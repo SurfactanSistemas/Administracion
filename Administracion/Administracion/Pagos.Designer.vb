@@ -57,6 +57,8 @@ Partial Class Pagos
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
+        Me.lstSeleccion = New Administracion.CustomListBox()
+        Me.CLBFiltrado = New Administracion.CustomListBox()
         Me.CustomLabel12 = New Administracion.CustomLabel()
         Me.CustomLabel13 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
@@ -66,7 +68,6 @@ Partial Class Pagos
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.lblPagos = New Administracion.CustomLabel()
         Me.CustomLabel4 = New Administracion.CustomLabel()
-        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.CustomLabel5 = New Administracion.CustomLabel()
         Me.txtOrdenPago = New Administracion.CustomTextBox()
         Me.txtProveedor = New Administracion.CustomTextBox()
@@ -299,6 +300,8 @@ Partial Class Pagos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.lstSeleccion)
+        Me.Panel2.Controls.Add(Me.CLBFiltrado)
         Me.Panel2.Controls.Add(Me.txtFechaParidad)
         Me.Panel2.Controls.Add(Me.txtFecha)
         Me.Panel2.Controls.Add(Me.CustomLabel12)
@@ -310,7 +313,6 @@ Partial Class Pagos
         Me.Panel2.Controls.Add(Me.CustomLabel3)
         Me.Panel2.Controls.Add(Me.lblPagos)
         Me.Panel2.Controls.Add(Me.CustomLabel4)
-        Me.Panel2.Controls.Add(Me.lstSeleccion)
         Me.Panel2.Controls.Add(Me.CustomLabel5)
         Me.Panel2.Controls.Add(Me.txtOrdenPago)
         Me.Panel2.Controls.Add(Me.txtProveedor)
@@ -507,6 +509,31 @@ Partial Class Pagos
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Agregar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
+        'lstSeleccion
+        '
+        Me.lstSeleccion.Cleanable = False
+        Me.lstSeleccion.EnterIndex = -1
+        Me.lstSeleccion.FormattingEnabled = True
+        Me.lstSeleccion.Items.AddRange(New Object() {"Proveedores", "Cuentas Corrientes", "Cheques Terceros", "Documentos", "Cuentas Contables"})
+        Me.lstSeleccion.LabelAssociationKey = -1
+        Me.lstSeleccion.Location = New System.Drawing.Point(475, 18)
+        Me.lstSeleccion.Name = "lstSeleccion"
+        Me.lstSeleccion.Size = New System.Drawing.Size(333, 134)
+        Me.lstSeleccion.TabIndex = 66
+        Me.lstSeleccion.Visible = False
+        '
+        'CLBFiltrado
+        '
+        Me.CLBFiltrado.Cleanable = True
+        Me.CLBFiltrado.EnterIndex = -1
+        Me.CLBFiltrado.FormattingEnabled = True
+        Me.CLBFiltrado.LabelAssociationKey = -1
+        Me.CLBFiltrado.Location = New System.Drawing.Point(474, 43)
+        Me.CLBFiltrado.Name = "CLBFiltrado"
+        Me.CLBFiltrado.Size = New System.Drawing.Size(333, 108)
+        Me.CLBFiltrado.TabIndex = 73
+        Me.CLBFiltrado.Visible = False
+        '
         'CustomLabel12
         '
         Me.CustomLabel12.AutoSize = True
@@ -616,19 +643,6 @@ Partial Class Pagos
         Me.CustomLabel4.TabIndex = 3
         Me.CustomLabel4.Text = "Observaciones"
         '
-        'lstSeleccion
-        '
-        Me.lstSeleccion.Cleanable = False
-        Me.lstSeleccion.EnterIndex = -1
-        Me.lstSeleccion.FormattingEnabled = True
-        Me.lstSeleccion.Items.AddRange(New Object() {"Proveedores", "Cuentas Corrientes", "Cheques Terceros"})
-        Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(474, 18)
-        Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(333, 134)
-        Me.lstSeleccion.TabIndex = 66
-        Me.lstSeleccion.Visible = False
-        '
         'CustomLabel5
         '
         Me.CustomLabel5.AutoSize = True
@@ -666,17 +680,18 @@ Partial Class Pagos
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(76, 20)
         Me.txtProveedor.TabIndex = 29
+        Me.ToolTip1.SetToolTip(Me.txtProveedor, "Doble Click para abrir listado de Proveedores")
         Me.txtProveedor.Validator = Administracion.ValidatorType.None
         '
         'txtRazonSocial
         '
         Me.txtRazonSocial.Cleanable = True
         Me.txtRazonSocial.Empty = False
-        Me.txtRazonSocial.Enabled = False
         Me.txtRazonSocial.EnterIndex = -1
         Me.txtRazonSocial.LabelAssociationKey = 3
         Me.txtRazonSocial.Location = New System.Drawing.Point(206, 49)
         Me.txtRazonSocial.Name = "txtRazonSocial"
+        Me.txtRazonSocial.ReadOnly = True
         Me.txtRazonSocial.Size = New System.Drawing.Size(259, 20)
         Me.txtRazonSocial.TabIndex = 30
         Me.txtRazonSocial.Validator = Administracion.ValidatorType.None
@@ -717,6 +732,7 @@ Partial Class Pagos
         Me.txtNombreBanco.LabelAssociationKey = 5
         Me.txtNombreBanco.Location = New System.Drawing.Point(206, 103)
         Me.txtNombreBanco.Name = "txtNombreBanco"
+        Me.txtNombreBanco.ReadOnly = True
         Me.txtNombreBanco.Size = New System.Drawing.Size(259, 20)
         Me.txtNombreBanco.TabIndex = 33
         Me.txtNombreBanco.Validator = Administracion.ValidatorType.None
@@ -795,6 +811,7 @@ Partial Class Pagos
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(168, 20)
         Me.txtTotal.TabIndex = 53
+        Me.txtTotal.Text = "0.00"
         Me.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtTotal.Validator = Administracion.ValidatorType.Float
         '
@@ -1030,4 +1047,5 @@ Partial Class Pagos
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents txtFechaParidad As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtFecha As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents CLBFiltrado As Administracion.CustomListBox
 End Class

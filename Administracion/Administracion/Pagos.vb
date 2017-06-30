@@ -13,6 +13,7 @@ Public Class Pagos
     Dim _ClavesCheques As New List(Of Object)
     Dim _Carpetas As New List(Of Object)
     Dim _Claves() As String
+    Dim _TipoConsulta As Integer = Nothing
 
     Private Sub Pagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         
@@ -239,7 +240,16 @@ Public Class Pagos
 
     Private Sub txtProveedor_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
         If e.KeyValue = Keys.Enter Then
-            Dim proveedor = DAOProveedor.buscarProveedorPorCodigo(ceros(txtProveedor.Text, 11))
+
+            If Trim(txtProveedor.Text) = "" Then
+                _ListarProveedores()
+                Exit Sub
+            End If
+
+            txtProveedor.Text = ceros(txtProveedor.Text, 11)
+
+            Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
+
             If Not IsNothing(proveedor) Then
                 mostrarProveedor(proveedor)
                 txtObservaciones.Focus()
@@ -248,11 +258,18 @@ Public Class Pagos
                 MessageBox.Show("El proveedor ingresado es inexistente")
                 txtProveedor.Focus()
             End If
+
         End If
     End Sub
 
     Private Sub txtBanco_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBanco.KeyDown
         If e.KeyValue = Keys.Enter Then
+
+            If Trim(txtBanco.Text) = "" Then
+                _ListarCuentasContables()
+                Exit Sub
+            End If
+
             Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(txtBanco.Text)
             If Not IsNothing(banco) Then
                 mostrarBanco(banco)
@@ -264,11 +281,6 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub txtOrdenPago_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtOrdenPago.Leave
-        txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
-        mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
-    End Sub
-
     Private Sub _InhabilitarConsulta()
         txtConsulta.Text = ""
         txtConsulta.Visible = False
@@ -277,11 +289,11 @@ Public Class Pagos
     End Sub
 
     Private Sub _HabilitarConsulta()
-        txtConsulta.Text = ""
-        txtConsulta.Focus()
         txtConsulta.Visible = True
         lstSeleccion.Visible = False
         lstConsulta.Visible = True
+        txtConsulta.Text = ""
+        txtConsulta.Focus()
     End Sub
 
     Private Function _TraerCambioDivisa(ByVal fecha As String) As String
@@ -327,7 +339,7 @@ Public Class Pagos
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
                                               & "cp.Numero, cp.Fecha, cp.Clave, ivc.Paridad, ivc.Pago FROM CtaCtePrv as cp, IvaComp as ivc WHERE cp.Proveedor = '" _
-                                              & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 AND cp.NroInterno = ivc.NroInterno ORDER BY cp.OrdFecha DESC")
+                                              & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 AND cp.NroInterno = ivc.NroInterno ORDER BY cp.OrdFecha ASC")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -374,7 +386,7 @@ Public Class Pagos
                             XSaldoUS = ""
                         End If
 
-                        lstConsulta.Items.Add(XImpre & " " & XLetra & " " & XPunto & " " & XNumero & " " & XFecha & " " & XSaldo & " " & XSaldoUS)
+                        lstConsulta.Items.Add(XImpre & "    " & XLetra & "    " & XPunto & "    " & XNumero & "    " & XFecha & "    " & XSaldo & "    " & XSaldoUS)
 
                         XClaves.Add(.Item("Clave").ToString())
                     Loop
@@ -400,6 +412,7 @@ Public Class Pagos
     End Sub
 
     Private Sub _ListarProveedores()
+        Dim XClaves As New List(Of String)
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor ORDER BY Nombre")
         Dim dr As SqlDataReader
@@ -416,7 +429,10 @@ Public Class Pagos
 
                     Do While .Read()
                         lstConsulta.Items.Add(ceros(.Item("Proveedor"), 11) & "    " & .Item("Nombre"))
+                        XClaves.Add(ceros(.Item("Proveedor"), 11))
                     Loop
+
+                    _Claves = XClaves.ToArray()
 
                     _HabilitarConsulta()
                 Else
@@ -579,21 +595,103 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub _MostrarConsultaPor(ByVal _TipoConsulta As String)
+    Private Sub _ListarDocumentos()
+        Dim itemTemplate As String = "#NUMERO#  #VENCIMIENTO#  #SALDO#  #CLIENTE#"
+        Dim item As String = ""
+        Dim XClaves As New List(Of String)
 
-        Select Case _TipoConsulta
-            Case "Proveedores"
-                _ListarProveedores()
-            Case "Cuentas Corrientes"
-                _ListarCtasCtes()
-            Case "Cheques Terceros"
-                _ListarChequesTerceros()
-            Case Else
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Clave, Numero, Vencimiento1, Saldo, Cliente FROM CtaCte " _
+                                              & "WHERE Tipo = '50' AND Saldo <> 0 AND Cliente <> '' ORDER BY Numero")
+        Dim dr As SqlDataReader
 
-        End Select
+        SQLConnector.conexionSql(cn, cm)
 
-        txtConsulta.Focus()
+        Try
+            lstConsulta.Items.Clear()
 
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    Do While .Read()
+
+                        item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero"), 6)) _
+                                            .Replace("#VENCIMIENTO#", .Item("Vencimiento1")) _
+                                            .Replace("#SALDO#", _NormalizarNumero(.Item("Saldo"))) _
+                                            .Replace("#CLIENTE#", .Item("Cliente"))
+
+                        lstConsulta.Items.Add(item)
+
+                        XClaves.Add(.Item("Clave"))
+
+                    Loop
+
+                    _Claves = XClaves.ToArray()
+
+                    _HabilitarConsulta()
+                Else
+                    MsgBox("No hay documentos disponibles para listar", MsgBoxStyle.Information)
+                    _InhabilitarConsulta()
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
+    Private Sub _ListarCuentasContables()
+        Dim XClaves As New List(Of String)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Cuenta, Descripcion FROM Cuenta ORDER BY Cuenta")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+            lstConsulta.Items.Clear()
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    Do While .Read()
+
+                        lstConsulta.Items.Add(LSet(Trim(.Item("Cuenta")), 6) & "    " & Trim(.Item("Descripcion")))
+
+                        XClaves.Add(.Item("Cuenta"))
+
+                    Loop
+
+                    _Claves = XClaves.ToArray()
+
+                    _HabilitarConsulta()
+                Else
+                    _InhabilitarConsulta()
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
     End Sub
 
     Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSeleccion.Click
@@ -602,18 +700,25 @@ Public Class Pagos
 
             With lstSeleccion
 
+                _TipoConsulta = .SelectedIndex
+
                 Select Case .SelectedIndex
                     Case 0
-                        _MostrarConsultaPor("Proveedores")
+                        _ListarProveedores()
                     Case 1
-                        _MostrarConsultaPor("Cuentas Corrientes")
+                        _ListarCtasCtes()
                     Case 2
-                        _MostrarConsultaPor("Cheques Terceros")
+                        _ListarChequesTerceros()
+                    Case 3
+                        _ListarDocumentos()
+                    Case 4
+                        _ListarCuentasContables()
                     Case Else
-
                 End Select
 
             End With
+
+            txtConsulta.Focus()
 
         End If
     End Sub
@@ -631,31 +736,253 @@ Public Class Pagos
         End If
     End Sub
 
+    Private Sub mostrarProveedor(ByVal indice As Integer)
+        Dim clave As String = ""
+        Dim proveedor As Proveedor
+
+        If Not IsNothing(_Claves) Then
+
+            If _Claves.Length > 0 Then
+                clave = _Claves(indice)
+            End If
+
+        End If
+
+        If clave = "" Then
+            Exit Sub
+        End If
+
+        proveedor = DAOProveedor.buscarProveedorPorCodigo(clave)
+
+        If IsNothing(proveedor) Then
+            Exit Sub
+        End If
+
+        mostrarProveedor(proveedor)
+
+        _InhabilitarConsulta()
+        lstSeleccion.Visible = False
+        txtObservaciones.Focus()
+    End Sub
+
+    Private Sub _TraerCtaCte(ByVal indice As String)
+        Dim XClave As String = ""
+
+        If IsNothing(_Claves) Then
+            Exit Sub
+        End If
+
+        If _Claves.Length = 0 Then
+            Exit Sub
+        End If
+
+        XClave = _Claves(indice)
+
+        ' Comprobamos que no se haya utilizado antes.
+        If _CtaCteYaUtilizada(XClave) Then
+            MsgBox("La Cta Cte indicada ya se encuentra en utilización.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        ' Comprobamos que aun haya lugar para seguir cancelando Facturas.
+        If gridPagos.Rows.Count > 15 Then
+            MsgBox("La cantidad de facturas a cancelar supera las 15", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        ' Procesamos la Cta Cte seleccionada.
+        _ProcesarCtaCte(XClave)
+
+        lstConsulta.Items(indice) = ""
+
+    End Sub
+
+    Private Function _CtaCteYaUtilizada(ByVal XClave As String) As Boolean
+        Dim utilizada As Boolean = False
+
+        For Each row As DataGridViewRow In gridPagos.Rows
+            With row
+                Dim RClave As String = ceros(txtProveedor.Text, 11) & .Cells(1).Value _
+                                       & .Cells(0).Value & .Cells(2).Value & .Cells(3).Value
+
+                If XClave = RClave Then
+
+                    utilizada = True
+
+                    Exit For
+
+                End If
+
+
+            End With
+        Next
+
+        Return utilizada
+    End Function
+
+    Private Sub _ProcesarCtaCte(ByVal clave As String)
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT cp.Tipo, cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
+                                              & "cp.Numero, cp.Fecha, cp.Clave, ivc.Paridad, ivc.Pago FROM CtaCtePrv as cp, IvaComp as ivc WHERE cp.Proveedor = '" _
+                                              & Trim(txtProveedor.Text) & "' and cp.Clave = '" & clave & "' and cp.Saldo <> 0 AND cp.NroInterno = ivc.NroInterno ORDER BY cp.OrdFecha DESC")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    .Read()
+
+                    Dim XTipo, XNroInterno, XTotal, XSaldo, XSaldoUS, XImpre, XLetra, XPunto, XNumero, XFecha, XClave, XParidad, XPago, XParidadTotal As String
+                    Dim XRow As Integer = gridPagos.Rows.Add()
+
+                    XTipo = .Item("Tipo").ToString()
+                    XNroInterno = .Item("NroInterno").ToString()
+                    XTotal = _NormalizarNumero(.Item("Total").ToString())
+                    XSaldo = _NormalizarNumero(.Item("Saldo").ToString())
+                    
+                    XImpre = .Item("Impre").ToString()
+                    XLetra = .Item("Letra").ToString()
+                    XPunto = .Item("Punto").ToString()
+                    XNumero = .Item("Numero").ToString()
+
+                    XSaldoUS = 0
+                    XParidadTotal = 0
+                    XParidad = _NormalizarNumero(.Item("Paridad").ToString())
+                    XPago = .Item("Pago").ToString()
+
+                    With gridPagos.Rows(XRow)
+                        .Cells(0).Value = XTipo
+                        .Cells(1).Value = XLetra
+                        .Cells(2).Value = XPunto
+                        .Cells(3).Value = XNumero
+                        .Cells(4).Value = XSaldo
+
+                        Select Case Val(XTipo)
+                            Case 1
+                                .Cells(5).Value = "Pago Factura nro. " & XNumero
+                            Case 2
+                                .Cells(5).Value = "Pago Nota de Debito nro. " & XNumero
+                            Case 3
+                                .Cells(5).Value = "Pago Nota de Credito nro. " & XNumero
+                            Case 5
+                                .Cells(5).Value = "Anticipo nro. " & XNumero
+                            Case Else
+                                .Cells(5).Value = ""
+                        End Select
+
+                    End With
+
+                    If Val(XPago) = 2 Then
+
+                        If Val(XParidad) <> 0 Then
+                            XParidadTotal = _TraerCambioDivisa(txtFechaParidad.Text)
+
+                            XSaldoUS = (Val(XSaldo) / Val(XParidad)) * Val(XParidadTotal)
+
+                            Dim diferencia As String = XSaldoUS - XSaldo
+
+                            ' Si hay diferencia se agrega una ND.
+                            If Val(diferencia) <> 0 Then
+
+                                XRow = gridPagos.Rows.Add()
+
+                                With gridPagos.Rows(XRow)
+
+                                    .Cells(0).Value = IIf(Val(diferencia) > 0, "02", "03")
+                                    .Cells(1).Value = XLetra
+                                    .Cells(2).Value = XPunto
+                                    .Cells(3).Value = "99999999"
+                                    .Cells(4).Value = _NormalizarNumero(diferencia)
+                                    .Cells(5).Value = "N/D por Diferencia de Cambio "
+
+                                End With
+
+                            End If
+                            
+                        End If
+
+                    End If
+
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
     Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
-        'queryController.showMethod.Invoke(lstConsulta.SelectedValue)
-        'If queryController.text = "Proveedores" Then
-        '    lstConsulta.Visible = False
-        'End If
-        'txtConsulta.Visible = False
-        'txtConsulta.Text = ""
+
+        If Not IsNothing(_TipoConsulta) Then
+
+            Select Case _TipoConsulta
+                Case 0
+                    mostrarProveedor(lstConsulta.SelectedIndex)
+                Case 1
+                    ' Ctas Ctes
+                    If Trim(lstConsulta.Items(lstConsulta.SelectedIndex)) <> "" Then
+                        _TraerCtaCte(lstConsulta.SelectedIndex)
+                    End If
+
+                Case 2
+
+                Case 3
+
+                Case Else
+                    Exit Sub
+            End Select
+
+        End If
+
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
-        Cleanner.clean(Me)
+        'Cleanner.clean(Me)
+
+        For Each _c As TextBox In Me.Panel2.Controls.OfType(Of TextBox)()
+            _c.Text = ""
+        Next
+
+        For Each _c As MaskedTextBox In Me.Panel2.Controls.OfType(Of MaskedTextBox)()
+            _c.Clear()
+        Next
+
+        cmbTipo.SelectedIndex = 0
+
         txtIBCiudad.Text = "0,00"
         txtIngresosBrutos.Text = "0,00"
         txtGanancias.Text = "0,00"
         txtIVA.Text = "0,00"
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
         txtFechaParidad.Text = txtFecha.Text
+
         gridPagos.Rows.Clear()
         pagos.Clear()
         gridFormaPagos.Rows.Clear()
         _ClavesCheques.Clear()
         cheques.Clear()
+
+        'Array.Clear(_Claves, 0, _Claves.Length)
+
         lstSeleccion.Visible = False
         lstConsulta.Visible = False
+        lstConsulta.Items.Clear()
+        CLBFiltrado.Visible = False
+        CLBFiltrado.Items.Clear()
         txtConsulta.Visible = False
+
         txtParidad.Text = traerParidad()
 
     End Sub
@@ -665,7 +992,7 @@ Public Class Pagos
     End Function
 
     Private Function traerParidad(ByVal fecha As String) As String
-        _Normalizarfecha(fecha)
+        fecha = _Normalizarfecha(fecha)
         Dim _Paridad As String = "0"
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand("SELECT TOP 1 Cambio FROM Cambios WHERE Fecha = '" & Trim(fecha) & "'")
@@ -1032,7 +1359,17 @@ Public Class Pagos
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtOrdenPago.Text) <> "" Then
-                txtFecha.Focus()
+                txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
+                mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
+
+
+                If txtProveedor.Text <> "" Then
+                    txtProveedor.Focus()
+                Else
+                    txtFecha.Focus()
+                End If
+
+
             End If
         End If
 
@@ -1086,7 +1423,7 @@ Public Class Pagos
                 End If
 
                 If iCol = 2 And valor <> "" Then
-                    _Normalizarfecha(valor)
+                    valor = _Normalizarfecha(valor)
                     gridFormaPagos.Rows(iRow).Cells(iCol).Value = valor
                 End If
 
@@ -1334,8 +1671,9 @@ Public Class Pagos
 
     End Sub
 
-    Private Function _Normalizarfecha(ByRef fecha As String) As Boolean
-        Dim _FechaValida As Boolean = True
+    Private Function _Normalizarfecha(ByVal fecha As String) As String
+        Dim xfecha As String = ""
+        Dim _temp As String = fecha
         Dim _Fecha As String() = fecha.Split("/")
 
         Try
@@ -1343,15 +1681,14 @@ Public Class Pagos
             _Fecha(1) = Val(_Fecha(1)).ToString()
             _Fecha(2) = Val(_Fecha(2)).ToString()
 
-            fecha = String.Join("/", _Fecha)
+            xfecha = String.Join("/", _Fecha)
 
-            fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+            xfecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
         Catch ex As Exception
-            _FechaValida = False
-            MsgBox("El formato de la fecha ingresada no es válido.", MsgBoxStyle.Information)
+            xfecha = _temp
         End Try
 
-        Return _FechaValida
+        Return xfecha
     End Function
 
     Private Sub _PedirInformacion(ByVal msg As String, ByRef control As TextBox, ByRef VariableDestino As String)
@@ -1488,6 +1825,10 @@ Public Class Pagos
         txtOrdenPago.Focus()
         cmbTipo.SelectedIndex = 0
         lstSeleccion.SelectedIndex = 0
+
+        txtFecha.ValidatingType = GetType(System.DateTime)
+        txtFechaParidad.ValidatingType = GetType(System.DateTime)
+
     End Sub
 
     Private Sub lblDiferencia_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDiferencia.TextChanged
@@ -1500,8 +1841,15 @@ Public Class Pagos
 
     Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
 
-        If Trim(txtFecha.Text.Replace("/", "")) <> "" Then
-            txtProveedor.Focus()
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFecha.Text.Replace("/", "")) <> "" Then
+
+                If Not _FormatoValidoFecha(txtFecha.Text) Then
+                    Exit Sub
+                End If
+
+                txtProveedor.Focus()
+            End If
         End If
 
     End Sub
@@ -1519,6 +1867,10 @@ Public Class Pagos
         If e.KeyData = Keys.Enter Then
 
             If Trim(txtFechaParidad.Text.Replace("/", "")) <> "" Then
+
+                If Not _FormatoValidoFecha(txtFecha.Text) Then
+                    Exit Sub
+                End If
 
                 txtParidad.Text = traerParidad()
 
@@ -1590,7 +1942,46 @@ Public Class Pagos
     Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
 
         If Trim(txtProveedor.Text) = "" Then
-            _MostrarConsultaPor("Proveedores")
+            _ListarProveedores()
+        End If
+
+    End Sub
+
+    Private Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
+        Return Trim(_Normalizarfecha(fecha)).Replace("/", "").Length = 8
+    End Function
+
+    Private Function _ValidarFecha(ByVal fecha As String, ByVal valido As Boolean) As Boolean
+        Dim invalida As Boolean = False
+
+        If Trim(fecha.Replace("/", "")) <> "" Then
+
+            If _FormatoValidoFecha(fecha) Then
+                If Not valido Then
+                    invalida = True
+                End If
+            End If
+
+        End If
+
+        Return invalida
+    End Function
+
+    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
+
+        e.Cancel = _ValidarFecha(txtFecha.Text, e.IsValidInput)
+
+    End Sub
+
+    Private Sub txtFechaParidad_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaParidad.TypeValidationCompleted
+        e.Cancel = _ValidarFecha(txtFechaParidad.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub txtBanco_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtBanco.MouseDoubleClick
+
+        If Trim(txtBanco.Text) = "" Then
+            _ListarCuentasContables()
+            Exit Sub
         End If
 
     End Sub
