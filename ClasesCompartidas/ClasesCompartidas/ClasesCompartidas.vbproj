@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{1793FAC7-20CD-43B7-BDF8-35ADEA3E45E2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ClasesCompartidas</RootNamespace>
+    <AssemblyName>ClasesCompartidas</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ClasesCompartidas.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>ClasesCompartidas.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Banco.vb" />
+    <Compile Include="ClienteTotal.vb" />
+    <Compile Include="CtaCteProveedoresDeudaDesdeHastaII.vb" />
+    <Compile Include="LeeComposicion.vb" />
+    <Compile Include="LeeEstadisticaProducto.vb" />
+    <Compile Include="LeeEstadisticaRanking.vb" />
+    <Compile Include="LeeEstadisticaRankingOtro.vb" />
+    <Compile Include="LeeMateriaPrimaCosto.vb" />
+    <Compile Include="LeeTerminado.vb" />
+    <Compile Include="Linea.vb" />
+    <Compile Include="Rubro.vb" />
+    <Compile Include="Vendedor.vb" />
+    <Compile Include="LeeAcumulado.vb" />
+    <Compile Include="LeeAplicaProve.vb" />
+    <Compile Include="LeeBanco.vb" />
+    <Compile Include="LeeCtaCte.vb" />
+    <Compile Include="LeeDepositos.vb" />
+    <Compile Include="LeeDepositosMovban.vb" />
+    <Compile Include="LeeIvaComp.vb" />
+    <Compile Include="LeeIvaCompAdicional.vb" />
+    <Compile Include="LeePagos.vb" />
+    <Compile Include="CtaCteProveedorDeudaDesdeHasta.vb" />
+    <Compile Include="Cliente.vb" />
+    <Compile Include="CapaDAO\SQLConnector.vb" />
+    <Compile Include="Cheque.vb" />
+    <Compile Include="Compra.vb" />
+    <Compile Include="CtaCteProveedor.vb" />
+    <Compile Include="CtaCteProveedoresDeuda.vb" />
+    <Compile Include="CuentaContable.vb" />
+    <Compile Include="Deposito.vb" />
+    <Compile Include="DetalleCompraCuentaCorriente.vb" />
+    <Compile Include="Efectivo.vb" />
+    <Compile Include="FormaPago.vb" />
+    <Compile Include="Global\Globals.vb" />
+    <Compile Include="Imputac.vb" />
+    <Compile Include="ItemDeposito.vb" />
+    <Compile Include="LeePagosII.vb" />
+    <Compile Include="LeePagosMovBan.vb" />
+    <Compile Include="LeeRecibos.vb" />
+    <Compile Include="LeeRecibosValcar.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="OrdenPago.vb" />
+    <Compile Include="Pago.vb" />
+    <Compile Include="ProcesoPercecion.vb" />
+    <Compile Include="ProcesoPercepcionTucuman.vb" />
+    <Compile Include="ProcesoReteGanancias.vb" />
+    <Compile Include="ProcesoReteGenanciasRecibo.vb" />
+    <Compile Include="ProcesoReteIb.vb" />
+    <Compile Include="ProcesoReteIbRecibos.vb" />
+    <Compile Include="ProcesoReteIvaRecibos.vb" />
+    <Compile Include="Proveedor.vb" />
+    <Compile Include="Provincia.vb" />
+    <Compile Include="Recibo.vb" />
+    <Compile Include="ReciboProvisorio.vb" />
+    <Compile Include="RubroProveedor.vb" />
+    <Compile Include="TipoDeCambio.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

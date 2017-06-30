@@ -1,0 +1,59 @@
+/*
+	AGREGO EL CAMPO Cuenta COMO CLAVE Y PARA ELLO PRIMERO TENGO QUE
+	DECIR QUE NO PUEDE SER NULL
+*/
+
+
+--IF NOT EXISTS (SELECT * 
+--			FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+--			WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' 
+--			AND TABLE_NAME = 'Cuenta' 
+--			AND TABLE_SCHEMA ='dbo' )
+--BEGIN
+
+	ALTER TABLE surfactanSA.dbo.Cuenta
+		ALTER COLUMN Cuenta varchar(10) NOT NULL
+	
+	ALTER TABLE	surfactanSA.dbo.Cuenta
+		ADD PRIMARY KEY (Cuenta)
+	
+--END
+--GO
+
+--IF EXISTS (SELECT name FROM sysindexes WHERE name = 'IX_Banco')
+	DROP INDEX IX_Banco ON surfactanSA.dbo.Banco
+--IF EXISTS (SELECT name FROM sysindexes WHERE name = 'IX_Banco_1')
+	DROP INDEX IX_Banco_1 ON surfactanSA.dbo.Banco
+
+--IF NOT EXISTS (SELECT * 
+--			FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+--			WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' 
+--			AND TABLE_NAME = 'Banco' 
+--			AND TABLE_SCHEMA ='dbo' )
+--BEGIN
+
+	ALTER TABLE surfactanSA.dbo.Banco
+		ALTER COLUMN Banco smallint NOT NULL
+
+	ALTER TABLE surfactanSA.dbo.Banco
+		ADD PRIMARY KEY (Banco)
+
+--END
+--GO
+
+--IF NOT EXISTS (SELECT * 
+--			FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+--			WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' 
+--			AND TABLE_NAME = 'TipoProv' 
+--			AND TABLE_SCHEMA ='dbo' )
+--BEGIN
+
+	ALTER TABLE surfactanSA.dbo.TipoProv
+		ALTER COLUMN Codigo int NOT NULL
+	
+	ALTER TABLE	surfactanSA.dbo.TipoProv
+		ADD PRIMARY KEY (Codigo)
+	
+--END
+--GO
+

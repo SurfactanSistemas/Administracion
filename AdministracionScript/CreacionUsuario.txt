@@ -1,0 +1,21 @@
+SEGURIDAD -> INICIO SESION -> NUEVO INICIO SESION:
+usuario: usuarioadmin
+	autenticacion sql server
+password: usuarioadmin
+deschequear: "el usuario debe cambiar la contraseña en ..."
+Base de datos predeterminada: surfactanSA
+Idioma predeterminado: español
+
+SOLATE FUNCIONES DEL SERVIDOR:
+clickear 
+	public
+	sysadmin
+	
+SOLAPA ASIGNACION DE USUARIOS:
+clickear base surfactanSA
+
+--------------------------------------
+BASE DE DATOS -> surfactanSA -> SEGURIDAD -> USUARIOS -> usuarioadmin
+
+SOLAPA GENERAL:
+Miembros de la funcion: clickear todas
