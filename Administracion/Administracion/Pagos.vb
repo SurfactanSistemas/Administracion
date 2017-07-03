@@ -536,7 +536,7 @@ Public Class Pagos
                                             .Replace("#BANCO#", .Item("Banco2"))
 
                         _ChequesRecibos.Add({item, _
-                                             "1" & .Item("Clave"), _
+                                             "2" & .Item("Clave"), _
                                              IIf(Not IsDBNull(.Item("FechaOrd2")), .Item("FechaOrd2"), ""), _
                                              ceros(.Item("Numero2"), 6), _
                                              .Item("Fecha2")
@@ -943,6 +943,87 @@ Public Class Pagos
         End Try
     End Sub
 
+    Private Sub _TraerChequeDeTercero(ByVal _Item As String, ByVal indice As Integer)
+        Dim XClave As String = ""
+
+        XClave = _ObtenerClaveConsulta(_Item)
+
+        If XClave = "" Then
+            Exit Sub
+        End If
+
+        _ProcesarChequeTercero(XClave, indice)
+
+    End Sub
+
+    Private Sub _ProcesarChequeTercero(ByVal clave As String, ByVal indice As Integer)
+        Dim ZSql As String = "SELECT Numero2, Fecha2, Banco2, Importe2, Cuit FROM #TABLA# WHERE Clave = '" & Mid(clave, 2, 8) & "'"
+        Dim Tabla As String = "Recibos"
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+
+        If Mid(clave, 1, 1) = "2" Then
+            Tabla = "RecibosProvi"
+        End If
+
+        cm.CommandText = ZSql.Replace("#TABLA#", Tabla)
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    .Read()
+
+                    Dim XTipo, XNumero, XFecha, XBanco, XImporte, XCuit, XClave As String
+                    Dim XRow As Integer = gridFormaPagos.Rows.Add()
+
+                    XClave = clave
+                    XTipo = "3"
+                    XNumero = .Item("Numero2").ToString()
+                    XFecha = .Item("Fecha2").ToString()
+                    XBanco = .Item("Banco2").ToString()
+                    XImporte = .Item("Importe2").ToString()
+                    XCuit = IIf(Not IsDBNull(.Item("Cuit")), .Item("Cuit"), "")
+
+                    With gridFormaPagos.Rows(XRow)
+
+                        .Cells(0).Value = XTipo
+                        .Cells(1).Value = XNumero
+                        .Cells(2).Value = XFecha
+                        .Cells(3).Value = ""
+                        .Cells(4).Value = XBanco
+                        .Cells(5).Value = _NormalizarNumero(XImporte)
+                        .Cells(6).Value = XClave
+                        .Cells(7).Value = XCuit
+
+                    End With
+
+
+                    If lstConsulta.Visible Then
+                        lstConsulta.Items(indice) = ""
+                    End If
+
+
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
     Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
 
         If Not IsNothing(_TipoConsulta) Then
@@ -957,7 +1038,10 @@ Public Class Pagos
                     End If
 
                 Case 2
-
+                    If Trim(lstConsulta.SelectedItem) = "" Then
+                        Exit Sub
+                    End If
+                    _TraerChequeDeTercero(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
                 Case 3
 
                 Case Else
