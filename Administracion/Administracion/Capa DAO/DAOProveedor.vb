@@ -69,7 +69,21 @@ Public Class DAOProveedor
                              row("dircufeii").ToString,
                              row("dircufeiii").ToString,
                              DAOCuentaContable.buscarCuentaContablePorCodigo(row("cuenta").ToString),
-                             DAORubroProveedor.buscarRubroProveedorPorCodigo(intNull(row("tipoprov"))))
+                             DAORubroProveedor.buscarRubroProveedorPorCodigo(intNull(row("tipoprov"))),
+                             row("PaginaWeb").ToString,
+                             row("ContactoNombre1").ToString,
+                             row("ContactoCargo1").ToString,
+                             row("ContactoTelefono1").ToString,
+                             row("ContactoEmail1").ToString,
+                             row("ContactoNombre2").ToString,
+                             row("ContactoCargo2").ToString,
+                             row("ContactoTelefono2").ToString,
+                             row("ContactoEmail2").ToString,
+                             row("ContactoNombre3").ToString,
+                             row("ContactoCargo3").ToString,
+                             row("ContactoTelefono3").ToString,
+                             row("ContactoEmail3").ToString
+                             )
     End Function
 
     Private Shared Function intNull(ByVal value)

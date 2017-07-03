@@ -697,7 +697,7 @@ Public Class Compras
 
     End Sub
 
-    Private Sub txtFechaVto1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles CBLetra.KeyDown, txtFechaVto1.KeyDown
+    Private Sub txtFechaVto1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaVto1.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtFechaVto2)
@@ -705,7 +705,7 @@ Public Class Compras
 
     End Sub
 
-    Private Sub txtFechaVto2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles CBLetra.KeyDown, txtFechaVto2.KeyDown
+    Private Sub txtFechaVto2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaVto2.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbFormaPago)
@@ -713,7 +713,7 @@ Public Class Compras
 
     End Sub
 
-    Private Sub txtFechaIVA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles CBLetra.KeyDown, txtFechaIVA.KeyDown
+    Private Sub txtFechaIVA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaIVA.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtRemito)
@@ -721,7 +721,7 @@ Public Class Compras
 
     End Sub
 
-    Private Sub txtRemito_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles CBLetra.KeyDown, txtRemito.KeyDown
+    Private Sub txtRemito_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemito.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtFechaVto1)
@@ -1005,6 +1005,10 @@ Public Class Compras
 
             If CBLetra.SelectedItem = "I" Then
                 cuenta = DAOCuentaContable.proveedoresInternacionales
+            End If
+
+            If IsNothing(cuenta) Then
+                Exit Sub
             End If
 
             crearAsientoContableUsando(cuenta)

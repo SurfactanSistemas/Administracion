@@ -18,6 +18,7 @@ Public Class DAORubroProveedor
         Dim rubros As New List(Of RubroProveedor)
         Dim tabla As DataTable
         tabla = SQLConnector.retrieveDataTable("buscar_rubro_proveedor_por_descripcion", descripcion)
+        rubros.Add(New RubroProveedor(0, ""))
         For Each rubro As DataRow In tabla.Rows
             rubros.Add(New RubroProveedor(rubro("codigo"), rubro("descripcion")))
         Next

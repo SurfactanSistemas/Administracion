@@ -12,6 +12,8 @@ Public Class ProveedoresABM
     Dim _Contacto2 As Tuple(Of String, String, String, String) = Tuple.Create("", "", "", "")
     Dim _Contacto3 As Tuple(Of String, String, String, String) = Tuple.Create("", "", "", "")
 
+    Private Const VALIDA_CUIT = "54327654321"
+
     Private TipoConsulta As String
     Private Const MAIN_HEIGHT = 580
     Private Const EXPANDED_HEIGHT = 695
@@ -46,7 +48,7 @@ Public Class ProveedoresABM
         For Each cmb As ComboBox In Me.Panel2.Controls.OfType(Of ComboBox)()
 
             If cmb.Items.Count > 0 Then
-                cmb.SelectedIndex = 1
+                cmb.SelectedIndex = 0
             End If
 
         Next
@@ -57,8 +59,162 @@ Public Class ProveedoresABM
         Me.Height = MAIN_HEIGHT
     End Sub
 
+    Private Function _FechaComoOrd(ByVal fecha As String) As String
+        Return String.Join("", fecha.Split("/").Reverse())
+    End Function
+
+    Private Sub _ActualizarProveedorEnEmpresa(ByVal cs As String)
+        Dim ZSql As String
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+
+        ZSql = "UPDATE Proveedor " _
+                    & " SET " _
+                    & "Nombre =  '" & txtRazonSocial.Text & "', " _
+                    & "Direccion =  '" & txtDireccion.Text & "', " _
+                    & "Localidad =  '" & txtLocalidad.Text & "', " _
+                    & "Provincia =  '" & ceros(cmbProvincia.SelectedIndex, 2) & "', " _
+                    & "Postal =  '" & txtCodigoPostal.Text & "', " _
+                    & "Cuit =  '" & txtCUIT.Text & "', " _
+                    & "Telefono =  '" & txtTelefono.Text & "', " _
+                    & "Email =  '" & txtEmail.Text & "', " _
+                    & "Observaciones =  '" & txtObservaciones.Text & "', " _
+                    & "Tipo =  '" & cmbRubro.SelectedIndex & "', " _
+                    & "Iva =  '" & cmbIVA.SelectedIndex & "', " _
+                    & "Dias =  '" & txtDiasPlazo.Text & "', " _
+                    & "Empresa =  '1', " _
+                    & "Cuenta =  '" & txtCuenta.Text & "', " _
+                    & "NombreCheque =  '" & txtCheque.Text & "', " _
+                    & "wdate =  '" & Date.Now.ToString("dd-MM-yyyy") & "', " _
+                    & "CodIb =  '" & cmbCondicionIB1.SelectedIndex & "', " _
+                    & "NroIb =  '" & txtNroIB.Text & "', " _
+                    & "NroInsc =  '" & txtNroSEDRONAR1.Text & "', " _
+                    & "Cai =  '" & txtCAI.Text & "', " _
+                    & "VtoCai =  '" & txtCAIVto.Text & "', " _
+                    & "TipoProv =  '" & cmbTipoProveedor.SelectedIndex & "', " _
+                    & "CategoriaI =  '" & cmbCategoria1.SelectedIndex & "', " _
+                    & "CategoriaII =  '" & cmbCategoria2.SelectedIndex & "', " _
+                    & "Iso =  '" & cmbCertificados.SelectedIndex & "', " _
+                    & "Region =  '" & cmbRegion.SelectedIndex & "', " _
+                    & "PorceIb =  '" & txtPorcelProv.Text & "', " _
+                    & "Estado =  '" & cmbEstado.SelectedIndex & "', " _
+                    & "Califica =  '" & cmbCalificacion.SelectedIndex & "', " _
+                    & "FechaCalifica =  '" & txtCalificacion.Text & "', " _
+                    & "OrdFechaCalifica =  '" & _FechaComoOrd(txtCalificacion.Text) & "', " _
+                    & "ObservacionesII =  '" & observaciones & "', " _
+                    & "FechaCategoria =  '" & txtCategoria.Text & "', " _
+                    & "OrdFechaCategoria =  '" & _FechaComoOrd(txtCategoria.Text) & "', " _
+                    & "FechaNroInsc =  '" & txtNroSEDRONAR2.Text & "', " _
+                    & "OrdFechaNroInsc =  '" & _FechaComoOrd(txtNroSEDRONAR2.Text) & "', " _
+                    & "PorceIbCaba =  '" & txtPorcelCABA.Text & "', " _
+                    & "Cufe =  '" & cufe1.Item1 & "', " _
+                    & "CufeII =  '" & cufe2.Item1 & "', " _
+                    & "CufeIII =  '" & cufe3.Item1 & "', " _
+                    & "DirCufe =  '" & cufe1.Item2 & "', " _
+                    & "DirCufeII =  '" & cufe2.Item2 & "', " _
+                    & "DirCufeIII =  '" & cufe3.Item2 & "', " _
+                    & "CodIbCaba =  '" & cmbCondicionIB2.SelectedIndex & "', " _
+                    & "PaginaWeb =  '" & txtPaginaWeb.Text & "', " _
+                    & "ContactoNombre1 = '" & _Contacto1.Item1 & "', " _
+                    & "ContactoCargo1 = '" & _Contacto1.Item2 & "', " _
+                    & "ContactoTelefono1 = '" & _Contacto1.Item3 & "', " _
+                    & "ContactoEmail1 = '" & _Contacto1.Item4 & "', " _
+                    & "ContactoNombre2 = '" & _Contacto2.Item1 & "', " _
+                    & "ContactoCargo2 = '" & _Contacto2.Item2 & "', " _
+                    & "ContactoTelefono2 = '" & _Contacto2.Item3 & "', " _
+                    & "ContactoEmail2 = '" & _Contacto2.Item4 & "', " _
+                    & "ContactoNombre3 = '" & _Contacto3.Item1 & "', " _
+                    & "ContactoCargo3 = '" & _Contacto3.Item2 & "', " _
+                    & "ContactoTelefono3 = '" & _Contacto3.Item3 & "', " _
+                    & "ContactoEmail3 = '" & _Contacto3.Item4 & "' " _
+                    & " WHERE Proveedor = '" & txtCodigo.Text & "'"
+        Try
+            cn.ConnectionString = cs
+            cn.Open()
+
+            cm.Connection = cn
+
+            cm.CommandText = ZSql
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Ocurrió un problema al querer actualizar al proveedor.")
+        Finally
+            cm = Nothing
+            cn.Close()
+            cn = Nothing
+        End Try
+
+        ' Actualizo proveedor con la ConnectionString en la que se encontró el proveedor.
+    End Sub
+
+    Private Sub _ActualizarProveedor(ByVal Clave As String)
+        Dim ZSql As String = ""
+        Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "GastonPruebas"}
+        Dim Xcs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+
+        ' Comprobamos que exista cuenta contable.
+        ' Comprobamos que se haya informado tipo proveedor.
+        ' Comprobamos que si se informó numero de sedrona, se haya cargado tambien la fecha.
+        ' Comprobamos que numero de cuit sea correcto.
+
+        ' Recorrer todos las plantas y actualizar en cada ocurrencia.
+
+        For Each _Empresa In _Empresas
+
+            Dim cs = Xcs.Replace("#EMPRESA#", _Empresa)
+
+            Try
+                cn.ConnectionString = cs
+                cn.Open()
+
+                cm.CommandText = "SELECT Proveedor FROM Proveedor WHERE Proveedor = '" & txtCodigo.Text & "'"
+
+                cm.Connection = cn
+
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+
+                    _ActualizarProveedorEnEmpresa(cs)
+
+                End If
+
+            Catch ex As Exception
+                MsgBox("Ocurrió un problema al querer actualizar al proveedor.", MsgBoxStyle.Critical)
+                Exit Sub
+            Finally
+
+                cn.Close()
+
+            End Try
+
+        Next
+
+        MsgBox("Proveedor Actualiza correctamente!", MsgBoxStyle.Information)
+
+        btnLimpiar.PerformClick()
+
+    End Sub
+
     Private Sub agregar()
-        Dim proveedor = New Proveedor(txtCodigo.Text, txtRazonSocial.Text)
+
+        Dim proveedor As Proveedor
+
+        proveedor = DAOProveedor.buscarProveedorPorCodigo(txtCodigo.Text)
+
+        If Not IsNothing(proveedor) Then
+            ' Actualizamos en vez de agregar uno nuevo.
+            _ActualizarProveedor(proveedor.id)
+            Exit Sub
+        End If
+        Exit Sub
+        proveedor = New Proveedor(txtCodigo.Text, txtRazonSocial.Text)
 
         proveedor.direccion = txtDireccion.Text
         proveedor.localidad = txtLocalidad.Text
@@ -101,7 +257,13 @@ Public Class ProveedoresABM
         proveedor.dirCUFE1 = cufe1.Item2
         proveedor.dirCUFE2 = cufe2.Item2
         proveedor.dirCUFE3 = cufe3.Item2
-        DAOProveedor.agregarProveedor(proveedor)
+        Try
+            DAOProveedor.agregarProveedor(proveedor)
+            MsgBox("Proveedor guardado correctamente.", MsgBoxStyle.Information)
+            btnLimpiar.PerformClick()
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub borrar()
@@ -152,6 +314,13 @@ Public Class ProveedoresABM
         cufe1 = Tuple.Create(proveedor.cufe1, proveedor.dirCUFE1)
         cufe2 = Tuple.Create(proveedor.cufe2, proveedor.dirCUFE2)
         cufe3 = Tuple.Create(proveedor.cufe3, proveedor.dirCUFE3)
+
+        txtPaginaWeb.Text = proveedor.PaginaWeb(0).ToString
+
+        _Contacto1 = Tuple.Create(proveedor.contacto1(0).ToString, proveedor.contacto1(1).ToString, proveedor.contacto1(2).ToString, proveedor.contacto1(3).ToString)
+        _Contacto2 = Tuple.Create(proveedor.contacto2(0).ToString, proveedor.contacto2(1).ToString, proveedor.contacto2(2).ToString, proveedor.contacto2(3).ToString)
+        _Contacto3 = Tuple.Create(proveedor.contacto3(0).ToString, proveedor.contacto3(1).ToString, proveedor.contacto3(2).ToString, proveedor.contacto3(3).ToString)
+
     End Sub
 
     Private Sub mostrarCuenta(ByVal cuenta As CuentaContable)
@@ -163,7 +332,7 @@ Public Class ProveedoresABM
 
     Private Sub mostrarRubro(ByVal rubro As RubroProveedor)
         If Not IsNothing(rubro) Then
-            cmbRubro.SelectedValue = rubro.codigo
+            cmbRubro.SelectedItem = rubro.codigo
         Else
             cmbRubro.SelectedValue = -1
         End If
@@ -447,19 +616,26 @@ Public Class ProveedoresABM
     Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
 
         If e.KeyData = Keys.Enter Then
+
+            If Trim(txtCodigo.Text) = "" Then
+                _AbrirConsulta("Proveedor")
+                Exit Sub
+            End If
+
             Dim codigo As String = Trim(txtCodigo.Text)
 
-            If codigo <> "" Then
-                Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(codigo)
-                If Not IsNothing(proveedor) Then
-                    mostrarProveedor(proveedor)
-                    _SaltarA(txtRazonSocial)
-                End If
+            Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(codigo)
+
+            If Not IsNothing(proveedor) Then
+                mostrarProveedor(proveedor)
+                _SaltarA(txtRazonSocial)
             Else
+
                 btnLimpiar.PerformClick()
                 txtCodigo.Text = codigo
-                txtCodigo.Focus()
+                txtRazonSocial.Focus()
             End If
+
 
         End If
 
@@ -511,9 +687,29 @@ Public Class ProveedoresABM
         End If
     End Sub
 
+    Private Function _CuitValido(ByVal cuit As String) As Boolean
+        Dim valido As Boolean = False
+        Dim suma As Integer = 0
+
+        For i = 1 To 11
+            suma = suma + (Val(Mid(cuit, i, 1)) * Val(Mid(VALIDA_CUIT, i, 1)))
+        Next
+
+        If suma > 0 Then
+            valido = suma Mod 11 = 0
+        End If
+
+        Return valido
+    End Function
+
     Private Sub txtCUIT_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCUIT.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbTipoProveedor)
+            If _CuitValido(txtCUIT.Text) Then
+                _SaltarA(cmbTipoProveedor)
+            Else
+                MsgBox("El CUIT ingresado no es correcto.")
+                txtCUIT.Focus()
+            End If
         End If
     End Sub
 
@@ -525,6 +721,14 @@ Public Class ProveedoresABM
 
     Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
         If e.KeyData = Keys.Enter Then
+
+
+            If Trim(txtCuenta.Text) = "" Then
+                _AbrirConsulta("Cuenta")
+                Exit Sub
+            End If
+
+
             Dim cuenta As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
             If Not IsNothing(cuenta) Then
                 txtCuentaDescripcion.Text = cuenta.descripcion

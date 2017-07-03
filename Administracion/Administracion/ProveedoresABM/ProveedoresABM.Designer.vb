@@ -44,10 +44,6 @@ Partial Class ProveedoresABM
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtPaginaWeb = New System.Windows.Forms.TextBox()
         Me.txtCUIT = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
-        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
         Me.cmbCalificacion = New Administracion.CustomComboBox()
         Me.cmbEstado = New Administracion.CustomComboBox()
         Me.cmbCertificados = New Administracion.CustomComboBox()
@@ -90,6 +86,10 @@ Partial Class ProveedoresABM
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
+        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
         Me.cmbRegion = New Administracion.CustomComboBox()
         Me.CustomLabel8 = New Administracion.CustomLabel()
         Me.CustomLabel7 = New Administracion.CustomLabel()
@@ -476,56 +476,13 @@ Partial Class ProveedoresABM
         'txtCUIT
         '
         Me.txtCUIT.Location = New System.Drawing.Point(281, 99)
-        Me.txtCUIT.Mask = "00-00000000-00"
+        Me.txtCUIT.Mask = "00-00000000-0"
         Me.txtCUIT.Name = "txtCUIT"
         Me.txtCUIT.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtCUIT.Size = New System.Drawing.Size(92, 20)
         Me.txtCUIT.TabIndex = 102
         Me.txtCUIT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtCategoria
-        '
-        Me.txtCategoria.Location = New System.Drawing.Point(346, 256)
-        Me.txtCategoria.Mask = "00/00/0000"
-        Me.txtCategoria.Name = "txtCategoria"
-        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
-        Me.txtCategoria.TabIndex = 47
-        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCategoria.ValidatingType = GetType(Date)
-        '
-        'txtCalificacion
-        '
-        Me.txtCalificacion.Location = New System.Drawing.Point(698, 312)
-        Me.txtCalificacion.Mask = "00/00/0000"
-        Me.txtCalificacion.Name = "txtCalificacion"
-        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCalificacion.Size = New System.Drawing.Size(74, 20)
-        Me.txtCalificacion.TabIndex = 47
-        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCalificacion.ValidatingType = GetType(Date)
-        '
-        'txtNroSEDRONAR2
-        '
-        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(658, 228)
-        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
-        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
-        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
-        Me.txtNroSEDRONAR2.TabIndex = 47
-        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
-        '
-        'txtCertificados
-        '
-        Me.txtCertificados.Location = New System.Drawing.Point(258, 312)
-        Me.txtCertificados.Mask = "00/00/0000"
-        Me.txtCertificados.Name = "txtCertificados"
-        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCertificados.Size = New System.Drawing.Size(74, 20)
-        Me.txtCertificados.TabIndex = 47
-        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCertificados.ValidatingType = GetType(Date)
+        Me.txtCUIT.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         '
         'cmbCalificacion
         '
@@ -776,7 +733,7 @@ Partial Class ProveedoresABM
         Me.cmbCategoria2.Empty = True
         Me.cmbCategoria2.EnterIndex = 26
         Me.cmbCategoria2.FormattingEnabled = True
-        Me.cmbCategoria2.Items.AddRange(New Object() {"Sin Calificar", "Muy Bueno", "Bueno", "Regular", "Malo"})
+        Me.cmbCategoria2.Items.AddRange(New Object() {"", "Sin Calificar", "Muy Bueno", "Bueno", "Regular", "Malo"})
         Me.cmbCategoria2.LabelAssociationKey = 23
         Me.cmbCategoria2.Location = New System.Drawing.Point(235, 256)
         Me.cmbCategoria2.Name = "cmbCategoria2"
@@ -806,7 +763,7 @@ Partial Class ProveedoresABM
         Me.cmbCondicionIB2.Empty = True
         Me.cmbCondicionIB2.EnterIndex = 18
         Me.cmbCondicionIB2.FormattingEnabled = True
-        Me.cmbCondicionIB2.Items.AddRange(New Object() {"", "", "Exento", "Reteniente"})
+        Me.cmbCondicionIB2.Items.AddRange(New Object() {"", "Exento", "Reteniente"})
         Me.cmbCondicionIB2.LabelAssociationKey = 17
         Me.cmbCondicionIB2.Location = New System.Drawing.Point(239, 202)
         Me.cmbCondicionIB2.Name = "cmbCondicionIB2"
@@ -821,7 +778,7 @@ Partial Class ProveedoresABM
         Me.cmbCondicionIB1.Empty = True
         Me.cmbCondicionIB1.EnterIndex = 17
         Me.cmbCondicionIB1.FormattingEnabled = True
-        Me.cmbCondicionIB1.Items.AddRange(New Object() {"Bienes", "Servicio", "Exento", "Ciudad Normal", "Ciudad Riesgo"})
+        Me.cmbCondicionIB1.Items.AddRange(New Object() {"", "Bienes", "Servicio", "Exento", "Ciudad Normal", "Ciudad Riesgo"})
         Me.cmbCondicionIB1.LabelAssociationKey = 17
         Me.cmbCondicionIB1.Location = New System.Drawing.Point(124, 202)
         Me.cmbCondicionIB1.Name = "cmbCondicionIB1"
@@ -1108,6 +1065,50 @@ Partial Class ProveedoresABM
         Me.CustomLabel1.TabIndex = 48
         Me.CustomLabel1.Text = "Código"
         '
+        'txtCategoria
+        '
+        Me.txtCategoria.Location = New System.Drawing.Point(346, 256)
+        Me.txtCategoria.Mask = "00/00/0000"
+        Me.txtCategoria.Name = "txtCategoria"
+        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
+        Me.txtCategoria.TabIndex = 47
+        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCategoria.ValidatingType = GetType(Date)
+        '
+        'txtCalificacion
+        '
+        Me.txtCalificacion.Location = New System.Drawing.Point(698, 312)
+        Me.txtCalificacion.Mask = "00/00/0000"
+        Me.txtCalificacion.Name = "txtCalificacion"
+        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCalificacion.Size = New System.Drawing.Size(74, 20)
+        Me.txtCalificacion.TabIndex = 47
+        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCalificacion.ValidatingType = GetType(Date)
+        '
+        'txtNroSEDRONAR2
+        '
+        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(658, 228)
+        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
+        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
+        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
+        Me.txtNroSEDRONAR2.TabIndex = 47
+        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
+        '
+        'txtCertificados
+        '
+        Me.txtCertificados.Location = New System.Drawing.Point(258, 312)
+        Me.txtCertificados.Mask = "00/00/0000"
+        Me.txtCertificados.Name = "txtCertificados"
+        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCertificados.Size = New System.Drawing.Size(74, 20)
+        Me.txtCertificados.TabIndex = 47
+        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCertificados.ValidatingType = GetType(Date)
+        '
         'cmbRegion
         '
         Me.cmbRegion.Cleanable = True
@@ -1115,7 +1116,7 @@ Partial Class ProveedoresABM
         Me.cmbRegion.Empty = True
         Me.cmbRegion.EnterIndex = 7
         Me.cmbRegion.FormattingEnabled = True
-        Me.cmbRegion.Items.AddRange(New Object() {"Fuera Mercosur", "Mercosur"})
+        Me.cmbRegion.Items.AddRange(New Object() {"", "Fuera Mercosur", "Mercosur"})
         Me.cmbRegion.LabelAssociationKey = 7
         Me.cmbRegion.Location = New System.Drawing.Point(673, 49)
         Me.cmbRegion.Name = "cmbRegion"
@@ -1275,7 +1276,7 @@ Partial Class ProveedoresABM
         Me.cmbTipoProveedor.Empty = True
         Me.cmbTipoProveedor.EnterIndex = 13
         Me.cmbTipoProveedor.FormattingEnabled = True
-        Me.cmbTipoProveedor.Items.AddRange(New Object() {"Bienes", "Servicios", "Alquileres", "Exento", "Despachante", "Locación de Obras", "Fletes", "Facturas (M)", ""})
+        Me.cmbTipoProveedor.Items.AddRange(New Object() {"", "Bienes", "Servicios", "Alquileres", "Exento", "Despachante", "Locación de Obras", "Fletes", "Facturas (M)"})
         Me.cmbTipoProveedor.LabelAssociationKey = 13
         Me.cmbTipoProveedor.Location = New System.Drawing.Point(514, 100)
         Me.cmbTipoProveedor.Name = "cmbTipoProveedor"
@@ -1316,7 +1317,7 @@ Partial Class ProveedoresABM
         Me.cmbIVA.Empty = True
         Me.cmbIVA.EnterIndex = 14
         Me.cmbIVA.FormattingEnabled = True
-        Me.cmbIVA.Items.AddRange(New Object() {"No Inscripto", "Consumidor Final", "Resp.Inscripto", "Exento", "No Responsable", "Monotributo", "No Catalogado", ""})
+        Me.cmbIVA.Items.AddRange(New Object() {"", "No Inscripto", "Consumidor Final", "Resp.Inscripto", "Exento", "No Responsable", "Monotributo", "No Catalogado"})
         Me.cmbIVA.LabelAssociationKey = 14
         Me.cmbIVA.Location = New System.Drawing.Point(707, 99)
         Me.cmbIVA.Name = "cmbIVA"
