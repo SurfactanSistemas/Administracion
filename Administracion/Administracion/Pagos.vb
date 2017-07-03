@@ -286,12 +286,14 @@ Public Class Pagos
         txtConsulta.Visible = False
         lstSeleccion.Visible = True
         lstConsulta.Visible = False
+        CLBFiltrado.Visible = False
     End Sub
 
     Private Sub _HabilitarConsulta()
         txtConsulta.Visible = True
         lstSeleccion.Visible = False
         lstConsulta.Visible = True
+        CLBFiltrado.Visible = False
         txtConsulta.Text = ""
         txtConsulta.Focus()
     End Sub
@@ -733,12 +735,7 @@ Public Class Pagos
         lstSeleccion.Visible = True
     End Sub
 
-    Private Sub txtConsulta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtConsulta.KeyDown
-        If e.KeyValue = Keys.Enter Then
-            'lstConsulta.DataSource = queryController.query.Invoke(txtConsulta.Text)
-            'e.Handled = True
-        End If
-    End Sub
+
 
     Private Function _ObtenerClaveConsulta(ByVal _Item As String) As String
         Dim clave As String = ""
@@ -1187,9 +1184,6 @@ Public Class Pagos
                     End If
 
                     _TraerChequeDeTercero(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
-
-                Case 3
-
                 Case Else
                     Exit Sub
             End Select
@@ -2232,6 +2226,36 @@ Public Class Pagos
         If Trim(txtBanco.Text) = "" Then
             _ListarCuentasContables()
             Exit Sub
+        End If
+
+    End Sub
+
+    Private Sub txtConsulta_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtConsulta.KeyPress
+
+    End Sub
+
+    Private Sub txtConsulta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtConsulta.TextChanged
+
+        CLBFiltrado.Items.Clear()
+
+        If UCase(Trim(txtConsulta.Text)) <> "" Then
+
+            For Each item In lstConsulta.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(txtConsulta.Text))) Then
+
+                    CLBFiltrado.Items.Add(item.ToString())
+
+                End If
+
+            Next
+
+            CLBFiltrado.Visible = True
+
+        Else
+
+            CLBFiltrado.Visible = False
+
         End If
 
     End Sub

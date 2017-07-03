@@ -37,6 +37,14 @@ Partial Class Pagos
         Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gridFormaPagos = New System.Windows.Forms.DataGridView()
+        Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Importe2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.XClave = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.XCuil = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -85,14 +93,6 @@ Partial Class Pagos
         Me.CustomLabel10 = New Administracion.CustomLabel()
         Me.CustomLabel9 = New Administracion.CustomLabel()
         Me.txtIBCiudad = New Administracion.CustomTextBox()
-        Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Importe2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.XClave = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.XCuil = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -229,6 +229,55 @@ Partial Class Pagos
         Me.gridFormaPagos.RowHeadersWidth = 10
         Me.gridFormaPagos.Size = New System.Drawing.Size(398, 217)
         Me.gridFormaPagos.TabIndex = 57
+        '
+        'Tipo2
+        '
+        Me.Tipo2.HeaderText = "Tipo"
+        Me.Tipo2.Name = "Tipo2"
+        Me.Tipo2.Width = 35
+        '
+        'Numero2
+        '
+        Me.Numero2.HeaderText = "Número"
+        Me.Numero2.Name = "Numero2"
+        Me.Numero2.Width = 70
+        '
+        'Fecha
+        '
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.Width = 75
+        '
+        'Banco
+        '
+        Me.Banco.HeaderText = "Banco"
+        Me.Banco.Name = "Banco"
+        Me.Banco.Width = 45
+        '
+        'Nombre
+        '
+        Me.Nombre.HeaderText = "Nombre"
+        Me.Nombre.Name = "Nombre"
+        Me.Nombre.ReadOnly = True
+        Me.Nombre.Width = 80
+        '
+        'Importe2
+        '
+        Me.Importe2.HeaderText = "Importe"
+        Me.Importe2.Name = "Importe2"
+        Me.Importe2.Width = 80
+        '
+        'XClave
+        '
+        Me.XClave.HeaderText = "XClave"
+        Me.XClave.Name = "XClave"
+        Me.XClave.Visible = False
+        '
+        'XCuil
+        '
+        Me.XCuil.HeaderText = "XCuil"
+        Me.XCuil.Name = "XCuil"
+        Me.XCuil.Visible = False
         '
         'Panel1
         '
@@ -493,7 +542,7 @@ Partial Class Pagos
         Me.CLBFiltrado.EnterIndex = -1
         Me.CLBFiltrado.FormattingEnabled = True
         Me.CLBFiltrado.LabelAssociationKey = -1
-        Me.CLBFiltrado.Location = New System.Drawing.Point(474, 43)
+        Me.CLBFiltrado.Location = New System.Drawing.Point(476, 41)
         Me.CLBFiltrado.Name = "CLBFiltrado"
         Me.CLBFiltrado.Size = New System.Drawing.Size(333, 108)
         Me.CLBFiltrado.TabIndex = 73
@@ -745,7 +794,7 @@ Partial Class Pagos
         Me.lstConsulta.EnterIndex = -1
         Me.lstConsulta.FormattingEnabled = True
         Me.lstConsulta.LabelAssociationKey = -1
-        Me.lstConsulta.Location = New System.Drawing.Point(474, 43)
+        Me.lstConsulta.Location = New System.Drawing.Point(476, 41)
         Me.lstConsulta.Name = "lstConsulta"
         Me.lstConsulta.Size = New System.Drawing.Size(333, 108)
         Me.lstConsulta.TabIndex = 54
@@ -915,55 +964,6 @@ Partial Class Pagos
         Me.txtIBCiudad.Text = "0,00"
         Me.txtIBCiudad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtIBCiudad.Validator = Administracion.ValidatorType.Float
-        '
-        'Tipo2
-        '
-        Me.Tipo2.HeaderText = "Tipo"
-        Me.Tipo2.Name = "Tipo2"
-        Me.Tipo2.Width = 35
-        '
-        'Numero2
-        '
-        Me.Numero2.HeaderText = "Número"
-        Me.Numero2.Name = "Numero2"
-        Me.Numero2.Width = 70
-        '
-        'Fecha
-        '
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.Width = 75
-        '
-        'Banco
-        '
-        Me.Banco.HeaderText = "Banco"
-        Me.Banco.Name = "Banco"
-        Me.Banco.Width = 45
-        '
-        'Nombre
-        '
-        Me.Nombre.HeaderText = "Nombre"
-        Me.Nombre.Name = "Nombre"
-        Me.Nombre.ReadOnly = True
-        Me.Nombre.Width = 80
-        '
-        'Importe2
-        '
-        Me.Importe2.HeaderText = "Importe"
-        Me.Importe2.Name = "Importe2"
-        Me.Importe2.Width = 80
-        '
-        'XClave
-        '
-        Me.XClave.HeaderText = "XClave"
-        Me.XClave.Name = "XClave"
-        Me.XClave.Visible = False
-        '
-        'XCuil
-        '
-        Me.XCuil.HeaderText = "XCuil"
-        Me.XCuil.Name = "XCuil"
-        Me.XCuil.Visible = False
         '
         'Pagos
         '
