@@ -952,9 +952,34 @@ Public Class Pagos
             Exit Sub
         End If
 
+        If _ChequeYaUtilizado(XClave) Then
+            Exit Sub
+        End If
+
         _ProcesarChequeTercero(XClave, indice)
 
     End Sub
+
+    Private Function _ChequeYaUtilizado(ByVal XClave As String) As Boolean
+        Dim utilizada As Boolean = False
+
+        For Each row As DataGridViewRow In gridFormaPagos.Rows
+            With row
+                Dim RClave As String = .Cells(6).Value
+
+                If XClave = RClave Then
+
+                    utilizada = True
+
+                    Exit For
+
+                End If
+
+            End With
+        Next
+
+        Return utilizada
+    End Function
 
     Private Sub _ProcesarChequeTercero(ByVal clave As String, ByVal indice As Integer)
         Dim ZSql As String = "SELECT Numero2, Fecha2, Banco2, Importe2, Cuit FROM #TABLA# WHERE Clave = '" & Mid(clave, 2, 8) & "'"
