@@ -946,6 +946,16 @@ Public Class Pagos
     Private Sub _TraerChequeDeTercero(ByVal _Item As String, ByVal indice As Integer)
         Dim XClave As String = ""
 
+        ' Comprobamos que aun haya lugar para seguir cancelando Facturas.
+        If gridFormaPagos.Rows.Count > 15 Then
+            MsgBox("La cantidad de facturas a cancelar supera las 15", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        If _Claves.Count = 0 Then
+            Exit Sub
+        End If
+
         XClave = _ObtenerClaveConsulta(_Item)
 
         If XClave = "" Then
@@ -1049,6 +1059,113 @@ Public Class Pagos
         End Try
     End Sub
 
+    Private Function _DocumentoYaUtilizado(ByVal XClave As String) As Boolean
+        Dim utilizada As Boolean = False
+
+        For Each row As DataGridViewRow In gridFormaPagos.Rows
+            With row
+                Dim RClave As String = .Cells(6).Value
+
+                If XClave = RClave Then
+
+                    utilizada = True
+
+                    Exit For
+
+                End If
+
+            End With
+        Next
+
+        Return utilizada
+    End Function
+
+    Private Sub _TraerDocumento(ByVal _Item As String, ByVal indice As Integer)
+        Dim XClave As String = ""
+
+        ' Comprobamos que aun haya lugar para seguir cancelando Facturas.
+        If gridFormaPagos.Rows.Count > 15 Then
+            MsgBox("La cantidad de facturas a cancelar supera las 15", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        If _Claves.Count = 0 Then
+            Exit Sub
+        End If
+
+        XClave = _ObtenerClaveConsulta(_Item)
+
+        If XClave = "" Then
+            Exit Sub
+        End If
+
+        If _DocumentoYaUtilizado(XClave) Then
+            Exit Sub
+        End If
+
+        _ProcesarDocumento(XClave, indice)
+
+    End Sub
+
+    Private Sub _ProcesarDocumento(ByVal clave As String, ByVal indice As Integer)
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Vencimiento1, Saldo FROM CtaCte WHERE Clave = '" & clave & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    .Read()
+
+                    Dim XTipo, XNumero, XFecha, XImporte, XCuit, XClave As String
+                    Dim XRow As Integer = gridFormaPagos.Rows.Add()
+
+                    XClave = clave
+                    XTipo = "4"
+                    XNumero = .Item("Numero").ToString()
+                    XFecha = .Item("Vencimiento1").ToString()
+                    XImporte = _NormalizarNumero(.Item("Saldo").ToString())
+                    XCuit = IIf(Not IsDBNull(.Item("Cuit")), .Item("Cuit"), "")
+
+                    With gridFormaPagos.Rows(XRow)
+
+                        .Cells(0).Value = XTipo
+                        .Cells(1).Value = XNumero
+                        .Cells(2).Value = XFecha
+                        .Cells(3).Value = ""
+                        .Cells(4).Value = ""
+                        .Cells(5).Value = XImporte
+                        .Cells(6).Value = XClave
+                        .Cells(7).Value = XCuit
+
+                    End With
+
+
+                    If lstConsulta.Visible Then
+                        lstConsulta.Items(indice) = ""
+                    End If
+
+
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
     Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
 
         If Not IsNothing(_TipoConsulta) Then
@@ -1058,15 +1175,19 @@ Public Class Pagos
                     mostrarProveedor(lstConsulta.SelectedItem.ToString)
                 Case 1
                     ' Ctas Ctes
-                    If Trim(lstConsulta.SelectedItem) <> "" Then
-                        _TraerCtaCte(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
+                    If Trim(lstConsulta.SelectedItem) = "" Then
+                        Exit Sub
                     End If
+
+                    _TraerCtaCte(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
 
                 Case 2
                     If Trim(lstConsulta.SelectedItem) = "" Then
                         Exit Sub
                     End If
+
                     _TraerChequeDeTercero(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
+
                 Case 3
 
                 Case Else
