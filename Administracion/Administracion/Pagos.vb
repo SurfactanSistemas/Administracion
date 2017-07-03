@@ -12,7 +12,7 @@ Public Class Pagos
     Dim commonEventHandler As New CommonEventsHandler
     Dim _ClavesCheques As New List(Of Object)
     Dim _Carpetas As New List(Of Object)
-    Dim _Claves() As String
+    Dim _Claves As New List(Of Object)
     Dim _TipoConsulta As Integer = Nothing
 
     Private Sub Pagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -335,7 +335,8 @@ Public Class Pagos
     End Function
 
     Private Sub _ListarCtasCtes()
-        Dim XClaves As New List(Of String)
+        Dim XClaves As New List(Of Object)
+        Dim _Item As String
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
                                               & "cp.Numero, cp.Fecha, cp.Clave, ivc.Paridad, ivc.Pago FROM CtaCtePrv as cp, IvaComp as ivc WHERE cp.Proveedor = '" _
@@ -385,13 +386,14 @@ Public Class Pagos
                         If Val(XSaldoUS) = 0 Then
                             XSaldoUS = ""
                         End If
+                        _Item = XImpre & "    " & XLetra & "    " & XPunto & "    " & XNumero & "    " & XFecha & "    " & XSaldo & "    " & XSaldoUS
 
-                        lstConsulta.Items.Add(XImpre & "    " & XLetra & "    " & XPunto & "    " & XNumero & "    " & XFecha & "    " & XSaldo & "    " & XSaldoUS)
+                        lstConsulta.Items.Add(_Item)
 
-                        XClaves.Add(.Item("Clave").ToString())
+                        XClaves.Add({_Item, .Item("Clave").ToString()})
                     Loop
 
-                    _Claves = XClaves.ToArray()
+                    _Claves = XClaves
 
                     _HabilitarConsulta()
                 Else
@@ -412,7 +414,8 @@ Public Class Pagos
     End Sub
 
     Private Sub _ListarProveedores()
-        Dim XClaves As New List(Of String)
+        Dim XClaves As New List(Of Object)
+        Dim _Item As String
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor ORDER BY Nombre")
         Dim dr As SqlDataReader
@@ -428,11 +431,12 @@ Public Class Pagos
                 If .HasRows Then
 
                     Do While .Read()
-                        lstConsulta.Items.Add(ceros(.Item("Proveedor"), 11) & "    " & .Item("Nombre"))
-                        XClaves.Add(ceros(.Item("Proveedor"), 11))
+                        _Item = ceros(.Item("Proveedor"), 11) & "    " & .Item("Nombre")
+                        lstConsulta.Items.Add(_Item)
+                        XClaves.Add({_Item, ceros(.Item("Proveedor"), 11)})
                     Loop
 
-                    _Claves = XClaves.ToArray()
+                    _Claves = XClaves
 
                     _HabilitarConsulta()
                 Else
@@ -557,8 +561,7 @@ Public Class Pagos
     End Function
 
     Private Sub _ListarChequesTerceros()
-        Dim c As Stopwatch = Stopwatch.StartNew
-        Dim XClaves As New List(Of String)
+        Dim XClaves As New List(Of Object)
         Dim _ChequesRecibos As New List(Of Object)
         Dim _ChequesRecibosProvisorios As New List(Of Object)
         Dim _ChequesTotales As New List(Of Object)
@@ -581,11 +584,11 @@ Public Class Pagos
         ' Lo colocamos en la lista.
         For Each _cheque As Object In _ChequesTotales
             lstConsulta.Items.Add(_cheque(0))
-            XClaves.Add(_cheque(1))
+            XClaves.Add({_cheque(0), _cheque(1)})
         Next
 
         ' Guardamos las referencias.
-        _Claves = XClaves.ToArray()
+        _Claves = XClaves
 
         If lstConsulta.Items.Count > 0 Then
             _HabilitarConsulta()
@@ -598,7 +601,7 @@ Public Class Pagos
     Private Sub _ListarDocumentos()
         Dim itemTemplate As String = "#NUMERO#  #VENCIMIENTO#  #SALDO#  #CLIENTE#"
         Dim item As String = ""
-        Dim XClaves As New List(Of String)
+        Dim XClaves As New List(Of Object)
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Clave, Numero, Vencimiento1, Saldo, Cliente FROM CtaCte " _
@@ -624,11 +627,11 @@ Public Class Pagos
 
                         lstConsulta.Items.Add(item)
 
-                        XClaves.Add(.Item("Clave"))
+                        XClaves.Add({item, .Item("Clave")})
 
                     Loop
 
-                    _Claves = XClaves.ToArray()
+                    _Claves = XClaves
 
                     _HabilitarConsulta()
                 Else
@@ -650,8 +653,8 @@ Public Class Pagos
     End Sub
 
     Private Sub _ListarCuentasContables()
-        Dim XClaves As New List(Of String)
-
+        Dim XClaves As New List(Of Object)
+        Dim _Item As String
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Cuenta, Descripcion FROM Cuenta ORDER BY Cuenta")
         Dim dr As SqlDataReader
@@ -667,14 +670,15 @@ Public Class Pagos
                 If .HasRows Then
 
                     Do While .Read()
+                        _Item = LSet(Trim(.Item("Cuenta")), 6) & "    " & Trim(.Item("Descripcion"))
 
-                        lstConsulta.Items.Add(LSet(Trim(.Item("Cuenta")), 6) & "    " & Trim(.Item("Descripcion")))
+                        lstConsulta.Items.Add(_Item)
 
-                        XClaves.Add(.Item("Cuenta"))
+                        XClaves.Add({_Item, .Item("Cuenta")})
 
                     Loop
 
-                    _Claves = XClaves.ToArray()
+                    _Claves = XClaves
 
                     _HabilitarConsulta()
                 Else
@@ -736,14 +740,26 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub mostrarProveedor(ByVal indice As Integer)
+    Private Function _ObtenerClaveConsulta(ByVal _Item As String) As String
+        Dim clave As String = ""
+
+        Try
+            clave = _Claves.FindLast(Function(i) i(0) = _Item)(1)
+        Catch ex As Exception
+
+        End Try
+
+        Return clave
+    End Function
+
+    Private Sub mostrarProveedor(ByVal _Item As String)
         Dim clave As String = ""
         Dim proveedor As Proveedor
 
         If Not IsNothing(_Claves) Then
 
-            If _Claves.Length > 0 Then
-                clave = _Claves(indice)
+            If _Claves.Count > 0 Then
+                clave = _ObtenerClaveConsulta(_Item)
             End If
 
         End If
@@ -765,18 +781,18 @@ Public Class Pagos
         txtObservaciones.Focus()
     End Sub
 
-    Private Sub _TraerCtaCte(ByVal indice As String)
+    Private Sub _TraerCtaCte(ByVal _Item As String, ByVal indice As Integer)
         Dim XClave As String = ""
 
         If IsNothing(_Claves) Then
             Exit Sub
         End If
 
-        If _Claves.Length = 0 Then
+        If _Claves.Count = 0 Then
             Exit Sub
         End If
 
-        XClave = _Claves(indice)
+        XClave = _ObtenerClaveConsulta(_Item)
 
         ' Comprobamos que no se haya utilizado antes.
         If _CtaCteYaUtilizada(XClave) Then
@@ -793,7 +809,11 @@ Public Class Pagos
         ' Procesamos la Cta Cte seleccionada.
         _ProcesarCtaCte(XClave)
 
-        lstConsulta.Items(indice) = ""
+
+        If lstConsulta.Visible Then
+            lstConsulta.Items(indice) = ""
+        End If
+
 
     End Sub
 
@@ -929,11 +949,11 @@ Public Class Pagos
 
             Select Case _TipoConsulta
                 Case 0
-                    mostrarProveedor(lstConsulta.SelectedIndex)
+                    mostrarProveedor(lstConsulta.SelectedItem.ToString)
                 Case 1
                     ' Ctas Ctes
-                    If Trim(lstConsulta.Items(lstConsulta.SelectedIndex)) <> "" Then
-                        _TraerCtaCte(lstConsulta.SelectedIndex)
+                    If Trim(lstConsulta.SelectedItem) <> "" Then
+                        _TraerCtaCte(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
                     End If
 
                 Case 2
