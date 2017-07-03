@@ -271,7 +271,7 @@ Public Class ProveedoresABM
         txtFiltrar.Text = ""
         LBConsulta_Filtrada.Items.Clear()
         LBConsulta.Items.Clear()
-        LBConsulta_Opciones.Visible = IIf(IsNothing(opcion), True, False)
+        LBConsulta_Opciones.Visible = IIf(opcion = "", True, False)
 
         If opcion <> "" Then
 

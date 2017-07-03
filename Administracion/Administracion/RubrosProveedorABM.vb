@@ -11,14 +11,6 @@ Public Class RubrosProveedorABM
         _LimpiarCampos()
     End Sub
 
-    Private Sub RubrosProveedorABM_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
-
-        If e.KeyData = Keys.Escape Then
-            _LimpiarCampos()
-        End If
-
-    End Sub
-
     Private Sub txtCodigo_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigo.Leave
         _MostrarRubro()
     End Sub
@@ -104,7 +96,7 @@ Public Class RubrosProveedorABM
     Private Sub LBConsulta_Filtrada_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Filtrada.SelectedIndexChanged
         _TraerRubro(LBConsulta_Filtrada.SelectedItem)
         LBConsulta_Filtrada.Visible = False
-        txtFiltrar.Text = "Buscar..."
+        txtFiltrar.Text = ""
     End Sub
 
     Private Sub btnPrimerRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerRegistro.Click
@@ -184,7 +176,7 @@ Public Class RubrosProveedorABM
         txtDescripcion.Focus()
         Actualiza = True
 
-        txtFiltrar.Text = "Buscar..."
+        txtFiltrar.Text = ""
 
         _ContraerFormulario()
     End Sub
@@ -259,7 +251,7 @@ Public Class RubrosProveedorABM
         txtCodigo.Text = DAORubroProveedor.siguienteCodigo()
         txtCodigo.SelectAll()
         txtDescripcion.Text = ""
-        txtFiltrar.Text = "Buscar..."
+        txtFiltrar.Text = ""
         Actualiza = False
         LBConsulta_Filtrada.Visible = False
         _ContraerFormulario()
