@@ -333,6 +333,8 @@ Public Class BancosABM
             txtCodigo.Text = banco.Rows(0)(0)
             txtNombre.Text = banco.Rows(0)(1)
 
+            Actualiza = True
+
             txtCuenta.Text = banco.Rows(0)(2)
 
             If Trim(txtCuenta.Text) <> "" Then
@@ -343,6 +345,7 @@ Public Class BancosABM
                 If Not IsNothing(cuenta) Then
                     txtDescripcion.Text = cuenta.descripcion
                 End If
+
             Else
 
                 txtDescripcion.Text = ""
