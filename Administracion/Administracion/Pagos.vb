@@ -96,7 +96,7 @@ Public Class Pagos
         Close()
     End Sub
 
-    Private Sub txtObservaciones_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtObservaciones.Leave
+    Private Sub txtObservaciones_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If gridPagos.Rows.Count = 0 Then
             lstSeleccion.SelectedIndex = 1
             lstSeleccion_Click(Nothing, Nothing)
@@ -242,6 +242,7 @@ Public Class Pagos
         If e.KeyValue = Keys.Enter Then
 
             If Trim(txtProveedor.Text) = "" Then
+                _TipoConsulta = 0
                 _ListarProveedores()
                 Exit Sub
             End If
@@ -266,6 +267,7 @@ Public Class Pagos
         If e.KeyValue = Keys.Enter Then
 
             If Trim(txtBanco.Text) = "" Then
+                _TipoConsulta = 1
                 _ListarCuentasContables()
                 Exit Sub
             End If
@@ -2225,7 +2227,10 @@ Public Class Pagos
     Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
 
         If Trim(txtProveedor.Text) = "" Then
+
+            _TipoConsulta = 0
             _ListarProveedores()
+
         End If
 
     End Sub
@@ -2263,6 +2268,7 @@ Public Class Pagos
     Private Sub txtBanco_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtBanco.MouseDoubleClick
 
         If Trim(txtBanco.Text) = "" Then
+            _TipoConsulta = 1
             _ListarCuentasContables()
             Exit Sub
         End If
