@@ -778,7 +778,7 @@ Public Class Pagos
         txtObservaciones.Focus()
     End Sub
 
-    Private Sub _TraerCtaCte(ByVal _Item As String, ByVal indice As Integer)
+    Private Sub _TraerCtaCte(ByVal _Item As String, Optional ByVal indice As Integer = Nothing)
         Dim XClave As String = ""
 
         If IsNothing(_Claves) Then
@@ -807,7 +807,7 @@ Public Class Pagos
         _ProcesarCtaCte(XClave)
 
 
-        If lstConsulta.Visible Then
+        If Not IsNothing(indice) Then
             lstConsulta.Items(indice) = ""
         End If
 
@@ -940,7 +940,7 @@ Public Class Pagos
         End Try
     End Sub
 
-    Private Sub _TraerChequeDeTercero(ByVal _Item As String, ByVal indice As Integer)
+    Private Sub _TraerChequeDeTercero(ByVal _Item As String, Optional ByVal indice As Integer = Nothing)
         Dim XClave As String = ""
 
         ' Comprobamos que aun haya lugar para seguir cancelando Facturas.
@@ -988,7 +988,7 @@ Public Class Pagos
         Return utilizada
     End Function
 
-    Private Sub _ProcesarChequeTercero(ByVal clave As String, ByVal indice As Integer)
+    Private Sub _ProcesarChequeTercero(ByVal clave As String, Optional ByVal indice As Integer = Nothing)
         Dim ZSql As String = "SELECT Numero2, Fecha2, Banco2, Importe2, Cuit FROM #TABLA# WHERE Clave = '" & Mid(clave, 2, 8) & "'"
         Dim Tabla As String = "Recibos"
         Dim cn As SqlConnection = New SqlConnection()
@@ -1036,7 +1036,7 @@ Public Class Pagos
                     End With
 
 
-                    If lstConsulta.Visible Then
+                    If Not IsNothing(indice) Then
                         lstConsulta.Items(indice) = ""
                     End If
 
@@ -1104,7 +1104,7 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub _ProcesarDocumento(ByVal clave As String, ByVal indice As Integer)
+    Private Sub _ProcesarDocumento(ByVal clave As String, Optional ByVal indice As Integer = Nothing)
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Vencimiento1, Saldo FROM CtaCte WHERE Clave = '" & clave & "'")
         Dim dr As SqlDataReader
@@ -1143,7 +1143,7 @@ Public Class Pagos
                     End With
 
 
-                    If lstConsulta.Visible Then
+                    If Not IsNothing(indice) Then
                         lstConsulta.Items(indice) = ""
                     End If
 
@@ -1161,6 +1161,45 @@ Public Class Pagos
             cm = Nothing
 
         End Try
+    End Sub
+
+    Private Sub CLBFiltrado_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CLBFiltrado.Click
+
+        If Not IsNothing(_TipoConsulta) Then
+            Dim indice As Integer = Nothing
+            Try
+                indice = lstConsulta.FindStringExact(CLBFiltrado.SelectedItem.ToString)
+            Catch ex As Exception
+
+            End Try
+
+            Select Case _TipoConsulta
+                Case 0
+                    mostrarProveedor(CLBFiltrado.SelectedItem.ToString)
+                Case 1
+                    ' Ctas Ctes
+                    If Trim(CLBFiltrado.SelectedItem) = "" Then
+                        Exit Sub
+                    End If
+
+                    _TraerCtaCte(CLBFiltrado.SelectedItem, indice)
+
+                Case 2
+                    If Trim(CLBFiltrado.SelectedItem) = "" Then
+                        Exit Sub
+                    End If
+
+                    _TraerChequeDeTercero(CLBFiltrado.SelectedItem, indice)
+
+                Case Else
+                    Exit Sub
+            End Select
+
+            CLBFiltrado.Visible = False
+            txtConsulta.Text = ""
+            txtConsulta.Focus()
+        End If
+
     End Sub
 
     Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
