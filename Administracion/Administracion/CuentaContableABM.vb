@@ -12,14 +12,6 @@ Public Class CuentaContableABM
         _ContraerFormulario()
     End Sub
 
-    Private Sub CuentaContableABM_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyData = Keys.Escape Then
-
-            _LimpiarCampos()
-
-        End If
-    End Sub
-
     Private Sub txtCodigo_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigo.Leave
 
         If Trim(txtCodigo.Text) <> "" Then
