@@ -209,12 +209,37 @@ Public Class ProveedoresABM
 
     Private Sub agregar()
 
+        ' Validamos el Cuit.
+        If Not _CuitValido(txtCUIT.Text) Then
+            MsgBox("El CUIT indicado no es válido.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        Dim cuentacontable As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
+
+        ' Validamos la cuenta corriente.
+        If IsNothing(cuentacontable) Then
+            MsgBox("La cuenta contable indicada no existe.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        ' Validamos que se haya indicado fecha para sedronar en caso de que se haya colocado un valor.
+
+        If Trim(txtNroSEDRONAR1.Text) <> "" Then
+
+            If Trim(txtNroSEDRONAR2.Text).Replace("/", "") <> "" Then
+                MsgBox("Se debe informar la fecha de Inscripción a Sedronar.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
+        End If
+
         Dim proveedor As Proveedor
 
         proveedor = DAOProveedor.buscarProveedorPorCodigo(txtCodigo.Text)
 
+        ' Comprobamos si se trata de una actualización o de un proveedor nuevo.
         If Not IsNothing(proveedor) Then
-            ' Actualizamos en vez de agregar uno nuevo.
             _ActualizarProveedor(proveedor.id)
             Exit Sub
         End If
