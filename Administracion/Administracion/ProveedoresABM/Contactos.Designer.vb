@@ -27,33 +27,6 @@ Partial Class Contactos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtEmail1 = New System.Windows.Forms.TextBox()
-        Me.txtTelefono1 = New System.Windows.Forms.TextBox()
-        Me.txtCargo1 = New System.Windows.Forms.TextBox()
-        Me.txtNombre1 = New System.Windows.Forms.TextBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtEmail2 = New System.Windows.Forms.TextBox()
-        Me.txtTelefono2 = New System.Windows.Forms.TextBox()
-        Me.txtCargo2 = New System.Windows.Forms.TextBox()
-        Me.txtNombre2 = New System.Windows.Forms.TextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -63,12 +36,39 @@ Partial Class Contactos
         Me.txtTelefono3 = New System.Windows.Forms.TextBox()
         Me.txtCargo3 = New System.Windows.Forms.TextBox()
         Me.txtNombre3 = New System.Windows.Forms.TextBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtEmail2 = New System.Windows.Forms.TextBox()
+        Me.txtTelefono2 = New System.Windows.Forms.TextBox()
+        Me.txtCargo2 = New System.Windows.Forms.TextBox()
+        Me.txtNombre2 = New System.Windows.Forms.TextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtEmail1 = New System.Windows.Forms.TextBox()
+        Me.txtTelefono1 = New System.Windows.Forms.TextBox()
+        Me.txtCargo1 = New System.Windows.Forms.TextBox()
+        Me.txtNombre1 = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnAceptar
@@ -134,171 +134,92 @@ Partial Class Contactos
         Me.Panel2.Size = New System.Drawing.Size(596, 327)
         Me.Panel2.TabIndex = 3
         '
-        'GroupBox1
+        'GroupBox4
         '
-        Me.GroupBox1.Controls.Add(Me.GroupBox2)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.TextBox4)
-        Me.GroupBox1.Controls.Add(Me.TextBox2)
-        Me.GroupBox1.Controls.Add(Me.TextBox3)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(15, 18)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(566, 93)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
+        Me.GroupBox4.Controls.Add(Me.Label15)
+        Me.GroupBox4.Controls.Add(Me.Label16)
+        Me.GroupBox4.Controls.Add(Me.Label17)
+        Me.GroupBox4.Controls.Add(Me.Label18)
+        Me.GroupBox4.Controls.Add(Me.txtEmail3)
+        Me.GroupBox4.Controls.Add(Me.txtTelefono3)
+        Me.GroupBox4.Controls.Add(Me.txtCargo3)
+        Me.GroupBox4.Controls.Add(Me.txtNombre3)
+        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox4.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox4.Location = New System.Drawing.Point(15, 216)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(566, 93)
+        Me.GroupBox4.TabIndex = 0
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Contacto 3"
         '
-        'TextBox1
+        'Label15
         '
-        Me.TextBox1.Location = New System.Drawing.Point(68, 25)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(243, 20)
-        Me.TextBox1.TabIndex = 0
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(256, 54)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(41, 13)
+        Me.Label15.TabIndex = 1
+        Me.Label15.Text = "Email:"
         '
-        'Label3
+        'Label16
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 28)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(47, 13)
-        Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Nombre:"
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(7, 54)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(61, 13)
+        Me.Label16.TabIndex = 1
+        Me.Label16.Text = "Telefono:"
         '
-        'TextBox2
+        'Label17
         '
-        Me.TextBox2.Location = New System.Drawing.Point(68, 51)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(173, 20)
-        Me.TextBox2.TabIndex = 0
-        Me.TextBox2.Text = "9999-9999-9999"
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(317, 28)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(44, 13)
+        Me.Label17.TabIndex = 1
+        Me.Label17.Text = "Cargo:"
         '
-        'Label4
+        'Label18
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(15, 54)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(47, 13)
-        Me.Label4.TabIndex = 1
-        Me.Label4.Text = "Nombre:"
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(15, 28)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(54, 13)
+        Me.Label18.TabIndex = 1
+        Me.Label18.Text = "Nombre:"
         '
-        'TextBox3
+        'txtEmail3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(370, 25)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(173, 20)
-        Me.TextBox3.TabIndex = 0
+        Me.txtEmail3.Location = New System.Drawing.Point(309, 51)
+        Me.txtEmail3.MaxLength = 50
+        Me.txtEmail3.Name = "txtEmail3"
+        Me.txtEmail3.Size = New System.Drawing.Size(234, 20)
+        Me.txtEmail3.TabIndex = 0
         '
-        'Label5
+        'txtTelefono3
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(317, 28)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(47, 13)
-        Me.Label5.TabIndex = 1
-        Me.Label5.Text = "Nombre:"
+        Me.txtTelefono3.Location = New System.Drawing.Point(68, 51)
+        Me.txtTelefono3.MaxLength = 50
+        Me.txtTelefono3.Name = "txtTelefono3"
+        Me.txtTelefono3.Size = New System.Drawing.Size(173, 20)
+        Me.txtTelefono3.TabIndex = 0
         '
-        'TextBox4
+        'txtCargo3
         '
-        Me.TextBox4.Location = New System.Drawing.Point(309, 51)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(234, 20)
-        Me.TextBox4.TabIndex = 0
+        Me.txtCargo3.Location = New System.Drawing.Point(370, 25)
+        Me.txtCargo3.MaxLength = 50
+        Me.txtCargo3.Name = "txtCargo3"
+        Me.txtCargo3.Size = New System.Drawing.Size(173, 20)
+        Me.txtCargo3.TabIndex = 0
         '
-        'Label6
+        'txtNombre3
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(256, 54)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(47, 13)
-        Me.Label6.TabIndex = 1
-        Me.Label6.Text = "Nombre:"
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Controls.Add(Me.Label9)
-        Me.GroupBox2.Controls.Add(Me.Label10)
-        Me.GroupBox2.Controls.Add(Me.txtEmail1)
-        Me.GroupBox2.Controls.Add(Me.txtTelefono1)
-        Me.GroupBox2.Controls.Add(Me.txtCargo1)
-        Me.GroupBox2.Controls.Add(Me.txtNombre1)
-        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(566, 93)
-        Me.GroupBox2.TabIndex = 0
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Contacto 1"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(256, 54)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(41, 13)
-        Me.Label7.TabIndex = 1
-        Me.Label7.Text = "Email:"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(7, 54)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(61, 13)
-        Me.Label8.TabIndex = 1
-        Me.Label8.Text = "Telefono:"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(317, 28)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(44, 13)
-        Me.Label9.TabIndex = 1
-        Me.Label9.Text = "Cargo:"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(15, 28)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(54, 13)
-        Me.Label10.TabIndex = 1
-        Me.Label10.Text = "Nombre:"
-        '
-        'txtEmail1
-        '
-        Me.txtEmail1.Location = New System.Drawing.Point(309, 51)
-        Me.txtEmail1.Name = "txtEmail1"
-        Me.txtEmail1.Size = New System.Drawing.Size(234, 20)
-        Me.txtEmail1.TabIndex = 0
-        '
-        'txtTelefono1
-        '
-        Me.txtTelefono1.Location = New System.Drawing.Point(68, 51)
-        Me.txtTelefono1.Name = "txtTelefono1"
-        Me.txtTelefono1.Size = New System.Drawing.Size(173, 20)
-        Me.txtTelefono1.TabIndex = 0
-        '
-        'txtCargo1
-        '
-        Me.txtCargo1.Location = New System.Drawing.Point(370, 25)
-        Me.txtCargo1.Name = "txtCargo1"
-        Me.txtCargo1.Size = New System.Drawing.Size(173, 20)
-        Me.txtCargo1.TabIndex = 0
-        '
-        'txtNombre1
-        '
-        Me.txtNombre1.Location = New System.Drawing.Point(68, 25)
-        Me.txtNombre1.Name = "txtNombre1"
-        Me.txtNombre1.Size = New System.Drawing.Size(243, 20)
-        Me.txtNombre1.TabIndex = 0
+        Me.txtNombre3.Location = New System.Drawing.Point(68, 25)
+        Me.txtNombre3.MaxLength = 50
+        Me.txtNombre3.Name = "txtNombre3"
+        Me.txtNombre3.Size = New System.Drawing.Size(243, 20)
+        Me.txtNombre3.TabIndex = 0
         '
         'GroupBox3
         '
@@ -358,6 +279,7 @@ Partial Class Contactos
         'txtEmail2
         '
         Me.txtEmail2.Location = New System.Drawing.Point(309, 51)
+        Me.txtEmail2.MaxLength = 50
         Me.txtEmail2.Name = "txtEmail2"
         Me.txtEmail2.Size = New System.Drawing.Size(234, 20)
         Me.txtEmail2.TabIndex = 0
@@ -365,6 +287,7 @@ Partial Class Contactos
         'txtTelefono2
         '
         Me.txtTelefono2.Location = New System.Drawing.Point(68, 51)
+        Me.txtTelefono2.MaxLength = 50
         Me.txtTelefono2.Name = "txtTelefono2"
         Me.txtTelefono2.Size = New System.Drawing.Size(173, 20)
         Me.txtTelefono2.TabIndex = 0
@@ -372,6 +295,7 @@ Partial Class Contactos
         'txtCargo2
         '
         Me.txtCargo2.Location = New System.Drawing.Point(370, 25)
+        Me.txtCargo2.MaxLength = 50
         Me.txtCargo2.Name = "txtCargo2"
         Me.txtCargo2.Size = New System.Drawing.Size(173, 20)
         Me.txtCargo2.TabIndex = 0
@@ -379,92 +303,180 @@ Partial Class Contactos
         'txtNombre2
         '
         Me.txtNombre2.Location = New System.Drawing.Point(68, 25)
+        Me.txtNombre2.MaxLength = 50
         Me.txtNombre2.Name = "txtNombre2"
         Me.txtNombre2.Size = New System.Drawing.Size(243, 20)
         Me.txtNombre2.TabIndex = 0
         '
-        'GroupBox4
+        'GroupBox1
         '
-        Me.GroupBox4.Controls.Add(Me.Label15)
-        Me.GroupBox4.Controls.Add(Me.Label16)
-        Me.GroupBox4.Controls.Add(Me.Label17)
-        Me.GroupBox4.Controls.Add(Me.Label18)
-        Me.GroupBox4.Controls.Add(Me.txtEmail3)
-        Me.GroupBox4.Controls.Add(Me.txtTelefono3)
-        Me.GroupBox4.Controls.Add(Me.txtCargo3)
-        Me.GroupBox4.Controls.Add(Me.txtNombre3)
-        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox4.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox4.Location = New System.Drawing.Point(15, 216)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(566, 93)
-        Me.GroupBox4.TabIndex = 0
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Contacto 3"
+        Me.GroupBox1.Controls.Add(Me.GroupBox2)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.Label5)
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.TextBox4)
+        Me.GroupBox1.Controls.Add(Me.TextBox2)
+        Me.GroupBox1.Controls.Add(Me.TextBox3)
+        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Location = New System.Drawing.Point(15, 18)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(566, 93)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "GroupBox1"
         '
-        'Label15
+        'GroupBox2
         '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(256, 54)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(41, 13)
-        Me.Label15.TabIndex = 1
-        Me.Label15.Text = "Email:"
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.Label10)
+        Me.GroupBox2.Controls.Add(Me.txtEmail1)
+        Me.GroupBox2.Controls.Add(Me.txtTelefono1)
+        Me.GroupBox2.Controls.Add(Me.txtCargo1)
+        Me.GroupBox2.Controls.Add(Me.txtNombre1)
+        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(566, 93)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Contacto 1"
         '
-        'Label16
+        'Label7
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(7, 54)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(61, 13)
-        Me.Label16.TabIndex = 1
-        Me.Label16.Text = "Telefono:"
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(256, 54)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(41, 13)
+        Me.Label7.TabIndex = 1
+        Me.Label7.Text = "Email:"
         '
-        'Label17
+        'Label8
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(317, 28)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(44, 13)
-        Me.Label17.TabIndex = 1
-        Me.Label17.Text = "Cargo:"
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(7, 54)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(61, 13)
+        Me.Label8.TabIndex = 1
+        Me.Label8.Text = "Telefono:"
         '
-        'Label18
+        'Label9
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(15, 28)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(54, 13)
-        Me.Label18.TabIndex = 1
-        Me.Label18.Text = "Nombre:"
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(317, 28)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(44, 13)
+        Me.Label9.TabIndex = 1
+        Me.Label9.Text = "Cargo:"
         '
-        'txtEmail3
+        'Label10
         '
-        Me.txtEmail3.Location = New System.Drawing.Point(309, 51)
-        Me.txtEmail3.Name = "txtEmail3"
-        Me.txtEmail3.Size = New System.Drawing.Size(234, 20)
-        Me.txtEmail3.TabIndex = 0
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(15, 28)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(54, 13)
+        Me.Label10.TabIndex = 1
+        Me.Label10.Text = "Nombre:"
         '
-        'txtTelefono3
+        'txtEmail1
         '
-        Me.txtTelefono3.Location = New System.Drawing.Point(68, 51)
-        Me.txtTelefono3.Name = "txtTelefono3"
-        Me.txtTelefono3.Size = New System.Drawing.Size(173, 20)
-        Me.txtTelefono3.TabIndex = 0
+        Me.txtEmail1.Location = New System.Drawing.Point(309, 51)
+        Me.txtEmail1.MaxLength = 50
+        Me.txtEmail1.Name = "txtEmail1"
+        Me.txtEmail1.Size = New System.Drawing.Size(234, 20)
+        Me.txtEmail1.TabIndex = 0
         '
-        'txtCargo3
+        'txtTelefono1
         '
-        Me.txtCargo3.Location = New System.Drawing.Point(370, 25)
-        Me.txtCargo3.Name = "txtCargo3"
-        Me.txtCargo3.Size = New System.Drawing.Size(173, 20)
-        Me.txtCargo3.TabIndex = 0
+        Me.txtTelefono1.Location = New System.Drawing.Point(68, 51)
+        Me.txtTelefono1.MaxLength = 50
+        Me.txtTelefono1.Name = "txtTelefono1"
+        Me.txtTelefono1.Size = New System.Drawing.Size(173, 20)
+        Me.txtTelefono1.TabIndex = 0
         '
-        'txtNombre3
+        'txtCargo1
         '
-        Me.txtNombre3.Location = New System.Drawing.Point(68, 25)
-        Me.txtNombre3.Name = "txtNombre3"
-        Me.txtNombre3.Size = New System.Drawing.Size(243, 20)
-        Me.txtNombre3.TabIndex = 0
+        Me.txtCargo1.Location = New System.Drawing.Point(370, 25)
+        Me.txtCargo1.MaxLength = 50
+        Me.txtCargo1.Name = "txtCargo1"
+        Me.txtCargo1.Size = New System.Drawing.Size(173, 20)
+        Me.txtCargo1.TabIndex = 0
+        '
+        'txtNombre1
+        '
+        Me.txtNombre1.Location = New System.Drawing.Point(68, 25)
+        Me.txtNombre1.MaxLength = 50
+        Me.txtNombre1.Name = "txtNombre1"
+        Me.txtNombre1.Size = New System.Drawing.Size(243, 20)
+        Me.txtNombre1.TabIndex = 0
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(256, 54)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(47, 13)
+        Me.Label6.TabIndex = 1
+        Me.Label6.Text = "Nombre:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(15, 54)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(47, 13)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "Nombre:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(317, 28)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(47, 13)
+        Me.Label5.TabIndex = 1
+        Me.Label5.Text = "Nombre:"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(15, 28)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(47, 13)
+        Me.Label3.TabIndex = 1
+        Me.Label3.Text = "Nombre:"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(309, 51)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(234, 20)
+        Me.TextBox4.TabIndex = 0
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(68, 51)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(173, 20)
+        Me.TextBox2.TabIndex = 0
+        Me.TextBox2.Text = "9999-9999-9999"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(370, 25)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(173, 20)
+        Me.TextBox3.TabIndex = 0
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(68, 25)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(243, 20)
+        Me.TextBox1.TabIndex = 0
         '
         'Contactos
         '
@@ -482,14 +494,14 @@ Partial Class Contactos
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

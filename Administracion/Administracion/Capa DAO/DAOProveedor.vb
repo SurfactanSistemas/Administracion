@@ -12,20 +12,15 @@ Public Class DAOProveedor
                                       proveedor.vtoCategoria, proveedor.tipoInscripcionIB, proveedor.cai, proveedor.vtoCAI, _
                                       proveedor.certificados, proveedor.vtoCertificados, proveedor.estado, proveedor.calificacion, _
                                       proveedor.vtoCalificacion, proveedor.observacionCompleta, proveedor.cufe1, proveedor.cufe2, _
-                                      proveedor.cufe3, proveedor.dirCUFE1, proveedor.dirCUFE2, proveedor.dirCUFE3)
+                                      proveedor.cufe3, proveedor.dirCUFE1, proveedor.dirCUFE2, proveedor.dirCUFE3, _
+                                      proveedor.PaginaWeb(0).ToString, proveedor.contacto1(0).ToString, proveedor.contacto1(1).ToString, proveedor.contacto1(2).ToString, proveedor.contacto1(3).ToString, _
+                                      proveedor.contacto2(0).ToString, proveedor.contacto2(1).ToString, proveedor.contacto2(2).ToString, proveedor.contacto2(3).ToString, _
+                                      proveedor.contacto3(0).ToString, proveedor.contacto3(1).ToString, proveedor.contacto3(2).ToString, proveedor.contacto3(3).ToString)
     End Sub
 
     Public Shared Sub eliminarProveedor(ByVal codProveedor As String)
         SQLConnector.executeProcedure("baja_proveedor", codProveedor)
     End Sub
-
-    'Private Shared Function crearProveedor(ByVal codigo As String, ByVal row As DataRow)
-    '    Return New Proveedor(codigo, row("nombre").ToString, row("direccion").ToString, row("postal").ToString, row("localidad").ToString, row("telefono").ToString, row("email").ToString,
-    '                         row("observaciones").ToString, row("cuit").ToString, row("nombrecheque").ToString, row("porceib"), row("porceibcaba"), row("cai").ToString, row("observacionesii").ToString, row("cufe").ToString, row("cufeii").ToString, row("cufeiii").ToString,
-    '                         intNull(row("provincia")), intNull(row("region")), row("dias").ToString, intNull(row("tipo")), intNull(row("iva")), intNull(row("codib")), intNull(row("codibcaba")), row("nroib").ToString, row("nroinsc").ToString, intNull(row("categoriai")),
-    '                         intNull(row("categoriaii")), intNull(row("ibciudadii")), intNull(row("iso")), intNull(row("estado")), intNull(row("califica")), asStringDate(row("fechanroinsc")), asStringDate(row("fechacategoria")), asStringDate(row("vtocai")), asStringDate(row("vtoiso")), asStringDate(row("fechacalifica")),
-    '                         asStringDate(row("dircufe")), asStringDate(row("dircufeii")), asStringDate(row("dircufeiii")), DAOCuentaContable.buscarCuentaContablePorCodigo(row("cuenta").ToString), DAORubroProveedor.buscarRubroProveedorPorCodigo(intNull(row("tipoprov"))))
-    'End Function
 
     Public Shared Function crearProveedor(ByVal row)
         Return New Proveedor(row("proveedor").ToString,

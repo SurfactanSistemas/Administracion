@@ -44,6 +44,10 @@ Partial Class ProveedoresABM
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtPaginaWeb = New System.Windows.Forms.TextBox()
         Me.txtCUIT = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
+        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
         Me.cmbCalificacion = New Administracion.CustomComboBox()
         Me.cmbEstado = New Administracion.CustomComboBox()
         Me.cmbCertificados = New Administracion.CustomComboBox()
@@ -86,10 +90,6 @@ Partial Class ProveedoresABM
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
-        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
         Me.cmbRegion = New Administracion.CustomComboBox()
         Me.CustomLabel8 = New Administracion.CustomLabel()
         Me.CustomLabel7 = New Administracion.CustomLabel()
@@ -468,6 +468,7 @@ Partial Class ProveedoresABM
         'txtPaginaWeb
         '
         Me.txtPaginaWeb.Location = New System.Drawing.Point(124, 340)
+        Me.txtPaginaWeb.MaxLength = 50
         Me.txtPaginaWeb.Name = "txtPaginaWeb"
         Me.txtPaginaWeb.Size = New System.Drawing.Size(309, 20)
         Me.txtPaginaWeb.TabIndex = 104
@@ -483,6 +484,50 @@ Partial Class ProveedoresABM
         Me.txtCUIT.TabIndex = 102
         Me.txtCUIT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCUIT.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        '
+        'txtCategoria
+        '
+        Me.txtCategoria.Location = New System.Drawing.Point(346, 256)
+        Me.txtCategoria.Mask = "00/00/0000"
+        Me.txtCategoria.Name = "txtCategoria"
+        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
+        Me.txtCategoria.TabIndex = 47
+        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCategoria.ValidatingType = GetType(Date)
+        '
+        'txtCalificacion
+        '
+        Me.txtCalificacion.Location = New System.Drawing.Point(698, 312)
+        Me.txtCalificacion.Mask = "00/00/0000"
+        Me.txtCalificacion.Name = "txtCalificacion"
+        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCalificacion.Size = New System.Drawing.Size(74, 20)
+        Me.txtCalificacion.TabIndex = 47
+        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCalificacion.ValidatingType = GetType(Date)
+        '
+        'txtNroSEDRONAR2
+        '
+        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(658, 228)
+        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
+        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
+        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
+        Me.txtNroSEDRONAR2.TabIndex = 47
+        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
+        '
+        'txtCertificados
+        '
+        Me.txtCertificados.Location = New System.Drawing.Point(258, 312)
+        Me.txtCertificados.Mask = "00/00/0000"
+        Me.txtCertificados.Name = "txtCertificados"
+        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCertificados.Size = New System.Drawing.Size(74, 20)
+        Me.txtCertificados.TabIndex = 47
+        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCertificados.ValidatingType = GetType(Date)
         '
         'cmbCalificacion
         '
@@ -536,6 +581,7 @@ Partial Class ProveedoresABM
         Me.txtCAI.EnterIndex = 29
         Me.txtCAI.LabelAssociationKey = 25
         Me.txtCAI.Location = New System.Drawing.Point(124, 284)
+        Me.txtCAI.MaxLength = 14
         Me.txtCAI.Name = "txtCAI"
         Me.txtCAI.Size = New System.Drawing.Size(175, 20)
         Me.txtCAI.TabIndex = 96
@@ -1064,50 +1110,6 @@ Partial Class ProveedoresABM
         Me.CustomLabel1.Size = New System.Drawing.Size(51, 18)
         Me.CustomLabel1.TabIndex = 48
         Me.CustomLabel1.Text = "Código"
-        '
-        'txtCategoria
-        '
-        Me.txtCategoria.Location = New System.Drawing.Point(346, 256)
-        Me.txtCategoria.Mask = "00/00/0000"
-        Me.txtCategoria.Name = "txtCategoria"
-        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
-        Me.txtCategoria.TabIndex = 47
-        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCategoria.ValidatingType = GetType(Date)
-        '
-        'txtCalificacion
-        '
-        Me.txtCalificacion.Location = New System.Drawing.Point(698, 312)
-        Me.txtCalificacion.Mask = "00/00/0000"
-        Me.txtCalificacion.Name = "txtCalificacion"
-        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCalificacion.Size = New System.Drawing.Size(74, 20)
-        Me.txtCalificacion.TabIndex = 47
-        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCalificacion.ValidatingType = GetType(Date)
-        '
-        'txtNroSEDRONAR2
-        '
-        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(658, 228)
-        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
-        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
-        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
-        Me.txtNroSEDRONAR2.TabIndex = 47
-        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
-        '
-        'txtCertificados
-        '
-        Me.txtCertificados.Location = New System.Drawing.Point(258, 312)
-        Me.txtCertificados.Mask = "00/00/0000"
-        Me.txtCertificados.Name = "txtCertificados"
-        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCertificados.Size = New System.Drawing.Size(74, 20)
-        Me.txtCertificados.TabIndex = 47
-        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCertificados.ValidatingType = GetType(Date)
         '
         'cmbRegion
         '

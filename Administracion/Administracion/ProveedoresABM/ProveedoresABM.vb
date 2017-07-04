@@ -63,6 +63,10 @@ Public Class ProveedoresABM
         Return String.Join("", fecha.Split("/").Reverse())
     End Function
 
+    Private Function NormalizarIndex(ByVal numero As Integer) As Integer
+        Return IIf(numero < 0, 0, numero)
+    End Function
+
     Private Sub _ActualizarProveedorEnEmpresa(ByVal cs As String)
         Dim ZSql As String
         Dim cn As SqlConnection = New SqlConnection()
@@ -70,64 +74,65 @@ Public Class ProveedoresABM
 
         ZSql = "UPDATE Proveedor " _
                     & " SET " _
-                    & "Nombre =  '" & txtRazonSocial.Text & "', " _
-                    & "Direccion =  '" & txtDireccion.Text & "', " _
-                    & "Localidad =  '" & txtLocalidad.Text & "', " _
-                    & "Provincia =  '" & ceros(cmbProvincia.SelectedIndex, 2) & "', " _
-                    & "Postal =  '" & txtCodigoPostal.Text & "', " _
-                    & "Cuit =  '" & txtCUIT.Text & "', " _
-                    & "Telefono =  '" & txtTelefono.Text & "', " _
-                    & "Email =  '" & txtEmail.Text & "', " _
-                    & "Observaciones =  '" & txtObservaciones.Text & "', " _
-                    & "Tipo =  '" & cmbRubro.SelectedIndex & "', " _
-                    & "Iva =  '" & cmbIVA.SelectedIndex & "', " _
-                    & "Dias =  '" & txtDiasPlazo.Text & "', " _
+                    & "Nombre =  '" & Mid(Trim(txtRazonSocial.Text), 1, 50) & "', " _
+                    & "Direccion =  '" & Mid(Trim(txtDireccion.Text), 1, 50) & "', " _
+                    & "Localidad =  '" & Mid(Trim(txtLocalidad.Text), 1, 50) & "', " _
+                    & "Provincia =  '" & ceros(NormalizarIndex(cmbProvincia.SelectedIndex), 2) & "', " _
+                    & "Postal =  '" & Mid(Trim(txtCodigoPostal.Text), 1, 4) & "', " _
+                    & "Cuit =  '" & Mid(Trim(txtCUIT.Text), 1, 15) & "', " _
+                    & "Telefono =  '" & Mid(Trim(txtTelefono.Text), 1, 30) & "', " _
+                    & "Email =  '" & Mid(Trim(txtEmail.Text), 1, 400) & "', " _
+                    & "Observaciones =  '" & Mid(Trim(txtObservaciones.Text), 1, 50) & "', " _
+                    & "Tipo =  '" & NormalizarIndex(cmbRubro.SelectedIndex) & "', " _
+                    & "Iva =  '" & NormalizarIndex(cmbIVA.SelectedIndex) & "', " _
+                    & "Dias =  '" & Mid(Trim(txtDiasPlazo.Text), 1, 20) & "', " _
                     & "Empresa =  '1', " _
-                    & "Cuenta =  '" & txtCuenta.Text & "', " _
-                    & "NombreCheque =  '" & txtCheque.Text & "', " _
+                    & "Cuenta =  '" & Mid(Trim(txtCuenta.Text), 1, 10) & "', " _
+                    & "NombreCheque =  '" & Mid(Trim(txtCheque.Text), 1, 50) & "', " _
                     & "wdate =  '" & Date.Now.ToString("dd-MM-yyyy") & "', " _
-                    & "CodIb =  '" & cmbCondicionIB1.SelectedIndex & "', " _
-                    & "NroIb =  '" & txtNroIB.Text & "', " _
-                    & "NroInsc =  '" & txtNroSEDRONAR1.Text & "', " _
-                    & "Cai =  '" & txtCAI.Text & "', " _
-                    & "VtoCai =  '" & txtCAIVto.Text & "', " _
-                    & "TipoProv =  '" & cmbTipoProveedor.SelectedIndex & "', " _
-                    & "CategoriaI =  '" & cmbCategoria1.SelectedIndex & "', " _
-                    & "CategoriaII =  '" & cmbCategoria2.SelectedIndex & "', " _
-                    & "Iso =  '" & cmbCertificados.SelectedIndex & "', " _
-                    & "Region =  '" & cmbRegion.SelectedIndex & "', " _
-                    & "PorceIb =  '" & txtPorcelProv.Text & "', " _
-                    & "Estado =  '" & cmbEstado.SelectedIndex & "', " _
-                    & "Califica =  '" & cmbCalificacion.SelectedIndex & "', " _
-                    & "FechaCalifica =  '" & txtCalificacion.Text & "', " _
-                    & "OrdFechaCalifica =  '" & _FechaComoOrd(txtCalificacion.Text) & "', " _
+                    & "CodIb =  '" & NormalizarIndex(cmbCondicionIB1.SelectedIndex) & "', " _
+                    & "NroIb =  '" & Mid(Trim(txtNroIB.Text), 1, 20) & "', " _
+                    & "NroInsc =  '" & Mid(Trim(txtNroSEDRONAR1.Text), 1, 15) & "', " _
+                    & "Cai =  '" & Mid(Trim(txtCAI.Text), 1, 14) & "', " _
+                    & "VtoCai =  '" & Mid(Trim(txtCAIVto.Text), 1, 10) & "', " _
+                    & "TipoProv =  '" & NormalizarIndex(cmbTipoProveedor.SelectedIndex) & "', " _
+                    & "CategoriaI =  '" & NormalizarIndex(cmbCategoria1.SelectedIndex) & "', " _
+                    & "CategoriaII =  '" & NormalizarIndex(cmbCategoria2.SelectedIndex) & "', " _
+                    & "Iso =  '" & NormalizarIndex(cmbCertificados.SelectedIndex) & "', " _
+                    & "Region =  '" & NormalizarIndex(cmbRegion.SelectedIndex) & "', " _
+                    & "PorceIb =  '" & Trim(txtPorcelProv.Text) & "', " _
+                    & "Estado =  '" & NormalizarIndex(cmbEstado.SelectedIndex) & "', " _
+                    & "Califica =  '" & NormalizarIndex(cmbCalificacion.SelectedIndex) & "', " _
+                    & "FechaCalifica =  '" & Mid(Trim(txtCalificacion.Text), 1, 10) & "', " _
+                    & "OrdFechaCalifica =  '" & Mid(_FechaComoOrd(txtCalificacion.Text), 1, 10) & "', " _
                     & "ObservacionesII =  '" & observaciones & "', " _
-                    & "FechaCategoria =  '" & txtCategoria.Text & "', " _
-                    & "OrdFechaCategoria =  '" & _FechaComoOrd(txtCategoria.Text) & "', " _
-                    & "FechaNroInsc =  '" & txtNroSEDRONAR2.Text & "', " _
-                    & "OrdFechaNroInsc =  '" & _FechaComoOrd(txtNroSEDRONAR2.Text) & "', " _
-                    & "PorceIbCaba =  '" & txtPorcelCABA.Text & "', " _
-                    & "Cufe =  '" & cufe1.Item1 & "', " _
-                    & "CufeII =  '" & cufe2.Item1 & "', " _
-                    & "CufeIII =  '" & cufe3.Item1 & "', " _
-                    & "DirCufe =  '" & cufe1.Item2 & "', " _
-                    & "DirCufeII =  '" & cufe2.Item2 & "', " _
-                    & "DirCufeIII =  '" & cufe3.Item2 & "', " _
-                    & "CodIbCaba =  '" & cmbCondicionIB2.SelectedIndex & "', " _
-                    & "PaginaWeb =  '" & txtPaginaWeb.Text & "', " _
-                    & "ContactoNombre1 = '" & _Contacto1.Item1 & "', " _
-                    & "ContactoCargo1 = '" & _Contacto1.Item2 & "', " _
-                    & "ContactoTelefono1 = '" & _Contacto1.Item3 & "', " _
-                    & "ContactoEmail1 = '" & _Contacto1.Item4 & "', " _
-                    & "ContactoNombre2 = '" & _Contacto2.Item1 & "', " _
-                    & "ContactoCargo2 = '" & _Contacto2.Item2 & "', " _
-                    & "ContactoTelefono2 = '" & _Contacto2.Item3 & "', " _
-                    & "ContactoEmail2 = '" & _Contacto2.Item4 & "', " _
-                    & "ContactoNombre3 = '" & _Contacto3.Item1 & "', " _
-                    & "ContactoCargo3 = '" & _Contacto3.Item2 & "', " _
-                    & "ContactoTelefono3 = '" & _Contacto3.Item3 & "', " _
-                    & "ContactoEmail3 = '" & _Contacto3.Item4 & "' " _
-                    & " WHERE Proveedor = '" & txtCodigo.Text & "'"
+                    & "FechaCategoria =  '" & Mid(Trim(txtCategoria.Text), 1, 10) & "', " _
+                    & "OrdFechaCategoria =  '" & Mid(_FechaComoOrd(txtCategoria.Text), 1, 10) & "', " _
+                    & "FechaNroInsc =  '" & Mid(Trim(txtNroSEDRONAR2.Text), 1, 10) & "', " _
+                    & "OrdFechaNroInsc =  '" & Mid(_FechaComoOrd(txtNroSEDRONAR2.Text), 1, 10) & "', " _
+                    & "PorceIbCaba =  '" & Trim(txtPorcelCABA.Text) & "', " _
+                    & "Cufe =  '" & Mid(Trim(cufe1.Item1), 1, 20) & "', " _
+                    & "CufeII =  '" & Mid(Trim(cufe2.Item1), 1, 20) & "', " _
+                    & "CufeIII =  '" & Mid(Trim(cufe3.Item1), 1, 20) & "', " _
+                    & "DirCufe =  '" & Mid(Trim(cufe1.Item2), 1, 50) & "', " _
+                    & "DirCufeII =  '" & Mid(Trim(cufe2.Item2), 1, 50) & "', " _
+                    & "DirCufeIII =  '" & Mid(Trim(cufe3.Item2), 1, 50) & "', " _
+                    & "CodIbCaba =  '" & NormalizarIndex(cmbCondicionIB2.SelectedIndex) & "', " _
+                    & "PaginaWeb =  '" & Mid(Trim(txtPaginaWeb.Text), 1, 50) & "', " _
+                    & "ContactoNombre1 = '" & Mid(Trim(_Contacto1.Item1), 1, 50) & "', " _
+                    & "ContactoCargo1 = '" & Mid(Trim(_Contacto1.Item2), 1, 50) & "', " _
+                    & "ContactoTelefono1 = '" & Mid(Trim(_Contacto1.Item3), 1, 50) & "', " _
+                    & "ContactoEmail1 = '" & Mid(Trim(_Contacto1.Item4), 1, 50) & "', " _
+                    & "ContactoNombre2 = '" & Mid(Trim(_Contacto2.Item1), 1, 50) & "', " _
+                    & "ContactoCargo2 = '" & Mid(Trim(_Contacto2.Item2), 1, 50) & "', " _
+                    & "ContactoTelefono2 = '" & Mid(Trim(_Contacto2.Item3), 1, 50) & "', " _
+                    & "ContactoEmail2 = '" & Mid(Trim(_Contacto2.Item4), 1, 50) & "', " _
+                    & "ContactoNombre3 = '" & Mid(Trim(_Contacto3.Item1), 1, 50) & "', " _
+                    & "ContactoCargo3 = '" & Mid(Trim(_Contacto3.Item2), 1, 50) & "', " _
+                    & "ContactoTelefono3 = '" & Mid(Trim(_Contacto3.Item3), 1, 50) & "', " _
+                    & "ContactoEmail3 = '" & Mid(Trim(_Contacto3.Item4), 1, 50) & "' " _
+                    & " WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'"
+
         Try
             cn.ConnectionString = cs
             cn.Open()
@@ -213,7 +218,6 @@ Public Class ProveedoresABM
             _ActualizarProveedor(proveedor.id)
             Exit Sub
         End If
-        Exit Sub
         proveedor = New Proveedor(txtCodigo.Text, txtRazonSocial.Text)
 
         proveedor.direccion = txtDireccion.Text
@@ -257,12 +261,19 @@ Public Class ProveedoresABM
         proveedor.dirCUFE1 = cufe1.Item2
         proveedor.dirCUFE2 = cufe2.Item2
         proveedor.dirCUFE3 = cufe3.Item2
+
+        proveedor.PaginaWeb = New Object() {txtPaginaWeb.Text}
+
+        proveedor.contacto1 = New Object() {_Contacto1.Item1, _Contacto1.Item2, _Contacto1.Item3, _Contacto1.Item4}
+        proveedor.contacto2 = New Object() {_Contacto2.Item1, _Contacto2.Item2, _Contacto2.Item3, _Contacto2.Item4}
+        proveedor.contacto3 = New Object() {_Contacto3.Item1, _Contacto3.Item2, _Contacto3.Item3, _Contacto3.Item4}
+
         Try
             DAOProveedor.agregarProveedor(proveedor)
             MsgBox("Proveedor guardado correctamente.", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
         Catch ex As Exception
-
+            MsgBox("Error")
         End Try
     End Sub
 
