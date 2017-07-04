@@ -294,6 +294,7 @@ Partial Class Compras
         Me.txtVtoCAI.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtVtoCAI.Size = New System.Drawing.Size(82, 20)
         Me.txtVtoCAI.TabIndex = 63
+        Me.txtVtoCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtVtoCAI.ValidatingType = GetType(Date)
         '
         'txtFechaIVA
@@ -304,6 +305,7 @@ Partial Class Compras
         Me.txtFechaIVA.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFechaIVA.Size = New System.Drawing.Size(82, 20)
         Me.txtFechaIVA.TabIndex = 63
+        Me.txtFechaIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFechaIVA.ValidatingType = GetType(Date)
         '
         'txtFechaVto2
@@ -314,6 +316,7 @@ Partial Class Compras
         Me.txtFechaVto2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFechaVto2.Size = New System.Drawing.Size(82, 20)
         Me.txtFechaVto2.TabIndex = 63
+        Me.txtFechaVto2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFechaVto2.ValidatingType = GetType(Date)
         '
         'txtFechaVto1
@@ -324,6 +327,7 @@ Partial Class Compras
         Me.txtFechaVto1.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFechaVto1.Size = New System.Drawing.Size(82, 20)
         Me.txtFechaVto1.TabIndex = 63
+        Me.txtFechaVto1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFechaVto1.ValidatingType = GetType(Date)
         '
         'txtFechaEmision
@@ -334,6 +338,7 @@ Partial Class Compras
         Me.txtFechaEmision.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFechaEmision.Size = New System.Drawing.Size(82, 20)
         Me.txtFechaEmision.TabIndex = 63
+        Me.txtFechaEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFechaEmision.ValidatingType = GetType(Date)
         '
         'CBLetra
