@@ -191,6 +191,7 @@ Partial Class Contactos
         '
         'txtEmail3
         '
+        Me.txtEmail3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtEmail3.Location = New System.Drawing.Point(309, 51)
         Me.txtEmail3.MaxLength = 50
         Me.txtEmail3.Name = "txtEmail3"
@@ -199,14 +200,17 @@ Partial Class Contactos
         '
         'txtTelefono3
         '
+        Me.txtTelefono3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtTelefono3.Location = New System.Drawing.Point(68, 51)
         Me.txtTelefono3.MaxLength = 50
         Me.txtTelefono3.Name = "txtTelefono3"
         Me.txtTelefono3.Size = New System.Drawing.Size(173, 20)
         Me.txtTelefono3.TabIndex = 0
+        Me.txtTelefono3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCargo3
         '
+        Me.txtCargo3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtCargo3.Location = New System.Drawing.Point(370, 25)
         Me.txtCargo3.MaxLength = 50
         Me.txtCargo3.Name = "txtCargo3"
@@ -215,6 +219,7 @@ Partial Class Contactos
         '
         'txtNombre3
         '
+        Me.txtNombre3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtNombre3.Location = New System.Drawing.Point(68, 25)
         Me.txtNombre3.MaxLength = 50
         Me.txtNombre3.Name = "txtNombre3"
@@ -278,6 +283,7 @@ Partial Class Contactos
         '
         'txtEmail2
         '
+        Me.txtEmail2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtEmail2.Location = New System.Drawing.Point(309, 51)
         Me.txtEmail2.MaxLength = 50
         Me.txtEmail2.Name = "txtEmail2"
@@ -286,14 +292,17 @@ Partial Class Contactos
         '
         'txtTelefono2
         '
+        Me.txtTelefono2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtTelefono2.Location = New System.Drawing.Point(68, 51)
         Me.txtTelefono2.MaxLength = 50
         Me.txtTelefono2.Name = "txtTelefono2"
         Me.txtTelefono2.Size = New System.Drawing.Size(173, 20)
         Me.txtTelefono2.TabIndex = 0
+        Me.txtTelefono2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCargo2
         '
+        Me.txtCargo2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtCargo2.Location = New System.Drawing.Point(370, 25)
         Me.txtCargo2.MaxLength = 50
         Me.txtCargo2.Name = "txtCargo2"
@@ -302,6 +311,7 @@ Partial Class Contactos
         '
         'txtNombre2
         '
+        Me.txtNombre2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtNombre2.Location = New System.Drawing.Point(68, 25)
         Me.txtNombre2.MaxLength = 50
         Me.txtNombre2.Name = "txtNombre2"
@@ -383,6 +393,7 @@ Partial Class Contactos
         '
         'txtEmail1
         '
+        Me.txtEmail1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtEmail1.Location = New System.Drawing.Point(309, 51)
         Me.txtEmail1.MaxLength = 50
         Me.txtEmail1.Name = "txtEmail1"
@@ -391,14 +402,17 @@ Partial Class Contactos
         '
         'txtTelefono1
         '
+        Me.txtTelefono1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtTelefono1.Location = New System.Drawing.Point(68, 51)
         Me.txtTelefono1.MaxLength = 50
         Me.txtTelefono1.Name = "txtTelefono1"
         Me.txtTelefono1.Size = New System.Drawing.Size(173, 20)
         Me.txtTelefono1.TabIndex = 0
+        Me.txtTelefono1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCargo1
         '
+        Me.txtCargo1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtCargo1.Location = New System.Drawing.Point(370, 25)
         Me.txtCargo1.MaxLength = 50
         Me.txtCargo1.Name = "txtCargo1"
@@ -407,6 +421,7 @@ Partial Class Contactos
         '
         'txtNombre1
         '
+        Me.txtNombre1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtNombre1.Location = New System.Drawing.Point(68, 25)
         Me.txtNombre1.MaxLength = 50
         Me.txtNombre1.Name = "txtNombre1"

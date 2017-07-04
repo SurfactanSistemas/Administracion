@@ -37,6 +37,7 @@ Partial Class ObservacionesProveedor
         Me.CustomTextBox1.Cleanable = False
         Me.CustomTextBox1.Empty = True
         Me.CustomTextBox1.EnterIndex = -1
+        Me.CustomTextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
         Me.CustomTextBox1.LabelAssociationKey = -1
         Me.CustomTextBox1.Location = New System.Drawing.Point(62, 9)
         Me.CustomTextBox1.Multiline = True
