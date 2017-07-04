@@ -79,22 +79,107 @@
     End Sub
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+        Dim _FechasInvalidas As Boolean = False
+
+        For Each row As DataGridViewRow In gridApertura.Rows
+            With row
+
+                If Not IsNothing(.Cells(6).Value) Then
+                    If Not _ValidarFecha(.Cells(6).Value.ToString()) Then
+                        _FechasInvalidas = True
+                        Exit For
+                    End If
+                End If
+
+            End With
+        Next
+
+        If _FechasInvalidas Then ' Si se encuentra que hay fechas ingresadas y alguna de estas es invalida, se notifica al usuario y se le pregunta si quiere continuar o no.
+            If MsgBox("Algunas de las fechas ingresadas no es correcta." & vbCrLf & vbCrLf & "¿Quiere cerrar igual la ventana de aperturas?", MsgBoxStyle.YesNo) = DialogResult.No Then
+                Exit Sub
+            End If
+        End If
+
         Me.Hide()
     End Sub
 
-    Private Sub gridApertura_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridApertura.CellValueChanged
-        If e.RowIndex > -1 And e.ColumnIndex > -1 Then
-            Dim cantCeros As Integer = 0
-            Dim cell As DataGridViewCell = gridApertura.Rows(e.RowIndex).Cells(e.ColumnIndex)
-            Select Case e.ColumnIndex
-                Case 4
-                    cantCeros = 4
-                Case 5
-                    cantCeros = 8
-                Case Else
-                    Exit Sub
-            End Select
-            cell.Value = ceros(cell.Value, cantCeros)
+    Private Function _Normalizarfecha(ByVal fecha As String) As String
+        Dim xfecha As String = ""
+        Dim _temp As String = fecha
+        Dim _Fecha As String() = fecha.Split("/")
+
+        Try
+            _Fecha(0) = Val(_Fecha(0)).ToString()
+            _Fecha(1) = Val(_Fecha(1)).ToString()
+            _Fecha(2) = Val(_Fecha(2)).ToString()
+
+            xfecha = String.Join("/", _Fecha)
+
+            xfecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+        Catch ex As Exception
+            xfecha = _temp
+        End Try
+
+        Return xfecha
+    End Function
+
+    Private Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
+        fecha = Trim(_Normalizarfecha(fecha))
+
+        Return fecha.Replace("/", "").Length = 8 And IsDate(fecha)
+    End Function
+
+    Private Function _ValidarFecha(ByVal fecha As String) As Boolean
+        Dim valida As Boolean = True
+
+        If Trim(fecha.Replace("/", "")) <> "" Then
+
+            If Not _FormatoValidoFecha(fecha) Then
+                valida = False
+            End If
+
         End If
-    End Sub
+
+        Return valida
+    End Function
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+        With gridApertura
+            If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+                .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                Dim iCol = .CurrentCell.ColumnIndex
+                Dim iRow = .CurrentCell.RowIndex
+
+                If msg.WParam.ToInt32() = Keys.Enter Then
+
+                    Dim valor = .Rows(iRow).Cells(iCol).Value
+
+                    Select Case iCol
+                        Case 6 ' Columna Fecha
+
+                            If Not IsNothing(valor) Then
+
+                                If Not _ValidarFecha(valor) Then
+                                    Return True
+                                End If
+
+                            End If
+
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                        Case 13 ' Ultima Columna
+                            .CurrentCell = .Rows(.Rows.Add).Cells(0) ' Agregamos una fila y nos posicionamos en la primer celda.
+                        Case Else
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End Select
+
+
+                    Return True
+
+                End If
+            End If
+        End With
+        
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
 End Class

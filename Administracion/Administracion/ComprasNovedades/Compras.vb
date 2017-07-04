@@ -53,13 +53,24 @@ Public Class Compras
             _msk.Clear()
         Next
 
+        For Each _cmb As ComboBox In Me.Panel2.Controls.OfType(Of ComboBox)() ' Limpiamos todos los campos combo.
+            _cmb.SelectedIndex = 0
+        Next
+
         gridAsientos.Rows.Clear()
         chkSoloIVA.Checked = False
         optCtaCte.Checked = True
-        cmbTipo.SelectedIndex = 0
         apertura = New Apertura
         esModificacion = False
         diasPlazo = 0
+
+        Dim ibs As New List(Of String) From {_RetIB1, _RetIB2, _RetIB3, _RetIB4, _RetIB5, _RetIB6, _RetIB7, _RetIB8, _RetIB9, _RetIB10, _RetIB11, _RetIB12, _RetIB13, _RetIB14}
+
+        For Each ib In ibs
+            ib = ""
+        Next
+
+        ibs = Nothing
 
         Array.Clear(_PyMENacion, 0, _PyMENacion.Length)
 
@@ -161,6 +172,8 @@ Public Class Compras
                 End If
             End If
 
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCodigoProveedor.Text = ""
         End If
     End Sub
 
@@ -268,7 +281,7 @@ Public Class Compras
             actualizarProveedor()
             Dim compra As Compra = crearCompra()
             If DAOCompras.facturaPagada(compra.nroInterno) Then
-                MsgBox("No se puede modificar una factura que ya fue pagada", MsgBoxStyle.Exclamation, "No se puede confirmar la operación")
+                MsgBox("No se puede modificar una factura que ya se encuentra paga", MsgBoxStyle.Exclamation, "No se puede confirmar la operación")
                 Exit Sub
             End If
             txtNroInterno.Text = compra.nroInterno
@@ -282,7 +295,7 @@ Public Class Compras
             If Not IsNothing(apertura) Then
                 DAOCompras.agregarTablaIvaComprasAdicional(compra, apertura.gridApertura.Rows)
             End If
-            MsgBox("El número de interno asignado es: " & compra.nroInterno)
+            MsgBox("El número de Factura asignado es: " & compra.nroInterno, MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
         End If
     End Sub
@@ -537,35 +550,35 @@ Public Class Compras
                 _SaltarA(txtCodigoProveedor)
             End If
 
-            Dim interno As String = txtNroInterno.Text
-            Dim compra As Compra = DAOCompras.buscarCompraPorCodigo(interno)
-            If Not IsNothing(compra) Then
-                apertura = New Apertura
-                mostrarCompra(compra)
-            Else
-                esModificacion = False
-                btnLimpiar.PerformClick()
-                txtNroInterno.Text = interno
-                txtCodigoProveedor.Focus()
-            End If
+            _BuscarCompraPorNumeroInterno()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNroInterno.Text = ""
         End If
     End Sub
 
-    'Private Sub txtNroInterno_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNroInterno.Leave
-    '    Dim compra As Compra = DAOCompras.buscarCompraPorCodigo(txtNroInterno.Text)
-    '    If Not IsNothing(compra) Then
-    '        apertura = New Apertura
-    '        mostrarCompra(compra)
-    '    Else
-    '        esModificacion = False
-    '        btnLimpiar.PerformClick()
-    '        'Creo que no hay que hacer nada
-    '    End If
-    'End Sub
+    Private Sub _BuscarCompraPorNumeroInterno()
+        Dim interno As String = txtNroInterno.Text
+        Dim compra As Compra = DAOCompras.buscarCompraPorCodigo(interno)
+        If Not IsNothing(compra) Then
+            apertura = New Apertura
+            mostrarCompra(compra)
+        Else
+            esModificacion = False
+            btnLimpiar.PerformClick()
+            txtNroInterno.Text = interno
+            txtCodigoProveedor.Focus()
+        End If
+    End Sub
 
     Private Sub btnConsultaNroFactura_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaNroFactura.Click
         Dim consulta As New ConsultaNumeroFactura
         consulta.ShowDialog(Me)
+
+        If consulta.numero <> 0 Then
+            txtNroInterno.Text = consulta.numero
+            _BuscarCompraPorNumeroInterno()
+        End If
+
     End Sub
 
     Private Sub btnApertura_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApertura.Click
@@ -675,6 +688,8 @@ Public Class Compras
         If e.KeyData = Keys.Enter Then
             txtPunto.Text = ceros(txtPunto.Text, 4)
             _SaltarA(txtNumero)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtPunto.Text = ""
         End If
 
     End Sub
@@ -690,6 +705,8 @@ Public Class Compras
                 txtFechaEmision.Focus()
             End If
 
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNumero.Text = ""
         End If
 
     End Sub
@@ -698,6 +715,8 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbTipo)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCAI.Text = ""
         End If
 
     End Sub
@@ -712,6 +731,8 @@ Public Class Compras
                 _SaltarA(txtFechaEmision)
             End If
 
+        ElseIf e.KeyData = Keys.Escape Then
+            txtVtoCAI.Clear()
         End If
 
     End Sub
@@ -736,6 +757,8 @@ Public Class Compras
             End Try
 
             _SaltarA(txtFechaIVA)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaEmision.Clear()
         End If
 
     End Sub
@@ -744,6 +767,8 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtFechaVto2)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaVto1.Clear()
         End If
 
     End Sub
@@ -752,6 +777,8 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbFormaPago)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaVto2.Clear()
         End If
 
     End Sub
@@ -760,6 +787,8 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtRemito)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaIVA.Clear()
         End If
 
     End Sub
@@ -777,6 +806,8 @@ Public Class Compras
 
             End If
 
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRemito.Text = ""
         End If
 
     End Sub
@@ -955,6 +986,8 @@ Public Class Compras
         If e.KeyData = Keys.Enter Then
             txtParidad.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtParidad.Text))
             _SaltarA(txtNeto)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtParidad.Text = ""
         End If
 
     End Sub
@@ -975,6 +1008,8 @@ Public Class Compras
                 _SaltarA(txtTotal)
             End If
 
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNeto.Text = ""
         End If
 
     End Sub
@@ -989,6 +1024,8 @@ Public Class Compras
             txtIVA21.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVA21.Text))
             _RecalcularTotal()
             _SaltarA(txtIVARG)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtIVA21.Text = ""
         End If
 
     End Sub
@@ -999,6 +1036,8 @@ Public Class Compras
             txtIVARG.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVARG.Text))
             _RecalcularTotal()
             _SaltarA(txtIVA27)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtIVARG.Text = ""
         End If
 
     End Sub
@@ -1009,6 +1048,8 @@ Public Class Compras
             txtIVA27.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVA27.Text))
             _RecalcularTotal()
             _SaltarA(txtIVA10)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtIVA27.Text = ""
         End If
 
     End Sub
@@ -1019,6 +1060,9 @@ Public Class Compras
             txtIVA10.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVA10.Text))
             _RecalcularTotal()
             _SaltarA(txtPercIB)
+            _SolicitarInfoIB()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtIVA10.Text = ""
         End If
 
     End Sub
@@ -1029,6 +1073,8 @@ Public Class Compras
             txtNoGravado.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtNoGravado.Text))
             _RecalcularTotal()
             _SaltarA(txtDespacho)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNoGravado.Text = ""
         End If
 
     End Sub
@@ -1059,6 +1105,8 @@ Public Class Compras
                 gridAsientos.CurrentCell = gridAsientos.Rows(gridAsientos.Rows.Count - 2).Cells(0) ' REM REVISAR LA RESTA, VON 2 DA INDICE NEGATIVO
                 gridAsientos.Select()
             End If
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDespacho.Text = ""
         End If
 
     End Sub
@@ -1071,7 +1119,6 @@ Public Class Compras
 
         If Trim(txtPercIB.Text) = "" Then
             txtPercIB.Text = "0,00"
-            _SolicitarInfoIB()
         End If
 
     End Sub
@@ -1229,6 +1276,8 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtDespacho)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtTotal.Text = ""
         End If
 
     End Sub
@@ -1241,6 +1290,8 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             _SolicitarInfoIB()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtPercIB.Text = ""
         End If
 
     End Sub
@@ -1252,6 +1303,8 @@ Public Class Compras
     Private Sub cmbFormaPago_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbFormaPago.KeyDown
         If e.KeyValue = Keys.Enter Then
             _DeterminarParidad()
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbFormaPago.SelectedIndex = 0
         End If
     End Sub
 
@@ -1276,6 +1329,8 @@ Public Class Compras
             End If
             gridAsientos.Rows.Clear()
             _SaltarA(CBLetra)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbTipo.SelectedIndex = 0
         End If
 
     End Sub
@@ -1293,6 +1348,8 @@ Public Class Compras
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtPunto)
             _HabilitarDeshabilitarControlesSegunLetra()
+        ElseIf e.KeyData = Keys.Escape Then
+            CBLetra.SelectedIndex = 0
         End If
 
     End Sub

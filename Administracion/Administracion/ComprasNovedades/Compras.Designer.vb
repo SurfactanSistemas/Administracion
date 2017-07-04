@@ -277,10 +277,10 @@ Partial Class Compras
         Me.Panel2.Controls.Add(Me.chkSoloIVA)
         Me.Panel2.Controls.Add(Me.cmbFormaPago)
         Me.Panel2.Controls.Add(Me.gbTipo)
-        Me.Panel2.Controls.Add(Me.txtTipo)
         Me.Panel2.Controls.Add(Me.txtRemito)
         Me.Panel2.Controls.Add(Me.cmbTipo)
         Me.Panel2.Controls.Add(Me.txtPunto)
+        Me.Panel2.Controls.Add(Me.txtTipo)
         Me.Panel2.Location = New System.Drawing.Point(0, 49)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(814, 551)
@@ -1038,7 +1038,7 @@ Partial Class Compras
         Me.btnConsultaNroFactura.Name = "btnConsultaNroFactura"
         Me.btnConsultaNroFactura.Size = New System.Drawing.Size(152, 43)
         Me.btnConsultaNroFactura.TabIndex = 56
-        Me.btnConsultaNroFactura.Text = "Consulta Nro. Factura"
+        Me.btnConsultaNroFactura.Text = "Consulta Nro. de Factura"
         Me.btnConsultaNroFactura.UseVisualStyleBackColor = True
         '
         'btnLimpiar

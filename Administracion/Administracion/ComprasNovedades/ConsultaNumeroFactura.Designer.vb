@@ -262,8 +262,8 @@ Partial Class ConsultaNumeroFactura
         Me.Panel2.Controls.Add(Me.CustomLabel5)
         Me.Panel2.Controls.Add(Me.txtLetra)
         Me.Panel2.Controls.Add(Me.CustomLabel6)
-        Me.Panel2.Controls.Add(Me.cmbTipo)
         Me.Panel2.Controls.Add(Me.CustomLabel7)
+        Me.Panel2.Controls.Add(Me.cmbTipo)
         Me.Panel2.Controls.Add(Me.txtTipo)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
@@ -274,7 +274,7 @@ Partial Class ConsultaNumeroFactura
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(581, 205)
+        Me.ClientSize = New System.Drawing.Size(581, 207)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnAceptar)

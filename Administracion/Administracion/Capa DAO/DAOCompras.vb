@@ -15,7 +15,11 @@ Public Class DAOCompras
     End Function
 
     Public Shared Function buscarNumeroIntero(ByVal codigoProveedor As String, ByVal tipo As String, ByVal letra As String, ByVal punto As String, ByVal numero As String)
-        Return SQLConnector.executeProcedureWithReturnValue("get_interno_segun", codigoProveedor, tipo, letra, punto, numero)
+        Try
+            Return SQLConnector.executeProcedureWithReturnValue("get_interno_segun", codigoProveedor, tipo, letra, punto, numero)
+        Catch ex As Exception
+            Return 0
+        End Try
     End Function
 
     Public Shared Sub agregarDatosCuentaCorriente(ByVal compra As Compra)
