@@ -326,13 +326,15 @@ Partial Class CuentaCorrientePantalla
         '
         'txtRazon
         '
-        Me.txtRazon.BackColor = System.Drawing.Color.Silver
+        Me.txtRazon.BackColor = System.Drawing.Color.Gainsboro
         Me.txtRazon.Cleanable = False
         Me.txtRazon.Empty = True
         Me.txtRazon.EnterIndex = -1
+        Me.txtRazon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRazon.LabelAssociationKey = -1
         Me.txtRazon.Location = New System.Drawing.Point(250, 73)
         Me.txtRazon.Name = "txtRazon"
+        Me.txtRazon.ReadOnly = True
         Me.txtRazon.Size = New System.Drawing.Size(298, 20)
         Me.txtRazon.TabIndex = 6
         Me.txtRazon.Validator = Administracion.ValidatorType.None
@@ -357,6 +359,7 @@ Partial Class CuentaCorrientePantalla
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(108, 20)
         Me.txtProveedor.TabIndex = 0
+        Me.txtProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtProveedor.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel3
