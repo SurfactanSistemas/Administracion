@@ -278,7 +278,13 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub borrar()
-        DAOProveedor.eliminarProveedor(txtCodigo.Text)
+        Try
+            DAOProveedor.eliminarProveedor(txtCodigo.Text)
+            MsgBox("Proveedor eliminado con exito!", MsgBoxStyle.Information)
+            btnLimpiar.PerformClick()
+        Catch ex As Exception
+            MsgBox("Hubo un error al querer eliminar el proveedor indicado.", MsgBoxStyle.Critical)
+        End Try
     End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
