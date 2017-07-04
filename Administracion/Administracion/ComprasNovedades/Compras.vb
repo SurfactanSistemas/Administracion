@@ -68,7 +68,11 @@ Public Class Compras
 
     Public Sub mostrarProveedor(ByVal proveedorAMostrar As Proveedor)
         If Not proveedorAMostrar.estaDefinidoCompleto Then
-            proveedorAMostrar = DAOProveedor.buscarProveedorPorCodigo(proveedorAMostrar.id)
+            Try
+                proveedorAMostrar = DAOProveedor.buscarProveedorPorCodigo(proveedorAMostrar.id)
+            Catch ex As Exception
+                MsgBox("")
+            End Try
         End If
         If Not optNacion.Checked Then
             proveedor = proveedorAMostrar
@@ -103,7 +107,11 @@ Public Class Compras
     End Function
 
     Public Sub mostrarProveedorConsulta(ByVal proveedorAMostrar As String)
-        mostrarProveedor(proveedorAMostrar)
+
+        If proveedorAMostrar <> "" Then
+            btnLimpiar.PerformClick()
+            mostrarProveedor(proveedorAMostrar)
+        End If
 
     End Sub
 
@@ -132,8 +140,9 @@ Public Class Compras
                     End If
                 End If
             Else
+                Dim prov As String = txtCodigoProveedor.Text
                 ' Buscamos el proveedor.
-                proveedor = DAOProveedor.buscarProveedorPorCodigo(txtCodigoProveedor.Text)
+                proveedor = DAOProveedor.buscarProveedorPorCodigo(prov)
                 If Not IsNothing(proveedor) Then
                     mostrarProveedor(proveedor)
 
@@ -146,6 +155,7 @@ Public Class Compras
                 Else
                     ' En caso de no existir, se notifica al usuario.
                     btnLimpiar.PerformClick()
+                    txtCodigoProveedor.Text = prov
                     MessageBox.Show("El proveedor ingresado es inexistente")
                     txtCodigoProveedor.Focus()
                 End If
@@ -322,8 +332,9 @@ Public Class Compras
         DAOProveedor.agregarProveedor(proveedor)
     End Sub
 
-    Private Function _NormalizarFecha(ByRef fecha As String) As Boolean
-        Dim _FechaValida As Boolean = True
+    Private Function _Normalizarfecha(ByVal fecha As String) As String
+        Dim xfecha As String = ""
+        Dim _temp As String = fecha
         Dim _Fecha As String() = fecha.Split("/")
 
         Try
@@ -331,15 +342,34 @@ Public Class Compras
             _Fecha(1) = Val(_Fecha(1)).ToString()
             _Fecha(2) = Val(_Fecha(2)).ToString()
 
-            fecha = String.Join("/", _Fecha)
+            xfecha = String.Join("/", _Fecha)
 
-            fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+            xfecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
         Catch ex As Exception
-            _FechaValida = False
-            MsgBox("El formato de la fecha ingresada no es válido.", MsgBoxStyle.Information)
+            xfecha = _temp
         End Try
 
-        Return _FechaValida
+        Return xfecha
+    End Function
+
+    Private Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
+        Return Trim(_Normalizarfecha(fecha)).Replace("/", "").Length = 8
+    End Function
+
+    Private Function _ValidarFecha(ByVal fecha As String, ByVal valido As Boolean) As Boolean
+        Dim invalida As Boolean = False
+
+        If Trim(fecha.Replace("/", "")) <> "" Then
+
+            If _FormatoValidoFecha(fecha) Then
+                If Not valido Then
+                    invalida = True
+                End If
+            End If
+
+        End If
+
+        Return invalida
     End Function
 
     Private Sub chkSoloIVA_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSoloIVA.CheckedChanged
@@ -502,14 +532,21 @@ Public Class Compras
 
     Private Sub txtNroInterno_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroInterno.KeyDown
         If e.KeyValue = Keys.Enter Then
-            Dim compra As Compra = DAOCompras.buscarCompraPorCodigo(txtNroInterno.Text)
+
+            If Trim(txtNroInterno.Text) = "" Then
+                _SaltarA(txtCodigoProveedor)
+            End If
+
+            Dim interno As String = txtNroInterno.Text
+            Dim compra As Compra = DAOCompras.buscarCompraPorCodigo(interno)
             If Not IsNothing(compra) Then
                 apertura = New Apertura
                 mostrarCompra(compra)
             Else
                 esModificacion = False
                 btnLimpiar.PerformClick()
-                'Creo que no hay que hacer nada
+                txtNroInterno.Text = interno
+                txtCodigoProveedor.Focus()
             End If
         End If
     End Sub
@@ -646,7 +683,13 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             txtNumero.Text = ceros(txtNumero.Text, 8)
-            _SaltarA(txtVtoCAI)
+
+            If Trim(txtCAI.Text) <> "" Then
+                _SaltarA(txtVtoCAI)
+            Else
+                txtFechaEmision.Focus()
+            End If
+
         End If
 
     End Sub
@@ -684,8 +727,8 @@ Public Class Compras
                 End If
 
                 Dim fecha As Date = Convert.ToDateTime(txtFechaEmision.Text)
-                txtFechaIVA.Text = fecha.ToString("dd/MM/yyyy")
-                txtFechaVto1.Text = fecha.ToString("dd/MM/yyyy")
+                txtFechaIVA.Text = Date.Now.ToString("dd/MM/yyyy")
+                txtFechaVto1.Text = fecha.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
                 txtFechaVto2.Text = txtFechaVto1.Text
 
             Catch ex As Exception
@@ -775,8 +818,7 @@ Public Class Compras
 
         ' Salimos en caso de no encontrar alguna empresa.
         If Trim(csEmpresa) = "" Then
-            MsgBox("Hubo un problema al querer procesar el/los remito(s) informado(s) para este Proveedor." & vbCrLf & vbCrLf _
-                   & "Corrobore que los remitos correspondan al Proveedor indicado e intente nuevamente.", MsgBoxStyle.Critical)
+            MsgBox("Remito Inexistente", MsgBoxStyle.Information)
 
             txtRemito.Focus()
 
@@ -1294,5 +1336,31 @@ Public Class Compras
 
     Private Sub txtTotal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTotal.Leave
         _FormatearNumero(txtTotal.Text)
+    End Sub
+
+    Private Sub txtFechaEmision_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaEmision.TypeValidationCompleted
+        e.Cancel = _ValidarFecha(txtFechaEmision.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub txtFechaIVA_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaIVA.TypeValidationCompleted
+        e.Cancel = _ValidarFecha(txtFechaIVA.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub txtFechaVto1_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaVto1.TypeValidationCompleted
+        e.Cancel = _ValidarFecha(txtFechaVto1.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub txtFechaVto2_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaVto2.TypeValidationCompleted
+        e.Cancel = _ValidarFecha(txtFechaVto2.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub txtVtoCAI_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtVtoCAI.TypeValidationCompleted
+
+        If txtCAI.Text <> "" Then
+            e.Cancel = _ValidarFecha(txtVtoCAI.Text, e.IsValidInput)
+        Else
+            e.Cancel = False
+        End If
+
     End Sub
 End Class

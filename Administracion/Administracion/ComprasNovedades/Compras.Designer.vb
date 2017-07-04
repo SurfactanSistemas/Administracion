@@ -589,11 +589,11 @@ Partial Class Compras
         Me.CustomLabel13.ControlAssociationKey = 13
         Me.CustomLabel13.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel13.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel13.Location = New System.Drawing.Point(319, 91)
+        Me.CustomLabel13.Location = New System.Drawing.Point(337, 92)
         Me.CustomLabel13.Name = "CustomLabel13"
-        Me.CustomLabel13.Size = New System.Drawing.Size(99, 18)
+        Me.CustomLabel13.Size = New System.Drawing.Size(64, 18)
         Me.CustomLabel13.TabIndex = 13
-        Me.CustomLabel13.Text = "Forma de Pago"
+        Me.CustomLabel13.Text = "Moneda:"
         '
         'CustomLabel14
         '
@@ -857,9 +857,9 @@ Partial Class Compras
         Me.cmbFormaPago.Empty = False
         Me.cmbFormaPago.EnterIndex = 12
         Me.cmbFormaPago.FormattingEnabled = True
-        Me.cmbFormaPago.Items.AddRange(New Object() {"", "Pesos", "Cláusula Dólar"})
+        Me.cmbFormaPago.Items.AddRange(New Object() {"Pesos", "Cláusula Dólar"})
         Me.cmbFormaPago.LabelAssociationKey = 13
-        Me.cmbFormaPago.Location = New System.Drawing.Point(427, 90)
+        Me.cmbFormaPago.Location = New System.Drawing.Point(413, 90)
         Me.cmbFormaPago.Name = "cmbFormaPago"
         Me.cmbFormaPago.Size = New System.Drawing.Size(157, 21)
         Me.cmbFormaPago.TabIndex = 41
