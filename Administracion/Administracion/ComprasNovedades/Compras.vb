@@ -1499,12 +1499,216 @@ Public Class Compras
         Return _Disponible
     End Function
 
+    Private Function _ExisteRegistrosParaBorrar() As Boolean
+        Dim _Existe As Boolean = False
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT NroInterno FROM IvaComp WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                _Existe = True
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return _Existe
+    End Function
+
+    Private Sub _BorrarIvaComp()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM IvaComp WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un error al querer borrar el registro.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _BorrarCtaCtePrv()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM CtaCtePrv WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un error al querer borrar el registro.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
+    Private Sub _BorrarImputaciones()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM Imputac WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un error al querer borrar el registro.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
+    Private Sub _BorrarIvaCompPyMENacion()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM IvaComp WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un error al querer borrar el registro.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
+    Private Sub _BorrarCtaCtePrvPyMENacion()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM CtaCtePrv WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            cm.ExecuteNonQuery()
+
+            _BorrarIvaCompPyMENacion()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un error al querer borrar el registro.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+
+        If Trim(txtNroInterno.Text) = "" Then
+            Exit Sub
+        End If
+
         ' Validar que se pueda borrar => Sólo si los saldos son distintos?
         If Not _DisponibleParaDarDeBaja() Then
             MsgBox("El Comprobante se encuentra total o parcialmente cancelado", MsgBoxStyle.Information)
             Exit Sub
         End If
+
+        ' Existe para poder borrarlo?
+        If Not _ExisteRegistrosParaBorrar() Then
+            Exit Sub
+        End If
+
+        ' Preguntamos si esta seguro de borrar.
+        If MsgBox("¿Está seguro de borrar el registro?", MsgBoxStyle.YesNo) = DialogResult.No Then
+            Exit Sub
+        End If
+
+        ' Borramos el IvaComp
+        Try
+            _BorrarIvaComp()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
+
+        ' Si el Nro de Interno no es cero, borramos la ctacteprv
+        Try
+            _BorrarCtaCtePrv()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
+
+        ' Borramos las imputaciones
+        Try
+            _BorrarImputaciones()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
+
+        ' En caso de PyME Nacion, borramos los datos de grabaciones anteriores.
+        Try
+            _BorrarCtaCtePrvPyMENacion()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
+
+        ' En caso de exito, mandamos mensaje a usuario y limpiamos pantalla.
+        btnLimpiar.PerformClick()
+        MsgBox("El Registro ha sido eliminado con exito.", MsgBoxStyle.Information)
 
     End Sub
 End Class
