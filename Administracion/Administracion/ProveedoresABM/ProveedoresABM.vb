@@ -538,6 +538,10 @@ Public Class ProveedoresABM
 
     Private Sub LBConsulta_Opciones_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Opciones.SelectedIndexChanged
 
+        If LBConsulta_Opciones.SelectedItem = "" Then
+            Exit Sub
+        End If
+
         If LBConsulta_Opciones.SelectedIndex = 0 Then
             _ListarConsulta("Nombre", "Proveedor")
         Else
@@ -547,6 +551,10 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub LBConsulta_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta.SelectedIndexChanged
+
+        If LBConsulta.SelectedItem = "" Then
+            Exit Sub
+        End If
 
         Select Case TipoConsulta
             Case "Proveedor"
@@ -559,6 +567,10 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub LBConsulta_Filtrada_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Filtrada.SelectedIndexChanged
+
+        If LBConsulta_Filtrada.SelectedItem = "" Then
+            Exit Sub
+        End If
 
         Select Case TipoConsulta
             Case "Proveedor"
