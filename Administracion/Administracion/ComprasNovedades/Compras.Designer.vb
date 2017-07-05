@@ -83,10 +83,10 @@ Partial Class Compras
         Me.CustomLabel23 = New Administracion.CustomLabel()
         Me.txtParidad = New Administracion.CustomTextBox()
         Me.cmbFormaPago = New Administracion.CustomComboBox()
-        Me.txtTipo = New Administracion.CustomTextBox()
         Me.txtRemito = New Administracion.CustomTextBox()
         Me.cmbTipo = New Administracion.CustomComboBox()
         Me.txtPunto = New Administracion.CustomTextBox()
+        Me.txtTipo = New Administracion.CustomTextBox()
         Me.btnApertura = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCerrar = New Administracion.CustomButton()
@@ -862,27 +862,13 @@ Partial Class Compras
         Me.cmbFormaPago.Empty = False
         Me.cmbFormaPago.EnterIndex = 12
         Me.cmbFormaPago.FormattingEnabled = True
-        Me.cmbFormaPago.Items.AddRange(New Object() {"Pesos", "Cláusula Dólar"})
+        Me.cmbFormaPago.Items.AddRange(New Object() {"", "Pesos", "Cláusula Dólar"})
         Me.cmbFormaPago.LabelAssociationKey = 13
         Me.cmbFormaPago.Location = New System.Drawing.Point(413, 90)
         Me.cmbFormaPago.Name = "cmbFormaPago"
         Me.cmbFormaPago.Size = New System.Drawing.Size(157, 21)
         Me.cmbFormaPago.TabIndex = 41
         Me.cmbFormaPago.Validator = Administracion.ValidatorType.None
-        '
-        'txtTipo
-        '
-        Me.txtTipo.Cleanable = True
-        Me.txtTipo.Empty = False
-        Me.txtTipo.EnterIndex = 4
-        Me.txtTipo.LabelAssociationKey = 4
-        Me.txtTipo.Location = New System.Drawing.Point(146, 40)
-        Me.txtTipo.MaxLength = 2
-        Me.txtTipo.Name = "txtTipo"
-        Me.txtTipo.Size = New System.Drawing.Size(26, 20)
-        Me.txtTipo.TabIndex = 29
-        Me.txtTipo.Validator = Administracion.ValidatorType.None
-        Me.txtTipo.Visible = False
         '
         'txtRemito
         '
@@ -925,6 +911,20 @@ Partial Class Compras
         Me.txtPunto.TabIndex = 32
         Me.txtPunto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtPunto.Validator = Administracion.ValidatorType.Numeric
+        '
+        'txtTipo
+        '
+        Me.txtTipo.Cleanable = True
+        Me.txtTipo.Empty = False
+        Me.txtTipo.EnterIndex = 4
+        Me.txtTipo.LabelAssociationKey = 4
+        Me.txtTipo.Location = New System.Drawing.Point(146, 40)
+        Me.txtTipo.MaxLength = 2
+        Me.txtTipo.Name = "txtTipo"
+        Me.txtTipo.Size = New System.Drawing.Size(26, 20)
+        Me.txtTipo.TabIndex = 29
+        Me.txtTipo.Validator = Administracion.ValidatorType.None
+        Me.txtTipo.Visible = False
         '
         'btnApertura
         '

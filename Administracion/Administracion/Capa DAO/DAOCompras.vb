@@ -78,7 +78,7 @@ Public Class DAOCompras
     Private Shared Function crearCompra(ByVal row As DataRow)
         Dim compra As Compra
         compra = New Compra(asInt(row("NroInterno")), DAOProveedor.buscarProveedorPorCodigo(row("Proveedor").ToString), asInt(row("Tipo")), "", asInt(row("Pago")), asInt(row("Contado")), row("Letra").ToString,
-                                row("Punto").ToString, row("Numero").ToString, asDate(row("Fecha")), asDate(row("Periodo")), asDate(row("Vencimiento")), asDate(row("Vencimiento1")), asDouble(row("Paridad")),
+                                row("Punto").ToString, row("Numero").ToString, row("Fecha"), row("Periodo"), row("Vencimiento"), row("Vencimiento1"), asDouble(row("Paridad")),
                                 asDouble(row("Neto")), asDouble(row("Iva21")), asDouble(row("Iva5")), asDouble(row("Iva27")), asDouble(row("Ib")), asDouble(row("Exento")), asDouble(row("Iva105")),
                                 0, asBool(row("SoloIva")), row("Remito").ToString, row("Despacho").ToString)
 

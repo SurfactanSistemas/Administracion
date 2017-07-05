@@ -195,6 +195,7 @@ Partial Class PercIB
         Me.txtRetIB11.Name = "txtRetIB11"
         Me.txtRetIB11.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB11.TabIndex = 34
+        Me.txtRetIB11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB14
         '
@@ -202,6 +203,7 @@ Partial Class PercIB
         Me.txtRetIB14.Name = "txtRetIB14"
         Me.txtRetIB14.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB14.TabIndex = 37
+        Me.txtRetIB14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB10
         '
@@ -209,6 +211,7 @@ Partial Class PercIB
         Me.txtRetIB10.Name = "txtRetIB10"
         Me.txtRetIB10.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB10.TabIndex = 33
+        Me.txtRetIB10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB13
         '
@@ -216,6 +219,7 @@ Partial Class PercIB
         Me.txtRetIB13.Name = "txtRetIB13"
         Me.txtRetIB13.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB13.TabIndex = 36
+        Me.txtRetIB13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB9
         '
@@ -223,6 +227,7 @@ Partial Class PercIB
         Me.txtRetIB9.Name = "txtRetIB9"
         Me.txtRetIB9.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB9.TabIndex = 32
+        Me.txtRetIB9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB12
         '
@@ -230,6 +235,7 @@ Partial Class PercIB
         Me.txtRetIB12.Name = "txtRetIB12"
         Me.txtRetIB12.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB12.TabIndex = 35
+        Me.txtRetIB12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB8
         '
@@ -237,6 +243,7 @@ Partial Class PercIB
         Me.txtRetIB8.Name = "txtRetIB8"
         Me.txtRetIB8.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB8.TabIndex = 20
+        Me.txtRetIB8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label4
         '
@@ -585,6 +592,7 @@ Partial Class PercIB
         Me.txtRetIB4.Name = "txtRetIB4"
         Me.txtRetIB4.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB4.TabIndex = 7
+        Me.txtRetIB4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB7
         '
@@ -592,6 +600,7 @@ Partial Class PercIB
         Me.txtRetIB7.Name = "txtRetIB7"
         Me.txtRetIB7.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB7.TabIndex = 13
+        Me.txtRetIB7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB3
         '
@@ -599,6 +608,7 @@ Partial Class PercIB
         Me.txtRetIB3.Name = "txtRetIB3"
         Me.txtRetIB3.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB3.TabIndex = 5
+        Me.txtRetIB3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB6
         '
@@ -606,6 +616,7 @@ Partial Class PercIB
         Me.txtRetIB6.Name = "txtRetIB6"
         Me.txtRetIB6.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB6.TabIndex = 11
+        Me.txtRetIB6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB2
         '
@@ -613,6 +624,7 @@ Partial Class PercIB
         Me.txtRetIB2.Name = "txtRetIB2"
         Me.txtRetIB2.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB2.TabIndex = 3
+        Me.txtRetIB2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB5
         '
@@ -620,6 +632,7 @@ Partial Class PercIB
         Me.txtRetIB5.Name = "txtRetIB5"
         Me.txtRetIB5.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB5.TabIndex = 9
+        Me.txtRetIB5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB1
         '
@@ -627,6 +640,7 @@ Partial Class PercIB
         Me.txtRetIB1.Name = "txtRetIB1"
         Me.txtRetIB1.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB1.TabIndex = 1
+        Me.txtRetIB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Button1
         '

@@ -50,9 +50,9 @@ Partial Class ConsultaNumeroFactura
         Me.txtNombreProveedor.Enabled = False
         Me.txtNombreProveedor.EnterIndex = -1
         Me.txtNombreProveedor.LabelAssociationKey = 2
-        Me.txtNombreProveedor.Location = New System.Drawing.Point(187, 15)
+        Me.txtNombreProveedor.Location = New System.Drawing.Point(234, 15)
         Me.txtNombreProveedor.Name = "txtNombreProveedor"
-        Me.txtNombreProveedor.Size = New System.Drawing.Size(366, 20)
+        Me.txtNombreProveedor.Size = New System.Drawing.Size(319, 20)
         Me.txtNombreProveedor.TabIndex = 31
         Me.txtNombreProveedor.Validator = Administracion.ValidatorType.None
         '
@@ -65,8 +65,9 @@ Partial Class ConsultaNumeroFactura
         Me.txtCodigoProveedor.Location = New System.Drawing.Point(101, 15)
         Me.txtCodigoProveedor.MaxLength = 11
         Me.txtCodigoProveedor.Name = "txtCodigoProveedor"
-        Me.txtCodigoProveedor.Size = New System.Drawing.Size(76, 20)
+        Me.txtCodigoProveedor.Size = New System.Drawing.Size(127, 20)
         Me.txtCodigoProveedor.TabIndex = 30
+        Me.txtCodigoProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCodigoProveedor.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel2
@@ -201,7 +202,7 @@ Partial Class ConsultaNumeroFactura
         '
         'btnAceptar
         '
-        Me.btnAceptar.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnAceptar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
         Me.btnAceptar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnAceptar.Cleanable = False
         Me.btnAceptar.Cursor = System.Windows.Forms.Cursors.Hand

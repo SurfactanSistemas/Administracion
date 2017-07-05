@@ -93,6 +93,7 @@ Public Class Compras
         txtCAI.Text = proveedorAMostrar.cai
         txtVtoCAI.Text = proveedorAMostrar.vtoCAI
         CBLetra.SelectedIndex = 0
+        cmbFormaPago.SelectedIndex = 0
 
         If Val(proveedorAMostrar.codIva) = 5 Then
             cmbTipo.SelectedIndex = 0
@@ -144,11 +145,7 @@ Public Class Compras
                 Dim consulta As New ConsultaCompras(Me, True)
                 consulta.ShowDialog()
                 If Trim(txtNombreProveedor.Text) <> "" And Trim(txtCodigoProveedor.Text) <> "" Then
-                    If Trim(txtCAI.Text) <> "" Then
-                        txtPunto.Focus()
-                    Else
-                        txtCAI.Focus()
-                    End If
+                    txtCAI.Focus()
                 End If
             Else
                 Dim prov As String = txtCodigoProveedor.Text
@@ -157,11 +154,7 @@ Public Class Compras
                 If Not IsNothing(proveedor) Then
                     mostrarProveedor(proveedor)
 
-                    If Trim(txtCAI.Text) <> "" Then
-                        txtPunto.Focus()
-                    Else
-                        txtCAI.Focus()
-                    End If
+                    txtCAI.Focus()
 
                 Else
                     ' En caso de no existir, se notifica al usuario.
@@ -234,8 +227,8 @@ Public Class Compras
         validador.validate(Me)
         validador.alsoValidate(CustomConvert.toIntOr(txtPunto.Text, 0) <> 0, "El campo " & CustomLabel6.Text & " no puede ser cero")
         validador.alsoValidate(CustomConvert.toIntOr(txtNumero.Text, 0) <> 0, "El campo " & CustomLabel7.Text & " no puede ser cero")
-        Dim letra = letrasValidas.Find(Function(l) l = CBLetra.SelectedItem)
-        validador.alsoValidate(IsNothing(letra) Or CBLetra.SelectedItem = "", "El valor ingresado (" & CBLetra.SelectedItem & ") no es una letra válida")
+        Dim letra As String = letrasValidas.Find(Function(l) l = CBLetra.SelectedItem)
+        validador.alsoValidate(Not IsNothing(letra) And letra <> "", "El valor ingresado (" & CBLetra.SelectedItem & ") no es una letra válida")
         validador.alsoValidate(DAOCierreMes.mesAbierto(txtFechaIVA.Text), "El mes de la fecha de emisión: " & txtFechaIVA.Text & " se encuentra cerrado según el sistema")
         validador.alsoValidate(gridAsientos.Rows.Count > 1, "No fue generado el asiento. No se puede confirmar")
         validador.alsoValidate(lblCredito.Text = lblDebito.Text, "El asiento se encuentra desbalanceado. Hay una diferencia de: " & Math.Abs(asDouble(lblCredito.Text) - asDouble(lblDebito.Text)))
@@ -258,10 +251,14 @@ Public Class Compras
     Private Function valoresDebeYHaberCorrectos()
         Dim estado As Boolean = True
         For Each row As DataGridViewRow In gridAsientos.Rows
-            If Not row.IsNewRow Then
-                estado = estado And (asDouble(row.Cells(2).Value) = 0 Xor asDouble(row.Cells(3).Value) = 0) _
-                    And asDouble(row.Cells(2).Value) >= 0 And asDouble(row.Cells(3).Value) >= 0
+
+            If Not IsNothing(row.Cells(0).Value) And Not IsNothing(row.Cells(1).Value) Then
+                If Not row.IsNewRow Then
+                    estado = estado And (asDouble(row.Cells(2).Value) = 0 Xor asDouble(row.Cells(3).Value) = 0) _
+                        And asDouble(row.Cells(2).Value) >= 0 And asDouble(row.Cells(3).Value) >= 0
+                End If
             End If
+            
         Next
         Return estado
     End Function
@@ -270,7 +267,9 @@ Public Class Compras
         Dim estado As Boolean = True
         For Each row As DataGridViewRow In gridAsientos.Rows
             If Not row.IsNewRow Then
-                estado = estado And row.Cells(1).Value <> ""
+                If Not IsNothing(row.Cells(0).Value) And Not IsNothing(row.Cells(1).Value) Then
+                    estado = estado And row.Cells(1).Value <> ""
+                End If
             End If
         Next
         Return estado
@@ -278,7 +277,12 @@ Public Class Compras
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
         If validarCampos() Then
-            actualizarProveedor()
+            Try
+                actualizarProveedor()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                Exit Sub
+            End Try
             Dim compra As Compra = crearCompra()
             If DAOCompras.facturaPagada(compra.nroInterno) Then
                 MsgBox("No se puede modificar una factura que ya se encuentra paga", MsgBoxStyle.Exclamation, "No se puede confirmar la operación")
@@ -321,10 +325,14 @@ Public Class Compras
     Private Sub crearImputaciones(ByVal compra As Compra)
         Dim imputaciones As New List(Of Imputac)
         For Each row As DataGridViewRow In gridAsientos.Rows
-            If Not row.IsNewRow Then
-                imputaciones.Add(New Imputac(compra.fechaEmision, asDouble(row.Cells(2).Value), asDouble(row.Cells(3).Value), proveedor.id, row.Cells(0).Value, compra.nroInterno,
-                                             compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, ceros((row.Index + 1).ToString, 2)))
+
+            If Not IsNothing(row.Cells(0).Value) And Not IsNothing(row.Cells(1).Value) And (row.Cells(2).Value.ToString <> "" Or row.Cells(3).Value.ToString <> "") Then
+                If Not row.IsNewRow Then
+                    imputaciones.Add(New Imputac(compra.fechaEmision, asDouble(row.Cells(2).Value), asDouble(row.Cells(3).Value), proveedor.id, row.Cells(0).Value, compra.nroInterno,
+                                                 compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, ceros((row.Index + 1).ToString, 2)))
+                End If
             End If
+            
         Next
 
         compra.agregarImputaciones(imputaciones)
@@ -337,12 +345,36 @@ Public Class Compras
     End Function
 
     Private Sub actualizarProveedor()
-        proveedor.cai = txtCAI.Text
-        proveedor.vtoCAI = txtVtoCAI.Text
-        If IsNothing(proveedor.cuenta) Then
-            proveedor.cuenta = DAOProveedor.cuentaDefault
+        'proveedor.cai = txtCAI.Text
+        'proveedor.vtoCAI = txtVtoCAI.Text
+        'If IsNothing(proveedor.cuenta) Then
+        '    proveedor.cuenta = DAOProveedor.cuentaDefault
+        'End If
+        'DAOProveedor.agregarProveedor(proveedor)
+
+        If Trim(txtCAI.Text) = "" Or Trim(txtVtoCAI.Text.Replace("/", "")) = "" Then
+            Exit Sub
         End If
-        DAOProveedor.agregarProveedor(proveedor)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("UPDATE Proveedor SET Cai = '" & Trim(txtCAI.Text) & "', VtoCai = '" & Trim(txtVtoCAI.Text) & "' WHERE Proveedor = '" & Trim(txtCodigoProveedor.Text) & "'")
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer Actualizar los datos del CAI del proveedor en la Base de Datos.")
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Function _Normalizarfecha(ByVal fecha As String) As String
@@ -1418,6 +1450,10 @@ Public Class Compras
         Else
             e.Cancel = False
         End If
+
+    End Sub
+
+    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
 
     End Sub
 End Class
