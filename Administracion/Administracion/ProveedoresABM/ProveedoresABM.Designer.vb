@@ -44,10 +44,6 @@ Partial Class ProveedoresABM
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtPaginaWeb = New System.Windows.Forms.TextBox()
         Me.txtCUIT = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
-        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
         Me.cmbCalificacion = New Administracion.CustomComboBox()
         Me.cmbEstado = New Administracion.CustomComboBox()
         Me.cmbCertificados = New Administracion.CustomComboBox()
@@ -90,6 +86,10 @@ Partial Class ProveedoresABM
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
+        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
         Me.cmbRegion = New Administracion.CustomComboBox()
         Me.CustomLabel8 = New Administracion.CustomLabel()
         Me.CustomLabel7 = New Administracion.CustomLabel()
@@ -129,9 +129,9 @@ Partial Class ProveedoresABM
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.Location = New System.Drawing.Point(110, 445)
+        Me.btnAgregar.Location = New System.Drawing.Point(83, 464)
         Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(105, 42)
+        Me.btnAgregar.Size = New System.Drawing.Size(56, 37)
         Me.btnAgregar.TabIndex = 70
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
@@ -147,9 +147,9 @@ Partial Class ProveedoresABM
         Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEliminar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.Location = New System.Drawing.Point(241, 443)
+        Me.btnEliminar.Location = New System.Drawing.Point(293, 464)
         Me.btnEliminar.Name = "btnEliminar"
-        Me.btnEliminar.Size = New System.Drawing.Size(105, 42)
+        Me.btnEliminar.Size = New System.Drawing.Size(56, 37)
         Me.btnEliminar.TabIndex = 72
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
@@ -165,9 +165,9 @@ Partial Class ProveedoresABM
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.Location = New System.Drawing.Point(241, 500)
+        Me.btnConsulta.Location = New System.Drawing.Point(223, 464)
         Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(105, 42)
+        Me.btnConsulta.Size = New System.Drawing.Size(56, 37)
         Me.btnConsulta.TabIndex = 71
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
@@ -183,9 +183,9 @@ Partial Class ProveedoresABM
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.Location = New System.Drawing.Point(365, 500)
+        Me.btnCerrar.Location = New System.Drawing.Point(363, 464)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(105, 42)
+        Me.btnCerrar.Size = New System.Drawing.Size(56, 37)
         Me.btnCerrar.TabIndex = 73
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
@@ -201,9 +201,9 @@ Partial Class ProveedoresABM
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.Location = New System.Drawing.Point(110, 500)
+        Me.btnLimpiar.Location = New System.Drawing.Point(153, 464)
         Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(105, 42)
+        Me.btnLimpiar.Size = New System.Drawing.Size(56, 37)
         Me.btnLimpiar.TabIndex = 75
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
@@ -219,9 +219,9 @@ Partial Class ProveedoresABM
         Me.btnListado.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnListado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnListado.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnListado.Location = New System.Drawing.Point(365, 445)
+        Me.btnListado.Location = New System.Drawing.Point(433, 464)
         Me.btnListado.Name = "btnListado"
-        Me.btnListado.Size = New System.Drawing.Size(105, 42)
+        Me.btnListado.Size = New System.Drawing.Size(56, 37)
         Me.btnListado.TabIndex = 74
         Me.btnListado.UseVisualStyleBackColor = True
         '
@@ -304,7 +304,7 @@ Partial Class ProveedoresABM
         Me.GroupBox1.Controls.Add(Me.btnUltimoRegistro)
         Me.GroupBox1.Controls.Add(Me.btnAnteriorRegistro)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Location = New System.Drawing.Point(510, 453)
+        Me.GroupBox1.Location = New System.Drawing.Point(587, 442)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(200, 80)
         Me.GroupBox1.TabIndex = 76
@@ -315,14 +315,14 @@ Partial Class ProveedoresABM
         '
         Me.LBConsulta_Opciones.FormattingEnabled = True
         Me.LBConsulta_Opciones.Items.AddRange(New Object() {"Proveedores", "Cuentas Contables"})
-        Me.LBConsulta_Opciones.Location = New System.Drawing.Point(24, 588)
+        Me.LBConsulta_Opciones.Location = New System.Drawing.Point(24, 560)
         Me.LBConsulta_Opciones.Name = "LBConsulta_Opciones"
-        Me.LBConsulta_Opciones.Size = New System.Drawing.Size(537, 69)
+        Me.LBConsulta_Opciones.Size = New System.Drawing.Size(538, 121)
         Me.LBConsulta_Opciones.TabIndex = 80
         '
         'txtFiltrar
         '
-        Me.txtFiltrar.Location = New System.Drawing.Point(23, 564)
+        Me.txtFiltrar.Location = New System.Drawing.Point(23, 536)
         Me.txtFiltrar.Name = "txtFiltrar"
         Me.txtFiltrar.Size = New System.Drawing.Size(538, 20)
         Me.txtFiltrar.TabIndex = 79
@@ -330,18 +330,18 @@ Partial Class ProveedoresABM
         'LBConsulta_Filtrada
         '
         Me.LBConsulta_Filtrada.FormattingEnabled = True
-        Me.LBConsulta_Filtrada.Location = New System.Drawing.Point(24, 589)
+        Me.LBConsulta_Filtrada.Location = New System.Drawing.Point(24, 560)
         Me.LBConsulta_Filtrada.Name = "LBConsulta_Filtrada"
-        Me.LBConsulta_Filtrada.Size = New System.Drawing.Size(538, 69)
+        Me.LBConsulta_Filtrada.Size = New System.Drawing.Size(538, 121)
         Me.LBConsulta_Filtrada.TabIndex = 78
         Me.LBConsulta_Filtrada.Visible = False
         '
         'LBConsulta
         '
         Me.LBConsulta.FormattingEnabled = True
-        Me.LBConsulta.Location = New System.Drawing.Point(24, 588)
+        Me.LBConsulta.Location = New System.Drawing.Point(24, 560)
         Me.LBConsulta.Name = "LBConsulta"
-        Me.LBConsulta.Size = New System.Drawing.Size(538, 69)
+        Me.LBConsulta.Size = New System.Drawing.Size(538, 121)
         Me.LBConsulta.TabIndex = 77
         '
         'Panel1
@@ -484,51 +484,6 @@ Partial Class ProveedoresABM
         Me.txtCUIT.TabIndex = 102
         Me.txtCUIT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCUIT.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
-        '
-        'txtCategoria
-        '
-        Me.txtCategoria.Enabled = False
-        Me.txtCategoria.Location = New System.Drawing.Point(346, 256)
-        Me.txtCategoria.Mask = "00/00/0000"
-        Me.txtCategoria.Name = "txtCategoria"
-        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
-        Me.txtCategoria.TabIndex = 47
-        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCategoria.ValidatingType = GetType(Date)
-        '
-        'txtCalificacion
-        '
-        Me.txtCalificacion.Location = New System.Drawing.Point(698, 312)
-        Me.txtCalificacion.Mask = "00/00/0000"
-        Me.txtCalificacion.Name = "txtCalificacion"
-        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCalificacion.Size = New System.Drawing.Size(74, 20)
-        Me.txtCalificacion.TabIndex = 47
-        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCalificacion.ValidatingType = GetType(Date)
-        '
-        'txtNroSEDRONAR2
-        '
-        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(658, 228)
-        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
-        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
-        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
-        Me.txtNroSEDRONAR2.TabIndex = 47
-        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
-        '
-        'txtCertificados
-        '
-        Me.txtCertificados.Location = New System.Drawing.Point(258, 312)
-        Me.txtCertificados.Mask = "00/00/0000"
-        Me.txtCertificados.Name = "txtCertificados"
-        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCertificados.Size = New System.Drawing.Size(74, 20)
-        Me.txtCertificados.TabIndex = 47
-        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCertificados.ValidatingType = GetType(Date)
         '
         'cmbCalificacion
         '
@@ -1113,6 +1068,51 @@ Partial Class ProveedoresABM
         Me.CustomLabel1.Size = New System.Drawing.Size(51, 18)
         Me.CustomLabel1.TabIndex = 48
         Me.CustomLabel1.Text = "Código"
+        '
+        'txtCategoria
+        '
+        Me.txtCategoria.Enabled = False
+        Me.txtCategoria.Location = New System.Drawing.Point(346, 256)
+        Me.txtCategoria.Mask = "00/00/0000"
+        Me.txtCategoria.Name = "txtCategoria"
+        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
+        Me.txtCategoria.TabIndex = 47
+        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCategoria.ValidatingType = GetType(Date)
+        '
+        'txtCalificacion
+        '
+        Me.txtCalificacion.Location = New System.Drawing.Point(698, 312)
+        Me.txtCalificacion.Mask = "00/00/0000"
+        Me.txtCalificacion.Name = "txtCalificacion"
+        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCalificacion.Size = New System.Drawing.Size(74, 20)
+        Me.txtCalificacion.TabIndex = 47
+        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCalificacion.ValidatingType = GetType(Date)
+        '
+        'txtNroSEDRONAR2
+        '
+        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(658, 228)
+        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
+        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
+        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
+        Me.txtNroSEDRONAR2.TabIndex = 47
+        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
+        '
+        'txtCertificados
+        '
+        Me.txtCertificados.Location = New System.Drawing.Point(258, 312)
+        Me.txtCertificados.Mask = "00/00/0000"
+        Me.txtCertificados.Name = "txtCertificados"
+        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCertificados.Size = New System.Drawing.Size(74, 20)
+        Me.txtCertificados.TabIndex = 47
+        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCertificados.ValidatingType = GetType(Date)
         '
         'cmbRegion
         '

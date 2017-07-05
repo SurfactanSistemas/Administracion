@@ -15,8 +15,8 @@ Public Class ProveedoresABM
     Private Const VALIDA_CUIT = "54327654321"
 
     Private TipoConsulta As String
-    Private Const MAIN_HEIGHT = 580
-    Private Const EXPANDED_HEIGHT = 695
+    Private Const MAIN_HEIGHT = 560
+    Private Const EXPANDED_HEIGHT = 720
 
     Private Sub ProveedoresABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim provincias = DAOProveedor.listarProvincias
@@ -812,11 +812,6 @@ Public Class ProveedoresABM
 
     Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
         If e.KeyData = Keys.Enter Then
-
-            If Trim(txtCuenta.Text) = "" Then
-                _AbrirConsulta("Cuenta")
-                Exit Sub
-            End If
 
             Dim cuenta As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
             If Not IsNothing(cuenta) Then
