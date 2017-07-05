@@ -235,7 +235,7 @@ Public Class ProveedoresABM
         If Trim(txtNroSEDRONAR1.Text) <> "" Then
 
             If Trim(txtNroSEDRONAR2.Text).Replace("/", "") <> "" Then
-                MsgBox("Se debe informar la fecha de Inscripción a Sedronar.", MsgBoxStyle.Information)
+                MsgBox("Se debe informar la fecha de vencimiento de Sedronar.", MsgBoxStyle.Information)
                 Exit Sub
             End If
 
