@@ -117,7 +117,9 @@ Public Class BancosABM
                 Case Else
 
             End Select
-
+        Else
+            _ListarConsulta("Nombre", "Banco")
+            Exit Sub
         End If
 
     End Sub
@@ -200,6 +202,10 @@ Public Class BancosABM
 
     Private Sub LBConsulta_Opciones_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Opciones.SelectedIndexChanged
 
+        If LBConsulta_Opciones.SelectedItem = "" Then
+            Exit Sub
+        End If
+
         If LBConsulta_Opciones.SelectedIndex = 0 Then
             _ListarConsulta("Nombre", "Banco")
         Else
@@ -209,6 +215,10 @@ Public Class BancosABM
     End Sub
 
     Private Sub LBConsulta_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta.SelectedIndexChanged
+
+        If LBConsulta.SelectedItem = "" Then
+            Exit Sub
+        End If
 
         Select Case TipoConsulta
             Case "Banco"
@@ -221,6 +231,10 @@ Public Class BancosABM
     End Sub
 
     Private Sub LBConsulta_Filtrada_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Filtrada.SelectedIndexChanged
+
+        If LBConsulta_Filtrada.SelectedItem = "" Then
+            Exit Sub
+        End If
 
         Select Case TipoConsulta
             Case "Banco"
