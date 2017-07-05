@@ -53,9 +53,19 @@ Public Class ProveedoresABM
 
         Next
 
+        cufe1 = Tuple.Create("", "")
+        cufe2 = Tuple.Create("", "")
+        cufe3 = Tuple.Create("", "")
+        _Contacto1 = Tuple.Create("", "", "", "")
+        _Contacto2 = Tuple.Create("", "", "", "")
+        _Contacto3 = Tuple.Create("", "", "", "")
+
         txtPaginaWeb.Text = "http://"
 
+        observaciones = ""
+
         txtCodigo.Focus()
+
         Me.Height = MAIN_HEIGHT
     End Sub
 
@@ -234,7 +244,7 @@ Public Class ProveedoresABM
 
         If Trim(txtNroSEDRONAR1.Text) <> "" Then
 
-            If Trim(txtNroSEDRONAR2.Text).Replace("/", "") <> "" Then
+            If Trim(txtNroSEDRONAR2.Text).Replace("/", "") = "" Then
                 MsgBox("Se debe informar la fecha de vencimiento de Sedronar.", MsgBoxStyle.Information)
                 Exit Sub
             End If
@@ -698,6 +708,8 @@ Public Class ProveedoresABM
             End If
 
 
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCodigo.Text = ""
         End If
 
     End Sub
@@ -709,42 +721,56 @@ Public Class ProveedoresABM
     Private Sub txtRazonSocial_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRazonSocial.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtDireccion)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRazonSocial.Text = ""
         End If
     End Sub
 
     Private Sub txtDireccion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDireccion.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtLocalidad)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDireccion.Text = ""
         End If
     End Sub
 
     Private Sub txtLocalidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLocalidad.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCodigoPostal)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtLocalidad.Text = ""
         End If
     End Sub
 
     Private Sub txtCodigoPostal_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigoPostal.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbRegion)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCodigoPostal.Text = ""
         End If
     End Sub
 
     Private Sub txtTelefono_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTelefono.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtEmail)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtTelefono.Text = ""
         End If
     End Sub
 
     Private Sub txtEmail_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEmail.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtDiasPlazo)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtEmail.Text = ""
         End If
     End Sub
 
     Private Sub txtDiasPlazo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDiasPlazo.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCUIT)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDiasPlazo.Text = ""
         End If
     End Sub
 
@@ -771,12 +797,16 @@ Public Class ProveedoresABM
                 MsgBox("El CUIT ingresado no es correcto.")
                 txtCUIT.Focus()
             End If
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCUIT.Text = ""
         End If
     End Sub
 
     Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCuenta)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtObservaciones.Text = ""
         End If
     End Sub
 
@@ -796,6 +826,8 @@ Public Class ProveedoresABM
                 txtCuentaDescripcion.Text = ""
                 txtCuenta.Focus()
             End If
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCuenta.Text = ""
         End If
     End Sub
 
@@ -807,61 +839,81 @@ Public Class ProveedoresABM
 
     Private Sub txtCheque_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCheque.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtPorcelProv)
+            _SaltarA(cmbCondicionIB1)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCheque.Text = ""
         End If
     End Sub
 
     Private Sub txtNroIB_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroIB.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbRubro)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNroIB.Text = ""
         End If
     End Sub
 
     Private Sub txtPorcelProv_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPorcelProv.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtPorcelCABA)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtPorcelProv.Text = ""
         End If
     End Sub
 
     Private Sub txtPorcelCABA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPorcelCABA.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbCondicionIB1)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtPorcelCABA.Text = ""
         End If
     End Sub
 
     Private Sub txtNroSEDRONAR1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroSEDRONAR1.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtNroSEDRONAR2)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNroSEDRONAR1.Text = ""
         End If
     End Sub
 
     Private Sub txtNroSEDRONAR2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroSEDRONAR2.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbCategoria1)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNroSEDRONAR2.Text = ""
         End If
     End Sub
 
     Private Sub txtCategoria_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCategoria.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbInscripcionIB)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCategoria.Text = ""
         End If
     End Sub
 
     Private Sub txtCAI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCAI.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCAIVto)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCAI.Text = ""
         End If
     End Sub
 
     Private Sub txtCAIVto_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCAIVto.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbEstado)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCAIVto.Text = ""
         End If
     End Sub
 
     Private Sub txtCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCertificados.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbCalificacion)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCertificados.Text = ""
         End If
     End Sub
 
@@ -869,6 +921,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtTelefono)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbRegion.SelectedIndex = 0
         End If
 
     End Sub
@@ -885,6 +939,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbIVA)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbTipoProveedor.SelectedIndex = 0
         End If
 
     End Sub
@@ -893,6 +949,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtObservaciones)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbIVA.SelectedIndex = 0
         End If
 
     End Sub
@@ -905,6 +963,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbCondicionIB2)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbCondicionIB1.SelectedIndex = 0
         End If
 
     End Sub
@@ -917,6 +977,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtNroIB)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbCondicionIB2.SelectedIndex = 0
         End If
 
     End Sub
@@ -932,12 +994,16 @@ Public Class ProveedoresABM
     Private Sub cmbRubro_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbRubro.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtNroSEDRONAR1)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbRubro.SelectedIndex = 0
         End If
     End Sub
 
     Private Sub cmbCategoria1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCategoria1.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbCategoria2)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbCategoria1.SelectedIndex = 0
         End If
     End Sub
 
@@ -949,6 +1015,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCategoria)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbCategoria2.SelectedIndex = 0
         End If
 
     End Sub
@@ -961,6 +1029,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCAI)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbInscripcionIB.SelectedIndex = 0
         End If
 
     End Sub
@@ -973,6 +1043,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbCertificados)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbEstado.SelectedIndex = 0
         End If
 
     End Sub
@@ -985,6 +1057,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCertificados)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbCertificados.SelectedIndex = 0
         End If
 
     End Sub
@@ -997,6 +1071,8 @@ Public Class ProveedoresABM
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCalificacion)
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbCalificacion.SelectedIndex = 0
         End If
 
     End Sub

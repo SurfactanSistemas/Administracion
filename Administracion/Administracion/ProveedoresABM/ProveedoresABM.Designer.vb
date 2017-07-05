@@ -487,6 +487,7 @@ Partial Class ProveedoresABM
         '
         'txtCategoria
         '
+        Me.txtCategoria.Enabled = False
         Me.txtCategoria.Location = New System.Drawing.Point(346, 256)
         Me.txtCategoria.Mask = "00/00/0000"
         Me.txtCategoria.Name = "txtCategoria"
@@ -777,6 +778,7 @@ Partial Class ProveedoresABM
         Me.cmbCategoria2.Cleanable = True
         Me.cmbCategoria2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCategoria2.Empty = True
+        Me.cmbCategoria2.Enabled = False
         Me.cmbCategoria2.EnterIndex = 26
         Me.cmbCategoria2.FormattingEnabled = True
         Me.cmbCategoria2.Items.AddRange(New Object() {"", "Sin Calificar", "Muy Bueno", "Bueno", "Regular", "Malo"})
@@ -792,6 +794,7 @@ Partial Class ProveedoresABM
         Me.cmbCategoria1.Cleanable = True
         Me.cmbCategoria1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCategoria1.Empty = True
+        Me.cmbCategoria1.Enabled = False
         Me.cmbCategoria1.EnterIndex = 25
         Me.cmbCategoria1.FormattingEnabled = True
         Me.cmbCategoria1.Items.AddRange(New Object() {"", "A", "B", "C", "E"})
