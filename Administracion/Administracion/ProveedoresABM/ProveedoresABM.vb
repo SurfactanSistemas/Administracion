@@ -209,19 +209,26 @@ Public Class ProveedoresABM
 
     Private Sub agregar()
 
-        ' Validamos el Cuit.
-        If Not _CuitValido(txtCUIT.Text) Then
-            MsgBox("El CUIT indicado no es válido.", MsgBoxStyle.Information)
-            Exit Sub
+        ' Validamos el Cuit en caso de que se haya ingresado alguno.
+
+        If Trim(txtCUIT.Text.Replace("/", "")) <> "" Then
+            If Not _CuitValido(txtCUIT.Text) Then
+                MsgBox("El CUIT indicado no es válido.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
         End If
 
-        Dim cuentacontable As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
 
-        ' Validamos la cuenta corriente.
-        If IsNothing(cuentacontable) Then
-            MsgBox("La cuenta contable indicada no existe.", MsgBoxStyle.Information)
-            Exit Sub
+        ' Validamos la cuenta corriente en caso de que haya colocado alguna.
+        If Trim(txtCuenta.Text) <> "" Then
+            Dim cuentacontable As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
+
+            If IsNothing(cuentacontable) Then
+                MsgBox("La cuenta contable indicada no existe.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
         End If
+
 
         ' Validamos que se haya indicado fecha para sedronar en caso de que se haya colocado un valor.
 
@@ -758,7 +765,7 @@ Public Class ProveedoresABM
 
     Private Sub txtCUIT_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCUIT.KeyDown
         If e.KeyData = Keys.Enter Then
-            If _CuitValido(txtCUIT.Text) Then
+            If _CuitValido(txtCUIT.Text) Or Trim(txtCUIT.Text.Replace("-", "")) = "" Then
                 _SaltarA(cmbTipoProveedor)
             Else
                 MsgBox("El CUIT ingresado no es correcto.")
@@ -776,12 +783,10 @@ Public Class ProveedoresABM
     Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
         If e.KeyData = Keys.Enter Then
 
-
             If Trim(txtCuenta.Text) = "" Then
                 _AbrirConsulta("Cuenta")
                 Exit Sub
             End If
-
 
             Dim cuenta As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
             If Not IsNothing(cuenta) Then
