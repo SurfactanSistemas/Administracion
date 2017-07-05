@@ -809,7 +809,7 @@ Partial Class ProveedoresABM
         Me.cmbCondicionIB2.Empty = True
         Me.cmbCondicionIB2.EnterIndex = 18
         Me.cmbCondicionIB2.FormattingEnabled = True
-        Me.cmbCondicionIB2.Items.AddRange(New Object() {"", "Exento", "Reteniente"})
+        Me.cmbCondicionIB2.Items.AddRange(New Object() {"", "Exento", "Retiene"})
         Me.cmbCondicionIB2.LabelAssociationKey = 17
         Me.cmbCondicionIB2.Location = New System.Drawing.Point(239, 202)
         Me.cmbCondicionIB2.Name = "cmbCondicionIB2"
