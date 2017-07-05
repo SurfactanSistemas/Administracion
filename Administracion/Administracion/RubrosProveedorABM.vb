@@ -46,7 +46,7 @@ Public Class RubrosProveedorABM
 
                     DAORubroProveedor.eliminarRubroProveedor(rubro)
 
-                    MsgBox("El Banco ha sido eliminado correctamente", MsgBoxStyle.Information)
+                    MsgBox("El Rubro ha sido eliminado correctamente", MsgBoxStyle.Information)
 
                     _LimpiarCampos()
 
