@@ -145,7 +145,7 @@ Public Class Compras
                 Dim consulta As New ConsultaCompras(Me, True)
                 consulta.ShowDialog()
                 If Trim(txtNombreProveedor.Text) <> "" And Trim(txtCodigoProveedor.Text) <> "" Then
-                    txtCAI.Focus()
+                    txtPunto.Focus()
                 End If
             Else
                 Dim prov As String = txtCodigoProveedor.Text
@@ -154,7 +154,7 @@ Public Class Compras
                 If Not IsNothing(proveedor) Then
                     mostrarProveedor(proveedor)
 
-                    txtCAI.Focus()
+                    txtPunto.Focus()
 
                 Else
                     ' En caso de no existir, se notifica al usuario.
@@ -252,13 +252,11 @@ Public Class Compras
         Dim estado As Boolean = True
         For Each row As DataGridViewRow In gridAsientos.Rows
 
-            If Not IsNothing(row.Cells(0).Value) And Not IsNothing(row.Cells(1).Value) Then
-                If Not row.IsNewRow Then
-                    estado = estado And (asDouble(row.Cells(2).Value) = 0 Xor asDouble(row.Cells(3).Value) = 0) _
-                        And asDouble(row.Cells(2).Value) >= 0 And asDouble(row.Cells(3).Value) >= 0
-                End If
+            If Not row.IsNewRow Then
+                estado = estado And (asDouble(row.Cells(2).Value) = 0 Xor asDouble(row.Cells(3).Value) = 0) _
+                    And asDouble(row.Cells(2).Value) >= 0 And asDouble(row.Cells(3).Value) >= 0
             End If
-            
+
         Next
         Return estado
     End Function
@@ -275,7 +273,24 @@ Public Class Compras
         Return estado
     End Function
 
+    Private Sub _EliminarFilasEnBlanco()
+        For Each row As DataGridViewRow In gridAsientos.Rows
+
+            With row
+
+                If IsNothing(.Cells(0).Value) And IsNothing(.Cells(1).Value) And IsNothing(.Cells(2).Value) And IsNothing(.Cells(3).Value) Then
+                    gridAsientos.Rows().Remove(row)
+                End If
+
+            End With
+
+        Next
+    End Sub
+
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
+
+        _EliminarFilasEnBlanco()
+
         If validarCampos() Then
             Try
                 actualizarProveedor()
@@ -326,13 +341,10 @@ Public Class Compras
         Dim imputaciones As New List(Of Imputac)
         For Each row As DataGridViewRow In gridAsientos.Rows
 
-            If Not IsNothing(row.Cells(0).Value) And Not IsNothing(row.Cells(1).Value) And (row.Cells(2).Value.ToString <> "" Or row.Cells(3).Value.ToString <> "") Then
-                If Not row.IsNewRow Then
-                    imputaciones.Add(New Imputac(compra.fechaEmision, asDouble(row.Cells(2).Value), asDouble(row.Cells(3).Value), proveedor.id, row.Cells(0).Value, compra.nroInterno,
-                                                 compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, ceros((row.Index + 1).ToString, 2)))
-                End If
+            If Not row.IsNewRow Then
+                imputaciones.Add(New Imputac(compra.fechaEmision, asDouble(row.Cells(2).Value), asDouble(row.Cells(3).Value), proveedor.id, row.Cells(0).Value, compra.nroInterno,
+                                             compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, ceros((row.Index + 1).ToString, 2)))
             End If
-            
         Next
 
         compra.agregarImputaciones(imputaciones)
@@ -731,11 +743,7 @@ Public Class Compras
         If e.KeyData = Keys.Enter Then
             txtNumero.Text = ceros(txtNumero.Text, 8)
 
-            If Trim(txtCAI.Text) <> "" Then
-                _SaltarA(txtVtoCAI)
-            Else
-                txtFechaEmision.Focus()
-            End If
+            txtCAI.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtNumero.Text = ""
@@ -1453,7 +1461,49 @@ Public Class Compras
 
     End Sub
 
+    Private Function _DisponibleParaDarDeBaja() As Boolean
+        Dim _Disponible As Boolean = False
+
+        Dim XClave As String = Trim(txtCodigoProveedor.Text) & CBLetra.SelectedItem & ceros(cmbTipo.SelectedItem, 2) & ceros(Trim(txtPunto.Text), 4) & ceros(Trim(txtNumero.Text), 8)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Saldo, Total FROM CtaCtePrv WHERE Clave = '" & XClave & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                If Val(dr.Item("Saldo")) <> Val(dr.Item("Total")) Then
+                    _Disponible = True
+                End If
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return _Disponible
+    End Function
+
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+        ' Validar que se pueda borrar => Sólo si los saldos son distintos?
+        If Not _DisponibleParaDarDeBaja() Then
+
+        End If
 
     End Sub
 End Class
