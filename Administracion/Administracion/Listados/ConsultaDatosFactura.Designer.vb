@@ -27,21 +27,21 @@ Partial Class ConsultaDatosFactura
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtOrdenCompra = New System.Windows.Forms.TextBox()
-        Me.txtFechaOrdenCompra = New System.Windows.Forms.MaskedTextBox()
-        Me.txtInformeRecepcion = New System.Windows.Forms.TextBox()
-        Me.txtFechaInformeRecepcion = New System.Windows.Forms.MaskedTextBox()
-        Me.txtRemito = New System.Windows.Forms.TextBox()
-        Me.txtFactura = New System.Windows.Forms.TextBox()
         Me.txtFechaFactura = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCarpeta = New System.Windows.Forms.TextBox()
+        Me.txtFechaInformeRecepcion = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFechaOrdenCompra = New System.Windows.Forms.MaskedTextBox()
         Me.txtNombreProveedor = New System.Windows.Forms.TextBox()
+        Me.txtCarpeta = New System.Windows.Forms.TextBox()
+        Me.txtFactura = New System.Windows.Forms.TextBox()
+        Me.txtRemito = New System.Windows.Forms.TextBox()
+        Me.txtInformeRecepcion = New System.Windows.Forms.TextBox()
+        Me.txtOrdenCompra = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.DGVArticulos = New System.Windows.Forms.DataGridView()
         Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -91,9 +91,10 @@ Partial Class ConsultaDatosFactura
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel2.Controls.Add(Me.GroupBox1)
+        Me.Panel2.Controls.Add(Me.DGVArticulos)
         Me.Panel2.Location = New System.Drawing.Point(2, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(834, 246)
+        Me.Panel2.Size = New System.Drawing.Size(834, 429)
         Me.Panel2.TabIndex = 32
         '
         'GroupBox1
@@ -122,95 +123,17 @@ Partial Class ConsultaDatosFactura
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Historial"
         '
-        'Label3
+        'txtFechaFactura
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label3.Location = New System.Drawing.Point(125, 28)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(121, 18)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Orden de Compra:"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label4.Location = New System.Drawing.Point(125, 60)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(144, 18)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Informe de Recepción"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label5.Location = New System.Drawing.Point(125, 92)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(57, 18)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Remito:"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label6.Location = New System.Drawing.Point(125, 124)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(57, 18)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Factura:"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label7.Location = New System.Drawing.Point(125, 156)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(60, 18)
-        Me.Label7.TabIndex = 0
-        Me.Label7.Text = "Carpeta:"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label8.Location = New System.Drawing.Point(125, 188)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(77, 18)
-        Me.Label8.TabIndex = 0
-        Me.Label8.Text = "Proveedor:"
-        '
-        'txtOrdenCompra
-        '
-        Me.txtOrdenCompra.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtOrdenCompra.Location = New System.Drawing.Point(274, 26)
-        Me.txtOrdenCompra.Name = "txtOrdenCompra"
-        Me.txtOrdenCompra.ReadOnly = True
-        Me.txtOrdenCompra.Size = New System.Drawing.Size(116, 20)
-        Me.txtOrdenCompra.TabIndex = 1
-        '
-        'txtFechaOrdenCompra
-        '
-        Me.txtFechaOrdenCompra.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtFechaOrdenCompra.Location = New System.Drawing.Point(402, 26)
-        Me.txtFechaOrdenCompra.Mask = "00/00/0000"
-        Me.txtFechaOrdenCompra.Name = "txtFechaOrdenCompra"
-        Me.txtFechaOrdenCompra.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaOrdenCompra.ReadOnly = True
-        Me.txtFechaOrdenCompra.Size = New System.Drawing.Size(93, 20)
-        Me.txtFechaOrdenCompra.TabIndex = 2
-        Me.txtFechaOrdenCompra.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtInformeRecepcion
-        '
-        Me.txtInformeRecepcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtInformeRecepcion.Location = New System.Drawing.Point(274, 58)
-        Me.txtInformeRecepcion.Name = "txtInformeRecepcion"
-        Me.txtInformeRecepcion.ReadOnly = True
-        Me.txtInformeRecepcion.Size = New System.Drawing.Size(116, 20)
-        Me.txtInformeRecepcion.TabIndex = 1
+        Me.txtFechaFactura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtFechaFactura.Location = New System.Drawing.Point(402, 122)
+        Me.txtFechaFactura.Mask = "00/00/0000"
+        Me.txtFechaFactura.Name = "txtFechaFactura"
+        Me.txtFechaFactura.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaFactura.ReadOnly = True
+        Me.txtFechaFactura.Size = New System.Drawing.Size(93, 20)
+        Me.txtFechaFactura.TabIndex = 2
+        Me.txtFechaFactura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtFechaInformeRecepcion
         '
@@ -224,44 +147,17 @@ Partial Class ConsultaDatosFactura
         Me.txtFechaInformeRecepcion.TabIndex = 2
         Me.txtFechaInformeRecepcion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'txtRemito
+        'txtFechaOrdenCompra
         '
-        Me.txtRemito.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtRemito.Location = New System.Drawing.Point(274, 90)
-        Me.txtRemito.Name = "txtRemito"
-        Me.txtRemito.ReadOnly = True
-        Me.txtRemito.Size = New System.Drawing.Size(116, 20)
-        Me.txtRemito.TabIndex = 1
-        '
-        'txtFactura
-        '
-        Me.txtFactura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtFactura.Location = New System.Drawing.Point(274, 122)
-        Me.txtFactura.Name = "txtFactura"
-        Me.txtFactura.ReadOnly = True
-        Me.txtFactura.Size = New System.Drawing.Size(116, 20)
-        Me.txtFactura.TabIndex = 1
-        '
-        'txtFechaFactura
-        '
-        Me.txtFechaFactura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtFechaFactura.Location = New System.Drawing.Point(402, 122)
-        Me.txtFechaFactura.Mask = "00/00/0000"
-        Me.txtFechaFactura.Name = "txtFechaFactura"
-        Me.txtFechaFactura.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaFactura.ReadOnly = True
-        Me.txtFechaFactura.Size = New System.Drawing.Size(93, 20)
-        Me.txtFechaFactura.TabIndex = 2
-        Me.txtFechaFactura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtCarpeta
-        '
-        Me.txtCarpeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtCarpeta.Location = New System.Drawing.Point(274, 154)
-        Me.txtCarpeta.Name = "txtCarpeta"
-        Me.txtCarpeta.ReadOnly = True
-        Me.txtCarpeta.Size = New System.Drawing.Size(116, 20)
-        Me.txtCarpeta.TabIndex = 1
+        Me.txtFechaOrdenCompra.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtFechaOrdenCompra.Location = New System.Drawing.Point(402, 26)
+        Me.txtFechaOrdenCompra.Mask = "00/00/0000"
+        Me.txtFechaOrdenCompra.Name = "txtFechaOrdenCompra"
+        Me.txtFechaOrdenCompra.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaOrdenCompra.ReadOnly = True
+        Me.txtFechaOrdenCompra.Size = New System.Drawing.Size(93, 20)
+        Me.txtFechaOrdenCompra.TabIndex = 2
+        Me.txtFechaOrdenCompra.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtNombreProveedor
         '
@@ -273,13 +169,123 @@ Partial Class ConsultaDatosFactura
         Me.txtNombreProveedor.Size = New System.Drawing.Size(223, 20)
         Me.txtNombreProveedor.TabIndex = 1
         '
+        'txtCarpeta
+        '
+        Me.txtCarpeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtCarpeta.Location = New System.Drawing.Point(274, 154)
+        Me.txtCarpeta.Name = "txtCarpeta"
+        Me.txtCarpeta.ReadOnly = True
+        Me.txtCarpeta.Size = New System.Drawing.Size(116, 20)
+        Me.txtCarpeta.TabIndex = 1
+        Me.txtCarpeta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtFactura
+        '
+        Me.txtFactura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtFactura.Location = New System.Drawing.Point(274, 122)
+        Me.txtFactura.Name = "txtFactura"
+        Me.txtFactura.ReadOnly = True
+        Me.txtFactura.Size = New System.Drawing.Size(116, 20)
+        Me.txtFactura.TabIndex = 1
+        Me.txtFactura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtRemito
+        '
+        Me.txtRemito.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtRemito.Location = New System.Drawing.Point(274, 90)
+        Me.txtRemito.Name = "txtRemito"
+        Me.txtRemito.ReadOnly = True
+        Me.txtRemito.Size = New System.Drawing.Size(116, 20)
+        Me.txtRemito.TabIndex = 1
+        Me.txtRemito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtInformeRecepcion
+        '
+        Me.txtInformeRecepcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtInformeRecepcion.Location = New System.Drawing.Point(274, 58)
+        Me.txtInformeRecepcion.Name = "txtInformeRecepcion"
+        Me.txtInformeRecepcion.ReadOnly = True
+        Me.txtInformeRecepcion.Size = New System.Drawing.Size(116, 20)
+        Me.txtInformeRecepcion.TabIndex = 1
+        Me.txtInformeRecepcion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtOrdenCompra
+        '
+        Me.txtOrdenCompra.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtOrdenCompra.Location = New System.Drawing.Point(274, 26)
+        Me.txtOrdenCompra.Name = "txtOrdenCompra"
+        Me.txtOrdenCompra.ReadOnly = True
+        Me.txtOrdenCompra.Size = New System.Drawing.Size(116, 20)
+        Me.txtOrdenCompra.TabIndex = 1
+        Me.txtOrdenCompra.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label8.Location = New System.Drawing.Point(125, 188)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(77, 18)
+        Me.Label8.TabIndex = 0
+        Me.Label8.Text = "Proveedor:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label7.Location = New System.Drawing.Point(125, 156)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(60, 18)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "Carpeta:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label6.Location = New System.Drawing.Point(125, 124)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(57, 18)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Factura:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label5.Location = New System.Drawing.Point(125, 92)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(57, 18)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Remito:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label4.Location = New System.Drawing.Point(125, 60)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(144, 18)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Informe de Recepción"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label3.Location = New System.Drawing.Point(125, 28)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(121, 18)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "Orden de Compra:"
+        '
         'DGVArticulos
         '
         Me.DGVArticulos.AllowUserToAddRows = False
         Me.DGVArticulos.AllowUserToDeleteRows = False
         Me.DGVArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVArticulos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Orden, Me.Producto, Me.Descripcion, Me.Cantidad, Me.Precio})
-        Me.DGVArticulos.Location = New System.Drawing.Point(60, 302)
+        Me.DGVArticulos.Location = New System.Drawing.Point(66, 243)
         Me.DGVArticulos.Name = "DGVArticulos"
         Me.DGVArticulos.ReadOnly = True
         Me.DGVArticulos.Size = New System.Drawing.Size(713, 172)
@@ -331,7 +337,6 @@ Partial Class ConsultaDatosFactura
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(833, 534)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.DGVArticulos)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.Name = "ConsultaDatosFactura"

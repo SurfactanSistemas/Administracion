@@ -42,14 +42,14 @@ Partial Class CuentaCorrientePantalla
         Me.opcCompleto = New System.Windows.Forms.RadioButton()
         Me.opcPendiente = New System.Windows.Forms.RadioButton()
         Me.boxPantallaProveedores = New System.Windows.Forms.GroupBox()
+        Me.lstAyuda = New Administracion.CustomListBox()
+        Me.txtAyuda = New Administracion.CustomTextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.CBProveedorSelectivo = New System.Windows.Forms.CheckBox()
         Me.btnCancela = New Administracion.CustomButton()
-        Me.lstAyuda = New Administracion.CustomListBox()
-        Me.txtAyuda = New Administracion.CustomTextBox()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.txtSaldo = New Administracion.CustomTextBox()
         Me.CustomLabel2 = New Administracion.CustomLabel()
@@ -179,6 +179,29 @@ Partial Class CuentaCorrientePantalla
         Me.boxPantallaProveedores.TabStop = False
         Me.boxPantallaProveedores.Visible = False
         '
+        'lstAyuda
+        '
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(61, 39)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(417, 303)
+        Me.lstAyuda.TabIndex = 29
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Cleanable = False
+        Me.txtAyuda.Empty = True
+        Me.txtAyuda.EnterIndex = -1
+        Me.txtAyuda.LabelAssociationKey = -1
+        Me.txtAyuda.Location = New System.Drawing.Point(61, 13)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
+        Me.txtAyuda.TabIndex = 28
+        Me.txtAyuda.Validator = Administracion.ValidatorType.None
+        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -252,29 +275,6 @@ Partial Class CuentaCorrientePantalla
         Me.btnCancela.Size = New System.Drawing.Size(93, 50)
         Me.btnCancela.TabIndex = 28
         Me.btnCancela.UseVisualStyleBackColor = False
-        '
-        'lstAyuda
-        '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(61, 39)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(417, 303)
-        Me.lstAyuda.TabIndex = 29
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Cleanable = False
-        Me.txtAyuda.Empty = True
-        Me.txtAyuda.EnterIndex = -1
-        Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(61, 13)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
-        Me.txtAyuda.TabIndex = 28
-        Me.txtAyuda.Validator = Administracion.ValidatorType.None
         '
         'btnConsulta
         '
@@ -350,9 +350,11 @@ Partial Class CuentaCorrientePantalla
         '
         'txtProveedor
         '
+        Me.txtProveedor.BackColor = System.Drawing.SystemColors.Control
         Me.txtProveedor.Cleanable = False
         Me.txtProveedor.Empty = True
         Me.txtProveedor.EnterIndex = -1
+        Me.txtProveedor.ForeColor = System.Drawing.SystemColors.WindowText
         Me.txtProveedor.LabelAssociationKey = -1
         Me.txtProveedor.Location = New System.Drawing.Point(136, 73)
         Me.txtProveedor.MaxLength = 11

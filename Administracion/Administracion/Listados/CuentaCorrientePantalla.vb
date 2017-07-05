@@ -10,30 +10,6 @@ Public Class CuentaCorrientePantalla
     Dim Aa As Integer
     Private _NrosInternos As New List(Of Object)
 
-    Private Sub txtproveedor_KeyPress(ByVal sender As Object, _
-                    ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                    Handles txtProveedor.KeyPress
-        ' Moverlo a un keydown
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            ' DADA que no rompa cuando el codigo no existe y usar la funcion "ceros" para completar??
-            Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
-            If IsNothing(CampoProveedor) Then
-                MsgBox("Proveedor incorrecto")
-                txtProveedor.Focus()
-            Else
-                mostrarProveedor(CampoProveedor)
-                txtRazon.Focus()
-            End If
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtRazon.Focus()
-        End If
-        If Not IsNumeric(e.KeyChar) Then
-            e.Handled = True
-        End If
-    End Sub
-
     Private Sub CuentaCorrientePantalla_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         dataGridBuilder = New GridBuilder(GRilla)
@@ -288,5 +264,33 @@ Public Class CuentaCorrientePantalla
             .ShowDialog()
 
         End With
+    End Sub
+
+    Private Sub txtProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
+            If IsNothing(CampoProveedor) Then
+                MsgBox("Proveedor incorrecto")
+                txtProveedor.Focus()
+            Else
+                mostrarProveedor(CampoProveedor)
+
+                If GRilla.Rows.Count > 0 Then
+                    GRilla.CurrentCell = GRilla.Rows(0).Cells(0)
+                Else
+                    txtProveedor.Focus()
+                End If
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            e.Handled = True
+            txtRazon.Focus()
+        End If
+        If Not IsNumeric(e.KeyCode) Then
+            e.Handled = True
+        End If
     End Sub
 End Class

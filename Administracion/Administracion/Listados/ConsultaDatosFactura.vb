@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports ClasesCompartidas
+Imports System.Text.RegularExpressions
 
 Public Class ConsultaDatosFactura
 
@@ -57,7 +58,7 @@ Public Class ConsultaDatosFactura
 
                     txtFactura.Text = .Item("Numero").ToString
                     txtFechaFactura.Text = .Item("Fecha").ToString
-                    txtRemito.Text = .Item("Remito").ToString
+                    txtRemito.Text = Trim(Regex.Replace(dr.Item("Remito").ToString, "\,\d+", ""))
                     XProveedor = .Item("Proveedor").ToString
 
                 End If
@@ -93,6 +94,8 @@ Public Class ConsultaDatosFactura
                         txtNombreProveedor.Text = Trim(.Item("Nombre").ToString)
 
                         Exit For
+                    Else
+                        XCs = ""
                     End If
                 End With
 
@@ -186,5 +189,19 @@ Public Class ConsultaDatosFactura
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Me.Close()
+    End Sub
+
+    Private Sub ConsultaDatosFactura_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        With DGVArticulos
+            _AlinearDerecha(.Columns(0))
+            _AlinearDerecha(.Columns(3))
+            _AlinearDerecha(.Columns(4))
+        End With
+
+    End Sub
+
+    Private Sub _AlinearDerecha(ByRef columna As DataGridViewColumn)
+        columna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
     End Sub
 End Class
