@@ -22,6 +22,7 @@ Partial Class ListadoRecibos
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txthastafecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.CustomLabel2 = New Administracion.CustomLabel()
@@ -34,6 +35,7 @@ Partial Class ListadoRecibos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -95,6 +97,7 @@ Partial Class ListadoRecibos
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(125, 37)
         Me.btnCancela.TabIndex = 41
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -112,6 +115,7 @@ Partial Class ListadoRecibos
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(125, 37)
         Me.btnAcepta.TabIndex = 40
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'opcImpesora
@@ -215,4 +219,5 @@ Partial Class ListadoRecibos
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

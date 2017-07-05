@@ -22,6 +22,7 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.opcPantalla = New System.Windows.Forms.RadioButton()
         Me.opcImpesora = New System.Windows.Forms.RadioButton()
         Me.btnConsulta = New Administracion.CustomButton()
@@ -37,6 +38,7 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -85,6 +87,7 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(120, 40)
         Me.btnConsulta.TabIndex = 22
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consulta de Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'lstAyuda
@@ -129,6 +132,7 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(120, 40)
         Me.btnCancela.TabIndex = 19
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -148,6 +152,7 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(120, 41)
         Me.btnAcepta.TabIndex = 18
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'txtHastaProveedor
@@ -161,6 +166,7 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.txtHastaProveedor.Name = "txtHastaProveedor"
         Me.txtHastaProveedor.Size = New System.Drawing.Size(100, 20)
         Me.txtHastaProveedor.TabIndex = 15
+        Me.ToolTip1.SetToolTip(Me.txtHastaProveedor, "Hasta Código de Proveedor")
         Me.txtHastaProveedor.Validator = Administracion.ValidatorType.None
         '
         'txtDesdeProveedor
@@ -174,6 +180,7 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
         Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
         Me.txtDesdeProveedor.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Desde Código de Proveedor")
         Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel2
@@ -282,4 +289,5 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

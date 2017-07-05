@@ -22,10 +22,15 @@ Partial Class RubrosProveedorABM
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.txtCodigo = New Administracion.CustomTextBox()
+        Me.CustomLabel2 = New Administracion.CustomLabel()
+        Me.txtDescripcion = New Administracion.CustomTextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSiguienteRegistro = New System.Windows.Forms.Button()
         Me.btnPrimerRegistro = New System.Windows.Forms.Button()
@@ -40,10 +45,7 @@ Partial Class RubrosProveedorABM
         Me.txtFiltrar = New System.Windows.Forms.TextBox()
         Me.LBConsulta_Filtrada = New System.Windows.Forms.ListBox()
         Me.LBConsulta = New System.Windows.Forms.ListBox()
-        Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.txtCodigo = New Administracion.CustomTextBox()
-        Me.CustomLabel2 = New Administracion.CustomLabel()
-        Me.txtDescripcion = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -93,6 +95,58 @@ Partial Class RubrosProveedorABM
         Me.Panel2.Size = New System.Drawing.Size(582, 54)
         Me.Panel2.TabIndex = 32
         '
+        'CustomLabel1
+        '
+        Me.CustomLabel1.AutoSize = True
+        Me.CustomLabel1.ControlAssociationKey = 1
+        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel1.Location = New System.Drawing.Point(29, 17)
+        Me.CustomLabel1.Name = "CustomLabel1"
+        Me.CustomLabel1.Size = New System.Drawing.Size(51, 18)
+        Me.CustomLabel1.TabIndex = 29
+        Me.CustomLabel1.Text = "Codigo"
+        '
+        'txtCodigo
+        '
+        Me.txtCodigo.Cleanable = True
+        Me.txtCodigo.Empty = False
+        Me.txtCodigo.EnterIndex = 1
+        Me.txtCodigo.LabelAssociationKey = 1
+        Me.txtCodigo.Location = New System.Drawing.Point(86, 16)
+        Me.txtCodigo.MaxLength = 6
+        Me.txtCodigo.Name = "txtCodigo"
+        Me.txtCodigo.Size = New System.Drawing.Size(79, 20)
+        Me.txtCodigo.TabIndex = 27
+        Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtCodigo, "Doble Click: Abrir Consulta de Rubros de Proveedores")
+        Me.txtCodigo.Validator = Administracion.ValidatorType.Positive
+        '
+        'CustomLabel2
+        '
+        Me.CustomLabel2.AutoSize = True
+        Me.CustomLabel2.ControlAssociationKey = 2
+        Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel2.Location = New System.Drawing.Point(177, 17)
+        Me.CustomLabel2.Name = "CustomLabel2"
+        Me.CustomLabel2.Size = New System.Drawing.Size(80, 18)
+        Me.CustomLabel2.TabIndex = 30
+        Me.CustomLabel2.Text = "Descripcion"
+        '
+        'txtDescripcion
+        '
+        Me.txtDescripcion.Cleanable = True
+        Me.txtDescripcion.Empty = False
+        Me.txtDescripcion.EnterIndex = 2
+        Me.txtDescripcion.LabelAssociationKey = 2
+        Me.txtDescripcion.Location = New System.Drawing.Point(260, 16)
+        Me.txtDescripcion.MaxLength = 50
+        Me.txtDescripcion.Name = "txtDescripcion"
+        Me.txtDescripcion.Size = New System.Drawing.Size(295, 20)
+        Me.txtDescripcion.TabIndex = 28
+        Me.txtDescripcion.Validator = Administracion.ValidatorType.NotEmpty
+        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.btnSiguienteRegistro)
@@ -123,6 +177,7 @@ Partial Class RubrosProveedorABM
         Me.btnSiguienteRegistro.Name = "btnSiguienteRegistro"
         Me.btnSiguienteRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnSiguienteRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnSiguienteRegistro, "SIguiente Registro")
         Me.btnSiguienteRegistro.UseVisualStyleBackColor = True
         '
         'btnPrimerRegistro
@@ -141,6 +196,7 @@ Partial Class RubrosProveedorABM
         Me.btnPrimerRegistro.Name = "btnPrimerRegistro"
         Me.btnPrimerRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnPrimerRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnPrimerRegistro, "Primer Registro")
         Me.btnPrimerRegistro.UseVisualStyleBackColor = True
         '
         'btnUltimoRegistro
@@ -159,6 +215,7 @@ Partial Class RubrosProveedorABM
         Me.btnUltimoRegistro.Name = "btnUltimoRegistro"
         Me.btnUltimoRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnUltimoRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnUltimoRegistro, "Ultimo Registro")
         Me.btnUltimoRegistro.UseVisualStyleBackColor = False
         '
         'btnAnteriorRegistro
@@ -177,6 +234,7 @@ Partial Class RubrosProveedorABM
         Me.btnAnteriorRegistro.Name = "btnAnteriorRegistro"
         Me.btnAnteriorRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnAnteriorRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnAnteriorRegistro, "Anterior Registro")
         Me.btnAnteriorRegistro.UseVisualStyleBackColor = True
         '
         'btnListado
@@ -195,6 +253,7 @@ Partial Class RubrosProveedorABM
         Me.btnListado.Name = "btnListado"
         Me.btnListado.Size = New System.Drawing.Size(105, 42)
         Me.btnListado.TabIndex = 37
+        Me.ToolTip1.SetToolTip(Me.btnListado, "Listado")
         Me.btnListado.UseVisualStyleBackColor = True
         '
         'btnLimpiar
@@ -213,6 +272,7 @@ Partial Class RubrosProveedorABM
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(105, 42)
         Me.btnLimpiar.TabIndex = 38
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnCerrar
@@ -231,6 +291,7 @@ Partial Class RubrosProveedorABM
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(105, 42)
         Me.btnCerrar.TabIndex = 36
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'btnConsulta
@@ -249,6 +310,7 @@ Partial Class RubrosProveedorABM
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(105, 42)
         Me.btnConsulta.TabIndex = 34
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Rubros de Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnEliminar
@@ -267,6 +329,7 @@ Partial Class RubrosProveedorABM
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(105, 42)
         Me.btnEliminar.TabIndex = 35
+        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar Rubro")
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'btnAgregar
@@ -285,6 +348,7 @@ Partial Class RubrosProveedorABM
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(105, 42)
         Me.btnAgregar.TabIndex = 33
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'txtFiltrar
@@ -310,57 +374,6 @@ Partial Class RubrosProveedorABM
         Me.LBConsulta.Name = "LBConsulta"
         Me.LBConsulta.Size = New System.Drawing.Size(538, 121)
         Me.LBConsulta.TabIndex = 40
-        '
-        'CustomLabel1
-        '
-        Me.CustomLabel1.AutoSize = True
-        Me.CustomLabel1.ControlAssociationKey = 1
-        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(29, 17)
-        Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(51, 18)
-        Me.CustomLabel1.TabIndex = 29
-        Me.CustomLabel1.Text = "Codigo"
-        '
-        'txtCodigo
-        '
-        Me.txtCodigo.Cleanable = True
-        Me.txtCodigo.Empty = False
-        Me.txtCodigo.EnterIndex = 1
-        Me.txtCodigo.LabelAssociationKey = 1
-        Me.txtCodigo.Location = New System.Drawing.Point(86, 16)
-        Me.txtCodigo.MaxLength = 6
-        Me.txtCodigo.Name = "txtCodigo"
-        Me.txtCodigo.Size = New System.Drawing.Size(79, 20)
-        Me.txtCodigo.TabIndex = 27
-        Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCodigo.Validator = Administracion.ValidatorType.Positive
-        '
-        'CustomLabel2
-        '
-        Me.CustomLabel2.AutoSize = True
-        Me.CustomLabel2.ControlAssociationKey = 2
-        Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(177, 17)
-        Me.CustomLabel2.Name = "CustomLabel2"
-        Me.CustomLabel2.Size = New System.Drawing.Size(80, 18)
-        Me.CustomLabel2.TabIndex = 30
-        Me.CustomLabel2.Text = "Descripcion"
-        '
-        'txtDescripcion
-        '
-        Me.txtDescripcion.Cleanable = True
-        Me.txtDescripcion.Empty = False
-        Me.txtDescripcion.EnterIndex = 2
-        Me.txtDescripcion.LabelAssociationKey = 2
-        Me.txtDescripcion.Location = New System.Drawing.Point(260, 16)
-        Me.txtDescripcion.MaxLength = 50
-        Me.txtDescripcion.Name = "txtDescripcion"
-        Me.txtDescripcion.Size = New System.Drawing.Size(295, 20)
-        Me.txtDescripcion.TabIndex = 28
-        Me.txtDescripcion.Validator = Administracion.ValidatorType.NotEmpty
         '
         'RubrosProveedorABM
         '
@@ -415,4 +428,5 @@ Partial Class RubrosProveedorABM
     Friend WithEvents txtFiltrar As System.Windows.Forms.TextBox
     Friend WithEvents LBConsulta_Filtrada As System.Windows.Forms.ListBox
     Friend WithEvents LBConsulta As System.Windows.Forms.ListBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

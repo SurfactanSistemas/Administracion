@@ -22,6 +22,7 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.txtAyuda = New Administracion.CustomTextBox()
@@ -41,13 +42,14 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFechaEmision
         '
-        Me.txtFechaEmision.Location = New System.Drawing.Point(340, 15)
+        Me.txtFechaEmision.Location = New System.Drawing.Point(341, 15)
         Me.txtFechaEmision.Mask = "##/##/####"
         Me.txtFechaEmision.Name = "txtFechaEmision"
         Me.txtFechaEmision.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -60,7 +62,7 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(218, 16)
+        Me.CustomLabel3.Location = New System.Drawing.Point(219, 16)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
         Me.CustomLabel3.TabIndex = 56
@@ -93,10 +95,11 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(412, 262)
+        Me.btnConsulta.Location = New System.Drawing.Point(411, 258)
         Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(120, 40)
+        Me.btnConsulta.Size = New System.Drawing.Size(120, 47)
         Me.btnConsulta.TabIndex = 54
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnCancela
@@ -113,10 +116,11 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(270, 262)
+        Me.btnCancela.Location = New System.Drawing.Point(269, 258)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(120, 40)
+        Me.btnCancela.Size = New System.Drawing.Size(120, 47)
         Me.btnCancela.TabIndex = 53
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -133,10 +137,11 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAcepta.LabelAssociationKey = -1
-        Me.btnAcepta.Location = New System.Drawing.Point(119, 261)
+        Me.btnAcepta.Location = New System.Drawing.Point(118, 257)
         Me.btnAcepta.Name = "btnAcepta"
-        Me.btnAcepta.Size = New System.Drawing.Size(120, 41)
+        Me.btnAcepta.Size = New System.Drawing.Size(120, 48)
         Me.btnAcepta.TabIndex = 52
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'txtHastaProveedor
@@ -145,11 +150,12 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.txtHastaProveedor.Empty = True
         Me.txtHastaProveedor.EnterIndex = -1
         Me.txtHastaProveedor.LabelAssociationKey = -1
-        Me.txtHastaProveedor.Location = New System.Drawing.Point(340, 90)
+        Me.txtHastaProveedor.Location = New System.Drawing.Point(341, 90)
         Me.txtHastaProveedor.MaxLength = 11
         Me.txtHastaProveedor.Name = "txtHastaProveedor"
         Me.txtHastaProveedor.Size = New System.Drawing.Size(106, 20)
         Me.txtHastaProveedor.TabIndex = 49
+        Me.ToolTip1.SetToolTip(Me.txtHastaProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtHastaProveedor.Validator = Administracion.ValidatorType.None
         '
         'txtDesdeProveedor
@@ -158,7 +164,7 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.txtDesdeProveedor.Empty = True
         Me.txtDesdeProveedor.EnterIndex = -1
         Me.txtDesdeProveedor.LabelAssociationKey = -1
-        Me.txtDesdeProveedor.Location = New System.Drawing.Point(340, 52)
+        Me.txtDesdeProveedor.Location = New System.Drawing.Point(341, 52)
         Me.txtDesdeProveedor.MaxLength = 11
         Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
         Me.txtDesdeProveedor.Size = New System.Drawing.Size(106, 20)
@@ -171,7 +177,7 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(204, 91)
+        Me.CustomLabel2.Location = New System.Drawing.Point(205, 91)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(110, 18)
         Me.CustomLabel2.TabIndex = 51
@@ -183,7 +189,7 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(199, 53)
+        Me.CustomLabel1.Location = New System.Drawing.Point(200, 53)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(115, 18)
         Me.CustomLabel1.TabIndex = 50
@@ -206,7 +212,7 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.opcImpesora.AutoSize = True
         Me.opcImpesora.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.opcImpesora.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcImpesora.Location = New System.Drawing.Point(354, 164)
+        Me.opcImpesora.Location = New System.Drawing.Point(355, 164)
         Me.opcImpesora.Name = "opcImpesora"
         Me.opcImpesora.Size = New System.Drawing.Size(89, 22)
         Me.opcImpesora.TabIndex = 59
@@ -219,7 +225,7 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.opcPantalla.AutoSize = True
         Me.opcPantalla.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.opcPantalla.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcPantalla.Location = New System.Drawing.Point(231, 164)
+        Me.opcPantalla.Location = New System.Drawing.Point(232, 164)
         Me.opcPantalla.Name = "opcPantalla"
         Me.opcPantalla.Size = New System.Drawing.Size(76, 22)
         Me.opcPantalla.TabIndex = 58
@@ -229,12 +235,13 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         '
         'txtDias
         '
-        Me.txtDias.Location = New System.Drawing.Point(342, 127)
+        Me.txtDias.Location = New System.Drawing.Point(343, 127)
         Me.txtDias.MaxLength = 4
         Me.txtDias.Name = "txtDias"
         Me.txtDias.Size = New System.Drawing.Size(106, 20)
         Me.txtDias.TabIndex = 61
         Me.txtDias.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtDias, "Doble Click: Abrir Consulta de Proveedores")
         '
         'CustomLabel4
         '
@@ -242,7 +249,7 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.CustomLabel4.ControlAssociationKey = -1
         Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(280, 128)
+        Me.CustomLabel4.Location = New System.Drawing.Point(281, 128)
         Me.CustomLabel4.Name = "CustomLabel4"
         Me.CustomLabel4.Size = New System.Drawing.Size(34, 18)
         Me.CustomLabel4.TabIndex = 60
@@ -338,4 +345,5 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

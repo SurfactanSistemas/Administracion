@@ -22,6 +22,7 @@ Partial Class ListadoPagosPosdatados
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtHastaBanco = New System.Windows.Forms.TextBox()
         Me.txtDesdeBanco = New System.Windows.Forms.TextBox()
         Me.btnConsulta = New Administracion.CustomButton()
@@ -41,6 +42,7 @@ Partial Class ListadoPagosPosdatados
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -53,6 +55,7 @@ Partial Class ListadoPagosPosdatados
         Me.txtHastaBanco.Size = New System.Drawing.Size(88, 20)
         Me.txtHastaBanco.TabIndex = 60
         Me.txtHastaBanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtHastaBanco, "Doble Click: Abrir Consulta de Bancos")
         '
         'txtDesdeBanco
         '
@@ -62,6 +65,7 @@ Partial Class ListadoPagosPosdatados
         Me.txtDesdeBanco.Size = New System.Drawing.Size(88, 20)
         Me.txtDesdeBanco.TabIndex = 59
         Me.txtDesdeBanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtDesdeBanco, "Doble Click: Abrir Consulta de Bancos")
         '
         'btnConsulta
         '
@@ -77,10 +81,11 @@ Partial Class ListadoPagosPosdatados
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(313, 194)
+        Me.btnConsulta.Location = New System.Drawing.Point(288, 194)
         Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(120, 37)
+        Me.btnConsulta.Size = New System.Drawing.Size(109, 37)
         Me.btnConsulta.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Banco")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnCancela
@@ -94,10 +99,11 @@ Partial Class ListadoPagosPosdatados
         Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancela.Location = New System.Drawing.Point(165, 194)
+        Me.btnCancela.Location = New System.Drawing.Point(171, 194)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(125, 37)
+        Me.btnCancela.Size = New System.Drawing.Size(109, 37)
         Me.btnCancela.TabIndex = 57
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -111,10 +117,11 @@ Partial Class ListadoPagosPosdatados
         Me.btnAcepta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAcepta.Location = New System.Drawing.Point(15, 194)
+        Me.btnAcepta.Location = New System.Drawing.Point(54, 194)
         Me.btnAcepta.Name = "btnAcepta"
-        Me.btnAcepta.Size = New System.Drawing.Size(125, 37)
+        Me.btnAcepta.Size = New System.Drawing.Size(109, 37)
         Me.btnAcepta.TabIndex = 56
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'opcImpesora
@@ -324,4 +331,5 @@ Partial Class ListadoPagosPosdatados
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

@@ -225,6 +225,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
         Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
         Me.txtDesdeProveedor.TabIndex = 49
+        Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel1

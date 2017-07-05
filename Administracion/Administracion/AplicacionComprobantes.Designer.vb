@@ -23,14 +23,14 @@ Partial Class AplicacionComprobantes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -68,7 +68,7 @@ Partial Class AplicacionComprobantes
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(784, 50)
+        Me.Panel1.Size = New System.Drawing.Size(731, 50)
         Me.Panel1.TabIndex = 38
         '
         'Label2
@@ -76,7 +76,7 @@ Partial Class AplicacionComprobantes
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(613, 9)
+        Me.Label2.Location = New System.Drawing.Point(546, 9)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -104,7 +104,7 @@ Partial Class AplicacionComprobantes
         Me.Panel2.Controls.Add(Me.CustomLabel2)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(784, 336)
+        Me.Panel2.Size = New System.Drawing.Size(731, 336)
         Me.Panel2.TabIndex = 39
         '
         'dtgCuentas
@@ -115,14 +115,14 @@ Partial Class AplicacionComprobantes
         Me.dtgCuentas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Fecha, Me.Importe, Me.Saldo, Me.Aplica})
         Me.dtgCuentas.Location = New System.Drawing.Point(17, 51)
         Me.dtgCuentas.Name = "dtgCuentas"
-        Me.dtgCuentas.Size = New System.Drawing.Size(750, 272)
+        Me.dtgCuentas.Size = New System.Drawing.Size(695, 272)
         Me.dtgCuentas.StandardTab = True
         Me.dtgCuentas.TabIndex = 36
         '
         'Tipo
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle1
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
@@ -130,8 +130,8 @@ Partial Class AplicacionComprobantes
         '
         'Letra
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Letra.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Letra.DefaultCellStyle = DataGridViewCellStyle2
         Me.Letra.HeaderText = "Letra"
         Me.Letra.Name = "Letra"
         Me.Letra.ReadOnly = True
@@ -139,8 +139,8 @@ Partial Class AplicacionComprobantes
         '
         'Punto
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
         Me.Punto.HeaderText = "Punto"
         Me.Punto.Name = "Punto"
         Me.Punto.ReadOnly = True
@@ -148,40 +148,40 @@ Partial Class AplicacionComprobantes
         '
         'Numero
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
         Me.Numero.HeaderText = "Numero"
         Me.Numero.Name = "Numero"
         Me.Numero.ReadOnly = True
         '
         'Fecha
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
         '
         'Importe
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle6
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
         Me.Importe.ReadOnly = True
         '
         'Saldo
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle7
         Me.Saldo.HeaderText = "Saldo"
         Me.Saldo.Name = "Saldo"
         Me.Saldo.ReadOnly = True
         '
         'Aplica
         '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Aplica.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Aplica.DefaultCellStyle = DataGridViewCellStyle8
         Me.Aplica.HeaderText = "Aplica"
         Me.Aplica.Name = "Aplica"
         '
@@ -205,8 +205,9 @@ Partial Class AplicacionComprobantes
         Me.txtProveedor.LabelAssociationKey = -1
         Me.txtProveedor.Location = New System.Drawing.Point(95, 16)
         Me.txtProveedor.Name = "txtProveedor"
-        Me.txtProveedor.Size = New System.Drawing.Size(101, 20)
+        Me.txtProveedor.Size = New System.Drawing.Size(125, 20)
         Me.txtProveedor.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.txtProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtProveedor.Validator = Administracion.ValidatorType.None
         '
         'txtSaldo
@@ -215,7 +216,7 @@ Partial Class AplicacionComprobantes
         Me.txtSaldo.Empty = True
         Me.txtSaldo.EnterIndex = -1
         Me.txtSaldo.LabelAssociationKey = -1
-        Me.txtSaldo.Location = New System.Drawing.Point(642, 16)
+        Me.txtSaldo.Location = New System.Drawing.Point(583, 16)
         Me.txtSaldo.Name = "txtSaldo"
         Me.txtSaldo.ReadOnly = True
         Me.txtSaldo.Size = New System.Drawing.Size(126, 20)
@@ -230,9 +231,9 @@ Partial Class AplicacionComprobantes
         Me.txtRazon.Empty = True
         Me.txtRazon.EnterIndex = -1
         Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(202, 16)
+        Me.txtRazon.Location = New System.Drawing.Point(226, 16)
         Me.txtRazon.Name = "txtRazon"
-        Me.txtRazon.Size = New System.Drawing.Size(375, 20)
+        Me.txtRazon.Size = New System.Drawing.Size(300, 20)
         Me.txtRazon.TabIndex = 33
         Me.txtRazon.Validator = Administracion.ValidatorType.None
         '
@@ -242,7 +243,7 @@ Partial Class AplicacionComprobantes
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(594, 17)
+        Me.CustomLabel2.Location = New System.Drawing.Point(535, 17)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(42, 18)
         Me.CustomLabel2.TabIndex = 35
@@ -262,7 +263,7 @@ Partial Class AplicacionComprobantes
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(278, 399)
+        Me.btnCancela.Location = New System.Drawing.Point(251, 399)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(103, 54)
         Me.btnCancela.TabIndex = 3
@@ -283,7 +284,7 @@ Partial Class AplicacionComprobantes
         Me.btnGraba.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnGraba.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnGraba.LabelAssociationKey = -1
-        Me.btnGraba.Location = New System.Drawing.Point(152, 399)
+        Me.btnGraba.Location = New System.Drawing.Point(125, 399)
         Me.btnGraba.Name = "btnGraba"
         Me.btnGraba.Size = New System.Drawing.Size(103, 54)
         Me.btnGraba.TabIndex = 2
@@ -304,7 +305,7 @@ Partial Class AplicacionComprobantes
         Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnProceso.LabelAssociationKey = -1
-        Me.btnProceso.Location = New System.Drawing.Point(530, 399)
+        Me.btnProceso.Location = New System.Drawing.Point(503, 399)
         Me.btnProceso.Name = "btnProceso"
         Me.btnProceso.Size = New System.Drawing.Size(103, 54)
         Me.btnProceso.TabIndex = 1
@@ -325,7 +326,7 @@ Partial Class AplicacionComprobantes
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(404, 399)
+        Me.btnConsulta.Location = New System.Drawing.Point(377, 399)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(103, 54)
         Me.btnConsulta.TabIndex = 0
@@ -361,7 +362,7 @@ Partial Class AplicacionComprobantes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 465)
+        Me.ClientSize = New System.Drawing.Size(731, 465)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)

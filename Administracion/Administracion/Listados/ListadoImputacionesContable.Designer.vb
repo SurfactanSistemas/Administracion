@@ -22,6 +22,7 @@ Partial Class ListadoImputacionesContable
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txthastafecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.CustomLabel2 = New Administracion.CustomLabel()
@@ -47,6 +48,7 @@ Partial Class ListadoImputacionesContable
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -180,6 +182,7 @@ Partial Class ListadoImputacionesContable
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(120, 37)
         Me.btnConsulta.TabIndex = 41
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Cuentas Contables")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnCancela
@@ -197,6 +200,7 @@ Partial Class ListadoImputacionesContable
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(125, 37)
         Me.btnCancela.TabIndex = 40
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -214,6 +218,7 @@ Partial Class ListadoImputacionesContable
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(125, 37)
         Me.btnAcepta.TabIndex = 39
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'txtAyuda
@@ -292,6 +297,7 @@ Partial Class ListadoImputacionesContable
         Me.txtDesdeCuenta.Name = "txtDesdeCuenta"
         Me.txtDesdeCuenta.Size = New System.Drawing.Size(106, 20)
         Me.txtDesdeCuenta.TabIndex = 45
+        Me.ToolTip1.SetToolTip(Me.txtDesdeCuenta, "Doble Click: Abrir Consulta de Cuentas Contables")
         '
         'txtHastaCuenta
         '
@@ -300,6 +306,7 @@ Partial Class ListadoImputacionesContable
         Me.txtHastaCuenta.Name = "txtHastaCuenta"
         Me.txtHastaCuenta.Size = New System.Drawing.Size(106, 20)
         Me.txtHastaCuenta.TabIndex = 46
+        Me.ToolTip1.SetToolTip(Me.txtHastaCuenta, "Doble Click: Abrir Consulta de Cuentas Contables")
         '
         'TipoListado
         '
@@ -409,4 +416,5 @@ Partial Class ListadoImputacionesContable
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

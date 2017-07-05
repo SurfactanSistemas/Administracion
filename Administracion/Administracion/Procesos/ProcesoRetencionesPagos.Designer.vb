@@ -22,6 +22,7 @@ Partial Class ProcesoRetencionesPagos
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
@@ -37,6 +38,7 @@ Partial Class ProcesoRetencionesPagos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -49,6 +51,7 @@ Partial Class ProcesoRetencionesPagos
         Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtHasta.Size = New System.Drawing.Size(106, 20)
         Me.txtHasta.TabIndex = 11
+        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDesde
         '
@@ -58,6 +61,7 @@ Partial Class ProcesoRetencionesPagos
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtDesde.Size = New System.Drawing.Size(106, 20)
         Me.txtDesde.TabIndex = 8
+        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'btnCancela
         '
@@ -77,6 +81,7 @@ Partial Class ProcesoRetencionesPagos
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(118, 50)
         Me.btnCancela.TabIndex = 16
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'CustomLabel4
@@ -145,6 +150,7 @@ Partial Class ProcesoRetencionesPagos
         Me.btnAceptaRetePago.Name = "btnAceptaRetePago"
         Me.btnAceptaRetePago.Size = New System.Drawing.Size(121, 50)
         Me.btnAceptaRetePago.TabIndex = 18
+        Me.ToolTip1.SetToolTip(Me.btnAceptaRetePago, "Aceptar")
         Me.btnAceptaRetePago.UseVisualStyleBackColor = True
         '
         'TipoProceso
@@ -252,4 +258,5 @@ Partial Class ProcesoRetencionesPagos
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

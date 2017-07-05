@@ -49,18 +49,10 @@ Partial Class Pagos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtFechaParidad = New System.Windows.Forms.MaskedTextBox()
-        Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnCarpetas = New Administracion.CustomButton()
-        Me.btnImprimir = New Administracion.CustomButton()
-        Me.btnCalcular = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.btnCerrar = New Administracion.CustomButton()
-        Me.btnLimpiar = New Administracion.CustomButton()
-        Me.btnAgregar = New Administracion.CustomButton()
         Me.lstSeleccion = New Administracion.CustomListBox()
         Me.CLBFiltrado = New Administracion.CustomListBox()
+        Me.txtFechaParidad = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.CustomLabel12 = New Administracion.CustomLabel()
         Me.CustomLabel13 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
@@ -93,6 +85,14 @@ Partial Class Pagos
         Me.CustomLabel10 = New Administracion.CustomLabel()
         Me.CustomLabel9 = New Administracion.CustomLabel()
         Me.txtIBCiudad = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnCarpetas = New Administracion.CustomButton()
+        Me.btnImprimir = New Administracion.CustomButton()
+        Me.btnCalcular = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnCerrar = New Administracion.CustomButton()
+        Me.btnLimpiar = New Administracion.CustomButton()
+        Me.btnAgregar = New Administracion.CustomButton()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -358,171 +358,6 @@ Partial Class Pagos
         Me.Panel2.Size = New System.Drawing.Size(828, 500)
         Me.Panel2.TabIndex = 73
         '
-        'txtFechaParidad
-        '
-        Me.txtFechaParidad.Location = New System.Drawing.Point(384, 129)
-        Me.txtFechaParidad.Mask = "00/00/0000"
-        Me.txtFechaParidad.Name = "txtFechaParidad"
-        Me.txtFechaParidad.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaParidad.Size = New System.Drawing.Size(79, 20)
-        Me.txtFechaParidad.TabIndex = 72
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(255, 22)
-        Me.txtFecha.Mask = "00/00/0000"
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFecha.Size = New System.Drawing.Size(100, 20)
-        Me.txtFecha.TabIndex = 72
-        '
-        'btnCarpetas
-        '
-        Me.btnCarpetas.BackgroundImage = Global.Administracion.My.Resources.Resources.Folder
-        Me.btnCarpetas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCarpetas.Cleanable = False
-        Me.btnCarpetas.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCarpetas.EnterIndex = -1
-        Me.btnCarpetas.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCarpetas.FlatAppearance.BorderSize = 0
-        Me.btnCarpetas.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCarpetas.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCarpetas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCarpetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCarpetas.LabelAssociationKey = -1
-        Me.btnCarpetas.Location = New System.Drawing.Point(474, 564)
-        Me.btnCarpetas.Name = "btnCarpetas"
-        Me.btnCarpetas.Size = New System.Drawing.Size(100, 54)
-        Me.btnCarpetas.TabIndex = 80
-        Me.ToolTip1.SetToolTip(Me.btnCarpetas, "Carpetas")
-        Me.btnCarpetas.UseVisualStyleBackColor = True
-        '
-        'btnImprimir
-        '
-        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
-        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnImprimir.Cleanable = False
-        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnImprimir.EnterIndex = -1
-        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.BorderSize = 0
-        Me.btnImprimir.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(362, 564)
-        Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(100, 54)
-        Me.btnImprimir.TabIndex = 79
-        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir")
-        Me.btnImprimir.UseVisualStyleBackColor = True
-        '
-        'btnCalcular
-        '
-        Me.btnCalcular.BackgroundImage = Global.Administracion.My.Resources.Resources.calculadora
-        Me.btnCalcular.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCalcular.Cleanable = False
-        Me.btnCalcular.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCalcular.EnterIndex = -1
-        Me.btnCalcular.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCalcular.FlatAppearance.BorderSize = 0
-        Me.btnCalcular.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCalcular.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCalcular.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCalcular.LabelAssociationKey = -1
-        Me.btnCalcular.Location = New System.Drawing.Point(586, 564)
-        Me.btnCalcular.Name = "btnCalcular"
-        Me.btnCalcular.Size = New System.Drawing.Size(100, 54)
-        Me.btnCalcular.TabIndex = 78
-        Me.ToolTip1.SetToolTip(Me.btnCalcular, "Calcular")
-        Me.btnCalcular.UseVisualStyleBackColor = True
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cleanable = False
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(138, 564)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(100, 54)
-        Me.btnConsulta.TabIndex = 77
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta")
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCerrar.Cleanable = False
-        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrar.EnterIndex = -1
-        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.BorderSize = 0
-        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(698, 564)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(100, 54)
-        Me.btnCerrar.TabIndex = 76
-        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cancelar y Salir")
-        Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
-        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnLimpiar.Cleanable = False
-        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLimpiar.EnterIndex = -1
-        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.BorderSize = 0
-        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(250, 564)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(100, 54)
-        Me.btnLimpiar.TabIndex = 75
-        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar")
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnAgregar
-        '
-        Me.btnAgregar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAgregar.Cleanable = False
-        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAgregar.EnterIndex = -1
-        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.BorderSize = 0
-        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(26, 564)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(100, 54)
-        Me.btnAgregar.TabIndex = 74
-        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Agregar")
-        Me.btnAgregar.UseVisualStyleBackColor = True
-        '
         'lstSeleccion
         '
         Me.lstSeleccion.Cleanable = False
@@ -547,6 +382,24 @@ Partial Class Pagos
         Me.CLBFiltrado.Size = New System.Drawing.Size(333, 108)
         Me.CLBFiltrado.TabIndex = 73
         Me.CLBFiltrado.Visible = False
+        '
+        'txtFechaParidad
+        '
+        Me.txtFechaParidad.Location = New System.Drawing.Point(384, 129)
+        Me.txtFechaParidad.Mask = "00/00/0000"
+        Me.txtFechaParidad.Name = "txtFechaParidad"
+        Me.txtFechaParidad.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaParidad.Size = New System.Drawing.Size(79, 20)
+        Me.txtFechaParidad.TabIndex = 72
+        '
+        'txtFecha
+        '
+        Me.txtFecha.Location = New System.Drawing.Point(255, 22)
+        Me.txtFecha.Mask = "00/00/0000"
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFecha.Size = New System.Drawing.Size(100, 20)
+        Me.txtFecha.TabIndex = 72
         '
         'CustomLabel12
         '
@@ -735,6 +588,7 @@ Partial Class Pagos
         Me.txtBanco.Name = "txtBanco"
         Me.txtBanco.Size = New System.Drawing.Size(76, 20)
         Me.txtBanco.TabIndex = 32
+        Me.ToolTip1.SetToolTip(Me.txtBanco, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtBanco.Validator = Administracion.ValidatorType.Numeric
         '
         'txtNombreBanco
@@ -964,6 +818,153 @@ Partial Class Pagos
         Me.txtIBCiudad.Text = "0,00"
         Me.txtIBCiudad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtIBCiudad.Validator = Administracion.ValidatorType.Float
+        '
+        'btnCarpetas
+        '
+        Me.btnCarpetas.BackgroundImage = Global.Administracion.My.Resources.Resources.Folder
+        Me.btnCarpetas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCarpetas.Cleanable = False
+        Me.btnCarpetas.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCarpetas.EnterIndex = -1
+        Me.btnCarpetas.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCarpetas.FlatAppearance.BorderSize = 0
+        Me.btnCarpetas.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCarpetas.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCarpetas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCarpetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCarpetas.LabelAssociationKey = -1
+        Me.btnCarpetas.Location = New System.Drawing.Point(474, 564)
+        Me.btnCarpetas.Name = "btnCarpetas"
+        Me.btnCarpetas.Size = New System.Drawing.Size(100, 54)
+        Me.btnCarpetas.TabIndex = 80
+        Me.ToolTip1.SetToolTip(Me.btnCarpetas, "Carpetas")
+        Me.btnCarpetas.UseVisualStyleBackColor = True
+        '
+        'btnImprimir
+        '
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cleanable = False
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.EnterIndex = -1
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.LabelAssociationKey = -1
+        Me.btnImprimir.Location = New System.Drawing.Point(362, 564)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(100, 54)
+        Me.btnImprimir.TabIndex = 79
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir")
+        Me.btnImprimir.UseVisualStyleBackColor = True
+        '
+        'btnCalcular
+        '
+        Me.btnCalcular.BackgroundImage = Global.Administracion.My.Resources.Resources.calculadora
+        Me.btnCalcular.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCalcular.Cleanable = False
+        Me.btnCalcular.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCalcular.EnterIndex = -1
+        Me.btnCalcular.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCalcular.FlatAppearance.BorderSize = 0
+        Me.btnCalcular.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCalcular.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCalcular.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCalcular.LabelAssociationKey = -1
+        Me.btnCalcular.Location = New System.Drawing.Point(586, 564)
+        Me.btnCalcular.Name = "btnCalcular"
+        Me.btnCalcular.Size = New System.Drawing.Size(100, 54)
+        Me.btnCalcular.TabIndex = 78
+        Me.ToolTip1.SetToolTip(Me.btnCalcular, "Calcular")
+        Me.btnCalcular.UseVisualStyleBackColor = True
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cleanable = False
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.EnterIndex = -1
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.LabelAssociationKey = -1
+        Me.btnConsulta.Location = New System.Drawing.Point(138, 564)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(100, 54)
+        Me.btnConsulta.TabIndex = 77
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta")
+        Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.Cleanable = False
+        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrar.EnterIndex = -1
+        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.BorderSize = 0
+        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrar.LabelAssociationKey = -1
+        Me.btnCerrar.Location = New System.Drawing.Point(698, 564)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(100, 54)
+        Me.btnCerrar.TabIndex = 76
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cancelar y Salir")
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.Cleanable = False
+        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiar.EnterIndex = -1
+        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.BorderSize = 0
+        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiar.LabelAssociationKey = -1
+        Me.btnLimpiar.Location = New System.Drawing.Point(250, 564)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(100, 54)
+        Me.btnLimpiar.TabIndex = 75
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
+        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAgregar.Cleanable = False
+        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAgregar.EnterIndex = -1
+        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.BorderSize = 0
+        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAgregar.LabelAssociationKey = -1
+        Me.btnAgregar.Location = New System.Drawing.Point(26, 564)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(100, 54)
+        Me.btnAgregar.TabIndex = 74
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Agregar")
+        Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'Pagos
         '

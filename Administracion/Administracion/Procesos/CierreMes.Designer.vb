@@ -22,6 +22,7 @@ Partial Class CierreMes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtMes = New Administracion.CustomTextBox()
         Me.txtAno = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
@@ -33,6 +34,7 @@ Partial Class CierreMes
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -47,6 +49,7 @@ Partial Class CierreMes
         Me.txtMes.Name = "txtMes"
         Me.txtMes.Size = New System.Drawing.Size(66, 20)
         Me.txtMes.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.txtMes, "Mes")
         Me.txtMes.Validator = Administracion.ValidatorType.None
         '
         'txtAno
@@ -59,6 +62,7 @@ Partial Class CierreMes
         Me.txtAno.Name = "txtAno"
         Me.txtAno.Size = New System.Drawing.Size(66, 20)
         Me.txtAno.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.txtAno, "Año")
         Me.txtAno.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel1
@@ -116,6 +120,7 @@ Partial Class CierreMes
         Me.btnGraba.Name = "btnGraba"
         Me.btnGraba.Size = New System.Drawing.Size(138, 44)
         Me.btnGraba.TabIndex = 12
+        Me.ToolTip1.SetToolTip(Me.btnGraba, "Aceptar")
         Me.btnGraba.UseVisualStyleBackColor = True
         '
         'btnMenu
@@ -136,6 +141,7 @@ Partial Class CierreMes
         Me.btnMenu.Name = "btnMenu"
         Me.btnMenu.Size = New System.Drawing.Size(131, 44)
         Me.btnMenu.TabIndex = 13
+        Me.ToolTip1.SetToolTip(Me.btnMenu, "Cerrar")
         Me.btnMenu.UseVisualStyleBackColor = True
         '
         'Panel1
@@ -211,4 +217,5 @@ Partial Class CierreMes
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

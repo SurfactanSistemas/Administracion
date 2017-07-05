@@ -22,6 +22,7 @@ Partial Class ListadoDepositos
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txthastafecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.btnCancela = New System.Windows.Forms.Button()
@@ -41,6 +42,7 @@ Partial Class ListadoDepositos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -78,6 +80,7 @@ Partial Class ListadoDepositos
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(125, 37)
         Me.btnCancela.TabIndex = 42
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -95,6 +98,7 @@ Partial Class ListadoDepositos
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(125, 37)
         Me.btnAcepta.TabIndex = 41
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'opcImpesora
@@ -131,6 +135,7 @@ Partial Class ListadoDepositos
         Me.txtDesdeBanco.Size = New System.Drawing.Size(106, 20)
         Me.txtDesdeBanco.TabIndex = 46
         Me.txtDesdeBanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtDesdeBanco, "Doble Click: Abrir Consulta de Bancos")
         '
         'txtHastaBanco
         '
@@ -140,6 +145,7 @@ Partial Class ListadoDepositos
         Me.txtHastaBanco.Size = New System.Drawing.Size(106, 20)
         Me.txtHastaBanco.TabIndex = 47
         Me.txtHastaBanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtHastaBanco, "Doble Click: Abrir Consulta de Bancos")
         '
         'txtAyuda
         '
@@ -184,6 +190,7 @@ Partial Class ListadoDepositos
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(120, 37)
         Me.btnConsulta.TabIndex = 43
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Bancos")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'CustomLabel4
@@ -324,4 +331,5 @@ Partial Class ListadoDepositos
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

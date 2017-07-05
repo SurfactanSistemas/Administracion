@@ -22,6 +22,7 @@ Partial Class ListadoProyeccionCobros
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
         Me.btnAcepta = New Administracion.CustomButton()
@@ -46,6 +47,7 @@ Partial Class ListadoProyeccionCobros
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -68,6 +70,7 @@ Partial Class ListadoProyeccionCobros
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(120, 40)
         Me.btnConsulta.TabIndex = 31
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnCancela
@@ -88,6 +91,7 @@ Partial Class ListadoProyeccionCobros
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(120, 40)
         Me.btnCancela.TabIndex = 30
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -108,6 +112,7 @@ Partial Class ListadoProyeccionCobros
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(120, 41)
         Me.btnAcepta.TabIndex = 29
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'opcImpesora
@@ -149,6 +154,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtHastaProveedor.Name = "txtHastaProveedor"
         Me.txtHastaProveedor.Size = New System.Drawing.Size(100, 20)
         Me.txtHastaProveedor.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.txtHastaProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtHastaProveedor.Validator = Administracion.ValidatorType.None
         '
         'txtDesdeProveedor
@@ -162,6 +168,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
         Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
         Me.txtDesdeProveedor.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel2
@@ -407,4 +414,5 @@ Partial Class ListadoProyeccionCobros
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

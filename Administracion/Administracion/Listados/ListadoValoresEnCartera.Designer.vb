@@ -22,6 +22,7 @@ Partial Class ListadoValoresEnCartera
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.CustomLabel5 = New Administracion.CustomLabel()
@@ -49,6 +50,7 @@ Partial Class ListadoValoresEnCartera
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtRazonSocial = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -227,6 +229,7 @@ Partial Class ListadoValoresEnCartera
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(120, 40)
         Me.btnConsulta.TabIndex = 46
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Clientes")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'txtAyuda
@@ -260,6 +263,7 @@ Partial Class ListadoValoresEnCartera
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(120, 40)
         Me.btnCancela.TabIndex = 44
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -280,6 +284,7 @@ Partial Class ListadoValoresEnCartera
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(120, 41)
         Me.btnAcepta.TabIndex = 43
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'txtCliente
@@ -293,6 +298,7 @@ Partial Class ListadoValoresEnCartera
         Me.txtCliente.Name = "txtCliente"
         Me.txtCliente.Size = New System.Drawing.Size(106, 20)
         Me.txtCliente.TabIndex = 6
+        Me.ToolTip1.SetToolTip(Me.txtCliente, "Doble Click: Abrir Consulta de Clientes")
         Me.txtCliente.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel7
@@ -444,4 +450,5 @@ Partial Class ListadoValoresEnCartera
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents txtRazonSocial As Administracion.CustomTextBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

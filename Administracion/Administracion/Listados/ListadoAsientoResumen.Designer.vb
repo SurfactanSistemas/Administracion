@@ -22,6 +22,7 @@ Partial Class ListadoAsientoResumen
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txthastafecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.opcImpesora = New System.Windows.Forms.RadioButton()
@@ -43,6 +44,7 @@ Partial Class ListadoAsientoResumen
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -54,6 +56,7 @@ Partial Class ListadoAsientoResumen
         Me.txthastafecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txthastafecha.Size = New System.Drawing.Size(146, 20)
         Me.txthastafecha.TabIndex = 1
+        Me.txthastafecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDesdeFecha
         '
@@ -63,6 +66,7 @@ Partial Class ListadoAsientoResumen
         Me.txtDesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtDesdeFecha.Size = New System.Drawing.Size(146, 20)
         Me.txtDesdeFecha.TabIndex = 0
+        Me.txtDesdeFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'opcImpesora
         '
@@ -107,6 +111,7 @@ Partial Class ListadoAsientoResumen
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(125, 37)
         Me.btnAcepta.TabIndex = 34
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'btnCancela
@@ -124,6 +129,7 @@ Partial Class ListadoAsientoResumen
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(125, 37)
         Me.btnCancela.TabIndex = 35
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnConsulta
@@ -144,6 +150,7 @@ Partial Class ListadoAsientoResumen
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(120, 37)
         Me.btnConsulta.TabIndex = 38
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consulta de Cuentas Contables")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'txtAyuda
@@ -178,7 +185,7 @@ Partial Class ListadoAsientoResumen
         Me.TipoListado.EnterIndex = -1
         Me.TipoListado.FormattingEnabled = True
         Me.TipoListado.LabelAssociationKey = -1
-        Me.TipoListado.Location = New System.Drawing.Point(297, 170)
+        Me.TipoListado.Location = New System.Drawing.Point(271, 170)
         Me.TipoListado.Name = "TipoListado"
         Me.TipoListado.Size = New System.Drawing.Size(146, 21)
         Me.TipoListado.TabIndex = 4
@@ -195,6 +202,7 @@ Partial Class ListadoAsientoResumen
         Me.txtHastaCuenta.Name = "txtHastaCuenta"
         Me.txtHastaCuenta.Size = New System.Drawing.Size(146, 20)
         Me.txtHastaCuenta.TabIndex = 3
+        Me.ToolTip1.SetToolTip(Me.txtHastaCuenta, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtHastaCuenta.Validator = Administracion.ValidatorType.None
         '
         'txtDesdeCuenta
@@ -208,6 +216,7 @@ Partial Class ListadoAsientoResumen
         Me.txtDesdeCuenta.Name = "txtDesdeCuenta"
         Me.txtDesdeCuenta.Size = New System.Drawing.Size(146, 20)
         Me.txtDesdeCuenta.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.txtDesdeCuenta, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtDesdeCuenta.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel5
@@ -217,7 +226,7 @@ Partial Class ListadoAsientoResumen
         Me.CustomLabel5.ControlAssociationKey = -1
         Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(182, 171)
+        Me.CustomLabel5.Location = New System.Drawing.Point(185, 171)
         Me.CustomLabel5.Name = "CustomLabel5"
         Me.CustomLabel5.Size = New System.Drawing.Size(82, 18)
         Me.CustomLabel5.TabIndex = 26
@@ -319,7 +328,7 @@ Partial Class ListadoAsientoResumen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(603, 322)
+        Me.ClientSize = New System.Drawing.Size(603, 326)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.txtAyuda)
@@ -367,4 +376,5 @@ Partial Class ListadoAsientoResumen
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

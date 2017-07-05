@@ -22,6 +22,7 @@ Partial Class Depositos
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.gridCheques = New System.Windows.Forms.DataGridView()
         Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -52,6 +53,7 @@ Partial Class Depositos
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.gridCheques, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -155,6 +157,7 @@ Partial Class Depositos
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(110, 50)
         Me.btnCerrar.TabIndex = 13
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'btnConsulta
@@ -175,6 +178,7 @@ Partial Class Depositos
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(110, 50)
         Me.btnConsulta.TabIndex = 12
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consulta")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnLimpiar
@@ -195,6 +199,7 @@ Partial Class Depositos
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(110, 50)
         Me.btnLimpiar.TabIndex = 11
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnImpresion
@@ -215,6 +220,7 @@ Partial Class Depositos
         Me.btnImpresion.Name = "btnImpresion"
         Me.btnImpresion.Size = New System.Drawing.Size(110, 50)
         Me.btnImpresion.TabIndex = 10
+        Me.ToolTip1.SetToolTip(Me.btnImpresion, "Imprimir Deposito")
         Me.btnImpresion.UseVisualStyleBackColor = True
         '
         'btnAgregar
@@ -235,6 +241,7 @@ Partial Class Depositos
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(110, 50)
         Me.btnAgregar.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'lstConsulta
@@ -300,6 +307,7 @@ Partial Class Depositos
         Me.txtCodigoBanco.Name = "txtCodigoBanco"
         Me.txtCodigoBanco.Size = New System.Drawing.Size(71, 20)
         Me.txtCodigoBanco.TabIndex = 3
+        Me.ToolTip1.SetToolTip(Me.txtCodigoBanco, "Doble Click: Abrir Consulta de Bancos")
         Me.txtCodigoBanco.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel5
@@ -492,4 +500,5 @@ Partial Class Depositos
     Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtFecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtFechaAcreditacion As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

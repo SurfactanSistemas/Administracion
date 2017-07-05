@@ -22,6 +22,7 @@ Partial Class ListadoRetencionIB
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnCancela = New System.Windows.Forms.Button()
         Me.btnAcepta = New System.Windows.Forms.Button()
         Me.opcImpesora = New System.Windows.Forms.RadioButton()
@@ -34,6 +35,7 @@ Partial Class ListadoRetencionIB
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -49,10 +51,11 @@ Partial Class ListadoRetencionIB
         Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancela.Location = New System.Drawing.Point(229, 219)
+        Me.btnCancela.Location = New System.Drawing.Point(238, 207)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(125, 34)
+        Me.btnCancela.Size = New System.Drawing.Size(125, 53)
         Me.btnCancela.TabIndex = 49
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -66,10 +69,11 @@ Partial Class ListadoRetencionIB
         Me.btnAcepta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAcepta.Location = New System.Drawing.Point(73, 219)
+        Me.btnAcepta.Location = New System.Drawing.Point(82, 207)
         Me.btnAcepta.Name = "btnAcepta"
-        Me.btnAcepta.Size = New System.Drawing.Size(125, 34)
+        Me.btnAcepta.Size = New System.Drawing.Size(125, 53)
         Me.btnAcepta.TabIndex = 48
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'opcImpesora
@@ -215,4 +219,5 @@ Partial Class ListadoRetencionIB
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

@@ -22,6 +22,7 @@ Partial Class ListadoIvaCompras
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.opcPantalla = New System.Windows.Forms.RadioButton()
         Me.opcImpesora = New System.Windows.Forms.RadioButton()
         Me.CustomLabel1 = New Administracion.CustomLabel()
@@ -37,6 +38,7 @@ Partial Class ListadoIvaCompras
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -158,6 +160,7 @@ Partial Class ListadoIvaCompras
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(63, 34)
         Me.btnCancela.TabIndex = 37
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -175,6 +178,7 @@ Partial Class ListadoIvaCompras
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(63, 34)
         Me.btnAcepta.TabIndex = 36
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'Panel1
@@ -257,4 +261,5 @@ Partial Class ListadoIvaCompras
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

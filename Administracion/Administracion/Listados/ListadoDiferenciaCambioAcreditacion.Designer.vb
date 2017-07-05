@@ -22,6 +22,7 @@ Partial Class ListadoDiferenciaCambioAcreditacion
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.txtHastaCliente = New System.Windows.Forms.TextBox()
@@ -43,6 +44,7 @@ Partial Class ListadoDiferenciaCambioAcreditacion
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -75,6 +77,7 @@ Partial Class ListadoDiferenciaCambioAcreditacion
         Me.txtHastaCliente.Name = "txtHastaCliente"
         Me.txtHastaCliente.Size = New System.Drawing.Size(106, 20)
         Me.txtHastaCliente.TabIndex = 63
+        Me.ToolTip1.SetToolTip(Me.txtHastaCliente, "Doble Click: Abrir Consulta de Clientes")
         '
         'txtDesdeCliente
         '
@@ -83,6 +86,7 @@ Partial Class ListadoDiferenciaCambioAcreditacion
         Me.txtDesdeCliente.Name = "txtDesdeCliente"
         Me.txtDesdeCliente.Size = New System.Drawing.Size(106, 20)
         Me.txtDesdeCliente.TabIndex = 62
+        Me.ToolTip1.SetToolTip(Me.txtDesdeCliente, "Doble Click: Abrir Consulta de Clientes")
         '
         'txtAyuda
         '
@@ -127,6 +131,7 @@ Partial Class ListadoDiferenciaCambioAcreditacion
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(120, 37)
         Me.btnConsulta.TabIndex = 59
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Clientes ")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnCancela
@@ -144,6 +149,7 @@ Partial Class ListadoDiferenciaCambioAcreditacion
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(125, 37)
         Me.btnCancela.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -161,6 +167,7 @@ Partial Class ListadoDiferenciaCambioAcreditacion
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(125, 37)
         Me.btnAcepta.TabIndex = 57
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'opcImpesora
@@ -349,4 +356,5 @@ Partial Class ListadoDiferenciaCambioAcreditacion
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

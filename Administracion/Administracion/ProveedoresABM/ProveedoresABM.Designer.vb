@@ -22,6 +22,7 @@ Partial Class ProveedoresABM
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnAgregar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnConsulta = New System.Windows.Forms.Button()
@@ -111,6 +112,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel14 = New Administracion.CustomLabel()
         Me.txtCuentaDescripcion = New Administracion.CustomTextBox()
         Me.txtCheque = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -133,6 +135,7 @@ Partial Class ProveedoresABM
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(56, 37)
         Me.btnAgregar.TabIndex = 70
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'btnEliminar
@@ -151,6 +154,7 @@ Partial Class ProveedoresABM
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(56, 37)
         Me.btnEliminar.TabIndex = 72
+        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar")
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'btnConsulta
@@ -169,6 +173,7 @@ Partial Class ProveedoresABM
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(56, 37)
         Me.btnConsulta.TabIndex = 71
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Listado de Proveedores/Cuentas Contables")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnCerrar
@@ -187,6 +192,7 @@ Partial Class ProveedoresABM
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(56, 37)
         Me.btnCerrar.TabIndex = 73
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Salir del Formulario")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'btnLimpiar
@@ -205,6 +211,7 @@ Partial Class ProveedoresABM
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(56, 37)
         Me.btnLimpiar.TabIndex = 75
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnListado
@@ -223,6 +230,7 @@ Partial Class ProveedoresABM
         Me.btnListado.Name = "btnListado"
         Me.btnListado.Size = New System.Drawing.Size(56, 37)
         Me.btnListado.TabIndex = 74
+        Me.ToolTip1.SetToolTip(Me.btnListado, "Listado")
         Me.btnListado.UseVisualStyleBackColor = True
         '
         'btnAnteriorRegistro
@@ -241,6 +249,7 @@ Partial Class ProveedoresABM
         Me.btnAnteriorRegistro.Name = "btnAnteriorRegistro"
         Me.btnAnteriorRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnAnteriorRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnAnteriorRegistro, "Anterior Registro")
         Me.btnAnteriorRegistro.UseVisualStyleBackColor = True
         '
         'btnUltimoRegistro
@@ -259,6 +268,7 @@ Partial Class ProveedoresABM
         Me.btnUltimoRegistro.Name = "btnUltimoRegistro"
         Me.btnUltimoRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnUltimoRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnUltimoRegistro, "Ultimo Registro")
         Me.btnUltimoRegistro.UseVisualStyleBackColor = True
         '
         'btnPrimerRegistro
@@ -277,6 +287,7 @@ Partial Class ProveedoresABM
         Me.btnPrimerRegistro.Name = "btnPrimerRegistro"
         Me.btnPrimerRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnPrimerRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnPrimerRegistro, "Primer Registro")
         Me.btnPrimerRegistro.UseVisualStyleBackColor = True
         '
         'btnSiguienteRegistro
@@ -295,6 +306,7 @@ Partial Class ProveedoresABM
         Me.btnSiguienteRegistro.Name = "btnSiguienteRegistro"
         Me.btnSiguienteRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnSiguienteRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnSiguienteRegistro, "Siguiente Registro")
         Me.btnSiguienteRegistro.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -473,6 +485,7 @@ Partial Class ProveedoresABM
         Me.txtPaginaWeb.Size = New System.Drawing.Size(309, 20)
         Me.txtPaginaWeb.TabIndex = 104
         Me.txtPaginaWeb.Text = "http://"
+        Me.ToolTip1.SetToolTip(Me.txtPaginaWeb, "Doble Click: Abrir en Navegador Web.")
         '
         'txtCUIT
         '
@@ -558,6 +571,7 @@ Partial Class ProveedoresABM
         Me.btnCUFE.Size = New System.Drawing.Size(116, 31)
         Me.btnCUFE.TabIndex = 95
         Me.btnCUFE.Text = "CUFE"
+        Me.ToolTip1.SetToolTip(Me.btnCUFE, "Datos CUFE")
         Me.btnCUFE.UseVisualStyleBackColor = False
         '
         'btnContactos
@@ -574,6 +588,7 @@ Partial Class ProveedoresABM
         Me.btnContactos.Size = New System.Drawing.Size(116, 31)
         Me.btnContactos.TabIndex = 94
         Me.btnContactos.Text = "Contactos"
+        Me.ToolTip1.SetToolTip(Me.btnContactos, "Contactos adicionales")
         Me.btnContactos.UseVisualStyleBackColor = False
         '
         'btnObservaciones
@@ -590,6 +605,7 @@ Partial Class ProveedoresABM
         Me.btnObservaciones.Size = New System.Drawing.Size(116, 31)
         Me.btnObservaciones.TabIndex = 94
         Me.btnObservaciones.Text = "Observaciones"
+        Me.ToolTip1.SetToolTip(Me.btnObservaciones, "Observaciones adicionales sobre el Proveedor")
         Me.btnObservaciones.UseVisualStyleBackColor = False
         '
         'CustomLabel29
@@ -1015,6 +1031,7 @@ Partial Class ProveedoresABM
         Me.txtCodigo.Size = New System.Drawing.Size(130, 20)
         Me.txtCodigo.TabIndex = 53
         Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtCodigo, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtCodigo.Validator = Administracion.ValidatorType.NotEmpty
         '
         'CustomLabel4
@@ -1342,6 +1359,7 @@ Partial Class ProveedoresABM
         Me.txtCuenta.Size = New System.Drawing.Size(100, 20)
         Me.txtCuenta.TabIndex = 44
         Me.txtCuenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtCuenta, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtCuenta.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel13
@@ -1516,4 +1534,5 @@ Partial Class ProveedoresABM
     Friend WithEvents btnContactos As Administracion.CustomButton
     Friend WithEvents CustomLabel30 As Administracion.CustomLabel
     Friend WithEvents txtPaginaWeb As System.Windows.Forms.TextBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

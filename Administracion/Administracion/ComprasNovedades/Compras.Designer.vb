@@ -22,6 +22,7 @@ Partial Class Compras
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.chkSoloIVA = New System.Windows.Forms.CheckBox()
         Me.gbTipo = New System.Windows.Forms.GroupBox()
         Me.optNacion = New System.Windows.Forms.RadioButton()
@@ -94,6 +95,7 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -403,6 +405,7 @@ Partial Class Compras
         Me.lblCredito.TabIndex = 61
         Me.lblCredito.Text = "0,00"
         Me.lblCredito.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ToolTip1.SetToolTip(Me.lblCredito, "Total de Créditos")
         '
         'txtNombreProveedor
         '
@@ -440,6 +443,7 @@ Partial Class Compras
         Me.txtCodigoProveedor.Size = New System.Drawing.Size(85, 20)
         Me.txtCodigoProveedor.TabIndex = 27
         Me.txtCodigoProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtCodigoProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtCodigoProveedor.Validator = Administracion.ValidatorType.None
         '
         'lblDebito
@@ -454,6 +458,7 @@ Partial Class Compras
         Me.lblDebito.TabIndex = 60
         Me.lblDebito.Text = "0,00"
         Me.lblDebito.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ToolTip1.SetToolTip(Me.lblDebito, "Total de Debitos")
         '
         'txtNroInterno
         '
@@ -940,6 +945,7 @@ Partial Class Compras
         Me.btnApertura.Size = New System.Drawing.Size(152, 43)
         Me.btnApertura.TabIndex = 59
         Me.btnApertura.Text = "Apertura"
+        Me.ToolTip1.SetToolTip(Me.btnApertura, "Ingresar detalles de Apertura")
         Me.btnApertura.UseVisualStyleBackColor = True
         '
         'btnConsulta
@@ -960,6 +966,7 @@ Partial Class Compras
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(69, 43)
         Me.btnConsulta.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Proveedores/Cuentas Contables")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnCerrar
@@ -980,6 +987,7 @@ Partial Class Compras
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(69, 43)
         Me.btnCerrar.TabIndex = 57
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'btnAgregar
@@ -1000,6 +1008,7 @@ Partial Class Compras
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(69, 43)
         Me.btnAgregar.TabIndex = 53
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'btnEliminar
@@ -1020,6 +1029,7 @@ Partial Class Compras
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(69, 43)
         Me.btnEliminar.TabIndex = 54
+        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar Comprobante")
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'btnConsultaNroFactura
@@ -1039,6 +1049,7 @@ Partial Class Compras
         Me.btnConsultaNroFactura.Size = New System.Drawing.Size(152, 43)
         Me.btnConsultaNroFactura.TabIndex = 56
         Me.btnConsultaNroFactura.Text = "Consulta Nro. de Factura"
+        Me.ToolTip1.SetToolTip(Me.btnConsultaNroFactura, "Consultar Comprobante  por Nro de Factura")
         Me.btnConsultaNroFactura.UseVisualStyleBackColor = True
         '
         'btnLimpiar
@@ -1059,6 +1070,7 @@ Partial Class Compras
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(69, 43)
         Me.btnLimpiar.TabIndex = 55
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'Compras
@@ -1161,4 +1173,5 @@ Partial Class Compras
     Friend WithEvents txtFechaIVA As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtFechaVto2 As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtFechaVto1 As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

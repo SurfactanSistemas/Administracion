@@ -22,6 +22,7 @@ Partial Class ModificaIntereses
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -46,6 +47,7 @@ Partial Class ModificaIntereses
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.gridCtaCte, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -194,6 +196,7 @@ Partial Class ModificaIntereses
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(122, 42)
         Me.btnCancela.TabIndex = 6
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnGraba
@@ -214,6 +217,7 @@ Partial Class ModificaIntereses
         Me.btnGraba.Name = "btnGraba"
         Me.btnGraba.Size = New System.Drawing.Size(122, 42)
         Me.btnGraba.TabIndex = 5
+        Me.ToolTip1.SetToolTip(Me.btnGraba, "Aceptar")
         Me.btnGraba.UseVisualStyleBackColor = True
         '
         'Panel1
@@ -296,4 +300,5 @@ Partial Class ModificaIntereses
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

@@ -22,6 +22,7 @@ Partial Class BancosABM
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -48,6 +49,7 @@ Partial Class BancosABM
         Me.txtCuenta = New Administracion.CustomTextBox()
         Me.txtNombre = New Administracion.CustomTextBox()
         Me.txtCodigo = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -147,6 +149,7 @@ Partial Class BancosABM
         Me.btnSiguienteRegistro.Name = "btnSiguienteRegistro"
         Me.btnSiguienteRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnSiguienteRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnSiguienteRegistro, "Siguiente Registro")
         Me.btnSiguienteRegistro.UseVisualStyleBackColor = True
         '
         'btnPrimerRegistro
@@ -165,6 +168,7 @@ Partial Class BancosABM
         Me.btnPrimerRegistro.Name = "btnPrimerRegistro"
         Me.btnPrimerRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnPrimerRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnPrimerRegistro, "Primer Registro")
         Me.btnPrimerRegistro.UseVisualStyleBackColor = True
         '
         'btnUltimoRegistro
@@ -183,6 +187,7 @@ Partial Class BancosABM
         Me.btnUltimoRegistro.Name = "btnUltimoRegistro"
         Me.btnUltimoRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnUltimoRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnUltimoRegistro, "Ultimo Registro")
         Me.btnUltimoRegistro.UseVisualStyleBackColor = True
         '
         'btnAnteriorRegistro
@@ -201,6 +206,7 @@ Partial Class BancosABM
         Me.btnAnteriorRegistro.Name = "btnAnteriorRegistro"
         Me.btnAnteriorRegistro.Size = New System.Drawing.Size(40, 40)
         Me.btnAnteriorRegistro.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnAnteriorRegistro, "Anterior Registro")
         Me.btnAnteriorRegistro.UseVisualStyleBackColor = True
         '
         'btnListado
@@ -219,6 +225,7 @@ Partial Class BancosABM
         Me.btnListado.Name = "btnListado"
         Me.btnListado.Size = New System.Drawing.Size(105, 42)
         Me.btnListado.TabIndex = 67
+        Me.ToolTip1.SetToolTip(Me.btnListado, "Listado")
         Me.btnListado.UseVisualStyleBackColor = True
         '
         'btnLimpiar
@@ -237,6 +244,7 @@ Partial Class BancosABM
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(105, 42)
         Me.btnLimpiar.TabIndex = 68
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnCerrar
@@ -255,6 +263,7 @@ Partial Class BancosABM
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(105, 42)
         Me.btnCerrar.TabIndex = 66
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'btnConsulta
@@ -273,6 +282,7 @@ Partial Class BancosABM
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(105, 42)
         Me.btnConsulta.TabIndex = 64
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consultar Bancos/Cuentas Contables")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnEliminar
@@ -291,6 +301,7 @@ Partial Class BancosABM
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(105, 42)
         Me.btnEliminar.TabIndex = 65
+        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar")
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'btnAgregar
@@ -310,6 +321,7 @@ Partial Class BancosABM
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(105, 42)
         Me.btnAgregar.TabIndex = 63
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'LBConsulta_Opciones
@@ -388,6 +400,7 @@ Partial Class BancosABM
         Me.txtCuenta.Name = "txtCuenta"
         Me.txtCuenta.Size = New System.Drawing.Size(79, 20)
         Me.txtCuenta.TabIndex = 44
+        Me.ToolTip1.SetToolTip(Me.txtCuenta, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtCuenta.Validator = Administracion.ValidatorType.NotEmpty
         '
         'txtNombre
@@ -415,6 +428,7 @@ Partial Class BancosABM
         Me.txtCodigo.Size = New System.Drawing.Size(79, 20)
         Me.txtCodigo.TabIndex = 42
         Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtCodigo, "Doble Click: Abrir Consulta de Bancos")
         Me.txtCodigo.Validator = Administracion.ValidatorType.Numeric
         '
         'BancosABM
@@ -480,4 +494,5 @@ Partial Class BancosABM
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
     Friend WithEvents btnAgregar As System.Windows.Forms.Button
     Friend WithEvents LBConsulta_Opciones As System.Windows.Forms.ListBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

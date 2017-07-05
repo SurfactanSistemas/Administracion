@@ -22,6 +22,7 @@ Partial Class ConsultaCheque
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridCheque = New System.Windows.Forms.DataGridView()
         Me.Cheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -40,6 +41,7 @@ Partial Class ConsultaCheque
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.gridCheque, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -169,10 +171,11 @@ Partial Class ConsultaCheque
         Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnProceso.LabelAssociationKey = -1
-        Me.btnProceso.Location = New System.Drawing.Point(303, 430)
+        Me.btnProceso.Location = New System.Drawing.Point(254, 430)
         Me.btnProceso.Name = "btnProceso"
         Me.btnProceso.Size = New System.Drawing.Size(59, 60)
         Me.btnProceso.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.btnProceso, "Aceptar")
         Me.btnProceso.UseVisualStyleBackColor = True
         '
         'btnCerrar
@@ -189,10 +192,11 @@ Partial Class ConsultaCheque
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(423, 429)
+        Me.btnCerrar.Location = New System.Drawing.Point(472, 430)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(59, 60)
         Me.btnCerrar.TabIndex = 3
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'Panel1
@@ -274,4 +278,5 @@ Partial Class ConsultaCheque
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

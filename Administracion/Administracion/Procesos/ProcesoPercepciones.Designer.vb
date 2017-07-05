@@ -22,6 +22,7 @@ Partial Class ProcesoPercepciones
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
@@ -40,6 +41,7 @@ Partial Class ProcesoPercepciones
         Me.CustomButton1 = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
         Me.btnAcepta = New Administracion.CustomButton()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -52,6 +54,7 @@ Partial Class ProcesoPercepciones
         Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtHasta.Size = New System.Drawing.Size(106, 20)
         Me.txtHasta.TabIndex = 19
+        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDesde
         '
@@ -61,6 +64,7 @@ Partial Class ProcesoPercepciones
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtDesde.Size = New System.Drawing.Size(106, 20)
         Me.txtDesde.TabIndex = 18
+        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TipoProceso
         '
@@ -201,6 +205,7 @@ Partial Class ProcesoPercepciones
         Me.CustomButton3.Name = "CustomButton3"
         Me.CustomButton3.Size = New System.Drawing.Size(77, 49)
         Me.CustomButton3.TabIndex = 27
+        Me.ToolTip1.SetToolTip(Me.CustomButton3, "Imprimir Informe")
         Me.CustomButton3.UseVisualStyleBackColor = True
         '
         'CustomButton2
@@ -221,6 +226,7 @@ Partial Class ProcesoPercepciones
         Me.CustomButton2.Name = "CustomButton2"
         Me.CustomButton2.Size = New System.Drawing.Size(69, 49)
         Me.CustomButton2.TabIndex = 26
+        Me.ToolTip1.SetToolTip(Me.CustomButton2, "Informe en PDF")
         Me.CustomButton2.UseVisualStyleBackColor = True
         '
         'CustomButton1
@@ -241,6 +247,7 @@ Partial Class ProcesoPercepciones
         Me.CustomButton1.Name = "CustomButton1"
         Me.CustomButton1.Size = New System.Drawing.Size(78, 49)
         Me.CustomButton1.TabIndex = 24
+        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Informe por Pantalla")
         Me.CustomButton1.UseVisualStyleBackColor = True
         '
         'btnCancela
@@ -261,6 +268,7 @@ Partial Class ProcesoPercepciones
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(112, 56)
         Me.btnCancela.TabIndex = 23
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnAcepta
@@ -281,6 +289,7 @@ Partial Class ProcesoPercepciones
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(115, 56)
         Me.btnAcepta.TabIndex = 22
+        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'ProcesoPercepciones
@@ -321,4 +330,5 @@ Partial Class ProcesoPercepciones
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

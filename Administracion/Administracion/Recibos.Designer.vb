@@ -22,6 +22,7 @@ Partial Class Recibos
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.gridPagos = New System.Windows.Forms.DataGridView()
         Me.TipoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LetraCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -43,15 +44,6 @@ Partial Class Recibos
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnImpresion = New Administracion.CustomButton()
-        Me.btnDias = New Administracion.CustomButton()
-        Me.btnLimpiar = New Administracion.CustomButton()
-        Me.btnCerrar = New Administracion.CustomButton()
-        Me.btnIntereses = New Administracion.CustomButton()
-        Me.btnAgregar = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
         Me.lstSeleccion = New Administracion.CustomListBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.lblDolares = New Administracion.CustomLabel()
@@ -84,6 +76,16 @@ Partial Class Recibos
         Me.CustomLabel9 = New Administracion.CustomLabel()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.btnImpresion = New Administracion.CustomButton()
+        Me.btnDias = New Administracion.CustomButton()
+        Me.btnLimpiar = New Administracion.CustomButton()
+        Me.btnCerrar = New Administracion.CustomButton()
+        Me.btnIntereses = New Administracion.CustomButton()
+        Me.btnAgregar = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormasPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -324,168 +326,6 @@ Partial Class Recibos
         Me.Label5.TabIndex = 125
         Me.Label5.Text = "Total Crédito"
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(205, 504)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(83, 18)
-        Me.Label4.TabIndex = 125
-        Me.Label4.Text = "Total Débito"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(23, 504)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(88, 18)
-        Me.Label3.TabIndex = 125
-        Me.Label3.Text = "Total Dólares"
-        '
-        'btnImpresion
-        '
-        Me.btnImpresion.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
-        Me.btnImpresion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnImpresion.Cleanable = False
-        Me.btnImpresion.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnImpresion.EnterIndex = -1
-        Me.btnImpresion.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnImpresion.FlatAppearance.BorderSize = 0
-        Me.btnImpresion.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnImpresion.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnImpresion.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnImpresion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnImpresion.LabelAssociationKey = -1
-        Me.btnImpresion.Location = New System.Drawing.Point(472, 631)
-        Me.btnImpresion.Name = "btnImpresion"
-        Me.btnImpresion.Size = New System.Drawing.Size(58, 51)
-        Me.btnImpresion.TabIndex = 132
-        Me.btnImpresion.UseVisualStyleBackColor = True
-        '
-        'btnDias
-        '
-        Me.btnDias.BackgroundImage = Global.Administracion.My.Resources.Resources.calendar
-        Me.btnDias.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnDias.Cleanable = False
-        Me.btnDias.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnDias.EnterIndex = -1
-        Me.btnDias.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnDias.FlatAppearance.BorderSize = 0
-        Me.btnDias.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnDias.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnDias.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnDias.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDias.LabelAssociationKey = -1
-        Me.btnDias.Location = New System.Drawing.Point(684, 631)
-        Me.btnDias.Name = "btnDias"
-        Me.btnDias.Size = New System.Drawing.Size(58, 51)
-        Me.btnDias.TabIndex = 131
-        Me.btnDias.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
-        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnLimpiar.Cleanable = False
-        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLimpiar.EnterIndex = -1
-        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.BorderSize = 0
-        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(578, 631)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(58, 51)
-        Me.btnLimpiar.TabIndex = 130
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCerrar.Cleanable = False
-        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrar.EnterIndex = -1
-        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.BorderSize = 0
-        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(366, 631)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(58, 51)
-        Me.btnCerrar.TabIndex = 129
-        Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'btnIntereses
-        '
-        Me.btnIntereses.BackgroundImage = Global.Administracion.My.Resources.Resources.calculadora
-        Me.btnIntereses.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnIntereses.Cleanable = False
-        Me.btnIntereses.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnIntereses.EnterIndex = -1
-        Me.btnIntereses.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnIntereses.FlatAppearance.BorderSize = 0
-        Me.btnIntereses.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnIntereses.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnIntereses.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnIntereses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnIntereses.LabelAssociationKey = -1
-        Me.btnIntereses.Location = New System.Drawing.Point(154, 631)
-        Me.btnIntereses.Name = "btnIntereses"
-        Me.btnIntereses.Size = New System.Drawing.Size(58, 51)
-        Me.btnIntereses.TabIndex = 128
-        Me.btnIntereses.UseVisualStyleBackColor = True
-        '
-        'btnAgregar
-        '
-        Me.btnAgregar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAgregar.Cleanable = False
-        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAgregar.EnterIndex = -1
-        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.BorderSize = 0
-        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(48, 631)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(58, 51)
-        Me.btnAgregar.TabIndex = 126
-        Me.btnAgregar.UseVisualStyleBackColor = True
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cleanable = False
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(260, 631)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(58, 51)
-        Me.btnConsulta.TabIndex = 127
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
         'lstSeleccion
         '
         Me.lstSeleccion.Cleanable = False
@@ -645,6 +485,7 @@ Partial Class Recibos
         Me.txtCliente.Name = "txtCliente"
         Me.txtCliente.Size = New System.Drawing.Size(73, 20)
         Me.txtCliente.TabIndex = 83
+        Me.ToolTip1.SetToolTip(Me.txtCliente, "Doble Click: Abrir Consulta de Clientes")
         Me.txtCliente.Validator = Administracion.ValidatorType.None
         '
         'txtNombre
@@ -710,6 +551,7 @@ Partial Class Recibos
         Me.txtCuenta.Name = "txtCuenta"
         Me.txtCuenta.Size = New System.Drawing.Size(73, 20)
         Me.txtCuenta.TabIndex = 112
+        Me.ToolTip1.SetToolTip(Me.txtCuenta, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtCuenta.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel5
@@ -882,6 +724,175 @@ Partial Class Recibos
         Me.lstConsulta.TabIndex = 106
         Me.lstConsulta.Visible = False
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label4.Location = New System.Drawing.Point(205, 504)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(83, 18)
+        Me.Label4.TabIndex = 125
+        Me.Label4.Text = "Total Débito"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label3.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label3.Location = New System.Drawing.Point(23, 504)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(88, 18)
+        Me.Label3.TabIndex = 125
+        Me.Label3.Text = "Total Dólares"
+        '
+        'btnImpresion
+        '
+        Me.btnImpresion.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImpresion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImpresion.Cleanable = False
+        Me.btnImpresion.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImpresion.EnterIndex = -1
+        Me.btnImpresion.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImpresion.FlatAppearance.BorderSize = 0
+        Me.btnImpresion.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnImpresion.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImpresion.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImpresion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImpresion.LabelAssociationKey = -1
+        Me.btnImpresion.Location = New System.Drawing.Point(472, 631)
+        Me.btnImpresion.Name = "btnImpresion"
+        Me.btnImpresion.Size = New System.Drawing.Size(58, 51)
+        Me.btnImpresion.TabIndex = 132
+        Me.ToolTip1.SetToolTip(Me.btnImpresion, "Imprimir")
+        Me.btnImpresion.UseVisualStyleBackColor = True
+        '
+        'btnDias
+        '
+        Me.btnDias.BackgroundImage = Global.Administracion.My.Resources.Resources.calendar
+        Me.btnDias.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnDias.Cleanable = False
+        Me.btnDias.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnDias.EnterIndex = -1
+        Me.btnDias.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnDias.FlatAppearance.BorderSize = 0
+        Me.btnDias.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnDias.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnDias.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnDias.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDias.LabelAssociationKey = -1
+        Me.btnDias.Location = New System.Drawing.Point(684, 631)
+        Me.btnDias.Name = "btnDias"
+        Me.btnDias.Size = New System.Drawing.Size(58, 51)
+        Me.btnDias.TabIndex = 131
+        Me.ToolTip1.SetToolTip(Me.btnDias, "Dias")
+        Me.btnDias.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.Cleanable = False
+        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiar.EnterIndex = -1
+        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.BorderSize = 0
+        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiar.LabelAssociationKey = -1
+        Me.btnLimpiar.Location = New System.Drawing.Point(578, 631)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(58, 51)
+        Me.btnLimpiar.TabIndex = 130
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.Cleanable = False
+        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrar.EnterIndex = -1
+        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.BorderSize = 0
+        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrar.LabelAssociationKey = -1
+        Me.btnCerrar.Location = New System.Drawing.Point(366, 631)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(58, 51)
+        Me.btnCerrar.TabIndex = 129
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'btnIntereses
+        '
+        Me.btnIntereses.BackgroundImage = Global.Administracion.My.Resources.Resources.calculadora
+        Me.btnIntereses.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnIntereses.Cleanable = False
+        Me.btnIntereses.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnIntereses.EnterIndex = -1
+        Me.btnIntereses.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnIntereses.FlatAppearance.BorderSize = 0
+        Me.btnIntereses.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnIntereses.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnIntereses.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnIntereses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnIntereses.LabelAssociationKey = -1
+        Me.btnIntereses.Location = New System.Drawing.Point(154, 631)
+        Me.btnIntereses.Name = "btnIntereses"
+        Me.btnIntereses.Size = New System.Drawing.Size(58, 51)
+        Me.btnIntereses.TabIndex = 128
+        Me.ToolTip1.SetToolTip(Me.btnIntereses, "Intereses")
+        Me.btnIntereses.UseVisualStyleBackColor = True
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
+        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAgregar.Cleanable = False
+        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAgregar.EnterIndex = -1
+        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.BorderSize = 0
+        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAgregar.LabelAssociationKey = -1
+        Me.btnAgregar.Location = New System.Drawing.Point(48, 631)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(58, 51)
+        Me.btnAgregar.TabIndex = 126
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
+        Me.btnAgregar.UseVisualStyleBackColor = True
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cleanable = False
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.EnterIndex = -1
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.LabelAssociationKey = -1
+        Me.btnConsulta.Location = New System.Drawing.Point(260, 631)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(58, 51)
+        Me.btnConsulta.TabIndex = 127
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta Clientes/Cuentas Contables")
+        Me.btnConsulta.UseVisualStyleBackColor = True
+        '
         'Recibos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -972,4 +983,5 @@ Partial Class Recibos
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

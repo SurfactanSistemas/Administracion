@@ -22,6 +22,7 @@ Partial Class ConsultaRemitos
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -37,6 +38,7 @@ Partial Class ConsultaRemitos
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.LBRemitos = New System.Windows.Forms.ListBox()
         Me.LBConsulta_Filtrada = New System.Windows.Forms.ListBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -96,6 +98,7 @@ Partial Class ConsultaRemitos
         Me.btnConsultaRemitos.Size = New System.Drawing.Size(132, 48)
         Me.btnConsultaRemitos.TabIndex = 4
         Me.btnConsultaRemitos.Text = "Consulta de Remitos"
+        Me.ToolTip1.SetToolTip(Me.btnConsultaRemitos, "Consultar Remitos de Proveedor")
         Me.btnConsultaRemitos.UseVisualStyleBackColor = True
         '
         'btnCerrar
@@ -105,6 +108,7 @@ Partial Class ConsultaRemitos
         Me.btnCerrar.Size = New System.Drawing.Size(132, 48)
         Me.btnCerrar.TabIndex = 4
         Me.btnCerrar.Text = "Cerrar"
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'txtCodigoProveedor
@@ -113,6 +117,7 @@ Partial Class ConsultaRemitos
         Me.txtCodigoProveedor.Name = "txtCodigoProveedor"
         Me.txtCodigoProveedor.Size = New System.Drawing.Size(135, 20)
         Me.txtCodigoProveedor.TabIndex = 5
+        Me.ToolTip1.SetToolTip(Me.txtCodigoProveedor, "Doble Click: Abrir Consulta de Proveedores")
         '
         'Label3
         '
@@ -218,4 +223,5 @@ Partial Class ConsultaRemitos
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents LBConsulta_Filtrada As System.Windows.Forms.ListBox
     Friend WithEvents LBRemitos As System.Windows.Forms.ListBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

@@ -22,6 +22,7 @@ Partial Class CuentaCorrientePantalla
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -57,6 +58,7 @@ Partial Class CuentaCorrientePantalla
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.txtProveedor = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.boxPantallaProveedores.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -274,6 +276,7 @@ Partial Class CuentaCorrientePantalla
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(93, 50)
         Me.btnCancela.TabIndex = 28
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = False
         '
         'btnConsulta
@@ -295,6 +298,7 @@ Partial Class CuentaCorrientePantalla
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(93, 50)
         Me.btnConsulta.TabIndex = 26
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consulta")
         Me.btnConsulta.UseVisualStyleBackColor = False
         '
         'txtSaldo
@@ -362,6 +366,7 @@ Partial Class CuentaCorrientePantalla
         Me.txtProveedor.Size = New System.Drawing.Size(108, 20)
         Me.txtProveedor.TabIndex = 0
         Me.txtProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtProveedor.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel3
@@ -435,4 +440,5 @@ Partial Class CuentaCorrientePantalla
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents CBProveedorSelectivo As System.Windows.Forms.CheckBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

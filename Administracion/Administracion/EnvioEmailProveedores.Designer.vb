@@ -182,6 +182,7 @@ Partial Class EnvioEmailProveedores
         Me.txtNombreArchivoAdjunto.ReadOnly = True
         Me.txtNombreArchivoAdjunto.Size = New System.Drawing.Size(357, 20)
         Me.txtNombreArchivoAdjunto.TabIndex = 6
+        Me.ToolTip1.SetToolTip(Me.txtNombreArchivoAdjunto, "Doble Click: Abrir y buscar archivos")
         '
         'Label5
         '
