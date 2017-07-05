@@ -7,6 +7,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Dim varRenglon As Integer
     Dim varTotal, varSaldo, varTotalUs, varSaldoUs, varSaldoOriginal, varDife, varParidad, varParidadTotal As Double
     Dim varPago As Integer
+    Dim _Claves As New List(Of Object)
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtDesdeProveedor.Text = ""
@@ -15,6 +16,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         opcPantalla.Checked = False
         opcImpesora.Checked = True
         _CargarProveedoresPreCargados()
+        _Claves.Clear()
     End Sub
 
     Private Function _DeterminarFechaLimite() As String
@@ -151,34 +153,115 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         Me.Height = 690
 
-        lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre("")
+        'lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre("")
 
+        _DeshabilitarConsulta()
+
+        _ListarProveedores()
+
+    End Sub
+
+    Private Sub _HabilitarConsulta()
         txtAyuda.Text = ""
         txtAyuda.Visible = True
         lstAyuda.Visible = True
 
         txtAyuda.Focus()
+    End Sub
 
+    Private Sub _DeshabilitarConsulta()
+        txtAyuda.Text = ""
+        txtAyuda.Visible = False
+        lstAyuda.Visible = False
+    End Sub
+
+    Private Sub _ListarProveedores()
+        Dim _Proveedores As New List(Of Object)
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor")
+        Dim dr As SqlDataReader
+        Dim item As String = ""
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                lstAyuda.Items.Clear()
+                _Claves.Clear()
+
+                Do While dr.Read()
+
+                    item = ceros(dr.Item("Proveedor"), 11) & "    " & dr.Item("Nombre")
+
+                    lstAyuda.Items.Add(item)
+
+                    _Claves.Add({item, dr.Item("Proveedor")})
+
+                Loop
+
+                _HabilitarConsulta()
+            Else
+                _DeshabilitarConsulta()
+            End If
+
+        Catch ex As Exception
+            _DeshabilitarConsulta()
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
     End Sub
 
     Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
                    ByVal e As System.Windows.Forms.KeyPressEventArgs) _
                    Handles txtAyuda.KeyPress
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-        End If
+        'If e.KeyChar = Convert.ToChar(Keys.Return) Then
+        '    e.Handled = True
+        '    lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
+        'ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
+        '    e.Handled = True
+        '    txtAyuda.Text = ""
+        'End If
     End Sub
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
-        If Not _ProveedorYaAgregado(lstAyuda.SelectedItem) Then
-            _CargarProveedor(lstAyuda.SelectedValue)
+
+        If Trim(lstAyuda.SelectedItem) <> "" Then
+            _AgregarProveedorAListadoGeneral(lstAyuda.SelectedItem)
         End If
+
     End Sub
 
+    Private Sub _AgregarProveedorAListadoGeneral(ByVal item As String)
+
+        If Trim(item) = "" Then
+            Exit Sub
+        End If
+
+        Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(_Claves.FindLast(Function(p) p(0) = item)(1))
+        If Not IsNothing(proveedor) Then
+            If Not _ProveedorYaAgregado(proveedor.id) Then
+                _CargarProveedor(proveedor)
+            End If
+
+            ' Sacamos el item del listado
+            lstAyuda.Items(lstAyuda.FindStringExact(item)) = ""
+            lstAyuda_Filtrada.Visible = False
+            lstAyuda.Visible = True
+            txtAyuda.Text = ""
+            txtAyuda.Focus()
+
+        End If
+
+    End Sub
 
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
 
@@ -435,6 +518,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Private Sub txtDesdeProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeProveedor.KeyDown
         If e.KeyData = Keys.Enter Then
 
+            If Trim(txtDesdeProveedor.Text) = "" Then
+                _ListarProveedores()
+                Exit Sub
+            End If
+
             If Not _ProveedorYaAgregado(txtDesdeProveedor.Text) Then
                 ' DADA que no rompa cuando el codigo no existe y usar la funcion "ceros" para completar??
                 _CargarProveedor(DAOProveedor.buscarProveedorPorCodigo(txtDesdeProveedor.Text))
@@ -475,8 +563,19 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Function
 
     Private Sub btnLimpiarTodo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarTodo.Click
+        _DeshabilitarConsulta()
 
-        _LimpiarProveedoresSelectivos()
+        For Each _C As TextBox In Me.Panel2.Controls.OfType(Of TextBox)()
+            _C.Text = ""
+        Next
+
+        For Each _C As MaskedTextBox In Me.Panel2.Controls.OfType(Of MaskedTextBox)()
+            _C.Clear()
+        Next
+
+        GRilla.Rows.Clear()
+
+        '_LimpiarProveedoresSelectivos()
 
     End Sub
 
@@ -486,8 +585,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
             _EliminarProveedoresSeleccionados()
 
-        Else
-            MsgBox("No se ha eliminado ningún Proveedor ya que no se encontraba ninguno seleccionado.", MsgBoxStyle.Information)
         End If
 
     End Sub
@@ -533,4 +630,38 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         Return exito
     End Function
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        lstAyuda_Filtrada.Items.Clear()
+
+        If UCase(Trim(txtAyuda.Text)) <> "" Then
+
+            For Each item In lstAyuda.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(txtAyuda.Text))) Then
+
+                    lstAyuda_Filtrada.Items.Add(item.ToString())
+
+                End If
+
+            Next
+
+            lstAyuda_Filtrada.Visible = True
+
+        Else
+
+            lstAyuda_Filtrada.Visible = False
+
+        End If
+    End Sub
+
+    Private Sub lstAyuda_Filtrada_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstAyuda_Filtrada.Click
+        If Trim(lstAyuda_Filtrada.SelectedItem) <> "" Then
+            _AgregarProveedorAListadoGeneral(lstAyuda_Filtrada.SelectedItem)
+        End If
+    End Sub
+
+    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeProveedor.MouseDoubleClick
+        _ListarProveedores()
+    End Sub
 End Class

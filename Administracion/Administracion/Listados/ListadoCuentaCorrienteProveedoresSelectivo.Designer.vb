@@ -30,21 +30,22 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Grupo2 = New System.Windows.Forms.GroupBox()
         Me.opcImpesora = New System.Windows.Forms.RadioButton()
         Me.opcPantalla = New System.Windows.Forms.RadioButton()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnLimpiarTodo = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
         Me.btnAcepta = New Administracion.CustomButton()
-        Me.lstAyuda = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.txtRazon = New Administracion.CustomTextBox()
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnLimpiarTodo = New Administracion.CustomButton()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
+        Me.lstAyuda = New Administracion.CustomListBox()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Grupo2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -116,6 +117,66 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.opcPantalla.Text = "Pantalla"
         Me.opcPantalla.UseVisualStyleBackColor = True
         '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(617, 50)
+        Me.Panel1.TabIndex = 59
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(422, 10)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(156, 26)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "SURFACTAN S.A."
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(27, 15)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(333, 19)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Listado Cuenta Corriente Proveedores Selectivo"
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Location = New System.Drawing.Point(0, 49)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(614, 359)
+        Me.Panel2.TabIndex = 60
+        '
+        'btnLimpiarTodo
+        '
+        Me.btnLimpiarTodo.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiarTodo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiarTodo.Cleanable = False
+        Me.btnLimpiarTodo.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiarTodo.EnterIndex = -1
+        Me.btnLimpiarTodo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiarTodo.FlatAppearance.BorderSize = 0
+        Me.btnLimpiarTodo.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiarTodo.LabelAssociationKey = -1
+        Me.btnLimpiarTodo.Location = New System.Drawing.Point(427, 420)
+        Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
+        Me.btnLimpiarTodo.Size = New System.Drawing.Size(120, 40)
+        Me.btnLimpiarTodo.TabIndex = 61
+        Me.ToolTip1.SetToolTip(Me.btnLimpiarTodo, "Limpiar Seleccionados / Todos")
+        Me.btnLimpiarTodo.UseVisualStyleBackColor = True
+        '
         'btnConsulta
         '
         Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
@@ -175,18 +236,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnAcepta.TabIndex = 56
         Me.ToolTip1.SetToolTip(Me.btnAcepta, "Generar Reporte")
         Me.btnAcepta.UseVisualStyleBackColor = True
-        '
-        'lstAyuda
-        '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(36, 498)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(545, 147)
-        Me.lstAyuda.TabIndex = 54
-        Me.lstAyuda.Visible = False
         '
         'txtAyuda
         '
@@ -254,78 +303,41 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.CustomLabel3.TabIndex = 47
         Me.CustomLabel3.Text = "Fecha Emision"
         '
-        'Panel1
+        'lstAyuda_Filtrada
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(617, 50)
-        Me.Panel1.TabIndex = 59
+        Me.lstAyuda_Filtrada.Cleanable = False
+        Me.lstAyuda_Filtrada.EnterIndex = -1
+        Me.lstAyuda_Filtrada.FormattingEnabled = True
+        Me.lstAyuda_Filtrada.LabelAssociationKey = -1
+        Me.lstAyuda_Filtrada.Location = New System.Drawing.Point(36, 498)
+        Me.lstAyuda_Filtrada.Name = "lstAyuda_Filtrada"
+        Me.lstAyuda_Filtrada.Size = New System.Drawing.Size(545, 147)
+        Me.lstAyuda_Filtrada.TabIndex = 62
+        Me.lstAyuda_Filtrada.Visible = False
         '
-        'Label2
+        'lstAyuda
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(422, 10)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(156, 26)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "SURFACTAN S.A."
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(27, 15)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(333, 19)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Listado Cuenta Corriente Proveedores Selectivo"
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel2.Location = New System.Drawing.Point(0, 49)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(614, 359)
-        Me.Panel2.TabIndex = 60
-        '
-        'btnLimpiarTodo
-        '
-        Me.btnLimpiarTodo.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
-        Me.btnLimpiarTodo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnLimpiarTodo.Cleanable = False
-        Me.btnLimpiarTodo.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLimpiarTodo.EnterIndex = -1
-        Me.btnLimpiarTodo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiarTodo.FlatAppearance.BorderSize = 0
-        Me.btnLimpiarTodo.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLimpiarTodo.LabelAssociationKey = -1
-        Me.btnLimpiarTodo.Location = New System.Drawing.Point(427, 420)
-        Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
-        Me.btnLimpiarTodo.Size = New System.Drawing.Size(120, 40)
-        Me.btnLimpiarTodo.TabIndex = 61
-        Me.ToolTip1.SetToolTip(Me.btnLimpiarTodo, "Limpiar Seleccionados / Todos")
-        Me.btnLimpiarTodo.UseVisualStyleBackColor = True
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(36, 498)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(545, 147)
+        Me.lstAyuda.TabIndex = 54
+        Me.lstAyuda.Visible = False
         '
         'ListadoCuentaCorrienteProveedoresSelectivo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(614, 469)
+        Me.ClientSize = New System.Drawing.Size(614, 471)
         Me.Controls.Add(Me.btnLimpiarTodo)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnCancela)
         Me.Controls.Add(Me.btnAcepta)
         Me.Controls.Add(Me.Grupo2)
-        Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.GRilla)
         Me.Controls.Add(Me.txtRazon)
@@ -334,6 +346,8 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Controls.Add(Me.txtFechaEmision)
         Me.Controls.Add(Me.CustomLabel3)
         Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.lstAyuda_Filtrada)
+        Me.Controls.Add(Me.lstAyuda)
         Me.Name = "ListadoCuentaCorrienteProveedoresSelectivo"
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Grupo2.ResumeLayout(False)
@@ -366,4 +380,5 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents btnLimpiarTodo As Administracion.CustomButton
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstAyuda_Filtrada As Administracion.CustomListBox
 End Class
