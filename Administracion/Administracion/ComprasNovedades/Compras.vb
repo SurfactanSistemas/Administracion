@@ -1502,7 +1502,8 @@ Public Class Compras
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
         ' Validar que se pueda borrar => Sólo si los saldos son distintos?
         If Not _DisponibleParaDarDeBaja() Then
-
+            MsgBox("El Comprobante se encuentra total o parcialmente cancelado", MsgBoxStyle.Information)
+            Exit Sub
         End If
 
     End Sub
