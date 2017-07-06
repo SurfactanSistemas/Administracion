@@ -155,8 +155,8 @@ Public Class CuentaContableABM
         Dim cuenta As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCodigo.Text)
         If Not IsNothing(cuenta) Then
 
-            txtCodigo.Text = cuenta.id
-            txtDescripcion.Text = cuenta.descripcion
+            txtCodigo.Text = Trim(cuenta.id)
+            txtDescripcion.Text = Trim(cuenta.descripcion)
             Actualiza = True
 
         Else
@@ -273,8 +273,8 @@ Public Class CuentaContableABM
 
 
         If cuenta.Rows.Count > 0 Then
-            txtCodigo.Text = cuenta.Rows(0)(0)
-            txtDescripcion.Text = cuenta.Rows(0)(1)
+            txtCodigo.Text = Trim(cuenta.Rows(0)(0))
+            txtDescripcion.Text = Trim(cuenta.Rows(0)(1))
         End If
 
     End Sub
