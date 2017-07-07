@@ -34,15 +34,6 @@ Public Class Compras
         Close()
     End Sub
 
-    Private Sub txtTipo_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTipo.Leave
-        Dim tipo As Integer = Val(txtTipo.Text)
-        If 1 <= tipo And tipo <= 3 Then
-            cmbTipo.SelectedIndex = tipo - 1
-        Else
-            cmbTipo.SelectedIndex = -1
-        End If
-    End Sub
-
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         'Cleanner.clean(Me)
         For Each _txt As TextBox In Me.Panel2.Controls.OfType(Of TextBox)() ' Limpiamos todos los textbox del Formulario.
@@ -92,12 +83,12 @@ Public Class Compras
         txtNombreProveedor.Text = proveedorAMostrar.razonSocial
         txtCAI.Text = proveedorAMostrar.cai
         txtVtoCAI.Text = proveedorAMostrar.vtoCAI
-        CBLetra.SelectedIndex = 0
+        CBLetra.SelectedItem = "A"
         cmbFormaPago.SelectedIndex = 0
 
         If Val(proveedorAMostrar.codIva) = 5 Then
-            cmbTipo.SelectedIndex = 0
-            CBLetra.SelectedIndex = 2
+            cmbTipo.SelectedItem = "FC"
+            CBLetra.SelectedItem = "C"
             _HabilitarDeshabilitarControlesSegunLetra()
         End If
 
@@ -242,7 +233,7 @@ Public Class Compras
     End Function
 
     Private Function laParidadEsValida()
-        If cmbTipo.SelectedIndex = 2 Then
+        If cmbTipo.SelectedItem = "NC" Then
             Return CustomConvert.toDoubleOrZero(txtParidad.Text)
         End If
         Return True
@@ -557,9 +548,9 @@ Public Class Compras
         txtTipo.Text = compra.tipoDocumento
 
         If compra.tipoDocumento > 0 Then
-            cmbTipo.SelectedIndex = compra.tipoDocumento - 1
+            cmbTipo.SelectedIndex = compra.tipoDocumento
         Else
-            cmbTipo.SelectedIndex = 0
+            cmbTipo.SelectedIndex = 1
         End If
 
         CBLetra.SelectedItem = compra.letra
@@ -584,7 +575,6 @@ Public Class Compras
         pulsarOption(compra.tipoPago)
         traerValoresIb(compra.nroInterno)
         txtImporte_Leave(Nothing, Nothing)
-        txtTipo_Leave(Nothing, Nothing)
         mostrarImputaciones(compra.imputaciones)
         calcularAsiento()
         esModificacion = True
@@ -793,10 +783,63 @@ Public Class Compras
 
     End Sub
 
+    Private Function _ExisteFacturaPorNumero() As String
+        Dim existe As String = ""
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT NroInterno FROM CtaCtePrv WHERE Numero = '" & Trim(txtNumero.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                existe = dr.Item("NroInterno").ToString()
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return existe
+    End Function
+
     Private Sub txtNumero_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNumero.KeyDown
 
         If e.KeyData = Keys.Enter Then
             txtNumero.Text = ceros(txtNumero.Text, 8)
+
+            Dim _NumeroInterno As String = ""
+
+            If Trim(txtCodigoProveedor.Text) <> "" And cmbTipo.SelectedIndex >= 0 And CBLetra.SelectedIndex >= 0 And Trim(txtPunto.Text) <> "" And Trim(txtNumero.Text) <> "" Then
+                _NumeroInterno = Trim(DAOCompras.buscarNumeroIntero(txtCodigoProveedor.Text, ceros(cmbTipo.SelectedIndex + 1, 2), CBLetra.SelectedItem, ceros(txtPunto.Text, 4), ceros(txtNumero.Text, 8)))
+
+                If Trim(_NumeroInterno) <> 0 Then
+
+                    If MsgBox("Ya existe una factura con el Numero indicado. ¿Desea traer la misma?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+
+                        txtNroInterno.Text = _NumeroInterno
+
+                        _BuscarCompraPorNumeroInterno()
+
+                    End If
+
+                    Exit Sub
+                End If
+            End If
+
 
             txtCAI.Focus()
 
@@ -1446,7 +1489,7 @@ Public Class Compras
             _SaltarA(txtPunto)
             _HabilitarDeshabilitarControlesSegunLetra()
         ElseIf e.KeyData = Keys.Escape Then
-            CBLetra.SelectedIndex = 0
+            CBLetra.SelectedItem = "A"
         End If
 
     End Sub

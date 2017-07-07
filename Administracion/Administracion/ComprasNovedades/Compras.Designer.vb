@@ -347,7 +347,7 @@ Partial Class Compras
         '
         Me.CBLetra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBLetra.FormattingEnabled = True
-        Me.CBLetra.Items.AddRange(New Object() {"A", "B", "C", "X", "M", "I"})
+        Me.CBLetra.Items.AddRange(New Object() {"", "A", "B", "C", "X", "M", "I"})
         Me.CBLetra.Location = New System.Drawing.Point(321, 39)
         Me.CBLetra.Name = "CBLetra"
         Me.CBLetra.Size = New System.Drawing.Size(36, 21)
@@ -895,7 +895,7 @@ Partial Class Compras
         Me.cmbTipo.Empty = False
         Me.cmbTipo.EnterIndex = 3
         Me.cmbTipo.FormattingEnabled = True
-        Me.cmbTipo.Items.AddRange(New Object() {"FC", "ND", "NC"})
+        Me.cmbTipo.Items.AddRange(New Object() {"", "FC", "ND", "NC"})
         Me.cmbTipo.LabelAssociationKey = 4
         Me.cmbTipo.Location = New System.Drawing.Point(143, 40)
         Me.cmbTipo.Name = "cmbTipo"
