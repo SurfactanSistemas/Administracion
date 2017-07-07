@@ -247,7 +247,7 @@ Public Class Pagos
                 Exit Sub
             End If
 
-            txtProveedor.Text = ceros(txtProveedor.Text, 11)
+            txtProveedor.Text = txtProveedor.Text
 
             Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
 
