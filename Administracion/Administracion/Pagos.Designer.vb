@@ -49,11 +49,10 @@ Partial Class Pagos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtFechaParidad = New System.Windows.Forms.MaskedTextBox()
-        Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.lstSeleccion = New Administracion.CustomListBox()
         Me.CLBFiltrado = New Administracion.CustomListBox()
+        Me.txtFechaParidad = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.CustomLabel12 = New Administracion.CustomLabel()
         Me.CustomLabel13 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
@@ -86,6 +85,7 @@ Partial Class Pagos
         Me.CustomLabel10 = New Administracion.CustomLabel()
         Me.CustomLabel9 = New Administracion.CustomLabel()
         Me.txtIBCiudad = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCarpetas = New Administracion.CustomButton()
         Me.btnImprimir = New Administracion.CustomButton()
         Me.btnCalcular = New Administracion.CustomButton()
@@ -360,24 +360,6 @@ Partial Class Pagos
         Me.Panel2.Size = New System.Drawing.Size(828, 500)
         Me.Panel2.TabIndex = 73
         '
-        'txtFechaParidad
-        '
-        Me.txtFechaParidad.Location = New System.Drawing.Point(384, 129)
-        Me.txtFechaParidad.Mask = "00/00/0000"
-        Me.txtFechaParidad.Name = "txtFechaParidad"
-        Me.txtFechaParidad.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaParidad.Size = New System.Drawing.Size(79, 20)
-        Me.txtFechaParidad.TabIndex = 72
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(255, 22)
-        Me.txtFecha.Mask = "00/00/0000"
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFecha.Size = New System.Drawing.Size(100, 20)
-        Me.txtFecha.TabIndex = 72
-        '
         'lstSeleccion
         '
         Me.lstSeleccion.Cleanable = False
@@ -402,6 +384,26 @@ Partial Class Pagos
         Me.CLBFiltrado.Size = New System.Drawing.Size(333, 108)
         Me.CLBFiltrado.TabIndex = 73
         Me.CLBFiltrado.Visible = False
+        '
+        'txtFechaParidad
+        '
+        Me.txtFechaParidad.Location = New System.Drawing.Point(384, 129)
+        Me.txtFechaParidad.Mask = "00/00/0000"
+        Me.txtFechaParidad.Name = "txtFechaParidad"
+        Me.txtFechaParidad.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaParidad.Size = New System.Drawing.Size(79, 20)
+        Me.txtFechaParidad.TabIndex = 72
+        Me.txtFechaParidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtFecha
+        '
+        Me.txtFecha.Location = New System.Drawing.Point(255, 22)
+        Me.txtFecha.Mask = "00/00/0000"
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFecha.Size = New System.Drawing.Size(100, 20)
+        Me.txtFecha.TabIndex = 72
+        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'CustomLabel12
         '
@@ -547,7 +549,7 @@ Partial Class Pagos
         Me.txtProveedor.Location = New System.Drawing.Point(124, 49)
         Me.txtProveedor.MaxLength = 11
         Me.txtProveedor.Name = "txtProveedor"
-        Me.txtProveedor.Size = New System.Drawing.Size(76, 20)
+        Me.txtProveedor.Size = New System.Drawing.Size(95, 20)
         Me.txtProveedor.TabIndex = 29
         Me.ToolTip1.SetToolTip(Me.txtProveedor, "Doble Click para abrir listado de Proveedores")
         Me.txtProveedor.Validator = Administracion.ValidatorType.None
@@ -558,10 +560,10 @@ Partial Class Pagos
         Me.txtRazonSocial.Empty = False
         Me.txtRazonSocial.EnterIndex = -1
         Me.txtRazonSocial.LabelAssociationKey = 3
-        Me.txtRazonSocial.Location = New System.Drawing.Point(206, 49)
+        Me.txtRazonSocial.Location = New System.Drawing.Point(225, 49)
         Me.txtRazonSocial.Name = "txtRazonSocial"
         Me.txtRazonSocial.ReadOnly = True
-        Me.txtRazonSocial.Size = New System.Drawing.Size(259, 20)
+        Me.txtRazonSocial.Size = New System.Drawing.Size(240, 20)
         Me.txtRazonSocial.TabIndex = 30
         Me.txtRazonSocial.Validator = Administracion.ValidatorType.None
         '
@@ -588,8 +590,9 @@ Partial Class Pagos
         Me.txtBanco.Location = New System.Drawing.Point(124, 103)
         Me.txtBanco.MaxLength = 8
         Me.txtBanco.Name = "txtBanco"
-        Me.txtBanco.Size = New System.Drawing.Size(76, 20)
+        Me.txtBanco.Size = New System.Drawing.Size(95, 20)
         Me.txtBanco.TabIndex = 32
+        Me.txtBanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtBanco, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtBanco.Validator = Administracion.ValidatorType.Numeric
         '
@@ -600,10 +603,10 @@ Partial Class Pagos
         Me.txtNombreBanco.Enabled = False
         Me.txtNombreBanco.EnterIndex = -1
         Me.txtNombreBanco.LabelAssociationKey = 5
-        Me.txtNombreBanco.Location = New System.Drawing.Point(206, 103)
+        Me.txtNombreBanco.Location = New System.Drawing.Point(225, 103)
         Me.txtNombreBanco.Name = "txtNombreBanco"
         Me.txtNombreBanco.ReadOnly = True
-        Me.txtNombreBanco.Size = New System.Drawing.Size(259, 20)
+        Me.txtNombreBanco.Size = New System.Drawing.Size(240, 20)
         Me.txtNombreBanco.TabIndex = 33
         Me.txtNombreBanco.Validator = Administracion.ValidatorType.None
         '
@@ -835,7 +838,7 @@ Partial Class Pagos
         Me.btnCarpetas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCarpetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCarpetas.LabelAssociationKey = -1
-        Me.btnCarpetas.Location = New System.Drawing.Point(362, 559)
+        Me.btnCarpetas.Location = New System.Drawing.Point(369, 559)
         Me.btnCarpetas.Name = "btnCarpetas"
         Me.btnCarpetas.Size = New System.Drawing.Size(50, 54)
         Me.btnCarpetas.TabIndex = 80
@@ -919,7 +922,7 @@ Partial Class Pagos
         Me.btnCtaCte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCtaCte.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCtaCte.LabelAssociationKey = -1
-        Me.btnCtaCte.Location = New System.Drawing.Point(518, 559)
+        Me.btnCtaCte.Location = New System.Drawing.Point(526, 559)
         Me.btnCtaCte.Name = "btnCtaCte"
         Me.btnCtaCte.Size = New System.Drawing.Size(58, 54)
         Me.btnCtaCte.TabIndex = 76

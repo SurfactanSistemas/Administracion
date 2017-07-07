@@ -2226,12 +2226,8 @@ Public Class Pagos
 
     Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
 
-        If Trim(txtProveedor.Text) = "" Then
-
             _TipoConsulta = 0
             _ListarProveedores()
-
-        End If
 
     End Sub
 
