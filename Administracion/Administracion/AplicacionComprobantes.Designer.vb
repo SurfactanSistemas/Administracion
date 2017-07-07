@@ -56,6 +56,7 @@ Partial Class AplicacionComprobantes
         Me.btnConsulta = New Administracion.CustomButton()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.lstAyuda = New Administracion.CustomListBox()
+        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.dtgCuentas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,7 +69,7 @@ Partial Class AplicacionComprobantes
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(731, 50)
+        Me.Panel1.Size = New System.Drawing.Size(734, 50)
         Me.Panel1.TabIndex = 38
         '
         'Label2
@@ -76,7 +77,7 @@ Partial Class AplicacionComprobantes
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(546, 9)
+        Me.Label2.Location = New System.Drawing.Point(556, 8)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -104,7 +105,7 @@ Partial Class AplicacionComprobantes
         Me.Panel2.Controls.Add(Me.CustomLabel2)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(731, 336)
+        Me.Panel2.Size = New System.Drawing.Size(734, 336)
         Me.Panel2.TabIndex = 39
         '
         'dtgCuentas
@@ -341,7 +342,7 @@ Partial Class AplicacionComprobantes
         Me.txtAyuda.LabelAssociationKey = -1
         Me.txtAyuda.Location = New System.Drawing.Point(18, 476)
         Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(749, 20)
+        Me.txtAyuda.Size = New System.Drawing.Size(694, 20)
         Me.txtAyuda.TabIndex = 36
         Me.txtAyuda.Validator = Administracion.ValidatorType.None
         Me.txtAyuda.Visible = False
@@ -354,15 +355,28 @@ Partial Class AplicacionComprobantes
         Me.lstAyuda.LabelAssociationKey = -1
         Me.lstAyuda.Location = New System.Drawing.Point(18, 503)
         Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(749, 82)
+        Me.lstAyuda.Size = New System.Drawing.Size(694, 82)
         Me.lstAyuda.TabIndex = 37
         Me.lstAyuda.Visible = False
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(18, 503)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(694, 82)
+        Me.lstFiltrada.TabIndex = 40
+        Me.lstFiltrada.Visible = False
         '
         'AplicacionComprobantes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(731, 465)
+        Me.ClientSize = New System.Drawing.Size(733, 462)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
@@ -408,4 +422,5 @@ Partial Class AplicacionComprobantes
     Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Saldo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Aplica As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents lstFiltrada As Administracion.CustomListBox
 End Class

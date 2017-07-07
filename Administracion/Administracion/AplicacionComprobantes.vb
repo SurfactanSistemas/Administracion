@@ -31,16 +31,6 @@ Public Class AplicacionComprobantes
         mostrarProveedor(lstAyuda.SelectedValue)
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAyuda.KeyPress
-        If e.KeyChar = Microsoft.VisualBasic.ChrW(13) Then
-            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-        End If
-    End Sub
-
-    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-    End Sub
-
     Private Sub btnProceso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProceso.Click
         Dim proveedor = DAOProveedor.buscarProveedorPorCodigo(ceros(txtProveedor.Text, 11))
         If Not IsNothing(proveedor) Then
@@ -147,9 +137,16 @@ Public Class AplicacionComprobantes
 
         txtSaldo.Text = "0.00"
 
-        dtgCuentas.CurrentCell = dtgCuentas.Item(7, 0)
-        dtgCuentas.Rows(0).Cells(7).Selected = True
-        dtgCuentas.Focus()
+
+        If dtgCuentas.Rows.Count > 0 Then
+            dtgCuentas.CurrentCell = dtgCuentas.Item(7, 0)
+            dtgCuentas.Rows(0).Cells(7).Selected = True
+            dtgCuentas.Focus()
+        Else
+            txtProveedor.Focus()
+            MsgBox("El proveedor no posee datos para ser listados.", MsgBoxStyle.Information)
+        End If
+
     End Sub
 
     Private Sub btnGraba_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraba.Click
@@ -173,5 +170,63 @@ Public Class AplicacionComprobantes
         txtProveedor.Text = ""
         txtRazon.Text = ""
         txtProveedor.Focus()
+    End Sub
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstAyuda
+        Dim final As ListBox = lstFiltrada
+        Dim cadena As String = Trim(txtAyuda.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+
+        Else
+
+            final.Visible = False
+
+        End If
+    End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+        Dim origen As ListBox = lstAyuda
+        Dim filtrado As ListBox = lstFiltrada
+        Dim texto As TextBox = txtAyuda
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        lstAyuda_Click(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        _FiltrarDinamicamente()
+    End Sub
+
+    Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
+        btnConsulta.PerformClick()
+    End Sub
+
+    Private Sub txtAyuda_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
+
     End Sub
 End Class
