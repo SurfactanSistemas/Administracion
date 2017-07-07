@@ -48,6 +48,7 @@ Partial Class ListadoProyeccionCobros
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstfiltrada = New Administracion.CustomListBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -362,11 +363,24 @@ Partial Class ListadoProyeccionCobros
         Me.Panel2.Size = New System.Drawing.Size(631, 247)
         Me.Panel2.TabIndex = 36
         '
+        'lstfiltrada
+        '
+        Me.lstfiltrada.Cleanable = False
+        Me.lstfiltrada.EnterIndex = -1
+        Me.lstfiltrada.FormattingEnabled = True
+        Me.lstfiltrada.LabelAssociationKey = -1
+        Me.lstfiltrada.Location = New System.Drawing.Point(90, 382)
+        Me.lstfiltrada.Name = "lstfiltrada"
+        Me.lstfiltrada.Size = New System.Drawing.Size(427, 147)
+        Me.lstfiltrada.TabIndex = 37
+        Me.lstfiltrada.Visible = False
+        '
         'ListadoProyeccionCobros
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(629, 353)
+        Me.ClientSize = New System.Drawing.Size(629, 352)
+        Me.Controls.Add(Me.lstfiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.txtAyuda)
@@ -415,4 +429,5 @@ Partial Class ListadoProyeccionCobros
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstfiltrada As Administracion.CustomListBox
 End Class

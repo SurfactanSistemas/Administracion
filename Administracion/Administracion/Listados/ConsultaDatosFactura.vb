@@ -157,7 +157,7 @@ Public Class ConsultaDatosFactura
             cn.ConnectionString = XCs
             cn.Open()
             cm.Connection = cn
-            cm.CommandText = "SELECT i.Orden, i.Articulo, a.Descripcion, i.Cantidad, o.Precio FROM Informe as i, Orden as o, Articulo as a WHERE i.Informe = '" & Trim(txtInformeRecepcion.Text) & "' AND i.Orden = o.Orden  AND i.Articulo = a.Codigo"
+            cm.CommandText = "SELECT i.Orden, i.Articulo, a.Descripcion, i.Cantidad, o.Precio FROM Informe as i, Orden as o, Articulo as a WHERE i.Informe = '" & Trim(txtInformeRecepcion.Text) & "' AND i.Orden = o.Orden  AND i.Articulo = a.Codigo AND i.Articulo = o.Articulo"
 
             dr = cm.ExecuteReader()
 
@@ -169,8 +169,8 @@ Public Class ConsultaDatosFactura
                         .Cells(0).Value = dr.Item("Orden")
                         .Cells(1).Value = dr.Item("Articulo")
                         .Cells(2).Value = dr.Item("Descripcion")
-                        .Cells(3).Value = dr.Item("Cantidad")
-                        .Cells(4).Value = dr.Item("Precio")
+                        .Cells(3).Value = formatonumerico(dr.Item("Cantidad"), "######0.#0", ".")
+                        .Cells(4).Value = formatonumerico(dr.Item("Precio"), "######0.#0", ".")
 
                     End With
 

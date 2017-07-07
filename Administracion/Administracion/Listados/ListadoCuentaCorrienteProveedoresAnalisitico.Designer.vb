@@ -43,6 +43,7 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -305,11 +306,24 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
         Me.Panel2.Size = New System.Drawing.Size(649, 199)
         Me.Panel2.TabIndex = 63
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(115, 344)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(417, 147)
+        Me.lstFiltrada.TabIndex = 64
+        Me.lstFiltrada.Visible = False
+        '
         'ListadoCuentaCorrienteProveedoresAnalisitico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(648, 314)
+        Me.ClientSize = New System.Drawing.Size(648, 316)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.lstAyuda)
@@ -346,4 +360,5 @@ Partial Class ListadoCuentaCorrienteProveedoresAnalisitico
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstFiltrada As Administracion.CustomListBox
 End Class

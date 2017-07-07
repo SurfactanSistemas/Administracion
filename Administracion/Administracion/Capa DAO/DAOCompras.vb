@@ -138,14 +138,16 @@ Public Class DAOCompras
         SQLConnector.executeProcedure("alta_iva_compra", compra.nroInterno, compra.codigoProveedor, compra.tipoDocumento, compra.letra, compra.punto, compra.numero, compra.fechaEmision,
                                       compra.fechaVto1, compra.fechaVto2, compra.fechaIVA, compra.neto, compra.iva21, compra.ivaRG, compra.iva27,
                                       compra.percibidoIB, compra.exento, compra.tipoPago, compra.tipoDocumentoDescripcion, compra.paridad,
-                                      compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, compra.iva105, compra.despacho, compra.remito, compra.soloIVA)
+                                      compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, compra.iva105, compra.despacho, compra.remito, compra.soloIVA, _
+                                      compra.RetIB1, compra.RetIB2, compra.RetIB3, compra.RetIB4, compra.RetIB5, compra.RetIB6, compra.RetIB7, compra.RetIB8, compra.RetIB9, compra.RetIB10, compra.RetIB11, compra.RetIB12, compra.RetIB13, compra.RetIB14)
     End Sub
 
     Public Shared Sub agregarCompra(ByVal compra As Compra)
         SQLConnector.executeProcedure("alta_iva_compra", compra.nroInterno, compra.codigoProveedor, compra.tipoDocumento, compra.letra, compra.punto, compra.numero, compra.fechaEmision,
                                       compra.fechaVto1, compra.fechaVto2, compra.fechaIVA, compra.neto, compra.iva21, compra.ivaRG, compra.iva27,
                                       compra.percibidoIB, compra.exento, compra.tipoPago, compra.tipoDocumentoDescripcion, compra.paridad,
-                                      compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, compra.iva105, compra.despacho, compra.remito, compra.soloIVA)
+                                      compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, compra.iva105, compra.despacho, compra.remito, compra.soloIVA, _
+                                      compra.RetIB1, compra.RetIB2, compra.RetIB3, compra.RetIB4, compra.RetIB5, compra.RetIB6, compra.RetIB7, compra.RetIB8, compra.RetIB9, compra.RetIB10, compra.RetIB11, compra.RetIB12, compra.RetIB13, compra.RetIB14)
         agregarImputaciones(compra.imputaciones)
     End Sub
 

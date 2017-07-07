@@ -44,8 +44,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
+        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
+        Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Grupo2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -303,17 +304,17 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.CustomLabel3.TabIndex = 47
         Me.CustomLabel3.Text = "Fecha Emision"
         '
-        'lstAyuda_Filtrada
+        'lstFiltrada
         '
-        Me.lstAyuda_Filtrada.Cleanable = False
-        Me.lstAyuda_Filtrada.EnterIndex = -1
-        Me.lstAyuda_Filtrada.FormattingEnabled = True
-        Me.lstAyuda_Filtrada.LabelAssociationKey = -1
-        Me.lstAyuda_Filtrada.Location = New System.Drawing.Point(36, 498)
-        Me.lstAyuda_Filtrada.Name = "lstAyuda_Filtrada"
-        Me.lstAyuda_Filtrada.Size = New System.Drawing.Size(545, 147)
-        Me.lstAyuda_Filtrada.TabIndex = 62
-        Me.lstAyuda_Filtrada.Visible = False
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(36, 498)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(545, 147)
+        Me.lstFiltrada.TabIndex = 62
+        Me.lstFiltrada.Visible = False
         '
         'lstAyuda
         '
@@ -327,11 +328,23 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.lstAyuda.TabIndex = 54
         Me.lstAyuda.Visible = False
         '
+        'lstAyuda_Filtrada
+        '
+        Me.lstAyuda_Filtrada.Cleanable = False
+        Me.lstAyuda_Filtrada.EnterIndex = -1
+        Me.lstAyuda_Filtrada.FormattingEnabled = True
+        Me.lstAyuda_Filtrada.LabelAssociationKey = -1
+        Me.lstAyuda_Filtrada.Location = New System.Drawing.Point(36, 498)
+        Me.lstAyuda_Filtrada.Name = "lstAyuda_Filtrada"
+        Me.lstAyuda_Filtrada.Size = New System.Drawing.Size(545, 147)
+        Me.lstAyuda_Filtrada.TabIndex = 62
+        Me.lstAyuda_Filtrada.Visible = False
+        '
         'ListadoCuentaCorrienteProveedoresSelectivo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(614, 471)
+        Me.ClientSize = New System.Drawing.Size(614, 468)
         Me.Controls.Add(Me.btnLimpiarTodo)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnConsulta)
@@ -346,7 +359,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Controls.Add(Me.txtFechaEmision)
         Me.Controls.Add(Me.CustomLabel3)
         Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.lstAyuda_Filtrada)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.lstAyuda)
         Me.Name = "ListadoCuentaCorrienteProveedoresSelectivo"
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).EndInit()
@@ -380,5 +393,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents btnLimpiarTodo As Administracion.CustomButton
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstFiltrada As Administracion.CustomListBox
     Friend WithEvents lstAyuda_Filtrada As Administracion.CustomListBox
 End Class

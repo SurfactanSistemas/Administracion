@@ -813,14 +813,21 @@ Public Class ProveedoresABM
     Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            Dim cuenta As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
-            If Not IsNothing(cuenta) Then
-                txtCuentaDescripcion.Text = cuenta.descripcion
-                _SaltarA(txtCheque)
+
+            If Trim(txtCuenta.Text) <> "" Then
+                Dim cuenta As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
+                If Not IsNothing(cuenta) Then
+                    txtCuentaDescripcion.Text = cuenta.descripcion
+                    _SaltarA(txtCheque)
+                Else
+                    txtCuentaDescripcion.Text = ""
+                    txtCuenta.Focus()
+                End If
             Else
-                txtCuentaDescripcion.Text = ""
-                txtCuenta.Focus()
+                _SaltarA(txtCheque)
             End If
+
+            
         ElseIf e.KeyData = Keys.Escape Then
             txtCuenta.Text = ""
         End If
@@ -1158,10 +1165,18 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub txtCodigo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigo.MouseDoubleClick
-        _AbrirConsulta("Proveedor")
+
+        If Trim(txtCodigo.Text) = "" Then
+            _AbrirConsulta("Proveedor")
+        End If
+
     End Sub
 
     Private Sub txtCuenta_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCuenta.MouseDoubleClick
-        _AbrirConsulta("Cuenta")
+
+        If Trim(txtCuenta.Text) = "" Then
+            _AbrirConsulta("Cuenta")
+        End If
+
     End Sub
 End Class

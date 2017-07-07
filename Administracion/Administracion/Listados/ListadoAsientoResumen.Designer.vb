@@ -45,6 +45,7 @@ Partial Class ListadoAsientoResumen
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -324,11 +325,24 @@ Partial Class ListadoAsientoResumen
         Me.Panel2.Size = New System.Drawing.Size(603, 199)
         Me.Panel2.TabIndex = 40
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(97, 360)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(417, 147)
+        Me.lstFiltrada.TabIndex = 41
+        Me.lstFiltrada.Visible = False
+        '
         'ListadoAsientoResumen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(603, 326)
+        Me.ClientSize = New System.Drawing.Size(603, 318)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.txtAyuda)
@@ -377,4 +391,5 @@ Partial Class ListadoAsientoResumen
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstFiltrada As Administracion.CustomListBox
 End Class

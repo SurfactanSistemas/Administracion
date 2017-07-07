@@ -49,6 +49,7 @@ Partial Class ListadoImputacionesContable
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -356,11 +357,24 @@ Partial Class ListadoImputacionesContable
         Me.Panel2.Size = New System.Drawing.Size(541, 212)
         Me.Panel2.TabIndex = 49
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(62, 350)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(409, 160)
+        Me.lstFiltrada.TabIndex = 50
+        Me.lstFiltrada.Visible = False
+        '
         'ListadoImputacionesContable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(540, 316)
+        Me.ClientSize = New System.Drawing.Size(540, 318)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.TipoListado)
         Me.Controls.Add(Me.txtHastaCuenta)
@@ -417,4 +431,5 @@ Partial Class ListadoImputacionesContable
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstFiltrada As Administracion.CustomListBox
 End Class

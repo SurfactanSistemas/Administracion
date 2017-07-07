@@ -46,9 +46,12 @@ Public Class EnvioEmailProveedores
 
             Next
 
-            'MsgBox(String.Join(";", _SubGrupoEmails).ToString()) ' REEMPLAZAR POR LLAMADA A METODO DE ENVIO DE EMAIL.
-
-            '_EnviarEmail(_SubGrupoEmails)
+            Try
+                '_EnviarEmail(_SubGrupoEmails) ' Descomentar para que comience a funcionar, no olvidarse tambien de descomentar el de mas abajo.
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                Exit Sub
+            End Try
 
             _SubGrupoEmails.Clear() ' Limpiamos para el siguiente grupo.
 
@@ -61,8 +64,11 @@ Public Class EnvioEmailProveedores
             _SubGrupoEmails.Add(_ListaEmails(i))
         Next
 
-        MsgBox(String.Join(";", _SubGrupoEmails).ToString()) ' REEMPLAZAR POR LLAMADA A METODO DE ENVIO DE EMAIL.
-        '_EnviarEmail(_SubGrupoEmails)
+        Try
+            '_EnviarEmail(_SubGrupoEmails) ' Descomentar para que comience a funcionar.
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub _EnviarEmail(ByVal emails As List(Of String))
@@ -84,16 +90,16 @@ Public Class EnvioEmailProveedores
 
             End With
 
-            '_Mail.Send()
 
-            'MsgBox("Email enviado de manera correcta")
+
+            '_Mail.Send()
 
             '_Mail = Nothing
 
             'Me.Close()
 
         Catch ex As Exception
-            MsgBox("Ocurrió un problema al querer enviar el email a los proveedores.")
+            Throw New Exception("Ocurrió un problema al querer enviar el email a los proveedores.")
         Finally
             _Outlook = Nothing
         End Try
@@ -104,16 +110,16 @@ Public Class EnvioEmailProveedores
         Dim LineasParseadas As String = ""
 
         If Trim(txtLineaExtraI.Text) <> "" Then
-            LineasParseadas += Trim(txtLineaExtraI.Text) + vbCrLf
+            LineasParseadas &= Trim(txtLineaExtraI.Text) + vbCrLf
         End If
         If Trim(txtLineaExtraII.Text) <> "" Then
-            LineasParseadas += Trim(txtLineaExtraII.Text) + vbCrLf
+            LineasParseadas &= Trim(txtLineaExtraII.Text) + vbCrLf
         End If
         If Trim(txtLineaExtraIII.Text) <> "" Then
-            LineasParseadas += Trim(txtLineaExtraIII.Text) + vbCrLf
+            LineasParseadas &= Trim(txtLineaExtraIII.Text) + vbCrLf
         End If
         If Trim(txtLineaExtraIV.Text) <> "" Then
-            LineasParseadas += Trim(txtLineaExtraIV.Text) + vbCrLf
+            LineasParseadas &= Trim(txtLineaExtraIV.Text) + vbCrLf
         End If
 
         Return LineasParseadas

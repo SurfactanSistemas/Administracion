@@ -3,7 +3,7 @@ Imports System.IO
 
 Public Class ListadoProyeccionCobros
 
-    Private Sub ListadoProyeccionCobros_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub ListadoProyeccionCobros_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
         txtAyuda.Text = ""
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
@@ -16,8 +16,8 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtdesdeproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtDesdeProveedor.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesdeProveedor.KeyPress
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             txtHastaProveedor.Focus()
@@ -31,8 +31,8 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txthastaproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtHastaProveedor.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHastaProveedor.KeyPress
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             txtFecha1.Focus()
@@ -46,8 +46,8 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha1_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtFecha1.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha1.KeyPress
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             If ValidaFecha(txtFecha1.Text) = "S" Then
@@ -60,8 +60,8 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha2_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtFecha2.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha2.KeyPress
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             If ValidaFecha(txtFecha2.Text) = "S" Then
@@ -74,8 +74,8 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha3_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtFecha3.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha3.KeyPress
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             If ValidaFecha(txtFecha3.Text) = "S" Then
@@ -88,8 +88,8 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha4_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtFecha4.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha4.KeyPress
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             If ValidaFecha(txtFecha4.Text) = "S" Then
@@ -125,8 +125,8 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtAyuda.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
@@ -228,5 +228,61 @@ Public Class ListadoProyeccionCobros
 
 
 
+    End Sub
+
+    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtHastaProveedor.MouseDoubleClick, txtDesdeProveedor.MouseDoubleClick
+        btnConsulta.PerformClick()
+    End Sub
+
+
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstAyuda
+        Dim final As ListBox = lstFiltrada
+        Dim cadena As String = Trim(txtAyuda.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+
+        Else
+
+            final.Visible = False
+
+        End If
+    End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+        Dim origen As ListBox = lstAyuda
+        Dim filtrado As ListBox = lstFiltrada
+        Dim texto As TextBox = txtAyuda
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        lstAyuda_Click(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        _FiltrarDinamicamente()
     End Sub
 End Class

@@ -258,7 +258,7 @@ Partial Class MenuPrincipal
         '
         Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem.Name = "CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem"
         Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
-        Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem.Text = "Cuanta Corriente de Proveedores Selectivo"
+        Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem.Text = "Cuenta Corriente de Proveedores Selectivo"
         '
         'ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem
         '

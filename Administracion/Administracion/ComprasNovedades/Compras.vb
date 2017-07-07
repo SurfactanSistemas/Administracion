@@ -170,7 +170,7 @@ Public Class Compras
         End If
     End Sub
 
-    Private Sub txtImporte_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) 'Handles txtIVARG.Leave, txtPercIB.Leave, txtNoGravado.Leave, txtIVA27.Leave, txtIVA21.Leave, txtIVA10.Leave
+    Private Sub txtImporte_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIVARG.Leave, txtPercIB.Leave, txtNoGravado.Leave, txtIVA27.Leave, txtIVA21.Leave, txtIVA10.Leave
         Dim total As Double = calculoTotal()
         txtTotal.Text = CustomConvert.toStringWithTwoDecimalPlaces(Math.Round(total, 2))
     End Sub
@@ -277,9 +277,11 @@ Public Class Compras
         For Each row As DataGridViewRow In gridAsientos.Rows
 
             With row
-
+                gridAsientos.CommitEdit(DataGridViewDataErrorContexts.Commit)
                 If IsNothing(.Cells(0).Value) And IsNothing(.Cells(1).Value) And IsNothing(.Cells(2).Value) And IsNothing(.Cells(3).Value) Then
-                    gridAsientos.Rows().Remove(row)
+                    If Not .IsNewRow Then
+                        gridAsientos.Rows().Remove(row)
+                    End If
                 End If
 
             End With
@@ -326,13 +328,13 @@ Public Class Compras
         End If
         Dim interno As Integer = CustomConvert.toIntOrZero(txtNroInterno.Text)
         If interno = 0 Then : interno = DAOCompras.siguienteNumeroDeInterno() : End If
-        Dim compra As New Compra(interno, proveedor, txtTipo.Text, cmbTipo.Text, cmbFormaPago.SelectedIndex,
+        Dim compra As New Compra(interno, proveedor, cmbTipo.SelectedIndex, cmbTipo.Text, cmbFormaPago.SelectedIndex,
                                  tipoPago(), CBLetra.SelectedItem, txtPunto.Text, txtNumero.Text, txtFechaEmision.Text, txtFechaIVA.Text, txtFechaVto1.Text, txtFechaVto2.Text,
                                  asDouble(txtParidad.Text), asDouble(txtNeto.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA21.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtIVARG.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA27.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtPercIB.Text) * multiplicadorPorNotaDeCredito, asDouble(txtNoGravado.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtIVA10.Text) * multiplicadorPorNotaDeCredito, asDouble(txtTotal.Text) * multiplicadorPorNotaDeCredito, chkSoloIVA.Checked,
-                                 txtRemito.Text, txtDespacho.Text)
+                                 txtRemito.Text, txtDespacho.Text, asDouble(_RetIB1), asDouble(_RetIB2), asDouble(_RetIB3), asDouble(_RetIB4), asDouble(_RetIB5), asDouble(_RetIB6), asDouble(_RetIB7), asDouble(_RetIB8), asDouble(_RetIB9), asDouble(_RetIB10), asDouble(_RetIB11), asDouble(_RetIB12), asDouble(_RetIB13), asDouble(_RetIB14))
         crearImputaciones(compra)
         Return compra
     End Function
@@ -480,33 +482,33 @@ Public Class Compras
     End Function
 
     Private Sub crearAsientoContableUsando(ByVal cuenta As CuentaContable)
-        If Not esModificacion Then
-            gridAsientos.Rows.Clear()
-            txtTotal.Text = calculoTotal()
-            Dim total As Double = asDouble(txtTotal.Text)
-            Dim sumaIvas As Double = asDouble(txtIVA10.Text) + asDouble(txtIVA21.Text) + asDouble(txtIVA27.Text)
-            Dim ivaRG3337 As Double = asDouble(txtIVARG.Text)
-            Dim ingresosBrutos As Double = asDouble(txtPercIB.Text)
-            Dim diferencia As Double = total - sumaIvas - ingresosBrutos - ivaRG3337
+        'If Not esModificacion Then
+        gridAsientos.Rows.Clear()
+        txtTotal.Text = calculoTotal()
+        Dim total As Double = asDouble(txtTotal.Text)
+        Dim sumaIvas As Double = asDouble(txtIVA10.Text) + asDouble(txtIVA21.Text) + asDouble(txtIVA27.Text)
+        Dim ivaRG3337 As Double = asDouble(txtIVARG.Text)
+        Dim ingresosBrutos As Double = asDouble(txtPercIB.Text)
+        Dim diferencia As Double = total - sumaIvas - ingresosBrutos - ivaRG3337
 
-            If esNotaDeCredito() Then
-                If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, total, "") : End If
-                If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, "", sumaIvas) : End If
-                If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, "", ivaRG3337) : End If
-                If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, "", ingresosBrutos) : End If
-                If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", "", diferencia) : End If
-            Else
-                If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, "", total) : End If
-                If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, sumaIvas, "") : End If
-                If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, ivaRG3337, "") : End If
-                If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, ingresosBrutos, "") : End If
-                If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", diferencia, 0) : End If
-            End If
-
-            _DarFormatoValoresGrilla()
-
-            calcularAsiento()
+        If esNotaDeCredito() Then
+            If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, total, "") : End If
+            If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, "", sumaIvas) : End If
+            If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, "", ivaRG3337) : End If
+            If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, "", ingresosBrutos) : End If
+            If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", "", diferencia) : End If
+        Else
+            If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, "", total) : End If
+            If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, sumaIvas, "") : End If
+            If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, ivaRG3337, "") : End If
+            If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, ingresosBrutos, "") : End If
+            If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", diferencia, 0) : End If
         End If
+
+        _DarFormatoValoresGrilla()
+
+        calcularAsiento()
+        'End If
     End Sub
 
     Private Sub _DarFormatoValoresGrilla()
@@ -553,6 +555,13 @@ Public Class Compras
         txtNroInterno.Text = compra.nroInterno
         mostrarProveedor(compra.proveedor)
         txtTipo.Text = compra.tipoDocumento
+
+        If compra.tipoDocumento > 0 Then
+            cmbTipo.SelectedIndex = compra.tipoDocumento - 1
+        Else
+            cmbTipo.SelectedIndex = 0
+        End If
+
         CBLetra.SelectedItem = compra.letra
         txtPunto.Text = compra.punto
         txtNumero.Text = compra.numero
@@ -573,11 +582,57 @@ Public Class Compras
         txtDespacho.Text = compra.despacho
         chkSoloIVA.Checked = compra.soloIVA
         pulsarOption(compra.tipoPago)
+        traerValoresIb(compra.nroInterno)
         txtImporte_Leave(Nothing, Nothing)
         txtTipo_Leave(Nothing, Nothing)
         mostrarImputaciones(compra.imputaciones)
         calcularAsiento()
         esModificacion = True
+    End Sub
+
+    Private Sub traerValoresIb(ByVal nroInterno As String)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 RetIB1, RetIB2, RetIB3, RetIB4, RetIB5, RetIB6, RetIB7, RetIB8, RetIB9, RetIB10, RetIB11, RetIB12, RetIB13, RetIB14 FROM IvaComp WHERE NroInterno = '" & Trim(nroInterno) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                _RetIB1 = IIf(Not IsDBNull(dr.Item("RetIB1")), dr.Item("RetIB1"), "")
+                _RetIB2 = IIf(Not IsDBNull(dr.Item("RetIB2")), dr.Item("RetIB2"), "")
+                _RetIB3 = IIf(Not IsDBNull(dr.Item("RetIB3")), dr.Item("RetIB3"), "")
+                _RetIB4 = IIf(Not IsDBNull(dr.Item("RetIB4")), dr.Item("RetIB4"), "")
+                _RetIB5 = IIf(Not IsDBNull(dr.Item("RetIB5")), dr.Item("RetIB5"), "")
+                _RetIB6 = IIf(Not IsDBNull(dr.Item("RetIB6")), dr.Item("RetIB6"), "")
+                _RetIB7 = IIf(Not IsDBNull(dr.Item("RetIB7")), dr.Item("RetIB7"), "")
+                _RetIB8 = IIf(Not IsDBNull(dr.Item("RetIB8")), dr.Item("RetIB8"), "")
+                _RetIB9 = IIf(Not IsDBNull(dr.Item("RetIB9")), dr.Item("RetIB9"), "")
+                _RetIB10 = IIf(Not IsDBNull(dr.Item("RetIB10")), dr.Item("RetIB10"), "")
+                _RetIB11 = IIf(Not IsDBNull(dr.Item("RetIB11")), dr.Item("RetIB11"), "")
+                _RetIB12 = IIf(Not IsDBNull(dr.Item("RetIB12")), dr.Item("RetIB12"), "")
+                _RetIB13 = IIf(Not IsDBNull(dr.Item("RetIB13")), dr.Item("RetIB13"), "")
+                _RetIB14 = IIf(Not IsDBNull(dr.Item("RetIB14")), dr.Item("RetIB14"), "")
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub mostrarImputaciones(ByVal imputaciones As List(Of Imputac))
@@ -754,7 +809,7 @@ Public Class Compras
     Private Sub txtCAI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCAI.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbTipo)
+            _SaltarA(txtVtoCAI)
         ElseIf e.KeyData = Keys.Escape Then
             txtCAI.Text = ""
         End If
@@ -1184,20 +1239,20 @@ Public Class Compras
 
             .ShowDialog(Me)
 
-            _RetIB1 = .txtRetIB1.Text
-            _RetIB2 = .txtRetIB2.Text
-            _RetIB3 = .txtRetIB3.Text
-            _RetIB4 = .txtRetIB4.Text
-            _RetIB5 = .txtRetIB5.Text
-            _RetIB6 = .txtRetIB6.Text
-            _RetIB7 = .txtRetIB7.Text
-            _RetIB8 = .txtRetIB8.Text
-            _RetIB9 = .txtRetIB9.Text
-            _RetIB10 = .txtRetIB10.Text
-            _RetIB11 = .txtRetIB11.Text
-            _RetIB12 = .txtRetIB12.Text
-            _RetIB13 = .txtRetIB13.Text
-            _RetIB14 = .txtRetIB14.Text
+            _RetIB1 = asDouble(.txtRetIB1.Text)
+            _RetIB2 = asDouble(.txtRetIB2.Text)
+            _RetIB3 = asDouble(.txtRetIB3.Text)
+            _RetIB4 = asDouble(.txtRetIB4.Text)
+            _RetIB5 = asDouble(.txtRetIB5.Text)
+            _RetIB6 = asDouble(.txtRetIB6.Text)
+            _RetIB7 = asDouble(.txtRetIB7.Text)
+            _RetIB8 = asDouble(.txtRetIB8.Text)
+            _RetIB9 = asDouble(.txtRetIB9.Text)
+            _RetIB10 = asDouble(.txtRetIB10.Text)
+            _RetIB11 = asDouble(.txtRetIB11.Text)
+            _RetIB12 = asDouble(.txtRetIB12.Text)
+            _RetIB13 = asDouble(.txtRetIB13.Text)
+            _RetIB14 = asDouble(.txtRetIB14.Text)
 
             .Dispose()
 
@@ -1230,7 +1285,7 @@ Public Class Compras
         totalIB += Val(_RetIB13)
         totalIB += Val(_RetIB14)
 
-        txtPercIB.Text = CustomConvert.toStringWithTwoDecimalPlaces(totalIB)
+        txtPercIB.Text = CustomConvert.toStringWithTwoDecimalPlaces(asDouble(totalIB))
 
     End Sub
 
@@ -1283,10 +1338,12 @@ Public Class Compras
 
                         gridAsientos.CurrentCell = gridAsientos.Rows(iRow).Cells(iCol + 1)
 
-                    End If
+                    Else
 
-                    If iCol = 3 And gridAsientos.Rows(iRow).Cells(iCol - 1).Value <> "" Then
-                        gridAsientos.CurrentCell = gridAsientos.Rows(gridAsientos.Rows.Add()).Cells(0)
+                        If iCol = 3 And gridAsientos.Rows(iRow).Cells(iCol - 1).Value <> "" Then
+                            gridAsientos.CurrentCell = gridAsientos.Rows(gridAsientos.Rows.Add()).Cells(0)
+                        End If
+
                     End If
 
                 End If
@@ -1464,7 +1521,7 @@ Public Class Compras
     Private Function _DisponibleParaDarDeBaja() As Boolean
         Dim _Disponible As Boolean = False
 
-        Dim XClave As String = Trim(txtCodigoProveedor.Text) & CBLetra.SelectedItem & ceros(cmbTipo.SelectedItem, 2) & ceros(Trim(txtPunto.Text), 4) & ceros(Trim(txtNumero.Text), 8)
+        Dim XClave As String = Trim(txtCodigoProveedor.Text) & CBLetra.SelectedItem & ceros(cmbTipo.SelectedIndex + 1, 2) & ceros(Trim(txtPunto.Text), 4) & ceros(Trim(txtNumero.Text), 8)
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Saldo, Total FROM CtaCtePrv WHERE Clave = '" & XClave & "'")
@@ -1536,7 +1593,7 @@ Public Class Compras
     Private Sub _BorrarIvaComp()
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM IvaComp WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM IvaComp WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1560,7 +1617,7 @@ Public Class Compras
 
     Private Sub _BorrarCtaCtePrv()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM CtaCtePrv WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM CtaCtePrv WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1583,7 +1640,7 @@ Public Class Compras
 
     Private Sub _BorrarImputaciones()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM Imputac WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM Imputac WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1606,7 +1663,7 @@ Public Class Compras
 
     Private Sub _BorrarIvaCompPyMENacion()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM IvaComp WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM IvaComp WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1629,7 +1686,7 @@ Public Class Compras
 
     Private Sub _BorrarCtaCtePrvPyMENacion()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE * FROM CtaCtePrv WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM CtaCtePrv WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)

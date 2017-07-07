@@ -171,8 +171,8 @@ Public Class RubrosProveedorABM
         Dim rubro As New List(Of RubroProveedor)
         rubro = DAORubroProveedor.buscarRubroProveedorPorDescripcion(descripcion)
 
-        txtCodigo.Text = rubro(0).codigo
-        txtDescripcion.Text = rubro(0).descripcion
+        txtCodigo.Text = rubro(1).codigo
+        txtDescripcion.Text = rubro(1).descripcion
         txtDescripcion.Focus()
         Actualiza = True
 

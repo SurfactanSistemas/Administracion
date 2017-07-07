@@ -25,20 +25,21 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.components = New System.ComponentModel.Container()
         Me.opcPantalla = New System.Windows.Forms.RadioButton()
         Me.opcImpesora = New System.Windows.Forms.RadioButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.lstAyuda = New Administracion.CustomListBox()
-        Me.txtAyuda = New Administracion.CustomTextBox()
-        Me.btnCancela = New Administracion.CustomButton()
-        Me.btnAcepta = New Administracion.CustomButton()
-        Me.txtHastaProveedor = New Administracion.CustomTextBox()
-        Me.txtDesdeProveedor = New Administracion.CustomTextBox()
-        Me.CustomLabel2 = New Administracion.CustomLabel()
-        Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnCancela = New Administracion.CustomButton()
+        Me.btnAcepta = New Administracion.CustomButton()
+        Me.txtHastaProveedor = New Administracion.CustomTextBox()
+        Me.txtDesdeProveedor = New Administracion.CustomTextBox()
+        Me.lstFiltrada = New Administracion.CustomListBox()
+        Me.lstAyuda = New Administracion.CustomListBox()
+        Me.txtAyuda = New Administracion.CustomTextBox()
+        Me.CustomLabel2 = New Administracion.CustomLabel()
+        Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -70,6 +71,46 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.opcImpesora.Text = "Impresora"
         Me.opcImpesora.UseVisualStyleBackColor = False
         '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(587, 50)
+        Me.Panel1.TabIndex = 23
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(417, 9)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(156, 26)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "SURFACTAN S.A."
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(16, 15)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(379, 19)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Listado de Saldos de Cuenta Corriente de Proveedores"
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Location = New System.Drawing.Point(-2, 47)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(589, 132)
+        Me.Panel2.TabIndex = 25
+        '
         'btnConsulta
         '
         Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
@@ -89,31 +130,6 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.btnConsulta.TabIndex = 22
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consulta de Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'lstAyuda
-        '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(82, 274)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(417, 147)
-        Me.lstAyuda.TabIndex = 21
-        Me.lstAyuda.Visible = False
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Cleanable = False
-        Me.txtAyuda.Empty = True
-        Me.txtAyuda.EnterIndex = -1
-        Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(82, 248)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
-        Me.txtAyuda.TabIndex = 20
-        Me.txtAyuda.Validator = Administracion.ValidatorType.None
-        Me.txtAyuda.Visible = False
         '
         'btnCancela
         '
@@ -183,6 +199,43 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Desde Código de Proveedor")
         Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(82, 274)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(417, 147)
+        Me.lstFiltrada.TabIndex = 26
+        Me.lstFiltrada.Visible = False
+        '
+        'lstAyuda
+        '
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(82, 274)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(417, 147)
+        Me.lstAyuda.TabIndex = 21
+        Me.lstAyuda.Visible = False
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Cleanable = False
+        Me.txtAyuda.Empty = True
+        Me.txtAyuda.EnterIndex = -1
+        Me.txtAyuda.LabelAssociationKey = -1
+        Me.txtAyuda.Location = New System.Drawing.Point(82, 248)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
+        Me.txtAyuda.TabIndex = 20
+        Me.txtAyuda.Validator = Administracion.ValidatorType.None
+        Me.txtAyuda.Visible = False
+        '
         'CustomLabel2
         '
         Me.CustomLabel2.AutoSize = True
@@ -209,51 +262,12 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
         Me.CustomLabel1.TabIndex = 12
         Me.CustomLabel1.Text = "Desde Proveedor"
         '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(587, 50)
-        Me.Panel1.TabIndex = 23
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(417, 9)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(156, 26)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "SURFACTAN S.A."
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(16, 15)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(379, 19)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Listado de Saldos de Cuenta Corriente de Proveedores"
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel2.Location = New System.Drawing.Point(-2, 47)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(589, 132)
-        Me.Panel2.TabIndex = 25
-        '
         'ListadoSaldosCuentaCorrienteProveedores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(586, 241)
+        Me.ClientSize = New System.Drawing.Size(586, 239)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.lstAyuda)
@@ -290,4 +304,5 @@ Partial Class ListadoSaldosCuentaCorrienteProveedores
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstFiltrada As Administracion.CustomListBox
 End Class
