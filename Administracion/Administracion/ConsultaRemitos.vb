@@ -123,6 +123,10 @@ Public Class ConsultaRemitos
         Dim remitos As New List(Of String)
         Dim Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
+        If Trim(txtCodigoProveedor.Text) = "" Then
+            Exit Sub
+        End If
+
         LBRemitos.Items.Clear()
 
         For Each empresa In Empresas
@@ -163,7 +167,7 @@ Public Class ConsultaRemitos
 
         Next
 
-        ' Filtro aquellos que no se encuentre en la tabla IvaComp
+        ' Filtro aquellos que no se encuentren en la tabla IvaComp
         For Each remito In remitos
 
             Try
@@ -236,4 +240,20 @@ Public Class ConsultaRemitos
     Private Function _ConnectionString(ByVal empresa As String) As String
         Return "Data Source=193.168.0.7;Initial Catalog=" + empresa + ";User ID=usuarioadmin; Password=usuarioadmin"
     End Function
+
+    Private Sub LBProveedores_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LBProveedores.MouseDoubleClick
+        btnConsultaRemitos.PerformClick()
+    End Sub
+
+    Private Sub txtCodigoProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigoProveedor.KeyDown
+
+        If Trim(txtCodigoProveedor.Text) <> "" Then
+            LBProveedores.SelectedIndex = LBProveedores.FindString(Trim(txtCodigoProveedor.Text))
+            LBProveedores_MouseDoubleClick(Nothing, Nothing)
+            btnConsultaRemitos.PerformClick()
+        Else
+            txtFiltrar.Focus()
+        End If
+
+    End Sub
 End Class

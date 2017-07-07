@@ -4,8 +4,6 @@ Imports CrystalDecisions.Shared
 
 Public Class DetallesRemitosProveedor
 
-    ' FALTA DEFINIR COMO REALIZAR LAS CONSULTAS EN CUANDO LOS REMITOS SON MAS DE UNO CON EL MISMO NUMERO DE REMITO Y ORDEN.
-
     Private _Consulta() As String
     Private _CodProv, _NombreProv As String
 
@@ -23,7 +21,22 @@ Public Class DetallesRemitosProveedor
     End Sub
 
     Private Sub DetallesRemitosProveedor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        _AlinearCeldas()
         _TraerInfoRemitos()
+
+    End Sub
+
+    'Definimos las alineaciones por defecto.
+    Private Sub _AlinearCeldas()
+        With DGVDetalles
+            .Columns("Remito").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns("Orden").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns("CantidadPedida").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns("Precio").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns("Remito").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns("Informe").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns("CantRecibida").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        End With
     End Sub
 
     Private Sub _TraerInfoRemitos()
@@ -113,6 +126,7 @@ Public Class DetallesRemitosProveedor
                 End If
             Catch ex As Exception
                 Throw New Exception("Hubo un error al querer buscar al proveedor indicado")
+                Exit Sub
             Finally
                 cn.Close()
             End Try
@@ -148,6 +162,7 @@ Public Class DetallesRemitosProveedor
                 End If
             Catch ex As Exception
                 Throw New Exception("Hubo un error al querer buscar al proveedor indicado")
+                Exit Sub
             Finally
                 cn.Close()
             End Try
@@ -182,6 +197,7 @@ Public Class DetallesRemitosProveedor
                 End If
             Catch ex As Exception
                 Throw New Exception("Hubo un error al querer buscar al proveedor indicado")
+                Exit Sub
             Finally
                 cn.Close()
                 'cm = Nothing
@@ -243,6 +259,10 @@ Public Class DetallesRemitosProveedor
             table.Rows.Add(row)
 
         Next
+
+        If table.Rows.Count = 0 Then
+            Exit Sub
+        End If
 
         crdoc.SetDataSource(table)
         ' Paso parámetros obligatorios.

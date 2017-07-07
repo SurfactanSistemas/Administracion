@@ -93,22 +93,38 @@ Partial Class ConsultaRemitos
         '
         'btnConsultaRemitos
         '
+        Me.btnConsultaRemitos.BackgroundImage = Global.Administracion.My.Resources.Resources.Informe
+        Me.btnConsultaRemitos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsultaRemitos.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsultaRemitos.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsultaRemitos.FlatAppearance.BorderSize = 0
+        Me.btnConsultaRemitos.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsultaRemitos.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsultaRemitos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsultaRemitos.ForeColor = System.Drawing.SystemColors.Control
         Me.btnConsultaRemitos.Location = New System.Drawing.Point(190, 374)
         Me.btnConsultaRemitos.Name = "btnConsultaRemitos"
         Me.btnConsultaRemitos.Size = New System.Drawing.Size(132, 48)
         Me.btnConsultaRemitos.TabIndex = 4
-        Me.btnConsultaRemitos.Text = "Consulta de Remitos"
         Me.ToolTip1.SetToolTip(Me.btnConsultaRemitos, "Consultar Remitos de Proveedor")
         Me.btnConsultaRemitos.UseVisualStyleBackColor = True
         '
         'btnCerrar
         '
+        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.BorderSize = 0
+        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.Location = New System.Drawing.Point(328, 374)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(132, 48)
         Me.btnCerrar.TabIndex = 4
-        Me.btnCerrar.Text = "Cerrar"
-        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'txtCodigoProveedor
