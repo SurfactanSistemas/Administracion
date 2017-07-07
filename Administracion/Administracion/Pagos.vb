@@ -2304,4 +2304,14 @@ Public Class Pagos
         End If
 
     End Sub
+
+    Private Sub btnChequesTerceros_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChequesTerceros.Click
+        lstSeleccion.SelectedIndex = 2
+        lstSeleccion_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub btnCtaCte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCtaCte.Click
+        lstSeleccion.SelectedIndex = 1
+        lstSeleccion_Click(Nothing, Nothing)
+    End Sub
 End Class
