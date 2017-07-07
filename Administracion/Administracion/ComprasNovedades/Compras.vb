@@ -1091,10 +1091,10 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             If txtIVA21.Enabled Then
-                txtIVA21.Text = CustomConvert.toStringWithTwoDecimalPlaces(Math.Round(asDouble(txtNeto.Text) * 0.21, 2))
+                txtIVA21.Text = CustomConvert.toStringWithTwoDecimalPlaces(Math.Round(asDouble(txtNeto.Text.Replace(".", ",")) * 0.21, 2))
             End If
 
-            txtNeto.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtNeto.Text))
+            txtNeto.Text = CustomConvert.toStringWithTwoDecimalPlaces(asDouble(txtNeto.Text.Replace(".", ",")))
             _RecalcularTotal()
 
             If txtIVA21.Enabled Then
