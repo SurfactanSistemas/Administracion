@@ -386,10 +386,12 @@
         If Trim(fecha.Replace("/", "")) <> "" Then
 
             ' Controlamos que el formato sea valido. (Tanto 03/04/2000 como 3/4/2000, son tomados como formatos validos. En cambio, no lo es 03/04/00.)
-            If _FormatoValidoFecha(fecha) Then
-                If Not valido Then ' Por si se lo utiliza con el evento TypeValidationCompleted u otra funcion con validacion adicional.
-                    valida = False
-                End If
+            If Not _FormatoValidoFecha(fecha) Then
+                valida = False
+            End If
+
+            If Not valido Then ' Por si se lo utiliza con el evento TypeValidationCompleted u otra funcion con validacion adicional.
+                valida = False
             End If
 
         End If

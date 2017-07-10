@@ -402,6 +402,11 @@ Public Class Pagos
                     _HabilitarConsulta()
                 Else
                     _InhabilitarConsulta()
+
+                    If Trim(txtProveedor.Text) = "" Then
+                        MsgBox("Debe informarse primero un proveedor para poder realizar la consulta de Cuentas Corrientes.", MsgBoxStyle.Information)
+                    End If
+
                 End If
             End With
 
@@ -2240,11 +2245,8 @@ Public Class Pagos
 
     Private Sub txtBanco_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtBanco.MouseDoubleClick
 
-        If Trim(txtBanco.Text) = "" Then
             _TipoConsulta = 1
             _ListarCuentasContables()
-            Exit Sub
-        End If
 
     End Sub
 
