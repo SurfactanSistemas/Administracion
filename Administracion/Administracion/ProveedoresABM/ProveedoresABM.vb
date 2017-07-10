@@ -103,8 +103,8 @@ Public Class ProveedoresABM
                     & "CodIb =  '" & NormalizarIndex(cmbCondicionIB1.SelectedIndex) & "', " _
                     & "NroIb =  '" & Mid(Trim(txtNroIB.Text), 1, 20) & "', " _
                     & "NroInsc =  '" & Mid(Trim(txtNroSEDRONAR1.Text), 1, 15) & "', " _
-                    & "Cai =  '" & Mid(Trim(txtCAI.Text), 1, 14) & "', " _
-                    & "VtoCai =  '" & Mid(Trim(txtCAIVto.Text), 1, 10) & "', " _
+                    & "Cai =  '', " _
+                    & "VtoCai =  '', " _
                     & "TipoProv =  '" & NormalizarIndex(cmbTipoProveedor.SelectedIndex) & "', " _
                     & "CategoriaI =  '" & NormalizarIndex(cmbCategoria1.SelectedIndex) & "', " _
                     & "CategoriaII =  '" & NormalizarIndex(cmbCategoria2.SelectedIndex) & "', " _
@@ -288,8 +288,8 @@ Public Class ProveedoresABM
         proveedor.categoriaCalif = cmbCategoria2.SelectedIndex
         proveedor.vtoCategoria = txtCategoria.Text
         proveedor.tipoInscripcionIB = cmbInscripcionIB.SelectedIndex
-        proveedor.cai = txtCAI.Text
-        proveedor.vtoCAI = txtCAIVto.Text
+        proveedor.cai = "" 'txtCAI.Text
+        proveedor.vtoCAI = "" 'txtCAIVto.Text
         proveedor.certificados = cmbCertificados.SelectedIndex
         proveedor.vtoCertificados = txtCertificados.Text
         proveedor.estado = cmbEstado.SelectedIndex
@@ -361,8 +361,8 @@ Public Class ProveedoresABM
         cmbCategoria2.SelectedIndex = proveedor.categoriaCalif
         txtCategoria.Text = proveedor.vtoCategoria
         cmbInscripcionIB.SelectedIndex = proveedor.tipoInscripcionIB
-        txtCAI.Text = proveedor.cai
-        txtCAIVto.Text = proveedor.vtoCAI
+        txtCAI.Text = "" 'proveedor.cai
+        txtCAIVto.Text = "" ' proveedor.vtoCAI
         cmbCertificados.SelectedIndex = proveedor.certificados
         txtCertificados.Text = proveedor.vtoCertificados
         cmbEstado.SelectedIndex = proveedor.estado
@@ -849,7 +849,7 @@ Public Class ProveedoresABM
 
     Private Sub txtNroIB_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroIB.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbRubro)
+            _SaltarA(txtPorcelProv)
         ElseIf e.KeyData = Keys.Escape Then
             txtNroIB.Text = ""
         End If
@@ -857,7 +857,7 @@ Public Class ProveedoresABM
 
     Private Sub txtPorcelProv_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPorcelProv.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtPorcelCABA)
+            _SaltarA(cmbCondicionIB2)
         ElseIf e.KeyData = Keys.Escape Then
             txtPorcelProv.Text = ""
         End If
@@ -865,7 +865,7 @@ Public Class ProveedoresABM
 
     Private Sub txtPorcelCABA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPorcelCABA.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbCondicionIB1)
+            _SaltarA(txtNroSEDRONAR1)
         ElseIf e.KeyData = Keys.Escape Then
             txtPorcelCABA.Text = ""
         End If
@@ -881,7 +881,7 @@ Public Class ProveedoresABM
 
     Private Sub txtNroSEDRONAR2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroSEDRONAR2.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbCategoria1)
+            _SaltarA(cmbCertificados)
         ElseIf e.KeyData = Keys.Escape Then
             txtNroSEDRONAR2.Text = ""
         End If
@@ -892,22 +892,6 @@ Public Class ProveedoresABM
             _SaltarA(cmbInscripcionIB)
         ElseIf e.KeyData = Keys.Escape Then
             txtCategoria.Text = ""
-        End If
-    End Sub
-
-    Private Sub txtCAI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCAI.KeyDown
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(txtCAIVto)
-        ElseIf e.KeyData = Keys.Escape Then
-            txtCAI.Text = ""
-        End If
-    End Sub
-
-    Private Sub txtCAIVto_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCAIVto.KeyDown
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbEstado)
-        ElseIf e.KeyData = Keys.Escape Then
-            txtCAIVto.Text = ""
         End If
     End Sub
 
@@ -964,7 +948,7 @@ Public Class ProveedoresABM
     Private Sub cmbCondicionIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCondicionIB1.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbCondicionIB2)
+            _SaltarA(txtNroIB)
         ElseIf e.KeyData = Keys.Escape Then
             cmbCondicionIB1.SelectedIndex = 0
         End If
@@ -972,13 +956,13 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub cmbCondicionIB1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCondicionIB1.TextChanged
-        _SaltarA(cmbCondicionIB2)
+        _SaltarA(txtNroIB)
     End Sub
 
     Private Sub cmbCondicionIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCondicionIB2.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtNroIB)
+            _SaltarA(cmbInscripcionIB)
         ElseIf e.KeyData = Keys.Escape Then
             cmbCondicionIB2.SelectedIndex = 0
         End If
@@ -986,7 +970,7 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub cmbCondicionIB2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCondicionIB2.TextChanged
-        _SaltarA(txtNroIB)
+        _SaltarA(cmbInscripcionIB)
     End Sub
 
     Private Sub cmbRubro_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRubro.TextChanged
@@ -1030,7 +1014,7 @@ Public Class ProveedoresABM
     Private Sub cmbInscripcionIB_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbInscripcionIB.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtCAI)
+            _SaltarA(txtPorcelCABA)
         ElseIf e.KeyData = Keys.Escape Then
             cmbInscripcionIB.SelectedIndex = 0
         End If
@@ -1038,13 +1022,13 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub cmbInscripcionIB_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbInscripcionIB.TextChanged
-        _SaltarA(txtCAI)
+        _SaltarA(txtPorcelCABA)
     End Sub
 
     Private Sub cmbEstado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbEstado.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbCertificados)
+            _SaltarA(txtPaginaWeb)
         ElseIf e.KeyData = Keys.Escape Then
             cmbEstado.SelectedIndex = 0
         End If
@@ -1052,7 +1036,7 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub cmbEstado_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbEstado.TextChanged
-        _SaltarA(cmbCertificados)
+        _SaltarA(txtPaginaWeb)
     End Sub
 
     Private Sub cmbCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCertificados.KeyDown
@@ -1176,6 +1160,14 @@ Public Class ProveedoresABM
 
         If Trim(txtCuenta.Text) = "" Then
             _AbrirConsulta("Cuenta")
+        End If
+
+    End Sub
+
+    Private Sub txtCalificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCalificacion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            _SaltarA(cmbEstado)
         End If
 
     End Sub
