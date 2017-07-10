@@ -377,6 +377,51 @@
 
     End Function
 
+    ' El parametro opcional es por si se decide utilizar con el evento TypeValidationCompleted (Ej: e.Cancel = _ValidarFecha(txtFecha.Text, e.IsValidInput) )
+    ' Retorna FALSE en caso de que no sea una fecha válida.
+    Public Function _ValidarFecha(ByVal fecha As String, Optional ByVal valido As Boolean = True) As Boolean
+        Dim valida As Boolean = True
 
+        ' Controlamos que tenga digitos.
+        If Trim(fecha.Replace("/", "")) <> "" Then
+
+            ' Controlamos que el formato sea valido. (Tanto 03/04/2000 como 3/4/2000, son tomados como formatos validos. En cambio, no lo es 03/04/00.)
+            If _FormatoValidoFecha(fecha) Then
+                If Not valido Then ' Por si se lo utiliza con el evento TypeValidationCompleted u otra funcion con validacion adicional.
+                    valida = False
+                End If
+            End If
+
+        End If
+
+        Return valida
+    End Function
+
+    Public Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
+        ' Se normaliza la fecha (Ej: 3/04/2000 => 03/04/2000 ó 3/4/2000 => 03/04/2000) y se controla que tenga los ocho digitos obligatoriamente.
+        Return Trim(_Normalizarfecha(fecha)).Replace("/", "").Length = 8
+    End Function
+
+    Public Function _Normalizarfecha(ByVal fecha As String) As String
+        Dim xfecha As String = ""
+        Dim _temp As String = fecha
+        Dim _Fecha As String() = fecha.Split("/")
+
+        Try
+            _Fecha(0) = Val(_Fecha(0)).ToString() ' 03 => 3, 12 => 12
+            _Fecha(1) = Val(_Fecha(1)).ToString() ' 04 => 4, 12 => 12
+            _Fecha(2) = Val(_Fecha(2)).ToString() ' 2000 => 2000, 0201 => 201
+
+            xfecha = String.Join("/", _Fecha) ' 3/4/2000, 12/12/201
+
+            ' En la primera (3/4/2001), se parsearia y devolveria: 03/04/2000. En el segundo caso lanzaria una excepcion ya que la fecha (12/12/201), no es un formato de fecha posible.
+            xfecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+        Catch ex As Exception
+            ' En caso de excepcion, se retorna el mismo valor que se introdujo sin cambios.
+            xfecha = _temp
+        End Try
+
+        Return xfecha
+    End Function
 
 End Module

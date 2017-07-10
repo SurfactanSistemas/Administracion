@@ -1709,6 +1709,11 @@ Public Class Pagos
 
                 If iCol = 2 And valor <> "" Then
                     valor = _Normalizarfecha(valor)
+
+                    If Not _ValidarFecha(valor, True) Then
+                        Return True
+                    End If
+
                     gridFormaPagos.Rows(iRow).Cells(iCol).Value = valor
                 End If
 
@@ -1957,23 +1962,7 @@ Public Class Pagos
     End Sub
 
     Private Function _Normalizarfecha(ByVal fecha As String) As String
-        Dim xfecha As String = ""
-        Dim _temp As String = fecha
-        Dim _Fecha As String() = fecha.Split("/")
-
-        Try
-            _Fecha(0) = Val(_Fecha(0)).ToString()
-            _Fecha(1) = Val(_Fecha(1)).ToString()
-            _Fecha(2) = Val(_Fecha(2)).ToString()
-
-            xfecha = String.Join("/", _Fecha)
-
-            xfecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
-        Catch ex As Exception
-            xfecha = _temp
-        End Try
-
-        Return xfecha
+        Return Proceso._Normalizarfecha(fecha)
     End Function
 
     Private Sub _PedirInformacion(ByVal msg As String, ByRef control As TextBox, ByRef VariableDestino As String)
@@ -2232,23 +2221,11 @@ Public Class Pagos
     End Sub
 
     Private Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
-        Return Trim(_Normalizarfecha(fecha)).Replace("/", "").Length = 8
+        Return Proceso._FormatoValidoFecha(fecha)
     End Function
 
     Private Function _ValidarFecha(ByVal fecha As String, ByVal valido As Boolean) As Boolean
-        Dim invalida As Boolean = False
-
-        If Trim(fecha.Replace("/", "")) <> "" Then
-
-            If _FormatoValidoFecha(fecha) Then
-                If Not valido Then
-                    invalida = True
-                End If
-            End If
-
-        End If
-
-        Return invalida
+        Return Proceso._ValidarFecha(fecha, valido)
     End Function
 
     Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
