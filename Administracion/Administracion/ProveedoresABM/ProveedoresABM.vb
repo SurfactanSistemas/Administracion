@@ -248,15 +248,37 @@ Public Class ProveedoresABM
 
 
         ' Validamos que se haya indicado fecha para sedronar en caso de que se haya colocado un valor.
-
+        ' y que esta sea valida.
         If Trim(txtNroSEDRONAR1.Text) <> "" Then
 
-            If Trim(txtNroSEDRONAR2.Text).Replace("/", "") = "" Then
+            If Trim(txtNroSEDRONAR2.Text).Replace("/", "") = "" And Not Proceso._ValidarFecha(txtNroSEDRONAR2.Text) Then
                 MsgBox("Se debe informar la fecha de vencimiento de Sedronar.", MsgBoxStyle.Information)
                 Exit Sub
             End If
 
         End If
+
+        ' Validamos los campos de fechas restantes.
+
+        If cmbCalificacion.SelectedIndex > 0 Then
+
+            If Not Proceso._ValidarFecha(txtCalificacion.Text) Then
+                MsgBox("Debe ingresarse fecha de la Calificación.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
+        End If
+
+        If cmbCertificados.SelectedIndex > 0 Then
+
+            If Not Proceso._ValidarFecha(txtCertificados.Text) Then
+                MsgBox("Debe ingresarse fecha del certificado.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
+        End If
+
+        ' Se supone que llegados hasta acá todos los datos introducidos son validos.
 
         Dim proveedor As Proveedor
 
