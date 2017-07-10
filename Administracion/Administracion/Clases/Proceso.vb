@@ -388,12 +388,15 @@
             ' Controlamos que el formato sea valido. (Tanto 03/04/2000 como 3/4/2000, son tomados como formatos validos. En cambio, no lo es 03/04/00.)
             If Not _FormatoValidoFecha(fecha) Then
                 valida = False
+                Return valida
             End If
 
             If Not valido Then ' Por si se lo utiliza con el evento TypeValidationCompleted u otra funcion con validacion adicional.
                 valida = False
             End If
-
+        Else
+            ' Si la fecha no tiene digitos, el formato no es valido. (Ej:   /  /     => retorna false)
+            valida = False
         End If
 
         Return valida
