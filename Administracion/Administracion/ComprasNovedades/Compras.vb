@@ -55,13 +55,20 @@ Public Class Compras
         esModificacion = False
         diasPlazo = 0
 
-        Dim ibs As New List(Of String) From {_RetIB1, _RetIB2, _RetIB3, _RetIB4, _RetIB5, _RetIB6, _RetIB7, _RetIB8, _RetIB9, _RetIB10, _RetIB11, _RetIB12, _RetIB13, _RetIB14}
-
-        For Each ib In ibs
-            ib = ""
-        Next
-
-        ibs = Nothing
+        _RetIB1 = ""
+        _RetIB2 = ""
+        _RetIB3 = ""
+        _RetIB4 = ""
+        _RetIB5 = ""
+        _RetIB6 = ""
+        _RetIB7 = ""
+        _RetIB8 = ""
+        _RetIB9 = ""
+        _RetIB10 = ""
+        _RetIB11 = ""
+        _RetIB12 = ""
+        _RetIB13 = ""
+        _RetIB14 = ""
 
         Array.Clear(_PyMENacion, 0, _PyMENacion.Length)
 
@@ -81,8 +88,7 @@ Public Class Compras
         End If
         txtCodigoProveedor.Text = proveedorAMostrar.id
         txtNombreProveedor.Text = proveedorAMostrar.razonSocial
-        txtCAI.Text = proveedorAMostrar.cai
-        txtVtoCAI.Text = proveedorAMostrar.vtoCAI
+        _MostrarCAI(proveedor)
         CBLetra.SelectedItem = "A"
         cmbFormaPago.SelectedIndex = 0
 
@@ -94,6 +100,48 @@ Public Class Compras
 
         diasPlazo = _ExtraerSoloNumeros(proveedorAMostrar.diasPlazo)
     End Sub
+
+    Private Sub _MostrarCAI(ByVal proveedor As Proveedor)
+
+        ' Si tiene dato de CAI, se verifica que no este vencido.
+        ' En caso de que si, se muestran los campos para solicitar que los actualice.
+        If Trim(proveedor.cai) <> "" And Trim(proveedor.vtoCAI).Length = 10 And Val(proveedor.codIva) = 5 Then ' CodIva = 5 corresponde a letra "C".
+            If _CAIVencido(proveedor.vtoCAI) Then
+                txtCAI.Text = proveedor.cai
+                txtVtoCAI.Text = proveedor.vtoCAI
+                _HabilitarCAI()
+            Else
+                _DeshabilitarCAI()
+            End If
+        End If
+
+    End Sub
+
+    Private Sub _HabilitarCAI()
+        lblCai.Visible = True
+        lblVtoCai.Visible = True
+        txtCAI.Visible = True
+        txtVtoCAI.Visible = True
+    End Sub
+
+    Private Sub _DeshabilitarCAI()
+        lblCai.Visible = False
+        lblVtoCai.Visible = False
+        txtCAI.Visible = False
+        txtVtoCAI.Visible = False
+    End Sub
+
+    Private Function _CAIVencido(ByVal fecha_Vto As String) As Boolean
+        Dim vencido As Boolean = False
+        Dim vto As String = String.Join("", fecha_Vto.Split("/").Reverse())
+        Dim actual As String = Date.Now.ToString("yyyyMMdd")
+
+        If Val(vto) < actual Then
+            vencido = True
+        End If
+
+        Return vencido
+    End Function
 
     Public Sub mostrarProveedor(ByVal _proveedorAMostrar As String)
         Dim proveedorAMostrar As Proveedor = DAOProveedor.buscarProveedorPorNombre(_proveedorAMostrar)(0)
@@ -216,8 +264,8 @@ Public Class Compras
         Dim validador As New Validator
 
         validador.validate(Me)
-        validador.alsoValidate(CustomConvert.toIntOr(txtPunto.Text, 0) <> 0, "El campo " & CustomLabel6.Text & " no puede ser cero")
-        validador.alsoValidate(CustomConvert.toIntOr(txtNumero.Text, 0) <> 0, "El campo " & CustomLabel7.Text & " no puede ser cero")
+        validador.alsoValidate(CustomConvert.toIntOr(txtPunto.Text, 0) > 0, "El campo " & CustomLabel6.Text & " no puede ser cero")
+        validador.alsoValidate(CustomConvert.toIntOr(txtNumero.Text, 0) > 0, "El campo " & CustomLabel7.Text & " no puede ser cero")
         Dim letra As String = letrasValidas.Find(Function(l) l = CBLetra.SelectedItem)
         validador.alsoValidate(Not IsNothing(letra) And letra <> "", "El valor ingresado (" & CBLetra.SelectedItem & ") no es una letra válida")
         validador.alsoValidate(DAOCierreMes.mesAbierto(txtFechaIVA.Text), "El mes de la fecha de emisión: " & txtFechaIVA.Text & " se encuentra cerrado según el sistema")
@@ -228,6 +276,7 @@ Public Class Compras
         validador.alsoValidate(asDouble(lblDebito.Text) = asDouble(txtTotal.Text), "El total del asiento contable tiene que ser igual al importe total")
         validador.alsoValidate(esValidoNacion, "No se cargaron las cuotas de PyME nación correctamente")
         validador.alsoValidate(laParidadEsValida, "La paridad con el dólar tiene que ser un valor positivo")
+        validador.alsoValidate(cmbFormaPago.SelectedIndex > 0, "Debe indicarse el tipo de Moneda.")
 
         Return validador.flush
     End Function
@@ -357,7 +406,8 @@ Public Class Compras
         'End If
         'DAOProveedor.agregarProveedor(proveedor)
 
-        If Trim(txtCAI.Text) = "" Or Trim(txtVtoCAI.Text.Replace("/", "")) = "" Then
+        ' Se actualiza CAI y su vencimiento unicamente cuando la letra es C.
+        If Trim(txtCAI.Text) <> "C" Then
             Exit Sub
         End If
 
@@ -758,6 +808,9 @@ Public Class Compras
                 _c.Enabled = False
             Next
             txtTotal.Enabled = True
+
+            _HabilitarCAI()
+
         Else
             For Each _c In _controles
                 _c.Enabled = True
@@ -769,14 +822,23 @@ Public Class Compras
             End If
 
             txtTotal.Enabled = False
+
+            _DeshabilitarCAI()
         End If
     End Sub
 
     Private Sub txtPunto_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPunto.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            txtPunto.Text = ceros(txtPunto.Text, 4)
-            _SaltarA(txtNumero)
+
+            ' Comprobamos que se haya colocado un punto correcto. Es decir, mayor a Cero.
+            If Val(txtPunto.Text) > 0 Then
+                txtPunto.Text = ceros(txtPunto.Text, 4)
+                _SaltarA(txtNumero)
+            Else
+                txtPunto.Focus()
+            End If
+
         ElseIf e.KeyData = Keys.Escape Then
             txtPunto.Text = ""
         End If
@@ -819,7 +881,14 @@ Public Class Compras
     Private Sub txtNumero_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNumero.KeyDown
 
         If e.KeyData = Keys.Enter Then
+
             txtNumero.Text = ceros(txtNumero.Text, 8)
+
+            ' Comprobamos que se haya colocado un numero correcto. Es decir, mayor a Cero.
+            If Val(txtNumero.Text) = 0 Then
+                txtNumero.Focus()
+                Exit Sub
+            End If
 
             Dim _NumeroInterno As String = ""
 
@@ -840,8 +909,12 @@ Public Class Compras
                 End If
             End If
 
+            If txtCAI.Visible Then
+                txtCAI.Focus()
+            Else
+                txtFechaEmision.Focus()
+            End If
 
-            txtCAI.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtNumero.Text = ""
@@ -1240,13 +1313,50 @@ Public Class Compras
             crearAsientoContableUsando(cuenta)
 
             If gridAsientos.Rows.Count > 0 And Val(txtTotal.Text) <> 0 Then
-                gridAsientos.CurrentCell = gridAsientos.Rows(gridAsientos.Rows.Count - 2).Cells(0) ' REM REVISAR LA RESTA, VON 2 DA INDICE NEGATIVO
+                Dim celda As Integer = gridAsientos.Rows.Count - 2
+                gridAsientos.CurrentCell = gridAsientos.Rows(celda).Cells(0) ' REM REVISAR LA RESTA, VON 2 DA INDICE NEGATIVO
+                _TraerSugerenciaDeCuenta(gridAsientos.CurrentCell)
                 gridAsientos.Select()
             End If
         ElseIf e.KeyData = Keys.Escape Then
             txtDespacho.Text = ""
         End If
 
+    End Sub
+
+    Private Sub _TraerSugerenciaDeCuenta(ByVal celda As DataGridViewCell)
+        Dim sugerencia As String = ""
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 i.Cuenta, c.Descripcion FROM Imputac as i, Cuenta as c WHERE i.Proveedor = '" & Trim(txtCodigoProveedor.Text) & "' AND i.Cuenta = c.Cuenta " _
+                                              & "ORDER BY i.Renglon DESC, i.NroInterno DESC")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                With gridAsientos.Rows(celda.RowIndex)
+                    .Cells(0).Value = dr.Item("Cuenta")
+                    .Cells(1).Value = dr.Item("Descripcion")
+                End With
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
     End Sub
 
     Private Sub _SaltarA(ByRef control As Control)
@@ -1811,4 +1921,5 @@ Public Class Compras
         MsgBox("El Registro ha sido eliminado con exito.", MsgBoxStyle.Information)
 
     End Sub
+
 End Class

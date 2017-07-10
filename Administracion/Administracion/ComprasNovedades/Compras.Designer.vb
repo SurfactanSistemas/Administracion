@@ -43,6 +43,7 @@ Partial Class Compras
         Me.txtFechaVto1 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.CBLetra = New System.Windows.Forms.ComboBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtNumero = New Administracion.CustomTextBox()
         Me.CustomLabel4 = New Administracion.CustomLabel()
         Me.txtCAI = New Administracion.CustomTextBox()
@@ -53,9 +54,9 @@ Partial Class Compras
         Me.lblDebito = New Administracion.CustomLabel()
         Me.txtNroInterno = New Administracion.CustomTextBox()
         Me.CustomLabel6 = New Administracion.CustomLabel()
-        Me.CustomLabel3 = New Administracion.CustomLabel()
+        Me.lblCai = New Administracion.CustomLabel()
         Me.CustomLabel7 = New Administracion.CustomLabel()
-        Me.CustomLabel8 = New Administracion.CustomLabel()
+        Me.lblVtoCai = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
         Me.CustomLabel9 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
@@ -95,7 +96,6 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -245,9 +245,9 @@ Partial Class Compras
         Me.Panel2.Controls.Add(Me.lblDebito)
         Me.Panel2.Controls.Add(Me.txtNroInterno)
         Me.Panel2.Controls.Add(Me.CustomLabel6)
-        Me.Panel2.Controls.Add(Me.CustomLabel3)
+        Me.Panel2.Controls.Add(Me.lblCai)
         Me.Panel2.Controls.Add(Me.CustomLabel7)
-        Me.Panel2.Controls.Add(Me.CustomLabel8)
+        Me.Panel2.Controls.Add(Me.lblVtoCai)
         Me.Panel2.Controls.Add(Me.CustomLabel2)
         Me.Panel2.Controls.Add(Me.CustomLabel9)
         Me.Panel2.Controls.Add(Me.CustomLabel1)
@@ -298,6 +298,7 @@ Partial Class Compras
         Me.txtVtoCAI.TabIndex = 63
         Me.txtVtoCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtVtoCAI.ValidatingType = GetType(Date)
+        Me.txtVtoCAI.Visible = False
         '
         'txtFechaIVA
         '
@@ -392,6 +393,7 @@ Partial Class Compras
         Me.txtCAI.TabIndex = 35
         Me.txtCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCAI.Validator = Administracion.ValidatorType.None
+        Me.txtCAI.Visible = False
         '
         'lblCredito
         '
@@ -485,17 +487,18 @@ Partial Class Compras
         Me.CustomLabel6.TabIndex = 5
         Me.CustomLabel6.Text = "Punto"
         '
-        'CustomLabel3
+        'lblCai
         '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.ControlAssociationKey = 3
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(630, 15)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(41, 18)
-        Me.CustomLabel3.TabIndex = 2
-        Me.CustomLabel3.Text = "C.A.I."
+        Me.lblCai.AutoSize = True
+        Me.lblCai.ControlAssociationKey = 3
+        Me.lblCai.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblCai.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblCai.Location = New System.Drawing.Point(630, 15)
+        Me.lblCai.Name = "lblCai"
+        Me.lblCai.Size = New System.Drawing.Size(41, 18)
+        Me.lblCai.TabIndex = 2
+        Me.lblCai.Text = "C.A.I."
+        Me.lblCai.Visible = False
         '
         'CustomLabel7
         '
@@ -509,17 +512,18 @@ Partial Class Compras
         Me.CustomLabel7.TabIndex = 6
         Me.CustomLabel7.Text = "Número"
         '
-        'CustomLabel8
+        'lblVtoCai
         '
-        Me.CustomLabel8.AutoSize = True
-        Me.CustomLabel8.ControlAssociationKey = 8
-        Me.CustomLabel8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel8.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel8.Location = New System.Drawing.Point(636, 41)
-        Me.CustomLabel8.Name = "CustomLabel8"
-        Me.CustomLabel8.Size = New System.Drawing.Size(70, 18)
-        Me.CustomLabel8.TabIndex = 8
-        Me.CustomLabel8.Text = "Vto. C.A.I."
+        Me.lblVtoCai.AutoSize = True
+        Me.lblVtoCai.ControlAssociationKey = 8
+        Me.lblVtoCai.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblVtoCai.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblVtoCai.Location = New System.Drawing.Point(636, 41)
+        Me.lblVtoCai.Name = "lblVtoCai"
+        Me.lblVtoCai.Size = New System.Drawing.Size(70, 18)
+        Me.lblVtoCai.TabIndex = 8
+        Me.lblVtoCai.Text = "Vto. C.A.I."
+        Me.lblVtoCai.Visible = False
         '
         'CustomLabel2
         '
@@ -1103,12 +1107,12 @@ Partial Class Compras
     End Sub
     Friend WithEvents CustomLabel1 As Administracion.CustomLabel
     Friend WithEvents CustomLabel2 As Administracion.CustomLabel
-    Friend WithEvents CustomLabel3 As Administracion.CustomLabel
+    Friend WithEvents lblCai As Administracion.CustomLabel
     Friend WithEvents CustomLabel4 As Administracion.CustomLabel
     Friend WithEvents CustomLabel5 As Administracion.CustomLabel
     Friend WithEvents CustomLabel6 As Administracion.CustomLabel
     Friend WithEvents CustomLabel7 As Administracion.CustomLabel
-    Friend WithEvents CustomLabel8 As Administracion.CustomLabel
+    Friend WithEvents lblVtoCai As Administracion.CustomLabel
     Friend WithEvents CustomLabel9 As Administracion.CustomLabel
     Friend WithEvents CustomLabel10 As Administracion.CustomLabel
     Friend WithEvents CustomLabel11 As Administracion.CustomLabel

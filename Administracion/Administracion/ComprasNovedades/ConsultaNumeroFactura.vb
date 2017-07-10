@@ -39,8 +39,8 @@ Public Class ConsultaNumeroFactura
     End Sub
 
     Private Sub ConsultaNumeroFactura_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        txtCodigoProveedor.Focus()
         cmbTipo.SelectedIndex = 0
+        txtCodigoProveedor.Focus()
     End Sub
 
     Private Sub txtLetra_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLetra.KeyDown

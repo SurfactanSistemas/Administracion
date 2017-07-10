@@ -14,7 +14,12 @@
                    ByVal emision As String, ByVal fecIVA As String, ByVal vto1 As String, ByVal vto2 As String, ByVal cotizacion As Double,
                    ByVal importeNeto As Double, ByVal importeIVA21 As Double, ByVal importeIVARG As Double, ByVal importeIVA27 As Double,
                    ByVal importeIB As Double, ByVal importeExento As Double, ByVal importeIVA105 As Double, ByVal importeTotal As Double,
-                   ByVal ivaSolo As Integer, ByVal nroRemito As String, ByVal desp As String, Optional ByVal _RetIB1 As Double = 0, Optional ByVal _RetIB2 As Double = 0, Optional ByVal _RetIB3 As Double = 0, Optional ByVal _RetIB4 As Double = 0, Optional ByVal _RetIB5 As Double = 0, Optional ByVal _RetIB6 As Double = 0, Optional ByVal _RetIB7 As Double = 0, Optional ByVal _RetIB8 As Double = 0, Optional ByVal _RetIB9 As Double = 0, Optional ByVal _RetIB10 As Double = 0, Optional ByVal _RetIB11 As Double = 0, Optional ByVal _RetIB12 As Double = 0, Optional ByVal _RetIB13 As Double = 0, Optional ByVal _RetIB14 As Double = 0)
+                   ByVal ivaSolo As Integer, ByVal nroRemito As String, ByVal desp As String, Optional ByVal _RetIB1 As Double = 0,
+                   Optional ByVal _RetIB2 As Double = 0, Optional ByVal _RetIB3 As Double = 0, Optional ByVal _RetIB4 As Double = 0,
+                   Optional ByVal _RetIB5 As Double = 0, Optional ByVal _RetIB6 As Double = 0, Optional ByVal _RetIB7 As Double = 0,
+                   Optional ByVal _RetIB8 As Double = 0, Optional ByVal _RetIB9 As Double = 0, Optional ByVal _RetIB10 As Double = 0,
+                   Optional ByVal _RetIB11 As Double = 0, Optional ByVal _RetIB12 As Double = 0, Optional ByVal _RetIB13 As Double = 0,
+                   Optional ByVal _RetIB14 As Double = 0)
         nroInterno = interno
         proveedor = prov
         tipoDocumento = tipoDoc
