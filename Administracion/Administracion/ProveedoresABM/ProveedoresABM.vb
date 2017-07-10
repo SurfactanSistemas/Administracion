@@ -53,6 +53,13 @@ Public Class ProveedoresABM
 
         Next
 
+        cmbInscripcionIB.SelectedIndex = 0
+        cmbCondicionIB1.SelectedIndex = 0
+        cmbCondicionIB2.SelectedIndex = 0
+        txtNroIB.Text = ""
+        txtPorcelProv.Text = ""
+        txtPorcelCABA.Text = ""
+
         cufe1 = Tuple.Create("", "")
         cufe2 = Tuple.Create("", "")
         cufe3 = Tuple.Create("", "")
@@ -1170,5 +1177,25 @@ Public Class ProveedoresABM
             _SaltarA(cmbEstado)
         End If
 
+    End Sub
+
+    Private Sub txtCertificados_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtCertificados.TypeValidationCompleted
+
+        If Trim(txtCertificados.Text).Length = 10 Then
+            e.Cancel = Not Proceso._ValidarFecha(txtCertificados.Text, e.IsValidInput)
+        End If
+
+    End Sub
+
+    Private Sub txtNroSEDRONAR2_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtNroSEDRONAR2.TypeValidationCompleted
+        If Trim(txtNroSEDRONAR2.Text).Length = 10 Then
+            e.Cancel = Not Proceso._ValidarFecha(txtNroSEDRONAR2.Text, e.IsValidInput)
+        End If
+    End Sub
+
+    Private Sub txtCalificacion_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtCalificacion.TypeValidationCompleted
+        If Trim(txtCalificacion.Text).Length = 10 Then
+            e.Cancel = Not Proceso._ValidarFecha(txtCalificacion.Text, e.IsValidInput)
+        End If
     End Sub
 End Class
