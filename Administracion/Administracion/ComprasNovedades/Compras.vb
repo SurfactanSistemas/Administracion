@@ -48,6 +48,9 @@ Public Class Compras
             _cmb.SelectedIndex = 0
         Next
 
+        cmbTipo.SelectedItem = "FC"
+        CBLetra.SelectedItem = "A"
+
         gridAsientos.Rows.Clear()
         chkSoloIVA.Checked = False
         optCtaCte.Checked = True
@@ -92,7 +95,7 @@ Public Class Compras
         CBLetra.SelectedItem = "A"
         cmbFormaPago.SelectedIndex = 0
 
-        If Val(proveedorAMostrar.codIva) = 5 Then
+        If Val(proveedorAMostrar.codIva) = 6 Then
             cmbTipo.SelectedItem = "FC"
             CBLetra.SelectedItem = "C"
             _HabilitarDeshabilitarControlesSegunLetra()
