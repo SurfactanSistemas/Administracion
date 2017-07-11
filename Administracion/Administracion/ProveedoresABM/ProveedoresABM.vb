@@ -1179,17 +1179,13 @@ Public Class ProveedoresABM
 
     Private Sub txtCodigo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigo.MouseDoubleClick
 
-        If Trim(txtCodigo.Text) = "" Then
             _AbrirConsulta("Proveedor")
-        End If
 
     End Sub
 
     Private Sub txtCuenta_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCuenta.MouseDoubleClick
 
-        If Trim(txtCuenta.Text) = "" Then
             _AbrirConsulta("Cuenta")
-        End If
 
     End Sub
 
