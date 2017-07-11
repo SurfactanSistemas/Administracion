@@ -1,5 +1,7 @@
 ﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
 
 Public Class Pagos
 
@@ -9,6 +11,7 @@ Public Class Pagos
     Dim chequeRow As Integer = -1
     Dim bancoOrden As Banco
     Dim proveedorOrden As Proveedor
+    Private XParidadTotal As String = "0"
     Dim commonEventHandler As New CommonEventsHandler
     Dim _ClavesCheques As New List(Of Object)
     Dim _Carpetas As New List(Of Object)
@@ -359,7 +362,7 @@ Public Class Pagos
                     XClaves.Clear()
 
                     Do While .Read()
-                        Dim XNroInterno, XTotal, XSaldo, XSaldoUS, XImpre, XLetra, XPunto, XNumero, XFecha, XClave, XParidad, XPago, XParidadTotal As String
+                        Dim XNroInterno, XTotal, XSaldo, XSaldoUS, XImpre, XLetra, XPunto, XNumero, XFecha, XClave, XParidad, XPago As String
 
                         XNroInterno = .Item("NroInterno").ToString()
                         XTotal = _NormalizarNumero(.Item("Total").ToString())
@@ -2288,5 +2291,464 @@ Public Class Pagos
     Private Sub btnCtaCte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCtaCte.Click
         lstSeleccion.SelectedIndex = 1
         lstSeleccion_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        Dim XOrdenPago As String = IIf(Trim(txtOrdenPago.Text) = "", "0", Trim(txtOrdenPago.Text))
+        Dim XEmpCuit As String = "30-54916508-3"
+        Dim XRazon, XCuitProveedor, WTipo, WLetra, WPunto, WNumero, ClaveCtaprv, WCtaProveedor, WCtaEfectivo, WCtaCheques, ClaveBanco As String
+        Dim WRenglon, XTotal, XSubtotal, XCantidad, XLugarResumen As Double
+        Dim WImpresion(15, 10) As String
+        Dim WImpre2(15, 10) As String
+        Dim WDebito(15, 2) As String
+        Dim WCredito(15, 4) As String
+        Dim WCuenta(15, 2) As String
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+
+        ' Verificamos de que haya codigo de orden de pago valido para traer.
+        If Val(XOrdenPago) <= 0 Then
+            Exit Sub
+        End If
+
+        XRazon = ""
+        XCuitProveedor = ""
+        WRenglon = 0
+        XTotal = 0
+        XSubtotal = 0
+        XCantidad = 0
+        XLugarResumen = 0
+
+        SQLConnector.conexionSql(cn, cm)
+
+        ' Sacamos el resto de informacion del proveedor.
+        Try
+            cm.CommandText = "SELECT Cuit, Nombre FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'"
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+                XRazon = dr.Item("Nombre")
+                XCuitProveedor = dr.Item("Cuit")
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        Finally
+            cn.Close()
+        End Try
+
+        ' Recorremos los primeros 15 pagos.
+        For iRow = 0 To gridPagos.Rows.Count - 1
+
+            With gridPagos.Rows(iRow)
+
+                If Val(.Cells(4).Value) = 0 Then
+                    Exit For
+                End If
+
+                Select Case Val(.Cells(0).Value)
+                    Case 1
+                        WImpresion(XCantidad, 2) = "Factura"
+                    Case 2
+                        WImpresion(XCantidad, 2) = "N.Debito"
+                    Case 3
+                        WImpresion(XCantidad, 2) = "N.Credito"
+                    Case 99
+                        WImpresion(XCantidad, 2) = "Varios"
+                    Case Else
+                        WImpresion(XCantidad, 2) = ""
+                End Select
+
+                WImpresion(XCantidad, 3) = Mid(.Cells(3).Value, 1, 8)
+                WImpresion(XCantidad, 4) = .Cells(5).Value
+                WImpresion(XCantidad, 5) = .Cells(4).Value
+                If Val(WImpresion(XCantidad, 2)) = 3 Or Val(WImpresion(XCantidad, 2)) = 5 Then
+                    XTotal -= CDbl(WImpresion(XCantidad, 5))
+                Else
+                    XTotal += CDbl(WImpresion(XCantidad, 5))
+                End If
+
+                WTipo = .Cells(0).Value
+                WLetra = .Cells(1).Value
+                WPunto = .Cells(2).Value
+                WNumero = .Cells(3).Value
+
+                ClaveCtaprv = txtProveedor.Text + WLetra + WTipo + WPunto + WNumero
+
+                ' Sacamos el resto de informacion del proveedor.
+                Try
+                    cn.Open()
+                    cm.CommandText = "SELECT Fecha FROM CtaCtePrv WHERE Clave = '" & ClaveCtaprv & "'"
+                    dr = cm.ExecuteReader()
+
+                    If dr.HasRows Then
+
+                        dr.Read()
+                        WImpresion(XCantidad, 1) = dr.Item("Fecha")
+
+                    Else
+                        WImpresion(XCantidad, 1) = ""
+                    End If
+
+                Catch ex As Exception
+                    MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                    Exit Sub
+                Finally
+                    cn.Close()
+                End Try
+
+                XCantidad += 1
+
+            End With
+
+        Next
+
+        WCtaProveedor = "21101"
+        WCtaEfectivo = "1110103"
+        WCtaCheques = "1110103"
+
+
+        If optCtaCte.Checked Or optAnticipos.Checked Then
+            WDebito(1, 1) = WCtaProveedor
+            WDebito(1, 2) = XTotal
+        Else
+
+            For irow = 0 To gridPagos.Rows.Count - 1
+                With gridPagos.Rows(irow)
+                    If Val(.Cells(4).Value) <> 0 Then
+                        WDebito(irow + 1, 1) = WCuenta(irow, 1)
+                        WDebito(irow + 1, 2) = CDbl(.Cells(4).Value)
+                    End If
+                End With
+            Next
+
+        End If
+
+        Dim Retenido = "" ' Consultar con DAVID mañana.
+
+        WCredito(1, 1) = WCtaProveedor
+        If Val(Retenido) <> 0 Then
+            WCredito(1, 2) = Retenido
+        End If
+
+        Dim Lugar = 0
+        Dim Impre2 = 0
+        Dim SumaTercero = 0
+
+        For iRow = 0 To gridFormaPagos.Rows.Count - 1
+            With gridFormaPagos.Rows(iRow)
+                If Val(.Cells(5).Value) <> 0 Then
+
+                    WCredito(Lugar, 4) = .Cells(5).Value
+                    Select Case Val(.Cells(0).Value)
+                        Case 2
+                            WCredito(Lugar, 1) = "999999"
+                            ClaveBanco = .Cells(3).Value
+                            WCredito(Lugar, 1) = _TraerCuentaBanco(ClaveBanco)
+                        Case 3, 4
+                            WCredito(Lugar, 1) = WCtaCheques
+                        Case Else
+                            WCredito(Lugar, 1) = WCtaEfectivo
+                    End Select
+
+                    If Val(.Cells(0).Value) <> 3 Or Val(txtProveedor.Text) = 0 Then
+
+                        WImpre2(Impre2, 1) = .Cells(1).Value
+                        WImpre2(Impre2, 2) = .Cells(4).Value
+                        WImpre2(Impre2, 3) = .Cells(5).Value
+                        WImpre2(Impre2, 4) = .Cells(2).Value
+
+                        WCredito(Lugar, 2) = .Cells(4).Value
+                        WCredito(Lugar, 3) = .Cells(1).Value
+                        WCredito(Lugar, 4) = .Cells(5).Value
+
+                        Impre2 = Impre2 + 1
+                    End If
+
+                    Lugar = Lugar + 1
+                End If
+            End With
+        Next iRow
+
+        ' ACA IMPRIMIR RESUMEN DE PAGO SI EL TIPO2 DEL PAGO ES = 3
+        _ImprimirResumenDePago()
+
+        ' ACA IMPRIMIR ORDEN DE PAGO.
+        Dim WFecha1, WNumero1, WComprobante1, WDescripcion1, WNumero2, WBanco2, WFecha2 As String
+        Dim WImporte1, WImporte2 As Double
+        Dim Tabla As New DataTable("Detalles")
+        Dim row As DataRow
+        Dim crdoc As ReportDocument = New InformeOrdenPago
+
+        ' Creo las Columnas
+        _PrepararTablaOrdenPago(Tabla)
+
+        For WCiclo = 0 To 11
+
+            WFecha1 = ""
+            WNumero1 = ""
+            WComprobante1 = ""
+            WDescripcion1 = ""
+            WImporte1 = 0
+            WNumero2 = ""
+            WBanco2 = ""
+            WImporte2 = 0
+            WFecha2 = ""
+
+            WRenglon += 1
+
+            If Val(WImpresion(WCiclo, 5)) <> 0 Then
+                WFecha1 = WImpresion(WCiclo, 1)
+                WNumero1 = WImpresion(WCiclo, 3)
+                WComprobante1 = WImpresion(WCiclo, 2)
+                WDescripcion1 = WImpresion(WCiclo, 4)
+                WImporte1 = CDbl(WImpresion(WCiclo, 5))
+            End If
+
+            If Val(WImpre2(WCiclo, 3)) <> 0 Then
+                WNumero2 = WImpre2(WCiclo, 1)
+                WBanco2 = WImpre2(WCiclo, 2)
+                WImporte2 = CDbl(WImpre2(WCiclo, 3))
+                WFecha2 = WImpre2(WCiclo, 4)
+            End If
+
+            row = Tabla.NewRow
+
+            With row
+
+                .Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                .Item("Tipo") = 1
+                .Item("Orden") = Val(txtOrdenPago.Text)
+                .Item("Renglon") = WRenglon
+                .Item("Fecha") = txtFecha.Text
+                .Item("Proveedor") = Trim(txtProveedor.Text)
+                .Item("Nombre") = txtRazonSocial.Text
+                .Item("Fecha1") = WFecha1
+                .Item("Numero1") = WNumero1
+                .Item("Comprobante1") = WComprobante1
+                .Item("Descripcion1") = WDescripcion1
+                .Item("Importe1") = WImporte1
+                .Item("Numero2") = WNumero2
+                .Item("Banco2") = WBanco2
+                .Item("Importe2") = WImporte2
+                .Item("Fecha2") = WFecha2
+                .Item("Neto") = XTotal
+                .Item("Rete1") = CDbl(txtGanancias.Text)
+                .Item("Rete2") = CDbl(txtIngresosBrutos.Text) + CDbl(txtIBCiudad.Text)
+                .Item("Total") = CDbl(txtIVA.Text)
+                .Item("Observaciones") = txtObservaciones.Text
+                .Item("Empresa") = "Surfactan S.A."
+                .Item("Cuit") = XEmpCuit
+                .Item("Paridad") = CDbl(XParidadTotal)
+
+            End With
+
+            Tabla.Rows.Add(row)
+
+            row = Tabla.NewRow()
+
+            With row
+                .Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                .Item("Tipo") = 2
+                .Item("Orden") = Val(txtOrdenPago.Text)
+                .Item("Renglon") = WRenglon
+                .Item("Fecha") = txtFecha.Text
+                .Item("Proveedor") = Trim(txtProveedor.Text)
+                .Item("Nombre") = txtRazonSocial.Text
+                .Item("Fecha1") = WFecha1
+                .Item("Numero1") = WNumero1
+                .Item("Comprobante1") = WComprobante1
+                .Item("Descripcion1") = WDescripcion1
+                .Item("Importe1") = WImporte1
+                .Item("Numero2") = WNumero2
+                .Item("Banco2") = WBanco2
+                .Item("Importe2") = WImporte2
+                .Item("Fecha2") = WFecha2
+                .Item("Neto") = XTotal
+                .Item("Rete1") = CDbl(txtGanancias.Text)
+                .Item("Rete2") = CDbl(txtIngresosBrutos.Text) + CDbl(txtIBCiudad.Text)
+                .Item("Total") = CDbl(txtIVA.Text)
+                .Item("Observaciones") = txtObservaciones.Text
+                .Item("Empresa") = "Surfactan S.A."
+                .Item("Cuit") = XEmpCuit
+                .Item("Paridad") = CDbl(XParidadTotal)
+            End With
+
+            Tabla.Rows.Add(row)
+
+        Next
+
+        crdoc.SetDataSource(Tabla)
+
+        With VistaPrevia
+            .CrystalReportViewer1.ReportSource = crdoc
+            .ShowDialog()
+            .Dispose()
+        End With
+
+
+        'MsgBox(WImpresion.Length)
+
+
+
+
+    End Sub
+
+    Private Function _TraerCuentaBanco(ByVal ClaveBanco As String) As String
+        Dim cuenta As String = ""
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Cuenta FROM Banco WHERE Banco = '" & Trim(ClaveBanco) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                cuenta = Trim(dr.Item("Cuenta"))
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return cuenta
+    End Function
+
+    Private Sub _ImprimirResumenDePago()
+        'For iRow = 1 To 15
+        '    If Val(WVector1.TextMatrix(iRow, 12)) <> 0 Then
+        '        If Val(WVector1.TextMatrix(iRow, 7)) = 3 Then
+
+        '            SumaTercero = SumaTercero + Val(WVector1.TextMatrix(iRow, 12))
+
+        '            LugarResumen = LugarResumen + 1
+
+        '            ZZCorte = "1"
+        '            ZZOrden = Orden.Text
+        '            ZZRenglon = Str$(LugarResumen)
+        '            ZZProveedor = Proveedor.Text
+        '            ZZFecha = Fecha.Text
+        '            ZZImporteCheque = WVector1.TextMatrix(iRow, 12)
+        '            ZZNumeroCheque = Left$(WVector1.TextMatrix(iRow, 8), 8)
+        '            ZZFechaCheque = Left$(WVector1.TextMatrix(iRow, 9), 10)
+        '            ZZBancoCheque = Left$(WVector1.TextMatrix(iRow, 11), 20)
+        '            ZZCuit = WVector1.TextMatrix(iRow, 14)
+
+        '            ZSql = ""
+        '            ZSql = ZSql + "INSERT INTO PagosResumen ("
+        '            ZSql = ZSql + "Corte ,"
+        '            ZSql = ZSql + "Orden ,"
+        '            ZSql = ZSql + "Renglon ,"
+        '            ZSql = ZSql + "Proveedor ,"
+        '            ZSql = ZSql + "Fecha ,"
+        '            ZSql = ZSql + "Cuit ,"
+        '            ZSql = ZSql + "ImporteCheque ,"
+        '            ZSql = ZSql + "NumeroCheque ,"
+        '            ZSql = ZSql + "FechaCheque ,"
+        '            ZSql = ZSql + "BancoCheque ,"
+        '            ZSql = ZSql + "Razon ,"
+        '            ZSql = ZSql + "CuitProveedor )"
+        '            ZSql = ZSql + "Values ("
+        '            ZSql = ZSql + "'" + ZZCorte + "',"
+        '            ZSql = ZSql + "'" + ZZOrden + "',"
+        '            ZSql = ZSql + "'" + ZZRenglon + "',"
+        '            ZSql = ZSql + "'" + ZZProveedor + "',"
+        '            ZSql = ZSql + "'" + ZZFecha + "',"
+        '            ZSql = ZSql + "'" + ZZCuit + "',"
+        '            ZSql = ZSql + "'" + ZZImporteCheque + "',"
+        '            ZSql = ZSql + "'" + ZZNumeroCheque + "',"
+        '            ZSql = ZSql + "'" + ZZFechaCheque + "',"
+        '            ZSql = ZSql + "'" + ZZBancoCheque + "',"
+        '            ZSql = ZSql + "'" + ZZRazon + "',"
+        '            ZSql = ZSql + "'" + ZZCuitProveedor + "')"
+
+        '            spPagosResumen = ZSql
+        '            rstPagosResumen = db.OpenRecordset(spPagosResumen, dbOpenSnapshot, dbSQLPassThrough)
+
+        '            ZZCorte = "2"
+
+        '            ZSql = ""
+        '            ZSql = ZSql + "INSERT INTO PagosResumen ("
+        '            ZSql = ZSql + "Corte ,"
+        '            ZSql = ZSql + "Orden ,"
+        '            ZSql = ZSql + "Renglon ,"
+        '            ZSql = ZSql + "Proveedor ,"
+        '            ZSql = ZSql + "Fecha ,"
+        '            ZSql = ZSql + "Cuit ,"
+        '            ZSql = ZSql + "ImporteCheque ,"
+        '            ZSql = ZSql + "NumeroCheque ,"
+        '            ZSql = ZSql + "FechaCheque ,"
+        '            ZSql = ZSql + "BancoCheque ,"
+        '            ZSql = ZSql + "Razon ,"
+        '            ZSql = ZSql + "CuitProveedor )"
+        '            ZSql = ZSql + "Values ("
+        '            ZSql = ZSql + "'" + ZZCorte + "',"
+        '            ZSql = ZSql + "'" + ZZOrden + "',"
+        '            ZSql = ZSql + "'" + ZZRenglon + "',"
+        '            ZSql = ZSql + "'" + ZZProveedor + "',"
+        '            ZSql = ZSql + "'" + ZZFecha + "',"
+        '            ZSql = ZSql + "'" + ZZCuit + "',"
+        '            ZSql = ZSql + "'" + ZZImporteCheque + "',"
+        '            ZSql = ZSql + "'" + ZZNumeroCheque + "',"
+        '            ZSql = ZSql + "'" + ZZFechaCheque + "',"
+        '            ZSql = ZSql + "'" + ZZBancoCheque + "',"
+        '            ZSql = ZSql + "'" + ZZRazon + "',"
+        '            ZSql = ZSql + "'" + ZZCuitProveedor + "')"
+
+        '            spPagosResumen = ZSql
+        '            rstPagosResumen = db.OpenRecordset(spPagosResumen, dbOpenSnapshot, dbSQLPassThrough)
+
+        '        End If
+        '    End If
+        'Next iRow
+    End Sub
+
+    Private Sub _PrepararTablaOrdenPago(ByRef tabla As DataTable)
+        ' Por defecto son de tipo String, asi que solamente defino explicitamente las de tipo Double.
+        With tabla
+            .Columns.Add("Clave")
+            .Columns.Add("Tipo")
+            .Columns.Add("Orden")
+            .Columns.Add("Renglon")
+            .Columns.Add("Fecha")
+            .Columns.Add("Proveedor")
+            .Columns.Add("Nombre")
+            .Columns.Add("Fecha1")
+            .Columns.Add("Numero1")
+            .Columns.Add("Comprobante1")
+            .Columns.Add("Descripcion1")
+            .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Numero2")
+            .Columns.Add("Banco2")
+            .Columns.Add("Importe2").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Fecha2")
+            .Columns.Add("Neto").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Rete1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Rete2").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Total").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Observaciones")
+            .Columns.Add("Empresa")
+            .Columns.Add("Cuit")
+            .Columns.Add("Paridad").DataType = System.Type.GetType("System.Double")
+        End With
     End Sub
 End Class

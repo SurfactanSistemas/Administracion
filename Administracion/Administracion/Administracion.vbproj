@@ -549,10 +549,24 @@
       <DependentUpon>InformeIntereses.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\InformeOrdenPago.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InformeOrdenPago.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\InteresesDetalles.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InteresesDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoDetalles.vb">
+      <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reportes\ReciboDefinitivo.vb">
       <DependentUpon>ReciboDefinitivo.rpt</DependentUpon>
@@ -833,6 +847,10 @@
     <EmbeddedResource Include="Reportes\InformeIntereses.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InformeIntereses.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\InformeOrdenPago.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InformeOrdenPago.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReciboDefinitivo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1130,6 +1148,17 @@
     <None Include="Reportes\InteresesDetalles.xss">
       <DependentUpon>InteresesDetalles.xsd</DependentUpon>
     </None>
+    <None Include="Reportes\OrdenPagoDetalles.xsc">
+      <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrdenPagoDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\OrdenPagoDetalles.xss">
+      <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </None>
     <None Include="Reportes\ReciboDetalles.xsc">
       <DependentUpon>ReciboDetalles.xsd</DependentUpon>
     </None>
@@ -1253,9 +1282,7 @@
   <ItemGroup>
     <None Include="Resources\calendar.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reportes\Depositos\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\check-icon.png" />
   </ItemGroup>
