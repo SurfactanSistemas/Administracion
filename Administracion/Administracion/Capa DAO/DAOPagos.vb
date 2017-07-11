@@ -26,7 +26,7 @@ Public Class DAOPagos
 
     Private Shared Function crearOrdenPago(ByVal row As DataRow)
         Return New OrdenPago(ceros(row("Orden").ToString, 6), asInteger(row("TipoOrd")), asDouble(row("Paridad")), asDouble(row("Importe")),
-                             asDouble(row("RetIva")), asDouble(row("RetencionIB")), asDouble(row("RetIbCiudad")), asDouble(row("RetGanancias")),
+                             asDouble(row("RetIva")), asDouble(row("RetencionIB")), asDouble(row("RetIbCiudad")), asDouble(row("Retencion")),
                              asDateString(row("Fecha")), asDateString(row("fechaParidad")), row("Observaciones").ToString,
                              DAOBanco.buscarBancoPorCodigo(row("Banco").ToString), DAOProveedor.buscarProveedorPorCodigo(row("Proveedor").ToString))
     End Function
@@ -50,7 +50,7 @@ Public Class DAOPagos
 
     Private Shared Function crearFormaPago(ByVal row As DataRow)
         Return New FormaPago(ceros(row("Tipo2").ToString, 2), asInteger(row("Banco2")), row("Numero2").ToString, row("FechaCheque").ToString,
-                            row("NombreCheque").ToString, asDouble(row("Importe2")))
+                            row("NombreCheque").ToString, asDouble(row("Importe2")), row("Cuit").ToString)
     End Function
 
     Public Shared Sub agregarPago(ByVal orden As OrdenPago)

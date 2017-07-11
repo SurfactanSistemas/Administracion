@@ -198,7 +198,7 @@ Public Class Pagos
     Private Sub mostrarFormaPagos(ByVal formaPagos As List(Of FormaPago))
         gridFormaPagos.Rows.Clear()
         For Each formaPago As FormaPago In formaPagos
-            gridFormaPagos.Rows.Add(formaPago.tipo, formaPago.numero, formaPago.fecha, formaPago.banco, formaPago.nombre, formaPago.importe)
+            gridFormaPagos.Rows.Add(formaPago.tipo, formaPago.numero, formaPago.fecha, formaPago.banco, formaPago.nombre, formaPago.importe, "", formaPago.cuit)
         Next
         sumarImportes()
     End Sub
@@ -2468,6 +2468,8 @@ Public Class Pagos
                         WCredito(Lugar, 4) = .Cells(5).Value
 
                         Impre2 = Impre2 + 1
+                    ElseIf Val(.Cells(0).Value) = 3 Then
+                        SumaTercero = SumaTercero + CDbl(.Cells(5).Value)
                     End If
 
                     Lugar = Lugar + 1
@@ -2475,8 +2477,17 @@ Public Class Pagos
             End With
         Next iRow
 
-        ' ACA IMPRIMIR RESUMEN DE PAGO SI EL TIPO2 DEL PAGO ES = 3
-        _ImprimirResumenDePago()
+        If SumaTercero <> 0 Then
+            For WCiclo = 1 To 15
+                If Val(WImpre2(WCiclo, 3)) = 0 Then
+                    WImpre2(WCiclo, 1) = ""
+                    WImpre2(WCiclo, 2) = "Valores S/Detalle"
+                    WImpre2(WCiclo, 3) = Str$(SumaTercero)
+                    WImpre2(WCiclo, 4) = ""
+                    Exit For
+                End If
+            Next WCiclo
+        End If
 
         ' ACA IMPRIMIR ORDEN DE PAGO.
         Dim WFecha1, WNumero1, WComprobante1, WDescripcion1, WNumero2, WBanco2, WFecha2 As String
@@ -2592,11 +2603,207 @@ Public Class Pagos
         End With
 
 
-        'MsgBox(WImpresion.Length)
+        ' Imprimimos Discrimianción de Valores de Terceros Entregados si el Tipo2 es = 3
+        If Not _DiscriminarValoreDeTerceros(txtOrdenPago.Text) Then
+            Exit Sub
+        End If
+
+        _ImprimirDiscriminacionDeValoresDeTerceros(XRazon, XCuitProveedor)
+
+    End Sub
+
+    Private Sub _ImprimirDiscriminacionDeValoresDeTerceros(ByVal XRazon As String, ByVal XCuitProveedor As String)
+        Dim ZZCorte, ZZOrden, ZZRenglon, ZZProveedor, ZZFecha, ZZImporteCheque, ZZNumeroCheque, ZZFechaCheque, ZZBancoCheque, ZZCuit As String
+        Dim LugarResumen As Integer = 0
+
+        Dim Tabla As New DataTable("Detalles")
+        Dim row As DataRow
+        Dim crdoc As New OrdenPagoDiscriminacionTerceros
+
+        _PrepararTablaOrdenPagoDiscriminacionTerceros(Tabla)
+
+        For iRow = 0 To gridFormaPagos.Rows.Count - 1
+            With gridFormaPagos.Rows(iRow)
+                If Val(.Cells(5).Value) <> 0 Then
+                    If Val(.Cells(0).Value) = 3 Then
+
+                        ZZCorte = "1"
+                        ZZOrden = txtOrdenPago.Text
+                        ZZRenglon = Str$(LugarResumen)
+                        ZZProveedor = txtProveedor.Text
+                        ZZFecha = txtFecha.Text
+                        ZZImporteCheque = CDbl(.Cells(5).Value)
+                        ZZNumeroCheque = .Cells(1).Value
+                        ZZFechaCheque = .Cells(2).Value
+                        ZZBancoCheque = .Cells(4).Value
+                        ZZCuit = .Cells(7).Value
+
+                        row = Tabla.NewRow
+
+                        With row
+
+                            .Item("Corte") = "1"
+                            .Item("Orden") = ZZOrden
+                            .Item("Renglon") = ZZRenglon
+                            .Item("Proveedor") = ZZProveedor
+                            .Item("Fecha") = ZZFecha
+                            .Item("Cuit") = ZZCuit
+                            .Item("Importe") = CDbl(ZZImporteCheque)
+                            .Item("Numero") = ZZNumeroCheque
+                            .Item("Fecha1") = ZZFechaCheque
+                            .Item("Banco") = ZZBancoCheque
+                            .Item("Razon") = XRazon
+                            .Item("CuitProveedor") = XCuitProveedor
+
+                        End With
+
+                        Tabla.Rows.Add(row)
+
+                        row = Tabla.NewRow()
+
+                        With row
+                            .Item("Corte") = "2"
+                            .Item("Orden") = ZZOrden
+                            .Item("Renglon") = ZZRenglon
+                            .Item("Proveedor") = ZZProveedor
+                            .Item("Fecha") = ZZFecha
+                            .Item("Cuit") = ZZCuit
+                            .Item("Importe") = CDbl(ZZImporteCheque)
+                            .Item("Numero") = ZZNumeroCheque
+                            .Item("Fecha1") = ZZFechaCheque
+                            .Item("Banco") = ZZBancoCheque
+                            .Item("Razon") = XRazon
+                            .Item("CuitProveedor") = XCuitProveedor
+                        End With
+
+                        Tabla.Rows.Add(row)
+
+                        LugarResumen = LugarResumen + 1
+
+                    End If
+                End If
+            End With
+        Next iRow
+
+        ' Completamos los renglones que resten.
+        For iRow = LugarResumen To 14
+
+            ZZCorte = "1"
+            ZZOrden = txtOrdenPago.Text
+            ZZRenglon = Str$(LugarResumen)
+            ZZProveedor = txtProveedor.Text
+            ZZFecha = txtFecha.Text
+            ZZImporteCheque = ""
+            ZZNumeroCheque = ""
+            ZZFechaCheque = ""
+            ZZBancoCheque = ""
+            ZZCuit = ""
+
+            row = Tabla.NewRow
+
+            With row
+
+                .Item("Corte") = "1"
+                .Item("Orden") = ZZOrden
+                .Item("Renglon") = ZZRenglon
+                .Item("Proveedor") = ZZProveedor
+                .Item("Fecha") = ZZFecha
+                .Item("Cuit") = ZZCuit
+                .Item("Importe") = 0
+                .Item("Numero") = ZZNumeroCheque
+                .Item("Fecha1") = ZZFechaCheque
+                .Item("Banco") = ZZBancoCheque
+                .Item("Razon") = XRazon
+                .Item("CuitProveedor") = XCuitProveedor
+
+            End With
+
+            Tabla.Rows.Add(row)
+
+            row = Tabla.NewRow()
+
+            With row
+                .Item("Corte") = "2"
+                .Item("Orden") = ZZOrden
+                .Item("Renglon") = ZZRenglon
+                .Item("Proveedor") = ZZProveedor
+                .Item("Fecha") = ZZFecha
+                .Item("Cuit") = ZZCuit
+                .Item("Importe") = 0
+                .Item("Numero") = ZZNumeroCheque
+                .Item("Fecha1") = ZZFechaCheque
+                .Item("Banco") = ZZBancoCheque
+                .Item("Razon") = XRazon
+                .Item("CuitProveedor") = XCuitProveedor
+            End With
+
+            Tabla.Rows.Add(row)
+
+            LugarResumen = LugarResumen + 1
+
+        Next iRow
+
+        If Tabla.Rows.Count > 0 Then
+
+            crdoc.SetDataSource(Tabla)
+
+            With VistaPrevia
+                .CrystalReportViewer1.ReportSource = crdoc
+                .ShowDialog()
+                .Dispose()
+            End With
+
+        End If
+    End Sub
+
+    Private Function _DiscriminarValoreDeTerceros(ByVal Orden As String) As Boolean
+        Dim discriminar As Boolean = True
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Tipo2 FROM Pagos WHERE Orden = '" & ceros(Orden, 6) & "' AND Tipo2 = '3'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If Not dr.HasRows Then
+                discriminar = False
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return discriminar
+    End Function
 
 
-
-
+    Private Sub _PrepararTablaOrdenPagoDiscriminacionTerceros(ByRef Tabla As DataTable)
+        ' Por defecto son de tipo String, asi que solamente defino explicitamente las de tipo Double.
+        With Tabla
+            .Columns.Add("Corte")
+            .Columns.Add("Orden")
+            .Columns.Add("Renglon")
+            .Columns.Add("Proveedor")
+            .Columns.Add("Fecha")
+            .Columns.Add("Cuit")
+            .Columns.Add("Importe").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Numero")
+            .Columns.Add("Fecha1")
+            .Columns.Add("Banco")
+            .Columns.Add("Razon")
+            .Columns.Add("CuitProveedor")
+        End With
     End Sub
 
     Private Function _TraerCuentaBanco(ByVal ClaveBanco As String) As String

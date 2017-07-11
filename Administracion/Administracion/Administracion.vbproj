@@ -543,6 +543,11 @@
       <DependentUpon>ControlDeFacturacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\DiscriminacionTercerosDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiscriminacionTercerosDetalles.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\InformeIntereses.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -567,6 +572,12 @@
     </Compile>
     <Compile Include="Reportes\OrdenPagoDetalles.vb">
       <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoDiscriminacionTerceros.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoDiscriminacionTerceros.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ReciboDefinitivo.vb">
       <DependentUpon>ReciboDefinitivo.rpt</DependentUpon>
@@ -852,6 +863,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InformeOrdenPago.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoDiscriminacionTerceros.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoDiscriminacionTerceros.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReciboDefinitivo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReciboDefinitivo.vb</LastGenOutput>
@@ -1136,6 +1151,17 @@
     </None>
     <None Include="Reportes\DetallesFacturacion.xss">
       <DependentUpon>DetallesFacturacion.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DiscriminacionTercerosDetalles.xsc">
+      <DependentUpon>DiscriminacionTercerosDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DiscriminacionTercerosDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DiscriminacionTercerosDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DiscriminacionTercerosDetalles.xss">
+      <DependentUpon>DiscriminacionTercerosDetalles.xsd</DependentUpon>
     </None>
     <None Include="Reportes\InteresesDetalles.xsc">
       <DependentUpon>InteresesDetalles.xsd</DependentUpon>
