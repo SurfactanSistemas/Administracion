@@ -960,8 +960,8 @@ Public Class Compras
                     Exit Sub
                 End If
 
-                Dim fecha As Date = Convert.ToDateTime(txtFechaEmision.Text)
                 txtFechaIVA.Text = Date.Now.ToString("dd/MM/yyyy")
+                Dim fecha As Date = Convert.ToDateTime(txtFechaIVA.Text)
                 txtFechaVto1.Text = fecha.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
                 txtFechaVto2.Text = txtFechaVto1.Text
 
