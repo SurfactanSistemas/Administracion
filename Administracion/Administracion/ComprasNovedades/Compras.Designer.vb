@@ -1055,6 +1055,7 @@ Partial Class Compras
         Me.btnConsultaNroFactura.Text = "Consulta Nro. de Factura"
         Me.ToolTip1.SetToolTip(Me.btnConsultaNroFactura, "Consultar Comprobante  por Nro de Factura")
         Me.btnConsultaNroFactura.UseVisualStyleBackColor = True
+        Me.btnConsultaNroFactura.Visible = False
         '
         'btnLimpiar
         '

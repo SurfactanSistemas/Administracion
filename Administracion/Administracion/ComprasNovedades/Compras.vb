@@ -712,13 +712,14 @@ Public Class Compras
     End Sub
 
     Private Sub btnConsultaNroFactura_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaNroFactura.Click
-        Dim consulta As New ConsultaNumeroFactura
-        consulta.ShowDialog(Me)
+        ' Deshabilitado ?
+        'Dim consulta As New ConsultaNumeroFactura
+        'consulta.ShowDialog(Me)
 
-        If consulta.numero <> 0 Then
-            txtNroInterno.Text = consulta.numero
-            _BuscarCompraPorNumeroInterno()
-        End If
+        'If consulta.numero <> 0 Then
+        '    txtNroInterno.Text = consulta.numero
+        '    _BuscarCompraPorNumeroInterno()
+        'End If
 
     End Sub
 
