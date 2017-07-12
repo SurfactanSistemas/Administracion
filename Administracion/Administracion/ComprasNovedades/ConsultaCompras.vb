@@ -74,9 +74,9 @@
     End Sub
 
     Private Sub CLBFiltrado_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CLBFiltrado.Click
-        If Trim(CLBFiltrado.SelectedItem.ToString()) <> "" Then
-            Close()
-            showMethod.Invoke(CLBFiltrado.SelectedItem.ToString())
+        If Trim(CLBFiltrado.SelectedItem) <> "" Then
+            lstConsulta.SelectedIndex = lstConsulta.FindStringExact(CLBFiltrado.SelectedItem)
+            lstConsulta_Click(Nothing, Nothing)
         End If
     End Sub
 
