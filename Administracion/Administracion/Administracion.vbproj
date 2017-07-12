@@ -543,6 +543,11 @@
       <DependentUpon>ControlDeFacturacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\DiscriminacionTercerosDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiscriminacionTercerosDetalles.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\InformeIntereses.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -560,6 +565,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InteresesDetalles.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteGanancias.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteRetGanancias.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteRetGanancias.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\OrdenPagoDetalles.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -567,6 +583,12 @@
     </Compile>
     <Compile Include="Reportes\OrdenPagoDetalles.vb">
       <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoDiscriminacionTerceros.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoDiscriminacionTerceros.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ReciboDefinitivo.vb">
       <DependentUpon>ReciboDefinitivo.rpt</DependentUpon>
@@ -851,6 +873,14 @@
     <EmbeddedResource Include="Reportes\InformeOrdenPago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InformeOrdenPago.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteRetGanancias.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteRetGanancias.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoDiscriminacionTerceros.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoDiscriminacionTerceros.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReciboDefinitivo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1137,6 +1167,17 @@
     <None Include="Reportes\DetallesFacturacion.xss">
       <DependentUpon>DetallesFacturacion.xsd</DependentUpon>
     </None>
+    <None Include="Reportes\DiscriminacionTercerosDetalles.xsc">
+      <DependentUpon>DiscriminacionTercerosDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DiscriminacionTercerosDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DiscriminacionTercerosDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DiscriminacionTercerosDetalles.xss">
+      <DependentUpon>DiscriminacionTercerosDetalles.xsd</DependentUpon>
+    </None>
     <None Include="Reportes\InteresesDetalles.xsc">
       <DependentUpon>InteresesDetalles.xsd</DependentUpon>
     </None>
@@ -1147,6 +1188,17 @@
     </None>
     <None Include="Reportes\InteresesDetalles.xss">
       <DependentUpon>InteresesDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteGanancias.xsc">
+      <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteGanancias.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteGanancias.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteGanancias.xss">
+      <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
     </None>
     <None Include="Reportes\OrdenPagoDetalles.xsc">
       <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>

@@ -43,23 +43,16 @@ Partial Class ProveedoresABM
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtPaginaWeb = New System.Windows.Forms.TextBox()
-        Me.txtCUIT = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
-        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.txtCheque = New Administracion.CustomTextBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cmbCondicionIB1 = New Administracion.CustomComboBox()
         Me.CustomLabel31 = New Administracion.CustomLabel()
         Me.CustomLabel18 = New Administracion.CustomLabel()
         Me.txtNroIB = New Administracion.CustomTextBox()
         Me.txtPorcelProv = New Administracion.CustomTextBox()
         Me.CustomLabel19 = New Administracion.CustomLabel()
+        Me.txtPaginaWeb = New System.Windows.Forms.TextBox()
+        Me.txtCUIT = New System.Windows.Forms.MaskedTextBox()
         Me.cmbCalificacion = New Administracion.CustomComboBox()
         Me.cmbEstado = New Administracion.CustomComboBox()
         Me.cmbCertificados = New Administracion.CustomComboBox()
@@ -89,6 +82,10 @@ Partial Class ProveedoresABM
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
+        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
         Me.cmbRegion = New Administracion.CustomComboBox()
         Me.CustomLabel8 = New Administracion.CustomLabel()
         Me.CustomLabel7 = New Administracion.CustomLabel()
@@ -109,12 +106,15 @@ Partial Class ProveedoresABM
         Me.CustomLabel13 = New Administracion.CustomLabel()
         Me.CustomLabel14 = New Administracion.CustomLabel()
         Me.txtCuentaDescripcion = New Administracion.CustomTextBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.cmbInscripcionIB = New Administracion.CustomComboBox()
         Me.cmbCondicionIB2 = New Administracion.CustomComboBox()
         Me.CustomLabel20 = New Administracion.CustomLabel()
         Me.CustomLabel32 = New Administracion.CustomLabel()
         Me.txtPorcelCABA = New Administracion.CustomTextBox()
         Me.CustomLabel24 = New Administracion.CustomLabel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.txtCAI = New Administracion.CustomTextBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -471,6 +471,19 @@ Partial Class ProveedoresABM
         Me.Label3.TabIndex = 107
         Me.Label3.Text = " Ingresos Brutos"
         '
+        'txtCheque
+        '
+        Me.txtCheque.Cleanable = True
+        Me.txtCheque.Empty = True
+        Me.txtCheque.EnterIndex = 16
+        Me.txtCheque.LabelAssociationKey = 16
+        Me.txtCheque.Location = New System.Drawing.Point(124, 177)
+        Me.txtCheque.MaxLength = 50
+        Me.txtCheque.Name = "txtCheque"
+        Me.txtCheque.Size = New System.Drawing.Size(366, 20)
+        Me.txtCheque.TabIndex = 46
+        Me.txtCheque.Validator = Administracion.ValidatorType.None
+        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.cmbCondicionIB1)
@@ -489,114 +502,6 @@ Partial Class ProveedoresABM
         Me.GroupBox2.TabIndex = 105
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "PROVINCIA"
-        '
-        'txtPaginaWeb
-        '
-        Me.txtPaginaWeb.Location = New System.Drawing.Point(124, 342)
-        Me.txtPaginaWeb.MaxLength = 50
-        Me.txtPaginaWeb.Name = "txtPaginaWeb"
-        Me.txtPaginaWeb.Size = New System.Drawing.Size(309, 20)
-        Me.txtPaginaWeb.TabIndex = 104
-        Me.txtPaginaWeb.Text = "http://"
-        Me.ToolTip1.SetToolTip(Me.txtPaginaWeb, "Doble Click: Abrir en Navegador Web.")
-        '
-        'txtCUIT
-        '
-        Me.txtCUIT.Location = New System.Drawing.Point(281, 99)
-        Me.txtCUIT.Mask = "00-00000000-0"
-        Me.txtCUIT.Name = "txtCUIT"
-        Me.txtCUIT.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCUIT.Size = New System.Drawing.Size(92, 20)
-        Me.txtCUIT.TabIndex = 102
-        Me.txtCUIT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCUIT.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
-        '
-        'txtCategoria
-        '
-        Me.txtCategoria.Enabled = False
-        Me.txtCategoria.Location = New System.Drawing.Point(346, 290)
-        Me.txtCategoria.Mask = "00/00/0000"
-        Me.txtCategoria.Name = "txtCategoria"
-        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
-        Me.txtCategoria.TabIndex = 47
-        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCategoria.ValidatingType = GetType(Date)
-        '
-        'txtCalificacion
-        '
-        Me.txtCalificacion.Location = New System.Drawing.Point(561, 317)
-        Me.txtCalificacion.Mask = "00/00/0000"
-        Me.txtCalificacion.Name = "txtCalificacion"
-        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCalificacion.Size = New System.Drawing.Size(74, 20)
-        Me.txtCalificacion.TabIndex = 47
-        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCalificacion.ValidatingType = GetType(Date)
-        '
-        'txtNroSEDRONAR2
-        '
-        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(735, 291)
-        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
-        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
-        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
-        Me.txtNroSEDRONAR2.TabIndex = 47
-        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
-        '
-        'txtCertificados
-        '
-        Me.txtCertificados.Location = New System.Drawing.Point(258, 317)
-        Me.txtCertificados.Mask = "00/00/0000"
-        Me.txtCertificados.Name = "txtCertificados"
-        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCertificados.Size = New System.Drawing.Size(74, 20)
-        Me.txtCertificados.TabIndex = 47
-        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCertificados.ValidatingType = GetType(Date)
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.cmbInscripcionIB)
-        Me.GroupBox3.Controls.Add(Me.cmbCondicionIB2)
-        Me.GroupBox3.Controls.Add(Me.CustomLabel20)
-        Me.GroupBox3.Controls.Add(Me.CustomLabel32)
-        Me.GroupBox3.Controls.Add(Me.txtPorcelCABA)
-        Me.GroupBox3.Controls.Add(Me.CustomLabel24)
-        Me.GroupBox3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox3.Location = New System.Drawing.Point(473, 203)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(335, 75)
-        Me.GroupBox3.TabIndex = 106
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "CABA"
-        '
-        'txtCAIVto
-        '
-        Me.txtCAIVto.Location = New System.Drawing.Point(766, 454)
-        Me.txtCAIVto.Mask = "00/00/0000"
-        Me.txtCAIVto.Name = "txtCAIVto"
-        Me.txtCAIVto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCAIVto.Size = New System.Drawing.Size(16, 20)
-        Me.txtCAIVto.TabIndex = 47
-        Me.txtCAIVto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCAIVto.ValidatingType = GetType(Date)
-        Me.txtCAIVto.Visible = False
-        '
-        'txtCheque
-        '
-        Me.txtCheque.Cleanable = True
-        Me.txtCheque.Empty = True
-        Me.txtCheque.EnterIndex = 16
-        Me.txtCheque.LabelAssociationKey = 16
-        Me.txtCheque.Location = New System.Drawing.Point(124, 177)
-        Me.txtCheque.MaxLength = 50
-        Me.txtCheque.Name = "txtCheque"
-        Me.txtCheque.Size = New System.Drawing.Size(366, 20)
-        Me.txtCheque.TabIndex = 46
-        Me.txtCheque.Validator = Administracion.ValidatorType.None
         '
         'cmbCondicionIB1
         '
@@ -681,6 +586,27 @@ Partial Class ProveedoresABM
         Me.CustomLabel19.Size = New System.Drawing.Size(67, 17)
         Me.CustomLabel19.TabIndex = 70
         Me.CustomLabel19.Text = "Porcel I.B."
+        '
+        'txtPaginaWeb
+        '
+        Me.txtPaginaWeb.Location = New System.Drawing.Point(124, 342)
+        Me.txtPaginaWeb.MaxLength = 50
+        Me.txtPaginaWeb.Name = "txtPaginaWeb"
+        Me.txtPaginaWeb.Size = New System.Drawing.Size(309, 20)
+        Me.txtPaginaWeb.TabIndex = 104
+        Me.txtPaginaWeb.Text = "http://"
+        Me.ToolTip1.SetToolTip(Me.txtPaginaWeb, "Doble Click: Abrir en Navegador Web.")
+        '
+        'txtCUIT
+        '
+        Me.txtCUIT.Location = New System.Drawing.Point(281, 99)
+        Me.txtCUIT.Mask = "00-00000000-0"
+        Me.txtCUIT.Name = "txtCUIT"
+        Me.txtCUIT.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCUIT.Size = New System.Drawing.Size(92, 20)
+        Me.txtCUIT.TabIndex = 102
+        Me.txtCUIT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCUIT.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         '
         'cmbCalificacion
         '
@@ -1093,6 +1019,51 @@ Partial Class ProveedoresABM
         Me.CustomLabel1.TabIndex = 48
         Me.CustomLabel1.Text = "Código"
         '
+        'txtCategoria
+        '
+        Me.txtCategoria.Enabled = False
+        Me.txtCategoria.Location = New System.Drawing.Point(346, 290)
+        Me.txtCategoria.Mask = "00/00/0000"
+        Me.txtCategoria.Name = "txtCategoria"
+        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
+        Me.txtCategoria.TabIndex = 47
+        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCategoria.ValidatingType = GetType(Date)
+        '
+        'txtCalificacion
+        '
+        Me.txtCalificacion.Location = New System.Drawing.Point(561, 317)
+        Me.txtCalificacion.Mask = "00/00/0000"
+        Me.txtCalificacion.Name = "txtCalificacion"
+        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCalificacion.Size = New System.Drawing.Size(74, 20)
+        Me.txtCalificacion.TabIndex = 47
+        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCalificacion.ValidatingType = GetType(Date)
+        '
+        'txtNroSEDRONAR2
+        '
+        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(735, 291)
+        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
+        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
+        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
+        Me.txtNroSEDRONAR2.TabIndex = 47
+        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
+        '
+        'txtCertificados
+        '
+        Me.txtCertificados.Location = New System.Drawing.Point(258, 317)
+        Me.txtCertificados.Mask = "00/00/0000"
+        Me.txtCertificados.Name = "txtCertificados"
+        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCertificados.Size = New System.Drawing.Size(74, 20)
+        Me.txtCertificados.TabIndex = 47
+        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCertificados.ValidatingType = GetType(Date)
+        '
         'cmbRegion
         '
         Me.cmbRegion.Cleanable = True
@@ -1364,6 +1335,23 @@ Partial Class ProveedoresABM
         Me.txtCuentaDescripcion.TabIndex = 45
         Me.txtCuentaDescripcion.Validator = Administracion.ValidatorType.None
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.cmbInscripcionIB)
+        Me.GroupBox3.Controls.Add(Me.cmbCondicionIB2)
+        Me.GroupBox3.Controls.Add(Me.CustomLabel20)
+        Me.GroupBox3.Controls.Add(Me.CustomLabel32)
+        Me.GroupBox3.Controls.Add(Me.txtPorcelCABA)
+        Me.GroupBox3.Controls.Add(Me.CustomLabel24)
+        Me.GroupBox3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox3.Location = New System.Drawing.Point(473, 203)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(335, 75)
+        Me.GroupBox3.TabIndex = 106
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "CABA"
+        '
         'cmbInscripcionIB
         '
         Me.cmbInscripcionIB.Cleanable = True
@@ -1448,6 +1436,18 @@ Partial Class ProveedoresABM
         Me.CustomLabel24.Size = New System.Drawing.Size(67, 17)
         Me.CustomLabel24.TabIndex = 76
         Me.CustomLabel24.Text = "Porcel I.B."
+        '
+        'txtCAIVto
+        '
+        Me.txtCAIVto.Location = New System.Drawing.Point(766, 454)
+        Me.txtCAIVto.Mask = "00/00/0000"
+        Me.txtCAIVto.Name = "txtCAIVto"
+        Me.txtCAIVto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCAIVto.Size = New System.Drawing.Size(16, 20)
+        Me.txtCAIVto.TabIndex = 47
+        Me.txtCAIVto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCAIVto.ValidatingType = GetType(Date)
+        Me.txtCAIVto.Visible = False
         '
         'txtCAI
         '
