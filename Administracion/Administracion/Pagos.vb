@@ -2614,6 +2614,62 @@ Public Class Pagos
             _ImprimirComprobanteRetencionGanancias(XTotal, txtGanancias.Text)
         End If
 
+        ' Imprimimos Comprobante de Retención de Ingresos Brutos si la hubiese.
+
+        If Val(txtIngresosBrutos.Text) <> 0 Then
+            _ImprimirComprobanteRetencionIB()
+        End If
+
+
+    End Sub
+
+    Private Sub _ImprimirComprobanteRetencionIB()
+        Dim Tabla As New DataTable("Detalles")
+        Dim row As DataRow
+        Dim crdoc As ReportDocument = New OrdenPagoComprobanteRetGanancias
+        Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
+        Dim WEmpNombre As String = "SURFACTAN S.A."
+        Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
+        Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
+        Dim WEmpCuit As String = "30-54916508-3"
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+                    .Read()
+
+                    WTipoIb = .Item("CodIb")
+                    WTipoIbCaba = .Item("CodIbCaba")
+                    WTipoiva = Val(.Item("Iva"))
+                    WTipoprv = Val(.Item("Tipo")) + 1
+                    WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
+                    WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
+
+                End If
+            End With
+            
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+
+
 
 
     End Sub
