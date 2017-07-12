@@ -108,7 +108,7 @@ Public Class Compras
 
         ' Si tiene dato de CAI, se verifica que no este vencido.
         ' En caso de que si, se muestran los campos para solicitar que los actualice.
-        If Trim(proveedor.cai) <> "" And Trim(proveedor.vtoCAI).Length = 10 And Val(proveedor.codIva) = 5 Then ' CodIva = 5 corresponde a letra "C".
+        If Trim(proveedor.cai) <> "" And Val(proveedor.vtoCAI.Replace("/", "")) > 0 Then
             If _CAIVencido(proveedor.vtoCAI) Then
                 txtCAI.Text = proveedor.cai
                 txtVtoCAI.Text = proveedor.vtoCAI
@@ -285,9 +285,9 @@ Public Class Compras
     End Function
 
     Private Function laParidadEsValida()
-        If cmbTipo.SelectedItem = "NC" Then
-            Return CustomConvert.toDoubleOrZero(txtParidad.Text)
-        End If
+        'If cmbTipo.SelectedItem = "NC" Then
+        'Return CustomConvert.toDoubleOrZero(txtParidad.Text)
+        'End If
         Return True
     End Function
 
@@ -409,8 +409,7 @@ Public Class Compras
         'End If
         'DAOProveedor.agregarProveedor(proveedor)
 
-        ' Se actualiza CAI y su vencimiento unicamente cuando la letra es C.
-        If Trim(txtCAI.Text) <> "C" Then
+        If Not txtCAI.Visible Then
             Exit Sub
         End If
 

@@ -43,7 +43,6 @@ Partial Class Compras
         Me.txtFechaVto1 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.CBLetra = New System.Windows.Forms.ComboBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtNumero = New Administracion.CustomTextBox()
         Me.CustomLabel4 = New Administracion.CustomLabel()
         Me.txtCAI = New Administracion.CustomTextBox()
@@ -89,6 +88,7 @@ Partial Class Compras
         Me.cmbTipo = New Administracion.CustomComboBox()
         Me.txtPunto = New Administracion.CustomTextBox()
         Me.txtTipo = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnApertura = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCerrar = New Administracion.CustomButton()
@@ -298,7 +298,6 @@ Partial Class Compras
         Me.txtVtoCAI.TabIndex = 63
         Me.txtVtoCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtVtoCAI.ValidatingType = GetType(Date)
-        Me.txtVtoCAI.Visible = False
         '
         'txtFechaIVA
         '
@@ -393,7 +392,6 @@ Partial Class Compras
         Me.txtCAI.TabIndex = 35
         Me.txtCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCAI.Validator = Administracion.ValidatorType.None
-        Me.txtCAI.Visible = False
         '
         'lblCredito
         '
