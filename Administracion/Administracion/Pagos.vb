@@ -157,9 +157,9 @@ Public Class Pagos
         If IsNothing(orden) Then : Exit Sub : End If
         'btnLimpiar.PerformClick()
         txtOrdenPago.Text = orden.nroOrden
-        txtFecha.Text = orden.fecha
+        txtFecha.Text = Proceso._Normalizarfecha(orden.fecha)
         txtObservaciones.Text = orden.observaciones
-        txtFechaParidad.Text = orden.fechaParidad
+        txtFechaParidad.Text = Proceso._Normalizarfecha(orden.fechaParidad)
         mostrarProveedor(orden.proveedor)
         mostrarBanco(orden.banco)
         txtGanancias.Text = CustomConvert.toStringWithTwoDecimalPlaces(orden.retGanancias)
@@ -2303,8 +2303,8 @@ Public Class Pagos
         Dim WDebito(15, 2) As String
         Dim WCredito(15, 4) As String
         Dim WCuenta(15, 2) As String
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand
         Dim dr As SqlDataReader
 
         ' Verificamos de que haya codigo de orden de pago valido para traer.
@@ -2604,13 +2604,175 @@ Public Class Pagos
 
 
         ' Imprimimos Discrimianción de Valores de Terceros Entregados si el Tipo2 es = 3
-        If Not _DiscriminarValoreDeTerceros(txtOrdenPago.Text) Then
-            Exit Sub
+        If _DiscriminarValoreDeTerceros(txtOrdenPago.Text) Then
+            _ImprimirDiscriminacionDeValoresDeTerceros(XRazon, XCuitProveedor)
         End If
 
-        _ImprimirDiscriminacionDeValoresDeTerceros(XRazon, XCuitProveedor)
+        ' Imprimimos Comprobante de Retención de Ganancias si la hubiese
+
+        If Val(txtGanancias.Text) <> 0 Then
+            _ImprimirComprobanteRetencionGanancias(XTotal, txtGanancias.Text)
+        End If
+
+
 
     End Sub
+
+    Private Sub _ImprimirComprobanteRetencionGanancias(ByVal Total As String, ByVal Retencion As String)
+        Dim Tabla As New DataTable("Detalles")
+        Dim row As DataRow
+        Dim crdoc As ReportDocument = New OrdenPagoComprobanteRetGanancias
+        Dim WEmpNombre As String = "SURFACTAN S.A."
+        Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
+        Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
+        Dim WEmpCuit As String = "30-54916508-3"
+        Dim Mes As String = Val(Mid$(txtFecha.Text, 3, 2))
+        Dim WCuatri As String = ""
+        Dim WLeyenda(10) As String
+
+        WLeyenda(1) = "Compra de Bienes"
+        WLeyenda(2) = "Ejericio Prof. Lib. c/Aj.Inf."
+        WLeyenda(3) = "Alquileres y Arrendamientos"
+        WLeyenda(6) = "Locacion de Obras y/o servicios"
+        WLeyenda(7) = "Transporte de Carga"
+        WLeyenda(8) = "Factura M"
+
+        If Mes <= 4 Then
+            WCuatri = "Primer Cuatrimestre"
+        Else
+            If Mes >= 5 And Mes <= 8 Then
+                WCuatri = "Segundo Cuatrimestre"
+            Else
+                If Mes >= 9 Then
+                    WCuatri = "Tercer Cuatrimestre"
+                End If
+            End If
+        End If
+
+        Dim _DatosProv() As String = _TraerDatosProveedor(txtOrdenPago.Text)
+
+        ' Por defecto son de tipo String, asi que solamente defino explicitamente las de tipo Double.
+        With Tabla
+            .Columns.Add("Clave")
+            .Columns.Add("Tipo")
+            .Columns.Add("Orden")
+            .Columns.Add("Renglon")
+            .Columns.Add("NroCertificado")
+            .Columns.Add("Empresa")
+            .Columns.Add("Direccion")
+            .Columns.Add("Localidad")
+            .Columns.Add("Fecha")
+            .Columns.Add("Cuit")
+            .Columns.Add("NombrePrv")
+            .Columns.Add("DireccionPrv")
+            .Columns.Add("CuitPrv")
+            .Columns.Add("Concepto")
+            .Columns.Add("Pagado").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Retenido").DataType = System.Type.GetType("System.Double")
+        End With
+
+        row = Tabla.NewRow
+
+        With row
+            .Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + "00"
+            .Item("Tipo") = 1
+            .Item("Orden") = Val(txtOrdenPago.Text)
+            .Item("Renglon") = 0
+            .Item("NroCertificado") = _DatosProv(0)
+            .Item("Empresa") = WEmpNombre
+            .Item("Direccion") = WEmpDireccion
+            .Item("Localidad") = WEmpLocalidad
+            .Item("Fecha") = txtFecha.Text
+            .Item("Cuit") = WEmpCuit
+            .Item("NombrePrv") = _DatosProv(5)
+            .Item("DireccionPrv") = _DatosProv(4)
+            .Item("CuitPrv") = _DatosProv(6)
+            .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
+            .Item("Pagado") = CDbl(Total - Retencion)
+            .Item("Pagado") = CDbl(Total)
+            .Item("Retenido") = CDbl(Retencion)
+        End With
+
+        Tabla.Rows.Add(row)
+
+        row = Tabla.NewRow
+
+        With row
+            .Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + "00"
+            .Item("Tipo") = 2
+            .Item("Orden") = Val(txtOrdenPago.Text)
+            .Item("Renglon") = 0
+            .Item("NroCertificado") = _DatosProv(0)
+            .Item("Empresa") = WEmpNombre
+            .Item("Direccion") = WEmpDireccion
+            .Item("Localidad") = WEmpLocalidad
+            .Item("Fecha") = txtFecha.Text
+            .Item("Cuit") = WEmpCuit
+            .Item("NombrePrv") = _DatosProv(5)
+            .Item("DireccionPrv") = _DatosProv(4)
+            .Item("CuitPrv") = _DatosProv(6)
+            .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
+            .Item("Pagado") = CDbl(Total - Retencion)
+            .Item("Pagado") = CDbl(Total)
+            .Item("Retenido") = CDbl(Retencion)
+        End With
+
+        Tabla.Rows.Add(row)
+
+        crdoc.SetDataSource(Tabla)
+
+        With VistaPrevia
+            .CrystalReportViewer1.ReportSource = crdoc
+            .ShowDialog()
+            .Dispose()
+        End With
+
+    End Sub
+
+    Private Function _TraerDatosProveedor(ByVal ordenpago As String) As String()
+        Dim datos(8) As String
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT p.CertificadoGan, p.CertificadoIb, p.CertificadoIbCiudad, p.CertificadoIva, pr.Direccion, pr.Nombre, pr.Cuit, pr.Tipo " _
+                                            & "FROM Pagos as p, Proveedor as pr where p.clave = '07239901' and p.Proveedor = pr.Proveedor")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+                    .Read()
+
+                    ' Agregamos los datos.
+                    datos(0) = .Item("CertificadoGan").ToString()
+                    datos(1) = .Item("CertificadoIb").ToString()
+                    datos(2) = .Item("CertificadoIbCiudad").ToString()
+                    datos(3) = .Item("CertificadoIva").ToString()
+                    datos(4) = .Item("Direccion").ToString()
+                    datos(5) = .Item("Nombre").ToString()
+                    datos(6) = .Item("Cuit").ToString()
+                    datos(7) = Val(.Item("Tipo") + 1).ToString()
+
+                End If
+            End With
+            
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return datos
+    End Function
 
     Private Sub _ImprimirDiscriminacionDeValoresDeTerceros(ByVal XRazon As String, ByVal XCuitProveedor As String)
         Dim ZZCorte, ZZOrden, ZZRenglon, ZZProveedor, ZZFecha, ZZImporteCheque, ZZNumeroCheque, ZZFechaCheque, ZZBancoCheque, ZZCuit As String
