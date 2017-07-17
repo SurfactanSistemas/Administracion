@@ -543,11 +543,28 @@
       <DependentUpon>ControlDeFacturacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\OrdenPagoComprobanteRetIva.vb">
-      <DependentUpon>OrdenPagoComprobanteRetIva.rpt</DependentUpon>
+    <Compile Include="Reportes\DepositoBancario2.vb">
+      <DependentUpon>DepositoBancario2.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\DepositoBancario.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepositoBancario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\DepositoDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepositoDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteRetIva.vb">
+      <DependentUpon>OrdenPagoComprobanteRetIva.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\OrdenPagoComprobanteIBCABA.vb">
       <DependentUpon>OrdenPagoComprobanteIBCABA.rpt</DependentUpon>
@@ -889,6 +906,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ControlDeFacturacion.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\DepositoBancario2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepositoBancario2.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\DepositoBancario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepositoBancario.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\OrdenPagoComprobanteRetIva.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>OrdenPagoComprobanteRetIva.vb</LastGenOutput>
@@ -1191,6 +1216,17 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reportes\DepositoDetalles.xsc">
+      <DependentUpon>DepositoDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DepositoDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DepositoDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DepositoDetalles.xss">
+      <DependentUpon>DepositoDetalles.xsd</DependentUpon>
+    </None>
     <None Include="Reportes\DetallesFacturacion.xsc">
       <DependentUpon>DetallesFacturacion.xsd</DependentUpon>
     </None>
