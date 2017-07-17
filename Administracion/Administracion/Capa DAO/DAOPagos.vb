@@ -28,7 +28,7 @@ Public Class DAOPagos
         Return New OrdenPago(ceros(row("Orden").ToString, 6), asInteger(row("TipoOrd")), asDouble(row("Paridad")), asDouble(row("Importe")),
                              asDouble(row("RetIva")), asDouble(row("RetencionIB")), asDouble(row("RetIbCiudad")), asDouble(row("Retencion")),
                              asDateString(row("Fecha")), asDateString(row("fechaParidad")), row("Observaciones").ToString,
-                             DAOBanco.buscarBancoPorCodigo(row("Banco").ToString), DAOProveedor.buscarProveedorPorCodigo(row("Proveedor").ToString), row("CertificadoIb"), row("CertificadoIbCiudad"), row("CertificadoIva"))
+                             DAOBanco.buscarBancoPorCodigo(row("Banco").ToString), DAOProveedor.buscarProveedorPorCodigo(row("Proveedor").ToString), asDouble(row("CertificadoIb")), asDouble(row("CertificadoIbCiudad")), asDouble(row("CertificadoIva")))
     End Function
 
     Private Shared Function asDouble(ByVal val)

@@ -543,11 +543,17 @@
       <DependentUpon>ControlDeFacturacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\OrdenPagoComprobanteIBCABA.vb">
-      <DependentUpon>OrdenPagoComprobanteIBCABA.rpt</DependentUpon>
+    <Compile Include="Reportes\OrdenPagoComprobanteRetIva.vb">
+      <DependentUpon>OrdenPagoComprobanteRetIva.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteIBCABA.vb">
+      <DependentUpon>OrdenPagoComprobanteIBCABA.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\DiscriminacionTercerosDetalles.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -882,6 +888,10 @@
     <EmbeddedResource Include="Reportes\ControlDeFacturacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ControlDeFacturacion.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteRetIva.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteRetIva.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\OrdenPagoComprobanteIBCABA.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
