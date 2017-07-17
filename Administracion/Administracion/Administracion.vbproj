@@ -570,6 +570,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteIB.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteIB.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteIBDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteIBDetalles.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\OrdenPagoComprobanteRetGanancias.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -873,6 +884,10 @@
     <EmbeddedResource Include="Reportes\InformeOrdenPago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InformeOrdenPago.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteIB.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteIB.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\OrdenPagoComprobanteRetGanancias.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1199,6 +1214,17 @@
     </None>
     <None Include="Reportes\OrdenPagoComprobanteGanancias.xss">
       <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteIBDetalles.xsc">
+      <DependentUpon>OrdenPagoComprobanteIBDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteIBDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteIBDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteIBDetalles.xss">
+      <DependentUpon>OrdenPagoComprobanteIBDetalles.xsd</DependentUpon>
     </None>
     <None Include="Reportes\OrdenPagoDetalles.xsc">
       <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
