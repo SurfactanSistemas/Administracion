@@ -546,8 +546,8 @@
     <Compile Include="Reportes\DepositoBancario2.vb">
       <DependentUpon>DepositoBancario2.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\DepositoBancario.vb">
       <AutoGen>True</AutoGen>
