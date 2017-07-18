@@ -108,7 +108,7 @@ Public Class Compras
 
         ' Si tiene dato de CAI, se verifica que no este vencido.
         ' En caso de que si, se muestran los campos para solicitar que los actualice.
-        If Trim(proveedor.cai) <> "" And Trim(proveedor.vtoCAI).Length = 10 And Val(proveedor.codIva) = 5 Then ' CodIva = 5 corresponde a letra "C".
+        If Trim(proveedor.cai) <> "" And Val(proveedor.vtoCAI.Replace("/", "")) > 0 Then
             If _CAIVencido(proveedor.vtoCAI) Then
                 txtCAI.Text = proveedor.cai
                 txtVtoCAI.Text = proveedor.vtoCAI
@@ -285,9 +285,9 @@ Public Class Compras
     End Function
 
     Private Function laParidadEsValida()
-        If cmbTipo.SelectedItem = "NC" Then
-            Return CustomConvert.toDoubleOrZero(txtParidad.Text)
-        End If
+        'If cmbTipo.SelectedItem = "NC" Then
+        'Return CustomConvert.toDoubleOrZero(txtParidad.Text)
+        'End If
         Return True
     End Function
 
@@ -409,8 +409,7 @@ Public Class Compras
         'End If
         'DAOProveedor.agregarProveedor(proveedor)
 
-        ' Se actualiza CAI y su vencimiento unicamente cuando la letra es C.
-        If Trim(txtCAI.Text) <> "C" Then
+        If Not txtCAI.Visible Then
             Exit Sub
         End If
 
@@ -713,13 +712,14 @@ Public Class Compras
     End Sub
 
     Private Sub btnConsultaNroFactura_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaNroFactura.Click
-        Dim consulta As New ConsultaNumeroFactura
-        consulta.ShowDialog(Me)
+        ' Deshabilitado ?
+        'Dim consulta As New ConsultaNumeroFactura
+        'consulta.ShowDialog(Me)
 
-        If consulta.numero <> 0 Then
-            txtNroInterno.Text = consulta.numero
-            _BuscarCompraPorNumeroInterno()
-        End If
+        'If consulta.numero <> 0 Then
+        '    txtNroInterno.Text = consulta.numero
+        '    _BuscarCompraPorNumeroInterno()
+        'End If
 
     End Sub
 
@@ -961,8 +961,8 @@ Public Class Compras
                     Exit Sub
                 End If
 
-                Dim fecha As Date = Convert.ToDateTime(txtFechaEmision.Text)
                 txtFechaIVA.Text = Date.Now.ToString("dd/MM/yyyy")
+                Dim fecha As Date = Convert.ToDateTime(txtFechaIVA.Text)
                 txtFechaVto1.Text = fecha.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
                 txtFechaVto2.Text = txtFechaVto1.Text
 

@@ -43,7 +43,6 @@ Partial Class Compras
         Me.txtFechaVto1 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.CBLetra = New System.Windows.Forms.ComboBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtNumero = New Administracion.CustomTextBox()
         Me.CustomLabel4 = New Administracion.CustomLabel()
         Me.txtCAI = New Administracion.CustomTextBox()
@@ -89,6 +88,7 @@ Partial Class Compras
         Me.cmbTipo = New Administracion.CustomComboBox()
         Me.txtPunto = New Administracion.CustomTextBox()
         Me.txtTipo = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnApertura = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCerrar = New Administracion.CustomButton()
@@ -298,7 +298,6 @@ Partial Class Compras
         Me.txtVtoCAI.TabIndex = 63
         Me.txtVtoCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtVtoCAI.ValidatingType = GetType(Date)
-        Me.txtVtoCAI.Visible = False
         '
         'txtFechaIVA
         '
@@ -320,6 +319,7 @@ Partial Class Compras
         Me.txtFechaVto2.Size = New System.Drawing.Size(82, 20)
         Me.txtFechaVto2.TabIndex = 63
         Me.txtFechaVto2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtFechaVto2, "Calculado a partir de Fecha IVA")
         Me.txtFechaVto2.ValidatingType = GetType(Date)
         '
         'txtFechaVto1
@@ -331,6 +331,7 @@ Partial Class Compras
         Me.txtFechaVto1.Size = New System.Drawing.Size(82, 20)
         Me.txtFechaVto1.TabIndex = 63
         Me.txtFechaVto1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtFechaVto1, "Calculado a partir de Fecha IVA")
         Me.txtFechaVto1.ValidatingType = GetType(Date)
         '
         'txtFechaEmision
@@ -393,7 +394,6 @@ Partial Class Compras
         Me.txtCAI.TabIndex = 35
         Me.txtCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCAI.Validator = Administracion.ValidatorType.None
-        Me.txtCAI.Visible = False
         '
         'lblCredito
         '
@@ -1055,6 +1055,7 @@ Partial Class Compras
         Me.btnConsultaNroFactura.Text = "Consulta Nro. de Factura"
         Me.ToolTip1.SetToolTip(Me.btnConsultaNroFactura, "Consultar Comprobante  por Nro de Factura")
         Me.btnConsultaNroFactura.UseVisualStyleBackColor = True
+        Me.btnConsultaNroFactura.Visible = False
         '
         'btnLimpiar
         '

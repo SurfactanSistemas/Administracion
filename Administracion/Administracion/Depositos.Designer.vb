@@ -29,6 +29,7 @@ Partial Class Depositos
         Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtImporte = New Administracion.CustomTextBox()
         Me.CustomLabel7 = New Administracion.CustomLabel()
         Me.lstSeleccion = New Administracion.CustomListBox()
@@ -62,7 +63,7 @@ Partial Class Depositos
         'gridCheques
         '
         Me.gridCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridCheques.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tipo, Me.numero, Me.fecha, Me.nombre, Me.importe})
+        Me.gridCheques.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tipo, Me.numero, Me.fecha, Me.nombre, Me.importe, Me.ClaveCheque})
         Me.gridCheques.Location = New System.Drawing.Point(25, 123)
         Me.gridCheques.Name = "gridCheques"
         Me.gridCheques.Size = New System.Drawing.Size(743, 350)
@@ -101,6 +102,12 @@ Partial Class Depositos
         Me.importe.Name = "importe"
         Me.importe.Width = 110
         '
+        'ClaveCheque
+        '
+        Me.ClaveCheque.HeaderText = "ClaveCheque"
+        Me.ClaveCheque.Name = "ClaveCheque"
+        Me.ClaveCheque.Visible = False
+        '
         'txtImporte
         '
         Me.txtImporte.Cleanable = True
@@ -112,6 +119,7 @@ Partial Class Depositos
         Me.txtImporte.Name = "txtImporte"
         Me.txtImporte.Size = New System.Drawing.Size(89, 20)
         Me.txtImporte.TabIndex = 16
+        Me.txtImporte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtImporte.Validator = Administracion.ValidatorType.PositiveFloat
         '
         'CustomLabel7
@@ -294,6 +302,7 @@ Partial Class Depositos
         Me.txtNroDeposito.Name = "txtNroDeposito"
         Me.txtNroDeposito.Size = New System.Drawing.Size(96, 20)
         Me.txtNroDeposito.TabIndex = 1
+        Me.txtNroDeposito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtNroDeposito.Validator = Administracion.ValidatorType.Positive
         '
         'txtCodigoBanco
@@ -307,6 +316,7 @@ Partial Class Depositos
         Me.txtCodigoBanco.Name = "txtCodigoBanco"
         Me.txtCodigoBanco.Size = New System.Drawing.Size(71, 20)
         Me.txtCodigoBanco.TabIndex = 3
+        Me.txtCodigoBanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtCodigoBanco, "Doble Click: Abrir Consulta de Bancos")
         Me.txtCodigoBanco.Validator = Administracion.ValidatorType.None
         '
@@ -434,6 +444,7 @@ Partial Class Depositos
         Me.txtFechaAcreditacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFechaAcreditacion.Size = New System.Drawing.Size(75, 20)
         Me.txtFechaAcreditacion.TabIndex = 18
+        Me.txtFechaAcreditacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFechaAcreditacion.ValidatingType = GetType(Date)
         '
         'txtFecha
@@ -444,6 +455,7 @@ Partial Class Depositos
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFecha.Size = New System.Drawing.Size(100, 20)
         Me.txtFecha.TabIndex = 17
+        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFecha.ValidatingType = GetType(Date)
         '
         'Depositos
@@ -493,12 +505,13 @@ Partial Class Depositos
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents txtFecha As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtFechaAcreditacion As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents numero As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents nombre As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents txtFecha As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents txtFechaAcreditacion As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents ClaveCheque As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

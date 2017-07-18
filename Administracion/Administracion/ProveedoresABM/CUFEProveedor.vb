@@ -1,18 +1,10 @@
 ﻿Public Class CUFEProveedor
 
-    'Dim organizadorABM As New FormOrganizer(Me, 533, 600)
-
-    'Private Sub CUFEProveedor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-    '    organizadorABM.addControls(txtCUFE1, txtCUFE2, txtCUFE3)
-    '    organizadorABM.addAnnexedControls(New List(Of CustomControl) From {txtCUFE1Fecha, txtCUFE2Fecha, txtCUFE3Fecha})
-    '    organizadorABM.organizeForNotCRUDForm()
-    'End Sub
-
     Private Sub CUFEProveedor_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtCUFE1.Focus()
     End Sub
 
-    Private Sub txtCUFE1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCUFE1.KeyDown
+    Private Sub txtCUFE1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCUFE1.KeyDown, txtCUFE3Fecha.KeyDown, txtCUFE2Fecha.KeyDown, txtCUFE1Fecha.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtCUFE1.Text) <> "" Then
@@ -47,9 +39,9 @@
         End If
     End Sub
 
-    Private Sub txtCUFE1Fecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCUFE1Fecha.KeyDown
+    Private Sub txtCUFE1Fecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If e.KeyData = Keys.Enter Then
-            If Trim(txtCUFE1.Text) <> "" And Trim(txtCUFE1Fecha.Text.Replace("/", "")) <> "" Then
+            If Trim(txtCUFE1.Text) <> "" And Trim(txtCUFE1Fecha.Text) <> "" Then
                 txtCUFE2.Focus()
             Else
                 txtCUFE1Fecha.Focus()
@@ -57,9 +49,9 @@
         End If
     End Sub
 
-    Private Sub txtCUFE2Fecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCUFE2Fecha.KeyDown
+    Private Sub txtCUFE2Fecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If e.KeyData = Keys.Enter Then
-            If Trim(txtCUFE2.Text) <> "" And Trim(txtCUFE2Fecha.Text.Replace("/", "")) <> "" Then
+            If Trim(txtCUFE2.Text) <> "" And Trim(txtCUFE2Fecha.Text) <> "" Then
                 txtCUFE3.Focus()
             Else
                 txtCUFE2Fecha.Focus()
@@ -67,9 +59,9 @@
         End If
     End Sub
 
-    Private Sub txtCUFE3Fecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCUFE3Fecha.KeyDown
+    Private Sub txtCUFE3Fecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If e.KeyData = Keys.Enter Then
-            If Trim(txtCUFE3.Text) <> "" And Trim(txtCUFE3Fecha.Text.Replace("/", "")) <> "" Then
+            If Trim(txtCUFE3.Text) <> "" And Trim(txtCUFE3Fecha.Text) <> "" Then
                 Me.Close()
             Else
                 txtCUFE3Fecha.Focus()

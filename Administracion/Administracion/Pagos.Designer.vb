@@ -30,12 +30,6 @@ Partial Class Pagos
         Me.optVarios = New System.Windows.Forms.RadioButton()
         Me.optCtaCte = New System.Windows.Forms.RadioButton()
         Me.gridPagos = New System.Windows.Forms.DataGridView()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gridFormaPagos = New System.Windows.Forms.DataGridView()
         Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -95,6 +89,13 @@ Partial Class Pagos
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImpoNeto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -174,53 +175,12 @@ Partial Class Pagos
         '
         Me.gridPagos.AllowUserToAddRows = False
         Me.gridPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Importe, Me.Descripcion})
+        Me.gridPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Importe, Me.Descripcion, Me.ImpoNeto})
         Me.gridPagos.Location = New System.Drawing.Point(16, 247)
         Me.gridPagos.Name = "gridPagos"
         Me.gridPagos.RowHeadersWidth = 10
         Me.gridPagos.Size = New System.Drawing.Size(396, 217)
         Me.gridPagos.TabIndex = 56
-        '
-        'Tipo
-        '
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.ReadOnly = True
-        Me.Tipo.Width = 35
-        '
-        'Letra
-        '
-        Me.Letra.HeaderText = "Letra"
-        Me.Letra.Name = "Letra"
-        Me.Letra.ReadOnly = True
-        Me.Letra.Width = 40
-        '
-        'Punto
-        '
-        Me.Punto.HeaderText = "Punto"
-        Me.Punto.Name = "Punto"
-        Me.Punto.ReadOnly = True
-        Me.Punto.Width = 45
-        '
-        'Numero
-        '
-        Me.Numero.HeaderText = "Número"
-        Me.Numero.Name = "Numero"
-        Me.Numero.ReadOnly = True
-        Me.Numero.Width = 70
-        '
-        'Importe
-        '
-        Me.Importe.HeaderText = "Importe"
-        Me.Importe.Name = "Importe"
-        Me.Importe.Width = 75
-        '
-        'Descripcion
-        '
-        Me.Descripcion.HeaderText = "Descripción"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        Me.Descripcion.Width = 115
         '
         'gridFormaPagos
         '
@@ -1013,6 +973,54 @@ Partial Class Pagos
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Agregar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
+        'Tipo
+        '
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.ReadOnly = True
+        Me.Tipo.Width = 35
+        '
+        'Letra
+        '
+        Me.Letra.HeaderText = "Letra"
+        Me.Letra.Name = "Letra"
+        Me.Letra.ReadOnly = True
+        Me.Letra.Width = 40
+        '
+        'Punto
+        '
+        Me.Punto.HeaderText = "Punto"
+        Me.Punto.Name = "Punto"
+        Me.Punto.ReadOnly = True
+        Me.Punto.Width = 45
+        '
+        'Numero
+        '
+        Me.Numero.HeaderText = "Número"
+        Me.Numero.Name = "Numero"
+        Me.Numero.ReadOnly = True
+        Me.Numero.Width = 70
+        '
+        'Importe
+        '
+        Me.Importe.HeaderText = "Importe"
+        Me.Importe.Name = "Importe"
+        Me.Importe.Width = 75
+        '
+        'Descripcion
+        '
+        Me.Descripcion.HeaderText = "Descripción"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        Me.Descripcion.Width = 115
+        '
+        'ImpoNeto
+        '
+        Me.ImpoNeto.HeaderText = "ImpoNeto"
+        Me.ImpoNeto.Name = "ImpoNeto"
+        Me.ImpoNeto.ReadOnly = True
+        Me.ImpoNeto.Visible = False
+        '
         'Pagos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1085,12 +1093,6 @@ Partial Class Pagos
     Friend WithEvents lblFormaPagos As Administracion.CustomLabel
     Friend WithEvents lblDiferencia As Administracion.CustomLabel
     Friend WithEvents CustomLabel13 As Administracion.CustomLabel
-    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Letra As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Punto As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -1116,4 +1118,11 @@ Partial Class Pagos
     Friend WithEvents XCuil As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnChequesTerceros As Administracion.CustomButton
     Friend WithEvents btnCtaCte As Administracion.CustomButton
+    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Letra As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Punto As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ImpoNeto As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

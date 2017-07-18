@@ -17,6 +17,7 @@ Public Class Pagos
     Dim _Carpetas As New List(Of Object)
     Dim _Claves As New List(Of Object)
     Dim _TipoConsulta As Integer = Nothing
+    Private WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
 
     Private Sub Pagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         
@@ -170,6 +171,9 @@ Public Class Pagos
         mostrarFormaPagos(orden.formaPagos)
         mostrarTipo(orden.tipo)
         txtParidad.Text = orden.paridad
+        WCertificadoIb = orden.certIb
+        WCertificadoIbCiudad = orden.certIbCABA
+        WCertificadoIVA = orden.certIVA
     End Sub
 
     Private Sub mostrarTipo(ByVal tipo As Integer)
@@ -190,7 +194,7 @@ Public Class Pagos
     Private Sub mostrarPagos(ByVal pagos As List(Of Pago))
         gridPagos.Rows.Clear()
         For Each pago As Pago In pagos
-            gridPagos.Rows.Add(pago.tipo, pago.letra, pago.punto, pago.numero, pago.importe, pago.descripcion)
+            gridPagos.Rows.Add(pago.tipo, pago.letra, pago.punto, pago.numero, pago.importe, pago.descripcion, pago.impoNeto)
         Next
         sumarImportes()
     End Sub
@@ -2613,6 +2617,1099 @@ Public Class Pagos
         If Val(txtGanancias.Text) <> 0 Then
             _ImprimirComprobanteRetencionGanancias(XTotal, txtGanancias.Text)
         End If
+
+        ' Imprimimos Comprobante de Retención de Ingresos Brutos si la hubiese.
+
+        If Val(txtIngresosBrutos.Text) <> 0 Then
+            _ImprimirComprobanteRetencionIB()
+        End If
+
+        ' Imprimimos Comprobante de Retención de Ingresos Brutos CABA si la hubiese.
+
+        If Val(txtIBCiudad.Text) <> 0 Then
+            _ImprimirComprobanteRetencionIBCiudad()
+        End If
+
+        ' Imprimimos Comprobante de Retención de Iva si la hubiese.
+
+        If Val(txtIVA.Text) <> 0 Then
+            _ImprimirComprobanteRetencionIva()
+        End If
+
+    End Sub
+
+    Private Sub _ImprimirComprobanteRetencionIva()
+        Dim Tabla As New DataTable("Detalles")
+        Dim row As DataRow
+        Dim crdoc As ReportDocument = New OrdenPagoComprobanteRetIva
+        Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
+        Dim WEmpNombre As String = "SURFACTAN S.A."
+        Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
+        Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
+        Dim WEmpCuit As String = "30-54916508-3"
+        Dim WNroIb As String = "902-913585-2"
+        Dim ImpreCopia(2) As String
+        Dim WLetra, WTipo, WPunto, WNumero, ZNroInterno, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, ZZTotal, ZZSaldo, ZZSuma, WPrvDireccion, WPrvCuit, WPrvIb As String
+        Dim WCategoria, WPorce1 As String
+        Dim ZRechazado, WImpoRetenido As Double
+        Dim ZFechaCompa = String.Join("", Trim(txtFecha.Text).Split("/").Reverse())
+        Dim WRete As Double = 0
+        Dim WRenglon As Integer = 0
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+                    .Read()
+
+                    WPrvDireccion = .Item("Direccion")
+                    WPrvCuit = .Item("Cuit")
+                    WPrvIb = .Item("NroIb")
+                    WTipoIb = .Item("CodIb")
+                    WTipoIbCaba = .Item("CodIbCaba")
+                    WTipoiva = Val(.Item("Iva"))
+                    WTipoprv = Val(.Item("Tipo")) + 1
+                    WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
+                    WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
+
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            cn.Close()
+
+        End Try
+
+        ImpreCopia(1) = "Original"
+        ImpreCopia(2) = "Duplicado"
+
+        WImpoRetenido = 0
+        ZRechazado = 0
+        ZNroInterno = "0"
+
+        ' Preparamos las columnas.
+        With Tabla
+            .Columns.Add("Clave")
+            .Columns.Add("Tipo")
+            .Columns.Add("Orden")
+            .Columns.Add("Renglon")
+            .Columns.Add("Empresa")
+            .Columns.Add("Direccion")
+            .Columns.Add("Titulo")
+            .Columns.Add("Localidad")
+            .Columns.Add("Fecha")
+            .Columns.Add("Cuit")
+            .Columns.Add("Copia")
+            .Columns.Add("NroIb")
+            .Columns.Add("NroAgente")
+            .Columns.Add("NombrePrv")
+            .Columns.Add("DireccionPrv")
+            .Columns.Add("CuitPrv")
+            .Columns.Add("NroIbPrv")
+            .Columns.Add("Tipo1")
+            .Columns.Add("Numero1")
+            .Columns.Add("Fecha1")
+            .Columns.Add("Categoria1")
+            .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Porce1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Retencion1").DataType = System.Type.GetType("System.Double")
+        End With
+
+
+        For iRow = 0 To gridPagos.Rows.Count - 1
+
+            With gridPagos.Rows(iRow)
+                WLetra = .Cells(1).Value
+                WTipo = .Cells(0).Value
+                WPunto = .Cells(2).Value
+                WNumero = .Cells(3).Value
+
+                ZRechazado = 0
+                ZNroInterno = "0"
+
+                ZZClaveCtaCtePrv = txtProveedor.Text + WLetra + WTipo + WPunto + WNumero
+
+                XImpre1 = ""
+
+                Select Case Val(.Cells(0).Value)
+                    Case 1
+                        XImpre1 = "Factura"
+                    Case 2
+                        XImpre1 = "N.Debito"
+                    Case 3
+                        XImpre1 = "N.Credito"
+                    Case 5
+                        XImpre1 = "Anticipo"
+                    Case 99
+                        XImpre1 = "Varios"
+                    Case Else
+                        XImpre1 = ""
+                End Select
+
+                XImpre2 = Mid(.Cells(3).Value, 1, 8)
+                XImpre3 = ""
+                ZZTotal = ""
+                ZZSaldo = ""
+                ZZSuma = ""
+
+                WImpre4 = Val(.Cells(4).Value) / 1.21
+
+                XImpre4 = WImpre4
+
+
+                If Val(XImpre4) >= 1000 And Val(WNumero) <> 0 Then
+
+                    Try
+                        cn.Open()
+                        cm.CommandText = "SELECT ccp.Fecha, i.Iva21 FROM CtaCtePrv as ccp, IvaComp as i WHERE ccp.Clave = '" & ZZClaveCtaCtePrv & "' AND ccp.NroInterno = i.NroInterno"
+
+                        dr = cm.ExecuteReader()
+
+                        If dr.HasRows Then
+                            dr.Read()
+
+                            XImpre3 = dr.Item("Fecha")
+                            WPorce1 = dr.Item("Iva21")
+                        Else
+                            XImpre3 = ""
+                            WPorce1 = "0"
+                        End If
+
+                    Catch ex As Exception
+                        MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                    Finally
+
+                        cn.Close()
+
+                    End Try
+
+                End If
+
+                WCategoria = "SUJETO A RETENCION 0.75%"
+                WRete = WPorce1
+
+                WRenglon = WRenglon + 1
+
+                row = Tabla.NewRow
+
+                row.Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                row.Item("Tipo") = 1
+                row.Item("Orden") = Val(txtOrdenPago.Text)
+                row.Item("Renglon") = WRenglon
+                row.Item("Empresa") = WEmpNombre
+                row.Item("Direccion") = WEmpDireccion
+                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIVA
+                row.Item("Localidad") = WEmpLocalidad
+                row.Item("Fecha") = txtFecha.Text
+                row.Item("Cuit") = WEmpCuit
+                row.Item("Copia") = ImpreCopia(1)
+                row.Item("NroIb") = WNroIb
+                row.Item("NroAgente") = "" 'WNroAgente
+                row.Item("NombrePrv") = txtRazonSocial.Text
+                row.Item("DireccionPrv") = WPrvDireccion
+                row.Item("CuitPrv") = WPrvCuit
+                row.Item("NroIbPrv") = WPrvIb
+                row.Item("Tipo1") = XImpre1
+                row.Item("Numero1") = XImpre2
+                row.Item("Fecha1") = XImpre3
+                row.Item("Categoria1") = WCategoria
+                row.Item("Importe1") = CDbl(XImpre4)
+                row.Item("Porce1") = CDbl(WPorce1)
+                row.Item("Retencion1") = CDbl(WRete)
+
+                Tabla.Rows.Add(row)
+
+                row = Tabla.NewRow
+
+                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                row.Item("Tipo") = 2
+                row.Item("Orden") = Val(txtOrdenPago.Text)
+                row.Item("Renglon") = WRenglon
+                row.Item("Empresa") = WEmpNombre
+                row.Item("Direccion") = WEmpDireccion
+                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIVA
+                row.Item("Localidad") = WEmpLocalidad
+                row.Item("Fecha") = txtFecha.Text
+                row.Item("Cuit") = WEmpCuit
+                row.Item("Copia") = ImpreCopia(1)
+                row.Item("NroIb") = WNroIb
+                row.Item("NroAgente") = "" 'WNroAgente
+                row.Item("NombrePrv") = txtRazonSocial.Text
+                row.Item("DireccionPrv") = WPrvDireccion
+                row.Item("CuitPrv") = WPrvCuit
+                row.Item("NroIbPrv") = WPrvIb
+                row.Item("Tipo1") = XImpre1
+                row.Item("Numero1") = XImpre2
+                row.Item("Fecha1") = XImpre3
+                row.Item("Categoria1") = WCategoria
+                row.Item("Importe1") = CDbl(XImpre4)
+                row.Item("Porce1") = CDbl(WPorce1)
+                row.Item("Retencion1") = CDbl(WRete)
+
+                Tabla.Rows.Add(row)
+
+            End With
+
+        Next
+
+        ' Completamos los renglones faltantes.
+
+
+        For WRenglon = 1 To 15
+
+            row = Tabla.NewRow
+
+            row.Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+            row.Item("Tipo") = 1
+            row.Item("Orden") = Val(txtOrdenPago.Text)
+            row.Item("Renglon") = WRenglon
+            row.Item("Empresa") = WEmpNombre
+            row.Item("Direccion") = WEmpDireccion
+            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIVA
+            row.Item("Localidad") = WEmpLocalidad
+            row.Item("Fecha") = txtFecha.Text
+            row.Item("Cuit") = WEmpCuit
+            row.Item("Copia") = ImpreCopia(1)
+            row.Item("NroIb") = WNroIb
+            row.Item("NroAgente") = "" 'WNroAgente
+            row.Item("NombrePrv") = txtRazonSocial.Text
+            row.Item("DireccionPrv") = WPrvDireccion
+            row.Item("CuitPrv") = WPrvCuit
+            row.Item("NroIbPrv") = WPrvIb
+            row.Item("Tipo1") = ""
+            row.Item("Numero1") = ""
+            row.Item("Fecha1") = ""
+            row.Item("Categoria1") = ""
+            row.Item("Importe1") = 0
+            row.Item("Porce1") = 0
+            row.Item("Retencion1") = 0
+
+            Tabla.Rows.Add(row)
+
+            row = Tabla.NewRow
+
+            row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+            row.Item("Tipo") = 2
+            row.Item("Orden") = Val(txtOrdenPago.Text)
+            row.Item("Renglon") = WRenglon
+            row.Item("Empresa") = WEmpNombre
+            row.Item("Direccion") = WEmpDireccion
+            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIVA
+            row.Item("Localidad") = WEmpLocalidad
+            row.Item("Fecha") = txtFecha.Text
+            row.Item("Cuit") = WEmpCuit
+            row.Item("Copia") = ImpreCopia(1)
+            row.Item("NroIb") = WNroIb
+            row.Item("NroAgente") = "" 'WNroAgente
+            row.Item("NombrePrv") = txtRazonSocial.Text
+            row.Item("DireccionPrv") = WPrvDireccion
+            row.Item("CuitPrv") = WPrvCuit
+            row.Item("NroIbPrv") = WPrvIb
+            row.Item("Tipo1") = ""
+            row.Item("Numero1") = ""
+            row.Item("Fecha1") = ""
+            row.Item("Categoria1") = ""
+            row.Item("Importe1") = 0
+            row.Item("Porce1") = 0
+            row.Item("Retencion1") = 0
+
+            Tabla.Rows.Add(row)
+        Next
+
+
+        crdoc.SetDataSource(Tabla)
+
+        With VistaPrevia
+            .CrystalReportViewer1.ReportSource = crdoc
+            .ShowDialog()
+            .Dispose()
+        End With
+    End Sub
+
+    Private Sub _ImprimirComprobanteRetencionIBCiudad()
+        Dim Tabla As New DataTable("Detalles")
+        Dim row As DataRow
+        Dim crdoc As ReportDocument = New OrdenPagoComprobanteIBCABA
+        Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
+        Dim WEmpNombre As String = "SURFACTAN S.A."
+        Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
+        Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
+        Dim WEmpCuit As String = "30-54916508-3"
+        Dim WNroIb As String = "902-913585-2"
+        Dim ImpreCopia(2) As String
+        Dim WLetra, WTipo, WPunto, WNumero, ZNroInterno, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, ZZTotal, ZZSaldo, ZZSuma, WPrvDireccion, WPrvCuit, WPrvIb As String
+        Dim WCategoria, WPorce1 As String
+        Dim ZRechazado, WImpoRetenido As Double
+        Dim ZFechaCompa = String.Join("", Trim(txtFecha.Text).Split("/").Reverse())
+        Dim WRete As Double = 0
+        Dim WRenglon As Integer = 0
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+                    .Read()
+
+                    WPrvDireccion = .Item("Direccion")
+                    WPrvCuit = .Item("Cuit")
+                    WPrvIb = .Item("NroIb")
+                    WTipoIb = .Item("CodIb")
+                    WTipoIbCaba = .Item("CodIbCaba")
+                    WTipoiva = Val(.Item("Iva"))
+                    WTipoprv = Val(.Item("Tipo")) + 1
+                    WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
+                    WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
+
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            cn.Close()
+
+        End Try
+
+        ImpreCopia(1) = "Original"
+        ImpreCopia(2) = "Duplicado"
+
+        WImpoRetenido = 0
+        ZRechazado = 0
+        ZNroInterno = "0"
+
+        ' Preparamos las columnas.
+        With Tabla
+            .Columns.Add("Clave")
+            .Columns.Add("Tipo")
+            .Columns.Add("Orden")
+            .Columns.Add("Renglon")
+            .Columns.Add("Empresa")
+            .Columns.Add("Direccion")
+            .Columns.Add("Titulo")
+            .Columns.Add("Localidad")
+            .Columns.Add("Fecha")
+            .Columns.Add("Cuit")
+            .Columns.Add("Copia")
+            .Columns.Add("NroIb")
+            .Columns.Add("NroAgente")
+            .Columns.Add("NombrePrv")
+            .Columns.Add("DireccionPrv")
+            .Columns.Add("CuitPrv")
+            .Columns.Add("NroIbPrv")
+            .Columns.Add("Tipo1")
+            .Columns.Add("Numero1")
+            .Columns.Add("Fecha1")
+            .Columns.Add("Categoria1")
+            .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Porce1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Retencion1").DataType = System.Type.GetType("System.Double")
+        End With
+
+
+        For iRow = 0 To gridPagos.Rows.Count - 1
+
+            With gridPagos.Rows(iRow)
+                WLetra = .Cells(1).Value
+                WTipo = .Cells(0).Value
+                WPunto = .Cells(2).Value
+                WNumero = .Cells(3).Value
+
+                ZRechazado = 0
+                ZNroInterno = "0"
+
+                ZZClaveCtaCtePrv = txtProveedor.Text + WLetra + WTipo + WPunto + WNumero
+
+                XImpre1 = ""
+
+                Select Case Val(.Cells(0).Value)
+                    Case 1
+                        XImpre1 = "Factura"
+                    Case 2
+                        XImpre1 = "N.Debito"
+                    Case 3
+                        XImpre1 = "N.Credito"
+                    Case 5
+                        XImpre1 = "Anticipo"
+                    Case 99
+                        XImpre1 = "Varios"
+                    Case Else
+                        XImpre1 = ""
+                End Select
+
+                XImpre2 = Mid(.Cells(3).Value, 1, 8)
+                XImpre3 = ""
+                ZZTotal = ""
+                ZZSaldo = ""
+                ZZSuma = ""
+
+                Try
+                    cn.Open()
+                    cm.CommandText = "SELECT ccp.NroInterno, ccp.Fecha, ccp.Total, ccp.Saldo, i.Rechazado, i.Neto FROM CtaCtePrv as ccp, IvaComp as i WHERE ccp.Clave = '" & ZZClaveCtaCtePrv & "' AND ccp.NroInterno = i.NroInterno"
+
+                    dr = cm.ExecuteReader()
+
+                    If dr.HasRows Then
+                        dr.Read()
+
+                        ZNroInterno = dr.Item("NroInterno")
+                        ZRechazado = IIf(IsDBNull(dr.Item("Rechazado")), "0", dr.Item("Rechazado"))
+                        XImpre3 = dr.Item("Fecha")
+
+                    Else
+                        ZZSuma = Val(.Cells(5).Value) / 1.21
+                    End If
+
+                Catch ex As Exception
+                    MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                Finally
+
+                    cn.Close()
+
+                End Try
+
+                WImpre4 = Val(.Cells(4).Value)
+
+                If WTipoiva = 2 Then
+                    WImpre4 = WImpre4 / 1.21
+                End If
+
+                XImpre4 = WImpre4
+
+                If Val(WPorceIbCaba) <> 0 Then
+                    WRete = CDbl(XImpre4) * (CDbl(WPorceIbCaba) / 100)
+                Else
+                    If WTipoIbCaba = 3 Then
+                        WRete = CDbl(XImpre4) * (6 / 100)
+                    Else
+                        WRete = CDbl(XImpre4) * (6 / 100)
+                    End If
+                End If
+
+                WImpoRetenido = WImpoRetenido + WRete
+
+                If WPorceIbCaba <> 0 Then
+                    WCategoria = "SUJETO A RETENCION " & WPorceIbCaba & "%"
+                Else
+                    If WTipoIbCaba = 3 Then
+                        WCategoria = "SUJETO A RETENCION 6%"
+                    Else
+                        WCategoria = "SUJETO A RETENCION 6%"
+                    End If
+                End If
+
+                If Val(WPorceIbCaba) <> 0 Then
+                    WPorce1 = WPorceIbCaba
+                Else
+                    WPorce1 = 6
+                End If
+
+                WRenglon = WRenglon + 1
+
+                row = Tabla.NewRow
+
+                row.Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                row.Item("Tipo") = 1
+                row.Item("Orden") = Val(txtOrdenPago.Text)
+                row.Item("Renglon") = WRenglon
+                row.Item("Empresa") = WEmpNombre
+                row.Item("Direccion") = WEmpDireccion
+                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIbCiudad
+                row.Item("Localidad") = WEmpLocalidad
+                row.Item("Fecha") = txtFecha.Text
+                row.Item("Cuit") = WEmpCuit
+                row.Item("Copia") = ImpreCopia(1)
+                row.Item("NroIb") = WNroIb
+                row.Item("NroAgente") = "" 'WNroAgente
+                row.Item("NombrePrv") = txtRazonSocial.Text
+                row.Item("DireccionPrv") = WPrvDireccion
+                row.Item("CuitPrv") = WPrvCuit
+                row.Item("NroIbPrv") = WPrvIb
+                row.Item("Tipo1") = XImpre1
+                row.Item("Numero1") = XImpre2
+                row.Item("Fecha1") = XImpre3
+                row.Item("Categoria1") = WCategoria
+                row.Item("Importe1") = CDbl(XImpre4)
+                row.Item("Porce1") = CDbl(WPorce1)
+                row.Item("Retencion1") = WRete
+
+                Tabla.Rows.Add(row)
+
+                row = Tabla.NewRow
+
+                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                row.Item("Tipo") = 2
+                row.Item("Orden") = Val(txtOrdenPago.Text)
+                row.Item("Renglon") = WRenglon
+                row.Item("Empresa") = WEmpNombre
+                row.Item("Direccion") = WEmpDireccion
+                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIbCiudad
+                row.Item("Localidad") = WEmpLocalidad
+                row.Item("Fecha") = txtFecha.Text
+                row.Item("Cuit") = WEmpCuit
+                row.Item("Copia") = ImpreCopia(1)
+                row.Item("NroIb") = WNroIb
+                row.Item("NroAgente") = "" 'WNroAgente
+                row.Item("NombrePrv") = txtRazonSocial.Text
+                row.Item("DireccionPrv") = WPrvDireccion
+                row.Item("CuitPrv") = WPrvCuit
+                row.Item("NroIbPrv") = WPrvIb
+                row.Item("Tipo1") = XImpre1
+                row.Item("Numero1") = XImpre2
+                row.Item("Fecha1") = XImpre3
+                row.Item("Categoria1") = WCategoria
+                row.Item("Importe1") = CDbl(XImpre4)
+                row.Item("Porce1") = CDbl(WPorce1)
+                row.Item("Retencion1") = WRete
+
+                Tabla.Rows.Add(row)
+
+            End With
+
+        Next
+
+        ' Completamos los renglones faltantes.
+
+
+        For WRenglon = 1 To 15
+
+            row = Tabla.NewRow
+
+            row.Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+            row.Item("Tipo") = 1
+            row.Item("Orden") = Val(txtOrdenPago.Text)
+            row.Item("Renglon") = WRenglon
+            row.Item("Empresa") = WEmpNombre
+            row.Item("Direccion") = WEmpDireccion
+            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+            row.Item("Localidad") = WEmpLocalidad
+            row.Item("Fecha") = txtFecha.Text
+            row.Item("Cuit") = WEmpCuit
+            row.Item("Copia") = ImpreCopia(1)
+            row.Item("NroIb") = WNroIb
+            row.Item("NroAgente") = "" 'WNroAgente
+            row.Item("NombrePrv") = txtRazonSocial.Text
+            row.Item("DireccionPrv") = WPrvDireccion
+            row.Item("CuitPrv") = WPrvCuit
+            row.Item("NroIbPrv") = WPrvIb
+            row.Item("Tipo1") = ""
+            row.Item("Numero1") = ""
+            row.Item("Fecha1") = ""
+            row.Item("Categoria1") = ""
+            row.Item("Importe1") = 0
+            row.Item("Porce1") = 0
+            row.Item("Retencion1") = 0
+
+            Tabla.Rows.Add(row)
+
+            row = Tabla.NewRow
+
+            row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+            row.Item("Tipo") = 2
+            row.Item("Orden") = Val(txtOrdenPago.Text)
+            row.Item("Renglon") = WRenglon
+            row.Item("Empresa") = WEmpNombre
+            row.Item("Direccion") = WEmpDireccion
+            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+            row.Item("Localidad") = WEmpLocalidad
+            row.Item("Fecha") = txtFecha.Text
+            row.Item("Cuit") = WEmpCuit
+            row.Item("Copia") = ImpreCopia(1)
+            row.Item("NroIb") = WNroIb
+            row.Item("NroAgente") = "" 'WNroAgente
+            row.Item("NombrePrv") = txtRazonSocial.Text
+            row.Item("DireccionPrv") = WPrvDireccion
+            row.Item("CuitPrv") = WPrvCuit
+            row.Item("NroIbPrv") = WPrvIb
+            row.Item("Tipo1") = ""
+            row.Item("Numero1") = ""
+            row.Item("Fecha1") = ""
+            row.Item("Categoria1") = ""
+            row.Item("Importe1") = 0
+            row.Item("Porce1") = 0
+            row.Item("Retencion1") = 0
+
+            Tabla.Rows.Add(row)
+        Next
+
+
+        crdoc.SetDataSource(Tabla)
+
+        With VistaPrevia
+            .CrystalReportViewer1.ReportSource = crdoc
+            .ShowDialog()
+            .Dispose()
+        End With
+    End Sub
+
+    Private Sub _ImprimirComprobanteRetencionIB()
+        Dim Tabla As New DataTable("Detalles")
+        Dim row As DataRow
+        Dim crdoc As ReportDocument = New OrdenPagoComprobanteIB
+        Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
+        Dim WEmpNombre As String = "SURFACTAN S.A."
+        Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
+        Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
+        Dim WEmpCuit As String = "30-54916508-3"
+        Dim WNroIb As String = "902-913585-2"
+        Dim ImpreCopia(2) As String
+        Dim WLetra, WTipo, WPunto, WNumero, ZNroInterno, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, ZZTotal, ZZSaldo, ZZSuma, WPrvDireccion, WPrvCuit, WPrvIb As String
+        Dim ZRechazado, WImpoRetenido As Double
+        Dim ZFechaCompa = String.Join("", Trim(txtFecha.Text).Split("/").Reverse())
+        Dim WRete As Double = 0
+        Dim WRenglon As Integer = 0
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+                    .Read()
+
+                    WPrvDireccion = .Item("Direccion")
+                    WPrvCuit = .Item("Cuit")
+                    WPrvIb = .Item("NroIb")
+                    WTipoIb = .Item("CodIb")
+                    WTipoIbCaba = .Item("CodIbCaba")
+                    WTipoiva = Val(.Item("Iva"))
+                    WTipoprv = Val(.Item("Tipo")) + 1
+                    WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
+                    WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
+
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            cn.Close()
+
+        End Try
+
+        ImpreCopia(1) = "Original"
+        ImpreCopia(2) = "Duplicado"
+
+        WImpoRetenido = 0
+        ZRechazado = 0
+        ZNroInterno = "0"
+
+        ' Preparamos las columnas.
+        With Tabla
+            .Columns.Add("Clave")
+            .Columns.Add("Tipo")
+            .Columns.Add("Orden")
+            .Columns.Add("Renglon")
+            .Columns.Add("Empresa")
+            .Columns.Add("Direccion")
+            .Columns.Add("Titulo")
+            .Columns.Add("Localidad")
+            .Columns.Add("Fecha")
+            .Columns.Add("Cuit")
+            .Columns.Add("Copia")
+            .Columns.Add("NroIb")
+            .Columns.Add("NroAgente")
+            .Columns.Add("NombrePrv")
+            .Columns.Add("DireccionPrv")
+            .Columns.Add("CuitPrv")
+            .Columns.Add("NroIbPrv")
+            .Columns.Add("Tipo1")
+            .Columns.Add("Numero1")
+            .Columns.Add("Fecha1")
+            .Columns.Add("Categoria1")
+            .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Porce1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Retencion1").DataType = System.Type.GetType("System.Double")
+        End With
+
+
+        For iRow = 0 To gridPagos.Rows.Count - 1
+
+            With gridPagos.Rows(iRow)
+                WLetra = .Cells(1).Value
+                WTipo = .Cells(0).Value
+                WPunto = .Cells(2).Value
+                WNumero = .Cells(3).Value
+
+                ZRechazado = 0
+                ZNroInterno = "0"
+
+                ZZClaveCtaCtePrv = txtProveedor.Text + WLetra + WTipo + WPunto + WNumero
+
+                XImpre1 = ""
+
+                Select Case Val(.Cells(0).Value)
+                    Case 1
+                        XImpre1 = "Factura"
+                    Case 2
+                        XImpre1 = "N.Debito"
+                    Case 3
+                        XImpre1 = "N.Credito"
+                    Case 5
+                        XImpre1 = "Anticipo"
+                    Case 99
+                        XImpre1 = "Varios"
+                    Case Else
+                        XImpre1 = ""
+                End Select
+
+                XImpre2 = Mid(.Cells(3).Value, 1, 8)
+                XImpre3 = ""
+                ZZTotal = ""
+                ZZSaldo = ""
+                ZZSuma = ""
+
+                Try
+                    cn.Open()
+                    cm.CommandText = "SELECT ccp.NroInterno, ccp.Fecha, ccp.Total, ccp.Saldo, i.Rechazado, i.Neto FROM CtaCtePrv as ccp, IvaComp as i WHERE ccp.Clave = '" & ZZClaveCtaCtePrv & "' AND ccp.NroInterno = i.NroInterno"
+
+                    dr = cm.ExecuteReader()
+
+                    If dr.HasRows Then
+                        dr.Read()
+
+                        ZNroInterno = dr.Item("NroInterno")
+                        ZRechazado = IIf(IsDBNull(dr.Item("Rechazado")), "0", dr.Item("Rechazado"))
+                        XImpre3 = dr.Item("Fecha")
+                        ZZTotal = dr.Item("Total")
+                        ZZSaldo = dr.Item("Saldo")
+
+                        ZZSuma = dr.Item("Neto")
+
+                    Else
+                        ZZSuma = Val(.Cells(5).Value) / 1.21
+                    End If
+
+                Catch ex As Exception
+                    MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                Finally
+
+                    cn.Close()
+
+                End Try
+
+                WImpre4 = Val(.Cells(4).Value)
+
+                If WTipoiva = 2 Then
+                    If Val(ZZSuma) <> 0 Then
+                        WImpre4 = ZZSuma
+                    Else
+                        WImpre4 = WImpre4 / 1.21
+                    End If
+                End If
+
+                XImpre4 = WImpre4
+
+                If Val(ZFechaCompa) >= 20071201 Then
+                    Select Case WTipoIb
+                        Case 0, 1
+                            WRete = CDbl(XImpre4) * (CDbl(WPorceIb) / 100)
+                            'Call redondeo(WRete)
+                            WImpoRetenido = WImpoRetenido + WRete
+
+                            WRenglon = WRenglon + 1
+
+                            row = Tabla.NewRow
+
+                            row.Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                            row.Item("Tipo") = 1
+                            row.Item("Orden") = Val(txtOrdenPago.Text)
+                            row.Item("Renglon") = WRenglon
+                            row.Item("Empresa") = WEmpNombre
+                            row.Item("Direccion") = WEmpDireccion
+                            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                            row.Item("Localidad") = WEmpLocalidad
+                            row.Item("Fecha") = txtFecha.Text
+                            row.Item("Cuit") = WEmpCuit
+                            row.Item("Copia") = ImpreCopia(1)
+                            row.Item("NroIb") = WNroIb
+                            row.Item("NroAgente") = "" 'WNroAgente
+                            row.Item("NombrePrv") = txtRazonSocial.Text
+                            row.Item("DireccionPrv") = WPrvDireccion
+                            row.Item("CuitPrv") = WPrvCuit
+                            row.Item("NroIbPrv") = WPrvIb
+                            row.Item("Tipo1") = XImpre1
+                            row.Item("Numero1") = XImpre2
+                            row.Item("Fecha1") = XImpre3
+                            row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                            row.Item("Importe1") = CDbl(XImpre4)
+                            row.Item("Porce1") = CDbl(WPorceIb)
+                            row.Item("Retencion1") = WRete
+
+                            Tabla.Rows.Add(row)
+
+                            row = Tabla.NewRow
+
+                            row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                            row.Item("Tipo") = 2
+                            row.Item("Orden") = Val(txtOrdenPago.Text)
+                            row.Item("Renglon") = WRenglon
+                            row.Item("Empresa") = WEmpNombre
+                            row.Item("Direccion") = WEmpDireccion
+                            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                            row.Item("Localidad") = WEmpLocalidad
+                            row.Item("Fecha") = txtFecha.Text
+                            row.Item("Cuit") = WEmpCuit
+                            row.Item("Copia") = ImpreCopia(1)
+                            row.Item("NroIb") = WNroIb
+                            row.Item("NroAgente") = "" 'WNroAgente
+                            row.Item("NombrePrv") = txtRazonSocial.Text
+                            row.Item("DireccionPrv") = WPrvDireccion
+                            row.Item("CuitPrv") = WPrvCuit
+                            row.Item("NroIbPrv") = WPrvIb
+                            row.Item("Tipo1") = XImpre1
+                            row.Item("Numero1") = XImpre2
+                            row.Item("Fecha1") = XImpre3
+                            row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                            row.Item("Importe1") = CDbl(XImpre4)
+                            row.Item("Porce1") = CDbl(WPorceIb)
+                            row.Item("Retencion1") = WRete
+
+                            Tabla.Rows.Add(row)
+                            
+                        Case Else
+                    End Select
+                Else
+                    Select Case WTipoIb
+                        Case 0
+                            WPorceIb = "0,75"
+                            WRete = Val(XImpre4) * (0.75 / 100)
+                            Call redondeo(WRete)
+                            WImpoRetenido = WImpoRetenido + WRete
+
+                            WRenglon = WRenglon + 1
+
+                            row = Tabla.NewRow
+
+                            row.Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                            row.Item("Tipo") = 1
+                            row.Item("Orden") = Val(txtOrdenPago.Text)
+                            row.Item("Renglon") = WRenglon
+                            row.Item("Empresa") = WEmpNombre
+                            row.Item("Direccion") = WEmpDireccion
+                            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                            row.Item("Localidad") = WEmpLocalidad
+                            row.Item("Fecha") = txtFecha.Text
+                            row.Item("Cuit") = WEmpCuit
+                            row.Item("Copia") = ImpreCopia(1)
+                            row.Item("NroIb") = WNroIb
+                            row.Item("NroAgente") = "" 'WNroAgente
+                            row.Item("NombrePrv") = txtRazonSocial.Text
+                            row.Item("DireccionPrv") = WPrvDireccion
+                            row.Item("CuitPrv") = WPrvCuit
+                            row.Item("NroIbPrv") = WPrvIb
+                            row.Item("Tipo1") = XImpre1
+                            row.Item("Numero1") = XImpre2
+                            row.Item("Fecha1") = XImpre3
+                            row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                            row.Item("Importe1") = CDbl(XImpre4)
+                            row.Item("Porce1") = CDbl(WPorceIb)
+                            row.Item("Retencion1") = WRete
+
+                            Tabla.Rows.Add(row)
+
+                            row = Tabla.NewRow
+
+                            row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                            row.Item("Tipo") = 2
+                            row.Item("Orden") = Val(txtOrdenPago.Text)
+                            row.Item("Renglon") = WRenglon
+                            row.Item("Empresa") = WEmpNombre
+                            row.Item("Direccion") = WEmpDireccion
+                            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                            row.Item("Localidad") = WEmpLocalidad
+                            row.Item("Fecha") = txtFecha.Text
+                            row.Item("Cuit") = WEmpCuit
+                            row.Item("Copia") = ImpreCopia(1)
+                            row.Item("NroIb") = WNroIb
+                            row.Item("NroAgente") = "" 'WNroAgente
+                            row.Item("NombrePrv") = txtRazonSocial.Text
+                            row.Item("DireccionPrv") = WPrvDireccion
+                            row.Item("CuitPrv") = WPrvCuit
+                            row.Item("NroIbPrv") = WPrvIb
+                            row.Item("Tipo1") = XImpre1
+                            row.Item("Numero1") = XImpre2
+                            row.Item("Fecha1") = XImpre3
+                            row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                            row.Item("Importe1") = CDbl(XImpre4)
+                            row.Item("Porce1") = CDbl(WPorceIb)
+                            row.Item("Retencion1") = WRete
+
+                            Tabla.Rows.Add(row)
+
+                        Case Else
+                            WPorceIb = "1,75"
+                            WRete = Val(XImpre4) * (1.75 / 100)
+                            Call redondeo(WRete)
+                            WImpoRetenido = WImpoRetenido + WRete
+
+                            WRenglon = WRenglon + 1
+
+                            row = Tabla.NewRow
+
+                            row.Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                            row.Item("Tipo") = 1
+                            row.Item("Orden") = Val(txtOrdenPago.Text)
+                            row.Item("Renglon") = WRenglon
+                            row.Item("Empresa") = WEmpNombre
+                            row.Item("Direccion") = WEmpDireccion
+                            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                            row.Item("Localidad") = WEmpLocalidad
+                            row.Item("Fecha") = txtFecha.Text
+                            row.Item("Cuit") = WEmpCuit
+                            row.Item("Copia") = ImpreCopia(1)
+                            row.Item("NroIb") = WNroIb
+                            row.Item("NroAgente") = "" 'WNroAgente
+                            row.Item("NombrePrv") = txtRazonSocial.Text
+                            row.Item("DireccionPrv") = WPrvDireccion
+                            row.Item("CuitPrv") = WPrvCuit
+                            row.Item("NroIbPrv") = WPrvIb
+                            row.Item("Tipo1") = XImpre1
+                            row.Item("Numero1") = XImpre2
+                            row.Item("Fecha1") = XImpre3
+                            row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                            row.Item("Importe1") = CDbl(XImpre4)
+                            row.Item("Porce1") = CDbl(WPorceIb)
+                            row.Item("Retencion1") = WRete
+
+                            Tabla.Rows.Add(row)
+
+                            row = Tabla.NewRow
+
+                            row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                            row.Item("Tipo") = 2
+                            row.Item("Orden") = Val(txtOrdenPago.Text)
+                            row.Item("Renglon") = WRenglon
+                            row.Item("Empresa") = WEmpNombre
+                            row.Item("Direccion") = WEmpDireccion
+                            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                            row.Item("Localidad") = WEmpLocalidad
+                            row.Item("Fecha") = txtFecha.Text
+                            row.Item("Cuit") = WEmpCuit
+                            row.Item("Copia") = ImpreCopia(1)
+                            row.Item("NroIb") = WNroIb
+                            row.Item("NroAgente") = "" 'WNroAgente
+                            row.Item("NombrePrv") = txtRazonSocial.Text
+                            row.Item("DireccionPrv") = WPrvDireccion
+                            row.Item("CuitPrv") = WPrvCuit
+                            row.Item("NroIbPrv") = WPrvIb
+                            row.Item("Tipo1") = XImpre1
+                            row.Item("Numero1") = XImpre2
+                            row.Item("Fecha1") = XImpre3
+                            row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                            row.Item("Importe1") = CDbl(XImpre4)
+                            row.Item("Porce1") = CDbl(WPorceIb)
+                            row.Item("Retencion1") = WRete
+
+                            Tabla.Rows.Add(row)
+
+                    End Select
+                End If
+
+
+            End With
+
+        Next
+
+        ' Completamos los renglones faltantes.
+
+
+        For WRenglon = 1 To 15
+
+            row = Tabla.NewRow
+
+            row.Item("Clave") = "1" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+            row.Item("Tipo") = 1
+            row.Item("Orden") = Val(txtOrdenPago.Text)
+            row.Item("Renglon") = WRenglon
+            row.Item("Empresa") = WEmpNombre
+            row.Item("Direccion") = WEmpDireccion
+            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+            row.Item("Localidad") = WEmpLocalidad
+            row.Item("Fecha") = txtFecha.Text
+            row.Item("Cuit") = WEmpCuit
+            row.Item("Copia") = ImpreCopia(1)
+            row.Item("NroIb") = WNroIb
+            row.Item("NroAgente") = "" 'WNroAgente
+            row.Item("NombrePrv") = txtRazonSocial.Text
+            row.Item("DireccionPrv") = WPrvDireccion
+            row.Item("CuitPrv") = WPrvCuit
+            row.Item("NroIbPrv") = WPrvIb
+            row.Item("Tipo1") = ""
+            row.Item("Numero1") = ""
+            row.Item("Fecha1") = ""
+            row.Item("Categoria1") = ""
+            row.Item("Importe1") = 0
+            row.Item("Porce1") = 0
+            row.Item("Retencion1") = 0
+
+            Tabla.Rows.Add(row)
+
+            row = Tabla.NewRow
+
+            row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+            row.Item("Tipo") = 2
+            row.Item("Orden") = Val(txtOrdenPago.Text)
+            row.Item("Renglon") = WRenglon
+            row.Item("Empresa") = WEmpNombre
+            row.Item("Direccion") = WEmpDireccion
+            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+            row.Item("Localidad") = WEmpLocalidad
+            row.Item("Fecha") = txtFecha.Text
+            row.Item("Cuit") = WEmpCuit
+            row.Item("Copia") = ImpreCopia(1)
+            row.Item("NroIb") = WNroIb
+            row.Item("NroAgente") = "" 'WNroAgente
+            row.Item("NombrePrv") = txtRazonSocial.Text
+            row.Item("DireccionPrv") = WPrvDireccion
+            row.Item("CuitPrv") = WPrvCuit
+            row.Item("NroIbPrv") = WPrvIb
+            row.Item("Tipo1") = ""
+            row.Item("Numero1") = ""
+            row.Item("Fecha1") = ""
+            row.Item("Categoria1") = ""
+            row.Item("Importe1") = 0
+            row.Item("Porce1") = 0
+            row.Item("Retencion1") = 0
+
+            Tabla.Rows.Add(row)
+        Next
+
+
+        crdoc.SetDataSource(Tabla)
+
+        With VistaPrevia
+            .CrystalReportViewer1.ReportSource = crdoc
+            .ShowDialog()
+            .Dispose()
+        End With
+
 
 
 

@@ -543,6 +543,35 @@
       <DependentUpon>ControlDeFacturacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\DepositoBancario2.vb">
+      <DependentUpon>DepositoBancario2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\DepositoBancario.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepositoBancario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\DepositoDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepositoDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteRetIva.vb">
+      <DependentUpon>OrdenPagoComprobanteRetIva.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteIBCABA.vb">
+      <DependentUpon>OrdenPagoComprobanteIBCABA.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\DiscriminacionTercerosDetalles.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -569,6 +598,17 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteIB.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteIB.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteIBDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteIBDetalles.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reportes\OrdenPagoComprobanteRetGanancias.vb">
       <AutoGen>True</AutoGen>
@@ -866,6 +906,22 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ControlDeFacturacion.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\DepositoBancario2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepositoBancario2.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\DepositoBancario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepositoBancario.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteRetIva.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteRetIva.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteIBCABA.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteIBCABA.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\InformeIntereses.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InformeIntereses.vb</LastGenOutput>
@@ -873,6 +929,10 @@
     <EmbeddedResource Include="Reportes\InformeOrdenPago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InformeOrdenPago.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteIB.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteIB.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\OrdenPagoComprobanteRetGanancias.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1156,6 +1216,17 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reportes\DepositoDetalles.xsc">
+      <DependentUpon>DepositoDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DepositoDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DepositoDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DepositoDetalles.xss">
+      <DependentUpon>DepositoDetalles.xsd</DependentUpon>
+    </None>
     <None Include="Reportes\DetallesFacturacion.xsc">
       <DependentUpon>DetallesFacturacion.xsd</DependentUpon>
     </None>
@@ -1199,6 +1270,17 @@
     </None>
     <None Include="Reportes\OrdenPagoComprobanteGanancias.xss">
       <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteIBDetalles.xsc">
+      <DependentUpon>OrdenPagoComprobanteIBDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteIBDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteIBDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteIBDetalles.xss">
+      <DependentUpon>OrdenPagoComprobanteIBDetalles.xsd</DependentUpon>
     </None>
     <None Include="Reportes\OrdenPagoDetalles.xsc">
       <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
