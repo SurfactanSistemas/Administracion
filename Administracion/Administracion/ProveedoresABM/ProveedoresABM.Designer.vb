@@ -605,7 +605,7 @@ Partial Class ProveedoresABM
         Me.cmbCondicionIB1.Empty = True
         Me.cmbCondicionIB1.EnterIndex = 17
         Me.cmbCondicionIB1.FormattingEnabled = True
-        Me.cmbCondicionIB1.Items.AddRange(New Object() {"", "Bienes", "Servicio", "Exento", "Ciudad Normal", "Ciudad Riesgo"})
+        Me.cmbCondicionIB1.Items.AddRange(New Object() {"Bienes", "Servicio", "Exento", "Ciudad Normal", "Ciudad Riesgo"})
         Me.cmbCondicionIB1.LabelAssociationKey = 17
         Me.cmbCondicionIB1.Location = New System.Drawing.Point(93, 18)
         Me.cmbCondicionIB1.Name = "cmbCondicionIB1"
@@ -839,7 +839,7 @@ Partial Class ProveedoresABM
         Me.cmbCategoria2.Enabled = False
         Me.cmbCategoria2.EnterIndex = 26
         Me.cmbCategoria2.FormattingEnabled = True
-        Me.cmbCategoria2.Items.AddRange(New Object() {"", "Sin Calificar", "Muy Bueno", "Bueno", "Regular", "Malo"})
+        Me.cmbCategoria2.Items.AddRange(New Object() {"Sin Calificar", "Muy Bueno", "Bueno", "Regular", "Malo"})
         Me.cmbCategoria2.LabelAssociationKey = 23
         Me.cmbCategoria2.Location = New System.Drawing.Point(235, 290)
         Me.cmbCategoria2.Name = "cmbCategoria2"
@@ -1386,7 +1386,7 @@ Partial Class ProveedoresABM
         Me.cmbCondicionIB2.Empty = True
         Me.cmbCondicionIB2.EnterIndex = 18
         Me.cmbCondicionIB2.FormattingEnabled = True
-        Me.cmbCondicionIB2.Items.AddRange(New Object() {"", "Exento", "Retiene"})
+        Me.cmbCondicionIB2.Items.AddRange(New Object() {"", "", "Exento", "Retiene"})
         Me.cmbCondicionIB2.LabelAssociationKey = 17
         Me.cmbCondicionIB2.Location = New System.Drawing.Point(94, 17)
         Me.cmbCondicionIB2.Name = "cmbCondicionIB2"
