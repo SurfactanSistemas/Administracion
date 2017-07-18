@@ -53,6 +53,7 @@ Partial Class ProveedoresABM
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
+        Me.CustomLabel25 = New Administracion.CustomLabel()
         Me.txtCheque = New Administracion.CustomTextBox()
         Me.cmbCondicionIB1 = New Administracion.CustomComboBox()
         Me.CustomLabel31 = New Administracion.CustomLabel()
@@ -136,7 +137,7 @@ Partial Class ProveedoresABM
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.Location = New System.Drawing.Point(83, 464)
+        Me.btnAgregar.Location = New System.Drawing.Point(77, 465)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(56, 37)
         Me.btnAgregar.TabIndex = 70
@@ -155,7 +156,7 @@ Partial Class ProveedoresABM
         Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEliminar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.Location = New System.Drawing.Point(293, 464)
+        Me.btnEliminar.Location = New System.Drawing.Point(287, 465)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(56, 37)
         Me.btnEliminar.TabIndex = 72
@@ -174,7 +175,7 @@ Partial Class ProveedoresABM
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.Location = New System.Drawing.Point(223, 464)
+        Me.btnConsulta.Location = New System.Drawing.Point(217, 465)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(56, 37)
         Me.btnConsulta.TabIndex = 71
@@ -193,7 +194,7 @@ Partial Class ProveedoresABM
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.Location = New System.Drawing.Point(363, 464)
+        Me.btnCerrar.Location = New System.Drawing.Point(357, 465)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(56, 37)
         Me.btnCerrar.TabIndex = 73
@@ -212,7 +213,7 @@ Partial Class ProveedoresABM
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.Location = New System.Drawing.Point(153, 464)
+        Me.btnLimpiar.Location = New System.Drawing.Point(147, 465)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(56, 37)
         Me.btnLimpiar.TabIndex = 75
@@ -231,7 +232,7 @@ Partial Class ProveedoresABM
         Me.btnListado.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnListado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnListado.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnListado.Location = New System.Drawing.Point(433, 464)
+        Me.btnListado.Location = New System.Drawing.Point(427, 465)
         Me.btnListado.Name = "btnListado"
         Me.btnListado.Size = New System.Drawing.Size(56, 37)
         Me.btnListado.TabIndex = 74
@@ -321,7 +322,7 @@ Partial Class ProveedoresABM
         Me.GroupBox1.Controls.Add(Me.btnUltimoRegistro)
         Me.GroupBox1.Controls.Add(Me.btnAnteriorRegistro)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Location = New System.Drawing.Point(587, 442)
+        Me.GroupBox1.Location = New System.Drawing.Point(581, 443)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(200, 80)
         Me.GroupBox1.TabIndex = 76
@@ -396,6 +397,7 @@ Partial Class ProveedoresABM
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.CustomLabel25)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.txtCheque)
         Me.Panel2.Controls.Add(Me.GroupBox2)
@@ -455,7 +457,7 @@ Partial Class ProveedoresABM
         Me.Panel2.Controls.Add(Me.CustomLabel14)
         Me.Panel2.Controls.Add(Me.txtCuentaDescripcion)
         Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Location = New System.Drawing.Point(1, 50)
+        Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(817, 387)
         Me.Panel2.TabIndex = 84
@@ -575,7 +577,7 @@ Partial Class ProveedoresABM
         '
         'txtCAIVto
         '
-        Me.txtCAIVto.Location = New System.Drawing.Point(766, 454)
+        Me.txtCAIVto.Location = New System.Drawing.Point(760, 455)
         Me.txtCAIVto.Mask = "00/00/0000"
         Me.txtCAIVto.Name = "txtCAIVto"
         Me.txtCAIVto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -584,6 +586,19 @@ Partial Class ProveedoresABM
         Me.txtCAIVto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCAIVto.ValidatingType = GetType(Date)
         Me.txtCAIVto.Visible = False
+        '
+        'CustomLabel25
+        '
+        Me.CustomLabel25.AutoSize = True
+        Me.CustomLabel25.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel25.ControlAssociationKey = 1
+        Me.CustomLabel25.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel25.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel25.Location = New System.Drawing.Point(599, 26)
+        Me.CustomLabel25.Name = "CustomLabel25"
+        Me.CustomLabel25.Size = New System.Drawing.Size(65, 18)
+        Me.CustomLabel25.TabIndex = 108
+        Me.CustomLabel25.Text = "Provincia"
         '
         'txtCheque
         '
@@ -993,7 +1008,7 @@ Partial Class ProveedoresABM
         Me.txtDireccion.Location = New System.Drawing.Point(122, 27)
         Me.txtDireccion.MaxLength = 50
         Me.txtDireccion.Name = "txtDireccion"
-        Me.txtDireccion.Size = New System.Drawing.Size(473, 20)
+        Me.txtDireccion.Size = New System.Drawing.Size(471, 20)
         Me.txtDireccion.TabIndex = 55
         Me.txtDireccion.Validator = Administracion.ValidatorType.None
         '
@@ -1005,9 +1020,9 @@ Partial Class ProveedoresABM
         Me.cmbProvincia.Empty = True
         Me.cmbProvincia.EnterIndex = 5
         Me.cmbProvincia.FormattingEnabled = True
-        Me.cmbProvincia.Items.AddRange(New Object() {"Capital Federal", "Buenos Aires", "Catamarca", "Cordoba", "Corrientes", "Chaco", "Chubut", "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago del Estero", "Tucuman", "Tierra del Fuego", "Exterior"})
+        Me.cmbProvincia.Items.AddRange(New Object() {"Buenos Aires", "Capital Federal", "Catamarca", "Cordoba", "Corrientes", "Chaco", "Chubut", "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago del Estero", "Tucuman", "Tierra del Fuego", "Exterior", "                                   "})
         Me.cmbProvincia.LabelAssociationKey = 5
-        Me.cmbProvincia.Location = New System.Drawing.Point(671, -24)
+        Me.cmbProvincia.Location = New System.Drawing.Point(673, 26)
         Me.cmbProvincia.Name = "cmbProvincia"
         Me.cmbProvincia.Size = New System.Drawing.Size(127, 21)
         Me.cmbProvincia.TabIndex = 57
@@ -1455,7 +1470,7 @@ Partial Class ProveedoresABM
         Me.txtCAI.Empty = True
         Me.txtCAI.EnterIndex = 29
         Me.txtCAI.LabelAssociationKey = 25
-        Me.txtCAI.Location = New System.Drawing.Point(750, 455)
+        Me.txtCAI.Location = New System.Drawing.Point(744, 456)
         Me.txtCAI.MaxLength = 14
         Me.txtCAI.Name = "txtCAI"
         Me.txtCAI.Size = New System.Drawing.Size(10, 20)
@@ -1593,4 +1608,5 @@ Partial Class ProveedoresABM
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtCAIVto As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtCAI As Administracion.CustomTextBox
+    Friend WithEvents CustomLabel25 As Administracion.CustomLabel
 End Class

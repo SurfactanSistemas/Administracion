@@ -293,7 +293,7 @@ Public Class ProveedoresABM
 
         proveedor.direccion = txtDireccion.Text
         proveedor.localidad = txtLocalidad.Text
-        proveedor.provincia = cmbProvincia.SelectedValue
+        proveedor.provincia = cmbProvincia.SelectedIndex
         proveedor.codPostal = txtCodigoPostal.Text
         proveedor.region = cmbRegion.SelectedIndex
         proveedor.telefono = txtTelefono.Text
@@ -366,7 +366,7 @@ Public Class ProveedoresABM
         txtRazonSocial.Text = proveedor.razonSocial
         txtDireccion.Text = proveedor.direccion
         txtLocalidad.Text = proveedor.localidad
-        cmbProvincia.SelectedValue = proveedor.provincia
+        cmbProvincia.SelectedIndex = proveedor.provincia
         txtCodigoPostal.Text = proveedor.codPostal
         cmbRegion.SelectedIndex = proveedor.region
         txtTelefono.Text = proveedor.telefono
@@ -420,7 +420,7 @@ Public Class ProveedoresABM
 
     Private Sub mostrarRubro(ByVal rubro As RubroProveedor)
         If Not IsNothing(rubro) Then
-            cmbRubro.SelectedItem = rubro.codigo
+            cmbRubro.SelectedIndex = rubro.codigo
         Else
             cmbRubro.SelectedValue = -1
         End If
@@ -757,7 +757,7 @@ Public Class ProveedoresABM
 
     Private Sub txtDireccion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDireccion.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtLocalidad)
+            _SaltarA(cmbProvincia)
         ElseIf e.KeyData = Keys.Escape Then
             txtDireccion.Text = ""
         End If
@@ -1215,5 +1215,17 @@ Public Class ProveedoresABM
         If Trim(txtCalificacion.Text).Length = 10 Then
             e.Cancel = Not Proceso._ValidarFecha(txtCalificacion.Text, e.IsValidInput)
         End If
+    End Sub
+
+    Private Sub cmbProvincia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbProvincia.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            _SaltarA(txtLocalidad)
+        End If
+
+    End Sub
+
+    Private Sub cmbProvincia_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbProvincia.TextChanged
+        _SaltarA(txtLocalidad)
     End Sub
 End Class
