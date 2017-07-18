@@ -147,7 +147,8 @@ Public Class ProveedoresABM
                     & "ContactoNombre3 = '" & Mid(Trim(_Contacto3.Item1), 1, 50) & "', " _
                     & "ContactoCargo3 = '" & Mid(Trim(_Contacto3.Item2), 1, 50) & "', " _
                     & "ContactoTelefono3 = '" & Mid(Trim(_Contacto3.Item3), 1, 50) & "', " _
-                    & "ContactoEmail3 = '" & Mid(Trim(_Contacto3.Item4), 1, 50) & "' " _
+                    & "ContactoEmail3 = '" & Mid(Trim(_Contacto3.Item4), 1, 50) & "', " _
+                    & "ClienteAsociado = '" & Mid(Trim(txtClienteAsociado.Text), 1, 6) & "' " _
                     & " WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'"
 
         Try
@@ -278,6 +279,17 @@ Public Class ProveedoresABM
 
         End If
 
+
+        If Trim(txtClienteAsociado.Text) <> "" Then
+            Dim c As Cliente = DAOCliente.buscarClientePorCodigo(Trim(txtClienteAsociado.Text))
+
+            If IsNothing(c) Then
+                MsgBox("El cliente indicado no es un cliente válido.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+        End If
+
+
         ' Se supone que llegados hasta acá todos los datos introducidos son validos.
 
         Dim proveedor As Proveedor
@@ -332,6 +344,10 @@ Public Class ProveedoresABM
         proveedor.dirCUFE1 = cufe1.Item2
         proveedor.dirCUFE2 = cufe2.Item2
         proveedor.dirCUFE3 = cufe3.Item2
+
+        Dim cliente As Cliente = DAOCliente.buscarClientePorCodigo(Trim(txtClienteAsociado.Text))
+
+        proveedor.cliente = IIf(Not IsNothing(cliente), cliente, New Cliente())
 
         proveedor.PaginaWeb = New Object() {txtPaginaWeb.Text}
 
@@ -397,6 +413,8 @@ Public Class ProveedoresABM
         cmbEstado.SelectedIndex = proveedor.estado
         cmbCalificacion.SelectedIndex = proveedor.calificacion
         txtCalificacion.Text = proveedor.vtoCalificacion
+        txtClienteAsociado.Text = Trim(proveedor.cliente.id)
+        txtClienteAsociadoDescripcion.Text = Trim(proveedor.cliente.razon)
 
         observaciones = proveedor.observacionCompleta
         cufe1 = Tuple.Create(proveedor.cufe1, proveedor.dirCUFE1)
@@ -588,11 +606,17 @@ Public Class ProveedoresABM
             Exit Sub
         End If
 
-        If LBConsulta_Opciones.SelectedIndex = 0 Then
-            _ListarConsulta("Nombre", "Proveedor")
-        Else
-            _ListarConsulta("Descripcion", "Cuenta")
-        End If
+
+        Select Case LBConsulta_Opciones.SelectedIndex
+            Case 0
+                _ListarConsulta("Nombre", "Proveedor")
+            Case 1
+                _ListarConsulta("Descripcion", "Cuenta")
+            Case 2
+                _ListarConsulta("Razon", "Cliente")
+            Case Else
+                Exit Sub
+        End Select
 
     End Sub
 
@@ -607,8 +631,43 @@ Public Class ProveedoresABM
                 _TraerProveedor(LBConsulta.SelectedItem)
             Case "Cuenta"
                 _TraerCuenta(LBConsulta.SelectedItem)
+            Case "Cliente"
+                _TraerCliente(LBConsulta.SelectedItem)
             Case Else
         End Select
+
+    End Sub
+
+    Private Sub _TraerCliente(ByVal clave As String)
+        If Trim(clave) = "" Then : Exit Sub : End If
+        Try
+            ' Lo buscamos por nombre
+            Dim cliente As List(Of Cliente) = DAOCliente.buscarClientePorNombre(Trim(clave))
+
+            If cliente.Count > 0 Then
+
+                txtClienteAsociado.Text = Trim(cliente(0).id)
+                txtClienteAsociadoDescripcion.Text = Trim(cliente(0).razon)
+
+            Else
+                ' Lo buscamos por codigo.
+                Dim cliente2 As Cliente = DAOCliente.buscarClientePorCodigo(Trim(clave))
+                If Not IsNothing(cliente2) Then
+
+                    txtClienteAsociado.Text = Trim(cliente2.id)
+                    txtClienteAsociadoDescripcion.Text = Trim(cliente2.razon)
+
+                Else
+                    txtClienteAsociadoDescripcion.Text = ""
+                End If
+
+            End If
+        Catch ex As Exception
+            MsgBox("No se pudo consultar la base de datos para el cliente indicado.", MsgBoxStyle.Information)
+            Exit Sub
+        End Try
+
+        _ContraerFormulario()
 
     End Sub
 
@@ -623,6 +682,8 @@ Public Class ProveedoresABM
                 _TraerProveedor(LBConsulta_Filtrada.SelectedItem)
             Case "Cuenta"
                 _TraerCuenta(LBConsulta_Filtrada.SelectedItem)
+            Case "Cliente"
+                _TraerCliente(LBConsulta_Filtrada.SelectedItem)
             Case Else
         End Select
 
@@ -963,6 +1024,11 @@ Public Class ProveedoresABM
     Private Sub cmbIVA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbIVA.KeyDown
 
         If e.KeyData = Keys.Enter Then
+
+            If cmbIVA.SelectedIndex = 5 Then ' Monotributo
+                cmbTipoProveedor.SelectedIndex = 3 ' Exento
+            End If
+
             _SaltarA(txtObservaciones)
         ElseIf e.KeyData = Keys.Escape Then
             cmbIVA.SelectedIndex = 0
@@ -971,6 +1037,9 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub cmbIVA_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbIVA.TextChanged
+        If cmbIVA.SelectedIndex = 5 Then ' Monotributo
+            cmbTipoProveedor.SelectedIndex = 3 ' Exento
+        End If
         _SaltarA(txtObservaciones)
     End Sub
 
@@ -1227,5 +1296,23 @@ Public Class ProveedoresABM
 
     Private Sub cmbProvincia_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbProvincia.TextChanged
         _SaltarA(txtLocalidad)
+    End Sub
+
+    Private Sub txtClienteAsociado_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtClienteAsociado.MouseDoubleClick
+        LBConsulta_Opciones.SelectedIndex = 2
+        LBConsulta_Opciones_SelectedIndexChanged(Nothing, Nothing)
+        _ExpandirFormulario()
+    End Sub
+
+    Private Sub txtClienteAsociado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtClienteAsociado.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtClienteAsociado.Text) <> "" Then
+                _TraerCliente(Trim(txtClienteAsociado.Text))
+            Else
+                txtClienteAsociadoDescripcion.Text = ""
+            End If
+        End If
+
     End Sub
 End Class

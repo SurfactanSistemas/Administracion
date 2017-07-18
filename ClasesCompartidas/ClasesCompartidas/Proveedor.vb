@@ -6,6 +6,7 @@
     Public porceIBProvincia, porceIBCABA As Double
     Public cuenta As CuentaContable
     Public rubro As RubroProveedor
+    Public cliente As Cliente
     Public contacto1 As Object
     Public contacto2 As Object
     Public contacto3 As Object
@@ -28,7 +29,7 @@
                    ByVal cufe1Dir As String, ByVal cufe2Dir As String, ByVal cufe3Dir As String, ByVal cuentaContable As CuentaContable, ByVal rubroProv As RubroProveedor,
                    ByVal _PaginaWeb As String, ByVal ContactoNombre1 As String, ByVal ContactoCargo1 As String, ByVal ContactoTelefono1 As String, ByVal ContactoEmail1 As String,
                    ByVal ContactoNombre2 As String, ByVal ContactoCargo2 As String, ByVal ContactoTelefono2 As String, ByVal ContactoEmail2 As String,
-                   ByVal ContactoNombre3 As String, ByVal ContactoCargo3 As String, ByVal ContactoTelefono3 As String, ByVal ContactoEmail3 As String)
+                   ByVal ContactoNombre3 As String, ByVal ContactoCargo3 As String, ByVal ContactoTelefono3 As String, ByVal ContactoEmail3 As String, Optional ByVal _ClienteAsociado As Cliente = Nothing)
 
         id = Trim(codigo)
         razonSocial = Trim(nombre)
@@ -73,7 +74,7 @@
         cuenta = cuentaContable
         rubro = rubroProv
         PaginaWeb = New Object() {_PaginaWeb}
-
+        cliente = _ClienteAsociado
         contacto1 = New Object() {ContactoNombre1, ContactoCargo1, ContactoTelefono1, ContactoEmail1}
         contacto2 = New Object() {ContactoNombre2, ContactoCargo2, ContactoTelefono2, ContactoEmail2}
         contacto3 = New Object() {ContactoNombre3, ContactoCargo3, ContactoTelefono3, ContactoEmail3}

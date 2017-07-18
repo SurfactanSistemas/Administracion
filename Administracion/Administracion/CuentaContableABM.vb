@@ -82,15 +82,6 @@ Public Class CuentaContableABM
         _ListarConsulta()
     End Sub
 
-    Private Sub LBConsulta_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta.SelectedIndexChanged
-
-        If Trim(LBConsulta.SelectedItem) = "" Then
-            Exit Sub
-        End If
-
-        _TraerCuentaContable(LBConsulta.SelectedItem)
-    End Sub
-
     Private Sub btnPrimerRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerRegistro.Click
         _NavegarHaciaEl("primero")
     End Sub
@@ -298,7 +289,15 @@ Public Class CuentaContableABM
 
         LBConsulta.SelectedIndex = LBConsulta.FindStringExact(LBConsulta_Filtrada.SelectedItem)
 
-        LBConsulta_SelectedIndexChanged(Nothing, Nothing)
+        LBConsulta_MouseClick(Nothing, Nothing)
 
+    End Sub
+
+    Private Sub LBConsulta_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LBConsulta.MouseClick
+        If Trim(LBConsulta.SelectedItem) = "" Then
+            Exit Sub
+        End If
+
+        _TraerCuentaContable(LBConsulta.SelectedItem)
     End Sub
 End Class

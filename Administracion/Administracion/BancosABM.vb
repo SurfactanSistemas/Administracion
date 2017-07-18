@@ -169,12 +169,7 @@ Public Class BancosABM
     End Sub
 
     Private Sub txtCodigo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigo.MouseDoubleClick
-
-        If Trim(txtCodigo.Text) = "" Then
-            _ListarConsulta("Nombre", "Banco")
-            Exit Sub
-        End If
-
+        _ListarConsulta("Nombre", "Banco")
     End Sub
 
     Private Sub txtNombre_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtNombre.MouseDoubleClick
@@ -182,12 +177,7 @@ Public Class BancosABM
     End Sub
 
     Private Sub txtCuenta_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCuenta.MouseDoubleClick
-
-        If Trim(txtCuenta.Text) = "" Then
-            _ListarConsulta("Descripcion", "Cuenta")
-            Exit Sub
-        End If
-
+        _ListarConsulta("Descripcion", "Cuenta")
     End Sub
 
     Private Sub btnPrimerRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerRegistro.Click
