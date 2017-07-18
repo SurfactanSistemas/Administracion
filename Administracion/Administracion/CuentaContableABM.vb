@@ -83,13 +83,12 @@ Public Class CuentaContableABM
     End Sub
 
     Private Sub LBConsulta_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta.SelectedIndexChanged
-        _TraerCuentaContable(LBConsulta.SelectedItem)
-    End Sub
 
-    Private Sub LBConsulta_Filtrada_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Filtrada.SelectedIndexChanged
-        _TraerCuentaContable(LBConsulta_Filtrada.SelectedItem)
-        LBConsulta_Filtrada.Visible = False
-        txtFiltrar.Text = "Buscar..."
+        If Trim(LBConsulta.SelectedItem) = "" Then
+            Exit Sub
+        End If
+
+        _TraerCuentaContable(LBConsulta.SelectedItem)
     End Sub
 
     Private Sub btnPrimerRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerRegistro.Click
@@ -288,6 +287,18 @@ Public Class CuentaContableABM
     Private Sub _ExpandirFormulario()
 
         Me.Height = EXPANDED_HEIGHT
+
+    End Sub
+
+    Private Sub LBConsulta_Filtrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LBConsulta_Filtrada.MouseClick
+
+        If Trim(LBConsulta_Filtrada.SelectedItem) = "" Then
+            Exit Sub
+        End If
+
+        LBConsulta.SelectedIndex = LBConsulta.FindStringExact(LBConsulta_Filtrada.SelectedItem)
+
+        LBConsulta_SelectedIndexChanged(Nothing, Nothing)
 
     End Sub
 End Class
