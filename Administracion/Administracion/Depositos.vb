@@ -614,7 +614,7 @@ Public Class Depositos
         End If
 
         Try
-            cm.CommandText = "SELECT Numero2, Fecha2, Importe2, Banco2 FROM " & _Tabla & " WHERE ClaveCheque = '" & ClaveCheque & "'"
+            cm.CommandText = "SELECT Numero2, Fecha2, Importe2, Banco2 FROM " & _Tabla & " WHERE ClaveCheque = '" & ClaveCheque & "' AND Estado2 = 'P'"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
@@ -627,25 +627,29 @@ Public Class Depositos
                     WImporte = .Item("Importe2")
                     WBanco = .Item("Banco2")
                 End With
-
+            Else
+                Return False
             End If
 
         Catch ex As Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Return False
         Finally
 
             cn.Close()
 
         End Try
 
-        With gridCheques.Rows(row)
-            .Cells(0).Value = "03"
-            .Cells(1).Value = WNumero
-            .Cells(2).Value = WFecha
-            .Cells(3).Value = WBanco
-            .Cells(4).Value = WImporte
-            .Cells(5).Value = WClave
-        End With
+        If _LecturaCorrecta Then
+            With gridCheques.Rows(row)
+                .Cells(0).Value = "03"
+                .Cells(1).Value = WNumero
+                .Cells(2).Value = WFecha
+                .Cells(3).Value = WBanco
+                .Cells(4).Value = WImporte
+                .Cells(5).Value = WClave
+            End With
+        End If
 
         Return _LecturaCorrecta
     End Function
