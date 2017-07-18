@@ -68,15 +68,15 @@
 
         If Trim(lstConsulta.SelectedItem.ToString()) <> "" Then
             Close()
-            showMethod.Invoke(lstConsulta.SelectedItem.ToString())
+            showMethod.Invoke(lstConsulta.SelectedItem)
         End If
 
     End Sub
 
     Private Sub CLBFiltrado_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CLBFiltrado.Click
-        If Trim(CLBFiltrado.SelectedItem.ToString()) <> "" Then
+        If Trim(CLBFiltrado.SelectedItem) <> "" Then
             Close()
-            showMethod.Invoke(CLBFiltrado.SelectedItem.ToString())
+            showMethod.Invoke(CLBFiltrado.SelectedItem)
         End If
     End Sub
 
