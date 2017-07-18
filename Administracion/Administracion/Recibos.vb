@@ -2610,9 +2610,9 @@ Public Class Recibos
 
                     Return True
                 End If
-            ElseIf msg.WParam.ToInt32() = Keys.Escape Then
-                gridFormasPago.Rows.Remove(gridFormasPago.Rows(iRow))
-                _SumarCreditos()
+                'ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                '    gridFormasPago.Rows.Remove(gridFormasPago.Rows(iRow))
+                '    _SumarCreditos()
             End If
         End If
 

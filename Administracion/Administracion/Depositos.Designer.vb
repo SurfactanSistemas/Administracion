@@ -24,30 +24,6 @@ Partial Class Depositos
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.gridCheques = New System.Windows.Forms.DataGridView()
-        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtImporte = New Administracion.CustomTextBox()
-        Me.CustomLabel7 = New Administracion.CustomLabel()
-        Me.lstSeleccion = New Administracion.CustomListBox()
-        Me.btnCerrar = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.btnLimpiar = New Administracion.CustomButton()
-        Me.btnImpresion = New Administracion.CustomButton()
-        Me.btnAgregar = New Administracion.CustomButton()
-        Me.lstConsulta = New Administracion.CustomListBox()
-        Me.CustomLabel6 = New Administracion.CustomLabel()
-        Me.txtDescripcionBanco = New Administracion.CustomTextBox()
-        Me.txtNroDeposito = New Administracion.CustomTextBox()
-        Me.txtCodigoBanco = New Administracion.CustomTextBox()
-        Me.CustomLabel5 = New Administracion.CustomLabel()
-        Me.CustomLabel4 = New Administracion.CustomLabel()
-        Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.lblTotal = New Administracion.CustomLabel()
-        Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -55,6 +31,30 @@ Partial Class Depositos
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtImporte = New Administracion.CustomTextBox()
+        Me.CustomLabel3 = New Administracion.CustomLabel()
+        Me.lstSeleccion = New Administracion.CustomListBox()
+        Me.CustomLabel4 = New Administracion.CustomLabel()
+        Me.CustomLabel7 = New Administracion.CustomLabel()
+        Me.CustomLabel5 = New Administracion.CustomLabel()
+        Me.lblTotal = New Administracion.CustomLabel()
+        Me.txtCodigoBanco = New Administracion.CustomTextBox()
+        Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.txtNroDeposito = New Administracion.CustomTextBox()
+        Me.lstConsulta = New Administracion.CustomListBox()
+        Me.txtDescripcionBanco = New Administracion.CustomTextBox()
+        Me.CustomLabel6 = New Administracion.CustomLabel()
+        Me.btnCerrar = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnLimpiar = New Administracion.CustomButton()
+        Me.btnImpresion = New Administracion.CustomButton()
+        Me.btnAgregar = New Administracion.CustomButton()
+        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gridCheques, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -64,49 +64,91 @@ Partial Class Depositos
         '
         Me.gridCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCheques.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tipo, Me.numero, Me.fecha, Me.nombre, Me.importe, Me.ClaveCheque})
+        Me.gridCheques.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridCheques.Location = New System.Drawing.Point(25, 123)
         Me.gridCheques.Name = "gridCheques"
         Me.gridCheques.Size = New System.Drawing.Size(743, 350)
         Me.gridCheques.StandardTab = True
         Me.gridCheques.TabIndex = 0
         '
-        'tipo
+        'Panel1
         '
-        Me.tipo.HeaderText = "Tipo"
-        Me.tipo.Name = "tipo"
-        Me.tipo.Width = 65
+        Me.Panel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(793, 50)
+        Me.Panel1.TabIndex = 17
         '
-        'numero
+        'Label2
         '
-        Me.numero.HeaderText = "Numero"
-        Me.numero.Name = "numero"
-        Me.numero.ReadOnly = True
-        Me.numero.Width = 145
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(616, 12)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(156, 26)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "SURFACTAN S.A."
         '
-        'fecha
+        'Label1
         '
-        Me.fecha.HeaderText = "Fecha"
-        Me.fecha.Name = "fecha"
-        Me.fecha.ReadOnly = True
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(21, 16)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(151, 19)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Ingreso de Depósitos"
         '
-        'nombre
+        'Panel2
         '
-        Me.nombre.HeaderText = "Nombre"
-        Me.nombre.Name = "nombre"
-        Me.nombre.ReadOnly = True
-        Me.nombre.Width = 280
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.txtFechaAcreditacion)
+        Me.Panel2.Controls.Add(Me.txtFecha)
+        Me.Panel2.Controls.Add(Me.txtImporte)
+        Me.Panel2.Controls.Add(Me.CustomLabel3)
+        Me.Panel2.Controls.Add(Me.lstSeleccion)
+        Me.Panel2.Controls.Add(Me.CustomLabel4)
+        Me.Panel2.Controls.Add(Me.CustomLabel7)
+        Me.Panel2.Controls.Add(Me.CustomLabel5)
+        Me.Panel2.Controls.Add(Me.lblTotal)
+        Me.Panel2.Controls.Add(Me.txtCodigoBanco)
+        Me.Panel2.Controls.Add(Me.CustomLabel1)
+        Me.Panel2.Controls.Add(Me.txtNroDeposito)
+        Me.Panel2.Controls.Add(Me.gridCheques)
+        Me.Panel2.Controls.Add(Me.lstConsulta)
+        Me.Panel2.Controls.Add(Me.txtDescripcionBanco)
+        Me.Panel2.Controls.Add(Me.CustomLabel6)
+        Me.Panel2.Location = New System.Drawing.Point(0, 50)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(793, 503)
+        Me.Panel2.TabIndex = 18
         '
-        'importe
+        'txtFechaAcreditacion
         '
-        Me.importe.HeaderText = "Importe"
-        Me.importe.Name = "importe"
-        Me.importe.Width = 110
+        Me.txtFechaAcreditacion.Location = New System.Drawing.Point(158, 78)
+        Me.txtFechaAcreditacion.Mask = "00/00/0000"
+        Me.txtFechaAcreditacion.Name = "txtFechaAcreditacion"
+        Me.txtFechaAcreditacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaAcreditacion.Size = New System.Drawing.Size(75, 20)
+        Me.txtFechaAcreditacion.TabIndex = 18
+        Me.txtFechaAcreditacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtFechaAcreditacion.ValidatingType = GetType(Date)
         '
-        'ClaveCheque
+        'txtFecha
         '
-        Me.ClaveCheque.HeaderText = "ClaveCheque"
-        Me.ClaveCheque.Name = "ClaveCheque"
-        Me.ClaveCheque.Visible = False
+        Me.txtFecha.Location = New System.Drawing.Point(289, 24)
+        Me.txtFecha.Mask = "00/00/0000"
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFecha.Size = New System.Drawing.Size(100, 20)
+        Me.txtFecha.TabIndex = 17
+        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtFecha.ValidatingType = GetType(Date)
         '
         'txtImporte
         '
@@ -122,17 +164,17 @@ Partial Class Depositos
         Me.txtImporte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtImporte.Validator = Administracion.ValidatorType.PositiveFloat
         '
-        'CustomLabel7
+        'CustomLabel3
         '
-        Me.CustomLabel7.AutoSize = True
-        Me.CustomLabel7.ControlAssociationKey = 5
-        Me.CustomLabel7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel7.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel7.Location = New System.Drawing.Point(239, 80)
-        Me.CustomLabel7.Name = "CustomLabel7"
-        Me.CustomLabel7.Size = New System.Drawing.Size(58, 18)
-        Me.CustomLabel7.TabIndex = 15
-        Me.CustomLabel7.Text = "Importe"
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.ControlAssociationKey = 1
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(34, 24)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(94, 18)
+        Me.CustomLabel3.TabIndex = 3
+        Me.CustomLabel3.Text = "Nro. Depósito"
         '
         'lstSeleccion
         '
@@ -146,6 +188,133 @@ Partial Class Depositos
         Me.lstSeleccion.Size = New System.Drawing.Size(373, 95)
         Me.lstSeleccion.TabIndex = 14
         Me.lstSeleccion.Visible = False
+        '
+        'CustomLabel4
+        '
+        Me.CustomLabel4.AutoSize = True
+        Me.CustomLabel4.ControlAssociationKey = 3
+        Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel4.Location = New System.Drawing.Point(34, 54)
+        Me.CustomLabel4.Name = "CustomLabel4"
+        Me.CustomLabel4.Size = New System.Drawing.Size(45, 18)
+        Me.CustomLabel4.TabIndex = 4
+        Me.CustomLabel4.Text = "Banco"
+        '
+        'CustomLabel7
+        '
+        Me.CustomLabel7.AutoSize = True
+        Me.CustomLabel7.ControlAssociationKey = 5
+        Me.CustomLabel7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel7.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel7.Location = New System.Drawing.Point(239, 80)
+        Me.CustomLabel7.Name = "CustomLabel7"
+        Me.CustomLabel7.Size = New System.Drawing.Size(58, 18)
+        Me.CustomLabel7.TabIndex = 15
+        Me.CustomLabel7.Text = "Importe"
+        '
+        'CustomLabel5
+        '
+        Me.CustomLabel5.AutoSize = True
+        Me.CustomLabel5.ControlAssociationKey = 4
+        Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel5.Location = New System.Drawing.Point(31, 80)
+        Me.CustomLabel5.Name = "CustomLabel5"
+        Me.CustomLabel5.Size = New System.Drawing.Size(125, 18)
+        Me.CustomLabel5.TabIndex = 5
+        Me.CustomLabel5.Text = "Fecha Acreditación"
+        '
+        'lblTotal
+        '
+        Me.lblTotal.BackColor = System.Drawing.SystemColors.Control
+        Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblTotal.ControlAssociationKey = -1
+        Me.lblTotal.Location = New System.Drawing.Point(552, 476)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(216, 15)
+        Me.lblTotal.TabIndex = 2
+        Me.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtCodigoBanco
+        '
+        Me.txtCodigoBanco.Cleanable = True
+        Me.txtCodigoBanco.Empty = False
+        Me.txtCodigoBanco.EnterIndex = 3
+        Me.txtCodigoBanco.LabelAssociationKey = 3
+        Me.txtCodigoBanco.Location = New System.Drawing.Point(82, 53)
+        Me.txtCodigoBanco.MaxLength = 5
+        Me.txtCodigoBanco.Name = "txtCodigoBanco"
+        Me.txtCodigoBanco.Size = New System.Drawing.Size(71, 20)
+        Me.txtCodigoBanco.TabIndex = 3
+        Me.txtCodigoBanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtCodigoBanco, "Doble Click: Abrir Consulta de Bancos")
+        Me.txtCodigoBanco.Validator = Administracion.ValidatorType.None
+        '
+        'CustomLabel1
+        '
+        Me.CustomLabel1.AutoSize = True
+        Me.CustomLabel1.BackColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.CustomLabel1.ControlAssociationKey = -1
+        Me.CustomLabel1.Location = New System.Drawing.Point(328, 476)
+        Me.CustomLabel1.Name = "CustomLabel1"
+        Me.CustomLabel1.Size = New System.Drawing.Size(218, 15)
+        Me.CustomLabel1.TabIndex = 1
+        Me.CustomLabel1.Text = "Tipo de Doc.:  1) Ef.    2) U$S    3)  Ch Terc."
+        '
+        'txtNroDeposito
+        '
+        Me.txtNroDeposito.Cleanable = True
+        Me.txtNroDeposito.Empty = False
+        Me.txtNroDeposito.EnterIndex = 1
+        Me.txtNroDeposito.LabelAssociationKey = 1
+        Me.txtNroDeposito.Location = New System.Drawing.Point(134, 23)
+        Me.txtNroDeposito.MaxLength = 6
+        Me.txtNroDeposito.Name = "txtNroDeposito"
+        Me.txtNroDeposito.Size = New System.Drawing.Size(96, 20)
+        Me.txtNroDeposito.TabIndex = 1
+        Me.txtNroDeposito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtNroDeposito.Validator = Administracion.ValidatorType.Positive
+        '
+        'lstConsulta
+        '
+        Me.lstConsulta.Cleanable = True
+        Me.lstConsulta.EnterIndex = -1
+        Me.lstConsulta.FormattingEnabled = True
+        Me.lstConsulta.LabelAssociationKey = -1
+        Me.lstConsulta.Location = New System.Drawing.Point(395, 14)
+        Me.lstConsulta.Name = "lstConsulta"
+        Me.lstConsulta.Size = New System.Drawing.Size(373, 95)
+        Me.lstConsulta.TabIndex = 8
+        Me.lstConsulta.Visible = False
+        '
+        'txtDescripcionBanco
+        '
+        Me.txtDescripcionBanco.Cleanable = True
+        Me.txtDescripcionBanco.Empty = False
+        Me.txtDescripcionBanco.Enabled = False
+        Me.txtDescripcionBanco.EnterIndex = -1
+        Me.txtDescripcionBanco.LabelAssociationKey = 3
+        Me.txtDescripcionBanco.Location = New System.Drawing.Point(159, 53)
+        Me.txtDescripcionBanco.MaxLength = 50
+        Me.txtDescripcionBanco.Name = "txtDescripcionBanco"
+        Me.txtDescripcionBanco.Size = New System.Drawing.Size(230, 20)
+        Me.txtDescripcionBanco.TabIndex = 6
+        Me.txtDescripcionBanco.TabStop = False
+        Me.txtDescripcionBanco.Validator = Administracion.ValidatorType.None
+        '
+        'CustomLabel6
+        '
+        Me.CustomLabel6.AutoSize = True
+        Me.CustomLabel6.ControlAssociationKey = 2
+        Me.CustomLabel6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel6.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel6.Location = New System.Drawing.Point(239, 25)
+        Me.CustomLabel6.Name = "CustomLabel6"
+        Me.CustomLabel6.Size = New System.Drawing.Size(44, 18)
+        Me.CustomLabel6.TabIndex = 7
+        Me.CustomLabel6.Text = "Fecha"
         '
         'btnCerrar
         '
@@ -252,211 +421,44 @@ Partial Class Depositos
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
-        'lstConsulta
+        'tipo
         '
-        Me.lstConsulta.Cleanable = True
-        Me.lstConsulta.EnterIndex = -1
-        Me.lstConsulta.FormattingEnabled = True
-        Me.lstConsulta.LabelAssociationKey = -1
-        Me.lstConsulta.Location = New System.Drawing.Point(395, 14)
-        Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(373, 95)
-        Me.lstConsulta.TabIndex = 8
-        Me.lstConsulta.Visible = False
+        Me.tipo.HeaderText = "Tipo"
+        Me.tipo.Name = "tipo"
+        Me.tipo.Width = 65
         '
-        'CustomLabel6
+        'numero
         '
-        Me.CustomLabel6.AutoSize = True
-        Me.CustomLabel6.ControlAssociationKey = 2
-        Me.CustomLabel6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel6.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel6.Location = New System.Drawing.Point(239, 25)
-        Me.CustomLabel6.Name = "CustomLabel6"
-        Me.CustomLabel6.Size = New System.Drawing.Size(44, 18)
-        Me.CustomLabel6.TabIndex = 7
-        Me.CustomLabel6.Text = "Fecha"
+        Me.numero.HeaderText = "Numero"
+        Me.numero.Name = "numero"
+        Me.numero.ReadOnly = True
+        Me.numero.Width = 145
         '
-        'txtDescripcionBanco
+        'fecha
         '
-        Me.txtDescripcionBanco.Cleanable = True
-        Me.txtDescripcionBanco.Empty = False
-        Me.txtDescripcionBanco.Enabled = False
-        Me.txtDescripcionBanco.EnterIndex = -1
-        Me.txtDescripcionBanco.LabelAssociationKey = 3
-        Me.txtDescripcionBanco.Location = New System.Drawing.Point(159, 53)
-        Me.txtDescripcionBanco.MaxLength = 50
-        Me.txtDescripcionBanco.Name = "txtDescripcionBanco"
-        Me.txtDescripcionBanco.Size = New System.Drawing.Size(230, 20)
-        Me.txtDescripcionBanco.TabIndex = 6
-        Me.txtDescripcionBanco.TabStop = False
-        Me.txtDescripcionBanco.Validator = Administracion.ValidatorType.None
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.Name = "fecha"
+        Me.fecha.ReadOnly = True
         '
-        'txtNroDeposito
+        'nombre
         '
-        Me.txtNroDeposito.Cleanable = True
-        Me.txtNroDeposito.Empty = False
-        Me.txtNroDeposito.EnterIndex = 1
-        Me.txtNroDeposito.LabelAssociationKey = 1
-        Me.txtNroDeposito.Location = New System.Drawing.Point(134, 23)
-        Me.txtNroDeposito.MaxLength = 6
-        Me.txtNroDeposito.Name = "txtNroDeposito"
-        Me.txtNroDeposito.Size = New System.Drawing.Size(96, 20)
-        Me.txtNroDeposito.TabIndex = 1
-        Me.txtNroDeposito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtNroDeposito.Validator = Administracion.ValidatorType.Positive
+        Me.nombre.HeaderText = "Nombre"
+        Me.nombre.Name = "nombre"
+        Me.nombre.ReadOnly = True
+        Me.nombre.Width = 280
         '
-        'txtCodigoBanco
+        'importe
         '
-        Me.txtCodigoBanco.Cleanable = True
-        Me.txtCodigoBanco.Empty = False
-        Me.txtCodigoBanco.EnterIndex = 3
-        Me.txtCodigoBanco.LabelAssociationKey = 3
-        Me.txtCodigoBanco.Location = New System.Drawing.Point(82, 53)
-        Me.txtCodigoBanco.MaxLength = 5
-        Me.txtCodigoBanco.Name = "txtCodigoBanco"
-        Me.txtCodigoBanco.Size = New System.Drawing.Size(71, 20)
-        Me.txtCodigoBanco.TabIndex = 3
-        Me.txtCodigoBanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ToolTip1.SetToolTip(Me.txtCodigoBanco, "Doble Click: Abrir Consulta de Bancos")
-        Me.txtCodigoBanco.Validator = Administracion.ValidatorType.None
+        Me.importe.HeaderText = "Importe"
+        Me.importe.Name = "importe"
+        Me.importe.ReadOnly = True
+        Me.importe.Width = 110
         '
-        'CustomLabel5
+        'ClaveCheque
         '
-        Me.CustomLabel5.AutoSize = True
-        Me.CustomLabel5.ControlAssociationKey = 4
-        Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(31, 80)
-        Me.CustomLabel5.Name = "CustomLabel5"
-        Me.CustomLabel5.Size = New System.Drawing.Size(125, 18)
-        Me.CustomLabel5.TabIndex = 5
-        Me.CustomLabel5.Text = "Fecha Acreditación"
-        '
-        'CustomLabel4
-        '
-        Me.CustomLabel4.AutoSize = True
-        Me.CustomLabel4.ControlAssociationKey = 3
-        Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(34, 54)
-        Me.CustomLabel4.Name = "CustomLabel4"
-        Me.CustomLabel4.Size = New System.Drawing.Size(45, 18)
-        Me.CustomLabel4.TabIndex = 4
-        Me.CustomLabel4.Text = "Banco"
-        '
-        'CustomLabel3
-        '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.ControlAssociationKey = 1
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(34, 24)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(94, 18)
-        Me.CustomLabel3.TabIndex = 3
-        Me.CustomLabel3.Text = "Nro. Depósito"
-        '
-        'lblTotal
-        '
-        Me.lblTotal.BackColor = System.Drawing.SystemColors.Control
-        Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblTotal.ControlAssociationKey = -1
-        Me.lblTotal.Location = New System.Drawing.Point(552, 476)
-        Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(216, 15)
-        Me.lblTotal.TabIndex = 2
-        Me.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'CustomLabel1
-        '
-        Me.CustomLabel1.AutoSize = True
-        Me.CustomLabel1.BackColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Location = New System.Drawing.Point(328, 476)
-        Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(218, 15)
-        Me.CustomLabel1.TabIndex = 1
-        Me.CustomLabel1.Text = "Tipo de Doc.:  1) Ef.    2) U$S    3)  Ch Terc."
-        '
-        'Panel1
-        '
-        Me.Panel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(793, 50)
-        Me.Panel1.TabIndex = 17
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(616, 12)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(156, 26)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "SURFACTAN S.A."
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(21, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(151, 19)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Ingreso de Depósitos"
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.txtFechaAcreditacion)
-        Me.Panel2.Controls.Add(Me.txtFecha)
-        Me.Panel2.Controls.Add(Me.txtImporte)
-        Me.Panel2.Controls.Add(Me.CustomLabel3)
-        Me.Panel2.Controls.Add(Me.lstSeleccion)
-        Me.Panel2.Controls.Add(Me.CustomLabel4)
-        Me.Panel2.Controls.Add(Me.CustomLabel7)
-        Me.Panel2.Controls.Add(Me.CustomLabel5)
-        Me.Panel2.Controls.Add(Me.lblTotal)
-        Me.Panel2.Controls.Add(Me.txtCodigoBanco)
-        Me.Panel2.Controls.Add(Me.CustomLabel1)
-        Me.Panel2.Controls.Add(Me.txtNroDeposito)
-        Me.Panel2.Controls.Add(Me.gridCheques)
-        Me.Panel2.Controls.Add(Me.lstConsulta)
-        Me.Panel2.Controls.Add(Me.txtDescripcionBanco)
-        Me.Panel2.Controls.Add(Me.CustomLabel6)
-        Me.Panel2.Location = New System.Drawing.Point(0, 50)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(793, 503)
-        Me.Panel2.TabIndex = 18
-        '
-        'txtFechaAcreditacion
-        '
-        Me.txtFechaAcreditacion.Location = New System.Drawing.Point(158, 78)
-        Me.txtFechaAcreditacion.Mask = "00/00/0000"
-        Me.txtFechaAcreditacion.Name = "txtFechaAcreditacion"
-        Me.txtFechaAcreditacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaAcreditacion.Size = New System.Drawing.Size(75, 20)
-        Me.txtFechaAcreditacion.TabIndex = 18
-        Me.txtFechaAcreditacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtFechaAcreditacion.ValidatingType = GetType(Date)
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(289, 24)
-        Me.txtFecha.Mask = "00/00/0000"
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFecha.Size = New System.Drawing.Size(100, 20)
-        Me.txtFecha.TabIndex = 17
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtFecha.ValidatingType = GetType(Date)
+        Me.ClaveCheque.HeaderText = "ClaveCheque"
+        Me.ClaveCheque.Name = "ClaveCheque"
+        Me.ClaveCheque.Visible = False
         '
         'Depositos
         '
