@@ -374,8 +374,8 @@ Public Class ProveedoresABM
         txtEmail.Text = proveedor.email
         txtObservaciones.Text = proveedor.observaciones
         txtCUIT.Text = proveedor.cuit
-        cmbTipoProveedor.SelectedIndex = proveedor.tipo + 1
-        cmbIVA.SelectedIndex = proveedor.codIva + 1
+        cmbTipoProveedor.SelectedIndex = proveedor.tipo
+        cmbIVA.SelectedIndex = proveedor.codIva
         mostrarCuenta(proveedor.cuenta)
         txtCheque.Text = proveedor.nombreCheque
         cmbCondicionIB1.SelectedIndex = proveedor.condicionIB1
