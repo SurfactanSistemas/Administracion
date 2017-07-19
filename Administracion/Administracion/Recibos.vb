@@ -10,7 +10,7 @@ Public Class Recibos
     Private _ComprobanteRetGanancias As String = ""
     Private _ComprobanteRetSuss As String = ""
     Private _RetIB1, _CompIB1, _RetIB2, _CompIB2, _RetIB3, _CompIB3, _RetIB4, _CompIB4, _RetIB5, _CompIB5, _
-            _RetIB6, _CompIB6, _RetIB7, _CompIB7 As String
+            _RetIB6, _CompIB6, _RetIB7, _CompIB7, _RetIB8, _CompIB8 As String
 
     ' Variables para impresion de Recibo.
     Dim WRazon, WDireccion, WLocalidad, WProvincia, WPostal, _
@@ -576,6 +576,8 @@ Public Class Recibos
                         _CompIB6 = dr.Item("NroRetIb6")
                         _RetIB7 = dr.Item("RetIb7")
                         _CompIB7 = dr.Item("NroRetIb7")
+                        _RetIB8 = dr.Item("RetIb8")
+                        _CompIB8 = dr.Item("NroRetIb8")
                         txtProvi.Text = dr.Item("Provisorio")
 
                     End If
@@ -703,6 +705,8 @@ Public Class Recibos
                         _CompIB6 = dr.Item("NroRetIb6")
                         _RetIB7 = dr.Item("RetIb7")
                         _CompIB7 = dr.Item("NroRetIb7")
+                        _RetIB8 = dr.Item("RetIb8")
+                        _CompIB8 = dr.Item("NroRetIb8")
 
                         If Val(dr.Item("TipoRec")) = 1 Then
                             optCtaCte.Checked = True
@@ -1491,13 +1495,15 @@ Public Class Recibos
         XSql = XSql & " NroRetIb5 = " & "'" & _CompIB5 & "',"
         XSql = XSql & " NroRetIb6 = " & "'" & _CompIB6 & "',"
         XSql = XSql & " NroRetIb7 = " & "'" & _CompIB7 & "',"
+        XSql = XSql & " NroRetIb8 = " & "'" & _CompIB8 & "',"
         XSql = XSql & " RetIb1 = " & "'" & _RetIB1 & "',"
         XSql = XSql & " RetIb2 = " & "'" & _RetIB2 & "',"
         XSql = XSql & " RetIb3 = " & "'" & _RetIB3 & "',"
         XSql = XSql & " RetIb4 = " & "'" & _RetIB4 & "',"
         XSql = XSql & " RetIb5 = " & "'" & _RetIB5 & "',"
         XSql = XSql & " RetIb6 = " & "'" & _RetIB6 & "',"
-        XSql = XSql & " RetIb7 = " & "'" & _RetIB7 & "'"
+        XSql = XSql & " RetIb7 = " & "'" & _RetIB7 & "',"
+        XSql = XSql & " RetIb8 = " & "'" & _RetIB8 & "'"
         XSql = XSql & " Where Recibo = " & "'" & txtRecibo.Text & "'"
 
         cm.CommandText = XSql
@@ -2375,6 +2381,8 @@ Public Class Recibos
             _CompIB6 = ""
             _RetIB7 = ""
             _CompIB7 = ""
+            _RetIB8 = ""
+            _CompIB8 = ""
         End If
     End Sub
 
@@ -2395,6 +2403,8 @@ Public Class Recibos
             .txtCompIB6.Text = _CompIB6
             .txtRetIB7.Text = _RetIB7
             .txtCompIB7.Text = _CompIB7
+            .txtRetIB8.Text = _RetIB8
+            .txtCompIB8.Text = _CompIB8
 
             .ShowDialog(Me)
 
@@ -2412,6 +2422,8 @@ Public Class Recibos
             _CompIB6 = .txtCompIB6.Text
             _RetIB7 = .txtRetIB7.Text
             _CompIB7 = .txtCompIB7.Text
+            _RetIB8 = .txtRetIB8.Text
+            _CompIB8 = .txtCompIB8.Text
 
             .Dispose()
 
@@ -2430,6 +2442,7 @@ Public Class Recibos
         totalIB += Val(_NormalizarNumero(_RetIB5))
         totalIB += Val(_NormalizarNumero(_RetIB6))
         totalIB += Val(_NormalizarNumero(_RetIB7))
+        totalIB += Val(_NormalizarNumero(_RetIB8))
 
         txtRetIB.Text = totalIB
     End Sub

@@ -53,14 +53,14 @@ Public Class DAORecibo
                    ByVal Suss As Double, ByVal valorParidad As Double, ByVal valorTotal As Double, ByVal FormasDePago As List(Of FormaPago), ByVal CompGanancias As String, ByVal CompIva As String,
                    ByVal CompSuss As String, ByVal RetIB1 As Double, ByVal CompIB1 As Double, ByVal RetIB2 As Double, ByVal CompIB2 As Double, ByVal RetIB3 As Double,
                    ByVal CompIB3 As Double, ByVal RetIB4 As Double, ByVal CompIB4 As Double, ByVal RetIB5 As Double, ByVal CompIB5 As Double, ByVal RetIB6 As Double,
-                   ByVal CompIB6 As Double, ByVal RetIB7 As Double, ByVal CompIB7 As Double, ByVal _cheques As List(Of Object))
+                   ByVal CompIB6 As Double, ByVal RetIB7 As Double, ByVal CompIB7 As Double, ByVal RetIB8 As Double, ByVal CompIB8 As Double, ByVal _cheques As List(Of Object))
 
         Dim renglon As Integer = 1
         Dim estado2 As Char = ""
         Dim _fechaord2 As String = ""
         Dim _fechaord As String() = fecha2.Split("/")
         Dim ConsultaSQL_Template As String = "('#CLAVE#', '" & id & "', '#RENGLON#', '" & cli.id & "', '" & fecha2 & "','" & _fechaord(2).ToString() & _fechaord(1).ToString() & _fechaord(0).ToString() & "', '#TIPOREC#', " & ganancias & ", '" & CompGanancias & "'," & IVA & ", '" & CompIva & "'," & IB & ", " & Suss & ", '" & CompSuss & "',0,2, '#TIPO#', '#NUMERO2#', '#FECHA2#', '#FECHAORD2#', '#BANCO2#', #IMPORTE2#, " & valorTotal & ", 1, 0, '', '', '#ESTADO2#', " & RetIB1.ToString() & ", " & CompIB1.ToString() & ", " & RetIB2.ToString() & ", " & CompIB2.ToString() & ", " & RetIB3.ToString() & ", " _
-                                        & CompIB3.ToString() & ", " & RetIB4.ToString() & ", " & CompIB4.ToString() & ", " & RetIB5.ToString() & ", " & CompIB5.ToString() & ", " & RetIB6.ToString() & ", " & CompIB6.ToString() & ", " & RetIB7.ToString() & ", " & CompIB7.ToString() _
+                                        & CompIB3.ToString() & ", " & RetIB4.ToString() & ", " & CompIB4.ToString() & ", " & RetIB5.ToString() & ", " & CompIB5.ToString() & ", " & RetIB6.ToString() & ", " & CompIB6.ToString() & ", " & RetIB7.ToString() & ", " & CompIB7.ToString() & ", " & RetIB8.ToString() & ", " & CompIB8.ToString() _
                                         & ", '#FechaDepo#', '#FechaDepoOrd#', '#ClaveCheque#', '#BancoCheque#', '#SucursalCheque#', '#ChequeCheque#', '#CuentaCheque#', '#Cuit#', '0')"
 
 
@@ -139,7 +139,7 @@ Public Class DAORecibo
                         & "RetSuss, ComproSuss, Retencion, TipoReg, Tipo2, Numero2, Fecha2, FechaOrd2," _
                         & "banco2, Importe2, Importe, Empresa, Impolist, Observaciones, Cuenta," _
                         & "Estado2, RetIb1, NroRetIb1, RetIb2, NroRetIb2, RetIb3, NroRetIb3, RetIb4, NroRetIb4," _
-                        & "RetIb5, NroRetIb5, RetIb6, NroRetIb6, RetIb7, NroRetIb7, FechaDepo, FechaDepoOrd," _
+                        & "RetIb5, NroRetIb5, RetIb6, NroRetIb6, RetIb7, NroRetIb7, RetIb8, NroRetIb8, FechaDepo, FechaDepoOrd," _
                         & "ClaveCheque, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque, Cuit, ReciboDefinitivo) VALUES " & SQL
             SQLConnector.conexionSql(cn, cm)
 

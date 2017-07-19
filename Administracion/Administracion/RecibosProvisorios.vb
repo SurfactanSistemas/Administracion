@@ -7,7 +7,7 @@ Public Class RecibosProvisorios
     Private _ComprobanteRetGanancias As String = ""
     Private _ComprobanteRetSuss As String = ""
     Private _RetIB1, _CompIB1, _RetIB2, _CompIB2, _RetIB3, _CompIB3, _RetIB4, _CompIB4, _RetIB5, _CompIB5, _
-            _RetIB6, _CompIB6, _RetIB7, _CompIB7 As String
+            _RetIB6, _CompIB6, _RetIB7, _CompIB7, _RetIB8, _CompIB8 As String
     Private _CuentasContables As New List(Of Object)
     Private _ClavesCheques As New List(Of Object)
 
@@ -232,6 +232,8 @@ Public Class RecibosProvisorios
                         _CompIB6 = dr.Item("NroRetIb6")
                         _RetIB7 = _NormalizarNumero(dr.Item("RetIb7"))
                         _CompIB7 = dr.Item("NroRetIb7")
+                        _RetIB8 = _NormalizarNumero(dr.Item("RetIb8"))
+                        _CompIB8 = dr.Item("NroRetIb8")
                         txtTotal.Text = _NormalizarNumero(dr.Item("Importe"))
                     End If
 
@@ -391,7 +393,7 @@ Public Class RecibosProvisorios
                 Val(_NormalizarNumero(_RetIB2)), Val(_NormalizarNumero(_CompIB2)), Val(_NormalizarNumero(_RetIB3)), _
                 Val(_NormalizarNumero(_CompIB3)), Val(_NormalizarNumero(_RetIB4)), Val(_NormalizarNumero(_CompIB4)), _
                 Val(_NormalizarNumero(_RetIB5)), Val(_NormalizarNumero(_CompIB5)), Val(_NormalizarNumero(_RetIB6)), _
-                Val(_NormalizarNumero(_CompIB6)), Val(_NormalizarNumero(_RetIB7)), Val(_NormalizarNumero(_CompIB7)), _ClavesCheques)
+                Val(_NormalizarNumero(_CompIB6)), Val(_NormalizarNumero(_RetIB7)), Val(_NormalizarNumero(_CompIB7)), Val(_NormalizarNumero(_RetIB8)), Val(_NormalizarNumero(_CompIB8)), _ClavesCheques)
 
             btnLimpiar.PerformClick()
         End If
@@ -499,6 +501,8 @@ Public Class RecibosProvisorios
             _CompIB6 = ""
             _RetIB7 = ""
             _CompIB7 = ""
+            _RetIB8 = ""
+            _CompIB8 = ""
         End If
     End Sub
 
@@ -613,6 +617,8 @@ Public Class RecibosProvisorios
             .txtCompIB6.Text = _CompIB6
             .txtRetIB7.Text = _RetIB7
             .txtCompIB7.Text = _CompIB7
+            .txtRetIB8.Text = _RetIB8
+            .txtCompIB8.Text = _CompIB8
 
             .ShowDialog(Me)
 
@@ -630,6 +636,8 @@ Public Class RecibosProvisorios
             _CompIB6 = .txtCompIB6.Text
             _RetIB7 = .txtRetIB7.Text
             _CompIB7 = .txtCompIB7.Text
+            _RetIB8 = .txtRetIB8.Text
+            _CompIB8 = .txtCompIB8.Text
 
             .Dispose()
 
@@ -649,6 +657,7 @@ Public Class RecibosProvisorios
         totalIB += Val(_RetIB5)
         totalIB += Val(_RetIB6)
         totalIB += Val(_RetIB7)
+        totalIB += Val(_RetIB8)
 
         txtRetIB.Text = totalIB
     End Sub
