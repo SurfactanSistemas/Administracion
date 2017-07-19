@@ -77,7 +77,7 @@ Public Class CuentaCorrientePantalla
 
         boxPantallaProveedores.Visible = True
 
-        lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre("")
+        lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
         txtAyuda.Text = ""
         txtAyuda.Focus()

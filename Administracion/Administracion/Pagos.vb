@@ -431,45 +431,25 @@ Public Class Pagos
 
     Private Sub _ListarProveedores()
         Dim XClaves As New List(Of Object)
-        Dim _Item As String
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor ORDER BY Nombre")
-        Dim dr As SqlDataReader
+        Dim _Item As String = ""
+        Dim proveedores As List(Of Proveedor) = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
-        SQLConnector.conexionSql(cn, cm)
-
-        Try
+        If proveedores.Count > 0 Then
             lstConsulta.Items.Clear()
 
-            dr = cm.ExecuteReader()
+            For Each _Prv As Proveedor In proveedores
+                _Item = ceros(_Prv.id, 11) & "    " & _Prv.razonSocial
+                lstConsulta.Items.Add(_Item)
+                XClaves.Add({_Item, ceros(_Prv.id, 11)})
+            Next
 
-            With dr
-                If .HasRows Then
+            _Claves = XClaves
 
-                    Do While .Read()
-                        _Item = ceros(.Item("Proveedor"), 11) & "    " & .Item("Nombre")
-                        lstConsulta.Items.Add(_Item)
-                        XClaves.Add({_Item, ceros(.Item("Proveedor"), 11)})
-                    Loop
+            _HabilitarConsulta()
+        Else
+            _InhabilitarConsulta()
+        End If
 
-                    _Claves = XClaves
-
-                    _HabilitarConsulta()
-                Else
-                    _InhabilitarConsulta()
-                End If
-            End With
-
-        Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
     End Sub
 
     Private Function _TraerChequesEnRecibos() As List(Of Object)

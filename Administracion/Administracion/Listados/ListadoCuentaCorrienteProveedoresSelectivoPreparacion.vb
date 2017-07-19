@@ -59,7 +59,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
         Me.Height = 690
 
-        lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre("")
+        lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
         txtAyuda.Text = ""
         txtAyuda.Visible = True

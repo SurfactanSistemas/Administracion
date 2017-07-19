@@ -23,7 +23,7 @@ Public Class AplicacionComprobantes
         Me.Height = 630
         lstAyuda.Visible = True
         txtAyuda.Visible = True
-        lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre("")
+        lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre("")
         txtAyuda.Focus()
     End Sub
 

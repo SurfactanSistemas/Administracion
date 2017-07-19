@@ -114,7 +114,7 @@ Public Class ListadoProyeccionCobros
 
         Me.Size = New System.Drawing.Size(645, 580)
 
-        lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre("")
+        lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre
 
         txtAyuda.Text = ""
         txtAyuda.Visible = True
@@ -129,7 +129,7 @@ Public Class ListadoProyeccionCobros
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
-            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
+            lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre(txtAyuda.Text)
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True
             txtAyuda.Text = ""
@@ -142,7 +142,7 @@ Public Class ListadoProyeccionCobros
         txtDesdeProveedor.Focus()
     End Sub
 
-    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
+    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         mostrarProveedor(lstAyuda.SelectedValue)
     End Sub
 
@@ -230,7 +230,7 @@ Public Class ListadoProyeccionCobros
 
     End Sub
 
-    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtHastaProveedor.MouseDoubleClick, txtDesdeProveedor.MouseDoubleClick
+    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         btnConsulta.PerformClick()
     End Sub
 
@@ -285,4 +285,5 @@ Public Class ListadoProyeccionCobros
     Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
         _FiltrarDinamicamente()
     End Sub
+
 End Class

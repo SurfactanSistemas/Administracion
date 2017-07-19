@@ -103,14 +103,38 @@ Public Class DAOProveedor
         Return provincias
     End Function
 
+    Public Shared Function buscarProveedoresActivoPorNombre(Optional ByVal nombre As String = "")
+        Dim proveedores As New List(Of Proveedor)
+        Dim tabla As DataTable
+        tabla = SQLConnector.retrieveDataTable("buscar_proveedor_por_nombre", nombre)
+        For Each proveedor As DataRow In tabla.Rows
+
+            If _ProveedorActivo(proveedor("Inhabilitado").ToString) Then
+
+                proveedores.Add(New Proveedor(proveedor("codigo"), proveedor("nombre")))
+
+            End If
+
+        Next
+        Return proveedores
+    End Function
+
     Public Shared Function buscarProveedorPorNombre(ByVal nombre As String)
         Dim proveedores As New List(Of Proveedor)
         Dim tabla As DataTable
         tabla = SQLConnector.retrieveDataTable("buscar_proveedor_por_nombre", nombre)
         For Each proveedor As DataRow In tabla.Rows
+
             proveedores.Add(New Proveedor(proveedor("codigo"), proveedor("nombre")))
+
         Next
         Return proveedores
+    End Function
+
+    Public Shared Function _ProveedorActivo(ByVal estado As String) As Boolean
+        Dim _estado As String = IIf(Trim(estado) = "", "0", Trim(estado))
+
+        Return _estado <> "1"
     End Function
 
     Public Shared Function buscarProveedorPorCodigo(ByVal codigo As String)

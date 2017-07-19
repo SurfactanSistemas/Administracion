@@ -51,7 +51,7 @@ Public Class ListadoCuentaCorrienteProveedores
 
         Me.Size = New System.Drawing.Size(606, 540)
 
-        lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre("")
+        lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
         txtAyuda.Text = ""
         txtAyuda.Visible = True
