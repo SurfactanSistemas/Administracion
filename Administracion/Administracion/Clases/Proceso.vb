@@ -402,7 +402,7 @@
 
     Public Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
         ' Se normaliza la fecha (Ej: 3/04/2000 => 03/04/2000 ó 3/4/2000 => 03/04/2000) y se controla que tenga los ocho digitos obligatoriamente.
-        Return Trim(_Normalizarfecha(fecha)).Replace("/", "").Length = 8
+        Return Trim(_Normalizarfecha(Trim(fecha))).Replace("/", "").Length = 8
     End Function
 
     Public Function _Normalizarfecha(ByVal fecha As String) As String

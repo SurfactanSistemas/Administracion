@@ -714,33 +714,10 @@ Public Class Pagos
         End Try
     End Sub
 
-    Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSeleccion.Click
 
-        If Trim(lstSeleccion.SelectedItem) <> "" Then
 
-            With lstSeleccion
+    Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs)
 
-                _TipoConsulta = .SelectedIndex
-
-                Select Case .SelectedIndex
-                    Case 0
-                        _ListarProveedores()
-                    Case 1
-                        _ListarCtasCtes()
-                    Case 2
-                        _ListarChequesTerceros()
-                    Case 3
-                        _ListarDocumentos()
-                    Case 4
-                        _ListarCuentasContables()
-                    Case Else
-                End Select
-
-            End With
-
-            txtConsulta.Focus()
-
-        End If
     End Sub
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
@@ -1177,74 +1154,6 @@ Public Class Pagos
         End Try
     End Sub
 
-    Private Sub CLBFiltrado_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CLBFiltrado.Click
-
-        If Not IsNothing(_TipoConsulta) Then
-            Dim indice As Integer = Nothing
-            Try
-                indice = lstConsulta.FindStringExact(CLBFiltrado.SelectedItem.ToString)
-            Catch ex As Exception
-
-            End Try
-
-            Select Case _TipoConsulta
-                Case 0
-                    mostrarProveedor(CLBFiltrado.SelectedItem.ToString)
-                Case 1
-                    ' Ctas Ctes
-                    If Trim(CLBFiltrado.SelectedItem) = "" Then
-                        Exit Sub
-                    End If
-
-                    _TraerCtaCte(CLBFiltrado.SelectedItem, indice)
-
-                Case 2
-                    If Trim(CLBFiltrado.SelectedItem) = "" Then
-                        Exit Sub
-                    End If
-
-                    _TraerChequeDeTercero(CLBFiltrado.SelectedItem, indice)
-
-                Case Else
-                    Exit Sub
-            End Select
-
-            CLBFiltrado.Visible = False
-            txtConsulta.Text = ""
-            txtConsulta.Focus()
-        End If
-
-    End Sub
-
-    Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
-
-        If Not IsNothing(_TipoConsulta) Then
-
-            Select Case _TipoConsulta
-                Case 0
-                    mostrarProveedor(lstConsulta.SelectedItem.ToString)
-                Case 1
-                    ' Ctas Ctes
-                    If Trim(lstConsulta.SelectedItem) = "" Then
-                        Exit Sub
-                    End If
-
-                    _TraerCtaCte(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
-
-                Case 2
-                    If Trim(lstConsulta.SelectedItem) = "" Then
-                        Exit Sub
-                    End If
-
-                    _TraerChequeDeTercero(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
-                Case Else
-                    Exit Sub
-            End Select
-
-        End If
-
-    End Sub
-
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         'Cleanner.clean(Me)
 
@@ -1649,7 +1558,7 @@ Public Class Pagos
     End Sub
 
     Private Sub txtFechaParidad_Leave(ByVal sender As Object, ByVal e As System.EventArgs)
-        traerParidad(txtFechaParidad.Text())
+        traerParidad(txtFechaParidad.Text)
     End Sub
 
     Private Sub txtOrdenPago_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrdenPago.KeyDown
@@ -1659,14 +1568,14 @@ Public Class Pagos
                 txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
                 mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
-
                 If txtProveedor.Text <> "" Then
                     txtProveedor.Focus()
                 Else
                     txtFecha.Focus()
                 End If
-
-
+            Else
+                txtOrdenPago.Text = "0"
+                txtFecha.Focus()
             End If
         End If
 
@@ -2108,7 +2017,7 @@ Public Class Pagos
 
     Private Sub Pagos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         _AlinearColumnas()
-        txtOrdenPago.Focus()
+        txtProveedor.Focus()
         cmbTipo.SelectedIndex = 0
         lstSeleccion.SelectedIndex = 0
 
@@ -2154,7 +2063,7 @@ Public Class Pagos
 
             If Trim(txtFechaParidad.Text.Replace("/", "")) <> "" Then
 
-                If Not _FormatoValidoFecha(txtFecha.Text) Then
+                If Not _FormatoValidoFecha(txtFechaParidad.Text) Then
                     Exit Sub
                 End If
 
@@ -2242,12 +2151,12 @@ Public Class Pagos
 
     Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
 
-        e.Cancel = _ValidarFecha(txtFecha.Text, e.IsValidInput)
+        e.Cancel = Not _ValidarFecha(txtFecha.Text, e.IsValidInput)
 
     End Sub
 
     Private Sub txtFechaParidad_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaParidad.TypeValidationCompleted
-        e.Cancel = _ValidarFecha(txtFechaParidad.Text, e.IsValidInput)
+        e.Cancel = Not _ValidarFecha(txtFechaParidad.Text, e.IsValidInput)
     End Sub
 
     Private Sub txtBanco_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtBanco.MouseDoubleClick
@@ -4216,5 +4125,101 @@ Public Class Pagos
             .Columns.Add("Cuit")
             .Columns.Add("Paridad").DataType = System.Type.GetType("System.Double")
         End With
+    End Sub
+
+    Private Sub lstSeleccion_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstSeleccion.MouseClick
+        If Trim(lstSeleccion.SelectedItem) = "" Then : Exit Sub : End If
+
+        If Trim(lstSeleccion.SelectedItem) <> "" Then
+
+            With lstSeleccion
+
+                _TipoConsulta = .SelectedIndex
+
+                Select Case .SelectedIndex
+                    Case 0
+                        _ListarProveedores()
+                    Case 1
+                        _ListarCtasCtes()
+                    Case 2
+                        _ListarChequesTerceros()
+                    Case 3
+                        _ListarDocumentos()
+                    Case 4
+                        _ListarCuentasContables()
+                    Case Else
+                End Select
+
+            End With
+
+            txtConsulta.Focus()
+
+        End If
+    End Sub
+
+    Private Sub CLBFiltrado_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles CLBFiltrado.MouseClick
+        If Trim(CLBFiltrado.SelectedItem) = "" Then
+            Exit Sub
+        End If
+
+        If Not IsNothing(_TipoConsulta) Then
+            Dim indice As Integer = Nothing
+            Try
+                indice = lstConsulta.FindStringExact(CLBFiltrado.SelectedItem.ToString)
+            Catch ex As Exception
+
+            End Try
+
+            Select Case _TipoConsulta
+                Case 0
+                    mostrarProveedor(CLBFiltrado.SelectedItem.ToString)
+                Case 1
+
+                    _TraerCtaCte(CLBFiltrado.SelectedItem, indice)
+
+                Case 2
+
+                    _TraerChequeDeTercero(CLBFiltrado.SelectedItem, indice)
+
+                Case Else
+                    Exit Sub
+            End Select
+
+            CLBFiltrado.Visible = False
+            txtConsulta.Text = ""
+            txtConsulta.Focus()
+        End If
+    End Sub
+
+    Private Sub lstConsulta_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstConsulta.MouseClick
+
+        If Trim(_TipoConsulta) = "" Then
+            Exit Sub
+        End If
+
+        If Not IsNothing(_TipoConsulta) Then
+
+            Select Case _TipoConsulta
+                Case 0
+                    mostrarProveedor(lstConsulta.SelectedItem.ToString)
+                Case 1
+                    ' Ctas Ctes
+                    If Trim(lstConsulta.SelectedItem) = "" Then
+                        Exit Sub
+                    End If
+
+                    _TraerCtaCte(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
+
+                Case 2
+                    If Trim(lstConsulta.SelectedItem) = "" Then
+                        Exit Sub
+                    End If
+
+                    _TraerChequeDeTercero(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
+                Case Else
+                    Exit Sub
+            End Select
+
+        End If
     End Sub
 End Class
