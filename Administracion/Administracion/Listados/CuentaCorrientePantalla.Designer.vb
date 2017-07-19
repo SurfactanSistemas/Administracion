@@ -23,14 +23,14 @@ Partial Class CuentaCorrientePantalla
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRilla = New System.Windows.Forms.DataGridView()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,6 +50,8 @@ Partial Class CuentaCorrientePantalla
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.gbSaldoCtaCliente = New System.Windows.Forms.GroupBox()
+        Me.lblSaldoCuentaProveedor = New Administracion.CustomLabel()
         Me.CBProveedorSelectivo = New System.Windows.Forms.CheckBox()
         Me.btnCancela = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
@@ -64,6 +66,7 @@ Partial Class CuentaCorrientePantalla
         Me.boxPantallaProveedores.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.gbSaldoCtaCliente.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRilla
@@ -78,8 +81,8 @@ Partial Class CuentaCorrientePantalla
         '
         'Tipo
         '
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle1
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
@@ -87,8 +90,8 @@ Partial Class CuentaCorrientePantalla
         '
         'Letra
         '
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Letra.DefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Letra.DefaultCellStyle = DataGridViewCellStyle2
         Me.Letra.HeaderText = "Letra"
         Me.Letra.Name = "Letra"
         Me.Letra.ReadOnly = True
@@ -96,8 +99,8 @@ Partial Class CuentaCorrientePantalla
         '
         'Punto
         '
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
         Me.Punto.HeaderText = "Punto"
         Me.Punto.Name = "Punto"
         Me.Punto.ReadOnly = True
@@ -105,40 +108,40 @@ Partial Class CuentaCorrientePantalla
         '
         'Numero
         '
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
         Me.Numero.HeaderText = "Numero"
         Me.Numero.Name = "Numero"
         Me.Numero.ReadOnly = True
         '
         'Importe
         '
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle5
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
         Me.Importe.ReadOnly = True
         '
         'Saldo
         '
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle6
         Me.Saldo.HeaderText = "Saldo"
         Me.Saldo.Name = "Saldo"
         Me.Saldo.ReadOnly = True
         '
         'Fecha
         '
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle7
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
         '
         'Vencimiento
         '
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle8
         Me.Vencimiento.HeaderText = "Vencimiento"
         Me.Vencimiento.Name = "Vencimiento"
         Me.Vencimiento.ReadOnly = True
@@ -149,7 +152,7 @@ Partial Class CuentaCorrientePantalla
         Me.opcCompleto.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.opcCompleto.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.opcCompleto.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcCompleto.Location = New System.Drawing.Point(425, 100)
+        Me.opcCompleto.Location = New System.Drawing.Point(425, 91)
         Me.opcCompleto.Name = "opcCompleto"
         Me.opcCompleto.Size = New System.Drawing.Size(87, 22)
         Me.opcCompleto.TabIndex = 24
@@ -163,7 +166,7 @@ Partial Class CuentaCorrientePantalla
         Me.opcPendiente.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.opcPendiente.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.opcPendiente.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcPendiente.Location = New System.Drawing.Point(320, 100)
+        Me.opcPendiente.Location = New System.Drawing.Point(320, 91)
         Me.opcPendiente.Name = "opcPendiente"
         Me.opcPendiente.Size = New System.Drawing.Size(91, 22)
         Me.opcPendiente.TabIndex = 23
@@ -253,18 +256,47 @@ Partial Class CuentaCorrientePantalla
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.gbSaldoCtaCliente)
         Me.Panel2.Controls.Add(Me.CBProveedorSelectivo)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(777, 88)
         Me.Panel2.TabIndex = 30
         '
+        'gbSaldoCtaCliente
+        '
+        Me.gbSaldoCtaCliente.Controls.Add(Me.lblSaldoCuentaProveedor)
+        Me.gbSaldoCtaCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gbSaldoCtaCliente.ForeColor = System.Drawing.SystemColors.Control
+        Me.gbSaldoCtaCliente.Location = New System.Drawing.Point(568, 39)
+        Me.gbSaldoCtaCliente.Name = "gbSaldoCtaCliente"
+        Me.gbSaldoCtaCliente.Size = New System.Drawing.Size(189, 43)
+        Me.gbSaldoCtaCliente.TabIndex = 1
+        Me.gbSaldoCtaCliente.TabStop = False
+        Me.gbSaldoCtaCliente.Text = "Saldo Cuenta Cliente"
+        Me.gbSaldoCtaCliente.Visible = False
+        '
+        'lblSaldoCuentaProveedor
+        '
+        Me.lblSaldoCuentaProveedor.AutoSize = True
+        Me.lblSaldoCuentaProveedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.lblSaldoCuentaProveedor.ControlAssociationKey = -1
+        Me.lblSaldoCuentaProveedor.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblSaldoCuentaProveedor.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblSaldoCuentaProveedor.Location = New System.Drawing.Point(44, 16)
+        Me.lblSaldoCuentaProveedor.MinimumSize = New System.Drawing.Size(100, 20)
+        Me.lblSaldoCuentaProveedor.Name = "lblSaldoCuentaProveedor"
+        Me.lblSaldoCuentaProveedor.Size = New System.Drawing.Size(100, 20)
+        Me.lblSaldoCuentaProveedor.TabIndex = 31
+        Me.lblSaldoCuentaProveedor.Text = "0.00"
+        Me.lblSaldoCuentaProveedor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'CBProveedorSelectivo
         '
         Me.CBProveedorSelectivo.AutoSize = True
         Me.CBProveedorSelectivo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CBProveedorSelectivo.ForeColor = System.Drawing.SystemColors.Control
-        Me.CBProveedorSelectivo.Location = New System.Drawing.Point(557, 23)
+        Me.CBProveedorSelectivo.Location = New System.Drawing.Point(557, 14)
         Me.CBProveedorSelectivo.Name = "CBProveedorSelectivo"
         Me.CBProveedorSelectivo.Size = New System.Drawing.Size(217, 22)
         Me.CBProveedorSelectivo.TabIndex = 0
@@ -279,11 +311,11 @@ Partial Class CuentaCorrientePantalla
         Me.btnCancela.Cleanable = False
         Me.btnCancela.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCancela.EnterIndex = -1
-        Me.btnCancela.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnCancela.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatAppearance.BorderSize = 0
         Me.btnCancela.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
         Me.btnCancela.Location = New System.Drawing.Point(404, 542)
@@ -301,11 +333,11 @@ Partial Class CuentaCorrientePantalla
         Me.btnConsulta.Cleanable = False
         Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatAppearance.BorderSize = 0
         Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
         Me.btnConsulta.Location = New System.Drawing.Point(279, 542)
@@ -321,7 +353,7 @@ Partial Class CuentaCorrientePantalla
         Me.txtSaldo.Empty = True
         Me.txtSaldo.EnterIndex = -1
         Me.txtSaldo.LabelAssociationKey = -1
-        Me.txtSaldo.Location = New System.Drawing.Point(136, 97)
+        Me.txtSaldo.Location = New System.Drawing.Point(136, 88)
         Me.txtSaldo.Name = "txtSaldo"
         Me.txtSaldo.ReadOnly = True
         Me.txtSaldo.Size = New System.Drawing.Size(108, 20)
@@ -336,7 +368,7 @@ Partial Class CuentaCorrientePantalla
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(63, 100)
+        Me.CustomLabel2.Location = New System.Drawing.Point(63, 91)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(42, 18)
         Me.CustomLabel2.TabIndex = 8
@@ -350,7 +382,7 @@ Partial Class CuentaCorrientePantalla
         Me.txtRazon.EnterIndex = -1
         Me.txtRazon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(250, 73)
+        Me.txtRazon.Location = New System.Drawing.Point(250, 64)
         Me.txtRazon.Name = "txtRazon"
         Me.txtRazon.ReadOnly = True
         Me.txtRazon.Size = New System.Drawing.Size(298, 20)
@@ -374,7 +406,7 @@ Partial Class CuentaCorrientePantalla
         Me.txtProveedor.EnterIndex = -1
         Me.txtProveedor.ForeColor = System.Drawing.SystemColors.WindowText
         Me.txtProveedor.LabelAssociationKey = -1
-        Me.txtProveedor.Location = New System.Drawing.Point(136, 73)
+        Me.txtProveedor.Location = New System.Drawing.Point(136, 64)
         Me.txtProveedor.MaxLength = 11
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(108, 20)
@@ -390,7 +422,7 @@ Partial Class CuentaCorrientePantalla
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(63, 76)
+        Me.CustomLabel3.Location = New System.Drawing.Point(63, 67)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(73, 18)
         Me.CustomLabel3.TabIndex = 3
@@ -424,6 +456,8 @@ Partial Class CuentaCorrientePantalla
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.gbSaldoCtaCliente.ResumeLayout(False)
+        Me.gbSaldoCtaCliente.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -457,4 +491,6 @@ Partial Class CuentaCorrientePantalla
     Friend WithEvents CBProveedorSelectivo As System.Windows.Forms.CheckBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
+    Friend WithEvents gbSaldoCtaCliente As System.Windows.Forms.GroupBox
+    Friend WithEvents lblSaldoCuentaProveedor As Administracion.CustomLabel
 End Class

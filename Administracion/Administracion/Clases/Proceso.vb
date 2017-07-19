@@ -47,7 +47,7 @@
         B1 = redondeoii * 10000
         Valor = Int(B)
         ZZRedondeo = Int(B1)
-        zzRedondeo1 = Int(B) * 100
+        ZZRedondeo1 = Int(B) * 100
         Dife = ZZRedondeo - ZZRedondeo1
         If Dife >= 50 Then Valor = Valor + 1
         txtredondeo = Valor / 100
@@ -369,7 +369,7 @@
                     End If
                 End If
                 varAcumulaIb = varAcumulaIb + redondeo(varRete)
-                varRetIbcaba = varAcumulaIb
+                varRetIbCaba = varAcumulaIb
             End If
         End If
 
