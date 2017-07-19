@@ -1425,7 +1425,9 @@
   <ItemGroup>
     <None Include="Resources\calendar.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Desactivar.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\check-icon.png" />
   </ItemGroup>

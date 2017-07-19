@@ -5,6 +5,7 @@ Public Class ProveedoresABM
 
     Dim organizadorABM As New FormOrganizer(Me, 800, 800)
     Dim observaciones As String = ""
+    Dim _Inhabilitado As String = "0"
     Dim cufe1 As Tuple(Of String, String) = Tuple.Create("", "")
     Dim cufe2 As Tuple(Of String, String) = Tuple.Create("", "")
     Dim cufe3 As Tuple(Of String, String) = Tuple.Create("", "")
@@ -59,6 +60,8 @@ Public Class ProveedoresABM
         txtNroIB.Text = ""
         txtPorcelProv.Text = ""
         txtPorcelCABA.Text = ""
+
+        CKBProveedorInactivo.Checked = False
 
         cufe1 = Tuple.Create("", "")
         cufe2 = Tuple.Create("", "")
@@ -148,7 +151,8 @@ Public Class ProveedoresABM
                     & "ContactoCargo3 = '" & Mid(Trim(_Contacto3.Item2), 1, 50) & "', " _
                     & "ContactoTelefono3 = '" & Mid(Trim(_Contacto3.Item3), 1, 50) & "', " _
                     & "ContactoEmail3 = '" & Mid(Trim(_Contacto3.Item4), 1, 50) & "', " _
-                    & "ClienteAsociado = '" & Mid(Trim(txtClienteAsociado.Text), 1, 6) & "' " _
+                    & "ClienteAsociado = '" & Mid(Trim(txtClienteAsociado.Text), 1, 6) & "', " _
+                    & "Inhabilitado = '" & Trim(_Inhabilitado) & "' " _
                     & " WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'"
 
         Try
@@ -355,6 +359,8 @@ Public Class ProveedoresABM
         proveedor.contacto2 = New Object() {_Contacto2.Item1, _Contacto2.Item2, _Contacto2.Item3, _Contacto2.Item4}
         proveedor.contacto3 = New Object() {_Contacto3.Item1, _Contacto3.Item2, _Contacto3.Item3, _Contacto3.Item4}
 
+        proveedor.Inhabilitado = IIf(CKBProveedorInactivo.Checked, "1", "0")
+
         Try
             DAOProveedor.agregarProveedor(proveedor)
             MsgBox("Proveedor guardado correctamente.", MsgBoxStyle.Information)
@@ -415,6 +421,8 @@ Public Class ProveedoresABM
         txtCalificacion.Text = proveedor.vtoCalificacion
         txtClienteAsociado.Text = Trim(proveedor.cliente.id)
         txtClienteAsociadoDescripcion.Text = Trim(proveedor.cliente.razon)
+
+        CKBProveedorInactivo.Checked = IIf(proveedor.Inhabilitado = "0", False, True)
 
         observaciones = proveedor.observacionCompleta
         cufe1 = Tuple.Create(proveedor.cufe1, proveedor.dirCUFE1)
@@ -1312,6 +1320,16 @@ Public Class ProveedoresABM
             Else
                 txtClienteAsociadoDescripcion.Text = ""
             End If
+        End If
+
+    End Sub
+
+    Private Sub CKBProveedorInactivo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CKBProveedorInactivo.CheckedChanged
+
+        If CKBProveedorInactivo.Checked Then
+            _Inhabilitado = "1"
+        Else
+            _Inhabilitado = "0"
         End If
 
     End Sub

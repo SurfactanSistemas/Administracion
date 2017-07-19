@@ -16,7 +16,7 @@ Public Class DAOProveedor
                                       proveedor.cufe3, proveedor.dirCUFE1, proveedor.dirCUFE2, proveedor.dirCUFE3, _
                                       proveedor.PaginaWeb(0).ToString, proveedor.contacto1(0).ToString, proveedor.contacto1(1).ToString, proveedor.contacto1(2).ToString, proveedor.contacto1(3).ToString, _
                                       proveedor.contacto2(0).ToString, proveedor.contacto2(1).ToString, proveedor.contacto2(2).ToString, proveedor.contacto2(3).ToString, _
-                                      proveedor.contacto3(0).ToString, proveedor.contacto3(1).ToString, proveedor.contacto3(2).ToString, proveedor.contacto3(3).ToString, proveedor.cliente.id)
+                                      proveedor.contacto3(0).ToString, proveedor.contacto3(1).ToString, proveedor.contacto3(2).ToString, proveedor.contacto3(3).ToString, proveedor.cliente.id, proveedor.Inhabilitado)
         Catch ex As Exception
             Throw New Exception("Error al dar de alta nuevo proveedor")
         End Try
@@ -82,7 +82,8 @@ Public Class DAOProveedor
                             row("ContactoCargo3").ToString,
                             row("ContactoTelefono3").ToString,
                             row("ContactoEmail3").ToString,
-                            DAOCliente.buscarClientePorCodigo(row("ClienteAsociado").ToString)
+                            DAOCliente.buscarClientePorCodigo(row("ClienteAsociado").ToString),
+                            row("Inhabilitado").ToString
                              )
     End Function
 
