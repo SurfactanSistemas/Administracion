@@ -100,7 +100,7 @@ Public Class CuentaCorrientePantalla
         Dim saldo As String = "0,00"
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Saldo, SaldoUs FROM CtaCte WHERE Cliente = '" & Trim(cliente) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT SUM(Saldo) as SaldoTotal FROM CtaCte WHERE Cliente = '" & Trim(cliente) & "'")
         Dim dr As SqlDataReader
 
 
@@ -116,7 +116,7 @@ Public Class CuentaCorrientePantalla
             With dr
                 If .HasRows Then
                     .Read()
-                    saldo = .Item("Saldo")
+                    saldo = .Item("SaldoTotal")
 
                     gbSaldoCtaCliente.Visible = True
                 Else
@@ -136,6 +136,7 @@ Public Class CuentaCorrientePantalla
 
         End Try
 
+        lblClienteAsociado.Text = Trim(cliente)
         lblSaldoCuentaProveedor.Text = "$ " & formatonumerico(saldo, "########0.#0", ".")
     End Sub
 
@@ -397,5 +398,23 @@ Public Class CuentaCorrientePantalla
 
         ' Sacamos de vista los resultados filtrados.
         filtrado.Visible = False
+    End Sub
+
+    Private Sub lblSaldoCuentaProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblSaldoCuentaProveedor.MouseDoubleClick
+        _AbrirDetallesFactura()
+    End Sub
+
+    Private Sub _AbrirDetallesFactura()
+        With CtaCtePrvPantallaDetallesCliente
+            .Cliente = lblClienteAsociado.Text
+            .SaldoTotal = lblSaldoCuentaProveedor.Text
+
+            .ShowDialog()
+            .Dispose()
+        End With
+    End Sub
+
+    Private Sub lblClienteAsociado_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblClienteAsociado.MouseDoubleClick
+        _AbrirDetallesFactura()
     End Sub
 End Class

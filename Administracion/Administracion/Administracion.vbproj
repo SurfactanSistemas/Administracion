@@ -223,6 +223,12 @@
     <Compile Include="Listados\ConsultaDatosFactura.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\CtaCtePrvPantallaDetallesCliente.Designer.vb">
+      <DependentUpon>CtaCtePrvPantallaDetallesCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CtaCtePrvPantallaDetallesCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPreparacion.Designer.vb">
       <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivoPreparacion.vb</DependentUpon>
     </Compile>
@@ -748,6 +754,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ConsultaDatosFactura.resx">
       <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CtaCtePrvPantallaDetallesCliente.resx">
+      <DependentUpon>CtaCtePrvPantallaDetallesCliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPreparacion.resx">
       <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivoPreparacion.vb</DependentUpon>

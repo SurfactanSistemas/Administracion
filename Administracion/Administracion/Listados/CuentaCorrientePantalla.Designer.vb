@@ -23,14 +23,14 @@ Partial Class CuentaCorrientePantalla
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRilla = New System.Windows.Forms.DataGridView()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -51,6 +51,7 @@ Partial Class CuentaCorrientePantalla
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.gbSaldoCtaCliente = New System.Windows.Forms.GroupBox()
+        Me.lblClienteAsociado = New Administracion.CustomLabel()
         Me.lblSaldoCuentaProveedor = New Administracion.CustomLabel()
         Me.CBProveedorSelectivo = New System.Windows.Forms.CheckBox()
         Me.btnCancela = New Administracion.CustomButton()
@@ -81,8 +82,8 @@ Partial Class CuentaCorrientePantalla
         '
         'Tipo
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle9
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
@@ -90,8 +91,8 @@ Partial Class CuentaCorrientePantalla
         '
         'Letra
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Letra.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Letra.DefaultCellStyle = DataGridViewCellStyle10
         Me.Letra.HeaderText = "Letra"
         Me.Letra.Name = "Letra"
         Me.Letra.ReadOnly = True
@@ -99,8 +100,8 @@ Partial Class CuentaCorrientePantalla
         '
         'Punto
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle11
         Me.Punto.HeaderText = "Punto"
         Me.Punto.Name = "Punto"
         Me.Punto.ReadOnly = True
@@ -108,40 +109,40 @@ Partial Class CuentaCorrientePantalla
         '
         'Numero
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle12
         Me.Numero.HeaderText = "Numero"
         Me.Numero.Name = "Numero"
         Me.Numero.ReadOnly = True
         '
         'Importe
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle13
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
         Me.Importe.ReadOnly = True
         '
         'Saldo
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle14
         Me.Saldo.HeaderText = "Saldo"
         Me.Saldo.Name = "Saldo"
         Me.Saldo.ReadOnly = True
         '
         'Fecha
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle15
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
         '
         'Vencimiento
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle16
         Me.Vencimiento.HeaderText = "Vencimiento"
         Me.Vencimiento.Name = "Vencimiento"
         Me.Vencimiento.ReadOnly = True
@@ -265,16 +266,33 @@ Partial Class CuentaCorrientePantalla
         '
         'gbSaldoCtaCliente
         '
+        Me.gbSaldoCtaCliente.Controls.Add(Me.lblClienteAsociado)
         Me.gbSaldoCtaCliente.Controls.Add(Me.lblSaldoCuentaProveedor)
         Me.gbSaldoCtaCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbSaldoCtaCliente.ForeColor = System.Drawing.SystemColors.Control
-        Me.gbSaldoCtaCliente.Location = New System.Drawing.Point(568, 39)
+        Me.gbSaldoCtaCliente.Location = New System.Drawing.Point(557, 39)
         Me.gbSaldoCtaCliente.Name = "gbSaldoCtaCliente"
-        Me.gbSaldoCtaCliente.Size = New System.Drawing.Size(189, 43)
+        Me.gbSaldoCtaCliente.Size = New System.Drawing.Size(207, 43)
         Me.gbSaldoCtaCliente.TabIndex = 1
         Me.gbSaldoCtaCliente.TabStop = False
         Me.gbSaldoCtaCliente.Text = "Saldo Cuenta Cliente"
+        Me.ToolTip1.SetToolTip(Me.gbSaldoCtaCliente, "Cliente Asociado (Doble Click para abrir Facturas)")
         Me.gbSaldoCtaCliente.Visible = False
+        '
+        'lblClienteAsociado
+        '
+        Me.lblClienteAsociado.AutoSize = True
+        Me.lblClienteAsociado.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.lblClienteAsociado.ControlAssociationKey = -1
+        Me.lblClienteAsociado.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblClienteAsociado.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblClienteAsociado.Location = New System.Drawing.Point(34, 17)
+        Me.lblClienteAsociado.Name = "lblClienteAsociado"
+        Me.lblClienteAsociado.Size = New System.Drawing.Size(26, 18)
+        Me.lblClienteAsociado.TabIndex = 32
+        Me.lblClienteAsociado.Text = "      "
+        Me.lblClienteAsociado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ToolTip1.SetToolTip(Me.lblClienteAsociado, "Cliente Asociado (Doble Click para abrir Facturas)")
         '
         'lblSaldoCuentaProveedor
         '
@@ -283,13 +301,14 @@ Partial Class CuentaCorrientePantalla
         Me.lblSaldoCuentaProveedor.ControlAssociationKey = -1
         Me.lblSaldoCuentaProveedor.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblSaldoCuentaProveedor.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblSaldoCuentaProveedor.Location = New System.Drawing.Point(44, 16)
+        Me.lblSaldoCuentaProveedor.Location = New System.Drawing.Point(97, 15)
         Me.lblSaldoCuentaProveedor.MinimumSize = New System.Drawing.Size(100, 20)
         Me.lblSaldoCuentaProveedor.Name = "lblSaldoCuentaProveedor"
         Me.lblSaldoCuentaProveedor.Size = New System.Drawing.Size(100, 20)
         Me.lblSaldoCuentaProveedor.TabIndex = 31
         Me.lblSaldoCuentaProveedor.Text = "0.00"
         Me.lblSaldoCuentaProveedor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ToolTip1.SetToolTip(Me.lblSaldoCuentaProveedor, "Cliente Asociado (Doble Click para abrir Facturas)")
         '
         'CBProveedorSelectivo
         '
@@ -493,4 +512,5 @@ Partial Class CuentaCorrientePantalla
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
     Friend WithEvents gbSaldoCtaCliente As System.Windows.Forms.GroupBox
     Friend WithEvents lblSaldoCuentaProveedor As Administracion.CustomLabel
+    Friend WithEvents lblClienteAsociado As Administracion.CustomLabel
 End Class
