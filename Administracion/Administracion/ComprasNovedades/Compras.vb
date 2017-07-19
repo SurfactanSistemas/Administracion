@@ -1219,7 +1219,7 @@ Public Class Compras
             If txtIVA21.Enabled Then
                 _SaltarA(txtIVA21)
             Else
-                _SaltarA(txtTotal)
+                _SaltarA(txtDespacho)
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
