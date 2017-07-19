@@ -83,7 +83,8 @@ Public Class Compras
             Try
                 proveedorAMostrar = DAOProveedor.buscarProveedorPorCodigo(proveedorAMostrar.id)
             Catch ex As Exception
-                MsgBox("")
+                'MsgBox("")
+                Exit Sub
             End Try
         End If
         If Not optNacion.Checked Then
@@ -111,8 +112,12 @@ Public Class Compras
         If Trim(proveedor.cai) <> "" And Val(proveedor.vtoCAI.Replace("/", "")) > 0 Then
             If _CAIVencido(proveedor.vtoCAI) Then
                 txtCAI.Text = proveedor.cai
-                txtVtoCAI.Text = proveedor.vtoCAI
-                _HabilitarCAI()
+                txtVtoCAI.Text = Proceso._Normalizarfecha(proveedor.vtoCAI)
+
+                If CBLetra.SelectedItem = "C" Then
+                    _HabilitarCAI()
+                End If
+
             Else
                 _DeshabilitarCAI()
             End If
@@ -213,6 +218,7 @@ Public Class Compras
     End Sub
 
     Private Sub txtImporte_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIVARG.Leave, txtPercIB.Leave, txtNoGravado.Leave, txtIVA27.Leave, txtIVA21.Leave, txtIVA10.Leave
+        If esModificacion Then : Exit Sub : End If
         Dim total As Double = calculoTotal()
         txtTotal.Text = CustomConvert.toStringWithTwoDecimalPlaces(Math.Round(total, 2))
     End Sub
@@ -371,7 +377,7 @@ Public Class Compras
         End If
         Dim interno As Integer = CustomConvert.toIntOrZero(txtNroInterno.Text)
         If interno = 0 Then : interno = DAOCompras.siguienteNumeroDeInterno() : End If
-        Dim compra As New Compra(interno, proveedor, cmbTipo.SelectedIndex + 1, cmbTipo.Text, cmbFormaPago.SelectedIndex,
+        Dim compra As New Compra(interno, proveedor, ceros(cmbTipo.SelectedIndex, 2), cmbTipo.Text, cmbFormaPago.SelectedIndex,
                                  tipoPago(), CBLetra.SelectedItem, txtPunto.Text, txtNumero.Text, txtFechaEmision.Text, txtFechaIVA.Text, txtFechaVto1.Text, txtFechaVto2.Text,
                                  asDouble(txtParidad.Text), asDouble(txtNeto.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA21.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtIVARG.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA27.Text) * multiplicadorPorNotaDeCredito,
@@ -435,23 +441,7 @@ Public Class Compras
     End Sub
 
     Private Function _Normalizarfecha(ByVal fecha As String) As String
-        Dim xfecha As String = ""
-        Dim _temp As String = fecha
-        Dim _Fecha As String() = fecha.Split("/")
-
-        Try
-            _Fecha(0) = Val(_Fecha(0)).ToString()
-            _Fecha(1) = Val(_Fecha(1)).ToString()
-            _Fecha(2) = Val(_Fecha(2)).ToString()
-
-            xfecha = String.Join("/", _Fecha)
-
-            xfecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
-        Catch ex As Exception
-            xfecha = _temp
-        End Try
-
-        Return xfecha
+        Return Proceso._Normalizarfecha(fecha)
     End Function
 
     Private Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
@@ -525,33 +515,33 @@ Public Class Compras
     End Function
 
     Private Sub crearAsientoContableUsando(ByVal cuenta As CuentaContable)
-        'If Not esModificacion Then
-        gridAsientos.Rows.Clear()
-        txtTotal.Text = calculoTotal()
-        Dim total As Double = asDouble(txtTotal.Text)
-        Dim sumaIvas As Double = asDouble(txtIVA10.Text) + asDouble(txtIVA21.Text) + asDouble(txtIVA27.Text)
-        Dim ivaRG3337 As Double = asDouble(txtIVARG.Text)
-        Dim ingresosBrutos As Double = asDouble(txtPercIB.Text)
-        Dim diferencia As Double = total - sumaIvas - ingresosBrutos - ivaRG3337
+        If Not esModificacion Then
+            gridAsientos.Rows.Clear()
+            txtTotal.Text = calculoTotal()
+            Dim total As Double = asDouble(txtTotal.Text)
+            Dim sumaIvas As Double = asDouble(txtIVA10.Text) + asDouble(txtIVA21.Text) + asDouble(txtIVA27.Text)
+            Dim ivaRG3337 As Double = asDouble(txtIVARG.Text)
+            Dim ingresosBrutos As Double = asDouble(txtPercIB.Text)
+            Dim diferencia As Double = total - sumaIvas - ingresosBrutos - ivaRG3337
 
-        If esNotaDeCredito() Then
-            If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, total, "") : End If
-            If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, "", sumaIvas) : End If
-            If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, "", ivaRG3337) : End If
-            If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, "", ingresosBrutos) : End If
-            If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", "", diferencia) : End If
-        Else
-            If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, "", total) : End If
-            If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, sumaIvas, "") : End If
-            If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, ivaRG3337, "") : End If
-            If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, ingresosBrutos, "") : End If
-            If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", diferencia, 0) : End If
+            If esNotaDeCredito() Then
+                If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, total, "") : End If
+                If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, "", sumaIvas) : End If
+                If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, "", ivaRG3337) : End If
+                If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, "", ingresosBrutos) : End If
+                If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", "", diferencia) : End If
+            Else
+                If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, "", total) : End If
+                If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, sumaIvas, "") : End If
+                If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, ivaRG3337, "") : End If
+                If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, ingresosBrutos, "") : End If
+                If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", diferencia, 0) : End If
+            End If
+
+            _DarFormatoValoresGrilla()
+
+            calcularAsiento()
         End If
-
-        _DarFormatoValoresGrilla()
-
-        calcularAsiento()
-        'End If
     End Sub
 
     Private Sub _DarFormatoValoresGrilla()
@@ -566,6 +556,7 @@ Public Class Compras
     Private Sub calcularAsiento()
         Dim valorDebe As Double = 0
         Dim valorHaber As Double = 0
+
         For Each row As DataGridViewRow In gridAsientos.Rows
             valorDebe += asDouble(row.Cells(2).Value)
             valorHaber += asDouble(row.Cells(3).Value)
@@ -597,6 +588,7 @@ Public Class Compras
     Private Sub mostrarCompra(ByVal compra As Compra)
         txtNroInterno.Text = compra.nroInterno
         mostrarProveedor(compra.proveedor)
+        esModificacion = True
         txtTipo.Text = compra.tipoDocumento
 
         If compra.tipoDocumento >= 0 Then
@@ -629,7 +621,6 @@ Public Class Compras
         txtImporte_Leave(Nothing, Nothing)
         mostrarImputaciones(compra.imputaciones)
         calcularAsiento()
-        esModificacion = True
     End Sub
 
     Private Sub traerValoresIb(ByVal nroInterno As String)
@@ -791,15 +782,14 @@ Public Class Compras
     End Sub
 
     Private Sub txtCodigoProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigoProveedor.MouseDoubleClick
-        If Trim(txtCodigoProveedor.Text) = "" Then
-            Dim consulta As New ConsultaCompras(Me, True)
-            consulta.ShowDialog()
-            If Trim(txtNombreProveedor.Text) <> "" And Trim(txtCodigoProveedor.Text) <> "" Then
-                If Trim(txtCAI.Text) <> "" Then
-                    txtPunto.Focus()
-                Else
-                    txtCAI.Focus()
-                End If
+
+        Dim consulta As New ConsultaCompras(Me, True)
+        consulta.ShowDialog()
+        If Trim(txtNombreProveedor.Text) <> "" And Trim(txtCodigoProveedor.Text) <> "" Then
+            If Trim(txtCAI.Text) <> "" Then
+                txtPunto.Focus()
+            Else
+                txtCAI.Focus()
             End If
         End If
     End Sub
@@ -812,7 +802,10 @@ Public Class Compras
             Next
             txtTotal.Enabled = True
 
-            _HabilitarCAI()
+
+            If Trim(txtCAI.Text) <> "" And Trim(txtVtoCAI.Text.Replace("/", "")) <> "" Then
+                _HabilitarCAI()
+            End If
 
         Else
             For Each _c In _controles
@@ -954,7 +947,11 @@ Public Class Compras
     Private Sub txtFechaEmision_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaEmision.KeyDown
 
         If e.KeyData = Keys.Enter Then
+
+
+
             Try
+                If esModificacion Then : Exit Try : End If
                 ' Validamos que se cargue una fecha de emisión.
                 If Trim(txtFechaEmision.Text.Replace("/", "")) = "" Or Trim(txtFechaEmision.Text).Length < 10 Then
                     txtFechaEmision.Focus()

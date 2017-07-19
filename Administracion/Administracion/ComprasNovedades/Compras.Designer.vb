@@ -394,6 +394,7 @@ Partial Class Compras
         Me.txtCAI.TabIndex = 35
         Me.txtCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCAI.Validator = Administracion.ValidatorType.None
+        Me.txtCAI.Visible = False
         '
         'lblCredito
         '
