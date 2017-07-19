@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports Microsoft.Office.Interop
 
 Public Class Recibos
 
@@ -14,7 +15,7 @@ Public Class Recibos
 
     ' Variables para impresion de Recibo.
     Dim WRazon, WDireccion, WLocalidad, WProvincia, WPostal, _
-            WRecibo, WFecha, WCliente As String
+            WRecibo, WFecha, WCliente, WEmail As String
 
     ' Variables Auxiliares
     Private _Provincia As Integer = 0
@@ -562,23 +563,23 @@ Public Class Recibos
                         _ComprobanteRetSuss = dr.Item("ComproSuss")
                         txtRetIB.Text = _NormalizarNumero(dr.Item("RetOtra"))
                         'txtParidad.Text = IIf(IsDBNull(dr.Item("Paridad")), "", dr.Item("Paridad"))
-                        _RetIB1 = dr.Item("RetIb1")
-                        _CompIB1 = dr.Item("NroRetIb1")
-                        _RetIB2 = dr.Item("RetIb2")
-                        _CompIB2 = dr.Item("NroRetIb2")
-                        _RetIB3 = dr.Item("RetIb3")
-                        _CompIB3 = dr.Item("NroRetIb3")
-                        _RetIB4 = dr.Item("RetIb4")
-                        _CompIB4 = dr.Item("NroRetIb4")
-                        _RetIB5 = dr.Item("RetIb5")
-                        _CompIB5 = dr.Item("NroRetIb5")
-                        _RetIB6 = dr.Item("RetIb6")
-                        _CompIB6 = dr.Item("NroRetIb6")
-                        _RetIB7 = dr.Item("RetIb7")
-                        _CompIB7 = dr.Item("NroRetIb7")
-                        _RetIB8 = dr.Item("RetIb8")
-                        _CompIB8 = dr.Item("NroRetIb8")
-                        txtProvi.Text = dr.Item("Provisorio")
+                        _RetIB1 = IIf(IsDBNull(dr.Item("RetIb1")), "", dr.Item("RetIb1"))
+                        _CompIB1 = IIf(IsDBNull(dr.Item("NroRetIb1")), "", dr.Item("NroRetIb1"))
+                        _RetIB2 = IIf(IsDBNull(dr.Item("RetIb2")), "", dr.Item("RetIb2"))
+                        _CompIB2 = IIf(IsDBNull(dr.Item("NroRetIb2")), "", dr.Item("NroRetIb2"))
+                        _RetIB3 = IIf(IsDBNull(dr.Item("RetIb3")), "", dr.Item("RetIb3"))
+                        _CompIB3 = IIf(IsDBNull(dr.Item("NroRetIb3")), "", dr.Item("NroRetIb3"))
+                        _RetIB4 = IIf(IsDBNull(dr.Item("RetIb4")), "", dr.Item("RetIb4"))
+                        _CompIB4 = IIf(IsDBNull(dr.Item("NroRetIb4")), "", dr.Item("NroRetIb4"))
+                        _RetIB5 = IIf(IsDBNull(dr.Item("RetIb5")), "", dr.Item("RetIb5"))
+                        _CompIB5 = IIf(IsDBNull(dr.Item("NroRetIb5")), "", dr.Item("NroRetIb5"))
+                        _RetIB6 = IIf(IsDBNull(dr.Item("RetIb6")), "", dr.Item("RetIb6"))
+                        _CompIB6 = IIf(IsDBNull(dr.Item("NroRetIb6")), "", dr.Item("NroRetIb6"))
+                        _RetIB7 = IIf(IsDBNull(dr.Item("RetIb7")), "", dr.Item("RetIb7"))
+                        _CompIB7 = IIf(IsDBNull(dr.Item("NroRetIb7")), "", dr.Item("NroRetIb7"))
+                        _RetIB8 = IIf(IsDBNull(dr.Item("RetIb8")), "", dr.Item("RetIb8"))
+                        _CompIB8 = IIf(IsDBNull(dr.Item("NroRetIb8")), "", dr.Item("NroRetIb8"))
+                        txtProvi.Text = IIf(IsDBNull(dr.Item("Provisorio")), "", dr.Item("Provisorio"))
 
                     End If
 
@@ -818,7 +819,7 @@ Public Class Recibos
 
     Private Sub mostrarCliente(ByVal cliente As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal " _
+        Dim cm As SqlCommand = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal, c.Email " _
                                               & " FROM Cliente as c, Provincia as p WHERE c.Cliente = '" & cliente & "' AND p.Provincia = c.Provincia")
         Dim dr As SqlDataReader
 
@@ -840,6 +841,7 @@ Public Class Recibos
                 WLocalidad = dr.Item("Localidad")
                 WProvincia = dr.Item("Nombre")
                 WPostal = dr.Item("Postal")
+                WEmail = dr.Item("Email")
             Else
                 MsgBox("El cliente especificado, no existe. Compruebe y vuelva a intentarlo.")
             End If
@@ -2577,7 +2579,7 @@ Public Class Recibos
                     End If
 
                     If iCol = 0 And iRow > -1 Then
-                        
+
 
                     Else
 
@@ -3242,12 +3244,85 @@ Public Class Recibos
 
         crdoc.SetDataSource(table)
 
-        _Imprimir(crdoc)
-        '_VistaPrevia(crdoc)
+        If Trim(WEmail) <> "" Then
+
+            If MsgBox("¿Desea enviar una copia del recibo por email a: " & Trim(WEmail) & " ?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+
+                crdoc = New ReciboDefinitivo ' ACA CAMBIAR POR EL MODELO IMPRESO.
+                crdoc.SetDataSource(table)
+
+                _EnviarReciboPorEmail(crdoc, WEmail)
+
+                Exit Sub
+            End If
+
+        End If
+
+        '_Imprimir(crdoc, 2)
+        _VistaPrevia(crdoc)
+
+
     End Sub
 
-    Private Sub _Imprimir(ByVal crdoc As ReportDocument)
-        crdoc.PrintToPrinter(1, True, 0, 0)
+    Private Sub _EnviarReciboPorEmail(ByVal crdoc As ReportDocument, ByVal WEmail As String)
+        Dim archivo As String = "Recibo" & Trim(txtRecibo.Text) & ".pdf"
+        Dim ruta As String = Application.StartupPath & "/"
+
+        ' Guardamos el archivo.
+        crdoc.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & archivo)
+
+        ' Confirmamos que se haya guardado correctamente el archivo.
+        If Not System.IO.File.Exists(ruta & archivo) Then
+            Exit Sub
+        End If
+
+        Try
+            ' Enviamos por email e imprimimos una copia.
+            _EnviarEmail("gferreyra@surfactan.com.ar", "gferreyra@surfactan.com.ar", "Recibo Nº " & Trim(txtRecibo.Text), "Recibo Nº " & Trim(txtRecibo.Text), ruta & archivo)
+
+            '_Imprimir(crdoc, 1)
+            _VistaPrevia(crdoc)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjunto As String)
+        Dim _Outlook As New Outlook.Application
+
+        Try
+            Dim _Mail As Outlook.MailItem = _Outlook.CreateItem(Outlook.OlItemType.olMailItem)
+
+            With _Mail
+
+                .To = _to
+                .BCC = _bcc
+                .Subject = _subject
+                .Body = _body
+
+                If Trim(_adjunto) <> "" Then
+                    .Attachments.Add(_adjunto)
+                End If
+
+            End With
+
+            _Mail.Send()
+
+            _Mail = Nothing
+
+            'Me.Close()
+
+        Catch ex As Exception
+            Throw New Exception("Ocurrió un problema al querer enviar el email a los proveedores.")
+        Finally
+            _Outlook = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub _Imprimir(ByVal crdoc As ReportDocument, Optional ByVal cant As Integer = 1)
+        crdoc.PrintToPrinter(cant, True, 0, 0)
     End Sub
 
     Private Sub _VistaPrevia(ByVal crdoc As ReportDocument)
@@ -3911,10 +3986,10 @@ Public Class Recibos
 
         crdoc.SetDataSource(tabla)
 
-        _Imprimir(crdoc)
-        '_VistaPrevia(crdoc)
+        '_Imprimir(crdoc)
+        _VistaPrevia(crdoc)
 
         MsgBox("El interes a pagar es de " + Str$(ZZSuma), MsgBoxStyle.Information, "Emision de Recibos")
-        
+
     End Sub
 End Class
