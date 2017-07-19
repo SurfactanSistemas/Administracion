@@ -499,7 +499,7 @@ Public Class Compras
     End Sub
 
     Private Function esNotaDeCredito()
-        Return txtTipo.Text = "03"
+        Return cmbTipo.SelectedItem = "NC" 'txtTipo.Text = "03"
     End Function
 
     Private Function cuentaIVACredito() As CuentaContable
@@ -1315,7 +1315,7 @@ Public Class Compras
             If gridAsientos.Rows.Count > 0 And Val(txtTotal.Text) <> 0 Then
                 Dim celda As Integer = gridAsientos.Rows.Count - 2
                 gridAsientos.CurrentCell = gridAsientos.Rows(celda).Cells(0) ' REM REVISAR LA RESTA, VON 2 DA INDICE NEGATIVO
-                _TraerSugerenciaDeCuenta(gridAsientos.CurrentCell)
+                '_TraerSugerenciaDeCuenta(gridAsientos.CurrentCell)
                 gridAsientos.Select()
             End If
         ElseIf e.KeyData = Keys.Escape Then

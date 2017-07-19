@@ -901,7 +901,7 @@ Partial Class Compras
         Me.cmbTipo.Empty = False
         Me.cmbTipo.EnterIndex = 3
         Me.cmbTipo.FormattingEnabled = True
-        Me.cmbTipo.Items.AddRange(New Object() {"FC", "ND", "NC"})
+        Me.cmbTipo.Items.AddRange(New Object() {"", "FC", "ND", "NC"})
         Me.cmbTipo.LabelAssociationKey = 4
         Me.cmbTipo.Location = New System.Drawing.Point(143, 40)
         Me.cmbTipo.Name = "cmbTipo"
