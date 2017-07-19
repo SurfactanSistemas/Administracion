@@ -599,10 +599,10 @@ Public Class Compras
         mostrarProveedor(compra.proveedor)
         txtTipo.Text = compra.tipoDocumento
 
-        If compra.tipoDocumento > 0 Then
+        If compra.tipoDocumento >= 0 Then
             cmbTipo.SelectedIndex = compra.tipoDocumento
         Else
-            cmbTipo.SelectedIndex = 1
+            cmbTipo.SelectedIndex = 0
         End If
 
         CBLetra.SelectedItem = compra.letra
