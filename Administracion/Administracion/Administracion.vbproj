@@ -549,6 +549,12 @@
       <DependentUpon>ControlDeFacturacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ReciboDefinitivoEmail.vb">
+      <DependentUpon>ReciboDefinitivoEmail.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\DepositoBancario2.vb">
       <DependentUpon>DepositoBancario2.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -914,6 +920,10 @@
     <EmbeddedResource Include="Reportes\ControlDeFacturacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ControlDeFacturacion.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReciboDefinitivoEmail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReciboDefinitivoEmail.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\DepositoBancario2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1433,6 +1443,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogoSurfactan.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

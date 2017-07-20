@@ -94,6 +94,16 @@
 
     End Function
 
+    Public Function formatonumerico(ByVal valor As String)
+
+        valor = IIf(Trim(valor) = "", "0", Trim(valor))
+
+        valor = valor.Replace(".", ",")
+
+        ' Redondeamos a dos decimales con "." como separador de decimales.
+        Return formatonumerico(CDbl(valor), "########0.#0", ".")
+
+    End Function
 
     Public Function formatonumerico(ByVal valor As Double, ByVal formato As String, ByVal formatoII As String)
 

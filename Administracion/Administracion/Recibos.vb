@@ -765,21 +765,9 @@ Public Class Recibos
     End Sub
 
     Private Function _NormalizarNumero(ByVal numero As String) As String
-        numero = IIf(Trim(numero) = "", "0", Trim(numero))
 
-        If numero.Contains(".") Then
-            Return Proceso.formatonumerico(numero.Replace(".", ","), "########0.#0", ".")
-        Else
-            Return Proceso.formatonumerico(CDbl(numero), "########0.#0", ".")
-        End If
+        Return Proceso.formatonumerico(numero)
 
-        'If numero.Contains(",") Then
-        '    numero = String.Format("{0:F2}", CDbl(numero)).Replace(",", ".")
-        'ElseIf Not numero.Contains(".") Then
-        '    numero &= ".00"
-        'End If
-
-        'Return numero
     End Function
 
     Private Function _SumarCreditos() As Boolean
@@ -3141,7 +3129,49 @@ Public Class Recibos
         Dim table As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument
+        Dim cantidad As Integer = 2
+        Dim enviarEmail As Boolean = False
         crdoc = New ReciboDefinitivo
+
+        If Trim(WEmail) <> "" Then
+
+            If MsgBox("¿Desea enviar una copia del recibo por email a: " & Trim(WEmail) & " ?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+
+                crdoc = New ReciboDefinitivoEmail
+
+                cantidad = 2
+
+                enviarEmail = True
+
+                Dim ultimo As Integer = 1
+                Dim WTemp(22, 5) As String
+                For i = 5 To 22
+                    WTemp(ultimo, 1) = WEntra(i, 12)
+                    WTemp(ultimo, 2) = WEntra(i, 13)
+                    WTemp(ultimo, 3) = WEntra(i, 14)
+                    WTemp(ultimo, 4) = WEntra(i, 15)
+                    WTemp(ultimo, 5) = WEntra(i, 16)
+                    ultimo += 1
+                Next
+
+                For u = 1 To 22
+                    If WEntra(u, 11) = "" And WEntra(u, 10) <> "" Then
+                        WEntra(u, 11) = " $ "
+                    End If
+
+                    WEntra(u, 12) = WTemp(u, 1)
+                    WEntra(u, 13) = WTemp(u, 2)
+                    WEntra(u, 14) = WTemp(u, 3)
+                    WEntra(u, 15) = WTemp(u, 4)
+                    WEntra(u, 16) = WTemp(u, 5)
+                Next
+
+                WEntra(24, 9) = RSet("TOTAL", 40)
+                WEntra(24, 11) = " $ "
+
+            End If
+
+        End If
 
         ' Creo las Columnas
         _PrepararTabla(table)
@@ -3256,21 +3286,19 @@ Public Class Recibos
 
         crdoc.SetDataSource(table)
 
-        If Trim(WEmail) <> "" Then
 
-            If MsgBox("¿Desea enviar una copia del recibo por email a: " & Trim(WEmail) & " ?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
-
-                crdoc = New ReciboDefinitivo ' ACA CAMBIAR POR EL MODELO IMPRESO.
-                crdoc.SetDataSource(table)
-
+        If enviarEmail Then
+            Try
                 _EnviarReciboPorEmail(crdoc, WEmail)
-
-                Exit Sub
-            End If
-
+            Catch ex As Exception ' En caso de que por alguna razoón no se haya podido enviar el email, se realizan las dos impresiones como se venia haciendo.
+                MsgBox(ex.Message _
+                      & vbCrLf & vbCrLf & vbCrLf & vbCrLf _
+                      & "Se realizarán las dos impresiones normales.")
+                cantidad = 2
+            End Try
         End If
 
-        '_Imprimir(crdoc, 2)
+        '_Imprimir(crdoc, cantidad)
         _VistaPrevia(crdoc)
 
 
@@ -3281,15 +3309,21 @@ Public Class Recibos
         Dim ruta As String = Application.StartupPath & "/"
         Dim _to, _bcc, _asunto, _mensaje, _adjunto As String
 
-        ' Guardamos el archivo.
-        crdoc.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & archivo)
+        Try
+            ' Guardamos el archivo.
+            crdoc.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & archivo)
 
-        ' Confirmamos que se haya guardado correctamente el archivo.
-        If Not System.IO.File.Exists(ruta & archivo) Then
+            ' Confirmamos que se haya guardado correctamente el archivo.
+            If Not System.IO.File.Exists(ruta & archivo) Then
+                Throw New Exception
+            End If
+        Catch ex As Exception
+            Throw New Exception("No se pudo generar el archivo PDF del Recibo. Se detiene el envio por email del mismo.")
             Exit Sub
-        End If
+        End Try
 
         Try
+            
             _to = "gferreyra@surfactan.com.ar" ' trim(WEmail)
             _bcc = _to ' CONSULTAR SI SE AGREGA ESTO O NO.
             _asunto = "Recibo Nº " & Trim(txtRecibo.Text)
@@ -3299,10 +3333,8 @@ Public Class Recibos
             ' Enviamos por email e imprimimos una copia.
             _EnviarEmail(_to, _bcc, _asunto, _mensaje, _adjunto)
 
-            '_Imprimir(crdoc, 1)
-            _VistaPrevia(crdoc)
         Catch ex As Exception
-            MsgBox(ex.Message)
+            Throw New Exception("No se pudo enviar el E-Mail.")
         End Try
 
     End Sub
