@@ -135,11 +135,8 @@
     <Compile Include="Capa DAO\DaoAcumulado.vb" />
     <Compile Include="Capa DAO\DAOCliente.vb" />
     <Compile Include="Capa DAO\DAOCierreMes.vb" />
-    <Compile Include="Capa DAO\DAOCompras.vb" />
     <Compile Include="Capa DAO\DAOCtaCteProveedor.vb" />
     <Compile Include="Capa DAO\DAODeposito.vb" />
-    <Compile Include="Capa DAO\DAOPagos.vb" />
-    <Compile Include="Capa DAO\DAOProveedor.vb" />
     <Compile Include="Capa DAO\DAORecibo.vb" />
     <Compile Include="Capa DAO\DAORubroProveedor.vb" />
     <Compile Include="Capa DAO\DAOBanco.vb" />

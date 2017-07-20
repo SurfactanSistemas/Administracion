@@ -85,12 +85,19 @@
         Dim filtrado As ListBox = CLBFiltrado
         Dim texto As TextBox = txtConsulta
 
+<<<<<<< HEAD
+
+        If Trim(filtrado.SelectedItem) = "" Then
+=======
         If Trim(filtrado.SelectedItem.ToString) = "" Then
+>>>>>>> ba7d4236a1a22a6222a3b3a1051456fff729d170
             Exit Sub
+
         End If
 
         ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
         origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
+
 
         ' Llamamos al evento que tenga asosiado el control de origen.
         lstConsulta_Click(Nothing, Nothing)
@@ -99,6 +106,7 @@
         ' Sacamos de vista los resultados filtrados.
         filtrado.Visible = False
         texto.Text = ""
+
     End Sub
 
     Private Sub txtConsulta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtConsulta.TextChanged

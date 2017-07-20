@@ -65,6 +65,7 @@ Public Class ReportViewer
     End Sub
 
     Public Sub imprimirReporte()
+        reporte.Refresh()
         reporte.PrintToPrinter(1, False, 1, 1)
     End Sub
 
