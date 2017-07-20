@@ -2,7 +2,7 @@
     Public id As String
     Public razon As String
 
-    Public Sub New(ByVal cliente2 As String, ByVal razon2 As String)
+    Public Sub New(Optional ByVal cliente2 As String = "", Optional ByVal razon2 As String = "")
         id = cliente2
         razon = razon2
     End Sub

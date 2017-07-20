@@ -176,48 +176,29 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Sub _ListarProveedores()
-        Dim _Proveedores As New List(Of Object)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor")
-        Dim dr As SqlDataReader
+        Dim _Proveedores As List(Of Proveedor) = DAOProveedor.buscarProveedoresActivoPorNombre()
         Dim item As String = ""
 
-        SQLConnector.conexionSql(cn, cm)
+        If _Proveedores.Count > 0 Then
 
-        Try
+            lstAyuda.Items.Clear()
+            _Claves.Clear()
 
-            dr = cm.ExecuteReader()
+            For Each _prv As Proveedor In _Proveedores
 
-            If dr.HasRows Then
+                item = ceros(_prv.id, 11) & "    " & _prv.razonSocial
 
-                lstAyuda.Items.Clear()
-                _Claves.Clear()
+                lstAyuda.Items.Add(item)
 
-                Do While dr.Read()
+                _Claves.Add({item, _prv.id})
 
-                    item = ceros(dr.Item("Proveedor"), 11) & "    " & dr.Item("Nombre")
+            Next
 
-                    lstAyuda.Items.Add(item)
-
-                    _Claves.Add({item, dr.Item("Proveedor")})
-
-                Loop
-
-                _HabilitarConsulta()
-            Else
-                _DeshabilitarConsulta()
-            End If
-
-        Catch ex As Exception
+            _HabilitarConsulta()
+        Else
             _DeshabilitarConsulta()
-        Finally
+        End If
 
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
     End Sub
 
     Private Sub txtAyuda_KeyPress(ByVal sender As Object, _

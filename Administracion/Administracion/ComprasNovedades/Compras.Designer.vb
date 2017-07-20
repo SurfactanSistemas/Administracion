@@ -394,6 +394,7 @@ Partial Class Compras
         Me.txtCAI.TabIndex = 35
         Me.txtCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCAI.Validator = Administracion.ValidatorType.None
+        Me.txtCAI.Visible = False
         '
         'lblCredito
         '
@@ -757,6 +758,7 @@ Partial Class Compras
         Me.txtTotal.LabelAssociationKey = 18
         Me.txtTotal.Location = New System.Drawing.Point(367, 195)
         Me.txtTotal.Name = "txtTotal"
+        Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(76, 20)
         Me.txtTotal.TabIndex = 46
         Me.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right

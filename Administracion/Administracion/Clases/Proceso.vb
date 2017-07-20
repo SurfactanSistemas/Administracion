@@ -47,7 +47,7 @@
         B1 = redondeoii * 10000
         Valor = Int(B)
         ZZRedondeo = Int(B1)
-        zzRedondeo1 = Int(B) * 100
+        ZZRedondeo1 = Int(B) * 100
         Dife = ZZRedondeo - ZZRedondeo1
         If Dife >= 50 Then Valor = Valor + 1
         txtredondeo = Valor / 100
@@ -369,7 +369,7 @@
                     End If
                 End If
                 varAcumulaIb = varAcumulaIb + redondeo(varRete)
-                varRetIbcaba = varAcumulaIb
+                varRetIbCaba = varAcumulaIb
             End If
         End If
 
@@ -402,7 +402,7 @@
 
     Public Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
         ' Se normaliza la fecha (Ej: 3/04/2000 => 03/04/2000 ó 3/4/2000 => 03/04/2000) y se controla que tenga los ocho digitos obligatoriamente.
-        Return Trim(_Normalizarfecha(fecha)).Replace("/", "").Length = 8
+        Return Trim(_Normalizarfecha(Trim(fecha))).Replace("/", "").Length = 8
     End Function
 
     Public Function _Normalizarfecha(ByVal fecha As String) As String

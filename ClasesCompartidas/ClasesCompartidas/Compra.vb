@@ -1,15 +1,15 @@
 ﻿Public Class Compra
     Public nroInterno As Integer
     Public proveedor As Proveedor
-    Public tipoDocumento, formaPago, tipoPago As Integer
-    Public tipoDocumentoDescripcion, letra, numero, fechaEmision, fechaIVA, fechaVto1, fechaVto2, remito, despacho, punto As String
+    Public formaPago, tipoPago As Integer
+    Public tipoDocumento, tipoDocumentoDescripcion, letra, numero, fechaEmision, fechaIVA, fechaVto1, fechaVto2, remito, despacho, punto As String
     Public paridad, neto, iva21, ivaRG, iva27, percibidoIB, exento, iva105, total As Double
     Public RetIB1, RetIB2, RetIB3, RetIB4, RetIB5, RetIB6, RetIB7, RetIB8, RetIB9, RetIB10, RetIB11, RetIB12, RetIB13, RetIB14 As Double
     Public soloIVA As Integer
     Public imputaciones As List(Of Imputac)
     Public pagoPyme() As Integer = {0, 0, 0}
 
-    Public Sub New(ByVal interno As Integer, ByVal prov As Proveedor, ByVal tipoDoc As Integer, ByVal tipoDocDesc As String,
+    Public Sub New(ByVal interno As Integer, ByVal prov As Proveedor, ByVal tipoDoc As String, ByVal tipoDocDesc As String,
                    ByVal forma As Integer, ByVal tipo As Integer, ByVal letraDoc As String, ByVal punto2 As String, ByVal num As String,
                    ByVal emision As String, ByVal fecIVA As String, ByVal vto1 As String, ByVal vto2 As String, ByVal cotizacion As Double,
                    ByVal importeNeto As Double, ByVal importeIVA21 As Double, ByVal importeIVARG As Double, ByVal importeIVA27 As Double,

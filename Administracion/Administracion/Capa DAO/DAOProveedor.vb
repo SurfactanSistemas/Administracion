@@ -3,7 +3,8 @@
 Public Class DAOProveedor
 
     Public Shared Sub agregarProveedor(ByVal proveedor As Proveedor)
-        SQLConnector.executeProcedure("alta_proveedor", proveedor.id, proveedor.razonSocial, proveedor.direccion, proveedor.localidad, _
+        Try
+            SQLConnector.executeProcedure("alta_proveedor", proveedor.id, proveedor.razonSocial, proveedor.direccion, proveedor.localidad, _
                                       proveedor.provincia, proveedor.codPostal, proveedor.region, proveedor.telefono, proveedor.diasPlazo, _
                                       proveedor.email, proveedor.observaciones, proveedor.cuit, proveedor.tipo, proveedor.codIva, _
                                       proveedor.codigoCuenta, proveedor.nombreCheque, proveedor.condicionIB1, proveedor.condicionIB2, _
@@ -15,7 +16,10 @@ Public Class DAOProveedor
                                       proveedor.cufe3, proveedor.dirCUFE1, proveedor.dirCUFE2, proveedor.dirCUFE3, _
                                       proveedor.PaginaWeb(0).ToString, proveedor.contacto1(0).ToString, proveedor.contacto1(1).ToString, proveedor.contacto1(2).ToString, proveedor.contacto1(3).ToString, _
                                       proveedor.contacto2(0).ToString, proveedor.contacto2(1).ToString, proveedor.contacto2(2).ToString, proveedor.contacto2(3).ToString, _
-                                      proveedor.contacto3(0).ToString, proveedor.contacto3(1).ToString, proveedor.contacto3(2).ToString, proveedor.contacto3(3).ToString)
+                                      proveedor.contacto3(0).ToString, proveedor.contacto3(1).ToString, proveedor.contacto3(2).ToString, proveedor.contacto3(3).ToString, proveedor.cliente.id, proveedor.Inhabilitado)
+        Catch ex As Exception
+            Throw New Exception("Error al dar de alta nuevo proveedor")
+        End Try
     End Sub
 
     Public Shared Sub eliminarProveedor(ByVal codProveedor As String)
@@ -43,7 +47,7 @@ Public Class DAOProveedor
                             intNull(row("provincia")),
                             intNull(row("region")),
                             row("dias").ToString,
-                            intNull(row("tipo")),
+                            intNull(row("tipoprov")),
                             intNull(row("iva")),
                             intNull(row("codib")),
                             intNull(row("codibcaba")),
@@ -64,7 +68,7 @@ Public Class DAOProveedor
                             row("dircufeii").ToString,
                             row("dircufeiii").ToString,
                             DAOCuentaContable.buscarCuentaContablePorCodigo(row("cuenta").ToString),
-                            DAORubroProveedor.buscarRubroProveedorPorCodigo(intNull(row("tipoprov"))),
+                            DAORubroProveedor.buscarRubroProveedorPorCodigo(intNull(row("tipo"))),
                             row("PaginaWeb").ToString,
                             row("ContactoNombre1").ToString,
                             row("ContactoCargo1").ToString,
@@ -77,7 +81,9 @@ Public Class DAOProveedor
                             row("ContactoNombre3").ToString,
                             row("ContactoCargo3").ToString,
                             row("ContactoTelefono3").ToString,
-                            row("ContactoEmail3").ToString
+                            row("ContactoEmail3").ToString,
+                            DAOCliente.buscarClientePorCodigo(row("ClienteAsociado").ToString),
+                            row("Inhabilitado").ToString
                              )
     End Function
 
@@ -97,14 +103,38 @@ Public Class DAOProveedor
         Return provincias
     End Function
 
+    Public Shared Function buscarProveedoresActivoPorNombre(Optional ByVal nombre As String = "")
+        Dim proveedores As New List(Of Proveedor)
+        Dim tabla As DataTable
+        tabla = SQLConnector.retrieveDataTable("buscar_proveedor_por_nombre", nombre)
+        For Each proveedor As DataRow In tabla.Rows
+
+            If _ProveedorActivo(proveedor("Inhabilitado").ToString) Then
+
+                proveedores.Add(New Proveedor(proveedor("codigo"), proveedor("nombre")))
+
+            End If
+
+        Next
+        Return proveedores
+    End Function
+
     Public Shared Function buscarProveedorPorNombre(ByVal nombre As String)
         Dim proveedores As New List(Of Proveedor)
         Dim tabla As DataTable
         tabla = SQLConnector.retrieveDataTable("buscar_proveedor_por_nombre", nombre)
         For Each proveedor As DataRow In tabla.Rows
+
             proveedores.Add(New Proveedor(proveedor("codigo"), proveedor("nombre")))
+
         Next
         Return proveedores
+    End Function
+
+    Public Shared Function _ProveedorActivo(ByVal estado As String) As Boolean
+        Dim _estado As String = IIf(Trim(estado) = "", "0", Trim(estado))
+
+        Return _estado <> "1"
     End Function
 
     Public Shared Function buscarProveedorPorCodigo(ByVal codigo As String)

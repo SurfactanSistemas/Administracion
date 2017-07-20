@@ -123,6 +123,8 @@
     End Sub
 
     Private Sub txtEmail3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEmail3.KeyDown
-        Me.Close()
+        If e.KeyData = Keys.Enter Then
+            Me.Close()
+        End If
     End Sub
 End Class

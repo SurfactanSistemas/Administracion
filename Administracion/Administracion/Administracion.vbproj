@@ -223,6 +223,12 @@
     <Compile Include="Listados\ConsultaDatosFactura.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\CtaCtePrvPantallaDetallesCliente.Designer.vb">
+      <DependentUpon>CtaCtePrvPantallaDetallesCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CtaCtePrvPantallaDetallesCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPreparacion.Designer.vb">
       <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivoPreparacion.vb</DependentUpon>
     </Compile>
@@ -546,8 +552,8 @@
     <Compile Include="Reportes\DepositoBancario2.vb">
       <DependentUpon>DepositoBancario2.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\DepositoBancario.vb">
       <AutoGen>True</AutoGen>
@@ -748,6 +754,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ConsultaDatosFactura.resx">
       <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CtaCtePrvPantallaDetallesCliente.resx">
+      <DependentUpon>CtaCtePrvPantallaDetallesCliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPreparacion.resx">
       <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivoPreparacion.vb</DependentUpon>
@@ -1416,7 +1425,9 @@
   <ItemGroup>
     <None Include="Resources\calendar.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Desactivar.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\check-icon.png" />
   </ItemGroup>

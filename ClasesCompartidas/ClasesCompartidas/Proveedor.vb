@@ -2,10 +2,11 @@
     Public id As String
     Public razonSocial, direccion, codPostal, localidad, telefono, email, observaciones, cuit, nombreCheque, cai, observacionCompleta, cufe1, cufe2, cufe3, diasPlazo, numeroIB, numeroSEDRONAR As String
     Public provincia, region, tipo, codIva, condicionIB1, condicionIB2, categoria, categoriaCalif, tipoInscripcionIB, certificados, estado, calificacion As Nullable(Of Integer)
-    Public vtoSEDRONAR, vtoCategoria, vtoCAI, vtoCertificados, vtoCalificacion, dirCUFE1, dirCUFE2, dirCUFE3 As String
+    Public vtoSEDRONAR, vtoCategoria, vtoCAI, vtoCertificados, vtoCalificacion, dirCUFE1, dirCUFE2, dirCUFE3, Inhabilitado As String
     Public porceIBProvincia, porceIBCABA As Double
     Public cuenta As CuentaContable
     Public rubro As RubroProveedor
+    Public cliente As Cliente
     Public contacto1 As Object
     Public contacto2 As Object
     Public contacto3 As Object
@@ -28,7 +29,7 @@
                    ByVal cufe1Dir As String, ByVal cufe2Dir As String, ByVal cufe3Dir As String, ByVal cuentaContable As CuentaContable, ByVal rubroProv As RubroProveedor,
                    ByVal _PaginaWeb As String, ByVal ContactoNombre1 As String, ByVal ContactoCargo1 As String, ByVal ContactoTelefono1 As String, ByVal ContactoEmail1 As String,
                    ByVal ContactoNombre2 As String, ByVal ContactoCargo2 As String, ByVal ContactoTelefono2 As String, ByVal ContactoEmail2 As String,
-                   ByVal ContactoNombre3 As String, ByVal ContactoCargo3 As String, ByVal ContactoTelefono3 As String, ByVal ContactoEmail3 As String)
+                   ByVal ContactoNombre3 As String, ByVal ContactoCargo3 As String, ByVal ContactoTelefono3 As String, ByVal ContactoEmail3 As String, Optional ByVal _ClienteAsociado As Cliente = Nothing, Optional ByVal _Inhabilitado As String = "0")
 
         id = Trim(codigo)
         razonSocial = Trim(nombre)
@@ -72,8 +73,9 @@
         dirCUFE3 = Trim(cufe3Dir)
         cuenta = cuentaContable
         rubro = rubroProv
+        Inhabilitado = _Inhabilitado
         PaginaWeb = New Object() {_PaginaWeb}
-
+        cliente = _ClienteAsociado
         contacto1 = New Object() {ContactoNombre1, ContactoCargo1, ContactoTelefono1, ContactoEmail1}
         contacto2 = New Object() {ContactoNombre2, ContactoCargo2, ContactoTelefono2, ContactoEmail2}
         contacto3 = New Object() {ContactoNombre3, ContactoCargo3, ContactoTelefono3, ContactoEmail3}

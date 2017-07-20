@@ -20,42 +20,20 @@ Public Class ConsultaRemitos
 
     Private Sub _ListarProveedores()
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor")
-        Dim dr As SqlDataReader
+        Dim proveedores As List(Of Proveedor) = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
-        SQLConnector.conexionSql(cn, cm)
+        If proveedores.Count > 0 Then
+            LBProveedores.Items.Clear()
 
-        Try
+            For Each _prv As Proveedor In proveedores
 
-            dr = cm.ExecuteReader()
+                LBProveedores.Items.Add(_prv.id + SEPARADOR_DE_COLUMNAS + _prv.razonSocial)
 
-            If dr.HasRows Then
+            Next
 
-                LBProveedores.Items.Clear()
-
-                Do While dr.Read()
-
-                    LBProveedores.Items.Add(dr.Item(0) + SEPARADOR_DE_COLUMNAS + dr.Item(1))
-
-                Loop
-
-                dr.Close()
-
-                txtFiltrar.Enabled = True
-                txtFiltrar.Focus()
-
-            End If
-
-        Catch ex As Exception
-            MsgBox("Hubo un problema al querer listar los Proveedores", MsgBoxStyle.Critical)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-
-        End Try
+            txtFiltrar.Enabled = True
+            txtFiltrar.Focus()
+        End If
 
     End Sub
 

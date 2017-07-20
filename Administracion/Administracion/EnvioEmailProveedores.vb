@@ -149,6 +149,7 @@ Public Class EnvioEmailProveedores
         Dim dr As SqlDataReader
         Dim _LimiteDireccionesPorEmail As Integer = 10
         Dim _FechaUltimo As String
+        Dim _Inhabilitado As String = ""
         Dim _EmailProveedores As New List(Of String)
 
         'Calculo un año hacia atrás a partir del dia de hoy.
@@ -157,7 +158,7 @@ Public Class EnvioEmailProveedores
         Try
             cn.ConnectionString = "Data Source=193.168.0.7;Initial Catalog=SurfactanSA;User ID=usuarioadmin; Password=usuarioadmin"
 
-            cm.CommandText = "SELECT DISTINCT IvaComp.Proveedor, Proveedor.Email FROM IvaComp, Proveedor WHERE IvaComp.Proveedor = Proveedor.Proveedor AND IvaComp.Ordfecha >= '" + _FechaUltimo + "' AND Proveedor.Email <> ''"
+            cm.CommandText = "SELECT DISTINCT IvaComp.Proveedor, Proveedor.Email, Proveedor.Inhabilitado FROM IvaComp, Proveedor WHERE IvaComp.Proveedor = Proveedor.Proveedor AND IvaComp.Ordfecha >= '" + _FechaUltimo + "' AND Proveedor.Email <> ''"
             cm.Connection = cn
 
             cn.Open()
@@ -168,7 +169,11 @@ Public Class EnvioEmailProveedores
 
                 Do While dr.Read()
 
-                    _EmailProveedores.Add(Trim(dr.Item(1)).ToString())
+                    _Inhabilitado = IIf(IsDBNull(dr.Item("Inhabilitado")), "0", dr.Item("Inhabilitado"))
+
+                    If _Inhabilitado <> "1" Then
+                        _EmailProveedores.Add(Trim(dr.Item("Email")).ToString())
+                    End If
 
                 Loop
 

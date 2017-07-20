@@ -178,13 +178,13 @@ Public Class Depositos
         End If
     End Sub
 
-    Private Sub gridCheques_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridCheques.CellValueChanged
-        sumarImportes()
-    End Sub
+    'Private Sub gridCheques_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridCheques.CellValueChanged
+    '    sumarImportes()
+    'End Sub
 
-    Private Sub gridCheques_UserAddedRow(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles gridCheques.UserAddedRow
-        sumarImportes()
-    End Sub
+    'Private Sub gridCheques_UserAddedRow(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles gridCheques.UserAddedRow
+    '    sumarImportes()
+    'End Sub
 
     Private Sub gridCheques_UserDeletingRow(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowCancelEventArgs) Handles gridCheques.UserDeletingRow
         Dim chequeABorrar As Cheque = cheques.Find(Function(cheque) cheque.numero = e.Row.Cells(1).Value And cheque.fecha = e.Row.Cells(2).Value And cheque.banco = e.Row.Cells(3).Value And cheque.importe = e.Row.Cells(4).Value)
@@ -396,6 +396,12 @@ Public Class Depositos
                 Dim iCol = .CurrentCell.ColumnIndex
                 Dim iRow = .CurrentCell.RowIndex
 
+                If Val(.Rows(iRow).Cells(0).Value) = 3 Then
+                    .Rows(iRow).Cells(4).ReadOnly = True
+                Else
+                    .Rows(iRow).Cells(4).ReadOnly = False
+                End If
+
                 If msg.WParam.ToInt32() = Keys.Enter Then
 
                     Dim valor = .Rows(iRow).Cells(iCol).Value
@@ -405,13 +411,19 @@ Public Class Depositos
                         If iCol = 0 And iRow > -1 Then
                             If Trim(valor.ToString.Length) = 31 Then
                                 If _ProcesarCheque(iRow, valor) Then
-                                    '.CurrentCell = .Rows(iRow).Cells(iCol + 2)
+                                    '.CurrentCell = .Rows(iRow).Cells(4)
+                                    .CurrentCell = .Rows(.Rows.Add()).Cells(0)
+
+                                    sumarImportes()
+                                Else
+                                    .Rows(iRow).Cells(iCol).Value = ""
+                                    .CurrentCell = .Rows(iRow).Cells(iCol + 1) ' Sólo para que refresque los datos de la celda 0, sino sigue la cadena hasta que se abandona la celda.
+                                    .CurrentCell = .Rows(iRow).Cells(iCol)
                                 End If
                             Else
-                                valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
-                                If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
-                                    'eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
-                                Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
+                                If Val(valor) = 1 Or Val(valor) = 2 Then
+                                    .CurrentCell = .Rows(iRow).Cells(4)
+                                Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque) por teclado. Cheque unicamente por lectora de cheques.
                                     .CurrentCell = .Rows(iRow).Cells(iCol)
                                 End If
                             End If
@@ -421,39 +433,22 @@ Public Class Depositos
 
                     End If
 
-
-                    If iCol = 3 Then
-                        If .Rows(iRow).Cells(0).Value = "02" Then
-                            Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(valor)
-                            If Not IsNothing(banco) Then
-                                .Rows(iRow).Cells(iCol + 1).Value = banco.nombre
-                                iCol = 4 ' Desplazamos a ultima fila.
-                            Else
-                                MsgBox("Codigo de Banco Incorrecto.", MsgBoxStyle.Information)
-                                Return True ' Nos quedamos en la celda.
-                            End If
-                        End If
-                    End If
-
-                    If iCol = 2 And valor <> "" Then
-                        valor = _Normalizarfecha(valor)
-
-                        If Not _ValidarFecha(valor, True) Then
-                            Return True
-                        End If
-
-                        .Rows(iRow).Cells(iCol).Value = valor
-                    End If
-
-                    If iCol = 1 Or iCol = 2 Or iCol = 3 Or iCol = 4 Then
+                    If iCol = 1 Or iCol = 2 Or iCol = 3 Then
                         .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                     End If
 
-                    If iCol = 5 Then
+                    If iCol = 4 Then
 
                         If valor <> "" Then
                             .Rows(iRow).Cells(iCol).Value = _NormalizarNumero(valor)
-                            .CurrentCell = .Rows(.Rows.Add()).Cells(0)
+
+                            Try
+                                .CurrentCell = .Rows(iRow + 1).Cells(0)
+                            Catch ex As Exception
+                                .CurrentCell = .Rows(.Rows.Add()).Cells(0)
+                            End Try
+
+                            sumarImportes()
                         End If
 
                     End If
@@ -520,24 +515,89 @@ Public Class Depositos
         Return valido
     End Function
 
+    Private Function _BuscarClaveRecibo(ByVal Clavecheque) As String
+        Dim clave As String = ""
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Clave FROM Recibos WHERE ClaveCheque = '" & Clavecheque & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                With dr
+                    clave = IIf(Not IsDBNull(.Item("Clave")), "1" & .Item("Clave"), "")
+                End With
+                
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            cn.Close()
+
+        End Try
+
+
+        If clave = "" Then
+            Try
+                cn.Open()
+                cm.CommandText = "SELECT Clave FROM RecibosProvi WHERE ClaveCheque = '" & Clavecheque & "'"
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+
+                    dr.Read()
+
+                    With dr
+                        clave = IIf(Not IsDBNull(.Item("Clave")), "2" & .Item("Clave"), "")
+                    End With
+
+                End If
+
+            Catch ex As Exception
+                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Finally
+
+                cn.Close()
+
+            End Try
+        End If
+
+        cn = Nothing
+        cm = Nothing
+        dr = Nothing
+
+        Return clave
+    End Function
+
     Private Function _ProcesarCheque(ByVal row As Integer, ByVal ClaveCheque As String) As Boolean
-        Dim _ClaveBanco, _Banco, _Sucursal, _NumCheque, _NumCta, _Cuit As String
+
+        Dim WNumero, WFecha, WBanco, WImporte, WClave As String
         Dim _LecturaCorrecta As Boolean = True
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As New SqlCommand
+        Dim dr As SqlDataReader
+
 
         If Not _FormatoValidoDeCheque(ClaveCheque) Then
             MsgBox("El formato del cheque no es valido.", MsgBoxStyle.Exclamation)
             Return False
         End If
 
-        _ClaveBanco = Mid$(ClaveCheque, 2, 3)
-        _Banco = _ObtenerNombreBanco(_ClaveBanco)
-        _Sucursal = Mid$(ClaveCheque, 5, 3)
-        _NumCheque = Mid$(ClaveCheque, 12, 8)
-        _NumCta = Mid$(ClaveCheque, 20, 11)
+        WClave = _BuscarClaveRecibo(ClaveCheque)
 
         ' Chequeamos que el cheque no se haya cargado.
 
-        If _ChequeYaCargado(ClaveCheque) Then
+        If _ChequeYaCargado(WClave) Then
             _LecturaCorrecta = False
 
             MsgBox("Cheque ya Cargado con anterioridad.", MsgBoxStyle.Exclamation)
@@ -545,23 +605,51 @@ Public Class Depositos
             Return _LecturaCorrecta
         End If
 
-        ' Extraer Datos del String.
-        If _Banco = "" Then
-            _LecturaCorrecta = False
-            MsgBox("Error en la lectura de los datos del codigo de banco del cheque")
+        SQLConnector.conexionSql(cn, cm)
+        Dim _Tabla As String = "Recibos"
+
+
+        If Mid(WClave, 1, 1) = "2" Then
+            _Tabla = "RecibosProvi"
         End If
 
-        With gridCheques.Rows(row)
-            .Cells(0).Value = "03"
-            .Cells(1).Value = _NumCheque
-            .Cells(2).Value = ""
-            .Cells(4).Value = _Banco '_GenerarCodigoBanco(_Banco)
-        End With
-        ' Buscamos si existe el cuit.
-        _Cuit = _TraerNumeroCuit(_ClaveBanco & _Sucursal & _NumCta)
+        Try
+            cm.CommandText = "SELECT Numero2, Fecha2, Importe2, Banco2 FROM " & _Tabla & " WHERE ClaveCheque = '" & ClaveCheque & "' AND Estado2 = 'P'"
+            dr = cm.ExecuteReader()
 
-        ' Guardamos el nuevo Cheque.
-        _GuardarNuevoCheque(row, ClaveCheque, _Banco, _Sucursal, _NumCheque, _NumCta, _Cuit)
+            If dr.HasRows Then
+
+                dr.Read()
+
+                With dr
+                    WNumero = .Item("Numero2")
+                    WFecha = .Item("Fecha2")
+                    WImporte = .Item("Importe2")
+                    WBanco = .Item("Banco2")
+                End With
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Return False
+        Finally
+
+            cn.Close()
+
+        End Try
+
+        If _LecturaCorrecta Then
+            With gridCheques.Rows(row)
+                .Cells(0).Value = "03"
+                .Cells(1).Value = WNumero
+                .Cells(2).Value = WFecha
+                .Cells(3).Value = WBanco
+                .Cells(4).Value = WImporte
+                .Cells(5).Value = WClave
+            End With
+        End If
 
         Return _LecturaCorrecta
     End Function
@@ -575,22 +663,14 @@ Public Class Depositos
     Private Function _ChequeYaCargado(ByVal ClaveCheque) As Boolean
         Dim _cargado As Boolean = False
 
-        If _ChequeUtilizadoEnRecibo(ClaveCheque) Then
+        For Each row As DataGridViewRow In gridCheques.Rows
 
-            _cargado = True
-
-        ElseIf _ChequeUtilizadoEnReciboProvisorio(ClaveCheque) Then
-
-            _cargado = True
-
-        Else
-
-            Dim cheque As Object = _ClavesCheques.FindLast(Function(c) c(1) = ClaveCheque)
-            If Not IsNothing(cheque) Then
+            If ClaveCheque = row.Cells(5).Value Then
                 _cargado = True
+                Exit For
             End If
 
-        End If
+        Next
 
         Return _cargado
     End Function

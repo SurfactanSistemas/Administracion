@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports Microsoft.Office.Interop
 
 Public Class Recibos
 
@@ -10,11 +11,11 @@ Public Class Recibos
     Private _ComprobanteRetGanancias As String = ""
     Private _ComprobanteRetSuss As String = ""
     Private _RetIB1, _CompIB1, _RetIB2, _CompIB2, _RetIB3, _CompIB3, _RetIB4, _CompIB4, _RetIB5, _CompIB5, _
-            _RetIB6, _CompIB6, _RetIB7, _CompIB7 As String
+            _RetIB6, _CompIB6, _RetIB7, _CompIB7, _RetIB8, _CompIB8 As String
 
     ' Variables para impresion de Recibo.
     Dim WRazon, WDireccion, WLocalidad, WProvincia, WPostal, _
-            WRecibo, WFecha, WCliente As String
+            WRecibo, WFecha, WCliente, WEmail As String
 
     ' Variables Auxiliares
     Private _Provincia As Integer = 0
@@ -295,7 +296,7 @@ Public Class Recibos
     End Sub
 
     Private Function _SumarDebitos() As Boolean
-        Dim _Paridad, _TipoCompo, _TotalUs As Double
+        Dim _Paridad, _TipoCompo, _TotalUs As String
         Dim _Error As Boolean = False
         lblTotalDebitos.Text = 0
         lblDolares.Text = 0
@@ -324,9 +325,9 @@ Public Class Recibos
 
                             .Read()
 
-                            _Paridad = Val(_NormalizarNumero(.Item("Paridad")))
+                            _Paridad = _NormalizarNumero(.Item("Paridad").ToString)
                             _TipoCompo = Val(IIf(IsDBNull(.Item("TipoCompo")), 0, .Item("TipoCompo")))
-                            _TotalUs = Val(_NormalizarNumero(.Item("TotalUs")))
+                            _TotalUs = _NormalizarNumero(.Item("TotalUs").ToString)
 
                         End With
 
@@ -341,19 +342,19 @@ Public Class Recibos
 
                 End Try
 
-                If _Provincia = 24 And _TotalUs <> 0 Then
+                If _Provincia = 24 And Val(_TotalUs) <> 0 Then
 
-                    lblTotalDebitos.Text = Val(_NormalizarNumero(lblTotalDebitos.Text)) + (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_NormalizarNumero(_Paridad)))
+                    lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_NormalizarNumero(_Paridad)))
 
-                    lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) + Val(_NormalizarNumero(row.Cells(4).Value))
+                    lblDolares.Text += Val(_NormalizarNumero(row.Cells(4).Value))
 
                 Else
 
-                    lblTotalDebitos.Text = Val(_NormalizarNumero(lblTotalDebitos.Text)) + Val(_NormalizarNumero(row.Cells(4).Value))
+                    lblTotalDebitos.Text += Val(_NormalizarNumero(row.Cells(4).Value))
 
                     If _TipoCompo <> 2 And _Paridad <> 0 Then
 
-                        lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) + (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_NormalizarNumero(_Paridad)))
+                        lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_NormalizarNumero(_Paridad)))
 
                     End If
 
@@ -362,8 +363,8 @@ Public Class Recibos
             End If
         Next
 
-        lblTotalDebitos.Text = _Redondear(_NormalizarNumero(lblTotalDebitos.Text))
-        lblDolares.Text = _Redondear(_NormalizarNumero(lblDolares.Text))
+        lblTotalDebitos.Text = _NormalizarNumero(lblTotalDebitos.Text)
+        lblDolares.Text = _NormalizarNumero(lblDolares.Text)
 
         _RecalcularDolaresfinales()
 
@@ -382,7 +383,7 @@ Public Class Recibos
 
             'lblDolares.Text = _NormalizarNumero(lblDolares.Text)
         Else
-            lblDolares.Text = "0"
+            lblDolares.Text = "0.00"
         End If
 
     End Sub
@@ -505,7 +506,6 @@ Public Class Recibos
     End Sub
 
     Private Sub mostrarRecibo(ByVal recibo As Recibo)
-        Dim _fecha As String
         If IsNothing(recibo) Then
             Dim temp As String = ceros(txtRecibo.Text, 6)
             btnLimpiar.PerformClick()
@@ -514,15 +514,15 @@ Public Class Recibos
             Exit Sub
         Else
             txtRecibo.Text = recibo.codigo
-            _fecha = recibo.fecha
-            _NormalizarFecha(_fecha)
-            txtFecha.Text = _fecha
+            txtFecha.Text = Proceso._Normalizarfecha(recibo.fecha)
+            '_NormalizarFecha(_fecha)
+            'txtFecha.Text = _fecha
             _DeterminarParidad()
             mostrarCliente(recibo.cliente.id)
-            txtRetGanancias.Text = recibo.retGanancias
+            txtRetGanancias.Text = _NormalizarNumero(recibo.retGanancias)
             txtRetIB.Text = _NormalizarNumero(recibo.retIB)
-            txtRetIva.Text = recibo.retIVA
-            txtRetSuss.Text = recibo.retSuss
+            txtRetIva.Text = _NormalizarNumero(recibo.retIVA)
+            txtRetSuss.Text = _NormalizarNumero(recibo.retSuss)
             'txtParidad.Text = recibo.paridad
             txtObservaciones.Text = recibo.observaciones
             mostrarTipoRecibo(recibo.tipo)
@@ -562,21 +562,23 @@ Public Class Recibos
                         _ComprobanteRetSuss = dr.Item("ComproSuss")
                         txtRetIB.Text = _NormalizarNumero(dr.Item("RetOtra"))
                         'txtParidad.Text = IIf(IsDBNull(dr.Item("Paridad")), "", dr.Item("Paridad"))
-                        _RetIB1 = dr.Item("RetIb1")
-                        _CompIB1 = dr.Item("NroRetIb1")
-                        _RetIB2 = dr.Item("RetIb2")
-                        _CompIB2 = dr.Item("NroRetIb2")
-                        _RetIB3 = dr.Item("RetIb3")
-                        _CompIB3 = dr.Item("NroRetIb3")
-                        _RetIB4 = dr.Item("RetIb4")
-                        _CompIB4 = dr.Item("NroRetIb4")
-                        _RetIB5 = dr.Item("RetIb5")
-                        _CompIB5 = dr.Item("NroRetIb5")
-                        _RetIB6 = dr.Item("RetIb6")
-                        _CompIB6 = dr.Item("NroRetIb6")
-                        _RetIB7 = dr.Item("RetIb7")
-                        _CompIB7 = dr.Item("NroRetIb7")
-                        txtProvi.Text = dr.Item("Provisorio")
+                        _RetIB1 = IIf(IsDBNull(dr.Item("RetIb1")), "", dr.Item("RetIb1"))
+                        _CompIB1 = IIf(IsDBNull(dr.Item("NroRetIb1")), "", dr.Item("NroRetIb1"))
+                        _RetIB2 = IIf(IsDBNull(dr.Item("RetIb2")), "", dr.Item("RetIb2"))
+                        _CompIB2 = IIf(IsDBNull(dr.Item("NroRetIb2")), "", dr.Item("NroRetIb2"))
+                        _RetIB3 = IIf(IsDBNull(dr.Item("RetIb3")), "", dr.Item("RetIb3"))
+                        _CompIB3 = IIf(IsDBNull(dr.Item("NroRetIb3")), "", dr.Item("NroRetIb3"))
+                        _RetIB4 = IIf(IsDBNull(dr.Item("RetIb4")), "", dr.Item("RetIb4"))
+                        _CompIB4 = IIf(IsDBNull(dr.Item("NroRetIb4")), "", dr.Item("NroRetIb4"))
+                        _RetIB5 = IIf(IsDBNull(dr.Item("RetIb5")), "", dr.Item("RetIb5"))
+                        _CompIB5 = IIf(IsDBNull(dr.Item("NroRetIb5")), "", dr.Item("NroRetIb5"))
+                        _RetIB6 = IIf(IsDBNull(dr.Item("RetIb6")), "", dr.Item("RetIb6"))
+                        _CompIB6 = IIf(IsDBNull(dr.Item("NroRetIb6")), "", dr.Item("NroRetIb6"))
+                        _RetIB7 = IIf(IsDBNull(dr.Item("RetIb7")), "", dr.Item("RetIb7"))
+                        _CompIB7 = IIf(IsDBNull(dr.Item("NroRetIb7")), "", dr.Item("NroRetIb7"))
+                        _RetIB8 = IIf(IsDBNull(dr.Item("RetIb8")), "", dr.Item("RetIb8"))
+                        _CompIB8 = IIf(IsDBNull(dr.Item("NroRetIb8")), "", dr.Item("NroRetIb8"))
+                        txtProvi.Text = IIf(IsDBNull(dr.Item("Provisorio")), "", dr.Item("Provisorio"))
 
                     End If
 
@@ -703,6 +705,8 @@ Public Class Recibos
                         _CompIB6 = dr.Item("NroRetIb6")
                         _RetIB7 = dr.Item("RetIb7")
                         _CompIB7 = dr.Item("NroRetIb7")
+                        _RetIB8 = dr.Item("RetIb8")
+                        _CompIB8 = dr.Item("NroRetIb8")
 
                         If Val(dr.Item("TipoRec")) = 1 Then
                             optCtaCte.Checked = True
@@ -761,18 +765,31 @@ Public Class Recibos
     End Sub
 
     Private Function _NormalizarNumero(ByVal numero As String) As String
+        numero = IIf(Trim(numero) = "", "0", Trim(numero))
 
-        If numero.Contains(",") Then
-            numero = String.Format("{0:F2}", CDbl(numero)).Replace(",", ".")
-        ElseIf Not numero.Contains(".") Then
-            numero &= ".00"
+        If numero.Contains(".") Then
+            Return Proceso.formatonumerico(numero.Replace(".", ","), "########0.#0", ".")
+        Else
+            Return Proceso.formatonumerico(CDbl(numero), "########0.#0", ".")
         End If
 
-        Return numero
+        'If numero.Contains(",") Then
+        '    numero = String.Format("{0:F2}", CDbl(numero)).Replace(",", ".")
+        'ElseIf Not numero.Contains(".") Then
+        '    numero &= ".00"
+        'End If
+
+        'Return numero
     End Function
 
     Private Function _SumarCreditos() As Boolean
         Dim _Error As Boolean = False
+
+        txtRetGanancias.Text = _NormalizarNumero(txtRetGanancias.Text)
+        txtRetIva.Text = _NormalizarNumero(txtRetIva.Text)
+        txtRetIB.Text = _NormalizarNumero(txtRetIB.Text)
+        txtRetSuss.Text = _NormalizarNumero(txtRetSuss.Text)
+
         lblTotalCreditos.Text = Val(txtRetGanancias.Text) + Val(txtRetIva.Text) + Val(txtRetIB.Text) + Val(txtRetSuss.Text)
 
         For Each row As DataGridViewRow In gridFormasPago.Rows
@@ -788,7 +805,7 @@ Public Class Recibos
 
                 End If
 
-                lblTotalCreditos.Text = Val(_NormalizarNumero(lblTotalCreditos.Text)) + Val(row.Cells(4).Value)
+                lblTotalCreditos.Text = Val(_NormalizarNumero(lblTotalCreditos.Text)) + Val(_NormalizarNumero(row.Cells(4).Value))
 
             End If
 
@@ -814,7 +831,7 @@ Public Class Recibos
 
     Private Sub mostrarCliente(ByVal cliente As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal " _
+        Dim cm As SqlCommand = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal, c.Email " _
                                               & " FROM Cliente as c, Provincia as p WHERE c.Cliente = '" & cliente & "' AND p.Provincia = c.Provincia")
         Dim dr As SqlDataReader
 
@@ -836,6 +853,7 @@ Public Class Recibos
                 WLocalidad = dr.Item("Localidad")
                 WProvincia = dr.Item("Nombre")
                 WPostal = dr.Item("Postal")
+                WEmail = dr.Item("Email")
             Else
                 MsgBox("El cliente especificado, no existe. Compruebe y vuelva a intentarlo.")
             End If
@@ -1491,13 +1509,15 @@ Public Class Recibos
         XSql = XSql & " NroRetIb5 = " & "'" & _CompIB5 & "',"
         XSql = XSql & " NroRetIb6 = " & "'" & _CompIB6 & "',"
         XSql = XSql & " NroRetIb7 = " & "'" & _CompIB7 & "',"
+        XSql = XSql & " NroRetIb8 = " & "'" & _CompIB8 & "',"
         XSql = XSql & " RetIb1 = " & "'" & _RetIB1 & "',"
         XSql = XSql & " RetIb2 = " & "'" & _RetIB2 & "',"
         XSql = XSql & " RetIb3 = " & "'" & _RetIB3 & "',"
         XSql = XSql & " RetIb4 = " & "'" & _RetIB4 & "',"
         XSql = XSql & " RetIb5 = " & "'" & _RetIB5 & "',"
         XSql = XSql & " RetIb6 = " & "'" & _RetIB6 & "',"
-        XSql = XSql & " RetIb7 = " & "'" & _RetIB7 & "'"
+        XSql = XSql & " RetIb7 = " & "'" & _RetIB7 & "',"
+        XSql = XSql & " RetIb8 = " & "'" & _RetIB8 & "'"
         XSql = XSql & " Where Recibo = " & "'" & txtRecibo.Text & "'"
 
         cm.CommandText = XSql
@@ -2375,6 +2395,8 @@ Public Class Recibos
             _CompIB6 = ""
             _RetIB7 = ""
             _CompIB7 = ""
+            _RetIB8 = ""
+            _CompIB8 = ""
         End If
     End Sub
 
@@ -2395,6 +2417,8 @@ Public Class Recibos
             .txtCompIB6.Text = _CompIB6
             .txtRetIB7.Text = _RetIB7
             .txtCompIB7.Text = _CompIB7
+            .txtRetIB8.Text = _RetIB8
+            .txtCompIB8.Text = _CompIB8
 
             .ShowDialog(Me)
 
@@ -2412,6 +2436,8 @@ Public Class Recibos
             _CompIB6 = .txtCompIB6.Text
             _RetIB7 = .txtRetIB7.Text
             _CompIB7 = .txtCompIB7.Text
+            _RetIB8 = .txtRetIB8.Text
+            _CompIB8 = .txtCompIB8.Text
 
             .Dispose()
 
@@ -2430,6 +2456,7 @@ Public Class Recibos
         totalIB += Val(_NormalizarNumero(_RetIB5))
         totalIB += Val(_NormalizarNumero(_RetIB6))
         totalIB += Val(_NormalizarNumero(_RetIB7))
+        totalIB += Val(_NormalizarNumero(_RetIB8))
 
         txtRetIB.Text = totalIB
     End Sub
@@ -2564,7 +2591,7 @@ Public Class Recibos
                     End If
 
                     If iCol = 0 And iRow > -1 Then
-                        
+
 
                     Else
 
@@ -2610,9 +2637,9 @@ Public Class Recibos
 
                     Return True
                 End If
-            ElseIf msg.WParam.ToInt32() = Keys.Escape Then
-                gridFormasPago.Rows.Remove(gridFormasPago.Rows(iRow))
-                _SumarCreditos()
+                'ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                '    gridFormasPago.Rows.Remove(gridFormasPago.Rows(iRow))
+                '    _SumarCreditos()
             End If
         End If
 
@@ -3229,12 +3256,92 @@ Public Class Recibos
 
         crdoc.SetDataSource(table)
 
-        _Imprimir(crdoc)
-        '_VistaPrevia(crdoc)
+        If Trim(WEmail) <> "" Then
+
+            If MsgBox("¿Desea enviar una copia del recibo por email a: " & Trim(WEmail) & " ?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+
+                crdoc = New ReciboDefinitivo ' ACA CAMBIAR POR EL MODELO IMPRESO.
+                crdoc.SetDataSource(table)
+
+                _EnviarReciboPorEmail(crdoc, WEmail)
+
+                Exit Sub
+            End If
+
+        End If
+
+        '_Imprimir(crdoc, 2)
+        _VistaPrevia(crdoc)
+
+
     End Sub
 
-    Private Sub _Imprimir(ByVal crdoc As ReportDocument)
-        crdoc.PrintToPrinter(1, True, 0, 0)
+    Private Sub _EnviarReciboPorEmail(ByVal crdoc As ReportDocument, ByVal WEmail As String)
+        Dim archivo As String = "Recibo" & Trim(txtRecibo.Text) & ".pdf"
+        Dim ruta As String = Application.StartupPath & "/"
+        Dim _to, _bcc, _asunto, _mensaje, _adjunto As String
+
+        ' Guardamos el archivo.
+        crdoc.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & archivo)
+
+        ' Confirmamos que se haya guardado correctamente el archivo.
+        If Not System.IO.File.Exists(ruta & archivo) Then
+            Exit Sub
+        End If
+
+        Try
+            _to = "gferreyra@surfactan.com.ar" ' trim(WEmail)
+            _bcc = _to ' CONSULTAR SI SE AGREGA ESTO O NO.
+            _asunto = "Recibo Nº " & Trim(txtRecibo.Text)
+            _mensaje = _asunto
+            _adjunto = ruta & archivo
+
+            ' Enviamos por email e imprimimos una copia.
+            _EnviarEmail(_to, _bcc, _asunto, _mensaje, _adjunto)
+
+            '_Imprimir(crdoc, 1)
+            _VistaPrevia(crdoc)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjunto As String)
+        Dim _Outlook As New Outlook.Application
+
+        Try
+            Dim _Mail As Outlook.MailItem = _Outlook.CreateItem(Outlook.OlItemType.olMailItem)
+
+            With _Mail
+
+                .To = _to
+                .BCC = _bcc
+                .Subject = _subject
+                .Body = _body
+
+                If Trim(_adjunto) <> "" Then
+                    .Attachments.Add(_adjunto)
+                End If
+
+            End With
+
+            _Mail.Send()
+
+            _Mail = Nothing
+
+            'Me.Close()
+
+        Catch ex As Exception
+            Throw New Exception("Ocurrió un problema al querer enviar el email a los proveedores.")
+        Finally
+            _Outlook = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub _Imprimir(ByVal crdoc As ReportDocument, Optional ByVal cant As Integer = 1)
+        crdoc.PrintToPrinter(cant, True, 0, 0)
     End Sub
 
     Private Sub _VistaPrevia(ByVal crdoc As ReportDocument)
@@ -3898,10 +4005,10 @@ Public Class Recibos
 
         crdoc.SetDataSource(tabla)
 
-        _Imprimir(crdoc)
-        '_VistaPrevia(crdoc)
+        '_Imprimir(crdoc)
+        _VistaPrevia(crdoc)
 
         MsgBox("El interes a pagar es de " + Str$(ZZSuma), MsgBoxStyle.Information, "Emision de Recibos")
-        
+
     End Sub
 End Class

@@ -24,17 +24,7 @@ Partial Class Recibos
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.gridPagos = New System.Windows.Forms.DataGridView()
-        Me.TipoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LetraCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PuntoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumeroCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ImporteCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gridFormasPago = New System.Windows.Forms.DataGridView()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optVarios = New System.Windows.Forms.RadioButton()
         Me.optAnticipos = New System.Windows.Forms.RadioButton()
@@ -86,6 +76,16 @@ Partial Class Recibos
         Me.btnAgregar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TipoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LetraCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PuntoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumeroCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImporteCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormasPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -99,46 +99,12 @@ Partial Class Recibos
         Me.gridPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TipoCC, Me.LetraCC, Me.PuntoCC, Me.NumeroCC, Me.ImporteCC})
         Me.gridPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.gridPagos.Location = New System.Drawing.Point(18, 229)
+        Me.gridPagos.Location = New System.Drawing.Point(31, 229)
         Me.gridPagos.Name = "gridPagos"
         Me.gridPagos.RowHeadersWidth = 20
         Me.gridPagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.gridPagos.Size = New System.Drawing.Size(362, 271)
+        Me.gridPagos.Size = New System.Drawing.Size(405, 271)
         Me.gridPagos.TabIndex = 20
-        '
-        'TipoCC
-        '
-        Me.TipoCC.FillWeight = 61.20156!
-        Me.TipoCC.HeaderText = "Tipo"
-        Me.TipoCC.Name = "TipoCC"
-        Me.TipoCC.ReadOnly = True
-        '
-        'LetraCC
-        '
-        Me.LetraCC.FillWeight = 59.29222!
-        Me.LetraCC.HeaderText = "Letra"
-        Me.LetraCC.Name = "LetraCC"
-        Me.LetraCC.ReadOnly = True
-        '
-        'PuntoCC
-        '
-        Me.PuntoCC.FillWeight = 55.11111!
-        Me.PuntoCC.HeaderText = "Punto"
-        Me.PuntoCC.Name = "PuntoCC"
-        Me.PuntoCC.ReadOnly = True
-        '
-        'NumeroCC
-        '
-        Me.NumeroCC.FillWeight = 125.6672!
-        Me.NumeroCC.HeaderText = "Numero"
-        Me.NumeroCC.Name = "NumeroCC"
-        Me.NumeroCC.ReadOnly = True
-        '
-        'ImporteCC
-        '
-        Me.ImporteCC.FillWeight = 125.6672!
-        Me.ImporteCC.HeaderText = "Importe"
-        Me.ImporteCC.Name = "ImporteCC"
         '
         'gridFormasPago
         '
@@ -146,50 +112,12 @@ Partial Class Recibos
         Me.gridFormasPago.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridFormasPago.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.numero, Me.fecha, Me.banco, Me.importe})
         Me.gridFormasPago.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.gridFormasPago.Location = New System.Drawing.Point(386, 229)
+        Me.gridFormasPago.Location = New System.Drawing.Point(444, 229)
         Me.gridFormasPago.Name = "gridFormasPago"
         Me.gridFormasPago.RowHeadersWidth = 20
         Me.gridFormasPago.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.gridFormasPago.Size = New System.Drawing.Size(393, 272)
+        Me.gridFormasPago.Size = New System.Drawing.Size(402, 272)
         Me.gridFormasPago.TabIndex = 119
-        '
-        'Tipo
-        '
-        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Tipo.FillWeight = 80.0!
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.Width = 53
-        '
-        'numero
-        '
-        Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.numero.FillWeight = 180.0!
-        Me.numero.HeaderText = "Numero/Cta"
-        Me.numero.Name = "numero"
-        Me.numero.Width = 70
-        '
-        'fecha
-        '
-        Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.fecha.FillWeight = 120.0!
-        Me.fecha.HeaderText = "Fecha"
-        Me.fecha.Name = "fecha"
-        Me.fecha.Width = 90
-        '
-        'banco
-        '
-        Me.banco.FillWeight = 90.0!
-        Me.banco.HeaderText = "Banco"
-        Me.banco.Name = "banco"
-        '
-        'importe
-        '
-        Me.importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.importe.FillWeight = 80.0!
-        Me.importe.HeaderText = "Importe"
-        Me.importe.Name = "importe"
-        Me.importe.Width = 67
         '
         'GroupBox1
         '
@@ -198,7 +126,7 @@ Partial Class Recibos
         Me.GroupBox1.Controls.Add(Me.optCtaCte)
         Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(18, 169)
+        Me.GroupBox1.Location = New System.Drawing.Point(47, 169)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(492, 49)
         Me.GroupBox1.TabIndex = 120
@@ -244,7 +172,7 @@ Partial Class Recibos
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(-1, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(795, 50)
+        Me.Panel1.Size = New System.Drawing.Size(883, 50)
         Me.Panel1.TabIndex = 124
         '
         'Label2
@@ -252,7 +180,7 @@ Partial Class Recibos
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(611, 10)
+        Me.Label2.Location = New System.Drawing.Point(715, 9)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -312,7 +240,7 @@ Partial Class Recibos
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Location = New System.Drawing.Point(-1, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(795, 571)
+        Me.Panel2.Size = New System.Drawing.Size(883, 571)
         Me.Panel2.TabIndex = 125
         '
         'Label5
@@ -320,11 +248,11 @@ Partial Class Recibos
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(586, 504)
+        Me.Label5.Location = New System.Drawing.Point(634, 504)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(87, 18)
+        Me.Label5.Size = New System.Drawing.Size(107, 18)
         Me.Label5.TabIndex = 125
-        Me.Label5.Text = "Total Crédito"
+        Me.Label5.Text = "Total Crédito ($)"
         '
         'lstSeleccion
         '
@@ -333,7 +261,7 @@ Partial Class Recibos
         Me.lstSeleccion.FormattingEnabled = True
         Me.lstSeleccion.Items.AddRange(New Object() {"Clientes", "Cuentas Corrientes"})
         Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(525, 20)
+        Me.lstSeleccion.Location = New System.Drawing.Point(559, 20)
         Me.lstSeleccion.Name = "lstSeleccion"
         Me.lstSeleccion.Size = New System.Drawing.Size(254, 199)
         Me.lstSeleccion.TabIndex = 108
@@ -345,7 +273,7 @@ Partial Class Recibos
         Me.CustomLabel1.ControlAssociationKey = 1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(43, 20)
+        Me.CustomLabel1.Location = New System.Drawing.Point(72, 20)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(80, 18)
         Me.CustomLabel1.TabIndex = 80
@@ -356,9 +284,9 @@ Partial Class Recibos
         Me.lblDolares.BackColor = System.Drawing.SystemColors.Control
         Me.lblDolares.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDolares.ControlAssociationKey = -1
-        Me.lblDolares.Location = New System.Drawing.Point(110, 503)
+        Me.lblDolares.Location = New System.Drawing.Point(174, 503)
         Me.lblDolares.Name = "lblDolares"
-        Me.lblDolares.Size = New System.Drawing.Size(93, 22)
+        Me.lblDolares.Size = New System.Drawing.Size(74, 22)
         Me.lblDolares.TabIndex = 121
         Me.lblDolares.Text = "0,00"
         Me.lblDolares.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -368,9 +296,9 @@ Partial Class Recibos
         Me.lblTotalDebitos.BackColor = System.Drawing.SystemColors.Control
         Me.lblTotalDebitos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTotalDebitos.ControlAssociationKey = -1
-        Me.lblTotalDebitos.Location = New System.Drawing.Point(286, 503)
+        Me.lblTotalDebitos.Location = New System.Drawing.Point(352, 503)
         Me.lblTotalDebitos.Name = "lblTotalDebitos"
-        Me.lblTotalDebitos.Size = New System.Drawing.Size(93, 22)
+        Me.lblTotalDebitos.Size = New System.Drawing.Size(84, 22)
         Me.lblTotalDebitos.TabIndex = 121
         Me.lblTotalDebitos.Text = "0,00"
         Me.lblTotalDebitos.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -381,7 +309,7 @@ Partial Class Recibos
         Me.txtObservaciones.Empty = True
         Me.txtObservaciones.EnterIndex = 11
         Me.txtObservaciones.LabelAssociationKey = 12
-        Me.txtObservaciones.Location = New System.Drawing.Point(129, 147)
+        Me.txtObservaciones.Location = New System.Drawing.Point(158, 147)
         Me.txtObservaciones.Name = "txtObservaciones"
         Me.txtObservaciones.Size = New System.Drawing.Size(381, 20)
         Me.txtObservaciones.TabIndex = 123
@@ -406,7 +334,7 @@ Partial Class Recibos
         Me.CustomLabel2.ControlAssociationKey = 4
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(39, 46)
+        Me.CustomLabel2.Location = New System.Drawing.Point(68, 46)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(84, 18)
         Me.CustomLabel2.TabIndex = 82
@@ -417,7 +345,7 @@ Partial Class Recibos
         Me.lblTotalCreditos.BackColor = System.Drawing.SystemColors.Control
         Me.lblTotalCreditos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTotalCreditos.ControlAssociationKey = -1
-        Me.lblTotalCreditos.Location = New System.Drawing.Point(679, 503)
+        Me.lblTotalCreditos.Location = New System.Drawing.Point(742, 503)
         Me.lblTotalCreditos.Name = "lblTotalCreditos"
         Me.lblTotalCreditos.Size = New System.Drawing.Size(100, 22)
         Me.lblTotalCreditos.TabIndex = 104
@@ -430,7 +358,7 @@ Partial Class Recibos
         Me.CustomLabel13.ControlAssociationKey = 12
         Me.CustomLabel13.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel13.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel13.Location = New System.Drawing.Point(24, 149)
+        Me.CustomLabel13.Location = New System.Drawing.Point(53, 149)
         Me.CustomLabel13.Name = "CustomLabel13"
         Me.CustomLabel13.Size = New System.Drawing.Size(99, 18)
         Me.CustomLabel13.TabIndex = 122
@@ -442,7 +370,7 @@ Partial Class Recibos
         Me.CustomLabel3.ControlAssociationKey = 2
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(228, 20)
+        Me.CustomLabel3.Location = New System.Drawing.Point(257, 20)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(44, 18)
         Me.CustomLabel3.TabIndex = 85
@@ -454,7 +382,7 @@ Partial Class Recibos
         Me.txtFecha.Empty = False
         Me.txtFecha.EnterIndex = 3
         Me.txtFecha.LabelAssociationKey = 2
-        Me.txtFecha.Location = New System.Drawing.Point(276, 19)
+        Me.txtFecha.Location = New System.Drawing.Point(305, 19)
         Me.txtFecha.MaxLength = 10
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.Size = New System.Drawing.Size(70, 20)
@@ -467,7 +395,7 @@ Partial Class Recibos
         Me.txtRecibo.Empty = False
         Me.txtRecibo.EnterIndex = 2
         Me.txtRecibo.LabelAssociationKey = 1
-        Me.txtRecibo.Location = New System.Drawing.Point(129, 17)
+        Me.txtRecibo.Location = New System.Drawing.Point(158, 17)
         Me.txtRecibo.MaxLength = 6
         Me.txtRecibo.Name = "txtRecibo"
         Me.txtRecibo.Size = New System.Drawing.Size(73, 20)
@@ -480,7 +408,7 @@ Partial Class Recibos
         Me.txtCliente.Empty = False
         Me.txtCliente.EnterIndex = 4
         Me.txtCliente.LabelAssociationKey = 4
-        Me.txtCliente.Location = New System.Drawing.Point(129, 43)
+        Me.txtCliente.Location = New System.Drawing.Point(158, 43)
         Me.txtCliente.MaxLength = 6
         Me.txtCliente.Name = "txtCliente"
         Me.txtCliente.Size = New System.Drawing.Size(73, 20)
@@ -495,7 +423,7 @@ Partial Class Recibos
         Me.txtNombre.Enabled = False
         Me.txtNombre.EnterIndex = -1
         Me.txtNombre.LabelAssociationKey = 4
-        Me.txtNombre.Location = New System.Drawing.Point(208, 43)
+        Me.txtNombre.Location = New System.Drawing.Point(237, 43)
         Me.txtNombre.MaxLength = 1000
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(302, 20)
@@ -508,7 +436,7 @@ Partial Class Recibos
         Me.txtRetGanancias.Empty = False
         Me.txtRetGanancias.EnterIndex = 5
         Me.txtRetGanancias.LabelAssociationKey = 5
-        Me.txtRetGanancias.Location = New System.Drawing.Point(129, 69)
+        Me.txtRetGanancias.Location = New System.Drawing.Point(158, 69)
         Me.txtRetGanancias.Name = "txtRetGanancias"
         Me.txtRetGanancias.Size = New System.Drawing.Size(73, 20)
         Me.txtRetGanancias.TabIndex = 84
@@ -521,7 +449,7 @@ Partial Class Recibos
         Me.txtNombreCuenta.Enabled = False
         Me.txtNombreCuenta.EnterIndex = -1
         Me.txtNombreCuenta.LabelAssociationKey = 9
-        Me.txtNombreCuenta.Location = New System.Drawing.Point(208, 121)
+        Me.txtNombreCuenta.Location = New System.Drawing.Point(237, 121)
         Me.txtNombreCuenta.MaxLength = 1000
         Me.txtNombreCuenta.Name = "txtNombreCuenta"
         Me.txtNombreCuenta.Size = New System.Drawing.Size(302, 20)
@@ -534,7 +462,7 @@ Partial Class Recibos
         Me.CustomLabel4.ControlAssociationKey = 5
         Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(24, 72)
+        Me.CustomLabel4.Location = New System.Drawing.Point(53, 72)
         Me.CustomLabel4.Name = "CustomLabel4"
         Me.CustomLabel4.Size = New System.Drawing.Size(99, 18)
         Me.CustomLabel4.TabIndex = 88
@@ -546,7 +474,7 @@ Partial Class Recibos
         Me.txtCuenta.Empty = True
         Me.txtCuenta.EnterIndex = 9
         Me.txtCuenta.LabelAssociationKey = 9
-        Me.txtCuenta.Location = New System.Drawing.Point(129, 121)
+        Me.txtCuenta.Location = New System.Drawing.Point(158, 121)
         Me.txtCuenta.MaxLength = 10
         Me.txtCuenta.Name = "txtCuenta"
         Me.txtCuenta.Size = New System.Drawing.Size(73, 20)
@@ -560,7 +488,7 @@ Partial Class Recibos
         Me.CustomLabel5.ControlAssociationKey = 7
         Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(66, 98)
+        Me.CustomLabel5.Location = New System.Drawing.Point(95, 98)
         Me.CustomLabel5.Name = "CustomLabel5"
         Me.CustomLabel5.Size = New System.Drawing.Size(57, 18)
         Me.CustomLabel5.TabIndex = 89
@@ -572,7 +500,7 @@ Partial Class Recibos
         Me.CustomLabel11.ControlAssociationKey = 9
         Me.CustomLabel11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel11.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel11.Location = New System.Drawing.Point(12, 124)
+        Me.CustomLabel11.Location = New System.Drawing.Point(41, 124)
         Me.CustomLabel11.Name = "CustomLabel11"
         Me.CustomLabel11.Size = New System.Drawing.Size(111, 18)
         Me.CustomLabel11.TabIndex = 111
@@ -584,7 +512,7 @@ Partial Class Recibos
         Me.txtRetIva.Empty = False
         Me.txtRetIva.EnterIndex = 7
         Me.txtRetIva.LabelAssociationKey = 7
-        Me.txtRetIva.Location = New System.Drawing.Point(129, 95)
+        Me.txtRetIva.Location = New System.Drawing.Point(158, 95)
         Me.txtRetIva.Name = "txtRetIva"
         Me.txtRetIva.Size = New System.Drawing.Size(73, 20)
         Me.txtRetIva.TabIndex = 90
@@ -596,7 +524,7 @@ Partial Class Recibos
         Me.txtProvi.Empty = True
         Me.txtProvi.EnterIndex = 1
         Me.txtProvi.LabelAssociationKey = 3
-        Me.txtProvi.Location = New System.Drawing.Point(448, 19)
+        Me.txtProvi.Location = New System.Drawing.Point(477, 19)
         Me.txtProvi.MaxLength = 6
         Me.txtProvi.Name = "txtProvi"
         Me.txtProvi.Size = New System.Drawing.Size(62, 20)
@@ -609,7 +537,7 @@ Partial Class Recibos
         Me.txtRetIB.Empty = False
         Me.txtRetIB.EnterIndex = 6
         Me.txtRetIB.LabelAssociationKey = 6
-        Me.txtRetIB.Location = New System.Drawing.Point(276, 69)
+        Me.txtRetIB.Location = New System.Drawing.Point(305, 69)
         Me.txtRetIB.Name = "txtRetIB"
         Me.txtRetIB.Size = New System.Drawing.Size(70, 20)
         Me.txtRetIB.TabIndex = 91
@@ -621,7 +549,7 @@ Partial Class Recibos
         Me.CustomLabel10.ControlAssociationKey = 3
         Me.CustomLabel10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel10.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel10.Location = New System.Drawing.Point(349, 19)
+        Me.CustomLabel10.Location = New System.Drawing.Point(378, 19)
         Me.CustomLabel10.Name = "CustomLabel10"
         Me.CustomLabel10.Size = New System.Drawing.Size(100, 18)
         Me.CustomLabel10.TabIndex = 110
@@ -633,7 +561,7 @@ Partial Class Recibos
         Me.CustomLabel7.ControlAssociationKey = 6
         Me.CustomLabel7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel7.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel7.Location = New System.Drawing.Point(216, 70)
+        Me.CustomLabel7.Location = New System.Drawing.Point(245, 70)
         Me.CustomLabel7.Name = "CustomLabel7"
         Me.CustomLabel7.Size = New System.Drawing.Size(56, 18)
         Me.CustomLabel7.TabIndex = 92
@@ -645,7 +573,7 @@ Partial Class Recibos
         Me.CustomLabel6.ControlAssociationKey = 8
         Me.CustomLabel6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel6.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel6.Location = New System.Drawing.Point(205, 96)
+        Me.CustomLabel6.Location = New System.Drawing.Point(234, 96)
         Me.CustomLabel6.Name = "CustomLabel6"
         Me.CustomLabel6.Size = New System.Drawing.Size(67, 18)
         Me.CustomLabel6.TabIndex = 93
@@ -657,7 +585,7 @@ Partial Class Recibos
         Me.txtConsulta.Empty = True
         Me.txtConsulta.EnterIndex = -1
         Me.txtConsulta.LabelAssociationKey = -1
-        Me.txtConsulta.Location = New System.Drawing.Point(525, 19)
+        Me.txtConsulta.Location = New System.Drawing.Point(559, 19)
         Me.txtConsulta.Name = "txtConsulta"
         Me.txtConsulta.Size = New System.Drawing.Size(254, 20)
         Me.txtConsulta.TabIndex = 107
@@ -670,7 +598,7 @@ Partial Class Recibos
         Me.txtRetSuss.Empty = False
         Me.txtRetSuss.EnterIndex = 8
         Me.txtRetSuss.LabelAssociationKey = 8
-        Me.txtRetSuss.Location = New System.Drawing.Point(276, 95)
+        Me.txtRetSuss.Location = New System.Drawing.Point(305, 95)
         Me.txtRetSuss.Name = "txtRetSuss"
         Me.txtRetSuss.Size = New System.Drawing.Size(70, 20)
         Me.txtRetSuss.TabIndex = 94
@@ -682,7 +610,7 @@ Partial Class Recibos
         Me.txtParidad.Empty = True
         Me.txtParidad.EnterIndex = 10
         Me.txtParidad.LabelAssociationKey = 11
-        Me.txtParidad.Location = New System.Drawing.Point(411, 72)
+        Me.txtParidad.Location = New System.Drawing.Point(440, 72)
         Me.txtParidad.Name = "txtParidad"
         Me.txtParidad.Size = New System.Drawing.Size(99, 20)
         Me.txtParidad.TabIndex = 95
@@ -694,7 +622,7 @@ Partial Class Recibos
         Me.CustomLabel9.ControlAssociationKey = 11
         Me.CustomLabel9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel9.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel9.Location = New System.Drawing.Point(352, 71)
+        Me.CustomLabel9.Location = New System.Drawing.Point(381, 71)
         Me.CustomLabel9.Name = "CustomLabel9"
         Me.CustomLabel9.Size = New System.Drawing.Size(55, 18)
         Me.CustomLabel9.TabIndex = 96
@@ -706,7 +634,7 @@ Partial Class Recibos
         Me.lstFiltrada.EnterIndex = -1
         Me.lstFiltrada.FormattingEnabled = True
         Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(525, 45)
+        Me.lstFiltrada.Location = New System.Drawing.Point(559, 45)
         Me.lstFiltrada.Name = "lstFiltrada"
         Me.lstFiltrada.Size = New System.Drawing.Size(254, 173)
         Me.lstFiltrada.TabIndex = 124
@@ -718,7 +646,7 @@ Partial Class Recibos
         Me.lstConsulta.EnterIndex = -1
         Me.lstConsulta.FormattingEnabled = True
         Me.lstConsulta.LabelAssociationKey = -1
-        Me.lstConsulta.Location = New System.Drawing.Point(525, 45)
+        Me.lstConsulta.Location = New System.Drawing.Point(559, 45)
         Me.lstConsulta.Name = "lstConsulta"
         Me.lstConsulta.Size = New System.Drawing.Size(254, 173)
         Me.lstConsulta.TabIndex = 106
@@ -729,22 +657,22 @@ Partial Class Recibos
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(205, 504)
+        Me.Label4.Location = New System.Drawing.Point(251, 504)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(83, 18)
+        Me.Label4.Size = New System.Drawing.Size(103, 18)
         Me.Label4.TabIndex = 125
-        Me.Label4.Text = "Total Débito"
+        Me.Label4.Text = "Total Débito ($)"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(23, 504)
+        Me.Label3.Location = New System.Drawing.Point(33, 507)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(88, 18)
+        Me.Label3.Size = New System.Drawing.Size(141, 14)
         Me.Label3.TabIndex = 125
-        Me.Label3.Text = "Total Dólares"
+        Me.Label3.Text = "Diferencia de Cambio (u$s)"
         '
         'btnImpresion
         '
@@ -893,11 +821,83 @@ Partial Class Recibos
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta Clientes/Cuentas Contables")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
+        'TipoCC
+        '
+        Me.TipoCC.FillWeight = 61.20156!
+        Me.TipoCC.HeaderText = "Tipo"
+        Me.TipoCC.Name = "TipoCC"
+        Me.TipoCC.ReadOnly = True
+        '
+        'LetraCC
+        '
+        Me.LetraCC.FillWeight = 59.29222!
+        Me.LetraCC.HeaderText = "Letra"
+        Me.LetraCC.Name = "LetraCC"
+        Me.LetraCC.ReadOnly = True
+        '
+        'PuntoCC
+        '
+        Me.PuntoCC.FillWeight = 55.11111!
+        Me.PuntoCC.HeaderText = "Punto"
+        Me.PuntoCC.Name = "PuntoCC"
+        Me.PuntoCC.ReadOnly = True
+        '
+        'NumeroCC
+        '
+        Me.NumeroCC.FillWeight = 125.6672!
+        Me.NumeroCC.HeaderText = "Numero"
+        Me.NumeroCC.Name = "NumeroCC"
+        Me.NumeroCC.ReadOnly = True
+        '
+        'ImporteCC
+        '
+        Me.ImporteCC.FillWeight = 125.6672!
+        Me.ImporteCC.HeaderText = "Importe ($)"
+        Me.ImporteCC.Name = "ImporteCC"
+        '
+        'Tipo
+        '
+        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Tipo.FillWeight = 80.0!
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.Width = 53
+        '
+        'numero
+        '
+        Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.numero.FillWeight = 180.0!
+        Me.numero.HeaderText = "Numero/Cta"
+        Me.numero.Name = "numero"
+        Me.numero.Width = 70
+        '
+        'fecha
+        '
+        Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.fecha.FillWeight = 120.0!
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.Name = "fecha"
+        Me.fecha.Width = 90
+        '
+        'banco
+        '
+        Me.banco.FillWeight = 90.0!
+        Me.banco.HeaderText = "Banco"
+        Me.banco.Name = "banco"
+        '
+        'importe
+        '
+        Me.importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.importe.FillWeight = 80.0!
+        Me.importe.HeaderText = "Importe ($)"
+        Me.importe.Name = "importe"
+        Me.importe.Width = 82
+        '
         'Recibos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(790, 690)
+        Me.ClientSize = New System.Drawing.Size(882, 690)
         Me.Controls.Add(Me.btnImpresion)
         Me.Controls.Add(Me.btnDias)
         Me.Controls.Add(Me.btnLimpiar)
@@ -949,11 +949,6 @@ Partial Class Recibos
     Friend WithEvents txtCuenta As Administracion.CustomTextBox
     Friend WithEvents CustomLabel11 As Administracion.CustomLabel
     Friend WithEvents CustomLabel12 As Administracion.CustomLabel
-    Friend WithEvents TipoCC As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents LetraCC As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PuntoCC As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NumeroCC As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ImporteCC As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents gridFormasPago As System.Windows.Forms.DataGridView
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents optVarios As System.Windows.Forms.RadioButton
@@ -962,11 +957,6 @@ Partial Class Recibos
     Friend WithEvents lblTotalDebitos As Administracion.CustomLabel
     Friend WithEvents CustomLabel13 As Administracion.CustomLabel
     Friend WithEvents txtObservaciones As Administracion.CustomTextBox
-    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents numero As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents banco As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -984,4 +974,14 @@ Partial Class Recibos
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents TipoCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LetraCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PuntoCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NumeroCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ImporteCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents numero As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents banco As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -77,7 +77,7 @@ Public Class CuentaCorrientePantalla
 
         boxPantallaProveedores.Visible = True
 
-        lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre("")
+        lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
         txtAyuda.Text = ""
         txtAyuda.Focus()
@@ -96,11 +96,56 @@ Public Class CuentaCorrientePantalla
         End If
     End Sub
 
+    Private Sub _TraerSaldoCuentaProveedor(ByVal cliente As String)
+        Dim saldo As String = "0,00"
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT SUM(Saldo) as SaldoTotal FROM CtaCte WHERE Cliente = '" & Trim(cliente) & "'")
+        Dim dr As SqlDataReader
+
+
+        If Trim(cliente) = "" Then
+            lblSaldoCuentaProveedor.Text = saldo
+            Exit Sub
+        End If
+
+        Try
+            SQLConnector.conexionSql(cn, cm)
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+                    .Read()
+                    saldo = .Item("SaldoTotal")
+
+                    gbSaldoCtaCliente.Visible = True
+                Else
+                    gbSaldoCtaCliente.Visible = False
+                End If
+            End With
+
+        Catch ex As Exception
+            gbSaldoCtaCliente.Visible = False
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        lblClienteAsociado.Text = Trim(cliente)
+        lblSaldoCuentaProveedor.Text = "$ " & formatonumerico(saldo, "########0.#0", ".")
+    End Sub
+
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
         txtProveedor.Text = proveedor.id
         txtRazon.Text = proveedor.razonSocial
         boxPantallaProveedores.Visible = False
         _TraerProveedorSelectivo()
+        _TraerSaldoCuentaProveedor(proveedor.cliente.id)
         Call Proceso()
 
         GRilla.CurrentCell = GRilla.Rows(0).Cells(0) ' Nos posicionamos en la grilla.
@@ -353,5 +398,23 @@ Public Class CuentaCorrientePantalla
 
         ' Sacamos de vista los resultados filtrados.
         filtrado.Visible = False
+    End Sub
+
+    Private Sub lblSaldoCuentaProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblSaldoCuentaProveedor.MouseDoubleClick
+        _AbrirDetallesFactura()
+    End Sub
+
+    Private Sub _AbrirDetallesFactura()
+        With CtaCtePrvPantallaDetallesCliente
+            .Cliente = lblClienteAsociado.Text
+            .SaldoTotal = lblSaldoCuentaProveedor.Text
+
+            .ShowDialog()
+            .Dispose()
+        End With
+    End Sub
+
+    Private Sub lblClienteAsociado_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblClienteAsociado.MouseDoubleClick
+        _AbrirDetallesFactura()
     End Sub
 End Class
