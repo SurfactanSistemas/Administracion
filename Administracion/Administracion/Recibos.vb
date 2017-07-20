@@ -296,7 +296,7 @@ Public Class Recibos
     End Sub
 
     Private Function _SumarDebitos() As Boolean
-        Dim _Paridad, _TipoCompo, _TotalUs As Double
+        Dim _Paridad, _TipoCompo, _TotalUs As String
         Dim _Error As Boolean = False
         lblTotalDebitos.Text = 0
         lblDolares.Text = 0
@@ -325,9 +325,9 @@ Public Class Recibos
 
                             .Read()
 
-                            _Paridad = Val(_NormalizarNumero(.Item("Paridad")))
+                            _Paridad = _NormalizarNumero(.Item("Paridad").ToString)
                             _TipoCompo = Val(IIf(IsDBNull(.Item("TipoCompo")), 0, .Item("TipoCompo")))
-                            _TotalUs = Val(_NormalizarNumero(.Item("TotalUs")))
+                            _TotalUs = _NormalizarNumero(.Item("TotalUs").ToString)
 
                         End With
 
@@ -342,19 +342,19 @@ Public Class Recibos
 
                 End Try
 
-                If _Provincia = 24 And _TotalUs <> 0 Then
+                If _Provincia = 24 And Val(_TotalUs) <> 0 Then
 
-                    lblTotalDebitos.Text = Val(_NormalizarNumero(lblTotalDebitos.Text)) + (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_NormalizarNumero(_Paridad)))
+                    lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_NormalizarNumero(_Paridad)))
 
-                    lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) + Val(_NormalizarNumero(row.Cells(4).Value))
+                    lblDolares.Text += Val(_NormalizarNumero(row.Cells(4).Value))
 
                 Else
 
-                    lblTotalDebitos.Text = Val(_NormalizarNumero(lblTotalDebitos.Text)) + Val(_NormalizarNumero(row.Cells(4).Value))
+                    lblTotalDebitos.Text += Val(_NormalizarNumero(row.Cells(4).Value))
 
                     If _TipoCompo <> 2 And _Paridad <> 0 Then
 
-                        lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) + (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_NormalizarNumero(_Paridad)))
+                        lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_NormalizarNumero(_Paridad)))
 
                     End If
 
@@ -363,8 +363,8 @@ Public Class Recibos
             End If
         Next
 
-        lblTotalDebitos.Text = _Redondear(_NormalizarNumero(lblTotalDebitos.Text))
-        lblDolares.Text = _Redondear(_NormalizarNumero(lblDolares.Text))
+        lblTotalDebitos.Text = _NormalizarNumero(lblTotalDebitos.Text)
+        lblDolares.Text = _NormalizarNumero(lblDolares.Text)
 
         _RecalcularDolaresfinales()
 
@@ -383,7 +383,7 @@ Public Class Recibos
 
             'lblDolares.Text = _NormalizarNumero(lblDolares.Text)
         Else
-            lblDolares.Text = "0"
+            lblDolares.Text = "0.00"
         End If
 
     End Sub
@@ -506,7 +506,6 @@ Public Class Recibos
     End Sub
 
     Private Sub mostrarRecibo(ByVal recibo As Recibo)
-        Dim _fecha As String
         If IsNothing(recibo) Then
             Dim temp As String = ceros(txtRecibo.Text, 6)
             btnLimpiar.PerformClick()
@@ -515,15 +514,15 @@ Public Class Recibos
             Exit Sub
         Else
             txtRecibo.Text = recibo.codigo
-            _fecha = recibo.fecha
-            _NormalizarFecha(_fecha)
-            txtFecha.Text = _fecha
+            txtFecha.Text = Proceso._Normalizarfecha(recibo.fecha)
+            '_NormalizarFecha(_fecha)
+            'txtFecha.Text = _fecha
             _DeterminarParidad()
             mostrarCliente(recibo.cliente.id)
-            txtRetGanancias.Text = recibo.retGanancias
+            txtRetGanancias.Text = _NormalizarNumero(recibo.retGanancias)
             txtRetIB.Text = _NormalizarNumero(recibo.retIB)
-            txtRetIva.Text = recibo.retIVA
-            txtRetSuss.Text = recibo.retSuss
+            txtRetIva.Text = _NormalizarNumero(recibo.retIVA)
+            txtRetSuss.Text = _NormalizarNumero(recibo.retSuss)
             'txtParidad.Text = recibo.paridad
             txtObservaciones.Text = recibo.observaciones
             mostrarTipoRecibo(recibo.tipo)
@@ -766,18 +765,31 @@ Public Class Recibos
     End Sub
 
     Private Function _NormalizarNumero(ByVal numero As String) As String
+        numero = IIf(Trim(numero) = "", "0", Trim(numero))
 
-        If numero.Contains(",") Then
-            numero = String.Format("{0:F2}", CDbl(numero)).Replace(",", ".")
-        ElseIf Not numero.Contains(".") Then
-            numero &= ".00"
+        If numero.Contains(".") Then
+            Return Proceso.formatonumerico(numero.Replace(".", ","), "########0.#0", ".")
+        Else
+            Return Proceso.formatonumerico(CDbl(numero), "########0.#0", ".")
         End If
 
-        Return numero
+        'If numero.Contains(",") Then
+        '    numero = String.Format("{0:F2}", CDbl(numero)).Replace(",", ".")
+        'ElseIf Not numero.Contains(".") Then
+        '    numero &= ".00"
+        'End If
+
+        'Return numero
     End Function
 
     Private Function _SumarCreditos() As Boolean
         Dim _Error As Boolean = False
+
+        txtRetGanancias.Text = _NormalizarNumero(txtRetGanancias.Text)
+        txtRetIva.Text = _NormalizarNumero(txtRetIva.Text)
+        txtRetIB.Text = _NormalizarNumero(txtRetIB.Text)
+        txtRetSuss.Text = _NormalizarNumero(txtRetSuss.Text)
+
         lblTotalCreditos.Text = Val(txtRetGanancias.Text) + Val(txtRetIva.Text) + Val(txtRetIB.Text) + Val(txtRetSuss.Text)
 
         For Each row As DataGridViewRow In gridFormasPago.Rows
@@ -793,7 +805,7 @@ Public Class Recibos
 
                 End If
 
-                lblTotalCreditos.Text = Val(_NormalizarNumero(lblTotalCreditos.Text)) + Val(row.Cells(4).Value)
+                lblTotalCreditos.Text = Val(_NormalizarNumero(lblTotalCreditos.Text)) + Val(_NormalizarNumero(row.Cells(4).Value))
 
             End If
 
@@ -3267,6 +3279,7 @@ Public Class Recibos
     Private Sub _EnviarReciboPorEmail(ByVal crdoc As ReportDocument, ByVal WEmail As String)
         Dim archivo As String = "Recibo" & Trim(txtRecibo.Text) & ".pdf"
         Dim ruta As String = Application.StartupPath & "/"
+        Dim _to, _bcc, _asunto, _mensaje, _adjunto As String
 
         ' Guardamos el archivo.
         crdoc.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & archivo)
@@ -3277,8 +3290,14 @@ Public Class Recibos
         End If
 
         Try
+            _to = "gferreyra@surfactan.com.ar" ' trim(WEmail)
+            _bcc = _to ' CONSULTAR SI SE AGREGA ESTO O NO.
+            _asunto = "Recibo Nº " & Trim(txtRecibo.Text)
+            _mensaje = _asunto
+            _adjunto = ruta & archivo
+
             ' Enviamos por email e imprimimos una copia.
-            _EnviarEmail("gferreyra@surfactan.com.ar", "gferreyra@surfactan.com.ar", "Recibo Nº " & Trim(txtRecibo.Text), "Recibo Nº " & Trim(txtRecibo.Text), ruta & archivo)
+            _EnviarEmail(_to, _bcc, _asunto, _mensaje, _adjunto)
 
             '_Imprimir(crdoc, 1)
             _VistaPrevia(crdoc)
