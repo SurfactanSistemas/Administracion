@@ -169,6 +169,11 @@ Public Class RubrosProveedorABM
 
     Private Sub _TraerRubro(ByVal descripcion As String)
         Dim rubro As New List(Of RubroProveedor)
+
+        If Trim(descripcion) = "" Then
+            Exit Sub
+        End If
+
         rubro = DAORubroProveedor.buscarRubroProveedorPorDescripcion(descripcion)
 
         txtCodigo.Text = rubro(1).codigo

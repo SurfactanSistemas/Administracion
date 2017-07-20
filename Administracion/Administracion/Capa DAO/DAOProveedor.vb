@@ -8,7 +8,7 @@ Public Class DAOProveedor
                                       proveedor.provincia, proveedor.codPostal, proveedor.region, proveedor.telefono, proveedor.diasPlazo, _
                                       proveedor.email, proveedor.observaciones, proveedor.cuit, proveedor.tipo, proveedor.codIva, _
                                       proveedor.codigoCuenta, proveedor.nombreCheque, proveedor.condicionIB1, proveedor.condicionIB2, _
-                                      proveedor.numeroIB, proveedor.porceIBProvincia, proveedor.porceIBCABA, proveedor.codigoRubro, _
+                                      proveedor.numeroIB, proveedor.porceIBProvincia, proveedor.porceIBCABA, proveedor.RawRubro, _
                                       proveedor.numeroSEDRONAR, proveedor.vtoSEDRONAR, proveedor.categoria, proveedor.categoriaCalif, _
                                       proveedor.vtoCategoria, proveedor.tipoInscripcionIB, proveedor.cai, proveedor.vtoCAI, _
                                       proveedor.certificados, proveedor.vtoCertificados, proveedor.estado, proveedor.calificacion, _
@@ -68,7 +68,7 @@ Public Class DAOProveedor
                             row("dircufeii").ToString,
                             row("dircufeiii").ToString,
                             DAOCuentaContable.buscarCuentaContablePorCodigo(row("cuenta").ToString),
-                            DAORubroProveedor.buscarRubroProveedorPorCodigo(intNull(row("tipo"))),
+                            DAORubroProveedor.buscarRubroProveedorPorCodigo(intNull(row("tipoprov"))),
                             row("PaginaWeb").ToString,
                             row("ContactoNombre1").ToString,
                             row("ContactoCargo1").ToString,
@@ -83,7 +83,8 @@ Public Class DAOProveedor
                             row("ContactoTelefono3").ToString,
                             row("ContactoEmail3").ToString,
                             DAOCliente.buscarClientePorCodigo(row("ClienteAsociado").ToString),
-                            row("Inhabilitado").ToString
+                            row("Inhabilitado").ToString,
+                            row("TipoProv").ToString
                              )
     End Function
 

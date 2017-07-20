@@ -20,10 +20,10 @@ Public Class ProveedoresABM
     Private Const EXPANDED_HEIGHT = 720
 
     Private Sub ProveedoresABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim provincias = DAOProveedor.listarProvincias
-        cmbProvincia.DisplayMember = "ToString"
-        cmbProvincia.ValueMember = "valueMember"
-        cmbProvincia.DataSource = provincias
+        'Dim provincias = DAOProveedor.listarProvincias
+        'cmbProvincia.DisplayMember = "ToString"
+        'cmbProvincia.ValueMember = "valueMember"
+        'cmbProvincia.DataSource = provincias
         
         cmbRubro.DisplayMember = "ToString"
         cmbRubro.ValueMember = "valueMember"
@@ -103,7 +103,7 @@ Public Class ProveedoresABM
                     & "Telefono =  '" & Mid(Trim(txtTelefono.Text), 1, 30) & "', " _
                     & "Email =  '" & Mid(Trim(txtEmail.Text), 1, 400) & "', " _
                     & "Observaciones =  '" & Mid(Trim(txtObservaciones.Text), 1, 50) & "', " _
-                    & "Tipo =  '" & NormalizarIndex(cmbRubro.SelectedIndex) & "', " _
+                    & "Tipo =  '" & NormalizarIndex(cmbTipoProveedor.SelectedIndex) & "', " _
                     & "Iva =  '" & NormalizarIndex(cmbIVA.SelectedIndex) & "', " _
                     & "Dias =  '" & Mid(Trim(txtDiasPlazo.Text), 1, 20) & "', " _
                     & "Empresa =  '1', " _
@@ -115,7 +115,7 @@ Public Class ProveedoresABM
                     & "NroInsc =  '" & Mid(Trim(txtNroSEDRONAR1.Text), 1, 15) & "', " _
                     & "Cai =  '', " _
                     & "VtoCai =  '', " _
-                    & "TipoProv =  '" & NormalizarIndex(cmbTipoProveedor.SelectedIndex) & "', " _
+                    & "TipoProv =  '" & NormalizarIndex(cmbRubro.SelectedIndex) & "', " _
                     & "CategoriaI =  '" & NormalizarIndex(cmbCategoria1.SelectedIndex) & "', " _
                     & "CategoriaII =  '" & NormalizarIndex(cmbCategoria2.SelectedIndex) & "', " _
                     & "Iso =  '" & NormalizarIndex(cmbCertificados.SelectedIndex) & "', " _
@@ -326,7 +326,7 @@ Public Class ProveedoresABM
         proveedor.numeroIB = txtNroIB.Text
         proveedor.porceIBProvincia = CustomConvert.toDoubleOrZero(txtPorcelProv.Text)
         proveedor.porceIBCABA = CustomConvert.toDoubleOrZero(txtPorcelCABA.Text)
-        proveedor.rubro = cmbRubro.SelectedItem
+        proveedor.RawRubro = cmbRubro.SelectedIndex
         proveedor.numeroSEDRONAR = txtNroSEDRONAR1.Text
         proveedor.vtoSEDRONAR = txtNroSEDRONAR2.Text
         proveedor.categoria = cmbCategoria1.SelectedIndex
@@ -405,7 +405,8 @@ Public Class ProveedoresABM
         txtNroIB.Text = proveedor.numeroIB
         txtPorcelProv.Text = proveedor.porceIBProvincia
         txtPorcelCABA.Text = proveedor.porceIBCABA
-        mostrarRubro(proveedor.rubro)
+        'mostrarRubro(proveedor.rubro)
+        cmbRubro.SelectedIndex = proveedor.RawRubro
         txtNroSEDRONAR1.Text = proveedor.numeroSEDRONAR
         txtNroSEDRONAR2.Text = proveedor.vtoSEDRONAR
         cmbCategoria1.SelectedIndex = proveedor.categoria
@@ -446,7 +447,7 @@ Public Class ProveedoresABM
 
     Private Sub mostrarRubro(ByVal rubro As RubroProveedor)
         If Not IsNothing(rubro) Then
-            cmbRubro.SelectedIndex = rubro.codigo
+            cmbRubro.SelectedItem = rubro.descripcion
         Else
             cmbRubro.SelectedValue = -1
         End If
