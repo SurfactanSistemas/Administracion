@@ -34,15 +34,24 @@ Public Class DAOCompras
             crarCuotasPara(compra, datosCuotas)
         End If
         Dim aumentoInterno As Integer = 0
+        Dim WProveedor As String = compra.codigoProveedor
         For Each datoCuotas In datosCuotas
-            SQLConnector.executeProcedure("alta_cuenta_corriente", compra.tipoPago, compra.codigoProveedor, compra.letra, ceros(compra.tipoDocumento, 2), compra.punto,
+
+            If aumentoInterno > 0 Then
+                WProveedor = "10077777777" 'DAOProveedor.bancoNacion
+                compra.fechaEmision = datoCuotas.Item2
+                compra.fechaVto1 = compra.fechaEmision
+                compra.fechaVto2 = compra.fechaEmision
+            End If
+
+            SQLConnector.executeProcedure("alta_cuenta_corriente", compra.tipoPago, WProveedor, compra.letra, ceros(compra.tipoDocumento, 2), compra.punto,
                                       datoCuotas.Item1, compra.fechaEmision, datoCuotas.Item2, datoCuotas.Item3, datoCuotas.Item4, datoCuotas.Item5,
-                                      compra.tipoDocumentoDescripcion, compra.nroInterno, compra.paridad, compra.formaPago)
+                                      compra.tipoDocumentoDescripcion, compra.nroInterno + aumentoInterno, compra.paridad, compra.formaPago, Proceso.ordenaFecha(compra.fechaEmision), Proceso.ordenaFecha(compra.fechaVto1))
             If compra.tipoPago = 3 And aumentoInterno > 0 Then
                 SQLConnector.executeProcedure("alta_iva_compra_nacion", compra.nroInterno + aumentoInterno, DAOProveedor.bancoNacion.id, compra.tipoDocumento, compra.letra,
-                                              compra.punto, compra.numero, compra.fechaEmision, datoCuotas.Item2, datoCuotas.Item3, compra.fechaIVA, 0, 0, 0, 0,
+                                              compra.punto, compra.numero, compra.fechaEmision, datoCuotas.Item2, datoCuotas.Item3, compra.fechaIVA, datoCuotas.Item4, 0, 0, 0,
                                               0, 0, compra.tipoPago, compra.tipoDocumentoDescripcion, compra.paridad,
-                                              compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, 0, compra.despacho, compra.remito, compra.soloIVA, compra.nroInterno)
+                                              compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, 0, compra.despacho, compra.remito, compra.soloIVA, compra.nroInterno, Proceso.ordenaFecha(compra.fechaEmision))
             End If
             aumentoInterno += 1
         Next
@@ -54,8 +63,8 @@ Public Class DAOCompras
         mes = CustomConvert.toIntOrZero(compra.pagoPyme(1))
         anio = CustomConvert.toIntOrZero(compra.pagoPyme(2))
 
-        For x As Integer = 1 To cantidadCuotas
-            datosCuotas.Add(Tuple.Create(truncarUltimosDosCon(compra.numero, x), fechaSegun(mes + x, anio),
+        For x As Integer = 0 To cantidadCuotas - 1
+            datosCuotas.Add(Tuple.Create(truncarUltimosDosCon(compra.numero, x + 1), fechaSegun(mes + x, anio),
                                          fechaSegun(mes + x, anio), compra.total / cantidadCuotas,
                                          compra.total / cantidadCuotas))
         Next
@@ -68,11 +77,11 @@ Public Class DAOCompras
             fechaSegun(mes, anio)
         End If
         Dim fecha As String = "01" & "/" & ceros(mes, 2) & "/" & anio
-        Return CustomConvert.asTextDate(fecha).ToString
+        Return fecha
     End Function
 
     Private Shared Function truncarUltimosDosCon(ByVal text As String, ByVal valor As String) As String
-        Return text.Remove(6, 2).Insert(6, ceros(valor, 2))
+        Return Mid(text, 3, 6) & ceros(valor, 2)
     End Function
 
     Private Shared Function crearCompra(ByVal row As DataRow)
@@ -139,7 +148,7 @@ Public Class DAOCompras
                                       compra.fechaVto1, compra.fechaVto2, compra.fechaIVA, compra.neto, compra.iva21, compra.ivaRG, compra.iva27,
                                       compra.percibidoIB, compra.exento, compra.tipoPago, compra.tipoDocumentoDescripcion, compra.paridad,
                                       compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, compra.iva105, compra.despacho, compra.remito, compra.soloIVA, _
-                                      compra.RetIB1, compra.RetIB2, compra.RetIB3, compra.RetIB4, compra.RetIB5, compra.RetIB6, compra.RetIB7, compra.RetIB8, compra.RetIB9, compra.RetIB10, compra.RetIB11, compra.RetIB12, compra.RetIB13, compra.RetIB14)
+                                      compra.RetIB1, compra.RetIB2, compra.RetIB3, compra.RetIB4, compra.RetIB5, compra.RetIB6, compra.RetIB7, compra.RetIB8, compra.RetIB9, compra.RetIB10, compra.RetIB11, compra.RetIB12, compra.RetIB13, compra.RetIB14, String.Join("", compra.fechaEmision.Split("/").Reverse))
     End Sub
 
     Public Shared Sub agregarCompra(ByVal compra As Compra)
@@ -147,14 +156,14 @@ Public Class DAOCompras
                                       compra.fechaVto1, compra.fechaVto2, compra.fechaIVA, compra.neto, compra.iva21, compra.ivaRG, compra.iva27,
                                       compra.percibidoIB, compra.exento, compra.tipoPago, compra.tipoDocumentoDescripcion, compra.paridad,
                                       compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, compra.iva105, compra.despacho, compra.remito, compra.soloIVA, _
-                                      compra.RetIB1, compra.RetIB2, compra.RetIB3, compra.RetIB4, compra.RetIB5, compra.RetIB6, compra.RetIB7, compra.RetIB8, compra.RetIB9, compra.RetIB10, compra.RetIB11, compra.RetIB12, compra.RetIB13, compra.RetIB14)
+                                      compra.RetIB1, compra.RetIB2, compra.RetIB3, compra.RetIB4, compra.RetIB5, compra.RetIB6, compra.RetIB7, compra.RetIB8, compra.RetIB9, compra.RetIB10, compra.RetIB11, compra.RetIB12, compra.RetIB13, compra.RetIB14, String.Join("", compra.fechaEmision.Split("/").Reverse))
         agregarImputaciones(compra.imputaciones)
     End Sub
 
     Private Shared Sub agregarImputaciones(ByVal imputaciones As List(Of Imputac))
         imputaciones.ForEach(Sub(imputacion) SQLConnector.executeProcedure("alta_imputacion", imputacion.clave, imputacion.tipoMovimiento, imputacion.proveedor, imputacion.tipoComprobante,
                                                                            imputacion.letra, imputacion.punto, imputacion.numero, imputacion.renglon,
-                                                                           imputacion.fechaord, "", imputacion.cuenta, imputacion.debito, imputacion.credito, imputacion.nrointerno))
+                                                                           imputacion.fechaord, "", imputacion.cuenta, imputacion.debito, imputacion.credito, imputacion.nrointerno, Proceso.ordenaFecha(imputacion.fechaord)))
     End Sub
 
     Public Shared Sub agregarTablaIvaComprasAdicional(ByVal compra As Compra, ByVal rows As DataGridViewRowCollection)
