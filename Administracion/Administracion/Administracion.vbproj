@@ -507,6 +507,12 @@
     <Compile Include="Procesos\ProcesoSifere.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ProveedoresABM\PedirClaveAutorizacion.Designer.vb">
+      <DependentUpon>PedirClaveAutorizacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresABM\PedirClaveAutorizacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ProveedoresABM\ProveedoresABM.Designer.vb">
       <DependentUpon>ProveedoresABM.vb</DependentUpon>
     </Compile>
@@ -898,6 +904,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Procesos\ProcesoSifere.resx">
       <DependentUpon>ProcesoSifere.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresABM\PedirClaveAutorizacion.resx">
+      <DependentUpon>PedirClaveAutorizacion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProveedoresABM\ProveedoresABM.resx">
       <DependentUpon>ProveedoresABM.vb</DependentUpon>

@@ -230,6 +230,11 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub agregar()
+        Dim _Autorizado As Boolean = False
+
+        If Trim(txtCodigo.Text) = "" Then
+            Exit Sub
+        End If
 
         ' Validamos el Cuit en caso de que se haya ingresado alguno.
 
@@ -293,6 +298,19 @@ Public Class ProveedoresABM
             End If
         End If
 
+        With PedirClaveAutorizacion
+
+            .ShowDialog()
+            _Autorizado = .Autorizado
+            .Dispose()
+
+        End With
+
+        If Not _Autorizado Then
+            'MsgBox("No se encuentra autorizado para realizar la modificacion requerida.", MsgBoxStyle.Information)
+            txtCodigo.Focus()
+            Exit Sub
+        End If
 
         ' Se supone que llegados hasta acá todos los datos introducidos son validos.
 
