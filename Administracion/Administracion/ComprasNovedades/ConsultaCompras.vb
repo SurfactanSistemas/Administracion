@@ -74,11 +74,8 @@
             Next
 
             final.Visible = True
-
         Else
-
             final.Visible = False
-
         End If
     End Sub
 

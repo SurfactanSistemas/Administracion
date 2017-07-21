@@ -1171,6 +1171,8 @@ Public Class Pagos
 
         txtParidad.Text = traerParidad()
 
+        txtProveedor.Focus()
+
     End Sub
 
     Private Function traerParidad() As String

@@ -96,15 +96,19 @@ Public Class CuentaCorrientePantalla
         End If
     End Sub
 
-    Private Sub _TraerSaldoCuentaProveedor(ByVal cliente As String)
+    Private Sub _TraerSaldoCuentaProveedor(ByVal proveedor As Proveedor)
+
+        If IsNothing(proveedor.cliente) Then : Exit Sub : End If
+
+        Dim cliente As String = proveedor.cliente.id
         Dim saldo As String = "0,00"
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT SUM(Saldo) as SaldoTotal FROM CtaCte WHERE Cliente = '" & Trim(cliente) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT SUM(Saldo) as SaldoTotal FROM CtaCte WHERE Cliente = '" & Trim(Cliente) & "'")
         Dim dr As SqlDataReader
 
 
-        If Trim(cliente) = "" Then
+        If Trim(Cliente) = "" Then
             lblSaldoCuentaProveedor.Text = saldo
             Exit Sub
         End If
@@ -136,16 +140,19 @@ Public Class CuentaCorrientePantalla
 
         End Try
 
-        lblClienteAsociado.Text = Trim(cliente)
+        lblClienteAsociado.Text = Trim(Cliente)
         lblSaldoCuentaProveedor.Text = "$ " & formatonumerico(saldo, "########0.#0", ".")
     End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
+
+        If IsNothing(proveedor) Then : Exit Sub : End If
+        'lstFiltrada.Visible = False
         txtProveedor.Text = proveedor.id
         txtRazon.Text = proveedor.razonSocial
         boxPantallaProveedores.Visible = False
         _TraerProveedorSelectivo()
-        _TraerSaldoCuentaProveedor(proveedor.cliente.id)
+        _TraerSaldoCuentaProveedor(proveedor)
         Call Proceso()
 
         GRilla.CurrentCell = GRilla.Rows(0).Cells(0) ' Nos posicionamos en la grilla.
@@ -347,10 +354,7 @@ Public Class CuentaCorrientePantalla
 
     Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
 
-        If Trim(txtProveedor.Text) = "" Then
-            btnConsulta.PerformClick()
-            Exit Sub
-        End If
+        btnConsulta.PerformClick()
 
     End Sub
 
@@ -391,13 +395,13 @@ Public Class CuentaCorrientePantalla
         Dim filtrado As ListBox = lstFiltrada
 
         ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
-        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
+        origen.SelectedItem = filtrado.SelectedItem
 
         ' Llamamos al evento que tenga asosiado el control de origen.
         lstAyuda_Click(Nothing, Nothing)
 
         ' Sacamos de vista los resultados filtrados.
-        filtrado.Visible = False
+
     End Sub
 
     Private Sub lblSaldoCuentaProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblSaldoCuentaProveedor.MouseDoubleClick
