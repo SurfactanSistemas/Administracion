@@ -12,6 +12,7 @@
     End Sub
 
     Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSeleccion.Click
+
         If lstSeleccion.SelectedItem = "Proveedores" Then
             query = AddressOf DAOProveedor.buscarProveedoresActivoPorNombre
             showMethod = AddressOf duenio.mostrarProveedorConsulta
@@ -38,9 +39,10 @@
 
     Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
 
-        If Trim(lstConsulta.SelectedItem.ToString) <> "" Then
+        If Not IsNothing(lstConsulta.SelectedItem) Then
+            showMethod.Invoke(lstConsulta.SelectedItem)
+            CLBFiltrado.Visible = False
             Close()
-            showMethod.Invoke(lstConsulta.SelectedItem.ToString())
         End If
 
     End Sub
@@ -85,12 +87,8 @@
         Dim filtrado As ListBox = CLBFiltrado
         Dim texto As TextBox = txtConsulta
 
-        If Trim(filtrado.SelectedItem.ToString) = "" Then
-            Exit Sub
-        End If
-
         ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
-        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
+        origen.SelectedItem = filtrado.SelectedItem
 
 
         ' Llamamos al evento que tenga asosiado el control de origen.
@@ -98,8 +96,7 @@
 
 
         ' Sacamos de vista los resultados filtrados.
-        filtrado.Visible = False
-        texto.Text = ""
+        ' filtrado.Visible = False
 
     End Sub
 

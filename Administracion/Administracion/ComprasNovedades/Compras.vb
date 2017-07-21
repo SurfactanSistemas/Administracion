@@ -96,7 +96,7 @@ Public Class Compras
         CBLetra.SelectedItem = "A"
         cmbFormaPago.SelectedIndex = 0
 
-        If Val(proveedorAMostrar.codIva) = 6 Then
+        If Val(proveedorAMostrar.codIva) = 5 Then
             cmbTipo.SelectedItem = "FC"
             CBLetra.SelectedItem = "C"
             _HabilitarDeshabilitarControlesSegunLetra()
@@ -165,9 +165,9 @@ Public Class Compras
         Return IIf(dias = "", 0, Mid(dias, 1, 2))
     End Function
 
-    Public Sub mostrarProveedorConsulta(ByVal proveedorAMostrar As String)
+    Public Sub mostrarProveedorConsulta(ByVal proveedorAMostrar As Proveedor)
 
-        If proveedorAMostrar <> "" Then
+        If Not IsNothing(proveedorAMostrar) Then
             btnLimpiar.PerformClick()
             mostrarProveedor(proveedorAMostrar)
         End If
@@ -694,6 +694,7 @@ Public Class Compras
         If Not IsNothing(compra) Then
             apertura = New Apertura
             mostrarCompra(compra)
+            _RecalcularTotal()
         Else
             esModificacion = False
             btnLimpiar.PerformClick()
@@ -889,7 +890,7 @@ Public Class Compras
             Dim _NumeroInterno As String = ""
 
             If Trim(txtCodigoProveedor.Text) <> "" And cmbTipo.SelectedIndex >= 0 And CBLetra.SelectedIndex >= 0 And Trim(txtPunto.Text) <> "" And Trim(txtNumero.Text) <> "" Then
-                _NumeroInterno = Trim(DAOCompras.buscarNumeroIntero(txtCodigoProveedor.Text, ceros(cmbTipo.SelectedIndex + 1, 2), CBLetra.SelectedItem, ceros(txtPunto.Text, 4), ceros(txtNumero.Text, 8)))
+                _NumeroInterno = Trim(DAOCompras.buscarNumeroIntero(txtCodigoProveedor.Text, ceros(cmbTipo.SelectedIndex, 2), CBLetra.SelectedItem, ceros(txtPunto.Text, 4), ceros(txtNumero.Text, 8)))
 
                 If Trim(_NumeroInterno) <> 0 Then
 

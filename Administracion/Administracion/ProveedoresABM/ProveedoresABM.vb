@@ -300,6 +300,10 @@ Public Class ProveedoresABM
 
         proveedor = DAOProveedor.buscarProveedorPorCodigo(txtCodigo.Text)
 
+        ' Normalizamos los numeros para que no rompa nada.
+        txtPorcelProv.Text = Proceso.formatonumerico(txtPorcelProv.Text)
+        txtPorcelCABA.Text = Proceso.formatonumerico(txtPorcelCABA.Text)
+
         ' Comprobamos si se trata de una actualización o de un proveedor nuevo.
         If Not IsNothing(proveedor) Then
             _ActualizarProveedor(proveedor.id)
