@@ -94,6 +94,11 @@ Public Class RubrosProveedorABM
     End Sub
 
     Private Sub LBConsulta_Filtrada_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Filtrada.SelectedIndexChanged
+
+        If Trim(LBConsulta_Filtrada.SelectedItem) = "" Then
+            Exit Sub
+        End If
+
         _TraerRubro(LBConsulta_Filtrada.SelectedItem)
         LBConsulta_Filtrada.Visible = False
         txtFiltrar.Text = ""
