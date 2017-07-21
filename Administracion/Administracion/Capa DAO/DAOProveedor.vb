@@ -47,7 +47,7 @@ Public Class DAOProveedor
                             intNull(row("provincia")),
                             intNull(row("region")),
                             row("dias").ToString,
-                            intNull(row("tipoprov")),
+                            intNull(row("tipo")),
                             intNull(row("iva")),
                             intNull(row("codib")),
                             intNull(row("codibcaba")),
