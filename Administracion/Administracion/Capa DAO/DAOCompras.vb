@@ -35,18 +35,43 @@ Public Class DAOCompras
         End If
         Dim aumentoInterno As Integer = 0
         Dim WProveedor As String = compra.codigoProveedor
+        Dim WNroInternoAsociado, WNombreProveedor, WNumeroOriginal, WImporteTotal, WFechaOriginal, WFechaOriginalOrd As String
+        Dim XNroInternoAsociado, XNombreProveedor, XNumeroOriginal, XImporteTotal, XFechaOriginal, XFechaOriginalOrd As String
+
+        WNroInternoAsociado = compra.nroInterno
+        WNombreProveedor = compra.proveedor.razonSocial
+        WNumeroOriginal = compra.numero
+        WImporteTotal = compra.neto
+        WFechaOriginal = compra.fechaEmision
+        WFechaOriginalOrd = Proceso.ordenaFecha(WFechaOriginal)
+
         For Each datoCuotas In datosCuotas
+
+            XNroInternoAsociado = ""
+            XNombreProveedor = ""
+            XNumeroOriginal = ""
+            XImporteTotal = "0"
+            XFechaOriginal = ""
+            XFechaOriginalOrd = ""
 
             If aumentoInterno > 0 Then
                 WProveedor = "10077777777" 'DAOProveedor.bancoNacion
                 compra.fechaEmision = datoCuotas.Item2
                 compra.fechaVto1 = compra.fechaEmision
                 compra.fechaVto2 = compra.fechaEmision
+                XNroInternoAsociado = WNroInternoAsociado
+                XNombreProveedor = WNombreProveedor
+                XNumeroOriginal = WNumeroOriginal
+                XImporteTotal = WImporteTotal
+                XFechaOriginal = WFechaOriginal
+                XFechaOriginalOrd = WFechaOriginalOrd
             End If
 
             SQLConnector.executeProcedure("alta_cuenta_corriente", compra.tipoPago, WProveedor, compra.letra, ceros(compra.tipoDocumento, 2), compra.punto,
                                       datoCuotas.Item1, compra.fechaEmision, datoCuotas.Item2, datoCuotas.Item3, datoCuotas.Item4, datoCuotas.Item5,
-                                      compra.tipoDocumentoDescripcion, compra.nroInterno + aumentoInterno, compra.paridad, compra.formaPago, Proceso.ordenaFecha(compra.fechaEmision), Proceso.ordenaFecha(compra.fechaVto1))
+                                      compra.tipoDocumentoDescripcion, compra.nroInterno + aumentoInterno, compra.paridad, compra.formaPago, Proceso.ordenaFecha(compra.fechaEmision), Proceso.ordenaFecha(compra.fechaVto1), _
+                                      XNroInternoAsociado, XNombreProveedor, XNumeroOriginal, CDbl(XImporteTotal), XFechaOriginal, XFechaOriginalOrd, IIf(aumentoInterno = 0, "", aumentoInterno))
+
             If compra.tipoPago = 3 And aumentoInterno > 0 Then
                 SQLConnector.executeProcedure("alta_iva_compra_nacion", compra.nroInterno + aumentoInterno, DAOProveedor.bancoNacion.id, compra.tipoDocumento, compra.letra,
                                               compra.punto, datoCuotas.Item1, compra.fechaEmision, compra.fechaEmision, compra.fechaEmision, compra.fechaEmision, datoCuotas.Item4, 0, 0, 0,

@@ -92,7 +92,7 @@ Public Class Compras
         End If
         txtCodigoProveedor.Text = proveedorAMostrar.id
         txtNombreProveedor.Text = proveedorAMostrar.razonSocial
-        _MostrarCAI(proveedor)
+
         CBLetra.SelectedItem = "A"
         cmbFormaPago.SelectedIndex = 0
 
@@ -102,6 +102,7 @@ Public Class Compras
             _HabilitarDeshabilitarControlesSegunLetra()
         End If
 
+        _MostrarCAI(proveedor)
         diasPlazo = _ExtraerSoloNumeros(proveedorAMostrar.diasPlazo)
     End Sub
 
@@ -109,19 +110,19 @@ Public Class Compras
 
         ' Si tiene dato de CAI, se verifica que no este vencido.
         ' En caso de que si, se muestran los campos para solicitar que los actualice.
-        If Trim(proveedor.cai) <> "" And Val(proveedor.vtoCAI.Replace("/", "")) > 0 Then
-            If _CAIVencido(proveedor.vtoCAI) Then
-                txtCAI.Text = proveedor.cai
-                txtVtoCAI.Text = Proceso._Normalizarfecha(proveedor.vtoCAI)
+        'If Trim(proveedor.cai) <> "" And Val(proveedor.vtoCAI.Replace("/", "")) > 0 Then
+        If _CAIVencido(proveedor.vtoCAI) Then
+            txtCAI.Text = proveedor.cai
+            txtVtoCAI.Text = Proceso._Normalizarfecha(proveedor.vtoCAI)
 
-                If CBLetra.SelectedItem = "C" Then
-                    _HabilitarCAI()
-                End If
-
-            Else
-                _DeshabilitarCAI()
+            If CBLetra.SelectedItem = "C" Then
+                _HabilitarCAI()
             End If
+
+        Else
+            _DeshabilitarCAI()
         End If
+        'End If
 
     End Sub
 
@@ -143,6 +144,8 @@ Public Class Compras
         Dim vencido As Boolean = False
         Dim vto As String = String.Join("", fecha_Vto.Split("/").Reverse())
         Dim actual As String = Date.Now.ToString("yyyyMMdd")
+
+        vto = IIf(Trim(vto) = "", "0", vto)
 
         If Val(vto) < actual Then
             vencido = True
