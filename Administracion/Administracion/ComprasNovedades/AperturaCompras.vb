@@ -1,4 +1,6 @@
-﻿Public Class Apertura
+﻿Imports System.Text.RegularExpressions
+
+Public Class Apertura
 
     Private seAbrio As Boolean = False
 
@@ -150,12 +152,31 @@
 
                 Dim iCol = .CurrentCell.ColumnIndex
                 Dim iRow = .CurrentCell.RowIndex
+                Dim valor = .Rows(iRow).Cells(iCol).Value
 
                 If msg.WParam.ToInt32() = Keys.Enter Then
 
-                    Dim valor = .Rows(iRow).Cells(iCol).Value
-
                     Select Case iCol
+                        Case 2 ' Columna tipo
+
+                            Select Case UCase(valor)
+                                Case "FC", "ND", "NC"
+                                    .Rows(iRow).Cells(iCol).Value = UCase(valor)
+                                    .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                                Case Else
+                                    Return True
+                            End Select
+
+                        Case 3 ' Columna Letra
+
+                            Select Case UCase(valor)
+                                Case "A", "B", "C", "X", "M", "I"
+                                    .Rows(iRow).Cells(iCol).Value = UCase(valor)
+                                    .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                                Case Else
+                                    Return True
+                            End Select
+
                         Case 6 ' Columna Fecha
 
                             If Not IsNothing(valor) Then
@@ -168,7 +189,12 @@
 
                             .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                         Case 13 ' Ultima Columna
-                            .CurrentCell = .Rows(.Rows.Add).Cells(0) ' Agregamos una fila y nos posicionamos en la primer celda.
+                            Try
+                                .CurrentCell = .Rows(iRow + 1).Cells(0)
+                            Catch ex As Exception
+                                .CurrentCell = .Rows(.Rows.Add).Cells(0) ' Agregamos una fila y nos posicionamos en la primer celda.
+                            End Try
+
                         Case Else
                             .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                     End Select
@@ -179,7 +205,45 @@
                 End If
             End If
         End With
-        
+
         Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
+
+    Private WithEvents txtNumeric As New DataGridViewTextBoxEditingControl
+    Private WithEvents txtNumericWithComma As New DataGridViewTextBoxEditingControl
+
+    Private Sub gridApertura_EditingControlShowing(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles gridApertura.EditingControlShowing
+
+        Select Case gridApertura.CurrentCell.ColumnIndex
+            Case 0, 4, 5
+                txtNumeric = CType(e.Control, DataGridViewTextBoxEditingControl)
+            Case 7, 8, 9, 10, 11, 12, 13
+                txtNumericWithComma = CType(e.Control, DataGridViewTextBoxEditingControl)
+            Case Else
+                txtNumericWithComma = Nothing
+                txtNumeric = Nothing
+        End Select
+
+    End Sub
+
+    Private Sub txtNumericWithComma_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNumericWithComma.KeyPress
+        If _EsNumero(e) Or e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or e.KeyChar = CChar(","c) Or e.KeyChar = CChar("."c) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtNumeric_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNumeric.KeyPress
+        If _EsNumero(e) Or e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Function _EsNumero(ByVal e As KeyPressEventArgs) As Boolean
+        Return (e.KeyChar >= CChar("0"c) And e.KeyChar <= CChar("9"c))
     End Function
 End Class

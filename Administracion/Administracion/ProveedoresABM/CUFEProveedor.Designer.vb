@@ -22,6 +22,7 @@ Partial Class CUFEProveedor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtCUFE3 = New Administracion.CustomTextBox()
         Me.txtCUFE2 = New Administracion.CustomTextBox()
         Me.txtCUFE1 = New Administracion.CustomTextBox()
@@ -32,11 +33,13 @@ Partial Class CUFEProveedor
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtCUFE1Fecha = New Administracion.CustomTextBox()
-        Me.txtCUFE2Fecha = New Administracion.CustomTextBox()
-        Me.txtCUFE3Fecha = New Administracion.CustomTextBox()
-        Me.CustomLabel4 = New Administracion.CustomLabel()
         Me.CustomLabel5 = New Administracion.CustomLabel()
+        Me.CustomLabel4 = New Administracion.CustomLabel()
+        Me.txtCUFE3Fecha = New Administracion.CustomTextBox()
+        Me.txtCUFE2Fecha = New Administracion.CustomTextBox()
+        Me.txtCUFE1Fecha = New Administracion.CustomTextBox()
+        Me.btnAgregar = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -170,47 +173,17 @@ Partial Class CUFEProveedor
         Me.Panel2.Size = New System.Drawing.Size(576, 156)
         Me.Panel2.TabIndex = 10
         '
-        'txtCUFE1Fecha
+        'CustomLabel5
         '
-        Me.txtCUFE1Fecha.Cleanable = False
-        Me.txtCUFE1Fecha.Empty = True
-        Me.txtCUFE1Fecha.EnterIndex = 1
-        Me.txtCUFE1Fecha.LabelAssociationKey = 1
-        Me.txtCUFE1Fecha.Location = New System.Drawing.Point(265, 37)
-        Me.txtCUFE1Fecha.MaxLength = 20
-        Me.txtCUFE1Fecha.Name = "txtCUFE1Fecha"
-        Me.txtCUFE1Fecha.Size = New System.Drawing.Size(289, 20)
-        Me.txtCUFE1Fecha.TabIndex = 3
-        Me.txtCUFE1Fecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCUFE1Fecha.Validator = Administracion.ValidatorType.None
-        '
-        'txtCUFE2Fecha
-        '
-        Me.txtCUFE2Fecha.Cleanable = False
-        Me.txtCUFE2Fecha.Empty = True
-        Me.txtCUFE2Fecha.EnterIndex = 1
-        Me.txtCUFE2Fecha.LabelAssociationKey = 1
-        Me.txtCUFE2Fecha.Location = New System.Drawing.Point(265, 74)
-        Me.txtCUFE2Fecha.MaxLength = 20
-        Me.txtCUFE2Fecha.Name = "txtCUFE2Fecha"
-        Me.txtCUFE2Fecha.Size = New System.Drawing.Size(289, 20)
-        Me.txtCUFE2Fecha.TabIndex = 3
-        Me.txtCUFE2Fecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCUFE2Fecha.Validator = Administracion.ValidatorType.None
-        '
-        'txtCUFE3Fecha
-        '
-        Me.txtCUFE3Fecha.Cleanable = False
-        Me.txtCUFE3Fecha.Empty = True
-        Me.txtCUFE3Fecha.EnterIndex = 1
-        Me.txtCUFE3Fecha.LabelAssociationKey = 1
-        Me.txtCUFE3Fecha.Location = New System.Drawing.Point(265, 114)
-        Me.txtCUFE3Fecha.MaxLength = 20
-        Me.txtCUFE3Fecha.Name = "txtCUFE3Fecha"
-        Me.txtCUFE3Fecha.Size = New System.Drawing.Size(289, 20)
-        Me.txtCUFE3Fecha.TabIndex = 3
-        Me.txtCUFE3Fecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCUFE3Fecha.Validator = Administracion.ValidatorType.None
+        Me.CustomLabel5.AutoSize = True
+        Me.CustomLabel5.ControlAssociationKey = 1
+        Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel5.Location = New System.Drawing.Point(386, 13)
+        Me.CustomLabel5.Name = "CustomLabel5"
+        Me.CustomLabel5.Size = New System.Drawing.Size(66, 18)
+        Me.CustomLabel5.TabIndex = 0
+        Me.CustomLabel5.Text = "Dirección"
         '
         'CustomLabel4
         '
@@ -224,23 +197,71 @@ Partial Class CUFEProveedor
         Me.CustomLabel4.TabIndex = 0
         Me.CustomLabel4.Text = "Código"
         '
-        'CustomLabel5
+        'txtCUFE3Fecha
         '
-        Me.CustomLabel5.AutoSize = True
-        Me.CustomLabel5.ControlAssociationKey = 1
-        Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(386, 13)
-        Me.CustomLabel5.Name = "CustomLabel5"
-        Me.CustomLabel5.Size = New System.Drawing.Size(66, 18)
-        Me.CustomLabel5.TabIndex = 0
-        Me.CustomLabel5.Text = "Dirección"
+        Me.txtCUFE3Fecha.Cleanable = False
+        Me.txtCUFE3Fecha.Empty = True
+        Me.txtCUFE3Fecha.EnterIndex = 1
+        Me.txtCUFE3Fecha.LabelAssociationKey = 1
+        Me.txtCUFE3Fecha.Location = New System.Drawing.Point(265, 114)
+        Me.txtCUFE3Fecha.MaxLength = 20
+        Me.txtCUFE3Fecha.Name = "txtCUFE3Fecha"
+        Me.txtCUFE3Fecha.Size = New System.Drawing.Size(289, 20)
+        Me.txtCUFE3Fecha.TabIndex = 3
+        Me.txtCUFE3Fecha.Validator = Administracion.ValidatorType.None
+        '
+        'txtCUFE2Fecha
+        '
+        Me.txtCUFE2Fecha.Cleanable = False
+        Me.txtCUFE2Fecha.Empty = True
+        Me.txtCUFE2Fecha.EnterIndex = 1
+        Me.txtCUFE2Fecha.LabelAssociationKey = 1
+        Me.txtCUFE2Fecha.Location = New System.Drawing.Point(265, 74)
+        Me.txtCUFE2Fecha.MaxLength = 20
+        Me.txtCUFE2Fecha.Name = "txtCUFE2Fecha"
+        Me.txtCUFE2Fecha.Size = New System.Drawing.Size(289, 20)
+        Me.txtCUFE2Fecha.TabIndex = 3
+        Me.txtCUFE2Fecha.Validator = Administracion.ValidatorType.None
+        '
+        'txtCUFE1Fecha
+        '
+        Me.txtCUFE1Fecha.Cleanable = False
+        Me.txtCUFE1Fecha.Empty = True
+        Me.txtCUFE1Fecha.EnterIndex = 1
+        Me.txtCUFE1Fecha.LabelAssociationKey = 1
+        Me.txtCUFE1Fecha.Location = New System.Drawing.Point(265, 37)
+        Me.txtCUFE1Fecha.MaxLength = 20
+        Me.txtCUFE1Fecha.Name = "txtCUFE1Fecha"
+        Me.txtCUFE1Fecha.Size = New System.Drawing.Size(289, 20)
+        Me.txtCUFE1Fecha.TabIndex = 3
+        Me.txtCUFE1Fecha.Validator = Administracion.ValidatorType.None
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.BackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
+        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.BorderSize = 0
+        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAgregar.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.Location = New System.Drawing.Point(259, 212)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(56, 37)
+        Me.btnAgregar.TabIndex = 71
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Cerrar ventana")
+        Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'CUFEProveedor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(574, 205)
+        Me.ClientSize = New System.Drawing.Size(574, 257)
+        Me.Controls.Add(Me.btnAgregar)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -270,4 +291,6 @@ Partial Class CUFEProveedor
     Friend WithEvents txtCUFE1Fecha As Administracion.CustomTextBox
     Friend WithEvents CustomLabel5 As Administracion.CustomLabel
     Friend WithEvents CustomLabel4 As Administracion.CustomLabel
+    Friend WithEvents btnAgregar As System.Windows.Forms.Button
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

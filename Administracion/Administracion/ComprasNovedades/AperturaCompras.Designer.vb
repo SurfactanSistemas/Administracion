@@ -22,6 +22,7 @@ Partial Class Apertura
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridApertura = New System.Windows.Forms.DataGridView()
         Me.CUIT = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RazonSocial = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,6 +55,9 @@ Partial Class Apertura
         '
         'CUIT
         '
+        DataGridViewCellStyle1.Format = "N0"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.CUIT.DefaultCellStyle = DataGridViewCellStyle1
         Me.CUIT.HeaderText = "CUIT"
         Me.CUIT.Name = "CUIT"
         '
@@ -68,6 +72,7 @@ Partial Class Apertura
         Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
+        Me.Tipo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Tipo.Width = 53
         '
         'Letra
@@ -75,6 +80,7 @@ Partial Class Apertura
         Me.Letra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Letra.HeaderText = "Letra"
         Me.Letra.Name = "Letra"
+        Me.Letra.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Letra.Width = 56
         '
         'Punto
