@@ -1,5 +1,7 @@
 ﻿Module Proceso
 
+    Private Const VALIDA_CUIT = "54327654321"
+
     Public Function ordenaFecha(ByVal fecha As String)
 
         Dim txtOrdenaFecha As String
@@ -116,6 +118,21 @@
 
         Return txtnumero
 
+    End Function
+
+    Public Function CuitValido(ByVal cuit As String) As Boolean
+        Dim valido As Boolean = False
+        Dim suma As Integer = 0
+
+        For i = 1 To 11
+            suma = suma + (Val(Mid(cuit, i, 1)) * Val(Mid(VALIDA_CUIT, i, 1)))
+        Next
+
+        If suma > 0 Then
+            valido = suma Mod 11 = 0
+        End If
+
+        Return valido
     End Function
 
 

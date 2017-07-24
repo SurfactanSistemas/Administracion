@@ -336,11 +336,27 @@ Public Class Compras
             End With
 
         Next
+
+        For Each row As DataGridViewRow In apertura.gridApertura.Rows
+
+            With row
+                apertura.gridApertura.CommitEdit(DataGridViewDataErrorContexts.Commit)
+                If IsNothing(.Cells(0).Value) And IsNothing(.Cells(1).Value) And IsNothing(.Cells(2).Value) And IsNothing(.Cells(3).Value) Then
+                    If Not .IsNewRow Then
+                        apertura.gridApertura.Rows().Remove(row)
+                    End If
+                End If
+
+            End With
+
+        Next
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
 
         _EliminarFilasEnBlanco()
+
+        Exit Sub
 
         If validarCampos() Then
             Try

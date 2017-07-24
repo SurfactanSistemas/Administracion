@@ -82,6 +82,7 @@ Public Class Apertura
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
         Dim _FechasInvalidas As Boolean = False
+        Dim _CuitsInvalidos As Boolean = False
 
         For Each row As DataGridViewRow In gridApertura.Rows
             With row
@@ -96,8 +97,27 @@ Public Class Apertura
             End With
         Next
 
+        For Each row As DataGridViewRow In gridApertura.Rows
+            With row
+
+                If Not IsNothing(.Cells(0).Value) Then
+                    If Not Proceso.CuitValido(.Cells(0).Value.ToString()) Then
+                        _CuitsInvalidos = True
+                        Exit For
+                    End If
+                End If
+
+            End With
+        Next
+
         If _FechasInvalidas Then ' Si se encuentra que hay fechas ingresadas y alguna de estas es invalida, se notifica al usuario y se le pregunta si quiere continuar o no.
             If MsgBox("Algunas de las fechas ingresadas no es correcta." & vbCrLf & vbCrLf & "¿Quiere cerrar igual la ventana de aperturas?", MsgBoxStyle.YesNo) = DialogResult.No Then
+                Exit Sub
+            End If
+        End If
+
+        If _CuitsInvalidos Then ' Si se encuentra que hay fechas ingresadas y alguna de estas es invalida, se notifica al usuario y se le pregunta si quiere continuar o no.
+            If MsgBox("Algunas de los Cuit ingresados no es correcto." & vbCrLf & vbCrLf & "¿Quiere cerrar igual la ventana de aperturas?", MsgBoxStyle.YesNo) = DialogResult.No Then
                 Exit Sub
             End If
         End If
@@ -157,6 +177,19 @@ Public Class Apertura
                 If msg.WParam.ToInt32() = Keys.Enter Then
 
                     Select Case iCol
+                        Case 0
+
+                            If Not IsNothing(valor) Then
+                                If Not Proceso.CuitValido(valor) Then
+                                    MsgBox("El CUIT ingresado no es correcto.")
+                                    Return True
+                                Else
+                                    .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                                End If
+                            Else
+                                Return True
+                            End If
+                            
                         Case 2 ' Columna tipo
 
                             Select Case UCase(valor)

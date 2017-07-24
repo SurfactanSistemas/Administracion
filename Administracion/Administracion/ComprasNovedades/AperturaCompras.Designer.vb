@@ -156,7 +156,7 @@ Partial Class Apertura
         Me.btnAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAceptar.LabelAssociationKey = -1
-        Me.btnAceptar.Location = New System.Drawing.Point(544, 370)
+        Me.btnAceptar.Location = New System.Drawing.Point(529, 370)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(136, 47)
         Me.btnAceptar.TabIndex = 1
