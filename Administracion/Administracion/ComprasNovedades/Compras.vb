@@ -327,9 +327,14 @@ Public Class Compras
 
             With row
                 gridAsientos.CommitEdit(DataGridViewDataErrorContexts.Commit)
-                If IsNothing(.Cells(0).Value) And IsNothing(.Cells(1).Value) And IsNothing(.Cells(2).Value) And IsNothing(.Cells(3).Value) Then
+                If IsNothing(.Cells(0).Value) And IsNothing(.Cells(1).Value) And (IsNothing(.Cells(2).Value) And IsNothing(.Cells(3).Value)) Then
                     If Not .IsNewRow Then
                         gridAsientos.Rows().Remove(row)
+                    End If
+                ElseIf Trim(.Cells(0).Value) = "" And Trim(.Cells(1).Value) = "" And Val(.Cells(2).Value) = 0 And Val(.Cells(3).Value) = 0 Then
+                    If Not .IsNewRow Then
+                        gridAsientos.Rows().Remove(row)
+                        _EliminarFilasEnBlanco()
                     End If
                 End If
 
@@ -355,8 +360,6 @@ Public Class Compras
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
 
         _EliminarFilasEnBlanco()
-
-        Exit Sub
 
         If validarCampos() Then
             Try
