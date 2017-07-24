@@ -41,7 +41,7 @@ Public Class ConsultaDatosFactura
         Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ic.Numero, ic.Fecha, ic.Remito, ic.Proveedor from IvaComp as ic WHERE ic.NroInterno = '" & _NroInterno & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT ic.Numero, ic.Fecha, ic.Remito, ic.Proveedor, ic.Despacho, ic.Paridad, ic.Fecha as FechaEmision, ic.Vencimiento, ic.Vencimiento1, ic.Pago as Moneda, ic.Periodo as FechaIva from IvaComp as ic WHERE ic.NroInterno = '" & _NroInterno & "'")
         Dim dr As SqlDataReader
 
         ' Extraemos datos de proveedor y remito.
@@ -60,6 +60,16 @@ Public Class ConsultaDatosFactura
                     txtFechaFactura.Text = .Item("Fecha").ToString
                     txtRemito.Text = Trim(Regex.Replace(dr.Item("Remito").ToString, "\,\d+", ""))
                     XProveedor = .Item("Proveedor").ToString
+
+                    txtParidad.Text = Proceso.formatonumerico(IIf(IsDBNull(.Item("Paridad")), "0", Trim(.Item("Paridad"))))
+                    txtDespacho.Text = IIf(IsDBNull(.Item("Despacho")), "", Trim(.Item("Despacho")))
+                    txtNroInterno.Text = _NroInterno
+                    txtFechaEmision.Text = IIf(IsDBNull(.Item("FechaEmision")), "", Trim(.Item("FechaEmision")))
+                    txtFechaVto1.Text = IIf(IsDBNull(.Item("Vencimiento")), "", Trim(.Item("Vencimiento")))
+                    txtFechaVto2.Text = IIf(IsDBNull(.Item("Vencimiento1")), "", Trim(.Item("Vencimiento1")))
+                    txtFechaVtoIva.Text = IIf(IsDBNull(.Item("FechaIva")), "", Trim(.Item("FechaIva")))
+
+                    txtMoneda.Text = IIf(.Item("Moneda") = 1, "Pesos", "Cláusula Dólar")
 
                 End If
             End With
@@ -199,9 +209,12 @@ Public Class ConsultaDatosFactura
             _AlinearDerecha(.Columns(4))
         End With
 
+        TabControl1.TabIndex = 0
+
     End Sub
 
     Private Sub _AlinearDerecha(ByRef columna As DataGridViewColumn)
         columna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
     End Sub
+
 End Class
