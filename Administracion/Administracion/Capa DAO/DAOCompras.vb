@@ -49,7 +49,7 @@ Public Class DAOCompras
                                       compra.tipoDocumentoDescripcion, compra.nroInterno + aumentoInterno, compra.paridad, compra.formaPago, Proceso.ordenaFecha(compra.fechaEmision), Proceso.ordenaFecha(compra.fechaVto1))
             If compra.tipoPago = 3 And aumentoInterno > 0 Then
                 SQLConnector.executeProcedure("alta_iva_compra_nacion", compra.nroInterno + aumentoInterno, DAOProveedor.bancoNacion.id, compra.tipoDocumento, compra.letra,
-                                              compra.punto, compra.numero, compra.fechaEmision, datoCuotas.Item2, datoCuotas.Item3, compra.fechaIVA, datoCuotas.Item4, 0, 0, 0,
+                                              compra.punto, datoCuotas.Item1, compra.fechaEmision, compra.fechaEmision, compra.fechaEmision, compra.fechaEmision, datoCuotas.Item4, 0, 0, 0,
                                               0, 0, compra.tipoPago, compra.tipoDocumentoDescripcion, compra.paridad,
                                               compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, 0, compra.despacho, compra.remito, compra.soloIVA, compra.nroInterno, Proceso.ordenaFecha(compra.fechaEmision))
             End If
