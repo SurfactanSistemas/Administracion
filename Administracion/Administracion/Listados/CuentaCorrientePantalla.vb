@@ -19,7 +19,7 @@ Public Class CuentaCorrientePantalla
 
     End Sub
 
-    Private Sub Proceso()
+    Private Sub _Proceso()
 
         Dim WRenglon As Integer
         Dim WSuma As Double
@@ -46,12 +46,11 @@ Public Class CuentaCorrientePantalla
 
             For Each row As DataRow In tabla.Rows
 
-                Dim CamposCtaCtePrv As New CtaCteProveedoresDeuda(row.Item(0).ToString, row.Item(1).ToString, row.Item(2).ToString, row.Item(3).ToString, row.Item(4), row.Item(5), row.Item(6).ToString, row.Item(7).ToString, row.Item(8).ToString)
-
+                Dim CamposCtaCtePrv As New CtaCteProveedoresDeuda(row.Item(0).ToString, row.Item(1).ToString, row.Item(2).ToString, row.Item(3).ToString, row.Item(4), row.Item(5), row.Item(6).ToString, row.Item(7).ToString, row.Item(8).ToString, row.Item(9).ToString)
 
                 GRilla.Rows.Add()
 
-                GRilla.Item(0, WRenglon).Value = CamposCtaCtePrv.Tipo
+                GRilla.Item(0, WRenglon).Value = CamposCtaCtePrv.Impre
                 GRilla.Item(1, WRenglon).Value = CamposCtaCtePrv.letra
                 GRilla.Item(2, WRenglon).Value = CamposCtaCtePrv.punto
                 GRilla.Item(3, WRenglon).Value = CamposCtaCtePrv.numero
@@ -178,7 +177,7 @@ Public Class CuentaCorrientePantalla
         boxPantallaProveedores.Visible = False
         _TraerProveedorSelectivo()
         _TraerSaldoCuentaProveedor(proveedor)
-        Call Proceso()
+        Call _Proceso()
 
         GRilla.CurrentCell = GRilla.Rows(0).Cells(0) ' Nos posicionamos en la grilla.
     End Sub
@@ -222,7 +221,7 @@ Public Class CuentaCorrientePantalla
     End Sub
 
     Private Sub opcCompleto_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles opcCompleto.CheckedChanged
-        Call Proceso()
+        Call _Proceso()
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -445,5 +444,88 @@ Public Class CuentaCorrientePantalla
 
     Private Sub lblClienteAsociado_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblClienteAsociado.MouseDoubleClick
         _AbrirDetallesFactura()
+    End Sub
+
+    Private Sub GRilla_CellMouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseUp
+        Dim _filas As New List(Of DataGridViewRow)
+        Dim _WTotalFC, _WTotalND, _WTotalNC, _Valor As Double
+        Dim comienzo, final, actual As Integer
+
+        comienzo = 0
+        final = 0
+        actual = 0
+
+        _WTotalFC = 0
+        _WTotalNC = 0
+        _WTotalND = 0
+
+        Debug.Print("==================================================")
+
+        If GRilla.SelectedCells.Count < 2 Then : Exit Sub : End If
+
+        For Each _cell As DataGridViewCell In GRilla.SelectedCells
+            If IsNothing(_filas.Find(Function(_f) _f.Index = _cell.RowIndex)) Then
+
+                _filas.Add(GRilla.Rows(_cell.RowIndex))
+
+            End If
+        Next
+
+        For Each _rows As DataGridViewRow In _filas
+            _Valor = 0
+
+            With _rows
+
+                If Not IsNothing(.Cells(4).Value) Then
+
+                    _Valor = Proceso.formatonumerico(.Cells(4).Value).replace(".", ",")
+
+                    If .Cells(4).Value <> "" Then
+                        Select Case .Cells(0).Value
+                            Case "FC"
+                                _WTotalFC += _Valor
+                            Case "ND"
+                                _WTotalND += _Valor
+                            Case "NC"
+                                _WTotalNC += _Valor
+                            Case Else
+
+                        End Select
+
+                    End If
+
+                End If
+                actual = Val(Proceso.ordenaFecha(.Cells(6).Value.ToString))
+
+                ' Determinamos el rango en el cual estamos trabajando.
+                If comienzo = 0 Or final = 0 Then
+                    comienzo = actual
+                    final = actual
+                ElseIf comienzo > actual Then
+                    comienzo = actual
+                ElseIf final < actual Then
+                    final = actual
+                End If
+
+            End With
+
+        Next
+
+        ' Asignamos los totales.
+        lblTotalFC.Text = "$ " & _WTotalFC
+        lblTotalND.Text = "$ " & _WTotalND
+        lblTotalNC.Text = "$ " & _WTotalNC
+
+        ' Animamos los botones para dar lugar al panel con la información de los totales.
+        For i = btnCancela.Location.X To 230 Step -1
+            btnCancela.Location = New Point(i, 541)
+            btnConsulta.Location = New Point(i - 120, 541)
+            Threading.Thread.Sleep(0.8)
+        Next
+
+        ' Mostramos el panel y le colocamos el titulo junto con el periodo determinado mas arriba.
+        GroupBox1.Visible = True
+        GroupBox1.Text = "Montos detallados por periodo: " & Proceso.DesOrdenaFecha(comienzo) & " al " & Proceso.DesOrdenaFecha(final)
+
     End Sub
 End Class

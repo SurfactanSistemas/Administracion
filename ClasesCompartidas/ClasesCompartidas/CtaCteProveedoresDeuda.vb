@@ -1,6 +1,6 @@
 ﻿Public Class CtaCteProveedoresDeuda
 
-    Public Tipo, letra, punto, numero, fecha, vencimiento, NroInterno As String
+    Public Tipo, letra, punto, numero, fecha, vencimiento, NroInterno, Impre As String
     Public total, saldo As Double
 
 
@@ -12,7 +12,8 @@
             ByVal saldo2 As Double,
             ByVal fecha2 As String,
             ByVal Vencimiento2 As String,
-            Optional ByVal _NroInterno As String = "")
+            Optional ByVal _NroInterno As String = "",
+            Optional ByVal _Impre As String = "")
         Tipo = tipo2
         letra = letra2
         punto = punto2
@@ -22,6 +23,7 @@
         fecha = fecha2
         vencimiento = Vencimiento2
         NroInterno = _NroInterno
+        Impre = _Impre
     End Sub
 
 

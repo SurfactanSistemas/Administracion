@@ -11,6 +11,15 @@
 
     End Function
 
+    Public Function DesOrdenaFecha(ByVal fecha As String, Optional ByVal separador As String = "/")
+
+        Dim txtOrdenaFecha As String
+
+        txtOrdenaFecha = Right$(fecha, 2) & separador & Mid$(fecha, 5, 2) & separador & Left$(fecha, 4)
+
+        Return txtOrdenaFecha
+
+    End Function
 
     Public Function leederecha(ByVal leederechaII As String, ByVal largoderecha As Integer)
 
@@ -105,7 +114,7 @@
 
         ' Redondeamos a dos decimales con "." como separador de decimales.
         _valor = FormatNumber(CDbl(valor), 2)
-        Return formatonumerico(CDbl(_valor), "########0.#0", ".")
+        Return formatonumerico(_valor, "########0.#0", ".")
 
     End Function
 
