@@ -218,6 +218,7 @@ Public Class DAORecibo
     End Function
 
     Public Shared Function asDouble(ByVal value)
+        'value = IIf(value = "", "0", value)
         Return CustomConvert.toDoubleOrZero(value)
     End Function
 End Class

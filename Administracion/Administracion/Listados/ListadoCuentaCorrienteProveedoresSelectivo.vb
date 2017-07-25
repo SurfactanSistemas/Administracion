@@ -664,4 +664,16 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
         _FiltrarDinamicamente()
     End Sub
+
+    Private Sub GRilla_UserDeletingRow(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewRowCancelEventArgs) Handles GRilla.UserDeletingRow
+
+        If Not IsNothing(GRilla.Rows(e.Row.Index).Cells(0)) Then
+            If Trim(GRilla.Rows(e.Row.Index).Cells(0).Value) <> "" Then
+                If _EliminarProveedorSelectivo(Trim(GRilla.Rows(e.Row.Index).Cells(0).Value)) Then
+                    GRilla.Rows.Remove(GRilla.Rows(e.Row.Index))
+                End If
+            End If
+        End If
+
+    End Sub
 End Class

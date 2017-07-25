@@ -39,9 +39,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
         Me.btnAcepta = New Administracion.CustomButton()
+        Me.txtDesdeProveedor = New Administracion.CustomTextBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.txtRazon = New Administracion.CustomTextBox()
-        Me.txtDesdeProveedor = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.lstFiltrada = New Administracion.CustomListBox()
@@ -238,6 +238,20 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.ToolTip1.SetToolTip(Me.btnAcepta, "Generar Reporte")
         Me.btnAcepta.UseVisualStyleBackColor = True
         '
+        'txtDesdeProveedor
+        '
+        Me.txtDesdeProveedor.Cleanable = False
+        Me.txtDesdeProveedor.Empty = True
+        Me.txtDesdeProveedor.EnterIndex = -1
+        Me.txtDesdeProveedor.LabelAssociationKey = -1
+        Me.txtDesdeProveedor.Location = New System.Drawing.Point(147, 88)
+        Me.txtDesdeProveedor.MaxLength = 11
+        Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
+        Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
+        Me.txtDesdeProveedor.TabIndex = 49
+        Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
+        Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
+        '
         'txtAyuda
         '
         Me.txtAyuda.Cleanable = False
@@ -263,20 +277,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtRazon.Size = New System.Drawing.Size(296, 20)
         Me.txtRazon.TabIndex = 51
         Me.txtRazon.Validator = Administracion.ValidatorType.None
-        '
-        'txtDesdeProveedor
-        '
-        Me.txtDesdeProveedor.Cleanable = False
-        Me.txtDesdeProveedor.Empty = True
-        Me.txtDesdeProveedor.EnterIndex = -1
-        Me.txtDesdeProveedor.LabelAssociationKey = -1
-        Me.txtDesdeProveedor.Location = New System.Drawing.Point(147, 88)
-        Me.txtDesdeProveedor.MaxLength = 11
-        Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
-        Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
-        Me.txtDesdeProveedor.TabIndex = 49
-        Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
-        Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel1
         '

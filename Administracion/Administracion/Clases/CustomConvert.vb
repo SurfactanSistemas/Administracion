@@ -19,7 +19,7 @@
     End Function
 
     Public Shared Function toDoubleOrZero(ByVal value)
-        value = IIf(IsNothing(value) Or value = "", "0", value)
+        'value = IIf(IsNothing(value) Or value = "", "0", value)
         Return toDoubleOr(value, 0)
     End Function
 
