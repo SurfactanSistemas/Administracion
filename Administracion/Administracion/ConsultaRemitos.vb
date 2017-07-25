@@ -68,7 +68,7 @@ Public Class ConsultaRemitos
     End Sub
 
     Private Sub LBConsulta_Filtrada_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Filtrada.SelectedIndexChanged
-        _TraerProveedor(LBConsulta_Filtrada.SelectedItem)
+        LBProveedores.SelectedItem = LBConsulta_Filtrada.SelectedItem
     End Sub
 
     Private Sub LBProveedores_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBProveedores.SelectedIndexChanged
@@ -77,7 +77,8 @@ Public Class ConsultaRemitos
 
     Private Sub _TraerProveedor(ByVal linea_proveedor As String)
 
-        If Not String.IsNullOrEmpty(Trim(linea_proveedor)) Then
+        If Trim(linea_proveedor) <> "" Then
+
             Dim proveedor() As String
 
             proveedor = Trim(linea_proveedor).Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
@@ -88,6 +89,8 @@ Public Class ConsultaRemitos
 
             LBRemitos.Visible = False
             txtRemitos.Text = ""
+            txtRemitos.Focus()
+
         End If
 
     End Sub
@@ -192,10 +195,6 @@ Public Class ConsultaRemitos
 
     End Sub
 
-    Private Sub txtFiltrar_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFiltrar.Enter
-        txtFiltrar.Text = ""
-    End Sub
-
     Private Sub txtRemitos_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemitos.KeyDown
 
         If e.KeyData = Keys.Enter And Trim(txtRemitos.Text) <> "" Then
@@ -225,12 +224,15 @@ Public Class ConsultaRemitos
 
     Private Sub txtCodigoProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigoProveedor.KeyDown
 
-        If Trim(txtCodigoProveedor.Text) <> "" Then
-            LBProveedores.SelectedIndex = LBProveedores.FindString(Trim(txtCodigoProveedor.Text))
-            LBProveedores_MouseDoubleClick(Nothing, Nothing)
-            btnConsultaRemitos.PerformClick()
-        Else
-            txtFiltrar.Focus()
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtCodigoProveedor.Text) <> "" Then
+                LBProveedores.SelectedIndex = LBProveedores.FindString(Trim(txtCodigoProveedor.Text))
+                _TraerProveedor(LBProveedores.SelectedItem)
+                'LBProveedores_MouseDoubleClick(Nothing, Nothing)
+                btnConsultaRemitos.PerformClick()
+            Else
+                txtFiltrar.Focus()
+            End If
         End If
 
     End Sub

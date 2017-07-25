@@ -81,7 +81,6 @@ Partial Class ConsultaRemitos
         Me.txtFiltrar.Name = "txtFiltrar"
         Me.txtFiltrar.Size = New System.Drawing.Size(605, 20)
         Me.txtFiltrar.TabIndex = 2
-        Me.txtFiltrar.Text = "Buscar..."
         '
         'LBProveedores
         '
