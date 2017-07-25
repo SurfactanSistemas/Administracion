@@ -110,7 +110,7 @@ Partial Class PymeNacion
         '
         Me.txtMes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtMes.Location = New System.Drawing.Point(60, 30)
-        Me.txtMes.MaxLength = 11
+        Me.txtMes.MaxLength = 2
         Me.txtMes.Name = "txtMes"
         Me.txtMes.Size = New System.Drawing.Size(72, 20)
         Me.txtMes.TabIndex = 0
@@ -120,7 +120,7 @@ Partial Class PymeNacion
         '
         Me.txtAno.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtAno.Location = New System.Drawing.Point(197, 30)
-        Me.txtAno.MaxLength = 11
+        Me.txtAno.MaxLength = 4
         Me.txtAno.Name = "txtAno"
         Me.txtAno.Size = New System.Drawing.Size(72, 20)
         Me.txtAno.TabIndex = 0
@@ -140,7 +140,7 @@ Partial Class PymeNacion
         'txtCantCuotas
         '
         Me.txtCantCuotas.Location = New System.Drawing.Point(181, 14)
-        Me.txtCantCuotas.MaxLength = 11
+        Me.txtCantCuotas.MaxLength = 2
         Me.txtCantCuotas.Name = "txtCantCuotas"
         Me.txtCantCuotas.Size = New System.Drawing.Size(72, 20)
         Me.txtCantCuotas.TabIndex = 0

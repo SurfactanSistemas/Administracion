@@ -4,6 +4,11 @@
     Private _Mes As Integer = 0
     Private _Ano As Integer = 0
 
+    Private Const ANO_MAX = 2100
+    Private Const ANO_MIN = 2000
+    Private Const MES_MAX = 12
+    Private Const MES_MIN = 1
+
     Public Property Cuotas() As Integer
 
         Get
@@ -39,14 +44,20 @@
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
+
+        If Val(txtCantCuotas.Text) <= 0 Or Val(txtMes.Text) < MES_MIN Or Val(txtMes.Text) > MES_MAX Or Val(txtAno.Text) < ANO_MIN Or Val(txtAno.Text) > ANO_MAX Then
+            MsgBox("Algunos de los valores indicados no tiene un valor permitido. Por favor, verifique y vuelva a intentarlo.", MsgBoxStyle.Information)
+            txtAno.Focus()
+            Exit Sub
+        End If
+
+
         _AsignarNuevoValor()
 
     End Sub
 
     Private Sub _AsignarNuevoValor()
 
-
-        If Val(txtCantCuotas.Text) > 0 And Val(txtMes.Text) > 0 And Val(txtAno.Text) > 0 Then
             With Me
 
                 .Cuotas = Val(txtCantCuotas.Text)
@@ -56,10 +67,6 @@
                 .Close()
 
             End With
-        Else
-            MsgBox("No todos los valores son correctos." & vbCrLf & vbCrLf & "Por favor verifique que los mismos sean correctos e intente nuevamente.", MsgBoxStyle.Information)
-        End If
-
 
     End Sub
 
@@ -79,8 +86,10 @@
 
         If e.KeyData = Keys.Enter Then
 
-            If Val(txtAno.Text) > 0 Then
+            If Val(txtAno.Text) >= ANO_MIN And Val(txtAno.Text) <= ANO_MAX Then
                 _AsignarNuevoValor()
+            Else
+                txtAno.Focus()
             End If
 
         End If
@@ -92,6 +101,8 @@
         If e.KeyData = Keys.Enter Then
             If Val(txtCantCuotas.Text) > 0 Then
                 txtMes.Focus()
+            Else
+                txtCantCuotas.Focus()
             End If
         End If
 
@@ -100,7 +111,9 @@
     Private Sub txtMes_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMes.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Val(txtMes.Text) > 0 Then
+            If Val(txtMes.Text) >= MES_MIN And Val(txtMes.Text) <= MES_MAX Then
+                txtAno.Focus()
+            Else
                 txtAno.Focus()
             End If
         End If
@@ -113,5 +126,31 @@
             Me.Close()
         End If
 
+    End Sub
+
+    Private Sub txtCantCuotas_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCantCuotas.KeyPress
+
+        If e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or (e.KeyChar > CChar("0"c) And e.KeyChar <= CChar("9"c)) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+
+    End Sub
+
+    Private Sub txtMes_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMes.KeyPress
+        If e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or (e.KeyChar > CChar("0"c) And e.KeyChar <= CChar("9"c)) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtAno_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAno.KeyPress
+        If e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or (e.KeyChar > CChar("0"c) And e.KeyChar <= CChar("9"c)) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
     End Sub
 End Class

@@ -24,6 +24,7 @@ Partial Class Apertura
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridApertura = New System.Windows.Forms.DataGridView()
+        Me.btnAceptar = New Administracion.CustomButton()
         Me.CUIT = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RazonSocial = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,7 +39,6 @@ Partial Class Apertura
         Me.PercIVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PercIB = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Exento = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnAceptar = New Administracion.CustomButton()
         CType(Me.gridApertura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -53,12 +53,32 @@ Partial Class Apertura
         Me.gridApertura.Size = New System.Drawing.Size(1194, 362)
         Me.gridApertura.TabIndex = 0
         '
+        'btnAceptar
+        '
+        Me.btnAceptar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
+        Me.btnAceptar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAceptar.Cleanable = False
+        Me.btnAceptar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAceptar.EnterIndex = -1
+        Me.btnAceptar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnAceptar.FlatAppearance.BorderSize = 0
+        Me.btnAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAceptar.LabelAssociationKey = -1
+        Me.btnAceptar.Location = New System.Drawing.Point(529, 370)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(136, 47)
+        Me.btnAceptar.TabIndex = 1
+        Me.btnAceptar.UseVisualStyleBackColor = True
+        '
         'CUIT
         '
         DataGridViewCellStyle1.Format = "N0"
         DataGridViewCellStyle1.NullValue = Nothing
         Me.CUIT.DefaultCellStyle = DataGridViewCellStyle1
         Me.CUIT.HeaderText = "CUIT"
+        Me.CUIT.MaxInputLength = 11
         Me.CUIT.Name = "CUIT"
         '
         'RazonSocial
@@ -71,6 +91,7 @@ Partial Class Apertura
         '
         Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.MaxInputLength = 2
         Me.Tipo.Name = "Tipo"
         Me.Tipo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Tipo.Width = 53
@@ -79,6 +100,7 @@ Partial Class Apertura
         '
         Me.Letra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Letra.HeaderText = "Letra"
+        Me.Letra.MaxInputLength = 1
         Me.Letra.Name = "Letra"
         Me.Letra.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Letra.Width = 56
@@ -86,18 +108,21 @@ Partial Class Apertura
         'Punto
         '
         Me.Punto.HeaderText = "Punto"
+        Me.Punto.MaxInputLength = 4
         Me.Punto.Name = "Punto"
         Me.Punto.Width = 60
         '
         'Numero
         '
         Me.Numero.HeaderText = "Número"
+        Me.Numero.MaxInputLength = 8
         Me.Numero.Name = "Numero"
         Me.Numero.Width = 70
         '
         'Fecha
         '
         Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 10
         Me.Fecha.Name = "Fecha"
         Me.Fecha.Width = 70
         '
@@ -142,25 +167,6 @@ Partial Class Apertura
         Me.Exento.HeaderText = "Exento"
         Me.Exento.Name = "Exento"
         Me.Exento.Width = 70
-        '
-        'btnAceptar
-        '
-        Me.btnAceptar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnAceptar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAceptar.Cleanable = False
-        Me.btnAceptar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAceptar.EnterIndex = -1
-        Me.btnAceptar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnAceptar.FlatAppearance.BorderSize = 0
-        Me.btnAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAceptar.LabelAssociationKey = -1
-        Me.btnAceptar.Location = New System.Drawing.Point(529, 370)
-        Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(136, 47)
-        Me.btnAceptar.TabIndex = 1
-        Me.btnAceptar.UseVisualStyleBackColor = True
         '
         'Apertura
         '
