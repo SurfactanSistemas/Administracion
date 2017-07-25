@@ -364,6 +364,13 @@ Public Class Compras
 
         _EliminarFilasEnBlanco()
 
+        If Trim(txtRemito.Text) <> "" And optNacion.Checked Then
+            If _ComprobarPyme() = False Then
+                MsgBox("Los remitos cargados no corresponden a Pyme Nación.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+        End If
+
         If validarCampos() Then
             Try
                 actualizarProveedor()
@@ -1074,7 +1081,7 @@ Public Class Compras
         Dim renglon As Integer = 0
 
         If remitos.Length = 0 Then
-            MsgBox("No hay remitos cargados.", MsgBoxStyle.Critical)
+            MsgBox("No hay remitos cargados.", MsgBoxStyle.Information)
             Return _EsPymeNacion
         End If
 
