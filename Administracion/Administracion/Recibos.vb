@@ -819,7 +819,7 @@ Public Class Recibos
 
     Private Sub mostrarCliente(ByVal cliente As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal, c.Email " _
+        Dim cm As SqlCommand = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal, c.EmailFacturaII as Email " _
                                               & " FROM Cliente as c, Provincia as p WHERE c.Cliente = '" & cliente & "' AND p.Provincia = c.Provincia")
         Dim dr As SqlDataReader
 
@@ -841,7 +841,7 @@ Public Class Recibos
                 WLocalidad = dr.Item("Localidad")
                 WProvincia = dr.Item("Nombre")
                 WPostal = dr.Item("Postal")
-                WEmail = dr.Item("Email")
+                WEmail = IIf(IsDBNull(dr.Item("Email")), "", dr.Item("Email"))
             Else
                 MsgBox("El cliente especificado, no existe. Compruebe y vuelva a intentarlo.")
             End If
@@ -3331,7 +3331,7 @@ Public Class Recibos
             _adjunto = ruta & archivo
 
             ' Enviamos por email e imprimimos una copia.
-            _EnviarEmail(_to, _bcc, _asunto, _mensaje, _adjunto)
+            '_EnviarEmail(_to, _bcc, _asunto, _mensaje, _adjunto)
 
         Catch ex As Exception
             Throw New Exception("No se pudo enviar el E-Mail.")

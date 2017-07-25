@@ -1719,7 +1719,7 @@ Public Class Compras
             If dr.HasRows Then
                 dr.Read()
 
-                If Val(dr.Item("Saldo")) <> Val(dr.Item("Total")) Then
+                If Val(dr.Item("Saldo")) = Val(dr.Item("Total")) Then
                     _Disponible = True
                 End If
 

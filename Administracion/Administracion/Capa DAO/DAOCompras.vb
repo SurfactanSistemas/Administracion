@@ -41,7 +41,7 @@ Public Class DAOCompras
         WNroInternoAsociado = compra.nroInterno
         WNombreProveedor = compra.proveedor.razonSocial
         WNumeroOriginal = compra.numero
-        WImporteTotal = compra.neto
+        WImporteTotal = compra.total
         WFechaOriginal = compra.fechaEmision
         WFechaOriginalOrd = Proceso.ordenaFecha(WFechaOriginal)
 
@@ -90,8 +90,8 @@ Public Class DAOCompras
 
         For x As Integer = 0 To cantidadCuotas - 1
             datosCuotas.Add(Tuple.Create(truncarUltimosDosCon(compra.numero, x + 1), fechaSegun(mes + x, anio),
-                                         fechaSegun(mes + x, anio), compra.total / cantidadCuotas,
-                                         compra.total / cantidadCuotas))
+                                         fechaSegun(mes + x, anio), (compra.total / cantidadCuotas),
+                                         CDbl(Proceso.formatonumerico(compra.total / cantidadCuotas))))
         Next
     End Sub
 

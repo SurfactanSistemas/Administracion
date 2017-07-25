@@ -139,7 +139,7 @@
     End Sub
 
     Private Sub txtMes_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMes.KeyPress
-        If e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or (e.KeyChar > CChar("0"c) And e.KeyChar <= CChar("9"c)) Then
+        If e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or (e.KeyChar >= CChar("0"c) And e.KeyChar <= CChar("9"c)) Then
             e.Handled = False
         Else
             e.Handled = True
@@ -147,7 +147,7 @@
     End Sub
 
     Private Sub txtAno_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAno.KeyPress
-        If e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or (e.KeyChar > CChar("0"c) And e.KeyChar <= CChar("9"c)) Then
+        If e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or (e.KeyChar >= CChar("0"c) And e.KeyChar <= CChar("9"c)) Then
             e.Handled = False
         Else
             e.Handled = True

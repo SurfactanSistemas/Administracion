@@ -103,17 +103,39 @@ Public Class CuentaCorrientePantalla
         Dim cliente As String = proveedor.cliente.id
         Dim saldo As String = "0,00"
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT SUM(Saldo) as SaldoTotal FROM CtaCte WHERE Cliente = '" & Trim(Cliente) & "'")
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
         Dim dr As SqlDataReader
 
-
-        If Trim(Cliente) = "" Then
+        If Trim(cliente) = "" Then
             lblSaldoCuentaProveedor.Text = saldo
             Exit Sub
         End If
 
         Try
+            cm.CommandText = "SELECT TOP 1 Cliente FROM CtaCte WHERE Cliente = '" & Trim(cliente) & "'"
+            SQLConnector.conexionSql(cn, cm)
+            dr = cm.ExecuteReader()
+
+            With dr
+                If Not .HasRows Then
+                    Exit Sub
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Information)
+        Finally
+
+            'dr = Nothing
+            cn.Close()
+            'cn = Nothing
+            'cm = Nothing
+
+        End Try
+
+        Try
+            cm.CommandText = "SELECT SUM(Saldo) as SaldoTotal FROM CtaCte WHERE Cliente = '" & Trim(cliente) & "'"
             SQLConnector.conexionSql(cn, cm)
             dr = cm.ExecuteReader()
 
@@ -130,7 +152,7 @@ Public Class CuentaCorrientePantalla
 
         Catch ex As Exception
             gbSaldoCtaCliente.Visible = False
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Information)
         Finally
 
             dr = Nothing
@@ -147,6 +169,9 @@ Public Class CuentaCorrientePantalla
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
 
         If IsNothing(proveedor) Then : Exit Sub : End If
+
+        gbSaldoCtaCliente.Visible = False
+
         'lstFiltrada.Visible = False
         txtProveedor.Text = proveedor.id
         txtRazon.Text = proveedor.razonSocial
