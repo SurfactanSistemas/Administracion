@@ -130,6 +130,7 @@ Public Class DAOCompras
     End Function
 
     Private Shared Function asDouble(ByVal value)
+        value = IIf(IsNothing(value) Or value = "", "0", value)
         Return CustomConvert.toDoubleOrZero(value.ToString)
     End Function
 
@@ -200,7 +201,7 @@ Public Class DAOCompras
                                               row.Cells(1).Value, row.Cells(2).Value, row.Cells(3).Value, row.Cells(4).Value,
                                               row.Cells(5).Value, row.Cells(6).Value, asDouble(row.Cells(7).Value), asDouble(row.Cells(8).Value),
                                               asDouble(row.Cells(9).Value), asDouble(row.Cells(10).Value), asDouble(row.Cells(11).Value),
-                                              asDouble(row.Cells(12).Value), asDouble(row.Cells(13).Value))
+                                              asDouble(row.Cells(12).Value), asDouble(row.Cells(13).Value), Proceso.ordenaFecha(row.Cells(6).Value))
             End If
         Next
     End Sub
