@@ -66,17 +66,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         End Try
 
         For Each _Proveedor As Object In _Proveedores
-            If _Proveedor(1) <= _FechaLimite Then ' Comprobamos si hay proveedores guardados fuera del periodo actual.
-                _CargadosHaceMasDeUnaSemana += 1
-                _CargarProveedor(DAOProveedor.buscarProveedorPorCodigo(_Proveedor(0)), True)
-            Else
                 _CargarProveedor(DAOProveedor.buscarProveedorPorCodigo(_Proveedor(0)))
-            End If
         Next
-
-        If Val(_CargadosHaceMasDeUnaSemana) > 0 Then
-            MsgBox("Hay " & _CargadosHaceMasDeUnaSemana & " Proveedor(es) que se encuentra(n) cargado(s) antes del periodo actual.", MsgBoxStyle.Information)
-        End If
 
     End Sub
 
@@ -460,7 +451,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         '    viewer.imprimirReporte()
         'End If
 
-        _ConsultarSiEliminarListaParcialDeProveedores()
+        '_ConsultarSiEliminarListaParcialDeProveedores()
+
+        _LimpiarProveedoresSelectivos()
     End Sub
 
     Private Sub _ConsultarSiEliminarListaParcialDeProveedores()
@@ -556,7 +549,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         GRilla.Rows.Clear()
 
-        '_LimpiarProveedoresSelectivos()
+        _LimpiarProveedoresSelectivos()
 
     End Sub
 
