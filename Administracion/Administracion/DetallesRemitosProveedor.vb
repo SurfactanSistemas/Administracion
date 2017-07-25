@@ -43,12 +43,26 @@ Public Class DetallesRemitosProveedor
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
-        Dim remitos(), codProveedor, proveedor, orden, articulo, descripcion, cantPed As String
-        Dim moneda, precio, condPago, informe, est, fApr, cantRecibida As String
+        Dim remitos() As String
+        Dim codProveedor, proveedor, orden, articulo, descripcion, cantPed, moneda, precio, condPago, informe, est, fApr, cantRecibida As String
         Dim aBuscar As New List(Of Object)
         Dim Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
-        remitos = _Consulta(2).Replace(" ", "").Split(",") ' Eliminamos los posibles espacios en blanco y luego los separamos por las comas.
+        codProveedor = ""
+        proveedor = ""
+        orden = ""
+        articulo = ""
+        descripcion = ""
+        cantPed = ""
+        moneda = ""
+        precio = ""
+        condPago = ""
+        informe = ""
+        est = ""
+        fApr = ""
+        cantRecibida = ""
+
+        remitos = _Consulta(2).Replace(" ", "").Replace(";", ",").Split(",") ' Eliminamos los posibles espacios en blanco y luego los separamos por las comas y/o puntos y comas (;).
 
         ' Por cada remito indicado, recorro las empresas buscándolo. Extraigo el num de Orden, los articulos y el num de informe.
         For Each remitoActual In remitos
@@ -97,6 +111,21 @@ Public Class DetallesRemitosProveedor
         Dim dr As SqlDataReader
         Dim _ConnectionString, remito, codProveedor, orden, articulo, descripcion, cantPed As String
         Dim moneda, precio, condPago, informe, est, fApr, cantRecibida As String
+
+        _ConnectionString = ""
+        remito = ""
+        codProveedor = ""
+        orden = ""
+        articulo = ""
+        descripcion = ""
+        cantPed = ""
+        moneda = ""
+        precio = ""
+        condPago = ""
+        informe = ""
+        est = ""
+        fApr = ""
+        cantRecibida = ""
 
         For Each _remitoActual In RemitosABuscar
 
@@ -152,9 +181,9 @@ Public Class DetallesRemitosProveedor
                         Case 0
                             moneda = "U$S"
                         Case 1
-                            moneda = "S"
+                            moneda = "$"
                         Case 2
-                            moneda = "Euro"
+                            moneda = "€"
                         Case Else
                             moneda = ""
                     End Select

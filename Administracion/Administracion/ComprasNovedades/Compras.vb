@@ -361,12 +361,31 @@ Public Class Compras
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
+        Dim validoComoPymenacion As Boolean = False
 
         _EliminarFilasEnBlanco()
 
-        If Trim(txtRemito.Text) <> "" And optNacion.Checked Then
-            If _ComprobarPyme() = False Then
-                MsgBox("Los remitos cargados no corresponden a Pyme Nación.", MsgBoxStyle.Information)
+        validoComoPymenacion = _ComprobarPyme()
+
+        ' Verificamos que laforma de pago segun orden de compra y la informada sean correctas.
+        If optNacion.Checked And Not validoComoPymenacion Then
+
+            Dim res As DialogResult = MsgBox("La Orden de Comrpa indica que se paga con Pyme Banco Nacion" & vbCrLf & _
+             "y difiere de la forma de pago informado en la carga del comprobante" & vbCrLf & _
+             "Desea continuar con la grabacion", MsgBoxStyle.YesNo)
+
+            If res = DialogResult.No Then
+                Exit Sub
+            End If
+
+        End If
+
+        If validoComoPymenacion Then
+            If Val(_PyMENacion(0)) = 0 Then
+                MsgBox("No se informo la cantidad de cuotas para la financiacion de la compra", MsgBoxStyle.Information)
+                Exit Sub
+            ElseIf Val(_PyMENacion(1)) = 0 Or Val(_PyMENacion(2)) = 0 Then
+                MsgBox("No se informó la fecha de inicio para la financiación de la compra", MsgBoxStyle.Information)
                 Exit Sub
             End If
         End If
@@ -1035,14 +1054,23 @@ Public Class Compras
     End Sub
 
     Private Sub txtRemito_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemito.KeyDown
+        Dim _ValidoComoPymeNacion As Boolean = False
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtFechaVto1)
 
             If Trim(txtRemito.Text) <> "" Then
-
-                If _ComprobarPyme() Then
+                _ValidoComoPymeNacion = _ComprobarPyme()
+                If _ValidoComoPymeNacion Then
                     _PedirDatosPymeNacion()
+                    optNacion.Checked = True
+                Else
+
+                    If optNacion.Checked And Not _ValidoComoPymeNacion Then
+                        MsgBox("Hay remitos cargados que no corresponden a Pyme Nación.")
+                        txtRemito.Focus()
+                    End If
+
                 End If
 
             End If
@@ -1952,4 +1980,20 @@ Public Class Compras
 
     End Sub
 
+    Private Sub txtRemito_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtRemito.MouseDoubleClick
+        Dim WConsulta As String = Trim(txtCodigoProveedor.Text) & "$" & Trim(txtNombreProveedor.Text) & "$" & Trim(txtRemito.Text)
+
+        ' Verificamos que hayan remitos que consultar.
+        If Trim(txtRemito.Text) = "" Then
+            Exit Sub
+        End If
+
+        ' Abrimos la ventana con los detalles de los remitos indicados.
+        With New DetallesRemitosProveedor(WConsulta)
+
+            .ShowDialog()
+
+        End With
+
+    End Sub
 End Class

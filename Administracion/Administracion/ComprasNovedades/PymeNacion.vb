@@ -44,14 +44,6 @@
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
-
-        If Val(txtCantCuotas.Text) <= 0 Or Val(txtMes.Text) < MES_MIN Or Val(txtMes.Text) > MES_MAX Or Val(txtAno.Text) < ANO_MIN Or Val(txtAno.Text) > ANO_MAX Then
-            MsgBox("Algunos de los valores indicados no tiene un valor permitido. Por favor, verifique y vuelva a intentarlo.", MsgBoxStyle.Information)
-            txtAno.Focus()
-            Exit Sub
-        End If
-
-
         _AsignarNuevoValor()
 
     End Sub
