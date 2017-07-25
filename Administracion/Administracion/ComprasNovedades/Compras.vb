@@ -978,10 +978,9 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
 
-
-
             Try
                 If esModificacion Then : Exit Try : End If
+
                 ' Validamos que se cargue una fecha de emisión.
                 If Trim(txtFechaEmision.Text.Replace("/", "")) = "" Or Trim(txtFechaEmision.Text).Length < 10 Then
                     txtFechaEmision.Focus()
@@ -990,8 +989,9 @@ Public Class Compras
 
                 txtFechaIVA.Text = Date.Now.ToString("dd/MM/yyyy")
                 Dim fecha As Date = Convert.ToDateTime(txtFechaIVA.Text)
-                txtFechaVto1.Text = fecha.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
-                txtFechaVto2.Text = txtFechaVto1.Text
+                Dim fecha2 As Date = Convert.ToDateTime(txtFechaEmision.Text)
+                txtFechaVto1.Text = fecha2.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
+                txtFechaVto2.Text = fecha.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
 
             Catch ex As Exception
 
