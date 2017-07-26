@@ -39,6 +39,7 @@ Partial Class ConsultaRemitos
         Me.LBRemitos = New System.Windows.Forms.ListBox()
         Me.LBConsulta_Filtrada = New System.Windows.Forms.ListBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -101,7 +102,7 @@ Partial Class ConsultaRemitos
         Me.btnConsultaRemitos.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsultaRemitos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsultaRemitos.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnConsultaRemitos.Location = New System.Drawing.Point(190, 374)
+        Me.btnConsultaRemitos.Location = New System.Drawing.Point(142, 377)
         Me.btnConsultaRemitos.Name = "btnConsultaRemitos"
         Me.btnConsultaRemitos.Size = New System.Drawing.Size(132, 48)
         Me.btnConsultaRemitos.TabIndex = 4
@@ -119,7 +120,7 @@ Partial Class ConsultaRemitos
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.Location = New System.Drawing.Point(328, 374)
+        Me.btnCerrar.Location = New System.Drawing.Point(280, 377)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(132, 48)
         Me.btnCerrar.TabIndex = 4
@@ -200,6 +201,24 @@ Partial Class ConsultaRemitos
         Me.LBConsulta_Filtrada.TabIndex = 8
         Me.LBConsulta_Filtrada.Visible = False
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.BorderSize = 0
+        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.Location = New System.Drawing.Point(427, 377)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(132, 48)
+        Me.btnLimpiar.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'ConsultaRemitos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -210,6 +229,7 @@ Partial Class ConsultaRemitos
         Me.Controls.Add(Me.txtDescripcionProveedor)
         Me.Controls.Add(Me.txtRemitos)
         Me.Controls.Add(Me.txtCodigoProveedor)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnConsultaRemitos)
         Me.Controls.Add(Me.txtFiltrar)
@@ -239,4 +259,5 @@ Partial Class ConsultaRemitos
     Friend WithEvents LBConsulta_Filtrada As System.Windows.Forms.ListBox
     Friend WithEvents LBRemitos As System.Windows.Forms.ListBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents btnLimpiar As System.Windows.Forms.Button
 End Class

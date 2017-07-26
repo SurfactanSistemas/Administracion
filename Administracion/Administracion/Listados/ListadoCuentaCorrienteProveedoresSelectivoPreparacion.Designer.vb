@@ -31,14 +31,15 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.btnLimpiarTodo = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnAcepta = New Administracion.CustomButton()
+        Me.txtCodProveedor = New Administracion.CustomTextBox()
+        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
-        Me.txtCodProveedor = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.btnImprimir = New Administracion.CustomButton()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -104,18 +105,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.Panel2.Size = New System.Drawing.Size(614, 313)
         Me.Panel2.TabIndex = 60
         '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(36, 498)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(545, 147)
-        Me.lstFiltrada.TabIndex = 61
-        Me.lstFiltrada.Visible = False
-        '
         'btnLimpiarTodo
         '
         Me.btnLimpiarTodo.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
@@ -129,9 +118,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiarTodo.LabelAssociationKey = -1
-        Me.btnLimpiarTodo.Location = New System.Drawing.Point(388, 374)
+        Me.btnLimpiarTodo.Location = New System.Drawing.Point(329, 374)
         Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
-        Me.btnLimpiarTodo.Size = New System.Drawing.Size(120, 40)
+        Me.btnLimpiarTodo.Size = New System.Drawing.Size(87, 40)
         Me.btnLimpiarTodo.TabIndex = 58
         Me.ToolTip1.SetToolTip(Me.btnLimpiarTodo, "Eliminar Seleccionados / Todos")
         Me.btnLimpiarTodo.UseVisualStyleBackColor = True
@@ -149,9 +138,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(246, 374)
+        Me.btnConsulta.Location = New System.Drawing.Point(198, 374)
         Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(120, 40)
+        Me.btnConsulta.Size = New System.Drawing.Size(87, 40)
         Me.btnConsulta.TabIndex = 58
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consultar Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
@@ -169,12 +158,39 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAcepta.LabelAssociationKey = -1
-        Me.btnAcepta.Location = New System.Drawing.Point(107, 373)
+        Me.btnAcepta.Location = New System.Drawing.Point(67, 373)
         Me.btnAcepta.Name = "btnAcepta"
-        Me.btnAcepta.Size = New System.Drawing.Size(120, 41)
+        Me.btnAcepta.Size = New System.Drawing.Size(87, 41)
         Me.btnAcepta.TabIndex = 56
         Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar y Cerrar")
         Me.btnAcepta.UseVisualStyleBackColor = True
+        '
+        'txtCodProveedor
+        '
+        Me.txtCodProveedor.Cleanable = False
+        Me.txtCodProveedor.Empty = True
+        Me.txtCodProveedor.EnterIndex = -1
+        Me.txtCodProveedor.LabelAssociationKey = -1
+        Me.txtCodProveedor.Location = New System.Drawing.Point(280, 72)
+        Me.txtCodProveedor.MaxLength = 11
+        Me.txtCodProveedor.Name = "txtCodProveedor"
+        Me.txtCodProveedor.Size = New System.Drawing.Size(140, 20)
+        Me.txtCodProveedor.TabIndex = 49
+        Me.txtCodProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtCodProveedor, "Doble Click: Abrir Consulta de Proveedores")
+        Me.txtCodProveedor.Validator = Administracion.ValidatorType.None
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(36, 498)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(545, 147)
+        Me.lstFiltrada.TabIndex = 61
+        Me.lstFiltrada.Visible = False
         '
         'lstAyuda
         '
@@ -201,21 +217,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.txtAyuda.Validator = Administracion.ValidatorType.None
         Me.txtAyuda.Visible = False
         '
-        'txtCodProveedor
-        '
-        Me.txtCodProveedor.Cleanable = False
-        Me.txtCodProveedor.Empty = True
-        Me.txtCodProveedor.EnterIndex = -1
-        Me.txtCodProveedor.LabelAssociationKey = -1
-        Me.txtCodProveedor.Location = New System.Drawing.Point(280, 72)
-        Me.txtCodProveedor.MaxLength = 11
-        Me.txtCodProveedor.Name = "txtCodProveedor"
-        Me.txtCodProveedor.Size = New System.Drawing.Size(140, 20)
-        Me.txtCodProveedor.TabIndex = 49
-        Me.txtCodProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ToolTip1.SetToolTip(Me.txtCodProveedor, "Doble Click: Abrir Consulta de Proveedores")
-        Me.txtCodProveedor.Validator = Administracion.ValidatorType.None
-        '
         'CustomLabel1
         '
         Me.CustomLabel1.AutoSize = True
@@ -229,6 +230,26 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.CustomLabel1.TabIndex = 50
         Me.CustomLabel1.Text = "Proveedor"
         '
+        'btnImprimir
+        '
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cleanable = False
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.EnterIndex = -1
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.LabelAssociationKey = -1
+        Me.btnImprimir.Location = New System.Drawing.Point(460, 375)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(87, 40)
+        Me.btnImprimir.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Listado de Proveedores Ingresados")
+        Me.btnImprimir.UseVisualStyleBackColor = True
+        '
         'ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -236,6 +257,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.ClientSize = New System.Drawing.Size(614, 427)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnLimpiarTodo)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnAcepta)
@@ -270,4 +292,5 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Friend WithEvents btnLimpiarTodo As Administracion.CustomButton
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
+    Friend WithEvents btnImprimir As Administracion.CustomButton
 End Class

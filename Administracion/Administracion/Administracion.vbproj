@@ -555,6 +555,17 @@
       <DependentUpon>ControlDeFacturacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ProveedoresSelectivoPreparacionDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProveedoresSelectivoPreparacionDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ProveedoresSelectivoPreparacionListado.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProveedoresSelectivoPreparacionListado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReciboDefinitivoEmail.vb">
       <DependentUpon>ReciboDefinitivoEmail.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -929,6 +940,10 @@
     <EmbeddedResource Include="Reportes\ControlDeFacturacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ControlDeFacturacion.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ProveedoresSelectivoPreparacionListado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProveedoresSelectivoPreparacionListado.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReciboDefinitivoEmail.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1320,6 +1335,17 @@
     </None>
     <None Include="Reportes\OrdenPagoDetalles.xss">
       <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\ProveedoresSelectivoPreparacionDetalles.xsc">
+      <DependentUpon>ProveedoresSelectivoPreparacionDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\ProveedoresSelectivoPreparacionDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProveedoresSelectivoPreparacionDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\ProveedoresSelectivoPreparacionDetalles.xss">
+      <DependentUpon>ProveedoresSelectivoPreparacionDetalles.xsd</DependentUpon>
     </None>
     <None Include="Reportes\ReciboDetalles.xsc">
       <DependentUpon>ReciboDetalles.xsd</DependentUpon>

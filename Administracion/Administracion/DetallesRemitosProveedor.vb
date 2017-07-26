@@ -174,7 +174,7 @@ Public Class DetallesRemitosProveedor
 
                     cantPed = _FormatearDecimales(dr.Item(0))
                     precio = _FormatearDecimales(CDbl(dr.Item(2)))
-                    condPago = dr.Item(3)
+                    condPago = Trim(dr.Item(3))
 
 
                     Select Case dr.Item(1)
@@ -234,7 +234,10 @@ Public Class DetallesRemitosProveedor
             End Try
 
             ' Agregamos la linea en el DGV.
-            DGVDetalles.Rows.Add(remito, orden, articulo, descripcion, cantPed, moneda, precio, condPago, informe, cantRecibida, est, fApr)
+
+            If Val(cantRecibida) > 0 And Val(cantPed) > 0 Then
+                DGVDetalles.Rows.Add(remito, orden, articulo, descripcion, cantPed, moneda, precio, condPago, informe, cantRecibida, est, fApr)
+            End If
 
         Next
 

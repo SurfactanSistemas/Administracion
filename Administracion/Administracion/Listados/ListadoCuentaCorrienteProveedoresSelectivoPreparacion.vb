@@ -1,6 +1,7 @@
 ﻿Imports ClasesCompartidas
 Imports System.IO
 Imports System.Data.SqlClient
+Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
@@ -156,7 +157,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
                 If Me.Height > 600 Then : txtAyuda.Focus() : End If
             End If
-            
+
         End If
     End Sub
 
@@ -379,5 +380,60 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivoPreparacion_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
         txtCodProveedor.Focus()
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+
+        If GRilla.Rows.Count > 0 And Not IsNothing(GRilla.Rows(0).Cells(0)) Then
+            Dim Tabla As New DataTable("Detalles")
+            Dim row As DataRow
+            Dim crdoc As New ProveedoresSelectivoPreparacionListado
+
+            ' Creamos la tabla.
+            With Tabla
+                .Columns.Add("Codigo")
+                .Columns.Add("Nombre")
+            End With
+
+            With GRilla
+                For Each _row As DataGridViewRow In .Rows
+
+                    If Not IsNothing(_row.Cells(0).Value) Then
+                        row = Tabla.NewRow
+
+                        row.Item("Codigo") = Trim(_row.Cells(0).Value)
+                        row.Item("Nombre") = Trim(_row.Cells(1).Value)
+
+                        Tabla.Rows.Add(row)
+                    End If
+
+
+                Next
+            End With
+
+            If Tabla.Rows.Count = 0 Then
+                txtCodProveedor.Focus()
+                Exit Sub
+            End If
+
+            crdoc.SetDataSource(Tabla)
+
+            '_Imprimir(crdoc)
+            _VistaPrevia(crdoc)
+
+        End If
+
+    End Sub
+
+    Private Sub _Imprimir(ByVal crdoc As ReportDocument, Optional ByVal cant As Integer = 1)
+        crdoc.PrintToPrinter(cant, True, 0, 0)
+    End Sub
+
+    Private Sub _VistaPrevia(ByVal crdoc As ReportDocument)
+        With VistaPrevia
+            .CrystalReportViewer1.ReportSource = crdoc
+            .ShowDialog()
+            .Dispose()
+        End With
     End Sub
 End Class

@@ -58,9 +58,12 @@ Public Class Depositos
 
     Private Function validarCampos()
         Dim validador As New Validator
+        Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(Trim(txtCodigoBanco.Text))
 
         validador.validate(Me)
-        validador.alsoValidate(CustomConvert.toDoubleOrZero(txtImporte.Text) = Math.Round(sumaImportes(), 2), "El campo importe tiene que ser igual a la suma de la grilla (" & sumaImportes() & ")")
+
+        validador.alsoValidate(Val(txtImporte.Text) = Math.Round(sumaImportes(), 2), "El campo importe tiene que ser igual a la suma de la grilla (" & sumaImportes() & ")")
+        validador.alsoValidate(Not IsNothing(banco), "Debe ingresar un Banco válido.")
         validador.alsoValidate(validarTipoUnico(), "Sólo puede realizarse un tipo de depósito por carga")
         validador.alsoValidate(validarEstadoGrilla(), "Hay campos en la grilla con estados inválidos")
         validador.alsoValidate(Not DAODeposito.existeDepositoNumero(txtNroDeposito.Text), "Ya existe un depósito con número " & txtNroDeposito.Text)
@@ -95,6 +98,7 @@ Public Class Depositos
         txtAyuda.Visible = False
         sumarImportes()
         _ClavesCheques.Clear()
+        txtNroDeposito.Focus()
     End Sub
 
     Private Sub sumarImportes()
@@ -224,16 +228,9 @@ Public Class Depositos
             Else
                 DAODeposito.agregarDeposito(deposito, gridCheques.Rows)
             End If
-            btnLimpiar_Click(sender, e)
-        End If
-    End Sub
 
-    Private Sub txtCodigoBanco_Leave(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigoBanco.Leave
-        Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(txtCodigoBanco.Text)
-        If Not IsNothing(banco) Then
-            txtDescripcionBanco.Text = banco.nombre
-        Else
-            txtDescripcionBanco.Text = ""
+            MsgBox("Deposito cargado con exito.", MsgBoxStyle.Information)
+            btnLimpiar_Click(sender, e)
         End If
     End Sub
 
@@ -277,7 +274,14 @@ Public Class Depositos
 
     Private Sub txtCodigoBanco_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigoBanco.KeyDown
         If e.KeyData = Keys.Enter Then
-            txtFechaAcreditacion.Focus()
+            Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(txtCodigoBanco.Text)
+            If Not IsNothing(banco) Then
+                txtDescripcionBanco.Text = banco.nombre
+                txtFechaAcreditacion.Focus()
+            Else
+                txtDescripcionBanco.Text = ""
+                txtCodigoBanco.Focus()
+            End If
         ElseIf e.KeyData = Keys.Escape Then
             txtCodigoBanco.Text = ""
             txtDescripcionBanco.Text = ""
@@ -294,7 +298,12 @@ Public Class Depositos
 
     Private Sub txtImporte_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtImporte.KeyDown
         If e.KeyData = Keys.Enter Then
+
+            If Trim(txtImporte.Text) = "" Then : Exit Sub : End If
+
+            txtImporte.Text = Proceso.formatonumerico(txtImporte.Text)
             gridCheques.CurrentCell = gridCheques.Rows(0).Cells(0)
+            gridCheques.Focus()
         ElseIf e.KeyData = Keys.Escape Then
             txtImporte.Text = ""
         End If
@@ -863,4 +872,20 @@ Public Class Depositos
         _FiltrarDinamicamente()
     End Sub
 
+    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
+        e.Cancel = Not Proceso._ValidarFecha(txtFecha.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub txtFechaAcreditacion_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaAcreditacion.TypeValidationCompleted
+        e.Cancel = Not Proceso._ValidarFecha(txtFechaAcreditacion.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub btnChequeTerceros_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChequeTerceros.Click
+        lstSeleccion.SelectedItem = "Cheques de Terceros"
+        lstSeleccion_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub txtImporte_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtImporte.Leave
+        txtImporte.Text = Proceso.formatonumerico(txtImporte.Text)
+    End Sub
 End Class

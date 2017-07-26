@@ -85,6 +85,13 @@ Public Class ConsultaRemitos
 
             txtCodigoProveedor.Text = proveedor(0)
 
+            Dim _proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(Trim(txtCodigoProveedor.Text))
+
+            If IsNothing(_proveedor) Then
+                MsgBox("Proveedor no existente.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
             txtDescripcionProveedor.Text = Trim(linea_proveedor.Replace(txtCodigoProveedor.Text, ""))
 
             LBRemitos.Visible = False
@@ -197,10 +204,12 @@ Public Class ConsultaRemitos
 
     Private Sub txtRemitos_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemitos.KeyDown
 
-        If e.KeyData = Keys.Enter And Trim(txtRemitos.Text) <> "" Then
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtRemitos.Text) = "" Then : Exit Sub : End If
 
             _ListarDetallesDeRemitos()
-
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRemitos.Text = ""
         End If
 
     End Sub
@@ -227,13 +236,32 @@ Public Class ConsultaRemitos
         If e.KeyData = Keys.Enter Then
             If Trim(txtCodigoProveedor.Text) <> "" Then
                 LBProveedores.SelectedIndex = LBProveedores.FindString(Trim(txtCodigoProveedor.Text))
-                _TraerProveedor(LBProveedores.SelectedItem)
+
+                If Not IsNothing(LBProveedores.SelectedItem) Then
+                    _TraerProveedor(LBProveedores.SelectedItem)
+                Else
+                    txtCodigoProveedor.Focus()
+                    txtDescripcionProveedor.Text = ""
+                End If
+
                 'LBProveedores_MouseDoubleClick(Nothing, Nothing)
-                btnConsultaRemitos.PerformClick()
+                'btnConsultaRemitos.PerformClick()
             Else
                 txtFiltrar.Focus()
             End If
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCodigoProveedor.Text = ""
+            txtDescripcionProveedor.Text = ""
         End If
 
+    End Sub
+
+    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+        LBRemitos.Items.Clear()
+        txtRemitos.Text = ""
+        txtCodigoProveedor.Text = ""
+        txtDescripcionProveedor.Text = ""
+        txtFiltrar.Text = ""
+        txtFiltrar.Focus()
     End Sub
 End Class

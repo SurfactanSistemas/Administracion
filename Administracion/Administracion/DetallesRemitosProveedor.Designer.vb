@@ -23,6 +23,13 @@ Partial Class DetallesRemitosProveedor
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGVDetalles = New System.Windows.Forms.DataGridView()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -48,6 +55,7 @@ Partial Class DetallesRemitosProveedor
         Me.FApr = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DGVDetalles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'DGVDetalles
@@ -58,14 +66,14 @@ Partial Class DetallesRemitosProveedor
         Me.DGVDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVDetalles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Remito, Me.Orden, Me.Producto, Me.Descripción, Me.CantidadPedida, Me.Moneda, Me.Precio, Me.Condicion, Me.Informe, Me.CantRecibida, Me.Estado, Me.FApr})
         Me.DGVDetalles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DGVDetalles.Location = New System.Drawing.Point(12, 100)
+        Me.DGVDetalles.Location = New System.Drawing.Point(11, 44)
         Me.DGVDetalles.Name = "DGVDetalles"
         Me.DGVDetalles.ReadOnly = True
         Me.DGVDetalles.ShowCellErrors = False
         Me.DGVDetalles.ShowCellToolTips = False
         Me.DGVDetalles.ShowEditingIcon = False
         Me.DGVDetalles.ShowRowErrors = False
-        Me.DGVDetalles.Size = New System.Drawing.Size(877, 289)
+        Me.DGVDetalles.Size = New System.Drawing.Size(936, 289)
         Me.DGVDetalles.TabIndex = 0
         '
         'Button1
@@ -75,7 +83,7 @@ Partial Class DetallesRemitosProveedor
         Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(414, 422)
+        Me.Button1.Location = New System.Drawing.Point(487, 422)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(128, 41)
         Me.Button1.TabIndex = 1
@@ -88,7 +96,7 @@ Partial Class DetallesRemitosProveedor
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(104, 64)
+        Me.Label1.Location = New System.Drawing.Point(133, 16)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(73, 18)
         Me.Label1.TabIndex = 2
@@ -96,7 +104,7 @@ Partial Class DetallesRemitosProveedor
         '
         'txtCodProveedor
         '
-        Me.txtCodProveedor.Location = New System.Drawing.Point(191, 64)
+        Me.txtCodProveedor.Location = New System.Drawing.Point(220, 16)
         Me.txtCodProveedor.Name = "txtCodProveedor"
         Me.txtCodProveedor.ReadOnly = True
         Me.txtCodProveedor.Size = New System.Drawing.Size(188, 20)
@@ -106,7 +114,7 @@ Partial Class DetallesRemitosProveedor
         '
         Me.txtNombreProveedor.Enabled = False
         Me.txtNombreProveedor.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNombreProveedor.Location = New System.Drawing.Point(385, 63)
+        Me.txtNombreProveedor.Location = New System.Drawing.Point(414, 15)
         Me.txtNombreProveedor.Name = "txtNombreProveedor"
         Me.txtNombreProveedor.ReadOnly = True
         Me.txtNombreProveedor.Size = New System.Drawing.Size(411, 23)
@@ -119,7 +127,7 @@ Partial Class DetallesRemitosProveedor
         Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCerrar.FlatAppearance.BorderSize = 0
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrar.Location = New System.Drawing.Point(272, 422)
+        Me.btnCerrar.Location = New System.Drawing.Point(345, 422)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(128, 41)
         Me.btnCerrar.TabIndex = 4
@@ -133,7 +141,7 @@ Partial Class DetallesRemitosProveedor
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Location = New System.Drawing.Point(1, -1)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(901, 50)
+        Me.Panel1.Size = New System.Drawing.Size(958, 50)
         Me.Panel1.TabIndex = 5
         '
         'Label2
@@ -141,7 +149,7 @@ Partial Class DetallesRemitosProveedor
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(732, 10)
+        Me.Label2.Location = New System.Drawing.Point(773, 10)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -161,13 +169,19 @@ Partial Class DetallesRemitosProveedor
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.DGVDetalles)
+        Me.Panel2.Controls.Add(Me.txtNombreProveedor)
+        Me.Panel2.Controls.Add(Me.Label1)
+        Me.Panel2.Controls.Add(Me.txtCodProveedor)
         Me.Panel2.Location = New System.Drawing.Point(1, 48)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(901, 359)
+        Me.Panel2.Size = New System.Drawing.Size(958, 359)
         Me.Panel2.TabIndex = 8
         '
         'Remito
         '
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Remito.DefaultCellStyle = DataGridViewCellStyle15
         Me.Remito.HeaderText = "Remito"
         Me.Remito.Name = "Remito"
         Me.Remito.ReadOnly = True
@@ -175,6 +189,8 @@ Partial Class DetallesRemitosProveedor
         '
         'Orden
         '
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Orden.DefaultCellStyle = DataGridViewCellStyle16
         Me.Orden.HeaderText = "Orden"
         Me.Orden.Name = "Orden"
         Me.Orden.ReadOnly = True
@@ -192,14 +208,18 @@ Partial Class DetallesRemitosProveedor
         Me.Descripción.HeaderText = "Descripción"
         Me.Descripción.Name = "Descripción"
         Me.Descripción.ReadOnly = True
-        Me.Descripción.Width = 128
+        Me.Descripción.Width = 155
         '
         'CantidadPedida
         '
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle17.Format = "N2"
+        DataGridViewCellStyle17.NullValue = """"""
+        Me.CantidadPedida.DefaultCellStyle = DataGridViewCellStyle17
         Me.CantidadPedida.HeaderText = "Cant. Ped."
         Me.CantidadPedida.Name = "CantidadPedida"
         Me.CantidadPedida.ReadOnly = True
-        Me.CantidadPedida.Width = 90
+        Me.CantidadPedida.Width = 70
         '
         'Moneda
         '
@@ -210,6 +230,10 @@ Partial Class DetallesRemitosProveedor
         '
         'Precio
         '
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle18.Format = "N2"
+        DataGridViewCellStyle18.NullValue = Nothing
+        Me.Precio.DefaultCellStyle = DataGridViewCellStyle18
         Me.Precio.HeaderText = "Precio"
         Me.Precio.Name = "Precio"
         Me.Precio.ReadOnly = True
@@ -220,10 +244,12 @@ Partial Class DetallesRemitosProveedor
         Me.Condicion.HeaderText = "C.Pago"
         Me.Condicion.Name = "Condicion"
         Me.Condicion.ReadOnly = True
-        Me.Condicion.Width = 60
+        Me.Condicion.Width = 90
         '
         'Informe
         '
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Informe.DefaultCellStyle = DataGridViewCellStyle19
         Me.Informe.HeaderText = "Informe"
         Me.Informe.Name = "Informe"
         Me.Informe.ReadOnly = True
@@ -231,10 +257,12 @@ Partial Class DetallesRemitosProveedor
         '
         'CantRecibida
         '
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CantRecibida.DefaultCellStyle = DataGridViewCellStyle20
         Me.CantRecibida.HeaderText = "Cant. Ing."
         Me.CantRecibida.Name = "CantRecibida"
         Me.CantRecibida.ReadOnly = True
-        Me.CantRecibida.Width = 80
+        Me.CantRecibida.Width = 70
         '
         'Estado
         '
@@ -245,23 +273,21 @@ Partial Class DetallesRemitosProveedor
         '
         'FApr
         '
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FApr.DefaultCellStyle = DataGridViewCellStyle21
         Me.FApr.HeaderText = "F. Apr"
         Me.FApr.Name = "FApr"
         Me.FApr.ReadOnly = True
-        Me.FApr.Width = 60
+        Me.FApr.Width = 90
         '
         'DetallesRemitosProveedor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(901, 478)
+        Me.ClientSize = New System.Drawing.Size(960, 478)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnCerrar)
-        Me.Controls.Add(Me.txtNombreProveedor)
-        Me.Controls.Add(Me.txtCodProveedor)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.DGVDetalles)
         Me.Controls.Add(Me.Panel2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -270,8 +296,9 @@ Partial Class DetallesRemitosProveedor
         CType(Me.DGVDetalles, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents DGVDetalles As System.Windows.Forms.DataGridView

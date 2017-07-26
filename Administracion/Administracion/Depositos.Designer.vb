@@ -37,6 +37,8 @@ Partial Class Depositos
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtImporte = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel4 = New Administracion.CustomLabel()
@@ -48,12 +50,11 @@ Partial Class Depositos
         Me.txtNroDeposito = New Administracion.CustomTextBox()
         Me.txtDescripcionBanco = New Administracion.CustomTextBox()
         Me.CustomLabel6 = New Administracion.CustomLabel()
-        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.lstFiltrado = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnChequeTerceros = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnImpresion = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
@@ -201,6 +202,19 @@ Partial Class Depositos
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFecha.ValidatingType = GetType(Date)
         '
+        'lstSeleccion
+        '
+        Me.lstSeleccion.Cleanable = False
+        Me.lstSeleccion.EnterIndex = -1
+        Me.lstSeleccion.FormattingEnabled = True
+        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
+        Me.lstSeleccion.LabelAssociationKey = -1
+        Me.lstSeleccion.Location = New System.Drawing.Point(395, 18)
+        Me.lstSeleccion.Name = "lstSeleccion"
+        Me.lstSeleccion.Size = New System.Drawing.Size(373, 134)
+        Me.lstSeleccion.TabIndex = 14
+        Me.lstSeleccion.Visible = False
+        '
         'txtImporte
         '
         Me.txtImporte.Cleanable = True
@@ -342,19 +356,6 @@ Partial Class Depositos
         Me.CustomLabel6.TabIndex = 7
         Me.CustomLabel6.Text = "Fecha"
         '
-        'lstSeleccion
-        '
-        Me.lstSeleccion.Cleanable = False
-        Me.lstSeleccion.EnterIndex = -1
-        Me.lstSeleccion.FormattingEnabled = True
-        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
-        Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(395, 18)
-        Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(373, 134)
-        Me.lstSeleccion.TabIndex = 14
-        Me.lstSeleccion.Visible = False
-        '
         'lstFiltrado
         '
         Me.lstFiltrado.Cleanable = True
@@ -393,7 +394,7 @@ Partial Class Depositos
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(482, 570)
+        Me.btnCerrar.Location = New System.Drawing.Point(400, 573)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(110, 50)
         Me.btnCerrar.TabIndex = 13
@@ -414,12 +415,33 @@ Partial Class Depositos
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(198, 570)
+        Me.btnConsulta.Location = New System.Drawing.Point(164, 573)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(110, 50)
         Me.btnConsulta.TabIndex = 12
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consulta")
         Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'btnChequeTerceros
+        '
+        Me.btnChequeTerceros.BackgroundImage = Global.Administracion.My.Resources.Resources.check_icon
+        Me.btnChequeTerceros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnChequeTerceros.Cleanable = False
+        Me.btnChequeTerceros.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnChequeTerceros.EnterIndex = -1
+        Me.btnChequeTerceros.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnChequeTerceros.FlatAppearance.BorderSize = 0
+        Me.btnChequeTerceros.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnChequeTerceros.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnChequeTerceros.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnChequeTerceros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnChequeTerceros.LabelAssociationKey = -1
+        Me.btnChequeTerceros.Location = New System.Drawing.Point(634, 573)
+        Me.btnChequeTerceros.Name = "btnChequeTerceros"
+        Me.btnChequeTerceros.Size = New System.Drawing.Size(110, 50)
+        Me.btnChequeTerceros.TabIndex = 11
+        Me.ToolTip1.SetToolTip(Me.btnChequeTerceros, "Consultar Cheques de terceros")
+        Me.btnChequeTerceros.UseVisualStyleBackColor = True
         '
         'btnLimpiar
         '
@@ -435,7 +457,7 @@ Partial Class Depositos
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(624, 570)
+        Me.btnLimpiar.Location = New System.Drawing.Point(518, 573)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(110, 50)
         Me.btnLimpiar.TabIndex = 11
@@ -456,7 +478,7 @@ Partial Class Depositos
         Me.btnImpresion.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImpresion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImpresion.LabelAssociationKey = -1
-        Me.btnImpresion.Location = New System.Drawing.Point(340, 570)
+        Me.btnImpresion.Location = New System.Drawing.Point(282, 573)
         Me.btnImpresion.Name = "btnImpresion"
         Me.btnImpresion.Size = New System.Drawing.Size(110, 50)
         Me.btnImpresion.TabIndex = 10
@@ -477,7 +499,7 @@ Partial Class Depositos
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(56, 570)
+        Me.btnAgregar.Location = New System.Drawing.Point(46, 573)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(110, 50)
         Me.btnAgregar.TabIndex = 9
@@ -493,6 +515,7 @@ Partial Class Depositos
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnConsulta)
+        Me.Controls.Add(Me.btnChequeTerceros)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnImpresion)
         Me.Controls.Add(Me.btnAgregar)
@@ -542,4 +565,5 @@ Partial Class Depositos
     Friend WithEvents ClaveCheque As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
     Friend WithEvents lstFiltrado As Administracion.CustomListBox
+    Friend WithEvents btnChequeTerceros As Administracion.CustomButton
 End Class
