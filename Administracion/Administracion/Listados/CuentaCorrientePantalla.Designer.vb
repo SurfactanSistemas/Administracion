@@ -43,37 +43,37 @@ Partial Class CuentaCorrientePantalla
         Me.opcCompleto = New System.Windows.Forms.RadioButton()
         Me.opcPendiente = New System.Windows.Forms.RadioButton()
         Me.boxPantallaProveedores = New System.Windows.Forms.GroupBox()
+        Me.lstFiltrada = New Administracion.CustomListBox()
+        Me.lstAyuda = New Administracion.CustomListBox()
+        Me.txtAyuda = New Administracion.CustomTextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.gbSaldoCtaCliente = New System.Windows.Forms.GroupBox()
+        Me.lblClienteAsociado = New Administracion.CustomLabel()
+        Me.lblSaldoCuentaProveedor = New Administracion.CustomLabel()
         Me.CBProveedorSelectivo = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnCancela = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.txtProveedor = New Administracion.CustomTextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblTotalAN = New System.Windows.Forms.Label()
         Me.lblTotalNC = New System.Windows.Forms.Label()
+        Me.lblTotalOP = New System.Windows.Forms.Label()
         Me.lblTotalND = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.lblTotalFC = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.lblTotalOP = New System.Windows.Forms.Label()
-        Me.lblTotalAN = New System.Windows.Forms.Label()
-        Me.btnCancela = New Administracion.CustomButton()
-        Me.lstFiltrada = New Administracion.CustomListBox()
-        Me.lstAyuda = New Administracion.CustomListBox()
-        Me.txtAyuda = New Administracion.CustomTextBox()
-        Me.btnConsulta = New Administracion.CustomButton()
         Me.txtSaldo = New Administracion.CustomTextBox()
         Me.CustomLabel2 = New Administracion.CustomLabel()
         Me.txtRazon = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.txtProveedor = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.lblClienteAsociado = New Administracion.CustomLabel()
-        Me.lblSaldoCuentaProveedor = New Administracion.CustomLabel()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.boxPantallaProveedores.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -199,6 +199,41 @@ Partial Class CuentaCorrientePantalla
         Me.boxPantallaProveedores.TabStop = False
         Me.boxPantallaProveedores.Visible = False
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(62, 38)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(417, 251)
+        Me.lstFiltrada.TabIndex = 30
+        Me.lstFiltrada.Visible = False
+        '
+        'lstAyuda
+        '
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(62, 38)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(417, 251)
+        Me.lstAyuda.TabIndex = 29
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Cleanable = False
+        Me.txtAyuda.Empty = True
+        Me.txtAyuda.EnterIndex = -1
+        Me.txtAyuda.LabelAssociationKey = -1
+        Me.txtAyuda.Location = New System.Drawing.Point(62, 13)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
+        Me.txtAyuda.TabIndex = 28
+        Me.txtAyuda.Validator = Administracion.ValidatorType.None
+        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -256,6 +291,37 @@ Partial Class CuentaCorrientePantalla
         Me.ToolTip1.SetToolTip(Me.gbSaldoCtaCliente, "Cliente Asociado (Doble Click para abrir Facturas)")
         Me.gbSaldoCtaCliente.Visible = False
         '
+        'lblClienteAsociado
+        '
+        Me.lblClienteAsociado.AutoSize = True
+        Me.lblClienteAsociado.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.lblClienteAsociado.ControlAssociationKey = -1
+        Me.lblClienteAsociado.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblClienteAsociado.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblClienteAsociado.Location = New System.Drawing.Point(34, 17)
+        Me.lblClienteAsociado.Name = "lblClienteAsociado"
+        Me.lblClienteAsociado.Size = New System.Drawing.Size(26, 18)
+        Me.lblClienteAsociado.TabIndex = 32
+        Me.lblClienteAsociado.Text = "      "
+        Me.lblClienteAsociado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ToolTip1.SetToolTip(Me.lblClienteAsociado, "Cliente Asociado (Doble Click para abrir Facturas)")
+        '
+        'lblSaldoCuentaProveedor
+        '
+        Me.lblSaldoCuentaProveedor.AutoSize = True
+        Me.lblSaldoCuentaProveedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.lblSaldoCuentaProveedor.ControlAssociationKey = -1
+        Me.lblSaldoCuentaProveedor.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblSaldoCuentaProveedor.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblSaldoCuentaProveedor.Location = New System.Drawing.Point(97, 15)
+        Me.lblSaldoCuentaProveedor.MinimumSize = New System.Drawing.Size(100, 20)
+        Me.lblSaldoCuentaProveedor.Name = "lblSaldoCuentaProveedor"
+        Me.lblSaldoCuentaProveedor.Size = New System.Drawing.Size(100, 20)
+        Me.lblSaldoCuentaProveedor.TabIndex = 31
+        Me.lblSaldoCuentaProveedor.Text = "0.00"
+        Me.lblSaldoCuentaProveedor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ToolTip1.SetToolTip(Me.lblSaldoCuentaProveedor, "Cliente Asociado (Doble Click para abrir Facturas)")
+        '
         'CBProveedorSelectivo
         '
         Me.CBProveedorSelectivo.AutoSize = True
@@ -267,6 +333,67 @@ Partial Class CuentaCorrientePantalla
         Me.CBProveedorSelectivo.TabIndex = 0
         Me.CBProveedorSelectivo.Text = "Seleccionar para Pago Semanal"
         Me.CBProveedorSelectivo.UseVisualStyleBackColor = True
+        '
+        'btnCancela
+        '
+        Me.btnCancela.BackColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCancela.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCancela.Cleanable = False
+        Me.btnCancela.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCancela.EnterIndex = -1
+        Me.btnCancela.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatAppearance.BorderSize = 0
+        Me.btnCancela.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancela.LabelAssociationKey = -1
+        Me.btnCancela.Location = New System.Drawing.Point(402, 541)
+        Me.btnCancela.Name = "btnCancela"
+        Me.btnCancela.Size = New System.Drawing.Size(93, 50)
+        Me.btnCancela.TabIndex = 28
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
+        Me.btnCancela.UseVisualStyleBackColor = False
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.BackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cleanable = False
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.EnterIndex = -1
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.LabelAssociationKey = -1
+        Me.btnConsulta.Location = New System.Drawing.Point(282, 541)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(93, 50)
+        Me.btnConsulta.TabIndex = 26
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consulta")
+        Me.btnConsulta.UseVisualStyleBackColor = False
+        '
+        'txtProveedor
+        '
+        Me.txtProveedor.BackColor = System.Drawing.SystemColors.Control
+        Me.txtProveedor.Cleanable = False
+        Me.txtProveedor.Empty = True
+        Me.txtProveedor.EnterIndex = -1
+        Me.txtProveedor.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.txtProveedor.LabelAssociationKey = -1
+        Me.txtProveedor.Location = New System.Drawing.Point(136, 64)
+        Me.txtProveedor.MaxLength = 11
+        Me.txtProveedor.Name = "txtProveedor"
+        Me.txtProveedor.Size = New System.Drawing.Size(108, 20)
+        Me.txtProveedor.TabIndex = 0
+        Me.txtProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtProveedor, "Doble Click: Abrir Consulta de Proveedores")
+        Me.txtProveedor.Validator = Administracion.ValidatorType.None
         '
         'GroupBox1
         '
@@ -288,6 +415,15 @@ Partial Class CuentaCorrientePantalla
         Me.GroupBox1.Text = "Montos detallados por periodo"
         Me.GroupBox1.Visible = False
         '
+        'lblTotalAN
+        '
+        Me.lblTotalAN.Location = New System.Drawing.Point(86, 100)
+        Me.lblTotalAN.Name = "lblTotalAN"
+        Me.lblTotalAN.Size = New System.Drawing.Size(183, 17)
+        Me.lblTotalAN.TabIndex = 1
+        Me.lblTotalAN.Text = "$ 0.00"
+        Me.lblTotalAN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'lblTotalNC
         '
         Me.lblTotalNC.Location = New System.Drawing.Point(86, 61)
@@ -296,6 +432,15 @@ Partial Class CuentaCorrientePantalla
         Me.lblTotalNC.TabIndex = 1
         Me.lblTotalNC.Text = "$ 0.00"
         Me.lblTotalNC.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblTotalOP
+        '
+        Me.lblTotalOP.Location = New System.Drawing.Point(86, 80)
+        Me.lblTotalOP.Name = "lblTotalOP"
+        Me.lblTotalOP.Size = New System.Drawing.Size(183, 17)
+        Me.lblTotalOP.TabIndex = 1
+        Me.lblTotalOP.Text = "$ 0.00"
+        Me.lblTotalOP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblTotalND
         '
@@ -306,6 +451,15 @@ Partial Class CuentaCorrientePantalla
         Me.lblTotalND.Text = "$ 0.00"
         Me.lblTotalND.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(51, 102)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(22, 13)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "AN"
+        '
         'lblTotalFC
         '
         Me.lblTotalFC.Location = New System.Drawing.Point(86, 24)
@@ -314,6 +468,15 @@ Partial Class CuentaCorrientePantalla
         Me.lblTotalFC.TabIndex = 1
         Me.lblTotalFC.Text = "$ 0.00"
         Me.lblTotalFC.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(51, 83)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(22, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "OP"
         '
         'Label5
         '
@@ -341,121 +504,6 @@ Partial Class CuentaCorrientePantalla
         Me.Label3.Size = New System.Drawing.Size(20, 13)
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "FC"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(51, 83)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(22, 13)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "OP"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(51, 102)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(22, 13)
-        Me.Label7.TabIndex = 0
-        Me.Label7.Text = "AN"
-        '
-        'lblTotalOP
-        '
-        Me.lblTotalOP.Location = New System.Drawing.Point(86, 80)
-        Me.lblTotalOP.Name = "lblTotalOP"
-        Me.lblTotalOP.Size = New System.Drawing.Size(183, 17)
-        Me.lblTotalOP.TabIndex = 1
-        Me.lblTotalOP.Text = "$ 0.00"
-        Me.lblTotalOP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblTotalAN
-        '
-        Me.lblTotalAN.Location = New System.Drawing.Point(86, 100)
-        Me.lblTotalAN.Name = "lblTotalAN"
-        Me.lblTotalAN.Size = New System.Drawing.Size(183, 17)
-        Me.lblTotalAN.TabIndex = 1
-        Me.lblTotalAN.Text = "$ 0.00"
-        Me.lblTotalAN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnCancela
-        '
-        Me.btnCancela.BackColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnCancela.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCancela.Cleanable = False
-        Me.btnCancela.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCancela.EnterIndex = -1
-        Me.btnCancela.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.FlatAppearance.BorderSize = 0
-        Me.btnCancela.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(402, 541)
-        Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(93, 50)
-        Me.btnCancela.TabIndex = 28
-        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
-        Me.btnCancela.UseVisualStyleBackColor = False
-        '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(62, 38)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(417, 251)
-        Me.lstFiltrada.TabIndex = 30
-        Me.lstFiltrada.Visible = False
-        '
-        'lstAyuda
-        '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(62, 38)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(417, 251)
-        Me.lstAyuda.TabIndex = 29
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Cleanable = False
-        Me.txtAyuda.Empty = True
-        Me.txtAyuda.EnterIndex = -1
-        Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(62, 13)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
-        Me.txtAyuda.TabIndex = 28
-        Me.txtAyuda.Validator = Administracion.ValidatorType.None
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cleanable = False
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(282, 541)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(93, 50)
-        Me.btnConsulta.TabIndex = 26
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consulta")
-        Me.btnConsulta.UseVisualStyleBackColor = False
         '
         'txtSaldo
         '
@@ -508,23 +556,6 @@ Partial Class CuentaCorrientePantalla
         Me.CustomLabel1.Size = New System.Drawing.Size(0, 13)
         Me.CustomLabel1.TabIndex = 5
         '
-        'txtProveedor
-        '
-        Me.txtProveedor.BackColor = System.Drawing.SystemColors.Control
-        Me.txtProveedor.Cleanable = False
-        Me.txtProveedor.Empty = True
-        Me.txtProveedor.EnterIndex = -1
-        Me.txtProveedor.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.txtProveedor.LabelAssociationKey = -1
-        Me.txtProveedor.Location = New System.Drawing.Point(136, 64)
-        Me.txtProveedor.MaxLength = 11
-        Me.txtProveedor.Name = "txtProveedor"
-        Me.txtProveedor.Size = New System.Drawing.Size(108, 20)
-        Me.txtProveedor.TabIndex = 0
-        Me.txtProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ToolTip1.SetToolTip(Me.txtProveedor, "Doble Click: Abrir Consulta de Proveedores")
-        Me.txtProveedor.Validator = Administracion.ValidatorType.None
-        '
         'CustomLabel3
         '
         Me.CustomLabel3.AutoSize = True
@@ -537,37 +568,6 @@ Partial Class CuentaCorrientePantalla
         Me.CustomLabel3.Size = New System.Drawing.Size(73, 18)
         Me.CustomLabel3.TabIndex = 3
         Me.CustomLabel3.Text = "Proveedor"
-        '
-        'lblClienteAsociado
-        '
-        Me.lblClienteAsociado.AutoSize = True
-        Me.lblClienteAsociado.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.lblClienteAsociado.ControlAssociationKey = -1
-        Me.lblClienteAsociado.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.lblClienteAsociado.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblClienteAsociado.Location = New System.Drawing.Point(34, 17)
-        Me.lblClienteAsociado.Name = "lblClienteAsociado"
-        Me.lblClienteAsociado.Size = New System.Drawing.Size(26, 18)
-        Me.lblClienteAsociado.TabIndex = 32
-        Me.lblClienteAsociado.Text = "      "
-        Me.lblClienteAsociado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.ToolTip1.SetToolTip(Me.lblClienteAsociado, "Cliente Asociado (Doble Click para abrir Facturas)")
-        '
-        'lblSaldoCuentaProveedor
-        '
-        Me.lblSaldoCuentaProveedor.AutoSize = True
-        Me.lblSaldoCuentaProveedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.lblSaldoCuentaProveedor.ControlAssociationKey = -1
-        Me.lblSaldoCuentaProveedor.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.lblSaldoCuentaProveedor.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblSaldoCuentaProveedor.Location = New System.Drawing.Point(97, 15)
-        Me.lblSaldoCuentaProveedor.MinimumSize = New System.Drawing.Size(100, 20)
-        Me.lblSaldoCuentaProveedor.Name = "lblSaldoCuentaProveedor"
-        Me.lblSaldoCuentaProveedor.Size = New System.Drawing.Size(100, 20)
-        Me.lblSaldoCuentaProveedor.TabIndex = 31
-        Me.lblSaldoCuentaProveedor.Text = "0.00"
-        Me.lblSaldoCuentaProveedor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.ToolTip1.SetToolTip(Me.lblSaldoCuentaProveedor, "Cliente Asociado (Doble Click para abrir Facturas)")
         '
         'CuentaCorrientePantalla
         '

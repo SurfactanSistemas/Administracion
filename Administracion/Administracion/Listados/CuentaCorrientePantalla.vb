@@ -169,7 +169,11 @@ Public Class CuentaCorrientePantalla
 
         If IsNothing(proveedor) Then : Exit Sub : End If
 
+        ' Reseteamos resumen de montos automático.
         gbSaldoCtaCliente.Visible = False
+        btnCancela.Location = New Point(402, 541)
+        btnConsulta.Location = New Point(282, 541)
+
 
         'lstFiltrada.Visible = False
         txtProveedor.Text = proveedor.id

@@ -87,6 +87,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor WHERE Proveedor = '" & proveedor & "' OR Nombre = '" & proveedor & "'")
         Dim dr As SqlDataReader
 
+        If Trim(proveedor) = "" Then : Return _Proveedor : End If
+
         SQLConnector.conexionSql(cn, cm)
 
         Try
@@ -146,9 +148,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
                 txtCodProveedor.Text = ""
                 txtAyuda.Text = ""
+                txtCodProveedor.Focus()
             Else
                 MsgBox("El Proveedor ya se encuentra agregado en el listado semanal.", MsgBoxStyle.Information)
+
                 txtCodProveedor.Focus()
+
+                If Me.Height > 600 Then : txtAyuda.Focus() : End If
             End If
             
         End If
@@ -179,6 +185,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
         mostrarProveedor(lstAyuda.SelectedItem.ToString())
+        txtAyuda.Focus()
     End Sub
 
     Private Sub txtCodProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodProveedor.KeyDown
@@ -262,7 +269,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub btnLimpiarTodo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarTodo.Click
 
-        _LimpiarProveedoresSelectivos()
+        If GRilla.Rows.Count > 1 Then
+            _LimpiarProveedoresSelectivos()
+        Else
+            txtCodProveedor.Focus()
+        End If
 
     End Sub
 
@@ -297,6 +308,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
             GRilla.Rows.Clear()
 
+            txtCodProveedor.Focus()
+
             varRenglon = 0
 
         Catch ex As Exception
@@ -308,5 +321,63 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             cm = Nothing
 
         End Try
+    End Sub
+
+    Private Sub txtCodProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodProveedor.MouseDoubleClick
+        btnConsulta.PerformClick()
+    End Sub
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstAyuda
+        Dim final As ListBox = lstFiltrada
+        Dim cadena As String = Trim(txtAyuda.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+
+        Else
+
+            final.Visible = False
+
+        End If
+    End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+        Dim origen As ListBox = lstAyuda
+        Dim filtrado As ListBox = lstFiltrada
+        Dim texto As TextBox = txtAyuda
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedItem = filtrado.SelectedItem
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        lstAyuda_Click(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        _FiltrarDinamicamente()
+    End Sub
+
+    Private Sub ListadoCuentaCorrienteProveedoresSelectivoPreparacion_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+        txtCodProveedor.Focus()
     End Sub
 End Class
