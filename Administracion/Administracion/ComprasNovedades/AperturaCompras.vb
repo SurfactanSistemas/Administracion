@@ -209,6 +209,13 @@ Public Class Apertura
                                 Case Else
                                     Return True
                             End Select
+                        Case 4, 5
+
+                            If Val(valor) = 0 Then
+                                .CurrentCell = .Rows(iRow).Cells(iCol)
+                            Else
+                                .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                            End If
 
                         Case 6 ' Columna Fecha
 
@@ -232,10 +239,22 @@ Public Class Apertura
                             .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                     End Select
 
+                    If IsNothing(valor) Then
+
+                        Select Case iCol
+                            Case 7, 8, 9, 10, 11, 12, 13
+                                .Rows(iRow).Cells(iCol).Value = "0"
+                            Case Else
+                                .Rows(iRow).Cells(iCol).Value = ""
+                        End Select
+
+                    End If
 
                     Return True
-
+                ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                    .Rows(iRow).Cells(iCol).Value = ""
                 End If
+
             End If
         End With
 

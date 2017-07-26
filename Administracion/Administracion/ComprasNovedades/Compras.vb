@@ -1104,6 +1104,8 @@ Public Class Compras
         ' Reiniciamos la variable de control.
         Dim _EsPymeNacion As Boolean = False
 
+        If Trim(txtRemito.Text) = "" Then : Return _EsPymeNacion : End If
+
         ' Extraemos los remitos a consultar.
         Dim remitos() As String = Trim(txtRemito.Text).Split(",")
         Dim renglon As Integer = 0
@@ -1118,10 +1120,13 @@ Public Class Compras
 
         ' Salimos en caso de no encontrar alguna empresa.
         If Trim(csEmpresa) = "" Then
-            MsgBox("Remito Inexistente", MsgBoxStyle.Information)
+            If optNacion.Checked Then
 
-            txtRemito.Focus()
+                MsgBox("Remito Inexistente", MsgBoxStyle.Information)
+                txtRemito.Focus()
 
+            End If
+            
             Return _EsPymeNacion
         End If
 
@@ -1561,6 +1566,8 @@ Public Class Compras
 
                 Return True
 
+            ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                gridAsientos.Rows(iRow).Cells(iCol).Value = ""
             End If
         End If
 
@@ -1730,7 +1737,7 @@ Public Class Compras
     End Sub
 
     Private Function _DisponibleParaDarDeBaja() As Boolean
-        Dim _Disponible As Boolean = False
+        Dim _Disponible As Boolean = True
 
         Dim XClave As String = Trim(txtCodigoProveedor.Text) & CBLetra.SelectedItem & ceros(cmbTipo.SelectedIndex + 1, 2) & ceros(Trim(txtPunto.Text), 4) & ceros(Trim(txtNumero.Text), 8)
 
@@ -1747,8 +1754,8 @@ Public Class Compras
             If dr.HasRows Then
                 dr.Read()
 
-                If Val(dr.Item("Saldo")) = Val(dr.Item("Total")) Then
-                    _Disponible = True
+                If Val(dr.Item("Saldo")) <> Val(dr.Item("Total")) Then
+                    _Disponible = false
                 End If
 
             End If
@@ -1985,6 +1992,7 @@ Public Class Compras
 
         ' Verificamos que hayan remitos que consultar.
         If Trim(txtRemito.Text) = "" Then
+            txtRemito.Focus()
             Exit Sub
         End If
 
@@ -1995,5 +2003,9 @@ Public Class Compras
 
         End With
 
+    End Sub
+
+    Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomButton1.Click
+        txtRemito_MouseDoubleClick(Nothing, Nothing)
     End Sub
 End Class

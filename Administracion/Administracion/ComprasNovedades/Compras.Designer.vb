@@ -96,6 +96,7 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
+        Me.CustomButton1 = New Administracion.CustomButton()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -229,6 +230,7 @@ Partial Class Compras
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.CustomButton1)
         Me.Panel2.Controls.Add(Me.txtVtoCAI)
         Me.Panel2.Controls.Add(Me.txtFechaIVA)
         Me.Panel2.Controls.Add(Me.txtFechaVto2)
@@ -890,8 +892,9 @@ Partial Class Compras
         Me.txtRemito.Location = New System.Drawing.Point(468, 65)
         Me.txtRemito.MaxLength = 30
         Me.txtRemito.Name = "txtRemito"
-        Me.txtRemito.Size = New System.Drawing.Size(319, 20)
+        Me.txtRemito.Size = New System.Drawing.Size(276, 20)
         Me.txtRemito.TabIndex = 39
+        Me.ToolTip1.SetToolTip(Me.txtRemito, "Doble Click: Consultar detalles de Remitos")
         Me.txtRemito.Validator = Administracion.ValidatorType.None
         '
         'cmbTipo
@@ -1080,6 +1083,28 @@ Partial Class Compras
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'CustomButton1
+        '
+        Me.CustomButton1.BackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.CustomButton1.Cleanable = False
+        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.CustomButton1.EnterIndex = -1
+        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.BorderSize = 0
+        Me.CustomButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CustomButton1.LabelAssociationKey = -1
+        Me.CustomButton1.Location = New System.Drawing.Point(749, 63)
+        Me.CustomButton1.Name = "CustomButton1"
+        Me.CustomButton1.Size = New System.Drawing.Size(31, 23)
+        Me.CustomButton1.TabIndex = 64
+        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Consultar Detalles de Remitos")
+        Me.CustomButton1.UseVisualStyleBackColor = False
+        '
         'Compras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1181,4 +1206,5 @@ Partial Class Compras
     Friend WithEvents txtFechaVto2 As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtFechaVto1 As System.Windows.Forms.MaskedTextBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents CustomButton1 As Administracion.CustomButton
 End Class

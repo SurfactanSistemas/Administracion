@@ -148,6 +148,7 @@ Partial Class Depositos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.lstSeleccion)
         Me.Panel2.Controls.Add(Me.txtAyuda)
         Me.Panel2.Controls.Add(Me.txtFechaAcreditacion)
         Me.Panel2.Controls.Add(Me.txtFecha)
@@ -163,7 +164,6 @@ Partial Class Depositos
         Me.Panel2.Controls.Add(Me.gridCheques)
         Me.Panel2.Controls.Add(Me.txtDescripcionBanco)
         Me.Panel2.Controls.Add(Me.CustomLabel6)
-        Me.Panel2.Controls.Add(Me.lstSeleccion)
         Me.Panel2.Controls.Add(Me.lstFiltrado)
         Me.Panel2.Controls.Add(Me.lstConsulta)
         Me.Panel2.Location = New System.Drawing.Point(0, 53)
@@ -349,9 +349,9 @@ Partial Class Depositos
         Me.lstSeleccion.FormattingEnabled = True
         Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
         Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(395, 40)
+        Me.lstSeleccion.Location = New System.Drawing.Point(395, 18)
         Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(373, 108)
+        Me.lstSeleccion.Size = New System.Drawing.Size(373, 134)
         Me.lstSeleccion.TabIndex = 14
         Me.lstSeleccion.Visible = False
         '

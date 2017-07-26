@@ -130,7 +130,7 @@ Public Class DAOCompras
     End Function
 
     Private Shared Function asDouble(ByVal value)
-        Return CustomConvert.toDoubleOrZero(value.ToString)
+        Return CustomConvert.toDoubleOrZero(value)
     End Function
 
     Private Shared Function asBool(ByVal value)

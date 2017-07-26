@@ -504,7 +504,7 @@ Partial Class MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(817, 504)
+        Me.ClientSize = New System.Drawing.Size(817, 550)
         Me.Controls.Add(Me.lblCargando)
         Me.Controls.Add(Me.btnCambio)
         Me.Controls.Add(Me.MenuStrip1)

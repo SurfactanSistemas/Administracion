@@ -372,8 +372,11 @@ Public Class CuentaCorrientePantalla
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
-            e.Handled = True
-            txtRazon.Focus()
+            'e.Handled = True
+            'txtRazon.Focus()
+            txtProveedor.Text = ""
+            txtRazon.Text = ""
+            'gbSaldoCtaCliente.Visible = False
         End If
         If Not IsNumeric(e.KeyCode) Then
             e.Handled = True
@@ -452,7 +455,7 @@ Public Class CuentaCorrientePantalla
 
     Private Sub GRilla_CellMouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseUp
         Dim _filas As New List(Of DataGridViewRow)
-        Dim _WTotalFC, _WTotalND, _WTotalNC, _WTotalOP, _WTotalAN, _Valor As Double
+        Dim _WTotalFC, _WTotalND, _WTotalNC, _WTotalPagos, _Valor As Double
         Dim comienzo, final, actual As Integer
 
         comienzo = 0
@@ -462,8 +465,7 @@ Public Class CuentaCorrientePantalla
         _WTotalFC = 0
         _WTotalNC = 0
         _WTotalND = 0
-        _WTotalOP = 0
-        _WTotalAN = 0
+        _WTotalPagos = 0
 
         Debug.Print("==================================================")
 
@@ -494,10 +496,8 @@ Public Class CuentaCorrientePantalla
                                 _WTotalND += _Valor
                             Case "NC"
                                 _WTotalNC += _Valor
-                            Case "OP"
-                                _WTotalOP += _Valor
-                            Case "AN"
-                                _WTotalAN += _Valor
+                            Case "OP", "AN"
+                                _WTotalPagos += _Valor
                             Case Else
 
                         End Select
@@ -525,8 +525,7 @@ Public Class CuentaCorrientePantalla
         lblTotalFC.Text = "$ " & _WTotalFC
         lblTotalND.Text = "$ " & _WTotalND
         lblTotalNC.Text = "$ " & _WTotalNC
-        lblTotalOP.Text = "$ " & _WTotalOP
-        lblTotalAN.Text = "$ " & _WTotalAN
+        lblTotalPagos.Text = "$ " & _WTotalPagos
 
         ' Animamos los botones para dar lugar al panel con la información de los totales.
         For i = btnCancela.Location.X To 230 Step -1

@@ -73,11 +73,16 @@ Public Class Depositos
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
-        Cleanner.clean(Me)
+        'Cleanner.clean(Me)
         lstSeleccion.SelectedIndex = 0
         txtFecha.Text = Date.Today
         txtFechaAcreditacion.Text = Date.Today
         txtNroDeposito.Text = ceros(DAODeposito.siguienteNumero(), 6)
+        txtCodigoBanco.Text = ""
+        txtDescripcionBanco.Text = ""
+        txtFechaAcreditacion.Clear()
+        txtFecha.Clear()
+        txtImporte.Text = ""
         gridCheques.Rows.Clear()
         cheques.Clear()
         gridCheques.AllowUserToAddRows = True
@@ -141,8 +146,9 @@ Public Class Depositos
 
     Private Sub mostrarCheque(ByVal cheque As Cheque)
         Dim msgBoxResult As Boolean = True
-        If IsNothing(cheque) Then : Exit Sub
-        End If
+
+        If IsNothing(cheque) Then : Exit Sub : End If
+
         If Not cheques.Any(Function(otroCheque) otroCheque.igualA(cheque)) Then
             If gridCheques.AllowUserToAddRows Then
                 If gridCheques.Rows.Count > 1 Then
@@ -158,7 +164,7 @@ Public Class Depositos
                 gridCheques.AllowUserToAddRows = False
                 gridCheques.Columns(0).ReadOnly = True
                 gridCheques.Columns(4).ReadOnly = True
-                lstConsulta.Items.Remove(lstConsulta.SelectedItem)
+                'lstConsulta.Items.Remove(lstConsulta.SelectedItem)
             End If
             sumarImportes()
         End If

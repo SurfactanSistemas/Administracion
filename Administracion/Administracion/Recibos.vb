@@ -2512,7 +2512,7 @@ Public Class Recibos
 
             _SaltarA(txtProvi)
         ElseIf e.KeyData = Keys.Escape Then
-            txtRecibo.Text = Date.Now.ToString("dd/MM/yyyy")
+            txtFecha.Clear()
         End If
     End Sub
 

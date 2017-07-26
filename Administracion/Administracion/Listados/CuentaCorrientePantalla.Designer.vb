@@ -59,11 +59,9 @@ Partial Class CuentaCorrientePantalla
         Me.btnConsulta = New Administracion.CustomButton()
         Me.txtProveedor = New Administracion.CustomTextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblTotalAN = New System.Windows.Forms.Label()
         Me.lblTotalNC = New System.Windows.Forms.Label()
-        Me.lblTotalOP = New System.Windows.Forms.Label()
+        Me.lblTotalPagos = New System.Windows.Forms.Label()
         Me.lblTotalND = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.lblTotalFC = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -397,11 +395,9 @@ Partial Class CuentaCorrientePantalla
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.lblTotalAN)
         Me.GroupBox1.Controls.Add(Me.lblTotalNC)
-        Me.GroupBox1.Controls.Add(Me.lblTotalOP)
+        Me.GroupBox1.Controls.Add(Me.lblTotalPagos)
         Me.GroupBox1.Controls.Add(Me.lblTotalND)
-        Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.lblTotalFC)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
@@ -415,15 +411,6 @@ Partial Class CuentaCorrientePantalla
         Me.GroupBox1.Text = "Montos detallados por periodo"
         Me.GroupBox1.Visible = False
         '
-        'lblTotalAN
-        '
-        Me.lblTotalAN.Location = New System.Drawing.Point(86, 100)
-        Me.lblTotalAN.Name = "lblTotalAN"
-        Me.lblTotalAN.Size = New System.Drawing.Size(183, 17)
-        Me.lblTotalAN.TabIndex = 1
-        Me.lblTotalAN.Text = "$ 0.00"
-        Me.lblTotalAN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'lblTotalNC
         '
         Me.lblTotalNC.Location = New System.Drawing.Point(86, 61)
@@ -433,14 +420,14 @@ Partial Class CuentaCorrientePantalla
         Me.lblTotalNC.Text = "$ 0.00"
         Me.lblTotalNC.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'lblTotalOP
+        'lblTotalPagos
         '
-        Me.lblTotalOP.Location = New System.Drawing.Point(86, 80)
-        Me.lblTotalOP.Name = "lblTotalOP"
-        Me.lblTotalOP.Size = New System.Drawing.Size(183, 17)
-        Me.lblTotalOP.TabIndex = 1
-        Me.lblTotalOP.Text = "$ 0.00"
-        Me.lblTotalOP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblTotalPagos.Location = New System.Drawing.Point(86, 80)
+        Me.lblTotalPagos.Name = "lblTotalPagos"
+        Me.lblTotalPagos.Size = New System.Drawing.Size(183, 17)
+        Me.lblTotalPagos.TabIndex = 1
+        Me.lblTotalPagos.Text = "$ 0.00"
+        Me.lblTotalPagos.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblTotalND
         '
@@ -450,15 +437,6 @@ Partial Class CuentaCorrientePantalla
         Me.lblTotalND.TabIndex = 1
         Me.lblTotalND.Text = "$ 0.00"
         Me.lblTotalND.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(51, 102)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(22, 13)
-        Me.Label7.TabIndex = 0
-        Me.Label7.Text = "AN"
         '
         'lblTotalFC
         '
@@ -474,9 +452,9 @@ Partial Class CuentaCorrientePantalla
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(51, 83)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(22, 13)
+        Me.Label6.Size = New System.Drawing.Size(37, 13)
         Me.Label6.TabIndex = 0
-        Me.Label6.Text = "OP"
+        Me.Label6.Text = "Pagos"
         '
         'Label5
         '
@@ -645,8 +623,6 @@ Partial Class CuentaCorrientePantalla
     Friend WithEvents lblTotalNC As System.Windows.Forms.Label
     Friend WithEvents lblTotalND As System.Windows.Forms.Label
     Friend WithEvents lblTotalFC As System.Windows.Forms.Label
-    Friend WithEvents lblTotalAN As System.Windows.Forms.Label
-    Friend WithEvents lblTotalOP As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents lblTotalPagos As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
 End Class
