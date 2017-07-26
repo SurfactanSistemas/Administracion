@@ -83,6 +83,11 @@ Public Class Depositos
         gridCheques.AllowUserToAddRows = True
         gridCheques.Columns(0).ReadOnly = False
         gridCheques.Columns(4).ReadOnly = False
+        lstConsulta.Visible = False
+        lstSeleccion.Visible = False
+        lstFiltrado.Visible = False
+        txtAyuda.Text = ""
+        txtAyuda.Visible = False
         sumarImportes()
         _ClavesCheques.Clear()
     End Sub
@@ -92,7 +97,10 @@ Public Class Depositos
     End Sub
 
     Private Sub mostrarSeleccionDeConsulta()
+        txtAyuda.Text = ""
+        txtAyuda.Visible = True
         lstConsulta.Visible = False
+        lstFiltrado.Visible = False
         lstSeleccion.Visible = True
     End Sub
 
@@ -168,12 +176,17 @@ Public Class Depositos
         End If
         lstSeleccion.Visible = False
         lstConsulta.Visible = True
+        txtAyuda.Focus()
     End Sub
 
     Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
+
+        If IsNothing(lstConsulta.SelectedItem) Then : Exit Sub : End If
+
         showFunction.Invoke(lstConsulta.SelectedItem)
         If lstSeleccion.SelectedItem = "Bancos" Then
             lstConsulta.Visible = False
+            txtAyuda.Visible = False
             txtCodigoBanco.Focus()
         End If
     End Sub
@@ -242,7 +255,8 @@ Public Class Depositos
                 txtNroDeposito.Text = numero
                 txtFecha.Focus()
             End If
-
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNroDeposito.Text = ""
         End If
 
     End Sub
@@ -250,24 +264,33 @@ Public Class Depositos
     Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
         If e.KeyData = Keys.Enter Then
             txtCodigoBanco.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFecha.Text = ""
         End If
     End Sub
 
     Private Sub txtCodigoBanco_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigoBanco.KeyDown
         If e.KeyData = Keys.Enter Then
             txtFechaAcreditacion.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCodigoBanco.Text = ""
+            txtDescripcionBanco.Text = ""
         End If
     End Sub
 
     Private Sub txtFechaAcreditacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAcreditacion.KeyDown
         If e.KeyData = Keys.Enter Then
             txtImporte.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaAcreditacion.Clear()
         End If
     End Sub
 
     Private Sub txtImporte_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtImporte.KeyDown
         If e.KeyData = Keys.Enter Then
             gridCheques.CurrentCell = gridCheques.Rows(0).Cells(0)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtImporte.Text = ""
         End If
     End Sub
 
@@ -781,4 +804,57 @@ Public Class Depositos
     Private Sub Depositos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtNroDeposito.Focus()
     End Sub
+
+
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstConsulta
+        Dim final As ListBox = lstFiltrado
+        Dim cadena As String = Trim(txtAyuda.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+
+        Else
+
+            final.Visible = False
+
+        End If
+    End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrado.MouseClick
+        Dim origen As ListBox = lstConsulta
+        Dim filtrado As ListBox = lstFiltrado
+        Dim texto As TextBox = txtAyuda
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedItem = filtrado.SelectedItem
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        lstConsulta_Click(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        _FiltrarDinamicamente()
+    End Sub
+
 End Class

@@ -24,16 +24,21 @@ Partial Class Depositos
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.gridCheques = New System.Windows.Forms.DataGridView()
+        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtImporte = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.CustomLabel4 = New Administracion.CustomLabel()
         Me.CustomLabel7 = New Administracion.CustomLabel()
         Me.CustomLabel5 = New Administracion.CustomLabel()
@@ -41,20 +46,17 @@ Partial Class Depositos
         Me.txtCodigoBanco = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.txtNroDeposito = New Administracion.CustomTextBox()
-        Me.lstConsulta = New Administracion.CustomListBox()
         Me.txtDescripcionBanco = New Administracion.CustomTextBox()
         Me.CustomLabel6 = New Administracion.CustomLabel()
+        Me.lstSeleccion = New Administracion.CustomListBox()
+        Me.lstFiltrado = New Administracion.CustomListBox()
+        Me.lstConsulta = New Administracion.CustomListBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnImpresion = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
-        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gridCheques, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -65,11 +67,50 @@ Partial Class Depositos
         Me.gridCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCheques.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tipo, Me.numero, Me.fecha, Me.nombre, Me.importe, Me.ClaveCheque})
         Me.gridCheques.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.gridCheques.Location = New System.Drawing.Point(25, 123)
+        Me.gridCheques.Location = New System.Drawing.Point(25, 168)
         Me.gridCheques.Name = "gridCheques"
-        Me.gridCheques.Size = New System.Drawing.Size(743, 350)
+        Me.gridCheques.Size = New System.Drawing.Size(743, 305)
         Me.gridCheques.StandardTab = True
         Me.gridCheques.TabIndex = 0
+        '
+        'tipo
+        '
+        Me.tipo.HeaderText = "Tipo"
+        Me.tipo.Name = "tipo"
+        Me.tipo.Width = 65
+        '
+        'numero
+        '
+        Me.numero.HeaderText = "Numero"
+        Me.numero.Name = "numero"
+        Me.numero.ReadOnly = True
+        Me.numero.Width = 145
+        '
+        'fecha
+        '
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.Name = "fecha"
+        Me.fecha.ReadOnly = True
+        '
+        'nombre
+        '
+        Me.nombre.HeaderText = "Nombre"
+        Me.nombre.Name = "nombre"
+        Me.nombre.ReadOnly = True
+        Me.nombre.Width = 280
+        '
+        'importe
+        '
+        Me.importe.HeaderText = "Importe"
+        Me.importe.Name = "importe"
+        Me.importe.ReadOnly = True
+        Me.importe.Width = 110
+        '
+        'ClaveCheque
+        '
+        Me.ClaveCheque.HeaderText = "ClaveCheque"
+        Me.ClaveCheque.Name = "ClaveCheque"
+        Me.ClaveCheque.Visible = False
         '
         'Panel1
         '
@@ -79,7 +120,7 @@ Partial Class Depositos
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(793, 50)
+        Me.Panel1.Size = New System.Drawing.Size(793, 58)
         Me.Panel1.TabIndex = 17
         '
         'Label2
@@ -107,11 +148,11 @@ Partial Class Depositos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.txtAyuda)
         Me.Panel2.Controls.Add(Me.txtFechaAcreditacion)
         Me.Panel2.Controls.Add(Me.txtFecha)
         Me.Panel2.Controls.Add(Me.txtImporte)
         Me.Panel2.Controls.Add(Me.CustomLabel3)
-        Me.Panel2.Controls.Add(Me.lstSeleccion)
         Me.Panel2.Controls.Add(Me.CustomLabel4)
         Me.Panel2.Controls.Add(Me.CustomLabel7)
         Me.Panel2.Controls.Add(Me.CustomLabel5)
@@ -120,13 +161,23 @@ Partial Class Depositos
         Me.Panel2.Controls.Add(Me.CustomLabel1)
         Me.Panel2.Controls.Add(Me.txtNroDeposito)
         Me.Panel2.Controls.Add(Me.gridCheques)
-        Me.Panel2.Controls.Add(Me.lstConsulta)
         Me.Panel2.Controls.Add(Me.txtDescripcionBanco)
         Me.Panel2.Controls.Add(Me.CustomLabel6)
-        Me.Panel2.Location = New System.Drawing.Point(0, 50)
+        Me.Panel2.Controls.Add(Me.lstSeleccion)
+        Me.Panel2.Controls.Add(Me.lstFiltrado)
+        Me.Panel2.Controls.Add(Me.lstConsulta)
+        Me.Panel2.Location = New System.Drawing.Point(0, 53)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(793, 503)
+        Me.Panel2.Size = New System.Drawing.Size(793, 500)
         Me.Panel2.TabIndex = 18
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(395, 18)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(372, 20)
+        Me.txtAyuda.TabIndex = 19
+        Me.txtAyuda.Visible = False
         '
         'txtFechaAcreditacion
         '
@@ -175,19 +226,6 @@ Partial Class Depositos
         Me.CustomLabel3.Size = New System.Drawing.Size(94, 18)
         Me.CustomLabel3.TabIndex = 3
         Me.CustomLabel3.Text = "Nro. Depósito"
-        '
-        'lstSeleccion
-        '
-        Me.lstSeleccion.Cleanable = False
-        Me.lstSeleccion.EnterIndex = -1
-        Me.lstSeleccion.FormattingEnabled = True
-        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
-        Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(395, 14)
-        Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(373, 95)
-        Me.lstSeleccion.TabIndex = 14
-        Me.lstSeleccion.Visible = False
         '
         'CustomLabel4
         '
@@ -277,18 +315,6 @@ Partial Class Depositos
         Me.txtNroDeposito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtNroDeposito.Validator = Administracion.ValidatorType.Positive
         '
-        'lstConsulta
-        '
-        Me.lstConsulta.Cleanable = True
-        Me.lstConsulta.EnterIndex = -1
-        Me.lstConsulta.FormattingEnabled = True
-        Me.lstConsulta.LabelAssociationKey = -1
-        Me.lstConsulta.Location = New System.Drawing.Point(395, 14)
-        Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(373, 95)
-        Me.lstConsulta.TabIndex = 8
-        Me.lstConsulta.Visible = False
-        '
         'txtDescripcionBanco
         '
         Me.txtDescripcionBanco.Cleanable = True
@@ -315,6 +341,43 @@ Partial Class Depositos
         Me.CustomLabel6.Size = New System.Drawing.Size(44, 18)
         Me.CustomLabel6.TabIndex = 7
         Me.CustomLabel6.Text = "Fecha"
+        '
+        'lstSeleccion
+        '
+        Me.lstSeleccion.Cleanable = False
+        Me.lstSeleccion.EnterIndex = -1
+        Me.lstSeleccion.FormattingEnabled = True
+        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
+        Me.lstSeleccion.LabelAssociationKey = -1
+        Me.lstSeleccion.Location = New System.Drawing.Point(395, 40)
+        Me.lstSeleccion.Name = "lstSeleccion"
+        Me.lstSeleccion.Size = New System.Drawing.Size(373, 108)
+        Me.lstSeleccion.TabIndex = 14
+        Me.lstSeleccion.Visible = False
+        '
+        'lstFiltrado
+        '
+        Me.lstFiltrado.Cleanable = True
+        Me.lstFiltrado.EnterIndex = -1
+        Me.lstFiltrado.FormattingEnabled = True
+        Me.lstFiltrado.LabelAssociationKey = -1
+        Me.lstFiltrado.Location = New System.Drawing.Point(394, 40)
+        Me.lstFiltrado.Name = "lstFiltrado"
+        Me.lstFiltrado.Size = New System.Drawing.Size(373, 108)
+        Me.lstFiltrado.TabIndex = 20
+        Me.lstFiltrado.Visible = False
+        '
+        'lstConsulta
+        '
+        Me.lstConsulta.Cleanable = True
+        Me.lstConsulta.EnterIndex = -1
+        Me.lstConsulta.FormattingEnabled = True
+        Me.lstConsulta.LabelAssociationKey = -1
+        Me.lstConsulta.Location = New System.Drawing.Point(395, 40)
+        Me.lstConsulta.Name = "lstConsulta"
+        Me.lstConsulta.Size = New System.Drawing.Size(373, 108)
+        Me.lstConsulta.TabIndex = 8
+        Me.lstConsulta.Visible = False
         '
         'btnCerrar
         '
@@ -421,45 +484,6 @@ Partial Class Depositos
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
-        'tipo
-        '
-        Me.tipo.HeaderText = "Tipo"
-        Me.tipo.Name = "tipo"
-        Me.tipo.Width = 65
-        '
-        'numero
-        '
-        Me.numero.HeaderText = "Numero"
-        Me.numero.Name = "numero"
-        Me.numero.ReadOnly = True
-        Me.numero.Width = 145
-        '
-        'fecha
-        '
-        Me.fecha.HeaderText = "Fecha"
-        Me.fecha.Name = "fecha"
-        Me.fecha.ReadOnly = True
-        '
-        'nombre
-        '
-        Me.nombre.HeaderText = "Nombre"
-        Me.nombre.Name = "nombre"
-        Me.nombre.ReadOnly = True
-        Me.nombre.Width = 280
-        '
-        'importe
-        '
-        Me.importe.HeaderText = "Importe"
-        Me.importe.Name = "importe"
-        Me.importe.ReadOnly = True
-        Me.importe.Width = 110
-        '
-        'ClaveCheque
-        '
-        Me.ClaveCheque.HeaderText = "ClaveCheque"
-        Me.ClaveCheque.Name = "ClaveCheque"
-        Me.ClaveCheque.Visible = False
-        '
         'Depositos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -516,4 +540,6 @@ Partial Class Depositos
     Friend WithEvents nombre As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ClaveCheque As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
+    Friend WithEvents lstFiltrado As Administracion.CustomListBox
 End Class
