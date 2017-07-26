@@ -23,15 +23,13 @@ Partial Class RecibosProvisorios
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridRecibos = New System.Windows.Forms.DataGridView()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -40,7 +38,6 @@ Partial Class RecibosProvisorios
         Me.optVarios = New System.Windows.Forms.RadioButton()
         Me.optAnticipos = New System.Windows.Forms.RadioButton()
         Me.optCtaCte = New System.Windows.Forms.RadioButton()
-        Me.txtFecha = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.CustomLabel10 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
@@ -70,6 +67,12 @@ Partial Class RecibosProvisorios
         Me.btnIntereses = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
+        Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gridRecibos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -79,78 +82,38 @@ Partial Class RecibosProvisorios
         'gridRecibos
         '
         Me.gridRecibos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gridRecibos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gridRecibos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.gridRecibos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridRecibos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.numero, Me.fecha, Me.banco, Me.importe})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.gridRecibos.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.gridRecibos.DefaultCellStyle = DataGridViewCellStyle11
         Me.gridRecibos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridRecibos.Location = New System.Drawing.Point(18, 179)
         Me.gridRecibos.Name = "gridRecibos"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gridRecibos.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gridRecibos.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.gridRecibos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.gridRecibos.Size = New System.Drawing.Size(756, 363)
         Me.gridRecibos.TabIndex = 13
-        '
-        'Tipo
-        '
-        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Tipo.FillWeight = 80.0!
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.MaxInputLength = 31
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.Width = 53
-        '
-        'numero
-        '
-        Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.numero.FillWeight = 120.0!
-        Me.numero.HeaderText = "Numero/Cta"
-        Me.numero.MaxInputLength = 8
-        Me.numero.Name = "numero"
-        Me.numero.Width = 170
-        '
-        'fecha
-        '
-        Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.fecha.FillWeight = 120.0!
-        Me.fecha.HeaderText = "Fecha"
-        Me.fecha.MaxInputLength = 10
-        Me.fecha.Name = "fecha"
-        Me.fecha.Width = 110
-        '
-        'banco
-        '
-        Me.banco.FillWeight = 150.0!
-        Me.banco.HeaderText = "Banco"
-        Me.banco.MaxInputLength = 20
-        Me.banco.Name = "banco"
-        '
-        'importe
-        '
-        Me.importe.FillWeight = 80.0!
-        Me.importe.HeaderText = "Importe"
-        Me.importe.Name = "importe"
         '
         'Panel1
         '
@@ -187,8 +150,8 @@ Partial Class RecibosProvisorios
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.GroupBox1)
         Me.Panel2.Controls.Add(Me.txtFecha)
+        Me.Panel2.Controls.Add(Me.GroupBox1)
         Me.Panel2.Controls.Add(Me.CustomLabel1)
         Me.Panel2.Controls.Add(Me.CustomLabel10)
         Me.Panel2.Controls.Add(Me.CustomLabel2)
@@ -227,7 +190,7 @@ Partial Class RecibosProvisorios
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox1.Location = New System.Drawing.Point(18, 132)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(412, 41)
+        Me.GroupBox1.Size = New System.Drawing.Size(379, 41)
         Me.GroupBox1.TabIndex = 121
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Tipo"
@@ -264,19 +227,6 @@ Partial Class RecibosProvisorios
         Me.optCtaCte.Text = "Cobro Cta. Cte."
         Me.optCtaCte.UseVisualStyleBackColor = True
         '
-        'txtFecha
-        '
-        Me.txtFecha.Cleanable = True
-        Me.txtFecha.Empty = False
-        Me.txtFecha.EnterIndex = 2
-        Me.txtFecha.LabelAssociationKey = 2
-        Me.txtFecha.Location = New System.Drawing.Point(314, 7)
-        Me.txtFecha.MaxLength = 10
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(114, 20)
-        Me.txtFecha.TabIndex = 1
-        Me.txtFecha.Validator = Administracion.ValidatorType.DateFormat
-        '
         'CustomLabel1
         '
         Me.CustomLabel1.AutoSize = True
@@ -295,9 +245,9 @@ Partial Class RecibosProvisorios
         Me.CustomLabel10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CustomLabel10.ControlAssociationKey = -1
         Me.CustomLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomLabel10.Location = New System.Drawing.Point(375, 545)
+        Me.CustomLabel10.Location = New System.Drawing.Point(210, 545)
         Me.CustomLabel10.Name = "CustomLabel10"
-        Me.CustomLabel10.Size = New System.Drawing.Size(247, 22)
+        Me.CustomLabel10.Size = New System.Drawing.Size(412, 22)
         Me.CustomLabel10.TabIndex = 118
         Me.CustomLabel10.Text = "Tipo Doc.: 1) Ef. 2) Ch. 3) Doc. 4) Varios "
         Me.CustomLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -332,9 +282,9 @@ Partial Class RecibosProvisorios
         Me.lstSeleccion.EnterIndex = -1
         Me.lstSeleccion.FormattingEnabled = True
         Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(434, 11)
+        Me.lstSeleccion.Location = New System.Drawing.Point(403, 11)
         Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(339, 134)
+        Me.lstSeleccion.Size = New System.Drawing.Size(370, 134)
         Me.lstSeleccion.TabIndex = 78
         Me.lstSeleccion.Visible = False
         '
@@ -356,9 +306,9 @@ Partial Class RecibosProvisorios
         Me.txtConsulta.Empty = True
         Me.txtConsulta.EnterIndex = -1
         Me.txtConsulta.LabelAssociationKey = -1
-        Me.txtConsulta.Location = New System.Drawing.Point(434, 12)
+        Me.txtConsulta.Location = New System.Drawing.Point(403, 12)
         Me.txtConsulta.Name = "txtConsulta"
-        Me.txtConsulta.Size = New System.Drawing.Size(339, 20)
+        Me.txtConsulta.Size = New System.Drawing.Size(370, 20)
         Me.txtConsulta.TabIndex = 77
         Me.txtConsulta.Validator = Administracion.ValidatorType.None
         Me.txtConsulta.Visible = False
@@ -372,8 +322,9 @@ Partial Class RecibosProvisorios
         Me.txtRecibo.Location = New System.Drawing.Point(128, 7)
         Me.txtRecibo.MaxLength = 6
         Me.txtRecibo.Name = "txtRecibo"
-        Me.txtRecibo.Size = New System.Drawing.Size(109, 20)
+        Me.txtRecibo.Size = New System.Drawing.Size(87, 20)
         Me.txtRecibo.TabIndex = 0
+        Me.txtRecibo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtRecibo.Validator = Administracion.ValidatorType.Numeric
         '
         'lstConsulta
@@ -382,9 +333,9 @@ Partial Class RecibosProvisorios
         Me.lstConsulta.EnterIndex = -1
         Me.lstConsulta.FormattingEnabled = True
         Me.lstConsulta.LabelAssociationKey = -1
-        Me.lstConsulta.Location = New System.Drawing.Point(434, 38)
+        Me.lstConsulta.Location = New System.Drawing.Point(403, 38)
         Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(339, 108)
+        Me.lstConsulta.Size = New System.Drawing.Size(370, 108)
         Me.lstConsulta.TabIndex = 76
         Me.lstConsulta.Visible = False
         '
@@ -397,8 +348,9 @@ Partial Class RecibosProvisorios
         Me.txtCliente.Location = New System.Drawing.Point(128, 33)
         Me.txtCliente.MaxLength = 6
         Me.txtCliente.Name = "txtCliente"
-        Me.txtCliente.Size = New System.Drawing.Size(109, 20)
+        Me.txtCliente.Size = New System.Drawing.Size(87, 20)
         Me.txtCliente.TabIndex = 2
+        Me.txtCliente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtCliente, "Doble Click: Abrir Consulta de Clientes")
         Me.txtCliente.Validator = Administracion.ValidatorType.None
         '
@@ -409,10 +361,10 @@ Partial Class RecibosProvisorios
         Me.txtNombre.Enabled = False
         Me.txtNombre.EnterIndex = -1
         Me.txtNombre.LabelAssociationKey = 3
-        Me.txtNombre.Location = New System.Drawing.Point(243, 33)
+        Me.txtNombre.Location = New System.Drawing.Point(221, 33)
         Me.txtNombre.MaxLength = 1000
         Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(185, 20)
+        Me.txtNombre.Size = New System.Drawing.Size(176, 20)
         Me.txtNombre.TabIndex = 12
         Me.txtNombre.Validator = Administracion.ValidatorType.None
         '
@@ -424,8 +376,9 @@ Partial Class RecibosProvisorios
         Me.txtRetGanancias.LabelAssociationKey = 4
         Me.txtRetGanancias.Location = New System.Drawing.Point(128, 59)
         Me.txtRetGanancias.Name = "txtRetGanancias"
-        Me.txtRetGanancias.Size = New System.Drawing.Size(109, 20)
+        Me.txtRetGanancias.Size = New System.Drawing.Size(87, 20)
         Me.txtRetGanancias.TabIndex = 3
+        Me.txtRetGanancias.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtRetGanancias.Validator = Administracion.ValidatorType.PositiveFloat
         '
         'CustomLabel4
@@ -460,8 +413,9 @@ Partial Class RecibosProvisorios
         Me.txtRetIva.LabelAssociationKey = 6
         Me.txtRetIva.Location = New System.Drawing.Point(128, 85)
         Me.txtRetIva.Name = "txtRetIva"
-        Me.txtRetIva.Size = New System.Drawing.Size(109, 20)
+        Me.txtRetIva.Size = New System.Drawing.Size(87, 20)
         Me.txtRetIva.TabIndex = 17
+        Me.txtRetIva.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtRetIva.Validator = Administracion.ValidatorType.PositiveFloat
         '
         'txtTotal
@@ -474,6 +428,7 @@ Partial Class RecibosProvisorios
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.Size = New System.Drawing.Size(129, 20)
         Me.txtTotal.TabIndex = 25
+        Me.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtTotal.Validator = Administracion.ValidatorType.PositiveFloat
         '
         'txtRetIB
@@ -482,11 +437,12 @@ Partial Class RecibosProvisorios
         Me.txtRetIB.Empty = False
         Me.txtRetIB.EnterIndex = 5
         Me.txtRetIB.LabelAssociationKey = 5
-        Me.txtRetIB.Location = New System.Drawing.Point(314, 59)
+        Me.txtRetIB.Location = New System.Drawing.Point(294, 58)
         Me.txtRetIB.Name = "txtRetIB"
         Me.txtRetIB.ReadOnly = True
-        Me.txtRetIB.Size = New System.Drawing.Size(114, 20)
+        Me.txtRetIB.Size = New System.Drawing.Size(103, 20)
         Me.txtRetIB.TabIndex = 18
+        Me.txtRetIB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtRetIB.Validator = Administracion.ValidatorType.PositiveFloat
         '
         'CustomLabel8
@@ -507,7 +463,7 @@ Partial Class RecibosProvisorios
         Me.CustomLabel7.ControlAssociationKey = 5
         Me.CustomLabel7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel7.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel7.Location = New System.Drawing.Point(254, 60)
+        Me.CustomLabel7.Location = New System.Drawing.Point(234, 59)
         Me.CustomLabel7.Name = "CustomLabel7"
         Me.CustomLabel7.Size = New System.Drawing.Size(56, 18)
         Me.CustomLabel7.TabIndex = 19
@@ -531,7 +487,7 @@ Partial Class RecibosProvisorios
         Me.CustomLabel6.ControlAssociationKey = 7
         Me.CustomLabel6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel6.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel6.Location = New System.Drawing.Point(243, 86)
+        Me.CustomLabel6.Location = New System.Drawing.Point(223, 85)
         Me.CustomLabel6.Name = "CustomLabel6"
         Me.CustomLabel6.Size = New System.Drawing.Size(67, 18)
         Me.CustomLabel6.TabIndex = 20
@@ -545,8 +501,9 @@ Partial Class RecibosProvisorios
         Me.txtParidad.LabelAssociationKey = 8
         Me.txtParidad.Location = New System.Drawing.Point(128, 111)
         Me.txtParidad.Name = "txtParidad"
-        Me.txtParidad.Size = New System.Drawing.Size(109, 20)
+        Me.txtParidad.Size = New System.Drawing.Size(87, 20)
         Me.txtParidad.TabIndex = 22
+        Me.txtParidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtParidad.Validator = Administracion.ValidatorType.PositiveFloat
         '
         'txtRetSuss
@@ -555,10 +512,11 @@ Partial Class RecibosProvisorios
         Me.txtRetSuss.Empty = False
         Me.txtRetSuss.EnterIndex = 7
         Me.txtRetSuss.LabelAssociationKey = 7
-        Me.txtRetSuss.Location = New System.Drawing.Point(314, 85)
+        Me.txtRetSuss.Location = New System.Drawing.Point(294, 84)
         Me.txtRetSuss.Name = "txtRetSuss"
-        Me.txtRetSuss.Size = New System.Drawing.Size(114, 20)
+        Me.txtRetSuss.Size = New System.Drawing.Size(103, 20)
         Me.txtRetSuss.TabIndex = 21
+        Me.txtRetSuss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtRetSuss.Validator = Administracion.ValidatorType.PositiveFloat
         '
         'btnLimpiar
@@ -666,6 +624,64 @@ Partial Class RecibosProvisorios
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
+        'txtFecha
+        '
+        Me.txtFecha.Location = New System.Drawing.Point(316, 7)
+        Me.txtFecha.Mask = "##/##/####"
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFecha.Size = New System.Drawing.Size(81, 20)
+        Me.txtFecha.TabIndex = 2
+        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Tipo
+        '
+        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Tipo.FillWeight = 80.0!
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.MaxInputLength = 31
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.Width = 53
+        '
+        'numero
+        '
+        Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.numero.DefaultCellStyle = DataGridViewCellStyle9
+        Me.numero.FillWeight = 120.0!
+        Me.numero.HeaderText = "Numero/Cta"
+        Me.numero.MaxInputLength = 8
+        Me.numero.Name = "numero"
+        Me.numero.Width = 170
+        '
+        'fecha
+        '
+        Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.fecha.FillWeight = 120.0!
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.MaxInputLength = 10
+        Me.fecha.Name = "fecha"
+        Me.fecha.Width = 110
+        '
+        'banco
+        '
+        Me.banco.FillWeight = 150.0!
+        Me.banco.HeaderText = "Banco"
+        Me.banco.MaxInputLength = 20
+        Me.banco.Name = "banco"
+        '
+        'importe
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle10.Format = "N2"
+        DataGridViewCellStyle10.NullValue = Nothing
+        Me.importe.DefaultCellStyle = DataGridViewCellStyle10
+        Me.importe.FillWeight = 80.0!
+        Me.importe.HeaderText = "Importe"
+        Me.importe.Name = "importe"
+        '
         'RecibosProvisorios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -694,7 +710,6 @@ Partial Class RecibosProvisorios
     Friend WithEvents CustomLabel1 As Administracion.CustomLabel
     Friend WithEvents CustomLabel2 As Administracion.CustomLabel
     Friend WithEvents CustomLabel3 As Administracion.CustomLabel
-    Friend WithEvents txtFecha As Administracion.CustomTextBox
     Friend WithEvents txtRecibo As Administracion.CustomTextBox
     Friend WithEvents txtCliente As Administracion.CustomTextBox
     Friend WithEvents txtNombre As Administracion.CustomTextBox
@@ -730,6 +745,7 @@ Partial Class RecibosProvisorios
     Friend WithEvents optVarios As System.Windows.Forms.RadioButton
     Friend WithEvents optAnticipos As System.Windows.Forms.RadioButton
     Friend WithEvents optCtaCte As System.Windows.Forms.RadioButton
+    Friend WithEvents txtFecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents numero As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn

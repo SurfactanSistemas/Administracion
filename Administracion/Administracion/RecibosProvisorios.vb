@@ -1112,4 +1112,8 @@ Public Class RecibosProvisorios
 
         Return _CuentaValida
     End Function
+
+    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
+        e.Cancel = Proceso._ValidarFecha(txtFecha.Text, e.IsValidInput)
+    End Sub
 End Class

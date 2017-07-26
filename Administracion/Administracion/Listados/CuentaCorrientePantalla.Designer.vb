@@ -23,14 +23,14 @@ Partial Class CuentaCorrientePantalla
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRilla = New System.Windows.Forms.DataGridView()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -57,6 +57,10 @@ Partial Class CuentaCorrientePantalla
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblTotalOP = New System.Windows.Forms.Label()
+        Me.lblTotalAN = New System.Windows.Forms.Label()
         Me.btnCancela = New Administracion.CustomButton()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
@@ -90,8 +94,8 @@ Partial Class CuentaCorrientePantalla
         '
         'Tipo
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle1
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
@@ -99,8 +103,8 @@ Partial Class CuentaCorrientePantalla
         '
         'Letra
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Letra.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Letra.DefaultCellStyle = DataGridViewCellStyle2
         Me.Letra.HeaderText = "Letra"
         Me.Letra.Name = "Letra"
         Me.Letra.ReadOnly = True
@@ -108,8 +112,8 @@ Partial Class CuentaCorrientePantalla
         '
         'Punto
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
         Me.Punto.HeaderText = "Punto"
         Me.Punto.Name = "Punto"
         Me.Punto.ReadOnly = True
@@ -117,40 +121,40 @@ Partial Class CuentaCorrientePantalla
         '
         'Numero
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
         Me.Numero.HeaderText = "Numero"
         Me.Numero.Name = "Numero"
         Me.Numero.ReadOnly = True
         '
         'Importe
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle5
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
         Me.Importe.ReadOnly = True
         '
         'Saldo
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle6
         Me.Saldo.HeaderText = "Saldo"
         Me.Saldo.Name = "Saldo"
         Me.Saldo.ReadOnly = True
         '
         'Fecha
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle7
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
         '
         'Vencimiento
         '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle8
         Me.Vencimiento.HeaderText = "Vencimiento"
         Me.Vencimiento.Name = "Vencimiento"
         Me.Vencimiento.ReadOnly = True
@@ -266,9 +270,13 @@ Partial Class CuentaCorrientePantalla
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lblTotalAN)
         Me.GroupBox1.Controls.Add(Me.lblTotalNC)
+        Me.GroupBox1.Controls.Add(Me.lblTotalOP)
         Me.GroupBox1.Controls.Add(Me.lblTotalND)
+        Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.lblTotalFC)
+        Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
@@ -282,27 +290,27 @@ Partial Class CuentaCorrientePantalla
         '
         'lblTotalNC
         '
-        Me.lblTotalNC.Location = New System.Drawing.Point(86, 87)
+        Me.lblTotalNC.Location = New System.Drawing.Point(86, 61)
         Me.lblTotalNC.Name = "lblTotalNC"
-        Me.lblTotalNC.Size = New System.Drawing.Size(183, 21)
+        Me.lblTotalNC.Size = New System.Drawing.Size(183, 17)
         Me.lblTotalNC.TabIndex = 1
         Me.lblTotalNC.Text = "$ 0.00"
         Me.lblTotalNC.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblTotalND
         '
-        Me.lblTotalND.Location = New System.Drawing.Point(86, 55)
+        Me.lblTotalND.Location = New System.Drawing.Point(86, 41)
         Me.lblTotalND.Name = "lblTotalND"
-        Me.lblTotalND.Size = New System.Drawing.Size(183, 21)
+        Me.lblTotalND.Size = New System.Drawing.Size(183, 17)
         Me.lblTotalND.TabIndex = 1
         Me.lblTotalND.Text = "$ 0.00"
         Me.lblTotalND.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblTotalFC
         '
-        Me.lblTotalFC.Location = New System.Drawing.Point(86, 27)
+        Me.lblTotalFC.Location = New System.Drawing.Point(86, 24)
         Me.lblTotalFC.Name = "lblTotalFC"
-        Me.lblTotalFC.Size = New System.Drawing.Size(183, 21)
+        Me.lblTotalFC.Size = New System.Drawing.Size(183, 13)
         Me.lblTotalFC.TabIndex = 1
         Me.lblTotalFC.Text = "$ 0.00"
         Me.lblTotalFC.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -310,7 +318,7 @@ Partial Class CuentaCorrientePantalla
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(51, 91)
+        Me.Label5.Location = New System.Drawing.Point(51, 64)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(22, 13)
         Me.Label5.TabIndex = 0
@@ -319,7 +327,7 @@ Partial Class CuentaCorrientePantalla
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(51, 59)
+        Me.Label4.Location = New System.Drawing.Point(51, 43)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(23, 13)
         Me.Label4.TabIndex = 0
@@ -328,11 +336,47 @@ Partial Class CuentaCorrientePantalla
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(51, 27)
+        Me.Label3.Location = New System.Drawing.Point(51, 24)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(20, 13)
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "FC"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(51, 83)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(22, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "OP"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(51, 102)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(22, 13)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "AN"
+        '
+        'lblTotalOP
+        '
+        Me.lblTotalOP.Location = New System.Drawing.Point(86, 80)
+        Me.lblTotalOP.Name = "lblTotalOP"
+        Me.lblTotalOP.Size = New System.Drawing.Size(183, 17)
+        Me.lblTotalOP.TabIndex = 1
+        Me.lblTotalOP.Text = "$ 0.00"
+        Me.lblTotalOP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblTotalAN
+        '
+        Me.lblTotalAN.Location = New System.Drawing.Point(86, 100)
+        Me.lblTotalAN.Name = "lblTotalAN"
+        Me.lblTotalAN.Size = New System.Drawing.Size(183, 17)
+        Me.lblTotalAN.TabIndex = 1
+        Me.lblTotalAN.Text = "$ 0.00"
+        Me.lblTotalAN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btnCancela
         '
@@ -349,7 +393,7 @@ Partial Class CuentaCorrientePantalla
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(400, 541)
+        Me.btnCancela.Location = New System.Drawing.Point(402, 541)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(93, 50)
         Me.btnCancela.TabIndex = 28
@@ -406,7 +450,7 @@ Partial Class CuentaCorrientePantalla
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(280, 541)
+        Me.btnConsulta.Location = New System.Drawing.Point(282, 541)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(93, 50)
         Me.btnConsulta.TabIndex = 26
@@ -601,4 +645,8 @@ Partial Class CuentaCorrientePantalla
     Friend WithEvents lblTotalNC As System.Windows.Forms.Label
     Friend WithEvents lblTotalND As System.Windows.Forms.Label
     Friend WithEvents lblTotalFC As System.Windows.Forms.Label
+    Friend WithEvents lblTotalAN As System.Windows.Forms.Label
+    Friend WithEvents lblTotalOP As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
 End Class
