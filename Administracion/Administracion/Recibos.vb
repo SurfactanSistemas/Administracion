@@ -3004,7 +3004,7 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub txtFecha_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFecha.TextChanged
+    Private Sub txtFecha_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         If Trim(txtFecha.Text).Length = 10 Then
             _DeterminarParidad()
@@ -4042,5 +4042,9 @@ Public Class Recibos
 
         MsgBox("El interes a pagar es de " + Str$(ZZSuma), MsgBoxStyle.Information, "Emision de Recibos")
 
+    End Sub
+
+    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
+        e.Cancel = Proceso._ValidarFecha(txtFecha.Text, e.IsValidInput)
     End Sub
 End Class
