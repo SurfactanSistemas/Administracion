@@ -84,6 +84,20 @@ Public Class Apertura
         Dim _FechasInvalidas As Boolean = False
         Dim _CuitsInvalidos As Boolean = False
 
+        ' Eliminamos la filas en blanco
+        For Each row As DataGridViewRow In gridApertura.Rows
+
+            With row
+                gridApertura.CommitEdit(DataGridViewDataErrorContexts.Commit)
+                If IsNothing(.Cells(0).Value) And IsNothing(.Cells(1).Value) And IsNothing(.Cells(2).Value) And IsNothing(.Cells(3).Value) Then
+                    If Not .IsNewRow Then
+                        gridApertura.Rows().Remove(row)
+                    End If
+                End If
+            End With
+
+        Next
+
         For Each row As DataGridViewRow In gridApertura.Rows
             With row
 
@@ -182,7 +196,7 @@ Public Class Apertura
                         Case 0
 
                             If Not IsNothing(valor) Then
-                                If Not Proceso.CuitValido(valor) Then
+                                If Not Proceso.CuitValido(valor) And Trim(valor) <> "" Then
                                     MsgBox("El CUIT ingresado no es correcto.")
                                     Return True
                                 Else

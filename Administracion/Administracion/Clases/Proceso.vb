@@ -134,6 +134,7 @@
     Public Function CuitValido(ByVal cuit As String) As Boolean
         Dim valido As Boolean = False
         Dim suma As Integer = 0
+        cuit = Trim(cuit)
 
         If cuit.Length = 11 Then
             For i = 1 To 11
