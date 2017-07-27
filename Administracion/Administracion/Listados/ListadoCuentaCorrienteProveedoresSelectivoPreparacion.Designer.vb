@@ -35,11 +35,12 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnAcepta = New Administracion.CustomButton()
         Me.txtCodProveedor = New Administracion.CustomTextBox()
+        Me.btnImprimir = New Administracion.CustomButton()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.btnImprimir = New Administracion.CustomButton()
+        Me.btnSalir = New Administracion.CustomButton()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -118,7 +119,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiarTodo.LabelAssociationKey = -1
-        Me.btnLimpiarTodo.Location = New System.Drawing.Point(329, 374)
+        Me.btnLimpiarTodo.Location = New System.Drawing.Point(264, 375)
         Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
         Me.btnLimpiarTodo.Size = New System.Drawing.Size(87, 40)
         Me.btnLimpiarTodo.TabIndex = 58
@@ -138,7 +139,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(198, 374)
+        Me.btnConsulta.Location = New System.Drawing.Point(155, 375)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(87, 40)
         Me.btnConsulta.TabIndex = 58
@@ -158,7 +159,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAcepta.LabelAssociationKey = -1
-        Me.btnAcepta.Location = New System.Drawing.Point(67, 373)
+        Me.btnAcepta.Location = New System.Drawing.Point(46, 374)
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(87, 41)
         Me.btnAcepta.TabIndex = 56
@@ -179,6 +180,26 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.txtCodProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtCodProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtCodProveedor.Validator = Administracion.ValidatorType.None
+        '
+        'btnImprimir
+        '
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cleanable = False
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.EnterIndex = -1
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.LabelAssociationKey = -1
+        Me.btnImprimir.Location = New System.Drawing.Point(373, 376)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(87, 40)
+        Me.btnImprimir.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Listado de Proveedores Ingresados")
+        Me.btnImprimir.UseVisualStyleBackColor = True
         '
         'lstFiltrada
         '
@@ -230,25 +251,25 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.CustomLabel1.TabIndex = 50
         Me.CustomLabel1.Text = "Proveedor"
         '
-        'btnImprimir
+        'btnSalir
         '
-        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
-        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnImprimir.Cleanable = False
-        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnImprimir.EnterIndex = -1
-        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.BorderSize = 0
-        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(460, 375)
-        Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(87, 40)
-        Me.btnImprimir.TabIndex = 58
-        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Listado de Proveedores Ingresados")
-        Me.btnImprimir.UseVisualStyleBackColor = True
+        Me.btnSalir.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnSalir.Cleanable = False
+        Me.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSalir.EnterIndex = -1
+        Me.btnSalir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnSalir.FlatAppearance.BorderSize = 0
+        Me.btnSalir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.LabelAssociationKey = -1
+        Me.btnSalir.Location = New System.Drawing.Point(482, 376)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(87, 40)
+        Me.btnSalir.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnSalir, "Salir del Formulario")
+        Me.btnSalir.UseVisualStyleBackColor = True
         '
         'ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         '
@@ -257,6 +278,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.ClientSize = New System.Drawing.Size(614, 427)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnLimpiarTodo)
         Me.Controls.Add(Me.btnConsulta)
@@ -293,4 +315,5 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
     Friend WithEvents btnImprimir As Administracion.CustomButton
+    Friend WithEvents btnSalir As Administracion.CustomButton
 End Class

@@ -108,21 +108,12 @@ Public Class Compras
 
     Private Sub _MostrarCAI(ByVal proveedor As Proveedor)
 
-        ' Si tiene dato de CAI, se verifica que no este vencido.
-        ' En caso de que si, se muestran los campos para solicitar que los actualice.
-        'If Trim(proveedor.cai) <> "" And Val(proveedor.vtoCAI.Replace("/", "")) > 0 Then
-        If _CAIVencido(proveedor.vtoCAI) Then
-            txtCAI.Text = proveedor.cai
-            txtVtoCAI.Text = Proceso._Normalizarfecha(proveedor.vtoCAI)
+        txtCAI.Text = proveedor.cai
+        txtVtoCAI.Text = Proceso._Normalizarfecha(proveedor.vtoCAI)
 
-            If CBLetra.SelectedItem = "C" Then
-                _HabilitarCAI()
-            End If
-
-        Else
-            _DeshabilitarCAI()
+        If CBLetra.SelectedItem = "C" Then
+            _HabilitarCAI()
         End If
-        'End If
 
     End Sub
 
@@ -140,9 +131,9 @@ Public Class Compras
         txtVtoCAI.Visible = False
     End Sub
 
-    Private Function _CAIVencido(ByVal fecha_Vto As String) As Boolean
+    Private Function _CAIVencido() As Boolean
         Dim vencido As Boolean = False
-        Dim vto As String = String.Join("", fecha_Vto.Split("/").Reverse())
+        Dim vto As String = String.Join("", txtVtoCAI.Text.Split("/").Reverse())
         Dim actual As String = Date.Now.ToString("yyyyMMdd")
 
         vto = IIf(Trim(vto) = "", "0", vto)
@@ -223,27 +214,21 @@ Public Class Compras
     Private Sub txtImporte_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIVARG.Leave, txtPercIB.Leave, txtNoGravado.Leave, txtIVA27.Leave, txtIVA21.Leave, txtIVA10.Leave
         If esModificacion Then : Exit Sub : End If
         Dim total As Double = calculoTotal()
-        txtTotal.Text = CustomConvert.toStringWithTwoDecimalPlaces(Math.Round(total, 2))
+        txtTotal.Text = _FormatearNumero(Math.Round(total, 2))
     End Sub
 
-    Private Sub _FormatearNumero(Optional ByRef numero As String = "")
+    Private Function _FormatearNumero(ByVal numero As String) As String
 
-        numero = IIf(IsNothing(numero) Or numero = "", "0", numero)
+        Return Proceso.formatonumerico(numero)
 
-        If _NecesarioFormatear(numero) Then
-            numero = CustomConvert.toStringWithTwoDecimalPlaces(numero)
-        End If
-
-    End Sub
+    End Function
 
     Private Sub _FormatearNumeros()
 
         Dim numeros As New List(Of TextBox) From {txtNeto, txtIVA10, txtIVA21, txtIVA27, txtIVARG, txtNoGravado, txtParidad, txtPercIB, txtTotal}
 
         For Each _n As TextBox In numeros
-            If _NecesarioFormatear(_n.Text) Then
-                _FormatearNumero(_n.Text)
-            End If
+            _n.Text = _FormatearNumero(_n.Text)
         Next
 
     End Sub
@@ -269,7 +254,10 @@ Public Class Compras
     End Function
 
     Private Function asDouble(ByVal text As String)
-        Return CustomConvert.toDoubleOrZero(text)
+
+        If IsNothing(text) Then : Return text : End If
+
+        Return CustomConvert.toDoubleOrZero(text.Replace(".", ","))
     End Function
 
     Private Function validarCampos() As Boolean
@@ -595,8 +583,8 @@ Public Class Compras
     Private Sub _DarFormatoValoresGrilla()
         For Each row As DataGridViewRow In gridAsientos.Rows
             With row
-                _FormatearNumero(.Cells(2).Value)
-                _FormatearNumero(.Cells(3).Value)
+                .Cells(2).Value = _FormatearNumero(.Cells(2).Value)
+                .Cells(3).Value = _FormatearNumero(.Cells(3).Value)
             End With
         Next
     End Sub
@@ -609,8 +597,8 @@ Public Class Compras
             valorDebe += asDouble(row.Cells(2).Value)
             valorHaber += asDouble(row.Cells(3).Value)
         Next
-        lblDebito.Text = CustomConvert.toStringWithTwoDecimalPlaces(valorDebe)
-        lblCredito.Text = CustomConvert.toStringWithTwoDecimalPlaces(valorHaber)
+        lblDebito.Text = _FormatearNumero(valorDebe)
+        lblCredito.Text = _FormatearNumero(valorHaber)
     End Sub
 
     Private Sub gridAsientos_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridAsientos.CellValueChanged
@@ -654,14 +642,14 @@ Public Class Compras
         txtFechaVto2.Text = compra.fechaVto2
         txtRemito.Text = compra.remito
         cmbFormaPago.SelectedIndex = compra.formaPago
-        txtParidad.Text = CustomConvert.toStringWithTwoDecimalPlaces(compra.paridad)
-        txtNeto.Text = CustomConvert.toStringWithTwoDecimalPlaces(compra.neto)
-        txtIVA10.Text = CustomConvert.toStringWithTwoDecimalPlaces(compra.iva105)
-        txtIVA21.Text = CustomConvert.toStringWithTwoDecimalPlaces(compra.iva21)
-        txtIVA27.Text = CustomConvert.toStringWithTwoDecimalPlaces(compra.iva27)
-        txtIVARG.Text = CustomConvert.toStringWithTwoDecimalPlaces(compra.ivaRG)
-        txtPercIB.Text = CustomConvert.toStringWithTwoDecimalPlaces(compra.percibidoIB)
-        txtNoGravado.Text = CustomConvert.toStringWithTwoDecimalPlaces(compra.exento)
+        txtParidad.Text = _FormatearNumero(compra.paridad)
+        txtNeto.Text = _FormatearNumero(compra.neto)
+        txtIVA10.Text = _FormatearNumero(compra.iva105)
+        txtIVA21.Text = _FormatearNumero(compra.iva21)
+        txtIVA27.Text = _FormatearNumero(compra.iva27)
+        txtIVARG.Text = _FormatearNumero(compra.ivaRG)
+        txtPercIB.Text = _FormatearNumero(compra.percibidoIB)
+        txtNoGravado.Text = _FormatearNumero(compra.exento)
         txtDespacho.Text = compra.despacho
         chkSoloIVA.Checked = compra.soloIVA
         pulsarOption(compra.tipoPago)
@@ -788,6 +776,8 @@ Public Class Compras
                 txtImporte_Leave(sender, Nothing)
             End If
         End If
+
+        txtDespacho_KeyDown(Nothing, New System.Windows.Forms.KeyEventArgs(Keys.Enter))
     End Sub
 
     Private Function usaCuentas()
@@ -862,7 +852,7 @@ Public Class Compras
             Next
 
             If Val(txtIVA21.Text) = 0 Or Trim(txtIVA21.Text) = "" Then
-                txtIVA21.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtNeto.Text) * 0.21)
+                txtIVA21.Text = _FormatearNumero(Val(txtNeto.Text) * 0.21)
                 _RecalcularTotal()
             End If
 
@@ -954,7 +944,7 @@ Public Class Compras
                 End If
             End If
 
-            If txtCAI.Visible Then
+            If txtCAI.Visible And _CAIVencido() Then
                 txtCAI.Focus()
             Else
                 txtFechaEmision.Focus()
@@ -1016,7 +1006,7 @@ Public Class Compras
 
             End Try
 
-            _SaltarA(txtFechaIVA)
+            _SaltarA(txtRemito)
         ElseIf e.KeyData = Keys.Escape Then
             txtFechaEmision.Clear()
         End If
@@ -1053,26 +1043,47 @@ Public Class Compras
 
     End Sub
 
+    Private Function _ComprobarExistenciaRemito(ByVal _remitos As String) As Boolean
+        Dim _existe As Boolean = False
+        Dim remito As String = _remitos.Split(",")(0)
+        Dim csEmpresa As String = _DeterminarEmpresaDeTrabajo(remito)
+
+        ' Lo determinamos como valido si se encuentra en alguna de las empresas.
+        If Trim(csEmpresa) <> "" Then
+            _existe = True
+        End If
+
+        Return _existe
+    End Function
+
     Private Sub txtRemito_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemito.KeyDown
         Dim _ValidoComoPymeNacion As Boolean = False
 
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtFechaVto1)
+            _SaltarA(cmbFormaPago)
 
             If Trim(txtRemito.Text) <> "" Then
-                _ValidoComoPymeNacion = _ComprobarPyme()
-                If _ValidoComoPymeNacion Then
-                    _PedirDatosPymeNacion()
-                    optNacion.Checked = True
-                Else
 
-                    If optNacion.Checked And Not _ValidoComoPymeNacion Then
-                        MsgBox("Hay remitos cargados que no corresponden a Pyme Nación.")
-                        txtRemito.Focus()
+                If _ComprobarExistenciaRemito(Trim(txtRemito.Text)) Then
+
+                    _ValidoComoPymeNacion = _ComprobarPyme()
+                    If _ValidoComoPymeNacion Then
+                        _PedirDatosPymeNacion()
+                        optNacion.Checked = True
+                    Else
+
+                        If optNacion.Checked And Not _ValidoComoPymeNacion Then
+                            MsgBox("Hay remitos cargados que no corresponden a Pyme Nación.")
+                            txtRemito.Focus()
+
+                        End If
+
                     End If
 
+                Else
+                    MsgBox("Remito Inexistente.", MsgBoxStyle.Information)
                 End If
-
+                
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -1258,7 +1269,7 @@ Public Class Compras
     Private Sub txtParidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtParidad.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            txtParidad.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtParidad.Text))
+            'txtParidad.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtParidad.Text))
             _SaltarA(txtNeto)
         ElseIf e.KeyData = Keys.Escape Then
             txtParidad.Text = ""
@@ -1270,10 +1281,10 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             If txtIVA21.Enabled Then
-                txtIVA21.Text = CustomConvert.toStringWithTwoDecimalPlaces(Math.Round(asDouble(txtNeto.Text.Replace(".", ",")) * 0.21, 2))
+                txtIVA21.Text = _FormatearNumero(Math.Round(asDouble(txtNeto.Text.Replace(".", ",")) * 0.21, 2))
             End If
 
-            txtNeto.Text = CustomConvert.toStringWithTwoDecimalPlaces(asDouble(txtNeto.Text.Replace(".", ",")))
+            txtNeto.Text = _FormatearNumero(asDouble(txtNeto.Text.Replace(".", ",")))
             _RecalcularTotal()
 
             If txtIVA21.Enabled Then
@@ -1289,13 +1300,13 @@ Public Class Compras
     End Sub
 
     Private Sub _RecalcularTotal()
-        txtTotal.Text = CustomConvert.toStringWithTwoDecimalPlaces(calculoTotal())
+        txtTotal.Text = _FormatearNumero(calculoTotal())
     End Sub
 
     Private Sub txtIVA21_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtIVA21.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            txtIVA21.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVA21.Text))
+            'txtIVA21.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVA21.Text))
             _RecalcularTotal()
             _SaltarA(txtIVARG)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1307,7 +1318,7 @@ Public Class Compras
     Private Sub txtIVARG_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtIVARG.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            txtIVARG.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVARG.Text))
+            'txtIVARG.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVARG.Text))
             _RecalcularTotal()
             _SaltarA(txtIVA27)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1319,7 +1330,7 @@ Public Class Compras
     Private Sub txtIVA27_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtIVA27.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            txtIVA27.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVA27.Text))
+            'txtIVA27.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVA27.Text))
             _RecalcularTotal()
             _SaltarA(txtIVA10)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1331,7 +1342,7 @@ Public Class Compras
     Private Sub txtIVA10_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtIVA10.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            txtIVA10.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVA10.Text))
+            'txtIVA10.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtIVA10.Text))
             _RecalcularTotal()
             _SaltarA(txtPercIB)
             _SolicitarInfoIB()
@@ -1344,7 +1355,7 @@ Public Class Compras
     Private Sub txtNoGravado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNoGravado.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            txtNoGravado.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtNoGravado.Text))
+            'txtNoGravado.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtNoGravado.Text))
             _RecalcularTotal()
             _SaltarA(txtDespacho)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1486,22 +1497,20 @@ Public Class Compras
     Private Sub _RecalcularRetIB()
         Dim totalIB As Double = 0
 
-        totalIB += Val(_RetIB1)
-        totalIB += Val(_RetIB2)
-        totalIB += Val(_RetIB3)
-        totalIB += Val(_RetIB4)
-        totalIB += Val(_RetIB5)
-        totalIB += Val(_RetIB6)
-        totalIB += Val(_RetIB7)
-        totalIB += Val(_RetIB8)
-        totalIB += Val(_RetIB9)
-        totalIB += Val(_RetIB10)
-        totalIB += Val(_RetIB11)
-        totalIB += Val(_RetIB12)
-        totalIB += Val(_RetIB13)
-        totalIB += Val(_RetIB14)
+        totalIB += Val(_FormatearNumero(_RetIB1))
+        totalIB += Val(_FormatearNumero(_RetIB2))
+        totalIB += Val(_FormatearNumero(_RetIB3))
+        totalIB += Val(_FormatearNumero(_RetIB4))
+        totalIB += Val(_FormatearNumero(_RetIB5))
+        totalIB += Val(_FormatearNumero(_RetIB6))
+        totalIB += Val(_FormatearNumero(_RetIB7))
+        totalIB += Val(_FormatearNumero(_RetIB9))
+        totalIB += Val(_FormatearNumero(_RetIB11))
+        totalIB += Val(_FormatearNumero(_RetIB12))
+        totalIB += Val(_FormatearNumero(_RetIB13))
+        totalIB += Val(_FormatearNumero(_RetIB14))
 
-        txtPercIB.Text = CustomConvert.toStringWithTwoDecimalPlaces(asDouble(totalIB))
+        txtPercIB.Text = _FormatearNumero(totalIB)
 
     End Sub
 
@@ -1535,7 +1544,7 @@ Public Class Compras
 
 
                     If iCol = 2 Or iCol = 3 Then
-                        _FormatearNumero(valor)
+                        valor = _FormatearNumero(valor)
                         gridAsientos.Rows(iRow).Cells(iCol).Value = valor
                     End If
 
@@ -1545,7 +1554,11 @@ Public Class Compras
                     End If
 
                     If iCol = 3 Then
-                        gridAsientos.CurrentCell = gridAsientos.Rows(gridAsientos.Rows.Add()).Cells(0)
+                        Try
+                            gridAsientos.CurrentCell = gridAsientos.Rows(iRow + 1).Cells(0)
+                        Catch ex As Exception
+                            gridAsientos.CurrentCell = gridAsientos.Rows(gridAsientos.Rows.Add).Cells(0) ' Agregamos una fila y nos posicionamos en la primer celda.
+                        End Try
                     End If
 
                 Else
@@ -1557,7 +1570,11 @@ Public Class Compras
                     Else
 
                         If iCol = 3 And gridAsientos.Rows(iRow).Cells(iCol - 1).Value <> "" Then
-                            gridAsientos.CurrentCell = gridAsientos.Rows(gridAsientos.Rows.Add()).Cells(0)
+                            Try
+                                gridAsientos.CurrentCell = gridAsientos.Rows(iRow + 1).Cells(0)
+                            Catch ex As Exception
+                                gridAsientos.CurrentCell = gridAsientos.Rows(gridAsientos.Rows.Add).Cells(0) ' Agregamos una fila y nos posicionamos en la primer celda.
+                            End Try
                         End If
 
                     End If
@@ -1675,39 +1692,41 @@ Public Class Compras
     End Sub
 
     Private Sub _FormatearNumero(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtParidad.Leave
-        _FormatearNumero()
+        _FormatearNumeros()
     End Sub
 
+
+
     Private Sub txtNeto_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNeto.Leave
-        _FormatearNumero(txtNeto.Text)
+        txtNeto.Text = _FormatearNumero(txtNeto.Text)
     End Sub
 
     Private Sub txtIVA21_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIVA21.Leave
-        _FormatearNumero(txtIVA21.Text)
+        txtIVA21.Text = _FormatearNumero(txtIVA21.Text)
     End Sub
 
     Private Sub txtIVARG_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIVARG.Leave
-        _FormatearNumero(txtIVARG.Text)
+        txtIVARG.Text = _FormatearNumero(txtIVARG.Text)
     End Sub
 
     Private Sub txtIVA27_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIVA27.Leave
-        _FormatearNumero(txtIVA27.Text)
+        txtIVA27.Text = _FormatearNumero(txtIVA27.Text)
     End Sub
 
     Private Sub txtPercIB_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPercIB.Leave
-        _FormatearNumero(txtPercIB.Text)
+        txtPercIB.Text = _FormatearNumero(txtPercIB.Text)
     End Sub
 
     Private Sub txtIVA10_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIVA10.Leave
-        _FormatearNumero(txtIVA10.Text)
+        txtIVA10.Text = _FormatearNumero(txtIVA10.Text)
     End Sub
 
     Private Sub txtNoGravado_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNoGravado.Leave
-        _FormatearNumero(txtNoGravado.Text)
+        txtNoGravado.Text = _FormatearNumero(txtNoGravado.Text)
     End Sub
 
     Private Sub txtTotal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTotal.Leave
-        _FormatearNumero(txtTotal.Text)
+        txtTotal.Text = _FormatearNumero(txtTotal.Text)
     End Sub
 
     Private Sub txtFechaEmision_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaEmision.TypeValidationCompleted
@@ -1879,6 +1898,29 @@ Public Class Compras
         End Try
     End Sub
 
+    Private Sub _BorrarIvaCompAdicional()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM IvaCompAdicional WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un error al querer borrar el registro.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
     Private Sub _BorrarIvaCompPyMENacion()
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("DELETE FROM IvaComp WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
@@ -1973,6 +2015,14 @@ Public Class Compras
             Exit Sub
         End Try
 
+        ' Borramos los registros de Iva Comp Adicionales.
+        Try
+            _BorrarIvaCompAdicional()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
+
         ' En caso de PyME Nacion, borramos los datos de grabaciones anteriores.
         Try
             _BorrarCtaCtePrvPyMENacion()
@@ -2008,4 +2058,24 @@ Public Class Compras
     Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomButton1.Click
         txtRemito_MouseDoubleClick(Nothing, Nothing)
     End Sub
+
+    Private Sub txtNumericWithComma_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNeto.KeyPress, txtIVA10.KeyPress, txtIVA21.KeyPress, txtIVA27.KeyPress, txtIVARG.KeyPress, txtNoGravado.KeyPress, txtParidad.KeyPress, txtPercIB.KeyPress, txtTotal.KeyPress
+        If _EsNumero(e) Or e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or e.KeyChar = CChar(","c) Or e.KeyChar = CChar("."c) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtNumeric_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNroInterno.KeyPress, txtCodigoProveedor.KeyPress, txtPunto.KeyPress, txtNumero.KeyPress
+        If _EsNumero(e) Or e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Function _EsNumero(ByVal e As KeyPressEventArgs) As Boolean
+        Return (e.KeyChar >= CChar("0"c) And e.KeyChar <= CChar("9"c))
+    End Function
 End Class

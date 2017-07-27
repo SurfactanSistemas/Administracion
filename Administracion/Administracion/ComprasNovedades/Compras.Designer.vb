@@ -37,6 +37,7 @@ Partial Class Compras
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.CustomButton1 = New Administracion.CustomButton()
         Me.txtVtoCAI = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaIVA = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaVto2 = New System.Windows.Forms.MaskedTextBox()
@@ -96,7 +97,6 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
-        Me.CustomButton1 = New Administracion.CustomButton()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -289,6 +289,28 @@ Partial Class Compras
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(814, 551)
         Me.Panel2.TabIndex = 63
+        '
+        'CustomButton1
+        '
+        Me.CustomButton1.BackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.CustomButton1.Cleanable = False
+        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.CustomButton1.EnterIndex = -1
+        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.BorderSize = 0
+        Me.CustomButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CustomButton1.LabelAssociationKey = -1
+        Me.CustomButton1.Location = New System.Drawing.Point(749, 63)
+        Me.CustomButton1.Name = "CustomButton1"
+        Me.CustomButton1.Size = New System.Drawing.Size(31, 23)
+        Me.CustomButton1.TabIndex = 64
+        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Consultar Detalles de Remitos")
+        Me.CustomButton1.UseVisualStyleBackColor = False
         '
         'txtVtoCAI
         '
@@ -1082,28 +1104,6 @@ Partial Class Compras
         Me.btnLimpiar.TabIndex = 55
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'CustomButton1
-        '
-        Me.CustomButton1.BackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.CustomButton1.Cleanable = False
-        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CustomButton1.EnterIndex = -1
-        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.BorderSize = 0
-        Me.CustomButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CustomButton1.LabelAssociationKey = -1
-        Me.CustomButton1.Location = New System.Drawing.Point(749, 63)
-        Me.CustomButton1.Name = "CustomButton1"
-        Me.CustomButton1.Size = New System.Drawing.Size(31, 23)
-        Me.CustomButton1.TabIndex = 64
-        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Consultar Detalles de Remitos")
-        Me.CustomButton1.UseVisualStyleBackColor = False
         '
         'Compras
         '

@@ -436,4 +436,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             .Dispose()
         End With
     End Sub
+
+    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+        ' Realizan la misma funcion.
+        btnAcepta.PerformClick()
+    End Sub
 End Class

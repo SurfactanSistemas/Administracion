@@ -135,12 +135,14 @@
         Dim valido As Boolean = False
         Dim suma As Integer = 0
 
-        For i = 1 To 11
-            suma = suma + (Val(Mid(cuit, i, 1)) * Val(Mid(VALIDA_CUIT, i, 1)))
-        Next
+        If cuit.Length = 11 Then
+            For i = 1 To 11
+                suma = suma + (Val(Mid(cuit, i, 1)) * Val(Mid(VALIDA_CUIT, i, 1)))
+            Next
 
-        If suma > 0 Then
-            valido = suma Mod 11 = 0
+            If suma > 0 Then
+                valido = suma Mod 11 = 0
+            End If
         End If
 
         Return valido
