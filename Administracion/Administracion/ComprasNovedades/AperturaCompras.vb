@@ -101,9 +101,11 @@ Public Class Apertura
             With row
 
                 If Not IsNothing(.Cells(0).Value) Then
-                    If Not Proceso.CuitValido(.Cells(0).Value.ToString()) Then
-                        _CuitsInvalidos = True
-                        Exit For
+                    If .Cells(0).Value.ToString() <> "" Then
+                        If Not Proceso.CuitValido(.Cells(0).Value.ToString()) Then
+                            _CuitsInvalidos = True
+                            Exit For
+                        End If
                     End If
                 End If
 
