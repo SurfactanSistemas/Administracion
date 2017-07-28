@@ -45,6 +45,7 @@ Public Class DetallesRemitosProveedor
         Dim dr As SqlDataReader
         Dim remitos() As String
         Dim codProveedor, proveedor, orden, articulo, descripcion, cantPed, moneda, precio, condPago, informe, est, fApr, cantRecibida As String
+        Dim WCantInforme As Double = 0
         Dim aBuscar As New List(Of Object)
         Dim Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
@@ -72,7 +73,7 @@ Public Class DetallesRemitosProveedor
                 Try
                     cn.ConnectionString = _ConnectionString(empresa)
 
-                    cm.CommandText = "SELECT orden, articulo, informe FROM Informe WHERE Remito = '" + remitoActual + "' AND Proveedor = '" + _CodProv + "'"
+                    cm.CommandText = "SELECT orden, articulo, informe, Cantidad FROM Informe WHERE Remito = '" + remitoActual + "' AND Proveedor = '" + _CodProv + "'"
                     cm.Connection = cn
 
                     cn.Open()
@@ -85,8 +86,11 @@ Public Class DetallesRemitosProveedor
                             orden = dr.Item(0)
                             articulo = dr.Item(1)
                             informe = dr.Item(2)
+                            WCantInforme = Val(dr.Item("Cantidad"))
 
-                            aBuscar.Add({_ConnectionString(empresa), remitoActual, _CodProv, orden, articulo, informe})
+                            If WCantInforme > 0 Then
+                                aBuscar.Add({_ConnectionString(empresa), remitoActual, _CodProv, orden, articulo, informe})
+                            End If
                         Loop
 
                         Exit For ' Salimos en la primer aparicion del remito en la primer empresa.
@@ -234,10 +238,7 @@ Public Class DetallesRemitosProveedor
             End Try
 
             ' Agregamos la linea en el DGV.
-
-            If Val(cantRecibida) > 0 And Val(cantPed) > 0 Then
-                DGVDetalles.Rows.Add(remito, orden, articulo, descripcion, cantPed, moneda, precio, condPago, informe, cantRecibida, est, fApr)
-            End If
+            DGVDetalles.Rows.Add(remito, orden, articulo, descripcion, cantPed, moneda, precio, condPago, informe, cantRecibida, est, fApr)
 
         Next
 
