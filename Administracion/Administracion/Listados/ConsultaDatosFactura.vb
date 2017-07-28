@@ -56,13 +56,25 @@ Public Class ConsultaDatosFactura
 
                     .Read()
 
-                    txtFactura.Text = .Item("Numero").ToString
-                    txtFechaFactura.Text = .Item("Fecha").ToString
-                    txtRemito.Text = Trim(Regex.Replace(dr.Item("Remito").ToString, "\,\d+", ""))
-                    XProveedor = .Item("Proveedor").ToString
+                    txtFactura.Text = .Item("Numero")
+                    txtFechaFactura.Text = .Item("Fecha")
+
+                    If Not IsDBNull(.Item("Remito")) Then
+                        txtRemito.Text = Regex.Replace(Trim(dr.Item("Remito")), "\,\d+", "")
+                    Else
+                        txtRemito.Text = ""
+                    End If
+
+                    XProveedor = .Item("Proveedor")
 
                     txtParidad.Text = Proceso.formatonumerico(IIf(IsDBNull(.Item("Paridad")), "0", Trim(.Item("Paridad"))))
-                    txtDespacho.Text = IIf(IsDBNull(.Item("Despacho")), "", Trim(.Item("Despacho")))
+
+                    If Not IsDBNull(.Item("Despacho")) Then
+                        txtDespacho.Text = Trim(.Item("Despacho"))
+                    Else
+                        txtDespacho.Text = ""
+                    End If
+
                     txtNroInterno.Text = _NroInterno
                     txtFechaEmision.Text = IIf(IsDBNull(.Item("FechaEmision")), "", Trim(.Item("FechaEmision")))
                     txtFechaVto1.Text = IIf(IsDBNull(.Item("Vencimiento")), "", Trim(.Item("Vencimiento")))
@@ -98,10 +110,10 @@ Public Class ConsultaDatosFactura
 
                         .Read()
 
-                        txtInformeRecepcion.Text = Trim(.Item("Informe").ToString)
-                        txtFechaInformeRecepcion.Text = .Item("Fecha").ToString
-                        txtOrdenCompra.Text = Trim(.Item("Orden").ToString)
-                        txtNombreProveedor.Text = Trim(.Item("Nombre").ToString)
+                        txtInformeRecepcion.Text = Trim(.Item("Informe"))
+                        txtFechaInformeRecepcion.Text = .Item("Fecha")
+                        txtOrdenCompra.Text = Trim(.Item("Orden"))
+                        txtNombreProveedor.Text = Trim(.Item("Nombre"))
 
                         Exit For
                     Else
@@ -142,8 +154,8 @@ Public Class ConsultaDatosFactura
                     If .HasRows Then
 
                         .Read()
-                        txtFechaOrdenCompra.Text = .Item("Fecha").ToString
-                        txtCarpeta.Text = .Item("Carpeta").ToString
+                        txtFechaOrdenCompra.Text = .Item("Fecha")
+                        txtCarpeta.Text = .Item("Carpeta")
 
                     End If
                 End With
@@ -176,9 +188,9 @@ Public Class ConsultaDatosFactura
                 Do While dr.Read()
                     i = DGVArticulos.Rows.Add
                     With DGVArticulos.Rows(i)
-                        .Cells(0).Value = dr.Item("Orden")
-                        .Cells(1).Value = dr.Item("Articulo")
-                        .Cells(2).Value = dr.Item("Descripcion")
+                        .Cells(0).Value = Trim(dr.Item("Orden"))
+                        .Cells(1).Value = Trim(dr.Item("Articulo"))
+                        .Cells(2).Value = Trim(dr.Item("Descripcion"))
                         .Cells(3).Value = formatonumerico(dr.Item("Cantidad"), "######0.#0", ".")
                         .Cells(4).Value = formatonumerico(dr.Item("Precio"), "######0.#0", ".")
 

@@ -19,6 +19,18 @@ Public Class Pagos
     Dim _TipoConsulta As Integer = Nothing
     Private WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
 
+    ' Utilizado para poder ser usado con consulta de cta cte prv por pantalla.
+    Private _SoloLectura As String = False
+
+    Public Property SoloLectura() As Boolean
+        Get
+            Return _SoloLectura
+        End Get
+        Set(ByVal value As Boolean)
+            _SoloLectura = value
+        End Set
+    End Property
+
     Private Sub Pagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         
         Dim gridPagosBuilder As New GridBuilder(gridPagos)
@@ -38,7 +50,20 @@ Public Class Pagos
         gridFormasBuilder.addTextColumn(5, "Importe")
 
         commonEventHandler.setIndexTab(Me)
-        btnLimpiar.PerformClick()
+
+        If Me.SoloLectura Then
+            Dim botones As New List(Of Button) From {btnAgregar, btnCalcular, btnCarpetas, btnChequesTerceros, btnConsulta, btnCtaCte, btnImprimir, btnLimpiar}
+
+            For Each btn As Button In botones
+                btn.Visible = False
+            Next
+
+            btnCerrar.Location = New Point(387, btnCerrar.Location.Y)
+
+        Else
+            btnLimpiar.PerformClick()
+        End If
+
     End Sub
 
     Private Sub _AlinearColumnas()
@@ -1543,7 +1568,7 @@ Public Class Pagos
         traerParidad(txtFechaParidad.Text)
     End Sub
 
-    Private Sub txtOrdenPago_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrdenPago.KeyDown
+    Public Sub txtOrdenPago_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrdenPago.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtOrdenPago.Text) <> "" Then

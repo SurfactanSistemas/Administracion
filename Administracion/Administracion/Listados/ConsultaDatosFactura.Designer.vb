@@ -22,16 +22,17 @@ Partial Class ConsultaDatosFactura
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.DGVArticulos = New System.Windows.Forms.DataGridView()
-        Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtFechaFactura = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaInformeRecepcion = New System.Windows.Forms.MaskedTextBox()
@@ -69,6 +70,11 @@ Partial Class ConsultaDatosFactura
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.DGVArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -126,42 +132,19 @@ Partial Class ConsultaDatosFactura
         Me.DGVArticulos.AllowUserToDeleteRows = False
         Me.DGVArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVArticulos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Orden, Me.Producto, Me.Descripcion, Me.Cantidad, Me.Precio})
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGVArticulos.DefaultCellStyle = DataGridViewCellStyle6
         Me.DGVArticulos.Location = New System.Drawing.Point(26, 233)
         Me.DGVArticulos.Name = "DGVArticulos"
         Me.DGVArticulos.ReadOnly = True
         Me.DGVArticulos.Size = New System.Drawing.Size(713, 172)
         Me.DGVArticulos.TabIndex = 33
-        '
-        'Orden
-        '
-        Me.Orden.HeaderText = "Orden"
-        Me.Orden.Name = "Orden"
-        Me.Orden.ReadOnly = True
-        '
-        'Producto
-        '
-        Me.Producto.HeaderText = "Producto"
-        Me.Producto.Name = "Producto"
-        Me.Producto.ReadOnly = True
-        '
-        'Descripcion
-        '
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        Me.Descripcion.Width = 270
-        '
-        'Cantidad
-        '
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        Me.Cantidad.ReadOnly = True
-        '
-        'Precio
-        '
-        Me.Precio.HeaderText = "Precio"
-        Me.Precio.Name = "Precio"
-        Me.Precio.ReadOnly = True
         '
         'GroupBox1
         '
@@ -587,6 +570,47 @@ Partial Class ConsultaDatosFactura
         Me.Label14.TabIndex = 0
         Me.Label14.Text = "Nro de Interno:"
         '
+        'Orden
+        '
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Orden.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Orden.HeaderText = "Orden"
+        Me.Orden.Name = "Orden"
+        Me.Orden.ReadOnly = True
+        '
+        'Producto
+        '
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Producto.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Producto.HeaderText = "Producto"
+        Me.Producto.Name = "Producto"
+        Me.Producto.ReadOnly = True
+        '
+        'Descripcion
+        '
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        Me.Descripcion.Width = 270
+        '
+        'Cantidad
+        '
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.ReadOnly = True
+        '
+        'Precio
+        '
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Precio.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Precio.HeaderText = "Precio"
+        Me.Precio.Name = "Precio"
+        Me.Precio.ReadOnly = True
+        '
         'ConsultaDatosFactura
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -616,11 +640,6 @@ Partial Class ConsultaDatosFactura
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents DGVArticulos As System.Windows.Forms.DataGridView
-    Friend WithEvents Orden As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Producto As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Precio As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents txtFechaFactura As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtFechaInformeRecepcion As System.Windows.Forms.MaskedTextBox
@@ -658,4 +677,9 @@ Partial Class ConsultaDatosFactura
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents txtFechaVto2 As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Orden As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Producto As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Precio As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

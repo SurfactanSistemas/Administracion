@@ -340,13 +340,58 @@ Public Class CuentaCorrientePantalla
             Exit Sub
         End If
 
-        With ConsultaDatosFactura
-            .NroInterno = _NroInterno
 
-            .ShowDialog()
+        Select Case GRilla.Rows(e.RowIndex).Cells(0).Value
+            Case "OP", "AN"
+                With Pagos
+                    .SoloLectura = True
+                    .txtOrdenPago.Text = Val(GRilla.Rows(e.RowIndex).Cells(3).Value)
+                    .txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                    .ShowDialog()
+                End With
+            Case "FC", "ND", "NC"
+                With ConsultaDatosFactura
 
-        End With
+                    .NroInterno = _NroInterno
+
+                    .ShowDialog()
+
+                End With
+            Case Else
+                Exit Sub
+        End Select
+
     End Sub
+
+    Private Function _TraerOrdenPago(ByVal _NroInterno) As String
+        Dim _OrdenPago As String = ""
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT ")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return _OrdenPago
+    End Function
 
     Private Sub txtProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
 
