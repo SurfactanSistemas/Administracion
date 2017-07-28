@@ -310,7 +310,7 @@ Public Class Apertura
         Dim _RazonSocial As String = ""
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Razon FROM IvaCompAdicional WHERE Cuit = '" & Trim(cuit) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Razon FROM IvaCompAdicional WHERE Cuit = '" & Trim(cuit) & "' AND Razon <> ''")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)

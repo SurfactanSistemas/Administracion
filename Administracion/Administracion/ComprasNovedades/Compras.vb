@@ -571,7 +571,7 @@ Public Class Compras
                     sumaIvas = .valorIVA105 + .valorIVA21 + .valorIVA27
                     ivaRG3337 = .valorIVARG 'asDouble(txtIVARG.Text)
                     ingresosBrutos = .valorIB 'asDouble(txtPercIB.Text)
-                    diferencia = total - sumaIvas - ingresosBrutos - ivaRG3337
+                    diferencia = .valorNeto 'total - sumaIvas - ingresosBrutos - ivaRG3337
                 End With
 
             Else
