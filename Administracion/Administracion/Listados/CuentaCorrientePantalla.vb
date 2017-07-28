@@ -171,6 +171,7 @@ Public Class CuentaCorrientePantalla
 
         ' Reseteamos resumen de montos automático.
         gbSaldoCtaCliente.Visible = False
+        GroupBox1.Visible = False
         btnCancela.Location = New Point(402, 541)
         btnConsulta.Location = New Point(282, 541)
 
@@ -350,6 +351,8 @@ Public Class CuentaCorrientePantalla
     Private Sub txtProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
 
         If e.KeyData = Keys.Enter Then
+
+            GroupBox1.Visible = False
 
             If Trim(txtProveedor.Text) = "" Then
                 btnConsulta.PerformClick()
