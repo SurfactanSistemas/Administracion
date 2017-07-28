@@ -385,38 +385,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
 
         If GRilla.Rows.Count > 0 And Not IsNothing(GRilla.Rows(0).Cells(0)) Then
-            Dim Tabla As New DataTable("Detalles")
-            Dim row As DataRow
             Dim crdoc As New ProveedoresSelectivoPreparacionListado
 
-            ' Creamos la tabla.
-            With Tabla
-                .Columns.Add("Codigo")
-                .Columns.Add("Nombre")
-            End With
-
-            With GRilla
-                For Each _row As DataGridViewRow In .Rows
-
-                    If Not IsNothing(_row.Cells(0).Value) Then
-                        row = Tabla.NewRow
-
-                        row.Item("Codigo") = Trim(_row.Cells(0).Value)
-                        row.Item("Nombre") = Trim(_row.Cells(1).Value)
-
-                        Tabla.Rows.Add(row)
-                    End If
-
-
-                Next
-            End With
-
-            If Tabla.Rows.Count = 0 Then
-                txtCodProveedor.Focus()
-                Exit Sub
-            End If
-
-            crdoc.SetDataSource(Tabla)
+            crdoc.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
 
             '_Imprimir(crdoc)
             _VistaPrevia(crdoc)
