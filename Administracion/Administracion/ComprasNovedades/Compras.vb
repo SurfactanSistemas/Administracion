@@ -273,7 +273,7 @@ Public Class Compras
         validador.alsoValidate(lblCredito.Text = lblDebito.Text, "El asiento se encuentra desbalanceado. Hay una diferencia de: " & Math.Abs(asDouble(lblCredito.Text) - asDouble(lblDebito.Text)))
         validador.alsoValidate(asientosCorrectos(), "El asiento se encuentra en un estado inválido, puede que falte asignar alguna cuenta")
         validador.alsoValidate(valoresDebeYHaberCorrectos(), "Una entrada del asiento tiene valores inválidos de Débito y/o Crédito")
-        validador.alsoValidate(asDouble(lblDebito.Text) = asDouble(lblCredito.Text), "El total del asiento contable tiene que ser igual al importe total")
+        validador.alsoValidate(asDouble(lblDebito.Text) = asDouble(txtTotal.Text), "El total del asiento contable tiene que ser igual al importe total")
         validador.alsoValidate(esValidoNacion, "No se cargaron las cuotas de PyME nación correctamente")
         validador.alsoValidate(laParidadEsValida, "La paridad con el dólar tiene que ser un valor positivo")
         validador.alsoValidate(cmbFormaPago.SelectedIndex > 0, "Debe indicarse el tipo de Moneda.")
@@ -567,15 +567,11 @@ Public Class Compras
             If apertura.gridApertura.Rows.Count > 0 And Not IsNothing(apertura.gridApertura.Rows(0).Cells(0).Value) And CBLetra.Text <> "C" Then
 
                 With apertura
-                    total = asDouble(txtNoGravado.Text)
-
-                    'sumaIvas = asDouble(txtIVA10.Text) + asDouble(txtIVA21.Text) + asDouble(txtIVA27.Text)
+                    total = asDouble(txtTotal.Text)
                     sumaIvas = .valorIVA105 + .valorIVA21 + .valorIVA27
                     ivaRG3337 = .valorIVARG 'asDouble(txtIVARG.Text)
                     ingresosBrutos = .valorIB 'asDouble(txtPercIB.Text)
                     diferencia = total - sumaIvas - ingresosBrutos - ivaRG3337
-
-                    ' Actualizar datos de los demas onda iva y esas cosas o las dejamos como viene?
                 End With
 
             Else
@@ -1533,7 +1529,9 @@ Public Class Compras
         totalIB += Val(_FormatearNumero(_RetIB5))
         totalIB += Val(_FormatearNumero(_RetIB6))
         totalIB += Val(_FormatearNumero(_RetIB7))
+        totalIB += Val(_FormatearNumero(_RetIB8))
         totalIB += Val(_FormatearNumero(_RetIB9))
+        totalIB += Val(_FormatearNumero(_RetIB10))
         totalIB += Val(_FormatearNumero(_RetIB11))
         totalIB += Val(_FormatearNumero(_RetIB12))
         totalIB += Val(_FormatearNumero(_RetIB13))
