@@ -435,6 +435,11 @@
                 If Not valido Then ' Por si se lo utiliza con el evento TypeValidationCompleted u otra funcion con validacion adicional.
                     valida = False
                 End If
+
+                ' Controlamos que el año en caso de ser bisiesto, la fecha no se refiera al 29 de Febrero.
+                If Not Date.IsLeapYear(Val(Mid(fecha, 7, 4))) And Val(Mid(fecha, 1, 2)) = 29 And Val(Mid(fecha, 4, 2)) = 2 Then
+                    valida = False
+                End If
             End If
         End If
 

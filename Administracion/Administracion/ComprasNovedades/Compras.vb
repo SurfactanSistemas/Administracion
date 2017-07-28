@@ -214,7 +214,7 @@ Public Class Compras
     Private Sub txtImporte_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIVARG.Leave, txtPercIB.Leave, txtNoGravado.Leave, txtIVA27.Leave, txtIVA21.Leave, txtIVA10.Leave
         If esModificacion Then : Exit Sub : End If
         Dim total As Double = calculoTotal()
-        txtTotal.Text = _FormatearNumero(Math.Round(total, 2))
+        txtTotal.Text = _FormatearNumero(total)
     End Sub
 
     Private Function _FormatearNumero(ByVal numero As String) As String
@@ -273,7 +273,7 @@ Public Class Compras
         validador.alsoValidate(lblCredito.Text = lblDebito.Text, "El asiento se encuentra desbalanceado. Hay una diferencia de: " & Math.Abs(asDouble(lblCredito.Text) - asDouble(lblDebito.Text)))
         validador.alsoValidate(asientosCorrectos(), "El asiento se encuentra en un estado inválido, puede que falte asignar alguna cuenta")
         validador.alsoValidate(valoresDebeYHaberCorrectos(), "Una entrada del asiento tiene valores inválidos de Débito y/o Crédito")
-        validador.alsoValidate(asDouble(lblDebito.Text) = asDouble(txtTotal.Text), "El total del asiento contable tiene que ser igual al importe total")
+        validador.alsoValidate(asDouble(lblDebito.Text) = asDouble(lblCredito.Text), "El total del asiento contable tiene que ser igual al importe total")
         validador.alsoValidate(esValidoNacion, "No se cargaron las cuotas de PyME nación correctamente")
         validador.alsoValidate(laParidadEsValida, "La paridad con el dólar tiene que ser un valor positivo")
         validador.alsoValidate(cmbFormaPago.SelectedIndex > 0, "Debe indicarse el tipo de Moneda.")
@@ -552,13 +552,41 @@ Public Class Compras
 
     Private Sub crearAsientoContableUsando(ByVal cuenta As CuentaContable)
         If Not esModificacion Then
+
+            Dim total, sumaIvas, ivaRG3337, ingresosBrutos, diferencia As Double
+
+            total = 0
+            sumaIvas = 0
+            ivaRG3337 = 0
+            ingresosBrutos = 0
+            diferencia = 0
+
             gridAsientos.Rows.Clear()
-            txtTotal.Text = calculoTotal()
-            Dim total As Double = asDouble(txtTotal.Text)
-            Dim sumaIvas As Double = asDouble(txtIVA10.Text) + asDouble(txtIVA21.Text) + asDouble(txtIVA27.Text)
-            Dim ivaRG3337 As Double = asDouble(txtIVARG.Text)
-            Dim ingresosBrutos As Double = asDouble(txtPercIB.Text)
-            Dim diferencia As Double = total - sumaIvas - ingresosBrutos - ivaRG3337
+
+            ' Solo cuando no es Tipo de Factura "C"?
+            If apertura.gridApertura.Rows.Count > 0 And Not IsNothing(apertura.gridApertura.Rows(0).Cells(0).Value) And CBLetra.Text <> "C" Then
+
+                With apertura
+                    total = asDouble(txtNoGravado.Text)
+
+                    'sumaIvas = asDouble(txtIVA10.Text) + asDouble(txtIVA21.Text) + asDouble(txtIVA27.Text)
+                    sumaIvas = .valorIVA105 + .valorIVA21 + .valorIVA27
+                    ivaRG3337 = .valorIVARG 'asDouble(txtIVARG.Text)
+                    ingresosBrutos = .valorIB 'asDouble(txtPercIB.Text)
+                    diferencia = total - sumaIvas - ingresosBrutos - ivaRG3337
+
+                    ' Actualizar datos de los demas onda iva y esas cosas o las dejamos como viene?
+                End With
+
+            Else
+                txtTotal.Text = calculoTotal()
+                total = asDouble(txtTotal.Text)
+                sumaIvas = asDouble(txtIVA10.Text) + asDouble(txtIVA21.Text) + asDouble(txtIVA27.Text)
+                ivaRG3337 = asDouble(txtIVARG.Text)
+                ingresosBrutos = asDouble(txtPercIB.Text)
+                diferencia = total - sumaIvas - ingresosBrutos - ivaRG3337
+
+            End If
 
             If esNotaDeCredito() Then
                 If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, total, "") : End If
@@ -577,6 +605,7 @@ Public Class Compras
             _DarFormatoValoresGrilla()
 
             calcularAsiento()
+
         End If
     End Sub
 
@@ -765,16 +794,16 @@ Public Class Compras
                 asDouble(apertura.valorIVA105) +
                 asDouble(apertura.valorExento) +
                 asDouble(apertura.valorIB)
-            If total > 0 Then
-                txtNeto.Text = apertura.valorNeto
-                txtIVA21.Text = apertura.valorIVA21
-                txtIVA27.Text = apertura.valorIVA27
-                txtIVARG.Text = apertura.valorIVARG
-                txtIVA10.Text = apertura.valorIVA105
-                txtNoGravado.Text = apertura.valorExento
-                txtPercIB.Text = apertura.valorIB
-                txtImporte_Leave(sender, Nothing)
-            End If
+            'If total > 0 Then
+            '    txtNeto.Text = apertura.valorNeto
+            '    txtIVA21.Text = apertura.valorIVA21
+            '    txtIVA27.Text = apertura.valorIVA27
+            '    txtIVARG.Text = apertura.valorIVARG
+            '    txtIVA10.Text = apertura.valorIVA105
+            '    txtNoGravado.Text = apertura.valorExento
+            '    txtPercIB.Text = apertura.valorIB
+            '    txtImporte_Leave(sender, Nothing)
+            'End If
         End If
 
         txtDespacho_KeyDown(Nothing, New System.Windows.Forms.KeyEventArgs(Keys.Enter))
@@ -1281,7 +1310,7 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             If txtIVA21.Enabled Then
-                txtIVA21.Text = _FormatearNumero(Math.Round(asDouble(txtNeto.Text.Replace(".", ",")) * 0.21, 2))
+                txtIVA21.Text = Proceso.formatonumerico(asDouble(txtNeto.Text) * 0.21)
             End If
 
             txtNeto.Text = _FormatearNumero(asDouble(txtNeto.Text.Replace(".", ",")))

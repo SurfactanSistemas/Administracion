@@ -23,6 +23,7 @@ Partial Class Apertura
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridApertura = New System.Windows.Forms.DataGridView()
         Me.CUIT = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RazonSocial = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,12 +39,15 @@ Partial Class Apertura
         Me.PercIVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PercIB = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Exento = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.btnAceptar = New Administracion.CustomButton()
         CType(Me.gridApertura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'gridApertura
         '
+        Me.gridApertura.AllowUserToResizeColumns = False
+        Me.gridApertura.AllowUserToResizeRows = False
         Me.gridApertura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridApertura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CUIT, Me.RazonSocial, Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Fecha, Me.Neto, Me.Iva21, Me.IVA27, Me.IVA105, Me.PercIVA, Me.PercIB, Me.Exento})
         Me.gridApertura.Dock = System.Windows.Forms.DockStyle.Top
@@ -102,6 +106,8 @@ Partial Class Apertura
         '
         'Fecha
         '
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.MaxInputLength = 10
         Me.Fecha.Name = "Fecha"
@@ -149,6 +155,22 @@ Partial Class Apertura
         Me.Exento.Name = "Exento"
         Me.Exento.Width = 70
         '
+        'txtFechaAux
+        '
+        Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFechaAux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtFechaAux.Location = New System.Drawing.Point(680, 385)
+        Me.txtFechaAux.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtFechaAux.Mask = "00/00/0000"
+        Me.txtFechaAux.MaximumSize = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.MinimumSize = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.Name = "txtFechaAux"
+        Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaAux.Size = New System.Drawing.Size(60, 13)
+        Me.txtFechaAux.TabIndex = 2
+        Me.txtFechaAux.ValidatingType = GetType(Date)
+        Me.txtFechaAux.Visible = False
+        '
         'btnAceptar
         '
         Me.btnAceptar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
@@ -173,6 +195,7 @@ Partial Class Apertura
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1194, 426)
+        Me.Controls.Add(Me.txtFechaAux)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.gridApertura)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -181,6 +204,7 @@ Partial Class Apertura
         Me.Text = "AperturaCompras"
         CType(Me.gridApertura, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents gridApertura As System.Windows.Forms.DataGridView
@@ -199,4 +223,5 @@ Partial Class Apertura
     Friend WithEvents PercIVA As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PercIB As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Exento As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
 End Class

@@ -1,8 +1,11 @@
 ﻿Imports System.Text.RegularExpressions
+Imports System.Data.SqlClient
+Imports ClasesCompartidas
 
 Public Class Apertura
 
     Private seAbrio As Boolean = False
+    Private WRow, Wcol As Integer
 
     Public Function valorNeto()
         Return sumarColumna(7)
@@ -54,7 +57,7 @@ Public Class Apertura
         Dim suma As Double
         For Each row As DataGridViewRow In gridApertura.Rows
             If Not row.IsNewRow Then
-                suma += CustomConvert.toDoubleOrZero(row.Cells(index).Value)
+                suma += asDouble(row.Cells(index).Value)
             End If
         Next
         Return suma
@@ -62,6 +65,9 @@ Public Class Apertura
 
     Private Sub Apertura_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim gridBuilder As New GridBuilder(gridApertura)
+
+        WRow = -1
+        Wcol = -1
 
         gridBuilder.addTextColumn(0, "CUIT")
         gridBuilder.addTextColumn(1, "Razón Social")
@@ -200,12 +206,16 @@ Public Class Apertura
                                     MsgBox("El CUIT ingresado no es correcto.")
                                     Return True
                                 Else
-                                    .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                                    ' Traemos la razon social en caso de ya haber sido agregado en alguna apertura anterior.
+                                    .Rows(iRow).Cells(1).Value = _BuscarRazonSocial(valor)
+
+                                    .CurrentCell = .Rows(iRow).Cells(1)
+
                                 End If
                             Else
                                 Return True
                             End If
-                            
+
                         Case 2 ' Columna tipo
 
                             Select Case UCase(valor)
@@ -231,9 +241,28 @@ Public Class Apertura
                                 .CurrentCell = .Rows(iRow).Cells(iCol)
                             Else
                                 .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                                If iCol = 5 Then
+                                    Dim _location As Point = .GetCellDisplayRectangle(6, iRow, False).Location
+                                    'Dim _size As Size = .GetCellDisplayRectangle(6, iRow, False).Size
+
+                                    'txtFechaAux.Size = _size
+                                    '.CurrentCell.Style.BackColor = Color.White
+                                    .ClearSelection()
+                                    _location.Y += 4
+                                    _location.X += 7
+                                    txtFechaAux.Location = _location
+                                    txtFechaAux.Text = .Rows(iRow).Cells(6).Value
+                                    WRow = iRow
+                                    Wcol = iCol
+                                    txtFechaAux.Visible = True
+                                    txtFechaAux.Focus()
+                                End If
                             End If
 
                         Case 6 ' Columna Fecha
+
+                            'Debug.Print("==============================================")
+                            'Debug.Print(.PointToScreen(.GetCellDisplayRectangle(iCol, iRow, False).Location).ToString)
 
                             If Not IsNothing(valor) Then
 
@@ -277,6 +306,43 @@ Public Class Apertura
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
+    Private Function _BuscarRazonSocial(ByVal cuit As String) As String
+        Dim _RazonSocial As String = ""
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Razon FROM IvaCompAdicional WHERE Cuit = '" & Trim(cuit) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    .Read()
+
+                    _RazonSocial = IIf(IsDBNull(.Item("Razon")), "", Trim(.Item("Razon")))
+
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return _RazonSocial
+    End Function
+
 
     Private WithEvents txtNumeric As New DataGridViewTextBoxEditingControl
     Private WithEvents txtNumericWithComma As New DataGridViewTextBoxEditingControl
@@ -314,4 +380,46 @@ Public Class Apertura
     Private Function _EsNumero(ByVal e As KeyPressEventArgs) As Boolean
         Return (e.KeyChar >= CChar("0"c) And e.KeyChar <= CChar("9"c))
     End Function
+
+    Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
+
+            If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
+                gridApertura.Rows(WRow).Cells(6).Value = txtFechaAux.Text
+
+                gridApertura.CurrentCell = gridApertura.Rows(WRow).Cells(7)
+                gridApertura.Focus()
+
+                txtFechaAux.Visible = False
+                txtFechaAux.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaAux.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub gridApertura_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridApertura.CellClick
+
+        If e.ColumnIndex = 6 Then
+            Dim _location As Point = gridApertura.GetCellDisplayRectangle(6, e.RowIndex, False).Location
+            
+            gridApertura.ClearSelection()
+            _location.Y += 4
+            _location.X += 7
+            txtFechaAux.Location = _location
+            txtFechaAux.Text = gridApertura.Rows(e.RowIndex).Cells(6).Value
+            WRow = e.RowIndex
+            Wcol = e.ColumnIndex
+            txtFechaAux.Visible = True
+            txtFechaAux.Focus()
+        End If
+
+    End Sub
 End Class
