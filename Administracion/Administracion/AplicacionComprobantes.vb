@@ -4,12 +4,6 @@ Public Class AplicacionComprobantes
 
     Dim proveedorActual As String 'Lo uso para insertar y actualizar
 
-    Private Sub txtProveedor_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtProveedor.KeyPress
-        If e.KeyChar = Microsoft.VisualBasic.ChrW(13) Then
-            btnProceso.PerformClick()
-        End If
-    End Sub
-
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
         If IsNothing(proveedor) Then : Exit Sub : End If
         txtProveedor.Text = proveedor.id
@@ -207,11 +201,10 @@ Public Class AplicacionComprobantes
         Dim texto As TextBox = txtAyuda
 
         ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
-        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
+        origen.SelectedItem = filtrado.SelectedItem
 
         ' Llamamos al evento que tenga asosiado el control de origen.
         lstAyuda_Click(Nothing, Nothing)
-
 
         ' Sacamos de vista los resultados filtrados.
         filtrado.Visible = False
@@ -227,6 +220,26 @@ Public Class AplicacionComprobantes
     End Sub
 
     Private Sub txtAyuda_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
+
+    End Sub
+
+    Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
+        Me.Close()
+    End Sub
+
+    Private Sub txtProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtProveedor.Text) = "" Then
+                btnConsulta.PerformClick()
+                Exit Sub
+            End If
+
+            btnProceso.PerformClick()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtProveedor.Text = ""
+        End If
 
     End Sub
 End Class
