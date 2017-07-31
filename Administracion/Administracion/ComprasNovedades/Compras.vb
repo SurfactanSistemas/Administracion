@@ -10,6 +10,7 @@ Public Class Compras
     Dim esModificacion As Boolean = False
     Private _RetIB1, _RetIB2, _RetIB3, _RetIB4, _RetIB5, _RetIB6, _RetIB7, _
             _RetIB8, _RetIB9, _RetIB10, _RetIB11, _RetIB12, _RetIB13, _RetIB14 As String
+    Private ImpoIb(14, 2) As String
     Dim _PyMENacion() As Integer = {0, 0, 0} ' Cuotas, Mes, Año.
 
     Dim commonEventsHandler As New CommonEventsHandler
@@ -74,6 +75,7 @@ Public Class Compras
         _RetIB14 = ""
 
         Array.Clear(_PyMENacion, 0, _PyMENacion.Length)
+        Array.Clear(ImpoIb, 0, ImpoIb.Length)
 
         txtCodigoProveedor.Focus()
     End Sub
@@ -551,6 +553,7 @@ Public Class Compras
     End Function
 
     Private Sub crearAsientoContableUsando(ByVal cuenta As CuentaContable)
+        Dim _Cta As CuentaContable
         If Not esModificacion Then
 
             Dim total, sumaIvas, ivaRG3337, ingresosBrutos, diferencia As Double
@@ -563,15 +566,14 @@ Public Class Compras
 
             gridAsientos.Rows.Clear()
 
-            ' Solo cuando no es Tipo de Factura "C"?
             If apertura.gridApertura.Rows.Count > 0 And Not IsNothing(apertura.gridApertura.Rows(0).Cells(0).Value) And CBLetra.Text <> "C" Then
 
                 With apertura
                     total = asDouble(txtTotal.Text)
                     sumaIvas = .valorIVA105 + .valorIVA21 + .valorIVA27
-                    ivaRG3337 = .valorIVARG 'asDouble(txtIVARG.Text)
-                    ingresosBrutos = .valorIB 'asDouble(txtPercIB.Text)
-                    diferencia = .valorNeto 'total - sumaIvas - ingresosBrutos - ivaRG3337
+                    ivaRG3337 = .valorIVARG
+                    ingresosBrutos = .valorIB
+                    diferencia = .valorNeto
                 End With
 
             Else
@@ -588,13 +590,35 @@ Public Class Compras
                 If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, total, "") : End If
                 If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, "", sumaIvas) : End If
                 If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, "", ivaRG3337) : End If
-                If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, "", ingresosBrutos) : End If
+
+                For i = 0 To 14
+
+                    If Val(ImpoIb(i, 1)) <> 0 Then
+                        _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo(Trim(ImpoIb(i, 2)))
+
+                        gridAsientos.Rows.Add(ImpoIb(i, 2), _Cta.descripcion, "", formatonumerico(ImpoIb(i, 1)))
+
+                    End If
+
+                Next
+
                 If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", "", diferencia) : End If
             Else
                 If total <> 0 Then : gridAsientos.Rows.Add(cuenta.id, cuenta.descripcion, "", total) : End If
                 If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, sumaIvas, "") : End If
                 If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, ivaRG3337, "") : End If
-                If ingresosBrutos <> 0 Then : gridAsientos.Rows.Add(cuentaIngresosBrutos.id, cuentaIngresosBrutos.descripcion, ingresosBrutos, "") : End If
+
+                For i = 0 To 14
+
+                    If Val(ImpoIb(i, 1)) <> 0 Then
+                        _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo(Trim(ImpoIb(i, 2)))
+
+                        gridAsientos.Rows.Add(ImpoIb(i, 2), _Cta.descripcion, formatonumerico(ImpoIb(i, 1)), "")
+
+                    End If
+
+                Next
+
                 If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", diferencia, 0) : End If
             End If
 
@@ -1505,6 +1529,38 @@ Public Class Compras
             _RetIB12 = asDouble(.txtRetIB12.Text)
             _RetIB13 = asDouble(.txtRetIB13.Text)
             _RetIB14 = asDouble(.txtRetIB14.Text)
+
+            Array.Clear(ImpoIb, 0, ImpoIb.Length)
+
+            ' Guardamos datos para detalles de asientos.
+            ImpoIb(1, 1) = _RetIB1
+            ImpoIb(1, 2) = "163"
+            ImpoIb(2, 1) = _RetIB2
+            ImpoIb(2, 2) = "164"
+            ImpoIb(3, 1) = _RetIB3
+            ImpoIb(3, 2) = "177"
+            ImpoIb(4, 1) = _RetIB4
+            ImpoIb(4, 2) = "173"
+            ImpoIb(5, 1) = _RetIB5
+            ImpoIb(5, 2) = "176"
+            ImpoIb(6, 1) = _RetIB6
+            ImpoIb(6, 2) = "170"
+            ImpoIb(7, 1) = _RetIB7
+            ImpoIb(7, 2) = "171"
+            ImpoIb(8, 1) = _RetIB8
+            ImpoIb(8, 2) = "167"
+            ImpoIb(9, 1) = _RetIB9
+            ImpoIb(9, 2) = "172"
+            ImpoIb(10, 1) = _RetIB10
+            ImpoIb(10, 2) = "165"
+            ImpoIb(11, 1) = _RetIB11
+            ImpoIb(11, 2) = "166"
+            ImpoIb(12, 1) = _RetIB12
+            ImpoIb(12, 2) = "179"
+            ImpoIb(13, 1) = _RetIB13
+            ImpoIb(13, 2) = "169"
+            ImpoIb(14, 1) = _RetIB14
+            ImpoIb(14, 2) = "168"
 
             .Dispose()
 
