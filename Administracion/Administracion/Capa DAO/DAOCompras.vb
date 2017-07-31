@@ -24,9 +24,9 @@ Public Class DAOCompras
 
     Public Shared Sub agregarDatosCuentaCorriente(ByVal compra As Compra)
         Dim saldo As Double = compra.total
-        If Not (compra.tipoDocumentoDescripcion = "FC") Then ' Porque notas de credito o debito llevan un saldo de 0
-            saldo = 0
-        End If
+        'If Not (compra.tipoDocumentoDescripcion = "FC") Then ' Porque notas de credito o debito llevan un saldo de 0
+        '    saldo = 0
+        'End If
         Dim datosCuotas As New List(Of Tuple(Of String, String, String, Double, Double)) '1: Numero 2: Fecha vto 3: Fecha vto 2 4: Total 5: Saldo
         datosCuotas.Add(Tuple.Create(compra.numero, compra.fechaVto1, compra.fechaVto2, compra.total, saldo))
         If compra.usaCuotas() Then
@@ -50,7 +50,7 @@ Public Class DAOCompras
             XNroInternoAsociado = ""
             XNombreProveedor = ""
             XNumeroOriginal = ""
-            XImporteTotal = "0"
+            XImporteTotal = IIf(compra.usaCuotas, "0", WImporteTotal)
             XFechaOriginal = ""
             XFechaOriginalOrd = ""
 

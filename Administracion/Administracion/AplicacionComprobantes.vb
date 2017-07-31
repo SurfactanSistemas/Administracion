@@ -11,6 +11,7 @@ Public Class AplicacionComprobantes
         ' Uso la variable global ya que sin querer pueden llegar a haber cambiado el texto y romperia todo
         proveedorActual = txtProveedor.Text
         Proceso()
+        Me.Height = 501
     End Sub
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
@@ -70,6 +71,8 @@ Public Class AplicacionComprobantes
 
                 txtSaldo.Text = saldoNuevo.ToString
             End If
+        ElseIf (e.KeyCode = Keys.Escape) Then
+            dtgCuentas.CurrentCell.Value = ""
         End If
     End Sub
 
@@ -241,5 +244,9 @@ Public Class AplicacionComprobantes
             txtProveedor.Text = ""
         End If
 
+    End Sub
+
+    Private Sub AplicacionComprobantes_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtProveedor.Focus()
     End Sub
 End Class

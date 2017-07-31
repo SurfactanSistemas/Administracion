@@ -264,7 +264,7 @@ Partial Class AplicacionComprobantes
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(251, 399)
+        Me.btnCancela.Location = New System.Drawing.Point(315, 399)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(103, 54)
         Me.btnCancela.TabIndex = 3
@@ -285,7 +285,7 @@ Partial Class AplicacionComprobantes
         Me.btnGraba.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnGraba.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnGraba.LabelAssociationKey = -1
-        Me.btnGraba.Location = New System.Drawing.Point(125, 399)
+        Me.btnGraba.Location = New System.Drawing.Point(189, 399)
         Me.btnGraba.Name = "btnGraba"
         Me.btnGraba.Size = New System.Drawing.Size(103, 54)
         Me.btnGraba.TabIndex = 2
@@ -306,12 +306,13 @@ Partial Class AplicacionComprobantes
         Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnProceso.LabelAssociationKey = -1
-        Me.btnProceso.Location = New System.Drawing.Point(503, 399)
+        Me.btnProceso.Location = New System.Drawing.Point(609, 399)
         Me.btnProceso.Name = "btnProceso"
         Me.btnProceso.Size = New System.Drawing.Size(103, 54)
         Me.btnProceso.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.btnProceso, "Proceso")
         Me.btnProceso.UseVisualStyleBackColor = True
+        Me.btnProceso.Visible = False
         '
         'btnConsulta
         '
@@ -327,7 +328,7 @@ Partial Class AplicacionComprobantes
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(377, 399)
+        Me.btnConsulta.Location = New System.Drawing.Point(441, 399)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(103, 54)
         Me.btnConsulta.TabIndex = 0
@@ -385,9 +386,10 @@ Partial Class AplicacionComprobantes
         Me.Controls.Add(Me.btnGraba)
         Me.Controls.Add(Me.btnProceso)
         Me.Controls.Add(Me.btnConsulta)
+        Me.Location = New System.Drawing.Point(100, 20)
         Me.MaximizeBox = False
         Me.Name = "AplicacionComprobantes"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
