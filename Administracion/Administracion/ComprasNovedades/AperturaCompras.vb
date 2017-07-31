@@ -422,4 +422,20 @@ Public Class Apertura
         End If
 
     End Sub
+
+    Private Sub gridApertura_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridApertura.MouseDoubleClick
+
+        If gridApertura.SelectedRows.Count > 0 Then
+
+            If MsgBox("¿Desea eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+                Dim row As DataGridViewRow = gridApertura.CurrentRow
+
+                gridApertura.Rows.Remove(row)
+            Else
+                gridApertura.ClearSelection()
+            End If
+
+        End If
+
+    End Sub
 End Class
