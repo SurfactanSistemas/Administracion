@@ -2105,4 +2105,8 @@ Public Class Compras
     Private Function _EsNumero(ByVal e As KeyPressEventArgs) As Boolean
         Return (e.KeyChar >= CChar("0"c) And e.KeyChar <= CChar("9"c))
     End Function
+
+    Private Sub cmbFormaPago_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFormaPago.Enter
+        cmbFormaPago.DroppedDown = True
+    End Sub
 End Class
