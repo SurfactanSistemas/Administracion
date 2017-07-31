@@ -44,6 +44,7 @@ Partial Class AplicacionComprobantes
         Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Saldo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Aplica = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.txtProveedor = New Administracion.CustomTextBox()
         Me.txtSaldo = New Administracion.CustomTextBox()
@@ -53,10 +54,11 @@ Partial Class AplicacionComprobantes
         Me.btnCancela = New Administracion.CustomButton()
         Me.btnGraba = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnProceso = New Administracion.CustomButton()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.lstFiltrada = New Administracion.CustomListBox()
-        Me.btnProceso = New Administracion.CustomButton()
+        Me.btnLimpiar = New Administracion.CustomButton()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.dtgCuentas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,7 +115,8 @@ Partial Class AplicacionComprobantes
         Me.dtgCuentas.AllowUserToAddRows = False
         Me.dtgCuentas.AllowUserToDeleteRows = False
         Me.dtgCuentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dtgCuentas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Fecha, Me.Importe, Me.Saldo, Me.Aplica})
+        Me.dtgCuentas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Fecha, Me.Importe, Me.Saldo, Me.Aplica, Me.WTipo})
+        Me.dtgCuentas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dtgCuentas.Location = New System.Drawing.Point(17, 51)
         Me.dtgCuentas.Name = "dtgCuentas"
         Me.dtgCuentas.Size = New System.Drawing.Size(695, 272)
@@ -185,6 +188,13 @@ Partial Class AplicacionComprobantes
         Me.Aplica.DefaultCellStyle = DataGridViewCellStyle16
         Me.Aplica.HeaderText = "Aplica"
         Me.Aplica.Name = "Aplica"
+        '
+        'WTipo
+        '
+        Me.WTipo.HeaderText = "WTipo"
+        Me.WTipo.Name = "WTipo"
+        Me.WTipo.ReadOnly = True
+        Me.WTipo.Visible = False
         '
         'CustomLabel3
         '
@@ -264,7 +274,7 @@ Partial Class AplicacionComprobantes
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(315, 399)
+        Me.btnCancela.Location = New System.Drawing.Point(505, 399)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(103, 54)
         Me.btnCancela.TabIndex = 3
@@ -285,7 +295,7 @@ Partial Class AplicacionComprobantes
         Me.btnGraba.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnGraba.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnGraba.LabelAssociationKey = -1
-        Me.btnGraba.Location = New System.Drawing.Point(189, 399)
+        Me.btnGraba.Location = New System.Drawing.Point(124, 399)
         Me.btnGraba.Name = "btnGraba"
         Me.btnGraba.Size = New System.Drawing.Size(103, 54)
         Me.btnGraba.TabIndex = 2
@@ -306,12 +316,33 @@ Partial Class AplicacionComprobantes
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(441, 399)
+        Me.btnConsulta.Location = New System.Drawing.Point(378, 399)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(103, 54)
         Me.btnConsulta.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta")
         Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'btnProceso
+        '
+        Me.btnProceso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnProceso.Cleanable = False
+        Me.btnProceso.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnProceso.EnterIndex = -1
+        Me.btnProceso.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatAppearance.BorderSize = 0
+        Me.btnProceso.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProceso.LabelAssociationKey = -1
+        Me.btnProceso.Location = New System.Drawing.Point(704, 433)
+        Me.btnProceso.Name = "btnProceso"
+        Me.btnProceso.Size = New System.Drawing.Size(30, 31)
+        Me.btnProceso.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.btnProceso, "Proceso")
+        Me.btnProceso.UseVisualStyleBackColor = True
+        Me.btnProceso.Visible = False
         '
         'txtAyuda
         '
@@ -350,26 +381,26 @@ Partial Class AplicacionComprobantes
         Me.lstFiltrada.TabIndex = 40
         Me.lstFiltrada.Visible = False
         '
-        'btnProceso
+        'btnLimpiar
         '
-        Me.btnProceso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnProceso.Cleanable = False
-        Me.btnProceso.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnProceso.EnterIndex = -1
-        Me.btnProceso.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatAppearance.BorderSize = 0
-        Me.btnProceso.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnProceso.LabelAssociationKey = -1
-        Me.btnProceso.Location = New System.Drawing.Point(711, 441)
-        Me.btnProceso.Name = "btnProceso"
-        Me.btnProceso.Size = New System.Drawing.Size(23, 22)
-        Me.btnProceso.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.btnProceso, "Proceso")
-        Me.btnProceso.UseVisualStyleBackColor = True
-        Me.btnProceso.Visible = False
+        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.Cleanable = False
+        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiar.EnterIndex = -1
+        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.BorderSize = 0
+        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiar.LabelAssociationKey = -1
+        Me.btnLimpiar.Location = New System.Drawing.Point(251, 399)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(103, 54)
+        Me.btnLimpiar.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Pantalla de Formulario")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'AplicacionComprobantes
         '
@@ -382,6 +413,7 @@ Partial Class AplicacionComprobantes
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.btnCancela)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnGraba)
         Me.Controls.Add(Me.btnProceso)
         Me.Controls.Add(Me.btnConsulta)
@@ -414,6 +446,8 @@ Partial Class AplicacionComprobantes
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents dtgCuentas As System.Windows.Forms.DataGridView
+    Friend WithEvents lstFiltrada As Administracion.CustomListBox
+    Friend WithEvents btnProceso As Administracion.CustomButton
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Letra As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Punto As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -422,6 +456,6 @@ Partial Class AplicacionComprobantes
     Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Saldo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Aplica As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents lstFiltrada As Administracion.CustomListBox
-    Friend WithEvents btnProceso As Administracion.CustomButton
+    Friend WithEvents WTipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnLimpiar As Administracion.CustomButton
 End Class
