@@ -552,6 +552,10 @@ Public Class Compras
         Return DAOCuentaContable.IVARG3337
     End Function
 
+    Private Function _UtilizaApertura() As Boolean
+        Return apertura.gridApertura.Rows.Count > 0 And Not IsNothing(apertura.gridApertura.Rows(0).Cells(0).Value) And CBLetra.Text <> "C"
+    End Function
+
     Private Sub crearAsientoContableUsando(ByVal cuenta As CuentaContable)
         Dim _Cta As CuentaContable
         If Not esModificacion Then
@@ -566,7 +570,7 @@ Public Class Compras
 
             gridAsientos.Rows.Clear()
 
-            If apertura.gridApertura.Rows.Count > 0 And Not IsNothing(apertura.gridApertura.Rows(0).Cells(0).Value) And CBLetra.Text <> "C" Then
+            If _UtilizaApertura Then
 
                 With apertura
                     total = asDouble(txtTotal.Text)
@@ -591,16 +595,23 @@ Public Class Compras
                 If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, "", sumaIvas) : End If
                 If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, "", ivaRG3337) : End If
 
-                For i = 0 To 14
 
-                    If Val(ImpoIb(i, 1)) <> 0 Then
-                        _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo(Trim(ImpoIb(i, 2)))
+                If _UtilizaApertura() Then
+                    _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo("164")
+                    gridAsientos.Rows.Add("164", _Cta.descripcion, "", formatonumerico(ingresosBrutos))
+                Else
+                    For i = 0 To 14
 
-                        gridAsientos.Rows.Add(ImpoIb(i, 2), _Cta.descripcion, "", formatonumerico(ImpoIb(i, 1)))
+                        If Val(ImpoIb(i, 1)) <> 0 Then
+                            _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo(Trim(ImpoIb(i, 2)))
 
-                    End If
+                            gridAsientos.Rows.Add(ImpoIb(i, 2), _Cta.descripcion, "", formatonumerico(ImpoIb(i, 1)))
 
-                Next
+                        End If
+
+                    Next
+                End If
+
 
                 If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", "", diferencia) : End If
             Else
@@ -608,16 +619,23 @@ Public Class Compras
                 If sumaIvas <> 0 Then : gridAsientos.Rows.Add(cuentaIVACredito.id, cuentaIVACredito.descripcion, sumaIvas, "") : End If
                 If ivaRG3337 <> 0 Then : gridAsientos.Rows.Add(cuentaIVARG3337.id, cuentaIVARG3337.descripcion, ivaRG3337, "") : End If
 
-                For i = 0 To 14
 
-                    If Val(ImpoIb(i, 1)) <> 0 Then
-                        _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo(Trim(ImpoIb(i, 2)))
+                If _UtilizaApertura() Then
+                    _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo("164")
+                    gridAsientos.Rows.Add("164", _Cta.descripcion, "", formatonumerico(ingresosBrutos))
+                Else
+                    For i = 0 To 14
 
-                        gridAsientos.Rows.Add(ImpoIb(i, 2), _Cta.descripcion, formatonumerico(ImpoIb(i, 1)), "")
+                        If Val(ImpoIb(i, 1)) <> 0 Then
 
-                    End If
+                            _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo(Trim(ImpoIb(i, 2)))
 
-                Next
+                            gridAsientos.Rows.Add(ImpoIb(i, 2), _Cta.descripcion, formatonumerico(ImpoIb(i, 1)), "")
+
+                        End If
+
+                    Next
+                End If
 
                 If diferencia <> 0 Then : gridAsientos.Rows.Add("", "", diferencia, 0) : End If
             End If
