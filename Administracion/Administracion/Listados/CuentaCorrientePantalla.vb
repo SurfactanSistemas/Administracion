@@ -65,10 +65,10 @@ Public Class CuentaCorrientePantalla
                 _NrosInternos.Add({CamposCtaCtePrv.numero, CamposCtaCtePrv.NroInterno})
 
             Next
-
-            GRilla.AllowUserToAddRows = False
-            txtSaldo.Text = formatonumerico(WSuma, "########0.#0", ".")
         End If
+
+        GRilla.AllowUserToAddRows = False
+        txtSaldo.Text = formatonumerico(WSuma, "########0.#0", ".")
 
     End Sub
 

@@ -30,13 +30,21 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
                     Handles txtDesdeProveedor.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
+
+
+            If Trim(txtDesdeProveedor.Text) = "" Then
+                btnConsulta.PerformClick()
+                Exit Sub
+            End If
+
+
             ' DADA que no rompa cuando el codigo no existe y usar la funcion "ceros" para completar??
             Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtDesdeProveedor.Text)
             txtRazon.Text = CampoProveedor.razonSocial
-            txtRazon.Focus()
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True
-            txtRazon.Focus()
+            txtDesdeProveedor.Text = ""
+            txtRazon.Text = ""
         End If
         If Not IsNumeric(e.KeyChar) Then
             e.Handled = True
@@ -76,8 +84,10 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
         txtDesdeProveedor.Text = proveedor.id
+        txtRazon.Text = proveedor.razonSocial
         REM txtHastaProveedor.Text = proveedor.id
         txtDesdeProveedor.Focus()
+        Me.Height = 298
     End Sub
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click

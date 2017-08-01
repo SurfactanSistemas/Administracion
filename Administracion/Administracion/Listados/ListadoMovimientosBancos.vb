@@ -342,7 +342,6 @@ Public Class ListadoMovimientosBancos
 
 
 
-
         'Dim txtdada As Double
         'txtdada = SQLConnector.executeProcedureWithReturnValue("get_saldo_inicial_pagos", txtDesdefechaOrd, txtHastafechaOrd, txtDesdeBanco.Text, txtHastaBanco.Text)
 
