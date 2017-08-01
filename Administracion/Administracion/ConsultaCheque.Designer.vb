@@ -172,7 +172,7 @@ Partial Class ConsultaCheque
         Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnProceso.LabelAssociationKey = -1
-        Me.btnProceso.Location = New System.Drawing.Point(200, 430)
+        Me.btnProceso.Location = New System.Drawing.Point(214, 430)
         Me.btnProceso.Name = "btnProceso"
         Me.btnProceso.Size = New System.Drawing.Size(59, 60)
         Me.btnProceso.TabIndex = 4
@@ -193,7 +193,7 @@ Partial Class ConsultaCheque
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(499, 430)
+        Me.btnCerrar.Location = New System.Drawing.Point(512, 430)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(59, 60)
         Me.btnCerrar.TabIndex = 3
@@ -258,7 +258,7 @@ Partial Class ConsultaCheque
         Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CustomButton1.LabelAssociationKey = -1
-        Me.CustomButton1.Location = New System.Drawing.Point(330, 430)
+        Me.CustomButton1.Location = New System.Drawing.Point(363, 430)
         Me.CustomButton1.Name = "CustomButton1"
         Me.CustomButton1.Size = New System.Drawing.Size(59, 60)
         Me.CustomButton1.TabIndex = 4

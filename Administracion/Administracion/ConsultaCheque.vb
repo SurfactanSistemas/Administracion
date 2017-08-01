@@ -8,7 +8,14 @@ Public Class ConsultaCheque
     End Sub
 
     Private Sub ejecutar()
+
+        If Trim(txtCheque.Text) = "" Then
+            Exit Sub
+        End If
+
+
         If IsNumeric(txtCheque.Text) Then
+            gridCheque.Rows.Clear()
             If cmbTipo.SelectedIndex = 0 Then
                 _ListarChequesTerceros(txtCheque.Text)
                 'For Each row In SQLConnector.retrieveDataTable("get_cheques_terceros", txtCheque.Text).Rows
@@ -23,8 +30,8 @@ Public Class ConsultaCheque
             Else
                 For Each row In SQLConnector.retrieveDataTable("get_cheques_propios", txtCheque.Text).Rows
                     gridCheque.Rows.Add(row("Numero2").ToString,
+                                        row("Banco2").ToString,
                                         formatonumerico(redondeo(Convert.ToDouble(row("Importe2"))), "#######0.#0", "."),
-                                        row("Importe2").ToString,
                                         row("Fecha").ToString,
                                         row("Fecha2").ToString,
                                         row("Recibo").ToString,
@@ -165,5 +172,9 @@ Public Class ConsultaCheque
         cmbTipo.SelectedIndex = 0
 
         txtCheque.Focus()
+    End Sub
+
+    Private Sub cmbTipo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipo.SelectedIndexChanged
+        ejecutar()
     End Sub
 End Class
