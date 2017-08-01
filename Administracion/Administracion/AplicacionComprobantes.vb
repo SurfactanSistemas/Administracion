@@ -45,13 +45,13 @@ Public Class AplicacionComprobantes
 
             Case 1, 2, 4
 
-                If Math.Abs(valor) > Math.Abs(CDbl(dtgCuentas.Rows(iRow).Cells(iCol - 1).Value)) Or valor > 0 Then
+                If Math.Abs(valor) > Math.Abs(CDbl(dtgCuentas.Rows(iRow).Cells(iCol - 1).Value)) Or valor < 0 Then
                     _valido = False
                 End If
 
             Case 3, 5
 
-                If Math.Abs(valor) > Math.Abs(CDbl(dtgCuentas.Rows(iRow).Cells(iCol - 1).Value)) Or valor < 0 Then
+                If Math.Abs(valor) > Math.Abs(CDbl(dtgCuentas.Rows(iRow).Cells(iCol - 1).Value)) Or valor > 0 Then
                     _valido = False
                 End If
 
@@ -189,7 +189,7 @@ Public Class AplicacionComprobantes
                     If importe <> 0 Then
                         ' Actualizamos la cta cte del proveedor.
                         Try
-                            SQLConnector.retrieveDataTable("actualizar_cuenta_corriente_proveedor", row.Cells(8).Value.ToString, row.Cells(1).Value.ToString, row.Cells(2).Value.ToString, row.Cells(3).Value.ToString, row.Cells(4).Value.ToString, CustomConvert.toDoubleOrZero(row.Cells(7).Value), proveedorActual)
+                            SQLConnector.retrieveDataTable("actualizar_cuenta_corriente_proveedor", row.Cells(8).Value.ToString, row.Cells(1).Value.ToString, row.Cells(2).Value.ToString, row.Cells(3).Value.ToString, row.Cells(4).Value.ToString, CustomConvert.toDoubleOrZero(-1 * row.Cells(7).Value), proveedorActual)
                         Catch ex As Exception
                             MsgBox("Ocurrió un problema al querer actualizar la Cuenta Corriente del Proveedor.")
                             Exit Sub
@@ -240,7 +240,7 @@ Public Class AplicacionComprobantes
             ZZLetra = .Cells(1).Value
             ZZPunto = .Cells(2).Value
             ZZNumero = .Cells(3).Value
-            ZZImporte = Proceso.formatonumerico(-1 * .Cells(7).Value)
+            ZZImporte = Proceso.formatonumerico(.Cells(7).Value)
         End With
 
         ZSql = ""
