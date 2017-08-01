@@ -1,4 +1,5 @@
 ﻿Imports ClasesCompartidas
+Imports System.Data.SqlClient
 
 Public Class ConsultaCheque
 
@@ -9,15 +10,16 @@ Public Class ConsultaCheque
     Private Sub ejecutar()
         If IsNumeric(txtCheque.Text) Then
             If cmbTipo.SelectedIndex = 0 Then
-                For Each row In SQLConnector.retrieveDataTable("get_cheques_terceros", txtCheque.Text).Rows
-                    gridCheque.Rows.Add(row("Numero2").ToString,
-                                        row("Banco").ToString,
-                                        formatonumerico(redondeo(Convert.ToDouble(row("Importe2"))), "#######0.#0", "."),
-                                        row("Fecha").ToString,
-                                        row("Fecha2").ToString,
-                                        row("Recibo").ToString,
-                                        row("Cliente").ToString)
-                Next
+                _ListarChequesTerceros(txtCheque.Text)
+                'For Each row In SQLConnector.retrieveDataTable("get_cheques_terceros", txtCheque.Text).Rows
+                '    gridCheque.Rows.Add(row("Numero2").ToString,
+                '                        row("Banco").ToString,
+                '                        formatonumerico(redondeo(Convert.ToDouble(row("Importe2"))), "#######0.#0", "."),
+                '                        row("Fecha").ToString,
+                '                        row("Fecha2").ToString,
+                '                        row("Recibo").ToString,
+                '                        row("Cliente").ToString)
+                'Next
             Else
                 For Each row In SQLConnector.retrieveDataTable("get_cheques_propios", txtCheque.Text).Rows
                     gridCheque.Rows.Add(row("Numero2").ToString,
@@ -29,7 +31,113 @@ Public Class ConsultaCheque
                                         row("Proveedor").ToString)
                 Next
             End If
+
         End If
+    End Sub
+
+    Private Sub _ListarChequesTerceros(ByVal cheque As String)
+        cheque = Trim(cheque)
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+        Dim dr As SqlDataReader
+
+        ' Listamos los pertenecientes a Recibos.
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cm.CommandText = "SELECT r.Numero2, r.Banco2, r.Importe2, r.Fecha, r.Fecha2, r.Recibo, r.Cliente, cli.Razon FROM Recibos as r, Cliente as cli WHERE r.Cliente = cli.Cliente and Tiporeg= '2' and (Tipo2 = '2' or Tipo2 = '02') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') order by FechaOrd2"
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+                    gridCheque.Rows.Add(dr.Item("Numero2"),
+                                        dr.Item("Banco2"),
+                                            formatonumerico(redondeo(Convert.ToDouble(dr.Item("Importe2"))), "#######0.#0", "."),
+                                            dr.Item("Fecha"),
+                                            dr.Item("Fecha2"),
+                                            "Rec: " & dr.Item("Recibo"),
+                                            dr.Item("Cliente") & " " & dr.Item("Razon"))
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            'dr = Nothing
+            cn.Close()
+            'cn = Nothing
+            'cm = Nothing
+
+        End Try
+
+
+        ' Listamos los pertenecientes a Depositos
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Deposito, d.Banco, b.Cuenta, b.Nombre FROM Depositos as d, Banco as b Where d.Banco = b.Banco and (Tipo2 = '3' Or Tipo2= '03') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') Order by FechaOrd"
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+                    gridCheque.Rows.Add(dr.Item("Numero2"),
+                                        dr.Item("Observaciones2"),
+                                            formatonumerico(redondeo(Convert.ToDouble(dr.Item("Importe2"))), "#######0.#0", "."),
+                                            dr.Item("Fecha"),
+                                            dr.Item("Fecha2"),
+                                            "Dep: " & dr.Item("Deposito"),
+                                            dr.Item("Banco") & " " & dr.Item("Nombre"))
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            'dr = Nothing
+            cn.Close()
+            'cn = Nothing
+            'cm = Nothing
+
+        End Try
+
+        ' Listamos los pertenecientes a Pagos
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, d.Proveedor, b.Nombre, d.Observaciones FROM Pagos as d, Proveedor as b Where d.Proveedor = b.Proveedor and Tiporeg = '2' and (Tipo2 = '3' Or Tipo2= '03') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') Order by FechaOrd2"
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+                    gridCheque.Rows.Add(dr.Item("Numero2"),
+                                        dr.Item("Observaciones2"),
+                                            formatonumerico(redondeo(Convert.ToDouble(dr.Item("Importe2"))), "#######0.#0", "."),
+                                            dr.Item("Fecha"),
+                                            dr.Item("Fecha2"),
+                                            "O.P.: " & dr.Item("Orden"),
+                                            dr.Item("Proveedor") & " " & IIf(IsDBNull(dr.Item("Nombre")), dr.Item("Observaciones"), dr.Item("Nombre")))
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
@@ -47,10 +155,15 @@ Public Class ConsultaCheque
         End If
     End Sub
 
-    Private Sub txtCheque_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
+    Private Sub ConsultaCheque_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtCheque.Focus()
     End Sub
-    Private Sub txtCheque_TextChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
+    Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomButton1.Click
+        txtCheque.Text = ""
+        gridCheque.Rows.Clear()
+        cmbTipo.SelectedIndex = 0
+
+        txtCheque.Focus()
     End Sub
 End Class

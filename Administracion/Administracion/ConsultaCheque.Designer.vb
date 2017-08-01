@@ -42,6 +42,7 @@ Partial Class ConsultaCheque
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.CustomButton1 = New Administracion.CustomButton()
         CType(Me.gridCheque, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -126,7 +127,7 @@ Partial Class ConsultaCheque
         '
         Me.cmbTipo.FormattingEnabled = True
         Me.cmbTipo.Items.AddRange(New Object() {"Cheque Terceros", "Cheques Propios"})
-        Me.cmbTipo.Location = New System.Drawing.Point(377, 11)
+        Me.cmbTipo.Location = New System.Drawing.Point(363, 10)
         Me.cmbTipo.Name = "cmbTipo"
         Me.cmbTipo.Size = New System.Drawing.Size(255, 21)
         Me.cmbTipo.TabIndex = 1
@@ -137,7 +138,7 @@ Partial Class ConsultaCheque
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(155, 12)
+        Me.CustomLabel1.Location = New System.Drawing.Point(169, 12)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(56, 18)
         Me.CustomLabel1.TabIndex = 7
@@ -149,7 +150,7 @@ Partial Class ConsultaCheque
         Me.txtCheque.Empty = True
         Me.txtCheque.EnterIndex = -1
         Me.txtCheque.LabelAssociationKey = -1
-        Me.txtCheque.Location = New System.Drawing.Point(222, 11)
+        Me.txtCheque.Location = New System.Drawing.Point(236, 11)
         Me.txtCheque.MaxLength = 8
         Me.txtCheque.Name = "txtCheque"
         Me.txtCheque.Size = New System.Drawing.Size(121, 20)
@@ -171,7 +172,7 @@ Partial Class ConsultaCheque
         Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnProceso.LabelAssociationKey = -1
-        Me.btnProceso.Location = New System.Drawing.Point(254, 430)
+        Me.btnProceso.Location = New System.Drawing.Point(200, 430)
         Me.btnProceso.Name = "btnProceso"
         Me.btnProceso.Size = New System.Drawing.Size(59, 60)
         Me.btnProceso.TabIndex = 4
@@ -192,7 +193,7 @@ Partial Class ConsultaCheque
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(472, 430)
+        Me.btnCerrar.Location = New System.Drawing.Point(499, 430)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(59, 60)
         Me.btnCerrar.TabIndex = 3
@@ -243,6 +244,26 @@ Partial Class ConsultaCheque
         Me.Panel2.Size = New System.Drawing.Size(786, 367)
         Me.Panel2.TabIndex = 9
         '
+        'CustomButton1
+        '
+        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.CustomButton1.Cleanable = False
+        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.CustomButton1.EnterIndex = -1
+        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.BorderSize = 0
+        Me.CustomButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CustomButton1.LabelAssociationKey = -1
+        Me.CustomButton1.Location = New System.Drawing.Point(330, 430)
+        Me.CustomButton1.Name = "CustomButton1"
+        Me.CustomButton1.Size = New System.Drawing.Size(59, 60)
+        Me.CustomButton1.TabIndex = 4
+        Me.CustomButton1.UseVisualStyleBackColor = True
+        '
         'ConsultaCheque
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -251,6 +272,7 @@ Partial Class ConsultaCheque
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.CustomButton1)
         Me.Controls.Add(Me.btnProceso)
         Me.Name = "ConsultaCheque"
         CType(Me.gridCheque, System.ComponentModel.ISupportInitialize).EndInit()
@@ -279,4 +301,5 @@ Partial Class ConsultaCheque
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents CustomButton1 As Administracion.CustomButton
 End Class
