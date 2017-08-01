@@ -1,20 +1,13 @@
 ﻿Imports ClasesCompartidas
 Imports System.IO
+Imports System.Data.SqlClient
 
 Public Class ListadoMovimientosBancos
 
     Dim txtVectorBanco(1000) As String
 
     Private Sub ListadoMovimientosBancos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        txtDesdeFecha.Text = "  /  /    "
-        txthastafecha.Text = "  /  /    "
-
-        txtDesdeBanco.Text = "0"
-        txtHastaBanco.Text = "9999"
-
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
+        Button1.PerformClick()
     End Sub
 
 
@@ -51,8 +44,10 @@ Public Class ListadoMovimientosBancos
     Private Sub txtdesdebanco_KeyPress(ByVal sender As Object, _
                    ByVal e As System.Windows.Forms.KeyPressEventArgs) _
                    Handles txtDesdeBanco.KeyPress
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
+            txtHastaBanco.Text = txtDesdeBanco.Text
             txtHastaBanco.Focus()
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True
@@ -61,6 +56,7 @@ Public Class ListadoMovimientosBancos
         If Not IsNumeric(e.KeyChar) Then
             e.Handled = True
         End If
+
     End Sub
 
     Private Sub txthastabanco_KeyPress(ByVal sender As Object, _
@@ -122,8 +118,51 @@ Public Class ListadoMovimientosBancos
         REM txtDesdeProveedor.Text = lstAyuda.SelectedValue.id
     End Sub
 
+    Private Function _ObtenerSaldoInicialDebito(ByVal banco As String, ByVal txtDesdeFecha As String) As Double
+        Dim saldoinicial As Double = 0
+        txtDesdeFecha = Proceso.ordenaFecha(txtDesdeFecha)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT SUM(Importe2) as SaldoInicial FROM Pagos WHERE Banco2 = '" & Trim(banco) & "' AND FechaOrd2 < '" & txtDesdeFecha & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                saldoinicial = IIf(IsDBNull(dr.Item("SaldoInicial")), 0, dr.Item("SaldoInicial"))
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return saldoinicial
+    End Function
+
+    Private Function _ObtenerSaldoInicialCredito(ByVal banco As String, ByVal txtDesdeFecha As String) As Double
+        Dim saldoinicial As Double = 0
+
+        Return saldoinicial
+    End Function
 
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+        Dim dr As SqlDataReader
 
         Dim varUno As String
 
@@ -171,7 +210,6 @@ Public Class ListadoMovimientosBancos
         Dim tabla As DataTable
         varRenglon = 0
 
-
         tabla = SQLConnector.retrieveDataTable("buscar_pagos_Movban", varDesdefechaOrd, varHastafechaOrd, txtDesdeBanco.Text, txtHastaBanco.Text)
 
         For Each row As DataRow In tabla.Rows
@@ -199,7 +237,7 @@ Public Class ListadoMovimientosBancos
             varCredito = CampoPagos.importe2
 
             SQLConnector.executeProcedure("alta_movban", varRenglon, CampoPagos.banco2, CampoPagos.fecha, CampoPagos.fechaord, varAcredita, varAcreditaOrd, CampoPagos.observaciones,
-                                          CampoPagos.numero2, varDebito, varCredito, CampoPagos.orden, varEmpresa, varTitulo, varTituloList, CampoPagos.proveedor)
+                                          CampoPagos.numero2, varDebito, varCredito, CampoPagos.orden, varEmpresa, varTituloList, varVarios, CampoPagos.proveedor)
 
 
         Next
@@ -243,7 +281,7 @@ Public Class ListadoMovimientosBancos
                 varCredito = 0
 
                 SQLConnector.executeProcedure("alta_movban", varRenglon, CampoPagos.banco2, CampoPagos.fecha, CampoPagos.fechaord, varAcredita, varAcreditaOrd, CampoPagos.observaciones,
-                                              CampoPagos.numero2, varDebito, varCredito, CampoPagos.orden, varEmpresa, varTitulo, varTituloList, CampoPagos.proveedor)
+                                              CampoPagos.numero2, varDebito, varCredito, CampoPagos.orden, varEmpresa, varTituloList, varVarios, CampoPagos.proveedor)
 
             End If
 
@@ -277,7 +315,7 @@ Public Class ListadoMovimientosBancos
             varCredito = 0
 
             SQLConnector.executeProcedure("alta_movban", varRenglon, CampoDepositos.Banco, CampoDepositos.Fecha, CampoDepositos.fechaord, varAcredita, varAcreditaOrd, "Deposito",
-                                          CampoDepositos.deposito, varDebito, varCredito, CampoDepositos.deposito, varEmpresa, varTitulo, varTituloList, "")
+                                          CampoDepositos.deposito, varDebito, varCredito, CampoDepositos.deposito, varEmpresa, varTituloList, varVarios, "")
 
 
         Next
@@ -333,17 +371,179 @@ Public Class ListadoMovimientosBancos
             If varBanco >= Val(txtDesdeBanco.Text) And varBanco <= Val(txtHastaBanco.Text) Then
 
                 SQLConnector.executeProcedure("alta_movban", varRenglon, varBanco, CampoRecibos.fecha, CampoRecibos.fechaord, varAcredita, varAcreditaOrd, "Recibos",
-                                              CampoRecibos.recibo, varDebito, varCredito, CampoRecibos.recibo, varEmpresa, varTitulo, varTituloList, "")
+                                              CampoRecibos.recibo, varDebito, varCredito, CampoRecibos.recibo, varEmpresa, varTituloList, varVarios, "")
 
             End If
 
         Next
 
-
-
-
         'Dim txtdada As Double
         'txtdada = SQLConnector.executeProcedureWithReturnValue("get_saldo_inicial_pagos", txtDesdefechaOrd, txtHastafechaOrd, txtDesdeBanco.Text, txtHastaBanco.Text)
+
+        ' Calculamos los saldos iniciales para los bancos seleccionados.
+
+        Dim WInicial(100) As Double
+
+        ' PAGOS
+        cm.CommandText = "SELECT Tipo2, Banco2, Importe2, TipoReg, Importe1 FROM Pagos Where FechaOrd < '" & Proceso.ordenaFecha(txtDesdeFecha.Text) & "' AND Banco2 BETWEEN '" & Trim(txtDesdeBanco.Text) & "' AND '" & Trim(txtHastaBanco.Text) & "'"
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    Do While .Read()
+
+
+                        If Val(.Item("Tipo2")) = 2 Then
+                            WInicial(.Item("Banco2")) = WInicial(.Item("Banco2")) - .Item("Importe2")
+                        End If
+
+                        If Val(.Item("TipoReg")) = 1 And Val(.Item("Banco2")) <> 0 Then
+                            WInicial(.Item("Banco2")) = WInicial(.Item("Banco2")) + .Item("Importe1")
+                        End If
+                    Loop
+
+                End If
+            End With
+            
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            'dr = Nothing
+            cn.Close()
+            'cn = Nothing
+            'cm = Nothing
+
+        End Try
+
+        ' DEPOSITOS
+
+        cm.CommandText = "SELECT Banco, Importe FROM Depositos Where FechaOrd < '" & Proceso.ordenaFecha(txtDesdeFecha.Text) & "' AND Renglon = '01' AND Banco BETWEEN '" & Trim(txtDesdeBanco.Text) & "' AND '" & Trim(txtHastaBanco.Text) & "'"
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    Do While .Read()
+
+                        WInicial(.Item("Banco")) = WInicial(.Item("Banco")) + .Item("Importe")
+
+                    Loop
+
+                End If
+            End With
+
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            'dr = Nothing
+            cn.Close()
+            'cn = Nothing
+            'cm = Nothing
+
+        End Try
+
+        ' RECIBOS
+
+        cm.CommandText = "SELECT Tipo2, Importe2, Cuenta FROM Recibos Where FechaOrd < '" & Proceso.ordenaFecha(txtDesdeFecha.Text) & "' AND Cuenta IN ('21','22','26','27')"
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Dim WTipo As Integer = 0
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    Do While .Read()
+                        WTipo = IIf(IsDBNull(.Item("Tipo2")), 0, Val(.Item("Tipo2")))
+                        If WTipo = 4 Then
+
+                            Select Case Val(.Item("Cuenta"))
+                                Case 21
+                                    WInicial(3) = WInicial(3) + .Item("Importe2")
+                                Case 22
+                                    WInicial(8) = WInicial(8) + .Item("Importe2")
+                                Case 26
+                                    WInicial(12) = WInicial(12) + .Item("Importe2")
+                                Case 27
+                                    WInicial(16) = WInicial(16) + .Item("Importe2")
+                                Case Else
+
+                            End Select
+
+                        End If
+
+                    Loop
+
+                End If
+            End With
+
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            'dr = Nothing
+            cn.Close()
+            'cn = Nothing
+            'cm = Nothing
+
+        End Try
+
+        WInicial(3) = WInicial(3) - 4624.79 + 82277.33 - 21644.52 - 29233
+        WInicial(8) = WInicial(8) + 65799.41 - 112141.1 + 11998.39 + 15008.45 + 10000.94 - 46211.58 + 46128.29 + 4135.52 - 434355.52 + 284428 + 2358.81
+        WInicial(9) = WInicial(9) - 982.73
+        WInicial(11) = WInicial(11) + 34749.08
+        WInicial(12) = WInicial(12) - 3348.97
+
+
+        ' Creamos los registros con los saldos iniciales.
+
+        For i = 0 To 100
+
+            If WInicial(i) <> 0 Then
+                varRenglon = varRenglon + 1
+
+                varTitulo = ""
+                varEmpresa = 1
+                varTituloList = "Surfactan S.A."
+                varVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
+
+                varAcredita = "00/00/0000" 'CampoPagos.fecha
+                varAcreditaOrd = "00000000" 'CampoPagos.fechaord
+
+                If WInicial(i) > 0 Then
+                    varDebito = WInicial(i) 'CampoPagos.importe1
+                    varCredito = 0
+                Else
+                    varDebito = 0 'CampoPagos.importe1
+                    varCredito = Math.Abs(WInicial(i))
+                End If
+
+
+                SQLConnector.executeProcedure("alta_movban", varRenglon, i, "00/00/0000", "00000000", varAcredita, varAcreditaOrd, "Saldo Inicial",
+                                              0, varDebito, varCredito, 0, varEmpresa, varTituloList, varVarios, 0)
+            End If
+
+        Next
 
 
 
@@ -415,4 +615,22 @@ Public Class ListadoMovimientosBancos
         _FiltrarDinamicamente()
     End Sub
 
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        txtDesdeBanco.Text = "0"
+        txtHastaBanco.Text = "9999"
+
+        txtDesdeFecha.Clear()
+        txthastafecha.Clear()
+
+        txtAyuda.Text = ""
+
+        opcPantalla.Checked = False
+        opcImpesora.Checked = True
+
+        txtDesdeFecha.Focus()
+    End Sub
+
+    Private Sub ListadoMovimientosBancos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesdeFecha.Focus()
+    End Sub
 End Class

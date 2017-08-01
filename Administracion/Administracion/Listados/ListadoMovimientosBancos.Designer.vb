@@ -43,6 +43,7 @@ Partial Class ListadoMovimientosBancos
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -107,9 +108,9 @@ Partial Class ListadoMovimientosBancos
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(320, 186)
+        Me.btnConsulta.Location = New System.Drawing.Point(155, 186)
         Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(120, 37)
+        Me.btnConsulta.Size = New System.Drawing.Size(94, 37)
         Me.btnConsulta.TabIndex = 58
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Bancos")
         Me.btnConsulta.UseVisualStyleBackColor = True
@@ -125,9 +126,9 @@ Partial Class ListadoMovimientosBancos
         Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancela.Location = New System.Drawing.Point(169, 186)
+        Me.btnCancela.Location = New System.Drawing.Point(359, 186)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(125, 37)
+        Me.btnCancela.Size = New System.Drawing.Size(91, 37)
         Me.btnCancela.TabIndex = 57
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
@@ -143,9 +144,9 @@ Partial Class ListadoMovimientosBancos
         Me.btnAcepta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAcepta.Location = New System.Drawing.Point(22, 186)
+        Me.btnAcepta.Location = New System.Drawing.Point(54, 186)
         Me.btnAcepta.Name = "btnAcepta"
-        Me.btnAcepta.Size = New System.Drawing.Size(125, 37)
+        Me.btnAcepta.Size = New System.Drawing.Size(84, 37)
         Me.btnAcepta.TabIndex = 56
         Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
@@ -208,6 +209,7 @@ Partial Class ListadoMovimientosBancos
         Me.txthastafecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txthastafecha.Size = New System.Drawing.Size(106, 20)
         Me.txthastafecha.TabIndex = 49
+        Me.txthastafecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDesdeFecha
         '
@@ -217,6 +219,7 @@ Partial Class ListadoMovimientosBancos
         Me.txtDesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtDesdeFecha.Size = New System.Drawing.Size(106, 20)
         Me.txtDesdeFecha.TabIndex = 48
+        Me.txtDesdeFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'CustomLabel2
         '
@@ -292,6 +295,24 @@ Partial Class ListadoMovimientosBancos
         Me.Panel2.Size = New System.Drawing.Size(461, 127)
         Me.Panel2.TabIndex = 64
         '
+        'Button1
+        '
+        Me.Button1.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(261, 186)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(91, 37)
+        Me.Button1.TabIndex = 57
+        Me.ToolTip1.SetToolTip(Me.Button1, "Limpiar Formulario")
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'lstFiltrada
         '
         Me.lstFiltrada.Cleanable = False
@@ -315,9 +336,11 @@ Partial Class ListadoMovimientosBancos
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.btnConsulta)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnCancela)
         Me.Controls.Add(Me.btnAcepta)
         Me.Name = "ListadoMovimientosBancos"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -347,4 +370,5 @@ Partial Class ListadoMovimientosBancos
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
