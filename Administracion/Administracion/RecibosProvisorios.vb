@@ -93,6 +93,7 @@ Public Class RecibosProvisorios
         lstConsulta.Visible = False
         txtConsulta.Visible = False
         txtConsulta.Text = ""
+        txtRetGanancias.Focus()
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
@@ -143,13 +144,15 @@ Public Class RecibosProvisorios
 
     Private Function _NormalizarNumero(ByVal numero As String) As String
 
-        If numero.Contains(",") Then
-            numero = String.Format("{0:F2}", CDbl(numero)).Replace(",", ".")
-        ElseIf Not numero.Contains(".") Then
-            numero &= ".00"
-        End If
+        Return Proceso.formatonumerico(numero)
 
-        Return numero
+        'If numero.Contains(",") Then
+        '    numero = String.Format("{0:F2}", CDbl(numero)).Replace(",", ".")
+        'ElseIf Not numero.Contains(".") Then
+        '    numero &= ".00"
+        'End If
+
+        'Return numero
     End Function
 
     Private Function sumarValores() As Boolean
@@ -336,6 +339,12 @@ Public Class RecibosProvisorios
 
     Private Sub txtCliente_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCliente.KeyDown
         If e.KeyValue = Keys.Enter Then
+
+            If Trim(txtCliente.Text) = "" Then
+                btnConsulta.PerformClick()
+                Exit Sub
+            End If
+
             Dim cliente = DAOCliente.buscarClientePorCodigo(txtCliente.Text)
             If Not IsNothing(cliente) Then
                 mostrarCliente(cliente)
@@ -640,40 +649,40 @@ Public Class RecibosProvisorios
 
         With DatosIB
 
-            .txtRetIB1.Text = _RetIB1
+            .txtRetIB1.Text = Proceso.formatonumerico(_RetIB1)
             .txtCompIB1.Text = _CompIB1
-            .txtRetIB2.Text = _RetIB2
+            .txtRetIB2.Text = Proceso.formatonumerico(_RetIB2)
             .txtCompIB2.Text = _CompIB2
-            .txtRetIB3.Text = _RetIB3
+            .txtRetIB3.Text = Proceso.formatonumerico(_RetIB3)
             .txtCompIB3.Text = _CompIB3
-            .txtRetIB4.Text = _RetIB4
+            .txtRetIB4.Text = Proceso.formatonumerico(_RetIB4)
             .txtCompIB4.Text = _CompIB4
-            .txtRetIB5.Text = _RetIB5
+            .txtRetIB5.Text = Proceso.formatonumerico(_RetIB5)
             .txtCompIB5.Text = _CompIB5
-            .txtRetIB6.Text = _RetIB6
+            .txtRetIB6.Text = Proceso.formatonumerico(_RetIB6)
             .txtCompIB6.Text = _CompIB6
-            .txtRetIB7.Text = _RetIB7
+            .txtRetIB7.Text = Proceso.formatonumerico(_RetIB7)
             .txtCompIB7.Text = _CompIB7
-            .txtRetIB8.Text = _RetIB8
+            .txtRetIB8.Text = Proceso.formatonumerico(_RetIB8)
             .txtCompIB8.Text = _CompIB8
 
             .ShowDialog(Me)
 
-            _RetIB1 = .txtRetIB1.Text
+            _RetIB1 = Proceso.formatonumerico(.txtRetIB1.Text)
             _CompIB1 = .txtCompIB1.Text
-            _RetIB2 = .txtRetIB2.Text
+            _RetIB2 = Proceso.formatonumerico(.txtRetIB2.Text)
             _CompIB2 = .txtCompIB2.Text
-            _RetIB3 = .txtRetIB3.Text
+            _RetIB3 = Proceso.formatonumerico(.txtRetIB3.Text)
             _CompIB3 = .txtCompIB3.Text
-            _RetIB4 = .txtRetIB4.Text
+            _RetIB4 = Proceso.formatonumerico(.txtRetIB4.Text)
             _CompIB4 = .txtCompIB4.Text
-            _RetIB5 = .txtRetIB5.Text
+            _RetIB5 = Proceso.formatonumerico(.txtRetIB5.Text)
             _CompIB5 = .txtCompIB5.Text
-            _RetIB6 = .txtRetIB6.Text
+            _RetIB6 = Proceso.formatonumerico(.txtRetIB6.Text)
             _CompIB6 = .txtCompIB6.Text
-            _RetIB7 = .txtRetIB7.Text
+            _RetIB7 = Proceso.formatonumerico(.txtRetIB7.Text)
             _CompIB7 = .txtCompIB7.Text
-            _RetIB8 = .txtRetIB8.Text
+            _RetIB8 = Proceso.formatonumerico(.txtRetIB8.Text)
             _CompIB8 = .txtCompIB8.Text
 
             .Dispose()
@@ -1108,11 +1117,15 @@ Public Class RecibosProvisorios
             If _cuit.Length = 11 Then : Exit Sub : End If
         End If
 
-        Do While Not _cuit.Length = 11
+        With SolicitarInformacionCuit
 
-            _PedirInformacion("Ingrese Cuit del Firmante", New TextBox(), _cuit)
+            .Valor = _cuit
 
-        Loop
+            .ShowDialog()
+
+            _cuit = .Valor
+
+        End With
 
         _clave = ""
         _banco = ""

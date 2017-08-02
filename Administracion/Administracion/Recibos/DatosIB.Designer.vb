@@ -26,6 +26,10 @@ Partial Class DatosIB
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.LBLTipoInformacion = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtCompIB8 = New System.Windows.Forms.TextBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.txtRetIB8 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -60,10 +64,6 @@ Partial Class DatosIB
         Me.txtRetIB1 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtCompIB8 = New System.Windows.Forms.TextBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.txtRetIB8 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -132,6 +132,44 @@ Partial Class DatosIB
         Me.Panel2.Size = New System.Drawing.Size(523, 264)
         Me.Panel2.TabIndex = 6
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(40, 121)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(29, 18)
+        Me.Label1.TabIndex = 16
+        Me.Label1.Text = "905"
+        '
+        'txtCompIB8
+        '
+        Me.txtCompIB8.Location = New System.Drawing.Point(375, 120)
+        Me.txtCompIB8.Name = "txtCompIB8"
+        Me.txtCompIB8.Size = New System.Drawing.Size(112, 20)
+        Me.txtCompIB8.TabIndex = 18
+        Me.txtCompIB8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label20.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label20.Location = New System.Drawing.Point(113, 121)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(67, 18)
+        Me.Label20.TabIndex = 15
+        Me.Label20.Text = "Corriente"
+        '
+        'txtRetIB8
+        '
+        Me.txtRetIB8.Location = New System.Drawing.Point(245, 120)
+        Me.txtRetIB8.Name = "txtRetIB8"
+        Me.txtRetIB8.Size = New System.Drawing.Size(112, 20)
+        Me.txtRetIB8.TabIndex = 17
+        Me.txtRetIB8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -171,6 +209,7 @@ Partial Class DatosIB
         Me.txtCompIB7.Name = "txtCompIB7"
         Me.txtCompIB7.Size = New System.Drawing.Size(112, 20)
         Me.txtCompIB7.TabIndex = 14
+        Me.txtCompIB7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label12
         '
@@ -343,6 +382,7 @@ Partial Class DatosIB
         Me.txtCompIB4.Name = "txtCompIB4"
         Me.txtCompIB4.Size = New System.Drawing.Size(112, 20)
         Me.txtCompIB4.TabIndex = 8
+        Me.txtCompIB4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB4
         '
@@ -350,6 +390,7 @@ Partial Class DatosIB
         Me.txtRetIB4.Name = "txtRetIB4"
         Me.txtRetIB4.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB4.TabIndex = 7
+        Me.txtRetIB4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB7
         '
@@ -357,6 +398,7 @@ Partial Class DatosIB
         Me.txtRetIB7.Name = "txtRetIB7"
         Me.txtRetIB7.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB7.TabIndex = 13
+        Me.txtRetIB7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB3
         '
@@ -364,6 +406,7 @@ Partial Class DatosIB
         Me.txtCompIB3.Name = "txtCompIB3"
         Me.txtCompIB3.Size = New System.Drawing.Size(112, 20)
         Me.txtCompIB3.TabIndex = 6
+        Me.txtCompIB3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB3
         '
@@ -371,6 +414,7 @@ Partial Class DatosIB
         Me.txtRetIB3.Name = "txtRetIB3"
         Me.txtRetIB3.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB3.TabIndex = 5
+        Me.txtRetIB3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB6
         '
@@ -378,6 +422,7 @@ Partial Class DatosIB
         Me.txtCompIB6.Name = "txtCompIB6"
         Me.txtCompIB6.Size = New System.Drawing.Size(112, 20)
         Me.txtCompIB6.TabIndex = 12
+        Me.txtCompIB6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB6
         '
@@ -385,6 +430,7 @@ Partial Class DatosIB
         Me.txtRetIB6.Name = "txtRetIB6"
         Me.txtRetIB6.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB6.TabIndex = 11
+        Me.txtRetIB6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB2
         '
@@ -392,6 +438,7 @@ Partial Class DatosIB
         Me.txtCompIB2.Name = "txtCompIB2"
         Me.txtCompIB2.Size = New System.Drawing.Size(112, 20)
         Me.txtCompIB2.TabIndex = 4
+        Me.txtCompIB2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB2
         '
@@ -399,6 +446,7 @@ Partial Class DatosIB
         Me.txtRetIB2.Name = "txtRetIB2"
         Me.txtRetIB2.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB2.TabIndex = 3
+        Me.txtRetIB2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB5
         '
@@ -406,6 +454,7 @@ Partial Class DatosIB
         Me.txtCompIB5.Name = "txtCompIB5"
         Me.txtCompIB5.Size = New System.Drawing.Size(112, 20)
         Me.txtCompIB5.TabIndex = 10
+        Me.txtCompIB5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB5
         '
@@ -413,6 +462,7 @@ Partial Class DatosIB
         Me.txtRetIB5.Name = "txtRetIB5"
         Me.txtRetIB5.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB5.TabIndex = 9
+        Me.txtRetIB5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB1
         '
@@ -420,6 +470,7 @@ Partial Class DatosIB
         Me.txtCompIB1.Name = "txtCompIB1"
         Me.txtCompIB1.Size = New System.Drawing.Size(112, 20)
         Me.txtCompIB1.TabIndex = 2
+        Me.txtCompIB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRetIB1
         '
@@ -427,6 +478,7 @@ Partial Class DatosIB
         Me.txtRetIB1.Name = "txtRetIB1"
         Me.txtRetIB1.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB1.TabIndex = 1
+        Me.txtRetIB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Button1
         '
@@ -444,42 +496,6 @@ Partial Class DatosIB
         Me.Button1.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.Button1, "Confirmar Datos")
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(40, 121)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(29, 18)
-        Me.Label1.TabIndex = 16
-        Me.Label1.Text = "905"
-        '
-        'txtCompIB8
-        '
-        Me.txtCompIB8.Location = New System.Drawing.Point(375, 120)
-        Me.txtCompIB8.Name = "txtCompIB8"
-        Me.txtCompIB8.Size = New System.Drawing.Size(112, 20)
-        Me.txtCompIB8.TabIndex = 18
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label20.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label20.Location = New System.Drawing.Point(113, 121)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(67, 18)
-        Me.Label20.TabIndex = 15
-        Me.Label20.Text = "Corriente"
-        '
-        'txtRetIB8
-        '
-        Me.txtRetIB8.Location = New System.Drawing.Point(245, 120)
-        Me.txtRetIB8.Name = "txtRetIB8"
-        Me.txtRetIB8.Size = New System.Drawing.Size(112, 20)
-        Me.txtRetIB8.TabIndex = 17
         '
         'DatosIB
         '

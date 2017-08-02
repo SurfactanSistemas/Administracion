@@ -147,4 +147,15 @@
         End If
 
     End Sub
+
+    Private Sub NormalizarNumero(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB1.Leave, txtRetIB2.Leave, txtRetIB3.Leave, txtRetIB4.Leave, txtRetIB5.Leave, txtRetIB6.Leave, txtRetIB7.Leave, txtRetIB8.Leave
+        txtRetIB1.Text = Proceso.formatonumerico(txtRetIB1.Text)
+        txtRetIB2.Text = Proceso.formatonumerico(txtRetIB2.Text)
+        txtRetIB3.Text = Proceso.formatonumerico(txtRetIB3.Text)
+        txtRetIB4.Text = Proceso.formatonumerico(txtRetIB4.Text)
+        txtRetIB5.Text = Proceso.formatonumerico(txtRetIB5.Text)
+        txtRetIB6.Text = Proceso.formatonumerico(txtRetIB6.Text)
+        txtRetIB7.Text = Proceso.formatonumerico(txtRetIB7.Text)
+        txtRetIB8.Text = Proceso.formatonumerico(txtRetIB8.Text)
+    End Sub
 End Class
