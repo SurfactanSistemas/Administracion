@@ -809,10 +809,17 @@ Public Class RecibosProvisorios
 
                 End If
             ElseIf msg.WParam.ToInt32() = Keys.Escape Then
-                gridRecibos.Rows.Remove(gridRecibos.Rows(iRow))
-                _CuentasContables.RemoveAll(Function(c) c(0) = iRow)
-                _ClavesCheques.RemoveAll(Function(c) c(0) = iRow)
-                sumarValores()
+                gridRecibos.Rows(iRow).Cells(iCol).Value = ""
+
+                ' Solo para que pierda el foco y se refresque el contenido sino sigue quedando ahi.
+                If iCol = 4 Then
+                    gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol - 1)
+                Else
+                    gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 1)
+                End If
+
+                gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol)
+
             End If
         End If
 
@@ -1156,14 +1163,6 @@ Public Class RecibosProvisorios
 
     Private Sub RecibosProvisorios_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtRecibo.Focus()
-    End Sub
-
-    Private Sub txtConsulta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
-
-    End Sub
-
-    Private Sub lstSeleccion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
     End Sub
 
     Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
