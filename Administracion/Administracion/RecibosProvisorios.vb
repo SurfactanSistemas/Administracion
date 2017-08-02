@@ -30,12 +30,63 @@ Public Class RecibosProvisorios
         txtConsulta.Focus()
     End Sub
 
-    Private Sub txtConsulta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtConsulta.KeyDown
-        If e.KeyValue = Keys.Enter Then
-            lstConsulta.DataSource = queryController.query.Invoke(txtConsulta.Text)
-            e.Handled = True
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstConsulta
+        Dim final As ListBox = lstFiltrada
+        Dim cadena As String = Trim(txtConsulta.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+
+        Else
+
+            final.Visible = False
+
         End If
     End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+        Dim origen As ListBox = lstConsulta
+        Dim filtrado As ListBox = lstFiltrada
+        Dim texto As TextBox = txtConsulta
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedItem = filtrado.SelectedItem
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        lstConsulta_Click(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtConsulta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtConsulta.TextChanged
+        _FiltrarDinamicamente()
+    End Sub
+
+    'Private Sub txtConsulta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtConsulta.KeyDown
+    '    'If e.KeyValue = Keys.Enter Then
+    '    '    lstConsulta.DataSource = queryController.query.Invoke(txtConsulta.Text)
+    '    '    e.Handled = True
+    '    'End If
+    'End Sub
 
     Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
         queryController.showMethod.Invoke(lstConsulta.SelectedValue)
@@ -1105,5 +1156,17 @@ Public Class RecibosProvisorios
 
     Private Sub RecibosProvisorios_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtRecibo.Focus()
+    End Sub
+
+    Private Sub txtConsulta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+
+    End Sub
+
+    Private Sub lstSeleccion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+    End Sub
+
+    Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
+        btnConsulta.PerformClick()
     End Sub
 End Class
