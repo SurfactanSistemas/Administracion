@@ -109,12 +109,12 @@ Public Class DAORecibo
             Dim _cheque As Object = _cheques.FindLast(Function(c) c(0) = (renglon - 1))
 
             If Not IsNothing(_cheque) Then
-                temp = temp.Replace("#ClaveCheque#", _cheque(1)) _
-                            .Replace("#BancoCheque#", _cheque(2)) _
-                            .Replace("#SucursalCheque#", _cheque(3)) _
-                            .Replace("#ChequeCheque#", _cheque(4)) _
-                            .Replace("#CuentaCheque#", _cheque(5)) _
-                            .Replace("#Cuit#", _cheque(6)) & ","
+                temp = temp.Replace("#ClaveCheque#", _Left(_cheque(1), 31)) _
+                            .Replace("#BancoCheque#", _Left(_cheque(2), 3)) _
+                            .Replace("#SucursalCheque#", _Left(_cheque(3), 3)) _
+                            .Replace("#ChequeCheque#", _Left(_cheque(4), 8)) _
+                            .Replace("#CuentaCheque#", _Left(_cheque(5), 11)) _
+                            .Replace("#Cuit#", _Left(_cheque(6), 15)) & ","
             Else
                 temp = temp.Replace("#ClaveCheque#", "") _
                             .Replace("#BancoCheque#", "") _
@@ -147,16 +147,18 @@ Public Class DAORecibo
 
                 cm.ExecuteNonQuery()
 
-                MsgBox("Recibo provisorio guardado con exito!", MsgBoxStyle.Information)
-
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer guardar el Recibo Provisorio", MsgBoxStyle.Critical)
+                Throw New Exception("Hubo un problema al querer guardar el Recibo Provisorio")
             Finally
                 cn.Close()
             End Try
         End If
 
     End Sub
+
+    Private Shared Function _Left(ByVal texto As String, ByVal largo As Integer) As String
+        Return Mid(texto, 1, largo)
+    End Function
 
     Private Shared Function crearFormaPago(ByVal rowA As DataRow)
         Return New FormaPago(rowA("Tipo2").ToString, 0, rowA("Numero2").ToString, rowA("Fecha2").ToString, rowA("banco2").ToString,

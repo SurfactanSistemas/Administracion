@@ -2,7 +2,9 @@
 Imports System.Data.SqlClient
 
 Public Class RecibosProvisorios
-
+    Private WRow, Wcol As Integer
+    Private Const YMARGEN = 183
+    Private Const XMARGEN = 65
     Private _ComprobanteRetIva As String = ""
     Private _ComprobanteRetGanancias As String = ""
     Private _ComprobanteRetSuss As String = ""
@@ -15,6 +17,9 @@ Public Class RecibosProvisorios
     Dim commonEventsHandler As New CommonEventsHandler
 
     Private Sub RecibosProvisorios_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        WRow = -1
+        Wcol = -1
+
         commonEventsHandler.setIndexTab(Me)
         lstSeleccion.Items.Add(New QueryController("Clientes", AddressOf DAOCliente.buscarClientePorNombre, AddressOf mostrarCliente))
         lstSeleccion.SelectedIndex = 0
@@ -109,6 +114,30 @@ Public Class RecibosProvisorios
             End If
 
         Next
+
+        _ComprobanteRetIva = ""
+        _ComprobanteRetGanancias = ""
+        _ComprobanteRetSuss = ""
+
+        _RetIB1 = ""
+        _CompIB1 = ""
+        _RetIB2 = ""
+        _CompIB2 = ""
+        _RetIB3 = ""
+        _CompIB3 = ""
+        _RetIB4 = ""
+        _CompIB4 = ""
+        _RetIB5 = ""
+        _CompIB5 = ""
+        _RetIB6 = ""
+        _CompIB6 = ""
+        _RetIB7 = ""
+        _CompIB7 = ""
+        _RetIB8 = ""
+        _CompIB8 = ""
+
+        lblTotal.Text = "0.00"
+
         gridRecibos.Rows.Clear()
         _ClavesCheques.Clear()
         _CuentasContables.Clear()
@@ -245,45 +274,45 @@ Public Class RecibosProvisorios
                     Dim renglon As String = dr.Item("Renglon").ToString()
 
                     If renglon = "01" Then
-                        txtRecibo.Text = dr.Item("Recibo")
-                        txtFecha.Text = dr.Item("Fecha")
-                        txtCliente.Text = dr.Item("Cliente")
+                        txtRecibo.Text = IIf(IsDBNull(dr.Item("Recibo")), "", dr.Item("Recibo"))
+                        txtFecha.Text = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                        txtCliente.Text = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
                         Dim cliente As Cliente = DAOCliente.buscarClientePorCodigo(txtCliente.Text)
-                        txtNombre.Text = cliente.razon
+                        If Not IsNothing(cliente) Then : txtNombre.Text = cliente.razon : End If
                         cliente = Nothing
-                        txtRetGanancias.Text = _NormalizarNumero(dr.Item("RetGanancias"))
-                        _ComprobanteRetGanancias = dr.Item("ComproGanan")
-                        txtRetIva.Text = _NormalizarNumero(dr.Item("RetIva"))
-                        _ComprobanteRetIva = dr.Item("ComproIva")
-                        txtRetSuss.Text = _NormalizarNumero(dr.Item("RetSuss"))
-                        _ComprobanteRetSuss = dr.Item("ComproSuss")
-                        txtRetIB.Text = _NormalizarNumero(dr.Item("RetOtra"))
-                        _RetIB1 = _NormalizarNumero(dr.Item("RetIb1"))
-                        _CompIB1 = dr.Item("NroRetIb1")
-                        _RetIB2 = _NormalizarNumero(dr.Item("RetIb2"))
-                        _CompIB2 = dr.Item("NroRetIb2")
-                        _RetIB3 = _NormalizarNumero(dr.Item("RetIb3"))
-                        _CompIB3 = dr.Item("NroRetIb3")
-                        _RetIB4 = _NormalizarNumero(dr.Item("RetIb4"))
-                        _CompIB4 = dr.Item("NroRetIb4")
-                        _RetIB5 = _NormalizarNumero(dr.Item("RetIb5"))
-                        _CompIB5 = dr.Item("NroRetIb5")
-                        _RetIB6 = _NormalizarNumero(dr.Item("RetIb6"))
-                        _CompIB6 = dr.Item("NroRetIb6")
-                        _RetIB7 = _NormalizarNumero(dr.Item("RetIb7"))
-                        _CompIB7 = dr.Item("NroRetIb7")
-                        _RetIB8 = _NormalizarNumero(dr.Item("RetIb8"))
-                        _CompIB8 = dr.Item("NroRetIb8")
-                        txtTotal.Text = _NormalizarNumero(dr.Item("Importe"))
+                        txtRetGanancias.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetGanancias")), "", dr.Item("RetGanancias")))
+                        _ComprobanteRetGanancias = IIf(IsDBNull(dr.Item("ComproGanan")), "", dr.Item("ComproGanan"))
+                        txtRetIva.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIva")), "", dr.Item("RetIva")))
+                        _ComprobanteRetIva = IIf(IsDBNull(dr.Item("ComproIva")), "", dr.Item("ComproIva"))
+                        txtRetSuss.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetSuss")), "", dr.Item("RetSuss")))
+                        _ComprobanteRetSuss = IIf(IsDBNull(dr.Item("ComproSuss")), "", dr.Item("ComproSuss"))
+                        txtRetIB.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetOtra")), "", dr.Item("RetOtra")))
+                        _RetIB1 = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIb1")), "", dr.Item("RetIb1")))
+                        _CompIB1 = IIf(IsDBNull(dr.Item("NroRetIb1")), "", dr.Item("NroRetIb1"))
+                        _RetIB2 = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIb2")), "", dr.Item("RetIb2")))
+                        _CompIB2 = IIf(IsDBNull(dr.Item("NroRetIb2")), "", dr.Item("NroRetIb2"))
+                        _RetIB3 = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIb3")), "", dr.Item("RetIb3")))
+                        _CompIB3 = IIf(IsDBNull(dr.Item("NroRetIb3")), "", dr.Item("NroRetIb3"))
+                        _RetIB4 = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIb4")), "", dr.Item("RetIb4")))
+                        _CompIB4 = IIf(IsDBNull(dr.Item("NroRetIb4")), "", dr.Item("NroRetIb4"))
+                        _RetIB5 = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIb5")), "", dr.Item("RetIb5")))
+                        _CompIB5 = IIf(IsDBNull(dr.Item("NroRetIb5")), "", dr.Item("NroRetIb5"))
+                        _RetIB6 = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIb6")), "", dr.Item("RetIb6")))
+                        _CompIB6 = IIf(IsDBNull(dr.Item("NroRetIb6")), "", dr.Item("NroRetIb6"))
+                        _RetIB7 = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIb7")), "", dr.Item("RetIb7")))
+                        _CompIB7 = IIf(IsDBNull(dr.Item("NroRetIb7")), "", dr.Item("NroRetIb7"))
+                        _RetIB8 = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIb8")), "", dr.Item("RetIb8")))
+                        _CompIB8 = IIf(IsDBNull(dr.Item("NroRetIb8")), "", dr.Item("NroRetIb8"))
+                        txtTotal.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("Importe")), "", dr.Item("Importe")))
                     End If
 
                     Dim _FormaPagoActual As Integer = gridRecibos.Rows.Add()
 
                     With gridRecibos.Rows(_FormaPagoActual)
-                        .Cells(0).Value = dr.Item("Tipo2")
-                        .Cells(1).Value = dr.Item("Numero2")
-                        .Cells(2).Value = dr.Item("Fecha2")
-                        .Cells(3).Value = dr.Item("banco2")
+                        .Cells(0).Value = IIf(IsDBNull(dr.Item("Tipo2")), "", dr.Item("Tipo2"))
+                        .Cells(1).Value = IIf(IsDBNull(dr.Item("Numero2")), "", dr.Item("Numero2"))
+                        .Cells(2).Value = IIf(IsDBNull(dr.Item("Fecha2")), "", dr.Item("Fecha2"))
+                        .Cells(3).Value = IIf(IsDBNull(dr.Item("banco2")), "", dr.Item("banco2"))
                         .Cells(4).Value = _NormalizarNumero(dr.Item("Importe2"))
                     End With
 
@@ -305,9 +334,13 @@ Public Class RecibosProvisorios
                 Loop
 
                 sumarValores()
+
             Else
+                Dim _r As String = txtRecibo.Text
+                btnLimpiar.PerformClick()
                 txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
-                txtFecha.Focus()
+                txtRecibo.Text = _r
+                txtRecibo.Focus()
             End If
 
         Catch ex As Exception
@@ -429,27 +462,38 @@ Public Class RecibosProvisorios
                 _tipoRec = 3
             End If
 
-            DAORecibo.eliminarReciboProvisorio(txtRecibo.Text)
+            Try
+                DAORecibo.eliminarReciboProvisorio(txtRecibo.Text)
 
-            DAORecibo.agregarReciboProvisorio(txtRecibo.Text, txtFecha.Text, DAOCliente.buscarClientePorCodigo(txtCliente.Text), _
-                _tipoRec, Val(_NormalizarNumero(txtRetGanancias.Text)), Val(_NormalizarNumero(txtRetIB.Text)), _
-                Val(_NormalizarNumero(txtRetIva.Text)), Val(_NormalizarNumero(txtRetSuss.Text)), _
-                0, Val(_NormalizarNumero(txtTotal.Text)), crearFormasPago(), _ComprobanteRetGanancias, _
-                _ComprobanteRetIva, _ComprobanteRetSuss, Val(_NormalizarNumero(_RetIB1)), Val(_NormalizarNumero(_CompIB1)), _
-                Val(_NormalizarNumero(_RetIB2)), Val(_NormalizarNumero(_CompIB2)), Val(_NormalizarNumero(_RetIB3)), _
-                Val(_NormalizarNumero(_CompIB3)), Val(_NormalizarNumero(_RetIB4)), Val(_NormalizarNumero(_CompIB4)), _
-                Val(_NormalizarNumero(_RetIB5)), Val(_NormalizarNumero(_CompIB5)), Val(_NormalizarNumero(_RetIB6)), _
-                Val(_NormalizarNumero(_CompIB6)), Val(_NormalizarNumero(_RetIB7)), Val(_NormalizarNumero(_CompIB7)), Val(_NormalizarNumero(_RetIB8)), Val(_NormalizarNumero(_CompIB8)), _ClavesCheques)
+                DAORecibo.agregarReciboProvisorio(txtRecibo.Text, txtFecha.Text, DAOCliente.buscarClientePorCodigo(txtCliente.Text), _
+                    _tipoRec, Val(_NormalizarNumero(txtRetGanancias.Text)), Val(_NormalizarNumero(txtRetIB.Text)), _
+                    Val(_NormalizarNumero(txtRetIva.Text)), Val(_NormalizarNumero(txtRetSuss.Text)), _
+                    0, Val(_NormalizarNumero(txtTotal.Text)), crearFormasPago(), _Left(_ComprobanteRetGanancias, 10), _
+                    _Left(_ComprobanteRetIva, 10), _Left(_ComprobanteRetSuss, 10), Val(_NormalizarNumero(_RetIB1)), Val(_NormalizarNumero(_CompIB1)), _
+                    Val(_NormalizarNumero(_RetIB2)), Val(_NormalizarNumero(_CompIB2)), Val(_NormalizarNumero(_RetIB3)), _
+                    Val(_NormalizarNumero(_CompIB3)), Val(_NormalizarNumero(_RetIB4)), Val(_NormalizarNumero(_CompIB4)), _
+                    Val(_NormalizarNumero(_RetIB5)), Val(_NormalizarNumero(_CompIB5)), Val(_NormalizarNumero(_RetIB6)), _
+                    Val(_NormalizarNumero(_CompIB6)), Val(_NormalizarNumero(_RetIB7)), Val(_NormalizarNumero(_CompIB7)), Val(_NormalizarNumero(_RetIB8)), Val(_NormalizarNumero(_CompIB8)), _ClavesCheques)
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                Exit Sub
+            End Try
 
+            MsgBox("Recibo provisorio guardado con exito!", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
+
         End If
     End Sub
+
+    Private Function _Left(ByVal texto As String, ByVal largo As Integer) As String
+        Return Mid(texto, 1, largo)
+    End Function
 
     Private Function crearFormasPago() As List(Of FormaPago)
         Dim formasPago As New List(Of FormaPago)
         For Each row As DataGridViewRow In gridRecibos.Rows
             If Not row.IsNewRow Then
-                formasPago.Add(New FormaPago(row.Cells(0).Value, 0, asString(row.Cells(1).Value), asString(row.Cells(2).Value), asString(row.Cells(3).Value), CustomConvert.toDoubleOrZero(row.Cells(4).Value)))
+                formasPago.Add(New FormaPago(_Left(row.Cells(0).Value, 2), 0, asString(row.Cells(1).Value), asString(row.Cells(2).Value), _Left(asString(row.Cells(3).Value), 20), CustomConvert.toDoubleOrZero(row.Cells(4).Value)))
             End If
         Next
         Return formasPago
@@ -478,7 +522,7 @@ Public Class RecibosProvisorios
                 .Focus()
             End With
         ElseIf e.KeyData = Keys.Escape Then
-            txtTotal.Text = 0
+            txtTotal.Text = "0.00"
         End If
     End Sub
 
@@ -521,7 +565,7 @@ Public Class RecibosProvisorios
 
             _SaltarA(txtRetIB)
         ElseIf e.KeyData = Keys.Escape Then
-            txtRetGanancias.Text = 0
+            txtRetGanancias.Text = "0.00"
         End If
     End Sub
 
@@ -532,7 +576,7 @@ Public Class RecibosProvisorios
 
             _SaltarA(txtRetIva)
         ElseIf e.KeyData = Keys.Escape Then
-            txtRetIB.Text = 0
+            txtRetIB.Text = "0.00"
             _RetIB1 = ""
             _CompIB1 = ""
             _RetIB2 = ""
@@ -561,7 +605,7 @@ Public Class RecibosProvisorios
 
             _SaltarA(txtParidad)
         ElseIf e.KeyData = Keys.Escape Then
-            txtRetSuss.Text = 0
+            txtRetSuss.Text = "0.00"
         End If
     End Sub
 
@@ -571,7 +615,7 @@ Public Class RecibosProvisorios
             _SaltarA(txtTotal)
 
         ElseIf e.KeyData = Keys.Escape Then
-            txtParidad.Text = 0
+            txtParidad.Text = "0.00"
         End If
     End Sub
 
@@ -696,14 +740,14 @@ Public Class RecibosProvisorios
     Private Sub _RecalcularRetIB()
         Dim totalIB As Double = 0
 
-        totalIB += Val(_RetIB1)
-        totalIB += Val(_RetIB2)
-        totalIB += Val(_RetIB3)
-        totalIB += Val(_RetIB4)
-        totalIB += Val(_RetIB5)
-        totalIB += Val(_RetIB6)
-        totalIB += Val(_RetIB7)
-        totalIB += Val(_RetIB8)
+        totalIB += Val(Proceso.formatonumerico(_RetIB1))
+        totalIB += Val(Proceso.formatonumerico(_RetIB2))
+        totalIB += Val(Proceso.formatonumerico(_RetIB3))
+        totalIB += Val(Proceso.formatonumerico(_RetIB4))
+        totalIB += Val(Proceso.formatonumerico(_RetIB5))
+        totalIB += Val(Proceso.formatonumerico(_RetIB6))
+        totalIB += Val(Proceso.formatonumerico(_RetIB7))
+        totalIB += Val(Proceso.formatonumerico(_RetIB8))
 
         txtRetIB.Text = totalIB
     End Sub
@@ -711,7 +755,7 @@ Public Class RecibosProvisorios
     Private Sub txtRetGanancias_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetGanancias.Leave
 
         If txtRetGanancias.Text = "" Then
-            txtRetGanancias.Text = 0
+            txtRetGanancias.Text = "0.00"
         End If
 
         sumarValores()
@@ -719,7 +763,7 @@ Public Class RecibosProvisorios
 
     Private Sub txtRetIB_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB.Leave
         If txtRetIB.Text = "" Then
-            txtRetIB.Text = 0
+            txtRetIB.Text = "0.00"
         End If
 
         sumarValores()
@@ -727,7 +771,7 @@ Public Class RecibosProvisorios
 
     Private Sub txtRetIva_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIva.Leave
         If txtRetIva.Text = "" Then
-            txtRetIva.Text = 0
+            txtRetIva.Text = "0.00"
         End If
 
         sumarValores()
@@ -735,8 +779,18 @@ Public Class RecibosProvisorios
 
     Private Sub txtRetSuss_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetSuss.Leave
         If txtRetSuss.Text = "" Then
-            txtRetSuss.Text = 0
+            txtRetSuss.Text = "0.00"
         End If
+
+        sumarValores()
+    End Sub
+
+    Private Sub NormalizarMontos(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetSuss.Leave, txtParidad.Leave, txtRetGanancias.Leave, txtRetIB.Leave, txtRetIva.Leave
+        txtRetSuss.Text = Proceso.formatonumerico(txtRetSuss.Text)
+        txtParidad.Text = Proceso.formatonumerico(txtParidad.Text)
+        txtRetGanancias.Text = Proceso.formatonumerico(txtRetGanancias.Text)
+        txtRetIB.Text = Proceso.formatonumerico(txtRetIB.Text)
+        txtRetIva.Text = Proceso.formatonumerico(txtRetIva.Text)
 
         sumarValores()
     End Sub
@@ -798,6 +852,21 @@ Public Class RecibosProvisorios
                                 gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 1)
                             Else
                                 gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 1)
+
+                                Dim _location As Point = gridRecibos.GetCellDisplayRectangle(2, iRow, False).Location
+                                'Dim _size As Size = .GetCellDisplayRectangle(6, iRow, False).Size
+
+                                'txtFechaAux.Size = _size
+                                '.CurrentCell.Style.BackColor = Color.White
+                                gridRecibos.ClearSelection()
+                                _location.Y += YMARGEN '183 '(4 + 180)
+                                _location.X += XMargen '(7 + 10)
+                                txtFechaAux.Location = _location
+                                txtFechaAux.Text = gridRecibos.Rows(iRow).Cells(2).Value
+                                WRow = iRow
+                                Wcol = iCol
+                                txtFechaAux.Visible = True
+                                txtFechaAux.Focus()
                             End If
 
                         End If
@@ -1181,4 +1250,160 @@ Public Class RecibosProvisorios
     Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
         btnConsulta.PerformClick()
     End Sub
+
+    Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
+
+            If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
+
+                If _ChequeVencido(Trim(txtFechaAux.Text)) Then
+                    MsgBox("La fecha del cheque introducida es inválida", MsgBoxStyle.Critical)
+                    'gridRecibos.CurrentCell = gridRecibos.Rows(WRow).Cells(Wcol)
+                    Exit Sub
+                End If
+
+                gridRecibos.Rows(WRow).Cells(2).Value = txtFechaAux.Text
+
+                gridRecibos.CurrentCell = gridRecibos.Rows(WRow).Cells(3)
+                gridRecibos.Focus()
+
+                txtFechaAux.Visible = False
+                txtFechaAux.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaAux.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+
+        If MsgBox("¿Desea eliminar el siguiente Recibo Provisorio?", MsgBoxStyle.YesNo) = DialogResult.No Then
+            txtRecibo.Focus()
+            Exit Sub
+        End If
+
+        ' Comprobamos que todos los cheques se encuentren en estado pendiente (Estado2 = "P")
+        If Not _TodosLosChequesPendientes() Then
+            MsgBox("Alguno de los cheques del Recibo Provisorio ya fue procesado.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        ' Verificamos que no se lo haya asignado a algun Recibo Definitivo.
+        If _ReciboProvisorioYaAsignado() Then
+            MsgBox("El recibo provisorio actual ya se encuentra asociado a un Recibo Definitivo.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        ' Eliminamos el Recibo Provisorio.
+        Try
+            _EliminarReciboProvisorio(txtRecibo.Text)
+            MsgBox("El Recibo Provisorio se ha eliminado correctamente.", MsgBoxStyle.Information)
+            btnLimpiar.PerformClick()
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Information)
+            Exit Sub
+        End Try
+
+    End Sub
+
+    Private Sub _EliminarReciboProvisorio(ByVal recibo As String)
+        recibo = Trim(recibo)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM RecibosProvi WHERE Recibo = '" & recibo & "'")
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("No se pudo eliminar el Recibo Provisorio solicitado.")
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Function _ReciboProvisorioYaAsignado() As Boolean
+        Dim asignado As Boolean = False
+        Dim definitivo As String = ""
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT ReciboDefinitivo FROM RecibosProvi WHERE Recibo = '" & Trim(txtRecibo.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+                definitivo = IIf(IsDBNull(dr.Item("ReciboDefinitivo")), 0, dr.Item("ReciboDefinitivo"))
+
+                If Val(definitivo) <> 0 Then
+                    asignado = True
+                End If
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return asignado
+    End Function
+
+    Private Function _TodosLosChequesPendientes() As Boolean
+        Dim _TodosPendientes As Boolean = True
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" & Trim(txtRecibo.Text) & "' AND (Tipo2 = '02' OR Tipo2 = '2') AND Estado2 <> 'P'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                _TodosPendientes = False
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return _TodosPendientes
+    End Function
 End Class

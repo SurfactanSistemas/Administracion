@@ -63,10 +63,11 @@ Partial Class InformacionRetenciones
         'txtInfo
         '
         Me.txtInfo.Location = New System.Drawing.Point(142, 37)
-        Me.txtInfo.MaxLength = 11
+        Me.txtInfo.MaxLength = 10
         Me.txtInfo.Name = "txtInfo"
         Me.txtInfo.Size = New System.Drawing.Size(243, 20)
         Me.txtInfo.TabIndex = 0
+        Me.txtInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button1
         '
