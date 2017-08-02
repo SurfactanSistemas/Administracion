@@ -22,26 +22,12 @@ Public Class RecibosProvisorios
         btnLimpiar.PerformClick()
     End Sub
 
-    Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSeleccion.Click
+    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
         queryController = lstSeleccion.SelectedItem
-        lstSeleccion.Visible = False
         lstConsulta.Visible = True
-        txtConsulta.Visible = queryController.usesQueryText
-        If txtConsulta.Visible Then
-            lstConsulta.Height = 108
-            lstConsulta.Top = 38
-        Else
-            lstConsulta.Height = lstSeleccion.Height
-            lstConsulta.Top = lstSeleccion.Top
-        End If
+        txtConsulta.Visible = True
         lstConsulta.DataSource = queryController.query.Invoke("")
         txtConsulta.Focus()
-    End Sub
-
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
-        lstConsulta.Visible = False
-        txtConsulta.Visible = False
-        lstSeleccion.Visible = True
     End Sub
 
     Private Sub txtConsulta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtConsulta.KeyDown
@@ -77,7 +63,7 @@ Public Class RecibosProvisorios
         txtConsulta.Visible = False
         lstConsulta.Visible = False
         txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
-        txtFecha.Focus()
+        txtRecibo.Focus()
     End Sub
 
     Private Sub eventoSegunTipoEnFormaDePagoPara(ByVal val As Integer, ByVal rowIndex As Integer, ByVal columnIndex As Integer)
@@ -1114,6 +1100,10 @@ Public Class RecibosProvisorios
     End Function
 
     Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
-        e.Cancel = Proceso._ValidarFecha(txtFecha.Text, e.IsValidInput)
+        e.Cancel = Not Proceso._ValidarFecha(txtFecha.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub RecibosProvisorios_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtRecibo.Focus()
     End Sub
 End Class

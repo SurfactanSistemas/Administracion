@@ -633,4 +633,12 @@ Public Class ListadoMovimientosBancos
     Private Sub ListadoMovimientosBancos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtDesdeFecha.Focus()
     End Sub
+
+    Private Sub txtDesdeFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtDesdeFecha.TypeValidationCompleted
+        e.Cancel = Not Proceso._ValidarFecha(txtDesdeFecha.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub txthastafecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txthastafecha.TypeValidationCompleted
+        e.Cancel = Not Proceso._ValidarFecha(txthastafecha.Text, e.IsValidInput)
+    End Sub
 End Class

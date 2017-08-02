@@ -156,7 +156,7 @@ Partial Class ListadoMovimientosBancos
         Me.opcImpesora.AutoSize = True
         Me.opcImpesora.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.opcImpesora.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcImpesora.Location = New System.Drawing.Point(256, 89)
+        Me.opcImpesora.Location = New System.Drawing.Point(253, 89)
         Me.opcImpesora.Name = "opcImpesora"
         Me.opcImpesora.Size = New System.Drawing.Size(89, 22)
         Me.opcImpesora.TabIndex = 55
@@ -169,7 +169,7 @@ Partial Class ListadoMovimientosBancos
         Me.opcPantalla.AutoSize = True
         Me.opcPantalla.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.opcPantalla.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcPantalla.Location = New System.Drawing.Point(122, 89)
+        Me.opcPantalla.Location = New System.Drawing.Point(119, 89)
         Me.opcPantalla.Name = "opcPantalla"
         Me.opcPantalla.Size = New System.Drawing.Size(76, 22)
         Me.opcPantalla.TabIndex = 54
