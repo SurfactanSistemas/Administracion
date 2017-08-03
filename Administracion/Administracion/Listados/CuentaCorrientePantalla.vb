@@ -172,8 +172,9 @@ Public Class CuentaCorrientePantalla
         ' Reseteamos resumen de montos automático.
         gbSaldoCtaCliente.Visible = False
         GroupBox1.Visible = False
-        btnCancela.Location = New Point(402, 541)
-        btnConsulta.Location = New Point(282, 541)
+        btnCancela.Location = New Point(342, 541)
+        btnConsulta.Location = New Point(213, 541)
+        btnLimpiar.Location = New Point(471, 541)
 
 
         'lstFiltrada.Visible = False
@@ -576,9 +577,10 @@ Public Class CuentaCorrientePantalla
         lblTotalPagos.Text = "$ " & _WTotalPagos
 
         ' Animamos los botones para dar lugar al panel con la información de los totales.
-        For i = btnCancela.Location.X To 230 Step -1
-            btnCancela.Location = New Point(i, 541)
-            btnConsulta.Location = New Point(i - 120, 541)
+        For i = btnCancela.Location.X To 280 Step -1
+            btnConsulta.Location = New Point(i - 258, 541)
+            btnCancela.Location = New Point(i - 129, 541)
+            btnLimpiar.Location = New Point(i, 541)
             Threading.Thread.Sleep(0.8)
         Next
 
@@ -586,5 +588,21 @@ Public Class CuentaCorrientePantalla
         GroupBox1.Visible = True
         GroupBox1.Text = "Montos detallados por periodo: " & Proceso.DesOrdenaFecha(comienzo) & " al " & Proceso.DesOrdenaFecha(final)
 
+    End Sub
+
+    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+        txtProveedor.Text = ""
+        txtRazon.Text = ""
+        txtSaldo.Text = "0.00"
+        opcCompleto.Checked = True
+        CBProveedorSelectivo.Checked = False
+        gbSaldoCtaCliente.Visible = False
+
+        GroupBox1.Visible = False
+        btnCancela.Location = New Point(342, 541)
+        btnConsulta.Location = New Point(213, 541)
+        btnLimpiar.Location = New Point(471, 541)
+
+        txtProveedor.Focus()
     End Sub
 End Class
