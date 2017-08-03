@@ -457,14 +457,14 @@ Public Class RecibosProvisorios
                 DAORecibo.eliminarReciboProvisorio(txtRecibo.Text)
 
                 DAORecibo.agregarReciboProvisorio(txtRecibo.Text, txtFecha.Text, DAOCliente.buscarClientePorCodigo(txtCliente.Text), _
-                    _tipoRec, Val(_NormalizarNumero(txtRetGanancias.Text)), Val(_NormalizarNumero(txtRetIB.Text)), _
-                    Val(_NormalizarNumero(txtRetIva.Text)), Val(_NormalizarNumero(txtRetSuss.Text)), _
-                    0, Val(_NormalizarNumero(txtTotal.Text)), crearFormasPago(), _Left(_ComprobanteRetGanancias, 10), _
-                    _Left(_ComprobanteRetIva, 10), _Left(_ComprobanteRetSuss, 10), Val(_NormalizarNumero(_RetIB1)), Val(_NormalizarNumero(_CompIB1)), _
-                    Val(_NormalizarNumero(_RetIB2)), Val(_NormalizarNumero(_CompIB2)), Val(_NormalizarNumero(_RetIB3)), _
-                    Val(_NormalizarNumero(_CompIB3)), Val(_NormalizarNumero(_RetIB4)), Val(_NormalizarNumero(_CompIB4)), _
-                    Val(_NormalizarNumero(_RetIB5)), Val(_NormalizarNumero(_CompIB5)), Val(_NormalizarNumero(_RetIB6)), _
-                    Val(_NormalizarNumero(_CompIB6)), Val(_NormalizarNumero(_RetIB7)), Val(_NormalizarNumero(_CompIB7)), Val(_NormalizarNumero(_RetIB8)), Val(_NormalizarNumero(_CompIB8)), _ClavesCheques)
+                    _tipoRec, (_NormalizarNumero(txtRetGanancias.Text)), (_NormalizarNumero(txtRetIB.Text)), _
+                    (_NormalizarNumero(txtRetIva.Text)), (_NormalizarNumero(txtRetSuss.Text)), _
+                    0, (_NormalizarNumero(txtTotal.Text)), crearFormasPago(), _Left(_ComprobanteRetGanancias, 10), _
+                    _Left(_ComprobanteRetIva, 10), _Left(_ComprobanteRetSuss, 10), (_NormalizarNumero(_RetIB1)), (_NormalizarNumero(_CompIB1)), _
+                    (_NormalizarNumero(_RetIB2)), (_NormalizarNumero(_CompIB2)), (_NormalizarNumero(_RetIB3)), _
+                    (_NormalizarNumero(_CompIB3)), (_NormalizarNumero(_RetIB4)), (_NormalizarNumero(_CompIB4)), _
+                    (_NormalizarNumero(_RetIB5)), (_NormalizarNumero(_CompIB5)), (_NormalizarNumero(_RetIB6)), _
+                    (_NormalizarNumero(_CompIB6)), (_NormalizarNumero(_RetIB7)), (_NormalizarNumero(_CompIB7)), (_NormalizarNumero(_RetIB8)), (_NormalizarNumero(_CompIB8)), _ClavesCheques)
             Catch ex As Exception
                 MsgBox(ex.Message)
                 Exit Sub
@@ -484,7 +484,7 @@ Public Class RecibosProvisorios
         Dim formasPago As New List(Of FormaPago)
         For Each row As DataGridViewRow In gridRecibos.Rows
             If Not row.IsNewRow Then
-                formasPago.Add(New FormaPago(_Left(row.Cells(0).Value, 2), 0, asString(row.Cells(1).Value), asString(row.Cells(2).Value), _Left(asString(row.Cells(3).Value), 20), CustomConvert.toDoubleOrZero(row.Cells(4).Value)))
+                formasPago.Add(New FormaPago(_Left(row.Cells(0).Value, 2), 0, asString(row.Cells(1).Value), asString(row.Cells(2).Value), _Left(asString(row.Cells(3).Value), 20), _NormalizarNumero(row.Cells(4).Value)))
             End If
         Next
         Return formasPago

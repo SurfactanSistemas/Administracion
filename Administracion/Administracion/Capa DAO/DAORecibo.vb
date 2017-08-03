@@ -49,11 +49,11 @@ Public Class DAORecibo
         SQLConnector.executeProcedure("actualizar_recibo_provisorio", codProvisorio, codRecibo)
     End Sub
 
-    Public Shared Sub agregarReciboProvisorio(ByVal id As String, ByVal fecha2 As String, ByVal cli As Cliente, ByVal tipoRec As Integer, ByVal ganancias As Double, ByVal IB As Double, ByVal IVA As Double,
-                   ByVal Suss As Double, ByVal valorParidad As Double, ByVal valorTotal As Double, ByVal FormasDePago As List(Of FormaPago), ByVal CompGanancias As String, ByVal CompIva As String,
-                   ByVal CompSuss As String, ByVal RetIB1 As Double, ByVal CompIB1 As Double, ByVal RetIB2 As Double, ByVal CompIB2 As Double, ByVal RetIB3 As Double,
-                   ByVal CompIB3 As Double, ByVal RetIB4 As Double, ByVal CompIB4 As Double, ByVal RetIB5 As Double, ByVal CompIB5 As Double, ByVal RetIB6 As Double,
-                   ByVal CompIB6 As Double, ByVal RetIB7 As Double, ByVal CompIB7 As Double, ByVal RetIB8 As Double, ByVal CompIB8 As Double, ByVal _cheques As List(Of Object))
+    Public Shared Sub agregarReciboProvisorio(ByVal id As String, ByVal fecha2 As String, ByVal cli As Cliente, ByVal tipoRec As Integer, ByVal ganancias As String, ByVal IB As String, ByVal IVA As String,
+        ByVal Suss As String, ByVal valorParidad As String, ByVal valorTotal As String, ByVal FormasDePago As List(Of FormaPago), ByVal CompGanancias As String, ByVal CompIva As String,
+        ByVal CompSuss As String, ByVal RetIB1 As String, ByVal CompIB1 As String, ByVal RetIB2 As String, ByVal CompIB2 As String, ByVal RetIB3 As String,
+        ByVal CompIB3 As String, ByVal RetIB4 As String, ByVal CompIB4 As String, ByVal RetIB5 As String, ByVal CompIB5 As String, ByVal RetIB6 As String,
+        ByVal CompIB6 As String, ByVal RetIB7 As String, ByVal CompIB7 As String, ByVal RetIB8 As String, ByVal CompIB8 As String, ByVal _cheques As List(Of Object))
 
         Dim renglon As Integer = 1
         Dim estado2 As Char = ""
@@ -101,7 +101,7 @@ Public Class DAORecibo
                 .Replace("#FECHA2#", formaPago.fecha) _
                 .Replace("#FECHAORD2#", _fechaord2) _
                 .Replace("#BANCO2#", formaPago.nombre) _
-                .Replace("#IMPORTE2#", formaPago.importe) _
+                .Replace("#IMPORTE2#", Val(formaPago.importe).ToString.Replace(",", ".")) _
                 .Replace("#ESTADO2#", estado2) _
                 .Replace("#FechaDepo#", "") _
                 .Replace("#FechaDepoOrd#", "")
