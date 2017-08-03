@@ -271,6 +271,7 @@ Public Class RecibosProvisorios
                         Dim cliente As Cliente = DAOCliente.buscarClientePorCodigo(txtCliente.Text)
                         If Not IsNothing(cliente) Then : txtNombre.Text = cliente.razon : End If
                         cliente = Nothing
+                        txtParidad.Text = IIf(IsDBNull(dr.Item("Paridad")), "0.00", dr.Item("Paridad"))
                         txtRetGanancias.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetGanancias")), "", dr.Item("RetGanancias")))
                         _ComprobanteRetGanancias = IIf(IsDBNull(dr.Item("ComproGanan")), "", dr.Item("ComproGanan"))
                         txtRetIva.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIva")), "", dr.Item("RetIva")))
