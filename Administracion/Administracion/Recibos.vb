@@ -681,9 +681,9 @@ Public Class Recibos
 
 
                     If renglon = "01" Then
-                        txtProvi.Text = dr.Item("Recibo")
-                        txtFecha.Text = dr.Item("Fecha")
-                        txtCliente.Text = dr.Item("Cliente")
+                        txtProvi.Text = IIf(IsDBNull(dr.Item("Recibo")), "", dr.Item("Recibo"))
+                        txtFecha.Text = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                        txtCliente.Text = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
                         Dim cliente As Cliente = DAOCliente.buscarClientePorCodigo(txtCliente.Text)
 
                         If Not IsNothing(cliente) Then
@@ -691,34 +691,34 @@ Public Class Recibos
                             cliente = Nothing
                         End If
 
-                        txtRetGanancias.Text = dr.Item("RetGanancias")
-                        _ComprobanteRetGanancias = dr.Item("ComproGanan")
-                        txtRetIva.Text = dr.Item("RetIva")
-                        _ComprobanteRetIva = dr.Item("ComproIva")
-                        txtRetSuss.Text = dr.Item("RetSuss")
-                        _ComprobanteRetSuss = dr.Item("ComproSuss")
-                        txtRetIB.Text = -_NormalizarNumero(dr.Item("RetOtra"))
-                        'txtParidad.Text = IIf(IsDBNull(dr.Item("Paridad")), "", dr.Item("Paridad"))
-                        _RetIB1 = dr.Item("RetIb1")
-                        _CompIB1 = dr.Item("NroRetIb1")
-                        _RetIB2 = dr.Item("RetIb2")
-                        _CompIB2 = dr.Item("NroRetIb2")
-                        _RetIB3 = dr.Item("RetIb3")
-                        _CompIB3 = dr.Item("NroRetIb3")
-                        _RetIB4 = dr.Item("RetIb4")
-                        _CompIB4 = dr.Item("NroRetIb4")
-                        _RetIB5 = dr.Item("RetIb5")
-                        _CompIB5 = dr.Item("NroRetIb5")
-                        _RetIB6 = dr.Item("RetIb6")
-                        _CompIB6 = dr.Item("NroRetIb6")
-                        _RetIB7 = dr.Item("RetIb7")
-                        _CompIB7 = dr.Item("NroRetIb7")
-                        _RetIB8 = dr.Item("RetIb8")
-                        _CompIB8 = dr.Item("NroRetIb8")
+                        txtRetGanancias.Text = IIf(IsDBNull(dr.Item("RetGanancias")), "0", dr.Item("RetGanancias"))
+                        _ComprobanteRetGanancias = IIf(IsDBNull(dr.Item("ComproGanan")), "", dr.Item("ComproGanan"))
+                        txtRetIva.Text = IIf(IsDBNull(dr.Item("RetIva")), "0", dr.Item("RetIva"))
+                        _ComprobanteRetIva = IIf(IsDBNull(dr.Item("ComproIva")), "", dr.Item("ComproIva"))
+                        txtRetSuss.Text = IIf(IsDBNull(dr.Item("RetSuss")), "0", dr.Item("RetSuss"))
+                        _ComprobanteRetSuss = IIf(IsDBNull(dr.Item("ComproSuss")), "", dr.Item("ComproSuss"))
+                        txtRetIB.Text = -_NormalizarNumero(IIf(IsDBNull(dr.Item("RetOtra")), "0", dr.Item("RetOtra")))
+                        'txtParidad.Text = IIf(IsDBNull(dr.Item("Paridad")), "0", dr.Item("Paridad"))
+                        _RetIB1 = IIf(IsDBNull(dr.Item("RetIb1")), "0", dr.Item("RetIb1"))
+                        _CompIB1 = IIf(IsDBNull(dr.Item("NroRetIb1")), "", dr.Item("NroRetIb1"))
+                        _RetIB2 = IIf(IsDBNull(dr.Item("RetIb2")), "0", dr.Item("RetIb2"))
+                        _CompIB2 = IIf(IsDBNull(dr.Item("NroRetIb2")), "", dr.Item("NroRetIb2"))
+                        _RetIB3 = IIf(IsDBNull(dr.Item("RetIb3")), "0", dr.Item("RetIb3"))
+                        _CompIB3 = IIf(IsDBNull(dr.Item("NroRetIb3")), "", dr.Item("NroRetIb3"))
+                        _RetIB4 = IIf(IsDBNull(dr.Item("RetIb4")), "0", dr.Item("RetIb4"))
+                        _CompIB4 = IIf(IsDBNull(dr.Item("NroRetIb4")), "", dr.Item("NroRetIb4"))
+                        _RetIB5 = IIf(IsDBNull(dr.Item("RetIb5")), "0", dr.Item("RetIb5"))
+                        _CompIB5 = IIf(IsDBNull(dr.Item("NroRetIb5")), "", dr.Item("NroRetIb5"))
+                        _RetIB6 = IIf(IsDBNull(dr.Item("RetIb6")), "0", dr.Item("RetIb6"))
+                        _CompIB6 = IIf(IsDBNull(dr.Item("NroRetIb6")), "", dr.Item("NroRetIb6"))
+                        _RetIB7 = IIf(IsDBNull(dr.Item("RetIb7")), "0", dr.Item("RetIb7"))
+                        _CompIB7 = IIf(IsDBNull(dr.Item("NroRetIb7")), "", dr.Item("NroRetIb7"))
+                        _RetIB8 = IIf(IsDBNull(dr.Item("RetIb8")), "0", dr.Item("RetIb8"))
+                        _CompIB8 = IIf(IsDBNull(dr.Item("NroRetIb8")), "", dr.Item("NroRetIb8"))
 
-                        If Val(dr.Item("TipoRec")) = 1 Then
+                        If Val(IIf(IsDBNull(dr.Item("TipoRec")), "0", dr.Item("TipoRec"))) = 1 Then
                             optCtaCte.Checked = True
-                        ElseIf Val(dr.Item("TipoRec")) = 2 Then
+                        ElseIf Val(IIf(IsDBNull(dr.Item("TipoRec")), "0", dr.Item("TipoRec"))) = 2 Then
                             optAnticipos.Checked = True
                         End If
 
@@ -727,26 +727,35 @@ Public Class Recibos
                     Dim _FormaPagoActual As Integer = gridFormasPago.Rows.Add()
 
                     With gridFormasPago.Rows(_FormaPagoActual)
-                        .Cells(0).Value = dr.Item("Tipo2")
-                        .Cells(1).Value = dr.Item("Numero2")
-                        .Cells(2).Value = dr.Item("Fecha2")
-                        .Cells(3).Value = dr.Item("banco2")
-                        .Cells(4).Value = _NormalizarNumero(Str$(dr.Item("Importe2")))
+                        .Cells(0).Value = IIf(IsDBNull(dr.Item("Tipo2")), "", dr.Item("Tipo2"))
+                        .Cells(1).Value = IIf(IsDBNull(dr.Item("Numero2")), "", dr.Item("Numero2"))
+                        .Cells(2).Value = IIf(IsDBNull(dr.Item("Fecha2")), "", dr.Item("Fecha2"))
+                        .Cells(3).Value = IIf(IsDBNull(dr.Item("banco2")), "", dr.Item("banco2"))
+                        .Cells(4).Value = _NormalizarNumero(Str$(IIf(IsDBNull(dr.Item("Importe2")), "0", dr.Item("Importe2"))))
                     End With
 
                     If Val(dr.Item("Tipo2")) = 2 Then
                         With dr
-                            _ClavesCheques.Add({CInt(.Item("Renglon")) - 1, .Item("ClaveCheque"), .Item("BancoCheque") _
-                                               , .Item("SucursalCheque"), .Item("ChequeCheque"), .Item("CuentaCheque") _
-                                               , .Item("Cuit"), "", ""})
+                            _ClavesCheques.Add({CInt(IIf(IsDBNull(.Item("Renglon")), "", .Item("Renglon"))) - 1, _
+                                                     IIf(IsDBNull(.Item("ClaveCheque")), "", .Item("ClaveCheque")), _
+                                                     IIf(IsDBNull(.Item("BancoCheque")), "", .Item("BancoCheque")), _
+                                                     IIf(IsDBNull(.Item("SucursalCheque")), "", .Item("SucursalCheque")), _
+                                                     IIf(IsDBNull(.Item("ChequeCheque")), "", .Item("ChequeCheque")), _
+                                                     IIf(IsDBNull(.Item("CuentaCheque")), "", .Item("CuentaCheque")), _
+                                                     IIf(IsDBNull(.Item("Cuit")), "", .Item("Cuit")), _
+                                                     "", _
+                                                     "" _
+                                                })
                         End With
                     End If
 
-                    If Val(dr.Item("Tipo2")) = 4 Then
-                        With dr
-                            _CuentasContables.Add({Val(.Item("Renglon")) - 1, .Item("Cuenta")})
-                        End With
-                    End If
+                    With dr
+                        If Val(IIf(IsDBNull(.Item("Tipo2")), "0", .Item("Tipo2"))) = 4 Then
+
+                            _CuentasContables.Add({Val(IIf(IsDBNull(.Item("Renglon")), "", .Item("Renglon"))) - 1, IIf(IsDBNull(.Item("Cuenta")), "", .Item("Cuenta"))})
+
+                        End If
+                    End With
 
                 Loop
 
@@ -2902,16 +2911,19 @@ Public Class Recibos
         buscar = _ClavesCheques.FindLast(Function(c) c(0) = row)
 
         If Not IsNothing(buscar) Then
-            _cuit = buscar(6)
-            _PedirInformacion("Ingrese Cuit del Firmante", New TextBox(), _cuit)
-            'If _cuit.Length = 11 Then : Exit Sub : End If
-        Else
-            Do While Not _cuit.Length = 11
-
-                _PedirInformacion("Ingrese Cuit del Firmante", New TextBox(), _cuit)
-
-            Loop
+            _cuit = Trim(buscar(6))
+            If _cuit.Length = 11 Then : Exit Sub : End If
         End If
+
+        With SolicitarInformacionCuit
+
+            .Valor = _cuit
+
+            .ShowDialog()
+
+            _cuit = .Valor
+
+        End With
 
         _clave = ""
         _banco = ""
@@ -2926,8 +2938,8 @@ Public Class Recibos
     End Sub
 
     Private Sub _PedirCuentaContable(ByVal row As Integer)
-        Dim cuenta As String
-        Dim buscar As Object
+        Dim cuenta As String = ""
+        Dim buscar As Object = Nothing
 
         buscar = _CuentasContables.FindLast(Function(c) c(0) = row)
 
