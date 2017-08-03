@@ -245,15 +245,6 @@ Public Class RecibosProvisorios
         Close()
     End Sub
 
-    Private Sub txtRecibo_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRecibo.Leave
-
-        If Trim(txtRecibo.Text) <> "" Then
-            txtRecibo.Text = ceros(txtRecibo.Text, 6)
-            mostrarRecibo(Trim(txtRecibo.Text))
-        End If
-
-    End Sub
-
     Private Sub mostrarRecibo(ByVal recibo As String)
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + recibo + "'")
@@ -622,9 +613,11 @@ Public Class RecibosProvisorios
     Private Sub txtRecibo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRecibo.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            txtRecibo.Text = ceros(txtRecibo.Text, 6)
-            mostrarRecibo(Trim(txtRecibo.Text))
-            _SaltarA(txtFecha)
+            If Trim(txtRecibo.Text) <> "" Then
+                txtRecibo.Text = ceros(txtRecibo.Text, 6)
+                mostrarRecibo(Trim(txtRecibo.Text))
+                _SaltarA(txtFecha)
+            End If
 
         ElseIf e.KeyData = Keys.Escape Then
             txtRecibo.Text = ""
