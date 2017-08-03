@@ -420,7 +420,6 @@ Partial Class RecibosProvisorios
         Me.txtCliente.Name = "txtCliente"
         Me.txtCliente.Size = New System.Drawing.Size(87, 20)
         Me.txtCliente.TabIndex = 2
-        Me.txtCliente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtCliente, "Doble Click: Abrir Consulta de Clientes")
         Me.txtCliente.Validator = Administracion.ValidatorType.None
         '

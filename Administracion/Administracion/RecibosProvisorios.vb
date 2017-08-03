@@ -526,6 +526,8 @@ Public Class RecibosProvisorios
             End If
 
             _SaltarA(txtRetSuss)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRetIva.Text = "0.00"
         End If
 
     End Sub
@@ -643,7 +645,7 @@ Public Class RecibosProvisorios
             _SaltarA(txtCliente)
 
         ElseIf e.KeyData = Keys.Escape Then
-            txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+            txtFecha.Clear()
         End If
     End Sub
 
@@ -733,16 +735,18 @@ Public Class RecibosProvisorios
     Private Sub _RecalcularRetIB()
         Dim totalIB As Double = 0
 
-        totalIB += Val(Proceso.formatonumerico(_RetIB1))
-        totalIB += Val(Proceso.formatonumerico(_RetIB2))
-        totalIB += Val(Proceso.formatonumerico(_RetIB3))
-        totalIB += Val(Proceso.formatonumerico(_RetIB4))
-        totalIB += Val(Proceso.formatonumerico(_RetIB5))
-        totalIB += Val(Proceso.formatonumerico(_RetIB6))
-        totalIB += Val(Proceso.formatonumerico(_RetIB7))
-        totalIB += Val(Proceso.formatonumerico(_RetIB8))
+        totalIB += (Proceso.formatonumerico(_RetIB1))
+        totalIB += (Proceso.formatonumerico(_RetIB2))
+        totalIB += (Proceso.formatonumerico(_RetIB3))
+        totalIB += (Proceso.formatonumerico(_RetIB4))
+        totalIB += (Proceso.formatonumerico(_RetIB5))
+        totalIB += (Proceso.formatonumerico(_RetIB6))
+        totalIB += (Proceso.formatonumerico(_RetIB7))
+        totalIB += (Proceso.formatonumerico(_RetIB8))
 
         txtRetIB.Text = totalIB
+
+        txtRetIva.Focus()
     End Sub
 
     Private Sub txtRetGanancias_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetGanancias.Leave
@@ -1399,4 +1403,16 @@ Public Class RecibosProvisorios
 
         Return _TodosPendientes
     End Function
+
+    Private Sub txtRecibo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRecibo.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar("-")) = e.KeyChar And Not (CChar("/")) = e.KeyChar Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRetGanancias.KeyPress, txtRetIB.KeyPress, txtRetIva.KeyPress, txtRetSuss.KeyPress, txtParidad.KeyPress, txtTotal.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
+            e.Handled = True
+        End If
+    End Sub
 End Class
