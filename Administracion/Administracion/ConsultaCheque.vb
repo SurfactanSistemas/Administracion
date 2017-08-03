@@ -177,4 +177,12 @@ Public Class ConsultaCheque
     Private Sub cmbTipo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipo.SelectedIndexChanged
         ejecutar()
     End Sub
+
+    Private Sub txtCheque_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCheque.KeyDown
+
+        If e.KeyData = Keys.Escape Then
+            txtCheque.Text = ""
+        End If
+
+    End Sub
 End Class

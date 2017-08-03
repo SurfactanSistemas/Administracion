@@ -36,6 +36,7 @@ Partial Class ProveedoresABM
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.CKBProveedorInactivo = New System.Windows.Forms.CheckBox()
         Me.txtClienteAsociadoDescripcion = New System.Windows.Forms.TextBox()
         Me.txtClienteAsociado = New System.Windows.Forms.TextBox()
         Me.CustomLabel26 = New Administracion.CustomLabel()
@@ -120,7 +121,6 @@ Partial Class ProveedoresABM
         Me.btnAgregar = New System.Windows.Forms.Button()
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.txtCAI = New Administracion.CustomTextBox()
-        Me.CKBProveedorInactivo = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -354,6 +354,17 @@ Partial Class ProveedoresABM
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(817, 387)
         Me.Panel2.TabIndex = 84
+        '
+        'CKBProveedorInactivo
+        '
+        Me.CKBProveedorInactivo.AutoSize = True
+        Me.CKBProveedorInactivo.ForeColor = System.Drawing.SystemColors.Control
+        Me.CKBProveedorInactivo.Location = New System.Drawing.Point(554, 180)
+        Me.CKBProveedorInactivo.Name = "CKBProveedorInactivo"
+        Me.CKBProveedorInactivo.Size = New System.Drawing.Size(64, 17)
+        Me.CKBProveedorInactivo.TabIndex = 112
+        Me.CKBProveedorInactivo.Text = "Inactivo"
+        Me.CKBProveedorInactivo.UseVisualStyleBackColor = True
         '
         'txtClienteAsociadoDescripcion
         '
@@ -1450,7 +1461,7 @@ Partial Class ProveedoresABM
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(56, 37)
         Me.btnConsulta.TabIndex = 71
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Listado de Proveedores/Cuentas Contables")
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Proveedores/Cuentas Contables")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnEliminar
@@ -1518,17 +1529,6 @@ Partial Class ProveedoresABM
         Me.txtCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCAI.Validator = Administracion.ValidatorType.None
         Me.txtCAI.Visible = False
-        '
-        'CKBProveedorInactivo
-        '
-        Me.CKBProveedorInactivo.AutoSize = True
-        Me.CKBProveedorInactivo.ForeColor = System.Drawing.SystemColors.Control
-        Me.CKBProveedorInactivo.Location = New System.Drawing.Point(554, 180)
-        Me.CKBProveedorInactivo.Name = "CKBProveedorInactivo"
-        Me.CKBProveedorInactivo.Size = New System.Drawing.Size(64, 17)
-        Me.CKBProveedorInactivo.TabIndex = 112
-        Me.CKBProveedorInactivo.Text = "Inactivo"
-        Me.CKBProveedorInactivo.UseVisualStyleBackColor = True
         '
         'ProveedoresABM
         '

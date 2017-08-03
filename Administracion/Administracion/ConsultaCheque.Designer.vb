@@ -262,6 +262,7 @@ Partial Class ConsultaCheque
         Me.CustomButton1.Name = "CustomButton1"
         Me.CustomButton1.Size = New System.Drawing.Size(59, 60)
         Me.CustomButton1.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Limpiar Formulario")
         Me.CustomButton1.UseVisualStyleBackColor = True
         '
         'ConsultaCheque
