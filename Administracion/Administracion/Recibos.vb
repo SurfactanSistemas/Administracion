@@ -5,6 +5,10 @@ Imports CrystalDecisions.Shared
 Imports Microsoft.Office.Interop
 
 Public Class Recibos
+    ' Variables y Constantes para fecha en grilla.
+    Private WRow, Wcol As Integer
+    Private Const YMARGEN = 233
+    Private Const XMARGEN = 471
 
     ' Variables para alta de nuevo recibo
     Private _ComprobanteRetIva As String = ""
@@ -34,7 +38,7 @@ Public Class Recibos
             XImporte5, XImporte6, XImporte7, XDate, XParam, XSql, XClaveCheque, XBancoCheque, XSucursalCheque, _
             XChequeCheque, XCuentaCheque, XCuit, XClaveCuit, XNet As String
 
-    Dim iRow, WRow, renglon As Integer
+    Dim iRow, renglon As Integer
     Dim _Cheque As Object = Nothing
     Dim _CuitExistente As Boolean = False
     Dim cn As SqlConnection = New SqlConnection()
@@ -46,13 +50,17 @@ Public Class Recibos
     Dim commonEventsHandler As New CommonEventsHandler
 
     Private Sub Recibos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        WRow = -1
+        Wcol = -1
+
         commonEventsHandler.setIndexTab(Me)
         lstSeleccion.SelectedIndex = 0
         lstFiltrada.Visible = False
 
         renglon = 0
 
-        _AlinearCeldas()
+        '_AlinearCeldas()
 
         txtProvi.Focus()
 
@@ -96,21 +104,21 @@ Public Class Recibos
 
     End Sub
 
-    'Definimos las alineaciones por defecto.
-    Private Sub _AlinearCeldas()
-        With gridFormasPago
-            .Columns("Tipo").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            .Columns("numero").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-            .Columns("fecha").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-            .Columns("importe").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        End With
+    ''Definimos las alineaciones por defecto.
+    'Private Sub _AlinearCeldas()
+    '    With gridFormasPago
+    '        .Columns("Tipo").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        .Columns("numero").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+    '        .Columns("fecha").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+    '        .Columns("importe").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '    End With
 
-        With gridPagos
-            .Columns("TipoCC").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            .Columns("NumeroCC").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            .Columns("ImporteCC").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        End With
-    End Sub
+    '    With gridPagos
+    '        .Columns("TipoCC").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        .Columns("NumeroCC").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '        .Columns("ImporteCC").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+    '    End With
+    'End Sub
 
     Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSeleccion.Click
 
@@ -2594,6 +2602,29 @@ Public Class Recibos
                         End If
 
                         If iCol = 1 Or iCol = 2 Or iCol = 3 Then
+
+                            If iCol = 1 Then
+                                With gridFormasPago
+                                    .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+
+                                    Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
+                                    'Dim _size As Size = .GetCellDisplayRectangle(6, iRow, False).Size
+
+                                    'txtFechaAux.Size = _size
+                                    '.CurrentCell.Style.BackColor = Color.White
+                                    .ClearSelection()
+                                    _location.Y += YMARGEN '183 '(4 + 180)
+                                    _location.X += XMARGEN '(7 + 10)
+                                    txtFechaAux.Location = _location
+                                    txtFechaAux.Text = .Rows(iRow).Cells(2).Value
+                                End With
+                                
+                                WRow = iRow
+                                Wcol = iCol
+                                txtFechaAux.Visible = True
+                                txtFechaAux.Focus()
+                            End If
+
                             If iCol = 2 Then
                                 If _ChequeVencido(valor) Then
                                     MsgBox("La fecha del cheque introducida es inválida", MsgBoxStyle.Critical)
@@ -3323,7 +3354,7 @@ Public Class Recibos
         End Try
 
         Try
-            
+
             _to = "gferreyra@surfactan.com.ar" ' trim(WEmail)
             _bcc = _to ' CONSULTAR SI SE AGREGA ESTO O NO.
             _asunto = "Recibo Nº " & Trim(txtRecibo.Text)
@@ -4046,5 +4077,40 @@ Public Class Recibos
 
     Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
         e.Cancel = Proceso._ValidarFecha(txtFecha.Text, e.IsValidInput)
+    End Sub
+
+    Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
+
+            If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
+
+                If _ChequeVencido(Trim(txtFechaAux.Text)) Then
+                    MsgBox("La fecha del cheque introducida es inválida", MsgBoxStyle.Critical)
+                    'gridRecibos.CurrentCell = gridRecibos.Rows(WRow).Cells(Wcol)
+                    Exit Sub
+                End If
+
+
+                With gridFormasPago
+                    .Rows(WRow).Cells(2).Value = txtFechaAux.Text
+
+                    .CurrentCell = .Rows(WRow).Cells(3)
+
+                    .Focus()
+                End With
+
+                txtFechaAux.Visible = False
+                txtFechaAux.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaAux.Text = ""
+        End If
+
     End Sub
 End Class

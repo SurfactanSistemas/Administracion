@@ -23,18 +23,15 @@ Partial Class Recibos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridPagos = New System.Windows.Forms.DataGridView()
-        Me.TipoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LetraCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PuntoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumeroCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ImporteCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gridFormasPago = New System.Windows.Forms.DataGridView()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,6 +46,8 @@ Partial Class Recibos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lstSeleccion = New Administracion.CustomListBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
@@ -91,7 +90,11 @@ Partial Class Recibos
         Me.btnAgregar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.TipoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LetraCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PuntoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumeroCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImporteCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormasPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -112,48 +115,6 @@ Partial Class Recibos
         Me.gridPagos.Size = New System.Drawing.Size(405, 271)
         Me.gridPagos.TabIndex = 20
         '
-        'TipoCC
-        '
-        Me.TipoCC.FillWeight = 61.20156!
-        Me.TipoCC.HeaderText = "Tipo"
-        Me.TipoCC.Name = "TipoCC"
-        Me.TipoCC.ReadOnly = True
-        '
-        'LetraCC
-        '
-        Me.LetraCC.FillWeight = 59.29222!
-        Me.LetraCC.HeaderText = "Letra"
-        Me.LetraCC.Name = "LetraCC"
-        Me.LetraCC.ReadOnly = True
-        '
-        'PuntoCC
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.PuntoCC.DefaultCellStyle = DataGridViewCellStyle7
-        Me.PuntoCC.FillWeight = 55.11111!
-        Me.PuntoCC.HeaderText = "Punto"
-        Me.PuntoCC.Name = "PuntoCC"
-        Me.PuntoCC.ReadOnly = True
-        '
-        'NumeroCC
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NumeroCC.DefaultCellStyle = DataGridViewCellStyle8
-        Me.NumeroCC.FillWeight = 125.6672!
-        Me.NumeroCC.HeaderText = "Numero"
-        Me.NumeroCC.Name = "NumeroCC"
-        Me.NumeroCC.ReadOnly = True
-        '
-        'ImporteCC
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle9.Format = "N2"
-        DataGridViewCellStyle9.NullValue = Nothing
-        Me.ImporteCC.DefaultCellStyle = DataGridViewCellStyle9
-        Me.ImporteCC.FillWeight = 125.6672!
-        Me.ImporteCC.HeaderText = "Importe ($)"
-        Me.ImporteCC.Name = "ImporteCC"
-        '
         'gridFormasPago
         '
         Me.gridFormasPago.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -170,8 +131,8 @@ Partial Class Recibos
         'Tipo
         '
         Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle5
         Me.Tipo.FillWeight = 80.0!
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
@@ -180,8 +141,8 @@ Partial Class Recibos
         'numero
         '
         Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.numero.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.numero.DefaultCellStyle = DataGridViewCellStyle6
         Me.numero.FillWeight = 180.0!
         Me.numero.HeaderText = "Numero/Cta"
         Me.numero.Name = "numero"
@@ -190,6 +151,8 @@ Partial Class Recibos
         'fecha
         '
         Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.fecha.DefaultCellStyle = DataGridViewCellStyle7
         Me.fecha.FillWeight = 120.0!
         Me.fecha.HeaderText = "Fecha"
         Me.fecha.Name = "fecha"
@@ -204,10 +167,10 @@ Partial Class Recibos
         'importe
         '
         Me.importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle12.Format = "N2"
-        DataGridViewCellStyle12.NullValue = Nothing
-        Me.importe.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.Format = "N2"
+        DataGridViewCellStyle8.NullValue = Nothing
+        Me.importe.DefaultCellStyle = DataGridViewCellStyle8
         Me.importe.FillWeight = 80.0!
         Me.importe.HeaderText = "Importe ($)"
         Me.importe.Name = "importe"
@@ -294,6 +257,7 @@ Partial Class Recibos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.txtFechaAux)
         Me.Panel2.Controls.Add(Me.txtFecha)
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.lstSeleccion)
@@ -336,6 +300,32 @@ Partial Class Recibos
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(883, 571)
         Me.Panel2.TabIndex = 125
+        '
+        'txtFechaAux
+        '
+        Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFechaAux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtFechaAux.Location = New System.Drawing.Point(614, 254)
+        Me.txtFechaAux.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtFechaAux.Mask = "00/00/0000"
+        Me.txtFechaAux.MaximumSize = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.MinimumSize = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.Name = "txtFechaAux"
+        Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaAux.Size = New System.Drawing.Size(60, 13)
+        Me.txtFechaAux.TabIndex = 127
+        Me.txtFechaAux.ValidatingType = GetType(Date)
+        Me.txtFechaAux.Visible = False
+        '
+        'txtFecha
+        '
+        Me.txtFecha.Location = New System.Drawing.Point(305, 17)
+        Me.txtFecha.Mask = "##/##/####"
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFecha.Size = New System.Drawing.Size(70, 20)
+        Me.txtFecha.TabIndex = 126
+        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label5
         '
@@ -911,15 +901,49 @@ Partial Class Recibos
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta Clientes/Cuentas Contables")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
-        'txtFecha
+        'TipoCC
         '
-        Me.txtFecha.Location = New System.Drawing.Point(305, 17)
-        Me.txtFecha.Mask = "##/##/####"
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFecha.Size = New System.Drawing.Size(70, 20)
-        Me.txtFecha.TabIndex = 126
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TipoCC.DefaultCellStyle = DataGridViewCellStyle1
+        Me.TipoCC.FillWeight = 61.20156!
+        Me.TipoCC.HeaderText = "Tipo"
+        Me.TipoCC.Name = "TipoCC"
+        Me.TipoCC.ReadOnly = True
+        '
+        'LetraCC
+        '
+        Me.LetraCC.FillWeight = 59.29222!
+        Me.LetraCC.HeaderText = "Letra"
+        Me.LetraCC.Name = "LetraCC"
+        Me.LetraCC.ReadOnly = True
+        '
+        'PuntoCC
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.PuntoCC.DefaultCellStyle = DataGridViewCellStyle2
+        Me.PuntoCC.FillWeight = 55.11111!
+        Me.PuntoCC.HeaderText = "Punto"
+        Me.PuntoCC.Name = "PuntoCC"
+        Me.PuntoCC.ReadOnly = True
+        '
+        'NumeroCC
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NumeroCC.DefaultCellStyle = DataGridViewCellStyle3
+        Me.NumeroCC.FillWeight = 125.6672!
+        Me.NumeroCC.HeaderText = "Numero"
+        Me.NumeroCC.Name = "NumeroCC"
+        Me.NumeroCC.ReadOnly = True
+        '
+        'ImporteCC
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N2"
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.ImporteCC.DefaultCellStyle = DataGridViewCellStyle4
+        Me.ImporteCC.FillWeight = 125.6672!
+        Me.ImporteCC.HeaderText = "Importe ($)"
+        Me.ImporteCC.Name = "ImporteCC"
         '
         'Recibos
         '
@@ -1001,15 +1025,16 @@ Partial Class Recibos
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents TipoCC As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents LetraCC As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PuntoCC As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NumeroCC As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ImporteCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtFecha As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents numero As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents banco As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents txtFecha As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents TipoCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LetraCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PuntoCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NumeroCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ImporteCC As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
