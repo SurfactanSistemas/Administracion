@@ -18,6 +18,10 @@ Public Class ProveedoresABM
     Private TipoConsulta As String
     Private Const MAIN_HEIGHT = 560
     Private Const EXPANDED_HEIGHT = 720
+    Private WBColorAntRazon As Color
+    Private WColorAntRazon As Color
+    Private WBColorAntEstado As Color
+    Private WColorAntEstado As Color
 
     Private Sub ProveedoresABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Dim provincias = DAOProveedor.listarProvincias
@@ -28,11 +32,21 @@ Public Class ProveedoresABM
         cmbRubro.DisplayMember = "ToString"
         cmbRubro.ValueMember = "valueMember"
         cmbRubro.DataSource = DAORubroProveedor.buscarRubroProveedorPorDescripcion("")
+        WBColorAntRazon = txtRazonSocial.BackColor
+        WColorAntRazon = txtRazonSocial.ForeColor
+        WBColorAntEstado = cmbEstado.BackColor
+        WColorAntEstado = cmbEstado.ForeColor
+
         limpiar()
     End Sub
 
     Private Sub limpiar()
-        'Cleanner.clean(Me)
+        txtRazonSocial.BackColor = WBColorAntRazon
+        txtRazonSocial.ForeColor = WColorAntRazon 'Color.White
+
+        cmbEstado.BackColor = WBColorAntEstado
+        cmbEstado.ForeColor = WBColorAntEstado 'Color.White
+        
         setDefaults()
     End Sub
 
@@ -406,6 +420,13 @@ Public Class ProveedoresABM
         If Not proveedor.estaDefinidoCompleto Then
             proveedor = DAOProveedor.buscarProveedorPorCodigo(proveedor.id)
         End If
+
+        txtRazonSocial.BackColor = WBColorAntRazon
+        txtRazonSocial.ForeColor = WColorAntRazon 'Color.White
+
+        cmbEstado.BackColor = WBColorAntEstado
+        cmbEstado.ForeColor = WBColorAntEstado 'Color.White
+
         txtCodigo.Text = proveedor.id
         txtRazonSocial.Text = proveedor.razonSocial
         txtDireccion.Text = proveedor.direccion
@@ -458,7 +479,54 @@ Public Class ProveedoresABM
         _Contacto2 = Tuple.Create(proveedor.contacto2(0).ToString, proveedor.contacto2(1).ToString, proveedor.contacto2(2).ToString, proveedor.contacto2(3).ToString)
         _Contacto3 = Tuple.Create(proveedor.contacto3(0).ToString, proveedor.contacto3(1).ToString, proveedor.contacto3(2).ToString, proveedor.contacto3(3).ToString)
 
+        ' Buscamos si el proveedor se encuentra en estado de Embargo
+        If _ProveedorEmbargado() Then
+            txtRazonSocial.BackColor = Color.Red
+            txtRazonSocial.ForeColor = Color.White
+        End If
+
+        ' Verificas si se encuentra en estado
+        If Val(proveedor.estado) = 2 Then
+            cmbEstado.BackColor = Color.Red
+            cmbEstado.ForeColor = Color.White
+        End If
+
     End Sub
+
+    Private Function _ProveedorEmbargado() As Boolean
+        Dim embargado As Boolean = False
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Embargo FROM Proveedor WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                If UCase(IIf(IsDBNull(dr.Item("Embargo")), "", dr.Item("Embargo"))) = "S" Then
+                    embargado = True
+                End If
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return embargado
+    End Function
 
     Private Sub mostrarCuenta(ByVal cuenta As CuentaContable)
         If Not IsNothing(cuenta) Then
