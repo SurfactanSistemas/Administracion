@@ -504,15 +504,6 @@ Public Class Recibos
         Me.Close()
     End Sub
 
-    Private Sub txtRecibo_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRecibo.Leave
-
-        If Trim(txtRecibo.Text) <> "" Then
-            txtRecibo.Text = ceros(txtRecibo.Text, 6)
-            mostrarRecibo(DAORecibo.buscarRecibo(txtRecibo.Text))
-        End If
-
-    End Sub
-
     Private Sub mostrarRecibo(ByVal recibo As Recibo)
         If IsNothing(recibo) Then
             Dim temp As String = ceros(txtRecibo.Text, 6)
@@ -697,7 +688,7 @@ Public Class Recibos
                         _ComprobanteRetIva = IIf(IsDBNull(dr.Item("ComproIva")), "", dr.Item("ComproIva"))
                         txtRetSuss.Text = IIf(IsDBNull(dr.Item("RetSuss")), "0", dr.Item("RetSuss"))
                         _ComprobanteRetSuss = IIf(IsDBNull(dr.Item("ComproSuss")), "", dr.Item("ComproSuss"))
-                        txtRetIB.Text = -_NormalizarNumero(IIf(IsDBNull(dr.Item("RetOtra")), "0", dr.Item("RetOtra")))
+                        txtRetIB.Text = IIf(IsDBNull(dr.Item("RetOtra")), "0", dr.Item("RetOtra"))
                         'txtParidad.Text = IIf(IsDBNull(dr.Item("Paridad")), "0", dr.Item("Paridad"))
                         _RetIB1 = IIf(IsDBNull(dr.Item("RetIb1")), "0", dr.Item("RetIb1"))
                         _CompIB1 = IIf(IsDBNull(dr.Item("NroRetIb1")), "", dr.Item("NroRetIb1"))
@@ -2513,7 +2504,11 @@ Public Class Recibos
     Private Sub txtRecibo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRecibo.KeyDown
 
         If e.KeyData = Keys.Enter Then
+
+            txtRecibo.Text = ceros(txtRecibo.Text, 6)
+            mostrarRecibo(DAORecibo.buscarRecibo(txtRecibo.Text))
             _SaltarA(txtFecha)
+
         ElseIf e.KeyData = Keys.Escape Then
             txtRecibo.Text = "0"
         End If
