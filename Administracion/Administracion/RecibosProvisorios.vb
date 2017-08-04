@@ -271,7 +271,7 @@ Public Class RecibosProvisorios
                         Dim cliente As Cliente = DAOCliente.buscarClientePorCodigo(txtCliente.Text)
                         If Not IsNothing(cliente) Then : txtNombre.Text = cliente.razon : End If
                         cliente = Nothing
-                        txtParidad.Text = IIf(IsDBNull(dr.Item("Paridad")), "0.00", dr.Item("Paridad"))
+                        txtParidad.Text = "0.00"
                         txtRetGanancias.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetGanancias")), "", dr.Item("RetGanancias")))
                         _ComprobanteRetGanancias = IIf(IsDBNull(dr.Item("ComproGanan")), "", dr.Item("ComproGanan"))
                         txtRetIva.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIva")), "", dr.Item("RetIva")))
@@ -597,7 +597,7 @@ Public Class RecibosProvisorios
                 _PedirInformacion("Ingrese el Número de Comprobante de Retención de SUSS", txtRetSuss, _ComprobanteRetSuss)
             End If
 
-            _SaltarA(txtParidad)
+            _SaltarA(txtTotal)
         ElseIf e.KeyData = Keys.Escape Then
             txtRetSuss.Text = "0.00"
         End If
@@ -633,15 +633,8 @@ Public Class RecibosProvisorios
 
     Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
         If e.KeyData = Keys.Enter Then
-            Dim _f As String = txtFecha.Text
 
-            _Normalizarfecha(_f)
-
-            txtFecha.Text = _f
-
-            If Trim(txtFecha.Text) <> "" Then
-                _DeterminarParidad()
-            End If
+            txtFecha.Text = _Normalizarfecha(txtFecha.Text)
 
             _SaltarA(txtCliente)
 
@@ -819,7 +812,7 @@ Public Class RecibosProvisorios
                             If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
                                 eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
                             Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
-                                gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol)
+                                Return True
                             End If
                         End If
 
@@ -828,10 +821,8 @@ Public Class RecibosProvisorios
                         'Modificar el valor de la columna de ser fecha DD/MM --> DD/MM/YYYY (año actual)
                         If iCol = 2 Then
 
-                            If _Normalizarfecha(valor) Then
-                                gridRecibos.Rows(iRow).Cells(2).Value = valor
-                                gridRecibos.EndEdit()
-                            End If
+                            gridRecibos.Rows(iRow).Cells(2).Value = _Normalizarfecha(valor)
+                            gridRecibos.EndEdit()
 
                         End If
 
@@ -846,19 +837,19 @@ Public Class RecibosProvisorios
                                     gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 1)
                                 End If
                             ElseIf iCol = 3 Then
+
+                                If Trim(valor) = "" Or IsNothing(valor) Then : Return True : End If
+
                                 gridRecibos.Rows(iRow).Cells(iCol).Value = _GenerarCodigoBanco(valor)
                                 gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 1)
                             Else
                                 gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 1)
 
                                 Dim _location As Point = gridRecibos.GetCellDisplayRectangle(2, iRow, False).Location
-                                'Dim _size As Size = .GetCellDisplayRectangle(6, iRow, False).Size
-
-                                'txtFechaAux.Size = _size
-                                '.CurrentCell.Style.BackColor = Color.White
+                                
                                 gridRecibos.ClearSelection()
                                 _location.Y += YMARGEN '183 '(4 + 180)
-                                _location.X += XMargen '(7 + 10)
+                                _location.X += XMARGEN '(7 + 10)
                                 txtFechaAux.Location = _location
                                 txtFechaAux.Text = gridRecibos.Rows(iRow).Cells(2).Value
                                 WRow = iRow
@@ -870,6 +861,9 @@ Public Class RecibosProvisorios
                         End If
 
                         If iCol = 4 Then ' Avanzamos a la fila siguiente.
+
+                            If Trim(valor) = "" Or IsNothing(valor) Then : Return True : End If
+
                             If Val(gridRecibos.Rows(iRow).Cells(0).Value) = 4 Then
                                 _PedirCuentaContable(iRow)
                             ElseIf Val(gridRecibos.Rows(iRow).Cells(0).Value) = 2 Then
@@ -882,7 +876,18 @@ Public Class RecibosProvisorios
                     End If
 
                     Return True
+                Else
 
+                    With gridRecibos
+                        Select Case iCol
+                            Case 0, 1, 2, 3
+                                .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                            Case Else
+                        End Select
+                    End With
+
+                    Return True
+                    
                 End If
             ElseIf msg.WParam.ToInt32() = Keys.Escape Then
                 gridRecibos.Rows(iRow).Cells(iCol).Value = ""
@@ -1126,24 +1131,8 @@ Public Class RecibosProvisorios
 
     End Sub
 
-    Private Function _Normalizarfecha(ByRef fecha As String) As Boolean
-        Dim _FechaValida As Boolean = True
-        Dim _Fecha As String() = fecha.Split("/")
-
-        Try
-            _Fecha(0) = Val(_Fecha(0)).ToString()
-            _Fecha(1) = Val(_Fecha(1)).ToString()
-            _Fecha(2) = Val(_Fecha(2)).ToString()
-
-            fecha = String.Join("/", _Fecha)
-
-            fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
-        Catch ex As Exception
-            _FechaValida = False
-            MsgBox("El formato de la fecha ingresada no es válido.", MsgBoxStyle.Information)
-        End Try
-
-        Return _FechaValida
+    Private Function _Normalizarfecha(ByVal fecha As String) As String
+        Return Proceso._Normalizarfecha(fecha)
     End Function
 
     Private Sub _PedirCuentaContable(ByVal row As Integer)
