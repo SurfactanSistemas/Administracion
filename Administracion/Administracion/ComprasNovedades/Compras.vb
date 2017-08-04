@@ -1133,7 +1133,7 @@ Public Class Compras
                 If dias <> "" Then
                     If Val(dias) <> diasPlazo Then
 
-                        If MsgBox("¿Se detectó que el plazo indicado en la Orden de Compra (" & dias & ") difiere con el indicado en la informacioón del Proveedor (" & diasPlazo & ")" && "¿Desea recalcular la fecha de Vencimiento a partir de la información de la Orden de Compra?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+                        If MsgBox("¿Se detectó que el plazo indicado en la Orden de Compra (" & dias & ") difiere con el indicado en la informacioón del Proveedor (" & diasPlazo & ")" & vbCrLf & vbCrLf & "¿Desea recalcular la fecha de Vencimiento a partir de la información de la Orden de Compra?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
                             _RecalcularFechaDeVencimiento(dias)
                         End If
 
@@ -1156,7 +1156,7 @@ Public Class Compras
         txtFechaVto2.Text = fecha.AddDays(Val(dias)).ToString("dd/MM/yyyy")
     End Sub
 
-    Private Function _BuscarDiasOCRelacionada(ByVal remito As ) As String
+    Private Function _BuscarDiasOCRelacionada(ByVal remito As String) As String
         Dim dias As String = ""
         Dim cn As New SqlConnection()
         ' ACA  FALTA AGREGAR LA COLUMNA DE DONDE SE EXTRAERÁ EL DATO DE LOS DIAS.
