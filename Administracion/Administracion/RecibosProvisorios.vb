@@ -729,14 +729,14 @@ Public Class RecibosProvisorios
     Private Sub _RecalcularRetIB()
         Dim totalIB As Double = 0
 
-        totalIB += (Proceso.formatonumerico(_RetIB1))
-        totalIB += (Proceso.formatonumerico(_RetIB2))
-        totalIB += (Proceso.formatonumerico(_RetIB3))
-        totalIB += (Proceso.formatonumerico(_RetIB4))
-        totalIB += (Proceso.formatonumerico(_RetIB5))
-        totalIB += (Proceso.formatonumerico(_RetIB6))
-        totalIB += (Proceso.formatonumerico(_RetIB7))
-        totalIB += (Proceso.formatonumerico(_RetIB8))
+        totalIB += (Val(_RetIB1))
+        totalIB += (Val(_RetIB2))
+        totalIB += (Val(_RetIB3))
+        totalIB += (Val(_RetIB4))
+        totalIB += (Val(_RetIB5))
+        totalIB += (Val(_RetIB6))
+        totalIB += (Val(_RetIB7))
+        totalIB += (Val(_RetIB8))
 
         txtRetIB.Text = totalIB
 

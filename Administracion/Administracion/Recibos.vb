@@ -2577,21 +2577,20 @@ Public Class Recibos
 
                 If Not IsNothing(valor) Then
 
-                    If Trim(valor.ToString.Length) = 31 Then
-                        If _ProcesarCheque(iRow, valor) Then
-                            gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol + 2) ' Nos desplazamos para que coloque la fecha del cheque.
-                        End If
-                    Else
-                        valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
-                        If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
-                            eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
-                        Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
-                            gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol)
-                        End If
-                    End If
-
                     If iCol = 0 And iRow > -1 Then
 
+                        If Trim(valor.ToString.Length) = 31 Then
+                            If _ProcesarCheque(iRow, valor) Then
+                                gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol + 2) ' Nos desplazamos para que coloque la fecha del cheque.
+                            End If
+                        Else
+                            valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
+                            If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
+                                eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
+                            Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
+                                gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol)
+                            End If
+                        End If
 
                     Else
 
