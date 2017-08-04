@@ -214,6 +214,12 @@ Public Class Recibos
     End Sub
 
     Private Sub txtConsulta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtConsulta.KeyDown
+
+        If e.KeyData = Keys.Escape Then
+            txtConsulta.Text = ""
+            Exit Sub
+        End If
+
         lstFiltrada.Items.Clear()
 
         If UCase(Trim(txtConsulta.Text)) <> "" Then
@@ -4118,5 +4124,17 @@ Public Class Recibos
             txtFechaAux.Text = ""
         End If
 
+    End Sub
+
+    Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
+        lstSeleccion.SelectedIndex = 0
+
+        lstSeleccion_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub btnCtaCte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCtaCte.Click
+        lstSeleccion.SelectedIndex = 1
+
+        lstSeleccion_Click(Nothing, Nothing)
     End Sub
 End Class

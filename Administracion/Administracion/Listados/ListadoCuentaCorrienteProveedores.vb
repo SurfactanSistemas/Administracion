@@ -17,6 +17,7 @@ Public Class ListadoCuentaCorrienteProveedores
                    Handles txtDesdeProveedor.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
+            txtHastaProveedor.Text = txtDesdeProveedor.Text
             txtHastaProveedor.Focus()
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True

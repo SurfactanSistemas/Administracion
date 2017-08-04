@@ -57,9 +57,11 @@ Public Class RecibosProvisorios
             Next
 
             final.Visible = True
+            origen.Visible = False
 
         Else
 
+            origen.Visible = True
             final.Visible = False
 
         End If
@@ -306,6 +308,7 @@ Public Class RecibosProvisorios
                         .Cells(2).Value = IIf(IsDBNull(dr.Item("Fecha2")), "", dr.Item("Fecha2"))
                         .Cells(3).Value = IIf(IsDBNull(dr.Item("banco2")), "", dr.Item("banco2"))
                         .Cells(4).Value = _NormalizarNumero(dr.Item("Importe2"))
+                        .Cells(5).Value = _FormaPagoActual
                     End With
 
 
@@ -1193,6 +1196,8 @@ Public Class RecibosProvisorios
 
         _ClavesCheques.Add({row, _clave, _banco, _sucursal, _cheque, _cuenta, _cuit, _estado, _destino})
 
+        gridRecibos.Rows(row).Cells(5).Value = row
+
     End Sub
 
     Private Function _CuentaContableValida(ByRef cuenta As String)
@@ -1404,5 +1409,25 @@ Public Class RecibosProvisorios
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub gridRecibos_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridRecibos.MouseDoubleClick
+
+        If gridRecibos.SelectedRows.Count > 0 Then
+
+            If MsgBox("¿Desea eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+                Dim row As DataGridViewRow = gridRecibos.CurrentRow
+
+                _ClavesCheques.RemoveAll(Function(_c) _c(0) = row.Cells(5).Value)
+
+                gridRecibos.Rows.Remove(row)
+
+                sumarValores()
+            Else
+                gridRecibos.ClearSelection()
+            End If
+
+        End If
+
     End Sub
 End Class

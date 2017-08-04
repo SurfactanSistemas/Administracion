@@ -23,15 +23,20 @@ Partial Class Recibos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridPagos = New System.Windows.Forms.DataGridView()
+        Me.TipoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LetraCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PuntoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumeroCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImporteCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gridFormasPago = New System.Windows.Forms.DataGridView()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -90,11 +95,7 @@ Partial Class Recibos
         Me.btnAgregar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.TipoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LetraCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PuntoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumeroCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ImporteCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnCtaCte = New Administracion.CustomButton()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormasPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -115,6 +116,50 @@ Partial Class Recibos
         Me.gridPagos.Size = New System.Drawing.Size(405, 271)
         Me.gridPagos.TabIndex = 20
         '
+        'TipoCC
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TipoCC.DefaultCellStyle = DataGridViewCellStyle9
+        Me.TipoCC.FillWeight = 61.20156!
+        Me.TipoCC.HeaderText = "Tipo"
+        Me.TipoCC.Name = "TipoCC"
+        Me.TipoCC.ReadOnly = True
+        '
+        'LetraCC
+        '
+        Me.LetraCC.FillWeight = 59.29222!
+        Me.LetraCC.HeaderText = "Letra"
+        Me.LetraCC.Name = "LetraCC"
+        Me.LetraCC.ReadOnly = True
+        '
+        'PuntoCC
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.PuntoCC.DefaultCellStyle = DataGridViewCellStyle10
+        Me.PuntoCC.FillWeight = 55.11111!
+        Me.PuntoCC.HeaderText = "Punto"
+        Me.PuntoCC.Name = "PuntoCC"
+        Me.PuntoCC.ReadOnly = True
+        '
+        'NumeroCC
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NumeroCC.DefaultCellStyle = DataGridViewCellStyle11
+        Me.NumeroCC.FillWeight = 125.6672!
+        Me.NumeroCC.HeaderText = "Numero"
+        Me.NumeroCC.Name = "NumeroCC"
+        Me.NumeroCC.ReadOnly = True
+        '
+        'ImporteCC
+        '
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.Format = "N2"
+        DataGridViewCellStyle12.NullValue = Nothing
+        Me.ImporteCC.DefaultCellStyle = DataGridViewCellStyle12
+        Me.ImporteCC.FillWeight = 125.6672!
+        Me.ImporteCC.HeaderText = "Importe ($)"
+        Me.ImporteCC.Name = "ImporteCC"
+        '
         'gridFormasPago
         '
         Me.gridFormasPago.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -131,8 +176,8 @@ Partial Class Recibos
         'Tipo
         '
         Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle13
         Me.Tipo.FillWeight = 80.0!
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
@@ -141,8 +186,8 @@ Partial Class Recibos
         'numero
         '
         Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.numero.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.numero.DefaultCellStyle = DataGridViewCellStyle14
         Me.numero.FillWeight = 180.0!
         Me.numero.HeaderText = "Numero/Cta"
         Me.numero.Name = "numero"
@@ -151,8 +196,8 @@ Partial Class Recibos
         'fecha
         '
         Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.fecha.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.fecha.DefaultCellStyle = DataGridViewCellStyle15
         Me.fecha.FillWeight = 120.0!
         Me.fecha.HeaderText = "Fecha"
         Me.fecha.Name = "fecha"
@@ -167,10 +212,10 @@ Partial Class Recibos
         'importe
         '
         Me.importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N2"
-        DataGridViewCellStyle8.NullValue = Nothing
-        Me.importe.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle16.Format = "N2"
+        DataGridViewCellStyle16.NullValue = Nothing
+        Me.importe.DefaultCellStyle = DataGridViewCellStyle16
         Me.importe.FillWeight = 80.0!
         Me.importe.HeaderText = "Importe ($)"
         Me.importe.Name = "importe"
@@ -768,7 +813,7 @@ Partial Class Recibos
         Me.btnImpresion.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImpresion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImpresion.LabelAssociationKey = -1
-        Me.btnImpresion.Location = New System.Drawing.Point(518, 631)
+        Me.btnImpresion.Location = New System.Drawing.Point(464, 631)
         Me.btnImpresion.Name = "btnImpresion"
         Me.btnImpresion.Size = New System.Drawing.Size(58, 51)
         Me.btnImpresion.TabIndex = 132
@@ -789,7 +834,7 @@ Partial Class Recibos
         Me.btnDias.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnDias.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDias.LabelAssociationKey = -1
-        Me.btnDias.Location = New System.Drawing.Point(730, 631)
+        Me.btnDias.Location = New System.Drawing.Point(672, 631)
         Me.btnDias.Name = "btnDias"
         Me.btnDias.Size = New System.Drawing.Size(58, 51)
         Me.btnDias.TabIndex = 131
@@ -810,7 +855,7 @@ Partial Class Recibos
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(624, 631)
+        Me.btnLimpiar.Location = New System.Drawing.Point(568, 631)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(58, 51)
         Me.btnLimpiar.TabIndex = 130
@@ -831,7 +876,7 @@ Partial Class Recibos
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(412, 631)
+        Me.btnCerrar.Location = New System.Drawing.Point(360, 631)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(58, 51)
         Me.btnCerrar.TabIndex = 129
@@ -852,7 +897,7 @@ Partial Class Recibos
         Me.btnIntereses.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnIntereses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnIntereses.LabelAssociationKey = -1
-        Me.btnIntereses.Location = New System.Drawing.Point(200, 631)
+        Me.btnIntereses.Location = New System.Drawing.Point(152, 631)
         Me.btnIntereses.Name = "btnIntereses"
         Me.btnIntereses.Size = New System.Drawing.Size(58, 51)
         Me.btnIntereses.TabIndex = 128
@@ -873,7 +918,7 @@ Partial Class Recibos
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(94, 631)
+        Me.btnAgregar.Location = New System.Drawing.Point(48, 631)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(58, 51)
         Me.btnAgregar.TabIndex = 126
@@ -894,56 +939,33 @@ Partial Class Recibos
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(306, 631)
+        Me.btnConsulta.Location = New System.Drawing.Point(256, 631)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(58, 51)
         Me.btnConsulta.TabIndex = 127
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta Clientes/Cuentas Contables")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
-        'TipoCC
+        'btnCtaCte
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TipoCC.DefaultCellStyle = DataGridViewCellStyle1
-        Me.TipoCC.FillWeight = 61.20156!
-        Me.TipoCC.HeaderText = "Tipo"
-        Me.TipoCC.Name = "TipoCC"
-        Me.TipoCC.ReadOnly = True
-        '
-        'LetraCC
-        '
-        Me.LetraCC.FillWeight = 59.29222!
-        Me.LetraCC.HeaderText = "Letra"
-        Me.LetraCC.Name = "LetraCC"
-        Me.LetraCC.ReadOnly = True
-        '
-        'PuntoCC
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.PuntoCC.DefaultCellStyle = DataGridViewCellStyle2
-        Me.PuntoCC.FillWeight = 55.11111!
-        Me.PuntoCC.HeaderText = "Punto"
-        Me.PuntoCC.Name = "PuntoCC"
-        Me.PuntoCC.ReadOnly = True
-        '
-        'NumeroCC
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NumeroCC.DefaultCellStyle = DataGridViewCellStyle3
-        Me.NumeroCC.FillWeight = 125.6672!
-        Me.NumeroCC.HeaderText = "Numero"
-        Me.NumeroCC.Name = "NumeroCC"
-        Me.NumeroCC.ReadOnly = True
-        '
-        'ImporteCC
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "N2"
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.ImporteCC.DefaultCellStyle = DataGridViewCellStyle4
-        Me.ImporteCC.FillWeight = 125.6672!
-        Me.ImporteCC.HeaderText = "Importe ($)"
-        Me.ImporteCC.Name = "ImporteCC"
+        Me.btnCtaCte.BackgroundImage = Global.Administracion.My.Resources.Resources.bank
+        Me.btnCtaCte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCtaCte.Cleanable = False
+        Me.btnCtaCte.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCtaCte.EnterIndex = -1
+        Me.btnCtaCte.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCtaCte.FlatAppearance.BorderSize = 0
+        Me.btnCtaCte.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCtaCte.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCtaCte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCtaCte.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCtaCte.LabelAssociationKey = -1
+        Me.btnCtaCte.Location = New System.Drawing.Point(776, 631)
+        Me.btnCtaCte.Name = "btnCtaCte"
+        Me.btnCtaCte.Size = New System.Drawing.Size(58, 51)
+        Me.btnCtaCte.TabIndex = 131
+        Me.ToolTip1.SetToolTip(Me.btnCtaCte, "Consultar Ctas Ctes")
+        Me.btnCtaCte.UseVisualStyleBackColor = True
         '
         'Recibos
         '
@@ -951,6 +973,7 @@ Partial Class Recibos
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(882, 690)
         Me.Controls.Add(Me.btnImpresion)
+        Me.Controls.Add(Me.btnCtaCte)
         Me.Controls.Add(Me.btnDias)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCerrar)
@@ -1037,4 +1060,5 @@ Partial Class Recibos
     Friend WithEvents PuntoCC As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents NumeroCC As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ImporteCC As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnCtaCte As Administracion.CustomButton
 End Class
