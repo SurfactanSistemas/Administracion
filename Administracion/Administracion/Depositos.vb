@@ -107,7 +107,7 @@ Public Class Depositos
 
     Private Sub mostrarSeleccionDeConsulta()
         txtAyuda.Text = ""
-        txtAyuda.Visible = True
+        txtAyuda.Visible = False
         lstConsulta.Visible = False
         lstFiltrado.Visible = False
         lstSeleccion.Visible = True
@@ -175,6 +175,7 @@ Public Class Depositos
     End Sub
 
     Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSeleccion.Click
+
         If lstSeleccion.SelectedItem = "Bancos" Then
             showFunction = AddressOf mostrarBanco
             lstConsulta.DataSource = DAOBanco.buscarBancoPorNombre("")
@@ -182,11 +183,76 @@ Public Class Depositos
             showFunction = AddressOf mostrarCheque
             lstConsulta.DataSource = Nothing
             lstConsulta.Items.Clear()
-            DAODeposito.buscarCheques().ForEach(Sub(cheque) lstConsulta.Items.Add(cheque))
+            'DAODeposito.buscarCheques().ForEach(Sub(cheque) lstConsulta.Items.Add(cheque))
+            _ListarCheques()
+
         End If
         lstSeleccion.Visible = False
         lstConsulta.Visible = True
+        txtAyuda.Visible = True
         txtAyuda.Focus()
+    End Sub
+
+    Private Sub _ListarCheques()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Numero2, Importe2, Fecha2, Banco2, Clave, FechaOrd2, Estado2 FROM Recibos WHERE Estado2 = 'P' AND (Tipo2 = '02' OR Tipo2 = '2') AND TipoReg = '2'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        ' Listamos Cheques pendientes en Recibos Definitivos.
+        Try
+
+            dr = cm.ExecuteReader()
+
+            lstConsulta.Items.Clear()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+                    lstConsulta.Items.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, dr.Item("Importe2"), dr.Item("banco2"), dr.Item("Clave")))
+                Loop
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        Finally
+
+            'dr = Nothing
+            cn.Close()
+            'cn = Nothing
+            'cm = Nothing
+
+        End Try
+
+
+        ' Listamos Cheques pendientes en Recibos Provisorios.
+        Try
+            cm.CommandText = "SELECT Numero2, Importe2, Fecha2, Banco2, Clave, FechaOrd2, Estado2, ReciboDefinitivo FROM RecibosProvi WHERE Estado2 = 'P' AND (Tipo2 = '02' OR Tipo2 = '2') AND TipoReg = '2' and (ReciboDefinitivo = '' or ReciboDefinitivo = '0')"
+            cn.Open()
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+                    lstConsulta.Items.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, dr.Item("Importe2"), dr.Item("banco2"), dr.Item("Clave")))
+                Loop
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click

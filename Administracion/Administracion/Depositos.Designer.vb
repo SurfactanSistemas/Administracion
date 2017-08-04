@@ -34,11 +34,10 @@ Partial Class Depositos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtImporte = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel4 = New Administracion.CustomLabel()
@@ -52,6 +51,7 @@ Partial Class Depositos
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.lstFiltrado = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnChequeTerceros = New Administracion.CustomButton()
@@ -150,7 +150,6 @@ Partial Class Depositos
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel2.Controls.Add(Me.lstSeleccion)
-        Me.Panel2.Controls.Add(Me.txtAyuda)
         Me.Panel2.Controls.Add(Me.txtFechaAcreditacion)
         Me.Panel2.Controls.Add(Me.txtFecha)
         Me.Panel2.Controls.Add(Me.txtImporte)
@@ -167,10 +166,24 @@ Partial Class Depositos
         Me.Panel2.Controls.Add(Me.CustomLabel6)
         Me.Panel2.Controls.Add(Me.lstFiltrado)
         Me.Panel2.Controls.Add(Me.lstConsulta)
+        Me.Panel2.Controls.Add(Me.txtAyuda)
         Me.Panel2.Location = New System.Drawing.Point(0, 53)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(793, 500)
         Me.Panel2.TabIndex = 18
+        '
+        'lstSeleccion
+        '
+        Me.lstSeleccion.Cleanable = False
+        Me.lstSeleccion.EnterIndex = -1
+        Me.lstSeleccion.FormattingEnabled = True
+        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
+        Me.lstSeleccion.LabelAssociationKey = -1
+        Me.lstSeleccion.Location = New System.Drawing.Point(395, 18)
+        Me.lstSeleccion.Name = "lstSeleccion"
+        Me.lstSeleccion.Size = New System.Drawing.Size(373, 134)
+        Me.lstSeleccion.TabIndex = 14
+        Me.lstSeleccion.Visible = False
         '
         'txtAyuda
         '
@@ -201,19 +214,6 @@ Partial Class Depositos
         Me.txtFecha.TabIndex = 17
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFecha.ValidatingType = GetType(Date)
-        '
-        'lstSeleccion
-        '
-        Me.lstSeleccion.Cleanable = False
-        Me.lstSeleccion.EnterIndex = -1
-        Me.lstSeleccion.FormattingEnabled = True
-        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
-        Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(395, 18)
-        Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(373, 134)
-        Me.lstSeleccion.TabIndex = 14
-        Me.lstSeleccion.Visible = False
         '
         'txtImporte
         '
@@ -362,7 +362,7 @@ Partial Class Depositos
         Me.lstFiltrado.EnterIndex = -1
         Me.lstFiltrado.FormattingEnabled = True
         Me.lstFiltrado.LabelAssociationKey = -1
-        Me.lstFiltrado.Location = New System.Drawing.Point(394, 40)
+        Me.lstFiltrado.Location = New System.Drawing.Point(395, 40)
         Me.lstFiltrado.Name = "lstFiltrado"
         Me.lstFiltrado.Size = New System.Drawing.Size(373, 108)
         Me.lstFiltrado.TabIndex = 20
