@@ -13,6 +13,8 @@ Public Class Compras
     Private ImpoIb(14, 2) As String
     Dim _PyMENacion() As Integer = {0, 0, 0} ' Cuotas, Mes, Año.
 
+    Private _PreguntarPorRecalculo As Boolean = True
+
     Dim commonEventsHandler As New CommonEventsHandler
 
     Private Sub Compras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -1118,9 +1120,76 @@ Public Class Compras
         ' Lo determinamos como valido si se encuentra en alguna de las empresas.
         If Trim(csEmpresa) <> "" Then
             _existe = True
+
+            ' Consultamos la orden de compra relacionada y si los dias son distintos, preguntamos si se recalcula o no.
+
+
+            If _PreguntarPorRecalculo Then
+
+                Dim dias As String = ""
+
+                dias = _BuscarDiasOCRelacionada(remito)
+
+                If dias <> "" Then
+                    If Val(dias) <> diasPlazo Then
+
+                        If MsgBox("¿Se detectó que el plazo indicado en la Orden de Compra (" & dias & ") difiere con el indicado en la informacioón del Proveedor (" & diasPlazo & ")" && "¿Desea recalcular la fecha de Vencimiento a partir de la información de la Orden de Compra?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+                            _RecalcularFechaDeVencimiento(dias)
+                        End If
+
+                    End If
+                End If
+
+            End If
+
+
+
         End If
 
         Return _existe
+    End Function
+
+    Private Sub _RecalcularFechaDeVencimiento(ByVal dias As String)
+        Dim fecha As Date = Convert.ToDateTime(txtFechaIVA.Text)
+        'Dim fecha2 As Date = Convert.ToDateTime(txtFechaEmision.Text)
+        'txtFechaVto1.Text = fecha2.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
+        txtFechaVto2.Text = fecha.AddDays(Val(dias)).ToString("dd/MM/yyyy")
+    End Sub
+
+    Private Function _BuscarDiasOCRelacionada(ByVal remito As ) As String
+        Dim dias As String = ""
+        Dim cn As New SqlConnection()
+        ' ACA  FALTA AGREGAR LA COLUMNA DE DONDE SE EXTRAERÁ EL DATO DE LOS DIAS.
+        Dim cm As New SqlCommand("SELECT i.Orden FROM Informe as i, Orden as o WHERE i.Remito = '" & Trim(remito) & "' AND i.Orden = o.Orden ")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                ' ACA UNA VEZ DEFINIDO EL CAMPO DEL CUAL SACAR SE ASIGNA Y SE RETORNA.
+                'dias = dr.item("Campo")
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return dias
+
     End Function
 
     Private Sub txtRemito_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemito.KeyDown
