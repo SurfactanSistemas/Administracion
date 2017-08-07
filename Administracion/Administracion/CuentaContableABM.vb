@@ -300,4 +300,10 @@ Public Class CuentaContableABM
 
         _TraerCuentaContable(LBConsulta.SelectedItem)
     End Sub
+
+    Private Sub txtCodigo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
 End Class
