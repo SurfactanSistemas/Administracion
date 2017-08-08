@@ -86,8 +86,8 @@ Partial Class MenuPrincipal
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCambio = New System.Windows.Forms.Button()
-        Me.lblCargando = New Administracion.CustomLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblCargando = New Administracion.CustomLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -493,18 +493,6 @@ Partial Class MenuPrincipal
         Me.btnCambio.Text = "Cambio de Empresa"
         Me.btnCambio.UseVisualStyleBackColor = True
         '
-        'lblCargando
-        '
-        Me.lblCargando.AutoSize = True
-        Me.lblCargando.ControlAssociationKey = -1
-        Me.lblCargando.Font = New System.Drawing.Font("Lucida Console", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCargando.Location = New System.Drawing.Point(71, 43)
-        Me.lblCargando.Name = "lblCargando"
-        Me.lblCargando.Size = New System.Drawing.Size(684, 37)
-        Me.lblCargando.TabIndex = 2
-        Me.lblCargando.Text = "CARGANDO, POR FAVOR ESPERE..."
-        Me.lblCargando.Visible = False
-        '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 3
@@ -521,6 +509,18 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(817, 526)
         Me.TableLayoutPanel1.TabIndex = 3
+        '
+        'lblCargando
+        '
+        Me.lblCargando.AutoSize = True
+        Me.lblCargando.ControlAssociationKey = -1
+        Me.lblCargando.Font = New System.Drawing.Font("Lucida Console", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCargando.Location = New System.Drawing.Point(71, 43)
+        Me.lblCargando.Name = "lblCargando"
+        Me.lblCargando.Size = New System.Drawing.Size(684, 37)
+        Me.lblCargando.TabIndex = 2
+        Me.lblCargando.Text = "CARGANDO, POR FAVOR ESPERE..."
+        Me.lblCargando.Visible = False
         '
         'MenuPrincipal
         '

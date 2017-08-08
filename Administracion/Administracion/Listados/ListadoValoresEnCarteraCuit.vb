@@ -43,18 +43,17 @@ Public Class ListadoValoresEnCarteraCuit
         End If
     End Sub
 
-
-    Private Sub txtcuit_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtCuit.KeyPress
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            txtDesdeFecha.Focus()
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtCuit.Text = ""
-        End If
-    End Sub
+    'Private Sub txtcuit_KeyPress(ByVal sender As Object, _
+    '               ByVal e As System.Windows.Forms.KeyPressEventArgs) _
+    '               Handles txtCuit.KeyPress
+    '    If e.KeyChar = Convert.ToChar(Keys.Return) Then
+    '        e.Handled = True
+    '        txtDesdeFecha.Focus()
+    '    ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
+    '        e.Handled = True
+    '        txtCuit.Text = ""
+    '    End If
+    'End Sub
 
 
     Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
@@ -87,6 +86,22 @@ Public Class ListadoValoresEnCarteraCuit
             viewer.Show()
         Else
             viewer.imprimirReporte()
+        End If
+
+    End Sub
+
+    Private Sub txtCuit_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuit.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtCuit.Text) = "" Then : Exit Sub : End If
+
+            If Not Proceso.CuitValido(Trim(txtCuit.Text)) Then
+                Exit Sub
+            End If
+
+            txtDesdeFecha.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCuit.Text = ""
         End If
 
     End Sub

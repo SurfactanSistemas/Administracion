@@ -4326,22 +4326,6 @@ Public Class Pagos
         End If
     End Sub
 
-    'With gridFormaPagos
-    '    .CurrentCell = .Rows(iRow).Cells(iCol + 1)
-
-    '    Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
-
-    '    .ClearSelection()
-    '    _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
-    '    _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
-    '    txtFechaAux.Location = _location
-    '    txtFechaAux.Text = .Rows(iRow).Cells(2).Value
-    '    WRow = iRow
-    '    Wcol = iCol
-    '    txtFechaAux.Visible = True
-    '    txtFechaAux.Focus()
-    'End With
-
     Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
 
         If e.KeyData = Keys.Enter Then
