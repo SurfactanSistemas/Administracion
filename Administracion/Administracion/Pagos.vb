@@ -1588,6 +1588,51 @@ Public Class Pagos
 
     End Sub
 
+    Private Function _EsNumero(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
+    End Function
+
+    Private Function _EsControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        Select Case keycode
+            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
+                valido = True
+            Case Else
+                valido = False
+        End Select
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
+    End Function
+
+    Private Function _EsNumeroOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimalOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
 
         If gridFormaPagos.Focused Or gridFormaPagos.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
@@ -1595,6 +1640,21 @@ Public Class Pagos
 
             Dim iCol = gridFormaPagos.CurrentCell.ColumnIndex
             Dim iRow = gridFormaPagos.CurrentCell.RowIndex
+
+
+            Select Case iCol
+                Case 0, 1
+                    If Not _EsNumeroOControl(keyData) Then
+                        Return True
+                    End If
+                Case 5
+                    If Not _EsDecimalOControl(keyData) Then
+                        Return True
+                    End If
+                Case Else
+
+            End Select
+
 
             If msg.WParam.ToInt32() = Keys.Enter Then
 
@@ -4228,5 +4288,16 @@ Public Class Pagos
             End Select
 
         End If
+    End Sub
+
+
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOrdenPago.KeyPress, txtProveedor.KeyPress, txtBanco.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub gridFormaPagos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellContentClick
+
     End Sub
 End Class
