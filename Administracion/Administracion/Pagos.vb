@@ -19,6 +19,10 @@ Public Class Pagos
     Dim _TipoConsulta As Integer = Nothing
     Private WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
 
+    Private Const YMARGEN = 250
+    Private Const XMARGEN = 426
+    Private WRow, Wcol As Integer
+
     ' Utilizado para poder ser usado con consulta de cta cte prv por pantalla.
     Private _SoloLectura As String = False
 
@@ -1170,6 +1174,9 @@ Public Class Pagos
             _c.Clear()
         Next
 
+        WRow = -1
+        Wcol = -1
+
         cmbTipo.SelectedIndex = 0
 
         txtIBCiudad.Text = "0,00"
@@ -1708,6 +1715,28 @@ Public Class Pagos
                 If iCol = 1 Or iCol = 2 Or iCol = 3 Or iCol = 4 Then
                     gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow).Cells(iCol + 1)
                 End If
+
+
+                If iCol = 1 Then
+
+                    With gridFormaPagos
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+
+                        Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
+
+                        .ClearSelection()
+                        _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+                        _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
+                        txtFechaAux.Location = _location
+                        txtFechaAux.Text = .Rows(iRow).Cells(2).Value
+                        WRow = iRow
+                        Wcol = iCol
+                        txtFechaAux.Visible = True
+                        txtFechaAux.Focus()
+                    End With
+
+                End If
+
 
                 If iCol = 5 Then
 
@@ -4297,7 +4326,46 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub gridFormaPagos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellContentClick
+    'With gridFormaPagos
+    '    .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+
+    '    Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
+
+    '    .ClearSelection()
+    '    _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+    '    _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
+    '    txtFechaAux.Location = _location
+    '    txtFechaAux.Text = .Rows(iRow).Cells(2).Value
+    '    WRow = iRow
+    '    Wcol = iCol
+    '    txtFechaAux.Visible = True
+    '    txtFechaAux.Focus()
+    'End With
+
+    Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
+
+            If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
+
+                With gridFormaPagos
+                    .Rows(WRow).Cells(2).Value = txtFechaAux.Text
+
+                    .CurrentCell = .Rows(WRow).Cells(3)
+                    .Focus()
+
+                    txtFechaAux.Visible = False
+                    txtFechaAux.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
+                End With
+                
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaAux.Text = ""
+        End If
 
     End Sub
 End Class

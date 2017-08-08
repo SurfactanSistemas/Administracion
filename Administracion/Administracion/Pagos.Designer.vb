@@ -39,6 +39,14 @@ Partial Class Pagos
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImpoNeto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gridFormaPagos = New System.Windows.Forms.DataGridView()
+        Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Importe2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.XClave = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.XCuil = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -89,14 +97,7 @@ Partial Class Pagos
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
-        Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Importe2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.XClave = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.XCuil = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -241,6 +242,58 @@ Partial Class Pagos
         Me.gridFormaPagos.Size = New System.Drawing.Size(398, 217)
         Me.gridFormaPagos.TabIndex = 57
         '
+        'Tipo2
+        '
+        DataGridViewCellStyle1.Format = "N2"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Tipo2.HeaderText = "Tipo"
+        Me.Tipo2.Name = "Tipo2"
+        Me.Tipo2.Width = 35
+        '
+        'Numero2
+        '
+        Me.Numero2.HeaderText = "Número"
+        Me.Numero2.Name = "Numero2"
+        Me.Numero2.Width = 70
+        '
+        'Fecha
+        '
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.Width = 75
+        '
+        'Banco
+        '
+        Me.Banco.HeaderText = "Banco"
+        Me.Banco.Name = "Banco"
+        Me.Banco.Width = 45
+        '
+        'Nombre
+        '
+        Me.Nombre.HeaderText = "Nombre"
+        Me.Nombre.Name = "Nombre"
+        Me.Nombre.ReadOnly = True
+        Me.Nombre.Width = 80
+        '
+        'Importe2
+        '
+        Me.Importe2.HeaderText = "Importe"
+        Me.Importe2.Name = "Importe2"
+        Me.Importe2.Width = 80
+        '
+        'XClave
+        '
+        Me.XClave.HeaderText = "XClave"
+        Me.XClave.Name = "XClave"
+        Me.XClave.Visible = False
+        '
+        'XCuil
+        '
+        Me.XCuil.HeaderText = "XCuil"
+        Me.XCuil.Name = "XCuil"
+        Me.XCuil.Visible = False
+        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -276,6 +329,7 @@ Partial Class Pagos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.txtFechaAux)
         Me.Panel2.Controls.Add(Me.lstSeleccion)
         Me.Panel2.Controls.Add(Me.CLBFiltrado)
         Me.Panel2.Controls.Add(Me.txtFechaParidad)
@@ -973,57 +1027,21 @@ Partial Class Pagos
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Agregar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
-        'Tipo2
+        'txtFechaAux
         '
-        DataGridViewCellStyle1.Format = "N2"
-        DataGridViewCellStyle1.NullValue = Nothing
-        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Tipo2.HeaderText = "Tipo"
-        Me.Tipo2.Name = "Tipo2"
-        Me.Tipo2.Width = 35
-        '
-        'Numero2
-        '
-        Me.Numero2.HeaderText = "Número"
-        Me.Numero2.Name = "Numero2"
-        Me.Numero2.Width = 70
-        '
-        'Fecha
-        '
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.Width = 75
-        '
-        'Banco
-        '
-        Me.Banco.HeaderText = "Banco"
-        Me.Banco.Name = "Banco"
-        Me.Banco.Width = 45
-        '
-        'Nombre
-        '
-        Me.Nombre.HeaderText = "Nombre"
-        Me.Nombre.Name = "Nombre"
-        Me.Nombre.ReadOnly = True
-        Me.Nombre.Width = 80
-        '
-        'Importe2
-        '
-        Me.Importe2.HeaderText = "Importe"
-        Me.Importe2.Name = "Importe2"
-        Me.Importe2.Width = 80
-        '
-        'XClave
-        '
-        Me.XClave.HeaderText = "XClave"
-        Me.XClave.Name = "XClave"
-        Me.XClave.Visible = False
-        '
-        'XCuil
-        '
-        Me.XCuil.HeaderText = "XCuil"
-        Me.XCuil.Name = "XCuil"
-        Me.XCuil.Visible = False
+        Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFechaAux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtFechaAux.Location = New System.Drawing.Point(542, 272)
+        Me.txtFechaAux.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtFechaAux.Mask = "00/00/0000"
+        Me.txtFechaAux.MaximumSize = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.MinimumSize = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.Name = "txtFechaAux"
+        Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaAux.Size = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.TabIndex = 124
+        Me.txtFechaAux.ValidatingType = GetType(Date)
+        Me.txtFechaAux.Visible = False
         '
         'Pagos
         '
@@ -1129,4 +1147,5 @@ Partial Class Pagos
     Friend WithEvents Importe2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents XClave As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents XCuil As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
 End Class
