@@ -26,14 +26,10 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Grupo1 = New System.Windows.Forms.GroupBox()
         Me.opcCompleto = New System.Windows.Forms.RadioButton()
         Me.opcPendiente = New System.Windows.Forms.RadioButton()
-        Me.Grupo2 = New System.Windows.Forms.GroupBox()
-        Me.opcImpesora = New System.Windows.Forms.RadioButton()
-        Me.opcPantalla = New System.Windows.Forms.RadioButton()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
-        Me.btnAcepta = New Administracion.CustomButton()
         Me.txtHastaProveedor = New Administracion.CustomTextBox()
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
         Me.CustomLabel2 = New Administracion.CustomLabel()
@@ -44,8 +40,9 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.lstFiltrada = New Administracion.CustomListBox()
+        Me.btnPorPantalla = New Administracion.CustomButton()
+        Me.btnImprimir = New Administracion.CustomButton()
         Me.Grupo1.SuspendLayout()
-        Me.Grupo2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -56,7 +53,7 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Grupo1.Controls.Add(Me.opcPendiente)
         Me.Grupo1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Grupo1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Grupo1.Location = New System.Drawing.Point(66, 133)
+        Me.Grupo1.Location = New System.Drawing.Point(90, 133)
         Me.Grupo1.Name = "Grupo1"
         Me.Grupo1.Size = New System.Drawing.Size(410, 50)
         Me.Grupo1.TabIndex = 20
@@ -89,53 +86,13 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.opcPendiente.Text = "Pendiente"
         Me.opcPendiente.UseVisualStyleBackColor = True
         '
-        'Grupo2
-        '
-        Me.Grupo2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Grupo2.Controls.Add(Me.opcImpesora)
-        Me.Grupo2.Controls.Add(Me.opcPantalla)
-        Me.Grupo2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Grupo2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Grupo2.Location = New System.Drawing.Point(66, 193)
-        Me.Grupo2.Name = "Grupo2"
-        Me.Grupo2.Size = New System.Drawing.Size(410, 50)
-        Me.Grupo2.TabIndex = 21
-        Me.Grupo2.TabStop = False
-        Me.Grupo2.Text = "Destino"
-        '
-        'opcImpesora
-        '
-        Me.opcImpesora.AutoSize = True
-        Me.opcImpesora.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.opcImpesora.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcImpesora.Location = New System.Drawing.Point(237, 17)
-        Me.opcImpesora.Name = "opcImpesora"
-        Me.opcImpesora.Size = New System.Drawing.Size(89, 22)
-        Me.opcImpesora.TabIndex = 20
-        Me.opcImpesora.TabStop = True
-        Me.opcImpesora.Text = "Impresora"
-        Me.opcImpesora.UseVisualStyleBackColor = True
-        '
-        'opcPantalla
-        '
-        Me.opcPantalla.AutoSize = True
-        Me.opcPantalla.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.opcPantalla.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcPantalla.Location = New System.Drawing.Point(103, 17)
-        Me.opcPantalla.Name = "opcPantalla"
-        Me.opcPantalla.Size = New System.Drawing.Size(76, 22)
-        Me.opcPantalla.TabIndex = 19
-        Me.opcPantalla.TabStop = True
-        Me.opcPantalla.Text = "Pantalla"
-        Me.opcPantalla.UseVisualStyleBackColor = True
-        '
         'lstAyuda
         '
         Me.lstAyuda.Cleanable = False
         Me.lstAyuda.EnterIndex = -1
         Me.lstAyuda.FormattingEnabled = True
         Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(83, 349)
+        Me.lstAyuda.Location = New System.Drawing.Point(83, 314)
         Me.lstAyuda.Name = "lstAyuda"
         Me.lstAyuda.Size = New System.Drawing.Size(417, 147)
         Me.lstAyuda.TabIndex = 27
@@ -147,7 +104,7 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.txtAyuda.Empty = True
         Me.txtAyuda.EnterIndex = -1
         Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(83, 323)
+        Me.txtAyuda.Location = New System.Drawing.Point(83, 288)
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
         Me.txtAyuda.TabIndex = 26
@@ -167,9 +124,9 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(383, 267)
+        Me.btnConsulta.Location = New System.Drawing.Point(83, 222)
         Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(120, 40)
+        Me.btnConsulta.Size = New System.Drawing.Size(89, 40)
         Me.btnConsulta.TabIndex = 25
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
@@ -187,32 +144,12 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(241, 267)
+        Me.btnCancela.Location = New System.Drawing.Point(203, 222)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(120, 40)
+        Me.btnCancela.Size = New System.Drawing.Size(81, 40)
         Me.btnCancela.TabIndex = 24
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
-        '
-        'btnAcepta
-        '
-        Me.btnAcepta.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnAcepta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAcepta.Cleanable = False
-        Me.btnAcepta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAcepta.EnterIndex = -1
-        Me.btnAcepta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatAppearance.BorderSize = 0
-        Me.btnAcepta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAcepta.LabelAssociationKey = -1
-        Me.btnAcepta.Location = New System.Drawing.Point(90, 266)
-        Me.btnAcepta.Name = "btnAcepta"
-        Me.btnAcepta.Size = New System.Drawing.Size(120, 40)
-        Me.btnAcepta.TabIndex = 23
-        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
-        Me.btnAcepta.UseVisualStyleBackColor = True
         '
         'txtHastaProveedor
         '
@@ -305,7 +242,7 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(590, 204)
+        Me.Panel2.Size = New System.Drawing.Size(590, 155)
         Me.Panel2.TabIndex = 29
         '
         'lstFiltrada
@@ -314,25 +251,65 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.lstFiltrada.EnterIndex = -1
         Me.lstFiltrada.FormattingEnabled = True
         Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(83, 349)
+        Me.lstFiltrada.Location = New System.Drawing.Point(83, 314)
         Me.lstFiltrada.Name = "lstFiltrada"
         Me.lstFiltrada.Size = New System.Drawing.Size(417, 147)
         Me.lstFiltrada.TabIndex = 30
         Me.lstFiltrada.Visible = False
         '
+        'btnPorPantalla
+        '
+        Me.btnPorPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
+        Me.btnPorPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnPorPantalla.Cleanable = False
+        Me.btnPorPantalla.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPorPantalla.EnterIndex = -1
+        Me.btnPorPantalla.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnPorPantalla.FlatAppearance.BorderSize = 0
+        Me.btnPorPantalla.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnPorPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnPorPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPorPantalla.LabelAssociationKey = -1
+        Me.btnPorPantalla.Location = New System.Drawing.Point(315, 220)
+        Me.btnPorPantalla.Name = "btnPorPantalla"
+        Me.btnPorPantalla.Size = New System.Drawing.Size(81, 40)
+        Me.btnPorPantalla.TabIndex = 24
+        Me.ToolTip1.SetToolTip(Me.btnPorPantalla, "Mostrar reporte por pantalla")
+        Me.btnPorPantalla.UseVisualStyleBackColor = True
+        '
+        'btnImprimir
+        '
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cleanable = False
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.EnterIndex = -1
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.LabelAssociationKey = -1
+        Me.btnImprimir.Location = New System.Drawing.Point(427, 222)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(81, 40)
+        Me.btnImprimir.TabIndex = 24
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir reporte")
+        Me.btnImprimir.UseVisualStyleBackColor = True
+        '
         'ListadoCuentaCorrienteProveedores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(590, 319)
+        Me.ClientSize = New System.Drawing.Size(590, 271)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.btnConsulta)
+        Me.Controls.Add(Me.btnImprimir)
+        Me.Controls.Add(Me.btnPorPantalla)
         Me.Controls.Add(Me.btnCancela)
-        Me.Controls.Add(Me.btnAcepta)
-        Me.Controls.Add(Me.Grupo2)
         Me.Controls.Add(Me.Grupo1)
         Me.Controls.Add(Me.txtHastaProveedor)
         Me.Controls.Add(Me.txtDesdeProveedor)
@@ -342,8 +319,6 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Name = "ListadoCuentaCorrienteProveedores"
         Me.Grupo1.ResumeLayout(False)
         Me.Grupo1.PerformLayout()
-        Me.Grupo2.ResumeLayout(False)
-        Me.Grupo2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -355,14 +330,10 @@ Partial Class ListadoCuentaCorrienteProveedores
     Friend WithEvents CustomLabel2 As Administracion.CustomLabel
     Friend WithEvents CustomLabel1 As Administracion.CustomLabel
     Friend WithEvents Grupo1 As System.Windows.Forms.GroupBox
-    Friend WithEvents Grupo2 As System.Windows.Forms.GroupBox
     Friend WithEvents opcCompleto As System.Windows.Forms.RadioButton
     Friend WithEvents opcPendiente As System.Windows.Forms.RadioButton
-    Friend WithEvents opcImpesora As System.Windows.Forms.RadioButton
-    Friend WithEvents opcPantalla As System.Windows.Forms.RadioButton
     Friend WithEvents btnConsulta As Administracion.CustomButton
     Friend WithEvents btnCancela As Administracion.CustomButton
-    Friend WithEvents btnAcepta As Administracion.CustomButton
     Friend WithEvents lstAyuda As Administracion.CustomListBox
     Friend WithEvents txtAyuda As Administracion.CustomTextBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
@@ -371,4 +342,6 @@ Partial Class ListadoCuentaCorrienteProveedores
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
+    Friend WithEvents btnPorPantalla As Administracion.CustomButton
+    Friend WithEvents btnImprimir As Administracion.CustomButton
 End Class

@@ -3,11 +3,14 @@ Imports System.IO
 
 Public Class ListadoCuentaCorrienteProveedores
 
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
+
     Private Sub ListadoCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
         opcPendiente.Checked = True
         opcCompleto.Checked = False
     End Sub
@@ -50,7 +53,7 @@ Public Class ListadoCuentaCorrienteProveedores
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(606, 540)
+        Me.Size = New System.Drawing.Size(606, 505)
 
         lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
@@ -72,8 +75,7 @@ Public Class ListadoCuentaCorrienteProveedores
         mostrarProveedor(lstAyuda.SelectedValue)
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
-
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
         Dim txtUno As String
 
         Dim txtFormula As String
@@ -127,17 +129,13 @@ Public Class ListadoCuentaCorrienteProveedores
 
         Dim viewer As New ReportViewer("Listado de Corriente de Proveedres", Globals.reportPathWithName("wccprvnet.rpt"), txtFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
 
-
-
-
-
-
+        Select Case TipoImpresion
+            Case Reporte.Imprimir
+                viewer.Show()
+            Case Reporte.Pantalla
+                viewer.imprimirReporte()
+        End Select
 
     End Sub
 
@@ -202,6 +200,11 @@ Public Class ListadoCuentaCorrienteProveedores
         End If
     End Sub
 
+    Private Sub btnPorPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPorPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
 
-
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
+    End Sub
 End Class
