@@ -1070,6 +1070,8 @@ Public Class ProveedoresABM
 
     Private Sub txtNroSEDRONAR2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroSEDRONAR2.KeyDown
         If e.KeyData = Keys.Enter Then
+            If _ValidarFecha(txtNroSEDRONAR2.Text) Then : Exit Sub : End If
+
             _SaltarA(cmbCertificados)
         ElseIf e.KeyData = Keys.Escape Then
             txtNroSEDRONAR2.Text = ""
@@ -1086,6 +1088,7 @@ Public Class ProveedoresABM
 
     Private Sub txtCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCertificados.KeyDown
         If e.KeyData = Keys.Enter Then
+            If _ValidarFecha(txtCertificados.Text) Then : Exit Sub : End If
             _SaltarA(cmbCalificacion)
         ElseIf e.KeyData = Keys.Escape Then
             txtCertificados.Text = ""
@@ -1360,28 +1363,39 @@ Public Class ProveedoresABM
     Private Sub txtCalificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCalificacion.KeyDown
 
         If e.KeyData = Keys.Enter Then
+            If _ValidarFecha(txtCalificacion.Text) Then : Exit Sub : End If
             _SaltarA(cmbEstado)
         End If
 
     End Sub
 
-    Private Sub txtCertificados_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtCertificados.TypeValidationCompleted
+    Private Function _ValidarFecha(ByVal fecha As String) As Boolean
+        Dim valido As Boolean = True
+
+        If Trim(fecha.Replace("/", "")) = "" Then
+            valido = Proceso._ValidarFecha(fecha)
+        End If
+
+        Return valido
+    End Function
+
+    Private Sub txtCertificados_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
 
         If Trim(txtCertificados.Text).Length = 10 Then
-            e.Cancel = Not Proceso._ValidarFecha(txtCertificados.Text, e.IsValidInput)
+            e.Cancel = _ValidarFecha(txtCertificados.Text)
         End If
 
     End Sub
 
-    Private Sub txtNroSEDRONAR2_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtNroSEDRONAR2.TypeValidationCompleted
+    Private Sub txtNroSEDRONAR2_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
         If Trim(txtNroSEDRONAR2.Text).Length = 10 Then
-            e.Cancel = Not Proceso._ValidarFecha(txtNroSEDRONAR2.Text, e.IsValidInput)
+            e.Cancel = _ValidarFecha(txtNroSEDRONAR2.Text)
         End If
     End Sub
 
-    Private Sub txtCalificacion_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtCalificacion.TypeValidationCompleted
+    Private Sub txtCalificacion_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
         If Trim(txtCalificacion.Text).Length = 10 Then
-            e.Cancel = Not Proceso._ValidarFecha(txtCalificacion.Text, e.IsValidInput)
+            e.Cancel = _ValidarFecha(txtCalificacion.Text)
         End If
     End Sub
 

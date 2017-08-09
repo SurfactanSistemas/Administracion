@@ -132,7 +132,7 @@ Public Class Pagos
     Private Sub txtObservaciones_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If gridPagos.Rows.Count = 0 Then
             lstSeleccion.SelectedIndex = 1
-            lstSeleccion_Click(Nothing, Nothing)
+            lstSeleccion_MouseClick(Nothing, Nothing)
         Else
             gridPagos.CurrentCell = gridPagos.Rows(0).Cells(4)
             gridPagos.Select()
@@ -1419,7 +1419,7 @@ Public Class Pagos
             Case 3
                 chequeRow = rowIndex
                 lstSeleccion.SelectedIndex = 2
-                lstSeleccion_Click(Nothing, Nothing)
+                lstSeleccion_MouseClick(Nothing, Nothing)
                 Exit Sub
             Case 5
                 nombre = "US$"
@@ -2294,12 +2294,12 @@ Public Class Pagos
 
     Private Sub btnChequesTerceros_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChequesTerceros.Click
         lstSeleccion.SelectedIndex = 2
-        lstSeleccion_Click(Nothing, Nothing)
+        lstSeleccion_MouseClick(Nothing, Nothing)
     End Sub
 
     Private Sub btnCtaCte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCtaCte.Click
         lstSeleccion.SelectedIndex = 1
-        lstSeleccion_Click(Nothing, Nothing)
+        lstSeleccion_MouseClick(Nothing, Nothing)
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click

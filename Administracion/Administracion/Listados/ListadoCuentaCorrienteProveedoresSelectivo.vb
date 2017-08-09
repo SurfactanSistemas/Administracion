@@ -13,8 +13,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Text = "  /  /    "
         varRenglon = 0
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
         _CargarProveedoresPreCargados()
         _Claves.Clear()
     End Sub
@@ -235,7 +233,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
+
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         Dim txtUno, txtDos As String
         Dim txtFormula As String
@@ -445,15 +448,17 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         'Dim viewer As New ReportViewer("Listado de Corriente de Proveedres Selectivo", Globals.reportPathWithName("wccprvfecnet.rpt"), txtFormula)
 
-        'If opcPantalla.Checked = True Then
-        '    viewer.Show()
-        'Else
-        '    viewer.imprimirReporte()
-        'End If
+        Select Case TipoImpresion
+            Case Reporte.Imprimir
+                '    viewer.imprimirReporte()
+                '_ConsultarSiEliminarListaParcialDeProveedores()
+                '_LimpiarProveedoresSelectivos()
+            Case Reporte.Pantalla
+                '    viewer.Show()
+            Case Else
 
-        '_ConsultarSiEliminarListaParcialDeProveedores()
+        End Select
 
-        _LimpiarProveedoresSelectivos()
     End Sub
 
     Private Sub _ConsultarSiEliminarListaParcialDeProveedores()
@@ -475,7 +480,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
             cm.ExecuteNonQuery()
 
-            MsgBox("Se han eliminado todos los proveedores correspondientes a este periodo.", MsgBoxStyle.Information)
+            '    MsgBox("Se han eliminado todos los proveedores correspondientes a este periodo.", MsgBoxStyle.Information)
 
         Catch ex As Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
@@ -684,6 +689,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         End If
     End Sub
 
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
 
-
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
+    End Sub
 End Class

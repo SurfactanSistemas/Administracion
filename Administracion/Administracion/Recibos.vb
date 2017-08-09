@@ -272,6 +272,7 @@ Public Class Recibos
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Tipo, Saldo, TotalUs, Paridad FROM CtaCte WHERE Numero = '" & cuenta(1) & "'")
         Dim dr As SqlDataReader
+        Dim row As Integer
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -284,7 +285,12 @@ Public Class Recibos
                 Do While dr.Read()
 
                     If Not _CuentaUtilizada(dr.Item("Numero")) Then
-                        Dim row = gridPagos.Rows.Add()
+
+                        If IsNothing(gridPagos.Rows(0).Cells(0).Value) Then
+                            row = 0
+                        Else
+                            row = gridPagos.Rows.Add()
+                        End If
 
                         With gridPagos.Rows(row)
                             .Cells(0).Value = dr.Item("Tipo")

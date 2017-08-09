@@ -444,8 +444,8 @@ Public Class RecibosProvisorios
         Next
         validador.validate(Me)
         validador.alsoValidate(Val(_NormalizarNumero(lblTotal.Text)) = Val(_NormalizarNumero(txtTotal.Text)), "La suma de los importes de la tabla no coincide con lo informado en el total")
-        validador.alsoValidate(DAORecibo.permiteActualizacionProvisorio(txtRecibo.Text), "Ya existe un recibo provisorio con ese número y no se puede modificar")
         validador.alsoValidate(DAORecibo.existeRecibo(txtRecibo.Text), "Ya existe un recibo definitivo con ese número")
+        validador.alsoValidate(DAORecibo.permiteActualizacionProvisorio(txtRecibo.Text), "Algunos de los cheques del recibo provisorio ya se encuentra procesado por lo que no se puede actualizar el mismo.")
 
         If validador.flush Then
 
@@ -488,10 +488,18 @@ Public Class RecibosProvisorios
         Dim formasPago As New List(Of FormaPago)
         For Each row As DataGridViewRow In gridRecibos.Rows
             If Not row.IsNewRow Then
-                formasPago.Add(New FormaPago(_Left(row.Cells(0).Value, 2), 0, asString(row.Cells(1).Value), asString(row.Cells(2).Value), _Left(asString(row.Cells(3).Value), 20), _NormalizarNumero(row.Cells(4).Value)))
+                formasPago.Add(New FormaPago(_Left(row.Cells(0).Value, 2), 0, _NormalizarNumeroCheque(asString(row.Cells(1).Value)), asString(row.Cells(2).Value), _Left(asString(row.Cells(3).Value), 20), _NormalizarNumero(row.Cells(4).Value)))
             End If
         Next
         Return formasPago
+    End Function
+
+    Private Function _NormalizarNumeroCheque(ByVal numero As String) As String
+
+        If Trim(numero) <> "" Then
+            numero = ceros(numero, 8)
+        End If
+        Return numero
     End Function
 
     Private Function asString(ByVal value)
@@ -514,7 +522,7 @@ Public Class RecibosProvisorios
             With gridRecibos
                 .Rows(0).Selected = True
                 .CurrentCell = .Rows(0).Cells(0)
-                .Focus()
+                '.Focus()
             End With
         ElseIf e.KeyData = Keys.Escape Then
             txtTotal.Text = "0.00"

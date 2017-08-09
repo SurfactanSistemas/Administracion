@@ -25,9 +25,6 @@ Partial Class ListadoProyeccionCobros
         Me.components = New System.ComponentModel.Container()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
-        Me.btnAcepta = New Administracion.CustomButton()
-        Me.opcImpesora = New System.Windows.Forms.RadioButton()
-        Me.opcPantalla = New System.Windows.Forms.RadioButton()
         Me.txtHastaProveedor = New Administracion.CustomTextBox()
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
         Me.CustomLabel2 = New Administracion.CustomLabel()
@@ -48,6 +45,8 @@ Partial Class ListadoProyeccionCobros
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnPantalla = New Administracion.CustomButton()
+        Me.CustomButton2 = New Administracion.CustomButton()
         Me.lstfiltrada = New Administracion.CustomListBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -67,9 +66,9 @@ Partial Class ListadoProyeccionCobros
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(397, 305)
+        Me.btnConsulta.Location = New System.Drawing.Point(220, 306)
         Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(120, 40)
+        Me.btnConsulta.Size = New System.Drawing.Size(87, 40)
         Me.btnConsulta.TabIndex = 31
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
@@ -88,61 +87,12 @@ Partial Class ListadoProyeccionCobros
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(248, 305)
+        Me.btnCancela.Location = New System.Drawing.Point(119, 306)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(120, 40)
+        Me.btnCancela.Size = New System.Drawing.Size(87, 40)
         Me.btnCancela.TabIndex = 30
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
-        '
-        'btnAcepta
-        '
-        Me.btnAcepta.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnAcepta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAcepta.Cleanable = False
-        Me.btnAcepta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAcepta.EnterIndex = -1
-        Me.btnAcepta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatAppearance.BorderSize = 0
-        Me.btnAcepta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAcepta.LabelAssociationKey = -1
-        Me.btnAcepta.Location = New System.Drawing.Point(90, 305)
-        Me.btnAcepta.Name = "btnAcepta"
-        Me.btnAcepta.Size = New System.Drawing.Size(120, 41)
-        Me.btnAcepta.TabIndex = 29
-        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
-        Me.btnAcepta.UseVisualStyleBackColor = True
-        '
-        'opcImpesora
-        '
-        Me.opcImpesora.AutoSize = True
-        Me.opcImpesora.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.opcImpesora.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.opcImpesora.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcImpesora.Location = New System.Drawing.Point(351, 265)
-        Me.opcImpesora.Name = "opcImpesora"
-        Me.opcImpesora.Size = New System.Drawing.Size(89, 22)
-        Me.opcImpesora.TabIndex = 28
-        Me.opcImpesora.TabStop = True
-        Me.opcImpesora.Text = "Impresora"
-        Me.opcImpesora.UseVisualStyleBackColor = False
-        '
-        'opcPantalla
-        '
-        Me.opcPantalla.AutoSize = True
-        Me.opcPantalla.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.opcPantalla.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.opcPantalla.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcPantalla.Location = New System.Drawing.Point(217, 265)
-        Me.opcPantalla.Name = "opcPantalla"
-        Me.opcPantalla.Size = New System.Drawing.Size(76, 22)
-        Me.opcPantalla.TabIndex = 27
-        Me.opcPantalla.TabStop = True
-        Me.opcPantalla.Text = "Pantalla"
-        Me.opcPantalla.UseVisualStyleBackColor = False
         '
         'txtHastaProveedor
         '
@@ -150,7 +100,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtHastaProveedor.Empty = True
         Me.txtHastaProveedor.EnterIndex = -1
         Me.txtHastaProveedor.LabelAssociationKey = -1
-        Me.txtHastaProveedor.Location = New System.Drawing.Point(306, 104)
+        Me.txtHastaProveedor.Location = New System.Drawing.Point(317, 117)
         Me.txtHastaProveedor.MaxLength = 11
         Me.txtHastaProveedor.Name = "txtHastaProveedor"
         Me.txtHastaProveedor.Size = New System.Drawing.Size(100, 20)
@@ -164,7 +114,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtDesdeProveedor.Empty = True
         Me.txtDesdeProveedor.EnterIndex = -1
         Me.txtDesdeProveedor.LabelAssociationKey = -1
-        Me.txtDesdeProveedor.Location = New System.Drawing.Point(306, 66)
+        Me.txtDesdeProveedor.Location = New System.Drawing.Point(317, 79)
         Me.txtDesdeProveedor.MaxLength = 11
         Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
         Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
@@ -179,7 +129,7 @@ Partial Class ListadoProyeccionCobros
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(187, 107)
+        Me.CustomLabel2.Location = New System.Drawing.Point(198, 120)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(110, 18)
         Me.CustomLabel2.TabIndex = 24
@@ -192,7 +142,7 @@ Partial Class ListadoProyeccionCobros
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(182, 69)
+        Me.CustomLabel1.Location = New System.Drawing.Point(193, 82)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(115, 18)
         Me.CustomLabel1.TabIndex = 23
@@ -211,7 +161,7 @@ Partial Class ListadoProyeccionCobros
         Me.GroupBox1.Controls.Add(Me.txtFecha1)
         Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(90, 142)
+        Me.GroupBox1.Location = New System.Drawing.Point(101, 155)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(427, 108)
         Me.GroupBox1.TabIndex = 32
@@ -363,6 +313,48 @@ Partial Class ListadoProyeccionCobros
         Me.Panel2.Size = New System.Drawing.Size(631, 247)
         Me.Panel2.TabIndex = 36
         '
+        'btnPantalla
+        '
+        Me.btnPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
+        Me.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnPantalla.Cleanable = False
+        Me.btnPantalla.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPantalla.EnterIndex = -1
+        Me.btnPantalla.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.BorderSize = 0
+        Me.btnPantalla.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPantalla.LabelAssociationKey = -1
+        Me.btnPantalla.Location = New System.Drawing.Point(321, 306)
+        Me.btnPantalla.Name = "btnPantalla"
+        Me.btnPantalla.Size = New System.Drawing.Size(87, 40)
+        Me.btnPantalla.TabIndex = 31
+        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Repote por Pantalla")
+        Me.btnPantalla.UseVisualStyleBackColor = True
+        '
+        'CustomButton2
+        '
+        Me.CustomButton2.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.CustomButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.CustomButton2.Cleanable = False
+        Me.CustomButton2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.CustomButton2.EnterIndex = -1
+        Me.CustomButton2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.CustomButton2.FlatAppearance.BorderSize = 0
+        Me.CustomButton2.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CustomButton2.LabelAssociationKey = -1
+        Me.CustomButton2.Location = New System.Drawing.Point(422, 306)
+        Me.CustomButton2.Name = "CustomButton2"
+        Me.CustomButton2.Size = New System.Drawing.Size(87, 40)
+        Me.CustomButton2.TabIndex = 31
+        Me.ToolTip1.SetToolTip(Me.CustomButton2, "Imprimir Reporte")
+        Me.CustomButton2.UseVisualStyleBackColor = True
+        '
         'lstfiltrada
         '
         Me.lstfiltrada.Cleanable = False
@@ -379,17 +371,16 @@ Partial Class ListadoProyeccionCobros
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(629, 352)
+        Me.ClientSize = New System.Drawing.Size(629, 355)
         Me.Controls.Add(Me.lstfiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.CustomButton2)
+        Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnCancela)
-        Me.Controls.Add(Me.btnAcepta)
-        Me.Controls.Add(Me.opcImpesora)
-        Me.Controls.Add(Me.opcPantalla)
         Me.Controls.Add(Me.txtHastaProveedor)
         Me.Controls.Add(Me.txtDesdeProveedor)
         Me.Controls.Add(Me.CustomLabel2)
@@ -406,7 +397,6 @@ Partial Class ListadoProyeccionCobros
     End Sub
     Friend WithEvents btnConsulta As Administracion.CustomButton
     Friend WithEvents btnCancela As Administracion.CustomButton
-    Friend WithEvents btnAcepta As Administracion.CustomButton
     Friend WithEvents opcImpesora As System.Windows.Forms.RadioButton
     Friend WithEvents opcPantalla As System.Windows.Forms.RadioButton
     Friend WithEvents txtHastaProveedor As Administracion.CustomTextBox
@@ -430,4 +420,6 @@ Partial Class ListadoProyeccionCobros
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lstfiltrada As Administracion.CustomListBox
+    Friend WithEvents btnPantalla As Administracion.CustomButton
+    Friend WithEvents CustomButton2 As Administracion.CustomButton
 End Class

@@ -6,8 +6,6 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
     Private Sub ListadoCuentaCorrienteProveedoresFecha_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Text = "  /  /    "
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
     End Sub
 
     Private Sub txtfechaemision_KeyPress(ByVal sender As Object, _
@@ -94,8 +92,12 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
         mostrarProveedor(lstAyuda.SelectedValue)
     End Sub
 
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         Dim txtUno, txtDos As String
 
@@ -134,7 +136,7 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
             Dim CCPrv As New CtaCteProveedoresDeudaDesdeHasta(row.Item(0).ToString, row.Item(1).ToString, row.Item(2).ToString, row.Item(3).ToString, row.Item(4), row.Item(5), row.Item(6).ToString, row.Item(7).ToString, row.Item(8).ToString, row.Item(9).ToString, row.Item(10), row.Item(11).ToString, row.Item(12).ToString)
 
             If ordenaFecha(CCPrv.fecha) <= varOrdFecha Then
-                vardada = vardada + 1
+                varDada = varDada + 1
                 SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, CCPrv.total, CCPrv.saldo, CCPrv.fecha, CCPrv.vencimiento, txtFechaEmision.Text, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, WSuma, WOrden, txtFechaEmision.Text, "", "", "", 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0)
             End If
 
@@ -202,12 +204,14 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
 
         Dim viewer As New ReportViewer("Listado de Corriente de Proveedres a Fecha", Globals.reportPathWithName("wccprvfecnet.rpt"), txtFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+        Select Case TipoImpresion
+            Case Reporte.Imprimir
+                viewer.imprimirReporte()
+            Case Reporte.Pantalla
+                viewer.Show()
+            Case Else
 
+        End Select
 
     End Sub
 
@@ -272,6 +276,11 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
         End If
     End Sub
 
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
 
-
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
+    End Sub
 End Class

@@ -22,9 +22,6 @@ Public Class ListadoImputacionesContable
         chkDepositos.Checked = False
         chkPagos.Checked = False
         chkRecibos.Checked = False
-
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
     End Sub
 
     Private Sub txtdesdefecha_KeyPress(ByVal sender As Object, _
@@ -62,6 +59,7 @@ Public Class ListadoImputacionesContable
                    Handles txtDesdeCuenta.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
+            txtHastaCuenta.Text = txtDesdeCuenta.Text
             txtHastaCuenta.Focus()
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True
@@ -131,10 +129,12 @@ Public Class ListadoImputacionesContable
         REM txtDesdeProveedor.Text = lstAyuda.SelectedValue.id
     End Sub
 
+    Enum Reporte
+        Pantalla
+        Imprimir
+    End Enum
 
-
-
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         Dim txtUno As String
 
@@ -158,6 +158,8 @@ Public Class ListadoImputacionesContable
 
         Dim txtBancoCodigo As Integer
         Dim txtBancoCuenta As String
+
+        Dim viewer As ReportViewer = Nothing
 
         'Dim banco As New Banco(0, "", New CuentaContable(0, ""))
 
@@ -920,26 +922,26 @@ Public Class ListadoImputacionesContable
 
         Select Case TipoListado.SelectedIndex
             Case 0
-                Dim viewer As New ReportViewer("Imputaciones Contables", Globals.reportPathWithName("wImpCybnet.rpt"), txtFormula)
-
-                If opcPantalla.Checked = True Then
-                    viewer.Show()
-                Else
-                    viewer.imprimirReporte()
-                End If
+                viewer = New ReportViewer("Imputaciones Contables", Globals.reportPathWithName("wImpCybnet.rpt"), txtFormula)
 
             Case Else
-                Dim viewer As New ReportViewer("Imputaciones Contables", Globals.reportPathWithName("wImpCybResunet.rpt"), txtFormula)
+                viewer = New ReportViewer("Imputaciones Contables", Globals.reportPathWithName("wImpCybResunet.rpt"), txtFormula)
 
-                If opcPantalla.Checked = True Then
-                    viewer.Show()
-                Else
-                    viewer.imprimirReporte()
-                End If
+        End Select
+
+        If IsNothing(viewer) Then : Exit Sub : End If
+
+        Select Case TipoImpresion
+            Case Reporte.Imprimir
+                viewer.imprimirReporte()
+            Case Reporte.Pantalla
+                viewer.Show()
+            Case Else
 
         End Select
 
     End Sub
+
 
     Private Sub txtDesdeCuenta_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeCuenta.MouseDoubleClick, txtHastaCuenta.MouseDoubleClick
         btnConsulta.PerformClick()

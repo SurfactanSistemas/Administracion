@@ -11,12 +11,10 @@ Public Class ListadoProyeccionCobros
         txtFecha2.Text = "  /  /    "
         txtFecha3.Text = "  /  /    "
         txtFecha4.Text = "  /  /    "
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
     End Sub
 
     Private Sub txtdesdeproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesdeProveedor.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -31,7 +29,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txthastaproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHastaProveedor.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -146,10 +144,12 @@ Public Class ListadoProyeccionCobros
         mostrarProveedor(lstAyuda.SelectedValue)
     End Sub
 
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
 
-
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
-
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
         Dim txtUno As String
 
         Dim txtEmpresa As String
@@ -220,21 +220,21 @@ Public Class ListadoProyeccionCobros
 
         Dim viewer As New ReportViewer("Proyeccion de Cobros de Corriente de Proveedres", Globals.reportPathWithName("wProyccprvnet.rpt"), txtFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
 
+        Select Case TipoImpresion
+            Case Reporte.Imprimir
+                viewer.imprimirReporte()
+            Case Reporte.Pantalla
+                viewer.Show()
+            Case Else
 
+        End Select
 
     End Sub
 
     Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         btnConsulta.PerformClick()
     End Sub
-
-
 
     ' Rutinas de Filtrado Dinámico.
     Private Sub _FiltrarDinamicamente()
@@ -292,4 +292,36 @@ Public Class ListadoProyeccionCobros
         End If
     End Sub
 
+    Private Sub txtDesdeProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeProveedor.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesdeProveedor.Text) = "" Then
+                btnConsulta.PerformClick()
+                Exit Sub
+            End If
+            txtHastaProveedor.Text = txtDesdeProveedor.Text
+            txtHastaProveedor.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesdeProveedor.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHastaProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHastaProveedor.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtHastaProveedor.Text) = "" Then
+                btnConsulta.PerformClick()
+                Exit Sub
+            End If
+            txtFecha1.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHastaProveedor.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+    End Sub
 End Class

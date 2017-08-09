@@ -10,38 +10,6 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
         txtAyuda.Text = ""
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
-    End Sub
-
-    Private Sub txtdesdeproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            txtHastaProveedor.Focus()
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtDesdeProveedor.Text = ""
-        End If
-        If Not IsNumeric(e.KeyChar) Then
-            e.Handled = True
-        End If
-    End Sub
-
-    Private Sub txthastaproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            txtDesdeProveedor.Focus()
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtHastaProveedor.Text = ""
-        End If
-        If Not IsNumeric(e.KeyChar) Then
-            e.Handled = True
-        End If
     End Sub
 
     Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
@@ -86,7 +54,13 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
         REM txtDesdeProveedor.Text = lstAyuda.SelectedValue.id
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
+
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         'Dim viewer As New ReportViewer("saldos de ctacte", Globals.reportPathWithName("bancosnew.rpt"))
 
@@ -101,11 +75,15 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
 
         Dim viewer As New ReportViewer("saldos de ctacte", Globals.reportPathWithName("wsaldoprvnet.rpt"), txtFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+
+        Select Case TipoImpresion
+            Case Reporte.Imprimir
+                viewer.Show()
+            Case Reporte.Pantalla
+                viewer.imprimirReporte()
+            Case Else
+
+        End Select
 
     End Sub
 
@@ -170,6 +148,37 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
         End If
     End Sub
 
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
 
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
+    End Sub
+
+    Private Sub txtDesdeProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeProveedor.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesdeProveedor.Text) = "" Then : Exit Sub : End If
+
+            txtHastaProveedor.Text = txtDesdeProveedor.Text
+            txtHastaProveedor.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesdeProveedor.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHastaProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHastaProveedor.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtHastaProveedor.Text) = "" Then : Exit Sub : End If
+            txtDesdeProveedor.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHastaProveedor.Text = ""
+        End If
+
+    End Sub
 
 End Class

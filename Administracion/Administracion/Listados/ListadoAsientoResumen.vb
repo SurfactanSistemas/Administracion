@@ -17,9 +17,6 @@ Public Class ListadoAsientoResumen
         TipoListado.Items.Add("Resumido")
         TipoListado.SelectedIndex = 0
 
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
-
     End Sub
 
     Private Sub txtdesdefecha_KeyPress(ByVal sender As Object, _
@@ -57,6 +54,7 @@ Public Class ListadoAsientoResumen
                    Handles txtDesdeCuenta.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
+            txtHastaCuenta.Text = txtDesdeCuenta.Text
             txtHastaCuenta.Focus()
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True
@@ -127,13 +125,19 @@ Public Class ListadoAsientoResumen
     End Sub
 
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Enum Reporte
+        Pantalla
+        Imprimir
+    End Enum
+
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
         Dim txtDesde As String
         Dim txtHasta As String
         Dim txtUno As String
         Dim txtDos As String
         Dim txtFormula As String
         Dim x As Char = Chr(34)
+        Dim viewer As ReportViewer = Nothing
 
         txtDesde = ordenaFecha(txtDesdeFecha.Text)
         txtHasta = ordenaFecha(txthastafecha.Text)
@@ -156,25 +160,28 @@ Public Class ListadoAsientoResumen
 
         Select Case TipoListado.SelectedIndex
             Case 0
-                Dim viewer As New ReportViewer("Listado de Imputaciones Contables", Globals.reportPathWithName("WImputaNet.rpt"), txtFormula)
-
-                If opcPantalla.Checked = True Then
-                    viewer.Show()
-                Else
-                    viewer.imprimirReporte()
-                End If
+                viewer = New ReportViewer("Listado de Imputaciones Contables", Globals.reportPathWithName("WImputaNet.rpt"), txtFormula)
 
             Case Else
-                Dim viewer As New ReportViewer("Listado de Imputaciones Contables", Globals.reportPathWithName("WImputa2Net.rpt"), txtFormula)
+                viewer = New ReportViewer("Listado de Imputaciones Contables", Globals.reportPathWithName("WImputa2Net.rpt"), txtFormula)
 
-                If opcPantalla.Checked = True Then
-                    viewer.Show()
-                Else
-                    viewer.imprimirReporte()
-                End If
+        End Select
+
+        If IsNothing(viewer) Then
+            Exit Sub
+        End If
+
+        Select Case TipoImpresion
+            Case Reporte.Pantalla
+                viewer.imprimirReporte()
+            Case Reporte.Imprimir
+                viewer.Show()
+            Case Else
+
         End Select
 
     End Sub
+
 
     ' Rutinas de Filtrado Dinámico.
     Private Sub _FiltrarDinamicamente()
@@ -234,5 +241,13 @@ Public Class ListadoAsientoResumen
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
     End Sub
 End Class
