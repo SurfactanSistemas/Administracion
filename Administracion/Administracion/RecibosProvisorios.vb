@@ -1181,7 +1181,7 @@ Public Class RecibosProvisorios
 
         If Not IsNothing(buscar) Then
             _cuit = Trim(buscar(6))
-            If _cuit.Length = 11 Then : Exit Sub : End If
+            'If _cuit.Length = 11 Then : Exit Sub : End If
         End If
 
         With SolicitarInformacionCuit
