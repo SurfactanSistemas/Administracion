@@ -960,7 +960,7 @@ Public Class Recibos
             End If
 
             ' Comprobamos que los creditos indicados como de tipo 4 tengan su respectiva cuenta contable asignada.
-            If Not _ImputadosCorrectamenteValoresVarios() Then
+            If _NoImputadosCorrectamenteValoresVarios() Then
                 MsgBox("No se ha imputado correctamente ingreso de valores varios.", MsgBoxStyle.Information)
                 Exit Sub
             End If
@@ -2171,7 +2171,7 @@ Public Class Recibos
 
     End Sub
 
-    Private Function _ImputadosCorrectamenteValoresVarios() As Boolean
+    Private Function _NoImputadosCorrectamenteValoresVarios() As Boolean
         Dim _Error As Boolean = False
 
         For Each credito As DataGridViewRow In gridFormasPago.Rows
@@ -2179,6 +2179,7 @@ Public Class Recibos
             If Val(credito.Cells(0).Value) = 4 Then
                 If Not _CuentaContableIngresada(credito.Index) Then
                     _Error = True
+                    Exit For
                 End If
             End If
 
