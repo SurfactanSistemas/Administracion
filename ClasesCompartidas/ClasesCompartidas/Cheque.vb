@@ -13,6 +13,10 @@
         clave = clav
     End Sub
 
+    Public Function Orden() As String
+        Return String.Join("", fechaCheque.Split("/").Reverse)
+    End Function
+
     Public Function igualA(ByVal otroCheque As Cheque)
         Return identificacion = otroCheque.identificacion And
         fechaCheque = otroCheque.fechaCheque And

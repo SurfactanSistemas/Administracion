@@ -198,6 +198,9 @@ Public Class Depositos
         Dim cm As SqlCommand = New SqlCommand("SELECT Numero2, Importe2, Fecha2, Banco2, Clave, FechaOrd2, Estado2 FROM Recibos WHERE Estado2 = 'P' AND (Tipo2 = '02' OR Tipo2 = '2') AND TipoReg = '2'")
         Dim dr As SqlDataReader
 
+        Dim cheques As New List(Of Cheque)
+        Dim chequesOrdenados As List(Of Cheque)
+
         SQLConnector.conexionSql(cn, cm)
 
         ' Listamos Cheques pendientes en Recibos Definitivos.
@@ -210,7 +213,7 @@ Public Class Depositos
             If dr.HasRows Then
 
                 Do While dr.Read()
-                    lstConsulta.Items.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, dr.Item("Importe2"), dr.Item("banco2"), dr.Item("Clave")))
+                    cheques.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, dr.Item("Importe2"), dr.Item("banco2"), dr.Item("Clave")))
                 Loop
             End If
 
@@ -229,7 +232,7 @@ Public Class Depositos
 
         ' Listamos Cheques pendientes en Recibos Provisorios.
         Try
-            cm.CommandText = "SELECT Numero2, Importe2, Fecha2, Banco2, Clave, FechaOrd2, Estado2, ReciboDefinitivo FROM RecibosProvi WHERE Estado2 = 'P' AND (Tipo2 = '02' OR Tipo2 = '2') AND TipoReg = '2' and (ReciboDefinitivo = '' or ReciboDefinitivo = '0')"
+            cm.CommandText = "SELECT Numero2, Importe2, Fecha2, Banco2, Clave, FechaOrd2, Estado2, ReciboDefinitivo FROM RecibosProvi WHERE Estado2 = 'P' AND (Tipo2 = '02' OR Tipo2 = '2') AND TipoReg = '2' and ReciboDefinitivo = '0'"
             cn.Open()
 
             dr = cm.ExecuteReader()
@@ -237,7 +240,11 @@ Public Class Depositos
             If dr.HasRows Then
 
                 Do While dr.Read()
-                    lstConsulta.Items.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, dr.Item("Importe2"), dr.Item("banco2"), dr.Item("Clave")))
+
+                    If Not _ChequeUtilizadoEnRecibo(dr.Item("Numero2"), dr.Item("Fecha2")) Then
+                        cheques.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, dr.Item("Importe2"), dr.Item("banco2"), dr.Item("Clave")))
+                    End If
+
                 Loop
             End If
 
@@ -252,6 +259,17 @@ Public Class Depositos
             cm = Nothing
 
         End Try
+
+
+        chequesOrdenados = cheques.OrderBy(Function(c) c.Orden).ToList()
+
+        For Each _cheque As Cheque In chequesOrdenados
+
+            'If Not _ChequeUtilizadoEnRecibo(_cheque.clave) Then
+            lstConsulta.Items.Add(_cheque)
+            'End If
+
+        Next
 
     End Sub
 
@@ -777,6 +795,36 @@ Public Class Depositos
         Next
 
         Return _cargado
+    End Function
+
+    Private Function _ChequeUtilizadoEnRecibo(ByVal numero2 As String, ByVal fecha2 As String) As Boolean
+        Dim utilizado As Boolean = False
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Numero2 FROM Recibos WHERE Numero2 = '" & Trim(numero2) & "' AND Fecha2 = '" & Trim(fecha2) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                utilizado = True
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return utilizado
     End Function
 
     Private Function _ChequeUtilizadoEnRecibo(ByVal ClaveCheque As String) As Boolean

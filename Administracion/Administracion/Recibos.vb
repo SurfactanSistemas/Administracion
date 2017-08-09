@@ -1504,28 +1504,28 @@ Public Class Recibos
         ' Actualizamos los datos de retenciones, comprobante y diferencias de cambio.
         XSql = ""
         XSql = XSql & "UPDATE Recibos SET "
-        XSql = XSql & " DifCambio = " & "'" & lblDolares.Text & "',"
-        XSql = XSql & " RetSuss = " & "'" & txtRetSuss.Text & "',"
-        XSql = XSql & " ComproGanan = " & "'" & _ComprobanteRetGanancias & "',"
-        XSql = XSql & " ComproIva = " & "'" & _ComprobanteRetIva & "',"
+        XSql = XSql & " DifCambio = " & "'" & Val(lblDolares.Text) & "',"
+        XSql = XSql & " RetSuss = " & "'" & Val(txtRetSuss.Text) & "',"
+        XSql = XSql & " ComproGanan = " & "'" & Val(_ComprobanteRetGanancias) & "',"
+        XSql = XSql & " ComproIva = " & "'" & Val(_ComprobanteRetIva) & "',"
         XSql = XSql & " ComproIb = ''," 'Comprobar si se sigue colocando o no. Me parece que no.
-        XSql = XSql & " ComproSuss = " & "'" & _ComprobanteRetSuss & "',"
-        XSql = XSql & " NroRetIb1 = " & "'" & _CompIB1 & "',"
-        XSql = XSql & " NroRetIb2 = " & "'" & _CompIB2 & "',"
-        XSql = XSql & " NroRetIb3 = " & "'" & _CompIB3 & "',"
-        XSql = XSql & " NroRetIb4 = " & "'" & _CompIB4 & "',"
-        XSql = XSql & " NroRetIb5 = " & "'" & _CompIB5 & "',"
-        XSql = XSql & " NroRetIb6 = " & "'" & _CompIB6 & "',"
-        XSql = XSql & " NroRetIb7 = " & "'" & _CompIB7 & "',"
-        XSql = XSql & " NroRetIb8 = " & "'" & _CompIB8 & "',"
-        XSql = XSql & " RetIb1 = " & "'" & _RetIB1 & "',"
-        XSql = XSql & " RetIb2 = " & "'" & _RetIB2 & "',"
-        XSql = XSql & " RetIb3 = " & "'" & _RetIB3 & "',"
-        XSql = XSql & " RetIb4 = " & "'" & _RetIB4 & "',"
-        XSql = XSql & " RetIb5 = " & "'" & _RetIB5 & "',"
-        XSql = XSql & " RetIb6 = " & "'" & _RetIB6 & "',"
-        XSql = XSql & " RetIb7 = " & "'" & _RetIB7 & "',"
-        XSql = XSql & " RetIb8 = " & "'" & _RetIB8 & "'"
+        XSql = XSql & " ComproSuss = " & "'" & Val(_ComprobanteRetSuss) & "',"
+        XSql = XSql & " NroRetIb1 = " & "'" & Val(_CompIB1) & "',"
+        XSql = XSql & " NroRetIb2 = " & "'" & Val(_CompIB2) & "',"
+        XSql = XSql & " NroRetIb3 = " & "'" & Val(_CompIB3) & "',"
+        XSql = XSql & " NroRetIb4 = " & "'" & Val(_CompIB4) & "',"
+        XSql = XSql & " NroRetIb5 = " & "'" & Val(_CompIB5) & "',"
+        XSql = XSql & " NroRetIb6 = " & "'" & Val(_CompIB6) & "',"
+        XSql = XSql & " NroRetIb7 = " & "'" & Val(_CompIB7) & "',"
+        XSql = XSql & " NroRetIb8 = " & "'" & Val(_CompIB8) & "',"
+        XSql = XSql & " RetIb1 = " & "'" & Val(_RetIB1) & "',"
+        XSql = XSql & " RetIb2 = " & "'" & Val(_RetIB2) & "',"
+        XSql = XSql & " RetIb3 = " & "'" & Val(_RetIB3) & "',"
+        XSql = XSql & " RetIb4 = " & "'" & Val(_RetIB4) & "',"
+        XSql = XSql & " RetIb5 = " & "'" & Val(_RetIB5) & "',"
+        XSql = XSql & " RetIb6 = " & "'" & Val(_RetIB6) & "',"
+        XSql = XSql & " RetIb7 = " & "'" & Val(_RetIB7) & "',"
+        XSql = XSql & " RetIb8 = " & "'" & Val(_RetIB8) & "'"
         XSql = XSql & " Where Recibo = " & "'" & txtRecibo.Text & "'"
 
         cm.CommandText = XSql
@@ -1737,13 +1737,21 @@ Public Class Recibos
                         + XCuenta + "','" _
                         + XMarca + "','" _
                         + XFechaDepo + "','" _
-                        + XFechaDepoOrd + "'"
+                        + XFechaDepoOrd + "','" _
+                        + XClaveCheque + "','" _
+                        + XCuit + "','" _
+                        + txtProvi.Text + "','" _
+                        + XBancoCheque + "','" _
+                        + XSucursalCheque + "','" _
+                        + XChequeCheque + "','" _
+                        + XCuentaCheque + "'"
+
 
                 ' Damos de alta el nuevo renglon del nuevo recibo.
                 XSql = "INSERT INTO  Recibos (Clave, Recibo, Renglon, Cliente, Fecha, Fechaord, TipoRec, RetGanancias, RetIva, RetOtra, Retencion," _
                 & "TipoReg, Tipo1, Letra1, Punto1, Numero1, Importe1, Tipo2, Numero2, Fecha2, banco2, Importe2," _
                 & "Estado2, Empresa, FechaOrd2, Importe, Observaciones, Impolist, Impo1list, Destino, Cuenta, Marca," _
-                & "FechaDepo, FechaDepoOrd) " _
+                & "FechaDepo, FechaDepoOrd, ClaveCheque, Cuit, Provisorio, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque) " _
                 & "VALUES(" & XParam & ")"
 
                 cm.CommandText = XSql
@@ -1754,37 +1762,6 @@ Public Class Recibos
 
                 Catch ex As Exception
                     MsgBox("Hubo un problema al querer guardar el nuevo recibo.", MsgBoxStyle.Critical)
-                    Exit Sub
-                Finally
-
-
-                    cn.Close()
-
-
-                    XSql = ""
-                    XParam = ""
-
-                End Try
-
-                ' Actualizamos los datos del cheque.
-                XSql = "UPDATE Recibos SET " _
-                & " ClaveCheque = " + "'" + XClaveCheque + "'," _
-                & " Cuit = " + "'" + XCuit + "'," _
-                & " Provisorio = " + "'" + txtProvi.Text + "'," _
-                & " BancoCheque = " + "'" + XBancoCheque + "'," _
-                & " SucursalCheque = " + "'" + XSucursalCheque + "'," _
-                & " ChequeCheque = " + "'" + XChequeCheque + "'," _
-                & " CuentaCheque = " + "'" + XCuentaCheque + "'" _
-                & " Where Clave = " + "'" + XClave + "'"
-
-                cm.CommandText = XSql
-                SQLConnector.conexionSql(cn, cm)
-
-                Try
-                    cm.ExecuteNonQuery()
-
-                Catch ex As Exception
-                    MsgBox("Hubo un problema al querer actualizar el recibo.", MsgBoxStyle.Critical)
                     Exit Sub
                 Finally
 
@@ -1830,6 +1807,7 @@ Public Class Recibos
 
                     Else
                         MsgBox("Error al querer actualizar el saldo en la Cta Cte asociada al recibo", MsgBoxStyle.Information)
+                        Exit Sub
                     End If
 
                 Catch ex As Exception
@@ -1849,8 +1827,8 @@ Public Class Recibos
 
                     XSql = "UPDATE CtaCte " _
                         & "SET " _
-                        & " Saldo = '" & XSaldo & "'," _
-                        & " SaldoUs = '" & XSaldoUs & "', " _
+                        & " Saldo = '" & Val(XSaldo) & "'," _
+                        & " SaldoUs = '" & Val(XSaldoUs) & "', " _
                         & " Estado = '" & XEstado & "', " _
                         & " Wdate = '" & XDate & "'" _
                         & " WHERE Clave = '" & ClaveCtaCte & "'"
@@ -2245,7 +2223,7 @@ Public Class Recibos
     Private Function _NumeracionDeReciboSiguiente()
         Dim ultimo As Integer = 0
 
-        cm.CommandText = "SELECT Recibo FROM Recibos WHERE Recibo < 6000 ORDER BY Recibo DESC"
+        cm.CommandText = "SELECT Recibo FROM Recibos WHERE Recibo < 600000 ORDER BY Recibo DESC"
         SQLConnector.conexionSql(cn, cm)
 
         Try
@@ -2531,11 +2509,18 @@ Public Class Recibos
     Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtFecha.Text) <> "" Then
+            If Proceso._ValidarFecha(txtFecha.Text) Then
+
                 _DeterminarParidad()
+
+                If Trim(txtParidad.Text) = "" Then
+                    MsgBox("No existe paridad cargada para la fecha indicada.")
+                End If
+
+                _SaltarA(txtProvi)
+
             End If
 
-            _SaltarA(txtProvi)
         ElseIf e.KeyData = Keys.Escape Then
             txtFecha.Clear()
         End If
@@ -4094,7 +4079,7 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
+    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
         e.Cancel = Proceso._ValidarFecha(txtFecha.Text, e.IsValidInput)
     End Sub
 
