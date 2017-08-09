@@ -520,9 +520,9 @@ Public Class RecibosProvisorios
             txtTotal.Text = _NormalizarNumero(txtTotal.Text)
 
             With gridRecibos
-                .Rows(0).Selected = True
+                '.Rows(0).Selected = True
                 .CurrentCell = .Rows(0).Cells(0)
-                '.Focus()
+                .Focus()
             End With
         ElseIf e.KeyData = Keys.Escape Then
             txtTotal.Text = "0.00"

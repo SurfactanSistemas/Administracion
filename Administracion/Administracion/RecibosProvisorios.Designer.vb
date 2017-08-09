@@ -105,7 +105,6 @@ Partial Class RecibosProvisorios
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.gridRecibos.DefaultCellStyle = DataGridViewCellStyle6
-        Me.gridRecibos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridRecibos.Location = New System.Drawing.Point(18, 179)
         Me.gridRecibos.Name = "gridRecibos"
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
