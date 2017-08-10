@@ -1514,22 +1514,22 @@ Public Class Recibos
         XSql = XSql & " ComproIva = " & "'" & Val(_ComprobanteRetIva) & "',"
         XSql = XSql & " ComproIb = ''," 'Comprobar si se sigue colocando o no. Me parece que no.
         XSql = XSql & " ComproSuss = " & "'" & Val(_ComprobanteRetSuss) & "',"
-        XSql = XSql & " NroRetIb1 = " & "'" & Val(_CompIB1) & "',"
-        XSql = XSql & " NroRetIb2 = " & "'" & Val(_CompIB2) & "',"
-        XSql = XSql & " NroRetIb3 = " & "'" & Val(_CompIB3) & "',"
-        XSql = XSql & " NroRetIb4 = " & "'" & Val(_CompIB4) & "',"
-        XSql = XSql & " NroRetIb5 = " & "'" & Val(_CompIB5) & "',"
-        XSql = XSql & " NroRetIb6 = " & "'" & Val(_CompIB6) & "',"
-        XSql = XSql & " NroRetIb7 = " & "'" & Val(_CompIB7) & "',"
-        XSql = XSql & " NroRetIb8 = " & "'" & Val(_CompIB8) & "',"
-        XSql = XSql & " RetIb1 = " & "'" & Val(_RetIB1) & "',"
-        XSql = XSql & " RetIb2 = " & "'" & Val(_RetIB2) & "',"
-        XSql = XSql & " RetIb3 = " & "'" & Val(_RetIB3) & "',"
-        XSql = XSql & " RetIb4 = " & "'" & Val(_RetIB4) & "',"
-        XSql = XSql & " RetIb5 = " & "'" & Val(_RetIB5) & "',"
-        XSql = XSql & " RetIb6 = " & "'" & Val(_RetIB6) & "',"
-        XSql = XSql & " RetIb7 = " & "'" & Val(_RetIB7) & "',"
-        XSql = XSql & " RetIb8 = " & "'" & Val(_RetIB8) & "'"
+        XSql = XSql & " NroRetIb1 = " & Val(_CompIB1) & ","
+        XSql = XSql & " NroRetIb2 = " & Val(_CompIB2) & ","
+        XSql = XSql & " NroRetIb3 = " & Val(_CompIB3) & ","
+        XSql = XSql & " NroRetIb4 = " & Val(_CompIB4) & ","
+        XSql = XSql & " NroRetIb5 = " & Val(_CompIB5) & ","
+        XSql = XSql & " NroRetIb6 = " & Val(_CompIB6) & ","
+        XSql = XSql & " NroRetIb7 = " & Val(_CompIB7) & ","
+        XSql = XSql & " NroRetIb8 = " & Val(_CompIB8) & ","
+        XSql = XSql & " RetIb1 = " & Val(_RetIB1) & ","
+        XSql = XSql & " RetIb2 = " & Val(_RetIB2) & ","
+        XSql = XSql & " RetIb3 = " & Val(_RetIB3) & ","
+        XSql = XSql & " RetIb4 = " & Val(_RetIB4) & ","
+        XSql = XSql & " RetIb5 = " & Val(_RetIB5) & ","
+        XSql = XSql & " RetIb6 = " & Val(_RetIB6) & ","
+        XSql = XSql & " RetIb7 = " & Val(_RetIB7) & ","
+        XSql = XSql & " RetIb8 = " & Val(_RetIB8) & ""
         XSql = XSql & " Where Recibo = " & "'" & txtRecibo.Text & "'"
 
         cm.CommandText = XSql
@@ -1831,8 +1831,8 @@ Public Class Recibos
 
                     XSql = "UPDATE CtaCte " _
                         & "SET " _
-                        & " Saldo = '" & Val(XSaldo) & "'," _
-                        & " SaldoUs = '" & Val(XSaldoUs) & "', " _
+                        & " Saldo = '" & XSaldo & "'," _
+                        & " SaldoUs = '" & XSaldoUs & "', " _
                         & " Estado = '" & XEstado & "', " _
                         & " Wdate = '" & XDate & "'" _
                         & " WHERE Clave = '" & ClaveCtaCte & "'"
