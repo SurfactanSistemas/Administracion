@@ -51,6 +51,7 @@ Partial Class Pagos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.lstSeleccion = New Administracion.CustomListBox()
         Me.CLBFiltrado = New Administracion.CustomListBox()
         Me.txtFechaParidad = New System.Windows.Forms.MaskedTextBox()
@@ -97,7 +98,6 @@ Partial Class Pagos
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
-        Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -178,6 +178,7 @@ Partial Class Pagos
         Me.gridPagos.AllowUserToAddRows = False
         Me.gridPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Importe, Me.Descripcion, Me.ImpoNeto})
+        Me.gridPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridPagos.Location = New System.Drawing.Point(16, 247)
         Me.gridPagos.Name = "gridPagos"
         Me.gridPagos.RowHeadersWidth = 10
@@ -236,6 +237,7 @@ Partial Class Pagos
         '
         Me.gridFormaPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridFormaPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo2, Me.Numero2, Me.Fecha, Me.Banco, Me.Nombre, Me.Importe2, Me.XClave, Me.XCuil})
+        Me.gridFormaPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridFormaPagos.Location = New System.Drawing.Point(414, 247)
         Me.gridFormaPagos.Name = "gridFormaPagos"
         Me.gridFormaPagos.RowHeadersWidth = 10
@@ -373,6 +375,22 @@ Partial Class Pagos
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(828, 500)
         Me.Panel2.TabIndex = 73
+        '
+        'txtFechaAux
+        '
+        Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFechaAux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtFechaAux.Location = New System.Drawing.Point(542, 272)
+        Me.txtFechaAux.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtFechaAux.Mask = "00/00/0000"
+        Me.txtFechaAux.MaximumSize = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.MinimumSize = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.Name = "txtFechaAux"
+        Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaAux.Size = New System.Drawing.Size(60, 13)
+        Me.txtFechaAux.TabIndex = 124
+        Me.txtFechaAux.ValidatingType = GetType(Date)
+        Me.txtFechaAux.Visible = False
         '
         'lstSeleccion
         '
@@ -1026,22 +1044,6 @@ Partial Class Pagos
         Me.btnAgregar.TabIndex = 74
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Agregar")
         Me.btnAgregar.UseVisualStyleBackColor = True
-        '
-        'txtFechaAux
-        '
-        Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFechaAux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtFechaAux.Location = New System.Drawing.Point(542, 272)
-        Me.txtFechaAux.Margin = New System.Windows.Forms.Padding(0)
-        Me.txtFechaAux.Mask = "00/00/0000"
-        Me.txtFechaAux.MaximumSize = New System.Drawing.Size(60, 15)
-        Me.txtFechaAux.MinimumSize = New System.Drawing.Size(60, 15)
-        Me.txtFechaAux.Name = "txtFechaAux"
-        Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaAux.Size = New System.Drawing.Size(60, 15)
-        Me.txtFechaAux.TabIndex = 124
-        Me.txtFechaAux.ValidatingType = GetType(Date)
-        Me.txtFechaAux.Visible = False
         '
         'Pagos
         '
