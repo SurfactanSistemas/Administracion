@@ -1037,7 +1037,7 @@ Public Class RecibosProvisorios
 
             _cargado = True
 
-        ElseIf Not _ChequeUtilizadoEnReciboProvisorio(ClaveCheque) Then
+        ElseIf _ChequeUtilizadoEnReciboProvisorio(ClaveCheque) Then
 
             _cargado = True
 
