@@ -4122,7 +4122,7 @@ Public Class Recibos
 
             End If
 
-            Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
+            'Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
 
             If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
 
@@ -4136,7 +4136,11 @@ Public Class Recibos
                 With gridFormasPago
                     .Rows(WRow).Cells(2).Value = txtFechaAux.Text
 
-                    .CurrentCell = .Rows(WRow).Cells(3)
+                    If Trim(.Rows(WRow).Cells(3).Value) <> "" Then
+                        .CurrentCell = .Rows(WRow).Cells(4)
+                    Else
+                        .CurrentCell = .Rows(WRow).Cells(3)
+                    End If
 
                     .Focus()
                 End With

@@ -1283,7 +1283,7 @@ Public Class RecibosProvisorios
 
             End If
 
-            Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
+            'Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
 
             If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
 
@@ -1295,7 +1295,12 @@ Public Class RecibosProvisorios
 
                 gridRecibos.Rows(WRow).Cells(2).Value = txtFechaAux.Text
 
-                gridRecibos.CurrentCell = gridRecibos.Rows(WRow).Cells(3)
+                If Trim(gridRecibos.Rows(WRow).Cells(3).Value) <> "" Then
+                    gridRecibos.CurrentCell = gridRecibos.Rows(WRow).Cells(4)
+                Else
+                    gridRecibos.CurrentCell = gridRecibos.Rows(WRow).Cells(3)
+                End If
+
                 gridRecibos.Focus()
 
                 txtFechaAux.Visible = False
@@ -1502,4 +1507,5 @@ Public Class RecibosProvisorios
             End If
         End With
     End Sub
+
 End Class

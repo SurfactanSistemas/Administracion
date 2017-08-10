@@ -257,7 +257,7 @@ Partial Class RecibosProvisorios
         Me.txtFechaAux.MinimumSize = New System.Drawing.Size(60, 15)
         Me.txtFechaAux.Name = "txtFechaAux"
         Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaAux.Size = New System.Drawing.Size(60, 15)
+        Me.txtFechaAux.Size = New System.Drawing.Size(60, 13)
         Me.txtFechaAux.TabIndex = 123
         Me.txtFechaAux.ValidatingType = GetType(Date)
         Me.txtFechaAux.Visible = False
