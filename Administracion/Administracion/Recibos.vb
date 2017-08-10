@@ -2631,6 +2631,19 @@ Public Class Recibos
                             End If
 
                             If iCol = 2 Then
+                                ' Completamos el año de manera automatica
+                                If Len(Trim(valor)) = 6 Then
+                                    Dim _mes As String = Mid(valor, 4, 2)
+
+                                    Select Case Val(_mes)
+                                        Case Is < 7
+                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2018"
+                                        Case Else
+                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2017"
+                                    End Select
+
+                                End If
+
                                 If _ChequeVencido(valor) Then
                                     MsgBox("La fecha del cheque introducida es inválida", MsgBoxStyle.Critical)
                                     gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol)
@@ -4094,6 +4107,20 @@ Public Class Recibos
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
 
+
+            ' Completamos el año de manera automatica
+            If Len(Trim(txtFechaAux.Text)) = 6 Then
+                Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
+
+                Select Case Val(_mes)
+                    Case Is < 7
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2018"
+                    Case Else
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2017"
+                End Select
+
+            End If
+
             Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
 
             If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
@@ -4134,6 +4161,45 @@ Public Class Recibos
         lstSeleccion.SelectedIndex = 1
 
         lstSeleccion_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago.CellClick
+        With gridFormasPago
+            If e.ColumnIndex = 2 Then
+                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
+
+                .ClearSelection()
+                _location.Y += YMARGEN '183 '(4 + 180)
+                _location.X += XMARGEN '(7 + 10)
+                txtFechaAux.Location = _location
+                txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
+                WRow = e.RowIndex
+                Wcol = e.ColumnIndex
+                txtFechaAux.Visible = True
+                txtFechaAux.Focus()
+            End If
+        End With
+
+    End Sub
+
+    Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago.CellEnter
+        With gridFormasPago
+            If e.ColumnIndex = 2 Then
+                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
+
+                .ClearSelection()
+                _location.Y += YMARGEN '183 '(4 + 180)
+                _location.X += XMARGEN '(7 + 10)
+                txtFechaAux.Location = _location
+                txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
+                WRow = e.RowIndex
+                Wcol = e.ColumnIndex
+                txtFechaAux.Visible = True
+                txtFechaAux.Focus()
+            End If
+        End With
     End Sub
 
 End Class

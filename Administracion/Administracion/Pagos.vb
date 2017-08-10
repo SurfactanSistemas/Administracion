@@ -4352,4 +4352,43 @@ Public Class Pagos
         End If
 
     End Sub
+
+    Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellClick
+        With gridFormaPagos
+            If e.ColumnIndex = 2 Then
+                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
+
+                .ClearSelection()
+                _location.Y += YMARGEN '183 '(4 + 180)
+                _location.X += XMARGEN '(7 + 10)
+                txtFechaAux.Location = _location
+                txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
+                WRow = e.RowIndex
+                Wcol = e.ColumnIndex
+                txtFechaAux.Visible = True
+                txtFechaAux.Focus()
+            End If
+        End With
+
+    End Sub
+
+    Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellEnter
+        With gridFormaPagos
+            If e.ColumnIndex = 2 Then
+                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
+
+                .ClearSelection()
+                _location.Y += YMARGEN '183 '(4 + 180)
+                _location.X += XMARGEN '(7 + 10)
+                txtFechaAux.Location = _location
+                txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
+                WRow = e.RowIndex
+                Wcol = e.ColumnIndex
+                txtFechaAux.Visible = True
+                txtFechaAux.Focus()
+            End If
+        End With
+    End Sub
 End Class
