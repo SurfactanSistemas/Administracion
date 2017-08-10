@@ -23,14 +23,14 @@ Partial Class Recibos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridPagos = New System.Windows.Forms.DataGridView()
         Me.TipoCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LetraCC = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -98,11 +98,15 @@ Partial Class Recibos
         Me.btnConsulta = New Administracion.CustomButton()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCtaCte = New Administracion.CustomButton()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormasPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'gridPagos
@@ -116,13 +120,13 @@ Partial Class Recibos
         Me.gridPagos.Name = "gridPagos"
         Me.gridPagos.RowHeadersWidth = 20
         Me.gridPagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.gridPagos.Size = New System.Drawing.Size(405, 271)
+        Me.gridPagos.Size = New System.Drawing.Size(384, 194)
         Me.gridPagos.TabIndex = 20
         '
         'TipoCC
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TipoCC.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TipoCC.DefaultCellStyle = DataGridViewCellStyle9
         Me.TipoCC.FillWeight = 61.20156!
         Me.TipoCC.HeaderText = "Tipo"
         Me.TipoCC.Name = "TipoCC"
@@ -137,8 +141,8 @@ Partial Class Recibos
         '
         'PuntoCC
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.PuntoCC.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.PuntoCC.DefaultCellStyle = DataGridViewCellStyle10
         Me.PuntoCC.FillWeight = 55.11111!
         Me.PuntoCC.HeaderText = "Punto"
         Me.PuntoCC.Name = "PuntoCC"
@@ -146,8 +150,8 @@ Partial Class Recibos
         '
         'NumeroCC
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NumeroCC.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NumeroCC.DefaultCellStyle = DataGridViewCellStyle11
         Me.NumeroCC.FillWeight = 125.6672!
         Me.NumeroCC.HeaderText = "Numero"
         Me.NumeroCC.Name = "NumeroCC"
@@ -155,10 +159,10 @@ Partial Class Recibos
         '
         'ImporteCC
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "N2"
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.ImporteCC.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.Format = "N2"
+        DataGridViewCellStyle12.NullValue = Nothing
+        Me.ImporteCC.DefaultCellStyle = DataGridViewCellStyle12
         Me.ImporteCC.FillWeight = 125.6672!
         Me.ImporteCC.HeaderText = "Importe ($)"
         Me.ImporteCC.Name = "ImporteCC"
@@ -169,18 +173,18 @@ Partial Class Recibos
         Me.gridFormasPago.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridFormasPago.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.numero, Me.fecha, Me.banco, Me.importe})
         Me.gridFormasPago.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.gridFormasPago.Location = New System.Drawing.Point(444, 229)
+        Me.gridFormasPago.Location = New System.Drawing.Point(421, 229)
         Me.gridFormasPago.Name = "gridFormasPago"
         Me.gridFormasPago.RowHeadersWidth = 20
         Me.gridFormasPago.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.gridFormasPago.Size = New System.Drawing.Size(402, 272)
+        Me.gridFormasPago.Size = New System.Drawing.Size(392, 194)
         Me.gridFormasPago.TabIndex = 119
         '
         'Tipo
         '
         Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle13
         Me.Tipo.FillWeight = 80.0!
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
@@ -189,8 +193,8 @@ Partial Class Recibos
         'numero
         '
         Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.numero.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.numero.DefaultCellStyle = DataGridViewCellStyle14
         Me.numero.FillWeight = 180.0!
         Me.numero.HeaderText = "Numero/Cta"
         Me.numero.Name = "numero"
@@ -199,8 +203,8 @@ Partial Class Recibos
         'fecha
         '
         Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.fecha.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.fecha.DefaultCellStyle = DataGridViewCellStyle15
         Me.fecha.FillWeight = 120.0!
         Me.fecha.HeaderText = "Fecha"
         Me.fecha.Name = "fecha"
@@ -215,10 +219,10 @@ Partial Class Recibos
         'importe
         '
         Me.importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N2"
-        DataGridViewCellStyle8.NullValue = Nothing
-        Me.importe.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle16.Format = "N2"
+        DataGridViewCellStyle16.NullValue = Nothing
+        Me.importe.DefaultCellStyle = DataGridViewCellStyle16
         Me.importe.FillWeight = 80.0!
         Me.importe.HeaderText = "Importe ($)"
         Me.importe.Name = "importe"
@@ -275,9 +279,11 @@ Partial Class Recibos
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(-1, 0)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(883, 50)
+        Me.Panel1.Size = New System.Drawing.Size(883, 47)
         Me.Panel1.TabIndex = 124
         '
         'Label2
@@ -285,7 +291,7 @@ Partial Class Recibos
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(715, 9)
+        Me.Label2.Location = New System.Drawing.Point(664, 14)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -346,9 +352,11 @@ Partial Class Recibos
         Me.Panel2.Controls.Add(Me.lstConsulta)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Location = New System.Drawing.Point(-1, 50)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(0, 47)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(883, 571)
+        Me.Panel2.Size = New System.Drawing.Size(883, 487)
         Me.Panel2.TabIndex = 125
         '
         'lblDiferencia
@@ -356,7 +364,7 @@ Partial Class Recibos
         Me.lblDiferencia.BackColor = System.Drawing.SystemColors.Control
         Me.lblDiferencia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDiferencia.ControlAssociationKey = -1
-        Me.lblDiferencia.Location = New System.Drawing.Point(352, 539)
+        Me.lblDiferencia.Location = New System.Drawing.Point(331, 455)
         Me.lblDiferencia.Name = "lblDiferencia"
         Me.lblDiferencia.Size = New System.Drawing.Size(83, 22)
         Me.lblDiferencia.TabIndex = 129
@@ -369,7 +377,7 @@ Partial Class Recibos
         Me.CustomLabel8.ControlAssociationKey = 9
         Me.CustomLabel8.Font = New System.Drawing.Font("Calibri", 9.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel8.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel8.Location = New System.Drawing.Point(275, 544)
+        Me.CustomLabel8.Location = New System.Drawing.Point(254, 460)
         Me.CustomLabel8.Name = "CustomLabel8"
         Me.CustomLabel8.Size = New System.Drawing.Size(66, 15)
         Me.CustomLabel8.TabIndex = 128
@@ -406,7 +414,7 @@ Partial Class Recibos
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(634, 504)
+        Me.Label5.Location = New System.Drawing.Point(605, 429)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(107, 18)
         Me.Label5.TabIndex = 125
@@ -442,7 +450,7 @@ Partial Class Recibos
         Me.lblDolares.BackColor = System.Drawing.SystemColors.Control
         Me.lblDolares.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDolares.ControlAssociationKey = -1
-        Me.lblDolares.Location = New System.Drawing.Point(174, 503)
+        Me.lblDolares.Location = New System.Drawing.Point(153, 428)
         Me.lblDolares.Name = "lblDolares"
         Me.lblDolares.Size = New System.Drawing.Size(74, 22)
         Me.lblDolares.TabIndex = 121
@@ -454,7 +462,7 @@ Partial Class Recibos
         Me.lblTotalDebitos.BackColor = System.Drawing.SystemColors.Control
         Me.lblTotalDebitos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTotalDebitos.ControlAssociationKey = -1
-        Me.lblTotalDebitos.Location = New System.Drawing.Point(352, 503)
+        Me.lblTotalDebitos.Location = New System.Drawing.Point(331, 428)
         Me.lblTotalDebitos.Name = "lblTotalDebitos"
         Me.lblTotalDebitos.Size = New System.Drawing.Size(84, 22)
         Me.lblTotalDebitos.TabIndex = 121
@@ -479,9 +487,9 @@ Partial Class Recibos
         Me.CustomLabel12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CustomLabel12.ControlAssociationKey = -1
         Me.CustomLabel12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomLabel12.Location = New System.Drawing.Point(444, 540)
+        Me.CustomLabel12.Location = New System.Drawing.Point(444, 456)
         Me.CustomLabel12.Name = "CustomLabel12"
-        Me.CustomLabel12.Size = New System.Drawing.Size(402, 22)
+        Me.CustomLabel12.Size = New System.Drawing.Size(369, 22)
         Me.CustomLabel12.TabIndex = 118
         Me.CustomLabel12.Text = "Tipo Doc.: 1) Ef. 2) Ch. 3) Doc. 4) Varios "
         Me.CustomLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -503,7 +511,7 @@ Partial Class Recibos
         Me.lblTotalCreditos.BackColor = System.Drawing.SystemColors.Control
         Me.lblTotalCreditos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTotalCreditos.ControlAssociationKey = -1
-        Me.lblTotalCreditos.Location = New System.Drawing.Point(742, 503)
+        Me.lblTotalCreditos.Location = New System.Drawing.Point(713, 428)
         Me.lblTotalCreditos.Name = "lblTotalCreditos"
         Me.lblTotalCreditos.Size = New System.Drawing.Size(100, 22)
         Me.lblTotalCreditos.TabIndex = 104
@@ -811,7 +819,7 @@ Partial Class Recibos
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(251, 504)
+        Me.Label4.Location = New System.Drawing.Point(230, 429)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(103, 18)
         Me.Label4.TabIndex = 125
@@ -822,11 +830,11 @@ Partial Class Recibos
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(33, 507)
+        Me.Label3.Location = New System.Drawing.Point(28, 432)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(141, 14)
+        Me.Label3.Size = New System.Drawing.Size(126, 14)
         Me.Label3.TabIndex = 125
-        Me.Label3.Text = "Diferencia de Cambio (u$s)"
+        Me.Label3.Text = "Diferencia Cambio (u$s)"
         '
         'btnImpresion
         '
@@ -842,7 +850,7 @@ Partial Class Recibos
         Me.btnImpresion.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImpresion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImpresion.LabelAssociationKey = -1
-        Me.btnImpresion.Location = New System.Drawing.Point(464, 631)
+        Me.btnImpresion.Location = New System.Drawing.Point(448, 5)
         Me.btnImpresion.Name = "btnImpresion"
         Me.btnImpresion.Size = New System.Drawing.Size(58, 51)
         Me.btnImpresion.TabIndex = 132
@@ -863,7 +871,7 @@ Partial Class Recibos
         Me.btnDias.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnDias.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDias.LabelAssociationKey = -1
-        Me.btnDias.Location = New System.Drawing.Point(672, 631)
+        Me.btnDias.Location = New System.Drawing.Point(656, 5)
         Me.btnDias.Name = "btnDias"
         Me.btnDias.Size = New System.Drawing.Size(58, 51)
         Me.btnDias.TabIndex = 131
@@ -884,7 +892,7 @@ Partial Class Recibos
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(568, 631)
+        Me.btnLimpiar.Location = New System.Drawing.Point(552, 5)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(58, 51)
         Me.btnLimpiar.TabIndex = 130
@@ -905,7 +913,7 @@ Partial Class Recibos
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(360, 631)
+        Me.btnCerrar.Location = New System.Drawing.Point(344, 5)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(58, 51)
         Me.btnCerrar.TabIndex = 129
@@ -926,7 +934,7 @@ Partial Class Recibos
         Me.btnIntereses.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnIntereses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnIntereses.LabelAssociationKey = -1
-        Me.btnIntereses.Location = New System.Drawing.Point(152, 631)
+        Me.btnIntereses.Location = New System.Drawing.Point(136, 5)
         Me.btnIntereses.Name = "btnIntereses"
         Me.btnIntereses.Size = New System.Drawing.Size(58, 51)
         Me.btnIntereses.TabIndex = 128
@@ -947,7 +955,7 @@ Partial Class Recibos
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(48, 631)
+        Me.btnAgregar.Location = New System.Drawing.Point(32, 5)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(58, 51)
         Me.btnAgregar.TabIndex = 126
@@ -968,7 +976,7 @@ Partial Class Recibos
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(256, 631)
+        Me.btnConsulta.Location = New System.Drawing.Point(240, 5)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(58, 51)
         Me.btnConsulta.TabIndex = 127
@@ -989,28 +997,53 @@ Partial Class Recibos
         Me.btnCtaCte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCtaCte.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCtaCte.LabelAssociationKey = -1
-        Me.btnCtaCte.Location = New System.Drawing.Point(776, 631)
+        Me.btnCtaCte.Location = New System.Drawing.Point(760, 5)
         Me.btnCtaCte.Name = "btnCtaCte"
         Me.btnCtaCte.Size = New System.Drawing.Size(58, 51)
         Me.btnCtaCte.TabIndex = 131
         Me.ToolTip1.SetToolTip(Me.btnCtaCte, "Consultar Ctas Ctes")
         Me.btnCtaCte.UseVisualStyleBackColor = True
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 3
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(842, 594)
+        Me.TableLayoutPanel1.TabIndex = 133
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.btnCtaCte)
+        Me.Panel3.Controls.Add(Me.btnConsulta)
+        Me.Panel3.Controls.Add(Me.btnImpresion)
+        Me.Panel3.Controls.Add(Me.btnAgregar)
+        Me.Panel3.Controls.Add(Me.btnIntereses)
+        Me.Panel3.Controls.Add(Me.btnDias)
+        Me.Panel3.Controls.Add(Me.btnCerrar)
+        Me.Panel3.Controls.Add(Me.btnLimpiar)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(0, 534)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(883, 60)
+        Me.Panel3.TabIndex = 134
+        '
         'Recibos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(882, 690)
-        Me.Controls.Add(Me.btnImpresion)
-        Me.Controls.Add(Me.btnCtaCte)
-        Me.Controls.Add(Me.btnDias)
-        Me.Controls.Add(Me.btnLimpiar)
-        Me.Controls.Add(Me.btnCerrar)
-        Me.Controls.Add(Me.btnIntereses)
-        Me.Controls.Add(Me.btnAgregar)
-        Me.Controls.Add(Me.btnConsulta)
-        Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Panel2)
+        Me.ClientSize = New System.Drawing.Size(842, 594)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Name = "Recibos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1022,6 +1055,8 @@ Partial Class Recibos
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1092,4 +1127,6 @@ Partial Class Recibos
     Friend WithEvents btnCtaCte As Administracion.CustomButton
     Friend WithEvents lblDiferencia As Administracion.CustomLabel
     Friend WithEvents CustomLabel8 As Administracion.CustomLabel
+    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents Panel3 As System.Windows.Forms.Panel
 End Class
