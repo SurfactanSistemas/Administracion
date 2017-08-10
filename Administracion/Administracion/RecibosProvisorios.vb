@@ -1019,7 +1019,7 @@ Public Class RecibosProvisorios
         _Cuit = _TraerNumeroCuit(_ClaveBanco & _Sucursal & _NumCta)
 
         ' Guardamos el nuevo Cheque.
-        _GuardarNuevoCheque(row, ClaveCheque, _Banco, _Sucursal, _NumCheque, _NumCta, _Cuit)
+        _GuardarNuevoCheque(row, ClaveCheque, _ClaveBanco, _Sucursal, _NumCheque, _NumCta, _Cuit)
 
         Return _LecturaCorrecta
     End Function
@@ -1152,6 +1152,12 @@ Public Class RecibosProvisorios
                                     ByVal numCheque As String, ByVal numCta As String, _
                                     ByVal _Cuit As String)
 
+        Dim buscar As Object = _ClavesCheques.Find(Function(c) c(0) = row)
+
+        If Not IsNothing(buscar) Then
+            _ClavesCheques.Remove(buscar)
+        End If
+
         _ClavesCheques.Add({row, Clave, banco, sucursal, numCheque, numCta, _Cuit, "", ""})
 
     End Sub
@@ -1215,6 +1221,21 @@ Public Class RecibosProvisorios
         _cuenta = ""
         _estado = ""
         _destino = ""
+
+        buscar = Nothing
+        buscar = _ClavesCheques.Find(Function(c) c(0) = row)
+        If Not IsNothing(buscar) Then
+
+            _clave = buscar(1)
+            _banco = buscar(2)
+            _sucursal = buscar(3)
+            _cheque = buscar(4)
+            _cuenta = buscar(5)
+            _estado = ""
+            _destino = ""
+
+            _ClavesCheques.Remove(buscar)
+        End If
 
         _ClavesCheques.Add({row, _clave, _banco, _sucursal, _cheque, _cuenta, _cuit, _estado, _destino})
 
