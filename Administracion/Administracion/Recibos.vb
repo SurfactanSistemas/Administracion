@@ -2542,7 +2542,7 @@ Public Class Recibos
         If e.KeyData = Keys.Enter Then
 
             If Val(txtParidad.Text) > 0 Then
-                _SaltarA(txtRetIva)
+                _SaltarA(txtObservaciones)
                 _SumarDebitos()
             Else
                 MsgBox("El valor de la Paridad debe ser mayor a 0", MsgBoxStyle.Information)
