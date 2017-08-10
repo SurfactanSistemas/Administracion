@@ -46,6 +46,7 @@ Partial Class RecibosProvisorios
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.CustomLabel10 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
+        Me.lblDiferencia = New Administracion.CustomLabel()
         Me.lblTotal = New Administracion.CustomLabel()
         Me.lstSeleccion = New Administracion.CustomListBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
@@ -59,6 +60,7 @@ Partial Class RecibosProvisorios
         Me.txtRetIva = New Administracion.CustomTextBox()
         Me.txtTotal = New Administracion.CustomTextBox()
         Me.txtRetIB = New Administracion.CustomTextBox()
+        Me.CustomLabel12 = New Administracion.CustomLabel()
         Me.CustomLabel8 = New Administracion.CustomLabel()
         Me.CustomLabel7 = New Administracion.CustomLabel()
         Me.CustomLabel9 = New Administracion.CustomLabel()
@@ -115,7 +117,7 @@ Partial Class RecibosProvisorios
         DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.gridRecibos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
-        Me.gridRecibos.Size = New System.Drawing.Size(756, 363)
+        Me.gridRecibos.Size = New System.Drawing.Size(756, 341)
         Me.gridRecibos.TabIndex = 13
         '
         'Tipo
@@ -215,6 +217,7 @@ Partial Class RecibosProvisorios
         Me.Panel2.Controls.Add(Me.CustomLabel1)
         Me.Panel2.Controls.Add(Me.CustomLabel10)
         Me.Panel2.Controls.Add(Me.CustomLabel2)
+        Me.Panel2.Controls.Add(Me.lblDiferencia)
         Me.Panel2.Controls.Add(Me.lblTotal)
         Me.Panel2.Controls.Add(Me.lstSeleccion)
         Me.Panel2.Controls.Add(Me.CustomLabel3)
@@ -229,6 +232,7 @@ Partial Class RecibosProvisorios
         Me.Panel2.Controls.Add(Me.txtRetIva)
         Me.Panel2.Controls.Add(Me.txtTotal)
         Me.Panel2.Controls.Add(Me.txtRetIB)
+        Me.Panel2.Controls.Add(Me.CustomLabel12)
         Me.Panel2.Controls.Add(Me.CustomLabel8)
         Me.Panel2.Controls.Add(Me.CustomLabel7)
         Me.Panel2.Controls.Add(Me.CustomLabel9)
@@ -287,7 +291,7 @@ Partial Class RecibosProvisorios
         Me.CustomLabel10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CustomLabel10.ControlAssociationKey = -1
         Me.CustomLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomLabel10.Location = New System.Drawing.Point(210, 545)
+        Me.CustomLabel10.Location = New System.Drawing.Point(210, 526)
         Me.CustomLabel10.Name = "CustomLabel10"
         Me.CustomLabel10.Size = New System.Drawing.Size(412, 22)
         Me.CustomLabel10.TabIndex = 118
@@ -306,12 +310,24 @@ Partial Class RecibosProvisorios
         Me.CustomLabel2.TabIndex = 1
         Me.CustomLabel2.Text = "Cod. Cliente"
         '
+        'lblDiferencia
+        '
+        Me.lblDiferencia.BackColor = System.Drawing.SystemColors.Control
+        Me.lblDiferencia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblDiferencia.ControlAssociationKey = -1
+        Me.lblDiferencia.Location = New System.Drawing.Point(628, 552)
+        Me.lblDiferencia.Name = "lblDiferencia"
+        Me.lblDiferencia.Size = New System.Drawing.Size(146, 22)
+        Me.lblDiferencia.TabIndex = 74
+        Me.lblDiferencia.Text = "0,00"
+        Me.lblDiferencia.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'lblTotal
         '
         Me.lblTotal.BackColor = System.Drawing.SystemColors.Control
         Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTotal.ControlAssociationKey = -1
-        Me.lblTotal.Location = New System.Drawing.Point(628, 545)
+        Me.lblTotal.Location = New System.Drawing.Point(628, 526)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(146, 22)
         Me.lblTotal.TabIndex = 74
@@ -473,6 +489,18 @@ Partial Class RecibosProvisorios
         Me.txtRetIB.TabIndex = 18
         Me.txtRetIB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtRetIB.Validator = Administracion.ValidatorType.PositiveFloat
+        '
+        'CustomLabel12
+        '
+        Me.CustomLabel12.AutoSize = True
+        Me.CustomLabel12.ControlAssociationKey = 9
+        Me.CustomLabel12.Font = New System.Drawing.Font("Calibri", 9.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel12.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel12.Location = New System.Drawing.Point(554, 557)
+        Me.CustomLabel12.Name = "CustomLabel12"
+        Me.CustomLabel12.Size = New System.Drawing.Size(66, 15)
+        Me.CustomLabel12.TabIndex = 24
+        Me.CustomLabel12.Text = "Diferencia:"
         '
         'CustomLabel8
         '
@@ -820,4 +848,6 @@ Partial Class RecibosProvisorios
     Friend WithEvents banco As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Ref As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents lblDiferencia As Administracion.CustomLabel
+    Friend WithEvents CustomLabel12 As Administracion.CustomLabel
 End Class

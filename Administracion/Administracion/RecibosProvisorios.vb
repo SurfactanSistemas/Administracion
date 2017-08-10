@@ -139,6 +139,7 @@ Public Class RecibosProvisorios
         _CompIB8 = ""
 
         lblTotal.Text = "0.00"
+        lblDiferencia.Text = "0.00"
 
         gridRecibos.Rows.Clear()
         _ClavesCheques.Clear()
@@ -214,6 +215,7 @@ Public Class RecibosProvisorios
         Next
 
         lblTotal.Text = _NormalizarNumero(lblTotal.Text)
+        lblDiferencia.Text = Val(_NormalizarNumero(lblTotal.Text)) - Val(_NormalizarNumero(txtTotal.Text))
         Return _Error
     End Function
 
@@ -518,7 +520,7 @@ Public Class RecibosProvisorios
         If e.KeyValue = Keys.Enter Then
 
             txtTotal.Text = _NormalizarNumero(txtTotal.Text)
-
+            sumarValores()
             With gridRecibos
                 '.Rows(0).Selected = True
                 .CurrentCell = .Rows(0).Cells(0)

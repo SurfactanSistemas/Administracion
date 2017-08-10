@@ -384,6 +384,7 @@ Public Class Recibos
         Next
 
         lblTotalDebitos.Text = _NormalizarNumero(lblTotalDebitos.Text)
+        lblDiferencia.Text = Val(_NormalizarNumero(lblTotalDebitos.Text)) - Val(_NormalizarNumero(lblTotalCreditos.Text))
         lblDolares.Text = _NormalizarNumero(lblDolares.Text)
 
         _RecalcularDolaresfinales()
@@ -465,6 +466,8 @@ Public Class Recibos
         lblDolares.Text = "0.0"
         lblTotalCreditos.Text = "0.0"
         lblTotalDebitos.Text = "0.0"
+        lblDiferencia.Text = "0.0"
+
         txtProvi.Focus()
         _ResetearConsultas()
     End Sub
@@ -820,6 +823,7 @@ Public Class Recibos
         Next
 
         lblTotalCreditos.Text = _NormalizarNumero(lblTotalCreditos.Text)
+        lblDiferencia.Text = Val(_NormalizarNumero(lblTotalDebitos.Text)) - Val(_NormalizarNumero(lblTotalCreditos.Text))
         Return _Error
     End Function
 
@@ -2640,6 +2644,7 @@ Public Class Recibos
                             Else
                                 gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol + 1)
                             End If
+                            Return True
                         End If
 
                         If iCol = 4 Then ' Avanzamos a la fila siguiente.
@@ -2652,6 +2657,7 @@ Public Class Recibos
                             gridFormasPago.Rows(iRow).Cells(4).Value = _NormalizarNumero(valor)
                             gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow + 1).Cells(0)
                             _SumarCreditos()
+                            Return True
                         End If
                     End If
 
@@ -4129,4 +4135,5 @@ Public Class Recibos
 
         lstSeleccion_Click(Nothing, Nothing)
     End Sub
+
 End Class

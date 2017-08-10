@@ -51,6 +51,8 @@ Partial Class Recibos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lblDiferencia = New Administracion.CustomLabel()
+        Me.CustomLabel8 = New Administracion.CustomLabel()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -303,6 +305,8 @@ Partial Class Recibos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.lblDiferencia)
+        Me.Panel2.Controls.Add(Me.CustomLabel8)
         Me.Panel2.Controls.Add(Me.txtFechaAux)
         Me.Panel2.Controls.Add(Me.txtFecha)
         Me.Panel2.Controls.Add(Me.Label5)
@@ -346,6 +350,30 @@ Partial Class Recibos
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(883, 571)
         Me.Panel2.TabIndex = 125
+        '
+        'lblDiferencia
+        '
+        Me.lblDiferencia.BackColor = System.Drawing.SystemColors.Control
+        Me.lblDiferencia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblDiferencia.ControlAssociationKey = -1
+        Me.lblDiferencia.Location = New System.Drawing.Point(352, 539)
+        Me.lblDiferencia.Name = "lblDiferencia"
+        Me.lblDiferencia.Size = New System.Drawing.Size(83, 22)
+        Me.lblDiferencia.TabIndex = 129
+        Me.lblDiferencia.Text = "0,00"
+        Me.lblDiferencia.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'CustomLabel8
+        '
+        Me.CustomLabel8.AutoSize = True
+        Me.CustomLabel8.ControlAssociationKey = 9
+        Me.CustomLabel8.Font = New System.Drawing.Font("Calibri", 9.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel8.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel8.Location = New System.Drawing.Point(275, 544)
+        Me.CustomLabel8.Name = "CustomLabel8"
+        Me.CustomLabel8.Size = New System.Drawing.Size(66, 15)
+        Me.CustomLabel8.TabIndex = 128
+        Me.CustomLabel8.Text = "Diferencia:"
         '
         'txtFechaAux
         '
@@ -451,7 +479,7 @@ Partial Class Recibos
         Me.CustomLabel12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CustomLabel12.ControlAssociationKey = -1
         Me.CustomLabel12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomLabel12.Location = New System.Drawing.Point(444, 538)
+        Me.CustomLabel12.Location = New System.Drawing.Point(444, 540)
         Me.CustomLabel12.Name = "CustomLabel12"
         Me.CustomLabel12.Size = New System.Drawing.Size(402, 22)
         Me.CustomLabel12.TabIndex = 118
@@ -1062,4 +1090,6 @@ Partial Class Recibos
     Friend WithEvents NumeroCC As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ImporteCC As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnCtaCte As Administracion.CustomButton
+    Friend WithEvents lblDiferencia As Administracion.CustomLabel
+    Friend WithEvents CustomLabel8 As Administracion.CustomLabel
 End Class
