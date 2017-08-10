@@ -873,8 +873,8 @@ Public Class RecibosProvisorios
                                 Dim _location As Point = gridRecibos.GetCellDisplayRectangle(2, iRow, False).Location
 
                                 gridRecibos.ClearSelection()
-                                _location.Y += YMARGEN '183 '(4 + 180)
-                                _location.X += XMARGEN '(7 + 10)
+                                _location.Y += gridRecibos.Location.Y + (gridRecibos.CurrentCell.Size.Height / 4) - 1.5
+                                _location.X += gridRecibos.Location.X + (gridRecibos.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
                                 txtFechaAux.Location = _location
                                 txtFechaAux.Text = gridRecibos.Rows(iRow).Cells(2).Value
                                 WRow = iRow
@@ -1469,12 +1469,11 @@ Public Class RecibosProvisorios
     Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridRecibos.CellClick
         With gridRecibos
             If e.ColumnIndex = 2 Then
-                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
 
-                gridRecibos.ClearSelection()
-                _location.Y += YMARGEN '183 '(4 + 180)
-                _location.X += XMARGEN '(7 + 10)
+                .ClearSelection()
+                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
                 txtFechaAux.Location = _location
                 txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
                 WRow = e.RowIndex
@@ -1489,12 +1488,11 @@ Public Class RecibosProvisorios
     Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridRecibos.CellEnter
         With gridRecibos
             If e.ColumnIndex = 2 Then
-                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
 
-                gridRecibos.ClearSelection()
-                _location.Y += YMARGEN '183 '(4 + 180)
-                _location.X += XMARGEN '(7 + 10)
+                .ClearSelection()
+                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
                 txtFechaAux.Location = _location
                 txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
                 WRow = e.RowIndex

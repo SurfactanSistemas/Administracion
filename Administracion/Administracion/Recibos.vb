@@ -2613,15 +2613,16 @@ Public Class Recibos
                                     .CurrentCell = .Rows(iRow).Cells(iCol + 1)
 
                                     Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
-                                    'Dim _size As Size = .GetCellDisplayRectangle(6, iRow, False).Size
 
-                                    'txtFechaAux.Size = _size
-                                    '.CurrentCell.Style.BackColor = Color.White
                                     .ClearSelection()
-                                    _location.Y += YMARGEN '183 '(4 + 180)
-                                    _location.X += XMARGEN '(7 + 10)
+                                    _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+                                    _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
                                     txtFechaAux.Location = _location
                                     txtFechaAux.Text = .Rows(iRow).Cells(2).Value
+                                    WRow = iRow
+                                    Wcol = iCol
+                                    txtFechaAux.Visible = True
+                                    txtFechaAux.Focus()
                                 End With
                                 
                                 WRow = iRow
@@ -4166,12 +4167,12 @@ Public Class Recibos
     Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago.CellClick
         With gridFormasPago
             If e.ColumnIndex = 2 Then
-                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
                 Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
 
                 .ClearSelection()
-                _location.Y += YMARGEN '183 '(4 + 180)
-                _location.X += XMARGEN '(7 + 10)
+                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
                 txtFechaAux.Location = _location
                 txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
                 WRow = e.RowIndex
@@ -4186,12 +4187,12 @@ Public Class Recibos
     Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago.CellEnter
         With gridFormasPago
             If e.ColumnIndex = 2 Then
-                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
                 Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
 
                 .ClearSelection()
-                _location.Y += YMARGEN '183 '(4 + 180)
-                _location.X += XMARGEN '(7 + 10)
+                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
                 txtFechaAux.Location = _location
                 txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
                 WRow = e.RowIndex
