@@ -506,7 +506,7 @@ Public Class Pagos
 
                         item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero2"), 6)) _
                                             .Replace("#FECHA#", .Item("Fecha2")) _
-                                            .Replace("#IMPORTE#", _NormalizarNumero(.Item("Importe2"))) _
+                                            .Replace("#IMPORTE#", _NormalizarNumero(.Item("Importe2")).ToString.PadLeft(10, "_")) _
                                             .Replace("#BANCO#", .Item("Banco2"))
 
                         _ChequesRecibos.Add({item, _
@@ -557,7 +557,7 @@ Public Class Pagos
 
                         item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero2"), 6)) _
                                             .Replace("#FECHA#", .Item("Fecha2")) _
-                                            .Replace("#IMPORTE#", _NormalizarNumero(.Item("Importe2"))) _
+                                            .Replace("#IMPORTE#", _NormalizarNumero(.Item("Importe2")).ToString.PadLeft(10, "_")) _
                                             .Replace("#BANCO#", .Item("Banco2"))
 
                         _ChequesRecibos.Add({item, _
