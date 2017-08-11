@@ -54,7 +54,7 @@ Public Class Recibos
         WRow = -1
         Wcol = -1
 
-        commonEventsHandler.setIndexTab(Me)
+        'commonEventsHandler.setIndexTab(Me)
         lstSeleccion.SelectedIndex = 0
         lstFiltrada.Visible = False
 
@@ -62,11 +62,13 @@ Public Class Recibos
 
         '_AlinearCeldas()
 
-        txtProvi.Focus()
+
 
         btnLimpiar.PerformClick()
 
         _DeterminarParidad()
+
+        txtProvi.Focus()
     End Sub
 
     'Private Sub _DeterminarParidad(Optional ByVal fecha As String = "")
@@ -299,7 +301,7 @@ Public Class Recibos
                             .Cells(4).Value = _Redondear(dr.Item("Saldo"))
                             .Cells(5).Value = _Redondear(dr.Item("Saldo"))
                         End With
-
+                        'gridPagos.Rows.Add()
                         _SumarDebitos()
 
                     End If
@@ -1151,11 +1153,11 @@ Public Class Recibos
                 'XTipoRec = IIf(optVarios.Checked, "3", "1")
 
                 If optVarios.Checked Then
-                    XTipoRec = "03"
+                    XTipoRec = "3"
                 ElseIf optAnticipos.Checked Then
-                    XTipoRec = "02"
+                    XTipoRec = "2"
                 Else
-                    XTipoRec = "01"
+                    XTipoRec = "1"
                 End If
 
                 XRetganancias = Str$(Val(txtRetGanancias.Text))
@@ -1868,10 +1870,11 @@ Public Class Recibos
                         With dr
                             .Read()
 
-                            XSaldo = _Redondear((Val(.Item("Saldo")) - Val(XImporteBaja)).ToString())
+                            XSaldo = Val(_NormalizarNumero(.Item("Saldo"))) - Val(XImporteBaja)
 
                             If Val(.Item("TotalUs")) <> 0 Then
-                                XSaldoUs = _Redondear((Val(.Item("Total")) / Val(.Item("TotalUs"))).ToString())
+                                XSaldoUs = Val(_NormalizarNumero(XSaldo)) / (Val(Val(_NormalizarNumero(.Item("Total"))) / Val(_NormalizarNumero(.Item("TotalUs")))))
+                                'XSaldoUs = Val(_NormalizarNumero(.Item("Total"))) / Val(_NormalizarNumero(.Item("TotalUs")))
                             Else
                                 XSaldoUs = ""
                             End If
@@ -1907,8 +1910,8 @@ Public Class Recibos
 
                     XSql = "UPDATE CtaCte " _
                         & "SET " _
-                        & " Saldo = '" & XSaldo & "'," _
-                        & " SaldoUs = '" & XSaldoUs & "', " _
+                        & " Saldo = " & Val(_NormalizarNumero(XSaldo)) & "," _
+                        & " SaldoUs = " & Val(_NormalizarNumero(XSaldoUs)) & ", " _
                         & " Estado = '" & XEstado & "', " _
                         & " Wdate = '" & XDate & "'" _
                         & " WHERE Clave = '" & ClaveCtaCte & "'"
@@ -2786,10 +2789,17 @@ Public Class Recibos
 
             If msg.WParam.ToInt32() = Keys.Enter Then
 
-                '_ComprobarDebitoPosible(iRow, iCol)
+                Dim valor = gridPagos.Rows(iRow).Cells(iCol).Value
 
-                If Val(gridPagos.Rows(iRow).Cells(iCol).Value) > Val(gridPagos.Rows(iRow).Cells(5).Value) Then
-                    Return True
+                '_ComprobarDebitoPosible(iRow, iCol)
+                If iCol = 4 Then
+                    If Val(gridPagos.Rows(iRow).Cells(iCol).Value) > Val(gridPagos.Rows(iRow).Cells(5).Value) Then
+                        gridPagos.CurrentCell = gridPagos.Rows(iRow).Cells(iCol)
+                        Return True
+                    Else
+                        gridPagos.Rows(iRow).Cells(iCol).Value = valor
+                        _SumarDebitos()
+                    End If
                 End If
 
             End If
@@ -3158,21 +3168,21 @@ Public Class Recibos
         gridPagos.Rows.Clear()
     End Sub
 
-    Private Sub gridPagos_CellBeginEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellCancelEventArgs) Handles gridPagos.CellBeginEdit
+    'Private Sub gridPagos_CellBeginEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellCancelEventArgs) Handles gridPagos.CellBeginEdit
 
-        If gridPagos.CurrentCell.ColumnIndex = 4 And Not IsNothing(gridPagos.CurrentCell.Value) And Val(gridPagos.Rows(e.RowIndex).Cells(3).Value) > 0 Then
+    '    If gridPagos.CurrentCell.ColumnIndex = 4 And Not IsNothing(gridPagos.CurrentCell.Value) And Val(gridPagos.Rows(e.RowIndex).Cells(3).Value) > 0 Then
 
-            Dim valor As Object = _ValoresMax.Find(Function(f As Object)
-                                                       Return f(0) = gridPagos.Rows(e.RowIndex).Cells(3).Value
-                                                   End Function)
+    '        Dim valor As Object = _ValoresMax.Find(Function(f As Object)
+    '                                                   Return f(0) = gridPagos.Rows(e.RowIndex).Cells(3).Value
+    '                                               End Function)
 
-            If IsNothing(valor) Then
-                _ValoresMax.Add({gridPagos.Rows(e.RowIndex).Cells(3).Value, gridPagos.Rows(e.RowIndex).Cells(4).Value})
-            End If
+    '        If IsNothing(valor) Then
+    '            _ValoresMax.Add({gridPagos.Rows(e.RowIndex).Cells(3).Value, gridPagos.Rows(e.RowIndex).Cells(4).Value})
+    '        End If
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
 
@@ -3316,7 +3326,7 @@ Public Class Recibos
         Dim crdoc As ReportDocument
         Dim cantidad As Integer = 2
         Dim enviarEmail As Boolean = False
-        crdoc = New ReciboDefinitivo
+        crdoc = New ReciboDefinitivoEmail
 
         If Trim(WEmail) <> "" Then
 
@@ -4337,4 +4347,7 @@ Public Class Recibos
         End With
     End Sub
 
+    Private Sub Recibos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtProvi.Focus()
+    End Sub
 End Class
