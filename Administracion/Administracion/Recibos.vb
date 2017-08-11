@@ -69,40 +69,40 @@ Public Class Recibos
         _DeterminarParidad()
     End Sub
 
-    Private Sub _DeterminarParidad(Optional ByVal fecha As String = "")
+    'Private Sub _DeterminarParidad(Optional ByVal fecha As String = "")
 
-        If Trim(txtFecha.Text) <> "" Then
+    '    If Trim(txtFecha.Text) <> "" Then
 
-            Dim _Fecha As String = IIf(fecha = "", txtFecha.Text, fecha)
+    '        Dim _Fecha As String = IIf(fecha = "", txtFecha.Text, fecha)
 
-            cm.CommandText = "SELECT Cambio FROM Cambios WHERE Fecha = '" & _Fecha & "'"
+    '        cm.CommandText = "SELECT Cambio FROM Cambios WHERE Fecha = '" & _Fecha & "'"
 
-            SQLConnector.conexionSql(cn, cm)
+    '        SQLConnector.conexionSql(cn, cm)
 
-            Try
+    '        Try
 
-                dr = cm.ExecuteReader()
+    '            dr = cm.ExecuteReader()
 
-                If dr.HasRows Then
+    '            If dr.HasRows Then
 
-                    dr.Read()
+    '                dr.Read()
 
-                    txtParidad.Text = _NormalizarNumero(dr.Item("Cambio"))
+    '                txtParidad.Text = _NormalizarNumero(dr.Item("Cambio"))
 
-                Else
-                    txtParidad.Text = ""
-                End If
+    '            Else
+    '                txtParidad.Text = ""
+    '            End If
 
-            Catch ex As Exception
-                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-            Finally
+    '        Catch ex As Exception
+    '            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+    '        Finally
 
-                cn.Close()
+    '            cn.Close()
 
-            End Try
-        End If
+    '        End Try
+    '    End If
 
-    End Sub
+    'End Sub
 
     ''Definimos las alineaciones por defecto.
     'Private Sub _AlinearCeldas()
@@ -261,6 +261,7 @@ Public Class Recibos
                 _AsignarCliente(parametro)
             Case 1
                 _AsignarCtaCte(parametro)
+                txtObservaciones.Focus()
             Case Else
 
         End Select
@@ -429,6 +430,8 @@ Public Class Recibos
         txtCliente.Text = cliente(0)
         txtNombre.Text = cliente(1)
 
+        txtRetGanancias.Focus()
+
         _ResetearConsultas()
 
     End Sub
@@ -570,13 +573,13 @@ Public Class Recibos
 
                     If Val(dr.Item("Renglon")) = 1 Then
 
-                        txtRetGanancias.Text = dr.Item("RetGanancias")
-                        _ComprobanteRetGanancias = dr.Item("ComproGanan")
-                        txtRetIva.Text = dr.Item("RetIva")
-                        _ComprobanteRetIva = dr.Item("ComproIva")
-                        txtRetSuss.Text = dr.Item("RetSuss")
-                        _ComprobanteRetSuss = dr.Item("ComproSuss")
-                        txtRetIB.Text = _NormalizarNumero(dr.Item("RetOtra"))
+                        txtRetGanancias.Text = IIf(IsDBNull(dr.Item("RetGanancias")), "", dr.Item("RetGanancias"))
+                        _ComprobanteRetGanancias = IIf(IsDBNull(dr.Item("ComproGanan")), "", dr.Item("ComproGanan"))
+                        txtRetIva.Text = IIf(IsDBNull(dr.Item("RetIva")), "", dr.Item("RetIva"))
+                        _ComprobanteRetIva = IIf(IsDBNull(dr.Item("ComproIva")), "", dr.Item("ComproIva"))
+                        txtRetSuss.Text = IIf(IsDBNull(dr.Item("RetSuss")), "", dr.Item("RetSuss"))
+                        _ComprobanteRetSuss = IIf(IsDBNull(dr.Item("ComproSuss")), "", dr.Item("ComproSuss"))
+                        txtRetIB.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetOtra")), "", dr.Item("RetOtra")))
                         'txtParidad.Text = IIf(IsDBNull(dr.Item("Paridad")), "", dr.Item("Paridad"))
                         _RetIB1 = IIf(IsDBNull(dr.Item("RetIb1")), "", dr.Item("RetIb1"))
                         _CompIB1 = IIf(IsDBNull(dr.Item("NroRetIb1")), "", dr.Item("NroRetIb1"))
@@ -699,6 +702,8 @@ Public Class Recibos
                             cliente = Nothing
                         End If
 
+                        _DeterminarParidad()
+
                         txtRetGanancias.Text = IIf(IsDBNull(dr.Item("RetGanancias")), "0", dr.Item("RetGanancias"))
                         _ComprobanteRetGanancias = IIf(IsDBNull(dr.Item("ComproGanan")), "", dr.Item("ComproGanan"))
                         txtRetIva.Text = IIf(IsDBNull(dr.Item("RetIva")), "0", dr.Item("RetIva"))
@@ -787,6 +792,41 @@ Public Class Recibos
 
 
         End Try
+    End Sub
+
+    Private Sub _DeterminarParidad(Optional ByVal fecha As String = "")
+        Dim _Fecha As String = IIf(fecha = "", txtFecha.Text, fecha)
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Cambio FROM Cambios WHERE Fecha = '" & _Fecha & "'")
+        Dim dr As SqlDataReader
+
+        If Trim(txtFecha.Text) <> "" Then
+
+            SQLConnector.conexionSql(cn, cm)
+
+            Try
+
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+
+                    dr.Read()
+
+                    txtParidad.Text = _NormalizarNumero(dr.Item("Cambio"))
+
+                Else
+                    txtParidad.Text = ""
+                End If
+
+            Catch ex As Exception
+                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Finally
+
+                cn.Close()
+
+            End Try
+        End If
+
     End Sub
 
     Private Function _NormalizarNumero(ByVal numero As String) As String
@@ -943,6 +983,21 @@ Public Class Recibos
             Exit Sub
         End If
 
+        ' Controlamos que en caso de ser Varios el tipo, tenga cuenta y que sea valida.
+        If optVarios.Checked Then
+            If Trim(txtCuenta.Text) = "" Then
+                MsgBox("Debe indicarse una cuenta contable.", MsgBoxStyle.Information)
+                Exit Sub
+            Else
+                Dim cuenta As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(Trim(txtCuenta.Text))
+
+                If IsNothing(cuenta) Then
+                    MsgBox("Debe indicarse una cuenta contable válida.", MsgBoxStyle.Information)
+                    Exit Sub
+                End If
+            End If
+        End If
+
         ' Calculamos nuevamente los saldo de débitos y Créditos.
         If _ErrorEnSumaDeSaldos() Then
             MsgBox("Hay errores en la carga de debitos o creditos. Por favor, verifique los datos y vuelva a intentar.", MsgBoxStyle.Information)
@@ -971,12 +1026,6 @@ Public Class Recibos
                 Exit Sub
             End If
 
-            ' Cargamos la numeración del recibo a guardar.
-            txtRecibo.Text = _NumeracionDeReciboSiguiente()
-
-            ' Normalizamos el número de recibo.
-            txtRecibo.Text = ceros(txtRecibo.Text, 6)
-
             ' Comprobamos que ya no se haya grabado el recibo con anterioridad.
             If Not _NumeroDeReciboDisponible() Then
                 MsgBox("El número de recibo ya se ha grabado con anterioridad y no se encuentra disponible.", MsgBoxStyle.Information)
@@ -996,6 +1045,14 @@ Public Class Recibos
             End If
 
             ' Damos de alta el recibo según el tipo de recibo definido por el usuario.
+
+            ' Cargamos la numeración del recibo a guardar.
+            txtRecibo.Text = _NumeracionDeReciboSiguiente()
+
+            ' Normalizamos el número de recibo.
+            txtRecibo.Text = ceros(txtRecibo.Text, 6)
+
+            renglon = 0
 
             ' COMENZAR CON LAS ULTIMAS DOS QUE SON MAS CORTAS.
             If optCtaCte.Checked Then
@@ -1083,7 +1140,7 @@ Public Class Recibos
                 XCliente = txtCliente.Text
                 XFecha = txtFecha.Text
                 XFechaOrd = String.Join("", txtFecha.Text.Split("/").Reverse())
-                XTipoRec = "1"
+                XTipoRec = IIf(optVarios.Checked, "3", "1")
                 XRetganancias = Str$(Val(txtRetGanancias.Text))
                 XRetIva = Str$(Val(txtRetIva.Text))
                 XRetotra = Str$(Val(txtRetIB.Text))
@@ -1510,12 +1567,12 @@ Public Class Recibos
         ' Actualizamos los datos de retenciones, comprobante y diferencias de cambio.
         XSql = ""
         XSql = XSql & "UPDATE Recibos SET "
-        XSql = XSql & " DifCambio = " & "'" & Val(lblDolares.Text) & "',"
-        XSql = XSql & " RetSuss = " & "'" & Val(txtRetSuss.Text) & "',"
-        XSql = XSql & " ComproGanan = " & "'" & Val(_ComprobanteRetGanancias) & "',"
-        XSql = XSql & " ComproIva = " & "'" & Val(_ComprobanteRetIva) & "',"
+        XSql = XSql & " DifCambio = " & Val(lblDolares.Text) & ","
+        XSql = XSql & " RetSuss = " & Val(txtRetSuss.Text.Replace(".", ",")) & ","
+        XSql = XSql & " ComproGanan = " & "'" & Val(Trim(_ComprobanteRetGanancias)) & "',"
+        XSql = XSql & " ComproIva = " & "'" & Val(Trim(_ComprobanteRetIva)) & "',"
         XSql = XSql & " ComproIb = ''," 'Comprobar si se sigue colocando o no. Me parece que no.
-        XSql = XSql & " ComproSuss = " & "'" & Val(_ComprobanteRetSuss) & "',"
+        XSql = XSql & " ComproSuss = " & "'" & Val(Trim(_ComprobanteRetSuss)) & "',"
         XSql = XSql & " NroRetIb1 = " & Val(_CompIB1) & ","
         XSql = XSql & " NroRetIb2 = " & Val(_CompIB2) & ","
         XSql = XSql & " NroRetIb3 = " & Val(_CompIB3) & ","
@@ -1886,7 +1943,7 @@ Public Class Recibos
         XLetra1 = ""
         XPunto1 = ""
         XNumero1 = txtRecibo.Text
-        XImporte1 = Str$(lblTotalCreditos.Text)
+        XImporte1 = Str$(Val(lblTotalCreditos.Text))
         XTipo2 = ""
         XNumero2 = ""
         XFecha2 = ""
@@ -1897,7 +1954,7 @@ Public Class Recibos
         XObservaciones = txtObservaciones.Text
         XEmpresa = "1"
         XClave = XRecibo + XRenglon
-        XImporte = Str$(XImporte1)
+        XImporte = Str$(Val(XImporte1))
         XCuenta = txtCuenta.Text
         XMarca = ""
         XFechaDepo = ""
@@ -1978,12 +2035,12 @@ Public Class Recibos
             XTotal = Str$(lblTotalCreditos.Text * -1 / Val(txtParidad.Text))
             XSaldo = Str$(lblTotalCreditos.Text * -1 / Val(txtParidad.Text))
         Else
-            XTotal = Str$(lblTotalCreditos.Text * -1)
-            XSaldo = Str$(lblTotalCreditos.Text * -1)
+            XTotal = _NormalizarNumero(Val(lblTotalCreditos.Text) * -1)
+            XSaldo = _NormalizarNumero(Val(lblTotalCreditos.Text) * -1)
         End If
 
-        XTotalUs = Str$(lblTotalCreditos.Text * -1 / Val(txtParidad.Text))
-        XSaldoUs = Str$(lblTotalCreditos.Text * -1 / Val(txtParidad.Text))
+        XTotalUs = Str$(Val(lblTotalCreditos.Text) * -1 / Val(txtParidad.Text))
+        XSaldoUs = Str$(Val(lblTotalCreditos.Text) * -1 / Val(txtParidad.Text))
 
         XOrdFecha = String.Join("", txtFecha.Text.Split("/").Reverse())
         XOrdVencimiento = XOrdFecha
@@ -2534,6 +2591,14 @@ Public Class Recibos
 
     Private Sub txtCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCliente.KeyDown
         If e.KeyData = Keys.Enter Then
+
+            If Trim(txtCliente.Text) = "" Then
+                lstSeleccion.SelectedIndex = 0
+                lstSeleccion_Click(Nothing, Nothing)
+                'btnConsulta.PerformClick()
+                Exit Sub
+            End If
+
             _SaltarA(txtRetGanancias)
         ElseIf e.KeyData = Keys.Escape Then
             txtCliente.Text = ""

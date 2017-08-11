@@ -150,7 +150,7 @@ Partial Class ListadoImputacionesContable
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(221, 269)
+        Me.btnConsulta.Location = New System.Drawing.Point(189, 269)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(67, 37)
         Me.btnConsulta.TabIndex = 41
@@ -168,7 +168,7 @@ Partial Class ListadoImputacionesContable
         Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancela.Location = New System.Drawing.Point(133, 269)
+        Me.btnCancela.Location = New System.Drawing.Point(101, 269)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(72, 37)
         Me.btnCancela.TabIndex = 40
@@ -324,7 +324,7 @@ Partial Class ListadoImputacionesContable
         Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPantalla.LabelAssociationKey = -1
-        Me.btnPantalla.Location = New System.Drawing.Point(320, 269)
+        Me.btnPantalla.Location = New System.Drawing.Point(288, 269)
         Me.btnPantalla.Name = "btnPantalla"
         Me.btnPantalla.Size = New System.Drawing.Size(67, 37)
         Me.btnPantalla.TabIndex = 41
@@ -345,7 +345,7 @@ Partial Class ListadoImputacionesContable
         Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(404, 267)
+        Me.btnImprimir.Location = New System.Drawing.Point(372, 267)
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(67, 37)
         Me.btnImprimir.TabIndex = 41
