@@ -97,7 +97,7 @@
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
-            txtRetIB3.Text = ""
+            txtRetIB4.Text = ""
         End If
 
     End Sub

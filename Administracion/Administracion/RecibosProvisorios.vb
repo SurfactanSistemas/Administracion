@@ -1,5 +1,6 @@
 ﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class RecibosProvisorios
     Private WRow, Wcol As Integer
@@ -28,6 +29,7 @@ Public Class RecibosProvisorios
     End Sub
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+        txtConsulta.Text = ""
         queryController = lstSeleccion.SelectedItem
         lstConsulta.Visible = True
         txtConsulta.Visible = True
@@ -81,7 +83,7 @@ Public Class RecibosProvisorios
 
         ' Sacamos de vista los resultados filtrados.
         filtrado.Visible = False
-        texto.Text = ""
+        'texto.Text = ""
     End Sub
 
     Private Sub txtConsulta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtConsulta.TextChanged
@@ -99,7 +101,7 @@ Public Class RecibosProvisorios
         queryController.showMethod.Invoke(lstConsulta.SelectedValue)
         lstConsulta.Visible = False
         txtConsulta.Visible = False
-        txtConsulta.Text = ""
+        'txtConsulta.Text = ""
         txtRetGanancias.Focus()
     End Sub
 
@@ -109,6 +111,8 @@ Public Class RecibosProvisorios
     End Sub
 
     Private Sub setDefaults()
+        txtFechaAux.Visible = False
+
         For Each control As Control In Panel2.Controls
 
             If TypeOf (control) Is TextBox Then
@@ -799,6 +803,51 @@ Public Class RecibosProvisorios
         sumarValores()
     End Sub
 
+    Private Function _EsNumero(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
+    End Function
+
+    Private Function _EsControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        Select Case keycode
+            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
+                valido = True
+            Case Else
+                valido = False
+        End Select
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
+    End Function
+
+    Private Function _EsNumeroOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimalOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
 
         If gridRecibos.Focused Or gridRecibos.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
@@ -806,6 +855,20 @@ Public Class RecibosProvisorios
 
             Dim iCol = gridRecibos.CurrentCell.ColumnIndex
             Dim iRow = gridRecibos.CurrentCell.RowIndex
+
+            ' Limitamos los caracteres permitidos para cada una de las columnas.
+            Select Case iCol
+                Case 1
+                    If Not _EsNumeroOControl(keyData) Then
+                        Return True
+                    End If
+                Case 4
+                    If Not _EsDecimalOControl(keyData) Then
+                        Return True
+                    End If
+                Case Else
+
+            End Select
 
             If msg.WParam.ToInt32() = Keys.Enter Then
 
@@ -912,7 +975,7 @@ Public Class RecibosProvisorios
                     End With
 
                     Return True
-                    
+
                 End If
             ElseIf msg.WParam.ToInt32() = Keys.Escape Then
                 gridRecibos.Rows(iRow).Cells(iCol).Value = ""
@@ -1508,7 +1571,7 @@ Public Class RecibosProvisorios
                 txtFechaAux.Focus()
             End If
         End With
-        
+
     End Sub
 
     Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridRecibos.CellEnter
@@ -1529,4 +1592,110 @@ Public Class RecibosProvisorios
         End With
     End Sub
 
+    Private Sub _PrepararTablaIntereses(ByRef tabla As DataTable)
+        ' Por defecto son de tipo String, asi que solamente defino explicitamente las de tipo Double.
+        With tabla
+            .Columns.Add("CodigoCliente")
+            .Columns.Add("Cliente")
+            .Columns.Add("Fecha")
+            .Columns.Add("Numero")
+            .Columns.Add("Fecha2")
+            .Columns.Add("Banco")
+            .Columns.Add("Importe").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Dias")
+            .Columns.Add("Tasa")
+            .Columns.Add("Intereses").DataType = System.Type.GetType("System.Double")
+        End With
+    End Sub
+
+    Private Sub btnIntereses_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIntereses.Click
+        Dim tabla As DataTable = New DataTable("Detalles")
+        Dim DiasTasa As String = ""
+        Dim XTipo2, XNumero2, XFecha2, XBanco2, XImporte2 As String
+
+        _PedirInformacion("Informe la tasa Mensual", New TextBox, DiasTasa)
+
+        Dim ZZSuma As Double = 0
+        Dim ZZCodigo As Double = 0
+
+        Dim FechaBase As String = txtFecha.Text
+
+        Dim row As DataRow
+        Dim crdoc As ReportDocument
+        crdoc = New InformeIntereses
+
+        ' Creo las Columnas
+        _PrepararTablaIntereses(tabla)
+
+        ' Lleno la tabla con la informacion del Recibo.
+        For i = 0 To gridRecibos.Rows.Count - 1
+
+            With gridRecibos.Rows(i)
+
+                XTipo2 = .Cells(0).Value
+                XNumero2 = ceros(.Cells(1).Value, 8)
+                If Val(XNumero2) = 0 Then
+                    XNumero2 = ""
+                End If
+                XFecha2 = .Cells(2).Value
+                XBanco2 = .Cells(3).Value
+                XImporte2 = .Cells(4).Value
+
+                If Val(XImporte2) <> 0 Then
+
+                    XImporte2 = _NormalizarNumero(XImporte2)
+                    DiasTasa = _NormalizarNumero(DiasTasa)
+
+                    If XFecha2 = "" Then
+                        XFecha2 = txtFecha.Text
+                    End If
+                    Dim WFechaCheque As String = String.Join("", XFecha2.Split("/").Reverse())
+                    Dim WFechaRecibo As String = String.Join("", txtFecha.Text.Split("/").Reverse())
+                    If Val(WFechaCheque) < Val(WFechaRecibo) Then
+                        XFecha2 = txtFecha.Text
+                    End If
+                    Dim XDias2 As Integer = DateDiff("d", FechaBase, XFecha2)
+                    Dim ZZInteres As Double = ((Val(XImporte2) * XDias2 * (Val(DiasTasa) / 100)) / 365)
+                    ZZInteres = Val(_NormalizarNumero(ZZInteres))
+                    ZZSuma = ZZSuma + ZZInteres
+
+                    row = tabla.NewRow()
+
+                    row.Item("CodigoCliente") = txtCliente.Text
+                    row.Item("Cliente") = txtNombre.Text
+                    row.Item("Fecha") = txtFecha.Text
+                    row.Item("Numero") = XNumero2
+                    row.Item("Fecha2") = XFecha2
+                    row.Item("Banco") = XBanco2
+                    row.Item("Importe") = Val(_NormalizarNumero(XImporte2))
+                    row.Item("Dias") = XDias2
+                    row.Item("Tasa") = _NormalizarNumero(DiasTasa)
+                    row.Item("Intereses") = Val(_NormalizarNumero(ZZInteres))
+
+                    tabla.Rows.Add(row)
+                End If
+
+            End With
+
+        Next
+
+        crdoc.SetDataSource(tabla)
+
+        MsgBox("El interes a pagar es de " + Str$(ZZSuma), MsgBoxStyle.Information, "Emision de Recibos")
+
+        '_Imprimir(crdoc)
+        _VistaPrevia(crdoc)
+    End Sub
+
+    Private Sub _Imprimir(ByVal crdoc As ReportDocument, Optional ByVal cant As Integer = 1)
+        crdoc.PrintToPrinter(cant, True, 0, 0)
+    End Sub
+
+    Private Sub _VistaPrevia(ByVal crdoc As ReportDocument)
+        With VistaPrevia
+            .CrystalReportViewer1.ReportSource = crdoc
+            .ShowDialog()
+            .Dispose()
+        End With
+    End Sub
 End Class

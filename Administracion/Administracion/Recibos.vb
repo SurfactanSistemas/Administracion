@@ -447,6 +447,8 @@ Public Class Recibos
     End Sub
 
     Private Sub setDefaults()
+        txtFechaAux.Visible = False
+
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
         gridFormasPago.Rows.Clear()
         gridPagos.Rows.Clear()
