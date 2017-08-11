@@ -474,6 +474,8 @@ Public Class Recibos
         lblTotalDebitos.Text = "0.0"
         lblDiferencia.Text = "0.0"
 
+        _DeterminarParidad()
+
         txtProvi.Focus()
         _ResetearConsultas()
     End Sub
@@ -1012,6 +1014,13 @@ Public Class Recibos
 
         ' Comprobamos que los datos sean coherentes.
         If Val(lblTotalCreditos.Text) = Val(lblTotalDebitos.Text) Or optAnticipos.Checked Or optVarios.Checked Then
+
+            ' Comprobamos que se hayan cargado tanto recibo como fecha. En caso de que no, salimos y cancelamos la grabación.
+            If Trim(txtRecibo.Text) = "" Or Trim(txtFecha.Text) = "" Then
+                MsgBox("Por favor verifique que tanto el número de Recibo como la fecha del mismo se encuentren cargados.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
             ' Comprbamos la diferencia de cambio y consultamos con el usuario sobre si graba igual o no.
             If optCtaCte.Checked And _ExisteDiferenciaDeCambio() Then
                 If MsgBox("Existe una diferencia de cambio de U$S " & lblDolares.Text & vbCrLf & "¿Desea grabar igualmente el recibo?", MsgBoxStyle.OkCancel, MsgBoxStyle.Information) = DialogResult.Cancel Then
@@ -1024,18 +1033,6 @@ Public Class Recibos
             ' Comprobamos que los creditos indicados como de tipo 4 tengan su respectiva cuenta contable asignada.
             If _NoImputadosCorrectamenteValoresVarios() Then
                 MsgBox("No se ha imputado correctamente ingreso de valores varios.", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-
-            ' Comprobamos que ya no se haya grabado el recibo con anterioridad.
-            If Not _NumeroDeReciboDisponible() Then
-                MsgBox("El número de recibo ya se ha grabado con anterioridad y no se encuentra disponible.", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-
-            ' Comprobamos que se hayan cargado tanto recibo como fecha. En caso de que no, salimos y cancelamos la grabación.
-            If Trim(txtRecibo.Text) = "" Or Trim(txtFecha.Text) = "" Then
-                MsgBox("Por favor verifique que tanto el número de Recibo como la fecha del mismo se encuentren cargados.", MsgBoxStyle.Information)
                 Exit Sub
             End If
 
@@ -1052,6 +1049,12 @@ Public Class Recibos
 
             ' Normalizamos el número de recibo.
             txtRecibo.Text = ceros(txtRecibo.Text, 6)
+
+            ' Comprobamos que ya no se haya grabado el recibo con anterioridad.
+            If Not _NumeroDeReciboDisponible() Then
+                MsgBox("El número de recibo ya se ha grabado con anterioridad y no se encuentra disponible.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
 
             renglon = 0
 
@@ -1145,7 +1148,16 @@ Public Class Recibos
                 XCliente = txtCliente.Text
                 XFecha = txtFecha.Text
                 XFechaOrd = String.Join("", txtFecha.Text.Split("/").Reverse())
-                XTipoRec = IIf(optVarios.Checked, "3", "1")
+                'XTipoRec = IIf(optVarios.Checked, "3", "1")
+
+                If optVarios.Checked Then
+                    XTipoRec = "03"
+                ElseIf optAnticipos.Checked Then
+                    XTipoRec = "02"
+                Else
+                    XTipoRec = "01"
+                End If
+
                 XRetganancias = Str$(Val(txtRetGanancias.Text))
                 XRetIva = Str$(Val(txtRetIva.Text))
                 XRetotra = Str$(Val(txtRetIB.Text))
@@ -2037,8 +2049,8 @@ Public Class Recibos
         XVencimiento1 = XFecha
 
         If Val(_Provincia) = 24 Then
-            XTotal = Str$(lblTotalCreditos.Text * -1 / Val(txtParidad.Text))
-            XSaldo = Str$(lblTotalCreditos.Text * -1 / Val(txtParidad.Text))
+            XTotal = Str$(Val(lblTotalCreditos.Text) * -1 / Val(txtParidad.Text))
+            XSaldo = Str$(Val(lblTotalCreditos.Text) * -1 / Val(txtParidad.Text))
         Else
             XTotal = _NormalizarNumero(Val(lblTotalCreditos.Text) * -1)
             XSaldo = _NormalizarNumero(Val(lblTotalCreditos.Text) * -1)
@@ -2142,7 +2154,7 @@ Public Class Recibos
         XLetra1 = ""
         XPunto1 = ""
         XNumero1 = txtRecibo.Text
-        XImporte1 = Str$(lblTotalCreditos.Text)
+        XImporte1 = Str$(Val(lblTotalCreditos.Text))
         XTipo2 = ""
         XNumero2 = ""
         XFecha2 = ""
@@ -2153,7 +2165,7 @@ Public Class Recibos
         XObservaciones = txtObservaciones.Text
         XEmpresa = "1"
         XClave = txtRecibo.Text + XRenglon
-        XImporte = XImporte1
+        XImporte = Str$(Val(XImporte1))
         XCuenta = ""
         XMarca = ""
         XFechaDepo = ""
@@ -2749,9 +2761,20 @@ Public Class Recibos
 
                     Return True
                 End If
-                'ElseIf msg.WParam.ToInt32() = Keys.Escape Then
-                '    gridFormasPago.Rows.Remove(gridFormasPago.Rows(iRow))
-                '    _SumarCreditos()
+            ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                With gridFormasPago
+                    .Rows(iRow).Cells(iCol).Value = ""
+
+                    If iCol = 4 Then
+                        .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                    Else
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End If
+
+                    .CurrentCell = .Rows(iRow).Cells(iCol)
+                End With
+
+                _SumarCreditos()
             End If
         End If
 
@@ -2765,16 +2788,27 @@ Public Class Recibos
 
                 '_ComprobarDebitoPosible(iRow, iCol)
 
-                If gridPagos.Rows(iRow).Cells(iCol).Value > gridPagos.Rows(iRow).Cells(5).Value Then
+                If Val(gridPagos.Rows(iRow).Cells(iCol).Value) > Val(gridPagos.Rows(iRow).Cells(5).Value) Then
                     Return True
                 End If
 
             End If
             If msg.WParam.ToInt32() = Keys.Escape Then
+                If iCol = 4 Then
+                    With gridPagos
+                        .Rows(iRow).Cells(iCol).Value = ""
 
-                gridPagos.Rows.Remove(gridPagos.Rows(iRow))
-                _SumarDebitos()
+                        If iCol = 4 Then
+                            .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                        Else
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                        End If
 
+                        .CurrentCell = .Rows(iRow).Cells(iCol)
+                    End With
+                    _SumarDebitos()
+                End If
+                
                 Return True
             End If
         End If
