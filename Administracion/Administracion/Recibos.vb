@@ -297,6 +297,7 @@ Public Class Recibos
                             .Cells(0).Value = dr.Item("Tipo")
                             .Cells(3).Value = dr.Item("Numero")
                             .Cells(4).Value = _Redondear(dr.Item("Saldo"))
+                            .Cells(5).Value = _Redondear(dr.Item("Saldo"))
                         End With
 
                         _SumarDebitos()
@@ -2758,9 +2759,12 @@ Public Class Recibos
 
             If msg.WParam.ToInt32() = Keys.Enter Then
 
-                _ComprobarDebitoPosible(iRow, iCol)
+                '_ComprobarDebitoPosible(iRow, iCol)
 
-                Return True
+                If gridPagos.Rows(iRow).Cells(iCol).Value > gridPagos.Rows(iRow).Cells(5).Value Then
+                    Return True
+                End If
+
             End If
             If msg.WParam.ToInt32() = Keys.Escape Then
 
