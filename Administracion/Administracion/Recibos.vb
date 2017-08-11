@@ -273,7 +273,7 @@ Public Class Recibos
     Private Sub _AsignarCtaCte(ByVal stringCtaCte As String)
         Dim cuenta As String() = stringCtaCte.Replace(_SEPARADOR, "$").Split("$")
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Tipo, Saldo, TotalUs, Paridad FROM CtaCte WHERE Numero = '" & cuenta(1) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Tipo, Saldo, TotalUs, Paridad FROM CtaCte WHERE Numero = '" & cuenta(1) & "' and Cliente = '" & Trim(txtCliente.Text) & "'")
         Dim dr As SqlDataReader
         Dim row As Integer
 
@@ -300,6 +300,8 @@ Public Class Recibos
                             .Cells(3).Value = dr.Item("Numero")
                             .Cells(4).Value = _Redondear(dr.Item("Saldo"))
                             .Cells(5).Value = _Redondear(dr.Item("Saldo"))
+                            '.Cells(4).Value = _NormalizarNumero(dr.Item("Saldo"))
+                            '.Cells(5).Value = _NormalizarNumero(dr.Item("Saldo"))
                         End With
                         'gridPagos.Rows.Add()
                         _SumarDebitos()
@@ -1089,6 +1091,8 @@ Public Class Recibos
 
             ' Si llegamos hasta aca se supone que todo salio bien.
             MsgBox("Se ha generado correctamente el Recibo solicitado. Nº de Recibo: " & txtRecibo.Text, MsgBoxStyle.Information)
+
+            mostrarRecibo(DAORecibo.buscarRecibo(txtRecibo.Text))
 
             ' Imprimimos los recibos y enviamos email en caso de que corresponda.
             btnImpresion.PerformClick()
@@ -1910,8 +1914,8 @@ Public Class Recibos
 
                     XSql = "UPDATE CtaCte " _
                         & "SET " _
-                        & " Saldo = " & Val(_NormalizarNumero(XSaldo)) & "," _
-                        & " SaldoUs = " & Val(_NormalizarNumero(XSaldoUs)) & ", " _
+                        & " Saldo = " & XSaldo.Replace(",", ".") & "," _
+                        & " SaldoUs = " & XSaldoUs.Replace(",", ".") & ", " _
                         & " Estado = '" & XEstado & "', " _
                         & " Wdate = '" & XDate & "'" _
                         & " WHERE Clave = '" & ClaveCtaCte & "'"
