@@ -153,7 +153,7 @@ Public Class Recibos
             If dr.HasRows Then
 
                 Do While dr.Read()
-                    lstConsulta.Items.Add(dr.Item("Impre") & _SEPARADOR & ceros(dr.Item("Numero"), 6) & _SEPARADOR & dr.Item("Fecha") & _SEPARADOR & _Redondear(dr.Item("Saldo")))
+                    lstConsulta.Items.Add(dr.Item("Impre") & _SEPARADOR & ceros(dr.Item("Numero"), 6) & _SEPARADOR & dr.Item("Fecha") & _SEPARADOR & _Redondear(dr.Item("Saldo")).ToString.PadLeft(10, "_"))
                 Loop
 
                 _HabilitarConsultas()
