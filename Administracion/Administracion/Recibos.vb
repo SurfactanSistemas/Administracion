@@ -1084,6 +1084,10 @@ Public Class Recibos
 
             ' Si llegamos hasta aca se supone que todo salio bien.
             MsgBox("Se ha generado correctamente el Recibo solicitado. Nº de Recibo: " & txtRecibo.Text, MsgBoxStyle.Information)
+
+            ' Imprimimos los recibos y enviamos email en caso de que corresponda.
+            btnImpresion.PerformClick()
+
             btnLimpiar.PerformClick()
         Else
 
@@ -3445,8 +3449,8 @@ Public Class Recibos
             End Try
         End If
 
-        '_Imprimir(crdoc, cantidad)
-        _VistaPrevia(crdoc)
+        _Imprimir(crdoc, cantidad)
+        '_VistaPrevia(crdoc)
 
 
     End Sub
@@ -3471,14 +3475,14 @@ Public Class Recibos
 
         Try
 
-            _to = "gferreyra@surfactan.com.ar" ' trim(WEmail)
-            _bcc = _to ' CONSULTAR SI SE AGREGA ESTO O NO.
+            _to = Trim(WEmail)
+            _bcc = "" ' CONSULTAR SI SE AGREGA ESTO O NO.
             _asunto = "Recibo Nº " & Trim(txtRecibo.Text)
             _mensaje = _asunto
             _adjunto = ruta & archivo
 
             ' Enviamos por email e imprimimos una copia.
-            '_EnviarEmail(_to, _bcc, _asunto, _mensaje, _adjunto)
+            _EnviarEmail(_to, _bcc, _asunto, _mensaje, _adjunto)
 
         Catch ex As Exception
             Throw New Exception("No se pudo enviar el E-Mail.")
