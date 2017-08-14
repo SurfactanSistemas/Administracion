@@ -289,13 +289,9 @@ Public Class Recibos
 
                     If Not _CuentaUtilizada(dr.Item("Numero")) Then
 
-                        If IsNothing(gridPagos.Rows(0).Cells(0).Value) Then
-                            row = 0
-                        Else
-                            row = gridPagos.Rows.Add()
-                        End If
+                        row = gridPagos2.Rows.Add()
 
-                        With gridPagos.Rows(row)
+                        With gridPagos2.Rows(row)
                             .Cells(0).Value = dr.Item("Tipo")
                             .Cells(3).Value = dr.Item("Numero")
                             .Cells(4).Value = _Redondear(dr.Item("Saldo"))
@@ -327,7 +323,7 @@ Public Class Recibos
         lblTotalDebitos.Text = 0
         lblDolares.Text = 0
 
-        For Each row As DataGridViewRow In gridPagos.Rows
+        For Each row As DataGridViewRow In gridPagos2.Rows
 
             _Paridad = 0
             _TipoCompo = 0
@@ -417,8 +413,8 @@ Public Class Recibos
 
     Private Function _CuentaUtilizada(ByRef NumeroCuenta As String)
 
-        For i = 0 To gridPagos.Rows.Count - 1
-            If gridPagos.Rows(i).Cells(3).Value = NumeroCuenta Then
+        For i = 0 To gridPagos2.Rows.Count - 1
+            If gridPagos2.Rows(i).Cells(3).Value = NumeroCuenta Then
                 Return True
             End If
         Next
@@ -458,8 +454,8 @@ Public Class Recibos
         txtFechaAux.Visible = False
 
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
-        gridFormasPago.Rows.Clear()
-        gridPagos.Rows.Clear()
+        gridFormasPago2.Rows.Clear()
+        gridPagos2.Rows.Clear()
         optCtaCte.Checked = True
 
         For Each control As Control In Panel2.Controls
@@ -489,7 +485,7 @@ Public Class Recibos
         Select Case val
             Case 1, 4
                 column = 4
-                With gridFormasPago.Rows(rowIndex)
+                With gridFormasPago2.Rows(rowIndex)
                     .Cells(1).Value = ""
                     .Cells(2).Value = ""
                     .Cells(3).Value = ""
@@ -499,13 +495,13 @@ Public Class Recibos
             Case Else
                 Exit Sub
         End Select
-        gridFormasPago.CurrentCell.Value = ceros(val.ToString, 2)
-        gridFormasPago.CurrentCell = gridFormasPago.Rows(rowIndex).Cells(column)
+        gridFormasPago2.CurrentCell.Value = ceros(val.ToString, 2)
+        gridFormasPago2.CurrentCell = gridFormasPago2.Rows(rowIndex).Cells(column)
     End Sub
 
     ' CHECKEAR PARA QUE ESTA
     Private Sub agregarClienteABanco()
-        For Each row As DataGridViewRow In gridFormasPago.Rows
+        For Each row As DataGridViewRow In gridFormasPago2.Rows
             If row.Cells(3).Value <> "" Then
                 If row.Cells(3).Value.ToString.Length > 20 Or row.Cells(3).Value.ToString.Contains("/") Then
                     'row.Cells(3).Value = ""
@@ -618,7 +614,7 @@ Public Class Recibos
 
                     If Val(dr.Item("Tipo2")) = 4 Then
                         With dr
-                            _CuentasContables.Add({Val(.Item("Renglon")) - 1, .Item("Cuenta")})
+                            _CuentasContables.Add({Val(.Item("Renglon")) - 2, .Item("Cuenta")})
                         End With
                     End If
 
@@ -686,7 +682,7 @@ Public Class Recibos
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
-                gridFormasPago.Rows.Clear()
+                gridFormasPago2.Rows.Clear()
 
                 Do While dr.Read()
                     Dim renglon As String = dr.Item("Renglon").ToString()
@@ -744,9 +740,9 @@ Public Class Recibos
 
                     End If
 
-                    Dim _FormaPagoActual As Integer = gridFormasPago.Rows.Add()
+                    Dim _FormaPagoActual As Integer = gridFormasPago2.Rows.Add()
 
-                    With gridFormasPago.Rows(_FormaPagoActual)
+                    With gridFormasPago2.Rows(_FormaPagoActual)
                         .Cells(0).Value = IIf(IsDBNull(dr.Item("Tipo2")), "", dr.Item("Tipo2"))
                         .Cells(1).Value = IIf(IsDBNull(dr.Item("Numero2")), "", dr.Item("Numero2"))
                         .Cells(2).Value = IIf(IsDBNull(dr.Item("Fecha2")), "", dr.Item("Fecha2"))
@@ -852,7 +848,7 @@ Public Class Recibos
 
         lblTotalCreditos.Text = Val(txtRetGanancias.Text) + Val(txtRetIva.Text) + Val(txtRetIB.Text) + Val(txtRetSuss.Text)
 
-        For Each row As DataGridViewRow In gridFormasPago.Rows
+        For Each row As DataGridViewRow In gridFormasPago2.Rows
 
             If Val(row.Cells(4).Value) <> 0 Then
 
@@ -877,16 +873,25 @@ Public Class Recibos
     End Function
 
     Private Sub mostrarPagos(ByVal pagos As List(Of Pago))
-        gridPagos.Rows.Clear()
+        gridPagos2.Rows.Clear()
         For Each pago As Pago In pagos
-            gridPagos.Rows.Add(pago.tipo, pago.letra, pago.punto, pago.numero, _NormalizarNumero(pago.importe))
+            gridPagos2.Rows.Add(pago.tipo, pago.letra, pago.punto, pago.numero, _NormalizarNumero(pago.importe))
         Next
     End Sub
 
     Private Sub mostrarFormasPago(ByVal formasPago As List(Of FormaPago))
-        gridFormasPago.Rows.Clear()
+        gridFormasPago2.Rows.Clear()
+        Dim row As Integer = gridFormasPago2.Rows.Add
         For Each forma As FormaPago In formasPago
-            gridFormasPago.Rows.Add(forma.tipo, forma.numero, forma.fecha, forma.nombre, _NormalizarNumero(forma.importe))
+            With gridFormasPago2.Rows(row)
+                .Cells(0).Value = forma.tipo
+                .Cells(1).Value = forma.numero
+                .Cells(2).Value = forma.fecha
+                .Cells(3).Value = forma.nombre
+                .Cells(4).Value = _NormalizarNumero(forma.importe)
+            End With
+
+            row = gridFormasPago2.Rows.Add
         Next
     End Sub
 
@@ -1144,9 +1149,9 @@ Public Class Recibos
         Dim dr As SqlDataReader
 
         ' Ahora guardamos los creditos.
-        For iRow = 0 To gridFormasPago.Rows.Count - 1
+        For iRow = 0 To gridFormasPago2.Rows.Count - 1
 
-            If Val(gridFormasPago.Rows(iRow).Cells(4).Value) <> 0 Then
+            If Val(gridFormasPago2.Rows(iRow).Cells(4).Value) <> 0 Then
                 renglon += 1
 
                 XRecibo = txtRecibo.Text
@@ -1174,12 +1179,12 @@ Public Class Recibos
                 XPunto1 = ""
                 XNumero1 = ""
                 XImporte1 = ""
-                XTipo2 = gridFormasPago.Rows(iRow).Cells(0).Value
-                XNumero2 = gridFormasPago.Rows(iRow).Cells(1).Value
-                XFecha2 = gridFormasPago.Rows(iRow).Cells(2).Value
+                XTipo2 = gridFormasPago2.Rows(iRow).Cells(0).Value
+                XNumero2 = gridFormasPago2.Rows(iRow).Cells(1).Value
+                XFecha2 = gridFormasPago2.Rows(iRow).Cells(2).Value
                 XFechaOrd2 = String.Join("", XFecha2.Split("/").Reverse())
-                XBanco2 = gridFormasPago.Rows(iRow).Cells(3).Value
-                XImporte2 = gridFormasPago.Rows(iRow).Cells(4).Value
+                XBanco2 = gridFormasPago2.Rows(iRow).Cells(3).Value
+                XImporte2 = gridFormasPago2.Rows(iRow).Cells(4).Value
                 XObservaciones = txtObservaciones.Text
                 XEmpresa = "1"
                 XClave = XRecibo + XRenglon
@@ -1399,16 +1404,16 @@ Public Class Recibos
 
                 End If
 
-                If Val(gridFormasPago.Rows(iRow).Cells(0).Value) = 3 Then
+                If Val(gridFormasPago2.Rows(iRow).Cells(0).Value) = 3 Then
                     XTipo = "50"
-                    XNumero = ceros(gridFormasPago.Rows(iRow).Cells(1).Value, 8)
+                    XNumero = ceros(gridFormasPago2.Rows(iRow).Cells(1).Value, 8)
                     XRenglon = "01"
                     XCliente = txtCliente.Text
                     XFecha = txtFecha.Text
                     XEstado = "1"
-                    XVencimiento = gridFormasPago.Rows(iRow).Cells(2).Value
+                    XVencimiento = gridFormasPago2.Rows(iRow).Cells(2).Value
                     XVencimiento1 = XVencimiento
-                    XTotal = gridFormasPago.Rows(iRow).Cells(4).Value
+                    XTotal = gridFormasPago2.Rows(iRow).Cells(4).Value
                     XTotalUs = XTotal
                     XSaldo = XTotal
                     XSaldoUs = XTotal
@@ -1590,8 +1595,8 @@ Public Class Recibos
         ' Actualizamos los datos de retenciones, comprobante y diferencias de cambio.
         XSql = ""
         XSql = XSql & "UPDATE Recibos SET "
-        XSql = XSql & " DifCambio = " & Val(lblDolares.Text) & ","
-        XSql = XSql & " RetSuss = " & Val(txtRetSuss.Text.Replace(".", ",")) & ","
+        XSql = XSql & " DifCambio = " & _NormalizarNumero(lblDolares.Text) & ","
+        XSql = XSql & " RetSuss = " & _NormalizarNumero(txtRetSuss.Text) & ","
         XSql = XSql & " ComproGanan = " & "'" & Val(Trim(_ComprobanteRetGanancias)) & "',"
         XSql = XSql & " ComproIva = " & "'" & Val(Trim(_ComprobanteRetIva)) & "',"
         XSql = XSql & " ComproIb = ''," 'Comprobar si se sigue colocando o no. Me parece que no.
@@ -1745,10 +1750,10 @@ Public Class Recibos
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
 
-        For iRow = 0 To gridPagos.Rows.Count - 1
+        For iRow = 0 To gridPagos2.Rows.Count - 1
 
             WRow = iRow
-            If Val(gridPagos.Rows(iRow).Cells(4).Value) <> 0 Then
+            If Val(gridPagos2.Rows(iRow).Cells(4).Value) <> 0 Then
 
                 renglon += 1
 
@@ -1763,16 +1768,16 @@ Public Class Recibos
                 XRetotra = Str$(Val(txtRetIB.Text))
                 XRetencion = ""
                 XTiporeg = "1"
-                XTipo1 = gridPagos.Rows(iRow).Cells(0).Value
-                XLetra1 = gridPagos.Rows(iRow).Cells(1).Value
-                XPunto1 = gridPagos.Rows(iRow).Cells(2).Value
-                XNumero1 = ceros(gridPagos.Rows(iRow).Cells(3).Value, 8)
+                XTipo1 = gridPagos2.Rows(iRow).Cells(0).Value
+                XLetra1 = gridPagos2.Rows(iRow).Cells(1).Value
+                XPunto1 = gridPagos2.Rows(iRow).Cells(2).Value
+                XNumero1 = ceros(gridPagos2.Rows(iRow).Cells(3).Value, 8)
                 If Val(_Provincia) = 24 Then
-                    XImporte1 = Str$(Val(gridPagos.Rows(iRow).Cells(4).Value) * Val(txtParidad.Text))
+                    XImporte1 = Str$(Val(gridPagos2.Rows(iRow).Cells(4).Value) * Val(txtParidad.Text))
                 Else
-                    XImporte1 = Str$(Val(gridPagos.Rows(iRow).Cells(4).Value))
+                    XImporte1 = Str$(Val(gridPagos2.Rows(iRow).Cells(4).Value))
                 End If
-                XImporteBaja = Str$(Val(gridPagos.Rows(iRow).Cells(4).Value))
+                XImporteBaja = Str$(Val(gridPagos2.Rows(iRow).Cells(4).Value))
                 XTipo2 = ""
                 XNumero2 = ""
                 XFecha2 = ""
@@ -1862,7 +1867,7 @@ Public Class Recibos
 
                 ' Calculamos el saldo para poder actualizar la cuenta cte.
                 ClaveCtaCte = XTipo1 + XNumero1 + "01"
-                cm.CommandText = "SELECT Saldo, Total, TotalUs, Estado FROM CtaCte Where Clave = '" & ClaveCtaCte & "'"
+                cm.CommandText = "SELECT Saldo, Total, TotalUs, Estado FROM CtaCte Where Clave = '" & ClaveCtaCte & "' and Cliente = '" & Trim(txtCliente.Text) & "'"
                 SQLConnector.conexionSql(cn, cm)
 
                 Try
@@ -1910,37 +1915,37 @@ Public Class Recibos
 
                 End Try
 
-                If Val(XSaldo) <> 0 Then
+                'If Val(XSaldo) <> 0 Then
 
-                    XSql = "UPDATE CtaCte " _
-                        & "SET " _
-                        & " Saldo = " & XSaldo.Replace(",", ".") & "," _
-                        & " SaldoUs = " & XSaldoUs.Replace(",", ".") & ", " _
-                        & " Estado = '" & XEstado & "', " _
-                        & " Wdate = '" & XDate & "'" _
-                        & " WHERE Clave = '" & ClaveCtaCte & "'"
+                XSql = "UPDATE CtaCte " _
+                    & "SET " _
+                    & " Saldo = " & XSaldo.Replace(",", ".") & "," _
+                    & " SaldoUs = " & XSaldoUs.Replace(",", ".") & ", " _
+                    & " Estado = '" & XEstado & "', " _
+                    & " Wdate = '" & XDate & "'" _
+                    & " WHERE Clave = '" & ClaveCtaCte & "' and Cliente = '" & Trim(txtCliente.Text) & "'"
 
-                    cm.CommandText = XSql
-                    SQLConnector.conexionSql(cn, cm)
+                cm.CommandText = XSql
+                SQLConnector.conexionSql(cn, cm)
 
-                    Try
-                        cm.ExecuteNonQuery()
+                Try
+                    cm.ExecuteNonQuery()
 
-                    Catch ex As Exception
-                        MsgBox("Hubo un problema al querer actualizar la cuenta corriente.", MsgBoxStyle.Critical)
-                        Exit Sub
-                    Finally
-
-
-                        cn.Close()
+                Catch ex As Exception
+                    MsgBox("Hubo un problema al querer actualizar la cuenta corriente.", MsgBoxStyle.Critical)
+                    Exit Sub
+                Finally
 
 
-                        XSql = ""
-                        XParam = ""
+                    cn.Close()
 
-                    End Try
 
-                End If
+                    XSql = ""
+                    XParam = ""
+
+                End Try
+
+                'End If
             Else
                 Exit Sub
             End If
@@ -2239,7 +2244,7 @@ Public Class Recibos
     Private Function _NoImputadosCorrectamenteValoresVarios() As Boolean
         Dim _Error As Boolean = False
 
-        For Each credito As DataGridViewRow In gridFormasPago.Rows
+        For Each credito As DataGridViewRow In gridFormasPago2.Rows
 
             If Val(credito.Cells(0).Value) = 4 Then
                 If Not _CuentaContableIngresada(credito.Index) Then
@@ -2341,7 +2346,7 @@ Public Class Recibos
 
     Private Function crearFormasPago() As List(Of FormaPago)
         Dim formasPago As New List(Of FormaPago)
-        For Each row As DataGridViewRow In gridFormasPago.Rows
+        For Each row As DataGridViewRow In gridFormasPago2.Rows
             If Not row.IsNewRow Then
                 formasPago.Add(New FormaPago(row.Cells(0).Value, 0, asString(row.Cells(1).Value), asString(row.Cells(2).Value), asString(row.Cells(3).Value), CustomConvert.toDoubleOrZero(row.Cells(4).Value)))
             End If
@@ -2351,7 +2356,7 @@ Public Class Recibos
 
     Private Function crearPagos() As List(Of Pago)
         Dim pagos As New List(Of Pago)
-        For Each row As DataGridViewRow In gridPagos.Rows
+        For Each row As DataGridViewRow In gridPagos2.Rows
             If Not row.IsNewRow Then
                 pagos.Add(New Pago(row.Cells(0).Value, asString(row.Cells(1).Value), asString(row.Cells(2).Value), asString(row.Cells(3).Value), "", CustomConvert.toDoubleOrZero(row.Cells(4).Value)))
             End If
@@ -2369,11 +2374,11 @@ Public Class Recibos
 
     Private Sub optCtaCte_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optCtaCte.CheckedChanged
         If Not optCtaCte.Checked Then
-            gridPagos.Rows.Clear()
-            gridPagos.AllowUserToAddRows = False
+            gridPagos2.Rows.Clear()
+            gridPagos2.AllowUserToAddRows = False
             'sumarValores()
         Else
-            gridPagos.AllowUserToAddRows = True
+            gridPagos2.AllowUserToAddRows = True
         End If
     End Sub
 
@@ -2646,7 +2651,7 @@ Public Class Recibos
 
     Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
         If e.KeyValue = Keys.Enter Then
-            With gridFormasPago
+            With gridFormasPago2
                 .Rows(0).Selected = True
                 .CurrentCell = .Rows(0).Cells(0)
                 .Focus()
@@ -2658,15 +2663,15 @@ Public Class Recibos
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
 
-        If gridFormasPago.Focused Or gridFormasPago.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
-            gridFormasPago.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+        If gridFormasPago2.Focused Or gridFormasPago2.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+            gridFormasPago2.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
 
-            Dim iCol = gridFormasPago.CurrentCell.ColumnIndex
-            Dim iRow = gridFormasPago.CurrentCell.RowIndex
+            Dim iCol = gridFormasPago2.CurrentCell.ColumnIndex
+            Dim iRow = gridFormasPago2.CurrentCell.RowIndex
 
             If msg.WParam.ToInt32() = Keys.Enter Then
 
-                Dim valor = gridFormasPago.Rows(iRow).Cells(iCol).Value
+                Dim valor = gridFormasPago2.Rows(iRow).Cells(iCol).Value
 
                 If Not IsNothing(valor) Then
 
@@ -2674,14 +2679,14 @@ Public Class Recibos
 
                         If Trim(valor.ToString.Length) = 31 Then
                             If _ProcesarCheque(iRow, valor) Then
-                                gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol + 2) ' Nos desplazamos para que coloque la fecha del cheque.
+                                gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 2) ' Nos desplazamos para que coloque la fecha del cheque.
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
                             If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
                                 eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
                             Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
-                                gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol)
+                                gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol)
                             End If
                         End If
 
@@ -2691,8 +2696,8 @@ Public Class Recibos
                         If iCol = 2 Then
 
                             If _NormalizarFecha(valor) Then
-                                gridFormasPago.Rows(iRow).Cells(2).Value = valor
-                                gridFormasPago.EndEdit()
+                                gridFormasPago2.Rows(iRow).Cells(2).Value = valor
+                                gridFormasPago2.EndEdit()
                             End If
 
                         End If
@@ -2700,7 +2705,7 @@ Public Class Recibos
                         If iCol = 1 Or iCol = 2 Or iCol = 3 Then
 
                             If iCol = 1 Then
-                                With gridFormasPago
+                                With gridFormasPago2
                                     .CurrentCell = .Rows(iRow).Cells(iCol + 1)
 
                                     Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
@@ -2715,7 +2720,7 @@ Public Class Recibos
                                     txtFechaAux.Visible = True
                                     txtFechaAux.Focus()
                                 End With
-                                
+
                                 WRow = iRow
                                 Wcol = iCol
                                 txtFechaAux.Visible = True
@@ -2738,29 +2743,31 @@ Public Class Recibos
 
                                 If _ChequeVencido(valor) Then
                                     MsgBox("La fecha del cheque introducida es inválida", MsgBoxStyle.Critical)
-                                    gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol)
+                                    gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol)
                                 ElseIf iCol = 3 Then
-                                    gridFormasPago.Rows(iRow).Cells(iCol).Value = _GenerarCodigoBanco(valor)
-                                    gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol + 1)
+                                    gridFormasPago2.Rows(iRow).Cells(iCol).Value = _GenerarCodigoBanco(valor)
+                                    gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
                                 Else
-                                    gridFormasPago.Rows(iRow).Cells(iCol).Value = valor
-                                    gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol + 1)
+                                    gridFormasPago2.Rows(iRow).Cells(iCol).Value = valor
+                                    gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
                                 End If
                             Else
-                                gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow).Cells(iCol + 1)
+                                gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
                             End If
                             Return True
                         End If
 
                         If iCol = 4 Then ' Avanzamos a la fila siguiente.
-                            If Val(gridFormasPago.Rows(iRow).Cells(0).Value) = 4 Then
+                            If Val(gridFormasPago2.Rows(iRow).Cells(0).Value) = 4 Then
                                 _PedirCuentaContable(iRow)
-                            ElseIf Val(gridFormasPago.Rows(iRow).Cells(0).Value) = 2 Then
+                            ElseIf Val(gridFormasPago2.Rows(iRow).Cells(0).Value) = 2 Then
                                 _PedirClaveCheque(iRow)
                             End If
 
-                            gridFormasPago.Rows(iRow).Cells(4).Value = _NormalizarNumero(valor)
-                            gridFormasPago.CurrentCell = gridFormasPago.Rows(iRow + 1).Cells(0)
+                            gridFormasPago2.Rows(iRow).Cells(4).Value = _NormalizarNumero(valor)
+
+                            gridFormasPago2.CurrentCell = gridFormasPago2.Rows(gridFormasPago2.Rows.Add).Cells(0)
+
                             _SumarCreditos()
                             Return True
                         End If
@@ -2769,7 +2776,7 @@ Public Class Recibos
                     Return True
                 End If
             ElseIf msg.WParam.ToInt32() = Keys.Escape Then
-                With gridFormasPago
+                With gridFormasPago2
                     .Rows(iRow).Cells(iCol).Value = ""
 
                     If iCol = 4 Then
@@ -2785,23 +2792,23 @@ Public Class Recibos
             End If
         End If
 
-        If gridPagos.Focused Or gridPagos.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
-            gridPagos.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+        If gridPagos2.Focused Or gridPagos2.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+            gridPagos2.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
 
-            Dim iCol = gridPagos.CurrentCell.ColumnIndex
-            Dim iRow = gridPagos.CurrentCell.RowIndex
+            Dim iCol = gridPagos2.CurrentCell.ColumnIndex
+            Dim iRow = gridPagos2.CurrentCell.RowIndex
 
             If msg.WParam.ToInt32() = Keys.Enter Then
 
-                Dim valor = gridPagos.Rows(iRow).Cells(iCol).Value
+                Dim valor = gridPagos2.Rows(iRow).Cells(iCol).Value
 
                 '_ComprobarDebitoPosible(iRow, iCol)
                 If iCol = 4 Then
-                    If Val(gridPagos.Rows(iRow).Cells(iCol).Value) > Val(gridPagos.Rows(iRow).Cells(5).Value) Then
-                        gridPagos.CurrentCell = gridPagos.Rows(iRow).Cells(iCol)
+                    If Val(gridPagos2.Rows(iRow).Cells(iCol).Value) > Val(gridPagos2.Rows(iRow).Cells(5).Value) Then
+                        gridPagos2.CurrentCell = gridPagos2.Rows(iRow).Cells(iCol)
                         Return True
                     Else
-                        gridPagos.Rows(iRow).Cells(iCol).Value = valor
+                        gridPagos2.Rows(iRow).Cells(iCol).Value = valor
                         _SumarDebitos()
                     End If
                 End If
@@ -2809,7 +2816,7 @@ Public Class Recibos
             End If
             If msg.WParam.ToInt32() = Keys.Escape Then
                 If iCol = 4 Then
-                    With gridPagos
+                    With gridPagos2
                         .Rows(iRow).Cells(iCol).Value = ""
 
                         If iCol = 4 Then
@@ -2822,7 +2829,7 @@ Public Class Recibos
                     End With
                     _SumarDebitos()
                 End If
-                
+
                 Return True
             End If
         End If
@@ -2952,7 +2959,7 @@ Public Class Recibos
             MsgBox("Error en la lectura de los datos del codigo de banco del cheque")
         End If
 
-        With gridFormasPago.Rows(row)
+        With gridFormasPago2.Rows(row)
             .Cells(0).Value = "02"
             .Cells(1).Value = _NumCheque
             .Cells(2).Value = ""
@@ -3149,15 +3156,15 @@ Public Class Recibos
     End Function
 
     Private Sub _ComprobarDebitoPosible(ByVal iRow As Integer, ByVal iCol As Integer)
-        Dim _Maximo As Object = _ValoresMax.FindLast(Function(m) m(0) = gridPagos.Rows(iRow).Cells(3).Value)
+        Dim _Maximo As Object = _ValoresMax.FindLast(Function(m) m(0) = gridPagos2.Rows(iRow).Cells(3).Value)
         If Not IsNothing(_Maximo) Then
-            If iCol = 4 And (IsNothing(gridPagos.CurrentCell.Value) Or Val(gridPagos.CurrentCell.Value) > _Maximo(1)) Then
+            If iCol = 4 And (IsNothing(gridPagos2.CurrentCell.Value) Or Val(gridPagos2.CurrentCell.Value) > _Maximo(1)) Then
                 MsgBox("El valor del importe indicado no puede ser mayor a " & _Maximo(1))
-                gridPagos.CurrentCell = gridPagos.Rows(iRow).Cells(iCol)
+                gridPagos2.CurrentCell = gridPagos2.Rows(iRow).Cells(iCol)
             Else
-                gridPagos.CurrentCell.Value = _NormalizarNumero(Val(gridPagos.CurrentCell.Value))
+                gridPagos2.CurrentCell.Value = _NormalizarNumero(Val(gridPagos2.CurrentCell.Value))
                 _SumarDebitos()
-                gridPagos.CurrentCell = gridPagos.Rows(iRow + 1).Cells(iCol)
+                gridPagos2.CurrentCell = gridPagos2.Rows(iRow + 1).Cells(iCol)
             End If
         End If
     End Sub
@@ -3169,7 +3176,7 @@ Public Class Recibos
     End Sub
 
     Private Sub txtCliente_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCliente.TextChanged
-        gridPagos.Rows.Clear()
+        gridPagos2.Rows.Clear()
     End Sub
 
     'Private Sub gridPagos_CellBeginEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellCancelEventArgs) Handles gridPagos.CellBeginEdit
@@ -3536,6 +3543,17 @@ Public Class Recibos
             Throw New Exception("No se pudo enviar el E-Mail.")
         End Try
 
+        Try
+            ' Eliminamos el archivo.
+
+            If System.IO.File.Exists(ruta & archivo) Then
+                System.IO.File.Delete(ruta & archivo)
+            End If
+        Catch ex As Exception
+            'Throw New Exception("No se pudo generar el archivo PDF del Recibo. Se detiene el envio por email del mismo.")
+            Exit Sub
+        End Try
+
     End Sub
 
     Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjunto As String)
@@ -3637,9 +3655,9 @@ Public Class Recibos
         ' Extraemos los valores de Débitos y Créditos.
         For iRow = 0 To 19
 
-            If iRow < gridPagos.Rows.Count Then
-                If Trim(gridPagos.Rows(iRow).Cells(4).Value) <> "" Then
-                    With gridPagos.Rows(iRow)
+            If iRow < gridPagos2.Rows.Count Then
+                If Trim(gridPagos2.Rows(iRow).Cells(4).Value) <> "" Then
+                    With gridPagos2.Rows(iRow)
                         Vector(iRow, 0) = .Cells(0).Value
                         Vector(iRow, 1) = .Cells(1).Value
                         Vector(iRow, 2) = .Cells(2).Value
@@ -3653,9 +3671,9 @@ Public Class Recibos
                 Next
             End If
 
-            If iRow < gridFormasPago.Rows.Count Then
-                If Trim(gridFormasPago.Rows(iRow).Cells(4).Value) <> "" Then
-                    With gridFormasPago.Rows(iRow)
+            If iRow < gridFormasPago2.Rows.Count Then
+                If Trim(gridFormasPago2.Rows(iRow).Cells(4).Value) <> "" Then
+                    With gridFormasPago2.Rows(iRow)
                         Vector(iRow, 5) = .Cells(0).Value
                         Vector(iRow, 6) = .Cells(1).Value
                         Vector(iRow, 7) = .Cells(2).Value
@@ -3952,10 +3970,12 @@ Public Class Recibos
                     WEntra(XLugar, 9) = "Moneda Ext."
                     If Val(txtParidad.Text) <> 0 Then
                         WEntra(XLugar, 10) = Str$(Val(_NormalizarNumero(Dolares)) / Val(_NormalizarNumero(txtParidad.Text)))
+                        WEntra(XLugar, 11) = "U$S"
                     Else
                         WEntra(XLugar, 10) = Str$(Dolares)
+                        WEntra(XLugar, 11) = ""
                     End If
-                    WEntra(XLugar, 11) = "U$S"
+
                 Case 10
                     WEntra(XLugar, 9) = "Compensacion"
                     WEntra(XLugar, 10) = Str$(Compe)
@@ -4089,8 +4109,8 @@ Public Class Recibos
         Suma3 = 0
         Suma4 = 0
 
-        For iRow = 0 To gridPagos.Rows.Count - 1
-            With gridPagos.Rows(iRow)
+        For iRow = 0 To gridPagos2.Rows.Count - 1
+            With gridPagos2.Rows(iRow)
                 XTipo1 = ceros(.Cells(0).Value, 2)
                 XLetra1 = .Cells(1).Value
                 XPunto1 = .Cells(2).Value
@@ -4109,9 +4129,9 @@ Public Class Recibos
             End If
         Next
 
-        For iRow = 0 To gridFormasPago.Rows.Count - 1
+        For iRow = 0 To gridFormasPago2.Rows.Count - 1
 
-            With gridFormasPago.Rows(iRow)
+            With gridFormasPago2.Rows(iRow)
                 XTipo2 = .Cells(0).Value
                 XFecha2 = .Cells(2).Value
                 XImporte2 = .Cells(4).Value
@@ -4183,9 +4203,9 @@ Public Class Recibos
         _PrepararTablaIntereses(tabla)
 
         ' Lleno la tabla con la informacion del Recibo.
-        For i = 0 To gridFormasPago.Rows.Count - 1
+        For i = 0 To gridFormasPago2.Rows.Count - 1
 
-            With gridFormasPago.Rows(i)
+            With gridFormasPago2.Rows(i)
 
                 XTipo2 = .Cells(0).Value
                 XNumero2 = ceros(.Cells(1).Value, 8)
@@ -4277,7 +4297,7 @@ Public Class Recibos
                 End If
 
 
-                With gridFormasPago
+                With gridFormasPago2
                     .Rows(WRow).Cells(2).Value = txtFechaAux.Text
 
                     If Trim(.Rows(WRow).Cells(3).Value) <> "" Then
@@ -4312,8 +4332,8 @@ Public Class Recibos
         lstSeleccion_Click(Nothing, Nothing)
     End Sub
 
-    Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago.CellClick
-        With gridFormasPago
+    Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago2.CellClick
+        With gridFormasPago2
             If e.ColumnIndex = 2 Then
 
                 Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
@@ -4332,8 +4352,8 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago.CellEnter
-        With gridFormasPago
+    Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago2.CellEnter
+        With gridFormasPago2
             If e.ColumnIndex = 2 Then
 
                 Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location

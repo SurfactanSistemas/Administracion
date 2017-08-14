@@ -162,7 +162,7 @@ Public Class DAORecibo
 
     Private Shared Function crearFormaPago(ByVal rowA As DataRow)
         Return New FormaPago(rowA("Tipo2").ToString, 0, rowA("Numero2").ToString, rowA("Fecha2").ToString, rowA("banco2").ToString,
-                            asDouble(rowA("Importe2")))
+                            asDouble(rowA("Importe2")), "", Val(rowA("Renglon")))
     End Function
 
     Private Shared Function crearPago(ByVal rowA As DataRow)
