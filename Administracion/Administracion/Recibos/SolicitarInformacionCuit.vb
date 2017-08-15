@@ -56,7 +56,11 @@
     End Sub
 
     Private Function _ValidarCuit(ByVal cuit As String) As Boolean
-        Return IIf(Val(cuit) = 0, True, Proceso.CuitValido(cuit))
+        If Trim(cuit) = "" Then
+            Return False
+        Else
+            Return IIf(Val(cuit) = 0, True, Proceso.CuitValido(cuit))
+        End If
     End Function
 
     Private Sub InformacionRetenciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
