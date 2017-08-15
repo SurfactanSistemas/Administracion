@@ -142,7 +142,7 @@ Public Class Recibos
 
     Private Sub _CargarCtasCtes()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Impre, Numero, Fecha, Saldo FROM CtaCte WHERE Saldo > 0 AND Cliente = '" & Trim(txtCliente.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Impre, Numero, Fecha, Saldo FROM CtaCte WHERE Saldo <> 0 AND Cliente = '" & Trim(txtCliente.Text) & "' order by OrdFecha")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -3508,6 +3508,7 @@ Public Class Recibos
         _Imprimir(crdoc, cantidad)
         '_VistaPrevia(crdoc)
 
+        btnLimpiar.PerformClick()
 
     End Sub
 
@@ -3969,7 +3970,7 @@ Public Class Recibos
                     WEntra(XLugar, 11) = ""
                 Case 8
                     WEntra(XLugar, 9) = "Moneda Ext."
-                    If Val(txtParidad.Text) <> 0 Then
+                    If Val(txtParidad.Text) <> 0 And Val(Dolares) <> 0 Then
                         WEntra(XLugar, 10) = Str$(Val(_NormalizarNumero(Dolares)) / Val(_NormalizarNumero(txtParidad.Text)))
                         WEntra(XLugar, 11) = "U$S"
                     Else
