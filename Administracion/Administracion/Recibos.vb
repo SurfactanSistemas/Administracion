@@ -881,8 +881,10 @@ Public Class Recibos
 
     Private Sub mostrarFormasPago(ByVal formasPago As List(Of FormaPago))
         gridFormasPago2.Rows.Clear()
-        Dim row As Integer = gridFormasPago2.Rows.Add
+        Dim row As Integer
         For Each forma As FormaPago In formasPago
+            row = gridFormasPago2.Rows.Add
+
             With gridFormasPago2.Rows(row)
                 .Cells(0).Value = forma.tipo
                 .Cells(1).Value = forma.numero
@@ -891,7 +893,6 @@ Public Class Recibos
                 .Cells(4).Value = _NormalizarNumero(forma.importe)
             End With
 
-            row = gridFormasPago2.Rows.Add
         Next
     End Sub
 
@@ -2766,7 +2767,7 @@ Public Class Recibos
 
                             gridFormasPago2.Rows(iRow).Cells(4).Value = _NormalizarNumero(valor)
 
-                            gridFormasPago2.CurrentCell = gridFormasPago2.Rows(gridFormasPago2.Rows.Add).Cells(0)
+                            gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow + 1).Cells(0)
 
                             _SumarCreditos()
                             Return True
@@ -3504,8 +3505,8 @@ Public Class Recibos
             End Try
         End If
 
-        _Imprimir(crdoc, cantidad)
-        '_VistaPrevia(crdoc)
+        '_Imprimir(crdoc, cantidad)
+        _VistaPrevia(crdoc)
 
 
     End Sub

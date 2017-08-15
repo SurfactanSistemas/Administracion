@@ -108,7 +108,7 @@ Partial Class RecibosProvisorios
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.gridRecibos.DefaultCellStyle = DataGridViewCellStyle6
         Me.gridRecibos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.gridRecibos.Location = New System.Drawing.Point(21, 175)
+        Me.gridRecibos.Location = New System.Drawing.Point(21, 146)
         Me.gridRecibos.Name = "gridRecibos"
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
@@ -118,7 +118,7 @@ Partial Class RecibosProvisorios
         DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.gridRecibos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
-        Me.gridRecibos.Size = New System.Drawing.Size(649, 261)
+        Me.gridRecibos.Size = New System.Drawing.Size(649, 216)
         Me.gridRecibos.TabIndex = 13
         '
         'Tipo
@@ -243,7 +243,7 @@ Partial Class RecibosProvisorios
         Me.Panel2.Controls.Add(Me.lstConsulta)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(691, 495)
+        Me.Panel2.Size = New System.Drawing.Size(691, 423)
         Me.Panel2.TabIndex = 120
         '
         'txtFechaAux
@@ -290,7 +290,7 @@ Partial Class RecibosProvisorios
         Me.CustomLabel10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CustomLabel10.ControlAssociationKey = -1
         Me.CustomLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomLabel10.Location = New System.Drawing.Point(164, 440)
+        Me.CustomLabel10.Location = New System.Drawing.Point(164, 367)
         Me.CustomLabel10.Name = "CustomLabel10"
         Me.CustomLabel10.Size = New System.Drawing.Size(384, 22)
         Me.CustomLabel10.TabIndex = 118
@@ -314,7 +314,7 @@ Partial Class RecibosProvisorios
         Me.lblDiferencia.BackColor = System.Drawing.SystemColors.Control
         Me.lblDiferencia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDiferencia.ControlAssociationKey = -1
-        Me.lblDiferencia.Location = New System.Drawing.Point(558, 466)
+        Me.lblDiferencia.Location = New System.Drawing.Point(558, 393)
         Me.lblDiferencia.Name = "lblDiferencia"
         Me.lblDiferencia.Size = New System.Drawing.Size(110, 22)
         Me.lblDiferencia.TabIndex = 74
@@ -326,7 +326,7 @@ Partial Class RecibosProvisorios
         Me.lblTotal.BackColor = System.Drawing.SystemColors.Control
         Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTotal.ControlAssociationKey = -1
-        Me.lblTotal.Location = New System.Drawing.Point(558, 440)
+        Me.lblTotal.Location = New System.Drawing.Point(558, 367)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(110, 22)
         Me.lblTotal.TabIndex = 74
@@ -341,7 +341,7 @@ Partial Class RecibosProvisorios
         Me.lstSeleccion.LabelAssociationKey = -1
         Me.lstSeleccion.Location = New System.Drawing.Point(407, 6)
         Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(263, 134)
+        Me.lstSeleccion.Size = New System.Drawing.Size(263, 108)
         Me.lstSeleccion.TabIndex = 78
         Me.lstSeleccion.Visible = False
         '
@@ -468,7 +468,7 @@ Partial Class RecibosProvisorios
         Me.txtTotal.Empty = False
         Me.txtTotal.EnterIndex = 8
         Me.txtTotal.LabelAssociationKey = 9
-        Me.txtTotal.Location = New System.Drawing.Point(541, 147)
+        Me.txtTotal.Location = New System.Drawing.Point(541, 120)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.Size = New System.Drawing.Size(129, 20)
         Me.txtTotal.TabIndex = 25
@@ -495,7 +495,7 @@ Partial Class RecibosProvisorios
         Me.CustomLabel12.ControlAssociationKey = 9
         Me.CustomLabel12.Font = New System.Drawing.Font("Calibri", 9.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel12.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel12.Location = New System.Drawing.Point(484, 471)
+        Me.CustomLabel12.Location = New System.Drawing.Point(484, 398)
         Me.CustomLabel12.Name = "CustomLabel12"
         Me.CustomLabel12.Size = New System.Drawing.Size(66, 15)
         Me.CustomLabel12.TabIndex = 24
@@ -507,7 +507,7 @@ Partial Class RecibosProvisorios
         Me.CustomLabel8.ControlAssociationKey = 9
         Me.CustomLabel8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel8.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel8.Location = New System.Drawing.Point(452, 148)
+        Me.CustomLabel8.Location = New System.Drawing.Point(452, 121)
         Me.CustomLabel8.Name = "CustomLabel8"
         Me.CustomLabel8.Size = New System.Drawing.Size(83, 18)
         Me.CustomLabel8.TabIndex = 24
@@ -631,7 +631,7 @@ Partial Class RecibosProvisorios
         Me.lstFiltrada.LabelAssociationKey = -1
         Me.lstFiltrada.Location = New System.Drawing.Point(407, 33)
         Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(263, 108)
+        Me.lstFiltrada.Size = New System.Drawing.Size(263, 82)
         Me.lstFiltrada.TabIndex = 122
         Me.lstFiltrada.Visible = False
         '
@@ -643,7 +643,7 @@ Partial Class RecibosProvisorios
         Me.lstConsulta.LabelAssociationKey = -1
         Me.lstConsulta.Location = New System.Drawing.Point(406, 33)
         Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(263, 108)
+        Me.lstConsulta.Size = New System.Drawing.Size(263, 82)
         Me.lstConsulta.TabIndex = 76
         Me.lstConsulta.Visible = False
         '
@@ -661,7 +661,7 @@ Partial Class RecibosProvisorios
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(574, 552)
+        Me.btnLimpiar.Location = New System.Drawing.Point(574, 481)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(69, 44)
         Me.btnLimpiar.TabIndex = 125
@@ -682,7 +682,7 @@ Partial Class RecibosProvisorios
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(469, 552)
+        Me.btnCerrar.Location = New System.Drawing.Point(469, 481)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(69, 44)
         Me.btnCerrar.TabIndex = 124
@@ -703,7 +703,7 @@ Partial Class RecibosProvisorios
         Me.btnIntereses.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnIntereses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnIntereses.LabelAssociationKey = -1
-        Me.btnIntereses.Location = New System.Drawing.Point(364, 552)
+        Me.btnIntereses.Location = New System.Drawing.Point(364, 481)
         Me.btnIntereses.Name = "btnIntereses"
         Me.btnIntereses.Size = New System.Drawing.Size(69, 44)
         Me.btnIntereses.TabIndex = 123
@@ -724,7 +724,7 @@ Partial Class RecibosProvisorios
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(259, 552)
+        Me.btnConsulta.Location = New System.Drawing.Point(259, 481)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(69, 44)
         Me.btnConsulta.TabIndex = 122
@@ -745,7 +745,7 @@ Partial Class RecibosProvisorios
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(49, 552)
+        Me.btnAgregar.Location = New System.Drawing.Point(49, 481)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(69, 44)
         Me.btnAgregar.TabIndex = 121
@@ -766,7 +766,7 @@ Partial Class RecibosProvisorios
         Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEliminar.LabelAssociationKey = -1
-        Me.btnEliminar.Location = New System.Drawing.Point(154, 552)
+        Me.btnEliminar.Location = New System.Drawing.Point(154, 481)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(69, 44)
         Me.btnEliminar.TabIndex = 122
@@ -777,7 +777,7 @@ Partial Class RecibosProvisorios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(692, 603)
+        Me.ClientSize = New System.Drawing.Size(692, 532)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnIntereses)
@@ -787,8 +787,9 @@ Partial Class RecibosProvisorios
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Location = New System.Drawing.Point(100, 10)
         Me.Name = "RecibosProvisorios"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         CType(Me.gridRecibos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
