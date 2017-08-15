@@ -3505,8 +3505,8 @@ Public Class Recibos
             End Try
         End If
 
-        '_Imprimir(crdoc, cantidad)
-        _VistaPrevia(crdoc)
+        _Imprimir(crdoc, cantidad)
+        '_VistaPrevia(crdoc)
 
 
     End Sub
