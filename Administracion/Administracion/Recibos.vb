@@ -45,6 +45,8 @@ Public Class Recibos
     Dim cm As SqlCommand = New SqlCommand()
     Dim dr As SqlDataReader
 
+    Dim WOffset As Integer = 1
+
     ' No tengo idea de para que son.
     Dim queryController As QueryController
     Dim commonEventsHandler As New CommonEventsHandler
@@ -53,6 +55,7 @@ Public Class Recibos
 
         WRow = -1
         Wcol = -1
+        WOffset = 1
 
         'commonEventsHandler.setIndexTab(Me)
         lstSeleccion.SelectedIndex = 0
@@ -535,6 +538,8 @@ Public Class Recibos
             txtRecibo.Focus()
             Exit Sub
         Else
+            WOffset = 1
+
             txtRecibo.Text = recibo.codigo
             txtFecha.Text = Proceso._Normalizarfecha(recibo.fecha)
             '_NormalizarFecha(_fecha)
@@ -614,7 +619,7 @@ Public Class Recibos
 
                     If Val(dr.Item("Tipo2")) = 4 Then
                         With dr
-                            _CuentasContables.Add({Val(.Item("Renglon")) - 2, .Item("Cuenta")})
+                            _CuentasContables.Add({Val(.Item("Renglon")) - WOffset, .Item("Cuenta")})
                         End With
                     End If
 
@@ -876,6 +881,7 @@ Public Class Recibos
         gridPagos2.Rows.Clear()
         For Each pago As Pago In pagos
             gridPagos2.Rows.Add(pago.tipo, pago.letra, pago.punto, pago.numero, _NormalizarNumero(pago.importe))
+            WOffset += 1
         Next
     End Sub
 
@@ -2590,6 +2596,7 @@ Public Class Recibos
         If e.KeyData = Keys.Enter Then
 
             txtRecibo.Text = ceros(txtRecibo.Text, 6)
+
             mostrarRecibo(DAORecibo.buscarRecibo(txtRecibo.Text))
             _SaltarA(txtFecha)
 
@@ -2805,13 +2812,26 @@ Public Class Recibos
 
                 '_ComprobarDebitoPosible(iRow, iCol)
                 If iCol = 4 Then
-                    If Val(gridPagos2.Rows(iRow).Cells(iCol).Value) > Val(gridPagos2.Rows(iRow).Cells(5).Value) Then
-                        gridPagos2.CurrentCell = gridPagos2.Rows(iRow).Cells(iCol)
-                        Return True
+                    Dim max As Double = Val(gridPagos2.Rows(iRow).Cells(5).Value)
+
+                    If max < 0 Then
+                        If Val(gridPagos2.Rows(iRow).Cells(iCol).Value) < max Or Val(gridPagos2.Rows(iRow).Cells(iCol).Value) > 0 Then
+                            gridPagos2.CurrentCell = gridPagos2.Rows(iRow).Cells(iCol)
+                            Return True
+                        Else
+                            gridPagos2.Rows(iRow).Cells(iCol).Value = valor
+                            _SumarDebitos()
+                        End If
                     Else
-                        gridPagos2.Rows(iRow).Cells(iCol).Value = valor
-                        _SumarDebitos()
+                        If Val(gridPagos2.Rows(iRow).Cells(iCol).Value) > max Or Val(gridPagos2.Rows(iRow).Cells(iCol).Value) < 0 Then
+                            gridPagos2.CurrentCell = gridPagos2.Rows(iRow).Cells(iCol)
+                            Return True
+                        Else
+                            gridPagos2.Rows(iRow).Cells(iCol).Value = valor
+                            _SumarDebitos()
+                        End If
                     End If
+                    
                 End If
 
             End If
