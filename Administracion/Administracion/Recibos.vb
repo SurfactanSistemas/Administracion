@@ -65,8 +65,6 @@ Public Class Recibos
 
         '_AlinearCeldas()
 
-
-
         btnLimpiar.PerformClick()
 
         _DeterminarParidad()
@@ -478,7 +476,7 @@ Public Class Recibos
         lblDiferencia.Text = "0.0"
 
         _DeterminarParidad()
-
+        txtRecibo.Text = "0"
         txtProvi.Focus()
         _ResetearConsultas()
     End Sub
@@ -783,7 +781,11 @@ Public Class Recibos
                 _SumarCreditos()
 
                 txtRecibo.Text = "0"
-                txtParidad.Focus()
+                'txtParidad.Focus()
+
+                If Trim(txtCliente.Text) <> "" Then
+                    btnCtaCte.PerformClick()
+                End If
 
             Else
 
@@ -2552,6 +2554,7 @@ Public Class Recibos
         If e.KeyData = Keys.Enter Then
             txtProvi.Text = ceros(txtProvi.Text, 6)
             mostrarReciboProvisorio(txtProvi.Text)
+
         ElseIf e.KeyData = Keys.Escape Then
             txtProvi.Text = ""
         End If
@@ -3130,16 +3133,16 @@ Public Class Recibos
         If Not IsNothing(buscar) Then
             cuenta = buscar(1)
             _PedirInformacion("Ingrese Cuenta Contable", New TextBox(), cuenta)
-            If cuenta = "" Then : Exit Sub : End If
+            'If cuenta = "" Then : Exit Sub : End If
         End If
 
         Do While Not _CuentaContableValida(cuenta)
 
             _PedirInformacion("Ingrese Cuenta Contable", New TextBox(), cuenta)
 
-            If cuenta = "" Then
-                Exit Do
-            End If
+            'If cuenta = "" Then
+            '    Exit Do
+            'End If
         Loop
 
         _CuentasContables.Add({row, Trim(cuenta)})
@@ -3366,7 +3369,7 @@ Public Class Recibos
 
                 crdoc = New ReciboDefinitivoEmail
 
-                cantidad = 2
+                cantidad = 1
 
                 enviarEmail = True
 
