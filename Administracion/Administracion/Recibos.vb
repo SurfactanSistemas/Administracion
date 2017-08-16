@@ -4399,4 +4399,8 @@ Public Class Recibos
     Private Sub Recibos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtProvi.Focus()
     End Sub
+
+    Private Sub lblDolares_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDolares.TextChanged
+        CustomLabel14.Text = _NormalizarNumero(Val(_NormalizarNumero(lblDolares.Text)) * Val(txtParidad.Text))
+    End Sub
 End Class
