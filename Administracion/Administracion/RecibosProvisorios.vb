@@ -525,6 +525,11 @@ Public Class RecibosProvisorios
 
             txtTotal.Text = _NormalizarNumero(txtTotal.Text)
             sumarValores()
+
+            If Val(txtTotal.Text) = 0 Or Trim(txtTotal.Text) = "" Then
+                Exit Sub
+            End If
+
             With gridRecibos
                 '.Rows(0).Selected = True
                 .CurrentCell = .Rows(0).Cells(0)

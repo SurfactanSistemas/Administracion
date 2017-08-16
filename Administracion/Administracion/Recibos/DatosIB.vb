@@ -8,7 +8,7 @@
         
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB1.Text) <> "" Then
+            If Val(txtRetIB1.Text) <> 0 Then
                 _SaltarA(txtCompIB1)
             Else
                 _SaltarA(txtRetIB2)
@@ -36,7 +36,7 @@
         
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB2.Text) <> "" Then
+            If Val(txtRetIB2.Text) <> 0 Then
                 _SaltarA(txtCompIB2)
             Else
                 _SaltarA(txtRetIB3)
@@ -63,7 +63,7 @@
     Private Sub txtRetIB3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB3.KeyDown
         
         If e.KeyData = Keys.Enter Then
-            If Trim(txtRetIB3.Text) <> "" Then
+            If Val(txtRetIB3.Text) <> 0 Then
                 _SaltarA(txtCompIB3)
             Else
                 _SaltarA(txtRetIB8)
@@ -90,7 +90,7 @@
         
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB4.Text) <> "" Then
+            If Val(txtRetIB4.Text) <> 0 Then
                 _SaltarA(txtCompIB4)
             Else
                 _SaltarA(txtRetIB5)
@@ -118,7 +118,7 @@
         
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB5.Text) <> "" Then
+            If Val(txtRetIB5.Text) <> 0 Then
                 _SaltarA(txtCompIB5)
             Else
                 _SaltarA(txtRetIB6)
@@ -146,7 +146,7 @@
 
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB6.Text) <> "" Then
+            If Val(txtRetIB6.Text) <> 0 Then
                 _SaltarA(txtCompIB6)
             Else
                 _SaltarA(txtRetIB7)
@@ -174,7 +174,7 @@
         
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB7.Text) <> "" Then
+            If Val(txtRetIB7.Text) <> 0 Then
                 _SaltarA(txtCompIB7)
             Else
                 Me.Close()
@@ -202,7 +202,7 @@
 
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB7.Text) <> "" Then
+            If Val(txtRetIB7.Text) <> 0 Then
                 _SaltarA(txtCompIB8)
             Else
                 _SaltarA(txtRetIB4)
