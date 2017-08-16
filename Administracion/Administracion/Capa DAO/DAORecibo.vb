@@ -20,7 +20,7 @@ Public Class DAORecibo
     End Sub
 
     Public Shared Function existeRecibo(ByVal codigo As String)
-        Dim tabla As DataTable = SQLConnector.retrieveDataTable("get_recibo", codigo)
+        Dim tabla As DataTable = SQLConnector.retrieveDataTable("get_recibo_provisorio_sin_numero", codigo)
         Return tabla.Rows.Count = 0
 
         'Return SQLConnector.checkIfExists("get_recibo", codigo)
