@@ -453,6 +453,7 @@ Public Class Recibos
 
     Private Sub setDefaults()
         txtFechaAux.Visible = False
+        WOffset = 1
 
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
         gridFormasPago2.Rows.Clear()
@@ -469,6 +470,27 @@ Public Class Recibos
 
         _ClavesCheques.Clear()
         _CuentasContables.Clear()
+
+        _ComprobanteRetIva = ""
+        _ComprobanteRetGanancias = ""
+        _ComprobanteRetSuss = ""
+
+        _RetIB1 = ""
+        _CompIB1 = ""
+        _RetIB2 = ""
+        _CompIB2 = ""
+        _RetIB3 = ""
+        _CompIB3 = ""
+        _RetIB4 = ""
+        _CompIB4 = ""
+        _RetIB5 = ""
+        _CompIB5 = ""
+        _RetIB6 = ""
+        _CompIB6 = ""
+        _RetIB7 = ""
+        _CompIB7 = ""
+        _RetIB8 = ""
+        _CompIB8 = ""
 
         lblDolares.Text = "0.0"
         lblTotalCreditos.Text = "0.0"
@@ -536,7 +558,8 @@ Public Class Recibos
             txtRecibo.Focus()
             Exit Sub
         Else
-            WOffset = 1
+            
+            btnLimpiar.PerformClick()
 
             txtRecibo.Text = recibo.codigo
             txtFecha.Text = Proceso._Normalizarfecha(recibo.fecha)

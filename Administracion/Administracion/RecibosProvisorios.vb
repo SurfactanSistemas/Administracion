@@ -875,6 +875,15 @@ Public Class RecibosProvisorios
 
             End Select
 
+            If iCol = 0 Then
+
+                ' Por compatibilidad con lectora de Domingo que no envia enter al leer dato de cheque.
+                If Len(gridRecibos.Rows(iRow).Cells(iCol).Value) = 30 Then
+                    SendKeys.Send("{ENTER}")
+                End If
+
+            End If
+
             If msg.WParam.ToInt32() = Keys.Enter Then
 
                 Dim valor = gridRecibos.Rows(iRow).Cells(iCol).Value
@@ -889,8 +898,8 @@ Public Class RecibosProvisorios
                                 gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 2) ' Nos desplazamos para que coloque la fecha del cheque.
                             End If
                         Else
-                            valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
-                            If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
+                            valor = Val(valor)
+                            If valor = 1 Or valor = 2 Or valor = 3 Or valor = 4 Then
                                 eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
                             Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
                                 Return True
@@ -973,7 +982,9 @@ Public Class RecibosProvisorios
 
                     With gridRecibos
                         Select Case iCol
-                            Case 0, 1, 2, 3
+                            Case 0
+                                .CurrentCell = .Rows(iRow).Cells(iCol)
+                            Case 1, 2, 3
                                 .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                             Case Else
                         End Select

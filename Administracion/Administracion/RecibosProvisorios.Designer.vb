@@ -77,9 +77,9 @@ Partial Class RecibosProvisorios
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnIntereses = New Administracion.CustomButton()
+        Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
-        Me.btnEliminar = New Administracion.CustomButton()
         CType(Me.gridRecibos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -710,6 +710,27 @@ Partial Class RecibosProvisorios
         Me.ToolTip1.SetToolTip(Me.btnIntereses, "Intereses")
         Me.btnIntereses.UseVisualStyleBackColor = True
         '
+        'btnEliminar
+        '
+        Me.btnEliminar.BackgroundImage = Global.Administracion.My.Resources.Resources.eliminar
+        Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnEliminar.Cleanable = False
+        Me.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEliminar.EnterIndex = -1
+        Me.btnEliminar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.BorderSize = 0
+        Me.btnEliminar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEliminar.LabelAssociationKey = -1
+        Me.btnEliminar.Location = New System.Drawing.Point(154, 481)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(69, 44)
+        Me.btnEliminar.TabIndex = 122
+        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar el Recibo Provisorio Actual")
+        Me.btnEliminar.UseVisualStyleBackColor = True
+        '
         'btnConsulta
         '
         Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
@@ -751,27 +772,6 @@ Partial Class RecibosProvisorios
         Me.btnAgregar.TabIndex = 121
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
-        '
-        'btnEliminar
-        '
-        Me.btnEliminar.BackgroundImage = Global.Administracion.My.Resources.Resources.eliminar
-        Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnEliminar.Cleanable = False
-        Me.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnEliminar.EnterIndex = -1
-        Me.btnEliminar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatAppearance.BorderSize = 0
-        Me.btnEliminar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEliminar.LabelAssociationKey = -1
-        Me.btnEliminar.Location = New System.Drawing.Point(154, 481)
-        Me.btnEliminar.Name = "btnEliminar"
-        Me.btnEliminar.Size = New System.Drawing.Size(69, 44)
-        Me.btnEliminar.TabIndex = 122
-        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar el Recibo Provisorio Actual")
-        Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'RecibosProvisorios
         '
