@@ -3355,11 +3355,13 @@ Public Class Recibos
         End With
     End Sub
 
-    Private Sub _ImprimirRecibo(ByVal WEntra)
+    Private Sub _ImprimirRecibo(ByVal WEntra, ByVal WCheques)
         Dim table As New DataTable("Detalles")
+        Dim cheques1 As New DataTable("Cheques1")
+        Dim cheques2 As New DataTable("Cheques2")
         Dim row As DataRow
         Dim crdoc As ReportDocument
-        Dim cantidad As Integer = 2
+        Dim cantidad As Integer = 1
         Dim enviarEmail As Boolean = False
         crdoc = New ReciboDefinitivoEmail
 
@@ -3428,94 +3430,77 @@ Public Class Recibos
             row.Item("Numero2") = WEntra(i, 14)
             row.Item("Signo2") = WEntra(i, 15)
             row.Item("Importe2") = Val(WEntra(i, 16))
-            row.Item("Cheque1") = WEntra(i, 17)
-            row.Item("Venci1") = WEntra(i, 18)
-            row.Item("Impo1") = Val(WEntra(i, 19))
-            row.Item("Banco1") = WEntra(i, 20)
-            row.Item("Cheque2") = WEntra(i, 21)
-            row.Item("Venci2") = WEntra(i, 22)
-            row.Item("Impo2") = Val(WEntra(i, 23))
-            row.Item("Banco2") = WEntra(i, 24)
-            row.Item("Cheque3") = WEntra(i, 25)
-            row.Item("Venci3") = WEntra(i, 26)
-            row.Item("Impo3") = Val(WEntra(i, 27))
-            row.Item("Banco3") = WEntra(i, 28)
-            row.Item("Cheque4") = WEntra(i, 29)
-            row.Item("Venci4") = WEntra(i, 30)
-            row.Item("Impo4") = Val(WEntra(i, 31))
-            row.Item("Banco4") = WEntra(i, 32)
-            row.Item("Cheque5") = WEntra(i, 33)
-            row.Item("Venci5") = WEntra(i, 34)
-            row.Item("Impo5") = Val(WEntra(i, 35))
-            row.Item("Banco5") = WEntra(i, 36)
-            row.Item("Cheque6") = WEntra(i, 37)
-            row.Item("Venci6") = WEntra(i, 38)
-            row.Item("Impo6") = Val(WEntra(i, 39))
-            row.Item("Banco6") = WEntra(i, 40)
-            row.Item("Cheque7") = WEntra(i, 41)
-            row.Item("Venci7") = WEntra(i, 42)
-            row.Item("Impo7") = Val(WEntra(i, 43))
-            row.Item("Banco7") = WEntra(i, 44)
-            row.Item("Cheque8") = WEntra(i, 45)
-            row.Item("Venci8") = WEntra(i, 46)
-            row.Item("Impo8") = Val(WEntra(i, 47))
-            row.Item("Banco8") = WEntra(i, 48)
-            row.Item("Cheque9") = WEntra(i, 49)
-            row.Item("Venci9") = WEntra(i, 50)
-            row.Item("Impo9") = Val(WEntra(i, 51))
-            row.Item("Banco9") = WEntra(i, 52)
-            row.Item("Cheque10") = WEntra(i, 53)
-            row.Item("Venci10") = WEntra(i, 54)
-            row.Item("Impo10") = Val(WEntra(i, 55))
-            row.Item("Banco10") = WEntra(i, 56)
-            row.Item("Cheque11") = WEntra(i, 57)
-            row.Item("Venci11") = WEntra(i, 58)
-            row.Item("Impo11") = Val(WEntra(i, 59))
-            row.Item("Banco11") = WEntra(i, 60)
-            row.Item("Cheque12") = WEntra(i, 61)
-            row.Item("Venci12") = WEntra(i, 62)
-            row.Item("Impo12") = Val(WEntra(i, 63))
-            row.Item("Banco12") = WEntra(i, 64)
-            row.Item("Cheque13") = WEntra(i, 65)
-            row.Item("Venci13") = WEntra(i, 66)
-            row.Item("Impo13") = Val(WEntra(i, 67))
-            row.Item("Banco13") = WEntra(i, 68)
-            row.Item("Cheque14") = WEntra(i, 69)
-            row.Item("Venci14") = WEntra(i, 70)
-            row.Item("Impo14") = Val(WEntra(i, 71))
-            row.Item("Banco14") = WEntra(i, 72)
-            row.Item("Cheque15") = WEntra(i, 73)
-            row.Item("Venci15") = WEntra(i, 74)
-            row.Item("Impo15") = Val(WEntra(i, 75))
-            row.Item("Banco15") = WEntra(i, 76)
-            row.Item("Cheque16") = WEntra(i, 77)
-            row.Item("Venci16") = WEntra(i, 78)
-            row.Item("Impo16") = Val(WEntra(i, 79))
-            row.Item("Banco16") = WEntra(i, 80)
-            row.Item("Cheque17") = WEntra(i, 81)
-            row.Item("Venci17") = WEntra(i, 82)
-            row.Item("Impo17") = Val(WEntra(i, 83))
-            row.Item("Banco17") = WEntra(i, 84)
-            row.Item("Cheque18") = WEntra(i, 85)
-            row.Item("Venci18") = WEntra(i, 86)
-            row.Item("Impo18") = Val(WEntra(i, 87))
-            row.Item("Banco18") = WEntra(i, 88)
-            row.Item("Cheque19") = WEntra(i, 89)
-            row.Item("Venci19") = WEntra(i, 90)
-            row.Item("Impo19") = Val(WEntra(i, 91))
-            row.Item("Banco19") = WEntra(i, 92)
-            row.Item("Cheque20") = WEntra(i, 93)
-            row.Item("Venci20") = WEntra(i, 94)
-            row.Item("Impo20") = Val(WEntra(i, 95))
-            row.Item("Banco20") = WEntra(i, 96)
             row.Item("Observaciones") = LSet(Trim(txtObservaciones.Text), 50)
 
             table.Rows.Add(row)
 
         Next
 
-        crdoc.SetDataSource(table)
+        With cheques1
+            .Columns.Add("Recibo")
+            .Columns.Add("Cheque")
+            .Columns.Add("Venci")
+            .Columns.Add("Impo").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Banco")
+            .Columns.Add("Renglon")
+        End With
 
+        With cheques2
+            .Columns.Add("Recibo")
+            .Columns.Add("Cheque")
+            .Columns.Add("Venci")
+            .Columns.Add("Impo").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Banco")
+            .Columns.Add("Renglon")
+        End With
+
+        Dim WCRenglon As Integer = 0
+        ' Ahora asignamos los datos de los cheques.
+        For w = 0 To 32
+
+            If WCheques(w, 4) <> "" And (Val(WCheques(w, 0)) = 2 Or Val(WCheques(w, 0)) = 3) Then
+
+                If WCRenglon <= 16 Then
+
+                    row = cheques1.NewRow
+                    With row
+                        .Item("Renglon") = WCRenglon
+                        .Item("Recibo") = Trim(txtRecibo.Text)
+                        .Item("Cheque") = WCheques(w, 1)
+                        .Item("Venci") = WCheques(w, 2)
+                        .Item("Impo") = Val(WCheques(w, 4))
+                        .Item("Banco") = UCase(WCheques(w, 3))
+                    End With
+                    cheques1.Rows.Add(row)
+                    WCRenglon += 1
+
+                Else
+
+                    row = cheques2.NewRow
+                    With row
+                        .Item("Renglon") = WCRenglon
+                        .Item("Recibo") = Trim(txtRecibo.Text)
+                        .Item("Cheque") = WCheques(w, 1)
+                        .Item("Venci") = WCheques(w, 2)
+                        .Item("Impo") = Val(WCheques(w, 4))
+                        .Item("Banco") = UCase(WCheques(w, 3))
+                    End With
+                    cheques2.Rows.Add(row)
+                    WCRenglon += 1
+
+                End If
+
+            End If
+
+        Next
+
+        Dim ds As New DataSet()
+
+        ds.Tables.Add(table)
+        ds.Tables.Add(cheques1)
+        ds.Tables.Add(cheques2)
+
+        crdoc.SetDataSource(ds)
 
         If enviarEmail Then
             Try
@@ -3637,8 +3622,10 @@ Public Class Recibos
 
         Dim Retencion, Cheque, Documento, Total2f, Pesos, Bonos, Dolares, Ajuste, Compe, Transfe, Total2, Total1 As Double
         Dim Vector(30, 10) As String
-        Dim WEntra(100, 120) As String
-        Dim ImpreTipo(100) As String
+        Dim WEntra(100, 160) As String
+        Dim WCheques(100, 5) As String
+        Dim WRCheques As Integer = 0
+        Dim ImpreTipo(2) As String
         Dim XLugar As Integer = 0
         Dim iRow As Integer = 0
 
@@ -3696,21 +3683,26 @@ Public Class Recibos
                 Next
             End If
 
-            If iRow < gridFormasPago2.Rows.Count Then
-                If Trim(gridFormasPago2.Rows(iRow).Cells(4).Value) <> "" Then
-                    With gridFormasPago2.Rows(iRow)
-                        Vector(iRow, 5) = .Cells(0).Value
-                        Vector(iRow, 6) = .Cells(1).Value
-                        Vector(iRow, 7) = .Cells(2).Value
-                        Vector(iRow, 8) = .Cells(3).Value
-                        Vector(iRow, 9) = _NormalizarNumero(.Cells(4).Value)
-                    End With
-                End If
-            Else
-                For i = 5 To 9
-                    Vector(iRow, i) = ""
-                Next
-            End If
+            'If iRow < gridFormasPago2.Rows.Count Then
+            '    If Trim(gridFormasPago2.Rows(iRow).Cells(4).Value) <> "" Then
+            '        With gridFormasPago2.Rows(iRow)
+            '            Vector(iRow, 5) = .Cells(0).Value
+            '            Vector(iRow, 6) = .Cells(1).Value
+            '            Vector(iRow, 7) = .Cells(2).Value
+            '            Vector(iRow, 8) = .Cells(3).Value
+            '            Vector(iRow, 9) = _NormalizarNumero(.Cells(4).Value)
+            '        End With
+            '    End If
+            'Else
+            '    For i = 5 To 9
+            '        Vector(iRow, i) = ""
+            '    Next
+            'End If
+
+            ' Porque cargamos los datos de los cheques en otra parte ahora.
+            For i = 5 To 9
+                Vector(iRow, i) = ""
+            Next
 
             XTipo = ceros(Vector(iRow, 0), 2)
             XNumero = ceros(Vector(iRow, 3), 8)
@@ -3723,6 +3715,28 @@ Public Class Recibos
             End If
 
         Next iRow
+
+        ' Volvemos a extraer los datos de los cheques para que se puedan generar mas filas.
+        With gridFormasPago2
+            If .Rows.Count Then
+                For Each row As DataGridViewRow In .Rows
+
+                    If row.Cells(4).Value <> "" Then
+
+                        WCheques(WRCheques, 0) = row.Cells(0).Value
+                        WCheques(WRCheques, 1) = row.Cells(1).Value
+                        WCheques(WRCheques, 2) = row.Cells(2).Value
+                        WCheques(WRCheques, 3) = row.Cells(3).Value
+                        WCheques(WRCheques, 4) = _NormalizarNumero(row.Cells(4).Value)
+
+                        WRCheques += 1
+
+                    End If
+
+                Next
+            End If
+        End With
+
 
         ' Calculamos totales y subtotales en base a los tipos de créditos.
         For Ciclo = 0 To 19
@@ -3878,6 +3892,71 @@ Public Class Recibos
                             WEntra(Pasa, 94) = Vector(Ciclo, 7)
                             WEntra(Pasa, 95) = Vector(Ciclo, 9)
                             WEntra(Pasa, 96) = Vector(Ciclo, 8)
+                        Case 20
+                            WEntra(Pasa, 97) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 98) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 99) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 100) = Vector(Ciclo, 8)
+                        Case 21
+                            WEntra(Pasa, 101) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 102) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 103) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 104) = Vector(Ciclo, 8)
+                        Case 22
+                            WEntra(Pasa, 105) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 106) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 107) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 108) = Vector(Ciclo, 8)
+                        Case 23
+                            WEntra(Pasa, 109) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 110) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 111) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 112) = Vector(Ciclo, 8)
+                        Case 24
+                            WEntra(Pasa, 113) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 114) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 115) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 116) = Vector(Ciclo, 8)
+                        Case 25
+                            WEntra(Pasa, 117) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 118) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 119) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 120) = Vector(Ciclo, 8)
+                        Case 26
+                            WEntra(Pasa, 121) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 122) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 123) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 124) = Vector(Ciclo, 8)
+                        Case 27
+                            WEntra(Pasa, 125) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 126) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 127) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 128) = Vector(Ciclo, 8)
+                        Case 28
+                            WEntra(Pasa, 129) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 130) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 131) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 132) = Vector(Ciclo, 8)
+                        Case 29
+                            WEntra(Pasa, 133) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 134) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 135) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 136) = Vector(Ciclo, 8)
+                        Case 30
+                            WEntra(Pasa, 137) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 138) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 139) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 140) = Vector(Ciclo, 8)
+                        Case 31
+                            WEntra(Pasa, 141) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 142) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 143) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 144) = Vector(Ciclo, 8)
+                        Case 32
+                            WEntra(Pasa, 145) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 146) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 147) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 148) = Vector(Ciclo, 8)
                         Case Else
                     End Select
                 Next Pasa
@@ -4090,7 +4169,7 @@ Public Class Recibos
             WEntra(XLugar, 16) = Str$(Total2)
         End If
 
-        _ImprimirRecibo(WEntra)
+        _ImprimirRecibo(WEntra, WCheques)
 
     End Sub
 

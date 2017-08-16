@@ -126,7 +126,37 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Cheques1" msprop:Generator_TableClassName="Cheques1DataTable" msprop:Generator_TableVarName="tableCheques1" msprop:Generator_RowChangedName="Cheques1RowChanged" msprop:Generator_TablePropName="Cheques1" msprop:Generator_RowDeletingName="Cheques1RowDeleting" msprop:Generator_RowChangingName="Cheques1RowChanging" msprop:Generator_RowEvHandlerName="Cheques1RowChangeEventHandler" msprop:Generator_RowDeletedName="Cheques1RowDeleted" msprop:Generator_RowClassName="Cheques1Row" msprop:Generator_UserTableName="Cheques1" msprop:Generator_RowEvArgName="Cheques1RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Cheque" msdata:Caption="Cheque1" msprop:Generator_ColumnVarNameInTable="columnCheque" msprop:Generator_ColumnPropNameInRow="Cheque" msprop:Generator_ColumnPropNameInTable="ChequeColumn" msprop:Generator_UserColumnName="Cheque" type="xs:string" minOccurs="0" />
+              <xs:element name="Venci" msdata:Caption="Venci1" msprop:Generator_ColumnVarNameInTable="columnVenci" msprop:Generator_ColumnPropNameInRow="Venci" msprop:Generator_ColumnPropNameInTable="VenciColumn" msprop:Generator_UserColumnName="Venci" type="xs:string" minOccurs="0" />
+              <xs:element name="Impo" msdata:Caption="Impo1" msprop:Generator_ColumnVarNameInTable="columnImpo" msprop:Generator_ColumnPropNameInRow="Impo" msprop:Generator_ColumnPropNameInTable="ImpoColumn" msprop:Generator_UserColumnName="Impo" type="xs:double" minOccurs="0" />
+              <xs:element name="Banco" msdata:Caption="Banco1" msprop:Generator_ColumnVarNameInTable="columnBanco" msprop:Generator_ColumnPropNameInRow="Banco" msprop:Generator_ColumnPropNameInTable="BancoColumn" msprop:Generator_UserColumnName="Banco" type="xs:string" minOccurs="0" />
+              <xs:element name="Recibo" msprop:Generator_ColumnVarNameInTable="columnRecibo" msprop:Generator_ColumnPropNameInRow="Recibo" msprop:Generator_ColumnPropNameInTable="ReciboColumn" msprop:Generator_UserColumnName="Recibo" type="xs:string" minOccurs="0" />
+              <xs:element name="Renglon" msprop:Generator_ColumnVarNameInTable="columnRenglon" msprop:Generator_ColumnPropNameInRow="Renglon" msprop:Generator_ColumnPropNameInTable="RenglonColumn" msprop:Generator_UserColumnName="Renglon" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Cheques2" msprop:Generator_TableClassName="Cheques2DataTable" msprop:Generator_TableVarName="tableCheques2" msprop:Generator_RowChangedName="Cheques2RowChanged" msprop:Generator_TablePropName="Cheques2" msprop:Generator_RowDeletingName="Cheques2RowDeleting" msprop:Generator_RowChangingName="Cheques2RowChanging" msprop:Generator_RowEvHandlerName="Cheques2RowChangeEventHandler" msprop:Generator_RowDeletedName="Cheques2RowDeleted" msprop:Generator_RowClassName="Cheques2Row" msprop:Generator_UserTableName="Cheques2" msprop:Generator_RowEvArgName="Cheques2RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Cheque" msdata:Caption="Cheque1" msprop:Generator_ColumnVarNameInTable="columnCheque" msprop:Generator_ColumnPropNameInRow="Cheque" msprop:Generator_ColumnPropNameInTable="ChequeColumn" msprop:Generator_UserColumnName="Cheque" type="xs:string" minOccurs="0" />
+              <xs:element name="Venci" msdata:Caption="Venci1" msprop:Generator_ColumnVarNameInTable="columnVenci" msprop:Generator_ColumnPropNameInRow="Venci" msprop:Generator_ColumnPropNameInTable="VenciColumn" msprop:Generator_UserColumnName="Venci" type="xs:string" minOccurs="0" />
+              <xs:element name="Impo" msdata:Caption="Impo1" msprop:Generator_ColumnVarNameInTable="columnImpo" msprop:Generator_ColumnPropNameInRow="Impo" msprop:Generator_ColumnPropNameInTable="ImpoColumn" msprop:Generator_UserColumnName="Impo" type="xs:double" minOccurs="0" />
+              <xs:element name="Banco" msdata:Caption="Banco1" msprop:Generator_ColumnVarNameInTable="columnBanco" msprop:Generator_ColumnPropNameInRow="Banco" msprop:Generator_ColumnPropNameInTable="BancoColumn" msprop:Generator_UserColumnName="Banco" type="xs:string" minOccurs="0" />
+              <xs:element name="Recibo" msprop:Generator_ColumnVarNameInTable="columnRecibo" msprop:Generator_ColumnPropNameInRow="Recibo" msprop:Generator_ColumnPropNameInTable="ReciboColumn" msprop:Generator_UserColumnName="Recibo" type="xs:string" minOccurs="0" />
+              <xs:element name="Renglon" msprop:Generator_ColumnVarNameInTable="columnRenglon" msprop:Generator_ColumnPropNameInRow="Renglon" msprop:Generator_ColumnPropNameInTable="RenglonColumn" msprop:Generator_UserColumnName="Renglon" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="Cheques1_Detalles" msdata:parent="Cheques1" msdata:child="Detalles" msdata:parentkey="Recibo" msdata:childkey="Recibo" msprop:Generator_UserChildTable="Detalles" msprop:Generator_ChildPropName="GetDetallesRows" msprop:Generator_UserRelationName="Cheques1_Detalles" msprop:Generator_ParentPropName="Cheques1Row" msprop:Generator_RelationVarName="relationCheques1_Detalles" msprop:Generator_UserParentTable="Cheques1" />
+      <msdata:Relationship name="Cheques2_Detalles" msdata:parent="Cheques2" msdata:child="Detalles" msdata:parentkey="Recibo" msdata:childkey="Recibo" msprop:Generator_UserChildTable="Detalles" msprop:Generator_ChildPropName="GetDetallesRows" msprop:Generator_UserRelationName="Cheques2_Detalles" msprop:Generator_ParentPropName="Cheques2Row" msprop:Generator_RelationVarName="relationCheques2_Detalles" msprop:Generator_UserParentTable="Cheques2" />
+    </xs:appinfo>
+  </xs:annotation>
 </xs:schema>
