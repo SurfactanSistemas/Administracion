@@ -453,6 +453,7 @@ Public Class Recibos
 
     Private Sub setDefaults()
         txtFechaAux.Visible = False
+        WOffset = 1
 
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
         gridFormasPago2.Rows.Clear()
@@ -466,6 +467,27 @@ Public Class Recibos
             End If
 
         Next
+
+        _ComprobanteRetIva = ""
+        _ComprobanteRetGanancias = ""
+        _ComprobanteRetSuss = ""
+
+        _RetIB1 = ""
+        _CompIB1 = ""
+        _RetIB2 = ""
+        _CompIB2 = ""
+        _RetIB3 = ""
+        _CompIB3 = ""
+        _RetIB4 = ""
+        _CompIB4 = ""
+        _RetIB5 = ""
+        _CompIB5 = ""
+        _RetIB6 = ""
+        _CompIB6 = ""
+        _RetIB7 = ""
+        _CompIB7 = ""
+        _RetIB8 = ""
+        _CompIB8 = ""
 
         _ClavesCheques.Clear()
         _CuentasContables.Clear()
@@ -536,7 +558,7 @@ Public Class Recibos
             txtRecibo.Focus()
             Exit Sub
         Else
-            WOffset = 1
+            btnLimpiar.PerformClick()
 
             txtRecibo.Text = recibo.codigo
             txtFecha.Text = Proceso._Normalizarfecha(recibo.fecha)
@@ -2831,7 +2853,9 @@ Public Class Recibos
 
                     If max < 0 Then
                         If Val(gridPagos2.Rows(iRow).Cells(iCol).Value) < max Or Val(gridPagos2.Rows(iRow).Cells(iCol).Value) > 0 Then
+                            MsgBox("El valor ingresado no se encuentra dentro del monto disponible en la Cuenta", MsgBoxStyle.Information)
                             gridPagos2.CurrentCell = gridPagos2.Rows(iRow).Cells(iCol)
+
                             Return True
                         Else
                             gridPagos2.Rows(iRow).Cells(iCol).Value = valor
@@ -2839,6 +2863,7 @@ Public Class Recibos
                         End If
                     Else
                         If Val(gridPagos2.Rows(iRow).Cells(iCol).Value) > max Or Val(gridPagos2.Rows(iRow).Cells(iCol).Value) < 0 Then
+                            MsgBox("El valor ingresado no se encuentra dentro del monto disponible en la Cuenta", MsgBoxStyle.Information)
                             gridPagos2.CurrentCell = gridPagos2.Rows(iRow).Cells(iCol)
                             Return True
                         Else
