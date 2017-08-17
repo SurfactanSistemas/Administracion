@@ -2766,13 +2766,14 @@ Public Class Recibos
                                 If _ChequeVencido(valor) Then
                                     MsgBox("La fecha del cheque introducida es inválida", MsgBoxStyle.Critical)
                                     gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol)
-                                ElseIf iCol = 3 Then
-                                    gridFormasPago2.Rows(iRow).Cells(iCol).Value = _GenerarCodigoBanco(valor)
-                                    gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
                                 Else
                                     gridFormasPago2.Rows(iRow).Cells(iCol).Value = valor
                                     gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
                                 End If
+
+                            ElseIf iCol = 3 Then
+                                gridFormasPago2.Rows(iRow).Cells(iCol).Value = _GenerarCodigoBanco(valor)
+                                gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
                             Else
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
                             End If
@@ -3398,6 +3399,7 @@ Public Class Recibos
         ' Ajustes varios para acomodar la informacion en un pdf en vez de ser preimpreso.
         Dim ultimo As Integer = 1
         Dim WTemp(22, 5) As String
+
         For i = 5 To 22
             WTemp(ultimo, 1) = WEntra(i, 12)
             WTemp(ultimo, 2) = WEntra(i, 13)
@@ -3700,10 +3702,21 @@ Public Class Recibos
                 Next
             End If
 
-            ' Porque cargamos los datos de los cheques en otra parte ahora.
-            For i = 5 To 9
-                Vector(iRow, i) = ""
-            Next
+            If iRow < gridFormasPago2.Rows.Count Then
+                If Trim(gridFormasPago2.Rows(iRow).Cells(4).Value) <> "" Then
+                    With gridFormasPago2.Rows(iRow)
+                        Vector(iRow, 5) = .Cells(0).Value
+                        Vector(iRow, 6) = .Cells(1).Value
+                        Vector(iRow, 7) = .Cells(2).Value
+                        Vector(iRow, 8) = .Cells(3).Value
+                        Vector(iRow, 9) = _NormalizarNumero(.Cells(4).Value)
+                    End With
+                End If
+            Else
+                For i = 5 To 9
+                    Vector(iRow, i) = ""
+                Next
+            End If
 
             XTipo = ceros(Vector(iRow, 0), 2)
             XNumero = ceros(Vector(iRow, 3), 8)
@@ -3730,7 +3743,9 @@ Public Class Recibos
                         WCheques(WRCheques, 3) = row.Cells(3).Value
                         WCheques(WRCheques, 4) = _NormalizarNumero(row.Cells(4).Value)
 
-                        Cheque = Cheque + Val(WCheques(WRCheques, 4))
+                        If Val(WCheques(WRCheques, 4)) <> 0 And (Val(WCheques(WRCheques, 0)) = 2 Or Val(WCheques(WRCheques, 0)) = 3) Then
+                            Cheque = Cheque + Val(WCheques(WRCheques, 4))
+                        End If
 
                         WRCheques += 1
 

@@ -1244,7 +1244,7 @@ Public Class RecibosProvisorios
         If Not IsNothing(buscar) Then
             cuenta = buscar(1)
             _PedirInformacion("Ingrese Cuenta Contable", New TextBox(), cuenta)
-            If cuenta = "" Then : Exit Sub : End If
+            'If cuenta = "" Then : Exit Sub : End If
         End If
 
         Do While Not _CuentaContableValida(cuenta)
