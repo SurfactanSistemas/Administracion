@@ -1015,6 +1015,8 @@ Public Class Recibos
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
         ' Comprobamos que el numero de recibo sea cero. En caso de que no,
         ' Chequeamos si el numero se corresponde con algun Recibo existente y se avisa al usuario de que no se permite actualizar.
+        Dim WMarcaDiferencia As String = ""
+
         If Val(txtRecibo.Text) <> 0 Then
 
             If _ReciboYaExistente(Trim(txtRecibo.Text)) Then
@@ -1065,6 +1067,10 @@ Public Class Recibos
             If optCtaCte.Checked And _ExisteDiferenciaDeCambio() Then
                 If MsgBox("Existe una diferencia de cambio de U$S " & lblDolares.Text & vbCrLf & "¿Desea grabar igualmente el recibo?", MsgBoxStyle.OkCancel, MsgBoxStyle.Information) = DialogResult.Cancel Then
                     Exit Sub
+                Else
+                    If MsgBox("¿Desea avisar a Ventas sobre esta diferencia de Cambio?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.Yes Then
+                        WMarcaDiferencia = "X"
+                    End If
                 End If
             End If
 
@@ -1098,15 +1104,15 @@ Public Class Recibos
 
             ' COMENZAR CON LAS ULTIMAS DOS QUE SON MAS CORTAS.
             If optCtaCte.Checked Then
-                _AltaCtaCte()
+                _AltaCtaCte(WMarcaDiferencia)
             ElseIf optAnticipos.Checked Then
-                _AltaAnticipo()
+                _AltaAnticipo(WMarcaDiferencia)
             ElseIf optVarios.Checked Then
-                _AltaVarios()
+                _AltaVarios(WMarcaDiferencia)
             End If
 
             ' Agregamos al registro del Recibo, los creditos ingresados por el usuario.
-            _AltaCreditos()
+            _AltaCreditos(WMarcaDiferencia)
 
             ' Si se trata de un recibo de tipo CtaCte, creamos un nuevo registro de CtaCte
             If optCtaCte.Checked Then
@@ -1169,7 +1175,7 @@ Public Class Recibos
         Return _existe
     End Function
 
-    Private Sub _AltaCreditos()
+    Private Sub _AltaCreditos(ByVal WMarcaDiferencia As String)
 
         Dim iRow As Integer
         Dim _Cheque As Object = Nothing
@@ -1315,13 +1321,14 @@ Public Class Recibos
                         + XCuenta + "','" _
                         + XMarca + "','" _
                         + XFechaDepo + "','" _
-                        + XFechaDepoOrd + "'"
+                        + XFechaDepoOrd + "'," _
+                        + WMarcaDiferencia + "'"
 
                 ' Damos de alta el nuevo renglon del nuevo recibo.
                 XSql = "INSERT INTO  Recibos (Clave, Recibo, Renglon, Cliente, Fecha, Fechaord, TipoRec, RetGanancias, RetIva, RetOtra, Retencion," _
                 & "TipoReg, Tipo1, Letra1, Punto1, Numero1, Importe1, Tipo2, Numero2, Fecha2, banco2, Importe2," _
                 & "Estado2, Empresa, FechaOrd2, Importe, Observaciones, Impolist, Impo1list, Destino, Cuenta, Marca," _
-                & "FechaDepo, FechaDepoOrd) " _
+                & "FechaDepo, FechaDepoOrd, MarcaDiferencia) " _
                 & "VALUES(" & XParam & ")"
 
                 cm.CommandText = XSql
@@ -1771,7 +1778,7 @@ Public Class Recibos
         End Try
     End Sub
 
-    Private Sub _AltaCtaCte()
+    Private Sub _AltaCtaCte(ByVal WMarcaDiferencia As String)
 
         Dim iRow, WRow As Integer
         Dim _Cheque As Object = Nothing
@@ -1865,14 +1872,15 @@ Public Class Recibos
                         + XBancoCheque + "','" _
                         + XSucursalCheque + "','" _
                         + XChequeCheque + "','" _
-                        + XCuentaCheque + "'"
+                        + XCuentaCheque + "','" _
+                        + WMarcaDiferencia + "'"
 
 
                 ' Damos de alta el nuevo renglon del nuevo recibo.
                 XSql = "INSERT INTO  Recibos (Clave, Recibo, Renglon, Cliente, Fecha, Fechaord, TipoRec, RetGanancias, RetIva, RetOtra, Retencion," _
                 & "TipoReg, Tipo1, Letra1, Punto1, Numero1, Importe1, Tipo2, Numero2, Fecha2, banco2, Importe2," _
                 & "Estado2, Empresa, FechaOrd2, Importe, Observaciones, Impolist, Impo1list, Destino, Cuenta, Marca," _
-                & "FechaDepo, FechaDepoOrd, ClaveCheque, Cuit, Provisorio, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque) " _
+                & "FechaDepo, FechaDepoOrd, ClaveCheque, Cuit, Provisorio, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque, MarcaDiferencia) " _
                 & "VALUES(" & XParam & ")"
 
                 cm.CommandText = XSql
@@ -1983,7 +1991,7 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub _AltaVarios()
+    Private Sub _AltaVarios(ByVal WMarcaDiferencia As String)
 
         renglon += 1
 
@@ -2060,11 +2068,12 @@ Public Class Recibos
                         + XBancoCheque + "','" _
                         + XSucursalCheque + "','" _
                         + XChequeCheque + "','" _
-                        + XCuentaCheque + "'"
+                        + XCuentaCheque + "','" _
+                        + WMarcaDiferencia + "'"
 
         XSql = "INSERT INTO  Recibos (Clave, Recibo, Renglon, Cliente, Fecha, Fechaord, TipoRec, RetGanancias, RetIva, RetOtra, Retencion," _
             & "TipoReg, Tipo1, Letra1, Punto1, Numero1, Importe1, Tipo2, Numero2, Fecha2, banco2, Importe2," _
-            & "Estado2, Empresa, FechaOrd2, Importe, Observaciones, Impolist, Impo1list, Destino, Cuenta, Marca,FechaDepo, FechaDepoOrd, ClaveCheque, Cuit, Provisorio, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque)" _
+            & "Estado2, Empresa, FechaOrd2, Importe, Observaciones, Impolist, Impo1list, Destino, Cuenta, Marca,FechaDepo, FechaDepoOrd, ClaveCheque, Cuit, Provisorio, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque, MarcaDiferencia)" _
             & " VALUES(" & XParam & ")"
 
         cm.CommandText = XSql
@@ -2088,7 +2097,7 @@ Public Class Recibos
         End Try
     End Sub
 
-    Private Sub _AltaAnticipo()
+    Private Sub _AltaAnticipo(ByVal WMarcaDiferencia As String)
 
         renglon += 1
 
@@ -2253,12 +2262,13 @@ Public Class Recibos
                         + XCuenta + "','" _
                         + XMarca + "','" _
                         + XFechaDepo + "','" _
-                        + XFechaDepoOrd + "'"
+                        + XFechaDepoOrd + "','" _
+                        + WMarcaDiferencia + "'"
 
         XSql = "INSERT INTO  Recibos (Clave, Recibo, Renglon, Cliente, Fecha, Fechaord, TipoRec, RetGanancias, RetIva, RetOtra, Retencion," _
             & "TipoReg, Tipo1, Letra1, Punto1, Numero1, Importe1, Tipo2, Numero2, Fecha2, banco2, Importe2," _
             & "Estado2, Empresa, FechaOrd2, Importe, Observaciones, Impolist, Impo1list, Destino, Cuenta, Marca," _
-            & "FechaDepo, FechaDepoOrd) " _
+            & "FechaDepo, FechaDepoOrd, MarcaDiferencia) " _
         & "VALUES(" & XParam & ")"
 
         cm.CommandText = XSql
