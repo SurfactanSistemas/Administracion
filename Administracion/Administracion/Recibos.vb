@@ -1994,11 +1994,18 @@ Public Class Recibos
         XImporte = Str$(Val(XImporte1))
         XCuenta = txtCuenta.Text
         XMarca = ""
-        XFechaDepo = ""
-        XFechaDepoOrd = ""
+        XDestino = ""
         XImpolist = ""
         XImpo1list = ""
-        XDestino = ""
+        XFechaDepo = ""
+        XFechaDepoOrd = ""
+
+        XClaveCheque = ""
+        XBancoCheque = ""
+        XSucursalCheque = ""
+        XChequeCheque = ""
+        XCuentaCheque = ""
+        XCuit = ""
 
         XParam = "'" + XClave + "','" _
                         + XRecibo + "','" + XRenglon + "','" _
@@ -2024,13 +2031,19 @@ Public Class Recibos
                         + XCuenta + "','" _
                         + XMarca + "','" _
                         + XFechaDepo + "','" _
-                        + XFechaDepoOrd + "'"
+                        + XFechaDepoOrd + "','" _
+                        + XClaveCheque + "','" _
+                        + XCuit + "','" _
+                        + txtProvi.Text + "','" _
+                        + XBancoCheque + "','" _
+                        + XSucursalCheque + "','" _
+                        + XChequeCheque + "','" _
+                        + XCuentaCheque + "'"
 
         XSql = "INSERT INTO  Recibos (Clave, Recibo, Renglon, Cliente, Fecha, Fechaord, TipoRec, RetGanancias, RetIva, RetOtra, Retencion," _
             & "TipoReg, Tipo1, Letra1, Punto1, Numero1, Importe1, Tipo2, Numero2, Fecha2, banco2, Importe2," _
-            & "Estado2, Empresa, FechaOrd2, Importe, Observaciones, Impolist, Impo1list, Destino, Cuenta, Marca," _
-            & "FechaDepo, FechaDepoOrd) " _
-        & "VALUES(" & XParam & ")"
+            & "Estado2, Empresa, FechaOrd2, Importe, Observaciones, Impolist, Impo1list, Destino, Cuenta, Marca,FechaDepo, FechaDepoOrd, ClaveCheque, Cuit, Provisorio, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque)" _
+            & " VALUES(" & XParam & ")"
 
         cm.CommandText = XSql
         SQLConnector.conexionSql(cn, cm)
