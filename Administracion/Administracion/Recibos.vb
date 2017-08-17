@@ -3361,7 +3361,7 @@ Public Class Recibos
         Dim cheques2 As New DataTable("Cheques2")
         Dim row As DataRow
         Dim crdoc As ReportDocument
-        Dim cantidad As Integer = 1
+        Dim cantidad As Integer = 2
         Dim enviarEmail As Boolean = False
         crdoc = New ReciboDefinitivoEmail
 
@@ -3375,35 +3375,36 @@ Public Class Recibos
 
                 enviarEmail = True
 
-                Dim ultimo As Integer = 1
-                Dim WTemp(22, 5) As String
-                For i = 5 To 22
-                    WTemp(ultimo, 1) = WEntra(i, 12)
-                    WTemp(ultimo, 2) = WEntra(i, 13)
-                    WTemp(ultimo, 3) = WEntra(i, 14)
-                    WTemp(ultimo, 4) = WEntra(i, 15)
-                    WTemp(ultimo, 5) = WEntra(i, 16)
-                    ultimo += 1
-                Next
-
-                For u = 1 To 22
-                    If WEntra(u, 11) = "" And WEntra(u, 10) <> "" Then
-                        WEntra(u, 11) = " $ "
-                    End If
-
-                    WEntra(u, 12) = WTemp(u, 1)
-                    WEntra(u, 13) = WTemp(u, 2)
-                    WEntra(u, 14) = WTemp(u, 3)
-                    WEntra(u, 15) = WTemp(u, 4)
-                    WEntra(u, 16) = WTemp(u, 5)
-                Next
-
-                WEntra(24, 9) = RSet("TOTAL", 40)
-                WEntra(24, 11) = " $ "
-
             End If
 
         End If
+
+        ' Ajustes varios para acomodar la informacion en un pdf en vez de ser preimpreso.
+        Dim ultimo As Integer = 1
+        Dim WTemp(22, 5) As String
+        For i = 5 To 22
+            WTemp(ultimo, 1) = WEntra(i, 12)
+            WTemp(ultimo, 2) = WEntra(i, 13)
+            WTemp(ultimo, 3) = WEntra(i, 14)
+            WTemp(ultimo, 4) = WEntra(i, 15)
+            WTemp(ultimo, 5) = WEntra(i, 16)
+            ultimo += 1
+        Next
+
+        For u = 1 To 22
+            If WEntra(u, 11) = "" And WEntra(u, 10) <> "" Then
+                WEntra(u, 11) = " $ "
+            End If
+
+            WEntra(u, 12) = WTemp(u, 1)
+            WEntra(u, 13) = WTemp(u, 2)
+            WEntra(u, 14) = WTemp(u, 3)
+            WEntra(u, 15) = WTemp(u, 4)
+            WEntra(u, 16) = WTemp(u, 5)
+        Next
+
+        WEntra(24, 9) = RSet("TOTAL", 40)
+        WEntra(24, 11) = " $ "
 
         ' Creo las Columnas
         _PrepararTabla(table)
@@ -3458,7 +3459,7 @@ Public Class Recibos
         ' Ahora asignamos los datos de los cheques.
         For w = 0 To 32
 
-            If WCheques(w, 4) <> "" And (Val(WCheques(w, 0)) = 2 Or Val(WCheques(w, 0)) = 3) Then
+            If Val(WCheques(w, 4)) <> 0 And (Val(WCheques(w, 0)) = 2 Or Val(WCheques(w, 0)) = 3) Then
 
                 If WCRenglon <= 16 Then
 
@@ -3625,7 +3626,7 @@ Public Class Recibos
         Dim WEntra(100, 160) As String
         Dim WCheques(100, 5) As String
         Dim WRCheques As Integer = 0
-        Dim ImpreTipo(2) As String
+        Dim ImpreTipo(100) As String
         Dim XLugar As Integer = 0
         Dim iRow As Integer = 0
 
@@ -3729,6 +3730,8 @@ Public Class Recibos
                         WCheques(WRCheques, 3) = row.Cells(3).Value
                         WCheques(WRCheques, 4) = _NormalizarNumero(row.Cells(4).Value)
 
+                        Cheque = Cheque + Val(WCheques(WRCheques, 4))
+
                         WRCheques += 1
 
                     End If
@@ -3772,7 +3775,7 @@ Public Class Recibos
                             End Select
                         End If
                     Case 2
-                        Cheque = Cheque + Val(Vector(Ciclo, 9))
+                        'Cheque = Cheque + Val(Vector(Ciclo, 9))
                     Case Else
                         Documento = Documento + Val(Vector(Ciclo, 9))
                 End Select
