@@ -1043,8 +1043,6 @@ Public Class Recibos
             If optCtaCte.Checked And _ExisteDiferenciaDeCambio() Then
                 If MsgBox("Existe una diferencia de cambio de U$S " & lblDolares.Text & vbCrLf & "¿Desea grabar igualmente el recibo?", MsgBoxStyle.OkCancel, MsgBoxStyle.Information) = DialogResult.Cancel Then
                     Exit Sub
-                Else
-                    MsgBox("Recuerde emitir la diferencia de Cambio.", MsgBoxStyle.Information)
                 End If
             End If
 
@@ -1104,8 +1102,9 @@ Public Class Recibos
             End If
 
             ' Si llegamos hasta aca se supone que todo salio bien.
-            MsgBox("Se ha generado correctamente el Recibo solicitado. Nº de Recibo: " & txtRecibo.Text, MsgBoxStyle.Information)
+            'MsgBox("Se ha generado correctamente el Recibo solicitado. Nº de Recibo: " & txtRecibo.Text, MsgBoxStyle.Information)
 
+            ' Recargamos los datos del recibo.
             mostrarRecibo(DAORecibo.buscarRecibo(txtRecibo.Text))
 
             ' Imprimimos los recibos y enviamos email en caso de que corresponda.
@@ -3378,6 +3377,11 @@ Public Class Recibos
 
         End If
 
+        ' En caso de Recibos varios solamente se imprime una copia (a pedido de Domingo).
+        If optVarios.Checked = True Then
+            cantidad = 1
+        End If
+
         ' Ajustes varios para acomodar la informacion en un pdf en vez de ser preimpreso.
         Dim ultimo As Integer = 1
         Dim WTemp(22, 5) As String
@@ -3682,22 +3686,6 @@ Public Class Recibos
                     Vector(iRow, i) = ""
                 Next
             End If
-
-            'If iRow < gridFormasPago2.Rows.Count Then
-            '    If Trim(gridFormasPago2.Rows(iRow).Cells(4).Value) <> "" Then
-            '        With gridFormasPago2.Rows(iRow)
-            '            Vector(iRow, 5) = .Cells(0).Value
-            '            Vector(iRow, 6) = .Cells(1).Value
-            '            Vector(iRow, 7) = .Cells(2).Value
-            '            Vector(iRow, 8) = .Cells(3).Value
-            '            Vector(iRow, 9) = _NormalizarNumero(.Cells(4).Value)
-            '        End With
-            '    End If
-            'Else
-            '    For i = 5 To 9
-            '        Vector(iRow, i) = ""
-            '    Next
-            'End If
 
             ' Porque cargamos los datos de los cheques en otra parte ahora.
             For i = 5 To 9
