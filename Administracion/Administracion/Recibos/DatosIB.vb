@@ -8,7 +8,7 @@
         
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB1.Text) <> "" Then
+            If Val(txtRetIB1.Text) <> 0 Then
                 _SaltarA(txtCompIB1)
             Else
                 _SaltarA(txtRetIB2)
@@ -33,10 +33,10 @@
     End Sub
 
     Private Sub txtRetIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB2.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB2.Text) <> "" Then
+            If Val(txtRetIB2.Text) <> 0 Then
                 _SaltarA(txtCompIB2)
             Else
                 _SaltarA(txtRetIB3)
@@ -49,7 +49,7 @@
     End Sub
 
     Private Sub txtCompIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB2.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
             _SaltarA(txtRetIB3)
@@ -61,9 +61,9 @@
     End Sub
 
     Private Sub txtRetIB3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB3.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
-            If Trim(txtRetIB3.Text) <> "" Then
+            If Val(txtRetIB3.Text) <> 0 Then
                 _SaltarA(txtCompIB3)
             Else
                 _SaltarA(txtRetIB8)
@@ -75,7 +75,7 @@
     End Sub
 
     Private Sub txtCompIB3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB3.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
             _SaltarA(txtRetIB8)
@@ -87,10 +87,10 @@
     End Sub
 
     Private Sub txtRetIB4_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB4.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB4.Text) <> "" Then
+            If Val(txtRetIB4.Text) <> 0 Then
                 _SaltarA(txtCompIB4)
             Else
                 _SaltarA(txtRetIB5)
@@ -103,7 +103,7 @@
     End Sub
 
     Private Sub txtCompIB4_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB4.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
             _SaltarA(txtRetIB5)
@@ -115,10 +115,10 @@
     End Sub
 
     Private Sub txtRetIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB5.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB5.Text) <> "" Then
+            If Val(txtRetIB5.Text) <> 0 Then
                 _SaltarA(txtCompIB5)
             Else
                 _SaltarA(txtRetIB6)
@@ -131,7 +131,7 @@
     End Sub
 
     Private Sub txtCompIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB5.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
             _SaltarA(txtRetIB6)
@@ -146,7 +146,7 @@
 
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB6.Text) <> "" Then
+            If Val(txtRetIB6.Text) <> 0 Then
                 _SaltarA(txtCompIB6)
             Else
                 _SaltarA(txtRetIB7)
@@ -159,7 +159,7 @@
     End Sub
 
     Private Sub txtCompIB6_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB6.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
             _SaltarA(txtRetIB7)
@@ -171,10 +171,10 @@
     End Sub
 
     Private Sub txtRetIB7_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB7.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB7.Text) <> "" Then
+            If Val(txtRetIB7.Text) <> 0 Then
                 _SaltarA(txtCompIB7)
             Else
                 Me.Close()
@@ -187,7 +187,7 @@
     End Sub
 
     Private Sub txtCompIB7_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB7.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
             Me.Close()
@@ -202,7 +202,7 @@
 
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtRetIB7.Text) <> "" Then
+            If Val(txtRetIB7.Text) <> 0 Then
                 _SaltarA(txtCompIB8)
             Else
                 _SaltarA(txtRetIB4)

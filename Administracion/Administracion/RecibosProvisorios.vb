@@ -524,6 +524,11 @@ Public Class RecibosProvisorios
         If e.KeyValue = Keys.Enter Then
 
             txtTotal.Text = _NormalizarNumero(txtTotal.Text)
+
+            If Val(txtTotal.Text) = 0 Then
+                Exit Sub
+            End If
+
             sumarValores()
             With gridRecibos
                 '.Rows(0).Selected = True
