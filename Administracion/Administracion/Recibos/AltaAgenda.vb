@@ -162,14 +162,12 @@ Public Class AltaAgenda
         txtFecha.Focus()
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
         Me.Close()
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim ZSql As String = ""
-
-        ' FALTA HACER LA VALIDACION DE LOS DATOS (Fecha -> Fecha Valida, Hora -> Puede ser >= a cero y Anotacion -> Esta puede estar vacia).
 
         If Not Proceso._ValidarFecha(txtFecha.Text) Then : Exit Sub : End If
 
@@ -190,6 +188,28 @@ Public Class AltaAgenda
         End If
 
         MsgBox(ZSql)
+
+        Exit Sub ' Comentar cuando ya se comience a querer probar.
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand(ZSql)
+
+        ClasesCompartidas.SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cm.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        btnCerrar.PerformClick()
 
     End Sub
 

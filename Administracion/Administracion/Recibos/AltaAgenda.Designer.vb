@@ -37,7 +37,7 @@ Partial Class AltaAgenda
         Me.txtCliente = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnCerrar = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -187,22 +187,22 @@ Partial Class AltaAgenda
         Me.ToolTip1.SetToolTip(Me.Button3, "Limpiar Formulario")
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnCerrar
         '
-        Me.Button2.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(333, 255)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(84, 50)
-        Me.Button2.TabIndex = 2
-        Me.ToolTip1.SetToolTip(Me.Button2, "Cerrar Formulario")
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.BorderSize = 0
+        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrar.Location = New System.Drawing.Point(333, 255)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(84, 50)
+        Me.btnCerrar.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
+        Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -227,7 +227,7 @@ Partial Class AltaAgenda
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(526, 313)
         Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
@@ -246,7 +246,7 @@ Partial Class AltaAgenda
     Friend WithEvents txtCliente As System.Windows.Forms.TextBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents txtFecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
