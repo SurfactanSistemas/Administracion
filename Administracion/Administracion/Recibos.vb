@@ -2586,6 +2586,8 @@ Public Class Recibos
 
         End With
 
+        _SaltarA(txtObservaciones)
+
         _RecalcularRetIB()
     End Sub
 
@@ -4545,5 +4547,9 @@ Public Class Recibos
 
     Private Sub lblDolares_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDolares.TextChanged
         CustomLabel14.Text = _NormalizarNumero(Val(_NormalizarNumero(lblDolares.Text)) * Val(txtParidad.Text))
+    End Sub
+
+    Private Sub txtRetIB_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRetIB.KeyPress
+
     End Sub
 End Class
