@@ -77,7 +77,7 @@ Partial Class AltaAgenda
         Me.Panel2.Controls.Add(Me.txtCliente)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(527, 198)
+        Me.Panel2.Size = New System.Drawing.Size(527, 119)
         Me.Panel2.TabIndex = 3
         '
         'txtFecha
@@ -140,7 +140,7 @@ Partial Class AltaAgenda
         Me.txtAnotacion.MaxLength = 50
         Me.txtAnotacion.Multiline = True
         Me.txtAnotacion.Name = "txtAnotacion"
-        Me.txtAnotacion.Size = New System.Drawing.Size(364, 111)
+        Me.txtAnotacion.Size = New System.Drawing.Size(364, 20)
         Me.txtAnotacion.TabIndex = 0
         '
         'txtDescripcionCliente
@@ -180,7 +180,7 @@ Partial Class AltaAgenda
         Me.Button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(229, 255)
+        Me.Button3.Location = New System.Drawing.Point(224, 185)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(84, 50)
         Me.Button3.TabIndex = 2
@@ -197,7 +197,7 @@ Partial Class AltaAgenda
         Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrar.Location = New System.Drawing.Point(333, 255)
+        Me.btnCerrar.Location = New System.Drawing.Point(328, 185)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(84, 50)
         Me.btnCerrar.TabIndex = 2
@@ -214,7 +214,7 @@ Partial Class AltaAgenda
         Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(119, 255)
+        Me.Button1.Location = New System.Drawing.Point(114, 185)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(84, 50)
         Me.Button1.TabIndex = 2
@@ -225,7 +225,7 @@ Partial Class AltaAgenda
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(526, 313)
+        Me.ClientSize = New System.Drawing.Size(526, 247)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.Button1)
