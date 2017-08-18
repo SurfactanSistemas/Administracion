@@ -1332,7 +1332,7 @@ Public Class Recibos
                         + XCuenta + "','" _
                         + XMarca + "','" _
                         + XFechaDepo + "','" _
-                        + XFechaDepoOrd + "'," _
+                        + XFechaDepoOrd + "','" _
                         + WMarcaDiferencia + "'"
 
                 ' Damos de alta el nuevo renglon del nuevo recibo.
