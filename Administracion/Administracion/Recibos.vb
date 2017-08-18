@@ -1050,9 +1050,9 @@ Public Class Recibos
         End If
 
         ' Comprobamos que haya valores con las que realizar el recibo
-        If Val(lblTotalCreditos.Text) = 0 And Val(lblTotalDebitos.Text) = 0 Then
-            Exit Sub
-        End If
+        'If Val(lblTotalCreditos.Text) = 0 And Val(lblTotalDebitos.Text) = 0 Then
+        '    Exit Sub
+        'End If
 
         ' Comprobamos que los datos sean coherentes.
         If Val(lblTotalCreditos.Text) = Val(lblTotalDebitos.Text) Or optAnticipos.Checked Or optVarios.Checked Then
@@ -1132,13 +1132,13 @@ Public Class Recibos
 
             ' Consultamos en caso de que desee agendar una llamada al Cliente al que se le hace el recibo.
             ' Comentado hasta que este completamente verificado y terminado.
-            'If MsgBox("", MsgBoxStyle.YesNo, MsgBoxStyle.Question) = MsgBoxResult.Yes Then
-            '    With AltaAgenda
-            '        .Cliente = Trim(txtCliente.Text)
-            '        .ShowDialog()
-            '        .Dispose()
-            '    End With
-            'End If
+            If MsgBox("¿Desea agregar un recordatorio en la agenda para este Cliente?", MsgBoxStyle.YesNo, MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                With AltaAgenda
+                    .Cliente = Trim(txtCliente.Text)
+                    .ShowDialog()
+                    .Dispose()
+                End With
+            End If
 
             ' Si llegamos hasta aca se supone que todo salio bien.
             'MsgBox("Se ha generado correctamente el Recibo solicitado. Nº de Recibo: " & txtRecibo.Text, MsgBoxStyle.Information)

@@ -137,7 +137,7 @@ Partial Class AltaAgenda
         'txtAnotacion
         '
         Me.txtAnotacion.Location = New System.Drawing.Point(120, 70)
-        Me.txtAnotacion.MaxLength = 10
+        Me.txtAnotacion.MaxLength = 50
         Me.txtAnotacion.Multiline = True
         Me.txtAnotacion.Name = "txtAnotacion"
         Me.txtAnotacion.Size = New System.Drawing.Size(364, 111)
