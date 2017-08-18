@@ -447,8 +447,24 @@
     End Function
 
     Public Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
+        Dim xfecha As String = ""
+        Dim _temp As String = fecha
+        Dim _Fecha As String() = fecha.Split("/")
         ' Se normaliza la fecha (Ej: 3/04/2000 => 03/04/2000 ó 3/4/2000 => 03/04/2000) y se controla que tenga los ocho digitos obligatoriamente.
-        Return Trim(_Normalizarfecha(Trim(fecha))).Replace("/", "").Length = 8
+        'Return Trim(_Normalizarfecha(Trim(fecha))).Replace("/", "").Length = 8
+        Try
+            _Fecha(0) = Val(_Fecha(0)).ToString() ' 03 => 3, 12 => 12
+            _Fecha(1) = Val(_Fecha(1)).ToString() ' 04 => 4, 12 => 12
+            _Fecha(2) = Val(_Fecha(2)).ToString() ' 2000 => 2000, 0201 => 201
+
+            xfecha = String.Join("/", _Fecha) ' 3/4/2000, 12/12/201
+
+            fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
     End Function
 
     Public Function _Normalizarfecha(ByVal fecha As String) As String

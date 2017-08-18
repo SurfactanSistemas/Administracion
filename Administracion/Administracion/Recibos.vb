@@ -1067,10 +1067,11 @@ Public Class Recibos
             If optCtaCte.Checked And _ExisteDiferenciaDeCambio() Then
                 If MsgBox("Existe una diferencia de cambio de U$S " & lblDolares.Text & vbCrLf & "¿Desea grabar igualmente el recibo?", MsgBoxStyle.OkCancel, MsgBoxStyle.Information) = DialogResult.Cancel Then
                     Exit Sub
-                Else
-                    If MsgBox("¿Desea avisar a Ventas sobre esta diferencia de Cambio?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.Yes Then
-                        WMarcaDiferencia = "X"
-                    End If
+                    ' Comentado hasta que este completamente desarrollado el resto.
+                    'Else
+                    '    If MsgBox("¿Desea avisar a Ventas sobre esta diferencia de Cambio?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.Yes Then
+                    '        WMarcaDiferencia = "X"
+                    '    End If
                 End If
             End If
 
@@ -1128,6 +1129,16 @@ Public Class Recibos
             If Val(txtProvi.Text) > 0 Then
                 _AsignarReciboAProvisorio()
             End If
+
+            ' Consultamos en caso de que desee agendar una llamada al Cliente al que se le hace el recibo.
+            ' Comentado hasta que este completamente verificado y terminado.
+            'If MsgBox("", MsgBoxStyle.YesNo, MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+            '    With AltaAgenda
+            '        .Cliente = Trim(txtCliente.Text)
+            '        .ShowDialog()
+            '        .Dispose()
+            '    End With
+            'End If
 
             ' Si llegamos hasta aca se supone que todo salio bien.
             'MsgBox("Se ha generado correctamente el Recibo solicitado. Nº de Recibo: " & txtRecibo.Text, MsgBoxStyle.Information)

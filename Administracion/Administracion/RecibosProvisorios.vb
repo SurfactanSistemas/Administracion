@@ -536,7 +536,7 @@ Public Class RecibosProvisorios
                 .Focus()
             End With
         ElseIf e.KeyData = Keys.Escape Then
-            txtTotal.Text = "0.00"
+            txtTotal.Text = ""
         End If
     End Sub
 
@@ -550,7 +550,7 @@ Public Class RecibosProvisorios
 
             _SaltarA(txtRetSuss)
         ElseIf e.KeyData = Keys.Escape Then
-            txtRetIva.Text = "0.00"
+            txtRetIva.Text = ""
         End If
 
     End Sub
@@ -581,7 +581,7 @@ Public Class RecibosProvisorios
 
             _SaltarA(txtRetIB)
         ElseIf e.KeyData = Keys.Escape Then
-            txtRetGanancias.Text = "0.00"
+            txtRetGanancias.Text = ""
         End If
     End Sub
 
@@ -621,7 +621,7 @@ Public Class RecibosProvisorios
 
             _SaltarA(txtTotal)
         ElseIf e.KeyData = Keys.Escape Then
-            txtRetSuss.Text = "0.00"
+            txtRetSuss.Text = ""
         End If
     End Sub
 
@@ -631,7 +631,7 @@ Public Class RecibosProvisorios
             _SaltarA(txtTotal)
 
         ElseIf e.KeyData = Keys.Escape Then
-            txtParidad.Text = "0.00"
+            txtParidad.Text = ""
         End If
     End Sub
 
