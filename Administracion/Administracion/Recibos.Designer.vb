@@ -981,6 +981,7 @@ Partial Class Recibos
         Me.txtRetIB.LabelAssociationKey = 6
         Me.txtRetIB.Location = New System.Drawing.Point(305, 69)
         Me.txtRetIB.Name = "txtRetIB"
+        Me.txtRetIB.ReadOnly = True
         Me.txtRetIB.Size = New System.Drawing.Size(70, 20)
         Me.txtRetIB.TabIndex = 91
         Me.txtRetIB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right

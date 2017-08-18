@@ -2520,7 +2520,7 @@ Public Class Recibos
     Private Sub txtRetIB_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            _SaltarA(txtParidad)
+            _SaltarA(txtObservaciones)
 
         ElseIf e.KeyData = Keys.Escape Then
             txtRetIB.Text = 0
