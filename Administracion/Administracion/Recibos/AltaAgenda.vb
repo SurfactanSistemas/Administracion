@@ -187,9 +187,9 @@ Public Class AltaAgenda
                         .Replace("#HORA#", "HoraII")
         End If
 
-        MsgBox(ZSql)
+        'MsgBox(ZSql)
 
-        Exit Sub ' Comentar cuando ya se comience a querer probar.
+        'Exit Sub ' Comentar cuando ya se comience a querer probar.
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand(ZSql)
