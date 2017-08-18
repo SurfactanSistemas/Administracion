@@ -143,7 +143,7 @@ Public Class Recibos
 
     Private Sub _CargarCtasCtes()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Impre, Numero, Fecha, Saldo FROM CtaCte WHERE Saldo <> 0 AND Cliente = '" & Trim(txtCliente.Text) & "' order by OrdFecha")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Impre, Numero, Fecha, Saldo FROM CtaCte WHERE Saldo <> 0 AND Cliente = '" & Trim(txtCliente.Text) & "' order by OrdFecha, Numero")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
