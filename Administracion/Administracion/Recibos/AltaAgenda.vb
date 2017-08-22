@@ -2,6 +2,8 @@
 
 Public Class AltaAgenda
 
+    Private WFecha, WAnotacion, WHora, WOrdFecha, WFechaII, WAnotacionII, WHoraII, WOrdFechaII, WDesCliente As String
+
     Private _Cliente As String
 
     Public Property Cliente() As String
@@ -33,8 +35,6 @@ Public Class AltaAgenda
             If Proceso._ValidarFecha(Trim(txtFecha.Text)) Then
                 ' Saltamos hacia el otro campo
                 txtHora.Focus()
-            Else
-                MsgBox("Fecha inválida.", MsgBoxStyle.Information)
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -55,7 +55,7 @@ Public Class AltaAgenda
 
     Private Sub AltaAgenda_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Button3.PerformClick()
+        btnLimpiar.PerformClick()
 
         ' Si tenemos un cliente, buscamos la informacion pertinente.
         If Trim(Cliente) <> "" Then
@@ -69,8 +69,6 @@ Public Class AltaAgenda
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Fecha, Hora, Anotacion, OrdFecha, FechaII, HoraII, AnotacionII, OrdFechaII, Razon FROM Cliente WHERE Cliente = '" & Trim(Me.Cliente) & "'")
         Dim dr As SqlDataReader
-        Dim WFecha, WAnotacion, WHora, WOrdFecha, WFechaII, WAnotacionII, WHoraII, WOrdFechaII As String
-        Dim WDesCliente As String = ""
 
         WFecha = ""
         WAnotacion = ""
@@ -81,6 +79,8 @@ Public Class AltaAgenda
         WAnotacionII = ""
         WHoraII = ""
         WOrdFechaII = ""
+
+        WDesCliente = ""
 
         ClasesCompartidas.SQLConnector.conexionSql(cn, cm)
 
@@ -129,30 +129,62 @@ Public Class AltaAgenda
         ' y asumimos que se guardara en el primer campo de fechas.
         If Val(WOrdFecha) > 0 Or Val(WOrdFechaII) > 0 Then
 
-            If Val(WOrdFechaII) < Val(WOrdFecha) Then ' La segunda fecha es mas actual.
+            If Val(WOrdFecha) > 0 Then
+                If Val(WOrdFechaII) < Val(WOrdFecha) And Val(WOrdFechaII) > 0 Then ' La segunda fecha es mas actual.
 
-                txtFecha.Text = Trim(WFechaII)
-                txtHora.Text = Proceso.formatonumerico(WHoraII)
-                txtAnotacion.Text = Trim(WAnotacionII)
+                    txtFecha.Text = Trim(WFechaII)
+                    txtHora.Text = Proceso.formatonumerico(WHoraII)
+                    txtAnotacion.Text = Trim(WAnotacionII)
 
-                Me.EsPrimerFecha = False
+                    Me.EsPrimerFecha = False
 
-            Else ' La primer fecha es mas actual.
+                Else ' La primer fecha es mas actual.
 
-                txtFecha.Text = Trim(WFecha)
-                txtHora.Text = Proceso.formatonumerico(WHora)
-                txtAnotacion.Text = Trim(WAnotacion)
+                    txtFecha.Text = Trim(WFecha)
+                    txtHora.Text = Proceso.formatonumerico(WHora)
+                    txtAnotacion.Text = Trim(WAnotacion)
 
-                Me.EsPrimerFecha = True
+                    Me.EsPrimerFecha = True
 
+                End If
+            ElseIf Val(WOrdFechaII) > 0 Then
+                If Val(WOrdFecha) < Val(WOrdFechaII) And Val(WOrdFecha) > 0 Then ' La segunda fecha es mas actual.
+
+                    txtFecha.Text = Trim(WFecha)
+                    txtHora.Text = Proceso.formatonumerico(WHora)
+                    txtAnotacion.Text = Trim(WAnotacion)
+
+                    Me.EsPrimerFecha = True
+
+                Else ' La primer fecha es mas actual.
+
+                    txtFecha.Text = Trim(WFechaII)
+                    txtHora.Text = Proceso.formatonumerico(WHoraII)
+                    txtAnotacion.Text = Trim(WAnotacionII)
+
+                    Me.EsPrimerFecha = False
+
+                End If
             End If
 
         End If
 
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+
+        WFecha = ""
+        WAnotacion = ""
+        WHora = ""
+        WOrdFecha = ""
+
+        WFechaII = ""
+        WAnotacionII = ""
+        WHoraII = ""
+        WOrdFechaII = ""
+
+        WDesCliente = ""
+
         txtFecha.Clear()
         txtHora.Text = ""
         txtAnotacion.Text = ""
@@ -166,7 +198,7 @@ Public Class AltaAgenda
         Me.Close()
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
         Dim ZSql As String = ""
 
         If Not Proceso._ValidarFecha(txtFecha.Text) Then : Exit Sub : End If
@@ -175,16 +207,54 @@ Public Class AltaAgenda
 
         ZSql = "UPDATE Cliente SET #FECHA# = '" & Trim(txtFecha.Text) & "', #HORA# = " & Proceso.formatonumerico(txtHora.Text) & ", #ANOTACION# = '" & Trim(txtAnotacion.Text) & "', #ORDFECHA# = '" & Proceso.ordenaFecha(txtFecha.Text) & "' WHERE Cliente = '" & Me.Cliente & "'"
 
+        ' CHEKEAR BIEN CUANDO SE ACTUALIZA Y CUANDO NO.
+        ' AHORA ESTA QUEDANDO DE LA SIGUIENTE MANERA:
+        ' EN CASO DE QUE NO HAYA NINGUN REGISTRO DE AGENDA, SE GUARDA POR DEFECTO EN FECHA 1.
+        ' EN CASO DE QUE EN ALGUNO DE LOS DOS REGISTROS HAYA DATOS, TRAE AQUEL QUE TENGA Y QUE SEA MAS RECIENTE.
+        ' AL MOMENTO DE GUARDAR, SE FIJA QUE SI LA FECHA COINCIDE O NO CON LA QUE SE TRAJO DE LA BD Y EN CASO DE QUE SI, ACTUALIZA.
+        ' EN CASO DE QUE NO, DETECTA SI EL OTRO CAMPO SE ENCUENTRA DISPONIBLE Y ACTUALIZA, SINO LANZA UN MSG Y NO GRABA NADA.
+
         If Me.EsPrimerFecha Then
-            ZSql = ZSql.Replace("#FECHA#", "Fecha") _
-                        .Replace("#ORDFECHA#", "OrdFecha") _
-                        .Replace("#ANOTACION#", "Anotacion") _
-                        .Replace("#HORA#", "Hora")
-        Else
-            ZSql = ZSql.Replace("#FECHA#", "FechaII") _
+
+            If Val(WOrdFecha) <> Val(Proceso.ordenaFecha(txtFecha.Text)) Then ' Si se modifico la fecha original, se chequea que hay fecha disponible.
+
+                If Val(WOrdFechaII) = 0 Then
+                    ZSql = ZSql.Replace("#FECHA#", "FechaII") _
                         .Replace("#ORDFECHA#", "OrdFechaII") _
                         .Replace("#ANOTACION#", "AnotacionII") _
                         .Replace("#HORA#", "HoraII")
+                Else
+                    MsgBox("No hay fecha disponible para el alta del recordatorio", MsgBoxStyle.Information)
+                    Exit Sub
+                End If
+
+            Else ' Se actualiza la informacion de la fecha.
+                ZSql = ZSql.Replace("#FECHA#", "Fecha") _
+                        .Replace("#ORDFECHA#", "OrdFecha") _
+                        .Replace("#ANOTACION#", "Anotacion") _
+                        .Replace("#HORA#", "Hora")
+            End If
+
+        Else
+            If Val(WOrdFechaII) <> Val(Proceso.ordenaFecha(txtFecha.Text)) Then ' Si se modifico la fecha original, se chequea que hay fecha disponible.
+
+                If Val(WOrdFecha) = 0 Then
+                    ZSql = ZSql.Replace("#FECHA#", "Fecha") _
+                        .Replace("#ORDFECHA#", "OrdFecha") _
+                        .Replace("#ANOTACION#", "Anotacion") _
+                        .Replace("#HORA#", "Hora")
+                Else
+                    MsgBox("No hay fecha disponible para el alta del recordatorio", MsgBoxStyle.Information)
+                    Exit Sub
+                End If
+
+            Else ' Se actualiza la informacion de la fecha.
+                ZSql = ZSql.Replace("#FECHA#", "FechaII") _
+                        .Replace("#ORDFECHA#", "OrdFechaII") _
+                        .Replace("#ANOTACION#", "AnotacionII") _
+                        .Replace("#HORA#", "HoraII")
+            End If
+
         End If
 
         'MsgBox(ZSql)

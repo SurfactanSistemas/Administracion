@@ -36,9 +36,9 @@ Partial Class AltaAgenda
         Me.txtHora = New System.Windows.Forms.TextBox()
         Me.txtCliente = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnAceptar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -170,22 +170,22 @@ Partial Class AltaAgenda
         Me.txtCliente.Size = New System.Drawing.Size(74, 20)
         Me.txtCliente.TabIndex = 0
         '
-        'Button3
+        'btnLimpiar
         '
-        Me.Button3.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button3.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(224, 185)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(84, 50)
-        Me.Button3.TabIndex = 2
-        Me.ToolTip1.SetToolTip(Me.Button3, "Limpiar Formulario")
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.BorderSize = 0
+        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiar.Location = New System.Drawing.Point(224, 185)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(84, 50)
+        Me.btnLimpiar.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnCerrar
         '
@@ -204,31 +204,31 @@ Partial Class AltaAgenda
         Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnAceptar
         '
-        Me.Button1.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(114, 185)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(84, 50)
-        Me.Button1.TabIndex = 2
-        Me.ToolTip1.SetToolTip(Me.Button1, "Agregar Agenda")
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnAceptar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
+        Me.btnAceptar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAceptar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAceptar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnAceptar.FlatAppearance.BorderSize = 0
+        Me.btnAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAceptar.Location = New System.Drawing.Point(114, 185)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(84, 50)
+        Me.btnAceptar.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.btnAceptar, "Agregar Agenda")
+        Me.btnAceptar.UseVisualStyleBackColor = True
         '
         'AltaAgenda
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(526, 247)
-        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCerrar)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.KeyPreview = True
@@ -244,7 +244,7 @@ Partial Class AltaAgenda
     Friend WithEvents LBLTipoInformacion As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents txtCliente As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents txtFecha As System.Windows.Forms.MaskedTextBox
@@ -255,5 +255,5 @@ Partial Class AltaAgenda
     Friend WithEvents txtHora As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtAnotacion As System.Windows.Forms.TextBox
-    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents btnLimpiar As System.Windows.Forms.Button
 End Class
