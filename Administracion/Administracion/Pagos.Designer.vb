@@ -23,7 +23,7 @@ Partial Class Pagos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optTransferencias = New System.Windows.Forms.RadioButton()
         Me.optAnticipos = New System.Windows.Forms.RadioButton()
@@ -246,9 +246,9 @@ Partial Class Pagos
         '
         'Tipo2
         '
-        DataGridViewCellStyle1.Format = "N2"
-        DataGridViewCellStyle1.NullValue = Nothing
-        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Format = "N2"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle3
         Me.Tipo2.HeaderText = "Tipo"
         Me.Tipo2.Name = "Tipo2"
         Me.Tipo2.Width = 35
@@ -583,6 +583,7 @@ Partial Class Pagos
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(95, 20)
         Me.txtProveedor.TabIndex = 29
+        Me.txtProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtProveedor, "Doble Click para abrir listado de Proveedores")
         Me.txtProveedor.Validator = Administracion.ValidatorType.None
         '

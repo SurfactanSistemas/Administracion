@@ -192,14 +192,15 @@ Public Class Pagos
         txtFechaParidad.Text = Proceso._Normalizarfecha(orden.fechaParidad)
         mostrarProveedor(orden.proveedor)
         mostrarBanco(orden.banco)
-        txtGanancias.Text = CustomConvert.toStringWithTwoDecimalPlaces(orden.retGanancias)
-        txtIBCiudad.Text = CustomConvert.toStringWithTwoDecimalPlaces(orden.retIBCiudad)
-        txtIngresosBrutos.Text = CustomConvert.toStringWithTwoDecimalPlaces(orden.retIB)
-        txtIVA.Text = CustomConvert.toStringWithTwoDecimalPlaces(orden.retIVA)
+
+        txtGanancias.Text = _NormalizarNumero(orden.retGanancias)
+        txtIBCiudad.Text = _NormalizarNumero(orden.retIBCiudad)
+        txtIngresosBrutos.Text = _NormalizarNumero(orden.retIB)
+        txtIVA.Text = _NormalizarNumero(orden.retIVA)
         mostrarPagos(orden.pagos)
         mostrarFormaPagos(orden.formaPagos)
         mostrarTipo(orden.tipo)
-        txtParidad.Text = orden.paridad
+        txtParidad.Text = _NormalizarNumero(orden.paridad)
         WCertificadoIb = orden.certIb
         WCertificadoIbCiudad = orden.certIbCABA
         WCertificadoIVA = orden.certIVA
@@ -223,7 +224,7 @@ Public Class Pagos
     Private Sub mostrarPagos(ByVal pagos As List(Of Pago))
         gridPagos.Rows.Clear()
         For Each pago As Pago In pagos
-            gridPagos.Rows.Add(pago.tipo, pago.letra, pago.punto, pago.numero, pago.importe, pago.descripcion, pago.impoNeto)
+            gridPagos.Rows.Add(pago.tipo, pago.letra, pago.punto, pago.numero, _NormalizarNumero(pago.importe), pago.descripcion, _NormalizarNumero(pago.impoNeto))
         Next
         sumarImportes()
     End Sub
@@ -231,7 +232,7 @@ Public Class Pagos
     Private Sub mostrarFormaPagos(ByVal formaPagos As List(Of FormaPago))
         gridFormaPagos.Rows.Clear()
         For Each formaPago As FormaPago In formaPagos
-            gridFormaPagos.Rows.Add(formaPago.tipo, formaPago.numero, formaPago.fecha, formaPago.banco, formaPago.nombre, formaPago.importe, "", formaPago.cuit)
+            gridFormaPagos.Rows.Add(formaPago.tipo, formaPago.numero, formaPago.fecha, formaPago.banco, formaPago.nombre, _NormalizarNumero(formaPago.importe), "", formaPago.cuit)
         Next
         sumarImportes()
     End Sub
@@ -1251,7 +1252,7 @@ Public Class Pagos
     End Function
 
     Private Function _NormalizarNumero(ByVal numero As String)
-        Return _NormalizarNumero(numero, 2)
+        Return Proceso.formatonumerico(numero)
     End Function
 
     Private Function _NormalizarNumero(ByVal numero As String, ByVal decimales As Integer)
@@ -1473,24 +1474,24 @@ Public Class Pagos
         Dim formaPagos As Double = 0
         Dim total As Double = 0
 
-        total = CustomConvert.toDoubleOrZero(txtIVA.Text) + CustomConvert.toDoubleOrZero(txtGanancias.Text) + CustomConvert.toDoubleOrZero(txtIBCiudad.Text) +
-            CustomConvert.toDoubleOrZero(txtIngresosBrutos.Text)
+        total = Val(_NormalizarNumero(txtIVA.Text)) + Val(_NormalizarNumero(txtGanancias.Text)) + Val(_NormalizarNumero(txtIBCiudad.Text)) +
+            Val(_NormalizarNumero(txtIngresosBrutos.Text))
 
         For Each row As DataGridViewRow In gridPagos.Rows
             If Not row.IsNewRow Then
-                pagos += CustomConvert.toDoubleOrZero(row.Cells(4).Value)
+                pagos += Val(_NormalizarNumero(row.Cells(4).Value))
             End If
         Next
 
         For Each row As DataGridViewRow In gridFormaPagos.Rows
             If Not row.IsNewRow Then
-                formaPagos += CustomConvert.toDoubleOrZero(row.Cells(5).Value)
+                formaPagos += Val(_NormalizarNumero(row.Cells(5).Value))
             End If
         Next
-        txtTotal.Text = CustomConvert.toStringWithTwoDecimalPlaces(total)
-        lblPagos.Text = CustomConvert.toStringWithTwoDecimalPlaces(pagos)
-        lblFormaPagos.Text = CustomConvert.toStringWithTwoDecimalPlaces(formaPagos + total)
-        lblDiferencia.Text = CustomConvert.toStringWithTwoDecimalPlaces(pagos - formaPagos - total)
+        txtTotal.Text = _NormalizarNumero(total)
+        lblPagos.Text = _NormalizarNumero(pagos)
+        lblFormaPagos.Text = _NormalizarNumero(formaPagos + total)
+        lblDiferencia.Text = _NormalizarNumero(pagos - formaPagos - total)
     End Sub
 
     Private Sub gridPagos_RowsAdded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles gridPagos.RowsAdded
@@ -2232,7 +2233,7 @@ Public Class Pagos
         If e.KeyData = Keys.Enter Then
             If Trim(txtFecha.Text.Replace("/", "")) <> "" Then
 
-                If Not _FormatoValidoFecha(txtFecha.Text) Then
+                If Not _ValidarFecha(txtFecha.Text) Then
                     Exit Sub
                 End If
 
@@ -2256,7 +2257,7 @@ Public Class Pagos
 
             If Trim(txtFechaParidad.Text.Replace("/", "")) <> "" Then
 
-                If Not _FormatoValidoFecha(txtFechaParidad.Text) Then
+                If Not _ValidarFecha(txtFechaParidad.Text) Then
                     Exit Sub
                 End If
 
@@ -2338,17 +2339,17 @@ Public Class Pagos
         Return Proceso._FormatoValidoFecha(fecha)
     End Function
 
-    Private Function _ValidarFecha(ByVal fecha As String, ByVal valido As Boolean) As Boolean
+    Private Function _ValidarFecha(ByVal fecha As String, Optional ByVal valido As Boolean = True) As Boolean
         Return Proceso._ValidarFecha(fecha, valido)
     End Function
 
-    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFecha.TypeValidationCompleted
+    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
 
         e.Cancel = Not _ValidarFecha(txtFecha.Text, e.IsValidInput)
 
     End Sub
 
-    Private Sub txtFechaParidad_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaParidad.TypeValidationCompleted
+    Private Sub txtFechaParidad_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
         e.Cancel = Not _ValidarFecha(txtFechaParidad.Text, e.IsValidInput)
     End Sub
 
