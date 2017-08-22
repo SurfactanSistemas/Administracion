@@ -26,6 +26,16 @@ Public Class Pagos
     ' Utilizado para poder ser usado con consulta de cta cte prv por pantalla.
     Private _SoloLectura As String = False
 
+    Dim XRenglon, XRecibo, XCliente, XFecha, XFechaOrd, XTipoRec, XRetganancias, XRetIva, XRetotra, _
+            XRetencion, XTiporeg, XTipo, XNumero, ClaveCtaCte, XTipo1, XLetra1, XPunto1, XNumero1, XImporte1, XTipo2, _
+            XNumero2, XFecha2, XFechaOrd2, XBanco2, XImporte2, XEstado2, XObservaciones, XEmpresa, _
+            XImporte, XImporteBaja, XCuenta, XMarca, XFechaDepo, XFechaDepoOrd, XImpolist, XImpo1list, XDestino, XEstado, _
+            XVencimiento, XVencimiento1, XTotal, XTotalUs, XSaldo, XSaldoUs, XOrdFecha, XOrdVencimiento, _
+            XOrdVencimiento1, XImpre, XNeto, XIva1, XIva2, XImpoIb, XSeguro, XFlete, XPedido, XRemito, XOrden, _
+            XParidad, XProvincia, XVendedor, XRubro, XComprobante, XAceptada, XCosto, XImporte3, XImporte4, _
+            XImporte5, XImporte6, XImporte7, XDate, XParam, XSql, XClaveCheque, XBancoCheque, XSucursalCheque, _
+            XChequeCheque, XCuentaCheque, XCuit, XClaveCuit, XNet As String
+
     Public Property SoloLectura() As Boolean
         Get
             Return _SoloLectura
@@ -1125,8 +1135,8 @@ Public Class Pagos
 
                     XClave = clave
                     XTipo = "4"
-                    XNumero = .Item("Numero").ToString()
-                    XFecha = .Item("Vencimiento1").ToString()
+                    XNumero = IIf(Not IsDBNull(.Item("Numero")), .Item("Numero"), "")
+                    XFecha = IIf(Not IsDBNull(.Item("Vencimiento1")), .Item("Vencimiento1"), "")
                     XImporte = _NormalizarNumero(.Item("Saldo").ToString())
                     XCuit = IIf(Not IsDBNull(.Item("Cuit")), .Item("Cuit"), "")
 
@@ -1180,10 +1190,10 @@ Public Class Pagos
 
         cmbTipo.SelectedIndex = 0
 
-        txtIBCiudad.Text = "0,00"
-        txtIngresosBrutos.Text = "0,00"
-        txtGanancias.Text = "0,00"
-        txtIVA.Text = "0,00"
+        txtIBCiudad.Text = "0.00"
+        txtIngresosBrutos.Text = "0.00"
+        txtGanancias.Text = "0.00"
+        txtIVA.Text = "0.00"
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
         txtFechaParidad.Text = txtFecha.Text
 
@@ -1194,6 +1204,10 @@ Public Class Pagos
         cheques.Clear()
 
         'Array.Clear(_Claves, 0, _Claves.Length)
+
+        WCertificadoIb = ""
+        WCertificadoIbCiudad = ""
+        WCertificadoIVA = ""
 
         lstSeleccion.Visible = False
         lstConsulta.Visible = False
@@ -1265,10 +1279,10 @@ Public Class Pagos
             bancoOrden = DAOBanco.buscarBancoPorCodigo(txtBanco.Text)
             proveedorOrden = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
             txtOrdenPago.Text = siguienteNumero
-            Dim pago As OrdenPago = New OrdenPago(siguienteNumero, tipoOrden, CustomConvert.toDoubleOrZero(txtParidad.Text),
-                                                  CustomConvert.toDoubleOrZero(txtTotal.Text), CustomConvert.toDoubleOrZero(txtIVA.Text),
-                                                  CustomConvert.toDoubleOrZero(txtIngresosBrutos.Text), CustomConvert.toDoubleOrZero(txtIBCiudad.Text),
-                                                  CustomConvert.toDoubleOrZero(txtGanancias.Text), txtFecha.Text, txtFechaParidad.Text, txtObservaciones.Text,
+            Dim pago As OrdenPago = New OrdenPago(siguienteNumero, tipoOrden, _NormalizarNumero(txtParidad.Text),
+                                                  _NormalizarNumero(txtTotal.Text), _NormalizarNumero(txtIVA.Text),
+                                                  _NormalizarNumero(txtIngresosBrutos.Text), _NormalizarNumero(txtIBCiudad.Text),
+                                                  _NormalizarNumero(txtGanancias.Text), txtFecha.Text, txtFechaParidad.Text, txtObservaciones.Text,
                                                   bancoOrden, proveedorOrden)
             crearNotasCreditoDebito()
             pago.pagos = crearPagos()
@@ -1294,7 +1308,7 @@ Public Class Pagos
                     tipoDoc = "NC"
                 End If
 
-                neto = CustomConvert.toStringWithTwoDecimalPlaces(row.Cells(4).Value) / 1.21
+                neto = _NormalizarNumero(row.Cells(4).Value) / 1.21
 
                 Dim interno As Integer = DAOCompras.siguienteNumeroDeInterno()
                 Dim compra As New Compra(
@@ -1311,15 +1325,15 @@ Public Class Pagos
                                          txtFecha.Text,
                                          txtFecha.Text,
                                          txtFecha.Text,
-                                         CustomConvert.toStringWithTwoDecimalPlaces(txtParidad.Text),
+                                         _NormalizarNumero(txtParidad.Text),
                                          neto,
-                                         CustomConvert.toStringWithTwoDecimalPlaces(row.Cells(4).Value) - neto,
+                                         _NormalizarNumero(row.Cells(4).Value) - neto,
                                          0,
                                          0,
                                          0,
                                          0,
                                          0,
-                                         CustomConvert.toStringWithTwoDecimalPlaces(row.Cells(4).Value),
+                                         _NormalizarNumero(row.Cells(4).Value),
                                          0,
                                          "",
                                          "")
@@ -1372,10 +1386,10 @@ Public Class Pagos
             If Not row.IsNewRow Then
                 If (Convert.ToString(row.Cells(3).Value) = "99999999") Then
                     pagos.Add(New Pago(Convert.ToString(row.Cells(0).Value), Convert.ToString(row.Cells(1).Value), Convert.ToString(row.Cells(2).Value), ultimoNumero,
-                    Convert.ToString(row.Cells(5).Value), CustomConvert.toDoubleOrZero(row.Cells(4).Value)))
+                    Convert.ToString(row.Cells(5).Value), _NormalizarNumero(row.Cells(4).Value)))
                 Else
                     pagos.Add(New Pago(Convert.ToString(row.Cells(0).Value), Convert.ToString(row.Cells(1).Value), Convert.ToString(row.Cells(2).Value), Convert.ToString(row.Cells(3).Value),
-                    Convert.ToString(row.Cells(5).Value), CustomConvert.toDoubleOrZero(row.Cells(4).Value)))
+                    Convert.ToString(row.Cells(5).Value), _NormalizarNumero(row.Cells(4).Value)))
                 End If
 
             End If
@@ -1389,7 +1403,7 @@ Public Class Pagos
         For Each row As DataGridViewRow In gridFormaPagos.Rows
             If Not row.IsNewRow Then
                 formaPagos.Add(New FormaPago(Convert.ToString(row.Cells(0).Value), CustomConvert.toIntOrZero(Convert.ToString(row.Cells(3).Value)), Convert.ToString(row.Cells(1).Value),
-                                             Convert.ToString(row.Cells(2).Value), Convert.ToString(row.Cells(4).Value), CustomConvert.toDoubleOrZero(row.Cells(5).Value)))
+                                             Convert.ToString(row.Cells(2).Value), Convert.ToString(row.Cells(4).Value), _NormalizarNumero(row.Cells(5).Value)))
             End If
         Next
         Return formaPagos
@@ -1541,7 +1555,7 @@ Public Class Pagos
     Private Sub optAnticipos_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optAnticipos.CheckedChanged
         If optAnticipos.Checked Then
             gridPagos.Rows.Clear()
-            gridPagos.Rows.Add("", "", "", "", "0,00", txtRazonSocial.Text)
+            gridPagos.Rows.Add("", "", "", "", "0.00", txtRazonSocial.Text)
             gridPagos.Columns(5).ReadOnly = True
         End If
     End Sub
@@ -1592,6 +1606,8 @@ Public Class Pagos
                 txtOrdenPago.Text = "0"
                 txtFecha.Focus()
             End If
+        ElseIf e.KeyData = Keys.Escape Then
+            txtOrdenPago.Text = ""
         End If
 
     End Sub
@@ -1754,6 +1770,19 @@ Public Class Pagos
                 End If
 
                 Return True
+            ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+
+                With gridFormaPagos
+                    .Rows(iRow).Cells(iCol).Value = ""
+                    If iCol = 5 Then
+                        .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                    Else
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End If
+
+                    .CurrentCell = .Rows(iRow).Cells(iCol)
+                End With
+
             End If
         End If
 
@@ -2231,14 +2260,16 @@ Public Class Pagos
     Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtFecha.Text.Replace("/", "")) <> "" Then
+            If Trim(txtFecha.Text.Replace("/", "")) = "" Then : Exit Sub : End If
 
-                If Not _ValidarFecha(txtFecha.Text) Then
-                    Exit Sub
-                End If
-
-                txtProveedor.Focus()
+            If Not _ValidarFecha(txtFecha.Text) Then
+                Exit Sub
             End If
+
+            txtProveedor.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFecha.Clear()
         End If
 
     End Sub
@@ -2247,6 +2278,8 @@ Public Class Pagos
 
         If e.KeyData = Keys.Enter Then
             txtBanco.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtObservaciones.Text = ""
         End If
 
     End Sub
@@ -2272,7 +2305,8 @@ Public Class Pagos
             Else
                 txtFechaParidad.Focus()
             End If
-
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaParidad.Clear()
         End If
 
     End Sub
@@ -2283,6 +2317,8 @@ Public Class Pagos
             If Val(txtParidad.Text) <> 0 Then
                 txtGanancias.Focus()
             End If
+        ElseIf e.KeyData = Keys.Escape Then
+            txtParidad.Text = ""
         End If
 
     End Sub
@@ -4454,16 +4490,22 @@ Public Class Pagos
     Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellClick
         With gridFormaPagos
             If e.ColumnIndex = 2 Then
-                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
+                Dim iRow, iCol As Integer
+                iRow = e.RowIndex
+                iCol = e.ColumnIndex
 
+                .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+
+                Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
+
+                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 .ClearSelection()
-                _location.Y += YMARGEN '183 '(4 + 180)
-                _location.X += XMARGEN '(7 + 10)
+                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
                 txtFechaAux.Location = _location
-                txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
-                WRow = e.RowIndex
-                Wcol = e.ColumnIndex
+                txtFechaAux.Text = .Rows(iRow).Cells(2).Value
+                WRow = iRow
+                Wcol = iCol
                 txtFechaAux.Visible = True
                 txtFechaAux.Focus()
             End If
@@ -4488,5 +4530,124 @@ Public Class Pagos
                 txtFechaAux.Focus()
             End If
         End With
+    End Sub
+
+    Private Sub btnCalcular_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCalcular.Click
+        Dim tabla As DataTable = New DataTable("Detalles")
+        Dim DiasTasa As String = ""
+        _PedirInformacion("Informe la tasa Mensual", New TextBox, DiasTasa)
+
+        Dim ZZSuma As Double = 0
+        Dim ZZCodigo As Double = 0
+
+        Dim FechaBase As String = txtFecha.Text
+
+        Dim row As DataRow
+        Dim crdoc As ReportDocument
+        crdoc = New InformeIntereses
+
+        ' Creo las Columnas
+        _PrepararTablaIntereses(tabla)
+
+        ' Lleno la tabla con la informacion del Recibo.
+        For i = 0 To gridFormaPagos.Rows.Count - 1
+
+            With gridFormaPagos.Rows(i)
+
+                XTipo2 = .Cells(0).Value
+                XNumero2 = ceros(.Cells(1).Value, 8)
+                If Val(XNumero2) = 0 Then
+                    XNumero2 = ""
+                End If
+                XFecha2 = .Cells(2).Value
+                XBanco2 = .Cells(3).Value
+                XImporte2 = .Cells(4).Value
+
+                If Val(XImporte2) <> 0 Then
+
+                    XImporte2 = _NormalizarNumero(XImporte2)
+                    DiasTasa = _NormalizarNumero(DiasTasa)
+
+                    If XFecha2 = "" Then
+                        XFecha2 = txtFecha.Text
+                    End If
+                    Dim WFechaCheque As String = String.Join("", XFecha2.Split("/").Reverse())
+                    Dim WFechaRecibo As String = String.Join("", txtFecha.Text.Split("/").Reverse())
+                    If Val(WFechaCheque) < Val(WFechaRecibo) Then
+                        XFecha2 = txtFecha.Text
+                    End If
+                    Dim XDias2 As Integer = DateDiff("d", FechaBase, XFecha2)
+                    Dim ZZInteres As Double = ((Val(XImporte2) * XDias2 * (Val(DiasTasa) / 100)) / 365)
+                    ZZInteres = Val(_NormalizarNumero(ZZInteres))
+                    ZZSuma = ZZSuma + ZZInteres
+
+                    row = tabla.NewRow()
+
+                    row.Item("CodigoCliente") = txtProveedor.Text
+                    row.Item("Cliente") = txtRazonSocial.Text
+                    row.Item("Fecha") = txtFecha.Text
+                    row.Item("Numero") = XNumero2
+                    row.Item("Fecha2") = XFecha2
+                    row.Item("Banco") = XBanco2
+                    row.Item("Importe") = Val(_NormalizarNumero(XImporte2))
+                    row.Item("Dias") = XDias2
+                    row.Item("Tasa") = _NormalizarNumero(DiasTasa)
+                    row.Item("Intereses") = Val(_NormalizarNumero(ZZInteres))
+
+                    tabla.Rows.Add(row)
+                End If
+
+            End With
+
+        Next
+
+        crdoc.SetDataSource(tabla)
+
+        '_Imprimir(crdoc)
+        _VistaPrevia(crdoc)
+
+        MsgBox("El interes a pagar es de " + Str$(ZZSuma), MsgBoxStyle.Information, "Ordenes de Pago")
+    End Sub
+
+    Private Sub _PrepararTablaIntereses(ByRef tabla As DataTable)
+        ' Por defecto son de tipo String, asi que solamente defino explicitamente las de tipo Double.
+        With tabla
+            .Columns.Add("CodigoCliente")
+            .Columns.Add("Cliente")
+            .Columns.Add("Fecha")
+            .Columns.Add("Numero")
+            .Columns.Add("Fecha2")
+            .Columns.Add("Banco")
+            .Columns.Add("Importe").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Dias")
+            .Columns.Add("Tasa")
+            .Columns.Add("Intereses").DataType = System.Type.GetType("System.Double")
+        End With
+    End Sub
+
+    Private Sub _Imprimir(ByVal crdoc As ReportDocument, Optional ByVal cant As Integer = 1)
+        crdoc.PrintToPrinter(cant, True, 0, 0)
+    End Sub
+
+    Private Sub _VistaPrevia(ByVal crdoc As ReportDocument)
+        With VistaPrevia
+            .CrystalReportViewer1.ReportSource = crdoc
+            .ShowDialog()
+            .Dispose()
+        End With
+    End Sub
+
+    Private Sub gridFormaPagos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridFormaPagos.CellMouseDoubleClick
+
+        Dim iRow As DataGridViewRow
+
+        iRow = gridFormaPagos.Rows(e.RowIndex)
+
+        If MsgBox("¿Está seguro de querer eliminar la fila?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.No Then
+            Exit Sub
+        End If
+
+        gridFormaPagos.Rows.Remove(iRow)
+
     End Sub
 End Class
