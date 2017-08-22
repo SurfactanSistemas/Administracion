@@ -46,7 +46,7 @@ Partial Class ListadoProyeccionCobros
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnPantalla = New Administracion.CustomButton()
-        Me.CustomButton2 = New Administracion.CustomButton()
+        Me.btnImprimir = New Administracion.CustomButton()
         Me.lstfiltrada = New Administracion.CustomListBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -105,6 +105,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtHastaProveedor.Name = "txtHastaProveedor"
         Me.txtHastaProveedor.Size = New System.Drawing.Size(100, 20)
         Me.txtHastaProveedor.TabIndex = 1
+        Me.txtHastaProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtHastaProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtHastaProveedor.Validator = Administracion.ValidatorType.None
         '
@@ -119,6 +120,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
         Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
         Me.txtDesdeProveedor.TabIndex = 0
+        Me.txtDesdeProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
@@ -217,6 +219,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtFecha4.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFecha4.Size = New System.Drawing.Size(106, 20)
         Me.txtFecha4.TabIndex = 5
+        Me.txtFecha4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtFecha3
         '
@@ -227,6 +230,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtFecha3.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFecha3.Size = New System.Drawing.Size(106, 20)
         Me.txtFecha3.TabIndex = 4
+        Me.txtFecha3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtFecha2
         '
@@ -237,6 +241,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtFecha2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFecha2.Size = New System.Drawing.Size(106, 20)
         Me.txtFecha2.TabIndex = 3
+        Me.txtFecha2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtFecha1
         '
@@ -247,6 +252,7 @@ Partial Class ListadoProyeccionCobros
         Me.txtFecha1.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFecha1.Size = New System.Drawing.Size(106, 20)
         Me.txtFecha1.TabIndex = 2
+        Me.txtFecha1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lstAyuda
         '
@@ -334,26 +340,26 @@ Partial Class ListadoProyeccionCobros
         Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Repote por Pantalla")
         Me.btnPantalla.UseVisualStyleBackColor = True
         '
-        'CustomButton2
+        'btnImprimir
         '
-        Me.CustomButton2.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
-        Me.CustomButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.CustomButton2.Cleanable = False
-        Me.CustomButton2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CustomButton2.EnterIndex = -1
-        Me.CustomButton2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.CustomButton2.FlatAppearance.BorderSize = 0
-        Me.CustomButton2.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CustomButton2.LabelAssociationKey = -1
-        Me.CustomButton2.Location = New System.Drawing.Point(422, 306)
-        Me.CustomButton2.Name = "CustomButton2"
-        Me.CustomButton2.Size = New System.Drawing.Size(87, 40)
-        Me.CustomButton2.TabIndex = 31
-        Me.ToolTip1.SetToolTip(Me.CustomButton2, "Imprimir Reporte")
-        Me.CustomButton2.UseVisualStyleBackColor = True
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cleanable = False
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.EnterIndex = -1
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.LabelAssociationKey = -1
+        Me.btnImprimir.Location = New System.Drawing.Point(422, 306)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(87, 40)
+        Me.btnImprimir.TabIndex = 31
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Reporte")
+        Me.btnImprimir.UseVisualStyleBackColor = True
         '
         'lstfiltrada
         '
@@ -377,7 +383,7 @@ Partial Class ListadoProyeccionCobros
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.CustomButton2)
+        Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnCancela)
@@ -421,5 +427,5 @@ Partial Class ListadoProyeccionCobros
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lstfiltrada As Administracion.CustomListBox
     Friend WithEvents btnPantalla As Administracion.CustomButton
-    Friend WithEvents CustomButton2 As Administracion.CustomButton
+    Friend WithEvents btnImprimir As Administracion.CustomButton
 End Class

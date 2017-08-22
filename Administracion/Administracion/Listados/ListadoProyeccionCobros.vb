@@ -44,7 +44,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha1_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha1.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -58,7 +58,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha2_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha2.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -72,7 +72,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha3_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha3.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -86,7 +86,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha4_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha4.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -103,12 +103,12 @@ Public Class ListadoProyeccionCobros
 
 
 
-    Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
+    Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.Close()
         MenuPrincipal.Show()
     End Sub
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Me.Size = New System.Drawing.Size(645, 580)
 
@@ -321,7 +321,11 @@ Public Class ListadoProyeccionCobros
 
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        _Imprimir(Reporte.Pantalla)
+    End Sub
 
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
     End Sub
 End Class
