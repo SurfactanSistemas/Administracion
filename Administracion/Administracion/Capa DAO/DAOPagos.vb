@@ -53,20 +53,24 @@ Public Class DAOPagos
                             row("NombreCheque").ToString, asDouble(row("Importe2")), row("Cuit").ToString)
     End Function
 
+    Private Shared Function _NormalizarNumero(ByVal numero As String)
+        Return Proceso.formatonumerico(numero)
+    End Function
+
     Public Shared Sub agregarPago(ByVal orden As OrdenPago)
         For Each pago As Pago In orden.pagos
             Dim renglon As Integer = 1
             SQLConnector.executeProcedure("alta_pago_pago", orden.nroOrden, ceros(renglon, 2), orden.tipo, orden.fecha, orden.codigoProveedor,
-            orden.observaciones, orden.codigoBanco, orden.fechaParidad, orden.paridad, orden.retGanancias, orden.retIB, orden.retIBCiudad, orden.retIVA, orden.importe,
-            pago.tipo, pago.letra, pago.punto, pago.numero, pago.importe, 0, pago.descripcion)
+            orden.observaciones, orden.codigoBanco, orden.fechaParidad, _NormalizarNumero(orden.paridad), _NormalizarNumero(orden.retGanancias), _NormalizarNumero(orden.retIB), _NormalizarNumero(orden.retIBCiudad), _NormalizarNumero(orden.retIVA), _NormalizarNumero(orden.importe),
+            pago.tipo, pago.letra, pago.punto, pago.numero, _NormalizarNumero(pago.importe), 0, pago.descripcion)
             renglon += 1
         Next
 
         For Each formaPago As FormaPago In orden.formaPagos
             Dim renglon As Integer = 1
             SQLConnector.executeProcedure("alta_pago_forma_de_pago", orden.nroOrden, ceros(renglon, 2), orden.tipo, orden.fecha, orden.codigoProveedor,
-            orden.observaciones, formaPago.banco, orden.fechaParidad, orden.paridad, orden.retGanancias, orden.retIB, orden.retIBCiudad, orden.retIVA, orden.importe,
-            formaPago.tipo, formaPago.numero, formaPago.fecha, formaPago.nombre, formaPago.importe, 0, formaPago.nombre)
+            orden.observaciones, formaPago.banco, orden.fechaParidad, _NormalizarNumero(orden.paridad), _NormalizarNumero(orden.retGanancias), _NormalizarNumero(orden.retIB), _NormalizarNumero(orden.retIBCiudad), _NormalizarNumero(orden.retIVA), _NormalizarNumero(orden.importe),
+            formaPago.tipo, formaPago.numero, formaPago.fecha, formaPago.nombre, _NormalizarNumero(formaPago.importe), 0, formaPago.nombre)
             renglon += 1
         Next
     End Sub

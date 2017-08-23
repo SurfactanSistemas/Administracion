@@ -600,7 +600,11 @@ Public Class Compras
 
                 If _UtilizaApertura() Then
                     _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo("164")
-                    gridAsientos.Rows.Add("164", _Cta.descripcion, "", formatonumerico(ingresosBrutos))
+
+                    If Val(ingresosBrutos) <> 0 Then
+                        gridAsientos.Rows.Add("164", _Cta.descripcion, "", formatonumerico(ingresosBrutos))
+                    End If
+
                 Else
                     For i = 0 To 14
 
@@ -624,7 +628,11 @@ Public Class Compras
 
                 If _UtilizaApertura() Then
                     _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo("164")
-                    gridAsientos.Rows.Add("164", _Cta.descripcion, formatonumerico(ingresosBrutos), "")
+
+                    If Val(ingresosBrutos) <> 0 Then
+                        gridAsientos.Rows.Add("164", _Cta.descripcion, formatonumerico(ingresosBrutos), "")
+                    End If
+
                 Else
                     For i = 0 To 14
 
