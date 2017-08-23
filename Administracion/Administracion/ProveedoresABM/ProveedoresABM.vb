@@ -629,7 +629,10 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub btnListado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnListado.Click
-
+        With VistaPrevia
+            .Reporte = New ListadoResumidoProveedores
+            .Mostrar()
+        End With
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
