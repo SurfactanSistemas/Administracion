@@ -24,13 +24,11 @@ Partial Class ListadoValoresEnCarteraCuit
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.btnCancela = New System.Windows.Forms.Button()
-        Me.btnAcepta = New System.Windows.Forms.Button()
+        Me.btnPantalla = New System.Windows.Forms.Button()
         Me.txthastafecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.CustomLabel2 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.opcImpesora = New System.Windows.Forms.RadioButton()
-        Me.opcPantalla = New System.Windows.Forms.RadioButton()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.txtCuit = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -38,6 +36,7 @@ Partial Class ListadoValoresEnCarteraCuit
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnImprimir = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -53,34 +52,34 @@ Partial Class ListadoValoresEnCarteraCuit
         Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancela.Location = New System.Drawing.Point(256, 237)
+        Me.btnCancela.Location = New System.Drawing.Point(312, 237)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(125, 34)
+        Me.btnCancela.Size = New System.Drawing.Size(62, 34)
         Me.btnCancela.TabIndex = 45
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
-        'btnAcepta
+        'btnPantalla
         '
-        Me.btnAcepta.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnAcepta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAcepta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAcepta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatAppearance.BorderSize = 0
-        Me.btnAcepta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAcepta.Location = New System.Drawing.Point(100, 237)
-        Me.btnAcepta.Name = "btnAcepta"
-        Me.btnAcepta.Size = New System.Drawing.Size(125, 34)
-        Me.btnAcepta.TabIndex = 44
-        Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
-        Me.btnAcepta.UseVisualStyleBackColor = True
+        Me.btnPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
+        Me.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnPantalla.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPantalla.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.BorderSize = 0
+        Me.btnPantalla.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPantalla.Location = New System.Drawing.Point(114, 237)
+        Me.btnPantalla.Name = "btnPantalla"
+        Me.btnPantalla.Size = New System.Drawing.Size(62, 34)
+        Me.btnPantalla.TabIndex = 44
+        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Reporte")
+        Me.btnPantalla.UseVisualStyleBackColor = True
         '
         'txthastafecha
         '
-        Me.txthastafecha.Location = New System.Drawing.Point(215, 53)
+        Me.txthastafecha.Location = New System.Drawing.Point(215, 71)
         Me.txthastafecha.Mask = "##/##/####"
         Me.txthastafecha.Name = "txthastafecha"
         Me.txthastafecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -89,7 +88,7 @@ Partial Class ListadoValoresEnCarteraCuit
         '
         'txtDesdeFecha
         '
-        Me.txtDesdeFecha.Location = New System.Drawing.Point(215, 19)
+        Me.txtDesdeFecha.Location = New System.Drawing.Point(215, 37)
         Me.txtDesdeFecha.Mask = "##/##/####"
         Me.txtDesdeFecha.Name = "txtDesdeFecha"
         Me.txtDesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -102,7 +101,7 @@ Partial Class ListadoValoresEnCarteraCuit
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(115, 54)
+        Me.CustomLabel2.Location = New System.Drawing.Point(115, 72)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(81, 18)
         Me.CustomLabel2.TabIndex = 43
@@ -114,37 +113,11 @@ Partial Class ListadoValoresEnCarteraCuit
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(110, 20)
+        Me.CustomLabel1.Location = New System.Drawing.Point(110, 38)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(86, 18)
         Me.CustomLabel1.TabIndex = 42
         Me.CustomLabel1.Text = "Desde Fecha"
-        '
-        'opcImpesora
-        '
-        Me.opcImpesora.AutoSize = True
-        Me.opcImpesora.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.opcImpesora.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcImpesora.Location = New System.Drawing.Point(263, 131)
-        Me.opcImpesora.Name = "opcImpesora"
-        Me.opcImpesora.Size = New System.Drawing.Size(89, 22)
-        Me.opcImpesora.TabIndex = 41
-        Me.opcImpesora.TabStop = True
-        Me.opcImpesora.Text = "Impresora"
-        Me.opcImpesora.UseVisualStyleBackColor = True
-        '
-        'opcPantalla
-        '
-        Me.opcPantalla.AutoSize = True
-        Me.opcPantalla.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.opcPantalla.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcPantalla.Location = New System.Drawing.Point(129, 131)
-        Me.opcPantalla.Name = "opcPantalla"
-        Me.opcPantalla.Size = New System.Drawing.Size(76, 22)
-        Me.opcPantalla.TabIndex = 40
-        Me.opcPantalla.TabStop = True
-        Me.opcPantalla.Text = "Pantalla"
-        Me.opcPantalla.UseVisualStyleBackColor = True
         '
         'CustomLabel3
         '
@@ -152,7 +125,7 @@ Partial Class ListadoValoresEnCarteraCuit
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(163, 90)
+        Me.CustomLabel3.Location = New System.Drawing.Point(163, 108)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(33, 18)
         Me.CustomLabel3.TabIndex = 46
@@ -160,7 +133,7 @@ Partial Class ListadoValoresEnCarteraCuit
         '
         'txtCuit
         '
-        Me.txtCuit.Location = New System.Drawing.Point(215, 89)
+        Me.txtCuit.Location = New System.Drawing.Point(215, 107)
         Me.txtCuit.MaxLength = 15
         Me.txtCuit.Name = "txtCuit"
         Me.txtCuit.Size = New System.Drawing.Size(146, 20)
@@ -202,9 +175,7 @@ Partial Class ListadoValoresEnCarteraCuit
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel2.Controls.Add(Me.txtDesdeFecha)
-        Me.Panel2.Controls.Add(Me.opcPantalla)
         Me.Panel2.Controls.Add(Me.txtCuit)
-        Me.Panel2.Controls.Add(Me.opcImpesora)
         Me.Panel2.Controls.Add(Me.CustomLabel3)
         Me.Panel2.Controls.Add(Me.CustomLabel1)
         Me.Panel2.Controls.Add(Me.CustomLabel2)
@@ -214,6 +185,24 @@ Partial Class ListadoValoresEnCarteraCuit
         Me.Panel2.Size = New System.Drawing.Size(489, 169)
         Me.Panel2.TabIndex = 49
         '
+        'btnImprimir
+        '
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.Location = New System.Drawing.Point(213, 237)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(62, 34)
+        Me.btnImprimir.TabIndex = 44
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Reporte")
+        Me.btnImprimir.UseVisualStyleBackColor = True
+        '
         'ListadoValoresEnCarteraCuit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -222,7 +211,8 @@ Partial Class ListadoValoresEnCarteraCuit
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnCancela)
-        Me.Controls.Add(Me.btnAcepta)
+        Me.Controls.Add(Me.btnImprimir)
+        Me.Controls.Add(Me.btnPantalla)
         Me.Name = "ListadoValoresEnCarteraCuit"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
@@ -232,13 +222,11 @@ Partial Class ListadoValoresEnCarteraCuit
 
     End Sub
     Friend WithEvents btnCancela As System.Windows.Forms.Button
-    Friend WithEvents btnAcepta As System.Windows.Forms.Button
+    Friend WithEvents btnPantalla As System.Windows.Forms.Button
     Friend WithEvents txthastafecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtDesdeFecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents CustomLabel2 As Administracion.CustomLabel
     Friend WithEvents CustomLabel1 As Administracion.CustomLabel
-    Friend WithEvents opcImpesora As System.Windows.Forms.RadioButton
-    Friend WithEvents opcPantalla As System.Windows.Forms.RadioButton
     Friend WithEvents CustomLabel3 As Administracion.CustomLabel
     Friend WithEvents txtCuit As System.Windows.Forms.TextBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
@@ -246,4 +234,5 @@ Partial Class ListadoValoresEnCarteraCuit
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents btnImprimir As System.Windows.Forms.Button
 End Class

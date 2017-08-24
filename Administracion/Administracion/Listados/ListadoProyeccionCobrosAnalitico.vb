@@ -8,8 +8,6 @@ Public Class ListadoProyeccionCobrosAnalitico
         txtDesdeProveedor.Text = ""
         txtHastaProveedor.Text = ""
         txtFechaEmision.Text = "  /  /    "
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
 
     End Sub
 
@@ -98,7 +96,12 @@ Public Class ListadoProyeccionCobrosAnalitico
         mostrarProveedor(lstAyuda.SelectedValue)
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
+
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
 
 
@@ -210,12 +213,16 @@ Public Class ListadoProyeccionCobrosAnalitico
 
         Dim viewer As New ReportViewer("Listado de Proyeccion de Corriente de Proveedres Analitico", Globals.reportPathWithName("wProyprvanaliticonet.rpt"), varFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+        With viewer
 
+            Select Case TipoImpresion
+                Case Reporte.Pantalla
+                    .ShowDialog()
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+            End Select
+
+        End With
     End Sub
 
     Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeProveedor.MouseDoubleClick
@@ -280,6 +287,11 @@ Public Class ListadoProyeccionCobrosAnalitico
         End If
     End Sub
 
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
 
-
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
+    End Sub
 End Class
