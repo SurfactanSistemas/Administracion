@@ -8,9 +8,6 @@ Public Class ListadoDeudaPyme
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
-
     End Sub
 
 
@@ -49,10 +46,12 @@ Public Class ListadoDeudaPyme
         MenuPrincipal.Show()
     End Sub
 
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
 
-
-
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         Dim varDesde, varHasta As String
         Dim varUno, varDos, varTres As String
@@ -70,11 +69,23 @@ Public Class ListadoDeudaPyme
 
         Dim viewer As New ReportViewer("Listado de Deuda Pyme Nacion", Globals.reportPathWithName("ListaPymenet.rpt"), varFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+        With viewer
 
+            Select Case TipoImpresion
+                Case Reporte.Pantalla
+                    .ShowDialog()
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+            End Select
+
+        End With
+    End Sub
+
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
     End Sub
 End Class

@@ -29,9 +29,8 @@ Public Class ReportViewer
 
     Private Sub ReportViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Text = nombre
+
         CrystalReportViewer1.SelectionFormula = formula
-
-
 
         'reporte.SetDatabaseLogon("usuarioadmin", "usuarioadmin", "(LOCAL)\SQLEXPRESS", "Surfactan_II")
         'For Each tabla As Table In reporte.Database.Tables

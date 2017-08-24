@@ -11,9 +11,6 @@ Public Class ListadoDepositos
         txtDesdeBanco.Text = "0"
         txtHastaBanco.Text = "9999"
 
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
-
     End Sub
 
 
@@ -121,9 +118,12 @@ Public Class ListadoDepositos
         REM txtDesdeProveedor.Text = lstAyuda.SelectedValue.id
     End Sub
 
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
-
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
         Dim txtDesde As String
         Dim txtHasta As String
         Dim txtUno As String
@@ -136,16 +136,22 @@ Public Class ListadoDepositos
 
         txtUno = "{Depositos.Banco} in " + txtDesdeBanco.Text + " to " + txtHastaBanco.Text
         txtDos = " and {Depositos.Fechaord} in " + x + txtDesde + x + " to " + x + txtHasta + x
-        txtFormula = txtUno + txtdos
+        txtFormula = txtUno + txtDos
 
         Dim viewer As New ReportViewer("Listado de Depositos", Globals.reportPathWithName("WDepositosnet.rpt"), txtFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+        With viewer
+
+            Select Case TipoImpresion
+                Case Reporte.Pantalla
+                    .ShowDialog()
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+            End Select
+
+        End With
     End Sub
+
 
     Private Sub txtDesdeBanco_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeBanco.MouseDoubleClick
         btnConsulta.PerformClick()
@@ -209,4 +215,11 @@ Public Class ListadoDepositos
         End If
     End Sub
 
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
+    End Sub
 End Class

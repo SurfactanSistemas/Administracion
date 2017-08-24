@@ -36,7 +36,6 @@ Partial Class RubrosProveedorABM
         Me.btnPrimerRegistro = New System.Windows.Forms.Button()
         Me.btnUltimoRegistro = New System.Windows.Forms.Button()
         Me.btnAnteriorRegistro = New System.Windows.Forms.Button()
-        Me.btnListado = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnConsulta = New System.Windows.Forms.Button()
@@ -154,7 +153,7 @@ Partial Class RubrosProveedorABM
         Me.GroupBox1.Controls.Add(Me.btnUltimoRegistro)
         Me.GroupBox1.Controls.Add(Me.btnAnteriorRegistro)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Location = New System.Drawing.Point(358, 135)
+        Me.GroupBox1.Location = New System.Drawing.Point(360, 132)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(209, 80)
         Me.GroupBox1.TabIndex = 39
@@ -237,25 +236,6 @@ Partial Class RubrosProveedorABM
         Me.ToolTip1.SetToolTip(Me.btnAnteriorRegistro, "Anterior Registro")
         Me.btnAnteriorRegistro.UseVisualStyleBackColor = True
         '
-        'btnListado
-        '
-        Me.btnListado.BackgroundImage = Global.Administracion.My.Resources.Resources.Informe
-        Me.btnListado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnListado.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnListado.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnListado.FlatAppearance.BorderSize = 0
-        Me.btnListado.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnListado.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnListado.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnListado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnListado.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnListado.Location = New System.Drawing.Point(244, 126)
-        Me.btnListado.Name = "btnListado"
-        Me.btnListado.Size = New System.Drawing.Size(105, 42)
-        Me.btnListado.TabIndex = 37
-        Me.ToolTip1.SetToolTip(Me.btnListado, "Listado")
-        Me.btnListado.UseVisualStyleBackColor = True
-        '
         'btnLimpiar
         '
         Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
@@ -268,9 +248,9 @@ Partial Class RubrosProveedorABM
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.Location = New System.Drawing.Point(21, 181)
+        Me.btnLimpiar.Location = New System.Drawing.Point(80, 140)
         Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(105, 42)
+        Me.btnLimpiar.Size = New System.Drawing.Size(58, 42)
         Me.btnLimpiar.TabIndex = 38
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
@@ -287,9 +267,9 @@ Partial Class RubrosProveedorABM
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.Location = New System.Drawing.Point(244, 181)
+        Me.btnCerrar.Location = New System.Drawing.Point(290, 140)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(105, 42)
+        Me.btnCerrar.Size = New System.Drawing.Size(58, 42)
         Me.btnCerrar.TabIndex = 36
         Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
         Me.btnCerrar.UseVisualStyleBackColor = True
@@ -306,9 +286,9 @@ Partial Class RubrosProveedorABM
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.Location = New System.Drawing.Point(132, 181)
+        Me.btnConsulta.Location = New System.Drawing.Point(220, 140)
         Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(105, 42)
+        Me.btnConsulta.Size = New System.Drawing.Size(58, 42)
         Me.btnConsulta.TabIndex = 34
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Rubros de Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
@@ -325,9 +305,9 @@ Partial Class RubrosProveedorABM
         Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEliminar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.Location = New System.Drawing.Point(133, 126)
+        Me.btnEliminar.Location = New System.Drawing.Point(150, 140)
         Me.btnEliminar.Name = "btnEliminar"
-        Me.btnEliminar.Size = New System.Drawing.Size(105, 42)
+        Me.btnEliminar.Size = New System.Drawing.Size(58, 42)
         Me.btnEliminar.TabIndex = 35
         Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar Rubro")
         Me.btnEliminar.UseVisualStyleBackColor = True
@@ -344,9 +324,9 @@ Partial Class RubrosProveedorABM
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.Location = New System.Drawing.Point(22, 126)
+        Me.btnAgregar.Location = New System.Drawing.Point(10, 140)
         Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(105, 42)
+        Me.btnAgregar.Size = New System.Drawing.Size(58, 42)
         Me.btnAgregar.TabIndex = 33
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
@@ -382,7 +362,6 @@ Partial Class RubrosProveedorABM
         Me.ClientSize = New System.Drawing.Size(579, 306)
         Me.Controls.Add(Me.txtFiltrar)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.btnListado)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnConsulta)
@@ -419,7 +398,6 @@ Partial Class RubrosProveedorABM
     Friend WithEvents btnPrimerRegistro As System.Windows.Forms.Button
     Friend WithEvents btnUltimoRegistro As System.Windows.Forms.Button
     Friend WithEvents btnAnteriorRegistro As System.Windows.Forms.Button
-    Friend WithEvents btnListado As System.Windows.Forms.Button
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents btnConsulta As System.Windows.Forms.Button

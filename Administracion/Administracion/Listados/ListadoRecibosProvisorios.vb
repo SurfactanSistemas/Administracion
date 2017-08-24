@@ -8,8 +8,6 @@ Public Class ListadoRecibosProvisorios
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
 
     End Sub
 
@@ -48,7 +46,12 @@ Public Class ListadoRecibosProvisorios
         MenuPrincipal.Show()
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
+
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         Dim txtDesde As String
         Dim txtHasta As String
@@ -67,13 +70,23 @@ Public Class ListadoRecibosProvisorios
 
         Dim viewer As New ReportViewer("Listado de Recibos Provisorios", Globals.reportPathWithName("wListReciProvinet.rpt"), txtFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+        With viewer
 
+            Select Case TipoImpresion
+                Case Reporte.Pantalla
+                    .ShowDialog()
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+            End Select
 
+        End With
+    End Sub
 
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
     End Sub
 End Class

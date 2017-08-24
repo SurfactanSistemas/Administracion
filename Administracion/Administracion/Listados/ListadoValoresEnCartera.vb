@@ -13,8 +13,6 @@ Public Class ListadoValoresEnCartera
         txtHastaFecha.Text = "  /  /    "
         txtCliente.Text = ""
         txtRazonSocial.Text = ""
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
     End Sub
 
     Private Sub txtfecha1_KeyPress(ByVal sender As Object, _
@@ -158,7 +156,12 @@ Public Class ListadoValoresEnCartera
         MenuPrincipal.Show()
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
+
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         Dim varUno As String
 
@@ -262,19 +265,18 @@ Public Class ListadoValoresEnCartera
 
         Dim viewer As New ReportViewer("Listado de Valores en Cartera", Globals.reportPathWithName("wvalcarnet.rpt"), varFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+        With viewer
 
+            Select Case TipoImpresion
+                Case Reporte.Pantalla
+                    .ShowDialog()
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+            End Select
 
-
-
-
-
-
+        End With
     End Sub
+
 
     Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
         btnConsulta.PerformClick()
@@ -333,4 +335,11 @@ Public Class ListadoValoresEnCartera
 
 
 
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
+    End Sub
 End Class

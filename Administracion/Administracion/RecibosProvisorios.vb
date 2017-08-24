@@ -450,7 +450,7 @@ Public Class RecibosProvisorios
         Next
         validador.validate(Me)
         validador.alsoValidate(Val(_NormalizarNumero(lblTotal.Text)) = Val(_NormalizarNumero(txtTotal.Text)), "La suma de los importes de la tabla no coincide con lo informado en el total")
-        validador.alsoValidate(DAORecibo.existeRecibo(txtRecibo.Text), "Ya existe un recibo definitivo con ese número")
+        validador.alsoValidate(DAORecibo.existeReciboProvisorio(txtRecibo.Text), "Ya existe un recibo definitivo con ese número")
         validador.alsoValidate(DAORecibo.permiteActualizacionProvisorio(txtRecibo.Text), "Algunos de los cheques del recibo provisorio ya se encuentra procesado por lo que no se puede actualizar el mismo.")
 
         If validador.flush Then
@@ -875,6 +875,15 @@ Public Class RecibosProvisorios
 
             End Select
 
+            If iCol = 0 Then
+
+                ' Por compatibilidad con lectora de Domingo que no envia enter al leer dato de cheque.
+                If Len(gridRecibos.Rows(iRow).Cells(iCol).Value) = 30 Then
+                    SendKeys.Send("{ENTER}")
+                End If
+
+            End If
+
             If msg.WParam.ToInt32() = Keys.Enter Then
 
                 Dim valor = gridRecibos.Rows(iRow).Cells(iCol).Value
@@ -973,7 +982,9 @@ Public Class RecibosProvisorios
 
                     With gridRecibos
                         Select Case iCol
-                            Case 0, 1, 2, 3
+                            Case 0
+                                .CurrentCell = .Rows(iRow).Cells(iCol)
+                            Case 1, 2, 3
                                 .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                             Case Else
                         End Select

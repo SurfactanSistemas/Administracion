@@ -44,7 +44,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha1_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha1.KeyPress
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -58,7 +58,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha2_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha2.KeyPress
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -72,7 +72,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha3_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha3.KeyPress
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -86,7 +86,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtfecha4_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFecha4.KeyPress
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -103,12 +103,12 @@ Public Class ListadoProyeccionCobros
 
 
 
-    Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
         Me.Close()
         MenuPrincipal.Show()
     End Sub
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
         Me.Size = New System.Drawing.Size(645, 580)
 
@@ -140,7 +140,7 @@ Public Class ListadoProyeccionCobros
         txtDesdeProveedor.Focus()
     End Sub
 
-    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
         mostrarProveedor(lstAyuda.SelectedValue)
     End Sub
 
@@ -232,7 +232,7 @@ Public Class ListadoProyeccionCobros
 
     End Sub
 
-    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeProveedor.MouseDoubleClick
         btnConsulta.PerformClick()
     End Sub
 
@@ -321,11 +321,12 @@ Public Class ListadoProyeccionCobros
 
     End Sub
 
-    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
         _Imprimir(Reporte.Pantalla)
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         _Imprimir(Reporte.Imprimir)
     End Sub
+
 End Class

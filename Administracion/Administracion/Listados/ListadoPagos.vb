@@ -8,12 +8,7 @@ Public Class ListadoPagos
 
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
-
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
     End Sub
-
-
 
     Private Sub txtdesdefecha_KeyPress(ByVal sender As Object, _
                 ByVal e As System.Windows.Forms.KeyPressEventArgs) _
@@ -50,9 +45,12 @@ Public Class ListadoPagos
         MenuPrincipal.Show()
     End Sub
 
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
-
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
         Dim txtDesde As String
         Dim txtHasta As String
         Dim txtUno As String
@@ -69,10 +67,23 @@ Public Class ListadoPagos
 
         Dim viewer As New ReportViewer("Listado de Ordenes de Pago", Globals.reportPathWithName("wListaOrdenesnet.rpt"), txtFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+        With viewer
+
+            Select Case TipoImpresion
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+                Case Reporte.Pantalla
+                    .ShowDialog()
+            End Select
+
+        End With
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
+    End Sub
+
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
     End Sub
 End Class

@@ -51,21 +51,21 @@ Partial Class ListadoAsientoResumen
         '
         'txthastafecha
         '
-        Me.txthastafecha.Location = New System.Drawing.Point(402, 42)
+        Me.txthastafecha.Location = New System.Drawing.Point(359, 42)
         Me.txthastafecha.Mask = "##/##/####"
         Me.txthastafecha.Name = "txthastafecha"
         Me.txthastafecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txthastafecha.Size = New System.Drawing.Size(146, 20)
+        Me.txthastafecha.Size = New System.Drawing.Size(95, 20)
         Me.txthastafecha.TabIndex = 1
         Me.txthastafecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDesdeFecha
         '
-        Me.txtDesdeFecha.Location = New System.Drawing.Point(153, 42)
+        Me.txtDesdeFecha.Location = New System.Drawing.Point(159, 43)
         Me.txtDesdeFecha.Mask = "##/##/####"
         Me.txtDesdeFecha.Name = "txtDesdeFecha"
         Me.txtDesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtDesdeFecha.Size = New System.Drawing.Size(146, 20)
+        Me.txtDesdeFecha.Size = New System.Drawing.Size(89, 20)
         Me.txtDesdeFecha.TabIndex = 0
         Me.txtDesdeFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -80,7 +80,7 @@ Partial Class ListadoAsientoResumen
         Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancela.Location = New System.Drawing.Point(96, 269)
+        Me.btnCancela.Location = New System.Drawing.Point(51, 269)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(88, 37)
         Me.btnCancela.TabIndex = 35
@@ -101,7 +101,7 @@ Partial Class ListadoAsientoResumen
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(205, 269)
+        Me.btnConsulta.Location = New System.Drawing.Point(160, 269)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(83, 37)
         Me.btnConsulta.TabIndex = 38
@@ -114,7 +114,7 @@ Partial Class ListadoAsientoResumen
         Me.txtAyuda.Empty = True
         Me.txtAyuda.EnterIndex = -1
         Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(97, 334)
+        Me.txtAyuda.Location = New System.Drawing.Point(48, 334)
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
         Me.txtAyuda.TabIndex = 37
@@ -127,7 +127,7 @@ Partial Class ListadoAsientoResumen
         Me.lstAyuda.EnterIndex = -1
         Me.lstAyuda.FormattingEnabled = True
         Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(97, 360)
+        Me.lstAyuda.Location = New System.Drawing.Point(48, 360)
         Me.lstAyuda.Name = "lstAyuda"
         Me.lstAyuda.Size = New System.Drawing.Size(417, 147)
         Me.lstAyuda.TabIndex = 36
@@ -140,7 +140,7 @@ Partial Class ListadoAsientoResumen
         Me.TipoListado.EnterIndex = -1
         Me.TipoListado.FormattingEnabled = True
         Me.TipoListado.LabelAssociationKey = -1
-        Me.TipoListado.Location = New System.Drawing.Point(271, 139)
+        Me.TipoListado.Location = New System.Drawing.Point(243, 139)
         Me.TipoListado.Name = "TipoListado"
         Me.TipoListado.Size = New System.Drawing.Size(146, 21)
         Me.TipoListado.TabIndex = 4
@@ -152,10 +152,10 @@ Partial Class ListadoAsientoResumen
         Me.txtHastaCuenta.Empty = True
         Me.txtHastaCuenta.EnterIndex = -1
         Me.txtHastaCuenta.LabelAssociationKey = -1
-        Me.txtHastaCuenta.Location = New System.Drawing.Point(402, 95)
+        Me.txtHastaCuenta.Location = New System.Drawing.Point(359, 95)
         Me.txtHastaCuenta.MaxLength = 10
         Me.txtHastaCuenta.Name = "txtHastaCuenta"
-        Me.txtHastaCuenta.Size = New System.Drawing.Size(146, 20)
+        Me.txtHastaCuenta.Size = New System.Drawing.Size(95, 20)
         Me.txtHastaCuenta.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.txtHastaCuenta, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtHastaCuenta.Validator = Administracion.ValidatorType.None
@@ -166,10 +166,10 @@ Partial Class ListadoAsientoResumen
         Me.txtDesdeCuenta.Empty = True
         Me.txtDesdeCuenta.EnterIndex = -1
         Me.txtDesdeCuenta.LabelAssociationKey = -1
-        Me.txtDesdeCuenta.Location = New System.Drawing.Point(153, 95)
+        Me.txtDesdeCuenta.Location = New System.Drawing.Point(159, 96)
         Me.txtDesdeCuenta.MaxLength = 10
         Me.txtDesdeCuenta.Name = "txtDesdeCuenta"
-        Me.txtDesdeCuenta.Size = New System.Drawing.Size(146, 20)
+        Me.txtDesdeCuenta.Size = New System.Drawing.Size(89, 20)
         Me.txtDesdeCuenta.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.txtDesdeCuenta, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtDesdeCuenta.Validator = Administracion.ValidatorType.None
@@ -181,7 +181,7 @@ Partial Class ListadoAsientoResumen
         Me.CustomLabel5.ControlAssociationKey = -1
         Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(185, 140)
+        Me.CustomLabel5.Location = New System.Drawing.Point(157, 140)
         Me.CustomLabel5.Name = "CustomLabel5"
         Me.CustomLabel5.Size = New System.Drawing.Size(82, 18)
         Me.CustomLabel5.TabIndex = 26
@@ -194,7 +194,7 @@ Partial Class ListadoAsientoResumen
         Me.CustomLabel4.ControlAssociationKey = -1
         Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(310, 96)
+        Me.CustomLabel4.Location = New System.Drawing.Point(267, 96)
         Me.CustomLabel4.Name = "CustomLabel4"
         Me.CustomLabel4.Size = New System.Drawing.Size(89, 18)
         Me.CustomLabel4.TabIndex = 25
@@ -207,7 +207,7 @@ Partial Class ListadoAsientoResumen
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(55, 96)
+        Me.CustomLabel3.Location = New System.Drawing.Point(59, 96)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(94, 18)
         Me.CustomLabel3.TabIndex = 24
@@ -220,7 +220,7 @@ Partial Class ListadoAsientoResumen
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(318, 43)
+        Me.CustomLabel2.Location = New System.Drawing.Point(275, 43)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(81, 18)
         Me.CustomLabel2.TabIndex = 23
@@ -233,7 +233,7 @@ Partial Class ListadoAsientoResumen
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(63, 43)
+        Me.CustomLabel1.Location = New System.Drawing.Point(67, 43)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(86, 18)
         Me.CustomLabel1.TabIndex = 22
@@ -246,7 +246,7 @@ Partial Class ListadoAsientoResumen
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(606, 50)
+        Me.Panel1.Size = New System.Drawing.Size(512, 50)
         Me.Panel1.TabIndex = 39
         '
         'Label2
@@ -254,7 +254,7 @@ Partial Class ListadoAsientoResumen
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(422, 10)
+        Me.Label2.Location = New System.Drawing.Point(328, 10)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -286,7 +286,7 @@ Partial Class ListadoAsientoResumen
         Me.Panel2.Controls.Add(Me.txtHastaCuenta)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(603, 199)
+        Me.Panel2.Size = New System.Drawing.Size(512, 199)
         Me.Panel2.TabIndex = 40
         '
         'btnPantalla
@@ -303,7 +303,7 @@ Partial Class ListadoAsientoResumen
         Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPantalla.LabelAssociationKey = -1
-        Me.btnPantalla.Location = New System.Drawing.Point(314, 269)
+        Me.btnPantalla.Location = New System.Drawing.Point(269, 269)
         Me.btnPantalla.Name = "btnPantalla"
         Me.btnPantalla.Size = New System.Drawing.Size(83, 37)
         Me.btnPantalla.TabIndex = 38
@@ -324,7 +324,7 @@ Partial Class ListadoAsientoResumen
         Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(424, 269)
+        Me.btnImprimir.Location = New System.Drawing.Point(379, 269)
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(83, 37)
         Me.btnImprimir.TabIndex = 38
@@ -337,7 +337,7 @@ Partial Class ListadoAsientoResumen
         Me.lstFiltrada.EnterIndex = -1
         Me.lstFiltrada.FormattingEnabled = True
         Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(97, 360)
+        Me.lstFiltrada.Location = New System.Drawing.Point(48, 360)
         Me.lstFiltrada.Name = "lstFiltrada"
         Me.lstFiltrada.Size = New System.Drawing.Size(417, 147)
         Me.lstFiltrada.TabIndex = 41
@@ -347,7 +347,7 @@ Partial Class ListadoAsientoResumen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(603, 318)
+        Me.ClientSize = New System.Drawing.Size(513, 320)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnImprimir)

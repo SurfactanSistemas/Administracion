@@ -210,14 +210,14 @@ Partial Class MenuPrincipal
         'CargaDeInteresesToolStripMenuItem
         '
         Me.CargaDeInteresesToolStripMenuItem.Name = "CargaDeInteresesToolStripMenuItem"
-        Me.CargaDeInteresesToolStripMenuItem.Size = New System.Drawing.Size(282, 22)
+        Me.CargaDeInteresesToolStripMenuItem.Size = New System.Drawing.Size(275, 22)
         Me.CargaDeInteresesToolStripMenuItem.Text = "Carga de Intereses"
         '
         'ModificaciuonDeNterfesesYaCargadosToolStripMenuItem
         '
         Me.ModificaciuonDeNterfesesYaCargadosToolStripMenuItem.Name = "ModificaciuonDeNterfesesYaCargadosToolStripMenuItem"
-        Me.ModificaciuonDeNterfesesYaCargadosToolStripMenuItem.Size = New System.Drawing.Size(282, 22)
-        Me.ModificaciuonDeNterfesesYaCargadosToolStripMenuItem.Text = "Modificaciuon de Intereses ya cargados"
+        Me.ModificaciuonDeNterfesesYaCargadosToolStripMenuItem.Size = New System.Drawing.Size(275, 22)
+        Me.ModificaciuonDeNterfesesYaCargadosToolStripMenuItem.Text = "Modificación de Intereses ya cargados"
         '
         'SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem
         '

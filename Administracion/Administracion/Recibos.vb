@@ -2728,6 +2728,52 @@ Public Class Recibos
         End If
     End Sub
 
+
+    Private Function _EsNumero(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
+    End Function
+
+    Private Function _EsControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        Select Case keycode
+            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
+                valido = True
+            Case Else
+                valido = False
+        End Select
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
+    End Function
+
+    Private Function _EsNumeroOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimalOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
 
         If gridFormasPago2.Focused Or gridFormasPago2.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
@@ -2735,6 +2781,29 @@ Public Class Recibos
 
             Dim iCol = gridFormasPago2.CurrentCell.ColumnIndex
             Dim iRow = gridFormasPago2.CurrentCell.RowIndex
+
+            ' Limitamos los caracteres permitidos para cada una de las columnas.
+            Select Case iCol
+                Case 1
+                    If Not _EsNumeroOControl(keyData) Then
+                        Return True
+                    End If
+                Case 4
+                    If Not _EsDecimalOControl(keyData) Then
+                        Return True
+                    End If
+                Case Else
+
+            End Select
+
+            If iCol = 0 Then
+
+                ' Por compatibilidad con lectora de Domingo que no envia enter al leer dato de cheque.
+                If Len(gridFormasPago2.Rows(iRow).Cells(iCol).Value) = 30 Then
+                    SendKeys.Send("{ENTER}")
+                End If
+
+            End If
 
             If msg.WParam.ToInt32() = Keys.Enter Then
 

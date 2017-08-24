@@ -159,7 +159,12 @@ Public Class ListadoMovimientosBancos
         Return saldoinicial
     End Function
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
+
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
         Dim dr As SqlDataReader
@@ -410,7 +415,7 @@ Public Class ListadoMovimientosBancos
 
                 End If
             End With
-            
+
 
         Catch ex As Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
@@ -552,11 +557,16 @@ Public Class ListadoMovimientosBancos
 
         Dim viewer As New ReportViewer("Listado de Movimientos Bancarios", Globals.reportPathWithName("wMovbannet.rpt"), varFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+        With viewer
+
+            Select Case TipoImpresion
+                Case Reporte.Pantalla
+                    .ShowDialog()
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+            End Select
+
+        End With
 
     End Sub
 
@@ -624,9 +634,6 @@ Public Class ListadoMovimientosBancos
 
         txtAyuda.Text = ""
 
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
-
         txtDesdeFecha.Focus()
     End Sub
 
@@ -646,5 +653,13 @@ Public Class ListadoMovimientosBancos
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
     End Sub
 End Class

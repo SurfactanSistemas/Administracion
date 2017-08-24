@@ -306,4 +306,11 @@ Public Class CuentaContableABM
             e.Handled = True
         End If
     End Sub
+
+    Private Sub btnListado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnListado.Click
+        With VistaPrevia
+            .Reporte = New ListadoCuentasContables
+            .Mostrar()
+        End With
+    End Sub
 End Class

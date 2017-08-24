@@ -387,6 +387,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         If GRilla.Rows.Count > 0 And Not IsNothing(GRilla.Rows(0).Cells(0)) Then
             Dim crdoc As New ProveedoresSelectivoPreparacionListado
 
+            'crdoc.DataSourceConnections.Item(0).SetConnection("(LOCAL)\LOCALSQLSERVER", "SurfactanSA", True)
+            'crdoc.DataSourceConnections.Item(0).SetConnection("193.168.0.7", "SurfactanSA", True)
             crdoc.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
 
             '_Imprimir(crdoc)
