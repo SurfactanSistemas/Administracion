@@ -252,4 +252,7 @@
         abrir(New ListadoCuentaCorrienteProveedoresSelectivoPreparacion)
     End Sub
 
+    Private Sub SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem.Click
+
+    End Sub
 End Class

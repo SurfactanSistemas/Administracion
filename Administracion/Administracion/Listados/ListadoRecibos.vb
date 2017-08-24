@@ -1,5 +1,6 @@
 ﻿Imports ClasesCompartidas
 Imports System.IO
+Imports System.Data.SqlClient
 
 Public Class ListadoRecibos
 
@@ -8,15 +9,11 @@ Public Class ListadoRecibos
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
-
     End Sub
 
-
     Private Sub txtdesdefecha_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                Handles txtDesdeFecha.KeyPress
+                ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesdeFecha.KeyPress
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             If ValidaFecha(txtDesdeFecha.Text) = "S" Then
@@ -30,8 +27,8 @@ Public Class ListadoRecibos
     End Sub
 
     Private Sub txthastafecha_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                Handles txthastafecha.KeyPress
+                ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txthastafecha.KeyPress
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             If ValidaFecha(txthastafecha.Text) = "S" Then
@@ -49,27 +46,71 @@ Public Class ListadoRecibos
         MenuPrincipal.Show()
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
 
-        Dim txtDesde As String
-        Dim txtHasta As String
-        Dim txtUno As String
-        Dim txtFormula As String
-        Dim x As Char = Chr(34)
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
-        txtDesde = ordenaFecha(txtDesdeFecha.Text)
-        txtHasta = ordenaFecha(txthastafecha.Text)
+        ' Reseteamos los datos de los recibos.
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("ModificaReciboImpolista0")
 
-        txtUno = "{Recibos.Fechaord} in " + x + txtDesde + x + " to " + x + txtHasta + x
-        txtFormula = txtUno
+        SQLConnector.conexionSql(cn, cm)
 
-        Dim viewer As New ReportViewer("Listado de Recibos", Globals.reportPathWithName("wListRecinet.rpt"), txtFormula)
+        Try
+            cm.CommandType = CommandType.StoredProcedure
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+            cm.ExecuteNonQuery()
 
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        Finally
+
+            cn.Close()
+
+        End Try
+
+        ' Actualizamos los datos antes de generar el informe.
+        Try
+            cn.Open()
+
+            cm.CommandText = "ModificaReciboImpolista"
+
+            cm.CommandType = CommandType.StoredProcedure
+
+            With cm.Parameters
+                .AddWithValue("@Desde", Proceso.ordenaFecha(txtDesdeFecha.Text))
+                .AddWithValue("@Hasta", Proceso.ordenaFecha(txthastafecha.Text))
+            End With
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+        End Try
+
+        With VistaPrevia
+            .Reporte = New WListadoRecibos
+            .CrystalReportViewer1.SelectionFormula = "{Recibos.Fechaord} >= '" & Proceso.ordenaFecha(txtDesdeFecha.Text) & "' AND {Recibos.Fechaord} <= '" & Proceso.ordenaFecha(txthastafecha.Text) & "'"
+            .Mostrar()
+        End With
+
+    End Sub
+
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
+
+    Private Sub ListadoRecibos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesdeFecha.Focus()
     End Sub
 End Class

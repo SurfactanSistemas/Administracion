@@ -17,9 +17,6 @@ Public Class ListadoIvaCompras
 
         TipoListado.SelectedIndex = 0
 
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
-
     End Sub
 
     Private Sub txtdesdefecha_KeyPress(ByVal sender As Object, _
@@ -57,9 +54,12 @@ Public Class ListadoIvaCompras
         MenuPrincipal.Show()
     End Sub
 
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
 
-
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         Dim txtUno As String
 
@@ -159,11 +159,23 @@ Public Class ListadoIvaCompras
 
         Dim viewer As New ReportViewer("Listado de Iva Compras", Globals.reportPathWithName("wIvaCompNet.rpt"), txtFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
+        With viewer
 
+            Select Case TipoImpresion
+                Case Reporte.Pantalla
+                    .ShowDialog()
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+            End Select
+
+        End With
+    End Sub
+
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
     End Sub
 End Class
