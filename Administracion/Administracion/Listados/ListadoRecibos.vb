@@ -101,7 +101,17 @@ Public Class ListadoRecibos
         With VistaPrevia
             .Reporte = New WListadoRecibos
             .CrystalReportViewer1.SelectionFormula = "{Recibos.Fechaord} >= '" & Proceso.ordenaFecha(txtDesdeFecha.Text) & "' AND {Recibos.Fechaord} <= '" & Proceso.ordenaFecha(txthastafecha.Text) & "'"
-            .Mostrar()
+
+            Select Case TipoImpresion
+
+                Case Reporte.Imprimir
+                    .Imprimir()
+                Case Reporte.Pantalla
+                    .Mostrar()
+                Case Else
+
+            End Select
+
         End With
 
     End Sub
@@ -112,5 +122,9 @@ Public Class ListadoRecibos
 
     Private Sub ListadoRecibos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtDesdeFecha.Focus()
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
     End Sub
 End Class
