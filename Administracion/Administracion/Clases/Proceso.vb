@@ -282,25 +282,25 @@
         varTasa1(3) = 0.18
         varTasa1(4) = 0.22
         varTasa1(5) = 0.26
-        varTasa1(6) = 0.26
+        varTasa1(6) = 0.28
 
         varRetencion = 0
 
         If varTipoprv = 1 Or varTipoprv = 2 Or varTipoprv = 3 Or varTipoprv = 6 Or varTipoprv = 7 Then
 
-            varBase = varAcumulaNeto
+            varBase = varAcuNeto
 
             Select Case varTipoprv
                 Case 1
-                    varMinimo = 12000
+                    varMinimo = 100000
                 Case 2
-                    varMinimo = 1200
+                    varMinimo = 7500
                 Case 3
-                    varMinimo = 1200
-                Case 6
                     varMinimo = 5000
+                Case 6
+                    varMinimo = 30000
                 Case 7
-                    varMinimo = 6500
+                    varMinimo = 30000
                 Case Else
             End Select
 

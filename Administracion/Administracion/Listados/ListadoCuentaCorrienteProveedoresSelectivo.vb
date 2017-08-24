@@ -8,10 +8,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Dim varTotal, varSaldo, varTotalUs, varSaldoUs, varSaldoOriginal, varDife, varParidad, varParidadTotal As Double
     Dim varPago As Integer
     Dim _Claves As New List(Of Object)
+    Dim XFecha As String
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtDesdeProveedor.Text = ""
-        txtFechaEmision.Text = "  /  /    "
+        txtFechaEmision.Text = Date.Now.ToString("dd/MM/yyyy")
         varRenglon = 0
         _CargarProveedoresPreCargados()
         _Claves.Clear()
@@ -117,7 +118,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             e.Handled = True
             If ValidaFecha(txtFechaEmision.Text) = "S" Then
 
-                Dim CampoTipoCambio As TipoDeCambio = DAOTipoCambio.buscarTipoCambioPorFecha(txtFechaEmision.Text)
+                Dim CampoTipoCambio As TipoDeCambio = DAOTipoCambio.buscarTipoCambioPorFechaPago(txtFechaEmision.Text)
                 If IsNothing(CampoTipoCambio) Then
                     MsgBox("Paridad Inexistente")
                     txtFechaEmision.Focus()
@@ -250,7 +251,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim varOrdFecha As String
         Dim varCiclo As Integer
         Dim varPorce As Double
-        Dim varAcumulado As Double
+        Dim varAcumulado, varAcuNeto, varAcuRetenido, varAcuIva, varAcuAnticipo, varAcuBruto As Double
         Dim varProveedor, varLetra As String
         Dim varNeto, varIva, varIva5, varIva27, varIva105, varIb, varExento, varTotalTrabajo As Double
         Dim varRetIb, varRetIva, varRetGan, varAcumulaIb
@@ -268,6 +269,15 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         varEmpresa = 1
 
         varOrdFecha = ordenaFecha(txtFechaEmision.Text)
+
+        Dim CampoTipoCambio As TipoDeCambio = DAOTipoCambio.buscarTipoCambioPorFechaPago(txtFechaEmision.Text)
+        If IsNothing(CampoTipoCambio) Then
+            MsgBox("Paridad Inexistente")
+        Else
+            varParidadTotal = CampoTipoCambio.paridad
+        End If
+
+
 
         For varCiclo = 0 To varRenglon
 
@@ -402,15 +412,33 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     End If
 
 
-                    Stop
+                    REM Stop
 
                     '
                     'calculo de rtencion de Ganancias
                     '
-                    varOrdFecha = leederecha(ordenaFecha(varFecha), 6)
-                    Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(varProveedor, varOrdFecha)
 
-                    varRetGan = CaculoRetencionGanancia(varTipoPrv, varAcumulaNeto, CampoAcumulado.neto, CampoAcumulado.retenido, CampoAcumulado.anticipo, CampoAcumulado.bruto, CampoAcumulado.iva)
+                    varAcuNeto = varAcumulaNeto
+                    varAcuRetenido = 
+                    varAcuAnticipo = 0
+                    varAcuBruto = 0
+                    varAcuIva = 0
+
+                    varOrdFecha = Mid(ordenaFecha(txtFechaEmision.Text), 3, 4)
+                    Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(varProveedor, varOrdFecha)
+                    If IsNothing(CampoAcumulado) Then
+                    Else
+                        varAcuNeto = CampoAcumulado.neto
+                        varAcuRetenido = CampoAcumulado.retenido
+                        varAcuAnticipo = CampoAcumulado.anticipo
+                        varAcuBruto = CampoAcumulado.bruto
+                        varAcuIva = CampoAcumulado.iva
+                    End If
+
+
+
+
+                    varRetGan = CaculoRetencionGanancia(varTipoPrv, varAcumulaNeto, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
 
 
                     '

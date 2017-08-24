@@ -38,4 +38,21 @@ Public Class DAOTipoCambio
             Return Nothing
         End Try
     End Function
+
+
+    Public Shared Function buscarTipoCambioPorFechaPago(ByVal fecha As String)
+        Try
+            Dim tabla As DataTable
+            tabla = SQLConnector.retrieveDataTable("buscar_tipo_cambio_por_fecha_Pago", fecha)
+            If tabla.Rows.Count > 0 Then
+                Return New TipoDeCambio(tabla(0)("fecha"), tabla(0)("Cambiodivisa"))
+            Else
+                Return Nothing
+            End If
+        Catch e As Exception
+            Return Nothing
+        End Try
+    End Function
+
+
 End Class
