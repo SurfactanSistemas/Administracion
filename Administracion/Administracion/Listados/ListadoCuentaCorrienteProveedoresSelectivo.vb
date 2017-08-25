@@ -527,7 +527,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         If e.KeyData = Keys.Enter Then
 
             If Trim(txtDesdeProveedor.Text) = "" Then
-                _ListarProveedores()
+                btnConsulta.PerformClick()
                 Exit Sub
             End If
 
@@ -646,7 +646,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeProveedor.MouseDoubleClick
-        _ListarProveedores()
+        btnConsulta.PerformClick()
     End Sub
 
     ' Rutinas de Filtrado Dinámico.

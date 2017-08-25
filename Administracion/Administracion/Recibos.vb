@@ -2730,7 +2730,7 @@ Public Class Recibos
 
 
     Private Function _EsNumero(ByVal keycode As Integer) As Boolean
-        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 109)
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
@@ -2747,7 +2747,7 @@ Public Class Recibos
     End Function
 
     Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
-        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190 Or keycode = 109)
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
@@ -2781,6 +2781,8 @@ Public Class Recibos
 
             Dim iCol = gridFormasPago2.CurrentCell.ColumnIndex
             Dim iRow = gridFormasPago2.CurrentCell.RowIndex
+
+            Debug.Print(keyData)
 
             ' Limitamos los caracteres permitidos para cada una de las columnas.
             Select Case iCol

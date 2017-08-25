@@ -33,6 +33,12 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
+        Me.btnImprimir = New Administracion.CustomButton()
+        Me.btnPantalla = New Administracion.CustomButton()
+        Me.btnLimpiarTodo = New Administracion.CustomButton()
+        Me.CustomButton1 = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnCancela = New Administracion.CustomButton()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.txtRazon = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
@@ -40,12 +46,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
-        Me.btnImprimir = New Administracion.CustomButton()
-        Me.btnPantalla = New Administracion.CustomButton()
-        Me.btnLimpiarTodo = New Administracion.CustomButton()
-        Me.CustomButton1 = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.btnCancela = New Administracion.CustomButton()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -133,94 +133,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtDesdeProveedor.TabIndex = 49
         Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Cleanable = False
-        Me.txtAyuda.Empty = True
-        Me.txtAyuda.EnterIndex = -1
-        Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(36, 472)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(545, 20)
-        Me.txtAyuda.TabIndex = 53
-        Me.txtAyuda.Validator = Administracion.ValidatorType.None
-        Me.txtAyuda.Visible = False
-        '
-        'txtRazon
-        '
-        Me.txtRazon.BackColor = System.Drawing.Color.Silver
-        Me.txtRazon.Cleanable = False
-        Me.txtRazon.Empty = True
-        Me.txtRazon.EnterIndex = -1
-        Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(265, 88)
-        Me.txtRazon.Name = "txtRazon"
-        Me.txtRazon.Size = New System.Drawing.Size(296, 20)
-        Me.txtRazon.TabIndex = 51
-        Me.txtRazon.Validator = Administracion.ValidatorType.None
-        '
-        'CustomLabel1
-        '
-        Me.CustomLabel1.AutoSize = True
-        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(66, 90)
-        Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
-        Me.CustomLabel1.TabIndex = 50
-        Me.CustomLabel1.Text = "Proveedor"
-        '
-        'CustomLabel3
-        '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel3.ControlAssociationKey = -1
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(46, 64)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
-        Me.CustomLabel3.TabIndex = 47
-        Me.CustomLabel3.Text = "Fecha Emision"
-        '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(36, 498)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(545, 147)
-        Me.lstFiltrada.TabIndex = 62
-        Me.lstFiltrada.Visible = False
-        '
-        'lstAyuda
-        '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(36, 498)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(545, 147)
-        Me.lstAyuda.TabIndex = 54
-        Me.lstAyuda.Visible = False
-        '
-        'lstAyuda_Filtrada
-        '
-        Me.lstAyuda_Filtrada.Cleanable = False
-        Me.lstAyuda_Filtrada.EnterIndex = -1
-        Me.lstAyuda_Filtrada.FormattingEnabled = True
-        Me.lstAyuda_Filtrada.LabelAssociationKey = -1
-        Me.lstAyuda_Filtrada.Location = New System.Drawing.Point(36, 498)
-        Me.lstAyuda_Filtrada.Name = "lstAyuda_Filtrada"
-        Me.lstAyuda_Filtrada.Size = New System.Drawing.Size(545, 147)
-        Me.lstAyuda_Filtrada.TabIndex = 62
-        Me.lstAyuda_Filtrada.Visible = False
         '
         'btnImprimir
         '
@@ -342,6 +254,94 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar Ventana")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
+        'txtAyuda
+        '
+        Me.txtAyuda.Cleanable = False
+        Me.txtAyuda.Empty = True
+        Me.txtAyuda.EnterIndex = -1
+        Me.txtAyuda.LabelAssociationKey = -1
+        Me.txtAyuda.Location = New System.Drawing.Point(36, 472)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(545, 20)
+        Me.txtAyuda.TabIndex = 53
+        Me.txtAyuda.Validator = Administracion.ValidatorType.None
+        Me.txtAyuda.Visible = False
+        '
+        'txtRazon
+        '
+        Me.txtRazon.BackColor = System.Drawing.Color.Silver
+        Me.txtRazon.Cleanable = False
+        Me.txtRazon.Empty = True
+        Me.txtRazon.EnterIndex = -1
+        Me.txtRazon.LabelAssociationKey = -1
+        Me.txtRazon.Location = New System.Drawing.Point(265, 88)
+        Me.txtRazon.Name = "txtRazon"
+        Me.txtRazon.Size = New System.Drawing.Size(296, 20)
+        Me.txtRazon.TabIndex = 51
+        Me.txtRazon.Validator = Administracion.ValidatorType.None
+        '
+        'CustomLabel1
+        '
+        Me.CustomLabel1.AutoSize = True
+        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel1.ControlAssociationKey = -1
+        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel1.Location = New System.Drawing.Point(66, 90)
+        Me.CustomLabel1.Name = "CustomLabel1"
+        Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
+        Me.CustomLabel1.TabIndex = 50
+        Me.CustomLabel1.Text = "Proveedor"
+        '
+        'CustomLabel3
+        '
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel3.ControlAssociationKey = -1
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(46, 64)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
+        Me.CustomLabel3.TabIndex = 47
+        Me.CustomLabel3.Text = "Fecha Emision"
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(36, 498)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(545, 147)
+        Me.lstFiltrada.TabIndex = 62
+        Me.lstFiltrada.Visible = False
+        '
+        'lstAyuda
+        '
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(36, 498)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(545, 147)
+        Me.lstAyuda.TabIndex = 54
+        Me.lstAyuda.Visible = False
+        '
+        'lstAyuda_Filtrada
+        '
+        Me.lstAyuda_Filtrada.Cleanable = False
+        Me.lstAyuda_Filtrada.EnterIndex = -1
+        Me.lstAyuda_Filtrada.FormattingEnabled = True
+        Me.lstAyuda_Filtrada.LabelAssociationKey = -1
+        Me.lstAyuda_Filtrada.Location = New System.Drawing.Point(36, 498)
+        Me.lstAyuda_Filtrada.Name = "lstAyuda_Filtrada"
+        Me.lstAyuda_Filtrada.Size = New System.Drawing.Size(545, 147)
+        Me.lstAyuda_Filtrada.TabIndex = 62
+        Me.lstAyuda_Filtrada.Visible = False
+        '
         'ListadoCuentaCorrienteProveedoresSelectivo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -364,7 +364,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.lstAyuda)
+        Me.Location = New System.Drawing.Point(50, 10)
         Me.Name = "ListadoCuentaCorrienteProveedoresSelectivo"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

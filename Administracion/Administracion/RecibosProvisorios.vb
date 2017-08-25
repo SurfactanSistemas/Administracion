@@ -809,7 +809,7 @@ Public Class RecibosProvisorios
     End Sub
 
     Private Function _EsNumero(ByVal keycode As Integer) As Boolean
-        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 109)
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
@@ -826,7 +826,7 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
-        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190 Or keycode = 109)
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
