@@ -277,9 +277,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             varParidadTotal = CampoTipoCambio.paridad
         End If
 
+        GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
 
-
-        For varCiclo = 0 To varRenglon
+        For varCiclo = 0 To GRilla.Rows.Count - 1
 
             varProveedor = GRilla.Item(0, varCiclo).Value
 
@@ -419,7 +419,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     '
 
                     varAcuNeto = varAcumulaNeto
-                    varAcuRetenido = 
+                    varAcuRetenido =
                     varAcuAnticipo = 0
                     varAcuBruto = 0
                     varAcuIva = 0
