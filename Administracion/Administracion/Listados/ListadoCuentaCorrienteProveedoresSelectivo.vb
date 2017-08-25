@@ -14,7 +14,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Text = Date.Now.ToString("dd/MM/yyyy")
         varRenglon = 0
-        _CargarProveedoresPreCargados()
+        '_CargarProveedoresPreCargados()
         _Claves.Clear()
     End Sub
 
@@ -457,7 +457,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     '!ReteIb = WRetIb
                     '!ReteGan = WRetgan
 
-                    SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, txtFechaEmision.Text, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, (varAcumulado - varRetIb - varRetGan), varParidad, varTotalUs, varSaldoUs, 0, 0)
+                    SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, (varAcumulado - varRetIb - varRetGan), varParidad, varTotalUs, varSaldoUs, 0, 0)
 
 
                 Next
@@ -724,5 +724,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         _Imprimir(Reporte.Imprimir)
+    End Sub
+
+    Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomButton1.Click
+        _CargarProveedoresPreCargados()
     End Sub
 End Class
