@@ -457,7 +457,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     '!ReteIb = WRetIb
                     '!ReteGan = WRetgan
 
-                    SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, txtFechaEmision.Text, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", 0, 0, 0, varParidad, varTotalUs, varSaldoUs, 0, 0)
+                    SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, txtFechaEmision.Text, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, (varAcumulado - varRetIb - varRetGan), varParidad, varTotalUs, varSaldoUs, 0, 0)
 
 
                 Next
@@ -466,23 +466,27 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         Next
 
-
         txtUno = "{impCtaCtePrvNet.Proveedor} in " + x + "" + x + " to " + x + "ZZZZZZZZZZZ" + x
         txtDos = " and {impCtaCtePrvNet.Saldo} <> 0.00"
         txtFormula = txtUno + txtDos
 
         'Dim viewer As New ReportViewer("Listado de Corriente de Proveedres Selectivo", Globals.reportPathWithName("wccprvfecnet.rpt"), txtFormula)
 
-        Select Case TipoImpresion
-            Case Reporte.Imprimir
-                '    viewer.imprimirReporte()
-                '_ConsultarSiEliminarListaParcialDeProveedores()
-                '_LimpiarProveedoresSelectivos()
-            Case Reporte.Pantalla
-                '    viewer.Show()
-            Case Else
+        With VistaPrevia
+            .Reporte = New ListadoCtaCtePrvSelectivo
+            .CrystalReportViewer1.SelectionFormula = txtFormula
+            Select Case TipoImpresion
+                Case Reporte.Imprimir
+                    '_ConsultarSiEliminarListaParcialDeProveedores()
+                    .Imprimir()
+                Case Reporte.Pantalla
+                    .Mostrar()
+                Case Else
 
-        End Select
+            End Select
+        End With
+
+
 
     End Sub
 

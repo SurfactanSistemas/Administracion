@@ -39,8 +39,8 @@ Public Class VistaPrevia
     End Sub
 
     Public Sub Imprimir(Optional ByVal cant As Integer = 1)
+        Me.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
         Me.Reporte.PrintToPrinter(cant, True, 0, 0)
-        Me.Close()
     End Sub
 
     Public Sub GuardarPDF(ByVal NombreArchivo As String, Optional ByVal ruta As String = "")
