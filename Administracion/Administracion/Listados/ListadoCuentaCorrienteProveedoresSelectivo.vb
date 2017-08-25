@@ -412,8 +412,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     End If
 
 
-                    REM Stop
-
                     '
                     'calculo de rtencion de Ganancias
                     '
@@ -468,7 +466,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         Next
 
-        Stop
 
         txtUno = "{impCtaCtePrvNet.Proveedor} in " + x + "" + x + " to " + x + "ZZZZZZZZZZZ" + x
         txtDos = " and {impCtaCtePrvNet.Saldo} <> 0.00"
