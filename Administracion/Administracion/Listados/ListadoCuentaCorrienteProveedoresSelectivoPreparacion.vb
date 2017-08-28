@@ -191,10 +191,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub txtCodProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodProveedor.KeyDown
 
-        If e.KeyData = Keys.Enter And Trim(txtCodProveedor.Text) <> "" Then
-            mostrarProveedor(txtCodProveedor.Text)
-        Else
-            btnConsulta.PerformClick()
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtCodProveedor.Text) <> "" Then
+                mostrarProveedor(txtCodProveedor.Text)
+            Else
+                btnConsulta.PerformClick()
+            End If
         End If
 
     End Sub
@@ -429,6 +431,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             If Trim(fila.Cells(0).Value) <> "" Then
 
                 If MsgBox("¿Seguro de querer eliminar el Proveedor Seleccionado?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.Yes Then
+                    GRilla.Rows.Remove(fila)
                     _EliminarProveedorSelectivo(fila.Cells(0).Value)
                 End If
 

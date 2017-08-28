@@ -34,12 +34,15 @@ Public Class VistaPrevia
     End Sub
 
     Public Sub Mostrar()
+        Me.Reporte.DataSourceConnections.Item(0).SetConnection("193.168.0.7", "SurfactanSA", "usuarioadmin", "usuarioadmin")
+        'Me.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
         Me.ShowDialog()
         Me.Dispose()
     End Sub
 
     Public Sub Imprimir(Optional ByVal cant As Integer = 1)
-        Me.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
+        Me.Reporte.DataSourceConnections.Item(0).SetConnection("193.168.0.7", "SurfactanSA", "usuarioadmin", "usuarioadmin")
+        'Me.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
         Me.Reporte.PrintToPrinter(cant, True, 0, 0)
     End Sub
 

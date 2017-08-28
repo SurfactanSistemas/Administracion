@@ -732,6 +732,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             If Trim(fila.Cells(0).Value) <> "" Then
 
                 If MsgBox("¿Seguro de querer eliminar el Proveedor Seleccionado?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.Yes Then
+                    GRilla.Rows.Remove(fila)
                     _EliminarProveedorSelectivo(fila.Cells(0).Value)
                 End If
 

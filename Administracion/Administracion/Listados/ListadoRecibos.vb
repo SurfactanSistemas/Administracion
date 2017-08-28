@@ -99,8 +99,9 @@ Public Class ListadoRecibos
         End Try
 
         With VistaPrevia
+            .CrystalReportViewer1.SelectionFormula = "{Recibos.Fechaord}>='" & Proceso.ordenaFecha(txtDesdeFecha.Text) & "' AND {Recibos.Fechaord}<='" & Proceso.ordenaFecha(txthastafecha.Text) & "' and {Recibos.Cliente} = {Cliente.Cliente}"
+
             .Reporte = New WListadoRecibos
-            .CrystalReportViewer1.SelectionFormula = "{Recibos.Fechaord} >= '" & Proceso.ordenaFecha(txtDesdeFecha.Text) & "' AND {Recibos.Fechaord} <= '" & Proceso.ordenaFecha(txthastafecha.Text) & "'"
 
             Select Case TipoImpresion
 
