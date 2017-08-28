@@ -4746,16 +4746,25 @@ Public Class Pagos
                         ' Buscamos la factura
                         Dim CtaCtePrv As DataRow = _BuscarCtaCteProv(ZClaveCtaCtePrv)
 
-                        If IsNothing(CtaCtePrv) Then : Exit Sub : End If
+                        'If Val(CtaCtePrv.Item("NroInterno")) = 0 Then : Exit Sub : End If
 
-                        Dim ZNroInterno As Integer = Val(CtaCtePrv.Item("NroInterno"))
+                        Dim ZNroInterno As Integer = 0
 
-                        ZZTotal = CtaCtePrv.Item("Total")
-                        ZZSaldo = CtaCtePrv.Item("Saldo")
+                        If Not IsNothing(CtaCtePrv) Then
+                            ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
+
+                            ZZTotal = CtaCtePrv.Item("Total")
+                            ZZSaldo = CtaCtePrv.Item("Saldo")
+
+                        End If
+
+                        
 
                         Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
 
                         If Not IsNothing(ZFactura) Then
+
+                            
 
                             ZNeto = ZFactura.neto
 
@@ -4791,7 +4800,7 @@ Public Class Pagos
                     End If
 
                     acumProv += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(ZZSuma))
-                    acumProv += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIbCaba, Val(ZZSuma))
+                    acumCaba += CaculoRetencionIngresosBrutos(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
 
                 End If
             End With
@@ -4864,12 +4873,16 @@ Public Class Pagos
                     ' Buscamos la factura
                     Dim CtaCtePrv As DataRow = _BuscarCtaCteProv(ZClaveCtaCtePrv)
 
-                    If IsNothing(CtaCtePrv) Then : Exit Sub : End If
+                    'If IsNothing(CtaCtePrv) Then : Exit Sub : End If
 
-                    Dim ZNroInterno As Integer = Val(CtaCtePrv.Item("NroInterno"))
+                    Dim ZNroInterno As Integer = 0
 
-                    ZZTotal = CtaCtePrv.Item("Total")
-                    ZZSaldo = CtaCtePrv.Item("Saldo")
+                    If Not IsNothing(CtaCtePrv) Then
+                        ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
+                        ZZTotal = CtaCtePrv.Item("Total")
+                        ZZSaldo = CtaCtePrv.Item("Saldo")
+                    End If
+
 
                     Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
 
