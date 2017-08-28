@@ -74,7 +74,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         If IsNothing(CampoProveedor) Then
             MsgBox("Proveedor incorrecto")
         Else
-            GRilla.Rows.Add()
+            varRenglon = GRilla.Rows.Add()
             GRilla.Item(0, varRenglon).Value = CampoProveedor.id
             GRilla.Item(1, varRenglon).Value = CampoProveedor.razonSocial
 
@@ -723,5 +723,20 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomButton1.Click
         _CargarProveedoresPreCargados()
+    End Sub
+
+    Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
+        Dim fila = GRilla.Rows(e.RowIndex)
+        If Not IsNothing(fila) Then
+
+            If Trim(fila.Cells(0).Value) <> "" Then
+
+                If MsgBox("¿Seguro de querer eliminar el Proveedor Seleccionado?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.Yes Then
+                    _EliminarProveedorSelectivo(fila.Cells(0).Value)
+                End If
+
+            End If
+
+        End If
     End Sub
 End Class

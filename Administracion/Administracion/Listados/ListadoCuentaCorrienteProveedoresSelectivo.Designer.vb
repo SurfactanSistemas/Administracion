@@ -58,6 +58,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtFechaEmision.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFechaEmision.Size = New System.Drawing.Size(100, 20)
         Me.txtFechaEmision.TabIndex = 48
+        Me.txtFechaEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GRilla
         '

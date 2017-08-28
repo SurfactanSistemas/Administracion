@@ -36,11 +36,11 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnAcepta = New Administracion.CustomButton()
         Me.txtCodProveedor = New Administracion.CustomTextBox()
         Me.btnImprimir = New Administracion.CustomButton()
+        Me.btnSalir = New Administracion.CustomButton()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.btnSalir = New Administracion.CustomButton()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -59,11 +59,13 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         '
         Me.Codigo.HeaderText = "Codigo"
         Me.Codigo.Name = "Codigo"
+        Me.Codigo.ReadOnly = True
         '
         'Razon
         '
         Me.Razon.HeaderText = "Razon Social"
         Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
         Me.Razon.Width = 400
         '
         'Panel1
@@ -201,6 +203,26 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Listado de Proveedores Ingresados")
         Me.btnImprimir.UseVisualStyleBackColor = True
         '
+        'btnSalir
+        '
+        Me.btnSalir.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnSalir.Cleanable = False
+        Me.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSalir.EnterIndex = -1
+        Me.btnSalir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnSalir.FlatAppearance.BorderSize = 0
+        Me.btnSalir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.LabelAssociationKey = -1
+        Me.btnSalir.Location = New System.Drawing.Point(482, 376)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(87, 40)
+        Me.btnSalir.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnSalir, "Salir del Formulario")
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
         'lstFiltrada
         '
         Me.lstFiltrada.Cleanable = False
@@ -251,26 +273,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.CustomLabel1.TabIndex = 50
         Me.CustomLabel1.Text = "Proveedor"
         '
-        'btnSalir
-        '
-        Me.btnSalir.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnSalir.Cleanable = False
-        Me.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnSalir.EnterIndex = -1
-        Me.btnSalir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnSalir.FlatAppearance.BorderSize = 0
-        Me.btnSalir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSalir.LabelAssociationKey = -1
-        Me.btnSalir.Location = New System.Drawing.Point(482, 376)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(87, 40)
-        Me.btnSalir.TabIndex = 58
-        Me.ToolTip1.SetToolTip(Me.btnSalir, "Salir del Formulario")
-        Me.btnSalir.UseVisualStyleBackColor = True
-        '
         'ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -289,8 +291,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.Controls.Add(Me.txtCodProveedor)
         Me.Controls.Add(Me.CustomLabel1)
         Me.Controls.Add(Me.Panel2)
+        Me.Location = New System.Drawing.Point(20, 20)
         Me.Name = "ListadoCuentaCorrienteProveedoresSelectivoPreparacion"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
@@ -305,8 +308,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Friend WithEvents txtAyuda As Administracion.CustomTextBox
     Friend WithEvents btnConsulta As Administracion.CustomButton
     Friend WithEvents btnAcepta As Administracion.CustomButton
-    Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -316,4 +317,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
     Friend WithEvents btnImprimir As Administracion.CustomButton
     Friend WithEvents btnSalir As Administracion.CustomButton
+    Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -4969,23 +4969,15 @@ Public Class Pagos
     End Sub
 
     Private Sub _RecalcularRetencionIVA()
-        'Dim varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva, varOrdFecha
         Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
-        Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZBase, ZZSumaNeto
+        Dim ZNeto, ZIva, ZZSuma, ZZTotal, ZZBase
 
         ZNeto = 0
         ZIva = 0
-        'ZIva5 = 0
-        'ZIva27 = 0
-        'ZIva105 = 0
-        'ZIb = 0
-        'ZExento = 0
-        'ZPorce = 0
         ZImporte = 0
         ZZSuma = 0
         ZZTotal = 0
         ZZBase = 0
-        'ZZSumaNeto = 0
 
         ZTipo = ""
         ZNumero = ""
@@ -4993,26 +4985,6 @@ Public Class Pagos
         ZLetra = ""
         ZTotal = 0
         ZZSaldo = 0
-
-        'varAcuNeto = 0
-        'varAcuRetenido = 0
-        'varAcuAnticipo = 0
-        'varAcuBruto = 0
-        'varAcuIva = 0
-
-        'varOrdFecha = Mid(ordenaFecha(txtFecha.Text), 3, 4)
-
-        'Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(txtProveedor.Text, varOrdFecha)
-
-        'If Not IsNothing(CampoAcumulado) Then
-
-        '    varAcuNeto = CampoAcumulado.neto
-        '    varAcuRetenido = CampoAcumulado.retenido
-        '    varAcuAnticipo = CampoAcumulado.anticipo
-        '    varAcuBruto = CampoAcumulado.bruto
-        '    varAcuIva = CampoAcumulado.iva
-
-        'End If
 
         ' Recalculo sobre porcentaje neto en Iva Comp.
         For Each row As DataGridViewRow In gridPagos.Rows
@@ -5026,19 +4998,16 @@ Public Class Pagos
 
                     Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
 
-                    'acum += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(_NormalizarNumero(.Cells(4).Value)))
                     ' Buscamos la factura
                     Dim CtaCtePrv As DataRow = _BuscarCtaCteProv(ZClaveCtaCtePrv)
-
-                    'If IsNothing(CtaCtePrv) Then : Exit Sub : End If
 
                     Dim ZNroInterno As Integer = 0
 
                     If Not IsNothing(CtaCtePrv) Then
                         ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
-                        'ZZTotal = CtaCtePrv.Item("Total")
-                        'ZZSaldo = CtaCtePrv.Item("Saldo")
                     End If
+
+                    ZZSuma = 0
 
                     If Val(ZImporte) <> 0 And UCase(ZLetra) = "M" Then
 
@@ -5068,12 +5037,6 @@ Public Class Pagos
                 End If
             End With
         Next
-
-        'If Val(WTipoIva) = 2 Then
-        '    ZZBase = ZZSumaNeto
-        'End If
-
-        'Dim varRetGan = CaculoRetencionGanancia(Val(WTipoProv), ZZBase, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
 
         txtIVA.Text = _NormalizarNumero(ZZBase)
 

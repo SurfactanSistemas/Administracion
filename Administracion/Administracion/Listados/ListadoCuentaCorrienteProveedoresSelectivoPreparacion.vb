@@ -138,7 +138,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             txtCodProveedor.Focus()
         Else
             If Not _ProveedorYaAgregado(_Proveedor(0)) Then
-                GRilla.Rows.Add()
+                varRenglon = GRilla.Rows.Add()
                 GRilla.Item(0, varRenglon).Value = _Proveedor(0)
                 GRilla.Item(1, varRenglon).Value = _Proveedor(1)
                 GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
@@ -193,6 +193,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
         If e.KeyData = Keys.Enter And Trim(txtCodProveedor.Text) <> "" Then
             mostrarProveedor(txtCodProveedor.Text)
+        Else
+            btnConsulta.PerformClick()
         End If
 
     End Sub
@@ -270,8 +272,10 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub btnLimpiarTodo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarTodo.Click
 
-        If GRilla.Rows.Count > 1 Then
+        If GRilla.Rows.Count > 0 Then
             _LimpiarProveedoresSelectivos()
+            txtCodProveedor.Text = ""
+            txtCodProveedor.Focus()
         Else
             txtCodProveedor.Focus()
         End If
@@ -280,11 +284,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub _LimpiarProveedoresSelectivos()
 
-        If GRilla.SelectedRows.Count > 0 Then ' Eliminamos solamente los seleccionados.
-
-            _EliminarProveedoresSeleccionados()
-
-        Else ' Si no hay seleccionados preguntamos si quiere en realidad eliminar todos, sino no se hace nada.
+        If GRilla.Rows.Count > 0 Then
 
             If MsgBox("¿Está seguro que quiere eliminar todos los proveedores listados?", MsgBoxStyle.OkCancel) = DialogResult.OK Then
                 _LimpiarTodosLosProveedoresSelectivos()
@@ -422,6 +422,19 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         End If
     End Sub
 
+    Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
+        Dim fila = GRilla.Rows(e.RowIndex)
+        If Not IsNothing(fila) Then
 
+            If Trim(fila.Cells(0).Value) <> "" Then
 
+                If MsgBox("¿Seguro de querer eliminar el Proveedor Seleccionado?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.Yes Then
+                    _EliminarProveedorSelectivo(fila.Cells(0).Value)
+                End If
+
+            End If
+
+        End If
+
+    End Sub
 End Class
