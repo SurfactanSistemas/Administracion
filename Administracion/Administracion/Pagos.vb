@@ -4681,11 +4681,8 @@ Public Class Pagos
     End Sub
 
     Private Sub _RecalcularIBCABA()
-        Dim acumCaba
-
-        Dim varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva, varOrdFecha
-        Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
-        Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZBase, ZZSumaNeto
+        
+        Dim ZImporte, ZZSuma, ZZBase, acumCaba
 
         acumCaba = 0
 
@@ -4693,102 +4690,14 @@ Public Class Pagos
             With row
                 If Not IsNothing(.Cells(4).Value) Then
 
-                    'ZNeto = 0
-                    'ZIva = 0
-                    'ZIva5 = 0
-                    'ZIva27 = 0
-                    'ZIva105 = 0
-                    'ZIb = 0
-                    'ZExento = 0
-                    'ZPorce = 0
                     ZImporte = 0
                     ZZSuma = 0
-                    'ZZTotal = 0
                     ZZBase = 0
-                    'ZZSumaNeto = 0
-
-                    'ZTipo = ""
-                    'ZNumero = ""
-                    'ZPunto = ""
-                    'ZLetra = ""
-                    'ZTotal = 0
-                    'ZZSaldo = 0
-
-                    'varAcuNeto = 0
-                    'varAcuRetenido = 0
-                    'varAcuAnticipo = 0
-                    'varAcuBruto = 0
-                    'varAcuIva = 0
-
-                    'varOrdFecha = Mid(ordenaFecha(txtFecha.Text), 3, 4)
-
-                    'Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(txtProveedor.Text, varOrdFecha)
-
-                    'If Not IsNothing(CampoAcumulado) Then
-
-                    '    varAcuNeto = CampoAcumulado.neto
-                    '    varAcuRetenido = CampoAcumulado.retenido
-                    '    varAcuAnticipo = CampoAcumulado.anticipo
-                    '    varAcuBruto = CampoAcumulado.bruto
-                    '    varAcuIva = CampoAcumulado.iva
-
-                    'End If
-
-                    ' Recalculo sobre porcentaje neto en Iva Comp.
-                    'If Not IsNothing(.Cells(4).Value) Then
-                    'ZTipo = .Cells(0).Value
-                    'ZLetra = .Cells(1).Value
-                    'ZPunto = .Cells(2).Value
-                    'ZNumero = .Cells(3).Value
+                    
                     ZImporte = .Cells(4).Value
-
-                    'Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
-
-                    ''acum += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(_NormalizarNumero(.Cells(4).Value)))
-                    '' Buscamos la factura
-                    'Dim CtaCtePrv As DataRow = _BuscarCtaCteProv(ZClaveCtaCtePrv)
-
-                    ''If Val(CtaCtePrv.Item("NroInterno")) = 0 Then : Exit Sub : End If
-
-                    'Dim ZNroInterno As Integer = 0
-
-                    'If Not IsNothing(CtaCtePrv) Then
-                    '    ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
-
-                    '    ZZTotal = CtaCtePrv.Item("Total")
-                    '    ZZSaldo = CtaCtePrv.Item("Saldo")
-
-                    'End If
-
-
-
-                    'Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
-
-                    'If Not IsNothing(ZFactura) Then
-
-
-
-                    '    ZNeto = ZFactura.neto
-
-                    '    If Val(ZImporte) = Val(ZZTotal) And ZNroInterno <> 0 Then
-
-                    '        ZZSuma = ZNeto
-
-                    '    Else
-                    '        ZZSuma = Val(ZImporte) / 1.21
-                    '    End If
-
-                    'Else
-
-                    '    ZZSuma = Val(ZImporte) / 1.21
-
-                    'End If
 
                     ZZSuma = Val(ZImporte) / 1.21
                     ZZBase = ZZSuma
-                    'ZZSumaNeto += ZZSuma
-
-                    'End If
 
                     acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
 
