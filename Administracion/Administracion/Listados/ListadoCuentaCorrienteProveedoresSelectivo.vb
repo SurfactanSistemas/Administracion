@@ -283,7 +283,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
             varProveedor = GRilla.Item(0, varCiclo).Value
 
-            If LTrim(RTrim(varProveedor)) <> "" Then
+            If Trim(varProveedor) <> "" Then
 
                 varAcumulado = 0
                 varAcumulaIva = 0
@@ -338,9 +338,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     varLetra = ""
 
                     Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(CCPrv.Proveedor)
-                    If IsNothing(CampoProveedor) Then
-                        REM no existe
-                    Else
+                    If Not IsNothing(CampoProveedor) Then
+
                         varTipoIb = CampoProveedor.condicionIB1
                         varTipoIbCaba = CampoProveedor.condicionIB2
                         varTipoIva = CampoProveedor.codIva
@@ -348,19 +347,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         varPorceIb = CampoProveedor.porceIBProvincia
                         varPorceIbCaba = CampoProveedor.porceIBCABA
 
-                        'WTipoIb = RstProveedor!CodIb
-                        'WTipoIbCaba = RstProveedor!CodIbCaba
-                        'WTipoiva = RstProveedor!Iva
-                        'WTipoprv = Val(RstProveedor!Tipo) + 1
-                        'WPorceIb = IIf(IsNull(RstProveedor!PorceIb), "0", RstProveedor!PorceIb)
-                        'WPorceIbCaba = IIf(IsNull(RstProveedor!PorceIbCaba), "0", RstProveedor!PorceIbCaba)
-
                     End If
 
                     Dim compra As Compra = DAOCompras.buscarCompraPorCodigo(CCPrv.nroInterno)
-                    If IsNothing(compra) Then
-                        REM no existe
-                    Else
+                    If Not IsNothing(compra) Then
+
                         varLetra = compra.letra
                         varNeto = compra.neto
                         varIva = compra.iva21
@@ -370,6 +361,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         varIb = compra.percibidoIB
                         varExento = compra.exento
                         varTotalTrabajo = varNeto + varIva + varIva5 + varIva27 + varIva105 + varIb + varExento
+
                     End If
 
                     varRetIbI = 0
@@ -424,13 +416,14 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
                     varOrdFecha = Mid(ordenaFecha(txtFechaEmision.Text), 3, 4)
                     Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(varProveedor, varOrdFecha)
-                    If IsNothing(CampoAcumulado) Then
-                    Else
+                    If Not IsNothing(CampoAcumulado) Then
+
                         varAcuNeto = CampoAcumulado.neto
                         varAcuRetenido = CampoAcumulado.retenido
                         varAcuAnticipo = CampoAcumulado.anticipo
                         varAcuBruto = CampoAcumulado.bruto
                         varAcuIva = CampoAcumulado.iva
+
                     End If
 
 
@@ -584,6 +577,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         GRilla.Rows.Clear()
 
         _LimpiarProveedoresSelectivos()
+
+        varRenglon = 0
 
     End Sub
 

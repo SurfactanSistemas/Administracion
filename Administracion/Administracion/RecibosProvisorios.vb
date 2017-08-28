@@ -875,14 +875,14 @@ Public Class RecibosProvisorios
 
             End Select
 
-            If iCol = 0 Then
+            'If iCol = 0 Then
 
-                ' Por compatibilidad con lectora de Domingo que no envia enter al leer dato de cheque.
-                If Len(gridRecibos.Rows(iRow).Cells(iCol).Value) = 30 Then
-                    SendKeys.Send("{ENTER}")
-                End If
+            '    ' Por compatibilidad con lectora de Domingo que no envia enter al leer dato de cheque.
+            '    If Len(gridRecibos.Rows(iRow).Cells(iCol).Value) = 30 Then
+            '        SendKeys.Send("{ENTER}")
+            '    End If
 
-            End If
+            'End If
 
             If msg.WParam.ToInt32() = Keys.Enter Then
 
