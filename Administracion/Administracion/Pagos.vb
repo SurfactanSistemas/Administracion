@@ -4800,7 +4800,7 @@ Public Class Pagos
                     End If
 
                     acumProv += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(ZZSuma))
-                    acumCaba += CaculoRetencionIngresosBrutos(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
+                    acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
 
                 End If
             End With
