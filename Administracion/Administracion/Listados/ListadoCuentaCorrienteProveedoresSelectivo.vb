@@ -108,6 +108,24 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Return _YaAgregado
     End Function
 
+    Private Function _ProveedorYaAgregado(ByVal _Proveedor As String, ByVal Excepto As Integer) As Boolean
+        Dim _YaAgregado As Boolean = False
+
+        For Each row As DataGridViewRow In GRilla.Rows
+
+            If Trim(row.Cells(0).Value) = Trim(_Proveedor) And row.Index <> Excepto Then
+                _YaAgregado = True
+                Exit For
+            ElseIf Trim(row.Cells(1).Value) = Trim(_Proveedor) And row.Index <> Excepto Then
+                _YaAgregado = True
+                Exit For
+            End If
+
+        Next
+
+        Return _YaAgregado
+    End Function
+
     Private Sub txtfechaemision_KeyPress(ByVal sender As Object, _
                ByVal e As System.Windows.Forms.KeyPressEventArgs) _
                Handles txtFechaEmision.KeyPress
@@ -464,9 +482,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         With VistaPrevia
             .Reporte = New ListadoCtaCtePrvSelectivo
-            .Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
-            .CrystalReportViewer1.SelectionFormula = txtFormula
-            .CrystalReportViewer1.Refresh()
+            '.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
+            .Formula = txtFormula
+            ' .CrystalReportViewer1.Refresh()
             Select Case TipoImpresion
                 Case Reporte.Imprimir
                     '_ConsultarSiEliminarListaParcialDeProveedores()
@@ -550,6 +568,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         GRilla.Rows.Clear()
 
         '_EliminarProveedorSelectivo()
+
+        txtFechaEmision.Focus()
 
         varRenglon = 0
 
@@ -674,4 +694,119 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         End If
     End Sub
+
+    Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesdeProveedor.Focus()
+    End Sub
+
+    Private Function _EsNumero(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 109)
+    End Function
+
+    Private Function _EsControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        Select Case keycode
+            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
+                valido = True
+            Case Else
+                valido = False
+        End Select
+
+        Return valido
+    End Function
+
+    Private Function _EsNumeroOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+
+        If GRilla.Focused Or GRilla.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+            GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+            Dim iCol = GRilla.CurrentCell.ColumnIndex
+            Dim iRow = GRilla.CurrentCell.RowIndex
+
+            ' Limitamos los caracteres permitidos para cada una de las columnas.
+            Select Case iCol
+                Case 0
+                    If Not _EsNumeroOControl(keyData) Then
+                        Return True
+                    End If
+                Case Else
+
+            End Select
+
+            If msg.WParam.ToInt32() = Keys.Enter Then
+
+                Dim valor = GRilla.Rows(iRow).Cells(iCol).Value
+
+                If Not IsNothing(valor) Then
+
+                    If iCol = 0 And iRow > -1 Then
+
+                        Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(valor)
+
+                        If Not IsNothing(proveedor) Then
+                            If Not _ProveedorYaAgregado(proveedor.id, iRow) Then
+                                GRilla.Rows(iRow).Cells(1).Value = Trim(proveedor.razonSocial)
+
+                                If GRilla.Rows.Count < iRow + 1 Then
+                                    GRilla.CurrentCell = GRilla.Rows(GRilla.Rows.Add).Cells(iCol)
+                                Else
+                                    GRilla.CurrentCell = GRilla.Rows(iRow + 1).Cells(iCol)
+                                End If
+                            Else
+                                MsgBox("Proveedor ya cargado con anterioridad.", MsgBoxStyle.Information)
+                                GRilla.CurrentCell = GRilla.Rows(iRow).Cells(iCol)
+                            End If
+                            
+                        End If
+
+                    End If
+
+                    Return True
+                Else
+
+                    With GRilla
+                        Select Case iCol
+                            Case 0, 1
+                                .CurrentCell = .Rows(iRow).Cells(iCol)
+                            Case Else
+                        End Select
+                    End With
+
+                    Return True
+
+                End If
+            ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+
+                With GRilla
+                    .Rows(iRow).Cells(iCol).Value = ""
+
+                    ' Solo para que pierda el foco y se refresque el contenido sino sigue quedando ahi.
+                    If iCol = 1 Then
+                        .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                    Else
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End If
+
+                    .CurrentCell = .Rows(iRow).Cells(iCol)
+                End With
+
+
+            End If
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
 End Class

@@ -25,12 +25,17 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.components = New System.ComponentModel.Container()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.GRilla = New System.Windows.Forms.DataGridView()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtRazon = New Administracion.CustomTextBox()
+        Me.CustomLabel3 = New Administracion.CustomLabel()
+        Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnImprimir = New Administracion.CustomButton()
         Me.btnPantalla = New Administracion.CustomButton()
         Me.btnLimpiarTodo = New Administracion.CustomButton()
@@ -38,14 +43,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
         Me.txtAyuda = New Administracion.CustomTextBox()
-        Me.txtRazon = New Administracion.CustomTextBox()
-        Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -65,11 +65,23 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         '
         Me.GRilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Razon})
+        Me.GRilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.GRilla.Location = New System.Drawing.Point(40, 122)
         Me.GRilla.Name = "GRilla"
         Me.GRilla.Size = New System.Drawing.Size(504, 261)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
+        '
+        'Codigo
+        '
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.Name = "Codigo"
+        '
+        'Razon
+        '
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.Width = 350
         '
         'Panel1
         '
@@ -115,6 +127,45 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(589, 359)
         Me.Panel2.TabIndex = 60
+        '
+        'txtRazon
+        '
+        Me.txtRazon.BackColor = System.Drawing.Color.Silver
+        Me.txtRazon.Cleanable = False
+        Me.txtRazon.Empty = True
+        Me.txtRazon.EnterIndex = -1
+        Me.txtRazon.LabelAssociationKey = -1
+        Me.txtRazon.Location = New System.Drawing.Point(248, 38)
+        Me.txtRazon.Name = "txtRazon"
+        Me.txtRazon.Size = New System.Drawing.Size(296, 20)
+        Me.txtRazon.TabIndex = 51
+        Me.txtRazon.Validator = Administracion.ValidatorType.None
+        '
+        'CustomLabel3
+        '
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel3.ControlAssociationKey = -1
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(29, 14)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
+        Me.CustomLabel3.TabIndex = 47
+        Me.CustomLabel3.Text = "Fecha Emision"
+        '
+        'CustomLabel1
+        '
+        Me.CustomLabel1.AutoSize = True
+        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel1.ControlAssociationKey = -1
+        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel1.Location = New System.Drawing.Point(49, 40)
+        Me.CustomLabel1.Name = "CustomLabel1"
+        Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
+        Me.CustomLabel1.TabIndex = 50
+        Me.CustomLabel1.Text = "Proveedor"
         '
         'txtDesdeProveedor
         '
@@ -263,45 +314,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtAyuda.Validator = Administracion.ValidatorType.None
         Me.txtAyuda.Visible = False
         '
-        'txtRazon
-        '
-        Me.txtRazon.BackColor = System.Drawing.Color.Silver
-        Me.txtRazon.Cleanable = False
-        Me.txtRazon.Empty = True
-        Me.txtRazon.EnterIndex = -1
-        Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(248, 38)
-        Me.txtRazon.Name = "txtRazon"
-        Me.txtRazon.Size = New System.Drawing.Size(296, 20)
-        Me.txtRazon.TabIndex = 51
-        Me.txtRazon.Validator = Administracion.ValidatorType.None
-        '
-        'CustomLabel1
-        '
-        Me.CustomLabel1.AutoSize = True
-        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(49, 40)
-        Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
-        Me.CustomLabel1.TabIndex = 50
-        Me.CustomLabel1.Text = "Proveedor"
-        '
-        'CustomLabel3
-        '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel3.ControlAssociationKey = -1
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(29, 14)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
-        Me.CustomLabel3.TabIndex = 47
-        Me.CustomLabel3.Text = "Fecha Emision"
-        '
         'lstFiltrada
         '
         Me.lstFiltrada.Cleanable = False
@@ -337,17 +349,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.lstAyuda_Filtrada.Size = New System.Drawing.Size(545, 147)
         Me.lstAyuda_Filtrada.TabIndex = 62
         Me.lstAyuda_Filtrada.Visible = False
-        '
-        'Codigo
-        '
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.Name = "Codigo"
-        '
-        'Razon
-        '
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.Width = 350
         '
         'ListadoCuentaCorrienteProveedoresSelectivo
         '

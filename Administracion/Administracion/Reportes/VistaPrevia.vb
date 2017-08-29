@@ -14,6 +14,17 @@ Public Class VistaPrevia
         End Set
     End Property
 
+    Private _Formula As String
+    Public Property Formula() As String
+        Get
+            Return _Formula
+        End Get
+        Set(ByVal value As String)
+            _Formula = value
+        End Set
+    End Property
+
+
     Private Sub Reporte_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         With Me.CrystalReportViewer1
@@ -34,17 +45,23 @@ Public Class VistaPrevia
     End Sub
 
     Public Sub Mostrar()
-        Me.Reporte.DataSourceConnections.Item(0).SetConnection("193.168.0.7", "SurfactanSA", "usuarioadmin", "usuarioadmin")
-        Me.Reporte.Refresh()
+        'Me.Reporte.DataSourceConnections.Item(0).SetConnection("193.168.0.7", "SurfactanSA", "usuarioadmin", "usuarioadmin")
+        'Me.Reporte.Refresh()
         'Me.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
+        Me.Reporte.DataSourceConnections.Item(0).SetConnection("EMPRESA01", "SurfactanSA", False)
+        Me.CrystalReportViewer1.SelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
+        Me.CrystalReportViewer1.Refresh()
         Me.ShowDialog()
         Me.Dispose()
     End Sub
 
     Public Sub Imprimir(Optional ByVal cant As Integer = 1)
-        Me.Reporte.DataSourceConnections.Item(0).SetConnection("193.168.0.7", "SurfactanSA", "usuarioadmin", "usuarioadmin")
-        Me.Reporte.Refresh()
+        'Me.Reporte.DataSourceConnections.Item(0).SetConnection("193.168.0.7", "SurfactanSA", "usuarioadmin", "usuarioadmin")
+        'Me.Reporte.Refresh()
         'Me.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
+        Me.Reporte.DataSourceConnections.Item(0).SetConnection("EMPRESA01", "SurfactanSA", False)
+        Me.CrystalReportViewer1.SelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
+        Me.CrystalReportViewer1.Refresh()
         Me.Reporte.PrintToPrinter(cant, True, 0, 0)
     End Sub
 
