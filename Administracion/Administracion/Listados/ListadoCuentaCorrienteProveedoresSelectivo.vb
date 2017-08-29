@@ -31,8 +31,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Sub _CargarProveedoresPreCargados()
         Dim _Proveedores As New List(Of Object)
-        Dim _CargadosHaceMasDeUnaSemana As Integer = 0
-        Dim _FechaLimite As String = _DeterminarFechaLimite()
+        'Dim _CargadosHaceMasDeUnaSemana As Integer = 0
+        'Dim _FechaLimite As String = _DeterminarFechaLimite()
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, FechaOrd FROM ProveedorSelectivo")
         Dim dr As SqlDataReader
@@ -45,12 +45,15 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
             If dr.HasRows Then
 
+                GRilla.Rows.Clear()
+
                 Do While dr.Read()
 
                     _Proveedores.Add({dr.Item("Proveedor"), dr.Item("FechaOrd")})
 
                 Loop
-
+            Else
+                MsgBox("No hay proveedores que listar.", MsgBoxStyle.Information)
             End If
 
         Catch ex As Exception
@@ -65,12 +68,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         End Try
 
         For Each _Proveedor As Object In _Proveedores
-                _CargarProveedor(DAOProveedor.buscarProveedorPorCodigo(_Proveedor(0)))
+            _CargarProveedor(DAOProveedor.buscarProveedorPorCodigo(_Proveedor(0)))
         Next
 
     End Sub
 
-    Private Sub _CargarProveedor(ByVal CampoProveedor As Proveedor, Optional ByVal marcar As Boolean = False)
+    Private Sub _CargarProveedor(ByVal CampoProveedor As Proveedor, Optional ByVal ChequeRechazado As String = "")
         If IsNothing(CampoProveedor) Then
             MsgBox("Proveedor incorrecto")
         Else
@@ -78,13 +81,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             GRilla.Item(0, varRenglon).Value = CampoProveedor.id
             GRilla.Item(1, varRenglon).Value = CampoProveedor.razonSocial
 
-            If marcar Then
-                GRilla.Rows(varRenglon).Cells(0).Style.BackColor = Color.IndianRed
-                GRilla.Rows(varRenglon).Cells(1).Style.BackColor = Color.IndianRed
-            End If
-
             GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
-            varRenglon = varRenglon + 1
             GRilla.CurrentCell = GRilla(0, 0)
 
             txtDesdeProveedor.Text = ""
@@ -479,8 +476,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             End Select
         End With
 
-
-
     End Sub
 
     Private Sub _ConsultarSiEliminarListaParcialDeProveedores()
@@ -539,30 +534,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         End If
     End Sub
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-
-        If GRilla.Focused Or GRilla.IsCurrentCellInEditMode Then
-
-            Dim key As Integer = msg.WParam.ToInt32()
-
-            GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
-
-            If key = Keys.Escape Then
-
-                If GRilla.SelectedRows.Count > 0 Then
-
-                    _EliminarProveedoresSeleccionados()
-
-                End If
-
-            End If
-
-            Return True
-        End If
-
-        Return MyBase.ProcessCmdKey(msg, keyData)
-    End Function
-
     Private Sub btnLimpiarTodo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarTodo.Click
         _DeshabilitarConsulta()
 
@@ -576,43 +547,16 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         GRilla.Rows.Clear()
 
-        _LimpiarProveedoresSelectivos()
+        _EliminarProveedorSelectivo()
 
         varRenglon = 0
 
     End Sub
 
-    Private Sub _LimpiarProveedoresSelectivos()
-
-        If GRilla.SelectedRows.Count > 0 Then ' Eliminamos solamente los seleccionados.
-
-            _EliminarProveedoresSeleccionados()
-
-        End If
-
-    End Sub
-
-    Private Sub _EliminarProveedoresSeleccionados()
-        If MsgBox("¿Esta seguro que desea eliminar los proveedores seleccionados?", MsgBoxStyle.OkCancel) = DialogResult.OK Then
-            For Each row As DataGridViewRow In GRilla.SelectedRows
-
-                If Not IsNothing(row.Cells(0).Value) And Trim(row.Cells(0).Value) <> "" Then
-
-                    If _EliminarProveedorSelectivo(row.Cells(0).Value) Then
-                        GRilla.Rows.Remove(row)
-                        varRenglon -= 1
-                    End If
-
-                End If
-
-            Next
-        End If
-    End Sub
-
-    Private Function _EliminarProveedorSelectivo(ByVal codProv As String) As Boolean
+    Private Function _EliminarProveedorSelectivo() As Boolean
         Dim exito As Boolean = False
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(codProv) & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -622,7 +566,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             exito = True
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer eliminar el Proveedor del periodo actual.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer eliminar los Proveedores precargados.", MsgBoxStyle.Critical)
         Finally
 
             cn.Close()
@@ -694,19 +638,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         _FiltrarDinamicamente()
     End Sub
 
-    Private Sub GRilla_UserDeletingRow(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewRowCancelEventArgs) Handles GRilla.UserDeletingRow
-
-        If Not IsNothing(GRilla.Rows(e.Row.Index).Cells(0)) Then
-            If Trim(GRilla.Rows(e.Row.Index).Cells(0).Value) <> "" Then
-                If _EliminarProveedorSelectivo(Trim(GRilla.Rows(e.Row.Index).Cells(0).Value)) Then
-                    GRilla.Rows.Remove(GRilla.Rows(e.Row.Index))
-                End If
-            End If
-        End If
-
-    End Sub
-
-
     Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesdeProveedor.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
@@ -733,7 +664,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
                 If MsgBox("¿Seguro de querer eliminar el Proveedor Seleccionado?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.Yes Then
                     GRilla.Rows.Remove(fila)
-                    _EliminarProveedorSelectivo(fila.Cells(0).Value)
                 End If
 
             End If

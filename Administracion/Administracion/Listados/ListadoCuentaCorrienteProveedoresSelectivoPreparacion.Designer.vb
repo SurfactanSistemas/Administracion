@@ -24,8 +24,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.GRilla = New System.Windows.Forms.DataGridView()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -41,32 +39,27 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cheque = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.CustomLabel2 = New Administracion.CustomLabel()
+        Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
+        Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
+        Me.CustomLabel3 = New Administracion.CustomLabel()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRilla
         '
         Me.GRilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Razon})
-        Me.GRilla.Location = New System.Drawing.Point(35, 104)
+        Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Razon, Me.Cheque})
+        Me.GRilla.Location = New System.Drawing.Point(40, 104)
         Me.GRilla.Name = "GRilla"
-        Me.GRilla.Size = New System.Drawing.Size(545, 225)
+        Me.GRilla.Size = New System.Drawing.Size(593, 225)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
-        '
-        'Codigo
-        '
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.Name = "Codigo"
-        Me.Codigo.ReadOnly = True
-        '
-        'Razon
-        '
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.ReadOnly = True
-        Me.Razon.Width = 400
         '
         'Panel1
         '
@@ -75,7 +68,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(617, 50)
+        Me.Panel1.Size = New System.Drawing.Size(672, 50)
         Me.Panel1.TabIndex = 59
         '
         'Label2
@@ -83,7 +76,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(428, 10)
+        Me.Label2.Location = New System.Drawing.Point(496, 9)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -103,9 +96,15 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.txtHasta)
+        Me.Panel2.Controls.Add(Me.txtDesde)
+        Me.Panel2.Controls.Add(Me.txtCodProveedor)
+        Me.Panel2.Controls.Add(Me.CustomLabel3)
+        Me.Panel2.Controls.Add(Me.CustomLabel2)
+        Me.Panel2.Controls.Add(Me.CustomLabel1)
         Me.Panel2.Location = New System.Drawing.Point(0, 49)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(614, 313)
+        Me.Panel2.Size = New System.Drawing.Size(675, 313)
         Me.Panel2.TabIndex = 60
         '
         'btnLimpiarTodo
@@ -174,7 +173,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.txtCodProveedor.Empty = True
         Me.txtCodProveedor.EnterIndex = -1
         Me.txtCodProveedor.LabelAssociationKey = -1
-        Me.txtCodProveedor.Location = New System.Drawing.Point(280, 72)
+        Me.txtCodProveedor.Location = New System.Drawing.Point(155, 16)
         Me.txtCodProveedor.MaxLength = 11
         Me.txtCodProveedor.Name = "txtCodProveedor"
         Me.txtCodProveedor.Size = New System.Drawing.Size(140, 20)
@@ -267,17 +266,82 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(194, 73)
+        Me.CustomLabel1.Location = New System.Drawing.Point(69, 17)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
         Me.CustomLabel1.TabIndex = 50
         Me.CustomLabel1.Text = "Proveedor"
         '
+        'Codigo
+        '
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.Name = "Codigo"
+        Me.Codigo.ReadOnly = True
+        '
+        'Razon
+        '
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        Me.Razon.Width = 300
+        '
+        'Cheque
+        '
+        Me.Cheque.HeaderText = "Cheque Rechazado"
+        Me.Cheque.Name = "Cheque"
+        Me.Cheque.Width = 150
+        '
+        'CustomLabel2
+        '
+        Me.CustomLabel2.AutoSize = True
+        Me.CustomLabel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel2.ControlAssociationKey = -1
+        Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel2.Location = New System.Drawing.Point(324, 17)
+        Me.CustomLabel2.Name = "CustomLabel2"
+        Me.CustomLabel2.Size = New System.Drawing.Size(57, 18)
+        Me.CustomLabel2.TabIndex = 50
+        Me.CustomLabel2.Text = "Periodo"
+        '
+        'txtDesde
+        '
+        Me.txtDesde.Location = New System.Drawing.Point(389, 16)
+        Me.txtDesde.Mask = "00/00/0000"
+        Me.txtDesde.Name = "txtDesde"
+        Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtDesde.Size = New System.Drawing.Size(83, 20)
+        Me.txtDesde.TabIndex = 51
+        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtHasta
+        '
+        Me.txtHasta.Location = New System.Drawing.Point(522, 16)
+        Me.txtHasta.Mask = "00/00/0000"
+        Me.txtHasta.Name = "txtHasta"
+        Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtHasta.Size = New System.Drawing.Size(83, 20)
+        Me.txtHasta.TabIndex = 51
+        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'CustomLabel3
+        '
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel3.ControlAssociationKey = -1
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(486, 17)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(21, 18)
+        Me.CustomLabel3.TabIndex = 50
+        Me.CustomLabel3.Text = "Al"
+        '
         'ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(614, 427)
+        Me.ClientSize = New System.Drawing.Size(673, 427)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnSalir)
@@ -288,8 +352,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.GRilla)
-        Me.Controls.Add(Me.txtCodProveedor)
-        Me.Controls.Add(Me.CustomLabel1)
         Me.Controls.Add(Me.Panel2)
         Me.Location = New System.Drawing.Point(20, 20)
         Me.Name = "ListadoCuentaCorrienteProveedoresSelectivoPreparacion"
@@ -297,6 +359,8 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -319,4 +383,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Friend WithEvents btnSalir As Administracion.CustomButton
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cheque As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents txtHasta As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtDesde As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents CustomLabel3 As Administracion.CustomLabel
+    Friend WithEvents CustomLabel2 As Administracion.CustomLabel
 End Class

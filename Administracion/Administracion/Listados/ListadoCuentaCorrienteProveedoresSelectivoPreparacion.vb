@@ -19,8 +19,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Dim _Proveedores As New List(Of Object)
         Dim _CargadosHaceMasDeUnaSemana As Integer = 0
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ps.Proveedor, ps.FechaOrd, p.Nombre FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Proveedor = p.Proveedor")
+        Dim cm As SqlCommand = New SqlCommand("SELECT ps.Proveedor, ps.FechaOrd, p.Nombre, ps.ChequeRechazado FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Proveedor = p.Proveedor")
         Dim dr As SqlDataReader
+        Dim WChequeRechazado As String = ""
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -32,11 +33,15 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
                 Do While dr.Read()
 
-                    GRilla.Rows.Add()
+                    varRenglon = GRilla.Rows.Add()
                     GRilla.Item(0, varRenglon).Value = dr.Item("Proveedor")
                     GRilla.Item(1, varRenglon).Value = dr.Item("Nombre")
+
+                    WChequeRechazado = IIf(IsDBNull(dr.Item("ChequeRechazado")), "", dr.Item("ChequeRechazado"))
+
+                    GRilla.Item(2, varRenglon).Value = (WChequeRechazado = "1")
+
                     GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
-                    varRenglon = varRenglon + 1
                     GRilla.CurrentCell = GRilla(0, 0)
 
                 Loop
@@ -68,18 +73,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
         txtAyuda.Focus()
 
-    End Sub
-
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtAyuda.KeyPress
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-        End If
     End Sub
 
     Private Function _BuscarProveedor(ByVal proveedor As String) As Object
@@ -145,7 +138,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                 varRenglon = varRenglon + 1
                 GRilla.CurrentCell = GRilla(0, 0)
 
-                _ActualizarProveedoresInscriptos(_Proveedor(0))
+                '_ActualizarProveedoresInscriptos(_Proveedor(0))
 
                 txtCodProveedor.Text = ""
                 txtAyuda.Text = ""
@@ -185,7 +178,10 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     End Sub
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
-        mostrarProveedor(lstAyuda.SelectedItem.ToString())
+
+        If Trim(lstAyuda.SelectedItem) = "" Then : Exit Sub : End If
+
+        mostrarProveedor(lstAyuda.SelectedItem)
         txtAyuda.Focus()
     End Sub
 
@@ -202,8 +198,68 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     End Sub
 
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
-        Me.Close()
-        MenuPrincipal.Show()
+        Dim ZSql, WProveedor, WFecha, WFechaOrd, WChequeRechazado
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+
+        If GRilla.Rows.Count > 0 Then
+
+
+            ' Eliminamos todos los proveedores que ya hayan estado guardados para evitar duplicados.
+
+            SQLConnector.conexionSql(cn, cm)
+
+            Try
+                cm.CommandText = "DELETE FROM ProveedorSelectivo"
+                cm.ExecuteNonQuery()
+
+            Catch ex As Exception
+                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                Exit Sub
+            Finally
+
+                cn.Close()
+
+            End Try
+
+            For Each row As DataGridViewRow In GRilla.Rows
+
+                If Not IsNothing(row.Cells(0)) Then
+                    With row
+                        If Trim(.Cells(0).Value) <> "" Then
+                            WProveedor = Trim(.Cells(0).Value)
+                            WFecha = Date.Now.ToString("dd-MM-yyyy")
+                            WFechaOrd = Proceso.ordenaFecha(WFecha)
+                            WChequeRechazado = IIf(.Cells(2).Value = True, "1", "0")
+
+                            ZSql = ""
+                            ZSql &= "INSERT INTO ProveedorSelectivo "
+                            ZSql &= "(Proveedor, Fecha, FechaOrd, ChequeRechazado) "
+                            ZSql &= "VALUES ('" & WProveedor & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WChequeRechazado & "') "
+
+                            Try
+                                cn.Open()
+                                cm.CommandText = ZSql
+                                cm.ExecuteNonQuery()
+
+                            Catch ex As Exception
+                                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                                Exit Sub
+                            Finally
+
+                                cn.Close()
+
+                            End Try
+
+                        End If
+                    End With
+                End If
+
+            Next
+
+            MsgBox("El listado provisorio se ha guardado correctamente", MsgBoxStyle.Information)
+            txtCodProveedor.Focus()
+        End If
     End Sub
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
@@ -391,10 +447,14 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
             'crdoc.DataSourceConnections.Item(0).SetConnection("(LOCAL)\LOCALSQLSERVER", "SurfactanSA", True)
             'crdoc.DataSourceConnections.Item(0).SetConnection("193.168.0.7", "SurfactanSA", True)
-            crdoc.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
+            'crdoc.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
 
             '_Imprimir(crdoc)
-            _VistaPrevia(crdoc)
+            '_VistaPrevia(crdoc)
+            With VistaPrevia
+                .Reporte = crdoc
+                .Mostrar()
+            End With
 
         End If
 
@@ -414,7 +474,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         ' Realizan la misma funcion.
-        btnAcepta.PerformClick()
+        Me.Close()
     End Sub
 
 
@@ -439,5 +499,33 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
         End If
 
+    End Sub
+
+    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesde.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            If Proceso._ValidarFecha(txtDesde.Text) Then
+                txtHasta.Focus()
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesde.Clear()
+        End If
+
+    End Sub
+
+    Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtHasta.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            If Proceso._ValidarFecha(txtDesde.Text) Then
+                txtDesde.Focus()
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHasta.Clear()
+        End If
     End Sub
 End Class

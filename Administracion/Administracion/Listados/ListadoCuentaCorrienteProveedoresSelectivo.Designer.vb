@@ -25,8 +25,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.components = New System.ComponentModel.Container()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.GRilla = New System.Windows.Forms.DataGridView()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -46,13 +44,16 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFechaEmision
         '
-        Me.txtFechaEmision.Location = New System.Drawing.Point(147, 62)
+        Me.txtFechaEmision.Location = New System.Drawing.Point(130, 12)
         Me.txtFechaEmision.Mask = "##/##/####"
         Me.txtFechaEmision.Name = "txtFechaEmision"
         Me.txtFechaEmision.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -64,22 +65,11 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         '
         Me.GRilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Razon})
-        Me.GRilla.Location = New System.Drawing.Point(36, 122)
+        Me.GRilla.Location = New System.Drawing.Point(40, 122)
         Me.GRilla.Name = "GRilla"
-        Me.GRilla.Size = New System.Drawing.Size(545, 261)
+        Me.GRilla.Size = New System.Drawing.Size(504, 261)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
-        '
-        'Codigo
-        '
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.Name = "Codigo"
-        '
-        'Razon
-        '
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.Width = 400
         '
         'Panel1
         '
@@ -88,7 +78,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(617, 50)
+        Me.Panel1.Size = New System.Drawing.Size(589, 50)
         Me.Panel1.TabIndex = 59
         '
         'Label2
@@ -96,7 +86,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(422, 10)
+        Me.Label2.Location = New System.Drawing.Point(414, 10)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -116,9 +106,14 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.txtRazon)
+        Me.Panel2.Controls.Add(Me.CustomLabel3)
+        Me.Panel2.Controls.Add(Me.txtFechaEmision)
+        Me.Panel2.Controls.Add(Me.CustomLabel1)
+        Me.Panel2.Controls.Add(Me.txtDesdeProveedor)
         Me.Panel2.Location = New System.Drawing.Point(0, 49)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(614, 359)
+        Me.Panel2.Size = New System.Drawing.Size(589, 359)
         Me.Panel2.TabIndex = 60
         '
         'txtDesdeProveedor
@@ -127,7 +122,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtDesdeProveedor.Empty = True
         Me.txtDesdeProveedor.EnterIndex = -1
         Me.txtDesdeProveedor.LabelAssociationKey = -1
-        Me.txtDesdeProveedor.Location = New System.Drawing.Point(147, 88)
+        Me.txtDesdeProveedor.Location = New System.Drawing.Point(130, 38)
         Me.txtDesdeProveedor.MaxLength = 11
         Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
         Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
@@ -148,7 +143,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(498, 418)
+        Me.btnImprimir.Location = New System.Drawing.Point(485, 417)
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(67, 40)
         Me.btnImprimir.TabIndex = 61
@@ -168,7 +163,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPantalla.LabelAssociationKey = -1
-        Me.btnPantalla.Location = New System.Drawing.Point(410, 418)
+        Me.btnPantalla.Location = New System.Drawing.Point(397, 417)
         Me.btnPantalla.Name = "btnPantalla"
         Me.btnPantalla.Size = New System.Drawing.Size(67, 40)
         Me.btnPantalla.TabIndex = 61
@@ -188,7 +183,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiarTodo.LabelAssociationKey = -1
-        Me.btnLimpiarTodo.Location = New System.Drawing.Point(322, 418)
+        Me.btnLimpiarTodo.Location = New System.Drawing.Point(309, 417)
         Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
         Me.btnLimpiarTodo.Size = New System.Drawing.Size(67, 40)
         Me.btnLimpiarTodo.TabIndex = 61
@@ -208,7 +203,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CustomButton1.LabelAssociationKey = -1
-        Me.CustomButton1.Location = New System.Drawing.Point(235, 418)
+        Me.CustomButton1.Location = New System.Drawing.Point(222, 417)
         Me.CustomButton1.Name = "CustomButton1"
         Me.CustomButton1.Size = New System.Drawing.Size(69, 40)
         Me.CustomButton1.TabIndex = 58
@@ -228,7 +223,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(144, 416)
+        Me.btnConsulta.Location = New System.Drawing.Point(131, 415)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(69, 40)
         Me.btnConsulta.TabIndex = 58
@@ -248,7 +243,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(49, 416)
+        Me.btnCancela.Location = New System.Drawing.Point(36, 415)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(74, 40)
         Me.btnCancela.TabIndex = 57
@@ -275,7 +270,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtRazon.Empty = True
         Me.txtRazon.EnterIndex = -1
         Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(265, 88)
+        Me.txtRazon.Location = New System.Drawing.Point(248, 38)
         Me.txtRazon.Name = "txtRazon"
         Me.txtRazon.Size = New System.Drawing.Size(296, 20)
         Me.txtRazon.TabIndex = 51
@@ -288,7 +283,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(66, 90)
+        Me.CustomLabel1.Location = New System.Drawing.Point(49, 40)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
         Me.CustomLabel1.TabIndex = 50
@@ -301,7 +296,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(46, 64)
+        Me.CustomLabel3.Location = New System.Drawing.Point(29, 14)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
         Me.CustomLabel3.TabIndex = 47
@@ -343,11 +338,22 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.lstAyuda_Filtrada.TabIndex = 62
         Me.lstAyuda_Filtrada.Visible = False
         '
+        'Codigo
+        '
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.Name = "Codigo"
+        '
+        'Razon
+        '
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.Width = 350
+        '
         'ListadoCuentaCorrienteProveedoresSelectivo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(614, 468)
+        Me.ClientSize = New System.Drawing.Size(589, 468)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnLimpiarTodo)
@@ -357,11 +363,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Controls.Add(Me.btnCancela)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.GRilla)
-        Me.Controls.Add(Me.txtRazon)
-        Me.Controls.Add(Me.txtDesdeProveedor)
-        Me.Controls.Add(Me.CustomLabel1)
-        Me.Controls.Add(Me.txtFechaEmision)
-        Me.Controls.Add(Me.CustomLabel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.lstAyuda)
@@ -371,6 +372,8 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -385,8 +388,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
     Friend WithEvents txtAyuda As Administracion.CustomTextBox
     Friend WithEvents btnConsulta As Administracion.CustomButton
     Friend WithEvents btnCancela As Administracion.CustomButton
-    Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -398,4 +399,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
     Friend WithEvents btnPantalla As Administracion.CustomButton
     Friend WithEvents btnImprimir As Administracion.CustomButton
     Friend WithEvents CustomButton1 As Administracion.CustomButton
+    Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

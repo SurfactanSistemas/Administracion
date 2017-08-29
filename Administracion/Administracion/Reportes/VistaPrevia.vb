@@ -16,11 +16,11 @@ Public Class VistaPrevia
 
     Private Sub Reporte_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
-
         With Me.CrystalReportViewer1
             .ReportSource = Me.Reporte
         End With
+
+        'Me.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
 
     End Sub
 
