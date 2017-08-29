@@ -397,7 +397,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     'calculo de rtencion de Ingresos brutos CABA
                     '
                     If varEmpresa = 1 Then
-                        varRetIbII = CaculoRetencionIngresosBrutos(varTipoIbCaba, varPorceIbCaba, varAcumulaNeto)
+                        varRetIbII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumulaNeto)
                     End If
 
 
@@ -466,6 +466,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             .Reporte = New ListadoCtaCtePrvSelectivo
             .Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
             .CrystalReportViewer1.SelectionFormula = txtFormula
+            .CrystalReportViewer1.Refresh()
             Select Case TipoImpresion
                 Case Reporte.Imprimir
                     '_ConsultarSiEliminarListaParcialDeProveedores()
@@ -623,8 +624,10 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim filtrado As ListBox = lstFiltrada
         Dim texto As TextBox = txtAyuda
 
+        If Trim(filtrado.SelectedItem) = "" Then : Exit Sub : End If
+
         ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
-        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
+        origen.SelectedItem = filtrado.SelectedItem
 
         ' Llamamos al evento que tenga asosiado el control de origen.
         lstAyuda_Click(Nothing, Nothing)
