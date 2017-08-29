@@ -549,7 +549,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         GRilla.Rows.Clear()
 
-        _EliminarProveedorSelectivo()
+        '_EliminarProveedorSelectivo()
 
         varRenglon = 0
 
