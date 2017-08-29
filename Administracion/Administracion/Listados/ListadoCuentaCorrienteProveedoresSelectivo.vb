@@ -464,6 +464,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         With VistaPrevia
             .Reporte = New ListadoCtaCtePrvSelectivo
+            .Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
             .CrystalReportViewer1.SelectionFormula = txtFormula
             Select Case TipoImpresion
                 Case Reporte.Imprimir
