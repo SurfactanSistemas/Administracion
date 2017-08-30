@@ -895,7 +895,12 @@ Public Class RecibosProvisorios
 
                         If Trim(valor.ToString.Length) = 31 Then
                             If _ProcesarCheque(iRow, valor) Then
-                                gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 2) ' Nos desplazamos para que coloque la fecha del cheque.
+                                'gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 2) ' Nos desplazamos para que coloque la fecha del cheque.
+                                If gridRecibos.Rows.Count < iRow + 1 Then
+                                    gridRecibos.CurrentCell = gridRecibos.Rows(gridRecibos.Rows.Add).Cells(0)
+                                Else
+                                    gridRecibos.CurrentCell = gridRecibos.Rows(iRow + 1).Cells(0) ' Nos desplazamos para que coloque la fecha del cheque.
+                                End If
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
@@ -1096,6 +1101,15 @@ Public Class RecibosProvisorios
         End With
         ' Buscamos si existe el cuit.
         _Cuit = _TraerNumeroCuit(_ClaveBanco & _Sucursal & _NumCta)
+
+
+        If Not Proceso.CuitValido(_Cuit) Then
+            With SolicitarInformacionCuit
+                .Valor = _Cuit
+                .ShowDialog()
+                .Dispose()
+            End With
+        End If
 
         ' Guardamos el nuevo Cheque.
         _GuardarNuevoCheque(row, ClaveCheque, _ClaveBanco, _Sucursal, _NumCheque, _NumCta, _Cuit)
