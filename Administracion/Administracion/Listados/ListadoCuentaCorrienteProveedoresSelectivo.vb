@@ -268,7 +268,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim varOrdFecha As String
         Dim varCiclo As Integer
         Dim varPorce As Double
-        Dim varAcumulado, varAcuNeto, varAcuRetenido, varAcuIva, varAcuAnticipo, varAcuBruto As Double
+        Dim varAcumulado, varAcuNeto, varAcuRetenido, varAcuIva, varAcuAnticipo, varAcuBruto, varAcumulaUs As Double
         Dim varProveedor, varLetra As String
         Dim varNeto, varIva, varIva5, varIva27, varIva105, varIb, varExento, varTotalTrabajo As Double
         Dim varRetIb, varRetIva, varRetGan, varAcumulaIb
@@ -290,11 +290,15 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim CampoTipoCambio As TipoDeCambio = DAOTipoCambio.buscarTipoCambioPorFechaPago(txtFechaEmision.Text)
         If IsNothing(CampoTipoCambio) Then
             MsgBox("Paridad Inexistente")
+            txtFechaEmision.Focus()
+            Exit Sub
         Else
             varParidadTotal = CampoTipoCambio.paridad
         End If
 
         GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
+
+        varAcumulaUs = 0
 
         For varCiclo = 0 To GRilla.Rows.Count - 1
 
@@ -331,6 +335,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         varSaldoUs = (CCPrv.saldo / varParidad)
                         varSaldoOriginal = CCPrv.saldo
                         varDife = varSaldo - CCPrv.saldo
+
+                        varAcumulaUs += varTotalUs
+
                     End If
 
                     redondeo(varTotal)
@@ -467,7 +474,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     '!ReteIb = WRetIb
                     '!ReteGan = WRetgan
 
-                    SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, (varAcumulado - varRetIb - varRetGan), varParidad, varTotalUs, varSaldoUs, 0, 0)
+                    SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, (varAcumulado - varRetIb - varRetGan), varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago)
 
 
                 Next
