@@ -200,9 +200,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
 
-        If Trim(lstAyuda.SelectedItem) = "" Then : Exit Sub : End If
+        If IsNothing(lstAyuda.SelectedValue) Then : Exit Sub : End If
 
-        mostrarProveedor(lstAyuda.SelectedItem)
+        mostrarProveedor(lstAyuda.SelectedItem.ToString)
         txtAyuda.Focus()
     End Sub
 
@@ -430,6 +430,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Dim origen As ListBox = lstAyuda
         Dim filtrado As ListBox = lstFiltrada
         Dim texto As TextBox = txtAyuda
+
+        If IsNothing(filtrado.SelectedItem) Then : Exit Sub : End If
 
         ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
         origen.SelectedItem = filtrado.SelectedItem
