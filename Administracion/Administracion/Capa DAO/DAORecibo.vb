@@ -94,6 +94,12 @@ Public Class DAORecibo
 
             Dim _Cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = (renglon - 1))
 
+            Dim WCuenta As String = ""
+
+            If Not IsNothing(_Cuenta) Then
+                WCuenta = _Cuenta(1)
+            End If
+
             temp &= ConsultaSQL_Template _
                 .Replace("#TIPOREC#", _tipoRec) _
                 .Replace("#CLAVE#", id + ceros(renglon, 2)) _
@@ -106,7 +112,7 @@ Public Class DAORecibo
                 .Replace("#IMPORTE2#", Val(formaPago.importe).ToString.Replace(",", ".")) _
                 .Replace("#ESTADO2#", estado2) _
                 .Replace("#FechaDepo#", "") _
-                .Replace("#CUENTA#", IIf(IsNothing(_Cuenta), "", Trim(_Cuenta(1)))) _
+                .Replace("#CUENTA#", WCuenta) _
                 .Replace("#FechaDepoOrd#", "")
 
             Dim _cheque As Object = _cheques.FindLast(Function(c) c(0) = (renglon - 1))

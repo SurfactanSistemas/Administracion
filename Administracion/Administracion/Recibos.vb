@@ -2817,11 +2817,10 @@ Public Class Recibos
 
                         If Trim(valor.ToString.Length) = 31 Then
                             If _ProcesarCheque(iRow, valor) Then
-                                If gridFormasPago2.Rows.Count < iRow + 1 Then
-                                    gridFormasPago2.CurrentCell = gridFormasPago2.Rows(gridFormasPago2.Rows.Add).Cells(0)
-                                Else
-                                    gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow + 1).Cells(0) ' Nos desplazamos para que coloque la fecha del cheque.
-                                End If
+
+                                gridFormasPago2.Rows(iRow + 1).Cells(5).Value = "1"
+                                gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(2) ' Nos desplazamos para que coloque la fecha del cheque.
+
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
@@ -2902,7 +2901,9 @@ Public Class Recibos
 
                         If iCol = 4 Then ' Avanzamos a la fila siguiente.
                             If Val(gridFormasPago2.Rows(iRow).Cells(0).Value) = 4 Then
-                                _PedirCuentaContable(iRow)
+                                If Val(gridFormasPago2.Rows(iRow).Cells(5).Value) <> 1 Then
+                                    _PedirCuentaContable(iRow)
+                                End If
                             ElseIf Val(gridFormasPago2.Rows(iRow).Cells(0).Value) = 2 Then
                                 _PedirClaveCheque(iRow)
                             End If

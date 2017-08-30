@@ -895,12 +895,11 @@ Public Class RecibosProvisorios
 
                         If Trim(valor.ToString.Length) = 31 Then
                             If _ProcesarCheque(iRow, valor) Then
-                                'gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 2) ' Nos desplazamos para que coloque la fecha del cheque.
-                                If gridRecibos.Rows.Count < iRow + 1 Then
-                                    gridRecibos.CurrentCell = gridRecibos.Rows(gridRecibos.Rows.Add).Cells(0)
-                                Else
-                                    gridRecibos.CurrentCell = gridRecibos.Rows(iRow + 1).Cells(0) ' Nos desplazamos para que coloque la fecha del cheque.
-                                End If
+
+                                gridRecibos.Rows(iRow).Cells(6).Value = "1"
+
+                                gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(iCol + 2) ' Nos desplazamos para que coloque la fecha del cheque.
+
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
@@ -972,7 +971,11 @@ Public Class RecibosProvisorios
                             If Trim(valor) = "" Or IsNothing(valor) Then : Return True : End If
 
                             If Val(gridRecibos.Rows(iRow).Cells(0).Value) = 4 Then
-                                _PedirCuentaContable(iRow)
+
+                                If Val(gridRecibos.Rows(iRow).Cells(6).Value) <> 1 Then
+                                    _PedirCuentaContable(iRow)
+                                End If
+
                             ElseIf Val(gridRecibos.Rows(iRow).Cells(0).Value) = 2 Then
                                 _PedirClaveCheque(iRow)
                             End If
