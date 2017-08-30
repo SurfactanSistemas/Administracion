@@ -328,7 +328,7 @@ Public Class RecibosProvisorios
 
                     If Val(dr.Item("Tipo2")) = 4 Then
                         With dr
-                            _CuentasContables.Add({Val(.Item("Renglon")), .Item("Cuenta")})
+                            _CuentasContables.Add({Val(.Item("Renglon")) - 1, .Item("Cuenta")})
                         End With
                     End If
 
@@ -450,8 +450,8 @@ Public Class RecibosProvisorios
         Next
         validador.validate(Me)
         validador.alsoValidate(Val(_NormalizarNumero(lblTotal.Text)) = Val(_NormalizarNumero(txtTotal.Text)), "La suma de los importes de la tabla no coincide con lo informado en el total")
-        validador.alsoValidate(DAORecibo.existeReciboProvisorio(txtRecibo.Text), "Ya existe un recibo definitivo con ese número")
         validador.alsoValidate(DAORecibo.permiteActualizacionProvisorio(txtRecibo.Text), "Algunos de los cheques del recibo provisorio ya se encuentra procesado por lo que no se puede actualizar el mismo.")
+        'validador.alsoValidate(DAORecibo.existeReciboProvisorio(txtRecibo.Text), "Ya existe un recibo definitivo con ese número")
 
         If validador.flush Then
 
@@ -474,7 +474,7 @@ Public Class RecibosProvisorios
                     (_NormalizarNumero(_RetIB2)), (_NormalizarNumero(_CompIB2)), (_NormalizarNumero(_RetIB3)), _
                     (_NormalizarNumero(_CompIB3)), (_NormalizarNumero(_RetIB4)), (_NormalizarNumero(_CompIB4)), _
                     (_NormalizarNumero(_RetIB5)), (_NormalizarNumero(_CompIB5)), (_NormalizarNumero(_RetIB6)), _
-                    (_NormalizarNumero(_CompIB6)), (_NormalizarNumero(_RetIB7)), (_NormalizarNumero(_CompIB7)), (_NormalizarNumero(_RetIB8)), (_NormalizarNumero(_CompIB8)), _ClavesCheques)
+                    (_NormalizarNumero(_CompIB6)), (_NormalizarNumero(_RetIB7)), (_NormalizarNumero(_CompIB7)), (_NormalizarNumero(_RetIB8)), (_NormalizarNumero(_CompIB8)), _ClavesCheques, _CuentasContables)
             Catch ex As Exception
                 MsgBox(ex.Message)
                 Exit Sub

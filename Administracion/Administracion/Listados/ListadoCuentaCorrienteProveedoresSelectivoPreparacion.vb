@@ -19,9 +19,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Dim _Proveedores As New List(Of Object)
         Dim _CargadosHaceMasDeUnaSemana As Integer = 0
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ps.Proveedor, ps.FechaOrd, p.Nombre, ps.ChequeRechazado FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Proveedor = p.Proveedor")
+        Dim cm As SqlCommand = New SqlCommand("SELECT ps.Proveedor, ps.FechaOrd, p.Nombre, ps.Observaciones, ps.Desde, ps.Hasta FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Proveedor = p.Proveedor")
         Dim dr As SqlDataReader
-        Dim WChequeRechazado As String = ""
+        Dim WObservaciones As String = ""
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -37,9 +37,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                     GRilla.Item(0, varRenglon).Value = dr.Item("Proveedor")
                     GRilla.Item(1, varRenglon).Value = dr.Item("Nombre")
 
-                    WChequeRechazado = IIf(IsDBNull(dr.Item("ChequeRechazado")), "", dr.Item("ChequeRechazado"))
+                    WObservaciones = IIf(IsDBNull(dr.Item("Observaciones")), "", dr.Item("Observaciones"))
 
-                    GRilla.Item(2, varRenglon).Value = (WChequeRechazado = "1")
+                    txtDesde.Text = IIf(IsDBNull(dr.Item("Desde")), "", dr.Item("Desde"))
+                    txtHasta.Text = IIf(IsDBNull(dr.Item("Hasta")), "", dr.Item("Hasta"))
+
+                    GRilla.Item(2, varRenglon).Value = WObservaciones
 
                     GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
                     GRilla.CurrentCell = GRilla(0, 0)
@@ -124,6 +127,24 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Return _YaAgregado
     End Function
 
+    Private Function _ProveedorYaAgregado(ByVal _Proveedor As String, ByVal Excepto As Integer) As Boolean
+        Dim _YaAgregado As Boolean = False
+
+        For Each row As DataGridViewRow In GRilla.Rows
+
+            If Trim(row.Cells(0).Value) = Trim(_Proveedor) And row.Index <> Excepto Then
+                _YaAgregado = True
+                Exit For
+            ElseIf Trim(row.Cells(1).Value) = Trim(_Proveedor) And row.Index <> Excepto Then
+                _YaAgregado = True
+                Exit For
+            End If
+
+        Next
+
+        Return _YaAgregado
+    End Function
+
     Private Sub mostrarProveedor(ByVal proveedor As String)
         Dim _Proveedor As Object = _BuscarProveedor(proveedor)
         If IsNothing(_Proveedor) Then
@@ -197,8 +218,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
-        Dim ZSql, WProveedor, WFecha, WFechaOrd, WChequeRechazado
+    Private Sub _GuardarProveedores()
+        Dim ZSql, WProveedor, WFecha, WFechaOrd, WObservaciones, WDesde, WHasta
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
 
@@ -222,6 +243,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
             End Try
 
+            WDesde = txtDesde.Text
+            WHasta = txtHasta.Text
+
             For Each row As DataGridViewRow In GRilla.Rows
 
                 If Not IsNothing(row.Cells(0)) Then
@@ -230,12 +254,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                             WProveedor = Trim(.Cells(0).Value)
                             WFecha = Date.Now.ToString("dd-MM-yyyy")
                             WFechaOrd = Proceso.ordenaFecha(WFecha)
-                            WChequeRechazado = IIf(.Cells(2).Value = True, "1", "0")
+                            WObservaciones = IIf(IsNothing(.Cells(2).Value), "", .Cells(2).Value)
 
                             ZSql = ""
                             ZSql &= "INSERT INTO ProveedorSelectivo "
-                            ZSql &= "(Proveedor, Fecha, FechaOrd, ChequeRechazado) "
-                            ZSql &= "VALUES ('" & WProveedor & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WChequeRechazado & "') "
+                            ZSql &= "(Proveedor, Fecha, FechaOrd, Observaciones, Desde, Hasta) "
+                            ZSql &= "VALUES ('" & WProveedor & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WObservaciones & "', '" & WDesde & "', '" & WHasta & "') "
 
                             Try
                                 cn.Open()
@@ -243,7 +267,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                                 cm.ExecuteNonQuery()
 
                             Catch ex As Exception
-                                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                                Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
                                 Exit Sub
                             Finally
 
@@ -257,34 +281,21 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
             Next
 
-            MsgBox("El listado provisorio se ha guardado correctamente", MsgBoxStyle.Information)
-            txtCodProveedor.Focus()
+
         End If
+
     End Sub
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-
-        If GRilla.Focused Or GRilla.IsCurrentCellInEditMode Then
-
-            Dim key As Integer = msg.WParam.ToInt32()
-
-            GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
-
-            If key = Keys.Escape Then
-
-                If GRilla.SelectedRows.Count > 0 Then
-
-                    _EliminarProveedoresSeleccionados()
-
-                End If
-
-            End If
-
-            Return True
-        End If
-
-        Return MyBase.ProcessCmdKey(msg, keyData)
-    End Function
+    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+        Try
+            _GuardarProveedores()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Information)
+            Exit Sub
+        End Try
+        MsgBox("El listado provisorio se ha guardado correctamente", MsgBoxStyle.Information)
+        txtCodProveedor.Focus()
+    End Sub
 
     Private Sub _EliminarProveedoresSeleccionados()
         If MsgBox("¿Esta seguro que desea eliminar los proveedores seleccionados?", MsgBoxStyle.OkCancel) = DialogResult.OK Then
@@ -450,6 +461,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
             '_Imprimir(crdoc)
             '_VistaPrevia(crdoc)
+            Try
+                _GuardarProveedores()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Information)
+                Exit Sub
+            End Try
+
             With VistaPrevia
                 .Reporte = New ProveedoresSelectivoPreparacionListado
                 .Mostrar()
@@ -527,4 +545,127 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             txtHasta.Clear()
         End If
     End Sub
+
+    Private Function _EsNumero(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 109)
+    End Function
+
+    Private Function _EsControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        Select Case keycode
+            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
+                valido = True
+            Case Else
+                valido = False
+        End Select
+
+        Return valido
+    End Function
+
+    Private Function _EsNumeroOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+
+        If GRilla.Focused Or GRilla.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+            GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+            Dim iCol = GRilla.CurrentCell.ColumnIndex
+            Dim iRow = GRilla.CurrentCell.RowIndex
+
+            ' Limitamos los caracteres permitidos para cada una de las columnas.
+            Select Case iCol
+                Case 0
+                    If Not _EsNumeroOControl(keyData) Then
+                        Return True
+                    End If
+                Case Else
+
+            End Select
+
+            If msg.WParam.ToInt32() = Keys.Enter Then
+
+                Dim valor = GRilla.Rows(iRow).Cells(iCol).Value
+
+                If Not IsNothing(valor) Then
+
+                    If iCol = 0 And iRow > -1 Then
+
+                        Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(valor)
+
+                        If Not IsNothing(proveedor) Then
+                            If Not _ProveedorYaAgregado(proveedor.id, iRow) Then
+
+                                GRilla.Rows(iRow).Cells(1).Value = Trim(proveedor.razonSocial)
+
+                                GRilla.CurrentCell = GRilla.Rows(iRow).Cells(2)
+
+                            Else
+                                MsgBox("Proveedor ya cargado con anterioridad.", MsgBoxStyle.Information)
+                                GRilla.CurrentCell = GRilla.Rows(iRow).Cells(iCol)
+                            End If
+
+                        End If
+                    ElseIf iCol = 2 Then
+                        If GRilla.Rows.Count < iRow + 1 Then
+                            GRilla.CurrentCell = GRilla.Rows(GRilla.Rows.Add).Cells(0)
+                        Else
+                            GRilla.CurrentCell = GRilla.Rows(iRow + 1).Cells(0)
+                        End If
+                    End If
+
+                    Return True
+                Else
+
+                    With GRilla
+                        Select Case iCol
+                            Case 0, 1
+                                .CurrentCell = .Rows(iRow).Cells(iCol)
+                            Case 2
+                                If .Rows.Count < iRow + 1 And Not IsNothing(.Rows(iRow).Cells(iCol).Value) Then
+                                    .CurrentCell = .Rows(.Rows.Add).Cells(iCol)
+                                Else
+                                    .CurrentCell = .Rows(iRow + 1).Cells(iCol)
+                                End If
+                            Case Else
+                        End Select
+                    End With
+
+                    Return True
+
+                End If
+            ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+
+                With GRilla
+                    .Rows(iRow).Cells(iCol).Value = ""
+
+                    ' Solo para que pierda el foco y se refresque el contenido sino sigue quedando ahi.
+                    
+                    Select Case iCol
+                        Case 2
+                            .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                        Case Else
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End Select
+
+
+                    .CurrentCell = .Rows(iRow).Cells(iCol)
+                End With
+
+
+            End If
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
 End Class

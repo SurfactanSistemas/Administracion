@@ -793,7 +793,7 @@ Public Class Recibos
                     With dr
                         If Val(IIf(IsDBNull(.Item("Tipo2")), "0", .Item("Tipo2"))) = 4 Then
 
-                            _CuentasContables.Add({Val(IIf(IsDBNull(.Item("Renglon")), "", .Item("Renglon"))) - 1, IIf(IsDBNull(.Item("Cuenta")), "", .Item("Cuenta"))})
+                            _CuentasContables.Add({Val(.Item("Renglon")) - 1, IIf(IsDBNull(.Item("Cuenta")), "", .Item("Cuenta"))})
 
                         End If
                     End With

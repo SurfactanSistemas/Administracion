@@ -53,13 +53,13 @@ Public Class DAORecibo
         ByVal Suss As String, ByVal valorParidad As String, ByVal valorTotal As String, ByVal FormasDePago As List(Of FormaPago), ByVal CompGanancias As String, ByVal CompIva As String,
         ByVal CompSuss As String, ByVal RetIB1 As String, ByVal CompIB1 As String, ByVal RetIB2 As String, ByVal CompIB2 As String, ByVal RetIB3 As String,
         ByVal CompIB3 As String, ByVal RetIB4 As String, ByVal CompIB4 As String, ByVal RetIB5 As String, ByVal CompIB5 As String, ByVal RetIB6 As String,
-        ByVal CompIB6 As String, ByVal RetIB7 As String, ByVal CompIB7 As String, ByVal RetIB8 As String, ByVal CompIB8 As String, ByVal _cheques As List(Of Object))
+        ByVal CompIB6 As String, ByVal RetIB7 As String, ByVal CompIB7 As String, ByVal RetIB8 As String, ByVal CompIB8 As String, ByVal _cheques As List(Of Object), ByVal _CuentasContables As List(Of Object))
 
         Dim renglon As Integer = 1
         Dim estado2 As Char = ""
         Dim _fechaord2 As String = ""
         Dim _fechaord As String() = fecha2.Split("/")
-        Dim ConsultaSQL_Template As String = "('#CLAVE#', '" & id & "', '#RENGLON#', '" & cli.id & "', '" & fecha2 & "','" & _fechaord(2).ToString() & _fechaord(1).ToString() & _fechaord(0).ToString() & "', '#TIPOREC#', '" & ganancias & "', '" & CompGanancias & "','" & IVA & "', '" & CompIva & "','" & IB & "', '" & Suss & "', '" & CompSuss & "',0,2, '#TIPO#', '#NUMERO2#', '#FECHA2#', '#FECHAORD2#', '#BANCO2#', '#IMPORTE2#', '" & valorTotal & "', 1, 0, '', '', '#ESTADO2#', '" & RetIB1.ToString() & "', '" & CompIB1.ToString() & "', '" & RetIB2.ToString() & "', '" & CompIB2.ToString() & "', '" & RetIB3.ToString() & "', '" _
+        Dim ConsultaSQL_Template As String = "('#CLAVE#', '" & id & "', '#RENGLON#', '" & cli.id & "', '" & fecha2 & "','" & _fechaord(2).ToString() & _fechaord(1).ToString() & _fechaord(0).ToString() & "', '#TIPOREC#', '" & ganancias & "', '" & CompGanancias & "','" & IVA & "', '" & CompIva & "','" & IB & "', '" & Suss & "', '" & CompSuss & "',0,2, '#TIPO#', '#NUMERO2#', '#FECHA2#', '#FECHAORD2#', '#BANCO2#', '#IMPORTE2#', '" & valorTotal & "', 1, 0, '', '#CUENTA#', '#ESTADO2#', '" & RetIB1.ToString() & "', '" & CompIB1.ToString() & "', '" & RetIB2.ToString() & "', '" & CompIB2.ToString() & "', '" & RetIB3.ToString() & "', '" _
                                         & CompIB3.ToString() & "', '" & RetIB4.ToString() & "', '" & CompIB4.ToString() & "', '" & RetIB5.ToString() & "', '" & CompIB5.ToString() & "', '" & RetIB6.ToString() & "', '" & CompIB6.ToString() & "', '" & RetIB7.ToString() & "', '" & CompIB7.ToString() & "', '" & RetIB8.ToString() & "', '" & CompIB8.ToString() _
                                         & "', '#FechaDepo#', '#FechaDepoOrd#', '#ClaveCheque#', '#BancoCheque#', '#SucursalCheque#', '#ChequeCheque#', '#CuentaCheque#', '#Cuit#', '0', '', '', 0, '', '', '', '', 0, '','', '')"
 
@@ -92,6 +92,8 @@ Public Class DAORecibo
 
             Dim temp As String = ""
 
+            Dim _Cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = (renglon - 1))
+
             temp &= ConsultaSQL_Template _
                 .Replace("#TIPOREC#", _tipoRec) _
                 .Replace("#CLAVE#", id + ceros(renglon, 2)) _
@@ -104,6 +106,7 @@ Public Class DAORecibo
                 .Replace("#IMPORTE2#", Val(formaPago.importe).ToString.Replace(",", ".")) _
                 .Replace("#ESTADO2#", estado2) _
                 .Replace("#FechaDepo#", "") _
+                .Replace("#CUENTA#", IIf(IsNothing(_Cuenta), "", Trim(_Cuenta(1)))) _
                 .Replace("#FechaDepoOrd#", "")
 
             Dim _cheque As Object = _cheques.FindLast(Function(c) c(0) = (renglon - 1))
