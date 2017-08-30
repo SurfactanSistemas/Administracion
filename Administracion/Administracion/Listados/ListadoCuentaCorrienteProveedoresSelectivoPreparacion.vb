@@ -12,7 +12,10 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Private Sub ListadoCuentaCorrienteProveedoresSelectivoPreparacion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtCodProveedor.Text = ""
         varRenglon = 0
+
         _CargarProveedoresPreCargados()
+
+        GRilla.Sort(GRilla.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 
     Private Sub _CargarProveedoresPreCargados()
@@ -156,8 +159,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                 GRilla.Item(0, varRenglon).Value = _Proveedor(0)
                 GRilla.Item(1, varRenglon).Value = _Proveedor(1)
                 GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
-                varRenglon = varRenglon + 1
-                GRilla.CurrentCell = GRilla(0, 0)
+                'varRenglon = varRenglon + 1
+
+                GRilla.Sort(GRilla.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+
+                GRilla.CurrentCell = GRilla(0, varRenglon)
+                'GRilla.Focus()
+                GRilla.FirstDisplayedScrollingRowIndex = varRenglon
 
                 '_ActualizarProveedoresInscriptos(_Proveedor(0))
 

@@ -71,6 +71,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             _CargarProveedor(DAOProveedor.buscarProveedorPorCodigo(_Proveedor(0)))
         Next
 
+        GRilla.Sort(GRilla.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+
     End Sub
 
     Private Sub _CargarProveedor(ByVal CampoProveedor As Proveedor, Optional ByVal ChequeRechazado As String = "")
@@ -681,6 +683,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
+        If e.RowIndex < 0 Then : Exit Sub : End If
         Dim fila = GRilla.Rows(e.RowIndex)
         If Not IsNothing(fila) Then
 
