@@ -463,8 +463,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
 
-        If GRilla.Rows.Count > 0 And Not IsNothing(GRilla.Rows(0).Cells(0)) Then
-            
+        If GRilla.Rows.Count > 0 And Not IsNothing(GRilla.Rows(0).Cells(0).Value) Then
+
             'crdoc.DataSourceConnections.Item(0).SetConnection("(LOCAL)\LOCALSQLSERVER", "SurfactanSA", True)
             'crdoc.DataSourceConnections.Item(0).SetConnection("193.168.0.7", "SurfactanSA", True)
             'crdoc.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
@@ -500,6 +500,16 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     End Sub
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+        If GRilla.Rows.Count > 0 And Not IsNothing(GRilla.Rows(0).Cells(0).Value) Then
+
+            Try
+                _GuardarProveedores()
+            Catch ex As Exception
+
+            End Try
+
+        End If
+
         ' Realizan la misma funcion.
         Me.Close()
     End Sub
@@ -678,4 +688,16 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
+
+    Private Sub ListadoCuentaCorrienteProveedoresSelectivoPreparacion_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        If GRilla.Rows.Count > 0 And Not IsNothing(GRilla.Rows(0).Cells(0).Value) Then
+
+            Try
+                _GuardarProveedores()
+            Catch ex As Exception
+
+            End Try
+
+        End If
+    End Sub
 End Class

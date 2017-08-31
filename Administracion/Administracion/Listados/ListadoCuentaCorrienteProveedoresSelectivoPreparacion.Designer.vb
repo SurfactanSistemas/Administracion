@@ -24,6 +24,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.GRilla = New System.Windows.Forms.DataGridView()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -43,9 +46,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -60,6 +60,27 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.GRilla.Size = New System.Drawing.Size(593, 225)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
+        '
+        'Codigo
+        '
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.Name = "Codigo"
+        '
+        'Razon
+        '
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        Me.Razon.Width = 300
+        '
+        'Observaciones
+        '
+        Me.Observaciones.HeaderText = "Observaciones"
+        Me.Observaciones.MaxInputLength = 100
+        Me.Observaciones.Name = "Observaciones"
+        Me.Observaciones.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Observaciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Observaciones.Width = 150
         '
         'Panel1
         '
@@ -317,27 +338,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.txtAyuda.TabIndex = 53
         Me.txtAyuda.Validator = Administracion.ValidatorType.None
         Me.txtAyuda.Visible = False
-        '
-        'Codigo
-        '
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.Name = "Codigo"
-        '
-        'Razon
-        '
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.ReadOnly = True
-        Me.Razon.Width = 300
-        '
-        'Observaciones
-        '
-        Me.Observaciones.HeaderText = "Observaciones"
-        Me.Observaciones.MaxInputLength = 100
-        Me.Observaciones.Name = "Observaciones"
-        Me.Observaciones.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Observaciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Observaciones.Width = 150
         '
         'ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         '

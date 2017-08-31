@@ -972,12 +972,14 @@ Public Class RecibosProvisorios
 
                             If Val(gridRecibos.Rows(iRow).Cells(0).Value) = 4 Then
 
-                                If Val(gridRecibos.Rows(iRow).Cells(6).Value) <> 1 Then
-                                    _PedirCuentaContable(iRow)
-                                End If
+                                _PedirCuentaContable(iRow)
 
                             ElseIf Val(gridRecibos.Rows(iRow).Cells(0).Value) = 2 Then
-                                _PedirClaveCheque(iRow)
+                                ' Pedimos unicamente cuit cuando el cheque no fue cargado por lectora y este no es un cuit invalido.
+                                If Val(gridRecibos.Rows(iRow).Cells(6).Value) <> 1 Then
+                                    _PedirClaveCheque(iRow)
+                                End If
+
                             End If
 
                             gridRecibos.CurrentCell = gridRecibos.Rows(iRow + 1).Cells(0)

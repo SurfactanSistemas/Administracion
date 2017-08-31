@@ -50,6 +50,17 @@ Public Class ListadoGraficoAnual
 
         txtAno.Focus()
 
+        _HabilitarSegunVendedor()
+
+    End Sub
+
+    Private Sub _HabilitarSegunVendedor()
+        If Vendedor.permisos <> 99 Then
+
+            txtVendedorFiltro.Text = Vendedor.permisos
+            txtVendedorFiltro.Enabled = False
+
+        End If
     End Sub
 
     Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
@@ -359,6 +370,11 @@ Public Class ListadoGraficoAnual
 
         txtUno = "{Grafico2.codigo} in 0 to 9999"
         txtDos = ""
+
+        If Vendedor.permisos <> 99 Then
+            txtUno = "{Grafico2.codigo} in " & Vendedor.permisos & " to " & Vendedor.permisos
+        End If
+
         txtFormula = txtUno + txtDos
 
         If TipoListado.SelectedIndex <> 3 Then

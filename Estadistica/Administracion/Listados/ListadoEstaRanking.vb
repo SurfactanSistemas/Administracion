@@ -112,7 +112,14 @@ Public Class ListadoEstaRanking
         End With
 
         Dim tabla As DataTable
-        tabla = SQLConnector.retrieveDataTable("buscar_estadistica_productos", 0, 9999, 0, 9999, 0, 9999, "", "Z999999", "", "ZZ-99999-999", txtDesde, txtHasta)
+        Dim WDesdeVendedor = 0, WHastaVendedor = 9999
+
+        If Vendedor.permisos <> 99 Then
+            WDesdeVendedor = Vendedor.permisos
+            WHastaVendedor = Vendedor.permisos
+        End If
+
+        tabla = SQLConnector.retrieveDataTable("buscar_estadistica_productos", WDesdeVendedor, WHastaVendedor, 0, 9999, 0, 9999, "", "Z999999", "", "ZZ-99999-999", txtDesde, txtHasta)
 
         For Each row As DataRow In tabla.Rows
 

@@ -6,7 +6,12 @@ Public Class Globals
     Public Shared Function reportPathWithName(ByVal reportName As String)
         Dim path As String
         Try
-            path = ConfigurationManager.AppSettings("reportsLocation")
+            If UCase(Globals.empresa) = "LOCAL" Then
+                path = ConfigurationManager.AppSettings("LocalreportsLocation")
+            Else
+                path = ConfigurationManager.AppSettings("reportsLocation")
+            End If
+
         Catch ex As Exception
             Throw New ApplicationException("Problemas obteniendo la variable de entorno 'reportsLocation' del app.config")
         End Try

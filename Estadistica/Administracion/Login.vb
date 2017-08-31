@@ -25,9 +25,13 @@ Public Class Login
 
     Private Sub btnAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccept.Click
         If validarCampos() Then
-            Globals.empresa = cmbEntity.Text
-            MenuPrincipal.Show()
-            Close()
+
+            If _ControlarPermisos(txtClave.Text) Then
+                Globals.empresa = cmbEntity.Text
+                MenuPrincipal.Show()
+                Close()
+            End If
+
         End If
     End Sub
 
@@ -88,28 +92,52 @@ Public Class Login
         Return _vendedor
     End Function
 
-    Private Sub txtClave_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtClave.KeyDown
+    Private Function _ControlarPermisos(ByVal clave As String) As Boolean
+        Dim valido As Boolean = True
 
+        If IsNothing(Globals.empresa) Then
+            Globals.empresa = cmbEntity.Text
+        End If
+
+        Dim _Vendedor As Vendedor = _BuscarVendedor(Trim(txtClave.Text))
+
+        If IsNothing(_Vendedor) Then
+            MsgBox("No tiene permisos para acceder al sistema de Estadisticas.", MsgBoxStyle.Information)
+            txtClave.Focus()
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Private Sub txtClave_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtClave.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtClave.Text) = "" Then : Exit Sub : End If
 
-            If IsNothing(Globals.empresa) Then
-                Globals.empresa = cmbEntity.Text
-            End If
-
-            Dim _Vendedor As Vendedor = _BuscarVendedor(Trim(txtClave.Text))
-
-            If IsNothing(_Vendedor) Then
-                MsgBox("No tiene permisos para acceder al sistema de Estadisticas.", MsgBoxStyle.Information)
-                Exit Sub
-            End If
+            btnAccept.PerformClick()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtClave.Text = ""
         End If
 
+    End Sub
+
+    Private Sub cmbEntity_SelectedValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbEntity.SelectedValueChanged
+        txtClave.Focus()
+    End Sub
 
 
+    ' Para centar Combo Box.
+    Private Sub cmbEntity_DrawItem(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles cmbEntity.DrawItem
+        If e.Index >= 0 Then
+            Using st As New StringFormat With {.Alignment = StringAlignment.Center}
+                e.Graphics.DrawString(sender.Items(e.Index).ToString, e.Font, Brushes.Black, e.Bounds, st)
+            End Using
+        End If
+    End Sub
+
+    Private Sub Login_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtClave.Focus()
     End Sub
 End Class

@@ -114,7 +114,7 @@ Public Class ProveedoresABM
                     & "Provincia =  '" & ceros(NormalizarIndex(cmbProvincia.SelectedIndex), 2) & "', " _
                     & "Postal =  '" & Mid(Trim(txtCodigoPostal.Text), 1, 4) & "', " _
                     & "Cuit =  '" & Mid(Trim(txtCUIT.Text), 1, 15) & "', " _
-                    & "Telefono =  '" & Mid(Trim(txtTelefono.Text), 1, 30) & "', " _
+                    & "Telefono =  '" & Mid(Trim(txtTelefono.Text), 1, 100) & "', " _
                     & "Email =  '" & Mid(Trim(txtEmail.Text), 1, 400) & "', " _
                     & "Observaciones =  '" & Mid(Trim(txtObservaciones.Text), 1, 50) & "', " _
                     & "Tipo =  '" & NormalizarIndex(cmbTipoProveedor.SelectedIndex) & "', " _
@@ -897,6 +897,9 @@ Public Class ProveedoresABM
                 btnLimpiar.PerformClick()
                 txtCodigo.Text = codigo
                 txtRazonSocial.Focus()
+
+                ' En CABA es exento por Defecto.
+                cmbCondicionIB2.SelectedIndex = 2
             End If
 
 
@@ -1442,7 +1445,7 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress, txtTelefono.KeyPress, txtCodigoPostal.KeyPress, txtCuenta.KeyPress
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress, txtCodigoPostal.KeyPress, txtCuenta.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If

@@ -1077,7 +1077,7 @@ Partial Class ProveedoresABM
         Me.txtTelefono.EnterIndex = 8
         Me.txtTelefono.LabelAssociationKey = 8
         Me.txtTelefono.Location = New System.Drawing.Point(124, 75)
-        Me.txtTelefono.MaxLength = 30
+        Me.txtTelefono.MaxLength = 100
         Me.txtTelefono.Name = "txtTelefono"
         Me.txtTelefono.Size = New System.Drawing.Size(153, 20)
         Me.txtTelefono.TabIndex = 26

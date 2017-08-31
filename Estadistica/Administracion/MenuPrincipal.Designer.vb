@@ -60,117 +60,117 @@ Partial Class MenuPrincipal
         '
         Me.EstadisticaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EstadisticasPorVendedorToolStripMenuItem, Me.EstadisticaDeVentasPorRubroYClienteToolStripMenuItem, Me.EstadisticasDeVentasPorLineaToolStripMenuItem, Me.EstsdisticaDeVentasPorProductoToolStripMenuItem, Me.EstadisticaDeVentasPorClienteToolStripMenuItem, Me.RankingDeVentasToolStripMenuItem, Me.EstadisticaDeVentasAnualesToolStripMenuItem, Me.EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem, Me.EmisionDeGraficosToolStripMenuItem, Me.EmiiosnDeGraficosAnualesToolStripMenuItem})
         Me.EstadisticaToolStripMenuItem.Name = "EstadisticaToolStripMenuItem"
-        Me.EstadisticaToolStripMenuItem.Size = New System.Drawing.Size(70, 20)
+        Me.EstadisticaToolStripMenuItem.Size = New System.Drawing.Size(74, 20)
         Me.EstadisticaToolStripMenuItem.Text = "Estadistica"
         '
         'EstadisticasPorVendedorToolStripMenuItem
         '
         Me.EstadisticasPorVendedorToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EstadisticaDeVentasPorVendedorRuboYLineaToolStripMenuItem, Me.EstadisticaDeVentasPorVededorClienteYLineaToolStripMenuItem, Me.EstadisticaDeVentasPorVendedorToolStripMenuItem})
         Me.EstadisticasPorVendedorToolStripMenuItem.Name = "EstadisticasPorVendedorToolStripMenuItem"
-        Me.EstadisticasPorVendedorToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.EstadisticasPorVendedorToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EstadisticasPorVendedorToolStripMenuItem.Text = "Estadistica de Ventas por VENDEDOR"
         '
         'EstadisticaDeVentasPorVendedorRuboYLineaToolStripMenuItem
         '
         Me.EstadisticaDeVentasPorVendedorRuboYLineaToolStripMenuItem.Name = "EstadisticaDeVentasPorVendedorRuboYLineaToolStripMenuItem"
-        Me.EstadisticaDeVentasPorVendedorRuboYLineaToolStripMenuItem.Size = New System.Drawing.Size(329, 22)
+        Me.EstadisticaDeVentasPorVendedorRuboYLineaToolStripMenuItem.Size = New System.Drawing.Size(349, 22)
         Me.EstadisticaDeVentasPorVendedorRuboYLineaToolStripMenuItem.Text = "Estadistica de Ventas por VENDEDOR, Rubo y Linea"
         '
         'EstadisticaDeVentasPorVededorClienteYLineaToolStripMenuItem
         '
         Me.EstadisticaDeVentasPorVededorClienteYLineaToolStripMenuItem.Name = "EstadisticaDeVentasPorVededorClienteYLineaToolStripMenuItem"
-        Me.EstadisticaDeVentasPorVededorClienteYLineaToolStripMenuItem.Size = New System.Drawing.Size(329, 22)
+        Me.EstadisticaDeVentasPorVededorClienteYLineaToolStripMenuItem.Size = New System.Drawing.Size(349, 22)
         Me.EstadisticaDeVentasPorVededorClienteYLineaToolStripMenuItem.Text = "Estadistica de Ventas por VENDEDOR, Cliente y Linea"
         '
         'EstadisticaDeVentasPorVendedorToolStripMenuItem
         '
         Me.EstadisticaDeVentasPorVendedorToolStripMenuItem.Name = "EstadisticaDeVentasPorVendedorToolStripMenuItem"
-        Me.EstadisticaDeVentasPorVendedorToolStripMenuItem.Size = New System.Drawing.Size(329, 22)
+        Me.EstadisticaDeVentasPorVendedorToolStripMenuItem.Size = New System.Drawing.Size(349, 22)
         Me.EstadisticaDeVentasPorVendedorToolStripMenuItem.Text = "Estadistica de Ventas por VENDEDOR y Linea"
         '
         'EstadisticaDeVentasPorRubroYClienteToolStripMenuItem
         '
         Me.EstadisticaDeVentasPorRubroYClienteToolStripMenuItem.Name = "EstadisticaDeVentasPorRubroYClienteToolStripMenuItem"
-        Me.EstadisticaDeVentasPorRubroYClienteToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.EstadisticaDeVentasPorRubroYClienteToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EstadisticaDeVentasPorRubroYClienteToolStripMenuItem.Text = "Estadistica de Ventas por RUBRO y Cliente"
         '
         'EstadisticasDeVentasPorLineaToolStripMenuItem
         '
         Me.EstadisticasDeVentasPorLineaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem, Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem1})
         Me.EstadisticasDeVentasPorLineaToolStripMenuItem.Name = "EstadisticasDeVentasPorLineaToolStripMenuItem"
-        Me.EstadisticasDeVentasPorLineaToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.EstadisticasDeVentasPorLineaToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EstadisticasDeVentasPorLineaToolStripMenuItem.Text = "Estadistica de Ventas por LINEA"
         '
         'EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem
         '
         Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem.Name = "EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem"
-        Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem.Size = New System.Drawing.Size(319, 22)
+        Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem.Size = New System.Drawing.Size(336, 22)
         Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem.Text = "Estadistica  de Ventas por  LINEA y Producto (Ind.)"
         '
         'EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem1
         '
         Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem1.Name = "EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem1"
-        Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem1.Size = New System.Drawing.Size(319, 22)
+        Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem1.Size = New System.Drawing.Size(336, 22)
         Me.EstadisticaDeVentasPorLineaYProductoIndToolStripMenuItem1.Text = "Estadistica  de Ventas por  LINEA y Producto "
         '
         'EstsdisticaDeVentasPorProductoToolStripMenuItem
         '
         Me.EstsdisticaDeVentasPorProductoToolStripMenuItem.Name = "EstsdisticaDeVentasPorProductoToolStripMenuItem"
-        Me.EstsdisticaDeVentasPorProductoToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.EstsdisticaDeVentasPorProductoToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EstsdisticaDeVentasPorProductoToolStripMenuItem.Text = "Estsdistica de Ventas por PRODUCTO  y Linea"
         '
         'EstadisticaDeVentasPorClienteToolStripMenuItem
         '
         Me.EstadisticaDeVentasPorClienteToolStripMenuItem.Name = "EstadisticaDeVentasPorClienteToolStripMenuItem"
-        Me.EstadisticaDeVentasPorClienteToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.EstadisticaDeVentasPorClienteToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EstadisticaDeVentasPorClienteToolStripMenuItem.Text = "Estadistica de Ventas por CLIENTE y Linea"
         '
         'RankingDeVentasToolStripMenuItem
         '
         Me.RankingDeVentasToolStripMenuItem.Name = "RankingDeVentasToolStripMenuItem"
-        Me.RankingDeVentasToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.RankingDeVentasToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.RankingDeVentasToolStripMenuItem.Text = "Ranking de Ventas"
         '
         'EstadisticaDeVentasAnualesToolStripMenuItem
         '
         Me.EstadisticaDeVentasAnualesToolStripMenuItem.Name = "EstadisticaDeVentasAnualesToolStripMenuItem"
-        Me.EstadisticaDeVentasAnualesToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.EstadisticaDeVentasAnualesToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EstadisticaDeVentasAnualesToolStripMenuItem.Text = "Estadistica de Ventas Anuales"
         '
         'EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem
         '
         Me.EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem.Name = "EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem"
-        Me.EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem.Text = "Estadistica de Ventas Comparativa entre Años"
         '
         'EmisionDeGraficosToolStripMenuItem
         '
         Me.EmisionDeGraficosToolStripMenuItem.Name = "EmisionDeGraficosToolStripMenuItem"
-        Me.EmisionDeGraficosToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.EmisionDeGraficosToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EmisionDeGraficosToolStripMenuItem.Text = "Emision de Graficos"
         '
         'EmiiosnDeGraficosAnualesToolStripMenuItem
         '
         Me.EmiiosnDeGraficosAnualesToolStripMenuItem.Name = "EmiiosnDeGraficosAnualesToolStripMenuItem"
-        Me.EmiiosnDeGraficosAnualesToolStripMenuItem.Size = New System.Drawing.Size(296, 22)
+        Me.EmiiosnDeGraficosAnualesToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EmiiosnDeGraficosAnualesToolStripMenuItem.Text = "Emiiosn de Graficos Anuales"
         '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator1, Me.FinDelSistemaToolStripMenuItem})
         Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
-        Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.ProcesosToolStripMenuItem.Text = "Procesos"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(142, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(150, 6)
         '
         'FinDelSistemaToolStripMenuItem
         '
         Me.FinDelSistemaToolStripMenuItem.Name = "FinDelSistemaToolStripMenuItem"
-        Me.FinDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.FinDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.FinDelSistemaToolStripMenuItem.Text = "Fin del Sistema"
         '
         'btnCambio

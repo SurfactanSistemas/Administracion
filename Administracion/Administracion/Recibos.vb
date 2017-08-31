@@ -274,7 +274,7 @@ Public Class Recibos
     Private Sub _AsignarCtaCte(ByVal stringCtaCte As String)
         Dim cuenta As String() = stringCtaCte.Replace(_SEPARADOR, "$").Split("$")
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Tipo, Saldo, TotalUs, Paridad FROM CtaCte WHERE Numero = '" & cuenta(1) & "' and Cliente = '" & Trim(txtCliente.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Tipo, Saldo, TotalUs, Paridad FROM CtaCte WHERE Numero = '" & cuenta(1) & "' and Impre = '" & cuenta(0) & "' and Cliente = '" & Trim(txtCliente.Text) & "'")
         Dim dr As SqlDataReader
         Dim row As Integer
 

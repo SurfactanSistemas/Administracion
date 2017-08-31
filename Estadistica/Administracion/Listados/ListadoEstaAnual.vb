@@ -41,6 +41,20 @@ Public Class ListadoEstaAnual
         txtDesdeTerminado.Focus()
         txtDesdeTerminado.SelectionStart = 0
 
+        _HabilitarSegunVendedor()
+
+    End Sub
+
+    Private Sub _HabilitarSegunVendedor()
+        If Vendedor.permisos <> 99 Then
+
+            txtVendedorFiltro.Text = Vendedor.permisos
+            txtVendedorFiltro.Enabled = False
+
+            btnCliente.PerformClick()
+            btnCliente.Visible = False
+
+        End If
     End Sub
 
     Private Sub txtdesdeterminado_KeyPress(ByVal sender As Object, _

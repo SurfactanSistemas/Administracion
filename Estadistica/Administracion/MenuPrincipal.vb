@@ -1,4 +1,6 @@
-﻿Public Class MenuPrincipal
+﻿Imports ClasesCompartidas
+
+Public Class MenuPrincipal
     Dim forms As New List(Of Form)
     Dim loginOpen As Boolean = False
 
@@ -96,5 +98,22 @@
 
     Private Sub EmiiosnDeGraficosAnualesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmiiosnDeGraficosAnualesToolStripMenuItem.Click
         abrir(New ListadoGraficoAnual)
+    End Sub
+
+    Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Vendedor.permisos = 0 Then : Me.Close() : End If
+
+        ' Aca ir deshabilitando solo si el usuario no es 99.
+        If Val(Vendedor.permisos) <> 99 Then
+
+            With Me
+                .EstadisticaDeVentasPorRubroYClienteToolStripMenuItem.Enabled = False
+                .EstadisticasDeVentasPorLineaToolStripMenuItem.Enabled = False
+                .EstsdisticaDeVentasPorProductoToolStripMenuItem.Enabled = False
+                .EstadisticaDeVentasPorClienteToolStripMenuItem.Enabled = False
+            End With
+
+        End If
     End Sub
 End Class

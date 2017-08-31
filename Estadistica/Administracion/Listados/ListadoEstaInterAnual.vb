@@ -290,7 +290,14 @@ Public Class ListadoEstaInterAnual
 
 
         Dim tabla As DataTable
-        tabla = SQLConnector.retrieveDataTable("buscar_estadistica_productosII", 0, 9999, 0, 9999, 0, 9999, txtDesdeCliente, txtHastaCliente, txtDesdeTerminado.Text, txtHastaTerminado.Text, txtOrdDesde, txtOrdHasta)
+        Dim DesdeVendedor = 0, HastaVendedor = 9999
+
+        If Vendedor.permisos <> 99 Then
+            DesdeVendedor = Vendedor.permisos
+            HastaVendedor = Vendedor.permisos
+        End If
+
+        tabla = SQLConnector.retrieveDataTable("buscar_estadistica_productosII", DesdeVendedor, HastaVendedor, 0, 9999, 0, 9999, txtDesdeCliente, txtHastaCliente, txtDesdeTerminado.Text, txtHastaTerminado.Text, txtOrdDesde, txtOrdHasta)
 
         For Each row As DataRow In tabla.Rows
 
