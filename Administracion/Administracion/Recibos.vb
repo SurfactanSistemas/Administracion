@@ -2922,6 +2922,7 @@ Public Class Recibos
 
                                 If Val(gridFormasPago2.Rows(iRow).Cells(5).Value) <> 1 Then
                                     _PedirClaveCheque(iRow)
+                                    gridFormasPago2.Rows(iRow).Cells(5).Value = "0"
                                 End If
 
                             End If
