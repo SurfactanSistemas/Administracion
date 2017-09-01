@@ -93,7 +93,6 @@ Partial Class SolicitarInformacionCuit
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
-        Me.KeyPreview = True
         Me.Name = "SolicitarInformacionCuit"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Panel1.ResumeLayout(False)

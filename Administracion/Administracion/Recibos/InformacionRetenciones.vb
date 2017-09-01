@@ -58,6 +58,8 @@
 
         If e.KeyData = Keys.Enter Then
             _AsignarNuevoValor()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtInfo.Text = ""
         End If
 
     End Sub

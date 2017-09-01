@@ -51,6 +51,8 @@
                 _AsignarNuevoValor()
             End If
 
+        ElseIf e.KeyData = Keys.Escape Then
+            txtInfo.Text = ""
         End If
 
     End Sub
