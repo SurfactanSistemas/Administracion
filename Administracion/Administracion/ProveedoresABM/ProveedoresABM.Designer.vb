@@ -1081,7 +1081,6 @@ Partial Class ProveedoresABM
         Me.txtTelefono.Name = "txtTelefono"
         Me.txtTelefono.Size = New System.Drawing.Size(153, 20)
         Me.txtTelefono.TabIndex = 26
-        Me.txtTelefono.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtTelefono.Validator = Administracion.ValidatorType.None
         '
         'CustomLabel6
