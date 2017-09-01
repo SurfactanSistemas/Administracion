@@ -993,6 +993,7 @@ Public Class RecibosProvisorios
                                 ' Pedimos unicamente cuit cuando el cheque no fue cargado por lectora y este no es un cuit invalido.
                                 If Val(gridRecibos.Rows(iRow).Cells(6).Value) <> 1 Then
                                     _PedirClaveCheque(iRow)
+                                Else
                                     gridRecibos.Rows(iRow).Cells(6).Value = "0"
                                 End If
 
