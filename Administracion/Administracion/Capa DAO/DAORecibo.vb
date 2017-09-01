@@ -124,6 +124,9 @@ Public Class DAORecibo
                             .Replace("#ChequeCheque#", _Left(_cheque(4), 8)) _
                             .Replace("#CuentaCheque#", _Left(_cheque(5), 11)) _
                             .Replace("#Cuit#", _Left(_cheque(6), 15)) & ","
+
+                _GrabarCuit(_Left(_cheque(2), 3), _Left(_cheque(3), 3), _Left(_cheque(5), 11), _Left(_cheque(6), 15))
+
             Else
                 temp = temp.Replace("#ClaveCheque#", "") _
                             .Replace("#BancoCheque#", "") _
@@ -161,6 +164,66 @@ Public Class DAORecibo
             Finally
                 cn.Close()
             End Try
+        End If
+
+    End Sub
+
+    Private Shared Sub _GrabarCuit(ByVal banco, ByVal sucursal, ByVal cuenta, ByVal cuit)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+
+        Dim _CuitExistente = False
+        Dim XClaveCuit = banco + sucursal + cuenta
+
+        If Trim(cuit) <> "" Then
+
+            cm.CommandText = "SELECT Clave FROM Cuit Where Clave = '" & XClaveCuit & "'"
+            SQLConnector.conexionSql(cn, cm)
+
+            Try
+
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+
+                    _CuitExistente = True
+
+                End If
+
+            Catch ex As Exception
+                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Finally
+
+
+                cn.Close()
+
+            End Try
+
+            If Not _CuitExistente Then
+
+                ' Damos de alta el nuevo Cuit.
+                Dim XSql = "INSERT INTO Cuit (Clave, Banco, Sucursal, Cuenta, Cuit) Values ('" + XClaveCuit + "','" + banco + "','" + sucursal + "','" + cuenta + "', '" + cuit + "')"
+
+                cm.CommandText = XSql
+                SQLConnector.conexionSql(cn, cm)
+
+                Try
+                    cm.ExecuteNonQuery()
+
+                Catch ex As Exception
+                    MsgBox("Hubo un problema al querer guardar el nuevo Cuit.", MsgBoxStyle.Critical)
+                    Exit Sub
+                Finally
+
+
+                    cn.Close()
+
+                End Try
+
+            End If
+
         End If
 
     End Sub
