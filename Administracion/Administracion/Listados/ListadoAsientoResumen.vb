@@ -173,9 +173,9 @@ Public Class ListadoAsientoResumen
 
         Select Case TipoImpresion
             Case Reporte.Pantalla
-                viewer.imprimirReporte()
-            Case Reporte.Imprimir
                 viewer.Show()
+            Case Reporte.Imprimir
+                viewer.imprimirReporte()
             Case Else
 
         End Select

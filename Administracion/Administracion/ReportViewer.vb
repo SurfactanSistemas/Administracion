@@ -20,6 +20,8 @@ Public Class ReportViewer
         formula = formulaReporte
         reporte.Load(ruta)
 
+        CrystalReportViewer1.ReportSource = reporte
+
         'DsNombre.Value = "Surfactan"
         'RpDatos.Add(DsNombre)
         'reporte.DataDefinition.ParameterFields("txtEmpresa").ApplyCurrentValues(RpDatos)
@@ -64,7 +66,8 @@ Public Class ReportViewer
     End Sub
 
     Public Sub imprimirReporte()
-        reporte.PrintToPrinter(1, False, 1, 1)
+        reporte.RecordSelectionFormula = formula
+        reporte.PrintToPrinter(1, True, 0, 0)
     End Sub
 
     Public Sub descargarComoPDF()
