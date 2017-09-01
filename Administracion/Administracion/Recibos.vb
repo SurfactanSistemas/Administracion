@@ -2817,8 +2817,22 @@ Public Class Recibos
 
                         If Trim(valor.ToString.Length) = 31 Then
                             If _ProcesarCheque(iRow, valor) Then
+                                Dim _c As Object = _ClavesCheques.FindLast(Function(c) c(0) = iRow)
 
-                                gridFormasPago2.Rows(iRow + 1).Cells(5).Value = "1"
+                                If Not IsNothing(_c) Then
+                                    If Proceso.CuitValido(_c(6)) Then
+
+                                        gridFormasPago2.Rows(iRow).Cells(5).Value = "1"
+
+                                    Else
+
+                                        gridFormasPago2.Rows(iRow).Cells(5).Value = "0"
+
+                                    End If
+                                Else
+                                    gridFormasPago2.Rows(iRow).Cells(5).Value = "0"
+                                End If
+
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(2) ' Nos desplazamos para que coloque la fecha del cheque.
 
                             End If
@@ -2901,11 +2915,15 @@ Public Class Recibos
 
                         If iCol = 4 Then ' Avanzamos a la fila siguiente.
                             If Val(gridFormasPago2.Rows(iRow).Cells(0).Value) = 4 Then
-                                If Val(gridFormasPago2.Rows(iRow).Cells(5).Value) <> 1 Then
-                                    _PedirCuentaContable(iRow)
-                                End If
+
+                                _PedirCuentaContable(iRow)
+
                             ElseIf Val(gridFormasPago2.Rows(iRow).Cells(0).Value) = 2 Then
-                                _PedirClaveCheque(iRow)
+
+                                If Val(gridFormasPago2.Rows(iRow).Cells(5).Value) <> 1 Then
+                                    _PedirClaveCheque(iRow)
+                                End If
+
                             End If
 
                             gridFormasPago2.Rows(iRow).Cells(4).Value = _NormalizarNumero(valor)
@@ -3127,14 +3145,6 @@ Public Class Recibos
         End With
         ' Buscamos si existe el cuit.
         _Cuit = _TraerNumeroCuit(_ClaveBanco & _Sucursal & _NumCta)
-
-        If Not Proceso.CuitValido(_Cuit) Then
-            With SolicitarInformacionCuit
-                .Valor = _Cuit
-                .ShowDialog()
-                .Dispose()
-            End With
-        End If
 
         ' Guardamos el nuevo Cheque.
         _GuardarNuevoCheque(row, ClaveCheque, _ClaveBanco, _Sucursal, _NumCheque, _NumCta, _Cuit)
