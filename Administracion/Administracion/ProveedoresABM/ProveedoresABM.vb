@@ -86,6 +86,8 @@ Public Class ProveedoresABM
 
         txtPaginaWeb.Text = "http://"
 
+        cmbCondicionIB2.SelectedIndex = 2
+
         observaciones = ""
 
         txtCodigo.Focus()
