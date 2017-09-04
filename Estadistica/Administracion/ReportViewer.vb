@@ -66,6 +66,7 @@ Public Class ReportViewer
 
     Public Sub imprimirReporte()
         reporte.Refresh()
+        reporte.RecordSelectionFormula = formula
         reporte.PrintToPrinter(1, False, 1, 1)
     End Sub
 
@@ -89,6 +90,7 @@ Public Class ReportViewer
         End With
 
         'Exporta y crea el pdf.
+        reporte.RecordSelectionFormula = formula
         reporte.Export()
     End Sub
 
