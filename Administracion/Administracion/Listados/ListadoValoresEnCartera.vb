@@ -20,7 +20,8 @@ Public Class ListadoValoresEnCartera
                    Handles txtFecha1.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
-            If ValidaFecha(txtFecha1.Text) = "S" Then
+            Dim WFecha = txtFecha1.Text
+            If ValidaFecha(WFecha) = "S" Or Trim(WFecha.Replace("/", "")) = "" Then
                 txtFecha2.Focus()
             End If
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
@@ -34,7 +35,9 @@ Public Class ListadoValoresEnCartera
                    Handles txtFecha2.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
-            If ValidaFecha(txtFecha2.Text) = "S" Then
+
+            Dim WFecha = txtFecha2.Text
+            If ValidaFecha(txtFecha2.Text) = "S" Or Trim(WFecha.Replace("/", "")) = "" Then
                 txtFecha3.Focus()
             End If
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
@@ -48,7 +51,8 @@ Public Class ListadoValoresEnCartera
                    Handles txtFecha3.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
-            If ValidaFecha(txtFecha3.Text) = "S" Then
+            Dim WFecha = txtFecha3.Text
+            If ValidaFecha(txtFecha3.Text) = "S" Or Trim(WFecha.Replace("/", "")) = "" Then
                 txtFecha4.Focus()
             End If
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
@@ -62,7 +66,8 @@ Public Class ListadoValoresEnCartera
                    Handles txtFecha4.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
-            If ValidaFecha(txtFecha4.Text) = "S" Then
+            Dim WFecha = txtFecha4.Text
+            If ValidaFecha(txtFecha4.Text) = "S" Or Trim(WFecha.Replace("/", "")) = "" Then
                 txtDesdeFecha.Focus()
             End If
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
@@ -203,17 +208,39 @@ Public Class ListadoValoresEnCartera
         vartitulo5 = "Posterior"
 
         Dim tabla As DataTable
+        Dim fechaord, recibo, tiporeg, tiporec, cuenta, cliente, tipo1, letra1, punto1, numero1, fecha, tipo2, numero2, importe1, paridad, importe2, retiva, retotra, retsuss, retganancias, renglon, Banco2, Fecha2, FechaOrd2, destino
 
         tabla = SQLConnector.retrieveDataTable("buscar_cheques_valcar", varDesdefechaOrd, varHastafechaOrd, varDesdeCliente, varHastaCliente)
 
         For Each row As DataRow In tabla.Rows
 
-            Dim CampoRecibos As New LeeRecibosValcar(row.Item(0), row.Item(1), row.Item(2),
-                                           row.Item(3), row.Item(4), row.Item(5),
-                                           row.Item(6), row.Item(7), row.Item(8),
-                                           row.Item(9), row.Item(10), row.Item(11), row.Item(12),
-                                           row.Item(13), row.Item(14), row.Item(15), row.Item(16), row.Item(17),
-                                           row.Item(18), row.Item(19), row.Item(20), row.Item(21), row.Item(22), row.Item(23), row.Item(24))
+            fechaord = IIf(IsDBNull(row.Item(0)), "", row.Item(0))
+            recibo = IIf(IsDBNull(row.Item(1)), "", row.Item(1))
+            tiporeg = IIf(IsDBNull(row.Item(2)), "", row.Item(2))
+            tiporec = IIf(IsDBNull(row.Item(3)), "", row.Item(3))
+            cuenta = IIf(IsDBNull(row.Item(4)), "", row.Item(4))
+            cliente = IIf(IsDBNull(row.Item(5)), "", row.Item(5))
+            tipo1 = IIf(IsDBNull(row.Item(6)), "", row.Item(6))
+            letra1 = IIf(IsDBNull(row.Item(7)), "", row.Item(7))
+            punto1 = IIf(IsDBNull(row.Item(8)), "", row.Item(8))
+            numero1 = IIf(IsDBNull(row.Item(9)), "", row.Item(9))
+            fecha = IIf(IsDBNull(row.Item(10)), "", row.Item(10))
+            tipo2 = IIf(IsDBNull(row.Item(11)), "", row.Item(11))
+            numero2 = IIf(IsDBNull(row.Item(12)), "", row.Item(12))
+            importe1 = IIf(IsDBNull(row.Item(13)), 0, row.Item(13))
+            paridad = IIf(IsDBNull(row.Item(14)), 0, row.Item(14))
+            importe2 = IIf(IsDBNull(row.Item(15)), 0, row.Item(15))
+            retiva = IIf(IsDBNull(row.Item(16)), 0, row.Item(16))
+            retotra = IIf(IsDBNull(row.Item(17)), 0, row.Item(17))
+            retsuss = IIf(IsDBNull(row.Item(18)), 0, row.Item(18))
+            retganancias = IIf(IsDBNull(row.Item(19)), 0, row.Item(19))
+            renglon = IIf(IsDBNull(row.Item(20)), 0, row.Item(20))
+            Banco2 = IIf(IsDBNull(row.Item(21)), "", row.Item(21))
+            Fecha2 = IIf(IsDBNull(row.Item(22)), "", row.Item(22))
+            FechaOrd2 = IIf(IsDBNull(row.Item(23)), "", row.Item(23))
+            destino = IIf(IsDBNull(row.Item(24)), "", row.Item(24))
+
+            Dim CampoRecibos As New LeeRecibosValcar(fechaord, recibo, tiporeg, tiporec, cuenta, cliente, tipo1, letra1, punto1, numero1, fecha, tipo2, numero2, importe1, paridad, importe2, retiva, retotra, retsuss, retganancias, renglon, Banco2, Fecha2, FechaOrd2, destino)
 
             varEmpresa = 1
 
@@ -341,5 +368,9 @@ Public Class ListadoValoresEnCartera
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         _Imprimir(Reporte.Imprimir)
+    End Sub
+
+    Private Sub ListadoValoresEnCartera_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtFecha1.Focus()
     End Sub
 End Class
