@@ -28,7 +28,6 @@ Partial Class ListadoEstaProductoCliente
         Me.P_Buscar = New System.Windows.Forms.Panel()
         Me.txtHastaTerminado = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeTerminado = New System.Windows.Forms.MaskedTextBox()
-        Me.TipoCosto = New Esta.CustomComboBox()
         Me.txthastafecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -44,15 +43,17 @@ Partial Class ListadoEstaProductoCliente
         Me.btnConsulta = New System.Windows.Forms.Button()
         Me.btnImpresora = New System.Windows.Forms.Button()
         Me.btnCancela = New System.Windows.Forms.Button()
-        Me.txtAyuda = New Esta.CustomTextBox()
+        Me.lstFiltrada = New Esta.CustomListBox()
         Me.lstAyuda = New Esta.CustomListBox()
+        Me.TipoCosto = New Esta.CustomComboBox()
+        Me.txtAyuda = New Esta.CustomTextBox()
         Me.P_Buscar.SuspendLayout()
         Me.panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(14, 206)
+        Me.ProgressBar1.Location = New System.Drawing.Point(39, 205)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(526, 29)
         Me.ProgressBar1.TabIndex = 95
@@ -95,20 +96,6 @@ Partial Class ListadoEstaProductoCliente
         Me.txtDesdeTerminado.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtDesdeTerminado.Size = New System.Drawing.Size(98, 20)
         Me.txtDesdeTerminado.TabIndex = 76
-        '
-        'TipoCosto
-        '
-        Me.TipoCosto.Cleanable = False
-        Me.TipoCosto.Empty = False
-        Me.TipoCosto.EnterIndex = -1
-        Me.TipoCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TipoCosto.FormattingEnabled = True
-        Me.TipoCosto.LabelAssociationKey = -1
-        Me.TipoCosto.Location = New System.Drawing.Point(110, 43)
-        Me.TipoCosto.Name = "TipoCosto"
-        Me.TipoCosto.Size = New System.Drawing.Size(151, 21)
-        Me.TipoCosto.TabIndex = 75
-        Me.TipoCosto.Validator = Esta.ValidatorType.None
         '
         'txthastafecha
         '
@@ -282,18 +269,17 @@ Partial Class ListadoEstaProductoCliente
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Menu Principal")
         Me.btnCancela.UseVisualStyleBackColor = False
         '
-        'txtAyuda
+        'lstFiltrada
         '
-        Me.txtAyuda.Cleanable = False
-        Me.txtAyuda.Empty = True
-        Me.txtAyuda.EnterIndex = -1
-        Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(15, 208)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(525, 20)
-        Me.txtAyuda.TabIndex = 89
-        Me.txtAyuda.Validator = Esta.ValidatorType.None
-        Me.txtAyuda.Visible = False
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(39, 267)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(525, 121)
+        Me.lstFiltrada.TabIndex = 98
+        Me.lstFiltrada.Visible = False
         '
         'lstAyuda
         '
@@ -301,17 +287,45 @@ Partial Class ListadoEstaProductoCliente
         Me.lstAyuda.EnterIndex = -1
         Me.lstAyuda.FormattingEnabled = True
         Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(15, 241)
+        Me.lstAyuda.Location = New System.Drawing.Point(39, 267)
         Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(525, 147)
+        Me.lstAyuda.Size = New System.Drawing.Size(525, 121)
         Me.lstAyuda.TabIndex = 97
         Me.lstAyuda.Visible = False
+        '
+        'TipoCosto
+        '
+        Me.TipoCosto.Cleanable = False
+        Me.TipoCosto.Empty = False
+        Me.TipoCosto.EnterIndex = -1
+        Me.TipoCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TipoCosto.FormattingEnabled = True
+        Me.TipoCosto.LabelAssociationKey = -1
+        Me.TipoCosto.Location = New System.Drawing.Point(110, 43)
+        Me.TipoCosto.Name = "TipoCosto"
+        Me.TipoCosto.Size = New System.Drawing.Size(151, 21)
+        Me.TipoCosto.TabIndex = 75
+        Me.TipoCosto.Validator = Esta.ValidatorType.None
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Cleanable = False
+        Me.txtAyuda.Empty = True
+        Me.txtAyuda.EnterIndex = -1
+        Me.txtAyuda.LabelAssociationKey = -1
+        Me.txtAyuda.Location = New System.Drawing.Point(39, 241)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(525, 20)
+        Me.txtAyuda.TabIndex = 89
+        Me.txtAyuda.Validator = Esta.ValidatorType.None
+        Me.txtAyuda.Visible = False
         '
         'ListadoEstaProductoCliente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(602, 433)
+        Me.ClientSize = New System.Drawing.Size(602, 237)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.panel1)
         Me.Controls.Add(Me.ProgressBar1)
@@ -352,4 +366,5 @@ Partial Class ListadoEstaProductoCliente
     Private WithEvents label3 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lstAyuda As Esta.CustomListBox
+    Friend WithEvents lstFiltrada As Esta.CustomListBox
 End Class

@@ -62,6 +62,7 @@ Partial Class ListadoEstaAnual
         Me.txtAyuda = New Esta.CustomTextBox()
         Me.lstAyuda = New Esta.CustomListBox()
         Me.TipoCosto = New Esta.CustomComboBox()
+        Me.lstFiltrada = New Esta.CustomListBox()
         Me.panel1.SuspendLayout()
         Me.P_Buscar.SuspendLayout()
         Me.PantaDatos.SuspendLayout()
@@ -245,7 +246,7 @@ Partial Class ListadoEstaAnual
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(32, 219)
+        Me.ProgressBar1.Location = New System.Drawing.Point(43, 219)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(526, 29)
         Me.ProgressBar1.TabIndex = 111
@@ -265,7 +266,7 @@ Partial Class ListadoEstaAnual
         Me.PantaDatos.Controls.Add(Me.Label8)
         Me.PantaDatos.Controls.Add(Me.txtClienteFiltro)
         Me.PantaDatos.Controls.Add(Me.txtVendedorFiltro)
-        Me.PantaDatos.Location = New System.Drawing.Point(16, 114)
+        Me.PantaDatos.Location = New System.Drawing.Point(27, 114)
         Me.PantaDatos.Name = "PantaDatos"
         Me.PantaDatos.Size = New System.Drawing.Size(543, 149)
         Me.PantaDatos.TabIndex = 112
@@ -467,7 +468,7 @@ Partial Class ListadoEstaAnual
         Me.btnImpresora.FlatAppearance.BorderSize = 0
         Me.btnImpresora.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImpresora.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImpresora.Location = New System.Drawing.Point(313, 126)
+        Me.btnImpresora.Location = New System.Drawing.Point(324, 126)
         Me.btnImpresora.Name = "btnImpresora"
         Me.btnImpresora.Size = New System.Drawing.Size(72, 72)
         Me.btnImpresora.TabIndex = 107
@@ -486,7 +487,7 @@ Partial Class ListadoEstaAnual
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancela.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnCancela.Location = New System.Drawing.Point(451, 125)
+        Me.btnCancela.Location = New System.Drawing.Point(462, 125)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(72, 73)
         Me.btnCancela.TabIndex = 108
@@ -501,7 +502,7 @@ Partial Class ListadoEstaAnual
         Me.txtAyuda.Empty = True
         Me.txtAyuda.EnterIndex = -1
         Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(16, 282)
+        Me.txtAyuda.Location = New System.Drawing.Point(35, 282)
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(527, 20)
         Me.txtAyuda.TabIndex = 113
@@ -514,7 +515,7 @@ Partial Class ListadoEstaAnual
         Me.lstAyuda.EnterIndex = -1
         Me.lstAyuda.FormattingEnabled = True
         Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(16, 308)
+        Me.lstAyuda.Location = New System.Drawing.Point(35, 308)
         Me.lstAyuda.Name = "lstAyuda"
         Me.lstAyuda.Size = New System.Drawing.Size(525, 147)
         Me.lstAyuda.TabIndex = 104
@@ -534,11 +535,24 @@ Partial Class ListadoEstaAnual
         Me.TipoCosto.TabIndex = 75
         Me.TipoCosto.Validator = Esta.ValidatorType.None
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(35, 308)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(525, 147)
+        Me.lstFiltrada.TabIndex = 114
+        Me.lstFiltrada.Visible = False
+        '
         'ListadoEstaAnual
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(596, 467)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.PantaDatos)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.ProgressBar1)
@@ -599,4 +613,5 @@ Partial Class ListadoEstaAnual
     Friend WithEvents btnCancelaII As System.Windows.Forms.Button
     Friend WithEvents btnConsultaVendedor As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstFiltrada As Esta.CustomListBox
 End Class

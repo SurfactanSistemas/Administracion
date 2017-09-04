@@ -46,6 +46,7 @@ Partial Class ListadoEstaClienteLinea
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.lstAyuda = New Esta.CustomListBox()
         Me.txtAyuda = New Esta.CustomTextBox()
+        Me.lstFiltrada = New Esta.CustomListBox()
         Me.panel1.SuspendLayout()
         Me.P_Buscar.SuspendLayout()
         Me.SuspendLayout()
@@ -275,7 +276,7 @@ Partial Class ListadoEstaClienteLinea
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(22, 206)
+        Me.ProgressBar1.Location = New System.Drawing.Point(22, 202)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(526, 29)
         Me.ProgressBar1.TabIndex = 94
@@ -287,9 +288,9 @@ Partial Class ListadoEstaClienteLinea
         Me.lstAyuda.EnterIndex = -1
         Me.lstAyuda.FormattingEnabled = True
         Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(21, 237)
+        Me.lstAyuda.Location = New System.Drawing.Point(21, 276)
         Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(527, 173)
+        Me.lstAyuda.Size = New System.Drawing.Size(527, 134)
         Me.lstAyuda.TabIndex = 96
         Me.lstAyuda.Visible = False
         '
@@ -299,18 +300,31 @@ Partial Class ListadoEstaClienteLinea
         Me.txtAyuda.Empty = True
         Me.txtAyuda.EnterIndex = -1
         Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(21, 206)
+        Me.txtAyuda.Location = New System.Drawing.Point(21, 241)
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(527, 20)
         Me.txtAyuda.TabIndex = 95
         Me.txtAyuda.Validator = Esta.ValidatorType.None
         Me.txtAyuda.Visible = False
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(21, 276)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(527, 134)
+        Me.lstFiltrada.TabIndex = 97
+        Me.lstFiltrada.Visible = False
+        '
         'ListadoEstaClienteLinea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(570, 433)
+        Me.ClientSize = New System.Drawing.Size(570, 238)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.panel1)
@@ -351,4 +365,5 @@ Partial Class ListadoEstaClienteLinea
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents lstAyuda As Esta.CustomListBox
     Friend WithEvents txtAyuda As Esta.CustomTextBox
+    Friend WithEvents lstFiltrada As Esta.CustomListBox
 End Class

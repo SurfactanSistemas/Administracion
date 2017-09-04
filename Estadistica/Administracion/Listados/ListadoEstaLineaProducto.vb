@@ -114,18 +114,18 @@ Public Class ListadoEstaLineaProducto
 
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAyuda.KeyPress
+    'Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
+    '               ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAyuda.KeyPress
 
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOLinea.buscarLineaPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-            lstAyuda.DataSource = DAOLinea.buscarLineaPorNombre(txtAyuda.Text)
-        End If
-    End Sub
+    '    If e.KeyChar = Convert.ToChar(Keys.Return) Then
+    '        e.Handled = True
+    '        lstAyuda.DataSource = DAOLinea.buscarLineaPorNombre(txtAyuda.Text)
+    '    ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
+    '        e.Handled = True
+    '        txtAyuda.Text = ""
+    '        lstAyuda.DataSource = DAOLinea.buscarLineaPorNombre(txtAyuda.Text)
+    '    End If
+    'End Sub
 
     Private Sub mostrarlinea(ByVal linea As Linea)
         txtAyuda.Visible = False
@@ -498,5 +498,63 @@ Public Class ListadoEstaLineaProducto
         txtSalida = 1
         Call Proceso()
     End Sub
+
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstAyuda
+        Dim final As ListBox = lstFiltrada
+        Dim cadena As String = Trim(txtAyuda.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+            origen.Visible = False
+
+        Else
+
+            final.Visible = False
+            origen.Visible = True
+
+        End If
+    End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+        Dim origen As ListBox = lstAyuda
+        Dim filtrado As ListBox = lstFiltrada
+        Dim texto As TextBox = txtAyuda
+
+        If IsNothing(filtrado.SelectedItem) Then : Exit Sub : End If
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedItem = filtrado.SelectedItem
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        lstAyuda_Click(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        _FiltrarDinamicamente()
+    End Sub
+
+
+
 
 End Class

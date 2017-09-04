@@ -654,4 +654,7 @@ Public Class ListadoEstaRanking
         Call Proceso()
     End Sub
 
+    Private Sub ListadoEstaRanking_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesdeFecha.Focus()
+    End Sub
 End Class

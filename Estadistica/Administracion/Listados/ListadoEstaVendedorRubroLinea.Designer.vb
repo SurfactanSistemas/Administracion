@@ -30,6 +30,8 @@ Partial Class ListadoEstaVendedorRubroLinea
         Me.label4 = New System.Windows.Forms.Label()
         Me.label3 = New System.Windows.Forms.Label()
         Me.P_Buscar = New System.Windows.Forms.Panel()
+        Me.TipoCosto = New Esta.CustomComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.txtDesdeVendedor = New System.Windows.Forms.TextBox()
         Me.txthastafecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
@@ -44,8 +46,7 @@ Partial Class ListadoEstaVendedorRubroLinea
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtAyuda = New Esta.CustomTextBox()
         Me.lstAyuda = New Esta.CustomListBox()
-        Me.TipoCosto = New Esta.CustomComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lstFiltrada = New Esta.CustomListBox()
         Me.panel1.SuspendLayout()
         Me.P_Buscar.SuspendLayout()
         Me.SuspendLayout()
@@ -136,6 +137,31 @@ Partial Class ListadoEstaVendedorRubroLinea
         Me.P_Buscar.Name = "P_Buscar"
         Me.P_Buscar.Size = New System.Drawing.Size(571, 78)
         Me.P_Buscar.TabIndex = 78
+        '
+        'TipoCosto
+        '
+        Me.TipoCosto.Cleanable = False
+        Me.TipoCosto.Empty = False
+        Me.TipoCosto.EnterIndex = -1
+        Me.TipoCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TipoCosto.FormattingEnabled = True
+        Me.TipoCosto.LabelAssociationKey = -1
+        Me.TipoCosto.Location = New System.Drawing.Point(103, 40)
+        Me.TipoCosto.Name = "TipoCosto"
+        Me.TipoCosto.Size = New System.Drawing.Size(151, 21)
+        Me.TipoCosto.TabIndex = 85
+        Me.TipoCosto.Validator = Esta.ValidatorType.None
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ButtonFace
+        Me.Label5.Location = New System.Drawing.Point(12, 40)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(92, 18)
+        Me.Label5.TabIndex = 84
+        Me.Label5.Text = "Tipo de Costo"
         '
         'txtDesdeVendedor
         '
@@ -283,30 +309,17 @@ Partial Class ListadoEstaVendedorRubroLinea
         Me.lstAyuda.TabIndex = 61
         Me.lstAyuda.Visible = False
         '
-        'TipoCosto
+        'lstFiltrada
         '
-        Me.TipoCosto.Cleanable = False
-        Me.TipoCosto.Empty = False
-        Me.TipoCosto.EnterIndex = -1
-        Me.TipoCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TipoCosto.FormattingEnabled = True
-        Me.TipoCosto.LabelAssociationKey = -1
-        Me.TipoCosto.Location = New System.Drawing.Point(103, 40)
-        Me.TipoCosto.Name = "TipoCosto"
-        Me.TipoCosto.Size = New System.Drawing.Size(151, 21)
-        Me.TipoCosto.TabIndex = 85
-        Me.TipoCosto.Validator = Esta.ValidatorType.None
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.Label5.Location = New System.Drawing.Point(12, 40)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(92, 18)
-        Me.Label5.TabIndex = 84
-        Me.Label5.Text = "Tipo de Costo"
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(21, 271)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(526, 147)
+        Me.lstFiltrada.TabIndex = 82
+        Me.lstFiltrada.Visible = False
         '
         'ListadoEstaVendedorRubroLinea
         '
@@ -314,7 +327,8 @@ Partial Class ListadoEstaVendedorRubroLinea
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.ClientSize = New System.Drawing.Size(572, 245)
+        Me.ClientSize = New System.Drawing.Size(572, 243)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnConsulta)
@@ -356,4 +370,5 @@ Partial Class ListadoEstaVendedorRubroLinea
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents TipoCosto As Esta.CustomComboBox
     Private WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents lstFiltrada As Esta.CustomListBox
 End Class
