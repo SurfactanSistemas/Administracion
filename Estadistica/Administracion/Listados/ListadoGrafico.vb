@@ -119,6 +119,7 @@ Public Class ListadoGrafico
         Dim txtDesLinea As String
         Dim txtDesRubro As String
         Dim txtDesVendedor As String
+        Dim WDesdeVendedor = 0, WHastaVendedor = 9999
 
         ReDim varGraba(1000, 10)
 
@@ -129,7 +130,10 @@ Public Class ListadoGrafico
 
         txtTitulo = ""
 
-
+        'If Vendedor.permisos <> 99 Then
+        '    WDesdeVendedor = Vendedor.permisos
+        '    WHastaVendedor = Vendedor.permisos
+        'End If
 
 
         If TipoListado.SelectedIndex = 3 Then
@@ -155,7 +159,7 @@ Public Class ListadoGrafico
             End With
 
             Dim tabla As DataTable
-            tabla = SQLConnector.retrieveDataTable("buscar_estadistica_productos", 0, 9999, 0, 9999, 0, 9999, "", "Z999999", "", "ZZ-99999-999", txtDesde, txtHasta)
+            tabla = SQLConnector.retrieveDataTable("buscar_estadistica_productos", WDesdeVendedor, WHastaVendedor, 0, 9999, 0, 9999, "", "Z999999", "", "ZZ-99999-999", txtDesde, txtHasta)
 
             For Each row As DataRow In tabla.Rows
 
@@ -317,7 +321,7 @@ Public Class ListadoGrafico
 
                 ProgressBar1.Visible = False
 
-                txtUno = "{Grafico2.codigo} in 0 to 9999"
+                txtUno = "{Grafico2.codigo} in " & WDesdeVendedor & " to " & WHastaVendedor
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 
@@ -467,7 +471,7 @@ Public Class ListadoGrafico
 
                 ProgressBar1.Visible = False
 
-                txtUno = "{Grafico2.codigo} in 0 to 9999"
+                txtUno = "{Grafico2.codigo} in " & WDesdeVendedor & " to " & WHastaVendedor
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 
@@ -616,7 +620,7 @@ Public Class ListadoGrafico
 
                 ProgressBar1.Visible = False
 
-                txtUno = "{Grafico2.codigo} in 0 to 9999"
+                txtUno = "{Grafico2.codigo} in " & WDesdeVendedor & " to " & WHastaVendedor
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 

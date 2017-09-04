@@ -44,6 +44,8 @@ Partial Class ListadoEstaVendedorRubroLinea
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtAyuda = New Esta.CustomTextBox()
         Me.lstAyuda = New Esta.CustomListBox()
+        Me.TipoCosto = New Esta.CustomComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.panel1.SuspendLayout()
         Me.P_Buscar.SuspendLayout()
         Me.SuspendLayout()
@@ -120,6 +122,8 @@ Partial Class ListadoEstaVendedorRubroLinea
         'P_Buscar
         '
         Me.P_Buscar.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.P_Buscar.Controls.Add(Me.TipoCosto)
+        Me.P_Buscar.Controls.Add(Me.Label5)
         Me.P_Buscar.Controls.Add(Me.txtDesdeVendedor)
         Me.P_Buscar.Controls.Add(Me.txthastafecha)
         Me.P_Buscar.Controls.Add(Me.txtDesdeFecha)
@@ -279,6 +283,31 @@ Partial Class ListadoEstaVendedorRubroLinea
         Me.lstAyuda.TabIndex = 61
         Me.lstAyuda.Visible = False
         '
+        'TipoCosto
+        '
+        Me.TipoCosto.Cleanable = False
+        Me.TipoCosto.Empty = False
+        Me.TipoCosto.EnterIndex = -1
+        Me.TipoCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TipoCosto.FormattingEnabled = True
+        Me.TipoCosto.LabelAssociationKey = -1
+        Me.TipoCosto.Location = New System.Drawing.Point(103, 40)
+        Me.TipoCosto.Name = "TipoCosto"
+        Me.TipoCosto.Size = New System.Drawing.Size(151, 21)
+        Me.TipoCosto.TabIndex = 85
+        Me.TipoCosto.Validator = Esta.ValidatorType.None
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ButtonFace
+        Me.Label5.Location = New System.Drawing.Point(12, 40)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(92, 18)
+        Me.Label5.TabIndex = 84
+        Me.Label5.Text = "Tipo de Costo"
+        '
         'ListadoEstaVendedorRubroLinea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -325,4 +354,6 @@ Partial Class ListadoEstaVendedorRubroLinea
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents txtDesdeVendedor As System.Windows.Forms.TextBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents TipoCosto As Esta.CustomComboBox
+    Private WithEvents Label5 As System.Windows.Forms.Label
 End Class

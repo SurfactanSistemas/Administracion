@@ -111,14 +111,10 @@ Public Class ListadoEstaRanking
             ProgressBar1.Value = 0
         End With
 
-        Dim tabla As DataTable
         Dim WDesdeVendedor = 0, WHastaVendedor = 9999
 
-        If Vendedor.permisos <> 99 Then
-            WDesdeVendedor = Vendedor.permisos
-            WHastaVendedor = Vendedor.permisos
-        End If
-
+        Dim tabla As DataTable
+        
         tabla = SQLConnector.retrieveDataTable("buscar_estadistica_productos", WDesdeVendedor, WHastaVendedor, 0, 9999, 0, 9999, "", "Z999999", "", "ZZ-99999-999", txtDesde, txtHasta)
 
         For Each row As DataRow In tabla.Rows
@@ -235,7 +231,9 @@ Public Class ListadoEstaRanking
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 
-                Dim viewer As New ReportViewer("Ranking de Ventas por Cliente", Globals.reportPathWithName("WListadoEstaRankingClienteNet.rpt"), txtFormula)
+                Dim WReporte As String = "WListadoEstaRankingClienteNet.rpt"
+
+                Dim viewer As New ReportViewer("Ranking de Ventas por Cliente", Globals.reportPathWithName(WReporte), txtFormula)
 
                 If txtSalida = 0 Then
                     viewer.Show()
@@ -316,7 +314,9 @@ Public Class ListadoEstaRanking
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 
-                Dim viewer As New ReportViewer("Ranking de Ventas por Producto", Globals.reportPathWithName("WListadoEstaRankingProductoNet.rpt"), txtFormula)
+                Dim WReporte As String = "WListadoEstaRankingProductoNet.rpt"
+
+                Dim viewer As New ReportViewer("Ranking de Ventas por Producto", Globals.reportPathWithName(WReporte), txtFormula)
 
                 If txtSalida = 0 Then
                     viewer.Show()
@@ -394,6 +394,8 @@ Public Class ListadoEstaRanking
                 txtUno = "{Ranking.Linea} in " + "0" + " to " + "9999"
                 txtDos = ""
                 txtFormula = txtUno + txtDos
+
+                Dim WReporte As String = "WListadoEstaRankingLineaNet.rpt"
 
                 Dim viewer As New ReportViewer("Ranking de Ventas por Linea", Globals.reportPathWithName("WListadoEstaRankingLineaNet.rpt"), txtFormula)
 

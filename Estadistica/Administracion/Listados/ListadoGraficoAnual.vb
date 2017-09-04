@@ -371,14 +371,18 @@ Public Class ListadoGraficoAnual
         txtUno = "{Grafico2.codigo} in 0 to 9999"
         txtDos = ""
 
+        Dim WReporteI = "WGraficoNet.rpt"
+
         If Vendedor.permisos <> 99 Then
+            ' Filtramos por vendedor y cambiamos al rpt por vendedor.
             txtUno = "{Grafico2.codigo} in " & Vendedor.permisos & " to " & Vendedor.permisos
+            WReporteI = "WGraficoNetporvendedor.rpt"
         End If
 
         txtFormula = txtUno + txtDos
 
         If TipoListado.SelectedIndex <> 3 Then
-            Dim viewer As New ReportViewer("Emision de Graficos", Globals.reportPathWithName("WGraficoNet.rpt"), txtFormula)
+            Dim viewer As New ReportViewer("Emision de Graficos", Globals.reportPathWithName(WReporteI), txtFormula)
             If txtSalida = 0 Then
                 viewer.Show()
             Else
