@@ -325,7 +325,7 @@ Partial Class ListadoEstaVendedorClienteLinea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(570, 239)
+        Me.ClientSize = New System.Drawing.Size(570, 243)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.ProgressBar1)

@@ -829,7 +829,7 @@ Public Class ListadoEstaAnual
 
     Private Sub btnConsultaCliente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaCliente.Click
 
-        Me.Size = New System.Drawing.Size(580, 460)
+        Me.Height = 510
 
         lstAyuda.DataSource = DAOCliente.buscarClientePorNombre("")
         varProcesoBusqueda = 2
@@ -844,7 +844,7 @@ Public Class ListadoEstaAnual
 
     Private Sub btnConsultaVendedor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaVendedor.Click
 
-        Me.Size = New System.Drawing.Size(580, 460)
+        Me.Height = 510
 
         lstAyuda.DataSource = DaoVendedor.buscarVendedorPorNombre("")
         varProcesoBusqueda = 1

@@ -102,7 +102,7 @@ Public Class ListadoEstaLineaProducto
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(580, 460)
+        Me.Height = 460
 
         lstAyuda.DataSource = DAOLinea.buscarLineaPorNombre("")
 

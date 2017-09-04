@@ -327,7 +327,7 @@ Partial Class ListadoEstaVendedorRubroLinea
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.ClientSize = New System.Drawing.Size(572, 243)
+        Me.ClientSize = New System.Drawing.Size(572, 245)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.btnPantalla)

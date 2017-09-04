@@ -28,6 +28,7 @@ Partial Class ListadoEstaProductoCliente
         Me.P_Buscar = New System.Windows.Forms.Panel()
         Me.txtHastaTerminado = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeTerminado = New System.Windows.Forms.MaskedTextBox()
+        Me.TipoCosto = New Esta.CustomComboBox()
         Me.txthastafecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -45,7 +46,6 @@ Partial Class ListadoEstaProductoCliente
         Me.btnCancela = New System.Windows.Forms.Button()
         Me.lstFiltrada = New Esta.CustomListBox()
         Me.lstAyuda = New Esta.CustomListBox()
-        Me.TipoCosto = New Esta.CustomComboBox()
         Me.txtAyuda = New Esta.CustomTextBox()
         Me.P_Buscar.SuspendLayout()
         Me.panel1.SuspendLayout()
@@ -96,6 +96,20 @@ Partial Class ListadoEstaProductoCliente
         Me.txtDesdeTerminado.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtDesdeTerminado.Size = New System.Drawing.Size(98, 20)
         Me.txtDesdeTerminado.TabIndex = 76
+        '
+        'TipoCosto
+        '
+        Me.TipoCosto.Cleanable = False
+        Me.TipoCosto.Empty = False
+        Me.TipoCosto.EnterIndex = -1
+        Me.TipoCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TipoCosto.FormattingEnabled = True
+        Me.TipoCosto.LabelAssociationKey = -1
+        Me.TipoCosto.Location = New System.Drawing.Point(110, 43)
+        Me.TipoCosto.Name = "TipoCosto"
+        Me.TipoCosto.Size = New System.Drawing.Size(151, 21)
+        Me.TipoCosto.TabIndex = 75
+        Me.TipoCosto.Validator = Esta.ValidatorType.None
         '
         'txthastafecha
         '
@@ -293,20 +307,6 @@ Partial Class ListadoEstaProductoCliente
         Me.lstAyuda.TabIndex = 97
         Me.lstAyuda.Visible = False
         '
-        'TipoCosto
-        '
-        Me.TipoCosto.Cleanable = False
-        Me.TipoCosto.Empty = False
-        Me.TipoCosto.EnterIndex = -1
-        Me.TipoCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TipoCosto.FormattingEnabled = True
-        Me.TipoCosto.LabelAssociationKey = -1
-        Me.TipoCosto.Location = New System.Drawing.Point(110, 43)
-        Me.TipoCosto.Name = "TipoCosto"
-        Me.TipoCosto.Size = New System.Drawing.Size(151, 21)
-        Me.TipoCosto.TabIndex = 75
-        Me.TipoCosto.Validator = Esta.ValidatorType.None
-        '
         'txtAyuda
         '
         Me.txtAyuda.Cleanable = False
@@ -324,7 +324,7 @@ Partial Class ListadoEstaProductoCliente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(602, 237)
+        Me.ClientSize = New System.Drawing.Size(602, 239)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.panel1)

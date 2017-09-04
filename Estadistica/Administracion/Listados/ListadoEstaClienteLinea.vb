@@ -96,7 +96,7 @@ Public Class ListadoEstaClienteLinea
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(578, 460)
+        Me.Height = 460
 
         lstAyuda.DataSource = DAOCliente.buscarClientePorNombre("")
 

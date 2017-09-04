@@ -112,7 +112,7 @@ Public Class ListadoEstaProductoCliente
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(610, 460)
+        Me.Height = 430
 
         lstAyuda.DataSource = DAOTerminado.buscarTerminadoPorNombre("")
 

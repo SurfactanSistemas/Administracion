@@ -72,7 +72,7 @@ Partial Class ListadoEstaLineaProductoInd
         Me.lstAyuda.LabelAssociationKey = -1
         Me.lstAyuda.Location = New System.Drawing.Point(21, 276)
         Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(527, 147)
+        Me.lstAyuda.Size = New System.Drawing.Size(527, 134)
         Me.lstAyuda.TabIndex = 83
         Me.lstAyuda.Visible = False
         '
@@ -298,7 +298,7 @@ Partial Class ListadoEstaLineaProductoInd
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(22, 215)
+        Me.ProgressBar1.Location = New System.Drawing.Point(22, 212)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(526, 29)
         Me.ProgressBar1.TabIndex = 90
@@ -310,9 +310,9 @@ Partial Class ListadoEstaLineaProductoInd
         Me.lstFiltrada.EnterIndex = -1
         Me.lstFiltrada.FormattingEnabled = True
         Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(22, 276)
+        Me.lstFiltrada.Location = New System.Drawing.Point(21, 276)
         Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(527, 147)
+        Me.lstFiltrada.Size = New System.Drawing.Size(527, 134)
         Me.lstFiltrada.TabIndex = 91
         Me.lstFiltrada.Visible = False
         '
@@ -321,7 +321,7 @@ Partial Class ListadoEstaLineaProductoInd
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(570, 249)
+        Me.ClientSize = New System.Drawing.Size(570, 247)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.btnPantalla)
