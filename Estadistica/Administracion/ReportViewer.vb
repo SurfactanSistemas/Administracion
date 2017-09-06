@@ -66,7 +66,8 @@ Public Class ReportViewer
 
     Public Sub imprimirReporte()
         reporte.Refresh()
-        reporte.PrintToPrinter(1, False, 1, 1)
+        reporte.RecordSelectionFormula = formula
+        reporte.PrintToPrinter(1, False, 0, 0)
     End Sub
 
     Public Sub descargarComoPDF()
