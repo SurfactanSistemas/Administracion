@@ -298,10 +298,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
 
-        varAcumulaUs = 0
-
         For varCiclo = 0 To GRilla.Rows.Count - 1
 
+            varAcumulaUs = 0
             varProveedor = GRilla.Item(0, varCiclo).Value
 
             If Trim(varProveedor) <> "" Then
