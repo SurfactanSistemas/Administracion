@@ -335,8 +335,8 @@ Public Class ProveedoresABM
         proveedor = DAOProveedor.buscarProveedorPorCodigo(txtCodigo.Text)
 
         ' Normalizamos los numeros para que no rompa nada.
-        txtPorcelProv.Text = Proceso.formatonumerico(txtPorcelProv.Text)
-        txtPorcelCABA.Text = Proceso.formatonumerico(txtPorcelCABA.Text)
+        Dim WPorcelProv = Proceso.formatonumerico(txtPorcelProv.Text)
+        Dim WPorcelCABA = Proceso.formatonumerico(txtPorcelCABA.Text)
 
         ' Comprobamos si se trata de una actualización o de un proveedor nuevo.
         If Not IsNothing(proveedor) Then
@@ -362,8 +362,8 @@ Public Class ProveedoresABM
         proveedor.condicionIB1 = cmbCondicionIB1.SelectedIndex
         proveedor.condicionIB2 = cmbCondicionIB2.SelectedIndex
         proveedor.numeroIB = txtNroIB.Text
-        proveedor.porceIBProvincia = CustomConvert.toDoubleOrZero(txtPorcelProv.Text)
-        proveedor.porceIBCABA = CustomConvert.toDoubleOrZero(txtPorcelCABA.Text)
+        proveedor.porceIBProvincia = Val(WPorcelProv)
+        proveedor.porceIBCABA = Val(WPorcelCABA)
         proveedor.RawRubro = cmbRubro.SelectedIndex
         proveedor.numeroSEDRONAR = txtNroSEDRONAR1.Text
         proveedor.vtoSEDRONAR = txtNroSEDRONAR2.Text
@@ -410,6 +410,8 @@ Public Class ProveedoresABM
 
     Private Sub borrar()
         Try
+            If MsgBox("¿Está seguro de querer eliminar el proveedor actual?", MsgBoxStyle.YesNo) = DialogResult.No Then : Exit Sub : End If
+
             DAOProveedor.eliminarProveedor(txtCodigo.Text)
             MsgBox("Proveedor eliminado con exito!", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
