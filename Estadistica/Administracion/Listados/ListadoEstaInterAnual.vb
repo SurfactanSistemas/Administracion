@@ -107,7 +107,7 @@ Public Class ListadoEstaInterAnual
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(610, 460)
+        Me.Height = 460
 
         lstAyuda.DataSource = DAOTerminado.buscarTerminadoPorNombre("")
         varProcesoBusqueda = 0
@@ -120,30 +120,30 @@ Public Class ListadoEstaInterAnual
 
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtAyuda.KeyPress
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            Select Case varProcesoBusqueda
-                Case 0
-                    lstAyuda.DataSource = DAOTerminado.buscarTerminadoPorNombre(txtAyuda.Text)
-                Case 1
-                    lstAyuda.DataSource = DAOCliente.buscarClientePorNombre(txtAyuda.Text)
-            End Select
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-            lstAyuda.DataSource = DAOCliente.buscarClientePorNombre(txtAyuda.Text)
-        End If
-    End Sub
+    'Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
+    '               ByVal e As System.Windows.Forms.KeyPressEventArgs) _
+    '               Handles txtAyuda.KeyPress
+    '    If e.KeyChar = Convert.ToChar(Keys.Return) Then
+    '        e.Handled = True
+    '        Select Case varProcesoBusqueda
+    '            Case 0
+    '                lstAyuda.DataSource = DAOTerminado.buscarTerminadoPorNombre(txtAyuda.Text)
+    '            Case 1
+    '                lstAyuda.DataSource = DAOCliente.buscarClientePorNombre(txtAyuda.Text)
+    '        End Select
+    '    ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
+    '        e.Handled = True
+    '        txtAyuda.Text = ""
+    '        lstAyuda.DataSource = DAOCliente.buscarClientePorNombre(txtAyuda.Text)
+    '    End If
+    'End Sub
 
     Private Sub mostrarterminado(ByVal terminado As LeeTerminado)
         txtAyuda.Visible = False
         lstAyuda.Visible = False
         Me.Size = New System.Drawing.Size(610, 270)
-        'txtDesdeTerminado.Text = LeeTerminado.Articulo
-        'txtHastaTerminado.Text = LeeTerminado.Descripcion
+        txtDesdeTerminado.Text = terminado.Articulo
+        txtHastaTerminado.Text = terminado.Articulo
         txtDesdeTerminado.Focus()
     End Sub
 
@@ -292,10 +292,10 @@ Public Class ListadoEstaInterAnual
         Dim tabla As DataTable
         Dim DesdeVendedor = 0, HastaVendedor = 9999
 
-        If Vendedor.permisos <> 99 Then
-            DesdeVendedor = Vendedor.permisos
-            HastaVendedor = Vendedor.permisos
-        End If
+        'If Vendedor.permisos <> 99 Then
+        '    DesdeVendedor = Vendedor.permisos
+        '    HastaVendedor = Vendedor.permisos
+        'End If
 
         tabla = SQLConnector.retrieveDataTable("buscar_estadistica_productosII", DesdeVendedor, HastaVendedor, 0, 9999, 0, 9999, txtDesdeCliente, txtHastaCliente, txtDesdeTerminado.Text, txtHastaTerminado.Text, txtOrdDesde, txtOrdHasta)
 
@@ -324,7 +324,7 @@ Public Class ListadoEstaInterAnual
         txtLinea = ""
 
         Dim tablaII As DataTable
-        tablaII = SQLConnector.retrieveDataTable("buscar_Estadistica_Ranking_producto_anual", txtOrdDesde, txtOrdHasta, txtDesdeTerminado.Text, txtHastaTerminado.Text, 0, 9999, txtDesdeCliente, txtHastaCliente)
+        tablaII = SQLConnector.retrieveDataTable("buscar_Estadistica_Ranking_producto_anual", txtOrdDesde, txtOrdHasta, txtDesdeTerminado.Text, txtHastaTerminado.Text, DesdeVendedor, HastaVendedor, txtDesdeCliente, txtHastaCliente)
 
         For Each row As DataRow In tablaII.Rows
 
@@ -525,7 +525,7 @@ Public Class ListadoEstaInterAnual
 
     Private Sub btnConsultaCliente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaCliente.Click
 
-        Me.Size = New System.Drawing.Size(580, 460)
+        Me.Height = 460
 
         lstAyuda.DataSource = DAOCliente.buscarClientePorNombre("")
         varProcesoBusqueda = 1
@@ -537,4 +537,62 @@ Public Class ListadoEstaInterAnual
         txtAyuda.Focus()
 
     End Sub
+
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstAyuda
+        Dim final As ListBox = lstFiltrada
+        Dim cadena As String = Trim(txtAyuda.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+            origen.Visible = False
+
+        Else
+
+            final.Visible = False
+            origen.Visible = True
+
+        End If
+    End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+        Dim origen As ListBox = lstAyuda
+        Dim filtrado As ListBox = lstFiltrada
+        Dim texto As TextBox = txtAyuda
+
+        If IsNothing(filtrado.SelectedItem) Then : Exit Sub : End If
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedItem = filtrado.SelectedItem
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        lstAyuda_Click(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        _FiltrarDinamicamente()
+    End Sub
+
+
+
 End Class

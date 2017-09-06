@@ -371,14 +371,18 @@ Public Class ListadoGraficoAnual
         txtUno = "{Grafico2.codigo} in 0 to 9999"
         txtDos = ""
 
+        Dim WReporteI = "WGraficoNet.rpt"
+
         If Vendedor.permisos <> 99 Then
+            ' Filtramos por vendedor y cambiamos al rpt por vendedor.
             txtUno = "{Grafico2.codigo} in " & Vendedor.permisos & " to " & Vendedor.permisos
+            WReporteI = "WGraficoNetporvendedor.rpt"
         End If
 
         txtFormula = txtUno + txtDos
 
         If TipoListado.SelectedIndex <> 3 Then
-            Dim viewer As New ReportViewer("Emision de Graficos", Globals.reportPathWithName("WGraficoNet.rpt"), txtFormula)
+            Dim viewer As New ReportViewer("Emision de Graficos", Globals.reportPathWithName(WReporteI), txtFormula)
             If txtSalida = 0 Then
                 viewer.Show()
             Else
@@ -1539,29 +1543,29 @@ Public Class ListadoGraficoAnual
 
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtAyuda.KeyPress
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            Select Case varProcesoBusqueda
-                Case 0
-                    lstAyuda.DataSource = DaoVendedor.buscarVendedorPorNombre(txtAyuda.Text)
-                Case 1
-                    lstAyuda.DataSource = DAOCliente.buscarClientePorNombre(txtAyuda.Text)
-                Case 2
-                    lstAyuda.DataSource = DAOLinea.buscarLineaPorNombre(txtAyuda.Text)
-                Case 3
-                    lstAyuda.DataSource = DAORubro.buscarRubroPorNombre(txtAyuda.Text)
-                Case 4
-                    lstAyuda.DataSource = DAOTerminado.buscarTerminadoPorNombre(txtAyuda.Text)
-            End Select
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-            lstAyuda.DataSource = DAOCliente.buscarClientePorNombre(txtAyuda.Text)
-        End If
-    End Sub
+    'Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
+    '               ByVal e As System.Windows.Forms.KeyPressEventArgs) _
+    '               Handles txtAyuda.KeyPress
+    '    If e.KeyChar = Convert.ToChar(Keys.Return) Then
+    '        e.Handled = True
+    '        Select Case varProcesoBusqueda
+    '            Case 0
+    '                lstAyuda.DataSource = DaoVendedor.buscarVendedorPorNombre(txtAyuda.Text)
+    '            Case 1
+    '                lstAyuda.DataSource = DAOCliente.buscarClientePorNombre(txtAyuda.Text)
+    '            Case 2
+    '                lstAyuda.DataSource = DAOLinea.buscarLineaPorNombre(txtAyuda.Text)
+    '            Case 3
+    '                lstAyuda.DataSource = DAORubro.buscarRubroPorNombre(txtAyuda.Text)
+    '            Case 4
+    '                lstAyuda.DataSource = DAOTerminado.buscarTerminadoPorNombre(txtAyuda.Text)
+    '        End Select
+    '    ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
+    '        e.Handled = True
+    '        txtAyuda.Text = ""
+    '        lstAyuda.DataSource = DAOCliente.buscarClientePorNombre(txtAyuda.Text)
+    '    End If
+    'End Sub
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
         Select Case varProcesoBusqueda
@@ -1616,7 +1620,7 @@ Public Class ListadoGraficoAnual
     Private Sub mostrarterminado(ByVal terminado As LeeTerminado)
         txtAyuda.Visible = False
         lstAyuda.Visible = False
-        'txtDesdeTerminado.Text = LeeTerminado.Articulo
+        txtTerminadoFiltro.Text = terminado.Articulo
         'txtHastaTerminado.Text = LeeTerminado.Descripcion
         txtTerminadoFiltro.Focus()
     End Sub
@@ -1636,5 +1640,61 @@ Public Class ListadoGraficoAnual
         txtAno.Focus()
     End Sub
 
-   
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstAyuda
+        Dim final As ListBox = lstFiltrada
+        Dim cadena As String = Trim(txtAyuda.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+            origen.Visible = False
+
+        Else
+
+            final.Visible = False
+            origen.Visible = True
+
+        End If
+    End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+        Dim origen As ListBox = lstAyuda
+        Dim filtrado As ListBox = lstFiltrada
+        Dim texto As TextBox = txtAyuda
+
+        If IsNothing(filtrado.SelectedItem) Then : Exit Sub : End If
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedItem = filtrado.SelectedItem
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        lstAyuda_Click(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        _FiltrarDinamicamente()
+    End Sub
+
+
+
 End Class

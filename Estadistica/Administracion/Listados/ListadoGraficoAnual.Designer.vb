@@ -68,6 +68,7 @@ Partial Class ListadoGraficoAnual
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtAyuda = New Esta.CustomTextBox()
         Me.lstAyuda = New Esta.CustomListBox()
+        Me.lstFiltrada = New Esta.CustomListBox()
         Me.panel1.SuspendLayout()
         Me.P_Buscar.SuspendLayout()
         Me.PantaDatos.SuspendLayout()
@@ -275,7 +276,7 @@ Partial Class ListadoGraficoAnual
         Me.PantaDatos.Controls.Add(Me.Label8)
         Me.PantaDatos.Controls.Add(Me.txtClienteFiltro)
         Me.PantaDatos.Controls.Add(Me.txtVendedorFiltro)
-        Me.PantaDatos.Location = New System.Drawing.Point(0, 120)
+        Me.PantaDatos.Location = New System.Drawing.Point(76, 120)
         Me.PantaDatos.Name = "PantaDatos"
         Me.PantaDatos.Size = New System.Drawing.Size(543, 185)
         Me.PantaDatos.TabIndex = 113
@@ -524,7 +525,7 @@ Partial Class ListadoGraficoAnual
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(7, 323)
+        Me.ProgressBar1.Location = New System.Drawing.Point(84, 323)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(526, 29)
         Me.ProgressBar1.TabIndex = 116
@@ -539,7 +540,7 @@ Partial Class ListadoGraficoAnual
         Me.btnPantalla.FlatAppearance.BorderSize = 0
         Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPantalla.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPantalla.Location = New System.Drawing.Point(99, 374)
+        Me.btnPantalla.Location = New System.Drawing.Point(431, 374)
         Me.btnPantalla.Name = "btnPantalla"
         Me.btnPantalla.Size = New System.Drawing.Size(72, 72)
         Me.btnPantalla.TabIndex = 115
@@ -555,7 +556,7 @@ Partial Class ListadoGraficoAnual
         Me.btnImpresora.FlatAppearance.BorderSize = 0
         Me.btnImpresora.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImpresora.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImpresora.Location = New System.Drawing.Point(262, 373)
+        Me.btnImpresora.Location = New System.Drawing.Point(191, 373)
         Me.btnImpresora.Name = "btnImpresora"
         Me.btnImpresora.Size = New System.Drawing.Size(72, 72)
         Me.btnImpresora.TabIndex = 114
@@ -574,7 +575,7 @@ Partial Class ListadoGraficoAnual
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancela.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnCancela.Location = New System.Drawing.Point(432, 373)
+        Me.btnCancela.Location = New System.Drawing.Point(311, 373)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(72, 73)
         Me.btnCancela.TabIndex = 117
@@ -589,7 +590,7 @@ Partial Class ListadoGraficoAnual
         Me.txtAyuda.Empty = True
         Me.txtAyuda.EnterIndex = -1
         Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(10, 474)
+        Me.txtAyuda.Location = New System.Drawing.Point(84, 474)
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(527, 20)
         Me.txtAyuda.TabIndex = 119
@@ -602,17 +603,30 @@ Partial Class ListadoGraficoAnual
         Me.lstAyuda.EnterIndex = -1
         Me.lstAyuda.FormattingEnabled = True
         Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(10, 500)
+        Me.lstAyuda.Location = New System.Drawing.Point(85, 500)
         Me.lstAyuda.Name = "lstAyuda"
         Me.lstAyuda.Size = New System.Drawing.Size(525, 147)
         Me.lstAyuda.TabIndex = 118
         Me.lstAyuda.Visible = False
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(85, 500)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(525, 147)
+        Me.lstFiltrada.TabIndex = 120
+        Me.lstFiltrada.Visible = False
         '
         'ListadoGraficoAnual
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(694, 656)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.lstAyuda)
         Me.Controls.Add(Me.btnCancela)
@@ -678,4 +692,5 @@ Partial Class ListadoGraficoAnual
     Friend WithEvents TipoListadoII As Esta.CustomComboBox
     Friend WithEvents txtAnoII As System.Windows.Forms.TextBox
     Private WithEvents ImpreAnoII As System.Windows.Forms.Label
+    Friend WithEvents lstFiltrada As Esta.CustomListBox
 End Class

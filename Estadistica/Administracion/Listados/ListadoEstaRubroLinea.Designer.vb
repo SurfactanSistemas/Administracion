@@ -46,6 +46,7 @@ Partial Class ListadoEstaRubroLinea
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtAyuda = New Esta.CustomTextBox()
         Me.lstAyuda = New Esta.CustomListBox()
+        Me.lstFiltrada = New Esta.CustomListBox()
         Me.panel1.SuspendLayout()
         Me.P_Buscar.SuspendLayout()
         Me.SuspendLayout()
@@ -272,7 +273,7 @@ Partial Class ListadoEstaRubroLinea
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(15, 207)
+        Me.ProgressBar1.Location = New System.Drawing.Point(22, 207)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(526, 29)
         Me.ProgressBar1.TabIndex = 87
@@ -284,7 +285,7 @@ Partial Class ListadoEstaRubroLinea
         Me.txtAyuda.Empty = True
         Me.txtAyuda.EnterIndex = -1
         Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(33, 216)
+        Me.txtAyuda.Location = New System.Drawing.Point(39, 242)
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(486, 20)
         Me.txtAyuda.TabIndex = 79
@@ -297,18 +298,31 @@ Partial Class ListadoEstaRubroLinea
         Me.lstAyuda.EnterIndex = -1
         Me.lstAyuda.FormattingEnabled = True
         Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(33, 242)
+        Me.lstAyuda.Location = New System.Drawing.Point(39, 268)
         Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(486, 147)
+        Me.lstAyuda.Size = New System.Drawing.Size(486, 121)
         Me.lstAyuda.TabIndex = 78
         Me.lstAyuda.Visible = False
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(39, 268)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(486, 121)
+        Me.lstFiltrada.TabIndex = 88
+        Me.lstFiltrada.Visible = False
         '
         'ListadoEstaRubroLinea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(570, 243)
+        Me.ClientSize = New System.Drawing.Size(570, 240)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.panel1)
         Me.Controls.Add(Me.btnPantalla)
@@ -350,4 +364,5 @@ Partial Class ListadoEstaRubroLinea
     Friend WithEvents btnCancela As System.Windows.Forms.Button
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstFiltrada As Esta.CustomListBox
 End Class

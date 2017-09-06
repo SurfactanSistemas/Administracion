@@ -121,4 +121,8 @@ Public Class ListadoValoresEnCarteraCuit
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         _Imprimir(Reporte.Imprimir)
     End Sub
+
+    Private Sub ListadoValoresEnCarteraCuit_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesdeFecha.Focus()
+    End Sub
 End Class

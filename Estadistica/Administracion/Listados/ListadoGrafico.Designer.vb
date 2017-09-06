@@ -300,7 +300,7 @@ Partial Class ListadoGrafico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(571, 283)
+        Me.ClientSize = New System.Drawing.Size(571, 269)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnImpresora)

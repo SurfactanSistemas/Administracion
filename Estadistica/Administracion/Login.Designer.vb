@@ -74,10 +74,10 @@ Partial Class Login
         '
         Me.txtClave.Location = New System.Drawing.Point(87, 88)
         Me.txtClave.Name = "txtClave"
-        Me.txtClave.PasswordChar = Global.Microsoft.VisualBasic.ChrW(46)
         Me.txtClave.Size = New System.Drawing.Size(257, 20)
         Me.txtClave.TabIndex = 13
         Me.txtClave.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtClave.UseSystemPasswordChar = True
         '
         'Label1
         '

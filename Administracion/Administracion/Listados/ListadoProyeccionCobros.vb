@@ -3,7 +3,7 @@ Imports System.IO
 
 Public Class ListadoProyeccionCobros
 
-    Private Sub ListadoProyeccionCobros_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ListadoProyeccionCobros_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtAyuda.Text = ""
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
@@ -14,7 +14,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txtdesdeproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesdeProveedor.KeyPress
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -29,7 +29,7 @@ Public Class ListadoProyeccionCobros
     End Sub
 
     Private Sub txthastaproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHastaProveedor.KeyPress
 
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -329,4 +329,7 @@ Public Class ListadoProyeccionCobros
         _Imprimir(Reporte.Imprimir)
     End Sub
 
+    Private Sub ListadoProyeccionCobros_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesdeProveedor.Focus()
+    End Sub
 End Class

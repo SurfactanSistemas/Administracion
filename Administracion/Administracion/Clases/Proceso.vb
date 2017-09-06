@@ -249,7 +249,7 @@
             txtValidaFecha = "N"
         End If
 
-        If txtAno <= 1900 Then
+        If txtAno < 1900 Then
             txtValidaFecha = "N"
         End If
 

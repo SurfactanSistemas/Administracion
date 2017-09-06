@@ -8,8 +8,6 @@ Public Class ListadoRetencionIBCiudad
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 
-        opcPantalla.Checked = False
-        opcImpesora.Checked = True
     End Sub
 
     Private Sub txtdesdefecha_KeyPress(ByVal sender As Object, _
@@ -47,7 +45,12 @@ Public Class ListadoRetencionIBCiudad
         MenuPrincipal.Show()
     End Sub
 
-    Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
+
+    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         Dim varDesde, varHasta As String
         Dim varUno, varDos, varTres As String
@@ -70,12 +73,28 @@ Public Class ListadoRetencionIBCiudad
 
         Dim viewer As New ReportViewer("Listado de Retenciones de Ingresos Brutos (CABA)", Globals.reportPathWithName("wListIbCiudadnet.rpt"), varFormula)
 
-        If opcPantalla.Checked = True Then
-            viewer.Show()
-        Else
-            viewer.imprimirReporte()
-        End If
 
+        With viewer
+
+            Select Case TipoImpresion
+                Case Reporte.Pantalla
+                    .ShowDialog()
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+            End Select
+
+        End With
     End Sub
 
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        _Imprimir(Reporte.Imprimir)
+    End Sub
+
+    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        _Imprimir(Reporte.Pantalla)
+    End Sub
+
+    Private Sub ListadoRetencionIBCiudad_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesdeFecha.Focus()
+    End Sub
 End Class

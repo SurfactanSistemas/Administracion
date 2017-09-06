@@ -90,6 +90,7 @@ Public Class ReportViewer
         End With
 
         'Exporta y crea el pdf.
+        reporte.RecordSelectionFormula = formula
         reporte.Export()
     End Sub
 

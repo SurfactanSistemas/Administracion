@@ -107,13 +107,32 @@ Public Class MenuPrincipal
         ' Aca ir deshabilitando solo si el usuario no es 99.
         If Val(Vendedor.permisos) <> 99 Then
 
+            ' Desactivamos por completo todos los items del menu.
+            For Each _menu As ToolStripMenuItem In MenuStrip1.Items
+
+
+                For i = 0 To _menu.DropDownItems.Count - 1
+
+                    _menu.DropDownItems.Item(i).Enabled = False
+
+                Next
+
+
+            Next
+
+            ' Habilitamos selectivamente solo aquellos que pueden ver los vendedores.
             With Me
-                .EstadisticaDeVentasPorRubroYClienteToolStripMenuItem.Enabled = False
-                .EstadisticasDeVentasPorLineaToolStripMenuItem.Enabled = False
-                .EstsdisticaDeVentasPorProductoToolStripMenuItem.Enabled = False
-                .EstadisticaDeVentasPorClienteToolStripMenuItem.Enabled = False
+                .EstadisticasPorVendedorToolStripMenuItem.Enabled = True
+                .EstadisticaDeVentasAnualesToolStripMenuItem.Enabled = True
+                .EmiiosnDeGraficosAnualesToolStripMenuItem.Enabled = True
+                .ProcesosToolStripMenuItem.Enabled = True
+                .FinDelSistemaToolStripMenuItem.Enabled = True
             End With
 
         End If
+    End Sub
+
+    Private Sub EstadisticasPorVendedorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EstadisticasPorVendedorToolStripMenuItem.Click
+
     End Sub
 End Class

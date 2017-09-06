@@ -52,7 +52,7 @@ Public Class Login
         Dim WPermisos As Integer = 0
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT v.Vendedor, v.Nombre, o.Vendedor as Permisos FROM Operador as o, Vendedor as v WHERE Clave = '" & clave & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT v.Vendedor, v.Nombre, o.Vendedor as Permisos FROM Operador as o, Vendedor as v WHERE Clave = '" & UCase(clave) & "' or Clave = '" & LCase(clave) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)

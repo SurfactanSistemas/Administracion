@@ -50,6 +50,7 @@ Partial Class ListadoEstaInterAnual
         Me.btnCancela = New System.Windows.Forms.Button()
         Me.txtAyuda = New Esta.CustomTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstFiltrada = New Esta.CustomListBox()
         Me.panel1.SuspendLayout()
         Me.P_Buscar.SuspendLayout()
         Me.SuspendLayout()
@@ -264,15 +265,15 @@ Partial Class ListadoEstaInterAnual
         Me.lstAyuda.EnterIndex = -1
         Me.lstAyuda.FormattingEnabled = True
         Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(44, 228)
+        Me.lstAyuda.Location = New System.Drawing.Point(39, 280)
         Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(527, 186)
+        Me.lstAyuda.Size = New System.Drawing.Size(527, 134)
         Me.lstAyuda.TabIndex = 105
         Me.lstAyuda.Visible = False
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(44, 204)
+        Me.ProgressBar1.Location = New System.Drawing.Point(39, 206)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(526, 29)
         Me.ProgressBar1.TabIndex = 104
@@ -353,18 +354,31 @@ Partial Class ListadoEstaInterAnual
         Me.txtAyuda.Empty = True
         Me.txtAyuda.EnterIndex = -1
         Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(44, 202)
+        Me.txtAyuda.Location = New System.Drawing.Point(39, 254)
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(527, 20)
         Me.txtAyuda.TabIndex = 114
         Me.txtAyuda.Validator = Esta.ValidatorType.None
         Me.txtAyuda.Visible = False
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(39, 280)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(527, 134)
+        Me.lstFiltrada.TabIndex = 115
+        Me.lstFiltrada.Visible = False
+        '
         'ListadoEstaInterAnual
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(605, 426)
+        Me.ClientSize = New System.Drawing.Size(605, 243)
+        Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.lstAyuda)
@@ -410,4 +424,5 @@ Partial Class ListadoEstaInterAnual
     Friend WithEvents btnCancela As System.Windows.Forms.Button
     Friend WithEvents txtAyuda As Esta.CustomTextBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lstFiltrada As Esta.CustomListBox
 End Class
