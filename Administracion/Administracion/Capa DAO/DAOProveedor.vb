@@ -130,7 +130,37 @@ Public Class DAOProveedor
     End Sub
 
     Public Shared Sub eliminarProveedor(ByVal codProveedor As String)
-        SQLConnector.executeProcedure("baja_proveedor", codProveedor)
+        'SQLConnector.executeProcedure("baja_proveedor", codProveedor)
+        Dim ZSql As String = ""
+        Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "GastonPruebas"}
+        Dim Xcs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand
+
+        ZSql = "DELETE FROM Proveedor Where Proveedor = '" & Trim(codProveedor) & "'"
+
+        For Each _Empresa As String In _Empresas
+
+            Try
+
+                cn.ConnectionString = Xcs.Replace("#EMPRESA#", Trim(_Empresa))
+                cn.Open()
+
+                cm.Connection = cn
+                cm.CommandText = ZSql
+
+                cm.ExecuteNonQuery()
+
+            Catch ex As Exception
+                Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+                Exit Sub
+            Finally
+
+                cn.Close()
+
+            End Try
+        Next
+
     End Sub
 
     Public Shared Function crearProveedor(ByVal row)
