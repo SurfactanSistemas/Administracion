@@ -182,13 +182,6 @@ Public Class RecibosProvisorios
 
         Return Proceso.formatonumerico(numero)
 
-        'If numero.Contains(",") Then
-        '    numero = String.Format("{0:F2}", CDbl(numero)).Replace(",", ".")
-        'ElseIf Not numero.Contains(".") Then
-        '    numero &= ".00"
-        'End If
-
-        'Return numero
     End Function
 
     Private Function sumarValores() As Boolean

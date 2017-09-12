@@ -136,7 +136,7 @@ Public Class ProveedoresABM
                     & "CategoriaII =  '" & NormalizarIndex(cmbCategoria2.SelectedIndex) & "', " _
                     & "Iso =  '" & NormalizarIndex(cmbCertificados.SelectedIndex) & "', " _
                     & "Region =  '" & NormalizarIndex(cmbRegion.SelectedIndex) & "', " _
-                    & "PorceIb =  '" & Trim(txtPorcelProv.Text) & "', " _
+                    & "PorceIb =  " & Proceso.formatonumerico(txtPorcelProv.Text) & ", " _
                     & "Estado =  '" & NormalizarIndex(cmbEstado.SelectedIndex) & "', " _
                     & "Califica =  '" & NormalizarIndex(cmbCalificacion.SelectedIndex) & "', " _
                     & "FechaCalifica =  '" & Mid(Trim(txtCalificacion.Text), 1, 10) & "', " _
@@ -146,7 +146,7 @@ Public Class ProveedoresABM
                     & "OrdFechaCategoria =  '" & Mid(_FechaComoOrd(txtCategoria.Text), 1, 10) & "', " _
                     & "FechaNroInsc =  '" & Mid(Trim(txtNroSEDRONAR2.Text), 1, 10) & "', " _
                     & "OrdFechaNroInsc =  '" & Mid(_FechaComoOrd(txtNroSEDRONAR2.Text), 1, 10) & "', " _
-                    & "PorceIbCaba =  '" & Trim(txtPorcelCABA.Text) & "', " _
+                    & "PorceIbCaba =  " & Proceso.formatonumerico(txtPorcelCABA.Text) & ", " _
                     & "Cufe =  '" & Mid(Trim(cufe1.Item1), 1, 20) & "', " _
                     & "CufeII =  '" & Mid(Trim(cufe2.Item1), 1, 20) & "', " _
                     & "CufeIII =  '" & Mid(Trim(cufe3.Item1), 1, 20) & "', " _

@@ -394,20 +394,79 @@ Public Class Compras
                 MsgBox("No se puede modificar una factura que ya se encuentra paga", MsgBoxStyle.Exclamation, "No se puede confirmar la operación")
                 Exit Sub
             End If
+
             txtNroInterno.Text = compra.nroInterno
-            DAOCompras.agregarCompra(compra)
+
+            Try
+                DAOCompras.agregarCompra(compra)
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Exit Sub
+            End Try
+
+            Try
+                _ActualizarChequeRechazado(compra.nroInterno)
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Exit Sub
+            End Try
+
             If usaCuentas() Then
                 If cuotasCargadas() Then
                     compra.agregarPagoPyme(_PyMENacion)
                 End If
-                DAOCompras.agregarDatosCuentaCorriente(compra)
+
+                Try
+                    DAOCompras.agregarDatosCuentaCorriente(compra)
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Critical)
+                    Exit Sub
+                End Try
+
             End If
             If Not IsNothing(apertura) Then
-                DAOCompras.agregarTablaIvaComprasAdicional(compra, apertura.gridApertura.Rows)
+
+                Try
+                    DAOCompras.agregarTablaIvaComprasAdicional(compra, apertura.gridApertura.Rows)
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Critical)
+                    Exit Sub
+                End Try
+
             End If
             MsgBox("El número de Factura asignado es: " & compra.nroInterno, MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
         End If
+    End Sub
+
+    Private Sub _ActualizarChequeRechazado(ByVal NroInterno As Integer)
+        Dim WRechazado = 0
+
+        If ckChequeRechazado.Checked Then
+            WRechazado = 1
+        End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("UPDATE IvaComp SET Rechazado = " & WRechazado & " WHERE NroInterno = '" & NroInterno & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Function crearCompra() As Compra

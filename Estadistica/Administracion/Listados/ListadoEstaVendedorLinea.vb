@@ -116,7 +116,7 @@ Public Class ListadoEstaVendedorLinea
     End Sub
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
-
+        If Not txtDesdeVendedor.Enabled Then : Exit Sub : End If
         Me.Height = 440
 
         lstAyuda.DataSource = DaoVendedor.buscarVendedorPorNombre("")

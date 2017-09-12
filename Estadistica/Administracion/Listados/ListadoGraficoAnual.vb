@@ -1476,7 +1476,7 @@ Public Class ListadoGraficoAnual
 
 
     Private Sub btnConsultaVendedor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaVendedor.Click
-
+        If Not txtVendedorFiltro.Enabled Then : Exit Sub : End If
         lstAyuda.DataSource = DaoVendedor.buscarVendedorPorNombre("")
         varProcesoBusqueda = 0
 

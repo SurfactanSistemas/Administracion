@@ -97,6 +97,7 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
+        Me.ckChequeRechazado = New System.Windows.Forms.CheckBox()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -230,6 +231,7 @@ Partial Class Compras
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.ckChequeRechazado)
         Me.Panel2.Controls.Add(Me.CustomButton1)
         Me.Panel2.Controls.Add(Me.txtVtoCAI)
         Me.Panel2.Controls.Add(Me.txtFechaIVA)
@@ -1105,6 +1107,18 @@ Partial Class Compras
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'ckChequeRechazado
+        '
+        Me.ckChequeRechazado.AutoSize = True
+        Me.ckChequeRechazado.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.ckChequeRechazado.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckChequeRechazado.Location = New System.Drawing.Point(464, 194)
+        Me.ckChequeRechazado.Name = "ckChequeRechazado"
+        Me.ckChequeRechazado.Size = New System.Drawing.Size(144, 22)
+        Me.ckChequeRechazado.TabIndex = 65
+        Me.ckChequeRechazado.Text = "Cheque Rechazado"
+        Me.ckChequeRechazado.UseVisualStyleBackColor = True
+        '
         'Compras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1207,4 +1221,5 @@ Partial Class Compras
     Friend WithEvents txtFechaVto1 As System.Windows.Forms.MaskedTextBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents CustomButton1 As Administracion.CustomButton
+    Friend WithEvents ckChequeRechazado As System.Windows.Forms.CheckBox
 End Class

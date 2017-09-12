@@ -72,57 +72,6 @@ Public Class Recibos
         txtProvi.Focus()
     End Sub
 
-    'Private Sub _DeterminarParidad(Optional ByVal fecha As String = "")
-
-    '    If Trim(txtFecha.Text) <> "" Then
-
-    '        Dim _Fecha As String = IIf(fecha = "", txtFecha.Text, fecha)
-
-    '        cm.CommandText = "SELECT Cambio FROM Cambios WHERE Fecha = '" & _Fecha & "'"
-
-    '        SQLConnector.conexionSql(cn, cm)
-
-    '        Try
-
-    '            dr = cm.ExecuteReader()
-
-    '            If dr.HasRows Then
-
-    '                dr.Read()
-
-    '                txtParidad.Text = _NormalizarNumero(dr.Item("Cambio"))
-
-    '            Else
-    '                txtParidad.Text = ""
-    '            End If
-
-    '        Catch ex As Exception
-    '            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-    '        Finally
-
-    '            cn.Close()
-
-    '        End Try
-    '    End If
-
-    'End Sub
-
-    ''Definimos las alineaciones por defecto.
-    'Private Sub _AlinearCeldas()
-    '    With gridFormasPago
-    '        .Columns("Tipo").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-    '        .Columns("numero").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-    '        .Columns("fecha").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-    '        .Columns("importe").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-    '    End With
-
-    '    With gridPagos
-    '        .Columns("TipoCC").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-    '        .Columns("NumeroCC").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-    '        .Columns("ImporteCC").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-    '    End With
-    'End Sub
-
     Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSeleccion.Click
 
         Select Case lstSeleccion.SelectedIndex
@@ -691,14 +640,12 @@ Public Class Recibos
 
     Private Sub mostrarReciboProvisorio(ByVal _ReciboProvisorio As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + _ReciboProvisorio + "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + _ReciboProvisorio + "' order by Renglon")
         Dim dr As SqlDataReader
-
 
         If Trim(_ReciboProvisorio) = "" Then
             Exit Sub
         End If
-
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -707,6 +654,8 @@ Public Class Recibos
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
+                _ClavesCheques.Clear()
+                _CuentasContables.Clear()
                 gridFormasPago2.Rows.Clear()
 
                 Do While dr.Read()
@@ -4645,7 +4594,4 @@ Public Class Recibos
         CustomLabel14.Text = _NormalizarNumero(Val(_NormalizarNumero(lblDolares.Text)) * Val(txtParidad.Text))
     End Sub
 
-    Private Sub txtRetIB_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRetIB.KeyPress
-
-    End Sub
 End Class

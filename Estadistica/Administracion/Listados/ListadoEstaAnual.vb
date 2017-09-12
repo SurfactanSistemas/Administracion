@@ -843,7 +843,7 @@ Public Class ListadoEstaAnual
     End Sub
 
     Private Sub btnConsultaVendedor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaVendedor.Click
-
+        If Not txtVendedorFiltro.Enabled Then : Exit Sub : End If
         Me.Height = 510
 
         lstAyuda.DataSource = DaoVendedor.buscarVendedorPorNombre("")
