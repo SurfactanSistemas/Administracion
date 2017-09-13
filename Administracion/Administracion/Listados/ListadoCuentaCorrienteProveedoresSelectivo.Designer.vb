@@ -31,10 +31,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtRazon = New Administracion.CustomTextBox()
-        Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.txtDesdeProveedor = New Administracion.CustomTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnImprimir = New Administracion.CustomButton()
         Me.btnPantalla = New Administracion.CustomButton()
@@ -43,6 +39,10 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
         Me.txtAyuda = New Administracion.CustomTextBox()
+        Me.txtRazon = New Administracion.CustomTextBox()
+        Me.CustomLabel3 = New Administracion.CustomLabel()
+        Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.txtDesdeProveedor = New Administracion.CustomTextBox()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
@@ -75,6 +75,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         'Codigo
         '
         Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.MaxInputLength = 11
         Me.Codigo.Name = "Codigo"
         '
         'Razon
@@ -127,59 +128,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(589, 359)
         Me.Panel2.TabIndex = 60
-        '
-        'txtRazon
-        '
-        Me.txtRazon.BackColor = System.Drawing.Color.Silver
-        Me.txtRazon.Cleanable = False
-        Me.txtRazon.Empty = True
-        Me.txtRazon.EnterIndex = -1
-        Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(248, 38)
-        Me.txtRazon.Name = "txtRazon"
-        Me.txtRazon.Size = New System.Drawing.Size(296, 20)
-        Me.txtRazon.TabIndex = 51
-        Me.txtRazon.Validator = Administracion.ValidatorType.None
-        '
-        'CustomLabel3
-        '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel3.ControlAssociationKey = -1
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(29, 14)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
-        Me.CustomLabel3.TabIndex = 47
-        Me.CustomLabel3.Text = "Fecha Emision"
-        '
-        'CustomLabel1
-        '
-        Me.CustomLabel1.AutoSize = True
-        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(49, 40)
-        Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
-        Me.CustomLabel1.TabIndex = 50
-        Me.CustomLabel1.Text = "Proveedor"
-        '
-        'txtDesdeProveedor
-        '
-        Me.txtDesdeProveedor.Cleanable = False
-        Me.txtDesdeProveedor.Empty = True
-        Me.txtDesdeProveedor.EnterIndex = -1
-        Me.txtDesdeProveedor.LabelAssociationKey = -1
-        Me.txtDesdeProveedor.Location = New System.Drawing.Point(130, 38)
-        Me.txtDesdeProveedor.MaxLength = 11
-        Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
-        Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
-        Me.txtDesdeProveedor.TabIndex = 49
-        Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
-        Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
         'btnImprimir
         '
@@ -274,7 +222,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(131, 415)
+        Me.btnConsulta.Location = New System.Drawing.Point(131, 417)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(69, 40)
         Me.btnConsulta.TabIndex = 58
@@ -294,7 +242,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(36, 415)
+        Me.btnCancela.Location = New System.Drawing.Point(36, 417)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(74, 40)
         Me.btnCancela.TabIndex = 57
@@ -313,6 +261,59 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtAyuda.TabIndex = 53
         Me.txtAyuda.Validator = Administracion.ValidatorType.None
         Me.txtAyuda.Visible = False
+        '
+        'txtRazon
+        '
+        Me.txtRazon.BackColor = System.Drawing.Color.Silver
+        Me.txtRazon.Cleanable = False
+        Me.txtRazon.Empty = True
+        Me.txtRazon.EnterIndex = -1
+        Me.txtRazon.LabelAssociationKey = -1
+        Me.txtRazon.Location = New System.Drawing.Point(248, 38)
+        Me.txtRazon.Name = "txtRazon"
+        Me.txtRazon.Size = New System.Drawing.Size(296, 20)
+        Me.txtRazon.TabIndex = 51
+        Me.txtRazon.Validator = Administracion.ValidatorType.None
+        '
+        'CustomLabel3
+        '
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel3.ControlAssociationKey = -1
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(29, 14)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
+        Me.CustomLabel3.TabIndex = 47
+        Me.CustomLabel3.Text = "Fecha Emision"
+        '
+        'CustomLabel1
+        '
+        Me.CustomLabel1.AutoSize = True
+        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel1.ControlAssociationKey = -1
+        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel1.Location = New System.Drawing.Point(49, 40)
+        Me.CustomLabel1.Name = "CustomLabel1"
+        Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
+        Me.CustomLabel1.TabIndex = 50
+        Me.CustomLabel1.Text = "Proveedor"
+        '
+        'txtDesdeProveedor
+        '
+        Me.txtDesdeProveedor.Cleanable = False
+        Me.txtDesdeProveedor.Empty = True
+        Me.txtDesdeProveedor.EnterIndex = -1
+        Me.txtDesdeProveedor.LabelAssociationKey = -1
+        Me.txtDesdeProveedor.Location = New System.Drawing.Point(130, 38)
+        Me.txtDesdeProveedor.MaxLength = 11
+        Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
+        Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
+        Me.txtDesdeProveedor.TabIndex = 49
+        Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
+        Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
         'lstFiltrada
         '

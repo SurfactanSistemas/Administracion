@@ -1,6 +1,62 @@
 ﻿Module Proceso
 
+    Private empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+
     Private Const VALIDA_CUIT = "54327654321"
+
+    Public Function _NormalizarFilas(ByVal tabla As DataTable) As DataTable
+
+        If tabla.Rows.Count = 0 Then : Return tabla : End If
+
+        Dim tabla2 As DataTable = tabla.Clone
+
+        tabla2.Rows.Clear()
+
+        For Each row As DataRow In tabla.Rows
+
+            tabla2.ImportRow(_NormalizarFila(row))
+
+        Next
+
+        Return tabla2
+
+    End Function
+
+    Public Function _NormalizarFila(ByVal row As DataRow) As DataRow
+
+        For r = 0 To row.ItemArray.Count - 1
+            With row
+                Try
+                    .Item(r) = IIf(IsDBNull(.Item(r)), "", .Item(r))
+                Catch ex As Exception
+                    .Item(r) = IIf(IsDBNull(.Item(r)), "0", .Item(r))
+                End Try
+            End With
+        Next
+
+        Return row
+
+    End Function
+
+    Public Function _ConectarA(ByVal empresa As String, Optional ByVal testing As Boolean = False) As String
+
+        Dim _empresa = empresas.Find(Function(e) UCase(e) = UCase(empresa))
+        Dim cs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        Dim csx As String = "Data Source=(LOCAL)\LOCALSQLSERVER;Initial Catalog=#EMPRESA#;Trusted_Connection=True"
+
+        If Not IsNothing(_empresa) Then
+
+            If testing Then
+                Return csx.Replace("#EMPRESA#", _empresa)
+            Else
+                Return cs.Replace("#EMPRESA#", _empresa)
+            End If
+
+        Else
+            Throw New Exception("No se pudo encontrar la empresa a la que se quiere conectar.")
+        End If
+
+    End Function
 
     Public Function ordenaFecha(ByVal fecha As String)
 
@@ -105,15 +161,15 @@
 
     End Function
 
-    Public Function formatonumerico(ByVal valor As String)
+    Public Function formatonumerico(ByVal valor As String, Optional ByVal decimales As Integer = 2)
         Dim _valor As Double = 0
 
         valor = IIf(Trim(valor) = "", "0", Trim(valor))
 
         valor = valor.Replace(".", ",")
 
-        ' Redondeamos a dos decimales con "." como separador de decimales.
-        _valor = FormatNumber(CDbl(valor), 2)
+        ' Redondeamos a los decimales indicados con "." como separador de decimales.
+        _valor = FormatNumber(CDbl(valor), decimales)
         Return formatonumerico(_valor, "########0.#0", ".")
 
     End Function

@@ -221,7 +221,7 @@ Partial Class ProveedoresABM
         'LBConsulta_Opciones
         '
         Me.LBConsulta_Opciones.FormattingEnabled = True
-        Me.LBConsulta_Opciones.Items.AddRange(New Object() {"Proveedores", "Cuentas Contables", "Clientes"})
+        Me.LBConsulta_Opciones.Items.AddRange(New Object() {"Proveedores", "Cuentas Contables", "Clientes", "Proveedores por Rubro"})
         Me.LBConsulta_Opciones.Location = New System.Drawing.Point(24, 560)
         Me.LBConsulta_Opciones.Name = "LBConsulta_Opciones"
         Me.LBConsulta_Opciones.Size = New System.Drawing.Size(538, 121)

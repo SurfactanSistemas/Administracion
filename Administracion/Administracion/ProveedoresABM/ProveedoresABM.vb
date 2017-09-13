@@ -720,6 +720,8 @@ Public Class ProveedoresABM
                 _ListarConsulta("Descripcion", "Cuenta")
             Case 2
                 _ListarConsulta("Razon", "Cliente")
+            Case 3
+                _ListarConsulta("Descripcion", "TipoProv")
             Case Else
                 Exit Sub
         End Select
@@ -739,6 +741,8 @@ Public Class ProveedoresABM
                 _TraerCuenta(LBConsulta.SelectedItem)
             Case "Cliente"
                 _TraerCliente(LBConsulta.SelectedItem)
+            Case "TipoProv"
+                _TraerRubros(LBConsulta.SelectedItem)
             Case Else
         End Select
 
@@ -790,8 +794,21 @@ Public Class ProveedoresABM
                 _TraerCuenta(LBConsulta_Filtrada.SelectedItem)
             Case "Cliente"
                 _TraerCliente(LBConsulta_Filtrada.SelectedItem)
+            Case "TipoProv"
+                _TraerRubros(LBConsulta.SelectedItem)
             Case Else
         End Select
+
+    End Sub
+
+    Private Sub _TraerRubros(ByVal Rubro As String)
+
+        With VistaPrevia
+            .Reporte = New ProveedoresPorRubro
+            .Formula = "{TipoProv.Descripcion}='" & Rubro & "'"
+            _ContraerFormulario()
+            .Mostrar()
+        End With
 
     End Sub
 
