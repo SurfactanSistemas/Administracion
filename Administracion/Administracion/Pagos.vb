@@ -830,11 +830,11 @@ Public Class Pagos
         ' Procesamos la Cta Cte seleccionada.
         _ProcesarCtaCte(XClave)
 
+        _RecalcularRetenciones()
 
         If Not IsNothing(indice) Then
             lstConsulta.Items(indice) = ""
         End If
-
 
     End Sub
 
@@ -868,9 +868,12 @@ Public Class Pagos
                                               & Trim(txtProveedor.Text) & "' and cp.Clave = '" & clave & "' and cp.Saldo <> 0 AND cp.NroInterno = ivc.NroInterno ORDER BY cp.OrdFecha DESC")
         Dim dr As SqlDataReader
 
-        SQLConnector.conexionSql(cn, cm)
+        'SQLConnector.conexionSql(cn, cm)
 
         Try
+            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.Open()
+            cm.Connection = cn
             dr = cm.ExecuteReader()
 
             With dr
@@ -885,7 +888,7 @@ Public Class Pagos
                     XNroInterno = .Item("NroInterno").ToString()
                     XTotal = _NormalizarNumero(.Item("Total").ToString())
                     XSaldo = _NormalizarNumero(.Item("Saldo").ToString())
-                    
+
                     XImpre = .Item("Impre").ToString()
                     XLetra = .Item("Letra").ToString()
                     XPunto = .Item("Punto").ToString()
@@ -944,7 +947,7 @@ Public Class Pagos
                                 End With
 
                             End If
-                            
+
                         End If
 
                     End If
@@ -4577,9 +4580,9 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub lblPagos_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblPagos.TextChanged
-        ' Recalculamos los valores de Retenciones.
+    Private Sub _RecalcularRetenciones()
 
+        Dim timer As Stopwatch = Stopwatch.StartNew
         ' Recalculo de Retenciones de Ganancias.
         _RecalcularRetencionGanancias()
 
@@ -4592,6 +4595,9 @@ Public Class Pagos
         ' Recalculo IB CABA
         _RecalcularIBCABA()
 
+        timer.Stop()
+
+        Debug.Print(timer.Elapsed.Milliseconds)
     End Sub
 
     Private Sub _RecalcularIBCABA()
@@ -4633,6 +4639,26 @@ Public Class Pagos
         acumProv = 0
         acumCaba = 0
 
+        varAcuNeto = 0
+        varAcuRetenido = 0
+        varAcuAnticipo = 0
+        varAcuBruto = 0
+        varAcuIva = 0
+
+        varOrdFecha = Mid(ordenaFecha(txtFecha.Text), 3, 4)
+
+        Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(txtProveedor.Text, varOrdFecha)
+
+        If Not IsNothing(CampoAcumulado) Then
+
+            varAcuNeto = CampoAcumulado.neto
+            varAcuRetenido = CampoAcumulado.retenido
+            varAcuAnticipo = CampoAcumulado.anticipo
+            varAcuBruto = CampoAcumulado.bruto
+            varAcuIva = CampoAcumulado.iva
+
+        End If
+
         For Each row As DataGridViewRow In gridPagos.Rows
             With row
                 If Not IsNothing(.Cells(4).Value) Then
@@ -4657,26 +4683,6 @@ Public Class Pagos
                     ZLetra = ""
                     ZTotal = 0
                     ZZSaldo = 0
-
-                    varAcuNeto = 0
-                    varAcuRetenido = 0
-                    varAcuAnticipo = 0
-                    varAcuBruto = 0
-                    varAcuIva = 0
-
-                    varOrdFecha = Mid(ordenaFecha(txtFecha.Text), 3, 4)
-
-                    Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(txtProveedor.Text, varOrdFecha)
-
-                    If Not IsNothing(CampoAcumulado) Then
-
-                        varAcuNeto = CampoAcumulado.neto
-                        varAcuRetenido = CampoAcumulado.retenido
-                        varAcuAnticipo = CampoAcumulado.anticipo
-                        varAcuBruto = CampoAcumulado.bruto
-                        varAcuIva = CampoAcumulado.iva
-
-                    End If
 
                     ' Recalculo sobre porcentaje neto en Iva Comp.
                     If Not IsNothing(.Cells(4).Value) Then
@@ -4704,15 +4710,12 @@ Public Class Pagos
 
                         End If
 
-
-
-                        Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
+                        'Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
+                        Dim ZFactura = _BuscarCompra(ZNroInterno)
 
                         If Not IsNothing(ZFactura) Then
 
-
-
-                            ZNeto = ZFactura.neto
+                            ZNeto = ZFactura("Neto")
 
                             If Val(ZImporte) = Val(ZZTotal) And ZNroInterno <> 0 Then
 
@@ -4720,12 +4723,12 @@ Public Class Pagos
 
                             Else
 
-                                ZIva = ZFactura.iva21
-                                ZIva5 = ZFactura.ivaRG
-                                ZIva27 = ZFactura.iva27
-                                ZIva105 = ZFactura.iva105
-                                ZIb = ZFactura.percibidoIB
-                                ZExento = ZFactura.exento
+                                ZIva = ZFactura("Iva21")
+                                ZIva5 = ZFactura("Iva5")
+                                ZIva27 = ZFactura("Iva27")
+                                ZIva105 = ZFactura("Iva105")
+                                ZIb = ZFactura("Ib")
+                                ZExento = ZFactura("Exento")
 
                                 ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
 
@@ -4746,48 +4749,80 @@ Public Class Pagos
                     End If
 
                     acumProv += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(ZZSuma))
-                    acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
+                    'acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
 
                 End If
             End With
         Next
 
         txtIngresosBrutos.Text = _NormalizarNumero(acumProv)
-        txtIBCiudad.Text = _NormalizarNumero(acumCaba)
+        'txtIBCiudad.Text = _NormalizarNumero(acumCaba)
 
     End Sub
+
+    Private Function _BuscarCompra(ByVal NroInterno As Integer)
+        Dim compra As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm = "SELECT Iva21, Iva5, Iva27, Iva105, Ib, Exento, Neto FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
+        Dim dr As New SqlDataAdapter(cm, cn)
+
+        'SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.Open()
+
+            dr.Fill(compra)
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        If compra.Rows.Count > 0 Then
+            Return Proceso._NormalizarFila(compra.Rows(0))
+        Else
+            Return Nothing
+        End If
+    End Function
 
     Private Sub _RecalcularRetencionGanancias()
         Dim varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva, varOrdFecha
         Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
         Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZBase, ZZSumaNeto
 
-        ZNeto = 0
-        ZIva = 0
-        ZIva5 = 0
-        ZIva27 = 0
-        ZIva105 = 0
-        ZIb = 0
-        ZExento = 0
-        ZPorce = 0
-        ZImporte = 0
-        ZZSuma = 0
-        ZZTotal = 0
-        ZZBase = 0
-        ZZSumaNeto = 0
+        ZNeto = 0.0
+        ZIva = 0.0
+        ZIva5 = 0.0
+        ZIva27 = 0.0
+        ZIva105 = 0.0
+        ZIb = 0.0
+        ZExento = 0.0
+        ZPorce = 0.0
+        ZImporte = 0.0
+        ZZSuma = 0.0
+        ZZTotal = 0.0
+        ZZBase = 0.0
+        ZZSumaNeto = 0.0
 
         ZTipo = ""
         ZNumero = ""
         ZPunto = ""
         ZLetra = ""
-        ZTotal = 0
-        ZZSaldo = 0
+        ZTotal = 0.0
+        ZZSaldo = 0.0
 
-        varAcuNeto = 0
-        varAcuRetenido = 0
-        varAcuAnticipo = 0
-        varAcuBruto = 0
-        varAcuIva = 0
+        varAcuNeto = 0.0
+        varAcuRetenido = 0.0
+        varAcuAnticipo = 0.0
+        varAcuBruto = 0.0
+        varAcuIva = 0.0
 
         varOrdFecha = Mid(ordenaFecha(txtFecha.Text), 3, 4)
 
@@ -4829,12 +4864,12 @@ Public Class Pagos
                         ZZSaldo = CtaCtePrv.Item("Saldo")
                     End If
 
-
-                    Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
+                    'Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
+                    Dim ZFactura = _BuscarCompra(ZNroInterno)
 
                     If Not IsNothing(ZFactura) Then
 
-                        ZNeto = ZFactura.neto
+                        ZNeto = ZFactura("Neto")
 
                         If Val(ZImporte) = Val(ZZTotal) And ZNroInterno <> 0 Then
 
@@ -4842,12 +4877,12 @@ Public Class Pagos
 
                         Else
 
-                            ZIva = ZFactura.iva21
-                            ZIva5 = ZFactura.ivaRG
-                            ZIva27 = ZFactura.iva27
-                            ZIva105 = ZFactura.iva105
-                            ZIb = ZFactura.percibidoIB
-                            ZExento = ZFactura.exento
+                            ZIva = ZFactura("Iva21")
+                            ZIva5 = ZFactura("Iva5")
+                            ZIva27 = ZFactura("Iva27")
+                            ZIva105 = ZFactura("Iva105")
+                            ZIb = ZFactura("Ib")
+                            ZExento = ZFactura("Exento")
 
                             ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
 
@@ -4918,7 +4953,7 @@ Public Class Pagos
                         ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
                     End If
 
-                    ZZSuma = 0
+                    ZZSuma = 0.0
 
                     If Val(ZImporte) <> 0 And UCase(ZLetra) = "M" Then
 
@@ -4927,11 +4962,11 @@ Public Class Pagos
 
                         If ZNeto >= 1000 Then
 
-                            Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
+                            Dim ZFactura = _BuscarCompra(ZNroInterno)
 
                             If Not IsNothing(ZFactura) Then
 
-                                ZZSuma = ZFactura.iva21
+                                ZZSuma = ZFactura("Iva21")
 
                             Else
 
@@ -4960,7 +4995,7 @@ Public Class Pagos
         Dim dt As New DataTable
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM CtaCtePrv WHERE clave = '" & _Clave & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT NroInterno, Total, Saldo FROM CtaCtePrv WHERE clave = '" & _Clave & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
