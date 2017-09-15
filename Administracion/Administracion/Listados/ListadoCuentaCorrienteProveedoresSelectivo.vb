@@ -320,7 +320,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
                     Dim CCPrv As New CtaCteProveedoresDeudaDesdeHastaII(row.Item(0).ToString, row.Item(1).ToString, row.Item(2).ToString, row.Item(3).ToString, row.Item(4), row.Item(5), row.Item(6).ToString, row.Item(7).ToString, row.Item(8).ToString, row.Item(9).ToString, row.Item(10), row.Item(11).ToString, row.Item(12).ToString, row.Item(13), row.Item(14))
 
-                    If Val(CCPrv.Proveedor) = 10071117197 And temp = 3 Then : Stop : End If
+                    REM If Val(CCPrv.Proveedor) = 10071117197 And temp = 3 Then : Stop : End If
 
                     varPago = CCPrv.pago
                     varParidad = CCPrv.paridad
