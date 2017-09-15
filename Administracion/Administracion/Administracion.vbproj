@@ -599,6 +599,12 @@
     <Compile Include="Recibos\InformacionRetenciones.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reportes\AnalisisDiferenciaCambioOP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnalisisDiferenciaCambioOP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ControlDeFacturacion.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1028,6 +1034,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Recibos\InformacionRetenciones.resx">
       <DependentUpon>InformacionRetenciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\AnalisisDiferenciaCambioOP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AnalisisDiferenciaCambioOP.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ControlDeFacturacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

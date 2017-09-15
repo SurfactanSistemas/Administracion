@@ -16,12 +16,13 @@ Public Class Pagos
     Dim _ClavesCheques As New List(Of Object)
     Dim _Carpetas As New List(Of Object)
     Dim _Claves As New List(Of Object)
+    Dim WClavesOP(100) As String
     Dim _TipoConsulta As Integer = Nothing
     Private WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
 
     Private Const YMARGEN = 250
     Private Const XMARGEN = 426
-    Private WRow, Wcol As Integer
+    Private WRow, Wcol, WRowVarios As Integer
 
     Private WTipoProv, WTipoIva, WTipoIb, WTipoIbCaba, WPorceIb, WPorceIbCaba As String
 
@@ -131,6 +132,10 @@ Public Class Pagos
             End If
         Next
         Return True
+    End Function
+
+    Private Function _CS(Optional ByVal empresa As String = "SurfactanSA")
+        Return Proceso._ConectarA(empresa, True)
     End Function
 
     Private Function consistenciaEntreProveedorYGrillas()
@@ -243,9 +248,19 @@ Public Class Pagos
 
     Private Sub mostrarFormaPagos(ByVal formaPagos As List(Of FormaPago))
         gridFormaPagos.Rows.Clear()
+
+        Dim WRenglon As Integer = 0
+
         For Each formaPago As FormaPago In formaPagos
+
             gridFormaPagos.Rows.Add(formaPago.tipo, formaPago.numero, formaPago.fecha, formaPago.banco, formaPago.nombre, _NormalizarNumero(formaPago.importe), "", formaPago.cuit)
+
+            WClavesOP(WRenglon) = Proceso.ceros(txtOrdenPago.Text, 6) & Proceso.ceros(WRenglon + 2, 2)
+
+            WRenglon += 1
+
         Next
+
         sumarImportes()
     End Sub
 
@@ -871,7 +886,7 @@ Public Class Pagos
         'SQLConnector.conexionSql(cn, cm)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = _CS()
             cn.Open()
             cm.Connection = cn
             dr = cm.ExecuteReader()
@@ -1039,7 +1054,19 @@ Public Class Pagos
                     .Read()
 
                     Dim XTipo, XNumero, XFecha, XBanco, XImporte, XCuit, XClave As String
-                    Dim XRow As Integer = gridFormaPagos.Rows.Add()
+
+                    Dim XRow = Nothing
+
+                    For Each row As DataGridViewRow In gridFormaPagos.Rows
+                        If IsNothing(row.Cells(0).Value) Or row.Cells(0).Value = "" Then
+                            XRow = row.Index
+                            Exit For
+                        End If
+                    Next
+
+                    If IsNothing(XRow) Then
+                        XRow = gridFormaPagos.Rows.Add
+                    End If
 
                     XClave = clave
                     XTipo = "3"
@@ -1204,6 +1231,9 @@ Public Class Pagos
         WRow = -1
         Wcol = -1
 
+        pnlPedirCuenta.Visible = False
+        WRowVarios = -1
+
         cmbTipo.SelectedIndex = 0
 
         txtIBCiudad.Text = "0.00"
@@ -1216,10 +1246,12 @@ Public Class Pagos
         gridPagos.Rows.Clear()
         pagos.Clear()
         gridFormaPagos.Rows.Clear()
+        gridFormaPagos.Rows.Add()
         _ClavesCheques.Clear()
         cheques.Clear()
 
         'Array.Clear(_Claves, 0, _Claves.Length)
+        Array.Clear(WClavesOP, 0, WClavesOP.Length)
 
         WCertificadoIb = ""
         WCertificadoIbCiudad = ""
@@ -1446,20 +1478,30 @@ Public Class Pagos
         Select Case val
             Case 1
                 nombre = "Efectivo"
-                column = 4
+                column = 5
             Case 2
                 column = 1
             Case 3
+                gridFormaPagos.Rows(rowIndex).Cells(0).Value = ""
                 chequeRow = rowIndex
                 lstSeleccion.SelectedIndex = 2
                 lstSeleccion_MouseClick(Nothing, Nothing)
                 Exit Sub
+            Case 4
+                column = 1
             Case 5
                 nombre = "US$"
                 column = 4
             Case 6
                 nombre = "Varios"
-                column = 4
+
+                WRowVarios = rowIndex
+
+                pnlPedirCuenta.Visible = True
+                txtCuenta.Text = gridFormaPagos.Rows(rowIndex).Cells("Cuenta").Value
+                txtCuenta.Focus()
+
+                column = 5
             Case Else
                 Exit Sub
         End Select
@@ -1580,9 +1622,14 @@ Public Class Pagos
 
     Private Sub optVarios_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optVarios.CheckedChanged
         If optVarios.Checked Then
-            gridPagos.Rows.Clear()
-            gridPagos.Rows.Add("", "", "", "", "", txtRazonSocial.Text)
-            gridPagos.Columns(5).ReadOnly = True
+            With gridPagos
+                .Rows.Clear()
+                Dim r = .Rows.Add("", "", "", "", "", txtObservaciones.Text)
+                .CurrentCell = .Rows(r).Cells(4)
+                .Focus()
+            End With
+
+            'gridPagos.Columns(5).ReadOnly = True
         End If
     End Sub
 
@@ -1716,11 +1763,16 @@ Public Class Pagos
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
-                            If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
-                                eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
-                            Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
-                                gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow).Cells(iCol)
-                            End If
+
+                            Select Case Val(valor)
+                                Case 1, 2, 3, 4, 5, 6
+
+                                    eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
+
+                                Case Else
+                                    gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow).Cells(iCol)
+                            End Select
+
                         End If
 
                         Return True
@@ -1782,7 +1834,12 @@ Public Class Pagos
 
                     If valor <> "" Then
                         gridFormaPagos.Rows(iRow).Cells(iCol).Value = _NormalizarNumero(valor)
-                        gridFormaPagos.CurrentCell = gridFormaPagos.Rows(gridFormaPagos.Rows.Add()).Cells(0)
+                        Try
+                            gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow + 1).Cells(0)
+                        Catch ex As Exception
+                            gridFormaPagos.CurrentCell = gridFormaPagos.Rows(gridFormaPagos.Rows.Add).Cells(0)
+                        End Try
+                        'gridFormaPagos.CurrentCell = gridFormaPagos.Rows(gridFormaPagos.Rows.Add()).Cells(0)
                     End If
 
                 End If
@@ -1803,6 +1860,65 @@ Public Class Pagos
 
             End If
         End If
+
+        With gridPagos
+            If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+                .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                Dim iCol = .CurrentCell.ColumnIndex
+                Dim iRow = .CurrentCell.RowIndex
+                Dim valor = IIf(IsNothing(.CurrentCell.Value), "", .CurrentCell.Value)
+
+
+                Select Case iCol
+                    Case 3
+
+                        If Not _EsNumeroOControl(keyData) Then
+                            Return True
+                        End If
+
+                    Case 4
+                        If Not _EsDecimalOControl(keyData) Then
+                            Return True
+                        End If
+                    Case Else
+
+                End Select
+
+                If msg.WParam.ToInt32() = Keys.Enter Then
+                    If Trim(valor) <> "" And Not IsNothing(valor) Then
+
+                    End If
+
+                    Select Case iCol
+                        Case 5
+                            Try
+                                .CurrentCell = .Rows(iRow + 1).Cells(0)
+                            Catch ex As Exception
+                                .CurrentCell = .Rows(iRow).Cells(0)
+                            End Try
+
+                        Case Else
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End Select
+                ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+
+                    .CurrentCell.Value = ""
+
+                    Select Case iCol
+                        Case 5
+                            .CurrentCell = .Rows(iRow).Cells(4)
+                            .CurrentCell = .Rows(iRow).Cells(5)
+                        Case Else
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                            .CurrentCell = .Rows(iRow).Cells(iCol)
+                    End Select
+
+                End If
+
+            End If
+        End With
+        
 
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
@@ -2384,8 +2500,8 @@ Public Class Pagos
 
     Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
 
-            _TipoConsulta = 0
-            _ListarProveedores()
+        _TipoConsulta = 0
+        _ListarProveedores()
 
     End Sub
 
@@ -2409,8 +2525,8 @@ Public Class Pagos
 
     Private Sub txtBanco_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtBanco.MouseDoubleClick
 
-            _TipoConsulta = 1
-            _ListarCuentasContables()
+        _TipoConsulta = 1
+        _ListarCuentasContables()
 
     End Sub
 
@@ -3649,7 +3765,7 @@ Public Class Pagos
                             row.Item("Retencion1") = WRete
 
                             Tabla.Rows.Add(row)
-                            
+
                         Case Else
                     End Select
                 Else
@@ -4012,7 +4128,7 @@ Public Class Pagos
 
                 End If
             End With
-            
+
 
         Catch ex As Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
@@ -4363,7 +4479,7 @@ Public Class Pagos
                     mostrarProveedor(lstConsulta.SelectedItem.ToString)
                 Case 1
                     ' Ctas Ctes
-                    If Trim(lstConsulta.SelectedItem) = "" Then
+                    If Trim(lstConsulta.SelectedItem) = "" Or Not optCtaCte.Checked Then
                         Exit Sub
                     End If
 
@@ -4407,7 +4523,7 @@ Public Class Pagos
                     txtFechaAux.Visible = False
                     txtFechaAux.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
                 End With
-                
+
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -4601,7 +4717,7 @@ Public Class Pagos
     End Sub
 
     Private Sub _RecalcularIBCABA()
-        
+
         Dim ZImporte, ZZSuma, ZZBase, acumCaba
 
         acumCaba = 0
@@ -4613,7 +4729,7 @@ Public Class Pagos
                     ZImporte = 0
                     ZZSuma = 0
                     ZZBase = 0
-                    
+
                     ZImporte = .Cells(4).Value
 
                     ZZSuma = Val(ZImporte) / 1.21
@@ -4769,7 +4885,7 @@ Public Class Pagos
         'SQLConnector.conexionSql(cn, cm)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = _CS()
             cn.Open()
 
             dr.Fill(compra)
@@ -5035,4 +5151,325 @@ Public Class Pagos
     Private Function _NormalizarNumero(ByVal numero As String)
         Return Proceso.formatonumerico(Trim(numero))
     End Function
+
+    Private Sub gridPagos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridPagos.CellMouseDoubleClick
+        Dim iRow As DataGridViewRow
+
+        iRow = gridPagos.Rows(e.RowIndex)
+
+        If MsgBox("¿Está seguro de querer eliminar la fila?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.No Then
+            Exit Sub
+        End If
+
+        gridPagos.Rows.Remove(iRow)
+    End Sub
+
+    Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtCuenta.Text) = "" Then : Exit Sub : End If
+
+            Dim valida As Boolean = False
+
+            Dim cn As SqlConnection = New SqlConnection()
+            Dim cm As SqlCommand = New SqlCommand("SELECT Cuenta FROM Cuenta WHERE Cuenta = '" & Val(txtCuenta.Text) & "'")
+            Dim dr As SqlDataReader
+
+            Try
+                cn.ConnectionString = _CS()
+                cn.Open()
+                cm.Connection = cn
+                dr = cm.ExecuteReader()
+
+                valida = dr.HasRows
+
+            Catch ex As Exception
+                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Finally
+
+                dr = Nothing
+                cn.Close()
+                cn = Nothing
+                cm = Nothing
+
+            End Try
+
+            If valida And WRowVarios >= 0 Then
+                gridFormaPagos.Rows(WRowVarios).Cells("Cuenta").Value = txtCuenta.Text
+                txtCuenta.Text = ""
+                pnlPedirCuenta.Visible = False
+
+                gridFormaPagos.CurrentCell = gridFormaPagos.Rows(WRowVarios).Cells(5)
+                gridFormaPagos.Focus()
+                WRowVarios = -1
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCuenta.Text = ""
+        End If
+
+    End Sub
+
+    Private Function _BuscarCambioDiviza(ByVal Fecha As String) As Double
+        Dim ZCambioDivisa = 0.0
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As New SqlCommand()
+        Dim dr As SqlDataReader
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            cm.CommandText = "SELECT Cambio, CambioDivisa FROM Cambios WHERE Fecha = '" & Fecha & "'"
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                With dr
+                    .Read()
+                    ZCambioDivisa = IIf(IsDBNull(.Item("CambioDivisa")), "0", .Item("CambioDivisa"))
+                    If ZCambioDivisa = 0 And .Item("Cambio") <> 0 Then
+                        MsgBox("La fecha " + txtFecha.Text + " no tiene informado cambio divisa y se tomara el cambio de ventas", MsgBoxStyle.Information)
+                        ZCambioDivisa = .Item("Cambio")
+                    End If
+
+                End With
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return ZCambioDivisa
+
+    End Function
+
+    Private Function _CalculaVencimiento(ByVal WFecha As String, ByVal Plazo As Integer)
+
+        Dim Dg As Integer
+        Dim Ano As Integer
+        Dim WAno As String
+        Dim Mes As Integer
+        Dim WMes As String
+        Dim Dia As Integer
+        Dim WDia As String
+        Dim Di As Integer
+        Dim aa As Integer
+        Dim Ds(20) As Integer
+
+        Ds(1) = 31
+        Ds(2) = 28
+        Ds(3) = 31
+        Ds(4) = 30
+        Ds(5) = 31
+        Ds(6) = 30
+        Ds(7) = 31
+        Ds(8) = 31
+        Ds(9) = 30
+        Ds(10) = 31
+        Ds(11) = 30
+        Ds(12) = 31
+
+        REM   DATA "0101","0105","2505", , ,"0907", ,"1210", ,"2512", , , , , ,
+
+        Dg = 0
+        WAno = Mid$(WFecha, 7, 4)
+        Ano = Val(WAno)
+        WMes = Mid$(WFecha, 4, 2)
+        Mes = Val(WMes)
+        WDia = Mid$(WFecha, 1, 2)
+        Dia = Val(WDia)
+
+        'CANTIDAD DE DIAS HASTA LA FECHA
+
+        Dg = Dia + Plazo - 1
+
+        Do
+            For aa = Mes To 12
+                If (Ano Mod 4 = 0) And Mes = 2 Then Ds(2) = 29 Else Ds(2) = 28
+                If Dg <= Ds(aa) Then Exit Do
+                Dg = Dg - Ds(aa)
+            Next aa
+            Ano = Ano + 1
+            Mes = 1
+        Loop
+
+        Dia = Dg
+        WDia$ = Microsoft.VisualBasic.Right$("0" + Mid$(Str$(Dia), 2, Len(Str$(Dia)) - 1), 2)
+
+        Mes = aa
+        WMes = Microsoft.VisualBasic.Right$("0" + Mid$(Str$(Mes), 2, Len(Str$(Mes)) - 1), 2)
+
+        WAno = Microsoft.VisualBasic.Right$("0" + Mid$(Str$(Ano), 2, Len(Str$(Ano)) - 1), 4)
+
+        Return WDia + "/" + WMes + "/" + WAno
+    End Function
+
+    Private Sub btnDifeCambio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDifeCambio.Click
+        Dim ZCambioDivisa = 0.0, ZZParidadOP = 0.0, ZZSumaI = 0.0, ZZSumaII = 0.0, ZZRete = 0.0, ZZParidad = 0.0, ZZCicloDia = 0
+        Dim XTipo2 = "", XNumero2 = "", XFecha2 = "", XFechaOrd2 = "", XBanco2 = "", XObservaciones2 = "", XImporte2 = 0.0
+        Dim TipoRecibos = "", ClaveRecibos = "", Cuit = "", ClaveCtacte = "", ZZFechaAnterior = "", XFec2 = ""
+
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+        Dim trans As SqlTransaction
+
+        cn.ConnectionString = _CS()
+        cm.Connection = cn
+
+        Try
+            ZCambioDivisa = _BuscarCambioDiviza(txtFecha.Text)
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
+        If ZCambioDivisa = 0 Then
+            MsgBox("La fecha " + txtFecha.Text + " no tiene informado paridad", "Emision de Ordenes de Pago", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        ZZParidadOP = ZCambioDivisa
+
+
+        ZZSumaI = 0
+        ZZSumaII = 0
+
+        ZZRete = Val(txtIBCiudad.Text) + Val(txtIVA.Text) + Val(txtGanancias.Text) + Val(txtIngresosBrutos.Text)
+        ZZSumaII = ZZSumaII + (ZZRete / ZZParidadOP)
+
+        For Each row As DataGridViewRow In gridPagos.Rows
+            With row
+                If Not IsNothing(.Cells("Importe")) Then
+                    If Val(.Cells("Importe").Value) <> 0 Then
+                        ZZSumaI += (Val(.Cells("Importe").Value) / ZZParidadOP)
+                    End If
+                End If
+            End With
+        Next
+
+        For Each row As DataGridViewRow In gridFormaPagos.Rows
+
+            XTipo2 = ""
+            XNumero2 = ""
+            XFecha2 = ""
+            XFechaOrd2 = ""
+            XBanco2 = ""
+            XObservaciones2 = ""
+            XImporte2 = 0.0
+            TipoRecibos = ""
+            ClaveRecibos = ""
+            Cuit = ""
+            ClaveCtacte = ""
+            ZZParidad = 0.0
+
+            With row
+                If Not IsNothing(.Cells(5)) Then
+                    If Val(.Cells(5).Value) <> 0 Then
+
+                        XTipo2 = .Cells(0).Value
+                        XNumero2 = .Cells(1).Value
+                        XFecha2 = .Cells(2).Value
+                        XFechaOrd2 = Proceso.ordenaFecha(XFecha2)
+                        XBanco2 = .Cells(3).Value
+                        XObservaciones2 = .Cells(4).Value
+                        XImporte2 = Val(.Cells(5).Value)
+                        ClaveCtacte = .Cells("XClave").Value
+                        TipoRecibos = Mid(ClaveCtacte, 1, 1)
+                        ClaveRecibos = Mid(ClaveCtacte, 2, 10)
+                        Cuit = .Cells(6).Value
+
+
+                        Select Case XTipo2
+                            Case 2, 3
+
+                                ZZCicloDia = 0
+
+                                Do
+                                    Try
+                                        ZCambioDivisa = _BuscarCambioDiviza(XFecha2)
+                                    Catch ex As Exception
+                                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                                        Exit Sub
+                                    End Try
+
+                                    ZZFechaAnterior = XFecha2
+
+                                    If ZCambioDivisa = 0 Then
+
+                                        ZZCicloDia = ZZCicloDia + 1
+                                        If ZZCicloDia = 15 Then
+                                            XFecha2 = ZZFechaAnterior
+                                            Exit Do
+                                        End If
+
+                                        XFecha2 = _CalculaVencimiento(XFecha2, 2)
+
+                                    Else
+
+                                        Exit Do
+
+                                    End If
+                                Loop
+
+                                If ZCambioDivisa = 0 Then
+                                    MsgBox("La fecha " + XFecha2 + " no tiene informado paridad", "Emision de Ordenes de Pago", MsgBoxStyle.Information)
+                                    Exit Sub
+                                End If
+                                ZZParidad = ZCambioDivisa
+
+                            Case Else
+
+                                ZZParidad = ZZParidadOP
+
+                        End Select
+
+                        Dim ZSql = ""
+                        ZSql = ZSql + "UPDATE Pagos SET "
+                        ZSql = ZSql + " ImpoList = " + "'" + Str$(ZZParidad) + "'"
+                        ZSql = ZSql + " Where Clave = " + "'" + WClavesOP(row.Index) + "'"
+
+                        Try
+                            cn.Open()
+                            trans = cn.BeginTransaction
+
+                            cm.CommandText = ZSql
+                            cm.Transaction = trans
+                            cm.ExecuteNonQuery()
+                            trans.Commit()
+                        Catch ex As Exception
+
+                            If Not IsNothing(trans) Then
+                                trans.Rollback()
+                            End If
+
+                            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                            Exit Sub
+                        Finally
+
+                            cn.Close()
+
+                        End Try
+
+                    End If
+                End If
+            End With
+
+        Next
+
+        With VistaPrevia
+            .Reporte = New AnalisisDiferenciaCambioOP
+            .Formula = "{Pagos.Orden} = '" & txtOrdenPago.Text & "' AND {Pagos.Impolist} <> 0"
+            .Mostrar()
+        End With
+
+    End Sub
 End Class
