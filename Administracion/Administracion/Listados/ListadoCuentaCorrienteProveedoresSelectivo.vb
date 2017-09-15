@@ -241,7 +241,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             End If
 
             ' Sacamos el item del listado
-            lstAyuda.Items(lstAyuda.FindStringExact(item)) = ""
+            'lstAyuda.Items(lstAyuda.FindStringExact(item)) = ""
             lstFiltrada.Visible = False
             lstAyuda.Visible = True
             txtAyuda.Text = ""
@@ -250,6 +250,191 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         End If
 
     End Sub
+
+    Private Sub _LimpiarImpCtaCtePrvNet()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM impCtaCtePrvNet")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Function _BuscarTipoCambio(ByVal fecha As String) As Double
+        Dim Paridad = 0.0
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT CambioDivisa FROM Cambios WHERE Fecha = '" & fecha & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                Paridad = dr.Item("CambioDivisa")
+
+            Else
+                Throw New Exception("Paridad Inexistente")
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return Paridad
+    End Function
+
+    Private Function _BuscarCtaCtePrvSelectivo(ByVal proveedor As String) As DataTable
+        Dim tabla As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm = "SELECT Tipo, Letra, Punto, Numero, Total, Saldo, Fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Pago, Paridad FROM CtaCtePrv WHERE Proveedor = '" & proveedor.Trim() & "' AND Saldo <> 0 ORDER BY OrdFecha, Numero"
+        Dim dr As New SqlDataAdapter(cm, cn)
+
+        'SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.Open()
+
+            dr.Fill(tabla)
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        If tabla.Rows.Count > 0 Then
+            Return Proceso._NormalizarFilas(tabla)
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Private Function _BuscarProveedor(ByVal codProveedor As String) As DataRow
+        Dim proveedor As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm = "SELECT CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & codProveedor & "'"
+        Dim dr As New SqlDataAdapter(cm, cn)
+
+        Try
+            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.Open()
+
+            dr.Fill(proveedor)
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        If proveedor.Rows.Count > 0 Then
+            Return Proceso._NormalizarFila(proveedor.Rows(0))
+        Else
+            Return Nothing
+        End If
+
+    End Function
+
+    Private Function _BuscarCompra(ByVal NroInterno As Integer) As DataRow
+        Dim compra As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm = "SELECT Letra, Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
+        Dim dr As New SqlDataAdapter(cm, cn)
+
+        'SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.Open()
+
+            dr.Fill(compra)
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        If compra.Rows.Count > 0 Then
+            Return Proceso._NormalizarFila(compra.Rows(0))
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Private Function _BuscarAcumulado(ByVal proveedor As String, ByVal fecha As String) As DataRow
+        Dim acumulado As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm = "SELECT Neto, Retenido, Anticipo, Bruto, Iva FROM Retencion WHERE Proveedor = '" & proveedor & "' AND Fecha = '" & fecha & "'"
+        Dim dr As New SqlDataAdapter(cm, cn)
+
+        'SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.Open()
+
+            dr.Fill(acumulado)
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        If acumulado.Rows.Count > 0 Then
+            Return Proceso._NormalizarFila(acumulado.Rows(0))
+        Else
+            Return Nothing
+        End If
+    End Function
 
     Enum Reporte
         Imprimir
@@ -280,21 +465,29 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim varFecha As String
         Dim varRetIbI, varRetIbII As Double
 
-        SQLConnector.retrieveDataTable("limpiar_impCtaCtePrvNet")
+        Try
+
+            _LimpiarImpCtaCtePrvNet()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
 
         txtEmpresa = "Surfactan S.A."
         varEmpresa = 1
 
         varOrdFecha = ordenaFecha(txtFechaEmision.Text)
 
-        Dim CampoTipoCambio As TipoDeCambio = DAOTipoCambio.buscarTipoCambioPorFechaPago(txtFechaEmision.Text)
-        If IsNothing(CampoTipoCambio) Then
-            MsgBox("Paridad Inexistente")
+        Try
+
+            varParidadTotal = _BuscarTipoCambio(txtFechaEmision.Text)
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Information)
             txtFechaEmision.Focus()
             Exit Sub
-        Else
-            varParidadTotal = CampoTipoCambio.paridad
-        End If
+        End Try
 
         GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
 
@@ -309,181 +502,233 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                 varAcumulaIva = 0
                 varAcumulaNeto = 0
 
-                Dim temp = 0
+                varTotal = 0
+                varSaldo = 0
+                varTotalUs = 0
+                varSaldoUs = 0
+                varSaldoOriginal = 0
+                varDife = 0
 
-                Dim tabla As DataTable
-                tabla = SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_selectivo", varProveedor)
+                Dim tabla As New DataTable
 
-                For Each row As DataRow In tabla.Rows
+                Try
 
-                    temp += 1
+                    tabla = _BuscarCtaCtePrvSelectivo(varProveedor)
 
-                    Dim CCPrv As New CtaCteProveedoresDeudaDesdeHastaII(row.Item(0).ToString, row.Item(1).ToString, row.Item(2).ToString, row.Item(3).ToString, row.Item(4), row.Item(5), row.Item(6).ToString, row.Item(7).ToString, row.Item(8).ToString, row.Item(9).ToString, row.Item(10), row.Item(11).ToString, row.Item(12).ToString, row.Item(13), row.Item(14))
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                    Exit Sub
+                End Try
 
-                    REM If Val(CCPrv.Proveedor) = 10071117197 And temp = 3 Then : Stop : End If
+                If Not IsNothing(tabla) Then
+                    For Each row As DataRow In tabla.Rows
 
-                    varPago = CCPrv.pago
-                    varParidad = CCPrv.paridad
-                    varFecha = CCPrv.fecha
+                        Dim CCPrv As New CtaCteProveedoresDeudaDesdeHastaII(row("Tipo"), row("Letra"), row("Punto"), row("Numero"), row("Total"), row("Saldo"), row("Fecha"), row("Vencimiento"), row("Vencimiento1"), row("Impre"), row("NroInterno"), row("Clave"), varProveedor, row("Pago"), row("Paridad"))
 
-                    If varPago <> 2 Then
-                        varTotal = CCPrv.total
-                        varSaldo = CCPrv.saldo
-                        varTotalUs = 0
-                        varSaldoUs = 0
-                        varSaldoOriginal = 0
-                        varDife = 0
-                    Else
-                        varTotal = (CCPrv.total / varParidad) * varParidadTotal
-                        varSaldo = (CCPrv.saldo / varParidad) * varParidadTotal
-                        varTotalUs = (CCPrv.total / varParidad)
-                        varSaldoUs = (CCPrv.saldo / varParidad)
-                        varSaldoOriginal = CCPrv.saldo
-                        varDife = varSaldo - CCPrv.saldo
+                        varPago = CCPrv.pago
+                        varParidad = CCPrv.paridad
+                        varFecha = CCPrv.fecha
 
-                        varAcumulaUs += varTotalUs
-
-                    End If
-
-                    redondeo(varTotal)
-                    redondeo(varSaldo)
-
-                    varAcumulado = varAcumulado + varSaldo
-
-                    If varTotal = varSaldo Then
-                        varPorce = 1
-                    Else
-                        varPorce = varSaldo / varTotal
-                    End If
-
-                    varNeto = 0
-                    varIva = 0
-                    varIva5 = 0
-                    varIva27 = 0
-                    varIva105 = 0
-                    varIb = 0
-                    varExento = 0
-                    varTotalTrabajo = 0
-                    varLetra = ""
-
-                    Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(CCPrv.Proveedor)
-                    If Not IsNothing(CampoProveedor) Then
-
-                        varTipoIb = CampoProveedor.condicionIB1
-                        varTipoIbCaba = CampoProveedor.condicionIB2
-                        varTipoIva = CampoProveedor.codIva
-                        varTipoPrv = CampoProveedor.tipo + 1
-                        varPorceIb = CampoProveedor.porceIBProvincia
-                        varPorceIbCaba = CampoProveedor.porceIBCABA
-
-                    End If
-
-                    Dim compra As Compra = DAOCompras.buscarCompraPorCodigo(CCPrv.nroInterno)
-                    If Not IsNothing(compra) Then
-
-                        varLetra = compra.letra
-                        varNeto = compra.neto
-                        varIva = compra.iva21
-                        varIva5 = compra.ivaRG
-                        varIva27 = compra.iva27
-                        varIva105 = compra.iva105
-                        varIb = compra.percibidoIB
-                        varExento = compra.exento
-                        varTotalTrabajo = varNeto + varIva + varIva5 + varIva27 + varIva105 + varIb + varExento
-
-                    End If
-
-                    varRetIbI = 0
-                    varRetIbII = 0
-                    varRetIb = 0
-                    varRetIva = 0
-                    varRetGan = 0
-                    varAcumulaIb = 0
-
-
-
-                    '
-                    'calcula el neto para el calculo de las retenciones
-                    '
-                    If varTotalTrabajo <> 0 Then
-                        varAcumulaNetoII = varNeto * varPorce
-                    Else
-                        If varTipoIva = 2 Then
-                            varAcumulaNetoII = (varSaldo / 1.21)
+                        If varPago <> 2 Then
+                            varTotal = CCPrv.total
+                            varSaldo = CCPrv.saldo
+                            varTotalUs = 0
+                            varSaldoUs = 0
+                            varSaldoOriginal = 0
+                            varDife = 0
                         Else
-                            varAcumulaNetoII = varSaldo
+                            If Val(varParidad) = 0 Then
+                                MsgBox("La factura con Nro Interno " & CCPrv.nroInterno & " del Proveedor " & CCPrv.Proveedor & ", no posee Paridad cargada.", MsgBoxStyle.Information)
+                                varTotal = 0
+                                varSaldo = 0
+                                varTotalUs = 0
+                                varSaldoUs = 0
+                                varSaldoOriginal = 0
+                                varDife = 0
+                            Else
+                                varTotal = (CCPrv.total / varParidad) * varParidadTotal
+                                varSaldo = (CCPrv.saldo / varParidad) * varParidadTotal
+                                varTotalUs = (CCPrv.total / varParidad)
+                                varSaldoUs = (CCPrv.saldo / varParidad)
+                                varSaldoOriginal = CCPrv.saldo
+                                varDife = varSaldo - CCPrv.saldo
+                            End If
+                            
+
+                            varAcumulaUs += varTotalUs
+
                         End If
-                    End If
 
-                    If varPago = 2 Then
-                        varAcumulaNetoII = varAcumulaNetoII + (varDife / 1.21)
-                    End If
-                    varAcumulaNeto = varAcumulaNeto + varAcumulaNetoII
+                        redondeo(varTotal)
+                        redondeo(varSaldo)
 
-                    '
-                    'calculo de rtencion de Ingresos brutos Pcia
-                    '
-                    varRetIbI = CaculoRetencionIngresosBrutos(varTipoIb, varPorceIb, varAcumulaNeto)
+                        varAcumulado = varAcumulado + varSaldo
 
-                    '
-                    'calculo de rtencion de Ingresos brutos CABA
-                    '
-                    If varEmpresa = 1 Then
-                        varRetIbII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumulaNeto)
-                    End If
-
-
-                    '
-                    'calculo de rtencion de Ganancias
-                    '
-
-                    varAcuNeto = varAcumulaNeto
-                    varAcuRetenido =
-                    varAcuAnticipo = 0
-                    varAcuBruto = 0
-                    varAcuIva = 0
-
-                    varOrdFecha = Mid(ordenaFecha(txtFechaEmision.Text), 3, 4)
-                    Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(varProveedor, varOrdFecha)
-                    If Not IsNothing(CampoAcumulado) Then
-
-                        varAcuNeto = CampoAcumulado.neto
-                        varAcuRetenido = CampoAcumulado.retenido
-                        varAcuAnticipo = CampoAcumulado.anticipo
-                        varAcuBruto = CampoAcumulado.bruto
-                        varAcuIva = CampoAcumulado.iva
-
-                    End If
-
-
-
-
-                    varRetGan = CaculoRetencionGanancia(varTipoPrv, varAcumulaNeto, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
-
-
-                    '
-                    'calculo de rtencion de IVA
-                    '
-                    If varLetra = "M" Then
-                        If varNeto >= 1000 Then
-                            varAcumulaIva = varAcumulaIva + varIva
+                        If varTotal = varSaldo Then
+                            varPorce = 1
+                        Else
+                            varPorce = varSaldo / varTotal
                         End If
-                        varRetIva = varAcumulaIva
-                    End If
 
-                    varRetIb = varRetIbI + varRetIbII + varRetIva
+                        varNeto = 0
+                        varIva = 0
+                        varIva5 = 0
+                        varIva27 = 0
+                        varIva105 = 0
+                        varIb = 0
+                        varExento = 0
+                        varTotalTrabajo = 0
+                        varLetra = ""
 
-                    '!acuneto = !Acumulado - WRetIb - WRetgan
-                    '!Nombre = WNombre
-                    '!Cheque = WCheque
-                    '!ReteIb = WRetIb
-                    '!ReteGan = WRetgan
+                        Dim CampoProveedor = Nothing
 
-                    SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, (varAcumulado - varRetIb - varRetGan), varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago)
+                        Try
+                            CampoProveedor = _BuscarProveedor(varProveedor)
+                        Catch ex As Exception
+                            MsgBox(ex.Message, MsgBoxStyle.Critical)
+                            Exit Sub
+                        End Try
+
+                        If Not IsNothing(CampoProveedor) Then
+
+                            varTipoIb = CampoProveedor("CodIb")
+                            varTipoIbCaba = CampoProveedor("CodIbCaba")
+                            varTipoIva = CampoProveedor("Iva")
+                            varTipoPrv = CampoProveedor("Tipo") + 1
+                            varPorceIb = CampoProveedor("PorceIb")
+                            varPorceIbCaba = CampoProveedor("PorceIbCaba")
+
+                        End If
+
+                        Dim compra = Nothing
+                        Try
+                            compra = _BuscarCompra(CCPrv.nroInterno)
+                        Catch ex As Exception
+                            MsgBox(ex.Message, MsgBoxStyle.Critical)
+                            Exit Sub
+                        End Try
+
+                        If Not IsNothing(compra) Then
+
+                            varLetra = compra("Letra")
+                            varNeto = compra("Neto")
+                            varIva = compra("iva21")
+                            varIva5 = compra("Iva5")
+                            varIva27 = compra("Iva27")
+                            varIva105 = compra("iva105")
+                            varIb = compra("Ib")
+                            varExento = compra("Exento")
+                            varTotalTrabajo = varNeto + varIva + varIva5 + varIva27 + varIva105 + varIb + varExento
+
+                        End If
+
+                        varRetIbI = 0
+                        varRetIbII = 0
+                        varRetIb = 0
+                        varRetIva = 0
+                        varRetGan = 0
+                        varAcumulaIb = 0
+
+                        '
+                        'calcula el neto para el calculo de las retenciones
+                        '
+                        If varTotalTrabajo <> 0 Then
+                            varAcumulaNetoII = varNeto * varPorce
+                        Else
+                            If varTipoIva = 2 Then
+                                varAcumulaNetoII = (varSaldo / 1.21)
+                            Else
+                                varAcumulaNetoII = varSaldo
+                            End If
+                        End If
+
+                        If varPago = 2 Then
+                            varAcumulaNetoII = varAcumulaNetoII + (varDife / 1.21)
+                        End If
+                        varAcumulaNeto = varAcumulaNeto + varAcumulaNetoII
+
+                        '
+                        'calculo de rtencion de Ingresos brutos Pcia
+                        '
+                        varRetIbI = CaculoRetencionIngresosBrutos(varTipoIb, varPorceIb, varAcumulaNeto)
+
+                        '
+                        'calculo de rtencion de Ingresos brutos CABA
+                        '
+                        If varEmpresa = 1 Then
+                            varRetIbII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumulaNeto)
+                        End If
 
 
-                Next
+                        '
+                        'calculo de rtencion de Ganancias
+                        '
 
+                        varAcuNeto = varAcumulaNeto
+                        varAcuRetenido =
+                        varAcuAnticipo = 0
+                        varAcuBruto = 0
+                        varAcuIva = 0
+
+                        varOrdFecha = Mid(ordenaFecha(txtFechaEmision.Text), 3, 4)
+
+                        Dim CampoAcumulado = Nothing
+
+                        Try
+                            CampoAcumulado = _BuscarAcumulado(varProveedor, varOrdFecha)
+
+                        Catch ex As Exception
+                            MsgBox(ex.Message, MsgBoxStyle.Critical)
+                            Exit Sub
+                        End Try
+
+                        If Not IsNothing(CampoAcumulado) Then
+
+                            varAcuNeto = CampoAcumulado("Neto")
+                            varAcuRetenido = CampoAcumulado("Retenido")
+                            varAcuAnticipo = CampoAcumulado("Anticipo")
+                            varAcuBruto = CampoAcumulado("Bruto")
+                            varAcuIva = CampoAcumulado("Iva")
+
+                        Else
+
+                            varAcuNeto = 0
+                            varAcuRetenido = 0
+                            varAcuAnticipo = 0
+                            varAcuBruto = 0
+                            varAcuIva = 0
+
+                        End If
+
+
+                        If Val(CCPrv.Proveedor) = 10071006122 Then : Stop : End If
+
+
+                        varRetGan = CaculoRetencionGanancia(varTipoPrv, varAcumulaNeto, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
+
+
+                        '
+                        'calculo de rtencion de IVA
+                        '
+                        If varLetra = "M" Then
+                            If varNeto >= 1000 Then
+                                varAcumulaIva = varAcumulaIva + varIva
+                            End If
+                            varRetIva = varAcumulaIva
+                        End If
+
+                        varRetIb = varRetIbI + varRetIbII + varRetIva
+
+                        Try
+                            SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, (varAcumulado - varRetIb - varRetGan), varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago)
+                        Catch ex As Exception
+                            Stop
+                        End Try
+
+
+                    Next
+                End If
+                
             End If
 
         Next
@@ -492,16 +737,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         txtDos = " and {impCtaCtePrvNet.Saldo} <> 0.00"
         txtFormula = txtUno + txtDos
 
-        'Dim viewer As New ReportViewer("Listado de Corriente de Proveedres Selectivo", Globals.reportPathWithName("wccprvfecnet.rpt"), txtFormula)
-
         With VistaPrevia
             .Reporte = New ListadoCtaCtePrvSelectivo
-            '.Reporte.DataSourceConnections.Item(0).SetLogon("usuarioadmin", "usuarioadmin")
+
             .Formula = txtFormula
-            ' .CrystalReportViewer1.Refresh()
+
             Select Case TipoImpresion
                 Case Reporte.Imprimir
-                    '_ConsultarSiEliminarListaParcialDeProveedores()
                     .Imprimir()
                 Case Reporte.Pantalla
                     .Mostrar()
@@ -571,6 +813,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Private Sub btnLimpiarTodo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarTodo.Click
         _DeshabilitarConsulta()
 
+        Dim WFecha = txtFechaEmision.Text
+
         For Each _C As TextBox In Me.Panel2.Controls.OfType(Of TextBox)()
             _C.Text = ""
         Next
@@ -583,6 +827,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         '_EliminarProveedorSelectivo()
 
+        txtFechaEmision.Text = WFecha
         txtFechaEmision.Focus()
 
         varRenglon = 0
@@ -687,7 +932,10 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        
         _Imprimir(Reporte.Imprimir)
+        MsgBox("El reporte se ha impreso correctamente.", MsgBoxStyle.Information)
+
     End Sub
 
     Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomButton1.Click
@@ -784,7 +1032,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                                 MsgBox("Proveedor ya cargado con anterioridad.", MsgBoxStyle.Information)
                                 GRilla.CurrentCell = GRilla.Rows(iRow).Cells(iCol)
                             End If
-                            
+
                         End If
 
                     End If
@@ -824,4 +1072,5 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
+
 End Class

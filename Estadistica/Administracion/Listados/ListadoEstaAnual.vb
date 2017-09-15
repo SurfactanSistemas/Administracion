@@ -761,7 +761,14 @@ Public Class ListadoEstaAnual
     End Sub
 
     Private Sub btnCancelaII_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelaII.Click
-        PantaDatos.Visible = False
+
+        Select Case Vendedor.permisos
+            Case 99, 13, 2
+                PantaDatos.Visible = False
+            Case Else
+                btnCancela.PerformClick()
+        End Select
+
     End Sub
 
     Private Sub txtVendedor_KeyPress(ByVal sender As Object, _
