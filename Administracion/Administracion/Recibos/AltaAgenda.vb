@@ -224,7 +224,7 @@ Public Class AltaAgenda
                         .Replace("#ANOTACION#", "AnotacionII") _
                         .Replace("#HORA#", "HoraII")
                 Else
-                    MsgBox("No hay fecha disponible para el alta del recordatorio", MsgBoxStyle.Information)
+                    MsgBox("No hay fecha disponible para el alta del recordatorio. (Fechas agendadas: " & WFecha & " y " & WFechaII & " )", MsgBoxStyle.Information)
                     Exit Sub
                 End If
 
@@ -244,7 +244,7 @@ Public Class AltaAgenda
                         .Replace("#ANOTACION#", "Anotacion") _
                         .Replace("#HORA#", "Hora")
                 Else
-                    MsgBox("No hay fecha disponible para el alta del recordatorio", MsgBoxStyle.Information)
+                    MsgBox("No hay fecha disponible para el alta del recordatorio. (Fechas agendadas: " & WFecha & " y " & WFechaII & " )", MsgBoxStyle.Information)
                     Exit Sub
                 End If
 

@@ -62,7 +62,7 @@ Public Class Depositos
 
         validador.validate(Me)
 
-        validador.alsoValidate(Val(txtImporte.Text) = Math.Round(sumaImportes(), 2), "El campo importe tiene que ser igual a la suma de la grilla (" & sumaImportes() & ")")
+        validador.alsoValidate(Val(txtImporte.Text) = Math.Round(sumaImportes(), 2), "El campo importe tiene que ser igual a la suma de los valores (" & sumaImportes() & ")")
         validador.alsoValidate(Not IsNothing(banco), "Debe ingresar un Banco válido.")
         validador.alsoValidate(validarTipoUnico(), "Sólo puede realizarse un tipo de depósito por carga")
         validador.alsoValidate(validarEstadoGrilla(), "Hay campos en la grilla con estados inválidos")
@@ -78,13 +78,11 @@ Public Class Depositos
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         'Cleanner.clean(Me)
         lstSeleccion.SelectedIndex = 0
-        txtFecha.Text = Date.Today
-        txtFechaAcreditacion.Text = Date.Today
         txtNroDeposito.Text = ceros(DAODeposito.siguienteNumero(), 6)
         txtCodigoBanco.Text = ""
         txtDescripcionBanco.Text = ""
-        txtFechaAcreditacion.Clear()
-        txtFecha.Clear()
+        txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+        txtFechaAcreditacion.Text = txtFecha.Text
         txtImporte.Text = ""
         gridCheques.Rows.Clear()
         cheques.Clear()
@@ -304,12 +302,28 @@ Public Class Depositos
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
         If validarCampos() Then
             Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(txtCodigoBanco.Text)
-            Dim deposito As Deposito = New Deposito(txtNroDeposito.Text, banco, txtFecha.Text, txtFechaAcreditacion.Text, txtImporte.Text)
+            Dim deposito As Deposito = New Deposito(txtNroDeposito.Text, banco, txtFecha.Text, txtFechaAcreditacion.Text, Val(Proceso.formatonumerico(txtImporte.Text)))
             If cheques.Count > 0 Then
                 Dim chequesADepositar As New List(Of ItemDeposito)
-                cheques.ForEach(Sub(cheque) chequesADepositar.Add(cheque))
+                For Each _cheque As Cheque In cheques
+
+                    _cheque.valorImporte = Proceso.formatonumerico(_cheque.valorImporte)
+
+                    chequesADepositar.Add(_cheque)
+
+                Next
+
                 DAODeposito.agregarDeposito(deposito, chequesADepositar)
             Else
+                For i = 0 To gridCheques.Rows.Count - 1
+                    With gridCheques.Rows(i)
+                        If Not IsNothing(.Cells(4).Value) Then
+                            If Val(.Cells(4).Value) <> 0 Then
+                                .Cells(4).Value = Proceso.formatonumerico(.Cells(4).Value)
+                            End If
+                        End If
+                    End With
+                Next
                 DAODeposito.agregarDeposito(deposito, gridCheques.Rows)
             End If
 
@@ -364,7 +378,9 @@ Public Class Depositos
                 txtFechaAcreditacion.Focus()
             Else
                 txtDescripcionBanco.Text = ""
-                txtCodigoBanco.Focus()
+                lstSeleccion.SelectedIndex = 0
+                btnConsulta_Click(sender, e)
+                lstSeleccion_Click(sender, e)
             End If
         ElseIf e.KeyData = Keys.Escape Then
             txtCodigoBanco.Text = ""

@@ -35,7 +35,6 @@ Partial Class Depositos
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.lstSeleccion = New Administracion.CustomListBox()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtImporte = New Administracion.CustomTextBox()
@@ -51,6 +50,7 @@ Partial Class Depositos
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.lstFiltrado = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
@@ -70,7 +70,7 @@ Partial Class Depositos
         Me.gridCheques.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridCheques.Location = New System.Drawing.Point(25, 168)
         Me.gridCheques.Name = "gridCheques"
-        Me.gridCheques.Size = New System.Drawing.Size(743, 305)
+        Me.gridCheques.Size = New System.Drawing.Size(743, 238)
         Me.gridCheques.StandardTab = True
         Me.gridCheques.TabIndex = 0
         '
@@ -121,7 +121,7 @@ Partial Class Depositos
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(793, 58)
+        Me.Panel1.Size = New System.Drawing.Size(793, 53)
         Me.Panel1.TabIndex = 17
         '
         'Label2
@@ -169,7 +169,7 @@ Partial Class Depositos
         Me.Panel2.Controls.Add(Me.txtAyuda)
         Me.Panel2.Location = New System.Drawing.Point(0, 53)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(793, 500)
+        Me.Panel2.Size = New System.Drawing.Size(793, 461)
         Me.Panel2.TabIndex = 18
         '
         'lstSeleccion
@@ -184,14 +184,6 @@ Partial Class Depositos
         Me.lstSeleccion.Size = New System.Drawing.Size(373, 134)
         Me.lstSeleccion.TabIndex = 14
         Me.lstSeleccion.Visible = False
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Location = New System.Drawing.Point(395, 18)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(372, 20)
-        Me.txtAyuda.TabIndex = 19
-        Me.txtAyuda.Visible = False
         '
         'txtFechaAcreditacion
         '
@@ -282,9 +274,9 @@ Partial Class Depositos
         Me.lblTotal.BackColor = System.Drawing.SystemColors.Control
         Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTotal.ControlAssociationKey = -1
-        Me.lblTotal.Location = New System.Drawing.Point(552, 476)
+        Me.lblTotal.Location = New System.Drawing.Point(551, 421)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(216, 15)
+        Me.lblTotal.Size = New System.Drawing.Size(216, 22)
         Me.lblTotal.TabIndex = 2
         Me.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -305,15 +297,15 @@ Partial Class Depositos
         '
         'CustomLabel1
         '
-        Me.CustomLabel1.AutoSize = True
         Me.CustomLabel1.BackColor = System.Drawing.SystemColors.Control
         Me.CustomLabel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Location = New System.Drawing.Point(328, 476)
+        Me.CustomLabel1.Location = New System.Drawing.Point(327, 421)
         Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(218, 15)
+        Me.CustomLabel1.Size = New System.Drawing.Size(218, 22)
         Me.CustomLabel1.TabIndex = 1
         Me.CustomLabel1.Text = "Tipo de Doc.:  1) Ef.    2) U$S    3)  Ch Terc."
+        Me.CustomLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtNroDeposito
         '
@@ -380,6 +372,14 @@ Partial Class Depositos
         Me.lstConsulta.TabIndex = 8
         Me.lstConsulta.Visible = False
         '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(395, 18)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(372, 20)
+        Me.txtAyuda.TabIndex = 19
+        Me.txtAyuda.Visible = False
+        '
         'btnCerrar
         '
         Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
@@ -394,7 +394,7 @@ Partial Class Depositos
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(400, 573)
+        Me.btnCerrar.Location = New System.Drawing.Point(400, 530)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(110, 50)
         Me.btnCerrar.TabIndex = 13
@@ -415,7 +415,7 @@ Partial Class Depositos
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(164, 573)
+        Me.btnConsulta.Location = New System.Drawing.Point(164, 530)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(110, 50)
         Me.btnConsulta.TabIndex = 12
@@ -436,7 +436,7 @@ Partial Class Depositos
         Me.btnChequeTerceros.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnChequeTerceros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnChequeTerceros.LabelAssociationKey = -1
-        Me.btnChequeTerceros.Location = New System.Drawing.Point(634, 573)
+        Me.btnChequeTerceros.Location = New System.Drawing.Point(634, 530)
         Me.btnChequeTerceros.Name = "btnChequeTerceros"
         Me.btnChequeTerceros.Size = New System.Drawing.Size(110, 50)
         Me.btnChequeTerceros.TabIndex = 11
@@ -457,7 +457,7 @@ Partial Class Depositos
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(518, 573)
+        Me.btnLimpiar.Location = New System.Drawing.Point(518, 530)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(110, 50)
         Me.btnLimpiar.TabIndex = 11
@@ -478,7 +478,7 @@ Partial Class Depositos
         Me.btnImpresion.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImpresion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImpresion.LabelAssociationKey = -1
-        Me.btnImpresion.Location = New System.Drawing.Point(282, 573)
+        Me.btnImpresion.Location = New System.Drawing.Point(282, 530)
         Me.btnImpresion.Name = "btnImpresion"
         Me.btnImpresion.Size = New System.Drawing.Size(110, 50)
         Me.btnImpresion.TabIndex = 10
@@ -499,7 +499,7 @@ Partial Class Depositos
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(46, 573)
+        Me.btnAgregar.Location = New System.Drawing.Point(46, 530)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(110, 50)
         Me.btnAgregar.TabIndex = 9
@@ -510,7 +510,7 @@ Partial Class Depositos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(790, 635)
+        Me.ClientSize = New System.Drawing.Size(790, 589)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnCerrar)
