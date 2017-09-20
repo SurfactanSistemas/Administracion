@@ -46,6 +46,15 @@ Partial Class Pagos
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImpoNeto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gridFormaPagos = New System.Windows.Forms.DataGridView()
+        Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fecha2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Banco2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Importe2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.XClave = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.XCuil = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -53,6 +62,7 @@ Partial Class Pagos
         Me.btnDifeCambio = New System.Windows.Forms.Button()
         Me.pnlPedirCuenta = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.WProceso = New System.Windows.Forms.Label()
         Me.txtCuenta = New Administracion.CustomTextBox()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.lstSeleccion = New Administracion.CustomListBox()
@@ -104,15 +114,6 @@ Partial Class Pagos
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
-        Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fecha2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Banco2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Importe2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.XClave = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.XCuil = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -283,6 +284,84 @@ Partial Class Pagos
         Me.gridFormaPagos.Size = New System.Drawing.Size(398, 190)
         Me.gridFormaPagos.TabIndex = 57
         '
+        'Tipo2
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.Format = "N2"
+        DataGridViewCellStyle5.NullValue = Nothing
+        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Tipo2.HeaderText = "Tipo"
+        Me.Tipo2.MaxInputLength = 31
+        Me.Tipo2.Name = "Tipo2"
+        Me.Tipo2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Tipo2.Width = 35
+        '
+        'Numero2
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Numero2.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Numero2.HeaderText = "Número"
+        Me.Numero2.MaxInputLength = 8
+        Me.Numero2.Name = "Numero2"
+        Me.Numero2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Numero2.Width = 70
+        '
+        'Fecha2
+        '
+        Me.Fecha2.HeaderText = "Fecha"
+        Me.Fecha2.MaxInputLength = 10
+        Me.Fecha2.Name = "Fecha2"
+        Me.Fecha2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Fecha2.Width = 75
+        '
+        'Banco2
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Banco2.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Banco2.HeaderText = "Banco"
+        Me.Banco2.MaxInputLength = 3
+        Me.Banco2.Name = "Banco2"
+        Me.Banco2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Banco2.Width = 45
+        '
+        'Nombre
+        '
+        Me.Nombre.HeaderText = "Nombre"
+        Me.Nombre.Name = "Nombre"
+        Me.Nombre.ReadOnly = True
+        Me.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Nombre.Width = 80
+        '
+        'Importe2
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Importe2.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Importe2.HeaderText = "Importe"
+        Me.Importe2.Name = "Importe2"
+        Me.Importe2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Importe2.Width = 80
+        '
+        'XClave
+        '
+        Me.XClave.HeaderText = "XClave"
+        Me.XClave.Name = "XClave"
+        Me.XClave.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.XClave.Visible = False
+        '
+        'XCuil
+        '
+        Me.XCuil.HeaderText = "XCuil"
+        Me.XCuil.Name = "XCuil"
+        Me.XCuil.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.XCuil.Visible = False
+        '
+        'Cuenta
+        '
+        Me.Cuenta.HeaderText = "Cuenta"
+        Me.Cuenta.Name = "Cuenta"
+        Me.Cuenta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Cuenta.Visible = False
+        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -385,7 +464,7 @@ Partial Class Pagos
         'pnlPedirCuenta
         '
         Me.pnlPedirCuenta.Controls.Add(Me.GroupBox2)
-        Me.pnlPedirCuenta.Location = New System.Drawing.Point(518, 305)
+        Me.pnlPedirCuenta.Location = New System.Drawing.Point(306, 316)
         Me.pnlPedirCuenta.Name = "pnlPedirCuenta"
         Me.pnlPedirCuenta.Size = New System.Drawing.Size(217, 76)
         Me.pnlPedirCuenta.TabIndex = 125
@@ -393,6 +472,7 @@ Partial Class Pagos
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.WProceso)
         Me.GroupBox2.Controls.Add(Me.txtCuenta)
         Me.GroupBox2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
@@ -402,6 +482,14 @@ Partial Class Pagos
         Me.GroupBox2.TabIndex = 7
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Cuenta"
+        '
+        'WProceso
+        '
+        Me.WProceso.AutoSize = True
+        Me.WProceso.Location = New System.Drawing.Point(139, 43)
+        Me.WProceso.Name = "WProceso"
+        Me.WProceso.Size = New System.Drawing.Size(0, 18)
+        Me.WProceso.TabIndex = 7
         '
         'txtCuenta
         '
@@ -1125,84 +1213,6 @@ Partial Class Pagos
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Ingresar Orden de Pago")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
-        'Tipo2
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        DataGridViewCellStyle5.NullValue = Nothing
-        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Tipo2.HeaderText = "Tipo"
-        Me.Tipo2.MaxInputLength = 31
-        Me.Tipo2.Name = "Tipo2"
-        Me.Tipo2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Tipo2.Width = 35
-        '
-        'Numero2
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Numero2.DefaultCellStyle = DataGridViewCellStyle6
-        Me.Numero2.HeaderText = "Número"
-        Me.Numero2.MaxInputLength = 8
-        Me.Numero2.Name = "Numero2"
-        Me.Numero2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Numero2.Width = 70
-        '
-        'Fecha2
-        '
-        Me.Fecha2.HeaderText = "Fecha"
-        Me.Fecha2.MaxInputLength = 10
-        Me.Fecha2.Name = "Fecha2"
-        Me.Fecha2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Fecha2.Width = 75
-        '
-        'Banco2
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Banco2.DefaultCellStyle = DataGridViewCellStyle7
-        Me.Banco2.HeaderText = "Banco"
-        Me.Banco2.MaxInputLength = 3
-        Me.Banco2.Name = "Banco2"
-        Me.Banco2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Banco2.Width = 45
-        '
-        'Nombre
-        '
-        Me.Nombre.HeaderText = "Nombre"
-        Me.Nombre.Name = "Nombre"
-        Me.Nombre.ReadOnly = True
-        Me.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Nombre.Width = 80
-        '
-        'Importe2
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Importe2.DefaultCellStyle = DataGridViewCellStyle8
-        Me.Importe2.HeaderText = "Importe"
-        Me.Importe2.Name = "Importe2"
-        Me.Importe2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Importe2.Width = 80
-        '
-        'XClave
-        '
-        Me.XClave.HeaderText = "XClave"
-        Me.XClave.Name = "XClave"
-        Me.XClave.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.XClave.Visible = False
-        '
-        'XCuil
-        '
-        Me.XCuil.HeaderText = "XCuil"
-        Me.XCuil.Name = "XCuil"
-        Me.XCuil.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.XCuil.Visible = False
-        '
-        'Cuenta
-        '
-        Me.Cuenta.HeaderText = "Cuenta"
-        Me.Cuenta.Name = "Cuenta"
-        Me.Cuenta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Cuenta.Visible = False
-        '
         'Pagos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1319,4 +1329,5 @@ Partial Class Pagos
     Friend WithEvents XClave As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents XCuil As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cuenta As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents WProceso As System.Windows.Forms.Label
 End Class

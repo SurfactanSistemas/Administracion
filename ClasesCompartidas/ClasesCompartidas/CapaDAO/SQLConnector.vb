@@ -6,6 +6,7 @@ Public Class SQLConnector
         Dim sconcompleto As String = Globals.getConnectionString()
 
         cn.ConnectionString = sconcompleto
+
         cm.Connection = cn
         cn.Open()
     End Sub
