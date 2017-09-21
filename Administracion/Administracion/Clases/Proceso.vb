@@ -38,19 +38,14 @@
 
     End Function
 
-    Public Function _ConectarA(ByVal empresa As String, Optional ByVal testing As Boolean = False) As String
+    Public Function _ConectarA(Optional ByVal empresa As String = "SurfactanSA") As String
 
         Dim _empresa = empresas.Find(Function(e) UCase(e) = UCase(empresa))
-        Dim cs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
-        Dim csx As String = "Data Source=(LOCAL)\LOCALSQLSERVER;Initial Catalog=#EMPRESA#;Trusted_Connection=True"
 
         If Not IsNothing(_empresa) Then
 
-            If testing Then
-                Return csx.Replace("#EMPRESA#", _empresa)
-            Else
-                Return cs.Replace("#EMPRESA#", _empresa)
-            End If
+            Dim cs = ClasesCompartidas.Globals.getConnectionString()
+            Return cs.Replace("Catalog=SurfactanSA", "Catalog=" & _empresa)
 
         Else
             Throw New Exception("No se pudo encontrar la empresa a la que se quiere conectar.")
@@ -429,28 +424,30 @@
 
         Dim varRete As Double
         Dim varAcumulaIb As Double
-        Dim varRetIb As Double
+        'Dim varRetIb As Double
 
-        varRetIb = 0
+        'varRetIb = 0
 
         If varTipoIb = 0 Or varTipoIb = 1 Then
             varRete = varAcumulaNeto * (varPorceIb / 100)
-            varAcumulaIb = varAcumulaIb + redondeo(varRete)
-            varRetIb = redondeo(varAcumulaIb)
+            varAcumulaIb = varAcumulaIb + varRete 'redondeo(varRete)
+            'varRetIb = redondeo(varAcumulaIb)
         End If
 
-        Return varRetIb
-
+        'Return varRetIb
+        Return redondeo(varAcumulaIb)
     End Function
 
 
     Public Function CaculoRetencionIngresosBrutosCaba(ByVal varTipoIbCaba As Integer, ByVal varPorceIbCaba As Double, ByVal varAcumulaNeto As Double)
 
         Dim varRete As Double
-        Dim varRetIbCaba As Double
+        'Dim varRetIbCaba As Double
         Dim varAcumulaIb As Double
 
-        varRetIbCaba = 0
+        'varRetIbCaba = 0.0
+        varAcumulaIb = 0.0
+        varRete = 0.0
 
         If varTipoIbCaba = 3 Or varTipoIbCaba = 4 Or varPorceIbCaba <> 0 Then
             If varTipoIbCaba <> 2 Then
@@ -465,13 +462,13 @@
                         End If
                     End If
                 End If
-                varAcumulaIb = varAcumulaIb + redondeo(varRete)
-                varRetIbCaba = varAcumulaIb
+                varAcumulaIb = varAcumulaIb + varRete 'redondeo(varRete)
             End If
         End If
 
-        Return varRetIbCaba
-
+        'varRetIbCaba = varAcumulaIb
+        'Return redondeo(varRetIbCaba)
+        Return redondeo(varAcumulaIb)
     End Function
 
     ' El parametro opcional es por si se decide utilizar con el evento TypeValidationCompleted (Ej: e.Cancel = _ValidarFecha(txtFecha.Text, e.IsValidInput) )

@@ -45,6 +45,7 @@ Public Class DAODeposito
     Private Shared Sub agregarDeposito(ByVal deposito As Deposito)
         For Each item As ItemDeposito In deposito.items
             Dim renglon As String = indiceComoString(item, deposito.items)
+            'SQLConnector.executeProcedure("alta_deposito", deposito.numero & renglon, deposito.numero, renglon, deposito.banco.id, deposito.fecha, Proceso.ordenaFecha(deposito.fecha), Proceso.formatonumerico(deposito.importeTotal), deposito.fechaAcreditacion, Proceso.ordenaFecha(deposito.fechaAcreditacion), item.tipo, item.numero, item.fecha, Proceso.formatonumerico(item.importe), item.nombre)
             SQLConnector.executeProcedure("alta_deposito", deposito.numero & renglon, deposito.numero, renglon, deposito.banco.id, deposito.fecha, Proceso.ordenaFecha(deposito.fecha), Proceso.formatonumerico(deposito.importeTotal), deposito.fechaAcreditacion, Proceso.ordenaFecha(deposito.fechaAcreditacion), item.tipo, item.numero, item.fecha, item.importe, item.nombre)
         Next
     End Sub

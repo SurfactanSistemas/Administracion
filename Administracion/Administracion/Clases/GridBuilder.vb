@@ -114,13 +114,13 @@
     End Sub
 
     Private Sub cellValueChanged(ByVal sender As Object, ByVal e As Object)
-        For Each row As DataGridViewRow In sender.Rows
-            For Each index In decimalColumns
-                If Not IsNothing(row.Cells(index).Value) Then
-                    row.Cells(index).Value = row.Cells(index).Value.ToString.Replace(".", ",")
-                    row.Cells(index).Value = CustomConvert.toStringWithTwoDecimalPlaces(CustomConvert.toDoubleOrZero(row.Cells(index).Value))
-                End If
-            Next
-        Next
+        'For Each row As DataGridViewRow In sender.Rows
+        '    For Each index In decimalColumns
+        '        If Not IsNothing(row.Cells(index).Value) Then
+        '            row.Cells(index).Value = row.Cells(index).Value.ToString.Replace(".", ",")
+        '            row.Cells(index).Value = CustomConvert.toStringWithTwoDecimalPlaces(CustomConvert.toDoubleOrZero(row.Cells(index).Value))
+        '        End If
+        '    Next
+        'Next
     End Sub
 End Class

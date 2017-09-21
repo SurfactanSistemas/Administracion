@@ -444,11 +444,7 @@ Public Class Pagos
     End Function
 
     Private Function _CS(Optional ByVal empresa As String = "SurfactanSA")
-        Dim pruebas As Boolean = False
-        If UCase(Globals.empresa) = "LOCAL" Then
-            pruebas = True
-        End If
-        Return Proceso._ConectarA(empresa, pruebas)
+        Return Proceso._ConectarA(empresa)
     End Function
 
     Private Function consistenciaEntreProveedorYGrillas()
@@ -534,6 +530,8 @@ Public Class Pagos
         WCertificadoIb = orden.certIb
         WCertificadoIbCiudad = orden.certIbCABA
         WCertificadoIVA = orden.certIVA
+
+        sumarImportes()
     End Sub
 
     Private Sub mostrarTipo(ByVal tipo As Integer)
@@ -556,7 +554,7 @@ Public Class Pagos
         For Each pago As Pago In pagos
             gridPagos.Rows.Add(pago.tipo, pago.letra, pago.punto, pago.numero, _NormalizarNumero(pago.importe), pago.descripcion, _NormalizarNumero(pago.impoNeto))
         Next
-        sumarImportes()
+        'sumarImportes()
     End Sub
 
     Private Sub mostrarFormaPagos(ByVal formaPagos As List(Of FormaPago))
@@ -574,7 +572,7 @@ Public Class Pagos
 
         Next
 
-        sumarImportes()
+        'sumarImportes()
     End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
@@ -2713,8 +2711,8 @@ Public Class Pagos
     End Sub
 
     Private Sub gridFormaPagos_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellValueChanged
-        sumarImportes()
-        llenarConCerosNumero()
+        'sumarImportes()
+        'llenarConCerosNumero()
     End Sub
 
     Private Sub llenarConCerosNumero()
@@ -2730,18 +2728,18 @@ Public Class Pagos
     End Sub
 
     Private Sub gridFormaPagos_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles gridFormaPagos.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            Dim iCol = gridFormaPagos.CurrentCell.ColumnIndex
-            Dim iRow = gridFormaPagos.CurrentCell.RowIndex
-            If iCol = 0 And iRow > -1 Then
-                Dim val = gridFormaPagos.Rows(iRow).Cells(iCol).Value
-                eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(val), iRow, iCol)
-            End If
-        End If
+        'If e.KeyCode = Keys.Enter Then
+        '    Dim iCol = gridFormaPagos.CurrentCell.ColumnIndex
+        '    Dim iRow = gridFormaPagos.CurrentCell.RowIndex
+        '    If iCol = 0 And iRow > -1 Then
+        '        Dim val = gridFormaPagos.Rows(iRow).Cells(iCol).Value
+        '        eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(val), iRow, iCol)
+        '    End If
+        'End If
     End Sub
 
     Private Sub gridPagos_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridPagos.CellValueChanged
-        sumarImportes()
+        'sumarImportes()
     End Sub
 
     Private Sub sumarImportes()
@@ -2749,8 +2747,8 @@ Public Class Pagos
         Dim formaPagos As Double = 0
         Dim total As Double = 0
 
-        total = Val(_NormalizarNumero(txtIVA.Text)) + Val(_NormalizarNumero(txtGanancias.Text)) + Val(_NormalizarNumero(txtIBCiudad.Text)) +
-            Val(_NormalizarNumero(txtIngresosBrutos.Text))
+        total = Val(txtIVA.Text) + Val(txtGanancias.Text) + Val(txtIBCiudad.Text) +
+            Val(txtIngresosBrutos.Text)
 
         For Each row As DataGridViewRow In gridPagos.Rows
             If Not row.IsNewRow Then
@@ -2765,8 +2763,8 @@ Public Class Pagos
         Next
         txtTotal.Text = _NormalizarNumero(total)
         lblPagos.Text = _NormalizarNumero(pagos)
-        lblFormaPagos.Text = _NormalizarNumero(formaPagos + total)
-        lblDiferencia.Text = _NormalizarNumero(pagos - formaPagos - total)
+        lblFormaPagos.Text = (formaPagos + total)
+        lblDiferencia.Text = (pagos - formaPagos - total)
     End Sub
 
     Private Sub gridPagos_RowsAdded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles gridPagos.RowsAdded
@@ -3035,6 +3033,9 @@ Public Class Pagos
 
                     If valor <> "" Then
                         gridFormaPagos.Rows(iRow).Cells(iCol).Value = _NormalizarNumero(valor)
+
+                        sumarImportes()
+
                         Try
                             gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow + 1).Cells(0)
                         Catch ex As Exception
@@ -5901,7 +5902,6 @@ Public Class Pagos
 
     Private Sub _RecalcularRetenciones()
 
-        Dim timer As Stopwatch = Stopwatch.StartNew
         ' Recalculo de Retenciones de Ganancias.
         _RecalcularRetencionGanancias()
 
@@ -5914,29 +5914,28 @@ Public Class Pagos
         ' Recalculo IB CABA
         _RecalcularIBCABA()
 
-        timer.Stop()
+        sumarImportes()
 
-        Debug.Print(timer.Elapsed.Milliseconds)
     End Sub
 
     Private Sub _RecalcularIBCABA()
 
-        Dim ZImporte, ZZSuma, ZZBase, acumCaba
+        Dim ZZSuma, acumCaba ' , ZImporte, ZZBase
 
-        acumCaba = 0
+        acumCaba = 0.0
 
         For Each row As DataGridViewRow In gridPagos.Rows
             With row
                 If Not IsNothing(.Cells(4).Value) Then
 
-                    ZImporte = 0
-                    ZZSuma = 0
-                    ZZBase = 0
+                    'ZImporte = 0
+                    ZZSuma = 0.0
+                    ' ZZBase = 0
 
-                    ZImporte = .Cells(4).Value
+                    'ZImporte = .Cells(4).Value
 
-                    ZZSuma = Val(ZImporte) / 1.21
-                    ZZBase = ZZSuma
+                    ZZSuma = Val(.Cells(4).Value) / 1.21
+                    'ZZBase = ZZSuma
 
                     acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
 
@@ -5944,7 +5943,7 @@ Public Class Pagos
             End With
         Next
 
-        txtIBCiudad.Text = _NormalizarNumero(acumCaba)
+        txtIBCiudad.Text = acumCaba '_NormalizarNumero(acumCaba)
 
     End Sub
 
@@ -5953,7 +5952,10 @@ Public Class Pagos
 
         Dim varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva, varOrdFecha
         Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
-        Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZBase, ZZSumaNeto
+        Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZSumaNeto
+        Dim ZFactura = Nothing
+        Dim CtaCtePrv As DataRow
+        Dim ZNroInterno As Integer = 0
 
         acumProv = 0
         acumCaba = 0
@@ -5993,7 +5995,7 @@ Public Class Pagos
                     ZImporte = 0
                     ZZSuma = 0
                     ZZTotal = 0
-                    ZZBase = 0
+                    'ZZBase = 0
                     ZZSumaNeto = 0
 
                     ZTipo = ""
@@ -6011,15 +6013,15 @@ Public Class Pagos
                         ZNumero = .Cells(3).Value
                         ZImporte = .Cells(4).Value
 
-                        Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
+                        'Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
 
                         'acum += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(_NormalizarNumero(.Cells(4).Value)))
                         ' Buscamos la factura
-                        Dim CtaCtePrv As DataRow = _BuscarCtaCteProv(ZClaveCtaCtePrv)
+                        CtaCtePrv = _BuscarCtaCteProv(txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero)
 
                         'If Val(CtaCtePrv.Item("NroInterno")) = 0 Then : Exit Sub : End If
 
-                        Dim ZNroInterno As Integer = 0
+                        ZNroInterno = 0
 
                         If Not IsNothing(CtaCtePrv) Then
                             ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
@@ -6030,7 +6032,7 @@ Public Class Pagos
                         End If
 
                         'Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
-                        Dim ZFactura = _BuscarCompra(ZNroInterno)
+                        ZFactura = _BuscarCompra(ZNroInterno)
 
                         If Not IsNothing(ZFactura) Then
 
@@ -6062,7 +6064,7 @@ Public Class Pagos
 
                         End If
 
-                        ZZBase = ZZSuma
+                        'ZZBase = ZZSuma
                         'ZZSumaNeto += ZZSuma
 
                     End If
@@ -6115,6 +6117,9 @@ Public Class Pagos
         Dim varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva, varOrdFecha
         Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
         Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZBase, ZZSumaNeto
+        Dim CtaCtePrv As DataRow
+        Dim ZNroInterno As Integer = 0
+        Dim ZFactura = Nothing
 
         ZNeto = 0.0
         ZIva = 0.0
@@ -6167,15 +6172,17 @@ Public Class Pagos
                     ZNumero = .Cells(3).Value
                     ZImporte = .Cells(4).Value
 
-                    Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
+                    'Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
 
                     'acum += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(_NormalizarNumero(.Cells(4).Value)))
                     ' Buscamos la factura
-                    Dim CtaCtePrv As DataRow = _BuscarCtaCteProv(ZClaveCtaCtePrv)
+                    CtaCtePrv = _BuscarCtaCteProv(txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero)
 
                     'If IsNothing(CtaCtePrv) Then : Exit Sub : End If
 
-                    Dim ZNroInterno As Integer = 0
+                    ZNroInterno = 0
+                    ZZTotal = 0
+                    ZZSaldo = 0
 
                     If Not IsNothing(CtaCtePrv) Then
                         ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
@@ -6184,7 +6191,7 @@ Public Class Pagos
                     End If
 
                     'Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
-                    Dim ZFactura = _BuscarCompra(ZNroInterno)
+                    ZFactura = _BuscarCompra(ZNroInterno)
 
                     If Not IsNothing(ZFactura) Then
 
@@ -6236,6 +6243,9 @@ Public Class Pagos
     Private Sub _RecalcularRetencionIVA()
         Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
         Dim ZNeto, ZIva, ZZSuma, ZZTotal, ZZBase
+        Dim ZFactura = Nothing
+        Dim CtaCtePrv As DataRow
+        Dim ZNroInterno As Integer = 0
 
         ZNeto = 0
         ZIva = 0
@@ -6261,12 +6271,12 @@ Public Class Pagos
                     ZNumero = .Cells(3).Value
                     ZImporte = .Cells(4).Value
 
-                    Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
+                    'Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
 
                     ' Buscamos la factura
-                    Dim CtaCtePrv As DataRow = _BuscarCtaCteProv(ZClaveCtaCtePrv)
+                    CtaCtePrv = _BuscarCtaCteProv(txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero)
 
-                    Dim ZNroInterno As Integer = 0
+                    ZNroInterno = 0
 
                     If Not IsNothing(CtaCtePrv) Then
                         ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
@@ -6281,7 +6291,7 @@ Public Class Pagos
 
                         If ZNeto >= 1000 Then
 
-                            Dim ZFactura = _BuscarCompra(ZNroInterno)
+                            ZFactura = _BuscarCompra(ZNroInterno)
 
                             If Not IsNothing(ZFactura) Then
 

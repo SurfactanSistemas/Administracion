@@ -24,7 +24,7 @@ Public Class Depositos
     Private Function sumaImportes() As Double
         Dim valorImportes As Double = 0
         For Each row As DataGridViewRow In gridCheques.Rows
-            valorImportes += row.Cells(4).Value
+            valorImportes += Val(row.Cells(4).Value)
         Next
         Return valorImportes
     End Function
@@ -60,9 +60,22 @@ Public Class Depositos
         Dim validador As New Validator
         Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(Trim(txtCodigoBanco.Text))
 
+        ' Normalizamos los valores antes de compararlos.
+        For i = 0 To gridCheques.Rows.Count - 1
+            With gridCheques.Rows(i)
+                If Not IsNothing(.Cells(4).Value) Then
+                    If Val(.Cells(4).Value) <> 0 Then
+                        .Cells(4).Value = Proceso.formatonumerico(.Cells(4).Value)
+                    End If
+                End If
+            End With
+        Next
+
         validador.validate(Me)
 
-        validador.alsoValidate(Val(txtImporte.Text) = Math.Round(sumaImportes(), 2), "El campo importe tiene que ser igual a la suma de los valores (" & sumaImportes() & ")")
+        Dim ZSumaImporte = Proceso.formatonumerico(Math.Round(sumaImportes(), 2))
+
+        validador.alsoValidate(Val(Proceso.formatonumerico(txtImporte.Text)) = Val(ZSumaImporte), "El campo importe tiene que ser igual a la suma de los valores (" & ZSumaImporte & ")")
         validador.alsoValidate(Not IsNothing(banco), "Debe ingresar un Banco válido.")
         validador.alsoValidate(validarTipoUnico(), "Sólo puede realizarse un tipo de depósito por carga")
         validador.alsoValidate(validarEstadoGrilla(), "Hay campos en la grilla con estados inválidos")
@@ -211,7 +224,7 @@ Public Class Depositos
             If dr.HasRows Then
 
                 Do While dr.Read()
-                    cheques.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, dr.Item("Importe2"), dr.Item("banco2"), dr.Item("Clave")))
+                    cheques.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Val(Proceso.formatonumerico(dr.Item("Importe2"))), dr.Item("banco2"), "1" & dr.Item("Clave")))
                 Loop
             End If
 
@@ -240,7 +253,7 @@ Public Class Depositos
                 Do While dr.Read()
 
                     If Not _ChequeUtilizadoEnRecibo(dr.Item("Numero2"), dr.Item("Fecha2")) Then
-                        cheques.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, dr.Item("Importe2"), dr.Item("banco2"), dr.Item("Clave")))
+                        cheques.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Proceso.formatonumerico(dr.Item("Importe2")), dr.Item("banco2"), "2" & dr.Item("Clave")))
                     End If
 
                 Loop
@@ -303,34 +316,175 @@ Public Class Depositos
         If validarCampos() Then
             Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(txtCodigoBanco.Text)
             Dim deposito As Deposito = New Deposito(txtNroDeposito.Text, banco, txtFecha.Text, txtFechaAcreditacion.Text, Val(Proceso.formatonumerico(txtImporte.Text)))
+
             If cheques.Count > 0 Then
+
                 Dim chequesADepositar As New List(Of ItemDeposito)
                 For Each _cheque As Cheque In cheques
 
-                    _cheque.valorImporte = Proceso.formatonumerico(_cheque.valorImporte)
+                    _cheque.valorImporte = Val(Proceso.formatonumerico(_cheque.valorImporte))
 
                     chequesADepositar.Add(_cheque)
 
                 Next
 
-                DAODeposito.agregarDeposito(deposito, chequesADepositar)
+                Try
+                    DAODeposito.agregarDeposito(deposito, chequesADepositar)
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Critical)
+                    Exit Sub
+                End Try
+
+                ' Damos marcamos los cheques.
+                _MarcarCheques(cheques)
+
             Else
-                For i = 0 To gridCheques.Rows.Count - 1
-                    With gridCheques.Rows(i)
-                        If Not IsNothing(.Cells(4).Value) Then
-                            If Val(.Cells(4).Value) <> 0 Then
-                                .Cells(4).Value = Proceso.formatonumerico(.Cells(4).Value)
-                            End If
-                        End If
-                    End With
-                Next
                 DAODeposito.agregarDeposito(deposito, gridCheques.Rows)
             End If
 
             MsgBox("Deposito cargado con exito.", MsgBoxStyle.Information)
+
+            btnImpresion.PerformClick()
+
             btnLimpiar_Click(sender, e)
         End If
     End Sub
+
+    Private Function _CS(Optional ByVal empresa As String = "SurfactanSA") As String
+        
+        Return Proceso._ConectarA(empresa)
+
+    End Function
+
+    Private Sub _MarcarCheques(ByVal WCheques As List(Of Cheque))
+        Dim ZSql = "", XClaveRecibo = "", XObservaciones = "", WReciboDefintivo = 0
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand("")
+        Dim trans As SqlTransaction
+
+        If WCheques.Count <= 0 Then : Exit Sub : End If
+
+        cn.ConnectionString = _CS()
+        cm.Connection = cn
+
+        For Each WCheque As Cheque In WCheques
+            WReciboDefintivo = 0
+            XObservaciones = Microsoft.VisualBasic.Left$("Deposito Nro : " + Str$(txtNroDeposito.Text) + " Banco : " + txtDescripcionBanco.Text, 50)
+            XClaveRecibo = Mid(WCheque.clave, 2, 10)
+
+            If WCheque.clave.StartsWith("1") Then
+
+                ZSql = ""
+                ZSql = ZSql + "UPDATE Recibos SET "
+                ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
+                ZSql = ZSql + "Destino = " + "'" + XObservaciones + "'"
+                ZSql = ZSql + " Where Clave = " + "'" + XClaveRecibo + "'"
+
+            Else
+
+                Try
+                    WReciboDefintivo = _BuscarReciboDefinitivo(XClaveRecibo)
+                Catch ex As Exception
+                    Throw New Exception("Hubo un problema al consultar la base de datos.")
+                    Exit For
+                End Try
+
+
+                ZSql = ""
+                ZSql = ZSql + "UPDATE RecibosProvi SET "
+                ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
+                ZSql = ZSql + "Destino = " + "'" + XObservaciones + "'"
+                ZSql = ZSql + " Where Clave = " + "'" + XClaveRecibo + "'"
+
+            End If
+
+            Try
+
+                cn.Open()
+                trans = cn.BeginTransaction
+
+                cm.CommandText = ZSql
+                cm.Transaction = trans
+                cm.ExecuteNonQuery()
+                trans.Commit()
+
+            Catch ex As Exception
+                If Not IsNothing(trans) Then
+                    trans.Rollback()
+                End If
+                Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+                Exit For
+            Finally
+
+                cn.Close()
+
+            End Try
+
+            If WReciboDefintivo <> 0 Then
+
+                ZSql = ""
+                ZSql = ZSql + "UPDATE Recibos SET "
+                ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
+                ZSql = ZSql + "Destino = " + "'" + XObservaciones + "'"
+                ZSql = ZSql + " Where Recibo = " + "'" + Proceso.ceros(WReciboDefintivo, 6) + "' AND Numero2 = '" & WCheque.numero & "'"
+
+                Try
+                    cn.Open()
+                    trans = cn.BeginTransaction
+
+                    cm.CommandText = ZSql
+                    cm.Transaction = trans
+                    cm.ExecuteNonQuery()
+                    trans.Commit()
+                Catch ex As Exception
+                    If Not IsNothing(trans) Then
+                        trans.Rollback()
+                    End If
+                    Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+                    Exit For
+                Finally
+
+                    cn.Close()
+
+                End Try
+
+            End If
+
+        Next
+
+    End Sub
+
+    Private Function _BuscarReciboDefinitivo(ByVal xclaverecibo) As Integer
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT ReciboDefinitivo FROM RecibosProvi WHERE Recibo = '" & xclaverecibo & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            SQLConnector.conexionSql(cn, cm)
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                Return IIf(IsDBNull(dr.Item("ReciboDefintivo")), 0, Val(dr.Item("ReciboDefinitivo")))
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return 0
+    End Function
 
     Private Sub txtCodigoBanco_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigoBanco.DoubleClick
         lstSeleccion.SelectedIndex = 0
@@ -399,7 +553,9 @@ Public Class Depositos
     Private Sub txtImporte_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtImporte.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            If Trim(txtImporte.Text) = "" Then : Exit Sub : End If
+            If Trim(txtImporte.Text) = "" Then
+                txtImporte.Text = "0"
+            End If
 
             txtImporte.Text = Proceso.formatonumerico(txtImporte.Text)
             gridCheques.CurrentCell = gridCheques.Rows(0).Cells(0)
@@ -410,14 +566,18 @@ Public Class Depositos
     End Sub
 
     Private Sub btnImpresion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImpresion.Click
-        _ImprimirDeposito()
+        Try
+            _ImprimirDeposito()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
     End Sub
 
     Private Sub _ImprimirDeposito()
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New DepositoBancario
-        Dim WDeposito, WRenglon, WFecha, WBanco, WNombre, WTotal, WTitulo, WTipo, WNumero, WImporte, WDescripcion As String
+        Dim WDeposito, WRenglon, WFecha, WBanco, WNombre, WTotal, WTitulo, WTipo, WNumero, WImporte, WDescripcion
         Dim XRenglon As Integer = 0
 
         WDeposito = ""
@@ -425,12 +585,12 @@ Public Class Depositos
         WFecha = ""
         WBanco = ""
         WNombre = ""
-        WTotal = ""
+        WTotal = 0.0
         WTitulo = ""
         WTipo = ""
         WNumero = ""
         WBanco = ""
-        WImporte = ""
+        WImporte = 0.0
         WDescripcion = ""
 
         ' Preparamos las columnas.
@@ -453,7 +613,7 @@ Public Class Depositos
         WFecha = txtFecha.Text
         WBanco = Trim(txtCodigoBanco.Text)
         WNombre = Trim(txtDescripcionBanco.Text)
-        WTotal = Trim(txtImporte.Text)
+        WTotal = Val(Proceso.formatonumerico(txtImporte.Text))
         WTitulo = "SURFACTAN S.A"
 
         For iRow = 0 To gridCheques.Rows.Count - 1
@@ -477,13 +637,16 @@ Public Class Depositos
                         WTipo = "Dólares"
                         WBanco = ""
                         WNombre = ""
-                    Case Else
+                    Case 3
                         WTipo = "Cheque"
                         WNumero = .Cells(1).Value
                         WDescripcion = .Cells(3).Value.ToString.Split("/")(0)
+                    Case Else
+                        Throw New Exception("No se ha podido identificar el Tipo de Depósito.")
+                        Exit Sub
                 End Select
 
-                WImporte = CDbl(.Cells(4).Value)
+                WImporte = Val(Proceso.formatonumerico(.Cells(4).Value))
 
                 row = Tabla.NewRow
 
@@ -492,12 +655,12 @@ Public Class Depositos
                 row.Item("Fecha") = WFecha
                 row.Item("Banco") = WBanco
                 row.Item("Nombre") = WNombre
-                row.Item("Total") = CDbl(WTotal)
+                row.Item("Total") = Val(WTotal)
                 row.Item("Titulo") = WTitulo
                 row.Item("Tipo") = WTipo
                 row.Item("Numero") = WNumero
                 row.Item("Banco") = WBanco
-                row.Item("Importe") = CDbl(WImporte)
+                row.Item("Importe") = Val(WImporte)
                 row.Item("Descripcion") = WDescripcion
 
                 Tabla.Rows.Add(row)
@@ -509,9 +672,8 @@ Public Class Depositos
         crdoc.SetDataSource(Tabla)
 
         With VistaPrevia
-            .CrystalReportViewer1.ReportSource = crdoc
-            .ShowDialog()
-            .Dispose()
+            .Reporte = crdoc
+            .Mostrar()
         End With
 
         crdoc = New DepositoBancario2
@@ -519,9 +681,8 @@ Public Class Depositos
         crdoc.SetDataSource(Tabla)
 
         With VistaPrevia
-            .CrystalReportViewer1.ReportSource = crdoc
-            .ShowDialog()
-            .Dispose()
+            .Reporte = crdoc
+            .Mostrar()
         End With
     End Sub
 
@@ -559,11 +720,16 @@ Public Class Depositos
                                     .CurrentCell = .Rows(iRow).Cells(iCol)
                                 End If
                             Else
-                                If Val(valor) = 1 Or Val(valor) = 2 Then
-                                    .CurrentCell = .Rows(iRow).Cells(4)
-                                Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque) por teclado. Cheque unicamente por lectora de cheques.
-                                    .CurrentCell = .Rows(iRow).Cells(iCol)
-                                End If
+
+                                Select Case Val(valor)
+                                    Case 1, 2
+                                        .CurrentCell = .Rows(iRow).Cells(4)
+                                    Case 3
+                                        .CurrentCell.Value = ""
+                                        btnChequeTerceros.PerformClick()
+                                    Case Else
+                                End Select
+
                             End If
 
                             Return True
@@ -673,7 +839,7 @@ Public Class Depositos
                 With dr
                     clave = IIf(Not IsDBNull(.Item("Clave")), "1" & .Item("Clave"), "")
                 End With
-                
+
             End If
 
         Catch ex As Exception
