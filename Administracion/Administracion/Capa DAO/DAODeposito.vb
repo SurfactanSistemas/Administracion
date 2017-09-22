@@ -6,14 +6,14 @@ Public Class DAODeposito
         Dim rows = SQLConnector.retrieveDataTable("get_deposito_por_numero", nroDeposito).Rows
         Try
             Dim deposito As New Deposito(nroDeposito, DAOBanco.buscarBancoPorCodigo(rows(0)("Banco").ToString), rows(0)("Fecha").ToString,
-                                     rows(0)("Acredita").ToString, CustomConvert.toDoubleOrZero(rows(0)("Importe")))
+                                     rows(0)("Acredita").ToString, rows(0)("Importe"))
             Dim items As New List(Of ItemDeposito)
             For Each row In rows
                 Dim item As ItemDeposito
                 If CustomConvert.toIntOrZero(row("Tipo2")) = 3 Then
-                    item = New Cheque(row("Numero2").ToString, row("Fecha2").ToString, CustomConvert.toDoubleOrZero(row("Importe2")), row("Observaciones2").ToString, "")
+                    item = New Cheque(row("Numero2").ToString, row("Fecha2").ToString, row("Importe2"), row("Observaciones2").ToString, "")
                 Else
-                    item = New Efectivo(row("Tipo2").ToString, CustomConvert.toDoubleOrZero(row("Importe2")))
+                    item = New Efectivo(row("Tipo2").ToString, row("Importe2"))
                 End If
                 items.Add(item)
                 deposito.agregarItems(items)
@@ -45,8 +45,8 @@ Public Class DAODeposito
     Private Shared Sub agregarDeposito(ByVal deposito As Deposito)
         For Each item As ItemDeposito In deposito.items
             Dim renglon As String = indiceComoString(item, deposito.items)
-            'SQLConnector.executeProcedure("alta_deposito", deposito.numero & renglon, deposito.numero, renglon, deposito.banco.id, deposito.fecha, Proceso.ordenaFecha(deposito.fecha), Proceso.formatonumerico(deposito.importeTotal), deposito.fechaAcreditacion, Proceso.ordenaFecha(deposito.fechaAcreditacion), item.tipo, item.numero, item.fecha, Proceso.formatonumerico(item.importe), item.nombre)
-            SQLConnector.executeProcedure("alta_deposito", deposito.numero & renglon, deposito.numero, renglon, deposito.banco.id, deposito.fecha, Proceso.ordenaFecha(deposito.fecha), Proceso.formatonumerico(deposito.importeTotal), deposito.fechaAcreditacion, Proceso.ordenaFecha(deposito.fechaAcreditacion), item.tipo, item.numero, item.fecha, item.importe, item.nombre)
+            SQLConnector.executeProcedure("alta_deposito", deposito.numero & renglon, deposito.numero, renglon, deposito.banco.id, deposito.fecha, Proceso.ordenaFecha(deposito.fecha), Proceso.formatonumerico(deposito.importeTotal), deposito.fechaAcreditacion, Proceso.ordenaFecha(deposito.fechaAcreditacion), item.tipo, item.numero, item.fecha, Proceso.formatonumerico(item.importe), item.nombre)
+            'SQLConnector.executeProcedure("alta_deposito", deposito.numero & renglon, deposito.numero, renglon, deposito.banco.id, deposito.fecha, Proceso.ordenaFecha(deposito.fecha), Proceso.formatonumerico(deposito.importeTotal), deposito.fechaAcreditacion, Proceso.ordenaFecha(deposito.fechaAcreditacion), item.tipo, item.numero, item.fecha, item.importe, item.nombre)
         Next
     End Sub
 
@@ -68,7 +68,7 @@ Public Class DAODeposito
         Dim items As New List(Of ItemDeposito)
         For Each row As DataGridViewRow In gridRows
             If Not row.IsNewRow Then
-                items.Add(New Efectivo(row.Cells(0).Value, row.Cells(4).Value))
+                items.Add(New Efectivo(row.Cells(0).Value, Val(row.Cells(4).Value)))
             End If
         Next
         Return items

@@ -137,12 +137,12 @@ Public Class Depositos
             txtFecha.Text = deposito.fecha
             mostrarBanco(deposito.banco)
             txtFechaAcreditacion.Text = deposito.fechaAcreditacion
-            txtImporte.Text = CustomConvert.toStringWithTwoDecimalPlaces(deposito.importeTotal)
+            txtImporte.Text = _NormalizarNumero(deposito.importeTotal)
             For Each item As ItemDeposito In deposito.items
                 If item.tipo = 3 Then
                     mostrarCheque(item)
                 Else
-                    gridCheques.Rows.Add(item.tipo, item.numero, item.fecha, item.nombre, item.importe, "")
+                    gridCheques.Rows.Add(item.tipo, item.numero, item.fecha, item.nombre, _NormalizarNumero(item.importe), "")
                 End If
             Next
 
@@ -175,7 +175,7 @@ Public Class Depositos
             End If
             If msgBoxResult Then
                 cheques.Add(cheque)
-                gridCheques.Rows.Add(3, cheque.numero, cheque.fecha, cheque.banco, CustomConvert.toStringWithTwoDecimalPlaces(cheque.importe))
+                gridCheques.Rows.Add(3, cheque.numero, cheque.fecha, cheque.banco, _NormalizarNumero(cheque.importe))
                 gridCheques.AllowUserToAddRows = False
                 gridCheques.Columns(0).ReadOnly = True
                 gridCheques.Columns(4).ReadOnly = True
@@ -194,8 +194,7 @@ Public Class Depositos
             showFunction = AddressOf mostrarCheque
             lstConsulta.DataSource = Nothing
             lstConsulta.Items.Clear()
-            'DAODeposito.buscarCheques().ForEach(Sub(cheque) lstConsulta.Items.Add(cheque))
-            '_ListarCheques()
+            
             _ListarChequesTerceros()
 
         End If
@@ -206,7 +205,6 @@ Public Class Depositos
     End Sub
 
     Private Sub _ListarChequesTerceros()
-        'Dim XClaves As New List(Of Object)
         Dim _ChequesRecibos As New List(Of Object)
         Dim _ChequesRecibosProvisorios As New List(Of Object)
         Dim _ChequesTotales As New List(Of Object)
@@ -221,7 +219,7 @@ Public Class Depositos
         _ChequesTotales.AddRange(_ChequesRecibos)
         _ChequesTotales.AddRange(_ChequesRecibosProvisorios)
 
-        ' Los oredenamos de manera ASC
+        ' Los ordenamos de manera ASC segun fecha
         _ChequesTotales.Sort(Function(a As Object, b As Object)
                                  Return Val(a(1).orden()) < Val(b(1).orden())
                              End Function)
@@ -229,17 +227,7 @@ Public Class Depositos
         ' Lo colocamos en la lista.
         For Each _cheque As Object In _ChequesTotales
             lstConsulta.Items.Add(_cheque(1))
-            'XClaves.Add({_cheque(0), _cheque(1)})
         Next
-
-        ' Guardamos las referencias.
-        '_Claves = XClaves
-
-        'If lstConsulta.Items.Count > 0 Then
-        '    _HabilitarConsulta()
-        'Else
-        '    _InhabilitarConsulta()
-        'End If
 
     End Sub
 
@@ -332,7 +320,7 @@ Public Class Depositos
                         '                     .Item("Fecha2")
                         '                    })
 
-                        _ChequesRecibos.Add({item, New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Proceso.formatonumerico(dr.Item("Importe2")), dr.Item("banco2"), "2" & dr.Item("Clave"))})
+                        _ChequesRecibos.Add({item, New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Val(Proceso.formatonumerico(dr.Item("Importe2"))), dr.Item("banco2"), "2" & dr.Item("Clave"))})
 
                     Loop
                 End If
@@ -727,7 +715,7 @@ Public Class Depositos
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New DepositoBancario
-        Dim WDeposito, WRenglon, WFecha, WBanco, WNombre, WTotal, WTitulo, WTipo, WNumero, WImporte, WDescripcion
+        Dim WDeposito, WRenglon, WFecha, WBanco, WNombre, WTotal, WTitulo, WTipo, WNumero, WImporte, WDescripcion, XTipo
         Dim XRenglon As Integer = 0
 
         WDeposito = ""
@@ -742,6 +730,7 @@ Public Class Depositos
         WBanco = ""
         WImporte = 0.0
         WDescripcion = ""
+        XTipo = 0
 
         ' Preparamos las columnas.
         With Tabla
@@ -777,18 +766,14 @@ Public Class Depositos
 
                     WTipo = ""
                     WNumero = ""
-                    WImporte = ""
+                    WImporte = 0.0
                     WDescripcion = ""
 
-                    Select Case Val(.Cells(0).Value)
+                    XTipo = Val(.Cells(0).Value)
+
+                    Select Case XTipo
                         Case 1
                             WTipo = "Efectivo"
-                            WBanco = ""
-                            WNombre = ""
-                        Case 2
-                            WTipo = "Dólares"
-                            WBanco = ""
-                            WNombre = ""
                         Case 3
                             WTipo = "Cheque"
                             WNumero = .Cells(1).Value
@@ -830,14 +815,19 @@ Public Class Depositos
             .Mostrar()
         End With
 
-        crdoc = New DepositoBancario2
+        If XTipo = 3 Then
 
-        crdoc.SetDataSource(Tabla)
+            crdoc = New DepositoBancario2
 
-        With VistaPrevia
-            .Reporte = crdoc
-            .Mostrar()
-        End With
+            crdoc.SetDataSource(Tabla)
+
+            With VistaPrevia
+                .Reporte = crdoc
+                .Mostrar()
+            End With
+
+        End If
+
     End Sub
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
@@ -920,11 +910,13 @@ Public Class Depositos
     End Function
 
     Private Function _NormalizarNumero(ByVal numero As String)
-        Return _NormalizarNumero(numero, 2)
+        'Return _NormalizarNumero(numero, 2)
+        Return Proceso.formatonumerico(numero)
     End Function
 
     Private Function _NormalizarNumero(ByVal numero As String, ByVal decimales As Integer)
-        Return CustomConvert.asStringWithDecimalPlaces(numero, decimales)
+        'Return CustomConvert.asStringWithDecimalPlaces(numero, decimales)
+        Return Proceso.formatonumerico(numero, decimales)
     End Function
 
     Private Function _ObtenerNombreBanco(ByVal claveBanco As String) As String
