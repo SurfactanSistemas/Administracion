@@ -195,7 +195,8 @@ Public Class Depositos
             lstConsulta.DataSource = Nothing
             lstConsulta.Items.Clear()
             'DAODeposito.buscarCheques().ForEach(Sub(cheque) lstConsulta.Items.Add(cheque))
-            _ListarCheques()
+            '_ListarCheques()
+            _ListarChequesTerceros()
 
         End If
         lstSeleccion.Visible = False
@@ -203,6 +204,153 @@ Public Class Depositos
         txtAyuda.Visible = True
         txtAyuda.Focus()
     End Sub
+
+    Private Sub _ListarChequesTerceros()
+        'Dim XClaves As New List(Of Object)
+        Dim _ChequesRecibos As New List(Of Object)
+        Dim _ChequesRecibosProvisorios As New List(Of Object)
+        Dim _ChequesTotales As New List(Of Object)
+
+        lstConsulta.Items.Clear()
+
+        ' Traemos los cheques que se encuentran aun disponibles.
+        _ChequesRecibos = _TraerChequesEnRecibos()
+        _ChequesRecibosProvisorios = _TraerChequesEnRecibosProvisorios()
+
+        ' Agrupamos todos los cheques
+        _ChequesTotales.AddRange(_ChequesRecibos)
+        _ChequesTotales.AddRange(_ChequesRecibosProvisorios)
+
+        ' Los oredenamos de manera ASC
+        _ChequesTotales.Sort(Function(a As Object, b As Object)
+                                 Return Val(a(1).orden()) < Val(b(1).orden())
+                             End Function)
+
+        ' Lo colocamos en la lista.
+        For Each _cheque As Object In _ChequesTotales
+            lstConsulta.Items.Add(_cheque(1))
+            'XClaves.Add({_cheque(0), _cheque(1)})
+        Next
+
+        ' Guardamos las referencias.
+        '_Claves = XClaves
+
+        'If lstConsulta.Items.Count > 0 Then
+        '    _HabilitarConsulta()
+        'Else
+        '    _InhabilitarConsulta()
+        'End If
+
+    End Sub
+
+
+    Private Function _TraerChequesEnRecibos() As List(Of Object)
+        Dim _ChequesRecibos As New List(Of Object)
+        Dim itemTemplate As String = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
+        Dim item As String = ""
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
+                                              & "Fecha2, Banco2, Clave, FechaOrd2 FROM Recibos WHERE " _
+                                              & "TipoReg = '2' AND Estado2 <> 'X' AND Tipo2 = '02' " _
+                                              & "ORDER BY FechaOrd2, Numero2")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    Do While .Read()
+
+                        item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero2"), 6)) _
+                                            .Replace("#FECHA#", .Item("Fecha2")) _
+                                            .Replace("#IMPORTE#", _NormalizarNumero(.Item("Importe2")).ToString.PadLeft(10, "_")) _
+                                            .Replace("#BANCO#", .Item("Banco2"))
+
+                        '_ChequesRecibos.Add({item, _
+                        '                     "1" & .Item("Clave"), _
+                        '                     IIf(Not IsDBNull(.Item("FechaOrd2")), .Item("FechaOrd2"), "") _
+                        '                    })
+
+                        _ChequesRecibos.Add({item, New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Val(Proceso.formatonumerico(dr.Item("Importe2"))), dr.Item("banco2"), "1" & dr.Item("Clave"))})
+
+                    Loop
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return _ChequesRecibos
+    End Function
+
+    Private Function _TraerChequesEnRecibosProvisorios() As List(Of Object)
+        Dim _ChequesRecibos As New List(Of Object)
+        Dim itemTemplate As String = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
+        Dim item As String = ""
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
+                                              & "Fecha2, Banco2, Clave, FechaOrd2 FROM RecibosProvi WHERE " _
+                                              & "TipoReg = '2' AND Estado2 = 'P' AND ReciboDefinitivo = '0' AND FechaOrd2 > '20080430'" _
+                                              & "ORDER BY FechaOrd2, Numero2")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    Do While .Read()
+
+                        item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero2"), 6)) _
+                                            .Replace("#FECHA#", .Item("Fecha2")) _
+                                            .Replace("#IMPORTE#", _NormalizarNumero(.Item("Importe2")).ToString.PadLeft(10, "_")) _
+                                            .Replace("#BANCO#", .Item("Banco2"))
+
+                        '_ChequesRecibos.Add({item, _
+                        '                     "2" & .Item("Clave"), _
+                        '                     IIf(Not IsDBNull(.Item("FechaOrd2")), .Item("FechaOrd2"), ""), _
+                        '                     ceros(.Item("Numero2"), 6), _
+                        '                     .Item("Fecha2")
+                        '                    })
+
+                        _ChequesRecibos.Add({item, New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Proceso.formatonumerico(dr.Item("Importe2")), dr.Item("banco2"), "2" & dr.Item("Clave"))})
+
+                    Loop
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return _ChequesRecibos
+    End Function
 
     Private Sub _ListarCheques()
         Dim cn As SqlConnection = New SqlConnection()
@@ -293,6 +441,8 @@ Public Class Depositos
             lstConsulta.Visible = False
             txtAyuda.Visible = False
             txtCodigoBanco.Focus()
+        Else
+            txtAyuda.Focus()
         End If
     End Sub
 

@@ -27,6 +27,8 @@ Public Class Pagos
     Private WRow, Wcol, WRowVarios As Integer
 
     Private WTipoProv, WTipoIva, WTipoIb, WTipoIbCaba, WPorceIb, WPorceIbCaba As String
+    ' Para calculos de Retenciones.
+    Dim varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva, varOrdFecha
 
     ' Utilizado para poder ser usado con consulta de cta cte prv por pantalla.
     Private _SoloLectura As String = False
@@ -2747,8 +2749,8 @@ Public Class Pagos
         Dim formaPagos As Double = 0
         Dim total As Double = 0
 
-        total = Val(txtIVA.Text) + Val(txtGanancias.Text) + Val(txtIBCiudad.Text) +
-            Val(txtIngresosBrutos.Text)
+        total = Val(_NormalizarNumero(txtIVA.Text)) + Val(_NormalizarNumero(txtGanancias.Text)) + Val(_NormalizarNumero(txtIBCiudad.Text)) +
+            Val(_NormalizarNumero(txtIngresosBrutos.Text))
 
         For Each row As DataGridViewRow In gridPagos.Rows
             If Not row.IsNewRow Then
@@ -5902,64 +5904,6 @@ Public Class Pagos
 
     Private Sub _RecalcularRetenciones()
 
-        ' Recalculo de Retenciones de Ganancias.
-        _RecalcularRetencionGanancias()
-
-        ' Recalculo de Retenciones por Iva.
-        _RecalcularRetencionIVA()
-
-        ' Recalculo IB Provincia
-        _RecalcularIBProvincia()
-
-        ' Recalculo IB CABA
-        _RecalcularIBCABA()
-
-        sumarImportes()
-
-    End Sub
-
-    Private Sub _RecalcularIBCABA()
-
-        Dim ZZSuma, acumCaba ' , ZImporte, ZZBase
-
-        acumCaba = 0.0
-
-        For Each row As DataGridViewRow In gridPagos.Rows
-            With row
-                If Not IsNothing(.Cells(4).Value) Then
-
-                    'ZImporte = 0
-                    ZZSuma = 0.0
-                    ' ZZBase = 0
-
-                    'ZImporte = .Cells(4).Value
-
-                    ZZSuma = Val(.Cells(4).Value) / 1.21
-                    'ZZBase = ZZSuma
-
-                    acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
-
-                End If
-            End With
-        Next
-
-        txtIBCiudad.Text = acumCaba '_NormalizarNumero(acumCaba)
-
-    End Sub
-
-    Private Sub _RecalcularIBProvincia()
-        Dim acumProv, acumCaba
-
-        Dim varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva, varOrdFecha
-        Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
-        Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZSumaNeto
-        Dim ZFactura = Nothing
-        Dim CtaCtePrv As DataRow
-        Dim ZNroInterno As Integer = 0
-
-        acumProv = 0
-        acumCaba = 0
-
         varAcuNeto = 0
         varAcuRetenido = 0
         varAcuAnticipo = 0
@@ -5980,9 +5924,61 @@ Public Class Pagos
 
         End If
 
+        ' Recalculo de Retenciones de Ganancias.
+        _RecalcularRetencionGanancias()
+
+        ' Recalculo de Retenciones por Iva.
+        _RecalcularRetencionIVA()
+
+        ' Recalculo IB Provincia
+        _RecalcularIBProvincia()
+
+        ' Recalculo IB CABA
+        _RecalcularIBCABA()
+
+        sumarImportes()
+
+    End Sub
+
+    Private Sub _RecalcularIBCABA()
+
+        Dim ZZSuma, acumCaba
+
+        acumCaba = 0.0
+
         For Each row As DataGridViewRow In gridPagos.Rows
             With row
-                If Not IsNothing(.Cells(4).Value) Then
+                If Trim(.Cells(4).Value) <> "" Then
+
+                    ZZSuma = 0.0
+
+                    ZZSuma = Val(.Cells(4).Value) / 1.21
+
+                    acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
+                Else
+                    Exit For
+                End If
+            End With
+        Next
+
+        txtIBCiudad.Text = acumCaba
+
+    End Sub
+
+    Private Sub _RecalcularIBProvincia()
+        Dim acumProv, acumCaba
+
+        Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
+        Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZSumaNeto
+        Dim ZFactura As DataRow = Nothing
+        Dim ZNroInterno As Integer = 0
+
+        acumProv = 0
+        acumCaba = 0
+
+        For Each row As DataGridViewRow In gridPagos.Rows
+            With row
+                If Trim(.Cells(4).Value) <> "" Then
 
                     ZNeto = 0
                     ZIva = 0
@@ -5995,7 +5991,6 @@ Public Class Pagos
                     ZImporte = 0
                     ZZSuma = 0
                     ZZTotal = 0
-                    'ZZBase = 0
                     ZZSumaNeto = 0
 
                     ZTipo = ""
@@ -6006,52 +6001,33 @@ Public Class Pagos
                     ZZSaldo = 0
 
                     ' Recalculo sobre porcentaje neto en Iva Comp.
-                    If Not IsNothing(.Cells(4).Value) Then
+                    If Trim(.Cells(4).Value) <> "" Then
                         ZTipo = .Cells(0).Value
                         ZLetra = .Cells(1).Value
                         ZPunto = .Cells(2).Value
                         ZNumero = .Cells(3).Value
                         ZImporte = .Cells(4).Value
 
-                        'Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
-
-                        'acum += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(_NormalizarNumero(.Cells(4).Value)))
-                        ' Buscamos la factura
-                        CtaCtePrv = _BuscarCtaCteProv(txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero)
-
-                        'If Val(CtaCtePrv.Item("NroInterno")) = 0 Then : Exit Sub : End If
-
-                        ZNroInterno = 0
-
-                        If Not IsNothing(CtaCtePrv) Then
-                            ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
-
-                            ZZTotal = CtaCtePrv.Item("Total")
-                            ZZSaldo = CtaCtePrv.Item("Saldo")
-
-                        End If
-
-                        'Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
-                        ZFactura = _BuscarCompra(ZNroInterno)
+                        ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZLetra, ZNumero)
 
                         If Not IsNothing(ZFactura) Then
 
-                            ZNeto = ZFactura("Neto")
+                            ZNeto = ZFactura.Item("Neto")
 
-                            If Val(ZImporte) = Val(ZZTotal) And ZNroInterno <> 0 Then
+                            ZIva = ZFactura.Item("Iva21")
+                            ZIva5 = ZFactura.Item("Iva5")
+                            ZIva27 = ZFactura.Item("Iva27")
+                            ZIva105 = ZFactura.Item("Iva105")
+                            ZIb = ZFactura.Item("Ib")
+                            ZExento = ZFactura.Item("Exento")
+
+                            ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
+
+                            If Val(ZImporte) = Val(ZTotal) Then
 
                                 ZZSuma = ZNeto
 
                             Else
-
-                                ZIva = ZFactura("Iva21")
-                                ZIva5 = ZFactura("Iva5")
-                                ZIva27 = ZFactura("Iva27")
-                                ZIva105 = ZFactura("Iva105")
-                                ZIb = ZFactura("Ib")
-                                ZExento = ZFactura("Exento")
-
-                                ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
 
                                 ZPorce = Val(ZImporte) / ZTotal
 
@@ -6064,30 +6040,59 @@ Public Class Pagos
 
                         End If
 
-                        'ZZBase = ZZSuma
-                        'ZZSumaNeto += ZZSuma
-
                     End If
 
                     acumProv += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(ZZSuma))
-                    'acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
-
+                Else
+                    Exit For
                 End If
             End With
         Next
 
         txtIngresosBrutos.Text = _NormalizarNumero(acumProv)
-        'txtIBCiudad.Text = _NormalizarNumero(acumCaba)
 
     End Sub
+
+    Private Function _BuscarCompra(ByVal proveedor, ByVal tipo, ByVal letra, ByVal numero)
+        Dim compra As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As New SqlCommand("SELECT Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE Proveedor = '" & proveedor & "' and letra = '" & letra & "' and numero = '" & numero & "' and tipo = '" & tipo & "'")
+        Dim dr As SqlDataReader
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader
+
+            If dr.HasRows Then
+
+                compra.Load(dr)
+
+                Return compra.Rows(0)
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return Nothing
+    End Function
 
     Private Function _BuscarCompra(ByVal NroInterno As Integer)
         Dim compra As New DataTable
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm = "SELECT Iva21, Iva5, Iva27, Iva105, Ib, Exento, Neto FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
         Dim dr As New SqlDataAdapter(cm, cn)
-
-        'SQLConnector.conexionSql(cn, cm)
 
         Try
             cn.ConnectionString = _CS()
@@ -6114,12 +6119,10 @@ Public Class Pagos
     End Function
 
     Private Sub _RecalcularRetencionGanancias()
-        Dim varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva, varOrdFecha
         Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
         Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZBase, ZZSumaNeto
-        Dim CtaCtePrv As DataRow
         Dim ZNroInterno As Integer = 0
-        Dim ZFactura = Nothing
+        Dim ZFactura As DataRow = Nothing
 
         ZNeto = 0.0
         ZIva = 0.0
@@ -6142,75 +6145,36 @@ Public Class Pagos
         ZTotal = 0.0
         ZZSaldo = 0.0
 
-        varAcuNeto = 0.0
-        varAcuRetenido = 0.0
-        varAcuAnticipo = 0.0
-        varAcuBruto = 0.0
-        varAcuIva = 0.0
-
-        varOrdFecha = Mid(ordenaFecha(txtFecha.Text), 3, 4)
-
-        Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(txtProveedor.Text, varOrdFecha)
-
-        If Not IsNothing(CampoAcumulado) Then
-
-            varAcuNeto = CampoAcumulado.neto
-            varAcuRetenido = CampoAcumulado.retenido
-            varAcuAnticipo = CampoAcumulado.anticipo
-            varAcuBruto = CampoAcumulado.bruto
-            varAcuIva = CampoAcumulado.iva
-
-        End If
-
         ' Recalculo sobre porcentaje neto en Iva Comp.
         For Each row As DataGridViewRow In gridPagos.Rows
             With row
-                If Not IsNothing(.Cells(4).Value) Then
+                If Trim(.Cells(4).Value) <> "" Then
                     ZTipo = .Cells(0).Value
                     ZLetra = .Cells(1).Value
                     ZPunto = .Cells(2).Value
                     ZNumero = .Cells(3).Value
                     ZImporte = .Cells(4).Value
 
-                    'Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
-
-                    'acum += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(_NormalizarNumero(.Cells(4).Value)))
-                    ' Buscamos la factura
-                    CtaCtePrv = _BuscarCtaCteProv(txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero)
-
-                    'If IsNothing(CtaCtePrv) Then : Exit Sub : End If
-
-                    ZNroInterno = 0
-                    ZZTotal = 0
-                    ZZSaldo = 0
-
-                    If Not IsNothing(CtaCtePrv) Then
-                        ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
-                        ZZTotal = CtaCtePrv.Item("Total")
-                        ZZSaldo = CtaCtePrv.Item("Saldo")
-                    End If
-
-                    'Dim ZFactura As Compra = DAOCompras.buscarCompraPorCodigo(ZNroInterno)
-                    ZFactura = _BuscarCompra(ZNroInterno)
+                    ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZLetra, ZNumero)
 
                     If Not IsNothing(ZFactura) Then
 
-                        ZNeto = ZFactura("Neto")
+                        ZNeto = ZFactura.Item("Neto")
+                        ZIva = ZFactura.Item("Iva21")
+                        ZIva5 = ZFactura.Item("Iva5")
+                        ZIva27 = ZFactura.Item("Iva27")
+                        ZIva105 = ZFactura.Item("Iva105")
+                        ZIb = ZFactura.Item("Ib")
+                        ZExento = ZFactura.Item("Exento")
 
-                        If Val(ZImporte) = Val(ZZTotal) And ZNroInterno <> 0 Then
+                        ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
+
+
+                        If Val(ZImporte) = Val(ZTotal) Then
 
                             ZZSuma = ZNeto
 
                         Else
-
-                            ZIva = ZFactura("Iva21")
-                            ZIva5 = ZFactura("Iva5")
-                            ZIva27 = ZFactura("Iva27")
-                            ZIva105 = ZFactura("Iva105")
-                            ZIb = ZFactura("Ib")
-                            ZExento = ZFactura("Exento")
-
-                            ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
 
                             ZPorce = Val(ZImporte) / ZTotal
 
@@ -6225,7 +6189,8 @@ Public Class Pagos
 
                     ZZBase += Val(ZImporte)
                     ZZSumaNeto += ZZSuma
-
+                Else
+                    Exit For
                 End If
             End With
         Next
@@ -6243,8 +6208,7 @@ Public Class Pagos
     Private Sub _RecalcularRetencionIVA()
         Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
         Dim ZNeto, ZIva, ZZSuma, ZZTotal, ZZBase
-        Dim ZFactura = Nothing
-        Dim CtaCtePrv As DataRow
+        Dim ZFactura As DataRow = Nothing
         Dim ZNroInterno As Integer = 0
 
         ZNeto = 0
@@ -6264,23 +6228,13 @@ Public Class Pagos
         ' Recalculo sobre porcentaje neto en Iva Comp.
         For Each row As DataGridViewRow In gridPagos.Rows
             With row
-                If Not IsNothing(.Cells(4).Value) Then
+                If Trim(.Cells(4).Value) <> "" Then
                     ZTipo = .Cells(0).Value
                     ZLetra = .Cells(1).Value
                     ZPunto = .Cells(2).Value
                     ZNumero = .Cells(3).Value
                     ZImporte = .Cells(4).Value
 
-                    'Dim ZClaveCtaCtePrv As String = txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero
-
-                    ' Buscamos la factura
-                    CtaCtePrv = _BuscarCtaCteProv(txtProveedor.Text & ZLetra & ZTipo & ZPunto & ZNumero)
-
-                    ZNroInterno = 0
-
-                    If Not IsNothing(CtaCtePrv) Then
-                        ZNroInterno = Val(CtaCtePrv.Item("NroInterno"))
-                    End If
 
                     ZZSuma = 0.0
 
@@ -6291,11 +6245,11 @@ Public Class Pagos
 
                         If ZNeto >= 1000 Then
 
-                            ZFactura = _BuscarCompra(ZNroInterno)
+                            ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZLetra, ZNumero)
 
                             If Not IsNothing(ZFactura) Then
 
-                                ZZSuma = ZFactura("Iva21")
+                                ZZSuma = ZFactura.Item("Iva21")
 
                             Else
 
@@ -6308,7 +6262,8 @@ Public Class Pagos
                     End If
 
                     ZZBase += ZZSuma
-
+                Else
+                    Exit For
                 End If
             End With
         Next
