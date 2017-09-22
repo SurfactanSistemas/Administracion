@@ -113,8 +113,8 @@ Public Class DetallesRemitosProveedor
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
-        Dim _ConnectionString, remito, codProveedor, orden, articulo, descripcion, cantPed As String
-        Dim moneda, precio, condPago, informe, est, fApr, cantRecibida As String
+        Dim _ConnectionString, remito, codProveedor, orden, articulo, descripcion, cantPed
+        Dim moneda, precio, condPago, informe, est, fApr, cantRecibida
 
         _ConnectionString = ""
         remito = ""
@@ -122,14 +122,14 @@ Public Class DetallesRemitosProveedor
         orden = ""
         articulo = ""
         descripcion = ""
-        cantPed = ""
+        cantPed = 0.0
         moneda = ""
         precio = ""
         condPago = ""
         informe = ""
         est = ""
         fApr = ""
-        cantRecibida = ""
+        cantRecibida = 0.0
 
         For Each _remitoActual In RemitosABuscar
 
@@ -200,52 +200,80 @@ Public Class DetallesRemitosProveedor
                 cn.Close()
             End Try
 
-            Try ' Buscamos la información del Laudo
-                cm.CommandText = "SELECT liberada, devuelta, fecha FROM Laudo WHERE Orden = '" + orden + "' AND Informe = '" + informe + "' AND Articulo = '" + articulo + "'"
-                cm.Connection = cn
+            If UCase(articulo.ToString).StartsWith("ZE") Then
+                Try
+                    cm.CommandText = "SELECT Cantidad FROM Informe WHERE Remito = '" + remito + "' AND Proveedor = '" + codProveedor + "' AND Articulo = '" + articulo + "'"
+                    cm.Connection = cn
 
-                cn.Open()
+                    cn.Open()
 
-                dr = cm.ExecuteReader()
+                    dr = cm.ExecuteReader()
 
-                If dr.HasRows Then
+                    If dr.HasRows Then
+                        dr.Read()
 
-                    dr.Read()
+                        cantRecibida = IIf(IsDBNull(dr.Item("Cantidad")), 0, dr.Item("Cantidad"))
 
-                    cantRecibida = _FormatearDecimales(dr.Item(0))
-
-
-                    If cantRecibida > 0 Then
-                        fApr = dr.Item(2)
-                        est = "Aprob."
-                    ElseIf dr.Item(1) > 0 Then
-                        est = "Rech."
                     End If
-                Else
+                Catch ex As Exception
+                    Throw New Exception("Hubo un error al querer buscar al proveedor indicado")
+                    Exit Sub
+                Finally
+                    cn.Close()
+                    'cm = Nothing
+                    'dr = Nothing
+                End Try
+            Else
+                Try ' Buscamos la información del Laudo
+                    cm.CommandText = "SELECT liberada, devuelta, fecha FROM Laudo WHERE Orden = '" + orden + "' AND Informe = '" + informe + "' AND Articulo = '" + articulo + "'"
+                    cm.Connection = cn
 
-                    cantRecibida = _FormatearDecimales(0)
-                    fApr = ""
-                    est = ""
+                    cn.Open()
 
-                End If
-            Catch ex As Exception
-                Throw New Exception("Hubo un error al querer buscar al proveedor indicado")
-                Exit Sub
-            Finally
-                cn.Close()
-                'cm = Nothing
-                'dr = Nothing
-            End Try
+                    dr = cm.ExecuteReader()
+
+                    If dr.HasRows Then
+
+                        cantRecibida = 0.0
+
+                        While dr.Read()
+                            cantRecibida += Val(_FormatearDecimales(dr.Item(0).ToString()))
+
+                            fApr = dr.Item(2)
+                        End While
+
+                        If cantRecibida > 0 Then
+                            est = "Aprob."
+                        ElseIf dr.Item(1) > 0 Then
+                            est = "Rech."
+                        End If
+                    Else
+
+                        cantRecibida = 0.0
+                        fApr = ""
+                        est = ""
+
+                    End If
+                Catch ex As Exception
+                    Throw New Exception("Hubo un error al querer buscar al proveedor indicado")
+                    Exit Sub
+                Finally
+                    cn.Close()
+                    'cm = Nothing
+                    'dr = Nothing
+                End Try
+            End If
 
             ' Agregamos la linea en el DGV.
-            DGVDetalles.Rows.Add(remito, orden, articulo, descripcion, cantPed, moneda, precio, condPago, informe, cantRecibida, est, fApr)
+            DGVDetalles.Rows.Add(remito, orden, articulo, descripcion, _FormatearDecimales(cantPed), moneda, _FormatearDecimales(precio), condPago, informe, _FormatearDecimales(cantRecibida), est, fApr)
 
         Next
 
     End Sub
 
-    Private Function _FormatearDecimales(ByVal numero As Double)
-        Return Format(Math.Round(numero, 2), "0.00")
+    Private Function _FormatearDecimales(ByVal numero As String)
+        'Return Format(Math.Round(numero, 2), "0.00")
+        Return Proceso.formatonumerico(numero)
     End Function
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
