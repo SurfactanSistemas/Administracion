@@ -620,50 +620,54 @@ Public Class Depositos
 
             With gridCheques.Rows(iRow)
 
-                XRenglon += 1
-                WRenglon = ceros(XRenglon, 2)
+                If Not IsNothing(.Cells(0).Value) Then
 
-                WTipo = ""
-                WNumero = ""
-                WImporte = ""
-                WDescripcion = ""
+                    XRenglon += 1
+                    WRenglon = ceros(XRenglon, 2)
 
-                Select Case Val(.Cells(0).Value)
-                    Case 1
-                        WTipo = "Efectivo"
-                        WBanco = ""
-                        WNombre = ""
-                    Case 2
-                        WTipo = "Dólares"
-                        WBanco = ""
-                        WNombre = ""
-                    Case 3
-                        WTipo = "Cheque"
-                        WNumero = .Cells(1).Value
-                        WDescripcion = .Cells(3).Value.ToString.Split("/")(0)
-                    Case Else
-                        Throw New Exception("No se ha podido identificar el Tipo de Depósito.")
-                        Exit Sub
-                End Select
+                    WTipo = ""
+                    WNumero = ""
+                    WImporte = ""
+                    WDescripcion = ""
 
-                WImporte = Val(Proceso.formatonumerico(.Cells(4).Value))
+                    Select Case Val(.Cells(0).Value)
+                        Case 1
+                            WTipo = "Efectivo"
+                            WBanco = ""
+                            WNombre = ""
+                        Case 2
+                            WTipo = "Dólares"
+                            WBanco = ""
+                            WNombre = ""
+                        Case 3
+                            WTipo = "Cheque"
+                            WNumero = .Cells(1).Value
+                            WDescripcion = .Cells(3).Value.ToString.Split("/")(0)
+                        Case Else
+                            Throw New Exception("No se ha podido identificar el Tipo de Depósito.")
+                            Exit Sub
+                    End Select
 
-                row = Tabla.NewRow
+                    WImporte = Val(Proceso.formatonumerico(.Cells(4).Value))
 
-                row.Item("Deposito") = WDeposito
-                row.Item("Renglon") = WRenglon
-                row.Item("Fecha") = WFecha
-                row.Item("Banco") = WBanco
-                row.Item("Nombre") = WNombre
-                row.Item("Total") = Val(WTotal)
-                row.Item("Titulo") = WTitulo
-                row.Item("Tipo") = WTipo
-                row.Item("Numero") = WNumero
-                row.Item("Banco") = WBanco
-                row.Item("Importe") = Val(WImporte)
-                row.Item("Descripcion") = WDescripcion
+                    row = Tabla.NewRow
 
-                Tabla.Rows.Add(row)
+                    row.Item("Deposito") = WDeposito
+                    row.Item("Renglon") = WRenglon
+                    row.Item("Fecha") = WFecha
+                    row.Item("Banco") = WBanco
+                    row.Item("Nombre") = WNombre
+                    row.Item("Total") = Val(WTotal)
+                    row.Item("Titulo") = WTitulo
+                    row.Item("Tipo") = WTipo
+                    row.Item("Numero") = WNumero
+                    row.Item("Banco") = WBanco
+                    row.Item("Importe") = Val(WImporte)
+                    row.Item("Descripcion") = WDescripcion
+
+                    Tabla.Rows.Add(row)
+
+                End If
 
             End With
 
