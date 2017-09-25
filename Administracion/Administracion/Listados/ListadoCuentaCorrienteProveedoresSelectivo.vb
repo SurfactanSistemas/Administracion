@@ -289,7 +289,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             If dr.HasRows Then
                 dr.Read()
 
-                Paridad = dr.Item("CambioDivisa")
+                Paridad = IIf(IsDBNull(dr.Item("CambioDivisa")), 0, dr.Item("CambioDivisa"))
+
+                If Val(Paridad) = 0 Then
+                    Throw New Exception("Paridad Inexistente")
+                End If
 
             Else
                 Throw New Exception("Paridad Inexistente")
