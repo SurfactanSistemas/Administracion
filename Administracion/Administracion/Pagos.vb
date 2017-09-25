@@ -54,23 +54,23 @@ Public Class Pagos
 
     Private Sub Pagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         
-        Dim gridPagosBuilder As New GridBuilder(gridPagos)
-        gridPagosBuilder.addTextColumn(0, "Tipo")
-        gridPagosBuilder.addTextColumn(1, "Letra")
-        gridPagosBuilder.addTextColumn(2, "Punto")
-        gridPagosBuilder.addTextColumn(3, "Número")
-        gridPagosBuilder.addTextColumn(4, "Importe")
-        gridPagosBuilder.addTextColumn(5, "Descripción")
+        'Dim gridPagosBuilder As New GridBuilder(gridPagos)
+        'gridPagosBuilder.addTextColumn(0, "Tipo")
+        'gridPagosBuilder.addTextColumn(1, "Letra")
+        'gridPagosBuilder.addTextColumn(2, "Punto")
+        'gridPagosBuilder.addTextColumn(3, "Número")
+        'gridPagosBuilder.addTextColumn(4, "Importe")
+        'gridPagosBuilder.addTextColumn(5, "Descripción")
 
-        Dim gridFormasBuilder As New GridBuilder(gridFormaPagos)
-        gridFormasBuilder.addTextColumn(0, "Tipo", False)
-        gridFormasBuilder.addTextColumn(1, "Número")
-        gridFormasBuilder.addTextColumn(2, "Fecha")
-        gridFormasBuilder.addTextColumn(3, "Banco")
-        gridFormasBuilder.addTextColumn(4, "Nombre")
-        gridFormasBuilder.addTextColumn(5, "Importe")
+        'Dim gridFormasBuilder As New GridBuilder(gridFormaPagos)
+        'gridFormasBuilder.addTextColumn(0, "Tipo", False)
+        'gridFormasBuilder.addTextColumn(1, "Número")
+        'gridFormasBuilder.addTextColumn(2, "Fecha")
+        'gridFormasBuilder.addTextColumn(3, "Banco")
+        'gridFormasBuilder.addTextColumn(4, "Nombre")
+        'gridFormasBuilder.addTextColumn(5, "Importe")
 
-        commonEventHandler.setIndexTab(Me)
+        'commonEventHandler.setIndexTab(Me)
 
         If Me.SoloLectura Then
             Dim botones As New List(Of Button) From {btnAgregar, btnCalcular, btnCarpetas, btnChequesTerceros, btnConsulta, btnCtaCte, btnImprimir, btnLimpiar}
@@ -212,7 +212,7 @@ Public Class Pagos
                 If Not IsNothing(row) And Not IsNothing(row.Cells(4).Value) Then
 
                     With row
-                        If Val(.Cells(4).Value) <> 0 And Trim(.Cells(0).Value) = "" Then
+                        If Val(.Cells(4).Value) <> 0 And WCuenta(row.Index, 1) = "" Then
                             MsgBox("No se ha imputado correctamente el concepto del pago", MsgBoxStyle.Critical)
                             Return False
                         End If
@@ -512,22 +512,27 @@ Public Class Pagos
     End Sub
 
     Private Sub mostrarOrdenDePago(ByVal orden As OrdenPago)
-        If IsNothing(orden) Then : Exit Sub : End If
-        'btnLimpiar.PerformClick()
+        If IsNothing(orden) Then
+            Throw New Exception("Orden de Pago no existente")
+            Exit Sub
+        End If
+        btnLimpiar.PerformClick()
         txtOrdenPago.Text = orden.nroOrden
         txtFecha.Text = Proceso._Normalizarfecha(orden.fecha)
         txtObservaciones.Text = orden.observaciones
-        'txtFechaParidad.Text = Proceso._Normalizarfecha(orden.fechaParidad)
-        mostrarProveedor(orden.proveedor)
-        mostrarBanco(orden.banco)
-
+        txtFechaParidad.Text = txtFecha.Text
         txtGanancias.Text = _NormalizarNumero(orden.retGanancias)
         txtIBCiudad.Text = _NormalizarNumero(orden.retIBCiudad)
         txtIngresosBrutos.Text = _NormalizarNumero(orden.retIB)
         txtIVA.Text = _NormalizarNumero(orden.retIVA)
+
+
+        mostrarProveedor(orden.proveedor)
+        mostrarBanco(orden.banco)
+        mostrarTipo(orden.tipo)
         mostrarPagos(orden.pagos)
         mostrarFormaPagos(orden.formaPagos)
-        mostrarTipo(orden.tipo)
+
         txtParidad.Text = _NormalizarNumero(orden.paridad)
         WCertificadoIb = orden.certIb
         WCertificadoIbCiudad = orden.certIbCABA
@@ -552,21 +557,42 @@ Public Class Pagos
     End Sub
 
     Private Sub mostrarPagos(ByVal pagos As List(Of Pago))
-        gridPagos.Rows.Clear()
+        'gridPagos.Rows.Clear()
+
+        Dim renglon As Integer = 0
+
         For Each pago As Pago In pagos
-            gridPagos.Rows.Add(pago.tipo, pago.letra, pago.punto, pago.numero, _NormalizarNumero(pago.importe), pago.descripcion, _NormalizarNumero(pago.impoNeto))
+            With gridPagos.Rows(renglon)
+                .Cells(0).Value = pago.tipo
+                .Cells(1).Value = pago.letra
+                .Cells(2).Value = pago.punto
+                .Cells(3).Value = pago.numero
+                .Cells(4).Value = _NormalizarNumero(pago.importe)
+                .Cells(5).Value = pago.descripcion
+                .Cells(6).Value = _NormalizarNumero(pago.impoNeto)
+            End With
+            renglon += 1
         Next
         'sumarImportes()
     End Sub
 
     Private Sub mostrarFormaPagos(ByVal formaPagos As List(Of FormaPago))
-        gridFormaPagos.Rows.Clear()
-
+        'gridFormaPagos.Rows.Clear()
+        
         Dim WRenglon As Integer = 0
 
         For Each formaPago As FormaPago In formaPagos
 
-            gridFormaPagos.Rows.Add(formaPago.tipo, formaPago.numero, formaPago.fecha, formaPago.banco, formaPago.nombre, _NormalizarNumero(formaPago.importe), "", formaPago.cuit)
+            With gridFormaPagos.Rows(WRenglon)
+                .Cells(0).Value = formaPago.tipo
+                .Cells(1).Value = formaPago.numero
+                .Cells(2).Value = formaPago.fecha
+                .Cells(3).Value = formaPago.banco
+                .Cells(4).Value = formaPago.nombre
+                .Cells(5).Value = _NormalizarNumero(formaPago.importe)
+                .Cells(6).Value = ""
+                .Cells(7).Value = formaPago.cuit
+            End With
 
             WClavesOP(WRenglon) = Proceso.ceros(txtOrdenPago.Text, 6) & Proceso.ceros(WRenglon + 2, 2)
 
@@ -1549,12 +1575,14 @@ Public Class Pagos
         gridPagos.Rows.Clear()
         gridFormaPagos.Rows.Clear()
 
-        For i = 1 To XMAXFILAS
+        If gridPagos.ColumnCount > 0 And gridFormaPagos.ColumnCount > 0 Then
+            For i = 1 To XMAXFILAS
 
-            gridPagos.Rows.Add("", "", "", "", "", "", "")
-            gridFormaPagos.Rows.Add("", "", "", "", "", "", "", "", "")
+                gridPagos.Rows.Add("", "", "", "", "", "", "")
+                gridFormaPagos.Rows.Add("", "", "", "", "", "", "", "", "")
 
-        Next
+            Next
+        End If
 
     End Sub
 
@@ -1630,7 +1658,7 @@ Public Class Pagos
         fecha = _Normalizarfecha(fecha)
         Dim _Paridad As String = "0"
         Dim cn As New SqlConnection()
-        Dim cm As New SqlCommand("SELECT TOP 1 CambioDivisa FROM Cambios WHERE Fecha = '" & Trim(fecha) & "'")
+        Dim cm As New SqlCommand("SELECT CambioDivisa FROM Cambios WHERE Fecha = '" & Trim(fecha) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1647,6 +1675,8 @@ Public Class Pagos
                             _Paridad = _NormalizarNumero(.Item("CambioDivisa").ToString())
                         End If
 
+                    Else
+                        MsgBox("No hay Paridad cargada para la fecha " & fecha, MsgBoxStyle.Critical)
                     End If
                 End With
             End If
@@ -1669,7 +1699,7 @@ Public Class Pagos
         Return CustomConvert.asStringWithDecimalPlaces(numero, decimales)
     End Function
 
-    Private Function _ActualizarNumeroCertificado(ByVal Codigo) As Integer
+    Private Function _TraerNumeroCertificado(ByVal Codigo) As Integer
         Dim WNumero As Integer = 0
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Numero) as Numero FROM Numero WHERE Codigo = '" & Val(Codigo) & "'")
@@ -1686,7 +1716,12 @@ Public Class Pagos
 
             If dr.HasRows Then
                 dr.Read()
-                WNumero = dr.Item("Numero") + 1
+                WNumero = dr.Item("Numero")
+            Else
+                If Not IsNothing(trans) Then
+                    trans.Rollback()
+                End If
+                Throw New Exception("No se pudo recuperar el Número de Certificado correspondiente al codigo: " & Codigo)
             End If
 
             dr.Close()
@@ -1759,10 +1794,27 @@ Public Class Pagos
 
         ' Damos de alta los numero de Certificados.
         Try
-            WCertificadoGan = _ActualizarNumeroCertificado("91")
-            WCertificadoIb = _ActualizarNumeroCertificado("92")
-            WCertificadoIbCiudad = _ActualizarNumeroCertificado("94")
-            WCertificadoIva = _ActualizarNumeroCertificado("93")
+            WCertificadoGan = 0
+            WCertificadoIb = 0
+            WCertificadoIbCiudad = 0
+            WCertificadoIva = 0
+
+            If Val(txtGanancias.Text) <> 0 Then
+                WCertificadoGan = _TraerNumeroCertificado("91")
+            End If
+
+            If Val(txtIngresosBrutos.Text) <> 0 Then
+                WCertificadoIb = _TraerNumeroCertificado("92")
+            End If
+
+            If Val(txtIBCiudad.Text) <> 0 Then
+                WCertificadoIbCiudad = _TraerNumeroCertificado("94")
+            End If
+
+            If Val(txtIVA.Text) <> 0 Then
+                WCertificadoIva = _TraerNumeroCertificado("93")
+            End If
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Exit Sub
@@ -2689,6 +2741,7 @@ Public Class Pagos
                 Exit Sub
             Case 4
                 column = 1
+                sumarImportes()
             Case 5
                 nombre = "US$"
                 column = 4
@@ -2800,32 +2853,74 @@ Public Class Pagos
         sumarImportes()
     End Sub
 
+    Private Function _ProximaFilaVaciaPagos() As Integer
+        Dim XRow As Integer = 0
+
+        For i = 0 To XMAXFILAS - 1
+            If gridPagos.Rows(i).Cells(0).Value = "" Then
+                XRow = i
+                Exit For
+            End If
+        Next
+
+        Return XRow
+    End Function
+
+
+    Private Function _ProximaFilaVaciaFormaPagos() As Integer
+        Dim XRow As Integer = 0
+
+        For i = 0 To XMAXFILAS - 1
+            If gridFormaPagos.Rows(i).Cells(0).Value = "" Then
+                XRow = i
+                Exit For
+            End If
+        Next
+
+        Return XRow
+    End Function
+
     Private Sub optTransferencias_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optTransferencias.CheckedChanged
         If optTransferencias.Checked Then
-            txtBanco.Enabled = True
-            txtBanco.Empty = False
-            txtNombreBanco.Empty = False
-            txtBanco.Text = ""
-            txtBanco.Focus()
-            gridPagos.Rows.Clear()
-            gridPagos.Rows.Add("", "", "", "", "", "")
-            gridPagos.Columns(5).ReadOnly = False
+
+            If Val(txtBanco.Text) = 0 Then
+                txtBanco.Enabled = True
+                txtBanco.Focus()
+                Exit Sub
+            End If
+
+            With gridPagos
+                '.Rows.Clear()
+                Dim r = _ProximaFilaVaciaPagos()
+                .CurrentCell = .Rows(r).Cells(4)
+                .Focus()
+            End With
+            'gridPagos.Columns(5).ReadOnly = False
         End If
     End Sub
 
     Private Sub optAnticipos_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optAnticipos.CheckedChanged
         If optAnticipos.Checked Then
-            gridPagos.Rows.Clear()
-            gridPagos.Rows.Add("", "", "", "", "0.00", txtRazonSocial.Text)
-            gridPagos.Columns(5).ReadOnly = True
+            'gridPagos.Rows.Clear()
+            _LimpiarGrillas()
+            With gridPagos
+                '.Rows.Clear()
+                Dim r = _ProximaFilaVaciaPagos()
+                .Rows(r).Cells(5).Value = txtRazonSocial.Text
+                .CurrentCell = .Rows(r).Cells(4)
+                .Focus()
+            End With
+            'gridPagos.Columns(5).ReadOnly = True
         End If
     End Sub
 
     Private Sub optVarios_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optVarios.CheckedChanged
         If optVarios.Checked Then
+            _LimpiarGrillas()
             With gridPagos
-                .Rows.Clear()
-                Dim r = .Rows.Add("", "", "", "", "", txtObservaciones.Text)
+                '.Rows.Clear()
+                Dim r = _ProximaFilaVaciaPagos() '.Rows.Add("", "", "", "", "", txtObservaciones.Text)
+                .Rows(r).Cells(5).Value = txtObservaciones.Text
                 .CurrentCell = .Rows(r).Cells(4)
                 .Focus()
             End With
@@ -2836,17 +2931,26 @@ Public Class Pagos
 
     Private Sub optChequeRechazado_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optChequeRechazado.CheckedChanged
         If optChequeRechazado.Checked Then
-            gridPagos.Rows.Clear()
-            gridPagos.Rows.Add("", "", "", "", "", "")
-            gridPagos.Columns(5).ReadOnly = False
+            _LimpiarGrillas()
+            With gridPagos
+                '.Rows.Clear()
+                Dim r = _ProximaFilaVaciaPagos()
+                .Rows(r).Cells(0).Value = "00"
+                .CurrentCell = .Rows(r).Cells(4)
+                .Focus()
+            End With
+            'gridPagos.Rows.Clear()
+            'gridPagos.Rows.Add("", "", "", "", "", "")
+            'gridPagos.Columns(5).ReadOnly = False
         End If
     End Sub
 
     Private Sub optCtaCte_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optCtaCte.CheckedChanged
         If optCtaCte.Checked Then
-            gridPagos.Rows.Clear()
+            _LimpiarGrillas()
+            'gridPagos.Rows.Clear()
             Try
-                gridPagos.Columns(5).ReadOnly = True
+                'gridPagos.Columns(5).ReadOnly = True
             Catch ex As ArgumentOutOfRangeException
             End Try
         End If
@@ -2861,7 +2965,18 @@ Public Class Pagos
         If e.KeyData = Keys.Enter Then
             If Trim(txtOrdenPago.Text) <> "" Then
                 txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
-                mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
+
+                Try
+                    mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
+                Catch ex As Exception
+
+                    Dim ord = txtOrdenPago.Text
+
+                    btnLimpiar.PerformClick()
+
+                    txtOrdenPago.Text = ord
+
+                End Try
 
                 If txtProveedor.Text <> "" Then
                     txtProveedor.Focus()
@@ -3095,7 +3210,34 @@ Public Class Pagos
                     End If
 
                     Select Case iCol
+                        Case 4
+                            sumarImportes()
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                         Case 5
+
+                            If optVarios.Checked Then
+
+                                WRowVarios = .CurrentCell.RowIndex
+
+                                WProceso.Text = 1
+                                pnlPedirCuenta.Visible = True
+                                txtCuenta.Text = WCuenta(WRowVarios, WProceso.Text)
+                                txtCuenta.Focus()
+
+                            ElseIf optTransferencias.Checked Then
+
+                                Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(txtBanco.Text)
+
+                                If Not IsNothing(banco) Then
+                                    WCuenta(.CurrentCell.RowIndex, 1) = banco.cuenta.id
+                                Else
+                                    WCuenta(.CurrentCell.RowIndex, 1) = "999999"
+                                End If
+
+                            Else
+                                WCuenta(.CurrentCell.RowIndex, 1) = "111"
+                            End If
+
                             Try
                                 .CurrentCell = .Rows(iRow + 1).Cells(0)
                             Catch ex As Exception
@@ -3105,6 +3247,8 @@ Public Class Pagos
                         Case Else
                             .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                     End Select
+
+                    Return True
                 ElseIf msg.WParam.ToInt32() = Keys.Escape Then
 
                     .CurrentCell.Value = ""
@@ -5961,7 +6105,7 @@ Public Class Pagos
             End With
         Next
 
-        txtIBCiudad.Text = acumCaba
+        txtIBCiudad.Text = _NormalizarNumero(acumCaba)
 
     End Sub
 
@@ -6370,12 +6514,13 @@ Public Class Pagos
 
                 Select Case Val(WProceso.Text)
                     Case 1
-                        If gridPagos.CurrentCell.RowIndex < XMAXFILAS - 1 Then
-                            gridFormaPagos.CurrentCell = gridFormaPagos.Rows(WRowVarios + 1).Cells(0)
-                        Else
-                            gridFormaPagos.CurrentCell = gridFormaPagos.Rows(WRowVarios).Cells(0)
-                        End If
-                        gridFormaPagos.Focus()
+                        Try
+                            gridPagos.CurrentCell = gridPagos.Rows(WRowVarios + 1).Cells(0)
+                        Catch ex As Exception
+                            gridPagos.CurrentCell = gridPagos.Rows(WRowVarios).Cells(0)
+                        End Try
+
+                        gridPagos.Focus()
                     Case 2
                         gridFormaPagos.CurrentCell = gridFormaPagos.Rows(WRowVarios).Cells(5)
                         gridFormaPagos.Focus()
