@@ -23,18 +23,22 @@ Partial Class Depositos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridCheques = New System.Windows.Forms.DataGridView()
+        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtImporte = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel4 = New Administracion.CustomLabel()
@@ -48,18 +52,14 @@ Partial Class Depositos
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.lstFiltrado = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnChequeTerceros = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnImpresion = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
-        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gridCheques, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -70,11 +70,56 @@ Partial Class Depositos
         Me.gridCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCheques.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tipo, Me.numero, Me.fecha, Me.nombre, Me.importe, Me.ClaveCheque})
         Me.gridCheques.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.gridCheques.Location = New System.Drawing.Point(25, 168)
+        Me.gridCheques.Location = New System.Drawing.Point(25, 136)
         Me.gridCheques.Name = "gridCheques"
-        Me.gridCheques.Size = New System.Drawing.Size(743, 238)
+        Me.gridCheques.Size = New System.Drawing.Size(743, 203)
         Me.gridCheques.StandardTab = True
         Me.gridCheques.TabIndex = 0
+        '
+        'tipo
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.tipo.DefaultCellStyle = DataGridViewCellStyle3
+        Me.tipo.HeaderText = "Tipo"
+        Me.tipo.MaxInputLength = 31
+        Me.tipo.Name = "tipo"
+        Me.tipo.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.tipo.Width = 50
+        '
+        'numero
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.numero.DefaultCellStyle = DataGridViewCellStyle4
+        Me.numero.HeaderText = "Numero"
+        Me.numero.Name = "numero"
+        Me.numero.ReadOnly = True
+        '
+        'fecha
+        '
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.Name = "fecha"
+        Me.fecha.ReadOnly = True
+        '
+        'nombre
+        '
+        Me.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.nombre.HeaderText = "Nombre"
+        Me.nombre.Name = "nombre"
+        Me.nombre.ReadOnly = True
+        '
+        'importe
+        '
+        Me.importe.HeaderText = "Importe"
+        Me.importe.Name = "importe"
+        Me.importe.ReadOnly = True
+        Me.importe.Width = 110
+        '
+        'ClaveCheque
+        '
+        Me.ClaveCheque.HeaderText = "ClaveCheque"
+        Me.ClaveCheque.Name = "ClaveCheque"
+        Me.ClaveCheque.Visible = False
         '
         'Panel1
         '
@@ -132,8 +177,21 @@ Partial Class Depositos
         Me.Panel2.Controls.Add(Me.txtAyuda)
         Me.Panel2.Location = New System.Drawing.Point(0, 53)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(793, 461)
+        Me.Panel2.Size = New System.Drawing.Size(793, 391)
         Me.Panel2.TabIndex = 18
+        '
+        'lstSeleccion
+        '
+        Me.lstSeleccion.Cleanable = False
+        Me.lstSeleccion.EnterIndex = -1
+        Me.lstSeleccion.FormattingEnabled = True
+        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
+        Me.lstSeleccion.LabelAssociationKey = -1
+        Me.lstSeleccion.Location = New System.Drawing.Point(395, 18)
+        Me.lstSeleccion.Name = "lstSeleccion"
+        Me.lstSeleccion.Size = New System.Drawing.Size(373, 108)
+        Me.lstSeleccion.TabIndex = 14
+        Me.lstSeleccion.Visible = False
         '
         'txtFechaAcreditacion
         '
@@ -156,27 +214,6 @@ Partial Class Depositos
         Me.txtFecha.TabIndex = 17
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFecha.ValidatingType = GetType(Date)
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Location = New System.Drawing.Point(395, 18)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(372, 20)
-        Me.txtAyuda.TabIndex = 19
-        Me.txtAyuda.Visible = False
-        '
-        'lstSeleccion
-        '
-        Me.lstSeleccion.Cleanable = False
-        Me.lstSeleccion.EnterIndex = -1
-        Me.lstSeleccion.FormattingEnabled = True
-        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
-        Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(395, 18)
-        Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(373, 134)
-        Me.lstSeleccion.TabIndex = 14
-        Me.lstSeleccion.Visible = False
         '
         'txtImporte
         '
@@ -245,7 +282,7 @@ Partial Class Depositos
         Me.lblTotal.BackColor = System.Drawing.SystemColors.Control
         Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTotal.ControlAssociationKey = -1
-        Me.lblTotal.Location = New System.Drawing.Point(551, 421)
+        Me.lblTotal.Location = New System.Drawing.Point(551, 348)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(216, 22)
         Me.lblTotal.TabIndex = 2
@@ -271,7 +308,7 @@ Partial Class Depositos
         Me.CustomLabel1.BackColor = System.Drawing.SystemColors.Control
         Me.CustomLabel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Location = New System.Drawing.Point(327, 421)
+        Me.CustomLabel1.Location = New System.Drawing.Point(327, 348)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(218, 22)
         Me.CustomLabel1.TabIndex = 1
@@ -327,7 +364,7 @@ Partial Class Depositos
         Me.lstFiltrado.LabelAssociationKey = -1
         Me.lstFiltrado.Location = New System.Drawing.Point(395, 40)
         Me.lstFiltrado.Name = "lstFiltrado"
-        Me.lstFiltrado.Size = New System.Drawing.Size(373, 108)
+        Me.lstFiltrado.Size = New System.Drawing.Size(373, 82)
         Me.lstFiltrado.TabIndex = 20
         Me.lstFiltrado.Visible = False
         '
@@ -339,9 +376,17 @@ Partial Class Depositos
         Me.lstConsulta.LabelAssociationKey = -1
         Me.lstConsulta.Location = New System.Drawing.Point(395, 40)
         Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(373, 108)
+        Me.lstConsulta.Size = New System.Drawing.Size(373, 82)
         Me.lstConsulta.TabIndex = 8
         Me.lstConsulta.Visible = False
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(395, 18)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(372, 20)
+        Me.txtAyuda.TabIndex = 19
+        Me.txtAyuda.Visible = False
         '
         'btnCerrar
         '
@@ -357,7 +402,7 @@ Partial Class Depositos
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(400, 530)
+        Me.btnCerrar.Location = New System.Drawing.Point(400, 455)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(110, 50)
         Me.btnCerrar.TabIndex = 13
@@ -378,7 +423,7 @@ Partial Class Depositos
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(164, 530)
+        Me.btnConsulta.Location = New System.Drawing.Point(164, 455)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(110, 50)
         Me.btnConsulta.TabIndex = 12
@@ -399,7 +444,7 @@ Partial Class Depositos
         Me.btnChequeTerceros.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnChequeTerceros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnChequeTerceros.LabelAssociationKey = -1
-        Me.btnChequeTerceros.Location = New System.Drawing.Point(634, 530)
+        Me.btnChequeTerceros.Location = New System.Drawing.Point(634, 455)
         Me.btnChequeTerceros.Name = "btnChequeTerceros"
         Me.btnChequeTerceros.Size = New System.Drawing.Size(110, 50)
         Me.btnChequeTerceros.TabIndex = 11
@@ -420,7 +465,7 @@ Partial Class Depositos
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(518, 530)
+        Me.btnLimpiar.Location = New System.Drawing.Point(518, 455)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(110, 50)
         Me.btnLimpiar.TabIndex = 11
@@ -441,7 +486,7 @@ Partial Class Depositos
         Me.btnImpresion.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImpresion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImpresion.LabelAssociationKey = -1
-        Me.btnImpresion.Location = New System.Drawing.Point(282, 530)
+        Me.btnImpresion.Location = New System.Drawing.Point(282, 455)
         Me.btnImpresion.Name = "btnImpresion"
         Me.btnImpresion.Size = New System.Drawing.Size(110, 50)
         Me.btnImpresion.TabIndex = 10
@@ -462,63 +507,18 @@ Partial Class Depositos
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(46, 530)
+        Me.btnAgregar.Location = New System.Drawing.Point(46, 455)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(110, 50)
         Me.btnAgregar.TabIndex = 9
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
-        'tipo
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.tipo.DefaultCellStyle = DataGridViewCellStyle1
-        Me.tipo.HeaderText = "Tipo"
-        Me.tipo.MaxInputLength = 31
-        Me.tipo.Name = "tipo"
-        Me.tipo.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.tipo.Width = 50
-        '
-        'numero
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.numero.DefaultCellStyle = DataGridViewCellStyle2
-        Me.numero.HeaderText = "Numero"
-        Me.numero.Name = "numero"
-        Me.numero.ReadOnly = True
-        '
-        'fecha
-        '
-        Me.fecha.HeaderText = "Fecha"
-        Me.fecha.Name = "fecha"
-        Me.fecha.ReadOnly = True
-        '
-        'nombre
-        '
-        Me.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.nombre.HeaderText = "Nombre"
-        Me.nombre.Name = "nombre"
-        Me.nombre.ReadOnly = True
-        '
-        'importe
-        '
-        Me.importe.HeaderText = "Importe"
-        Me.importe.Name = "importe"
-        Me.importe.ReadOnly = True
-        Me.importe.Width = 110
-        '
-        'ClaveCheque
-        '
-        Me.ClaveCheque.HeaderText = "ClaveCheque"
-        Me.ClaveCheque.Name = "ClaveCheque"
-        Me.ClaveCheque.Visible = False
-        '
         'Depositos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(790, 589)
+        Me.ClientSize = New System.Drawing.Size(790, 519)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnCerrar)
@@ -528,9 +528,10 @@ Partial Class Depositos
         Me.Controls.Add(Me.btnImpresion)
         Me.Controls.Add(Me.btnAgregar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Location = New System.Drawing.Point(5, 20)
         Me.MaximizeBox = False
         Me.Name = "Depositos"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         CType(Me.gridCheques, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
