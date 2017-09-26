@@ -4281,7 +4281,7 @@ Public Class Pagos
         Dim WRenglon As Integer = 0
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -4579,7 +4579,7 @@ Public Class Pagos
         Dim WRenglon As Integer = 0
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -4903,7 +4903,7 @@ Public Class Pagos
         Dim WRenglon As Integer = 0
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
 
@@ -5050,6 +5050,7 @@ Public Class Pagos
                     End If
                 End If
 
+                WImpre4 = Val(.Cells(6).Value) ' ImpoNeto
                 XImpre4 = WImpre4
 
                 If Val(ZFechaCompa) >= 20071201 Then
