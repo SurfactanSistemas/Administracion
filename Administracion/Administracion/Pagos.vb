@@ -1647,6 +1647,9 @@ Public Class Pagos
         WTipoIbCaba = ""
         WPorceIb = ""
         WPorceIbCaba = ""
+        txtFechaAux.Visible = False
+
+        optCtaCte.Checked = True
 
     End Sub
 
@@ -2906,7 +2909,7 @@ Public Class Pagos
             With gridPagos
                 '.Rows.Clear()
                 Dim r = _ProximaFilaVaciaPagos()
-                .Rows(r).Cells(5).Value = txtRazonSocial.Text
+                '.Rows(r).Cells(5).Value = txtRazonSocial.Text
                 .CurrentCell = .Rows(r).Cells(4)
                 .Focus()
             End With
@@ -6803,4 +6806,23 @@ Public Class Pagos
 
     End Sub
 
+    Private Sub txtFechaAux_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaAux.Leave
+        If WRow >= 0 And Wcol >= 0 Then
+            If Trim(txtFechaAux.Text.Replace("/", "")) <> "" And Trim(txtFechaAux.Text).Length = 10 Then
+
+                With gridFormaPagos
+                    .Rows(WRow).Cells(2).Value = txtFechaAux.Text
+
+                    .CurrentCell = .Rows(WRow).Cells(3)
+                    .Focus()
+
+                End With
+
+            End If
+
+            txtFechaAux.Visible = False
+            txtFechaAux.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
+
+        End If
+    End Sub
 End Class
