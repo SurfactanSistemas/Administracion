@@ -19,7 +19,7 @@ Public Class Pagos
     Dim WClavesOP(100) As String
     Dim WCuenta(100, 2) As String
     Dim _TipoConsulta As Integer = Nothing
-    Private WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
+    Private WCertificadoGan, WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
 
     Private Const XMAXFILAS = 15
     Private Const YMARGEN = 250
@@ -545,11 +545,11 @@ Public Class Pagos
         Select Case tipo
             Case 1
                 optCtaCte.Checked = True
-            Case 3
-                optChequeRechazado.Checked = True
-            Case 4
-                optAnticipos.Checked = True
             Case 5
+                optChequeRechazado.Checked = True
+            Case 2
+                optAnticipos.Checked = True
+            Case 4
                 optTransferencias.Checked = True
             Case Else
                 optVarios.Checked = True
@@ -1772,7 +1772,7 @@ Public Class Pagos
     End Function
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
-        Dim WCertificadoGan, WCertificadoIb, WCertificadoIbCiudad, WCertificadoIva, XParidad, WEntra
+        Dim XParidad, WEntra
         Dim XOrden, XRenglon, XProveedor, XFecha, XFechaOrd, XImporte, XRetencion, XRetotra, XRetIbCiudad, XRetIva, XObservaciones, XCuenta, XTipoOrd, ZValida, ZLetra, ZTipo, ZPunto, ZNumero, XTipo1, XLetra1, XPunto1, XNumero1, XImporte1, XObservaciones2, XImpoNeto, XTipo2, XNumero2, XFecha2, XFechaOrd2, XBanco2, XImporte2, XEmpresa, XClave, XRetganancias, XConcepto, XConsecionaria, XImpolist, ClaveRecibo, XCuit, ImporteCheque, NumeroCheque, FechaCheque, BancoCheque, WLetra, WTipo, WPunto, WNumero, WImporte, ZSql, XClaveCtaprv, XTipoRecibo, XClaveRecibo, XClaveCtaCte
         Dim _banco As Banco = Nothing
         Dim cn As SqlConnection = New SqlConnection()
@@ -3234,8 +3234,10 @@ Public Class Pagos
                                     WCuenta(.CurrentCell.RowIndex, 1) = "999999"
                                 End If
 
-                            Else
+                            ElseIf optChequeRechazado.Checked Then
                                 WCuenta(.CurrentCell.RowIndex, 1) = "111"
+                            Else
+                                WCuenta(.CurrentCell.RowIndex, 1) = ""
                             End If
 
                             Try
