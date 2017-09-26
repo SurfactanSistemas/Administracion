@@ -56,9 +56,6 @@ Partial Class Pagos
         Me.XClave = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.XCuil = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnDifeCambio = New System.Windows.Forms.Button()
         Me.pnlPedirCuenta = New System.Windows.Forms.Panel()
@@ -118,7 +115,6 @@ Partial Class Pagos
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.pnlPedirCuenta.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -133,7 +129,7 @@ Partial Class Pagos
         Me.GroupBox1.Controls.Add(Me.optCtaCte)
         Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(22, 120)
+        Me.GroupBox1.Location = New System.Drawing.Point(22, 127)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(259, 99)
         Me.GroupBox1.TabIndex = 34
@@ -199,7 +195,7 @@ Partial Class Pagos
         Me.gridPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Importe, Me.Descripcion, Me.ImpoNeto, Me.CuentaContable})
         Me.gridPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.gridPagos.Location = New System.Drawing.Point(16, 229)
+        Me.gridPagos.Location = New System.Drawing.Point(16, 236)
         Me.gridPagos.Name = "gridPagos"
         Me.gridPagos.RowHeadersWidth = 10
         Me.gridPagos.Size = New System.Drawing.Size(396, 143)
@@ -280,7 +276,7 @@ Partial Class Pagos
         Me.gridFormaPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.gridFormaPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo2, Me.Numero2, Me.Fecha2, Me.Banco2, Me.Nombre, Me.Importe2, Me.XClave, Me.XCuil, Me.Cuenta})
         Me.gridFormaPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.gridFormaPagos.Location = New System.Drawing.Point(414, 229)
+        Me.gridFormaPagos.Location = New System.Drawing.Point(414, 236)
         Me.gridFormaPagos.Name = "gridFormaPagos"
         Me.gridFormaPagos.RowHeadersWidth = 10
         Me.gridFormaPagos.Size = New System.Drawing.Size(398, 143)
@@ -364,38 +360,6 @@ Partial Class Pagos
         Me.Cuenta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Cuenta.Visible = False
         '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(0, -1)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(828, 50)
-        Me.Panel1.TabIndex = 72
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(651, 10)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(156, 26)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "SURFACTAN S.A."
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(22, 14)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(226, 19)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Ingreso de Pagos a Proveedores"
-        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
@@ -444,9 +408,9 @@ Partial Class Pagos
         Me.Panel2.Controls.Add(Me.CustomLabel10)
         Me.Panel2.Controls.Add(Me.CustomLabel9)
         Me.Panel2.Controls.Add(Me.txtIBCiudad)
-        Me.Panel2.Location = New System.Drawing.Point(-1, 49)
+        Me.Panel2.Location = New System.Drawing.Point(-1, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(828, 439)
+        Me.Panel2.Size = New System.Drawing.Size(828, 447)
         Me.Panel2.TabIndex = 73
         '
         'btnDifeCambio
@@ -455,7 +419,7 @@ Partial Class Pagos
         Me.btnDifeCambio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDifeCambio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDifeCambio.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnDifeCambio.Location = New System.Drawing.Point(44, 381)
+        Me.btnDifeCambio.Location = New System.Drawing.Point(44, 388)
         Me.btnDifeCambio.Name = "btnDifeCambio"
         Me.btnDifeCambio.Size = New System.Drawing.Size(148, 45)
         Me.btnDifeCambio.TabIndex = 126
@@ -466,7 +430,7 @@ Partial Class Pagos
         'pnlPedirCuenta
         '
         Me.pnlPedirCuenta.Controls.Add(Me.GroupBox2)
-        Me.pnlPedirCuenta.Location = New System.Drawing.Point(306, 274)
+        Me.pnlPedirCuenta.Location = New System.Drawing.Point(306, 281)
         Me.pnlPedirCuenta.Name = "pnlPedirCuenta"
         Me.pnlPedirCuenta.Size = New System.Drawing.Size(217, 76)
         Me.pnlPedirCuenta.TabIndex = 125
@@ -513,7 +477,7 @@ Partial Class Pagos
         '
         Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFechaAux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtFechaAux.Location = New System.Drawing.Point(542, 254)
+        Me.txtFechaAux.Location = New System.Drawing.Point(542, 261)
         Me.txtFechaAux.Margin = New System.Windows.Forms.Padding(0)
         Me.txtFechaAux.Mask = "00/00/0000"
         Me.txtFechaAux.MaximumSize = New System.Drawing.Size(60, 15)
@@ -532,7 +496,7 @@ Partial Class Pagos
         Me.lstSeleccion.FormattingEnabled = True
         Me.lstSeleccion.Items.AddRange(New Object() {"Proveedores", "Cuentas Corrientes", "Cheques Terceros", "Documentos", "Cuentas Contables"})
         Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(477, 7)
+        Me.lstSeleccion.Location = New System.Drawing.Point(477, 14)
         Me.lstSeleccion.Name = "lstSeleccion"
         Me.lstSeleccion.Size = New System.Drawing.Size(333, 134)
         Me.lstSeleccion.TabIndex = 66
@@ -544,7 +508,7 @@ Partial Class Pagos
         Me.CLBFiltrado.EnterIndex = -1
         Me.CLBFiltrado.FormattingEnabled = True
         Me.CLBFiltrado.LabelAssociationKey = -1
-        Me.CLBFiltrado.Location = New System.Drawing.Point(477, 31)
+        Me.CLBFiltrado.Location = New System.Drawing.Point(477, 38)
         Me.CLBFiltrado.Name = "CLBFiltrado"
         Me.CLBFiltrado.Size = New System.Drawing.Size(333, 108)
         Me.CLBFiltrado.TabIndex = 73
@@ -552,7 +516,7 @@ Partial Class Pagos
         '
         'txtFechaParidad
         '
-        Me.txtFechaParidad.Location = New System.Drawing.Point(384, 119)
+        Me.txtFechaParidad.Location = New System.Drawing.Point(384, 126)
         Me.txtFechaParidad.Mask = "00/00/0000"
         Me.txtFechaParidad.Name = "txtFechaParidad"
         Me.txtFechaParidad.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -562,7 +526,7 @@ Partial Class Pagos
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(255, 12)
+        Me.txtFecha.Location = New System.Drawing.Point(255, 19)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -576,7 +540,7 @@ Partial Class Pagos
         Me.CustomLabel12.ControlAssociationKey = 13
         Me.CustomLabel12.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel12.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel12.Location = New System.Drawing.Point(305, 176)
+        Me.CustomLabel12.Location = New System.Drawing.Point(305, 183)
         Me.CustomLabel12.Name = "CustomLabel12"
         Me.CustomLabel12.Size = New System.Drawing.Size(35, 18)
         Me.CustomLabel12.TabIndex = 67
@@ -589,7 +553,7 @@ Partial Class Pagos
         Me.CustomLabel13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CustomLabel13.ControlAssociationKey = -1
         Me.CustomLabel13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomLabel13.Location = New System.Drawing.Point(414, 404)
+        Me.CustomLabel13.Location = New System.Drawing.Point(414, 411)
         Me.CustomLabel13.Name = "CustomLabel13"
         Me.CustomLabel13.Size = New System.Drawing.Size(396, 22)
         Me.CustomLabel13.TabIndex = 71
@@ -602,7 +566,7 @@ Partial Class Pagos
         Me.CustomLabel1.ControlAssociationKey = 1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(22, 13)
+        Me.CustomLabel1.Location = New System.Drawing.Point(22, 20)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(99, 18)
         Me.CustomLabel1.TabIndex = 0
@@ -613,7 +577,7 @@ Partial Class Pagos
         Me.lblDiferencia.BackColor = System.Drawing.SystemColors.Control
         Me.lblDiferencia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDiferencia.ControlAssociationKey = -1
-        Me.lblDiferencia.Location = New System.Drawing.Point(534, 377)
+        Me.lblDiferencia.Location = New System.Drawing.Point(534, 384)
         Me.lblDiferencia.Name = "lblDiferencia"
         Me.lblDiferencia.Size = New System.Drawing.Size(93, 22)
         Me.lblDiferencia.TabIndex = 70
@@ -626,7 +590,7 @@ Partial Class Pagos
         Me.CustomLabel2.ControlAssociationKey = 2
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(205, 13)
+        Me.CustomLabel2.Location = New System.Drawing.Point(205, 20)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(44, 18)
         Me.CustomLabel2.TabIndex = 1
@@ -637,7 +601,7 @@ Partial Class Pagos
         Me.lblFormaPagos.BackColor = System.Drawing.SystemColors.Control
         Me.lblFormaPagos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblFormaPagos.ControlAssociationKey = -1
-        Me.lblFormaPagos.Location = New System.Drawing.Point(716, 377)
+        Me.lblFormaPagos.Location = New System.Drawing.Point(716, 384)
         Me.lblFormaPagos.Name = "lblFormaPagos"
         Me.lblFormaPagos.Size = New System.Drawing.Size(93, 22)
         Me.lblFormaPagos.TabIndex = 69
@@ -650,7 +614,7 @@ Partial Class Pagos
         Me.CustomLabel3.ControlAssociationKey = 3
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(48, 42)
+        Me.CustomLabel3.Location = New System.Drawing.Point(48, 49)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(73, 18)
         Me.CustomLabel3.TabIndex = 2
@@ -661,7 +625,7 @@ Partial Class Pagos
         Me.lblPagos.BackColor = System.Drawing.SystemColors.Control
         Me.lblPagos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblPagos.ControlAssociationKey = -1
-        Me.lblPagos.Location = New System.Drawing.Point(308, 377)
+        Me.lblPagos.Location = New System.Drawing.Point(308, 384)
         Me.lblPagos.Name = "lblPagos"
         Me.lblPagos.Size = New System.Drawing.Size(104, 22)
         Me.lblPagos.TabIndex = 68
@@ -674,7 +638,7 @@ Partial Class Pagos
         Me.CustomLabel4.ControlAssociationKey = 4
         Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(22, 69)
+        Me.CustomLabel4.Location = New System.Drawing.Point(22, 76)
         Me.CustomLabel4.Name = "CustomLabel4"
         Me.CustomLabel4.Size = New System.Drawing.Size(99, 18)
         Me.CustomLabel4.TabIndex = 3
@@ -686,7 +650,7 @@ Partial Class Pagos
         Me.CustomLabel5.ControlAssociationKey = 5
         Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(76, 96)
+        Me.CustomLabel5.Location = New System.Drawing.Point(76, 103)
         Me.CustomLabel5.Name = "CustomLabel5"
         Me.CustomLabel5.Size = New System.Drawing.Size(45, 18)
         Me.CustomLabel5.TabIndex = 4
@@ -698,7 +662,7 @@ Partial Class Pagos
         Me.txtOrdenPago.Empty = True
         Me.txtOrdenPago.EnterIndex = 1
         Me.txtOrdenPago.LabelAssociationKey = 1
-        Me.txtOrdenPago.Location = New System.Drawing.Point(124, 12)
+        Me.txtOrdenPago.Location = New System.Drawing.Point(124, 19)
         Me.txtOrdenPago.MaxLength = 6
         Me.txtOrdenPago.Name = "txtOrdenPago"
         Me.txtOrdenPago.Size = New System.Drawing.Size(75, 20)
@@ -712,7 +676,7 @@ Partial Class Pagos
         Me.txtProveedor.Empty = False
         Me.txtProveedor.EnterIndex = 3
         Me.txtProveedor.LabelAssociationKey = 3
-        Me.txtProveedor.Location = New System.Drawing.Point(124, 39)
+        Me.txtProveedor.Location = New System.Drawing.Point(124, 46)
         Me.txtProveedor.MaxLength = 11
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(95, 20)
@@ -727,7 +691,7 @@ Partial Class Pagos
         Me.txtRazonSocial.Empty = False
         Me.txtRazonSocial.EnterIndex = -1
         Me.txtRazonSocial.LabelAssociationKey = 3
-        Me.txtRazonSocial.Location = New System.Drawing.Point(225, 39)
+        Me.txtRazonSocial.Location = New System.Drawing.Point(225, 46)
         Me.txtRazonSocial.Name = "txtRazonSocial"
         Me.txtRazonSocial.ReadOnly = True
         Me.txtRazonSocial.Size = New System.Drawing.Size(240, 20)
@@ -740,7 +704,7 @@ Partial Class Pagos
         Me.txtObservaciones.Empty = True
         Me.txtObservaciones.EnterIndex = 4
         Me.txtObservaciones.LabelAssociationKey = 4
-        Me.txtObservaciones.Location = New System.Drawing.Point(124, 66)
+        Me.txtObservaciones.Location = New System.Drawing.Point(124, 73)
         Me.txtObservaciones.MaxLength = 50
         Me.txtObservaciones.Name = "txtObservaciones"
         Me.txtObservaciones.Size = New System.Drawing.Size(341, 20)
@@ -754,7 +718,7 @@ Partial Class Pagos
         Me.txtBanco.Enabled = False
         Me.txtBanco.EnterIndex = 5
         Me.txtBanco.LabelAssociationKey = 5
-        Me.txtBanco.Location = New System.Drawing.Point(124, 93)
+        Me.txtBanco.Location = New System.Drawing.Point(124, 100)
         Me.txtBanco.MaxLength = 8
         Me.txtBanco.Name = "txtBanco"
         Me.txtBanco.Size = New System.Drawing.Size(95, 20)
@@ -770,7 +734,7 @@ Partial Class Pagos
         Me.txtNombreBanco.Enabled = False
         Me.txtNombreBanco.EnterIndex = -1
         Me.txtNombreBanco.LabelAssociationKey = 5
-        Me.txtNombreBanco.Location = New System.Drawing.Point(225, 93)
+        Me.txtNombreBanco.Location = New System.Drawing.Point(225, 100)
         Me.txtNombreBanco.Name = "txtNombreBanco"
         Me.txtNombreBanco.ReadOnly = True
         Me.txtNombreBanco.Size = New System.Drawing.Size(240, 20)
@@ -783,7 +747,7 @@ Partial Class Pagos
         Me.CustomLabel6.ControlAssociationKey = 6
         Me.CustomLabel6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel6.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel6.Location = New System.Drawing.Point(284, 124)
+        Me.CustomLabel6.Location = New System.Drawing.Point(284, 131)
         Me.CustomLabel6.Name = "CustomLabel6"
         Me.CustomLabel6.Size = New System.Drawing.Size(94, 18)
         Me.CustomLabel6.TabIndex = 35
@@ -795,7 +759,7 @@ Partial Class Pagos
         Me.CustomLabel7.ControlAssociationKey = 7
         Me.CustomLabel7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel7.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel7.Location = New System.Drawing.Point(285, 151)
+        Me.CustomLabel7.Location = New System.Drawing.Point(285, 158)
         Me.CustomLabel7.Name = "CustomLabel7"
         Me.CustomLabel7.Size = New System.Drawing.Size(55, 18)
         Me.CustomLabel7.TabIndex = 36
@@ -807,7 +771,7 @@ Partial Class Pagos
         Me.txtConsulta.Empty = True
         Me.txtConsulta.EnterIndex = -1
         Me.txtConsulta.LabelAssociationKey = -1
-        Me.txtConsulta.Location = New System.Drawing.Point(477, 7)
+        Me.txtConsulta.Location = New System.Drawing.Point(477, 14)
         Me.txtConsulta.Name = "txtConsulta"
         Me.txtConsulta.Size = New System.Drawing.Size(333, 20)
         Me.txtConsulta.TabIndex = 55
@@ -820,7 +784,7 @@ Partial Class Pagos
         Me.lstConsulta.EnterIndex = -1
         Me.lstConsulta.FormattingEnabled = True
         Me.lstConsulta.LabelAssociationKey = -1
-        Me.lstConsulta.Location = New System.Drawing.Point(476, 31)
+        Me.lstConsulta.Location = New System.Drawing.Point(476, 38)
         Me.lstConsulta.Name = "lstConsulta"
         Me.lstConsulta.Size = New System.Drawing.Size(333, 108)
         Me.lstConsulta.TabIndex = 54
@@ -832,7 +796,7 @@ Partial Class Pagos
         Me.txtParidad.Empty = True
         Me.txtParidad.EnterIndex = 7
         Me.txtParidad.LabelAssociationKey = 7
-        Me.txtParidad.Location = New System.Drawing.Point(346, 146)
+        Me.txtParidad.Location = New System.Drawing.Point(346, 153)
         Me.txtParidad.Name = "txtParidad"
         Me.txtParidad.ReadOnly = True
         Me.txtParidad.Size = New System.Drawing.Size(81, 20)
@@ -846,7 +810,7 @@ Partial Class Pagos
         Me.txtTotal.Empty = False
         Me.txtTotal.EnterIndex = -1
         Me.txtTotal.LabelAssociationKey = 12
-        Me.txtTotal.Location = New System.Drawing.Point(716, 203)
+        Me.txtTotal.Location = New System.Drawing.Point(716, 210)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(91, 20)
@@ -864,7 +828,7 @@ Partial Class Pagos
         Me.cmbTipo.FormattingEnabled = True
         Me.cmbTipo.Items.AddRange(New Object() {"Normal", "Cheque Rechazado"})
         Me.cmbTipo.LabelAssociationKey = 13
-        Me.cmbTipo.Location = New System.Drawing.Point(346, 172)
+        Me.cmbTipo.Location = New System.Drawing.Point(346, 179)
         Me.cmbTipo.Name = "cmbTipo"
         Me.cmbTipo.Size = New System.Drawing.Size(81, 21)
         Me.cmbTipo.TabIndex = 39
@@ -877,7 +841,7 @@ Partial Class Pagos
         Me.CustomLabel15.ControlAssociationKey = 12
         Me.CustomLabel15.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CustomLabel15.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel15.Location = New System.Drawing.Point(468, 381)
+        Me.CustomLabel15.Location = New System.Drawing.Point(468, 388)
         Me.CustomLabel15.Name = "CustomLabel15"
         Me.CustomLabel15.Size = New System.Drawing.Size(62, 15)
         Me.CustomLabel15.TabIndex = 52
@@ -889,7 +853,7 @@ Partial Class Pagos
         Me.CustomLabel16.ControlAssociationKey = 12
         Me.CustomLabel16.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CustomLabel16.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel16.Location = New System.Drawing.Point(222, 381)
+        Me.CustomLabel16.Location = New System.Drawing.Point(222, 388)
         Me.CustomLabel16.Name = "CustomLabel16"
         Me.CustomLabel16.Size = New System.Drawing.Size(78, 15)
         Me.CustomLabel16.TabIndex = 52
@@ -901,7 +865,7 @@ Partial Class Pagos
         Me.CustomLabel14.ControlAssociationKey = 12
         Me.CustomLabel14.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CustomLabel14.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel14.Location = New System.Drawing.Point(633, 381)
+        Me.CustomLabel14.Location = New System.Drawing.Point(633, 388)
         Me.CustomLabel14.Name = "CustomLabel14"
         Me.CustomLabel14.Size = New System.Drawing.Size(82, 15)
         Me.CustomLabel14.TabIndex = 52
@@ -913,7 +877,7 @@ Partial Class Pagos
         Me.CustomLabel11.ControlAssociationKey = 12
         Me.CustomLabel11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel11.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel11.Location = New System.Drawing.Point(592, 204)
+        Me.CustomLabel11.Location = New System.Drawing.Point(592, 211)
         Me.CustomLabel11.Name = "CustomLabel11"
         Me.CustomLabel11.Size = New System.Drawing.Size(118, 18)
         Me.CustomLabel11.TabIndex = 52
@@ -925,7 +889,7 @@ Partial Class Pagos
         Me.lblGanancias.ControlAssociationKey = 8
         Me.lblGanancias.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblGanancias.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblGanancias.Location = New System.Drawing.Point(434, 149)
+        Me.lblGanancias.Location = New System.Drawing.Point(434, 156)
         Me.lblGanancias.Name = "lblGanancias"
         Me.lblGanancias.Size = New System.Drawing.Size(93, 18)
         Me.lblGanancias.TabIndex = 40
@@ -937,7 +901,7 @@ Partial Class Pagos
         Me.txtIVA.Empty = False
         Me.txtIVA.EnterIndex = -1
         Me.txtIVA.LabelAssociationKey = 11
-        Me.txtIVA.Location = New System.Drawing.Point(716, 175)
+        Me.txtIVA.Location = New System.Drawing.Point(716, 182)
         Me.txtIVA.Name = "txtIVA"
         Me.txtIVA.ReadOnly = True
         Me.txtIVA.Size = New System.Drawing.Size(91, 20)
@@ -952,7 +916,7 @@ Partial Class Pagos
         Me.CustomLabel8.ControlAssociationKey = 9
         Me.CustomLabel8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel8.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel8.Location = New System.Drawing.Point(626, 149)
+        Me.CustomLabel8.Location = New System.Drawing.Point(626, 156)
         Me.CustomLabel8.Name = "CustomLabel8"
         Me.CustomLabel8.Size = New System.Drawing.Size(84, 18)
         Me.CustomLabel8.TabIndex = 41
@@ -964,7 +928,7 @@ Partial Class Pagos
         Me.txtIngresosBrutos.Empty = False
         Me.txtIngresosBrutos.EnterIndex = -1
         Me.txtIngresosBrutos.LabelAssociationKey = 9
-        Me.txtIngresosBrutos.Location = New System.Drawing.Point(716, 148)
+        Me.txtIngresosBrutos.Location = New System.Drawing.Point(716, 155)
         Me.txtIngresosBrutos.Name = "txtIngresosBrutos"
         Me.txtIngresosBrutos.ReadOnly = True
         Me.txtIngresosBrutos.Size = New System.Drawing.Size(91, 20)
@@ -979,7 +943,7 @@ Partial Class Pagos
         Me.txtGanancias.Empty = False
         Me.txtGanancias.EnterIndex = -1
         Me.txtGanancias.LabelAssociationKey = 8
-        Me.txtGanancias.Location = New System.Drawing.Point(533, 146)
+        Me.txtGanancias.Location = New System.Drawing.Point(533, 153)
         Me.txtGanancias.Name = "txtGanancias"
         Me.txtGanancias.ReadOnly = True
         Me.txtGanancias.Size = New System.Drawing.Size(87, 20)
@@ -994,7 +958,7 @@ Partial Class Pagos
         Me.CustomLabel10.ControlAssociationKey = 11
         Me.CustomLabel10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel10.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel10.Location = New System.Drawing.Point(642, 176)
+        Me.CustomLabel10.Location = New System.Drawing.Point(642, 183)
         Me.CustomLabel10.Name = "CustomLabel10"
         Me.CustomLabel10.Size = New System.Drawing.Size(68, 18)
         Me.CustomLabel10.TabIndex = 49
@@ -1006,7 +970,7 @@ Partial Class Pagos
         Me.CustomLabel9.ControlAssociationKey = 10
         Me.CustomLabel9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel9.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel9.Location = New System.Drawing.Point(433, 176)
+        Me.CustomLabel9.Location = New System.Drawing.Point(433, 183)
         Me.CustomLabel9.Name = "CustomLabel9"
         Me.CustomLabel9.Size = New System.Drawing.Size(94, 18)
         Me.CustomLabel9.TabIndex = 47
@@ -1018,7 +982,7 @@ Partial Class Pagos
         Me.txtIBCiudad.Empty = False
         Me.txtIBCiudad.EnterIndex = -1
         Me.txtIBCiudad.LabelAssociationKey = 10
-        Me.txtIBCiudad.Location = New System.Drawing.Point(533, 173)
+        Me.txtIBCiudad.Location = New System.Drawing.Point(533, 180)
         Me.txtIBCiudad.Name = "txtIBCiudad"
         Me.txtIBCiudad.ReadOnly = True
         Me.txtIBCiudad.Size = New System.Drawing.Size(87, 20)
@@ -1041,7 +1005,7 @@ Partial Class Pagos
         Me.btnCarpetas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCarpetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCarpetas.LabelAssociationKey = -1
-        Me.btnCarpetas.Location = New System.Drawing.Point(383, 497)
+        Me.btnCarpetas.Location = New System.Drawing.Point(383, 452)
         Me.btnCarpetas.Name = "btnCarpetas"
         Me.btnCarpetas.Size = New System.Drawing.Size(50, 54)
         Me.btnCarpetas.TabIndex = 80
@@ -1062,7 +1026,7 @@ Partial Class Pagos
         Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(298, 497)
+        Me.btnImprimir.Location = New System.Drawing.Point(298, 452)
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(50, 54)
         Me.btnImprimir.TabIndex = 79
@@ -1083,7 +1047,7 @@ Partial Class Pagos
         Me.btnCalcular.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCalcular.LabelAssociationKey = -1
-        Me.btnCalcular.Location = New System.Drawing.Point(468, 497)
+        Me.btnCalcular.Location = New System.Drawing.Point(468, 452)
         Me.btnCalcular.Name = "btnCalcular"
         Me.btnCalcular.Size = New System.Drawing.Size(50, 54)
         Me.btnCalcular.TabIndex = 78
@@ -1104,7 +1068,7 @@ Partial Class Pagos
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(142, 497)
+        Me.btnConsulta.Location = New System.Drawing.Point(142, 452)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(50, 54)
         Me.btnConsulta.TabIndex = 77
@@ -1125,7 +1089,7 @@ Partial Class Pagos
         Me.btnCtaCte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCtaCte.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCtaCte.LabelAssociationKey = -1
-        Me.btnCtaCte.Location = New System.Drawing.Point(552, 497)
+        Me.btnCtaCte.Location = New System.Drawing.Point(552, 452)
         Me.btnCtaCte.Name = "btnCtaCte"
         Me.btnCtaCte.Size = New System.Drawing.Size(58, 54)
         Me.btnCtaCte.TabIndex = 76
@@ -1146,7 +1110,7 @@ Partial Class Pagos
         Me.btnChequesTerceros.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnChequesTerceros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnChequesTerceros.LabelAssociationKey = -1
-        Me.btnChequesTerceros.Location = New System.Drawing.Point(622, 497)
+        Me.btnChequesTerceros.Location = New System.Drawing.Point(622, 452)
         Me.btnChequesTerceros.Name = "btnChequesTerceros"
         Me.btnChequesTerceros.Size = New System.Drawing.Size(89, 54)
         Me.btnChequesTerceros.TabIndex = 76
@@ -1167,7 +1131,7 @@ Partial Class Pagos
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(717, 497)
+        Me.btnCerrar.Location = New System.Drawing.Point(717, 452)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(50, 54)
         Me.btnCerrar.TabIndex = 76
@@ -1188,7 +1152,7 @@ Partial Class Pagos
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(213, 497)
+        Me.btnLimpiar.Location = New System.Drawing.Point(213, 452)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(50, 54)
         Me.btnLimpiar.TabIndex = 75
@@ -1209,7 +1173,7 @@ Partial Class Pagos
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(57, 497)
+        Me.btnAgregar.Location = New System.Drawing.Point(57, 452)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(50, 54)
         Me.btnAgregar.TabIndex = 74
@@ -1220,7 +1184,7 @@ Partial Class Pagos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(824, 555)
+        Me.ClientSize = New System.Drawing.Size(824, 509)
         Me.Controls.Add(Me.btnCarpetas)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnCalcular)
@@ -1230,19 +1194,19 @@ Partial Class Pagos
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnAgregar)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Location = New System.Drawing.Point(20, 5)
         Me.MaximizeBox = False
         Me.Name = "Pagos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
+        Me.Text = "Ingreso de Pagos a Proveedores                                                   " & _
+            "                                                                                " & _
+            "             SURFACTAN S.A."
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.pnlPedirCuenta.ResumeLayout(False)
@@ -1292,9 +1256,6 @@ Partial Class Pagos
     Friend WithEvents lblFormaPagos As Administracion.CustomLabel
     Friend WithEvents lblDiferencia As Administracion.CustomLabel
     Friend WithEvents CustomLabel13 As Administracion.CustomLabel
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents btnCarpetas As Administracion.CustomButton
     Friend WithEvents btnImprimir As Administracion.CustomButton
