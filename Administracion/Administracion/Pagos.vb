@@ -1294,7 +1294,7 @@ Public Class Pagos
                             ' Si hay diferencia se agrega una ND.
                             If Val(diferencia) <> 0 Then
 
-                                XRow = gridPagos.Rows.Add()
+                                XRow = _ProximaFilaVaciaPagos() 'gridPagos.Rows.Add()
 
                                 With gridPagos.Rows(XRow)
 
@@ -1411,7 +1411,7 @@ Public Class Pagos
                     Next
 
                     If IsNothing(XRow) Then
-                        XRow = gridFormaPagos.Rows.Add
+                        XRow = _ProximaFilaVaciaFormaPagos() 'gridFormaPagos.Rows.Add
                     End If
 
                     XClave = clave
@@ -3077,7 +3077,7 @@ Public Class Pagos
                                 Try
                                     gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow + 1).Cells(0)
                                 Catch ex As Exception
-                                    gridFormaPagos.CurrentCell = gridFormaPagos.Rows(gridFormaPagos.Rows.Add).Cells(0)
+                                    gridFormaPagos.CurrentCell = gridFormaPagos.Rows(_ProximaFilaVaciaFormaPagos).Cells(0) 'gridFormaPagos.Rows(gridFormaPagos.Rows.Add).Cells(0)
                                 End Try
                             End If
                         Else
@@ -3159,7 +3159,7 @@ Public Class Pagos
                         Try
                             gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow + 1).Cells(0)
                         Catch ex As Exception
-                            gridFormaPagos.CurrentCell = gridFormaPagos.Rows(gridFormaPagos.Rows.Add).Cells(0)
+                            gridFormaPagos.CurrentCell = gridFormaPagos.Rows(_ProximaFilaVaciaFormaPagos).Cells(0) 'gridFormaPagos.Rows(gridFormaPagos.Rows.Add).Cells(0)
                         End Try
                         'gridFormaPagos.CurrentCell = gridFormaPagos.Rows(gridFormaPagos.Rows.Add()).Cells(0)
                     End If
