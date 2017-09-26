@@ -45,9 +45,8 @@ Public Class HistorialProforma
         txtNroProforma.Focus()
     End Sub
 
-    Private Function _CS(Optional ByVal empresa As String = "SurfactanSA")
-        Return Helper._ConectarA(empresa, True)
-        'Return Helper._ConectarA(empresa)
+    Private Function _CS(Optional ByVal empresa As String = "")
+        Return Helper._ConectarA(empresa)
     End Function
 
     Private Sub _MostrarHistorial()
@@ -175,7 +174,7 @@ Public Class HistorialProforma
         dgvProductos.Rows.Clear()
 
         For i = 0 To PRODUCTOS_MAX - 1
-            dgvProductos.Rows.Add("", "", "", "", "")
+            dgvProductos.Rows.Add("", "", "")
         Next
 
         dgvProductos.ClearSelection()
@@ -504,24 +503,24 @@ Public Class HistorialProforma
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    Private Sub dgvProductos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProductos.CellEnter
-        With dgvProductos
-            If e.ColumnIndex = 0 Then
-                .ClearSelection()
-                .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
-                Dim _location As Point = .GetCellDisplayRectangle(0, e.RowIndex, False).Location
+    'Private Sub dgvProductos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProductos.CellEnter
+    '    With dgvProductos
+    '        If e.ColumnIndex = 0 Then
+    '            .ClearSelection()
+    '            .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
+    '            Dim _location As Point = .GetCellDisplayRectangle(0, e.RowIndex, False).Location
 
-                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN
-                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - XMARGEN
-                txtFechaAux.Location = _location
-                txtFechaAux.Text = .Rows(e.RowIndex).Cells(0).Value
-                WRow = e.RowIndex
-                Wcol = e.ColumnIndex
-                txtFechaAux.Visible = True
-                txtFechaAux.Focus()
-            End If
-        End With
-    End Sub
+    '            _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN
+    '            _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - XMARGEN
+    '            txtFechaAux.Location = _location
+    '            txtFechaAux.Text = .Rows(e.RowIndex).Cells(0).Value
+    '            WRow = e.RowIndex
+    '            Wcol = e.ColumnIndex
+    '            txtFechaAux.Visible = True
+    '            txtFechaAux.Focus()
+    '        End If
+    '    End With
+    'End Sub
 
     Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNroProforma.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
@@ -564,60 +563,60 @@ Public Class HistorialProforma
 
     End Function
 
-    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
-        If Trim(txtNroProforma.Text) = "" Or Not _ExisteProforma(txtNroProforma.Text) Then
+        'If Trim(txtNroProforma.Text) = "" Or Not _ExisteProforma(txtNroProforma.Text) Then
 
-            txtNroProforma.Focus()
-            Exit Sub
+        '    txtNroProforma.Focus()
+        '    Exit Sub
 
-        End If
+        'End If
 
-        If MsgBox("¿Esta seguro de que quiere eliminar la Preforma " & txtNroProforma.Text & " ?", MsgBoxStyle.YesNo, MsgBoxStyle.Exclamation) = DialogResult.Yes Then
+        'If MsgBox("¿Esta seguro de que quiere eliminar la Preforma " & txtNroProforma.Text & " ?", MsgBoxStyle.YesNo, MsgBoxStyle.Exclamation) = DialogResult.Yes Then
 
-            Dim cn As New SqlConnection()
-            Dim cm As New SqlCommand()
-            Dim trans As SqlTransaction
+        '    Dim cn As New SqlConnection()
+        '    Dim cm As New SqlCommand()
+        '    Dim trans As SqlTransaction
 
-            Try
+        '    Try
 
-                cn.ConnectionString = _CS()
-                cn.Open()
-                trans = cn.BeginTransaction
+        '        cn.ConnectionString = _CS()
+        '        cn.Open()
+        '        trans = cn.BeginTransaction
 
-                cm.Connection = cn
-                cm.CommandText = "DELETE FROM ProformaExportacion WHERE Proforma = '" & txtNroProforma.Text & "'"
-                cm.Transaction = trans
+        '        cm.Connection = cn
+        '        cm.CommandText = "DELETE FROM ProformaExportacion WHERE Proforma = '" & txtNroProforma.Text & "'"
+        '        cm.Transaction = trans
 
-                cm.ExecuteNonQuery()
+        '        cm.ExecuteNonQuery()
 
-                trans.Commit()
+        '        trans.Commit()
 
-                btnLimpiar.PerformClick()
+        '        btnLimpiar.PerformClick()
 
-                txtNroProforma.Focus()
+        '        txtNroProforma.Focus()
 
-            Catch ex As Exception
+        '    Catch ex As Exception
 
-                If Not IsNothing(trans) Then
-                    trans.Rollback()
-                End If
+        '        If Not IsNothing(trans) Then
+        '            trans.Rollback()
+        '        End If
 
-                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        '        MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
 
-            Finally
+        '    Finally
 
-                trans = Nothing
-                cn.Close()
-                cn = Nothing
-                cm = Nothing
+        '        trans = Nothing
+        '        cn.Close()
+        '        cn = Nothing
+        '        cm = Nothing
 
-            End Try
+        '    End Try
 
-        End If
+        'End If
     End Sub
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         MsgBox("Aun no implementado. No hay todavia realizadas consultas.", MsgBoxStyle.Information)
     End Sub
 
@@ -809,11 +808,12 @@ Public Class HistorialProforma
         'txtNroProforma.Focus()
     End Sub
 
-    Private Sub btnVistaPrevia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVistaPrevia.Click
+    Private Sub btnVistaPrevia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         With VistaPrevia
             .Reporte = New ProformaVistaPrevia
             .Formula = "{ProformaExportacion.Proforma} = '" & txtNroProforma.Text & "'"
             .Mostrar()
         End With
     End Sub
+
 End Class

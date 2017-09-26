@@ -23,9 +23,9 @@ Partial Class HistorialProforma
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -35,9 +35,14 @@ Partial Class HistorialProforma
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.dgvProductos = New System.Windows.Forms.DataGridView()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Observacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Usuario = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnAceptar = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -48,15 +53,7 @@ Partial Class HistorialProforma
         Me.txtNroProforma = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.btnConsulta = New System.Windows.Forms.Button()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnVistaPrevia = New System.Windows.Forms.Button()
-        Me.btnEliminar = New System.Windows.Forms.Button()
-        Me.btnAceptar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Observacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Usuario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -80,7 +77,7 @@ Partial Class HistorialProforma
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(774, 497)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(930, 458)
         Me.LayoutPrincipal.TabIndex = 1
         '
         'LayoutCabecera
@@ -102,7 +99,7 @@ Partial Class HistorialProforma
         Me.LayoutCabecera.RowCount = 1
         Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
-        Me.LayoutCabecera.Size = New System.Drawing.Size(774, 45)
+        Me.LayoutCabecera.Size = New System.Drawing.Size(930, 45)
         Me.LayoutCabecera.TabIndex = 0
         '
         'Label3
@@ -112,7 +109,7 @@ Partial Class HistorialProforma
         Me.Label3.Location = New System.Drawing.Point(241, 0)
         Me.Label3.Margin = New System.Windows.Forms.Padding(0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(353, 45)
+        Me.Label3.Size = New System.Drawing.Size(509, 45)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "- Historial de Proforma -"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -133,7 +130,7 @@ Partial Class HistorialProforma
         '
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label2.Font = New System.Drawing.Font("Calibri", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.Location = New System.Drawing.Point(597, 0)
+        Me.Label2.Location = New System.Drawing.Point(753, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(174, 45)
         Me.Label2.TabIndex = 1
@@ -152,9 +149,9 @@ Partial Class HistorialProforma
         Me.LayoutCuerpoPrincipal.Margin = New System.Windows.Forms.Padding(0)
         Me.LayoutCuerpoPrincipal.Name = "LayoutCuerpoPrincipal"
         Me.LayoutCuerpoPrincipal.RowCount = 2
-        Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69.0!))
-        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(774, 452)
+        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(930, 413)
         Me.LayoutCuerpoPrincipal.TabIndex = 1
         '
         'Panel1
@@ -162,9 +159,11 @@ Partial Class HistorialProforma
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel1.Controls.Add(Me.txtFechaAux)
         Me.Panel1.Controls.Add(Me.dgvProductos)
+        Me.Panel1.Controls.Add(Me.btnLimpiar)
         Me.Panel1.Controls.Add(Me.txtFecha)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label6)
+        Me.Panel1.Controls.Add(Me.btnAceptar)
         Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.Label14)
         Me.Panel1.Controls.Add(Me.Label4)
@@ -177,13 +176,13 @@ Partial Class HistorialProforma
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(774, 383)
+        Me.Panel1.Size = New System.Drawing.Size(930, 344)
         Me.Panel1.TabIndex = 2
         '
         'txtFechaAux
         '
         Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFechaAux.Location = New System.Drawing.Point(87, 195)
+        Me.txtFechaAux.Location = New System.Drawing.Point(495, 276)
         Me.txtFechaAux.Mask = "LL-00000-000"
         Me.txtFechaAux.Name = "txtFechaAux"
         Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -203,12 +202,50 @@ Partial Class HistorialProforma
         Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.dgvProductos.Location = New System.Drawing.Point(20, 50)
         Me.dgvProductos.Name = "dgvProductos"
-        Me.dgvProductos.Size = New System.Drawing.Size(737, 281)
+        Me.dgvProductos.Size = New System.Drawing.Size(574, 281)
         Me.dgvProductos.TabIndex = 8
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 12
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Fecha.Width = 80
+        '
+        'Observacion
+        '
+        Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Observacion.HeaderText = "Observación"
+        Me.Observacion.Name = "Observacion"
+        Me.Observacion.ReadOnly = True
+        Me.Observacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Usuario
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Usuario.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Usuario.HeaderText = "Usuario"
+        Me.Usuario.Name = "Usuario"
+        Me.Usuario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Location = New System.Drawing.Point(779, 234)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(112, 45)
+        Me.btnLimpiar.TabIndex = 0
+        Me.btnLimpiar.Text = "Limpiar"
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(258, 24)
+        Me.txtFecha.Location = New System.Drawing.Point(668, 72)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -221,7 +258,7 @@ Partial Class HistorialProforma
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(199, 25)
+        Me.Label5.Location = New System.Drawing.Point(609, 73)
         Me.Label5.Margin = New System.Windows.Forms.Padding(0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(48, 18)
@@ -234,7 +271,7 @@ Partial Class HistorialProforma
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label6.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label6.Location = New System.Drawing.Point(349, 24)
+        Me.Label6.Location = New System.Drawing.Point(185, 24)
         Me.Label6.Margin = New System.Windows.Forms.Padding(0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(57, 18)
@@ -242,17 +279,27 @@ Partial Class HistorialProforma
         Me.Label6.Text = "Cliente:"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'btnAceptar
+        '
+        Me.btnAceptar.Location = New System.Drawing.Point(641, 234)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(112, 45)
+        Me.btnAceptar.TabIndex = 0
+        Me.btnAceptar.Text = "Aceptar"
+        Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Proforma")
+        Me.btnAceptar.UseVisualStyleBackColor = True
+        '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label13.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label13.Location = New System.Drawing.Point(581, 338)
+        Me.Label13.Location = New System.Drawing.Point(750, 73)
         Me.Label13.Margin = New System.Windows.Forms.Padding(0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(42, 18)
+        Me.Label13.Size = New System.Drawing.Size(60, 18)
         Me.Label13.TabIndex = 3
-        Me.Label13.Text = "Total:"
+        Me.Label13.Text = "Usuario:"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label14
@@ -260,12 +307,12 @@ Partial Class HistorialProforma
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label14.Location = New System.Drawing.Point(29, 339)
+        Me.Label14.Location = New System.Drawing.Point(610, 99)
         Me.Label14.Margin = New System.Windows.Forms.Padding(0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(54, 18)
+        Me.Label14.Size = New System.Drawing.Size(89, 18)
         Me.Label14.TabIndex = 3
-        Me.Label14.Text = "Monto:"
+        Me.Label14.Text = "Observacion:"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label4
@@ -284,7 +331,7 @@ Partial Class HistorialProforma
         'txtTotal
         '
         Me.txtTotal.BackColor = System.Drawing.SystemColors.Window
-        Me.txtTotal.Location = New System.Drawing.Point(625, 337)
+        Me.txtTotal.Location = New System.Drawing.Point(794, 72)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(124, 20)
@@ -295,7 +342,7 @@ Partial Class HistorialProforma
         'txtDescripcionCliente
         '
         Me.txtDescripcionCliente.Enabled = False
-        Me.txtDescripcionCliente.Location = New System.Drawing.Point(492, 23)
+        Me.txtDescripcionCliente.Location = New System.Drawing.Point(328, 23)
         Me.txtDescripcionCliente.Name = "txtDescripcionCliente"
         Me.txtDescripcionCliente.ReadOnly = True
         Me.txtDescripcionCliente.Size = New System.Drawing.Size(266, 20)
@@ -303,7 +350,7 @@ Partial Class HistorialProforma
         '
         'txtCliente
         '
-        Me.txtCliente.Location = New System.Drawing.Point(407, 23)
+        Me.txtCliente.Location = New System.Drawing.Point(243, 23)
         Me.txtCliente.MaxLength = 6
         Me.txtCliente.Name = "txtCliente"
         Me.txtCliente.Size = New System.Drawing.Size(79, 20)
@@ -311,10 +358,11 @@ Partial Class HistorialProforma
         '
         'txtDescripcionTotal
         '
-        Me.txtDescripcionTotal.Location = New System.Drawing.Point(87, 338)
+        Me.txtDescripcionTotal.Location = New System.Drawing.Point(613, 121)
         Me.txtDescripcionTotal.MaxLength = 100
+        Me.txtDescripcionTotal.Multiline = True
         Me.txtDescripcionTotal.Name = "txtDescripcionTotal"
-        Me.txtDescripcionTotal.Size = New System.Drawing.Size(462, 20)
+        Me.txtDescripcionTotal.Size = New System.Drawing.Size(305, 102)
         Me.txtDescripcionTotal.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.txtDescripcionTotal, "Descripción en Inglés del Monto Total")
         '
@@ -330,20 +378,15 @@ Partial Class HistorialProforma
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.btnCerrar)
-        Me.Panel2.Controls.Add(Me.btnConsulta)
-        Me.Panel2.Controls.Add(Me.btnLimpiar)
-        Me.Panel2.Controls.Add(Me.btnVistaPrevia)
-        Me.Panel2.Controls.Add(Me.btnEliminar)
-        Me.Panel2.Controls.Add(Me.btnAceptar)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 386)
+        Me.Panel2.Location = New System.Drawing.Point(3, 347)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(768, 63)
+        Me.Panel2.Size = New System.Drawing.Size(924, 63)
         Me.Panel2.TabIndex = 3
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(599, 9)
+        Me.btnCerrar.Location = New System.Drawing.Point(412, 9)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(81, 45)
         Me.btnCerrar.TabIndex = 0
@@ -351,88 +394,11 @@ Partial Class HistorialProforma
         Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
-        'btnConsulta
-        '
-        Me.btnConsulta.Location = New System.Drawing.Point(191, 9)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(81, 45)
-        Me.btnConsulta.TabIndex = 0
-        Me.btnConsulta.Text = "Consulta"
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consultas")
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.Location = New System.Drawing.Point(293, 8)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(81, 45)
-        Me.btnLimpiar.TabIndex = 0
-        Me.btnLimpiar.Text = "Limpiar"
-        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnVistaPrevia
-        '
-        Me.btnVistaPrevia.Location = New System.Drawing.Point(395, 8)
-        Me.btnVistaPrevia.Name = "btnVistaPrevia"
-        Me.btnVistaPrevia.Size = New System.Drawing.Size(81, 45)
-        Me.btnVistaPrevia.TabIndex = 0
-        Me.btnVistaPrevia.Text = "Vista Previa"
-        Me.ToolTip1.SetToolTip(Me.btnVistaPrevia, "Ver Proforma por Pantalla")
-        Me.btnVistaPrevia.UseVisualStyleBackColor = True
-        '
-        'btnEliminar
-        '
-        Me.btnEliminar.Location = New System.Drawing.Point(497, 9)
-        Me.btnEliminar.Name = "btnEliminar"
-        Me.btnEliminar.Size = New System.Drawing.Size(81, 45)
-        Me.btnEliminar.TabIndex = 0
-        Me.btnEliminar.Text = "Eliminar"
-        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar Proforma")
-        Me.btnEliminar.UseVisualStyleBackColor = True
-        '
-        'btnAceptar
-        '
-        Me.btnAceptar.Location = New System.Drawing.Point(89, 9)
-        Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(81, 45)
-        Me.btnAceptar.TabIndex = 0
-        Me.btnAceptar.Text = "Aceptar"
-        Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Proforma")
-        Me.btnAceptar.UseVisualStyleBackColor = True
-        '
-        'Fecha
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.MaxInputLength = 12
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Observacion
-        '
-        Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Observacion.HeaderText = "Observación"
-        Me.Observacion.Name = "Observacion"
-        Me.Observacion.ReadOnly = True
-        Me.Observacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Usuario
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Usuario.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Usuario.HeaderText = "Usuario"
-        Me.Usuario.Name = "Usuario"
-        Me.Usuario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
         'HistorialProforma
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(774, 497)
+        Me.ClientSize = New System.Drawing.Size(930, 458)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Name = "HistorialProforma"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -463,19 +429,16 @@ Partial Class HistorialProforma
     Friend WithEvents txtNroProforma As System.Windows.Forms.TextBox
     Friend WithEvents dgvProductos As System.Windows.Forms.DataGridView
     Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents txtTotal As System.Windows.Forms.TextBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents txtDescripcionTotal As System.Windows.Forms.TextBox
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
-    Friend WithEvents btnConsulta As System.Windows.Forms.Button
-    Friend WithEvents btnEliminar As System.Windows.Forms.Button
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
-    Friend WithEvents btnVistaPrevia As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Observacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Usuario As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents txtTotal As System.Windows.Forms.TextBox
+    Friend WithEvents txtDescripcionTotal As System.Windows.Forms.TextBox
 End Class

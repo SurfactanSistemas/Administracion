@@ -26,7 +26,7 @@ Public Class Proforma
     End Sub
 
     Private Function _CS(Optional ByVal empresa As String = "SurfactanSA")
-        Return Helper._ConectarA(empresa, True)
+        Return Helper._ConectarA()
         'Return Helper._ConectarA(empresa)
     End Function
 

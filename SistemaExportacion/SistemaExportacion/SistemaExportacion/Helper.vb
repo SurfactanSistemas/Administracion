@@ -1,8 +1,12 @@
-﻿Module Helper
+﻿Imports System.Configuration
+
+Module Helper
 
     Private empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
     Private Const VALIDA_CUIT = "54327654321"
+
+    Private TESTING As Boolean = False
 
     Public Function _NormalizarFilas(ByVal tabla As DataTable) As DataTable
 
@@ -38,15 +42,17 @@
 
     End Function
 
-    Public Function _ConectarA(ByVal empresa As String, Optional ByVal testing As Boolean = False) As String
+    Public Function _ConectarA(Optional ByVal empresa As String = "SurfactanSA") As String
 
         Dim _empresa = empresas.Find(Function(e) UCase(e) = UCase(empresa))
         Dim cs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
-        Dim csx As String = "Data Source=(LOCAL)\LOCALSQLSERVER;Initial Catalog=#EMPRESA#;Trusted_Connection=True"
+        Dim csx As String = "Data Source=(LOCAL)\LOCALSQLEXPRESS;Initial Catalog=#EMPRESA#;Trusted_Connection=True"
 
         If Not IsNothing(_empresa) Then
 
-            If testing Then
+            TESTING = ConfigurationManager.AppSettings("TESTING")
+
+            If TESTING Then
                 Return csx.Replace("#EMPRESA#", _empresa)
             Else
                 Return cs.Replace("#EMPRESA#", _empresa)
