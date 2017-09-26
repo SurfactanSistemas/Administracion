@@ -4489,8 +4489,8 @@ Public Class Pagos
 
         ' Completamos los renglones faltantes.
 
-
-        For WRenglon = 1 To 15
+        Dim XRenglon = WRenglon
+        For WRenglon = XRenglon To 15
 
             row = Tabla.NewRow
 
@@ -4813,8 +4813,8 @@ Public Class Pagos
 
         ' Completamos los renglones faltantes.
 
-
-        For WRenglon = 1 To 15
+        Dim XReglon = WRenglon
+        For WRenglon = XReglon To 15
 
             row = Tabla.NewRow
 
@@ -5265,8 +5265,8 @@ Public Class Pagos
 
         ' Completamos los renglones faltantes.
 
-
-        For WRenglon = 1 To 15
+        Dim XRenglon = WRenglon
+        For WRenglon = XRenglon To 15
 
             row = Tabla.NewRow
 
