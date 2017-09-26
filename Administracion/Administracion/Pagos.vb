@@ -2727,10 +2727,11 @@ Public Class Pagos
         txtFechaParidad.Text = txtFecha.Text
     End Sub
 
-    Private Sub eventoSegunTipoEnFormaDePagoPara(ByVal val As Integer, ByVal rowIndex As Integer, ByVal columnIndex As Integer)
+    Private Sub eventoSegunTipoEnFormaDePagoPara(ByVal valor As Integer, ByVal rowIndex As Integer, ByVal columnIndex As Integer)
         Dim nombre As String = ""
         Dim column As Integer = columnIndex
-        Select Case val
+
+        Select Case valor
             Case 1
                 nombre = "Efectivo"
                 column = 5
@@ -2762,10 +2763,28 @@ Public Class Pagos
             Case Else
                 Exit Sub
         End Select
-        gridFormaPagos.CurrentCell.Value = ceros(val.ToString, 2)
 
-        gridFormaPagos.Rows(rowIndex).Cells(4).Value = nombre
-        gridFormaPagos.CurrentCell = gridFormaPagos.Rows(rowIndex).Cells(column)
+
+        With gridFormaPagos.Rows(rowIndex)
+            Dim anterior As Integer = Val(.Cells("UltTipo").Value)
+
+            ' Limpiamos la fila cada vez que se modifique el tipo.
+            If anterior <> valor Then
+                .Cells(0).Value = ""
+                .Cells(1).Value = ""
+                .Cells(2).Value = ""
+                .Cells(3).Value = ""
+                .Cells(4).Value = ""
+                .Cells(5).Value = ""
+            ElseIf anterior = 2 Or anterior = 4 Then
+                nombre = .Cells(4).Value
+            End If
+
+            .Cells(0).Value = ceros(valor.ToString, 2)
+            .Cells(4).Value = nombre
+            .Cells("UltTipo").Value = .Cells(0).Value
+            gridFormaPagos.CurrentCell = .Cells(column)
+        End With
     End Sub
 
     Private Sub gridFormaPagos_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellValueChanged
@@ -3101,7 +3120,7 @@ Public Class Pagos
 
 
                 If iCol = 3 Then
-                    If gridFormaPagos.Rows(iRow).Cells(0).Value = "02" Then
+                    If gridFormaPagos.Rows(iRow).Cells(0).Value = "02" Or gridFormaPagos.Rows(iRow).Cells(0).Value = "04" Then
                         Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(valor)
                         If Not IsNothing(banco) Then
                             gridFormaPagos.Rows(iRow).Cells(iCol + 1).Value = banco.nombre
