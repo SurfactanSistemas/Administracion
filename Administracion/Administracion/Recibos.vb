@@ -3717,9 +3717,8 @@ Public Class Recibos
 
     Private Sub _VistaPrevia(ByVal crdoc As ReportDocument)
         With VistaPrevia
-            .CrystalReportViewer1.ReportSource = crdoc
-            .ShowDialog()
-            .Dispose()
+            .Reporte = crdoc
+            .Mostrar()
         End With
     End Sub
 
