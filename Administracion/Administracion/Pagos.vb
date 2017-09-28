@@ -1353,6 +1353,8 @@ Public Class Pagos
 
         _ProcesarChequeTercero(XClave, indice)
 
+        sumarImportes()
+
     End Sub
 
     Private Function _ChequeYaUtilizado(ByVal XClave As String) As Boolean
@@ -1774,6 +1776,48 @@ Public Class Pagos
         Return False
     End Function
 
+    Private Function _SiguienteNumeroDeOrdenPago() As Integer
+        Dim siguiente As Integer = 0
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 p.Orden FROM Pagos p ORDER BY p.Orden desc")
+        Dim dr As SqlDataReader
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            'SQLConnector.conexionSql(cn, cm)
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                siguiente = IIf(IsDBNull(dr.Item("Orden")), 0, Val(dr.Item("Orden")))
+
+                If siguiente = 0 Then
+                    Throw New Exception("No se pudo consultar correctamente el siguiente numero de Orden de Pago disponible.")
+                Else
+                    siguiente += 1
+                End If
+            Else
+                Throw New Exception("No se pudo consultar correctamente el siguiente numero de Orden de Pago disponible.")
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("No se pudo consultar correctamente el siguiente numero de Orden de Pago disponible.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return siguiente
+    End Function
+
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
         Dim XParidad, WEntra
         Dim XOrden, XRenglon, XProveedor, XFecha, XFechaOrd, XImporte, XRetencion, XRetotra, XRetIbCiudad, XRetIva, XObservaciones, XCuenta, XTipoOrd, ZValida, ZLetra, ZTipo, ZPunto, ZNumero, XTipo1, XLetra1, XPunto1, XNumero1, XImporte1, XObservaciones2, XImpoNeto, XTipo2, XNumero2, XFecha2, XFechaOrd2, XBanco2, XImporte2, XEmpresa, XClave, XRetganancias, XConcepto, XConsecionaria, XImpolist, ClaveRecibo, XCuit, ImporteCheque, NumeroCheque, FechaCheque, BancoCheque, WLetra, WTipo, WPunto, WNumero, WImporte, ZSql, XClaveCtaprv, XTipoRecibo, XClaveRecibo, XClaveCtaCte
@@ -1787,7 +1831,7 @@ Public Class Pagos
 
         Dim WOrdPago As Integer = 0
         Try
-            WOrdPago = DAOPagos.siguienteNumeroDeOrden()
+            WOrdPago = _SiguienteNumeroDeOrdenPago() 'DAOPagos.siguienteNumeroDeOrden()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Exit Sub
@@ -1800,7 +1844,7 @@ Public Class Pagos
             WCertificadoGan = 0
             WCertificadoIb = 0
             WCertificadoIbCiudad = 0
-            WCertificadoIva = 0
+            WCertificadoIVA = 0
 
             If Val(txtGanancias.Text) <> 0 Then
                 WCertificadoGan = _TraerNumeroCertificado("91")
@@ -1815,7 +1859,7 @@ Public Class Pagos
             End If
 
             If Val(txtIVA.Text) <> 0 Then
-                WCertificadoIva = _TraerNumeroCertificado("93")
+                WCertificadoIVA = _TraerNumeroCertificado("93")
             End If
 
         Catch ex As Exception
@@ -2516,7 +2560,7 @@ Public Class Pagos
                             cn.ConnectionString = _CS(_Empresa)
                             cn.Open()
                             cm.CommandText = ZSql
-                            
+
                             If dr.HasRows Then
                                 dr.Read()
                                 ZProveedor = dr.Item("Proveedor")
@@ -2572,7 +2616,7 @@ Public Class Pagos
         ZSql &= " CertificadoGan = " & "" & Val(WCertificadoGan) & ","
         ZSql &= " CertificadoIb = " & "" & Val(WCertificadoIb) & ","
         ZSql &= " CertificadoIbCiudad = " & "" & Val(WCertificadoIbCiudad) & ","
-        ZSql &= " CertificadoIva = " & "" & Val(WCertificadoIva) & ""
+        ZSql &= " CertificadoIva = " & "" & Val(WCertificadoIVA) & ""
         ZSql &= " Where Orden = " & "'" & txtOrdenPago.Text & "'"
 
         Try
@@ -2599,55 +2643,505 @@ Public Class Pagos
     End Sub
 
     Private Sub crearNotasCreditoDebito()
-        Dim pagos As New List(Of Pago)
-        Dim ultimoNumero As String = 0
-        Dim tipoDoc As String = ""
-        Dim neto As Double
+        'Dim pagos As New List(Of Pago)
+        'Dim ultimoNumero As String = 0
+        'Dim tipoDoc As String = ""
+        'Dim neto As Double
+        Dim interno As String = ""
+        'Dim Prov As Proveedor
+        Dim XProveedor, XTipo, XLetra, XPunto, XNumero, XFecha, XVencimiento, XVencimiento1, XPeriodo, XImpoNeto, XIva21, XIva5, XIva27, XIb, XExento, XImpre
+        Dim WTipoDife, WLetraDife, WPuntoDife, WNumeroDife, WNetoDife, WIvaDife
+        Dim XOrdFecha, XContado, XEmpresa, XNetolist, XExentolist, XParidad, XPAgo, ZSqlIvaComp, ZSqlImputac, XParamIvaComp, XParamImputac
+        Dim XClave, XTipomovi, XTipocomp, XLetracomp, XPuntocomp, XNrocomp, XRenglon, XObservaciones, XCuenta, XDebito, XCredito, XFechaOrd, XTitulo, XDebitolist, XCreditolist, XNroInterno, RenglonDife, XSaldolist, Xlista, XAcumulado
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim trans As SqlTransaction
+
 
         For Each row As DataGridViewRow In gridPagos.Rows
             If Not row.IsNewRow And Val(row.Cells(3).Value) = 99999999 Then
 
-                If Val(row.Cells(0).Value) = 2 Then
-                    tipoDoc = "ND"
-                Else
-                    tipoDoc = "NC"
-                End If
+                XProveedor = ""
+                XTipo = ""
+                XLetra = ""
+                XPunto = ""
+                XNumero = ""
+                XFecha = ""
+                XVencimiento = ""
+                XVencimiento1 = ""
+                XPeriodo = ""
+                XImpoNeto = 0.0
+                XIva21 = 0.0
+                XIva5 = 0.0
+                XIva27 = 0.0
+                XIb = 0.0
+                XExento = 0.0
+                XImpre = ""
+                XOrdFecha = ""
+                XContado = ""
+                XEmpresa = 0
+                XNetolist = 0.0
+                XExentolist = 0.0
+                XParidad = 0.0
+                XPAgo = 0
 
-                neto = _NormalizarNumero(row.Cells(4).Value) / 1.21
+                XClave = ""
+                XTipomovi = ""
+                XTipocomp = ""
+                XLetracomp = ""
+                XPuntocomp = ""
+                XNrocomp = ""
+                XRenglon = ""
+                'XFecha = ""
+                XObservaciones = ""
+                XCuenta = ""
+                XDebito = 0.0
+                XCredito = 0.0
+                'XFechaOrd = ""
+                XTitulo = ""
+                XDebitolist = 0.0
+                XCreditolist = 0.0
+                XNroInterno = 0
+                XSaldolist = 0.0
+                Xlista = 0.0
+                XAcumulado = 0.0
 
-                Dim interno As Integer = DAOCompras.siguienteNumeroDeInterno()
-                Dim compra As New Compra(
-                                         interno,
-                                         DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text),
-                                         Str$(row.Cells(0).Value),
-                                         tipoDoc,
-                                         "1",
-                                         "2",
-                                         Str$(row.Cells(1).Value),
-                                         Str$(row.Cells(2).Value),
-                                         ultimoNumero,
-                                         txtFecha.Text,
-                                         txtFecha.Text,
-                                         txtFecha.Text,
-                                         txtFecha.Text,
-                                         _NormalizarNumero(txtParidad.Text),
-                                         neto,
-                                         _NormalizarNumero(row.Cells(4).Value) - neto,
-                                         0,
-                                         0,
-                                         0,
-                                         0,
-                                         0,
-                                         _NormalizarNumero(row.Cells(4).Value),
-                                         0,
-                                         "",
-                                         "")
-                crearImputaciones(compra)
-                DAOCompras.agregarCompra(compra)
-                DAOCompras.agregarDatosCuentaCorriente(compra)
+                WTipoDife = ""
+                WLetraDife = ""
+                WPuntoDife = ""
+                WNumeroDife = ""
+                WNetoDife = 0.0
+                WIvaDife = 0.0
+
+                ' Buscamos el proximo numero interno.
+                Try
+                    interno = DAOCompras.siguienteNumeroDeInterno()
+                Catch ex As Exception
+                    Throw New Exception("No se pudo obtener el próximo numero interno para la nota de Crédito/Débito")
+                    Exit Sub
+                End Try
+
+                With row
+                    WTipoDife = Proceso.ceros(.Cells(0).Value, 2)
+                    WLetraDife = .Cells(1).Value
+                    WPuntoDife = Proceso.ceros(.Cells(2).Value, 4)
+                    WNumeroDife = Proceso.ceros(interno, 8)
+                    interno = Proceso.ceros(interno, 6)
+
+                    If UCase(Trim(WLetraDife)) = "A" Then
+                        WNetoDife = .Cells(4).Value / 1.21
+                        WIvaDife = .Cells(4).Value - WNetoDife
+                    Else
+                        WNetoDife = .Cells(4).Value
+                        WIvaDife = 0.0
+                    End If
+
+                End With
+
+                ' Grabamos la Factura.
+
+                XProveedor = txtProveedor.Text
+                XTipo = WTipoDife
+                XLetra = WLetraDife
+                XPunto = WPuntoDife
+                XNumero = WNumeroDife
+                XFecha = txtFecha.Text
+                XVencimiento = XFecha
+                XVencimiento1 = XFecha
+                XPeriodo = XFecha
+                XImpoNeto = Val(Proceso.formatonumerico(WNetoDife))
+                XIva21 = Val(Proceso.formatonumerico(WIvaDife))
+                XIva5 = 0
+                XIva27 = 0
+                XIb = 0
+                XExento = 0
+
+                Select Case Val(WTipoDife)
+                    Case 1
+                        XImpre = "FC"
+                    Case 2
+                        XImpre = "ND"
+                    Case 3
+                        XImpre = "NC"
+                    Case Else
+                        XImpre = ""
+                End Select
+
+                XOrdFecha = Proceso.ordenaFecha(XFecha)
+                XContado = "2"
+                XEmpresa = 1
+                XNetolist = 0.0
+                XExentolist = 0.0
+                XParidad = 0.0
+                XPAgo = 0.0
+
+                XParamIvaComp = ""
+
+                XParamIvaComp = "" & interno & ",'" _
+                       & XProveedor & "','" & XTipo & "','" _
+                       & XLetra & "','" _
+                       & XPunto & "','" & XNumero & "','" _
+                       & XFecha & "','" _
+                       & XVencimiento & "','" _
+                       & XVencimiento1 & "','" & XPeriodo & "'," _
+                       & Str$(XImpoNeto) & "," _
+                       & Str$(XIva21) & "," _
+                       & Str$(XIva5) & "," & Str$(XIva27) & "," _
+                       & Str$(XIb) & "," & Str$(XExento) & ",'" _
+                       & XContado & "','" _
+                       & XImpre & "','" & XOrdFecha & "'," _
+                       & XEmpresa & "," & Str$(XNetolist) & "," _
+                       & Str$(XExentolist) & "," _
+                       & Str$(XParidad) & "," _
+                       & Str$(XPAgo) & ""
+
+                ZSqlIvaComp = ""
+                ZSqlIvaComp = "INSERT INTO IvaComp (NroInterno, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Vencimiento, Vencimiento1, Periodo, Neto, Iva21, Iva5, Iva27, Ib, Exento, " _
+                    & " Contado, Impre, OrdFecha, Empresa, NetoList, ExentoList, Paridad, Pago) VALUES (#PARAM#)"
+
+                Try
+                    cn.ConnectionString = _CS()
+                    cn.Open()
+                    trans = cn.BeginTransaction
+
+                    cm.Connection = cn
+                    cm.Transaction = trans
+
+                    cm.CommandText = ZSqlIvaComp.ToString.Replace("#PARAM#", XParamIvaComp)
+
+                    cm.ExecuteNonQuery()
+
+                    trans.Commit()
+
+                Catch ex As Exception
+
+                    If Not IsNothing(trans) Then
+                        trans.Rollback()
+                    End If
+
+                    Throw New Exception("Hubo un problema al intentar grabar la Factura en la Base de Datos.")
+                    Exit Sub
+                Finally
+
+                    cn.Close()
+                    cm.Dispose()
+
+                End Try
+
+
+                ' Grabamos las Imputaciones Correspondientes.
+
+                RenglonDife = 1
+
+
+                REM Renglon 1
+
+                RenglonDife = Proceso.ceros(RenglonDife, 2)
+                XRenglon = RenglonDife
+
+                XTipomovi = "2"
+                XTipocomp = WTipoDife
+                XLetracomp = WLetraDife
+                XPuntocomp = WPuntoDife
+                XNrocomp = WNumeroDife
+                'XFecha = Fecha.Text
+                XObservaciones = ""
+                Select Case Val(WTipoDife)
+                    Case 2
+                        XCuenta = "6107"
+                        XDebito = Val(Proceso.formatonumerico(Math.Abs(WNetoDife)))
+                        XCredito = 0
+                    Case Else
+                        XCuenta = "7308"
+                        XDebito = 0
+                        XCredito = Val(Proceso.formatonumerico(Math.Abs(WNetoDife)))
+                End Select
+                XFechaOrd = XOrdFecha
+                XTitulo = "Compras"
+                XEmpresa = "1"
+                XClave = XTipomovi & interno & XRenglon
+                XDebitolist = 0
+                XCreditolist = 0
+
+                XParamImputac = ""
+
+                XParamImputac = "'" & XClave & "','" _
+                        & XTipomovi & "','" & XProveedor & "','" _
+                        & XTipocomp & "','" _
+                        & XLetracomp & "','" & XPuntocomp & "','" _
+                        & XNrocomp & "','" _
+                        & XRenglon & "','" _
+                        & XFecha & "','" & XObservaciones & "','" _
+                        & XCuenta & "'," _
+                        & Str$(XDebito) & "," _
+                        & Str$(XCredito) & ",'" & XFechaOrd & "','" _
+                        & XTitulo & "'," & XEmpresa & "," _
+                        & Str$(XDebitolist) & "," _
+                        & Str$(XCreditolist) & "," _
+                        & interno & ""
+
+                ZSqlImputac = ""
+
+                ZSqlImputac = "INSERT INTO Imputac (Clave, TipoMovi, Proveedor, TipoComp, LetraComp, PuntoComp, NroComp, Renglon, Fecha, Observaciones, Cuenta, Debito, Credito, FechaOrd, Titulo, Empresa, DebitoList, CreditoList, NroInterno ) VALUES (#PARAM#)"
+
+
+                Try
+                    cn.Open()
+                    trans = cn.BeginTransaction
+
+                    cm.Transaction = trans
+
+                    cm.CommandText = ZSqlImputac.ToString.Replace("#PARAM#", XParamImputac)
+
+                    cm.ExecuteNonQuery()
+
+                    trans.Commit()
+
+                Catch ex As Exception
+
+                    If Not IsNothing(trans) Then
+                        trans.Rollback()
+                    End If
+
+                    Throw New Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
+                    Exit Sub
+                Finally
+
+                    cn.Close()
+                    cm.Dispose()
+
+                End Try
+
+                ' Renglon 2
+
+                RenglonDife = RenglonDife + 1
+                XRenglon = Proceso.ceros(RenglonDife, 2)
+
+                XTipomovi = "2"
+                XTipocomp = WTipoDife
+                XLetracomp = WLetraDife
+                XPuntocomp = WPuntoDife
+                XNrocomp = WNumeroDife
+                'XFecha = Fecha.Text
+                XObservaciones = ""
+                Select Case Val(WTipoDife)
+                    Case 2
+                        XCuenta = "151"
+                        XDebito = Val(Proceso.formatonumerico(Math.Abs(WIvaDife)))
+                        XCredito = 0
+                    Case Else
+                        XCuenta = "151"
+                        XDebito = 0
+                        XCredito = Val(Proceso.formatonumerico(Math.Abs(WIvaDife)))
+                End Select
+                XFechaOrd = XOrdFecha
+                XTitulo = "Compras"
+                XEmpresa = "1"
+                XClave = XTipomovi & interno & XRenglon
+                XDebitolist = 0.0
+                XCreditolist = 0.0
+
+                XParamImputac = ""
+
+                XParamImputac = "'" & XClave & "','" _
+                        & XTipomovi & "','" & XProveedor & "','" _
+                        & XTipocomp & "','" _
+                        & XLetracomp & "','" & XPuntocomp & "','" _
+                        & XNrocomp & "','" _
+                        & XRenglon & "','" _
+                        & XFecha & "','" & XObservaciones & "','" _
+                        & XCuenta & "'," _
+                        & Str$(XDebito) & "," _
+                        & Str$(XCredito) & ",'" & XFechaOrd & "','" _
+                        & XTitulo & "'," & XEmpresa & "," _
+                        & Str$(XDebitolist) & "," _
+                        & Str$(XCreditolist) & "," _
+                        & interno & ""
+
+
+                Try
+                    cn.Open()
+                    trans = cn.BeginTransaction
+
+                    cm.Transaction = trans
+
+                    cm.CommandText = ZSqlImputac.ToString.Replace("#PARAM#", XParamImputac)
+
+                    cm.ExecuteNonQuery()
+
+                    trans.Commit()
+
+                Catch ex As Exception
+
+                    If Not IsNothing(trans) Then
+                        trans.Rollback()
+                    End If
+
+                    Throw New Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
+                    Exit Sub
+                Finally
+
+                    cn.Close()
+                    cm.Dispose()
+
+                End Try
+
+                ' Renglon 3
+
+                RenglonDife = RenglonDife + 1
+
+                XRenglon = Proceso.ceros(RenglonDife, 2)
+
+                XTipomovi = "2"
+                XTipocomp = WTipoDife
+                XLetracomp = WLetraDife
+                XPuntocomp = WPuntoDife
+                XNrocomp = WNumeroDife
+                'XFecha = Fecha.Text
+                XObservaciones = ""
+                Select Case Val(WTipoDife)
+                    Case 2
+                        XCuenta = "2001"
+                        XDebito = 0
+                        XCredito = Val(Proceso.formatonumerico(Math.Abs(WNetoDife) + Math.Abs(WIvaDife)))
+                    Case Else
+                        XCuenta = "2001"
+                        XDebito = Val(Proceso.formatonumerico(Math.Abs(WNetoDife) + Math.Abs(WIvaDife)))
+                        XCredito = 0
+                End Select
+                XFechaOrd = XOrdFecha
+                XTitulo = "Compras"
+                XEmpresa = "1"
+                XClave = XTipomovi & interno & XRenglon
+                XDebitolist = 0.0
+                XCreditolist = 0.0
+
+                XParamImputac = ""
+
+                XParamImputac = "'" & XClave & "','" _
+                        & XTipomovi & "','" & XProveedor & "','" _
+                        & XTipocomp & "','" _
+                        & XLetracomp & "','" & XPuntocomp & "','" _
+                        & XNrocomp & "','" _
+                        & XRenglon & "','" _
+                        & XFecha & "','" & XObservaciones & "','" _
+                        & XCuenta & "'," _
+                        & Str$(XDebito) & "," _
+                        & Str$(XCredito) & ",'" & XFechaOrd & "','" _
+                        & XTitulo & "'," & XEmpresa & "," _
+                        & Str$(XDebitolist) & "," _
+                        & Str$(XCreditolist) & "," _
+                        & interno & ""
+
+
+                Try
+                    cn.Open()
+                    trans = cn.BeginTransaction
+
+                    cm.Transaction = trans
+
+                    cm.CommandText = ZSqlImputac.ToString.Replace("#PARAM#", XParamImputac)
+
+                    cm.ExecuteNonQuery()
+
+                    trans.Commit()
+
+                Catch ex As Exception
+
+                    If Not IsNothing(trans) Then
+                        trans.Rollback()
+                    End If
+
+                    Throw New Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
+                    Exit Sub
+                Finally
+
+                    cn.Close()
+                    cm.Dispose()
+
+                End Try
+
+                ' Grabamos damos de alta en la Cta Cte de Proveedores.
+                XProveedor = txtProveedor.Text
+                XLetra = WLetraDife
+                XTipo = WTipoDife
+                XPunto = WPuntoDife
+                XNumero = WNumeroDife
+                XFecha = txtFecha.Text
+                XEstado = "1"
+                XVencimiento = XFecha
+                XVencimiento1 = XFecha
+                XNroInterno = XNroInterno
+                XTotal = Val(Proceso.formatonumerico((WNetoDife + WIvaDife)))
+                XSaldo = Val(Proceso.formatonumerico((WNetoDife + WIvaDife)))
+                XClave = XProveedor & WLetraDife & WTipoDife & WPuntoDife & WNumeroDife
+                XOrdFecha = Proceso.ordenaFecha(XFecha)
+                XOrdVencimiento = XOrdFecha
+                Select Case Val(WTipoDife)
+                    Case 1
+                        XImpre = "FC"
+                    Case 2
+                        XImpre = "ND"
+                    Case 3
+                        XImpre = "NC"
+                    Case Else
+                        XImpre = ""
+                End Select
+                XEmpresa = "1"
+                XSaldolist = 0.0
+                Xlista = ""
+                XAcumulado = 0.0
+                XParidad = 0.0
+                XPAgo = "1"
+
+                XParam = "'" & XClave & "','" _
+                        & XProveedor & "','" & XLetra & "','" _
+                        & XTipo & "','" _
+                        & XPunto & "','" & XNumero & "','" _
+                        & XFecha & "','" _
+                        & XEstado & "','" _
+                        & XVencimiento & "','" & XVencimiento1 & "'," _
+                        & Str$(XTotal) & "," _
+                        & Str$(XSaldo) & ",'" _
+                        & XOrdFecha & "','" & XOrdVencimiento & "','" _
+                        & XImpre & "','" & XEmpresa & "'," _
+                        & Str$(XSaldolist) & "," _
+                        & interno & ",'" & Xlista & "'," _
+                        & Str$(XAcumulado) & "," _
+                        & Str$(XParidad) & "," _
+                        & Str$(XPAgo) & ""
+
+                XSql = "INSERT INTO CtaCtePrv (Clave, Proveedor, Letra, Tipo, Punto, Numero, fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Lista, Acumulado, Paridad, Pago) VALUES (#PARAM#)"
+
+
+                Try
+                    cn.Open()
+                    trans = cn.BeginTransaction
+
+                    cm.Transaction = trans
+
+                    cm.CommandText = XSql.ToString.Replace("#PARAM#", XParam)
+
+                    cm.ExecuteNonQuery()
+
+                    trans.Commit()
+
+                Catch ex As Exception
+
+                    If Not IsNothing(trans) Then
+                        trans.Rollback()
+                    End If
+
+                    Throw New Exception("Hubo un problema al intentar grabar la Cta Cte del Proveedor en la Base de Datos.")
+                    Exit Sub
+                Finally
+
+                    cn.Close()
+                    cm.Dispose()
+
+                End Try
 
             End If
-            ' ultimoNumero = row.Cells(3).Value
         Next
     End Sub
 
@@ -2657,30 +3151,35 @@ Public Class Pagos
         Dim cuenta As Integer = 0
         debitoProv = 0
         debitoIva = debitoCuenta = creditoProv = creditoIva = creditoCuenta = debitoProv
-        If compra.tipoDocumentoDescripcion = "ND" Then
-            debitoCuenta = compra.neto
-            debitoIva = compra.iva21
-            creditoProv = compra.total
-            cuenta = 6107
-        Else
-            creditoCuenta = compra.neto
-            creditoIva = compra.iva21
-            debitoProv = compra.total
-            cuenta = 7308
-        End If
-        'For Each row As DataGridViewRow In gridAsientos.Rows
-        'If Not row.IsNewRow Then
+        Try
+            If compra.tipoDocumentoDescripcion = "ND" Then
+                debitoCuenta = compra.neto
+                debitoIva = compra.iva21
+                creditoProv = compra.total
+                cuenta = 6107
+            Else
+                creditoCuenta = compra.neto
+                creditoIva = compra.iva21
+                debitoProv = compra.total
+                cuenta = 7308
+            End If
+            'For Each row As DataGridViewRow In gridAsientos.Rows
+            'If Not row.IsNewRow Then
 
-        imputaciones.Add(New Imputac(compra.fechaEmision, debitoProv, creditoProv, compra.proveedor.id.ToString, 2001, compra.nroInterno,
-                                     compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, "01"))
-        imputaciones.Add(New Imputac(compra.fechaEmision, debitoIva, creditoIva, compra.proveedor.id.ToString, 151, compra.nroInterno,
-                                     compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, "02"))
-        imputaciones.Add(New Imputac(compra.fechaEmision, debitoCuenta, creditoCuenta, compra.proveedor.id.ToString, cuenta, compra.nroInterno,
-                             compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, "03"))
-        'End If
-        'Next
+            imputaciones.Add(New Imputac(compra.fechaEmision, debitoProv, creditoProv, compra.proveedor.id.ToString, 2001, compra.nroInterno,
+                                         compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, "01"))
+            imputaciones.Add(New Imputac(compra.fechaEmision, debitoIva, creditoIva, compra.proveedor.id.ToString, 151, compra.nroInterno,
+                                         compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, "02"))
+            imputaciones.Add(New Imputac(compra.fechaEmision, debitoCuenta, creditoCuenta, compra.proveedor.id.ToString, cuenta, compra.nroInterno,
+                                 compra.punto, compra.numero, compra.despacho, compra.letra, compra.tipoDocumento, "03"))
+            'End If
+            'Next
 
-        compra.agregarImputaciones(imputaciones)
+            compra.agregarImputaciones(imputaciones)
+        Catch ex As Exception
+            Throw New Exception("Hubo un error al querer generar el alta de las imputaciones de la nota de Credito / Debito.")
+            Exit Sub
+        End Try
     End Sub
 
     Private Function crearPagos()
@@ -2776,6 +3275,9 @@ Public Class Pagos
                 .Cells(3).Value = ""
                 .Cells(4).Value = ""
                 .Cells(5).Value = ""
+
+                sumarImportes()
+
             ElseIf anterior = 2 Or anterior = 4 Then
                 nombre = .Cells(4).Value
             End If
