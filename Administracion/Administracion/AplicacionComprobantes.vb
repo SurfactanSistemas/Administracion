@@ -160,6 +160,10 @@ Public Class AplicacionComprobantes
         Return ultimo + 1
     End Function
 
+    Private Function _NormalizarNumero(ByVal valor)
+        Return Proceso.formatonumerico(valor)
+    End Function
+
     Private Sub btnGraba_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraba.Click
         Dim saldo As Double = 0 ' Convert.ToDouble(txtSaldo.Text)
         Dim importe As Double = 0
@@ -169,7 +173,8 @@ Public Class AplicacionComprobantes
         Try
             _RecalcularSaldo()
 
-            saldo = Convert.ToDouble(txtSaldo.Text)
+            'saldo = Convert.ToDouble(txtSaldo.Text)
+            saldo = Val(_NormalizarNumero(txtSaldo.Text))
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -184,12 +189,13 @@ Public Class AplicacionComprobantes
 
             For Each row As DataGridViewRow In dtgCuentas.Rows
                 If Not row.IsNewRow Then
-                    importe = CustomConvert.toDoubleOrZero(row.Cells(7).Value)
+                    'importe = CustomConvert.toDoubleOrZero(row.Cells(7).Value)
+                    importe = Val(_NormalizarNumero(row.Cells(7).Value))
 
                     If importe <> 0 Then
                         ' Actualizamos la cta cte del proveedor.
                         Try
-                            SQLConnector.retrieveDataTable("actualizar_cuenta_corriente_proveedor", row.Cells(8).Value.ToString, row.Cells(1).Value.ToString, row.Cells(2).Value.ToString, row.Cells(3).Value.ToString, row.Cells(4).Value.ToString, CustomConvert.toDoubleOrZero(-1 * row.Cells(7).Value), Trim(txtProveedor.Text))
+                            SQLConnector.retrieveDataTable("actualizar_cuenta_corriente_proveedor", row.Cells(8).Value.ToString, row.Cells(1).Value.ToString, row.Cells(2).Value.ToString, row.Cells(3).Value.ToString, row.Cells(4).Value.ToString, -1 * importe, Trim(txtProveedor.Text))
                         Catch ex As Exception
                             MsgBox("Ocurrió un problema al querer actualizar la Cuenta Corriente del Proveedor.")
                             Exit Sub
@@ -437,7 +443,7 @@ Public Class AplicacionComprobantes
             End If
 
             tipo = _row.Cells(8).Value
-            valor = Convert.ToDouble(_row.Cells(7).Value)
+            valor = Val(_NormalizarNumero(_row.Cells(7).Value)) 'Convert.ToDouble(_row.Cells(7).Value)
             iRow = _row.Index
             iCol = 7
 
