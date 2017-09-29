@@ -11,8 +11,7 @@
         'MsgBox("En Desarrollo. Sin Implementacion todavia.")
         'Exit Sub
         With HistorialProforma
-            .ShowDialog()
-            .Dispose()
+            .Show()
         End With
     End Sub
 End Class

@@ -590,4 +590,12 @@ Public Class HistorialProforma
         _MostrarHistorial()
 
     End Sub
+
+    Private Sub btnArchivos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnArchivos.Click
+        ' Abrimos ventana de archivos Relacionados.
+        With ArchivosRelacionados
+            .NroProforma = txtNroProforma.Text
+            .Show()
+        End With
+    End Sub
 End Class

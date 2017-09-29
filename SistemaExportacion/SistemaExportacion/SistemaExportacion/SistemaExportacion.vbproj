@@ -67,6 +67,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -87,6 +88,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchivosRelacionados.Designer.vb">
+      <DependentUpon>ArchivosRelacionados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ArchivosRelacionados.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HistorialProforma.Designer.vb">
       <DependentUpon>HistorialProforma.vb</DependentUpon>
     </Compile>
@@ -136,6 +143,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ArchivosRelacionados.resx">
+      <DependentUpon>ArchivosRelacionados.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HistorialProforma.resx">
       <DependentUpon>HistorialProforma.vb</DependentUpon>
     </EmbeddedResource>
@@ -310,6 +320,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imagen_icono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf_icono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Word_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Excel_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
