@@ -8,8 +8,8 @@
     End Sub
 
     Private Sub btnHistorialProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistorialProforma.Click
-        MsgBox("En Desarrollo. Sin Implementacion todavia.")
-        Exit Sub
+        'MsgBox("En Desarrollo. Sin Implementacion todavia.")
+        'Exit Sub
         With HistorialProforma
             .ShowDialog()
             .Dispose()

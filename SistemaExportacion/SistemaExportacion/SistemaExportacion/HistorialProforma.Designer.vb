@@ -23,9 +23,8 @@ Partial Class HistorialProforma
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -35,9 +34,6 @@ Partial Class HistorialProforma
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.dgvProductos = New System.Windows.Forms.DataGridView()
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Observacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Usuario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -46,14 +42,21 @@ Partial Class HistorialProforma
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtTotal = New System.Windows.Forms.TextBox()
+        Me.txtUsuario = New System.Windows.Forms.TextBox()
         Me.txtDescripcionCliente = New System.Windows.Forms.TextBox()
         Me.txtCliente = New System.Windows.Forms.TextBox()
-        Me.txtDescripcionTotal = New System.Windows.Forms.TextBox()
+        Me.txtObservacion = New System.Windows.Forms.TextBox()
         Me.txtNroProforma = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.WClaveObservacion = New System.Windows.Forms.TextBox()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Observacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Usuario = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Clave = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaOrd = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnEliminar = New System.Windows.Forms.Button()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -159,6 +162,7 @@ Partial Class HistorialProforma
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel1.Controls.Add(Me.txtFechaAux)
         Me.Panel1.Controls.Add(Me.dgvProductos)
+        Me.Panel1.Controls.Add(Me.btnEliminar)
         Me.Panel1.Controls.Add(Me.btnLimpiar)
         Me.Panel1.Controls.Add(Me.txtFecha)
         Me.Panel1.Controls.Add(Me.Label5)
@@ -167,10 +171,11 @@ Partial Class HistorialProforma
         Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.Label14)
         Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Controls.Add(Me.txtTotal)
+        Me.Panel1.Controls.Add(Me.WClaveObservacion)
+        Me.Panel1.Controls.Add(Me.txtUsuario)
         Me.Panel1.Controls.Add(Me.txtDescripcionCliente)
         Me.Panel1.Controls.Add(Me.txtCliente)
-        Me.Panel1.Controls.Add(Me.txtDescripcionTotal)
+        Me.Panel1.Controls.Add(Me.txtObservacion)
         Me.Panel1.Controls.Add(Me.txtNroProforma)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
@@ -198,46 +203,19 @@ Partial Class HistorialProforma
         Me.dgvProductos.AllowUserToOrderColumns = True
         Me.dgvProductos.AllowUserToResizeRows = False
         Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Observacion, Me.Usuario})
+        Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Observacion, Me.Usuario, Me.Clave, Me.FechaOrd})
         Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.dgvProductos.Location = New System.Drawing.Point(20, 50)
+        Me.dgvProductos.MultiSelect = False
         Me.dgvProductos.Name = "dgvProductos"
         Me.dgvProductos.Size = New System.Drawing.Size(574, 281)
         Me.dgvProductos.TabIndex = 8
         '
-        'Fecha
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.MaxInputLength = 12
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Fecha.Width = 80
-        '
-        'Observacion
-        '
-        Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Observacion.HeaderText = "Observación"
-        Me.Observacion.Name = "Observacion"
-        Me.Observacion.ReadOnly = True
-        Me.Observacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Usuario
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Usuario.DefaultCellStyle = DataGridViewCellStyle6
-        Me.Usuario.HeaderText = "Usuario"
-        Me.Usuario.Name = "Usuario"
-        Me.Usuario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(779, 234)
+        Me.btnLimpiar.Location = New System.Drawing.Point(814, 234)
         Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(112, 45)
+        Me.btnLimpiar.Size = New System.Drawing.Size(90, 45)
         Me.btnLimpiar.TabIndex = 0
         Me.btnLimpiar.Text = "Limpiar"
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
@@ -281,9 +259,9 @@ Partial Class HistorialProforma
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(641, 234)
+        Me.btnAceptar.Location = New System.Drawing.Point(625, 234)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(112, 45)
+        Me.btnAceptar.Size = New System.Drawing.Size(88, 45)
         Me.btnAceptar.TabIndex = 0
         Me.btnAceptar.Text = "Aceptar"
         Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Proforma")
@@ -328,16 +306,15 @@ Partial Class HistorialProforma
         Me.Label4.Text = "Proforma:"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'txtTotal
+        'txtUsuario
         '
-        Me.txtTotal.BackColor = System.Drawing.SystemColors.Window
-        Me.txtTotal.Location = New System.Drawing.Point(794, 72)
-        Me.txtTotal.Name = "txtTotal"
-        Me.txtTotal.ReadOnly = True
-        Me.txtTotal.Size = New System.Drawing.Size(124, 20)
-        Me.txtTotal.TabIndex = 0
-        Me.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ToolTip1.SetToolTip(Me.txtTotal, "Total")
+        Me.txtUsuario.BackColor = System.Drawing.SystemColors.Window
+        Me.txtUsuario.Location = New System.Drawing.Point(813, 72)
+        Me.txtUsuario.MaxLength = 20
+        Me.txtUsuario.Name = "txtUsuario"
+        Me.txtUsuario.Size = New System.Drawing.Size(105, 20)
+        Me.txtUsuario.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.txtUsuario, "Total")
         '
         'txtDescripcionCliente
         '
@@ -353,18 +330,19 @@ Partial Class HistorialProforma
         Me.txtCliente.Location = New System.Drawing.Point(243, 23)
         Me.txtCliente.MaxLength = 6
         Me.txtCliente.Name = "txtCliente"
+        Me.txtCliente.ReadOnly = True
         Me.txtCliente.Size = New System.Drawing.Size(79, 20)
         Me.txtCliente.TabIndex = 0
         '
-        'txtDescripcionTotal
+        'txtObservacion
         '
-        Me.txtDescripcionTotal.Location = New System.Drawing.Point(613, 121)
-        Me.txtDescripcionTotal.MaxLength = 100
-        Me.txtDescripcionTotal.Multiline = True
-        Me.txtDescripcionTotal.Name = "txtDescripcionTotal"
-        Me.txtDescripcionTotal.Size = New System.Drawing.Size(305, 102)
-        Me.txtDescripcionTotal.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.txtDescripcionTotal, "Descripción en Inglés del Monto Total")
+        Me.txtObservacion.Location = New System.Drawing.Point(613, 121)
+        Me.txtObservacion.MaxLength = 100
+        Me.txtObservacion.Multiline = True
+        Me.txtObservacion.Name = "txtObservacion"
+        Me.txtObservacion.Size = New System.Drawing.Size(305, 102)
+        Me.txtObservacion.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.txtObservacion, "Descripción en Inglés del Monto Total")
         '
         'txtNroProforma
         '
@@ -393,6 +371,68 @@ Partial Class HistorialProforma
         Me.btnCerrar.Text = "Cerrar"
         Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
         Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'WClaveObservacion
+        '
+        Me.WClaveObservacion.BackColor = System.Drawing.SystemColors.Window
+        Me.WClaveObservacion.Location = New System.Drawing.Point(700, 99)
+        Me.WClaveObservacion.MaxLength = 20
+        Me.WClaveObservacion.Name = "WClaveObservacion"
+        Me.WClaveObservacion.ReadOnly = True
+        Me.WClaveObservacion.Size = New System.Drawing.Size(19, 20)
+        Me.WClaveObservacion.TabIndex = 0
+        Me.WClaveObservacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.WClaveObservacion.Visible = False
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 12
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        Me.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Fecha.Width = 80
+        '
+        'Observacion
+        '
+        Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Observacion.HeaderText = "Observación"
+        Me.Observacion.Name = "Observacion"
+        Me.Observacion.ReadOnly = True
+        Me.Observacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Usuario
+        '
+        Me.Usuario.HeaderText = "Usuario"
+        Me.Usuario.Name = "Usuario"
+        Me.Usuario.ReadOnly = True
+        Me.Usuario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Clave
+        '
+        Me.Clave.HeaderText = "Clave"
+        Me.Clave.Name = "Clave"
+        Me.Clave.Visible = False
+        '
+        'FechaOrd
+        '
+        Me.FechaOrd.HeaderText = "FechaOrd"
+        Me.FechaOrd.Name = "FechaOrd"
+        Me.FechaOrd.Visible = False
+        '
+        'btnEliminar
+        '
+        Me.btnEliminar.Location = New System.Drawing.Point(720, 234)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(90, 45)
+        Me.btnEliminar.TabIndex = 0
+        Me.btnEliminar.Text = "Eliminar"
+        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar Observación")
+        Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'HistorialProforma
         '
@@ -434,11 +474,15 @@ Partial Class HistorialProforma
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents txtUsuario As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservacion As System.Windows.Forms.TextBox
+    Friend WithEvents WClaveObservacion As System.Windows.Forms.TextBox
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Observacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Usuario As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents txtTotal As System.Windows.Forms.TextBox
-    Friend WithEvents txtDescripcionTotal As System.Windows.Forms.TextBox
+    Friend WithEvents Clave As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FechaOrd As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnEliminar As System.Windows.Forms.Button
 End Class

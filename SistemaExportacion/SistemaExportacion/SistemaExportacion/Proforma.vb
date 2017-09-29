@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports CrystalDecisions.Shared
+Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class Proforma
 
@@ -9,7 +11,7 @@ Public Class Proforma
 
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
-    
+
     Private Sub Proforma_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         _LimpiarGrilla()
@@ -924,8 +926,28 @@ Public Class Proforma
     End Sub
 
     Private Sub btnVistaPrevia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVistaPrevia.Click
+        'Dim doc As ReportDocument = New ProformaVistaPrevia
+        'Dim sConn As New SqlConnectionStringBuilder(_CS)
+
+        'Dim tables As CrystalDecisions.CrystalReports.Engine.Tables = doc.Database.Tables
+
+        'For Each table As CrystalDecisions.CrystalReports.Engine.Table In tables
+
+        '    Dim tableLogOnInfo As CrystalDecisions.Shared.TableLogOnInfo = table.LogOnInfo
+
+        '    tableLogOnInfo.ConnectionInfo.ServerName = sConn.DataSource
+
+        '    tableLogOnInfo.ConnectionInfo.DatabaseName = sConn.InitialCatalog
+
+        '    tableLogOnInfo.ConnectionInfo.IntegratedSecurity = True
+
+        '    table.ApplyLogOnInfo(tableLogOnInfo)
+
+        'Next
+
         With VistaPrevia
             .Reporte = New ProformaVistaPrevia
+            '.Reporte.DataSourceConnections(0).SetLogonProperties()
             .Formula = "{ProformaExportacion.Proforma} = '" & txtNroProforma.Text & "'"
             .Mostrar()
         End With

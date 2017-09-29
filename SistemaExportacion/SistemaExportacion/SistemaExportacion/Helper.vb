@@ -45,17 +45,15 @@ Module Helper
     Public Function _ConectarA(Optional ByVal empresa As String = "SurfactanSA") As String
 
         Dim _empresa = empresas.Find(Function(e) UCase(e) = UCase(empresa))
-        Dim cs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
-        Dim csx As String = "Data Source=(LOCAL)\LOCALSQLEXPRESS;Initial Catalog=#EMPRESA#;Trusted_Connection=True"
 
         If Not IsNothing(_empresa) Then
 
             TESTING = ConfigurationManager.AppSettings("TESTING")
 
             If TESTING Then
-                Return csx.Replace("#EMPRESA#", _empresa)
+                Return ConfigurationManager.ConnectionStrings("LOCAL").ToString.Replace("#EMPRESA#", _empresa)
             Else
-                Return cs.Replace("#EMPRESA#", _empresa)
+                Return ConfigurationManager.ConnectionStrings("SURFACTAN").ToString.Replace("#EMPRESA#", _empresa)
             End If
 
         Else
