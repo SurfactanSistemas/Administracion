@@ -4,7 +4,7 @@ Imports Microsoft.VisualBasic.FileIO
 
 Public Class ArchivosRelacionados
 
-    Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico"
+    Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
 
     Private _NroProforma As String
     Public Property NroProforma() As String
@@ -75,7 +75,7 @@ Public Class ArchivosRelacionados
     End Sub
 
     Private Function _ObtenerIconoSegunTipoArchivo(ByVal extension As String)
-        Dim icono
+        Dim icono = Nothing
 
         'My.Resources.pdf_icon
 
@@ -90,8 +90,10 @@ Public Class ArchivosRelacionados
                 icono = My.Resources.pdf_icono
             Case ".JPG", ".JPEG", ".BMP", ".ICO", ".PNG"
                 icono = My.Resources.imagen_icono
+            Case ".TXT"
+                icono = My.Resources.txt_icono
             Case Else
-
+                icono = My.Resources.archivo_default
         End Select
 
 
@@ -152,5 +154,97 @@ Public Class ArchivosRelacionados
 
             End If
         End With
+    End Sub
+
+    Private Sub txtNroProforma_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroProforma.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtNroProforma.Text) = "" Then : Exit Sub : End If
+
+            Try
+                _BuscarClienteProforma()
+
+                _CargarArchivosRelacionados()
+
+                With dgvProductos
+                    If .Rows.Count > 0 Then
+                        .CurrentCell = .Rows(0).Cells(0)
+                        .Focus()
+                    Else
+                        txtNroProforma.SelectAll()
+                    End If
+                End With
+
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+            End Try
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNroProforma.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub dgvProductos_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvProductos.DragEnter
+        _PermitirDrag(e)
+    End Sub
+
+    Private Sub _PermitirDrag(ByVal e As System.Windows.Forms.DragEventArgs)
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
+
+    Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
+
+        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
+
+        Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+        Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+        Dim WDestino As String = ""
+        Dim WCantCorrectas = 0
+
+        If archivos.Length = 0 Then : Exit Sub : End If
+
+        For Each archivo In archivos
+
+            If File.Exists(archivo) Then
+
+                If EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(archivo).ToLower()) Then
+
+                    WDestino = WRutaArchivosRelacionados & "\" & Path.GetFileName(archivo)
+
+                    Try
+                        If Not File.Exists(WDestino) Then
+                            File.Copy(archivo, WDestino)
+                            WCantCorrectas += 1
+                        Else
+                            If MsgBox("El Archivo " & Path.GetFileName(archivo) & ", ya existe en la carpeta. ¿Desea sobreescribir el archivo existente?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                                File.Copy(archivo, WDestino, True)
+                                WCantCorrectas += 1
+                            End If
+                        End If
+
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                        Exit Sub
+                    End Try
+
+                End If
+
+            End If
+
+        Next
+
+        If WCantCorrectas > 0 Then
+            MsgBox("Se subieron correctamente " & WCantCorrectas & " Archivo(s)", MsgBoxStyle.Information)
+        End If
+
+        _CargarArchivosRelacionados()
+
+    End Sub
+
+    Private Sub dgvProductos_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvProductos.DragDrop
+        _ProcesarDragDeArchivo(e)
     End Sub
 End Class

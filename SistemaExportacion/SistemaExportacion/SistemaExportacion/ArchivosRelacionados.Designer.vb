@@ -176,6 +176,7 @@ Partial Class ArchivosRelacionados
         '
         'dgvProductos
         '
+        Me.dgvProductos.AllowDrop = True
         Me.dgvProductos.AllowUserToAddRows = False
         Me.dgvProductos.AllowUserToDeleteRows = False
         Me.dgvProductos.AllowUserToOrderColumns = True
