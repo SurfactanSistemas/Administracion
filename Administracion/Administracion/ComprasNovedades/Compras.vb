@@ -261,7 +261,8 @@ Public Class Compras
 
         If IsNothing(text) Then : Return text : End If
 
-        Return CustomConvert.toDoubleOrZero(text.Replace(".", ","))
+        'Return CustomConvert.toDoubleOrZero(text.Replace(".", ","))
+        Return Val(Proceso.formatonumerico(text))
     End Function
 
     Private Function validarCampos() As Boolean

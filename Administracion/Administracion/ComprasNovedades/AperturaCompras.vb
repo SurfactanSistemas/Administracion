@@ -49,7 +49,8 @@ Public Class Apertura
     End Sub
 
     Private Function asDouble(ByVal valor)
-        Return CustomConvert.toStringWithTwoDecimalPlaces(CustomConvert.toDoubleOrZero(valor))
+        'Return CustomConvert.toStringWithTwoDecimalPlaces(CustomConvert.toDoubleOrZero(valor))
+        Return Proceso.formatonumerico(valor)
     End Function
 
 
@@ -57,7 +58,7 @@ Public Class Apertura
         Dim suma As Double
         For Each row As DataGridViewRow In gridApertura.Rows
             If Not row.IsNewRow Then
-                suma += asDouble(row.Cells(index).Value)
+                suma += Val(asDouble(row.Cells(index).Value))
             End If
         Next
         Return suma
