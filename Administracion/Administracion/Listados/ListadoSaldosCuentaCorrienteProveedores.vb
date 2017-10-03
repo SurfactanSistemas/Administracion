@@ -78,9 +78,9 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
 
         Select Case TipoImpresion
             Case Reporte.Imprimir
-                viewer.Show()
-            Case Reporte.Pantalla
                 viewer.imprimirReporte()
+            Case Reporte.Pantalla
+                viewer.Show()
             Case Else
 
         End Select

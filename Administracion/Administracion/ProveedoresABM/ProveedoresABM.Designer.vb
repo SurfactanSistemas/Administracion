@@ -1538,6 +1538,7 @@ Partial Class ProveedoresABM
         Me.Button1.TabIndex = 97
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'ProveedoresABM
         '

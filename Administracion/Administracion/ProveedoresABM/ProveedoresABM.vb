@@ -1470,14 +1470,14 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Dim _provedores As New List(Of String) From {"01000000012", "01000000001", "00000000008", "10008321238", "1000466464 ", "00000000010", "00000000009", "10067727539", "10999888782", "10014871417", "10053801902"}
+        'Dim _provedores As New List(Of String) From {"01000000012", "01000000001", "00000000008", "10008321238", "1000466464 ", "00000000010", "00000000009", "10067727539", "10999888782", "10014871417", "10053801902"}
 
-        For Each _Proveedor As String In _provedores
-            txtCodigo.Text = _Proveedor
-            txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        'For Each _Proveedor As String In _provedores
+        '    txtCodigo.Text = _Proveedor
+        '    txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
-            btnAgregar.PerformClick()
-        Next
+        '    btnAgregar.PerformClick()
+        'Next
 
     End Sub
 End Class

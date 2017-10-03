@@ -201,11 +201,13 @@ Public Class AltaAgenda
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
         Dim ZSql As String = ""
 
+        If Trim(txtFecha.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
         If Not Proceso._ValidarFecha(txtFecha.Text) Then : Exit Sub : End If
 
         If Val(txtHora.Text) < 0 Then : Exit Sub : End If
 
-        ZSql = "UPDATE Cliente SET #FECHA# = '" & Trim(txtFecha.Text) & "', #HORA# = " & Proceso.formatonumerico(txtHora.Text) & ", #ANOTACION# = '" & Trim(txtAnotacion.Text) & "', #ORDFECHA# = '" & Proceso.ordenaFecha(txtFecha.Text) & "' WHERE Cliente = '" & Me.Cliente & "'"
+        ZSql = "UPDATE Cliente SET #FECHA# = '" & txtFecha.Text & "', #HORA# = " & Proceso.formatonumerico(txtHora.Text) & ", #ANOTACION# = '" & Trim(txtAnotacion.Text) & "', #ORDFECHA# = '" & Proceso.ordenaFecha(txtFecha.Text) & "' WHERE Cliente = '" & Me.Cliente & "'"
 
         ' CHEKEAR BIEN CUANDO SE ACTUALIZA Y CUANDO NO.
         ' AHORA ESTA QUEDANDO DE LA SIGUIENTE MANERA:

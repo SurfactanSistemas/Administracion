@@ -57,7 +57,14 @@
 
         Dim txtOrdenaFecha As String
 
-        txtOrdenaFecha = Right$(fecha, 4) + Mid$(fecha, 4, 2) + Left$(fecha, 2)
+        'txtOrdenaFecha = Right$(fecha, 4) + Mid$(fecha, 4, 2) + Left$(fecha, 2)
+
+        If Trim(fecha.Replace("/", "")) <> "" Then
+            txtOrdenaFecha = String.Join("", fecha.Split("/").Reverse())
+        Else
+            txtOrdenaFecha = 0
+        End If
+
         Return txtOrdenaFecha
 
     End Function

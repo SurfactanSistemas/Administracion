@@ -654,6 +654,7 @@ Public Class Recibos
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
+                btnLimpiar.PerformClick()
                 _ClavesCheques.Clear()
                 _CuentasContables.Clear()
                 gridFormasPago2.Rows.Clear()
