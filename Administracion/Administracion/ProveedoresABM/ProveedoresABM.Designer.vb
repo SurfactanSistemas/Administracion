@@ -121,6 +121,7 @@ Partial Class ProveedoresABM
         Me.btnAgregar = New System.Windows.Forms.Button()
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.txtCAI = New Administracion.CustomTextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -557,7 +558,7 @@ Partial Class ProveedoresABM
         Me.txtCUIT.Size = New System.Drawing.Size(92, 20)
         Me.txtCUIT.TabIndex = 102
         Me.txtCUIT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCUIT.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        Me.txtCUIT.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         '
         'cmbCalificacion
         '
@@ -1529,11 +1530,21 @@ Partial Class ProveedoresABM
         Me.txtCAI.Validator = Administracion.ValidatorType.None
         Me.txtCAI.Visible = False
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(500, 479)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 97
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'ProveedoresABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(820, 689)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.LBConsulta_Opciones)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.txtFiltrar)
@@ -1663,4 +1674,5 @@ Partial Class ProveedoresABM
     Friend WithEvents CustomLabel26 As Administracion.CustomLabel
     Friend WithEvents txtClienteAsociadoDescripcion As System.Windows.Forms.TextBox
     Friend WithEvents CKBProveedorInactivo As System.Windows.Forms.CheckBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

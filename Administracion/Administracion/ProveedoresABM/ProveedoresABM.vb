@@ -201,11 +201,6 @@ Public Class ProveedoresABM
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
 
-        ' Comprobamos que exista cuenta contable.
-        ' Comprobamos que se haya informado tipo proveedor.
-        ' Comprobamos que si se informó numero de sedrona, se haya cargado tambien la fecha.
-        ' Comprobamos que numero de cuit sea correcto.
-
         ' Recorrer todos las plantas y actualizar en cada ocurrencia.
 
         For Each _Empresa In _Empresas
@@ -994,6 +989,8 @@ Public Class ProveedoresABM
         Dim valido As Boolean = False
         Dim suma As Integer = 0
 
+        cuit = cuit.Replace("-", "")
+
         For i = 1 To 11
             suma = suma + (Val(Mid(cuit, i, 1)) * Val(Mid(VALIDA_CUIT, i, 1)))
         Next
@@ -1470,5 +1467,17 @@ Public Class ProveedoresABM
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim _provedores As New List(Of String) From {"01000000012", "01000000001", "00000000008", "10008321238", "1000466464 ", "00000000010", "00000000009", "10067727539", "10999888782", "10014871417", "10053801902"}
+
+        For Each _Proveedor As String In _provedores
+            txtCodigo.Text = _Proveedor
+            txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+            btnAgregar.PerformClick()
+        Next
+
     End Sub
 End Class

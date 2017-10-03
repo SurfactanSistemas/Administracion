@@ -298,9 +298,9 @@ Partial Class ListadoImputacionesContable
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
         Me.Label1.Location = New System.Drawing.Point(27, 16)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(132, 19)
+        Me.Label1.Size = New System.Drawing.Size(246, 19)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Ingreso de Bancos"
+        Me.Label1.Text = "Listado de Imputaciones Contables"
         '
         'Panel2
         '
@@ -390,7 +390,6 @@ Partial Class ListadoImputacionesContable
         Me.Controls.Add(Me.CustomLabel1)
         Me.Controls.Add(Me.Panel2)
         Me.Name = "ListadoImputacionesContable"
-        Me.Text = "Listado de Imputaciones Contables"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.Panel1.ResumeLayout(False)

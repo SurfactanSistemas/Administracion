@@ -130,7 +130,8 @@ Public Class DAOCompras
     End Function
 
     Private Shared Function asDouble(ByVal value)
-        Return CustomConvert.toDoubleOrZero(value)
+        'Return CustomConvert.toDoubleOrZero(value)
+        Return Val(Proceso.formatonumerico(value))
     End Function
 
     Private Shared Function asBool(ByVal value)
