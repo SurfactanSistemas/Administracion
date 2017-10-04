@@ -230,6 +230,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Dim ZSql, WProveedor, WFecha, WFechaOrd, WObservaciones, WDesde, WHasta
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
+        Dim trans As SqlTransaction
 
         If GRilla.Rows.Count > 0 Then
 
@@ -239,15 +240,20 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             SQLConnector.conexionSql(cn, cm)
 
             Try
+                trans = cn.BeginTransaction
+                cm.Transaction = trans
                 cm.CommandText = "DELETE FROM ProveedorSelectivo"
                 cm.ExecuteNonQuery()
 
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                If Not IsNothing(trans) Then
+                    trans.Rollback()
+                End If
+                Throw New Exception(ex.Message)
                 Exit Sub
             Finally
-
-                cn.Close()
+                
+                'cn.Close()
 
             End Try
 
@@ -270,16 +276,18 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                             ZSql &= "VALUES ('" & WProveedor & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WObservaciones & "', '" & WDesde & "', '" & WHasta & "') "
 
                             Try
-                                cn.Open()
+                                'cn.Open()
                                 cm.CommandText = ZSql
                                 cm.ExecuteNonQuery()
 
                             Catch ex As Exception
-                                Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+                                If Not IsNothing(trans) Then
+                                    trans.Rollback()
+                                End If
+                                Throw New Exception(ex.Message)
                                 Exit Sub
                             Finally
-
-                                cn.Close()
+                                'cn.Close()
 
                             End Try
 
@@ -289,7 +297,14 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
             Next
 
+            If cn.State = 1 Then
+                Try
+                    trans.Commit()
+                    cn.Close()
+                Catch ex As Exception
 
+                End Try
+            End If
         End If
 
     End Sub
