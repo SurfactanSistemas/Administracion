@@ -1303,7 +1303,7 @@ Public Class Pagos
                                     .Cells(2).Value = XPunto
                                     .Cells(3).Value = "99999999"
                                     .Cells(4).Value = _NormalizarNumero(diferencia)
-                                    .Cells(5).Value = "N/D por Diferencia de Cambio "
+                                    .Cells(5).Value = IIf(Val(diferencia) > 0, "N/D por Diferencia de Cambio ", "N/C por Diferencia de Cambio ") ' "N/D por Diferencia de Cambio "
 
                                 End With
 
@@ -2725,12 +2725,13 @@ Public Class Pagos
                     WTipoDife = Proceso.ceros(.Cells(0).Value, 2)
                     WLetraDife = .Cells(1).Value
                     WPuntoDife = Proceso.ceros(.Cells(2).Value, 4)
+                    row.Cells(3).Value = Proceso.ceros(interno, 8)
                     WNumeroDife = Proceso.ceros(interno, 8)
                     interno = Proceso.ceros(interno, 6)
 
                     If UCase(Trim(WLetraDife)) = "A" Then
                         WNetoDife = .Cells(4).Value / 1.21
-                        WIvaDife = .Cells(4).Value - WNetoDife
+                        WIvaDife = Val(.Cells(4).Value) - Val(WNetoDife)
                     Else
                         WNetoDife = .Cells(4).Value
                         WIvaDife = 0.0
@@ -2749,8 +2750,8 @@ Public Class Pagos
                 XVencimiento = XFecha
                 XVencimiento1 = XFecha
                 XPeriodo = XFecha
-                XImpoNeto = Val(Proceso.formatonumerico(WNetoDife))
-                XIva21 = Val(Proceso.formatonumerico(WIvaDife))
+                XImpoNeto = Val(Proceso.formatonumerico(Val(WNetoDife)))
+                XIva21 = Val(Proceso.formatonumerico(Val(WIvaDife)))
                 XIva5 = 0
                 XIva27 = 0
                 XIb = 0
@@ -2773,7 +2774,7 @@ Public Class Pagos
                 XNetolist = 0.0
                 XExentolist = 0.0
                 XParidad = 0.0
-                XPAgo = 0.0
+                XPAgo = "1"
 
                 XParamIvaComp = ""
 
@@ -2793,11 +2794,14 @@ Public Class Pagos
                        & XEmpresa & "," & Str$(XNetolist) & "," _
                        & Str$(XExentolist) & "," _
                        & Str$(XParidad) & "," _
-                       & Str$(XPAgo) & ""
+                       & Val(XPAgo) & ", " _
+                       & "1,'',0,0,0,0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'' "
 
                 ZSqlIvaComp = ""
                 ZSqlIvaComp = "INSERT INTO IvaComp (NroInterno, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Vencimiento, Vencimiento1, Periodo, Neto, Iva21, Iva5, Iva27, Ib, Exento, " _
-                    & " Contado, Impre, OrdFecha, Empresa, NetoList, ExentoList, Paridad, Pago) VALUES (#PARAM#)"
+                    & " Contado, Impre, OrdFecha, Empresa, NetoList, ExentoList, Paridad, Pago, Rechazado, Remito, NroInternoAsociado, Iva105, SoloIva, RetIb1, NroRetIb1, RetIb2, NroRetIb2, " _
+                    & " RetIb3, NroRetIb3, RetIb4, NroRetIb4, RetIb5, NroRetIb5, RetIb6, NroRetIb6, RetIb7, NroRetIb7, RetIb8, NroRetIb8, RetIb9, NroRetIb9, RetIb10, NroRetIb10, RetIb11, NroRetIb11, " _
+                    & " RetIb12, NroRetIb12, RetIb13, NroRetIb13, RetIb14, NroRetIb14) VALUES (#PARAM#)"
 
                 Try
                     cn.ConnectionString = _CS()
@@ -2849,12 +2853,12 @@ Public Class Pagos
                 Select Case Val(WTipoDife)
                     Case 2
                         XCuenta = "6107"
-                        XDebito = Val(Proceso.formatonumerico(Math.Abs(WNetoDife)))
+                        XDebito = Val(Proceso.formatonumerico(Math.Abs(Val(WNetoDife))))
                         XCredito = 0
                     Case Else
                         XCuenta = "7308"
                         XDebito = 0
-                        XCredito = Val(Proceso.formatonumerico(Math.Abs(WNetoDife)))
+                        XCredito = Val(Proceso.formatonumerico(Math.Abs(Val(WNetoDife))))
                 End Select
                 XFechaOrd = XOrdFecha
                 XTitulo = "Compras"
@@ -2878,11 +2882,11 @@ Public Class Pagos
                         & XTitulo & "'," & XEmpresa & "," _
                         & Str$(XDebitolist) & "," _
                         & Str$(XCreditolist) & "," _
-                        & interno & ""
+                        & interno & ", '','',''"
 
                 ZSqlImputac = ""
 
-                ZSqlImputac = "INSERT INTO Imputac (Clave, TipoMovi, Proveedor, TipoComp, LetraComp, PuntoComp, NroComp, Renglon, Fecha, Observaciones, Cuenta, Debito, Credito, FechaOrd, Titulo, Empresa, DebitoList, CreditoList, NroInterno ) VALUES (#PARAM#)"
+                ZSqlImputac = "INSERT INTO Imputac (Clave, TipoMovi, Proveedor, TipoComp, LetraComp, PuntoComp, NroComp, Renglon, Fecha, Observaciones, Cuenta, Debito, Credito, FechaOrd, Titulo, Empresa, DebitoList, CreditoList, NroInterno, Periodo, PeriodoOrd, TituloII) VALUES (#PARAM#)"
 
 
                 Try
@@ -2927,12 +2931,12 @@ Public Class Pagos
                 Select Case Val(WTipoDife)
                     Case 2
                         XCuenta = "151"
-                        XDebito = Val(Proceso.formatonumerico(Math.Abs(WIvaDife)))
+                        XDebito = Val(Proceso.formatonumerico(Math.Abs(Val(WIvaDife))))
                         XCredito = 0
                     Case Else
                         XCuenta = "151"
                         XDebito = 0
-                        XCredito = Val(Proceso.formatonumerico(Math.Abs(WIvaDife)))
+                        XCredito = Val(Proceso.formatonumerico(Math.Abs(Val(WIvaDife))))
                 End Select
                 XFechaOrd = XOrdFecha
                 XTitulo = "Compras"
@@ -2956,7 +2960,7 @@ Public Class Pagos
                         & XTitulo & "'," & XEmpresa & "," _
                         & Str$(XDebitolist) & "," _
                         & Str$(XCreditolist) & "," _
-                        & interno & ""
+                        & interno & ", '', '', ''"
 
 
                 Try
@@ -3003,10 +3007,10 @@ Public Class Pagos
                     Case 2
                         XCuenta = "2001"
                         XDebito = 0
-                        XCredito = Val(Proceso.formatonumerico(Math.Abs(WNetoDife) + Math.Abs(WIvaDife)))
+                        XCredito = Val(Proceso.formatonumerico(Math.Abs(Val(WNetoDife)) + Math.Abs(Val(WIvaDife))))
                     Case Else
                         XCuenta = "2001"
-                        XDebito = Val(Proceso.formatonumerico(Math.Abs(WNetoDife) + Math.Abs(WIvaDife)))
+                        XDebito = Val(Proceso.formatonumerico(Math.Abs(Val(WNetoDife)) + Math.Abs(Val(WIvaDife))))
                         XCredito = 0
                 End Select
                 XFechaOrd = XOrdFecha
@@ -3031,7 +3035,7 @@ Public Class Pagos
                         & XTitulo & "'," & XEmpresa & "," _
                         & Str$(XDebitolist) & "," _
                         & Str$(XCreditolist) & "," _
-                        & interno & ""
+                        & interno & ", '', '', ''"
 
 
                 Try
@@ -3072,8 +3076,8 @@ Public Class Pagos
                 XVencimiento = XFecha
                 XVencimiento1 = XFecha
                 XNroInterno = XNroInterno
-                XTotal = Val(Proceso.formatonumerico((WNetoDife + WIvaDife)))
-                XSaldo = Val(Proceso.formatonumerico((WNetoDife + WIvaDife)))
+                XTotal = Val(Proceso.formatonumerico(Val(WNetoDife) + Val(WIvaDife)))
+                XSaldo = Val(Proceso.formatonumerico(Val(WNetoDife) + Val(WIvaDife)))
                 XClave = XProveedor & WLetraDife & WTipoDife & WPuntoDife & WNumeroDife
                 XOrdFecha = Proceso.ordenaFecha(XFecha)
                 XOrdVencimiento = XOrdFecha
@@ -3109,9 +3113,10 @@ Public Class Pagos
                         & interno & ",'" & Xlista & "'," _
                         & Str$(XAcumulado) & "," _
                         & Str$(XParidad) & "," _
-                        & Str$(XPAgo) & ""
+                        & Str$(XPAgo) & ", " _
+                        & "'','',0,'',0,0,0,'',0,0,'','','','','','','',''"
 
-                XSql = "INSERT INTO CtaCtePrv (Clave, Proveedor, Letra, Tipo, Punto, Numero, fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Lista, Acumulado, Paridad, Pago) VALUES (#PARAM#)"
+                XSql = "INSERT INTO CtaCtePrv (Clave, Proveedor, Letra, Tipo, Punto, Numero, fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Lista, Acumulado, Paridad, Pago, Observaciones, Tarjeta, NroInternoAsociado, DesProveOriginal, FacturaOriginal, Cuota, ImporteOriginal, FechaOriginal, Interes, IvaInteres, OrdFechaOriginal, Referencia, TituloI, TituloII, Auxi1, Auxi2, Auxi3, Auxi4) VALUES (#PARAM#)"
 
 
                 Try

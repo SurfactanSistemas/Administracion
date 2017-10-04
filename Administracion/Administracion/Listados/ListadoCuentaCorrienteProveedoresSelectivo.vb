@@ -300,7 +300,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             End If
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New Exception(ex.Message)
         Finally
 
             dr = Nothing
