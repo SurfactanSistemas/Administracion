@@ -23,11 +23,11 @@ Partial Class Proforma
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -77,6 +77,11 @@ Partial Class Proforma
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtDescripcionTotalII = New System.Windows.Forms.TextBox()
+        Me.txtCondicionPagoII = New System.Windows.Forms.TextBox()
+        Me.txtViaII = New System.Windows.Forms.TextBox()
+        Me.txtObservacionesII = New System.Windows.Forms.TextBox()
+        Me.txtObservacionesIII = New System.Windows.Forms.TextBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -100,7 +105,7 @@ Partial Class Proforma
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(774, 497)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(778, 535)
         Me.LayoutPrincipal.TabIndex = 1
         '
         'LayoutCabecera
@@ -122,7 +127,7 @@ Partial Class Proforma
         Me.LayoutCabecera.RowCount = 1
         Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
-        Me.LayoutCabecera.Size = New System.Drawing.Size(774, 45)
+        Me.LayoutCabecera.Size = New System.Drawing.Size(778, 45)
         Me.LayoutCabecera.TabIndex = 0
         '
         'Label3
@@ -132,7 +137,7 @@ Partial Class Proforma
         Me.Label3.Location = New System.Drawing.Point(241, 0)
         Me.Label3.Margin = New System.Windows.Forms.Padding(0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(353, 45)
+        Me.Label3.Size = New System.Drawing.Size(357, 45)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "- Proformas -"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -153,7 +158,7 @@ Partial Class Proforma
         '
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label2.Font = New System.Drawing.Font("Calibri", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.Location = New System.Drawing.Point(597, 0)
+        Me.Label2.Location = New System.Drawing.Point(601, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(174, 45)
         Me.Label2.TabIndex = 1
@@ -174,13 +179,15 @@ Partial Class Proforma
         Me.LayoutCuerpoPrincipal.RowCount = 2
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69.0!))
-        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(774, 452)
+        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(778, 490)
         Me.LayoutCuerpoPrincipal.TabIndex = 1
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Label15)
+        Me.Panel1.Controls.Add(Me.txtObservacionesIII)
+        Me.Panel1.Controls.Add(Me.txtObservacionesII)
         Me.Panel1.Controls.Add(Me.txtObservaciones)
         Me.Panel1.Controls.Add(Me.txtFechaAux)
         Me.Panel1.Controls.Add(Me.dgvProductos)
@@ -201,9 +208,12 @@ Partial Class Proforma
         Me.Panel1.Controls.Add(Me.txtTotal)
         Me.Panel1.Controls.Add(Me.txtDescripcionCliente)
         Me.Panel1.Controls.Add(Me.txtCliente)
+        Me.Panel1.Controls.Add(Me.txtDescripcionTotalII)
         Me.Panel1.Controls.Add(Me.txtDescripcionTotal)
         Me.Panel1.Controls.Add(Me.txtPais)
+        Me.Panel1.Controls.Add(Me.txtCondicionPagoII)
         Me.Panel1.Controls.Add(Me.txtCondicionPago)
+        Me.Panel1.Controls.Add(Me.txtViaII)
         Me.Panel1.Controls.Add(Me.txtVia)
         Me.Panel1.Controls.Add(Me.txtOCCliente)
         Me.Panel1.Controls.Add(Me.txtLocalidadCliente)
@@ -213,7 +223,7 @@ Partial Class Proforma
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(774, 383)
+        Me.Panel1.Size = New System.Drawing.Size(778, 421)
         Me.Panel1.TabIndex = 2
         '
         'Label15
@@ -221,7 +231,7 @@ Partial Class Proforma
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label15.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label15.Location = New System.Drawing.Point(17, 135)
+        Me.Label15.Location = New System.Drawing.Point(17, 119)
         Me.Label15.Margin = New System.Windows.Forms.Padding(0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(103, 18)
@@ -231,7 +241,7 @@ Partial Class Proforma
         '
         'txtObservaciones
         '
-        Me.txtObservaciones.Location = New System.Drawing.Point(133, 134)
+        Me.txtObservaciones.Location = New System.Drawing.Point(133, 118)
         Me.txtObservaciones.MaxLength = 100
         Me.txtObservaciones.Name = "txtObservaciones"
         Me.txtObservaciones.Size = New System.Drawing.Size(624, 20)
@@ -241,7 +251,7 @@ Partial Class Proforma
         'txtFechaAux
         '
         Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFechaAux.Location = New System.Drawing.Point(87, 195)
+        Me.txtFechaAux.Location = New System.Drawing.Point(87, 228)
         Me.txtFechaAux.Mask = "LL-00000-000"
         Me.txtFechaAux.Name = "txtFechaAux"
         Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -259,15 +269,15 @@ Partial Class Proforma
         Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Producto, Me.Descripcion, Me.Cantidad, Me.Precio, Me.Total})
         Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.dgvProductos.Location = New System.Drawing.Point(20, 170)
+        Me.dgvProductos.Location = New System.Drawing.Point(20, 201)
         Me.dgvProductos.Name = "dgvProductos"
         Me.dgvProductos.Size = New System.Drawing.Size(737, 161)
         Me.dgvProductos.TabIndex = 8
         '
         'Producto
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Producto.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Producto.DefaultCellStyle = DataGridViewCellStyle31
         Me.Producto.HeaderText = "Producto"
         Me.Producto.MaxInputLength = 12
         Me.Producto.Name = "Producto"
@@ -276,8 +286,8 @@ Partial Class Proforma
         'Descripcion
         '
         Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle32
         Me.Descripcion.HeaderText = "Descripcion"
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
@@ -285,24 +295,24 @@ Partial Class Proforma
         '
         'Cantidad
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle33
         Me.Cantidad.HeaderText = "Cantidad"
         Me.Cantidad.Name = "Cantidad"
         Me.Cantidad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Precio
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Precio.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Precio.DefaultCellStyle = DataGridViewCellStyle34
         Me.Precio.HeaderText = "Precio"
         Me.Precio.Name = "Precio"
         Me.Precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Total
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle35
         Me.Total.HeaderText = "Total"
         Me.Total.Name = "Total"
         Me.Total.ReadOnly = True
@@ -312,14 +322,14 @@ Partial Class Proforma
         '
         Me.cmbCondicion.FormattingEnabled = True
         Me.cmbCondicion.Items.AddRange(New Object() {"", "FOB", "CIF", "CFR", "CPT", "EXW", "FCA"})
-        Me.cmbCondicion.Location = New System.Drawing.Point(525, 96)
+        Me.cmbCondicion.Location = New System.Drawing.Point(391, 91)
         Me.cmbCondicion.Name = "cmbCondicion"
         Me.cmbCondicion.Size = New System.Drawing.Size(98, 21)
         Me.cmbCondicion.TabIndex = 7
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(258, 24)
+        Me.txtFecha.Location = New System.Drawing.Point(258, 17)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -332,7 +342,7 @@ Partial Class Proforma
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(199, 25)
+        Me.Label5.Location = New System.Drawing.Point(199, 18)
         Me.Label5.Margin = New System.Windows.Forms.Padding(0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(48, 18)
@@ -345,7 +355,7 @@ Partial Class Proforma
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label6.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label6.Location = New System.Drawing.Point(349, 24)
+        Me.Label6.Location = New System.Drawing.Point(349, 17)
         Me.Label6.Margin = New System.Windows.Forms.Padding(0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(57, 18)
@@ -358,7 +368,7 @@ Partial Class Proforma
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label8.Location = New System.Drawing.Point(413, 61)
+        Me.Label8.Location = New System.Drawing.Point(413, 43)
         Me.Label8.Margin = New System.Windows.Forms.Padding(0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(70, 18)
@@ -371,7 +381,7 @@ Partial Class Proforma
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label16.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label16.Location = New System.Drawing.Point(630, 60)
+        Me.Label16.Location = New System.Drawing.Point(630, 42)
         Me.Label16.Margin = New System.Windows.Forms.Padding(0)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(37, 18)
@@ -384,7 +394,7 @@ Partial Class Proforma
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(630, 97)
+        Me.Label11.Location = New System.Drawing.Point(497, 68)
         Me.Label11.Margin = New System.Windows.Forms.Padding(0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(32, 18)
@@ -397,7 +407,7 @@ Partial Class Proforma
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label13.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label13.Location = New System.Drawing.Point(581, 338)
+        Me.Label13.Location = New System.Drawing.Point(581, 371)
         Me.Label13.Margin = New System.Windows.Forms.Padding(0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(42, 18)
@@ -410,7 +420,7 @@ Partial Class Proforma
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label10.Location = New System.Drawing.Point(448, 97)
+        Me.Label10.Location = New System.Drawing.Point(314, 92)
         Me.Label10.Margin = New System.Windows.Forms.Padding(0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(74, 18)
@@ -423,7 +433,7 @@ Partial Class Proforma
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label14.Location = New System.Drawing.Point(29, 339)
+        Me.Label14.Location = New System.Drawing.Point(98, 372)
         Me.Label14.Margin = New System.Windows.Forms.Padding(0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(54, 18)
@@ -436,7 +446,7 @@ Partial Class Proforma
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label12.Location = New System.Drawing.Point(17, 97)
+        Me.Label12.Location = New System.Drawing.Point(17, 67)
         Me.Label12.Margin = New System.Windows.Forms.Padding(0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(81, 18)
@@ -449,7 +459,7 @@ Partial Class Proforma
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label9.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label9.Location = New System.Drawing.Point(314, 97)
+        Me.Label9.Location = New System.Drawing.Point(357, 67)
         Me.Label9.Margin = New System.Windows.Forms.Padding(0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(30, 18)
@@ -462,7 +472,7 @@ Partial Class Proforma
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label7.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label7.Location = New System.Drawing.Point(17, 61)
+        Me.Label7.Location = New System.Drawing.Point(17, 43)
         Me.Label7.Margin = New System.Windows.Forms.Padding(0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(70, 18)
@@ -475,7 +485,7 @@ Partial Class Proforma
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(17, 25)
+        Me.Label4.Location = New System.Drawing.Point(17, 18)
         Me.Label4.Margin = New System.Windows.Forms.Padding(0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(70, 18)
@@ -486,7 +496,7 @@ Partial Class Proforma
         'txtTotal
         '
         Me.txtTotal.BackColor = System.Drawing.SystemColors.Window
-        Me.txtTotal.Location = New System.Drawing.Point(625, 337)
+        Me.txtTotal.Location = New System.Drawing.Point(625, 370)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(124, 20)
@@ -497,7 +507,7 @@ Partial Class Proforma
         'txtDescripcionCliente
         '
         Me.txtDescripcionCliente.Enabled = False
-        Me.txtDescripcionCliente.Location = New System.Drawing.Point(492, 23)
+        Me.txtDescripcionCliente.Location = New System.Drawing.Point(492, 16)
         Me.txtDescripcionCliente.Name = "txtDescripcionCliente"
         Me.txtDescripcionCliente.ReadOnly = True
         Me.txtDescripcionCliente.Size = New System.Drawing.Size(266, 20)
@@ -505,7 +515,7 @@ Partial Class Proforma
         '
         'txtCliente
         '
-        Me.txtCliente.Location = New System.Drawing.Point(407, 23)
+        Me.txtCliente.Location = New System.Drawing.Point(407, 16)
         Me.txtCliente.MaxLength = 6
         Me.txtCliente.Name = "txtCliente"
         Me.txtCliente.Size = New System.Drawing.Size(79, 20)
@@ -513,16 +523,16 @@ Partial Class Proforma
         '
         'txtDescripcionTotal
         '
-        Me.txtDescripcionTotal.Location = New System.Drawing.Point(87, 338)
-        Me.txtDescripcionTotal.MaxLength = 100
+        Me.txtDescripcionTotal.Location = New System.Drawing.Point(155, 371)
+        Me.txtDescripcionTotal.MaxLength = 50
         Me.txtDescripcionTotal.Name = "txtDescripcionTotal"
-        Me.txtDescripcionTotal.Size = New System.Drawing.Size(462, 20)
+        Me.txtDescripcionTotal.Size = New System.Drawing.Size(410, 20)
         Me.txtDescripcionTotal.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.txtDescripcionTotal, "Descripción en Inglés del Monto Total")
         '
         'txtPais
         '
-        Me.txtPais.Location = New System.Drawing.Point(665, 59)
+        Me.txtPais.Location = New System.Drawing.Point(665, 41)
         Me.txtPais.MaxLength = 15
         Me.txtPais.Name = "txtPais"
         Me.txtPais.Size = New System.Drawing.Size(93, 20)
@@ -530,7 +540,7 @@ Partial Class Proforma
         '
         'txtCondicionPago
         '
-        Me.txtCondicionPago.Location = New System.Drawing.Point(97, 96)
+        Me.txtCondicionPago.Location = New System.Drawing.Point(97, 66)
         Me.txtCondicionPago.MaxLength = 50
         Me.txtCondicionPago.Name = "txtCondicionPago"
         Me.txtCondicionPago.Size = New System.Drawing.Size(211, 20)
@@ -539,26 +549,26 @@ Partial Class Proforma
         '
         'txtVia
         '
-        Me.txtVia.Location = New System.Drawing.Point(665, 96)
+        Me.txtVia.Location = New System.Drawing.Point(531, 67)
         Me.txtVia.MaxLength = 20
         Me.txtVia.Name = "txtVia"
-        Me.txtVia.Size = New System.Drawing.Size(93, 20)
+        Me.txtVia.Size = New System.Drawing.Size(226, 20)
         Me.txtVia.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.txtVia, "Vía de Transporte")
         '
         'txtOCCliente
         '
-        Me.txtOCCliente.Location = New System.Drawing.Point(348, 96)
+        Me.txtOCCliente.Location = New System.Drawing.Point(391, 66)
         Me.txtOCCliente.MaxLength = 20
         Me.txtOCCliente.Name = "txtOCCliente"
-        Me.txtOCCliente.Size = New System.Drawing.Size(92, 20)
+        Me.txtOCCliente.Size = New System.Drawing.Size(98, 20)
         Me.txtOCCliente.TabIndex = 0
         Me.txtOCCliente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtOCCliente, "Orden de Compra de Cliente")
         '
         'txtLocalidadCliente
         '
-        Me.txtLocalidadCliente.Location = New System.Drawing.Point(492, 60)
+        Me.txtLocalidadCliente.Location = New System.Drawing.Point(492, 42)
         Me.txtLocalidadCliente.MaxLength = 50
         Me.txtLocalidadCliente.Name = "txtLocalidadCliente"
         Me.txtLocalidadCliente.Size = New System.Drawing.Size(131, 20)
@@ -566,7 +576,7 @@ Partial Class Proforma
         '
         'txtDireccionCliente
         '
-        Me.txtDireccionCliente.Location = New System.Drawing.Point(97, 60)
+        Me.txtDireccionCliente.Location = New System.Drawing.Point(97, 42)
         Me.txtDireccionCliente.MaxLength = 100
         Me.txtDireccionCliente.Name = "txtDireccionCliente"
         Me.txtDireccionCliente.Size = New System.Drawing.Size(309, 20)
@@ -574,7 +584,7 @@ Partial Class Proforma
         '
         'txtNroProforma
         '
-        Me.txtNroProforma.Location = New System.Drawing.Point(97, 24)
+        Me.txtNroProforma.Location = New System.Drawing.Point(97, 17)
         Me.txtNroProforma.MaxLength = 6
         Me.txtNroProforma.Name = "txtNroProforma"
         Me.txtNroProforma.Size = New System.Drawing.Size(79, 20)
@@ -590,9 +600,9 @@ Partial Class Proforma
         Me.Panel2.Controls.Add(Me.btnEliminar)
         Me.Panel2.Controls.Add(Me.btnAceptar)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 386)
+        Me.Panel2.Location = New System.Drawing.Point(3, 424)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(768, 63)
+        Me.Panel2.Size = New System.Drawing.Size(772, 63)
         Me.Panel2.TabIndex = 3
         '
         'btnCerrar
@@ -655,11 +665,51 @@ Partial Class Proforma
         Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Proforma")
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
+        'txtDescripcionTotalII
+        '
+        Me.txtDescripcionTotalII.Location = New System.Drawing.Point(155, 394)
+        Me.txtDescripcionTotalII.MaxLength = 50
+        Me.txtDescripcionTotalII.Name = "txtDescripcionTotalII"
+        Me.txtDescripcionTotalII.Size = New System.Drawing.Size(410, 20)
+        Me.txtDescripcionTotalII.TabIndex = 0
+        '
+        'txtCondicionPagoII
+        '
+        Me.txtCondicionPagoII.Location = New System.Drawing.Point(97, 92)
+        Me.txtCondicionPagoII.MaxLength = 50
+        Me.txtCondicionPagoII.Name = "txtCondicionPagoII"
+        Me.txtCondicionPagoII.Size = New System.Drawing.Size(211, 20)
+        Me.txtCondicionPagoII.TabIndex = 0
+        '
+        'txtViaII
+        '
+        Me.txtViaII.Location = New System.Drawing.Point(531, 93)
+        Me.txtViaII.MaxLength = 20
+        Me.txtViaII.Name = "txtViaII"
+        Me.txtViaII.Size = New System.Drawing.Size(226, 20)
+        Me.txtViaII.TabIndex = 0
+        '
+        'txtObservacionesII
+        '
+        Me.txtObservacionesII.Location = New System.Drawing.Point(133, 143)
+        Me.txtObservacionesII.MaxLength = 100
+        Me.txtObservacionesII.Name = "txtObservacionesII"
+        Me.txtObservacionesII.Size = New System.Drawing.Size(624, 20)
+        Me.txtObservacionesII.TabIndex = 10
+        '
+        'txtObservacionesIII
+        '
+        Me.txtObservacionesIII.Location = New System.Drawing.Point(133, 168)
+        Me.txtObservacionesIII.MaxLength = 100
+        Me.txtObservacionesIII.Name = "txtObservacionesIII"
+        Me.txtObservacionesIII.Size = New System.Drawing.Size(624, 20)
+        Me.txtObservacionesIII.TabIndex = 10
+        '
         'Proforma
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(774, 497)
+        Me.ClientSize = New System.Drawing.Size(778, 535)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Name = "Proforma"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -723,4 +773,9 @@ Partial Class Proforma
     Friend WithEvents Total As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnVistaPrevia As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents txtDescripcionTotalII As System.Windows.Forms.TextBox
+    Friend WithEvents txtCondicionPagoII As System.Windows.Forms.TextBox
+    Friend WithEvents txtViaII As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservacionesIII As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservacionesII As System.Windows.Forms.TextBox
 End Class
