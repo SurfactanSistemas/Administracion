@@ -4875,19 +4875,20 @@ Public Class Pagos
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteRetIva
-        Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
+        Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba
         Dim WEmpNombre As String = "SURFACTAN S.A."
         Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
         Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
         Dim WEmpCuit As String = "30-54916508-3"
         Dim WNroIb As String = "902-913585-2"
         Dim ImpreCopia(2) As String
-        Dim WLetra, WTipo, WPunto, WNumero, ZNroInterno, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, ZZTotal, ZZSaldo, ZZSuma, WPrvDireccion, WPrvCuit, WPrvIb As String
-        Dim WCategoria, WPorce1 As String
-        Dim ZRechazado, WImpoRetenido As Double
+        Dim WLetra, WTipo, WPunto, WNumero, WImporte, ZNroInterno, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, ZZTotal, ZZSaldo, ZZSuma, WPrvDireccion, WPrvCuit, WPrvIb
+        Dim WBruto, WNeto, WIva, WReteIva
+        Dim WCategoria, WPorce1
+        Dim ZRechazado, WImpoRetenido
         Dim ZFechaCompa = String.Join("", Trim(txtFecha.Text).Split("/").Reverse())
-        Dim WRete As Double = 0
-        Dim WRenglon As Integer = 0
+        Dim WRete
+        Dim WRenglon = 0
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
@@ -4967,6 +4968,9 @@ Public Class Pagos
                 WTipo = .Cells(0).Value
                 WPunto = .Cells(2).Value
                 WNumero = .Cells(3).Value
+                WImporte = .Cells(4).Value
+
+                If Trim(WTipo) = "" Then : Exit For : End If
 
                 ZRechazado = 0
                 ZNroInterno = "0"
@@ -4996,38 +5000,48 @@ Public Class Pagos
                 ZZSaldo = ""
                 ZZSuma = ""
 
-                WImpre4 = Val(.Cells(4).Value) / 1.21
+                'WImpre4 = Val(.Cells(4).Value) / 1.21
+                WImpre4 = Val(.Cells(6).Value) / 1.21
 
                 XImpre4 = WImpre4
 
+                WBruto = Val(WImporte)
+                WNeto = WBruto / 1.21
+                WIva = WBruto - WNeto
+                WReteIva = 0.0
 
-                If Val(XImpre4) >= 1000 And Val(WNumero) <> 0 Then
 
-                    Try
-                        cn.Open()
-                        cm.CommandText = "SELECT ccp.Fecha, i.Iva21 FROM CtaCtePrv as ccp, IvaComp as i WHERE ccp.Clave = '" & ZZClaveCtaCtePrv & "' AND ccp.NroInterno = i.NroInterno"
+                'If Val(WNeto) >= 1000 And Val(WNumero) <> 0 Then
 
-                        dr = cm.ExecuteReader()
+                Try
+                    cn.Open()
+                    cm.CommandText = "SELECT ccp.Fecha, i.Iva21 FROM CtaCtePrv as ccp, IvaComp as i WHERE ccp.Clave = '" & ZZClaveCtaCtePrv & "' AND ccp.NroInterno = i.NroInterno"
 
-                        If dr.HasRows Then
-                            dr.Read()
+                    dr = cm.ExecuteReader()
 
-                            XImpre3 = dr.Item("Fecha")
-                            WPorce1 = dr.Item("Iva21")
-                        Else
-                            XImpre3 = ""
-                            WPorce1 = "0"
+                    If dr.HasRows Then
+                        dr.Read()
+
+                        XImpre3 = dr.Item("Fecha")
+
+                        If Val(WNeto) >= 1000 And Val(WNumero) <> 0 Then
+                            WReteIva = dr.Item("Iva21")
                         End If
 
-                    Catch ex As Exception
-                        MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-                    Finally
+                    Else
+                        XImpre3 = ""
+                        WReteIva = 0
+                    End If
 
-                        cn.Close()
+                Catch ex As Exception
+                    MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                Finally
 
-                    End Try
+                    cn.Close()
 
-                End If
+                End Try
+
+                'End If
 
                 WCategoria = "SUJETO A RETENCION 0.75%"
                 WRete = WPorce1
@@ -5057,9 +5071,9 @@ Public Class Pagos
                 row.Item("Numero1") = XImpre2
                 row.Item("Fecha1") = XImpre3
                 row.Item("Categoria1") = WCategoria
-                row.Item("Importe1") = CDbl(XImpre4)
-                row.Item("Porce1") = CDbl(WPorce1)
-                row.Item("Retencion1") = CDbl(WRete)
+                row.Item("Importe1") = Val(WNeto)
+                row.Item("Porce1") = Val(WReteIva)
+                row.Item("Retencion1") = Val(WReteIva)
 
                 Tabla.Rows.Add(row)
 
@@ -5086,9 +5100,9 @@ Public Class Pagos
                 row.Item("Numero1") = XImpre2
                 row.Item("Fecha1") = XImpre3
                 row.Item("Categoria1") = WCategoria
-                row.Item("Importe1") = CDbl(XImpre4)
-                row.Item("Porce1") = CDbl(WPorce1)
-                row.Item("Retencion1") = CDbl(WRete)
+                row.Item("Importe1") = Val(WNeto)
+                row.Item("Porce1") = Val(WReteIva)
+                row.Item("Retencion1") = Val(WReteIva)
 
                 Tabla.Rows.Add(row)
 
@@ -5265,6 +5279,8 @@ Public Class Pagos
                 WTipo = .Cells(0).Value
                 WPunto = .Cells(2).Value
                 WNumero = .Cells(3).Value
+
+                If Trim(WTipo) = "" Then : Exit For : End If
 
                 ZRechazado = 0
                 ZNroInterno = "0"
@@ -6023,8 +6039,8 @@ Public Class Pagos
             .Item("CuitPrv") = _DatosProv(6)
             .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
             .Item("Pagado") = CDbl(Total - Retencion)
-            .Item("Pagado") = CDbl(Total)
-            .Item("Retenido") = CDbl(Retencion)
+            .Item("Pagado") = Val(Total)
+            .Item("Retenido") = Val(Retencion)
         End With
 
         Tabla.Rows.Add(row)
@@ -6047,8 +6063,8 @@ Public Class Pagos
             .Item("CuitPrv") = _DatosProv(6)
             .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
             .Item("Pagado") = CDbl(Total - Retencion)
-            .Item("Pagado") = CDbl(Total)
-            .Item("Retenido") = CDbl(Retencion)
+            .Item("Pagado") = Val(Total)
+            .Item("Retenido") = Val(Retencion)
         End With
 
         Tabla.Rows.Add(row)
