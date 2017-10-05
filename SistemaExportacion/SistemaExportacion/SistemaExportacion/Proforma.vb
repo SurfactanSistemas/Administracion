@@ -13,9 +13,27 @@ Public Class Proforma
     Private Const PRODUCTOS_MAX = 6
     Private Const SEPARADOR_CONSULTA = "____"
 
+
+    Private _NroProforma As String
+    Public Property NroProforma() As String
+        Get
+            Return _NroProforma
+        End Get
+        Set(ByVal value As String)
+            _NroProforma = Helper.ceros(value, 6)
+        End Set
+    End Property
+
+
     Private Sub Proforma_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        btnLimpiar.PerformClick()
+        If Not IsNothing(Me.NroProforma) Then
+            txtNroProforma.Text = Me.NroProforma
+
+            txtNroProforma_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        Else
+            btnLimpiar.PerformClick()
+        End If
 
     End Sub
 

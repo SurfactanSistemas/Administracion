@@ -23,21 +23,31 @@ Partial Class MenuPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dgvPrincipal = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnHistorialProforma = New System.Windows.Forms.Button()
         Me.btnNuevaProforma = New System.Windows.Forms.Button()
         Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.NroProforma = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Pais = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -109,7 +119,7 @@ Partial Class MenuPrincipal
         Me.LayoutCuerpoPrincipal.ColumnCount = 2
         Me.LayoutCuerpoPrincipal.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84.0!))
         Me.LayoutCuerpoPrincipal.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutCuerpoPrincipal.Controls.Add(Me.DataGridView1, 1, 0)
+        Me.LayoutCuerpoPrincipal.Controls.Add(Me.dgvPrincipal, 1, 0)
         Me.LayoutCuerpoPrincipal.Controls.Add(Me.Panel1, 0, 0)
         Me.LayoutCuerpoPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutCuerpoPrincipal.Location = New System.Drawing.Point(0, 91)
@@ -121,16 +131,21 @@ Partial Class MenuPrincipal
         Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(826, 388)
         Me.LayoutCuerpoPrincipal.TabIndex = 1
         '
-        'DataGridView1
+        'dgvPrincipal
         '
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(99, 15)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(15)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(712, 358)
-        Me.DataGridView1.TabIndex = 0
+        Me.dgvPrincipal.AllowUserToAddRows = False
+        Me.dgvPrincipal.AllowUserToDeleteRows = False
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvPrincipal.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total})
+        Me.dgvPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvPrincipal.Location = New System.Drawing.Point(99, 15)
+        Me.dgvPrincipal.Margin = New System.Windows.Forms.Padding(15)
+        Me.dgvPrincipal.Name = "dgvPrincipal"
+        Me.dgvPrincipal.ReadOnly = True
+        Me.dgvPrincipal.Size = New System.Drawing.Size(712, 358)
+        Me.dgvPrincipal.TabIndex = 0
         '
         'Panel1
         '
@@ -185,6 +200,52 @@ Partial Class MenuPrincipal
         Me.LayoutFiltros.Size = New System.Drawing.Size(826, 46)
         Me.LayoutFiltros.TabIndex = 2
         '
+        'NroProforma
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle2
+        Me.NroProforma.HeaderText = "Nro Proforma"
+        Me.NroProforma.MaxInputLength = 6
+        Me.NroProforma.Name = "NroProforma"
+        Me.NroProforma.ReadOnly = True
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 10
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        '
+        'Cliente
+        '
+        Me.Cliente.HeaderText = "Cliente"
+        Me.Cliente.MaxInputLength = 6
+        Me.Cliente.Name = "Cliente"
+        Me.Cliente.ReadOnly = True
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        '
+        'Pais
+        '
+        Me.Pais.HeaderText = "Pais"
+        Me.Pais.Name = "Pais"
+        Me.Pais.ReadOnly = True
+        '
+        'Total
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Total.HeaderText = "Monto Total"
+        Me.Total.Name = "Total"
+        Me.Total.ReadOnly = True
+        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -198,7 +259,7 @@ Partial Class MenuPrincipal
         Me.LayoutPrincipal.ResumeLayout(False)
         Me.LayoutCabecera.ResumeLayout(False)
         Me.LayoutCuerpoPrincipal.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -209,10 +270,16 @@ Partial Class MenuPrincipal
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents LayoutCuerpoPrincipal As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents LayoutFiltros As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents dgvPrincipal As System.Windows.Forms.DataGridView
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents btnHistorialProforma As System.Windows.Forms.Button
     Friend WithEvents btnNuevaProforma As System.Windows.Forms.Button
+    Friend WithEvents NroProforma As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Pais As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Total As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

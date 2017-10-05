@@ -1,4 +1,6 @@
-﻿Public Class MenuPrincipal
+﻿Imports System.Data.SqlClient
+
+Public Class MenuPrincipal
 
     Private Sub btnNuevaProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaProforma.Click
         With Proforma
@@ -13,5 +15,93 @@
         With HistorialProforma
             .Show()
         End With
+    End Sub
+
+    Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        _CargarTodasLasProformas()
+    End Sub
+
+    Private Sub _CargarTodasLasProformas()
+        Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WRowIndex
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente ORDER BY p.FechaOrd, p.Proforma")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                WProforma = ""
+                WFecha = ""
+                WCliente = ""
+                WRazon = ""
+                WPais = ""
+                WTotal = 0.0
+                WRowIndex = 0
+
+                dgvPrincipal.Rows.Clear()
+
+                Do While dr.Read()
+
+                    WProforma = ""
+                    WFecha = ""
+                    WCliente = ""
+                    WRazon = ""
+                    WPais = ""
+                    WTotal = 0.0
+
+                    With dr
+                        WProforma = IIf(IsDBNull(.Item("Proforma")), "", .Item("Proforma"))
+                        WFecha = IIf(IsDBNull(.Item("Fecha")), "", .Item("Fecha"))
+                        WCliente = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+                        WRazon = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                        WPais = IIf(IsDBNull(.Item("Pais")), "", .Item("Pais"))
+                        WTotal = IIf(IsDBNull(.Item("Total")), 0.0, .Item("Total"))
+
+                        WRowIndex = dgvPrincipal.Rows.Add
+                    End With
+
+                    With dgvPrincipal.Rows(WRowIndex)
+                        .Cells("NroProforma").Value = WProforma
+                        .Cells("Fecha").Value = WFecha
+                        .Cells("Cliente").Value = WCliente
+                        .Cells("Razon").Value = WRazon
+                        .Cells("Pais").Value = WPais
+                        .Cells("Total").Value = Helper.formatonumerico(WTotal)
+                    End With
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer listar las Proformas desde la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub dgvPrincipal_CellContentDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvPrincipal.CellContentDoubleClick
+        
+        If Not IsNothing(dgvPrincipal.Rows(e.RowIndex).Cells(0).Value) Then
+
+            With Proforma
+                .NroProforma = dgvPrincipal.Rows(e.RowIndex).Cells(0).Value
+                .Show()
+            End With
+
+        End If
+
     End Sub
 End Class
