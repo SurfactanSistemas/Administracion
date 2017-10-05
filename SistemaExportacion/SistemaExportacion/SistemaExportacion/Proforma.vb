@@ -11,18 +11,11 @@ Public Class Proforma
 
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
+    Private Const SEPARADOR_CONSULTA = "____"
 
     Private Sub Proforma_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        _LimpiarGrilla()
-
-        txtFechaAux.Visible = False
-
-        WRow = -1
-        Wcol = -1
-
-        ' Cargamos automaticamente el próximo número de Proforma.
-        _TraerProximoNroProforma()
+        btnLimpiar.PerformClick()
 
     End Sub
 
@@ -318,12 +311,111 @@ Public Class Proforma
 
     End Sub
 
+    Private Sub _ConsultarProductos()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo, Descripcion FROM Terminado WHERE Codigo >= 'PT-00004-100' AND Codigo <= 'PT-99999-999' ORDER BY Codigo")
+        Dim dr As SqlDataReader
+        Dim WItem = ""
+
+        Try
+
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                lstConsulta.Items.Clear()
+
+                Do While dr.Read()
+                    WItem = ""
+
+                    With dr
+                        WItem = .Item("Codigo") & SEPARADOR_CONSULTA & .Item("Descripcion")
+
+                        lstConsulta.Items.Add(WItem)
+
+                    End With
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer listar los Clientes desde la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
+    Private Sub _ConsultarClientes()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Cliente, Razon FROM Cliente WHERE Razon <> '' ORDER BY Razon")
+        Dim dr As SqlDataReader
+        Dim WItem = ""
+
+        Try
+
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                lstConsulta.Items.Clear()
+
+                Do While dr.Read()
+                    WItem = ""
+
+                    With dr
+                        WItem = .Item("Cliente") & SEPARADOR_CONSULTA & .Item("Razon")
+
+                        lstConsulta.Items.Add(WItem)
+
+                    End With
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer listar los Clientes desde la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
     Private Sub txtCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCliente.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtCliente.Text) = "" Then : Exit Sub : End If
+            If Trim(txtCliente.Text) = "" Then
 
-            Dim cliente = _BuscarCliente(txtCliente.Text)
+                txtCliente_MouseDoubleClick(Nothing, Nothing)
+                Exit Sub
+            End If
+
+            Dim cliente = Nothing
+
+            ' Buscamos todos los datos del cliente.
+            Try
+                cliente = _BuscarCliente(txtCliente.Text)
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Exit Sub
+            End Try
 
             If Not IsNothing(cliente) Then
                 ' Guardar y llenar los datos que se puedan extraer del registro de cliente.
@@ -332,10 +424,10 @@ Public Class Proforma
                 txtDireccionCliente.Text = cliente("Direccion")
                 txtLocalidadCliente.Text = cliente("Localidad")
 
-                txtCondicionPago.Focus()
+                txtPais.Focus()
             Else
                 MsgBox("Cliente inexistente.", MsgBoxStyle.Information)
-                txtCliente.Focus()
+                txtPais.Focus()
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -357,7 +449,7 @@ Public Class Proforma
             dr.Fill(resultados)
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Throw New Exception("Hubo un problema al consultar los datos del Cliente en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -450,7 +542,7 @@ Public Class Proforma
         End If
     End Sub
 
-    Private Sub txtVia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtVia.KeyDown, txtPais.KeyDown
+    Private Sub txtVia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtVia.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -834,7 +926,8 @@ Public Class Proforma
     End Sub
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
-        MsgBox("Aun no implementado. No hay todavia realizadas consultas.", MsgBoxStyle.Information)
+        'MsgBox("Aun no implementado. No hay todavia realizadas consultas.", MsgBoxStyle.Information)
+        GrupoConsulta.Visible = True
     End Sub
 
     Private Function _ProformaExiste(ByVal nroproforma)
@@ -1015,7 +1108,7 @@ Public Class Proforma
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         txtNroProforma.Text = ""
-        txtFecha.Text = Date.Now.ToString("dd-MM-yyyy")
+        txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
         txtCliente.Text = ""
         txtDescripcionCliente.Text = ""
         txtDireccionCliente.Text = ""
@@ -1031,6 +1124,16 @@ Public Class Proforma
         _LimpiarGrilla()
 
         txtNroProforma.Focus()
+
+        GrupoConsulta.Visible = False
+
+        txtFechaAux.Visible = False
+
+        WRow = -1
+        Wcol = -1
+
+        ' Cargamos automaticamente el próximo número de Proforma.
+        _TraerProximoNroProforma()
     End Sub
 
     Private Sub btnVistaPrevia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVistaPrevia.Click
@@ -1083,5 +1186,200 @@ Public Class Proforma
         ElseIf e.KeyData = Keys.Escape Then
             txtVia.Text = ""
         End If
+    End Sub
+
+    Private Sub lstOpcionesConsulta_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstOpcionesConsulta.MouseClick
+
+        If Trim(lstOpcionesConsulta.SelectedItem) = "" Then : Exit Sub : End If
+
+        Select Case lstOpcionesConsulta.SelectedIndex
+            Case 0
+                _ConsultarClientes()
+            Case 1
+                _ConsultarProductos()
+            Case Else
+                Exit Sub
+        End Select
+
+        'lstConsulta.Visible = True
+        With txtAyuda
+            .Visible = True
+            .Text = ""
+            .Focus()
+        End With
+
+        lstOpcionesConsulta.Visible = False
+    End Sub
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstConsulta
+        Dim final As ListBox = lstFiltrada
+        Dim cadena As String = Trim(txtAyuda.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+            origen.Visible = False
+
+        Else
+
+            final.Visible = False
+            origen.Visible = True
+
+        End If
+    End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+        Dim origen As ListBox = lstConsulta
+        Dim filtrado As ListBox = lstFiltrada
+        Dim texto As TextBox = txtAyuda
+
+        If IsNothing(filtrado.SelectedItem) Then : Exit Sub : End If
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedItem = filtrado.SelectedItem
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        lstConsulta_MouseClick(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        _FiltrarDinamicamente()
+    End Sub
+
+    Private Sub txtAyuda_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAyuda.KeyDown
+
+        If e.KeyData = Keys.Escape Then
+            txtAyuda.Text = ""
+        End If
+
+    End Sub
+
+    Private Function _ProductoYaAgregado(ByVal codigo)
+        
+        For i = 0 To PRODUCTOS_MAX - 1
+
+            With dgvProductos.Rows(i)
+                If Trim(.Cells(0).Value) = codigo Then
+                    Return True
+                    Exit For
+                End If
+            End With
+
+        Next
+
+        Return False
+    End Function
+
+    Private Sub lstConsulta_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstConsulta.MouseClick
+        Dim WDatos()
+        Dim WRowIndex = -1
+
+        If Trim(lstConsulta.SelectedItem) = "" Then : Exit Sub : End If
+
+        WDatos = Trim(lstConsulta.SelectedItem).Replace(SEPARADOR_CONSULTA, "#").Split("#")
+
+
+        Select Case lstOpcionesConsulta.SelectedIndex
+            Case 0
+
+                txtCliente.Text = Trim(WDatos(0))
+
+                txtCliente_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+            Case 1
+
+                If _ProductoYaAgregado(WDatos(0)) Then
+
+                    MsgBox("El producto ya se encuentra agregado a la lista.", MsgBoxStyle.Information)
+                    Exit Sub
+
+                End If
+
+                For i = 0 To PRODUCTOS_MAX - 1
+
+                    With dgvProductos.Rows(i)
+                        If Trim(.Cells(0).Value).Replace("-", "") = "" Then
+                            WRowIndex = i
+                            Exit For
+                        End If
+                    End With
+
+                Next
+
+                If WRowIndex < 0 Then
+                    MsgBox("No se pueden seguir agregando productos. Se ha alcanzado el número máximo permitido por Proforma.", MsgBoxStyle.Information)
+                    Exit Sub
+                End If
+
+                With dgvProductos
+                    .Rows(WRowIndex).Cells(0).Value = Trim(WDatos(0))
+                    .Rows(WRowIndex).Cells(1).Value = Trim(WDatos(1))
+
+                    .CurrentCell = .Rows(WRowIndex).Cells(0)
+                    .Focus()
+                End With
+
+                'txtFechaAux_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+                Exit Sub
+
+            Case Else
+
+
+
+        End Select
+
+
+        btnCerrarConsulta.PerformClick()
+
+    End Sub
+
+    Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
+        lstFiltrada.Visible = False
+        txtAyuda.Visible = False
+        lstOpcionesConsulta.Visible = True
+        GrupoConsulta.Visible = False
+    End Sub
+
+    Private Sub txtPais_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPais.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtPais.Text) = "" Then : Exit Sub : End If
+
+            txtCondicionPago.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtPais.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
+
+        lstOpcionesConsulta.SelectedIndex = 0
+
+        btnConsulta.PerformClick()
+
+        lstOpcionesConsulta_MouseClick(Nothing, Nothing)
+
     End Sub
 End Class
