@@ -45,7 +45,7 @@ Public Class ProveedoresABM
         txtRazonSocial.ForeColor = WColorAntRazon 'Color.White
 
         cmbEstado.BackColor = WBColorAntEstado
-        cmbEstado.ForeColor = WBColorAntEstado 'Color.White
+        cmbEstado.ForeColor = WColorAntEstado 'Color.White
         
         setDefaults()
     End Sub
@@ -424,7 +424,7 @@ Public Class ProveedoresABM
         txtRazonSocial.ForeColor = WColorAntRazon 'Color.White
 
         cmbEstado.BackColor = WBColorAntEstado
-        cmbEstado.ForeColor = WBColorAntEstado 'Color.White
+        cmbEstado.ForeColor = WColorAntEstado 'Color.White
 
         txtCodigo.Text = proveedor.id
         txtRazonSocial.Text = proveedor.razonSocial
@@ -888,7 +888,7 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub ProveedoresABM_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        Me.DesktopLocation = New Point(200, 0)
+        'Me.DesktopLocation = New Point(200, 0)
         txtCodigo.Focus()
     End Sub
 

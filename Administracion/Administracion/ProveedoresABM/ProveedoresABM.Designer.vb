@@ -41,7 +41,6 @@ Partial Class ProveedoresABM
         Me.txtClienteAsociado = New System.Windows.Forms.TextBox()
         Me.CustomLabel26 = New Administracion.CustomLabel()
         Me.CustomLabel25 = New Administracion.CustomLabel()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.txtCheque = New Administracion.CustomTextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cmbCondicionIB1 = New Administracion.CustomComboBox()
@@ -136,7 +135,7 @@ Partial Class ProveedoresABM
         Me.GroupBox1.Controls.Add(Me.btnUltimoRegistro)
         Me.GroupBox1.Controls.Add(Me.btnAnteriorRegistro)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Location = New System.Drawing.Point(581, 442)
+        Me.GroupBox1.Location = New System.Drawing.Point(545, 443)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(200, 80)
         Me.GroupBox1.TabIndex = 76
@@ -230,7 +229,7 @@ Partial Class ProveedoresABM
         '
         'txtFiltrar
         '
-        Me.txtFiltrar.Location = New System.Drawing.Point(23, 536)
+        Me.txtFiltrar.Location = New System.Drawing.Point(24, 536)
         Me.txtFiltrar.Name = "txtFiltrar"
         Me.txtFiltrar.Size = New System.Drawing.Size(538, 20)
         Me.txtFiltrar.TabIndex = 79
@@ -259,7 +258,7 @@ Partial Class ProveedoresABM
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(818, 50)
+        Me.Panel1.Size = New System.Drawing.Size(763, 50)
         Me.Panel1.TabIndex = 81
         '
         'Label2
@@ -267,7 +266,7 @@ Partial Class ProveedoresABM
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(625, 10)
+        Me.Label2.Location = New System.Drawing.Point(573, 10)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -292,7 +291,6 @@ Partial Class ProveedoresABM
         Me.Panel2.Controls.Add(Me.txtClienteAsociado)
         Me.Panel2.Controls.Add(Me.CustomLabel26)
         Me.Panel2.Controls.Add(Me.CustomLabel25)
-        Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.txtCheque)
         Me.Panel2.Controls.Add(Me.GroupBox2)
         Me.Panel2.Controls.Add(Me.txtPaginaWeb)
@@ -353,14 +351,14 @@ Partial Class ProveedoresABM
         Me.Panel2.Controls.Add(Me.GroupBox3)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(817, 387)
+        Me.Panel2.Size = New System.Drawing.Size(763, 387)
         Me.Panel2.TabIndex = 84
         '
         'CKBProveedorInactivo
         '
         Me.CKBProveedorInactivo.AutoSize = True
         Me.CKBProveedorInactivo.ForeColor = System.Drawing.SystemColors.Control
-        Me.CKBProveedorInactivo.Location = New System.Drawing.Point(554, 180)
+        Me.CKBProveedorInactivo.Location = New System.Drawing.Point(507, 180)
         Me.CKBProveedorInactivo.Name = "CKBProveedorInactivo"
         Me.CKBProveedorInactivo.Size = New System.Drawing.Size(64, 17)
         Me.CKBProveedorInactivo.TabIndex = 112
@@ -373,7 +371,7 @@ Partial Class ProveedoresABM
         Me.txtClienteAsociadoDescripcion.MaxLength = 255
         Me.txtClienteAsociadoDescripcion.Name = "txtClienteAsociadoDescripcion"
         Me.txtClienteAsociadoDescripcion.ReadOnly = True
-        Me.txtClienteAsociadoDescripcion.Size = New System.Drawing.Size(214, 20)
+        Me.txtClienteAsociadoDescripcion.Size = New System.Drawing.Size(169, 20)
         Me.txtClienteAsociadoDescripcion.TabIndex = 111
         Me.ToolTip1.SetToolTip(Me.txtClienteAsociadoDescripcion, "Doble Click: Abrir en Navegador Web.")
         '
@@ -406,22 +404,11 @@ Partial Class ProveedoresABM
         Me.CustomLabel25.ControlAssociationKey = 1
         Me.CustomLabel25.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel25.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel25.Location = New System.Drawing.Point(599, 26)
+        Me.CustomLabel25.Location = New System.Drawing.Point(561, 26)
         Me.CustomLabel25.Name = "CustomLabel25"
         Me.CustomLabel25.Size = New System.Drawing.Size(65, 18)
         Me.CustomLabel25.TabIndex = 108
         Me.CustomLabel25.Text = "Provincia"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(12, 244)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(106, 18)
-        Me.Label3.TabIndex = 107
-        Me.Label3.Text = " Ingresos Brutos"
         '
         'txtCheque
         '
@@ -450,7 +437,7 @@ Partial Class ProveedoresABM
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(0)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(0)
-        Me.GroupBox2.Size = New System.Drawing.Size(339, 75)
+        Me.GroupBox2.Size = New System.Drawing.Size(296, 75)
         Me.GroupBox2.TabIndex = 105
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "PROVINCIA"
@@ -464,9 +451,9 @@ Partial Class ProveedoresABM
         Me.cmbCondicionIB1.FormattingEnabled = True
         Me.cmbCondicionIB1.Items.AddRange(New Object() {"Bienes", "Servicio", "Exento", "Ciudad Normal", "Ciudad Riesgo"})
         Me.cmbCondicionIB1.LabelAssociationKey = 17
-        Me.cmbCondicionIB1.Location = New System.Drawing.Point(93, 18)
+        Me.cmbCondicionIB1.Location = New System.Drawing.Point(82, 18)
         Me.cmbCondicionIB1.Name = "cmbCondicionIB1"
-        Me.cmbCondicionIB1.Size = New System.Drawing.Size(105, 22)
+        Me.cmbCondicionIB1.Size = New System.Drawing.Size(84, 22)
         Me.cmbCondicionIB1.TabIndex = 78
         Me.ToolTip1.SetToolTip(Me.cmbCondicionIB1, "Condición Ingresos Brutos en Provincia")
         Me.cmbCondicionIB1.Validator = Administracion.ValidatorType.None
@@ -478,7 +465,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel31.ControlAssociationKey = 17
         Me.CustomLabel31.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel31.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel31.Location = New System.Drawing.Point(15, 20)
+        Me.CustomLabel31.Location = New System.Drawing.Point(4, 20)
         Me.CustomLabel31.Name = "CustomLabel31"
         Me.CustomLabel31.Size = New System.Drawing.Size(74, 18)
         Me.CustomLabel31.TabIndex = 67
@@ -492,7 +479,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel18.ControlAssociationKey = 18
         Me.CustomLabel18.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel18.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel18.Location = New System.Drawing.Point(31, 46)
+        Me.CustomLabel18.Location = New System.Drawing.Point(20, 46)
         Me.CustomLabel18.Name = "CustomLabel18"
         Me.CustomLabel18.Size = New System.Drawing.Size(54, 18)
         Me.CustomLabel18.TabIndex = 69
@@ -504,10 +491,10 @@ Partial Class ProveedoresABM
         Me.txtNroIB.Empty = True
         Me.txtNroIB.EnterIndex = 19
         Me.txtNroIB.LabelAssociationKey = 18
-        Me.txtNroIB.Location = New System.Drawing.Point(92, 45)
+        Me.txtNroIB.Location = New System.Drawing.Point(81, 45)
         Me.txtNroIB.MaxLength = 20
         Me.txtNroIB.Name = "txtNroIB"
-        Me.txtNroIB.Size = New System.Drawing.Size(105, 22)
+        Me.txtNroIB.Size = New System.Drawing.Size(85, 22)
         Me.txtNroIB.TabIndex = 83
         Me.txtNroIB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtNroIB.Validator = Administracion.ValidatorType.None
@@ -518,7 +505,7 @@ Partial Class ProveedoresABM
         Me.txtPorcelProv.Empty = True
         Me.txtPorcelProv.EnterIndex = 20
         Me.txtPorcelProv.LabelAssociationKey = 19
-        Me.txtPorcelProv.Location = New System.Drawing.Point(276, 44)
+        Me.txtPorcelProv.Location = New System.Drawing.Point(234, 44)
         Me.txtPorcelProv.MaxLength = 6
         Me.txtPorcelProv.Name = "txtPorcelProv"
         Me.txtPorcelProv.Size = New System.Drawing.Size(50, 22)
@@ -533,7 +520,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel19.ControlAssociationKey = 19
         Me.CustomLabel19.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel19.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel19.Location = New System.Drawing.Point(204, 47)
+        Me.CustomLabel19.Location = New System.Drawing.Point(169, 47)
         Me.CustomLabel19.Name = "CustomLabel19"
         Me.CustomLabel19.Size = New System.Drawing.Size(67, 17)
         Me.CustomLabel19.TabIndex = 70
@@ -544,14 +531,14 @@ Partial Class ProveedoresABM
         Me.txtPaginaWeb.Location = New System.Drawing.Point(124, 337)
         Me.txtPaginaWeb.MaxLength = 50
         Me.txtPaginaWeb.Name = "txtPaginaWeb"
-        Me.txtPaginaWeb.Size = New System.Drawing.Size(309, 20)
+        Me.txtPaginaWeb.Size = New System.Drawing.Size(264, 20)
         Me.txtPaginaWeb.TabIndex = 104
         Me.txtPaginaWeb.Text = "http://"
         Me.ToolTip1.SetToolTip(Me.txtPaginaWeb, "Doble Click: Abrir en Navegador Web.")
         '
         'txtCUIT
         '
-        Me.txtCUIT.Location = New System.Drawing.Point(281, 99)
+        Me.txtCUIT.Location = New System.Drawing.Point(263, 99)
         Me.txtCUIT.Mask = "00-00000000-0"
         Me.txtCUIT.Name = "txtCUIT"
         Me.txtCUIT.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -569,9 +556,9 @@ Partial Class ProveedoresABM
         Me.cmbCalificacion.FormattingEnabled = True
         Me.cmbCalificacion.Items.AddRange(New Object() {"", "Apto", "Condicional", "No Apto"})
         Me.cmbCalificacion.LabelAssociationKey = 29
-        Me.cmbCalificacion.Location = New System.Drawing.Point(442, 316)
+        Me.cmbCalificacion.Location = New System.Drawing.Point(419, 313)
         Me.cmbCalificacion.Name = "cmbCalificacion"
-        Me.cmbCalificacion.Size = New System.Drawing.Size(113, 21)
+        Me.cmbCalificacion.Size = New System.Drawing.Size(94, 21)
         Me.cmbCalificacion.TabIndex = 101
         Me.cmbCalificacion.Validator = Administracion.ValidatorType.None
         '
@@ -579,14 +566,13 @@ Partial Class ProveedoresABM
         '
         Me.cmbEstado.Cleanable = True
         Me.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbEstado.Empty = True
+        Me.cmbEstado.Empty = False
         Me.cmbEstado.EnterIndex = 33
-        Me.cmbEstado.FormattingEnabled = True
         Me.cmbEstado.Items.AddRange(New Object() {"", "Habilitado", "Inhabilitado"})
         Me.cmbEstado.LabelAssociationKey = 28
-        Me.cmbEstado.Location = New System.Drawing.Point(692, 316)
+        Me.cmbEstado.Location = New System.Drawing.Point(653, 314)
         Me.cmbEstado.Name = "cmbEstado"
-        Me.cmbEstado.Size = New System.Drawing.Size(113, 21)
+        Me.cmbEstado.Size = New System.Drawing.Size(98, 21)
         Me.cmbEstado.TabIndex = 100
         Me.cmbEstado.Validator = Administracion.ValidatorType.None
         '
@@ -614,7 +600,7 @@ Partial Class ProveedoresABM
         Me.btnCUFE.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.btnCUFE.ForeColor = System.Drawing.SystemColors.Control
         Me.btnCUFE.LabelAssociationKey = -1
-        Me.btnCUFE.Location = New System.Drawing.Point(688, 343)
+        Me.btnCUFE.Location = New System.Drawing.Point(635, 343)
         Me.btnCUFE.Name = "btnCUFE"
         Me.btnCUFE.Size = New System.Drawing.Size(116, 31)
         Me.btnCUFE.TabIndex = 95
@@ -631,7 +617,7 @@ Partial Class ProveedoresABM
         Me.btnContactos.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.btnContactos.ForeColor = System.Drawing.SystemColors.Control
         Me.btnContactos.LabelAssociationKey = -1
-        Me.btnContactos.Location = New System.Drawing.Point(444, 343)
+        Me.btnContactos.Location = New System.Drawing.Point(392, 343)
         Me.btnContactos.Name = "btnContactos"
         Me.btnContactos.Size = New System.Drawing.Size(116, 31)
         Me.btnContactos.TabIndex = 94
@@ -648,7 +634,7 @@ Partial Class ProveedoresABM
         Me.btnObservaciones.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.btnObservaciones.ForeColor = System.Drawing.SystemColors.Control
         Me.btnObservaciones.LabelAssociationKey = -1
-        Me.btnObservaciones.Location = New System.Drawing.Point(568, 343)
+        Me.btnObservaciones.Location = New System.Drawing.Point(516, 343)
         Me.btnObservaciones.Name = "btnObservaciones"
         Me.btnObservaciones.Size = New System.Drawing.Size(116, 31)
         Me.btnObservaciones.TabIndex = 94
@@ -663,7 +649,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel29.ControlAssociationKey = 29
         Me.CustomLabel29.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel29.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel29.Location = New System.Drawing.Point(357, 317)
+        Me.CustomLabel29.Location = New System.Drawing.Point(338, 315)
         Me.CustomLabel29.Name = "CustomLabel29"
         Me.CustomLabel29.Size = New System.Drawing.Size(78, 18)
         Me.CustomLabel29.TabIndex = 93
@@ -676,7 +662,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel28.ControlAssociationKey = 28
         Me.CustomLabel28.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel28.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel28.Location = New System.Drawing.Point(636, 317)
+        Me.CustomLabel28.Location = New System.Drawing.Point(596, 314)
         Me.CustomLabel28.Name = "CustomLabel28"
         Me.CustomLabel28.Size = New System.Drawing.Size(49, 18)
         Me.CustomLabel28.TabIndex = 92
@@ -701,10 +687,10 @@ Partial Class ProveedoresABM
         Me.txtNroSEDRONAR1.Empty = True
         Me.txtNroSEDRONAR1.EnterIndex = 23
         Me.txtNroSEDRONAR1.LabelAssociationKey = 22
-        Me.txtNroSEDRONAR1.Location = New System.Drawing.Point(611, 291)
+        Me.txtNroSEDRONAR1.Location = New System.Drawing.Point(583, 291)
         Me.txtNroSEDRONAR1.MaxLength = 15
         Me.txtNroSEDRONAR1.Name = "txtNroSEDRONAR1"
-        Me.txtNroSEDRONAR1.Size = New System.Drawing.Size(118, 20)
+        Me.txtNroSEDRONAR1.Size = New System.Drawing.Size(90, 20)
         Me.txtNroSEDRONAR1.TabIndex = 86
         Me.txtNroSEDRONAR1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtNroSEDRONAR1.Validator = Administracion.ValidatorType.None
@@ -751,9 +737,9 @@ Partial Class ProveedoresABM
         Me.cmbRubro.EnterIndex = 22
         Me.cmbRubro.FormattingEnabled = True
         Me.cmbRubro.LabelAssociationKey = 21
-        Me.cmbRubro.Location = New System.Drawing.Point(554, 150)
+        Me.cmbRubro.Location = New System.Drawing.Point(553, 150)
         Me.cmbRubro.Name = "cmbRubro"
-        Me.cmbRubro.Size = New System.Drawing.Size(221, 21)
+        Me.cmbRubro.Size = New System.Drawing.Size(198, 21)
         Me.cmbRubro.TabIndex = 77
         Me.cmbRubro.Validator = Administracion.ValidatorType.None
         '
@@ -766,7 +752,7 @@ Partial Class ProveedoresABM
         Me.txtDiasPlazo.Location = New System.Drawing.Point(124, 99)
         Me.txtDiasPlazo.MaxLength = 20
         Me.txtDiasPlazo.Name = "txtDiasPlazo"
-        Me.txtDiasPlazo.Size = New System.Drawing.Size(103, 20)
+        Me.txtDiasPlazo.Size = New System.Drawing.Size(89, 20)
         Me.txtDiasPlazo.TabIndex = 75
         Me.txtDiasPlazo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtDiasPlazo.Validator = Administracion.ValidatorType.None
@@ -806,9 +792,9 @@ Partial Class ProveedoresABM
         Me.CustomLabel21.ForeColor = System.Drawing.SystemColors.Control
         Me.CustomLabel21.Location = New System.Drawing.Point(428, 292)
         Me.CustomLabel21.Name = "CustomLabel21"
-        Me.CustomLabel21.Size = New System.Drawing.Size(176, 18)
+        Me.CustomLabel21.Size = New System.Drawing.Size(154, 18)
         Me.CustomLabel21.TabIndex = 72
-        Me.CustomLabel21.Text = "Nro. Inscripción SEDRONAR"
+        Me.CustomLabel21.Text = "Nro. Inscrip. SEDRONAR"
         '
         'CustomLabel16
         '
@@ -825,16 +811,16 @@ Partial Class ProveedoresABM
         '
         'CustomLabel15
         '
-        Me.CustomLabel15.AutoSize = True
         Me.CustomLabel15.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.CustomLabel15.ControlAssociationKey = 17
         Me.CustomLabel15.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel15.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel15.Location = New System.Drawing.Point(20, 225)
+        Me.CustomLabel15.Location = New System.Drawing.Point(39, 219)
         Me.CustomLabel15.Name = "CustomLabel15"
-        Me.CustomLabel15.Size = New System.Drawing.Size(89, 18)
+        Me.CustomLabel15.Size = New System.Drawing.Size(75, 40)
         Me.CustomLabel15.TabIndex = 67
-        Me.CustomLabel15.Text = "Condición de"
+        Me.CustomLabel15.Text = "Condición   de IB"
+        Me.CustomLabel15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'CustomLabel5
         '
@@ -871,7 +857,7 @@ Partial Class ProveedoresABM
         Me.txtDireccion.Location = New System.Drawing.Point(122, 27)
         Me.txtDireccion.MaxLength = 50
         Me.txtDireccion.Name = "txtDireccion"
-        Me.txtDireccion.Size = New System.Drawing.Size(471, 20)
+        Me.txtDireccion.Size = New System.Drawing.Size(438, 20)
         Me.txtDireccion.TabIndex = 55
         Me.txtDireccion.Validator = Administracion.ValidatorType.None
         '
@@ -885,9 +871,9 @@ Partial Class ProveedoresABM
         Me.cmbProvincia.FormattingEnabled = True
         Me.cmbProvincia.Items.AddRange(New Object() {"Capital Federal", "Buenos Aires", "Catamarca", "Cordoba", "Corrientes", "Chaco", "Chubut", "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago del Estero", "Tucuman", "Tierra del Fuego", "Exterior", "                                   "})
         Me.cmbProvincia.LabelAssociationKey = 5
-        Me.cmbProvincia.Location = New System.Drawing.Point(673, 26)
+        Me.cmbProvincia.Location = New System.Drawing.Point(632, 26)
         Me.cmbProvincia.Name = "cmbProvincia"
-        Me.cmbProvincia.Size = New System.Drawing.Size(127, 21)
+        Me.cmbProvincia.Size = New System.Drawing.Size(119, 21)
         Me.cmbProvincia.TabIndex = 57
         Me.cmbProvincia.Validator = Administracion.ValidatorType.NotEmpty
         '
@@ -897,10 +883,10 @@ Partial Class ProveedoresABM
         Me.txtRazonSocial.Empty = False
         Me.txtRazonSocial.EnterIndex = 2
         Me.txtRazonSocial.LabelAssociationKey = 2
-        Me.txtRazonSocial.Location = New System.Drawing.Point(348, 4)
+        Me.txtRazonSocial.Location = New System.Drawing.Point(345, 4)
         Me.txtRazonSocial.MaxLength = 50
         Me.txtRazonSocial.Name = "txtRazonSocial"
-        Me.txtRazonSocial.Size = New System.Drawing.Size(451, 20)
+        Me.txtRazonSocial.Size = New System.Drawing.Size(406, 20)
         Me.txtRazonSocial.TabIndex = 54
         Me.txtRazonSocial.Validator = Administracion.ValidatorType.NotEmpty
         '
@@ -985,7 +971,7 @@ Partial Class ProveedoresABM
         '
         'txtCalificacion
         '
-        Me.txtCalificacion.Location = New System.Drawing.Point(561, 317)
+        Me.txtCalificacion.Location = New System.Drawing.Point(516, 313)
         Me.txtCalificacion.Mask = "00/00/0000"
         Me.txtCalificacion.Name = "txtCalificacion"
         Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -996,7 +982,7 @@ Partial Class ProveedoresABM
         '
         'txtNroSEDRONAR2
         '
-        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(735, 291)
+        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(677, 291)
         Me.txtNroSEDRONAR2.Mask = "00/00/0000"
         Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
         Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -1025,9 +1011,9 @@ Partial Class ProveedoresABM
         Me.cmbRegion.FormattingEnabled = True
         Me.cmbRegion.Items.AddRange(New Object() {"Fuera Mercosur", "Mercosur"})
         Me.cmbRegion.LabelAssociationKey = 7
-        Me.cmbRegion.Location = New System.Drawing.Point(673, 49)
+        Me.cmbRegion.Location = New System.Drawing.Point(632, 49)
         Me.cmbRegion.Name = "cmbRegion"
-        Me.cmbRegion.Size = New System.Drawing.Size(127, 21)
+        Me.cmbRegion.Size = New System.Drawing.Size(119, 21)
         Me.cmbRegion.TabIndex = 29
         Me.cmbRegion.Validator = Administracion.ValidatorType.NotEmpty
         '
@@ -1038,7 +1024,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel8.ControlAssociationKey = 7
         Me.CustomLabel8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel8.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel8.Location = New System.Drawing.Point(613, 51)
+        Me.CustomLabel8.Location = New System.Drawing.Point(575, 51)
         Me.CustomLabel8.Name = "CustomLabel8"
         Me.CustomLabel8.Size = New System.Drawing.Size(51, 18)
         Me.CustomLabel8.TabIndex = 7
@@ -1051,7 +1037,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel7.ControlAssociationKey = 6
         Me.CustomLabel7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel7.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel7.Location = New System.Drawing.Point(412, 52)
+        Me.CustomLabel7.Location = New System.Drawing.Point(377, 52)
         Me.CustomLabel7.Name = "CustomLabel7"
         Me.CustomLabel7.Size = New System.Drawing.Size(92, 18)
         Me.CustomLabel7.TabIndex = 6
@@ -1063,7 +1049,7 @@ Partial Class ProveedoresABM
         Me.txtCodigoPostal.Empty = True
         Me.txtCodigoPostal.EnterIndex = 6
         Me.txtCodigoPostal.LabelAssociationKey = 6
-        Me.txtCodigoPostal.Location = New System.Drawing.Point(509, 51)
+        Me.txtCodigoPostal.Location = New System.Drawing.Point(474, 51)
         Me.txtCodigoPostal.MaxLength = 4
         Me.txtCodigoPostal.Name = "txtCodigoPostal"
         Me.txtCodigoPostal.Size = New System.Drawing.Size(86, 20)
@@ -1103,10 +1089,10 @@ Partial Class ProveedoresABM
         Me.txtEmail.Empty = True
         Me.txtEmail.EnterIndex = 10
         Me.txtEmail.LabelAssociationKey = 10
-        Me.txtEmail.Location = New System.Drawing.Point(334, 74)
+        Me.txtEmail.Location = New System.Drawing.Point(331, 74)
         Me.txtEmail.MaxLength = 400
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(466, 20)
+        Me.txtEmail.Size = New System.Drawing.Size(420, 20)
         Me.txtEmail.TabIndex = 27
         Me.txtEmail.Validator = Administracion.ValidatorType.None
         '
@@ -1130,7 +1116,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel11.ControlAssociationKey = 12
         Me.CustomLabel11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel11.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel11.Location = New System.Drawing.Point(236, 102)
+        Me.CustomLabel11.Location = New System.Drawing.Point(218, 100)
         Me.CustomLabel11.Name = "CustomLabel11"
         Me.CustomLabel11.Size = New System.Drawing.Size(37, 18)
         Me.CustomLabel11.TabIndex = 10
@@ -1184,7 +1170,7 @@ Partial Class ProveedoresABM
         Me.cmbTipoProveedor.FormattingEnabled = True
         Me.cmbTipoProveedor.Items.AddRange(New Object() {"Bienes", "Honorarios", "Alquileres", "Exento", "Despachante", "Locación de Obras", "Fletes", "                                  ", "                                  "})
         Me.cmbTipoProveedor.LabelAssociationKey = 13
-        Me.cmbTipoProveedor.Location = New System.Drawing.Point(514, 100)
+        Me.cmbTipoProveedor.Location = New System.Drawing.Point(461, 99)
         Me.cmbTipoProveedor.Name = "cmbTipoProveedor"
         Me.cmbTipoProveedor.Size = New System.Drawing.Size(110, 21)
         Me.cmbTipoProveedor.TabIndex = 32
@@ -1197,11 +1183,11 @@ Partial Class ProveedoresABM
         Me.CustomLabel12.ControlAssociationKey = 13
         Me.CustomLabel12.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel12.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel12.Location = New System.Drawing.Point(379, 100)
+        Me.CustomLabel12.Location = New System.Drawing.Point(361, 100)
         Me.CustomLabel12.Name = "CustomLabel12"
-        Me.CustomLabel12.Size = New System.Drawing.Size(133, 18)
+        Me.CustomLabel12.Size = New System.Drawing.Size(98, 18)
         Me.CustomLabel12.TabIndex = 11
-        Me.CustomLabel12.Text = "Categoría Ganancias"
+        Me.CustomLabel12.Text = "Cat. Ganancias"
         '
         'CustomLabel17
         '
@@ -1210,7 +1196,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel17.ControlAssociationKey = 14
         Me.CustomLabel17.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel17.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel17.Location = New System.Drawing.Point(627, 101)
+        Me.CustomLabel17.Location = New System.Drawing.Point(579, 101)
         Me.CustomLabel17.Name = "CustomLabel17"
         Me.CustomLabel17.Size = New System.Drawing.Size(75, 18)
         Me.CustomLabel17.TabIndex = 16
@@ -1225,7 +1211,7 @@ Partial Class ProveedoresABM
         Me.cmbIVA.FormattingEnabled = True
         Me.cmbIVA.Items.AddRange(New Object() {"No Inscripto", "Consumidor Final", "Resp.Inscripto", "Exento", "No Responsable", "Monotributo", "No Catalogado", "                          "})
         Me.cmbIVA.LabelAssociationKey = 14
-        Me.cmbIVA.Location = New System.Drawing.Point(707, 99)
+        Me.cmbIVA.Location = New System.Drawing.Point(658, 99)
         Me.cmbIVA.Name = "cmbIVA"
         Me.cmbIVA.Size = New System.Drawing.Size(93, 21)
         Me.cmbIVA.TabIndex = 37
@@ -1296,9 +1282,9 @@ Partial Class ProveedoresABM
         Me.GroupBox3.Controls.Add(Me.CustomLabel24)
         Me.GroupBox3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox3.Location = New System.Drawing.Point(473, 203)
+        Me.GroupBox3.Location = New System.Drawing.Point(438, 203)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(335, 75)
+        Me.GroupBox3.Size = New System.Drawing.Size(313, 75)
         Me.GroupBox3.TabIndex = 106
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "CABA"
@@ -1312,9 +1298,9 @@ Partial Class ProveedoresABM
         Me.cmbInscripcionIB.FormattingEnabled = True
         Me.cmbInscripcionIB.Items.AddRange(New Object() {"", "Local", "Conv. Multilateral", "No Inscripto", "Reg. Simplificado"})
         Me.cmbInscripcionIB.LabelAssociationKey = 24
-        Me.cmbInscripcionIB.Location = New System.Drawing.Point(94, 44)
+        Me.cmbInscripcionIB.Location = New System.Drawing.Point(91, 44)
         Me.cmbInscripcionIB.Name = "cmbInscripcionIB"
-        Me.cmbInscripcionIB.Size = New System.Drawing.Size(105, 22)
+        Me.cmbInscripcionIB.Size = New System.Drawing.Size(88, 22)
         Me.cmbInscripcionIB.TabIndex = 82
         Me.cmbInscripcionIB.Validator = Administracion.ValidatorType.None
         '
@@ -1327,9 +1313,9 @@ Partial Class ProveedoresABM
         Me.cmbCondicionIB2.FormattingEnabled = True
         Me.cmbCondicionIB2.Items.AddRange(New Object() {"", "", "Exento", "Retiene"})
         Me.cmbCondicionIB2.LabelAssociationKey = 17
-        Me.cmbCondicionIB2.Location = New System.Drawing.Point(94, 17)
+        Me.cmbCondicionIB2.Location = New System.Drawing.Point(91, 17)
         Me.cmbCondicionIB2.Name = "cmbCondicionIB2"
-        Me.cmbCondicionIB2.Size = New System.Drawing.Size(105, 22)
+        Me.cmbCondicionIB2.Size = New System.Drawing.Size(88, 22)
         Me.cmbCondicionIB2.TabIndex = 79
         Me.ToolTip1.SetToolTip(Me.cmbCondicionIB2, "Condición Ingresos Brutos en CABA")
         Me.cmbCondicionIB2.Validator = Administracion.ValidatorType.None
@@ -1341,7 +1327,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel20.ControlAssociationKey = 24
         Me.CustomLabel20.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel20.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel20.Location = New System.Drawing.Point(8, 44)
+        Me.CustomLabel20.Location = New System.Drawing.Point(5, 44)
         Me.CustomLabel20.Name = "CustomLabel20"
         Me.CustomLabel20.Size = New System.Drawing.Size(83, 18)
         Me.CustomLabel20.TabIndex = 71
@@ -1354,7 +1340,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel32.ControlAssociationKey = 17
         Me.CustomLabel32.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel32.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel32.Location = New System.Drawing.Point(15, 17)
+        Me.CustomLabel32.Location = New System.Drawing.Point(12, 17)
         Me.CustomLabel32.Name = "CustomLabel32"
         Me.CustomLabel32.Size = New System.Drawing.Size(74, 18)
         Me.CustomLabel32.TabIndex = 67
@@ -1367,7 +1353,7 @@ Partial Class ProveedoresABM
         Me.txtPorcelCABA.Empty = True
         Me.txtPorcelCABA.EnterIndex = 21
         Me.txtPorcelCABA.LabelAssociationKey = 20
-        Me.txtPorcelCABA.Location = New System.Drawing.Point(277, 43)
+        Me.txtPorcelCABA.Location = New System.Drawing.Point(249, 43)
         Me.txtPorcelCABA.MaxLength = 6
         Me.txtPorcelCABA.Name = "txtPorcelCABA"
         Me.txtPorcelCABA.Size = New System.Drawing.Size(49, 22)
@@ -1382,7 +1368,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel24.ControlAssociationKey = 20
         Me.CustomLabel24.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel24.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel24.Location = New System.Drawing.Point(209, 45)
+        Me.CustomLabel24.Location = New System.Drawing.Point(181, 45)
         Me.CustomLabel24.Name = "CustomLabel24"
         Me.CustomLabel24.Size = New System.Drawing.Size(67, 17)
         Me.CustomLabel24.TabIndex = 76
@@ -1400,7 +1386,7 @@ Partial Class ProveedoresABM
         Me.btnListado.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnListado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnListado.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnListado.Location = New System.Drawing.Point(443, 465)
+        Me.btnListado.Location = New System.Drawing.Point(435, 465)
         Me.btnListado.Name = "btnListado"
         Me.btnListado.Size = New System.Drawing.Size(56, 37)
         Me.btnListado.TabIndex = 74
@@ -1419,7 +1405,7 @@ Partial Class ProveedoresABM
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.Location = New System.Drawing.Point(163, 465)
+        Me.btnLimpiar.Location = New System.Drawing.Point(155, 465)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(56, 37)
         Me.btnLimpiar.TabIndex = 75
@@ -1438,7 +1424,7 @@ Partial Class ProveedoresABM
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.Location = New System.Drawing.Point(373, 465)
+        Me.btnCerrar.Location = New System.Drawing.Point(365, 465)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(56, 37)
         Me.btnCerrar.TabIndex = 73
@@ -1457,7 +1443,7 @@ Partial Class ProveedoresABM
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.Location = New System.Drawing.Point(233, 465)
+        Me.btnConsulta.Location = New System.Drawing.Point(225, 465)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(56, 37)
         Me.btnConsulta.TabIndex = 71
@@ -1476,7 +1462,7 @@ Partial Class ProveedoresABM
         Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEliminar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.Location = New System.Drawing.Point(303, 465)
+        Me.btnEliminar.Location = New System.Drawing.Point(295, 465)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(56, 37)
         Me.btnEliminar.TabIndex = 72
@@ -1496,7 +1482,7 @@ Partial Class ProveedoresABM
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.Location = New System.Drawing.Point(93, 465)
+        Me.btnAgregar.Location = New System.Drawing.Point(85, 465)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(56, 37)
         Me.btnAgregar.TabIndex = 70
@@ -1505,11 +1491,11 @@ Partial Class ProveedoresABM
         '
         'txtCAIVto
         '
-        Me.txtCAIVto.Location = New System.Drawing.Point(760, 455)
+        Me.txtCAIVto.Location = New System.Drawing.Point(663, 479)
         Me.txtCAIVto.Mask = "00/00/0000"
         Me.txtCAIVto.Name = "txtCAIVto"
         Me.txtCAIVto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCAIVto.Size = New System.Drawing.Size(16, 20)
+        Me.txtCAIVto.Size = New System.Drawing.Size(10, 20)
         Me.txtCAIVto.TabIndex = 47
         Me.txtCAIVto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCAIVto.ValidatingType = GetType(Date)
@@ -1521,7 +1507,7 @@ Partial Class ProveedoresABM
         Me.txtCAI.Empty = True
         Me.txtCAI.EnterIndex = 29
         Me.txtCAI.LabelAssociationKey = 25
-        Me.txtCAI.Location = New System.Drawing.Point(744, 456)
+        Me.txtCAI.Location = New System.Drawing.Point(652, 479)
         Me.txtCAI.MaxLength = 14
         Me.txtCAI.Name = "txtCAI"
         Me.txtCAI.Size = New System.Drawing.Size(10, 20)
@@ -1532,7 +1518,7 @@ Partial Class ProveedoresABM
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(500, 479)
+        Me.Button1.Location = New System.Drawing.Point(578, 658)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 97
@@ -1544,7 +1530,7 @@ Partial Class ProveedoresABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(820, 689)
+        Me.ClientSize = New System.Drawing.Size(761, 689)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.LBConsulta_Opciones)
         Me.Controls.Add(Me.Panel1)
@@ -1564,6 +1550,7 @@ Partial Class ProveedoresABM
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MaximizeBox = False
         Me.Name = "ProveedoresABM"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.GroupBox1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
@@ -1667,7 +1654,6 @@ Partial Class ProveedoresABM
     Friend WithEvents CustomLabel31 As Administracion.CustomLabel
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtCAIVto As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtCAI As Administracion.CustomTextBox
     Friend WithEvents CustomLabel25 As Administracion.CustomLabel
