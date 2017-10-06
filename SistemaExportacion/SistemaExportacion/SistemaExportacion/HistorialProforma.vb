@@ -10,21 +10,23 @@ Public Class HistorialProforma
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
 
-    Private _Proforma As String
+    Private _NroProforma As String
 
-    Public Property Proforma() As String
+    Public Property NroProforma() As String
         Get
-            Return _Proforma
+            Return _NroProforma
         End Get
         Set(ByVal value As String)
-            _Proforma = value
+            _NroProforma = value
         End Set
     End Property
 
     Private Sub HistorialProforma_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        If Not IsNothing(Me.Proforma) Then
+        If Not IsNothing(Me.NroProforma) Then
             Try
+                txtNroProforma.Text = Helper.ceros(Me.NroProforma, 6)
+
                 _MostrarHistorial()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
@@ -55,10 +57,10 @@ Public Class HistorialProforma
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
-        Dim WClave, WFecha, WFechaOrd, WObservacion, WUsuario, XRenglon, ZSql
+        Dim WClave, WFecha, WFechaOrd, WNroObservacion, WNroObsAnt, WObservacion, WUsuario, XRenglon, ZSql, WRefPrimeraFilaObs
 
         ZSql = ""
-        ZSql &= "SELECT DISTINCT h.Clave, h.Renglon, h.Fecha, h.FechaOrd, h.Usuario, h.Observaciones, p.Cliente, c.Razon"
+        ZSql &= "SELECT DISTINCT h.Clave, h.NroObservacion, h.Renglon, h.Fecha, h.FechaOrd, h.Usuario, h.Observaciones, p.Cliente, c.Razon"
         ZSql &= " FROM ProformaExportacionHistorial as h, ProformaExportacion as p, Cliente as c"
         ZSql &= " WHERE h.Proforma = '" & txtNroProforma.Text & "' AND p.Proforma = h.Proforma AND c.Cliente = p.Cliente ORDER BY h.FechaOrd, h.Renglon"
 
@@ -76,6 +78,9 @@ Public Class HistorialProforma
 
                 dgvProductos.Rows.Clear()
 
+                WRefPrimeraFilaObs = 0
+                WNroObsAnt = -1
+
                 Do While dr.Read()
 
                     WClave = ""
@@ -83,6 +88,7 @@ Public Class HistorialProforma
                     WFechaOrd = 0
                     WObservacion = ""
                     WUsuario = ""
+                    WNroObservacion = 0
 
                     txtCliente.Text = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
                     txtDescripcionCliente.Text = IIf(IsDBNull(dr.Item("Razon")), "", dr.Item("Razon"))
@@ -90,6 +96,7 @@ Public Class HistorialProforma
                     XRenglon = dgvProductos.Rows.Add
 
                     WFecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                    WNroObservacion = IIf(IsDBNull(dr.Item("NroObservacion")), 0, dr.Item("NroObservacion"))
                     WFechaOrd = IIf(IsDBNull(dr.Item("FechaOrd")), "", dr.Item("FechaOrd"))
                     WObservacion = IIf(IsDBNull(dr.Item("Observaciones")), "", dr.Item("Observaciones"))
                     WClave = IIf(IsDBNull(dr.Item("Clave")), "", dr.Item("Clave"))
@@ -100,8 +107,22 @@ Public Class HistorialProforma
                         .Cells("Fecha").Value = WFecha
                         .Cells("FechaOrd").Value = WFechaOrd
                         .Cells("Clave").Value = WClave
-                        .Cells("Observacion").Value = WObservacion
-                        .Cells("Usuario").Value = WUsuario
+                        .Cells("Observacion").Value = Trim(WObservacion)
+                        .Cells("Usuario").Value = Trim(WUsuario)
+                        '.Cells("NroObservacion").Value = WNroObservacion
+
+                        If WNroObservacion = WNroObsAnt Then
+
+                            If WNroObservacion & WRefPrimeraFilaObs = dgvProductos.Rows(XRenglon - 1).Cells("NroObservacion").Value Then
+                                .Cells("Fecha").Value = ""
+                            End If
+
+                            .Cells("NroObservacion").Value = WNroObservacion & WRefPrimeraFilaObs
+                        Else
+                            WNroObsAnt = WNroObservacion
+                            WRefPrimeraFilaObs = Helper.ceros(XRenglon, 4)
+                            .Cells("NroObservacion").Value = WNroObservacion & WRefPrimeraFilaObs
+                        End If
 
                     End With
 
@@ -397,12 +418,58 @@ Public Class HistorialProforma
         Return _ProximoRenglon
     End Function
 
+    Private Function _ProximoNroObservacion()
+        Dim actual = 0
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(NroObservacion) as NroActual FROM ProformaExportacionHistorial")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                actual = dr.Item("NroActual")
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer traer el próximo número de Observación de la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return actual + 1
+
+    End Function
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
-        Dim _Actualiza As Boolean = False
-        Dim WClave, WRenglon, XRenglon, WNroProforma, WFecha, WFechaOrd, WCliente, WObservacion, WUsuario, ZSql
+        Dim trans As SqlTransaction = Nothing
+
+        Dim WClave, WRenglon, XRenglon, WNroProforma, WFecha, WFechaOrd, WCliente, WObservacion, WUsuario, WNroObservacion, WClaveObs, ZSql
+        Dim WFila = "", WFilasAGrabar() As String
+        Dim WParrafosAGrabar() As String
+
+        cn.ConnectionString = _CS()
+        cn.Open()
+
+        trans = cn.BeginTransaction
+        cm.Connection = cn
+        cm.Transaction = trans
 
         ZSql = ""
         WNroProforma = Helper.ceros(txtNroProforma.Text, 6)
@@ -410,64 +477,102 @@ Public Class HistorialProforma
         WFechaOrd = Helper.ordenaFecha(WFecha)
         WCliente = txtCliente.Text
         WObservacion = Trim(txtObservacion.Text)
+        WClaveObs = Trim(WClaveObservacion.Text)
+
         WUsuario = txtUsuario.Text
 
         ' Chequeamos si se trata de la actualización de un renglon existente.
-        If Trim(WClaveObservacion.Text) <> "" And Trim(WClaveObservacion.Text).Length = 8 Then
-            _Actualiza = True
+        ' Si tiene clave, es una actualizacion y recuperamos el nro de referencia.
+        If WClaveObs = "" Then
 
-            WRenglon = Val(Microsoft.VisualBasic.Right(WClaveObservacion.Text, 2))
-
-        Else
-            ' Buscamos el numero de Proximo Renglon que corresponda.
             Try
-                WRenglon = _TraerProximoRenglon()
+                WNroObservacion = _ProximoNroObservacion()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
                 Exit Sub
             End Try
-        End If
 
-        XRenglon = Helper.ceros(WRenglon, 2)
-
-        WClave = WNroProforma + XRenglon
-
-        ' Creamos la consulta segun sea el caso de una actualizacion o no.
-
-        If _Actualiza Then
-            ZSql = "UPDATE ProformaExportacionHistorial SET "
-            ZSql &= "Fecha = '" & WFecha & "', FechaOrd = '" & WFechaOrd & "', Observaciones = '" & WObservacion & "', Usuario = '" & WUsuario & "' "
-            ZSql &= "WHERE Clave = '" & WClave & "' "
         Else
-            ZSql = "INSERT INTO ProformaExportacionHistorial (Clave, Renglon, Proforma, Usuario, Fecha, FechaOrd, Observaciones) "
-            ZSql &= "VALUES "
-            ZSql &= "('" & WClave & "','" & XRenglon & "','" & WNroProforma & "','" & WUsuario & "','" & WFecha & "','" & WFechaOrd & "','" & WObservacion & "')"
+
+            WNroObservacion = Mid(WClaveObs, 1, WClaveObs.ToString.Length - 4)
+
         End If
 
         Try
-            cn.ConnectionString = _CS()
-            cn.Open()
 
-            cm.Connection = cn
+            ZSql = ""
+            ZSql = "DELETE FROM ProformaExportacionHistorial WHERE NroObservacion = '" & WNroObservacion & "'"
+
             cm.CommandText = ZSql
 
             cm.ExecuteNonQuery()
 
+            ' Aca calculamos y grabamos todas las filas correspondientes.
+
+            WObservacion = Trim(WObservacion)
+
+            ' Separamos los párrafos para conservar el formato del comentario.
+            WParrafosAGrabar = WObservacion.ToString.Split(vbCrLf)
+
+            WRenglon = 0
+
+            For i = 0 To WParrafosAGrabar.Length - 1
+
+                If WParrafosAGrabar(i) <> "" Then
+
+                    ' Redondeamos el párrafo a un multiplo de 100 (max de caracteres por linea.)
+                    WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), 100 - (WParrafosAGrabar(i).Length Mod 100))
+
+                    ' Calculamos el numero de filas a grabar.
+                    ReDim WFilasAGrabar((WParrafosAGrabar(i).Length / 100))
+
+                    ' Por cada fila, cortamos trozos del parrafo cada 100 caracteres.
+                    For x = 0 To WFilasAGrabar.Length - 1
+
+                        WFilasAGrabar(x) = Trim(Mid(WParrafosAGrabar(i), (x * 100) + 1, 100))
+
+                        ' Grabamos unicamente aquellos que no sean nueva fila y tengan contenido.
+                        If Trim(WFilasAGrabar(x)) <> "" And WFilasAGrabar(x) <> vbLf Then
+                            WRenglon += 1
+
+                            XRenglon = Helper.ceros(WRenglon, 2)
+
+                            WClave = Helper.ceros(WNroObservacion, 6) + XRenglon
+
+                            ZSql = ""
+                            ZSql = "INSERT INTO ProformaExportacionHistorial (Clave, NroObservacion, Renglon, Proforma, Usuario, Fecha, FechaOrd, Observaciones) "
+                            ZSql &= "VALUES "
+                            ZSql &= "('" & WClave & "'," & WNroObservacion & ",'" & XRenglon & "','" & WNroProforma & "','" & WUsuario & "','" & WFecha & "','" & WFechaOrd & "','" & WFilasAGrabar(x) & "')"
+
+                            cm.CommandText = ZSql
+
+                            cm.ExecuteNonQuery()
+                        End If
+
+                    Next
+
+                End If
+
+            Next
+
         Catch ex As Exception
+            If Not IsNothing(trans) Then
+                trans.Rollback()
+            End If
+            cn.Close()
             MsgBox("No se pudo grabar la observación en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
-        Finally
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
         End Try
+
+        trans.Commit()
 
         MsgBox("La observación ha sido grabada con exito.", MsgBoxStyle.Information)
 
         _MostrarHistorial()
 
+        ' Despues de cargar todo el historial, no posicionamos en la primer fila de ese comentario creado/actualizado.
         For Each row As DataGridViewRow In dgvProductos.Rows
-            If row.Cells("Clave").Value = WClave Then
+            If row.Cells("Clave").Value = WClaveObs Then
                 row.Cells(0).Selected = True
                 Exit For
             End If
@@ -476,6 +581,7 @@ Public Class HistorialProforma
         'btnVistaPrevia.PerformClick()
 
         'btnLimpiar.PerformClick()
+        GrupoNuevaObs.Visible = False
 
     End Sub
 
@@ -489,29 +595,41 @@ Public Class HistorialProforma
         txtFecha.Focus()
     End Sub
 
-    Private Sub dgvProductos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProductos.CellContentClick
-        _CargarRenglon(e.RowIndex)
-    End Sub
-
     Private Sub _CargarRenglon(ByVal rowIndex As Integer)
-
+        Dim WRow = rowIndex
         If rowIndex + 1 <> Val(Microsoft.VisualBasic.Right(WClaveObservacion.Text, 2)) Or Trim(WClaveObservacion.Text) = "" Then
             WClaveObservacion.Text = ""
 
             btnLimpiar.PerformClick()
 
+            ' Calculamos la primera fila de la observacion, segun su clave.
+            rowIndex = Val(Microsoft.VisualBasic.Right(dgvProductos.Rows(rowIndex).Cells("NroObservacion").Value, 4))
+
             With dgvProductos.Rows(rowIndex)
                 txtFecha.Text = Trim(.Cells("Fecha").Value)
-                txtObservacion.Text = .Cells("Observacion").Value.ToString.Trim()
+
                 txtUsuario.Text = Trim(.Cells("Usuario").Value)
-                WClaveObservacion.Text = Trim(.Cells("Clave").Value)
+                WClaveObservacion.Text = Trim(.Cells("NroObservacion").Value)
+
+                txtObservacion.Text = ""
+
+                ' Recorremos hasta la ultima fila de la observacion.
+                For i = rowIndex To dgvProductos.Rows.Count - 1
+
+                    ' Salimos en la primera en la que ya no coincidan las claves de la observacion.
+                    If Val(dgvProductos.Rows(i).Cells("NroObservacion").Value) <> Val(WClaveObservacion.Text) Then
+                        Exit For
+                    End If
+
+                    txtObservacion.Text &= dgvProductos.Rows(i).Cells("Observacion").Value.ToString.Trim() & vbCrLf
+
+                Next
+
             End With
+
+            GrupoNuevaObs.Visible = True
         End If
 
-    End Sub
-
-    Private Sub dgvProductos_RowHeaderMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvProductos.RowHeaderMouseClick
-        _CargarRenglon(e.RowIndex)
     End Sub
 
     Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
@@ -597,5 +715,24 @@ Public Class HistorialProforma
             .NroProforma = txtNroProforma.Text
             .Show()
         End With
+    End Sub
+
+    Private Sub btnNuevaObservacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaObservacion.Click
+        GrupoNuevaObs.Visible = True
+        btnLimpiar.PerformClick()
+        txtFecha.Focus()
+    End Sub
+
+    Private Sub btnCerrarFormObs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarFormObs.Click
+        btnLimpiar.PerformClick()
+        GrupoNuevaObs.Visible = False
+    End Sub
+
+    Private Sub dgvProductos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvProductos.RowHeaderMouseDoubleClick
+        ' Eliminar la observacion?
+    End Sub
+
+    Private Sub dgvProductos_CellContentDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProductos.CellContentDoubleClick
+        _CargarRenglon(e.RowIndex)
     End Sub
 End Class

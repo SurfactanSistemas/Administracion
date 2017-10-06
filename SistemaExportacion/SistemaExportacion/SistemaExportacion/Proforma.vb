@@ -903,7 +903,7 @@ Public Class Proforma
 
             Dim cn As New SqlConnection()
             Dim cm As New SqlCommand()
-            Dim trans As SqlTransaction
+            Dim trans As SqlTransaction = Nothing
 
             Try
 
@@ -1007,9 +1007,8 @@ Public Class Proforma
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
         Dim cn As New SqlConnection()
-        Dim trans As SqlTransaction
+        Dim trans As SqlTransaction = Nothing
         Dim cm As New SqlCommand()
-        Dim _Actualiza As Boolean = False
         Dim WClave, WRenglon, XRenglon, WNroProforma, XNroProforma, WFecha, WFechaOrd, WCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WTotal, WDescripcionMonto, WSql, WPais
         Dim WCondPagoII, WViaII, WObservacionesII, WObservacionesIII, WDescripcionMontoII
         Dim WProd As String, WCant, WPrecio
@@ -1398,6 +1397,21 @@ Public Class Proforma
         btnConsulta.PerformClick()
 
         lstOpcionesConsulta_MouseClick(Nothing, Nothing)
+
+    End Sub
+
+    Private Sub btnHistorialArchivosRelacionados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistorialArchivosRelacionados.Click
+
+        If Trim(txtNroProforma.Text) <> "" Then
+
+            With HistorialProforma
+
+                .NroProforma = txtNroProforma.Text
+                .Show()
+
+            End With
+
+        End If
 
     End Sub
 End Class
