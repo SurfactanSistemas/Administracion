@@ -59,7 +59,7 @@ Public Class ArchivosRelacionados
 
         Dim InfoArchivo As FileInfo
 
-        dgvProductos.Rows.Clear()
+        dgvArchivos.Rows.Clear()
 
         ' Recorremos unicamente aquellos archivos que tengan una extensión que esté entre las permitidas por la aplicación.
         For Each WNombreArchivo As String In Directory.GetFiles(WRutaArchivosRelacionados).Where(Function(s) EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(s).ToLower()))
@@ -67,7 +67,7 @@ Public Class ArchivosRelacionados
             InfoArchivo = FileSystem.GetFileInfo(WNombreArchivo)
 
             With InfoArchivo
-                dgvProductos.Rows.Add(.CreationTime.ToString("dd/MM/yyyy"), UCase(.Name), _ObtenerIconoSegunTipoArchivo(.Extension), .FullName)
+                dgvArchivos.Rows.Add(.CreationTime.ToString("dd/MM/yyyy"), UCase(.Name), _ObtenerIconoSegunTipoArchivo(.Extension), .FullName)
             End With
 
         Next
@@ -142,8 +142,8 @@ Public Class ArchivosRelacionados
 
     End Sub
 
-    Private Sub dgvProductos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvProductos.CellMouseDoubleClick
-        With dgvProductos.Rows(e.RowIndex)
+    Private Sub dgvArchivos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvArchivos.CellMouseDoubleClick
+        With dgvArchivos.Rows(e.RowIndex)
             If Not IsNothing(.Cells("RutaArchivo").Value) Then
 
                 Try
@@ -166,7 +166,7 @@ Public Class ArchivosRelacionados
 
                 _CargarArchivosRelacionados()
 
-                With dgvProductos
+                With dgvArchivos
                     If .Rows.Count > 0 Then
                         .CurrentCell = .Rows(0).Cells(0)
                         .Focus()
@@ -185,7 +185,7 @@ Public Class ArchivosRelacionados
 
     End Sub
 
-    Private Sub dgvProductos_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvProductos.DragEnter
+    Private Sub dgvArchivos_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvArchivos.DragEnter
         _PermitirDrag(e)
     End Sub
 
@@ -244,7 +244,7 @@ Public Class ArchivosRelacionados
 
     End Sub
 
-    Private Sub dgvProductos_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvProductos.DragDrop
+    Private Sub dgvArchivos_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvArchivos.DragDrop
         _ProcesarDragDeArchivo(e)
     End Sub
 End Class

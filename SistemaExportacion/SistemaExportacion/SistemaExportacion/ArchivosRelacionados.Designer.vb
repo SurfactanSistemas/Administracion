@@ -33,7 +33,7 @@ Partial Class ArchivosRelacionados
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
-        Me.dgvProductos = New System.Windows.Forms.DataGridView()
+        Me.dgvArchivos = New System.Windows.Forms.DataGridView()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Icono = New System.Windows.Forms.DataGridViewImageColumn()
@@ -49,7 +49,7 @@ Partial Class ArchivosRelacionados
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -149,7 +149,7 @@ Partial Class ArchivosRelacionados
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel1.Controls.Add(Me.txtFechaAux)
-        Me.Panel1.Controls.Add(Me.dgvProductos)
+        Me.Panel1.Controls.Add(Me.dgvArchivos)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.txtDescripcionCliente)
@@ -165,7 +165,7 @@ Partial Class ArchivosRelacionados
         'txtFechaAux
         '
         Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFechaAux.Location = New System.Drawing.Point(495, 276)
+        Me.txtFechaAux.Location = New System.Drawing.Point(495, 271)
         Me.txtFechaAux.Mask = "LL-00000-000"
         Me.txtFechaAux.Name = "txtFechaAux"
         Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -174,15 +174,15 @@ Partial Class ArchivosRelacionados
         Me.txtFechaAux.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFechaAux.Visible = False
         '
-        'dgvProductos
+        'dgvArchivos
         '
-        Me.dgvProductos.AllowDrop = True
-        Me.dgvProductos.AllowUserToAddRows = False
-        Me.dgvProductos.AllowUserToDeleteRows = False
-        Me.dgvProductos.AllowUserToOrderColumns = True
-        Me.dgvProductos.AllowUserToResizeRows = False
-        Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Observacion, Me.Icono, Me.RutaArchivo})
+        Me.dgvArchivos.AllowDrop = True
+        Me.dgvArchivos.AllowUserToAddRows = False
+        Me.dgvArchivos.AllowUserToDeleteRows = False
+        Me.dgvArchivos.AllowUserToOrderColumns = True
+        Me.dgvArchivos.AllowUserToResizeRows = False
+        Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Observacion, Me.Icono, Me.RutaArchivo})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -190,14 +190,14 @@ Partial Class ArchivosRelacionados
         DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvProductos.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.dgvProductos.Location = New System.Drawing.Point(48, 50)
-        Me.dgvProductos.MultiSelect = False
-        Me.dgvProductos.Name = "dgvProductos"
-        Me.dgvProductos.RowTemplate.Height = 40
-        Me.dgvProductos.Size = New System.Drawing.Size(574, 281)
-        Me.dgvProductos.TabIndex = 8
+        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.dgvArchivos.Location = New System.Drawing.Point(48, 45)
+        Me.dgvArchivos.MultiSelect = False
+        Me.dgvArchivos.Name = "dgvArchivos"
+        Me.dgvArchivos.RowTemplate.Height = 40
+        Me.dgvArchivos.Size = New System.Drawing.Size(574, 281)
+        Me.dgvArchivos.TabIndex = 8
         '
         'Fecha
         '
@@ -319,7 +319,7 @@ Partial Class ArchivosRelacionados
         Me.LayoutCuerpoPrincipal.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -332,7 +332,7 @@ Partial Class ArchivosRelacionados
     Friend WithEvents LayoutCuerpoPrincipal As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents dgvProductos As System.Windows.Forms.DataGridView
+    Friend WithEvents dgvArchivos As System.Windows.Forms.DataGridView
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtDescripcionCliente As System.Windows.Forms.TextBox

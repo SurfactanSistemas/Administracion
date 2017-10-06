@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
+Imports Microsoft.VisualBasic.FileIO
 
 Public Class HistorialProforma
 
@@ -9,7 +11,8 @@ Public Class HistorialProforma
 
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
-
+    Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
+    
     Private _NroProforma As String
 
     Public Property NroProforma() As String
@@ -25,9 +28,14 @@ Public Class HistorialProforma
 
         If Not IsNothing(Me.NroProforma) Then
             Try
+                _LimpiarTodo()
+
                 txtNroProforma.Text = Helper.ceros(Me.NroProforma, 6)
 
-                _MostrarHistorial()
+                _TraerHistorialYArchivos()
+
+                TabControl1.SelectTab(0)
+
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
                 Me.Close()
@@ -51,8 +59,23 @@ Public Class HistorialProforma
         Return Helper._ConectarA()
     End Function
 
+    Private Sub _LimpiarTodo()
+
+        dgvArchivos.Rows.Clear()
+        dgvHistorial.Rows.Clear()
+        txtCliente.Text = ""
+        txtDescripcionCliente.Text = ""
+        txtNroProforma.Text = ""
+
+        TabControl1.SelectTab(0)
+        txtNroProforma.Focus()
+
+    End Sub
+
     Private Sub _MostrarHistorial()
         'If IsNothing(Me.Proforma) Then : Exit Sub : End If
+
+        GrupoNuevaObs.Visible = False
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
@@ -62,7 +85,7 @@ Public Class HistorialProforma
         ZSql = ""
         ZSql &= "SELECT DISTINCT h.Clave, h.NroObservacion, h.Renglon, h.Fecha, h.FechaOrd, h.Usuario, h.Observaciones, p.Cliente, c.Razon"
         ZSql &= " FROM ProformaExportacionHistorial as h, ProformaExportacion as p, Cliente as c"
-        ZSql &= " WHERE h.Proforma = '" & txtNroProforma.Text & "' AND p.Proforma = h.Proforma AND c.Cliente = p.Cliente ORDER BY h.FechaOrd, h.Renglon"
+        ZSql &= " WHERE h.Proforma = '" & txtNroProforma.Text & "' AND p.Proforma = h.Proforma AND c.Cliente = p.Cliente ORDER BY h.FechaOrd, h.NroObservacion, h.Renglon"
 
         Try
             cn.ConnectionString = _CS()
@@ -76,7 +99,7 @@ Public Class HistorialProforma
 
                 btnLimpiar.PerformClick()
 
-                dgvProductos.Rows.Clear()
+                dgvHistorial.Rows.Clear()
 
                 WRefPrimeraFilaObs = 0
                 WNroObsAnt = -1
@@ -93,7 +116,7 @@ Public Class HistorialProforma
                     txtCliente.Text = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
                     txtDescripcionCliente.Text = IIf(IsDBNull(dr.Item("Razon")), "", dr.Item("Razon"))
 
-                    XRenglon = dgvProductos.Rows.Add
+                    XRenglon = dgvHistorial.Rows.Add
 
                     WFecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
                     WNroObservacion = IIf(IsDBNull(dr.Item("NroObservacion")), 0, dr.Item("NroObservacion"))
@@ -102,7 +125,7 @@ Public Class HistorialProforma
                     WClave = IIf(IsDBNull(dr.Item("Clave")), "", dr.Item("Clave"))
                     WUsuario = IIf(IsDBNull(dr.Item("Usuario")), "", dr.Item("Usuario"))
 
-                    With dgvProductos.Rows(XRenglon)
+                    With dgvHistorial.Rows(XRenglon)
 
                         .Cells("Fecha").Value = WFecha
                         .Cells("FechaOrd").Value = WFechaOrd
@@ -113,8 +136,9 @@ Public Class HistorialProforma
 
                         If WNroObservacion = WNroObsAnt Then
 
-                            If WNroObservacion & WRefPrimeraFilaObs = dgvProductos.Rows(XRenglon - 1).Cells("NroObservacion").Value Then
+                            If WNroObservacion & WRefPrimeraFilaObs = dgvHistorial.Rows(XRenglon - 1).Cells("NroObservacion").Value Then
                                 .Cells("Fecha").Value = ""
+                                .Cells("Usuario").Value = ""
                             End If
 
                             .Cells("NroObservacion").Value = WNroObservacion & WRefPrimeraFilaObs
@@ -149,11 +173,14 @@ Public Class HistorialProforma
         If e.KeyData = Keys.Enter Then
             If Trim(txtNroProforma.Text) = "" Then : Exit Sub : End If
 
-            txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6)
-
             Try
-                '_TraerProforma(txtNroProforma.Text)
-                _MostrarHistorial()
+                Dim WNroProforma = Helper.ceros(txtNroProforma.Text, 6)
+
+                _LimpiarTodo()
+
+                txtNroProforma.Text = WNroProforma
+
+                _TraerHistorialYArchivos()
 
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
@@ -191,7 +218,7 @@ Public Class HistorialProforma
 
     '        If WRow >= 0 And Wcol >= 0 Then
 
-    '            'With dgvProductos
+    '            'With dgvHistorial
     '            '    .Rows(WRow).Cells(0).Value = txtFechaAux.Text
 
     '            '    Dim terminado = _BuscarTerminado(txtFechaAux.Text)
@@ -265,7 +292,7 @@ Public Class HistorialProforma
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
 
-        With dgvProductos
+        With dgvHistorial
             If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
                 .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
 
@@ -348,8 +375,8 @@ Public Class HistorialProforma
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    'Private Sub dgvProductos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProductos.CellEnter
-    '    With dgvProductos
+    'Private Sub dgvHistorial_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvHistorial.CellEnter
+    '    With dgvHistorial
     '        If e.ColumnIndex = 0 Then
     '            .ClearSelection()
     '            .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
@@ -454,6 +481,34 @@ Public Class HistorialProforma
 
     End Function
 
+    Private Function _DatosValidos() As Boolean
+
+        ' Validamos que la fecha indicada sea correcta.
+        If Not Helper._ValidarFecha(txtFecha.Text) Then
+            MsgBox("La fecha indicada no es válida", MsgBoxStyle.Critical)
+            txtFecha.Focus()
+            Return False
+        End If
+
+        ' Validamos que se haya cargado algun nombre de usuario.
+        If Trim(txtUsuario.Text) = "" Then
+            MsgBox("Debe indicarse un usuario al que le corresponda la presente observación", MsgBoxStyle.Critical)
+            txtUsuario.Focus()
+            Return False
+        End If
+
+        ' Validamos que se haya cargado contenido para grabar una observacion.
+        ' Se eliminan todos los caracteres de Nueva Linea y de Acarreo antes de validar.
+        If Trim(txtObservacion.Text.Replace(vbCrLf, "").Replace(vbLf, "")) = "" Then
+            MsgBox("La observacioón no puede estar vacía.", MsgBoxStyle.Critical)
+            txtObservacion.Focus()
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
 
         Dim cn As New SqlConnection()
@@ -480,6 +535,11 @@ Public Class HistorialProforma
         WClaveObs = Trim(WClaveObservacion.Text)
 
         WUsuario = txtUsuario.Text
+
+        ' Validamos datos minimos antes de grabar.
+        If Not _DatosValidos() Then
+            Exit Sub
+        End If
 
         ' Chequeamos si se trata de la actualización de un renglon existente.
         ' Si tiene clave, es una actualizacion y recuperamos el nro de referencia.
@@ -568,10 +628,10 @@ Public Class HistorialProforma
 
         MsgBox("La observación ha sido grabada con exito.", MsgBoxStyle.Information)
 
-        _MostrarHistorial()
+        _TraerHistorialYArchivos()
 
         ' Despues de cargar todo el historial, no posicionamos en la primer fila de ese comentario creado/actualizado.
-        For Each row As DataGridViewRow In dgvProductos.Rows
+        For Each row As DataGridViewRow In dgvHistorial.Rows
             If row.Cells("Clave").Value = WClaveObs Then
                 row.Cells(0).Selected = True
                 Exit For
@@ -585,12 +645,23 @@ Public Class HistorialProforma
 
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
-        txtFecha.Text = Date.Now.ToString("dd-MM-yyyy")
+    Private Sub _TraerHistorialYArchivos()
 
-        txtUsuario.Text = ""
+        _MostrarHistorial()
+
+        _CargarArchivosRelacionados()
+
+    End Sub
+
+    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+
         txtObservacion.Text = ""
+
+        'If Trim(WClaveObservacion.Text) = "" Then
+        txtUsuario.Text = ""
+        txtFecha.Text = Date.Now.ToString("dd-MM-yyyy")
         WClaveObservacion.Text = ""
+        'End If
 
         txtFecha.Focus()
     End Sub
@@ -603,9 +674,9 @@ Public Class HistorialProforma
             btnLimpiar.PerformClick()
 
             ' Calculamos la primera fila de la observacion, segun su clave.
-            rowIndex = Val(Microsoft.VisualBasic.Right(dgvProductos.Rows(rowIndex).Cells("NroObservacion").Value, 4))
+            rowIndex = Val(Microsoft.VisualBasic.Right(dgvHistorial.Rows(rowIndex).Cells("NroObservacion").Value, 4))
 
-            With dgvProductos.Rows(rowIndex)
+            With dgvHistorial.Rows(rowIndex)
                 txtFecha.Text = Trim(.Cells("Fecha").Value)
 
                 txtUsuario.Text = Trim(.Cells("Usuario").Value)
@@ -614,14 +685,14 @@ Public Class HistorialProforma
                 txtObservacion.Text = ""
 
                 ' Recorremos hasta la ultima fila de la observacion.
-                For i = rowIndex To dgvProductos.Rows.Count - 1
+                For i = rowIndex To dgvHistorial.Rows.Count - 1
 
                     ' Salimos en la primera en la que ya no coincidan las claves de la observacion.
-                    If Val(dgvProductos.Rows(i).Cells("NroObservacion").Value) <> Val(WClaveObservacion.Text) Then
+                    If Val(dgvHistorial.Rows(i).Cells("NroObservacion").Value) <> Val(WClaveObservacion.Text) Then
                         Exit For
                     End If
 
-                    txtObservacion.Text &= dgvProductos.Rows(i).Cells("Observacion").Value.ToString.Trim() & vbCrLf
+                    txtObservacion.Text &= dgvHistorial.Rows(i).Cells("Observacion").Value.ToString.Trim() & vbCrLf
 
                 Next
 
@@ -662,7 +733,7 @@ Public Class HistorialProforma
 
     Private Sub btnEliminar_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
 
-        If Trim(WClaveObservacion.Text) = "" Or Trim(WClaveObservacion.Text).Length < 8 Then : Exit Sub : End If
+        If Trim(WClaveObservacion.Text) = "" Then : Exit Sub : End If
 
         If MsgBox("¿Está seguro de que quiere eliminar la observación actual?", MsgBoxStyle.YesNo, MsgBoxStyle.Question) = MsgBoxResult.No Then
             Exit Sub
@@ -679,16 +750,17 @@ Public Class HistorialProforma
 
     Private Sub _EliminarObservacion(ByVal WClave As String)
         WClave = Trim(WClave)
-        If WClave = "" Or WClave.Length < 8 Then : Exit Sub : End If
+        If WClave = "" Then : Exit Sub : End If
 
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
+        Dim WNroObs = Mid(WClave, 1, WClave.Length - 4)
 
         Try
             cn.ConnectionString = _CS()
             cn.Open()
             cm.Connection = cn
-            cm.CommandText = "DELETE FROM ProformaExportacionHistorial WHERE Clave = '" & WClave & "'"
+            cm.CommandText = "DELETE FROM ProformaExportacionHistorial WHERE NroObservacion = '" & WNroObs & "'"
 
             cm.ExecuteNonQuery()
 
@@ -705,19 +777,65 @@ Public Class HistorialProforma
 
         btnLimpiar.PerformClick()
 
-        _MostrarHistorial()
+        _TraerHistorialYArchivos()
 
     End Sub
 
     Private Sub btnArchivos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnArchivos.Click
         ' Abrimos ventana de archivos Relacionados.
-        With ArchivosRelacionados
-            .NroProforma = txtNroProforma.Text
-            .Show()
-        End With
+        'With ArchivosRelacionados
+        '    .NroProforma = txtNroProforma.Text
+        '    .Show()
+        'End With
+
+        TabControl1.SelectTab(1)
+
     End Sub
 
+    Private Function _ExisteProforma() As Boolean
+
+        If Trim(txtNroProforma.Text) = "" Then
+            Return False
+        End If
+
+        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Proforma FROM ProformaExportacion WHERE Proforma = '" & txtNroProforma.Text & "'")
+        Dim dr As SqlDataReader
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            Return dr.HasRows
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
+
     Private Sub btnNuevaObservacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaObservacion.Click
+
+        If Not _ExisteProforma() Then
+            txtNroProforma.Focus()
+            txtNroProforma.SelectAll()
+            Exit Sub
+        End If
+
+        TabControl1.SelectTab(0)
+
         GrupoNuevaObs.Visible = True
         btnLimpiar.PerformClick()
         txtFecha.Focus()
@@ -728,11 +846,246 @@ Public Class HistorialProforma
         GrupoNuevaObs.Visible = False
     End Sub
 
-    Private Sub dgvProductos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvProductos.RowHeaderMouseDoubleClick
-        ' Eliminar la observacion?
+    Private Sub dgvHistorial_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvHistorial.RowHeaderMouseDoubleClick
+
+        ' Verificamos que tenga una clave de Observacion para poder eliminar.
+        With dgvHistorial.Rows(e.RowIndex)
+
+            If Not IsNothing(.Cells("NroObservacion").Value) Then
+                If Trim(.Cells("NroObservacion").Value) <> "" Then
+
+                    If MsgBox("¿Está seguro de querer eliminar la observacion indicada?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then : Exit Sub : End If
+
+                    Try
+                        _EliminarObservacion(.Cells("NroObservacion").Value)
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                        Exit Sub
+                    End Try
+
+                End If
+            End If
+
+        End With
+
     End Sub
 
-    Private Sub dgvProductos_CellContentDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProductos.CellContentDoubleClick
+    Private Sub dgvHistorial_CellContentDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvHistorial.CellContentDoubleClick
         _CargarRenglon(e.RowIndex)
+    End Sub
+
+    '
+    ' MANEJO DE PESTAÑA ARCHIVOS.
+    '
+
+    Private Function _RutaCarpetaArchivos()
+        Return Configuration.ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS")
+    End Function
+
+    Private Sub _CargarArchivosRelacionados()
+        Dim WRutaArchivosRelacionados As String = ""
+        If Not Directory.Exists(_RutaCarpetaArchivos) Then
+            Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
+            Exit Sub
+        End If
+
+        If txtNroProforma.Text.Trim.Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
+
+        WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+
+        ' Creamos la Carpeta en caso de que no exista aún.
+        If Not Directory.Exists(WRutaArchivosRelacionados) Then
+            Try
+                Directory.CreateDirectory(WRutaArchivosRelacionados)
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
+        End If
+
+        Dim InfoArchivo As FileInfo
+
+        dgvArchivos.Rows.Clear()
+
+        ' Recorremos unicamente aquellos archivos que tengan una extensión que esté entre las permitidas por la aplicación.
+        For Each WNombreArchivo As String In Directory.GetFiles(WRutaArchivosRelacionados).Where(Function(s) EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(s).ToLower()))
+
+            InfoArchivo = FileSystem.GetFileInfo(WNombreArchivo)
+
+            With InfoArchivo
+                dgvArchivos.Rows.Add(.CreationTime.ToString("dd/MM/yyyy"), UCase(.Name), _ObtenerIconoSegunTipoArchivo(.Extension), .FullName)
+            End With
+
+        Next
+
+    End Sub
+
+    Private Function _ObtenerIconoSegunTipoArchivo(ByVal extension As String)
+        Dim icono = Nothing
+
+        'My.Resources.pdf_icon
+
+
+        Select Case UCase(extension)
+
+            Case ".DOC", ".DOCX"
+                icono = My.Resources.Word_icon
+            Case ".XLS", ".XLSX"
+                icono = My.Resources.Excel_icon
+            Case ".PDF"
+                icono = My.Resources.pdf_icono
+            Case ".JPG", ".JPEG", ".BMP", ".ICO", ".PNG"
+                icono = My.Resources.imagen_icono
+            Case ".TXT"
+                icono = My.Resources.txt_icono
+            Case Else
+                icono = My.Resources.archivo_default
+        End Select
+
+
+        Return icono
+    End Function
+
+    Private Sub _BuscarClienteProforma()
+        If Trim(txtNroProforma.Text) = "" Then : Exit Sub : End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Cliente, c.Razon FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & txtNroProforma.Text & "' AND p.Cliente = c.Cliente")
+        Dim dr As SqlDataReader
+
+        Try
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                With dr
+                    txtCliente.Text = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+                    txtDescripcionCliente.Text = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                End With
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar los datos del Cliente correspondiente a la Proforma en la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+
+    Private Sub dgvArchivos_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvArchivos.DragEnter
+        _PermitirDrag(e)
+    End Sub
+
+    Private Sub _PermitirDrag(ByVal e As System.Windows.Forms.DragEventArgs)
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
+
+    Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
+
+        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
+
+        Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+        Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+        Dim WDestino As String = ""
+        Dim WCantCorrectas = 0
+
+        If archivos.Length = 0 Then : Exit Sub : End If
+
+        For Each archivo In archivos
+
+            If File.Exists(archivo) Then
+
+                If EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(archivo).ToLower()) Then
+
+                    WDestino = WRutaArchivosRelacionados & "\" & Path.GetFileName(archivo)
+
+                    Try
+                        If Not File.Exists(WDestino) Then
+                            File.Copy(archivo, WDestino)
+                            WCantCorrectas += 1
+                        Else
+                            If MsgBox("El Archivo " & Path.GetFileName(archivo) & ", ya existe en la carpeta. ¿Desea sobreescribir el archivo existente?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                                File.Copy(archivo, WDestino, True)
+                                WCantCorrectas += 1
+                            End If
+                        End If
+
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                        Exit Sub
+                    End Try
+
+                End If
+
+            End If
+
+        Next
+
+        If WCantCorrectas > 0 Then
+            MsgBox("Se subieron correctamente " & WCantCorrectas & " Archivo(s)", MsgBoxStyle.Information)
+        End If
+
+        _CargarArchivosRelacionados()
+
+    End Sub
+
+    Private Sub dgvArchivos_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvArchivos.DragDrop
+        _ProcesarDragDeArchivo(e)
+    End Sub
+
+    Private Sub dgvArchivos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvArchivos.RowHeaderMouseDoubleClick
+
+        With dgvArchivos.Rows(e.RowIndex)
+
+            Dim WRutaArchivo = .Cells("RutaArchivo").Value
+
+            If IsNothing(WRutaArchivo) Then : Exit Sub : End If
+
+            If Trim(WRutaArchivo) = "" Then : Exit Sub : End If
+
+            If Not File.Exists(WRutaArchivo) Then : Exit Sub : End If
+
+            If MsgBox("¿Está seguro de que quiere eliminar el archivo de manera definitiva?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then : Exit Sub : End If
+
+            Try
+                File.Delete(WRutaArchivo)
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Exit Sub
+            End Try
+
+            _TraerHistorialYArchivos()
+
+            TabControl1.SelectTab(1)
+        End With
+
+    End Sub
+
+    Private Sub dgvArchivos_CellContentDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvArchivos.CellContentDoubleClick
+        With dgvArchivos.Rows(e.RowIndex)
+            If Not IsNothing(.Cells("RutaArchivo").Value) Then
+
+                Try
+                    Process.Start(.Cells("RutaArchivo").Value, "f")
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+
+            End If
+        End With
     End Sub
 End Class
