@@ -23,32 +23,39 @@ Partial Class MenuPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvPrincipal = New System.Windows.Forms.DataGridView()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnHistorialProforma = New System.Windows.Forms.Button()
-        Me.btnNuevaProforma = New System.Windows.Forms.Button()
-        Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.NroProforma = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Pais = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnHistorialProforma = New System.Windows.Forms.Button()
+        Me.btnNuevaProforma = New System.Windows.Forms.Button()
+        Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cmbTipoFiltro = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
         CType(Me.dgvPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        Me.LayoutFiltros.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -135,8 +142,8 @@ Partial Class MenuPrincipal
         '
         Me.dgvPrincipal.AllowUserToAddRows = False
         Me.dgvPrincipal.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dgvPrincipal.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvPrincipal.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total})
         Me.dgvPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
@@ -146,6 +153,52 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.ReadOnly = True
         Me.dgvPrincipal.Size = New System.Drawing.Size(712, 358)
         Me.dgvPrincipal.TabIndex = 0
+        '
+        'NroProforma
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle6
+        Me.NroProforma.HeaderText = "Nro Proforma"
+        Me.NroProforma.MaxInputLength = 6
+        Me.NroProforma.Name = "NroProforma"
+        Me.NroProforma.ReadOnly = True
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 10
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        '
+        'Cliente
+        '
+        Me.Cliente.HeaderText = "Cliente"
+        Me.Cliente.MaxInputLength = 6
+        Me.Cliente.Name = "Cliente"
+        Me.Cliente.ReadOnly = True
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        '
+        'Pais
+        '
+        Me.Pais.HeaderText = "Pais"
+        Me.Pais.Name = "Pais"
+        Me.Pais.ReadOnly = True
+        '
+        'Total
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Total.HeaderText = "Monto Total"
+        Me.Total.Name = "Total"
+        Me.Total.ReadOnly = True
         '
         'Panel1
         '
@@ -191,6 +244,7 @@ Partial Class MenuPrincipal
         Me.LayoutFiltros.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.LayoutFiltros.ColumnCount = 1
         Me.LayoutFiltros.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.LayoutFiltros.Controls.Add(Me.Panel2, 0, 0)
         Me.LayoutFiltros.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutFiltros.Location = New System.Drawing.Point(0, 45)
         Me.LayoutFiltros.Margin = New System.Windows.Forms.Padding(0)
@@ -200,51 +254,60 @@ Partial Class MenuPrincipal
         Me.LayoutFiltros.Size = New System.Drawing.Size(826, 46)
         Me.LayoutFiltros.TabIndex = 2
         '
-        'NroProforma
+        'Panel2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle2
-        Me.NroProforma.HeaderText = "Nro Proforma"
-        Me.NroProforma.MaxInputLength = 6
-        Me.NroProforma.Name = "NroProforma"
-        Me.NroProforma.ReadOnly = True
+        Me.Panel2.Controls.Add(Me.cmbTipoFiltro)
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.Label3)
+        Me.Panel2.Controls.Add(Me.txtFiltrarPor)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(826, 46)
+        Me.Panel2.TabIndex = 0
         '
-        'Fecha
+        'cmbTipoFiltro
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.MaxInputLength = 10
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
+        Me.cmbTipoFiltro.FormattingEnabled = True
+        Me.cmbTipoFiltro.Items.AddRange(New Object() {"", "Nro de Proforma", "Fecha", "Cliente", "País"})
+        Me.cmbTipoFiltro.Location = New System.Drawing.Point(105, 11)
+        Me.cmbTipoFiltro.Name = "cmbTipoFiltro"
+        Me.cmbTipoFiltro.Size = New System.Drawing.Size(121, 21)
+        Me.cmbTipoFiltro.TabIndex = 2
         '
-        'Cliente
+        'Label4
         '
-        Me.Cliente.HeaderText = "Cliente"
-        Me.Cliente.MaxInputLength = 6
-        Me.Cliente.Name = "Cliente"
-        Me.Cliente.ReadOnly = True
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label4.Location = New System.Drawing.Point(235, 13)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(162, 18)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "Aquellos que contengan:"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Razon
+        'Label3
         '
-        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.ReadOnly = True
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.Label3.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label3.Location = New System.Drawing.Point(29, 11)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(73, 18)
+        Me.Label3.TabIndex = 1
+        Me.Label3.Text = "Filtrar por:"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Pais
+        'txtFiltrarPor
         '
-        Me.Pais.HeaderText = "Pais"
-        Me.Pais.Name = "Pais"
-        Me.Pais.ReadOnly = True
-        '
-        'Total
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Total.HeaderText = "Monto Total"
-        Me.Total.Name = "Total"
-        Me.Total.ReadOnly = True
+        Me.txtFiltrarPor.Location = New System.Drawing.Point(400, 13)
+        Me.txtFiltrarPor.Name = "txtFiltrarPor"
+        Me.txtFiltrarPor.Size = New System.Drawing.Size(176, 20)
+        Me.txtFiltrarPor.TabIndex = 0
         '
         'MenuPrincipal
         '
@@ -261,6 +324,9 @@ Partial Class MenuPrincipal
         Me.LayoutCuerpoPrincipal.ResumeLayout(False)
         CType(Me.dgvPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
+        Me.LayoutFiltros.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -281,5 +347,10 @@ Partial Class MenuPrincipal
     Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Pais As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Total As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents cmbTipoFiltro As System.Windows.Forms.ComboBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents txtFiltrarPor As System.Windows.Forms.TextBox
 
 End Class
