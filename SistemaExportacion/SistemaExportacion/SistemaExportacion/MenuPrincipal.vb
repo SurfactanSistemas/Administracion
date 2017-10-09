@@ -183,7 +183,10 @@ Public Class MenuPrincipal
     Private Sub txtFiltrarPor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFiltrarPor.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtFiltrarPor.Text) = "" Then : Exit Sub : End If
+            If Trim(txtFiltrarPor.Text) = "" Then
+                _CargarTodasLasProformas()
+                Exit Sub
+            End If
 
             If cmbTipoFiltro.SelectedIndex < 1 Then : Exit Sub : End If
 
@@ -219,7 +222,13 @@ Public Class MenuPrincipal
     End Sub
 
     Private Sub cmbTipoFiltro_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoFiltro.SelectedIndexChanged
-        txtFiltrarPor.Focus()
+
+        If cmbTipoFiltro.SelectedIndex = 0 Then
+            _CargarTodasLasProformas()
+        Else
+            txtFiltrarPor.Focus()
+        End If
+
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
