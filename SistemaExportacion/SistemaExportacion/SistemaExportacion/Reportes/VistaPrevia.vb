@@ -59,6 +59,7 @@ Public Class VistaPrevia
         ruta = IIf(ruta = "", Application.StartupPath & "/", ruta)
 
         NombreArchivo = IIf(Regex.IsMatch(NombreArchivo, "(\.pdf)$"), NombreArchivo, NombreArchivo & ".pdf")
+        ruta = IIf(Regex.IsMatch(ruta, "(\/)$"), ruta, ruta & "/")
 
         Me.Reporte.DataSourceConnections.Item(0).SetConnection("EMPRESA01", "SurfactanSA", False)
         Me.Reporte.Refresh()

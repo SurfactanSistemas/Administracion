@@ -23,11 +23,11 @@ Partial Class Proforma
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -35,6 +35,7 @@ Partial Class Proforma
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnHistorialArchivosRelacionados = New System.Windows.Forms.Button()
         Me.GrupoConsulta = New System.Windows.Forms.GroupBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.lstOpcionesConsulta = New System.Windows.Forms.ListBox()
@@ -59,6 +60,9 @@ Partial Class Proforma
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -67,6 +71,9 @@ Partial Class Proforma
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
+        Me.txtSeguro = New System.Windows.Forms.TextBox()
+        Me.txtFlete = New System.Windows.Forms.TextBox()
+        Me.txtSubTotal = New System.Windows.Forms.TextBox()
         Me.txtDescripcionCliente = New System.Windows.Forms.TextBox()
         Me.txtCliente = New System.Windows.Forms.TextBox()
         Me.txtDescripcionTotalII = New System.Windows.Forms.TextBox()
@@ -88,7 +95,8 @@ Partial Class Proforma
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnHistorialArchivosRelacionados = New System.Windows.Forms.Button()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.cmbEstado = New System.Windows.Forms.ComboBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -113,7 +121,7 @@ Partial Class Proforma
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(778, 543)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(778, 623)
         Me.LayoutPrincipal.TabIndex = 1
         '
         'LayoutCabecera
@@ -187,7 +195,7 @@ Partial Class Proforma
         Me.LayoutCuerpoPrincipal.RowCount = 2
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69.0!))
-        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(778, 498)
+        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(778, 578)
         Me.LayoutCuerpoPrincipal.TabIndex = 1
         '
         'Panel1
@@ -201,13 +209,18 @@ Partial Class Proforma
         Me.Panel1.Controls.Add(Me.txtObservaciones)
         Me.Panel1.Controls.Add(Me.txtFechaAux)
         Me.Panel1.Controls.Add(Me.dgvProductos)
+        Me.Panel1.Controls.Add(Me.cmbEstado)
         Me.Panel1.Controls.Add(Me.cmbCondicion)
         Me.Panel1.Controls.Add(Me.txtFecha)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.Label16)
+        Me.Panel1.Controls.Add(Me.Label20)
         Me.Panel1.Controls.Add(Me.Label11)
+        Me.Panel1.Controls.Add(Me.Label19)
+        Me.Panel1.Controls.Add(Me.Label18)
+        Me.Panel1.Controls.Add(Me.Label17)
         Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.Label14)
@@ -216,6 +229,9 @@ Partial Class Proforma
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.txtTotal)
+        Me.Panel1.Controls.Add(Me.txtSeguro)
+        Me.Panel1.Controls.Add(Me.txtFlete)
+        Me.Panel1.Controls.Add(Me.txtSubTotal)
         Me.Panel1.Controls.Add(Me.txtDescripcionCliente)
         Me.Panel1.Controls.Add(Me.txtCliente)
         Me.Panel1.Controls.Add(Me.txtDescripcionTotalII)
@@ -233,8 +249,20 @@ Partial Class Proforma
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(778, 429)
+        Me.Panel1.Size = New System.Drawing.Size(778, 509)
         Me.Panel1.TabIndex = 2
+        '
+        'btnHistorialArchivosRelacionados
+        '
+        Me.btnHistorialArchivosRelacionados.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnHistorialArchivosRelacionados.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnHistorialArchivosRelacionados.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnHistorialArchivosRelacionados.Location = New System.Drawing.Point(584, 458)
+        Me.btnHistorialArchivosRelacionados.Name = "btnHistorialArchivosRelacionados"
+        Me.btnHistorialArchivosRelacionados.Size = New System.Drawing.Size(174, 38)
+        Me.btnHistorialArchivosRelacionados.TabIndex = 13
+        Me.btnHistorialArchivosRelacionados.Text = "Ver Historial y Archivos Relacionados"
+        Me.btnHistorialArchivosRelacionados.UseVisualStyleBackColor = True
         '
         'GrupoConsulta
         '
@@ -243,7 +271,7 @@ Partial Class Proforma
         Me.GrupoConsulta.Controls.Add(Me.lstFiltrada)
         Me.GrupoConsulta.Controls.Add(Me.lstConsulta)
         Me.GrupoConsulta.Controls.Add(Me.btnCerrarConsulta)
-        Me.GrupoConsulta.Location = New System.Drawing.Point(205, 55)
+        Me.GrupoConsulta.Location = New System.Drawing.Point(208, 94)
         Me.GrupoConsulta.Name = "GrupoConsulta"
         Me.GrupoConsulta.Size = New System.Drawing.Size(373, 321)
         Me.GrupoConsulta.TabIndex = 12
@@ -360,8 +388,8 @@ Partial Class Proforma
         '
         'Producto
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Producto.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Producto.DefaultCellStyle = DataGridViewCellStyle41
         Me.Producto.HeaderText = "Producto"
         Me.Producto.MaxInputLength = 12
         Me.Producto.Name = "Producto"
@@ -370,8 +398,8 @@ Partial Class Proforma
         'Descripcion
         '
         Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle42
         Me.Descripcion.HeaderText = "Descripcion"
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
@@ -379,24 +407,24 @@ Partial Class Proforma
         '
         'Cantidad
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle43
         Me.Cantidad.HeaderText = "Cantidad"
         Me.Cantidad.Name = "Cantidad"
         Me.Cantidad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Precio
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Precio.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Precio.DefaultCellStyle = DataGridViewCellStyle44
         Me.Precio.HeaderText = "Precio"
         Me.Precio.Name = "Precio"
         Me.Precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Total
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle45
         Me.Total.HeaderText = "Total"
         Me.Total.Name = "Total"
         Me.Total.ReadOnly = True
@@ -404,11 +432,12 @@ Partial Class Proforma
         '
         'cmbCondicion
         '
+        Me.cmbCondicion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondicion.FormattingEnabled = True
         Me.cmbCondicion.Items.AddRange(New Object() {"", "FOB", "CIF", "CFR", "CPT", "EXW", "FCA"})
         Me.cmbCondicion.Location = New System.Drawing.Point(391, 91)
         Me.cmbCondicion.Name = "cmbCondicion"
-        Me.cmbCondicion.Size = New System.Drawing.Size(98, 21)
+        Me.cmbCondicion.Size = New System.Drawing.Size(65, 21)
         Me.cmbCondicion.TabIndex = 7
         '
         'txtFecha
@@ -478,13 +507,52 @@ Partial Class Proforma
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(497, 68)
+        Me.Label11.Location = New System.Drawing.Point(459, 68)
         Me.Label11.Margin = New System.Windows.Forms.Padding(0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(32, 18)
         Me.Label11.TabIndex = 3
         Me.Label11.Text = "Via:"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label19.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label19.Location = New System.Drawing.Point(604, 433)
+        Me.Label19.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(42, 18)
+        Me.Label19.TabIndex = 3
+        Me.Label19.Text = "Total:"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label18.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label18.Location = New System.Drawing.Point(591, 411)
+        Me.Label18.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(55, 18)
+        Me.Label18.TabIndex = 3
+        Me.Label18.Text = "Seguro:"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label17.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label17.Location = New System.Drawing.Point(602, 389)
+        Me.Label17.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(44, 18)
+        Me.Label17.TabIndex = 3
+        Me.Label17.Text = "Flete:"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label13
         '
@@ -494,9 +562,9 @@ Partial Class Proforma
         Me.Label13.Location = New System.Drawing.Point(581, 367)
         Me.Label13.Margin = New System.Windows.Forms.Padding(0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(42, 18)
+        Me.Label13.Size = New System.Drawing.Size(65, 18)
         Me.Label13.TabIndex = 3
-        Me.Label13.Text = "Total:"
+        Me.Label13.Text = "SubTotal:"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label10
@@ -517,7 +585,7 @@ Partial Class Proforma
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label14.Location = New System.Drawing.Point(98, 368)
+        Me.Label14.Location = New System.Drawing.Point(76, 368)
         Me.Label14.Margin = New System.Windows.Forms.Padding(0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(54, 18)
@@ -580,13 +648,41 @@ Partial Class Proforma
         'txtTotal
         '
         Me.txtTotal.BackColor = System.Drawing.SystemColors.Window
-        Me.txtTotal.Location = New System.Drawing.Point(625, 366)
+        Me.txtTotal.Location = New System.Drawing.Point(648, 432)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
-        Me.txtTotal.Size = New System.Drawing.Size(132, 20)
+        Me.txtTotal.Size = New System.Drawing.Size(105, 20)
         Me.txtTotal.TabIndex = 0
         Me.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ToolTip1.SetToolTip(Me.txtTotal, "Total")
+        '
+        'txtSeguro
+        '
+        Me.txtSeguro.BackColor = System.Drawing.SystemColors.Window
+        Me.txtSeguro.Location = New System.Drawing.Point(648, 410)
+        Me.txtSeguro.Name = "txtSeguro"
+        Me.txtSeguro.Size = New System.Drawing.Size(105, 20)
+        Me.txtSeguro.TabIndex = 0
+        Me.txtSeguro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtFlete
+        '
+        Me.txtFlete.BackColor = System.Drawing.SystemColors.Window
+        Me.txtFlete.Location = New System.Drawing.Point(648, 388)
+        Me.txtFlete.Name = "txtFlete"
+        Me.txtFlete.Size = New System.Drawing.Size(105, 20)
+        Me.txtFlete.TabIndex = 0
+        Me.txtFlete.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtSubTotal
+        '
+        Me.txtSubTotal.BackColor = System.Drawing.SystemColors.Window
+        Me.txtSubTotal.Location = New System.Drawing.Point(648, 366)
+        Me.txtSubTotal.Name = "txtSubTotal"
+        Me.txtSubTotal.ReadOnly = True
+        Me.txtSubTotal.Size = New System.Drawing.Size(105, 20)
+        Me.txtSubTotal.TabIndex = 0
+        Me.txtSubTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtSubTotal, "Total")
         '
         'txtDescripcionCliente
         '
@@ -607,7 +703,7 @@ Partial Class Proforma
         '
         'txtDescripcionTotalII
         '
-        Me.txtDescripcionTotalII.Location = New System.Drawing.Point(155, 390)
+        Me.txtDescripcionTotalII.Location = New System.Drawing.Point(133, 390)
         Me.txtDescripcionTotalII.MaxLength = 50
         Me.txtDescripcionTotalII.Name = "txtDescripcionTotalII"
         Me.txtDescripcionTotalII.Size = New System.Drawing.Size(410, 20)
@@ -615,7 +711,7 @@ Partial Class Proforma
         '
         'txtDescripcionTotal
         '
-        Me.txtDescripcionTotal.Location = New System.Drawing.Point(155, 367)
+        Me.txtDescripcionTotal.Location = New System.Drawing.Point(133, 367)
         Me.txtDescripcionTotal.MaxLength = 50
         Me.txtDescripcionTotal.Name = "txtDescripcionTotal"
         Me.txtDescripcionTotal.Size = New System.Drawing.Size(410, 20)
@@ -649,18 +745,18 @@ Partial Class Proforma
         '
         'txtViaII
         '
-        Me.txtViaII.Location = New System.Drawing.Point(531, 93)
+        Me.txtViaII.Location = New System.Drawing.Point(493, 92)
         Me.txtViaII.MaxLength = 20
         Me.txtViaII.Name = "txtViaII"
-        Me.txtViaII.Size = New System.Drawing.Size(226, 20)
+        Me.txtViaII.Size = New System.Drawing.Size(175, 20)
         Me.txtViaII.TabIndex = 0
         '
         'txtVia
         '
-        Me.txtVia.Location = New System.Drawing.Point(531, 67)
+        Me.txtVia.Location = New System.Drawing.Point(493, 67)
         Me.txtVia.MaxLength = 20
         Me.txtVia.Name = "txtVia"
-        Me.txtVia.Size = New System.Drawing.Size(226, 20)
+        Me.txtVia.Size = New System.Drawing.Size(175, 20)
         Me.txtVia.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.txtVia, "Vía de Transporte")
         '
@@ -669,7 +765,7 @@ Partial Class Proforma
         Me.txtOCCliente.Location = New System.Drawing.Point(391, 66)
         Me.txtOCCliente.MaxLength = 20
         Me.txtOCCliente.Name = "txtOCCliente"
-        Me.txtOCCliente.Size = New System.Drawing.Size(98, 20)
+        Me.txtOCCliente.Size = New System.Drawing.Size(65, 20)
         Me.txtOCCliente.TabIndex = 0
         Me.txtOCCliente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtOCCliente, "Orden de Compra de Cliente")
@@ -708,7 +804,7 @@ Partial Class Proforma
         Me.Panel2.Controls.Add(Me.btnEliminar)
         Me.Panel2.Controls.Add(Me.btnAceptar)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 432)
+        Me.Panel2.Location = New System.Drawing.Point(3, 512)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(772, 63)
         Me.Panel2.TabIndex = 3
@@ -773,23 +869,34 @@ Partial Class Proforma
         Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Proforma")
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'btnHistorialArchivosRelacionados
+        'Label20
         '
-        Me.btnHistorialArchivosRelacionados.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnHistorialArchivosRelacionados.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHistorialArchivosRelacionados.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnHistorialArchivosRelacionados.Location = New System.Drawing.Point(584, 388)
-        Me.btnHistorialArchivosRelacionados.Name = "btnHistorialArchivosRelacionados"
-        Me.btnHistorialArchivosRelacionados.Size = New System.Drawing.Size(174, 38)
-        Me.btnHistorialArchivosRelacionados.TabIndex = 13
-        Me.btnHistorialArchivosRelacionados.Text = "Ver Historial y Archivos Relacionados"
-        Me.btnHistorialArchivosRelacionados.UseVisualStyleBackColor = True
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label20.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label20.Location = New System.Drawing.Point(692, 69)
+        Me.Label20.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(53, 18)
+        Me.Label20.TabIndex = 3
+        Me.Label20.Text = "Estado:"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cmbEstado
+        '
+        Me.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEstado.FormattingEnabled = True
+        Me.cmbEstado.Items.AddRange(New Object() {"", "APROBADA"})
+        Me.cmbEstado.Location = New System.Drawing.Point(674, 91)
+        Me.cmbEstado.Name = "cmbEstado"
+        Me.cmbEstado.Size = New System.Drawing.Size(83, 21)
+        Me.cmbEstado.TabIndex = 7
         '
         'Proforma
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(778, 543)
+        Me.ClientSize = New System.Drawing.Size(778, 623)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Name = "Proforma"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -834,7 +941,7 @@ Partial Class Proforma
     Friend WithEvents txtVia As System.Windows.Forms.TextBox
     Friend WithEvents dgvProductos As System.Windows.Forms.DataGridView
     Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents txtTotal As System.Windows.Forms.TextBox
+    Friend WithEvents txtSubTotal As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents txtDescripcionTotal As System.Windows.Forms.TextBox
@@ -867,4 +974,12 @@ Partial Class Proforma
     Friend WithEvents lstConsulta As System.Windows.Forms.ListBox
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
     Friend WithEvents btnHistorialArchivosRelacionados As System.Windows.Forms.Button
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents txtTotal As System.Windows.Forms.TextBox
+    Friend WithEvents txtSeguro As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlete As System.Windows.Forms.TextBox
+    Friend WithEvents cmbEstado As System.Windows.Forms.ComboBox
+    Friend WithEvents Label20 As System.Windows.Forms.Label
 End Class

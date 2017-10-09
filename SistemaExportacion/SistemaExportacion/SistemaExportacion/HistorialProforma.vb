@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports Microsoft.VisualBasic.FileIO
+Imports Microsoft.Office.Interop
 
 Public Class HistorialProforma
 
@@ -12,7 +13,7 @@ Public Class HistorialProforma
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
     Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
-    
+
     Private _NroProforma As String
 
     Public Property NroProforma() As String
@@ -44,7 +45,7 @@ Public Class HistorialProforma
 
         txtFechaAux.Visible = False
 
-        txtFecha.Text = Date.Now.ToString("dd-MM-yyyy")
+        txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
 
         WRow = -1
         Wcol = -1
@@ -626,7 +627,13 @@ Public Class HistorialProforma
 
         trans.Commit()
 
-        MsgBox("La observación ha sido grabada con exito.", MsgBoxStyle.Information)
+        ' Aca consultamos si quiere enviar este mismo contenido por email. Abrimos un nuevo email, sin enviarlo automaticamente.
+        If MsgBox("¿Desea enviar este comentario por E-Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            _AbrirNuevoEmail(Trim(txtObservacion.Text))
+        End If
+
+
+        'MsgBox("La observación ha sido grabada con exito.", MsgBoxStyle.Information)
 
         _TraerHistorialYArchivos()
 
@@ -645,7 +652,31 @@ Public Class HistorialProforma
 
     End Sub
 
+    Private Sub _AbrirNuevoEmail(ByVal body)
+        Dim oApp As Outlook._Application
+        Dim oMsg As Outlook._MailItem
+
+        Try
+            oApp = New Outlook.Application()
+
+
+            oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
+            oMsg.Subject = ""
+            oMsg.Body = body
+            oMsg.To = ""
+
+            oMsg.Display()
+
+        Catch ex As Exception
+            Throw New Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Exit Sub
+        End Try
+
+    End Sub
+
     Private Sub _TraerHistorialYArchivos()
+
+        _BuscarClienteProforma()
 
         _MostrarHistorial()
 
@@ -789,6 +820,7 @@ Public Class HistorialProforma
         'End With
 
         TabControl1.SelectTab(1)
+        Process.Start("explorer.exe", "C:\")
 
     End Sub
 
@@ -1035,9 +1067,9 @@ Public Class HistorialProforma
 
         Next
 
-        If WCantCorrectas > 0 Then
-            MsgBox("Se subieron correctamente " & WCantCorrectas & " Archivo(s)", MsgBoxStyle.Information)
-        End If
+        'If WCantCorrectas > 0 Then
+        '    MsgBox("Se subieron correctamente " & WCantCorrectas & " Archivo(s)", MsgBoxStyle.Information)
+        'End If
 
         _CargarArchivosRelacionados()
 
@@ -1087,5 +1119,34 @@ Public Class HistorialProforma
 
             End If
         End With
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
+
+        'If TabControl1.SelectedIndex = 0 Then
+
+        '    TabControl1.SelectedTab.
+
+        'ElseIf TabControl1.SelectedIndex = 1 Then
+
+        'End If
+
+    End Sub
+
+    Private Sub btnEnviarPorEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnviarPorEmail.Click
+        Dim WObservacion As String = ""
+        Dim WNroObservacion As Integer = 0
+
+        Try
+
+            If Trim(txtObservacion.Text) = "" Then : Exit Sub : End If
+
+            _AbrirNuevoEmail(txtObservacion.Text)
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
     End Sub
 End Class

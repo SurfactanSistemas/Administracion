@@ -4,15 +4,27 @@ Public Class MenuPrincipal
 
     Private Sub btnNuevaProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaProforma.Click
         With Proforma
+
+            If dgvPrincipal.SelectedRows.Count = 1 Then
+                .NroProforma = dgvPrincipal.CurrentRow.Cells(0).Value
+            End If
+
             .ShowDialog()
             .Dispose()
         End With
+
+        _CargarTodasLasProformas()
     End Sub
 
     Private Sub btnHistorialProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistorialProforma.Click
         'MsgBox("En Desarrollo. Sin Implementacion todavia.")
         'Exit Sub
         With HistorialProforma
+
+            If dgvPrincipal.SelectedRows.Count = 1 Then
+                .NroProforma = dgvPrincipal.CurrentRow.Cells(0).Value
+            End If
+
             .Show()
         End With
     End Sub
@@ -21,7 +33,7 @@ Public Class MenuPrincipal
         _CargarTodasLasProformas()
     End Sub
 
-    Private Sub _CargarTodasLasProformas()
+    Public Sub _CargarTodasLasProformas()
         Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WRowIndex
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente ORDER BY p.FechaOrd, p.Proforma")
@@ -225,6 +237,7 @@ Public Class MenuPrincipal
 
         If cmbTipoFiltro.SelectedIndex = 0 Then
             _CargarTodasLasProformas()
+            txtFiltrarPor.Text = ""
         Else
             txtFiltrarPor.Focus()
         End If
