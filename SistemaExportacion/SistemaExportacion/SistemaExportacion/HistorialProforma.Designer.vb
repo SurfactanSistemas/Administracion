@@ -23,11 +23,11 @@ Partial Class HistorialProforma
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -45,6 +45,7 @@ Partial Class HistorialProforma
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.btnCerrarFormObs = New System.Windows.Forms.Button()
+        Me.btnEnviarPorEmail = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
@@ -65,16 +66,39 @@ Partial Class HistorialProforma
         Me.NombreArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Icono = New System.Windows.Forms.DataGridViewImageColumn()
         Me.RutaArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.GrupoEspecificacion = New System.Windows.Forms.GroupBox()
+        Me.txtUsuarioEspecificacion = New System.Windows.Forms.TextBox()
+        Me.cmbTipoEspecificacion = New System.Windows.Forms.ComboBox()
+        Me.txtEspecificacion = New System.Windows.Forms.TextBox()
+        Me.WNroEspecificacion = New System.Windows.Forms.TextBox()
+        Me.btnEliminarEspecificacion = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnCerrarFormularioEspecificacion = New System.Windows.Forms.Button()
+        Me.btnEnviarEmailEspecificacion = New System.Windows.Forms.Button()
+        Me.btnLimpiarFormularioEspecificacion = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtFechaEspecificacion = New System.Windows.Forms.MaskedTextBox()
+        Me.btnAgregarEspecificacion = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.dgvEspecificaciones = New System.Windows.Forms.DataGridView()
+        Me.FechaEspecificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoEspecificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UsuarioEspecificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RenglonEspecificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NroEspecificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtCliente = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtDescripcionCliente = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnNuevaEspecificacion = New System.Windows.Forms.Button()
         Me.btnNuevaObservacion = New System.Windows.Forms.Button()
         Me.btnArchivos = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnEnviarPorEmail = New System.Windows.Forms.Button()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -85,6 +109,9 @@ Partial Class HistorialProforma
         CType(Me.dgvHistorial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage3.SuspendLayout()
+        Me.GrupoEspecificacion.SuspendLayout()
+        CType(Me.dgvEspecificaciones, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -209,7 +236,8 @@ Partial Class HistorialProforma
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.ItemSize = New System.Drawing.Size(313, 30)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.ItemSize = New System.Drawing.Size(209, 30)
         Me.TabControl1.Location = New System.Drawing.Point(10, 47)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabControl1.Multiline = True
@@ -335,6 +363,17 @@ Partial Class HistorialProforma
         Me.ToolTip1.SetToolTip(Me.btnCerrarFormObs, "Cerrar Formulario de Observaciones")
         Me.btnCerrarFormObs.UseVisualStyleBackColor = True
         '
+        'btnEnviarPorEmail
+        '
+        Me.btnEnviarPorEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEnviarPorEmail.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnEnviarPorEmail.Location = New System.Drawing.Point(234, 185)
+        Me.btnEnviarPorEmail.Name = "btnEnviarPorEmail"
+        Me.btnEnviarPorEmail.Size = New System.Drawing.Size(68, 41)
+        Me.btnEnviarPorEmail.TabIndex = 0
+        Me.btnEnviarPorEmail.Text = "Enviar Email"
+        Me.btnEnviarPorEmail.UseVisualStyleBackColor = True
+        '
         'btnLimpiar
         '
         Me.btnLimpiar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -427,8 +466,8 @@ Partial Class HistorialProforma
         '
         'Fecha
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle1
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.MaxInputLength = 12
         Me.Fecha.Name = "Fecha"
@@ -439,8 +478,8 @@ Partial Class HistorialProforma
         'Observacion
         '
         Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle2
         Me.Observacion.HeaderText = "Observación"
         Me.Observacion.MaxInputLength = 100
         Me.Observacion.Name = "Observacion"
@@ -505,16 +544,16 @@ Partial Class HistorialProforma
         Me.dgvArchivos.AllowUserToResizeRows = False
         Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaCreacion, Me.NombreArchivo, Me.Icono, Me.RutaArchivo})
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle5
         Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.dgvArchivos.Location = New System.Drawing.Point(26, 15)
+        Me.dgvArchivos.Location = New System.Drawing.Point(23, 18)
         Me.dgvArchivos.MultiSelect = False
         Me.dgvArchivos.Name = "dgvArchivos"
         Me.dgvArchivos.RowTemplate.Height = 40
@@ -523,8 +562,8 @@ Partial Class HistorialProforma
         '
         'FechaCreacion
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaCreacion.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaCreacion.DefaultCellStyle = DataGridViewCellStyle3
         Me.FechaCreacion.HeaderText = "Fecha de Creación"
         Me.FechaCreacion.MaxInputLength = 12
         Me.FechaCreacion.MinimumWidth = 100
@@ -536,8 +575,8 @@ Partial Class HistorialProforma
         'NombreArchivo
         '
         Me.NombreArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.NombreArchivo.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.NombreArchivo.DefaultCellStyle = DataGridViewCellStyle4
         Me.NombreArchivo.HeaderText = "Nombre de Archivo"
         Me.NombreArchivo.Name = "NombreArchivo"
         Me.NombreArchivo.ReadOnly = True
@@ -558,6 +597,271 @@ Partial Class HistorialProforma
         Me.RutaArchivo.Name = "RutaArchivo"
         Me.RutaArchivo.Visible = False
         Me.RutaArchivo.Width = 80
+        '
+        'TabPage3
+        '
+        Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabPage3.Controls.Add(Me.GrupoEspecificacion)
+        Me.TabPage3.Controls.Add(Me.dgvEspecificaciones)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 34)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(626, 311)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "ESPECIFICACIONES"
+        '
+        'GrupoEspecificacion
+        '
+        Me.GrupoEspecificacion.Controls.Add(Me.txtUsuarioEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.cmbTipoEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.txtEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.WNroEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.btnEliminarEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.Label7)
+        Me.GrupoEspecificacion.Controls.Add(Me.btnCerrarFormularioEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.btnEnviarEmailEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.btnLimpiarFormularioEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.Label10)
+        Me.GrupoEspecificacion.Controls.Add(Me.Label8)
+        Me.GrupoEspecificacion.Controls.Add(Me.txtFechaEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.btnAgregarEspecificacion)
+        Me.GrupoEspecificacion.Controls.Add(Me.Label9)
+        Me.GrupoEspecificacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.GrupoEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrupoEspecificacion.ForeColor = System.Drawing.SystemColors.Control
+        Me.GrupoEspecificacion.Location = New System.Drawing.Point(121, 44)
+        Me.GrupoEspecificacion.Name = "GrupoEspecificacion"
+        Me.GrupoEspecificacion.Size = New System.Drawing.Size(390, 251)
+        Me.GrupoEspecificacion.TabIndex = 11
+        Me.GrupoEspecificacion.TabStop = False
+        Me.GrupoEspecificacion.Text = "Ingreso de Nueva Especificación"
+        Me.GrupoEspecificacion.Visible = False
+        '
+        'txtUsuarioEspecificacion
+        '
+        Me.txtUsuarioEspecificacion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtUsuarioEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtUsuarioEspecificacion.Location = New System.Drawing.Point(248, 67)
+        Me.txtUsuarioEspecificacion.MaxLength = 20
+        Me.txtUsuarioEspecificacion.Name = "txtUsuarioEspecificacion"
+        Me.txtUsuarioEspecificacion.Size = New System.Drawing.Size(123, 20)
+        Me.txtUsuarioEspecificacion.TabIndex = 8
+        '
+        'cmbTipoEspecificacion
+        '
+        Me.cmbTipoEspecificacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTipoEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmbTipoEspecificacion.FormattingEnabled = True
+        Me.cmbTipoEspecificacion.Items.AddRange(New Object() {"", "Envase", "Varios"})
+        Me.cmbTipoEspecificacion.Location = New System.Drawing.Point(248, 40)
+        Me.cmbTipoEspecificacion.Name = "cmbTipoEspecificacion"
+        Me.cmbTipoEspecificacion.Size = New System.Drawing.Size(123, 21)
+        Me.cmbTipoEspecificacion.TabIndex = 7
+        '
+        'txtEspecificacion
+        '
+        Me.txtEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEspecificacion.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.txtEspecificacion.Location = New System.Drawing.Point(17, 94)
+        Me.txtEspecificacion.MaxLength = 1000
+        Me.txtEspecificacion.Multiline = True
+        Me.txtEspecificacion.Name = "txtEspecificacion"
+        Me.txtEspecificacion.Size = New System.Drawing.Size(357, 85)
+        Me.txtEspecificacion.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.txtEspecificacion, "Descripción en Inglés del Monto Total")
+        '
+        'WNroEspecificacion
+        '
+        Me.WNroEspecificacion.BackColor = System.Drawing.SystemColors.Window
+        Me.WNroEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.WNroEspecificacion.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.WNroEspecificacion.Location = New System.Drawing.Point(121, 67)
+        Me.WNroEspecificacion.MaxLength = 20
+        Me.WNroEspecificacion.Name = "WNroEspecificacion"
+        Me.WNroEspecificacion.ReadOnly = True
+        Me.WNroEspecificacion.Size = New System.Drawing.Size(19, 20)
+        Me.WNroEspecificacion.TabIndex = 0
+        Me.WNroEspecificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.WNroEspecificacion.Visible = False
+        '
+        'btnEliminarEspecificacion
+        '
+        Me.btnEliminarEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEliminarEspecificacion.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnEliminarEspecificacion.Location = New System.Drawing.Point(92, 185)
+        Me.btnEliminarEspecificacion.Name = "btnEliminarEspecificacion"
+        Me.btnEliminarEspecificacion.Size = New System.Drawing.Size(68, 41)
+        Me.btnEliminarEspecificacion.TabIndex = 0
+        Me.btnEliminarEspecificacion.Text = "Eliminar"
+        Me.ToolTip1.SetToolTip(Me.btnEliminarEspecificacion, "Eliminar Especificación")
+        Me.btnEliminarEspecificacion.UseVisualStyleBackColor = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label7.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label7.Location = New System.Drawing.Point(31, 68)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(98, 18)
+        Me.Label7.TabIndex = 3
+        Me.Label7.Text = "Especificación:"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'btnCerrarFormularioEspecificacion
+        '
+        Me.btnCerrarFormularioEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCerrarFormularioEspecificacion.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarFormularioEspecificacion.Location = New System.Drawing.Point(305, 185)
+        Me.btnCerrarFormularioEspecificacion.Name = "btnCerrarFormularioEspecificacion"
+        Me.btnCerrarFormularioEspecificacion.Size = New System.Drawing.Size(68, 41)
+        Me.btnCerrarFormularioEspecificacion.TabIndex = 0
+        Me.btnCerrarFormularioEspecificacion.Text = "Cerrar"
+        Me.ToolTip1.SetToolTip(Me.btnCerrarFormularioEspecificacion, "Cerrar Formulario de Especificaciones")
+        Me.btnCerrarFormularioEspecificacion.UseVisualStyleBackColor = True
+        '
+        'btnEnviarEmailEspecificacion
+        '
+        Me.btnEnviarEmailEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEnviarEmailEspecificacion.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnEnviarEmailEspecificacion.Location = New System.Drawing.Point(234, 185)
+        Me.btnEnviarEmailEspecificacion.Name = "btnEnviarEmailEspecificacion"
+        Me.btnEnviarEmailEspecificacion.Size = New System.Drawing.Size(68, 41)
+        Me.btnEnviarEmailEspecificacion.TabIndex = 0
+        Me.btnEnviarEmailEspecificacion.Text = "Enviar Email"
+        Me.ToolTip1.SetToolTip(Me.btnEnviarEmailEspecificacion, "Enviar Especificación por Email")
+        Me.btnEnviarEmailEspecificacion.UseVisualStyleBackColor = True
+        '
+        'btnLimpiarFormularioEspecificacion
+        '
+        Me.btnLimpiarFormularioEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLimpiarFormularioEspecificacion.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnLimpiarFormularioEspecificacion.Location = New System.Drawing.Point(163, 185)
+        Me.btnLimpiarFormularioEspecificacion.Name = "btnLimpiarFormularioEspecificacion"
+        Me.btnLimpiarFormularioEspecificacion.Size = New System.Drawing.Size(68, 41)
+        Me.btnLimpiarFormularioEspecificacion.TabIndex = 0
+        Me.btnLimpiarFormularioEspecificacion.Text = "Limpiar"
+        Me.ToolTip1.SetToolTip(Me.btnLimpiarFormularioEspecificacion, "Limpiar Formulario")
+        Me.btnLimpiarFormularioEspecificacion.UseVisualStyleBackColor = True
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label10.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label10.Location = New System.Drawing.Point(183, 68)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(60, 18)
+        Me.Label10.TabIndex = 3
+        Me.Label10.Text = "Usuario:"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label8.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label8.Location = New System.Drawing.Point(204, 40)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(39, 18)
+        Me.Label8.TabIndex = 3
+        Me.Label8.Text = "Tipo:"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtFechaEspecificacion
+        '
+        Me.txtFechaEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaEspecificacion.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.txtFechaEspecificacion.Location = New System.Drawing.Point(92, 39)
+        Me.txtFechaEspecificacion.Mask = "00/00/0000"
+        Me.txtFechaEspecificacion.Name = "txtFechaEspecificacion"
+        Me.txtFechaEspecificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaEspecificacion.Size = New System.Drawing.Size(72, 20)
+        Me.txtFechaEspecificacion.TabIndex = 6
+        Me.txtFechaEspecificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'btnAgregarEspecificacion
+        '
+        Me.btnAgregarEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarEspecificacion.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnAgregarEspecificacion.Location = New System.Drawing.Point(18, 185)
+        Me.btnAgregarEspecificacion.Name = "btnAgregarEspecificacion"
+        Me.btnAgregarEspecificacion.Size = New System.Drawing.Size(71, 41)
+        Me.btnAgregarEspecificacion.TabIndex = 0
+        Me.btnAgregarEspecificacion.Text = "Aceptar"
+        Me.ToolTip1.SetToolTip(Me.btnAgregarEspecificacion, "Grabar / Actualizar Especificación")
+        Me.btnAgregarEspecificacion.UseVisualStyleBackColor = True
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label9.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label9.Location = New System.Drawing.Point(33, 40)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(48, 18)
+        Me.Label9.TabIndex = 5
+        Me.Label9.Text = "Fecha:"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'dgvEspecificaciones
+        '
+        Me.dgvEspecificaciones.AllowUserToAddRows = False
+        Me.dgvEspecificaciones.AllowUserToDeleteRows = False
+        Me.dgvEspecificaciones.AllowUserToOrderColumns = True
+        Me.dgvEspecificaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvEspecificaciones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaEspecificacion, Me.Especificacion, Me.TipoEspecificacion, Me.UsuarioEspecificacion, Me.RenglonEspecificacion, Me.NroEspecificacion})
+        Me.dgvEspecificaciones.Location = New System.Drawing.Point(23, 18)
+        Me.dgvEspecificaciones.Name = "dgvEspecificaciones"
+        Me.dgvEspecificaciones.ReadOnly = True
+        Me.dgvEspecificaciones.Size = New System.Drawing.Size(574, 281)
+        Me.dgvEspecificaciones.TabIndex = 0
+        '
+        'FechaEspecificacion
+        '
+        Me.FechaEspecificacion.HeaderText = "Fecha"
+        Me.FechaEspecificacion.MaxInputLength = 10
+        Me.FechaEspecificacion.Name = "FechaEspecificacion"
+        Me.FechaEspecificacion.ReadOnly = True
+        '
+        'Especificacion
+        '
+        Me.Especificacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Especificacion.HeaderText = "Especificacion"
+        Me.Especificacion.MaxInputLength = 100
+        Me.Especificacion.Name = "Especificacion"
+        Me.Especificacion.ReadOnly = True
+        '
+        'TipoEspecificacion
+        '
+        Me.TipoEspecificacion.HeaderText = "Tipo"
+        Me.TipoEspecificacion.Name = "TipoEspecificacion"
+        Me.TipoEspecificacion.ReadOnly = True
+        '
+        'UsuarioEspecificacion
+        '
+        Me.UsuarioEspecificacion.HeaderText = "Usuario"
+        Me.UsuarioEspecificacion.Name = "UsuarioEspecificacion"
+        Me.UsuarioEspecificacion.ReadOnly = True
+        '
+        'RenglonEspecificacion
+        '
+        Me.RenglonEspecificacion.HeaderText = "Renglon"
+        Me.RenglonEspecificacion.MaxInputLength = 3
+        Me.RenglonEspecificacion.Name = "RenglonEspecificacion"
+        Me.RenglonEspecificacion.ReadOnly = True
+        Me.RenglonEspecificacion.Visible = False
+        '
+        'NroEspecificacion
+        '
+        Me.NroEspecificacion.HeaderText = "NroEspecificacion"
+        Me.NroEspecificacion.Name = "NroEspecificacion"
+        Me.NroEspecificacion.ReadOnly = True
+        Me.NroEspecificacion.Visible = False
         '
         'Label4
         '
@@ -607,6 +911,7 @@ Partial Class HistorialProforma
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.btnNuevaEspecificacion)
         Me.Panel2.Controls.Add(Me.btnNuevaObservacion)
         Me.Panel2.Controls.Add(Me.btnArchivos)
         Me.Panel2.Controls.Add(Me.btnCerrar)
@@ -616,9 +921,19 @@ Partial Class HistorialProforma
         Me.Panel2.Size = New System.Drawing.Size(648, 68)
         Me.Panel2.TabIndex = 3
         '
+        'btnNuevaEspecificacion
+        '
+        Me.btnNuevaEspecificacion.Location = New System.Drawing.Point(334, 12)
+        Me.btnNuevaEspecificacion.Name = "btnNuevaEspecificacion"
+        Me.btnNuevaEspecificacion.Size = New System.Drawing.Size(88, 45)
+        Me.btnNuevaEspecificacion.TabIndex = 1
+        Me.btnNuevaEspecificacion.Text = "Nueva Especificación"
+        Me.ToolTip1.SetToolTip(Me.btnNuevaEspecificacion, "Abrir Formulario para Agregar una nueva Especificación")
+        Me.btnNuevaEspecificacion.UseVisualStyleBackColor = True
+        '
         'btnNuevaObservacion
         '
-        Me.btnNuevaObservacion.Location = New System.Drawing.Point(179, 12)
+        Me.btnNuevaObservacion.Location = New System.Drawing.Point(118, 12)
         Me.btnNuevaObservacion.Name = "btnNuevaObservacion"
         Me.btnNuevaObservacion.Size = New System.Drawing.Size(88, 45)
         Me.btnNuevaObservacion.TabIndex = 1
@@ -627,7 +942,7 @@ Partial Class HistorialProforma
         '
         'btnArchivos
         '
-        Me.btnArchivos.Location = New System.Drawing.Point(285, 12)
+        Me.btnArchivos.Location = New System.Drawing.Point(226, 12)
         Me.btnArchivos.Name = "btnArchivos"
         Me.btnArchivos.Size = New System.Drawing.Size(88, 45)
         Me.btnArchivos.TabIndex = 0
@@ -637,24 +952,13 @@ Partial Class HistorialProforma
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(389, 12)
+        Me.btnCerrar.Location = New System.Drawing.Point(442, 14)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(81, 45)
+        Me.btnCerrar.Size = New System.Drawing.Size(88, 45)
         Me.btnCerrar.TabIndex = 0
         Me.btnCerrar.Text = "Cerrar"
         Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
         Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'btnEnviarPorEmail
-        '
-        Me.btnEnviarPorEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEnviarPorEmail.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnEnviarPorEmail.Location = New System.Drawing.Point(234, 185)
-        Me.btnEnviarPorEmail.Name = "btnEnviarPorEmail"
-        Me.btnEnviarPorEmail.Size = New System.Drawing.Size(68, 41)
-        Me.btnEnviarPorEmail.TabIndex = 0
-        Me.btnEnviarPorEmail.Text = "Enviar Email"
-        Me.btnEnviarPorEmail.UseVisualStyleBackColor = True
         '
         'HistorialProforma
         '
@@ -680,6 +984,10 @@ Partial Class HistorialProforma
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage3.ResumeLayout(False)
+        Me.GrupoEspecificacion.ResumeLayout(False)
+        Me.GrupoEspecificacion.PerformLayout()
+        CType(Me.dgvEspecificaciones, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -731,4 +1039,28 @@ Partial Class HistorialProforma
     Friend WithEvents Icono As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents RutaArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnEnviarPorEmail As System.Windows.Forms.Button
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents dgvEspecificaciones As System.Windows.Forms.DataGridView
+    Friend WithEvents GrupoEspecificacion As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbTipoEspecificacion As System.Windows.Forms.ComboBox
+    Friend WithEvents txtEspecificacion As System.Windows.Forms.TextBox
+    Friend WithEvents WNroEspecificacion As System.Windows.Forms.TextBox
+    Friend WithEvents btnEliminarEspecificacion As System.Windows.Forms.Button
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents btnCerrarFormularioEspecificacion As System.Windows.Forms.Button
+    Friend WithEvents btnEnviarEmailEspecificacion As System.Windows.Forms.Button
+    Friend WithEvents btnLimpiarFormularioEspecificacion As System.Windows.Forms.Button
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents txtFechaEspecificacion As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents btnAgregarEspecificacion As System.Windows.Forms.Button
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents btnNuevaEspecificacion As System.Windows.Forms.Button
+    Friend WithEvents txtUsuarioEspecificacion As System.Windows.Forms.TextBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents FechaEspecificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Especificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoEspecificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UsuarioEspecificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RenglonEspecificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NroEspecificacion As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

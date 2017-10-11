@@ -13,6 +13,7 @@ Public Class HistorialProforma
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
     Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
+    Private TIPO_ESPECIFICACIONES() As String = {"", "Envase", "Varios"}
 
     Private _NroProforma As String
 
@@ -147,6 +148,110 @@ Public Class HistorialProforma
                             WNroObsAnt = WNroObservacion
                             WRefPrimeraFilaObs = Helper.ceros(XRenglon, 4)
                             .Cells("NroObservacion").Value = WNroObservacion & WRefPrimeraFilaObs
+                        End If
+
+                    End With
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Exit Sub
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _MostrarEspecificaciones()
+        'If IsNothing(Me.Proforma) Then : Exit Sub : End If
+
+        GrupoNuevaObs.Visible = False
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+        Dim WClave, WFecha, WFechaOrd, WNroEspecificacion, WNroObsAnt, WEspecificacion, WUsuario, XRenglon, ZSql, WRefPrimeraFilaEsp, WRenglon, WTipoEsp
+
+        ZSql = ""
+        ZSql &= "SELECT DISTINCT e.Clave, e.NroEspecificacion, e.Renglon, e.Fecha, e.FechaOrd, e.Usuario, e.Especificacion, e.Tipo"
+        ZSql &= " FROM ProformaExportacionEspecificaciones as e"
+        ZSql &= " WHERE e.Proforma = '" & txtNroProforma.Text & "' ORDER BY e.FechaOrd, e.NroEspecificacion, e.Renglon"
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.CommandText = ZSql
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                btnLimpiar.PerformClick()
+
+                dgvEspecificaciones.Rows.Clear()
+
+                WRefPrimeraFilaEsp = 0
+                WNroObsAnt = -1
+
+                Do While dr.Read()
+
+                    WClave = ""
+                    WFecha = ""
+                    WFechaOrd = 0
+                    WEspecificacion = ""
+                    WUsuario = ""
+                    WRenglon = ""
+                    WNroEspecificacion = 0
+                    WTipoEsp = 0
+
+                    'txtCliente.Text = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
+                    'txtDescripcionCliente.Text = IIf(IsDBNull(dr.Item("Razon")), "", dr.Item("Razon"))
+
+                    XRenglon = dgvEspecificaciones.Rows.Add
+
+                    WFecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                    WNroEspecificacion = IIf(IsDBNull(dr.Item("NroEspecificacion")), 0, dr.Item("NroEspecificacion"))
+                    WFechaOrd = IIf(IsDBNull(dr.Item("FechaOrd")), "", dr.Item("FechaOrd"))
+                    WEspecificacion = IIf(IsDBNull(dr.Item("Especificacion")), "", dr.Item("Especificacion"))
+                    WClave = IIf(IsDBNull(dr.Item("Clave")), "", dr.Item("Clave"))
+                    WRenglon = IIf(IsDBNull(dr.Item("Renglon")), "", dr.Item("Renglon"))
+                    WUsuario = IIf(IsDBNull(dr.Item("Usuario")), "", dr.Item("Usuario"))
+                    WTipoEsp = IIf(IsDBNull(dr.Item("Tipo")), 0, Val(dr.Item("Tipo")))
+
+                    With dgvEspecificaciones.Rows(XRenglon)
+
+                        .Cells("FechaEspecificacion").Value = WFecha
+                        '.Cells("FechaOrd").Value = WFechaOrd
+                        .Cells("NroEspecificacion").Value = WNroEspecificacion
+                        .Cells("Especificacion").Value = Trim(WEspecificacion)
+                        .Cells("UsuarioEspecificacion").Value = Trim(WUsuario)
+                        '.Cells("NroObservacion").Value = WNroObservacion
+                        .Cells("TipoEspecificacion").Value = TIPO_ESPECIFICACIONES(WTipoEsp)
+
+                        If WNroEspecificacion = WNroObsAnt Then
+
+                            If WNroEspecificacion = dgvEspecificaciones.Rows(XRenglon - 1).Cells("NroEspecificacion").Value Then
+                                .Cells("FechaEspecificacion").Value = ""
+                                .Cells("UsuarioEspecificacion").Value = ""
+                                .Cells("TipoEspecificacion").Value = ""
+                            End If
+
+                            .Cells("NroEspecificacion").Value = WNroEspecificacion '& WRefPrimeraFilaEsp
+                            .Cells("RenglonEspecificacion").Value = WRenglon '& WRefPrimeraFilaEsp
+                        Else
+                            WNroObsAnt = WNroEspecificacion
+                            WRefPrimeraFilaEsp = Helper.ceros(XRenglon, 4)
+                            .Cells("NroEspecificacion").Value = WNroEspecificacion '& WRefPrimeraFilaEsp
+                            .Cells("RenglonEspecificacion").Value = WRenglon '& WRefPrimeraFilaEsp
                         End If
 
                     End With
@@ -682,6 +787,8 @@ Public Class HistorialProforma
 
         _CargarArchivosRelacionados()
 
+        _MostrarEspecificaciones()
+
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
@@ -1123,13 +1230,16 @@ Public Class HistorialProforma
 
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
 
-        'If TabControl1.SelectedIndex = 0 Then
+        If TabControl1.SelectedIndex = 0 Then
 
-        '    TabControl1.SelectedTab.
+            'TabControl1.TabPages(1).Font = New Font(TabControl1.TabPages(1).Font.FontFamily, TabControl1.TabPages(1).Font.Size - 0.25)
+            'TabControl1.ItemSize = New Size(TabControl1.ItemSize.Width, TabControl1.ItemSize.Height + 5)
 
-        'ElseIf TabControl1.SelectedIndex = 1 Then
+        ElseIf TabControl1.SelectedIndex = 1 Then
 
-        'End If
+            '            TabControl1.TabPages(0).Font = New Font(TabControl1.TabPages(0).Font.FontFamily, TabControl1.TabPages(0).Font.Size - 0.25)
+
+        End If
 
     End Sub
 
@@ -1147,6 +1257,377 @@ Public Class HistorialProforma
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
             Exit Sub
         End Try
+
+    End Sub
+
+    Private Sub btnNuevaEspecificacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaEspecificacion.Click
+        TabControl1.SelectTab(2)
+        GrupoEspecificacion.Visible = True
+        btnLimpiarFormularioEspecificacion.PerformClick()
+    End Sub
+
+    Private Sub btnCerrarFormularioEspecificacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarFormularioEspecificacion.Click
+        GrupoEspecificacion.Visible = False
+    End Sub
+
+    Private Sub btnLimpiarFormularioEspecificacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarFormularioEspecificacion.Click
+        GrupoEspecificacion.Visible = True
+        txtFechaEspecificacion.Text = Date.Now.ToString("dd/MM/yyyy")
+        cmbTipoEspecificacion.SelectedIndex = 0
+        txtEspecificacion.Text = ""
+        WNroEspecificacion.Text = ""
+        txtFechaEspecificacion.Focus()
+
+    End Sub
+
+    Private Sub txtFechaEspecificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaEspecificacion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaEspecificacion.Text).Length < 10 Then : Exit Sub : End If
+
+            If Helper._ValidarFecha(txtFechaEspecificacion.Text) Then
+
+                cmbTipoEspecificacion.Focus()
+                cmbTipoEspecificacion.DroppedDown = True
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaEspecificacion.Clear()
+        End If
+
+    End Sub
+
+    Private Function _ProximoNroEspecificacion()
+        Dim actual = 0
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(NroEspecificacion) as NroActual FROM ProformaExportacionEspecificaciones")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                actual = IIf(IsDBNull(dr.Item("NroActual")), 0, dr.Item("NroActual"))
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer traer el próximo número de Espeficación de la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return actual + 1
+
+    End Function
+
+    Private Function _DatosEspecificacionValidos()
+
+        If Not _ExisteProforma() Then
+            Return False
+        End If
+
+        If Not Helper._ValidarFecha(txtFechaEspecificacion.Text) Then
+            MsgBox("La fecha de Especificación indicada no es una fecha válida.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Trim(txtEspecificacion.Text) = "" Then
+            MsgBox("Debe cargar alguna especificación antes de grabar.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Trim(txtUsuarioEspecificacion.Text) = "" Then
+            MsgBox("Debe indicar quién carga la nueva especificación.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Val(cmbTipoEspecificacion.SelectedIndex) < 1 Then
+            MsgBox("Debe indicar de qué Tipo de Especificación se trata.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Private Sub btnAgregarEspecificacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarEspecificacion.Click
+
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+        Dim trans As SqlTransaction = Nothing
+
+        Dim WClave, WRenglon, XRenglon, WNroProforma, WFecha, WFechaOrd, WTipo, WEspecificacion, WUsuario, WNroEspecif, WClaveEsp, ZSql
+        Dim WFila = "", WFilasAGrabar() As String
+        Dim WParrafosAGrabar() As String
+
+        cn.ConnectionString = _CS()
+        cn.Open()
+
+        trans = cn.BeginTransaction
+        cm.Connection = cn
+        cm.Transaction = trans
+
+        ZSql = ""
+        WNroProforma = Helper.ceros(txtNroProforma.Text, 6)
+        WFecha = txtFecha.Text
+        WFechaOrd = Helper.ordenaFecha(WFecha)
+        WTipo = cmbTipoEspecificacion.SelectedIndex
+        WEspecificacion = Trim(txtEspecificacion.Text)
+        WClaveEsp = Trim(WNroEspecificacion.Text)
+
+        WUsuario = txtUsuarioEspecificacion.Text
+
+        ' Validamos datos minimos antes de grabar.
+        If Not _DatosEspecificacionValidos() Then
+            txtFechaEspecificacion.Focus()
+            Exit Sub
+        End If
+
+        ' Chequeamos si se trata de la actualización de un renglon existente.
+        ' Si tiene clave, es una actualizacion y recuperamos el nro de referencia.
+        If WClaveEsp = "" Then
+
+            Try
+                WNroEspecif = _ProximoNroEspecificacion()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Exit Sub
+            End Try
+
+        Else
+
+            WNroEspecif = Val(WClaveEsp) 'Mid(WClaveEsp, 1, WClaveEsp.ToString.Length - 4)
+
+        End If
+
+        Try
+
+            ZSql = ""
+            ZSql = "DELETE FROM ProformaExportacionEspecificaciones WHERE NroEspecificacion = '" & WNroEspecif & "'"
+
+            cm.CommandText = ZSql
+
+            cm.ExecuteNonQuery()
+
+            ' Aca calculamos y grabamos todas las filas correspondientes.
+
+            WEspecificacion = Trim(WEspecificacion)
+
+            ' Separamos los párrafos para conservar el formato del comentario.
+            WParrafosAGrabar = WEspecificacion.ToString.Split(vbCrLf)
+
+            WRenglon = 0
+
+            For i = 0 To WParrafosAGrabar.Length - 1
+
+                If WParrafosAGrabar(i) <> "" And WParrafosAGrabar(i) <> vbLf Then
+
+                    ' Redondeamos el párrafo a un multiplo de 100 (max de caracteres por linea.)
+                    WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), 100 - (WParrafosAGrabar(i).Length Mod 100))
+
+                    ' Calculamos el numero de filas a grabar.
+                    ReDim WFilasAGrabar((WParrafosAGrabar(i).Length / 100))
+
+                    ' Por cada fila, cortamos trozos del parrafo cada 100 caracteres.
+                    For x = 0 To WFilasAGrabar.Length - 1
+
+                        WFilasAGrabar(x) = Trim(Mid(WParrafosAGrabar(i), (x * 100) + 1, 100))
+
+                        ' Grabamos unicamente aquellos que no sean nueva fila y tengan contenido.
+                        If Trim(WFilasAGrabar(x)) <> "" And WFilasAGrabar(x) <> vbLf Then
+                            WRenglon += 1
+
+                            XRenglon = Helper.ceros(WRenglon, 2)
+
+                            WClave = Helper.ceros(WNroEspecif, 6) + XRenglon
+
+                            ZSql = ""
+                            ZSql = "INSERT INTO ProformaExportacionEspecificaciones (Clave, NroEspecificacion, Renglon, Proforma, Especificacion, Tipo, Fecha, FechaOrd, Usuario) "
+                            ZSql &= "VALUES "
+                            ZSql &= "('" & WClave & "'," & WNroEspecif & ",'" & XRenglon & "','" & WNroProforma & "','" & WFilasAGrabar(x) & "','" & WTipo & "','" & WFecha & "','" & WFechaOrd & "','" & WUsuario & "')"
+
+                            cm.CommandText = ZSql
+
+                            cm.ExecuteNonQuery()
+                        End If
+
+                    Next
+
+                End If
+
+            Next
+
+        Catch ex As Exception
+            If Not IsNothing(trans) Then
+                trans.Rollback()
+            End If
+            cn.Close()
+            MsgBox("No se pudo grabar la Especificacion en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
+        trans.Commit()
+
+        ' Aca consultamos si quiere enviar este mismo contenido por email. Abrimos un nuevo email, sin enviarlo automaticamente.
+        If MsgBox("¿Desea enviar esta Especificación por E-Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            _AbrirNuevoEmail(Trim(txtEspecificacion.Text))
+        End If
+
+
+        'MsgBox("La observación ha sido grabada con exito.", MsgBoxStyle.Information)
+
+        _TraerHistorialYArchivos()
+
+        ' Despues de cargar todo el historial, no posicionamos en la primer fila de ese comentario creado/actualizado.
+        If dgvEspecificaciones.Rows.Count > 0 Then
+            For Each row As DataGridViewRow In dgvEspecificaciones.Rows
+                If row.Cells("NroEspecificacion").Value = WNroEspecif And Val(row.Cells("RenglonEspecificacion").Value) = 1 Then
+                    row.Cells(0).Selected = True
+                    Exit For
+                End If
+            Next
+        End If
+        
+        'btnVistaPrevia.PerformClick()
+
+        'btnLimpiar.PerformClick()
+        GrupoEspecificacion.Visible = False
+
+    End Sub
+
+    Private Sub cmbTipoEspecificacion_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoEspecificacion.DropDownClosed
+        If cmbTipoEspecificacion.SelectedIndex > 0 Then
+            txtUsuarioEspecificacion.Focus()
+        End If
+    End Sub
+
+    Private Sub cmbTipoEspecificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbTipoEspecificacion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Val(cmbTipoEspecificacion.Text) < 0 Then : Exit Sub : End If
+
+            txtUsuarioEspecificacion.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbTipoEspecificacion.SelectedIndex = 0
+        End If
+
+    End Sub
+
+    Private Sub txtUsuarioEspecificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtUsuarioEspecificacion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtUsuarioEspecificacion.Text) = "" Then : Exit Sub : End If
+
+            txtEspecificacion.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtUsuarioEspecificacion.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub _CargarEspecificacion(ByVal NroEspecificacion)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM ProformaExportacionEspecificaciones WHERE NroEspecificacion = '" & Val(NroEspecificacion) & "' ORDER BY Renglon")
+        Dim dr As SqlDataReader
+        Dim WClave, WNroEspec, WRenglon, WProforma, WEspecificacion, WTipo, WFecha, WFechaOrd, WUsuario
+
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            dr = cm.ExecuteReader()
+
+            'btnLimpiarFormularioEspecificacion.PerformClick()
+            txtFechaEspecificacion.Text = ""
+            cmbTipoEspecificacion.SelectedIndex = 0
+            txtUsuarioEspecificacion.Text = ""
+            txtEspecificacion.Text = ""
+
+            If dr.HasRows Then
+
+                WClave = ""
+                WNroEspec = ""
+                WRenglon = ""
+                WEspecificacion = ""
+                WTipo = 0
+                WFecha = ""
+                WFechaOrd = ""
+                WUsuario = ""
+
+                Do While dr.Read()
+
+                    WClave = IIf(IsDBNull(dr.Item("Clave")), "", dr.Item("Clave"))
+                    WNroEspec = IIf(IsDBNull(dr.Item("NroEspecificacion")), "", dr.Item("NroEspecificacion"))
+                    WRenglon = IIf(IsDBNull(dr.Item("Renglon")), "", dr.Item("Renglon"))
+                    WProforma = IIf(IsDBNull(dr.Item("Proforma")), "", dr.Item("Proforma"))
+                    WEspecificacion = IIf(IsDBNull(dr.Item("Especificacion")), "", dr.Item("Especificacion"))
+                    WTipo = IIf(IsDBNull(dr.Item("Tipo")), 0, dr.Item("Tipo"))
+                    WFecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                    WFechaOrd = IIf(IsDBNull(dr.Item("FechaOrd")), "", dr.Item("FechaOrd"))
+                    WUsuario = IIf(IsDBNull(dr.Item("Usuario")), "", dr.Item("Usuario"))
+
+                    txtFechaEspecificacion.Text = WFecha
+                    cmbTipoEspecificacion.SelectedIndex = WTipo
+                    txtUsuarioEspecificacion.Text = Trim(WUsuario)
+                    txtEspecificacion.Text &= Trim(WEspecificacion) & vbCrLf
+
+                    WNroEspecificacion.Text = Val(WNroEspec)
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer recuperar la Especificación desde la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+
+    Private Sub dgvEspecificaciones_CellContentDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvEspecificaciones.CellContentDoubleClick
+
+        With dgvEspecificaciones.CurrentRow
+
+            If Not IsNothing(.Cells("NroEspecificacion").Value) Then
+                If Val(.Cells("NroEspecificacion").Value) > 0 Then
+
+                    Try
+                        _CargarEspecificacion(.Cells("NroEspecificacion").Value)
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                        Exit Sub
+                    End Try
+
+                    GrupoEspecificacion.Visible = True
+
+                End If
+            End If
+
+        End With
 
     End Sub
 End Class
