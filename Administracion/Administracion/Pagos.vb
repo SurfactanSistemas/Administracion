@@ -53,24 +53,6 @@ Public Class Pagos
     End Property
 
     Private Sub Pagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        
-        'Dim gridPagosBuilder As New GridBuilder(gridPagos)
-        'gridPagosBuilder.addTextColumn(0, "Tipo")
-        'gridPagosBuilder.addTextColumn(1, "Letra")
-        'gridPagosBuilder.addTextColumn(2, "Punto")
-        'gridPagosBuilder.addTextColumn(3, "Número")
-        'gridPagosBuilder.addTextColumn(4, "Importe")
-        'gridPagosBuilder.addTextColumn(5, "Descripción")
-
-        'Dim gridFormasBuilder As New GridBuilder(gridFormaPagos)
-        'gridFormasBuilder.addTextColumn(0, "Tipo", False)
-        'gridFormasBuilder.addTextColumn(1, "Número")
-        'gridFormasBuilder.addTextColumn(2, "Fecha")
-        'gridFormasBuilder.addTextColumn(3, "Banco")
-        'gridFormasBuilder.addTextColumn(4, "Nombre")
-        'gridFormasBuilder.addTextColumn(5, "Importe")
-
-        'commonEventHandler.setIndexTab(Me)
 
         If Me.SoloLectura Then
             Dim botones As New List(Of Button) From {btnAgregar, btnCalcular, btnCarpetas, btnChequesTerceros, btnConsulta, btnCtaCte, btnImprimir, btnLimpiar}
@@ -83,6 +65,9 @@ Public Class Pagos
 
         Else
             btnLimpiar.PerformClick()
+
+            txtFechaParidad.Text = txtFecha.Text
+            txtParidad.Text = traerParidad()
         End If
 
     End Sub
@@ -1668,6 +1653,8 @@ Public Class Pagos
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         'Cleanner.clean(Me)
+        Dim WParidad = txtParidad.Text
+        Dim WFechaParidad = txtFechaParidad.Text
 
         For Each _c As TextBox In Me.Panel2.Controls.OfType(Of TextBox)()
             _c.Text = ""
@@ -1690,7 +1677,7 @@ Public Class Pagos
         txtGanancias.Text = "0.00"
         txtIVA.Text = "0.00"
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
-        txtFechaParidad.Text = txtFecha.Text
+        txtFechaParidad.Text = WFechaParidad 'txtFecha.Text
 
         _LimpiarGrillas()
 
@@ -1718,7 +1705,7 @@ Public Class Pagos
         CLBFiltrado.Items.Clear()
         txtConsulta.Visible = False
 
-        txtParidad.Text = traerParidad()
+        txtParidad.Text = WParidad 'traerParidad()
 
         txtProveedor.Focus()
         WTipoProv = ""
@@ -1956,11 +1943,11 @@ Public Class Pagos
         XProveedor = txtProveedor.Text
         XFecha = txtFecha.Text
         XFechaOrd = Proceso.ordenaFecha(XFecha)
-        XImporte = lblFormaPagos.Text
-        XRetencion = txtGanancias.Text
-        XRetotra = txtIngresosBrutos.Text
-        XRetIbCiudad = txtIBCiudad.Text
-        XRetIva = txtIVA.Text
+        XImporte = _NormalizarNumero(lblFormaPagos.Text)
+        XRetencion = _NormalizarNumero(txtGanancias.Text)
+        XRetotra = _NormalizarNumero(txtIngresosBrutos.Text)
+        XRetIbCiudad = _NormalizarNumero(txtIBCiudad.Text)
+        XRetIva = _NormalizarNumero(txtIVA.Text)
         XObservaciones = Trim(txtObservaciones.Text)
         XParidad = Proceso.formatonumerico(txtParidad.Text, 4)
 
@@ -1993,21 +1980,21 @@ Public Class Pagos
                     XLetra1 = ""
                     XPunto1 = ""
                     XNumero1 = ""
-                    XImporte1 = ""
+                    XImporte1 = 0.0
                     XObservaciones2 = ""
-                    XImpoNeto = ""
+                    XImpoNeto = 0.0
                     XTipo2 = ""
                     XNumero2 = ""
                     XFecha2 = ""
                     XFechaOrd2 = ""
                     XBanco2 = ""
-                    XImporte2 = ""
+                    XImporte2 = 0.0
                     XEmpresa = "1"
                     XClave = ""
-                    XRetganancias = ""
+                    XRetganancias = 0.0
                     XConcepto = ""
                     XConsecionaria = ""
-                    XImpolist = ""
+                    XImpolist = 0.0
                     ClaveRecibo = ""
                     XCuit = ""
                     ImporteCheque = ""
@@ -2018,7 +2005,7 @@ Public Class Pagos
                     WTipo = ""
                     WPunto = ""
                     WNumero = ""
-                    WImporte = ""
+                    WImporte = 0.0
                     XTiporeg = "1"
                     XClaveCtaCte = ""
 
@@ -2062,7 +2049,7 @@ Public Class Pagos
                     XLetra1 = .Cells(1).Value
                     XPunto1 = .Cells(2).Value
                     XNumero1 = .Cells(3).Value
-                    XImporte1 = .Cells(4).Value
+                    XImporte1 = _NormalizarNumero(.Cells(4).Value)
                     XObservaciones2 = .Cells(5).Value
                     XImpoNeto = Val(.Cells(6).Value)
 
@@ -2091,11 +2078,11 @@ Public Class Pagos
                     ZSql &= " Importe, Fechaord2, Consecionaria, Impolist, Cuenta, ImpoNeto,"
                     ZSql &= " RetIbCiudad, ClaveRecibo, ImporteCheque, NumeroCheque, FechaCheque, BancoCheque, Cuit, Paridad)"
                     ZSql &= " VALUES ('" & XClave & "', '" & XOrden & "', '" & XRenglon & "', '" & XProveedor & "',"
-                    ZSql &= " '" & XFecha & "', '" & XFechaOrd & "', '" & XTipoOrd & "', " & XRetganancias & ", " & XRetIva & ","
-                    ZSql &= " " & XRetotra & ", " & XRetencion & ", '" & XTiporeg & "', '" & XTipo1 & "', '" & XLetra1 & "',"
-                    ZSql &= " '" & XPunto1 & "', '" & XNumero1 & "', " & XImporte1 & ", '" & XTipo2 & "', '" & XNumero2 & "',"
+                    ZSql &= " '" & XFecha & "', '" & XFechaOrd & "', '" & XTipoOrd & "', " & Str(XRetganancias) & ", " & Str(XRetIva) & ","
+                    ZSql &= " " & Str(XRetotra) & ", " & Str(XRetencion) & ", '" & XTiporeg & "', '" & XTipo1 & "', '" & XLetra1 & "',"
+                    ZSql &= " '" & XPunto1 & "', '" & XNumero1 & "', " & Str(XImporte1) & ", '" & XTipo2 & "', '" & XNumero2 & "',"
                     ZSql &= " '" & XFecha2 & "', '" & XBanco2 & "', " & XImporte2 & ", '" & XObservaciones2 & "', '" & XEmpresa & "',"
-                    ZSql &= " '" & XConcepto & "', '" & XObservaciones & "', " & XImporte & ", '" & XFechaOrd2 & "', '" & XConsecionaria & "',"
+                    ZSql &= " '" & XConcepto & "', '" & XObservaciones & "', " & Str(XImporte) & ", '" & XFechaOrd2 & "', '" & XConsecionaria & "',"
                     ZSql &= " " & XImpolist & ", '" & XCuenta & "', " & XImpoNeto & ", " & XRetIbCiudad & ", '', '', '', '', '', '', " & XParidad & ")"
 
 
@@ -2115,7 +2102,7 @@ Public Class Pagos
                     ' Actualizamos la Cta Cte del Proveedor.
                     XClaveCtaprv = txtProveedor.Text & XLetra1 & XTipo1 & XPunto1 & XNumero1
 
-                    ZSql = "UPDATE CtaCtePrv SET Saldo = Saldo - " & XImporte1 & " WHERE Clave = '" & XClaveCtaprv & "'"
+                    ZSql = "UPDATE CtaCtePrv SET Saldo = Saldo - " & Str(XImporte1) & " WHERE Clave = '" & XClaveCtaprv & "'"
 
                     Try
                         cn.Open()
@@ -2155,21 +2142,21 @@ Public Class Pagos
                     XLetra1 = ""
                     XPunto1 = ""
                     XNumero1 = ""
-                    XImporte1 = ""
+                    XImporte1 = 0.0
                     XObservaciones2 = ""
-                    XImpoNeto = ""
+                    XImpoNeto = 0.0
                     XTipo2 = ""
                     XNumero2 = ""
                     XFecha2 = ""
                     XFechaOrd2 = ""
                     XBanco2 = ""
-                    XImporte2 = ""
+                    XImporte2 = 0.0
                     XEmpresa = "1"
                     XClave = ""
-                    XRetganancias = ""
+                    XRetganancias = 0.0
                     XConcepto = ""
                     XConsecionaria = ""
-                    XImpolist = ""
+                    XImpolist = 0.0
                     ClaveRecibo = ""
                     XCuit = ""
                     ImporteCheque = ""
@@ -2180,7 +2167,7 @@ Public Class Pagos
                     WTipo = ""
                     WPunto = ""
                     WNumero = ""
-                    WImporte = ""
+                    WImporte = 0.0
                     XTiporeg = ""
                     XTipoRecibo = ""
                     XClaveRecibo = ""
@@ -2220,7 +2207,7 @@ Public Class Pagos
                     XFechaOrd2 = Proceso.ordenaFecha(XFecha2)
                     XBanco2 = .Cells(3).Value
                     XObservaciones2 = .Cells(4).Value
-                    XImporte2 = .Cells(5).Value
+                    XImporte2 = _NormalizarNumero(.Cells(5).Value)
                     XClaveRecibo = Mid(.Cells(6).Value, 2, 10)
                     XClaveCtaCte = .Cells(6).Value
                     XTipoRecibo = Microsoft.VisualBasic.Left(.Cells(6).Value, 1)
@@ -2248,12 +2235,12 @@ Public Class Pagos
                     ZSql &= " Importe, Fechaord2, Consecionaria, Impolist, Cuenta, ImpoNeto,"
                     ZSql &= " RetIbCiudad, ClaveRecibo, ImporteCheque, NumeroCheque, FechaCheque, BancoCheque, Cuit, Paridad)"
                     ZSql &= " VALUES ('" & XClave & "', '" & XOrden & "', '" & XRenglon & "', '" & XProveedor & "',"
-                    ZSql &= " '" & XFecha & "', '" & XFechaOrd & "', '" & XTipoOrd & "', " & XRetganancias & ", " & XRetIva & ","
-                    ZSql &= " " & XRetotra & ", " & XRetencion & ", '" & XTiporeg & "', '" & XTipo1 & "', '" & XLetra1 & "',"
-                    ZSql &= " '" & XPunto1 & "', '" & XNumero1 & "', " & XImporte1 & ", '" & XTipo2 & "', '" & XNumero2 & "',"
-                    ZSql &= " '" & XFecha2 & "', '" & XBanco2 & "', " & XImporte2 & ", '" & XObservaciones2 & "', '" & XEmpresa & "',"
-                    ZSql &= " '" & XConcepto & "', '" & XObservaciones & "', " & XImporte & ", '" & XFechaOrd2 & "', '" & XConsecionaria & "',"
-                    ZSql &= " " & XImpolist & ", '" & XCuenta & "', " & XImpoNeto & ", " & XRetIbCiudad & ", '" & XClaveRecibo & "', '', '', '', '', '', " & XParidad & ")"
+                    ZSql &= " '" & XFecha & "', '" & XFechaOrd & "', '" & XTipoOrd & "', " & Str(XRetganancias) & ", " & Str(XRetIva) & ","
+                    ZSql &= " " & Str(XRetotra) & ", " & Str(XRetencion) & ", '" & XTiporeg & "', '" & XTipo1 & "', '" & XLetra1 & "',"
+                    ZSql &= " '" & XPunto1 & "', '" & XNumero1 & "', " & Str(XImporte1) & ", '" & XTipo2 & "', '" & XNumero2 & "',"
+                    ZSql &= " '" & XFecha2 & "', '" & XBanco2 & "', " & Str(XImporte2) & ", '" & XObservaciones2 & "', '" & XEmpresa & "',"
+                    ZSql &= " '" & XConcepto & "', '" & XObservaciones & "', " & Str(XImporte) & ", '" & XFechaOrd2 & "', '" & XConsecionaria & "',"
+                    ZSql &= " " & Str(XImpolist) & ", '" & XCuenta & "', " & Str(XImpoNeto) & ", " & Str(XRetIbCiudad) & ", '" & XClaveRecibo & "', '', '', '', '', '', " & Str(XParidad) & ")"
 
 
                     Try
@@ -2278,8 +2265,8 @@ Public Class Pagos
                     ZSql = ""
                     ZSql = ZSql + "UPDATE Pagos SET "
                     ZSql = ZSql + " ClaveRecibo = " + "'" + ZClaveRecibo + "',"
-                    ZSql = ZSql + " RetIbCiudad = " + "'" + XRetIbCiudad + "',"
-                    ZSql = ZSql + " ImporteCheque = " + "'" + ImporteCheque + "',"
+                    ZSql = ZSql + " RetIbCiudad = " + "'" + Str(XRetIbCiudad) + "',"
+                    ZSql = ZSql + " ImporteCheque = " + "'" + Str(ImporteCheque) + "',"
                     ZSql = ZSql + " NumeroCheque = " + "'" + NumeroCheque + "',"
                     ZSql = ZSql + " FechaCheque = " + "'" + FechaCheque + "',"
                     ZSql = ZSql + " BancoCheque = " + "'" + BancoCheque + "',"
@@ -2343,8 +2330,8 @@ Public Class Pagos
 
                         ZSql = ""
                         ZSql = ZSql + "UPDATE CtaCte SET "
-                        ZSql = ZSql + "Saldo = " + "'" + XSaldo + "',"
-                        ZSql = ZSql + "SaldoUs = " + "'" + XSaldoUs + "',"
+                        ZSql = ZSql + "Saldo = " + "'" + Str(XSaldo) + "',"
+                        ZSql = ZSql + "SaldoUs = " + "'" + Str(XSaldoUs) + "',"
                         ZSql = ZSql + "Estado2 = " + "'" + XEstado + "',"
                         ZSql = ZSql + "WDate = " + "'" + XDate + "'"
                         ZSql = ZSql + " Where Clave = " + "'" + XClaveCtaCte + "'"
@@ -2405,8 +2392,8 @@ Public Class Pagos
                 ZSql &= " Estado = '" & XEstado & "',"
                 ZSql &= " Vencimiento = '" & XVencimiento & "',"
                 ZSql &= " Vencimiento1 = '" & XVencimiento1 & "',"
-                ZSql &= " Total = " & XTotal & ","
-                ZSql &= " Saldo = " & XSaldo & ","
+                ZSql &= " Total = " & Str(XTotal) & ","
+                ZSql &= " Saldo = " & Str(XSaldo) & ","
                 ZSql &= " OrdFecha = '" & XOrdFecha & "',"
                 ZSql &= " OrdVencimiento = '" & XOrdVencimiento & "',"
                 ZSql &= " Impre = '" & XImpre & "',"
@@ -2432,8 +2419,8 @@ Public Class Pagos
                 ZSql &= "'" & XEstado & "',"
                 ZSql &= "'" & XVencimiento & "',"
                 ZSql &= "'" & XVencimiento1 & "',"
-                ZSql &= "" & XTotal & ","
-                ZSql &= "" & XSaldo & ","
+                ZSql &= "" & Str(XTotal) & ","
+                ZSql &= "" & Str(XSaldo) & ","
                 ZSql &= "'" & XOrdFecha & "',"
                 ZSql &= "'" & XOrdVencimiento & "',"
                 ZSql &= "'" & XImpre & "',"
@@ -2492,8 +2479,8 @@ Public Class Pagos
                 ZSql &= " Estado = '" & XEstado & "',"
                 ZSql &= " Vencimiento = '" & XVencimiento & "',"
                 ZSql &= " Vencimiento1 = '" & XVencimiento1 & "',"
-                ZSql &= " Total = " & XTotal & ","
-                ZSql &= " Saldo = " & XSaldo & ","
+                ZSql &= " Total = " & Str(XTotal) & ","
+                ZSql &= " Saldo = " & Str(XSaldo) & ","
                 ZSql &= " OrdFecha = '" & XOrdFecha & "',"
                 ZSql &= " OrdVencimiento = '" & XOrdVencimiento & "',"
                 ZSql &= " Impre = '" & XImpre & "',"
@@ -2521,8 +2508,8 @@ Public Class Pagos
                 ZSql &= "'" & XEstado & "',"
                 ZSql &= "'" & XVencimiento & "',"
                 ZSql &= "'" & XVencimiento1 & "',"
-                ZSql &= "" & XTotal & ","
-                ZSql &= "" & XSaldo & ","
+                ZSql &= "" & Str(XTotal) & ","
+                ZSql &= "" & Str(XSaldo) & ","
                 ZSql &= "'" & XOrdFecha & "',"
                 ZSql &= "'" & XOrdVencimiento & "',"
                 ZSql &= "'" & XImpre & "',"
@@ -2553,7 +2540,7 @@ Public Class Pagos
         Dim _Clave = Microsoft.VisualBasic.Right(txtFecha.Text, 2) & Mid(txtFecha.Text, 4, 2) & txtProveedor.Text
         XNeto = 0
         ZSql = ""
-        ZSql &= "UPDATE Retencion SET Neto = Neto + " & XNeto & ", Retenido = Retenido + " & XRetencion & " WHERE Clave = '" & _Clave & "'"
+        ZSql &= "UPDATE Retencion SET Neto = Neto + " & Str(XNeto) & ", Retenido = Retenido + " & Str(XRetencion) & " WHERE Clave = '" & _Clave & "'"
 
         Try
 
@@ -2712,6 +2699,10 @@ Public Class Pagos
 
         MsgBox("El número de orden asignado es: " & WOrdPago)
 
+        txtOrdenPago.Text = WOrdPago
+
+        txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
         ' Imprimimos los comprobantes pertinentes.
         btnImprimir.PerformClick()
 
@@ -2808,10 +2799,10 @@ Public Class Pagos
                     interno = Proceso.ceros(interno, 6)
 
                     If UCase(Trim(WLetraDife)) = "A" Then
-                        WNetoDife = .Cells(4).Value / 1.21
-                        WIvaDife = Val(.Cells(4).Value) - Val(WNetoDife)
+                        WNetoDife = Val(Proceso.formatonumerico(.Cells(4).Value)) / 1.21
+                        WIvaDife = Val(Proceso.formatonumerico(.Cells(4).Value)) - Val(WNetoDife)
                     Else
-                        WNetoDife = .Cells(4).Value
+                        WNetoDife = Val(Proceso.formatonumerico(.Cells(4).Value))
                         WIvaDife = 0.0
                     End If
 
@@ -2873,11 +2864,11 @@ Public Class Pagos
                        & Str$(XExentolist) & "," _
                        & Str$(XParidad) & "," _
                        & Val(XPAgo) & ", " _
-                       & "1,'',0,0,0,0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'' "
+                       & "'','  /  /    ','',1,'',0,0,0,0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'' "
 
                 ZSqlIvaComp = ""
                 ZSqlIvaComp = "INSERT INTO IvaComp (NroInterno, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Vencimiento, Vencimiento1, Periodo, Neto, Iva21, Iva5, Iva27, Ib, Exento, " _
-                    & " Contado, Impre, OrdFecha, Empresa, NetoList, ExentoList, Paridad, Pago, Rechazado, Remito, NroInternoAsociado, Iva105, SoloIva, RetIb1, NroRetIb1, RetIb2, NroRetIb2, " _
+                    & " Contado, Impre, OrdFecha, Empresa, NetoList, ExentoList, Paridad, Pago, Cai, VtoCai, Despacho, Rechazado, Remito, NroInternoAsociado, Iva105, SoloIva, RetIb1, NroRetIb1, RetIb2, NroRetIb2, " _
                     & " RetIb3, NroRetIb3, RetIb4, NroRetIb4, RetIb5, NroRetIb5, RetIb6, NroRetIb6, RetIb7, NroRetIb7, RetIb8, NroRetIb8, RetIb9, NroRetIb9, RetIb10, NroRetIb10, RetIb11, NroRetIb11, " _
                     & " RetIb12, NroRetIb12, RetIb13, NroRetIb13, RetIb14, NroRetIb14) VALUES (#PARAM#)"
 
@@ -6678,26 +6669,6 @@ Public Class Pagos
 
     Private Sub _RecalcularRetenciones()
 
-        varAcuNeto = 0
-        varAcuRetenido = 0
-        varAcuAnticipo = 0
-        varAcuBruto = 0
-        varAcuIva = 0
-
-        varOrdFecha = Mid(ordenaFecha(txtFecha.Text), 3, 4)
-
-        Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(txtProveedor.Text, varOrdFecha)
-
-        If Not IsNothing(CampoAcumulado) Then
-
-            varAcuNeto = CampoAcumulado.neto
-            varAcuRetenido = CampoAcumulado.retenido
-            varAcuAnticipo = CampoAcumulado.anticipo
-            varAcuBruto = CampoAcumulado.bruto
-            varAcuIva = CampoAcumulado.iva
-
-        End If
-
         ' Recalculo de Retenciones de Ganancias.
         _RecalcularRetencionGanancias()
 
@@ -6780,20 +6751,20 @@ Public Class Pagos
                         ZLetra = .Cells(1).Value
                         ZPunto = .Cells(2).Value
                         ZNumero = .Cells(3).Value
-                        ZImporte = .Cells(4).Value
+                        ZImporte = _NormalizarNumero(.Cells(4).Value)
 
                         ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZLetra, ZNumero)
 
                         If Not IsNothing(ZFactura) Then
 
-                            ZNeto = ZFactura.Item("Neto")
+                            ZNeto = _NormalizarNumero(ZFactura.Item("Neto"))
 
-                            ZIva = ZFactura.Item("Iva21")
-                            ZIva5 = ZFactura.Item("Iva5")
-                            ZIva27 = ZFactura.Item("Iva27")
-                            ZIva105 = ZFactura.Item("Iva105")
-                            ZIb = ZFactura.Item("Ib")
-                            ZExento = ZFactura.Item("Exento")
+                            ZIva = _NormalizarNumero(ZFactura.Item("Iva21"))
+                            ZIva5 = _NormalizarNumero(ZFactura.Item("Iva5"))
+                            ZIva27 = _NormalizarNumero(ZFactura.Item("Iva27"))
+                            ZIva105 = _NormalizarNumero(ZFactura.Item("Iva105"))
+                            ZIb = _NormalizarNumero(ZFactura.Item("Ib"))
+                            ZExento = _NormalizarNumero(ZFactura.Item("Exento"))
 
                             ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
 
@@ -6919,6 +6890,26 @@ Public Class Pagos
         ZTotal = 0.0
         ZZSaldo = 0.0
 
+        varAcuNeto = 0
+        varAcuRetenido = 0
+        varAcuAnticipo = 0
+        varAcuBruto = 0
+        varAcuIva = 0
+
+        varOrdFecha = Mid(ordenaFecha(txtFecha.Text), 3, 4)
+
+        Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(txtProveedor.Text, varOrdFecha)
+
+        If Not IsNothing(CampoAcumulado) Then
+
+            varAcuNeto = CampoAcumulado.neto
+            varAcuRetenido = CampoAcumulado.retenido
+            varAcuAnticipo = CampoAcumulado.anticipo
+            varAcuBruto = CampoAcumulado.bruto
+            varAcuIva = CampoAcumulado.iva
+
+        End If
+
         ' Recalculo sobre porcentaje neto en Iva Comp.
         For Each row As DataGridViewRow In gridPagos.Rows
             With row
@@ -6933,13 +6924,13 @@ Public Class Pagos
 
                     If Not IsNothing(ZFactura) Then
 
-                        ZNeto = ZFactura.Item("Neto")
-                        ZIva = ZFactura.Item("Iva21")
-                        ZIva5 = ZFactura.Item("Iva5")
-                        ZIva27 = ZFactura.Item("Iva27")
-                        ZIva105 = ZFactura.Item("Iva105")
-                        ZIb = ZFactura.Item("Ib")
-                        ZExento = ZFactura.Item("Exento")
+                        ZNeto = _NormalizarNumero(ZFactura.Item("Neto"))
+                        ZIva = _NormalizarNumero(ZFactura.Item("Iva21"))
+                        ZIva5 = _NormalizarNumero(ZFactura.Item("Iva5"))
+                        ZIva27 = _NormalizarNumero(ZFactura.Item("Iva27"))
+                        ZIva105 = _NormalizarNumero(ZFactura.Item("Iva105"))
+                        ZIb = _NormalizarNumero(ZFactura.Item("Ib"))
+                        ZExento = _NormalizarNumero(ZFactura.Item("Exento"))
 
                         ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
 
@@ -7090,8 +7081,11 @@ Public Class Pagos
         Return ""
     End Function
 
-    Private Function _NormalizarNumero(ByVal numero As String, Optional ByVal decimales As Integer = 2)
-        Return Proceso.formatonumerico(Trim(numero), decimales)
+    Private Function _NormalizarNumero(ByVal numero As Object, Optional ByVal decimales As Integer = 2)
+        If IsDBNull(numero) Then
+            numero = ""
+        End If
+        Return Val(Proceso.formatonumerico(Trim(numero), decimales))
     End Function
 
     Private Sub gridPagos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridPagos.CellMouseDoubleClick
@@ -7448,5 +7442,9 @@ Public Class Pagos
             txtFechaAux.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
 
         End If
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        _RecalcularRetenciones()
     End Sub
 End Class

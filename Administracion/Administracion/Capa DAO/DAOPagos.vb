@@ -31,11 +31,11 @@ Public Class DAOPagos
                              DAOBanco.buscarBancoPorCodigo(row("Banco").ToString), DAOProveedor.buscarProveedorPorCodigo(row("Proveedor").ToString), asDouble(row("CertificadoIb")), asDouble(row("CertificadoIbCiudad")), asDouble(row("CertificadoIva")))
     End Function
 
-    Private Shared Function asDouble(ByVal val As Object, Optional ByVal decimales As Integer = 2)
-        If IsDBNull(val) Then
-            val = ""
+    Private Shared Function asDouble(ByVal valor As Object, Optional ByVal decimales As Integer = 2)
+        If IsDBNull(valor) Then
+            valor = ""
         End If
-        Return Proceso.formatonumerico(val, decimales)
+        Return Val(Proceso.formatonumerico(valor, decimales))
         'Return CustomConvert.toDoubleOrZero(val.ToString)
     End Function
 
