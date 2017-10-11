@@ -221,19 +221,21 @@ Public Class Compras
         txtTotal.Text = _FormatearNumero(total)
     End Sub
 
-    Private Function _FormatearNumero(ByVal numero As String) As String
+    Private Function _FormatearNumero(ByVal numero As String, Optional ByVal decimales As Integer = 2) As String
 
-        Return Proceso.formatonumerico(numero)
+        Return Proceso.formatonumerico(numero, decimales)
 
     End Function
 
     Private Sub _FormatearNumeros()
 
-        Dim numeros As New List(Of TextBox) From {txtNeto, txtIVA10, txtIVA21, txtIVA27, txtIVARG, txtNoGravado, txtParidad, txtPercIB, txtTotal}
+        Dim numeros As New List(Of TextBox) From {txtNeto, txtIVA10, txtIVA21, txtIVA27, txtIVARG, txtNoGravado, txtPercIB, txtTotal}
 
         For Each _n As TextBox In numeros
             _n.Text = _FormatearNumero(_n.Text)
         Next
+
+        txtParidad.Text = Proceso.formatonumerico(txtParidad.Text, 4)
 
     End Sub
 
@@ -257,12 +259,12 @@ Public Class Compras
         Return asDouble(txtIVA21.Text) + asDouble(txtIVARG.Text) + asDouble(txtIVA27.Text) + asDouble(txtPercIB.Text) + asDouble(txtNoGravado.Text) + asDouble(txtIVA10.Text) + asDouble(txtNeto.Text)
     End Function
 
-    Private Function asDouble(ByVal text As String)
+    Private Function asDouble(ByVal text As String, Optional ByVal decimales As Integer = 2)
 
         If IsNothing(text) Then : Return text : End If
 
         'Return CustomConvert.toDoubleOrZero(text.Replace(".", ","))
-        Return Val(Proceso.formatonumerico(text))
+        Return Val(Proceso.formatonumerico(text, decimales))
     End Function
 
     Private Function validarCampos() As Boolean
@@ -479,7 +481,7 @@ Public Class Compras
         If interno = 0 Then : interno = DAOCompras.siguienteNumeroDeInterno() : End If
         Dim compra As New Compra(interno, proveedor, ceros(cmbTipo.SelectedIndex, 2), cmbTipo.Text, cmbFormaPago.SelectedIndex,
                                  tipoPago(), CBLetra.SelectedItem, txtPunto.Text, txtNumero.Text, txtFechaEmision.Text, txtFechaIVA.Text, txtFechaVto1.Text, txtFechaVto2.Text,
-                                 asDouble(txtParidad.Text), asDouble(txtNeto.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA21.Text) * multiplicadorPorNotaDeCredito,
+                                 asDouble(txtParidad.Text, 4), asDouble(txtNeto.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA21.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtIVARG.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA27.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtPercIB.Text) * multiplicadorPorNotaDeCredito, asDouble(txtNoGravado.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtIVA10.Text) * multiplicadorPorNotaDeCredito, asDouble(txtTotal.Text) * multiplicadorPorNotaDeCredito, chkSoloIVA.Checked,
@@ -779,7 +781,7 @@ Public Class Compras
         txtFechaVto2.Text = compra.fechaVto2
         txtRemito.Text = compra.remito
         cmbFormaPago.SelectedIndex = compra.formaPago
-        txtParidad.Text = _FormatearNumero(compra.paridad)
+        txtParidad.Text = _FormatearNumero(compra.paridad, 4)
         txtNeto.Text = _FormatearNumero(compra.neto)
         txtIVA10.Text = _FormatearNumero(compra.iva105)
         txtIVA21.Text = _FormatearNumero(compra.iva21)

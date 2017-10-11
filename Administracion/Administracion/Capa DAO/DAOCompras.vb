@@ -112,7 +112,7 @@ Public Class DAOCompras
     Private Shared Function crearCompra(ByVal row As DataRow)
         Dim compra As Compra
         compra = New Compra(asInt(row("NroInterno")), DAOProveedor.buscarProveedorPorCodigo(row("Proveedor").ToString), asInt(row("Tipo")), "", asInt(row("Pago")), asInt(row("Contado")), row("Letra").ToString,
-                                row("Punto").ToString, row("Numero").ToString, row("Fecha"), row("Periodo"), row("Vencimiento"), row("Vencimiento1"), asDouble(row("Paridad")),
+                                row("Punto").ToString, row("Numero").ToString, row("Fecha"), row("Periodo"), row("Vencimiento"), row("Vencimiento1"), asDouble(row("Paridad"), 4),
                                 asDouble(row("Neto")), asDouble(row("Iva21")), asDouble(row("Iva5")), asDouble(row("Iva27")), asDouble(row("Ib")), asDouble(row("Exento")), asDouble(row("Iva105")),
                                 0, asBool(row("SoloIva")), row("Remito").ToString, row("Despacho").ToString)
 
@@ -129,9 +129,13 @@ Public Class DAOCompras
         Return CustomConvert.toIntOrZero(value.ToString)
     End Function
 
-    Private Shared Function asDouble(ByVal value)
+    Private Shared Function asDouble(ByVal value As Object, Optional ByVal decimales As Integer = 2)
         'Return CustomConvert.toDoubleOrZero(value)
-        Return Val(Proceso.formatonumerico(value))
+        If IsDBNull(value) Then
+            value = ""
+        End If
+
+        Return Val(Proceso.formatonumerico(value, decimales))
     End Function
 
     Private Shared Function asBool(ByVal value)

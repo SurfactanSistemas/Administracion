@@ -266,7 +266,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                     With row
                         If Trim(.Cells(0).Value) <> "" Then
                             WProveedor = Trim(.Cells(0).Value)
-                            WFecha = Date.Now.ToString("dd-MM-yyyy")
+                            WFecha = Date.Now.ToString("dd/MM/yyyy")
                             WFechaOrd = Proceso.ordenaFecha(WFecha)
                             WObservaciones = IIf(IsNothing(.Cells(2).Value), "", .Cells(2).Value)
 
@@ -519,14 +519,17 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
             Try
                 _GuardarProveedores()
-            Catch ex As Exception
 
+                ' Realizan la misma funcion.
+                Me.Close()
+
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Exit Sub
             End Try
 
         End If
 
-        ' Realizan la misma funcion.
-        Me.Close()
     End Sub
 
 
