@@ -864,7 +864,7 @@ Public Class Pagos
                         XNumero = .Item("Numero").ToString()
                         XFecha = .Item("Fecha").ToString()
                         XClave = .Item("Clave").ToString()
-                        XParidad = _NormalizarNumero(.Item("Paridad").ToString())
+                        XParidad = _NormalizarNumero(.Item("Paridad").ToString(), 4)
                         XPago = .Item("Pago").ToString()
 
                         If Val(XPago) <> 2 Then
@@ -1365,7 +1365,7 @@ Public Class Pagos
                         If Val(XParidad) <> 0 Then
                             XParidadTotal = _TraerCambioDivisa(txtFechaParidad.Text)
 
-                            XSaldoUS = (Val(_NormalizarNumero(XSaldo)) / Val(XParidad.Replace(",", "."))) * Val(_NormalizarNumero(XParidadTotal))
+                            XSaldoUS = (Val(_NormalizarNumero(XSaldo)) / Val(XParidad.Replace(",", "."))) * Val(_NormalizarNumero(XParidadTotal, 4))
 
                             Dim diferencia As String = Val(_NormalizarNumero(XSaldoUS)) - Val(_NormalizarNumero(XSaldo))
 
