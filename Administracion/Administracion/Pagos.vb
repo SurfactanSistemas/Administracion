@@ -496,7 +496,7 @@ Public Class Pagos
     Private Sub generarNota(ByVal cuenta As DetalleCompraCuentaCorriente)
         Dim resto As Double
 
-        resto = (cuenta.montoDolar() * CustomConvert.toStringWithTwoDecimalPlaces(txtParidad.Text)) - CustomConvert.toStringWithTwoDecimalPlaces(cuenta.saldo)
+        resto = (cuenta.montoDolar() * Val(_NormalizarNumero(txtParidad.Text, 4))) - CustomConvert.toStringWithTwoDecimalPlaces(cuenta.saldo)
 
 
 
@@ -533,7 +533,7 @@ Public Class Pagos
         mostrarPagos(orden.pagos)
         mostrarFormaPagos(orden.formaPagos)
 
-        txtParidad.Text = _NormalizarNumero(orden.paridad)
+        txtParidad.Text = _NormalizarNumero(orden.paridad, 4)
         WCertificadoIb = orden.certIb
         WCertificadoIbCiudad = orden.certIbCABA
         WCertificadoIVA = orden.certIVA
@@ -1755,7 +1755,7 @@ Public Class Pagos
                         .Read()
 
                         If Not IsDBNull(.Item("CambioDivisa")) Then
-                            _Paridad = _NormalizarNumero(.Item("CambioDivisa").ToString())
+                            _Paridad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
                         End If
 
                     Else
@@ -1778,9 +1778,9 @@ Public Class Pagos
         Return _Paridad
     End Function
 
-    Private Function _NormalizarNumero(ByVal numero As String, ByVal decimales As Integer)
-        Return CustomConvert.asStringWithDecimalPlaces(numero, decimales)
-    End Function
+    'Private Function _NormalizarNumero(ByVal numero As String, ByVal decimales As Integer)
+    '    Return CustomConvert.asStringWithDecimalPlaces(numero, decimales)
+    'End Function
 
     Private Function _TraerNumeroCertificado(ByVal Codigo) As Integer
         Dim WNumero As Integer = 0
@@ -4453,10 +4453,12 @@ Public Class Pagos
     End Sub
 
     Private Sub txtParidad_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtParidad.Leave, txtGanancias.Leave, txtIBCiudad.Leave, txtIngresosBrutos.Leave, txtIVA.Leave, txtTotal.Leave, lblDiferencia.Leave, lblFormaPagos.Leave, lblPagos.Leave
-        Dim _controles As New List(Of Control) From {txtParidad, txtGanancias, txtIBCiudad, txtIngresosBrutos, txtIVA, txtTotal, lblDiferencia, lblFormaPagos, lblPagos}
+        Dim _controles As New List(Of Control) From {txtGanancias, txtIBCiudad, txtIngresosBrutos, txtIVA, txtTotal, lblDiferencia, lblFormaPagos, lblPagos}
         For Each _c As Control In _controles
             _c.Text = _NormalizarNumero(_c.Text)
         Next
+
+        txtParidad.Text = _NormalizarNumero(txtParidad.Text, 4)
     End Sub
 
     Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
@@ -7088,8 +7090,8 @@ Public Class Pagos
         Return ""
     End Function
 
-    Private Function _NormalizarNumero(ByVal numero As String)
-        Return Proceso.formatonumerico(Trim(numero))
+    Private Function _NormalizarNumero(ByVal numero As String, Optional ByVal decimales As Integer = 2)
+        Return Proceso.formatonumerico(Trim(numero), decimales)
     End Function
 
     Private Sub gridPagos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridPagos.CellMouseDoubleClick
