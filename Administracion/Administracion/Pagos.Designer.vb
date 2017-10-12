@@ -1199,7 +1199,6 @@ Partial Class Pagos
         Me.ImpoNeto.Name = "ImpoNeto"
         Me.ImpoNeto.ReadOnly = True
         Me.ImpoNeto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ImpoNeto.Visible = False
         '
         'CuentaContable
         '

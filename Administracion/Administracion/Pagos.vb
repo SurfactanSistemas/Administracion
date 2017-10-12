@@ -570,7 +570,7 @@ Public Class Pagos
     Private Function _CalcularImpoNeto(ByVal tipo, ByVal letra, ByVal punto, ByVal numero, ByVal importe)
         Dim WImpoNeto = 0.0
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM IvaComp WHERE Proveedor = '" & txtProveedor.Text & "' AND Tipo = '" & tipo & "' AND Letra = '" & letra & "' AND Punto = '" & punto & "' AND Numero = '" & numero & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Iva21, Iva5, Iva27, Iva105, Ib, Exento, Neto  FROM IvaComp WHERE Proveedor = '" & txtProveedor.Text & "' AND Tipo = '" & tipo & "' AND Letra = '" & letra & "' AND Punto = '" & punto & "' AND Numero = '" & numero & "'")
         Dim dr As SqlDataReader
         Dim WIva21, WIva5, WIva27, WIva105, WIb, WExento, WNeto, WTotal, WPorce
 
@@ -611,12 +611,13 @@ Public Class Pagos
                     WTotal = WIva21 + WIva5 + WIva27 + WIva105 + WIb + WExento + WNeto
 
                     If importe = WTotal Then
-                        WImpoNeto = importe
+                        WImpoNeto = WNeto 'importe
                     Else
                         WPorce = importe / WTotal
 
                         WImpoNeto = WNeto * WPorce
                     End If
+
 
                 End With
 
@@ -2370,7 +2371,8 @@ Public Class Pagos
             XEstado = "1"
             XVencimiento = "  /  /    "
             XVencimiento1 = "  /  /    "
-            XTotal = Proceso.formatonumerico(Val(lblFormaPagos.Text) * -1)
+            XTotal = Val(Proceso.formatonumerico((lblFormaPagos.Text)))
+            XTotal = Val(XTotal * -1)
             XSaldo = 0
             XOrdFecha = Proceso.ordenaFecha(XFecha)
             XOrdVencimiento = "00000000"
@@ -2457,7 +2459,8 @@ Public Class Pagos
             XEstado = "1"
             XVencimiento = "  /  /    "
             XVencimiento1 = "  /  /    "
-            XTotal = Proceso.formatonumerico(Val(lblFormaPagos.Text) * -1)
+            XTotal = Val(Proceso.formatonumerico(lblFormaPagos.Text))
+            XTotal = Val(XTotal * -1)
             XSaldo = XTotal
             XOrdFecha = Proceso.ordenaFecha(XFecha)
             XOrdVencimiento = "00000000"
@@ -4599,9 +4602,9 @@ Public Class Pagos
                 WImpresion(XCantidad, 4) = .Cells(5).Value
                 WImpresion(XCantidad, 5) = .Cells(4).Value
                 If Val(WImpresion(XCantidad, 2)) = 3 Or Val(WImpresion(XCantidad, 2)) = 5 Then
-                    XTotal -= Val(WImpresion(XCantidad, 5))
+                    XTotal -= Val(Proceso.formatonumerico(WImpresion(XCantidad, 5)))
                 Else
-                    XTotal += Val(WImpresion(XCantidad, 5))
+                    XTotal += Val(Proceso.formatonumerico(WImpresion(XCantidad, 5)))
                 End If
 
                 WTipo = .Cells(0).Value
@@ -4646,14 +4649,14 @@ Public Class Pagos
 
         If optCtaCte.Checked Or optAnticipos.Checked Then
             WDebito(1, 1) = WCtaProveedor
-            WDebito(1, 2) = XTotal
+            WDebito(1, 2) = Proceso.formatonumerico(XTotal)
         Else
 
             For irow = 0 To gridPagos.Rows.Count - 1
                 With gridPagos.Rows(irow)
                     If Val(.Cells(4).Value) <> 0 Then
                         WDebito(irow + 1, 1) = WCuenta(irow, 1)
-                        WDebito(irow + 1, 2) = Val(.Cells(4).Value)
+                        WDebito(irow + 1, 2) = Val(Proceso.formatonumerico(.Cells(4).Value))
                     End If
                 End With
             Next
@@ -4700,7 +4703,7 @@ Public Class Pagos
 
                         Impre2 = Impre2 + 1
                     ElseIf Val(.Cells(0).Value) = 3 Then
-                        SumaTercero = SumaTercero + Val(.Cells(5).Value)
+                        SumaTercero = SumaTercero + Val(Proceso.formatonumerico(.Cells(5).Value))
                     End If
 
                     Lugar = Lugar + 1
@@ -4749,13 +4752,13 @@ Public Class Pagos
                 WNumero1 = WImpresion(WCiclo, 3)
                 WComprobante1 = WImpresion(WCiclo, 2)
                 WDescripcion1 = WImpresion(WCiclo, 4)
-                WImporte1 = Val(WImpresion(WCiclo, 5))
+                WImporte1 = Val(Proceso.formatonumerico(WImpresion(WCiclo, 5)))
             End If
 
             If Val(WImpre2(WCiclo, 3)) <> 0 Then
                 WNumero2 = WImpre2(WCiclo, 1)
                 WBanco2 = WImpre2(WCiclo, 2)
-                WImporte2 = Val(WImpre2(WCiclo, 3))
+                WImporte2 = Val(Proceso.formatonumerico(WImpre2(WCiclo, 3)))
                 WFecha2 = WImpre2(WCiclo, 4)
             End If
 
@@ -4774,19 +4777,19 @@ Public Class Pagos
                 .Item("Numero1") = WNumero1
                 .Item("Comprobante1") = WComprobante1
                 .Item("Descripcion1") = WDescripcion1
-                .Item("Importe1") = WImporte1
+                .Item("Importe1") = Val(Proceso.formatonumerico(WImporte1))
                 .Item("Numero2") = WNumero2
                 .Item("Banco2") = WBanco2
-                .Item("Importe2") = WImporte2
+                .Item("Importe2") = Val(Proceso.formatonumerico(WImporte2))
                 .Item("Fecha2") = WFecha2
-                .Item("Neto") = XTotal
-                .Item("Rete1") = Val(txtGanancias.Text)
-                .Item("Rete2") = Val(txtIngresosBrutos.Text) + Val(txtIBCiudad.Text)
+                .Item("Neto") = Val(Proceso.formatonumerico(XTotal))
+                .Item("Rete1") = Val(Proceso.formatonumerico(txtGanancias.Text))
+                .Item("Rete2") = Val(Proceso.formatonumerico(txtIngresosBrutos.Text)) + Val(Proceso.formatonumerico(txtIBCiudad.Text))
                 .Item("Total") = Val(txtIVA.Text)
                 .Item("Observaciones") = txtObservaciones.Text
                 .Item("Empresa") = "Surfactan S.A."
                 .Item("Cuit") = XEmpCuit
-                .Item("Paridad") = Val(XParidadTotal)
+                .Item("Paridad") = Val(Proceso.formatonumerico(XParidadTotal))
 
             End With
 
@@ -4806,19 +4809,19 @@ Public Class Pagos
                 .Item("Numero1") = WNumero1
                 .Item("Comprobante1") = WComprobante1
                 .Item("Descripcion1") = WDescripcion1
-                .Item("Importe1") = WImporte1
+                .Item("Importe1") = Val(Proceso.formatonumerico(WImporte1))
                 .Item("Numero2") = WNumero2
                 .Item("Banco2") = WBanco2
-                .Item("Importe2") = WImporte2
+                .Item("Importe2") = Val(Proceso.formatonumerico(WImporte2))
                 .Item("Fecha2") = WFecha2
-                .Item("Neto") = XTotal
-                .Item("Rete1") = Val(txtGanancias.Text)
-                .Item("Rete2") = Val(txtIngresosBrutos.Text) + Val(txtIBCiudad.Text)
-                .Item("Total") = Val(txtIVA.Text)
+                .Item("Neto") = Val(Proceso.formatonumerico(XTotal))
+                .Item("Rete1") = Val(Proceso.formatonumerico(txtGanancias.Text))
+                .Item("Rete2") = Val(Proceso.formatonumerico(txtIngresosBrutos.Text)) + Val(Proceso.formatonumerico(txtIBCiudad.Text))
+                .Item("Total") = Val(Proceso.formatonumerico(txtIVA.Text))
                 .Item("Observaciones") = txtObservaciones.Text
                 .Item("Empresa") = "Surfactan S.A."
                 .Item("Cuit") = XEmpCuit
-                .Item("Paridad") = Val(XParidadTotal)
+                .Item("Paridad") = Val(Proceso.formatonumerico(XParidadTotal))
             End With
 
             Tabla.Rows.Add(row)
@@ -5658,8 +5661,8 @@ Public Class Pagos
 
                     End Try
 
-                    'WImpre4 = Val(.Cells(4).Value)
-                    WImpre4 = ZZSuma
+                    WImpre4 = Val(.Cells(4).Value)
+                    'WImpre4 = ZZSuma
 
                     If WTipoiva = 2 Then
                         If Val(ZZSuma) <> 0 Then
