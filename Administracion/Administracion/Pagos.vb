@@ -3419,8 +3419,8 @@ Public Class Pagos
         Next
         txtTotal.Text = _NormalizarNumero(total)
         lblPagos.Text = _NormalizarNumero(pagos)
-        lblFormaPagos.Text = (formaPagos + total)
-        lblDiferencia.Text = (pagos - formaPagos - total)
+        lblFormaPagos.Text = _NormalizarNumero(formaPagos + total)
+        lblDiferencia.Text = _NormalizarNumero(pagos - formaPagos - total)
     End Sub
 
     Private Sub gridPagos_RowsAdded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles gridPagos.RowsAdded
@@ -3677,6 +3677,8 @@ Public Class Pagos
                                 Catch ex As Exception
                                     gridFormaPagos.CurrentCell = gridFormaPagos.Rows(_ProximaFilaVaciaFormaPagos).Cells(0) 'gridFormaPagos.Rows(gridFormaPagos.Rows.Add).Cells(0)
                                 End Try
+
+                                sumarImportes()
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
@@ -4001,7 +4003,8 @@ Public Class Pagos
 
         ' Chequeamos que el cheque no se haya cargado.
 
-        If _ChequeYaCargado(WClave) Then
+        'If _ChequeYaCargado(WClave) Then
+        If _ChequeYaCargado(ClaveCheque) Then
             _LecturaCorrecta = False
 
             MsgBox("Cheque ya Cargado con anterioridad.", MsgBoxStyle.Exclamation)
@@ -4050,7 +4053,7 @@ Public Class Pagos
                 .Cells(1).Value = WNumero
                 .Cells(2).Value = WFecha
                 .Cells(4).Value = WBanco
-                .Cells(5).Value = WImporte
+                .Cells(5).Value = Proceso.formatonumerico(WImporte)
                 .Cells(6).Value = WClave
             End With
         End If
