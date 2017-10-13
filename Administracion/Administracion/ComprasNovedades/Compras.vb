@@ -1587,6 +1587,7 @@ Public Class Compras
             End If
 
             If IsNothing(cuenta) Then
+                MsgBox("No se encontró una cuenta asociada para poder calcular el Asiento correspondiente.", MsgBoxStyle.Information)
                 Exit Sub
             End If
 
