@@ -665,13 +665,15 @@ Public Class ProveedoresABM
 
     Private Sub _ContraerFormulario()
 
-        Me.Height = MAIN_HEIGHT
+        'Me.Height = MAIN_HEIGHT
+        GrupoConsultas.Visible = False
 
     End Sub
 
     Private Sub _ExpandirFormulario()
 
-        Me.Height = EXPANDED_HEIGHT
+        'Me.Height = EXPANDED_HEIGHT
+        GrupoConsultas.Visible = True
 
     End Sub
 
@@ -851,6 +853,7 @@ Public Class ProveedoresABM
                 txtFiltrar.Focus()
 
                 _ExpandirFormulario()
+                txtFiltrar.Focus()
 
             Else
 
@@ -898,6 +901,7 @@ Public Class ProveedoresABM
 
             If Trim(txtCodigo.Text) = "" Then
                 _AbrirConsulta("Proveedor")
+                txtFiltrar.Focus()
                 Exit Sub
             End If
 
@@ -1374,13 +1378,15 @@ Public Class ProveedoresABM
 
     Private Sub txtCodigo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigo.MouseDoubleClick
 
-            _AbrirConsulta("Proveedor")
+        _AbrirConsulta("Proveedor")
+        txtFiltrar.Focus()
 
     End Sub
 
     Private Sub txtCuenta_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCuenta.MouseDoubleClick
 
-            _AbrirConsulta("Cuenta")
+        _AbrirConsulta("Cuenta")
+        txtFiltrar.Focus()
 
     End Sub
 
@@ -1439,6 +1445,7 @@ Public Class ProveedoresABM
         LBConsulta_Opciones.SelectedIndex = 2
         LBConsulta_Opciones_SelectedIndexChanged(Nothing, Nothing)
         _ExpandirFormulario()
+        txtFiltrar.Focus()
     End Sub
 
     Private Sub txtClienteAsociado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtClienteAsociado.KeyDown
@@ -1479,5 +1486,9 @@ Public Class ProveedoresABM
         '    btnAgregar.PerformClick()
         'Next
 
+    End Sub
+
+    Private Sub btnCerrarConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsultas.Click
+        _ContraerFormulario()
     End Sub
 End Class

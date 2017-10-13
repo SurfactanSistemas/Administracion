@@ -36,6 +36,8 @@ Partial Class ProveedoresABM
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.GrupoConsultas = New System.Windows.Forms.Panel()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.CKBProveedorInactivo = New System.Windows.Forms.CheckBox()
         Me.txtClienteAsociadoDescripcion = New System.Windows.Forms.TextBox()
         Me.txtClienteAsociado = New System.Windows.Forms.TextBox()
@@ -121,9 +123,12 @@ Partial Class ProveedoresABM
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.txtCAI = New Administracion.CustomTextBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCerrarConsultas = New Administracion.CustomButton()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.GrupoConsultas.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
@@ -222,33 +227,33 @@ Partial Class ProveedoresABM
         '
         Me.LBConsulta_Opciones.FormattingEnabled = True
         Me.LBConsulta_Opciones.Items.AddRange(New Object() {"Proveedores", "Cuentas Contables", "Clientes", "Proveedores por Rubro"})
-        Me.LBConsulta_Opciones.Location = New System.Drawing.Point(24, 560)
+        Me.LBConsulta_Opciones.Location = New System.Drawing.Point(22, 44)
         Me.LBConsulta_Opciones.Name = "LBConsulta_Opciones"
-        Me.LBConsulta_Opciones.Size = New System.Drawing.Size(538, 121)
+        Me.LBConsulta_Opciones.Size = New System.Drawing.Size(454, 121)
         Me.LBConsulta_Opciones.TabIndex = 80
         '
         'txtFiltrar
         '
-        Me.txtFiltrar.Location = New System.Drawing.Point(24, 536)
+        Me.txtFiltrar.Location = New System.Drawing.Point(22, 20)
         Me.txtFiltrar.Name = "txtFiltrar"
-        Me.txtFiltrar.Size = New System.Drawing.Size(538, 20)
+        Me.txtFiltrar.Size = New System.Drawing.Size(454, 20)
         Me.txtFiltrar.TabIndex = 79
         '
         'LBConsulta_Filtrada
         '
         Me.LBConsulta_Filtrada.FormattingEnabled = True
-        Me.LBConsulta_Filtrada.Location = New System.Drawing.Point(24, 560)
+        Me.LBConsulta_Filtrada.Location = New System.Drawing.Point(22, 44)
         Me.LBConsulta_Filtrada.Name = "LBConsulta_Filtrada"
-        Me.LBConsulta_Filtrada.Size = New System.Drawing.Size(538, 121)
+        Me.LBConsulta_Filtrada.Size = New System.Drawing.Size(454, 121)
         Me.LBConsulta_Filtrada.TabIndex = 78
         Me.LBConsulta_Filtrada.Visible = False
         '
         'LBConsulta
         '
         Me.LBConsulta.FormattingEnabled = True
-        Me.LBConsulta.Location = New System.Drawing.Point(24, 560)
+        Me.LBConsulta.Location = New System.Drawing.Point(22, 44)
         Me.LBConsulta.Name = "LBConsulta"
-        Me.LBConsulta.Size = New System.Drawing.Size(538, 121)
+        Me.LBConsulta.Size = New System.Drawing.Size(454, 121)
         Me.LBConsulta.TabIndex = 77
         '
         'Panel1
@@ -286,6 +291,7 @@ Partial Class ProveedoresABM
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.GrupoConsultas)
         Me.Panel2.Controls.Add(Me.CKBProveedorInactivo)
         Me.Panel2.Controls.Add(Me.txtClienteAsociadoDescripcion)
         Me.Panel2.Controls.Add(Me.txtClienteAsociado)
@@ -353,6 +359,31 @@ Partial Class ProveedoresABM
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(763, 387)
         Me.Panel2.TabIndex = 84
+        '
+        'GrupoConsultas
+        '
+        Me.GrupoConsultas.Controls.Add(Me.GroupBox4)
+        Me.GrupoConsultas.Location = New System.Drawing.Point(110, 88)
+        Me.GrupoConsultas.Name = "GrupoConsultas"
+        Me.GrupoConsultas.Size = New System.Drawing.Size(543, 243)
+        Me.GrupoConsultas.TabIndex = 98
+        Me.GrupoConsultas.Visible = False
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.LBConsulta_Opciones)
+        Me.GroupBox4.Controls.Add(Me.txtFiltrar)
+        Me.GroupBox4.Controls.Add(Me.LBConsulta_Filtrada)
+        Me.GroupBox4.Controls.Add(Me.LBConsulta)
+        Me.GroupBox4.Controls.Add(Me.btnCerrarConsultas)
+        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.GroupBox4.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox4.Location = New System.Drawing.Point(22, 12)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(499, 212)
+        Me.GroupBox4.TabIndex = 81
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Consultas"
         '
         'CKBProveedorInactivo
         '
@@ -1518,7 +1549,7 @@ Partial Class ProveedoresABM
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(578, 658)
+        Me.Button1.Location = New System.Drawing.Point(485, 500)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 97
@@ -1526,17 +1557,30 @@ Partial Class ProveedoresABM
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
+        'btnCerrarConsultas
+        '
+        Me.btnCerrarConsultas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnCerrarConsultas.Cleanable = False
+        Me.btnCerrarConsultas.EnterIndex = -1
+        Me.btnCerrarConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrarConsultas.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.btnCerrarConsultas.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsultas.LabelAssociationKey = -1
+        Me.btnCerrarConsultas.Location = New System.Drawing.Point(191, 171)
+        Me.btnCerrarConsultas.Name = "btnCerrarConsultas"
+        Me.btnCerrarConsultas.Size = New System.Drawing.Size(116, 31)
+        Me.btnCerrarConsultas.TabIndex = 94
+        Me.btnCerrarConsultas.Text = "Cerrar"
+        Me.ToolTip1.SetToolTip(Me.btnCerrarConsultas, "Cerrar Ventana de Consultas")
+        Me.btnCerrarConsultas.UseVisualStyleBackColor = False
+        '
         'ProveedoresABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(761, 689)
+        Me.ClientSize = New System.Drawing.Size(761, 528)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.LBConsulta_Opciones)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.txtFiltrar)
-        Me.Controls.Add(Me.LBConsulta_Filtrada)
-        Me.Controls.Add(Me.LBConsulta)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnListado)
         Me.Controls.Add(Me.btnLimpiar)
@@ -1556,6 +1600,9 @@ Partial Class ProveedoresABM
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GrupoConsultas.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -1662,4 +1709,7 @@ Partial Class ProveedoresABM
     Friend WithEvents txtClienteAsociadoDescripcion As System.Windows.Forms.TextBox
     Friend WithEvents CKBProveedorInactivo As System.Windows.Forms.CheckBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents GrupoConsultas As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnCerrarConsultas As Administracion.CustomButton
 End Class
