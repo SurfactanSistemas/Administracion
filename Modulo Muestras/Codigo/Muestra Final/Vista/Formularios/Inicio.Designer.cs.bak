@@ -1,0 +1,763 @@
+﻿using System;
+
+
+namespace Vista
+
+{
+    partial class Muestra
+    {
+        /// <summary>
+        /// Variable del diseñador requerida.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Limpiar los recursos que se estén utilizando.
+        /// </summary>
+        /// <param name="disposing">true si los recursos administrados se deben eliminar; false en caso contrario, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Código generado por el Diseñador de Windows Forms
+
+        /// <summary>
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido del método con el editor de código.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.P_Buscar = new System.Windows.Forms.Panel();
+            this.P_Filtrado = new System.Windows.Forms.Panel();
+            this.LBFiltro = new System.Windows.Forms.Label();
+            this.BT_Filtrar = new System.Windows.Forms.Button();
+            this.TBFiltro = new System.Windows.Forms.TextBox();
+            this.LBError = new System.Windows.Forms.Label();
+            this.BT_MenuFiltros = new System.Windows.Forms.Button();
+            this.BT_Buscar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TB_Hasta = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TB_Desde = new System.Windows.Forms.TextBox();
+            this.P_Botones = new System.Windows.Forms.Panel();
+            this.DGV_Muestra = new System.Windows.Forms.DataGridView();
+            this.BtFin = new System.Windows.Forms.Button();
+            this.BtImpresion = new System.Windows.Forms.Button();
+            this.BtRemito = new System.Windows.Forms.Button();
+            this.BtEtiquetas = new System.Windows.Forms.Button();
+            this.BtExportar = new System.Windows.Forms.Button();
+            this.BtActLaborat = new System.Windows.Forms.Button();
+            this.CMS_Filtros = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pedidoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codigoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.descripcionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cantidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nombreParaElClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.óbservacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.remitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hojaDeRutaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip_BTBajaMuestra = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip_ActLab = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip_Export = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip_Etiquetas = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip_Remito = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip_Impresion = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip_Fin = new System.Windows.Forms.ToolTip(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.muestraBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescriCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.remitoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HojaRuta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodigoConf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lote2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observaciones2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActualizaStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ordenTrabajoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrdenFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.P_Buscar.SuspendLayout();
+            this.P_Filtrado.SuspendLayout();
+            this.P_Botones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Muestra)).BeginInit();
+            this.CMS_Filtros.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.muestraBindingSource)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // P_Buscar
+            // 
+            this.P_Buscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
+            this.P_Buscar.Controls.Add(this.P_Filtrado);
+            this.P_Buscar.Controls.Add(this.LBError);
+            this.P_Buscar.Controls.Add(this.BT_MenuFiltros);
+            this.P_Buscar.Controls.Add(this.BT_Buscar);
+            this.P_Buscar.Controls.Add(this.label2);
+            this.P_Buscar.Controls.Add(this.TB_Hasta);
+            this.P_Buscar.Controls.Add(this.label1);
+            this.P_Buscar.Controls.Add(this.TB_Desde);
+            this.P_Buscar.Location = new System.Drawing.Point(0, 36);
+            this.P_Buscar.Name = "P_Buscar";
+            this.P_Buscar.Size = new System.Drawing.Size(854, 55);
+            this.P_Buscar.TabIndex = 0;
+            // 
+            // P_Filtrado
+            // 
+            this.P_Filtrado.Controls.Add(this.LBFiltro);
+            this.P_Filtrado.Controls.Add(this.BT_Filtrar);
+            this.P_Filtrado.Controls.Add(this.TBFiltro);
+            this.P_Filtrado.Location = new System.Drawing.Point(586, 0);
+            this.P_Filtrado.Name = "P_Filtrado";
+            this.P_Filtrado.Size = new System.Drawing.Size(265, 53);
+            this.P_Filtrado.TabIndex = 7;
+            this.P_Filtrado.Visible = false;
+            // 
+            // LBFiltro
+            // 
+            this.LBFiltro.AutoSize = true;
+            this.LBFiltro.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBFiltro.ForeColor = System.Drawing.Color.White;
+            this.LBFiltro.Location = new System.Drawing.Point(3, 18);
+            this.LBFiltro.Name = "LBFiltro";
+            this.LBFiltro.Size = new System.Drawing.Size(46, 18);
+            this.LBFiltro.TabIndex = 7;
+            this.LBFiltro.Text = "label5";
+            this.LBFiltro.Click += new System.EventHandler(this.LBFiltro_Click);
+            // 
+            // BT_Filtrar
+            // 
+            this.BT_Filtrar.Location = new System.Drawing.Point(179, 13);
+            this.BT_Filtrar.Name = "BT_Filtrar";
+            this.BT_Filtrar.Size = new System.Drawing.Size(75, 23);
+            this.BT_Filtrar.TabIndex = 6;
+            this.BT_Filtrar.Text = "Filtrar";
+            this.BT_Filtrar.UseVisualStyleBackColor = true;
+            this.BT_Filtrar.Click += new System.EventHandler(this.BT_Filtrar_Click);
+            // 
+            // TBFiltro
+            // 
+            this.TBFiltro.Location = new System.Drawing.Point(59, 15);
+            this.TBFiltro.Name = "TBFiltro";
+            this.TBFiltro.Size = new System.Drawing.Size(114, 20);
+            this.TBFiltro.TabIndex = 5;
+            this.TBFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
+            // 
+            // LBError
+            // 
+            this.LBError.AutoSize = true;
+            this.LBError.Location = new System.Drawing.Point(73, 56);
+            this.LBError.Name = "LBError";
+            this.LBError.Size = new System.Drawing.Size(0, 13);
+            this.LBError.TabIndex = 9;
+            // 
+            // BT_MenuFiltros
+            // 
+            this.BT_MenuFiltros.Location = new System.Drawing.Point(505, 13);
+            this.BT_MenuFiltros.Name = "BT_MenuFiltros";
+            this.BT_MenuFiltros.Size = new System.Drawing.Size(75, 23);
+            this.BT_MenuFiltros.TabIndex = 8;
+            this.BT_MenuFiltros.Text = "Filtra Por";
+            this.BT_MenuFiltros.UseVisualStyleBackColor = true;
+            this.BT_MenuFiltros.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // BT_Buscar
+            // 
+            this.BT_Buscar.Location = new System.Drawing.Point(276, 13);
+            this.BT_Buscar.Name = "BT_Buscar";
+            this.BT_Buscar.Size = new System.Drawing.Size(92, 25);
+            this.BT_Buscar.TabIndex = 4;
+            this.BT_Buscar.Text = "Buscar";
+            this.BT_Buscar.UseVisualStyleBackColor = true;
+            this.BT_Buscar.Click += new System.EventHandler(this.BT_Buscar_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label2.Location = new System.Drawing.Point(145, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 18);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Hasta";
+            // 
+            // TB_Hasta
+            // 
+            this.TB_Hasta.Location = new System.Drawing.Point(189, 16);
+            this.TB_Hasta.Name = "TB_Hasta";
+            this.TB_Hasta.Size = new System.Drawing.Size(67, 20);
+            this.TB_Hasta.TabIndex = 2;
+            this.TB_Hasta.Text = "2017";
+            this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(13, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 18);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Desde";
+            // 
+            // TB_Desde
+            // 
+            this.TB_Desde.Location = new System.Drawing.Point(62, 16);
+            this.TB_Desde.Name = "TB_Desde";
+            this.TB_Desde.Size = new System.Drawing.Size(67, 20);
+            this.TB_Desde.TabIndex = 0;
+            this.TB_Desde.Text = "2017";
+            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
+            // 
+            // P_Botones
+            // 
+            this.P_Botones.AutoSize = true;
+            this.P_Botones.Controls.Add(this.DGV_Muestra);
+            this.P_Botones.Controls.Add(this.BtFin);
+            this.P_Botones.Controls.Add(this.BtImpresion);
+            this.P_Botones.Controls.Add(this.BtRemito);
+            this.P_Botones.Controls.Add(this.BtEtiquetas);
+            this.P_Botones.Controls.Add(this.BtExportar);
+            this.P_Botones.Controls.Add(this.BtActLaborat);
+            this.P_Botones.Location = new System.Drawing.Point(0, 90);
+            this.P_Botones.Name = "P_Botones";
+            this.P_Botones.Size = new System.Drawing.Size(857, 493);
+            this.P_Botones.TabIndex = 1;
+            // 
+            // DGV_Muestra
+            // 
+            this.DGV_Muestra.AllowUserToAddRows = false;
+            this.DGV_Muestra.AllowUserToDeleteRows = false;
+            this.DGV_Muestra.AllowUserToResizeRows = false;
+            this.DGV_Muestra.AutoGenerateColumns = false;
+            this.DGV_Muestra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Muestra.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Pedido,
+            this.Fecha,
+            this.Codigo,
+            this.Nombre,
+            this.Cantidad,
+            this.DescriCliente,
+            this.Razon,
+            this.Observaciones,
+            this.Fecha2,
+            this.remitoDataGridViewTextBoxColumn,
+            this.HojaRuta,
+            this.CodigoConf,
+            this.Nombre2,
+            this.Lote2,
+            this.Observaciones2,
+            this.Cantidad2,
+            this.ActualizaStock,
+            this.ordenTrabajoDataGridViewTextBoxColumn,
+            this.OrdenFecha});
+            this.DGV_Muestra.DataSource = this.muestraBindingSource;
+            this.DGV_Muestra.Location = new System.Drawing.Point(65, 3);
+            this.DGV_Muestra.Name = "DGV_Muestra";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Muestra.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Muestra.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.DGV_Muestra.Size = new System.Drawing.Size(789, 464);
+            this.DGV_Muestra.TabIndex = 8;
+            this.DGV_Muestra.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Muestra_CellContentClick);
+            this.DGV_Muestra.Sorted += new System.EventHandler(this.DGV_Muestra_Sorted);
+            this.DGV_Muestra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DGV_Muestra_KeyDown);
+            // 
+            // BtFin
+            // 
+            this.BtFin.BackgroundImage = global::Vista.Properties.Resources.Salir1;
+            this.BtFin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtFin.FlatAppearance.BorderSize = 0;
+            this.BtFin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtFin.Location = new System.Drawing.Point(5, 390);
+            this.BtFin.Margin = new System.Windows.Forms.Padding(0);
+            this.BtFin.Name = "BtFin";
+            this.BtFin.Size = new System.Drawing.Size(46, 50);
+            this.BtFin.TabIndex = 7;
+            this.toolTip_Fin.SetToolTip(this.BtFin, "  Fin\r\n(F10)");
+            this.BtFin.UseVisualStyleBackColor = true;
+            this.BtFin.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // BtImpresion
+            // 
+            this.BtImpresion.BackgroundImage = global::Vista.Properties.Resources.Impresion_N1;
+            this.BtImpresion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtImpresion.FlatAppearance.BorderSize = 0;
+            this.BtImpresion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtImpresion.Location = new System.Drawing.Point(5, 320);
+            this.BtImpresion.Margin = new System.Windows.Forms.Padding(0);
+            this.BtImpresion.Name = "BtImpresion";
+            this.BtImpresion.Size = new System.Drawing.Size(48, 52);
+            this.BtImpresion.TabIndex = 6;
+            this.toolTip_Impresion.SetToolTip(this.BtImpresion, "Impresion\r\n    (F9)");
+            this.BtImpresion.UseVisualStyleBackColor = true;
+            this.BtImpresion.Click += new System.EventHandler(this.BtImpresion_Click);
+            // 
+            // BtRemito
+            // 
+            this.BtRemito.BackgroundImage = global::Vista.Properties.Resources.Remito1;
+            this.BtRemito.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtRemito.FlatAppearance.BorderSize = 0;
+            this.BtRemito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtRemito.Location = new System.Drawing.Point(5, 250);
+            this.BtRemito.Margin = new System.Windows.Forms.Padding(0);
+            this.BtRemito.Name = "BtRemito";
+            this.BtRemito.Size = new System.Drawing.Size(54, 53);
+            this.BtRemito.TabIndex = 5;
+            this.toolTip_Remito.SetToolTip(this.BtRemito, "Remito\r\n   (F8)");
+            this.BtRemito.UseVisualStyleBackColor = true;
+            this.BtRemito.Click += new System.EventHandler(this.BtRemito_Click);
+            // 
+            // BtEtiquetas
+            // 
+            this.BtEtiquetas.BackgroundImage = global::Vista.Properties.Resources.Etiquetas_N1;
+            this.BtEtiquetas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtEtiquetas.FlatAppearance.BorderSize = 0;
+            this.BtEtiquetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtEtiquetas.Location = new System.Drawing.Point(5, 180);
+            this.BtEtiquetas.Margin = new System.Windows.Forms.Padding(0);
+            this.BtEtiquetas.Name = "BtEtiquetas";
+            this.BtEtiquetas.Size = new System.Drawing.Size(55, 57);
+            this.BtEtiquetas.TabIndex = 4;
+            this.toolTip_Etiquetas.SetToolTip(this.BtEtiquetas, "Etiquetas\r\n    (F6)");
+            this.BtEtiquetas.UseVisualStyleBackColor = true;
+            this.BtEtiquetas.Click += new System.EventHandler(this.BtEtiquetas_Click);
+            // 
+            // BtExportar
+            // 
+            this.BtExportar.BackgroundImage = global::Vista.Properties.Resources.Export_N;
+            this.BtExportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtExportar.FlatAppearance.BorderSize = 0;
+            this.BtExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtExportar.Location = new System.Drawing.Point(5, 110);
+            this.BtExportar.Margin = new System.Windows.Forms.Padding(0);
+            this.BtExportar.Name = "BtExportar";
+            this.BtExportar.Size = new System.Drawing.Size(60, 60);
+            this.BtExportar.TabIndex = 3;
+            this.toolTip_Export.SetToolTip(this.BtExportar, "Exportacion\r\n      (F5)");
+            this.BtExportar.UseVisualStyleBackColor = true;
+            this.BtExportar.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // BtActLaborat
+            // 
+            this.BtActLaborat.BackgroundImage = global::Vista.Properties.Resources.Act_Lab_N1;
+            this.BtActLaborat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtActLaborat.FlatAppearance.BorderSize = 0;
+            this.BtActLaborat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtActLaborat.Location = new System.Drawing.Point(5, 40);
+            this.BtActLaborat.Margin = new System.Windows.Forms.Padding(0);
+            this.BtActLaborat.Name = "BtActLaborat";
+            this.BtActLaborat.Size = new System.Drawing.Size(52, 55);
+            this.BtActLaborat.TabIndex = 2;
+            this.toolTip_ActLab.SetToolTip(this.BtActLaborat, " Actualizar \r\nLaboratorio\r\n     (F4)");
+            this.BtActLaborat.UseVisualStyleBackColor = true;
+            this.BtActLaborat.Click += new System.EventHandler(this.BtActLaborat_Click);
+            // 
+            // CMS_Filtros
+            // 
+            this.CMS_Filtros.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pedidoToolStripMenuItem,
+            this.fechaToolStripMenuItem,
+            this.codigoToolStripMenuItem,
+            this.descripcionToolStripMenuItem,
+            this.cantidadToolStripMenuItem,
+            this.nombreParaElClienteToolStripMenuItem,
+            this.clienteToolStripMenuItem,
+            this.óbservacionesToolStripMenuItem,
+            this.remitoToolStripMenuItem,
+            this.hojaDeRutaToolStripMenuItem});
+            this.CMS_Filtros.Name = "contextMenuStrip1";
+            this.CMS_Filtros.Size = new System.Drawing.Size(195, 224);
+            // 
+            // pedidoToolStripMenuItem
+            // 
+            this.pedidoToolStripMenuItem.Name = "pedidoToolStripMenuItem";
+            this.pedidoToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.pedidoToolStripMenuItem.Text = "Pedido";
+            this.pedidoToolStripMenuItem.Click += new System.EventHandler(this.pedidoToolStripMenuItem_Click);
+            // 
+            // fechaToolStripMenuItem
+            // 
+            this.fechaToolStripMenuItem.Name = "fechaToolStripMenuItem";
+            this.fechaToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.fechaToolStripMenuItem.Text = "Fecha";
+            this.fechaToolStripMenuItem.Click += new System.EventHandler(this.fechaToolStripMenuItem_Click);
+            // 
+            // codigoToolStripMenuItem
+            // 
+            this.codigoToolStripMenuItem.Name = "codigoToolStripMenuItem";
+            this.codigoToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.codigoToolStripMenuItem.Text = "Codigo";
+            this.codigoToolStripMenuItem.Click += new System.EventHandler(this.codigoToolStripMenuItem_Click);
+            // 
+            // descripcionToolStripMenuItem
+            // 
+            this.descripcionToolStripMenuItem.Name = "descripcionToolStripMenuItem";
+            this.descripcionToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.descripcionToolStripMenuItem.Text = "Descripcion";
+            this.descripcionToolStripMenuItem.Click += new System.EventHandler(this.descripcionToolStripMenuItem_Click);
+            // 
+            // cantidadToolStripMenuItem
+            // 
+            this.cantidadToolStripMenuItem.Name = "cantidadToolStripMenuItem";
+            this.cantidadToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.cantidadToolStripMenuItem.Text = "Cantidad";
+            this.cantidadToolStripMenuItem.Click += new System.EventHandler(this.cantidadToolStripMenuItem_Click);
+            // 
+            // nombreParaElClienteToolStripMenuItem
+            // 
+            this.nombreParaElClienteToolStripMenuItem.Name = "nombreParaElClienteToolStripMenuItem";
+            this.nombreParaElClienteToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.nombreParaElClienteToolStripMenuItem.Text = "Nombre para el cliente";
+            this.nombreParaElClienteToolStripMenuItem.Click += new System.EventHandler(this.nombreParaElClienteToolStripMenuItem_Click);
+            // 
+            // clienteToolStripMenuItem
+            // 
+            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.clienteToolStripMenuItem.Text = "Cliente";
+            this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
+            // 
+            // óbservacionesToolStripMenuItem
+            // 
+            this.óbservacionesToolStripMenuItem.Name = "óbservacionesToolStripMenuItem";
+            this.óbservacionesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.óbservacionesToolStripMenuItem.Text = "Observaciones";
+            this.óbservacionesToolStripMenuItem.Click += new System.EventHandler(this.óbservacionesToolStripMenuItem_Click);
+            // 
+            // remitoToolStripMenuItem
+            // 
+            this.remitoToolStripMenuItem.Name = "remitoToolStripMenuItem";
+            this.remitoToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.remitoToolStripMenuItem.Text = "Remito";
+            this.remitoToolStripMenuItem.Click += new System.EventHandler(this.remitoToolStripMenuItem_Click);
+            // 
+            // hojaDeRutaToolStripMenuItem
+            // 
+            this.hojaDeRutaToolStripMenuItem.Name = "hojaDeRutaToolStripMenuItem";
+            this.hojaDeRutaToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.hojaDeRutaToolStripMenuItem.Text = "Hoja de Ruta";
+            this.hojaDeRutaToolStripMenuItem.Click += new System.EventHandler(this.hojaDeRutaToolStripMenuItem_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(74)))), ((int)(((byte)(95)))));
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(854, 39);
+            this.panel1.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(12, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(251, 19);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "INGRESO DE MUESTRAS A CLIENTES";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(692, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(156, 26);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "SURFACTAN S.A.";
+            // 
+            // muestraBindingSource
+            // 
+            this.muestraBindingSource.DataSource = typeof(Negocio.Muestra);
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Id.Visible = false;
+            // 
+            // Pedido
+            // 
+            this.Pedido.DataPropertyName = "Pedido";
+            this.Pedido.HeaderText = "Pedido";
+            this.Pedido.Name = "Pedido";
+            this.Pedido.ReadOnly = true;
+            this.Pedido.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Pedido.Width = 50;
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "Fecha";
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            this.Fecha.Width = 70;
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "Codigo";
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Codigo.Width = 85;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.HeaderText = "Descripcion";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Nombre.Width = 90;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.DataPropertyName = "Cantidad";
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            this.Cantidad.Width = 50;
+            // 
+            // DescriCliente
+            // 
+            this.DescriCliente.DataPropertyName = "DescriCliente";
+            this.DescriCliente.HeaderText = "Nombre para Cliente";
+            this.DescriCliente.Name = "DescriCliente";
+            this.DescriCliente.ReadOnly = true;
+            this.DescriCliente.Width = 90;
+            // 
+            // Razon
+            // 
+            this.Razon.DataPropertyName = "Razon";
+            this.Razon.HeaderText = "Cliente";
+            this.Razon.Name = "Razon";
+            this.Razon.ReadOnly = true;
+            this.Razon.Width = 85;
+            // 
+            // Observaciones
+            // 
+            this.Observaciones.DataPropertyName = "Observaciones";
+            this.Observaciones.HeaderText = "Observaciones";
+            this.Observaciones.Name = "Observaciones";
+            this.Observaciones.ReadOnly = true;
+            this.Observaciones.Width = 85;
+            // 
+            // Fecha2
+            // 
+            this.Fecha2.DataPropertyName = "Fecha2";
+            this.Fecha2.HeaderText = "Fecha OK";
+            this.Fecha2.Name = "Fecha2";
+            this.Fecha2.ReadOnly = true;
+            this.Fecha2.Width = 30;
+            // 
+            // remitoDataGridViewTextBoxColumn
+            // 
+            this.remitoDataGridViewTextBoxColumn.DataPropertyName = "Remito";
+            this.remitoDataGridViewTextBoxColumn.HeaderText = "Remito";
+            this.remitoDataGridViewTextBoxColumn.Name = "remitoDataGridViewTextBoxColumn";
+            this.remitoDataGridViewTextBoxColumn.ReadOnly = true;
+            this.remitoDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // HojaRuta
+            // 
+            this.HojaRuta.DataPropertyName = "HojaRuta";
+            this.HojaRuta.HeaderText = "H. Ruta";
+            this.HojaRuta.Name = "HojaRuta";
+            this.HojaRuta.ReadOnly = true;
+            this.HojaRuta.Width = 42;
+            // 
+            // CodigoConf
+            // 
+            this.CodigoConf.DataPropertyName = "CodigoConf";
+            this.CodigoConf.HeaderText = "Cod. Conf";
+            this.CodigoConf.Name = "CodigoConf";
+            this.CodigoConf.ReadOnly = true;
+            this.CodigoConf.Width = 60;
+            // 
+            // Nombre2
+            // 
+            this.Nombre2.DataPropertyName = "Nombre2";
+            this.Nombre2.HeaderText = "Descripcion2";
+            this.Nombre2.Name = "Nombre2";
+            this.Nombre2.ReadOnly = true;
+            this.Nombre2.Width = 80;
+            // 
+            // Lote2
+            // 
+            this.Lote2.DataPropertyName = "Lote2";
+            this.Lote2.HeaderText = "Lote";
+            this.Lote2.Name = "Lote2";
+            this.Lote2.ReadOnly = true;
+            this.Lote2.Width = 41;
+            // 
+            // Observaciones2
+            // 
+            this.Observaciones2.DataPropertyName = "Observaciones2";
+            this.Observaciones2.HeaderText = "Observaciones2";
+            this.Observaciones2.Name = "Observaciones2";
+            this.Observaciones2.ReadOnly = true;
+            this.Observaciones2.Width = 80;
+            // 
+            // Cantidad2
+            // 
+            this.Cantidad2.DataPropertyName = "Cantidad2";
+            this.Cantidad2.HeaderText = "Cantidad";
+            this.Cantidad2.Name = "Cantidad2";
+            this.Cantidad2.ReadOnly = true;
+            this.Cantidad2.Width = 50;
+            // 
+            // ActualizaStock
+            // 
+            this.ActualizaStock.DataPropertyName = "ActualizarStock";
+            this.ActualizaStock.HeaderText = "Actualizar Stock";
+            this.ActualizaStock.Name = "ActualizaStock";
+            this.ActualizaStock.ReadOnly = true;
+            this.ActualizaStock.Width = 65;
+            // 
+            // ordenTrabajoDataGridViewTextBoxColumn
+            // 
+            this.ordenTrabajoDataGridViewTextBoxColumn.DataPropertyName = "OrdenTrabajo";
+            this.ordenTrabajoDataGridViewTextBoxColumn.HeaderText = "OrdenTrabajo";
+            this.ordenTrabajoDataGridViewTextBoxColumn.Name = "ordenTrabajoDataGridViewTextBoxColumn";
+            this.ordenTrabajoDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ordenTrabajoDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // OrdenFecha
+            // 
+            this.OrdenFecha.DataPropertyName = "OrdenFecha";
+            this.OrdenFecha.HeaderText = "OrdenFecha";
+            this.OrdenFecha.Name = "OrdenFecha";
+            // 
+            // Muestra
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(852, 558);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.P_Botones);
+            this.Controls.Add(this.P_Buscar);
+            this.Name = "Muestra";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.P_Buscar.ResumeLayout(false);
+            this.P_Buscar.PerformLayout();
+            this.P_Filtrado.ResumeLayout(false);
+            this.P_Filtrado.PerformLayout();
+            this.P_Botones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Muestra)).EndInit();
+            this.CMS_Filtros.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.muestraBindingSource)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel P_Buscar;
+        private System.Windows.Forms.Panel P_Botones;
+        private System.Windows.Forms.Button BtActLaborat;
+        private System.Windows.Forms.Button BtFin;
+        private System.Windows.Forms.Button BtImpresion;
+        private System.Windows.Forms.Button BtRemito;
+        private System.Windows.Forms.Button BtEtiquetas;
+        private System.Windows.Forms.Button BtExportar;
+        private System.Windows.Forms.Button BT_Buscar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox TB_Hasta;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TB_Desde;
+        private System.Windows.Forms.TextBox TBFiltro;
+        private System.Windows.Forms.Button BT_Filtrar;
+        private System.Windows.Forms.Panel P_Filtrado;
+        private System.Windows.Forms.BindingSource muestraBindingSource;
+        private System.Windows.Forms.DataGridView DGV_Muestra;
+        private System.Windows.Forms.Button BT_MenuFiltros;
+        private System.Windows.Forms.ContextMenuStrip CMS_Filtros;
+        private System.Windows.Forms.ToolStripMenuItem pedidoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fechaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem codigoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem descripcionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cantidadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nombreParaElClienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem óbservacionesToolStripMenuItem;
+        private System.Windows.Forms.Label LBError;
+        private System.Windows.Forms.ToolTip toolTip_BTBajaMuestra;
+        private System.Windows.Forms.ToolTip toolTip_ActLab;
+        private System.Windows.Forms.ToolTip toolTip_Export;
+        private System.Windows.Forms.ToolTip toolTip_Etiquetas;
+        private System.Windows.Forms.ToolTip toolTip_Remito;
+        private System.Windows.Forms.ToolTip toolTip_Impresion;
+        private System.Windows.Forms.ToolTip toolTip_Fin;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label LBFiltro;
+        private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem remitoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hojaDeRutaToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pedido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescriCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Razon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remitoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HojaRuta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoConf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lote2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ActualizaStock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ordenTrabajoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrdenFecha;
+    }
+}
+
