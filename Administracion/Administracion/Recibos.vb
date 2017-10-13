@@ -314,7 +314,8 @@ Public Class Recibos
 
                 End Try
 
-                If _Provincia = 24 And Val(_TotalUs) <> 0 Then
+                'If _Provincia = 24 And Val(_TotalUs) <> 0 Then
+                If _Provincia = 24 Then
 
                     lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_NormalizarNumero(_Paridad)))
 
