@@ -84,16 +84,19 @@ namespace Vista
                     );
             }
 
-            if (this.HojasDeSeguridad.GetLength(0) > 0)
+            if (this.HojasDeSeguridad != null)
             {
-                if (this.HojasDeSeguridad[0, 0].ToString().Trim() != "")
+                if (this.HojasDeSeguridad.GetLength(0) > 0)
                 {
-                    if (MessageBox.Show("¿Quiere reimprimir las hojas de seguridad?","", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                    if (this.HojasDeSeguridad[0, 0].ToString().Trim() != "")
+                    {
+                        if (MessageBox.Show("¿Quiere reimprimir las hojas de seguridad?","", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 
-                        this.ImprimirHojasDSeguridad(this.HojasDeSeguridad);
+                            this.ImprimirHojasDSeguridad(this.HojasDeSeguridad);
                 
-                    }
+                        }
 
+                    }
                 }
             }
 
