@@ -12,7 +12,7 @@ Public Class HistorialProforma
 
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
-    Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
+    Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.xlsm|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
     Private TIPO_ESPECIFICACIONES() As String = {"", "Envase", "Varios"}
 
     Private _NroProforma As String
@@ -1096,7 +1096,7 @@ Public Class HistorialProforma
 
             Case ".DOC", ".DOCX"
                 icono = My.Resources.Word_icon
-            Case ".XLS", ".XLSX"
+            Case ".XLS", ".XLSX", ".XLSM"
                 icono = My.Resources.Excel_icon
             Case ".PDF"
                 icono = My.Resources.pdf_icono

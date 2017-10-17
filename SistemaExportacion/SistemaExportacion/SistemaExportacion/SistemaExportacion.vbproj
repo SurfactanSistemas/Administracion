@@ -94,6 +94,12 @@
     <Compile Include="ArchivosRelacionados.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ConsultaArticulosProforma.Designer.vb">
+      <DependentUpon>ConsultaArticulosProforma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaArticulosProforma.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HistorialProforma.Designer.vb">
       <DependentUpon>HistorialProforma.vb</DependentUpon>
     </Compile>
@@ -145,6 +151,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ArchivosRelacionados.resx">
       <DependentUpon>ArchivosRelacionados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaArticulosProforma.resx">
+      <DependentUpon>ConsultaArticulosProforma.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HistorialProforma.resx">
       <DependentUpon>HistorialProforma.vb</DependentUpon>

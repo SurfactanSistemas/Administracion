@@ -261,4 +261,10 @@ Public Class MenuPrincipal
 
         End If
     End Sub
+
+    Private Sub btnAperturaArchivos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAperturaArchivos.Click
+        With ConsultaArticulosProforma
+            .Show()
+        End With
+    End Sub
 End Class
