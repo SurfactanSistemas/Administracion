@@ -927,7 +927,35 @@ Public Class HistorialProforma
         'End With
 
         TabControl1.SelectTab(1)
-        Process.Start("explorer.exe", "C:\")
+        'Process.Start("explorer.exe", "C:\")
+        Try
+            _AdjuntarArchivos()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
+
+    End Sub
+
+    Private Sub _AdjuntarArchivos()
+        Dim _ArchivosAdjuntos() As String
+
+        OpenFileDialog1.FileName = ""
+
+        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+
+            _ArchivosAdjuntos = OpenFileDialog1.FileNames
+
+            'txtNombreArchivoAdjunto.Text = _ArchivoAdjunto
+
+            _SubirArchivos(_ArchivosAdjuntos)
+
+        End If
+
+        OpenFileDialog1.Dispose()
+
+        _TraerHistorialYArchivos()
+
 
     End Sub
 
@@ -1137,12 +1165,25 @@ Public Class HistorialProforma
 
         If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
 
-        Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
         Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
-        Dim WDestino As String = ""
-        Dim WCantCorrectas = 0
+        
 
         If archivos.Length = 0 Then : Exit Sub : End If
+
+        _SubirArchivos(archivos)
+
+        'If WCantCorrectas > 0 Then
+        '    MsgBox("Se subieron correctamente " & WCantCorrectas & " Archivo(s)", MsgBoxStyle.Information)
+        'End If
+
+        _CargarArchivosRelacionados()
+
+    End Sub
+
+    Private Sub _SubirArchivos(ByVal archivos() As String)
+        Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+        Dim WDestino As String = ""
+        Dim WCantCorrectas = 0
 
         For Each archivo In archivos
 
@@ -1173,12 +1214,6 @@ Public Class HistorialProforma
             End If
 
         Next
-
-        'If WCantCorrectas > 0 Then
-        '    MsgBox("Se subieron correctamente " & WCantCorrectas & " Archivo(s)", MsgBoxStyle.Information)
-        'End If
-
-        _CargarArchivosRelacionados()
 
     End Sub
 

@@ -1190,7 +1190,8 @@ Public Class Proforma
 
         btnVistaPrevia.PerformClick()
 
-        btnLimpiar.PerformClick()
+        'btnLimpiar.PerformClick()
+        btnCerrar.PerformClick()
 
         MenuPrincipal._CargarTodasLasProformas()
 

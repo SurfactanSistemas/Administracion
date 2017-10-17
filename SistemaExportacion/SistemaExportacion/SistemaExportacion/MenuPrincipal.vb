@@ -4,11 +4,6 @@ Public Class MenuPrincipal
 
     Private Sub btnNuevaProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaProforma.Click
         With Proforma
-
-            If dgvPrincipal.SelectedRows.Count = 1 Then
-                .NroProforma = dgvPrincipal.CurrentRow.Cells(0).Value
-            End If
-
             .ShowDialog()
             .Dispose()
         End With
@@ -23,6 +18,14 @@ Public Class MenuPrincipal
 
             If dgvPrincipal.SelectedRows.Count = 1 Then
                 .NroProforma = dgvPrincipal.CurrentRow.Cells(0).Value
+            ElseIf dgvPrincipal.SelectedCells.Count > 0 Then
+
+                ' Nos quedamos con la primera fila de las seleccionadas.
+                With dgvPrincipal
+                    Dim PrimeraCelda = .SelectedCells.Item(.SelectedCells.Count - 1).RowIndex
+
+                    HistorialProforma.NroProforma = .Rows(PrimeraCelda).Cells(0).Value
+                End With
             End If
 
             .Show()
@@ -246,5 +249,16 @@ Public Class MenuPrincipal
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Me.Close()
+    End Sub
+
+    Private Sub dgvPrincipal_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvPrincipal.CellDoubleClick
+        If Not IsNothing(dgvPrincipal.Rows(e.RowIndex).Cells(0).Value) Then
+
+            With Proforma
+                .NroProforma = dgvPrincipal.Rows(e.RowIndex).Cells(0).Value
+                .Show()
+            End With
+
+        End If
     End Sub
 End Class

@@ -23,11 +23,11 @@ Partial Class HistorialProforma
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -99,6 +99,7 @@ Partial Class HistorialProforma
         Me.btnArchivos = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -466,8 +467,8 @@ Partial Class HistorialProforma
         '
         'Fecha
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle6
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.MaxInputLength = 12
         Me.Fecha.Name = "Fecha"
@@ -478,8 +479,8 @@ Partial Class HistorialProforma
         'Observacion
         '
         Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle7
         Me.Observacion.HeaderText = "Observación"
         Me.Observacion.MaxInputLength = 100
         Me.Observacion.Name = "Observacion"
@@ -544,14 +545,14 @@ Partial Class HistorialProforma
         Me.dgvArchivos.AllowUserToResizeRows = False
         Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaCreacion, Me.NombreArchivo, Me.Icono, Me.RutaArchivo})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.dgvArchivos.Location = New System.Drawing.Point(23, 18)
         Me.dgvArchivos.MultiSelect = False
@@ -562,8 +563,8 @@ Partial Class HistorialProforma
         '
         'FechaCreacion
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaCreacion.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaCreacion.DefaultCellStyle = DataGridViewCellStyle8
         Me.FechaCreacion.HeaderText = "Fecha de Creación"
         Me.FechaCreacion.MaxInputLength = 12
         Me.FechaCreacion.MinimumWidth = 100
@@ -575,8 +576,8 @@ Partial Class HistorialProforma
         'NombreArchivo
         '
         Me.NombreArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.NombreArchivo.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.NombreArchivo.DefaultCellStyle = DataGridViewCellStyle9
         Me.NombreArchivo.HeaderText = "Nombre de Archivo"
         Me.NombreArchivo.Name = "NombreArchivo"
         Me.NombreArchivo.ReadOnly = True
@@ -652,7 +653,7 @@ Partial Class HistorialProforma
         Me.cmbTipoEspecificacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTipoEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmbTipoEspecificacion.FormattingEnabled = True
-        Me.cmbTipoEspecificacion.Items.AddRange(New Object() {"", "Envase", "Varios"})
+        Me.cmbTipoEspecificacion.Items.AddRange(New Object() {"", "Envase", "Entrega", "Varios"})
         Me.cmbTipoEspecificacion.Location = New System.Drawing.Point(248, 40)
         Me.cmbTipoEspecificacion.Name = "cmbTipoEspecificacion"
         Me.cmbTipoEspecificacion.Size = New System.Drawing.Size(123, 21)
@@ -960,6 +961,10 @@ Partial Class HistorialProforma
         Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'HistorialProforma
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1063,4 +1068,5 @@ Partial Class HistorialProforma
     Friend WithEvents UsuarioEspecificacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RenglonEspecificacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents NroEspecificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 End Class

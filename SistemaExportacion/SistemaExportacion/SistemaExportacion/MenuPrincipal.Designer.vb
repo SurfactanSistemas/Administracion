@@ -23,9 +23,9 @@ Partial Class MenuPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -39,17 +39,17 @@ Partial Class MenuPrincipal
         Me.Pais = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnHistorialProforma = New System.Windows.Forms.Button()
         Me.btnNuevaProforma = New System.Windows.Forms.Button()
         Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cmbTipoFiltro = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -136,7 +136,7 @@ Partial Class MenuPrincipal
         Me.LayoutCuerpoPrincipal.Name = "LayoutCuerpoPrincipal"
         Me.LayoutCuerpoPrincipal.RowCount = 1
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 388.0!))
+        Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 378.0!))
         Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(826, 378)
         Me.LayoutCuerpoPrincipal.TabIndex = 1
         '
@@ -156,8 +156,8 @@ Partial Class MenuPrincipal
         '
         'NroProforma
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
         Me.NroProforma.HeaderText = "Nro Proforma"
         Me.NroProforma.MaxInputLength = 6
         Me.NroProforma.Name = "NroProforma"
@@ -165,8 +165,8 @@ Partial Class MenuPrincipal
         '
         'Fecha
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.MaxInputLength = 10
         Me.Fecha.Name = "Fecha"
@@ -194,8 +194,8 @@ Partial Class MenuPrincipal
         '
         'Total
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
         Me.Total.HeaderText = "Monto Total"
         Me.Total.Name = "Total"
         Me.Total.ReadOnly = True
@@ -211,6 +211,20 @@ Partial Class MenuPrincipal
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(84, 378)
         Me.Panel1.TabIndex = 1
+        '
+        'Button1
+        '
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(6, 189)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(74, 56)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "Cerrar"
+        Me.ToolTip1.SetToolTip(Me.Button1, "Cerrar Sistema")
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnHistorialProforma
         '
@@ -265,48 +279,6 @@ Partial Class MenuPrincipal
         Me.Panel2.Size = New System.Drawing.Size(826, 56)
         Me.Panel2.TabIndex = 0
         '
-        'cmbTipoFiltro
-        '
-        Me.cmbTipoFiltro.FormattingEnabled = True
-        Me.cmbTipoFiltro.Items.AddRange(New Object() {"", "Nro de Proforma", "Fecha", "Cliente", "País"})
-        Me.cmbTipoFiltro.Location = New System.Drawing.Point(116, 15)
-        Me.cmbTipoFiltro.Name = "cmbTipoFiltro"
-        Me.cmbTipoFiltro.Size = New System.Drawing.Size(108, 21)
-        Me.cmbTipoFiltro.TabIndex = 2
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(238, 15)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(162, 18)
-        Me.Label4.TabIndex = 1
-        Me.Label4.Text = "Aquellos que contengan:"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(47, 15)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(67, 18)
-        Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Columna:"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtFiltrarPor
-        '
-        Me.txtFiltrarPor.Location = New System.Drawing.Point(403, 15)
-        Me.txtFiltrarPor.Name = "txtFiltrarPor"
-        Me.txtFiltrarPor.Size = New System.Drawing.Size(176, 20)
-        Me.txtFiltrarPor.TabIndex = 0
-        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.cmbTipoFiltro)
@@ -322,19 +294,47 @@ Partial Class MenuPrincipal
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filtrar datos"
         '
-        'Button1
+        'cmbTipoFiltro
         '
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(6, 189)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(74, 56)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "Cerrar"
-        Me.ToolTip1.SetToolTip(Me.Button1, "Cerrar Sistema")
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.cmbTipoFiltro.FormattingEnabled = True
+        Me.cmbTipoFiltro.Items.AddRange(New Object() {"", "Nro de Proforma", "Fecha", "Cliente", "País"})
+        Me.cmbTipoFiltro.Location = New System.Drawing.Point(116, 15)
+        Me.cmbTipoFiltro.Name = "cmbTipoFiltro"
+        Me.cmbTipoFiltro.Size = New System.Drawing.Size(108, 21)
+        Me.cmbTipoFiltro.TabIndex = 2
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.Label3.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label3.Location = New System.Drawing.Point(47, 15)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(67, 18)
+        Me.Label3.TabIndex = 1
+        Me.Label3.Text = "Columna:"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label4.Location = New System.Drawing.Point(238, 15)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(162, 18)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "Aquellos que contengan:"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtFiltrarPor
+        '
+        Me.txtFiltrarPor.Location = New System.Drawing.Point(403, 15)
+        Me.txtFiltrarPor.Name = "txtFiltrarPor"
+        Me.txtFiltrarPor.Size = New System.Drawing.Size(176, 20)
+        Me.txtFiltrarPor.TabIndex = 0
         '
         'MenuPrincipal
         '
