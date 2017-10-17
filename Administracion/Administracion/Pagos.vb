@@ -842,8 +842,8 @@ Public Class Pagos
                         XNroInterno = .Item("NroInterno").ToString()
                         XTotal = _NormalizarNumero(.Item("Total").ToString())
                         XSaldo = _NormalizarNumero(.Item("Saldo").ToString())
-                        XSaldoUS = 0
-                        XParidadTotal = 0
+                        XSaldoUS = 0.0
+                        XParidadTotal = 0.0
                         XImpre = .Item("Impre").ToString()
                         XLetra = .Item("Letra").ToString()
                         XPunto = .Item("Punto").ToString()
@@ -868,7 +868,9 @@ Public Class Pagos
                         If Val(XSaldoUS) = 0 Then
                             XSaldoUS = ""
                         End If
-                        _Item = XImpre & "    " & XLetra & "    " & XPunto & "    " & XNumero & "    " & XFecha & "    " & XSaldo & "    " & XSaldoUS
+                        _Item = XImpre & "    " & XLetra & "    " & XPunto & "    " & XNumero & "    " & XFecha & RSet(Proceso.formatonumerico(XSaldo), 12)
+
+                        If Val(XSaldoUS) > 0 Then : _Item &= RSet(Proceso.formatonumerico(XSaldoUS), 12) : End If
 
                         lstConsulta.Items.Add(_Item)
 
@@ -1329,7 +1331,7 @@ Public Class Pagos
                         .Cells(1).Value = XLetra
                         .Cells(2).Value = XPunto
                         .Cells(3).Value = XNumero
-                        .Cells(4).Value = XSaldo
+                        .Cells(4).Value = Proceso.formatonumerico(XSaldo)
 
                         Select Case Val(XTipo)
                             Case 1
@@ -2867,7 +2869,7 @@ Public Class Pagos
                        & Str$(XExentolist) & "," _
                        & Str$(XParidad) & "," _
                        & Val(XPAgo) & ", " _
-                       & "'','  /  /    ','',1,'',0,0,0,0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'' "
+                       & "'','  /  /    ','',0,'',0,0,0,0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'',0,'' "
 
                 ZSqlIvaComp = ""
                 ZSqlIvaComp = "INSERT INTO IvaComp (NroInterno, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Vencimiento, Vencimiento1, Periodo, Neto, Iva21, Iva5, Iva27, Ib, Exento, " _
@@ -4835,7 +4837,8 @@ Public Class Pagos
 
         With VistaPrevia
             .Reporte = crdoc
-            .Mostrar()
+            '.Mostrar()
+            .Imprimir()
         End With
 
 
@@ -5178,7 +5181,8 @@ Public Class Pagos
 
         With VistaPrevia
             .Reporte = crdoc
-            .Mostrar()
+            '.Mostrar()
+            .Imprimir()
         End With
     End Sub
 
@@ -5504,7 +5508,8 @@ Public Class Pagos
 
         With VistaPrevia
             .Reporte = crdoc
-            .Mostrar()
+            '.Mostrar()
+            .Imprimir()
         End With
     End Sub
 
@@ -5959,7 +5964,8 @@ Public Class Pagos
 
         With VistaPrevia
             .Reporte = crdoc
-            .Mostrar()
+            '.Mostrar()
+            .Imprimir()
         End With
 
 
@@ -6072,7 +6078,8 @@ Public Class Pagos
 
         With VistaPrevia
             .Reporte = crdoc
-            .Mostrar()
+            '.Mostrar()
+            .Imprimir()
         End With
 
     End Sub
@@ -6260,7 +6267,8 @@ Public Class Pagos
 
             With VistaPrevia
                 .Reporte = crdoc
-                .Mostrar()
+                '.Mostrar()
+                .Imprimir()
             End With
 
         End If
@@ -7425,7 +7433,8 @@ Public Class Pagos
         With VistaPrevia
             .Reporte = New AnalisisDiferenciaCambioOP
             .Formula = "{Pagos.Orden} = '" & txtOrdenPago.Text & "' AND {Pagos.Impolist} <> 0"
-            .Mostrar()
+            '.Mostrar()
+            .Imprimir()
         End With
 
     End Sub

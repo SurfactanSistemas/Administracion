@@ -223,6 +223,8 @@ Public Class Compras
 
     Private Function _FormatearNumero(ByVal numero As String, Optional ByVal decimales As Integer = 2) As String
 
+        If Trim(numero) = "" Then : numero = "0" : End If
+
         Return Proceso.formatonumerico(numero, decimales)
 
     End Function
