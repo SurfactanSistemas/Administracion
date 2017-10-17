@@ -1665,4 +1665,35 @@ Public Class HistorialProforma
         End With
 
     End Sub
+
+    Private Sub PegarArchivosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PegarArchivosToolStripMenuItem.Click
+        Dim _Archivos() As String
+
+        ReDim _Archivos(Clipboard.GetFileDropList.Count)
+
+        For i = 0 To Clipboard.GetFileDropList.Count - 1
+            _Archivos(i) = Clipboard.GetFileDropList.Item(i)
+        Next
+
+        _SubirArchivos(_Archivos)
+
+        _TraerHistorialYArchivos()
+
+    End Sub
+
+    Private Sub dgvArchivos_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvArchivos.CellDoubleClick
+        If dgvArchivos.SelectedRows.Count > 0 Then : Exit Sub : End If
+        With dgvArchivos.Rows(e.RowIndex)
+
+            If Not IsNothing(.Cells("RutaArchivo").Value) Then
+
+                Try
+                    Process.Start(.Cells("RutaArchivo").Value, "f")
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+
+            End If
+        End With
+    End Sub
 End Class
