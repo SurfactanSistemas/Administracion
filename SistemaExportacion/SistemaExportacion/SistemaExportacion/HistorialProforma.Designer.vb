@@ -38,7 +38,8 @@ Partial Class HistorialProforma
         Me.txtNroProforma = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.GrupoNuevaObs = New System.Windows.Forms.GroupBox()
+        Me.GrupoNuevaObs = New System.Windows.Forms.Panel()
+        Me.GrupoNuevaObsII = New System.Windows.Forms.GroupBox()
         Me.txtUsuario = New System.Windows.Forms.TextBox()
         Me.txtObservacion = New System.Windows.Forms.TextBox()
         Me.WClaveObservacion = New System.Windows.Forms.TextBox()
@@ -66,8 +67,11 @@ Partial Class HistorialProforma
         Me.NombreArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Icono = New System.Windows.Forms.DataGridViewImageColumn()
         Me.RutaArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.PegarArchivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.GrupoEspecificacion = New System.Windows.Forms.GroupBox()
+        Me.GrupoEspecificacion = New System.Windows.Forms.Panel()
+        Me.GrupoEspecificacionII = New System.Windows.Forms.GroupBox()
         Me.txtUsuarioEspecificacion = New System.Windows.Forms.TextBox()
         Me.cmbTipoEspecificacion = New System.Windows.Forms.ComboBox()
         Me.txtEspecificacion = New System.Windows.Forms.TextBox()
@@ -100,8 +104,6 @@ Partial Class HistorialProforma
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.PegarArchivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -109,14 +111,16 @@ Partial Class HistorialProforma
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GrupoNuevaObs.SuspendLayout()
+        Me.GrupoNuevaObsII.SuspendLayout()
         CType(Me.dgvHistorial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GrupoEspecificacion.SuspendLayout()
+        Me.GrupoEspecificacionII.SuspendLayout()
         CType(Me.dgvEspecificaciones, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -268,28 +272,36 @@ Partial Class HistorialProforma
         '
         'GrupoNuevaObs
         '
-        Me.GrupoNuevaObs.Controls.Add(Me.txtUsuario)
-        Me.GrupoNuevaObs.Controls.Add(Me.txtObservacion)
-        Me.GrupoNuevaObs.Controls.Add(Me.WClaveObservacion)
-        Me.GrupoNuevaObs.Controls.Add(Me.btnEliminar)
-        Me.GrupoNuevaObs.Controls.Add(Me.Label14)
-        Me.GrupoNuevaObs.Controls.Add(Me.btnCerrarFormObs)
-        Me.GrupoNuevaObs.Controls.Add(Me.btnEnviarPorEmail)
-        Me.GrupoNuevaObs.Controls.Add(Me.btnLimpiar)
-        Me.GrupoNuevaObs.Controls.Add(Me.Label13)
-        Me.GrupoNuevaObs.Controls.Add(Me.txtFecha)
-        Me.GrupoNuevaObs.Controls.Add(Me.btnAceptar)
-        Me.GrupoNuevaObs.Controls.Add(Me.Label5)
-        Me.GrupoNuevaObs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GrupoNuevaObs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrupoNuevaObs.ForeColor = System.Drawing.SystemColors.Control
-        Me.GrupoNuevaObs.Location = New System.Drawing.Point(121, 44)
+        Me.GrupoNuevaObs.Controls.Add(Me.GrupoNuevaObsII)
+        Me.GrupoNuevaObs.Location = New System.Drawing.Point(96, 24)
         Me.GrupoNuevaObs.Name = "GrupoNuevaObs"
-        Me.GrupoNuevaObs.Size = New System.Drawing.Size(390, 251)
-        Me.GrupoNuevaObs.TabIndex = 10
-        Me.GrupoNuevaObs.TabStop = False
-        Me.GrupoNuevaObs.Text = "Ingreso de Nueva Observación"
+        Me.GrupoNuevaObs.Size = New System.Drawing.Size(434, 262)
+        Me.GrupoNuevaObs.TabIndex = 11
         Me.GrupoNuevaObs.Visible = False
+        '
+        'GrupoNuevaObsII
+        '
+        Me.GrupoNuevaObsII.Controls.Add(Me.txtUsuario)
+        Me.GrupoNuevaObsII.Controls.Add(Me.txtObservacion)
+        Me.GrupoNuevaObsII.Controls.Add(Me.WClaveObservacion)
+        Me.GrupoNuevaObsII.Controls.Add(Me.btnEliminar)
+        Me.GrupoNuevaObsII.Controls.Add(Me.Label14)
+        Me.GrupoNuevaObsII.Controls.Add(Me.btnCerrarFormObs)
+        Me.GrupoNuevaObsII.Controls.Add(Me.btnEnviarPorEmail)
+        Me.GrupoNuevaObsII.Controls.Add(Me.btnLimpiar)
+        Me.GrupoNuevaObsII.Controls.Add(Me.Label13)
+        Me.GrupoNuevaObsII.Controls.Add(Me.txtFecha)
+        Me.GrupoNuevaObsII.Controls.Add(Me.btnAceptar)
+        Me.GrupoNuevaObsII.Controls.Add(Me.Label5)
+        Me.GrupoNuevaObsII.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.GrupoNuevaObsII.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrupoNuevaObsII.ForeColor = System.Drawing.SystemColors.Control
+        Me.GrupoNuevaObsII.Location = New System.Drawing.Point(22, 6)
+        Me.GrupoNuevaObsII.Name = "GrupoNuevaObsII"
+        Me.GrupoNuevaObsII.Size = New System.Drawing.Size(390, 251)
+        Me.GrupoNuevaObsII.TabIndex = 10
+        Me.GrupoNuevaObsII.TabStop = False
+        Me.GrupoNuevaObsII.Text = "Ingreso de Nueva Observación"
         '
         'txtUsuario
         '
@@ -603,6 +615,18 @@ Partial Class HistorialProforma
         Me.RutaArchivo.Visible = False
         Me.RutaArchivo.Width = 80
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PegarArchivosToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(162, 26)
+        '
+        'PegarArchivosToolStripMenuItem
+        '
+        Me.PegarArchivosToolStripMenuItem.Name = "PegarArchivosToolStripMenuItem"
+        Me.PegarArchivosToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.PegarArchivosToolStripMenuItem.Text = "Pegar Archivo(s)"
+        '
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
@@ -617,30 +641,38 @@ Partial Class HistorialProforma
         '
         'GrupoEspecificacion
         '
-        Me.GrupoEspecificacion.Controls.Add(Me.txtUsuarioEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.cmbTipoEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.txtEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.WNroEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.btnEliminarEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.Label7)
-        Me.GrupoEspecificacion.Controls.Add(Me.btnCerrarFormularioEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.btnEnviarEmailEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.btnLimpiarFormularioEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.Label10)
-        Me.GrupoEspecificacion.Controls.Add(Me.Label8)
-        Me.GrupoEspecificacion.Controls.Add(Me.txtFechaEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.btnAgregarEspecificacion)
-        Me.GrupoEspecificacion.Controls.Add(Me.Label9)
-        Me.GrupoEspecificacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GrupoEspecificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrupoEspecificacion.ForeColor = System.Drawing.SystemColors.Control
-        Me.GrupoEspecificacion.Location = New System.Drawing.Point(121, 44)
+        Me.GrupoEspecificacion.Controls.Add(Me.GrupoEspecificacionII)
+        Me.GrupoEspecificacion.Location = New System.Drawing.Point(96, 24)
         Me.GrupoEspecificacion.Name = "GrupoEspecificacion"
-        Me.GrupoEspecificacion.Size = New System.Drawing.Size(390, 251)
-        Me.GrupoEspecificacion.TabIndex = 11
-        Me.GrupoEspecificacion.TabStop = False
-        Me.GrupoEspecificacion.Text = "Ingreso de Nueva Especificación"
+        Me.GrupoEspecificacion.Size = New System.Drawing.Size(434, 262)
+        Me.GrupoEspecificacion.TabIndex = 12
         Me.GrupoEspecificacion.Visible = False
+        '
+        'GrupoEspecificacionII
+        '
+        Me.GrupoEspecificacionII.Controls.Add(Me.txtUsuarioEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.cmbTipoEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.txtEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.WNroEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.btnEliminarEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.Label7)
+        Me.GrupoEspecificacionII.Controls.Add(Me.btnCerrarFormularioEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.btnEnviarEmailEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.btnLimpiarFormularioEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.Label10)
+        Me.GrupoEspecificacionII.Controls.Add(Me.Label8)
+        Me.GrupoEspecificacionII.Controls.Add(Me.txtFechaEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.btnAgregarEspecificacion)
+        Me.GrupoEspecificacionII.Controls.Add(Me.Label9)
+        Me.GrupoEspecificacionII.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.GrupoEspecificacionII.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrupoEspecificacionII.ForeColor = System.Drawing.SystemColors.Control
+        Me.GrupoEspecificacionII.Location = New System.Drawing.Point(22, 6)
+        Me.GrupoEspecificacionII.Name = "GrupoEspecificacionII"
+        Me.GrupoEspecificacionII.Size = New System.Drawing.Size(390, 251)
+        Me.GrupoEspecificacionII.TabIndex = 11
+        Me.GrupoEspecificacionII.TabStop = False
+        Me.GrupoEspecificacionII.Text = "Ingreso de Nueva Especificación"
         '
         'txtUsuarioEspecificacion
         '
@@ -969,18 +1001,6 @@ Partial Class HistorialProforma
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PegarArchivosToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(162, 26)
-        '
-        'PegarArchivosToolStripMenuItem
-        '
-        Me.PegarArchivosToolStripMenuItem.Name = "PegarArchivosToolStripMenuItem"
-        Me.PegarArchivosToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
-        Me.PegarArchivosToolStripMenuItem.Text = "Pegar Archivo(s)"
-        '
         'HistorialProforma
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1000,17 +1020,19 @@ Partial Class HistorialProforma
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.GrupoNuevaObs.ResumeLayout(False)
-        Me.GrupoNuevaObs.PerformLayout()
+        Me.GrupoNuevaObsII.ResumeLayout(False)
+        Me.GrupoNuevaObsII.PerformLayout()
         CType(Me.dgvHistorial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.GrupoEspecificacion.ResumeLayout(False)
-        Me.GrupoEspecificacion.PerformLayout()
+        Me.GrupoEspecificacionII.ResumeLayout(False)
+        Me.GrupoEspecificacionII.PerformLayout()
         CType(Me.dgvEspecificaciones, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
-        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1042,7 +1064,7 @@ Partial Class HistorialProforma
     Friend WithEvents WClaveObservacion As System.Windows.Forms.TextBox
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
     Friend WithEvents btnArchivos As System.Windows.Forms.Button
-    Friend WithEvents GrupoNuevaObs As System.Windows.Forms.GroupBox
+    Friend WithEvents GrupoNuevaObsII As System.Windows.Forms.GroupBox
     Friend WithEvents btnNuevaObservacion As System.Windows.Forms.Button
     Friend WithEvents btnCerrarFormObs As System.Windows.Forms.Button
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
@@ -1063,7 +1085,7 @@ Partial Class HistorialProforma
     Friend WithEvents btnEnviarPorEmail As System.Windows.Forms.Button
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents dgvEspecificaciones As System.Windows.Forms.DataGridView
-    Friend WithEvents GrupoEspecificacion As System.Windows.Forms.GroupBox
+    Friend WithEvents GrupoEspecificacionII As System.Windows.Forms.GroupBox
     Friend WithEvents cmbTipoEspecificacion As System.Windows.Forms.ComboBox
     Friend WithEvents txtEspecificacion As System.Windows.Forms.TextBox
     Friend WithEvents WNroEspecificacion As System.Windows.Forms.TextBox
@@ -1088,4 +1110,6 @@ Partial Class HistorialProforma
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents PegarArchivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GrupoNuevaObs As System.Windows.Forms.Panel
+    Friend WithEvents GrupoEspecificacion As System.Windows.Forms.Panel
 End Class

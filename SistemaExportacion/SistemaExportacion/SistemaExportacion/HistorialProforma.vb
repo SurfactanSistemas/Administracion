@@ -13,7 +13,7 @@ Public Class HistorialProforma
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
     Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.xlsm|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
-    Private TIPO_ESPECIFICACIONES() As String = {"", "Envase", "Varios"}
+    Private TIPO_ESPECIFICACIONES() As String = {"", "Envase", "Entrega", "Varios"}
 
     Private _NroProforma As String
 
@@ -97,11 +97,13 @@ Public Class HistorialProforma
 
             dr = cm.ExecuteReader()
 
+            btnLimpiar.PerformClick()
+
+            dgvHistorial.Rows.Clear()
+
             If dr.HasRows Then
 
-                btnLimpiar.PerformClick()
 
-                dgvHistorial.Rows.Clear()
 
                 WRefPrimeraFilaObs = 0
                 WNroObsAnt = -1
@@ -178,6 +180,7 @@ Public Class HistorialProforma
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
+        Dim auxi = 0
         Dim WClave, WFecha, WFechaOrd, WNroEspecificacion, WNroObsAnt, WEspecificacion, WUsuario, XRenglon, ZSql, WRefPrimeraFilaEsp, WRenglon, WTipoEsp
 
         ZSql = ""
@@ -193,11 +196,13 @@ Public Class HistorialProforma
 
             dr = cm.ExecuteReader()
 
+            btnLimpiar.PerformClick()
+
+            dgvEspecificaciones.Rows.Clear()
+
             If dr.HasRows Then
 
-                btnLimpiar.PerformClick()
 
-                dgvEspecificaciones.Rows.Clear()
 
                 WRefPrimeraFilaEsp = 0
                 WNroObsAnt = -1
@@ -239,7 +244,11 @@ Public Class HistorialProforma
 
                         If WNroEspecificacion = WNroObsAnt Then
 
-                            If WNroEspecificacion = dgvEspecificaciones.Rows(XRenglon - 1).Cells("NroEspecificacion").Value Then
+                            auxi = XRenglon - 1
+
+                            auxi = IIf(auxi < 0, 0, auxi )
+
+                            If WNroEspecificacion = dgvEspecificaciones.Rows(auxi).Cells("NroEspecificacion").Value Then
                                 .Cells("FechaEspecificacion").Value = ""
                                 .Cells("UsuarioEspecificacion").Value = ""
                                 .Cells("TipoEspecificacion").Value = ""
@@ -554,7 +563,7 @@ Public Class HistorialProforma
     Private Function _ProximoNroObservacion()
         Dim actual = 0
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(NroObservacion) as NroActual FROM ProformaExportacionHistorial")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 NroObservacion as NroActual FROM ProformaExportacionHistorial ORDER BY NroObservacion DESC")
         Dim dr As SqlDataReader
 
         Try
@@ -764,7 +773,6 @@ Public Class HistorialProforma
         Try
             oApp = New Outlook.Application()
 
-
             oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
             oMsg.Subject = ""
             oMsg.Body = body
@@ -797,7 +805,7 @@ Public Class HistorialProforma
 
         'If Trim(WClaveObservacion.Text) = "" Then
         txtUsuario.Text = ""
-        txtFecha.Text = Date.Now.ToString("dd-MM-yyyy")
+        txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
         WClaveObservacion.Text = ""
         'End If
 
@@ -899,6 +907,39 @@ Public Class HistorialProforma
             cn.Open()
             cm.Connection = cn
             cm.CommandText = "DELETE FROM ProformaExportacionHistorial WHERE NroObservacion = '" & WNroObs & "'"
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+            Exit Sub
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        btnLimpiar.PerformClick()
+
+        _TraerHistorialYArchivos()
+
+    End Sub
+
+    Private Sub _EliminarEspecificacion(ByVal WClave As String)
+        WClave = Trim(WClave)
+        If WClave = "" Then : Exit Sub : End If
+
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+        'Dim WNroObs = Mid(WClave, 1, WClave.Length - 4)
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            cm.CommandText = "DELETE FROM ProformaExportacionEspecificaciones WHERE NroEspecificacion = '" & WClave & "'"
 
             cm.ExecuteNonQuery()
 
@@ -1051,6 +1092,9 @@ Public Class HistorialProforma
 
     Private Sub _CargarArchivosRelacionados()
         Dim WRutaArchivosRelacionados As String = ""
+
+        dgvArchivos.Rows.Clear()
+
         If Not Directory.Exists(_RutaCarpetaArchivos) Then
             Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
             Exit Sub
@@ -1071,7 +1115,6 @@ Public Class HistorialProforma
 
         Dim InfoArchivo As FileInfo
 
-        dgvArchivos.Rows.Clear()
 
         ' Recorremos unicamente aquellos archivos que tengan una extensión que esté entre las permitidas por la aplicación.
         For Each WNombreArchivo As String In Directory.GetFiles(WRutaArchivosRelacionados).Where(Function(s) EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(s).ToLower()))
@@ -1336,7 +1379,7 @@ Public Class HistorialProforma
     Private Function _ProximoNroEspecificacion()
         Dim actual = 0
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(NroEspecificacion) as NroActual FROM ProformaExportacionEspecificaciones")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 NroEspecificacion as NroActual FROM ProformaExportacionEspecificaciones ORDER BY NroEspecificacion DESC")
         Dim dr As SqlDataReader
 
         Try
@@ -1518,7 +1561,11 @@ Public Class HistorialProforma
 
         ' Aca consultamos si quiere enviar este mismo contenido por email. Abrimos un nuevo email, sin enviarlo automaticamente.
         If MsgBox("¿Desea enviar esta Especificación por E-Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-            _AbrirNuevoEmail(Trim(txtEspecificacion.Text))
+            Try
+                _AbrirNuevoEmail(Trim(txtEspecificacion.Text))
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+            End Try
         End If
 
 
@@ -1535,7 +1582,7 @@ Public Class HistorialProforma
                 End If
             Next
         End If
-        
+
         'btnVistaPrevia.PerformClick()
 
         'btnLimpiar.PerformClick()
@@ -1695,5 +1742,33 @@ Public Class HistorialProforma
 
             End If
         End With
+    End Sub
+
+    Private Sub btnEnviarEmailEspecificacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnviarEmailEspecificacion.Click
+        If Trim(txtEspecificacion.Text) <> "" Then
+            Try
+                _AbrirNuevoEmail(Trim(txtEspecificacion.Text))
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+            End Try
+        End If
+    End Sub
+
+    Private Sub btnEliminarEspecificacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminarEspecificacion.Click
+        If Trim(WNroEspecificacion.Text) = "" Then : Exit Sub : End If
+
+        If MsgBox("¿Está seguro de que quiere eliminar la especificación actual?", MsgBoxStyle.YesNo, MsgBoxStyle.Question) = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        Try
+            _EliminarEspecificacion(WNroEspecificacion.Text)
+
+        Catch ex As Exception
+            MsgBox("No se pudo eliminar la observación de la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
+        btnCerrarFormularioEspecificacion.PerformClick()
     End Sub
 End Class
