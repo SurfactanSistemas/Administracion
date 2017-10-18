@@ -262,7 +262,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             cm.ExecuteNonQuery()
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New Exception("Hubo un problema al querer limpiar la tabla ImpCtaCtePrvNet en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -292,11 +292,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                 Paridad = IIf(IsDBNull(dr.Item("CambioDivisa")), 0, dr.Item("CambioDivisa"))
 
                 If Val(Paridad) = 0 Then
-                    Throw New Exception("Paridad Inexistente")
+                    Throw New SinParidadException("Paridad Inexistente")
                 End If
 
             Else
-                Throw New Exception("Paridad Inexistente")
+                Throw New SinParidadException("Paridad Inexistente")
             End If
 
         Catch ex As Exception
@@ -328,7 +328,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             dr.Fill(tabla)
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New Exception("Hubo un problema al querer consultar la Cuenta Corriente del Proveedor en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -358,7 +358,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             dr.Fill(proveedor)
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New Exception("Hubo un problema al querer consultar los datos del Proveedor en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -391,7 +391,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             dr.Fill(compra)
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New Exception("Hubo un problema al querer consultar la Factura en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -423,7 +423,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             dr.Fill(acumulado)
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New Exception("Hubo un problema al querer consultar los valores acumulados correspondientes al Proveedor: " & proveedor & " en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -487,8 +487,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
             varParidadTotal = _BuscarTipoCambio(txtFechaEmision.Text)
 
-        Catch ex As Exception
+        Catch ex As SinParidadException
             MsgBox(ex.Message, MsgBoxStyle.Information)
+            Exit Sub
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
             txtFechaEmision.Focus()
             Exit Sub
         End Try
@@ -543,6 +546,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         Else
                             If Val(varParidad) = 0 Then
                                 MsgBox("La factura con Nro Interno " & CCPrv.nroInterno & " del Proveedor " & CCPrv.Proveedor & ", no posee Paridad cargada.", MsgBoxStyle.Information)
+
+                                If varPago = 2 Then
+                                    Exit Sub
+                                End If
+
                                 varTotal = 0
                                 varSaldo = 0
                                 varTotalUs = 0
@@ -726,7 +734,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         Try
                             SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, (varAcumulado - varRetIb - varRetGan), varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago)
                         Catch ex As Exception
-                            Stop
+                            MsgBox(ex.Message, MsgBoxStyle.Critical)
+                            Exit Sub
                         End Try
 
 
@@ -780,7 +789,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             '    MsgBox("Se han eliminado todos los proveedores correspondientes a este periodo.", MsgBoxStyle.Information)
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer eliminar a todos los Proveedores que se encontraban guardados en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
             cn.Close()
