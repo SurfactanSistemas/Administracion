@@ -97,6 +97,12 @@
     <Compile Include="Maestros\AMBSectores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestros\AMBTareas.Designer.vb">
+      <DependentUpon>AMBTareas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\AMBTareas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MenuPrincipal.Designer.vb">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
     </Compile>
@@ -124,6 +130,12 @@
       <DependentUpon>ListadoSectores.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ListadoTareas.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoTareas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\VistaPrevia.designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
@@ -138,6 +150,9 @@
     <EmbeddedResource Include="Maestros\AMBSectores.resx">
       <DependentUpon>AMBSectores.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\AMBTareas.resx">
+      <DependentUpon>AMBTareas.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +165,10 @@
     <EmbeddedResource Include="Reportes\ListadoSectores.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoSectores.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ListadoTareas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoTareas.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
