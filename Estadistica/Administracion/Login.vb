@@ -14,6 +14,7 @@ Public Class Login
 
     Private Sub Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         cmbEntity.DataSource = Globals.connectionStringNames()
+        Globals.empresa = cmbEntity.Text
     End Sub
 
     Private Function validarCampos()
@@ -36,12 +37,14 @@ Public Class Login
     End Sub
 
     Private Sub cmbEntity_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbEntity.TextChanged
+        Globals.empresa = cmbEntity.Text
         txtClave.Focus()
     End Sub
 
     Private Sub cmbEntity_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbEntity.KeyDown
 
         If e.KeyData = Keys.Enter Then
+            Globals.empresa = cmbEntity.Text
             txtClave.Focus()
         End If
 
@@ -124,6 +127,7 @@ Public Class Login
     End Sub
 
     Private Sub cmbEntity_SelectedValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbEntity.SelectedValueChanged
+        Globals.empresa = cmbEntity.Text
         txtClave.Focus()
     End Sub
 

@@ -11,15 +11,12 @@ Public Class ReportViewer
     Dim RpDatos As New CrystalDecisions.Shared.ParameterValues()
     Dim DsNombre As New CrystalDecisions.Shared.ParameterDiscreteValue()
 
-
-
     Public Sub New(ByVal nombreReporte As String, ByVal rutaReporte As String, ByVal formulaReporte As String)
         InitializeComponent()
         nombre = nombreReporte
         ruta = rutaReporte
         formula = formulaReporte
         reporte.Load(ruta)
-
         'DsNombre.Value = "Surfactan"
         'RpDatos.Add(DsNombre)
         'reporte.DataDefinition.ParameterFields("txtEmpresa").ApplyCurrentValues(RpDatos)
@@ -51,11 +48,35 @@ Public Class ReportViewer
         'Next
 
         CrystalReportViewer1.ReportSource = reporte
-        'Dim conexion As New ConnectionInfo
-        'conexion.DatabaseName = "Surfactan_II"
-        'conexion.ServerName = "(LOCAL)\SQLEXPRESS"
-        'conexion.UserID = "usuarioadmin"
-        'conexion.Password = "usuarioadmin"
+
+        Dim cs = ""
+
+        Try
+            cs = ClasesCompartidas.Globals.getConnectionString()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
+        Dim cnsb As New SqlClient.SqlConnectionStringBuilder(cs)
+
+        reporte.SetDatabaseLogon(cnsb.UserID, cnsb.Password, cnsb.DataSource, cnsb.InitialCatalog)
+
+        Dim conexion As New ConnectionInfo
+        conexion.DatabaseName = cnsb.InitialCatalog
+        conexion.ServerName = cnsb.DataSource
+        conexion.UserID = cnsb.UserID
+        conexion.Password = cnsb.Password
+
+        Dim tli As New TableLogOnInfo()
+        tli.ConnectionInfo = conexion
+
+        For Each tabla As Table In reporte.Database.Tables
+
+            tabla.ApplyLogOnInfo(tli)
+
+        Next
+
         'For Each logInfo In CrystalReportViewer1.LogOnInfo
         '    logInfo.ConnectionInfo = conexion
         'Next
