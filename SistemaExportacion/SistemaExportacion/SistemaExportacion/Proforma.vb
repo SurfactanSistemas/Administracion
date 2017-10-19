@@ -283,8 +283,11 @@ Public Class Proforma
                             txtDescripcionTotal.Text = WDescripcionMonto
                             txtDescripcionTotalII.Text = WDescripcionMontoII
                             txtPais.Text = WPais
-                            txtSubTotal.Text = Helper.formatonumerico(WTotal)
+                            txtSubTotal.Text = Helper.formatonumerico(WSubTotal)
                             cmbEstado.SelectedIndex = WEstado
+
+                            txtFlete.Text = Helper.formatonumerico(WFlete)
+                            txtSeguro.Text = Helper.formatonumerico(WSeguro)
 
                             If Val(WEstado) = 1 Then
                                 Me.Bloqueado = True
