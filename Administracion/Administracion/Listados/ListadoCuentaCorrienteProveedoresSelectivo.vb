@@ -547,9 +547,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                             If Val(varParidad) = 0 Then
                                 MsgBox("La factura con Nro Interno " & CCPrv.nroInterno & " del Proveedor " & CCPrv.Proveedor & ", no posee Paridad cargada.", MsgBoxStyle.Information)
 
-                                If varPago = 2 Then
-                                    Exit Sub
-                                End If
+                                'If varPago = 2 Then
+                                '    Exit Sub
+                                'End If
 
                                 varTotal = 0
                                 varSaldo = 0

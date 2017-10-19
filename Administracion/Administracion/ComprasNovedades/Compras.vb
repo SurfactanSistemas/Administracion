@@ -287,6 +287,14 @@ Public Class Compras
         validador.alsoValidate(laParidadEsValida, "La paridad con el dólar tiene que ser un valor positivo")
         validador.alsoValidate(cmbFormaPago.SelectedIndex > 0, "Debe indicarse el tipo de Moneda.")
 
+        If Val(cmbFormaPago.SelectedIndex) = 2 And Val(txtParidad.Text) = 0 Then
+
+            MsgBox("Debe cargarse la paridad", MsgBoxStyle.Information)
+            txtParidad.Focus()
+            Return False
+
+        End If
+
         Return validador.flush
     End Function
 
