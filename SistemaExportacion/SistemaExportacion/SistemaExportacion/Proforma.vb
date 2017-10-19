@@ -1213,7 +1213,8 @@ Public Class Proforma
             oMsg.Body = "Se encuentra APROBADA la Proforma Nº: " & NroProforma
 
             ' Modificar por los E-Mails que correspondan.
-            oMsg.To = "gferreyra@surfactan.com.ar"
+            'oMsg.To = "gferreyra@surfactan.com.ar"
+            oMsg.To = "nsoto@surfactan.com.ar"
 
             oMsg.Display()
 
