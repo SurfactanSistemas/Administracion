@@ -2702,7 +2702,7 @@ Public Class Pagos
             cn.Close()
         End Try
 
-        MsgBox("El número de orden asignado es: " & WOrdPago)
+        'MsgBox("El número de orden asignado es: " & WOrdPago)
 
         txtOrdenPago.Text = WOrdPago
 
@@ -6496,7 +6496,11 @@ Public Class Pagos
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
 
-            Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
+            'Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
+
+            If txtFechaAux.Text.Replace(" ", "").Length = 6 Then
+                txtFechaAux.Text &= "2017"
+            End If
 
             If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
 
@@ -6521,15 +6525,24 @@ Public Class Pagos
     Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellClick
         With gridFormaPagos
             If e.ColumnIndex = 2 Then
+
+                gridRecibos_CellEnter(sender, e)
+
+            End If
+        End With
+
+    End Sub
+
+    Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellEnter
+        With gridFormaPagos
+            If e.ColumnIndex = 2 Then
+                
                 Dim iRow, iCol As Integer
                 iRow = e.RowIndex
                 iCol = e.ColumnIndex
 
-                .CurrentCell = .Rows(iRow).Cells(iCol + 1)
-
                 Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
 
-                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 .ClearSelection()
                 _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
                 _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
@@ -6539,26 +6552,7 @@ Public Class Pagos
                 Wcol = iCol
                 txtFechaAux.Visible = True
                 txtFechaAux.Focus()
-            End If
-        End With
 
-    End Sub
-
-    Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellEnter
-        With gridFormaPagos
-            If e.ColumnIndex = 2 Then
-                '.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
-
-                .ClearSelection()
-                _location.Y += YMARGEN '183 '(4 + 180)
-                _location.X += XMARGEN '(7 + 10)
-                txtFechaAux.Location = _location
-                txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
-                WRow = e.RowIndex
-                Wcol = e.ColumnIndex
-                txtFechaAux.Visible = True
-                txtFechaAux.Focus()
             End If
         End With
     End Sub
