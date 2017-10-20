@@ -1,7 +1,9 @@
 ﻿Imports System.Data.SqlClient
+Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class AMBCursos
     Private Const TABLA_CURSOS = "Tema"
+    Private Const TABLA_TEMAS = "Curso"
 
     Private WClavesCursos(1000) As String
 
@@ -52,38 +54,42 @@ Public Class AMBCursos
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
 
         ' Limpiamos todos los campos del tipo Texto.
-        For Each txt As TextBox In {txtCodigo, txtDescripcion, txtAyuda, txtHoras}
+        For Each txt As TextBox In {txtTema, txtDescripcion, txtAyuda, txtDesde, txtHasta}
             txt.Text = ""
         Next
 
         GrupoConsulta.Visible = False
-        Try
-            txtCodigo.Text = _TraerProximoCodigoTarea()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
-        End Try
-        txtCodigo.Focus()
+        GrupoImpresion.Visible = False
+
+        ckTemaActual.Checked = True
+
+        dgvCursos.Rows.Clear()
+
+        dgvCursos.Rows.Add()
+
+        txtTema.Focus()
     End Sub
 
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHoras.KeyPress
+    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtTema.KeyPress, txtHasta.KeyPress, txtDesde.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+        GrupoImpresion.Visible = False
         GrupoConsulta.Visible = True
 
         Dim WCodigo, WDescripcion, WRenglon
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Curso, Descripcion FROM " & TABLA_CURSOS & " ORDER BY Curso")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo, Descripcion FROM " & TABLA_TEMAS & " ORDER BY Codigo")
         Dim dr As SqlDataReader
 
         Try
@@ -106,7 +112,7 @@ Public Class AMBCursos
 
                     With dr
 
-                        WCodigo = IIf(IsDBNull(.Item("Curso")), "", Trim(.Item("Curso")))
+                        WCodigo = IIf(IsDBNull(.Item("Codigo")), "", Trim(.Item("Codigo")))
                         WDescripcion = IIf(IsDBNull(.Item("Descripcion")), "", Trim(.Item("Descripcion")))
 
                         If WCodigo <> "" And WDescripcion <> "" Then
@@ -122,7 +128,7 @@ Public Class AMBCursos
             End If
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Throw New Exception("Hubo un problema al querer consultar los temas disponibles en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -140,7 +146,7 @@ Public Class AMBCursos
 
     Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
         GrupoConsulta.Visible = False
-        txtCodigo.Focus()
+        txtTema.Focus()
     End Sub
 
 
@@ -202,27 +208,28 @@ Public Class AMBCursos
     Private Sub lstConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
         If lstConsulta.SelectedItem = "" Then : Exit Sub : End If
 
-        txtCodigo.Text = WClavesCursos(lstConsulta.SelectedIndex)
+        txtTema.Text = WClavesCursos(lstConsulta.SelectedIndex)
 
-        txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        txtTema_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
         btnCerrarConsulta.PerformClick()
     End Sub
 
     Private Sub AMBCursos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        txtCodigo.Focus()
+        txtTema.Focus()
     End Sub
 
-    Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
+    Private Sub txtTema_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTema.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtCodigo.Text) = "" Then
+            If Trim(txtTema.Text) = "" Then
                 btnConsulta.PerformClick()
                 Exit Sub
             End If
 
             Try
-                _TraerTarea(txtCodigo.Text)
+                _TraerTarea(txtTema.Text)
+                Exit Sub
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
                 Exit Sub
@@ -231,7 +238,7 @@ Public Class AMBCursos
             txtDescripcion.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
-            txtCodigo.Text = ""
+            txtTema.Text = ""
         End If
 
     End Sub
@@ -243,15 +250,19 @@ Public Class AMBCursos
 
         btnLimpiar.PerformClick()
 
-        Dim WCodigo, WDescripcion, WHoras
+        Dim WCodigo, WDescripcionTema, WCurso, WDescripcionCurso, WHorasCurso, WRenglon
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM " & TABLA_CURSOS & " WHERE Curso = '" & codigo & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT t.Descripcion as DescriTema FROM " & TABLA_TEMAS & " as t WHERE t.Codigo = '" & codigo & "'")
+
         Dim dr As SqlDataReader
 
         Try
             WCodigo = codigo
-            WDescripcion = ""
-            WHoras = ""
+            WDescripcionTema = ""
+            WCurso = ""
+            WDescripcionCurso = ""
+            WHorasCurso = ""
+            WRenglon = 0
 
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
@@ -261,12 +272,34 @@ Public Class AMBCursos
 
             If dr.HasRows Then
                 dr.Read()
+                WDescripcionTema = IIf(IsDBNull(dr.Item("DescriTema")), "", dr.Item("DescriTema"))
 
-                With dr
-                    WDescripcion = IIf(IsDBNull(dr.Item("Descripcion")), "", dr.Item("Descripcion"))
-                    WHoras = IIf(IsDBNull(dr.Item("Horas")), "0", dr.Item("Horas"))
+                dr.Close()
 
-                End With
+                ' Buscamos los cursos que se tengan asociados.
+                cm.CommandText = "SELECT c.Tema as Curso, c.Descripcion as DescriCurso, c.Horas FROM " & TABLA_CURSOS & " as c WHERE c.Curso = '" & codigo & "' ORDER BY c.Tema"
+
+                dr = cm.ExecuteReader
+
+                If dr.HasRows Then
+                    While dr.Read()
+
+                        With dr
+
+                            WCurso = IIf(IsDBNull(.Item("Curso")), "", .Item("Curso"))
+                            WDescripcionCurso = IIf(IsDBNull(.Item("DescriCurso")), "", .Item("DescriCurso"))
+                            WHorasCurso = IIf(IsDBNull(.Item("Horas")), "", .Item("Horas"))
+
+                        End With
+
+                        With dgvCursos.Rows(WRenglon)
+                            .Cells("Curso").Value = WCurso
+                            .Cells("Descripcion").Value = WDescripcionCurso
+                            .Cells("Horas").Value = Helper.formatonumerico(WHorasCurso)
+                            WRenglon = dgvCursos.Rows.Add
+                        End With
+                    End While
+                End If
 
             End If
 
@@ -281,9 +314,14 @@ Public Class AMBCursos
 
         End Try
 
-        txtCodigo.Text = WCodigo
-        txtDescripcion.Text = Trim(WDescripcion)
-        txtHoras.Text = Helper.formatonumerico(WHoras)
+        txtTema.Text = WCodigo
+        txtDescripcion.Text = Trim(WDescripcionTema)
+
+        ' Nos posicionamos automaticamente en la grilla de cursos.
+        If dgvCursos.Rows.Count > 0 Then
+            dgvCursos.CurrentCell = dgvCursos.Rows(0).Cells(0)
+            dgvCursos.Focus()
+        End If
 
     End Sub
 
@@ -329,9 +367,17 @@ Public Class AMBCursos
     End Function
 
     Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+        ckTemaActual.Checked = True
+        txtDesde.Text = ""
+        txtHasta.Text = ""
+        GrupoConsulta.Visible = False
+        GrupoImpresion.Visible = True
+    End Sub
+
+    Private Sub _Imprimir(Optional ByVal _Formula As String = "")
         With VistaPrevia
-            '.Reporte = New ListadoCursos
-            '.Formula = "{Curso.Codigo} > 0"
+            .Reporte = New ListadoCursos
+            .Formula = _Formula
             .Mostrar()
         End With
     End Sub
@@ -340,77 +386,117 @@ Public Class AMBCursos
 
         If Not _DatosValidos() Then : Exit Sub : End If
 
-        Dim WCodigo, WDescripcion, WTemaI, WTemaII, WTemaIII, WResponsable, WResponsableII, WResponsableIII, WHoras, WTipo
+        Dim WCurso, WDescripcionCurso, WHorasTema, WTema, WDescripcionTema, WClave
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo FROM " & TABLA_CURSOS & " WHERE Codigo = '" & Trim(txtCodigo.Text) & "'")
-        Dim dr As SqlDataReader
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim trans As SqlTransaction = Nothing
 
         Try
-            WCodigo = Trim(txtCodigo.Text)
-            WDescripcion = _Left(txtDescripcion.Text, 90)
-            WHoras = Helper.formatonumerico(txtHoras.Text)
+            WCurso = ""
+            WDescripcionCurso = ""
+            WHorasTema = ""
+            WTema = ""
+            WDescripcionTema = ""
+            WClave = ""
+
+            WCurso = Trim(txtTema.Text)
 
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
             cm.Connection = cn
+            trans = cn.BeginTransaction
+            cm.Transaction = trans
 
-            dr = cm.ExecuteReader()
+            cm.CommandText = "DELETE FROM " & TABLA_CURSOS & " WHERE Curso = '" & WCurso & "'"
+            cm.ExecuteNonQuery()
 
-            If dr.HasRows Then
+            For Each row As DataGridViewRow In dgvCursos.Rows
+                With row
+                    If Not .IsNewRow Then
+                        If Val(.Cells("Curso").Value) > 0 Then
 
-                ' Actualizamos
-                'cm.CommandText = "UPDATE " & TABLA_CURSOS & " SET Descripcion = '" & WDescripcion & "', TemaI = '" & WTemaI & "', TemaII = '" & WTemaII & "', TemaIII = '" & WTemaIII & "', Responsable = '" & WResponsable & "', ResponsableII = " & WResponsableII & ", ResponsableIII = " & WResponsableIII & ", ResponsableIV = 0, Horas = " & WHoras & ", Tipo = " & WTipo & " WHERE Codigo = '" & Trim(txtCodigo.Text) & "'"
-            Else
+                            WHorasTema = Helper.formatonumerico(.Cells("Horas").Value)
+                            WTema = Trim(.Cells("Curso").Value)
+                            WDescripcionTema = Trim(.Cells("Descripcion").Value)
+                            WDescripcionTema = _Left(WDescripcionTema, 90)
 
-                ' Damos de Alta.
-                'cm.CommandText = "INSERT INTO " & TABLA_CURSOS & " (Codigo, Descripcion, TemaI, TemaII, TemaIII, Responsable, Horas, Tipo, ResponsableII, ResponsableIII, ResponsableIV) VALUES " _
-                '                & "(" & WCodigo & ", '" & WDescripcion & "', '" & WTemaI & "', '" & WTemaII & "', '" & WTemaIII & "', '" & WResponsable & "', " & WHoras & ", " & WTipo & ", " & WResponsableII & ", " & WResponsableIII & ", 0)"
-            End If
+                            WClave = Helper.ceros(WCurso, 4) & Helper.ceros(WTema, 4)
 
-            dr.Close()
-            'cm.ExecuteNonQuery()
+                            cm.CommandText = "INSERT INTO " & TABLA_CURSOS & " (Clave, Tema, Descripcion, Curso, Horas) " _
+                                           & "VALUES ('" & WClave & "', " & WTema & ", '" & WDescripcionTema & "', " & WCurso & ", " & WHorasTema & ")"
+
+                            cm.ExecuteNonQuery()
+                        End If
+                    End If
+                End With
+            Next
+
+            trans.Commit()
 
         Catch ex As Exception
-            'Throw New Exception("Hubo un problema al querer grabar el Sector indicado en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-            MsgBox("Hubo un problema al querer grabar el Tema indicado en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+            If Not IsNothing(trans) Then
+                trans.Rollback()
+            End If
+            MsgBox("Hubo un problema al querer grabar el Curso indicado en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         Finally
 
-            dr = Nothing
             cn.Close()
             cn = Nothing
             cm = Nothing
 
         End Try
 
-        MsgBox("Tarea Guardada con exito", MsgBoxStyle.Information)
+        ' Si llegamos hasta acá estariamos sin problemas. Confirmamos los cambios.
+
+        MsgBox("Curso Guardado con exito", MsgBoxStyle.Information)
         btnLimpiar.PerformClick()
 
     End Sub
 
     Private Function _DatosValidos() As Boolean
 
-        If Trim(txtCodigo.Text) = "" Then
+        If Trim(txtTema.Text) = "" Then
             Return False
         End If
 
-        If Trim(txtDescripcion.Text) = "" Then
-            MsgBox("La tarea debe tener una descripción", MsgBoxStyle.Information)
-            Return False
-        End If
+        ' Confirmamos todas las celdas antes de validarlas.
+        dgvCursos.CommitEdit(DataGridViewDataErrorContexts.Commit)
+
+        For Each row As DataGridViewRow In dgvCursos.Rows
+            With row
+
+                ' Eliminamos los renglones nuevos.
+                If Not .IsNewRow Then
+
+                    If Trim(.Cells("Curso").Value) <> "" Then
+                        If Trim(.Cells("Descripcion").Value) = "" Then
+                            MsgBox("Todos los cursos deben tener una descripción", MsgBoxStyle.Critical)
+                            Return False
+                        End If
+                        If Val(.Cells("Horas").Value) = 0 Then
+                            MsgBox("Todos los cursos deben tener una cantidad de h", MsgBoxStyle.Critical)
+                            Return False
+                        End If
+                    End If
+
+                End If
+
+            End With
+        Next
 
         Return True
     End Function
 
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
-        If Trim(txtCodigo.Text) = "" Then : Exit Sub : End If
+        If Trim(txtTema.Text) = "" Then : Exit Sub : End If
 
-        If MsgBox("¿Esta seguro de querer eliminar la Tarea indicada?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+        If MsgBox("¿Esta seguro de querer eliminar este Curso?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
             Exit Sub
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM " & TABLA_CURSOS & " WHERE Clave = '" & Trim(txtCodigo.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM " & TABLA_CURSOS & " WHERE Curso = '" & Trim(txtTema.Text) & "'")
 
         Try
 
@@ -422,7 +508,7 @@ Public Class AMBCursos
 
         Catch ex As Exception
             'Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-            MsgBox("Hubo un problema al querer eliminar la Tarea en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer eliminar el Curso de la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
         Finally
 
             cn.Close()
@@ -431,17 +517,17 @@ Public Class AMBCursos
 
         End Try
 
-        MsgBox("Tarea eliminada con exito", MsgBoxStyle.Information)
+        MsgBox("Curso eliminadado con exito", MsgBoxStyle.Information)
         btnLimpiar.PerformClick()
 
     End Sub
 
     Private Sub btnPrimerRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerRegistro.Click
-        If Trim(txtCodigo.Text) = "" Then
-            txtCodigo.Text = "1"
+        If Trim(txtTema.Text) = "" Then
+            txtTema.Text = "1"
         End If
 
-        Dim WCodigo = txtCodigo.Text
+        Dim WCodigo = txtTema.Text
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT MIN(Curso) as PrimerRegistro FROM " & TABLA_CURSOS & " WHERE Curso > 0")
@@ -475,18 +561,18 @@ Public Class AMBCursos
 
         End Try
 
-        txtCodigo.Text = WCodigo
+        txtTema.Text = WCodigo
 
-        txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        txtTema_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
     End Sub
 
     Private Sub btnUltimoRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUltimoRegistro.Click
-        If Trim(txtCodigo.Text) = "" Then
-            txtCodigo.Text = "1"
+        If Trim(txtTema.Text) = "" Then
+            txtTema.Text = "1"
         End If
 
-        Dim WCodigo = txtCodigo.Text
+        Dim WCodigo = txtTema.Text
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Curso) as UltimoRegistro FROM " & TABLA_CURSOS)
@@ -520,21 +606,21 @@ Public Class AMBCursos
 
         End Try
 
-        txtCodigo.Text = WCodigo
+        txtTema.Text = WCodigo
 
-        txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        txtTema_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
     End Sub
 
     Private Sub btnAnteriorRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnteriorRegistro.Click
-        If Trim(txtCodigo.Text) = "" Then
-            txtCodigo.Text = "1"
+        If Trim(txtTema.Text) = "" Then
+            txtTema.Text = "1"
         End If
 
-        Dim WCodigo = txtCodigo.Text
+        Dim WCodigo = txtTema.Text
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Curso as AnteriorRegistro FROM " & TABLA_CURSOS & " WHERE Curso < " & Trim(txtCodigo.Text) & " ORDER BY Curso DESC")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Curso as AnteriorRegistro FROM " & TABLA_CURSOS & " WHERE Curso < " & Trim(txtTema.Text) & " ORDER BY Curso DESC")
         Dim dr As SqlDataReader
 
         Try
@@ -565,21 +651,21 @@ Public Class AMBCursos
 
         End Try
 
-        txtCodigo.Text = WCodigo
+        txtTema.Text = WCodigo
 
-        txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        txtTema_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
     Private Sub btnSiguienteRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSiguienteRegistro.Click
 
-        If Trim(txtCodigo.Text) = "" Then
-            txtCodigo.Text = "1"
+        If Trim(txtTema.Text) = "" Then
+            txtTema.Text = "1"
         End If
 
-        Dim WCodigo = txtCodigo.Text
+        Dim WCodigo = txtTema.Text
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Curso as SiguienteRegistro FROM " & TABLA_CURSOS & " WHERE Curso > " & Trim(txtCodigo.Text) & " ORDER BY Curso")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Curso as SiguienteRegistro FROM " & TABLA_CURSOS & " WHERE Curso > " & Trim(txtTema.Text) & " ORDER BY Curso")
         Dim dr As SqlDataReader
 
         Try
@@ -610,9 +696,9 @@ Public Class AMBCursos
 
         End Try
 
-        txtCodigo.Text = WCodigo
+        txtTema.Text = WCodigo
 
-        txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        txtTema_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
     Private Sub txtDescripcion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyDown
@@ -620,7 +706,7 @@ Public Class AMBCursos
         If e.KeyData = Keys.Enter Then
             If Trim(txtDescripcion.Text) = "" Then : Exit Sub : End If
 
-            txtHoras.Focus()
+            'txtHoras.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtDescripcion.Text = ""
@@ -628,11 +714,234 @@ Public Class AMBCursos
 
     End Sub
 
-    Private Sub txtCodigo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigo.MouseDoubleClick
+    Private Sub txtTema_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTema.MouseDoubleClick
         btnConsulta.PerformClick()
     End Sub
 
-    Private Sub cmbTipo_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        txtHoras.Focus()
+    Private Sub ckIntervaloTemas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckIntervaloTemas.CheckedChanged
+        If ckIntervaloTemas.Checked Then
+            txtDesde.Focus()
+        End If
+    End Sub
+
+    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesde.Text) = "" Then
+                txtDesde.Text = "0"
+            End If
+
+            txtHasta.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesde.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtHasta.Text) = "" Then
+                txtHasta.Text = "99999999"
+            End If
+
+            txtDesde.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHasta.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+        Dim _Formula As String = ""
+
+        If ckTemaActual.Checked Then
+
+            If Trim(txtTema.Text) = "" Or Val(txtTema.Text) = 0 Then : Exit Sub : End If
+
+            _Formula = "{Tema.Curso}=" & Trim(txtTema.Text)
+
+        ElseIf ckTodosTemas.Checked Then
+
+            _Formula = "{Tema.Curso}>0"
+
+        ElseIf ckIntervaloTemas.Checked Then
+
+            If Trim(txtDesde.Text) = "" Then
+                txtDesde.Text = "1"
+            End If
+
+            If Trim(txtHasta.Text) = "" Then
+                txtHasta.Text = "999999999"
+            End If
+
+            _Formula = "{Tema.Curso} in " & Trim(txtDesde.Text) & " to " & Trim(txtHasta.Text)
+
+        End If
+
+        _Imprimir(_Formula)
+
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        GrupoImpresion.Visible = False
+    End Sub
+
+    Private Function _EsNumero(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
+    End Function
+
+    Private Function _EsControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        Select Case keycode
+            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
+                valido = True
+            Case Else
+                valido = False
+        End Select
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
+    End Function
+
+    Private Function _EsNumeroOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimalOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+
+        With dgvCursos
+            If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+                .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                Dim iCol As Integer = .CurrentCell.ColumnIndex
+                Dim iRow As Integer = .CurrentCell.RowIndex
+                Dim valor As String = .CurrentCell.Value
+
+                ' Limitamos los caracteres permitidos para cada una de las columnas.
+                Select Case iCol
+                    Case 0
+                        If Not _EsNumeroOControl(keyData) Then
+                            Return True
+                        End If
+                    Case 2
+                        If Not _EsDecimalOControl(keyData) Then
+                            Return True
+                        End If
+                    Case Else
+
+                End Select
+
+                If msg.WParam.ToInt32() = Keys.Enter Then
+
+                    If valor <> "" Then
+
+                        Select Case iCol
+                            Case 0
+                                If _NroCursoEnUso(valor, iRow) Then
+                                    MsgBox("El Nro de Curso, ya se encuentra utilizado.", MsgBoxStyle.Information)
+                                    Return True
+                                End If
+                            Case 2
+                                .CurrentCell.Value = Helper.formatonumerico(valor)
+                            Case Else
+
+                        End Select
+                    Else
+                        Select Case iCol
+                            Case 0, 1, 2
+                                Return True
+                            Case Else
+
+                        End Select
+                    End If
+
+                    Select Case iCol
+                        Case 2
+
+                            Try
+                                .CurrentCell = .Rows(iRow + 1).Cells(0)
+                            Catch ex As Exception
+                                .Rows.Add()
+                                .CurrentCell = .Rows(iRow + 1).Cells(0)
+                            End Try
+
+                        Case Else
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End Select
+
+                    Return True
+
+                ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                    .Rows(iRow).Cells(iCol).Value = ""
+
+                    If iCol = 2 Then
+                        .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                    Else
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End If
+
+                    .CurrentCell = .Rows(iRow).Cells(iCol)
+                End If
+            End If
+
+        End With
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
+    Private Function _NroCursoEnUso(ByVal NroCurso As String, ByVal iRow As Integer) As Boolean
+
+        For Each row As DataGridViewRow In dgvCursos.Rows
+            With row
+
+                If Val(.Cells("Curso").Value) = Val(NroCurso) And .Index <> iRow Then
+                    Return True
+                End If
+
+            End With
+        Next
+
+        Return False
+
+    End Function
+
+    Private Sub dgvCursos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvCursos.RowHeaderMouseDoubleClick
+
+        If MsgBox("¿Está seguro de que quiere eliminar el curso indicado?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        Dim row As DataGridViewRow = dgvCursos.Rows(e.RowIndex)
+
+        dgvCursos.Rows.Remove(row)
+
     End Sub
 End Class

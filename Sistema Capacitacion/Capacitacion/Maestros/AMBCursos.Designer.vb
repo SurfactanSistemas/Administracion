@@ -23,6 +23,8 @@ Partial Class AMBCursos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -41,11 +43,13 @@ Partial Class AMBCursos
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.txtHoras = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.dgvCursos = New System.Windows.Forms.DataGridView()
+        Me.Curso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Horas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtCodigo = New System.Windows.Forms.TextBox()
+        Me.txtTema = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.GrupoConsultaII = New System.Windows.Forms.GroupBox()
         Me.lstConsulta = New System.Windows.Forms.ListBox()
@@ -54,13 +58,29 @@ Partial Class AMBCursos
         Me.lstFiltrada = New System.Windows.Forms.ListBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GrupoConsulta = New System.Windows.Forms.Panel()
+        Me.GrupoImpresion = New System.Windows.Forms.Panel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.ckIntervaloTemas = New System.Windows.Forms.RadioButton()
+        Me.ckTodosTemas = New System.Windows.Forms.RadioButton()
+        Me.ckTemaActual = New System.Windows.Forms.RadioButton()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.txtHasta = New System.Windows.Forms.TextBox()
+        Me.txtDesde = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        CType(Me.dgvCursos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrupoConsultaII.SuspendLayout()
         Me.GrupoConsulta.SuspendLayout()
+        Me.GrupoImpresion.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -90,8 +110,8 @@ Partial Class AMBCursos
         Me.LayoutCabecera.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCabecera.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180.0!))
         Me.LayoutCabecera.Controls.Add(Me.Label3, 0, 0)
-        Me.LayoutCabecera.Controls.Add(Me.Label1, 0, 0)
         Me.LayoutCabecera.Controls.Add(Me.Label2, 2, 0)
+        Me.LayoutCabecera.Controls.Add(Me.Label1, 0, 0)
         Me.LayoutCabecera.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutCabecera.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold)
         Me.LayoutCabecera.ForeColor = System.Drawing.SystemColors.Control
@@ -356,11 +376,10 @@ Partial Class AMBCursos
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.txtHoras)
-        Me.Panel1.Controls.Add(Me.Label11)
+        Me.Panel1.Controls.Add(Me.dgvCursos)
         Me.Panel1.Controls.Add(Me.txtDescripcion)
         Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.txtCodigo)
+        Me.Panel1.Controls.Add(Me.txtTema)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 45)
@@ -369,31 +388,45 @@ Partial Class AMBCursos
         Me.Panel1.Size = New System.Drawing.Size(711, 296)
         Me.Panel1.TabIndex = 1
         '
-        'txtHoras
+        'dgvCursos
         '
-        Me.txtHoras.Location = New System.Drawing.Point(161, 46)
-        Me.txtHoras.MaxLength = 50
-        Me.txtHoras.Name = "txtHoras"
-        Me.txtHoras.Size = New System.Drawing.Size(80, 20)
-        Me.txtHoras.TabIndex = 4
-        Me.txtHoras.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.dgvCursos.AllowUserToAddRows = False
+        Me.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvCursos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Curso, Me.Descripcion, Me.Horas})
+        Me.dgvCursos.Location = New System.Drawing.Point(24, 56)
+        Me.dgvCursos.Name = "dgvCursos"
+        Me.dgvCursos.Size = New System.Drawing.Size(663, 206)
+        Me.dgvCursos.TabIndex = 2
         '
-        'Label11
+        'Curso
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(43, 50)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(116, 13)
-        Me.Label11.TabIndex = 3
-        Me.Label11.Text = "Cantidad de Horas:"
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Curso.DefaultCellStyle = DataGridViewCellStyle21
+        Me.Curso.HeaderText = "Curso"
+        Me.Curso.Name = "Curso"
+        Me.Curso.Width = 50
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.HeaderText = "Decripcion"
+        Me.Descripcion.Name = "Descripcion"
+        '
+        'Horas
+        '
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Horas.DefaultCellStyle = DataGridViewCellStyle22
+        Me.Horas.HeaderText = "Cant. Hs"
+        Me.Horas.Name = "Horas"
         '
         'txtDescripcion
         '
-        Me.txtDescripcion.Location = New System.Drawing.Point(321, 20)
+        Me.txtDescripcion.BackColor = System.Drawing.SystemColors.Window
+        Me.txtDescripcion.Enabled = False
+        Me.txtDescripcion.Location = New System.Drawing.Point(291, 20)
         Me.txtDescripcion.MaxLength = 90
         Me.txtDescripcion.Name = "txtDescripcion"
+        Me.txtDescripcion.ReadOnly = True
         Me.txtDescripcion.Size = New System.Drawing.Size(347, 20)
         Me.txtDescripcion.TabIndex = 1
         '
@@ -402,30 +435,30 @@ Partial Class AMBCursos
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(243, 24)
+        Me.Label5.Location = New System.Drawing.Point(213, 24)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(78, 13)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Descripción:"
         '
-        'txtCodigo
+        'txtTema
         '
-        Me.txtCodigo.Location = New System.Drawing.Point(161, 20)
-        Me.txtCodigo.Name = "txtCodigo"
-        Me.txtCodigo.Size = New System.Drawing.Size(80, 20)
-        Me.txtCodigo.TabIndex = 1
-        Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtTema.Location = New System.Drawing.Point(131, 20)
+        Me.txtTema.Name = "txtTema"
+        Me.txtTema.Size = New System.Drawing.Size(80, 20)
+        Me.txtTema.TabIndex = 1
+        Me.txtTema.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(109, 24)
+        Me.Label4.Location = New System.Drawing.Point(79, 24)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(50, 13)
+        Me.Label4.Size = New System.Drawing.Size(42, 13)
         Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Código:"
+        Me.Label4.Text = "Tema:"
         '
         'GrupoConsultaII
         '
@@ -441,7 +474,7 @@ Partial Class AMBCursos
         Me.GrupoConsultaII.Size = New System.Drawing.Size(334, 208)
         Me.GrupoConsultaII.TabIndex = 3
         Me.GrupoConsultaII.TabStop = False
-        Me.GrupoConsultaII.Text = "Consultas"
+        Me.GrupoConsultaII.Text = "Consultas de Temas"
         '
         'lstConsulta
         '
@@ -485,17 +518,150 @@ Partial Class AMBCursos
         '
         Me.GrupoConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.GrupoConsulta.Controls.Add(Me.GrupoConsultaII)
-        Me.GrupoConsulta.Location = New System.Drawing.Point(171, 48)
+        Me.GrupoConsulta.Location = New System.Drawing.Point(168, 99)
         Me.GrupoConsulta.Name = "GrupoConsulta"
         Me.GrupoConsulta.Size = New System.Drawing.Size(375, 241)
         Me.GrupoConsulta.TabIndex = 4
         Me.GrupoConsulta.Visible = False
+        '
+        'GrupoImpresion
+        '
+        Me.GrupoImpresion.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.GrupoImpresion.Controls.Add(Me.GroupBox2)
+        Me.GrupoImpresion.Location = New System.Drawing.Point(163, 158)
+        Me.GrupoImpresion.Name = "GrupoImpresion"
+        Me.GrupoImpresion.Size = New System.Drawing.Size(385, 123)
+        Me.GrupoImpresion.TabIndex = 6
+        Me.GrupoImpresion.Visible = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.GroupBox3)
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Controls.Add(Me.Button1)
+        Me.GroupBox2.Controls.Add(Me.txtHasta)
+        Me.GroupBox2.Controls.Add(Me.txtDesde)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox2.Location = New System.Drawing.Point(8, 3)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(368, 116)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.ckIntervaloTemas)
+        Me.GroupBox3.Controls.Add(Me.ckTodosTemas)
+        Me.GroupBox3.Controls.Add(Me.ckTemaActual)
+        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 13)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.GroupBox3.Size = New System.Drawing.Size(170, 91)
+        Me.GroupBox3.TabIndex = 3
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Tipo Reporte"
+        '
+        'ckIntervaloTemas
+        '
+        Me.ckIntervaloTemas.AutoSize = True
+        Me.ckIntervaloTemas.Location = New System.Drawing.Point(18, 61)
+        Me.ckIntervaloTemas.Name = "ckIntervaloTemas"
+        Me.ckIntervaloTemas.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ckIntervaloTemas.Size = New System.Drawing.Size(135, 17)
+        Me.ckIntervaloTemas.TabIndex = 0
+        Me.ckIntervaloTemas.Text = "Por Intervalo de Temas"
+        Me.ckIntervaloTemas.UseVisualStyleBackColor = True
+        '
+        'ckTodosTemas
+        '
+        Me.ckTodosTemas.AutoSize = True
+        Me.ckTodosTemas.Location = New System.Drawing.Point(18, 42)
+        Me.ckTodosTemas.Name = "ckTodosTemas"
+        Me.ckTodosTemas.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ckTodosTemas.Size = New System.Drawing.Size(106, 17)
+        Me.ckTodosTemas.TabIndex = 0
+        Me.ckTodosTemas.Text = "Todos los Temas"
+        Me.ckTodosTemas.UseVisualStyleBackColor = True
+        '
+        'ckTemaActual
+        '
+        Me.ckTemaActual.AutoSize = True
+        Me.ckTemaActual.Checked = True
+        Me.ckTemaActual.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.ckTemaActual.Location = New System.Drawing.Point(18, 23)
+        Me.ckTemaActual.Name = "ckTemaActual"
+        Me.ckTemaActual.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ckTemaActual.Size = New System.Drawing.Size(99, 17)
+        Me.ckTemaActual.TabIndex = 0
+        Me.ckTemaActual.TabStop = True
+        Me.ckTemaActual.Text = "Sólo este Tema"
+        Me.ckTemaActual.UseVisualStyleBackColor = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label7.Location = New System.Drawing.Point(199, 49)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(79, 13)
+        Me.Label7.TabIndex = 2
+        Me.Label7.Text = "Hasta Tema:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label6.Location = New System.Drawing.Point(196, 23)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(82, 13)
+        Me.Label6.TabIndex = 2
+        Me.Label6.Text = "Desde Tema:"
+        '
+        'Button1
+        '
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button1.Location = New System.Drawing.Point(191, 74)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(99, 23)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "Generar Reporte"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'txtHasta
+        '
+        Me.txtHasta.Location = New System.Drawing.Point(278, 46)
+        Me.txtHasta.Name = "txtHasta"
+        Me.txtHasta.Size = New System.Drawing.Size(67, 20)
+        Me.txtHasta.TabIndex = 0
+        '
+        'txtDesde
+        '
+        Me.txtDesde.Location = New System.Drawing.Point(278, 20)
+        Me.txtDesde.Name = "txtDesde"
+        Me.txtDesde.Size = New System.Drawing.Size(67, 20)
+        Me.txtDesde.TabIndex = 0
+        '
+        'Button2
+        '
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button2.Location = New System.Drawing.Point(296, 74)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(64, 23)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "Cancelar"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'AMBCursos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(711, 438)
+        Me.Controls.Add(Me.GrupoImpresion)
         Me.Controls.Add(Me.GrupoConsulta)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Name = "AMBCursos"
@@ -506,9 +672,15 @@ Partial Class AMBCursos
         Me.GroupBox1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.dgvCursos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GrupoConsultaII.ResumeLayout(False)
         Me.GrupoConsultaII.PerformLayout()
         Me.GrupoConsulta.ResumeLayout(False)
+        Me.GrupoImpresion.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -521,7 +693,7 @@ Partial Class AMBCursos
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtDescripcion As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
+    Friend WithEvents txtTema As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
@@ -541,6 +713,20 @@ Partial Class AMBCursos
     Friend WithEvents btnUltimoRegistro As System.Windows.Forms.Button
     Friend WithEvents btnAnteriorRegistro As System.Windows.Forms.Button
     Friend WithEvents GrupoConsulta As System.Windows.Forms.Panel
-    Friend WithEvents txtHoras As System.Windows.Forms.TextBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents dgvCursos As System.Windows.Forms.DataGridView
+    Friend WithEvents Curso As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Horas As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents GrupoImpresion As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents ckIntervaloTemas As System.Windows.Forms.RadioButton
+    Friend WithEvents ckTodosTemas As System.Windows.Forms.RadioButton
+    Friend WithEvents ckTemaActual As System.Windows.Forms.RadioButton
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents txtHasta As System.Windows.Forms.TextBox
+    Friend WithEvents txtDesde As System.Windows.Forms.TextBox
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class
