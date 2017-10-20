@@ -17,6 +17,9 @@ Public Class ListadoEstaRanking
     Private Sub ListadoEstaRanking_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ReDim varListaMp(10000, 2)
+
+        label3.Text = Globals.NombreEmpresa
+
         txtLugarMp = 0
 
         txtDesdeFecha.Text = "  /  /    "

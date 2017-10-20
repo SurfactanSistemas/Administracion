@@ -18,6 +18,8 @@ Public Class ListadoEstaVendedorLinea
 
         ReDim varListaMp(10000, 2)
 
+        label3.Text = Globals.NombreEmpresa
+
         txtLugarMp = 0
 
         txtDesdeFecha.Text = "  /  /    "
@@ -196,7 +198,7 @@ Public Class ListadoEstaVendedorLinea
 
         ProgressBar1.Visible = False
 
-        If Vendedor.permisos = 99 Or Vendedor.permisos = 2 Or Vendedor.permisos = 13 Then
+        If Vendedor.permisos = 99 Or ((Vendedor.permisos = 2 Or Vendedor.permisos = 13) And UCase(Globals.empresa) = "SURFACTAN") Then
 
             If TipoCosto.SelectedIndex = 0 Then
                 txtTitulo = txtTitulo + " (Costo Actual)"
@@ -285,8 +287,16 @@ Public Class ListadoEstaVendedorLinea
 
         Dim WReporte As String = "WEstaVendedorLineaNet.rpt"
 
-        If Vendedor.permisos <> 99 And Vendedor.permisos <> 2 And Vendedor.permisos <> 13 Then
+        If Vendedor.permisos <> 99 Then
             WReporte = "WEstaVendedorLineaNetVendedor.rpt"
+        End If
+
+        If UCase(Globals.empresa) = "SURFACTAN" Then
+            WReporte = "WEstaVendedorLineaNet.rpt"
+
+            If Vendedor.permisos <> 99 And Vendedor.permisos <> 2 And Vendedor.permisos <> 13 Then
+                WReporte = "WEstaVendedorLineaNetVendedor.rpt"
+            End If
         End If
 
         Dim viewer As New ReportViewer("Listado de Vendedores, Rubro y Linea", Globals.reportPathWithName(Wreporte), txtFormula)

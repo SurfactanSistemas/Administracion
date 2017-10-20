@@ -20,6 +20,8 @@ Public Class ListadoEstaAnual
 
     Private Sub ListadoEstaAnual_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        label3.Text = Globals.NombreEmpresa
+
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 

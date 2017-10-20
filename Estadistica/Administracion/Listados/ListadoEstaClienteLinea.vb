@@ -20,6 +20,8 @@ Public Class ListadoEstaClienteLinea
 
         ReDim varListaMp(10000, 2)
 
+        label3.Text = Globals.NombreEmpresa
+
         txtLugarMp = 0
 
         txtDesdeFecha.Text = "  /  /    "

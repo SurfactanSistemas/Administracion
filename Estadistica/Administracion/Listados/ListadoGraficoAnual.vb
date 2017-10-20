@@ -24,6 +24,8 @@ Public Class ListadoGraficoAnual
 
         ReDim varListaMp(50000, 2)
 
+        label3.Text = Globals.NombreEmpresa
+
         txtLugarMp = 0
 
         txtAno.Text = ""

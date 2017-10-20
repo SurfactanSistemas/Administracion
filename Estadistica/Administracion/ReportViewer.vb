@@ -17,49 +17,23 @@ Public Class ReportViewer
         ruta = rutaReporte
         formula = formulaReporte
         reporte.Load(ruta)
-        'DsNombre.Value = "Surfactan"
-        'RpDatos.Add(DsNombre)
-        'reporte.DataDefinition.ParameterFields("txtEmpresa").ApplyCurrentValues(RpDatos)
-        'RpDatos.Clear()
+        reporte.SetParameterValue(0, ClasesCompartidas.Globals.NombreEmpresa)
 
-    End Sub
-
-    Private Sub ReportViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Text = nombre
-        CrystalReportViewer1.SelectionFormula = formula
-
-
-
-        'reporte.SetDatabaseLogon("usuarioadmin", "usuarioadmin", "(LOCAL)\SQLEXPRESS", "Surfactan_II")
-        'For Each tabla As Table In reporte.Database.Tables
-        '    Dim conexion As New ConnectionInfo
-        '    conexion.DatabaseName = "Surfactan_II"
-        '    conexion.ServerName = "(LOCAL)\SQLEXPRESS"
-        '    conexion.UserID = "usuarioadmin"
-        '    conexion.Password = "usuarioadmin"
-        '    tabla.LogOnInfo.ConnectionInfo = conexion
-
-        '    'tabla.ConnectionProperties.Add("DSN", )
-        '    'tabla.ConnectionProperties.Add("Server", "(LOCAL)\SQLEXPRESS")
-        '    'tabla.ConnectionProperties.Add("Database", "surfactan_ii")
-        '    'tabla.ConnectionProperties.Add("User ID", "usuarioadmin")
-        '    'tabla.ConnectionProperties.Add("Password", "usuarioadmin")
-        '    'tabla.ConnectionProperties.Add("UseDSNProperties", False)
-        'Next
-
-        CrystalReportViewer1.ReportSource = reporte
-
+        ' CONECTAMOS CON LA BASE DE DATOS QUE CORRESPONDA.
         Dim cs = ""
 
         Try
+            ' Buscamos el string de conexion.
             cs = ClasesCompartidas.Globals.getConnectionString()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         End Try
 
+        ' Extraemos los datos de conexion del string de conexion.
         Dim cnsb As New SqlClient.SqlConnectionStringBuilder(cs)
 
+        ' Asignamos los datos al reporte.
         reporte.SetDatabaseLogon(cnsb.UserID, cnsb.Password, cnsb.DataSource, cnsb.InitialCatalog)
 
         Dim conexion As New ConnectionInfo
@@ -71,16 +45,20 @@ Public Class ReportViewer
         Dim tli As New TableLogOnInfo()
         tli.ConnectionInfo = conexion
 
+        ' Volvemos a asignar los datos de conexion pero ahora a cada una de las tablas que tenga el reporte.
         For Each tabla As Table In reporte.Database.Tables
 
             tabla.ApplyLogOnInfo(tli)
 
         Next
 
-        'For Each logInfo In CrystalReportViewer1.LogOnInfo
-        '    logInfo.ConnectionInfo = conexion
-        'Next
+    End Sub
 
+    Private Sub ReportViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Text = nombre
+        CrystalReportViewer1.SelectionFormula = formula
+
+        CrystalReportViewer1.ReportSource = reporte
 
         CrystalReportViewer1.Refresh()
     End Sub

@@ -3,6 +3,10 @@
 Public Class Globals
     Public Shared empresa As String
 
+    Public Shared Function NombreEmpresa() As String
+        Return empresa & " S.A."
+    End Function
+
     Public Shared Function reportPathWithName(ByVal reportName As String)
         Dim path As String
         Try
