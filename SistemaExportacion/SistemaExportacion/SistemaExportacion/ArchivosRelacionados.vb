@@ -4,7 +4,7 @@ Imports Microsoft.VisualBasic.FileIO
 
 Public Class ArchivosRelacionados
 
-    Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
+    Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.xlsm|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
 
     Private _NroProforma As String
     Public Property NroProforma() As String
@@ -84,7 +84,7 @@ Public Class ArchivosRelacionados
 
             Case ".DOC", ".DOCX"
                 icono = My.Resources.Word_icon
-            Case ".XLS", ".XLSX"
+            Case ".XLS", ".XLSX", ".XLSM"
                 icono = My.Resources.Excel_icon
             Case ".PDF"
                 icono = My.Resources.pdf_icono
