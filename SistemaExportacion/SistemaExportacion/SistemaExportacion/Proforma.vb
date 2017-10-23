@@ -1281,6 +1281,7 @@ Public Class Proforma
     Private Sub _NotificarAVentas(ByVal NroProforma)
         Dim oApp As Outlook._Application
         Dim oMsg As Outlook._MailItem
+        Dim WArchivoProforma = ""
 
         Try
             oApp = New Outlook.Application()
@@ -1289,6 +1290,14 @@ Public Class Proforma
             oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
             oMsg.Subject = "Notificación de Aprobación de Proforma (Nº: " & NroProforma & ")"
             oMsg.Body = "Se encuentra APROBADA la Proforma Nº: " & NroProforma
+
+            If NroProforma.ToString.Length < 6 Then : Helper.ceros(NroProforma, 6) : End If
+
+            WArchivoProforma = Helper._CarpetaArchivosProforma(NroProforma) & "Proforma" & NroProforma & ".pdf"
+
+            If File.Exists(WArchivoProforma) Then
+                oMsg.Attachments.Add(WArchivoProforma)
+            End If
 
             ' Modificar por los E-Mails que correspondan.
             'oMsg.To = "gferreyra@surfactan.com.ar"
