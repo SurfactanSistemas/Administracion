@@ -358,11 +358,48 @@ Public Class Proforma
 
     End Sub
 
+    Private Function _BuscarNombreProductoPorCliente(ByVal _CodProd, ByVal _Cliente)
+        _CodProd = UCase(Trim(_CodProd))
+        _Cliente = UCase(Trim(_Cliente))
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Clave FROM Precios WHERE Clave = '" & _Cliente & _CodProd & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                Return IIf(IsDBNull(dr.Item("Descripcion")), "", dr.Item("Descripcion"))
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return ""
+    End Function
+
     Private Sub _ConsultarProductos()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo, Descripcion FROM Terminado WHERE Codigo >= 'PT-00004-100' AND Codigo <= 'PT-99999-999' ORDER BY Codigo")
+        Dim cm As SqlCommand = New SqlCommand("SELECT t.Codigo, t.Linea, t.Descripcion, t.DescripcionIngles, p.Descripcion as DescripcionNoFarma FROM Terminado as t, Precios as p WHERE t.Codigo >= 'PT-00004-100' AND t.Codigo <= 'PT-99999-999' AND t.Codigo = p.Terminado AND p.Cliente = '" & txtCliente.Text & "' ORDER BY t.Codigo")
         Dim dr As SqlDataReader
-        Dim WItem = ""
+        Dim WItem = "", WLinea = 0, WDescripcion = ""
 
         Try
 
@@ -377,9 +414,25 @@ Public Class Proforma
 
                 Do While dr.Read()
                     WItem = ""
+                    WLinea = 0
+                    WDescripcion = ""
 
                     With dr
-                        WItem = .Item("Codigo") & SEPARADOR_CONSULTA & .Item("Descripcion")
+
+                        WLinea = IIf(IsDBNull(.Item("Linea")), 0, Val(.Item("Linea")))
+
+                        Select Case WLinea
+                            Case 10, 20, 22, 24, 25, 26, 29, 30 ' Producto de Farma
+
+                                WDescripcion = IIf(IsDBNull(.Item("Descripcion")), "", Trim(.Item("Descripcion")))
+
+                            Case Else ' Productos NO Farma
+
+                                WDescripcion = IIf(IsDBNull(.Item("DescripcionNoFarma")), "", Trim(.Item("DescripcionNoFarma")))
+                                'WDescripcion = _BuscarNombreProductoPorCliente(.Item("Codigo"), txtCliente.Text)
+                        End Select
+
+                        WItem = .Item("Codigo") & SEPARADOR_CONSULTA & WDescripcion
 
                         lstConsulta.Items.Add(WItem)
 
@@ -626,7 +679,10 @@ Public Class Proforma
     Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtFechaAux.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            If Trim(txtFechaAux.Text.Replace("-", "")) = "" Then
+                txtFechaAux_DoubleClick(Nothing, Nothing)
+                Exit Sub
+            End If
 
             If WRow >= 0 And Wcol >= 0 Then
 
@@ -1172,8 +1228,7 @@ Public Class Proforma
                             End If
 
                         End If
-                    Else
-                        Exit For
+
                     End If
 
                 End With
@@ -1493,10 +1548,12 @@ Public Class Proforma
                     .Rows(WRowIndex).Cells(0).Value = Trim(WDatos(0))
                     .Rows(WRowIndex).Cells(1).Value = Trim(WDatos(1))
 
-                    .CurrentCell = .Rows(WRowIndex).Cells(0)
+                    .CurrentCell = .Rows(WRowIndex).Cells(2)
                     .Focus()
                 End With
 
+                GrupoConsulta.Visible = False
+                If txtFechaAux.Visible Then : txtFechaAux.Visible = False : End If
                 'txtFechaAux_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
                 Exit Sub
@@ -1517,6 +1574,8 @@ Public Class Proforma
         txtAyuda.Visible = False
         lstOpcionesConsulta.Visible = True
         GrupoConsulta.Visible = False
+
+        If txtFechaAux.Visible Then : txtFechaAux.Focus() : End If
     End Sub
 
     Private Sub txtPais_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPais.KeyDown
@@ -1661,5 +1720,16 @@ Public Class Proforma
         End With
 
         dgvProductos.ClearSelection()
+    End Sub
+
+    Private Sub txtFechaAux_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaAux.DoubleClick
+        If Trim(txtFechaAux.Text.Replace("-", "")) = "" Then
+            ' Abrimos la Consulta de Productos que el Cliente Puede Comprar.
+            
+            btnConsulta.PerformClick()
+            lstOpcionesConsulta.SelectedIndex = 1
+            lstOpcionesConsulta_MouseClick(Nothing, Nothing)
+
+        End If
     End Sub
 End Class
