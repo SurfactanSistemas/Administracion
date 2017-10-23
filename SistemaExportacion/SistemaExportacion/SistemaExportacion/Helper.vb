@@ -62,6 +62,27 @@ Module Helper
 
     End Function
 
+    Public Function _CarpetaArchivosCompartidos()
+        Try
+            Return ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS") & "\"
+        Catch ex As Exception
+            Throw New Exception("No se pudo recuperar la direccion de la Carpeta de Archivos Relacionados. " & vbCrLf & "Motivo: " & ex.Message)
+        End Try
+    End Function
+
+    Public Function _CarpetaArchivosProforma(Optional ByVal _NroProforma As String = "") As String
+        _NroProforma = Trim(_NroProforma)
+
+        If _NroProforma = "" Then
+            Return _CarpetaArchivosCompartidos()
+        End If
+
+        If _NroProforma.Length < 6 Then : _NroProforma = Helper.ceros(_NroProforma, 6) : End If
+
+        Return _CarpetaArchivosCompartidos() & _NroProforma & "\"
+
+    End Function
+
     Public Function ordenaFecha(ByVal fecha As String)
 
         Dim txtOrdenaFecha As String

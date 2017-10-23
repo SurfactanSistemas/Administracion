@@ -191,9 +191,9 @@ Public Class Proforma
 
     Private Sub _TraerProforma(ByVal NroProforma As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ViaII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
+        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
         Dim dr As SqlDataReader
-        Dim WClave, WRenglon, WEstado, WNroProforma, WFecha, WFechaOrd, WCliente, WDescripcionCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WFlete, WSeguro, WTotal, WDescripcionMonto, WPais, WCondPagoII, WViaII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WRowIndex
+        Dim WClave, WRenglon, WEstado, WNroProforma, WFecha, WFechaOrd, WCliente, WDescripcionCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WFlete, WSeguro, WTotal, WDescripcionMonto, WPais, WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WRowIndex
 
         WClave = ""
         WRenglon = 0
@@ -208,7 +208,7 @@ Public Class Proforma
         WCondPago = ""
         WOCCliente = ""
         WCondicion = ""
-        WVia = ""
+        WVia = 0
         WObservaciones = ""
         WSubTotal = 0.0
         WFlete = 0.0
@@ -217,7 +217,6 @@ Public Class Proforma
         WDescripcionMonto = ""
         WPais = ""
         WCondPagoII = ""
-        WViaII = ""
         WObservacionesII = ""
         WObservacionesIII = ""
         WDescripcionMontoII = ""
@@ -251,7 +250,7 @@ Public Class Proforma
                             WCondPago = IIf(IsDBNull(.Item("CondPago")), "", .Item("CondPago"))
                             WOCCliente = IIf(IsDBNull(.Item("OCCliente")), "", .Item("OCCliente"))
                             WCondicion = IIf(IsDBNull(.Item("Condicion")), "", .Item("Condicion"))
-                            WVia = IIf(IsDBNull(.Item("Via")), "", .Item("Via"))
+                            WVia = IIf(IsDBNull(.Item("Via")), 0, .Item("Via"))
                             WObservaciones = IIf(IsDBNull(.Item("Observaciones")), "", .Item("Observaciones"))
                             WSubTotal = IIf(IsDBNull(.Item("SubTotal")), 0.0, .Item("SubTotal"))
                             WFlete = IIf(IsDBNull(.Item("Flete")), 0.0, .Item("Flete"))
@@ -260,7 +259,6 @@ Public Class Proforma
                             WDescripcionMonto = IIf(IsDBNull(.Item("DescriTotal")), "", .Item("DescriTotal"))
                             WPais = IIf(IsDBNull(.Item("Pais")), "", .Item("Pais"))
                             WCondPagoII = IIf(IsDBNull(.Item("CondPagoII")), "", .Item("CondPagoII"))
-                            WViaII = IIf(IsDBNull(.Item("ViaII")), "", .Item("ViaII"))
                             WObservacionesII = IIf(IsDBNull(.Item("ObservacionesII")), "", .Item("ObservacionesII"))
                             WObservacionesIII = IIf(IsDBNull(.Item("ObservacionesIII")), "", .Item("ObservacionesIII"))
                             WDescripcionMontoII = IIf(IsDBNull(.Item("DescriTotalII")), "", .Item("DescriTotalII"))
@@ -275,8 +273,7 @@ Public Class Proforma
                             txtCondicionPagoII.Text = WCondPagoII
                             txtOCCliente.Text = WOCCliente
                             cmbCondicion.SelectedIndex = Val(WCondicion)
-                            txtVia.Text = WVia
-                            txtViaII.Text = WViaII
+                            cmbVia.SelectedIndex = WVia
                             txtObservaciones.Text = WObservaciones
                             txtObservacionesII.Text = WObservacionesII
                             txtObservacionesIII.Text = WObservacionesIII
@@ -563,7 +560,6 @@ Public Class Proforma
     Private Sub txtOCCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOCCliente.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            'If Trim(txtOCCliente.Text) = "" Then : Exit Sub : End If
 
             cmbCondicion.Focus()
             cmbCondicion.DroppedDown = True
@@ -579,7 +575,8 @@ Public Class Proforma
         If e.KeyData = Keys.Enter Then
             If Trim(cmbCondicion.SelectedItem) = "" Then : Exit Sub : End If
 
-            txtVia.Focus()
+            cmbVia.Focus()
+            cmbVia.DroppedDown = True
 
         ElseIf e.KeyData = Keys.Escape Then
             cmbCondicion.SelectedIndex = 0
@@ -589,27 +586,9 @@ Public Class Proforma
 
     Private Sub cmbCondicion_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCondicion.DropDownClosed
         If cmbCondicion.SelectedIndex > 0 Then
-            txtVia.Focus()
+            cmbVia.Focus()
+            cmbVia.DroppedDown = True
         End If
-    End Sub
-
-    Private Sub txtVia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtVia.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-
-            If Trim(txtVia.Text) <> "" Then
-                txtViaII.Focus()
-                txtViaII.SelectionStart = txtViaII.Text.Length
-            Else
-                'txtObservaciones.Focus()
-                cmbEstado.Focus()
-                cmbEstado.DroppedDown = True
-            End If
-
-        ElseIf e.KeyData = Keys.Escape Then
-            txtVia.Text = ""
-        End If
-
     End Sub
 
     Private Function _BuscarTerminado(ByVal terminado As String) As DataRow
@@ -847,7 +826,6 @@ Public Class Proforma
             With row
                 .Cells(2).Value = IIf(.Cells(2).Value <> "", Helper.formatonumerico(.Cells(2).Value), "")
                 .Cells(3).Value = IIf(.Cells(3).Value <> "", Helper.formatonumerico(.Cells(3).Value), "")
-                '.Cells(4).Value = IIf(.Cells(4).Value <> "", Helper.formatonumerico(.Cells(4).Value), "")
                 WTotal += (Val(.Cells(2).Value) * Val(.Cells(3).Value))
             End With
         Next
@@ -856,7 +834,7 @@ Public Class Proforma
         _RecalcularTotal()
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNroProforma.KeyPress, txtOCCliente.KeyPress
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNroProforma.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
@@ -874,8 +852,6 @@ Public Class Proforma
             If Trim(txtDescripcionTotal.Text) <> "" Then
                 txtDescripcionTotalII.Focus()
             End If
-
-            'txtTotal.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtDescripcionTotal.Text = ""
@@ -1053,14 +1029,50 @@ Public Class Proforma
         Return Microsoft.VisualBasic.Left(Trim(texto), largo)
     End Function
 
+    Private Function _TieneFDS(ByVal _CodProducto As String, ByVal _Descripcion As String) As Boolean
+
+        Dim CarpetaFDS = "W:\impresion pdf\FDS\"
+        Dim _RutaArchivo = ""
+        Dim AuxiCod = "", AuxiDesc = ""
+
+        _CodProducto = Trim(_CodProducto)
+        _Descripcion = Trim(_Descripcion)
+
+        If Trim(_CodProducto) = "" Then
+            Throw New Exception("No se ha especificado el Código del Producto.")
+        End If
+
+        If Trim(_Descripcion) = "" Then
+            Throw New Exception("No se ha especificado la Descripción del Producto.")
+        End If
+
+        AuxiCod = _CodProducto.Replace("PT", "").Replace("-", "")
+        AuxiDesc = _Descripcion.Replace(" ", "").Replace("/", "")
+
+        _RutaArchivo = CarpetaFDS & "FDS" & AuxiDesc & AuxiCod & ".pdf"
+
+        If File.Exists(_RutaArchivo) Then
+
+            Try
+                File.Copy(_RutaArchivo, Helper._CarpetaArchivosProforma(txtNroProforma.Text) & "FDS" & AuxiDesc & AuxiCod & ".pdf", True)
+            Catch ex As Exception
+                Throw New Exception("No se pudo copiar FDS a Carpeta de Archivos de la Proforma: " & txtNroProforma.Text & vbCrLf & "Motivo: " & ex.Message)
+            End Try
+
+            Return True
+        End If
+
+        Return False
+    End Function
+
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
         Dim cn As New SqlConnection()
         Dim trans As SqlTransaction = Nothing
         Dim cm As New SqlCommand()
         Dim WClave, WRenglon, WEstado, XRenglon, WNroProforma, XNroProforma, WFecha, WFechaOrd, WCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WSeguro, WFlete, WTotal, WDescripcionMonto, WSql, WPais
-        Dim WCondPagoII, WViaII, WObservacionesII, WObservacionesIII, WDescripcionMontoII
-        Dim WProd As String, WCant, WPrecio
+        Dim WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII ', WViaII
+        Dim WProd As String, WCant, WPrecio, WDesc, WSinFDS
 
 
         If Me.Bloqueado Then
@@ -1082,7 +1094,7 @@ Public Class Proforma
         WCondPago = _Left(txtCondicionPago.Text, 50)
         WOCCliente = _Left(txtOCCliente.Text, 20)
         WCondicion = Val(cmbCondicion.SelectedIndex)
-        WVia = _Left(txtVia.Text, 20)
+        WVia = cmbVia.SelectedIndex.ToString()
         WObservaciones = _Left(txtObservaciones.Text, 100)
         WSubTotal = Val(Helper.formatonumerico(txtSubTotal.Text))
         WFlete = Val(Helper.formatonumerico(txtFlete.Text))
@@ -1092,7 +1104,6 @@ Public Class Proforma
         WPais = _Left(txtPais.Text, 15)
 
         WCondPagoII = Trim(txtCondicionPagoII.Text)
-        WViaII = Trim(txtViaII.Text)
         WObservacionesII = Trim(txtObservacionesII.Text)
         WObservacionesIII = Trim(txtObservacionesIII.Text)
         WDescripcionMontoII = Trim(txtDescripcionTotalII.Text)
@@ -1102,8 +1113,11 @@ Public Class Proforma
         WSql = ""
 
         WProd = ""
+        WDesc = ""
         WCant = 0.0
         WPrecio = 0.0
+
+        WSinFDS = ""
 
         ' Validamos los datos minimos que se necesitan por lo menos para poder generar una proforma.
         If WCliente = "" Or Trim(WFecha).Length < 10 Then
@@ -1130,6 +1144,7 @@ Public Class Proforma
             For Each row As DataGridViewRow In dgvProductos.Rows
                 With row
                     WProd = Trim(.Cells(0).Value)
+                    WDesc = Trim(.Cells(1).Value)
                     WCant = Val(.Cells(2).Value)
                     WPrecio = Val(.Cells(3).Value)
 
@@ -1142,15 +1157,19 @@ Public Class Proforma
 
                             WClave = XNroProforma & XRenglon
 
-                            WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, ViaII, Observaciones, ObservacionesII, ObservacionesIII, Producto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais)" _
+                            WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, Observaciones, ObservacionesII, ObservacionesIII, Producto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais)" _
                                  & " VALUES " _
-                                 & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', '" & WViaII & "', " _
+                                 & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', " _
                                  & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', " & Helper.formatonumerico(WCant) & ", " & Helper.formatonumerico(WPrecio) & ", " & Helper.formatonumerico(WSubTotal) & ", " & Helper.formatonumerico(WFlete) & ", " & Helper.formatonumerico(WSeguro) & ", " _
                                  & Helper.formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "')"
 
                             cm.CommandText = WSql
 
                             cm.ExecuteNonQuery()
+
+                            If Not _TieneFDS(WProd, WDesc) Then
+                                WSinFDS &= WProd & " (" & WDesc & ") " & vbCrLf
+                            End If
 
                         End If
                     Else
@@ -1162,6 +1181,10 @@ Public Class Proforma
 
             ' Si no hubo nigun error durante la carga de datos, confirmo los cambios.
             trans.Commit()
+
+            If Trim(WSinFDS) <> "" Then
+                MsgBox("Los siguientes Productos, no poseen FDS: " & vbCrLf & WSinFDS, MsgBoxStyle.Information)
+            End If
 
             txtNroProforma.Text = WNroProforma
             txtNroProforma_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
@@ -1235,8 +1258,7 @@ Public Class Proforma
         txtCondicionPago.Text = ""
         txtCondicionPagoII.Text = ""
         txtOCCliente.Text = ""
-        txtVia.Text = ""
-        txtViaII.Text = ""
+        cmbVia.SelectedIndex = 0
         cmbCondicion.SelectedIndex = 0
         cmbEstado.SelectedIndex = 0
         txtObservaciones.Text = ""
@@ -1317,27 +1339,11 @@ Public Class Proforma
 
     Private Sub txtCondicionPagoII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCondicionPagoII.KeyDown
         If e.KeyData = Keys.Enter Then
-            'If Trim(txtCondicionPagoII.Text) = "" Then : Exit Sub : End If
 
             txtOCCliente.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtCondicionPagoII.Text = ""
-        End If
-    End Sub
-
-    Private Sub txtViaII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtViaII.KeyDown
-        If e.KeyData = Keys.Enter Then
-            'If Trim(txtViaII.Text) = "" Then : Exit Sub : End If
-
-            'txtObservaciones.Focus()
-            'txtObservaciones.SelectionStart = txtObservaciones.Text.Length
-
-            cmbEstado.Focus()
-            cmbEstado.DroppedDown = True
-
-        ElseIf e.KeyData = Keys.Escape Then
-            txtViaII.Text = ""
         End If
     End Sub
 
@@ -1516,7 +1522,6 @@ Public Class Proforma
     Private Sub txtPais_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPais.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            'If Trim(txtPais.Text) = "" Then : Exit Sub : End If
 
             txtCondicionPago.Focus()
 
@@ -1555,7 +1560,6 @@ Public Class Proforma
     Private Sub txtSubTotal_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSubTotal.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            'If Trim(txtSubTotal.Text) = "" Then : Exit Sub : End If
             txtFlete.Focus()
         ElseIf e.KeyData = Keys.Escape Then
             txtSubTotal.Text = ""
@@ -1579,7 +1583,6 @@ Public Class Proforma
     Private Sub txtFlete_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFlete.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            'If Trim(txtFlete.Text) = "" Then : Exit Sub : End If
 
             txtSeguro.Focus()
 
@@ -1592,7 +1595,6 @@ Public Class Proforma
     Private Sub txtSeguro_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSeguro.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            '    If Trim(txtSeguro.Text) = "" Then : Exit Sub : End If
             txtTotal.Focus()
         ElseIf e.KeyData = Keys.Escape Then
             txtSeguro.Text = ""
@@ -1612,12 +1614,52 @@ Public Class Proforma
 
     Private Sub cmbEstado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbEstado.KeyDown
         If e.KeyData = Keys.Enter Then
-            'If Trim(cmbEstado.SelectedItem) = "" Then : Exit Sub : End If
 
             txtObservaciones.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             cmbEstado.SelectedIndex = 0
         End If
+    End Sub
+
+    Private Sub cmbVia_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbVia.DropDownClosed
+        If cmbVia.SelectedIndex > 0 Then
+            cmbEstado.Focus()
+            cmbEstado.DroppedDown = True
+        End If
+    End Sub
+
+    Private Sub cmbVia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbVia.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(cmbVia.SelectedIndex) = 0 Then : Exit Sub : End If
+
+            cmbEstado.Focus()
+            cmbEstado.DroppedDown = True
+
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbVia.SelectedIndex = 0
+        End If
+
+    End Sub
+
+    Private Sub dgvProductos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvProductos.RowHeaderMouseDoubleClick
+        If MsgBox("¿Seguro de que quiere eliminar el renglón correspondiente a este Producto?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        With dgvProductos.Rows(e.RowIndex)
+
+            txtFechaAux.Clear()
+
+            For i = 0 To .Cells.Count - 1
+
+                .Cells(i).Value = ""
+
+            Next
+
+        End With
+
+        dgvProductos.ClearSelection()
     End Sub
 End Class
