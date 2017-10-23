@@ -3675,9 +3675,19 @@ Public Class Pagos
                         If Trim(valor.ToString.Length) = 31 Then
                             If _ProcesarCheque(iRow, valor) Then
                                 Try
-                                    gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow + 1).Cells(0)
+                                    If _EsChequePropio(valor) Then
+                                        gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow).Cells(2)
+                                    Else
+                                        gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow + 1).Cells(0)
+                                    End If
+
                                 Catch ex As Exception
-                                    gridFormaPagos.CurrentCell = gridFormaPagos.Rows(_ProximaFilaVaciaFormaPagos).Cells(0) 'gridFormaPagos.Rows(gridFormaPagos.Rows.Add).Cells(0)
+                                    If _EsChequePropio(valor) Then
+                                        gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow).Cells(2)
+                                    Else
+                                        gridFormaPagos.CurrentCell = gridFormaPagos.Rows(_ProximaFilaVaciaFormaPagos).Cells(0) 'gridFormaPagos.Rows(gridFormaPagos.Rows.Add).Cells(0)
+                                    End If
+
                                 End Try
 
                                 sumarImportes()
@@ -3988,8 +3998,21 @@ Public Class Pagos
         Return clave
     End Function
 
+    Private Function _EsChequePropio(ByVal ClaveCheque) As Boolean
+        Dim WCuenta As String = Mid$(ClaveCheque, 20, 11)
+
+        Select Case WCuenta
+            Case "00000035626", "00030521158", "00830029723", "05095506300"
+                Return True
+
+            Case Else
+                Return False
+        End Select
+
+    End Function
+
     Private Function _ProcesarCheque(ByVal row As Integer, ByVal ClaveCheque As String) As Boolean
-        Dim WNumero, WFecha, WBanco, WImporte, WClave As String
+        Dim WTipo, WNumero, WFecha, WBanco, WImporte, WClave, WNomBanco, XBanco As String
         Dim _LecturaCorrecta As Boolean = True
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As New SqlCommand
@@ -3999,6 +4022,51 @@ Public Class Pagos
         If Not _FormatoValidoDeCheque(ClaveCheque) Then
             MsgBox("El formato del cheque no es valido.", MsgBoxStyle.Exclamation)
             Return False
+        End If
+
+        ' Chequemos si es Cheque Propio.
+        If _EsChequePropio(ClaveCheque) Then
+
+            Dim ZZBanco = Mid$(ClaveCheque, 2, 3)
+            Dim ZZSucursal = Mid$(ClaveCheque, 5, 3)
+            Dim ZZNroCheque = Mid$(ClaveCheque, 12, 8)
+            Dim ZZNroCuenta = Mid$(ClaveCheque, 20, 11)
+
+            WTipo = "02"
+            WClave = ClaveCheque
+            'WNomBanco = DAOBanco.buscarBancoPorCodigo(ZZBanco)
+            XBanco = ""
+            WNomBanco = ""
+
+            Select Case ZZNroCuenta
+
+                Case "00000035626"
+                    XBanco = "16"
+                    WNomBanco = "SANTANDER"
+                Case "00030521158"
+                    XBanco = "3"
+                    WNomBanco = "NACION (SF)"
+                Case "00830029723"
+                    XBanco = "8"
+                    WNomBanco = "HSBC (SF"
+                Case "05095506300"
+                    XBanco = "12"
+                    WNomBanco = "Pcia (BsAs"
+                Case Else
+
+            End Select
+
+            With gridFormaPagos.Rows(row)
+                .Cells(0).Value = "03"
+                .Cells(1).Value = ZZNroCheque
+                .Cells(2).Value = ""
+                .Cells(3).Value = XBanco
+                .Cells(4).Value = WNomBanco
+                .Cells(5).Value = ""
+                .Cells(6).Value = WClave
+            End With
+
+            Return True
         End If
 
         WClave = _BuscarClaveRecibo(ClaveCheque)

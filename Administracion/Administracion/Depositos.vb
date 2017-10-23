@@ -24,7 +24,7 @@ Public Class Depositos
     Private Function sumaImportes() As Double
         Dim valorImportes As Double = 0
         For Each row As DataGridViewRow In gridCheques.Rows
-            valorImportes += Val(row.Cells(4).Value)
+            valorImportes += Val(Proceso.formatonumerico(row.Cells(4).Value))
         Next
         Return valorImportes
     End Function
@@ -113,7 +113,7 @@ Public Class Depositos
     End Sub
 
     Private Sub sumarImportes()
-        lblTotal.Text = CustomConvert.toStringWithTwoDecimalPlaces(sumaImportes)
+        lblTotal.Text = Proceso.formatonumerico(sumaImportes) 'CustomConvert.toStringWithTwoDecimalPlaces(sumaImportes)
     End Sub
 
     Private Sub mostrarSeleccionDeConsulta()
@@ -853,6 +853,7 @@ Public Class Depositos
 
                         If iCol = 0 And iRow > -1 Then
                             If Trim(valor.ToString.Length) = 31 Then
+                                .Rows(iRow).Cells(5).Value = valor
                                 If _ProcesarCheque(iRow, valor) Then
                                     '.CurrentCell = .Rows(iRow).Cells(4)
                                     .CurrentCell = .Rows(.Rows.Add()).Cells(0)
@@ -1047,7 +1048,7 @@ Public Class Depositos
 
         ' Chequeamos que el cheque no se haya cargado.
 
-        If _ChequeYaCargado(WClave) Then
+        If _ChequeYaCargado(ClaveCheque, row) Then
             _LecturaCorrecta = False
 
             MsgBox("Cheque ya Cargado con anterioridad.", MsgBoxStyle.Exclamation)
@@ -1074,7 +1075,7 @@ Public Class Depositos
                 With dr
                     WNumero = .Item("Numero2")
                     WFecha = .Item("Fecha2")
-                    WImporte = .Item("Importe2")
+                    WImporte = Proceso.formatonumerico(.Item("Importe2"))
                     WBanco = .Item("Banco2")
                 End With
             Else
@@ -1110,12 +1111,12 @@ Public Class Depositos
     '    Return _Banco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
     'End Function
 
-    Private Function _ChequeYaCargado(ByVal ClaveCheque) As Boolean
+    Private Function _ChequeYaCargado(ByVal ClaveCheque As String, ByVal rowIndex As Integer) As Boolean
         Dim _cargado As Boolean = False
 
         For Each row As DataGridViewRow In gridCheques.Rows
 
-            If ClaveCheque = row.Cells(5).Value Then
+            If ClaveCheque = row.Cells(5).Value And row.Index <> rowIndex Then
                 _cargado = True
                 Exit For
             End If
