@@ -130,7 +130,7 @@ Public Class Pagos
 
     Private Function _ExisteOrdenDePago(ByVal NumOrden) As Boolean
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Orden FROM Orden WHERE Orden = '" & NumOrden & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -351,7 +351,7 @@ Public Class Pagos
         End If
 
         ' Controlamos balanceo.
-        If Val(lblPagos.Text) <> Val(lblFormaPagos.Text) Then
+        If _NormalizarNumero(lblPagos.Text) <> _NormalizarNumero(lblFormaPagos.Text) Then
             MsgBox("Los créditos y débitos no se encuentran balanceados.", MsgBoxStyle.Critical)
             Return False
         End If
@@ -950,7 +950,7 @@ Public Class Pagos
 
                         item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero2"), 6)) _
                                             .Replace("#FECHA#", .Item("Fecha2")) _
-                                            .Replace("#IMPORTE#", _NormalizarNumero(.Item("Importe2")).ToString.PadLeft(10, "_")) _
+                                            .Replace("#IMPORTE#", Proceso.formatonumerico(.Item("Importe2")).ToString.PadLeft(10, "_")) _
                                             .Replace("#BANCO#", .Item("Banco2"))
 
                         _ChequesRecibos.Add({item, _
@@ -1001,7 +1001,7 @@ Public Class Pagos
 
                         item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero2"), 6)) _
                                             .Replace("#FECHA#", .Item("Fecha2")) _
-                                            .Replace("#IMPORTE#", _NormalizarNumero(.Item("Importe2")).ToString.PadLeft(10, "_")) _
+                                            .Replace("#IMPORTE#", Proceso.formatonumerico(.Item("Importe2")).ToString.PadLeft(10, "_")) _
                                             .Replace("#BANCO#", .Item("Banco2"))
 
                         _ChequesRecibos.Add({item, _
@@ -1091,7 +1091,7 @@ Public Class Pagos
 
                         item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero"), 6)) _
                                             .Replace("#VENCIMIENTO#", .Item("Vencimiento1")) _
-                                            .Replace("#SALDO#", _NormalizarNumero(.Item("Saldo"))) _
+                                            .Replace("#SALDO#", Proceso.formatonumerico(.Item("Saldo"))) _
                                             .Replace("#CLIENTE#", .Item("Cliente"))
 
                         lstConsulta.Items.Add(item)
@@ -2096,7 +2096,7 @@ Public Class Pagos
                         cm.ExecuteNonQuery()
 
                     Catch ex As Exception
-                        MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                        MsgBox("Hubo un problema al querer grabar la Orden de Pago en la Base de Datos.", MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
                         cn.Close()
@@ -2113,7 +2113,7 @@ Public Class Pagos
                         cm.ExecuteNonQuery()
 
                     Catch ex As Exception
-                        MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                        MsgBox("Hubo un problema al querer actualizar la Cuenta Corriente en la Base de Datos.", MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
                         cn.Close()
@@ -2215,6 +2215,7 @@ Public Class Pagos
                     XClaveCtaCte = .Cells(6).Value
                     XTipoRecibo = Microsoft.VisualBasic.Left(.Cells(6).Value, 1)
                     XCuit = .Cells(7).Value
+                    Dim ZClaveRecibo = Microsoft.VisualBasic.Right$(XClaveRecibo, 8)
 
                     XEmpresa = "1"
                     XClave = XOrden + XRenglon
@@ -2243,7 +2244,7 @@ Public Class Pagos
                     ZSql &= " '" & XPunto1 & "', '" & XNumero1 & "', " & Str(XImporte1) & ", '" & XTipo2 & "', '" & XNumero2 & "',"
                     ZSql &= " '" & XFecha2 & "', '" & XBanco2 & "', " & Str(XImporte2) & ", '" & XObservaciones2 & "', '" & XEmpresa & "',"
                     ZSql &= " '" & XConcepto & "', '" & XObservaciones & "', " & Str(XImporte) & ", '" & XFechaOrd2 & "', '" & XConsecionaria & "',"
-                    ZSql &= " " & Str(XImpolist) & ", '" & XCuenta & "', " & Str(XImpoNeto) & ", " & Str(XRetIbCiudad) & ", '" & XClaveRecibo & "', '', '', '', '', '', " & Str(XParidad) & ")"
+                    ZSql &= " " & Str(XImpolist) & ", '" & XCuenta & "', " & Str(XImpoNeto) & ", " & Str(XRetIbCiudad) & ", '" & ZClaveRecibo & "', '', '', '', '', '', " & XParidad & ")"
 
 
                     Try
@@ -2252,7 +2253,7 @@ Public Class Pagos
                         cm.ExecuteNonQuery()
 
                     Catch ex As Exception
-                        MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                        MsgBox("Hubo un problema al querer grabar la Forma de Pago en la Base de Datos.", MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
                         cn.Close()
@@ -2263,7 +2264,7 @@ Public Class Pagos
                     FechaCheque = XFecha2
                     BancoCheque = XObservaciones2
 
-                    Dim ZClaveRecibo = Microsoft.VisualBasic.Right$(XClaveRecibo, 8)
+
 
                     ZSql = ""
                     ZSql = ZSql + "UPDATE Pagos SET "
@@ -2282,7 +2283,7 @@ Public Class Pagos
                         cm.ExecuteNonQuery()
 
                     Catch ex As Exception
-                        MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                        MsgBox("Hubo un problema al querer Actualizar los datos de Cheques en la Base de Datos.", MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
                         cn.Close()
@@ -2316,7 +2317,7 @@ Public Class Pagos
                             cm.ExecuteNonQuery()
 
                         Catch ex As Exception
-                            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                            MsgBox("Hubo un problema al querer actualizar el estado del Cheque en la Base de Datos.", MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
                             cn.Close()
@@ -2347,7 +2348,7 @@ Public Class Pagos
                             cm.ExecuteNonQuery()
 
                         Catch ex As Exception
-                            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                            MsgBox("Hubo un problema al querer actualizar la Cuenta corriente en la Base de Datos.", MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
                             cn.Close()
@@ -2361,7 +2362,6 @@ Public Class Pagos
         Next
 
         If optCtaCte.Checked Then
-
 
             WLetra = "A"
             WTipo = "04"
@@ -2441,7 +2441,7 @@ Public Class Pagos
                 cm.ExecuteNonQuery()
 
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos.", MsgBoxStyle.Critical)
                 Exit Sub
             Finally
                 cn.Close()
@@ -2531,7 +2531,7 @@ Public Class Pagos
                 cm.ExecuteNonQuery()
 
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos.", MsgBoxStyle.Critical)
                 Exit Sub
             Finally
                 cn.Close()
@@ -2554,7 +2554,7 @@ Public Class Pagos
             cm.ExecuteNonQuery()
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer Actualizar la información de Retención en la Base de Datos.", MsgBoxStyle.Critical)
             Exit Sub
         Finally
             cn.Close()
@@ -2590,7 +2590,7 @@ Public Class Pagos
             cm.ExecuteNonQuery()
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer Actualizar la informacion de la Orden de Pago en la Base de Datos.", MsgBoxStyle.Critical)
             Exit Sub
         Finally
             cn.Close()
@@ -2638,7 +2638,7 @@ Public Class Pagos
                             End If
 
                         Catch ex As Exception
-                            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                            MsgBox("Hubo un problema al querer la información de la Orden de Compra en la Base de Datos.", MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
                             cn.Close()
@@ -2658,7 +2658,7 @@ Public Class Pagos
                                     cm.ExecuteNonQuery()
 
                                 Catch ex As Exception
-                                    MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                                    MsgBox("Hubo un problema al querer Actualizar la información de la Orden de Pago en la Base de Datos.", MsgBoxStyle.Critical)
                                     Exit Sub
                                 Finally
                                     cn.Close()
@@ -2696,7 +2696,7 @@ Public Class Pagos
             cm.ExecuteNonQuery()
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer Actualizar los datos de certificados de Retenciones de la Orden de Pagos en la Base de Datos.", MsgBoxStyle.Critical)
             Exit Sub
         Finally
             cn.Close()
@@ -3410,19 +3410,21 @@ Public Class Pagos
 
         For Each row As DataGridViewRow In gridPagos.Rows
             If Not row.IsNewRow Then
+                row.Cells(4).Value = IIf(Trim(row.Cells(4).Value) <> "", Proceso.formatonumerico(row.Cells(4).Value), "")
                 pagos += Val(_NormalizarNumero(row.Cells(4).Value))
             End If
         Next
 
         For Each row As DataGridViewRow In gridFormaPagos.Rows
             If Not row.IsNewRow Then
+                row.Cells(5).Value = IIf(Trim(row.Cells(5).Value) <> "", Proceso.formatonumerico(row.Cells(5).Value), "")
                 formaPagos += Val(_NormalizarNumero(row.Cells(5).Value))
             End If
         Next
-        txtTotal.Text = _NormalizarNumero(total)
-        lblPagos.Text = _NormalizarNumero(pagos)
-        lblFormaPagos.Text = _NormalizarNumero(formaPagos + total)
-        lblDiferencia.Text = _NormalizarNumero(pagos - formaPagos - total)
+        txtTotal.Text = Proceso.formatonumerico(total)
+        lblPagos.Text = Proceso.formatonumerico(pagos)
+        lblFormaPagos.Text = Proceso.formatonumerico(formaPagos + total)
+        lblDiferencia.Text = Proceso.formatonumerico(pagos - formaPagos - total)
     End Sub
 
     Private Sub gridPagos_RowsAdded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles gridPagos.RowsAdded
@@ -3764,7 +3766,7 @@ Public Class Pagos
                 If iCol = 5 Then
 
                     If valor <> "" Then
-                        gridFormaPagos.Rows(iRow).Cells(iCol).Value = _NormalizarNumero(valor)
+                        gridFormaPagos.Rows(iRow).Cells(iCol).Value = Proceso.formatonumerico(valor)
 
                         sumarImportes()
 
@@ -4616,6 +4618,11 @@ Public Class Pagos
 
         ' Verificamos de que haya codigo de orden de pago valido para traer.
         If Val(XOrdenPago) <= 0 Then
+            Exit Sub
+        End If
+
+        ' Chequeamos que la OP exista antes de Imprimir.
+        If Not _ExisteOrdenDePago(XOrdenPago) Then
             Exit Sub
         End If
 
@@ -6575,7 +6582,7 @@ Public Class Pagos
                 With gridFormaPagos
                     .Rows(WRow).Cells(2).Value = txtFechaAux.Text
 
-                    .CurrentCell = .Rows(WRow).Cells(3)
+                    .CurrentCell = .Rows(WRow).Cells(5)
                     .Focus()
 
                     txtFechaAux.Visible = False
@@ -7508,7 +7515,7 @@ Public Class Pagos
                 With gridFormaPagos
                     .Rows(WRow).Cells(2).Value = txtFechaAux.Text
 
-                    .CurrentCell = .Rows(WRow).Cells(3)
+                    .CurrentCell = .Rows(WRow).Cells(5)
                     .Focus()
 
                 End With
