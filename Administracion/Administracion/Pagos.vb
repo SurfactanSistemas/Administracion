@@ -371,7 +371,7 @@ Public Class Pagos
         If txtProveedor.Text = "10167878480" Or txtProveedor.Text = "10000000100" Or txtProveedor.Text = "10071081483" Or txtProveedor.Text = "10069345023" Or txtProveedor.Text = "10066352912" Or (Val(datos_prov(0)) = 24 And Val(datos_prov(1)) = 1) Then
             Dim entra As Boolean = False
 
-            For i = 1 To _Carpetas.Length
+            For i = 1 To _Carpetas.Length - 1
                 If _Carpetas(i) <> "" Then
                     entra = True
                 End If
@@ -2055,7 +2055,7 @@ Public Class Pagos
                     XPunto1 = .Cells(2).Value
                     XNumero1 = .Cells(3).Value
                     XImporte1 = _NormalizarNumero(.Cells(4).Value)
-                    XObservaciones2 = .Cells(5).Value
+                    XObservaciones2 = Proceso.leeizquierda(.Cells(5).Value, 30)
                     XImpoNeto = Val(.Cells(6).Value)
 
                     XTipo2 = ""

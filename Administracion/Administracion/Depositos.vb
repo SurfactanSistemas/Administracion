@@ -441,8 +441,10 @@ Public Class Depositos
 
             For Each _row As DataGridViewRow In gridCheques.Rows
                 If Not _row.IsNewRow Then
-                    If _row.Cells(5).Value = cheq.ClaveCheque Then
+                    If _row.Cells(5).Value = cheq.clave Then
+                        MsgBox("Cheque ya cargado.", MsgBoxStyle.Exclamation)
                         lstConsulta.Items.Remove(lstConsulta.SelectedItem)
+                        txtAyuda.Focus()
                         Exit Sub
                     End If
                 End If
@@ -462,17 +464,92 @@ Public Class Depositos
                 row = gridCheques.Rows.Add
             End If
 
-            If _ProcesarCheque(row, cheq.ClaveCheque) Then
-                lstConsulta.Items.Remove(lstConsulta.SelectedItem)
-                Dim nuevafila = gridCheques.Rows.Add()
-                sumarImportes()
-                gridCheques.CurrentCell = gridCheques.Rows(nuevafila).Cells(0)
-                gridCheques.Focus()
+            If cheq.ClaveCheque <> "" Then
+
+                If _ProcesarCheque(row, cheq.ClaveCheque) Then
+                    lstConsulta.Items.Remove(lstConsulta.SelectedItem)
+                    Dim nuevafila = gridCheques.Rows.Add()
+                    sumarImportes()
+                    gridCheques.CurrentCell = gridCheques.Rows(nuevafila).Cells(0)
+                    gridCheques.Focus()
+                Else
+                    MsgBox("Hubo un problema al querer cargar el cheque.", MsgBoxStyle.Exclamation)
+                End If
+            Else
+                _TraerChequeRecibo(row, cheq.clave)
             End If
+
 
             'txtAyuda.Focus()
 
         End If
+    End Sub
+
+    Private Sub _TraerChequeRecibo(ByVal rowIndex As Integer, ByVal ClaveRecibo As String)
+        Dim WTipo = "", WNumero = "", WFecha = "", WNombre = "", WImporte = "", WTipoRec = ""
+
+        WTipoRec = Mid(ClaveRecibo, 1, 1)
+        Dim ZSql = "SELECT Tipo2, Numero2, Fecha2, Banco2, Importe2 FROM #TABLA# WHERE Clave = '" & Mid(ClaveRecibo, 2, 8) & "'"
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+
+        Try
+
+            If Val(WTipoRec) = 1 Then
+                cm.CommandText = ZSql.Replace("#TABLA#", "Recibos")
+            ElseIf Val(WTipoRec) = 2 Then
+                cm.CommandText = ZSql.Replace("#TABLA#", "RecibosProvi")
+            Else
+                Exit Sub
+            End If
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                With dr
+
+                    WTipo = IIf(IsDBNull(.Item("Tipo2")), "", .Item("Tipo2"))
+                    WNumero = IIf(IsDBNull(.Item("Numero2")), "", .Item("Numero2"))
+                    WFecha = IIf(IsDBNull(.Item("Fecha2")), "", .Item("Fecha2"))
+                    WNombre = IIf(IsDBNull(.Item("Banco2")), "", .Item("Banco2"))
+                    WImporte = IIf(IsDBNull(.Item("Importe2")), "", Proceso.formatonumerico(.Item("Importe2")))
+
+                End With
+
+                With gridCheques.Rows(rowIndex)
+
+                    .Cells("Tipo").Value = WTipo
+                    .Cells("Numero").Value = WNumero
+                    .Cells("Fecha").Value = WFecha
+                    .Cells("Nombre").Value = WNombre
+                    .Cells("Importe").Value = WImporte
+                    .Cells("ClaveCheque").Value = ClaveRecibo
+
+                End With
+
+                lstConsulta.Items.Remove(lstConsulta.SelectedItem)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     'Private Sub gridCheques_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridCheques.CellValueChanged
@@ -1141,6 +1218,8 @@ Public Class Depositos
                 .Cells(4).Value = WImporte
                 .Cells(5).Value = WClave
             End With
+        Else
+            MsgBox("Hubo un problema al querer cargar el cheque correspondiente.", MsgBoxStyle.Exclamation)
         End If
 
         Return _LecturaCorrecta
