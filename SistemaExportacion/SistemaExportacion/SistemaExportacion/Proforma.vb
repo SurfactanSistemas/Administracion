@@ -14,7 +14,8 @@ Public Class Proforma
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
     Private Const SEPARADOR_CONSULTA = "____"
-
+    Private VIAS_ESP = {"", "TERRESTRE", "AÉREA", "MARÍTIMA"}
+    Private VIAS_ING = {"", "LAND ROUTE", "BY AIR", "BY SEA"}
 
     Private _NroProforma As String
     Public Property NroProforma() As String
@@ -110,7 +111,7 @@ Public Class Proforma
             End If
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Exclamation)
         Finally
 
             dr = Nothing
@@ -141,7 +142,7 @@ Public Class Proforma
             End If
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Exclamation)
         Finally
 
             dr = Nothing
@@ -191,9 +192,10 @@ Public Class Proforma
 
     Private Sub _TraerProforma(ByVal NroProforma As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
+        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
         Dim dr As SqlDataReader
         Dim WClave, WRenglon, WEstado, WNroProforma, WFecha, WFechaOrd, WCliente, WDescripcionCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WFlete, WSeguro, WTotal, WDescripcionMonto, WPais, WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WRowIndex
+        Dim WNroPedido, WNroFactura, WSaldoFactura, WEnviarDocumentacion, WProformaCerrada, WPackingList, WIdioma, WFechaLimite
 
         WClave = ""
         WRenglon = 0
@@ -220,6 +222,16 @@ Public Class Proforma
         WObservacionesII = ""
         WObservacionesIII = ""
         WDescripcionMontoII = ""
+
+        ' Completarlas cuando se definan desde ventas.
+        WNroPedido = ""
+        WNroFactura = ""
+        WSaldoFactura = ""
+        WEnviarDocumentacion = ""
+        WProformaCerrada = ""
+        WPackingList = ""
+        WFechaLimite = ""
+        WIdioma = 0
 
         btnLimpiar.PerformClick()
 
@@ -262,6 +274,10 @@ Public Class Proforma
                             WObservacionesII = IIf(IsDBNull(.Item("ObservacionesII")), "", .Item("ObservacionesII"))
                             WObservacionesIII = IIf(IsDBNull(.Item("ObservacionesIII")), "", .Item("ObservacionesIII"))
                             WDescripcionMontoII = IIf(IsDBNull(.Item("DescriTotalII")), "", .Item("DescriTotalII"))
+                            WProformaCerrada = IIf(IsDBNull(.Item("Cerrada")), "0", .Item("Cerrada"))
+                            WPackingList = IIf(IsDBNull(.Item("PackingList")), "0", .Item("PackingList"))
+                            WIdioma = IIf(IsDBNull(.Item("Idioma")), 0, .Item("Idioma"))
+                            WFechaLimite = IIf(IsDBNull(.Item("FechaLimite")), "", .Item("FechaLimite"))
 
                             txtNroProforma.Text = WNroProforma
                             txtFecha.Text = WFecha
@@ -281,7 +297,21 @@ Public Class Proforma
                             txtDescripcionTotalII.Text = WDescripcionMontoII
                             txtPais.Text = WPais
                             txtSubTotal.Text = Helper.formatonumerico(WSubTotal)
-                            cmbEstado.SelectedIndex = WEstado
+                            cmbEstado.SelectedIndex = Val(WEstado)
+                            cmbIdioma.SelectedIndex = Val(WIdioma)
+                            txtFechaLimite.Text = WFechaLimite
+
+                            If Val(WProformaCerrada) = 1 Then
+                                ckCerrado.Checked = True
+                            End If
+
+                            If Val(WPackingList) = 1 Then
+                                ckPakingList.Checked = True
+                            End If
+
+                            txtNroFactura.Text = WNroFactura
+                            txtNroPedido.Text = WNroPedido
+                            txtSaldoFactura.Text = ""
 
                             txtFlete.Text = Helper.formatonumerico(WFlete)
                             txtSeguro.Text = Helper.formatonumerico(WSeguro)
@@ -330,7 +360,7 @@ Public Class Proforma
             Try
                 _TraerProforma(txtNroProforma.Text)
             Catch ex As Exception
-                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation)
                 Exit Sub
             End Try
 
@@ -339,6 +369,21 @@ Public Class Proforma
 
         ElseIf e.KeyData = Keys.Escape Then
             txtNroProforma.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtFechaLimite_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaLimite.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaLimite.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            If Helper._ValidarFecha(txtFechaLimite.Text) Then
+                txtObservaciones.Focus()
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaLimite.Text = ""
         End If
 
     End Sub
@@ -399,7 +444,7 @@ Public Class Proforma
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT t.Codigo, t.Linea, t.Descripcion, t.DescripcionIngles, p.Descripcion as DescripcionNoFarma FROM Terminado as t, Precios as p WHERE t.Codigo >= 'PT-00004-100' AND t.Codigo <= 'PT-99999-999' AND t.Codigo = p.Terminado AND p.Cliente = '" & txtCliente.Text & "' ORDER BY t.Codigo")
         Dim dr As SqlDataReader
-        Dim WItem = "", WLinea = 0, WDescripcion = ""
+        Dim WItem = "", WLinea = 0, WDescripcion = "", WDescripcionIng = ""
 
         Try
 
@@ -416,6 +461,7 @@ Public Class Proforma
                     WItem = ""
                     WLinea = 0
                     WDescripcion = ""
+                    WDescripcionIng = ""
 
                     With dr
 
@@ -425,6 +471,13 @@ Public Class Proforma
                             Case 10, 20, 22, 24, 25, 26, 29, 30 ' Producto de Farma
 
                                 WDescripcion = IIf(IsDBNull(.Item("Descripcion")), "", Trim(.Item("Descripcion")))
+                                WDescripcionIng = IIf(IsDBNull(.Item("DescripcionIngles")), "", Trim(.Item("DescripcionIngles")))
+
+                                If cmbIdioma.SelectedIndex = 2 Then
+                                    If Trim(WDescripcionIng) <> "" Then
+                                        WDescripcion = WDescripcionIng
+                                    End If
+                                End If
 
                             Case Else ' Productos NO Farma
 
@@ -443,7 +496,7 @@ Public Class Proforma
             End If
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer listar los Clientes desde la Base de Datos.")
+            Throw New Exception("Hubo un problema al querer listar los Productos disponibles para este Cliente desde la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -513,7 +566,7 @@ Public Class Proforma
             Try
                 cliente = _BuscarCliente(txtCliente.Text)
             Catch ex As Exception
-                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation)
                 Exit Sub
             End Try
 
@@ -610,7 +663,7 @@ Public Class Proforma
 
     End Sub
 
-    Private Sub txtOCCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOCCliente.KeyDown
+    Private Sub txtOCCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOCCliente.KeyDown, txtSaldoFactura.KeyDown, txtNroPedido.KeyDown, txtNroFactura.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -658,7 +711,7 @@ Public Class Proforma
             dr.Fill(resultados)
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Exclamation)
         Finally
 
             dr = Nothing
@@ -955,7 +1008,7 @@ Public Class Proforma
             Return dr.HasRows
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Exclamation)
         Finally
 
             dr = Nothing
@@ -1010,7 +1063,7 @@ Public Class Proforma
                     trans.Rollback()
                 End If
 
-                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Exclamation)
 
             Finally
 
@@ -1127,15 +1180,19 @@ Public Class Proforma
         Dim trans As SqlTransaction = Nothing
         Dim cm As New SqlCommand()
         Dim WClave, WRenglon, WEstado, XRenglon, WNroProforma, XNroProforma, WFecha, WFechaOrd, WCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WSeguro, WFlete, WTotal, WDescripcionMonto, WSql, WPais
-        Dim WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII ', WViaII
-        Dim WProd As String, WCant, WPrecio, WDesc, WSinFDS
+        Dim WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WProformaCerrada, WPackingList, WEnviarDoc, WIdioma, WViaDesc
+        Dim WProd As String, WCant, WPrecio, WDesc, WSinFDS, WFechaLimite, WFechaLimiteOrd
 
 
-        If Me.Bloqueado Then
+        'If Me.Bloqueado Then
 
-            MsgBox("No se puede modificar una Proforma que ya se encuentra Aprobada.", MsgBoxStyle.Information)
-            Exit Sub
-        End If
+        '    MsgBox("No se puede modificar una Proforma que ya se encuentra Aprobada.", MsgBoxStyle.Information)
+        '    Exit Sub
+        'End If
+
+        WProformaCerrada = "0"
+        WPackingList = "0"
+        WEnviarDoc = "0"
 
         WClave = ""
         WRenglon = 0
@@ -1165,6 +1222,22 @@ Public Class Proforma
         WDescripcionMontoII = Trim(txtDescripcionTotalII.Text)
 
         WEstado = Trim(Str$(cmbEstado.SelectedIndex))
+        WIdioma = Trim(Str$(cmbCondicion.SelectedIndex))
+
+        WFechaLimite = txtFechaLimite.Text
+        WFechaLimiteOrd = Helper.ordenaFecha(WFechaLimite)
+
+        If ckCerrado.Checked Then
+            WProformaCerrada = "1"
+        End If
+
+        If ckEnviarDocumentacion.Checked Then
+            WEnviarDoc = "1"
+        End If
+
+        If ckPakingList.Checked Then
+            WPackingList = "1"
+        End If
 
         WSql = ""
 
@@ -1179,6 +1252,32 @@ Public Class Proforma
         If WCliente = "" Or Trim(WFecha).Length < 10 Then
             Exit Sub
         End If
+
+        If WIdioma = "" Then
+            MsgBox("No se ha informado un idioma para la Proforma.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        If WVia = "" Then
+            MsgBox("No se ha indicado la Vía de Transporte.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        ' Validar fecha limite como obligatoria?
+        'If WFechaLimiteOrd = 0 Then
+        '    MsgBox("La fecha límite, debe ser una fecha válida.", MsgBoxStyle.Exclamation)
+        '    Exit Sub
+        'End If
+
+        ' Valido que la fecha limite, en caso de existir, sea posterior a la fecha de la Proforma.
+        If WFechaLimite.ToString.Replace(" ", "").Length = 10 Then
+            If Val(WFechaOrd) >= Val(WFechaLimiteOrd) Then
+                MsgBox("La fecha límite debe ser posterior a la fecha de creación de la Proforma.", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+        End If
+
+        WViaDesc = UCase(Trim(cmbVia.SelectedText))
 
         Try
             cn.ConnectionString = _CS() ' TRUE: Para testing en local.
@@ -1213,11 +1312,11 @@ Public Class Proforma
 
                             WClave = XNroProforma & XRenglon
 
-                            WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, Observaciones, ObservacionesII, ObservacionesIII, Producto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais)" _
+                            WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd)" _
                                  & " VALUES " _
-                                 & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', " _
+                                 & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', '" & WViaDesc & "', " _
                                  & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', " & Helper.formatonumerico(WCant) & ", " & Helper.formatonumerico(WPrecio) & ", " & Helper.formatonumerico(WSubTotal) & ", " & Helper.formatonumerico(WFlete) & ", " & Helper.formatonumerico(WSeguro) & ", " _
-                                 & Helper.formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "')"
+                                 & Helper.formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "')"
 
                             cm.CommandText = WSql
 
@@ -1255,7 +1354,7 @@ Public Class Proforma
             cn.Close()
             cn = Nothing
             cm = Nothing
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             Exit Sub
         End Try
 
@@ -1313,28 +1412,34 @@ Public Class Proforma
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
-        txtNroProforma.Text = ""
+
+        ' Reseteamos los campos de Texto.
+        For Each txt As TextBox In {txtNroProforma, txtCliente, txtDescripcionCliente, txtDireccionCliente, txtLocalidadCliente, _
+                                    txtCondicionPago, txtCondicionPagoII, txtOCCliente, txtObservaciones, txtObservacionesII, txtObservacionesIII, _
+                                    txtDescripcionTotal, txtDescripcionTotalII, txtSubTotal, txtSeguro, txtFlete, txtTotal, txtPais, txtNroPedido, _
+                                    txtNroFactura, txtSaldoFactura}
+            txt.Text = ""
+
+        Next
+
+        ' Reseteamos los Combobox
+        For Each cmb As ComboBox In {cmbVia, cmbCondicion, cmbEstado, cmbIdioma}
+            cmb.SelectedIndex = 0
+        Next
+
+        ' Reseteamos los Checks
+        For Each ck As CheckBox In {ckCerrado, ckEnviarDocumentacion, ckPakingList}
+            ck.Checked = False
+        Next
+
+        ' Asignamos valores por defecto.
         txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
-        txtCliente.Text = ""
-        txtDescripcionCliente.Text = ""
-        txtDireccionCliente.Text = ""
-        txtLocalidadCliente.Text = ""
-        txtCondicionPago.Text = ""
-        txtCondicionPagoII.Text = ""
-        txtOCCliente.Text = ""
-        cmbVia.SelectedIndex = 0
-        cmbCondicion.SelectedIndex = 0
-        cmbEstado.SelectedIndex = 0
-        txtObservaciones.Text = ""
-        txtObservacionesII.Text = ""
-        txtObservacionesIII.Text = ""
-        txtDescripcionTotal.Text = ""
-        txtDescripcionTotalII.Text = ""
-        txtSubTotal.Text = ""
-        txtSeguro.Text = ""
-        txtFlete.Text = ""
-        txtTotal.Text = ""
-        txtPais.Text = ""
+        ckEnviarDocumentacion.Checked = False
+        cmbIdioma.SelectedIndex = 1 ' Español por defecto.
+
+        txtFecha.Clear()
+        txtFechaLimite.Clear()
+
         _LimpiarGrilla()
 
         txtNroProforma.Focus()
@@ -1350,6 +1455,7 @@ Public Class Proforma
 
         ' Cargamos automaticamente el próximo número de Proforma.
         _TraerProximoNroProforma()
+
     End Sub
 
     Private Sub btnVistaPrevia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVistaPrevia.Click
@@ -1556,7 +1662,16 @@ Public Class Proforma
                 With dgvProductos
                     .Rows(WRowIndex).Cells(0).Value = Trim(WDatos(0))
                     .Rows(WRowIndex).Cells(1).Value = Trim(WDatos(1))
+                End With
 
+                Try
+                    _TraerNombresProductos()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+                    Exit Sub
+                End Try
+
+                With dgvProductos
                     .CurrentCell = .Rows(WRowIndex).Cells(2)
                     .Focus()
                 End With
@@ -1591,7 +1706,8 @@ Public Class Proforma
 
         If e.KeyData = Keys.Enter Then
 
-            txtCondicionPago.Focus()
+            cmbIdioma.Focus()
+            cmbIdioma.DroppedDown = True
 
         ElseIf e.KeyData = Keys.Escape Then
             txtPais.Text = ""
@@ -1674,6 +1790,22 @@ Public Class Proforma
         _RecalcularTotal()
     End Sub
 
+    Private Sub cmbIdioma_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbIdioma.DropDownClosed
+        If cmbIdioma.SelectedIndex > -1 Then
+            txtCondicionPago.Focus()
+        End If
+    End Sub
+
+    Private Sub cmbIdioma_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbIdioma.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            txtCondicionPago.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbIdioma.SelectedIndex = 0
+        End If
+    End Sub
+
     Private Sub cmbEstado_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbEstado.DropDownClosed
         If cmbEstado.SelectedIndex > -1 Then
             txtObservaciones.Focus()
@@ -1740,5 +1872,103 @@ Public Class Proforma
             lstOpcionesConsulta_MouseClick(Nothing, Nothing)
 
         End If
+    End Sub
+
+    Private Function _TraerNombreProducto(ByVal _Codigo As String)
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT t.Linea, t.Descripcion, t.DescripcionIngles, p.Descripcion as DescripcionNoFarma FROM Terminado as t, Precios as p WHERE t.Codigo = '" & Trim(_Codigo) & "' AND t.Codigo = p.Terminado AND p.Cliente = '" & txtCliente.Text & "' ORDER BY t.Codigo")
+        Dim dr As SqlDataReader
+        Dim WLinea = 0, WDescripcion = "", WDescripcionIng = ""
+
+        Try
+
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                lstConsulta.Items.Clear()
+
+                dr.Read()
+                'WItem = ""
+                WLinea = 0
+                WDescripcion = ""
+
+                With dr
+
+                    WLinea = IIf(IsDBNull(.Item("Linea")), 0, Val(.Item("Linea")))
+
+                    Select Case WLinea
+                        Case 10, 20, 22, 24, 25, 26, 29, 30 ' Producto de Farma
+
+                            WDescripcion = IIf(IsDBNull(.Item("Descripcion")), "", Trim(.Item("Descripcion")))
+                            WDescripcionIng = IIf(IsDBNull(.Item("DescripcionIngles")), "", Trim(.Item("DescripcionIngles")))
+
+                            If cmbIdioma.SelectedIndex = 2 Then
+                                If Trim(WDescripcionIng) = "" Then
+                                    Throw New Exception("El Código " & _Codigo & ", no posee descripción en Inglés.")
+                                End If
+
+                                Return WDescripcionIng
+                            Else
+                                Return WDescripcion
+                            End If
+
+                        Case Else ' Productos NO Farma
+
+                            WDescripcion = IIf(IsDBNull(.Item("DescripcionNoFarma")), "", Trim(.Item("DescripcionNoFarma")))
+
+                            Return WDescripcion
+                            'WDescripcion = _BuscarNombreProductoPorCliente(.Item("Codigo"), txtCliente.Text)
+                    End Select
+
+                    '   WItem = .Item("Codigo") & SEPARADOR_CONSULTA & WDescripcion
+
+                    'lstConsulta.Items.Add(WItem)
+
+                End With
+
+                'Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return WDescripcion
+    End Function
+
+    Private Sub _TraerNombresProductos()
+        For Each row As DataGridViewRow In dgvProductos.Rows
+            With row
+                If Trim(.Cells(0).Value) <> "" Then
+                    Try
+                        .Cells(1).Value = _TraerNombreProducto(.Cells(0).Value)
+                    Catch ex As Exception
+                        Throw New Exception("No se ha podido recuperar las descripciones de todos los productos." & vbCrLf & "Motivo: " & vbCrLf & ex.Message)
+                        Exit Sub
+                    End Try
+                End If
+            End With
+        Next
+    End Sub
+
+    Private Sub cmbIdioma_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbIdioma.Leave
+        Try
+            _TraerNombresProductos()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            Exit Sub
+        End Try
     End Sub
 End Class

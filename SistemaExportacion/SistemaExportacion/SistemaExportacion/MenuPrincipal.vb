@@ -37,9 +37,9 @@ Public Class MenuPrincipal
     End Sub
 
     Public Sub _CargarTodasLasProformas()
-        Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WRowIndex
+        Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WFechaLimite, WPackingList, WRowIndex
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente ORDER BY p.FechaOrd, p.Proforma")
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total, p.FechaLimiteOrd, p.PackingList FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente ORDER BY p.FechaOrd, p.Proforma")
         Dim dr As SqlDataReader
 
         Try
@@ -57,6 +57,8 @@ Public Class MenuPrincipal
                 WRazon = ""
                 WPais = ""
                 WTotal = 0.0
+                WFechaLimite = ""
+                WPackingList = ""
                 WRowIndex = 0
 
                 dgvPrincipal.Rows.Clear()
@@ -77,6 +79,8 @@ Public Class MenuPrincipal
                         WRazon = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
                         WPais = IIf(IsDBNull(.Item("Pais")), "", .Item("Pais"))
                         WTotal = IIf(IsDBNull(.Item("Total")), 0.0, .Item("Total"))
+                        WFechaLimite = IIf(IsDBNull(.Item("FechaLimiteOrd")), "", .Item("FechaLimiteOrd"))
+                        WPackingList = IIf(IsDBNull(.Item("PackingList")), "", .Item("PackingList"))
 
                         WRowIndex = dgvPrincipal.Rows.Add
                     End With
@@ -88,6 +92,8 @@ Public Class MenuPrincipal
                         .Cells("Razon").Value = WRazon
                         .Cells("Pais").Value = WPais
                         .Cells("Total").Value = Helper.formatonumerico(WTotal)
+                        .Cells("FechaLimiteOrd").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
+                        .Cells("PackingList").Value = WPackingList
                     End With
 
                 Loop

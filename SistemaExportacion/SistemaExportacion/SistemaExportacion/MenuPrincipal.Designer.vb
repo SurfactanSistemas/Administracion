@@ -32,14 +32,9 @@ Partial Class MenuPrincipal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvPrincipal = New System.Windows.Forms.DataGridView()
-        Me.NroProforma = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Pais = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnAperturaArchivos = New System.Windows.Forms.Button()
         Me.btnHistorialProforma = New System.Windows.Forms.Button()
         Me.btnNuevaProforma = New System.Windows.Forms.Button()
         Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
@@ -50,7 +45,14 @@ Partial Class MenuPrincipal
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnAperturaArchivos = New System.Windows.Forms.Button()
+        Me.NroProforma = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Pais = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaLimite = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PackingList = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -146,7 +148,7 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.AllowUserToAddRows = False
         Me.dgvPrincipal.AllowUserToDeleteRows = False
         Me.dgvPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total})
+        Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total, Me.FechaLimite, Me.PackingList})
         Me.dgvPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvPrincipal.Location = New System.Drawing.Point(99, 15)
         Me.dgvPrincipal.Margin = New System.Windows.Forms.Padding(15)
@@ -154,52 +156,6 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.ReadOnly = True
         Me.dgvPrincipal.Size = New System.Drawing.Size(712, 348)
         Me.dgvPrincipal.TabIndex = 0
-        '
-        'NroProforma
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
-        Me.NroProforma.HeaderText = "Nro Proforma"
-        Me.NroProforma.MaxInputLength = 6
-        Me.NroProforma.Name = "NroProforma"
-        Me.NroProforma.ReadOnly = True
-        '
-        'Fecha
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.MaxInputLength = 10
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        '
-        'Cliente
-        '
-        Me.Cliente.HeaderText = "Cliente"
-        Me.Cliente.MaxInputLength = 6
-        Me.Cliente.Name = "Cliente"
-        Me.Cliente.ReadOnly = True
-        '
-        'Razon
-        '
-        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.ReadOnly = True
-        '
-        'Pais
-        '
-        Me.Pais.HeaderText = "Pais"
-        Me.Pais.Name = "Pais"
-        Me.Pais.ReadOnly = True
-        '
-        'Total
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Total.HeaderText = "Monto Total"
-        Me.Total.Name = "Total"
-        Me.Total.ReadOnly = True
         '
         'Panel1
         '
@@ -227,6 +183,20 @@ Partial Class MenuPrincipal
         Me.Button1.Text = "Cerrar"
         Me.ToolTip1.SetToolTip(Me.Button1, "Cerrar Sistema")
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'btnAperturaArchivos
+        '
+        Me.btnAperturaArchivos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAperturaArchivos.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAperturaArchivos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAperturaArchivos.Location = New System.Drawing.Point(5, 154)
+        Me.btnAperturaArchivos.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
+        Me.btnAperturaArchivos.Name = "btnAperturaArchivos"
+        Me.btnAperturaArchivos.Size = New System.Drawing.Size(74, 56)
+        Me.btnAperturaArchivos.TabIndex = 3
+        Me.btnAperturaArchivos.Text = "Apertura por Articulos"
+        Me.ToolTip1.SetToolTip(Me.btnAperturaArchivos, "Desplegar Información de Articulos por Proforma")
+        Me.btnAperturaArchivos.UseVisualStyleBackColor = True
         '
         'btnHistorialProforma
         '
@@ -338,19 +308,67 @@ Partial Class MenuPrincipal
         Me.txtFiltrarPor.Size = New System.Drawing.Size(176, 20)
         Me.txtFiltrarPor.TabIndex = 0
         '
-        'btnAperturaArchivos
+        'NroProforma
         '
-        Me.btnAperturaArchivos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAperturaArchivos.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAperturaArchivos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAperturaArchivos.Location = New System.Drawing.Point(5, 154)
-        Me.btnAperturaArchivos.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
-        Me.btnAperturaArchivos.Name = "btnAperturaArchivos"
-        Me.btnAperturaArchivos.Size = New System.Drawing.Size(74, 56)
-        Me.btnAperturaArchivos.TabIndex = 3
-        Me.btnAperturaArchivos.Text = "Apertura por Articulos"
-        Me.ToolTip1.SetToolTip(Me.btnAperturaArchivos, "Desplegar Información de Articulos por Proforma")
-        Me.btnAperturaArchivos.UseVisualStyleBackColor = True
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
+        Me.NroProforma.HeaderText = "Nro Proforma"
+        Me.NroProforma.MaxInputLength = 6
+        Me.NroProforma.Name = "NroProforma"
+        Me.NroProforma.ReadOnly = True
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 10
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        '
+        'Cliente
+        '
+        Me.Cliente.HeaderText = "Cliente"
+        Me.Cliente.MaxInputLength = 6
+        Me.Cliente.Name = "Cliente"
+        Me.Cliente.ReadOnly = True
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        '
+        'Pais
+        '
+        Me.Pais.HeaderText = "Pais"
+        Me.Pais.Name = "Pais"
+        Me.Pais.ReadOnly = True
+        '
+        'Total
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Total.HeaderText = "Monto Total"
+        Me.Total.Name = "Total"
+        Me.Total.ReadOnly = True
+        '
+        'FechaLimite
+        '
+        Me.FechaLimite.HeaderText = "FechaLimite"
+        Me.FechaLimite.MaxInputLength = 8
+        Me.FechaLimite.Name = "FechaLimite"
+        Me.FechaLimite.ReadOnly = True
+        Me.FechaLimite.Visible = False
+        '
+        'PackingList
+        '
+        Me.PackingList.HeaderText = "PackingList"
+        Me.PackingList.MaxInputLength = 1
+        Me.PackingList.Name = "PackingList"
+        Me.PackingList.ReadOnly = True
+        Me.PackingList.Visible = False
         '
         'MenuPrincipal
         '
@@ -385,12 +403,6 @@ Partial Class MenuPrincipal
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents btnHistorialProforma As System.Windows.Forms.Button
     Friend WithEvents btnNuevaProforma As System.Windows.Forms.Button
-    Friend WithEvents NroProforma As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Pais As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Total As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents cmbTipoFiltro As System.Windows.Forms.ComboBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
@@ -399,5 +411,13 @@ Partial Class MenuPrincipal
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents btnAperturaArchivos As System.Windows.Forms.Button
+    Friend WithEvents NroProforma As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Pais As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Total As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FechaLimite As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PackingList As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

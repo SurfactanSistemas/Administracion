@@ -1,16 +1,17 @@
 ﻿Public Class Cheque
     Implements ItemDeposito
 
-    Public identificacion, fechaCheque, banco, clave As String
+    Public identificacion, fechaCheque, banco, clave, ClaveCheque As String
     Public valorImporte As Double
 
 
-    Public Sub New(ByVal nro As String, ByVal fechaSegunCheque As String, ByVal valor As Double, ByVal codBanco As String, ByVal clav As String)
+    Public Sub New(ByVal nro As String, ByVal fechaSegunCheque As String, ByVal valor As Double, ByVal codBanco As String, ByVal clav As String, Optional ByVal _ClaveCheque As String = "")
         identificacion = nro
         fechaCheque = fechaSegunCheque
         valorImporte = valor
         banco = codBanco
         clave = clav
+        ClaveCheque = Trim(_ClaveCheque)
     End Sub
 
     Public Function Orden() As String
@@ -43,7 +44,6 @@
         Return value.ToString
     End Function
 
-
     Public Function tipo() As Integer Implements ItemDeposito.tipo
         Return 3
     End Function
@@ -63,4 +63,9 @@
     Public Function fecha() As String Implements ItemDeposito.fecha
         Return fechaCheque
     End Function
+
+    Public Function _ClaveCheque() As String
+        Return ClaveCheque
+    End Function
+
 End Class
