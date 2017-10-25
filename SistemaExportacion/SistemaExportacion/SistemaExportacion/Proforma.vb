@@ -39,7 +39,6 @@ Public Class Proforma
     End Property
 
 
-
     Private Sub Proforma_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsNothing(Me.NroProforma) Then
@@ -333,6 +332,10 @@ Public Class Proforma
 
                 _ProcesarDatosGrilla()
 
+                _TraerNombresProductos()
+
+                _TraerViasSegunIdioma()
+
             Else
                 txtNroProforma.Text = NroProforma
             End If
@@ -377,6 +380,15 @@ Public Class Proforma
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaLimite.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            If Val(Helper.ordenaFecha(txtFecha.Text)) > Val(Helper.ordenaFecha(txtFechaLimite.Text)) Then
+
+                MsgBox("La fecha límite debe ser posterior a la fecha de la Proforma.", MsgBoxStyle.Exclamation)
+
+                txtFechaLimite.Focus()
+
+                Exit Sub
+            End If
 
             If Helper._ValidarFecha(txtFechaLimite.Text) Then
                 txtObservaciones.Focus()
@@ -746,7 +758,7 @@ Public Class Proforma
 
                     If Not IsNothing(terminado) Then
                         .Rows(WRow).Cells(0).Value = terminado("Codigo")
-                        .Rows(WRow).Cells(1).Value = terminado("Descripcion")
+                        .Rows(WRow).Cells(1).Value = _TraerNombreProducto(terminado("Codigo")) 'terminado("Descripcion")
 
                         .CurrentCell = .Rows(WRow).Cells(2)
                         .Focus()
@@ -1181,7 +1193,7 @@ Public Class Proforma
         Dim cm As New SqlCommand()
         Dim WClave, WRenglon, WEstado, XRenglon, WNroProforma, XNroProforma, WFecha, WFechaOrd, WCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WSeguro, WFlete, WTotal, WDescripcionMonto, WSql, WPais
         Dim WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WProformaCerrada, WPackingList, WEnviarDoc, WIdioma, WViaDesc
-        Dim WProd As String, WCant, WPrecio, WDesc, WSinFDS, WFechaLimite, WFechaLimiteOrd
+        Dim WProd As String, WDescriProducto, WCant, WPrecio, WDesc, WSinFDS, WFechaLimite, WFechaLimiteOrd
 
 
         'If Me.Bloqueado Then
@@ -1193,6 +1205,7 @@ Public Class Proforma
         WProformaCerrada = "0"
         WPackingList = "0"
         WEnviarDoc = "0"
+        WDescriProducto = ""
 
         WClave = ""
         WRenglon = 0
@@ -1263,6 +1276,8 @@ Public Class Proforma
             Exit Sub
         End If
 
+        WViaDesc = UCase(_Left(cmbVia.SelectedItem, 20))
+
         ' Validar fecha limite como obligatoria?
         'If WFechaLimiteOrd = 0 Then
         '    MsgBox("La fecha límite, debe ser una fecha válida.", MsgBoxStyle.Exclamation)
@@ -1277,7 +1292,7 @@ Public Class Proforma
             End If
         End If
 
-        WViaDesc = UCase(Trim(cmbVia.SelectedText))
+        'WViaDesc = UCase(Trim(cmbVia.SelectedText))
 
         Try
             cn.ConnectionString = _CS() ' TRUE: Para testing en local.
@@ -1300,6 +1315,7 @@ Public Class Proforma
                 With row
                     WProd = Trim(.Cells(0).Value)
                     WDesc = Trim(.Cells(1).Value)
+                    WDesc = _Left(WDesc, 100)
                     WCant = Val(.Cells(2).Value)
                     WPrecio = Val(.Cells(3).Value)
 
@@ -1312,10 +1328,10 @@ Public Class Proforma
 
                             WClave = XNroProforma & XRenglon
 
-                            WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd)" _
+                            WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, DescriProducto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd)" _
                                  & " VALUES " _
                                  & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', '" & WViaDesc & "', " _
-                                 & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', " & Helper.formatonumerico(WCant) & ", " & Helper.formatonumerico(WPrecio) & ", " & Helper.formatonumerico(WSubTotal) & ", " & Helper.formatonumerico(WFlete) & ", " & Helper.formatonumerico(WSeguro) & ", " _
+                                 & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', '" & WDesc & "', " & Helper.formatonumerico(WCant) & ", " & Helper.formatonumerico(WPrecio) & ", " & Helper.formatonumerico(WSubTotal) & ", " & Helper.formatonumerico(WFlete) & ", " & Helper.formatonumerico(WSeguro) & ", " _
                                  & Helper.formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "')"
 
                             cm.CommandText = WSql
@@ -1456,10 +1472,78 @@ Public Class Proforma
         ' Cargamos automaticamente el próximo número de Proforma.
         _TraerProximoNroProforma()
 
+        _TraerViasSegunIdioma()
+
+    End Sub
+
+    Private Sub _ActualizarNombresProductos()
+
+        If Trim(txtNroProforma.Text) = "" Then : Exit Sub : End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim trans As SqlTransaction = Nothing
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            trans = cn.BeginTransaction
+            cm.Connection = cn
+            cm.Transaction = trans
+
+            Dim WNroProforma As String = Helper.ceros(txtNroProforma.Text, 6)
+
+            For Each row As DataGridViewRow In dgvProductos.Rows
+                With row
+
+                    If .Cells("Producto").Value <> "" Then
+
+                        cm.CommandText = "UPDATE ProformaExportacion SET DescriProducto = '" & _Left(.Cells("Descripcion").Value, 100) & "' WHERE Proforma = '" & WNroProforma & "' AND Producto = '" & Trim(.Cells("Producto").Value) & "'"
+
+                        cm.ExecuteNonQuery()
+
+                    End If
+
+                End With
+            Next
+
+            trans.Commit()
+
+        Catch ex As Exception
+
+            If Not IsNothing(trans) Then
+                trans.Rollback()
+            End If
+
+            Throw New Exception(ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub btnVistaPrevia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVistaPrevia.Click
         Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+
+        Try
+            _TraerNombresProductos()
+        Catch ex As Exception
+
+        End Try
+
+        Try
+
+            _ActualizarNombresProductos()
+
+        Catch ex As Exception
+            Helper._MsgBoxConMotivo(ex, "Hubo un problema al querer traer los datos de los Productos de la Proforma para mostrar la Vista Previa.")
+            Exit Sub
+        End Try
 
         With VistaPrevia
             .Reporte = New ProformaVistaPrevia
@@ -1706,6 +1790,8 @@ Public Class Proforma
 
         If e.KeyData = Keys.Enter Then
 
+            txtPais.Text = UCase(txtPais.Text)
+
             cmbIdioma.Focus()
             cmbIdioma.DroppedDown = True
 
@@ -1808,14 +1894,14 @@ Public Class Proforma
 
     Private Sub cmbEstado_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbEstado.DropDownClosed
         If cmbEstado.SelectedIndex > -1 Then
-            txtObservaciones.Focus()
+            txtFechaLimite.Focus()
         End If
     End Sub
 
     Private Sub cmbEstado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbEstado.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            txtObservaciones.Focus()
+            txtFechaLimite.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             cmbEstado.SelectedIndex = 0
@@ -1901,14 +1987,16 @@ Public Class Proforma
                     WLinea = IIf(IsDBNull(.Item("Linea")), 0, Val(.Item("Linea")))
 
                     Select Case WLinea
-                        Case 10, 20, 22, 24, 25, 26, 29, 30 ' Producto de Farma
+                        Case 10, 20, 22, 24, 25, 26, 27, 29, 30 ' Producto de Farma
 
                             WDescripcion = IIf(IsDBNull(.Item("Descripcion")), "", Trim(.Item("Descripcion")))
                             WDescripcionIng = IIf(IsDBNull(.Item("DescripcionIngles")), "", Trim(.Item("DescripcionIngles")))
 
                             If cmbIdioma.SelectedIndex = 2 Then
                                 If Trim(WDescripcionIng) = "" Then
-                                    Throw New Exception("El Código " & _Codigo & ", no posee descripción en Inglés.")
+                                    'Throw New Exception("El Código " & _Codigo & ", no posee descripción en Inglés.")
+                                    MsgBox("El Código " & _Codigo & ", no posee descripción en Inglés.", MsgBoxStyle.Exclamation)
+                                    Return WDescripcion
                                 End If
 
                                 Return WDescripcionIng
@@ -1963,9 +2051,26 @@ Public Class Proforma
         Next
     End Sub
 
+    Private Sub _TraerViasSegunIdioma()
+        Dim _index = cmbVia.SelectedIndex
+
+        Select Case cmbIdioma.SelectedIndex
+            Case 1
+                cmbVia.DataSource = VIAS_ESP
+            Case 2
+                cmbVia.DataSource = VIAS_ING
+            Case Else
+
+        End Select
+
+        cmbVia.SelectedIndex = _index
+    End Sub
+
     Private Sub cmbIdioma_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbIdioma.Leave
         Try
             _TraerNombresProductos()
+
+            _TraerViasSegunIdioma()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             Exit Sub

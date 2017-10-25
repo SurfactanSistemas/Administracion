@@ -92,7 +92,7 @@ Public Class MenuPrincipal
                         .Cells("Razon").Value = WRazon
                         .Cells("Pais").Value = WPais
                         .Cells("Total").Value = Helper.formatonumerico(WTotal)
-                        .Cells("FechaLimiteOrd").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
+                        .Cells("FechaLimite").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
                         .Cells("PackingList").Value = WPackingList
                     End With
 
@@ -111,6 +111,28 @@ Public Class MenuPrincipal
 
         End Try
 
+        Try
+            _ColorearProformasVencidasYSinPackingListRecibido()
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer marcar las proformas vencidas.", MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+    Private Sub _ColorearProformasVencidasYSinPackingListRecibido()
+        For Each row As DataGridViewRow In dgvPrincipal.Rows
+            With row
+                ' Chequeamos que tenga fecha limite indicada.
+                If Trim(.Cells("FechaLimite").Value) <> "" Then
+
+                    If Val(Helper.ordenaFecha(Date.Now.ToString("dd/MM/yyyy"))) > Val(.Cells("FechaLimite").Value) And .Cells("PackingList").Value <> "1" Then
+                        .DefaultCellStyle.BackColor = Color.Red
+                        .DefaultCellStyle.ForeColor = Color.White
+                    End If
+
+                End If
+            End With
+        Next
     End Sub
 
     Private Sub _Filtrar(ByVal _Filtros)

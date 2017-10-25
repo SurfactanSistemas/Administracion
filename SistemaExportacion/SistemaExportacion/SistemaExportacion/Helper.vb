@@ -8,6 +8,14 @@ Module Helper
 
     Private TESTING As Boolean = False
 
+    Public Function _Left(ByVal texto, ByVal largo) As String
+        Return Microsoft.VisualBasic.Left(Trim(texto), largo)
+    End Function
+
+    Public Sub _MsgBoxConMotivo(ByVal ex As Exception, Optional ByVal msg As String = "Error general.")
+        MsgBox(msg & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+    End Sub
+
     Public Function _NormalizarFilas(ByVal tabla As DataTable) As DataTable
 
         If tabla.Rows.Count = 0 Then : Return tabla : End If
