@@ -743,7 +743,6 @@ Partial Class Pagos
         '
         Me.txtBanco.Cleanable = True
         Me.txtBanco.Empty = True
-        Me.txtBanco.Enabled = False
         Me.txtBanco.EnterIndex = 5
         Me.txtBanco.LabelAssociationKey = 5
         Me.txtBanco.Location = New System.Drawing.Point(112, 100)

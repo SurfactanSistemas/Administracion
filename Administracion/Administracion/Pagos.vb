@@ -744,7 +744,7 @@ Public Class Pagos
     Private Sub txtBanco_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBanco.KeyDown
         If e.KeyValue = Keys.Enter Then
 
-            If Trim(txtBanco.Text) = "" Then
+            If Trim(txtBanco.Text) = "" And Not optVarios.Checked Then
                 _TipoConsulta = 1
                 _ListarCuentasContables()
                 Exit Sub
@@ -753,11 +753,13 @@ Public Class Pagos
             Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(txtBanco.Text)
             If Not IsNothing(banco) Then
                 mostrarBanco(banco)
-                txtFechaParidad.Focus()
-            Else
-                MsgBox("Código de Banco incorrecto.", MsgBoxStyle.Information)
-                txtBanco.Focus()
             End If
+
+            With gridPagos
+                .CurrentCell = .Rows(0).Cells(4)
+                .Focus()
+            End With
+
         End If
     End Sub
 
@@ -4441,7 +4443,14 @@ Public Class Pagos
     Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            txtBanco.Focus()
+            If Not optVarios.Checked Then
+                With gridPagos
+                    .CurrentCell = .Rows(0).Cells(4)
+                    .Focus()
+                End With
+            Else
+                txtBanco.Focus()
+            End If
         ElseIf e.KeyData = Keys.Escape Then
             txtObservaciones.Text = ""
         End If

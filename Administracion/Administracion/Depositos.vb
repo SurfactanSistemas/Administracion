@@ -7,17 +7,18 @@ Public Class Depositos
     Dim showFunction As ShowMethod
     Dim cheques As New List(Of Cheque)
     Private _ClavesCheques As New List(Of Object)
+    Private WClaveCheques(1000) As String
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        dataGridBuilder = New GridBuilder(gridCheques)
-        dataGridBuilder.addTextColumn(0, "Tipo")
-        dataGridBuilder.addTextColumn(1, "Número")
-        dataGridBuilder.addDateColumn(2, "Fecha")
-        dataGridBuilder.addTextColumn(3, "Nombre")
-        dataGridBuilder.addPositiveFloatColumn(4, "Importe")
+        'dataGridBuilder = New GridBuilder(gridCheques)
+        'dataGridBuilder.addTextColumn(0, "Tipo")
+        'dataGridBuilder.addTextColumn(1, "Número")
+        'dataGridBuilder.addDateColumn(2, "Fecha")
+        'dataGridBuilder.addTextColumn(3, "Nombre")
+        'dataGridBuilder.addPositiveFloatColumn(4, "Importe")
 
-        Dim commonEventsHandler As New CommonEventsHandler
-        commonEventsHandler.setIndexTab(Me)
+        'Dim commonEventsHandler As New CommonEventsHandler
+        'commonEventsHandler.setIndexTab(Me)
         btnLimpiar.PerformClick()
     End Sub
 
@@ -98,10 +99,11 @@ Public Class Depositos
         txtFechaAcreditacion.Text = txtFecha.Text
         txtImporte.Text = ""
         gridCheques.Rows.Clear()
+        gridCheques.Rows.Add()
         cheques.Clear()
-        gridCheques.AllowUserToAddRows = True
-        gridCheques.Columns(0).ReadOnly = False
-        gridCheques.Columns(4).ReadOnly = False
+        'gridCheques.AllowUserToAddRows = True
+        'gridCheques.Columns(0).ReadOnly = False
+        'gridCheques.Columns(4).ReadOnly = False
         lstConsulta.Visible = False
         lstSeleccion.Visible = False
         lstFiltrado.Visible = False
@@ -175,10 +177,10 @@ Public Class Depositos
             End If
             If msgBoxResult Then
                 cheques.Add(cheque)
-                gridCheques.Rows.Add(3, cheque.numero, cheque.fecha, cheque.banco, _NormalizarNumero(cheque.importe))
-                gridCheques.AllowUserToAddRows = False
-                gridCheques.Columns(0).ReadOnly = True
-                gridCheques.Columns(4).ReadOnly = True
+                Dim rowIndex = gridCheques.Rows.Add(3, cheque.numero, cheque.fecha, cheque.banco, _NormalizarNumero(cheque.importe))
+                'gridCheques.AllowUserToAddRows = False
+                'gridCheques.Columns(0).ReadOnly = True
+                'gridCheques.Columns(4).ReadOnly = True
                 'lstConsulta.Items.Remove(lstConsulta.SelectedItem)
             End If
             sumarImportes()
@@ -239,7 +241,7 @@ Public Class Depositos
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
-                                              & "Fecha2, Banco2, Clave, FechaOrd2 FROM Recibos WHERE " _
+                                              & "Fecha2, Banco2, Clave, FechaOrd2, ClaveCheque FROM Recibos WHERE " _
                                               & "TipoReg = '2' AND Estado2 <> 'X' AND Tipo2 = '02' " _
                                               & "ORDER BY FechaOrd2, Numero2")
         Dim dr As SqlDataReader
@@ -265,7 +267,7 @@ Public Class Depositos
                         '                     IIf(Not IsDBNull(.Item("FechaOrd2")), .Item("FechaOrd2"), "") _
                         '                    })
 
-                        _ChequesRecibos.Add({item, New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Val(Proceso.formatonumerico(dr.Item("Importe2"))), dr.Item("banco2"), "1" & dr.Item("Clave"))})
+                        _ChequesRecibos.Add({item, New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Val(Proceso.formatonumerico(dr.Item("Importe2"))), dr.Item("banco2"), "1" & dr.Item("Clave"), dr.Item("ClaveCheque"))})
 
                     Loop
                 End If
@@ -292,7 +294,7 @@ Public Class Depositos
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
-                                              & "Fecha2, Banco2, Clave, FechaOrd2 FROM RecibosProvi WHERE " _
+                                              & "Fecha2, Banco2, Clave, FechaOrd2, ClaveCheque FROM RecibosProvi WHERE " _
                                               & "TipoReg = '2' AND Estado2 = 'P' AND ReciboDefinitivo = '0' AND FechaOrd2 > '20080430'" _
                                               & "ORDER BY FechaOrd2, Numero2")
         Dim dr As SqlDataReader
@@ -320,7 +322,7 @@ Public Class Depositos
                         '                     .Item("Fecha2")
                         '                    })
 
-                        _ChequesRecibos.Add({item, New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Val(Proceso.formatonumerico(dr.Item("Importe2"))), dr.Item("banco2"), "2" & dr.Item("Clave"))})
+                        _ChequesRecibos.Add({item, New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Val(Proceso.formatonumerico(dr.Item("Importe2"))), dr.Item("banco2"), "2" & dr.Item("Clave"), dr.Item("ClaveCheque"))})
 
                     Loop
                 End If
@@ -424,13 +426,52 @@ Public Class Depositos
 
         If IsNothing(lstConsulta.SelectedItem) Then : Exit Sub : End If
 
-        showFunction.Invoke(lstConsulta.SelectedItem)
         If lstSeleccion.SelectedItem = "Bancos" Then
             lstConsulta.Visible = False
             txtAyuda.Visible = False
             txtCodigoBanco.Focus()
         Else
-            txtAyuda.Focus()
+
+            Dim row As Integer = -1
+            Dim cheq As Cheque
+
+            cheq = lstConsulta.SelectedItem
+
+            'showFunction.Invoke(lstConsulta.SelectedItem)
+
+            For Each _row As DataGridViewRow In gridCheques.Rows
+                If Not _row.IsNewRow Then
+                    If _row.Cells(5).Value = cheq.ClaveCheque Then
+                        lstConsulta.Items.Remove(lstConsulta.SelectedItem)
+                        Exit Sub
+                    End If
+                End If
+            Next
+
+            For Each _row As DataGridViewRow In gridCheques.Rows
+                If IsNothing(_row.Cells(0).Value) Then
+                    row = _row.Index
+                    Exit For
+                ElseIf Trim(_row.Cells(0).Value) = "" Then
+                    row = _row.Index
+                    Exit For
+                End If
+            Next
+
+            If row < 0 Then
+                row = gridCheques.Rows.Add
+            End If
+
+            If _ProcesarCheque(row, cheq.ClaveCheque) Then
+                lstConsulta.Items.Remove(lstConsulta.SelectedItem)
+                Dim nuevafila = gridCheques.Rows.Add()
+                sumarImportes()
+                gridCheques.CurrentCell = gridCheques.Rows(nuevafila).Cells(0)
+                gridCheques.Focus()
+            End If
+
+            'txtAyuda.Focus()
+
         End If
     End Sub
 
@@ -839,11 +880,11 @@ Public Class Depositos
                 Dim iCol = .CurrentCell.ColumnIndex
                 Dim iRow = .CurrentCell.RowIndex
 
-                If Val(.Rows(iRow).Cells(0).Value) = 3 Then
-                    .Rows(iRow).Cells(4).ReadOnly = True
-                Else
-                    .Rows(iRow).Cells(4).ReadOnly = False
-                End If
+                'If Val(.Rows(iRow).Cells(0).Value) = 3 Then
+                '    .Rows(iRow).Cells(4).ReadOnly = True
+                'Else
+                '    .Rows(iRow).Cells(4).ReadOnly = False
+                'End If
 
                 If msg.WParam.ToInt32() = Keys.Enter Then
 
