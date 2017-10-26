@@ -3404,6 +3404,19 @@ Public Class Pagos
         Dim pagos As Double = 0
         Dim formaPagos As Double = 0
         Dim total As Double = 0
+        Dim WRecalcular = False
+
+        For Each row As DataGridViewRow In gridPagos.Rows
+            If Val(row.Cells(4).Value) <> 0 Then
+                WRecalcular = True
+                Exit For
+            End If
+        Next
+
+        ' Recalculamos las retenciones.
+        If WRecalcular Then
+            _RecalcularRetenciones()
+        End If
 
         total = Val(_NormalizarNumero(txtIVA.Text)) + Val(_NormalizarNumero(txtGanancias.Text)) + Val(_NormalizarNumero(txtIBCiudad.Text)) +
             Val(_NormalizarNumero(txtIngresosBrutos.Text))
@@ -3425,6 +3438,7 @@ Public Class Pagos
         lblPagos.Text = Proceso.formatonumerico(pagos)
         lblFormaPagos.Text = Proceso.formatonumerico(formaPagos + total)
         lblDiferencia.Text = Proceso.formatonumerico(pagos - formaPagos - total)
+
     End Sub
 
     Private Sub gridPagos_RowsAdded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles gridPagos.RowsAdded
@@ -6768,7 +6782,7 @@ Public Class Pagos
         ' Recalculo IB CABA
         _RecalcularIBCABA()
 
-        sumarImportes()
+        'sumarImportes()
 
     End Sub
 
