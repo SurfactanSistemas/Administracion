@@ -3319,14 +3319,8 @@ Public Class Pagos
             Case 1
                 nombre = "Efectivo"
                 column = 5
-            Case 2
+            Case 2, 3
                 column = 1
-            Case 3
-                gridFormaPagos.Rows(rowIndex).Cells(0).Value = ""
-                chequeRow = rowIndex
-                lstSeleccion.SelectedIndex = 2
-                lstSeleccion_MouseClick(Nothing, Nothing)
-                Exit Sub
             Case 4
                 column = 1
                 sumarImportes()
@@ -3721,15 +3715,21 @@ Public Class Pagos
 
 
                 If iCol = 3 Then
-                    If gridFormaPagos.Rows(iRow).Cells(0).Value = "02" Or gridFormaPagos.Rows(iRow).Cells(0).Value = "04" Then
+                    If gridFormaPagos.Rows(iRow).Cells(0).Value = "02" Or gridFormaPagos.Rows(iRow).Cells(0).Value = "04" Or gridFormaPagos.Rows(iRow).Cells(0).Value = "03" Then
+
                         Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(valor)
                         If Not IsNothing(banco) Then
                             gridFormaPagos.Rows(iRow).Cells(iCol + 1).Value = banco.nombre
-                            iCol = 4 ' Desplazamos a ultima fila.
                         Else
-                            MsgBox("Codigo de Banco Incorrecto.", MsgBoxStyle.Information)
-                            Return True ' Nos quedamos en la celda.
+
+                            If Trim(gridFormaPagos.Rows(iRow).Cells(iCol + 1).Value) = "" Then
+                                MsgBox("Codigo de Banco Incorrecto.", MsgBoxStyle.Information)
+                                Return True ' Nos quedamos en la celda.
+                            End If
+
                         End If
+
+                        iCol = 4 ' Desplazamos a ultima celda.
                     End If
                 End If
 
@@ -4117,7 +4117,7 @@ Public Class Pagos
             End If
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar los datos del Cheque en la Base de Datos.", MsgBoxStyle.Critical)
             Return False
         Finally
 
@@ -4139,31 +4139,17 @@ Public Class Pagos
         Return _LecturaCorrecta
     End Function
 
-    'Private Function _GenerarCodigoBanco(ByVal _Banco As String) As String
-    '    _Banco = _Banco.ToString.Split("/")(0) ' Agarramos el nombre del banco, sin el cod del cliente.
-
-    '    Return _Banco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
-    'End Function
-
     Private Function _ChequeYaCargado(ByVal ClaveCheque) As Boolean
         Dim _cargado As Boolean = False
+        Dim ZZNroCheque = Mid$(ClaveCheque, 12, 8)
 
-        If _ChequeUtilizadoEnRecibo(ClaveCheque) Then
-
-            _cargado = True
-
-        ElseIf _ChequeUtilizadoEnReciboProvisorio(ClaveCheque) Then
-
-            _cargado = True
-
-        Else
-
-            Dim cheque As Object = _ClavesCheques.FindLast(Function(c) c(1) = ClaveCheque)
-            If Not IsNothing(cheque) Then
-                _cargado = True
-            End If
-
-        End If
+        For Each row As DataGridViewRow In gridFormaPagos.Rows
+            With row
+                If Val(.Cells(1).Value) = ZZNroCheque Then
+                    Return True
+                End If
+            End With
+        Next
 
         Return _cargado
     End Function
@@ -6595,7 +6581,12 @@ Public Class Pagos
                 With gridFormaPagos
                     .Rows(WRow).Cells(2).Value = txtFechaAux.Text
 
-                    .CurrentCell = .Rows(WRow).Cells(5)
+                    If Trim(.Rows(WRow).Cells(3).Value) <> "" Then
+                        .CurrentCell = .Rows(WRow).Cells(5)
+                    Else
+                        .CurrentCell = .Rows(WRow).Cells(3)
+                    End If
+
                     .Focus()
 
                     txtFechaAux.Visible = False
@@ -7528,7 +7519,13 @@ Public Class Pagos
                 With gridFormaPagos
                     .Rows(WRow).Cells(2).Value = txtFechaAux.Text
 
-                    .CurrentCell = .Rows(WRow).Cells(5)
+
+                    If Trim(.Rows(WRow).Cells(3).Value) <> "" Then
+                        .CurrentCell = .Rows(WRow).Cells(5)
+                    Else
+                        .CurrentCell = .Rows(WRow).Cells(3)
+                    End If
+
                     .Focus()
 
                 End With
