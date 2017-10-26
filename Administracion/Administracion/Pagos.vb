@@ -4479,6 +4479,8 @@ Public Class Pagos
                     MsgBox("No hay paridad cargada para esta fecha.", MsgBoxStyle.Information)
                 End If
 
+                sumarImportes()
+
             Else
                 txtFechaParidad.Focus()
             End If
@@ -7472,7 +7474,7 @@ Public Class Pagos
                                 Loop
 
                                 If ZCambioDivisa = 0 Then
-                                    MsgBox("La fecha " + XFecha2 + " no tiene informado paridad", "Emision de Ordenes de Pago", MsgBoxStyle.Information)
+                                    MsgBox("La fecha " + XFecha2 + " no tiene informado paridad", MsgBoxStyle.Information)
                                     Exit Sub
                                 End If
                                 ZZParidad = ZCambioDivisa
@@ -7568,6 +7570,19 @@ Public Class Pagos
         With gridFormaPagos
             .Rows.Remove(.Rows(e.RowIndex))
             .Rows.Add("", "", "", "", "", "", "", "", "")
+        End With
+
+    End Sub
+
+    Private Sub gridPagos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridPagos.RowHeaderMouseDoubleClick
+
+        If MsgBox("¿Está seguro de querer eliminar los datos de la fila?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        With gridPagos
+            .Rows.Remove(.Rows(e.RowIndex))
+            .Rows.Add("", "", "", "", "", "", "")
         End With
 
     End Sub
