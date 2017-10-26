@@ -266,31 +266,27 @@ Public Class MenuPrincipal
 
     Private Sub cmbTipoFiltro_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoFiltro.SelectedIndexChanged
 
-        Select Case cmbTipoFiltro.SelectedIndex
-            Case 5, 6
-                txtFiltrarPor.Enabled = False
-            Case Else
-                txtFiltrarPor.Enabled = True
-        End Select
-
         _CargarTodasLasProformas()
 
-        If cmbTipoFiltro.SelectedIndex = 0 Then
-            txtFiltrarPor.Text = ""
-        Else
+        Select Case cmbTipoFiltro.SelectedIndex
+            Case 5
 
-            Select Case cmbTipoFiltro.SelectedIndex
-                Case 5
-                    ' Mostramos unicamente los que no tiene Packing List informado.
-                    _TraerProformasSinPackingList()
-                Case 6
-                    ' Mostramos unicamente los que estan vencidos y sin Packing List Informado.
-                    _TraerProformasVencidasSinPackingList()
-                Case Else
-                    txtFiltrarPor.Focus()
-            End Select
+                txtFiltrarPor.Enabled = False
+                _TraerProformasSinPackingList()
 
-        End If
+            Case 6
+
+                txtFiltrarPor.Enabled = False
+                _TraerProformasVencidasSinPackingList()
+
+            Case Else
+
+                txtFiltrarPor.Enabled = True
+                txtFiltrarPor.Text = ""
+                txtFiltrarPor.Focus()
+
+        End Select
+
 
     End Sub
 
