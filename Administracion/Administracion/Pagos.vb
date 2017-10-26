@@ -3695,7 +3695,7 @@ Public Class Pagos
                                 sumarImportes()
                             End If
                         Else
-                            valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
+                            'valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
 
                             Select Case Val(valor)
                                 Case 1, 2, 3, 4, 5, 6
@@ -6568,7 +6568,7 @@ Public Class Pagos
     Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+            'If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
 
             'Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
 
@@ -6742,15 +6742,15 @@ Public Class Pagos
 
     Private Sub gridFormaPagos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridFormaPagos.CellMouseDoubleClick
 
-        Dim iRow As DataGridViewRow
+        'Dim iRow As DataGridViewRow
 
-        iRow = gridFormaPagos.Rows(e.RowIndex)
+        'iRow = gridFormaPagos.Rows(e.RowIndex)
 
-        If MsgBox("¿Está seguro de querer eliminar la fila?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.No Then
-            Exit Sub
-        End If
+        'If MsgBox("¿Está seguro de querer eliminar la fila?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.No Then
+        '    Exit Sub
+        'End If
 
-        gridFormaPagos.Rows.Remove(iRow)
+        'gridFormaPagos.Rows.Remove(iRow)
 
     End Sub
 
@@ -7529,7 +7529,10 @@ Public Class Pagos
                     .Focus()
 
                 End With
-
+            Else
+                With gridFormaPagos
+                    .Rows(WRow).Cells(2).Value = txtFechaAux.Text
+                End With
             End If
 
             txtFechaAux.Visible = False
@@ -7540,5 +7543,18 @@ Public Class Pagos
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         _RecalcularRetenciones()
+    End Sub
+
+    Private Sub gridFormaPagos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridFormaPagos.RowHeaderMouseDoubleClick
+
+        If MsgBox("¿Está seguro de querer eliminar los datos de la fila?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        With gridFormaPagos
+            .Rows.Remove(.Rows(e.RowIndex))
+            .Rows.Add("", "", "", "", "", "", "", "", "")
+        End With
+
     End Sub
 End Class

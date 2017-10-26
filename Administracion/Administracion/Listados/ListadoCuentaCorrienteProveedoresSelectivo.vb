@@ -316,7 +316,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Private Function _BuscarCtaCtePrvSelectivo(ByVal proveedor As String) As DataTable
         Dim tabla As New DataTable
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm = "SELECT Tipo, Letra, Punto, Numero, Total, Saldo, Fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Pago, Paridad FROM CtaCtePrv WHERE Proveedor = '" & proveedor.Trim() & "' AND Saldo <> 0 ORDER BY OrdFecha, Numero"
+        Dim cm = "SELECT Tipo, Letra, Punto, Numero, Total, Saldo, Fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Pago, Paridad FROM CtaCtePrv WHERE Proveedor = '" & proveedor.Trim() & "' AND Saldo <> 0 ORDER BY Proveedor, OrdFecha, NroInterno"
         Dim dr As New SqlDataAdapter(cm, cn)
 
         'SQLConnector.conexionSql(cn, cm)
@@ -451,7 +451,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim txtFormula As String
         Dim x As Char = Chr(34)
 
-        Dim WOrden As Integer
+        Dim WOrden As Integer = 0
         Dim txtEmpresa As String
 
         Dim varOrdFecha As String
@@ -530,6 +530,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                 If Not IsNothing(tabla) Then
                     For Each row As DataRow In tabla.Rows
 
+                        WOrden += 1
+
                         Dim CCPrv As New CtaCteProveedoresDeudaDesdeHastaII(row("Tipo"), row("Letra"), row("Punto"), row("Numero"), row("Total"), row("Saldo"), row("Fecha"), row("Vencimiento"), row("Vencimiento1"), row("Impre"), row("NroInterno"), row("Clave"), varProveedor, row("Pago"), row("Paridad"))
 
                         varPago = CCPrv.pago
@@ -565,7 +567,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                                 varSaldoOriginal = CCPrv.saldo
                                 varDife = varSaldo - CCPrv.saldo
                             End If
-                            
+
 
                             varAcumulaUs += varTotalUs
 
