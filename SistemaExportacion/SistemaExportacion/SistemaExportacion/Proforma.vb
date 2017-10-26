@@ -1004,7 +1004,7 @@ Public Class Proforma
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
         Me.Close()
-        MenuPrincipal._CargarTodasLasProformas()
+        MenuPrincipal.btnLimpiarFiltros.PerformClick()
     End Sub
 
     Private Function _ExisteProforma(ByVal NroProforma As String) As Boolean
@@ -1071,7 +1071,7 @@ Public Class Proforma
 
                 txtNroProforma.Focus()
 
-                MenuPrincipal._CargarTodasLasProformas()
+                MenuPrincipal.btnLimpiarFiltros.PerformClick()
 
             Catch ex As Exception
 
@@ -1394,7 +1394,7 @@ Public Class Proforma
         'btnLimpiar.PerformClick()
         btnCerrar.PerformClick()
 
-        MenuPrincipal._CargarTodasLasProformas()
+        MenuPrincipal.btnLimpiarFiltros.PerformClick()
 
     End Sub
 
