@@ -32,6 +32,14 @@ Partial Class MenuPrincipal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvPrincipal = New System.Windows.Forms.DataGridView()
+        Me.NroProforma = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Pais = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaLimite = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PackingList = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnAperturaArchivos = New System.Windows.Forms.Button()
@@ -45,14 +53,7 @@ Partial Class MenuPrincipal
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.NroProforma = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Pais = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FechaLimite = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PackingList = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnLimpiarFiltros = New System.Windows.Forms.Button()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -157,6 +158,68 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.Size = New System.Drawing.Size(712, 348)
         Me.dgvPrincipal.TabIndex = 0
         '
+        'NroProforma
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
+        Me.NroProforma.HeaderText = "Nro Proforma"
+        Me.NroProforma.MaxInputLength = 6
+        Me.NroProforma.Name = "NroProforma"
+        Me.NroProforma.ReadOnly = True
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 10
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        '
+        'Cliente
+        '
+        Me.Cliente.HeaderText = "Cliente"
+        Me.Cliente.MaxInputLength = 6
+        Me.Cliente.Name = "Cliente"
+        Me.Cliente.ReadOnly = True
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        '
+        'Pais
+        '
+        Me.Pais.HeaderText = "Pais"
+        Me.Pais.Name = "Pais"
+        Me.Pais.ReadOnly = True
+        '
+        'Total
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Total.HeaderText = "Monto Total"
+        Me.Total.Name = "Total"
+        Me.Total.ReadOnly = True
+        '
+        'FechaLimite
+        '
+        Me.FechaLimite.HeaderText = "FechaLimite"
+        Me.FechaLimite.MaxInputLength = 8
+        Me.FechaLimite.Name = "FechaLimite"
+        Me.FechaLimite.ReadOnly = True
+        Me.FechaLimite.Visible = False
+        '
+        'PackingList
+        '
+        Me.PackingList.HeaderText = "PackingList"
+        Me.PackingList.MaxInputLength = 1
+        Me.PackingList.Name = "PackingList"
+        Me.PackingList.ReadOnly = True
+        Me.PackingList.Visible = False
+        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.Button1)
@@ -253,6 +316,7 @@ Partial Class MenuPrincipal
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnLimpiarFiltros)
         Me.GroupBox1.Controls.Add(Me.cmbTipoFiltro)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label4)
@@ -261,15 +325,17 @@ Partial Class MenuPrincipal
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox1.Location = New System.Drawing.Point(22, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(588, 43)
+        Me.GroupBox1.Size = New System.Drawing.Size(731, 43)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filtrar datos"
         '
         'cmbTipoFiltro
         '
+        Me.cmbTipoFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTipoFiltro.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmbTipoFiltro.FormattingEnabled = True
-        Me.cmbTipoFiltro.Items.AddRange(New Object() {"", "Nro de Proforma", "Fecha", "Cliente", "País"})
+        Me.cmbTipoFiltro.Items.AddRange(New Object() {"", "Nro de Proforma", "Fecha", "Cliente", "País", "S/Packing List", "Vencidas (S/Packing List)"})
         Me.cmbTipoFiltro.Location = New System.Drawing.Point(116, 15)
         Me.cmbTipoFiltro.Name = "cmbTipoFiltro"
         Me.cmbTipoFiltro.Size = New System.Drawing.Size(108, 21)
@@ -308,67 +374,19 @@ Partial Class MenuPrincipal
         Me.txtFiltrarPor.Size = New System.Drawing.Size(176, 20)
         Me.txtFiltrarPor.TabIndex = 0
         '
-        'NroProforma
+        'btnLimpiarFiltros
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
-        Me.NroProforma.HeaderText = "Nro Proforma"
-        Me.NroProforma.MaxInputLength = 6
-        Me.NroProforma.Name = "NroProforma"
-        Me.NroProforma.ReadOnly = True
-        '
-        'Fecha
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.MaxInputLength = 10
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        '
-        'Cliente
-        '
-        Me.Cliente.HeaderText = "Cliente"
-        Me.Cliente.MaxInputLength = 6
-        Me.Cliente.Name = "Cliente"
-        Me.Cliente.ReadOnly = True
-        '
-        'Razon
-        '
-        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.ReadOnly = True
-        '
-        'Pais
-        '
-        Me.Pais.HeaderText = "Pais"
-        Me.Pais.Name = "Pais"
-        Me.Pais.ReadOnly = True
-        '
-        'Total
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Total.HeaderText = "Monto Total"
-        Me.Total.Name = "Total"
-        Me.Total.ReadOnly = True
-        '
-        'FechaLimite
-        '
-        Me.FechaLimite.HeaderText = "FechaLimite"
-        Me.FechaLimite.MaxInputLength = 8
-        Me.FechaLimite.Name = "FechaLimite"
-        Me.FechaLimite.ReadOnly = True
-        Me.FechaLimite.Visible = False
-        '
-        'PackingList
-        '
-        Me.PackingList.HeaderText = "PackingList"
-        Me.PackingList.MaxInputLength = 1
-        Me.PackingList.Name = "PackingList"
-        Me.PackingList.ReadOnly = True
-        Me.PackingList.Visible = False
+        Me.btnLimpiarFiltros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiarFiltros.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiarFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiarFiltros.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnLimpiarFiltros.Location = New System.Drawing.Point(599, 11)
+        Me.btnLimpiarFiltros.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
+        Me.btnLimpiarFiltros.Name = "btnLimpiarFiltros"
+        Me.btnLimpiarFiltros.Size = New System.Drawing.Size(123, 26)
+        Me.btnLimpiarFiltros.TabIndex = 3
+        Me.btnLimpiarFiltros.Text = "Limpiar Filtros"
+        Me.btnLimpiarFiltros.UseVisualStyleBackColor = True
         '
         'MenuPrincipal
         '
@@ -419,5 +437,6 @@ Partial Class MenuPrincipal
     Friend WithEvents Total As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FechaLimite As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PackingList As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnLimpiarFiltros As System.Windows.Forms.Button
 
 End Class

@@ -266,12 +266,207 @@ Public Class MenuPrincipal
 
     Private Sub cmbTipoFiltro_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoFiltro.SelectedIndexChanged
 
+        Select Case cmbTipoFiltro.SelectedIndex
+            Case 5, 6
+                txtFiltrarPor.Enabled = False
+            Case Else
+                txtFiltrarPor.Enabled = True
+        End Select
+
+        _CargarTodasLasProformas()
+
         If cmbTipoFiltro.SelectedIndex = 0 Then
-            _CargarTodasLasProformas()
             txtFiltrarPor.Text = ""
         Else
-            txtFiltrarPor.Focus()
+
+            Select Case cmbTipoFiltro.SelectedIndex
+                Case 5
+                    ' Mostramos unicamente los que no tiene Packing List informado.
+                    _TraerProformasSinPackingList()
+                Case 6
+                    ' Mostramos unicamente los que estan vencidos y sin Packing List Informado.
+                    _TraerProformasVencidasSinPackingList()
+                Case Else
+                    txtFiltrarPor.Focus()
+            End Select
+
         End If
+
+    End Sub
+
+    Private Sub _TraerProformasVencidasSinPackingList()
+
+        Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WFechaLimite, WPackingList, WRowIndex
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total, p.FechaLimiteOrd, p.PackingList FROM ProformaExportacion as p, Cliente as c WHERE p.FechaLimite <> '  /  /    ' AND PackingList = '0' AND p.Cliente = c.Cliente ORDER BY p.FechaOrd, p.Proforma")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+            dr = cm.ExecuteReader()
+            dgvPrincipal.Rows.Clear()
+
+            If dr.HasRows Then
+
+                WProforma = ""
+                WFecha = ""
+                WCliente = ""
+                WRazon = ""
+                WPais = ""
+                WTotal = 0.0
+                WFechaLimite = ""
+                WPackingList = ""
+                WRowIndex = 0
+
+                Do While dr.Read()
+
+                    WProforma = ""
+                    WFecha = ""
+                    WCliente = ""
+                    WRazon = ""
+                    WPais = ""
+                    WTotal = 0.0
+
+                    With dr
+                        WProforma = IIf(IsDBNull(.Item("Proforma")), "", .Item("Proforma"))
+                        WFecha = IIf(IsDBNull(.Item("Fecha")), "", .Item("Fecha"))
+                        WCliente = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+                        WRazon = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                        WPais = IIf(IsDBNull(.Item("Pais")), "", .Item("Pais"))
+                        WTotal = IIf(IsDBNull(.Item("Total")), 0.0, .Item("Total"))
+                        WFechaLimite = IIf(IsDBNull(.Item("FechaLimiteOrd")), "", .Item("FechaLimiteOrd"))
+                        WPackingList = IIf(IsDBNull(.Item("PackingList")), "", .Item("PackingList"))
+
+                        WRowIndex = dgvPrincipal.Rows.Add
+                    End With
+
+                    If Val(Helper.ordenaFecha(Date.Now.ToString("dd/MM/yyyy"))) > Helper.ordenaFecha(WFechaLimite) Then
+
+                        With dgvPrincipal.Rows(WRowIndex)
+                            .Cells("NroProforma").Value = WProforma
+                            .Cells("Fecha").Value = WFecha
+                            .Cells("Cliente").Value = WCliente
+                            .Cells("Razon").Value = WRazon
+                            .Cells("Pais").Value = WPais
+                            .Cells("Total").Value = Helper.formatonumerico(WTotal)
+                            .Cells("FechaLimite").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
+                            .Cells("PackingList").Value = WPackingList
+                        End With
+
+                    End If
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer listar las Proformas desde la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Try
+            _ColorearProformasVencidasYSinPackingListRecibido()
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer marcar las proformas vencidas.", MsgBoxStyle.Exclamation)
+        End Try
+
+
+    End Sub
+
+    Private Sub _TraerProformasSinPackingList()
+
+        Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WFechaLimite, WPackingList, WRowIndex
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total, p.FechaLimiteOrd, p.PackingList FROM ProformaExportacion as p, Cliente as c WHERE PackingList = '0' AND p.Cliente = c.Cliente ORDER BY p.FechaOrd, p.Proforma")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+            dr = cm.ExecuteReader()
+            dgvPrincipal.Rows.Clear()
+
+            If dr.HasRows Then
+
+                WProforma = ""
+                WFecha = ""
+                WCliente = ""
+                WRazon = ""
+                WPais = ""
+                WTotal = 0.0
+                WFechaLimite = ""
+                WPackingList = ""
+                WRowIndex = 0
+
+                Do While dr.Read()
+
+                    WProforma = ""
+                    WFecha = ""
+                    WCliente = ""
+                    WRazon = ""
+                    WPais = ""
+                    WTotal = 0.0
+
+                    With dr
+                        WProforma = IIf(IsDBNull(.Item("Proforma")), "", .Item("Proforma"))
+                        WFecha = IIf(IsDBNull(.Item("Fecha")), "", .Item("Fecha"))
+                        WCliente = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+                        WRazon = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                        WPais = IIf(IsDBNull(.Item("Pais")), "", .Item("Pais"))
+                        WTotal = IIf(IsDBNull(.Item("Total")), 0.0, .Item("Total"))
+                        WFechaLimite = IIf(IsDBNull(.Item("FechaLimiteOrd")), "", .Item("FechaLimiteOrd"))
+                        WPackingList = IIf(IsDBNull(.Item("PackingList")), "", .Item("PackingList"))
+
+                        WRowIndex = dgvPrincipal.Rows.Add
+                    End With
+
+                    'If Val(Helper.ordenaFecha(Date.Now.ToString("dd/MM/yyyy"))) > Helper.ordenaFecha(WFechaLimite) Then
+
+                    With dgvPrincipal.Rows(WRowIndex)
+                        .Cells("NroProforma").Value = WProforma
+                        .Cells("Fecha").Value = WFecha
+                        .Cells("Cliente").Value = WCliente
+                        .Cells("Razon").Value = WRazon
+                        .Cells("Pais").Value = WPais
+                        .Cells("Total").Value = Helper.formatonumerico(WTotal)
+                        .Cells("FechaLimite").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
+                        .Cells("PackingList").Value = WPackingList
+                    End With
+
+                    'End If
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer listar las Proformas desde la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Try
+            _ColorearProformasVencidasYSinPackingListRecibido()
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer marcar las proformas vencidas.", MsgBoxStyle.Exclamation)
+        End Try
+
 
     End Sub
 
@@ -294,5 +489,13 @@ Public Class MenuPrincipal
         With ConsultaArticulosProforma
             .Show()
         End With
+    End Sub
+
+    Private Sub btnLimpiarFiltros_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarFiltros.Click
+
+        '_CargarTodasLasProformas()
+        cmbTipoFiltro.SelectedIndex = 0
+        txtFiltrarPor.Focus()
+
     End Sub
 End Class

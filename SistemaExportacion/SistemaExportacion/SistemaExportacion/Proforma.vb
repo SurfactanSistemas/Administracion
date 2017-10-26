@@ -14,6 +14,9 @@ Public Class Proforma
     ' Constantes
     Private Const PRODUCTOS_MAX = 6
     Private Const SEPARADOR_CONSULTA = "____"
+
+    ' Control de Idiomas
+    Private MOSTRAR_MSG_IDIOMAS As Boolean = True
     Private VIAS_ESP = {"", "TERRESTRE", "AÉREA", "MARÍTIMA"}
     Private VIAS_ING = {"", "LAND ROUTE", "BY AIR", "BY SEA"}
 
@@ -43,6 +46,7 @@ Public Class Proforma
 
         If Not IsNothing(Me.NroProforma) Then
             txtNroProforma.Text = Me.NroProforma
+            MOSTRAR_MSG_IDIOMAS = False
 
             txtNroProforma_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         Else
@@ -1357,6 +1361,7 @@ Public Class Proforma
             End If
 
             txtNroProforma.Text = WNroProforma
+            MOSTRAR_MSG_IDIOMAS = False
             txtNroProforma_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
             txtNroProforma.Focus()
@@ -1995,7 +2000,11 @@ Public Class Proforma
                             If cmbIdioma.SelectedIndex = 2 Then
                                 If Trim(WDescripcionIng) = "" Then
                                     'Throw New Exception("El Código " & _Codigo & ", no posee descripción en Inglés.")
-                                    MsgBox("El Código " & _Codigo & ", no posee descripción en Inglés.", MsgBoxStyle.Exclamation)
+
+                                    If MOSTRAR_MSG_IDIOMAS Then
+                                        MsgBox("El Código " & _Codigo & ", no posee descripción en Inglés.", MsgBoxStyle.Exclamation)
+                                    End If
+
                                     Return WDescripcion
                                 End If
 
@@ -2049,6 +2058,8 @@ Public Class Proforma
                 End If
             End With
         Next
+
+        MOSTRAR_MSG_IDIOMAS = True
     End Sub
 
     Private Sub _TraerViasSegunIdioma()
