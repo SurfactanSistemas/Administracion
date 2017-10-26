@@ -371,18 +371,22 @@ Public Class Pagos
         If txtProveedor.Text = "10167878480" Or txtProveedor.Text = "10000000100" Or txtProveedor.Text = "10071081483" Or txtProveedor.Text = "10069345023" Or txtProveedor.Text = "10066352912" Or (Val(datos_prov(0)) = 24 And Val(datos_prov(1)) = 1) Then
             Dim entra As Boolean = False
 
-            For i = 1 To _Carpetas.Length - 1
-                If _Carpetas(i) <> "" Then
-                    entra = True
-                End If
-            Next
+            'For i = 1 To _Carpetas.Length - 1
+            '    If _Carpetas(i) <> "" Then
+            '        entra = True
+            '    End If
+            'Next
 
-            If entra Then
+            If Val(_Carpetas(1)) = 0 And Val(_Carpetas(2)) = 0 And Val(_Carpetas(3)) = 0 And Val(_Carpetas(4)) = 0 And Val(_Carpetas(5)) = 0 And Val(_Carpetas(6)) = 0 And Val(_Carpetas(7)) = 0 And Val(_Carpetas(8)) = 0 And Val(_Carpetas(9)) = 0 And Val(_Carpetas(10)) = 0 Then
+                'If entra Then
                 If MsgBox("¿El pago que se esta efectuando corresponde a una Importacion?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
-                    MsgBox("e debe informar el numero de carpeta correspondiente", MsgBoxStyle.Critical)
+                    MsgBox("Se debe informar el numero de carpeta correspondiente", MsgBoxStyle.Critical)
                     Return False
                 End If
+                'End If
             End If
+
+
         End If
 
         ' Si el proveedor se encuentra embargado por arba, se consulta si se quiere proseguir con la generacion de la orden de pago.
