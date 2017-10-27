@@ -2622,7 +2622,7 @@ Public Class Pagos
 
                     WEntra = "N"
 
-                    Dim dr As SqlDataReader = cm.ExecuteReader()
+                    Dim dr As SqlDataReader
                     Dim ZProveedor = ""
 
                     For Each _Empresa As String In _Empresas
@@ -2636,6 +2636,7 @@ Public Class Pagos
                             cn.ConnectionString = _CS(_Empresa)
                             cn.Open()
                             cm.CommandText = ZSql
+                            dr = cm.ExecuteReader()
 
                             If dr.HasRows Then
                                 dr.Read()
