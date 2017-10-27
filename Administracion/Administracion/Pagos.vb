@@ -3414,7 +3414,7 @@ Public Class Pagos
         Next
 
         ' Recalculamos las retenciones.
-        If WRecalcular Then
+        If WRecalcular And Not _ExisteOrdenDePago(txtOrdenPago.Text) Then
             _RecalcularRetenciones()
         End If
 
