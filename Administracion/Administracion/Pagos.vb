@@ -4079,7 +4079,7 @@ Public Class Pagos
             End Select
 
             With gridFormaPagos.Rows(row)
-                .Cells(0).Value = "03"
+                .Cells(0).Value = WTipo
                 .Cells(1).Value = ZZNroCheque
                 .Cells(2).Value = ""
                 .Cells(3).Value = XBanco
