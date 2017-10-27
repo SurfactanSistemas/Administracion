@@ -2210,7 +2210,7 @@ Public Class Pagos
                     XImporte1 = 0
                     XImpoNeto = 0
 
-                    XTipo2 = .Cells(0).Value
+                    XTipo2 = Proceso.ceros(.Cells(0).Value, 2)
                     XNumero2 = .Cells(1).Value
                     XFecha2 = .Cells(2).Value
                     XFechaOrd2 = Proceso.ordenaFecha(XFecha2)
@@ -6368,7 +6368,7 @@ Public Class Pagos
         Dim discriminar As Boolean = True
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Tipo2 FROM Pagos WHERE Orden = '" & ceros(Orden, 6) & "' AND Tipo2 = '3'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Tipo2 FROM Pagos WHERE Orden = '" & ceros(Orden, 6) & "' AND (Tipo2 = '3' Or Tipo2 = '03')")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
