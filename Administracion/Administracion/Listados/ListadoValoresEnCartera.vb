@@ -272,10 +272,11 @@ Public Class ListadoValoresEnCartera
 
             ''If Impre(5) = 0 Then
             '?????
-
-            SQLConnector.executeProcedure("alta_valcar", CampoRecibos.recibo, CampoRecibos.cliente, CampoRecibos.numero2, CampoRecibos.Banco2, varImpo1, varImpo2, varImpo3,
+            If Val(varImpo5) = 0 Then
+                SQLConnector.executeProcedure("alta_valcar", CampoRecibos.recibo, CampoRecibos.cliente, CampoRecibos.numero2, CampoRecibos.Banco2, varImpo1, varImpo2, varImpo3,
                                           varImpo4, varImpo5, vartitulo1, vartitulo2, vartitulo3, vartitulo4, vartitulo5)
-
+            End If
+            
         Next
 
 
