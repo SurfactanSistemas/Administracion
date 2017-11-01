@@ -72,17 +72,19 @@ Public Class SectoresPrincipal
 
         dgvGrilla.Rows.Clear()
 
-        For Each row As DataRow In DT.Rows
-            rowindex = dgvGrilla.Rows.Add
+        If Not IsNothing(DT) Then
+            For Each row As DataRow In DT.Rows
+                rowindex = dgvGrilla.Rows.Add
 
-            With dgvGrilla.Rows(rowindex)
+                With dgvGrilla.Rows(rowindex)
 
-                .Cells("ID").Value = row.Item("ID")
-                .Cells("Descripcion").Value = row.Item("Descripcion")
+                    .Cells("ID").Value = row.Item("ID")
+                    .Cells("Descripcion").Value = row.Item("Descripcion")
 
-            End With
+                End With
 
-        Next
+            Next
+        End If
 
     End Sub
 
@@ -96,7 +98,7 @@ Public Class SectoresPrincipal
 
     End Sub
 
-    Private Sub cmbTipoFiltro_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbTipoFiltro.KeyDown
+    Private Sub cmbTipoFiltro_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
 
         If e.KeyData = Keys.Enter Then
             If cmbTipoFiltro.SelectedIndex = 0 Then : Exit Sub : End If
@@ -106,6 +108,35 @@ Public Class SectoresPrincipal
 
         ElseIf e.KeyData = Keys.Escape Then
             cmbTipoFiltro.SelectedIndex = 0
+        End If
+
+    End Sub
+
+    Private Sub txtFiltro_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFiltro.KeyUp
+
+        If e.KeyData = Keys.Escape Then
+            txtFiltro.Text = ""
+            _AsignarDatosAGrilla(DT_ORIGINAL)
+        Else
+
+            If Trim(txtFiltro.Text) = "" Then
+
+                _AsignarDatosAGrilla(DT_ORIGINAL)
+
+            Else
+
+                Dim tabla As DataTable
+
+                Try
+                    tabla = DT_ORIGINAL.Select("ID like '%" & Trim(txtFiltro.Text) & "%' OR Descripcion like '%" & Trim(txtFiltro.Text) & "%'").CopyToDataTable
+                Catch ex As Exception
+                    'DT_ORIGINAL.Copy
+                End Try
+
+                _AsignarDatosAGrilla(tabla)
+
+            End If
+
         End If
 
     End Sub

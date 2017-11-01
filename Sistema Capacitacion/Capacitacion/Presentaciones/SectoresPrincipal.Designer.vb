@@ -22,25 +22,26 @@ Partial Class SectoresPrincipal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
-        Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.dgvGrilla = New System.Windows.Forms.DataGridView()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.cmbTipoFiltro = New System.Windows.Forms.ComboBox()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.LayoutPrincipal.SuspendLayout()
-        Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
         CType(Me.dgvGrilla, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.LayoutCabecera.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -62,6 +63,59 @@ Partial Class SectoresPrincipal
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutPrincipal.Size = New System.Drawing.Size(749, 438)
         Me.LayoutPrincipal.TabIndex = 1
+        '
+        'LayoutCuerpoPrincipal
+        '
+        Me.LayoutCuerpoPrincipal.ColumnCount = 2
+        Me.LayoutCuerpoPrincipal.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91.0!))
+        Me.LayoutCuerpoPrincipal.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.LayoutCuerpoPrincipal.Controls.Add(Me.Panel1, 0, 0)
+        Me.LayoutCuerpoPrincipal.Controls.Add(Me.dgvGrilla, 1, 0)
+        Me.LayoutCuerpoPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LayoutCuerpoPrincipal.Location = New System.Drawing.Point(3, 98)
+        Me.LayoutCuerpoPrincipal.Name = "LayoutCuerpoPrincipal"
+        Me.LayoutCuerpoPrincipal.RowCount = 1
+        Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(743, 337)
+        Me.LayoutCuerpoPrincipal.TabIndex = 2
+        '
+        'Panel1
+        '
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(85, 331)
+        Me.Panel1.TabIndex = 0
+        '
+        'dgvGrilla
+        '
+        Me.dgvGrilla.AllowUserToAddRows = False
+        Me.dgvGrilla.AllowUserToDeleteRows = False
+        Me.dgvGrilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvGrilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Descripcion})
+        Me.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvGrilla.Location = New System.Drawing.Point(106, 15)
+        Me.dgvGrilla.Margin = New System.Windows.Forms.Padding(15)
+        Me.dgvGrilla.Name = "dgvGrilla"
+        Me.dgvGrilla.ReadOnly = True
+        Me.dgvGrilla.Size = New System.Drawing.Size(622, 307)
+        Me.dgvGrilla.TabIndex = 1
+        '
+        'ID
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ID.DefaultCellStyle = DataGridViewCellStyle3
+        Me.ID.HeaderText = "# ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        Me.ID.Width = 70
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.HeaderText = "Sector"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
         '
         'LayoutCabecera
         '
@@ -120,64 +174,10 @@ Partial Class SectoresPrincipal
         Me.Label2.Text = "SURFACTAN S.A."
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'LayoutCuerpoPrincipal
-        '
-        Me.LayoutCuerpoPrincipal.ColumnCount = 2
-        Me.LayoutCuerpoPrincipal.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91.0!))
-        Me.LayoutCuerpoPrincipal.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutCuerpoPrincipal.Controls.Add(Me.Panel1, 0, 0)
-        Me.LayoutCuerpoPrincipal.Controls.Add(Me.dgvGrilla, 1, 0)
-        Me.LayoutCuerpoPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LayoutCuerpoPrincipal.Location = New System.Drawing.Point(3, 98)
-        Me.LayoutCuerpoPrincipal.Name = "LayoutCuerpoPrincipal"
-        Me.LayoutCuerpoPrincipal.RowCount = 1
-        Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(743, 337)
-        Me.LayoutCuerpoPrincipal.TabIndex = 2
-        '
-        'Panel1
-        '
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(85, 331)
-        Me.Panel1.TabIndex = 0
-        '
-        'dgvGrilla
-        '
-        Me.dgvGrilla.AllowUserToAddRows = False
-        Me.dgvGrilla.AllowUserToDeleteRows = False
-        Me.dgvGrilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvGrilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Descripcion})
-        Me.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvGrilla.Location = New System.Drawing.Point(106, 15)
-        Me.dgvGrilla.Margin = New System.Windows.Forms.Padding(15)
-        Me.dgvGrilla.Name = "dgvGrilla"
-        Me.dgvGrilla.ReadOnly = True
-        Me.dgvGrilla.Size = New System.Drawing.Size(622, 307)
-        Me.dgvGrilla.TabIndex = 1
-        '
-        'ID
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ID.DefaultCellStyle = DataGridViewCellStyle3
-        Me.ID.HeaderText = "# ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        Me.ID.Width = 70
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.HeaderText = "Sector"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel2.Controls.Add(Me.txtFiltro)
-        Me.Panel2.Controls.Add(Me.cmbTipoFiltro)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 45)
@@ -186,6 +186,14 @@ Partial Class SectoresPrincipal
         Me.Panel2.Size = New System.Drawing.Size(749, 50)
         Me.Panel2.TabIndex = 3
         '
+        'txtFiltro
+        '
+        Me.txtFiltro.Location = New System.Drawing.Point(88, 14)
+        Me.txtFiltro.Name = "txtFiltro"
+        Me.txtFiltro.Size = New System.Drawing.Size(382, 20)
+        Me.txtFiltro.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.txtFiltro, "Filtrado dinámico.")
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -193,26 +201,9 @@ Partial Class SectoresPrincipal
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
         Me.Label4.Location = New System.Drawing.Point(33, 14)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(73, 18)
+        Me.Label4.Size = New System.Drawing.Size(49, 18)
         Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Filtrar por:"
-        '
-        'cmbTipoFiltro
-        '
-        Me.cmbTipoFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTipoFiltro.FormattingEnabled = True
-        Me.cmbTipoFiltro.Items.AddRange(New Object() {"", "ID", "Sector"})
-        Me.cmbTipoFiltro.Location = New System.Drawing.Point(126, 14)
-        Me.cmbTipoFiltro.Name = "cmbTipoFiltro"
-        Me.cmbTipoFiltro.Size = New System.Drawing.Size(114, 21)
-        Me.cmbTipoFiltro.TabIndex = 1
-        '
-        'txtFiltro
-        '
-        Me.txtFiltro.Location = New System.Drawing.Point(259, 14)
-        Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(310, 20)
-        Me.txtFiltro.TabIndex = 2
+        Me.Label4.Text = "Filtrar:"
         '
         'SectoresPrincipal
         '
@@ -223,9 +214,9 @@ Partial Class SectoresPrincipal
         Me.Name = "SectoresPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.LayoutPrincipal.ResumeLayout(False)
-        Me.LayoutCabecera.ResumeLayout(False)
         Me.LayoutCuerpoPrincipal.ResumeLayout(False)
         CType(Me.dgvGrilla, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.LayoutCabecera.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
@@ -243,6 +234,6 @@ Partial Class SectoresPrincipal
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
-    Friend WithEvents cmbTipoFiltro As System.Windows.Forms.ComboBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class
