@@ -7397,7 +7397,7 @@ Public Class Pagos
         ZZSumaI = 0
         ZZSumaII = 0
 
-        ZZRete = Val(txtIBCiudad.Text) + Val(txtIVA.Text) + Val(txtGanancias.Text) + Val(txtIngresosBrutos.Text)
+        ZZRete = Val(Proceso.formatonumerico(txtIBCiudad.Text)) + Val(Proceso.formatonumerico(txtIVA.Text)) + Val(Proceso.formatonumerico(txtGanancias.Text)) + Val(Proceso.formatonumerico(txtIngresosBrutos.Text))
         ZZSumaII = ZZSumaII + (ZZRete / ZZParidadOP)
 
         For Each row As DataGridViewRow In gridPagos.Rows
@@ -7442,10 +7442,11 @@ Public Class Pagos
                         Cuit = .Cells(6).Value
 
 
-                        Select Case XTipo2
+                        Select Case Val(XTipo2)
                             Case 2, 3
 
                                 ZZCicloDia = 0
+                                'XFec2 = XFecha2
 
                                 Do
                                     Try
@@ -7489,7 +7490,7 @@ Public Class Pagos
                         Dim ZSql = ""
                         ZSql = ZSql + "UPDATE Pagos SET "
                         ZSql = ZSql + " ImpoList = " + "'" + Str$(ZZParidad) + "'"
-                        ZSql = ZSql + " Where Clave = " + "'" + WClavesOP(row.Index) + "'"
+                        ZSql = ZSql + " Where Orden = '" & txtOrdenPago.Text & "' AND (Tipo2 = '" & Val(XTipo2) & "' OR Tipo2 = '" & Proceso.ceros(XTipo2, 2) & "') AND Numero2 = '" & XNumero2 & "'" ' AND Fecha2 = '" & XFecha2 & "'" ' + "'" + WClavesOP(row.Index) + "'"
 
 
                         Try
@@ -7522,9 +7523,9 @@ Public Class Pagos
 
         With VistaPrevia
             .Reporte = New AnalisisDiferenciaCambioOP
-            .Formula = "{Pagos.Orden} = '" & txtOrdenPago.Text & "' AND {Pagos.Impolist} <> 0"
-            '.Mostrar()
-            .Imprimir()
+            .Formula = "{Pagos.Orden} = '" & txtOrdenPago.Text & "' AND {Pagos.Impolist} <> 0 AND {Pagos.TipoReg}='2'"
+            .Mostrar()
+            '.Imprimir()
         End With
 
     End Sub
