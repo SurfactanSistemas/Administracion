@@ -1,11 +1,11 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class AMBTareas
-    Private Const TABLA_TAREAS = "Curso"
+Public Class AMBTemas
+    Private Const TABLA_Temas = "Curso"
 
-    Private WClavesTareas(1000) As String
+    Private WClavesTemas(1000) As String
 
-    Private Sub AMBTareas_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub AMBTemas_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         btnLimpiar.PerformClick()
     End Sub
 
@@ -13,7 +13,7 @@ Public Class AMBTareas
 
         Dim WUltimo = "0"
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Codigo) as Ultimo FROM " & TABLA_TAREAS)
+        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Codigo) as Ultimo FROM " & TABLA_Temas)
         Dim dr As SqlDataReader
 
         Try
@@ -85,7 +85,7 @@ Public Class AMBTareas
         Dim WCodigo, WDescripcion, WRenglon
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo, Descripcion FROM " & TABLA_TAREAS & " ORDER BY Codigo")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo, Descripcion FROM " & TABLA_Temas & " ORDER BY Codigo")
         Dim dr As SqlDataReader
 
         Try
@@ -113,7 +113,7 @@ Public Class AMBTareas
 
                         If WCodigo <> "" And WDescripcion <> "" Then
                             lstConsulta.Items.Add(WDescripcion)
-                            WClavesTareas(WRenglon) = WCodigo
+                            WClavesTemas(WRenglon) = WCodigo
                             WRenglon += 1
                         End If
 
@@ -204,14 +204,14 @@ Public Class AMBTareas
     Private Sub lstConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
         If lstConsulta.SelectedItem = "" Then : Exit Sub : End If
 
-        txtCodigo.Text = WClavesTareas(lstConsulta.SelectedIndex)
+        txtCodigo.Text = WClavesTemas(lstConsulta.SelectedIndex)
 
         txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
         btnCerrarConsulta.PerformClick()
     End Sub
 
-    Private Sub AMBTareas_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub AMBTemas_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtCodigo.Focus()
     End Sub
 
@@ -247,7 +247,7 @@ Public Class AMBTareas
 
         Dim WCodigo, WDescripcion, WTemaI, WTemaII, WTemaIII, WResponsable, WResponsableII, WResponsableIII, WHoras, WTipo
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM " & TABLA_TAREAS & " WHERE Codigo = '" & codigo & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM " & TABLA_Temas & " WHERE Codigo = '" & codigo & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -364,7 +364,7 @@ Public Class AMBTareas
 
     Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
         With VistaPrevia
-            .Reporte = New ListadoTareas
+            .Reporte = New ListadoTemas
             .Formula = "{Curso.Codigo} > 0"
             .Mostrar()
         End With
@@ -376,7 +376,7 @@ Public Class AMBTareas
 
         Dim WCodigo, WDescripcion, WTemaI, WTemaII, WTemaIII, WResponsable, WResponsableII, WResponsableIII, WHoras, WTipo
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo FROM " & TABLA_TAREAS & " WHERE Codigo = '" & Trim(txtCodigo.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo FROM " & TABLA_Temas & " WHERE Codigo = '" & Trim(txtCodigo.Text) & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -400,11 +400,11 @@ Public Class AMBTareas
             If dr.HasRows Then
 
                 ' Actualizamos
-                cm.CommandText = "UPDATE " & TABLA_TAREAS & " SET Descripcion = '" & WDescripcion & "', TemaI = '" & WTemaI & "', TemaII = '" & WTemaII & "', TemaIII = '" & WTemaIII & "', Responsable = '" & WResponsable & "', ResponsableII = " & WResponsableII & ", ResponsableIII = " & WResponsableIII & ", ResponsableIV = 0, Horas = " & WHoras & ", Tipo = " & WTipo & " WHERE Codigo = '" & Trim(txtCodigo.Text) & "'"
+                cm.CommandText = "UPDATE " & TABLA_Temas & " SET Descripcion = '" & WDescripcion & "', TemaI = '" & WTemaI & "', TemaII = '" & WTemaII & "', TemaIII = '" & WTemaIII & "', Responsable = '" & WResponsable & "', ResponsableII = " & WResponsableII & ", ResponsableIII = " & WResponsableIII & ", ResponsableIV = 0, Horas = " & WHoras & ", Tipo = " & WTipo & " WHERE Codigo = '" & Trim(txtCodigo.Text) & "'"
             Else
 
                 ' Damos de Alta.
-                cm.CommandText = "INSERT INTO " & TABLA_TAREAS & " (Codigo, Descripcion, TemaI, TemaII, TemaIII, Responsable, Horas, Tipo, ResponsableII, ResponsableIII, ResponsableIV) VALUES " _
+                cm.CommandText = "INSERT INTO " & TABLA_Temas & " (Codigo, Descripcion, TemaI, TemaII, TemaIII, Responsable, Horas, Tipo, ResponsableII, ResponsableIII, ResponsableIV) VALUES " _
                                 & "(" & WCodigo & ", '" & WDescripcion & "', '" & WTemaI & "', '" & WTemaII & "', '" & WTemaIII & "', '" & WResponsable & "', " & WHoras & ", " & WTipo & ", " & WResponsableII & ", " & WResponsableIII & ", 0)"
             End If
 
@@ -427,6 +427,16 @@ Public Class AMBTareas
         MsgBox("Tarea Guardada con exito", MsgBoxStyle.Information)
         btnLimpiar.PerformClick()
 
+        TemasPrincipal._CargarTodos()
+        Me.Close()
+
+    End Sub
+
+    Public Sub _AbrirParaModificar()
+        Dim temp = txtCodigo.Text
+        Me.Show()
+        txtCodigo.Text = temp
+        txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
     Private Function _DatosValidos() As Boolean
@@ -451,7 +461,7 @@ Public Class AMBTareas
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM " & TABLA_TAREAS & " WHERE Codigo = '" & Trim(txtCodigo.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM " & TABLA_Temas & " WHERE Codigo = '" & Trim(txtCodigo.Text) & "'")
 
         Try
 
@@ -475,6 +485,9 @@ Public Class AMBTareas
         MsgBox("Tarea eliminada con exito", MsgBoxStyle.Information)
         btnLimpiar.PerformClick()
 
+        TemasPrincipal._CargarTodos()
+        Me.Close()
+
     End Sub
 
     Private Sub btnPrimerRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerRegistro.Click
@@ -485,7 +498,7 @@ Public Class AMBTareas
         Dim WCodigo = txtCodigo.Text
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT MIN(Codigo) as PrimerRegistro FROM " & TABLA_TAREAS & " WHERE Codigo > 0")
+        Dim cm As SqlCommand = New SqlCommand("SELECT MIN(Codigo) as PrimerRegistro FROM " & TABLA_Temas & " WHERE Codigo > 0")
         Dim dr As SqlDataReader
 
         Try
@@ -530,7 +543,7 @@ Public Class AMBTareas
         Dim WCodigo = txtCodigo.Text
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Codigo) as UltimoRegistro FROM " & TABLA_TAREAS)
+        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Codigo) as UltimoRegistro FROM " & TABLA_Temas)
         Dim dr As SqlDataReader
 
         Try
@@ -575,7 +588,7 @@ Public Class AMBTareas
         Dim WCodigo = txtCodigo.Text
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Codigo as AnteriorRegistro FROM " & TABLA_TAREAS & " WHERE Codigo < " & Trim(txtCodigo.Text) & " ORDER BY Codigo DESC")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Codigo as AnteriorRegistro FROM " & TABLA_Temas & " WHERE Codigo < " & Trim(txtCodigo.Text) & " ORDER BY Codigo DESC")
         Dim dr As SqlDataReader
 
         Try
@@ -620,7 +633,7 @@ Public Class AMBTareas
         Dim WCodigo = txtCodigo.Text
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Codigo as SiguienteRegistro FROM " & TABLA_TAREAS & " WHERE Codigo > " & Trim(txtCodigo.Text) & " ORDER BY Codigo")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Codigo as SiguienteRegistro FROM " & TABLA_Temas & " WHERE Codigo > " & Trim(txtCodigo.Text) & " ORDER BY Codigo")
         Dim dr As SqlDataReader
 
         Try
@@ -729,7 +742,7 @@ Public Class AMBTareas
             End If
 
             txtDescripcionResponsableII.Text = _TraerResponsableSac(txtResponsableII.Text)
-        
+
 
             txtResponsableIII.Focus()
 

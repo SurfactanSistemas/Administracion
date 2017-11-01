@@ -97,10 +97,10 @@
     <Compile Include="Maestros\AMBSectores.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\AMBTareas.Designer.vb">
-      <DependentUpon>AMBTareas.vb</DependentUpon>
+    <Compile Include="Maestros\AMBTemas.Designer.vb">
+      <DependentUpon>AMBTemas.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\AMBTareas.vb">
+    <Compile Include="Maestros\AMBTemas.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestros\AMBCursos.Designer.vb">
@@ -130,6 +130,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Presentaciones\TemasPrincipal.Designer.vb">
+      <DependentUpon>TemasPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Presentaciones\TemasPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Presentaciones\SectoresPrincipal.Designer.vb">
       <DependentUpon>SectoresPrincipal.vb</DependentUpon>
     </Compile>
@@ -148,10 +154,10 @@
       <DependentUpon>ListadoSectores.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ListadoTareas.vb">
+    <Compile Include="Reportes\ListadoTemas.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ListadoTareas.rpt</DependentUpon>
+      <DependentUpon>ListadoTemas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\VistaPrevia.designer.vb">
@@ -168,8 +174,8 @@
     <EmbeddedResource Include="Maestros\AMBSectores.resx">
       <DependentUpon>AMBSectores.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\AMBTareas.resx">
-      <DependentUpon>AMBTareas.vb</DependentUpon>
+    <EmbeddedResource Include="Maestros\AMBTemas.resx">
+      <DependentUpon>AMBTemas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\AMBCursos.resx">
       <DependentUpon>AMBCursos.vb</DependentUpon>
@@ -183,6 +189,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentaciones\TemasPrincipal.resx">
+      <DependentUpon>TemasPrincipal.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentaciones\SectoresPrincipal.resx">
       <DependentUpon>SectoresPrincipal.vb</DependentUpon>
     </EmbeddedResource>
@@ -194,9 +203,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoSectores.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ListadoTareas.rpt">
+    <EmbeddedResource Include="Reportes\ListadoTemas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ListadoTareas.vb</LastGenOutput>
+      <LastGenOutput>ListadoTemas.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>

@@ -29,33 +29,33 @@ Partial Class AMBSectores
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnSiguienteRegistro = New System.Windows.Forms.Button()
-        Me.btnPrimerRegistro = New System.Windows.Forms.Button()
-        Me.btnUltimoRegistro = New System.Windows.Forms.Button()
-        Me.btnAnteriorRegistro = New System.Windows.Forms.Button()
         Me.txtNombre = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnSiguienteRegistro = New System.Windows.Forms.Button()
+        Me.btnPrimerRegistro = New System.Windows.Forms.Button()
+        Me.btnUltimoRegistro = New System.Windows.Forms.Button()
+        Me.btnAnteriorRegistro = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnPantalla = New System.Windows.Forms.Button()
         Me.btnConsulta = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
-        Me.GrupoConsulta = New System.Windows.Forms.GroupBox()
-        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.lstConsulta = New System.Windows.Forms.ListBox()
-        Me.lstFiltrada = New System.Windows.Forms.ListBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstFiltrada = New System.Windows.Forms.ListBox()
+        Me.lstConsulta = New System.Windows.Forms.ListBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
+        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
+        Me.GrupoConsulta = New System.Windows.Forms.GroupBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.GrupoConsulta.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -149,6 +149,59 @@ Partial Class AMBSectores
         Me.Panel1.Size = New System.Drawing.Size(716, 121)
         Me.Panel1.TabIndex = 1
         '
+        'txtNombre
+        '
+        Me.txtNombre.Location = New System.Drawing.Point(258, 50)
+        Me.txtNombre.MaxLength = 50
+        Me.txtNombre.Name = "txtNombre"
+        Me.txtNombre.Size = New System.Drawing.Size(410, 20)
+        Me.txtNombre.TabIndex = 1
+        Me.txtNombre.Text = "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label5.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label5.Location = New System.Drawing.Point(202, 54)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(54, 13)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Nombre:"
+        '
+        'txtCodigo
+        '
+        Me.txtCodigo.Location = New System.Drawing.Point(97, 50)
+        Me.txtCodigo.Name = "txtCodigo"
+        Me.txtCodigo.Size = New System.Drawing.Size(80, 20)
+        Me.txtCodigo.TabIndex = 1
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label4.Location = New System.Drawing.Point(41, 54)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(50, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Código:"
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox1)
+        Me.Panel2.Controls.Add(Me.btnCerrar)
+        Me.Panel2.Controls.Add(Me.btnPantalla)
+        Me.Panel2.Controls.Add(Me.btnConsulta)
+        Me.Panel2.Controls.Add(Me.btnLimpiar)
+        Me.Panel2.Controls.Add(Me.btnEliminar)
+        Me.Panel2.Controls.Add(Me.btnAceptar)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 169)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(710, 91)
+        Me.Panel2.TabIndex = 2
+        '
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.Control
@@ -239,59 +292,6 @@ Partial Class AMBSectores
         Me.btnAnteriorRegistro.TabIndex = 14
         Me.ToolTip1.SetToolTip(Me.btnAnteriorRegistro, "Anterior Registro")
         Me.btnAnteriorRegistro.UseVisualStyleBackColor = True
-        '
-        'txtNombre
-        '
-        Me.txtNombre.Location = New System.Drawing.Point(258, 50)
-        Me.txtNombre.MaxLength = 50
-        Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(410, 20)
-        Me.txtNombre.TabIndex = 1
-        Me.txtNombre.Text = "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(202, 54)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(54, 13)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Nombre:"
-        '
-        'txtCodigo
-        '
-        Me.txtCodigo.Location = New System.Drawing.Point(97, 50)
-        Me.txtCodigo.Name = "txtCodigo"
-        Me.txtCodigo.Size = New System.Drawing.Size(80, 20)
-        Me.txtCodigo.TabIndex = 1
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(41, 54)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(50, 13)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Código:"
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.GroupBox1)
-        Me.Panel2.Controls.Add(Me.btnCerrar)
-        Me.Panel2.Controls.Add(Me.btnPantalla)
-        Me.Panel2.Controls.Add(Me.btnConsulta)
-        Me.Panel2.Controls.Add(Me.btnLimpiar)
-        Me.Panel2.Controls.Add(Me.btnEliminar)
-        Me.Panel2.Controls.Add(Me.btnAceptar)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 169)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(710, 91)
-        Me.Panel2.TabIndex = 2
         '
         'btnCerrar
         '
@@ -401,6 +401,44 @@ Partial Class AMBSectores
         Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Sector")
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.Location = New System.Drawing.Point(13, 53)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(308, 121)
+        Me.lstFiltrada.TabIndex = 0
+        '
+        'lstConsulta
+        '
+        Me.lstConsulta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.lstConsulta.FormattingEnabled = True
+        Me.lstConsulta.Location = New System.Drawing.Point(13, 53)
+        Me.lstConsulta.Name = "lstConsulta"
+        Me.lstConsulta.Size = New System.Drawing.Size(308, 121)
+        Me.lstConsulta.TabIndex = 1
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtAyuda.Location = New System.Drawing.Point(13, 24)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(308, 20)
+        Me.txtAyuda.TabIndex = 2
+        '
+        'btnCerrarConsulta
+        '
+        Me.btnCerrarConsulta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(130, 179)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(75, 23)
+        Me.btnCerrarConsulta.TabIndex = 3
+        Me.btnCerrarConsulta.Text = "Cerrar"
+        Me.ToolTip1.SetToolTip(Me.btnCerrarConsulta, "Cerrar Ventana de Consulta")
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
+        '
         'GrupoConsulta
         '
         Me.GrupoConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
@@ -418,44 +456,6 @@ Partial Class AMBSectores
         Me.GrupoConsulta.Text = "Consulta de Sectores"
         Me.GrupoConsulta.Visible = False
         '
-        'btnCerrarConsulta
-        '
-        Me.btnCerrarConsulta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnCerrarConsulta.Location = New System.Drawing.Point(130, 179)
-        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
-        Me.btnCerrarConsulta.Size = New System.Drawing.Size(75, 23)
-        Me.btnCerrarConsulta.TabIndex = 3
-        Me.btnCerrarConsulta.Text = "Cerrar"
-        Me.ToolTip1.SetToolTip(Me.btnCerrarConsulta, "Cerrar Ventana de Consulta")
-        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtAyuda.Location = New System.Drawing.Point(13, 24)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(308, 20)
-        Me.txtAyuda.TabIndex = 2
-        '
-        'lstConsulta
-        '
-        Me.lstConsulta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.lstConsulta.FormattingEnabled = True
-        Me.lstConsulta.Location = New System.Drawing.Point(13, 53)
-        Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(308, 121)
-        Me.lstConsulta.TabIndex = 1
-        '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.Location = New System.Drawing.Point(13, 53)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(308, 121)
-        Me.lstFiltrada.TabIndex = 0
-        '
         'AMBSectores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -470,8 +470,8 @@ Partial Class AMBSectores
         Me.LayoutCabecera.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
         Me.GrupoConsulta.ResumeLayout(False)
         Me.GrupoConsulta.PerformLayout()
         Me.ResumeLayout(False)
@@ -494,15 +494,15 @@ Partial Class AMBSectores
     Friend WithEvents btnConsulta As System.Windows.Forms.Button
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
-    Friend WithEvents GrupoConsulta As System.Windows.Forms.GroupBox
-    Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
-    Friend WithEvents lstConsulta As System.Windows.Forms.ListBox
-    Friend WithEvents lstFiltrada As System.Windows.Forms.ListBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents btnCerrarConsulta As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnSiguienteRegistro As System.Windows.Forms.Button
     Friend WithEvents btnPrimerRegistro As System.Windows.Forms.Button
     Friend WithEvents btnUltimoRegistro As System.Windows.Forms.Button
     Friend WithEvents btnAnteriorRegistro As System.Windows.Forms.Button
+    Friend WithEvents lstFiltrada As System.Windows.Forms.ListBox
+    Friend WithEvents lstConsulta As System.Windows.Forms.ListBox
+    Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
+    Friend WithEvents btnCerrarConsulta As System.Windows.Forms.Button
+    Friend WithEvents GrupoConsulta As System.Windows.Forms.GroupBox
 End Class

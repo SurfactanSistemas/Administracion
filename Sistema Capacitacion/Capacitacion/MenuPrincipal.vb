@@ -10,7 +10,8 @@
     End Sub
 
     Private Sub IngresoTemasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoTemasToolStripMenuItem.Click
-        AMBTareas.Show()
+        TemasPrincipal.Show()
+        'AMBTareas.Show()
     End Sub
 
     Private Sub IngresoDeCursosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeCursosToolStripMenuItem.Click

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class AMBTareas
+Partial Class AMBTemas
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -127,7 +127,7 @@ Partial Class AMBTareas
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(261, 45)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "- Ingreso de Tareas -"
+        Me.Label3.Text = "- Ingreso de Temas -"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label1
@@ -181,7 +181,7 @@ Partial Class AMBTareas
         Me.GroupBox1.Size = New System.Drawing.Size(200, 78)
         Me.GroupBox1.TabIndex = 22
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Navegar por Tareas"
+        Me.GroupBox1.Text = "Navegar por Temas"
         '
         'btnSiguienteRegistro
         '
@@ -292,7 +292,7 @@ Partial Class AMBTareas
         Me.btnPantalla.Name = "btnPantalla"
         Me.btnPantalla.Size = New System.Drawing.Size(66, 47)
         Me.btnPantalla.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Listado de Sectores por Pantalla")
+        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Listado deTemas por Pantalla")
         Me.btnPantalla.UseVisualStyleBackColor = True
         '
         'btnConsulta
@@ -310,7 +310,7 @@ Partial Class AMBTareas
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(66, 47)
         Me.btnConsulta.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consultar Sectores")
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consultar Temas")
         Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnLimpiar
@@ -346,7 +346,7 @@ Partial Class AMBTareas
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(66, 47)
         Me.btnEliminar.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar Sector")
+        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar Tema")
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'btnAceptar
@@ -364,7 +364,7 @@ Partial Class AMBTareas
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(66, 47)
         Me.btnAceptar.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Sector")
+        Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Tema")
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
         'Panel1
@@ -606,7 +606,7 @@ Partial Class AMBTareas
         Me.GrupoConsultaII.Size = New System.Drawing.Size(334, 208)
         Me.GrupoConsultaII.TabIndex = 3
         Me.GrupoConsultaII.TabStop = False
-        Me.GrupoConsultaII.Text = "Consulta de Tareas"
+        Me.GrupoConsultaII.Text = "Consulta de Temas"
         '
         'lstConsulta
         '
@@ -650,20 +650,20 @@ Partial Class AMBTareas
         '
         Me.GrupoConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.GrupoConsulta.Controls.Add(Me.GrupoConsultaII)
-        Me.GrupoConsulta.Location = New System.Drawing.Point(171, 48)
+        Me.GrupoConsulta.Location = New System.Drawing.Point(168, 59)
         Me.GrupoConsulta.Name = "GrupoConsulta"
         Me.GrupoConsulta.Size = New System.Drawing.Size(375, 241)
         Me.GrupoConsulta.TabIndex = 4
         Me.GrupoConsulta.Visible = False
         '
-        'AMBTareas
+        'AMBTemas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(711, 358)
-        Me.Controls.Add(Me.LayoutPrincipal)
         Me.Controls.Add(Me.GrupoConsulta)
-        Me.Name = "AMBTareas"
+        Me.Controls.Add(Me.LayoutPrincipal)
+        Me.Name = "AMBTemas"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.LayoutPrincipal.ResumeLayout(False)
         Me.LayoutCabecera.ResumeLayout(False)

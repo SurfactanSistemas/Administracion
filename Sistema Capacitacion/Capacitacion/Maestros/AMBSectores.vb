@@ -2,6 +2,7 @@
 
 Public Class AMBSectores
     Private WClavesSectores(100) As String
+    Private WCerrar As Boolean = False
 
     Private Sub AMBSectores_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         btnLimpiar.PerformClick()
@@ -195,6 +196,14 @@ Public Class AMBSectores
         txtCodigo.Focus()
     End Sub
 
+    Public Sub _AbrirParaModificar()
+        Dim temp = txtCodigo.Text
+        WCerrar = True
+        Me.Show()
+        txtCodigo.Text = temp
+        txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
+
     Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
 
         If e.KeyData = Keys.Enter Then
@@ -313,6 +322,11 @@ Public Class AMBSectores
         MsgBox("Sector Guardado con exito", MsgBoxStyle.Information)
         btnLimpiar.PerformClick()
 
+        'If WCerrar Then
+        SectoresPrincipal._CargarTodos()
+        Me.Close()
+        'End If
+
     End Sub
 
     Private Function _DatosValidos() As Boolean
@@ -359,6 +373,11 @@ Public Class AMBSectores
 
         MsgBox("Sector eliminado con exito", MsgBoxStyle.Information)
         btnLimpiar.PerformClick()
+
+        'If WCerrar Then
+        SectoresPrincipal._CargarTodos()
+        Me.Close()
+        'End If
 
     End Sub
 

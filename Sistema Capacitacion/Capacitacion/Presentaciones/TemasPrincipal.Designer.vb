@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class SectoresPrincipal
+Partial Class TemasPrincipal
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,23 +24,27 @@ Partial Class SectoresPrincipal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.btnNuevo = New System.Windows.Forms.Button()
         Me.dgvGrilla = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnCargarTodos = New System.Windows.Forms.Button()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnNuevo = New System.Windows.Forms.Button()
-        Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.btnCargarTodos = New System.Windows.Forms.Button()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Responsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Lugar = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Horas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -94,12 +98,30 @@ Partial Class SectoresPrincipal
         Me.Panel1.Size = New System.Drawing.Size(91, 353)
         Me.Panel1.TabIndex = 0
         '
+        'btnCerrar
+        '
+        Me.btnCerrar.Location = New System.Drawing.Point(2, 74)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(87, 56)
+        Me.btnCerrar.TabIndex = 0
+        Me.btnCerrar.Text = "Cerrar"
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'btnNuevo
+        '
+        Me.btnNuevo.Location = New System.Drawing.Point(2, 12)
+        Me.btnNuevo.Name = "btnNuevo"
+        Me.btnNuevo.Size = New System.Drawing.Size(87, 56)
+        Me.btnNuevo.TabIndex = 0
+        Me.btnNuevo.Text = "Nuevo"
+        Me.btnNuevo.UseVisualStyleBackColor = True
+        '
         'dgvGrilla
         '
         Me.dgvGrilla.AllowUserToAddRows = False
         Me.dgvGrilla.AllowUserToDeleteRows = False
         Me.dgvGrilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvGrilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Descripcion})
+        Me.dgvGrilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Descripcion, Me.Responsable, Me.Lugar, Me.Horas})
         Me.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvGrilla.Location = New System.Drawing.Point(106, 15)
         Me.dgvGrilla.Margin = New System.Windows.Forms.Padding(15)
@@ -107,22 +129,6 @@ Partial Class SectoresPrincipal
         Me.dgvGrilla.ReadOnly = True
         Me.dgvGrilla.Size = New System.Drawing.Size(622, 329)
         Me.dgvGrilla.TabIndex = 1
-        '
-        'ID
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ID.DefaultCellStyle = DataGridViewCellStyle1
-        Me.ID.HeaderText = "# ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        Me.ID.Width = 70
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.HeaderText = "Sector"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
         '
         'LayoutCabecera
         '
@@ -155,7 +161,7 @@ Partial Class SectoresPrincipal
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(299, 45)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "- Sectores -"
+        Me.Label3.Text = "- Temas -"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label1
@@ -194,6 +200,15 @@ Partial Class SectoresPrincipal
         Me.Panel2.Size = New System.Drawing.Size(749, 50)
         Me.Panel2.TabIndex = 3
         '
+        'btnCargarTodos
+        '
+        Me.btnCargarTodos.Location = New System.Drawing.Point(561, 14)
+        Me.btnCargarTodos.Name = "btnCargarTodos"
+        Me.btnCargarTodos.Size = New System.Drawing.Size(106, 23)
+        Me.btnCargarTodos.TabIndex = 3
+        Me.btnCargarTodos.Text = "Volver a Cargar"
+        Me.btnCargarTodos.UseVisualStyleBackColor = True
+        '
         'txtFiltro
         '
         Me.txtFiltro.Location = New System.Drawing.Point(164, 15)
@@ -213,40 +228,50 @@ Partial Class SectoresPrincipal
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Filtrar:"
         '
-        'btnNuevo
+        'ID
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(2, 12)
-        Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(87, 56)
-        Me.btnNuevo.TabIndex = 0
-        Me.btnNuevo.Text = "Nuevo"
-        Me.btnNuevo.UseVisualStyleBackColor = True
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ID.DefaultCellStyle = DataGridViewCellStyle1
+        Me.ID.HeaderText = "# ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        Me.ID.Width = 70
         '
-        'btnCerrar
+        'Descripcion
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(2, 74)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(87, 56)
-        Me.btnCerrar.TabIndex = 0
-        Me.btnCerrar.Text = "Cerrar"
-        Me.btnCerrar.UseVisualStyleBackColor = True
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.HeaderText = "Tema"
+        Me.Descripcion.MinimumWidth = 200
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
         '
-        'btnCargarTodos
+        'Responsable
         '
-        Me.btnCargarTodos.Location = New System.Drawing.Point(561, 14)
-        Me.btnCargarTodos.Name = "btnCargarTodos"
-        Me.btnCargarTodos.Size = New System.Drawing.Size(106, 23)
-        Me.btnCargarTodos.TabIndex = 3
-        Me.btnCargarTodos.Text = "Volver a Cargar"
-        Me.btnCargarTodos.UseVisualStyleBackColor = True
+        Me.Responsable.HeaderText = "Responsable"
+        Me.Responsable.Name = "Responsable"
+        Me.Responsable.ReadOnly = True
         '
-        'SectoresPrincipal
+        'Lugar
+        '
+        Me.Lugar.HeaderText = "Dónde se Dicta"
+        Me.Lugar.Name = "Lugar"
+        Me.Lugar.ReadOnly = True
+        '
+        'Horas
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Horas.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Horas.HeaderText = "Cant. Hs"
+        Me.Horas.Name = "Horas"
+        Me.Horas.ReadOnly = True
+        '
+        'TemasPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(749, 460)
         Me.Controls.Add(Me.LayoutPrincipal)
-        Me.Name = "SectoresPrincipal"
+        Me.Name = "TemasPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.LayoutPrincipal.ResumeLayout(False)
         Me.LayoutCuerpoPrincipal.ResumeLayout(False)
@@ -266,8 +291,6 @@ Partial Class SectoresPrincipal
     Friend WithEvents LayoutCuerpoPrincipal As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents dgvGrilla As System.Windows.Forms.DataGridView
-    Friend WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
@@ -275,4 +298,9 @@ Partial Class SectoresPrincipal
     Friend WithEvents btnNuevo As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents btnCargarTodos As System.Windows.Forms.Button
+    Friend WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Responsable As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Lugar As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Horas As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

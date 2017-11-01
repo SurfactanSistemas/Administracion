@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class ListadoTareas
+Public Class ListadoTemas
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class ListadoTareas
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "ListadoTareas.rpt"
+            Return "ListadoTemas.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class ListadoTareas
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Capacitacion.ListadoTareas.rpt"
+            Return "Capacitacion.ListadoTemas.rpt"
         End Get
         Set
             'Do nothing
@@ -94,7 +94,7 @@ Public Class ListadoTareas
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedListadoTareas
+Public Class CachedListadoTemas
     Inherits Component
     Implements ICachedReport
     
@@ -136,7 +136,7 @@ Public Class CachedListadoTareas
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As ListadoTareas = New ListadoTareas()
+        Dim rpt As ListadoTemas = New ListadoTemas()
         rpt.Site = Me.Site
         Return rpt
     End Function
