@@ -12,10 +12,12 @@ Public Class CuentaCorrientePantalla
 
     Private Sub CuentaCorrientePantalla_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        dataGridBuilder = New GridBuilder(GRilla)
+        'dataGridBuilder = New GridBuilder(GRilla)
 
         opcPendiente.Checked = True
         opcCompleto.Checked = False
+
+        GRilla.Columns(6).ValueType = GetType(Date)
 
     End Sub
 
@@ -57,7 +59,9 @@ Public Class CuentaCorrientePantalla
                 GRilla.Item(4, WRenglon).Value = formatonumerico(CamposCtaCtePrv.total, "########0.#0", ".")
                 GRilla.Item(5, WRenglon).Value = formatonumerico(CamposCtaCtePrv.saldo, "########0.#0", ".")
                 GRilla.Item(6, WRenglon).Value = CamposCtaCtePrv.fecha
+                GRilla.Item(8, WRenglon).Value = Proceso.ordenaFecha(CamposCtaCtePrv.fecha)
                 GRilla.Item(7, WRenglon).Value = CamposCtaCtePrv.vencimiento
+                GRilla.Item(9, WRenglon).Value = Proceso.ordenaFecha(CamposCtaCtePrv.vencimiento)
 
                 WRenglon = WRenglon + 1
                 WSuma = WSuma + CamposCtaCtePrv.saldo
@@ -331,10 +335,20 @@ Public Class CuentaCorrientePantalla
 
     Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
         Dim _NroInterno As String = ""
-        Dim _Numero As String = GRilla.Rows(e.RowIndex).Cells(3).Value.ToString ' Guardamos el numero de factura para buscar el nro interno.
+        Dim _Numero As String = "" ' Guardamos el numero de factura para buscar el nro interno.
         Dim _Datos As New List(Of Object)
 
-        _NroInterno = _NrosInternos.FindLast(Function(n) n(0) = _Numero)(1)
+        If e.RowIndex >= 0 Then
+            _Numero = GRilla.Rows(e.RowIndex).Cells(3).Value
+        Else
+            Exit Sub
+        End If
+
+        Try
+            _NroInterno = _NrosInternos.FindLast(Function(n) n(0) = _Numero)(1)
+        Catch ex As Exception
+            _NroInterno = Nothing
+        End Try
 
         ' Comprobamos que se encuentre un nro interno.
         If IsNothing(_NroInterno) Then
@@ -616,6 +630,30 @@ Public Class CuentaCorrientePantalla
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub GRilla_ColumnHeaderMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.ColumnHeaderMouseClick
+
+        Select Case e.ColumnIndex
+            Case 6
+
+                If GRilla.SortOrder = 1 Then
+                    GRilla.Sort(GRilla.Columns("OrdFecha"), System.ComponentModel.ListSortDirection.Descending)
+                Else
+                    GRilla.Sort(GRilla.Columns("OrdFecha"), System.ComponentModel.ListSortDirection.Ascending)
+                End If
+
+            Case 7
+
+                If GRilla.SortOrder = 1 Then
+                    GRilla.Sort(GRilla.Columns("OrdVencimiento"), System.ComponentModel.ListSortDirection.Descending)
+                Else
+                    GRilla.Sort(GRilla.Columns("OrdVencimiento"), System.ComponentModel.ListSortDirection.Ascending)
+                End If
+
+            Case Else
+
+        End Select
     End Sub
 
 End Class
