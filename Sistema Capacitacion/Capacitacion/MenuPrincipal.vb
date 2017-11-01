@@ -5,7 +5,8 @@
     End Sub
 
     Private Sub IngresoSectoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoSectoresToolStripMenuItem.Click
-        AMBSectores.Show()
+        SectoresPrincipal.Show()
+        'AMBSectores.Show()
     End Sub
 
     Private Sub IngresoTemasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoTemasToolStripMenuItem.Click
