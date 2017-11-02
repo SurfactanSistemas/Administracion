@@ -229,4 +229,33 @@ Public Class ConsultaDatosFactura
         columna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
     End Sub
 
+    Private Sub DGVArticulos_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles DGVArticulos.SortCompare
+
+        Dim num1, num2
+
+        Select Case e.Column.Index
+            Case 0, 3, 4
+
+                num1 = CDbl(e.CellValue1)
+                num2 = CDbl(e.CellValue2)
+
+            Case 6, 7
+
+                num1 = Proceso.ordenaFecha(e.CellValue1)
+                num2 = Proceso.ordenaFecha(e.CellValue2)
+
+            Case Else
+                Exit Sub
+        End Select
+
+        If num1 < num2 Then
+            e.SortResult = -1
+        ElseIf num1 = num2 Then
+            e.SortResult = 0
+        Else
+            e.SortResult = 1
+        End If
+
+        e.Handled = True
+    End Sub
 End Class

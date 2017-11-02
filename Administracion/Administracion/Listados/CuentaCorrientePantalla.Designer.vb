@@ -566,7 +566,6 @@ Partial Class CuentaCorrientePantalla
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
-        Me.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
         '
         'Vencimiento
         '
@@ -575,7 +574,6 @@ Partial Class CuentaCorrientePantalla
         Me.Vencimiento.HeaderText = "Vencimiento"
         Me.Vencimiento.Name = "Vencimiento"
         Me.Vencimiento.ReadOnly = True
-        Me.Vencimiento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
         '
         'OrdFecha
         '

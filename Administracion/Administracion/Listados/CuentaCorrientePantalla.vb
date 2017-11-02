@@ -632,28 +632,34 @@ Public Class CuentaCorrientePantalla
         End If
     End Sub
 
-    Private Sub GRilla_ColumnHeaderMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.ColumnHeaderMouseClick
+    Private Sub GRilla_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles GRilla.SortCompare
 
-        Select Case e.ColumnIndex
-            Case 6
+        Dim num1, num2
 
-                If GRilla.SortOrder = 1 Then
-                    GRilla.Sort(GRilla.Columns("OrdFecha"), System.ComponentModel.ListSortDirection.Descending)
-                Else
-                    GRilla.Sort(GRilla.Columns("OrdFecha"), System.ComponentModel.ListSortDirection.Ascending)
-                End If
+        Select Case e.Column.Index
+            Case 2, 3, 4, 5
 
-            Case 7
+                num1 = CDbl(e.CellValue1)
+                num2 = CDbl(e.CellValue2)
 
-                If GRilla.SortOrder = 1 Then
-                    GRilla.Sort(GRilla.Columns("OrdVencimiento"), System.ComponentModel.ListSortDirection.Descending)
-                Else
-                    GRilla.Sort(GRilla.Columns("OrdVencimiento"), System.ComponentModel.ListSortDirection.Ascending)
-                End If
+            Case 6, 7
+
+                num1 = Proceso.ordenaFecha(e.CellValue1)
+                num2 = Proceso.ordenaFecha(e.CellValue2)
 
             Case Else
-
+                Exit Sub
         End Select
-    End Sub
 
+        If num1 < num2 Then
+            e.SortResult = -1
+        ElseIf num1 = num2 Then
+            e.SortResult = 0
+        Else
+            e.SortResult = 1
+        End If
+
+        e.Handled = True
+
+    End Sub
 End Class
