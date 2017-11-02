@@ -35,6 +35,7 @@ Partial Class MenuPrincipal
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeLegajosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -112,7 +113,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoSectoresToolStripMenuItem, Me.IngresoTemasToolStripMenuItem, Me.IngresoDeCursosToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoSectoresToolStripMenuItem, Me.IngresoTemasToolStripMenuItem, Me.IngresoDeCursosToolStripMenuItem, Me.IngresoDeLegajosToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -157,8 +158,14 @@ Partial Class MenuPrincipal
         'CerrarSistemaToolStripMenuItem
         '
         Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
-        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
+        '
+        'IngresoDeLegajosToolStripMenuItem
+        '
+        Me.IngresoDeLegajosToolStripMenuItem.Name = "IngresoDeLegajosToolStripMenuItem"
+        Me.IngresoDeLegajosToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.IngresoDeLegajosToolStripMenuItem.Text = "Ingreso de Legajos"
         '
         'MenuPrincipal
         '
@@ -190,4 +197,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ListadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProcesosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CerrarSistemaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoDeLegajosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
