@@ -24,6 +24,7 @@ Public Class CarpetasPagos
         For Each _Empresa As String In _Empresas
             Try
                 cn.ConnectionString = _ObtenerConnectionString(_Empresa)
+                cn.Open()
                 cm.Connection = cn
                 dr = cm.ExecuteReader()
 
@@ -33,7 +34,7 @@ Public Class CarpetasPagos
                 End If
 
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+                MsgBox("Hubo un problema al querer validar la carpeta indicada consultar la Base de Datos.", MsgBoxStyle.Critical)
             Finally
 
                 cn.Close()
