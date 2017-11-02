@@ -130,6 +130,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Presentaciones\CursosPrincipal.Designer.vb">
+      <DependentUpon>CursosPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Presentaciones\CursosPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Presentaciones\TemasPrincipal.Designer.vb">
       <DependentUpon>TemasPrincipal.vb</DependentUpon>
     </Compile>
@@ -188,6 +194,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentaciones\CursosPrincipal.resx">
+      <DependentUpon>CursosPrincipal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentaciones\TemasPrincipal.resx">
       <DependentUpon>TemasPrincipal.vb</DependentUpon>

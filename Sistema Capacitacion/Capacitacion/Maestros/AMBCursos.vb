@@ -452,6 +452,9 @@ Public Class AMBCursos
         MsgBox("Curso Guardado con exito", MsgBoxStyle.Information)
         btnLimpiar.PerformClick()
 
+        Me.Close()
+        CursosPrincipal.btnCargarTodos.PerformClick()
+
     End Sub
 
     Private Function _DatosValidos() As Boolean
@@ -519,6 +522,8 @@ Public Class AMBCursos
 
         MsgBox("Curso eliminadado con exito", MsgBoxStyle.Information)
         btnLimpiar.PerformClick()
+        Me.Close()
+        CursosPrincipal.btnCargarTodos.PerformClick()
 
     End Sub
 
@@ -943,5 +948,12 @@ Public Class AMBCursos
 
         dgvCursos.Rows.Remove(row)
 
+    End Sub
+
+    Public Sub _AbrirParaModificar()
+        Dim temp = txtTema.Text
+        Me.Show()
+        txtTema.Text = temp
+        txtTema_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 End Class

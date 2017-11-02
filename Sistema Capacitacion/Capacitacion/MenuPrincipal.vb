@@ -15,7 +15,8 @@
     End Sub
 
     Private Sub IngresoDeCursosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeCursosToolStripMenuItem.Click
-        AMBCursos.Show()
+        CursosPrincipal.Show()
+        'AMBCursos.Show()
     End Sub
 
     Private Sub CerrarSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CerrarSistemaToolStripMenuItem.Click
