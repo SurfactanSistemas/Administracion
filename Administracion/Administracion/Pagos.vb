@@ -6134,9 +6134,9 @@ Public Class Pagos
             .Item("DireccionPrv") = _DatosProv(4)
             .Item("CuitPrv") = _DatosProv(6)
             .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
-            .Item("Pagado") = CDbl(Total - Retencion)
-            .Item("Pagado") = Val(Total)
-            .Item("Retenido") = Val(Retencion)
+            .Item("Pagado") = Val(Proceso.formatonumerico(Total)) - Val(Proceso.formatonumerico(Retencion))
+            .Item("Pagado") = Val(Proceso.formatonumerico(Total))
+            .Item("Retenido") = Val(Proceso.formatonumerico(Retencion))
         End With
 
         Tabla.Rows.Add(row)
@@ -6158,9 +6158,9 @@ Public Class Pagos
             .Item("DireccionPrv") = _DatosProv(4)
             .Item("CuitPrv") = _DatosProv(6)
             .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
-            .Item("Pagado") = CDbl(Total - Retencion)
-            .Item("Pagado") = Val(Total)
-            .Item("Retenido") = Val(Retencion)
+            .Item("Pagado") = Val(Proceso.formatonumerico(Total)) - Val(Proceso.formatonumerico(Retencion))
+            .Item("Pagado") = Val(Proceso.formatonumerico(Total))
+            .Item("Retenido") = Val(Proceso.formatonumerico(Retencion))
         End With
 
         Tabla.Rows.Add(row)
@@ -6179,7 +6179,7 @@ Public Class Pagos
         Dim datos(8) As String
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT p.CertificadoGan, p.CertificadoIb, p.CertificadoIbCiudad, p.CertificadoIva, pr.Direccion, pr.Nombre, pr.Cuit, pr.Tipo " _
-                                            & "FROM Pagos as p, Proveedor as pr where p.clave = '07239901' and p.Proveedor = pr.Proveedor")
+                                            & "FROM Pagos as p, Proveedor as pr where p.Orden = '" & Trim(txtOrdenPago.Text) & "' and (p.Renglon = '01' or p.Renglon = '1') and p.Proveedor = pr.Proveedor")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
