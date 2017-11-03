@@ -4035,7 +4035,7 @@ Public Class Pagos
     End Function
 
     Private Function _ProcesarCheque(ByVal row As Integer, ByVal ClaveCheque As String) As Boolean
-        Dim WTipo, WNumero, WFecha, WBanco, WImporte, WClave, WNomBanco, XBanco As String
+        Dim WTipo, WNumero, WFecha, WBanco, WImporte, WClave, WNomBanco, XBanco, WCuit As String
         Dim _LecturaCorrecta As Boolean = True
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As New SqlCommand
@@ -4114,7 +4114,7 @@ Public Class Pagos
         End If
 
         Try
-            cm.CommandText = "SELECT Numero2, Fecha2, Importe2, Banco2 FROM " & _Tabla & " WHERE ClaveCheque = '" & ClaveCheque & "' AND Estado2 = 'P'"
+            cm.CommandText = "SELECT Numero2, Fecha2, Importe2, Banco2, Cuit FROM " & _Tabla & " WHERE ClaveCheque = '" & ClaveCheque & "' AND Estado2 = 'P'"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
@@ -4122,10 +4122,11 @@ Public Class Pagos
                 dr.Read()
 
                 With dr
-                    WNumero = .Item("Numero2")
-                    WFecha = .Item("Fecha2")
-                    WImporte = .Item("Importe2")
-                    WBanco = .Item("Banco2")
+                    WNumero = IIf(IsDBNull(.Item("Numero2")), "", .Item("Numero2"))
+                    WFecha = IIf(IsDBNull(.Item("Fecha2")), "", .Item("Fecha2"))
+                    WImporte = IIf(IsDBNull(.Item("Importe2")), "", .Item("Importe2"))
+                    WBanco = IIf(IsDBNull(.Item("Banco2")), "", .Item("Banco2"))
+                    WCuit = IIf(IsDBNull(.Item("Cuit")), "", .Item("Cuit"))
                 End With
             Else
                 Return False
@@ -4148,6 +4149,7 @@ Public Class Pagos
                 .Cells(4).Value = WBanco
                 .Cells(5).Value = Proceso.formatonumerico(WImporte)
                 .Cells(6).Value = WClave
+                .Cells(7).Value = WCuit
             End With
         End If
 
