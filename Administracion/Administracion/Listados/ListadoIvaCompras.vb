@@ -112,7 +112,7 @@ Public Class ListadoIvaCompras
 
                 txtGraba = "N"
 
-                txtOrdFecha = ordenaFecha(CampoIvaComp.periodo)
+                txtOrdFecha = ordenaFecha(CampoIvaComp.fecha)
 
                 SQLConnector.executeProcedure("alta_ListaIvaCompras", CampoIvaComp.NroInterno, CampoIvaComp.proveedor, CampoIvaCompAdicional.tipo,
                                                CampoIvaCompAdicional.letra, ceros(CampoIvaCompAdicional.punto, 4), ceros(CampoIvaCompAdicional.numero, 8),
@@ -127,7 +127,7 @@ Public Class ListadoIvaCompras
 
             If txtGraba = "S" Then
 
-                txtOrdFecha = ordenaFecha(CampoIvaComp.periodo)
+                txtOrdFecha = ordenaFecha(CampoIvaComp.fecha)
                 varNeto = CampoIvaComp.neto
                 If CampoIvaComp.soloiva = 1 Then
                     varNeto = 0
@@ -154,8 +154,8 @@ Public Class ListadoIvaCompras
         Next
 
 
-        txtUno = "{ListaIvaCompras.OrdFecha} in " + x + txtDesdefechaOrd + x + " to " + x + txtHastafechaOrd + x
-        txtFormula = txtUno
+        'txtUno = "{ListaIvaCompras.OrdFecha} in " + x + txtDesdefechaOrd + x + " to " + x + txtHastafechaOrd + x
+        txtFormula = "" 'txtUno
 
         Dim viewer As New ReportViewer("Listado de Iva Compras", Globals.reportPathWithName("wIvaCompNet.rpt"), txtFormula)
 
