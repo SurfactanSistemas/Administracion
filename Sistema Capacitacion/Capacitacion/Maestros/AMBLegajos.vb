@@ -58,21 +58,11 @@ Public Class AMBLegajos
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
 
-        GrupoObservaciones.Visible = False
+        GrupoObservacionesII.Visible = False
+        GrupoObservacionesI.Visible = False
+        AtencionNoActualizado.Visible = False
 
-        ' Limpiamos todos los campos del tipo Texto.
-        'For Each txt As TextBox In {txtLegajo, txtDescripcion, txtAyuda, txtDesde, txtHasta}
-        '    txt.Text = ""
-        'Next
-
-        'GrupoConsulta.Visible = False
-        'GrupoImpresion.Visible = False
-
-        'ckTemaActual.Checked = True
-
-        'dgvLegajos.Rows.Clear()
-
-        'dgvLegajos.Rows.Add()
+        _LimpiarTodo()
 
         txtLegajo.Focus()
     End Sub
@@ -226,7 +216,7 @@ Public Class AMBLegajos
         txtLegajo.Focus()
     End Sub
 
-    Private Sub txtTema_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLegajo.KeyDown, txtNroVersion.KeyDown, txtSectorDescripcion.KeyDown, txtPerfilVersion.KeyDown, txtPerfilDescripcion.KeyDown, txtTareasIII.KeyDown, txtSector.KeyDown, txtTareasII.KeyDown, txtTareasI.KeyDown, txtDescriIII.KeyDown, txtObservaII.KeyDown, txtDescriII.KeyDown, txtObservaI.KeyDown, txtDescriI.KeyDown, txtEquivalenciasII.KeyDown, txtEquivalenciasI.KeyDown, txtOtrosII.KeyDown, txtOtrosI.KeyDown, txtFisica.KeyDown, txtObservaV.KeyDown, txtDescriV.KeyDown, txtObservaIV.KeyDown, txtDescriIV.KeyDown, txtObservaIII.KeyDown, txtEstadoX.KeyDown, txtEstadoIX.KeyDown, txtEstadoVIII.KeyDown, txtEstadoVII.KeyDown, txtEstadoVI.KeyDown, txtEstadoV.KeyDown, txtEstadoIV.KeyDown, txtEstadoIII.KeyDown, txtEstadoII.KeyDown, txtEstadoI.KeyDown
+    Private Sub txtTema_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroVersion.KeyDown, txtSectorDescripcion.KeyDown, txtPerfilVersion.KeyDown, txtPerfilDescripcion.KeyDown, txtTareasIII.KeyDown, txtSector.KeyDown, txtTareasII.KeyDown, txtTareasI.KeyDown, txtDescriIII.KeyDown, txtObservaII.KeyDown, txtDescriII.KeyDown, txtObservaI.KeyDown, txtDescriI.KeyDown, txtEquivalenciasII.KeyDown, txtEquivalenciasI.KeyDown, txtOtrosII.KeyDown, txtOtrosI.KeyDown, txtFisica.KeyDown, txtObservaV.KeyDown, txtDescriV.KeyDown, txtObservaIV.KeyDown, txtDescriIV.KeyDown, txtObservaIII.KeyDown, txtEstadoX.KeyDown, txtEstadoIX.KeyDown, txtEstadoVIII.KeyDown, txtEstadoVII.KeyDown, txtEstadoVI.KeyDown, txtEstadoV.KeyDown, txtEstadoIV.KeyDown, txtEstadoIII.KeyDown, txtEstadoII.KeyDown, txtEstadoI.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtLegajo.Text) = "" Then
@@ -969,7 +959,7 @@ Public Class AMBLegajos
     End Sub
 
     Private Sub btnObservaciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnObservaciones.Click
-        GrupoObservaciones.Visible = True
+        GrupoObservacionesII.Visible = True
     End Sub
 
     Private Sub txtPerfil_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPerfil.KeyDown
@@ -1001,8 +991,7 @@ Public Class AMBLegajos
                                     txtTareasI, txtTareasII, txtTareasIII, txtDescriI, txtDescriII, txtDescriIII, _
                                     txtDescriIV, txtDescriV, txtObservaI, txtObservaII, txtObservaIII, txtObservaIV, _
                                     txtObservaV, txtFisica, txtOtrosI, txtOtrosII, txtEquivalenciasI, txtEquivalenciasII, _
-                                    txtEstadoI, txtEstadoII, txtEstadoIII, txtEstadoIV, txtEstadoV, txtEstadoVI, txtEstadoVII, _
-                                    txtEstadoVIII, txtEstadoIX, txtEstadoX}
+                                    txtObservaII1, txtObservaII2, txtObservaII3, txtObservaII4, txtObservaII5}
 
             txt.Text = ""
 
@@ -1188,4 +1177,483 @@ Public Class AMBLegajos
 
     End Sub
 
+    Private Sub _CargarPerfilSegunVersion()
+
+        If Trim(txtPerfil.Text) = "" Then : Exit Sub : End If
+
+        Dim WPerfil, WDescripcion, WSector, WDesSector, WTareasI, WTareasII, WTareasIII, WDescriI, WDescriII, WDescriIII, WDescriIV, WDescriV, WObservaI, WObservaII, WObservaIII, WObservaIV, WObservaV, WNecesariaI, WNecesariaII, WNecesariaIII, WNecesariaIV, WNecesariaV, WNecesariaVI, WNecesariaVII, WNecesariaVIII, WDeseableI, WDeseableII, WDeseableIII, WDeseableIV, WDeseableV, WDeseableVI, WDeseableVII, WDeseableVIII, WEquivalenciasI, WEquivalenciasII, WFisica, WOtrosI, WOtrosII, WPerfilVersion
+
+        WPerfil = Trim(txtPerfil.Text)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT *, Sector.Descripcion as DesSector FROM TareaVersion, Sector WHERE TareaVersion.Codigo = '" & WPerfil & "' AND TareaVersion.Version = '" & Trim(txtPerfilVersion.Text) & "' AND TareaVersion.Renglon = 1 AND TareaVersion.Sector = Sector.Codigo ORDER BY TareaVersion.Codigo, Renglon")
+        Dim dr As SqlDataReader
+
+
+        WDescripcion = ""
+        WSector = ""
+        WDesSector = ""
+        WTareasI = ""
+        WTareasII = ""
+        WTareasIII = ""
+        WDescriI = ""
+        WDescriII = ""
+        WDescriIII = ""
+        WDescriIV = ""
+        WDescriV = ""
+        WObservaI = ""
+        WObservaII = ""
+        WObservaIII = ""
+        WObservaIV = ""
+        WObservaV = ""
+        WNecesariaI = ""
+        WNecesariaII = ""
+        WNecesariaIII = ""
+        WNecesariaIV = ""
+        WNecesariaV = ""
+        WNecesariaVI = ""
+        WNecesariaVII = ""
+        WNecesariaVIII = ""
+        WDeseableI = ""
+        WDeseableII = ""
+        WDeseableIII = ""
+        WDeseableIV = ""
+        WDeseableV = ""
+        WDeseableVI = ""
+        WDeseableVII = ""
+        WDeseableVIII = ""
+        WEquivalenciasI = ""
+        WEquivalenciasII = ""
+        WFisica = ""
+        WOtrosI = ""
+        WOtrosII = ""
+        WPerfilVersion = ""
+
+        _LimpiarPerfil()
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                With dr
+
+                    WDescripcion = IIf(IsDBNull(.Item("Descripcion")), "", .Item("Descripcion"))
+                    WSector = IIf(IsDBNull(.Item("Sector")), "", .Item("Sector"))
+                    WDesSector = IIf(IsDBNull(.Item("DesSector")), "", .Item("DesSector"))
+                    WTareasI = IIf(IsDBNull(.Item("TareasI")), "", .Item("TareasI"))
+                    WTareasII = IIf(IsDBNull(.Item("TareasII")), "", .Item("TareasII"))
+                    WTareasIII = IIf(IsDBNull(.Item("TareasIII")), "", .Item("TareasIII"))
+                    WDescriI = IIf(IsDBNull(.Item("DescriI")), "", .Item("DescriI"))
+                    WDescriII = IIf(IsDBNull(.Item("DescriII")), "", .Item("DescriII"))
+                    WDescriIII = IIf(IsDBNull(.Item("DescriIII")), "", .Item("DescriIII"))
+                    WDescriIV = IIf(IsDBNull(.Item("DescriIV")), "", .Item("DescriIV"))
+                    WDescriV = IIf(IsDBNull(.Item("DescriV")), "", .Item("DescriV"))
+                    WObservaI = IIf(IsDBNull(.Item("ObservaI")), "", .Item("ObservaI"))
+                    WObservaII = IIf(IsDBNull(.Item("ObservaII")), "", .Item("ObservaII"))
+                    WObservaIII = IIf(IsDBNull(.Item("ObservaIII")), "", .Item("ObservaIII"))
+                    WObservaIV = IIf(IsDBNull(.Item("ObservaIV")), "", .Item("ObservaIV"))
+                    WObservaV = IIf(IsDBNull(.Item("ObservaV")), "", .Item("ObservaV"))
+                    WNecesariaI = IIf(IsDBNull(.Item("NecesariaI")), "0", .Item("NecesariaI"))
+                    WNecesariaII = IIf(IsDBNull(.Item("NecesariaII")), "0", .Item("NecesariaII"))
+                    WNecesariaIII = IIf(IsDBNull(.Item("NecesariaIII")), "0", .Item("NecesariaIII"))
+                    WNecesariaIV = IIf(IsDBNull(.Item("NecesariaIV")), "0", .Item("NecesariaIV"))
+                    WNecesariaV = IIf(IsDBNull(.Item("NecesariaV")), "0", .Item("NecesariaV"))
+                    WNecesariaVI = IIf(IsDBNull(.Item("NecesariaVI")), "0", .Item("NecesariaVI"))
+                    WNecesariaVII = IIf(IsDBNull(.Item("NecesariaVII")), "0", .Item("NecesariaVII"))
+                    WNecesariaVIII = IIf(IsDBNull(.Item("NecesariaVIII")), "0", .Item("NecesariaVIII"))
+                    WDeseableI = IIf(IsDBNull(.Item("DeseableI")), "0", .Item("DeseableI"))
+                    WDeseableII = IIf(IsDBNull(.Item("DeseableII")), "0", .Item("DeseableII"))
+                    WDeseableIII = IIf(IsDBNull(.Item("DeseableIII")), "0", .Item("DeseableIII"))
+                    WDeseableIV = IIf(IsDBNull(.Item("DeseableIV")), "0", .Item("DeseableIV"))
+                    WDeseableV = IIf(IsDBNull(.Item("DeseableV")), "0", .Item("DeseableV"))
+                    WDeseableVI = IIf(IsDBNull(.Item("DeseableVI")), "0", .Item("DeseableVI"))
+                    WDeseableVII = IIf(IsDBNull(.Item("DeseableVII")), "0", .Item("DeseableVII"))
+                    WDeseableVIII = IIf(IsDBNull(.Item("DeseableVIII")), "0", .Item("DeseableVIII"))
+                    WEquivalenciasI = IIf(IsDBNull(.Item("Equivalencias")), "", .Item("Equivalencias"))
+                    WEquivalenciasII = IIf(IsDBNull(.Item("EquivalenciasII")), "", .Item("EquivalenciasII"))
+                    WFisica = IIf(IsDBNull(.Item("Fisica")), "", .Item("Fisica"))
+                    WOtrosI = IIf(IsDBNull(.Item("OtrosI")), "", .Item("OtrosI"))
+                    WOtrosII = IIf(IsDBNull(.Item("OtrosII")), "", .Item("OtrosII"))
+                    WPerfilVersion = IIf(IsDBNull(.Item("Version")), "", .Item("Version"))
+
+                End With
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la informacion del Perfil desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        txtPerfil.Text = WPerfil
+        txtPerfilDescripcion.Text = Trim(WDescripcion)
+        txtPerfilVersion.Text = Trim(WPerfilVersion)
+        txtSector.Text = Trim(WSector)
+        txtSectorDescripcion.Text = Trim(WDesSector)
+        txtTareasI.Text = Trim(WTareasI)
+        txtTareasII.Text = Trim(WTareasII)
+        txtTareasIII.Text = Trim(WTareasIII)
+
+        txtDescriI.Text = Trim(WDescriI)
+        txtDescriII.Text = Trim(WDescriII)
+        txtDescriIII.Text = Trim(WDescriIII)
+        txtDescriIV.Text = Trim(WDescriIV)
+        txtDescriV.Text = Trim(WDescriV)
+
+        txtObservaI.Text = Trim(WObservaI)
+        txtObservaII.Text = Trim(WObservaII)
+        txtObservaIII.Text = Trim(WObservaIII)
+        txtObservaIV.Text = Trim(WObservaIV)
+        txtObservaV.Text = Trim(WObservaV)
+
+        txtFisica.Text = Trim(WFisica)
+        txtOtrosI.Text = Trim(WOtrosI)
+        txtOtrosII.Text = Trim(WOtrosII)
+
+        txtEquivalenciasI.Text = Trim(WEquivalenciasI)
+        txtEquivalenciasII.Text = Trim(WEquivalenciasII)
+
+        ckNecesarioI.Checked = IIf(Val(WNecesariaI) = 0, False, True)
+        ckNecesarioII.Checked = IIf(Val(WNecesariaII) = 0, False, True)
+        ckNecesarioIII.Checked = IIf(Val(WNecesariaIII) = 0, False, True)
+        ckNecesarioIV.Checked = IIf(Val(WNecesariaIV) = 0, False, True)
+        ckNecesarioV.Checked = IIf(Val(WNecesariaV) = 0, False, True)
+        ckNecesarioVI.Checked = IIf(Val(WNecesariaVI) = 0, False, True)
+        ckNecesarioVII.Checked = IIf(Val(WNecesariaVII) = 0, False, True)
+        ckNecesarioVIII.Checked = IIf(Val(WNecesariaVIII) = 0, False, True)
+
+        ckDeseableI.Checked = IIf(Val(WDeseableI) = 0, False, True)
+        ckDeseableII.Checked = IIf(Val(WDeseableII) = 0, False, True)
+        ckDeseableIII.Checked = IIf(Val(WDeseableIII) = 0, False, True)
+        ckDeseableIV.Checked = IIf(Val(WDeseableIV) = 0, False, True)
+        ckDeseableV.Checked = IIf(Val(WDeseableV) = 0, False, True)
+        ckDeseableVI.Checked = IIf(Val(WDeseableVI) = 0, False, True)
+        ckDeseableVII.Checked = IIf(Val(WDeseableVII) = 0, False, True)
+        ckDeseableVIII.Checked = IIf(Val(WDeseableVIII) = 0, False, True)
+
+    End Sub
+
+    Private Sub txtLegajo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLegajo.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtLegajo.Text) = "" Then : Exit Sub : End If
+
+            _traerLegajo()
+
+            txtLegajo.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtLegajo.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub _traerLegajo()
+
+        If Trim(txtLegajo.Text) = "" Then : Exit Sub : End If
+
+        Dim WLegajo = Trim(txtLegajo.Text)
+        Dim WFechaVersion, WPerfilVersion, WVersion, WDescripcion, WFechaEgreso, WFIngreso, WPerfil, WEstadoI, WEstadoII, WEstadoIII, WEstadoIV, WEstadoV, WEstadoVI, WEstadoVII, WEstadoVIII, WEstadoIX, WEstadoX, WEstaI, WEstaII, WEstaIII, WEstaIV, WEstaV, WEstaVI, WEstaVII, WEstaVIII, WEstaIX, WEstaX
+        Dim WObservaI1, WObservaI2, WObservaI3, WObservaI4, WObservaI5, WObservaII1, WObservaII2, WObservaII3, WObservaII4, WObservaII5, WActualizado, WTareaVersion
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT *, Tarea.Version as TareaVersion FROM Legajo, Tarea WHERE Legajo.Codigo = '" & WLegajo & "' AND Legajo.Perfil = Tarea.Codigo ")
+        Dim dr As SqlDataReader
+
+        WVersion = ""
+        WPerfilVersion = ""
+        WDescripcion = ""
+        WFechaVersion = ""
+        WVersion = ""
+        WFIngreso = ""
+        WFechaEgreso = ""
+        WPerfil = ""
+        WEstadoI = ""
+        WEstadoII = ""
+        WEstadoIII = ""
+        WEstadoIV = ""
+        WEstadoV = ""
+        WEstadoVI = ""
+        WEstadoVII = ""
+        WEstadoVIII = ""
+        WEstadoIX = ""
+        WEstadoX = ""
+        WEstaI = ""
+        WEstaII = ""
+        WEstaIII = ""
+        WEstaIV = ""
+        WEstaV = ""
+        WEstaVI = ""
+        WEstaVII = ""
+        WEstaVIII = ""
+        WEstaIX = ""
+        WEstaX = ""
+
+        WObservaI1 = ""
+        WObservaI2 = ""
+        WObservaI3 = ""
+        WObservaI4 = ""
+        WObservaI5 = ""
+        WObservaII1 = ""
+        WObservaII2 = ""
+        WObservaII3 = ""
+        WObservaII4 = ""
+        WObservaII5 = ""
+
+        WActualizado = ""
+        WTareaVersion = ""
+
+        _LimpiarTodo()
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                With dr
+                    .Read()
+
+                    WVersion = IIf(IsDBNull(.Item("Version")), "", .Item("Version"))
+                    WDescripcion = IIf(IsDBNull(.Item("Descripcion")), "", .Item("Descripcion"))
+                    WFechaVersion = IIf(IsDBNull(.Item("FechaVersion")), "", .Item("FechaVersion"))
+                    WVersion = IIf(IsDBNull(.Item("Version")), "", .Item("Version"))
+                    WFIngreso = IIf(IsDBNull(.Item("FIngreso")), "", .Item("FIngreso"))
+                    WFechaEgreso = IIf(IsDBNull(.Item("Fegreso")), "00/00/0000", .Item("Fegreso"))
+                    WPerfil = IIf(IsDBNull(.Item("Perfil")), "", .Item("Perfil"))
+                    WEstadoI = IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
+                    WEstadoII = IIf(IsDBNull(.Item("EstadoII")), "", .Item("EstadoII"))
+                    WEstadoIII = IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII"))
+                    WEstadoIV = IIf(IsDBNull(.Item("EstadoIV")), "", .Item("EstadoIV"))
+                    WEstadoV = IIf(IsDBNull(.Item("EstadoV")), "", .Item("EstadoV"))
+                    WEstadoVI = IIf(IsDBNull(.Item("EstadoVI")), "", .Item("EstadoVI"))
+                    WEstadoVII = IIf(IsDBNull(.Item("EstadoVII")), "", .Item("EstadoVII"))
+                    WEstadoVIII = IIf(IsDBNull(.Item("EstadoVIII")), "", .Item("EstadoVIII"))
+                    WEstadoIX = IIf(IsDBNull(.Item("EstadoIX")), "", .Item("EstadoIX"))
+                    WEstadoX = IIf(IsDBNull(.Item("EstadoX")), "", .Item("EstadoX"))
+                    WEstaI = IIf(IsDBNull(.Item("EstaI")), "", .Item("EstaI"))
+                    WEstaII = IIf(IsDBNull(.Item("EstaII")), "", .Item("EstaII"))
+                    WEstaIII = IIf(IsDBNull(.Item("EstaIII")), "", .Item("EstaIII"))
+                    WEstaIV = IIf(IsDBNull(.Item("EstaIV")), "", .Item("EstaIV"))
+                    WEstaV = IIf(IsDBNull(.Item("EstaV")), "", .Item("EstaV"))
+                    WEstaVI = IIf(IsDBNull(.Item("EstaVI")), "", .Item("EstaVI"))
+                    WEstaVII = IIf(IsDBNull(.Item("EstaVII")), "", .Item("EstaVII"))
+                    WEstaVIII = IIf(IsDBNull(.Item("EstaVIII")), "", .Item("EstaVIII"))
+                    WEstaIX = IIf(IsDBNull(.Item("EstaIX")), "", .Item("EstaIX"))
+                    WEstaX = IIf(IsDBNull(.Item("EstaX")), "", .Item("EstaX"))
+
+                    WObservaI1 = IIf(IsDBNull(.Item("ObservaI1")), "", .Item("ObservaI1"))
+                    WObservaI2 = IIf(IsDBNull(.Item("ObservaI2")), "", .Item("ObservaI2"))
+                    WObservaI3 = IIf(IsDBNull(.Item("ObservaI3")), "", .Item("ObservaI3"))
+                    WObservaI4 = IIf(IsDBNull(.Item("ObservaI4")), "", .Item("ObservaI4"))
+                    WObservaI5 = IIf(IsDBNull(.Item("ObservaI5")), "", .Item("ObservaI5"))
+                    WObservaII1 = IIf(IsDBNull(.Item("ObservaII1")), "", .Item("ObservaII1"))
+                    WObservaII2 = IIf(IsDBNull(.Item("ObservaII2")), "", .Item("ObservaII2"))
+                    WObservaII3 = IIf(IsDBNull(.Item("ObservaII3")), "", .Item("ObservaII3"))
+                    WObservaII4 = IIf(IsDBNull(.Item("ObservaII4")), "", .Item("ObservaII4"))
+                    WObservaII5 = IIf(IsDBNull(.Item("ObservaII5")), "", .Item("ObservaII5"))
+                    WActualizado = IIf(IsDBNull(.Item("Actualizado")), "", .Item("Actualizado"))
+                    WTareaVersion = IIf(IsDBNull(.Item("TareaVersion")), "0", .Item("TareaVersion"))
+
+                End With
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar el legajo en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        txtLegajo.Text = Trim(WLegajo)
+        txtNroVersion.Text = Trim(WVersion)
+        txtDescripcion.Text = Trim(WDescripcion)
+        txtFechaVersion.Text = Trim(WFechaVersion)
+        txtFechaIngreso.Text = Trim(WFIngreso)
+        txtFechaEgreso.Text = Trim(WFechaEgreso)
+        txtPerfil.Text = Trim(WPerfil)
+        txtEstadoI.Text = Trim(WEstadoI)
+        txtEstadoII.Text = Trim(WEstadoII)
+        txtEstadoIII.Text = Trim(WEstadoIII)
+        txtEstadoIV.Text = Trim(WEstadoIV)
+        txtEstadoV.Text = Trim(WEstadoV)
+        txtEstadoVI.Text = Trim(WEstadoVI)
+        txtEstadoVII.Text = Trim(WEstadoVII)
+        txtEstadoVIII.Text = Trim(WEstadoVIII)
+        txtEstadoIX.Text = Trim(WEstadoIX)
+        txtEstadoX.Text = Trim(WEstadoX)
+        cmbEstaI.SelectedIndex = Val(WEstaI)
+        cmbEstaII.SelectedIndex = Val(WEstaII)
+        cmbEstaIII.SelectedIndex = Val(WEstaIII)
+        cmbEstaIV.SelectedIndex = Val(WEstaIV)
+        cmbEstaV.SelectedIndex = Val(WEstaV)
+        cmbEstaVI.SelectedIndex = Val(WEstaVI)
+        cmbEstaVII.SelectedIndex = Val(WEstaVII)
+        cmbEstaVIII.SelectedIndex = Val(WEstaVIII)
+        cmbEstaIX.selectedindex = Val(WEstaIX)
+        cmbEstaX.SelectedIndex = Val(WEstaX)
+
+        txtObservaI1.Text = Trim(WObservaI1)
+        txtObservaI2.Text = Trim(WObservaI2)
+        txtObservaI3.Text = Trim(WObservaI3)
+        txtObservaI4.Text = Trim(WObservaI4)
+        txtObservaI5.Text = Trim(WObservaI5)
+        txtObservaII1.Text = Trim(WObservaII1)
+        txtObservaII2.Text = Trim(WObservaII2)
+        txtObservaII3.Text = Trim(WObservaII3)
+        txtObservaII4.Text = Trim(WObservaII4)
+        txtObservaII5.Text = Trim(WObservaII5)
+
+        If UCase(WActualizado) = "N" Then
+            AtencionNoActualizado.Visible = True
+            MsgBox("ATENCION: SE ACTUALIZÓ LA VERSIÓN DEL PERFIL, PERO AUN NO ASI LA CALIFICACIÓN", MsgBoxStyle.Information)
+        Else
+            AtencionNoActualizado.Visible = False
+        End If
+
+        ' Ahora falta traer los datos del perfil.
+        If Val(WTareaVersion) = Val(WPerfilVersion) Or Val(WTareaVersion) = 0 Or Val(WPerfilVersion) = 0 Then
+
+            txtPerfilVersion.Text = WTareaVersion
+
+            _CargarPerfil()
+
+        Else
+
+            txtPerfilVersion.Text = WPerfilVersion
+
+            _CargarPerfilSegunVersion()
+
+        End If
+
+        If Val(WPerfil) <> 0 Then
+            _CargarConocimientos()
+        End If
+
+    End Sub
+
+    Private Sub _CargarConocimientos()
+        If Trim(txtPerfil.Text) = "" Then : Exit Sub : End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Legajo.Curso, Legajo.EstaCurso as EstaCurso, Tarea.NecesariaCurso, Tarea.DeseableCurso, Curso.Descripcion FROM Legajo, Tarea, Curso WHERE Legajo.Codigo = '" & Trim(txtLegajo.Text) & "' AND Legajo.Curso = Tarea.Curso AND Legajo.Perfil = Tarea.Codigo AND Legajo.Curso = Curso.Codigo ORDER BY Legajo.Curso")
+        Dim dr As SqlDataReader
+        Dim WRowIndex, WEstaCurso, WCurso, WDescriCurso, WNecesario, WDeseable
+        Dim WEstados() = {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."}
+
+        Try
+            dgvConocimientos.Rows.Clear()
+
+            WRowIndex = 0
+
+            WEstaCurso = 0
+            WCurso = ""
+            WDescriCurso = ""
+            WNecesario = ""
+            WDeseable = ""
+            
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+
+                    WEstaCurso = 0
+                    WCurso = ""
+                    WDescriCurso = ""
+                    WNecesario = ""
+                    WDeseable = ""
+
+                    WCurso = IIf(IsDBNull(dr.Item("Curso")), "", dr.Item("Curso"))
+                    WDescriCurso = IIf(IsDBNull(dr.Item("Descripcion")), "", dr.Item("Descripcion"))
+                    WNecesario = IIf(IsDBNull(dr.Item("NecesariaCurso")), "", dr.Item("NecesariaCurso"))
+                    WDeseable = IIf(IsDBNull(dr.Item("DeseableCurso")), "", dr.Item("DeseableCurso"))
+                    WEstaCurso = IIf(IsDBNull(dr.Item("EstaCurso")), "", dr.Item("EstaCurso"))
+
+                    WRowIndex = dgvConocimientos.Rows.Add
+
+                    With dgvConocimientos.Rows(WRowIndex)
+
+                        .Cells("Tema").Value = Trim(WCurso)
+                        .Cells("DescripcionTema").Value = Trim(WDescriCurso)
+                        .Cells("EstadoTema").Value = WEstados(Val(WEstaCurso))
+
+                        If UCase(Trim(WNecesario)) = "X" Then
+                            .Cells("TipoNecesidad").Value = "Necesario"
+                        ElseIf UCase(Trim(WDeseable)) = "X" Then
+                            .Cells("TipoNecesidad").Value = "Deseable"
+                        Else
+                            .Cells("TipoNecesidad").Value = ""
+                        End If
+
+                    End With
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _LimpiarLegajoInfo()
+        For Each txt As TextBox In {txtLegajo, txtDescripcion, txtNroVersion, txtObservaII1, txtObservaII2, _
+                                    txtObservaII3, txtObservaII4, txtEstadoI, txtEstadoII, txtEstadoIII, txtEstadoIV, txtEstadoV, txtEstadoVI, txtEstadoVII, _
+                                    txtEstadoVIII, txtEstadoIX, txtEstadoX}
+            txt.Text = ""
+        Next
+
+        For Each txt As MaskedTextBox In {txtFechaEgreso, txtFechaIngreso, txtFechaVersion}
+            txt.Clear()
+        Next
+    End Sub
+
+    Private Sub _LimpiarTodo()
+        _LimpiarLegajoInfo()
+        _LimpiarPerfil()
+    End Sub
+
+    Private Sub btnCerrarObservacionesI_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarObservacionesI.Click
+        GrupoObservacionesI.Visible = False
+    End Sub
+
+    Private Sub btnCerrarObservaciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarObservaciones.Click
+        GrupoObservacionesII.Visible = False
+    End Sub
 End Class

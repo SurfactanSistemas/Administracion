@@ -42,12 +42,22 @@ Partial Class AMBLegajos
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.AtencionNoActualizado = New System.Windows.Forms.GroupBox()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.btnObservaciones = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.GrupoObservacionesII = New System.Windows.Forms.Panel()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.btnCerrarObservaciones = New System.Windows.Forms.Button()
+        Me.txtObservaII5 = New System.Windows.Forms.TextBox()
+        Me.txtObservaII4 = New System.Windows.Forms.TextBox()
+        Me.txtObservaII3 = New System.Windows.Forms.TextBox()
+        Me.txtObservaII2 = New System.Windows.Forms.TextBox()
+        Me.txtObservaII1 = New System.Windows.Forms.TextBox()
         Me.GrupoEducacion = New System.Windows.Forms.GroupBox()
-        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
+        Me.cmbEstaX = New System.Windows.Forms.ComboBox()
+        Me.cmbEstaIX = New System.Windows.Forms.ComboBox()
         Me.cmbEstaVIII = New System.Windows.Forms.ComboBox()
         Me.cmbEstaVII = New System.Windows.Forms.ComboBox()
         Me.cmbEstaVI = New System.Windows.Forms.ComboBox()
@@ -124,12 +134,14 @@ Partial Class AMBLegajos
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.dgvConocimientos = New System.Windows.Forms.DataGridView()
-        Me.Tema = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionTema = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TipoNecesidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EstadoTarea = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.ObservacionTema = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GrupoObservacionesI = New System.Windows.Forms.Panel()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.btnCerrarObservacionesI = New System.Windows.Forms.Button()
+        Me.txtObservaI5 = New System.Windows.Forms.TextBox()
+        Me.txtObservaI4 = New System.Windows.Forms.TextBox()
+        Me.txtObservaI3 = New System.Windows.Forms.TextBox()
+        Me.txtObservaI2 = New System.Windows.Forms.TextBox()
+        Me.txtObservaI1 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvCursosRealizados = New System.Windows.Forms.DataGridView()
         Me.TemaRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -169,24 +181,27 @@ Partial Class AMBLegajos
         Me.Button1 = New System.Windows.Forms.Button()
         Me.txtHasta = New System.Windows.Forms.TextBox()
         Me.txtDesde = New System.Windows.Forms.TextBox()
-        Me.GrupoObservaciones = New System.Windows.Forms.Panel()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.btnCerrarObservaciones = New System.Windows.Forms.Button()
-        Me.TextBox33 = New System.Windows.Forms.TextBox()
-        Me.TextBox32 = New System.Windows.Forms.TextBox()
-        Me.TextBox31 = New System.Windows.Forms.TextBox()
-        Me.TextBox30 = New System.Windows.Forms.TextBox()
+        Me.ObservacionTema = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EstadoTema = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.TipoNecesidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionTema = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tema = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvConocimientos = New System.Windows.Forms.DataGridView()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.AtencionNoActualizado.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.GrupoObservacionesII.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.GrupoEducacion.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        CType(Me.dgvConocimientos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GrupoObservacionesI.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         CType(Me.dgvCursosRealizados, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
@@ -195,8 +210,7 @@ Partial Class AMBLegajos
         Me.GrupoImpresion.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GrupoObservaciones.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
+        CType(Me.dgvConocimientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -492,6 +506,7 @@ Partial Class AMBLegajos
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.AtencionNoActualizado)
         Me.Panel1.Controls.Add(Me.btnObservaciones)
         Me.Panel1.Controls.Add(Me.TabControl1)
         Me.Panel1.Controls.Add(Me.GroupBox4)
@@ -506,12 +521,36 @@ Partial Class AMBLegajos
         Me.Panel1.Size = New System.Drawing.Size(918, 550)
         Me.Panel1.TabIndex = 1
         '
+        'AtencionNoActualizado
+        '
+        Me.AtencionNoActualizado.Controls.Add(Me.Label28)
+        Me.AtencionNoActualizado.Font = New System.Drawing.Font("Calibri", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.AtencionNoActualizado.ForeColor = System.Drawing.SystemColors.Control
+        Me.AtencionNoActualizado.Location = New System.Drawing.Point(36, 39)
+        Me.AtencionNoActualizado.Name = "AtencionNoActualizado"
+        Me.AtencionNoActualizado.Size = New System.Drawing.Size(402, 38)
+        Me.AtencionNoActualizado.TabIndex = 6
+        Me.AtencionNoActualizado.TabStop = False
+        Me.AtencionNoActualizado.Text = "ATENCION"
+        Me.AtencionNoActualizado.Visible = False
+        '
+        'Label28
+        '
+        Me.Label28.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label28.ForeColor = System.Drawing.Color.Yellow
+        Me.Label28.Location = New System.Drawing.Point(23, 15)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(356, 14)
+        Me.Label28.TabIndex = 0
+        Me.Label28.Text = "SE ACTUALIZÓ LA VERSIÓN DEL PERFIL, PERO AUN NO ASI LA CALIFICACIÓN"
+        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'btnObservaciones
         '
         Me.btnObservaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnObservaciones.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.btnObservaciones.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnObservaciones.Location = New System.Drawing.Point(420, 45)
+        Me.btnObservaciones.Location = New System.Drawing.Point(444, 46)
         Me.btnObservaciones.Name = "btnObservaciones"
         Me.btnObservaciones.Size = New System.Drawing.Size(142, 32)
         Me.btnObservaciones.TabIndex = 5
@@ -534,6 +573,7 @@ Partial Class AMBLegajos
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabPage1.Controls.Add(Me.GrupoObservacionesII)
         Me.TabPage1.Controls.Add(Me.GrupoEducacion)
         Me.TabPage1.Controls.Add(Me.txtSector)
         Me.TabPage1.Controls.Add(Me.txtSectorDescripcion)
@@ -553,10 +593,109 @@ Partial Class AMBLegajos
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Requerimientos"
         '
+        'GrupoObservacionesII
+        '
+        Me.GrupoObservacionesII.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.GrupoObservacionesII.Controls.Add(Me.GroupBox6)
+        Me.GrupoObservacionesII.Location = New System.Drawing.Point(22, 54)
+        Me.GrupoObservacionesII.Name = "GrupoObservacionesII"
+        Me.GrupoObservacionesII.Size = New System.Drawing.Size(823, 188)
+        Me.GrupoObservacionesII.TabIndex = 7
+        Me.GrupoObservacionesII.Visible = False
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.btnCerrarObservaciones)
+        Me.GroupBox6.Controls.Add(Me.txtObservaII5)
+        Me.GroupBox6.Controls.Add(Me.txtObservaII4)
+        Me.GroupBox6.Controls.Add(Me.txtObservaII3)
+        Me.GroupBox6.Controls.Add(Me.txtObservaII2)
+        Me.GroupBox6.Controls.Add(Me.txtObservaII1)
+        Me.GroupBox6.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox6.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox6.Location = New System.Drawing.Point(11, 2)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(800, 180)
+        Me.GroupBox6.TabIndex = 0
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Observaciones de Perfil"
+        '
+        'btnCerrarObservaciones
+        '
+        Me.btnCerrarObservaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrarObservaciones.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnCerrarObservaciones.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarObservaciones.Location = New System.Drawing.Point(328, 143)
+        Me.btnCerrarObservaciones.Name = "btnCerrarObservaciones"
+        Me.btnCerrarObservaciones.Size = New System.Drawing.Size(142, 28)
+        Me.btnCerrarObservaciones.TabIndex = 5
+        Me.btnCerrarObservaciones.Text = "Cerrar"
+        Me.btnCerrarObservaciones.UseVisualStyleBackColor = True
+        '
+        'txtObservaII5
+        '
+        Me.txtObservaII5.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaII5.Enabled = False
+        Me.txtObservaII5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaII5.Location = New System.Drawing.Point(19, 117)
+        Me.txtObservaII5.MaxLength = 90
+        Me.txtObservaII5.Name = "txtObservaII5"
+        Me.txtObservaII5.ReadOnly = True
+        Me.txtObservaII5.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaII5.TabIndex = 1
+        '
+        'txtObservaII4
+        '
+        Me.txtObservaII4.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaII4.Enabled = False
+        Me.txtObservaII4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaII4.Location = New System.Drawing.Point(19, 94)
+        Me.txtObservaII4.MaxLength = 90
+        Me.txtObservaII4.Name = "txtObservaII4"
+        Me.txtObservaII4.ReadOnly = True
+        Me.txtObservaII4.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaII4.TabIndex = 1
+        '
+        'txtObservaII3
+        '
+        Me.txtObservaII3.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaII3.Enabled = False
+        Me.txtObservaII3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaII3.Location = New System.Drawing.Point(19, 71)
+        Me.txtObservaII3.MaxLength = 90
+        Me.txtObservaII3.Name = "txtObservaII3"
+        Me.txtObservaII3.ReadOnly = True
+        Me.txtObservaII3.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaII3.TabIndex = 1
+        '
+        'txtObservaII2
+        '
+        Me.txtObservaII2.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaII2.Enabled = False
+        Me.txtObservaII2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaII2.Location = New System.Drawing.Point(19, 48)
+        Me.txtObservaII2.MaxLength = 90
+        Me.txtObservaII2.Name = "txtObservaII2"
+        Me.txtObservaII2.ReadOnly = True
+        Me.txtObservaII2.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaII2.TabIndex = 1
+        '
+        'txtObservaII1
+        '
+        Me.txtObservaII1.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaII1.Enabled = False
+        Me.txtObservaII1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaII1.Location = New System.Drawing.Point(19, 25)
+        Me.txtObservaII1.MaxLength = 90
+        Me.txtObservaII1.Name = "txtObservaII1"
+        Me.txtObservaII1.ReadOnly = True
+        Me.txtObservaII1.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaII1.TabIndex = 1
+        '
         'GrupoEducacion
         '
-        Me.GrupoEducacion.Controls.Add(Me.ComboBox10)
-        Me.GrupoEducacion.Controls.Add(Me.ComboBox9)
+        Me.GrupoEducacion.Controls.Add(Me.cmbEstaX)
+        Me.GrupoEducacion.Controls.Add(Me.cmbEstaIX)
         Me.GrupoEducacion.Controls.Add(Me.cmbEstaVIII)
         Me.GrupoEducacion.Controls.Add(Me.cmbEstaVII)
         Me.GrupoEducacion.Controls.Add(Me.cmbEstaVI)
@@ -612,25 +751,25 @@ Partial Class AMBLegajos
         Me.GrupoEducacion.TabStop = False
         Me.GrupoEducacion.Text = "EDUCACIÓN"
         '
-        'ComboBox10
+        'cmbEstaX
         '
-        Me.ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox10.FormattingEnabled = True
-        Me.ComboBox10.Items.AddRange(New Object() {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."})
-        Me.ComboBox10.Location = New System.Drawing.Point(547, 273)
-        Me.ComboBox10.Name = "ComboBox10"
-        Me.ComboBox10.Size = New System.Drawing.Size(86, 22)
-        Me.ComboBox10.TabIndex = 3
+        Me.cmbEstaX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEstaX.FormattingEnabled = True
+        Me.cmbEstaX.Items.AddRange(New Object() {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."})
+        Me.cmbEstaX.Location = New System.Drawing.Point(547, 273)
+        Me.cmbEstaX.Name = "cmbEstaX"
+        Me.cmbEstaX.Size = New System.Drawing.Size(86, 22)
+        Me.cmbEstaX.TabIndex = 3
         '
-        'ComboBox9
+        'cmbEstaIX
         '
-        Me.ComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox9.FormattingEnabled = True
-        Me.ComboBox9.Items.AddRange(New Object() {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."})
-        Me.ComboBox9.Location = New System.Drawing.Point(547, 248)
-        Me.ComboBox9.Name = "ComboBox9"
-        Me.ComboBox9.Size = New System.Drawing.Size(86, 22)
-        Me.ComboBox9.TabIndex = 3
+        Me.cmbEstaIX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEstaIX.FormattingEnabled = True
+        Me.cmbEstaIX.Items.AddRange(New Object() {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."})
+        Me.cmbEstaIX.Location = New System.Drawing.Point(547, 248)
+        Me.cmbEstaIX.Name = "cmbEstaIX"
+        Me.cmbEstaIX.Size = New System.Drawing.Size(86, 22)
+        Me.cmbEstaIX.TabIndex = 3
         '
         'cmbEstaVIII
         '
@@ -1429,6 +1568,7 @@ Partial Class AMBLegajos
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabPage2.Controls.Add(Me.GrupoObservacionesI)
         Me.TabPage2.Controls.Add(Me.dgvConocimientos)
         Me.TabPage2.Location = New System.Drawing.Point(4, 34)
         Me.TabPage2.Name = "TabPage2"
@@ -1437,57 +1577,104 @@ Partial Class AMBLegajos
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Conocimientos para el Puesto"
         '
-        'dgvConocimientos
+        'GrupoObservacionesI
         '
-        Me.dgvConocimientos.AllowUserToAddRows = False
-        Me.dgvConocimientos.AllowUserToDeleteRows = False
-        Me.dgvConocimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvConocimientos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tema, Me.DescripcionTema, Me.TipoNecesidad, Me.EstadoTarea, Me.ObservacionTema})
-        Me.dgvConocimientos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvConocimientos.Location = New System.Drawing.Point(3, 3)
-        Me.dgvConocimientos.Name = "dgvConocimientos"
-        Me.dgvConocimientos.Size = New System.Drawing.Size(868, 419)
-        Me.dgvConocimientos.TabIndex = 0
+        Me.GrupoObservacionesI.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.GrupoObservacionesI.Controls.Add(Me.GroupBox7)
+        Me.GrupoObservacionesI.Location = New System.Drawing.Point(26, 118)
+        Me.GrupoObservacionesI.Name = "GrupoObservacionesI"
+        Me.GrupoObservacionesI.Size = New System.Drawing.Size(823, 188)
+        Me.GrupoObservacionesI.TabIndex = 8
+        Me.GrupoObservacionesI.Visible = False
         '
-        'Tema
+        'GroupBox7
         '
-        Me.Tema.HeaderText = "Tema"
-        Me.Tema.Name = "Tema"
-        Me.Tema.ReadOnly = True
+        Me.GroupBox7.Controls.Add(Me.btnCerrarObservacionesI)
+        Me.GroupBox7.Controls.Add(Me.txtObservaI5)
+        Me.GroupBox7.Controls.Add(Me.txtObservaI4)
+        Me.GroupBox7.Controls.Add(Me.txtObservaI3)
+        Me.GroupBox7.Controls.Add(Me.txtObservaI2)
+        Me.GroupBox7.Controls.Add(Me.txtObservaI1)
+        Me.GroupBox7.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox7.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox7.Location = New System.Drawing.Point(11, 2)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(800, 180)
+        Me.GroupBox7.TabIndex = 0
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Observaciones de Conocimientos"
         '
-        'DescripcionTema
+        'btnCerrarObservacionesI
         '
-        Me.DescripcionTema.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionTema.HeaderText = "Descripcion"
-        Me.DescripcionTema.Name = "DescripcionTema"
-        Me.DescripcionTema.ReadOnly = True
+        Me.btnCerrarObservacionesI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrarObservacionesI.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnCerrarObservacionesI.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarObservacionesI.Location = New System.Drawing.Point(328, 143)
+        Me.btnCerrarObservacionesI.Name = "btnCerrarObservacionesI"
+        Me.btnCerrarObservacionesI.Size = New System.Drawing.Size(142, 28)
+        Me.btnCerrarObservacionesI.TabIndex = 5
+        Me.btnCerrarObservacionesI.Text = "Cerrar"
+        Me.btnCerrarObservacionesI.UseVisualStyleBackColor = True
         '
-        'TipoNecesidad
+        'txtObservaI5
         '
-        Me.TipoNecesidad.HeaderText = "Tipo de Necesidad"
-        Me.TipoNecesidad.Name = "TipoNecesidad"
-        Me.TipoNecesidad.ReadOnly = True
-        Me.TipoNecesidad.Width = 120
+        Me.txtObservaI5.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaI5.Enabled = False
+        Me.txtObservaI5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaI5.Location = New System.Drawing.Point(19, 117)
+        Me.txtObservaI5.MaxLength = 90
+        Me.txtObservaI5.Name = "txtObservaI5"
+        Me.txtObservaI5.ReadOnly = True
+        Me.txtObservaI5.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaI5.TabIndex = 1
         '
-        'EstadoTarea
+        'txtObservaI4
         '
-        Me.EstadoTarea.AutoComplete = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Window
-        Me.EstadoTarea.DefaultCellStyle = DataGridViewCellStyle1
-        Me.EstadoTarea.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
-        Me.EstadoTarea.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.EstadoTarea.HeaderText = "Estado"
-        Me.EstadoTarea.Items.AddRange(New Object() {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."})
-        Me.EstadoTarea.Name = "EstadoTarea"
-        Me.EstadoTarea.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.EstadoTarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.txtObservaI4.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaI4.Enabled = False
+        Me.txtObservaI4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaI4.Location = New System.Drawing.Point(19, 94)
+        Me.txtObservaI4.MaxLength = 90
+        Me.txtObservaI4.Name = "txtObservaI4"
+        Me.txtObservaI4.ReadOnly = True
+        Me.txtObservaI4.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaI4.TabIndex = 1
         '
-        'ObservacionTema
+        'txtObservaI3
         '
-        Me.ObservacionTema.HeaderText = "Observaciones"
-        Me.ObservacionTema.Name = "ObservacionTema"
+        Me.txtObservaI3.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaI3.Enabled = False
+        Me.txtObservaI3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaI3.Location = New System.Drawing.Point(19, 71)
+        Me.txtObservaI3.MaxLength = 90
+        Me.txtObservaI3.Name = "txtObservaI3"
+        Me.txtObservaI3.ReadOnly = True
+        Me.txtObservaI3.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaI3.TabIndex = 1
+        '
+        'txtObservaI2
+        '
+        Me.txtObservaI2.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaI2.Enabled = False
+        Me.txtObservaI2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaI2.Location = New System.Drawing.Point(19, 48)
+        Me.txtObservaI2.MaxLength = 90
+        Me.txtObservaI2.Name = "txtObservaI2"
+        Me.txtObservaI2.ReadOnly = True
+        Me.txtObservaI2.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaI2.TabIndex = 1
+        '
+        'txtObservaI1
+        '
+        Me.txtObservaI1.BackColor = System.Drawing.SystemColors.Window
+        Me.txtObservaI1.Enabled = False
+        Me.txtObservaI1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtObservaI1.Location = New System.Drawing.Point(19, 25)
+        Me.txtObservaI1.MaxLength = 90
+        Me.txtObservaI1.Name = "txtObservaI1"
+        Me.txtObservaI1.ReadOnly = True
+        Me.txtObservaI1.Size = New System.Drawing.Size(762, 20)
+        Me.txtObservaI1.TabIndex = 1
         '
         'TabPage3
         '
@@ -1560,9 +1747,9 @@ Partial Class AMBLegajos
         Me.GroupBox4.Controls.Add(Me.Label8)
         Me.GroupBox4.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox4.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox4.Location = New System.Drawing.Point(574, 6)
+        Me.GroupBox4.Location = New System.Drawing.Point(593, 6)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(288, 74)
+        Me.GroupBox4.Size = New System.Drawing.Size(297, 74)
         Me.GroupBox4.TabIndex = 3
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Fechas"
@@ -1603,11 +1790,11 @@ Partial Class AMBLegajos
         'txtNroVersion
         '
         Me.txtNroVersion.BackColor = System.Drawing.SystemColors.Window
-        Me.txtNroVersion.Enabled = False
+        Me.txtNroVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtNroVersion.Location = New System.Drawing.Point(154, 43)
         Me.txtNroVersion.Name = "txtNroVersion"
         Me.txtNroVersion.ReadOnly = True
-        Me.txtNroVersion.Size = New System.Drawing.Size(47, 21)
+        Me.txtNroVersion.Size = New System.Drawing.Size(47, 20)
         Me.txtNroVersion.TabIndex = 1
         Me.txtNroVersion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1647,12 +1834,11 @@ Partial Class AMBLegajos
         'txtDescripcion
         '
         Me.txtDescripcion.BackColor = System.Drawing.SystemColors.Window
-        Me.txtDescripcion.Enabled = False
         Me.txtDescripcion.Location = New System.Drawing.Point(233, 13)
         Me.txtDescripcion.MaxLength = 90
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.ReadOnly = True
-        Me.txtDescripcion.Size = New System.Drawing.Size(329, 20)
+        Me.txtDescripcion.Size = New System.Drawing.Size(354, 20)
         Me.txtDescripcion.TabIndex = 1
         '
         'Label5
@@ -1881,90 +2067,63 @@ Partial Class AMBLegajos
         Me.txtDesde.Size = New System.Drawing.Size(67, 20)
         Me.txtDesde.TabIndex = 0
         '
-        'GrupoObservaciones
+        'ObservacionTema
         '
-        Me.GrupoObservaciones.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.GrupoObservaciones.Controls.Add(Me.GroupBox6)
-        Me.GrupoObservaciones.Location = New System.Drawing.Point(48, 227)
-        Me.GrupoObservaciones.Name = "GrupoObservaciones"
-        Me.GrupoObservaciones.Size = New System.Drawing.Size(823, 169)
-        Me.GrupoObservaciones.TabIndex = 7
+        Me.ObservacionTema.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ObservacionTema.FillWeight = 20.0!
+        Me.ObservacionTema.HeaderText = "Observaciones"
+        Me.ObservacionTema.MinimumWidth = 200
+        Me.ObservacionTema.Name = "ObservacionTema"
         '
-        'GroupBox6
+        'EstadoTema
         '
-        Me.GroupBox6.Controls.Add(Me.btnCerrarObservaciones)
-        Me.GroupBox6.Controls.Add(Me.TextBox33)
-        Me.GroupBox6.Controls.Add(Me.TextBox32)
-        Me.GroupBox6.Controls.Add(Me.TextBox31)
-        Me.GroupBox6.Controls.Add(Me.TextBox30)
-        Me.GroupBox6.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox6.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox6.Location = New System.Drawing.Point(11, 2)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(800, 156)
-        Me.GroupBox6.TabIndex = 0
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Observaciones de Legajo"
+        Me.EstadoTema.AutoComplete = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Window
+        Me.EstadoTema.DefaultCellStyle = DataGridViewCellStyle1
+        Me.EstadoTema.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
+        Me.EstadoTema.HeaderText = "Estado"
+        Me.EstadoTema.Items.AddRange(New Object() {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."})
+        Me.EstadoTema.MinimumWidth = 110
+        Me.EstadoTema.Name = "EstadoTema"
+        Me.EstadoTema.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.EstadoTema.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.EstadoTema.Width = 110
         '
-        'btnCerrarObservaciones
+        'TipoNecesidad
         '
-        Me.btnCerrarObservaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrarObservaciones.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnCerrarObservaciones.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarObservaciones.Location = New System.Drawing.Point(329, 120)
-        Me.btnCerrarObservaciones.Name = "btnCerrarObservaciones"
-        Me.btnCerrarObservaciones.Size = New System.Drawing.Size(142, 28)
-        Me.btnCerrarObservaciones.TabIndex = 5
-        Me.btnCerrarObservaciones.Text = "Cerrar"
-        Me.btnCerrarObservaciones.UseVisualStyleBackColor = True
+        Me.TipoNecesidad.HeaderText = "Tipo Necesidad"
+        Me.TipoNecesidad.Name = "TipoNecesidad"
+        Me.TipoNecesidad.ReadOnly = True
         '
-        'TextBox33
+        'DescripcionTema
         '
-        Me.TextBox33.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox33.Enabled = False
-        Me.TextBox33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox33.Location = New System.Drawing.Point(19, 94)
-        Me.TextBox33.MaxLength = 90
-        Me.TextBox33.Name = "TextBox33"
-        Me.TextBox33.ReadOnly = True
-        Me.TextBox33.Size = New System.Drawing.Size(762, 20)
-        Me.TextBox33.TabIndex = 1
+        Me.DescripcionTema.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescripcionTema.FillWeight = 80.0!
+        Me.DescripcionTema.HeaderText = "Descripcion"
+        Me.DescripcionTema.Name = "DescripcionTema"
+        Me.DescripcionTema.ReadOnly = True
         '
-        'TextBox32
+        'Tema
         '
-        Me.TextBox32.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox32.Enabled = False
-        Me.TextBox32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox32.Location = New System.Drawing.Point(19, 71)
-        Me.TextBox32.MaxLength = 90
-        Me.TextBox32.Name = "TextBox32"
-        Me.TextBox32.ReadOnly = True
-        Me.TextBox32.Size = New System.Drawing.Size(762, 20)
-        Me.TextBox32.TabIndex = 1
+        Me.Tema.HeaderText = "Tema"
+        Me.Tema.Name = "Tema"
+        Me.Tema.ReadOnly = True
+        Me.Tema.Width = 50
         '
-        'TextBox31
+        'dgvConocimientos
         '
-        Me.TextBox31.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox31.Enabled = False
-        Me.TextBox31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox31.Location = New System.Drawing.Point(19, 48)
-        Me.TextBox31.MaxLength = 90
-        Me.TextBox31.Name = "TextBox31"
-        Me.TextBox31.ReadOnly = True
-        Me.TextBox31.Size = New System.Drawing.Size(762, 20)
-        Me.TextBox31.TabIndex = 1
-        '
-        'TextBox30
-        '
-        Me.TextBox30.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox30.Enabled = False
-        Me.TextBox30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox30.Location = New System.Drawing.Point(19, 25)
-        Me.TextBox30.MaxLength = 90
-        Me.TextBox30.Name = "TextBox30"
-        Me.TextBox30.ReadOnly = True
-        Me.TextBox30.Size = New System.Drawing.Size(762, 20)
-        Me.TextBox30.TabIndex = 1
+        Me.dgvConocimientos.AllowUserToAddRows = False
+        Me.dgvConocimientos.AllowUserToDeleteRows = False
+        Me.dgvConocimientos.ColumnHeadersHeight = 30
+        Me.dgvConocimientos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tema, Me.DescripcionTema, Me.TipoNecesidad, Me.EstadoTema, Me.ObservacionTema})
+        Me.dgvConocimientos.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvConocimientos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgvConocimientos.Location = New System.Drawing.Point(3, 3)
+        Me.dgvConocimientos.Name = "dgvConocimientos"
+        Me.dgvConocimientos.Size = New System.Drawing.Size(868, 419)
+        Me.dgvConocimientos.TabIndex = 0
         '
         'AMBLegajos
         '
@@ -1974,7 +2133,6 @@ Partial Class AMBLegajos
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Controls.Add(Me.GrupoConsulta)
         Me.Controls.Add(Me.GrupoImpresion)
-        Me.Controls.Add(Me.GrupoObservaciones)
         Me.Name = "AMBLegajos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.LayoutPrincipal.ResumeLayout(False)
@@ -1983,15 +2141,21 @@ Partial Class AMBLegajos
         Me.GroupBox1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.AtencionNoActualizado.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        Me.GrupoObservacionesII.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.GrupoEducacion.ResumeLayout(False)
         Me.GrupoEducacion.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
-        CType(Me.dgvConocimientos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GrupoObservacionesI.ResumeLayout(False)
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         CType(Me.dgvCursosRealizados, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox4.ResumeLayout(False)
@@ -2004,9 +2168,7 @@ Partial Class AMBLegajos
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GrupoObservaciones.ResumeLayout(False)
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
+        CType(Me.dgvConocimientos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2128,8 +2290,8 @@ Partial Class AMBLegajos
     Friend WithEvents cmbEstaII As System.Windows.Forms.ComboBox
     Friend WithEvents cmbEstaI As System.Windows.Forms.ComboBox
     Friend WithEvents Label26 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox10 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox9 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbEstaX As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbEstaIX As System.Windows.Forms.ComboBox
     Friend WithEvents txtEstadoX As System.Windows.Forms.TextBox
     Friend WithEvents txtEstadoV As System.Windows.Forms.TextBox
     Friend WithEvents txtEstadoIX As System.Windows.Forms.TextBox
@@ -2141,13 +2303,7 @@ Partial Class AMBLegajos
     Friend WithEvents txtEstadoVI As System.Windows.Forms.TextBox
     Friend WithEvents txtEstadoI As System.Windows.Forms.TextBox
     Friend WithEvents Label27 As System.Windows.Forms.Label
-    Friend WithEvents dgvConocimientos As System.Windows.Forms.DataGridView
     Friend WithEvents dgvCursosRealizados As System.Windows.Forms.DataGridView
-    Friend WithEvents Tema As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DescripcionTema As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TipoNecesidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EstadoTarea As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents ObservacionTema As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TemaRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescripcionRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents HorasRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2155,11 +2311,28 @@ Partial Class AMBLegajos
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ObservacionesRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnObservaciones As System.Windows.Forms.Button
-    Friend WithEvents GrupoObservaciones As System.Windows.Forms.Panel
+    Friend WithEvents GrupoObservacionesII As System.Windows.Forms.Panel
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents btnCerrarObservaciones As System.Windows.Forms.Button
-    Friend WithEvents TextBox32 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox31 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox30 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox33 As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservaII3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservaII2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservaII1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservaII4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservaII5 As System.Windows.Forms.TextBox
+    Friend WithEvents GrupoObservacionesI As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnCerrarObservacionesI As System.Windows.Forms.Button
+    Friend WithEvents txtObservaI5 As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservaI4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservaI3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservaI2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtObservaI1 As System.Windows.Forms.TextBox
+    Friend WithEvents AtencionNoActualizado As System.Windows.Forms.GroupBox
+    Friend WithEvents Label28 As System.Windows.Forms.Label
+    Friend WithEvents dgvConocimientos As System.Windows.Forms.DataGridView
+    Friend WithEvents Tema As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescripcionTema As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoNecesidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EstadoTema As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents ObservacionTema As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
