@@ -7,6 +7,11 @@ Public Class AMBLegajos
 
     Private WClavesLegajos(1000) As String
 
+    '
+    '   DATATABLES PARA FILTRAR DINÁMICAMENTE.
+    '
+    Private DT_Cursos As New DataTable
+
     Private Sub AMBLegajos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         TabControl1.SelectTab(0)
@@ -703,7 +708,7 @@ Public Class AMBLegajos
         txtTema_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
-    Private Sub txtDescripcion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyDown
+    Private Sub txtDescripcion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyDown, txtFiltroCurso.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtDescripcion.Text) = "" Then : Exit Sub : End If
@@ -1438,7 +1443,7 @@ Public Class AMBLegajos
                     WVersion = IIf(IsDBNull(.Item("Version")), "", .Item("Version"))
                     WFIngreso = IIf(IsDBNull(.Item("FIngreso")), "", .Item("FIngreso"))
                     WFechaEgreso = IIf(IsDBNull(.Item("Fegreso")), "00/00/0000", .Item("Fegreso"))
-                    WPerfil = IIf(IsDBNull(.Item("Perfil")), "", .Item("Perfil"))
+                    WPerfil = IIf(IsDBNull(.Item("Perfil")), "0", .Item("Perfil"))
                     WEstadoI = IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
                     WEstadoII = IIf(IsDBNull(.Item("EstadoII")), "", .Item("EstadoII"))
                     WEstadoIII = IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII"))
@@ -1541,25 +1546,109 @@ Public Class AMBLegajos
 
             _CargarPerfil()
 
+
+            If Val(WPerfil) <> 0 Then
+                _CargarConocimientos()
+            End If
+
         Else
 
             txtPerfilVersion.Text = WPerfilVersion
 
             _CargarPerfilSegunVersion()
 
+
+            If Val(WPerfil) <> 0 Then
+                _CargarConocimientosSegunVersion()
+            End If
+
         End If
 
-        If Val(WPerfil) <> 0 Then
-            _CargarConocimientos()
-        End If
+        '
+        ' CARGAMOS LOS CURSOS REALIZADOS.
+        '
+        _CargarCursosRealizados()
+
 
     End Sub
 
-    Private Sub _CargarConocimientos()
+    Private Sub _AsignarCurso(ByVal dt As DataTable)
+        If IsNothing(dt) Then : Exit Sub : End If
+
+        Dim WCurso, WDescriCurso, WRealizado, WAnio, WObservaciones, WHoras, WRowIndex
+
+        For Each row As DataRow In dt.Rows
+
+            With row
+
+                WCurso = .Item("Curso")
+                WDescriCurso = .Item("Descripcion")
+                WRealizado = .Item("Realizado")
+                WAnio = .Item("Ano")
+                WObservaciones = .Item("ObservacionesII")
+                WHoras = .Item("Horas")
+
+            End With
+
+            WRowIndex = dgvCursosRealizados.Rows.Add
+
+            With dgvCursosRealizados.Rows(WRowIndex)
+
+                .Cells("TemaRealizado").Value = Trim(WCurso)
+                .Cells("DescripcionRealizado").Value = Trim(WDescriCurso)
+                .Cells("Realizado").Value = Trim(WRealizado)
+                .Cells("HorasRealizado").Value = Helper.formatonumerico(WHoras)
+                .Cells("AnioRealizado").Value = Trim(WAnio)
+                .Cells("ObservacionesRealizado").Value = Trim(WObservaciones)
+
+            End With
+        Next
+
+    End Sub
+
+    Private Sub _CargarCursosRealizados()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT cr.Curso, c.Descripcion, cr.Horas, cr.Realizado, cr.Ano, cr.ObservacionesII FROM Cronograma as cr, Curso as c WHERE cr.Legajo = '" & Trim(txtLegajo.Text) & "' AND cr.Realizado <> 0 AND cr.Curso = c.Codigo")
+        Dim dr As SqlDataReader
+
+        Try
+            
+            dgvCursosRealizados.Rows.Clear()
+            DT_Cursos.Rows.Clear()
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                DT_Cursos.Load(dr)
+
+                _AsignarCurso(DT_Cursos)
+                
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los cursos realizados desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _CargarConocimientosSegunVersion()
         If Trim(txtPerfil.Text) = "" Then : Exit Sub : End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Legajo.Curso, Legajo.EstaCurso as EstaCurso, Tarea.NecesariaCurso, Tarea.DeseableCurso, Curso.Descripcion FROM Legajo, Tarea, Curso WHERE Legajo.Codigo = '" & Trim(txtLegajo.Text) & "' AND Legajo.Curso = Tarea.Curso AND Legajo.Perfil = Tarea.Codigo AND Legajo.Curso = Curso.Codigo ORDER BY Legajo.Curso")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Legajo.Curso, Legajo.EstaCurso as EstaCurso, TareaVersion.NecesariaCurso, TareaVersion.DeseableCurso, Curso.Descripcion FROM Legajo, TareaVersion, Curso WHERE Legajo.Codigo = '" & Trim(txtLegajo.Text) & "' AND TareaVersion.Version = '" & Val(txtPerfilVersion.Text) & "' AND Legajo.Curso = Tarea.Curso AND Legajo.Perfil = TareaVersion.Codigo AND Legajo.Curso = Curso.Codigo ORDER BY Legajo.Curso")
         Dim dr As SqlDataReader
         Dim WRowIndex, WEstaCurso, WCurso, WDescriCurso, WNecesario, WDeseable
         Dim WEstados() = {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."}
@@ -1574,7 +1663,7 @@ Public Class AMBLegajos
             WDescriCurso = ""
             WNecesario = ""
             WDeseable = ""
-            
+
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
             cm.Connection = cn
@@ -1620,7 +1709,85 @@ Public Class AMBLegajos
             End If
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Throw New Exception("Hubo un problema al querer consultar la informacionde los conocimientos desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _CargarConocimientos()
+        If Trim(txtPerfil.Text) = "" Then : Exit Sub : End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Legajo.Curso, Legajo.EstaCurso as EstaCurso, Tarea.NecesariaCurso, Tarea.DeseableCurso, Curso.Descripcion FROM Legajo, Tarea, Curso WHERE Legajo.Codigo = '" & Trim(txtLegajo.Text) & "' AND Legajo.Curso = Tarea.Curso AND Legajo.Perfil = Tarea.Codigo AND Legajo.Curso = Curso.Codigo ORDER BY Legajo.Curso")
+        Dim dr As SqlDataReader
+        Dim WRowIndex, WEstaCurso, WCurso, WDescriCurso, WNecesario, WDeseable
+        Dim WEstados() = {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."}
+
+        Try
+            dgvConocimientos.Rows.Clear()
+
+            WRowIndex = 0
+
+            WEstaCurso = 0
+            WCurso = ""
+            WDescriCurso = ""
+            WNecesario = ""
+            WDeseable = ""
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+
+                Do While dr.Read()
+
+                    WEstaCurso = 0
+                    WCurso = ""
+                    WDescriCurso = ""
+                    WNecesario = ""
+                    WDeseable = ""
+
+                    WCurso = IIf(IsDBNull(dr.Item("Curso")), "", dr.Item("Curso"))
+                    WDescriCurso = IIf(IsDBNull(dr.Item("Descripcion")), "", dr.Item("Descripcion"))
+                    WNecesario = IIf(IsDBNull(dr.Item("NecesariaCurso")), "", dr.Item("NecesariaCurso"))
+                    WDeseable = IIf(IsDBNull(dr.Item("DeseableCurso")), "", dr.Item("DeseableCurso"))
+                    WEstaCurso = IIf(IsDBNull(dr.Item("EstaCurso")), "", dr.Item("EstaCurso"))
+
+                    WRowIndex = dgvConocimientos.Rows.Add
+
+                    With dgvConocimientos.Rows(WRowIndex)
+
+                        .Cells("Tema").Value = Trim(WCurso)
+                        .Cells("DescripcionTema").Value = Trim(WDescriCurso)
+                        .Cells("EstadoTema").Value = WEstados(Val(WEstaCurso))
+
+                        If UCase(Trim(WNecesario)) = "X" Then
+                            .Cells("TipoNecesidad").Value = "Necesario"
+                        ElseIf UCase(Trim(WDeseable)) = "X" Then
+                            .Cells("TipoNecesidad").Value = "Deseable"
+                        Else
+                            .Cells("TipoNecesidad").Value = ""
+                        End If
+
+                    End With
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la informacionde los conocimientos desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -1655,5 +1822,36 @@ Public Class AMBLegajos
 
     Private Sub btnCerrarObservaciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarObservaciones.Click
         GrupoObservacionesII.Visible = False
+    End Sub
+
+    Private Sub cmbFiltroCurso_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFiltroCurso.SelectedIndexChanged
+
+        Select Case cmbFiltroCurso.SelectedIndex
+            Case 1
+                GrupoDesdeHasta.Visible = False
+                txtFiltroCurso.Text = ""
+                txtFiltroCurso.Focus()
+            Case 2, 3
+                GrupoDesdeHasta.Visible = True
+                cmbDesdeCurso.Focus()
+                cmbDesdeCurso.DroppedDown = True
+            Case Else
+                Exit Sub
+        End Select
+
+    End Sub
+
+    Private Sub cmbDesdeCurso_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbDesdeCurso.DropDownClosed
+        cmbHastaCurso.Focus()
+        cmbHastaCurso.DroppedDown = True
+    End Sub
+
+    Private Sub cmbHastaCurso_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHastaCurso.DropDownClosed
+        If cmbHastaCurso.SelectedValue Is Nothing OrElse cmbDesdeCurso.SelectedValue Is Nothing Then : Exit Sub : End If
+        If cmbHastaCurso.SelectedValue < cmbDesdeCurso.SelectedValue Then
+            MsgBox("El valor debe ser posterior al valor 'Desde'")
+            cmbHastaCurso.Focus()
+            cmbHastaCurso.DroppedDown = True
+        End If
     End Sub
 End Class

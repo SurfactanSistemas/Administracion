@@ -23,7 +23,7 @@ Partial Class AMBLegajos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -144,12 +144,6 @@ Partial Class AMBLegajos
         Me.txtObservaI1 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvCursosRealizados = New System.Windows.Forms.DataGridView()
-        Me.TemaRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HorasRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Realizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.txtFechaEgreso = New System.Windows.Forms.MaskedTextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -187,6 +181,20 @@ Partial Class AMBLegajos
         Me.DescripcionTema = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tema = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvConocimientos = New System.Windows.Forms.DataGridView()
+        Me.TemaRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HorasRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Realizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AnioRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesRealizado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.cmbFiltroCurso = New System.Windows.Forms.ComboBox()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.cmbDesdeCurso = New System.Windows.Forms.ComboBox()
+        Me.cmbHastaCurso = New System.Windows.Forms.ComboBox()
+        Me.GrupoDesdeHasta = New System.Windows.Forms.Panel()
+        Me.txtFiltroCurso = New System.Windows.Forms.TextBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -211,6 +219,7 @@ Partial Class AMBLegajos
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.dgvConocimientos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GrupoDesdeHasta.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -1679,7 +1688,11 @@ Partial Class AMBLegajos
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabPage3.Controls.Add(Me.GrupoDesdeHasta)
+        Me.TabPage3.Controls.Add(Me.cmbFiltroCurso)
         Me.TabPage3.Controls.Add(Me.dgvCursosRealizados)
+        Me.TabPage3.Controls.Add(Me.Label29)
+        Me.TabPage3.Controls.Add(Me.txtFiltroCurso)
         Me.TabPage3.Location = New System.Drawing.Point(4, 34)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Size = New System.Drawing.Size(874, 425)
@@ -1691,50 +1704,12 @@ Partial Class AMBLegajos
         Me.dgvCursosRealizados.AllowUserToAddRows = False
         Me.dgvCursosRealizados.AllowUserToDeleteRows = False
         Me.dgvCursosRealizados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvCursosRealizados.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TemaRealizado, Me.DescripcionRealizado, Me.HorasRealizado, Me.Realizado, Me.Fecha, Me.ObservacionesRealizado})
-        Me.dgvCursosRealizados.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvCursosRealizados.Location = New System.Drawing.Point(0, 0)
+        Me.dgvCursosRealizados.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TemaRealizado, Me.DescripcionRealizado, Me.HorasRealizado, Me.Realizado, Me.AnioRealizado, Me.ObservacionesRealizado})
+        Me.dgvCursosRealizados.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.dgvCursosRealizados.Location = New System.Drawing.Point(0, 41)
         Me.dgvCursosRealizados.Name = "dgvCursosRealizados"
-        Me.dgvCursosRealizados.Size = New System.Drawing.Size(874, 425)
+        Me.dgvCursosRealizados.Size = New System.Drawing.Size(874, 384)
         Me.dgvCursosRealizados.TabIndex = 1
-        '
-        'TemaRealizado
-        '
-        Me.TemaRealizado.HeaderText = "Tema"
-        Me.TemaRealizado.Name = "TemaRealizado"
-        Me.TemaRealizado.ReadOnly = True
-        '
-        'DescripcionRealizado
-        '
-        Me.DescripcionRealizado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionRealizado.HeaderText = "Descripción"
-        Me.DescripcionRealizado.Name = "DescripcionRealizado"
-        Me.DescripcionRealizado.ReadOnly = True
-        '
-        'HorasRealizado
-        '
-        Me.HorasRealizado.HeaderText = "Cant. Hs"
-        Me.HorasRealizado.Name = "HorasRealizado"
-        Me.HorasRealizado.ReadOnly = True
-        '
-        'Realizado
-        '
-        Me.Realizado.HeaderText = "Realizado"
-        Me.Realizado.Name = "Realizado"
-        Me.Realizado.ReadOnly = True
-        '
-        'Fecha
-        '
-        Me.Fecha.HeaderText = "Año"
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        '
-        'ObservacionesRealizado
-        '
-        Me.ObservacionesRealizado.HeaderText = "Observaciones"
-        Me.ObservacionesRealizado.Name = "ObservacionesRealizado"
-        Me.ObservacionesRealizado.ReadOnly = True
-        Me.ObservacionesRealizado.Width = 150
         '
         'GroupBox4
         '
@@ -2078,10 +2053,10 @@ Partial Class AMBLegajos
         'EstadoTema
         '
         Me.EstadoTema.AutoComplete = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Window
-        Me.EstadoTema.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Window
+        Me.EstadoTema.DefaultCellStyle = DataGridViewCellStyle4
         Me.EstadoTema.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
         Me.EstadoTema.HeaderText = "Estado"
         Me.EstadoTema.Items.AddRange(New Object() {"", "Exede", "Cumple", "Reforzar", "En Entrenamiento", "No Cumple", "No Aplica", "No Evalua", "Cumple Act."})
@@ -2125,6 +2100,124 @@ Partial Class AMBLegajos
         Me.dgvConocimientos.Size = New System.Drawing.Size(868, 419)
         Me.dgvConocimientos.TabIndex = 0
         '
+        'TemaRealizado
+        '
+        Me.TemaRealizado.HeaderText = "Tema"
+        Me.TemaRealizado.Name = "TemaRealizado"
+        Me.TemaRealizado.ReadOnly = True
+        '
+        'DescripcionRealizado
+        '
+        Me.DescripcionRealizado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescripcionRealizado.HeaderText = "Descripción"
+        Me.DescripcionRealizado.Name = "DescripcionRealizado"
+        Me.DescripcionRealizado.ReadOnly = True
+        '
+        'HorasRealizado
+        '
+        Me.HorasRealizado.HeaderText = "Cant. Hs"
+        Me.HorasRealizado.Name = "HorasRealizado"
+        Me.HorasRealizado.ReadOnly = True
+        '
+        'Realizado
+        '
+        Me.Realizado.HeaderText = "Realizado"
+        Me.Realizado.Name = "Realizado"
+        Me.Realizado.ReadOnly = True
+        '
+        'AnioRealizado
+        '
+        Me.AnioRealizado.HeaderText = "Año"
+        Me.AnioRealizado.Name = "AnioRealizado"
+        Me.AnioRealizado.ReadOnly = True
+        '
+        'ObservacionesRealizado
+        '
+        Me.ObservacionesRealizado.HeaderText = "Observaciones"
+        Me.ObservacionesRealizado.Name = "ObservacionesRealizado"
+        Me.ObservacionesRealizado.ReadOnly = True
+        Me.ObservacionesRealizado.Width = 150
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label29.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label29.Location = New System.Drawing.Point(177, 15)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(66, 13)
+        Me.Label29.TabIndex = 0
+        Me.Label29.Text = "Filtrar Por:"
+        '
+        'cmbFiltroCurso
+        '
+        Me.cmbFiltroCurso.FormattingEnabled = True
+        Me.cmbFiltroCurso.Items.AddRange(New Object() {"", "Descripcion Curso", "Curso", "Fecha"})
+        Me.cmbFiltroCurso.Location = New System.Drawing.Point(247, 11)
+        Me.cmbFiltroCurso.Name = "cmbFiltroCurso"
+        Me.cmbFiltroCurso.Size = New System.Drawing.Size(101, 21)
+        Me.cmbFiltroCurso.TabIndex = 2
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label30.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label30.Location = New System.Drawing.Point(18, 7)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(47, 13)
+        Me.Label30.TabIndex = 0
+        Me.Label30.Text = "Desde:"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label31.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label31.Location = New System.Drawing.Point(174, 7)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(44, 13)
+        Me.Label31.TabIndex = 0
+        Me.Label31.Text = "Hasta:"
+        '
+        'cmbDesdeCurso
+        '
+        Me.cmbDesdeCurso.FormattingEnabled = True
+        Me.cmbDesdeCurso.Location = New System.Drawing.Point(69, 3)
+        Me.cmbDesdeCurso.Name = "cmbDesdeCurso"
+        Me.cmbDesdeCurso.Size = New System.Drawing.Size(101, 21)
+        Me.cmbDesdeCurso.TabIndex = 2
+        '
+        'cmbHastaCurso
+        '
+        Me.cmbHastaCurso.FormattingEnabled = True
+        Me.cmbHastaCurso.Location = New System.Drawing.Point(222, 3)
+        Me.cmbHastaCurso.Name = "cmbHastaCurso"
+        Me.cmbHastaCurso.Size = New System.Drawing.Size(101, 21)
+        Me.cmbHastaCurso.TabIndex = 2
+        '
+        'GrupoDesdeHasta
+        '
+        Me.GrupoDesdeHasta.Controls.Add(Me.cmbHastaCurso)
+        Me.GrupoDesdeHasta.Controls.Add(Me.cmbDesdeCurso)
+        Me.GrupoDesdeHasta.Controls.Add(Me.Label31)
+        Me.GrupoDesdeHasta.Controls.Add(Me.Label30)
+        Me.GrupoDesdeHasta.Location = New System.Drawing.Point(366, 8)
+        Me.GrupoDesdeHasta.Name = "GrupoDesdeHasta"
+        Me.GrupoDesdeHasta.Size = New System.Drawing.Size(354, 27)
+        Me.GrupoDesdeHasta.TabIndex = 3
+        Me.GrupoDesdeHasta.Visible = False
+        '
+        'txtFiltroCurso
+        '
+        Me.txtFiltroCurso.BackColor = System.Drawing.SystemColors.Window
+        Me.txtFiltroCurso.Location = New System.Drawing.Point(366, 11)
+        Me.txtFiltroCurso.MaxLength = 90
+        Me.txtFiltroCurso.Name = "txtFiltroCurso"
+        Me.txtFiltroCurso.ReadOnly = True
+        Me.txtFiltroCurso.Size = New System.Drawing.Size(354, 20)
+        Me.txtFiltroCurso.TabIndex = 1
+        '
         'AMBLegajos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2157,6 +2250,7 @@ Partial Class AMBLegajos
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         CType(Me.dgvCursosRealizados, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
@@ -2169,6 +2263,8 @@ Partial Class AMBLegajos
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.dgvConocimientos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GrupoDesdeHasta.ResumeLayout(False)
+        Me.GrupoDesdeHasta.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2304,12 +2400,6 @@ Partial Class AMBLegajos
     Friend WithEvents txtEstadoI As System.Windows.Forms.TextBox
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents dgvCursosRealizados As System.Windows.Forms.DataGridView
-    Friend WithEvents TemaRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DescripcionRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents HorasRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Realizado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ObservacionesRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnObservaciones As System.Windows.Forms.Button
     Friend WithEvents GrupoObservacionesII As System.Windows.Forms.Panel
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
@@ -2335,4 +2425,18 @@ Partial Class AMBLegajos
     Friend WithEvents TipoNecesidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EstadoTema As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents ObservacionTema As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TemaRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescripcionRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents HorasRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Realizado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AnioRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ObservacionesRealizado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label29 As System.Windows.Forms.Label
+    Friend WithEvents cmbHastaCurso As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbDesdeCurso As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbFiltroCurso As System.Windows.Forms.ComboBox
+    Friend WithEvents Label31 As System.Windows.Forms.Label
+    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents GrupoDesdeHasta As System.Windows.Forms.Panel
+    Friend WithEvents txtFiltroCurso As System.Windows.Forms.TextBox
 End Class
