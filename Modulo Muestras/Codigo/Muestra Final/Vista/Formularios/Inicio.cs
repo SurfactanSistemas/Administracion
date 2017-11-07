@@ -589,7 +589,7 @@ namespace Vista
 
                     if (DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YQ"))
                     {
-                        if (Double.Parse(cant) >= 20)
+                        if (Double.Parse(cant.Replace(".", ",")) >= 20)
                         {
                             int Lote1 = int.Parse(CS.BuscarLote1(cod, pedido));
 
