@@ -2333,4 +2333,15 @@ Public Class Compras
     Private Sub cmbFormaPago_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFormaPago.Enter
         cmbFormaPago.DroppedDown = True
     End Sub
+
+    Private Sub gridAsientos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridAsientos.RowHeaderMouseDoubleClick
+        Dim row As DataGridViewRow = gridAsientos.Rows(e.RowIndex)
+
+        If row.IsNewRow Then : Exit Sub : End If
+
+        If MsgBox("¿Seguro que quiere eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then : Exit Sub : End If
+
+        gridAsientos.Rows.Remove(row)
+
+    End Sub
 End Class

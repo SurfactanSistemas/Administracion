@@ -37,6 +37,7 @@ Partial Class Compras
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ckChequeRechazado = New System.Windows.Forms.CheckBox()
         Me.CustomButton1 = New Administracion.CustomButton()
         Me.txtVtoCAI = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaIVA = New System.Windows.Forms.MaskedTextBox()
@@ -97,7 +98,6 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
-        Me.ckChequeRechazado = New System.Windows.Forms.CheckBox()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -291,6 +291,18 @@ Partial Class Compras
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(814, 551)
         Me.Panel2.TabIndex = 63
+        '
+        'ckChequeRechazado
+        '
+        Me.ckChequeRechazado.AutoSize = True
+        Me.ckChequeRechazado.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.ckChequeRechazado.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckChequeRechazado.Location = New System.Drawing.Point(464, 194)
+        Me.ckChequeRechazado.Name = "ckChequeRechazado"
+        Me.ckChequeRechazado.Size = New System.Drawing.Size(144, 22)
+        Me.ckChequeRechazado.TabIndex = 65
+        Me.ckChequeRechazado.Text = "Cheque Rechazado"
+        Me.ckChequeRechazado.UseVisualStyleBackColor = True
         '
         'CustomButton1
         '
@@ -1106,18 +1118,6 @@ Partial Class Compras
         Me.btnLimpiar.TabIndex = 55
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'ckChequeRechazado
-        '
-        Me.ckChequeRechazado.AutoSize = True
-        Me.ckChequeRechazado.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.ckChequeRechazado.ForeColor = System.Drawing.SystemColors.Control
-        Me.ckChequeRechazado.Location = New System.Drawing.Point(464, 194)
-        Me.ckChequeRechazado.Name = "ckChequeRechazado"
-        Me.ckChequeRechazado.Size = New System.Drawing.Size(144, 22)
-        Me.ckChequeRechazado.TabIndex = 65
-        Me.ckChequeRechazado.Text = "Cheque Rechazado"
-        Me.ckChequeRechazado.UseVisualStyleBackColor = True
         '
         'Compras
         '
