@@ -696,10 +696,16 @@ Public Class HistorialProforma
                 If WParrafosAGrabar(i) <> "" Then
 
                     ' Redondeamos el párrafo a un multiplo de 100 (max de caracteres por linea.)
-                    WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), 100 - (WParrafosAGrabar(i).Length Mod 100))
+                    If WParrafosAGrabar(i).Length <= 100 Then
+                        WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), 100) ' - (WParrafosAGrabar(i).Length Mod 100))
+                    Else
+                        WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), WParrafosAGrabar(i).Length + (100 - (WParrafosAGrabar(i).Length Mod 100)))
+                    End If
 
                     ' Calculamos el numero de filas a grabar.
+
                     ReDim WFilasAGrabar((WParrafosAGrabar(i).Length / 100))
+
 
                     ' Por cada fila, cortamos trozos del parrafo cada 100 caracteres.
                     For x = 0 To WFilasAGrabar.Length - 1
@@ -1514,7 +1520,11 @@ Public Class HistorialProforma
                 If WParrafosAGrabar(i) <> "" And WParrafosAGrabar(i) <> vbLf Then
 
                     ' Redondeamos el párrafo a un multiplo de 100 (max de caracteres por linea.)
-                    WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), 100 - (WParrafosAGrabar(i).Length Mod 100))
+                    If WParrafosAGrabar(i).Length <= 100 Then
+                        WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), 100)
+                    Else
+                        WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), WParrafosAGrabar(i).Length + (100 - (WParrafosAGrabar(i).Length Mod 100)))
+                    End If
 
                     ' Calculamos el numero de filas a grabar.
                     ReDim WFilasAGrabar((WParrafosAGrabar(i).Length / 100))
