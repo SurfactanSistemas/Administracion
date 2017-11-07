@@ -25,8 +25,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.components = New System.ComponentModel.Container()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.GRilla = New System.Windows.Forms.DataGridView()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -46,6 +44,8 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -60,29 +60,18 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.txtFechaEmision.Size = New System.Drawing.Size(100, 20)
         Me.txtFechaEmision.TabIndex = 48
         Me.txtFechaEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtFechaEmision, "Fecha de Pago. Si hubiesen proveedores cargados se traeran automáticamente.")
         '
         'GRilla
         '
         Me.GRilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Razon})
         Me.GRilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.GRilla.Location = New System.Drawing.Point(40, 122)
+        Me.GRilla.Location = New System.Drawing.Point(16, 64)
         Me.GRilla.Name = "GRilla"
-        Me.GRilla.Size = New System.Drawing.Size(504, 265)
+        Me.GRilla.Size = New System.Drawing.Size(557, 284)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
-        '
-        'Codigo
-        '
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.MaxInputLength = 11
-        Me.Codigo.Name = "Codigo"
-        '
-        'Razon
-        '
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.Width = 350
         '
         'Panel1
         '
@@ -124,6 +113,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Panel2.Controls.Add(Me.txtFechaEmision)
         Me.Panel2.Controls.Add(Me.CustomLabel1)
         Me.Panel2.Controls.Add(Me.txtDesdeProveedor)
+        Me.Panel2.Controls.Add(Me.GRilla)
         Me.Panel2.Location = New System.Drawing.Point(0, 49)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(589, 359)
@@ -286,7 +276,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
         Me.CustomLabel3.TabIndex = 47
-        Me.CustomLabel3.Text = "Fecha Emision"
+        Me.CustomLabel3.Text = "Fecha de Pago"
         '
         'CustomLabel1
         '
@@ -351,6 +341,18 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.lstAyuda_Filtrada.TabIndex = 62
         Me.lstAyuda_Filtrada.Visible = False
         '
+        'Codigo
+        '
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.MaxInputLength = 11
+        Me.Codigo.Name = "Codigo"
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        '
         'ListadoCuentaCorrienteProveedoresSelectivo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -364,7 +366,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnCancela)
         Me.Controls.Add(Me.txtAyuda)
-        Me.Controls.Add(Me.GRilla)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.lstAyuda)

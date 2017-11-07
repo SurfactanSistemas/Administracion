@@ -31,33 +31,37 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCodProveedor = New Administracion.CustomTextBox()
-        Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.CustomLabel2 = New Administracion.CustomLabel()
-        Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFechaPago = New System.Windows.Forms.MaskedTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstFiltrada = New Administracion.CustomListBox()
+        Me.btnSalir = New Administracion.CustomButton()
+        Me.btnImprimir = New Administracion.CustomButton()
         Me.btnLimpiarTodo = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnAcepta = New Administracion.CustomButton()
-        Me.btnImprimir = New Administracion.CustomButton()
-        Me.btnSalir = New Administracion.CustomButton()
-        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
+        Me.CustomLabel2 = New Administracion.CustomLabel()
+        Me.CustomLabel3 = New Administracion.CustomLabel()
+        Me.txtCodProveedor = New Administracion.CustomTextBox()
+        Me.CustomLabel4 = New Administracion.CustomLabel()
+        Me.CustomLabel1 = New Administracion.CustomLabel()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRilla
         '
         Me.GRilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Razon, Me.Observaciones})
-        Me.GRilla.Location = New System.Drawing.Point(40, 104)
+        Me.GRilla.Location = New System.Drawing.Point(12, 129)
         Me.GRilla.Name = "GRilla"
-        Me.GRilla.Size = New System.Drawing.Size(593, 225)
+        Me.GRilla.Size = New System.Drawing.Size(649, 225)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
         '
@@ -68,10 +72,10 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         '
         'Razon
         '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Razon.HeaderText = "Razon Social"
         Me.Razon.Name = "Razon"
         Me.Razon.ReadOnly = True
-        Me.Razon.Width = 300
         '
         'Observaciones
         '
@@ -117,90 +121,124 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.txtHasta)
-        Me.Panel2.Controls.Add(Me.txtDesde)
+        Me.Panel2.Controls.Add(Me.GroupBox1)
+        Me.Panel2.Controls.Add(Me.txtFechaPago)
         Me.Panel2.Controls.Add(Me.txtCodProveedor)
-        Me.Panel2.Controls.Add(Me.CustomLabel3)
-        Me.Panel2.Controls.Add(Me.CustomLabel2)
+        Me.Panel2.Controls.Add(Me.CustomLabel4)
         Me.Panel2.Controls.Add(Me.CustomLabel1)
         Me.Panel2.Location = New System.Drawing.Point(0, 49)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(675, 313)
         Me.Panel2.TabIndex = 60
         '
-        'txtHasta
+        'GroupBox1
         '
-        Me.txtHasta.Location = New System.Drawing.Point(522, 16)
-        Me.txtHasta.Mask = "00/00/0000"
-        Me.txtHasta.Name = "txtHasta"
-        Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtHasta.Size = New System.Drawing.Size(83, 20)
-        Me.txtHasta.TabIndex = 51
-        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.GroupBox1.Controls.Add(Me.txtDesde)
+        Me.GroupBox1.Controls.Add(Me.txtHasta)
+        Me.GroupBox1.Controls.Add(Me.CustomLabel2)
+        Me.GroupBox1.Controls.Add(Me.CustomLabel3)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox1.Location = New System.Drawing.Point(337, 11)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(285, 62)
+        Me.GroupBox1.TabIndex = 52
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Periodo"
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(389, 16)
+        Me.txtDesde.BackColor = System.Drawing.SystemColors.Window
+        Me.txtDesde.Enabled = False
+        Me.txtDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtDesde.Location = New System.Drawing.Point(58, 23)
         Me.txtDesde.Mask = "00/00/0000"
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtDesde.ReadOnly = True
         Me.txtDesde.Size = New System.Drawing.Size(83, 20)
         Me.txtDesde.TabIndex = 51
         Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtDesde, "Fecha calculada automáticamente con respecto al Miércoles indicado")
         '
-        'txtCodProveedor
+        'txtHasta
         '
-        Me.txtCodProveedor.Cleanable = False
-        Me.txtCodProveedor.Empty = True
-        Me.txtCodProveedor.EnterIndex = -1
-        Me.txtCodProveedor.LabelAssociationKey = -1
-        Me.txtCodProveedor.Location = New System.Drawing.Point(155, 16)
-        Me.txtCodProveedor.MaxLength = 11
-        Me.txtCodProveedor.Name = "txtCodProveedor"
-        Me.txtCodProveedor.Size = New System.Drawing.Size(140, 20)
-        Me.txtCodProveedor.TabIndex = 49
-        Me.txtCodProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ToolTip1.SetToolTip(Me.txtCodProveedor, "Doble Click: Abrir Consulta de Proveedores")
-        Me.txtCodProveedor.Validator = Administracion.ValidatorType.None
+        Me.txtHasta.BackColor = System.Drawing.SystemColors.Window
+        Me.txtHasta.Enabled = False
+        Me.txtHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtHasta.Location = New System.Drawing.Point(178, 23)
+        Me.txtHasta.Mask = "00/00/0000"
+        Me.txtHasta.Name = "txtHasta"
+        Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtHasta.ReadOnly = True
+        Me.txtHasta.Size = New System.Drawing.Size(83, 20)
+        Me.txtHasta.TabIndex = 51
+        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtHasta, "Fecha calculada automáticamente con respecto al Miércoles indicado")
         '
-        'CustomLabel3
+        'txtFechaPago
         '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel3.ControlAssociationKey = -1
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(486, 17)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(21, 18)
-        Me.CustomLabel3.TabIndex = 50
-        Me.CustomLabel3.Text = "Al"
+        Me.txtFechaPago.Location = New System.Drawing.Point(178, 42)
+        Me.txtFechaPago.Mask = "00/00/0000"
+        Me.txtFechaPago.Name = "txtFechaPago"
+        Me.txtFechaPago.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaPago.Size = New System.Drawing.Size(83, 20)
+        Me.txtFechaPago.TabIndex = 51
+        Me.txtFechaPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtFechaPago, "Fecha del Miércoles en el cual se realizará el control de Pagos a Proveedores Sel" & _
+                "ectivos")
         '
-        'CustomLabel2
+        'lstFiltrada
         '
-        Me.CustomLabel2.AutoSize = True
-        Me.CustomLabel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel2.ControlAssociationKey = -1
-        Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(324, 17)
-        Me.CustomLabel2.Name = "CustomLabel2"
-        Me.CustomLabel2.Size = New System.Drawing.Size(57, 18)
-        Me.CustomLabel2.TabIndex = 50
-        Me.CustomLabel2.Text = "Periodo"
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(36, 498)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(545, 147)
+        Me.lstFiltrada.TabIndex = 61
+        Me.lstFiltrada.Visible = False
         '
-        'CustomLabel1
+        'btnSalir
         '
-        Me.CustomLabel1.AutoSize = True
-        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(69, 17)
-        Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
-        Me.CustomLabel1.TabIndex = 50
-        Me.CustomLabel1.Text = "Proveedor"
+        Me.btnSalir.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnSalir.Cleanable = False
+        Me.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSalir.EnterIndex = -1
+        Me.btnSalir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnSalir.FlatAppearance.BorderSize = 0
+        Me.btnSalir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.LabelAssociationKey = -1
+        Me.btnSalir.Location = New System.Drawing.Point(412, 376)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(87, 40)
+        Me.btnSalir.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnSalir, "Salir del Formulario")
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
+        'btnImprimir
+        '
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cleanable = False
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.EnterIndex = -1
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.LabelAssociationKey = -1
+        Me.btnImprimir.Location = New System.Drawing.Point(293, 376)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(87, 40)
+        Me.btnImprimir.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Listado de Proveedores Ingresados")
+        Me.btnImprimir.UseVisualStyleBackColor = True
         '
         'btnLimpiarTodo
         '
@@ -215,7 +253,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiarTodo.LabelAssociationKey = -1
-        Me.btnLimpiarTodo.Location = New System.Drawing.Point(264, 375)
+        Me.btnLimpiarTodo.Location = New System.Drawing.Point(531, 376)
         Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
         Me.btnLimpiarTodo.Size = New System.Drawing.Size(87, 40)
         Me.btnLimpiarTodo.TabIndex = 58
@@ -235,7 +273,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(155, 375)
+        Me.btnConsulta.Location = New System.Drawing.Point(174, 376)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(87, 40)
         Me.btnConsulta.TabIndex = 58
@@ -255,64 +293,12 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAcepta.LabelAssociationKey = -1
-        Me.btnAcepta.Location = New System.Drawing.Point(46, 374)
+        Me.btnAcepta.Location = New System.Drawing.Point(55, 376)
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(87, 41)
         Me.btnAcepta.TabIndex = 56
         Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar y Cerrar")
         Me.btnAcepta.UseVisualStyleBackColor = True
-        '
-        'btnImprimir
-        '
-        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
-        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnImprimir.Cleanable = False
-        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnImprimir.EnterIndex = -1
-        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.BorderSize = 0
-        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(373, 376)
-        Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(87, 40)
-        Me.btnImprimir.TabIndex = 58
-        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Listado de Proveedores Ingresados")
-        Me.btnImprimir.UseVisualStyleBackColor = True
-        '
-        'btnSalir
-        '
-        Me.btnSalir.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnSalir.Cleanable = False
-        Me.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnSalir.EnterIndex = -1
-        Me.btnSalir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnSalir.FlatAppearance.BorderSize = 0
-        Me.btnSalir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSalir.LabelAssociationKey = -1
-        Me.btnSalir.Location = New System.Drawing.Point(482, 376)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(87, 40)
-        Me.btnSalir.TabIndex = 58
-        Me.ToolTip1.SetToolTip(Me.btnSalir, "Salir del Formulario")
-        Me.btnSalir.UseVisualStyleBackColor = True
-        '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(36, 498)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(545, 147)
-        Me.lstFiltrada.TabIndex = 61
-        Me.lstFiltrada.Visible = False
         '
         'lstAyuda
         '
@@ -339,6 +325,73 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.txtAyuda.Validator = Administracion.ValidatorType.None
         Me.txtAyuda.Visible = False
         '
+        'CustomLabel2
+        '
+        Me.CustomLabel2.AutoSize = True
+        Me.CustomLabel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel2.ControlAssociationKey = -1
+        Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel2.Location = New System.Drawing.Point(23, 24)
+        Me.CustomLabel2.Name = "CustomLabel2"
+        Me.CustomLabel2.Size = New System.Drawing.Size(29, 18)
+        Me.CustomLabel2.TabIndex = 50
+        Me.CustomLabel2.Text = "Del"
+        '
+        'CustomLabel3
+        '
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel3.ControlAssociationKey = -1
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(151, 24)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(21, 18)
+        Me.CustomLabel3.TabIndex = 50
+        Me.CustomLabel3.Text = "Al"
+        '
+        'txtCodProveedor
+        '
+        Me.txtCodProveedor.Cleanable = False
+        Me.txtCodProveedor.Empty = True
+        Me.txtCodProveedor.EnterIndex = -1
+        Me.txtCodProveedor.LabelAssociationKey = -1
+        Me.txtCodProveedor.Location = New System.Drawing.Point(178, 16)
+        Me.txtCodProveedor.MaxLength = 11
+        Me.txtCodProveedor.Name = "txtCodProveedor"
+        Me.txtCodProveedor.Size = New System.Drawing.Size(154, 20)
+        Me.txtCodProveedor.TabIndex = 49
+        Me.txtCodProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtCodProveedor, "Doble Click: Abrir Consulta de Proveedores")
+        Me.txtCodProveedor.Validator = Administracion.ValidatorType.None
+        '
+        'CustomLabel4
+        '
+        Me.CustomLabel4.AutoSize = True
+        Me.CustomLabel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel4.ControlAssociationKey = -1
+        Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel4.Location = New System.Drawing.Point(53, 43)
+        Me.CustomLabel4.Name = "CustomLabel4"
+        Me.CustomLabel4.Size = New System.Drawing.Size(119, 18)
+        Me.CustomLabel4.TabIndex = 50
+        Me.CustomLabel4.Text = "Para el Miercoles:"
+        '
+        'CustomLabel1
+        '
+        Me.CustomLabel1.AutoSize = True
+        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel1.ControlAssociationKey = -1
+        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel1.Location = New System.Drawing.Point(95, 17)
+        Me.CustomLabel1.Name = "CustomLabel1"
+        Me.CustomLabel1.Size = New System.Drawing.Size(77, 18)
+        Me.CustomLabel1.TabIndex = 50
+        Me.CustomLabel1.Text = "Proveedor:"
+        '
         'ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -363,6 +416,8 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -390,4 +445,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Observaciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtFechaPago As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents CustomLabel4 As Administracion.CustomLabel
 End Class

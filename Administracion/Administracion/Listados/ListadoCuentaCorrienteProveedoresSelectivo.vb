@@ -12,7 +12,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtDesdeProveedor.Text = ""
-        txtFechaEmision.Text = Date.Now.ToString("dd/MM/yyyy")
+        txtFechaEmision.Clear()
         varRenglon = 0
         '_CargarProveedoresPreCargados()
         _Claves.Clear()
@@ -34,18 +34,17 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         'Dim _CargadosHaceMasDeUnaSemana As Integer = 0
         'Dim _FechaLimite As String = _DeterminarFechaLimite()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, FechaOrd FROM ProveedorSelectivo")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, FechaOrd FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
 
         Try
 
+            GRilla.Rows.Clear()
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
-
-                GRilla.Rows.Clear()
 
                 Do While dr.Read()
 
@@ -79,6 +78,15 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         If IsNothing(CampoProveedor) Then
             MsgBox("Proveedor incorrecto")
         Else
+
+
+            If txtFechaEmision.Text.Replace(" ", "").Length < 10 Then
+                MsgBox("Debe indicarse una fecha de Pago antes de cargar un Proveedor.", MsgBoxStyle.Exclamation)
+                txtFechaEmision.Focus()
+                Exit Sub
+            End If
+
+
             varRenglon = GRilla.Rows.Add()
             GRilla.Item(0, varRenglon).Value = CampoProveedor.id
             GRilla.Item(1, varRenglon).Value = CampoProveedor.razonSocial
@@ -137,12 +145,15 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
                 Dim CampoTipoCambio As TipoDeCambio = DAOTipoCambio.buscarTipoCambioPorFechaPago(txtFechaEmision.Text)
                 If IsNothing(CampoTipoCambio) Then
-                    MsgBox("Paridad Inexistente")
-                    txtFechaEmision.Focus()
+                    If txtFechaEmision.Text = Date.Now.ToString("dd/MM/yyyy") Then
+                        MsgBox("Paridad Inexistente")
+                        txtFechaEmision.Focus()
+                        Exit Sub
+                    End If
                 Else
                     varParidadTotal = CampoTipoCambio.paridad
-                    txtDesdeProveedor.Focus()
                 End If
+                txtDesdeProveedor.Focus()
             End If
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True
@@ -954,7 +965,17 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomButton1.Click
-        _CargarProveedoresPreCargados()
+
+        If txtFechaEmision.Text.Replace(" ", "").Length = 10 Then
+            _CargarProveedoresPreCargados()
+        Else
+            MsgBox("Debe indicar una fecha de Pago antes de cargar los Proveedores Guardados.", MsgBoxStyle.Exclamation)
+            txtFechaEmision.Focus()
+            Exit Sub
+        End If
+
+        txtDesdeProveedor.Focus()
+
     End Sub
 
     Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
@@ -974,7 +995,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        txtDesdeProveedor.Focus()
+        'txtDesdeProveedor.Focus()
+        txtFechaEmision.Focus()
     End Sub
 
     Private Function _EsNumero(ByVal keycode As Integer) As Boolean
@@ -1088,4 +1110,16 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
+    Private Sub txtFechaEmision_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaEmision.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaEmision.Text).Replace("/", "") = "" Then : Exit Sub : End If
+
+            CustomButton1.PerformClick()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaEmision.Text = ""
+        End If
+
+    End Sub
 End Class
