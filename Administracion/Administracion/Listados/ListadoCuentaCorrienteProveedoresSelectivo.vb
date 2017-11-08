@@ -726,7 +726,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         End If
 
 
-                        If Val(CCPrv.Proveedor) = 10071006122 Then : Stop : End If
+                        'If Val(CCPrv.Proveedor) = 10071006122 Then : Stop : End If
 
 
                         varRetGan = CaculoRetencionGanancia(varTipoPrv, varAcumulaNeto, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)

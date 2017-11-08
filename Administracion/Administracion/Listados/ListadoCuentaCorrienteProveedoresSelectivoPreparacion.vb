@@ -161,6 +161,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             txtCodProveedor.Focus()
         Else
             If Not _ProveedorYaAgregado(_Proveedor(0)) Then
+
+                If txtFechaPago.Text.Replace(" ", "").Length < 10 Then
+                    MsgBox("Debe colocar la fecha para cual se prepara el listado antes de asignar proveedores al mismo.", MsgBoxStyle.Exclamation)
+                    txtFechaPago.Focus()
+                    Exit Sub
+                End If
+
                 varRenglon = GRilla.Rows.Add()
                 GRilla.Item(0, varRenglon).Value = _Proveedor(0)
                 GRilla.Item(1, varRenglon).Value = _Proveedor(1)
@@ -247,6 +254,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Dim trans As SqlTransaction = Nothing
 
         If GRilla.Rows.Count > 0 Then
+
+            If txtFechaPago.Text.Replace(" ", "").Length < 10 Then
+                Throw New Exception("Debe colocar la fecha para la cual se está preparando el listado.")
+                Exit Sub
+            End If
 
             SQLConnector.conexionSql(cn, cm)
 
