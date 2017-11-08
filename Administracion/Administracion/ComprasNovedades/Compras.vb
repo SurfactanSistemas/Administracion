@@ -56,6 +56,7 @@ Public Class Compras
 
         gridAsientos.Rows.Clear()
         chkSoloIVA.Checked = False
+        ckChequeRechazado.Checked = False
         optCtaCte.Checked = True
         apertura = New Apertura
         esModificacion = False
