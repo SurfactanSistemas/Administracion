@@ -63,7 +63,7 @@ Partial Class ComparacionesMensuales
         'cmbTipoGrafico
         '
         Me.cmbTipoGrafico.FormattingEnabled = True
-        Me.cmbTipoGrafico.Items.AddRange(New Object() {"", "Barras", "Pastel"})
+        Me.cmbTipoGrafico.Items.AddRange(New Object() {"", "Barras", "Pasteles", "Lineas"})
         Me.cmbTipoGrafico.Location = New System.Drawing.Point(411, 17)
         Me.cmbTipoGrafico.Name = "cmbTipoGrafico"
         Me.cmbTipoGrafico.Size = New System.Drawing.Size(142, 21)

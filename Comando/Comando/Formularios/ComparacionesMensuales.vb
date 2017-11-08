@@ -10,6 +10,8 @@ Public Class ComparacionesMensuales
                 PictureBox1.Image = My.Resources.GraficoBarras
             Case 2
                 PictureBox1.Image = My.Resources.GraficoTortas
+            Case 3
+                PictureBox1.Image = My.Resources.GraficoLineas
             Case Else
                 PictureBox1.Image = Nothing
                 Exit Sub
@@ -85,6 +87,8 @@ Public Class ComparacionesMensuales
                         WReporte = New TrimestralValorUnicoBarras
                     Case 2
                         WReporte = New TrimestralValorUnicoTortas
+                    Case 3
+                        WReporte = New TrimestralValorUnicoLineas
                     Case Else
                         Exit Sub
                 End Select

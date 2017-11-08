@@ -137,6 +137,12 @@
       <DependentUpon>ListadoNormal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Mensuales\Valor Unico\TrimestralValorUnicoLineas.vb">
+      <DependentUpon>TrimestralValorUnicoLineas.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\Mensuales\Valor Unico\TrimestralValorUnicoTortas.vb">
       <DependentUpon>TrimestralValorUnicoTortas.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -178,6 +184,10 @@
     <EmbeddedResource Include="Reportes\ListadoNormal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoNormal.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\TrimestralValorUnicoLineas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TrimestralValorUnicoLineas.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\TrimestralValorUnicoTortas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -372,6 +382,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\GraficoTortas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GraficoLineas.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
