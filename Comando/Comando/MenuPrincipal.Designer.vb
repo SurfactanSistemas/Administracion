@@ -23,11 +23,10 @@ Partial Class MenuPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PruebaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ComparaciónDeFamiliasEntreMismosPeriodosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ComparaciónMensualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -40,19 +39,6 @@ Partial Class MenuPrincipal
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
-        'MaestrosToolStripMenuItem
-        '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PruebaToolStripMenuItem, Me.ComparaciónDeFamiliasEntreMismosPeriodosToolStripMenuItem})
-        Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
-        Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
-        Me.MaestrosToolStripMenuItem.Text = "Maestros"
-        '
-        'PruebaToolStripMenuItem
-        '
-        Me.PruebaToolStripMenuItem.Name = "PruebaToolStripMenuItem"
-        Me.PruebaToolStripMenuItem.Size = New System.Drawing.Size(332, 22)
-        Me.PruebaToolStripMenuItem.Text = "Prueba"
-        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CerrarSistemaToolStripMenuItem})
@@ -63,14 +49,21 @@ Partial Class MenuPrincipal
         'CerrarSistemaToolStripMenuItem
         '
         Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
-        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
         '
-        'ComparaciónDeFamiliasEntreMismosPeriodosToolStripMenuItem
+        'MaestrosToolStripMenuItem
         '
-        Me.ComparaciónDeFamiliasEntreMismosPeriodosToolStripMenuItem.Name = "ComparaciónDeFamiliasEntreMismosPeriodosToolStripMenuItem"
-        Me.ComparaciónDeFamiliasEntreMismosPeriodosToolStripMenuItem.Size = New System.Drawing.Size(332, 22)
-        Me.ComparaciónDeFamiliasEntreMismosPeriodosToolStripMenuItem.Text = "Comparación de Familias entre mismos periodos"
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComparaciónMensualToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
+        Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
+        Me.MaestrosToolStripMenuItem.Text = "Maestros"
+        '
+        'ComparaciónMensualToolStripMenuItem
+        '
+        Me.ComparaciónMensualToolStripMenuItem.Name = "ComparaciónMensualToolStripMenuItem"
+        Me.ComparaciónMensualToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.ComparaciónMensualToolStripMenuItem.Text = "Comparación Mensual"
         '
         'MenuPrincipal
         '
@@ -88,10 +81,9 @@ Partial Class MenuPrincipal
 
     End Sub
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
-    Friend WithEvents MaestrosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProcesosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CerrarSistemaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PruebaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ComparaciónDeFamiliasEntreMismosPeriodosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MaestrosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ComparaciónMensualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class VentasMensualTortas
+Public Class MensualValorUnico
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class VentasMensualTortas
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "VentasMensualTortas.rpt"
+            Return "MensualValorUnico.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class VentasMensualTortas
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Comando.VentasMensualTortas.rpt"
+            Return "Comando.MensualValorUnico.rpt"
         End Get
         Set
             'Do nothing
@@ -86,15 +86,23 @@ Public Class VentasMensualTortas
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property ReportFooterSection3() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(4)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
+        Get
+            Return Me.ReportDefinition.Sections(5)
         End Get
     End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedVentasMensualTortas
+Public Class CachedMensualValorUnico
     Inherits Component
     Implements ICachedReport
     
@@ -136,7 +144,7 @@ Public Class CachedVentasMensualTortas
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As VentasMensualTortas = New VentasMensualTortas()
+        Dim rpt As MensualValorUnico = New MensualValorUnico()
         rpt.Site = Me.Site
         Return rpt
     End Function
