@@ -23,10 +23,10 @@ Partial Class MenuPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ComparaciónMensualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -38,19 +38,6 @@ Partial Class MenuPrincipal
         Me.MenuStrip1.Size = New System.Drawing.Size(787, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
-        '
-        'ProcesosToolStripMenuItem
-        '
-        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CerrarSistemaToolStripMenuItem})
-        Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
-        Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
-        Me.ProcesosToolStripMenuItem.Text = "Procesos"
-        '
-        'CerrarSistemaToolStripMenuItem
-        '
-        Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
-        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
         '
         'MaestrosToolStripMenuItem
         '
@@ -65,6 +52,19 @@ Partial Class MenuPrincipal
         Me.ComparaciónMensualToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.ComparaciónMensualToolStripMenuItem.Text = "Comparación Mensual"
         '
+        'ProcesosToolStripMenuItem
+        '
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CerrarSistemaToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
+        Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
+        Me.ProcesosToolStripMenuItem.Text = "Procesos"
+        '
+        'CerrarSistemaToolStripMenuItem
+        '
+        Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
+        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
+        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -73,7 +73,9 @@ Partial Class MenuPrincipal
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "MenuPrincipal"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Menú Principal"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)

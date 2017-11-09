@@ -29,13 +29,23 @@ Partial Class ComparacionesMensuales
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ckVarios = New System.Windows.Forms.CheckBox()
+        Me.ckFazonQuimicos = New System.Windows.Forms.CheckBox()
+        Me.ckFazonFarma = New System.Windows.Forms.CheckBox()
+        Me.ckFazonPellital = New System.Windows.Forms.CheckBox()
+        Me.ckFarma = New System.Windows.Forms.CheckBox()
+        Me.ckColorantes = New System.Windows.Forms.CheckBox()
+        Me.ckQuimicos = New System.Windows.Forms.CheckBox()
+        Me.ckTodas = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnGenerar
         '
-        Me.btnGenerar.Location = New System.Drawing.Point(431, 318)
+        Me.btnGenerar.Location = New System.Drawing.Point(575, 328)
         Me.btnGenerar.Name = "btnGenerar"
         Me.btnGenerar.Size = New System.Drawing.Size(153, 38)
         Me.btnGenerar.TabIndex = 0
@@ -82,9 +92,9 @@ Partial Class ComparacionesMensuales
         '
         Me.GroupBox1.Controls.Add(Me.PictureBox1)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Location = New System.Drawing.Point(35, 69)
+        Me.GroupBox1.Location = New System.Drawing.Point(30, 83)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(548, 232)
+        Me.GroupBox1.Size = New System.Drawing.Size(548, 230)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Vista Previa (Sólo a modo Ilustrativo)"
@@ -98,11 +108,109 @@ Partial Class ComparacionesMensuales
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.ckVarios)
+        Me.GroupBox2.Controls.Add(Me.ckFazonQuimicos)
+        Me.GroupBox2.Controls.Add(Me.ckFazonFarma)
+        Me.GroupBox2.Controls.Add(Me.ckFazonPellital)
+        Me.GroupBox2.Controls.Add(Me.ckFarma)
+        Me.GroupBox2.Controls.Add(Me.ckColorantes)
+        Me.GroupBox2.Controls.Add(Me.ckQuimicos)
+        Me.GroupBox2.Controls.Add(Me.ckTodas)
+        Me.GroupBox2.Location = New System.Drawing.Point(589, 83)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(139, 230)
+        Me.GroupBox2.TabIndex = 4
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Familias a Comparar"
+        '
+        'ckVarios
+        '
+        Me.ckVarios.AutoSize = True
+        Me.ckVarios.Location = New System.Drawing.Point(19, 187)
+        Me.ckVarios.Name = "ckVarios"
+        Me.ckVarios.Size = New System.Drawing.Size(55, 17)
+        Me.ckVarios.TabIndex = 0
+        Me.ckVarios.Text = "Varios"
+        Me.ckVarios.UseVisualStyleBackColor = True
+        '
+        'ckFazonQuimicos
+        '
+        Me.ckFazonQuimicos.AutoSize = True
+        Me.ckFazonQuimicos.Location = New System.Drawing.Point(19, 164)
+        Me.ckFazonQuimicos.Name = "ckFazonQuimicos"
+        Me.ckFazonQuimicos.Size = New System.Drawing.Size(103, 17)
+        Me.ckFazonQuimicos.TabIndex = 0
+        Me.ckFazonQuimicos.Text = "Fazón Químicos"
+        Me.ckFazonQuimicos.UseVisualStyleBackColor = True
+        '
+        'ckFazonFarma
+        '
+        Me.ckFazonFarma.AutoSize = True
+        Me.ckFazonFarma.Location = New System.Drawing.Point(19, 141)
+        Me.ckFazonFarma.Name = "ckFazonFarma"
+        Me.ckFazonFarma.Size = New System.Drawing.Size(87, 17)
+        Me.ckFazonFarma.TabIndex = 0
+        Me.ckFazonFarma.Text = "Fazón Farma"
+        Me.ckFazonFarma.UseVisualStyleBackColor = True
+        '
+        'ckFazonPellital
+        '
+        Me.ckFazonPellital.AutoSize = True
+        Me.ckFazonPellital.Location = New System.Drawing.Point(19, 118)
+        Me.ckFazonPellital.Name = "ckFazonPellital"
+        Me.ckFazonPellital.Size = New System.Drawing.Size(88, 17)
+        Me.ckFazonPellital.TabIndex = 0
+        Me.ckFazonPellital.Text = "Fazon Pellital"
+        Me.ckFazonPellital.UseVisualStyleBackColor = True
+        '
+        'ckFarma
+        '
+        Me.ckFarma.AutoSize = True
+        Me.ckFarma.Location = New System.Drawing.Point(19, 95)
+        Me.ckFarma.Name = "ckFarma"
+        Me.ckFarma.Size = New System.Drawing.Size(55, 17)
+        Me.ckFarma.TabIndex = 0
+        Me.ckFarma.Text = "Farma"
+        Me.ckFarma.UseVisualStyleBackColor = True
+        '
+        'ckColorantes
+        '
+        Me.ckColorantes.AutoSize = True
+        Me.ckColorantes.Location = New System.Drawing.Point(19, 72)
+        Me.ckColorantes.Name = "ckColorantes"
+        Me.ckColorantes.Size = New System.Drawing.Size(76, 17)
+        Me.ckColorantes.TabIndex = 0
+        Me.ckColorantes.Text = "Colorantes"
+        Me.ckColorantes.UseVisualStyleBackColor = True
+        '
+        'ckQuimicos
+        '
+        Me.ckQuimicos.AutoSize = True
+        Me.ckQuimicos.Location = New System.Drawing.Point(19, 49)
+        Me.ckQuimicos.Name = "ckQuimicos"
+        Me.ckQuimicos.Size = New System.Drawing.Size(71, 17)
+        Me.ckQuimicos.TabIndex = 0
+        Me.ckQuimicos.Text = "Químicos"
+        Me.ckQuimicos.UseVisualStyleBackColor = True
+        '
+        'ckTodas
+        '
+        Me.ckTodas.AutoSize = True
+        Me.ckTodas.Location = New System.Drawing.Point(19, 26)
+        Me.ckTodas.Name = "ckTodas"
+        Me.ckTodas.Size = New System.Drawing.Size(56, 17)
+        Me.ckTodas.TabIndex = 0
+        Me.ckTodas.Text = "Todas"
+        Me.ckTodas.UseVisualStyleBackColor = True
+        '
         'ComparacionesMensuales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(610, 368)
+        Me.ClientSize = New System.Drawing.Size(759, 372)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.cmbTipoGrafico)
         Me.Controls.Add(Me.cmbTipoComparacion)
@@ -110,9 +218,12 @@ Partial Class ComparacionesMensuales
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnGenerar)
         Me.Name = "ComparacionesMensuales"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ComparacionesMensuales"
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -124,4 +235,13 @@ Partial Class ComparacionesMensuales
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents ckVarios As System.Windows.Forms.CheckBox
+    Friend WithEvents ckFazonQuimicos As System.Windows.Forms.CheckBox
+    Friend WithEvents ckFazonFarma As System.Windows.Forms.CheckBox
+    Friend WithEvents ckFazonPellital As System.Windows.Forms.CheckBox
+    Friend WithEvents ckFarma As System.Windows.Forms.CheckBox
+    Friend WithEvents ckColorantes As System.Windows.Forms.CheckBox
+    Friend WithEvents ckQuimicos As System.Windows.Forms.CheckBox
+    Friend WithEvents ckTodas As System.Windows.Forms.CheckBox
 End Class

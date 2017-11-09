@@ -249,7 +249,7 @@ Public Class ProveedoresABM
 
         ' Validamos el Cuit en caso de que se haya ingresado alguno.
 
-        If Trim(txtCUIT.Text.Replace("/", "")) <> "" Then
+        If Trim(txtCUIT.Text.Replace("-", "")) <> "" Then
             If Not _CuitValido(txtCUIT.Text) Then
                 MsgBox("El CUIT indicado no es válido.", MsgBoxStyle.Information)
                 Exit Sub
