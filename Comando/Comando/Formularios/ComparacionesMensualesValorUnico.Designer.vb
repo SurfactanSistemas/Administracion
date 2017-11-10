@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ComparacionesMensuales
+Partial Class ComparacionesMensualesValorUnico
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -73,7 +73,7 @@ Partial Class ComparacionesMensuales
         'cmbTipoGrafico
         '
         Me.cmbTipoGrafico.FormattingEnabled = True
-        Me.cmbTipoGrafico.Items.AddRange(New Object() {"", "Barras", "Pasteles", "Lineas"})
+        Me.cmbTipoGrafico.Items.AddRange(New Object() {"", "Barras", "Pasteles", "Lineas", "Barras 3D"})
         Me.cmbTipoGrafico.Location = New System.Drawing.Point(411, 17)
         Me.cmbTipoGrafico.Name = "cmbTipoGrafico"
         Me.cmbTipoGrafico.Size = New System.Drawing.Size(142, 21)
@@ -205,7 +205,7 @@ Partial Class ComparacionesMensuales
         Me.ckTodas.Text = "Todas"
         Me.ckTodas.UseVisualStyleBackColor = True
         '
-        'ComparacionesMensuales
+        'ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -217,7 +217,7 @@ Partial Class ComparacionesMensuales
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnGenerar)
-        Me.Name = "ComparacionesMensuales"
+        Me.Name = "ComparacionesMensualesValorUnico"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ComparacionesMensuales"
         Me.GroupBox1.ResumeLayout(False)

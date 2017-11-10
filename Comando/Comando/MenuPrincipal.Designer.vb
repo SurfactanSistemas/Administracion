@@ -49,8 +49,8 @@ Partial Class MenuPrincipal
         'ComparaciónMensualToolStripMenuItem
         '
         Me.ComparaciónMensualToolStripMenuItem.Name = "ComparaciónMensualToolStripMenuItem"
-        Me.ComparaciónMensualToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
-        Me.ComparaciónMensualToolStripMenuItem.Text = "Comparación Mensual"
+        Me.ComparaciónMensualToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.ComparaciónMensualToolStripMenuItem.Text = "Comparación por Valores Unicos"
         '
         'ProcesosToolStripMenuItem
         '

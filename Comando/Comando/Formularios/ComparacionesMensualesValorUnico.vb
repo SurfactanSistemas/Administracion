@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
 
-Public Class ComparacionesMensuales
+Public Class ComparacionesMensualesValorUnico
 
     Private Sub cmbTipoGrafico_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.SelectedIndexChanged
 
@@ -135,7 +135,7 @@ Public Class ComparacionesMensuales
     End Function
 
     Private Function _FamiliasSeleccionadas() As Boolean
-        
+
         For Each ck As CheckBox In {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios}
             If ck.Checked Then
                 Return True
@@ -155,6 +155,8 @@ Public Class ComparacionesMensuales
                 Return New TrimestralValorUnicoTortas
             Case 3
                 Return New TrimestralValorUnicoLineas
+            Case 4
+                Return New TrimestralValorUnicoBarras3D
             Case Else
                 Return Nothing
         End Select
