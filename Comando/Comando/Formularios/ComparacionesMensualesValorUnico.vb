@@ -12,6 +12,8 @@ Public Class ComparacionesMensualesValorUnico
                 PictureBox1.Image = My.Resources.GraficoTortas
             Case 3
                 PictureBox1.Image = My.Resources.GraficoLineas
+            Case 4
+                PictureBox1.Image = My.Resources.GraficoBarras3D
             Case Else
                 PictureBox1.Image = Nothing
                 Exit Sub
