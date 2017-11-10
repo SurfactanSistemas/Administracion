@@ -38,6 +38,8 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckColorantes = New System.Windows.Forms.CheckBox()
         Me.ckQuimicos = New System.Windows.Forms.CheckBox()
         Me.ckTodas = New System.Windows.Forms.CheckBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmbValorAComparar = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -45,7 +47,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'btnGenerar
         '
-        Me.btnGenerar.Location = New System.Drawing.Point(575, 328)
+        Me.btnGenerar.Location = New System.Drawing.Point(572, 426)
         Me.btnGenerar.Name = "btnGenerar"
         Me.btnGenerar.Size = New System.Drawing.Size(153, 38)
         Me.btnGenerar.TabIndex = 0
@@ -55,7 +57,7 @@ Partial Class ComparacionesMensualesValorUnico
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(24, 21)
+        Me.Label1.Location = New System.Drawing.Point(29, 19)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(93, 13)
         Me.Label1.TabIndex = 1
@@ -65,7 +67,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.cmbTipoComparacion.FormattingEnabled = True
         Me.cmbTipoComparacion.Items.AddRange(New Object() {"", "Trimestral"})
-        Me.cmbTipoComparacion.Location = New System.Drawing.Point(129, 17)
+        Me.cmbTipoComparacion.Location = New System.Drawing.Point(129, 15)
         Me.cmbTipoComparacion.Name = "cmbTipoComparacion"
         Me.cmbTipoComparacion.Size = New System.Drawing.Size(142, 21)
         Me.cmbTipoComparacion.TabIndex = 2
@@ -74,7 +76,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.cmbTipoGrafico.FormattingEnabled = True
         Me.cmbTipoGrafico.Items.AddRange(New Object() {"", "Barras", "Pasteles", "Lineas", "Barras 3D"})
-        Me.cmbTipoGrafico.Location = New System.Drawing.Point(411, 17)
+        Me.cmbTipoGrafico.Location = New System.Drawing.Point(381, 15)
         Me.cmbTipoGrafico.Name = "cmbTipoGrafico"
         Me.cmbTipoGrafico.Size = New System.Drawing.Size(142, 21)
         Me.cmbTipoGrafico.TabIndex = 2
@@ -82,7 +84,7 @@ Partial Class ComparacionesMensualesValorUnico
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(334, 21)
+        Me.Label2.Location = New System.Drawing.Point(312, 19)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(65, 13)
         Me.Label2.TabIndex = 1
@@ -92,7 +94,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.GroupBox1.Controls.Add(Me.PictureBox1)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Location = New System.Drawing.Point(30, 83)
+        Me.GroupBox1.Location = New System.Drawing.Point(27, 170)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(548, 230)
         Me.GroupBox1.TabIndex = 3
@@ -118,7 +120,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox2.Controls.Add(Me.ckColorantes)
         Me.GroupBox2.Controls.Add(Me.ckQuimicos)
         Me.GroupBox2.Controls.Add(Me.ckTodas)
-        Me.GroupBox2.Location = New System.Drawing.Point(589, 83)
+        Me.GroupBox2.Location = New System.Drawing.Point(586, 170)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(139, 230)
         Me.GroupBox2.TabIndex = 4
@@ -205,15 +207,35 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckTodas.Text = "Todas"
         Me.ckTodas.UseVisualStyleBackColor = True
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(34, 47)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(88, 13)
+        Me.Label3.TabIndex = 1
+        Me.Label3.Text = "Valor a Comparar"
+        '
+        'cmbValorAComparar
+        '
+        Me.cmbValorAComparar.FormattingEnabled = True
+        Me.cmbValorAComparar.Items.AddRange(New Object() {"", "Venta (U$S)", "Kilos", "Factor", "Precio Promedio", "Stock", "Rotacion", "Porcentaje", "Pedidos", "Atrasados", "% Atrasos"})
+        Me.cmbValorAComparar.Location = New System.Drawing.Point(129, 43)
+        Me.cmbValorAComparar.Name = "cmbValorAComparar"
+        Me.cmbValorAComparar.Size = New System.Drawing.Size(142, 21)
+        Me.cmbValorAComparar.TabIndex = 2
+        '
         'ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(759, 372)
+        Me.ClientSize = New System.Drawing.Size(1066, 476)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.cmbValorAComparar)
         Me.Controls.Add(Me.cmbTipoGrafico)
         Me.Controls.Add(Me.cmbTipoComparacion)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnGenerar)
@@ -244,4 +266,6 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckColorantes As System.Windows.Forms.CheckBox
     Friend WithEvents ckQuimicos As System.Windows.Forms.CheckBox
     Friend WithEvents ckTodas As System.Windows.Forms.CheckBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents cmbValorAComparar As System.Windows.Forms.ComboBox
 End Class

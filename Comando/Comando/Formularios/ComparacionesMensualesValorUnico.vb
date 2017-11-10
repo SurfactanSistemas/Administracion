@@ -3,7 +3,7 @@ Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class ComparacionesMensualesValorUnico
 
-    Private Sub cmbTipoGrafico_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.SelectedIndexChanged
+    Private Sub cmbTipoGrafico_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.SelectedIndexChanged, cmbValorAComparar.SelectedIndexChanged
 
         Select Case cmbTipoGrafico.SelectedIndex
             Case 1
@@ -63,6 +63,41 @@ Public Class ComparacionesMensualesValorUnico
         Return WBuscarFamilias
     End Function
 
+    Private Function _BuscarTituloGrafico() As String
+        Return cmbValorAComparar.SelectedItem
+    End Function
+
+    Private Function _BuscarDatosAComparar() As String
+
+        Select Case cmbValorAComparar.SelectedIndex
+            Case 1
+                Return "Venta"
+            Case 2
+                Return "Kilos"
+            Case 3
+                Return "Factor"
+            Case 4
+                Return "Precio"
+            Case 5
+                Return "Stock"
+            Case 6
+                Return "Rotacion"
+            Case 7
+                Return "PorceVenta"
+            Case 8
+                Return "Pedidos"
+            Case 9
+                Return "Atraso"
+            Case 10
+                Return "PorceAtraso"
+            Case 11
+                Return "Promedio"
+            Case Else
+                Return Nothing
+        End Select
+
+    End Function
+
     Private Function _TraerDatosParaGraficos() As DataTable
         Dim tabla As New DataTable("Detalles")
 
@@ -95,7 +130,11 @@ Public Class ComparacionesMensualesValorUnico
         Dim dr As SqlDataReader
         Dim ZSql As String = ""
         Dim Temp = "SELECT Tipo, Descripcion, Descripcion as Titulo #DATOS# FROM Comando", Aux = ""
-        Dim dato = "Venta"
+        Dim dato = _BuscarDatosAComparar()
+
+        If dato Is Nothing Then
+            Throw New Exception("Debe seleccionarse un valor por el cual comparar.")
+        End If
 
         For i = 1 To 12
             Aux &= ", " & dato & i & " as Valor" & i
@@ -132,6 +171,16 @@ Public Class ComparacionesMensualesValorUnico
 
         End Try
 
+        '
+        ' Cargamos el titulo correspondiente.
+        '
+        Dim titulo = _BuscarTituloGrafico()
+
+        For Each row As DataRow In tabla.Rows
+            With row
+                .Item("Titulo") = titulo
+            End With
+        Next
 
         Return tabla
     End Function

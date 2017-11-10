@@ -167,17 +167,6 @@
       <DependentUpon>MensualValorUnico.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Temporales\DataSet2.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet2.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\Temporales\temp.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>temp.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reportes\VistaPrevia.designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
@@ -221,10 +210,6 @@
     <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\MensualValorUnico.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>MensualValorUnico.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Temporales\temp.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>temp.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
@@ -276,17 +261,6 @@
     </None>
     <None Include="Reportes\DataSets\VentasMensuales.xss">
       <DependentUpon>VentasMensuales.xsd</DependentUpon>
-    </None>
-    <None Include="Reportes\Temporales\DataSet2.xsc">
-      <DependentUpon>DataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="Reportes\Temporales\DataSet2.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet2.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="Reportes\Temporales\DataSet2.xss">
-      <DependentUpon>DataSet2.xsd</DependentUpon>
     </None>
     <None Include="Resources\Aceptar N2.png" />
   </ItemGroup>
