@@ -66,7 +66,7 @@ Partial Class ComparacionesMensualesValorUnico
         'cmbTipoComparacion
         '
         Me.cmbTipoComparacion.FormattingEnabled = True
-        Me.cmbTipoComparacion.Items.AddRange(New Object() {"", "Trimestral"})
+        Me.cmbTipoComparacion.Items.AddRange(New Object() {"", "Mensual por Familia", "Mensual entre Familias", "Bimestral", "Trimestral"})
         Me.cmbTipoComparacion.Location = New System.Drawing.Point(129, 15)
         Me.cmbTipoComparacion.Name = "cmbTipoComparacion"
         Me.cmbTipoComparacion.Size = New System.Drawing.Size(142, 21)
