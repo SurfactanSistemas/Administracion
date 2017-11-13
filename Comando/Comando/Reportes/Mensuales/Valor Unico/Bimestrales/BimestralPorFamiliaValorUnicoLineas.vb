@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class TrimestralValorUnicoBarras3D
+Public Class BimestralPorFamiliaValorUnicoLineas
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class TrimestralValorUnicoBarras3D
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "TrimestralValorUnicoBarras3D.rpt"
+            Return "BimestralPorFamiliaValorUnicoLineas.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class TrimestralValorUnicoBarras3D
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Comando.TrimestralValorUnicoBarras3D.rpt"
+            Return "Comando.BimestralPorFamiliaValorUnicoLineas.rpt"
         End Get
         Set
             'Do nothing
@@ -70,7 +70,7 @@ Public Class TrimestralValorUnicoBarras3D
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section3() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property GroupHeaderSection1() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(2)
         End Get
@@ -78,7 +78,7 @@ Public Class TrimestralValorUnicoBarras3D
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property Section3() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(3)
         End Get
@@ -86,7 +86,7 @@ Public Class TrimestralValorUnicoBarras3D
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property ReportFooterSection3() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property GroupFooterSection1() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(4)
         End Get
@@ -110,7 +110,7 @@ Public Class TrimestralValorUnicoBarras3D
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedTrimestralValorUnicoBarras3D
+Public Class CachedBimestralPorFamiliaValorUnicoLineas
     Inherits Component
     Implements ICachedReport
     
@@ -152,7 +152,7 @@ Public Class CachedTrimestralValorUnicoBarras3D
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As TrimestralValorUnicoBarras3D = New TrimestralValorUnicoBarras3D()
+        Dim rpt As BimestralPorFamiliaValorUnicoLineas = New BimestralPorFamiliaValorUnicoLineas()
         rpt.Site = Me.Site
         Return rpt
     End Function

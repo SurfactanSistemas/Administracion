@@ -24,7 +24,7 @@ Partial Class ComparacionesMensualesValorUnico
     Private Sub InitializeComponent()
         Me.btnGenerar = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmbTipoComparacion = New System.Windows.Forms.ComboBox()
+        Me.cmbTipoPeriodo = New System.Windows.Forms.ComboBox()
         Me.cmbTipoGrafico = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -40,6 +40,8 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckTodas = New System.Windows.Forms.CheckBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cmbValorAComparar = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cmbTipoComparacion = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -57,34 +59,34 @@ Partial Class ComparacionesMensualesValorUnico
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(29, 19)
+        Me.Label1.Location = New System.Drawing.Point(14, 19)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(93, 13)
+        Me.Label1.Size = New System.Drawing.Size(108, 13)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Tipo Comparacion"
+        Me.Label1.Text = "Periodo Comparación"
         '
-        'cmbTipoComparacion
+        'cmbTipoPeriodo
         '
-        Me.cmbTipoComparacion.FormattingEnabled = True
-        Me.cmbTipoComparacion.Items.AddRange(New Object() {"", "Mensual por Familia", "Mensual entre Familias", "Bimestral", "Trimestral"})
-        Me.cmbTipoComparacion.Location = New System.Drawing.Point(129, 15)
-        Me.cmbTipoComparacion.Name = "cmbTipoComparacion"
-        Me.cmbTipoComparacion.Size = New System.Drawing.Size(142, 21)
-        Me.cmbTipoComparacion.TabIndex = 2
+        Me.cmbTipoPeriodo.FormattingEnabled = True
+        Me.cmbTipoPeriodo.Items.AddRange(New Object() {"", "Mensual", "Bimestral", "Trimestral"})
+        Me.cmbTipoPeriodo.Location = New System.Drawing.Point(129, 14)
+        Me.cmbTipoPeriodo.Name = "cmbTipoPeriodo"
+        Me.cmbTipoPeriodo.Size = New System.Drawing.Size(118, 21)
+        Me.cmbTipoPeriodo.TabIndex = 2
         '
         'cmbTipoGrafico
         '
         Me.cmbTipoGrafico.FormattingEnabled = True
         Me.cmbTipoGrafico.Items.AddRange(New Object() {"", "Barras", "Pasteles", "Lineas", "Barras 3D"})
-        Me.cmbTipoGrafico.Location = New System.Drawing.Point(381, 15)
+        Me.cmbTipoGrafico.Location = New System.Drawing.Point(361, 42)
         Me.cmbTipoGrafico.Name = "cmbTipoGrafico"
-        Me.cmbTipoGrafico.Size = New System.Drawing.Size(142, 21)
+        Me.cmbTipoGrafico.Size = New System.Drawing.Size(117, 21)
         Me.cmbTipoGrafico.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(312, 19)
+        Me.Label2.Location = New System.Drawing.Point(292, 47)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(65, 13)
         Me.Label2.TabIndex = 1
@@ -222,8 +224,26 @@ Partial Class ComparacionesMensualesValorUnico
         Me.cmbValorAComparar.Items.AddRange(New Object() {"", "Venta (U$S)", "Kilos", "Factor", "Precio Promedio", "Stock", "Rotacion", "Porcentaje", "Pedidos", "Atrasados", "% Atrasos"})
         Me.cmbValorAComparar.Location = New System.Drawing.Point(129, 43)
         Me.cmbValorAComparar.Name = "cmbValorAComparar"
-        Me.cmbValorAComparar.Size = New System.Drawing.Size(142, 21)
+        Me.cmbValorAComparar.Size = New System.Drawing.Size(118, 21)
         Me.cmbValorAComparar.TabIndex = 2
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(264, 19)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(93, 13)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "Tipo Comparacion"
+        '
+        'cmbTipoComparacion
+        '
+        Me.cmbTipoComparacion.FormattingEnabled = True
+        Me.cmbTipoComparacion.Items.AddRange(New Object() {"", "Por Familia", "Entre Familias"})
+        Me.cmbTipoComparacion.Location = New System.Drawing.Point(361, 14)
+        Me.cmbTipoComparacion.Name = "cmbTipoComparacion"
+        Me.cmbTipoComparacion.Size = New System.Drawing.Size(117, 21)
+        Me.cmbTipoComparacion.TabIndex = 2
         '
         'ComparacionesMensualesValorUnico
         '
@@ -233,9 +253,11 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.cmbValorAComparar)
-        Me.Controls.Add(Me.cmbTipoGrafico)
         Me.Controls.Add(Me.cmbTipoComparacion)
+        Me.Controls.Add(Me.cmbTipoGrafico)
+        Me.Controls.Add(Me.cmbTipoPeriodo)
         Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnGenerar)
@@ -252,7 +274,7 @@ Partial Class ComparacionesMensualesValorUnico
     End Sub
     Friend WithEvents btnGenerar As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents cmbTipoComparacion As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbTipoPeriodo As System.Windows.Forms.ComboBox
     Friend WithEvents cmbTipoGrafico As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -268,4 +290,6 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckTodas As System.Windows.Forms.CheckBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents cmbValorAComparar As System.Windows.Forms.ComboBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents cmbTipoComparacion As System.Windows.Forms.ComboBox
 End Class

@@ -4,7 +4,7 @@ Imports CrystalDecisions.CrystalReports.Engine
 ' ReSharper disable once CheckNamespace
 Public Class ComparacionesMensualesValorUnico
 
-    Private Sub cmbTipoGrafico_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.SelectedIndexChanged, cmbValorAComparar.SelectedIndexChanged
+    Private Sub cmbTipoGrafico_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.SelectedIndexChanged, cmbValorAComparar.SelectedIndexChanged, cmbTipoComparacion.SelectedIndexChanged
 
         Select Case cmbTipoGrafico.SelectedIndex
             Case 1
@@ -102,27 +102,47 @@ Public Class ComparacionesMensualesValorUnico
     Private Function _TraerDatosParaGraficos() As DataTable
         Dim tabla As DataTable = _ArmarTablaYDatos()
 
-        Select Case cmbTipoComparacion.SelectedIndex
+        Dim titulo = _BuscarTituloGrafico()
 
-            Case 2
+        For Each row As DataRow In tabla.Rows
+            With row
+                .Item("Titulo") = titulo
+            End With
+        Next
+
+        Select Case cmbTipoPeriodo.SelectedIndex
+
+            Case 1 ' Mensual.
 
                 '
                 ' Modificamos los datos en la tabla principal. Los nombres de las familias, pasan a ser los titulos 1-12 y valores 1-12 son ahora los valores de cada familia para un mes determinado que será el tipo.
                 '
-                Return _FormatearDatosEntreFamilias(tabla)
+                If _EsEntreFamilias() Then
+                    Return _FormatearDatosMensualEntreFamilias(tabla)
+                End If
+                
+                Return tabla
 
-            Case Else
+            Case 2 ' Bimestral
+
+                If _EsEntreFamilias() Then
+                    Return _FormatearDatosBimestralEntreFamilias(tabla)
+                End If
+
+                Return _FormatearDatosBimestralPorFamilia(tabla)
+
+            Case 3 ' Trimestral.
 
                 '
                 ' Cargamos el titulo correspondiente.
                 '
-                Dim titulo = _BuscarTituloGrafico()
+                If _EsEntreFamilias() Then
+                    Return _FormatearDatosTrimestralEntreFamilias(tabla)
+                End If
 
-                For Each row As DataRow In tabla.Rows
-                    With row
-                        .Item("Titulo") = titulo
-                    End With
-                Next
+                Return _FormatearDatosTrimestralPorFamilia(tabla)
+
+            Case Else
 
                 Return tabla
 
@@ -241,7 +261,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Function
 
-    Private Function _FormatearDatosEntreFamilias(ByVal tabla As DataTable) As DataTable
+    Private Function _FormatearDatosMensualEntreFamilias(ByVal tabla As DataTable) As DataTable
         Dim auxi As DataTable
 
         ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
@@ -255,7 +275,7 @@ Public Class ComparacionesMensualesValorUnico
 
         For i = 1 To 12
 
-            For j = 0 To 6
+            For j = 0 To tabla.Rows.Count - 1
                 ' Crear una fila nueva por cada mes de cada flia.
                 With auxi.Rows(i - 1)
                     .Item("tipo") = i
@@ -264,6 +284,167 @@ Public Class ComparacionesMensualesValorUnico
                     .Item("Descripcion") = tabla.Rows(j).Item("titulo" & i)
                 End With
 
+            Next
+
+        Next
+
+        Return auxi
+    End Function
+
+    Private Function _FormatearDatosTrimestralEntreFamilias(ByVal tabla As DataTable) As DataTable
+        Dim auxi As DataTable
+        Dim x, grupo As Integer
+
+        ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
+        auxi = tabla.Copy
+        auxi.Rows.Clear()
+
+
+        For i = 1 To (4 * tabla.Rows.Count) '28
+            auxi.Rows.Add()
+        Next
+
+        x = -1
+        grupo = 1
+
+        For i = 1 To 12
+
+            For j = 0 To tabla.Rows.Count - 1
+
+                ' Crear una fila nueva por cada mes de cada flia.
+                x += 1
+
+                With auxi.Rows(x)
+                    .Item("tipo") = grupo
+                    .Item("valor1") = tabla.Rows(j).Item("valor" & i)
+                    .Item("valor2") = tabla.Rows(j).Item("valor" & i + 1)
+                    .Item("valor3") = tabla.Rows(j).Item("valor" & i + 2)
+                    .Item("titulo1") = tabla.Rows(j).Item("titulo" & i)
+                    .Item("titulo2") = tabla.Rows(j).Item("titulo" & i + 1)
+                    .Item("titulo3") = tabla.Rows(j).Item("titulo" & i + 2)
+                    .Item("Descripcion") = tabla.Rows(j).Item("Descripcion")
+                End With
+
+            Next
+            
+            i += 2
+            grupo += 1
+        Next
+
+        Return auxi
+    End Function
+
+    Private Function _FormatearDatosTrimestralPorFamilia(ByVal tabla As DataTable) As DataTable
+        Dim auxi As DataTable
+        Dim x As Integer = -1
+
+        ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
+        auxi = tabla.Copy
+        auxi.Rows.Clear()
+
+
+        For i = 1 To (4 * tabla.Rows.Count) '28 ' 4 filas por familia (4 * 7)
+            auxi.Rows.Add()
+        Next
+
+        x = -1
+
+        For j = 0 To tabla.Rows.Count - 1
+
+            For i = 1 To 12
+
+                ' Crear una fila nueva por cada mes de cada flia.
+                x += 1
+                With auxi.Rows(x)
+                    .Item("tipo") = x
+                    .Item("valor1") = tabla.Rows(j).Item("valor" & i)
+                    .Item("valor2") = tabla.Rows(j).Item("valor" & i + 1)
+                    .Item("valor3") = tabla.Rows(j).Item("valor" & i + 2)
+                    .Item("titulo1") = tabla.Rows(j).Item("titulo" & i)
+                    .Item("titulo2") = tabla.Rows(j).Item("titulo" & i + 1)
+                    .Item("titulo3") = tabla.Rows(j).Item("titulo" & i + 2)
+                    .Item("Descripcion") = tabla.Rows(j).Item("Descripcion")
+                End With
+                i += 2
+            Next
+
+        Next
+
+        Return auxi
+    End Function
+
+    Private Function _FormatearDatosBimestralEntreFamilias(ByVal tabla As DataTable) As DataTable
+        Dim auxi As DataTable
+        Dim x, grupo As Integer
+
+        ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
+        auxi = tabla.Copy
+        auxi.Rows.Clear()
+
+
+        For i = 1 To (6 * tabla.Rows.Count) '42
+            auxi.Rows.Add()
+        Next
+
+        x = -1
+        grupo = 1
+
+        For i = 1 To 12
+
+            For j = 0 To tabla.Rows.Count - 1
+
+                ' Crear una fila nueva por cada mes de cada flia.
+                x += 1
+
+                With auxi.Rows(x)
+                    .Item("tipo") = grupo
+                    .Item("valor1") = tabla.Rows(j).Item("valor" & i)
+                    .Item("valor2") = tabla.Rows(j).Item("valor" & i + 1)
+                    .Item("titulo1") = tabla.Rows(j).Item("titulo" & i)
+                    .Item("titulo2") = tabla.Rows(j).Item("titulo" & i + 1)
+                    .Item("Descripcion") = tabla.Rows(j).Item("Descripcion")
+                End With
+
+            Next
+
+            i += 1
+            grupo += 1
+        Next
+
+        Return auxi
+    End Function
+
+
+    Private Function _FormatearDatosBimestralPorFamilia(ByVal tabla As DataTable) As DataTable
+        Dim auxi As DataTable
+        Dim x As Integer = -1
+
+        ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
+        auxi = tabla.Copy
+        auxi.Rows.Clear()
+
+
+        For i = 1 To (6 * tabla.Rows.Count) '42 ' 6 filas por familia (6 * 7)
+            auxi.Rows.Add()
+        Next
+
+        x = -1
+
+        For j = 0 To tabla.Rows.Count - 1
+
+            For i = 1 To 12
+
+                ' Crear una fila nueva por cada mes de cada flia.
+                x += 1
+                With auxi.Rows(x)
+                    .Item("tipo") = x
+                    .Item("valor1") = tabla.Rows(j).Item("valor" & i)
+                    .Item("valor2") = tabla.Rows(j).Item("valor" & i + 1)
+                    .Item("titulo1") = tabla.Rows(j).Item("titulo" & i)
+                    .Item("titulo2") = tabla.Rows(j).Item("titulo" & i + 1)
+                    .Item("Descripcion") = tabla.Rows(j).Item("Descripcion")
+                End With
+                i += 1
             Next
 
         Next
@@ -289,40 +470,106 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _TraerReporteTrimestralPorValorUnico()
 
+        ' Modificar para que las comparaciones sean entre familias y por familias.
         Select Case cmbTipoGrafico.SelectedIndex
             Case 1
-                Return New TrimestralValorUnicoBarras
+
+                If _EsEntreFamilias() Then
+                    Return New TrimestralEntreFamiliasValorUnicoBarras
+                End If
+
+                Return New TrimestralPorFamiliaValorUnicoBarras
+
             Case 2
-                Return New TrimestralValorUnicoTortas
+
+                If _EsEntreFamilias() Then
+                    Return New TrimestralEntreFamiliasValorUnicoTortas
+                End If
+
+                Return New TrimestralPorFamiliaValorUnicoTortas
+
             Case 3
-                Return New TrimestralValorUnicoLineas
+
+                If _EsEntreFamilias() Then
+                    Return New TrimestralEntreFamiliasValorUnicoLineas
+                End If
+
+                Return New TrimestralPorFamiliaValorUnicoLineas
+
             Case 4
-                Return New TrimestralValorUnicoBarras3D
+
+                If _EsEntreFamilias() Then
+                    Return New TrimestralEntreFamiliasValorUnicoBarras3D
+                End If
+
+                Return New TrimestralPorFamiliaValorUnicoBarras3D
+
             Case Else
                 Return Nothing
         End Select
 
     End Function
 
-    Private Function _TraerReporteMensualPorValorUnico()
-        Dim EntreFlias = False
+    Private Function _TraerReporteBimestralPorValorUnico()
 
-        If cmbTipoComparacion.SelectedIndex = 2 Then
-            EntreFlias = True
-        End If
-
+        ' Modificar para que las comparaciones sean entre familias y por familias.
         Select Case cmbTipoGrafico.SelectedIndex
             Case 1
 
-                If EntreFlias Then
+                If _EsEntreFamilias() Then
+                    Return New BimestralEntreFamiliasValorUnicoBarras
+                End If
+
+                Return New BimestralPorFamiliaValorUnicoBarras
+
+            Case 3
+
+                If _EsEntreFamilias() Then
+                    Return New BimestralEntreFamiliasValorUnicoLineas
+                End If
+
+                Return New BimestralPorFamiliaValorUnicoLineas
+
+                'Case 4
+
+                '    If _EsEntreFamilias() Then
+                '        Return New TrimestralEntreFamiliasValorUnicoBarras3D
+                '    End If
+
+                '    Return New TrimestralPorFamiliaValorUnicoBarras3D
+
+            Case Else
+                Return Nothing
+        End Select
+
+    End Function
+
+    Private Function _EsEntreFamilias() As Boolean
+
+        Return cmbTipoComparacion.SelectedIndex = 2
+
+    End Function
+
+    Private Function _TraerReporteMensualPorValorUnico()
+        
+        Select Case cmbTipoGrafico.SelectedIndex
+            Case 1 ' Barras
+
+                If _EsEntreFamilias() Then
                     Return New MensualEntreFamiliasValorUnicoBarras
                 End If
 
                 Return New MensualPorFamiliaValorUnicoBarras
-                
-            Case 4
+            Case 2 ' Pastel
 
-                If EntreFlias Then
+                If _EsEntreFamilias() Then
+                    Return New MensualEntreFamiliasValorUnicoTortas
+                End If
+
+                Return New MensualPorFamiliaValorUnicoTortas
+            Case 4 ' Barras 3D
+
+                If _EsEntreFamilias() Then
                     Return New MensualEntreFamiliasValorUnicoBarras3D
                 End If
 
@@ -352,12 +599,16 @@ Public Class ComparacionesMensualesValorUnico
         ' BUSCAMOS EL RPT SEGUN TIPO DE COMPARACION Y TIPO DE GRAFICO INDICADO.
         '
 
-        Select Case cmbTipoComparacion.SelectedIndex
-            Case 1, 2 ' Mensual por/entre Familia
+        Select Case cmbTipoPeriodo.SelectedIndex
+            Case 1 ' Mensual por/entre Familia
 
                 WReporte = _TraerReporteMensualPorValorUnico()
 
-            Case 4 ' Trimestral
+            Case 2 ' Bimestral
+
+                WReporte = _TraerReporteBimestralPorValorUnico()
+
+            Case 3 ' Trimestral
 
                 WReporte = _TraerReporteTrimestralPorValorUnico()
 
