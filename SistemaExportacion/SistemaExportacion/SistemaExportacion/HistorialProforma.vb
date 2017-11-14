@@ -69,6 +69,10 @@ Public Class HistorialProforma
         txtDescripcionCliente.Text = ""
         txtNroProforma.Text = ""
 
+        btnNuevaObservacion.Visible = True
+        btnArchivos.Visible = False
+        btnNuevaEspecificacion.Visible = False
+
         TabControl1.SelectTab(0)
         txtNroProforma.Focus()
 
@@ -1314,16 +1318,20 @@ Public Class HistorialProforma
 
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
 
-        If TabControl1.SelectedIndex = 0 Then
-
-            'TabControl1.TabPages(1).Font = New Font(TabControl1.TabPages(1).Font.FontFamily, TabControl1.TabPages(1).Font.Size - 0.25)
-            'TabControl1.ItemSize = New Size(TabControl1.ItemSize.Width, TabControl1.ItemSize.Height + 5)
-
-        ElseIf TabControl1.SelectedIndex = 1 Then
-
-            '            TabControl1.TabPages(0).Font = New Font(TabControl1.TabPages(0).Font.FontFamily, TabControl1.TabPages(0).Font.Size - 0.25)
-
-        End If
+        Select Case TabControl1.SelectedIndex
+            Case 0 ' Historial
+                btnNuevaObservacion.Visible = True
+                btnArchivos.Visible = False
+                btnNuevaEspecificacion.Visible = False
+            Case 1 ' Archivos
+                btnNuevaObservacion.Visible = False
+                btnArchivos.Visible = True
+                btnNuevaEspecificacion.Visible = False
+            Case 2 ' Especificaciones
+                btnNuevaObservacion.Visible = False
+                btnArchivos.Visible = False
+                btnNuevaEspecificacion.Visible = True
+        End Select
 
     End Sub
 

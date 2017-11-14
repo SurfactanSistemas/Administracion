@@ -489,7 +489,7 @@ Public Class MenuPrincipal
 
     Private Sub btnLimpiarFiltros_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarFiltros.Click
 
-        '_CargarTodasLasProformas()
+        _CargarTodasLasProformas()
         cmbTipoFiltro.SelectedIndex = 0
         txtFiltrarPor.Focus()
 
