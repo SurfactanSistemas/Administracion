@@ -4,7 +4,11 @@ Imports CrystalDecisions.CrystalReports.Engine
 ' ReSharper disable once CheckNamespace
 Public Class ComparacionesMensualesValorUnico
 
-    Private Sub cmbTipoGrafico_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.SelectedIndexChanged, cmbValorAComparar.SelectedIndexChanged, cmbTipoComparacion.SelectedIndexChanged
+    Private Sub ComparacionesMensuales_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        ckTodas.Checked = True
+    End Sub
+
+    Private Sub cmbTipoGrafico_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.SelectedIndexChanged, cmbValorAComparar.SelectedIndexChanged
 
         Select Case cmbTipoGrafico.SelectedIndex
             Case 1
@@ -120,7 +124,7 @@ Public Class ComparacionesMensualesValorUnico
                 If _EsEntreFamilias() Then
                     Return _FormatearDatosMensualEntreFamilias(tabla)
                 End If
-                
+
                 Return tabla
 
             Case 2 ' Bimestral
@@ -326,7 +330,7 @@ Public Class ComparacionesMensualesValorUnico
                 End With
 
             Next
-            
+
             i += 2
             grupo += 1
         Next
@@ -551,7 +555,7 @@ Public Class ComparacionesMensualesValorUnico
     End Function
 
     Private Function _TraerReporteMensualPorValorUnico()
-        
+
         Select Case cmbTipoGrafico.SelectedIndex
             Case 1 ' Barras
 
@@ -567,6 +571,14 @@ Public Class ComparacionesMensualesValorUnico
                 End If
 
                 Return New MensualPorFamiliaValorUnicoTortas
+            Case 3
+
+                If _EsEntreFamilias() Then
+                    Return Nothing
+                End If
+
+                Return New MensualPorFamiliaValorUnicoLineas
+
             Case 4 ' Barras 3D
 
                 If _EsEntreFamilias() Then
@@ -672,7 +684,31 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub ComparacionesMensuales_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        ckTodas.Checked = True
+    Private Sub cmbTipoGrafico_DropDown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.DropDown
+        Dim WEntreFamilias As String() = {"", "Barras", "Pasteles", "Lineas", "Barras 3D"}
+        Dim WPorFamilia As String() = {"", "Barras", "Pasteles", "", "Barras 3D"}
+
+        If _EsEntreFamilias() AndAlso _EsComparacionMensual() Then
+
+            cmbTipoGrafico.DataSource = WPorFamilia ' No se permite grafico de lineas cuando es entre familias la comparacion mensual
+
+        Else
+
+            cmbTipoGrafico.DataSource = WEntreFamilias
+
+        End If
+
+    End Sub
+
+    Private Function _EsComparacionMensual() As Boolean
+        Return cmbTipoPeriodo.SelectedIndex = 1
+    End Function
+
+    Private Sub cmbTipoComparacion_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoComparacion.SelectedIndexChanged, cmbTipoPeriodo.SelectedIndexChanged
+
+        If _EsEntreFamilias() AndAlso _EsComparacionMensual() AndAlso cmbTipoGrafico.SelectedIndex = 3 Then
+            cmbTipoGrafico.DroppedDown = True
+        End If
+
     End Sub
 End Class
