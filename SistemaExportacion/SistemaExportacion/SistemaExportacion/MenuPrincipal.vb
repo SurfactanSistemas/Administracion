@@ -3,9 +3,14 @@
 Public Class MenuPrincipal
 
     Private Sub btnNuevaProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaProforma.Click
+
         With Proforma
-            .ShowDialog()
-            .Dispose()
+            If Not .Visible Then
+                .ShowDialog()
+                .Dispose()
+            Else
+                .Focus()
+            End If
         End With
 
         _CargarTodasLasProformas()
@@ -16,19 +21,24 @@ Public Class MenuPrincipal
         'Exit Sub
         With HistorialProforma
 
-            If dgvPrincipal.SelectedRows.Count = 1 Then
-                .NroProforma = dgvPrincipal.CurrentRow.Cells(0).Value
-            ElseIf dgvPrincipal.SelectedCells.Count > 0 Then
+            If Not .Visible Then
+                If dgvPrincipal.SelectedRows.Count = 1 Then
+                    .NroProforma = dgvPrincipal.CurrentRow.Cells(0).Value
+                ElseIf dgvPrincipal.SelectedCells.Count > 0 Then
 
-                ' Nos quedamos con la primera fila de las seleccionadas.
-                With dgvPrincipal
-                    Dim PrimeraCelda = .SelectedCells.Item(.SelectedCells.Count - 1).RowIndex
+                    ' Nos quedamos con la primera fila de las seleccionadas.
+                    With dgvPrincipal
+                        Dim PrimeraCelda = .SelectedCells.Item(.SelectedCells.Count - 1).RowIndex
 
-                    HistorialProforma.NroProforma = .Rows(PrimeraCelda).Cells(0).Value
-                End With
+                        HistorialProforma.NroProforma = .Rows(PrimeraCelda).Cells(0).Value
+                    End With
+                End If
+
+                .Show()
+            Else
+                .Focus()
             End If
 
-            .Show()
         End With
     End Sub
 
@@ -215,8 +225,13 @@ Public Class MenuPrincipal
         If Not IsNothing(dgvPrincipal.Rows(e.RowIndex).Cells(0).Value) Then
 
             With Proforma
-                .NroProforma = dgvPrincipal.Rows(e.RowIndex).Cells(0).Value
-                .Show()
+                If Not .Visible Then
+                    .NroProforma = dgvPrincipal.Rows(e.RowIndex).Cells(0).Value
+                    .Show()
+                Else
+                    .Focus()
+                End If
+                
             End With
 
         End If
@@ -474,8 +489,13 @@ Public Class MenuPrincipal
         If Not IsNothing(dgvPrincipal.Rows(e.RowIndex).Cells(0).Value) Then
 
             With Proforma
-                .NroProforma = dgvPrincipal.Rows(e.RowIndex).Cells(0).Value
-                .Show()
+                If Not .Visible Then
+                    .NroProforma = dgvPrincipal.Rows(e.RowIndex).Cells(0).Value
+                    .Show()
+                Else
+                    .Focus()
+                End If
+                
             End With
 
         End If
@@ -493,5 +513,34 @@ Public Class MenuPrincipal
         cmbTipoFiltro.SelectedIndex = 0
         txtFiltrarPor.Focus()
 
+    End Sub
+
+    Private Sub dgvPrincipal_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles dgvPrincipal.SortCompare
+        Dim num1, num2
+
+        Select Case e.Column.Index
+            Case 0, 5
+
+                num1 = CDbl(e.CellValue1)
+                num2 = CDbl(e.CellValue2)
+
+            Case 1
+
+                num1 = Helper.ordenaFecha(e.CellValue1)
+                num2 = Helper.ordenaFecha(e.CellValue2)
+
+            Case Else
+                Exit Sub
+        End Select
+
+        If num1 < num2 Then
+            e.SortResult = -1
+        ElseIf num1 = num2 Then
+            e.SortResult = 0
+        Else
+            e.SortResult = 1
+        End If
+
+        e.Handled = True
     End Sub
 End Class

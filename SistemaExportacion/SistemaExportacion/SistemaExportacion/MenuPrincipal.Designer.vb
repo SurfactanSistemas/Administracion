@@ -48,12 +48,12 @@ Partial Class MenuPrincipal
         Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnLimpiarFiltros = New System.Windows.Forms.Button()
         Me.cmbTipoFiltro = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnLimpiarFiltros = New System.Windows.Forms.Button()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -330,6 +330,20 @@ Partial Class MenuPrincipal
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filtrar datos"
         '
+        'btnLimpiarFiltros
+        '
+        Me.btnLimpiarFiltros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiarFiltros.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiarFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiarFiltros.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnLimpiarFiltros.Location = New System.Drawing.Point(599, 11)
+        Me.btnLimpiarFiltros.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
+        Me.btnLimpiarFiltros.Name = "btnLimpiarFiltros"
+        Me.btnLimpiarFiltros.Size = New System.Drawing.Size(123, 26)
+        Me.btnLimpiarFiltros.TabIndex = 3
+        Me.btnLimpiarFiltros.Text = "Limpiar Filtros"
+        Me.btnLimpiarFiltros.UseVisualStyleBackColor = True
+        '
         'cmbTipoFiltro
         '
         Me.cmbTipoFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -373,20 +387,6 @@ Partial Class MenuPrincipal
         Me.txtFiltrarPor.Name = "txtFiltrarPor"
         Me.txtFiltrarPor.Size = New System.Drawing.Size(176, 20)
         Me.txtFiltrarPor.TabIndex = 0
-        '
-        'btnLimpiarFiltros
-        '
-        Me.btnLimpiarFiltros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnLimpiarFiltros.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLimpiarFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLimpiarFiltros.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.btnLimpiarFiltros.Location = New System.Drawing.Point(599, 11)
-        Me.btnLimpiarFiltros.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
-        Me.btnLimpiarFiltros.Name = "btnLimpiarFiltros"
-        Me.btnLimpiarFiltros.Size = New System.Drawing.Size(123, 26)
-        Me.btnLimpiarFiltros.TabIndex = 3
-        Me.btnLimpiarFiltros.Text = "Limpiar Filtros"
-        Me.btnLimpiarFiltros.UseVisualStyleBackColor = True
         '
         'MenuPrincipal
         '
