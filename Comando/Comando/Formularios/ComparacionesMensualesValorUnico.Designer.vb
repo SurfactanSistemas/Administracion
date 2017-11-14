@@ -49,7 +49,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'btnGenerar
         '
-        Me.btnGenerar.Location = New System.Drawing.Point(572, 426)
+        Me.btnGenerar.Location = New System.Drawing.Point(572, 327)
         Me.btnGenerar.Name = "btnGenerar"
         Me.btnGenerar.Size = New System.Drawing.Size(153, 38)
         Me.btnGenerar.TabIndex = 0
@@ -96,7 +96,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.GroupBox1.Controls.Add(Me.PictureBox1)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Location = New System.Drawing.Point(27, 170)
+        Me.GroupBox1.Location = New System.Drawing.Point(27, 87)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(548, 230)
         Me.GroupBox1.TabIndex = 3
@@ -122,7 +122,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox2.Controls.Add(Me.ckColorantes)
         Me.GroupBox2.Controls.Add(Me.ckQuimicos)
         Me.GroupBox2.Controls.Add(Me.ckTodas)
-        Me.GroupBox2.Location = New System.Drawing.Point(586, 170)
+        Me.GroupBox2.Location = New System.Drawing.Point(586, 87)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(139, 230)
         Me.GroupBox2.TabIndex = 4
@@ -249,7 +249,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1066, 476)
+        Me.ClientSize = New System.Drawing.Size(749, 376)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.cmbValorAComparar)
