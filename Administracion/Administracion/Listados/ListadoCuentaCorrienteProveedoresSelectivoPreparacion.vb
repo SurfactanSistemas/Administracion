@@ -749,7 +749,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     End Function
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivoPreparacion_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-        If GRilla.Rows.Count > 0 AndAlso IsNothing(GRilla.Rows(0).Cells(0).Value) Then
+        If GRilla.Rows.Count > 0 AndAlso Not IsNothing(GRilla.Rows(0).Cells(0).Value) Then
 
             Try
                 _GuardarProveedores()

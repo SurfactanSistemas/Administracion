@@ -503,7 +503,12 @@ Public Class MenuPrincipal
 
     Private Sub btnAperturaArchivos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAperturaArchivos.Click
         With ConsultaArticulosProforma
-            .Show()
+            If Not .Visible Then
+                .Show()
+            Else
+                .Focus()
+            End If
+
         End With
     End Sub
 

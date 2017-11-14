@@ -209,4 +209,37 @@ Public Class ConsultaArticulosProforma
         End Try
 
     End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Close()
+    End Sub
+
+    Private Sub dgvPrincipal_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles dgvPrincipal.SortCompare
+        Dim num1, num2
+
+        Select Case e.Column.Index
+            Case 0, 6, 7
+
+                num1 = CDbl(e.CellValue1)
+                num2 = CDbl(e.CellValue2)
+
+            Case 1
+
+                num1 = Helper.ordenaFecha(e.CellValue1)
+                num2 = Helper.ordenaFecha(e.CellValue2)
+
+            Case Else
+                Exit Sub
+        End Select
+
+        If num1 < num2 Then
+            e.SortResult = -1
+        ElseIf num1 = num2 Then
+            e.SortResult = 0
+        Else
+            e.SortResult = 1
+        End If
+
+        e.Handled = True
+    End Sub
 End Class
