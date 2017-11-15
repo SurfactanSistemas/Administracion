@@ -451,7 +451,6 @@ namespace ClassConexion
 
             string cod = _FormatearCodigoProducto(DGVRow.Cells[5].Value.ToString().Trim());
 
-
             //Busco el tipopedido (esto es lo primero que tengo que hacer, antes de actualizar en otro lado) modifico la connectionstring
             cmd.CommandText = "select TipoPedido from Pedido where  Pedido = '" + DGVRow.Cells[4].Value.ToString().Trim()
                 + "' and Terminado = '" + cod + "'";
@@ -465,11 +464,14 @@ namespace ClassConexion
             CerrarConexion();
         }
 
-        private static string _FormatearCodigoProducto(string cod)
+        /// <summary>
+        /// Formatea el codigo del producto para que coincida con el formato de la base de datos. Ej: ML-00006-100 -> ML-006-100.
+        /// </summary>
+        private static string _FormatearCodigoProducto(string codigo)
         {
-            if (!cod.StartsWith("DY") && !cod.StartsWith("ML")) return cod;
+            if (!codigo.StartsWith("DY") && !codigo.StartsWith("ML")) return codigo;
 
-            string[] auxi = cod.Split('-');
+            string[] auxi = codigo.Split('-');
 
             int max = auxi[1].Length;
 
@@ -478,9 +480,9 @@ namespace ClassConexion
                 auxi[1] = "0" + auxi[1];
             }
 
-            cod = string.Join("-", auxi).Trim();
+            codigo = string.Join("-", auxi).Trim();
 
-            return cod;
+            return codigo;
         }
 
         public void ActualizarMuestraRemito(DataGridViewRow DGV, string NroRemito)
