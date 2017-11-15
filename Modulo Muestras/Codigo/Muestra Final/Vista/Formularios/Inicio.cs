@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ClassConexion;
 using Negocio;
-using System.Configuration;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
 
 namespace Vista
 {
@@ -23,11 +20,8 @@ namespace Vista
         Negocio.Muestra M = new Negocio.Muestra();
         DataTable dt;
         string columna = "";
-        bool OrdFecha = false;
-        private string PeligroI;
-        private string PeligroII;
-        private string PeligroIII;
-        
+        bool OrdFecha;
+
 
         public Muestra()
         {
@@ -56,7 +50,7 @@ namespace Vista
             //LimpiarFechas();
 
             //Limpio cualquier filtro existente
-            (DGV_Muestra.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            ((DataTable) DGV_Muestra.DataSource).DefaultView.RowFilter = string.Empty;
 
             //DGV_Muestra.SortedColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
@@ -84,8 +78,8 @@ namespace Vista
                 DGV_Muestra.DataSource = dt;
 
                 //Limpio cualquier filtro existente
-                (DGV_Muestra.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
-                (DGV_Muestra.DataSource as DataTable).DefaultView.Sort = string.Empty;
+                ((DataTable) DGV_Muestra.DataSource).DefaultView.RowFilter = string.Empty;
+                ((DataTable) DGV_Muestra.DataSource).DefaultView.Sort = string.Empty;
                 P_Filtrado.Visible = false;
             }
             catch (Exception Err)
@@ -104,13 +98,6 @@ namespace Vista
 
         }
 
-        
-
-        private void LimpiarFechas()
-        {
-            TB_Desde.Text = "";
-            TB_Hasta.Text = "";
-        }
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -129,12 +116,16 @@ namespace Vista
         {
             if (BT_Filtrar.Text == "Filtrar")
             {
-                (DGV_Muestra.DataSource as DataTable).DefaultView.RowFilter = string.Format("CONVERT(" + columna + ", System.String) like '%{0}%'", TBFiltro.Text);
+                DataTable dataTable = DGV_Muestra.DataSource as DataTable;
+                if (dataTable != null)
+                    dataTable.DefaultView.RowFilter = string.Format("CONVERT(" + columna + ", System.String) like '%{0}%'", TBFiltro.Text);
                 BT_Filtrar.Text = "Limp. Filtro";
             }
             else
             {
-                (DGV_Muestra.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+                DataTable dataTable = DGV_Muestra.DataSource as DataTable;
+                if (dataTable != null)
+                    dataTable.DefaultView.RowFilter = string.Empty;
 
                 P_Filtrado.Visible = false;
                 TBFiltro.Text = "";
@@ -232,7 +223,9 @@ namespace Vista
             HabilitarPanelFiltrado();
             LBFiltro.Text = columna;
             TBFiltro.Visible = false;
-            (DGV_Muestra.DataSource as DataTable).DefaultView.RowFilter = "CONVERT(Isnull(Remito,''), System.String) = ''";
+            DataTable dataTable = DGV_Muestra.DataSource as DataTable;
+            if (dataTable != null)
+                dataTable.DefaultView.RowFilter = "CONVERT(Isnull(Remito,''), System.String) = ''";
         }
 
         private void sinRemitoConLote1ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -241,7 +234,9 @@ namespace Vista
             HabilitarPanelFiltrado();
             LBFiltro.Text = columna;
             TBFiltro.Visible = false;
-            (DGV_Muestra.DataSource as DataTable).DefaultView.RowFilter = "CONVERT(Isnull(Remito,''), System.String) = '' AND Lote1 <> 0";
+            DataTable dataTable = DGV_Muestra.DataSource as DataTable;
+            if (dataTable != null)
+                dataTable.DefaultView.RowFilter = "CONVERT(Isnull(Remito,''), System.String) = '' AND Lote1 <> 0";
         }
 
         private void codClienteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -314,19 +309,19 @@ namespace Vista
                 //Armo el datatable
                 if (DGV_Muestra.SelectedRows.Count == 0) throw new Exception("No hay filas seleccionadas");
 
-                DataTable dt = new DataTable();
+                DataTable _dt = new DataTable();
                 foreach (DataGridViewColumn column in DGV_Muestra.Columns)
-                    dt.Columns.Add(column.Name, typeof(string));
+                    _dt.Columns.Add(column.Name, typeof(string));
                 for (int i = 0; i < DGV_Muestra.SelectedRows.Count; i++)
                 {
-                    dt.Rows.Add();
+                    _dt.Rows.Add();
                     for (int j = 0; j < DGV_Muestra.Columns.Count; j++)
                     {
-                        dt.Rows[i][j] = DGV_Muestra.SelectedRows[i].Cells[j].Value;
+                        _dt.Rows[i][j] = DGV_Muestra.SelectedRows[i].Cells[j].Value;
                     }
                 }
 
-                Exportar exportar = new Exportar(dt);
+                Exportar exportar = new Exportar(_dt);
                 exportar.ShowDialog();
             }
             catch (Exception err)
@@ -362,13 +357,13 @@ namespace Vista
                 if (DGV_Muestra.SelectedRows.Count == 0) throw new Exception("No hay filas seleccionadas");
 
                 //creo el datatable
-                DataTable dt = new DataTable();
+                DataTable _dt = new DataTable();
 
-                AgregarColumnas(dt);
+                AgregarColumnas(_dt);
                                
                 for (int i = 0; i < DGV_Muestra.SelectedRows.Count; i++)
                 {
-                    DataRow newRow = dt.NewRow();
+                    DataRow newRow = _dt.NewRow();
                     newRow["NombreEmpresa"] = "SURFACTAN S.A.";
                     newRow["Nombre"] = DGV_Muestra.SelectedRows[i].Cells["Nombre"].Value.ToString();
                     newRow["Codigo"] = DGV_Muestra.SelectedRows[i].Cells["Codigo"].Value.ToString();
@@ -381,27 +376,22 @@ namespace Vista
 
                     string lote = DGV_Muestra.SelectedRows[i].Cells["Lote2"].Value.ToString();
 
-                    if (lote.Trim() == "" || int.Parse(lote) == 0)
+                    try
                     {
-                        lote = DGV_Muestra.SelectedRows[i].Cells["Lote1"].Value.ToString();
+                        lote = _DetarminarLote(i, newRow, lote);
                     }
-
-                    if (lote.Trim() == "" || int.Parse(lote) == 0)
+                    catch (Exception exception)
                     {
-                        if (newRow["Codigo"].ToString().StartsWith("YF")) throw new Exception("Los YF deben tener lote asignado antes de poder imprimir sus respectivas etiquetas.");
-
-                        lote = "Pedido: " + DGV_Muestra.SelectedRows[i].Cells["Pedido"].Value.ToString().Trim();
-                    }
-                    else {
-                        lote = "Lote: " + lote.Trim();
+                        MessageBox.Show(exception.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
                     }
 
-                    newRow["Lote"] = lote.ToString();
+                    newRow["Lote"] = lote;
 
                     string codigoOri = DGV_Muestra.SelectedRows[i].Cells["Codigo"].Value.ToString();
                     //string codigo = codigoOri.Substring(0, 12);
 
-                    //Me fijo si empieza con PT de Producto Terminado y sino dejo todo vacio
+                    //Me fijo si empieza con PT de Producto Terminado y sino dejo vacio
                     if (codigoOri.Substring(0, 2) == "PT")
                     {
                         string codigo = codigoOri.Substring(0, 12);
@@ -444,11 +434,11 @@ namespace Vista
                         newRow["Naciones"] = "";
                     }
 
-                    dt.Rows.Add(newRow);
+                    _dt.Rows.Add(newRow);
 
                 }
 
-                Etiquetas etiquetas = new Etiquetas(dt);
+                Etiquetas etiquetas = new Etiquetas(_dt);
                 etiquetas.ShowDialog();
             }
             catch (Exception err)
@@ -457,9 +447,41 @@ namespace Vista
             }
         }
 
-        private string _BuscarNombreML(string codigo, string pedido)
+        private string _DetarminarLote(int i, DataRow newRow, string lote)
         {
-            return CS.BuscarNombreML(codigo.Trim(), pedido.Trim());
+            if (lote.Trim() == "" || int.Parse(lote) == 0)
+            {
+                lote = DGV_Muestra.SelectedRows[i].Cells["Lote1"].Value.ToString();
+            }
+
+            // En caso de los DY, deben salir con el lote Alfanumérico no con el número de Laudo.
+            if (newRow["Codigo"].ToString().StartsWith("DY"))
+            {
+                try
+                {
+                    lote = CS.BuscarAlfanumericoDY(newRow["Codigo"].ToString(), lote)["PartiOri"].ToString();
+                }
+                catch (Exception exception)
+                {
+                    throw new Exception(exception.Message);
+                }
+            }
+
+            lote = lote.Trim();
+
+            if (lote.Trim() == "" || (!newRow["Codigo"].ToString().StartsWith("DY") && int.Parse(lote) == 0))
+            {
+                if (newRow["Codigo"].ToString().StartsWith("YF"))
+                    throw new Exception("Los YF deben tener lote asignado antes de poder imprimir sus respectivas etiquetas.");
+
+                lote = "Pedido: " + DGV_Muestra.SelectedRows[i].Cells["Pedido"].Value.ToString().Trim();
+            }
+            else
+            {
+                lote = "Lote: " + lote.Trim();
+            }
+
+            return lote;
         }
 
         private void BtRemito_Click(object sender, EventArgs e)
@@ -477,11 +499,9 @@ namespace Vista
                     }
                 }
 
-                DataTable dt = new DataTable();
+                DataTable _dt = new DataTable();
                 List<string> sinEnsayo = new List<string>();
                 List<string> errorLote = new List<string>();
-                List<string> peligroI = new List<string>();
-                List<string> peligroII = new List<string>();
 
                 int cantidad = (DGV_Muestra.SelectedRows.Count - 1);
                 string cliente = DGV_Muestra.SelectedRows[cantidad].Cells[7].Value.ToString(); //Cliente
@@ -502,8 +522,8 @@ namespace Vista
 
                     if (DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("ML") &&
                         valor >= 100) {
-                            string Id = DGV_Muestra.SelectedRows[i].Cells[0].Value.ToString();
-                            if (!CS.VerificarEnsayo2(Id)) throw new Exception("La muestra " + DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString() + " no posee ensayo");
+                            string _id = DGV_Muestra.SelectedRows[i].Cells[0].Value.ToString();
+                            if (!CS.VerificarEnsayo2(_id)) throw new Exception("La muestra " + DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().Trim() + " no posee ensayo");
                             //sinEnsayo.Add(DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString());
                     }
                 }
@@ -524,7 +544,7 @@ namespace Vista
 
                 if (numero_remito != "")
                 {
-                    dt = CS.BuscarListaRemito(numero_remito, _CodCliente);
+                    _dt = CS.BuscarListaRemito(numero_remito, _CodCliente);
 
                     DataRow datacliente1 = CS.BuscarCliente(cliente);
 
@@ -533,7 +553,7 @@ namespace Vista
                     string LocalidadClient1 = datacliente1[2].ToString();
                     string Cuit1 = datacliente1[3].ToString();
                     string DirEntrega1 = datacliente1[4].ToString();
-                    ImpreRemito impre_1 = new ImpreRemito(dt, DirEntrega1, CodClient1, DirClient1, LocalidadClient1, Cuit1, cliente, HojasDeSeguridad);
+                    ImpreRemito impre_1 = new ImpreRemito(_dt, DirEntrega1, CodClient1, DirClient1, LocalidadClient1, Cuit1, cliente, HojasDeSeguridad);
                     impre_1.ShowDialog();
                     goto finalizado;
                     //goto Error;
@@ -541,7 +561,7 @@ namespace Vista
 
                 }
 
-                //Se valido todo ahora se va a modificar la/s base/s                
+                //Se valido la totalidad de las variables, ahora se va a modificar la/s base/s                
                 int[] Lotes = new int[DGV_Muestra.SelectedRows.Count];
 
                 string[,] Peligroso = new string[DGV_Muestra.SelectedRows.Count, 2];
@@ -558,26 +578,15 @@ namespace Vista
                         cod = codigo;
                     }
                     Codigos[i] = cod;
-                    int Id = int.Parse(DGV_Muestra.SelectedRows[i].Cells[0].Value.ToString());
+                    int _id = int.Parse(DGV_Muestra.SelectedRows[i].Cells[0].Value.ToString());
                     string pedido = DGV_Muestra.SelectedRows[i].Cells[1].Value.ToString();
                     
                     // Se busca lote para el Codigo solicitado en caso de que no sea un ML.
                     // Falta definir el
 
-                    if (cod.StartsWith("DY")) {
-
-                        string[] auxi = cod.Split('-');
-                        int max = auxi[1].ToString().Length;
-
-                        for (int x = 0; x < 5 - max; x++)
-                        {
-
-                            auxi[1] = "0" + auxi[1];
-
-                        }
-
-                        cod = string.Join("-", auxi).Trim();
-                    
+                    if (cod.StartsWith("DY"))
+                    {
+                        cod = Conexion._FormatearCodigoProducto(cod);
                     }
                     
 
@@ -591,14 +600,14 @@ namespace Vista
                     {
                         if (Double.Parse(cant.Replace(".", ",")) >= 20)
                         {
-                            int Lote1 = int.Parse(CS.BuscarLote1(cod, pedido));
+                            int _lote1 = int.Parse(CS.BuscarLote1(cod, pedido));
 
-                            if (Lote1 == 0)
+                            if (_lote1 == 0)
                             {
                                 throw new Exception("La Muestra para " + DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().Trim() + " no posee lote");
                             }
 
-                            Lotes[i] = Lote1;
+                            Lotes[i] = _lote1;
                         }
                         
                     }
@@ -607,17 +616,17 @@ namespace Vista
                         if (!DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("ML") && !DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YP"))
                         {
 
-                            int Lote1 = int.Parse(CS.BuscarLote1(cod, pedido));
+                            int _lote1 = int.Parse(CS.BuscarLote1(cod, pedido));
 
-                            if (Lote1 == 0) throw new Exception("La Muestra para " + DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().Trim() + " no posee lote");
+                            if (_lote1 == 0) throw new Exception("La Muestra para " + DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().Trim() + " no posee lote");
 
-                            Lotes[i] = Lote1;
+                            Lotes[i] = _lote1;
                         }
                     }
                     
                     
 
-                    DataRow datarow = CS.ListarPeligroso(Id);
+                    DataRow datarow = CS.ListarPeligroso(_id);
 
                     Peligroso[i, 0] = datarow[0].ToString();
                     Peligroso[i, 1] = datarow[1].ToString();
@@ -635,13 +644,13 @@ namespace Vista
                 string DirEntrega = datacliente[4].ToString();
 
                 string datos = numero_remito + ";" + cliente;
-                AgregarColumnasRemito(dt);
+                AgregarColumnasRemito(_dt);
 
                 
 
                 for (int i = 0; i < DGV_Muestra.SelectedRows.Count; i++)
                 {
-                    DataRow newRow = dt.NewRow();
+                    DataRow newRow = _dt.NewRow();
                     newRow["Descripcion"] = DGV_Muestra.SelectedRows[i].Cells["DescriCliente"].Value.ToString();
                     newRow["Cantidad"] = DGV_Muestra.SelectedRows[i].Cells["Cantidad"].Value.ToString();
                     newRow["Muestra"] = DGV_Muestra.SelectedRows[i].Cells["Id"].Value.ToString();
@@ -656,11 +665,11 @@ namespace Vista
 
                     HojasDeSeguridad[i, 1] = DGV_Muestra.SelectedRows[i].Cells["Codigo"].Value.ToString().Trim();
 
-                    dt.Rows.Add(newRow);
+                    _dt.Rows.Add(newRow);
                 }
 
                 
-                Remito remito = new Remito(datos, dt, errorLote, sinEnsayo, DirEntrega, CodClient, DirClient, LocalidadClient, Cuit, cliente, HojasDeSeguridad);
+                Remito remito = new Remito(datos, _dt, errorLote, sinEnsayo, DirEntrega, CodClient, DirClient, LocalidadClient, Cuit, cliente, HojasDeSeguridad);
                 remito.ShowDialog();
 
             }
@@ -674,40 +683,35 @@ namespace Vista
            
         }
 
-        private void terminar()
+        private void AgregarColumnasRemito(DataTable _dt)
         {
-            throw new NotImplementedException();
-        }
-
-        private void AgregarColumnasRemito(DataTable dt)
-        {
-            dt.Columns.Add("Descripcion", typeof(string));
-            dt.Columns.Add("Cantidad", typeof(string));
-            dt.Columns.Add("Muestra", typeof(string));
-            dt.Columns.Add("Partida", typeof(string));
-            dt.Columns.Add("Pedido", typeof(string));
-            dt.Columns.Add("Codigo", typeof(string));
-            dt.Columns.Add("Codigo_Original", typeof(string));
-            dt.Columns.Add("Peligroso", typeof(string));
-            dt.Columns.Add("PeligrosoII", typeof(string));
+            _dt.Columns.Add("Descripcion", typeof(string));
+            _dt.Columns.Add("Cantidad", typeof(string));
+            _dt.Columns.Add("Muestra", typeof(string));
+            _dt.Columns.Add("Partida", typeof(string));
+            _dt.Columns.Add("Pedido", typeof(string));
+            _dt.Columns.Add("Codigo", typeof(string));
+            _dt.Columns.Add("Codigo_Original", typeof(string));
+            _dt.Columns.Add("Peligroso", typeof(string));
+            _dt.Columns.Add("PeligrosoII", typeof(string));
         }
 
         
 
-        private void AgregarColumnas(DataTable dt)
+        private void AgregarColumnas(DataTable _dt)
         {
-            dt.Columns.Add("NombreEmpresa", typeof(string));
-            dt.Columns.Add("Nombre", typeof(string));
-            dt.Columns.Add("Codigo", typeof(string));
-            dt.Columns.Add("DescriCliente", typeof(string));
-            dt.Columns.Add("Razon", typeof(string));
-            dt.Columns.Add("Fecha", typeof(string));
-            dt.Columns.Add("Direccion_1", typeof(string));
-            dt.Columns.Add("Direccion_2", typeof(string));
-            dt.Columns.Add("Clase", typeof(string));
-            dt.Columns.Add("Intervencion", typeof(string));
-            dt.Columns.Add("Naciones", typeof(string));
-            dt.Columns.Add("Lote", typeof(string));
+            _dt.Columns.Add("NombreEmpresa", typeof(string));
+            _dt.Columns.Add("Nombre", typeof(string));
+            _dt.Columns.Add("Codigo", typeof(string));
+            _dt.Columns.Add("DescriCliente", typeof(string));
+            _dt.Columns.Add("Razon", typeof(string));
+            _dt.Columns.Add("Fecha", typeof(string));
+            _dt.Columns.Add("Direccion_1", typeof(string));
+            _dt.Columns.Add("Direccion_2", typeof(string));
+            _dt.Columns.Add("Clase", typeof(string));
+            _dt.Columns.Add("Intervencion", typeof(string));
+            _dt.Columns.Add("Naciones", typeof(string));
+            _dt.Columns.Add("Lote", typeof(string));
         }
 
         private void BtImpresion_Click(object sender, EventArgs e)
@@ -717,19 +721,19 @@ namespace Vista
                 //Armo el datatable
                 if (DGV_Muestra.SelectedRows.Count == 0) throw new Exception("No hay filas seleccionadas");
 
-                DataTable dt = new DataTable();
+                DataTable _dt = new DataTable();
                 foreach (DataGridViewColumn column in DGV_Muestra.Columns)
-                    dt.Columns.Add(column.Name, typeof(string));
+                    _dt.Columns.Add(column.Name, typeof(string));
                 for (int i = 0; i < DGV_Muestra.SelectedRows.Count; i++)
                 {
-                    dt.Rows.Add();
+                    _dt.Rows.Add();
                     for (int j = 0; j < DGV_Muestra.Columns.Count; j++)
                     {
-                        dt.Rows[i][j] = DGV_Muestra.SelectedRows[i].Cells[j].Value;
+                        _dt.Rows[i][j] = DGV_Muestra.SelectedRows[i].Cells[j].Value;
                     }
                 }
 
-                Impresion impresion = new Impresion(dt);
+                Impresion impresion = new Impresion(_dt);
                 impresion.ShowDialog();
                 
             }
@@ -751,17 +755,17 @@ namespace Vista
                     throw new Exception("La muestra seleccionada no es una Muestra de Laboratorio");
 
                 //creo el datatable
-                DataTable dt = new DataTable();
+                DataTable _dt = new DataTable();
 
-                dt.Columns.Add("Id", typeof(string));
-                dt.Columns.Add("Codigo", typeof(string));
-                dt.Columns.Add("Ensayo", typeof(string));
-                dt.Columns.Add("Nombre", typeof(string));
-                dt.Columns.Add("Fecha", typeof(string));
-                dt.Columns.Add("Cantidad", typeof(string));
-                dt.Columns.Add("Observaciones", typeof(string));
+                _dt.Columns.Add("Id", typeof(string));
+                _dt.Columns.Add("Codigo", typeof(string));
+                _dt.Columns.Add("Ensayo", typeof(string));
+                _dt.Columns.Add("Nombre", typeof(string));
+                _dt.Columns.Add("Fecha", typeof(string));
+                _dt.Columns.Add("Cantidad", typeof(string));
+                _dt.Columns.Add("Observaciones", typeof(string));
 
-                DataRow row = dt.NewRow();
+                DataRow row = _dt.NewRow();
                 //Estos datos que tomo estan bien o me tengo que fijar en ensayo2 y cantidad2? 
                 row["Id"] = DGV_Muestra.SelectedRows[0].Cells["Id"].Value.ToString();
                 row["Codigo"] = DGV_Muestra.SelectedRows[0].Cells["Codigo"].Value.ToString();
@@ -771,9 +775,9 @@ namespace Vista
                 row["Cantidad"] = DGV_Muestra.SelectedRows[0].Cells["Cantidad2"].Value.ToString();
                 row["Observaciones"] = DGV_Muestra.SelectedRows[0].Cells["Observaciones2"].Value.ToString();
 
-                dt.Rows.Add(row);
+                _dt.Rows.Add(row);
 
-                ActLab actlab = new ActLab(dt);
+                ActLab actlab = new ActLab(_dt);
                 actlab.ShowDialog();
                 
                 ActualizarGridView();
@@ -841,12 +845,12 @@ namespace Vista
             {
                 if (OrdFecha == false)
                 {
-                    this.DGV_Muestra.Sort(this.DGV_Muestra.Columns[19], ListSortDirection.Ascending);
+                    DGV_Muestra.Sort(DGV_Muestra.Columns[19], ListSortDirection.Ascending);
                     OrdFecha = true;
                 }
                 else
                 {
-                    this.DGV_Muestra.Sort(this.DGV_Muestra.Columns[19], ListSortDirection.Descending);
+                    DGV_Muestra.Sort(DGV_Muestra.Columns[19], ListSortDirection.Descending);
                     OrdFecha = false;
                 }
             }
@@ -874,12 +878,12 @@ namespace Vista
                                 MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                string Id = DGV_Muestra.SelectedRows[0].Cells["Id"].Value.ToString();
+                string _id = DGV_Muestra.SelectedRows[0].Cells["Id"].Value.ToString();
                 string Producto = DGV_Muestra.SelectedRows[0].Cells["Codigo"].Value.ToString();
 
-                int Pedido = CS.BuscarPedido(Id);
-                CS.ModificCantidad(Pedido, Producto);
-                CS.EliminarMuestra(Id);
+                int _pedido = CS.BuscarPedido(_id);
+                CS.ModificCantidad(_pedido, Producto);
+                CS.EliminarMuestra(_id);
 
 
                 ActualizarGridView();

@@ -467,7 +467,7 @@ namespace ClassConexion
         /// <summary>
         /// Formatea el codigo del producto para que coincida con el formato de la base de datos. Ej: ML-00006-100 -> ML-006-100.
         /// </summary>
-        private static string _FormatearCodigoProducto(string codigo)
+        public static string _FormatearCodigoProducto(string codigo)
         {
             if (!codigo.StartsWith("DY") && !codigo.StartsWith("ML")) return codigo;
 
@@ -514,6 +514,30 @@ namespace ClassConexion
             adapter.Fill(tabla);
 
             if (tabla.Rows.Count == 0) throw new Exception("No se encontro cliente o la muestra no posee cliente");
+
+            filas.Add(tabla.Rows[0]);
+
+            CerrarConexion();
+
+            return filas[0];
+        }
+
+        public DataRow BuscarAlfanumericoDY(string codigo, string laudo)
+        {
+            List<DataRow> filas = new List<DataRow>();
+            DataTable tabla = new DataTable();
+
+            //codigo = _FormatearCodigoProducto(codigo);
+
+            AbrirConexion();
+
+            string str = "SELECT TOP 1 PartiOri FROM Laudo WHERE Articulo = '" + codigo.Trim() + "' AND Laudo  = '" + laudo.Trim() + "'";
+
+            adapter.SelectCommand = new SqlCommand(str, conexion);
+
+            adapter.Fill(tabla);
+
+            if (tabla.Rows.Count == 0) throw new Exception("No se encontro el código Alfanumérico para el Producto: " + codigo + " con Nº de Laudo: " + laudo);
 
             filas.Add(tabla.Rows[0]);
 
