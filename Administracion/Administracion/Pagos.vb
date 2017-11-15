@@ -2050,7 +2050,7 @@ Public Class Pagos
                     XTipo1 = .Cells(0).Value
                     XLetra1 = .Cells(1).Value
                     XPunto1 = .Cells(2).Value
-                    XNumero1 = .Cells(3).Value
+                    XNumero1 = Proceso.ceros(.Cells(3).Value, 8)
                     XImporte1 = _NormalizarNumero(.Cells(4).Value)
                     XObservaciones2 = Proceso.leeizquierda(.Cells(5).Value, 30)
                     XImpoNeto = Val(.Cells(6).Value)
@@ -2204,7 +2204,7 @@ Public Class Pagos
                     XImpoNeto = 0
 
                     XTipo2 = Proceso.ceros(.Cells(0).Value, 2)
-                    XNumero2 = .Cells(1).Value
+                    XNumero2 = Proceso.ceros(.Cells(1).Value, 8)
                     XFecha2 = .Cells(2).Value
                     XFechaOrd2 = Proceso.ordenaFecha(XFecha2)
                     XBanco2 = .Cells(3).Value
