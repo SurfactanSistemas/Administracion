@@ -516,12 +516,14 @@ Partial Class Depositos
         Me.numero.HeaderText = "Numero"
         Me.numero.Name = "numero"
         Me.numero.ReadOnly = True
+        Me.numero.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'fecha
         '
         Me.fecha.HeaderText = "Fecha"
         Me.fecha.Name = "fecha"
         Me.fecha.ReadOnly = True
+        Me.fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'nombre
         '
@@ -529,6 +531,7 @@ Partial Class Depositos
         Me.nombre.HeaderText = "Nombre"
         Me.nombre.Name = "nombre"
         Me.nombre.ReadOnly = True
+        Me.nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'importe
         '
@@ -537,12 +540,14 @@ Partial Class Depositos
         Me.importe.HeaderText = "Importe"
         Me.importe.Name = "importe"
         Me.importe.ReadOnly = True
+        Me.importe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.importe.Width = 110
         '
         'ClaveCheque
         '
         Me.ClaveCheque.HeaderText = "ClaveCheque"
         Me.ClaveCheque.Name = "ClaveCheque"
+        Me.ClaveCheque.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.ClaveCheque.Visible = False
         '
         'Depositos

@@ -1255,6 +1255,37 @@ Public Class Pagos
             lstConsulta.Items(indice) = ""
         End If
 
+        Dim pagos As Double = 0
+        Dim formaPagos As Double = 0
+        Dim total As Double = 0
+        Dim WRecalcular = gridPagos.Rows.Cast(Of DataGridViewRow)().Any(Function(row) Val(row.Cells(4).Value) <> 0)
+
+        ' Recalculamos las retenciones.
+        If WRecalcular And Not _ExisteOrdenDePago(txtOrdenPago.Text) Then
+            _RecalcularRetenciones()
+        End If
+
+        total = Val(_NormalizarNumero(txtIVA.Text)) + Val(_NormalizarNumero(txtGanancias.Text)) + Val(_NormalizarNumero(txtIBCiudad.Text)) +
+            Val(_NormalizarNumero(txtIngresosBrutos.Text))
+
+        For Each row As DataGridViewRow In gridPagos.Rows
+            If Not row.IsNewRow Then
+                row.Cells(4).Value = IIf(Trim(row.Cells(4).Value) <> "", Proceso.formatonumerico(row.Cells(4).Value), "")
+                pagos += Val(_NormalizarNumero(row.Cells(4).Value))
+            End If
+        Next
+
+        For Each row As DataGridViewRow In gridFormaPagos.Rows
+            If Not row.IsNewRow Then
+                row.Cells(5).Value = IIf(Trim(row.Cells(5).Value) <> "", Proceso.formatonumerico(row.Cells(5).Value), "")
+                formaPagos += Val(_NormalizarNumero(row.Cells(5).Value))
+            End If
+        Next
+        txtTotal.Text = Proceso.formatonumerico(total)
+        lblPagos.Text = Proceso.formatonumerico(pagos)
+        lblFormaPagos.Text = Proceso.formatonumerico(formaPagos + total)
+        lblDiferencia.Text = Proceso.formatonumerico(pagos - formaPagos - total)
+
     End Sub
 
     Private Function _CtaCteYaUtilizada(ByVal XClave As String) As Boolean
@@ -3398,14 +3429,7 @@ Public Class Pagos
         Dim pagos As Double = 0
         Dim formaPagos As Double = 0
         Dim total As Double = 0
-        Dim WRecalcular = False
-
-        For Each row As DataGridViewRow In gridPagos.Rows
-            If Val(row.Cells(4).Value) <> 0 Then
-                WRecalcular = True
-                Exit For
-            End If
-        Next
+        Dim WRecalcular = gridPagos.Rows.Cast (Of DataGridViewRow)().Any(Function(row) Val(row.Cells(4).Value) <> 0)
 
         ' Recalculamos las retenciones.
         If WRecalcular And Not _ExisteOrdenDePago(txtOrdenPago.Text) Then
@@ -4613,6 +4637,11 @@ Public Class Pagos
         lstSeleccion_MouseClick(Nothing, Nothing)
     End Sub
 
+    Enum Reporte
+        Imprimir
+        Pantalla
+    End Enum
+
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         Dim XOrdenPago As String = IIf(Trim(txtOrdenPago.Text) = "", "0", Trim(txtOrdenPago.Text))
         Dim XEmpCuit As String = "30-54916508-3"
@@ -4921,10 +4950,27 @@ Public Class Pagos
 
         crdoc.SetDataSource(Tabla)
 
-        With VistaPrevia
-            .Reporte = crdoc
-            '.Mostrar()
-            .Imprimir()
+        '
+        ' COMENTADO EN ESPERA DE LA EVOLUCION DEL PROBLEMA EN MAQUINA DE MARIA LAURA.
+        '
+        'With VistaPrevia
+        '    .Reporte = crdoc
+        '    '.Mostrar()
+        '    .Imprimir()
+        'End With
+
+        Dim viewer As New ReportViewer("Orden de Pago", Globals.reportPathWithName("wInformeOrdenPago.rpt"), "")
+
+        With viewer
+            .reporte.SetDataSource(Tabla)
+
+            Select Case Reporte.Imprimir
+                Case Reporte.Pantalla
+                    .ShowDialog()
+                Case Reporte.Imprimir
+                    .imprimirReporte()
+            End Select
+
         End With
 
 

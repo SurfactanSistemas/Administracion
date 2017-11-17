@@ -169,6 +169,7 @@ Public Class AplicacionComprobantes
         Dim importe As Double = 0
         Dim WCodigo As Integer = 0
         Dim WRenglon As Integer = 0
+        Dim WTipo, WLetra, WPunto, WNumero, WFecha, WProveedor, WImporte
 
         Try
             _RecalcularSaldo()
@@ -195,7 +196,19 @@ Public Class AplicacionComprobantes
                     If importe <> 0 Then
                         ' Actualizamos la cta cte del proveedor.
                         Try
-                            SQLConnector.retrieveDataTable("actualizar_cuenta_corriente_proveedor", row.Cells(8).Value.ToString, row.Cells(1).Value.ToString, row.Cells(2).Value.ToString, row.Cells(3).Value.ToString, row.Cells(4).Value.ToString, -1 * importe, Trim(txtProveedor.Text))
+
+                            WProveedor = Trim(txtProveedor.Text)
+                            WTipo = row.Cells("WTipo").Value
+                            WLetra = row.Cells("Letra").Value
+                            WPunto = row.Cells("Punto").Value
+                            WNumero = row.Cells("Numero").Value
+                            WFecha = row.Cells("Fecha").Value
+                            WImporte = importe
+
+                            _ActualizarCtaCteProveedor(WProveedor, WTipo, WLetra, WPunto, WNumero, WFecha, WImporte)
+
+
+                            'SQLConnector.retrieveDataTable("actualizar_cuenta_corriente_proveedor", row.Cells(8).Value.ToString, row.Cells(1).Value.ToString, row.Cells(2).Value.ToString, row.Cells(3).Value.ToString, row.Cells(4).Value.ToString, -1 * importe, Trim(txtProveedor.Text))
                         Catch ex As Exception
                             MsgBox("Ocurrió un problema al querer actualizar la Cuenta Corriente del Proveedor.")
                             Exit Sub
@@ -220,6 +233,61 @@ Public Class AplicacionComprobantes
             MsgBox("La aplicación de Comprobantes fue existosa.", MsgBoxStyle.Information)
 
         End If
+    End Sub
+
+    Private Sub _ActualizarCtaCteProveedor(ByVal wProveedor As Object, ByVal _WTipo As Object, ByVal wLetra As Object, ByVal wPunto As Object, ByVal wNumero As Object, ByVal wFecha As Object, ByVal wImporte As Object)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Clave, Saldo FROM CtaCtePrv WHERE Proveedor = '" & Trim(wProveedor) & "' AND Tipo = '" & _WTipo & "' and Letra = '" & UCase(wLetra) & "' and Numero = '" & Proceso.ceros(wNumero, 8) & "' AND Punto = '" & Proceso.ceros(wPunto, 4) & "' ANd Fecha = '" & wFecha & "' AND Saldo <> 0")
+        Dim dr As SqlDataReader
+        Dim WClave = "", WSaldo = 0.0, XImporte = 0.0
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                With dr
+                    .Read()
+                    WClave = IIf(IsDBNull(.Item("Clave")), "", Trim(.Item("Clave")))
+                    WSaldo = IIf(IsDBNull(.Item("Saldo")), 0, Val(Proceso.formatonumerico(.Item("Saldo"))))
+                End With
+
+                If Trim(WClave) <> "" AndAlso Val(WSaldo) <> 0 Then
+
+                    dr.Close()
+
+                    XImporte = -1 * Val(Proceso.formatonumerico(wImporte))
+
+                    WSaldo = WSaldo + XImporte
+
+                    If WSaldo > -0.1 AndAlso WSaldo < 0.1 Then
+                        WSaldo = 0
+                    End If
+
+                    cm.CommandText = "UPDATE CtaCtePrv SET Saldo = " & WSaldo & " WHERE Clave = '" & WClave & "'"
+                    cm.ExecuteNonQuery()
+
+                End If
+            Else
+                Throw New Exception("Hubo un problema al querer actualizar el saldo de la cuenta corriente del proveedor " & wProveedor & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: No pudo encontrarse la Cuenta Corriente indicada.")
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer actualizar el saldo de la cuenta corriente del proveedor " & wProveedor & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub _DarDeAltaRenglonAplicacionComprobante(ByVal row As DataGridViewRow, ByVal WRenglon As Integer, ByVal WCodigo As Integer)
