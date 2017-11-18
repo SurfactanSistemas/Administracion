@@ -1,5 +1,5 @@
-﻿Imports ClasesCompartidas
-Imports System.IO
+﻿Imports System.Data.SqlClient
+Imports ClasesCompartidas
 
 Public Class ListadoImputacionesContable
 
@@ -105,18 +105,18 @@ Public Class ListadoImputacionesContable
 
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-            lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion(txtAyuda.Text)
-        End If
-    End Sub
+    '    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
+    '                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+    '
+    '        If e.KeyChar = Convert.ToChar(Keys.Return) Then
+    '            e.Handled = True
+    '            lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion(txtAyuda.Text)
+    '        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
+    '            e.Handled = True
+    '            txtAyuda.Text = ""
+    '            lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion(txtAyuda.Text)
+    '        End If
+    '    End Sub
 
     Private Sub mostrarcuenta(ByVal cuenta As CuentaContable)
         txtDesdeCuenta.Text = cuenta.id
@@ -205,8 +205,6 @@ Public Class ListadoImputacionesContable
                                                row.Item(9), row.Item(10), row.Item(11), row.Item(12),
                                                row.Item(13), row.Item(14), row.Item(15), row.Item(16), row.Item(17),
                                                row.Item(18), row.Item(19), row.Item(20))
-
-
 
                 'Select Case CampoPagos.orden
                 '    Case 117336, 117534, 117539, 117381, 117551
@@ -531,6 +529,15 @@ Public Class ListadoImputacionesContable
 
 
         Dim tablaCtaCte As DataTable
+        Dim ZRetIb(8, 2) As String
+        ZRetIb(1, 2) = "162"
+        ZRetIb(2, 2) = "161"
+        ZRetIb(3, 2) = "190"
+        ZRetIb(4, 2) = "191"
+        ZRetIb(5, 2) = "192"
+        ZRetIb(6, 2) = "193"
+        ZRetIb(7, 2) = "194"
+        ZRetIb(8, 2) = "195"
 
         txtCorte = ""
         txtRenglonII = 0
@@ -549,6 +556,7 @@ Public Class ListadoImputacionesContable
                                                row.Item(13), row.Item(14), row.Item(15), row.Item(16), row.Item(17),
                                                row.Item(18), row.Item(19), row.Item(20))
 
+                If Val(CampoRecibos.cuenta) = 162 Then : Stop : End If
 
                 REM If Val(CampoRecibos.recibo) = 88760 Then Stop
                 REM If Val(CampoRecibos.recibo) = 88564 Then Stop
@@ -825,6 +833,78 @@ Public Class ListadoImputacionesContable
 
             Next
 
+            '
+            ' Buscamos los datos de las retenciones que no estabn implementadas.
+            '
+            Try
+                Dim WRetIBs As DataTable = _BuscarRetencionesIBRecibos(txtDesdeFecha.Text, txthastafecha.Text)
+                Dim WRecibo = "", WFecha = "", WImporte = ""
+
+                If Not IsNothing(WRetIBs) Then
+                    For Each ret As DataRow In WRetIBs.Rows
+
+                        With ret
+
+                            WRecibo = IIf(IsDBNull(.Item("Recibo")), "0", Trim(.Item("Recibo")))
+                            WFecha = IIf(IsDBNull(.Item("Fecha")), "0", Trim(.Item("Fecha")))
+
+                            For i = 1 To 8
+                                If IsDBNull(.Item("RetIb" & i)) Then
+                                    ZRetIb(i, 1) = "0"
+                                Else
+                                    ZRetIb(i, 1) = Proceso.formatonumerico(.Item("RetIb" & i))
+                                End If
+                            Next
+
+                        End With
+
+                        For i = 1 To 8
+
+                            If Val(ZRetIb(i, 1)) <> 0 AndAlso Val(WRecibo) <> 0 Then
+
+                                txtRenglonII = txtRenglonII + 1
+                                txtCuenta = ZRetIb(i, 2)
+
+                                ' Chequear que se esta pasando mal.
+                                WImporte = Proceso.formatonumerico(ZRetIb(i, 1))
+
+                                txtTipomovi = "3"
+                                txtNroInterno = WRecibo
+                                txtProveedor = ""
+                                txtTipo = ""
+                                txtLetra = ""
+                                txtPunto = ""
+                                txtNumero = ""
+                                txtRenglon = txtRenglonII
+                                txtFecha = WFecha 'CampoRecibos.fecha
+                                txtObservaciones = ""
+                                txtDebito = Val(WImporte) 'CampoRecibos.retsuss
+                                txtCredito = 0
+                                txtFechaOrd = Proceso.ordenaFecha(WFecha) 'CampoRecibos.fechaord
+                                txtTitulo = "Recibos"
+                                txtEmpresa = 1
+                                txtTituloList = "Surfactan S.A."
+                                txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
+
+                                txtClave = txtTipomovi + txtNroInterno + txtRenglon
+                                txtClaveOrd = txtTipomovi + txtNroInterno
+
+                                SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
+                                                              txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
+
+
+                            End If
+
+                        Next
+
+                    Next
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                Exit Sub
+            End Try
+
         End If
 
 
@@ -936,11 +1016,47 @@ Public Class ListadoImputacionesContable
                 viewer.imprimirReporte()
             Case Reporte.Pantalla
                 viewer.Show()
-            Case Else
-
         End Select
 
     End Sub
+
+    Private Function _BuscarRetencionesIBRecibos(ByVal WDesde As String, ByVal WHasta As String) As DataTable
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Recibo, Fecha, RetIb1, RetIb2, RetIb3, RetIb4, RetIb5, RetIb6, RetIb7, RetIb8 FROM Recibos WHERE (Renglon = '01' OR Renglon = '1') AND FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "'")
+        Dim dr As SqlDataReader
+        Dim tabla As New DataTable
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                tabla.Load(dr)
+
+                Return tabla
+            Else
+                Return Nothing
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los montos y cuentas de IB desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
 
 
     Private Sub txtDesdeCuenta_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeCuenta.MouseDoubleClick, txtHastaCuenta.MouseDoubleClick
@@ -978,22 +1094,22 @@ Public Class ListadoImputacionesContable
         End If
     End Sub
 
-    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-        Dim origen As ListBox = lstAyuda
-        Dim filtrado As ListBox = lstFiltrada
-        Dim texto As TextBox = txtAyuda
-
-        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
-        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
-
-        ' Llamamos al evento que tenga asosiado el control de origen.
-        lstAyuda_Click(Nothing, Nothing)
-
-
-        ' Sacamos de vista los resultados filtrados.
-        filtrado.Visible = False
-        texto.Text = ""
-    End Sub
+    '    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    '        Dim origen As ListBox = lstAyuda
+    '        Dim filtrado As ListBox = lstFiltrada
+    '        Dim texto As TextBox = txtAyuda
+    '
+    '        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+    '        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
+    '
+    '        ' Llamamos al evento que tenga asosiado el control de origen.
+    '        lstAyuda_Click(Nothing, Nothing)
+    '
+    '
+    '        ' Sacamos de vista los resultados filtrados.
+    '        filtrado.Visible = False
+    '        texto.Text = ""
+    '    End Sub
 
     Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
         _FiltrarDinamicamente()

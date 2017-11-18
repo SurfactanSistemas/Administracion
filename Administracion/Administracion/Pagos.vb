@@ -820,8 +820,8 @@ Public Class Pagos
         Dim _Item As String
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
-                                              & "cp.Numero, cp.Fecha, cp.Clave, ivc.Paridad, ivc.Pago FROM CtaCtePrv as cp, IvaComp as ivc WHERE cp.Proveedor = '" _
-                                              & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 AND cp.NroInterno = ivc.NroInterno ORDER BY cp.OrdFecha ASC, cp.Numero")
+                                              & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" _
+                                              & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha ASC, cp.Numero")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -849,8 +849,21 @@ Public Class Pagos
                         XNumero = .Item("Numero").ToString()
                         XFecha = .Item("Fecha").ToString()
                         XClave = .Item("Clave").ToString()
-                        XParidad = _NormalizarNumero(.Item("Paridad").ToString(), 4)
-                        XPago = .Item("Pago").ToString()
+                        XParidad = 0 '_NormalizarNumero(.Item("Paridad").ToString(), 4)
+                        XPago = 0 '.Item("Pago").ToString()
+
+                        If Val(XNroInterno) <> 0 Then
+
+                            Dim WIvaComp As DataRow = _BuscarInfoIvaComp(XNroInterno)
+
+                            If Not IsNothing(WIvaComp) Then
+                                With WIvaComp
+                                    XParidad = IIf(IsDBNull(.Item("Paridad")), "0", Proceso.formatonumerico(.Item("Paridad")))
+                                    XPago = IIf(IsDBNull(.Item("Pago")), "0", Val(.Item("Pago")))
+                                End With
+                            End If
+                            
+                        End If
 
                         If Val(XPago) <> 2 Then
 
@@ -900,6 +913,41 @@ Public Class Pagos
 
         End Try
     End Sub
+
+    Private Function _BuscarInfoIvaComp(ByVal xNroInterno As String) As DataRow
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Paridad, Pago FROM IvaComp WHERE NroInterno =  '" & xNroInterno & "'")
+        Dim dr As SqlDataReader
+        Dim tabla As New DataTable
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            tabla.Load(dr)
+
+            If tabla.Rows.Count > 0 Then
+                Return tabla.Rows(0)
+            Else
+                Return Nothing
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la informacion de la factura en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        Return Nothing
+    End Function
 
     Private Sub _ListarProveedores()
         Dim XClaves As New List(Of Object)
@@ -1314,8 +1362,8 @@ Public Class Pagos
     Private Sub _ProcesarCtaCte(ByVal clave As String)
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT cp.Tipo, cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
-                                              & "cp.Numero, cp.Fecha, cp.Clave, ivc.Paridad, ivc.Pago FROM CtaCtePrv as cp, IvaComp as ivc WHERE cp.Proveedor = '" _
-                                              & Trim(txtProveedor.Text) & "' and cp.Clave = '" & clave & "' and cp.Saldo <> 0 AND cp.NroInterno = ivc.NroInterno ORDER BY cp.OrdFecha DESC")
+                                              & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" _
+                                              & Trim(txtProveedor.Text) & "' and cp.Clave = '" & clave & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha DESC")
         Dim dr As SqlDataReader
 
         'SQLConnector.conexionSql(cn, cm)
@@ -1353,8 +1401,21 @@ Public Class Pagos
 
                     XSaldoUS = 0
                     XParidadTotal = 0
-                    XParidad = .Item("Paridad")
-                    XPago = .Item("Pago").ToString()
+                    XParidad = 0.0 '.Item("Paridad")
+                    XPago = 0 '.Item("Pago").ToString()
+
+                    If Val(XNroInterno) <> 0 Then
+
+                        Dim WIvaComp As DataRow = _BuscarInfoIvaComp(XNroInterno)
+
+                        If Not IsNothing(WIvaComp) Then
+                            With WIvaComp
+                                XParidad = IIf(IsDBNull(.Item("Paridad")), "0", Proceso.formatonumerico(.Item("Paridad")))
+                                XPago = IIf(IsDBNull(.Item("Pago")), "0", Val(.Item("Pago")))
+                            End With
+                        End If
+
+                    End If
 
                     With gridPagos.Rows(XRow)
                         .Cells(0).Value = XTipo
