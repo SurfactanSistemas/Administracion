@@ -35,10 +35,6 @@
         abrir(New BancosABM)
     End Sub
 
-    Private Sub IngresoDeCambiosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        abrir(New TipoCambioABM)
-    End Sub
-
     Private Sub IngresoDeProveedoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeProveedoresToolStripMenuItem.Click
         abrir(New ProveedoresABM)
     End Sub
