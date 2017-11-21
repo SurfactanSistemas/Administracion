@@ -837,7 +837,7 @@ Public Class ListadoImputacionesContable
             ' Buscamos los datos de las retenciones que no estabn implementadas.
             '
             Try
-                Dim WRetIBs As DataTable = _BuscarRetencionesIBRecibos(txtDesdeFecha.Text, txthastafecha.Text)
+                Dim WRetIBs As DataTable = _BuscarRetencionesIBRecibos(Proceso.ordenaFecha(txtDesdeFecha.Text), Proceso.ordenaFecha(txthastafecha.Text))
                 Dim WRecibo = "", WFecha = "", WImporte = ""
 
                 If Not IsNothing(WRetIBs) Then
@@ -1036,7 +1036,7 @@ Public Class ListadoImputacionesContable
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
-
+                
                 tabla.Load(dr)
 
                 Return tabla
@@ -1127,5 +1127,9 @@ Public Class ListadoImputacionesContable
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         _Imprimir(Reporte.Imprimir)
+    End Sub
+
+    Private Sub ListadoImputacionesContable_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesdeFecha.Focus()
     End Sub
 End Class
