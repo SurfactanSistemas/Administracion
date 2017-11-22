@@ -5,156 +5,88 @@ Imports CrystalDecisions.CrystalReports.Engine
 Public Class ComparacionesMensualesValorUnico
 
     Private Sub ComparacionesMensuales_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        ckTodas.Checked = True
+        _Limpiar()
     End Sub
 
-    Private Sub cmbTipoGrafico_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.SelectedIndexChanged, cmbValorAComparar.SelectedIndexChanged
-
-        Select Case cmbTipoGrafico.SelectedIndex
-            Case 1
-                PictureBox1.Image = My.Resources.GraficoBarras
-            Case 2
-                PictureBox1.Image = My.Resources.GraficoTortas
-            Case 3
-                PictureBox1.Image = My.Resources.GraficoLineas
-            Case 4
-                PictureBox1.Image = My.Resources.GraficoBarras3D
-            Case Else
-                PictureBox1.Image = Nothing
-                Exit Sub
-        End Select
-
+    Private Sub _Limpiar()
+        ckTodas.Checked = True
+        cmbTipoGrafico.SelectedIndex = 0
+        cmbTipoComparacion.SelectedIndex = 0
+        txtAnio.Text = ""
     End Sub
 
     Private Function _ArmarBuscarFamilias() As String
+        Dim chks() As CheckBox = {ckQuimicos, ckColorantes, ckFarma, ckFazonPellital, _
+                                  ckFazonFarma, ckFazonQuimicos, ckVarios}
 
-        Dim WBuscarFamilias = " WHERE Tipo in ("
+        Dim WBuscarFamilias = " Tipo in ("
 
-        If ckQuimicos.Checked Then
-            WBuscarFamilias &= "'1',"
-        End If
-
-        If ckColorantes.Checked Then
-            WBuscarFamilias &= "'2',"
-        End If
-
-        If ckFarma.Checked Then
-            WBuscarFamilias &= "'3',"
-        End If
-
-        If ckFazonPellital.Checked Then
-            WBuscarFamilias &= "'4',"
-        End If
-
-        If ckFazonFarma.Checked Then
-            WBuscarFamilias &= "'5',"
-        End If
-
-        If ckFazonQuimicos.Checked Then
-            WBuscarFamilias &= "'6',"
-        End If
-
-        If ckVarios.Checked Then
-            WBuscarFamilias &= "'7',"
-        End If
+        For i = 0 To 6
+            If chks(i).Checked Then
+                WBuscarFamilias &= "'" & i + 1 & "',"
+            End If
+        Next
 
         If WBuscarFamilias.EndsWith(",") Then
             WBuscarFamilias = Mid(WBuscarFamilias, 1, WBuscarFamilias.Length - 1)
         End If
 
-        WBuscarFamilias &= ")"
+        Return WBuscarFamilias & ")"
 
-
-        Return WBuscarFamilias
-    End Function
-
-    Private Function _BuscarTituloGrafico() As String
-        Return cmbValorAComparar.SelectedItem
     End Function
 
     Private Function _BuscarDatosAComparar() As String
-
-        Select Case cmbValorAComparar.SelectedIndex
-            Case 1
-                Return "Venta"
-            Case 2
-                Return "Kilos"
-            Case 3
-                Return "Factor"
-            Case 4
-                Return "Precio"
-            Case 5
-                Return "Stock"
-            Case 6
-                Return "Rotacion"
-            Case 7
-                Return "PorceVenta"
-            Case 8
-                Return "Pedidos"
-            Case 9
-                Return "Atraso"
-            Case 10
-                Return "PorceAtraso"
-            Case 11
-                Return "Promedio"
-            Case Else
-                Return Nothing
-        End Select
-
+        Return Nothing
     End Function
 
     Private Function _TraerDatosParaGraficos() As DataTable
         Dim tabla As DataTable = _ArmarTablaYDatos()
 
-        Dim titulo = _BuscarTituloGrafico()
+        If _EsEntreFamilias() Then
+            Return _FormatearDatosMensualEntreFamilias(tabla)
+        End If
 
-        For Each row As DataRow In tabla.Rows
-            With row
-                .Item("Titulo") = titulo
-            End With
-        Next
-
-        Select Case cmbTipoPeriodo.SelectedIndex
-
-            Case 1 ' Mensual.
-
-                '
-                ' Modificamos los datos en la tabla principal. Los nombres de las familias, pasan a ser los titulos 1-12 y valores 1-12 son ahora los valores de cada familia para un mes determinado que será el tipo.
-                '
-                If _EsEntreFamilias() Then
-                    Return _FormatearDatosMensualEntreFamilias(tabla)
-                End If
-
-                Return tabla
-
-            Case 2 ' Bimestral
-
-                If _EsEntreFamilias() Then
-                    Return _FormatearDatosBimestralEntreFamilias(tabla)
-                End If
-
-                Return _FormatearDatosBimestralPorFamilia(tabla)
-
-            Case 3 ' Trimestral.
-
-                '
-                ' Cargamos el titulo correspondiente.
-                '
-                If _EsEntreFamilias() Then
-                    Return _FormatearDatosTrimestralEntreFamilias(tabla)
-                End If
-
-                Return _FormatearDatosTrimestralPorFamilia(tabla)
-
-            Case Else
-
-                Return tabla
-
-        End Select
+        Return tabla
 
     End Function
 
     Private Function _ArmarTablaYDatos() As DataTable
+        Dim WAnio As Integer = 0
+        Dim WMeses(12) As Integer
+        Dim row As DataRow
+        Dim tabla As DataTable = _CrearTablaDetalles()
+
+        '
+        ' Obtenemos los mese con los cuales trabajar.
+        '
+        WMeses = _TraerMesesAConsultar()
+
+        '
+        ' Obtenemos el año por el cual se van a traer los datos.
+        '
+        WAnio = Val(txtAnio.Text)
+
+        For i = 1 To 12
+
+            If WMeses(i - 0) <> -1 Then
+
+                row = tabla.NewRow()
+
+
+
+                tabla.Rows.Add(row)
+
+            End If
+            
+        Next
+
+        Return _TraerInformacionPorFamilia()
+
+    End Function
+
+    Private Function _TraerInformacionPorFamilia() As DataTable
+
+
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
@@ -164,6 +96,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Try
             ZSql = _ArmarConsultaSQL()
+
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
             cm.Connection = cn
@@ -186,19 +119,51 @@ Public Class ComparacionesMensualesValorUnico
         End Try
 
         Return tabla
+    End Function
 
+    Private Function _TraerMesesAConsultar() As Integer()
+        Dim WMeses(12) As Integer
+        Dim WIndice = 0
+        Dim temp() As CheckBox = {ckEnero, ckFebrero, ckMarzo, ckAbril, ckMayo, ckJunio, ckJulio, ckAgosto, ckSeptiembre, ckOctubre, ckNoviembre, ckDiciembre}
+        Dim ck As CheckBox
+
+        '
+        ' Guardamos la posicion del mes chequeado y le sumamos uno para que coincida con el numero de mes.
+        '
+        For i = 0 To 11
+
+            ck = temp(i)
+
+            If ck.Checked Then
+                WMeses(WIndice) = i + 1
+                WIndice += 1
+            End If
+
+        Next
+
+        '
+        ' Completamos los lugares restantes con -1 asi no los tenemos en cuenta en la consulta.
+        '
+        For i = WIndice To 11
+            WMeses(i) = -1
+        Next
+
+        Return WMeses
     End Function
 
     Private Function _ArmarConsultaSQL() As String
         Dim ZSql As String = ""
+        Dim WBuscarFamilias As String = ""
+        Dim Temp, Aux, dato As String
 
         '
         ' ARMAMOS EL CONDICIONAL CON LAS FAMILIAS A BUSCAR.
         '
-        Dim WBuscarFamilias = _ArmarBuscarFamilias()
-
-        Dim Temp = "SELECT Tipo, Descripcion, Descripcion as Titulo #DATOS# FROM Comando", Aux = ""
-        Dim dato = _BuscarDatosAComparar()
+        WBuscarFamilias = _ArmarBuscarFamilias()
+        
+        Aux = ""
+        Temp = "SELECT Tipo, Descripcion, Descripcion as Titulo #DATOS# FROM Comando"
+        dato = _BuscarDatosAComparar()
 
         If dato Is Nothing Then
             Throw New Exception("Debe seleccionarse un valor por el cual comparar.")
@@ -295,256 +260,9 @@ Public Class ComparacionesMensualesValorUnico
         Return auxi
     End Function
 
-    Private Function _FormatearDatosTrimestralEntreFamilias(ByVal tabla As DataTable) As DataTable
-        Dim auxi As DataTable
-        Dim x, grupo As Integer
-
-        ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
-        auxi = tabla.Copy
-        auxi.Rows.Clear()
-
-
-        For i = 1 To (4 * tabla.Rows.Count) '28
-            auxi.Rows.Add()
-        Next
-
-        x = -1
-        grupo = 1
-
-        For i = 1 To 12
-
-            For j = 0 To tabla.Rows.Count - 1
-
-                ' Crear una fila nueva por cada mes de cada flia.
-                x += 1
-
-                With auxi.Rows(x)
-                    .Item("tipo") = grupo
-                    .Item("valor1") = tabla.Rows(j).Item("valor" & i)
-                    .Item("valor2") = tabla.Rows(j).Item("valor" & i + 1)
-                    .Item("valor3") = tabla.Rows(j).Item("valor" & i + 2)
-                    .Item("titulo1") = tabla.Rows(j).Item("titulo" & i)
-                    .Item("titulo2") = tabla.Rows(j).Item("titulo" & i + 1)
-                    .Item("titulo3") = tabla.Rows(j).Item("titulo" & i + 2)
-                    .Item("Descripcion") = tabla.Rows(j).Item("Descripcion")
-                End With
-
-            Next
-
-            i += 2
-            grupo += 1
-        Next
-
-        Return auxi
-    End Function
-
-    Private Function _FormatearDatosTrimestralPorFamilia(ByVal tabla As DataTable) As DataTable
-        Dim auxi As DataTable
-        Dim x As Integer = -1
-
-        ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
-        auxi = tabla.Copy
-        auxi.Rows.Clear()
-
-
-        For i = 1 To (4 * tabla.Rows.Count) '28 ' 4 filas por familia (4 * 7)
-            auxi.Rows.Add()
-        Next
-
-        x = -1
-
-        For j = 0 To tabla.Rows.Count - 1
-
-            For i = 1 To 12
-
-                ' Crear una fila nueva por cada mes de cada flia.
-                x += 1
-                With auxi.Rows(x)
-                    .Item("tipo") = x
-                    .Item("valor1") = tabla.Rows(j).Item("valor" & i)
-                    .Item("valor2") = tabla.Rows(j).Item("valor" & i + 1)
-                    .Item("valor3") = tabla.Rows(j).Item("valor" & i + 2)
-                    .Item("titulo1") = tabla.Rows(j).Item("titulo" & i)
-                    .Item("titulo2") = tabla.Rows(j).Item("titulo" & i + 1)
-                    .Item("titulo3") = tabla.Rows(j).Item("titulo" & i + 2)
-                    .Item("Descripcion") = tabla.Rows(j).Item("Descripcion")
-                End With
-                i += 2
-            Next
-
-        Next
-
-        Return auxi
-    End Function
-
-    Private Function _FormatearDatosBimestralEntreFamilias(ByVal tabla As DataTable) As DataTable
-        Dim auxi As DataTable
-        Dim x, grupo As Integer
-
-        ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
-        auxi = tabla.Copy
-        auxi.Rows.Clear()
-
-
-        For i = 1 To (6 * tabla.Rows.Count) '42
-            auxi.Rows.Add()
-        Next
-
-        x = -1
-        grupo = 1
-
-        For i = 1 To 12
-
-            For j = 0 To tabla.Rows.Count - 1
-
-                ' Crear una fila nueva por cada mes de cada flia.
-                x += 1
-
-                With auxi.Rows(x)
-                    .Item("tipo") = grupo
-                    .Item("valor1") = tabla.Rows(j).Item("valor" & i)
-                    .Item("valor2") = tabla.Rows(j).Item("valor" & i + 1)
-                    .Item("titulo1") = tabla.Rows(j).Item("titulo" & i)
-                    .Item("titulo2") = tabla.Rows(j).Item("titulo" & i + 1)
-                    .Item("Descripcion") = tabla.Rows(j).Item("Descripcion")
-                End With
-
-            Next
-
-            i += 1
-            grupo += 1
-        Next
-
-        Return auxi
-    End Function
-
-
-    Private Function _FormatearDatosBimestralPorFamilia(ByVal tabla As DataTable) As DataTable
-        Dim auxi As DataTable
-        Dim x As Integer = -1
-
-        ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
-        auxi = tabla.Copy
-        auxi.Rows.Clear()
-
-
-        For i = 1 To (6 * tabla.Rows.Count) '42 ' 6 filas por familia (6 * 7)
-            auxi.Rows.Add()
-        Next
-
-        x = -1
-
-        For j = 0 To tabla.Rows.Count - 1
-
-            For i = 1 To 12
-
-                ' Crear una fila nueva por cada mes de cada flia.
-                x += 1
-                With auxi.Rows(x)
-                    .Item("tipo") = x
-                    .Item("valor1") = tabla.Rows(j).Item("valor" & i)
-                    .Item("valor2") = tabla.Rows(j).Item("valor" & i + 1)
-                    .Item("titulo1") = tabla.Rows(j).Item("titulo" & i)
-                    .Item("titulo2") = tabla.Rows(j).Item("titulo" & i + 1)
-                    .Item("Descripcion") = tabla.Rows(j).Item("Descripcion")
-                End With
-                i += 1
-            Next
-
-        Next
-
-        Return auxi
-    End Function
-
     Private Function _FamiliasSeleccionadas() As Boolean
 
-        For Each ck As CheckBox In {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios}
-
-            If ck.Checked Then
-
-                Return True
-
-            End If
-
-        Next
-
-        Return False
-
-    End Function
-
-    Private Function _TraerReporteTrimestralPorValorUnico()
-
-        ' Modificar para que las comparaciones sean entre familias y por familias.
-        Select Case cmbTipoGrafico.SelectedIndex
-            Case 1
-
-                If _EsEntreFamilias() Then
-                    Return New TrimestralEntreFamiliasValorUnicoBarras
-                End If
-
-                Return New TrimestralPorFamiliaValorUnicoBarras
-
-            Case 2
-
-                If _EsEntreFamilias() Then
-                    Return New TrimestralEntreFamiliasValorUnicoTortas
-                End If
-
-                Return New TrimestralPorFamiliaValorUnicoTortas
-
-            Case 3
-
-                If _EsEntreFamilias() Then
-                    Return New TrimestralEntreFamiliasValorUnicoLineas
-                End If
-
-                Return New TrimestralPorFamiliaValorUnicoLineas
-
-            Case 4
-
-                If _EsEntreFamilias() Then
-                    Return New TrimestralEntreFamiliasValorUnicoBarras3D
-                End If
-
-                Return New TrimestralPorFamiliaValorUnicoBarras3D
-
-            Case Else
-                Return Nothing
-        End Select
-
-    End Function
-
-    Private Function _TraerReporteBimestralPorValorUnico()
-
-        ' Modificar para que las comparaciones sean entre familias y por familias.
-        Select Case cmbTipoGrafico.SelectedIndex
-            Case 1
-
-                If _EsEntreFamilias() Then
-                    Return New BimestralEntreFamiliasValorUnicoBarras
-                End If
-
-                Return New BimestralPorFamiliaValorUnicoBarras
-
-            Case 3
-
-                If _EsEntreFamilias() Then
-                    Return New BimestralEntreFamiliasValorUnicoLineas
-                End If
-
-                Return New BimestralPorFamiliaValorUnicoLineas
-
-                'Case 4
-
-                '    If _EsEntreFamilias() Then
-                '        Return New TrimestralEntreFamiliasValorUnicoBarras3D
-                '    End If
-
-                '    Return New TrimestralPorFamiliaValorUnicoBarras3D
-
-            Case Else
-                Return Nothing
-        End Select
+        Return {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios}.Any(Function(ck) ck.Checked)
 
     End Function
 
@@ -554,38 +272,24 @@ Public Class ComparacionesMensualesValorUnico
 
     End Function
 
-    Private Function _TraerReporteMensualPorValorUnico()
+    Private Function _TraerReporteMensual()
 
         Select Case cmbTipoGrafico.SelectedIndex
-            Case 1 ' Barras
+            Case 0 ' Barras
 
                 If _EsEntreFamilias() Then
                     Return New MensualEntreFamiliasValorUnicoBarras
                 End If
 
                 Return New MensualPorFamiliaValorUnicoBarras
-            Case 2 ' Pastel
 
-                If _EsEntreFamilias() Then
-                    Return New MensualEntreFamiliasValorUnicoTortas
-                End If
-
-                Return New MensualPorFamiliaValorUnicoTortas
-            Case 3
+            Case 1 ' Lineas
 
                 If _EsEntreFamilias() Then
                     Return Nothing
                 End If
 
                 Return New MensualPorFamiliaValorUnicoLineas
-
-            Case 4 ' Barras 3D
-
-                If _EsEntreFamilias() Then
-                    Return New MensualEntreFamiliasValorUnicoBarras3D
-                End If
-
-                Return New MensualPorFamiliaValorUnicoBarras3D
 
             Case Else
                 Return Nothing
@@ -608,25 +312,18 @@ Public Class ComparacionesMensualesValorUnico
         End If
 
         '
+        ' VALIDAMOS QUE SE HAYA SELECCIONADO ALGUN MES.
+
+        If Not _MesesElegidos() Then
+            MsgBox("Se debe seleccionar por lo menos un mes para generar un reporte.", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        '
         ' BUSCAMOS EL RPT SEGUN TIPO DE COMPARACION Y TIPO DE GRAFICO INDICADO.
         '
 
-        Select Case cmbTipoPeriodo.SelectedIndex
-            Case 1 ' Mensual por/entre Familia
-
-                WReporte = _TraerReporteMensualPorValorUnico()
-
-            Case 2 ' Bimestral
-
-                WReporte = _TraerReporteBimestralPorValorUnico()
-
-            Case 3 ' Trimestral
-
-                WReporte = _TraerReporteTrimestralPorValorUnico()
-
-            Case Else
-                Exit Sub
-        End Select
+        WReporte = _TraerReporteMensual()
 
         '
         ' BUSCAMOS LOS DATOS CON LOS CUALES TRABAJAR.
@@ -652,62 +349,52 @@ Public Class ComparacionesMensualesValorUnico
 
         If tabla Is Nothing Then : Exit Sub : End If
 
-        With VistaPrevia
+        DataGridView1.DataSource = tabla
 
-            .Reporte = WReporte
-            .Reporte.SetDataSource(tabla)
-            .Mostrar()
+        'With VistaPrevia
 
-        End With
+        '    .Reporte = WReporte
+        '    .Reporte.SetDataSource(tabla)
+        '    .Mostrar()
+
+        'End With
     End Sub
 
-    Private Sub ckTodas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodas.CheckedChanged
-        Dim valor As Boolean = False
-
-        Select Case ckTodas.Checked
-            Case True
-
-                valor = True
-
-            Case False
-
-                valor = False
-
-            Case Else
-                Exit Sub
-        End Select
-
-
-        For Each ck As CheckBox In {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios}
-            ck.Checked = valor
-        Next
-
-    End Sub
-
-    Private Sub cmbTipoGrafico_DropDown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoGrafico.DropDown
-        Dim WEntreFamilias As String() = {"", "Barras", "Pasteles", "Lineas", "Barras 3D"}
-        Dim WPorFamilia As String() = {"", "Barras", "Pasteles", "", "Barras 3D"}
-
-        If _EsEntreFamilias() AndAlso _EsComparacionMensual() Then
-
-            cmbTipoGrafico.DataSource = WPorFamilia ' No se permite grafico de lineas cuando es entre familias la comparacion mensual
-
-        Else
-
-            cmbTipoGrafico.DataSource = WEntreFamilias
-
-        End If
-
-    End Sub
-
-    Private Function _EsComparacionMensual() As Boolean
-        Return cmbTipoPeriodo.SelectedIndex = 1
+    Private Function _MesesElegidos() As Boolean
+        Return {ckEnero, ckFebrero, ckMarzo, ckAbril, ckMayo, ckJunio, ckJulio, ckAgosto, ckSeptiembre, ckOctubre, ckNoviembre, ckDiciembre}.Any(Function(ck) ck.Checked)
     End Function
 
-    Private Sub cmbTipoComparacion_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoComparacion.SelectedIndexChanged, cmbTipoPeriodo.SelectedIndexChanged
+    Private Sub ckTodas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodas.CheckedChanged, ckPedidos.CheckedChanged, ckOctubre.CheckedChanged
+        For Each ck As CheckBox In {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios}
+            ck.Checked = ckTodas.Checked
+        Next
+    End Sub
 
-        If _EsEntreFamilias() AndAlso _EsComparacionMensual() AndAlso cmbTipoGrafico.SelectedIndex = 3 Then
-            cmbTipoGrafico.DroppedDown = True
+    Private Sub ckTodosValores_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodosValores.CheckedChanged
+        For Each ck As CheckBox In {ckVenta, ckAtrasados, ckFactor, ckKilos, ckPedidos, ckPorcentajeAtrasos, ckPrecio, ckRotacion, ckStock, ckPorcentaje}
+            ck.Checked = ckTodosValores.Checked
+        Next
+    End Sub
+
+    Private Sub ckTodosMeses_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodosMeses.CheckedChanged
+        For Each ck As CheckBox In {ckEnero, ckFebrero, ckMarzo, ckAbril, ckMayo, ckJunio, ckJulio, ckAgosto, ckSeptiembre, ckOctubre, ckNoviembre, ckDiciembre}
+            ck.Checked = ckTodosMeses.Checked
+        Next
+    End Sub
+
+    Private Sub ckValoresAComparar_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckVenta.CheckedChanged, ckAtrasados.CheckedChanged, ckFactor.CheckedChanged, ckKilos.CheckedChanged, ckPedidos.CheckedChanged, ckPorcentajeAtrasos.CheckedChanged, ckPrecio.CheckedChanged, ckRotacion.CheckedChanged, ckStock.CheckedChanged, ckPorcentaje.CheckedChanged
+        '
+        ' Contamos los valores que se seleccionaron para graficar.
+        '
+        Dim seleccionados As Integer = {ckVenta, ckAtrasados, ckFactor, ckKilos, ckPedidos, ckPorcentajeAtrasos, ckPrecio, ckRotacion, ckStock, ckPorcentaje}.Count(Function(ck) ck.Checked)
+
+        '
+        ' Seleccionamos por defecto tipo de grafico en linea en caso de que hayan mas de dos valores marcados. Sino lo colocamos como "Barras"
+        '
+        If seleccionados > 2 Then
+            cmbTipoGrafico.SelectedIndex = 1
+        Else
+            cmbTipoGrafico.SelectedIndex = 0
         End If
 
     End Sub
