@@ -6875,19 +6875,21 @@ Public Class Pagos
 
     Private Sub _RecalcularRetenciones()
 
-        ' Recalculo de Retenciones de Ganancias.
-        _RecalcularRetencionGanancias()
+        If optCtaCte.Checked Or optAnticipos.Checked Then
+            ' Recalculo de Retenciones de Ganancias.
+            _RecalcularRetencionGanancias()
 
-        ' Recalculo de Retenciones por Iva.
-        _RecalcularRetencionIVA()
+            ' Recalculo de Retenciones por Iva.
+            _RecalcularRetencionIVA()
 
-        ' Recalculo IB Provincia
-        _RecalcularIBProvincia()
+            ' Recalculo IB Provincia
+            _RecalcularIBProvincia()
 
-        ' Recalculo IB CABA
-        _RecalcularIBCABA()
+            ' Recalculo IB CABA
+            _RecalcularIBCABA()
 
-        'sumarImportes()
+            'sumarImportes()
+        End If
 
     End Sub
 
