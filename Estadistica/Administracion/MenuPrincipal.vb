@@ -132,7 +132,4 @@ Public Class MenuPrincipal
         End If
     End Sub
 
-    Private Sub EstadisticasPorVendedorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EstadisticasPorVendedorToolStripMenuItem.Click
-
-    End Sub
 End Class

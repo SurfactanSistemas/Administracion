@@ -17,7 +17,14 @@ Public Class ReportViewer
         ruta = rutaReporte
         formula = formulaReporte
         reporte.Load(ruta)
+
+        _ReconectarBaseDatos()
+
         reporte.SetParameterValue(0, ClasesCompartidas.Globals.NombreEmpresa)
+    End Sub
+
+    Private Sub _ReconectarBaseDatos()
+
 
         ' CONECTAMOS CON LA BASE DE DATOS QUE CORRESPONDA.
         Dim cs = ""
@@ -27,7 +34,7 @@ Public Class ReportViewer
             cs = ClasesCompartidas.Globals.getConnectionString()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
-            Exit Sub
+            Return
         End Try
 
         ' Extraemos los datos de conexion del string de conexion.
@@ -41,6 +48,7 @@ Public Class ReportViewer
         conexion.ServerName = cnsb.DataSource
         conexion.UserID = cnsb.UserID
         conexion.Password = cnsb.Password
+        'conexion.IntegratedSecurity = True
 
         Dim tli As New TableLogOnInfo()
         tli.ConnectionInfo = conexion
@@ -48,15 +56,20 @@ Public Class ReportViewer
         ' Volvemos a asignar los datos de conexion pero ahora a cada una de las tablas que tenga el reporte.
         For Each tabla As Table In reporte.Database.Tables
 
-            tabla.ApplyLogOnInfo(tli)
+            Dim _logInfo As TableLogOnInfo = tabla.LogOnInfo
+
+            _logInfo.ConnectionInfo = conexion
+
+            tabla.ApplyLogOnInfo(_logInfo)
 
         Next
-
     End Sub
 
     Private Sub ReportViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Text = nombre
         CrystalReportViewer1.SelectionFormula = formula
+
+        _ReconectarBaseDatos()
 
         CrystalReportViewer1.ReportSource = reporte
 
@@ -91,10 +104,6 @@ Public Class ReportViewer
         'Exporta y crea el pdf.
         reporte.RecordSelectionFormula = formula
         reporte.Export()
-    End Sub
-
-    Private Sub CrystalReportViewer1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CrystalReportViewer1.Load
-
     End Sub
 
 End Class
