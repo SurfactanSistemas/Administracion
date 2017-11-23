@@ -5079,10 +5079,13 @@ Public Class Pagos
         Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
-        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
         If Proceso._EsPellital() Then
             WEmpCuit = "30-61052459-8"
             WEmpNombre = "PELLITAL S.A."
+            WEmpDireccion = "Tucumán 3275"
+            WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
+            WNroIb = "902-931405-2"
         End If
 
         SQLConnector.conexionSql(cn, cm)
@@ -5397,10 +5400,13 @@ Public Class Pagos
         Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
-        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
         If Proceso._EsPellital() Then
             WEmpCuit = "30-61052459-8"
             WEmpNombre = "PELLITAL S.A."
+            WEmpDireccion = "Tucumán 3275"
+            WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
+            WNroIb = "902-931405-2"
         End If
 
         SQLConnector.conexionSql(cn, cm)
@@ -5730,10 +5736,13 @@ Public Class Pagos
         Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
-        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
         If Proceso._EsPellital() Then
             WEmpCuit = "30-61052459-8"
             WEmpNombre = "PELLITAL S.A."
+            WEmpDireccion = "Tucumán 3275"
+            WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
+            WNroIb = "902-931405-2"
         End If
 
         SQLConnector.conexionSql(cn, cm)
@@ -6185,10 +6194,12 @@ Public Class Pagos
         Dim WCuatri As String = ""
         Dim WLeyenda(10) As String
 
-        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
         If Proceso._EsPellital() Then
             WEmpCuit = "30-61052459-8"
             WEmpNombre = "PELLITAL S.A."
+            WEmpDireccion = "Tucumán 3275"
+            WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
         End If
 
         WLeyenda(1) = "Compra de Bienes"
