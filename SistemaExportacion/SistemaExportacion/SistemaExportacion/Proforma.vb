@@ -1386,9 +1386,22 @@ Public Class Proforma
         ' Consultar si se quiere enviar una notificación a ventas sobre el cambio de estado de la Proforma.
 
         If Val(WEstado) = 1 Then
+
+            Try
+
+                ' GUARDAMOS/ACTUALIZAMOS EL PDF DE LA PROFORMA.
+                _ActualizarPDFProforma(XNroProforma)
+
+            Catch ex As Exception
+
+                MsgBox("No se ha podido actualizar el archivo PDF relacionado a esta Proforma." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+
+            End Try
+
             If MsgBox("¿Desea notificar a Ventas sobre la aprobación de la actual Proforma?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 _NotificarAVentas(XNroProforma)
             End If
+
         End If
 
         btnVistaPrevia.PerformClick()
@@ -1397,6 +1410,33 @@ Public Class Proforma
         btnCerrar.PerformClick()
 
         MenuPrincipal.btnLimpiarFiltros.PerformClick()
+
+    End Sub
+
+    Private Sub _ActualizarPDFProforma(ByVal WNroProforma As String)
+
+        If Val(WNroProforma) <= 0 Then : Exit Sub : End If
+
+        Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & WNroProforma
+
+        With VistaPrevia
+            .Reporte = New ProformaVistaPrevia
+            '.Reporte.DataSourceConnections(0).SetLogonProperties()
+            .Formula = "{ProformaExportacion.Proforma} = '" & WNroProforma & "'"
+
+            Try
+
+                If Not Directory.Exists(WRutaArchivosRelacionados) Then
+                    Directory.CreateDirectory(WRutaArchivosRelacionados)
+                End If
+
+                .GuardarPDF("Proforma" & WNroProforma, WRutaArchivosRelacionados)
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+                'Exit Sub
+            End Try
+
+        End With
 
     End Sub
 
@@ -1417,9 +1457,11 @@ Public Class Proforma
 
             WArchivoProforma = Helper._CarpetaArchivosProforma(NroProforma) & "Proforma" & NroProforma & ".pdf"
 
-            If File.Exists(WArchivoProforma) Then
-                oMsg.Attachments.Add(WArchivoProforma)
+            If Not File.Exists(WArchivoProforma) Then
+                _ActualizarPDFProforma(NroProforma)
             End If
+
+            oMsg.Attachments.Add(WArchivoProforma)
 
             ' Modificar por los E-Mails que correspondan.
             'oMsg.To = "gferreyra@surfactan.com.ar"
@@ -1557,16 +1599,18 @@ Public Class Proforma
             '.Reporte.DataSourceConnections(0).SetLogonProperties()
             .Formula = "{ProformaExportacion.Proforma} = '" & txtNroProforma.Text & "'"
 
-            If Not Directory.Exists(WRutaArchivosRelacionados) Then
-                Try
-                    Directory.CreateDirectory(WRutaArchivosRelacionados)
+            Try
 
-                    .GuardarPDF("Proforma" & txtNroProforma.Text, WRutaArchivosRelacionados)
-                Catch ex As Exception
-                    Throw New Exception(ex.Message)
-                    'Exit Sub
-                End Try
-            End If
+                If Not Directory.Exists(WRutaArchivosRelacionados) Then
+                    Directory.CreateDirectory(WRutaArchivosRelacionados)
+                End If
+
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+                'Exit Sub
+            End Try
+
+            .GuardarPDF("Proforma" & txtNroProforma.Text, WRutaArchivosRelacionados)
 
             .Mostrar()
         End With
