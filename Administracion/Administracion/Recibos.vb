@@ -2733,7 +2733,7 @@ Public Class Recibos
             Dim iCol = gridFormasPago2.CurrentCell.ColumnIndex
             Dim iRow = gridFormasPago2.CurrentCell.RowIndex
 
-            Debug.Print(keyData)
+            'Debug.Print(keyData)
 
             ' Limitamos los caracteres permitidos para cada una de las columnas.
             Select Case iCol
@@ -2745,8 +2745,6 @@ Public Class Recibos
                     If Not _EsDecimalOControl(keyData) Then
                         Return True
                     End If
-                Case Else
-
             End Select
 
             'If iCol = 0 Then
@@ -3484,6 +3482,10 @@ Public Class Recibos
 
             End If
 
+        End If
+
+        If Proceso._EsPellital() Then
+            crdoc = New ReciboDefinitivoEmailPellital
         End If
 
         ' En caso de Recibos varios solamente se imprime una copia (a pedido de Domingo).

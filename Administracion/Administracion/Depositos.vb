@@ -297,7 +297,7 @@ Public Class Depositos
             End With
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar los cheques en recibos definitivos en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
             dr = Nothing
@@ -345,7 +345,7 @@ Public Class Depositos
             End With
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar los cheques en Recibos Provisorios en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
             dr = Nothing
@@ -943,7 +943,7 @@ Public Class Depositos
                 End If
 
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, vbExclamation)
+                MsgBox("Hubo un problema al querer consultar la informacion del Depósito indicado desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, vbExclamation)
                 Exit Sub
             Finally
 
@@ -1067,6 +1067,12 @@ Public Class Depositos
         WNombre = Trim(txtDescripcionBanco.Text)
         WTotal = Val(Proceso.formatonumerico(txtImporte.Text))
         WTitulo = "SURFACTAN S.A"
+
+        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        If Proceso._EsPellital() Then
+            'WEmpCuit = "30-61052459-8"
+            WTitulo = "PELLITAL S.A."
+        End If
 
         For iRow = 0 To gridCheques.Rows.Count - 1
 

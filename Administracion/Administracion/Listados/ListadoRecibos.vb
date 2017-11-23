@@ -109,8 +109,6 @@ Public Class ListadoRecibos
                     .Imprimir()
                 Case Reporte.Pantalla
                     .Mostrar()
-                Case Else
-
             End Select
 
         End With

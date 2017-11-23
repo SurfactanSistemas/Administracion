@@ -1,9 +1,6 @@
 ﻿Imports ClasesCompartidas
 Imports System.IO
 
-Imports CrystalDecisions.CrystalReports.Engine
-Imports CrystalDecisions.Shared
-
 Public Class ProcesoPercepciones
 
 
@@ -16,9 +13,7 @@ Public Class ProcesoPercepciones
     Dim WCuit As String
     Dim WFecha As String
     Dim WImporte As String
-    Dim WRecibo As String
     Dim WTipoFac As String
-    Dim WTipo As String
     Dim WNumero As String
     Dim WNeto As String
     Dim WImporteII As Double
@@ -37,16 +32,6 @@ Public Class ProcesoPercepciones
     Dim WCampo9 As String
     Dim WCampo10 As String
     Dim WCampo11 As String
-    Dim WCampo12 As String
-    Dim WCampo13 As String
-    Dim WCampo14 As String
-    Dim WCampo15 As String
-    Dim WCampo16 As String
-    Dim WCampo17 As String
-    Dim WCampo18 As String
-    Dim WCampo19 As String
-    Dim WCampo20 As String
-    Dim WSucursal As String
 
     Private Sub ProcesoPercepciones_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 

@@ -104,14 +104,8 @@ Public Class CuentaContableABM
 
         If UCase(Trim(txtFiltrar.Text)) <> "" Then
 
-            For Each item In LBConsulta.Items
-
-                If UCase(item.ToString()).Contains(UCase(Trim(txtFiltrar.Text))) Then
-
-                    LBConsulta_Filtrada.Items.Add(item.ToString())
-
-                End If
-
+            For Each item In From item1 As Object In LBConsulta.Items Where UCase(item1.ToString()).Contains(UCase(Trim(txtFiltrar.Text)))
+                LBConsulta_Filtrada.Items.Add(item.ToString())
             Next
 
             LBConsulta_Filtrada.Visible = True

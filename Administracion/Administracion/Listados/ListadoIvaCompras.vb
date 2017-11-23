@@ -83,7 +83,10 @@ Public Class ListadoIvaCompras
         txtTitulo = "Surfactan S.A."
         txtTituloII = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
-
+        If Proceso._EsPellital() Then
+            txtEmpresa = "Pellital S.A."
+            txtTitulo = "Pellital S.A."
+        End If
 
         Dim tabla As DataTable
         tabla = SQLConnector.retrieveDataTable("Lee_Ivacomp", txtDesdefechaOrd, txtHastafechaOrd)

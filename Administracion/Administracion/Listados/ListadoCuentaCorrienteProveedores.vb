@@ -1,5 +1,4 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoCuentaCorrienteProveedores
 
@@ -97,6 +96,10 @@ Public Class ListadoCuentaCorrienteProveedores
         End If
 
         txtEmpresa = "Surfactan S.A."
+
+        If Proceso._EsPellital() Then
+            txtEmpresa = "Pellital S.A."
+        End If
 
         Dim tabla As DataTable
         tabla = SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_desdehasta", txtDesdeProveedor.Text, txtHastaProveedor.Text, WTipo)

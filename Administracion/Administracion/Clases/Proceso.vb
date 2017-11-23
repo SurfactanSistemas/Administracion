@@ -1,8 +1,37 @@
 ﻿Module Proceso
 
-    Private empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
-
     Private Const VALIDA_CUIT = "54327654321"
+
+    Public ReadOnly Property Empresas As List(Of String)
+        Get
+            ' DETERMINO LAS EMPRESAS CON LAS QUE TRABAJAR.
+            Select Case UCase(Trim(ClasesCompartidas.Globals.empresa))
+
+                Case "SURFACTAN"
+
+                    Return New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+
+                Case "PELLITAL"
+
+                    Return New List(Of String) From {"PellitalSA", "Pellital_II", "Pellital_III", "Pellital_V"}
+
+                Case "Local"
+
+                    ' PARA TRABAJOS EN LOCAL.
+
+                    Return New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+                Case Else
+
+                    Return New List(Of String) From {}
+
+            End Select
+
+        End Get
+    End Property
+
+    Public Function _EsPellital() As Boolean
+        Return ClasesCompartidas.Globals.empresa.Equals("PELLITAL")
+    End Function
 
     Public Function _NormalizarFilas(ByVal tabla As DataTable) As DataTable
 
@@ -40,11 +69,20 @@
 
     Public Function _ConectarA(Optional ByVal empresa As String = "SurfactanSA") As String
 
-        Dim _empresa = empresas.Find(Function(e) UCase(e) = UCase(empresa))
+        If _EsPellital() AndAlso empresa = "SurfactanSA" Then
+            empresa = "Pellital_III"
+        End If
+
+        Dim _empresa = Empresas.Find(Function(e) UCase(e) = UCase(empresa))
 
         If Not IsNothing(_empresa) Then
 
             Dim cs = ClasesCompartidas.Globals.getConnectionString()
+
+            If _EsPellital() Then
+                Return cs.Replace("Catalog=Pellital_III", "Catalog=" & _empresa)
+            End If
+
             Return cs.Replace("Catalog=SurfactanSA", "Catalog=" & _empresa)
 
         Else
@@ -365,7 +403,6 @@
                     varMinimo = 30000
                 Case 7
                     varMinimo = 30000
-                Case Else
             End Select
 
             varAcumuladPago = varAcumulaNeto + varBase
@@ -513,8 +550,6 @@
     End Function
 
     Public Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
-        Dim xfecha As String = ""
-        Dim _temp As String = fecha
         Dim _Fecha As String() = fecha.Split("/")
         ' Se normaliza la fecha (Ej: 3/04/2000 => 03/04/2000 ó 3/4/2000 => 03/04/2000) y se controla que tenga los ocho digitos obligatoriamente.
         'Return Trim(_Normalizarfecha(Trim(fecha))).Replace("/", "").Length = 8
@@ -522,8 +557,6 @@
             _Fecha(0) = Val(_Fecha(0)).ToString() ' 03 => 3, 12 => 12
             _Fecha(1) = Val(_Fecha(1)).ToString() ' 04 => 4, 12 => 12
             _Fecha(2) = Val(_Fecha(2)).ToString() ' 2000 => 2000, 0201 => 201
-
-            xfecha = String.Join("/", _Fecha) ' 3/4/2000, 12/12/201
 
             fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
 

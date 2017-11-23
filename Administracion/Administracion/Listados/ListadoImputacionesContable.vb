@@ -138,7 +138,7 @@ Public Class ListadoImputacionesContable
 
         Dim txtUno As String
 
-        Dim txtEmpresa As String
+        Dim txtEmpresa = "", WEmpresa = "1"
         Dim txtFormula As String
         Dim x As Char = Chr(34)
         Dim txtDesdefechaOrd, txtHastafechaOrd
@@ -166,6 +166,11 @@ Public Class ListadoImputacionesContable
         SQLConnector.retrieveDataTable("limpiar_impCyb")
 
         txtEmpresa = "Surfactan S.A."
+
+        If Proceso._EsPellital() Then
+            txtEmpresa = "Pellital S.A."
+            WEmpresa = "8"
+        End If
 
         txtDesdefechaOrd = ordenaFecha(txtDesdeFecha.Text)
         txtHastafechaOrd = ordenaFecha(txthastafecha.Text)
@@ -232,11 +237,17 @@ Public Class ListadoImputacionesContable
                             End Select
 
                         Else
-                            txtCuenta = "2001"
+                            
                             Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(CampoPagos.proveedor)
-                            If IsNothing(CampoProveedor) Then
-                                REM MsgBox("Proveedor incorrecto")
-                            Else
+
+                            If Not IsNothing(CampoProveedor) Then
+
+                                txtCuenta = "2001"
+
+                                If Proceso._EsPellital() AndAlso Val(CampoProveedor.id) = 10077777777 Then
+                                    txtCuenta = "2046"
+                                End If
+
                                 If Val(CampoProveedor.provincia) = 24 Then
                                     txtCuenta = "2010"
                                 End If
@@ -268,6 +279,11 @@ Public Class ListadoImputacionesContable
                         txtTitulo = "Pagos"
                         txtEmpresa = 1
                         txtTituloList = "Surfactan S.A."
+
+                        If Proceso._EsPellital() Then
+                            txtTituloList = "Pellital S.A."
+                        End If
+
                         txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                         txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -412,6 +428,11 @@ Public Class ListadoImputacionesContable
                         txtTitulo = "Pagos"
                         txtEmpresa = 1
                         txtTituloList = "Surfactan S.A."
+
+                        If Proceso._EsPellital() Then
+                            txtTituloList = "Pellital S.A."
+                        End If
+
                         txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                         txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -579,11 +600,11 @@ Public Class ListadoImputacionesContable
                                 txtCuenta = "101"
                             Else
                                 txtCuenta = "91"
-                                'If Val(WEmpresa) <> 1 Then
-                                '    If campoecibos.provincia = 24 Then
-                                '        WCuenta = "92"
-                                '    End If
-                                'End If
+                                If Val(WEmpresa) <> 1 Then
+                                    If Val(CampoRecibos.provincia) = 24 Then
+                                        txtCuenta = "92"
+                                    End If
+                                End If
                             End If
                         End If
 
@@ -654,6 +675,11 @@ Public Class ListadoImputacionesContable
                         txtTitulo = "Recibos"
                         txtEmpresa = 1
                         txtTituloList = "Surfactan S.A."
+
+                        If Proceso._EsPellital() Then
+                            txtTituloList = "Pellital S.A."
+                        End If
+
                         txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                         txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -693,6 +719,11 @@ Public Class ListadoImputacionesContable
                         txtTitulo = "Recibos"
                         txtEmpresa = 1
                         txtTituloList = "Surfactan S.A."
+
+                        If Proceso._EsPellital() Then
+                            txtTituloList = "Pellital S.A."
+                        End If
+
                         txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                         txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -724,6 +755,11 @@ Public Class ListadoImputacionesContable
                     txtTitulo = "Recibos"
                     txtEmpresa = 1
                     txtTituloList = "Surfactan S.A."
+
+                    If Proceso._EsPellital() Then
+                        txtTituloList = "Pellital S.A."
+                    End If
+
                     txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                     txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -756,6 +792,11 @@ Public Class ListadoImputacionesContable
                     txtTitulo = "Recibos"
                     txtEmpresa = 1
                     txtTituloList = "Surfactan S.A."
+
+                    If Proceso._EsPellital() Then
+                        txtTituloList = "Pellital S.A."
+                    End If
+
                     txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                     txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -789,6 +830,11 @@ Public Class ListadoImputacionesContable
                     txtTitulo = "Recibos"
                     txtEmpresa = 1
                     txtTituloList = "Surfactan S.A."
+                    
+                    If Proceso._EsPellital() Then
+                        txtTituloList = "Pellital S.A."
+                    End If
+
                     txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                     txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -821,6 +867,11 @@ Public Class ListadoImputacionesContable
                     txtTitulo = "Recibos"
                     txtEmpresa = 1
                     txtTituloList = "Surfactan S.A."
+
+                    If Proceso._EsPellital() Then
+                        txtTituloList = "Pellital S.A."
+                    End If
+
                     txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                     txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -884,6 +935,11 @@ Public Class ListadoImputacionesContable
                                 txtTitulo = "Recibos"
                                 txtEmpresa = 1
                                 txtTituloList = "Surfactan S.A."
+                                
+                                If Proceso._EsPellital() Then
+                                    txtTituloList = "Pellital S.A."
+                                End If
+
                                 txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                                 txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -943,6 +999,11 @@ Public Class ListadoImputacionesContable
                 txtTitulo = "Deposito"
                 txtEmpresa = 1
                 txtTituloList = "Surfactan S.A."
+
+                If Proceso._EsPellital() Then
+                    txtTituloList = "Pellital S.A."
+                End If
+
                 txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                 txtClave = txtTipomovi + txtNroInterno + txtRenglon
@@ -981,6 +1042,11 @@ Public Class ListadoImputacionesContable
                 txtTitulo = "Deposito"
                 txtEmpresa = 1
                 txtTituloList = "Surfactan S.A."
+
+                If Proceso._EsPellital() Then
+                    txtTituloList = "Pellital S.A."
+                End If
+
                 txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
                 txtClave = txtTipomovi + txtNroInterno + txtRenglon

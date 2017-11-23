@@ -1,5 +1,4 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoProyeccionCobrosAnalitico
 
@@ -72,18 +71,6 @@ Public Class ListadoProyeccionCobrosAnalitico
 
         txtAyuda.Focus()
 
-    End Sub
-
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-        End If
     End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
@@ -209,7 +196,13 @@ Public Class ListadoProyeccionCobrosAnalitico
 
         varFormula = varUno + varDos + varTres
 
-        SQLConnector.executeProcedure("modificar_ctacteprv_titulo", "Surfactan S.A.", "", varFecha1, varFecha2, varordFecha1, varordFecha2, varDesdeFecha, varHastaFecha, txtDesdeProveedor.Text, txtHastaProveedor.Text)
+        Dim WEmpresa = "Surfactan S.A."
+
+        If Proceso._EsPellital() Then
+            WEmpresa = "Pellital S.A."
+        End If
+
+        SQLConnector.executeProcedure("modificar_ctacteprv_titulo", WEmpresa, "", varFecha1, varFecha2, varordFecha1, varordFecha2, varDesdeFecha, varHastaFecha, txtDesdeProveedor.Text, txtHastaProveedor.Text)
 
         Dim viewer As New ReportViewer("Listado de Proyeccion de Corriente de Proveedres Analitico", Globals.reportPathWithName("wProyprvanaliticonet.rpt"), varFormula)
 

@@ -219,17 +219,17 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtAyuda.KeyPress
-        'If e.KeyChar = Convert.ToChar(Keys.Return) Then
-        '    e.Handled = True
-        '    lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-        'ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-        '    e.Handled = True
-        '    txtAyuda.Text = ""
-        'End If
-    End Sub
+    'Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
+    '               ByVal e As System.Windows.Forms.KeyPressEventArgs) _
+    '               Handles txtAyuda.KeyPress
+    '    'If e.KeyChar = Convert.ToChar(Keys.Return) Then
+    '    '    e.Handled = True
+    '    '    lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
+    '    'ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
+    '    '    e.Handled = True
+    '    '    txtAyuda.Text = ""
+    '    'End If
+    'End Sub
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
 
@@ -333,7 +333,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         'SQLConnector.conexionSql(cn, cm)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = Proceso._ConectarA
             cn.Open()
 
             dr.Fill(tabla)
@@ -363,7 +363,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = Proceso._ConectarA
             cn.Open()
 
             dr.Fill(proveedor)
@@ -396,7 +396,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         'SQLConnector.conexionSql(cn, cm)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = Proceso._ConectarA
             cn.Open()
 
             dr.Fill(compra)
@@ -428,7 +428,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         'SQLConnector.conexionSql(cn, cm)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = Proceso._ConectarA
             cn.Open()
 
             dr.Fill(acumulado)
@@ -491,6 +491,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         txtEmpresa = "Surfactan S.A."
         varEmpresa = 1
+
+        If Proceso._EsPellital() Then
+            txtEmpresa = "Pellital S.A"
+            varEmpresa = 8
+        End If
 
         varOrdFecha = ordenaFecha(txtFechaEmision.Text)
 
@@ -678,7 +683,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         varRetIbI = CaculoRetencionIngresosBrutos(varTipoIb, varPorceIb, varAcumulaNeto)
 
                         '
-                        'calculo de rtencion de Ingresos brutos CABA
+                        'calculo de retencion de Ingresos brutos CABA. SOLO PARA SURFACTAN.
                         '
                         If varEmpresa = 1 Then
                             varRetIbII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumulaNeto)
@@ -773,45 +778,43 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     .Imprimir()
                 Case Reporte.Pantalla
                     .Mostrar()
-                Case Else
-
             End Select
         End With
 
     End Sub
 
-    Private Sub _ConsultarSiEliminarListaParcialDeProveedores()
+    '    Private Sub _ConsultarSiEliminarListaParcialDeProveedores()
+    '
+    '        If MsgBox("¿Desea limpiar la lista parcial de proveedores de este periodo?", MsgBoxStyle.Exclamation) = DialogResult.OK Then
+    '            _LimpiarTodosLosProveedoresSelectivos()
+    '        End If
+    '
+    '    End Sub
 
-        If MsgBox("¿Desea limpiar la lista parcial de proveedores de este periodo?", MsgBoxStyle.Exclamation) = DialogResult.OK Then
-            _LimpiarTodosLosProveedoresSelectivos()
-        End If
-
-    End Sub
-
-    Private Sub _LimpiarTodosLosProveedoresSelectivos()
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo")
-
-        SQLConnector.conexionSql(cn, cm)
-
-        Try
-
-            cm.ExecuteNonQuery()
-
-            '    MsgBox("Se han eliminado todos los proveedores correspondientes a este periodo.", MsgBoxStyle.Information)
-
-        Catch ex As Exception
-            MsgBox("Hubo un problema al querer eliminar a todos los Proveedores que se encontraban guardados en la Base de Datos.", MsgBoxStyle.Critical)
-        Finally
-
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-    End Sub
+    '    Private Sub _LimpiarTodosLosProveedoresSelectivos()
+    '
+    '        Dim cn As SqlConnection = New SqlConnection()
+    '        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo")
+    '
+    '        SQLConnector.conexionSql(cn, cm)
+    '
+    '        Try
+    '
+    '            cm.ExecuteNonQuery()
+    '
+    '            '    MsgBox("Se han eliminado todos los proveedores correspondientes a este periodo.", MsgBoxStyle.Information)
+    '
+    '        Catch ex As Exception
+    '            MsgBox("Hubo un problema al querer eliminar a todos los Proveedores que se encontraban guardados en la Base de Datos.", MsgBoxStyle.Critical)
+    '        Finally
+    '
+    '            cn.Close()
+    '            cn = Nothing
+    '            cm = Nothing
+    '
+    '        End Try
+    '
+    '    End Sub
 
     Private Sub txtDesdeProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeProveedor.KeyDown
         If e.KeyData = Keys.Enter Then
@@ -860,30 +863,30 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     End Sub
 
-    Private Function _EliminarProveedorSelectivo() As Boolean
-        Dim exito As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo")
-
-        SQLConnector.conexionSql(cn, cm)
-
-        Try
-
-            cm.ExecuteNonQuery()
-            exito = True
-
-        Catch ex As Exception
-            MsgBox("Hubo un problema al querer eliminar los Proveedores precargados.", MsgBoxStyle.Critical)
-        Finally
-
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return exito
-    End Function
+    '    Private Function _EliminarProveedorSelectivo() As Boolean
+    '        Dim exito As Boolean = False
+    '        Dim cn As SqlConnection = New SqlConnection()
+    '        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo")
+    '
+    '        SQLConnector.conexionSql(cn, cm)
+    '
+    '        Try
+    '
+    '            cm.ExecuteNonQuery()
+    '            exito = True
+    '
+    '        Catch ex As Exception
+    '            MsgBox("Hubo un problema al querer eliminar los Proveedores precargados.", MsgBoxStyle.Critical)
+    '        Finally
+    '
+    '            cn.Close()
+    '            cn = Nothing
+    '            cm = Nothing
+    '
+    '        End Try
+    '
+    '        Return exito
+    '    End Function
 
     Private Sub lstAyuda_Filtrada_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstAyuda_Filtrada.Click
         If Trim(lstFiltrada.SelectedItem) <> "" Then

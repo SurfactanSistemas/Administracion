@@ -103,13 +103,13 @@ Public Class ConsultaRemitos
     End Sub
 
     Private Sub btnConsultaRemitos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaRemitos.Click
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
         Dim ConnectionStringTemplate As String
         Dim DiferenciaFechas As Long
         Dim remitos As New List(Of String)
-        Dim Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+        Dim Empresas = Proceso.Empresas 'As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
         If Trim(txtCodigoProveedor.Text) = "" Then
             Exit Sub

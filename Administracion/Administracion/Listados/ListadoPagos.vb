@@ -1,6 +1,4 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
-
 
 Public Class ListadoPagos
 

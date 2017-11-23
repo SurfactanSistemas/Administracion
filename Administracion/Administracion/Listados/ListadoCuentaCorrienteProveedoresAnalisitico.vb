@@ -1,5 +1,4 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoCuentaCorrienteProveedoresAnalisitico
 
@@ -88,18 +87,6 @@ Public Class ListadoCuentaCorrienteProveedoresAnalisitico
 
         txtAyuda.Focus()
 
-    End Sub
-
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-        End If
     End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)

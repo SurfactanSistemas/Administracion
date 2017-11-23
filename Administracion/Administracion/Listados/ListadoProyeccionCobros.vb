@@ -122,18 +122,6 @@ Public Class ListadoProyeccionCobros
 
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-        End If
-    End Sub
-
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
         txtDesdeProveedor.Text = proveedor.id
         txtHastaProveedor.Text = proveedor.id
@@ -164,6 +152,10 @@ Public Class ListadoProyeccionCobros
         SQLConnector.retrieveDataTable("limpiar_impCtaCtePrvNet")
 
         txtEmpresa = "Surfactan S.A."
+
+        If Proceso._EsPellital() Then
+            txtEmpresa = "Pellital S.A."
+        End If
 
         txtfechaOrd1 = ordenaFecha(txtFecha1.Text)
         txtfechaOrd2 = ordenaFecha(txtFecha2.Text)
@@ -226,8 +218,6 @@ Public Class ListadoProyeccionCobros
                 viewer.imprimirReporte()
             Case Reporte.Pantalla
                 viewer.Show()
-            Case Else
-
         End Select
 
     End Sub

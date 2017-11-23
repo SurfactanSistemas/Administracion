@@ -1213,20 +1213,12 @@ Public Class Pagos
 
         End Try
     End Sub
-
-
-
-    Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
-    End Sub
-
+    
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
         lstConsulta.Visible = False
         txtConsulta.Visible = False
         lstSeleccion.Visible = True
     End Sub
-
-
 
     Private Function _ObtenerClaveConsulta(ByVal _Item As String) As String
         Dim clave As String = ""
@@ -2689,16 +2681,7 @@ Public Class Pagos
 
         XEmpresa = "1"
 
-        Dim _Empresas As New List(Of String) From {}
-
-        Select Case Val(XEmpresa)
-            Case 1, 3, 5, 6, 7, 10, 11
-
-                _Empresas.AddRange({"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"})
-
-            Case Else
-
-        End Select
+        Dim _Empresas = Proceso.Empresas 'As New List(Of String) From {}
 
         If _Empresas.Count > 0 Then
             For Ciclo = 1 To 10
@@ -4706,6 +4689,7 @@ Public Class Pagos
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         Dim XOrdenPago As String = IIf(Trim(txtOrdenPago.Text) = "", "0", Trim(txtOrdenPago.Text))
         Dim XEmpCuit As String = "30-54916508-3"
+        Dim WEmpresa = "SURFACTAN S.A."
         Dim XRazon, XCuitProveedor, WTipo, WLetra, WPunto, WNumero, ClaveCtaprv, WCtaProveedor, WCtaEfectivo, WCtaCheques, ClaveBanco As String
         Dim WRenglon, XTotal, XSubtotal, XCantidad, XLugarResumen As Double
         Dim WImpresion(15, 10) As String
@@ -4716,6 +4700,12 @@ Public Class Pagos
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand
         Dim dr As SqlDataReader
+
+        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        If Proceso._EsPellital() Then
+            XEmpCuit = "30-61052459-8"
+            WEmpresa = "PELLITAL S.A."
+        End If
 
         ' Verificamos de que haya codigo de orden de pago valido para traer.
         If Val(XOrdenPago) <= 0 Then
@@ -4968,7 +4958,7 @@ Public Class Pagos
                 .Item("Rete2") = Val(Proceso.formatonumerico(txtIngresosBrutos.Text)) + Val(Proceso.formatonumerico(txtIBCiudad.Text))
                 .Item("Total") = Val(txtIVA.Text)
                 .Item("Observaciones") = txtObservaciones.Text
-                .Item("Empresa") = "Surfactan S.A."
+                .Item("Empresa") = WEmpresa '"Surfactan S.A."
                 .Item("Cuit") = XEmpCuit
                 .Item("Paridad") = Val(Proceso.formatonumerico(XParidadTotal))
 
@@ -5000,7 +4990,7 @@ Public Class Pagos
                 .Item("Rete2") = Val(Proceso.formatonumerico(txtIngresosBrutos.Text)) + Val(Proceso.formatonumerico(txtIBCiudad.Text))
                 .Item("Total") = Val(Proceso.formatonumerico(txtIVA.Text))
                 .Item("Observaciones") = txtObservaciones.Text
-                .Item("Empresa") = "Surfactan S.A."
+                .Item("Empresa") = WEmpresa '"Surfactan S.A."
                 .Item("Cuit") = XEmpCuit
                 .Item("Paridad") = Val(Proceso.formatonumerico(XParidadTotal))
             End With
@@ -5088,6 +5078,12 @@ Public Class Pagos
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
+
+        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        If Proceso._EsPellital() Then
+            WEmpCuit = "30-61052459-8"
+            WEmpNombre = "PELLITAL S.A."
+        End If
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -5400,6 +5396,12 @@ Public Class Pagos
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
+
+        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        If Proceso._EsPellital() Then
+            WEmpCuit = "30-61052459-8"
+            WEmpNombre = "PELLITAL S.A."
+        End If
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -5728,6 +5730,11 @@ Public Class Pagos
         Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
+        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        If Proceso._EsPellital() Then
+            WEmpCuit = "30-61052459-8"
+            WEmpNombre = "PELLITAL S.A."
+        End If
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -6177,6 +6184,12 @@ Public Class Pagos
         Dim Mes As String = Val(Mid$(txtFecha.Text, 3, 2))
         Dim WCuatri As String = ""
         Dim WLeyenda(10) As String
+
+        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        If Proceso._EsPellital() Then
+            WEmpCuit = "30-61052459-8"
+            WEmpNombre = "PELLITAL S.A."
+        End If
 
         WLeyenda(1) = "Compra de Bienes"
         WLeyenda(2) = "Ejericio Prof. Lib. c/Aj.Inf."

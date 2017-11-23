@@ -1,5 +1,4 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoValoresEnCarteraCuit
 
@@ -68,12 +67,9 @@ Public Class ListadoValoresEnCarteraCuit
 
         Dim varUno, varDos As String
 
-        Dim varEmpresa As String
         Dim varFormula As String
         Dim x As Char = Chr(34)
         Dim varDesdefechaOrd, varHastafechaOrd As String
-
-        varEmpresa = "Surfactan S.A."
 
         varDesdefechaOrd = ordenaFecha(txtDesdeFecha.Text)
         varHastafechaOrd = ordenaFecha(txthastafecha.Text)

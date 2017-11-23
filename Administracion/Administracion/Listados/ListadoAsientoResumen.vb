@@ -1,5 +1,4 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoAsientoResumen
 
@@ -100,19 +99,6 @@ Public Class ListadoAsientoResumen
 
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-            lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion(txtAyuda.Text)
-        End If
-    End Sub
-
     Private Sub mostrarcuenta(ByVal cuenta As CuentaContable)
         txtDesdeCuenta.Text = cuenta.id
         txtHastaCuenta.Text = cuenta.id
@@ -121,7 +107,6 @@ Public Class ListadoAsientoResumen
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
         mostrarcuenta(lstAyuda.SelectedValue)
-        REM txtDesdeProveedor.Text = lstAyuda.SelectedValue.id
     End Sub
 
 
@@ -176,8 +161,6 @@ Public Class ListadoAsientoResumen
                 viewer.Show()
             Case Reporte.Imprimir
                 viewer.imprimirReporte()
-            Case Else
-
         End Select
 
     End Sub

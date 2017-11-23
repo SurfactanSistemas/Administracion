@@ -1,5 +1,4 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoValoresEnCartera
 
@@ -133,18 +132,6 @@ Public Class ListadoValoresEnCartera
 
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOCliente.buscarClientePorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-        End If
-    End Sub
-
     Private Sub mostrarCliente(ByVal cliente As Cliente)
         txtCliente.Text = cliente.id
         txtRazonSocial.Text = cliente.razon
@@ -169,10 +156,7 @@ Public Class ListadoValoresEnCartera
     Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         Dim varUno As String
-
-        Dim varEmpresa As String
         Dim varFormula As String
-        Dim x As Char = Chr(34)
         Dim varDesdefechaOrd, varHastafechaOrd As String
         Dim varDesdeCliente, varHastaCliente As String
         Dim varFecha1, varFecha2, VarFecha3, VarFecha4 As String
@@ -183,7 +167,8 @@ Public Class ListadoValoresEnCartera
 
         SQLConnector.retrieveDataTable("limpiar_valcar")
 
-        varEmpresa = "Surfactan S.A."
+        If Proceso._EsPellital() Then
+        End If
 
         varDesdefechaOrd = ordenaFecha(txtDesdeFecha.Text)
         varHastafechaOrd = ordenaFecha(txtHastaFecha.Text)
@@ -241,8 +226,6 @@ Public Class ListadoValoresEnCartera
             destino = IIf(IsDBNull(row.Item(24)), "", row.Item(24))
 
             Dim CampoRecibos As New LeeRecibosValcar(fechaord, recibo, tiporeg, tiporec, cuenta, cliente, tipo1, letra1, punto1, numero1, fecha, tipo2, numero2, importe1, paridad, importe2, retiva, retotra, retsuss, retganancias, renglon, Banco2, Fecha2, FechaOrd2, destino)
-
-            varEmpresa = 1
 
             varImpo1 = 0
             varImpo2 = 0
