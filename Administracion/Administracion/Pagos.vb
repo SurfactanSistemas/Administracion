@@ -5042,9 +5042,9 @@ Public Class Pagos
             _ImprimirComprobanteRetencionIB()
         End If
 
-        ' Imprimimos Comprobante de Retención de Ingresos Brutos CABA si la hubiese.
+        ' Imprimimos Comprobante de Retención de Ingresos Brutos CABA si la hubiese y si estuviesemos en SURFACTAN.
 
-        If Val(txtIBCiudad.Text) <> 0 Then
+        If Val(txtIBCiudad.Text) <> 0 AndAlso Not Proceso._EsPellital() Then
             _ImprimirComprobanteRetencionIBCiudad()
         End If
 
@@ -6898,8 +6898,11 @@ Public Class Pagos
             ' Recalculo IB Provincia
             _RecalcularIBProvincia()
 
-            ' Recalculo IB CABA
-            _RecalcularIBCABA()
+            ' PELLITAL NO RETIENE EN CABA
+            If Not Proceso._EsPellital() Then
+                ' Recalculo IB CABA
+                _RecalcularIBCABA()
+            End If
 
             'sumarImportes()
         End If

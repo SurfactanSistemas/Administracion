@@ -1133,7 +1133,7 @@ Public Class Depositos
             .Mostrar()
         End With
 
-        If XTipo = 3 Then
+        If XTipo = 3 AndAlso Not Proceso._EsPellital() Then
 
             crdoc = New DepositoBancario2
 
