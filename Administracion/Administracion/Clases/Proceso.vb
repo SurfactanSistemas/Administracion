@@ -7,7 +7,7 @@
             ' DETERMINO LAS EMPRESAS CON LAS QUE TRABAJAR.
             Select Case UCase(Trim(ClasesCompartidas.Globals.empresa))
 
-                Case "SURFACTAN"
+                Case "SURFACTAN", "LOCAL"
 
                     Return New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
@@ -15,11 +15,6 @@
 
                     Return New List(Of String) From {"PellitalSA", "Pellital_II", "Pellital_III", "Pellital_V"}
 
-                Case "Local"
-
-                    ' PARA TRABAJOS EN LOCAL.
-
-                    Return New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
                 Case Else
 
                     Return New List(Of String) From {}
