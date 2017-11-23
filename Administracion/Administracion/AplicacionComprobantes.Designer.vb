@@ -36,15 +36,6 @@ Partial Class AplicacionComprobantes
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.dtgCuentas = New System.Windows.Forms.DataGridView()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Saldo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Aplica = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.txtProveedor = New Administracion.CustomTextBox()
         Me.txtSaldo = New Administracion.CustomTextBox()
@@ -59,6 +50,15 @@ Partial Class AplicacionComprobantes
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.lstAyuda = New Administracion.CustomListBox()
         Me.lstFiltrada = New Administracion.CustomListBox()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Saldo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Aplica = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.dtgCuentas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -117,84 +117,11 @@ Partial Class AplicacionComprobantes
         Me.dtgCuentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgCuentas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Fecha, Me.Importe, Me.Saldo, Me.Aplica, Me.WTipo})
         Me.dtgCuentas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dtgCuentas.Location = New System.Drawing.Point(17, 51)
+        Me.dtgCuentas.Location = New System.Drawing.Point(16, 51)
         Me.dtgCuentas.Name = "dtgCuentas"
-        Me.dtgCuentas.Size = New System.Drawing.Size(695, 272)
+        Me.dtgCuentas.Size = New System.Drawing.Size(704, 272)
         Me.dtgCuentas.StandardTab = True
         Me.dtgCuentas.TabIndex = 36
-        '
-        'Tipo
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.ReadOnly = True
-        Me.Tipo.Width = 50
-        '
-        'Letra
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Letra.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Letra.HeaderText = "Letra"
-        Me.Letra.Name = "Letra"
-        Me.Letra.ReadOnly = True
-        Me.Letra.Width = 50
-        '
-        'Punto
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Punto.HeaderText = "Punto"
-        Me.Punto.Name = "Punto"
-        Me.Punto.ReadOnly = True
-        Me.Punto.Width = 50
-        '
-        'Numero
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Numero.HeaderText = "Numero"
-        Me.Numero.Name = "Numero"
-        Me.Numero.ReadOnly = True
-        '
-        'Fecha
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        '
-        'Importe
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle6
-        Me.Importe.HeaderText = "Importe"
-        Me.Importe.Name = "Importe"
-        Me.Importe.ReadOnly = True
-        '
-        'Saldo
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle7
-        Me.Saldo.HeaderText = "Saldo"
-        Me.Saldo.Name = "Saldo"
-        Me.Saldo.ReadOnly = True
-        '
-        'Aplica
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Aplica.DefaultCellStyle = DataGridViewCellStyle8
-        Me.Aplica.HeaderText = "Aplica"
-        Me.Aplica.Name = "Aplica"
-        '
-        'WTipo
-        '
-        Me.WTipo.HeaderText = "WTipo"
-        Me.WTipo.Name = "WTipo"
-        Me.WTipo.ReadOnly = True
-        Me.WTipo.Visible = False
         '
         'CustomLabel3
         '
@@ -202,7 +129,7 @@ Partial Class AplicacionComprobantes
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(16, 17)
+        Me.CustomLabel3.Location = New System.Drawing.Point(21, 17)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(73, 18)
         Me.CustomLabel3.TabIndex = 31
@@ -214,7 +141,7 @@ Partial Class AplicacionComprobantes
         Me.txtProveedor.Empty = True
         Me.txtProveedor.EnterIndex = -1
         Me.txtProveedor.LabelAssociationKey = -1
-        Me.txtProveedor.Location = New System.Drawing.Point(95, 16)
+        Me.txtProveedor.Location = New System.Drawing.Point(100, 16)
         Me.txtProveedor.MaxLength = 11
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(125, 20)
@@ -229,7 +156,7 @@ Partial Class AplicacionComprobantes
         Me.txtSaldo.Empty = True
         Me.txtSaldo.EnterIndex = -1
         Me.txtSaldo.LabelAssociationKey = -1
-        Me.txtSaldo.Location = New System.Drawing.Point(583, 16)
+        Me.txtSaldo.Location = New System.Drawing.Point(588, 16)
         Me.txtSaldo.Name = "txtSaldo"
         Me.txtSaldo.ReadOnly = True
         Me.txtSaldo.Size = New System.Drawing.Size(126, 20)
@@ -244,7 +171,7 @@ Partial Class AplicacionComprobantes
         Me.txtRazon.Empty = True
         Me.txtRazon.EnterIndex = -1
         Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(226, 16)
+        Me.txtRazon.Location = New System.Drawing.Point(231, 16)
         Me.txtRazon.Name = "txtRazon"
         Me.txtRazon.Size = New System.Drawing.Size(300, 20)
         Me.txtRazon.TabIndex = 33
@@ -256,7 +183,7 @@ Partial Class AplicacionComprobantes
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(535, 17)
+        Me.CustomLabel2.Location = New System.Drawing.Point(540, 17)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(42, 18)
         Me.CustomLabel2.TabIndex = 35
@@ -404,6 +331,80 @@ Partial Class AplicacionComprobantes
         Me.lstFiltrada.TabIndex = 40
         Me.lstFiltrada.Visible = False
         '
+        'Tipo
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.ReadOnly = True
+        Me.Tipo.Width = 50
+        '
+        'Letra
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Letra.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Letra.HeaderText = "Letra"
+        Me.Letra.Name = "Letra"
+        Me.Letra.ReadOnly = True
+        Me.Letra.Width = 50
+        '
+        'Punto
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Punto.HeaderText = "Punto"
+        Me.Punto.Name = "Punto"
+        Me.Punto.ReadOnly = True
+        Me.Punto.Width = 50
+        '
+        'Numero
+        '
+        Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Numero.HeaderText = "Numero"
+        Me.Numero.Name = "Numero"
+        Me.Numero.ReadOnly = True
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        '
+        'Importe
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Importe.HeaderText = "Importe"
+        Me.Importe.Name = "Importe"
+        Me.Importe.ReadOnly = True
+        '
+        'Saldo
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Saldo.HeaderText = "Saldo"
+        Me.Saldo.Name = "Saldo"
+        Me.Saldo.ReadOnly = True
+        '
+        'Aplica
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Aplica.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Aplica.HeaderText = "Aplica"
+        Me.Aplica.Name = "Aplica"
+        '
+        'WTipo
+        '
+        Me.WTipo.HeaderText = "WTipo"
+        Me.WTipo.Name = "WTipo"
+        Me.WTipo.ReadOnly = True
+        Me.WTipo.Visible = False
+        '
         'AplicacionComprobantes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -450,6 +451,7 @@ Partial Class AplicacionComprobantes
     Friend WithEvents dtgCuentas As System.Windows.Forms.DataGridView
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
     Friend WithEvents btnProceso As Administracion.CustomButton
+    Friend WithEvents btnLimpiar As Administracion.CustomButton
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Letra As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Punto As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -459,5 +461,4 @@ Partial Class AplicacionComprobantes
     Friend WithEvents Saldo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Aplica As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents WTipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btnLimpiar As Administracion.CustomButton
 End Class
