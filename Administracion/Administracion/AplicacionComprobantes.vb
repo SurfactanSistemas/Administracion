@@ -220,7 +220,7 @@ Public Class AplicacionComprobantes
                         Try
                             _DarDeAltaRenglonAplicacionComprobante(row, WRenglon, WCodigo)
                         Catch ex As Exception
-                            MsgBox("Error al dar de alta Aplicacion de Comprobantes", MsgBoxStyle.Information)
+                            MsgBox("Error al dar de alta Aplicacion de Comprobantes. Motivo: " & ex.Message, MsgBoxStyle.Information)
                             Exit Sub
                         End Try
 
@@ -349,7 +349,7 @@ Public Class AplicacionComprobantes
         Try
             cm.ExecuteNonQuery()
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New Exception(ex.Message)
             Exit Sub
         Finally
 
