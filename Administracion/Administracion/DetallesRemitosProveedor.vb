@@ -236,11 +236,10 @@ Public Class DetallesRemitosProveedor
 
                         cantRecibida = 0.0
 
-                        While dr.Read()
-                            cantRecibida += Val(_FormatearDecimales(dr.Item(0).ToString()))
+                        dr.Read()
+                        cantRecibida += Val(_FormatearDecimales(dr.Item(0).ToString()))
 
-                            fApr = dr.Item(2)
-                        End While
+                        fApr = dr.Item(2)
 
                         If cantRecibida > 0 Then
                             est = "Aprob."
@@ -255,7 +254,7 @@ Public Class DetallesRemitosProveedor
 
                     End If
                 Catch ex As Exception
-                    Throw New Exception("Hubo un error al querer buscar al proveedor indicado")
+                    MsgBox("Hubo un error al querer buscar la información del Laudo.", MsgBoxStyle.Exclamation)
                     Exit Sub
                 Finally
                     cn.Close()

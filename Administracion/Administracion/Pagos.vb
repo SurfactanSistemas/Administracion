@@ -6961,7 +6961,7 @@ Public Class Pagos
                         ZNumero = .Cells(3).Value
                         ZImporte = _NormalizarNumero(.Cells(4).Value)
 
-                        ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZLetra, ZNumero)
+                        ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZPunto, ZLetra, ZNumero)
 
                         If Not IsNothing(ZFactura) Then
 
@@ -7006,10 +7006,10 @@ Public Class Pagos
 
     End Sub
 
-    Private Function _BuscarCompra(ByVal proveedor, ByVal tipo, ByVal letra, ByVal numero)
+    Private Function _BuscarCompra(ByVal proveedor, ByVal tipo, ByVal punto, ByVal letra, ByVal numero)
         Dim compra As New DataTable
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As New SqlCommand("SELECT Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE Proveedor = '" & proveedor & "' and letra = '" & letra & "' and numero = '" & numero & "' and tipo = '" & tipo & "'")
+        Dim cm As New SqlCommand("SELECT Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE Proveedor = '" & proveedor & "' and letra = '" & letra & "' and punto = '" & Proceso.ceros(punto, 4) & "' and numero = '" & Proceso.ceros(numero, 8) & "' and tipo = '" & Proceso.ceros(tipo, 2) & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -7128,7 +7128,7 @@ Public Class Pagos
                     ZNumero = .Cells(3).Value
                     ZImporte = .Cells(4).Value
 
-                    ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZLetra, ZNumero)
+                    ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZPunto, ZLetra, ZNumero)
 
                     If Not IsNothing(ZFactura) Then
 
@@ -7218,7 +7218,7 @@ Public Class Pagos
 
                         If ZNeto >= 1000 Then
 
-                            ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZLetra, ZNumero)
+                            ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZPunto, ZLetra, ZNumero)
 
                             If Not IsNothing(ZFactura) Then
 

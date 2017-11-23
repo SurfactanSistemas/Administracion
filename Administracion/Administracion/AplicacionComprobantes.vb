@@ -210,7 +210,7 @@ Public Class AplicacionComprobantes
 
                             'SQLConnector.retrieveDataTable("actualizar_cuenta_corriente_proveedor", row.Cells(8).Value.ToString, row.Cells(1).Value.ToString, row.Cells(2).Value.ToString, row.Cells(3).Value.ToString, row.Cells(4).Value.ToString, -1 * importe, Trim(txtProveedor.Text))
                         Catch ex As Exception
-                            MsgBox("Ocurrió un problema al querer actualizar la Cuenta Corriente del Proveedor.")
+                            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
                             Exit Sub
                         End Try
 
@@ -255,11 +255,10 @@ Public Class AplicacionComprobantes
                     .Read()
                     WClave = IIf(IsDBNull(.Item("Clave")), "", Trim(.Item("Clave")))
                     WSaldo = IIf(IsDBNull(.Item("Saldo")), 0, Val(Proceso.formatonumerico(.Item("Saldo"))))
+                    dr.Close()
                 End With
 
                 If Trim(WClave) <> "" AndAlso Val(WSaldo) <> 0 Then
-
-                    dr.Close()
 
                     XImporte = -1 * Val(Proceso.formatonumerico(wImporte))
 
@@ -269,7 +268,7 @@ Public Class AplicacionComprobantes
                         WSaldo = 0
                     End If
 
-                    cm.CommandText = "UPDATE CtaCtePrv SET Saldo = " & WSaldo & " WHERE Clave = '" & WClave & "'"
+                    cm.CommandText = "UPDATE CtaCtePrv SET Saldo = " & Str$(WSaldo) & " WHERE Clave = '" & WClave & "'"
                     cm.ExecuteNonQuery()
 
                 End If
