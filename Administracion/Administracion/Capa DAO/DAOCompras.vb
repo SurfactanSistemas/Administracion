@@ -30,7 +30,7 @@ Public Class DAOCompras
         Dim datosCuotas As New List(Of Tuple(Of String, String, String, Double, Double)) '1: Numero 2: Fecha vto 3: Fecha vto 2 4: Total 5: Saldo
         datosCuotas.Add(Tuple.Create(compra.numero, compra.fechaVto1, compra.fechaVto2, compra.total, saldo))
         If compra.usaCuotas() Then
-            datosCuotas(0) = Tuple.Create(datosCuotas(0).Item1, datosCuotas(0).Item2, datosCuotas(0).Item3, datosCuotas(0).Item4, 0.0)
+            datosCuotas(0) = Tuple.Create(datosCuotas(0).Item1, datosCuotas(0).Item2, datosCuotas(0).Item3, Val(Proceso.formatonumerico(datosCuotas(0).Item4)), 0.0)
             crarCuotasPara(compra, datosCuotas)
         End If
         Dim aumentoInterno As Integer = 0
@@ -41,7 +41,7 @@ Public Class DAOCompras
         WNroInternoAsociado = compra.nroInterno
         WNombreProveedor = compra.proveedor.razonSocial
         WNumeroOriginal = compra.numero
-        WImporteTotal = compra.total
+        WImporteTotal = Proceso.formatonumerico(compra.total)
         WFechaOriginal = compra.fechaEmision
         WFechaOriginalOrd = Proceso.ordenaFecha(WFechaOriginal)
 
@@ -50,7 +50,7 @@ Public Class DAOCompras
             XNroInternoAsociado = ""
             XNombreProveedor = ""
             XNumeroOriginal = ""
-            XImporteTotal = IIf(compra.usaCuotas, "0", WImporteTotal)
+            XImporteTotal = IIf(compra.usaCuotas, "0", Proceso.formatonumerico(WImporteTotal))
             XFechaOriginal = ""
             XFechaOriginalOrd = ""
 
@@ -68,13 +68,13 @@ Public Class DAOCompras
             End If
 
             SQLConnector.executeProcedure("alta_cuenta_corriente", compra.tipoPago, WProveedor, compra.letra, ceros(compra.tipoDocumento, 2), compra.punto,
-                                      datoCuotas.Item1, compra.fechaEmision, datoCuotas.Item2, datoCuotas.Item3, datoCuotas.Item4, datoCuotas.Item5,
+                                      datoCuotas.Item1, compra.fechaEmision, datoCuotas.Item2, datoCuotas.Item3, Val(Proceso.formatonumerico(datoCuotas.Item4)), Val(Proceso.formatonumerico(datoCuotas.Item5)),
                                       compra.tipoDocumentoDescripcion, compra.nroInterno + aumentoInterno, compra.paridad, compra.formaPago, Proceso.ordenaFecha(compra.fechaEmision), Proceso.ordenaFecha(compra.fechaVto1), _
-                                      XNroInternoAsociado, XNombreProveedor, XNumeroOriginal, CDbl(XImporteTotal), XFechaOriginal, XFechaOriginalOrd, IIf(aumentoInterno = 0, "", aumentoInterno))
+                                      XNroInternoAsociado, XNombreProveedor, XNumeroOriginal, Val(Proceso.formatonumerico(XImporteTotal)), XFechaOriginal, XFechaOriginalOrd, IIf(aumentoInterno = 0, "", aumentoInterno))
 
             If compra.tipoPago = 3 And aumentoInterno > 0 Then
                 SQLConnector.executeProcedure("alta_iva_compra_nacion", compra.nroInterno + aumentoInterno, DAOProveedor.bancoNacion.id, compra.tipoDocumento, compra.letra,
-                                              compra.punto, datoCuotas.Item1, compra.fechaEmision, compra.fechaEmision, compra.fechaEmision, compra.fechaEmision, datoCuotas.Item4, 0, 0, 0,
+                                              compra.punto, datoCuotas.Item1, compra.fechaEmision, compra.fechaEmision, compra.fechaEmision, compra.fechaEmision, Val(Proceso.formatonumerico(datoCuotas.Item4)), 0, 0, 0,
                                               0, 0, compra.tipoPago, compra.tipoDocumentoDescripcion, compra.paridad,
                                               compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, 0, compra.despacho, compra.remito, compra.soloIVA, compra.nroInterno, Proceso.ordenaFecha(compra.fechaEmision))
             End If
@@ -91,7 +91,7 @@ Public Class DAOCompras
         For x As Integer = 0 To cantidadCuotas - 1
             datosCuotas.Add(Tuple.Create(truncarUltimosDosCon(compra.numero, x + 1), fechaSegun(mes + x, anio),
                                          fechaSegun(mes + x, anio), (compra.total / cantidadCuotas),
-                                         CDbl(Proceso.formatonumerico(compra.total / cantidadCuotas))))
+                                         Val(Proceso.formatonumerico(compra.total / cantidadCuotas))))
         Next
     End Sub
 
