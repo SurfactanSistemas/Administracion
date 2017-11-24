@@ -130,18 +130,17 @@ Public Class Depositos
         gridCheques.Rows.Clear()
         gridCheques.Rows.Add()
         cheques.Clear()
-        lstConsulta.Visible = False
-        lstSeleccion.Visible = False
-        lstFiltrado.Visible = False
         txtAyuda.Text = ""
-        txtAyuda.Visible = False
         sumarImportes()
         _ClavesCheques.Clear()
+
+        btnChequeTerceros.PerformClick()
+
         txtNroDeposito.Focus()
     End Sub
 
     Private Sub sumarImportes()
-        lblTotal.Text = Proceso.formatonumerico(sumaImportes) 'CustomConvert.toStringWithTwoDecimalPlaces(sumaImportes)
+        lblTotal.Text = Proceso.formatonumerico(sumaImportes)
     End Sub
 
     Private Sub mostrarSeleccionDeConsulta()
@@ -155,26 +154,6 @@ Public Class Depositos
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
         mostrarSeleccionDeConsulta()
     End Sub
-
-    '    Private Sub mostrarDeposito(ByVal deposito As Deposito)
-    '        If IsNothing(deposito) Then
-    '            btnLimpiar.PerformClick()
-    '        Else
-    '            _ClavesCheques.Clear()
-    '            txtFecha.Text = deposito.fecha
-    '            mostrarBanco(deposito.banco)
-    '            txtFechaAcreditacion.Text = deposito.fechaAcreditacion
-    '            txtImporte.Text = _NormalizarNumero(deposito.importeTotal)
-    '            For Each item As ItemDeposito In deposito.items
-    '                If item.tipo = 3 Then
-    '                    mostrarCheque(item)
-    '                Else
-    '                    gridCheques.Rows.Add(item.tipo, item.numero, item.fecha, item.nombre, _NormalizarNumero(item.importe), "")
-    '                End If
-    '            Next
-    '
-    '        End If
-    '    End Sub
 
     Private Sub mostrarBanco(ByVal banco As Banco)
         If Not IsNothing(banco) Then
@@ -211,7 +190,7 @@ Public Class Depositos
             Return row.Index
         Next
 
-        Return gridCheques.Rows.Add() 'rowIndex
+        Return gridCheques.Rows.Add()
 
     End Function
 
@@ -358,86 +337,6 @@ Public Class Depositos
         Return _ChequesRecibos
     End Function
 
-    '    Private Sub _ListarCheques()
-    '        Dim cn As SqlConnection = New SqlConnection()
-    '        Dim cm As SqlCommand = New SqlCommand("SELECT Numero2, Importe2, Fecha2, Banco2, Clave, FechaOrd2, Estado2 FROM Recibos WHERE Estado2 = 'P' AND (Tipo2 = '02' OR Tipo2 = '2') AND TipoReg = '2'")
-    '        Dim dr As SqlDataReader
-    '
-    '        Dim cheques As New List(Of Cheque)
-    '        Dim chequesOrdenados As List(Of Cheque)
-    '
-    '        SQLConnector.conexionSql(cn, cm)
-    '
-    '        ' Listamos Cheques pendientes en Recibos Definitivos.
-    '        Try
-    '
-    '            dr = cm.ExecuteReader()
-    '
-    '            lstConsulta.Items.Clear()
-    '
-    '            If dr.HasRows Then
-    '
-    '                Do While dr.Read()
-    '                    cheques.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Val(Proceso.formatonumerico(dr.Item("Importe2"))), dr.Item("banco2"), "1" & dr.Item("Clave")))
-    '                Loop
-    '            End If
-    '
-    '        Catch ex As Exception
-    '            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-    '            Exit Sub
-    '        Finally
-    '
-    '            'dr = Nothing
-    '            cn.Close()
-    '            'cn = Nothing
-    '            'cm = Nothing
-    '
-    '        End Try
-    '
-    '
-    '        ' Listamos Cheques pendientes en Recibos Provisorios.
-    '        Try
-    '            cm.CommandText = "SELECT Numero2, Importe2, Fecha2, Banco2, Clave, FechaOrd2, Estado2, ReciboDefinitivo FROM RecibosProvi WHERE Estado2 = 'P' AND (Tipo2 = '02' OR Tipo2 = '2') AND TipoReg = '2' and ReciboDefinitivo = '0'"
-    '            cn.Open()
-    '
-    '            dr = cm.ExecuteReader()
-    '
-    '            If dr.HasRows Then
-    '
-    '                Do While dr.Read()
-    '
-    '                    If Not _ChequeUtilizadoEnRecibo(dr.Item("Numero2"), dr.Item("Fecha2")) Then
-    '                        cheques.Add(New Cheque(dr.Item("Numero2").ToString, dr.Item("Fecha2").ToString, Proceso.formatonumerico(dr.Item("Importe2")), dr.Item("banco2"), "2" & dr.Item("Clave")))
-    '                    End If
-    '
-    '                Loop
-    '            End If
-    '
-    '        Catch ex As Exception
-    '            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-    '            Exit Sub
-    '        Finally
-    '
-    '            dr = Nothing
-    '            cn.Close()
-    '            cn = Nothing
-    '            cm = Nothing
-    '
-    '        End Try
-    '
-    '
-    '        chequesOrdenados = cheques.OrderBy(Function(c) c.Orden).ToList()
-    '
-    '        For Each _cheque As Cheque In chequesOrdenados
-    '
-    '            'If Not _ChequeUtilizadoEnRecibo(_cheque.clave) Then
-    '            lstConsulta.Items.Add(_cheque)
-    '            'End If
-    '
-    '        Next
-    '
-    '    End Sub
-
     Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
 
         If IsNothing(lstConsulta.SelectedItem) Then : Exit Sub : End If
@@ -452,15 +351,16 @@ Public Class Depositos
             End If
             txtCodigoBanco.Text = banco.id
             txtDescripcionBanco.Text = Trim(banco.nombre)
-            txtCodigoBanco.Focus()
+            'txtCodigoBanco.Focus()
+            btnChequeTerceros.PerformClick()
+            txtFechaAcreditacion.Focus()
+
         Else
 
             Dim row As Integer = -1
             Dim cheq As Cheque
 
             cheq = lstConsulta.SelectedItem
-
-            'showFunction.Invoke(lstConsulta.SelectedItem)
 
             For Each _row As DataGridViewRow In gridCheques.Rows
                 If Not _row.IsNewRow Then
@@ -502,9 +402,6 @@ Public Class Depositos
                 _TraerChequeRecibo(row, cheq.clave)
             End If
 
-
-            'txtAyuda.Focus()
-
         End If
     End Sub
 
@@ -539,7 +436,7 @@ Public Class Depositos
 
                 With dr
 
-                    WTipo = "3" 'IIf(IsDBNull(.Item("Tipo2")), "", .Item("Tipo2"))
+                    WTipo = "3"
                     WNumero = IIf(IsDBNull(.Item("Numero2")), "", .Item("Numero2"))
                     WFecha = IIf(IsDBNull(.Item("Fecha2")), "", .Item("Fecha2"))
                     WNombre = IIf(IsDBNull(.Item("Banco2")), "", .Item("Banco2"))
@@ -957,7 +854,7 @@ Public Class Depositos
             'If Not IsNothing(deposito) Then
             'mostrarDeposito(Deposito)
             'Else
-            btnLimpiar.PerformClick()
+            'btnLimpiar.PerformClick()
             txtNroDeposito.Text = numero
             txtFecha.Focus()
             'End If
@@ -1359,7 +1256,7 @@ Public Class Depositos
 
         ' Chequeamos que el cheque no se haya cargado.
 
-        If _ChequeYaCargado(ClaveCheque, row) Then
+        If _ChequeYaCargado(WClave, row) Then
             _LecturaCorrecta = False
 
             MsgBox("Cheque ya Cargado con anterioridad.", MsgBoxStyle.Exclamation)
@@ -1404,7 +1301,7 @@ Public Class Depositos
 
         If _LecturaCorrecta Then
             With gridCheques.Rows(row)
-                .Cells(0).Value = "03"
+                .Cells(0).Value = "3"
                 .Cells(1).Value = WNumero
                 .Cells(2).Value = WFecha
                 .Cells(3).Value = WBanco
@@ -1417,156 +1314,15 @@ Public Class Depositos
 
         Return _LecturaCorrecta
     End Function
-
-    'Private Function _GenerarCodigoBanco(ByVal _Banco As String) As String
-    '    _Banco = _Banco.ToString.Split("/")(0) ' Agarramos el nombre del banco, sin el cod del cliente.
-
-    '    Return _Banco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
-    'End Function
-
+    
     Private Function _ChequeYaCargado(ByVal ClaveCheque As String, ByVal rowIndex As Integer) As Boolean
 
-        Return gridCheques.Rows.Cast(Of DataGridViewRow)().Any(Function(row) ClaveCheque = row.Cells(5).Value And row.Index <> rowIndex)
+        Return gridCheques.Rows.Cast(Of DataGridViewRow)().Any(Function(row) ClaveCheque = row.Cells("ClaveCheque").Value And row.Index <> rowIndex)
     End Function
-
-    '    Private Function _ChequeUtilizadoEnRecibo(ByVal numero2 As String, ByVal fecha2 As String) As Boolean
-    '        Dim utilizado As Boolean = False
-    '        Dim cn As SqlConnection = New SqlConnection()
-    '        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Numero2 FROM Recibos WHERE Numero2 = '" & Trim(numero2) & "' AND Fecha2 = '" & Trim(fecha2) & "'")
-    '        Dim dr As SqlDataReader
-    '
-    '        SQLConnector.conexionSql(cn, cm)
-    '
-    '        Try
-    '
-    '            dr = cm.ExecuteReader()
-    '
-    '            If dr.HasRows Then
-    '                utilizado = True
-    '            End If
-    '
-    '        Catch ex As Exception
-    '            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-    '        Finally
-    '
-    '            dr = Nothing
-    '            cn.Close()
-    '            cn = Nothing
-    '            cm = Nothing
-    '
-    '        End Try
-    '
-    '        Return utilizado
-    '    End Function
-
-    '    Private Function _ChequeUtilizadoEnRecibo(ByVal ClaveCheque As String) As Boolean
-    '        Dim utilizado As Boolean = False
-    '        Dim cn As SqlConnection = New SqlConnection()
-    '        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 ClaveCheque FROM Recibos WHERE ClaveCheque = '" & ClaveCheque & "'")
-    '        Dim dr As SqlDataReader
-    '
-    '        SQLConnector.conexionSql(cn, cm)
-    '
-    '        Try
-    '
-    '            dr = cm.ExecuteReader()
-    '
-    '            If dr.HasRows Then
-    '                utilizado = True
-    '            End If
-    '
-    '        Catch ex As Exception
-    '            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-    '        Finally
-    '
-    '            dr = Nothing
-    '            cn.Close()
-    '            cn = Nothing
-    '            cm = Nothing
-    '
-    '        End Try
-    '
-    '        Return utilizado
-    '    End Function
-
-    '    Private Function _ChequeUtilizadoEnReciboProvisorio(ByVal ClaveCheque As String) As Boolean
-    '        Dim utilizado As Boolean = False
-    '        Dim cn As SqlConnection = New SqlConnection()
-    '        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 ClaveCheque FROM RecibosProvi WHERE ClaveCheque = '" & ClaveCheque & "'")
-    '        Dim dr As SqlDataReader
-    '
-    '        SQLConnector.conexionSql(cn, cm)
-    '
-    '        Try
-    '
-    '            dr = cm.ExecuteReader()
-    '
-    '            If dr.HasRows Then
-    '                utilizado = True
-    '            End If
-    '
-    '        Catch ex As Exception
-    '            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-    '        Finally
-    '
-    '            dr = Nothing
-    '            cn.Close()
-    '            cn = Nothing
-    '            cm = Nothing
-    '
-    '        End Try
-    '
-    '        Return utilizado
-    '    End Function
-
-    '    Private Function _TraerNumeroCuit(ByVal clave As String) As String
-    '        Dim _cuit As String = ""
-    '        Dim cn As SqlConnection = New SqlConnection()
-    '        Dim cm As SqlCommand = New SqlCommand("SELECT Cuit FROM Cuit WHERE Clave = '" & Trim(clave) & "'")
-    '        Dim dr As SqlDataReader
-    '
-    '        SQLConnector.conexionSql(cn, cm)
-    '
-    '        Try
-    '
-    '            dr = cm.ExecuteReader()
-    '
-    '            If dr.HasRows Then
-    '                dr.Read()
-    '
-    '                _cuit = dr.Item("Cuit")
-    '
-    '            End If
-    '
-    '        Catch ex As Exception
-    '            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-    '        Finally
-    '
-    '            dr = Nothing
-    '            cn.Close()
-    '            cn = Nothing
-    '            cm = Nothing
-    '
-    '        End Try
-    '
-    '        Return _cuit
-    '    End Function
-
-
-    '    Private Sub _GuardarNuevoCheque(ByVal row As Integer, ByVal Clave As String, _
-    '                                    ByVal banco As String, ByVal sucursal As String, _
-    '                                    ByVal numCheque As String, ByVal numCta As String, _
-    '                                    ByVal _Cuit As String)
-    '
-    '        _ClavesCheques.Add({row, Clave, banco, sucursal, numCheque, numCta, _Cuit, "", ""})
-    '
-    '    End Sub
 
     Private Sub Depositos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtNroDeposito.Focus()
     End Sub
-
-
 
     ' Rutinas de Filtrado Dinámico.
     Private Sub _FiltrarDinamicamente()
