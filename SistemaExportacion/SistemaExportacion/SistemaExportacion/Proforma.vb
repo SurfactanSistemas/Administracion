@@ -1,6 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports CrystalDecisions.Shared
-Imports CrystalDecisions.CrystalReports.Engine
 Imports System.IO
 Imports Microsoft.Office.Interop
 
@@ -31,15 +29,7 @@ Public Class Proforma
     End Property
 
 
-    Private _Bloqueado As Boolean
-    Public Property Bloqueado() As Boolean
-        Get
-            Return _Bloqueado
-        End Get
-        Private Set(ByVal value As Boolean)
-            _Bloqueado = value
-        End Set
-    End Property
+    Public Property Bloqueado As Boolean
 
 
     Private Sub Proforma_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -91,40 +81,10 @@ Public Class Proforma
         txtNroProforma.Focus()
     End Sub
 
-    Private Function _CS(Optional ByVal empresa As String = "SurfactanSA")
+    Private Function _CS()
         Return Helper._ConectarA()
         'Return Helper._ConectarA(empresa)
     End Function
-
-    Private Sub _TraerDescripcionCliente()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Razon FROM Cliente WHERE CLiente = '" & txtCliente.Text & "'")
-        Dim dr As SqlDataReader
-
-        Try
-            cn.ConnectionString = _CS()
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-                dr.Read()
-                txtDescripcionCliente.Text = dr.Item("Razon")
-            End If
-
-        Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Exclamation)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-    End Sub
 
     Private Function _TraerDescripcionProducto(ByVal codigo As String) As String
         Dim cn As SqlConnection = New SqlConnection()
@@ -197,15 +157,13 @@ Public Class Proforma
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
         Dim dr As SqlDataReader
-        Dim WClave, WRenglon, WEstado, WNroProforma, WFecha, WFechaOrd, WCliente, WDescripcionCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WFlete, WSeguro, WTotal, WDescripcionMonto, WPais, WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WRowIndex
+        Dim WRenglon, WEstado, WNroProforma, WFecha, WCliente, WDescripcionCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WFlete, WSeguro, WTotal, WDescripcionMonto, WPais, WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WRowIndex
         Dim WNroPedido, WNroFactura, WSaldoFactura, WEnviarDocumentacion, WProformaCerrada, WPackingList, WIdioma, WFechaLimite
 
-        WClave = ""
         WRenglon = 0
         WEstado = 0
         WNroProforma = ""
         WFecha = ""
-        WFechaOrd = ""
         WCliente = ""
         WDescripcionCliente = ""
         WDireccion = ""
@@ -385,7 +343,10 @@ Public Class Proforma
     Private Sub txtFechaLimite_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaLimite.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtFechaLimite.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+            If Trim(txtFechaLimite.Text.Replace("/", "")) = "" Then
+                txtObservaciones.Focus()
+                Exit Sub
+            End If
 
             If Val(Helper.ordenaFecha(txtFecha.Text)) > Val(Helper.ordenaFecha(txtFechaLimite.Text)) Then
 
@@ -860,8 +821,6 @@ Public Class Proforma
                         Select Case iCol
                             Case 2, 3
                                 _RecalcularTotalFila(iRow)
-                            Case Else
-
                         End Select
 
                         _NormalizarNumerosGrilla()
@@ -901,8 +860,6 @@ Public Class Proforma
                             End If
 
                             .CurrentCell = .Rows(iRow).Cells(iCol)
-
-                        Case Else
 
                     End Select
 
