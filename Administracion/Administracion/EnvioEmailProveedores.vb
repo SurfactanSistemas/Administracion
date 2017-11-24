@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.SqlClient
+Imports ClasesCompartidas
 
 Public Class EnvioEmailProveedores
 
@@ -134,6 +135,8 @@ Public Class EnvioEmailProveedores
     End Sub
 
     Private Sub EnvioEmailProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
+
         txtAsunto.Text = ""
         txtCuerpoEmail.Text = ""
         txtLineaExtraI.Text = ""

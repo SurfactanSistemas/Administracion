@@ -9,6 +9,7 @@ Public Class Depositos
     Private _ClavesCheques As New List(Of Object)
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         btnLimpiar.PerformClick()
     End Sub
 

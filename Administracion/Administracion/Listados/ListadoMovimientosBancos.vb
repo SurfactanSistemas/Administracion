@@ -7,6 +7,7 @@ Public Class ListadoMovimientosBancos
     Dim txtVectorBanco(1000) As String
 
     Private Sub ListadoMovimientosBancos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         Button1.PerformClick()
     End Sub
 

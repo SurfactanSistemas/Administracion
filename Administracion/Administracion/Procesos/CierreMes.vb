@@ -4,7 +4,7 @@ Imports System.IO
 Public Class CierreMes
 
     Private Sub CierreMes_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = Globals.NombreEmpresa()
         txtMes.Text = ""
         txtAno.Text = ""
 

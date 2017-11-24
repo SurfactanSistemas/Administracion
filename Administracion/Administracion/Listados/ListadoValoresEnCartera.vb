@@ -3,6 +3,7 @@
 Public Class ListadoValoresEnCartera
 
     Private Sub ListadoValoresEnCartera_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         txtAyuda.Text = ""
         txtFecha1.Text = "  /  /    "
         txtFecha2.Text = "  /  /    "

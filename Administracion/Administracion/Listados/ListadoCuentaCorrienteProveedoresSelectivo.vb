@@ -11,6 +11,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Dim XFecha As String
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Clear()
         varRenglon = 0

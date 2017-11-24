@@ -5,7 +5,7 @@ Imports System.Data.SqlClient
 Public Class ListadoRecibos
 
     Private Sub ListadoRecibos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 

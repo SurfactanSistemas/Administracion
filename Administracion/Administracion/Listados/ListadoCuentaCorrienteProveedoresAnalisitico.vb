@@ -7,7 +7,7 @@ Public Class ListadoCuentaCorrienteProveedoresAnalisitico
         txtHastaProveedor.Text = ""
         txtFechaEmision.Text = "  /  /    "
         txtDias.Text = ""
-
+        Label2.Text = Globals.NombreEmpresa()
     End Sub
 
     Private Sub txtfechaemision_KeyPress(ByVal sender As Object, _

@@ -6,6 +6,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Dim varRenglon As Integer
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivoPreparacion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         txtCodProveedor.Text = ""
         varRenglon = 0
 

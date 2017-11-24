@@ -7,6 +7,7 @@ Public Class CuentaCorrientePantalla
     Private _NrosInternos As New List(Of Object)
 
     Private Sub CuentaCorrientePantalla_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         opcPendiente.Checked = True
         opcCompleto.Checked = False
 

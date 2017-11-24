@@ -7,6 +7,7 @@ Imports System.IO
 Public Class ListadoSaldosCuentaCorrienteProveedores
 
     Private Sub LitadoSaldosCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Label2.Text = Globals.NombreEmpresa()
         txtAyuda.Text = ""
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"

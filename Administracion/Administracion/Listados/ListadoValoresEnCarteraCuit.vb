@@ -3,7 +3,7 @@
 Public Class ListadoValoresEnCarteraCuit
 
     Private Sub ListadoValoresEnCarteraCuit_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
         txtCuit.Text = ""

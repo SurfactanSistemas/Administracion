@@ -28,7 +28,8 @@ Public Class ProveedoresABM
         'cmbProvincia.DisplayMember = "ToString"
         'cmbProvincia.ValueMember = "valueMember"
         'cmbProvincia.DataSource = provincias
-        
+        Label2.Text = Globals.NombreEmpresa()
+
         cmbRubro.DisplayMember = "ToString"
         cmbRubro.ValueMember = "valueMember"
         cmbRubro.DataSource = DAORubroProveedor.buscarRubroProveedorPorDescripcion("")

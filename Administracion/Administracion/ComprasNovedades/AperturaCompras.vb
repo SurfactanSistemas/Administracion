@@ -60,6 +60,7 @@ Public Class Apertura
     End Function
 
     Private Sub Apertura_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         Dim gridBuilder As New GridBuilder(gridApertura)
 
         WRow = -1

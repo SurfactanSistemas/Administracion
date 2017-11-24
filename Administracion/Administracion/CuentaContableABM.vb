@@ -10,6 +10,9 @@ Public Class CuentaContableABM
     Private Sub CuentaContableABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Actualiza = False
         _ContraerFormulario()
+
+        Label2.Text = Globals.NombreEmpresa()
+
     End Sub
 
     Private Sub txtCodigo_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigo.Leave

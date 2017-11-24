@@ -8,6 +8,7 @@ Public Class ListadoCuentaCorrienteProveedores
     End Enum
 
     Private Sub ListadoCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
         opcPendiente.Checked = True

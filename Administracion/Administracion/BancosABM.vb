@@ -9,6 +9,7 @@ Public Class BancosABM
     Private Const EXPANDED_HEIGHT = 480
 
     Private Sub BancosABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         _LimpiarCampos()
         _ContraerFormulario()
     End Sub

@@ -9,6 +9,7 @@ Public Class RubrosProveedorABM
 
     Private Sub RubrosProveedorABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         _LimpiarCampos()
+        Label2.Text = Globals.NombreEmpresa()
     End Sub
 
     Private Sub txtCodigo_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigo.Leave

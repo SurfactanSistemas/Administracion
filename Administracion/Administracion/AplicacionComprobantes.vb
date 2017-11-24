@@ -61,6 +61,7 @@ Public Class AplicacionComprobantes
     End Function
 
     Private Sub AplicacionComprobantes_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         Dim gridFormasBuilder As New GridBuilder(dtgCuentas)
         gridFormasBuilder.addTextColumn(0, "Tipo", True)
         gridFormasBuilder.addTextColumn(1, "Letra", True)

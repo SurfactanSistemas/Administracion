@@ -6,6 +6,7 @@ Public Class ConsultaRemitos
     Private Const SEPARADOR_DE_COLUMNAS = "    "
 
     Private Sub ConsultaRemitos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         _Limpiar()
     End Sub
 

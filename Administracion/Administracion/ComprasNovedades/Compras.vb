@@ -18,6 +18,7 @@ Public Class Compras
     Dim commonEventsHandler As New CommonEventsHandler
 
     Private Sub Compras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Label2.Text = Globals.NombreEmpresa()
         Dim gridBuilder As New GridBuilder(gridAsientos)
 
         gridBuilder.addTextColumn(0, "Cuenta")

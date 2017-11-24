@@ -54,6 +54,8 @@ Public Class Pagos
 
     Private Sub Pagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        Me.Text = "Ingreso de Pagos a Proveedores                                                                                                                        " & Globals.NombreEmpresa()
+
         If Me.SoloLectura Then
             Dim botones As New List(Of Button) From {btnAgregar, btnCalcular, btnCarpetas, btnChequesTerceros, btnConsulta, btnCtaCte, btnImprimir, btnLimpiar}
 
