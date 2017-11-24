@@ -1198,7 +1198,7 @@ Public Class Proforma
         WDescripcionMontoII = Trim(txtDescripcionTotalII.Text)
 
         WEstado = Trim(Str$(cmbEstado.SelectedIndex))
-        WIdioma = Trim(Str$(cmbCondicion.SelectedIndex))
+        WIdioma = Trim(Str$(cmbIdioma.SelectedIndex))
 
         WFechaLimite = txtFechaLimite.Text
         WFechaLimiteOrd = Helper.ordenaFecha(WFechaLimite)
