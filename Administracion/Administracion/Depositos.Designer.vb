@@ -34,11 +34,9 @@ Partial Class Depositos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtImporte = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel4 = New Administracion.CustomLabel()
@@ -52,6 +50,8 @@ Partial Class Depositos
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.lstFiltrado = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnChequeTerceros = New Administracion.CustomButton()
@@ -91,7 +91,7 @@ Partial Class Depositos
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.gridCheques.DefaultCellStyle = DataGridViewCellStyle5
         Me.gridCheques.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.gridCheques.Location = New System.Drawing.Point(25, 136)
+        Me.gridCheques.Location = New System.Drawing.Point(8, 119)
         Me.gridCheques.Name = "gridCheques"
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
@@ -101,7 +101,8 @@ Partial Class Depositos
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.gridCheques.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
-        Me.gridCheques.Size = New System.Drawing.Size(743, 203)
+        Me.gridCheques.RowHeadersWidth = 10
+        Me.gridCheques.Size = New System.Drawing.Size(485, 220)
         Me.gridCheques.StandardTab = True
         Me.gridCheques.TabIndex = 0
         '
@@ -113,7 +114,7 @@ Partial Class Depositos
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(793, 53)
+        Me.Panel1.Size = New System.Drawing.Size(818, 53)
         Me.Panel1.TabIndex = 17
         '
         'Label2
@@ -161,12 +162,25 @@ Partial Class Depositos
         Me.Panel2.Controls.Add(Me.txtAyuda)
         Me.Panel2.Location = New System.Drawing.Point(0, 53)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(793, 391)
+        Me.Panel2.Size = New System.Drawing.Size(815, 391)
         Me.Panel2.TabIndex = 18
+        '
+        'lstSeleccion
+        '
+        Me.lstSeleccion.Cleanable = False
+        Me.lstSeleccion.EnterIndex = -1
+        Me.lstSeleccion.FormattingEnabled = True
+        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
+        Me.lstSeleccion.LabelAssociationKey = -1
+        Me.lstSeleccion.Location = New System.Drawing.Point(504, 7)
+        Me.lstSeleccion.Name = "lstSeleccion"
+        Me.lstSeleccion.Size = New System.Drawing.Size(305, 329)
+        Me.lstSeleccion.TabIndex = 14
+        Me.lstSeleccion.Visible = False
         '
         'txtFechaAcreditacion
         '
-        Me.txtFechaAcreditacion.Location = New System.Drawing.Point(158, 78)
+        Me.txtFechaAcreditacion.Location = New System.Drawing.Point(139, 78)
         Me.txtFechaAcreditacion.Mask = "00/00/0000"
         Me.txtFechaAcreditacion.Name = "txtFechaAcreditacion"
         Me.txtFechaAcreditacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -177,7 +191,7 @@ Partial Class Depositos
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(289, 24)
+        Me.txtFecha.Location = New System.Drawing.Point(270, 24)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -186,34 +200,13 @@ Partial Class Depositos
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFecha.ValidatingType = GetType(Date)
         '
-        'txtAyuda
-        '
-        Me.txtAyuda.Location = New System.Drawing.Point(395, 18)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(372, 20)
-        Me.txtAyuda.TabIndex = 19
-        Me.txtAyuda.Visible = False
-        '
-        'lstSeleccion
-        '
-        Me.lstSeleccion.Cleanable = False
-        Me.lstSeleccion.EnterIndex = -1
-        Me.lstSeleccion.FormattingEnabled = True
-        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
-        Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(395, 18)
-        Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(373, 108)
-        Me.lstSeleccion.TabIndex = 14
-        Me.lstSeleccion.Visible = False
-        '
         'txtImporte
         '
         Me.txtImporte.Cleanable = True
         Me.txtImporte.Empty = False
         Me.txtImporte.EnterIndex = 5
         Me.txtImporte.LabelAssociationKey = 5
-        Me.txtImporte.Location = New System.Drawing.Point(300, 79)
+        Me.txtImporte.Location = New System.Drawing.Point(281, 79)
         Me.txtImporte.MaxLength = 10
         Me.txtImporte.Name = "txtImporte"
         Me.txtImporte.Size = New System.Drawing.Size(89, 20)
@@ -227,7 +220,7 @@ Partial Class Depositos
         Me.CustomLabel3.ControlAssociationKey = 1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(34, 24)
+        Me.CustomLabel3.Location = New System.Drawing.Point(15, 24)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(94, 18)
         Me.CustomLabel3.TabIndex = 3
@@ -239,7 +232,7 @@ Partial Class Depositos
         Me.CustomLabel4.ControlAssociationKey = 3
         Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(34, 54)
+        Me.CustomLabel4.Location = New System.Drawing.Point(15, 54)
         Me.CustomLabel4.Name = "CustomLabel4"
         Me.CustomLabel4.Size = New System.Drawing.Size(45, 18)
         Me.CustomLabel4.TabIndex = 4
@@ -251,7 +244,7 @@ Partial Class Depositos
         Me.CustomLabel7.ControlAssociationKey = 5
         Me.CustomLabel7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel7.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel7.Location = New System.Drawing.Point(239, 80)
+        Me.CustomLabel7.Location = New System.Drawing.Point(220, 80)
         Me.CustomLabel7.Name = "CustomLabel7"
         Me.CustomLabel7.Size = New System.Drawing.Size(58, 18)
         Me.CustomLabel7.TabIndex = 15
@@ -263,7 +256,7 @@ Partial Class Depositos
         Me.CustomLabel5.ControlAssociationKey = 4
         Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(31, 80)
+        Me.CustomLabel5.Location = New System.Drawing.Point(12, 80)
         Me.CustomLabel5.Name = "CustomLabel5"
         Me.CustomLabel5.Size = New System.Drawing.Size(125, 18)
         Me.CustomLabel5.TabIndex = 5
@@ -286,7 +279,7 @@ Partial Class Depositos
         Me.txtCodigoBanco.Empty = False
         Me.txtCodigoBanco.EnterIndex = 3
         Me.txtCodigoBanco.LabelAssociationKey = 3
-        Me.txtCodigoBanco.Location = New System.Drawing.Point(82, 53)
+        Me.txtCodigoBanco.Location = New System.Drawing.Point(63, 53)
         Me.txtCodigoBanco.MaxLength = 5
         Me.txtCodigoBanco.Name = "txtCodigoBanco"
         Me.txtCodigoBanco.Size = New System.Drawing.Size(71, 20)
@@ -313,7 +306,7 @@ Partial Class Depositos
         Me.txtNroDeposito.Empty = False
         Me.txtNroDeposito.EnterIndex = 1
         Me.txtNroDeposito.LabelAssociationKey = 1
-        Me.txtNroDeposito.Location = New System.Drawing.Point(134, 23)
+        Me.txtNroDeposito.Location = New System.Drawing.Point(115, 23)
         Me.txtNroDeposito.MaxLength = 6
         Me.txtNroDeposito.Name = "txtNroDeposito"
         Me.txtNroDeposito.Size = New System.Drawing.Size(96, 20)
@@ -328,7 +321,7 @@ Partial Class Depositos
         Me.txtDescripcionBanco.Enabled = False
         Me.txtDescripcionBanco.EnterIndex = -1
         Me.txtDescripcionBanco.LabelAssociationKey = 3
-        Me.txtDescripcionBanco.Location = New System.Drawing.Point(159, 53)
+        Me.txtDescripcionBanco.Location = New System.Drawing.Point(140, 53)
         Me.txtDescripcionBanco.MaxLength = 50
         Me.txtDescripcionBanco.Name = "txtDescripcionBanco"
         Me.txtDescripcionBanco.Size = New System.Drawing.Size(230, 20)
@@ -342,7 +335,7 @@ Partial Class Depositos
         Me.CustomLabel6.ControlAssociationKey = 2
         Me.CustomLabel6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel6.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel6.Location = New System.Drawing.Point(239, 25)
+        Me.CustomLabel6.Location = New System.Drawing.Point(220, 25)
         Me.CustomLabel6.Name = "CustomLabel6"
         Me.CustomLabel6.Size = New System.Drawing.Size(44, 18)
         Me.CustomLabel6.TabIndex = 7
@@ -354,9 +347,9 @@ Partial Class Depositos
         Me.lstFiltrado.EnterIndex = -1
         Me.lstFiltrado.FormattingEnabled = True
         Me.lstFiltrado.LabelAssociationKey = -1
-        Me.lstFiltrado.Location = New System.Drawing.Point(395, 40)
+        Me.lstFiltrado.Location = New System.Drawing.Point(504, 29)
         Me.lstFiltrado.Name = "lstFiltrado"
-        Me.lstFiltrado.Size = New System.Drawing.Size(373, 82)
+        Me.lstFiltrado.Size = New System.Drawing.Size(305, 303)
         Me.lstFiltrado.TabIndex = 20
         Me.lstFiltrado.Visible = False
         '
@@ -366,11 +359,19 @@ Partial Class Depositos
         Me.lstConsulta.EnterIndex = -1
         Me.lstConsulta.FormattingEnabled = True
         Me.lstConsulta.LabelAssociationKey = -1
-        Me.lstConsulta.Location = New System.Drawing.Point(395, 40)
+        Me.lstConsulta.Location = New System.Drawing.Point(504, 29)
         Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(373, 82)
+        Me.lstConsulta.Size = New System.Drawing.Size(305, 303)
         Me.lstConsulta.TabIndex = 8
         Me.lstConsulta.Visible = False
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(504, 7)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(304, 20)
+        Me.txtAyuda.TabIndex = 19
+        Me.txtAyuda.Visible = False
         '
         'btnCerrar
         '
@@ -517,6 +518,7 @@ Partial Class Depositos
         Me.numero.Name = "numero"
         Me.numero.ReadOnly = True
         Me.numero.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.numero.Width = 80
         '
         'fecha
         '
@@ -524,6 +526,7 @@ Partial Class Depositos
         Me.fecha.Name = "fecha"
         Me.fecha.ReadOnly = True
         Me.fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.fecha.Width = 80
         '
         'nombre
         '
@@ -554,7 +557,7 @@ Partial Class Depositos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(790, 519)
+        Me.ClientSize = New System.Drawing.Size(815, 519)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnCerrar)
