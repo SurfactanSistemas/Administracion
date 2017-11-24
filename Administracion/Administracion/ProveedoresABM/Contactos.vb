@@ -1,5 +1,9 @@
 ﻿Public Class Contactos
 
+    Private Sub Contactos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Label2.Text = ClasesCompartidas.Globals.NombreEmpresa()
+    End Sub
+
 
 
     Private Sub Contactos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
