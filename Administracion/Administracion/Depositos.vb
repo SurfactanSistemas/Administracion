@@ -392,16 +392,17 @@ Public Class Depositos
 
                 If _ProcesarCheque(row, cheq.ClaveCheque) Then
                     lstConsulta.Items.Remove(lstConsulta.SelectedItem)
-                    Dim nuevafila = gridCheques.Rows.Add()
                     sumarImportes()
-                    gridCheques.CurrentCell = gridCheques.Rows(nuevafila).Cells(0)
-                    gridCheques.Focus()
                 Else
                     MsgBox("Hubo un problema al querer cargar el cheque.", MsgBoxStyle.Exclamation)
                 End If
             Else
                 _TraerChequeRecibo(row, cheq.clave)
             End If
+
+            Dim nuevafila = gridCheques.Rows.Add()
+            gridCheques.CurrentCell = gridCheques.Rows(nuevafila).Cells(0)
+            gridCheques.Focus()
 
         End If
     End Sub
@@ -535,7 +536,7 @@ Public Class Depositos
                         WImporte = Val(Proceso.formatonumerico(txtImporte.Text))
                         WFechaAcredita = txtFechaAcreditacion.Text
                         WFechaAcreditaOrd = Proceso.ordenaFecha(WFechaAcredita)
-                        WTipo2 = Proceso.ceros(row.Cells("Tipo").Value, 2)
+                        WTipo2 = Str$(Val(row.Cells("Tipo").Value))
                         WNumero2 = Proceso.ceros(row.Cells("Numero").Value, 8)
                         WFecha2 = row.Cells("Fecha").Value
                         WImporte2 = Val(Proceso.formatonumerico(row.Cells("Importe").Value))
@@ -585,7 +586,7 @@ Public Class Depositos
                             If Not IsNothing(trans) Then
                                 trans.Rollback()
                             End If
-                            MsgBox("Hubo un problema al consultar el numero de Recibo Provisorio Relacionado desde la base de datos.", MsgBoxStyle.Exclamation)
+                            MsgBox("Hubo un problema al consultar el numero de Recibo Provisorio Relacionado desde la base de datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
                             Exit Sub
                         End Try
 
@@ -612,7 +613,7 @@ Public Class Depositos
                         If Not IsNothing(trans) Then
                             trans.Rollback()
                         End If
-                        MsgBox("Hubo un problema al querer actualizar el estado del cheque en el registro de Recibos Provisorios relacionado a este Depósito en la Base de Datos.", MsgBoxStyle.Exclamation)
+                        MsgBox("Hubo un problema al querer actualizar el estado del cheque en el registro de Recibos Provisorios relacionado a este Depósito en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
                         Exit Sub
                     Finally
 
@@ -640,7 +641,7 @@ Public Class Depositos
                             If Not IsNothing(trans) Then
                                 trans.Rollback()
                             End If
-                            MsgBox("Hubo un problema al querer actualizar el estado del Recibo Definitivo relacionado a este Depósito en la Base de Datos.", MsgBoxStyle.Exclamation)
+                            MsgBox("Hubo un problema al querer actualizar el estado del Recibo Definitivo relacionado a este Depósito en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
                             Exit Sub
                         Finally
 
@@ -701,10 +702,9 @@ Public Class Depositos
                                 trans.Rollback()
                             End If
 
-                            MsgBox("Hubo un problema al querer actualizar las marcas de los recibos relacionados a este deposito.", MsgBoxStyle.Exclamation)
+                            MsgBox("Hubo un problema al querer actualizar las marcas de los recibos relacionados a este deposito." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
                             Exit Sub
                         Finally
-                            dr.Close()
                             dr = Nothing
                         End Try
 
@@ -731,7 +731,7 @@ Public Class Depositos
     
     Private Function _BuscarReciboDefinitivo(ByVal xclaverecibo) As Integer
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ReciboDefinitivo FROM RecibosProvi WHERE Recibo = '" & xclaverecibo & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT ReciboDefinitivo FROM RecibosProvi WHERE Clave = '" & xclaverecibo & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -743,12 +743,13 @@ Public Class Depositos
             If dr.HasRows Then
                 dr.Read()
 
-                Return IIf(IsDBNull(dr.Item("ReciboDefintivo")), 0, Val(dr.Item("ReciboDefinitivo")))
+                'Return IIf(IsDBNull(dr.Item("ReciboDefintivo")), 0, Val(dr.Item("ReciboDefinitivo")))
+                Return Val(dr.Item("ReciboDefinitivo"))
 
             End If
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New Exception(ex.Message)
         Finally
 
             dr = Nothing
@@ -1028,7 +1029,8 @@ Public Class Depositos
 
         With VistaPrevia
             .Reporte = crdoc
-            .Mostrar()
+            '.Mostrar()
+            .Imprimir()
         End With
 
         If XTipo = 3 AndAlso Not Proceso._EsPellital() Then
@@ -1039,7 +1041,8 @@ Public Class Depositos
 
             With VistaPrevia
                 .Reporte = crdoc
-                .Mostrar()
+                '.Mostrar()
+                .Imprimir()
             End With
 
         End If
