@@ -539,6 +539,9 @@ Public Class ListadoImputacionesContable
         ZRetIb(7, 2) = "194"
         ZRetIb(8, 2) = "195"
 
+        Dim ZExcluir(1000) As String
+        Dim Zex As Integer = 0
+
         txtCorte = ""
         txtRenglonII = 0
 
@@ -765,41 +768,7 @@ Public Class ListadoImputacionesContable
                                                   txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
 
                 End If
-
-
-
-                If Val(CampoRecibos.renglon) = 1 And Val(CampoRecibos.retotra) <> 0 Then
-
-                    txtRenglonII = txtRenglonII + 1
-                    txtCuenta = "161"
-
-                    txtTipomovi = "3"
-                    txtNroInterno = CampoRecibos.recibo
-                    txtProveedor = ""
-                    txtTipo = ""
-                    txtLetra = ""
-                    txtPunto = ""
-                    txtNumero = ""
-                    txtRenglon = txtRenglonII
-                    txtFecha = CampoRecibos.fecha
-                    txtObservaciones = ""
-                    txtDebito = CampoRecibos.retotra
-                    txtCredito = 0
-                    txtFechaOrd = CampoRecibos.fechaord
-                    txtTitulo = "Recibos"
-                    txtEmpresa = 1
-                    txtTituloList = "Surfactan S.A."
-                    txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
-
-                    txtClave = txtTipomovi + txtNroInterno + txtRenglon
-                    txtClaveOrd = txtTipomovi + txtNroInterno
-
-                    SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
-                                                  txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
-
-                End If
-
-
+                
                 If Val(CampoRecibos.renglon) = 1 And Val(CampoRecibos.retsuss) <> 0 Then
 
                     txtRenglonII = txtRenglonII + 1
@@ -834,7 +803,7 @@ Public Class ListadoImputacionesContable
             Next
 
             '
-            ' Buscamos los datos de las retenciones que no estabn implementadas.
+            ' Buscamos los datos de las retenciones que no estaban implementadas y las discrimamos por cuentas.
             '
             Try
                 Dim WRetIBs As DataTable = _BuscarRetencionesIBRecibos(Proceso.ordenaFecha(txtDesdeFecha.Text), Proceso.ordenaFecha(txthastafecha.Text))
@@ -865,7 +834,6 @@ Public Class ListadoImputacionesContable
                                 txtRenglonII = txtRenglonII + 1
                                 txtCuenta = ZRetIb(i, 2)
 
-                                ' Chequear que se esta pasando mal.
                                 WImporte = Proceso.formatonumerico(ZRetIb(i, 1))
 
                                 txtTipomovi = "3"
@@ -876,11 +844,11 @@ Public Class ListadoImputacionesContable
                                 txtPunto = ""
                                 txtNumero = ""
                                 txtRenglon = txtRenglonII
-                                txtFecha = WFecha 'CampoRecibos.fecha
+                                txtFecha = WFecha
                                 txtObservaciones = ""
-                                txtDebito = Val(WImporte) 'CampoRecibos.retsuss
+                                txtDebito = Val(WImporte)
                                 txtCredito = 0
-                                txtFechaOrd = Proceso.ordenaFecha(WFecha) 'CampoRecibos.fechaord
+                                txtFechaOrd = Proceso.ordenaFecha(WFecha)
                                 txtTitulo = "Recibos"
                                 txtEmpresa = 1
                                 txtTituloList = "Surfactan S.A."
