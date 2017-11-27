@@ -47,7 +47,7 @@ Public Class DetallesRemitosProveedor
         Dim codProveedor, proveedor, orden, articulo, descripcion, cantPed, moneda, precio, condPago, informe, est, fApr, cantRecibida As String
         Dim WCantInforme As Double = 0
         Dim aBuscar As New List(Of Object)
-        Dim Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+        Dim Empresas = Proceso.Empresas 'as New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
         codProveedor = ""
         proveedor = ""

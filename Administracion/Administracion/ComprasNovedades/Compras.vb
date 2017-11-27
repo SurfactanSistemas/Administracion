@@ -1435,10 +1435,11 @@ Public Class Compras
     End Function
 
     Private Function _DeterminarEmpresaDeTrabajo(ByVal remitoPrueba As String) As String
-        Dim Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", _
-                                                  "Surfactan_III", "Surfactan_VI", _
-                                                  "Surfactan_V", "Surfactan_VI", _
-                                                  "Surfactan_VII"}
+        'Dim Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", _
+        '                                          "Surfactan_III", "Surfactan_VI", _
+        '                                          "Surfactan_V", "Surfactan_VI", _
+        '                                          "Surfactan_VII"}
+        Dim Empresas = Proceso.Empresas
         Dim csTemplate As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
         Dim cs As String = ""
 

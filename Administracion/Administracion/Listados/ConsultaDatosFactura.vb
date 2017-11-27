@@ -38,7 +38,7 @@ Public Class ConsultaDatosFactura
 
         Dim cs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
         Dim XCs As String = ""
-        Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+        Dim _Empresas = Proceso.Empresas 'As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT ic.Numero, ic.Fecha, ic.Remito, ic.Proveedor, ic.Despacho, ic.Paridad, ic.Fecha as FechaEmision, ic.Vencimiento, ic.Vencimiento1, ic.Pago as Moneda, ic.Periodo as FechaIva from IvaComp as ic WHERE ic.NroInterno = '" & _NroInterno & "'")
