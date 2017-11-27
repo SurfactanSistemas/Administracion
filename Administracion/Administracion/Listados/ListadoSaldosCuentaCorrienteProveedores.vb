@@ -1,12 +1,8 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
-
-'Imports CrystalDecisions.CrystalReports.Engine
-'Imports CrystalDecisions.Shared
 
 Public Class ListadoSaldosCuentaCorrienteProveedores
 
-    Private Sub LitadoSaldosCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub LitadoSaldosCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtAyuda.Text = ""
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
@@ -29,18 +25,6 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
 
         txtAyuda.Focus()
 
-    End Sub
-
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-        End If
     End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
@@ -81,8 +65,6 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
                 viewer.imprimirReporte()
             Case Reporte.Pantalla
                 viewer.Show()
-            Case Else
-
         End Select
 
     End Sub
