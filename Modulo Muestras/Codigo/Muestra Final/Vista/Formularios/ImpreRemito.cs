@@ -152,21 +152,12 @@ namespace Vista
                     cod = string.Join("-", ZCod);
                 }
 
-                string nom = "";
-
-                if (cod.StartsWith("PT"))
-                {
-                    nom = desc + cod;
-                }else
-                {
-                    nom = cod;
-                }
-
+                string nom = (cod.StartsWith("PT")) ? desc + cod : cod;
 
                 if (System.IO.File.Exists(ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom)))
                 {
 
-                    System.IO.File.Copy(ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom), DESTINO_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", desc + cod));
+                    System.IO.File.Copy(ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom), DESTINO_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom));
 
                 }
                 else

@@ -1,12 +1,8 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
-
-'Imports CrystalDecisions.CrystalReports.Engine
-'Imports CrystalDecisions.Shared
 
 Public Class ListadoSaldosCuentaCorrienteProveedores
 
-    Private Sub LitadoSaldosCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub LitadoSaldosCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
         txtAyuda.Text = ""
         txtDesdeProveedor.Text = "0"
@@ -69,8 +65,6 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
                 viewer.imprimirReporte()
             Case Reporte.Pantalla
                 viewer.Show()
-            Case Else
-
         End Select
 
     End Sub
