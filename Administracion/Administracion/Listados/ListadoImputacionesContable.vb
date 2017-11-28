@@ -580,7 +580,7 @@ Public Class ListadoImputacionesContable
                                                row.Item(13), row.Item(14), row.Item(15), row.Item(16), row.Item(17),
                                                row.Item(18), row.Item(19), row.Item(20))
 
-                If Val(CampoRecibos.cuenta) = 162 Then : Stop : End If
+                REM If Val(CampoRecibos.cuenta) = 162 Then : Stop : End If
 
                 REM If Val(CampoRecibos.recibo) = 88760 Then Stop
                 REM If Val(CampoRecibos.recibo) = 88564 Then Stop
