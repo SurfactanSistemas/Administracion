@@ -12,8 +12,10 @@
                     Return New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
                 Case "PELLITAL"
-
-                    Return New List(Of String) From {"PellitalSA", "Pellital_II", "Pellital_III", "Pellital_V"}
+                    '
+                    ' PELLITAL_II ESTA MAL ESCRITA PORQUE LA BASE DE DATOS LO TIENE ASI AL NOMBRE.
+                    '
+                    Return New List(Of String) From {"PellitalSA", "Pelitall_II", "Pellital_III", "Pellital_V"}
 
                 Case Else
 
