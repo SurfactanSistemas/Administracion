@@ -16,6 +16,8 @@ Public Class ReportViewer
         formula = formulaReporte
         reporte.Load(ruta)
 
+        _ReconectarBaseDatos()
+
         CrystalReportViewer1.ReportSource = reporte
 
     End Sub
@@ -31,6 +33,7 @@ Public Class ReportViewer
     End Sub
 
     Public Sub imprimirReporte()
+        _ReconectarBaseDatos()
         reporte.RecordSelectionFormula = formula
         reporte.PrintToPrinter(1, True, 0, 0)
     End Sub
@@ -39,6 +42,8 @@ Public Class ReportViewer
         Dim exportOptions As ExportOptions
         Dim diskFileDestinationOptions As New DiskFileDestinationOptions()
         Dim formatTypeOptions As New PdfRtfWordFormatOptions()
+
+        _ReconectarBaseDatos()
 
         Dim folderPath As String = Application.StartupPath & "\Reportes\"
         If Not Directory.Exists(folderPath) Then
@@ -58,8 +63,52 @@ Public Class ReportViewer
         reporte.Export()
     End Sub
 
-    Private Sub CrystalReportViewer1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CrystalReportViewer1.Load
+    Private Sub _ReconectarBaseDatos()
 
+        ' MANDAMOS EL PARÁMETRO DE LA EMPRESA.
+
+        If reporte.ParameterFields.Count > 0 Then
+            reporte.SetParameterValue(0, ClasesCompartidas.Globals.NombreEmpresa)
+        End If
+
+        ' CONECTAMOS CON LA BASE DE DATOS QUE CORRESPONDA.
+        Dim cs = ""
+
+        Try
+            ' Buscamos el string de conexion.
+            cs = ClasesCompartidas.Globals.getConnectionString()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Return
+        End Try
+
+        ' Extraemos los datos de conexion del string de conexion.
+        Dim cnsb As New SqlClient.SqlConnectionStringBuilder(cs)
+
+        ' Asignamos los datos al reporte.
+        reporte.SetDatabaseLogon(cnsb.UserID, cnsb.Password, cnsb.DataSource, cnsb.InitialCatalog)
+
+        Dim conexion As New ConnectionInfo
+        conexion.DatabaseName = cnsb.InitialCatalog
+        conexion.ServerName = cnsb.DataSource
+        conexion.UserID = cnsb.UserID
+        conexion.Password = cnsb.Password
+        'conexion.IntegratedSecurity = True
+
+        Dim tli As New TableLogOnInfo()
+        tli.ConnectionInfo = conexion
+
+        ' Volvemos a asignar los datos de conexion pero ahora a cada una de las tablas que tenga el reporte.
+        For Each tabla As Table In Reporte.Database.Tables
+
+            Dim _logInfo As TableLogOnInfo = tabla.LogOnInfo
+
+            _logInfo.ConnectionInfo = conexion
+
+            tabla.ApplyLogOnInfo(_logInfo)
+
+        Next
     End Sub
+
 
 End Class
