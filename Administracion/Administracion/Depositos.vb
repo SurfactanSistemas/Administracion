@@ -719,7 +719,7 @@ Public Class Depositos
 
             trans.Commit()
 
-            MsgBox("Deposito cargado con exito.", MsgBoxStyle.Information)
+            'MsgBox("Deposito cargado con exito.", MsgBoxStyle.Information)
 
             btnImpresion.PerformClick()
 
