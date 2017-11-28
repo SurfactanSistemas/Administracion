@@ -533,6 +533,7 @@ Partial Class CuentaCorrientePantalla
         '
         'Numero
         '
+        Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
         Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
         Me.Numero.HeaderText = "Numero"

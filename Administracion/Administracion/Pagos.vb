@@ -1,7 +1,6 @@
 ﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
-Imports CrystalDecisions.Shared
 
 Public Class Pagos
 
@@ -9,8 +8,6 @@ Public Class Pagos
     Dim pagos As New List(Of DetalleCompraCuentaCorriente)
     Dim cheques As New List(Of Cheque)
     Dim chequeRow As Integer = -1
-    Dim bancoOrden As Banco
-    Dim proveedorOrden As Proveedor
     Private XParidadTotal As String = "0"
     Dim commonEventHandler As New CommonEventsHandler
     Dim _ClavesCheques As New List(Of Object)
@@ -70,22 +67,6 @@ Public Class Pagos
             txtParidad.Text = traerParidad()
         End If
 
-    End Sub
-
-    Private Sub _AlinearColumnas()
-        With gridPagos
-            _AlinearDerecha(.Columns(0))
-            _AlinearDerecha(.Columns(2))
-            _AlinearDerecha(.Columns(3))
-            _AlinearDerecha(.Columns(4))
-        End With
-
-        With gridFormaPagos
-            _AlinearDerecha(.Columns(0))
-            _AlinearDerecha(.Columns(2))
-            _AlinearDerecha(.Columns(1))
-            _AlinearDerecha(.Columns(5))
-        End With
     End Sub
 
     Private Sub _AlinearDerecha(ByRef columna As DataGridViewColumn)
@@ -369,7 +350,6 @@ Public Class Pagos
 
         ' Si la orden de pago se realiza a alguno de estos proveedores o a un proveedor del exterior tipo = 1, se tiene que cargar numero de carpeta.
         If txtProveedor.Text = "10167878480" Or txtProveedor.Text = "10000000100" Or txtProveedor.Text = "10071081483" Or txtProveedor.Text = "10069345023" Or txtProveedor.Text = "10066352912" Or (Val(datos_prov(0)) = 24 And Val(datos_prov(1)) = 1) Then
-            Dim entra As Boolean = False
 
             If Val(_Carpetas(1)) = 0 And Val(_Carpetas(2)) = 0 And Val(_Carpetas(3)) = 0 And Val(_Carpetas(4)) = 0 And Val(_Carpetas(5)) = 0 And Val(_Carpetas(6)) = 0 And Val(_Carpetas(7)) = 0 And Val(_Carpetas(8)) = 0 And Val(_Carpetas(9)) = 0 And Val(_Carpetas(10)) = 0 Then
                 'If entra Then
@@ -409,70 +389,12 @@ Public Class Pagos
 
     End Function
 
-    Private Function hayMovimientos()
-        Return CustomConvert.toDoubleOrZero(lblPagos.Text) <> 0
-    End Function
-
-    Private Function noHayDiferencia()
-        Return CustomConvert.toDoubleOrZero(lblDiferencia.Text) = 0
-    End Function
-
-    Private Function bancosValidos()
-        'For Each row As DataGridViewRow In gridFormaPagos.Rows
-        '    If Not row.IsNewRow And row.Cells(0).Value = "02" Then
-        '        Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(row.Cells(3).Value)
-        '        If IsNothing(banco) Then : Return False : End If
-        '    End If
-        'Next
-        Return True
-    End Function
-
     Private Function _CS(Optional ByVal empresa As String = "SurfactanSA")
         Return Proceso._ConectarA(empresa)
     End Function
 
-    Private Function consistenciaEntreProveedorYGrillas()
-        Return pagos.All(Function(cuenta) cuenta.proveedor.id = txtProveedor.Text)
-    End Function
-
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
         Close()
-    End Sub
-
-    Private Sub txtObservaciones_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If gridPagos.Rows.Count = 0 Then
-            lstSeleccion.SelectedIndex = 1
-            lstSeleccion_MouseClick(Nothing, Nothing)
-        Else
-            gridPagos.CurrentCell = gridPagos.Rows(0).Cells(4)
-            gridPagos.Select()
-            gridPagos.Focus()
-        End If
-    End Sub
-
-    Private Function cuentasCorrientesDelProveedorActual()
-        Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
-        If IsNothing(proveedor) Then
-            Return New List(Of CtaCteProveedor)
-        Else
-            Return DAOCtaCteProveedor.cuentasSinSaldar(proveedor)
-        End If
-    End Function
-
-    Private Sub mostrarCuentaCorriente(ByVal cuenta As DetalleCompraCuentaCorriente)
-        If (LTrim(txtParidad.Text) = "") Then
-            MessageBox.Show("No hay paridad informada")
-        Else
-            If pagos.Any(Function(pagoExistente) cuenta.igualA(pagoExistente)) Then
-                Exit Sub
-            End If
-            pagos.Add(cuenta)
-            gridPagos.Rows.Add(cuenta.tipo, cuenta.letra, cuenta.punto, cuenta.numero, CustomConvert.toStringWithTwoDecimalPlaces(cuenta.saldo), "Pago Factura Nro " & CustomConvert.toIntOrZero(cuenta.numero))
-
-            If cuenta.esClausulaDolar Then
-                generarNota(cuenta)
-            End If
-        End If
     End Sub
 
     Private Sub generarNota(ByVal cuenta As DetalleCompraCuentaCorriente)
@@ -487,8 +409,6 @@ Public Class Pagos
                 gridPagos.Rows.Add("03", cuenta.letra, cuenta.punto, "99999999", CustomConvert.toStringWithTwoDecimalPlaces(resto), "N/C por Diferencia de Cambio")
             Case Is > 0
                 gridPagos.Rows.Add("02", cuenta.letra, cuenta.punto, "99999999", CustomConvert.toStringWithTwoDecimalPlaces(resto), "N/D por Diferencia de Cambio")
-            Case Else
-                'ENTRA ACA SI ES IGUAL A CERO Y NO SE DEBE HACER NADA'
         End Select
 
     End Sub
@@ -496,9 +416,13 @@ Public Class Pagos
     Private Sub mostrarOrdenDePago(ByVal orden As OrdenPago)
         If IsNothing(orden) Then
             Throw New Exception("Orden de Pago no existente")
-            Exit Sub
         End If
         btnLimpiar.PerformClick()
+
+        If Me.SoloLectura Then
+            _LimpiarGrillas()
+        End If
+
         txtOrdenPago.Text = orden.nroOrden
         txtFecha.Text = Proceso._Normalizarfecha(orden.fecha)
         txtObservaciones.Text = orden.observaciones
@@ -687,32 +611,6 @@ Public Class Pagos
         txtNombreBanco.Text = banco.nombre
     End Sub
 
-    Private Sub mostrarCuentaContable(ByVal cuenta As CuentaContable)
-        'TODO
-    End Sub
-
-    Private Sub mostrarCheque(ByVal cheque As Cheque)
-        If cheques.Any(Function(chequeExistente) cheque.igualA(chequeExistente)) Then
-            chequeRow = -1
-            gridFormaPagos.Select()
-            Exit Sub
-        End If
-        cheques.Add(cheque)
-        If chequeRow <> -1 Then
-            gridFormaPagos.Rows(chequeRow).Cells(0).Value = "03"
-            gridFormaPagos.Rows(chequeRow).Cells(1).Value = cheque.numero
-            gridFormaPagos.Rows(chequeRow).Cells(2).Value = cheque.fecha
-            gridFormaPagos.Rows(chequeRow).Cells(3).Value = ""
-            gridFormaPagos.Rows(chequeRow).Cells(4).Value = cheque.banco
-            gridFormaPagos.Rows(chequeRow).Cells(5).Value = CustomConvert.toStringWithTwoDecimalPlaces(cheque.importe)
-            gridFormaPagos.CurrentCell = gridFormaPagos.Rows(chequeRow + 1).Cells(0)
-            gridFormaPagos.Select()
-            chequeRow = -1
-        Else
-            gridFormaPagos.Rows.Add("03", cheque.numero, cheque.fecha, "", cheque.banco, CustomConvert.toStringWithTwoDecimalPlaces(cheque.importe))
-        End If
-    End Sub
-
     Private Sub txtProveedor_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
         If e.KeyValue = Keys.Enter Then
 
@@ -836,10 +734,9 @@ Public Class Pagos
                     XClaves.Clear()
 
                     Do While .Read()
-                        Dim XNroInterno, XTotal, XSaldo, XSaldoUS, XImpre, XLetra, XPunto, XNumero, XFecha, XClave, XParidad, XPago As String
+                        Dim XNroInterno, XSaldo, XSaldoUS, XImpre, XLetra, XPunto, XNumero, XFecha, XParidad, XPago As String
 
                         XNroInterno = .Item("NroInterno").ToString()
-                        XTotal = _NormalizarNumero(.Item("Total").ToString())
                         XSaldo = _NormalizarNumero(.Item("Saldo").ToString())
                         XSaldoUS = 0.0
                         XParidadTotal = 0.0
@@ -848,7 +745,6 @@ Public Class Pagos
                         XPunto = .Item("Punto").ToString()
                         XNumero = .Item("Numero").ToString()
                         XFecha = .Item("Fecha").ToString()
-                        XClave = .Item("Clave").ToString()
                         XParidad = 0 '_NormalizarNumero(.Item("Paridad").ToString(), 4)
                         XPago = 0 '.Item("Pago").ToString()
 
@@ -946,7 +842,6 @@ Public Class Pagos
             cm = Nothing
 
         End Try
-        Return Nothing
     End Function
 
     Private Sub _ListarProveedores()
@@ -1215,11 +1110,6 @@ Public Class Pagos
     End Sub
 
 
-
-    Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
-    End Sub
-
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
         lstConsulta.Visible = False
         txtConsulta.Visible = False
@@ -1379,7 +1269,7 @@ Public Class Pagos
 
                     .Read()
 
-                    Dim XTipo, XNroInterno, XTotal, XSaldo, XSaldoUS, XImpre, XLetra, XPunto, XNumero, XFecha, XClave, XParidad, XPago, XParidadTotal As String
+                    Dim XTipo, XNroInterno, XSaldo, XSaldoUS, XLetra, XPunto, XNumero, XParidad, XPago, XParidadTotal As String
                     Dim XRow As Integer = 0
 
                     For i = 0 To XMAXFILAS - 1
@@ -1391,10 +1281,8 @@ Public Class Pagos
 
                     XTipo = .Item("Tipo").ToString()
                     XNroInterno = .Item("NroInterno").ToString()
-                    XTotal = _NormalizarNumero(.Item("Total").ToString())
                     XSaldo = _NormalizarNumero(.Item("Saldo").ToString())
 
-                    XImpre = .Item("Impre").ToString()
                     XLetra = .Item("Letra").ToString()
                     XPunto = .Item("Punto").ToString()
                     XNumero = .Item("Numero").ToString()
@@ -1636,33 +1524,6 @@ Public Class Pagos
         Return utilizada
     End Function
 
-    Private Sub _TraerDocumento(ByVal _Item As String, ByVal indice As Integer)
-        Dim XClave As String = ""
-
-        ' Comprobamos que aun haya lugar para seguir cancelando Facturas.
-        If gridFormaPagos.Rows.Count > 15 Then
-            MsgBox("La cantidad de facturas a cancelar supera las 15", MsgBoxStyle.Information)
-            Exit Sub
-        End If
-
-        If _Claves.Count = 0 Then
-            Exit Sub
-        End If
-
-        XClave = _ObtenerClaveConsulta(_Item)
-
-        If XClave = "" Then
-            Exit Sub
-        End If
-
-        If _DocumentoYaUtilizado(XClave) Then
-            Exit Sub
-        End If
-
-        _ProcesarDocumento(XClave, indice)
-
-    End Sub
-
     Private Sub _ProcesarDocumento(ByVal clave As String, Optional ByVal indice As Integer = Nothing)
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Vencimiento1, Saldo FROM CtaCte WHERE Clave = '" & clave & "'")
@@ -1858,11 +1719,7 @@ Public Class Pagos
 
         Return _Paridad
     End Function
-
-    'Private Function _NormalizarNumero(ByVal numero As String, ByVal decimales As Integer)
-    '    Return CustomConvert.asStringWithDecimalPlaces(numero, decimales)
-    'End Function
-
+    
     Private Function _TraerNumeroCertificado(ByVal Codigo) As Integer
         Dim WNumero As Integer = 0
         Dim cn As SqlConnection = New SqlConnection()
@@ -3454,11 +3311,6 @@ Public Class Pagos
         End With
     End Sub
 
-    Private Sub gridFormaPagos_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellValueChanged
-        'sumarImportes()
-        'llenarConCerosNumero()
-    End Sub
-
     Private Sub llenarConCerosNumero()
         For Each row As DataGridViewRow In gridFormaPagos.Rows
             If row.Cells(1).Value <> "" Then
@@ -3469,21 +3321,6 @@ Public Class Pagos
                 End If
             End If
         Next
-    End Sub
-
-    Private Sub gridFormaPagos_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles gridFormaPagos.KeyDown
-        'If e.KeyCode = Keys.Enter Then
-        '    Dim iCol = gridFormaPagos.CurrentCell.ColumnIndex
-        '    Dim iRow = gridFormaPagos.CurrentCell.RowIndex
-        '    If iCol = 0 And iRow > -1 Then
-        '        Dim val = gridFormaPagos.Rows(iRow).Cells(iCol).Value
-        '        eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(val), iRow, iCol)
-        '    End If
-        'End If
-    End Sub
-
-    Private Sub gridPagos_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridPagos.CellValueChanged
-        'sumarImportes()
     End Sub
 
     Private Sub sumarImportes()
@@ -3652,10 +3489,6 @@ Public Class Pagos
             Catch ex As ArgumentOutOfRangeException
             End Try
         End If
-    End Sub
-
-    Private Sub txtFechaParidad_Leave(ByVal sender As Object, ByVal e As System.EventArgs)
-        traerParidad(txtFechaParidad.Text)
     End Sub
 
     Public Sub txtOrdenPago_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrdenPago.KeyDown
@@ -4454,49 +4287,6 @@ Public Class Pagos
             .Dispose()
 
         End With
-
-
-        'If _Carpetas.Count > 0 Then
-
-        ' Validamos que todas las carpetas, ademas de validas, correspondan al proveedor en cuestión.
-        'If Not _CarpetasCorrespondenAProveedor(txtProveedor.Text) Then
-        '    MsgBox("El Proveedor de la Carpeta no coincide con el indicado en la Orden de Pago.", MsgBoxStyle.Critical)
-        '    btnCarpetas.PerformClick()
-        'End If
-
-        'End If
-
-    End Sub
-
-    'Private Function _CarpetasCorrespondenAProveedor(ByVal _Proveedor As String)
-    '    Dim corresponden As Boolean = True
-    '    _Proveedor = Trim(_Proveedor)
-
-    '    For Each _C As String In _Carpetas
-
-    '        If Trim(_C) <> "" Then
-    '            If _Proveedor <> "10167878480" And _Proveedor <> "10000000100" And _Proveedor <> "10071081483" And _Proveedor <> "10069345023" And _Proveedor <> "10066352912" Then
-    '                If _Proveedor <> Trim(_C) Then
-    '                    ' Indicamos que hay algunas de las carpetas que no se corresponde con el proveedor y salimos.
-    '                    corresponden = False
-    '                    Exit For
-    '                End If
-    '            End If
-    '        End If
-
-    '    Next
-
-    '    Return corresponden
-    'End Function
-
-    Private Sub Pagos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        _AlinearColumnas()
-        txtProveedor.Focus()
-        cmbTipo.SelectedIndex = 0
-        lstSeleccion.SelectedIndex = 0
-
-        txtFecha.ValidatingType = GetType(System.DateTime)
-        txtFechaParidad.ValidatingType = GetType(System.DateTime)
 
     End Sub
 
