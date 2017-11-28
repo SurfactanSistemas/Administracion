@@ -219,7 +219,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
             If Trim(txtCodProveedor.Text) <> "" Then
 
-                If txtFechaPago.Text.Replace("/", "").Replace(" ", "").Length < 10 Then
+                If txtFechaPago.Text.Replace(" ", "").Length < 10 Then
                     MsgBox("Se debe indicar una fecha de Pago antes de ingresar un Proveedor.", MsgBoxStyle.Exclamation)
                     txtFechaPago.Focus()
                     Exit Sub
