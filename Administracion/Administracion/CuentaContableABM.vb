@@ -48,7 +48,7 @@ Public Class CuentaContableABM
 
                 DAOCuentaContable.eliminarCuentaContable(txtCodigo.Text)
 
-                MsgBox("El Banco ha sido eliminado correctamente", MsgBoxStyle.Information)
+                MsgBox("La Cuenta Contable ha sido eliminada correctamente", MsgBoxStyle.Information)
 
                 _LimpiarCampos()
 
