@@ -128,7 +128,20 @@ Public Class ListadoCuentaCorrienteProveedores
 
         Next
 
-        txtUno = "{ImpCtaCtePrvNet.Proveedor} in " + x + "0" + x + " to " + x + "99999999999" + x
+        Dim WDesde, WHasta
+
+        WDesde = txtDesdeProveedor.Text
+        WHasta = txtHastaProveedor.Text
+
+        If Trim(WDesde) = "" Then
+            WDesde = "0"
+        End If
+
+        If Trim(WHasta) = "" Then
+            WHasta = "99999999999"
+        End If
+
+        txtUno = "{ImpCtaCtePrvNet.Proveedor} in " & x & WDesde & x & " to " & x & WHasta & x
         txtFormula = txtUno
 
         Dim viewer As New ReportViewer("Listado de Corriente de Proveedres", Globals.reportPathWithName("wccprvnet.rpt"), txtFormula)
