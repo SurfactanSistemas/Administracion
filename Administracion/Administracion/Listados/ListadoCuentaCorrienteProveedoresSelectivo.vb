@@ -1,14 +1,11 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 Imports System.Data.SqlClient
 
 Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Dim varRenglon As Integer
     Dim varTotal, varSaldo, varTotalUs, varSaldoUs, varSaldoOriginal, varDife, varParidad, varParidadTotal As Double
-    Dim varPago As Integer
     Dim _Claves As New List(Of Object)
-    Dim XFecha As String
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
@@ -18,17 +15,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         '_CargarProveedoresPreCargados()
         _Claves.Clear()
     End Sub
-
-    Private Function _DeterminarFechaLimite() As String
-        Dim _Fecha As Date = Nothing
-        Dim _FechaActual As Date = Date.Now
-        Const DIA_LIMITE As Integer = 4
-
-        _Fecha = DateAdd(DateInterval.Day, (DIA_LIMITE - _FechaActual.DayOfWeek), _FechaActual)
-        _Fecha = DateAdd(DateInterval.Day, -7, _Fecha)
-
-        Return String.Join("", _Fecha.ToString("dd/MM/yyyy").Split("/").Reverse())
-    End Function
 
     Private Sub _CargarProveedoresPreCargados()
         Dim _Proveedores As New List(Of Object)
@@ -52,12 +38,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     _Proveedores.Add({dr.Item("Proveedor"), dr.Item("FechaOrd")})
 
                 Loop
-            Else
-                MsgBox("No hay proveedores que listar.", MsgBoxStyle.Information)
+                'Else
+                'MsgBox("No hay proveedores que listar.", MsgBoxStyle.Information)
             End If
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar los Proveedores Selectivos precargados en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
             dr = Nothing
@@ -75,7 +61,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     End Sub
 
-    Private Sub _CargarProveedor(ByVal CampoProveedor As Proveedor, Optional ByVal ChequeRechazado As String = "")
+    Private Sub _CargarProveedor(ByVal CampoProveedor As Proveedor)
         If IsNothing(CampoProveedor) Then
             MsgBox("Proveedor incorrecto")
         Else
@@ -266,7 +252,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Private Sub _LimpiarImpCtaCtePrvNet()
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("DELETE FROM impCtaCtePrvNet")
-        Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -277,7 +262,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
             Throw New Exception("Hubo un problema al querer limpiar la tabla ImpCtaCtePrvNet en la Base de Datos.")
         Finally
 
-            dr = Nothing
             cn.Close()
             cn = Nothing
             cm = Nothing
@@ -472,13 +456,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim varAcumulado, varAcuNeto, varAcuRetenido, varAcuIva, varAcuAnticipo, varAcuBruto, varAcumulaUs As Double
         Dim varProveedor, varLetra As String
         Dim varNeto, varIva, varIva5, varIva27, varIva105, varIb, varExento, varTotalTrabajo As Double
-        Dim varRetIb, varRetIva, varRetGan, varAcumulaIb
+        Dim varRetIb, varRetIva, varRetGan
         REM Dim varRetIb, varRetIva, varRetGan, varAcumulaIb, varRete As Double
         Dim varPorceIb, varPorceIbCaba As Double
         Dim varTipoIbCaba, varTipoIva, varTipoPrv, varTipoIb As Integer
         Dim varPago, varEmpresa As Integer
         Dim varAcumulaNeto, varAcumulaNetoII, varAcumulaIva As Double
-        Dim varFecha As String
         Dim varRetIbI, varRetIbII As Double
 
         Try
@@ -553,7 +536,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
                         varPago = CCPrv.pago
                         varParidad = CCPrv.paridad
-                        varFecha = CCPrv.fecha
 
                         If varPago <> 2 Then
                             varTotal = CCPrv.total
@@ -658,7 +640,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         varRetIb = 0
                         varRetIva = 0
                         varRetGan = 0
-                        varAcumulaIb = 0
 
                         '
                         'calcula el neto para el calculo de las retenciones
@@ -760,7 +741,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
                     Next
                 End If
-                
+
             End If
 
         Next
@@ -1046,8 +1027,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     If Not _EsNumeroOControl(keyData) Then
                         Return True
                     End If
-                Case Else
-
             End Select
 
             If msg.WParam.ToInt32() = Keys.Enter Then
@@ -1085,7 +1064,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         Select Case iCol
                             Case 0, 1
                                 .CurrentCell = .Rows(iRow).Cells(iCol)
-                            Case Else
                         End Select
                     End With
 
