@@ -3372,10 +3372,16 @@ Public Class Recibos
             .Columns.Add("Postal")
             .Columns.Add("Impre1")
             .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Fecha2")
-            .Columns.Add("Tipo2")
-            .Columns.Add("Numero2")
-            .Columns.Add("Importe2").DataType = System.Type.GetType("System.Double")
+
+            .Columns.Add("Fecha21")
+            .Columns.Add("Tipo21")
+            .Columns.Add("Numero21")
+            .Columns.Add("Importe21").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Fecha22")
+            .Columns.Add("Tipo22")
+            .Columns.Add("Numero22")
+            .Columns.Add("Importe22").DataType = System.Type.GetType("System.Double")
+
             .Columns.Add("Cheque1")
             .Columns.Add("Venci1")
             .Columns.Add("Impo1").DataType = System.Type.GetType("System.Double")
@@ -3457,7 +3463,8 @@ Public Class Recibos
             .Columns.Add("Impo20").DataType = System.Type.GetType("System.Double")
             .Columns.Add("Banco20")
             .Columns.Add("Signo1")
-            .Columns.Add("Signo2")
+            .Columns.Add("Signo21")
+            .Columns.Add("Signo22")
             .Columns.Add("Observaciones")
         End With
     End Sub
@@ -3466,6 +3473,7 @@ Public Class Recibos
         Dim table As New DataTable("Detalles")
         Dim cheques1 As New DataTable("Cheques1")
         Dim cheques2 As New DataTable("Cheques2")
+        Dim detallado As New DataTable("Detallado")
         Dim row As DataRow
         Dim crdoc As ReportDocument
         Dim cantidad As Integer = 2
@@ -3504,6 +3512,7 @@ Public Class Recibos
             ultimo += 1
         Next
 
+        ' Alineamos las filas de los recibos a la de las facturas.
         For u = 1 To 22
             If WEntra(u, 11) = "" And WEntra(u, 10) <> "" Then
                 WEntra(u, 11) = " $ "
@@ -3519,13 +3528,82 @@ Public Class Recibos
         WEntra(24, 9) = RSet("TOTAL", 40)
         WEntra(24, 11) = " $ "
 
+        '
+        ' AJUSTE PARA NUEVO DISEÑO.
+        '
+        Dim WRecibo, WImpre1, WSigno, WImporte1, WIndice
+        Dim WLeyendas(40) As String
+
+        WLeyendas(1) = "Efectivo:"
+        WLeyendas(3) = "Cheques:"
+        WLeyendas(5) = "Documentos:"
+        WLeyendas(7) = "Ret. Ganancias:"
+        WLeyendas(9) = "Ret. Iva:"
+        WLeyendas(11) = "Ret. I.Brutos:"
+        WLeyendas(13) = "Monenda Ext:"
+        WLeyendas(15) = "Compensacion:"
+        WLeyendas(17) = "Bonos:"
+        WLeyendas(19) = "Ajuste:"
+        WLeyendas(21) = "Transferencia:"
+        WLeyendas(22) = "Ret. SUSS:"
+
+        ' Generamos la tabla.
+        With detallado
+            .Columns.Add("Recibo")
+
+            For i = 1 To 10
+                .Columns.Add("Impre" & i)
+            Next
+
+        End With
+
+        WIndice = 0
+
+        row = detallado.NewRow()
+
+        With row
+
+            For i = 1 To 39
+
+                WRecibo = WEntra(i, 1)
+                WImpre1 = WLeyendas(i) 'Trim(WEntra(i, 9))
+                WImporte1 = WEntra(i, 10)
+                WSigno = WEntra(i, 11)
+
+                If Val(WImporte1) <> 0 And WIndice <= 10 Then
+
+                    WIndice += 1
+
+                    WImpre1 &= RSet(Trim(WSigno) & " " & Proceso.formatonumerico(Trim(WImporte1)), 33 - WImpre1.ToString().Length)
+
+                    .Item("Impre" & WIndice) = Trim(WImpre1)
+
+                End If
+
+                If WIndice > 10 Then
+                    Exit For
+                End If
+
+            Next
+
+            .Item("Recibo") = WRecibo
+
+        End With
+
+        If WIndice > 0 Then
+            detallado.Rows.Add(row)
+        End If
+
         ' Creo las Columnas
         _PrepararTabla(table)
 
+        WIndice = 0
         ' Lleno la tabla con la informacion del Recibo.
-        For i = 1 To 24
+        For i = 1 To 20 Step 2
 
-            row = table.NewRow()
+            'If Val(WEntra(i, 16)) <> 0 Then
+
+            row = table.NewRow
 
             row.Item("Recibo") = WEntra(i, 1)
             row.Item("Renglon") = i
@@ -3539,14 +3617,25 @@ Public Class Recibos
             row.Item("Impre1") = WEntra(i, 9)
             row.Item("Importe1") = Val(WEntra(i, 10))
             row.Item("Signo1") = WEntra(i, 11)
-            row.Item("Fecha2") = WEntra(i, 12)
-            row.Item("Tipo2") = WEntra(i, 13)
-            row.Item("Numero2") = WEntra(i, 14)
-            row.Item("Signo2") = WEntra(i, 15)
-            row.Item("Importe2") = Val(WEntra(i, 16))
+
+            'If WIndice Mod 2 = 0 Then
+            row.Item("Fecha22") = WEntra(i + 1, 12)
+            row.Item("Tipo22") = WEntra(i + 1, 13)
+            row.Item("Numero22") = WEntra(i + 1, 14)
+            row.Item("Signo22") = WEntra(i + 1, 15)
+            row.Item("Importe22") = Val(WEntra(i + 1, 16))
+            'Else
+            row.Item("Fecha21") = WEntra(i, 12)
+            row.Item("Tipo21") = WEntra(i, 13)
+            row.Item("Numero21") = WEntra(i, 14)
+            row.Item("Signo21") = WEntra(i, 15)
+            row.Item("Importe21") = Val(WEntra(i, 16))
+            'End If
+
             row.Item("Observaciones") = LSet(Trim(txtObservaciones.Text), 50)
 
             table.Rows.Add(row)
+            'End If
 
         Next
 
@@ -3610,9 +3699,14 @@ Public Class Recibos
 
         Dim ds As New DataSet()
 
-        ds.Tables.Add(table)
-        ds.Tables.Add(cheques1)
-        ds.Tables.Add(cheques2)
+        With ds
+
+            .Tables.Add(table)
+            .Tables.Add(cheques1)
+            .Tables.Add(cheques2)
+            .Tables.Add(detallado)
+
+        End With
 
         crdoc.SetDataSource(ds)
 
@@ -3627,8 +3721,8 @@ Public Class Recibos
             End Try
         End If
 
-        _Imprimir(crdoc, cantidad)
-        '_VistaPrevia(crdoc)
+        '_Imprimir(crdoc, cantidad)
+        _VistaPrevia(crdoc)
 
         btnLimpiar.PerformClick()
 
@@ -3734,7 +3828,7 @@ Public Class Recibos
         End If
 
         Dim Retencion, Cheque, Documento, Total2f, Pesos, Bonos, Dolares, Ajuste, Compe, Transfe, Total2, Total1 As Double
-        Dim Vector(30, 10) As String
+        Dim Vector(50, 10) As String
         Dim WEntra(100, 160) As String
         Dim WCheques(100, 5) As String
         Dim WRCheques As Integer = 0
@@ -3778,7 +3872,7 @@ Public Class Recibos
         ImpreTipo(1) = "FC"
 
         ' Extraemos los valores de Débitos y Créditos.
-        For iRow = 0 To 19
+        For iRow = 0 To 40
 
             If iRow < gridPagos2.Rows.Count Then
                 If Trim(gridPagos2.Rows(iRow).Cells(4).Value) <> "" Then
@@ -3851,7 +3945,7 @@ Public Class Recibos
 
 
         ' Calculamos totales y subtotales en base a los tipos de créditos.
-        For Ciclo = 0 To 19
+        For Ciclo = 0 To 40
 
             If Val(Vector(Ciclo, 9)) <> 0 Then
                 Dim _cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = Ciclo)
@@ -3898,7 +3992,10 @@ Public Class Recibos
 
         Total1 = Pesos + Cheque + Documento + Retencion + Dolares + Compe + Transfe + Ajuste + Bonos
 
-        For Ciclo = 0 To 19
+        '
+        ' GUARDAMOS LA INFORMACION DE LOS CHEQUES
+        '
+        For Ciclo = 0 To 40
             If Val(Vector(Ciclo, 9)) <> 0 And (Val(Vector(Ciclo, 5)) = 2 Or Val(Vector(Ciclo, 5)) = 3) Then
                 Vector(Ciclo, 6) = ceros(Vector(Ciclo, 6), 6)
                 Vector(Ciclo, 8) = LSet(Vector(Ciclo, 8), 20)
@@ -4152,7 +4249,7 @@ Public Class Recibos
         WEntra(XLugar, 16) = ""
 
 
-        For Ciclo = 0 To 17
+        For Ciclo = 0 To 37
 
             XLugar = XLugar + 1
 
