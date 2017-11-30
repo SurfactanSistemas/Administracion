@@ -1,24 +1,22 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 Imports System.Data.SqlClient
-Imports System.Text.RegularExpressions
-
 
 Public Class CuentaCorrientePantalla
-
-    Dim dataGridBuilder As GridBuilder
-    Dim Aa As Integer
     Private _NrosInternos As New List(Of Object)
+    Private WPOSINICIALCONSULTA As Point
+    Private WPOSINICIALCERRAR As Point
+    Private WPOSINICIALLIMPIAR As Point
 
     Private Sub CuentaCorrientePantalla_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        'dataGridBuilder = New GridBuilder(GRilla)
+        WPOSINICIALCONSULTA = btnConsulta.Location
+        WPOSINICIALCERRAR = btnCancela.Location
+        WPOSINICIALLIMPIAR = btnLimpiar.Location
 
         opcPendiente.Checked = True
         opcCompleto.Checked = False
 
         GRilla.Columns(6).ValueType = GetType(Date)
-
     End Sub
 
     Private Sub _Proceso()
@@ -73,7 +71,6 @@ Public Class CuentaCorrientePantalla
 
         GRilla.AllowUserToAddRows = False
         txtSaldo.Text = formatonumerico(WSuma, "########0.#0", ".")
-
     End Sub
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
@@ -84,12 +81,9 @@ Public Class CuentaCorrientePantalla
 
         txtAyuda.Text = ""
         txtAyuda.Focus()
-
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtAyuda.KeyPress
+    Private Sub txtAyuda_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAyuda.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
@@ -101,7 +95,8 @@ Public Class CuentaCorrientePantalla
 
     Private Sub _TraerSaldoCuentaProveedor(ByVal proveedor As Proveedor)
 
-        If IsNothing(proveedor.cliente) Then : Exit Sub : End If
+        If IsNothing(proveedor.cliente) Then : Exit Sub
+        End If
 
         Dim cliente As String = proveedor.cliente.id
         Dim saldo As String = "0,00"
@@ -165,20 +160,21 @@ Public Class CuentaCorrientePantalla
 
         End Try
 
-        lblClienteAsociado.Text = Trim(Cliente)
+        lblClienteAsociado.Text = Trim(cliente)
         lblSaldoCuentaProveedor.Text = "$ " & formatonumerico(saldo, "########0.#0", ".")
     End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
 
-        If IsNothing(proveedor) Then : Exit Sub : End If
+        If IsNothing(proveedor) Then : Exit Sub
+        End If
 
         ' Reseteamos resumen de montos automático.
         gbSaldoCtaCliente.Visible = False
         GroupBox1.Visible = False
-        btnCancela.Location = New Point(342, 541)
-        btnConsulta.Location = New Point(213, 541)
-        btnLimpiar.Location = New Point(471, 541)
+        btnCancela.Location = WPOSINICIALCERRAR 'New Point(342, 541)
+        btnConsulta.Location = WPOSINICIALCONSULTA 'New Point(213, 541)
+        btnLimpiar.Location = WPOSINICIALLIMPIAR 'New Point(471, 541)
 
 
         'lstFiltrada.Visible = False
@@ -232,19 +228,6 @@ Public Class CuentaCorrientePantalla
 
     Private Sub opcCompleto_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles opcCompleto.CheckedChanged
         Call _Proceso()
-    End Sub
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        'Dim opc As DialogResult = MsgBox("¿Desea salir de esta aplicación?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Salir")
-        'If opc = Windows.Forms.DialogResult.Yes Then
-        '    Aa = 1
-        '    'End
-        'Else
-        '    'e.Cancel = True
-        '    Aa = 2
-        'End If
-        'Stop
     End Sub
 
     Private Function _AltaProveedorSelectivo(ByVal CodProveedor As String) As Boolean
@@ -330,13 +313,11 @@ Public Class CuentaCorrientePantalla
 
             End If
         End If
-
     End Sub
 
     Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
         Dim _NroInterno As String = ""
         Dim _Numero As String = "" ' Guardamos el numero de factura para buscar el nro interno.
-        Dim _Datos As New List(Of Object)
 
         If e.RowIndex >= 0 Then
             _Numero = GRilla.Rows(e.RowIndex).Cells(3).Value
@@ -375,38 +356,7 @@ Public Class CuentaCorrientePantalla
             Case Else
                 Exit Sub
         End Select
-
     End Sub
-
-    Private Function _TraerOrdenPago(ByVal _NroInterno) As String
-        Dim _OrdenPago As String = ""
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ")
-        Dim dr As SqlDataReader
-
-        SQLConnector.conexionSql(cn, cm)
-
-        Try
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-                dr.Read()
-            End If
-
-        Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return _OrdenPago
-    End Function
 
     Private Sub txtProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
 
@@ -449,7 +399,6 @@ Public Class CuentaCorrientePantalla
     Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
 
         btnConsulta.PerformClick()
-
     End Sub
 
     Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
@@ -495,7 +444,6 @@ Public Class CuentaCorrientePantalla
         lstAyuda_Click(Nothing, Nothing)
 
         ' Sacamos de vista los resultados filtrados.
-
     End Sub
 
     Private Sub lblSaldoCuentaProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblSaldoCuentaProveedor.MouseDoubleClick
@@ -532,7 +480,8 @@ Public Class CuentaCorrientePantalla
 
         Debug.Print("==================================================")
 
-        If GRilla.SelectedCells.Count < 2 Then : Exit Sub : End If
+        If GRilla.SelectedCells.Count < 2 Then : Exit Sub
+        End If
 
         For Each _cell As DataGridViewCell In GRilla.SelectedCells
             If IsNothing(_filas.Find(Function(_f) _f.Index = _cell.RowIndex)) Then
@@ -561,8 +510,6 @@ Public Class CuentaCorrientePantalla
                                 _WTotalNC += _Valor
                             Case "OP", "AN"
                                 _WTotalPagos += _Valor
-                            Case Else
-
                         End Select
 
                     End If
@@ -592,16 +539,15 @@ Public Class CuentaCorrientePantalla
 
         ' Animamos los botones para dar lugar al panel con la información de los totales.
         For i = btnCancela.Location.X To 280 Step -1
-            btnConsulta.Location = New Point(i - 258, 541)
-            btnCancela.Location = New Point(i - 129, 541)
-            btnLimpiar.Location = New Point(i, 541)
+            btnConsulta.Location = New Point(i - 258, btnCancela.Location.Y)
+            btnCancela.Location = New Point(i - 129, btnCancela.Location.Y)
+            btnLimpiar.Location = New Point(i, btnCancela.Location.Y)
             Threading.Thread.Sleep(0.8)
         Next
 
         ' Mostramos el panel y le colocamos el titulo junto con el periodo determinado mas arriba.
         GroupBox1.Visible = True
         GroupBox1.Text = "Montos detallados por periodo: " & Proceso.DesOrdenaFecha(comienzo) & " al " & Proceso.DesOrdenaFecha(final)
-
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
@@ -613,9 +559,9 @@ Public Class CuentaCorrientePantalla
         gbSaldoCtaCliente.Visible = False
 
         GroupBox1.Visible = False
-        btnCancela.Location = New Point(342, 541)
-        btnConsulta.Location = New Point(213, 541)
-        btnLimpiar.Location = New Point(471, 541)
+        btnCancela.Location = WPOSINICIALCERRAR ' New Point(342, 541)
+        btnConsulta.Location = WPOSINICIALCONSULTA ' New Point(213, 541)
+        btnLimpiar.Location = WPOSINICIALLIMPIAR 'New Point(471, 541)
 
         txtProveedor.Focus()
     End Sub
@@ -633,6 +579,8 @@ Public Class CuentaCorrientePantalla
     End Sub
 
     Private Sub GRilla_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles GRilla.SortCompare
+
+        GRilla.ClearSelection()
 
         Dim num1, num2
 
@@ -660,6 +608,10 @@ Public Class CuentaCorrientePantalla
         End If
 
         e.Handled = True
+    End Sub
 
+    Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
+        boxPantallaProveedores.Visible = False
+        txtProveedor.Focus()
     End Sub
 End Class

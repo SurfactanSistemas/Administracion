@@ -110,7 +110,7 @@ Public Class ListadoProyeccionCobros
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(645, 580)
+        Me.Size = New System.Drawing.Size(645, 449)
 
         lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre
 
@@ -232,7 +232,7 @@ Public Class ListadoProyeccionCobros
 
     End Sub
 
-    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeProveedor.MouseDoubleClick
+    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         btnConsulta.PerformClick()
     End Sub
 

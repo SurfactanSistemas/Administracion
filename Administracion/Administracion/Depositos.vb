@@ -1026,19 +1026,19 @@ Public Class Depositos
             .Imprimir()
         End With
 
-        If XTipo = 3 Then
+        'If XTipo = 3 Then
 
-            crdoc = New DepositoBancario2
+        crdoc = New DepositoBancario2
 
-            crdoc.SetDataSource(Tabla)
+        crdoc.SetDataSource(Tabla)
 
-            With VistaPrevia
-                .Reporte = crdoc
-                '.Mostrar()
-                .Imprimir()
-            End With
+        With VistaPrevia
+            .Reporte = crdoc
+            '.Mostrar()
+            .Imprimir()
+        End With
 
-        End If
+        'End If
 
     End Sub
 

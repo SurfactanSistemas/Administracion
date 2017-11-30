@@ -1,5 +1,4 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoAsientoResumen
 
@@ -88,7 +87,7 @@ Public Class ListadoAsientoResumen
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(619, 560)
+        Me.Size = New System.Drawing.Size(529, 392)
 
         lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion("")
 
@@ -98,19 +97,6 @@ Public Class ListadoAsientoResumen
 
         txtAyuda.Focus()
 
-    End Sub
-
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-            lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion(txtAyuda.Text)
-        End If
     End Sub
 
     Private Sub mostrarcuenta(ByVal cuenta As CuentaContable)
@@ -176,8 +162,6 @@ Public Class ListadoAsientoResumen
                 viewer.Show()
             Case Reporte.Imprimir
                 viewer.imprimirReporte()
-            Case Else
-
         End Select
 
     End Sub
