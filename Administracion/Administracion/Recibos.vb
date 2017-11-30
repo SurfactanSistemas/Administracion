@@ -213,9 +213,6 @@ Public Class Recibos
                 _AsignarCliente(parametro)
             Case 1
                 _AsignarCtaCte(parametro)
-                txtObservaciones.Focus()
-            Case Else
-
         End Select
 
     End Sub
@@ -239,7 +236,13 @@ Public Class Recibos
 
                     If Not _CuentaUtilizada(dr.Item("Numero")) Then
 
-                        row = gridPagos2.Rows.Add()
+
+                        If gridPagos2.Rows.Count <= 38 Then
+                            row = gridPagos2.Rows.Add()
+                        Else
+                            MsgBox("Se ha alcanzado el Número Máximo de Facturas que pueden cargarse por Recibo.")
+                            Exit Sub
+                        End If
 
                         With gridPagos2.Rows(row)
                             .Cells(0).Value = dr.Item("Tipo")
@@ -251,7 +254,8 @@ Public Class Recibos
                         End With
                         'gridPagos.Rows.Add()
                         _SumarDebitos()
-
+                        gridPagos2.CurrentCell = gridPagos2.Rows(row).Cells(0)
+                        gridPagos2.Focus()
                     End If
                 Loop
 
@@ -408,6 +412,10 @@ Public Class Recibos
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
         gridFormasPago2.Rows.Clear()
         gridPagos2.Rows.Clear()
+
+        gridFormasPago2.Rows.Add()
+        gridPagos2.Rows.Add()
+
         optCtaCte.Checked = True
 
         For Each control As Control In Panel2.Controls
@@ -2733,8 +2741,6 @@ Public Class Recibos
             Dim iCol = gridFormasPago2.CurrentCell.ColumnIndex
             Dim iRow = gridFormasPago2.CurrentCell.RowIndex
 
-            Debug.Print(keyData)
-
             ' Limitamos los caracteres permitidos para cada una de las columnas.
             Select Case iCol
                 Case 1
@@ -2880,6 +2886,15 @@ Public Class Recibos
                             End If
 
                             gridFormasPago2.Rows(iRow).Cells(4).Value = _NormalizarNumero(valor)
+
+                            If gridFormasPago2.Rows.Count <= 40 Then
+                                gridFormasPago2.Rows.Add()
+                            Else
+                                MsgBox("Se ha alcanzado el Número Máximo de Cheques/Formas de Pago permitidos en un Recibo.", MsgBoxStyle.Information)
+                                gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(0)
+                                gridFormasPago2.Focus()
+                                Return True
+                            End If
 
                             gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow + 1).Cells(0)
 
@@ -3305,26 +3320,6 @@ Public Class Recibos
             _TraerConsulta(lstFiltrada.SelectedItem)
         End If
     End Sub
-
-    Private Sub txtCliente_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCliente.TextChanged
-        gridPagos2.Rows.Clear()
-    End Sub
-
-    'Private Sub gridPagos_CellBeginEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellCancelEventArgs) Handles gridPagos.CellBeginEdit
-
-    '    If gridPagos.CurrentCell.ColumnIndex = 4 And Not IsNothing(gridPagos.CurrentCell.Value) And Val(gridPagos.Rows(e.RowIndex).Cells(3).Value) > 0 Then
-
-    '        Dim valor As Object = _ValoresMax.Find(Function(f As Object)
-    '                                                   Return f(0) = gridPagos.Rows(e.RowIndex).Cells(3).Value
-    '                                               End Function)
-
-    '        If IsNothing(valor) Then
-    '            _ValoresMax.Add({gridPagos.Rows(e.RowIndex).Cells(3).Value, gridPagos.Rows(e.RowIndex).Cells(4).Value})
-    '        End If
-
-    '    End If
-
-    'End Sub
 
     Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
 
