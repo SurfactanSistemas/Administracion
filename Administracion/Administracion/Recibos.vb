@@ -3551,7 +3551,7 @@ Public Class Recibos
         With detallado
             .Columns.Add("Recibo")
 
-            For i = 1 To 10
+            For i = 1 To 14
                 .Columns.Add("Impre" & i)
             Next
 
@@ -3571,30 +3571,30 @@ Public Class Recibos
 
         With row
 
-            For i = 1 To 9
+            For i = 1 To 13
 
                 WRecibo = WEntra(i, 1)
                 WImpre1 = WLeyendas(i) 'Trim(WEntra(i, 9))
                 WImporte1 = WEntra(i, 10)
                 WSigno = WEntra(i, 11)
 
-                If Val(WImporte1) <> 0 And WIndice <= 9 Then
+                If Val(WImporte1) <> 0 And WIndice <= 13 Then
 
                     WIndice += 1
 
-                    WImpre1 &= RSet(Trim(WSigno) & " " & Proceso.formatonumerico(Trim(WImporte1)), 32 - WImpre1.ToString().Length)
+                    WImpre1 &= RSet(Trim(WSigno) & " " & Val(Proceso.formatonumerico(Trim(WImporte1))).ToString("##,###0.00"), 32 - WImpre1.ToString().Length)
 
                     .Item("Impre" & WIndice) = Trim(WImpre1)
 
                 End If
 
-                If WIndice > 9 Then
+                If WIndice > 13 Then
                     Exit For
                 End If
 
             Next
 
-            .Item("Impre10") = WEntra(24, 11) & " " & Str$(WTotalRecibo)
+            .Item("Impre14") = WEntra(24, 11) & " " & Val(WTotalRecibo).ToString("##,###0.00")
 
             .Item("Recibo") = WRecibo
 
@@ -3609,7 +3609,7 @@ Public Class Recibos
 
         WIndice = 0
         ' Lleno la tabla con la informacion del Recibo.
-        For i = 1 To 40 Step 2
+        For i = 1 To 38 Step 2
 
             'If Val(WEntra(i, 16)) <> 0 Then
             If Val(WEntra(i, 16)) <> 0 Or Val(WEntra(i + 1, 16)) <> 0 Then
@@ -3647,12 +3647,12 @@ Public Class Recibos
 
                 table.Rows.Add(row)
             End If
-            
+
             'End If
 
         Next
 
-        For i = WIndice + 1 To 40 Step 2
+        For i = WIndice + 1 To 38 Step 2
             row = table.NewRow()
 
             row.Item("Recibo") = WEntra(i, 1)
