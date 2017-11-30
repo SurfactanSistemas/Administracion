@@ -156,10 +156,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
-        Me.Height = 690
-
-        'lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre("")
-
         _DeshabilitarConsulta()
 
         _ListarProveedores()
@@ -168,16 +164,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Sub _HabilitarConsulta()
         txtAyuda.Text = ""
-        txtAyuda.Visible = True
-        lstAyuda.Visible = True
-
+        GrupoConsultas.Visible = True
         txtAyuda.Focus()
     End Sub
 
     Private Sub _DeshabilitarConsulta()
         txtAyuda.Text = ""
-        txtAyuda.Visible = False
-        lstAyuda.Visible = False
+        GrupoConsultas.Visible = False
     End Sub
 
     Private Sub _ListarProveedores()
@@ -206,18 +199,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     End Sub
 
-    'Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-    '               ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-    '               Handles txtAyuda.KeyPress
-    '    'If e.KeyChar = Convert.ToChar(Keys.Return) Then
-    '    '    e.Handled = True
-    '    '    lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-    '    'ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-    '    '    e.Handled = True
-    '    '    txtAyuda.Text = ""
-    '    'End If
-    'End Sub
-
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
 
         If Trim(lstAyuda.SelectedItem) <> "" Then
@@ -238,8 +219,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                 _CargarProveedor(proveedor)
             End If
 
-            ' Sacamos el item del listado
-            'lstAyuda.Items(lstAyuda.FindStringExact(item)) = ""
             lstFiltrada.Visible = False
             lstAyuda.Visible = True
             txtAyuda.Text = ""
@@ -314,9 +293,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm = "SELECT Tipo, Letra, Punto, Numero, Total, Saldo, Fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Pago, Paridad FROM CtaCtePrv WHERE Proveedor = '" & proveedor.Trim() & "' AND Saldo <> 0 ORDER BY Proveedor, OrdFecha, NroInterno"
         Dim dr As New SqlDataAdapter(cm, cn)
-
-        'SQLConnector.conexionSql(cn, cm)
-
+        
         Try
             cn.ConnectionString = Proceso._ConectarA
             cn.Open()
@@ -378,8 +355,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim cm = "SELECT Letra, Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
         Dim dr As New SqlDataAdapter(cm, cn)
 
-        'SQLConnector.conexionSql(cn, cm)
-
         Try
             cn.ConnectionString = Proceso._ConectarA
             cn.Open()
@@ -409,8 +384,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm = "SELECT Neto, Retenido, Anticipo, Bruto, Iva FROM Retencion WHERE Proveedor = '" & proveedor & "' AND Fecha = '" & fecha & "'"
         Dim dr As New SqlDataAdapter(cm, cn)
-
-        'SQLConnector.conexionSql(cn, cm)
 
         Try
             cn.ConnectionString = Proceso._ConectarA
@@ -547,11 +520,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         Else
                             If Val(varParidad) = 0 Then
                                 MsgBox("La factura con Nro Interno " & CCPrv.nroInterno & " del Proveedor " & CCPrv.Proveedor & ", no posee Paridad cargada.", MsgBoxStyle.Information)
-
-                                'If varPago = 2 Then
-                                '    Exit Sub
-                                'End If
-
+                                
                                 varTotal = 0
                                 varSaldo = 0
                                 varTotalUs = 0
@@ -712,10 +681,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
                         End If
 
-
-                        'If Val(CCPrv.Proveedor) = 10071006122 Then : Stop : End If
-
-
                         varRetGan = CaculoRetencionGanancia(varTipoPrv, varAcumulaNeto, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
 
 
@@ -765,39 +730,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     End Sub
 
-    '    Private Sub _ConsultarSiEliminarListaParcialDeProveedores()
-    '
-    '        If MsgBox("¿Desea limpiar la lista parcial de proveedores de este periodo?", MsgBoxStyle.Exclamation) = DialogResult.OK Then
-    '            _LimpiarTodosLosProveedoresSelectivos()
-    '        End If
-    '
-    '    End Sub
-
-    '    Private Sub _LimpiarTodosLosProveedoresSelectivos()
-    '
-    '        Dim cn As SqlConnection = New SqlConnection()
-    '        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo")
-    '
-    '        SQLConnector.conexionSql(cn, cm)
-    '
-    '        Try
-    '
-    '            cm.ExecuteNonQuery()
-    '
-    '            '    MsgBox("Se han eliminado todos los proveedores correspondientes a este periodo.", MsgBoxStyle.Information)
-    '
-    '        Catch ex As Exception
-    '            MsgBox("Hubo un problema al querer eliminar a todos los Proveedores que se encontraban guardados en la Base de Datos.", MsgBoxStyle.Critical)
-    '        Finally
-    '
-    '            cn.Close()
-    '            cn = Nothing
-    '            cm = Nothing
-    '
-    '        End Try
-    '
-    '    End Sub
-
     Private Sub txtDesdeProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeProveedor.KeyDown
         If e.KeyData = Keys.Enter Then
 
@@ -836,39 +768,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         GRilla.Rows.Clear()
 
-        '_EliminarProveedorSelectivo()
-
         txtFechaEmision.Text = WFecha
         txtFechaEmision.Focus()
 
         varRenglon = 0
 
     End Sub
-
-    '    Private Function _EliminarProveedorSelectivo() As Boolean
-    '        Dim exito As Boolean = False
-    '        Dim cn As SqlConnection = New SqlConnection()
-    '        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo")
-    '
-    '        SQLConnector.conexionSql(cn, cm)
-    '
-    '        Try
-    '
-    '            cm.ExecuteNonQuery()
-    '            exito = True
-    '
-    '        Catch ex As Exception
-    '            MsgBox("Hubo un problema al querer eliminar los Proveedores precargados.", MsgBoxStyle.Critical)
-    '        Finally
-    '
-    '            cn.Close()
-    '            cn = Nothing
-    '            cm = Nothing
-    '
-    '        End Try
-    '
-    '        Return exito
-    '    End Function
 
     Private Sub lstAyuda_Filtrada_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstAyuda_Filtrada.Click
         If Trim(lstFiltrada.SelectedItem) <> "" Then
@@ -954,7 +859,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         If txtFechaEmision.Text.Replace(" ", "").Length = 10 Then
             _CargarProveedoresPreCargados()
         Else
-            MsgBox("Debe indicar una fecha de Pago antes de cargar los Proveedores Guardados.", MsgBoxStyle.Exclamation)
+            MsgBox("Debe indicar una fecha de Pago.", MsgBoxStyle.Exclamation)
             txtFechaEmision.Focus()
             Exit Sub
         End If
@@ -980,7 +885,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        'txtDesdeProveedor.Focus()
         txtFechaEmision.Focus()
     End Sub
 
@@ -1097,11 +1001,54 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaEmision.Text).Replace("/", "") = "" Then : Exit Sub : End If
 
-            CustomButton1.PerformClick()
+            If _ExistenProveedoresCargados() Then
+
+                If MsgBox("Existen Proveedores cargados para esta fecha ¿Desea traerlos?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    CustomButton1.PerformClick()
+                    Exit Sub
+                End If
+
+            End If
+
+            txtDesdeProveedor.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtFechaEmision.Text = ""
         End If
 
+    End Sub
+
+    Private Function _ExistenProveedoresCargados() As Boolean
+        Dim WExistenProveedoresCargados As Boolean
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Proveedor FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            WExistenProveedoresCargados = dr.HasRows
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        Return WExistenProveedoresCargados
+    End Function
+
+    Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
+        _DeshabilitarConsulta()
     End Sub
 End Class

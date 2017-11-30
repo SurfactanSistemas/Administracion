@@ -1,13 +1,20 @@
 ﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
 
-
 Public Class CuentaCorrientePantalla
 
     Private _NrosInternos As New List(Of Object)
+    Private WPOSINICIALCONSULTA As Point
+    Private WPOSINICIALCERRAR As Point
+    Private WPOSINICIALLIMPIAR As Point
 
     Private Sub CuentaCorrientePantalla_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
+
+        WPOSINICIALCONSULTA = btnConsulta.Location
+        WPOSINICIALCERRAR = btnCancela.Location
+        WPOSINICIALLIMPIAR = btnLimpiar.Location
+
         opcPendiente.Checked = True
         opcCompleto.Checked = False
 
@@ -167,9 +174,9 @@ Public Class CuentaCorrientePantalla
         ' Reseteamos resumen de montos automático.
         gbSaldoCtaCliente.Visible = False
         GroupBox1.Visible = False
-        btnCancela.Location = New Point(342, 541)
-        btnConsulta.Location = New Point(213, 541)
-        btnLimpiar.Location = New Point(471, 541)
+        btnCancela.Location = WPOSINICIALCERRAR 'New Point(342, 541)
+        btnConsulta.Location = WPOSINICIALCONSULTA 'New Point(213, 541)
+        btnLimpiar.Location = WPOSINICIALLIMPIAR 'New Point(471, 541)
 
 
         'lstFiltrada.Visible = False
@@ -529,9 +536,9 @@ Public Class CuentaCorrientePantalla
 
         ' Animamos los botones para dar lugar al panel con la información de los totales.
         For i = btnCancela.Location.X To 280 Step -1
-            btnConsulta.Location = New Point(i - 258, 541)
-            btnCancela.Location = New Point(i - 129, 541)
-            btnLimpiar.Location = New Point(i, 541)
+            btnConsulta.Location = New Point(i - 258, btnCancela.Location.Y)
+            btnCancela.Location = New Point(i - 129, btnCancela.Location.Y)
+            btnLimpiar.Location = New Point(i, btnCancela.Location.Y)
             Threading.Thread.Sleep(0.8)
         Next
 
@@ -549,9 +556,9 @@ Public Class CuentaCorrientePantalla
         gbSaldoCtaCliente.Visible = False
 
         GroupBox1.Visible = False
-        btnCancela.Location = New Point(342, 541)
-        btnConsulta.Location = New Point(213, 541)
-        btnLimpiar.Location = New Point(471, 541)
+        btnCancela.Location = WPOSINICIALCERRAR ' New Point(342, 541)
+        btnConsulta.Location = WPOSINICIALCONSULTA ' New Point(213, 541)
+        btnLimpiar.Location = WPOSINICIALLIMPIAR 'New Point(471, 541)
 
         txtProveedor.Focus()
     End Sub
@@ -569,6 +576,8 @@ Public Class CuentaCorrientePantalla
     End Sub
 
     Private Sub GRilla_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles GRilla.SortCompare
+
+        GRilla.ClearSelection()
 
         Dim num1, num2
 
@@ -596,5 +605,10 @@ Public Class CuentaCorrientePantalla
         End If
 
         e.Handled = True
+    End Sub
+
+    Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
+        boxPantallaProveedores.Visible = False
+        txtProveedor.Focus()
     End Sub
 End Class

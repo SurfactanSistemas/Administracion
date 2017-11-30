@@ -87,7 +87,7 @@ Public Class ListadoAsientoResumen
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(619, 560)
+        Me.Size = New System.Drawing.Size(529, 392)
 
         lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion("")
 

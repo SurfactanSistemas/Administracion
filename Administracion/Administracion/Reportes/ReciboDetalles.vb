@@ -1,6 +1,10 @@
 ﻿Partial Class ReciboDetalles
-    Partial Class DetallesDataTable
+    Partial Class DetalladoDataTable
 
+    End Class
+
+    Partial Class DetallesDataTable
+        
     End Class
 
 End Class
