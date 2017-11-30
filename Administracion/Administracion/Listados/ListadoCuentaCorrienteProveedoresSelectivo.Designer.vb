@@ -25,10 +25,14 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.components = New System.ComponentModel.Container()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.GRilla = New System.Windows.Forms.DataGridView()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.GrupoConsultas = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnImprimir = New Administracion.CustomButton()
         Me.btnPantalla = New Administracion.CustomButton()
@@ -36,19 +40,20 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.CustomButton1 = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
+        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
+        Me.lstAyuda = New Administracion.CustomListBox()
         Me.txtRazon = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
-        Me.lstFiltrada = New Administracion.CustomListBox()
-        Me.lstAyuda = New Administracion.CustomListBox()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnCerrarConsulta = New Administracion.CustomButton()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.GrupoConsultas.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFechaEmision
@@ -72,6 +77,18 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.GRilla.Size = New System.Drawing.Size(557, 284)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
+        '
+        'Codigo
+        '
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.MaxInputLength = 11
+        Me.Codigo.Name = "Codigo"
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
         '
         'Panel1
         '
@@ -108,6 +125,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.GrupoConsultas)
         Me.Panel2.Controls.Add(Me.txtRazon)
         Me.Panel2.Controls.Add(Me.CustomLabel3)
         Me.Panel2.Controls.Add(Me.txtFechaEmision)
@@ -118,6 +136,29 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(589, 359)
         Me.Panel2.TabIndex = 60
+        '
+        'GrupoConsultas
+        '
+        Me.GrupoConsultas.Controls.Add(Me.GroupBox1)
+        Me.GrupoConsultas.Location = New System.Drawing.Point(97, 100)
+        Me.GrupoConsultas.Name = "GrupoConsultas"
+        Me.GrupoConsultas.Size = New System.Drawing.Size(395, 231)
+        Me.GrupoConsultas.TabIndex = 53
+        Me.GrupoConsultas.Visible = False
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnCerrarConsulta)
+        Me.GroupBox1.Controls.Add(Me.lstFiltrada)
+        Me.GroupBox1.Controls.Add(Me.txtAyuda)
+        Me.GroupBox1.Controls.Add(Me.lstAyuda)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(389, 225)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Consulta"
         '
         'btnImprimir
         '
@@ -239,18 +280,40 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar Ventana")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(10, 43)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(368, 147)
+        Me.lstFiltrada.TabIndex = 62
+        Me.lstFiltrada.Visible = False
+        '
         'txtAyuda
         '
         Me.txtAyuda.Cleanable = False
         Me.txtAyuda.Empty = True
         Me.txtAyuda.EnterIndex = -1
         Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(36, 472)
+        Me.txtAyuda.Location = New System.Drawing.Point(10, 17)
         Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(545, 20)
+        Me.txtAyuda.Size = New System.Drawing.Size(368, 20)
         Me.txtAyuda.TabIndex = 53
         Me.txtAyuda.Validator = Administracion.ValidatorType.None
-        Me.txtAyuda.Visible = False
+        '
+        'lstAyuda
+        '
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(10, 43)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(368, 147)
+        Me.lstAyuda.TabIndex = 54
         '
         'txtRazon
         '
@@ -305,30 +368,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(36, 498)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(545, 147)
-        Me.lstFiltrada.TabIndex = 62
-        Me.lstFiltrada.Visible = False
-        '
-        'lstAyuda
-        '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(36, 498)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(545, 147)
-        Me.lstAyuda.TabIndex = 54
-        Me.lstAyuda.Visible = False
-        '
         'lstAyuda_Filtrada
         '
         Me.lstAyuda_Filtrada.Cleanable = False
@@ -341,23 +380,33 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.lstAyuda_Filtrada.TabIndex = 62
         Me.lstAyuda_Filtrada.Visible = False
         '
-        'Codigo
+        'btnCerrarConsulta
         '
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.MaxInputLength = 11
-        Me.Codigo.Name = "Codigo"
-        '
-        'Razon
-        '
-        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
+        Me.btnCerrarConsulta.BackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrarConsulta.Cleanable = False
+        Me.btnCerrarConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrarConsulta.EnterIndex = -1
+        Me.btnCerrarConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatAppearance.BorderSize = 0
+        Me.btnCerrarConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.LabelAssociationKey = -1
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(155, 196)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(78, 23)
+        Me.btnCerrarConsulta.TabIndex = 63
+        Me.btnCerrarConsulta.Text = "Cerrar Consulta"
+        Me.ToolTip1.SetToolTip(Me.btnCerrarConsulta, "Cerrar Ventana")
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = False
         '
         'ListadoCuentaCorrienteProveedoresSelectivo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(589, 468)
+        Me.ClientSize = New System.Drawing.Size(589, 469)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnLimpiarTodo)
@@ -365,10 +414,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Controls.Add(Me.CustomButton1)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnCancela)
-        Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.lstFiltrada)
-        Me.Controls.Add(Me.lstAyuda)
         Me.Location = New System.Drawing.Point(50, 10)
         Me.Name = "ListadoCuentaCorrienteProveedoresSelectivo"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
@@ -377,8 +423,10 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GrupoConsultas.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents CustomLabel3 As Administracion.CustomLabel
@@ -404,4 +452,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
     Friend WithEvents CustomButton1 As Administracion.CustomButton
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents GrupoConsultas As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnCerrarConsulta As Administracion.CustomButton
 End Class
