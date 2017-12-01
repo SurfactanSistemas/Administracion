@@ -53,11 +53,12 @@ Public Class ComparacionesMensualesValorUnico
     Private Function _ArmarTablaYDatos() As DataTable
         Dim WAnio As Integer = 0
         Dim WMeses(12) As Integer
+        
         Dim row As DataRow
         Dim tabla As DataTable = _CrearTablaDetalles()
 
         '
-        ' Obtenemos los mese con los cuales trabajar.
+        ' Obtenemos los meses con los cuales trabajar.
         '
         WMeses = _TraerMesesAConsultar()
 
@@ -66,22 +67,87 @@ Public Class ComparacionesMensualesValorUnico
         '
         WAnio = Val(txtAnio.Text)
 
-        For i = 1 To 12
+        '
+        ' Obtenemos los valores a comparar.
+        '
 
-            If WMeses(i - 0) <> -1 Then
+        Dim WDatos(10) As String = _TraerValoresAComparar()
+
+        For i = 0 To 11
+
+            If WMeses(i) <> -1 Then
 
                 row = tabla.NewRow()
+
+
 
 
 
                 tabla.Rows.Add(row)
 
             End If
-            
+
         Next
 
-        Return _TraerInformacionPorFamilia()
+        Return tabla '_TraerInformacionPorFamilia()
 
+    End Function
+
+    Private Function _TraerValoresAComparar() As String()
+        Dim WDatos(10) As String
+        Dim i = 0
+        i = 0
+        If ckVenta.Checked Then
+            i += 1
+            WDatos(i) = "Venta"
+        End If
+
+        If ckKilos.Checked Then
+            i += 1
+            WDatos(i) = "Kilo"
+        End If
+
+        If ckFactor.Checked Then
+            i += 1
+            WDatos(i) = "Factor"
+        End If
+
+        If ckPrecio.Checked Then
+            i += 1
+            WDatos(i) = "Precio"
+        End If
+
+        If ckStock.Checked Then
+            i += 1
+            WDatos(i) = "Stock"
+        End If
+
+        If ckRotacion.Checked Then
+            i += 1
+            WDatos(i) = "Rotacion"
+        End If
+
+        If ckPorcentaje.Checked Then
+            i += 1
+            WDatos(i) = "PorceVenta"
+        End If
+
+        If ckPedidos.Checked Then
+            i += 1
+            WDatos(i) = "Pedido"
+        End If
+
+        If ckAtrasados.Checked Then
+            i += 1
+            WDatos(i) = "Atraso"
+        End If
+
+        If ckPorcentajeAtrasos.Checked Then
+            i += 1
+            WDatos(i) = "PorceAtraso"
+        End If
+
+        Return WDatos
     End Function
 
     Private Function _TraerInformacionPorFamilia() As DataTable
@@ -262,7 +328,7 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _FamiliasSeleccionadas() As Boolean
 
-        Return {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios}.Any(Function(ck) ck.Checked)
+        Return Familias().Any(Function(ck) ck.Checked)
 
     End Function
 
@@ -274,27 +340,53 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _TraerReporteMensual()
 
+        ' CALCULAMOS LA CANTIDAD DE FAMILIAS A COMPARAR PARA SABER QUE TIPO DE GRAFICO SE TIENE QUE UTILIZAR.
+        Dim WCantFamilias = (From familia In Familias() Where familia.Checked).Count()
+
         Select Case cmbTipoGrafico.SelectedIndex
             Case 0 ' Barras
+                
+                'EN CASO DE QUE HAYA MAS DE UNA FAMILIA, PUEDE PASAR DOS COSAS: QUE SEAN SOLO DOS O QUE SEAN MAS DE DOS.
 
-                If _EsEntreFamilias() Then
-                    Return New MensualEntreFamiliasValorUnicoBarras
+                If WCantFamilias = 2 AndAlso (_EsComparacionMensual() OrElse _EsComparativoMensual()) Then
+                    ' RETORNAMOS EL GRAFICO QUE SALEN DOS BARRAS POR MES.
+                    Return New MensualEntreFamiliasBarras
                 End If
 
-                Return New MensualPorFamiliaValorUnicoBarras
+                ' EN CUALQUIER OTRO CASO, RETORNAREMOS EL GRAFICO COMUN DE MES/AÑO POR BARRA.
 
+                Return New MensualPorFamiliaBarras
             Case 1 ' Lineas
 
-                If _EsEntreFamilias() Then
-                    Return Nothing
+                'EN CASO DE QUE HAYA MAS DE UNA FAMILIA, PUEDE PASAR DOS COSAS: QUE SEAN SOLO DOS O QUE SEAN MAS DE DOS.
+
+                If WCantFamilias = 2 AndAlso (_EsComparacionMensual() OrElse _EsComparativoMensual()) Then
+                    ' RETORNAMOS EL GRAFICO QUE SALEN DOS BARRAS POR MES.
+                    Return New MensualEntreFamiliaLineas
                 End If
 
-                Return New MensualPorFamiliaValorUnicoLineas
+                ' EN CUALQUIER OTRO CASO, RETORNAREMOS EL GRAFICO COMUN DE MES/AÑO POR BARRA.
 
+                Return New MensualPorFamiliaLineas
             Case Else
                 Return Nothing
         End Select
 
+    End Function
+
+    Private Function _EsComparativoMensual() As Boolean
+
+        Return cmbTipoComparacion.SelectedIndex = 2
+    End Function
+
+    Private Function _EsComparacionMensual() As Boolean
+
+        Return cmbTipoComparacion.SelectedIndex = 0
+    End Function
+
+    Private Function Familias() As CheckBox()
+
+        Return {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios}
     End Function
 
     Private Sub btnGenerar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerar.Click
@@ -349,8 +441,6 @@ Public Class ComparacionesMensualesValorUnico
 
         If tabla Is Nothing Then : Exit Sub : End If
 
-        DataGridView1.DataSource = tabla
-
         'With VistaPrevia
 
         '    .Reporte = WReporte
@@ -371,10 +461,14 @@ Public Class ComparacionesMensualesValorUnico
     End Sub
 
     Private Sub ckTodosValores_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodosValores.CheckedChanged
-        For Each ck As CheckBox In {ckVenta, ckAtrasados, ckFactor, ckKilos, ckPedidos, ckPorcentajeAtrasos, ckPrecio, ckRotacion, ckStock, ckPorcentaje}
+        For Each ck As CheckBox In _ValoresComparables()
             ck.Checked = ckTodosValores.Checked
         Next
     End Sub
+
+    Private Function _ValoresComparables() As CheckBox()
+        Return {ckVenta, ckAtrasados, ckFactor, ckKilos, ckPedidos, ckPorcentajeAtrasos, ckPrecio, ckRotacion, ckStock, ckPorcentaje}
+    End Function
 
     Private Sub ckTodosMeses_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodosMeses.CheckedChanged
         For Each ck As CheckBox In {ckEnero, ckFebrero, ckMarzo, ckAbril, ckMayo, ckJunio, ckJulio, ckAgosto, ckSeptiembre, ckOctubre, ckNoviembre, ckDiciembre}

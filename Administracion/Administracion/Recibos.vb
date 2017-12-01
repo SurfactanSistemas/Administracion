@@ -213,6 +213,9 @@ Public Class Recibos
                 _AsignarCliente(parametro)
             Case 1
                 _AsignarCtaCte(parametro)
+                txtObservaciones.Focus()
+            Case Else
+
         End Select
 
     End Sub
@@ -236,13 +239,7 @@ Public Class Recibos
 
                     If Not _CuentaUtilizada(dr.Item("Numero")) Then
 
-
-                        If gridPagos2.Rows.Count <= 38 Then
-                            row = gridPagos2.Rows.Add()
-                        Else
-                            MsgBox("Se ha alcanzado el Número Máximo de Facturas que pueden cargarse por Recibo.")
-                            Exit Sub
-                        End If
+                        row = gridPagos2.Rows.Add()
 
                         With gridPagos2.Rows(row)
                             .Cells(0).Value = dr.Item("Tipo")
@@ -254,8 +251,7 @@ Public Class Recibos
                         End With
                         'gridPagos.Rows.Add()
                         _SumarDebitos()
-                        gridPagos2.CurrentCell = gridPagos2.Rows(row).Cells(0)
-                        gridPagos2.Focus()
+
                     End If
                 Loop
 
@@ -412,10 +408,6 @@ Public Class Recibos
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
         gridFormasPago2.Rows.Clear()
         gridPagos2.Rows.Clear()
-
-        gridFormasPago2.Rows.Add()
-        gridPagos2.Rows.Add()
-
         optCtaCte.Checked = True
 
         For Each control As Control In Panel2.Controls
@@ -2887,15 +2879,6 @@ Public Class Recibos
 
                             gridFormasPago2.Rows(iRow).Cells(4).Value = _NormalizarNumero(valor)
 
-                            If gridFormasPago2.Rows.Count <= 40 Then
-                                gridFormasPago2.Rows.Add()
-                            Else
-                                MsgBox("Se ha alcanzado el Número Máximo de Cheques/Formas de Pago permitidos en un Recibo.", MsgBoxStyle.Information)
-                                gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(0)
-                                gridFormasPago2.Focus()
-                                Return True
-                            End If
-
                             gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow + 1).Cells(0)
 
                             _SumarCreditos()
@@ -2956,7 +2939,7 @@ Public Class Recibos
                             _SumarDebitos()
                         End If
                     End If
-                    
+
                 End If
 
             End If
@@ -3321,6 +3304,26 @@ Public Class Recibos
         End If
     End Sub
 
+    Private Sub txtCliente_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCliente.TextChanged
+        gridPagos2.Rows.Clear()
+    End Sub
+
+    'Private Sub gridPagos_CellBeginEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellCancelEventArgs) Handles gridPagos.CellBeginEdit
+
+    '    If gridPagos.CurrentCell.ColumnIndex = 4 And Not IsNothing(gridPagos.CurrentCell.Value) And Val(gridPagos.Rows(e.RowIndex).Cells(3).Value) > 0 Then
+
+    '        Dim valor As Object = _ValoresMax.Find(Function(f As Object)
+    '                                                   Return f(0) = gridPagos.Rows(e.RowIndex).Cells(3).Value
+    '                                               End Function)
+
+    '        If IsNothing(valor) Then
+    '            _ValoresMax.Add({gridPagos.Rows(e.RowIndex).Cells(3).Value, gridPagos.Rows(e.RowIndex).Cells(4).Value})
+    '        End If
+
+    '    End If
+
+    'End Sub
+
     Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
 
         If e.KeyData = Keys.Enter Then
@@ -3367,16 +3370,10 @@ Public Class Recibos
             .Columns.Add("Postal")
             .Columns.Add("Impre1")
             .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
-
-            .Columns.Add("Fecha21")
-            .Columns.Add("Tipo21")
-            .Columns.Add("Numero21")
-            .Columns.Add("Importe21").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Fecha22")
-            .Columns.Add("Tipo22")
-            .Columns.Add("Numero22")
-            .Columns.Add("Importe22").DataType = System.Type.GetType("System.Double")
-
+            .Columns.Add("Fecha2")
+            .Columns.Add("Tipo2")
+            .Columns.Add("Numero2")
+            .Columns.Add("Importe2").DataType = System.Type.GetType("System.Double")
             .Columns.Add("Cheque1")
             .Columns.Add("Venci1")
             .Columns.Add("Impo1").DataType = System.Type.GetType("System.Double")
@@ -3458,8 +3455,7 @@ Public Class Recibos
             .Columns.Add("Impo20").DataType = System.Type.GetType("System.Double")
             .Columns.Add("Banco20")
             .Columns.Add("Signo1")
-            .Columns.Add("Signo21")
-            .Columns.Add("Signo22")
+            .Columns.Add("Signo2")
             .Columns.Add("Observaciones")
         End With
     End Sub
@@ -3468,7 +3464,6 @@ Public Class Recibos
         Dim table As New DataTable("Detalles")
         Dim cheques1 As New DataTable("Cheques1")
         Dim cheques2 As New DataTable("Cheques2")
-        Dim detallado As New DataTable("Detallado")
         Dim row As DataRow
         Dim crdoc As ReportDocument
         Dim cantidad As Integer = 2
@@ -3507,7 +3502,6 @@ Public Class Recibos
             ultimo += 1
         Next
 
-        ' Alineamos las filas de los recibos a la de las facturas.
         For u = 1 To 22
             If WEntra(u, 11) = "" And WEntra(u, 10) <> "" Then
                 WEntra(u, 11) = " $ "
@@ -3523,131 +3517,12 @@ Public Class Recibos
         WEntra(24, 9) = RSet("TOTAL", 40)
         WEntra(24, 11) = " $ "
 
-        '
-        ' AJUSTE PARA NUEVO DISEÑO.
-        '
-        Dim WRecibo, WImpre1, WSigno, WImporte1, WIndice
-        Dim WLeyendas(40) As String
-
-        WLeyendas(1) = "Efectivo:"
-        WLeyendas(3) = "Cheques:"
-        WLeyendas(5) = "Documentos:"
-        WLeyendas(7) = "Ret. Ganancias:"
-        WLeyendas(9) = "Ret. Iva:"
-        WLeyendas(11) = "Ret. I.Brutos:"
-        WLeyendas(13) = "Monenda Ext:"
-        WLeyendas(15) = "Compensacion:"
-        WLeyendas(17) = "Bonos:"
-        WLeyendas(19) = "Ajuste:"
-        WLeyendas(21) = "Transferencia:"
-        WLeyendas(22) = "Ret. SUSS:"
-
-        ' Generamos la tabla.
-        With detallado
-            .Columns.Add("Recibo")
-
-            For i = 1 To 14
-                .Columns.Add("Impre" & i)
-            Next
-
-        End With
-
-        WIndice = 0
-
-        row = detallado.NewRow()
-
-        Dim WTotalRecibo = 0.0
-
-        For i = 0 To 40
-            If Val(WEntra(i, 10)) <> 0 Then
-                WTotalRecibo += Val(Proceso.formatonumerico(WEntra(i, 10)))
-            End If
-        Next
-
-        With row
-
-            For i = 1 To 13
-
-                WRecibo = WEntra(i, 1)
-                WImpre1 = WLeyendas(i) 'Trim(WEntra(i, 9))
-                WImporte1 = WEntra(i, 10)
-                WSigno = WEntra(i, 11)
-
-                If Val(WImporte1) <> 0 And WIndice <= 13 Then
-
-                    WIndice += 1
-
-                    WImpre1 &= RSet(Trim(WSigno) & " " & Val(Proceso.formatonumerico(Trim(WImporte1))).ToString("##,###0.00"), 32 - WImpre1.ToString().Length)
-
-                    .Item("Impre" & WIndice) = Trim(WImpre1)
-
-                End If
-
-                If WIndice > 13 Then
-                    Exit For
-                End If
-
-            Next
-
-            .Item("Impre14") = WEntra(24, 11) & " " & Val(WTotalRecibo).ToString("##,###0.00")
-
-            .Item("Recibo") = WRecibo
-
-        End With
-
-        If WIndice > 0 Then
-            detallado.Rows.Add(row)
-        End If
-
         ' Creo las Columnas
         _PrepararTabla(table)
 
-        WIndice = 0
         ' Lleno la tabla con la informacion del Recibo.
-        For i = 1 To 38 Step 2
+        For i = 1 To 24
 
-            'If Val(WEntra(i, 16)) <> 0 Then
-            If Val(WEntra(i, 16)) <> 0 Or Val(WEntra(i + 1, 16)) <> 0 Then
-                WIndice += 2
-                row = table.NewRow
-
-                row.Item("Recibo") = WEntra(i, 1)
-                row.Item("Renglon") = i
-                row.Item("Fecha") = WEntra(i, 2)
-                row.Item("Cliente") = WEntra(i, 3)
-                row.Item("Razon") = WEntra(i, 4)
-                row.Item("Direccion") = WEntra(i, 5)
-                row.Item("Localidad") = WEntra(i, 6)
-                row.Item("Provincia") = WEntra(i, 7)
-                row.Item("Postal") = WEntra(i, 8)
-                row.Item("Impre1") = WEntra(i, 9)
-                row.Item("Importe1") = Val(WEntra(i, 10))
-                row.Item("Signo1") = WEntra(i, 11)
-
-                'If WIndice Mod 2 = 0 Then
-                row.Item("Fecha22") = WEntra(i + 1, 12)
-                row.Item("Tipo22") = WEntra(i + 1, 13)
-                row.Item("Numero22") = WEntra(i + 1, 14)
-                row.Item("Signo22") = WEntra(i + 1, 15)
-                row.Item("Importe22") = Val(WEntra(i + 1, 16))
-                'Else
-                row.Item("Fecha21") = WEntra(i, 12)
-                row.Item("Tipo21") = WEntra(i, 13)
-                row.Item("Numero21") = WEntra(i, 14)
-                row.Item("Signo21") = WEntra(i, 15)
-                row.Item("Importe21") = Val(WEntra(i, 16))
-                'End If
-
-                row.Item("Observaciones") = LSet(Trim(txtObservaciones.Text), 50)
-
-                table.Rows.Add(row)
-            End If
-
-            'End If
-
-        Next
-
-        For i = WIndice + 1 To 38 Step 2
             row = table.NewRow()
 
             row.Item("Recibo") = WEntra(i, 1)
@@ -3662,21 +3537,15 @@ Public Class Recibos
             row.Item("Impre1") = WEntra(i, 9)
             row.Item("Importe1") = Val(WEntra(i, 10))
             row.Item("Signo1") = WEntra(i, 11)
-
-            'If WIndice Mod 2 = 0 Then
-            row.Item("Fecha22") = ""
-            row.Item("Tipo22") = ""
-            row.Item("Numero22") = ""
-            row.Item("Signo22") = ""
-            row.Item("Importe22") = 0
-            'Else
-            row.Item("Fecha21") = ""
-            row.Item("Tipo21") = ""
-            row.Item("Numero21") = ""
-            row.Item("Signo21") = ""
-            row.Item("Importe21") = 0
+            row.Item("Fecha2") = WEntra(i, 12)
+            row.Item("Tipo2") = WEntra(i, 13)
+            row.Item("Numero2") = WEntra(i, 14)
+            row.Item("Signo2") = WEntra(i, 15)
+            row.Item("Importe2") = Val(WEntra(i, 16))
+            row.Item("Observaciones") = LSet(Trim(txtObservaciones.Text), 50)
 
             table.Rows.Add(row)
+
         Next
 
         With cheques1
@@ -3699,11 +3568,11 @@ Public Class Recibos
 
         Dim WCRenglon As Integer = 0
         ' Ahora asignamos los datos de los cheques.
-        For w = 0 To 39
+        For w = 0 To 32
 
             If Val(WCheques(w, 4)) <> 0 And (Val(WCheques(w, 0)) = 2 Or Val(WCheques(w, 0)) = 3) Then
 
-                If WCRenglon < 20 Then
+                If WCRenglon <= 16 Then
 
                     row = cheques1.NewRow
                     With row
@@ -3739,14 +3608,9 @@ Public Class Recibos
 
         Dim ds As New DataSet()
 
-        With ds
-
-            .Tables.Add(table)
-            .Tables.Add(cheques1)
-            .Tables.Add(cheques2)
-            .Tables.Add(detallado)
-
-        End With
+        ds.Tables.Add(table)
+        ds.Tables.Add(cheques1)
+        ds.Tables.Add(cheques2)
 
         crdoc.SetDataSource(ds)
 
@@ -3868,8 +3732,8 @@ Public Class Recibos
         End If
 
         Dim Retencion, Cheque, Documento, Total2f, Pesos, Bonos, Dolares, Ajuste, Compe, Transfe, Total2, Total1 As Double
-        Dim Vector(50, 10) As String
-        Dim WEntra(100, 180) As String
+        Dim Vector(30, 10) As String
+        Dim WEntra(100, 160) As String
         Dim WCheques(100, 5) As String
         Dim WRCheques As Integer = 0
         Dim ImpreTipo(100) As String
@@ -3912,7 +3776,7 @@ Public Class Recibos
         ImpreTipo(1) = "FC"
 
         ' Extraemos los valores de Débitos y Créditos.
-        For iRow = 0 To 40
+        For iRow = 0 To 19
 
             If iRow < gridPagos2.Rows.Count Then
                 If Trim(gridPagos2.Rows(iRow).Cells(4).Value) <> "" Then
@@ -3983,11 +3847,11 @@ Public Class Recibos
             End If
         End With
 
+
         ' Calculamos totales y subtotales en base a los tipos de créditos.
-        For Ciclo = 0 To 40
+        For Ciclo = 0 To 19
 
             If Val(Vector(Ciclo, 9)) <> 0 Then
-
                 Dim _cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = Ciclo)
                 Select Case Val(Vector(Ciclo, 5))
                     Case 1
@@ -4013,6 +3877,8 @@ Public Class Recibos
                                     Ajuste = Ajuste + Val(Vector(Ciclo, 9))
                                 Case 157, 7, 8
                                     Bonos = Bonos + Val(Vector(Ciclo, 9))
+                                Case Else
+                                    REM Pesos = Pesos + Val(Vector(Ciclo, 9))
                             End Select
                         End If
                     Case 2
@@ -4029,15 +3895,12 @@ Public Class Recibos
         Next Ciclo
 
         Total1 = Pesos + Cheque + Documento + Retencion + Dolares + Compe + Transfe + Ajuste + Bonos
-        
-        '
-        ' GUARDAMOS LA INFORMACION DE LOS CHEQUES
-        '
-        For Ciclo = 0 To 40
+
+        For Ciclo = 0 To 19
             If Val(Vector(Ciclo, 9)) <> 0 And (Val(Vector(Ciclo, 5)) = 2 Or Val(Vector(Ciclo, 5)) = 3) Then
                 Vector(Ciclo, 6) = ceros(Vector(Ciclo, 6), 6)
                 Vector(Ciclo, 8) = LSet(Vector(Ciclo, 8), 20)
-                For Pasa = 1 To 40
+                For Pasa = 1 To 24
                     Select Case Ciclo
                         Case 0
                             WEntra(Pasa, 17) = Vector(Ciclo, 6)
@@ -4204,46 +4067,7 @@ Public Class Recibos
                             WEntra(Pasa, 146) = Vector(Ciclo, 7)
                             WEntra(Pasa, 147) = Vector(Ciclo, 9)
                             WEntra(Pasa, 148) = Vector(Ciclo, 8)
-                        Case 33
-                            WEntra(Pasa, 149) = Vector(Ciclo, 6)
-                            WEntra(Pasa, 150) = Vector(Ciclo, 7)
-                            WEntra(Pasa, 151) = Vector(Ciclo, 9)
-                            WEntra(Pasa, 152) = Vector(Ciclo, 8)
-                        Case 34
-                            WEntra(Pasa, 153) = Vector(Ciclo, 6)
-                            WEntra(Pasa, 154) = Vector(Ciclo, 7)
-                            WEntra(Pasa, 155) = Vector(Ciclo, 9)
-                            WEntra(Pasa, 156) = Vector(Ciclo, 8)
-                        Case 35
-                            WEntra(Pasa, 157) = Vector(Ciclo, 6)
-                            WEntra(Pasa, 158) = Vector(Ciclo, 7)
-                            WEntra(Pasa, 159) = Vector(Ciclo, 9)
-                            WEntra(Pasa, 160) = Vector(Ciclo, 8)
-                        Case 36
-                            WEntra(Pasa, 161) = Vector(Ciclo, 6)
-                            WEntra(Pasa, 162) = Vector(Ciclo, 7)
-                            WEntra(Pasa, 163) = Vector(Ciclo, 9)
-                            WEntra(Pasa, 164) = Vector(Ciclo, 8)
-                        Case 37
-                            WEntra(Pasa, 165) = Vector(Ciclo, 6)
-                            WEntra(Pasa, 166) = Vector(Ciclo, 7)
-                            WEntra(Pasa, 167) = Vector(Ciclo, 9)
-                            WEntra(Pasa, 168) = Vector(Ciclo, 8)
-                        Case 38
-                            WEntra(Pasa, 169) = Vector(Ciclo, 6)
-                            WEntra(Pasa, 170) = Vector(Ciclo, 7)
-                            WEntra(Pasa, 171) = Vector(Ciclo, 9)
-                            WEntra(Pasa, 172) = Vector(Ciclo, 8)
-                        Case 39
-                            WEntra(Pasa, 173) = Vector(Ciclo, 6)
-                            WEntra(Pasa, 174) = Vector(Ciclo, 7)
-                            WEntra(Pasa, 175) = Vector(Ciclo, 9)
-                            WEntra(Pasa, 176) = Vector(Ciclo, 8)
-                        Case 40
-                            WEntra(Pasa, 177) = Vector(Ciclo, 6)
-                            WEntra(Pasa, 178) = Vector(Ciclo, 7)
-                            WEntra(Pasa, 179) = Vector(Ciclo, 9)
-                            WEntra(Pasa, 180) = Vector(Ciclo, 8)
+                        Case Else
                     End Select
                 Next Pasa
             End If
@@ -4326,7 +4150,7 @@ Public Class Recibos
         WEntra(XLugar, 16) = ""
 
 
-        For Ciclo = 0 To 37
+        For Ciclo = 0 To 17
 
             XLugar = XLugar + 1
 
@@ -4646,8 +4470,8 @@ Public Class Recibos
 
         crdoc.SetDataSource(tabla)
 
-        _Imprimir(crdoc)
-        '_VistaPrevia(crdoc)
+        '_Imprimir(crdoc)
+        _VistaPrevia(crdoc)
 
         MsgBox("El interes a pagar es de " + Str$(ZZSuma), MsgBoxStyle.Information, "Emision de Recibos")
 
