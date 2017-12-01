@@ -619,12 +619,6 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reportes\ReciboDefinitivoEmailPellital2.vb">
-      <DependentUpon>ReciboDefinitivoEmailPellital2.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Reportes\ListadoBancos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1060,10 +1054,6 @@
     <EmbeddedResource Include="Reportes\ReciboDefinitivoEmailPellital.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReciboDefinitivoEmailPellital.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ReciboDefinitivoEmailPellital2.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReciboDefinitivoEmailPellital2.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ListadoBancos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
