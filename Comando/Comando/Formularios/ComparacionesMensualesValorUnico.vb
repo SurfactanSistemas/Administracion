@@ -9,12 +9,57 @@ Public Class ComparacionesMensualesValorUnico
     End Sub
 
     Private Sub _Limpiar()
+        _CargarAniosComparables()
+
         ckTodas.Checked = True
         cmbTipoGrafico.SelectedIndex = 0
         cmbTipoComparacion.SelectedIndex = 0
         cmbPeriodo.SelectedIndex = 0
         txtAnio.Text = ""
         txtAnio.Text = Date.Now.ToString("yyyy")
+    End Sub
+
+    Private Sub _CargarAniosComparables()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Distinct Impre1 FROM Comando")
+        Dim dr As SqlDataReader
+        Dim Aux = ""
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            ckAnios.Items.Clear()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+
+                    Aux = Trim(dr.Item("Impre1"))
+
+                    Aux = Microsoft.VisualBasic.Right(Aux, 4)
+
+                    ckAnios.Items.Add(Aux)
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
     End Sub
 
     Private Function _ArmarBuscarFamilias() As String
@@ -85,6 +130,9 @@ Public Class ComparacionesMensualesValorUnico
                 _BuscarDatosBrutos(WMeses, WAnio, WDatos, datos)
             Case 1
                 _BuscarDatosBrutosAnual(WMeses, WAnio, WDatos, datos)
+            Case 2
+                ' Recorremos los años. Buscamos los datos y los agrupamos por Valor Comparativo y Año.
+
         End Select
 
         Return datos
@@ -165,15 +213,12 @@ Public Class ComparacionesMensualesValorUnico
                     ZCorte += 1
 
                     Do While dr.Read()
-                        row.Item("Corte") = wAnio
-                        row.Item("Descripcion") = WDatos(j)  'dr.Item("Descripcion")
+                        row.Item("Corte") = Str$(j) & Str$(wAnio)
+                        row.Item("Tipo") = Val(Str$(j) & Str$(wAnio))
+                        row.Item("Descripcion") = WDatos(j)
 
-                        
                         With row
-                            '.Item("Tipo") = IIf(WCantDatos = 1 OrElse rdPorSeparado.Checked, ZCorte, dr.Item("Tipo"))
-
-                            '.Item("Titulo") = UCase(WDatos(j))
-
+                            
                             WValor = IIf(IsDBNull(dr.Item("Total")), 0.0, dr.Item("Total"))
 
                             If WValor <> 0 Then
@@ -183,22 +228,6 @@ Public Class ComparacionesMensualesValorUnico
                                 .Item("Titulo" & rowIndex) = dr.Item("Descripcion") 'WMes
                             End If
 
-                            'For i = 0 To 11
-
-                            '    If wMeses(i) > -1 Then
-                            '        rowIndex += 1
-
-                            '        WMes = ""
-                            '        WMes = wMeses(i) & "/" & Str$(wAnio)
-
-                            '        WDato = WDatos(j) & wMeses(i)
-
-                            '        .Item("Valor" & rowIndex) = dr.Item(WDato)
-                            '        .Item("Titulo" & rowIndex) = WMes
-
-                            '    End If
-
-                            'Next
                         End With
 
                     Loop
@@ -604,6 +633,12 @@ Public Class ComparacionesMensualesValorUnico
         ' CALCULAMOS LA CANTIDAD DE FAMILIAS A COMPARAR PARA SABER QUE TIPO DE GRAFICO SE TIENE QUE UTILIZAR.
         Dim WCantFamilias = (From familia In Familias() Where familia.Checked).Count()
         Dim seleccionados = ValoresComparables().Count(Function(ck) ck.Checked)
+        
+
+        ' Por defecto, en caso de comparaciones anuales es solamente en Barras.
+        If cmbPeriodo.SelectedIndex = 1 Then
+            Return New AnualPorFamiliaBarras
+        End If
 
         If seleccionados > 1 Then ' Seleccionamos tipo de grafico 'Linea' cuando es mas de un valor
             cmbTipoGrafico.SelectedIndex = 1
@@ -766,6 +801,34 @@ Public Class ComparacionesMensualesValorUnico
             cmbTipoGrafico.SelectedIndex = 0 ' Barras
             rdPorSeparado.Enabled = True
         End If
+
+    End Sub
+
+    Private Sub btnSeleccionarAnios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSeleccionarAnios.Click
+
+        Dim x
+
+        x = New Point((Me.Width - pnlAnios.Width * 1.5), Me.Height - pnlAnios.Height * 2.5)
+
+        pnlAnios.Location = x
+        pnlAnios.Visible = True
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        pnlAnios.Visible = False
+    End Sub
+
+    Private Sub cmbPeriodo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPeriodo.SelectedIndexChanged
+
+        Select Case cmbPeriodo.SelectedIndex
+            Case 1
+                cmbTipoGrafico.SelectedIndex = 0
+            Case 2
+                btnSeleccionarAnios.Visible = True
+                btnSeleccionarAnios.PerformClick()
+            Case Else
+                btnSeleccionarAnios.Visible = False
+        End Select
 
     End Sub
 End Class
