@@ -137,6 +137,12 @@
       <DependentUpon>ListadoNormal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Mensuales\AnualPorFamiliaBarras.vb">
+      <DependentUpon>AnualPorFamiliaBarras.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\Mensuales\MensualEntreFamiliaLineas.vb">
       <DependentUpon>MensualEntreFamiliaLineas.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -184,6 +190,10 @@
     <EmbeddedResource Include="Reportes\ListadoNormal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoNormal.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Mensuales\AnualPorFamiliaBarras.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AnualPorFamiliaBarras.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Mensuales\MensualEntreFamiliaLineas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
