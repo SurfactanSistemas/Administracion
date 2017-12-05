@@ -251,6 +251,7 @@ Partial Class Recibos
         '
         'gridPagos2
         '
+        Me.gridPagos2.AllowUserToAddRows = False
         Me.gridPagos2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
@@ -553,6 +554,7 @@ Partial Class Recibos
         '
         'gridFormasPago2
         '
+        Me.gridFormasPago2.AllowUserToAddRows = False
         Me.gridFormasPago2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridFormasPago2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridFormasPago2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.numero, Me.fecha, Me.banco, Me.importe, Me.Lectora})

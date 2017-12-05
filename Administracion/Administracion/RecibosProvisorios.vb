@@ -146,6 +146,8 @@ Public Class RecibosProvisorios
         lblDiferencia.Text = "0.00"
 
         gridRecibos.Rows.Clear()
+        gridRecibos.Rows.Add()
+
         _ClavesCheques.Clear()
         _CuentasContables.Clear()
         txtConsulta.Visible = False
@@ -992,6 +994,15 @@ Public Class RecibosProvisorios
 
                             End If
 
+                            If gridRecibos.Rows.Count <= 40 Then
+                                gridRecibos.Rows.Add()
+                            Else
+                                MsgBox("Se ha alcanzado el Número Máximo de Cheques/Formas de Pago permitidos en un Recibo.", MsgBoxStyle.Information)
+                                gridRecibos.CurrentCell = gridRecibos.Rows(iRow).Cells(0)
+                                gridRecibos.Focus()
+                                Return True
+                            End If
+
                             gridRecibos.CurrentCell = gridRecibos.Rows(iRow + 1).Cells(0)
                             sumarValores()
                         End If
@@ -1738,9 +1749,8 @@ Public Class RecibosProvisorios
 
     Private Sub _VistaPrevia(ByVal crdoc As ReportDocument)
         With VistaPrevia
-            .CrystalReportViewer1.ReportSource = crdoc
-            .ShowDialog()
-            .Dispose()
+            .Reporte = crdoc
+            .Mostrar()
         End With
     End Sub
 End Class

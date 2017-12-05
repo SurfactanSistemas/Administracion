@@ -89,6 +89,7 @@ Partial Class RecibosProvisorios
         '
         'gridRecibos
         '
+        Me.gridRecibos.AllowUserToAddRows = False
         Me.gridRecibos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
