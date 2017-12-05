@@ -1,4 +1,6 @@
-﻿Module Proceso
+﻿Imports System.Net
+
+Module Proceso
 
     Private Const VALIDA_CUIT = "54327654321"
 
@@ -25,6 +27,10 @@
 
         End Get
     End Property
+
+    Public Function getNombrePC() As String
+        Return My.Computer.Name
+    End Function
 
     Public Function _EsPellital() As Boolean
         Return ClasesCompartidas.Globals.empresa.Equals("PELLITAL")

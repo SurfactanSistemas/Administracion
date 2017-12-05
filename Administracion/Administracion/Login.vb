@@ -1,4 +1,5 @@
-﻿Imports System.Net
+﻿Imports System.Configuration
+Imports System.Net
 Imports ClasesCompartidas
 
 Public Class Login
@@ -26,8 +27,31 @@ Public Class Login
     Private Sub btnAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccept.Click
         If validarCampos() Then
             Globals.empresa = cmbEntity.Text
+
+            If Proceso._EsPellital Then
+                ' En caso de ser PELLITAL, validamos que la conexion se haga desde una pc con Permisos. Los mismos se definen segun nombre de PC.
+
+                If Not _PermisosPellitalValidos() Then
+
+                    MsgBox("No tiene los permisos necesarios para poder ingresar a esta Empresa.", MsgBoxStyle.Exclamation)
+
+                    Exit Sub
+
+                End If
+
+            End If
+
             MenuPrincipal.Show()
             Close()
         End If
     End Sub
+
+    Private Function _PermisosPellitalValidos() As Boolean
+
+        Dim WPermitidos() = ConfigurationManager.AppSettings("PERMISOS_PELLITAL").ToString.Split(",")
+        Dim WNombrePC = Proceso.getNombrePC
+
+        Return (From N In WPermitidos Where UCase(Trim(N)) = UCase(Trim(WNombrePC))).Any()
+
+    End Function
 End Class

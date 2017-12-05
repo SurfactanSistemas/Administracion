@@ -27,9 +27,9 @@ Partial Class Login
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnAccept = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -98,6 +98,17 @@ Partial Class Login
         Me.Panel1.Size = New System.Drawing.Size(496, 50)
         Me.Panel1.TabIndex = 8
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(13, 12)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(282, 26)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "SISTEMA DE ADMINISTRACIÓN"
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -118,17 +129,6 @@ Partial Class Login
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(496, 82)
         Me.Panel2.TabIndex = 9
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(13, 12)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(282, 26)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "SISTEMA DE ADMINISTRACIÓN"
         '
         'Login
         '
