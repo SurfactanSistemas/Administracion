@@ -132,11 +132,133 @@ Public Class ComparacionesMensualesValorUnico
                 _BuscarDatosBrutosAnual(WMeses, WAnio, WDatos, datos)
             Case 2
                 ' Recorremos los años. Buscamos los datos y los agrupamos por Valor Comparativo y Año.
+                For Each item In ckAnios.CheckedItems
+
+                    _BuscarDatosBrutosAnualComparativo(WMeses, item, WDatos, datos)
+
+                Next
 
         End Select
 
         Return datos
 
+    End Function
+
+    Private Function _BuscarDatosBrutosAnualComparativo(ByVal wMeses As Integer(), ByVal wAnio As Integer, ByVal wDatos As String(), ByRef tabla As DataTable)
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        'Dim tabla As DataTable
+        Dim row As DataRow
+        Dim rowIndex = 0
+        Dim ZCorte = 0
+        Dim WBuscarFamilias = _ArmarBuscarFamilias()
+        Dim WDatosABuscar = ""
+        Dim WMes = ""
+        Dim WDato = ""
+        Dim WValor = 0.0
+        Dim WCantDatos = (From d In wDatos Where Trim(d) <> "").Count
+
+        'tabla = _CrearTablaDetalles()
+        'tabla.Rows.Clear()
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+
+            ' Recorremos los datos a pedir y cada dato
+
+
+            ' Armamos la consulta de los campos a comparar para cada mes.
+            For j = 1 To 10
+
+                ' Recorremos los meses pedidos.
+                WDatosABuscar = ""
+                For i = 0 To 11
+
+                    If wMeses(i) > -1 Then
+
+                        If Not IsNothing(wDatos(j)) OrElse wDatos(j) <> "" Then
+                            WDatosABuscar &= wDatos(j) & wMeses(i) & "+"
+                        End If
+
+                    End If
+
+                Next
+
+                ' Chequeamos que hayan datos que buscar.
+                If Trim(WDatosABuscar) = "" Then
+                    Return Nothing
+                End If
+
+                ' Eliminamos el ultimo '+'.
+                WDatosABuscar = WDatosABuscar.Substring(0, WDatosABuscar.Length - 1)
+
+
+                ' Buscamos el registro correspondiente a ese mes y buscamos los datos de los meses, segun datos de mas arriba.
+                WMes = ""
+                ' Los meses y años se estan guardando como ' 1/ 2017 '
+                WMes = " 1/ " & wAnio & " "
+
+                cm.CommandText = "SELECT Tipo, Descripcion, (" & WDatosABuscar & ") as Total FROM Comando WHERE Impre1 = '" & WMes & "' and " & WBuscarFamilias
+
+                cm.Connection = cn
+
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+
+                    ' Agregamos una fila por cada familia.
+                    row = tabla.NewRow
+
+                    rowIndex = 0
+                    ZCorte += 1
+
+                    Do While dr.Read()
+                        row.Item("Corte") = Str$(j) & Str$(wAnio)
+                        row.Item("Tipo") = Val(Str$(j) & Str$(wAnio))
+                        row.Item("Descripcion") = wDatos(j)
+
+                        With row
+
+                            WValor = IIf(IsDBNull(dr.Item("Total")), 0.0, dr.Item("Total"))
+
+                            If WValor <> 0 Then
+                                rowIndex += 1
+
+                                .Item("Valor" & rowIndex) = WValor 'dr.Item("")
+                                .Item("Titulo" & rowIndex) = dr.Item("Descripcion") 'WMes
+                            End If
+
+                        End With
+
+                    Loop
+
+                    tabla.Rows.Add(row)
+
+                End If
+
+                If Not dr.IsClosed Then
+                    dr.Close()
+                    dr = Nothing
+                End If
+
+            Next
+
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return tabla
     End Function
 
     Private Function _BuscarDatosBrutosAnual(ByVal wMeses() As Integer, ByVal wAnio As Integer, ByVal WDatos() As String,
@@ -636,7 +758,7 @@ Public Class ComparacionesMensualesValorUnico
         
 
         ' Por defecto, en caso de comparaciones anuales es solamente en Barras.
-        If cmbPeriodo.SelectedIndex = 1 Then
+        If cmbPeriodo.SelectedIndex = 1 Or cmbPeriodo.SelectedIndex = 2 Then
             Return New AnualPorFamiliaBarras
         End If
 
@@ -808,7 +930,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Dim x
 
-        x = New Point((Me.Width - pnlAnios.Width * 1.5), Me.Height - pnlAnios.Height * 2.5)
+        x = New Point((Me.Width - pnlAnios.Width * 1.5), Me.Height - pnlAnios.Height * 2)
 
         pnlAnios.Location = x
         pnlAnios.Visible = True

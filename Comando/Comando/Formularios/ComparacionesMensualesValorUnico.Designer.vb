@@ -679,7 +679,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(118, 25)
         Me.Button1.TabIndex = 11
-        Me.Button1.Text = "Seleccionar Años"
+        Me.Button1.Text = "Aceptar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'ComparacionesMensualesValorUnico
