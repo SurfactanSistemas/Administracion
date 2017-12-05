@@ -490,7 +490,7 @@ Public Class RecibosProvisorios
     Private Function crearFormasPago() As List(Of FormaPago)
         Dim formasPago As New List(Of FormaPago)
         For Each row As DataGridViewRow In gridRecibos.Rows
-            If Not row.IsNewRow Then
+            If Not row.IsNewRow AndAlso Not IsNothing(row.Cells(0).Value) AndAlso Trim(row.Cells(0).Value) <> "" Then
                 formasPago.Add(New FormaPago(_Left(row.Cells(0).Value, 2), 0, _NormalizarNumeroCheque(asString(row.Cells(1).Value)), asString(row.Cells(2).Value), _Left(asString(row.Cells(3).Value), 20), _NormalizarNumero(row.Cells(4).Value)))
             End If
         Next

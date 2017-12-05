@@ -762,6 +762,8 @@ Public Class Recibos
 
                 Loop
 
+                gridFormasPago2.Rows.Add()
+
                 _SumarCreditos()
 
                 txtRecibo.Text = "0"
@@ -1160,7 +1162,7 @@ Public Class Recibos
         ' Ahora guardamos los creditos.
         For iRow = 0 To gridFormasPago2.Rows.Count - 1
 
-            If Val(gridFormasPago2.Rows(iRow).Cells(4).Value) <> 0 Then
+            If Not IsNothing(gridFormasPago2.Rows(iRow).Cells(4).Value) AndAlso Val(gridFormasPago2.Rows(iRow).Cells(4).Value) <> 0 Then
                 renglon += 1
 
                 XRecibo = txtRecibo.Text
@@ -1763,7 +1765,7 @@ Public Class Recibos
         For iRow = 0 To gridPagos2.Rows.Count - 1
 
             WRow = iRow
-            If Val(gridPagos2.Rows(iRow).Cells(4).Value) <> 0 Then
+            If Not IsNothing(gridPagos2.Rows(iRow).Cells(4).Value) AndAlso Val(gridPagos2.Rows(iRow).Cells(4).Value) <> 0 Then
 
                 renglon += 1
 
