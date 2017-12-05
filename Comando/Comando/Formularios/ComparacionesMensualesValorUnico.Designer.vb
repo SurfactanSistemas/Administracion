@@ -66,14 +66,19 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckFebrero = New System.Windows.Forms.CheckBox()
         Me.ckDiciembre = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.btnSeleccionarAnios = New System.Windows.Forms.Button()
+        Me.rdPorSeparado = New System.Windows.Forms.RadioButton()
+        Me.rdTodoEnUno = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmbPeriodo = New System.Windows.Forms.ComboBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.pnlAnios = New System.Windows.Forms.Panel()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.ckAnios = New System.Windows.Forms.CheckedListBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.PanelMeses.SuspendLayout()
@@ -81,11 +86,13 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlAnios.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnGenerar
         '
-        Me.btnGenerar.Location = New System.Drawing.Point(575, 333)
+        Me.btnGenerar.Location = New System.Drawing.Point(575, 329)
         Me.btnGenerar.Name = "btnGenerar"
         Me.btnGenerar.Size = New System.Drawing.Size(153, 38)
         Me.btnGenerar.TabIndex = 0
@@ -96,7 +103,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.cmbTipoGrafico.FormattingEnabled = True
         Me.cmbTipoGrafico.Items.AddRange(New Object() {"Barras", "Lineas"})
-        Me.cmbTipoGrafico.Location = New System.Drawing.Point(301, 24)
+        Me.cmbTipoGrafico.Location = New System.Drawing.Point(285, 11)
         Me.cmbTipoGrafico.Name = "cmbTipoGrafico"
         Me.cmbTipoGrafico.Size = New System.Drawing.Size(117, 21)
         Me.cmbTipoGrafico.TabIndex = 2
@@ -104,7 +111,7 @@ Partial Class ComparacionesMensualesValorUnico
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(228, 28)
+        Me.Label2.Location = New System.Drawing.Point(212, 15)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(65, 13)
         Me.Label2.TabIndex = 1
@@ -120,7 +127,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox2.Controls.Add(Me.ckColorantes)
         Me.GroupBox2.Controls.Add(Me.ckQuimicos)
         Me.GroupBox2.Controls.Add(Me.ckTodas)
-        Me.GroupBox2.Location = New System.Drawing.Point(611, 52)
+        Me.GroupBox2.Location = New System.Drawing.Point(595, 46)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(139, 272)
         Me.GroupBox2.TabIndex = 4
@@ -210,7 +217,7 @@ Partial Class ComparacionesMensualesValorUnico
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(442, 28)
+        Me.Label4.Location = New System.Drawing.Point(426, 15)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(93, 13)
         Me.Label4.TabIndex = 1
@@ -220,7 +227,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.cmbTipoComparacion.FormattingEnabled = True
         Me.cmbTipoComparacion.Items.AddRange(New Object() {"Por Familia", "Entre Familias"})
-        Me.cmbTipoComparacion.Location = New System.Drawing.Point(543, 24)
+        Me.cmbTipoComparacion.Location = New System.Drawing.Point(527, 11)
         Me.cmbTipoComparacion.Name = "cmbTipoComparacion"
         Me.cmbTipoComparacion.Size = New System.Drawing.Size(117, 21)
         Me.cmbTipoComparacion.TabIndex = 2
@@ -238,7 +245,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox3.Controls.Add(Me.ckVenta)
         Me.GroupBox3.Controls.Add(Me.ckPedidos)
         Me.GroupBox3.Controls.Add(Me.ckTodosValores)
-        Me.GroupBox3.Location = New System.Drawing.Point(312, 143)
+        Me.GroupBox3.Location = New System.Drawing.Point(296, 137)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(293, 181)
         Me.GroupBox3.TabIndex = 4
@@ -358,7 +365,7 @@ Partial Class ComparacionesMensualesValorUnico
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(108, 30)
+        Me.Label3.Location = New System.Drawing.Point(92, 15)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(26, 13)
         Me.Label3.TabIndex = 1
@@ -366,7 +373,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'txtAnio
         '
-        Me.txtAnio.Location = New System.Drawing.Point(142, 26)
+        Me.txtAnio.Location = New System.Drawing.Point(126, 11)
         Me.txtAnio.Name = "txtAnio"
         Me.txtAnio.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtAnio.Size = New System.Drawing.Size(62, 20)
@@ -376,7 +383,7 @@ Partial Class ComparacionesMensualesValorUnico
         'PanelMeses
         '
         Me.PanelMeses.Controls.Add(Me.GroupBox1)
-        Me.PanelMeses.Location = New System.Drawing.Point(43, 109)
+        Me.PanelMeses.Location = New System.Drawing.Point(27, 103)
         Me.PanelMeses.Name = "PanelMeses"
         Me.PanelMeses.Size = New System.Drawing.Size(254, 215)
         Me.PanelMeses.TabIndex = 6
@@ -538,12 +545,22 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.GroupBox4.Controls.Add(Me.RadioButton2)
         Me.GroupBox4.Controls.Add(Me.RadioButton1)
-        Me.GroupBox4.Location = New System.Drawing.Point(45, 52)
+        Me.GroupBox4.Location = New System.Drawing.Point(29, 46)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(252, 51)
         Me.GroupBox4.TabIndex = 7
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Tipo de Unidad"
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(134, 21)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(76, 17)
+        Me.RadioButton2.TabIndex = 0
+        Me.RadioButton2.Text = "Porcentaje"
+        Me.RadioButton2.UseVisualStyleBackColor = True
         '
         'RadioButton1
         '
@@ -557,82 +574,120 @@ Partial Class ComparacionesMensualesValorUnico
         Me.RadioButton1.Text = "Monto"
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
-        'RadioButton2
-        '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(134, 21)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(76, 17)
-        Me.RadioButton2.TabIndex = 0
-        Me.RadioButton2.Text = "Porcentaje"
-        Me.RadioButton2.UseVisualStyleBackColor = True
-        '
         'GroupBox5
         '
-        Me.GroupBox5.Controls.Add(Me.RadioButton3)
-        Me.GroupBox5.Controls.Add(Me.RadioButton4)
+        Me.GroupBox5.Controls.Add(Me.btnSeleccionarAnios)
+        Me.GroupBox5.Controls.Add(Me.rdPorSeparado)
+        Me.GroupBox5.Controls.Add(Me.rdTodoEnUno)
         Me.GroupBox5.Controls.Add(Me.Label1)
-        Me.GroupBox5.Controls.Add(Me.ComboBox1)
-        Me.GroupBox5.Location = New System.Drawing.Point(312, 52)
+        Me.GroupBox5.Controls.Add(Me.cmbPeriodo)
+        Me.GroupBox5.Location = New System.Drawing.Point(296, 46)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(293, 85)
+        Me.GroupBox5.Size = New System.Drawing.Size(293, 90)
         Me.GroupBox5.TabIndex = 7
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Configuración Gráfico"
         '
-        'RadioButton3
+        'btnSeleccionarAnios
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(26, 49)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(131, 17)
-        Me.RadioButton3.TabIndex = 0
-        Me.RadioButton3.Text = "Graficos por Separado"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.btnSeleccionarAnios.Location = New System.Drawing.Point(163, 57)
+        Me.btnSeleccionarAnios.Name = "btnSeleccionarAnios"
+        Me.btnSeleccionarAnios.Size = New System.Drawing.Size(118, 25)
+        Me.btnSeleccionarAnios.TabIndex = 10
+        Me.btnSeleccionarAnios.Text = "Seleccionar Años"
+        Me.btnSeleccionarAnios.UseVisualStyleBackColor = True
         '
-        'RadioButton4
+        'rdPorSeparado
         '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Checked = True
-        Me.RadioButton4.Location = New System.Drawing.Point(26, 26)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(122, 17)
-        Me.RadioButton4.TabIndex = 0
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "En un mismo Gráfico"
-        Me.RadioButton4.UseVisualStyleBackColor = True
+        Me.rdPorSeparado.AutoSize = True
+        Me.rdPorSeparado.Checked = True
+        Me.rdPorSeparado.Location = New System.Drawing.Point(27, 29)
+        Me.rdPorSeparado.Name = "rdPorSeparado"
+        Me.rdPorSeparado.Size = New System.Drawing.Size(131, 17)
+        Me.rdPorSeparado.TabIndex = 0
+        Me.rdPorSeparado.TabStop = True
+        Me.rdPorSeparado.Text = "Graficos por Separado"
+        Me.rdPorSeparado.UseVisualStyleBackColor = True
+        '
+        'rdTodoEnUno
+        '
+        Me.rdTodoEnUno.AutoSize = True
+        Me.rdTodoEnUno.Location = New System.Drawing.Point(27, 52)
+        Me.rdTodoEnUno.Name = "rdTodoEnUno"
+        Me.rdTodoEnUno.Size = New System.Drawing.Size(122, 17)
+        Me.rdTodoEnUno.TabIndex = 0
+        Me.rdTodoEnUno.Text = "En un mismo Gráfico"
+        Me.rdTodoEnUno.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(167, 21)
+        Me.Label1.Location = New System.Drawing.Point(167, 13)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(110, 13)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Período Comparación"
         '
-        'ComboBox1
+        'cmbPeriodo
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Mensual", "Anual", "Comparativo Mensual"})
-        Me.ComboBox1.Location = New System.Drawing.Point(164, 45)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(117, 21)
-        Me.ComboBox1.TabIndex = 2
+        Me.cmbPeriodo.FormattingEnabled = True
+        Me.cmbPeriodo.Items.AddRange(New Object() {"Mensual", "Anual", "Comparativo Mensual"})
+        Me.cmbPeriodo.Location = New System.Drawing.Point(164, 32)
+        Me.cmbPeriodo.Name = "cmbPeriodo"
+        Me.cmbPeriodo.Size = New System.Drawing.Size(117, 21)
+        Me.cmbPeriodo.TabIndex = 2
         '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(45, 379)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 382)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(704, 94)
+        Me.DataGridView1.Size = New System.Drawing.Size(738, 150)
         Me.DataGridView1.TabIndex = 8
+        '
+        'pnlAnios
+        '
+        Me.pnlAnios.Controls.Add(Me.GroupBox6)
+        Me.pnlAnios.Location = New System.Drawing.Point(171, 329)
+        Me.pnlAnios.Name = "pnlAnios"
+        Me.pnlAnios.Size = New System.Drawing.Size(374, 220)
+        Me.pnlAnios.TabIndex = 9
+        Me.pnlAnios.Visible = False
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.Button1)
+        Me.GroupBox6.Controls.Add(Me.ckAnios)
+        Me.GroupBox6.Location = New System.Drawing.Point(13, 10)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(348, 201)
+        Me.GroupBox6.TabIndex = 1
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Seleccione los Años a Comparar"
+        '
+        'ckAnios
+        '
+        Me.ckAnios.FormattingEnabled = True
+        Me.ckAnios.Location = New System.Drawing.Point(19, 26)
+        Me.ckAnios.Name = "ckAnios"
+        Me.ckAnios.Size = New System.Drawing.Size(311, 139)
+        Me.ckAnios.TabIndex = 0
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(115, 169)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(118, 25)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Aceptar"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(761, 485)
+        Me.ClientSize = New System.Drawing.Size(761, 578)
+        Me.Controls.Add(Me.pnlAnios)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
@@ -662,6 +717,8 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlAnios.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -713,9 +770,14 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
     Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Friend WithEvents RadioButton3 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton4 As System.Windows.Forms.RadioButton
+    Friend WithEvents rdPorSeparado As System.Windows.Forms.RadioButton
+    Friend WithEvents rdTodoEnUno As System.Windows.Forms.RadioButton
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbPeriodo As System.Windows.Forms.ComboBox
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents pnlAnios As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents ckAnios As System.Windows.Forms.CheckedListBox
+    Friend WithEvents btnSeleccionarAnios As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

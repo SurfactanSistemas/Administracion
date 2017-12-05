@@ -238,8 +238,9 @@ Public Class Recibos
 
                     If Not _CuentaUtilizada(dr.Item("Numero")) Then
 
-
-                        If gridPagos2.Rows.Count <= 38 Then
+                        If gridPagos2.Rows.Count = 1 AndAlso Trim(gridPagos2.Rows(0).Cells(0).Value) = "" Then
+                            row = 0
+                        ElseIf gridPagos2.Rows.Count <= 38 Then
                             row = gridPagos2.Rows.Add()
                         Else
                             MsgBox("Se ha alcanzado el Número Máximo de Facturas que pueden cargarse por Recibo.")
@@ -2956,7 +2957,7 @@ Public Class Recibos
                             _SumarDebitos()
                         End If
                     End If
-                    
+
                 End If
 
             End If
@@ -4033,7 +4034,7 @@ Public Class Recibos
         Next Ciclo
 
         Total1 = Pesos + Cheque + Documento + Retencion + Dolares + Compe + Transfe + Ajuste + Bonos
-        
+
         '
         ' GUARDAMOS LA INFORMACION DE LOS CHEQUES
         '

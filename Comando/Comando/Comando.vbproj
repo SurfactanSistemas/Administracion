@@ -137,137 +137,35 @@
       <DependentUpon>ListadoNormal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralEntreFamiliasValorUnicoBarras3D.vb">
-      <DependentUpon>BimestralEntreFamiliasValorUnicoBarras3D.rpt</DependentUpon>
+    <Compile Include="Reportes\Mensuales\AnualPorFamiliaBarras.vb">
+      <DependentUpon>AnualPorFamiliaBarras.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralPorFamiliaValorUnicoBarras3D.vb">
-      <DependentUpon>BimestralPorFamiliaValorUnicoBarras3D.rpt</DependentUpon>
+    <Compile Include="Reportes\Mensuales\MensualEntreFamiliaLineas.vb">
+      <DependentUpon>MensualEntreFamiliaLineas.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralEntreFamiliasValorUnicoLineas.vb">
-      <DependentUpon>BimestralEntreFamiliasValorUnicoLineas.rpt</DependentUpon>
+    <Compile Include="Reportes\Mensuales\MensualEntreFamiliasBarras.vb">
+      <DependentUpon>MensualEntreFamiliasBarras.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralPorFamiliaValorUnicoLineas.vb">
-      <DependentUpon>BimestralPorFamiliaValorUnicoLineas.rpt</DependentUpon>
+    <Compile Include="Reportes\Mensuales\MensualPorFamiliaLineas.vb">
+      <DependentUpon>MensualPorFamiliaLineas.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualPorFamiliaValorUnicoLineas.vb">
-      <DependentUpon>MensualPorFamiliaValorUnicoLineas.rpt</DependentUpon>
+    <Compile Include="Reportes\Mensuales\MensualPorFamiliaBarras.vb">
+      <DependentUpon>MensualPorFamiliaBarras.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualEntreFamiliasValorUnicoTortas.vb">
-      <DependentUpon>MensualEntreFamiliasValorUnicoTortas.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualEntreFamiliasValorUnicoBarras3D.vb">
-      <DependentUpon>MensualEntreFamiliasValorUnicoBarras3D.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualEntreFamiliasValorUnicoBarras.vb">
-      <DependentUpon>MensualEntreFamiliasValorUnicoBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualPorFamiliaValorUnicoBarras3D.vb">
-      <DependentUpon>MensualPorFamiliaValorUnicoBarras3D.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualPorFamiliaValorUnicoBarras.vb">
-      <DependentUpon>MensualPorFamiliaValorUnicoBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualPorFamiliaValorUnicoTortas.vb">
-      <DependentUpon>MensualPorFamiliaValorUnicoTortas.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralEntreFamiliasValorUnicoBarras.vb">
-      <DependentUpon>BimestralEntreFamiliasValorUnicoBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralPorFamiliaValorUnicoBarras.vb">
-      <DependentUpon>BimestralPorFamiliaValorUnicoBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralEntreFamiliasValorUnicoLineas.vb">
-      <DependentUpon>TrimestralEntreFamiliasValorUnicoLineas.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralPorFamiliaValorUnicoTortas.vb">
-      <DependentUpon>TrimestralPorFamiliaValorUnicoTortas.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralEntreFamiliasValorUnicoTortas.vb">
-      <DependentUpon>TrimestralEntreFamiliasValorUnicoTortas.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralEntreFamiliasValorUnicoBarras3D.vb">
-      <DependentUpon>TrimestralEntreFamiliasValorUnicoBarras3D.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralPorFamiliaValorUnicoBarras3D.vb">
-      <DependentUpon>TrimestralPorFamiliaValorUnicoBarras3D.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralEntreFamiliasValorUnicoBarras.vb">
-      <DependentUpon>TrimestralEntreFamiliasValorUnicoBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralPorFamiliaValorUnicoBarras.vb">
-      <DependentUpon>TrimestralPorFamiliaValorUnicoBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralPorFamiliaValorUnicoLineas.vb">
-      <DependentUpon>TrimestralPorFamiliaValorUnicoLineas.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\Valor Unico\MensualValorUnico.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MensualValorUnico.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\VistaPrevia.designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
@@ -293,93 +191,25 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoNormal.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralEntreFamiliasValorUnicoBarras3D.rpt">
+    <EmbeddedResource Include="Reportes\Mensuales\AnualPorFamiliaBarras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BimestralEntreFamiliasValorUnicoBarras3D.vb</LastGenOutput>
+      <LastGenOutput>AnualPorFamiliaBarras.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralPorFamiliaValorUnicoBarras3D.rpt">
+    <EmbeddedResource Include="Reportes\Mensuales\MensualEntreFamiliaLineas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BimestralPorFamiliaValorUnicoBarras3D.vb</LastGenOutput>
+      <LastGenOutput>MensualEntreFamiliaLineas.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralEntreFamiliasValorUnicoLineas.rpt">
+    <EmbeddedResource Include="Reportes\Mensuales\MensualEntreFamiliasBarras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BimestralEntreFamiliasValorUnicoLineas.vb</LastGenOutput>
+      <LastGenOutput>MensualEntreFamiliasBarras.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralPorFamiliaValorUnicoLineas.rpt">
+    <EmbeddedResource Include="Reportes\Mensuales\MensualPorFamiliaLineas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BimestralPorFamiliaValorUnicoLineas.vb</LastGenOutput>
+      <LastGenOutput>MensualPorFamiliaLineas.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualPorFamiliaValorUnicoLineas.rpt">
+    <EmbeddedResource Include="Reportes\Mensuales\MensualPorFamiliaBarras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualPorFamiliaValorUnicoLineas.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualEntreFamiliasValorUnicoTortas.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualEntreFamiliasValorUnicoTortas.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualEntreFamiliasValorUnicoBarras3D.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualEntreFamiliasValorUnicoBarras3D.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualEntreFamiliasValorUnicoBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualEntreFamiliasValorUnicoBarras.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualPorFamiliaValorUnicoBarras3D.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualPorFamiliaValorUnicoBarras3D.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualPorFamiliaValorUnicoBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualPorFamiliaValorUnicoBarras.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Mensuales\MensualPorFamiliaValorUnicoTortas.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualPorFamiliaValorUnicoTortas.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralEntreFamiliasValorUnicoBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BimestralEntreFamiliasValorUnicoBarras.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Bimestrales\BimestralPorFamiliaValorUnicoBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BimestralPorFamiliaValorUnicoBarras.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralEntreFamiliasValorUnicoLineas.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TrimestralEntreFamiliasValorUnicoLineas.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralPorFamiliaValorUnicoTortas.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TrimestralPorFamiliaValorUnicoTortas.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralEntreFamiliasValorUnicoTortas.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TrimestralEntreFamiliasValorUnicoTortas.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralEntreFamiliasValorUnicoBarras3D.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TrimestralEntreFamiliasValorUnicoBarras3D.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralPorFamiliaValorUnicoBarras3D.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TrimestralPorFamiliaValorUnicoBarras3D.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralEntreFamiliasValorUnicoBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TrimestralEntreFamiliasValorUnicoBarras.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralPorFamiliaValorUnicoBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TrimestralPorFamiliaValorUnicoBarras.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\Trimestrales\TrimestralPorFamiliaValorUnicoLineas.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TrimestralPorFamiliaValorUnicoLineas.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\Valor Unico\MensualValorUnico.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualValorUnico.vb</LastGenOutput>
+      <LastGenOutput>MensualPorFamiliaBarras.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>

@@ -1,4 +1,6 @@
 ﻿Imports ClasesCompartidas
+Imports System.IO
+Imports System.Data.SqlClient
 
 Public Class ListadoValoresEnCarteraCuit
 
@@ -74,6 +76,61 @@ Public Class ListadoValoresEnCarteraCuit
         varDesdefechaOrd = ordenaFecha(txtDesdeFecha.Text)
         varHastafechaOrd = ordenaFecha(txthastafecha.Text)
 
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Clave, Destino, Estado2 FROM Recibos WHERE Cuit = '" & txtCuit.Text & "' AND FechaOrd2 BETWEEN " & varDesdefechaOrd & " AND " & varHastafechaOrd & " ORDER BY Clave")
+        Dim dr As SqlDataReader
+        Dim WClave, WDestino, WEstado2
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            WClave = ""
+            WDestino = ""
+            WEstado2 = ""
+
+            If dr.HasRows Then
+
+                While dr.Read()
+
+                    With dr
+                        WClave = Trim(.Item("Clave"))
+                        WDestino = IIf(IsDBNull(.Item("Destino")), "", Trim(.Item("Destino")))
+                        WEstado2 = IIf(IsDBNull(.Item("Estado2")), "", Trim(.Item("Estado2")))
+
+                        _ActualizarRecibo(WClave, WDestino, WEstado2)
+                    End With
+
+
+                End While
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+
+
+
+
+
+
+
+
+
+
         varUno = "{Recibos.fechaord2} in " + x + varDesdefechaOrd + x + " to " + x + varHastafechaOrd + x
         varDos = " and {recibos.cuit} in " + x + txtCuit.Text + x + " to " + x + txtCuit.Text + x
 
@@ -91,6 +148,78 @@ Public Class ListadoValoresEnCarteraCuit
             End Select
 
         End With
+
+    End Sub
+
+    Private Sub _ActualizarRecibo(ByVal wClave As Object, ByVal wDestino As Object, ByVal wEstado2 As Object)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim WProveedor, WDesProveedor, WOrden
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            If Trim(UCase(wEstado2)) = "X" AndAlso Microsoft.VisualBasic.Left(Trim(wDestino), 8) <> "Deposito" Then
+
+                WProveedor = ""
+                WDesProveedor = ""
+                WOrden = ""
+
+                cm.CommandText = "SELECT Proveedor, Orden FROM Pagos WHERE ClaveRecibo = '" & wClave & "'"
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+                    dr.Read()
+
+                    With dr
+                        WProveedor = IIf(IsDBNull(.Item("Proveedor")), "", .Item("Proveedor"))
+                        WOrden = IIf(IsDBNull(.Item("Orden")), "", .Item("Orden"))
+                    End With
+                    dr.Close()
+                End If
+
+                If Trim(WProveedor) <> "" Then
+
+                    cm.CommandText = "SELECT Nombre FROM Proveedor WHERE Proveedor = '" & Trim(WProveedor) & "'"
+                    dr = cm.ExecuteReader()
+
+                    If dr.HasRows Then
+                        dr.Read()
+
+                        With dr
+                            WDesProveedor = IIf(IsDBNull(.Item("Nombre")), "", .Item("Nombre"))
+                        End With
+                        dr.Close()
+                    End If
+
+                End If
+
+                If Trim(WDesProveedor) <> "" Then
+                    wDestino = Microsoft.VisualBasic.Left(Trim(WDesProveedor) & "  O.P.:" & Trim(WOrden), 50)
+                End If
+
+            End If
+
+            cm.CommandText = "UPDATE Recibos SET ImpreObserva = '" & wDestino & "' WHERE Clave  = '" & wClave & "'"
+            cm.ExecuteNonQuery()
+
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer actualizar las observaciones de los cheques en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
 
     End Sub
 

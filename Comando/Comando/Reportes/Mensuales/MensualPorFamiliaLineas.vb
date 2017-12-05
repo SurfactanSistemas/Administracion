@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class BimestralPorFamiliaValorUnicoLineas
+Public Class MensualPorFamiliaLineas
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class BimestralPorFamiliaValorUnicoLineas
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "BimestralPorFamiliaValorUnicoLineas.rpt"
+            Return "MensualPorFamiliaLineas.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class BimestralPorFamiliaValorUnicoLineas
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Comando.BimestralPorFamiliaValorUnicoLineas.rpt"
+            Return "Comando.MensualPorFamiliaLineas.rpt"
         End Get
         Set
             'Do nothing
@@ -110,7 +110,7 @@ Public Class BimestralPorFamiliaValorUnicoLineas
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedBimestralPorFamiliaValorUnicoLineas
+Public Class CachedMensualPorFamiliaLineas
     Inherits Component
     Implements ICachedReport
     
@@ -152,7 +152,7 @@ Public Class CachedBimestralPorFamiliaValorUnicoLineas
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As BimestralPorFamiliaValorUnicoLineas = New BimestralPorFamiliaValorUnicoLineas()
+        Dim rpt As MensualPorFamiliaLineas = New MensualPorFamiliaLineas()
         rpt.Site = Me.Site
         Return rpt
     End Function

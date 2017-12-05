@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class MensualEntreFamiliasValorUnicoBarras3D
+Public Class MensualPorFamiliaBarras
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class MensualEntreFamiliasValorUnicoBarras3D
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "MensualEntreFamiliasValorUnicoBarras3D.rpt"
+            Return "MensualPorFamiliaBarras.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class MensualEntreFamiliasValorUnicoBarras3D
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Comando.MensualEntreFamiliasValorUnicoBarras3D.rpt"
+            Return "Comando.MensualPorFamiliaBarras.rpt"
         End Get
         Set
             'Do nothing
@@ -126,7 +126,7 @@ Public Class MensualEntreFamiliasValorUnicoBarras3D
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedMensualEntreFamiliasValorUnicoBarras3D
+Public Class CachedMensualPorFamiliaBarras
     Inherits Component
     Implements ICachedReport
     
@@ -168,7 +168,7 @@ Public Class CachedMensualEntreFamiliasValorUnicoBarras3D
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As MensualEntreFamiliasValorUnicoBarras3D = New MensualEntreFamiliasValorUnicoBarras3D()
+        Dim rpt As MensualPorFamiliaBarras = New MensualPorFamiliaBarras()
         rpt.Site = Me.Site
         Return rpt
     End Function
