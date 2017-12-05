@@ -1591,25 +1591,25 @@ Public Class RecibosProvisorios
         End If
     End Sub
 
-    Private Sub gridRecibos_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridRecibos.MouseDoubleClick
+    'Private Sub gridRecibos_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridRecibos.MouseDoubleClick
 
-        If gridRecibos.SelectedRows.Count > 0 Then
+    '    If gridRecibos.SelectedRows.Count > 0 Then
 
-            If MsgBox("¿Desea eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
-                Dim row As DataGridViewRow = gridRecibos.CurrentRow
+    '        If MsgBox("¿Desea eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+    '            Dim row As DataGridViewRow = gridRecibos.CurrentRow
 
-                _ClavesCheques.RemoveAll(Function(_c) _c(0) = row.Cells(5).Value)
+    '            _ClavesCheques.RemoveAll(Function(_c) _c(0) = row.Cells(5).Value)
 
-                gridRecibos.Rows.Remove(row)
+    '            gridRecibos.Rows.Remove(row)
 
-                sumarValores()
-            Else
-                gridRecibos.ClearSelection()
-            End If
+    '            sumarValores()
+    '        Else
+    '            gridRecibos.ClearSelection()
+    '        End If
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridRecibos.CellClick
         With gridRecibos
@@ -1752,5 +1752,27 @@ Public Class RecibosProvisorios
             .Reporte = crdoc
             .Mostrar()
         End With
+    End Sub
+
+    Private Sub gridRecibos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridRecibos.RowHeaderMouseDoubleClick
+        If gridRecibos.SelectedRows.Count > 0 Then
+
+            If MsgBox("¿Desea eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+                Dim row As DataGridViewRow = gridRecibos.CurrentRow
+
+                _ClavesCheques.RemoveAll(Function(_c) _c(0) = row.Cells(5).Value)
+
+                gridRecibos.Rows.Remove(row)
+
+                If gridRecibos.RowCount = 0 Then
+                    gridRecibos.Rows.Add()
+                End If
+
+                sumarValores()
+            Else
+                gridRecibos.ClearSelection()
+            End If
+
+        End If
     End Sub
 End Class
