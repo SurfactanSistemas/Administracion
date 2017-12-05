@@ -15,8 +15,7 @@ Public Class CarpetasPagos
     Private Function _ValidarCarpeta(ByVal _Carpeta As String) As Boolean
         Dim valida As Boolean = False
         ' Seguimos en caso de que no se la haya validado con anterioridad.
-        Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", _
-                                                   "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+        Dim _Empresas = Proceso.Empresas
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Carpeta, Proveedor FROM Orden WHERE Carpeta = '" & _Carpeta & "'")
         Dim dr As SqlDataReader
@@ -34,7 +33,7 @@ Public Class CarpetasPagos
                 End If
 
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer validar la carpeta indicada consultar la Base de Datos.", MsgBoxStyle.Critical)
+                MsgBox("Hubo un problema al querer validar la carpeta indicada en la Base de Datos.", MsgBoxStyle.Critical)
             Finally
 
                 cn.Close()

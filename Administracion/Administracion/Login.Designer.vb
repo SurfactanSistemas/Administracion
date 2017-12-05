@@ -27,9 +27,9 @@ Partial Class Login
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnAccept = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -50,9 +50,9 @@ Partial Class Login
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
         Me.Label1.Location = New System.Drawing.Point(79, 32)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(65, 18)
+        Me.Label1.Size = New System.Drawing.Size(71, 18)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Empresa:"
+        Me.Label1.Text = "EMPRESA:"
         '
         'btnCancel
         '
@@ -98,27 +98,16 @@ Partial Class Login
         Me.Panel1.Size = New System.Drawing.Size(496, 50)
         Me.Panel1.TabIndex = 8
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(321, 10)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(156, 26)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "SURFACTAN S.A."
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(20, 14)
+        Me.Label3.Location = New System.Drawing.Point(351, 17)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(115, 19)
+        Me.Label3.Size = New System.Drawing.Size(133, 19)
         Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Inicio de Sesión"
+        Me.Label3.Text = "- Inicio de Sesión -"
         '
         'Panel2
         '
@@ -129,6 +118,17 @@ Partial Class Login
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(496, 82)
         Me.Panel2.TabIndex = 9
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(13, 12)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(282, 26)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "SISTEMA DE ADMINISTRACIÓN"
         '
         'Login
         '
@@ -156,7 +156,7 @@ Partial Class Login
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnAccept As System.Windows.Forms.Button
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents Label2 As System.Windows.Forms.Label
 End Class

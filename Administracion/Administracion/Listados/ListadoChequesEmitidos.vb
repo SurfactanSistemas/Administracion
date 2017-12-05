@@ -1,10 +1,9 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoChequesEmitidos
 
     Private Sub ListadoChequesEmitidos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 
@@ -91,19 +90,6 @@ Public Class ListadoChequesEmitidos
 
         txtAyuda.Focus()
 
-    End Sub
-
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOBanco.buscarBancoPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-            lstAyuda.DataSource = DAOBanco.buscarBancoPorNombre(txtAyuda.Text)
-        End If
     End Sub
 
     Private Sub mostrarbanco(ByVal banco As Banco)

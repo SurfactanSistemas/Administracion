@@ -3,6 +3,7 @@
 Public Class ListadoSaldosCuentaCorrienteProveedores
 
     Private Sub LitadoSaldosCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         txtAyuda.Text = ""
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
@@ -37,7 +38,6 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
         mostrarProveedor(lstAyuda.SelectedValue)
         REM txtDesdeProveedor.Text = lstAyuda.SelectedValue.id
     End Sub
-
 
     Enum Reporte
         Imprimir

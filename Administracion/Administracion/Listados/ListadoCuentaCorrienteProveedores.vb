@@ -1,5 +1,4 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoCuentaCorrienteProveedores
 
@@ -9,6 +8,7 @@ Public Class ListadoCuentaCorrienteProveedores
     End Enum
 
     Private Sub ListadoCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
         opcPendiente.Checked = True
@@ -98,6 +98,10 @@ Public Class ListadoCuentaCorrienteProveedores
 
         txtEmpresa = "Surfactan S.A."
 
+        If Proceso._EsPellital() Then
+            txtEmpresa = "Pellital S.A."
+        End If
+
         Dim tabla As DataTable
         tabla = SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_desdehasta", txtDesdeProveedor.Text, txtHastaProveedor.Text, WTipo)
 
@@ -124,7 +128,20 @@ Public Class ListadoCuentaCorrienteProveedores
 
         Next
 
-        txtUno = "{ImpCtaCtePrvNet.Proveedor} in " + x + "0" + x + " to " + x + "99999999999" + x
+        Dim WDesde, WHasta
+
+        WDesde = txtDesdeProveedor.Text
+        WHasta = txtHastaProveedor.Text
+
+        If Trim(WDesde) = "" Then
+            WDesde = "0"
+        End If
+
+        If Trim(WHasta) = "" Then
+            WHasta = "99999999999"
+        End If
+
+        txtUno = "{ImpCtaCtePrvNet.Proveedor} in " & x & WDesde & x & " to " & x & WHasta & x
         txtFormula = txtUno
 
         Dim viewer As New ReportViewer("Listado de Corriente de Proveedres", Globals.reportPathWithName("wccprvnet.rpt"), txtFormula)

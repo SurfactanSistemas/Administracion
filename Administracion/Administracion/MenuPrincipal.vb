@@ -84,10 +84,6 @@
         abrir(New ListadoSaldosCuentaCorrienteProveedores)
     End Sub
 
-    Private Sub ToolStripMenuItem7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        abrir(New ListadoAsientoResumen)
-    End Sub
-
     Private Sub ToolStripMenuItem8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem8.Click
         abrir(New ListadoProyeccionCobros)
     End Sub
@@ -172,17 +168,17 @@
         abrir(New ListadoCuentaCorrienteProveedoresFecha)
     End Sub
 
-    Private Sub ListadoDeDiferenciaDeCambioCobranzaToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        abrir(New ListadoDiferenciaCambioCobranza)
-    End Sub
+    '    Private Sub ListadoDeDiferenciaDeCambioCobranzaToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '        abrir(New ListadoDiferenciaCambioCobranza)
+    '    End Sub
 
-    Private Sub ListadoDeDiferenciaDeCambioAcreditacionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        abrir(New ListadoDiferenciaCambioAcreditacion)
-    End Sub
+    '    Private Sub ListadoDeDiferenciaDeCambioAcreditacionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '        abrir(New ListadoDiferenciaCambioAcreditacion)
+    '    End Sub
 
-    Private Sub ListadoDeDiferencaiDeCambioDeFacturasDeExportacionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        abrir(New ListadoDiferenciaCambioExterior)
-    End Sub
+    '    Private Sub ListadoDeDiferencaiDeCambioDeFacturasDeExportacionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '        abrir(New ListadoDiferenciaCambioExterior)
+    '    End Sub
 
     Private Sub ListadoDeRetencionesDeIngresosBrutosPcToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeRetencionesDeIngresosBrutosPcToolStripMenuItem.Click
         abrir(New ListadoRetencionIB)
@@ -200,9 +196,9 @@
         abrir(New ListadoProyeccionCobrosAnalitico)
     End Sub
 
-    Private Sub ListadoDeAgendaDeVencimientosDeLertasYDespachosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        abrir(New ListadoAgenda)
-    End Sub
+    '    Private Sub ListadoDeAgendaDeVencimientosDeLertasYDespachosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '        abrir(New ListadoAgenda)
+    '    End Sub
 
     Private Sub ControlDeRecibosProvisoriosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ControlDeRecibosProvisoriosToolStripMenuItem1.Click
         abrir(New ListadoRecibosProvisorios)
@@ -212,9 +208,9 @@
         abrir(New ListadoDeudaPyme)
     End Sub
 
-    Private Sub ListadoDeProyeccionDePagosDeImportacionesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        abrir(New ListadoPagosImportaciones)
-    End Sub
+    '    Private Sub ListadoDeProyeccionDePagosDeImportacionesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '        abrir(New ListadoPagosImportaciones)
+    '    End Sub
 
     Private Sub ConsultaDeChequesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsultaDeChequesToolStripMenuItem.Click
         abrir(New ConsultaCheque)

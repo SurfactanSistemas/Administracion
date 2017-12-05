@@ -83,23 +83,24 @@ Public Class DAOProveedor
                 WClienteAsociado = .cliente.id
                 WInhabilitado = .Inhabilitado
             End With
-            
+
             ZSql = ""
             ZSql = "INSERT INTO Proveedor (Proveedor,	Nombre, Direccion, Localidad,Provincia, Postal,Region,Telefono,Dias, Email,Observaciones,Cuit,Tipo,Iva,Cuenta,NombreCheque,CodIb,CodIbCaba,NroIb, PorceIb,PorceIbCaba,TipoProv,NroInsc,FechaNroInsc,CategoriaI,CategoriaII, FechaCategoria, IbCiudadII,Cai,VtoCai,Iso,VtoIso,Estado,Califica,FechaCalifica,ObservacionesII, Cufe,CufeII,CufeIII,DirCufe,DirCufeII,DirCufeIII, OrdFechaCalifica, OrdFechaCategoria, OrdFechaNroInsc, Wdate, PaginaWeb, ContactoNombre1, ContactoCargo1, ContactoTelefono1, ContactoEmail1, ContactoNombre2, ContactoCargo2, ContactoTelefono2, ContactoEmail2, ContactoNombre3, ContactoCargo3, ContactoTelefono3, ContactoEmail3, ClienteAsociado, Inhabilitado) VALUES ('" & WProveedor & "',	'" & WNombre & "', '" & WDireccion & "', '" & WLocalidad & "','" & WProvincia & "', '" & WPostal & "','" & WRegion & "','" & WTelefono & "','" & WDias & "','" & WEmail & "','" & WObservaciones & "','" & WCuit & "','" & WTipo & "','" & WIva & "','" & WCuenta & "','" & WNombreCheque & "','" & WCodIb & "','" & WCodIbCaba & "','" & WNroIb & "'," & WPorceIb & "," & WPorceIbCaba & ",'" & WRubro & "','" & WNroInsc & "','" & WFechaNroInsc & "','" & WCategoriaI & "','" & WCategoriaII & "', '" & WFechaCategoria & "','" & WIbCiudadII & "','" & WCai & "','" & WVtoCai & "','" & WIso & "','" & WVtoIso & "','" & WEstado & "','" & WCalifica & "','" & WFechaCalifica & "','" & WObservacionesII & "','" & WCufe & "','" & WCufeII & "','" & WCufeIII & "','" & WDirCufe & "','" & WDirCufeII & "','" & WDirCufeIII & "', '" & WOrdFechaCalifica & "', '" & WOrdFechaCategoria & "','" & WOrdFechaNroInsc & "', '" & WWdate & "', '" & WPaginaWeb & "', '" & WContactoNombre1 & "', '" & WContactoCargo1 & "', '" & WContactoTelefono1 & "', '" & WContactoEmail1 & "','" & WContactoNombre2 & "', '" & WContactoCargo2 & "', '" & WContactoTelefono2 & "', '" & WContactoEmail2 & "','" & WContactoNombre3 & "', '" & WContactoCargo3 & "', '" & WContactoTelefono3 & "', '" & WContactoEmail3 & "', '" & WClienteAsociado & "', '" & WInhabilitado & "')"
 
             _DarDeAltaEnTodasLasPlantas(ZSql)
 
         Catch ex As Exception
-            Throw New Exception("Error al dar de alta nuevo proveedor")
+            Throw New Exception(ex.Message)
         End Try
     End Sub
 
     Private Shared Sub _DarDeAltaEnTodasLasPlantas(ByVal ZSql As String)
-        Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "GastonPruebas"}
-        Dim Xcs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        'Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "GastonPruebas"}
+        Dim _Empresas = Proceso.Empresas
+        Dim Xcs = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
 
         ' Recorrer todos las plantas y dar de alta en cada una.
 
@@ -118,8 +119,7 @@ Public Class DAOProveedor
                 cm.ExecuteNonQuery()
 
             Catch ex As Exception
-                Throw New Exception("Ocurrió un problema al querer actualizar al proveedor.")
-                Exit Sub
+                Throw New Exception("Ocurrió un problema al querer dar de alta al proveedor en la planta: " & _Empresa & ".")
             Finally
 
                 cn.Close()
@@ -131,11 +131,11 @@ Public Class DAOProveedor
 
     Public Shared Sub eliminarProveedor(ByVal codProveedor As String)
         'SQLConnector.executeProcedure("baja_proveedor", codProveedor)
-        Dim ZSql As String = ""
-        Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "GastonPruebas"}
-        Dim Xcs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand
+        Dim ZSql = ""
+        Dim _Empresas = Proceso.Empresas 'As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "GastonPruebas"}
+        Dim Xcs = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand
 
         ZSql = "DELETE FROM Proveedor Where Proveedor = '" & Trim(codProveedor) & "'"
 
@@ -152,8 +152,7 @@ Public Class DAOProveedor
                 cm.ExecuteNonQuery()
 
             Catch ex As Exception
-                Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
-                Exit Sub
+                Throw New Exception("Hubo un problema al querer eliminar el Proveedor en la Planta: " & _Empresa & ".")
             Finally
 
                 cn.Close()
@@ -229,44 +228,24 @@ Public Class DAOProveedor
         Return CustomConvert.toIntOrNull(value)
     End Function
 
-    Private Shared Function asStringDate(ByVal value)
-        Return CustomConvert.asTextDate(value)
-    End Function
+    '    Private Shared Function asStringDate(ByVal value)
+    '        Return CustomConvert.asTextDate(value)
+    '    End Function
 
     Public Shared Function listarProvincias() As List(Of Provincia)
-        Dim provincias As New List(Of Provincia)
-        For Each row In SQLConnector.retrieveDataTable("get_provincias").Rows
-            provincias.Add(New Provincia(row("codigo"), row("nombre")))
-        Next
-        Return provincias
+        Return (From row As Object In SQLConnector.retrieveDataTable("get_provincias").Rows Select New Provincia(row("codigo"), row("nombre"))).ToList()
     End Function
 
     Public Shared Function buscarProveedoresActivoPorNombre(Optional ByVal nombre As String = "")
-        Dim proveedores As New List(Of Proveedor)
         Dim tabla As DataTable
         tabla = SQLConnector.retrieveDataTable("buscar_proveedor_por_nombre", nombre)
-        For Each proveedor As DataRow In tabla.Rows
-
-            If _ProveedorActivo(proveedor("Inhabilitado").ToString) Then
-
-                proveedores.Add(New Proveedor(proveedor("codigo"), proveedor("nombre")))
-
-            End If
-
-        Next
-        Return proveedores
+        Return (From proveedor As DataRow In tabla.Rows Where _ProveedorActivo(proveedor("Inhabilitado").ToString) Select New Proveedor(proveedor("codigo"), proveedor("nombre"))).ToList()
     End Function
 
     Public Shared Function buscarProveedorPorNombre(ByVal nombre As String)
-        Dim proveedores As New List(Of Proveedor)
         Dim tabla As DataTable
         tabla = SQLConnector.retrieveDataTable("buscar_proveedor_por_nombre", nombre)
-        For Each proveedor As DataRow In tabla.Rows
-
-            proveedores.Add(New Proveedor(proveedor("codigo"), proveedor("nombre")))
-
-        Next
-        Return proveedores
+        Return (From proveedor As DataRow In tabla.Rows Select New Proveedor(proveedor("codigo"), proveedor("nombre"))).ToList()
     End Function
 
     Public Shared Function _ProveedorActivo(ByVal estado As String) As Boolean

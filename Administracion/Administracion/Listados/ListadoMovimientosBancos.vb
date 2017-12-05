@@ -7,6 +7,7 @@ Public Class ListadoMovimientosBancos
     Dim txtVectorBanco(1000) As String
 
     Private Sub ListadoMovimientosBancos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         Button1.PerformClick()
     End Sub
 
@@ -194,6 +195,10 @@ Public Class ListadoMovimientosBancos
 
         varEmpresa = "Surfactan S.A."
 
+        If Proceso._EsPellital() Then
+            varEmpresa = "Pellital S.A."
+        End If
+
         varDesdefechaOrd = ordenaFecha(txtDesdeFecha.Text)
         varHastafechaOrd = ordenaFecha(txthastafecha.Text)
 
@@ -234,6 +239,12 @@ Public Class ListadoMovimientosBancos
             varTitulo = "Pagos"
             varEmpresa = 1
             varTituloList = "Surfactan S.A."
+
+            If Proceso._EsPellital() Then
+                varEmpresa = 8
+                varTituloList = "Pellital S.A."
+            End If
+
             varVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
             varAcredita = CampoPagos.fecha2
@@ -280,6 +291,11 @@ Public Class ListadoMovimientosBancos
                 varTituloList = "Surfactan S.A."
                 varVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
+                If Proceso._EsPellital() Then
+                    varEmpresa = 8
+                    varTituloList = "Pellital S.A."
+                End If
+
                 varAcredita = CampoPagos.fecha
                 varAcreditaOrd = CampoPagos.fechaord
                 varDebito = CampoPagos.importe1
@@ -313,6 +329,11 @@ Public Class ListadoMovimientosBancos
             varEmpresa = 1
             varTituloList = "Surfactan S.A."
             varVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
+
+            If Proceso._EsPellital() Then
+                varEmpresa = 8
+                varTituloList = "Pellital S.A."
+            End If
 
             varAcredita = CampoDepositos.acredita
             varAcreditaOrd = CampoDepositos.acreditaord
@@ -354,24 +375,42 @@ Public Class ListadoMovimientosBancos
             varTituloList = "Surfactan S.A."
             varVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
+            If Proceso._EsPellital() Then
+                varEmpresa = 8
+                varTituloList = "Pellital S.A."
+            End If
+
             varAcredita = CampoRecibos.fecha
             varAcreditaOrd = CampoRecibos.fechaord
             varDebito = CampoRecibos.importe2
             varCredito = 0
             varBanco = 0
 
-            Select Case LTrim(RTrim(CampoRecibos.cuenta))
-                Case "21"
-                    varBanco = 3
-                Case "22"
-                    varBanco = 8
-                Case "26"
-                    varBanco = 12
-                Case "27"
-                    varBanco = 16
-                Case Else
-                    varBanco = 99
-            End Select
+            If Not Proceso._EsPellital() Then
+                Select Case Trim(CampoRecibos.cuenta)
+                    Case "21"
+                        varBanco = 3
+                    Case "22"
+                        varBanco = 8
+                    Case "26"
+                        varBanco = 12
+                    Case "27"
+                        varBanco = 16
+                    Case Else
+                        varBanco = 99
+                End Select
+            Else
+                Select Case Trim(CampoRecibos.cuenta)
+                    Case "22"
+                        varBanco = 5
+                    Case "25"
+                        varBanco = 12
+                    Case "26"
+                        varBanco = 11
+                    Case Else
+                        varBanco = 99
+                End Select
+            End If
 
             If varBanco >= Val(txtDesdeBanco.Text) And varBanco <= Val(txtHastaBanco.Text) Then
 
@@ -481,18 +520,29 @@ Public Class ListadoMovimientosBancos
                         WTipo = IIf(IsDBNull(.Item("Tipo2")), 0, Val(.Item("Tipo2")))
                         If WTipo = 4 Then
 
-                            Select Case Val(.Item("Cuenta"))
-                                Case 21
-                                    WInicial(3) = WInicial(3) + .Item("Importe2")
-                                Case 22
-                                    WInicial(8) = WInicial(8) + .Item("Importe2")
-                                Case 26
-                                    WInicial(12) = WInicial(12) + .Item("Importe2")
-                                Case 27
-                                    WInicial(16) = WInicial(16) + .Item("Importe2")
-                                Case Else
+                            If not proceso._EsPellital() Then
+                                Select Case Val(.Item("Cuenta"))
+                                    Case 21
+                                        WInicial(3) = WInicial(3) + .Item("Importe2")
+                                    Case 22
+                                        WInicial(8) = WInicial(8) + .Item("Importe2")
+                                    Case 26
+                                        WInicial(12) = WInicial(12) + .Item("Importe2")
+                                    Case 27
+                                        WInicial(16) = WInicial(16) + .Item("Importe2")
+                                End Select
+                            Else
 
-                            End Select
+                                Select Case Val(.Item("Cuenta"))
+                                    Case 22
+                                        WInicial(5) = WInicial(5) + .Item("Importe2")
+                                    Case 25
+                                        WInicial(12) = WInicial(12) + .Item("Importe2")
+                                    Case 26
+                                        WInicial(11) = WInicial(11) + .Item("Importe2")
+                                End Select
+
+                            End If
 
                         End If
 
@@ -513,11 +563,22 @@ Public Class ListadoMovimientosBancos
 
         End Try
 
-        WInicial(3) = WInicial(3) - 4624.79 + 82277.33 - 21644.52 - 29233
-        WInicial(8) = WInicial(8) + 65799.41 - 112141.1 + 11998.39 + 15008.45 + 10000.94 - 46211.58 + 46128.29 + 4135.52 - 434355.52 + 284428 + 2358.81
-        WInicial(9) = WInicial(9) - 982.73
-        WInicial(11) = WInicial(11) + 34749.08
-        WInicial(12) = WInicial(12) - 3348.97
+        If Not Proceso._EsPellital() Then
+
+            WInicial(3) = WInicial(3) - 4624.79 + 82277.33 - 21644.52 - 29233
+            WInicial(8) = WInicial(8) + 65799.41 - 112141.1 + 11998.39 + 15008.45 + 10000.94 - 46211.58 + 46128.29 + 4135.52 - 434355.52 + 284428 + 2358.81
+            WInicial(9) = WInicial(9) - 982.73
+            WInicial(11) = WInicial(11) + 34749.08
+            WInicial(12) = WInicial(12) - 3348.97
+
+        Else
+
+            WInicial(12) = WInicial(12) - 20491.04 - 75346.71
+            WInicial(11) = WInicial(11) - 658606.91 - 87000
+            WInicial(5) = WInicial(5) - 319209.66 + 46739.76 - 2921911.71
+            WInicial(14) = WInicial(14) + 105837.46 - 99780.98
+
+        End If
 
 
         ' Creamos los registros con los saldos iniciales.
@@ -531,6 +592,11 @@ Public Class ListadoMovimientosBancos
                 varEmpresa = 1
                 varTituloList = "Surfactan S.A."
                 varVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
+
+                If Proceso._EsPellital() Then
+                    varEmpresa = 8
+                    varTituloList = "Pellital S.A."
+                End If
 
                 varAcredita = "00/00/0000" 'CampoPagos.fecha
                 varAcreditaOrd = "00000000" 'CampoPagos.fechaord

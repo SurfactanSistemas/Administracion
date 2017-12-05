@@ -3,24 +3,13 @@ Imports System.Data.SqlClient
 Imports ClasesCompartidas
 
 Public Class PedirClaveAutorizacion
-
-    Private _Autorizado As Boolean
-
-    Public Property Autorizado() As Boolean
-        Get
-            Return _Autorizado
-        End Get
-        Private Set(ByVal value As Boolean)
-            _Autorizado = value
-        End Set
-    End Property
+    Public Property Autorizado As Boolean
 
     Private Sub TextBox1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
 
         If e.KeyCode = Keys.Enter And Trim(TextBox1.Text) <> "" Then
             _VerificarAutorizacion()
         End If
-
     End Sub
 
     Private Sub _VerificarAutorizacion()
@@ -62,6 +51,10 @@ Public Class PedirClaveAutorizacion
             cm = Nothing
 
         End Try
+    End Sub
+
+    Private Sub PedirClaveAutorizacion_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Label2.Text = Globals.NombreEmpresa()
     End Sub
 
     Private Sub PedirClaveAutorizacion_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown

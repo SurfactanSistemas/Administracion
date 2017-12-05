@@ -1,10 +1,9 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
 
 Public Class ListadoRetencionIB
 
     Private Sub ListadoRetencionIB_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 
@@ -60,6 +59,11 @@ Public Class ListadoRetencionIB
         varHasta = ordenaFecha(txthastafecha.Text)
 
         varEmpresa = "Surfactan S.A."
+
+        If Proceso._EsPellital() Then
+            varEmpresa = "Pellital S.A."
+        End If
+
         varTitulo = "Desde el " + txtDesdeFecha.Text + " al " + txthastafecha.Text
 
         SQLConnector.retrieveDataTable("modificar_pagos_titulo", varEmpresa, varTitulo, varDesde, varHasta)

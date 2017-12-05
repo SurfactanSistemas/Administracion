@@ -1,11 +1,9 @@
 ﻿Imports ClasesCompartidas
-Imports System.IO
-
 
 Public Class ListadoPagos
 
     Private Sub ListadoPagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
     End Sub

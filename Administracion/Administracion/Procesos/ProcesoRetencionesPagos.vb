@@ -42,7 +42,7 @@ Public Class ProcesoRetencionesPagos
 
 
     Private Sub ProcesoRetencionesPagos_Load_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = Globals.NombreEmpresa()
         txtDesde.Text = "  /  /    "
         txtHasta.Text = "  /  /    "
 

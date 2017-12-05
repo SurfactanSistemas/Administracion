@@ -21,6 +21,8 @@ Public Class RecibosProvisorios
         WRow = -1
         Wcol = -1
 
+        Label2.Text = Globals.NombreEmpresa()
+
         commonEventsHandler.setIndexTab(Me)
         lstSeleccion.Items.Add(New QueryController("Clientes", AddressOf DAOCliente.buscarClientePorNombre, AddressOf mostrarCliente))
         lstSeleccion.SelectedIndex = 0

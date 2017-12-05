@@ -39,7 +39,7 @@ Public Class ProcesoReteRecibos
     Dim WCampo20 As String
 
     Private Sub ProcesoReteRecibos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = Globals.NombreEmpresa()
         txtDesde.Text = "  /  /    "
         txtHasta.Text = "  /  /    "
 

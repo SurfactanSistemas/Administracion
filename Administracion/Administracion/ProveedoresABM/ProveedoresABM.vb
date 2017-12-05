@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 
 Public Class ProveedoresABM
 
-    Dim organizadorABM As New FormOrganizer(Me, 800, 800)
+    '    Dim organizadorABM As New FormOrganizer(Me, 800, 800)
     Dim observaciones As String = ""
     Dim _Inhabilitado As String = "0"
     Dim cufe1 As Tuple(Of String, String) = Tuple.Create("", "")
@@ -17,7 +17,7 @@ Public Class ProveedoresABM
 
     Private TipoConsulta As String
     Private Const MAIN_HEIGHT = 560
-    Private Const EXPANDED_HEIGHT = 720
+    'Private Const EXPANDED_HEIGHT = 720
     Private WBColorAntRazon As Color
     Private WColorAntRazon As Color
     Private WBColorAntEstado As Color
@@ -28,7 +28,8 @@ Public Class ProveedoresABM
         'cmbProvincia.DisplayMember = "ToString"
         'cmbProvincia.ValueMember = "valueMember"
         'cmbProvincia.DataSource = provincias
-        
+        Label2.Text = Globals.NombreEmpresa()
+
         cmbRubro.DisplayMember = "ToString"
         cmbRubro.ValueMember = "valueMember"
         cmbRubro.DataSource = DAORubroProveedor.buscarRubroProveedorPorDescripcion("")
@@ -192,14 +193,18 @@ Public Class ProveedoresABM
         ' Actualizo proveedor con la ConnectionString en la que se encontró el proveedor.
     End Sub
 
-    Private Sub _ActualizarProveedor(ByVal Clave As String)
-        Dim ZSql As String = ""
-        Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "GastonPruebas"}
+    Private Sub _ActualizarProveedor()
+        'Dim ZSql As String = ""
+        Dim _Empresas As List(Of String)
+
         Dim Xcs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
+
+        ' DETERMINO LAS EMPRESAS CON LAS QUE TRABAJAR.
+        _Empresas = Proceso.Empresas
 
         ' Recorrer todos las plantas y actualizar en cada ocurrencia.
 
@@ -335,7 +340,7 @@ Public Class ProveedoresABM
 
         ' Comprobamos si se trata de una actualización o de un proveedor nuevo.
         If Not IsNothing(proveedor) Then
-            _ActualizarProveedor(proveedor.id)
+            _ActualizarProveedor()
             Exit Sub
         End If
         proveedor = New Proveedor(txtCodigo.Text, txtRazonSocial.Text)
@@ -399,7 +404,7 @@ Public Class ProveedoresABM
             MsgBox("Proveedor guardado correctamente.", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
         Catch ex As Exception
-            MsgBox("Error")
+            MsgBox(ex.Message)
         End Try
     End Sub
 
@@ -465,7 +470,7 @@ Public Class ProveedoresABM
         txtClienteAsociado.Text = Trim(proveedor.cliente.id)
         txtClienteAsociadoDescripcion.Text = Trim(proveedor.cliente.razon)
 
-        CKBProveedorInactivo.Checked = IIf(proveedor.Inhabilitado = "0", False, True)
+        CKBProveedorInactivo.Checked = proveedor.Inhabilitado <> "0"
 
         observaciones = proveedor.observacionCompleta
         cufe1 = Tuple.Create(proveedor.cufe1, proveedor.dirCUFE1)
@@ -534,20 +539,20 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub mostrarRubro(ByVal rubro As RubroProveedor)
-        If Not IsNothing(rubro) Then
-            cmbRubro.SelectedItem = rubro.descripcion
-        Else
-            cmbRubro.SelectedValue = -1
-        End If
-    End Sub
+    '    Private Sub mostrarRubro(ByVal rubro As RubroProveedor)
+    '        If Not IsNothing(rubro) Then
+    '            cmbRubro.SelectedItem = rubro.descripcion
+    '        Else
+    '            cmbRubro.SelectedValue = -1
+    '        End If
+    '    End Sub
 
-    Private Sub listado()
-        'DirectCast(Me.Controls("controlButtonsGroupBox").Controls("btnLastReg"), CustomButton).PerformClick()
-        'Do While txtCodigo.Text <> "00000000001"
-        '    DirectCast(Me.Controls("controlButtonsGroupBox").Controls("btnPreviousReg"), CustomButton).PerformClick()
-        'Loop
-    End Sub
+    '    Private Sub listado()
+    '        'DirectCast(Me.Controls("controlButtonsGroupBox").Controls("btnLastReg"), CustomButton).PerformClick()
+    '        'Do While txtCodigo.Text <> "00000000001"
+    '        '    DirectCast(Me.Controls("controlButtonsGroupBox").Controls("btnPreviousReg"), CustomButton).PerformClick()
+    '        'Loop
+    '    End Sub
 
     Private Sub btnObservaciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnObservaciones.Click
         Dim formularioObservaciones As New ObservacionesProveedor()
@@ -647,7 +652,7 @@ Public Class ProveedoresABM
         txtFiltrar.Text = ""
         LBConsulta_Filtrada.Items.Clear()
         LBConsulta.Items.Clear()
-        LBConsulta_Opciones.Visible = IIf(opcion = "", True, False)
+        LBConsulta_Opciones.Visible = opcion = ""
 
         If opcion <> "" Then
 
@@ -740,7 +745,6 @@ Public Class ProveedoresABM
                 _TraerCliente(LBConsulta.SelectedItem)
             Case "TipoProv"
                 _TraerRubros(LBConsulta.SelectedItem)
-            Case Else
         End Select
 
     End Sub
@@ -793,7 +797,6 @@ Public Class ProveedoresABM
                 _TraerCliente(LBConsulta_Filtrada.SelectedItem)
             Case "TipoProv"
                 _TraerRubros(LBConsulta.SelectedItem)
-            Case Else
         End Select
 
     End Sub
@@ -1409,25 +1412,25 @@ Public Class ProveedoresABM
         Return valido
     End Function
 
-    Private Sub txtCertificados_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
+    'Private Sub txtCertificados_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
 
-        If Trim(txtCertificados.Text).Length = 10 Then
-            e.Cancel = _ValidarFecha(txtCertificados.Text)
-        End If
+    '    If Trim(txtCertificados.Text).Length = 10 Then
+    '        e.Cancel = _ValidarFecha(txtCertificados.Text)
+    '    End If
 
-    End Sub
+    'End Sub
 
-    Private Sub txtNroSEDRONAR2_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
-        If Trim(txtNroSEDRONAR2.Text).Length = 10 Then
-            e.Cancel = _ValidarFecha(txtNroSEDRONAR2.Text)
-        End If
-    End Sub
+    'Private Sub txtNroSEDRONAR2_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
+    '    If Trim(txtNroSEDRONAR2.Text).Length = 10 Then
+    '        e.Cancel = _ValidarFecha(txtNroSEDRONAR2.Text)
+    '    End If
+    'End Sub
 
-    Private Sub txtCalificacion_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
-        If Trim(txtCalificacion.Text).Length = 10 Then
-            e.Cancel = _ValidarFecha(txtCalificacion.Text)
-        End If
-    End Sub
+    'Private Sub txtCalificacion_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
+    '    If Trim(txtCalificacion.Text).Length = 10 Then
+    '        e.Cancel = _ValidarFecha(txtCalificacion.Text)
+    '    End If
+    'End Sub
 
     Private Sub cmbProvincia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbProvincia.KeyDown
 

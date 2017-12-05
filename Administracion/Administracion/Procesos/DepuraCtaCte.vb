@@ -12,4 +12,8 @@ Public Class DepuraCtaCte
         SQLConnector.executeProcedure("depurar_cuentas_corrientes")
         MsgBox("Proceso Depuracion de Cuentas Corrientes", MsgBoxStyle.Information)
     End Sub
+
+    Private Sub DepuraCtaCte_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Label2.Text = Globals.NombreEmpresa()
+    End Sub
 End Class

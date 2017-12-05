@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.SqlClient
+Imports ClasesCompartidas
 
 Public Class EnvioEmailProveedores
 
@@ -9,8 +10,11 @@ Public Class EnvioEmailProveedores
     Private _ArchivoAdjunto As String
     Private _ListaEmails() As String
     Private Const LIMITE_DE_DIRECCIONES_POR_EMAIL = 10
-    Private _To As String = "gferreyra@surfactan.com.ar" ' Cambiar por la direccion de Surfactan y posibles otras.
-    Private _Bcc As String = "gferreyra@surfactan.com.ar" ' Solo a manera de prueba para el envio de email. BORRAR DESPUES.
+    '
+    ' TODO - CONSULTAR EN CASO DE USO EN PELLITAL, QUE DIRECCION SE UTILIZA O SI SE EVITA EL ENVIO DE EMAIL EN CASO DE NO UTILIZARLO.
+    '
+    Private _To As String = "surfac@surfactan.com.ar" '"gferreyra@surfactan.com.ar" ' Cambiar por la direccion de Surfactan y posibles otras.
+
 
     Private Sub btnEnviar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnviar.Click
 
@@ -47,7 +51,7 @@ Public Class EnvioEmailProveedores
             Next
 
             Try
-                '_EnviarEmail(_SubGrupoEmails) ' Descomentar para que comience a funcionar, no olvidarse tambien de descomentar el de mas abajo.
+                _EnviarEmail(_SubGrupoEmails) ' Descomentar para que comience a funcionar, no olvidarse tambien de descomentar el de mas abajo.
             Catch ex As Exception
                 MsgBox(ex.Message)
                 Exit Sub
@@ -65,7 +69,7 @@ Public Class EnvioEmailProveedores
         Next
 
         Try
-            '_EnviarEmail(_SubGrupoEmails) ' Descomentar para que comience a funcionar.
+            _EnviarEmail(_SubGrupoEmails) ' Descomentar para que comience a funcionar.
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -92,11 +96,11 @@ Public Class EnvioEmailProveedores
 
 
 
-            '_Mail.Send()
+            _Mail.Send()
 
-            '_Mail = Nothing
+            _Mail = Nothing
 
-            'Me.Close()
+            Me.Close()
 
         Catch ex As Exception
             Throw New Exception("Ocurrió un problema al querer enviar el email a los proveedores.")
@@ -134,6 +138,8 @@ Public Class EnvioEmailProveedores
     End Sub
 
     Private Sub EnvioEmailProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
+
         txtAsunto.Text = ""
         txtCuerpoEmail.Text = ""
         txtLineaExtraI.Text = ""
@@ -147,7 +153,6 @@ Public Class EnvioEmailProveedores
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
-        Dim _LimiteDireccionesPorEmail As Integer = 10
         Dim _FechaUltimo As String
         Dim _Inhabilitado As String = ""
         Dim _EmailProveedores As New List(Of String)
@@ -156,7 +161,7 @@ Public Class EnvioEmailProveedores
         _FechaUltimo = _ObtenerFechaLimite()
 
         Try
-            cn.ConnectionString = "Data Source=193.168.0.7;Initial Catalog=SurfactanSA;User ID=usuarioadmin; Password=usuarioadmin"
+            cn.ConnectionString = Proceso._ConectarA() '"Data Source=193.168.0.7;Initial Catalog=SurfactanSA;User ID=usuarioadmin; Password=usuarioadmin"
 
             cm.CommandText = "SELECT DISTINCT IvaComp.Proveedor, Proveedor.Email, Proveedor.Inhabilitado FROM IvaComp, Proveedor WHERE IvaComp.Proveedor = Proveedor.Proveedor AND IvaComp.Ordfecha >= '" + _FechaUltimo + "' AND Proveedor.Email <> ''"
             cm.Connection = cn

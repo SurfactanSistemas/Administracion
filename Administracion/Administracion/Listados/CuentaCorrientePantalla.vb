@@ -2,12 +2,14 @@
 Imports System.Data.SqlClient
 
 Public Class CuentaCorrientePantalla
+
     Private _NrosInternos As New List(Of Object)
     Private WPOSINICIALCONSULTA As Point
     Private WPOSINICIALCERRAR As Point
     Private WPOSINICIALLIMPIAR As Point
 
     Private Sub CuentaCorrientePantalla_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
 
         WPOSINICIALCONSULTA = btnConsulta.Location
         WPOSINICIALCERRAR = btnCancela.Location
@@ -385,11 +387,8 @@ Public Class CuentaCorrientePantalla
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
-            'e.Handled = True
-            'txtRazon.Focus()
             txtProveedor.Text = ""
             txtRazon.Text = ""
-            'gbSaldoCtaCliente.Visible = False
         End If
         If Not IsNumeric(e.KeyCode) Then
             e.Handled = True
@@ -477,8 +476,6 @@ Public Class CuentaCorrientePantalla
         _WTotalNC = 0
         _WTotalND = 0
         _WTotalPagos = 0
-
-        Debug.Print("==================================================")
 
         If GRilla.SelectedCells.Count < 2 Then : Exit Sub
         End If

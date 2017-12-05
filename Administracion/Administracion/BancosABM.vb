@@ -9,6 +9,7 @@ Public Class BancosABM
     Private Const EXPANDED_HEIGHT = 480
 
     Private Sub BancosABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         _LimpiarCampos()
         _ContraerFormulario()
     End Sub
@@ -46,7 +47,7 @@ Public Class BancosABM
 
         If Trim(txtCodigo.Text) <> "" And Actualiza = True Then
 
-            If MessageBox.Show("¿Está seguro de que quiere eliminar esta Cuenta Contable?", "Confirmación de Eliminación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
+            If MessageBox.Show("¿Está seguro de que quiere eliminar este Banco?", "Confirmación de Eliminación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
                 Dim cuenta As New CuentaContable(txtCuenta.Text, txtDescripcion.Text)
                 Dim banco As New Banco(txtCodigo.Text, txtNombre.Text, cuenta)
                 DAOBanco.eliminarBanco(banco)

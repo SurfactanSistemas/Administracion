@@ -53,6 +53,8 @@ Public Class Recibos
 
     Private Sub Recibos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        Label2.Text = Globals.NombreEmpresa()
+
         WRow = -1
         Wcol = -1
         WOffset = 1
@@ -2752,8 +2754,6 @@ Public Class Recibos
                     If Not _EsDecimalOControl(keyData) Then
                         Return True
                     End If
-                Case Else
-
             End Select
 
             'If iCol = 0 Then
@@ -3488,6 +3488,10 @@ Public Class Recibos
 
             End If
 
+        End If
+
+        If Proceso._EsPellital() Then
+            crdoc = New ReciboDefinitivoEmailPellital
         End If
 
         ' En caso de Recibos varios solamente se imprime una copia (a pedido de Domingo).

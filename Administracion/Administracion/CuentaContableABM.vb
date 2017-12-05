@@ -10,6 +10,9 @@ Public Class CuentaContableABM
     Private Sub CuentaContableABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Actualiza = False
         _ContraerFormulario()
+
+        Label2.Text = Globals.NombreEmpresa()
+
     End Sub
 
     Private Sub txtCodigo_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigo.Leave
@@ -45,7 +48,7 @@ Public Class CuentaContableABM
 
                 DAOCuentaContable.eliminarCuentaContable(txtCodigo.Text)
 
-                MsgBox("El Banco ha sido eliminado correctamente", MsgBoxStyle.Information)
+                MsgBox("La Cuenta Contable ha sido eliminada correctamente", MsgBoxStyle.Information)
 
                 _LimpiarCampos()
 
@@ -104,14 +107,8 @@ Public Class CuentaContableABM
 
         If UCase(Trim(txtFiltrar.Text)) <> "" Then
 
-            For Each item In LBConsulta.Items
-
-                If UCase(item.ToString()).Contains(UCase(Trim(txtFiltrar.Text))) Then
-
-                    LBConsulta_Filtrada.Items.Add(item.ToString())
-
-                End If
-
+            For Each item In From item1 As Object In LBConsulta.Items Where UCase(item1.ToString()).Contains(UCase(Trim(txtFiltrar.Text)))
+                LBConsulta_Filtrada.Items.Add(item.ToString())
             Next
 
             LBConsulta_Filtrada.Visible = True

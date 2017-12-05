@@ -1,5 +1,4 @@
-﻿Imports System.Text.RegularExpressions
-Imports System.Data.SqlClient
+﻿Imports System.Data.SqlClient
 Imports ClasesCompartidas
 
 Public Class Apertura
@@ -56,15 +55,12 @@ Public Class Apertura
 
     Private Function sumarColumna(ByVal index As Integer)
         Dim suma As Double
-        For Each row As DataGridViewRow In gridApertura.Rows
-            If Not row.IsNewRow Then
-                suma += Val(asDouble(row.Cells(index).Value))
-            End If
-        Next
+        suma += (From row As DataGridViewRow In gridApertura.Rows Where Not row.IsNewRow).Sum(Function(row) Val(asDouble(row.Cells(index).Value)))
         Return suma
     End Function
 
     Private Sub Apertura_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         Dim gridBuilder As New GridBuilder(gridApertura)
 
         WRow = -1
@@ -386,8 +382,6 @@ Public Class Apertura
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
-
-            Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
 
             If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
                 gridApertura.Rows(WRow).Cells(6).Value = txtFechaAux.Text

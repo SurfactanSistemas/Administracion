@@ -3,7 +3,7 @@
 Public Class ListadoAsientoResumen
 
     Private Sub ListadoAsientoResumen_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 
@@ -107,7 +107,6 @@ Public Class ListadoAsientoResumen
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
         mostrarcuenta(lstAyuda.SelectedValue)
-        REM txtDesdeProveedor.Text = lstAyuda.SelectedValue.id
     End Sub
 
 

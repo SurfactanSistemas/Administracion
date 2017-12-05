@@ -18,6 +18,7 @@ Public Class Compras
     Dim commonEventsHandler As New CommonEventsHandler
 
     Private Sub Compras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Label2.Text = Globals.NombreEmpresa()
         Dim gridBuilder As New GridBuilder(gridAsientos)
 
         gridBuilder.addTextColumn(0, "Cuenta")
@@ -376,7 +377,7 @@ Public Class Compras
         ' Verificamos que laforma de pago segun orden de compra y la informada sean correctas.
         If optNacion.Checked And Not validoComoPymenacion Then
 
-            Dim res As DialogResult = MsgBox("La Orden de Comrpa indica que se paga con Pyme Banco Nacion" & vbCrLf & _
+            Dim res As DialogResult = MsgBox("La Orden de Compra indica que se paga con Pyme Banco Nacion" & vbCrLf & _
              "y difiere de la forma de pago informado en la carga del comprobante" & vbCrLf & _
              "Desea continuar con la grabacion", MsgBoxStyle.YesNo)
 
@@ -1434,10 +1435,11 @@ Public Class Compras
     End Function
 
     Private Function _DeterminarEmpresaDeTrabajo(ByVal remitoPrueba As String) As String
-        Dim Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", _
-                                                  "Surfactan_III", "Surfactan_VI", _
-                                                  "Surfactan_V", "Surfactan_VI", _
-                                                  "Surfactan_VII"}
+        'Dim Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", _
+        '                                          "Surfactan_III", "Surfactan_VI", _
+        '                                          "Surfactan_V", "Surfactan_VI", _
+        '                                          "Surfactan_VII"}
+        Dim Empresas = Proceso.Empresas
         Dim csTemplate As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
         Dim cs As String = ""
 
@@ -1702,8 +1704,13 @@ Public Class Compras
             Array.Clear(ImpoIb, 0, ImpoIb.Length)
 
             ' Guardamos datos para detalles de asientos.
-            ImpoIb(1, 1) = _RetIB1
-            ImpoIb(1, 2) = "163"
+            If not proceso._EsPellital() Then
+                ImpoIb(1, 1) = _RetIB1
+                ImpoIb(1, 2) = "163"
+            Else
+                ImpoIb(1, 1) = _RetIB1
+                ImpoIb(1, 2) = "161"
+            End If
             ImpoIb(2, 1) = _RetIB2
             ImpoIb(2, 2) = "164"
             ImpoIb(3, 1) = _RetIB3

@@ -61,6 +61,7 @@ Public Class AplicacionComprobantes
     End Function
 
     Private Sub AplicacionComprobantes_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         Dim gridFormasBuilder As New GridBuilder(dtgCuentas)
         gridFormasBuilder.addTextColumn(0, "Tipo", True)
         gridFormasBuilder.addTextColumn(1, "Letra", True)
@@ -130,7 +131,7 @@ Public Class AplicacionComprobantes
     Private Function _ObtenerProximoCodigo() As Integer
         Dim ultimo As Integer = 0
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Max(Codigo) as Ultimo FROM AplicaProve")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Codigo as Ultimo FROM AplicaProve ORDER BY Codigo DESC")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)

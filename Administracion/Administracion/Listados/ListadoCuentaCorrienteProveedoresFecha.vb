@@ -4,6 +4,7 @@ Imports System.IO
 Public Class ListadoCuentaCorrienteProveedoresFecha
 
     Private Sub ListadoCuentaCorrienteProveedoresFecha_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Text = "  /  /    "
     End Sub
@@ -68,17 +69,17 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
 
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-        End If
-    End Sub
+    '    Private Sub txtAyuda_KeyPress(ByVal sender As Object, _
+    '                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+    '
+    '        If e.KeyChar = Convert.ToChar(Keys.Return) Then
+    '            e.Handled = True
+    '            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
+    '        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
+    '            e.Handled = True
+    '            txtAyuda.Text = ""
+    '        End If
+    '    End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
         txtDesdeProveedor.Text = proveedor.id
@@ -122,6 +123,10 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
         WTipo = "T"
 
         txtEmpresa = "Surfactan S.A."
+
+        If Proceso._EsPellital() Then
+            txtEmpresa = "Pellital S.A."
+        End If
 
         varOrdFecha = ordenaFecha(txtFechaEmision.Text)
 
@@ -209,8 +214,6 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
                 viewer.imprimirReporte()
             Case Reporte.Pantalla
                 viewer.Show()
-            Case Else
-
         End Select
 
     End Sub

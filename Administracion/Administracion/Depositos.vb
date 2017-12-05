@@ -9,6 +9,7 @@ Public Class Depositos
     Private _ClavesCheques As New List(Of Object)
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         btnLimpiar.PerformClick()
     End Sub
 
@@ -276,7 +277,7 @@ Public Class Depositos
             End With
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar los cheques en recibos definitivos en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
             dr = Nothing
@@ -324,7 +325,7 @@ Public Class Depositos
             End With
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar los cheques en Recibos Provisorios en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
             dr = Nothing
@@ -841,7 +842,7 @@ Public Class Depositos
                 End If
 
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, vbExclamation)
+                MsgBox("Hubo un problema al querer consultar la informacion del Depósito indicado desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, vbExclamation)
                 Exit Sub
             Finally
 
@@ -966,6 +967,12 @@ Public Class Depositos
         WTotal = Val(Proceso.formatonumerico(txtImporte.Text))
         WTitulo = "SURFACTAN S.A"
 
+        ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
+        If Proceso._EsPellital() Then
+            'WEmpCuit = "30-61052459-8"
+            WTitulo = "PELLITAL S.A."
+        End If
+
         For iRow = 0 To gridCheques.Rows.Count - 1
 
             With gridCheques.Rows(iRow)
@@ -1026,19 +1033,19 @@ Public Class Depositos
             .Imprimir()
         End With
 
-        'If XTipo = 3 Then
+        If Not Proceso._EsPellital() Then
 
-        crdoc = New DepositoBancario2
+            crdoc = New DepositoBancario2
 
-        crdoc.SetDataSource(Tabla)
+            crdoc.SetDataSource(Tabla)
 
-        With VistaPrevia
-            .Reporte = crdoc
-            '.Mostrar()
-            .Imprimir()
-        End With
+            With VistaPrevia
+                .Reporte = crdoc
+                '.Mostrar()
+                .Imprimir()
+            End With
 
-        'End If
+        End If
 
     End Sub
 

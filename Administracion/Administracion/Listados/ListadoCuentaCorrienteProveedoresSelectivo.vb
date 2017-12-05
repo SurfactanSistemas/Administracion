@@ -8,6 +8,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Dim _Claves As New List(Of Object)
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Label2.Text = Globals.NombreEmpresa()
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Clear()
         varRenglon = 0
@@ -37,12 +38,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                     _Proveedores.Add({dr.Item("Proveedor"), dr.Item("FechaOrd")})
 
                 Loop
-            Else
-                MsgBox("No hay proveedores que listar.", MsgBoxStyle.Information)
+                'Else
+                'MsgBox("No hay proveedores que listar.", MsgBoxStyle.Information)
             End If
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar los Proveedores Selectivos precargados en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
             dr = Nothing
@@ -294,7 +295,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim dr As New SqlDataAdapter(cm, cn)
         
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = Proceso._ConectarA
             cn.Open()
 
             dr.Fill(tabla)
@@ -324,7 +325,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = Proceso._ConectarA
             cn.Open()
 
             dr.Fill(proveedor)
@@ -355,7 +356,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = Proceso._ConectarA
             cn.Open()
 
             dr.Fill(compra)
@@ -385,7 +386,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA("SurfactanSA")
+            cn.ConnectionString = Proceso._ConectarA
             cn.Open()
 
             dr.Fill(acumulado)
@@ -447,6 +448,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
         txtEmpresa = "Surfactan S.A."
         varEmpresa = 1
+
+        If Proceso._EsPellital() Then
+            txtEmpresa = "Pellital S.A"
+            varEmpresa = 8
+        End If
 
         varOrdFecha = ordenaFecha(txtFechaEmision.Text)
 
@@ -628,7 +634,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         varRetIbI = CaculoRetencionIngresosBrutos(varTipoIb, varPorceIb, varAcumulaNeto)
 
                         '
-                        'calculo de rtencion de Ingresos brutos CABA
+                        'calculo de retencion de Ingresos brutos CABA. SOLO PARA SURFACTAN.
                         '
                         If varEmpresa = 1 Then
                             varRetIbII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumulaNeto)
