@@ -5589,7 +5589,7 @@ Public Class Pagos
         For iRow = 0 To gridPagos.Rows.Count - 1
 
             With gridPagos.Rows(iRow)
-                If Trim(.Cells(0).Value) <> "" Then
+                If Trim(.Cells(4).Value) <> "" Then
                     WLetra = .Cells(1).Value
                     WTipo = .Cells(0).Value
                     WPunto = .Cells(2).Value
