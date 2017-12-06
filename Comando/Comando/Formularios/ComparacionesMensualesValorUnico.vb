@@ -86,7 +86,7 @@ Public Class ComparacionesMensualesValorUnico
         Return Nothing
     End Function
 
-    Private Function _TraerDatosParaGraficos() As DataTable
+    Private Function _TraerDatosParaGraficos() As DataSet
         Return _ArmarTablaYDatos()
 
         'If _EsEntreFamilias() Then
@@ -97,13 +97,14 @@ Public Class ComparacionesMensualesValorUnico
 
     End Function
 
-    Private Function _ArmarTablaYDatos() As DataTable
+    Private Function _ArmarTablaYDatos() As DataSet
         Dim WAnio As Integer = 0
         Dim WMeses(12) As Integer
-        
+
         Dim row As DataRow
         Dim WDatosBrutos As DataTable
         Dim datos As DataTable = _CrearTablaDetalles()
+        Dim ds As New DataSet
 
         '
         ' Obtenemos los meses con los cuales trabajar.
@@ -128,135 +129,112 @@ Public Class ComparacionesMensualesValorUnico
         Select Case cmbPeriodo.SelectedIndex
             Case 0
                 _BuscarDatosBrutos(WMeses, WAnio, WDatos, datos)
+                ds.Tables.Add(datos)
             Case 1
                 _BuscarDatosBrutosAnual(WMeses, WAnio, WDatos, datos)
+                ds.Tables.Add(datos)
             Case 2
                 ' Recorremos los años. Buscamos los datos y los agrupamos por Valor Comparativo y Año.
-                For Each item In ckAnios.CheckedItems
 
-                    _BuscarDatosBrutosAnualComparativo(WMeses, item, WDatos, datos)
-
+                For Each anio In ckAnios.CheckedItems
+                    _BuscarDatosBrutos(WMeses, anio, WDatos, datos)
                 Next
+
+                _BuscarDatosBrutosAnualComparativo(WMeses, datos)
+
+                ds.Tables.Add(datos)
 
         End Select
 
-        Return datos
+        Return ds
 
     End Function
 
-    Private Function _BuscarDatosBrutosAnualComparativo(ByVal wMeses As Integer(), ByVal wAnio As Integer, ByVal wDatos As String(), ByRef tabla As DataTable)
+    Private Function _BuscarDatosBrutosAnualComparativo(ByVal wMeses As Integer(), ByRef tabla As DataTable)
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
         Dim dr As SqlDataReader
-        'Dim tabla As DataTable
+        Dim tabla2 As DataTable = _CrearTablaDetalles()
         Dim row As DataRow
-        Dim rowIndex = 0
-        Dim ZCorte = 0
-        Dim WBuscarFamilias = _ArmarBuscarFamilias()
-        Dim WDatosABuscar = ""
-        Dim WMes = ""
-        Dim WDato = ""
-        Dim WValor = 0.0
-        Dim WCantDatos = (From d In wDatos Where Trim(d) <> "").Count
+        Dim WCantMeses = (From m In wMeses Where m > 0).Count
+        Dim WCantAnios = ckAnios.CheckedItems.Count
+        Dim WCantFamilias = (From f In Familias() Where f.Checked).Count
 
-        'tabla = _CrearTablaDetalles()
-        'tabla.Rows.Clear()
+        ' Creamos una fila por mes.
 
-        Try
+        For i = 0 To (WCantMeses * WCantAnios * WCantFamilias)
 
-            cn.ConnectionString = Helper._ConectarA
-            cn.Open()
+            tabla2.Rows.Add()
 
-            ' Recorremos los datos a pedir y cada dato
+        Next
 
+        ' recorremos las filas de la tabla original.
+        Dim WIndiceAnio = 0, WIndiceMes = 0, aux = 0
+        Dim WTipo = 0
 
-            ' Armamos la consulta de los campos a comparar para cada mes.
-            For j = 1 To 10
+        Dim rows() As DataRow
 
-                ' Recorremos los meses pedidos.
-                WDatosABuscar = ""
-                For i = 0 To 11
+        ' Recorremos las familias.
+        For i = 1 To 7
 
-                    If wMeses(i) > -1 Then
+            rows = tabla.Select("Tipo = " & i)
 
-                        If Not IsNothing(wDatos(j)) OrElse wDatos(j) <> "" Then
-                            WDatosABuscar &= wDatos(j) & wMeses(i) & "+"
-                        End If
+            If rows.Count > 0 Then
 
-                    End If
+                WIndiceAnio = 0
+
+                For j = 0 To WCantAnios - 1
+
+                    WIndiceAnio += 1
+
+                    For x = 1 To WCantMeses
+
+                        tabla2.Rows((x - 1) * i).Item("Valor" & WIndiceAnio) = rows(j).Item("Valor" & x)
+
+                    Next
 
                 Next
+                
+            End If
 
-                ' Chequeamos que hayan datos que buscar.
-                If Trim(WDatosABuscar) = "" Then
-                    Return Nothing
-                End If
+        Next
 
-                ' Eliminamos el ultimo '+'.
-                WDatosABuscar = WDatosABuscar.Substring(0, WDatosABuscar.Length - 1)
+        'For Each row In rows
 
+        '    If WTipo = row.Item("Tipo") Then
+        '        WIndiceAnio += 1
 
-                ' Buscamos el registro correspondiente a ese mes y buscamos los datos de los meses, segun datos de mas arriba.
-                WMes = ""
-                ' Los meses y años se estan guardando como ' 1/ 2017 '
-                WMes = " 1/ " & wAnio & " "
+        '    Else
+        '        WTipo = row.Item("Tipo")
+        '        WIndiceAnio = 1
+        '    End If
 
-                cm.CommandText = "SELECT Tipo, Descripcion, (" & WDatosABuscar & ") as Total FROM Comando WHERE Impre1 = '" & WMes & "' and " & WBuscarFamilias
+        '    For i = 0 To (From m In wMeses Where m > 0).Count - 1
 
-                cm.Connection = cn
+        '        'tabla2.Rows().Item("")
+        '        WIndiceMes += 1
 
-                dr = cm.ExecuteReader()
+        '    Next
 
-                If dr.HasRows Then
+        'Next
 
-                    ' Agregamos una fila por cada familia.
-                    row = tabla.NewRow
+        'For j = 0 To tabla.Rows.Count - 1
 
-                    rowIndex = 0
-                    ZCorte += 1
+        '    WIndiceAnio += 1
 
-                    Do While dr.Read()
-                        row.Item("Corte") = Str$(j) & Str$(wAnio)
-                        row.Item("Tipo") = Val(Str$(j) & Str$(wAnio))
-                        row.Item("Descripcion") = wDatos(j)
+        '    For i = 0 To tabla2.Rows.Count - 1
 
-                        With row
+        '        With tabla2.Rows(i)
 
-                            WValor = IIf(IsDBNull(dr.Item("Total")), 0.0, dr.Item("Total"))
+        '            .Item("Valor" & WIndiceAnio) = tabla.Rows(j).Item("Valor" & i + 1)
 
-                            If WValor <> 0 Then
-                                rowIndex += 1
+        '        End With
 
-                                .Item("Valor" & rowIndex) = WValor 'dr.Item("")
-                                .Item("Titulo" & rowIndex) = dr.Item("Descripcion") 'WMes
-                            End If
+        '    Next
 
-                        End With
+        'Next
 
-                    Loop
-
-                    tabla.Rows.Add(row)
-
-                End If
-
-                If Not dr.IsClosed Then
-                    dr.Close()
-                    dr = Nothing
-                End If
-
-            Next
-
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
+        tabla = tabla2.Copy
 
         Return tabla
     End Function
@@ -759,7 +737,7 @@ Public Class ComparacionesMensualesValorUnico
 
         ' Por defecto, en caso de comparaciones anuales es solamente en Barras.
         If cmbPeriodo.SelectedIndex = 1 Or cmbPeriodo.SelectedIndex = 2 Then
-            Return New AnualPorFamiliaBarras
+            Return New MensualComparativoBarras
         End If
 
         If seleccionados > 1 Then ' Seleccionamos tipo de grafico 'Linea' cuando es mas de un valor
@@ -820,7 +798,7 @@ Public Class ComparacionesMensualesValorUnico
     Private Sub btnGenerar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerar.Click
 
         Dim WReporte As ReportDocument = Nothing
-        Dim tabla As DataTable
+        Dim tabla As DataSet
 
         '
         ' VALIDAMOS QUE SE HAYAN ELEGIDO POR LO MENOS ALGUNA DE LAS SIETE FAMILIAS.

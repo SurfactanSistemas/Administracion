@@ -143,6 +143,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reportes\Mensuales\MensualComparativoBarras.vb">
+      <DependentUpon>MensualComparativoBarras.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\Mensuales\MensualEntreFamiliaLineas.vb">
       <DependentUpon>MensualEntreFamiliaLineas.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -194,6 +200,10 @@
     <EmbeddedResource Include="Reportes\Mensuales\AnualPorFamiliaBarras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AnualPorFamiliaBarras.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Mensuales\MensualComparativoBarras.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MensualComparativoBarras.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Mensuales\MensualEntreFamiliaLineas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
