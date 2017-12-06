@@ -650,9 +650,12 @@ Public Class RecibosProvisorios
     Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            txtFecha.Text = _Normalizarfecha(txtFecha.Text)
+            'txtFecha.Text = _Normalizarfecha(txtFecha.Text)
 
-            _SaltarA(txtCliente)
+            If Proceso._ValidarFecha(txtFecha.Text) Then
+                txtCliente.Focus()
+                Exit Sub
+            End If
 
         ElseIf e.KeyData = Keys.Escape Then
             txtFecha.Clear()
