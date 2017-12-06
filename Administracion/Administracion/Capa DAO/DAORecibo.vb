@@ -50,7 +50,7 @@ Public Class DAORecibo
     End Sub
 
     Public Shared Sub agregarReciboProvisorio(ByVal id As String, ByVal fecha2 As String, ByVal cli As Cliente, ByVal tipoRec As Integer, ByVal ganancias As String, ByVal IB As String, ByVal IVA As String,
-        ByVal Suss As String, ByVal valorParidad As String, ByVal valorTotal As String, ByVal FormasDePago As List(Of FormaPago), ByVal CompGanancias As String, ByVal CompIva As String,
+        ByVal Suss As String, ByVal valorParidad As String, ByVal valorTotal As String, ByVal GrillaRecibos As DataGridViewRowCollection, ByVal CompGanancias As String, ByVal CompIva As String,
         ByVal CompSuss As String, ByVal RetIB1 As String, ByVal CompIB1 As String, ByVal RetIB2 As String, ByVal CompIB2 As String, ByVal RetIB3 As String,
         ByVal CompIB3 As String, ByVal RetIB4 As String, ByVal CompIB4 As String, ByVal RetIB5 As String, ByVal CompIB5 As String, ByVal RetIB6 As String,
         ByVal CompIB6 As String, ByVal RetIB7 As String, ByVal CompIB7 As String, ByVal RetIB8 As String, ByVal CompIB8 As String, ByVal _cheques As List(Of Object), ByVal _CuentasContables As List(Of Object))
@@ -77,89 +77,141 @@ Public Class DAORecibo
                 _tipoRec = "3"
         End Select
 
+        ' Corroboramos los cheques cargados.
+        Dim WNumero, WString
+
+        For Each row As DataGridViewRow In GrillaRecibos
+
+            With row
+                WNumero = .Cells(1).Value
+                WString = .Cells("ClaveCheque").Value
+
+                If Not IsNothing(WNumero) OrElse Not IsNothing(WString) Then
+
+                    If Val(Trim(WNumero)) <> Val(Mid(Trim(WString), 12, 8)) Then
+
+                        Throw New Exception("Hay cheques que no coinciden")
+
+                    End If
+
+                End If
+
+            End With
+
+        Next
+
 
         ' Concatenamos todos los renglones a insertar con el fin de realizar una única llamada a la BD.
-        For Each formaPago As FormaPago In FormasDePago
-            If (Convert.ToInt32(formaPago.tipo) = 2) Then
-                estado2 = "P"
-            ElseIf (Convert.ToInt32(formaPago.tipo) = 1) Or (Convert.ToInt32(formaPago.tipo) = 4) Then
-                estado2 = "X"
-            Else
-                estado2 = ""
-            End If
+        For Each row As DataGridViewRow In GrillaRecibos
 
-            _fechaord2 = String.Join("", formaPago.fecha.Split("/").Reverse())
+            With row
 
-            Dim temp As String = ""
+                If Val(.Cells(4).Value) <> 0 Then
 
-            Dim _Cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = (renglon - 1))
+                    Select Case Val(.Cells(0).Value)
+                        Case 2
+                            estado2 = "P"
+                        Case 1, 4
+                            estado2 = "X"
+                        Case Else
+                            estado2 = ""
+                    End Select
 
-            Dim WCuenta As String = ""
+                    _fechaord2 = String.Join("", .Cells(2).Value.ToString.Split("/").Reverse())
 
-            If Not IsNothing(_Cuenta) Then
-                WCuenta = _Cuenta(1)
-            End If
+                    Dim temp As String = ""
 
-            temp &= ConsultaSQL_Template _
-                .Replace("#TIPOREC#", _tipoRec) _
-                .Replace("#CLAVE#", id + ceros(renglon, 2)) _
-                .Replace("#RENGLON#", ceros(renglon, 2)) _
-                .Replace("#TIPO#", formaPago.tipo) _
-                .Replace("#NUMERO2#", formaPago.numero) _
-                .Replace("#FECHA2#", formaPago.fecha) _
-                .Replace("#FECHAORD2#", _fechaord2) _
-                .Replace("#BANCO2#", formaPago.nombre) _
-                .Replace("#IMPORTE2#", Val(formaPago.importe).ToString.Replace(",", ".")) _
-                .Replace("#ESTADO2#", estado2) _
-                .Replace("#FechaDepo#", "") _
-                .Replace("#CUENTA#", WCuenta) _
-                .Replace("#FechaDepoOrd#", "")
+                    Dim _Cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = (.Index))
 
-            Dim _cheque As Object = _cheques.FindLast(Function(c) c(0) = (renglon - 1))
+                    Dim WCuenta As String = ""
 
-            If Not IsNothing(_cheque) Then
-                temp = temp.Replace("#ClaveCheque#", _Left(_cheque(1), 31)) _
-                            .Replace("#BancoCheque#", _Left(_cheque(2), 3)) _
-                            .Replace("#SucursalCheque#", _Left(_cheque(3), 3)) _
-                            .Replace("#ChequeCheque#", _Left(_cheque(4), 8)) _
-                            .Replace("#CuentaCheque#", _Left(_cheque(5), 11)) _
-                            .Replace("#Cuit#", _Left(_cheque(6), 15)) & ","
+                    If Not IsNothing(_Cuenta) Then
+                        WCuenta = _Cuenta(1)
+                    End If
 
-                _GrabarCuit(_Left(_cheque(2), 3), _Left(_cheque(3), 3), _Left(_cheque(5), 11), _Left(_cheque(6), 15))
+                    temp &= ConsultaSQL_Template _
+                        .Replace("#TIPOREC#", _tipoRec) _
+                        .Replace("#CLAVE#", id + ceros(renglon, 2)) _
+                        .Replace("#RENGLON#", ceros(renglon, 2)) _
+                        .Replace("#TIPO#", Proceso.ceros(.Cells(0).Value, 2)) _
+                        .Replace("#NUMERO2#", Proceso.ceros(.Cells(1).Value, 8)) _
+                        .Replace("#FECHA2#", .Cells(2).Value) _
+                        .Replace("#FECHAORD2#", _fechaord2) _
+                        .Replace("#BANCO2#", .Cells(3).Value) _
+                        .Replace("#IMPORTE2#", Val(Proceso.formatonumerico(.Cells(4).Value))) _
+                        .Replace("#ESTADO2#", estado2) _
+                        .Replace("#FechaDepo#", "") _
+                        .Replace("#CUENTA#", WCuenta) _
+                        .Replace("#FechaDepoOrd#", "")
 
-            Else
-                temp = temp.Replace("#ClaveCheque#", "") _
-                            .Replace("#BancoCheque#", "") _
-                            .Replace("#SucursalCheque#", "") _
-                            .Replace("#ChequeCheque#", "") _
-                            .Replace("#CuentaCheque#", "") _
-                            .Replace("#Cuit#", "") & ","
-            End If
+                    Dim _cheque = .Cells("ClaveCheque").Value
 
-            SQL &= temp
+                    If Not IsNothing(_cheque) Then
+
+                        temp = temp.Replace("#ClaveCheque#", _Left(.Cells("ClaveCheque").Value, 31)) _
+                                    .Replace("#BancoCheque#", _Left(.Cells("ClaveBanco").Value, 3)) _
+                                    .Replace("#SucursalCheque#", _Left(.Cells("ClaveSucursal").Value, 3)) _
+                                    .Replace("#ChequeCheque#", _Left(.Cells("NumeroCheque").Value, 8)) _
+                                    .Replace("#CuentaCheque#", _Left(.Cells("NroCta").Value, 11)) _
+                                    .Replace("#Cuit#", _Left(.Cells("NroCuit").Value, 15)) & ","
+
+                        _GrabarCuit(_Left(.Cells("ClaveBanco").Value, 3), _Left(.Cells("ClaveSucursal").Value, 3), _Left(.Cells("NroCta").Value, 11), _Left(.Cells("NroCuit").Value, 15))
+
+                    Else
+                        temp = temp.Replace("#ClaveCheque#", "") _
+                                    .Replace("#BancoCheque#", "") _
+                                    .Replace("#SucursalCheque#", "") _
+                                    .Replace("#ChequeCheque#", "") _
+                                    .Replace("#CuentaCheque#", "") _
+                                    .Replace("#Cuit#", "") & ","
+                    End If
+
+                    SQL &= temp
+
+
+                End If
+
+            End With
 
             renglon += 1
         Next
 
         If Trim(SQL) <> "" Then
+            
             Dim cn As SqlConnection = New SqlConnection()
             Dim cm As SqlCommand = New SqlCommand()
-
-            SQL = SQL.Substring(0, SQL.Length - 1) ' Quitamos la ultima ',' de la lista de valores.
-            cm.CommandText = "INSERT INTO RecibosProvi(Clave, Recibo, Renglon, Cliente, Fecha," _
-                        & "Fechaord, TipoRec, RetGanancias,ComproGanan, RetIva, ComproIva, RetOtra," _
-                        & "RetSuss, ComproSuss, Retencion, TipoReg, Tipo2, Numero2, Fecha2, FechaOrd2," _
-                        & "banco2, Importe2, Importe, Empresa, Impolist, Observaciones, Cuenta," _
-                        & "Estado2, RetIb1, NroRetIb1, RetIb2, NroRetIb2, RetIb3, NroRetIb3, RetIb4, NroRetIb4," _
-                        & "RetIb5, NroRetIb5, RetIb6, NroRetIb6, RetIb7, NroRetIb7, RetIb8, NroRetIb8, FechaDepo, FechaDepoOrd," _
-                        & "ClaveCheque, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque, Cuit, ReciboDefinitivo, Destino, Marca, Impo1List, Tipo1, Letra1, Punto1, Numero1, Importe1, ComproIb, Provisorio, Paridad) VALUES " & SQL
-            SQLConnector.conexionSql(cn, cm)
+            Dim trans As SqlTransaction = Nothing
 
             Try
 
+                cn.ConnectionString = Proceso._ConectarA
+                cn.Open()
+                trans = cn.BeginTransaction
+
+                cm.Connection = cn
+                cm.Transaction = trans
+
+                cm.CommandText = "DELETE FROM RecibosProvi WHERE Recibo = '" & Proceso.ceros(id, 6) & "'"
+
                 cm.ExecuteNonQuery()
 
+                SQL = SQL.Substring(0, SQL.Length - 1) ' Quitamos la ultima ',' de la lista de valores.
+                cm.CommandText = "INSERT INTO RecibosProvi(Clave, Recibo, Renglon, Cliente, Fecha," _
+                            & "Fechaord, TipoRec, RetGanancias,ComproGanan, RetIva, ComproIva, RetOtra," _
+                            & "RetSuss, ComproSuss, Retencion, TipoReg, Tipo2, Numero2, Fecha2, FechaOrd2," _
+                            & "banco2, Importe2, Importe, Empresa, Impolist, Observaciones, Cuenta," _
+                            & "Estado2, RetIb1, NroRetIb1, RetIb2, NroRetIb2, RetIb3, NroRetIb3, RetIb4, NroRetIb4," _
+                            & "RetIb5, NroRetIb5, RetIb6, NroRetIb6, RetIb7, NroRetIb7, RetIb8, NroRetIb8, FechaDepo, FechaDepoOrd," _
+                            & "ClaveCheque, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque, Cuit, ReciboDefinitivo, Destino, Marca, Impo1List, Tipo1, Letra1, Punto1, Numero1, Importe1, ComproIb, Provisorio, Paridad) VALUES " & SQL
+
+                cm.ExecuteNonQuery()
+
+                trans.Commit()
+
             Catch ex As Exception
+                If Not IsNothing(trans) Then
+                    trans.Rollback()
+                End If
                 Throw New Exception("Hubo un problema al querer guardar el Recibo Provisorio")
             Finally
                 cn.Close()

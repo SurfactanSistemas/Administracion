@@ -459,12 +459,11 @@ Public Class RecibosProvisorios
             End If
 
             Try
-                DAORecibo.eliminarReciboProvisorio(txtRecibo.Text)
 
                 DAORecibo.agregarReciboProvisorio(txtRecibo.Text, txtFecha.Text, DAOCliente.buscarClientePorCodigo(txtCliente.Text), _
                     _tipoRec, (_NormalizarNumero(txtRetGanancias.Text)), (_NormalizarNumero(txtRetIB.Text)), _
                     (_NormalizarNumero(txtRetIva.Text)), (_NormalizarNumero(txtRetSuss.Text)), _
-                    0, (_NormalizarNumero(txtTotal.Text)), crearFormasPago(), _Left(_ComprobanteRetGanancias, 10), _
+                    0, (_NormalizarNumero(txtTotal.Text)), gridRecibos.Rows, _Left(_ComprobanteRetGanancias, 10), _
                     _Left(_ComprobanteRetIva, 10), _Left(_ComprobanteRetSuss, 10), (_NormalizarNumero(_RetIB1)), (_NormalizarNumero(_CompIB1)), _
                     (_NormalizarNumero(_RetIB2)), (_NormalizarNumero(_CompIB2)), (_NormalizarNumero(_RetIB3)), _
                     (_NormalizarNumero(_CompIB3)), (_NormalizarNumero(_RetIB4)), (_NormalizarNumero(_CompIB4)), _
@@ -1119,23 +1118,21 @@ Public Class RecibosProvisorios
             MsgBox("Error en la lectura de los datos del codigo de banco del cheque")
         End If
 
+        ' Buscamos si existe el cuit.
+        _Cuit = _TraerNumeroCuit(_ClaveBanco & _Sucursal & _NumCta)
+        
         With gridRecibos.Rows(row)
             .Cells(0).Value = "02"
             .Cells(1).Value = _NumCheque
             .Cells(2).Value = ""
             .Cells(3).Value = _GenerarCodigoBanco(_Banco)
+            .Cells("ClaveCheque").Value = ClaveCheque
+            .Cells("ClaveBanco").Value = _ClaveBanco
+            .Cells("ClaveSucursal").Value = _Sucursal
+            .Cells("NumeroCheque").Value = _NumCheque
+            .Cells("NroCta").Value = _NumCta
+            .Cells("NroCuit").Value = _Cuit
         End With
-        ' Buscamos si existe el cuit.
-        _Cuit = _TraerNumeroCuit(_ClaveBanco & _Sucursal & _NumCta)
-
-
-        'If Not Proceso.CuitValido(_Cuit) Then
-        '    With SolicitarInformacionCuit
-        '        .Valor = _Cuit
-        '        .ShowDialog()
-        '        .Dispose()
-        '    End With
-        'End If
 
         ' Guardamos el nuevo Cheque.
         _GuardarNuevoCheque(row, ClaveCheque, _ClaveBanco, _Sucursal, _NumCheque, _NumCta, _Cuit)
@@ -1247,7 +1244,7 @@ Public Class RecibosProvisorios
             If dr.HasRows Then
                 dr.Read()
 
-                _cuit = dr.Item("Cuit")
+                _cuit = IIf(IsDBNull(dr.Item("Cuit")), "", dr.Item("Cuit"))
 
             End If
 
@@ -1760,7 +1757,7 @@ Public Class RecibosProvisorios
             If MsgBox("¿Desea eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
                 Dim row As DataGridViewRow = gridRecibos.CurrentRow
 
-                _ClavesCheques.RemoveAll(Function(_c) _c(0) = row.Cells(5).Value)
+                _ClavesCheques.RemoveAll(Function(_c) _c(1) = row.Cells(5).Value)
 
                 gridRecibos.Rows.Remove(row)
 

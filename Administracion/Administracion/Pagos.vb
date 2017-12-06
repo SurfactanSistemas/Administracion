@@ -614,24 +614,25 @@ Public Class Pagos
     Private Sub txtProveedor_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
         If e.KeyValue = Keys.Enter Then
 
-            'If Trim(txtProveedor.Text) = "" Then
-            '    _TipoConsulta = 0
-            '    _ListarProveedores()
-            '    Exit Sub
-            'End If
+            If Trim(txtProveedor.Text) <> "" Then
 
-            txtProveedor.Text = txtProveedor.Text
+                txtProveedor.Text = txtProveedor.Text
 
-            Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
+                Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
 
-            If Not IsNothing(proveedor) Then
-                mostrarProveedor(proveedor)
-                txtObservaciones.Focus()
-            Else
-                txtRazonSocial.Text = ""
-                MessageBox.Show("El proveedor ingresado es inexistente")
-                txtProveedor.Focus()
+                If Not IsNothing(proveedor) Then
+                    mostrarProveedor(proveedor)
+
+                Else
+                    txtRazonSocial.Text = ""
+                    MessageBox.Show("El proveedor ingresado es inexistente")
+                    txtProveedor.Focus()
+                    Exit Sub
+                End If
+
             End If
+
+            txtObservaciones.Focus()
 
         End If
     End Sub
