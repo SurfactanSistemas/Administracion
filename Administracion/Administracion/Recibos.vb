@@ -2891,15 +2891,20 @@ Public Class Recibos
                             gridFormasPago2.Rows(iRow).Cells(4).Value = _NormalizarNumero(valor)
 
                             If gridFormasPago2.Rows.Count <= 40 Then
-                                gridFormasPago2.Rows.Add()
+
+                                Try
+                                    gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow + 1).Cells(0)
+                                Catch ex As Exception
+                                    gridFormasPago2.Rows.Add()
+                                    gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow + 1).Cells(0)
+                                End Try
+
                             Else
                                 MsgBox("Se ha alcanzado el Número Máximo de Cheques/Formas de Pago permitidos en un Recibo.", MsgBoxStyle.Information)
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(0)
                                 gridFormasPago2.Focus()
                                 Return True
                             End If
-
-                            gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow + 1).Cells(0)
 
                             _SumarCreditos()
                             Return True
@@ -3256,18 +3261,16 @@ Public Class Recibos
         buscar = _CuentasContables.FindLast(Function(c) c(0) = row)
 
         If Not IsNothing(buscar) Then
+
             cuenta = buscar(1)
             _PedirInformacion("Ingrese Cuenta Contable", New TextBox(), cuenta)
-            'If cuenta = "" Then : Exit Sub : End If
+
         End If
 
-        Do While Not _CuentaContableValida(cuenta)
+        Do While Not _CuentaContableValida(cuenta) And Trim(cuenta) <> "0"
 
             _PedirInformacion("Ingrese Cuenta Contable", New TextBox(), cuenta)
 
-            'If cuenta = "" Then
-            '    Exit Do
-            'End If
         Loop
 
         _CuentasContables.Add({row, Trim(cuenta)})
@@ -3573,7 +3576,7 @@ Public Class Recibos
 
         With row
 
-            For i = 1 To 13
+            For i = 1 To 24
 
                 WRecibo = WEntra(i, 1)
                 WImpre1 = WLeyendas(i) 'Trim(WEntra(i, 9))

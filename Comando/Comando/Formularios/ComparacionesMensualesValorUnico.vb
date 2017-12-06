@@ -162,7 +162,7 @@ Public Class ComparacionesMensualesValorUnico
 
         ' Creamos una fila por mes.
 
-        For i = 0 To (WCantMeses * WCantAnios * WCantFamilias)
+        For i = 1 To (WCantMeses * (WCantAnios / 2) * WCantFamilias)
 
             tabla2.Rows.Add()
 
@@ -183,56 +183,30 @@ Public Class ComparacionesMensualesValorUnico
 
                 WIndiceAnio = 0
 
+                WIndiceMes = aux
+
                 For j = 0 To WCantAnios - 1
 
                     WIndiceAnio += 1
 
                     For x = 1 To WCantMeses
 
-                        tabla2.Rows((x - 1) * i).Item("Valor" & WIndiceAnio) = rows(j).Item("Valor" & x)
+                        tabla2.Rows(WIndiceMes).Item("Tipo") = Str$(i)
+                        tabla2.Rows(WIndiceMes).Item("Valor" & WIndiceAnio) = rows(j).Item("Valor" & x)
+                        tabla2.Rows(WIndiceMes).Item("Descripcion") = Str$(x)
+                        tabla2.Rows(WIndiceMes).Item("Titulo" & WIndiceAnio) = Microsoft.VisualBasic.Right(Trim(rows(j).Item("Titulo" & x)), 4)
 
                     Next
 
+                    WIndiceMes += 1
+
                 Next
+
+                aux = WIndiceMes
                 
             End If
 
         Next
-
-        'For Each row In rows
-
-        '    If WTipo = row.Item("Tipo") Then
-        '        WIndiceAnio += 1
-
-        '    Else
-        '        WTipo = row.Item("Tipo")
-        '        WIndiceAnio = 1
-        '    End If
-
-        '    For i = 0 To (From m In wMeses Where m > 0).Count - 1
-
-        '        'tabla2.Rows().Item("")
-        '        WIndiceMes += 1
-
-        '    Next
-
-        'Next
-
-        'For j = 0 To tabla.Rows.Count - 1
-
-        '    WIndiceAnio += 1
-
-        '    For i = 0 To tabla2.Rows.Count - 1
-
-        '        With tabla2.Rows(i)
-
-        '            .Item("Valor" & WIndiceAnio) = tabla.Rows(j).Item("Valor" & i + 1)
-
-        '        End With
-
-        '    Next
-
-        'Next
 
         tabla = tabla2.Copy
 
