@@ -22,7 +22,7 @@ Public Class ComparacionesMensualesValorUnico
     Private Sub _CargarAniosComparables()
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Distinct Impre1 FROM Comando")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Distinct Impre1 FROM ComandoII")
         Dim dr As SqlDataReader
         Dim Aux = ""
 
@@ -134,6 +134,13 @@ Public Class ComparacionesMensualesValorUnico
                 _BuscarDatosBrutosAnual(WMeses, WAnio, WDatos, datos)
                 ds.Tables.Add(datos)
             Case 2
+                ' Validamos que se haya seleccionado un unico valor a comparar.
+                Dim WCantValoresSeleccionados = (From v In ValoresComparables() Where v.Checked).Count
+
+                If WCantValoresSeleccionados > 1 Then
+                    Throw New Exception("En 'Comparativo Mensual', sólo puede seleccionarse un único valor a comparar.")
+                End If
+
                 ' Recorremos los años. Buscamos los datos y los agrupamos por Valor Comparativo y Año.
 
                 For Each anio In ckAnios.CheckedItems
@@ -172,33 +179,72 @@ Public Class ComparacionesMensualesValorUnico
         Dim WIndiceAnio = 0, WIndiceMes = 0, aux = 0
         Dim WTipo = 0
 
+        Dim WDescFamilias(7) As String
+
+        WDescFamilias(1) = "Químicos"
+        WDescFamilias(2) = "Colorantes"
+        WDescFamilias(3) = "Farma"
+        WDescFamilias(4) = "Fazón Pellital"
+        WDescFamilias(5) = "Fazón Farma"
+        WDescFamilias(6) = "Fazón Químicos"
+        WDescFamilias(7) = "Varios"
+
         Dim rows() As DataRow
+        Dim WTotales() As Double
 
         ' Recorremos las familias.
         For i = 1 To 7
 
             rows = tabla.Select("Tipo = " & i)
 
+            ' Calculamos los totales en caso de que se requiera como porcentaje.
+            If rbPorcentaje.Checked Then
+
+                ReDim WTotales(rows.Count)
+
+                For x = 0 To rows.Count - 1
+                    WTotales(x) = 0.0
+                Next
+
+                Dim aux2 = 0.0
+
+                For k = 0 To rows.Count - 1
+
+                    aux2 = 0.0
+
+                    For w = 1 To 12
+                        aux2 += Val(Helper.formatonumerico(rows(k).Item("Valor" & w)))
+                    Next
+
+                    WTotales(k) = Val(Helper.formatonumerico(aux2))
+
+                Next
+
+            End If
+
             If rows.Count > 0 Then
-
-                WIndiceAnio = 0
-
-                WIndiceMes = aux
 
                 For j = 0 To WCantAnios - 1
 
-                    WIndiceAnio += 1
+                    WIndiceMes = aux
 
                     For x = 1 To WCantMeses
 
                         tabla2.Rows(WIndiceMes).Item("Tipo") = Str$(i)
-                        tabla2.Rows(WIndiceMes).Item("Valor" & WIndiceAnio) = rows(j).Item("Valor" & x)
-                        tabla2.Rows(WIndiceMes).Item("Descripcion") = Str$(x)
-                        tabla2.Rows(WIndiceMes).Item("Titulo" & WIndiceAnio) = Microsoft.VisualBasic.Right(Trim(rows(j).Item("Titulo" & x)), 4)
+
+                        If rbPorcentaje.Checked Then
+                            tabla2.Rows(WIndiceMes).Item("Valor" & j + 1) = (tabla.Rows(j).Item("Valor" & x) * 100) / WTotales(j)
+                        Else
+                            tabla2.Rows(WIndiceMes).Item("Valor" & j + 1) = tabla.Rows(j).Item("Valor" & x)
+                        End If
+
+                        tabla2.Rows(WIndiceMes).Item("Titulo" & j + 1) = Microsoft.VisualBasic.Right(Trim(rows(j).Item("Titulo" & x)), 4)
+                        tabla2.Rows(WIndiceMes).Item("Descripcion") = UCase(MonthName(x)) & " (" & (IIf(rbPorcentaje.Checked, "%", "$")) & ")"
+                        tabla2.Rows(WIndiceMes).Item("Titulo") = WDescFamilias(i)
+
+                        WIndiceMes += 1
 
                     Next
-
-                    WIndiceMes += 1
 
                 Next
 
@@ -272,7 +318,7 @@ Public Class ComparacionesMensualesValorUnico
                 ' Los meses y años se estan guardando como ' 1/ 2017 '
                 WMes = " 1/ " & wAnio & " "
 
-                cm.CommandText = "SELECT Tipo, Descripcion, (" & WDatosABuscar & ") as Total FROM Comando WHERE Impre1 = '" & WMes & "' and " & WBuscarFamilias
+                cm.CommandText = "SELECT Tipo, Descripcion, (" & WDatosABuscar & ") as Total FROM ComandoII WHERE Impre1 = '" & WMes & "' and " & WBuscarFamilias
 
                 cm.Connection = cn
 
@@ -390,7 +436,7 @@ Public Class ComparacionesMensualesValorUnico
                 ' Los meses y años se estan guardando como ' 1/ 2017 '
                 WMes = " 1/ " & wAnio & " "
 
-                cm.CommandText = "SELECT Tipo, Descripcion, " & WDatosABuscar & " FROM Comando WHERE Impre1 = '" & WMes & "' and " & WBuscarFamilias
+                cm.CommandText = "SELECT Tipo, Descripcion, " & WDatosABuscar & " FROM ComandoII WHERE Impre1 = '" & WMes & "' and " & WBuscarFamilias
 
                 cm.Connection = cn
 
@@ -591,7 +637,7 @@ Public Class ComparacionesMensualesValorUnico
         WBuscarFamilias = _ArmarBuscarFamilias()
         
         Aux = ""
-        Temp = "SELECT Tipo, Descripcion, Descripcion as Titulo #DATOS# FROM Comando"
+        Temp = "SELECT Tipo, Descripcion, Descripcion as Titulo #DATOS# FROM ComandoII"
         dato = _BuscarDatosAComparar()
 
         If dato Is Nothing Then
@@ -704,14 +750,17 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _TraerReporteMensual()
 
-        ' CALCULAMOS LA CANTIDAD DE FAMILIAS A COMPARAR PARA SABER QUE TIPO DE GRAFICO SE TIENE QUE UTILIZAR.
-        Dim WCantFamilias = (From familia In Familias() Where familia.Checked).Count()
         Dim seleccionados = ValoresComparables().Count(Function(ck) ck.Checked)
         
-
         ' Por defecto, en caso de comparaciones anuales es solamente en Barras.
-        If cmbPeriodo.SelectedIndex = 1 Or cmbPeriodo.SelectedIndex = 2 Then
+        If cmbPeriodo.SelectedIndex = 1 Then
+            Return New AnualPorFamiliaBarras
+        End If
+
+        If cmbPeriodo.SelectedIndex = 2 Then
             Return New MensualComparativoBarras
+        Else
+            rbMonto.Checked = True
         End If
 
         If seleccionados > 1 Then ' Seleccionamos tipo de grafico 'Linea' cuando es mas de un valor
@@ -721,30 +770,24 @@ Public Class ComparacionesMensualesValorUnico
         Select Case cmbTipoGrafico.SelectedIndex
             Case 0 ' Barras
 
-                ''EN CASO DE QUE HAYA MAS DE UNA FAMILIA, PUEDE PASAR DOS COSAS: QUE SEAN SOLO DOS O QUE SEAN MAS DE DOS.
-
-                'If WCantFamilias = 2 AndAlso (_EsComparacionMensual() OrElse _EsComparativoMensual()) Then
-                '    ' RETORNAMOS EL GRAFICO QUE SALEN DOS BARRAS POR MES.
-                '    Return New MensualEntreFamiliasBarras
-                'End If
+                'EN CASO DE QUE HAYA MAS DE UNA FAMILIA, PUEDE PASAR DOS COSAS: QUE SEAN SOLO DOS O QUE SEAN MAS DE DOS.
 
                 ' EN CUALQUIER OTRO CASO, RETORNAREMOS EL GRAFICO COMUN DE MES/AÑO POR BARRA.
 
                 Return New MensualPorFamiliaBarras
+
             Case 1 ' Lineas
 
                 'EN CASO DE QUE HAYA MAS DE UNA FAMILIA, PUEDE PASAR DOS COSAS: QUE SEAN SOLO DOS O QUE SEAN MAS DE DOS.
 
-                'If WCantFamilias = 2 AndAlso (_EsComparacionMensual() OrElse _EsComparativoMensual()) Then
-                '    ' RETORNAMOS EL GRAFICO QUE SALEN DOS BARRAS POR MES.
-                '    Return New MensualEntreFamiliaLineas
-                'End If
-
                 ' EN CUALQUIER OTRO CASO, RETORNAREMOS EL GRAFICO COMUN DE MES/AÑO POR BARRA.
 
                 Return New MensualPorFamiliaLineas
+
             Case Else
+
                 Return Nothing
+
         End Select
 
     End Function
@@ -880,11 +923,11 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Sub btnSeleccionarAnios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSeleccionarAnios.Click
 
-        Dim x
+        'Dim x
 
-        x = New Point((Me.Width - pnlAnios.Width * 1.5), Me.Height - pnlAnios.Height * 2)
+        'x = New Point((Me.Width - pnlAnios.Width * 1.5), Me.Height - pnlAnios.Height * 2)
 
-        pnlAnios.Location = x
+        'pnlAnios.Location = x
         pnlAnios.Visible = True
     End Sub
 
@@ -905,4 +948,19 @@ Public Class ComparacionesMensualesValorUnico
         End Select
 
     End Sub
+
+    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnio.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtAnio.Text) = "" Then : Exit Sub : End If
+
+            cmbTipoGrafico.DroppedDown = True
+            cmbTipoGrafico.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtAnio.Text = ""
+        End If
+
+    End Sub
+
 End Class

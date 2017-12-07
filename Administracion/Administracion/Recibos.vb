@@ -238,7 +238,7 @@ Public Class Recibos
 
                     If Not _CuentaUtilizada(dr.Item("Numero")) Then
 
-                        If gridPagos2.Rows.Count = 1 AndAlso Trim(gridPagos2.Rows(0).Cells(0).Value) = "" Then
+                        If gridPagos2.Rows.Count = 1 AndAlso (Trim(gridPagos2.Rows(0).Cells(0).Value) = "" OrElse IsNothing(gridPagos2.Rows(0).Cells(0).Value)) Then
                             row = 0
                         ElseIf gridPagos2.Rows.Count <= 38 Then
                             row = gridPagos2.Rows.Add()
@@ -1959,8 +1959,6 @@ Public Class Recibos
                 End Try
 
                 'End If
-            Else
-                Exit Sub
             End If
         Next
 
@@ -2964,6 +2962,18 @@ Public Class Recibos
                             _SumarDebitos()
                         End If
                     End If
+
+                    Try
+                        If Not IsNothing(gridPagos2.Rows(iRow).Cells(4).Value) AndAlso Val(gridPagos2.Rows(iRow).Cells(4).Value) <> 0 Then
+                            gridPagos2.CurrentCell = gridPagos2.Rows(iRow + 1).Cells(0)
+                        End If
+
+                    Catch ex As Exception
+                        If Not IsNothing(gridPagos2.Rows(iRow).Cells(4).Value) AndAlso Val(gridPagos2.Rows(iRow).Cells(4).Value) <> 0 Then
+                            gridPagos2.Rows.Add()
+                            gridPagos2.CurrentCell = gridPagos2.Rows(iRow + 1).Cells(0)
+                        End If
+                    End Try
 
                 End If
 
