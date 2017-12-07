@@ -59,8 +59,8 @@ Public Class DAORecibo
         Dim estado2 As Char = ""
         Dim _fechaord2 As String = ""
         Dim _fechaord As String() = fecha2.Split("/")
-        Dim ConsultaSQL_Template As String = "('#CLAVE#', '" & id & "', '#RENGLON#', '" & cli.id & "', '" & fecha2 & "','" & _fechaord(2).ToString() & _fechaord(1).ToString() & _fechaord(0).ToString() & "', '#TIPOREC#', '" & ganancias & "', '" & CompGanancias & "','" & IVA & "', '" & CompIva & "','" & IB & "', '" & Suss & "', '" & CompSuss & "',0,2, '#TIPO#', '#NUMERO2#', '#FECHA2#', '#FECHAORD2#', '#BANCO2#', '#IMPORTE2#', '" & valorTotal & "', 1, 0, '', '#CUENTA#', '#ESTADO2#', '" & RetIB1.ToString() & "', '" & CompIB1.ToString() & "', '" & RetIB2.ToString() & "', '" & CompIB2.ToString() & "', '" & RetIB3.ToString() & "', '" _
-                                        & CompIB3.ToString() & "', '" & RetIB4.ToString() & "', '" & CompIB4.ToString() & "', '" & RetIB5.ToString() & "', '" & CompIB5.ToString() & "', '" & RetIB6.ToString() & "', '" & CompIB6.ToString() & "', '" & RetIB7.ToString() & "', '" & CompIB7.ToString() & "', '" & RetIB8.ToString() & "', '" & CompIB8.ToString() _
+        Dim ConsultaSQL_Template As String = "('#CLAVE#', '" & id & "', '#RENGLON#', '" & cli.id & "', '" & fecha2 & "','" & _fechaord(2).ToString() & _fechaord(1).ToString() & _fechaord(0).ToString() & "', '#TIPOREC#', '" & ganancias & "', '" & CompGanancias & "','" & IVA & "', '" & CompIva & "','" & IB & "', '" & Suss & "', '" & CompSuss & "',0,2, '#TIPO#', '#NUMERO2#', '#FECHA2#', '#FECHAORD2#', '#BANCO2#', #IMPORTE2#, " & valorTotal & ", 1, 0, '', '#CUENTA#', '#ESTADO2#', " & RetIB1.ToString() & ", '" & CompIB1.ToString() & "', " & RetIB2.ToString() & ", '" & CompIB2.ToString() & "', " & RetIB3.ToString() & ", '" _
+                                        & CompIB3.ToString() & "', " & RetIB4.ToString() & ", '" & CompIB4.ToString() & "', " & RetIB5.ToString() & ", '" & CompIB5.ToString() & "', " & RetIB6.ToString() & ", '" & CompIB6.ToString() & "', " & RetIB7.ToString() & ", '" & CompIB7.ToString() & "', " & RetIB8.ToString() & ", '" & CompIB8.ToString() _
                                         & "', '#FechaDepo#', '#FechaDepoOrd#', '#ClaveCheque#', '#BancoCheque#', '#SucursalCheque#', '#ChequeCheque#', '#CuentaCheque#', '#Cuit#', '0', '', '', 0, '', '', '', '', 0, '','', '')"
 
 
@@ -86,11 +86,19 @@ Public Class DAORecibo
                 WNumero = .Cells(1).Value
                 WString = .Cells("ClaveCheque").Value
 
-                If Not IsNothing(WNumero) OrElse Not IsNothing(WString) Then
+                If Not IsNothing(WNumero) AndAlso Not IsNothing(WString) Then
 
-                    If Val(Trim(WNumero)) <> Val(Mid(Trim(WString), 12, 8)) Then
+                    If Val(.Cells(0).Value) = 2 Then
 
-                        Throw New Exception("Hay cheques que no coinciden")
+                        If Trim(WString) <> "" Then
+
+                            If Val(Trim(WNumero)) <> Val(Mid(Trim(WString), 12, 8)) Then
+
+                                Throw New Exception("Hay cheques que no coinciden")
+
+                            End If
+
+                        End If
 
                     End If
 
@@ -138,7 +146,7 @@ Public Class DAORecibo
                         .Replace("#FECHA2#", .Cells(2).Value) _
                         .Replace("#FECHAORD2#", _fechaord2) _
                         .Replace("#BANCO2#", .Cells(3).Value) _
-                        .Replace("#IMPORTE2#", Val(Proceso.formatonumerico(.Cells(4).Value))) _
+                        .Replace("#IMPORTE2#", Proceso.formatonumerico(.Cells(4).Value)) _
                         .Replace("#ESTADO2#", estado2) _
                         .Replace("#FechaDepo#", "") _
                         .Replace("#CUENTA#", WCuenta) _
@@ -212,7 +220,7 @@ Public Class DAORecibo
                 If Not IsNothing(trans) Then
                     trans.Rollback()
                 End If
-                Throw New Exception("Hubo un problema al querer guardar el Recibo Provisorio")
+                Throw New Exception("Hubo un problema al querer guardar el Recibo Provisorio. Motivo: " & ex.Message)
             Finally
                 cn.Close()
             End Try

@@ -310,6 +310,12 @@ Public Class RecibosProvisorios
                         .Cells(3).Value = IIf(IsDBNull(dr.Item("banco2")), "", dr.Item("banco2"))
                         .Cells(4).Value = _NormalizarNumero(dr.Item("Importe2"))
                         .Cells(5).Value = _FormaPagoActual
+                        .Cells("ClaveCheque").Value = IIf(IsDBNull(dr.Item("ClaveCheque")), "", dr.Item("ClaveCheque"))
+                        .Cells("ClaveBanco").Value = IIf(IsDBNull(dr.Item("BancoCheque")), "", dr.Item("BancoCheque"))
+                        .Cells("ClaveSucursal").Value = IIf(IsDBNull(dr.Item("SucursalCheque")), "", dr.Item("SucursalCheque"))
+                        .Cells("NumeroCheque").Value = IIf(IsDBNull(dr.Item("ChequeCheque")), "", dr.Item("ChequeCheque"))
+                        .Cells("NroCta").Value = IIf(IsDBNull(dr.Item("CuentaCheque")), "", dr.Item("CuentaCheque"))
+                        .Cells("NroCuit").Value = IIf(IsDBNull(dr.Item("Cuit")), "", dr.Item("Cuit"))
                     End With
 
 
