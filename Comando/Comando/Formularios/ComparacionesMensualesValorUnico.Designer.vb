@@ -66,8 +66,8 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckFebrero = New System.Windows.Forms.CheckBox()
         Me.ckDiciembre = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.rbPorcentaje = New System.Windows.Forms.RadioButton()
+        Me.rbMonto = New System.Windows.Forms.RadioButton()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.btnSeleccionarAnios = New System.Windows.Forms.Button()
         Me.rdPorSeparado = New System.Windows.Forms.RadioButton()
@@ -77,8 +77,8 @@ Partial Class ComparacionesMensualesValorUnico
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.pnlAnios = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.ckAnios = New System.Windows.Forms.CheckedListBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ckAnios = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.PanelMeses.SuspendLayout()
@@ -543,8 +543,8 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.RadioButton2)
-        Me.GroupBox4.Controls.Add(Me.RadioButton1)
+        Me.GroupBox4.Controls.Add(Me.rbPorcentaje)
+        Me.GroupBox4.Controls.Add(Me.rbMonto)
         Me.GroupBox4.Location = New System.Drawing.Point(29, 46)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(252, 51)
@@ -552,27 +552,27 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Tipo de Unidad"
         '
-        'RadioButton2
+        'rbPorcentaje
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(134, 21)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(76, 17)
-        Me.RadioButton2.TabIndex = 0
-        Me.RadioButton2.Text = "Porcentaje"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.rbPorcentaje.AutoSize = True
+        Me.rbPorcentaje.Location = New System.Drawing.Point(134, 21)
+        Me.rbPorcentaje.Name = "rbPorcentaje"
+        Me.rbPorcentaje.Size = New System.Drawing.Size(76, 17)
+        Me.rbPorcentaje.TabIndex = 0
+        Me.rbPorcentaje.Text = "Porcentaje"
+        Me.rbPorcentaje.UseVisualStyleBackColor = True
         '
-        'RadioButton1
+        'rbMonto
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Checked = True
-        Me.RadioButton1.Location = New System.Drawing.Point(58, 21)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(55, 17)
-        Me.RadioButton1.TabIndex = 0
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Monto"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.rbMonto.AutoSize = True
+        Me.rbMonto.Checked = True
+        Me.rbMonto.Location = New System.Drawing.Point(58, 21)
+        Me.rbMonto.Name = "rbMonto"
+        Me.rbMonto.Size = New System.Drawing.Size(55, 17)
+        Me.rbMonto.TabIndex = 0
+        Me.rbMonto.TabStop = True
+        Me.rbMonto.Text = "Monto"
+        Me.rbMonto.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '
@@ -665,14 +665,6 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Seleccione los Años a Comparar"
         '
-        'ckAnios
-        '
-        Me.ckAnios.FormattingEnabled = True
-        Me.ckAnios.Location = New System.Drawing.Point(19, 26)
-        Me.ckAnios.Name = "ckAnios"
-        Me.ckAnios.Size = New System.Drawing.Size(311, 139)
-        Me.ckAnios.TabIndex = 0
-        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(115, 169)
@@ -681,6 +673,14 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Button1.TabIndex = 11
         Me.Button1.Text = "Aceptar"
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'ckAnios
+        '
+        Me.ckAnios.FormattingEnabled = True
+        Me.ckAnios.Location = New System.Drawing.Point(19, 26)
+        Me.ckAnios.Name = "ckAnios"
+        Me.ckAnios.Size = New System.Drawing.Size(311, 139)
+        Me.ckAnios.TabIndex = 0
         '
         'ComparacionesMensualesValorUnico
         '
@@ -767,8 +767,8 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckFebrero As System.Windows.Forms.CheckBox
     Friend WithEvents ckDiciembre As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
+    Friend WithEvents rbPorcentaje As System.Windows.Forms.RadioButton
+    Friend WithEvents rbMonto As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents rdPorSeparado As System.Windows.Forms.RadioButton
     Friend WithEvents rdTodoEnUno As System.Windows.Forms.RadioButton
