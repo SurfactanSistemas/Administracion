@@ -644,11 +644,12 @@ Partial Class ComparacionesMensualesValorUnico
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(738, 150)
         Me.DataGridView1.TabIndex = 8
+        Me.DataGridView1.Visible = False
         '
         'pnlAnios
         '
         Me.pnlAnios.Controls.Add(Me.GroupBox6)
-        Me.pnlAnios.Location = New System.Drawing.Point(171, 329)
+        Me.pnlAnios.Location = New System.Drawing.Point(193, 77)
         Me.pnlAnios.Name = "pnlAnios"
         Me.pnlAnios.Size = New System.Drawing.Size(374, 220)
         Me.pnlAnios.TabIndex = 9
@@ -686,7 +687,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(761, 578)
+        Me.ClientSize = New System.Drawing.Size(761, 374)
         Me.Controls.Add(Me.pnlAnios)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.GroupBox5)

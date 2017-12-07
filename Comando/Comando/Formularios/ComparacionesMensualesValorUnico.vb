@@ -923,11 +923,11 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Sub btnSeleccionarAnios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSeleccionarAnios.Click
 
-        Dim x
+        'Dim x
 
-        x = New Point((Me.Width - pnlAnios.Width * 1.5), Me.Height - pnlAnios.Height * 2)
+        'x = New Point((Me.Width - pnlAnios.Width * 1.5), Me.Height - pnlAnios.Height * 2)
 
-        pnlAnios.Location = x
+        'pnlAnios.Location = x
         pnlAnios.Visible = True
     End Sub
 
