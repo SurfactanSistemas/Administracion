@@ -677,6 +677,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'ckAnios
         '
+        Me.ckAnios.CheckOnClick = True
         Me.ckAnios.FormattingEnabled = True
         Me.ckAnios.Location = New System.Drawing.Point(19, 26)
         Me.ckAnios.Name = "ckAnios"
