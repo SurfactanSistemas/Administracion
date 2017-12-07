@@ -948,4 +948,18 @@ Public Class ComparacionesMensualesValorUnico
         End Select
 
     End Sub
+
+    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnio.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtAnio.Text) = "" Then : Exit Sub : End If
+
+            cmbTipoGrafico.DroppedDown = True
+            cmbTipoGrafico.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtAnio.Text = ""
+        End If
+
+    End Sub
 End Class
