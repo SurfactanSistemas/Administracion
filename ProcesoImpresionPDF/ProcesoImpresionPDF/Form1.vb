@@ -57,7 +57,6 @@ Public Class Form1
     End Sub
 
     Private Sub btnGenerar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerar.Click
-        Dim WReporte As ReportDocument = Nothing
 
         '
         ' DISCRIMINAMOS LOS PROCESOS.

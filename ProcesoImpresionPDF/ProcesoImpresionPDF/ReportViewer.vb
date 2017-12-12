@@ -8,8 +8,6 @@ Public Class ReportViewer
     Dim ruta As String
     Dim formula As String
     Dim reporte As New ReportDocument
-    Dim RpDatos As New CrystalDecisions.Shared.ParameterValues()
-    Dim DsNombre As New CrystalDecisions.Shared.ParameterDiscreteValue()
 
     Public Sub New(ByVal nombreReporte As String, ByVal rutaReporte As String, ByVal formulaReporte As String)
         InitializeComponent()
