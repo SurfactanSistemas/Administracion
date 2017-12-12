@@ -1072,7 +1072,7 @@ Public Class Proforma
             Return dr.HasRows
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New Exception("Hubo un problema al querer consultar la existencia de la proforma en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -1140,7 +1140,8 @@ Public Class Proforma
             Try
                 File.Copy(_RutaArchivo, Helper._CarpetaArchivosProforma(txtNroProforma.Text) & "FDS" & AuxiDesc & AuxiCod & ".pdf", True)
             Catch ex As Exception
-                Throw New Exception("No se pudo copiar FDS a Carpeta de Archivos de la Proforma: " & txtNroProforma.Text & vbCrLf & "Motivo: " & ex.Message)
+                'Throw New Exception("No se pudo copiar FDS a Carpeta de Archivos de la Proforma: " & txtNroProforma.Text & vbCrLf & "Motivo: " & ex.Message)
+                Return False
             End Try
 
             Return True
