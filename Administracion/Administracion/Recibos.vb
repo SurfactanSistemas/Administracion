@@ -3586,7 +3586,7 @@ Public Class Recibos
 
         With row
 
-            For i = 1 To 24
+            For i = 1 To 39
 
                 WRecibo = WEntra(i, 1)
                 WImpre1 = WLeyendas(i) 'Trim(WEntra(i, 9))
@@ -3615,9 +3615,10 @@ Public Class Recibos
 
         End With
 
-        If WIndice > 0 Then
-            detallado.Rows.Add(row)
-        End If
+        'If WIndice > 0 Then
+        '    detallado.Rows.Add(row)
+        'End If
+        detallado.Rows.Add(row)
 
         ' Creo las Columnas
         _PrepararTabla(table)
@@ -3695,6 +3696,7 @@ Public Class Recibos
             row.Item("Numero21") = ""
             row.Item("Signo21") = ""
             row.Item("Importe21") = 0
+            'End If
 
             table.Rows.Add(row)
         Next
