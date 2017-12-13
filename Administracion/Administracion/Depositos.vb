@@ -26,7 +26,11 @@ Public Class Depositos
             Return True
         End If
         For Each row As DataGridViewRow In From row1 As DataGridViewRow In gridCheques.Rows Where _tipo <> row1.Cells(0).Value
-            Return (row.Index + 1 = gridCheques.Rows.Count) And IsNothing(row.Cells(0).Value)
+
+            If Not IsNothing(row.Cells(0).Value) Then
+                Return (row.Index + 1 = gridCheques.Rows.Count) And IsNothing(row.Cells(0).Value)
+            End If
+
         Next
         Return True
     End Function
