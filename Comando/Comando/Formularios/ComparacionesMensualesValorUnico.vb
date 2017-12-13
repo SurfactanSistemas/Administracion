@@ -82,27 +82,10 @@ Public Class ComparacionesMensualesValorUnico
 
     End Function
 
-    Private Function _BuscarDatosAComparar() As String
-        Return Nothing
-    End Function
-
-    Private Function _TraerDatosParaGraficos() As DataSet
-        Return _ArmarTablaYDatos()
-
-        'If _EsEntreFamilias() Then
-        '    Return _FormatearDatosMensualEntreFamilias(tabla)
-        'End If
-
-        'Return tabla
-
-    End Function
-
     Private Function _ArmarTablaYDatos() As DataSet
         Dim WAnio As Integer = 0
         Dim WMeses(12) As Integer
 
-        Dim row As DataRow
-        Dim WDatosBrutos As DataTable
         Dim datos As DataTable = _CrearTablaDetalles()
         Dim ds As New DataSet
 
@@ -158,11 +141,7 @@ Public Class ComparacionesMensualesValorUnico
     End Function
 
     Private Function _BuscarDatosBrutosAnualComparativo(ByVal wMeses As Integer(), ByRef tabla As DataTable)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
-        Dim dr As SqlDataReader
         Dim tabla2 As DataTable = _CrearTablaDetalles()
-        Dim row As DataRow
         Dim WCantMeses = (From m In wMeses Where m > 0).Count
         Dim WCantAnios = ckAnios.CheckedItems.Count
         Dim WCantFamilias = (From f In Familias() Where f.Checked).Count
@@ -176,8 +155,7 @@ Public Class ComparacionesMensualesValorUnico
         Next
 
         ' recorremos las filas de la tabla original.
-        Dim WIndiceAnio = 0, WIndiceMes = 0, aux = 0
-        Dim WTipo = 0
+        Dim WIndiceMes = 0, aux = 0
 
         Dim WDescFamilias(7) As String
 
@@ -233,6 +211,7 @@ Public Class ComparacionesMensualesValorUnico
                         tabla2.Rows(WIndiceMes).Item("Tipo") = Str$(i)
 
                         If rbPorcentaje.Checked Then
+                            ' ReSharper disable once VBWarnings::BC42104
                             tabla2.Rows(WIndiceMes).Item("Valor" & j + 1) = (tabla.Rows(j).Item("Valor" & x) * 100) / WTotales(j)
                         Else
                             tabla2.Rows(WIndiceMes).Item("Valor" & j + 1) = tabla.Rows(j).Item("Valor" & x)
@@ -259,8 +238,7 @@ Public Class ComparacionesMensualesValorUnico
         Return tabla
     End Function
 
-    Private Function _BuscarDatosBrutosAnual(ByVal wMeses() As Integer, ByVal wAnio As Integer, ByVal WDatos() As String,
-                                        ByRef tabla As DataTable) As DataTable
+    Private Sub _BuscarDatosBrutosAnual(ByVal wMeses As Integer(), ByVal wAnio As Integer, ByVal WDatos As String(), ByRef tabla As DataTable)
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
@@ -268,13 +246,10 @@ Public Class ComparacionesMensualesValorUnico
         'Dim tabla As DataTable
         Dim row As DataRow
         Dim rowIndex = 0
-        Dim ZCorte = 0
         Dim WBuscarFamilias = _ArmarBuscarFamilias()
         Dim WDatosABuscar = ""
         Dim WMes = ""
-        Dim WDato = ""
         Dim WValor = 0.0
-        Dim WCantDatos = (From d In WDatos Where Trim(d) <> "").Count
 
         'tabla = _CrearTablaDetalles()
         'tabla.Rows.Clear()
@@ -306,7 +281,7 @@ Public Class ComparacionesMensualesValorUnico
 
                 ' Chequeamos que hayan datos que buscar.
                 If Trim(WDatosABuscar) = "" Then
-                    Return Nothing
+                    Return
                 End If
 
                 ' Eliminamos el ultimo '+'.
@@ -330,7 +305,6 @@ Public Class ComparacionesMensualesValorUnico
                     row = tabla.NewRow
 
                     rowIndex = 0
-                    ZCorte += 1
 
                     Do While dr.Read()
                         row.Item("Corte") = Str$(j) & Str$(wAnio)
@@ -338,7 +312,7 @@ Public Class ComparacionesMensualesValorUnico
                         row.Item("Descripcion") = WDatos(j)
 
                         With row
-                            
+
                             WValor = IIf(IsDBNull(dr.Item("Total")), 0.0, dr.Item("Total"))
 
                             If WValor <> 0 Then
@@ -375,11 +349,10 @@ Public Class ComparacionesMensualesValorUnico
 
         End Try
 
-        Return tabla
-    End Function
+        Return
+    End Sub
 
-    Private Function _BuscarDatosBrutos(ByVal wMeses() As Integer, ByVal wAnio As Integer, ByVal WDatos() As String,
-                                        ByRef tabla As DataTable) As DataTable
+    Private Sub _BuscarDatosBrutos(ByVal wMeses As Integer(), ByVal wAnio As Integer, ByVal WDatos As String(), ByRef tabla As DataTable)
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
@@ -424,7 +397,7 @@ Public Class ComparacionesMensualesValorUnico
 
                 ' Chequeamos que hayan datos que buscar.
                 If Trim(WDatosABuscar) = "" Then
-                    Return Nothing
+                    Return
                 End If
 
                 ' Eliminamos la ultima coma.
@@ -499,8 +472,8 @@ Public Class ComparacionesMensualesValorUnico
 
         End Try
 
-        Return tabla
-    End Function
+        Return
+    End Sub
 
     Private Function _TraerValoresAComparar() As String()
         Dim WDatos(10) As String
@@ -559,43 +532,6 @@ Public Class ComparacionesMensualesValorUnico
         Return WDatos
     End Function
 
-    Private Function _TraerInformacionPorFamilia() As DataTable
-
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
-        Dim dr As SqlDataReader
-
-        Dim tabla As DataTable = _CrearTablaDetalles()
-        Dim ZSql As String = ""
-
-        Try
-            ZSql = _ArmarConsultaSQL()
-
-            cn.ConnectionString = Helper._ConectarA
-            cn.Open()
-            cm.Connection = cn
-            cm.CommandText = ZSql
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-                tabla.Load(dr)
-            End If
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar los datos necesario para generar los reportes desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return tabla
-    End Function
-
     Private Function _TraerMesesAConsultar() As Integer()
         Dim WMeses(12) As Integer
         Dim WIndice = 0
@@ -624,57 +560,6 @@ Public Class ComparacionesMensualesValorUnico
         Next
 
         Return WMeses
-    End Function
-
-    Private Function _ArmarConsultaSQL() As String
-        Dim ZSql As String = ""
-        Dim WBuscarFamilias As String = ""
-        Dim Temp, Aux, dato As String
-
-        '
-        ' ARMAMOS EL CONDICIONAL CON LAS FAMILIAS A BUSCAR.
-        '
-        WBuscarFamilias = _ArmarBuscarFamilias()
-        
-        Aux = ""
-        Temp = "SELECT Tipo, Descripcion, Descripcion as Titulo #DATOS# FROM ComandoII"
-        dato = _BuscarDatosAComparar()
-
-        If dato Is Nothing Then
-            Throw New Exception("Debe seleccionarse un valor por el cual comparar.")
-        End If
-
-        Aux = _ArmarTraerValores(dato)
-        Aux &= _ArmarTraerFechas()
-
-        ZSql = Temp.Replace("#DATOS#", Aux)
-
-        ZSql &= WBuscarFamilias
-
-        Return ZSql
-
-    End Function
-
-    Private Function _ArmarTraerFechas() As String
-        Dim Aux As String = ""
-
-        For i = 1 To 12
-            Aux &= ", Impre" & i & " as Titulo" & i
-        Next
-
-        Return Aux
-
-    End Function
-
-    Private Function _ArmarTraerValores(ByVal dato As String) As String
-        Dim Aux As String = ""
-
-        For i = 1 To 12
-            Aux &= ", " & dato & i & " as Valor" & i
-        Next
-
-        Return Aux
-
     End Function
 
     Private Function _CrearTablaDetalles() As DataTable
@@ -706,45 +591,9 @@ Public Class ComparacionesMensualesValorUnico
 
     End Function
 
-    Private Function _FormatearDatosMensualEntreFamilias(ByVal tabla As DataTable) As DataTable
-        Dim auxi As DataTable
-
-        ' Copiamos la tabla y limpiamos las filas para quedarnos solo con la estructura.
-        auxi = tabla.Copy
-        auxi.Rows.Clear()
-
-
-        For i = 1 To 12
-            auxi.Rows.Add()
-        Next
-
-        For i = 1 To 12
-
-            For j = 0 To tabla.Rows.Count - 1
-                ' Crear una fila nueva por cada mes de cada flia.
-                With auxi.Rows(i - 1)
-                    .Item("tipo") = i
-                    .Item("valor" & j + 1) = tabla.Rows(j).Item("valor" & i)
-                    .Item("titulo" & j + 1) = tabla.Rows(j).Item("Descripcion")
-                    .Item("Descripcion") = tabla.Rows(j).Item("titulo" & i)
-                End With
-
-            Next
-
-        Next
-
-        Return auxi
-    End Function
-
     Private Function _FamiliasSeleccionadas() As Boolean
 
         Return Familias().Any(Function(ck) ck.Checked)
-
-    End Function
-
-    Private Function _EsEntreFamilias() As Boolean
-
-        Return cmbTipoComparacion.SelectedIndex = 2
 
     End Function
 
@@ -795,16 +644,6 @@ Public Class ComparacionesMensualesValorUnico
     Private Function ValoresComparables() As CheckBox()
 
         Return {ckVenta, ckAtrasados, ckFactor, ckKilos, ckPedidos, ckPorcentajeAtrasos, ckPrecio, ckRotacion, ckStock, ckPorcentaje}
-    End Function
-
-    Private Function _EsComparativoMensual() As Boolean
-
-        Return cmbTipoComparacion.SelectedIndex = 2
-    End Function
-
-    Private Function _EsComparacionMensual() As Boolean
-
-        Return cmbTipoComparacion.SelectedIndex = 0
     End Function
 
     Private Function Familias() As CheckBox()
