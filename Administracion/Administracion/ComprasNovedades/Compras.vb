@@ -296,6 +296,26 @@ Public Class Compras
 
         End If
 
+        If txtFechaEmision.Text.Replace(" ", "").Length < 10 Then
+            MsgBox("Debe cargarse una fecha de emisión válida", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If txtFechaIVA.Text.Replace(" ", "").Length < 10 Then
+            MsgBox("Debe cargarse una fecha de IVA válida", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If txtFechaVto1.Text.Replace(" ", "").Length < 10 Then
+            MsgBox("Debe cargarse una fecha de Vencimiento válida", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If txtFechaVto2.Text.Replace(" ", "").Length < 10 Then
+            MsgBox("Debe cargarse una fecha de Vencimiento válida", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
         Return validador.flush
     End Function
 
@@ -943,9 +963,17 @@ Public Class Compras
     End Function
 
     Private Sub optNacion_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optNacion.CheckedChanged
-        If Not optNacion.Checked Then
+        If optNacion.Checked Then
             If esModificacion Then
-                _PyMENacion = DAOCompras.datosNacion(CustomConvert.toIntOrZero(txtNroInterno.Text))
+
+                If Trim(txtNroInterno.Text) <> "" Then
+                    Dim num As Integer = Val(txtNroInterno.Text)
+
+                    _PyMENacion = DAOCompras.datosNacion(num)
+                Else
+                    _PyMENacion = {0, 0, 0}
+                End If
+
             Else
                 _PyMENacion = {0, 0, 0}
             End If
@@ -957,19 +985,7 @@ Public Class Compras
             _PedirDatosPymeNacion()
         End If
     End Sub
-
-    Private Sub optEfectivo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optEfectivo.CheckedChanged
-        'If Not esModificacion Then
-        'gridAsientos.Rows.Clear()
-        'End If
-    End Sub
-
-    Private Sub optCtaCte_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optCtaCte.CheckedChanged
-        'If Not esModificacion Then
-        '    gridAsientos.Rows.Clear()
-        'End If
-    End Sub
-
+    
     Private Sub txtCodigoProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigoProveedor.MouseDoubleClick
 
         Dim consulta As New ConsultaCompras(Me, True)
@@ -1144,6 +1160,11 @@ Public Class Compras
                 If Trim(txtFechaEmision.Text.Replace("/", "")) = "" Or Trim(txtFechaEmision.Text).Length < 10 Then
                     txtFechaEmision.Focus()
                     Exit Sub
+                Else
+                    If Not Proceso._ValidarFecha(txtFechaEmision.Text) Then
+                        txtFechaEmision.Focus()
+                        Exit Sub
+                    End If
                 End If
 
                 txtFechaIVA.Text = Date.Now.ToString("dd/MM/yyyy")
@@ -1166,7 +1187,11 @@ Public Class Compras
     Private Sub txtFechaVto1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaVto1.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtFechaVto2)
+
+            If Proceso._ValidarFecha(txtFechaVto1.Text) Then
+                _SaltarA(txtFechaVto2)
+            End If
+
         ElseIf e.KeyData = Keys.Escape Then
             txtFechaVto1.Clear()
         End If
@@ -1176,7 +1201,11 @@ Public Class Compras
     Private Sub txtFechaVto2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaVto2.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbFormaPago)
+
+            If Proceso._ValidarFecha(txtFechaVto2.Text) Then
+                _SaltarA(cmbFormaPago)
+            End If
+
         ElseIf e.KeyData = Keys.Escape Then
             txtFechaVto2.Clear()
         End If
@@ -1186,7 +1215,11 @@ Public Class Compras
     Private Sub txtFechaIVA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaIVA.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtRemito)
+
+            If Proceso._ValidarFecha(txtFechaIVA.Text) Then
+                _SaltarA(txtRemito)
+            End If
+
         ElseIf e.KeyData = Keys.Escape Then
             txtFechaIVA.Clear()
         End If

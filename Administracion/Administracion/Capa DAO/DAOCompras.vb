@@ -2,13 +2,20 @@
 
 Public Class DAOCompras
 
-    Public Shared Function datosNacion(ByVal nroInterno As Integer)
+    Public Shared Function datosNacion(ByVal nroInterno As Integer) As Integer()
         Try
+            Dim datos(2) As Integer
+
             Dim row As DataRow = SQLConnector.retrieveDataTable("get_datos_nacion", nroInterno).Rows(0)
             Dim fecha As DateTime = Convert.ToDateTime(row("Fecha").ToString)
-            Dim mes As String = fecha.AddDays(-1).Month
+            Dim mes As String = fecha.Month
             Dim anio As String = fecha.AddDays(-1).Year
-            Return {Val(row("Cantidad")), Val(mes), Val(anio)}
+
+            datos(0) = Val(row("cantidad"))
+            datos(1) = Val(mes)
+            datos(2) = Val(anio)
+
+            Return datos
         Catch ex As Exception
             Return {0, 0, 0}
         End Try
