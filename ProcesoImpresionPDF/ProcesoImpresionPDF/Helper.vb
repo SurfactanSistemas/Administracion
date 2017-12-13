@@ -6,8 +6,6 @@ Module Helper
 
     Private Const VALIDA_CUIT = "54327654321"
 
-    Private TESTING As Boolean = False
-
     Public Function _Left(ByVal texto, ByVal largo) As String
         Return Microsoft.VisualBasic.Left(Trim(texto), largo)
     End Function
@@ -56,13 +54,13 @@ Module Helper
 
         If Not IsNothing(_empresa) Then
 
-            TESTING = ConfigurationManager.AppSettings("TESTING")
+            'TESTING = ConfigurationManager.AppSettings("TESTING")
 
-            If TESTING Then
-                Return ConfigurationManager.ConnectionStrings("LOCAL").ToString.Replace("#EMPRESA#", _empresa)
-            Else
-                Return ConfigurationManager.ConnectionStrings("SURFACTAN").ToString.Replace("#EMPRESA#", _empresa)
-            End If
+            'If TESTING Then
+            'Return ConfigurationManager.ConnectionStrings("LOCAL").ToString.Replace("#EMPRESA#", _empresa)
+            'Else
+            Return ConfigurationManager.ConnectionStrings("SURFACTAN").ToString.Replace("#EMPRESA#", _empresa)
+            'End If
 
         Else
             Throw New Exception("No se pudo encontrar la empresa a la que se quiere conectar.")
@@ -196,16 +194,24 @@ Module Helper
 
     End Function
 
-    Public Function formatonumerico(ByVal valor As String)
+    Public Function formatonumerico(ByVal valor As String, Optional ByVal decimales As Integer = 2)
         Dim _valor As Double = 0
+        Dim formato = "########0."
 
         valor = IIf(Trim(valor) = "", "0", Trim(valor))
 
         valor = valor.Replace(".", ",")
 
-        ' Redondeamos a dos decimales con "." como separador de decimales.
-        _valor = FormatNumber(CDbl(valor), 2)
-        Return formatonumerico(_valor, "########0.#0", ".")
+        ' Redondeamos a los decimales indicados con "." como separador de decimales.
+        _valor = FormatNumber(CDbl(valor), decimales)
+
+        For i = 1 To decimales - 1
+            formato &= "#"
+        Next
+
+        formato &= "0"
+
+        Return formatonumerico(_valor, formato, ".")
 
     End Function
 
@@ -392,7 +398,6 @@ Module Helper
                     varMinimo = 30000
                 Case 7
                     varMinimo = 30000
-                Case Else
             End Select
 
             varAcumuladPago = varAcumulaNeto + varBase
@@ -538,8 +543,6 @@ Module Helper
     End Function
 
     Public Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
-        Dim xfecha As String = ""
-        Dim _temp As String = fecha
         Dim _Fecha As String() = fecha.Split("/")
         ' Se normaliza la fecha (Ej: 3/04/2000 => 03/04/2000 ó 3/4/2000 => 03/04/2000) y se controla que tenga los ocho digitos obligatoriamente.
         'Return Trim(_Normalizarfecha(Trim(fecha))).Replace("/", "").Length = 8
@@ -548,7 +551,7 @@ Module Helper
             _Fecha(1) = Val(_Fecha(1)).ToString() ' 04 => 4, 12 => 12
             _Fecha(2) = Val(_Fecha(2)).ToString() ' 2000 => 2000, 0201 => 201
 
-            xfecha = String.Join("/", _Fecha) ' 3/4/2000, 12/12/201
+            ' 3/4/2000, 12/12/201
 
             fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
 
