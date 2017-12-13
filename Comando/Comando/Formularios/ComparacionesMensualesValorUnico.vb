@@ -15,8 +15,8 @@ Public Class ComparacionesMensualesValorUnico
         cmbTipoGrafico.SelectedIndex = 0
         cmbTipoComparacion.SelectedIndex = 0
         cmbPeriodo.SelectedIndex = 0
-        txtAnio.Text = ""
-        txtAnio.Text = Date.Now.ToString("yyyy")
+        txtAnioDesde.Text = ""
+        txtAnioDesde.Text = Date.Now.ToString("yyyy")
     End Sub
 
     Private Sub _CargarAniosComparables()
@@ -97,7 +97,7 @@ Public Class ComparacionesMensualesValorUnico
         '
         ' Obtenemos el año por el cual se van a traer los datos.
         '
-        WAnio = Val(txtAnio.Text)
+        WAnio = Val(txtAnioDesde.Text)
 
         '
         ' Obtenemos los valores a comparar.
@@ -228,7 +228,7 @@ Public Class ComparacionesMensualesValorUnico
                 Next
 
                 aux = WIndiceMes
-                
+
             End If
 
         Next
@@ -600,7 +600,7 @@ Public Class ComparacionesMensualesValorUnico
     Private Function _TraerReporteMensual()
 
         Dim seleccionados = ValoresComparables().Count(Function(ck) ck.Checked)
-        
+
         ' Por defecto, en caso de comparaciones anuales es solamente en Barras.
         If cmbPeriodo.SelectedIndex = 1 Then
             Return New AnualPorFamiliaBarras
@@ -788,16 +788,16 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnio.KeyDown
+    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnioDesde.KeyDown, txtAnioHasta.KeyDown, txtMesHasta.KeyDown, txtMesDesde.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtAnio.Text) = "" Then : Exit Sub : End If
+            If Trim(txtAnioDesde.Text) = "" Then : Exit Sub : End If
 
             cmbTipoGrafico.DroppedDown = True
             cmbTipoGrafico.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
-            txtAnio.Text = ""
+            txtAnioDesde.Text = ""
         End If
 
     End Sub
