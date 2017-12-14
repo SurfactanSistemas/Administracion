@@ -11,9 +11,8 @@ Public Class ComparacionesMensualesValorUnico
     Private Sub _Limpiar()
         _CargarAniosComparables()
 
-        ckTodas.Checked = True
+        ckConsolidado.Checked = True
         cmbTipoGrafico.SelectedIndex = 0
-        cmbTipoComparacion.SelectedIndex = 0
         cmbPeriodo.SelectedIndex = 0
         txtAnioDesde.Text = ""
         txtAnioDesde.Text = Date.Now.ToString("yyyy")
@@ -84,7 +83,8 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _ArmarTablaYDatos() As DataSet
         Dim WAnio As Integer = 0
-        Dim WMeses(12) As Integer
+        Dim WMeses(12) As String
+        Dim WAnios(12) As String
 
         Dim datos As DataTable = _CrearTablaDetalles()
         Dim ds As New DataSet
@@ -92,12 +92,12 @@ Public Class ComparacionesMensualesValorUnico
         '
         ' Obtenemos los meses con los cuales trabajar.
         '
-        WMeses = _TraerMesesAConsultar()
+        _TraerMesesAConsultar(WMeses, WAnios)
 
         '
         ' Obtenemos el año por el cual se van a traer los datos.
         '
-        WAnio = Val(txtAnioDesde.Text)
+        'WAnio = Val(txtAnioDesde.Text)
 
         '
         ' Obtenemos los valores a comparar.
@@ -111,10 +111,10 @@ Public Class ComparacionesMensualesValorUnico
 
         Select Case cmbPeriodo.SelectedIndex
             Case 0
-                _BuscarDatosBrutos(WMeses, WAnio, WDatos, datos)
+                _BuscarDatosBrutos(WMeses, WAnios, WDatos, datos)
                 ds.Tables.Add(datos)
             Case 1
-                _BuscarDatosBrutosAnual(WMeses, WAnio, WDatos, datos)
+                '_BuscarDatosBrutosAnual(WMeses, WAnio, WDatos, datos)
                 ds.Tables.Add(datos)
             Case 2
                 ' Validamos que se haya seleccionado un unico valor a comparar.
@@ -130,7 +130,7 @@ Public Class ComparacionesMensualesValorUnico
                     _BuscarDatosBrutos(WMeses, anio, WDatos, datos)
                 Next
 
-                _BuscarDatosBrutosAnualComparativo(WMeses, datos)
+                '_BuscarDatosBrutosAnualComparativo(WMeses, datos)
 
                 ds.Tables.Add(datos)
 
@@ -352,7 +352,7 @@ Public Class ComparacionesMensualesValorUnico
         Return
     End Sub
 
-    Private Sub _BuscarDatosBrutos(ByVal wMeses As Integer(), ByVal wAnio As Integer, ByVal WDatos As String(), ByRef tabla As DataTable)
+    Private Sub _BuscarDatosBrutos(ByVal wMeses() As String, ByVal WAnios() As String, ByVal WDatos As String(), ByRef tabla As DataTable)
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
@@ -364,6 +364,7 @@ Public Class ComparacionesMensualesValorUnico
         Dim WBuscarFamilias = _ArmarBuscarFamilias()
         Dim WDatosABuscar = ""
         Dim WMes = ""
+        Dim WAnio = ""
         Dim WDato = ""
         Dim WCantDatos = (From d In WDatos Where Trim(d) <> "").Count
 
@@ -388,7 +389,7 @@ Public Class ComparacionesMensualesValorUnico
                     If wMeses(i) > -1 Then
 
                         If Not IsNothing(WDatos(j)) OrElse WDatos(j) <> "" Then
-                            WDatosABuscar &= WDatos(j) & wMeses(i) & ","
+                            WDatosABuscar &= WDatos(j) & Trim(wMeses(i)) & ","
                         End If
 
                     End If
@@ -407,55 +408,188 @@ Public Class ComparacionesMensualesValorUnico
                 ' Buscamos el registro correspondiente a ese mes y buscamos los datos de los meses, segun datos de mas arriba.
                 WMes = ""
                 ' Los meses y años se estan guardando como ' 1/ 2017 '
-                WMes = " 1/ " & wAnio & " "
+                If Val(txtAnioDesde.Text) = Val(txtAnioHasta.Text) Then
 
-                cm.CommandText = "SELECT Tipo, Descripcion, " & WDatosABuscar & " FROM ComandoII WHERE Impre1 = '" & WMes & "' and " & WBuscarFamilias
+                    WAnio = Trim(WAnios(0))
 
-                cm.Connection = cn
+                    WMes = " 1/ " & WAnio & " "
 
-                dr = cm.ExecuteReader()
+                    cm.CommandText = "SELECT Tipo, Descripcion, " & WDatosABuscar & " FROM ComandoII WHERE Impre1 = '" & WMes & "' and " & WBuscarFamilias
 
-                If dr.HasRows Then
+                    cm.Connection = cn
 
-                    ' Agregamos una fila por cada familia.
-                    Do While dr.Read()
+                    dr = cm.ExecuteReader()
 
-                        row = tabla.NewRow
-                        rowIndex = 0
-                        ZCorte += 1
-                        With row
-                            .Item("Tipo") = IIf(WCantDatos = 1 OrElse rdPorSeparado.Checked, ZCorte, dr.Item("Tipo"))
-                            .Item("Descripcion") = dr.Item("Descripcion")
-                            .Item("Corte") = ZCorte
-                            .Item("Titulo") = UCase(WDatos(j))
+                    If dr.HasRows Then
 
-                            For i = 0 To 11
+                        ' Agregamos una fila por cada familia.
+                        Do While dr.Read()
 
-                                If wMeses(i) > -1 Then
-                                    rowIndex += 1
+                            row = tabla.NewRow
+                            rowIndex = 0
+                            ZCorte += 1
+                            With row
+                                .Item("Tipo") = IIf(WCantDatos = 1, ZCorte, dr.Item("Tipo"))
+                                .Item("Descripcion") = dr.Item("Descripcion")
+                                .Item("Corte") = ZCorte
+                                .Item("Titulo") = UCase(WDatos(j))
 
-                                    WMes = ""
-                                    WMes = wMeses(i) & "/" & Str$(wAnio)
+                                For i = 0 To 11
 
-                                    WDato = WDatos(j) & wMeses(i)
+                                    If wMeses(i) > -1 Then
+                                        rowIndex += 1
 
-                                    .Item("Valor" & rowIndex) = dr.Item(WDato)
-                                    .Item("Titulo" & rowIndex) = WMes
+                                        WMes = ""
+                                        WMes = wMeses(i) & "/" & Str$(WAnio)
+
+                                        WDato = WDatos(j) & Trim(wMeses(i))
+
+                                        .Item("Valor" & rowIndex) = dr.Item(WDato)
+                                        .Item("Titulo" & rowIndex) = WMes
+
+                                    End If
+
+                                Next
+                            End With
+
+                            tabla.Rows.Add(row)
+
+                        Loop
+
+                    End If
+
+                    If Not dr.IsClosed Then
+                        dr.Close()
+                        dr = Nothing
+                    End If
+
+                Else
+
+                    Dim aux1 = 0
+
+                    For i = Val(txtMesDesde.Text) To 11
+
+                        aux1 += 1
+
+                    Next
+
+
+                    WDatosABuscar = ""
+                    For i = 0 To aux1
+
+                        If wMeses(i) > -1 Then
+
+                            If Not IsNothing(WDatos(j)) OrElse WDatos(j) <> "" Then
+                                WDatosABuscar &= WDatos(j) & Trim(wMeses(i)) & ","
+                            End If
+
+                        End If
+
+                    Next
+
+                    Dim aux2 = aux1 + 1
+
+                    For i = 0 To Val(txtMesHasta.Text)
+
+                        If wMeses(aux2) > -1 Then
+
+                            If Not IsNothing(WDatos(j)) OrElse WDatos(j) <> "" Then
+                                WDatosABuscar &= WDatos(j) & Trim(wMeses(aux2)) & ","
+                            End If
+
+                            aux2 += 1
+                        End If
+
+                    Next
+
+
+                    ' Chequeamos que hayan datos que buscar.
+                    If Trim(WDatosABuscar) = "" Then
+                        Return
+                    End If
+
+                    ' Eliminamos la ultima coma.
+                    WDatosABuscar = WDatosABuscar.Substring(0, WDatosABuscar.Length - 1)
+
+                    WAnio = Trim(txtAnioDesde.Text)
+
+                    WMes = " 1/ " & WAnio & " "
+                    Dim WAnio2 = Trim(txtAnioHasta.Text)
+                    Dim WMes2 = " 1/ " & WAnio2 & " "
+
+                    cm.CommandText = "SELECT Tipo, Descripcion, " & WDatosABuscar & " FROM ComandoII WHERE (Impre1 = '" & WMes & "' OR Impre1 = '" & WMes2 & "' ) and " & WBuscarFamilias & " ORDER BY Tipo"
+
+                    cm.Connection = cn
+
+                    dr = cm.ExecuteReader()
+
+                    If dr.HasRows Then
+
+                        ' Agregamos una fila por cada familia.
+                        Do While dr.Read()
+
+                            row = tabla.NewRow
+                            rowIndex = 0
+                            ZCorte += 1
+                            With row
+                                .Item("Tipo") = IIf(WCantDatos = 1, ZCorte, dr.Item("Tipo"))
+                                .Item("Descripcion") = dr.Item("Descripcion")
+                                .Item("Corte") = ZCorte
+                                .Item("Titulo") = UCase(WDatos(j))
+
+                                For i = 0 To aux1
+
+                                    If wMeses(i) > -1 Then
+                                        rowIndex += 1
+
+                                        WMes = ""
+                                        WMes = wMeses(i) & "/" & Str$(WAnio)
+
+                                        WDato = WDatos(j) & Trim(wMeses(i))
+
+                                        .Item("Valor" & rowIndex) = dr.Item(WDato)
+                                        .Item("Titulo" & rowIndex) = WMes
+
+                                    End If
+
+                                Next
+
+                                ' Leemos los meses del Próximo año.
+                                If dr.Read() Then
+
+                                    For i = 1 To Val(txtMesHasta.Text)
+
+                                        If wMeses(aux1) > -1 Then
+                                            rowIndex += 1
+
+                                            WMes = ""
+                                            WMes = wMeses(aux1) & "/" & Str$(WAnio)
+
+                                            WDato = WDatos(j) & Trim(wMeses(aux1))
+
+                                            .Item("Valor" & rowIndex) = dr.Item(WDato)
+                                            .Item("Titulo" & rowIndex) = WMes
+
+                                            aux1 += 1
+                                        End If
+
+                                    Next
 
                                 End If
+                                
+                            End With
 
-                            Next
-                        End With
+                            tabla.Rows.Add(row)
 
-                        tabla.Rows.Add(row)
+                        Loop
 
-                    Loop
+                    End If
 
-                End If
+                    If Not IsNothing(dr) AndAlso Not dr.IsClosed Then
+                        dr.Close()
+                        dr = Nothing
+                    End If
 
-                If Not dr.IsClosed Then
-                    dr.Close()
-                    dr = Nothing
                 End If
 
             Next
@@ -532,35 +666,87 @@ Public Class ComparacionesMensualesValorUnico
         Return WDatos
     End Function
 
-    Private Function _TraerMesesAConsultar() As Integer()
-        Dim WMeses(12) As Integer
+    Private Sub _TraerMesesAConsultar(ByRef WMeses() As String, ByRef WAnios() As String)
+        ReDim WMeses(12)
+        ReDim WAnios(12)
+
         Dim WIndice = 0
-        Dim temp() As CheckBox = {ckEnero, ckFebrero, ckMarzo, ckAbril, ckMayo, ckJunio, ckJulio, ckAgosto, ckSeptiembre, ckOctubre, ckNoviembre, ckDiciembre}
-        Dim ck As CheckBox
+        Dim WMesInicial = Val(txtMesDesde.Text)
+        Dim WMesFinal = Val(txtMesHasta.Text)
+        Dim WAnioInicial = Val(txtAnioDesde.Text)
+        Dim WAnioFinal = Val(txtAnioHasta.Text)
 
-        '
-        ' Guardamos la posicion del mes chequeado y le sumamos uno para que coincida con el numero de mes.
-        '
-        For i = 0 To 11
+        ' Se controla que se consulten solo meses cerrados.
+        If WMesFinal = Date.Now.Month And WAnioFinal = Date.Now.Year Then
+            WMesFinal = WMesFinal - 1
+        End If
 
-            ck = temp(i)
+        ''
+        '' Guardamos la posicion del mes chequeado y le sumamos uno para que coincida con el numero de mes.
+        ''
 
-            If ck.Checked Then
-                WMeses(WIndice) = i + 1
-                WIndice += 1
+        If WAnioInicial = WAnioFinal Then
+            For i = 0 To 12
+
+                If WMesInicial <= WMesFinal Then
+                    WMeses(i) = Str$(WMesInicial)
+                    WAnios(i) = Str$(WAnioInicial)
+                Else
+                    Exit For
+                End If
+
+                WMesInicial += 1
+
+                WIndice = i + 1
+            Next
+
+        Else
+
+            Dim aux1 = 0, aux2 = 0
+
+            If WAnioInicial > WAnioFinal Then
+                Throw New Exception("Las fechas deben correlativas.")
             End If
 
-        Next
+            ' Calculamos la cantidad de meses del primer año.
+            For i = WMesInicial To 11
+
+                aux1 += 1
+
+            Next
+
+            For i = 0 To aux1
+
+                WMeses(i) = Str$(WMesInicial)
+                WAnios(i) = Str$(WAnioInicial)
+
+                WMesInicial += 1
+
+                WIndice = i + 1
+            Next
+
+            For i = 1 To WMesFinal
+
+                aux2 += 1
+                aux1 += 1
+
+                WMeses(aux1) = Str$(aux2)
+                WAnios(aux1) = Str$(WAnioFinal)
+
+                WIndice += 1
+            Next
+
+        End If
 
         '
         ' Completamos los lugares restantes con -1 asi no los tenemos en cuenta en la consulta.
         '
-        For i = WIndice To 11
-            WMeses(i) = -1
+        For i = WIndice To 12
+            WMeses(i) = Str$(-1)
+            WAnios(i) = Str$(-1)
         Next
 
-        Return WMeses
-    End Function
+    End Sub
 
     Private Function _CrearTablaDetalles() As DataTable
 
@@ -655,6 +841,18 @@ Public Class ComparacionesMensualesValorUnico
 
         Dim WReporte As ReportDocument = Nothing
         Dim tabla As DataSet
+        Dim valido As Boolean = _PeriodoValido()
+
+
+        '
+        ' VALIDAMOS QUE EL PERIODO SEA DE UN AÑO.
+        '
+        If Not _ValidaDatosPeriodo() Then
+
+            MsgBox("Periodo no valido. Debe seleccionarse un periodo de máximo 12 meses para generar el reporte.", MsgBoxStyle.Exclamation)
+            Exit Sub
+
+        End If
 
         '
         ' VALIDAMOS QUE SE HAYAN ELEGIDO POR LO MENOS ALGUNA DE LAS SIETE FAMILIAS.
@@ -714,15 +912,31 @@ Public Class ComparacionesMensualesValorUnico
         End With
     End Sub
 
-    Private Function _MesesElegidos() As Boolean
-        Return {ckEnero, ckFebrero, ckMarzo, ckAbril, ckMayo, ckJunio, ckJulio, ckAgosto, ckSeptiembre, ckOctubre, ckNoviembre, ckDiciembre}.Any(Function(ck) ck.Checked)
+    Private Function _PeriodoValido() As Boolean
+
+        Dim valido = False
+        Dim aux = 0
+
+        For i = Val(txtMesDesde.Text) To 11
+            aux += 1
+        Next
+
+        If Val(txtAnioDesde.Text) < Val(txtAnioHasta.Text) Then
+            For i = 1 To Val(txtMesHasta.Text)
+                aux += 1
+            Next
+        End If
+
+        If aux <= 12 Then
+            valido = True
+        End If
+
+        Return valido
     End Function
 
-    Private Sub ckTodas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodas.CheckedChanged, ckPedidos.CheckedChanged, ckOctubre.CheckedChanged
-        For Each ck As CheckBox In {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios}
-            ck.Checked = ckTodas.Checked
-        Next
-    End Sub
+    Private Function _MesesElegidos() As Boolean
+        Return True '{ckEnero, ckFebrero, ckMarzo, ckAbril, ckMayo, ckJunio, ckJulio, ckAgosto, ckSeptiembre, ckOctubre, ckNoviembre, ckDiciembre}.Any(Function(ck) ck.Checked)
+    End Function
 
     Private Sub ckTodosValores_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodosValores.CheckedChanged
         For Each ck As CheckBox In _ValoresComparables()
@@ -733,12 +947,6 @@ Public Class ComparacionesMensualesValorUnico
     Private Function _ValoresComparables() As CheckBox()
         Return {ckVenta, ckAtrasados, ckFactor, ckKilos, ckPedidos, ckPorcentajeAtrasos, ckPrecio, ckRotacion, ckStock, ckPorcentaje}
     End Function
-
-    Private Sub ckTodosMeses_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodosMeses.CheckedChanged
-        For Each ck As CheckBox In {ckEnero, ckFebrero, ckMarzo, ckAbril, ckMayo, ckJunio, ckJulio, ckAgosto, ckSeptiembre, ckOctubre, ckNoviembre, ckDiciembre}
-            ck.Checked = ckTodosMeses.Checked
-        Next
-    End Sub
 
     Private Sub ckValoresAComparar_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckVenta.CheckedChanged, ckAtrasados.CheckedChanged, ckFactor.CheckedChanged, ckKilos.CheckedChanged, ckPedidos.CheckedChanged, ckPorcentajeAtrasos.CheckedChanged, ckPrecio.CheckedChanged, ckRotacion.CheckedChanged, ckStock.CheckedChanged, ckPorcentaje.CheckedChanged
         '
@@ -751,11 +959,8 @@ Public Class ComparacionesMensualesValorUnico
         '
         If seleccionados > 1 Then
             cmbTipoGrafico.SelectedIndex = 1 ' Lineas
-            rdPorSeparado.Enabled = False
-            rdTodoEnUno.Checked = True
         Else
             cmbTipoGrafico.SelectedIndex = 0 ' Barras
-            rdPorSeparado.Enabled = True
         End If
 
     End Sub
@@ -778,23 +983,65 @@ Public Class ComparacionesMensualesValorUnico
 
         Select Case cmbPeriodo.SelectedIndex
             Case 1
+
                 cmbTipoGrafico.SelectedIndex = 0
+                btnSeleccionarAnios.Visible = False
+                Button1.PerformClick()
+
             Case 2
                 btnSeleccionarAnios.Visible = True
                 btnSeleccionarAnios.PerformClick()
             Case Else
+
                 btnSeleccionarAnios.Visible = False
+                Button1.PerformClick()
+
+                For Each ck As CheckBox In Familias()
+                    If Familias.Count(Function(c) c.Checked) > 1 Then
+                        ck.Checked = False
+                    End If
+                Next
+
         End Select
 
     End Sub
 
-    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnioDesde.KeyDown, txtAnioHasta.KeyDown, txtMesHasta.KeyDown, txtMesDesde.KeyDown
+    Private Sub txtMesDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMesDesde.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtMesDesde.Text) = "" Then : Exit Sub : End If
+
+            ' Validamos mes
+            If Not _MesValido(txtMesDesde.Text) Then
+                Exit Sub
+            End If
+
+            ' Deberiamos validar el periodo. O Capaz despues ya en la generacion?
+
+            txtMesDesde.Text = Helper.ceros(txtMesDesde.Text, 2)
+            txtAnioDesde.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtMesDesde.Text = ""
+        End If
+
+    End Sub
+
+    Private Function _MesValido(ByVal WMes As String) As Boolean
+        Return Val(WMes) >= 1 And Val(WMes) <= 12
+    End Function
+
+    Private Sub txtAnioDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnioDesde.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtAnioDesde.Text) = "" Then : Exit Sub : End If
 
-            cmbTipoGrafico.DroppedDown = True
-            cmbTipoGrafico.Focus()
+            ' validamos el año.
+            If Not _ValidarAnio(txtAnioDesde.Text) Then
+                Exit Sub
+            End If
+
+            txtMesHasta.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtAnioDesde.Text = ""
@@ -802,4 +1049,142 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
+    Private Function _ValidarAnio(ByVal WAnio As String) As Boolean
+        Return Trim(WAnio).Length = 4 And Val(WAnio) >= 1900 And Val(WAnio) <= 2999
+    End Function
+
+    Private Sub txtMesHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMesHasta.KeyDown
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtMesHasta.Text) = "" Then : Exit Sub : End If
+
+            ' Validamos mes
+            If Not _MesValido(txtMesHasta.Text) Then
+                Exit Sub
+            End If
+
+            ' Deberiamos validar el periodo. O Capaz despues ya en la generacion?
+
+            txtMesHasta.Text = Helper.ceros(txtMesHasta.Text, 2)
+            txtAnioHasta.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtMesHasta.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtAnioHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnioHasta.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtAnioHasta.Text) = "" Then : Exit Sub : End If
+
+            ' validamos el año.
+            If Not _ValidarAnio(txtAnioHasta.Text) Then
+                Exit Sub
+            End If
+
+            If Not _ValidaDatosPeriodo() Then
+
+                Exit Sub
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtAnioHasta.Text = ""
+        End If
+
+    End Sub
+
+    Private Function _ValidaDatosPeriodo() As Boolean
+
+        If {txtMesDesde, txtMesHasta, txtAnioDesde, txtAnioHasta}.Any(Function(t) Val(t.Text) <= 0) Then
+            Return False
+        End If
+
+        Dim WMesDesde = Val(txtMesDesde.Text)
+        Dim WMesHasta = Val(txtMesHasta.Text)
+        Dim WAnioDesde = Val(txtAnioDesde.Text)
+        Dim WAnioHasta = Val(txtAnioHasta.Text)
+        
+        If WAnioDesde <> WAnioHasta Then
+
+            If WAnioHasta < WAnioDesde Then
+                Return False
+            End If
+
+            If WMesHasta > WMesDesde Then
+                Return False
+            End If
+
+        Else
+
+            If WMesHasta < WMesDesde Then
+                Return False
+            End If
+
+        End If
+
+        Return _PeriodoValido()
+    End Function
+
+    Private Sub ComparacionesMensualesValorUnico_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtMesDesde.Focus()
+    End Sub
+
+    Private Sub cmbTipoGrafico_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbTipoGrafico.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            cmbPeriodo.DroppedDown = True
+            cmbPeriodo.Focus()
+
+        End If
+    End Sub
+
+    Private Sub ckFamilias_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckQuimicos.CheckedChanged, ckColorantes.CheckedChanged, ckFarma.CheckedChanged, ckFazonFarma.CheckedChanged, ckFazonPellital.CheckedChanged, ckFazonQuimicos.CheckedChanged, ckVarios.CheckedChanged
+
+        Dim control As CheckBox = sender
+
+        If _EsComparacionMensual() Then
+
+            For Each ck As CheckBox In Familias()
+
+                If control.Checked = False Then
+                    Exit For
+                End If
+
+                If control.Name <> ck.Name Then
+                    ck.Checked = False
+                End If
+
+            Next
+
+        End If
+
+    End Sub
+
+    Private Function _EsComparacionMensual() As Boolean
+        Return cmbPeriodo.SelectedIndex = 0
+    End Function
+
+    Private Sub ckConsolidado_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckConsolidado.CheckedChanged
+
+        If ckConsolidado.Checked Then
+
+            For Each ck As CheckBox In Familias()
+                With ck
+                    .Checked = False
+                    .Enabled = False
+                End With
+            Next
+
+        Else
+
+            For Each ck As CheckBox In Familias()
+                With ck
+                    .Enabled = True
+                End With
+            Next
+
+        End If
+
+    End Sub
 End Class
