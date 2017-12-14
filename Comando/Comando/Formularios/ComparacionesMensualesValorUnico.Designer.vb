@@ -34,8 +34,6 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckColorantes = New System.Windows.Forms.CheckBox()
         Me.ckQuimicos = New System.Windows.Forms.CheckBox()
         Me.ckTodas = New System.Windows.Forms.CheckBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.cmbTipoComparacion = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.ckPorcentaje = New System.Windows.Forms.CheckBox()
         Me.ckRotacion = New System.Windows.Forms.CheckBox()
@@ -49,7 +47,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckPedidos = New System.Windows.Forms.CheckBox()
         Me.ckTodosValores = New System.Windows.Forms.CheckBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtAnio = New System.Windows.Forms.MaskedTextBox()
+        Me.txtAnioDesde = New System.Windows.Forms.MaskedTextBox()
         Me.PanelMeses = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ckSeptiembre = New System.Windows.Forms.CheckBox()
@@ -79,6 +77,14 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ckAnios = New System.Windows.Forms.CheckedListBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtMesDesde = New System.Windows.Forms.MaskedTextBox()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.txtMesHasta = New System.Windows.Forms.MaskedTextBox()
+        Me.txtAnioHasta = New System.Windows.Forms.MaskedTextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.PanelMeses.SuspendLayout()
@@ -88,6 +94,8 @@ Partial Class ComparacionesMensualesValorUnico
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAnios.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnGenerar
@@ -103,19 +111,19 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.cmbTipoGrafico.FormattingEnabled = True
         Me.cmbTipoGrafico.Items.AddRange(New Object() {"Barras", "Lineas"})
-        Me.cmbTipoGrafico.Location = New System.Drawing.Point(285, 11)
+        Me.cmbTipoGrafico.Location = New System.Drawing.Point(596, 16)
         Me.cmbTipoGrafico.Name = "cmbTipoGrafico"
-        Me.cmbTipoGrafico.Size = New System.Drawing.Size(117, 21)
+        Me.cmbTipoGrafico.Size = New System.Drawing.Size(137, 21)
         Me.cmbTipoGrafico.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(212, 15)
+        Me.Label2.Location = New System.Drawing.Point(522, 20)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 13)
+        Me.Label2.Size = New System.Drawing.Size(68, 13)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Tipo Gráfico"
+        Me.Label2.Text = "Tipo Gráfico:"
         '
         'GroupBox2
         '
@@ -213,24 +221,6 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckTodas.TabIndex = 0
         Me.ckTodas.Text = "Todas"
         Me.ckTodas.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(426, 15)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(93, 13)
-        Me.Label4.TabIndex = 1
-        Me.Label4.Text = "Tipo Comparacion"
-        '
-        'cmbTipoComparacion
-        '
-        Me.cmbTipoComparacion.FormattingEnabled = True
-        Me.cmbTipoComparacion.Items.AddRange(New Object() {"Por Familia", "Entre Familias"})
-        Me.cmbTipoComparacion.Location = New System.Drawing.Point(527, 11)
-        Me.cmbTipoComparacion.Name = "cmbTipoComparacion"
-        Me.cmbTipoComparacion.Size = New System.Drawing.Size(117, 21)
-        Me.cmbTipoComparacion.TabIndex = 2
         '
         'GroupBox3
         '
@@ -365,20 +355,21 @@ Partial Class ComparacionesMensualesValorUnico
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(92, 15)
+        Me.Label3.Location = New System.Drawing.Point(126, 17)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(26, 13)
+        Me.Label3.Size = New System.Drawing.Size(29, 13)
         Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Año"
+        Me.Label3.Text = "Año:"
         '
-        'txtAnio
+        'txtAnioDesde
         '
-        Me.txtAnio.Location = New System.Drawing.Point(126, 11)
-        Me.txtAnio.Name = "txtAnio"
-        Me.txtAnio.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtAnio.Size = New System.Drawing.Size(62, 20)
-        Me.txtAnio.TabIndex = 5
-        Me.txtAnio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtAnioDesde.Location = New System.Drawing.Point(157, 13)
+        Me.txtAnioDesde.Mask = "0000"
+        Me.txtAnioDesde.Name = "txtAnioDesde"
+        Me.txtAnioDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtAnioDesde.Size = New System.Drawing.Size(62, 20)
+        Me.txtAnioDesde.TabIndex = 5
+        Me.txtAnioDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PanelMeses
         '
@@ -649,7 +640,7 @@ Partial Class ComparacionesMensualesValorUnico
         'pnlAnios
         '
         Me.pnlAnios.Controls.Add(Me.GroupBox6)
-        Me.pnlAnios.Location = New System.Drawing.Point(193, 77)
+        Me.pnlAnios.Location = New System.Drawing.Point(375, 329)
         Me.pnlAnios.Name = "pnlAnios"
         Me.pnlAnios.Size = New System.Drawing.Size(374, 220)
         Me.pnlAnios.TabIndex = 9
@@ -684,23 +675,104 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckAnios.Size = New System.Drawing.Size(311, 139)
         Me.ckAnios.TabIndex = 0
         '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.txtMesDesde)
+        Me.GroupBox7.Controls.Add(Me.txtAnioDesde)
+        Me.GroupBox7.Controls.Add(Me.Label4)
+        Me.GroupBox7.Controls.Add(Me.Label3)
+        Me.GroupBox7.Location = New System.Drawing.Point(29, 5)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(230, 40)
+        Me.GroupBox7.TabIndex = 10
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Desde"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(52, 17)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(30, 13)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "Mes:"
+        '
+        'txtMesDesde
+        '
+        Me.txtMesDesde.Location = New System.Drawing.Point(83, 13)
+        Me.txtMesDesde.Mask = "00"
+        Me.txtMesDesde.Name = "txtMesDesde"
+        Me.txtMesDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtMesDesde.Size = New System.Drawing.Size(37, 20)
+        Me.txtMesDesde.TabIndex = 5
+        Me.txtMesDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.Controls.Add(Me.txtMesHasta)
+        Me.GroupBox8.Controls.Add(Me.txtAnioHasta)
+        Me.GroupBox8.Controls.Add(Me.Label5)
+        Me.GroupBox8.Controls.Add(Me.Label6)
+        Me.GroupBox8.Location = New System.Drawing.Point(265, 5)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(230, 40)
+        Me.GroupBox8.TabIndex = 10
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "Hasta"
+        '
+        'txtMesHasta
+        '
+        Me.txtMesHasta.Location = New System.Drawing.Point(83, 13)
+        Me.txtMesHasta.Mask = "00"
+        Me.txtMesHasta.Name = "txtMesHasta"
+        Me.txtMesHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtMesHasta.Size = New System.Drawing.Size(37, 20)
+        Me.txtMesHasta.TabIndex = 5
+        Me.txtMesHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtAnioHasta
+        '
+        Me.txtAnioHasta.Location = New System.Drawing.Point(157, 13)
+        Me.txtAnioHasta.Mask = "0000"
+        Me.txtAnioHasta.Name = "txtAnioHasta"
+        Me.txtAnioHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtAnioHasta.Size = New System.Drawing.Size(62, 20)
+        Me.txtAnioHasta.TabIndex = 5
+        Me.txtAnioHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(50, 17)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(30, 13)
+        Me.Label5.TabIndex = 1
+        Me.Label5.Text = "Mes:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(124, 17)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(29, 13)
+        Me.Label6.TabIndex = 1
+        Me.Label6.Text = "Año:"
+        '
         'ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(761, 374)
+        Me.Controls.Add(Me.GroupBox8)
+        Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.pnlAnios)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.PanelMeses)
-        Me.Controls.Add(Me.txtAnio)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.cmbTipoComparacion)
         Me.Controls.Add(Me.cmbTipoGrafico)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnGenerar)
         Me.MaximizeBox = False
@@ -721,6 +793,10 @@ Partial Class ComparacionesMensualesValorUnico
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlAnios.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -737,8 +813,6 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckColorantes As System.Windows.Forms.CheckBox
     Friend WithEvents ckQuimicos As System.Windows.Forms.CheckBox
     Friend WithEvents ckTodas As System.Windows.Forms.CheckBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents cmbTipoComparacion As System.Windows.Forms.ComboBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents ckPorcentaje As System.Windows.Forms.CheckBox
     Friend WithEvents ckRotacion As System.Windows.Forms.CheckBox
@@ -752,7 +826,7 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckPedidos As System.Windows.Forms.CheckBox
     Friend WithEvents ckTodosValores As System.Windows.Forms.CheckBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents txtAnio As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtAnioDesde As System.Windows.Forms.MaskedTextBox
     Friend WithEvents PanelMeses As System.Windows.Forms.Panel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents ckSeptiembre As System.Windows.Forms.CheckBox
@@ -782,4 +856,12 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckAnios As System.Windows.Forms.CheckedListBox
     Friend WithEvents btnSeleccionarAnios As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtMesDesde As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtMesHasta As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtAnioHasta As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
 End Class
