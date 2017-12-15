@@ -14,8 +14,8 @@ Public Class ComparacionesMensualesValorUnico
         ckConsolidado.Checked = True
         cmbTipoGrafico.SelectedIndex = 0
         cmbPeriodo.SelectedIndex = 0
-        txtAnioDesde.Text = ""
         txtAnioDesde.Text = Date.Now.ToString("yyyy")
+        txtAnioHasta.Text = Date.Now.ToString("yyyy")
     End Sub
 
     Private Sub _CargarAniosComparables()
@@ -112,6 +112,12 @@ Public Class ComparacionesMensualesValorUnico
         Select Case cmbPeriodo.SelectedIndex
             Case 0
                 _BuscarDatosBrutos(WMeses, WAnios, WDatos, datos)
+
+                ' Si es consolidado, rearmamos la tabla con los totales por valor comparable.
+                If ckConsolidado.Checked Then
+                    _FormatearConsolidado(datos)
+                End If
+
                 ds.Tables.Add(datos)
             Case 1
                 '_BuscarDatosBrutosAnual(WMeses, WAnio, WDatos, datos)
@@ -139,6 +145,55 @@ Public Class ComparacionesMensualesValorUnico
         Return ds
 
     End Function
+
+    Private Sub _FormatearConsolidado(ByRef datos As DataTable)
+        Dim _datos = datos.Copy
+        Dim Wtipo = 0
+        Dim temp() As DataRow
+        Dim aux = _ValoresComparables.Count(Function(v) v.Checked)
+        Dim aux2 = 0.0
+
+        _datos.Rows.Clear()
+
+        _datos.Rows.Add()
+
+        For i = 1 To aux
+            _datos.Rows(0).Item("Valor" & i) = 0
+        Next
+
+        For i = 1 To 7
+
+            temp = datos.Select("Tipo = '" & i & "'")
+
+            If temp.Count > 0 Then
+
+                For x = 1 To aux
+
+                    aux2 = 0.0
+
+                    For z = 1 To 12
+
+                        aux2 += IIf(IsDBNull(temp(x - 1).Item("Valor" & z)), 0, temp(x - 1).Item("Valor" & z))
+
+                    Next
+
+                    If Not IsDBNull(temp(x - 1).Item("Titulo")) Then
+                        _datos.Rows(0).Item("Titulo" & x) = temp(x - 1).Item("Titulo")
+                    End If
+
+                    _datos.Rows(0).Item("Valor" & x) += aux2
+
+                Next
+
+            End If
+
+
+        Next
+
+        _datos.Rows(0).Item("Descripcion") = "Consolidado"
+
+        datos = _datos.Copy
+    End Sub
 
     Private Function _BuscarDatosBrutosAnualComparativo(ByVal wMeses As Integer(), ByRef tabla As DataTable)
         Dim tabla2 As DataTable = _CrearTablaDetalles()
@@ -432,7 +487,7 @@ Public Class ComparacionesMensualesValorUnico
                                 .Item("Tipo") = IIf(WCantDatos = 1, ZCorte, dr.Item("Tipo"))
                                 .Item("Descripcion") = dr.Item("Descripcion")
                                 .Item("Corte") = ZCorte
-                                .Item("Titulo") = UCase(WDatos(j))
+                                .Item("Titulo") = UCase(_NombreValorSegunColumna(WDatos(j)))
 
                                 For i = 0 To 11
 
@@ -535,7 +590,7 @@ Public Class ComparacionesMensualesValorUnico
                                 .Item("Tipo") = IIf(WCantDatos = 1, ZCorte, dr.Item("Tipo"))
                                 .Item("Descripcion") = dr.Item("Descripcion")
                                 .Item("Corte") = ZCorte
-                                .Item("Titulo") = UCase(WDatos(j))
+                                .Item("Titulo") = UCase(_NombreValorSegunColumna(WDatos(j)))
 
                                 For i = 0 To aux1
 
@@ -557,20 +612,22 @@ Public Class ComparacionesMensualesValorUnico
                                 ' Leemos los meses del Próximo año.
                                 If dr.Read() Then
 
+                                    aux2 = aux1 + 1
+
                                     For i = 1 To Val(txtMesHasta.Text)
 
-                                        If wMeses(aux1) > -1 Then
+                                        If wMeses(aux2) > -1 Then
                                             rowIndex += 1
 
                                             WMes = ""
-                                            WMes = wMeses(aux1) & "/" & Str$(WAnio)
+                                            WMes = wMeses(aux2) & "/" & Str$(WAnio2)
 
-                                            WDato = WDatos(j) & Trim(wMeses(aux1))
+                                            WDato = WDatos(j) & Trim(wMeses(aux2))
 
                                             .Item("Valor" & rowIndex) = dr.Item(WDato)
                                             .Item("Titulo" & rowIndex) = WMes
 
-                                            aux1 += 1
+                                            aux2 += 1
                                         End If
 
                                     Next
@@ -608,6 +665,23 @@ Public Class ComparacionesMensualesValorUnico
 
         Return
     End Sub
+
+    Private Function _NombreValorSegunColumna(ByVal columna As String) As String
+
+        Select Case UCase(columna)
+            Case "VENTA"
+                Return "Venta (U$S)"
+            Case "PRECIO"
+                Return "Precio (U$S)"
+            Case "PORCEVENTA"
+                Return "% Ventas"
+            Case "PORCEATRASO"
+                Return "% Atrasos"
+            Case Else
+                Return columna
+        End Select
+
+    End Function
 
     Private Function _TraerValoresAComparar() As String()
         Dim WDatos(10) As String
@@ -798,7 +872,7 @@ Public Class ComparacionesMensualesValorUnico
             rbMonto.Checked = True
         End If
 
-        If seleccionados > 1 Then ' Seleccionamos tipo de grafico 'Linea' cuando es mas de un valor
+        If seleccionados > 1 And Not ckConsolidado.Checked Then ' Seleccionamos tipo de grafico 'Linea' cuando es mas de un valor
             cmbTipoGrafico.SelectedIndex = 1
         End If
 
@@ -862,15 +936,7 @@ Public Class ComparacionesMensualesValorUnico
             MsgBox("Se debe seleccionar por lo menos una familia para generar un reporte.", MsgBoxStyle.Exclamation)
             Exit Sub
         End If
-
-        '
-        ' VALIDAMOS QUE SE HAYA SELECCIONADO ALGUN MES.
-
-        If Not _MesesElegidos() Then
-            MsgBox("Se debe seleccionar por lo menos un mes para generar un reporte.", MsgBoxStyle.Exclamation)
-            Exit Sub
-        End If
-
+        
         '
         ' BUSCAMOS EL RPT SEGUN TIPO DE COMPARACION Y TIPO DE GRAFICO INDICADO.
         '
@@ -957,7 +1023,7 @@ Public Class ComparacionesMensualesValorUnico
         '
         ' Seleccionamos por defecto tipo de grafico en linea en caso de que hayan mas de dos valores marcados. Sino lo colocamos como "Barras"
         '
-        If seleccionados > 1 Then
+        If seleccionados > 1 And Not ckConsolidado.Checked Then
             cmbTipoGrafico.SelectedIndex = 1 ' Lineas
         Else
             cmbTipoGrafico.SelectedIndex = 0 ' Barras
@@ -987,22 +1053,26 @@ Public Class ComparacionesMensualesValorUnico
                 cmbTipoGrafico.SelectedIndex = 0
                 btnSeleccionarAnios.Visible = False
                 Button1.PerformClick()
+                ckConsolidado.Checked = False
 
             Case 2
                 btnSeleccionarAnios.Visible = True
                 btnSeleccionarAnios.PerformClick()
+
             Case Else
 
                 btnSeleccionarAnios.Visible = False
                 Button1.PerformClick()
 
-                For Each ck As CheckBox In Familias()
-                    If Familias.Count(Function(c) c.Checked) > 1 Then
-                        ck.Checked = False
-                    End If
-                Next
-
         End Select
+
+        If Not ckConsolidado.Checked Then
+            For Each ck As CheckBox In Familias()
+                If Familias.Count(Function(c) c.Checked) > 1 Then
+                    ck.Checked = False
+                End If
+            Next
+        End If
 
     End Sub
 
@@ -1143,7 +1213,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Dim control As CheckBox = sender
 
-        If _EsComparacionMensual() Then
+        If _EsComparacionMensual() And Not ckConsolidado.Checked Then
 
             For Each ck As CheckBox In Familias()
 
@@ -1171,7 +1241,7 @@ Public Class ComparacionesMensualesValorUnico
 
             For Each ck As CheckBox In Familias()
                 With ck
-                    .Checked = False
+                    .Checked = True
                     .Enabled = False
                 End With
             Next
@@ -1180,6 +1250,7 @@ Public Class ComparacionesMensualesValorUnico
 
             For Each ck As CheckBox In Familias()
                 With ck
+                    .Checked = False
                     .Enabled = True
                 End With
             Next
