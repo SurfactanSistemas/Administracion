@@ -1473,12 +1473,15 @@ Public Class Compras
         '                                          "Surfactan_V", "Surfactan_VI", _
         '                                          "Surfactan_VII"}
         Dim Empresas = Proceso.Empresas
-        Dim csTemplate As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        'Dim csTemplate As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+
+        Dim csTemplate As String = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString
+
         Dim cs As String = ""
 
         For Each Empresa As String In Empresas
 
-            Dim cn As New SqlConnection(csTemplate.Replace("#EMPRESA#", Empresa))
+            Dim cn As New SqlConnection(csTemplate.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & Empresa))
             Dim cm As New SqlCommand("SELECT TOP 1 Informe FROM Informe WHERE Remito = '" & remitoPrueba & "' and Proveedor = '" & Trim(txtCodigoProveedor.Text) & "'")
             Dim dr As SqlDataReader
 

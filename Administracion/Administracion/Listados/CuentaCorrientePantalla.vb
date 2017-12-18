@@ -17,6 +17,7 @@ Public Class CuentaCorrientePantalla
 
         opcPendiente.Checked = True
         opcCompleto.Checked = False
+        pnlSelectivo.Visible = False
 
         GRilla.Columns(6).ValueType = GetType(Date)
     End Sub
@@ -196,7 +197,7 @@ Public Class CuentaCorrientePantalla
 
     Private Sub _TraerProveedorSelectivo()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Proveedor, Fecha FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(txtProveedor.Text) & "' AND FechaOrd >= '" & String.Join("", Date.Now.ToString("dd/MM/yyyy").Split("/").Reverse()) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -206,7 +207,10 @@ Public Class CuentaCorrientePantalla
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
+                dr.Read()
                 CBProveedorSelectivo.Checked = True
+                txtFechaSelectivo.Text = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+
             Else
                 CBProveedorSelectivo.Checked = False
             End If
@@ -232,9 +236,9 @@ Public Class CuentaCorrientePantalla
         Call _Proceso()
     End Sub
 
-    Private Function _AltaProveedorSelectivo(ByVal CodProveedor As String) As Boolean
+    Private Function _AltaProveedorSelectivo(ByVal CodProveedor As String, ByVal fecha As String) As Boolean
         Dim exito As Boolean = False
-        Dim _Fecha As String = Date.Now.ToString("dd/MM/yyyy")
+        Dim _Fecha As String = Trim(fecha)
         Dim _FechaOrd As String = String.Join("", _Fecha.Split("/").Reverse())
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("INSERT INTO ProveedorSelectivo (Proveedor, Fecha, FechaOrd) Values ('" & CodProveedor & "', '" & _Fecha & "', '" & _FechaOrd & "')")
@@ -247,7 +251,7 @@ Public Class CuentaCorrientePantalla
             exito = True
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer agregar al proveedor al listado de Proveedores Selectivo en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
             cn.Close()
@@ -259,10 +263,50 @@ Public Class CuentaCorrientePantalla
         Return exito
     End Function
 
-    Private Function _EliminarProveedorSelectivo(ByVal codProv As String) As Boolean
+    Private Function _BuscarFechaSelectivo() As String
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Fecha FROM ProveedorSelectivo ORDER BY FechaOrd DESC")
+        Dim dr As SqlDataReader
+        Dim _Fecha As String = ""
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                _Fecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+
+        Return _Fecha
+
+
+    End Function
+
+    Private Function _EliminarProveedorSelectivo(ByVal codProv As String, ByVal fecha As String) As Boolean
         Dim exito As Boolean = False
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(codProv) & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(codProv) & "' AND Fecha = '" & fecha & "'")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -286,12 +330,29 @@ Public Class CuentaCorrientePantalla
 
     Private Sub CBProveedorSelectivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CBProveedorSelectivo.Click
 
+        If CBProveedorSelectivo.Checked Then
+
+            txtFechaSelectivo.Text = _BuscarFechaSelectivo()
+            pnlSelectivo.Visible = True
+            txtFechaSelectivo.Focus()
+
+        Else
+
+            _GrabarSelectivo(txtFechaSelectivo.Text)
+            pnlSelectivo.Visible = False
+
+        End If
+
+    End Sub
+
+    Private Sub _GrabarSelectivo(ByVal fecha As String)
+
         If Trim(txtProveedor.Text) <> "" Then
             If CBProveedorSelectivo.Checked Then
 
                 If MsgBox("¿Está seguro de que quiere colocar al proveedor actual al listado de Proveedores Selectivos?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
 
-                    If Not _AltaProveedorSelectivo(txtProveedor.Text) Then
+                    If Not _AltaProveedorSelectivo(txtProveedor.Text, fecha) Then
                         CBProveedorSelectivo.Checked = False
                         MsgBox("Hubo un error al querer colocar al proveeedor en la lista de Proveedores Selectivo.", MsgBoxStyle.Critical)
                     End If
@@ -304,7 +365,7 @@ Public Class CuentaCorrientePantalla
 
                 If MsgBox("¿Está seguro de que quiere eliminar al proveedor actual del listado de Proveedores Selectivos?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
 
-                    If Not _EliminarProveedorSelectivo(txtProveedor.Text) Then
+                    If Not _EliminarProveedorSelectivo(txtProveedor.Text, fecha) Then
                         CBProveedorSelectivo.Checked = True
                         MsgBox("Hubo un error al querer eliminar al proveeedor de la lista de Proveedores Selectivo.", MsgBoxStyle.Critical)
                     End If
@@ -610,5 +671,40 @@ Public Class CuentaCorrientePantalla
     Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
         boxPantallaProveedores.Visible = False
         txtProveedor.Focus()
+    End Sub
+
+    Private Sub btnCerrarFechaSelectivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarFechaSelectivo.Click
+        pnlSelectivo.Visible = False
+        CBProveedorSelectivo.Checked = False
+        txtFechaSelectivo.Clear()
+    End Sub
+
+    Private Sub btnGrabarSelectivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabarSelectivo.Click
+
+        If Proceso._ValidarFecha(txtFechaSelectivo.Text) Then
+
+            _GrabarSelectivo(txtFechaSelectivo.Text)
+            pnlSelectivo.Visible = False
+
+        End If
+
+    End Sub
+
+    Private Sub txtFechaSelectivo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaSelectivo.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaSelectivo.Text).Length < 10 Then : Exit Sub : End If
+
+            If Not Proceso._ValidarFecha(txtFechaSelectivo.Text) Then
+
+                MsgBox("Fecha Invalida", MsgBoxStyle.Exclamation)
+                txtFechaSelectivo.Focus()
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaSelectivo.Clear()
+        End If
+
     End Sub
 End Class

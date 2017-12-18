@@ -36,7 +36,7 @@ Public Class ConsultaDatosFactura
     Private Sub _ObtenerDatosDeNroInterno(ByVal _NroInterno)
         Dim XProveedor As String
 
-        Dim cs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        Dim cs As String = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
         Dim XCs As String = ""
         Dim _Empresas = Proceso.Empresas 'As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
@@ -94,7 +94,8 @@ Public Class ConsultaDatosFactura
 
         ' Busco el informe segun empresa.
         For Each _Empresa As String In _Empresas
-            XCs = cs.Replace("#EMPRESA#", _Empresa)
+            'XCs = cs.Replace("#EMPRESA#", _Empresa)
+            XCs = cs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & _Empresa)
 
             Try
 

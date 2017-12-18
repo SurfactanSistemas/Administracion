@@ -51,7 +51,9 @@ Public Class CarpetasPagos
     End Function
 
     Private Function _ObtenerConnectionString(ByVal _Empresa As String)
-        Return "Data Source=193.168.0.7;Initial Catalog=" & _Empresa & ";User ID=usuarioadmin; Password=usuarioadmin"
+        Dim cs = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString
+
+        Return cs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & _Empresa) '"Data Source=193.168.0.7;Initial Catalog=" & _Empresa & ";User ID=usuarioadmin; Password=usuarioadmin"
     End Function
 
     Private Sub CarpetasPagos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown

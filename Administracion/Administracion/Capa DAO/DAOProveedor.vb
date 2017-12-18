@@ -97,7 +97,7 @@ Public Class DAOProveedor
     Private Shared Sub _DarDeAltaEnTodasLasPlantas(ByVal ZSql As String)
         'Dim _Empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "GastonPruebas"}
         Dim _Empresas = Proceso.Empresas
-        Dim Xcs = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        Dim Xcs = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
 
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand()
@@ -106,7 +106,7 @@ Public Class DAOProveedor
 
         For Each _Empresa In _Empresas
 
-            Dim cs = Xcs.Replace("#EMPRESA#", _Empresa)
+            Dim cs = Xcs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & _Empresa)
 
             Try
                 cn.ConnectionString = cs
@@ -133,7 +133,7 @@ Public Class DAOProveedor
         'SQLConnector.executeProcedure("baja_proveedor", codProveedor)
         Dim ZSql = ""
         Dim _Empresas = Proceso.Empresas 'As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "GastonPruebas"}
-        Dim Xcs = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        Dim Xcs = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand
 
@@ -143,7 +143,7 @@ Public Class DAOProveedor
 
             Try
 
-                cn.ConnectionString = Xcs.Replace("#EMPRESA#", Trim(_Empresa))
+                cn.ConnectionString = Xcs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & Trim(_Empresa))
                 cn.Open()
 
                 cm.Connection = cn
@@ -244,7 +244,7 @@ Public Class DAOProveedor
 
     Public Shared Function buscarProveedorPorNombre(ByVal nombre As String)
         Dim tabla As DataTable
-        tabla = SQLConnector.retrieveDataTable("buscar_proveedor_por_nombre", nombre)
+        tabla = SQLConnector.retrieveDataTable("buscar_proveedor_por_nombre", Trim(nombre))
         Return (From proveedor As DataRow In tabla.Rows Select New Proveedor(proveedor("codigo"), proveedor("nombre"))).ToList()
     End Function
 

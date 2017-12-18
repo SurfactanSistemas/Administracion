@@ -225,7 +225,9 @@ Public Class ConsultaRemitos
     End Sub
 
     Private Function _ConnectionString(ByVal empresa As String) As String
-        Return "Data Source=193.168.0.7;Initial Catalog=" + empresa + ";User ID=usuarioadmin; Password=usuarioadmin"
+        Dim cs = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString
+
+        Return cs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & empresa) '"Data Source=193.168.0.7;Initial Catalog=" + empresa + ";User ID=usuarioadmin; Password=usuarioadmin"
     End Function
 
     Private Sub LBProveedores_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LBProveedores.MouseDoubleClick

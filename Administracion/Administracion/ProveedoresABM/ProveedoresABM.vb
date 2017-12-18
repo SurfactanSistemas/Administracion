@@ -197,7 +197,7 @@ Public Class ProveedoresABM
         'Dim ZSql As String = ""
         Dim _Empresas As List(Of String)
 
-        Dim Xcs As String = "Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        Dim Xcs As String = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
@@ -210,7 +210,7 @@ Public Class ProveedoresABM
 
         For Each _Empresa In _Empresas
 
-            Dim cs = Xcs.Replace("#EMPRESA#", _Empresa)
+            Dim cs = Xcs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & _Empresa)
 
             Try
                 cn.ConnectionString = cs
