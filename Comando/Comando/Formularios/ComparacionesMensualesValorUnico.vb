@@ -152,7 +152,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Function
 
-    Private Sub _BuscarDatosComparativoMensual(ByVal anio As Object, ByVal wDatos As String(), ByVal datos As DataTable)
+    Private Sub _BuscarDatosComparativoMensual(ByVal anio As Object, ByVal wDatos As String(), ByRef datos As DataTable)
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
@@ -170,7 +170,7 @@ Public Class ComparacionesMensualesValorUnico
         Dim WMeses(12) As String
 
         'tabla = _CrearTablaDetalles()
-        tabla.Rows.Clear()
+        'tabla.Rows.Clear()
 
         Try
 
@@ -190,10 +190,10 @@ Public Class ComparacionesMensualesValorUnico
                 WDatosABuscar = ""
                 For i = 0 To 11
 
-                    If wMeses(i) > -1 Then
+                    If WMeses(i) > -1 Then
 
                         If Not IsNothing(wDatos(j)) OrElse wDatos(j) <> "" Then
-                            WDatosABuscar &= wDatos(j) & Trim(wMeses(i)) & ","
+                            WDatosABuscar &= wDatos(j) & Trim(WMeses(i)) & ","
                         End If
 
                     End If
@@ -225,7 +225,7 @@ Public Class ComparacionesMensualesValorUnico
                     ' Agregamos una fila por cada familia.
                     Do While dr.Read()
 
-                        row = tabla.NewRow
+                        row = datos.NewRow
                         rowIndex = 0
                         ZCorte += 1
                         With row
@@ -236,13 +236,13 @@ Public Class ComparacionesMensualesValorUnico
 
                             For i = 0 To 11
 
-                                If wMeses(i) > -1 Then
+                                If WMeses(i) > -1 Then
                                     rowIndex += 1
 
                                     WMes = ""
-                                    WMes = wMeses(i) & "/" & Str$(WAnio)
+                                    WMes = WMeses(i) & "/" & Str$(WAnio)
 
-                                    WDato = wDatos(j) & Trim(wMeses(i))
+                                    WDato = wDatos(j) & Trim(WMeses(i))
 
                                     .Item("Valor" & rowIndex) = dr.Item(WDato)
                                     .Item("Titulo" & rowIndex) = WMes
@@ -252,7 +252,7 @@ Public Class ComparacionesMensualesValorUnico
                             Next
                         End With
 
-                        tabla.Rows.Add(row)
+                        datos.Rows.Add(row)
 
                     Loop
 
@@ -266,9 +266,15 @@ Public Class ComparacionesMensualesValorUnico
             Next
 
         Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
 
         End Try
-
     End Sub
 
     Private Sub _FormatearAnual(ByRef datos As DataTable)
@@ -951,7 +957,9 @@ Public Class ComparacionesMensualesValorUnico
                 Case 1 ' Ex anual
 
                     .Tipo = 3
+                Case 2 ' Ex Comparativo Mensual
 
+                    .Tipo = 4
             End Select
             
             If Not .IsDisposed Then
@@ -1007,18 +1015,23 @@ Public Class ComparacionesMensualesValorUnico
     End Function
 
     Private Sub ckValoresAComparar_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckVenta.CheckedChanged, ckAtrasados.CheckedChanged, ckFactor.CheckedChanged, ckKilos.CheckedChanged, ckPedidos.CheckedChanged, ckPorcentajeAtrasos.CheckedChanged, ckPrecio.CheckedChanged, ckRotacion.CheckedChanged, ckStock.CheckedChanged, ckPorcentaje.CheckedChanged
-        '
-        ' Contamos los valores que se seleccionaron para graficar.
-        '
-        Dim seleccionados As Integer = {ckVenta, ckAtrasados, ckFactor, ckKilos, ckPedidos, ckPorcentajeAtrasos, ckPrecio, ckRotacion, ckStock, ckPorcentaje}.Count(Function(ck) ck.Checked)
 
-        '
-        ' Seleccionamos por defecto tipo de grafico en linea en caso de que hayan mas de dos valores marcados. Sino lo colocamos como "Barras"
-        '
-        If seleccionados > 1 And Not ckConsolidado.Checked Then
-            cmbTipoGrafico.SelectedIndex = 1 ' Lineas
-        Else
-            cmbTipoGrafico.SelectedIndex = 0 ' Barras
+        Dim control As CheckBox = sender
+
+        If cmbPeriodo.SelectedIndex = 2 Then
+
+            For Each ck As CheckBox In _ValoresComparables()
+
+                If control.Checked = False Then
+                    Exit For
+                End If
+
+                If control.Name <> ck.Name Then
+                    ck.Checked = False
+                End If
+
+            Next
+
         End If
 
     End Sub
@@ -1205,7 +1218,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Dim control As CheckBox = sender
 
-        If _EsComparacionMensual() And Not ckConsolidado.Checked Then
+        If (_EsComparacionMensual() And Not ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 2 Then
 
             For Each ck As CheckBox In Familias()
 
