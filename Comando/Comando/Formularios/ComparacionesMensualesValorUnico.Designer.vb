@@ -416,7 +416,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(12, 382)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(738, 150)
+        Me.DataGridView1.Size = New System.Drawing.Size(585, 150)
         Me.DataGridView1.TabIndex = 8
         Me.DataGridView1.Visible = False
         '
@@ -456,7 +456,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckAnios.FormattingEnabled = True
         Me.ckAnios.Location = New System.Drawing.Point(19, 26)
         Me.ckAnios.Name = "ckAnios"
-        Me.ckAnios.Size = New System.Drawing.Size(311, 139)
+        Me.ckAnios.Size = New System.Drawing.Size(311, 130)
         Me.ckAnios.TabIndex = 0
         '
         'GroupBox7
@@ -548,7 +548,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(614, 348)
+        Me.ClientSize = New System.Drawing.Size(614, 345)
         Me.Controls.Add(Me.GroupBox8)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.pnlAnios)
