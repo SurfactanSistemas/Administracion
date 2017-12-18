@@ -71,6 +71,8 @@ Public Class AplicacionComprobantes
         gridFormasBuilder.addFloatColumn(5, "Importe", True)
         gridFormasBuilder.addFloatColumn(6, "Saldo", True)
         gridFormasBuilder.addFloatColumn(7, "Aplica", True)
+
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub _Proceso()

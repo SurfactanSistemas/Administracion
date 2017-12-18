@@ -6,6 +6,7 @@ Public Class ListadoPagos
         Label2.Text = Globals.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub txtdesdefecha_KeyPress(ByVal sender As Object, _

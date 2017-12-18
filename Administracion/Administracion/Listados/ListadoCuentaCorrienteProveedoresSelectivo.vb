@@ -14,6 +14,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         varRenglon = 0
         '_CargarProveedoresPreCargados()
         _Claves.Clear()
+
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub _CargarProveedoresPreCargados()

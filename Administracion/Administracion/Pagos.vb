@@ -69,6 +69,8 @@ Public Class Pagos
             txtParidad.Text = traerParidad()
         End If
 
+        Proceso._PurgarSaldosCtaCtePrvs()
+
     End Sub
 
     Private Sub _AlinearDerecha(ByRef columna As DataGridViewColumn)

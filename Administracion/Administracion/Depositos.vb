@@ -11,6 +11,8 @@ Public Class Depositos
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
         btnLimpiar.PerformClick()
+
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Function sumaImportes() As Double

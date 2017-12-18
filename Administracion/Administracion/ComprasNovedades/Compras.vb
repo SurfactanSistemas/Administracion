@@ -28,6 +28,8 @@ Public Class Compras
 
         btnLimpiar.PerformClick()
 
+        Proceso._PurgarSaldosCtaCtePrvs()
+
     End Sub
 
     Private Sub _AlinearDerecha(ByRef columna As DataGridViewColumn)

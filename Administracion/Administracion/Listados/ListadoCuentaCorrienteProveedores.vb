@@ -13,6 +13,8 @@ Public Class ListadoCuentaCorrienteProveedores
         txtHastaProveedor.Text = "99999999999"
         opcPendiente.Checked = True
         opcCompleto.Checked = False
+
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub txtdesdeproveedor_KeyPress(ByVal sender As Object, _

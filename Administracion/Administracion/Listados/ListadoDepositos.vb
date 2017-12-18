@@ -9,6 +9,7 @@ Public Class ListadoDepositos
 
         txtDesdeBanco.Text = "0"
         txtHastaBanco.Text = "9999"
+        Proceso._PurgarSaldosCtaCtePrvs()
 
     End Sub
 

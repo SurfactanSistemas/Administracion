@@ -8,6 +8,8 @@ Public Class ListadoProyeccionCobrosAnalitico
         txtHastaProveedor.Text = ""
         txtFechaEmision.Text = "  /  /    "
         Label2.Text = Globals.NombreEmpresa()
+
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub txtfechaemision_KeyPress(ByVal sender As Object, _

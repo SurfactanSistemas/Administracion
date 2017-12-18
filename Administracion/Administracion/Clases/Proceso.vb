@@ -1,4 +1,4 @@
-﻿Imports System.Net
+﻿Imports System.Data.SqlClient
 
 Module Proceso
 
@@ -35,6 +35,32 @@ Module Proceso
     Public Function _EsPellital() As Boolean
         Return ClasesCompartidas.Globals.empresa.Equals("PELLITAL")
     End Function
+
+    Public Sub _PurgarSaldosCtaCtePrvs()
+        Dim ZSql = "Update CtaCtePrv set Saldo = 0 where Saldo > -0.01 and Saldo < 0.01 and Saldo <> 0"""
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand(ZSql)
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            'Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
 
     Public Function _NormalizarFilas(ByVal tabla As DataTable) As DataTable
 

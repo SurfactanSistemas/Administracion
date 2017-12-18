@@ -7,6 +7,8 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
         txtAyuda.Text = ""
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
+
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click

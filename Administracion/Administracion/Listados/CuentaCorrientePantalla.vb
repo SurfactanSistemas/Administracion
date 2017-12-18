@@ -20,6 +20,8 @@ Public Class CuentaCorrientePantalla
         pnlSelectivo.Visible = False
 
         GRilla.Columns(6).ValueType = GetType(Date)
+
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub _Proceso()

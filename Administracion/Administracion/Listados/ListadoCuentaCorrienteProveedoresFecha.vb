@@ -7,6 +7,8 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
         Label2.Text = Globals.NombreEmpresa()
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Text = "  /  /    "
+
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub txtfechaemision_KeyPress(ByVal sender As Object, _

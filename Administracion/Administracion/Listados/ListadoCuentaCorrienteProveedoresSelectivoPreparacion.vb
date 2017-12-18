@@ -13,6 +13,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         '_CargarProveedoresPreCargados()
 
         GRilla.Sort(GRilla.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub _CargarProveedoresPreCargados()
