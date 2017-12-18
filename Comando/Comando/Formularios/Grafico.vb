@@ -17,9 +17,11 @@ Public Class Grafico
             Close()
         End If
 
-        Chart1.Series.Clear()
-        Chart1.ResetAutoValues()
-        
+        With Chart1
+            .Series.Clear()
+            .ResetAutoValues()
+        End With
+
         Select Case Tipo
             Case 1
                 _ProcesarAcumulado()
@@ -27,8 +29,9 @@ Public Class Grafico
                 _ProcesarAcumuladoFamilia()
             Case 3
                 _ProcesarAnual()
+            Case Else
+                Close()
         End Select
-
 
     End Sub
 
@@ -36,29 +39,43 @@ Public Class Grafico
         
         Dim wacu = 0.0
 
-        For i = 1 To 12
-
-            If Not IsDBNull(Tabla.Rows(0).Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(Tabla.Rows(0).Item("Titulo" & i)) Then
-                Chart1.Series.Add(Tabla.Rows(0).Item("Titulo" & i))
-            End If
-
-        Next
-
-        For Each row As DataRow In Tabla.Rows
+        With Tabla.Rows(0)
 
             For i = 1 To 12
-                wacu = 0.0
-                If Not IsDBNull(row.Item("Valor" & i)) Then
-                    wacu = Val(Helper.formatonumerico(row.Item("Valor" & i)))
-                End If
 
-                If wacu <> 0 Then
+                If Not IsDBNull(.Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(.Item("Titulo" & i)) Then
 
-                    Chart1.Series(row.Item("Titulo" & i).ToString).Points.AddXY(row.Item(1), wacu)
+                    Chart1.Series.Add(.Item("Titulo" & i))
 
                 End If
 
             Next
+
+        End With
+
+        For Each row As DataRow In Tabla.Rows
+
+            With row
+
+                For i = 1 To 12
+
+                    wacu = 0.0
+
+                    If Not IsDBNull(.Item("Valor" & i)) Then
+
+                        wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
+
+                    End If
+
+                    If wacu <> 0 Then
+
+                        Chart1.Series(.Item("Titulo" & i).ToString).Points.AddXY(.Item(1), wacu)
+
+                    End If
+
+                Next
+
+            End With
 
             wacu = 0.0
 
@@ -74,21 +91,28 @@ Public Class Grafico
 
         For Each row As DataRow In Tabla.Rows
 
-            Chart1.Series.Add(row.Item(2))
+            With row
 
-            For i = 1 To 12
-                wacu = 0.0
-                If Not IsDBNull(row.Item("Valor" & i)) Then
-                    wacu = Val(Helper.formatonumerico(row.Item("Valor" & i)))
-                End If
+                Chart1.Series.Add(.Item(2))
 
-                If wacu <> 0 Then
+                For i = 1 To 12
 
-                    Chart1.Series(row.Item(2).ToString).Points.AddXY(row.Item(i + 15), wacu)
+                    wacu = 0.0
 
-                End If
+                    If Not IsDBNull(.Item("Valor" & i)) Then
+                        wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
+                    End If
 
-            Next
+
+                    If wacu <> 0 Then
+
+                        Chart1.Series(.Item(2).ToString).Points.AddXY(.Item(i + 15), wacu)
+
+                    End If
+
+                Next
+
+            End With
 
             wacu = 0.0
 
@@ -103,14 +127,18 @@ Public Class Grafico
 
         For Each row As DataRow In Tabla.Rows
 
-            Chart1.Series.Add(row.Item(1))
+            With row
 
-            For i = 1 To 12
-                wacu += IIf(IsDBNull(row.Item("Valor" & i)), 0, Val(Helper.formatonumerico(row.Item("Valor" & i))))
-            Next
+                Chart1.Series.Add(.Item(1))
 
-            Chart1.Series(row.Item(1).ToString).Points.AddXY(row.Item(1), wacu)
-            
+                For i = 1 To 12
+                    wacu += IIf(IsDBNull(.Item("Valor" & i)), 0, Val(Helper.formatonumerico(.Item("Valor" & i))))
+                Next
+
+                Chart1.Series(row.Item(1).ToString).Points.AddXY(.Item(1), wacu)
+
+            End With
+
             wacu = 0.0
 
         Next
@@ -124,20 +152,22 @@ Public Class Grafico
 
         For Each serie In Chart1.Series
 
-            If Chart1.Series(serie.Name).Points.Count > 1 Then
-                aux = Chart1.Series(serie.Name).Points.Sum(Function(p) p.YValues(0))
-            End If
-
+            With Chart1.Series(serie.Name).Points
+                If .Count > 1 Then
+                    aux = .Sum(Function(p) p.YValues(0))
+                End If
+            End With
 
             For Each p As DataPoint In serie.Points
 
-                p.IsValueShownAsLabel = True
-                p.CustomProperties = "DrawSideBySide=True"
+                With p
+                    .IsValueShownAsLabel = True
+                    .CustomProperties = "DrawSideBySide=True"
+                    If Chart1.Series(serie.Name).Points.Count > 1 Then
+                        .Label = .YValues(0) & " (% " & Helper.formatonumerico((.YValues(0) * 100) / aux) & " )"
+                    End If
+                End With
 
-                If Chart1.Series(serie.Name).Points.Count > 1 Then
-                    p.Label = p.YValues(0) & " (% " & Helper.formatonumerico((p.YValues(0) * 100) / aux) & " )"
-                End If
-                
             Next
         Next
 
@@ -145,9 +175,9 @@ Public Class Grafico
 
         gd.LineWidth = 0
 
-        Chart1.ChartAreas(0).AxisX.MajorGrid = gd
-
-        Chart1.ChartAreas(0).AxisX.Interval = 1
-
+        With Chart1.ChartAreas(0)
+            .AxisX.MajorGrid = gd
+            .AxisX.Interval = 1
+        End With
     End Sub
 End Class

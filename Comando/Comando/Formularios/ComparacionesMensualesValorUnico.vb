@@ -82,7 +82,6 @@ Public Class ComparacionesMensualesValorUnico
     End Function
 
     Private Function _ArmarTablaYDatos() As DataSet
-        Dim WAnio As Integer = 0
         Dim WMeses(12) As String
         Dim WAnios(12) As String
 
@@ -201,7 +200,6 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Sub _FormatearConsolidado(ByRef datos As DataTable)
         Dim _datos = datos.Copy
-        Dim Wtipo = 0
         Dim temp() As DataRow
         Dim aux = _ValoresComparables.Count(Function(v) v.Checked)
         Dim aux2 = 0.0
@@ -246,319 +244,6 @@ Public Class ComparacionesMensualesValorUnico
         _datos.Rows(0).Item("Descripcion") = "Consolidado"
 
         datos = _datos.Copy
-    End Sub
-
-    Private Function _BuscarDatosBrutosAnualComparativo(ByVal wMeses As Integer(), ByRef tabla As DataTable)
-        Dim tabla2 As DataTable = _CrearTablaDetalles()
-        Dim WCantMeses = (From m In wMeses Where m > 0).Count
-        Dim WCantAnios = ckAnios.CheckedItems.Count
-        Dim WCantFamilias = (From f In Familias() Where f.Checked).Count
-
-        ' Creamos una fila por mes.
-
-        For i = 1 To (WCantMeses * (WCantAnios / 2) * WCantFamilias)
-
-            tabla2.Rows.Add()
-
-        Next
-
-        ' recorremos las filas de la tabla original.
-        Dim WIndiceMes = 0, aux = 0
-
-        Dim WDescFamilias(7) As String
-
-        WDescFamilias(1) = "Químicos"
-        WDescFamilias(2) = "Colorantes"
-        WDescFamilias(3) = "Farma"
-        WDescFamilias(4) = "Fazón Pellital"
-        WDescFamilias(5) = "Fazón Farma"
-        WDescFamilias(6) = "Fazón Químicos"
-        WDescFamilias(7) = "Varios"
-
-        Dim rows() As DataRow
-        Dim WTotales() As Double
-
-        ' Recorremos las familias.
-        For i = 1 To 7
-
-            rows = tabla.Select("Tipo = " & i)
-
-            ' Calculamos los totales en caso de que se requiera como porcentaje.
-            If rbPorcentaje.Checked Then
-
-                ReDim WTotales(rows.Count)
-
-                For x = 0 To rows.Count - 1
-                    WTotales(x) = 0.0
-                Next
-
-                Dim aux2 = 0.0
-
-                For k = 0 To rows.Count - 1
-
-                    aux2 = 0.0
-
-                    For w = 1 To 12
-                        aux2 += Val(Helper.formatonumerico(rows(k).Item("Valor" & w)))
-                    Next
-
-                    WTotales(k) = Val(Helper.formatonumerico(aux2))
-
-                Next
-
-            End If
-
-            If rows.Count > 0 Then
-
-                For j = 0 To WCantAnios - 1
-
-                    WIndiceMes = aux
-
-                    For x = 1 To WCantMeses
-
-                        tabla2.Rows(WIndiceMes).Item("Tipo") = Str$(i)
-
-                        If rbPorcentaje.Checked Then
-                            ' ReSharper disable once VBWarnings::BC42104
-                            tabla2.Rows(WIndiceMes).Item("Valor" & j + 1) = (tabla.Rows(j).Item("Valor" & x) * 100) / WTotales(j)
-                        Else
-                            tabla2.Rows(WIndiceMes).Item("Valor" & j + 1) = tabla.Rows(j).Item("Valor" & x)
-                        End If
-
-                        tabla2.Rows(WIndiceMes).Item("Titulo" & j + 1) = Microsoft.VisualBasic.Right(Trim(rows(j).Item("Titulo" & x)), 4)
-                        tabla2.Rows(WIndiceMes).Item("Descripcion") = UCase(MonthName(x)) & " (" & (IIf(rbPorcentaje.Checked, "%", "$")) & ")"
-                        tabla2.Rows(WIndiceMes).Item("Titulo") = WDescFamilias(i)
-
-                        WIndiceMes += 1
-
-                    Next
-
-                Next
-
-                aux = WIndiceMes
-
-            End If
-
-        Next
-
-        tabla = tabla2.Copy
-
-        Return tabla
-    End Function
-
-    Private Sub _BuscarDatosBrutosAnual(ByVal wMeses As String(), ByVal wAnios() As String, ByVal WDatos As String(), ByRef tabla As DataTable)
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
-        Dim dr As SqlDataReader
-        'Dim tabla As DataTable
-        Dim row As DataRow
-        Dim rowIndex = 0
-        Dim WBuscarFamilias = _ArmarBuscarFamilias()
-        Dim WDatosABuscar = ""
-        Dim WMes = "", WMes2 = ""
-        Dim WAnio = "", WAnio2 = ""
-        Dim WValor = 0.0
-        Dim aux1 = 0, aux2 = 0
-
-        'tabla = _CrearTablaDetalles()
-        'tabla.Rows.Clear()
-
-        Try
-
-            cn.ConnectionString = Helper._ConectarA
-            cn.Open()
-
-            ' Recorremos los datos a pedir y cada dato
-
-            If Val(txtAnioDesde.Text) = Val(txtAnioHasta.Text) Then
-
-
-                ' Armamos la consulta de los campos a comparar para cada mes.
-                For j = 1 To 10
-
-                    ' Recorremos los meses pedidos.
-                    WDatosABuscar = ""
-                    For i = 0 To 11
-
-                        If wMeses(i) > -1 Then
-
-                            If Not IsNothing(WDatos(j)) OrElse WDatos(j) <> "" Then
-                                WDatosABuscar &= WDatos(j) & wMeses(i) & "+"
-                            End If
-
-                        End If
-
-                    Next
-
-                    ' Chequeamos que hayan datos que buscar.
-                    If Trim(WDatosABuscar) = "" Then
-                        Return
-                    End If
-
-                    ' Eliminamos el ultimo '+'.
-                    WDatosABuscar = WDatosABuscar.Substring(0, WDatosABuscar.Length - 1)
-
-
-                    ' Buscamos el registro correspondiente a ese mes y buscamos los datos de los meses, segun datos de mas arriba.
-                    WMes = ""
-                    ' Los meses y años se estan guardando como ' 1/ 2017 '
-                    WMes = " 1/ " & WAnio & " "
-
-                    cm.CommandText = "SELECT Tipo, Descripcion, (" & WDatosABuscar & ") as Total FROM ComandoII WHERE Impre1 = '" & WMes & "' and " & WBuscarFamilias
-
-                    cm.Connection = cn
-
-                    dr = cm.ExecuteReader()
-
-                    If dr.HasRows Then
-
-                        ' Agregamos una fila por cada familia.
-                        row = tabla.NewRow
-
-                        rowIndex = 0
-
-                        Do While dr.Read()
-                            row.Item("Corte") = Str$(j) & Str$(WAnio)
-                            row.Item("Tipo") = Val(Str$(j) & Str$(WAnio))
-                            row.Item("Descripcion") = WDatos(j)
-
-                            With row
-
-                                WValor = IIf(IsDBNull(dr.Item("Total")), 0.0, dr.Item("Total"))
-
-                                If WValor <> 0 Then
-                                    rowIndex += 1
-
-                                    .Item("Valor" & rowIndex) = WValor 'dr.Item("")
-                                    .Item("Titulo" & rowIndex) = dr.Item("Descripcion") 'WMes
-                                End If
-
-                            End With
-
-                        Loop
-
-                        tabla.Rows.Add(row)
-
-                    End If
-
-                    If Not dr.IsClosed Then
-                        dr.Close()
-                        dr = Nothing
-                    End If
-
-                Next
-
-            Else
-
-                WAnio = Trim(txtAnioDesde.Text)
-                WAnio2 = Trim(txtAnioHasta.Text)
-
-                ' Armamos la consulta de los campos a comparar para cada mes.
-                For j = 1 To 10
-
-                    ' Recorremos los meses pedidos.
-                    WDatosABuscar = ""
-                    For i = 0 To Val(txtMesDesde.Text)
-
-                        If wMeses(i) > -1 Then
-
-                            If Not IsNothing(WDatos(j)) OrElse WDatos(j) <> "" Then
-                                WDatosABuscar &= WDatos(j) & wMeses(i) & ","
-                            End If
-
-                            aux1 += 1
-                        End If
-
-                    Next
-
-                    aux2 = aux1 + 1
-
-                    For i = aux2 To Val(txtMesHasta.Text)
-
-                        If wMeses(i) > -1 Then
-
-                            If Not IsNothing(WDatos(j)) OrElse WDatos(j) <> "" Then
-                                WDatosABuscar &= WDatos(j) & wMeses(i) & ","
-                            End If
-
-                            aux2 += 1
-
-                        End If
-
-                    Next
-
-                    ' Chequeamos que hayan datos que buscar.
-                    If Trim(WDatosABuscar) = "" Then
-                        Return
-                    End If
-
-                    ' Eliminamos el ultimo ','.
-                    WDatosABuscar = WDatosABuscar.Substring(0, WDatosABuscar.Length - 1)
-
-
-                    ' Buscamos el registro correspondiente a ese mes y buscamos los datos de los meses, segun datos de mas arriba.
-                    WMes = ""
-                    ' Los meses y años se estan guardando como ' 1/ 2017 '
-                    WMes = " 1/ " & WAnio & " "
-
-                    WMes2 = " 1/ " & WAnio2 & " "
-
-                    cm.CommandText = "SELECT Tipo, Descripcion, " & WDatosABuscar & " FROM ComandoII WHERE (Impre1 = '" & WMes & "' OR Impre1 = '" & WMes2 & "') AND " & WBuscarFamilias
-
-                    cm.Connection = cn
-
-                    dr = cm.ExecuteReader()
-
-                    If dr.HasRows Then
-
-                        ' Agregamos una fila por cada familia.
-                        row = tabla.NewRow
-
-                        rowIndex = 0
-
-                        Do While dr.Read()
-
-                            WValor = 0.0
-
-                            row.Item("Corte") = Str$(j) & Str$(WAnio)
-                            row.Item("Tipo") = Val(Str$(j) & Str$(WAnio))
-                            row.Item("Descripcion") = WDatos(j)
-
-                            For i = 1 To aux1
-
-
-
-                            Next
-
-                        Loop
-
-                        tabla.Rows.Add(row)
-
-                    End If
-
-                    If Not dr.IsClosed Then
-                        dr.Close()
-                        dr = Nothing
-                    End If
-
-                Next
-
-            End If
-
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return
     End Sub
 
     Private Sub _BuscarDatosBrutos(ByVal wMeses() As String, ByVal WAnios() As String, ByVal WDatos As String(), ByRef tabla As DataTable)
@@ -828,9 +513,17 @@ Public Class ComparacionesMensualesValorUnico
             Case "PRECIO"
                 Return "Precio (U$S)"
             Case "PORCEVENTA"
-                Return "% Ventas"
+                Return "Ventas (%)"
             Case "PORCEATRASO"
-                Return "% Atrasos"
+                Return "Atrasos (%)"
+            Case "KILOS"
+                Return "Kilos (Kgs)"
+            Case "COSTO"
+                Return "Costo (U$S)"
+            Case "STOCK"
+                Return "Stock (Kgs)"
+            Case "PRECIO"
+                Return "Precio Promedio (U$S)"
             Case Else
                 Return columna
         End Select
@@ -1066,11 +759,8 @@ Public Class ComparacionesMensualesValorUnico
     End Function
 
     Private Sub btnGenerar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerar.Click
-
         Dim WReporte As ReportDocument = Nothing
         Dim tabla As DataSet
-        Dim valido As Boolean = _PeriodoValido()
-
 
         '
         ' VALIDAMOS QUE EL PERIODO SEA DE UN AÑO.
@@ -1181,10 +871,6 @@ Public Class ComparacionesMensualesValorUnico
         End If
 
         Return valido
-    End Function
-
-    Private Function _MesesElegidos() As Boolean
-        Return True '{ckEnero, ckFebrero, ckMarzo, ckAbril, ckMayo, ckJunio, ckJulio, ckAgosto, ckSeptiembre, ckOctubre, ckNoviembre, ckDiciembre}.Any(Function(ck) ck.Checked)
     End Function
 
     Private Sub ckTodosValores_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodosValores.CheckedChanged
