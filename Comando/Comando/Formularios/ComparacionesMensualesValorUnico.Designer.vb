@@ -423,7 +423,7 @@ Partial Class ComparacionesMensualesValorUnico
         'pnlAnios
         '
         Me.pnlAnios.Controls.Add(Me.GroupBox6)
-        Me.pnlAnios.Location = New System.Drawing.Point(38, 303)
+        Me.pnlAnios.Location = New System.Drawing.Point(120, 62)
         Me.pnlAnios.Name = "pnlAnios"
         Me.pnlAnios.Size = New System.Drawing.Size(374, 220)
         Me.pnlAnios.TabIndex = 9

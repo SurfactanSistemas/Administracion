@@ -1,10 +1,13 @@
-﻿Imports System.Windows.Forms.DataVisualization.Charting
+﻿Imports System.Text.RegularExpressions
+Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Windows.Forms.DataVisualization
 
 Public Class Grafico
     Public Property Tabla As DataTable
 
     Public Property Tipo As Integer
+
+    Public Property Titulo As String
 
     Private Sub Grafico_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         _ProcesarGrafico()
@@ -29,15 +32,78 @@ Public Class Grafico
                 _ProcesarAcumuladoFamilia()
             Case 3
                 _ProcesarAnual()
+            Case 4
+                _ProcesarComparativoMensual()
             Case Else
                 Close()
         End Select
 
     End Sub
 
+    Private Sub _ProcesarComparativoMensual()
+
+        Dim wacu = 0.0
+
+        Titulo = "Anual" & vbCrLf & " - "
+
+        For Each row As DataRow In Tabla.Rows
+
+            With row
+
+
+                If Not IsDBNull(.Item("Titulo1")) AndAlso Chart1.Series.IsUniqueName(Microsoft.VisualBasic.Right(Trim(.Item("Titulo1")), 4)) Then
+
+                    Chart1.Series.Add(Microsoft.VisualBasic.Right(Trim(.Item("Titulo1")), 4))
+
+                End If
+
+            End With
+
+        Next
+
+        For Each row As DataRow In Tabla.Rows
+
+            With row
+
+                For i = 1 To 12
+
+                    wacu = 0.0
+
+                    If Not IsDBNull(.Item("Valor" & i)) Then
+
+                        wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
+
+                    End If
+
+                    If wacu <> 0 Then
+                        
+                        Titulo &= " " & .Item(2) & ", "
+
+                        Chart1.Series(Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)).Points.AddXY(.Item("Titulo" & i), wacu)
+
+                    End If
+
+                Next
+
+            End With
+
+            wacu = 0.0
+
+        Next
+
+
+        ' Eliminamos la ultima coma
+        Titulo = ReplaceLastComma(UCase(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " -")
+
+        _HabilitarLabels()
+
+    End Sub
+
     Private Sub _ProcesarAnual()
         
         Dim wacu = 0.0
+
+        Titulo = "Anual" & vbCrLf & " - "
 
         With Tabla.Rows(0)
 
@@ -46,6 +112,8 @@ Public Class Grafico
                 If Not IsDBNull(.Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(.Item("Titulo" & i)) Then
 
                     Chart1.Series.Add(.Item("Titulo" & i))
+
+                    Titulo &= " " & .Item("Titulo" & i) & ", "
 
                 End If
 
@@ -81,6 +149,10 @@ Public Class Grafico
 
         Next
 
+
+        ' Eliminamos la ultima coma
+        Titulo = ReplaceLastComma(UCase(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " -")
+
         _HabilitarLabels()
         
     End Sub
@@ -88,6 +160,8 @@ Public Class Grafico
     Private Sub _ProcesarAcumuladoFamilia()
 
         Dim wacu = 0.0
+
+        Titulo = "Mensual por Linea" & vbCrLf & " - "
 
         For Each row As DataRow In Tabla.Rows
 
@@ -112,11 +186,17 @@ Public Class Grafico
 
                 Next
 
+                Titulo &= " " & .Item(2) & ", "
+
             End With
 
             wacu = 0.0
 
         Next
+
+
+        ' Eliminamos la ultima coma
+        Titulo = ReplaceLastComma(UCase(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " -")
 
         _HabilitarLabels()
 
@@ -124,6 +204,9 @@ Public Class Grafico
 
     Private Sub _ProcesarAcumulado()
         Dim wacu = 0.0
+        Dim aux = ""
+
+        Titulo = "Consolidado" & vbCrLf & " - "
 
         For Each row As DataRow In Tabla.Rows
 
@@ -132,7 +215,12 @@ Public Class Grafico
                 Chart1.Series.Add(.Item(1))
 
                 For i = 1 To 12
-                    wacu += IIf(IsDBNull(.Item("Valor" & i)), 0, Val(Helper.formatonumerico(.Item("Valor" & i))))
+
+                    If Not IsDBNull(.Item("Valor" & i)) Then
+                        wacu += Val(Helper.formatonumerico(.Item("Valor" & i)))
+                        Titulo &= " " & .Item("Titulo" & i) & ", "
+                    End If
+
                 Next
 
                 Chart1.Series(row.Item(1).ToString).Points.AddXY(.Item(1), wacu)
@@ -143,8 +231,16 @@ Public Class Grafico
 
         Next
 
+        ' Eliminamos la ultima coma
+        Titulo = ReplaceLastComma(UCase(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " -")
+
         _HabilitarLabels()
     End Sub
+
+    Private Function ReplaceLastComma(ByVal s As String)
+        Static re As New Regex("\s*,\s*([^,]*)$")
+        Return re.Replace(s, " y $1")
+    End Function
 
     Private Sub _HabilitarLabels()
 
@@ -178,6 +274,12 @@ Public Class Grafico
         With Chart1.ChartAreas(0)
             .AxisX.MajorGrid = gd
             .AxisX.Interval = 1
+        End With
+
+        With Chart1
+            .Titles.Clear()
+            .Titles.Add("Titulo")
+            .Titles(0).Text = Titulo
         End With
     End Sub
 End Class
