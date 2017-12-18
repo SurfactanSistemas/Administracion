@@ -19,9 +19,7 @@ Public Class Grafico
 
         Chart1.Series.Clear()
         Chart1.ResetAutoValues()
-        'Chart1.ChartAreas(0).AxisX.LabelStyle.Angle = -90
-
-
+        
         Select Case Tipo
             Case 1
                 _ProcesarAcumulado()
@@ -61,8 +59,6 @@ Public Class Grafico
                 End If
 
             Next
-
-            '_HabilitarLabels(row.Item("Titulo" & i))
 
             wacu = 0.0
 
@@ -124,12 +120,24 @@ Public Class Grafico
 
     Private Sub _HabilitarLabels()
 
+        Dim aux = 0.0
+
         For Each serie In Chart1.Series
+
+            If Chart1.Series(serie.Name).Points.Count > 1 Then
+                aux = Chart1.Series(serie.Name).Points.Sum(Function(p) p.YValues(0))
+            End If
+
+
             For Each p As DataPoint In serie.Points
 
                 p.IsValueShownAsLabel = True
                 p.CustomProperties = "DrawSideBySide=True"
 
+                If Chart1.Series(serie.Name).Points.Count > 1 Then
+                    p.Label = p.YValues(0) & " (% " & Helper.formatonumerico((p.YValues(0) * 100) / aux) & " )"
+                End If
+                
             Next
         Next
 

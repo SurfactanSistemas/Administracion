@@ -25,6 +25,7 @@ Partial Class Grafico
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataPoint1 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0.0R, 0.0R)
         Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -48,6 +49,8 @@ Partial Class Grafico
         Series1.IsXValueIndexed = True
         Series1.Legend = "Legend1"
         Series1.Name = "Series1"
+        DataPoint1.Label = "#LEGENDTEXT"
+        Series1.Points.Add(DataPoint1)
         Me.Chart1.Series.Add(Series1)
         Me.Chart1.Size = New System.Drawing.Size(784, 277)
         Me.Chart1.TabIndex = 12
