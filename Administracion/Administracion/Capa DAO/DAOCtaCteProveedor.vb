@@ -8,7 +8,7 @@ Public Class DAOCtaCteProveedor
         Dim referencia As String
 
         intereses = Convert.ToDecimal(cuenta.Cells("Intereses").Value)
-        iva = Convert.ToDecimal(cuenta.Cells("IvaIntereses").Value)
+        iva = Convert.ToDecimal(cuenta.Cells("ivaIntereses").Value)
         referencia = cuenta.Cells("Referencia").Value
 
         If (validarModifcacionIntereses(cuenta, tipoMov, intereses, iva, referencia)) Then

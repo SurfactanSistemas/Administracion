@@ -4,17 +4,17 @@ Public Class CargaIntereses
 
     Private Sub CargaIntereses_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
-        Dim gridBuilder As New GridBuilder(gridCtaCte)
+        'Dim gridBuilder As New GridBuilder(gridCtaCte)
 
-        gridBuilder.addDateColumn(0, "Fecha")
-        gridBuilder.addTextColumn(1, "Razón")
-        gridBuilder.addTextColumn(2, "Factura")
-        gridBuilder.addNumericColumn(3, "Cuota")
-        gridBuilder.addDateColumn(4, "Vencimiento")
-        gridBuilder.addFloatColumn(5, "Saldo")
-        gridBuilder.addFloatColumn(6, "Intereses")
-        gridBuilder.addFloatColumn(7, "Iva Int.")
-        gridBuilder.addTextColumn(8, "Referencia")
+        'gridBuilder.addDateColumn(0, "Fecha")
+        'gridBuilder.addTextColumn(1, "Razón")
+        'gridBuilder.addTextColumn(2, "Factura")
+        'gridBuilder.addNumericColumn(3, "Cuota")
+        'gridBuilder.addDateColumn(4, "Vencimiento")
+        'gridBuilder.addFloatColumn(5, "Saldo")
+        'gridBuilder.addFloatColumn(6, "Intereses")
+        'gridBuilder.addFloatColumn(7, "Iva Int.")
+        'gridBuilder.addTextColumn(8, "Referencia")
 
         CargarIntereses()
     End Sub
