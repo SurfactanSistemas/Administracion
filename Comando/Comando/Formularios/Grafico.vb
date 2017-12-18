@@ -77,8 +77,6 @@ Public Class Grafico
 
                     If wacu <> 0 Then
                         
-                        Titulo &= " " & .Item(2) & ", "
-
                         Chart1.Series(Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)).Points.AddXY(.Item("Titulo" & i), wacu)
 
                     End If
@@ -91,6 +89,7 @@ Public Class Grafico
 
         Next
 
+        Titulo &= " " & Tabla.Rows(0).Item(2) & ", "
 
         ' Eliminamos la ultima coma
         Titulo = ReplaceLastComma(UCase(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " -")
