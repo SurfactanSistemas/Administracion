@@ -52,8 +52,13 @@ Public Class CarpetasPagos
 
     Private Function _ObtenerConnectionString(ByVal _Empresa As String)
         Dim cs = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString
+        Dim Wrem = "SurfactanSA"
 
-        Return cs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & _Empresa) '"Data Source=193.168.0.7;Initial Catalog=" & _Empresa & ";User ID=usuarioadmin; Password=usuarioadmin"
+        If Proceso._EsPellital Then
+            Wrem = "Pellital_III"
+        End If
+
+        Return cs.Replace("Catalog=" & Wrem, "Catalog=" & _Empresa) '"Data Source=193.168.0.7;Initial Catalog=" & _Empresa & ";User ID=usuarioadmin; Password=usuarioadmin"
     End Function
 
     Private Sub CarpetasPagos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown

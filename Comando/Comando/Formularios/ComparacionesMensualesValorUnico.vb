@@ -83,6 +83,7 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _ArmarTablaYDatos() As DataSet
         Dim WMeses(12) As String
+        Dim WMesesCompletos(12) As String
         Dim WAnios(12) As String
 
         Dim datos As DataTable = _CrearTablaDetalles()
@@ -91,7 +92,7 @@ Public Class ComparacionesMensualesValorUnico
         '
         ' Obtenemos los meses con los cuales trabajar.
         '
-        _TraerMesesAConsultar(WMeses, WAnios)
+        _TraerMesesAConsultar(WMeses, WAnios, WMesesCompletos)
 
         '
         ' Obtenemos el año por el cual se van a traer los datos.
@@ -148,16 +149,47 @@ Public Class ComparacionesMensualesValorUnico
 
         End Select
 
+        '
+        ' Traemos datos restantes para mostrar debajo de los graficos.
+        '
+        Dim datos_restantes = datos.Copy
+
+        datos_restantes.Clear()
+        datos_restantes.TableName = "Detalles2"
+
+        WDatos(1) = "Venta"
+
+        WDatos(2) = "Kilos"
+
+        WDatos(3) = "Factor"
+
+        WDatos(4) = "Precio"
+
+        WDatos(5) = "Stock"
+
+        WDatos(6) = "Rotacion"
+
+        WDatos(7) = "PorceVenta"
+
+        WDatos(8) = "Pedidos"
+
+        WDatos(9) = "Atraso"
+
+        WDatos(10) = "PorceAtraso"
+
+        _BuscarDatosBrutos(WMesesCompletos, WAnios, WDatos, datos_restantes)
+
+        ds.Tables.Add(datos_restantes)
+
         Return ds
 
     End Function
 
     Private Sub _BuscarDatosComparativoMensual(ByVal anio As Object, ByVal wDatos As String(), ByRef datos As DataTable)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("")
         Dim dr As SqlDataReader
-        Dim tabla As DataTable = datos.Copy
         Dim row As DataRow
         Dim rowIndex = 0
         Dim ZCorte = 0
@@ -332,7 +364,6 @@ Public Class ComparacionesMensualesValorUnico
         Dim temp() As DataRow
         Dim aux = _ValoresComparables.Count(Function(v) v.Checked)
         Dim aux2 = 0.0
-        Dim WMesInicial = "", WMesFinal = ""
 
         _datos.Rows.Clear()
 
@@ -469,7 +500,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                         WDato = WDatos(j) & Trim(wMeses(i))
 
-                                        .Item("Valor" & rowIndex) = dr.Item(WDato)
+                                        .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(dr.Item(WDato)))
                                         .Item("Titulo" & rowIndex) = WMes
 
                                     End If
@@ -572,7 +603,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                         WDato = WDatos(j) & Trim(wMeses(i))
 
-                                        .Item("Valor" & rowIndex) = dr.Item(WDato)
+                                        .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(dr.Item(WDato)))
                                         .Item("Titulo" & rowIndex) = WMes
 
                                     End If
@@ -594,7 +625,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                             WDato = WDatos(j) & Trim(wMeses(aux2))
 
-                                            .Item("Valor" & rowIndex) = dr.Item(WDato)
+                                            .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(dr.Item(WDato)))
                                             .Item("Titulo" & rowIndex) = WMes
 
                                             aux2 += 1
@@ -718,7 +749,7 @@ Public Class ComparacionesMensualesValorUnico
         Return WDatos
     End Function
 
-    Private Sub _TraerMesesAConsultar(ByRef WMeses() As String, ByRef WAnios() As String)
+    Private Sub _TraerMesesAConsultar(ByRef WMeses() As String, ByRef WAnios() As String, ByRef WMesesCompletos() As String)
         ReDim WMeses(12)
         ReDim WAnios(12)
 
@@ -757,7 +788,7 @@ Public Class ComparacionesMensualesValorUnico
             Dim aux1 = 0, aux2 = 0
 
             If WAnioInicial > WAnioFinal Then
-                Throw New Exception("Las fechas deben correlativas.")
+                Throw New Exception("Las fechas deben ser correlativas.")
             End If
 
             ' Calculamos la cantidad de meses del primer año.
@@ -787,6 +818,15 @@ Public Class ComparacionesMensualesValorUnico
 
                 WIndice += 1
             Next
+
+        End If
+
+        WMesesCompletos = WMeses
+
+        If WMesesCompletos(WIndice - 1) < Val(txtMesHasta.Text) Then
+
+            WMesesCompletos(WIndice) = txtMesHasta.Text
+            WIndice += 1
 
         End If
 
@@ -835,55 +875,6 @@ Public Class ComparacionesMensualesValorUnico
 
     End Function
 
-    Private Function _TraerReporteMensual()
-
-        Dim seleccionados = ValoresComparables().Count(Function(ck) ck.Checked)
-
-        ' Por defecto, en caso de comparaciones anuales es solamente en Barras.
-        If cmbPeriodo.SelectedIndex = 1 Then
-            Return New AnualPorFamiliaBarras
-        End If
-
-        If cmbPeriodo.SelectedIndex = 2 Then
-            Return New MensualComparativoBarras
-        Else
-            rbMonto.Checked = True
-        End If
-
-        If seleccionados > 1 And Not ckConsolidado.Checked Then ' Seleccionamos tipo de grafico 'Linea' cuando es mas de un valor
-            cmbTipoGrafico.SelectedIndex = 1
-        End If
-
-        Select Case cmbTipoGrafico.SelectedIndex
-            Case 0 ' Barras
-
-                'EN CASO DE QUE HAYA MAS DE UNA FAMILIA, PUEDE PASAR DOS COSAS: QUE SEAN SOLO DOS O QUE SEAN MAS DE DOS.
-
-                ' EN CUALQUIER OTRO CASO, RETORNAREMOS EL GRAFICO COMUN DE MES/AÑO POR BARRA.
-
-                Return New MensualPorFamiliaBarras
-
-            Case 1 ' Lineas
-
-                'EN CASO DE QUE HAYA MAS DE UNA FAMILIA, PUEDE PASAR DOS COSAS: QUE SEAN SOLO DOS O QUE SEAN MAS DE DOS.
-
-                ' EN CUALQUIER OTRO CASO, RETORNAREMOS EL GRAFICO COMUN DE MES/AÑO POR BARRA.
-
-                Return New MensualPorFamiliaLineas
-
-            Case Else
-
-                Return Nothing
-
-        End Select
-
-    End Function
-
-    Private Function ValoresComparables() As CheckBox()
-
-        Return {ckVenta, ckAtrasados, ckFactor, ckKilos, ckPedidos, ckPorcentajeAtrasos, ckPrecio, ckRotacion, ckStock, ckPorcentaje}
-    End Function
-
     Private Function Familias() As CheckBox()
 
         Return {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios}
@@ -913,12 +904,6 @@ Public Class ComparacionesMensualesValorUnico
         End If
         
         '
-        ' BUSCAMOS EL RPT SEGUN TIPO DE COMPARACION Y TIPO DE GRAFICO INDICADO.
-        '
-
-        WReporte = _TraerReporteMensual()
-
-        '
         ' BUSCAMOS LOS DATOS CON LOS CUALES TRABAJAR.
         '
 
@@ -931,23 +916,14 @@ Public Class ComparacionesMensualesValorUnico
             Exit Sub
         End Try
 
-        '
-        '   VALIDAMOS QUE HAYAN DATOS Y RPT PARA PODER GENERAR LOS REPORTES.
-        '
-
-        If WReporte Is Nothing Then
-            MsgBox("Debe indicarse un tipo de Gráfico válido.", MsgBoxStyle.Exclamation)
-            Exit Sub
-        End If
-
         If tabla Is Nothing Then : Exit Sub : End If
 
         'DataGridView1.DataSource = tabla
 
         With Grafico
             .Tabla = tabla.Tables(0)
-
-
+            .TablaGrilla = tabla.Tables(1)
+            
             Select Case cmbPeriodo.SelectedIndex
                 Case 0 ' Mensual
 

@@ -1483,7 +1483,13 @@ Public Class Compras
 
         For Each Empresa As String In Empresas
 
-            Dim cn As New SqlConnection(csTemplate.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & Empresa))
+            Dim Wrem = "SurfactanSA"
+
+            If Proceso._EsPellital Then
+                Wrem = "Pellital_III"
+            End If
+
+            Dim cn As New SqlConnection(csTemplate.Replace("Catalog=" & Wrem, "Catalog=" & Empresa))
             Dim cm As New SqlCommand("SELECT TOP 1 Informe FROM Informe WHERE Remito = '" & remitoPrueba & "' and Proveedor = '" & Trim(txtCodigoProveedor.Text) & "'")
             Dim dr As SqlDataReader
 
@@ -1495,7 +1501,7 @@ Public Class Compras
 
                 If dr.HasRows Then
 
-                    cs = csTemplate.Replace("#EMPRESA#", Empresa)
+                    cs = csTemplate.Replace("Catalog=" & Wrem, "Catalog=" & Empresa)
 
                 End If
 

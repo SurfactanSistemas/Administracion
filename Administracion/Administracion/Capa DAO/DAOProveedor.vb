@@ -106,7 +106,13 @@ Public Class DAOProveedor
 
         For Each _Empresa In _Empresas
 
-            Dim cs = Xcs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & _Empresa)
+            Dim Wrem = "SurfactanSA"
+
+            If Proceso._EsPellital Then
+                Wrem = "Pellital_III"
+            End If
+
+            Dim cs = Xcs.Replace("Catalog=" & Wrem, "Catalog=" & _Empresa)
 
             Try
                 cn.ConnectionString = cs
@@ -142,8 +148,13 @@ Public Class DAOProveedor
         For Each _Empresa As String In _Empresas
 
             Try
+                Dim Wrem = "SurfactanSA"
 
-                cn.ConnectionString = Xcs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & Trim(_Empresa))
+                If Proceso._EsPellital Then
+                    Wrem = "Pellital_III"
+                End If
+
+                cn.ConnectionString = Xcs.Replace("Catalog=" & Wrem, "Catalog=" & Trim(_Empresa))
                 cn.Open()
 
                 cm.Connection = cn

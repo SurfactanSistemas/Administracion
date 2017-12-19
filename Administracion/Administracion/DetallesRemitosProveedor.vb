@@ -339,8 +339,13 @@ Public Class DetallesRemitosProveedor
 
     Private Function _ConnectionString(ByVal empresa As String) As String
         Dim cs = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString
+        Dim Wrem = "SurfactanSA"
 
-        Return cs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & empresa) '"Data Source=193.168.0.7;Initial Catalog=" + empresa + ";User ID=usuarioadmin; Password=usuarioadmin"
+        If Proceso._EsPellital Then
+            Wrem = "Pellital_III"
+        End If
+
+        Return cs.Replace("Catalog=" & Wrem, "Catalog=" & empresa) '"Data Source=193.168.0.7;Initial Catalog=" + empresa + ";User ID=usuarioadmin; Password=usuarioadmin"
     End Function
 
     Private Sub _Imprimir(ByVal crdoc As ReportDocument)

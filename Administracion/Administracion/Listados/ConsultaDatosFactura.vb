@@ -95,7 +95,14 @@ Public Class ConsultaDatosFactura
         ' Busco el informe segun empresa.
         For Each _Empresa As String In _Empresas
             'XCs = cs.Replace("#EMPRESA#", _Empresa)
-            XCs = cs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & _Empresa)
+
+            Dim Wrem = "SurfactanSA"
+
+            If Proceso._EsPellital Then
+                Wrem = "Pellital_III"
+            End If
+
+            XCs = cs.Replace("Catalog=" & Wrem, "Catalog=" & _Empresa)
 
             Try
 

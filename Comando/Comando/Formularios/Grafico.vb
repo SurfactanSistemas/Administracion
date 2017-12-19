@@ -5,6 +5,8 @@ Imports System.Windows.Forms.DataVisualization
 Public Class Grafico
     Public Property Tabla As DataTable
 
+    Public Property TablaGrilla As DataTable
+
     Public Property Tipo As Integer
 
     Public Property Titulo As String
@@ -38,6 +40,50 @@ Public Class Grafico
                 Close()
         End Select
 
+        TablaGrilla.DefaultView.Sort = "Tipo ASC, Descripcion ASC"
+
+        With DataGridView1
+
+            .DataSource = TablaGrilla.DefaultView
+
+            Dim linea = ""
+
+            For Each row As DataGridViewRow In .Rows
+
+                If linea <> Trim(row.Cells(1).Value) Then
+                    linea = Trim(row.Cells(1).Value)
+                    Continue For
+                End If
+
+                row.Cells(1).Value = ""
+
+            Next
+
+            '
+            ' Cambiamos los nombres de las columnas con los valores de las fechas en las que se realizó la consulta.
+            '
+
+            For i = 4 To 15
+
+                .Columns(i).HeaderText = "- - -"
+
+                If Not IsDBNull(DataGridView1.Rows(0).Cells(i + 12).Value) Then
+                    .Columns(i).HeaderText = Trim(DataGridView1.Rows(0).Cells(i + 12).Value)
+                End If
+
+                .Columns(i + 12).Visible = False
+                .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            Next
+
+            .Columns(0).Visible = False
+            .Columns(3).Visible = False
+
+            .Sort(.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+            .CurrentCell = .Rows(0).Cells(1)
+            .Focus()
+
+        End With
     End Sub
 
     Private Sub _ProcesarComparativoMensual()

@@ -209,8 +209,13 @@ Public Class ProveedoresABM
         ' Recorrer todos las plantas y actualizar en cada ocurrencia.
 
         For Each _Empresa In _Empresas
+            Dim Wrem = "SurfactanSA"
 
-            Dim cs = Xcs.Replace("Catalog=" & ClasesCompartidas.Globals.empresa, "Catalog=" & _Empresa)
+            If Proceso._EsPellital Then
+                Wrem = "Pellital_III"
+            End If
+
+            Dim cs = Xcs.Replace("Catalog=" & Wrem, "Catalog=" & _Empresa)
 
             Try
                 cn.ConnectionString = cs
