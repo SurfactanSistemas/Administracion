@@ -52,10 +52,10 @@ Partial Class Grafico
         DataPoint1.Label = "#LEGENDTEXT"
         Series1.Points.Add(DataPoint1)
         Me.Chart1.Series.Add(Series1)
-        Me.Chart1.Size = New System.Drawing.Size(784, 277)
+        Me.Chart1.Size = New System.Drawing.Size(784, 278)
         Me.Chart1.TabIndex = 12
         Me.Chart1.Text = "Chart1"
-        Title1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Title1.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Title1.Name = "Title1"
         Title1.Text = "Prueba de Gráficos"
         Me.Chart1.Titles.Add(Title1)

@@ -332,6 +332,7 @@ Public Class ComparacionesMensualesValorUnico
         Dim temp() As DataRow
         Dim aux = _ValoresComparables.Count(Function(v) v.Checked)
         Dim aux2 = 0.0
+        Dim WMesInicial = "", WMesFinal = ""
 
         _datos.Rows.Clear()
 
@@ -340,7 +341,7 @@ Public Class ComparacionesMensualesValorUnico
         For i = 1 To aux
             _datos.Rows(0).Item("Valor" & i) = 0
         Next
-
+        
         For i = 1 To 7
 
             temp = datos.Select("Tipo = '" & i & "'")
@@ -371,6 +372,7 @@ Public Class ComparacionesMensualesValorUnico
         Next
 
         _datos.Rows(0).Item("Descripcion") = "Consolidado"
+        _datos.Rows(0).Item("Titulo") = txtMesDesde.Text & "/" & txtAnioDesde.Text & " al " & txtMesHasta.Text & "/" & txtAnioHasta.Text
 
         datos = _datos.Copy
     End Sub
@@ -455,7 +457,7 @@ Public Class ComparacionesMensualesValorUnico
                                 .Item("Tipo") = IIf(WCantDatos = 1, ZCorte, dr.Item("Tipo"))
                                 .Item("Descripcion") = dr.Item("Descripcion")
                                 .Item("Corte") = ZCorte
-                                .Item("Titulo") = UCase(_NombreValorSegunColumna(WDatos(j)))
+                                .Item("Titulo") = _NombreValorSegunColumna(WDatos(j))
 
                                 For i = 0 To 11
 
@@ -558,7 +560,7 @@ Public Class ComparacionesMensualesValorUnico
                                 .Item("Tipo") = IIf(WCantDatos = 1, ZCorte, dr.Item("Tipo"))
                                 .Item("Descripcion") = dr.Item("Descripcion")
                                 .Item("Corte") = ZCorte
-                                .Item("Titulo") = UCase(_NombreValorSegunColumna(WDatos(j)))
+                                .Item("Titulo") = _NombreValorSegunColumna(WDatos(j))
 
                                 For i = 0 To aux1
 
@@ -1064,10 +1066,38 @@ Public Class ComparacionesMensualesValorUnico
                 btnSeleccionarAnios.Visible = True
                 btnSeleccionarAnios.PerformClick()
 
+                For Each ck As CheckBox In _ValoresComparables()
+                    ck.Checked = False
+
+                    If _ValoresComparables.Count(Function(_ck) _ck.Checked) = 1 Then
+                        Exit For
+                    End If
+
+                Next
+
+                For Each ck As CheckBox In Familias()
+                    ck.Checked = False
+
+                    If Familias.Count(Function(_ck) _ck.Checked) = 1 Then
+                        Exit For
+                    End If
+
+                Next
+
+                If ckConsolidado.Checked Then
+                    ckConsolidado.Checked = False
+                End If
+
+
+                If ckTodosValores.Checked Then
+                    ckTodosValores.Checked = False
+                End If
+
             Case Else
 
                 btnSeleccionarAnios.Visible = False
                 Button1.PerformClick()
+                
 
         End Select
 
@@ -1162,6 +1192,9 @@ Public Class ComparacionesMensualesValorUnico
                 Exit Sub
 
             End If
+
+            cmbPeriodo.DroppedDown = True
+            cmbPeriodo.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtAnioHasta.Text = ""

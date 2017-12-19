@@ -44,7 +44,7 @@ Public Class Grafico
 
         Dim wacu = 0.0
 
-        Titulo = "Anual" & vbCrLf & " - "
+        Titulo = "COMPARATIVO ENTRE PERIODOS" & vbCrLf & " - "
 
         For Each row As DataRow In Tabla.Rows
 
@@ -102,7 +102,7 @@ Public Class Grafico
         
         Dim wacu = 0.0
 
-        Titulo = "Anual" & vbCrLf & " - "
+        Titulo = "COMPARACION ANUAL" & vbCrLf & " - "
 
         With Tabla.Rows(0)
 
@@ -160,7 +160,7 @@ Public Class Grafico
 
         Dim wacu = 0.0
 
-        Titulo = "Mensual por Linea" & vbCrLf & " - "
+        Titulo = "COMPARATIVO MENSUAL" & vbCrLf & " - " & Tabla.Rows(0).Item(1).ToString.Trim & " -" & vbCrLf & "( "
 
         For Each row As DataRow In Tabla.Rows
 
@@ -195,7 +195,7 @@ Public Class Grafico
 
 
         ' Eliminamos la ultima coma
-        Titulo = ReplaceLastComma(UCase(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " -")
+        Titulo = ReplaceLastComma(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " )"
 
         _HabilitarLabels()
 
@@ -205,7 +205,9 @@ Public Class Grafico
         Dim wacu = 0.0
         Dim aux = ""
 
-        Titulo = "Consolidado" & vbCrLf & " - "
+        Titulo = "CONSOLIDADO" & vbCrLf & " - "
+
+        Titulo &= Tabla.Rows(0).Item("Titulo") & " -" & vbCrLf & "("
 
         For Each row As DataRow In Tabla.Rows
 
@@ -231,7 +233,7 @@ Public Class Grafico
         Next
 
         ' Eliminamos la ultima coma
-        Titulo = ReplaceLastComma(UCase(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " -")
+        Titulo = ReplaceLastComma(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " )"
 
         _HabilitarLabels()
     End Sub
@@ -279,6 +281,7 @@ Public Class Grafico
             .Titles.Clear()
             .Titles.Add("Titulo")
             .Titles(0).Text = Titulo
+            .Titles(0).Font = New Font(FontFamily.GenericSansSerif, 12, GraphicsUnit.Point)
         End With
     End Sub
 End Class
