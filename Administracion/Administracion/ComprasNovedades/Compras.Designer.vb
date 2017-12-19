@@ -23,16 +23,15 @@ Partial Class Compras
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.chkSoloIVA = New System.Windows.Forms.CheckBox()
         Me.gbTipo = New System.Windows.Forms.GroupBox()
         Me.optNacion = New System.Windows.Forms.RadioButton()
         Me.optCtaCte = New System.Windows.Forms.RadioButton()
         Me.optEfectivo = New System.Windows.Forms.RadioButton()
         Me.gridAsientos = New System.Windows.Forms.DataGridView()
-        Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Debito = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Credito = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -98,6 +97,10 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
+        Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Debito = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Credito = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -172,30 +175,6 @@ Partial Class Compras
         Me.gridAsientos.Size = New System.Drawing.Size(734, 286)
         Me.gridAsientos.TabIndex = 52
         '
-        'Cuenta
-        '
-        Me.Cuenta.HeaderText = "Cuenta"
-        Me.Cuenta.Name = "Cuenta"
-        '
-        'Descripcion
-        '
-        Me.Descripcion.HeaderText = "Descripción"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        Me.Descripcion.Width = 350
-        '
-        'Debito
-        '
-        Me.Debito.HeaderText = "Débito"
-        Me.Debito.Name = "Debito"
-        Me.Debito.Width = 120
-        '
-        'Credito
-        '
-        Me.Credito.HeaderText = "Crédito"
-        Me.Credito.Name = "Credito"
-        Me.Credito.Width = 120
-        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -211,7 +190,7 @@ Partial Class Compras
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(613, 10)
+        Me.Label2.Location = New System.Drawing.Point(613, 12)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -222,7 +201,7 @@ Partial Class Compras
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(27, 15)
+        Me.Label1.Location = New System.Drawing.Point(27, 16)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(295, 19)
         Me.Label1.TabIndex = 0
@@ -1119,6 +1098,36 @@ Partial Class Compras
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'Cuenta
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Cuenta.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Cuenta.HeaderText = "Cuenta"
+        Me.Cuenta.Name = "Cuenta"
+        '
+        'Descripcion
+        '
+        Me.Descripcion.HeaderText = "Descripción"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        Me.Descripcion.Width = 350
+        '
+        'Debito
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Debito.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Debito.HeaderText = "Débito"
+        Me.Debito.Name = "Debito"
+        Me.Debito.Width = 120
+        '
+        'Credito
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Credito.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Credito.HeaderText = "Crédito"
+        Me.Credito.Name = "Credito"
+        Me.Credito.Width = 120
+        '
         'Compras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1203,10 +1212,6 @@ Partial Class Compras
     Friend WithEvents btnAgregar As Administracion.CustomButton
     Friend WithEvents btnConsulta As Administracion.CustomButton
     Friend WithEvents btnApertura As Administracion.CustomButton
-    Friend WithEvents Cuenta As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Debito As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Credito As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lblDebito As Administracion.CustomLabel
     Friend WithEvents lblCredito As Administracion.CustomLabel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
@@ -1222,4 +1227,8 @@ Partial Class Compras
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents CustomButton1 As Administracion.CustomButton
     Friend WithEvents ckChequeRechazado As System.Windows.Forms.CheckBox
+    Friend WithEvents Cuenta As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Debito As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Credito As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -17,7 +17,7 @@ Public Class Compras
 
     Dim commonEventsHandler As New CommonEventsHandler
 
-    Private Sub Compras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Compras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
         Label2.Text = Globals.NombreEmpresa()
         Dim gridBuilder As New GridBuilder(gridAsientos)
 
@@ -64,7 +64,7 @@ Public Class Compras
         apertura = New Apertura
         esModificacion = False
         diasPlazo = 0
-
+        
         _RetIB1 = ""
         _RetIB2 = ""
         _RetIB3 = ""
@@ -1889,15 +1889,6 @@ Public Class Compras
     End Function
 
     Private Sub Compras_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-
-        With gridAsientos
-            _AlinearDerecha(.Columns("Cuenta"))
-            _AlinearDerecha(.Columns("Debito"))
-            _AlinearDerecha(.Columns("Credito"))
-        End With
-
-        CBLetra.SelectedItem = "A"
-        cmbTipo.SelectedItem = "FC"
         txtCodigoProveedor.Focus()
     End Sub
 
