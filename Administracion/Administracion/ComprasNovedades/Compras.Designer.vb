@@ -32,6 +32,10 @@ Partial Class Compras
         Me.optCtaCte = New System.Windows.Forms.RadioButton()
         Me.optEfectivo = New System.Windows.Forms.RadioButton()
         Me.gridAsientos = New System.Windows.Forms.DataGridView()
+        Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Debito = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Credito = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -97,10 +101,6 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
-        Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Debito = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Credito = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -174,6 +174,36 @@ Partial Class Compras
         Me.gridAsientos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.gridAsientos.Size = New System.Drawing.Size(734, 286)
         Me.gridAsientos.TabIndex = 52
+        '
+        'Cuenta
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Cuenta.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Cuenta.HeaderText = "Cuenta"
+        Me.Cuenta.Name = "Cuenta"
+        '
+        'Descripcion
+        '
+        Me.Descripcion.HeaderText = "Descripción"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        Me.Descripcion.Width = 350
+        '
+        'Debito
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Debito.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Debito.HeaderText = "Débito"
+        Me.Debito.Name = "Debito"
+        Me.Debito.Width = 120
+        '
+        'Credito
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Credito.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Credito.HeaderText = "Crédito"
+        Me.Credito.Name = "Credito"
+        Me.Credito.Width = 120
         '
         'Panel1
         '
@@ -1097,36 +1127,6 @@ Partial Class Compras
         Me.btnLimpiar.TabIndex = 55
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'Cuenta
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Cuenta.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Cuenta.HeaderText = "Cuenta"
-        Me.Cuenta.Name = "Cuenta"
-        '
-        'Descripcion
-        '
-        Me.Descripcion.HeaderText = "Descripción"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        Me.Descripcion.Width = 350
-        '
-        'Debito
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Debito.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Debito.HeaderText = "Débito"
-        Me.Debito.Name = "Debito"
-        Me.Debito.Width = 120
-        '
-        'Credito
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Credito.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Credito.HeaderText = "Crédito"
-        Me.Credito.Name = "Credito"
-        Me.Credito.Width = 120
         '
         'Compras
         '
