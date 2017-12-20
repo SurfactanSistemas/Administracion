@@ -256,22 +256,28 @@ Public Class Grafico
 
         Titulo &= Tabla.Rows(0).Item("Titulo") & " -" & vbCrLf & "("
 
+        'For i = 1 To 12
+
+        '    Chart1.Series.Add(Tabla.Rows(0).Item("Titulo" & i))
+
+        'Next
+
+        Chart1.Series.Add("Consolidado")
+
         For Each row As DataRow In Tabla.Rows
 
             With row
 
-                Chart1.Series.Add(.Item(1))
-
                 For i = 1 To 12
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
-                        wacu += Val(Helper.formatonumerico(.Item("Valor" & i)))
+                        wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
                         Titulo &= " " & .Item("Titulo" & i) & ", "
                     End If
 
-                Next
+                    Chart1.Series("Consolidado").Points.AddXY(.Item("Titulo" & i), wacu)
 
-                Chart1.Series(row.Item(1).ToString).Points.AddXY(.Item(1), wacu)
+                Next
 
             End With
 

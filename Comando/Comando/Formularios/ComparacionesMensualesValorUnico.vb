@@ -250,7 +250,7 @@ Public Class ComparacionesMensualesValorUnico
 
                 WMes = " 1/ " & WAnio & " "
 
-                cm.CommandText = "SELECT Linea, Tipo, DesTipo as Descripcion, " & WValoresABuscar & " FROM ComandoDatosII WHERE Tipo IN (" & WDatosABuscar & ") and " & WBuscarFamilias & " AND Ano = '" & WAnio & "'"
+                cm.CommandText = "SELECT Linea, Tipo, DesTipo as Descripcion, " & WValoresABuscar & " FROM ComandoDatosII WHERE Tipo IN (" & WDatosABuscar & ") and " & WBuscarFamilias & " AND Ano = '" & WAnio & "' order by linea, ano, tipo"
 
                 cm.Connection = cn
 
@@ -373,35 +373,42 @@ Public Class ComparacionesMensualesValorUnico
 
         _datos.Rows.Add()
 
-        For i = 1 To aux
+        For i = 1 To 12
             _datos.Rows(0).Item("Valor" & i) = 0
         Next
         
-        For i = 1 To 7
+        For i = 1 To 12
 
-            temp = datos.Select("Tipo = '" & i & "'")
+            For Each row As DataRow In datos.Rows
 
-            If temp.Count > 0 Then
+                _datos.Rows(0).Item("Valor" & i) += IIf(IsDBNull(row.Item("Valor" & i)), 0, row.Item("Valor" & i))
+                _datos.Rows(0).Item("Titulo" & i) = IIf(IsDBNull(row.Item("Titulo" & i)), 0, row.Item("Titulo" & i))
 
-                For x = 1 To aux
+            Next
 
-                    aux2 = 0.0
+            'temp = datos.Select("Tipo = '" & i & "'")
 
-                    For z = 1 To 12
+            'If temp.Count > 0 Then
 
-                        aux2 += IIf(IsDBNull(temp(x - 1).Item("Valor" & z)), 0, temp(x - 1).Item("Valor" & z))
+            '    For x = 1 To aux
 
-                    Next
+            '        aux2 = 0.0
 
-                    If Not IsDBNull(temp(x - 1).Item("Titulo")) Then
-                        _datos.Rows(0).Item("Titulo" & x) = temp(x - 1).Item("Titulo")
-                    End If
+            '        For z = 1 To 12
 
-                    _datos.Rows(0).Item("Valor" & x) += aux2
+            '            aux2 += IIf(IsDBNull(temp(x - 1).Item("Valor" & z)), 0, temp(x - 1).Item("Valor" & z))
 
-                Next
+            '        Next
 
-            End If
+            '        If Not IsDBNull(temp(x - 1).Item("Titulo")) Then
+            '            _datos.Rows(0).Item("Titulo" & x) = temp(x - 1).Item("Titulo")
+            '        End If
+
+            '        _datos.Rows(0).Item("Valor" & x) += aux2
+
+            '    Next
+
+            'End If
 
 
         Next
@@ -478,7 +485,7 @@ Public Class ComparacionesMensualesValorUnico
 
                     WAnio = Trim(WAnios(0))
                     
-                    cm.CommandText = "SELECT Linea, Tipo, DesTipo as Descripcion, " & WValoresABuscar & " FROM ComandoDatosII WHERE Ano = '" & WAnio & "' AND " & WBuscarFamilias & " AND Tipo in (" & WDatosABuscar & ")"
+                    cm.CommandText = "SELECT Linea, Tipo, DesTipo as Descripcion, " & WValoresABuscar & " FROM ComandoDatosII WHERE Ano = '" & WAnio & "' AND " & WBuscarFamilias & " AND Tipo in (" & WDatosABuscar & ") order by linea, ano, tipo"
 
                     cm.Connection = cn
 
@@ -602,7 +609,7 @@ Public Class ComparacionesMensualesValorUnico
                     WMes = " 1/ " & WAnio & " "
                     Dim WAnio2 = Trim(txtAnioHasta.Text)
 
-                    cm.CommandText = "SELECT Linea, Tipo, DesTipo as Descripcion, " & WValoresABuscar & " FROM ComandoDatosII WHERE Ano IN ('" & WAnio & "', '" & WAnio2 & "') AND " & WBuscarFamilias & " AND Tipo in (" & WDatosABuscar & ") ORDER BY Linea, Ano"
+                    cm.CommandText = "SELECT Linea, Tipo, DesTipo as Descripcion, " & WValoresABuscar & " FROM ComandoDatosII WHERE Ano IN ('" & WAnio & "', '" & WAnio2 & "') AND " & WBuscarFamilias & " AND Tipo in (" & WDatosABuscar & ") ORDER BY Linea, Ano, tipo"
 
                     cm.Connection = cn
 
@@ -1069,7 +1076,7 @@ Public Class ComparacionesMensualesValorUnico
                 cmbTipoGrafico.SelectedIndex = 0
                 btnSeleccionarAnios.Visible = False
                 Button1.PerformClick()
-                ckConsolidado.Checked = False
+                ckConsolidado.Checked = True
 
             Case 2
                 btnSeleccionarAnios.Visible = True
