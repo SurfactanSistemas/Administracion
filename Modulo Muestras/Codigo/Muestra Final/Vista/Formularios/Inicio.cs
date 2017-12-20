@@ -471,8 +471,9 @@ namespace Vista
 
             if (lote.Trim() == "" || (!newRow["Codigo"].ToString().StartsWith("DY") && int.Parse(lote) == 0))
             {
-                if (newRow["Codigo"].ToString().StartsWith("YF"))
-                    throw new Exception("Los YF deben tener lote asignado antes de poder imprimir sus respectivas etiquetas.");
+                // EB - 20/12/2017 - Autoriza a destrabar.
+                //if (newRow["Codigo"].ToString().StartsWith("YF"))
+                //    throw new Exception("Los YF deben tener lote asignado antes de poder imprimir sus respectivas etiquetas.");
 
                 lote = "Pedido: " + DGV_Muestra.SelectedRows[i].Cells["Pedido"].Value.ToString().Trim();
             }
@@ -613,7 +614,7 @@ namespace Vista
                     }
                     else {
 
-                        if (!DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("ML") && !DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YP"))
+                        if (!DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("ML") && !DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YP") && !DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YF"))
                         {
 
                             int _lote1 = int.Parse(CS.BuscarLote1(cod, pedido));
