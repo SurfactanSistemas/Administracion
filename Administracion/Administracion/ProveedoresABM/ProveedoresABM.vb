@@ -818,9 +818,9 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub _TraerProveedor(ByVal nombre As String)
-        Dim proveedor As List(Of Proveedor) = DAOProveedor.buscarProveedorPorNombre(nombre)
+        Dim proveedor As List(Of Proveedor) = DAOProveedor.buscarProveedorPorNombre(Trim(nombre))
 
-        If Not IsNothing(proveedor) Then
+        If Not IsNothing(proveedor) AndAlso proveedor.Count > 0 Then
 
             mostrarProveedor(proveedor(0))
 
