@@ -20,6 +20,7 @@ Public Class Grafico
         If Tabla.Rows.Count = 0 Then
             MsgBox("No hay datos que graficar.", MsgBoxStyle.Exclamation)
             Close()
+            Exit Sub
         End If
 
         With Chart1
@@ -81,7 +82,7 @@ Public Class Grafico
 
             .Sort(.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
             .CurrentCell = .Rows(0).Cells(1)
-            .Focus()
+            '.Focus()
 
         End With
     End Sub
