@@ -13,6 +13,11 @@ Public Class Grafico
 
     Private Sub Grafico_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         _ProcesarGrafico()
+
+        For Each column As DataGridViewColumn In DataGridView1.Columns
+            column.SortMode = DataGridViewColumnSortMode.NotSortable
+        Next
+
     End Sub
 
     Public Sub _ProcesarGrafico()
@@ -43,48 +48,89 @@ Public Class Grafico
 
         TablaGrilla.DefaultView.Sort = "Tipo ASC, Descripcion ASC"
 
-        With DataGridView1
+        If TablaGrilla.Rows.Count > 0 Then
 
-            .DataSource = TablaGrilla.DefaultView
 
-            Dim linea = ""
+            With DataGridView1
 
-            For Each row As DataGridViewRow In .Rows
+                .DataSource = TablaGrilla.DefaultView
 
-                If linea <> Trim(row.Cells(1).Value) Then
-                    linea = Trim(row.Cells(1).Value)
-                    Continue For
+                Dim linea = ""
+
+                If Tipo = 1 Then
+
+                    .Columns(0).Visible = False
+                    .Columns(2).Visible = False
+                    .Columns(3).Visible = False
+
+                Else
+
+                    For Each row As DataGridViewRow In .Rows
+
+                        If linea <> Trim(row.Cells(1).Value) Then
+                            linea = Trim(row.Cells(1).Value)
+                            Continue For
+                        End If
+
+                        row.Cells(1).Value = ""
+
+                    Next
+
                 End If
 
-                row.Cells(1).Value = ""
 
-            Next
+                '
+                ' Cambiamos los nombres de las columnas con los valores de las fechas en las que se realizó la consulta.
+                '
 
-            '
-            ' Cambiamos los nombres de las columnas con los valores de las fechas en las que se realizó la consulta.
-            '
+                If Tipo = 1 Then
 
-            For i = 4 To 15
+                    For i = 4 To 15
 
-                .Columns(i).HeaderText = "- - -"
+                        .Columns(i).HeaderText = "- - -"
 
-                If Not IsDBNull(DataGridView1.Rows(0).Cells(i + 12).Value) Then
-                    .Columns(i).HeaderText = Trim(DataGridView1.Rows(0).Cells(i + 12).Value)
+                        If Not IsDBNull(DataGridView1.Rows(1).Cells(i + 12).Value) Then
+                            .Columns(i).HeaderText = Trim(DataGridView1.Rows(1).Cells(i + 12).Value)
+                        End If
+
+                        .Columns(i + 12).Visible = False
+                        .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                    Next
+
+                Else
+
+
+                    For i = 4 To 15
+
+                        .Columns(i).HeaderText = "- - -"
+
+                        If Not IsDBNull(DataGridView1.Rows(0).Cells(i + 12).Value) Then
+                            .Columns(i).HeaderText = Trim(DataGridView1.Rows(0).Cells(i + 12).Value)
+                        End If
+
+                        .Columns(i + 12).Visible = False
+                        .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                    Next
                 End If
 
-                .Columns(i + 12).Visible = False
-                .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                If Tipo = 1 Then
+                    .Sort(.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+                    .CurrentCell = .Rows(0).Cells("Descripcion")
+                Else
+                    .Columns(0).Visible = False
+                    .Columns(3).Visible = False
+                    .Sort(.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+                    .CurrentCell = .Rows(0).Cells(1)
+                End If
 
-            Next
+                '.Focus()
 
-            .Columns(0).Visible = False
-            .Columns(3).Visible = False
+            End With
 
-            .Sort(.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
-            .CurrentCell = .Rows(0).Cells(1)
-            '.Focus()
+        End If
 
-        End With
     End Sub
 
     Private Sub _ProcesarComparativoMensual()
@@ -98,11 +144,14 @@ Public Class Grafico
             With row
 
 
-                If Not IsDBNull(.Item("Titulo1")) AndAlso Chart1.Series.IsUniqueName(Microsoft.VisualBasic.Right(Trim(.Item("Titulo1")), 4)) Then
+                For i = 1 To 12
+                    If Not IsDBNull(.Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)) Then
 
-                    Chart1.Series.Add(Microsoft.VisualBasic.Right(Trim(.Item("Titulo1")), 4))
+                        Chart1.Series.Add(Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4))
 
-                End If
+                    End If
+                Next
+
 
             End With
 
@@ -254,7 +303,7 @@ Public Class Grafico
 
         Titulo = "CONSOLIDADO" & vbCrLf & " - "
 
-        Titulo &= Tabla.Rows(0).Item("Titulo") & " -" & vbCrLf & "("
+        Titulo &= Tabla.Rows(0).Item("Titulo") & " -" ' & vbCrLf & "("
 
         'For i = 1 To 12
 
@@ -262,7 +311,13 @@ Public Class Grafico
 
         'Next
 
-        Chart1.Series.Add("Consolidado")
+        For Each row As DataRow In Tabla.Rows
+            If Not IsDBNull(row.Item("Descripcion")) AndAlso Chart1.Series.IsUniqueName(row.Item("Descripcion")) Then
+                Chart1.Series.Add(row.Item("Descripcion"))
+            End If
+        Next
+
+        Dim serie = ""
 
         For Each row As DataRow In Tabla.Rows
 
@@ -272,10 +327,11 @@ Public Class Grafico
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
                         wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
-                        Titulo &= " " & .Item("Titulo" & i) & ", "
                     End If
 
-                    Chart1.Series("Consolidado").Points.AddXY(.Item("Titulo" & i), wacu)
+                    If wacu <> 0 And (Not IsDBNull(.Item("Descripcion")) AndAlso Trim(.Item("Descripcion")) <> "") Then
+                        Chart1.Series(.Item("Descripcion")).Points.AddXY(.Item("Titulo" & i), wacu)
+                    End If
 
                 Next
 
@@ -285,8 +341,8 @@ Public Class Grafico
 
         Next
 
-        ' Eliminamos la ultima coma
-        Titulo = ReplaceLastComma(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " )"
+        '' Eliminamos la ultima coma
+        'Titulo = ReplaceLastComma(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " )"
 
         _HabilitarLabels()
     End Sub
@@ -314,7 +370,7 @@ Public Class Grafico
                     .IsValueShownAsLabel = True
                     .CustomProperties = "DrawSideBySide=True"
                     If Chart1.Series(serie.Name).Points.Count > 1 Then
-                        .Label = .YValues(0) & " (% " & Helper.formatonumerico((.YValues(0) * 100) / aux) & " )"
+                        .Label = "% " & Helper.formatonumerico((.YValues(0) * 100) / aux)
                     End If
                 End With
 
@@ -336,5 +392,72 @@ Public Class Grafico
             .Titles(0).Text = Titulo
             .Titles(0).Font = New Font(FontFamily.GenericSansSerif, 12, GraphicsUnit.Point)
         End With
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+        With ComparacionesMensualesValorUnico
+            .WindowState = FormWindowState.Normal
+            .Focus()
+            .txtMesDesde.Focus()
+        End With
+
+    End Sub
+
+    Private Sub DataGridView1_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.RowHeaderMouseDoubleClick
+
+        If Tipo = 1 Then
+
+
+            Dim WRow() = TablaGrilla.Select("Descripcion = '" & TablaGrilla.Rows(e.RowIndex).Item(1) & "'")
+            Dim WCols As DataColumnCollection = TablaGrilla.Columns
+            Dim tabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
+
+            With Chart1
+
+                .Series.Clear()
+                .ResetAutoValues()
+            End With
+
+
+            Chart1.Series.Add(tabla(e.RowIndex).Item(1))
+
+            For i = 4 To 15
+
+                If Not IsDBNull(tabla(e.RowIndex).Item(i)) AndAlso tabla(e.RowIndex).Item(i) <> 0 Then
+                    Chart1.Series(tabla(e.RowIndex).Item(1).ToString).Points.AddXY(tabla(e.RowIndex).Item(i + 12), tabla(e.RowIndex).Item(i))
+                End If
+            Next
+
+            _HabilitarLabels()
+
+        End If
+
+    End Sub
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+
+        For Each serie As Series In Chart1.Series
+
+            serie.ChartType = DataVisualization.Charting.SeriesChartType.Line
+
+        Next
+
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        For Each serie As Series In Chart1.Series
+
+            serie.ChartType = DataVisualization.Charting.SeriesChartType.Pie
+
+        Next
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        For Each serie As Series In Chart1.Series
+
+            serie.ChartType = DataVisualization.Charting.SeriesChartType.Column
+
+        Next
     End Sub
 End Class
