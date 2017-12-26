@@ -1768,7 +1768,7 @@ Public Class RecibosProvisorios
             If MsgBox("¿Desea eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
                 Dim row As DataGridViewRow = gridRecibos.CurrentRow
 
-                _ClavesCheques.RemoveAll(Function(_c) _c(1) = row.Cells(5).Value)
+                _ClavesCheques.RemoveAll(Function(_c) _c(1) = row.Cells("ClaveCheque").Value)
 
                 gridRecibos.Rows.Remove(row)
 
