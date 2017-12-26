@@ -1,4 +1,4 @@
-﻿Imports System.Text.RegularExpressions
+﻿
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Windows.Forms.DataVisualization
 
@@ -175,7 +175,7 @@ Public Class Grafico
                     End If
 
                     If wacu <> 0 Then
-                        
+
                         Chart1.Series(Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)).Points.AddXY(.Item("Titulo" & i), wacu)
 
                     End If
@@ -188,36 +188,16 @@ Public Class Grafico
 
         Next
 
-        Titulo &= " " & Tabla.Rows(0).Item(2) & ", "
-
-        ' Eliminamos la ultima coma
-        Titulo = ReplaceLastComma(UCase(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " -")
-
         _HabilitarLabels()
 
     End Sub
 
     Private Sub _ProcesarAnual()
-        
+
         Dim wacu = 0.0
 
-        Titulo = "COMPARACION ANUAL" & vbCrLf & " - "
+        Titulo = "COMPARACION ANUAL"
 
-        With Tabla.Rows(0)
-
-            For i = 1 To 12
-
-                If Not IsDBNull(.Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(.Item("Titulo" & i)) Then
-
-                    Chart1.Series.Add(.Item("Titulo" & i))
-
-                    Titulo &= " " & .Item("Titulo" & i) & ", "
-
-                End If
-
-            Next
-
-        End With
 
         For Each row As DataRow In Tabla.Rows
 
@@ -247,19 +227,15 @@ Public Class Grafico
 
         Next
 
-
-        ' Eliminamos la ultima coma
-        Titulo = ReplaceLastComma(UCase(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " -")
-
         _HabilitarLabels()
-        
+
     End Sub
 
     Private Sub _ProcesarAcumuladoFamilia()
 
         Dim wacu = 0.0
 
-        Titulo = "COMPARATIVO MENSUAL" & vbCrLf & " - " & Tabla.Rows(0).Item(1).ToString.Trim & " -" & vbCrLf & "( "
+        Titulo = "COMPARATIVO MENSUAL" & vbCrLf & " - " & Tabla.Rows(0).Item(1).ToString.Trim & " -"
 
         For Each row As DataRow In Tabla.Rows
 
@@ -284,17 +260,11 @@ Public Class Grafico
 
                 Next
 
-                Titulo &= " " & .Item(2) & ", "
-
             End With
 
             wacu = 0.0
 
         Next
-
-
-        ' Eliminamos la ultima coma
-        Titulo = ReplaceLastComma(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " )"
 
         _HabilitarLabels()
 
@@ -337,11 +307,6 @@ Public Class Grafico
 
         _HabilitarLabels()
     End Sub
-
-    Private Function ReplaceLastComma(ByVal s As String)
-        Static re As New Regex("\s*,\s*([^,]*)$")
-        Return re.Replace(s, " y $1")
-    End Function
 
     Private Sub _HabilitarLabels()
 
@@ -396,6 +361,74 @@ Public Class Grafico
                 If Not IsDBNull(tabla(e.RowIndex).Item(i)) AndAlso tabla(e.RowIndex).Item(i) <> 0 Then
                     Chart1.Series(tabla(e.RowIndex).Item(1).ToString).Points.AddXY(tabla(e.RowIndex).Item(i + 12), tabla(e.RowIndex).Item(i))
                 End If
+            Next
+
+            _HabilitarLabels()
+
+        ElseIf Tipo = 3 Then
+
+            With Chart1
+
+                .Series.Clear()
+                .ResetAutoValues()
+
+            End With
+
+            Dim valor = ""
+
+            valor = DataGridView1.CurrentRow.Cells(2).Value
+
+            Chart1.Series.Add(valor)
+
+            Dim aux = 0.0, WA = "", WLinea = ""
+
+            For Each r As DataGridViewRow In DataGridView1.Rows
+
+                WA = IIf(IsDBNull(r.Cells(1).Value), "", r.Cells(1).Value)
+
+                If WA <> WLinea And WA <> "" Then
+                    WLinea = WA
+                End If
+
+                If r.Cells(2).Value = valor Then
+
+                    aux = 0.0
+
+                    For i = 4 To 15
+
+                        aux += IIf(IsDBNull(r.Cells(i).Value), 0, r.Cells(i).Value)
+
+                    Next
+
+                    Chart1.Series(valor).Points.AddXY(WLinea, aux)
+
+
+                End If
+
+            Next
+
+            _HabilitarLabels()
+
+        Else
+
+
+            Dim tabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
+
+            With Chart1
+
+                .Series.Clear()
+                .ResetAutoValues()
+
+            End With
+
+            Chart1.Series.Add(tabla(e.RowIndex).Item(2))
+
+            For i = 4 To 15
+
+                If Not IsDBNull(tabla(e.RowIndex).Item(i)) AndAlso tabla(e.RowIndex).Item(i) <> 0 Then
+                    Chart1.Series(tabla(e.RowIndex).Item(2).ToString).Points.AddXY(tabla(e.RowIndex).Item(i + 12), tabla(e.RowIndex).Item(i))
+                End If
+
             Next
 
             _HabilitarLabels()
