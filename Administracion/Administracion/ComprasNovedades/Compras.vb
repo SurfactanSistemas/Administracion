@@ -518,7 +518,7 @@ Public Class Compras
                                  asDouble(txtParidad.Text, 4), asDouble(txtNeto.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA21.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtIVARG.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA27.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtPercIB.Text) * multiplicadorPorNotaDeCredito, asDouble(txtNoGravado.Text) * multiplicadorPorNotaDeCredito,
-                                 asDouble(txtIVA10.Text) * multiplicadorPorNotaDeCredito, asDouble(txtTotal.Text) * multiplicadorPorNotaDeCredito, chkSoloIVA.Checked,
+                                 asDouble(txtIVA10.Text) * multiplicadorPorNotaDeCredito, asDouble(txtTotal.Text) * multiplicadorPorNotaDeCredito, IIf(chkSoloIVA.Checked, 1, 0),
                                  txtRemito.Text, txtDespacho.Text, asDouble(_RetIB1), asDouble(_RetIB2), asDouble(_RetIB3), asDouble(_RetIB4), asDouble(_RetIB5), asDouble(_RetIB6), asDouble(_RetIB7), asDouble(_RetIB8), asDouble(_RetIB9), asDouble(_RetIB10), asDouble(_RetIB11), asDouble(_RetIB12), asDouble(_RetIB13), asDouble(_RetIB14))
         crearImputaciones(compra)
         Return compra
@@ -829,8 +829,45 @@ Public Class Compras
         traerValoresIb(compra.nroInterno)
         txtImporte_Leave(Nothing, Nothing)
         mostrarImputaciones(compra.imputaciones)
+
+        ckChequeRechazado.Checked = _BuscarRechazado(compra.nroInterno)
+
         calcularAsiento()
     End Sub
+
+    Private Function _BuscarRechazado(ByVal nroInterno As Integer) As Boolean
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Rechazado FROM IvaComp WHERE NroInterno = '" & nroInterno & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                Return IIf(IsDBNull(dr.Item("Rechazado")), False, Val(dr.Item("Rechazado")) = 1)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
 
     Private Sub traerValoresIb(ByVal nroInterno As String)
 
@@ -2385,6 +2422,8 @@ Public Class Compras
         If MsgBox("¿Seguro que quiere eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then : Exit Sub : End If
 
         gridAsientos.Rows.Remove(row)
+
+        calcularAsiento()
 
     End Sub
 
