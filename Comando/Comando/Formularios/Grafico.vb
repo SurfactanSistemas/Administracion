@@ -60,7 +60,7 @@ Public Class Grafico
 
                 Dim linea = ""
 
-                If Tipo = 1 Then
+                If Tipo = -1 Then
 
                     .Columns(0).Visible = False
                     .Columns(2).Visible = False
@@ -86,7 +86,7 @@ Public Class Grafico
                 ' Cambiamos los nombres de las columnas con los valores de las fechas en las que se realizó la consulta.
                 '
 
-                If Tipo = 1 Then
+                If Tipo = -1 Then
 
                     For i = 4 To 15
 
@@ -118,7 +118,7 @@ Public Class Grafico
                     Next
                 End If
 
-                If Tipo = 1 Then
+                If Tipo = -1 Then
                     .Sort(.Columns(1), System.ComponentModel.ListSortDirection.Descending)
                     .CurrentCell = .Rows(0).Cells("Descripcion")
                 Else
@@ -349,7 +349,7 @@ Public Class Grafico
 
     Private Sub DataGridView1_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.RowHeaderMouseDoubleClick
 
-        If Tipo = 1 Then
+        If Tipo = -1 Then
 
             Dim tabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
 
@@ -457,6 +457,55 @@ Public Class Grafico
 
                     Next
 
+                End If
+
+            Next
+
+            _HabilitarLabels()
+
+
+        ElseIf Tipo = 1 Then
+
+            With Chart1
+
+                .Series.Clear()
+                .ResetAutoValues()
+
+            End With
+
+            Dim valor = ""
+
+            valor = DataGridView1.CurrentRow.Cells(2).Value
+
+            Dim aux = 0.0, WA = "", WLinea = ""
+
+            
+            For i = 4 To 15
+
+                aux = 0.0
+                WA = ""
+                WLinea = ""
+
+                For Each r As DataGridViewRow In DataGridView1.Rows
+
+                    If r.Cells(2).Value = valor Then
+
+                        If Chart1.Series.IsUniqueName(valor) Then
+                            Chart1.Series.Add(valor)
+                        End If
+
+                        aux += IIf(IsDBNull(r.Cells(i).Value), 0, r.Cells(i).Value)
+
+                        If Not IsDBNull(r.Cells(i + 12).Value) Then
+                            WLinea = r.Cells(i + 12).Value
+                        End If
+
+                    End If
+
+                Next
+
+                If Trim(WLinea) <> "" Then
+                    Chart1.Series(valor).Points.AddXY(WLinea, aux)
                 End If
 
             Next

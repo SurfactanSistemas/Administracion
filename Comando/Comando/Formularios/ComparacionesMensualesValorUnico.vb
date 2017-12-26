@@ -171,9 +171,9 @@ Public Class ComparacionesMensualesValorUnico
         If cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked Then
 
             ' Si es consolidado, rearmamos la tabla con los totales por valor comparable.
-            If ckConsolidado.Checked Then
-                _FormatearConsolidado(datos_restantes, _ValoresComparables.Count, True)
-            End If
+            'If ckConsolidado.Checked Then
+            '    _FormatearConsolidado(datos_restantes, _ValoresComparables.Count, True)
+            'End If
 
         End If
 
