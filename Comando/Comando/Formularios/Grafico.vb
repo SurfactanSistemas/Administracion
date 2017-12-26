@@ -215,6 +215,10 @@ Public Class Grafico
 
                     If wacu <> 0 Then
 
+                        If Not IsDBNull(.Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(.Item("Titulo" & i)) Then
+                            Chart1.Series.Add(.Item("Titulo" & i))
+                        End If
+
                         Chart1.Series(.Item("Titulo" & i).ToString).Points.AddXY(.Item(1), wacu)
 
                     End If
@@ -241,7 +245,9 @@ Public Class Grafico
 
             With row
 
-                Chart1.Series.Add(.Item(2))
+                If Not IsDBNull(.Item(2)) AndAlso Chart1.Series.IsUniqueName(.Item(2)) Then
+                    Chart1.Series.Add(.Item(1))
+                End If
 
                 For i = 1 To 12
 
@@ -254,7 +260,7 @@ Public Class Grafico
 
                     If wacu <> 0 Then
 
-                        Chart1.Series(.Item(2).ToString).Points.AddXY(.Item(i + 15), wacu)
+                        Chart1.Series(.Item(1).ToString).Points.AddXY(.Item(i + 15), wacu)
 
                     End If
 
@@ -402,6 +408,54 @@ Public Class Grafico
 
                     Chart1.Series(valor).Points.AddXY(WLinea, aux)
 
+
+                End If
+
+            Next
+
+            _HabilitarLabels()
+
+        ElseIf Tipo = 2 Then
+
+
+            With Chart1
+
+                .Series.Clear()
+                .ResetAutoValues()
+
+            End With
+
+            Dim valor = ""
+
+            valor = DataGridView1.CurrentRow.Cells(2).Value
+
+            Dim aux = 0.0, WA = "", WLinea = ""
+
+            For Each r As DataGridViewRow In DataGridView1.Rows
+
+                WA = IIf(IsDBNull(r.Cells(1).Value), "", r.Cells(1).Value)
+
+                If WA <> WLinea And WA <> "" Then
+                    WLinea = WA
+                End If
+
+                If r.Cells(2).Value = valor Then
+
+                    If Chart1.Series.IsUniqueName(WLinea) Then
+                        Chart1.Series.Add(WLinea)
+                    End If
+
+                    aux = 0.0
+
+                    For i = 4 To 15
+
+                        aux = IIf(IsDBNull(r.Cells(i).Value), 0, r.Cells(i).Value)
+
+                        If Not IsDBNull(r.Cells(i + 12).Value) Then
+                            Chart1.Series(WLinea).Points.AddXY(r.Cells(i + 12).Value, aux)
+                        End If
+
+                    Next
 
                 End If
 

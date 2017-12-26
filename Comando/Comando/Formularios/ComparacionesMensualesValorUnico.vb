@@ -519,7 +519,7 @@ Public Class ComparacionesMensualesValorUnico
 
             For x = 0 To datos.Rows.Count - 1
 
-                If x <> 0 AndAlso x Mod 7 = 0 Then
+                If x <> 0 AndAlso x Mod corte = 0 Then
                     aux2 += 1
                 End If
 
@@ -1715,23 +1715,23 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Sub ckFamilias_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckQuimicos.CheckedChanged, ckColorantes.CheckedChanged, ckFarma.CheckedChanged, ckFazonFarma.CheckedChanged, ckFazonPellital.CheckedChanged, ckFazonQuimicos.CheckedChanged, ckVarios.CheckedChanged, ckPapel.CheckedChanged, ckBiocidas.CheckedChanged
 
-        Dim control As CheckBox = sender
+        'Dim control As CheckBox = sender
 
-        If (_EsComparacionMensual() And Not ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 2 Then
+        'If (_EsComparacionMensual() And Not ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 2 Then
 
-            For Each ck As CheckBox In Familias()
+        '    For Each ck As CheckBox In Familias()
 
-                If control.Checked = False Then
-                    Exit For
-                End If
+        '        If control.Checked = False Then
+        '            Exit For
+        '        End If
 
-                If control.Name <> ck.Name Then
-                    ck.Checked = False
-                End If
+        '        If control.Name <> ck.Name Then
+        '            ck.Checked = False
+        '        End If
 
-            Next
+        '    Next
 
-        End If
+        'End If
 
     End Sub
 
