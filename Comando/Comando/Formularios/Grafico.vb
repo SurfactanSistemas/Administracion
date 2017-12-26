@@ -46,12 +46,15 @@ Public Class Grafico
                 Close()
         End Select
 
-        TablaGrilla.DefaultView.Sort = "Tipo ASC, Descripcion ASC"
+        TablaGrilla.DefaultView.Sort = "Tipo ASC, Corte ASC"
 
         If TablaGrilla.Rows.Count > 0 Then
 
-
             With DataGridView1
+
+                For Each c As DataGridViewColumn In .Columns
+                    c.Visible = True
+                Next
 
                 .DataSource = TablaGrilla.DefaultView
 
@@ -125,7 +128,7 @@ Public Class Grafico
                     .CurrentCell = .Rows(0).Cells(1)
                 End If
 
-                '.Focus()
+                .Focus()
 
             End With
 

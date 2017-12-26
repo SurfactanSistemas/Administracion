@@ -601,7 +601,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(635, 357)
+        Me.ClientSize = New System.Drawing.Size(628, 353)
         Me.Controls.Add(Me.GroupBox8)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.DataGridView1)
@@ -614,8 +614,6 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Controls.Add(Me.pnlAnios)
         Me.Location = New System.Drawing.Point(10, 10)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(651, 396)
-        Me.MinimumSize = New System.Drawing.Size(651, 396)
         Me.Name = "ComparacionesMensualesValorUnico"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Comando"

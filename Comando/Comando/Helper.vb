@@ -167,16 +167,24 @@ Module Helper
 
     End Function
 
-    Public Function formatonumerico(ByVal valor As String)
+    Public Function formatonumerico(ByVal valor As String, Optional ByVal decimales As Integer = 2)
         Dim _valor As Double = 0
+        Dim formato = "########0."
 
         valor = IIf(Trim(valor) = "", "0", Trim(valor))
 
         valor = valor.Replace(".", ",")
 
-        ' Redondeamos a dos decimales con "." como separador de decimales.
-        _valor = FormatNumber(CDbl(valor), 2)
-        Return formatonumerico(_valor, "########0.#0", ".")
+        ' Redondeamos a los decimales indicados con "." como separador de decimales.
+        _valor = FormatNumber(CDbl(valor), decimales)
+
+        For i = 1 To decimales - 1
+            formato &= "#"
+        Next
+
+        formato &= "0"
+
+        Return formatonumerico(_valor, formato, ".")
 
     End Function
 
