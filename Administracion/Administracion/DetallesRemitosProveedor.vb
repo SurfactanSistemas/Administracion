@@ -236,11 +236,14 @@ Public Class DetallesRemitosProveedor
 
                         cantRecibida = 0.0
 
-                        dr.Read()
-                        cantRecibida += Val(_FormatearDecimales(dr.Item(0).ToString()))
+                        Do While dr.Read()
 
-                        fApr = dr.Item(2)
+                            cantRecibida += Val(_FormatearDecimales(dr.Item(0).ToString()))
 
+                            fApr = dr.Item(2)
+
+                        Loop
+                        
                         If cantRecibida > 0 Then
                             est = "Aprob."
                         ElseIf dr.Item(1) > 0 Then
