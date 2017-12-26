@@ -299,25 +299,16 @@ Public Class Grafico
 
     Private Sub _ProcesarAcumulado()
         Dim wacu = 0.0
-        Dim aux = ""
 
         Titulo = "CONSOLIDADO" & vbCrLf & " - "
 
-        Titulo &= Tabla.Rows(0).Item("Titulo") & " -" ' & vbCrLf & "("
-
-        'For i = 1 To 12
-
-        '    Chart1.Series.Add(Tabla.Rows(0).Item("Titulo" & i))
-
-        'Next
+        Titulo &= Tabla.Rows(0).Item("Titulo") & " -"
 
         For Each row As DataRow In Tabla.Rows
             If Not IsDBNull(row.Item("Descripcion")) AndAlso Chart1.Series.IsUniqueName(row.Item("Descripcion")) Then
                 Chart1.Series.Add(row.Item("Descripcion"))
             End If
         Next
-
-        Dim serie = ""
 
         For Each row As DataRow In Tabla.Rows
 
@@ -341,9 +332,6 @@ Public Class Grafico
 
         Next
 
-        '' Eliminamos la ultima coma
-        'Titulo = ReplaceLastComma(Trim(Titulo).Substring(0, Trim(Titulo).Length - 1)) & " )"
-
         _HabilitarLabels()
     End Sub
 
@@ -354,27 +342,8 @@ Public Class Grafico
 
     Private Sub _HabilitarLabels()
 
-        Dim aux = 0.0
-
         For Each serie In Chart1.Series
-
-            With Chart1.Series(serie.Name).Points
-                If .Count > 1 Then
-                    aux = .Sum(Function(p) p.YValues(0))
-                End If
-            End With
-
-            For Each p As DataPoint In serie.Points
-
-                With p
-                    .IsValueShownAsLabel = True
-                    .CustomProperties = "DrawSideBySide=True"
-                    If Chart1.Series(serie.Name).Points.Count > 1 Then
-                        .Label = "% " & Helper.formatonumerico((.YValues(0) * 100) / aux)
-                    End If
-                End With
-
-            Next
+            _LabelsComoPorcentaje(serie)
         Next
 
         Dim gd As New Charting.Grid
@@ -408,9 +377,6 @@ Public Class Grafico
 
         If Tipo = 1 Then
 
-
-            Dim WRow() = TablaGrilla.Select("Descripcion = '" & TablaGrilla.Rows(e.RowIndex).Item(1) & "'")
-            Dim WCols As DataColumnCollection = TablaGrilla.Columns
             Dim tabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
 
             With Chart1
@@ -441,8 +407,32 @@ Public Class Grafico
 
             serie.ChartType = DataVisualization.Charting.SeriesChartType.Line
 
+            _LabelsComoPorcentaje(serie)
+
         Next
 
+    End Sub
+
+    Private Sub _LabelsComoPorcentaje(ByVal serie As Series)
+        Dim aux As Double
+
+        aux = 0.0
+
+        If serie.Points.Count > 1 Then
+            aux = serie.Points.Sum(Function(p) p.YValues(0))
+        End If
+
+        For Each p As DataPoint In serie.Points
+
+            With p
+                .IsValueShownAsLabel = True
+                .CustomProperties = "DrawSideBySide=True"
+                If Chart1.Series(serie.Name).Points.Count > 1 Then
+                    .Label = "% " & Helper.formatonumerico((.YValues(0) * 100) / aux)
+                End If
+            End With
+
+        Next
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
@@ -450,13 +440,29 @@ Public Class Grafico
 
             serie.ChartType = DataVisualization.Charting.SeriesChartType.Pie
 
+            Dim aux = 0
+
+            For Each p As DataPoint In serie.Points
+                With p
+                    .IsValueShownAsLabel = True
+                    .CustomProperties = "DrawSideBySide=True"
+                    If Chart1.Series(serie.Name).Points.Count > 1 Then
+                        .Label = DataGridView1.Columns(4 + aux).HeaderText
+                        aux += 1
+                    End If
+                End With
+            Next
+
         Next
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+
         For Each serie As Series In Chart1.Series
 
             serie.ChartType = DataVisualization.Charting.SeriesChartType.Column
+
+            _LabelsComoPorcentaje(serie)
 
         Next
     End Sub

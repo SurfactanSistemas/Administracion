@@ -34,6 +34,13 @@ Public Class AltaAgenda
 
             If Proceso._ValidarFecha(Trim(txtFecha.Text)) Then
                 ' Saltamos hacia el otro campo
+
+                If Proceso.ordenaFecha(txtFecha.Text) <= Proceso.ordenaFecha(Date.Now.ToString("dd/MM/yyyy")) Then
+                    MsgBox("La fecha debe ser posterior a la fecha de hoy", MsgBoxStyle.Information)
+                    txtFecha.Focus()
+                    Exit Sub
+                End If
+
                 txtHora.Focus()
             End If
 

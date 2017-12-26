@@ -61,7 +61,7 @@
         If Trim(cuit) = "" Then
             Return False
         Else
-            Return IIf(Val(cuit) = 0, True, Proceso.CuitValido(cuit))
+            Return Val(cuit) = 0 OrElse Proceso.CuitValido(cuit)
         End If
     End Function
 
