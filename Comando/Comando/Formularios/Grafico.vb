@@ -139,6 +139,10 @@ Public Class Grafico
                     End With
 
                     .Columns(.Columns.Count - 1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    .Columns(.Columns.Count - 1).HeaderText = "Total"
+
+                    .Columns(1).HeaderText = "Linea"
+                    .Columns(2).HeaderText = "Concepto"
 
                     If Tipo = 1 Then
                         _ProcesarAcumulados(.Rows)
@@ -374,8 +378,8 @@ Public Class Grafico
 
             With row
 
-                If Not IsDBNull(.Item(2)) AndAlso Chart1.Series.IsUniqueName(.Item(2)) Then
-                    Chart1.Series.Add(.Item(2))
+                If Not IsDBNull(.Item(1)) AndAlso Chart1.Series.IsUniqueName(.Item(1)) Then
+                    Chart1.Series.Add(.Item(1))
                 End If
 
                 For i = 1 To 12
@@ -389,7 +393,7 @@ Public Class Grafico
 
                     If wacu <> 0 Then
 
-                        Chart1.Series(.Item(2).ToString).Points.AddXY(.Item(i + 15), wacu)
+                        Chart1.Series(.Item(1).ToString).Points.AddXY(.Item(i + 15), wacu)
 
                     End If
 
@@ -413,8 +417,8 @@ Public Class Grafico
         Titulo &= Tabla.Rows(0).Item("Titulo") & " -"
 
         For Each row As DataRow In Tabla.Rows
-            If Not IsDBNull(row.Item(2)) AndAlso Chart1.Series.IsUniqueName(row.Item(2)) Then
-                Chart1.Series.Add(row.Item(2))
+            If Not IsDBNull(row.Item(1)) AndAlso Chart1.Series.IsUniqueName(row.Item(1)) Then
+                Chart1.Series.Add(row.Item(1))
             End If
         Next
 
@@ -428,8 +432,8 @@ Public Class Grafico
                         wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
                     End If
 
-                    If wacu <> 0 And (Not IsDBNull(.Item(2)) AndAlso Trim(.Item(2)) <> "") Then
-                        Chart1.Series(.Item(2)).Points.AddXY(.Item("Titulo" & i), wacu)
+                    If wacu <> 0 And (Not IsDBNull(.Item(1)) AndAlso Trim(.Item(1)) <> "") Then
+                        Chart1.Series(.Item(1)).Points.AddXY(.Item("Titulo" & i), wacu)
                     End If
 
                 Next
