@@ -168,15 +168,6 @@ Public Class ComparacionesMensualesValorUnico
 
         _BuscarDatosBrutos(WMesesCompletos, WDatos, datos_restantes)
 
-        If cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked Then
-
-            ' Si es consolidado, rearmamos la tabla con los totales por valor comparable.
-            'If ckConsolidado.Checked Then
-            '    _FormatearConsolidado(datos_restantes, _ValoresComparables.Count, True)
-            'End If
-
-        End If
-
         Dim WTipo = 0, WAcum = 0.0
 
         For Each row As DataRow In datos_restantes.Rows
@@ -211,6 +202,14 @@ Public Class ComparacionesMensualesValorUnico
             End With
 
         Next
+
+        If cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked Then
+
+            For i = 1 To 3
+                datos_restantes.Rows.Add(99999)
+            Next
+
+        End If
 
         ds.Tables.Add(datos_restantes)
 
