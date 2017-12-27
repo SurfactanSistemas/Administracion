@@ -177,6 +177,41 @@ Public Class ComparacionesMensualesValorUnico
 
         End If
 
+        Dim WTipo = 0, WAcum = 0.0
+
+        For Each row As DataRow In datos_restantes.Rows
+
+            WTipo = 0
+
+            With row
+
+                WTipo = IIf(IsDBNull(.Item("Corte")), 0, Val(.Item("Corte")))
+
+                Select Case WTipo
+                    Case 1, 2, 5, 6
+
+                        WAcum = 0.0
+
+                        For i = 1 To 12
+
+                            If Not IsDBNull(.Item("Valor" & i)) Then
+
+                                WAcum += Val(Helper.formatonumerico(.Item("Valor" & i)))
+
+                            End If
+
+                        Next
+
+                        .Item("TotalFila") = WAcum
+
+                    Case Else
+                        Continue For
+                End Select
+
+            End With
+
+        Next
+
         ds.Tables.Add(datos_restantes)
 
         Return ds
@@ -1362,6 +1397,8 @@ Public Class ComparacionesMensualesValorUnico
                 .Columns.Add("Titulo" & i)
             Next
 
+            .Columns.Add("TotalFila", System.Type.GetType("System.Double"))
+
         End With
 
         Return tabla
@@ -1734,10 +1771,6 @@ Public Class ComparacionesMensualesValorUnico
         'End If
 
     End Sub
-
-    Private Function _EsComparacionMensual() As Boolean
-        Return cmbPeriodo.SelectedIndex = 0
-    End Function
 
     Private Sub ckConsolidado_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckConsolidado.CheckedChanged
 

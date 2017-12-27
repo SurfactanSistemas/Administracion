@@ -102,8 +102,7 @@ Public Class Grafico
                     Next
 
                 Else
-
-
+                    
                     For i = 4 To 15
 
                         .Columns(i).HeaderText = "- - -"
@@ -114,6 +113,7 @@ Public Class Grafico
 
                         .Columns(i + 12).Visible = False
                         .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                        .Columns(i).Width = 80
 
                     Next
                 End If
@@ -124,6 +124,16 @@ Public Class Grafico
                 Else
                     .Columns(0).Visible = False
                     .Columns(3).Visible = False
+                    
+                    .Columns(2).Width = 70
+
+                    With .Columns(1)
+                        .MinimumWidth = 90
+                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                    End With
+
+                    .Columns(.Columns.Count - 1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
                     .Sort(.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
                     .CurrentCell = .Rows(0).Cells(1)
                 End If
@@ -477,13 +487,12 @@ Public Class Grafico
 
             valor = DataGridView1.CurrentRow.Cells(2).Value
 
-            Dim aux = 0.0, WA = "", WLinea = ""
+            Dim aux = 0.0, WLinea = ""
 
-            
+
             For i = 4 To 15
 
                 aux = 0.0
-                WA = ""
                 WLinea = ""
 
                 For Each r As DataGridViewRow In DataGridView1.Rows
@@ -605,4 +614,8 @@ Public Class Grafico
 
         Next
     End Sub
+
+    'Private Sub DataGridView1_ColumnHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.ColumnHeaderMouseDoubleClick
+    '    MsgBox(DataGridView1.Columns(e.ColumnIndex).Width)
+    'End Sub
 End Class
