@@ -92,10 +92,11 @@ Public Class Pagos
             If dr.HasRows Then
                 dr.Read()
 
-                WProv = IIf(IsDBNull(dr.Item("Provincia")), 0, Val(dr.Item("Provincia")))
-                WTipoProv = IIf(IsDBNull(dr.Item("TipoProv")), 0, Val(dr.Item("TipoProv")))
-                WEmbargo = IIf(IsDBNull(dr.Item("Embargo")), "N", Trim(dr.Item("Embargo")))
+                WProv = IIf(IsDBNull(dr.Item("Provincia")), 0, dr.Item("Provincia"))
+                WTipoProv = IIf(IsDBNull(dr.Item("TipoProv")), 0, dr.Item("TipoProv"))
+                WEmbargo = IIf(IsDBNull(dr.Item("Embargo")), "N", dr.Item("Embargo"))
 
+                WProv = Val(WProv)
             End If
 
         Catch ex As Exception

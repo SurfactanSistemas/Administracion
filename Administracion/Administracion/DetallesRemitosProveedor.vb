@@ -93,7 +93,7 @@ Public Class DetallesRemitosProveedor
                             End If
                         Loop
 
-                        Exit For ' Salimos en la primer aparicion del remito en la primer empresa.
+                        'Exit For ' Salimos en la primer aparicion del remito en la primer empresa.
                     End If
 
                 Catch ex As Exception
@@ -242,13 +242,14 @@ Public Class DetallesRemitosProveedor
 
                             fApr = dr.Item(2)
 
+
+                            If cantRecibida > 0 Then
+                                est = "Aprob."
+                            ElseIf dr.Item(1) > 0 Then
+                                est = "Rech."
+                            End If
                         Loop
                         
-                        If cantRecibida > 0 Then
-                            est = "Aprob."
-                        ElseIf dr.Item(1) > 0 Then
-                            est = "Rech."
-                        End If
                     Else
 
                         cantRecibida = 0.0
