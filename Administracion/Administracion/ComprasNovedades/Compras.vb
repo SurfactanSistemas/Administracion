@@ -513,8 +513,8 @@ Public Class Compras
         End If
         Dim interno As Integer = CustomConvert.toIntOrZero(txtNroInterno.Text)
         If interno = 0 Then : interno = DAOCompras.siguienteNumeroDeInterno() : End If
-        Dim compra As New Compra(interno, proveedor, ceros(cmbTipo.SelectedIndex, 2), cmbTipo.Text, cmbFormaPago.SelectedIndex,
-                                 tipoPago(), CBLetra.SelectedItem, txtPunto.Text, txtNumero.Text, txtFechaEmision.Text, txtFechaIVA.Text, txtFechaVto1.Text, txtFechaVto2.Text,
+        Dim compra As New Compra(interno, proveedor, ceros(cmbTipo.SelectedIndex, 2), ceros(cmbTipo.Text, 2), cmbFormaPago.SelectedIndex,
+                                 tipoPago(), UCase(CBLetra.SelectedItem), ceros(txtPunto.Text, 4), ceros(txtNumero.Text, 8), txtFechaEmision.Text, txtFechaIVA.Text, txtFechaVto1.Text, txtFechaVto2.Text,
                                  asDouble(txtParidad.Text, 4), asDouble(txtNeto.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA21.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtIVARG.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA27.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtPercIB.Text) * multiplicadorPorNotaDeCredito, asDouble(txtNoGravado.Text) * multiplicadorPorNotaDeCredito,
@@ -852,7 +852,7 @@ Public Class Compras
 
                 dr.Read()
 
-                Return IIf(IsDBNull(dr.Item("Rechazado")), False, Val(dr.Item("Rechazado")) = 1)
+                Return Not IsDBNull(dr.Item("Rechazado")) AndAlso Val(dr.Item("Rechazado")) = 1
 
             End If
 
@@ -867,6 +867,7 @@ Public Class Compras
 
         End Try
 
+        Return False
     End Function
 
     Private Sub traerValoresIb(ByVal nroInterno As String)
