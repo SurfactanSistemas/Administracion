@@ -894,7 +894,7 @@ Public Class Grafico
                         ComoPorce = False
 
                         For i = 0 To WConPorce.Length - 1
-                            If serie.Name.Contains(WConPorce(i)) Then
+                            If UCase(serie.Name).Contains(WConPorce(i)) Then
                                 ComoPorce = True
                                 Exit For
                             End If
