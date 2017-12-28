@@ -377,10 +377,28 @@ Public Class Grafico
     Private Sub _ProcesarComparativoMensual()
 
         Dim wacu = 0.0
-        Dim WIndice = 0
+        Dim WIndice = 0, WIndice2 = 0
         Dim aux = ""
+        Dim WValores(9) As String
 
-        Titulo = "COMPARATIVO ENTRE PERIODOS" & vbCrLf & " - "
+        Titulo = "COMPARATIVO ENTRE PERIODOS" & vbCrLf
+
+        If Tabla.Rows.Count > 0 Then
+
+            Titulo &= " - " & Tabla.Rows(0).Item(16) & " Al "
+
+            For i = 27 To 16 Step -1
+
+                If Not IsDBNull(Tabla.Rows(0).Item(i)) Then
+
+                    Titulo &= Tabla.Rows(0).Item(i) & " -" & vbCrLf & "( "
+
+                    Exit For
+                End If
+
+            Next
+
+        End If
 
         For Each row As DataRow In Tabla.Rows
 
@@ -420,8 +438,16 @@ Public Class Grafico
 
                         Chart1.Series(aux).Points.AddXY(.Item("Titulo" & i), wacu)
 
+                        If Not WValores.Contains(.Item(2)) Then
+
+                            WValores(WIndice2) = .Item(2)
+
+                            WIndice2 += 1
+                        End If
+
                         If Not _wValoresDibujados.Contains(aux) Then
                             _wValoresDibujados(WIndice) = aux
+
                             WIndice += 1
                         End If
 
@@ -434,6 +460,14 @@ Public Class Grafico
             wacu = 0.0
 
         Next
+
+        For i = 0 To WValores.Length - 1
+            If Not IsNothing(WValores(i)) Then
+                Titulo &= WValores(i) & ","
+            End If
+        Next
+
+        Titulo = Titulo.Substring(0, Titulo.Length - 1) & " )"
 
         _HabilitarLabels()
 
@@ -500,6 +534,8 @@ Public Class Grafico
 
         Dim wacu = 0.0
         Dim WIndice = 0
+        Dim Wvalores(10) As String
+        Dim windice2 = 0
 
 
         Titulo = Tabla.Rows(0).Item(1).ToString.Trim & vbCrLf & " - " & Tabla.Rows(0).Item(16).ToString.Trim
@@ -507,7 +543,7 @@ Public Class Grafico
         For i = 27 To 16 Step -1
 
             If Not IsDBNull(Tabla.Rows(0).Item(i)) Then
-                Titulo &= " al " & Tabla.Rows(0).Item(i).ToString.Trim & " -"
+                Titulo &= " al " & Tabla.Rows(0).Item(i).ToString.Trim & " -" & vbCrLf & "( "
                 Exit For
             End If
 
@@ -534,6 +570,11 @@ Public Class Grafico
 
                         Chart1.Series((.Item(2) & " (" & .Item(1) & ")").ToString).Points.AddXY(.Item(i + 15), wacu)
 
+                        If Not Wvalores.Contains(.Item(2)) Then
+                            Wvalores(windice2) = .Item(2)
+                            windice2 += 1
+                        End If
+
                         If Not _wValoresDibujados.Contains(.Item(1)) Then
                             _wValoresDibujados(WIndice) = .Item(1)
                             WIndice += 1
@@ -548,6 +589,14 @@ Public Class Grafico
             wacu = 0.0
 
         Next
+
+        For i = 0 To Wvalores.Length - 1
+            If Not IsNothing(Wvalores(i)) Then
+                Titulo &= Wvalores(i) & ","
+            End If
+        Next
+
+        Titulo = Titulo.Substring(0, Titulo.Length - 1) & " )"
 
         _HabilitarLabels()
 
@@ -671,6 +720,10 @@ Public Class Grafico
 
             valor = DataGridView1.CurrentRow.Cells(2).Value
 
+            If Tabla.Rows.Count > 0 Then
+                Titulo = "COMPARACION ANUAL" & vbCrLf & " - " & Tabla.Rows(0).Item(2) & " -" & vbCrLf & "( " & valor & " )"
+            End If
+
             Chart1.Series.Add(valor)
 
             Dim aux = 0.0, WA = "", WLinea = "", WAuxi = ""
@@ -719,6 +772,19 @@ Public Class Grafico
             Dim valor = ""
 
             valor = DataGridView1.CurrentRow.Cells(2).Value
+
+            Titulo = Tabla.Rows(0).Item(1).ToString.Trim & vbCrLf & " - " & Tabla.Rows(0).Item(16).ToString.Trim
+
+            For i = 27 To 16 Step -1
+
+                If Not IsDBNull(Tabla.Rows(0).Item(i)) Then
+                    Titulo &= " al " & Tabla.Rows(0).Item(i).ToString.Trim & " -"
+                    Exit For
+                End If
+
+            Next
+
+            Titulo &= vbCrLf & "( " & valor & " )"
 
             Dim aux = 0.0, WA = "", WLinea = ""
 
