@@ -203,7 +203,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Next
 
-        If cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked Then
+        If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
 
             For i = 1 To 3
                 datos_restantes.Rows.Add(99999)
@@ -212,6 +212,18 @@ Public Class ComparacionesMensualesValorUnico
         End If
 
         ds.Tables.Add(datos_restantes)
+
+        Dim WTablaConsolidado = datos_restantes.Copy
+
+        WTablaConsolidado.TableName = "Consolidados"
+
+        If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
+
+            _FormatearConsolidado(WTablaConsolidado, _ValoresComparables.Count, True)
+
+        End If
+
+        ds.Tables.Add(WTablaConsolidado)
 
         Return ds
 
@@ -356,7 +368,7 @@ Public Class ComparacionesMensualesValorUnico
 
                         If wMeses(auxi2) > -1 Then
 
-                            WValoresABuscar &= "Importe" & auxi2 & ","
+                            WValoresABuscar &= "Importe" & i + 1 & ","
 
                             auxi2 += 1
                         End If
@@ -431,6 +443,8 @@ Public Class ComparacionesMensualesValorUnico
 
                                             .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
                                             .Item("Titulo" & rowIndex) = WMes
+
+                                            auxi2 += 1
 
                                         End If
 
@@ -539,6 +553,8 @@ Public Class ComparacionesMensualesValorUnico
             Next
 
             _datos.Rows(i).Item("Titulo") = txtMesDesde.Text & "/" & txtAnioDesde.Text & " al " & txtMesHasta.Text & "/" & txtAnioHasta.Text
+
+            _datos.Rows(i).Item("TotalFila") = 0
 
         Next
 
@@ -1027,7 +1043,7 @@ Public Class ComparacionesMensualesValorUnico
                     End If
 
                     WValoresABuscar = ""
-                    For i = aux1 To 11
+                    For i = Val(txtMesDesde.Text) To 11
 
                         If Val(wMeses(i)) > 0 AndAlso Not IsNothing(wMeses(i)) Then
 
@@ -1087,13 +1103,13 @@ Public Class ComparacionesMensualesValorUnico
 
                                 For i = 0 To aux1
 
-                                    If wMeses(i) > -1 OrElse Not IsNothing(wMeses(i)) Then
+                                    If wMeses(i) > -1 And Not IsNothing(wMeses(i)) Then
                                         rowIndex += 1
 
                                         WMes = ""
                                         WMes = wMeses(i) & "/" & Str$(WAnio)
 
-                                        WDato = dr.Item("Importe" & Trim(wMeses(i)))
+                                        WDato = dr.Item("Importe" & i + 1)
 
                                         .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
                                         .Item("Titulo" & rowIndex) = WMes
@@ -1109,13 +1125,13 @@ Public Class ComparacionesMensualesValorUnico
 
                                     For i = 1 To Val(txtMesHasta.Text)
 
-                                        If wMeses(aux2) > -1 OrElse Not IsNothing(wMeses(i)) Then
+                                        If wMeses(aux2) > -1 And Not IsNothing(wMeses(i)) Then
                                             rowIndex += 1
 
                                             WMes = ""
                                             WMes = wMeses(aux2) & "/" & Str$(WAnio2)
 
-                                            WDato = dr.Item("Importe" & Trim(wMeses(i)))
+                                            WDato = dr.Item("Importe" & i)
 
                                             .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
                                             .Item("Titulo" & rowIndex) = WMes
@@ -1461,6 +1477,7 @@ Public Class ComparacionesMensualesValorUnico
         With Grafico
             .Tabla = tabla.Tables(0)
             .TablaGrilla = tabla.Tables(1)
+            .TablaConsolidados = tabla.Tables(2)
             
             Select Case cmbPeriodo.SelectedIndex
                 Case 0 ' Mensual

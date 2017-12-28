@@ -224,12 +224,10 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.ckPorcentaje)
         Me.GroupBox3.Controls.Add(Me.ckRotacion)
         Me.GroupBox3.Controls.Add(Me.ckStock)
         Me.GroupBox3.Controls.Add(Me.ckPrecio)
         Me.GroupBox3.Controls.Add(Me.ckFactor)
-        Me.GroupBox3.Controls.Add(Me.ckPorcentajeAtrasos)
         Me.GroupBox3.Controls.Add(Me.ckKilos)
         Me.GroupBox3.Controls.Add(Me.ckAtrasados)
         Me.GroupBox3.Controls.Add(Me.ckVenta)
@@ -246,17 +244,18 @@ Partial Class ComparacionesMensualesValorUnico
         'ckPorcentaje
         '
         Me.ckPorcentaje.AutoSize = True
-        Me.ckPorcentaje.Location = New System.Drawing.Point(155, 77)
+        Me.ckPorcentaje.Location = New System.Drawing.Point(204, 10)
         Me.ckPorcentaje.Name = "ckPorcentaje"
         Me.ckPorcentaje.Size = New System.Drawing.Size(98, 22)
         Me.ckPorcentaje.TabIndex = 0
         Me.ckPorcentaje.Text = "Porcentaje"
         Me.ckPorcentaje.UseVisualStyleBackColor = True
+        Me.ckPorcentaje.Visible = False
         '
         'ckRotacion
         '
         Me.ckRotacion.AutoSize = True
-        Me.ckRotacion.Location = New System.Drawing.Point(155, 54)
+        Me.ckRotacion.Location = New System.Drawing.Point(155, 88)
         Me.ckRotacion.Name = "ckRotacion"
         Me.ckRotacion.Size = New System.Drawing.Size(87, 22)
         Me.ckRotacion.TabIndex = 0
@@ -266,7 +265,7 @@ Partial Class ComparacionesMensualesValorUnico
         'ckStock
         '
         Me.ckStock.AutoSize = True
-        Me.ckStock.Location = New System.Drawing.Point(13, 146)
+        Me.ckStock.Location = New System.Drawing.Point(155, 57)
         Me.ckStock.Name = "ckStock"
         Me.ckStock.Size = New System.Drawing.Size(66, 22)
         Me.ckStock.TabIndex = 0
@@ -276,7 +275,7 @@ Partial Class ComparacionesMensualesValorUnico
         'ckPrecio
         '
         Me.ckPrecio.AutoSize = True
-        Me.ckPrecio.Location = New System.Drawing.Point(13, 123)
+        Me.ckPrecio.Location = New System.Drawing.Point(13, 149)
         Me.ckPrecio.Name = "ckPrecio"
         Me.ckPrecio.Size = New System.Drawing.Size(139, 22)
         Me.ckPrecio.TabIndex = 0
@@ -286,7 +285,7 @@ Partial Class ComparacionesMensualesValorUnico
         'ckFactor
         '
         Me.ckFactor.AutoSize = True
-        Me.ckFactor.Location = New System.Drawing.Point(13, 100)
+        Me.ckFactor.Location = New System.Drawing.Point(13, 118)
         Me.ckFactor.Name = "ckFactor"
         Me.ckFactor.Size = New System.Drawing.Size(70, 22)
         Me.ckFactor.TabIndex = 0
@@ -296,17 +295,18 @@ Partial Class ComparacionesMensualesValorUnico
         'ckPorcentajeAtrasos
         '
         Me.ckPorcentajeAtrasos.AutoSize = True
-        Me.ckPorcentajeAtrasos.Location = New System.Drawing.Point(155, 146)
+        Me.ckPorcentajeAtrasos.Location = New System.Drawing.Point(204, 35)
         Me.ckPorcentajeAtrasos.Name = "ckPorcentajeAtrasos"
         Me.ckPorcentajeAtrasos.Size = New System.Drawing.Size(153, 22)
         Me.ckPorcentajeAtrasos.TabIndex = 0
         Me.ckPorcentajeAtrasos.Text = "Porcentaje Atrasos"
         Me.ckPorcentajeAtrasos.UseVisualStyleBackColor = True
+        Me.ckPorcentajeAtrasos.Visible = False
         '
         'ckKilos
         '
         Me.ckKilos.AutoSize = True
-        Me.ckKilos.Location = New System.Drawing.Point(13, 77)
+        Me.ckKilos.Location = New System.Drawing.Point(13, 87)
         Me.ckKilos.Name = "ckKilos"
         Me.ckKilos.Size = New System.Drawing.Size(60, 22)
         Me.ckKilos.TabIndex = 0
@@ -316,7 +316,7 @@ Partial Class ComparacionesMensualesValorUnico
         'ckAtrasados
         '
         Me.ckAtrasados.AutoSize = True
-        Me.ckAtrasados.Location = New System.Drawing.Point(155, 123)
+        Me.ckAtrasados.Location = New System.Drawing.Point(155, 150)
         Me.ckAtrasados.Name = "ckAtrasados"
         Me.ckAtrasados.Size = New System.Drawing.Size(152, 22)
         Me.ckAtrasados.TabIndex = 0
@@ -326,7 +326,7 @@ Partial Class ComparacionesMensualesValorUnico
         'ckVenta
         '
         Me.ckVenta.AutoSize = True
-        Me.ckVenta.Location = New System.Drawing.Point(13, 54)
+        Me.ckVenta.Location = New System.Drawing.Point(13, 56)
         Me.ckVenta.Name = "ckVenta"
         Me.ckVenta.Size = New System.Drawing.Size(107, 22)
         Me.ckVenta.TabIndex = 0
@@ -336,7 +336,7 @@ Partial Class ComparacionesMensualesValorUnico
         'ckPedidos
         '
         Me.ckPedidos.AutoSize = True
-        Me.ckPedidos.Location = New System.Drawing.Point(155, 100)
+        Me.ckPedidos.Location = New System.Drawing.Point(155, 119)
         Me.ckPedidos.Name = "ckPedidos"
         Me.ckPedidos.Size = New System.Drawing.Size(81, 22)
         Me.ckPedidos.TabIndex = 0
@@ -346,7 +346,7 @@ Partial Class ComparacionesMensualesValorUnico
         'ckTodosValores
         '
         Me.ckTodosValores.AutoSize = True
-        Me.ckTodosValores.Location = New System.Drawing.Point(13, 31)
+        Me.ckTodosValores.Location = New System.Drawing.Point(13, 25)
         Me.ckTodosValores.Name = "ckTodosValores"
         Me.ckTodosValores.Size = New System.Drawing.Size(69, 22)
         Me.ckTodosValores.TabIndex = 0
@@ -374,12 +374,14 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.ckPorcentaje)
         Me.GroupBox4.Controls.Add(Me.rbPorcentaje)
         Me.GroupBox4.Controls.Add(Me.rbMonto)
+        Me.GroupBox4.Controls.Add(Me.ckPorcentajeAtrasos)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
         Me.GroupBox4.Location = New System.Drawing.Point(12, 62)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(310, 51)
+        Me.GroupBox4.Size = New System.Drawing.Size(23, 25)
         Me.GroupBox4.TabIndex = 7
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Tipo de Unidad"

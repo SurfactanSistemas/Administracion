@@ -7,14 +7,21 @@ Public Class Grafico
 
     Public Property TablaGrilla As DataTable
 
+    Public Property TablaConsolidados As DataTable
+
     Public Property Tipo As Integer
 
     Public Property Titulo As String
 
     Public WColorBasico
 
+    Private _wValoresDibujados As String()
+
     Private Sub Grafico_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        _ProcesarGrafico()
+
+        _wValoresDibujados = {Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing}
+
+        '_ProcesarGrafico()
 
         For Each column As DataGridViewColumn In DataGridView1.Columns
             column.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -38,6 +45,10 @@ Public Class Grafico
             .Series.Clear()
             .ResetAutoValues()
         End With
+
+        For i = 0 To _wValoresDibujados.Length - 1
+            _wValoresDibujados(i) = Nothing
+        Next
 
         Select Case Tipo
             Case 1
@@ -108,7 +119,7 @@ Public Class Grafico
                     Next
 
                 Else
-                    
+
                     For i = 4 To 15
 
                         .Columns(i).HeaderText = "- - -"
@@ -130,7 +141,7 @@ Public Class Grafico
                 Else
                     .Columns(0).Visible = False
                     .Columns(3).Visible = False
-                    
+
                     .Columns(2).Width = 70
 
                     With .Columns(1)
@@ -144,10 +155,6 @@ Public Class Grafico
                     .Columns(1).HeaderText = "Linea"
                     .Columns(2).HeaderText = "Concepto"
 
-                    If Tipo = 1 Then
-                        _ProcesarAcumulados(.Rows)
-                    End If
-
                     .Sort(.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
                     .CurrentCell = .Rows(0).Cells(1)
                 End If
@@ -156,122 +163,93 @@ Public Class Grafico
                 .Focus()
 
             End With
+            
+            If Tipo = 1 Or Tipo = 3 Then
+                _MostrarConsolidados()
+            End If
+
+            For Each row As DataGridViewRow In DataGridView1.Rows
+
+                row.DefaultCellStyle.BackColor = WColorBasico
+
+                If Not IsDBNull(row.Cells("Titulo").Value) AndAlso _wValoresDibujados.Contains(row.Cells("Titulo").Value) Then
+                    row.DefaultCellStyle.BackColor = Color.LightBlue
+                End If
+
+            Next
 
         End If
 
     End Sub
 
-    Private Sub _ProcesarAcumulados(ByVal _rows As DataGridViewRowCollection)
+    Private Sub _MostrarConsolidados()
 
-        Dim WFilaVenta = 0, WFilaKilos = 0, WFilaPedidos = 0
-        Dim WVenta = 0.0, WKilos = 0.0, WPedidos = 0.0
-        Dim valorCelda = ""
-        Dim r As DataGridViewRow
+        _LimpiarConsolidadosAgregadosAnteriormente()
 
-        WFilaVenta = _rows.Count - 3
-        WFilaKilos = _rows.Count - 2
-        WFilaPedidos = _rows.Count - 1
+        For Each _str As String In From _str1 In _wValoresDibujados Where Not IsNothing(_str1)
+            _ProcesarAcumulados(_str)
+        Next
 
-        With DataGridView1
+    End Sub
 
-            For i = 4 To 15
+    Private Sub _LimpiarConsolidadosAgregadosAnteriormente()
 
-                .Rows(WFilaVenta).Cells(i).Value = 0
-                .Rows(WFilaKilos).Cells(i).Value = 0
-                .Rows(WFilaPedidos).Cells(i).Value = 0
+        If DataGridView1.Rows.Count > TablaGrilla.Rows.Count Then
+
+            Dim aux As DataGridViewRow
+
+            For i = TablaGrilla.Rows.Count To DataGridView1.Rows.Count - 1
+
+                aux = DataGridView1.Rows(i)
+
+                DataGridView1.Rows.Remove(aux)
 
             Next
 
-        End With
+        End If
 
-        For Each row As DataGridViewRow In _rows
-            valorCelda = ""
-            With row
+    End Sub
 
-                Select Case row.Index
-                    Case WFilaVenta, WFilaKilos, WFilaPedidos
-                        Continue For
-                End Select
+    Private Sub _ProcesarAcumulados(ByVal str As String)
 
-                If Not IsDBNull(.Cells("Titulo").Value) Then
-                    valorCelda = Trim(.Cells("Titulo").Value)
-                End If
+        Dim aux = DataGridView1.DataSource
+        Dim WTabla As DataTable
 
-                Select Case UCase(valorCelda)
-                    Case "VENTAS U$S"
-                        r = DataGridView1.Rows(WFilaVenta)
-                        For i = 4 To 15
-                            WVenta = 0.0
+        If TypeOf aux Is DataView Then
+            WTabla = aux.toTable.Copy
+        ElseIf TypeOf aux Is DataTable Then
+            WTabla = aux.Copy
+        Else
+            Exit Sub
+        End If
 
-                            If Not IsDBNull(r.Cells(i).Value) Then
-                                WVenta = Val(Helper.formatonumerico(r.Cells(i).Value))
-                            End If
+        WTabla.TableName = "Consolidados"
 
-                            If Not IsDBNull(.Cells(i).Value) Then
+        Dim _r() As DataRow = TablaConsolidados.Select("Descripcion = '" & str & "'")
 
-                                WVenta += Val(Helper.formatonumerico(.Cells(i).Value))
+        If _r.Count > 0 Then
 
-                            End If
+            For i = 0 To _r.Count - 1
+                Dim WR As DataRow = WTabla.NewRow
+                WR = _r(i)
 
-                            r.Cells(i).Value = Val(Helper.formatonumerico(WVenta))
-                        Next
+                WR.Item("Titulo") = WR.Item("Descripcion")
+                WR.Item("Descripcion") = "Consolidado"
 
-                    Case "KILOS"
+                WTabla.ImportRow(WR)
+            Next
 
-                        r = DataGridView1.Rows(WFilaKilos)
-                        For i = 4 To 15
-                            WKilos = 0.0
+            DataGridView1.DataSource = WTabla
 
-                            If Not IsDBNull(r.Cells(i).Value) Then
-                                WKilos = Val(Helper.formatonumerico(r.Cells(i).Value))
-                            End If
+        End If
 
-                            If Not IsDBNull(.Cells(i).Value) Then
-
-                                WKilos += Val(Helper.formatonumerico(.Cells(i).Value))
-
-                            End If
-
-                            r.Cells(i).Value = Val(Helper.formatonumerico(WKilos))
-                        Next
-
-                    Case "PEDIDOS"
-
-                        r = DataGridView1.Rows(WFilaPedidos)
-                        For i = 4 To 15
-                            WPedidos = 0.0
-
-                            If Not IsDBNull(r.Cells(i).Value) Then
-                                WPedidos = Val(Helper.formatonumerico(r.Cells(i).Value))
-                            End If
-
-                            If Not IsDBNull(.Cells(i).Value) Then
-
-                                WPedidos += Val(Helper.formatonumerico(.Cells(i).Value))
-
-                            End If
-
-                            r.Cells(i).Value = Val(Helper.formatonumerico(WPedidos))
-                        Next
-
-                End Select
-
-            End With
-
-            With DataGridView1
-                .Rows(WFilaVenta).Cells("Titulo").Value = "Ventas U$S"
-                .Rows(WFilaVenta).Cells("Descripcion").Value = "Consolidado"
-                .Rows(WFilaKilos).Cells("Titulo").Value = "Kilos"
-                .Rows(WFilaPedidos).Cells("Titulo").Value = "Pedidos"
-
-            End With
-
-        Next
     End Sub
 
     Private Sub _ProcesarComparativoMensual()
 
         Dim wacu = 0.0
+        Dim WIndice = 0
+        Dim aux = ""
 
         Titulo = "COMPARATIVO ENTRE PERIODOS" & vbCrLf & " - "
 
@@ -309,7 +287,14 @@ Public Class Grafico
 
                     If wacu <> 0 Then
 
-                        Chart1.Series(Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)).Points.AddXY(.Item("Titulo" & i), wacu)
+                        aux = Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)
+
+                        Chart1.Series(aux).Points.AddXY(.Item("Titulo" & i), wacu)
+
+                        If Not _wValoresDibujados.Contains(aux) Then
+                            _wValoresDibujados(WIndice) = aux
+                            WIndice += 1
+                        End If
 
                     End If
 
@@ -328,9 +313,9 @@ Public Class Grafico
     Private Sub _ProcesarAnual()
 
         Dim wacu = 0.0
+        Dim WIndice = 0
 
         Titulo = "COMPARACION ANUAL"
-
 
         For Each row As DataRow In Tabla.Rows
 
@@ -354,6 +339,13 @@ Public Class Grafico
 
                         Chart1.Series(.Item("Titulo" & i).ToString).Points.AddXY(.Item(1), wacu)
 
+                        If Not _wValoresDibujados.Contains(.Item("Titulo" & i)) Then
+
+                            _wValoresDibujados(WIndice) = .Item("Titulo" & i)
+                            WIndice += 1
+
+                        End If
+
                     End If
 
                 Next
@@ -371,15 +363,26 @@ Public Class Grafico
     Private Sub _ProcesarAcumuladoFamilia()
 
         Dim wacu = 0.0
+        Dim WIndice = 0
 
-        Titulo = "COMPARATIVO MENSUAL" & vbCrLf & " - " & Tabla.Rows(0).Item(1).ToString.Trim & " -"
+
+        Titulo = Tabla.Rows(0).Item(1).ToString.Trim & vbCrLf & " - " & Tabla.Rows(0).Item(16).ToString.Trim
+
+        For i = 27 To 16 Step -1
+
+            If Not IsDBNull(Tabla.Rows(0).Item(i)) Then
+                Titulo &= " al " & Tabla.Rows(0).Item(i).ToString.Trim & " -"
+                Exit For
+            End If
+
+        Next
 
         For Each row As DataRow In Tabla.Rows
 
             With row
 
-                If Not IsDBNull(.Item(1)) AndAlso Chart1.Series.IsUniqueName(.Item(1)) Then
-                    Chart1.Series.Add(.Item(1))
+                If (Not IsDBNull(.Item(2)) And Not IsDBNull(.Item(1))) AndAlso Chart1.Series.IsUniqueName(.Item(2) & " (" & .Item(1) & ")") Then
+                    Chart1.Series.Add(.Item(2) & " (" & .Item(1) & ")")
                 End If
 
                 For i = 1 To 12
@@ -393,7 +396,12 @@ Public Class Grafico
 
                     If wacu <> 0 Then
 
-                        Chart1.Series(.Item(1).ToString).Points.AddXY(.Item(i + 15), wacu)
+                        Chart1.Series((.Item(2) & " (" & .Item(1) & ")").ToString).Points.AddXY(.Item(i + 15), wacu)
+
+                        If Not _wValoresDibujados.Contains(.Item(1)) Then
+                            _wValoresDibujados(WIndice) = .Item(1)
+                            WIndice += 1
+                        End If
 
                     End If
 
@@ -411,6 +419,7 @@ Public Class Grafico
 
     Private Sub _ProcesarAcumulado()
         Dim wacu = 0.0
+        Dim WIndice = 0
 
         Titulo = "CONSOLIDADO" & vbCrLf & " - "
 
@@ -434,6 +443,12 @@ Public Class Grafico
 
                     If wacu <> 0 And (Not IsDBNull(.Item(1)) AndAlso Trim(.Item(1)) <> "") Then
                         Chart1.Series(.Item(1)).Points.AddXY(.Item("Titulo" & i), wacu)
+
+                        If Not _wValoresDibujados.Contains(.Item(1)) Then
+                            _wValoresDibujados(WIndice) = .Item(1)
+                            WIndice += 1
+                        End If
+
                     End If
 
                 Next
@@ -520,7 +535,7 @@ Public Class Grafico
 
             Chart1.Series.Add(valor)
 
-            Dim aux = 0.0, WA = "", WLinea = ""
+            Dim aux = 0.0, WA = "", WLinea = "", WAuxi = ""
 
             For Each r As DataGridViewRow In DataGridView1.Rows
 
@@ -532,7 +547,9 @@ Public Class Grafico
 
                 r.DefaultCellStyle.BackColor = WColorBasico
 
-                If r.Cells(2).Value = valor Then
+                WAuxi = IIf(IsDBNull(r.Cells(2).Value), "", r.Cells(2).Value)
+
+                If WAuxi = valor Then
 
                     aux = 0.0
 
@@ -618,19 +635,21 @@ Public Class Grafico
 
             valor = DataGridView1.CurrentRow.Cells(2).Value
 
-            Dim aux = 0.0, WLinea = ""
-
-
+            Dim aux = 0.0, WLinea = "", aux2 = ""
+            
             For i = 4 To 15
 
                 aux = 0.0
                 WLinea = ""
+                aux2 = ""
 
                 For Each r As DataGridViewRow In DataGridView1.Rows
 
                     r.DefaultCellStyle.BackColor = WColorBasico
 
-                    If r.Cells(2).Value = valor Then
+                    aux2 = IIf(IsDBNull(r.Cells(2).Value), "", r.Cells(2).Value)
+
+                    If aux2 = valor Then
 
                         If Chart1.Series.IsUniqueName(valor) Then
                             Chart1.Series.Add(valor)
@@ -682,6 +701,17 @@ Public Class Grafico
 
         End If
 
+        If Tipo = 1 Or Tipo = 3 Then
+
+            For i = 0 To _wValoresDibujados.Length - 1
+                _wValoresDibujados(i) = Nothing
+            Next
+
+            _wValoresDibujados(0) = DataGridView1.CurrentRow.Cells(2).Value
+
+            _MostrarConsolidados()
+        End If
+
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
@@ -710,33 +740,43 @@ Public Class Grafico
             With p
                 .IsValueShownAsLabel = True
                 .CustomProperties = "DrawSideBySide=True"
+
+
+                
                 If Chart1.Series(serie.Name).Points.Count > 1 Then
-                    .Label = "% " & Helper.formatonumerico((.YValues(0) * 100) / aux)
+                    Select UCase(serie.Name)
+                        Case "VENTAS U$S", "KILOS", "PEDIDOS"
+                            .Label = "% " & Helper.formatonumerico((.YValues(0) * 100) / aux)
+
+                        Case Else
+                            .Label = Helper.formatonumerico(.YValues(0))
+                    End Select
                 End If
+
+
             End With
 
         Next
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+
         For Each serie As Series In Chart1.Series
 
             serie.ChartType = DataVisualization.Charting.SeriesChartType.Pie
-
-            Dim aux = 0
 
             For Each p As DataPoint In serie.Points
                 With p
                     .IsValueShownAsLabel = True
                     .CustomProperties = "DrawSideBySide=True"
                     If Chart1.Series(serie.Name).Points.Count > 1 Then
-                        .Label = DataGridView1.Columns(4 + aux).HeaderText
-                        aux += 1
+                        p.Label = p.AxisLabel & " (" & p.Label & ")"
                     End If
                 End With
             Next
 
         Next
+
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
