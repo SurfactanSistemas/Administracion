@@ -552,6 +552,36 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
+    Public Sub _RegraficarConsolidado(ByVal valor As String)
+
+        ' Seleccionamos el valor comparable.
+
+
+        Select Case UCase(valor)
+            Case "VENTAS U$S"
+                ckVenta.Checked = True
+            Case "KILOS"
+                ckKilos.Checked = True
+            Case "STOCK"
+                ckStock.Checked = True
+            Case "ATRASO"
+                ckAtrasados.Checked = True
+            Case "PEDIDOS"
+                ckPedidos.Checked = True
+            Case "ROTACION"
+                ckRotacion.Checked = True
+            Case "FACTOR"
+                ckFactor.Checked = True
+            Case "PRECIO"
+                ckPrecio.Checked = True
+            Case Else
+                Exit Sub
+        End Select
+
+        btnGenerar.PerformClick()
+
+    End Sub
+
     Private Sub _FormatearConsolidado(ByRef datos As DataTable, Optional ByVal valoresSeleccionados As Integer = 0, Optional ByVal consolidadoTotal As Boolean = False)
         Dim _datos = datos.Copy
         Dim aux = valoresSeleccionados

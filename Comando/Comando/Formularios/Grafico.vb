@@ -828,6 +828,11 @@ Public Class Grafico
 
             _HabilitarLabels()
 
+
+        ElseIf Tipo = 4 Then
+
+            ComparacionesMensualesValorUnico._RegraficarConsolidado(DataGridView1.Rows(e.RowIndex).Cells("Titulo").Value)
+
         Else
 
 
