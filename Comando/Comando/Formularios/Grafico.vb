@@ -165,7 +165,8 @@ Public Class Grafico
             End With
             
             If Tipo = 1 Or Tipo = 3 Then
-                _MostrarConsolidados()
+                '_MostrarConsolidados()
+                _ProcesarAcumulados2(DataGridView1.Rows)
             End If
 
             For Each row As DataGridViewRow In DataGridView1.Rows
@@ -208,6 +209,134 @@ Public Class Grafico
 
         End If
 
+    End Sub
+
+    Private Sub _ProcesarAcumulados2(ByVal _rows As DataGridViewRowCollection)
+        Dim WFilaVenta = 0, WFilaKilos = 0, WFilaPedidos = 0, WFilaAtrasos = 0
+        Dim WVenta = 0.0, WKilos = 0.0, WPedidos = 0.0, WAtrasos = 0.0
+        Dim valorCelda = ""
+        Dim r As DataGridViewRow
+
+        WFilaVenta = _rows.Count - 4
+        WFilaKilos = _rows.Count - 3
+        WFilaPedidos = _rows.Count - 2
+        WFilaAtrasos = _rows.Count - 1
+
+        With DataGridView1
+
+            For i = 4 To 15
+
+                .Rows(WFilaVenta).Cells(i).Value = 0
+                .Rows(WFilaKilos).Cells(i).Value = 0
+                .Rows(WFilaPedidos).Cells(i).Value = 0
+                .Rows(WFilaAtrasos).Cells(i).Value = 0
+
+            Next
+
+        End With
+
+        For Each row As DataGridViewRow In _rows
+            valorCelda = ""
+            With row
+
+                Select Case row.Index
+                    Case WFilaVenta, WFilaKilos, WFilaPedidos, WFilaAtrasos
+                        Continue For
+                End Select
+
+                If Not IsDBNull(.Cells("Titulo").Value) Then
+                    valorCelda = Trim(.Cells("Titulo").Value)
+                End If
+
+                Select Case UCase(valorCelda)
+                    Case "VENTAS U$S"
+                        r = DataGridView1.Rows(WFilaVenta)
+                        For i = 4 To 15
+                            WVenta = 0.0
+
+                            If Not IsDBNull(r.Cells(i).Value) Then
+                                WVenta = Val(Helper.formatonumerico(r.Cells(i).Value))
+                            End If
+
+                            If Not IsDBNull(.Cells(i).Value) Then
+
+                                WVenta += Val(Helper.formatonumerico(.Cells(i).Value))
+
+                            End If
+
+                            r.Cells(i).Value = Val(Helper.formatonumerico(WVenta))
+                        Next
+
+                    Case "KILOS"
+
+                        r = DataGridView1.Rows(WFilaKilos)
+                        For i = 4 To 15
+                            WKilos = 0.0
+
+                            If Not IsDBNull(r.Cells(i).Value) Then
+                                WKilos = Val(Helper.formatonumerico(r.Cells(i).Value))
+                            End If
+
+                            If Not IsDBNull(.Cells(i).Value) Then
+
+                                WKilos += Val(Helper.formatonumerico(.Cells(i).Value))
+
+                            End If
+
+                            r.Cells(i).Value = Val(Helper.formatonumerico(WKilos))
+                        Next
+
+                    Case "PEDIDOS"
+
+                        r = DataGridView1.Rows(WFilaPedidos)
+                        For i = 4 To 15
+                            WPedidos = 0.0
+
+                            If Not IsDBNull(r.Cells(i).Value) Then
+                                WPedidos = Val(Helper.formatonumerico(r.Cells(i).Value))
+                            End If
+
+                            If Not IsDBNull(.Cells(i).Value) Then
+
+                                WPedidos += Val(Helper.formatonumerico(.Cells(i).Value))
+
+                            End If
+
+                            r.Cells(i).Value = Val(Helper.formatonumerico(WPedidos))
+                        Next
+
+                    Case "ATRASO"
+
+                        r = DataGridView1.Rows(WFilaAtrasos)
+                        For i = 4 To 15
+                            WAtrasos = 0.0
+
+                            If Not IsDBNull(r.Cells(i).Value) Then
+                                WAtrasos = Val(Helper.formatonumerico(r.Cells(i).Value))
+                            End If
+
+                            If Not IsDBNull(.Cells(i).Value) Then
+
+                                WAtrasos += Val(Helper.formatonumerico(.Cells(i).Value))
+
+                            End If
+
+                            r.Cells(i).Value = Val(Helper.formatonumerico(WAtrasos))
+                        Next
+                End Select
+
+            End With
+
+            With DataGridView1
+                .Rows(WFilaVenta).Cells("Titulo").Value = "Ventas U$S"
+                .Rows(WFilaVenta).Cells("Descripcion").Value = "Consolidado"
+                .Rows(WFilaKilos).Cells("Titulo").Value = "Kilos"
+                .Rows(WFilaPedidos).Cells("Titulo").Value = "Pedidos"
+                .Rows(WFilaAtrasos).Cells("Titulo").Value = "Atrasos"
+
+            End With
+
+        Next
     End Sub
 
     Private Sub _ProcesarAcumulados(ByVal str As String)
@@ -709,7 +838,10 @@ Public Class Grafico
 
             _wValoresDibujados(0) = DataGridView1.CurrentRow.Cells(2).Value
 
-            _MostrarConsolidados()
+            '_MostrarConsolidados()
+
+            _ProcesarAcumulados2(DataGridView1.Rows)
+
         End If
 
     End Sub
@@ -728,6 +860,8 @@ Public Class Grafico
 
     Private Sub _LabelsComoPorcentaje(ByVal serie As Series)
         Dim aux As Double
+        Dim WValores(2, 12)
+        Dim WAuxi = 0
 
         aux = 0.0
 
@@ -735,28 +869,51 @@ Public Class Grafico
             aux = serie.Points.Sum(Function(p) p.YValues(0))
         End If
 
-        For Each p As DataPoint In serie.Points
+        ' Seguir trabajando en las leyendas de las diferencias.
+        If Tipo = -1 Then
 
-            With p
-                .IsValueShownAsLabel = True
-                .CustomProperties = "DrawSideBySide=True"
+            'Dim valorActual = 0.0, valorPeriodoPasado = 0.0
 
+            'valorActual = Val(Helper.formatonumerico(.YValues(0)))
+            'valorPeriodoPasado = Val(Helper.formatonumerico(.YValues(1)))
 
-                
-                If Chart1.Series(serie.Name).Points.Count > 1 Then
-                    Select UCase(serie.Name)
-                        Case "VENTAS U$S", "KILOS", "PEDIDOS"
+            '.Label = "% " & Helper.formatonumerico(((valorActual / valorPeriodoPasado) - 1) * 100)
+
+        Else
+
+            Dim WConPorce() = {"VENTAS U$S", "KILOS", "PEDIDOS"}
+            Dim ComoPorce = False
+
+            For Each p As DataPoint In serie.Points
+
+                With p
+                    .IsValueShownAsLabel = True
+                    .CustomProperties = "DrawSideBySide=True"
+                    If Chart1.Series(serie.Name).Points.Count > 1 Then
+
+                        ComoPorce = False
+
+                        For i = 0 To WConPorce.Length - 1
+                            If serie.Name.Contains(WConPorce(i)) Then
+                                ComoPorce = True
+                                Exit For
+                            End If
+                        Next
+
+                        If ComoPorce Then
                             .Label = "% " & Helper.formatonumerico((.YValues(0) * 100) / aux)
-
-                        Case Else
+                        Else
                             .Label = Helper.formatonumerico(.YValues(0))
-                    End Select
-                End If
+                        End If
 
+                    End If
 
-            End With
+                End With
 
-        Next
+            Next
+
+        End If
+
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click

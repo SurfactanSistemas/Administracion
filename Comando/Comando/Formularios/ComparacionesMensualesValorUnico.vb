@@ -205,7 +205,7 @@ Public Class ComparacionesMensualesValorUnico
 
         If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
 
-            For i = 1 To 3
+            For i = 1 To 4
                 datos_restantes.Rows.Add(99999)
             Next
 
