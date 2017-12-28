@@ -332,7 +332,7 @@ Public Class Grafico
                 .Rows(WFilaVenta).Cells("Descripcion").Value = "Consolidado"
                 .Rows(WFilaKilos).Cells("Titulo").Value = "Kilos"
                 .Rows(WFilaPedidos).Cells("Titulo").Value = "Pedidos"
-                .Rows(WFilaAtrasos).Cells("Titulo").Value = "Atrasos"
+                .Rows(WFilaAtrasos).Cells("Titulo").Value = "Atraso"
 
             End With
 
@@ -626,6 +626,8 @@ Public Class Grafico
 
     Private Sub DataGridView1_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.RowHeaderMouseDoubleClick
 
+        Dim WLimite = TablaGrilla.Rows.Count - 4
+
         If Tipo = -1 Then
 
             Dim tabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
@@ -786,6 +788,8 @@ Public Class Grafico
                 aux2 = ""
 
                 For Each r As DataGridViewRow In DataGridView1.Rows
+
+                    If r.Index >= WLimite Then Continue For
 
                     r.DefaultCellStyle.BackColor = WColorBasico
 
