@@ -444,7 +444,9 @@ Public Class Grafico
         Dim wacu = 0.0
         Dim WIndice = 0
 
-        Titulo = "COMPARACION ANUAL"
+        If Tabla.Rows.Count > 0 Then
+            Titulo = "COMPARACION ANUAL" & vbCrLf & " - " & Tabla.Rows(0).Item(2) & " -" & vbCrLf & "( "
+        End If
 
         For Each row As DataRow In Tabla.Rows
 
@@ -464,6 +466,9 @@ Public Class Grafico
 
                         If Not IsDBNull(.Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(.Item("Titulo" & i)) Then
                             Chart1.Series.Add(.Item("Titulo" & i))
+
+                            Titulo &= .Item("Titulo" & i) & ","
+
                         End If
 
                         Chart1.Series(.Item("Titulo" & i).ToString).Points.AddXY(.Item(1), wacu)
@@ -484,6 +489,8 @@ Public Class Grafico
             wacu = 0.0
 
         Next
+
+        Titulo = Titulo.Substring(0, Titulo.Length - 1) & " )"
 
         _HabilitarLabels()
 

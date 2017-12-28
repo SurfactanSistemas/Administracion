@@ -489,9 +489,29 @@ Public Class ComparacionesMensualesValorUnico
         Dim row As DataRow
         Dim wacu = 0.0
 
+        Dim WInicial = "", WFinal = ""
+
         _datos.Rows.Clear()
 
-        For i = 1 To 7
+        If datos.Rows.Count > 0 Then
+
+            WInicial = datos.Rows(0).Item(16)
+
+            For i = 27 To 16 Step -1
+
+                If Not IsDBNull(datos.Rows(0).Item(i)) Then
+
+                    WFinal = datos.Rows(0).Item(i)
+
+                    Exit For
+
+                End If
+
+            Next
+
+        End If
+
+        For i = 1 To 9
 
             _rows = datos.Select("Tipo = '" & i & "'")
 
@@ -515,6 +535,7 @@ Public Class ComparacionesMensualesValorUnico
 
                         .Item(1) = _rows(j).Item(1)
                         .Item("Titulo" & j + 1) = _rows(j).Item(2)
+                        .Item(2) = WInicial & " Al " & WFinal
                         .Item(4 + j) = wacu
 
                     End With
