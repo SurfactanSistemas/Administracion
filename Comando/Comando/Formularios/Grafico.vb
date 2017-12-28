@@ -700,7 +700,6 @@ Public Class Grafico
 
         ElseIf Tipo = 2 Then
 
-
             With Chart1
 
                 .Series.Clear()
@@ -716,11 +715,25 @@ Public Class Grafico
 
             For Each r As DataGridViewRow In DataGridView1.Rows
 
-                WA = IIf(IsDBNull(r.Cells(2).Value), "", r.Cells(2).Value)
+                WA = IIf(IsDBNull(r.Cells(1).Value), "", r.Cells(1).Value)
 
-                If WA <> WLinea And WA <> "" Then
-                    WLinea = WA
+                If WA = "" Then
+                    For i = r.Index To 0 Step -1
+
+                        WA = IIf(IsDBNull(DataGridView1.Rows(i).Cells(1).Value), "", DataGridView1.Rows(i).Cells(1).Value)
+
+                        If WA <> "" Then
+                            Exit For
+                        End If
+
+                    Next
                 End If
+
+                If WA = "" Then
+                    Exit Sub
+                End If
+
+                WLinea = valor & " (" & WA & ")"
 
                 r.DefaultCellStyle.BackColor = WColorBasico
 
