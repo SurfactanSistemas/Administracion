@@ -1367,6 +1367,7 @@ Public Class RecibosProvisorios
         _ClavesCheques.Add({row, _clave, _banco, _sucursal, _cheque, _cuenta, _cuit, _estado, _destino})
 
         gridRecibos.Rows(row).Cells(5).Value = row
+        gridRecibos.Rows(row).Cells(12).Value = _cuit ' Guardamos el numero de cuit para que lo guarde.
 
     End Sub
 

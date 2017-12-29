@@ -654,6 +654,7 @@ Public Class Recibos
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + _ReciboProvisorio + "' order by Renglon")
         Dim dr As SqlDataReader
+        Dim _reciboProvi = 0
 
         If Trim(_ReciboProvisorio) = "" Then
             Exit Sub
@@ -674,8 +675,9 @@ Public Class Recibos
                 Do While dr.Read()
                     Dim renglon As String = dr.Item("Renglon").ToString()
 
+                    _reciboProvi = IIf(IsDBNull(dr.Item("ReciboDefinitivo")), 0, dr.Item("ReciboDefinitivo"))
 
-                    If Val(dr.Item("ReciboDefinitivo")) <> 0 Then
+                    If Val(_reciboProvi) <> 0 Then
                         MsgBox("El recibo Provisorio indicado ya se encuentra asociado a un Recibo Definitivo y no se encuentra disponible.", MsgBoxStyle.Information)
                         Exit Try
                     End If
