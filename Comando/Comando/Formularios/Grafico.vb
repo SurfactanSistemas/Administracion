@@ -1,4 +1,5 @@
 ﻿
+Imports System.Text.RegularExpressions
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Windows.Forms.DataVisualization
 
@@ -537,8 +538,33 @@ Public Class Grafico
         Dim Wvalores(10) As String
         Dim windice2 = 0
 
+        Dim WNombres(11) As String
+        Dim WInd = 0
 
-        Titulo = Tabla.Rows(0).Item(1).ToString.Trim & vbCrLf & " - " & Tabla.Rows(0).Item(16).ToString.Trim
+        Titulo = ""
+
+        For Each row As DataRow In Tabla.Rows
+            If Not IsDBNull(row.Item(1)) AndAlso Trim(row.Item(1)) <> "" Then
+
+                If Not WNombres.Contains(row.Item(1)) Then
+                    WNombres(WInd) = row.Item(1)
+                    WInd += 1
+                End If
+
+            End If
+        Next
+
+        For i = 0 To WInd
+            If Not IsNothing(WNombres(i)) Then
+                Titulo &= WNombres(i) & ", "
+            End If
+        Next
+
+        Titulo = Titulo.Substring(0, Trim(Titulo).Length - 1)
+
+        Titulo = ReplaceLastComma(Titulo)
+
+        Titulo &= vbCrLf & " - " & Tabla.Rows(0).Item(16).ToString.Trim
 
         For i = 27 To 16 Step -1
 
@@ -601,6 +627,11 @@ Public Class Grafico
         _HabilitarLabels()
 
     End Sub
+
+    Private Function ReplaceLastComma(ByVal s As String)
+        Static re As New Regex("\s*,\s*([^,]*)$")
+        Return re.Replace(s, " y $1")
+    End Function
 
     Private Sub _ProcesarAcumulado()
         Dim wacu = 0.0
@@ -841,60 +872,40 @@ Public Class Grafico
 
         ElseIf Tipo = 1 Then
 
-            With Chart1
+            Dim valorComparable = DataGridView1.Rows(e.RowIndex).Cells("Titulo").Value
 
-                .Series.Clear()
-                .ResetAutoValues()
+            Dim rows() As DataRow = TablaConsolidados.Select("Descripcion = '" & valorComparable & "'")
+            Dim Waux = 0.0
 
-            End With
+            If rows.Count > 0 Then
 
-            Dim valor = ""
+                With Chart1
 
-            valor = DataGridView1.CurrentRow.Cells(2).Value
+                    .Series.Clear()
+                    .ResetAutoValues()
 
-            Dim aux = 0.0, WLinea = "", aux2 = ""
-            
-            For i = 4 To 15
+                End With
 
-                aux = 0.0
-                WLinea = ""
-                aux2 = ""
+                For i = 4 To 15
 
-                For Each r As DataGridViewRow In DataGridView1.Rows
+                    Waux = 0.0
+                    
+                    Waux = IIf(IsDBNull(rows(0).Item(i)), 0, rows(0).Item(i))
 
-                    If r.Index >= WLimite Then Continue For
+                    If Chart1.Series.IsUniqueName(valorComparable) Then
+                        Chart1.Series.Add(valorComparable)
+                    End If
 
-                    r.DefaultCellStyle.BackColor = WColorBasico
-
-                    aux2 = IIf(IsDBNull(r.Cells(2).Value), "", r.Cells(2).Value)
-
-                    If aux2 = valor Then
-
-                        If Chart1.Series.IsUniqueName(valor) Then
-                            Chart1.Series.Add(valor)
-                        End If
-
-                        aux += IIf(IsDBNull(r.Cells(i).Value), 0, r.Cells(i).Value)
-
-                        If Not IsDBNull(r.Cells(i + 12).Value) Then
-                            WLinea = r.Cells(i + 12).Value
-                        End If
-
-                        r.DefaultCellStyle.BackColor = Color.LightBlue
-
+                    If Waux <> 0 Then
+                        Chart1.Series(valorComparable).Points.AddXY(rows(0).Item(i + 12), Waux)
                     End If
 
                 Next
 
-                If Trim(WLinea) <> "" Then
-                    Chart1.Series(valor).Points.AddXY(WLinea, aux)
-                End If
+                _HabilitarLabels()
 
-            Next
-
-            _HabilitarLabels()
-
-
+            End If
+            
         ElseIf Tipo = 4 Then
 
             ComparacionesMensualesValorUnico._RegraficarConsolidado(DataGridView1.Rows(e.RowIndex).Cells("Titulo").Value)

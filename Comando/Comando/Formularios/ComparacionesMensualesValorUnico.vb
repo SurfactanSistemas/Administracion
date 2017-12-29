@@ -552,7 +552,13 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Public Sub _RegraficarConsolidado(ByVal valor As String)
+    Public Sub _RegraficarConsolidado(ByVal valor As String, Optional ByVal limpiar As Boolean = False)
+
+        If limpiar Then
+            For Each _c As CheckBox In _ValoresComparables()
+                _c.Checked = False
+            Next
+        End If
 
         ' Seleccionamos el valor comparable.
 
@@ -618,6 +624,8 @@ Public Class ComparacionesMensualesValorUnico
 
             Dim WRow() As DataRow = IIf(consolidadoTotal, datos.Select("", "Corte"), datos.Rows)
 
+            'Dim cou = datos.Select("Titulo is null").Count
+
             For x = 0 To datos.Rows.Count - 1
 
                 If x <> 0 AndAlso x Mod corte = 0 Then
@@ -628,7 +636,6 @@ Public Class ComparacionesMensualesValorUnico
 
                     _datos.Rows(aux2).Item("Valor" & i) += IIf(IsDBNull(WRow(x).Item("Valor" & i)), 0, WRow(x).Item("Valor" & i))
                     _datos.Rows(aux2).Item("Titulo" & i) = IIf(IsDBNull(WRow(x).Item("Titulo" & i)), "", WRow(x).Item("Titulo" & i))
-                    _datos.Rows(aux2).Item("Descripcion") = IIf(IsDBNull(WRow(x).Item("Titulo")), "", WRow(x).Item("Titulo"))
                     _datos.Rows(aux2).Item("Corte") = IIf(IsDBNull(datos.Rows(x).Item("Corte")), 0, datos.Rows(x).Item("Corte"))
                     _datos.Rows(aux2).Item("Tipo") = IIf(IsDBNull(datos.Rows(x).Item("Tipo")), 0, datos.Rows(x).Item("Tipo"))
 
@@ -641,6 +648,8 @@ Public Class ComparacionesMensualesValorUnico
             For i = 0 To aux2
 
                 With _datos.Rows(i)
+
+                    .Item("Descripcion") = _DescripcionSegunTipo(.Item("Corte"))
 
                     Select Case Val(.Item("Corte"))
 
