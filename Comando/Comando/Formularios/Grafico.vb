@@ -446,8 +446,8 @@ Public Class Grafico
                             WIndice2 += 1
                         End If
 
-                        If Not _wValoresDibujados.Contains(aux) Then
-                            _wValoresDibujados(WIndice) = aux
+                        If Not _wValoresDibujados.Contains(.Item(2)) Then
+                            _wValoresDibujados(WIndice) = .Item(2)
 
                             WIndice += 1
                         End If
@@ -601,8 +601,8 @@ Public Class Grafico
                             windice2 += 1
                         End If
 
-                        If Not _wValoresDibujados.Contains(.Item(1)) Then
-                            _wValoresDibujados(WIndice) = .Item(1)
+                        If Not _wValoresDibujados.Contains(.Item(2)) Then
+                            _wValoresDibujados(WIndice) = .Item(2)
                             WIndice += 1
                         End If
 
@@ -873,6 +873,8 @@ Public Class Grafico
         ElseIf Tipo = 1 Then
 
             Dim valorComparable = DataGridView1.Rows(e.RowIndex).Cells("Titulo").Value
+
+            If valorComparable = "Precio" Then Exit Sub
 
             Dim rows() As DataRow = TablaConsolidados.Select("Descripcion = '" & valorComparable & "'")
             Dim Waux = 0.0

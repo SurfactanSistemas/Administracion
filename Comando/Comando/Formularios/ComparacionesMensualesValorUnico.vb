@@ -99,6 +99,8 @@ Public Class ComparacionesMensualesValorUnico
 
         Dim WDatos() As String = _TraerValoresAComparar()
 
+        If Not WDatos.Any(Function(v) Not IsNothing(v)) Then : Exit Function : End If
+
         '
         ' Obtenemos los datos de las familias en el periodo dado.
         '
@@ -131,7 +133,7 @@ Public Class ComparacionesMensualesValorUnico
                 For i = 1 To 4 Step 2
                     _BuscarDatosComparativoMensual(anios(i), anios(i + 1), WDatos, datos, WMeses)
                 Next
-                
+
                 ds.Tables.Add(datos)
 
         End Select
@@ -261,7 +263,7 @@ Public Class ComparacionesMensualesValorUnico
                     End If
 
                     WValoresABuscar = ""
-                    For i = 0 To 11
+                    For i = 0 To 12
 
                         If wMeses(i) > -1 AndAlso Not IsNothing(wMeses(i)) Then
 
@@ -306,7 +308,7 @@ Public Class ComparacionesMensualesValorUnico
                                 .Item("Corte") = ZCorte
                                 .Item("Titulo") = Trim(dr.Item("Descripcion"))
 
-                                For i = 0 To 11
+                                For i = 0 To 12
 
                                     If wMeses(i) > -1 AndAlso Not IsNothing(wMeses(i)) Then
                                         rowIndex += 1
@@ -351,7 +353,7 @@ Public Class ComparacionesMensualesValorUnico
 
                     WValoresABuscar = ""
                     Dim auxi1 = 0
-                    For i = WMesDesde To 11
+                    For i = WMesDesde To 12
 
                         If wMeses(i) > -1 Then
 
@@ -410,7 +412,7 @@ Public Class ComparacionesMensualesValorUnico
                                 .Item("Corte") = ZCorte
                                 .Item("Titulo") = Trim(dr.Item("Descripcion"))
 
-                                For i = WMesDesde To 11
+                                For i = WMesDesde To 12
 
                                     If wMeses(i) > -1 Then
                                         rowIndex += 1
@@ -1008,7 +1010,7 @@ Public Class ComparacionesMensualesValorUnico
                 End If
 
                 WValoresABuscar = ""
-                For i = 0 To 11
+                For i = 0 To 12
 
                     If Val(wMeses(i)) > 0 AndAlso Not IsNothing(wMeses(i)) Then
 
@@ -1056,7 +1058,7 @@ Public Class ComparacionesMensualesValorUnico
                                 .Item("Corte") = Val(dr.Item("Tipo"))
                                 .Item("Titulo") = _DescripcionSegunTipo(.Item("Corte"))
 
-                                For i = 0 To 11
+                                For i = 0 To 12
 
                                     If wMeses(i) > -1 AndAlso Not IsNothing(wMeses(i)) Then
                                         rowIndex += 1
@@ -1089,7 +1091,7 @@ Public Class ComparacionesMensualesValorUnico
                     
                     Dim aux1 = 0
 
-                    For i = Val(txtMesDesde.Text) To 11
+                    For i = Val(txtMesDesde.Text) To 12
 
                         aux1 += 1
 
@@ -1103,7 +1105,7 @@ Public Class ComparacionesMensualesValorUnico
                     End If
 
                     WValoresABuscar = ""
-                    For i = Val(txtMesDesde.Text) To 11
+                    For i = Val(txtMesDesde.Text) To 12
 
                         If Val(wMeses(i)) > 0 AndAlso Not IsNothing(wMeses(i)) Then
 
@@ -1336,7 +1338,7 @@ Public Class ComparacionesMensualesValorUnico
 
         End If
 
-        If ckPrecio.Checked Then
+        If ckPrecio.Checked And Not ckConsolidado.Checked Then
             i += 1
             WDatos(i) = "8"
         End If
@@ -1397,7 +1399,7 @@ Public Class ComparacionesMensualesValorUnico
             End If
 
             ' Calculamos la cantidad de meses del primer año.
-            For i = WMesInicial To 11
+            For i = WMesInicial To 12
 
                 aux1 += 1
 
@@ -1569,7 +1571,7 @@ Public Class ComparacionesMensualesValorUnico
         Dim valido = False
         Dim aux = 0
 
-        For i = Val(txtMesDesde.Text) To 11
+        For i = Val(txtMesDesde.Text) To 12
             aux += 1
         Next
 
