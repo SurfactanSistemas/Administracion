@@ -1,4 +1,5 @@
 ﻿
+Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Windows.Forms.DataVisualization
@@ -401,6 +402,8 @@ Public Class Grafico
 
         End If
 
+        Chart1.Series.Clear()
+
         For Each row As DataRow In Tabla.Rows
 
             With row
@@ -423,7 +426,11 @@ Public Class Grafico
 
             With row
 
+                If row.Item("Titulo") = "Costo" Then Continue For
+
                 For i = 1 To 12
+
+                    'If i = 12 Then Stop
 
                     wacu = 0.0
 
@@ -433,26 +440,26 @@ Public Class Grafico
 
                     End If
 
-                    If wacu <> 0 Then
+                    'If wacu <> 0 Then
 
-                        aux = Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)
+                    aux = Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)
 
-                        Chart1.Series(aux).Points.AddXY(.Item("Titulo" & i), wacu)
+                    Chart1.Series(aux).Points.AddXY(.Item("Titulo" & i), wacu)
 
-                        If Not WValores.Contains(.Item(2)) Then
+                    If Not WValores.Contains(.Item(2)) Then
 
-                            WValores(WIndice2) = .Item(2)
+                        WValores(WIndice2) = .Item(2)
 
-                            WIndice2 += 1
-                        End If
-
-                        If Not _wValoresDibujados.Contains(.Item(2)) Then
-                            _wValoresDibujados(WIndice) = .Item(2)
-
-                            WIndice += 1
-                        End If
-
+                        WIndice2 += 1
                     End If
+
+                    If Not _wValoresDibujados.Contains(.Item(2)) Then
+                        _wValoresDibujados(WIndice) = .Item(2)
+
+                        WIndice += 1
+                    End If
+
+                    'End If
 
                 Next
 
@@ -497,25 +504,26 @@ Public Class Grafico
 
                     End If
 
-                    If wacu <> 0 Then
+                    'If wacu <> 0 Then
 
-                        If Not IsDBNull(.Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(.Item("Titulo" & i)) Then
-                            Chart1.Series.Add(.Item("Titulo" & i))
+                    If Not IsDBNull(.Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(.Item("Titulo" & i)) Then
+                        Chart1.Series.Add(.Item("Titulo" & i))
 
-                            Titulo &= .Item("Titulo" & i) & ","
+                        Titulo &= .Item("Titulo" & i) & ","
+                    ElseIf IsDBNull(.Item("Titulo" & i)) Then
+                        Continue For
+                    End If
 
-                        End If
+                    Chart1.Series(.Item("Titulo" & i).ToString).Points.AddXY(.Item(1), wacu)
 
-                        Chart1.Series(.Item("Titulo" & i).ToString).Points.AddXY(.Item(1), wacu)
+                    If Not _wValoresDibujados.Contains(.Item("Titulo" & i)) Then
 
-                        If Not _wValoresDibujados.Contains(.Item("Titulo" & i)) Then
-
-                            _wValoresDibujados(WIndice) = .Item("Titulo" & i)
-                            WIndice += 1
-
-                        End If
+                        _wValoresDibujados(WIndice) = .Item("Titulo" & i)
+                        WIndice += 1
 
                     End If
+
+                    ' End If
 
                 Next
 
@@ -592,21 +600,21 @@ Public Class Grafico
                     End If
 
 
-                    If wacu <> 0 Then
+                    'If wacu <> 0 Then
 
-                        Chart1.Series((.Item(2) & " (" & .Item(1) & ")").ToString).Points.AddXY(.Item(i + 15), wacu)
+                    Chart1.Series((.Item(2) & " (" & .Item(1) & ")").ToString).Points.AddXY(.Item(i + 15), wacu)
 
-                        If Not Wvalores.Contains(.Item(2)) Then
-                            Wvalores(windice2) = .Item(2)
-                            windice2 += 1
-                        End If
-
-                        If Not _wValoresDibujados.Contains(.Item(2)) Then
-                            _wValoresDibujados(WIndice) = .Item(2)
-                            WIndice += 1
-                        End If
-
+                    If Not Wvalores.Contains(.Item(2)) Then
+                        Wvalores(windice2) = .Item(2)
+                        windice2 += 1
                     End If
+
+                    If Not _wValoresDibujados.Contains(.Item(2)) Then
+                        _wValoresDibujados(WIndice) = .Item(2)
+                        WIndice += 1
+                    End If
+
+                    'End If
 
                 Next
 
@@ -657,7 +665,7 @@ Public Class Grafico
                         wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
                     End If
 
-                    If wacu <> 0 And (Not IsDBNull(.Item(1)) AndAlso Trim(.Item(1)) <> "") Then
+                    If (Not IsDBNull(.Item(1)) AndAlso Trim(.Item(1)) <> "") Then
                         Chart1.Series(.Item(1)).Points.AddXY(.Item("Titulo" & i), wacu)
 
                         If Not _wValoresDibujados.Contains(.Item(1)) Then
@@ -761,13 +769,13 @@ Public Class Grafico
 
             For Each r As DataGridViewRow In DataGridView1.Rows
 
+                If r.Index >= DataGridView1.Rows.Count - 4 Then Exit For
+
                 WA = IIf(IsDBNull(r.Cells(1).Value), "", r.Cells(1).Value)
 
                 If WA <> WLinea And WA <> "" Then
                     WLinea = WA
                 End If
-
-                r.DefaultCellStyle.BackColor = WColorBasico
 
                 WAuxi = IIf(IsDBNull(r.Cells(2).Value), "", r.Cells(2).Value)
 
@@ -783,8 +791,16 @@ Public Class Grafico
 
                     Chart1.Series(valor).Points.AddXY(WLinea, aux)
 
-                    r.DefaultCellStyle.BackColor = Color.LightBlue
+                End If
 
+            Next
+
+            For Each row As DataGridViewRow In DataGridView1.Rows
+
+                row.DefaultCellStyle.BackColor = WColorBasico
+
+                If row.Cells(2).Value = valor Then
+                    row.DefaultCellStyle.BackColor = Color.LightBlue
                 End If
 
             Next
@@ -820,6 +836,8 @@ Public Class Grafico
             Dim aux = 0.0, WA = "", WLinea = ""
 
             For Each r As DataGridViewRow In DataGridView1.Rows
+
+                'If r.Index > DataGridView1.Rows.Count - 4 Then Continue For
 
                 WA = IIf(IsDBNull(r.Cells(1).Value), "", r.Cells(1).Value)
 
@@ -1018,6 +1036,10 @@ Public Class Grafico
                             End If
                         Next
 
+                        If aux = 0 Then
+                            ComoPorce = False
+                        End If
+
                         If ComoPorce Then
                             .Label = "% " & Helper.formatonumerico((.YValues(0) * 100) / aux)
                         Else
@@ -1068,4 +1090,134 @@ Public Class Grafico
     'Private Sub DataGridView1_ColumnHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.ColumnHeaderMouseDoubleClick
     '    MsgBox(DataGridView1.Columns(e.ColumnIndex).Width)
     'End Sub
+
+    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ComandoII")
+        Dim dr As SqlDataReader
+        Dim WCampo = ""
+        Dim WCampos = ""
+        Dim WValores = ""
+        Dim WRow() As DataRow
+        Dim WTabla As DataTable
+        Dim WLineaDes = ""
+
+        Try
+            ' Limpiamos los datos que esten presentes con anterioridad.
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.ExecuteNonQuery()
+
+            If TypeOf DataGridView1.DataSource Is DataView Then
+                WTabla = DataGridView1.DataSource.toTable.Copy
+            ElseIf TypeOf DataGridView1.DataSource Is DataTable Then
+                WTabla = DataGridView1.DataSource.Copy
+            Else
+                Exit Sub
+            End If
+
+            For i = 1 To 9
+
+                WRow = WTabla.Select("Tipo = " & i)
+
+                If WRow.Length = 0 Then Continue For
+
+                WLineaDes = WRow(0).Item("Descripcion")
+                WCampo = ""
+
+                WCampos = "Tipo, Descripcion,"
+                WValores = i & ",'" & WLineaDes & "',"
+
+                For x = 1 To 12
+                    WCampos &= "Impre" & x & ","
+                    WValores &= "'" & WRow(0).Item("Titulo" & x) & "',"
+                Next
+
+                For j = 0 To WRow.Length - 1
+
+                    WCampo = WRow(j).Item("Titulo")
+
+                    Select Case UCase(WCampo)
+                        Case "VENTAS U$S"
+                            WCampo = "Venta"
+                        Case "KILOS"
+                            WCampo = "Kilos"
+                        Case "STOCK"
+                            WCampo = "Stock"
+                        Case "ATRASO"
+                            WCampo = "Atraso"
+                        Case "PEDIDOS"
+                            WCampo = "Pedidos"
+                        Case "ROTACIÓN"
+                            WCampo = "Rotacion"
+                        Case "FACTOR"
+                            WCampo = "Factor"
+                        Case "PRECIO"
+                            WCampo = "Precio"
+                        Case "% VENTA"
+                            WCampo = "PorceVenta"
+                        Case "% ATRASO"
+                            WCampo = "PorceAtraso"
+                        Case Else
+                            WCampo = ""
+                    End Select
+
+                    If WCampo = "" Then Continue For
+
+                    For x = 1 To 12
+
+                        WCampos &= WCampo & x & ","
+                        WValores &= Helper.formatonumerico(WRow(j).Item("Valor" & x)) & ","
+
+                    Next
+
+                Next
+
+                If WCampos.EndsWith(",") Then
+                    WCampos = WCampos.Substring(0, WCampos.Length - 1)
+                End If
+
+                If WValores.EndsWith(",") Then
+                    WValores = WValores.Substring(0, WValores.Length - 1)
+                End If
+                cm.CommandText = "INSERT INTO ComandoII (" & WCampos & ") VALUES (" & WValores & ")"
+
+                cm.ExecuteNonQuery()
+            Next
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+            Exit Sub
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        With VistaPrevia
+            .Reporte = New listacomando
+            .Imprimir()
+        End With
+
+    End Sub
+
+    Private Sub _ImprimirGrafico()
+        PrintDocument1.DefaultPageSettings.Landscape = True
+        Chart1.Printing.PrintDocument = PrintDocument1 ' this enables the adding of other material to the page on which the chart is printed
+        Chart1.Printing.Print(False) ' True/False -> show print dialog
+    End Sub
+
+    Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        Chart1.Printing.PrintPaint(e.Graphics, New Rectangle(0, 0, Chart1.Width, Chart1.Height)) ' draw the chart
+    End Sub
+
+    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
+        _ImprimirGrafico()
+    End Sub
 End Class

@@ -175,6 +175,8 @@ Public Class ComparacionesMensualesValorUnico
 
                 ds.Tables.Add(datos)
 
+                DataGridView1.DataSource = datos
+
         End Select
 
         '
@@ -347,7 +349,7 @@ Public Class ComparacionesMensualesValorUnico
                                 .Item("Tipo") = dr.Item("Linea")
                                 .Item("Descripcion") = _NombreLineaSegunNumero(.Item("Tipo"))
                                 .Item("Corte") = ZCorte
-                                .Item("Titulo") = Trim(dr.Item("Descripcion"))
+                                .Item("Titulo") = _DescripcionSegunTipo(dr.Item("Tipo"))
 
                                 For i = 0 To 12
 
@@ -357,7 +359,7 @@ Public Class ComparacionesMensualesValorUnico
                                         WMes = ""
                                         WMes = wMeses(i) & "/" & Str$(WAnio1)
 
-                                        WDato = dr.Item("Importe" & i)
+                                        WDato = dr.Item("Importe" & Trim(wMeses(i)))
 
                                         .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
                                         .Item("Titulo" & rowIndex) = WMes
@@ -522,6 +524,8 @@ Public Class ComparacionesMensualesValorUnico
             cm = Nothing
 
         End Try
+
+        DataGridView1.DataSource = datos
     End Sub
 
     Private Sub _FormatearAnual(ByRef datos As DataTable)
@@ -566,7 +570,7 @@ Public Class ComparacionesMensualesValorUnico
 
                     wacu = 0.0
 
-                    For x = 4 To 14
+                    For x = 4 To 15
 
                         If Not IsDBNull(_rows(j).Item(x)) Then
                             wacu += Val(Helper.formatonumerico(_rows(j).Item(x)))
@@ -617,7 +621,7 @@ Public Class ComparacionesMensualesValorUnico
                 ckAtrasados.Checked = True
             Case "PEDIDOS"
                 ckPedidos.Checked = True
-            Case "ROTACION"
+            Case "ROTACIÓN"
                 ckRotacion.Checked = True
             Case "FACTOR"
                 ckFactor.Checked = True

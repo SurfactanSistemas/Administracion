@@ -124,62 +124,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reportes\DataSets\DataSet1.Designer.vb">
+    <Compile Include="Reportes\listacomando.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\DataSets\DSMensualesValoresUnicos.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DSMensualesValoresUnicos.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\DataSets\VentasMensuales.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VentasMensuales.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\ListadoNormal.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ListadoNormal.rpt</DependentUpon>
+      <DependentUpon>listacomando.rpt</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\AnualPorFamiliaBarras.vb">
-      <DependentUpon>AnualPorFamiliaBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\MensualComparativoBarras.vb">
-      <DependentUpon>MensualComparativoBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\MensualEntreFamiliaLineas.vb">
-      <DependentUpon>MensualEntreFamiliaLineas.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\MensualEntreFamiliasBarras.vb">
-      <DependentUpon>MensualEntreFamiliasBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\MensualPorFamiliaLineas.vb">
-      <DependentUpon>MensualPorFamiliaLineas.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\Mensuales\MensualPorFamiliaBarras.vb">
-      <DependentUpon>MensualPorFamiliaBarras.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reportes\VistaPrevia.designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
@@ -204,33 +153,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ListadoNormal.rpt">
+    <EmbeddedResource Include="Reportes\listacomando.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ListadoNormal.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\AnualPorFamiliaBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>AnualPorFamiliaBarras.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\MensualComparativoBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualComparativoBarras.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\MensualEntreFamiliaLineas.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualEntreFamiliaLineas.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\MensualEntreFamiliasBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualEntreFamiliasBarras.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\MensualPorFamiliaLineas.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualPorFamiliaLineas.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Mensuales\MensualPorFamiliaBarras.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MensualPorFamiliaBarras.vb</LastGenOutput>
+      <LastGenOutput>listacomando.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
@@ -248,41 +173,8 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Reportes\DataSets\DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="Reportes\DataSets\DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="Reportes\DataSets\DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Reportes\DataSets\DSMensualesValoresUnicos.xsc">
-      <DependentUpon>DSMensualesValoresUnicos.xsd</DependentUpon>
-    </None>
-    <None Include="Reportes\DataSets\DSMensualesValoresUnicos.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DSMensualesValoresUnicos.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="Reportes\DataSets\DSMensualesValoresUnicos.xss">
-      <DependentUpon>DSMensualesValoresUnicos.xsd</DependentUpon>
-    </None>
-    <None Include="Reportes\DataSets\VentasMensuales.xsc">
-      <DependentUpon>VentasMensuales.xsd</DependentUpon>
-    </None>
-    <None Include="Reportes\DataSets\VentasMensuales.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>VentasMensuales.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="Reportes\DataSets\VentasMensuales.xss">
-      <DependentUpon>VentasMensuales.xsd</DependentUpon>
-    </None>
     <None Include="Resources\Aceptar N2.png" />
   </ItemGroup>
   <ItemGroup>
