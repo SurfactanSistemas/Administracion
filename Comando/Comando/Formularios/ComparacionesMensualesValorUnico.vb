@@ -109,6 +109,8 @@ Public Class ComparacionesMensualesValorUnico
             Case 0
                 _BuscarDatosBrutos(WMeses, WDatos, datos)
 
+                DataGridView1.DataSource = datos
+
                 ' Si es consolidado, rearmamos la tabla con los totales por valor comparable.
                 If ckConsolidado.Checked Then
                     _FormatearConsolidado(datos)
@@ -221,9 +223,11 @@ Public Class ComparacionesMensualesValorUnico
 
         If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
 
-            _FormatearConsolidado(WTablaConsolidado, _ValoresComparables.Count, True)
+            _FormatearConsolidado(WTablaConsolidado, _ValoresComparables.Count, True, WDatos)
 
         End If
+
+        DataGridView1.DataSource = WTablaConsolidado
 
         ds.Tables.Add(WTablaConsolidado)
 
@@ -590,7 +594,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub _FormatearConsolidado(ByRef datos As DataTable, Optional ByVal valoresSeleccionados As Integer = 0, Optional ByVal consolidadoTotal As Boolean = False)
+    Private Sub _FormatearConsolidado(ByRef datos As DataTable, Optional ByVal valoresSeleccionados As Integer = 0, Optional ByVal consolidadoTotal As Boolean = False, Optional ByVal WDatos() As String = Nothing)
         Dim _datos = datos.Copy
         Dim aux = valoresSeleccionados
         Dim aux2 = 0.0
@@ -620,34 +624,51 @@ Public Class ComparacionesMensualesValorUnico
         aux2 = 0
 
         If consolidadoTotal Then
+
+            For i = 0 To _datos.Rows.Count - 1
+
+                If Not IsNothing(WDatos(i + 1)) Then
+                    _datos.Rows(i).Item("Corte") = WDatos(i + 1)
+                End If
+
+            Next
+
+            Dim auxi = 0.0
+
             datos.DefaultView.Sort = "Titulo"
 
             DataGridView1.DataSource = datos
 
-            Dim WRow() As DataRow = IIf(consolidadoTotal, datos.Select("", "Corte"), datos.Rows)
+            Dim WRow() As DataRow
 
-            'Dim cou = datos.Select("Titulo is null").Count
+            For i = 0 To WDatos.Length - 2
 
-            For x = 0 To datos.Rows.Count - 1
+                If Not IsNothing(WDatos(i + 1)) And i <= WDatos.Length + 1 Then
 
-                If x <> 0 AndAlso x Mod corte = 0 Then
-                    aux2 += 1
+                    WRow = datos.Select("Corte = '" & WDatos(i + 1) & "'")
+
+                    If WRow.Length = 0 Then Continue For
+
+                    For j = 1 To 12
+
+                        For x = 0 To WRow.Length - 1
+
+                            _datos.Rows(i).Item("Valor" & j) += WRow(x).Item("Valor" & j)
+                            _datos.Rows(i).Item("Titulo" & j) = IIf(IsDBNull(WRow(x).Item("Titulo" & j)), "", WRow(x).Item("Titulo" & j))
+                            _datos.Rows(i).Item("Tipo") = IIf(IsDBNull(WRow(x).Item("Tipo")), 0, WRow(x).Item("Tipo"))
+
+                        Next
+
+                    Next
+
                 End If
-
-                For i = 1 To 12
-
-                    _datos.Rows(aux2).Item("Valor" & i) += IIf(IsDBNull(WRow(x).Item("Valor" & i)), 0, WRow(x).Item("Valor" & i))
-                    _datos.Rows(aux2).Item("Titulo" & i) = IIf(IsDBNull(WRow(x).Item("Titulo" & i)), "", WRow(x).Item("Titulo" & i))
-                    _datos.Rows(aux2).Item("Corte") = IIf(IsDBNull(datos.Rows(x).Item("Corte")), 0, datos.Rows(x).Item("Corte"))
-                    _datos.Rows(aux2).Item("Tipo") = IIf(IsDBNull(datos.Rows(x).Item("Tipo")), 0, datos.Rows(x).Item("Tipo"))
-
-                Next
 
             Next
 
+            ' Dim cou = datos.Select("Titulo is null").Count
 
             ' Recalculamos los valores.
-            For i = 0 To aux2
+            For i = 0 To _datos.Rows.Count - 1
 
                 With _datos.Rows(i)
 
@@ -664,7 +685,8 @@ Public Class ComparacionesMensualesValorUnico
                             For j = 1 To 12
 
                                 ZAu = ""
-                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", Trim(.Item("Titulo" & j)))
+                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", .Item("Titulo" & j))
+                                ZAu = Trim(ZAu)
 
                                 If Trim(ZAu) <> "" Then
 
@@ -674,6 +696,8 @@ Public Class ComparacionesMensualesValorUnico
                                     ' Buscamos los valores de Costo y Stock para determinado mes.
                                     WAux = _BuscarDato(WMes, WAnio, 1) ' Venta
                                     WAux2 = _BuscarDato(WMes, WAnio, 3) ' Costo
+
+                                    WAux = WAux / WAux2
 
                                     .Item("Valor" & j) = Val(Helper.formatonumerico(WAux / WAux2))
 
@@ -690,7 +714,8 @@ Public Class ComparacionesMensualesValorUnico
                             For j = 1 To 12
 
                                 ZAu = ""
-                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", Trim(.Item("Titulo" & j)))
+                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", .Item("Titulo" & j))
+                                ZAu = Trim(ZAu)
 
                                 If Trim(ZAu) <> "" Then
 
@@ -711,7 +736,8 @@ Public Class ComparacionesMensualesValorUnico
                             For j = 1 To 12
 
                                 ZAu = ""
-                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", Trim(.Item("Titulo" & j)))
+                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", .Item("Titulo" & j))
+                                ZAu = Trim(ZAu)
 
                                 If Trim(ZAu) <> "" Then
 
@@ -735,7 +761,8 @@ Public Class ComparacionesMensualesValorUnico
                             For j = 1 To 12
 
                                 ZAu = ""
-                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", Trim(.Item("Titulo" & j)))
+                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", .Item("Titulo" & j))
+                                ZAu = Trim(ZAu)
 
                                 If Trim(ZAu) <> "" Then
 
@@ -761,7 +788,8 @@ Public Class ComparacionesMensualesValorUnico
                             For j = 1 To 12
 
                                 ZAu = ""
-                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", Trim(.Item("Titulo" & j)))
+                                ZAu = IIf(IsDBNull(.Item("Titulo" & j)), "", .Item("Titulo" & j))
+                                ZAu = Trim(ZAu)
 
                                 If Trim(ZAu) <> "" Then
 
@@ -943,6 +971,8 @@ Public Class ComparacionesMensualesValorUnico
         End If
 
         datos = _datos.Copy
+
+        DataGridView1.DataSource = datos
     End Sub
 
     Private Function _BuscarDato(ByVal wMes As Object, ByVal wAnio As Object, ByVal _Tipo As Integer) As Double

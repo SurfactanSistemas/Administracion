@@ -39,17 +39,17 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckQuimicos = New System.Windows.Forms.CheckBox()
         Me.ckConsolidado = New System.Windows.Forms.CheckBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.ckPorcentaje = New System.Windows.Forms.CheckBox()
         Me.ckRotacion = New System.Windows.Forms.CheckBox()
         Me.ckStock = New System.Windows.Forms.CheckBox()
         Me.ckPrecio = New System.Windows.Forms.CheckBox()
         Me.ckFactor = New System.Windows.Forms.CheckBox()
-        Me.ckPorcentajeAtrasos = New System.Windows.Forms.CheckBox()
         Me.ckKilos = New System.Windows.Forms.CheckBox()
         Me.ckAtrasados = New System.Windows.Forms.CheckBox()
         Me.ckVenta = New System.Windows.Forms.CheckBox()
         Me.ckPedidos = New System.Windows.Forms.CheckBox()
         Me.ckTodosValores = New System.Windows.Forms.CheckBox()
+        Me.ckPorcentaje = New System.Windows.Forms.CheckBox()
+        Me.ckPorcentajeAtrasos = New System.Windows.Forms.CheckBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtAnioDesde = New System.Windows.Forms.MaskedTextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -241,17 +241,6 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Valores a Graficar"
         '
-        'ckPorcentaje
-        '
-        Me.ckPorcentaje.AutoSize = True
-        Me.ckPorcentaje.Location = New System.Drawing.Point(204, 10)
-        Me.ckPorcentaje.Name = "ckPorcentaje"
-        Me.ckPorcentaje.Size = New System.Drawing.Size(98, 22)
-        Me.ckPorcentaje.TabIndex = 0
-        Me.ckPorcentaje.Text = "Porcentaje"
-        Me.ckPorcentaje.UseVisualStyleBackColor = True
-        Me.ckPorcentaje.Visible = False
-        '
         'ckRotacion
         '
         Me.ckRotacion.AutoSize = True
@@ -291,17 +280,6 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckFactor.TabIndex = 0
         Me.ckFactor.Text = "Factor"
         Me.ckFactor.UseVisualStyleBackColor = True
-        '
-        'ckPorcentajeAtrasos
-        '
-        Me.ckPorcentajeAtrasos.AutoSize = True
-        Me.ckPorcentajeAtrasos.Location = New System.Drawing.Point(204, 35)
-        Me.ckPorcentajeAtrasos.Name = "ckPorcentajeAtrasos"
-        Me.ckPorcentajeAtrasos.Size = New System.Drawing.Size(153, 22)
-        Me.ckPorcentajeAtrasos.TabIndex = 0
-        Me.ckPorcentajeAtrasos.Text = "Porcentaje Atrasos"
-        Me.ckPorcentajeAtrasos.UseVisualStyleBackColor = True
-        Me.ckPorcentajeAtrasos.Visible = False
         '
         'ckKilos
         '
@@ -352,6 +330,28 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckTodosValores.TabIndex = 0
         Me.ckTodosValores.Text = "Todas"
         Me.ckTodosValores.UseVisualStyleBackColor = True
+        '
+        'ckPorcentaje
+        '
+        Me.ckPorcentaje.AutoSize = True
+        Me.ckPorcentaje.Location = New System.Drawing.Point(204, 10)
+        Me.ckPorcentaje.Name = "ckPorcentaje"
+        Me.ckPorcentaje.Size = New System.Drawing.Size(98, 22)
+        Me.ckPorcentaje.TabIndex = 0
+        Me.ckPorcentaje.Text = "Porcentaje"
+        Me.ckPorcentaje.UseVisualStyleBackColor = True
+        Me.ckPorcentaje.Visible = False
+        '
+        'ckPorcentajeAtrasos
+        '
+        Me.ckPorcentajeAtrasos.AutoSize = True
+        Me.ckPorcentajeAtrasos.Location = New System.Drawing.Point(204, 35)
+        Me.ckPorcentajeAtrasos.Name = "ckPorcentajeAtrasos"
+        Me.ckPorcentajeAtrasos.Size = New System.Drawing.Size(153, 22)
+        Me.ckPorcentajeAtrasos.TabIndex = 0
+        Me.ckPorcentajeAtrasos.Text = "Porcentaje Atrasos"
+        Me.ckPorcentajeAtrasos.UseVisualStyleBackColor = True
+        Me.ckPorcentajeAtrasos.Visible = False
         '
         'Label3
         '
@@ -472,7 +472,6 @@ Partial Class ComparacionesMensualesValorUnico
         Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView1.Size = New System.Drawing.Size(585, 150)
         Me.DataGridView1.TabIndex = 8
-        Me.DataGridView1.Visible = False
         '
         'pnlAnios
         '
@@ -603,7 +602,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(628, 353)
+        Me.ClientSize = New System.Drawing.Size(743, 544)
         Me.Controls.Add(Me.GroupBox8)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.DataGridView1)
