@@ -13,9 +13,46 @@ Public Class ComparacionesMensualesValorUnico
         ckConsolidado.Checked = True
         cmbTipoGrafico.SelectedIndex = 0
         cmbPeriodo.SelectedIndex = 0
-        txtAnioDesde.Text = Date.Now.ToString("yyyy")
-        txtAnioHasta.Text = Date.Now.ToString("yyyy")
+        txtAnioDesde.Text = _BuscarAnoPorDefecto()
+        txtAnioHasta.Text = txtAnioDesde.Text
     End Sub
+
+    Private Function _BuscarAnoPorDefecto() As String
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Ano) as Anio FROM ComandoDatosII")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                Return dr.Item("Anio")
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return Date.Now.Year
+
+    End Function
 
     Private Sub _CargarAniosComparables()
 
@@ -632,8 +669,6 @@ Public Class ComparacionesMensualesValorUnico
                 End If
 
             Next
-
-            Dim auxi = 0.0
 
             datos.DefaultView.Sort = "Titulo"
 
@@ -1670,22 +1705,28 @@ Public Class ComparacionesMensualesValorUnico
             Case 2
 
                 For Each ck As CheckBox In _ValoresComparables()
-                    ck.Checked = False
 
                     If _ValoresComparables.Count(Function(_ck) _ck.Checked) = 1 Then
                         Exit For
                     End If
 
-                Next
-
-                For Each ck As CheckBox In Familias()
                     ck.Checked = False
 
-                    If Familias.Count(Function(_ck) _ck.Checked) = 1 Then
-                        Exit For
-                    End If
-
                 Next
+
+                If Familias.Count(Function(_ck) _ck.Checked) > 1 Then
+
+                    For Each ck As CheckBox In Familias()
+
+                        ck.Checked = False
+
+                        If Familias.Count(Function(_ck) _ck.Checked) = 1 Then
+                            Exit For
+                        End If
+
+                    Next
+                End If
+
 
                 If ckConsolidado.Checked Then
                     ckConsolidado.Checked = False
@@ -1858,46 +1899,33 @@ Public Class ComparacionesMensualesValorUnico
         End If
     End Sub
 
-    Private Sub ckFamilias_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckQuimicos.CheckedChanged, ckColorantes.CheckedChanged, ckFarma.CheckedChanged, ckFazonFarma.CheckedChanged, ckFazonPellital.CheckedChanged, ckFazonQuimicos.CheckedChanged, ckVarios.CheckedChanged, ckPapel.CheckedChanged, ckBiocidas.CheckedChanged
-
-        'Dim control As CheckBox = sender
-
-        'If (_EsComparacionMensual() And Not ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 2 Then
-
-        '    For Each ck As CheckBox In Familias()
-
-        '        If control.Checked = False Then
-        '            Exit For
-        '        End If
-
-        '        If control.Name <> ck.Name Then
-        '            ck.Checked = False
-        '        End If
-
-        '    Next
-
-        'End If
-
-    End Sub
-
     Private Sub ckConsolidado_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckConsolidado.CheckedChanged
 
         If ckConsolidado.Checked Then
 
             For Each ck As CheckBox In Familias()
+
                 With ck
+
                     .Checked = True
+
                     .Enabled = False
+
                 End With
+
             Next
 
         Else
 
             For Each ck As CheckBox In Familias()
+
                 With ck
+
                     .Checked = False
                     .Enabled = True
+
                 End With
+
             Next
 
         End If
