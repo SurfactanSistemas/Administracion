@@ -904,6 +904,16 @@ Public Class Grafico
 
                 Next
 
+                For Each row As DataGridViewRow In DataGridView1.Rows
+
+                    row.DefaultCellStyle.BackColor = WColorBasico
+
+                    If row.Cells("Titulo").Value = valorComparable Then
+                        row.DefaultCellStyle.BackColor = Color.LightBlue
+                    End If
+
+                Next
+
                 _HabilitarLabels()
 
             End If

@@ -699,7 +699,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                     WAux = WAux / WAux2
 
-                                    .Item("Valor" & j) = Val(Helper.formatonumerico(WAux / WAux2))
+                                    .Item("Valor" & j) = Val(Helper.formatonumerico(WAux))
 
                                 End If
 
