@@ -1427,7 +1427,7 @@ Public Class RecibosProvisorios
                     Case Is < 7
                         txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2018"
                     Case Else
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2017"
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2019"
                 End Select
 
             End If

@@ -2037,7 +2037,7 @@ Public Class Pagos
                     ZSql &= " '" & XPunto1 & "', '" & XNumero1 & "', " & Str(XImporte1) & ", '" & XTipo2 & "', '" & XNumero2 & "',"
                     ZSql &= " '" & XFecha2 & "', '" & XBanco2 & "', " & XImporte2 & ", '" & XObservaciones2 & "', '" & XEmpresa & "',"
                     ZSql &= " '" & XConcepto & "', '" & XObservaciones & "', " & Str(XImporte) & ", '" & XFechaOrd2 & "', '" & XConsecionaria & "',"
-                    ZSql &= " " & XImpolist & ", '" & XCuenta & "', " & XImpoNeto & ", " & XRetIbCiudad & ", '', '', '', '', '', '', " & XParidad & ")"
+                    ZSql &= " " & XImpolist & ", '" & XCuenta & "', " & XImpoNeto & ", " & Str$(XRetIbCiudad) & ", '', '', '', '', '', '', " & XParidad & ")"
 
 
                     SQLConnector.conexionSql(cn, cm)
@@ -6516,8 +6516,16 @@ Public Class Pagos
 
             'Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
 
-            If txtFechaAux.Text.Replace(" ", "").Length = 6 Then
-                txtFechaAux.Text &= "2017"
+            If Len(Trim(txtFechaAux.Text)) = 6 Then
+                Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
+
+                Select Case Val(_mes)
+                    Case Is < 7
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2018"
+                    Case Else
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2019"
+                End Select
+
             End If
 
             If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
