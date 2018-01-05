@@ -185,34 +185,6 @@ Public Class Grafico
 
     End Sub
 
-    Private Sub _MostrarConsolidados()
-
-        _LimpiarConsolidadosAgregadosAnteriormente()
-
-        For Each _str As String In From _str1 In _wValoresDibujados Where Not IsNothing(_str1)
-            _ProcesarAcumulados(_str)
-        Next
-
-    End Sub
-
-    Private Sub _LimpiarConsolidadosAgregadosAnteriormente()
-
-        If DataGridView1.Rows.Count > TablaGrilla.Rows.Count Then
-
-            Dim aux As DataGridViewRow
-
-            For i = TablaGrilla.Rows.Count To DataGridView1.Rows.Count - 1
-
-                aux = DataGridView1.Rows(i)
-
-                DataGridView1.Rows.Remove(aux)
-
-            Next
-
-        End If
-
-    End Sub
-
     Private Sub _ProcesarAcumulados2(ByVal _rows As DataGridViewRowCollection)
         Dim WFilaVenta = 0, WFilaKilos = 0, WFilaPedidos = 0, WFilaAtrasos = 0
         Dim WVenta = 0.0, WKilos = 0.0, WPedidos = 0.0, WAtrasos = 0.0
@@ -341,53 +313,38 @@ Public Class Grafico
         Next
     End Sub
 
-    Private Sub _ProcesarAcumulados(ByVal str As String)
-
-        Dim aux = DataGridView1.DataSource
-        Dim WTabla As DataTable
-
-        If TypeOf aux Is DataView Then
-            WTabla = aux.toTable.Copy
-        ElseIf TypeOf aux Is DataTable Then
-            WTabla = aux.Copy
-        Else
-            Exit Sub
-        End If
-
-        WTabla.TableName = "Consolidados"
-
-        Dim _r() As DataRow = TablaConsolidados.Select("Descripcion = '" & str & "'")
-
-        If _r.Count > 0 Then
-
-            For i = 0 To _r.Count - 1
-                Dim WR As DataRow = WTabla.NewRow
-                WR = _r(i)
-
-                WR.Item("Titulo") = WR.Item("Descripcion")
-                WR.Item("Descripcion") = "Consolidado"
-
-                WTabla.ImportRow(WR)
-            Next
-
-            DataGridView1.DataSource = WTabla
-
-        End If
-
-    End Sub
-
     Private Sub _ProcesarComparativoMensual()
 
         Dim wacu = 0.0
-        Dim WIndice = 0, WIndice2 = 0
+        Dim WIndice = 0, WIndice2 = 0, WIndiceLineas = 0
         Dim aux = ""
         Dim WValores(9) As String
+        Dim WLineas(9) As String
 
-        Titulo = "COMPARATIVO ENTRE PERIODOS" & vbCrLf
+        Titulo = "COMPARATIVO ENTRE PERIODOS" & vbCrLf & " - "
 
         If Tabla.Rows.Count > 0 Then
 
-            Titulo &= " - " & Tabla.Rows(0).Item(16) & " Al "
+            For i = 0 To Tabla.Rows.Count - 1
+
+                If Not IsDBNull(Tabla.Rows(i).Item(1)) AndAlso Not WLineas.Contains(Tabla.Rows(i).Item(1)) Then
+
+                    WLineas(WIndiceLineas) = Tabla.Rows(i).Item(1)
+                    WIndiceLineas += 1
+
+                End If
+
+            Next
+
+            For Each wl In From wl1 In WLineas Where Not IsNothing(wl1)
+                Titulo &= wl & ", "
+            Next
+
+            Titulo = Titulo.Substring(0, Trim(Titulo).Length - 1)
+
+            Titulo = ReplaceLastComma(Titulo)
+
+            Titulo &= " -" & vbCrLf & " - " & Tabla.Rows(0).Item(16) & " Al "
 
             For i = 27 To 16 Step -1
 
@@ -496,7 +453,11 @@ Public Class Grafico
 
                 For i = 1 To 12
 
+                    If Not IsDBNull(.Item("Titulo" & i)) AndAlso .Item("Titulo" & i) = "Costo" Then Continue For
+
                     wacu = 0.0
+
+
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
 
@@ -658,7 +619,7 @@ Public Class Grafico
         For Each row As DataRow In Tabla.Rows
 
             With row
-
+                
                 For i = 1 To 12
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
@@ -720,8 +681,6 @@ Public Class Grafico
     End Sub
 
     Private Sub DataGridView1_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.RowHeaderMouseDoubleClick
-
-        Dim WLimite = TablaGrilla.Rows.Count - 4
 
         If Tipo = -1 Then
 
@@ -909,7 +868,7 @@ Public Class Grafico
                 For i = 4 To 15
 
                     Waux = 0.0
-                    
+
                     Waux = IIf(IsDBNull(rows(0).Item(i)), 0, rows(0).Item(i))
 
                     If Chart1.Series.IsUniqueName(valorComparable) Then
@@ -935,7 +894,7 @@ Public Class Grafico
                 _HabilitarLabels()
 
             End If
-            
+
         ElseIf Tipo = 4 Then
 
             ComparacionesMensualesValorUnico._RegraficarConsolidado(DataGridView1.Rows(e.RowIndex).Cells("Titulo").Value)
@@ -996,8 +955,6 @@ Public Class Grafico
 
     Private Sub _LabelsComoPorcentaje(ByVal serie As Series)
         Dim aux As Double
-        Dim WValores(2, 12)
-        Dim WAuxi = 0
 
         aux = 0.0
 
@@ -1095,7 +1052,6 @@ Public Class Grafico
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("DELETE FROM ComandoII")
-        Dim dr As SqlDataReader
         Dim WCampo = ""
         Dim WCampos = ""
         Dim WValores = ""
@@ -1193,7 +1149,6 @@ Public Class Grafico
             Exit Sub
         Finally
 
-            dr = Nothing
             cn.Close()
             cn = Nothing
             cm = Nothing
