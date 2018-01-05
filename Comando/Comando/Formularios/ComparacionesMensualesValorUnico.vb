@@ -164,6 +164,10 @@ Public Class ComparacionesMensualesValorUnico
 
                 Dim anios(4) As Integer
 
+                If ckConsolidado.Checked And Not _ValidoParaConsolidarEntrePeriodos() Then
+                    Return Nothing
+                End If
+
                 anios(1) = Val(txtAnioDesde.Text)
                 anios(2) = Val(txtAnioHasta.Text)
                 anios(3) = Val(txtAnioDesde.Text) - 1
@@ -172,6 +176,16 @@ Public Class ComparacionesMensualesValorUnico
                 For i = 1 To 4 Step 2
                     _BuscarDatosComparativoMensual(anios(i), anios(i + 1), WDatos, datos, WMeses)
                 Next
+
+                If datos.Rows.Count = 0 OrElse datos.Rows.Count - 9 = 0 Then
+                    Throw New Exception("No existen datos para alguno de los siguientes Años: " & anios(1) & " o " & anios(3))
+                End If
+
+                If ckConsolidado.Checked Then
+
+                    _FormatearConsolidadoComparativoMensual(datos)
+
+                End If
 
                 ds.Tables.Add(datos)
 
@@ -274,6 +288,63 @@ Public Class ComparacionesMensualesValorUnico
 
     End Function
 
+    Private Sub _FormatearConsolidadoComparativoMensual(ByRef datos As DataTable)
+
+        If datos.Rows.Count = 0 Then Exit Sub
+
+        Dim _datos = datos.Copy
+        Dim _row As DataRow
+
+        _datos.Clear()
+
+        For i = 1 To datos.Rows.Count / 9
+            _row = _datos.NewRow()
+            _datos.Rows.Add(_row)
+        Next
+
+        Dim aux = -9
+
+        For i = 0 To _datos.Rows.Count - 1
+
+            With _datos.Rows(i)
+
+                aux += 9
+
+                ' Asignamos los datos generales segun el primer registro de cada año.
+                .Item("Tipo") = datos.Rows(aux).Item("Tipo")
+                .Item("Corte") = datos.Rows(aux).Item("Corte")
+                .Item("Titulo") = datos.Rows(aux).Item("Titulo")
+                .Item("Descripcion") = "Consolidado"
+
+                ' Extraemos los datos de las fechas e inicializamos los valores de cada uno en cero.
+                For j = 1 To 12
+                    .Item("Valor" & j) = 0
+                    .Item("Titulo" & j) = datos.Rows(aux).Item("Titulo" & j)
+                Next
+
+                ' Recorremos los datos de todas las lineas por mes y vamos consolidando en el mes correspondiente.
+                For x = aux To aux + 8
+
+                    For j = 1 To 12
+
+                        .Item("Valor" & j) += IIf(IsDBNull(datos.Rows(x).Item("Valor" & j)), 0, datos.Rows(x).Item("Valor" & j))
+
+                    Next
+
+                Next
+
+            End With
+
+        Next
+
+        datos = _datos.Copy
+
+    End Sub
+
+    Private Function _ValidoParaConsolidarEntrePeriodos() As Boolean
+        Return {ckVenta, ckKilos, ckPedidos, ckAtrasados}.Any(Function(ck) ck.Checked)
+    End Function
+
     Private Sub _BuscarDatosComparativoMensual(ByVal anio1 As Object, ByVal anio2 As Object, ByVal wDatos As String(), ByRef datos As DataTable, ByVal wMeses As String())
 
         Dim cn = New SqlConnection()
@@ -302,7 +373,23 @@ Public Class ComparacionesMensualesValorUnico
                     WDatosABuscar = ""
 
                     If Not IsNothing(wDatos(j)) OrElse wDatos(j) <> "" Then
-                        WDatosABuscar &= wDatos(j) & ","
+
+                        If ckConsolidado.Checked Then
+                            Select Case Val(wDatos(j))
+
+                                Case 1, 2, 5, 6
+
+                                    WDatosABuscar &= wDatos(j) & ","
+
+                                Case Else
+
+                                    WDatosABuscar = ""
+
+                            End Select
+                        Else
+                            WDatosABuscar &= wDatos(j) & ","
+                        End If
+
                     End If
 
                     WValoresABuscar = ""
@@ -853,6 +940,9 @@ Public Class ComparacionesMensualesValorUnico
 
         Else
 
+            ' ACA esta fallando a la hora de traer Rotacion como mensual acumulado.
+            Dim WA = 0
+
             For x = 0 To datos.Rows.Count - 1
 
                 If x <> 0 AndAlso x Mod corte = 0 Then
@@ -860,6 +950,10 @@ Public Class ComparacionesMensualesValorUnico
                 End If
 
                 For i = 1 To 12
+
+                    WA = IIf(IsDBNull(datos.Rows(x).Item("Corte")), 0, datos.Rows(x).Item("Corte"))
+
+                    If WA = 3 Then Continue For
 
                     _datos.Rows(aux2).Item("Valor" & i) += IIf(IsDBNull(datos.Rows(x).Item("Valor" & i)), 0, datos.Rows(x).Item("Valor" & i))
                     _datos.Rows(aux2).Item("Titulo" & i) = IIf(IsDBNull(datos.Rows(x).Item("Titulo" & i)), "", datos.Rows(x).Item("Titulo" & i))
