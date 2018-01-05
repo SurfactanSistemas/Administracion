@@ -27,7 +27,7 @@ Partial Class CierreMes
         Me.txtAno = New Administracion.CustomTextBox()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
-        Me.Proceso = New Administracion.CustomComboBox()
+        Me.cmbEstado = New Administracion.CustomComboBox()
         Me.btnGraba = New Administracion.CustomButton()
         Me.btnMenu = New Administracion.CustomButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -49,6 +49,7 @@ Partial Class CierreMes
         Me.txtMes.Name = "txtMes"
         Me.txtMes.Size = New System.Drawing.Size(66, 20)
         Me.txtMes.TabIndex = 0
+        Me.txtMes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtMes, "Mes")
         Me.txtMes.Validator = Administracion.ValidatorType.None
         '
@@ -62,6 +63,7 @@ Partial Class CierreMes
         Me.txtAno.Name = "txtAno"
         Me.txtAno.Size = New System.Drawing.Size(66, 20)
         Me.txtAno.TabIndex = 1
+        Me.txtAno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtAno, "Año")
         Me.txtAno.Validator = Administracion.ValidatorType.None
         '
@@ -89,18 +91,20 @@ Partial Class CierreMes
         Me.CustomLabel2.TabIndex = 11
         Me.CustomLabel2.Text = "Estado"
         '
-        'Proceso
+        'cmbEstado
         '
-        Me.Proceso.Cleanable = False
-        Me.Proceso.Empty = False
-        Me.Proceso.EnterIndex = -1
-        Me.Proceso.FormattingEnabled = True
-        Me.Proceso.LabelAssociationKey = -1
-        Me.Proceso.Location = New System.Drawing.Point(368, 19)
-        Me.Proceso.Name = "Proceso"
-        Me.Proceso.Size = New System.Drawing.Size(151, 21)
-        Me.Proceso.TabIndex = 2
-        Me.Proceso.Validator = Administracion.ValidatorType.None
+        Me.cmbEstado.Cleanable = False
+        Me.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEstado.Empty = False
+        Me.cmbEstado.EnterIndex = -1
+        Me.cmbEstado.FormattingEnabled = True
+        Me.cmbEstado.Items.AddRange(New Object() {"Mes Abierto", "Mes Cerrado", "                      "})
+        Me.cmbEstado.LabelAssociationKey = -1
+        Me.cmbEstado.Location = New System.Drawing.Point(368, 19)
+        Me.cmbEstado.Name = "cmbEstado"
+        Me.cmbEstado.Size = New System.Drawing.Size(151, 21)
+        Me.cmbEstado.TabIndex = 2
+        Me.cmbEstado.Validator = Administracion.ValidatorType.None
         '
         'btnGraba
         '
@@ -183,7 +187,7 @@ Partial Class CierreMes
         Me.Panel2.Controls.Add(Me.txtMes)
         Me.Panel2.Controls.Add(Me.txtAno)
         Me.Panel2.Controls.Add(Me.CustomLabel2)
-        Me.Panel2.Controls.Add(Me.Proceso)
+        Me.Panel2.Controls.Add(Me.cmbEstado)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(582, 59)
@@ -210,7 +214,7 @@ Partial Class CierreMes
     Friend WithEvents txtAno As Administracion.CustomTextBox
     Friend WithEvents CustomLabel1 As Administracion.CustomLabel
     Friend WithEvents CustomLabel2 As Administracion.CustomLabel
-    Friend WithEvents Proceso As Administracion.CustomComboBox
+    Friend WithEvents cmbEstado As Administracion.CustomComboBox
     Friend WithEvents btnGraba As Administracion.CustomButton
     Friend WithEvents btnMenu As Administracion.CustomButton
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
