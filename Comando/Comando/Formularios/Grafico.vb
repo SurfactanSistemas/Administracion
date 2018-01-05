@@ -682,6 +682,12 @@ Public Class Grafico
 
     Private Sub DataGridView1_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.RowHeaderMouseDoubleClick
 
+        _RedibujarDatos(e.RowIndex)
+
+    End Sub
+
+    Private Sub _RedibujarDatos(ByVal rowIndex As Integer)
+
         If Tipo = -1 Then
 
             Dim tabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
@@ -693,12 +699,12 @@ Public Class Grafico
             End With
 
 
-            Chart1.Series.Add(tabla(e.RowIndex).Item(1))
+            Chart1.Series.Add(tabla(rowIndex).Item(1))
 
             For i = 4 To 15
 
-                If Not IsDBNull(tabla(e.RowIndex).Item(i)) AndAlso tabla(e.RowIndex).Item(i) <> 0 Then
-                    Chart1.Series(tabla(e.RowIndex).Item(1).ToString).Points.AddXY(tabla(e.RowIndex).Item(i + 12), tabla(e.RowIndex).Item(i))
+                If Not IsDBNull(tabla(rowIndex).Item(i)) AndAlso tabla(rowIndex).Item(i) <> 0 Then
+                    Chart1.Series(tabla(rowIndex).Item(1).ToString).Points.AddXY(tabla(rowIndex).Item(i + 12), tabla(rowIndex).Item(i))
                 End If
 
             Next
@@ -849,7 +855,7 @@ Public Class Grafico
 
         ElseIf Tipo = 1 Then
 
-            Dim valorComparable = DataGridView1.Rows(e.RowIndex).Cells("Titulo").Value
+            Dim valorComparable = DataGridView1.Rows(rowIndex).Cells("Titulo").Value
 
             If valorComparable = "Precio" Then Exit Sub
 
@@ -897,7 +903,7 @@ Public Class Grafico
 
         ElseIf Tipo = 4 Then
 
-            ComparacionesMensualesValorUnico._RegraficarConsolidado(DataGridView1.Rows(e.RowIndex).Cells("Titulo").Value)
+            ComparacionesMensualesValorUnico._RegraficarConsolidado(DataGridView1.Rows(rowIndex).Cells("Titulo").Value)
 
         Else
 
@@ -911,12 +917,12 @@ Public Class Grafico
 
             End With
 
-            Chart1.Series.Add(tabla(e.RowIndex).Item(2))
+            Chart1.Series.Add(tabla(rowIndex).Item(2))
 
             For i = 4 To 15
 
-                If Not IsDBNull(tabla(e.RowIndex).Item(i)) AndAlso tabla(e.RowIndex).Item(i) <> 0 Then
-                    Chart1.Series(tabla(e.RowIndex).Item(2).ToString).Points.AddXY(tabla(e.RowIndex).Item(i + 12), tabla(e.RowIndex).Item(i))
+                If Not IsDBNull(tabla(rowIndex).Item(i)) AndAlso tabla(rowIndex).Item(i) <> 0 Then
+                    Chart1.Series(tabla(rowIndex).Item(2).ToString).Points.AddXY(tabla(rowIndex).Item(i + 12), tabla(rowIndex).Item(i))
                 End If
 
             Next
@@ -938,7 +944,6 @@ Public Class Grafico
             _ProcesarAcumulados2(DataGridView1.Rows)
 
         End If
-
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
@@ -1174,5 +1179,11 @@ Public Class Grafico
 
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
         _ImprimirGrafico()
+    End Sub
+
+    Private Sub DataGridView1_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
+
+        _RedibujarDatos(e.RowIndex)
+
     End Sub
 End Class
