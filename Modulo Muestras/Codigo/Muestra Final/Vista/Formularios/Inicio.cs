@@ -30,6 +30,10 @@ namespace Vista
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            TB_Desde.Text = DateTime.Now.Year.ToString();
+            TB_Hasta.Text = TB_Desde.Text;
+
             ConfigurationManager.AppSettings["Fecha_Desde"] = TB_Desde.Text;
             ConfigurationManager.AppSettings["Fecha_Hasta"] = TB_Hasta.Text;
 
