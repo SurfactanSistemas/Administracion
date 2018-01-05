@@ -848,7 +848,7 @@ Public Class ComparacionesMensualesValorUnico
                                     WMes = Mid(ZAu, 1, 1)
                                     WAnio = ZAu.Substring(ZAu.Length - 4)
 
-                                    ' Buscamos los valores de Costo y Stock para determinado mes.
+                                    ' Buscamos los valores de Ventas U$S.
                                     WAux += _BuscarDato(WMes, WAnio, 1) ' Ventas U$S
 
                                     WCantMeses += 1
@@ -895,7 +895,7 @@ Public Class ComparacionesMensualesValorUnico
                                     WMes = Mid(ZAu, 1, 1)
                                     WAnio = ZAu.Substring(ZAu.Length - 4)
 
-                                    ' Buscamos los valores de Costo y Stock para determinado mes.
+                                    ' Buscamos los valores de Nro Atrasos y Nro Pedidos para determinado mes.
                                     WAux = _BuscarDato(WMes, WAnio, 6) ' Nro Atrasos
                                     WAux2 = _BuscarDato(WMes, WAnio, 5) ' Nro Pedidos
 
