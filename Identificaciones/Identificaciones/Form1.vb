@@ -165,7 +165,10 @@ Public Class Form1
     Private Sub txtProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtProveedor.Text) = "" Then : Exit Sub : End If
+            If Trim(txtProveedor.Text) = "" Then
+                btnConsultas.PerformClick()
+                Exit Sub
+            End If
 
             Try
                 _CargarProveedor()
@@ -377,5 +380,142 @@ Public Class Form1
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         _Limpiar()
+    End Sub
+
+    Private Sub btnConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultas.Click
+        Try
+            _CargarProveedores()
+            lstFiltrada.Visible = False
+            pnlConsulta.Visible = True
+            txtAyuda.Focus()
+        Catch ex As Exception
+            pnlConsulta.Visible = False
+            txtNroDocumento.Focus()
+        End Try
+    End Sub
+
+    Private Sub _CargarProveedores()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor WHERE Nombre <> '' ORDER BY Nombre")
+        Dim dr As SqlDataReader
+
+        Try
+            lstConsulta.Items.Clear()
+            cmbIndices.Items.Clear()
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+
+                    lstConsulta.Items.Add(IIf(IsDBNull(dr.Item("Nombre")), "", dr.Item("Nombre")))
+                    cmbIndices.Items.Add(IIf(IsDBNull(dr.Item("Proveedor")), 0, dr.Item("Proveedor")))
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer traer los Proveedores Disponibles desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    ' Rutinas de Filtrado Dinámico.
+    Private Sub _FiltrarDinamicamente()
+        Dim origen As ListBox = lstConsulta
+        Dim final As ListBox = lstFiltrada
+        Dim cadena As String = Trim(txtAyuda.Text)
+
+        final.Items.Clear()
+
+        If UCase(Trim(cadena)) <> "" Then
+
+            For Each item In origen.Items
+
+                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+                    final.Items.Add(item)
+
+                End If
+
+            Next
+
+            final.Visible = True
+            origen.Visible = False
+
+        Else
+
+            final.Visible = False
+            origen.Visible = True
+
+        End If
+    End Sub
+
+    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+        Dim origen As ListBox = lstConsulta
+        Dim filtrado As ListBox = lstFiltrada
+        Dim texto As TextBox = txtAyuda
+
+        If IsNothing(filtrado.SelectedItem) Then : Exit Sub : End If
+
+        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+        origen.SelectedItem = filtrado.SelectedItem
+
+        ' Llamamos al evento que tenga asosiado el control de origen.
+        'lstConsulta_Click(Nothing, Nothing)
+
+
+        ' Sacamos de vista los resultados filtrados.
+        filtrado.Visible = False
+        texto.Text = ""
+    End Sub
+
+    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        _FiltrarDinamicamente()
+    End Sub
+
+    Private Sub lstConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
+        Dim WIndice = ""
+
+        Try
+            cmbIndices.SelectedIndex = lstConsulta.SelectedIndex
+
+            WIndice = cmbIndices.SelectedItem
+
+            txtProveedor.Text = WIndice
+
+            _CargarProveedor()
+
+            pnlConsulta.Visible = False
+
+            txtObservaciones.Focus()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            txtAyuda.Focus()
+        End Try
+
+    End Sub
+
+    Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
+        btnConsultas.PerformClick()
+    End Sub
+
+    Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
+        pnlConsulta.Visible = False
+        txtProveedor.Focus()
     End Sub
 End Class

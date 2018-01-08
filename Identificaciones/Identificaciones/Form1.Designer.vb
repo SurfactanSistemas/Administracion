@@ -27,6 +27,7 @@ Partial Class Form1
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.btnImprimir = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnConsultas = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
@@ -50,7 +51,13 @@ Partial Class Form1
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.pnlImagen = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.pnlConsulta = New System.Windows.Forms.Panel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lstFiltrada = New System.Windows.Forms.ListBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
+        Me.lstConsulta = New System.Windows.Forms.ListBox()
+        Me.cmbIndices = New System.Windows.Forms.ComboBox()
+        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
         Me.TableLayoutPrincipal.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutCabecera.SuspendLayout()
@@ -58,6 +65,8 @@ Partial Class Form1
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.pnlConsulta.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPrincipal
@@ -111,6 +120,16 @@ Partial Class Form1
         Me.btnCerrar.Text = "Cerrar"
         Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
         Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Location = New System.Drawing.Point(422, 19)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(83, 39)
+        Me.btnLimpiar.TabIndex = 0
+        Me.btnLimpiar.Text = "Limpiar"
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Campos")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnConsultas
         '
@@ -363,21 +382,80 @@ Partial Class Form1
         Me.pnlImagen.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.pnlImagen, "Haga 'Doble Click' para cargar una nueva imagen.")
         '
-        'btnLimpiar
+        'pnlConsulta
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(422, 19)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(83, 39)
-        Me.btnLimpiar.TabIndex = 0
-        Me.btnLimpiar.Text = "Limpiar"
-        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Campos")
-        Me.btnLimpiar.UseVisualStyleBackColor = True
+        Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlConsulta.Controls.Add(Me.GroupBox2)
+        Me.pnlConsulta.Location = New System.Drawing.Point(335, 48)
+        Me.pnlConsulta.Name = "pnlConsulta"
+        Me.pnlConsulta.Size = New System.Drawing.Size(381, 272)
+        Me.pnlConsulta.TabIndex = 1
+        Me.pnlConsulta.Visible = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.lstFiltrada)
+        Me.GroupBox2.Controls.Add(Me.btnCerrarConsulta)
+        Me.GroupBox2.Controls.Add(Me.txtAyuda)
+        Me.GroupBox2.Controls.Add(Me.lstConsulta)
+        Me.GroupBox2.Controls.Add(Me.cmbIndices)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox2.Location = New System.Drawing.Point(9, 6)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(363, 260)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Consulta Proveedores"
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.Location = New System.Drawing.Point(13, 49)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(338, 173)
+        Me.lstFiltrada.TabIndex = 3
+        Me.lstFiltrada.Visible = False
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(12, 25)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(338, 20)
+        Me.txtAyuda.TabIndex = 2
+        '
+        'lstConsulta
+        '
+        Me.lstConsulta.FormattingEnabled = True
+        Me.lstConsulta.Location = New System.Drawing.Point(12, 48)
+        Me.lstConsulta.Name = "lstConsulta"
+        Me.lstConsulta.Size = New System.Drawing.Size(338, 173)
+        Me.lstConsulta.TabIndex = 1
+        '
+        'cmbIndices
+        '
+        Me.cmbIndices.FormattingEnabled = True
+        Me.cmbIndices.Location = New System.Drawing.Point(350, 207)
+        Me.cmbIndices.Name = "cmbIndices"
+        Me.cmbIndices.Size = New System.Drawing.Size(18, 21)
+        Me.cmbIndices.TabIndex = 0
+        Me.cmbIndices.Visible = False
+        '
+        'btnCerrarConsulta
+        '
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(122, 225)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(118, 29)
+        Me.btnCerrarConsulta.TabIndex = 0
+        Me.btnCerrarConsulta.Text = "Cerrar Consulta"
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(823, 368)
+        Me.Controls.Add(Me.pnlConsulta)
         Me.Controls.Add(Me.TableLayoutPrincipal)
         Me.Location = New System.Drawing.Point(10, 10)
         Me.MaximizeBox = False
@@ -394,6 +472,9 @@ Partial Class Form1
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
+        Me.pnlConsulta.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -425,5 +506,12 @@ Partial Class Form1
     Friend WithEvents btnGuardar As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
+    Friend WithEvents pnlConsulta As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents lstFiltrada As System.Windows.Forms.ListBox
+    Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
+    Friend WithEvents lstConsulta As System.Windows.Forms.ListBox
+    Friend WithEvents cmbIndices As System.Windows.Forms.ComboBox
+    Friend WithEvents btnCerrarConsulta As System.Windows.Forms.Button
 
 End Class
