@@ -27,8 +27,8 @@ Public Class Form1
     End Sub
 
     Private Sub _Limpiar()
-        For Each txt In {}
-            txt.text = ""
+        For Each txt In {txtApellido, txtDescProveedor, txtNombres, txtNroDocumento, txtObservaciones, txtProveedor}
+            txt.Text = ""
         Next
 
         txtNroDocumento.Focus()
@@ -212,6 +212,7 @@ Public Class Form1
         Try
             _GrabarIdentificacion(WClave, WDNI, WApellido, WNombres, WProveedor, WObservacionesI, WObservacionesII)
             MsgBox("Identificación guardada con éxito!", MsgBoxStyle.Information)
+            btnLimpiar.PerformClick()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -336,4 +337,45 @@ Public Class Form1
         Return False
 
     End Function
+
+    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+        If Trim(txtNroDocumento.Text) = "" Or Trim(txtProveedor.Text) = "" Then Exit Sub
+
+        If MsgBox("¿Está seguro de que quiere ELIMINAR esta Identificación?", MsgBoxStyle.YesNo) = vbYesNo Then
+            txtNroDocumento.Focus()
+            Exit Sub
+        End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "DELETE FROM Identificaciones WHERE Clave = '" & txtProveedor.Text.Trim & txtNroDocumento.Text.Trim & "'"
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        btnLimpiar.PerformClick()
+
+    End Sub
+
+    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+        _Limpiar()
+    End Sub
 End Class

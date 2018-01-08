@@ -50,6 +50,7 @@ Partial Class Form1
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.pnlImagen = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPrincipal.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutCabecera.SuspendLayout()
@@ -80,6 +81,7 @@ Partial Class Form1
         '
         Me.Panel4.Controls.Add(Me.btnImprimir)
         Me.Panel4.Controls.Add(Me.btnCerrar)
+        Me.Panel4.Controls.Add(Me.btnLimpiar)
         Me.Panel4.Controls.Add(Me.btnConsultas)
         Me.Panel4.Controls.Add(Me.btnEliminar)
         Me.Panel4.Controls.Add(Me.btnGuardar)
@@ -92,7 +94,7 @@ Partial Class Form1
         '
         'btnImprimir
         '
-        Me.btnImprimir.Location = New System.Drawing.Point(584, 19)
+        Me.btnImprimir.Location = New System.Drawing.Point(630, 19)
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(83, 39)
         Me.btnImprimir.TabIndex = 0
@@ -102,7 +104,7 @@ Partial Class Form1
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(477, 19)
+        Me.btnCerrar.Location = New System.Drawing.Point(526, 19)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(83, 39)
         Me.btnCerrar.TabIndex = 0
@@ -112,7 +114,7 @@ Partial Class Form1
         '
         'btnConsultas
         '
-        Me.btnConsultas.Location = New System.Drawing.Point(370, 19)
+        Me.btnConsultas.Location = New System.Drawing.Point(318, 19)
         Me.btnConsultas.Name = "btnConsultas"
         Me.btnConsultas.Size = New System.Drawing.Size(83, 39)
         Me.btnConsultas.TabIndex = 0
@@ -122,7 +124,7 @@ Partial Class Form1
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(263, 19)
+        Me.btnEliminar.Location = New System.Drawing.Point(214, 19)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(83, 39)
         Me.btnEliminar.TabIndex = 0
@@ -132,7 +134,7 @@ Partial Class Form1
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(156, 19)
+        Me.btnGuardar.Location = New System.Drawing.Point(110, 19)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(83, 39)
         Me.btnGuardar.TabIndex = 0
@@ -361,6 +363,16 @@ Partial Class Form1
         Me.pnlImagen.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.pnlImagen, "Haga 'Doble Click' para cargar una nueva imagen.")
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Location = New System.Drawing.Point(422, 19)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(83, 39)
+        Me.btnLimpiar.TabIndex = 0
+        Me.btnLimpiar.Text = "Limpiar"
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Campos")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -412,5 +424,6 @@ Partial Class Form1
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
     Friend WithEvents btnGuardar As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents btnLimpiar As System.Windows.Forms.Button
 
 End Class
