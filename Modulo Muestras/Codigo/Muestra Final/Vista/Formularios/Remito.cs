@@ -278,7 +278,7 @@ namespace Vista
                 // Eliminamos los espacios y "/" del nombre del Producto.
                 desc = desc.Replace(" ", "").Replace("/", "");
 
-                if (cod.StartsWith("PT"))
+                if (cod.StartsWith("PT") || cod.StartsWith("CO"))
                 {
                     // Eliminamos los "-" y el prefijo "PT" del Código del Producto.
                     cod = cod.Replace("-", "").Replace("PT", "");
@@ -293,10 +293,12 @@ namespace Vista
                     cod = string.Join("-", ZCod);
                 }
 
-                if (System.IO.File.Exists(ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", desc + cod)))
+                string nom = (cod.StartsWith("PT")) ? desc + cod : cod;
+
+                if (System.IO.File.Exists(ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom)))
                 {
 
-                    System.IO.File.Copy(ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", desc + cod), DESTINO_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", desc + cod));
+                    System.IO.File.Copy(ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom), DESTINO_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom));
 
                 }
                 else
