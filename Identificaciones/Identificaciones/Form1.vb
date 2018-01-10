@@ -624,4 +624,8 @@ Public Class Form1
         End Try
 
     End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        picFoto_MouseDoubleClick(Nothing, Nothing)
+    End Sub
 End Class
