@@ -49,15 +49,17 @@ Partial Class Form1
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.pnlImagen = New System.Windows.Forms.Panel()
+        Me.pnlFotoFinal = New System.Windows.Forms.Panel()
+        Me.picFoto = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlConsulta = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.lstFiltrada = New System.Windows.Forms.ListBox()
+        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.lstConsulta = New System.Windows.Forms.ListBox()
         Me.cmbIndices = New System.Windows.Forms.ComboBox()
-        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.TableLayoutPrincipal.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutCabecera.SuspendLayout()
@@ -65,6 +67,8 @@ Partial Class Form1
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.pnlFotoFinal.SuspendLayout()
+        CType(Me.picFoto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlConsulta.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -361,7 +365,8 @@ Partial Class Form1
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.pnlImagen)
+        Me.GroupBox1.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox1.Controls.Add(Me.pnlFotoFinal)
         Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox1.Location = New System.Drawing.Point(565, 3)
@@ -371,22 +376,30 @@ Partial Class Form1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Foto"
         '
-        'pnlImagen
+        'pnlFotoFinal
         '
-        Me.pnlImagen.BackgroundImage = Global.Identificaciones.My.Resources.Resources.sin_imagen
-        Me.pnlImagen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pnlImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlImagen.Location = New System.Drawing.Point(15, 21)
-        Me.pnlImagen.Name = "pnlImagen"
-        Me.pnlImagen.Size = New System.Drawing.Size(200, 200)
-        Me.pnlImagen.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.pnlImagen, "Haga 'Doble Click' para cargar una nueva imagen.")
+        Me.pnlFotoFinal.BackColor = System.Drawing.Color.Transparent
+        Me.pnlFotoFinal.Controls.Add(Me.picFoto)
+        Me.pnlFotoFinal.Location = New System.Drawing.Point(15, 21)
+        Me.pnlFotoFinal.Name = "pnlFotoFinal"
+        Me.pnlFotoFinal.Size = New System.Drawing.Size(200, 200)
+        Me.pnlFotoFinal.TabIndex = 0
+        '
+        'picFoto
+        '
+        Me.picFoto.Image = Global.Identificaciones.My.Resources.Resources.sin_imagen
+        Me.picFoto.Location = New System.Drawing.Point(2, 2)
+        Me.picFoto.Name = "picFoto"
+        Me.picFoto.Size = New System.Drawing.Size(198, 198)
+        Me.picFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picFoto.TabIndex = 0
+        Me.picFoto.TabStop = False
         '
         'pnlConsulta
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox2)
-        Me.pnlConsulta.Location = New System.Drawing.Point(335, 48)
+        Me.pnlConsulta.Location = New System.Drawing.Point(221, 48)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(381, 272)
         Me.pnlConsulta.TabIndex = 1
@@ -416,6 +429,16 @@ Partial Class Form1
         Me.lstFiltrada.TabIndex = 3
         Me.lstFiltrada.Visible = False
         '
+        'btnCerrarConsulta
+        '
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(122, 225)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(118, 29)
+        Me.btnCerrarConsulta.TabIndex = 0
+        Me.btnCerrarConsulta.Text = "Cerrar Consulta"
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
+        '
         'txtAyuda
         '
         Me.txtAyuda.Location = New System.Drawing.Point(12, 25)
@@ -434,21 +457,15 @@ Partial Class Form1
         'cmbIndices
         '
         Me.cmbIndices.FormattingEnabled = True
-        Me.cmbIndices.Location = New System.Drawing.Point(350, 207)
+        Me.cmbIndices.Location = New System.Drawing.Point(335, 228)
         Me.cmbIndices.Name = "cmbIndices"
         Me.cmbIndices.Size = New System.Drawing.Size(18, 21)
         Me.cmbIndices.TabIndex = 0
         Me.cmbIndices.Visible = False
         '
-        'btnCerrarConsulta
+        'OpenFileDialog1
         '
-        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnCerrarConsulta.Location = New System.Drawing.Point(122, 225)
-        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
-        Me.btnCerrarConsulta.Size = New System.Drawing.Size(118, 29)
-        Me.btnCerrarConsulta.TabIndex = 0
-        Me.btnCerrarConsulta.Text = "Cerrar Consulta"
-        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
         'Form1
         '
@@ -472,6 +489,8 @@ Partial Class Form1
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
+        Me.pnlFotoFinal.ResumeLayout(False)
+        CType(Me.picFoto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlConsulta.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -498,7 +517,6 @@ Partial Class Form1
     Friend WithEvents txtDescProveedor As System.Windows.Forms.TextBox
     Friend WithEvents txtObservaciones As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents pnlImagen As System.Windows.Forms.Panel
     Friend WithEvents btnImprimir As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents btnConsultas As System.Windows.Forms.Button
@@ -513,5 +531,8 @@ Partial Class Form1
     Friend WithEvents lstConsulta As System.Windows.Forms.ListBox
     Friend WithEvents cmbIndices As System.Windows.Forms.ComboBox
     Friend WithEvents btnCerrarConsulta As System.Windows.Forms.Button
+    Friend WithEvents pnlFotoFinal As System.Windows.Forms.Panel
+    Friend WithEvents picFoto As System.Windows.Forms.PictureBox
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 
 End Class

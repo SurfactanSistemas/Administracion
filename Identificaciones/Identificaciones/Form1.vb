@@ -1,9 +1,14 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 
 Public Class Form1
 
+    Private X_Img = 0, Y_Img = 0
+
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ClasesCompartidas.Globals.empresa = "SURFACTAN"
+        picFoto.AllowDrop = True
+        btnLimpiar.PerformClick()
     End Sub
 
     Private Sub txtNroDocumento_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroDocumento.KeyDown
@@ -31,6 +36,8 @@ Public Class Form1
             txt.Text = ""
         Next
 
+        picFoto.Image = My.Resources.sin_imagen
+
         txtNroDocumento.Focus()
 
     End Sub
@@ -45,6 +52,9 @@ Public Class Form1
         Try
             WNroDocumento = Trim(txtNroDocumento.Text)
 
+            _Limpiar()
+
+            txtNroDocumento.Text = WNroDocumento
 
             If WNroDocumento.Length < 8 Then Exit Sub
 
@@ -60,7 +70,7 @@ Public Class Form1
                 dr.Read()
 
                 With dr
-                    txtNroDocumento.Text = IIf(IsDBNull(.Item("Dni")), "", .Item("Dni"))
+
                     txtApellido.Text = IIf(IsDBNull(.Item("Apellidos")), "", .Item("Apellidos"))
                     txtNombres.Text = IIf(IsDBNull(.Item("Nombres")), "", .Item("Nombres"))
                     txtProveedor.Text = IIf(IsDBNull(.Item("Proveedor")), "", .Item("Proveedor"))
@@ -71,6 +81,19 @@ Public Class Form1
                     For Each txt In {txtNroDocumento, txtApellido, txtNombres, txtObservaciones, txtProveedor, txtDescProveedor}
                         txt.Text = Trim(txt.Text)
                     Next
+
+                    ' Cargamos la foto en caso de que exista.
+
+                    Dim WDestino As String = Configuration.ConfigurationManager.AppSettings("FOTOS_IDENTIFICACIONES")
+                    If Directory.Exists(WDestino) Then
+
+                        If File.Exists(WDestino & txtNroDocumento.Text & ".png") Then
+
+                            picFoto.Image = Image.FromFile(WDestino & txtNroDocumento.Text & ".png")
+
+                        End If
+
+                    End If
 
                 End With
 
@@ -112,7 +135,7 @@ Public Class Form1
 
                 txtDescProveedor.Text = IIf(IsDBNull(dr.Item("Nombre")), "", dr.Item("Nombre"))
                 WPasa = "S"
-            
+
             End If
 
         Catch ex As Exception
@@ -268,6 +291,10 @@ Public Class Form1
 
             cm.ExecuteNonQuery()
 
+            ' Guardamos la Foto de la Persona.
+
+            _GuardarFoto(WDNI)
+
             trans.Commit()
 
         Catch ex As Exception
@@ -283,6 +310,25 @@ Public Class Form1
 
         End Try
 
+    End Sub
+
+    Private Sub _GuardarFoto(ByVal wdni As String)
+        Try
+
+            Dim img As Bitmap = New Bitmap(200, 200)
+
+            pnlFotoFinal.DrawToBitmap(img, New Rectangle(0, 0, img.Width, img.Height))
+
+            Dim _CarpetaDestino As String = Configuration.ConfigurationManager.AppSettings("FOTOS_IDENTIFICACIONES")
+            If Not Directory.Exists(_CarpetaDestino) Then
+                Directory.CreateDirectory(_CarpetaDestino)
+            End If
+
+            img.Save(_CarpetaDestino & wdni & ".png")
+
+        Catch ex As Exception
+            Throw New Exception("Motivo: " & ex.Message)
+        End Try
     End Sub
 
     Private Function _DatosValidos() As Boolean
@@ -476,7 +522,7 @@ Public Class Form1
         origen.SelectedItem = filtrado.SelectedItem
 
         ' Llamamos al evento que tenga asosiado el control de origen.
-        'lstConsulta_Click(Nothing, Nothing)
+        lstConsulta_Click(Nothing, Nothing)
 
 
         ' Sacamos de vista los resultados filtrados.
@@ -517,5 +563,65 @@ Public Class Form1
     Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
         pnlConsulta.Visible = False
         txtProveedor.Focus()
+    End Sub
+
+    Private Sub _PermitirDrag(ByVal e As System.Windows.Forms.DragEventArgs)
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
+
+    Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
+        Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+        Dim WExtensionesPermitidas = {".bmp", ".jpg", ".jpeg", ".png"}
+
+        If archivos.Length = 0 Then Exit Sub
+
+        Try
+
+            Dim extension = Path.GetExtension(archivos(0))
+
+            If Not WExtensionesPermitidas.Contains(extension) Then
+                Throw New Exception("Tipo de Archivo no permitido.")
+            End If
+
+            picFoto.Image = Image.FromFile(archivos(0))
+
+        Catch ex As Exception
+            MsgBox("No se pudo cargar la imagen. Motivo: " & ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub picFoto_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles picFoto.DragEnter
+        _PermitirDrag(e)
+    End Sub
+
+    Private Sub picFoto_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles picFoto.DragDrop
+        _ProcesarDragDeArchivo(e)
+    End Sub
+
+    Private Sub picFoto_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picFoto.MouseDoubleClick
+
+        Try
+            With OpenFileDialog1
+
+                .Filter = "Imágenes (*.bmp, *.jpg, *.jpeg, *.png)|*.bmp;*.jpg;*.jpeg;*.png"
+
+                .FileName = ""
+
+                Dim result = .ShowDialog()
+
+                If result = Windows.Forms.DialogResult.OK Then
+
+                    picFoto.Image = Image.FromFile(.FileName)
+
+                End If
+
+            End With
+        Catch ex As Exception
+            MsgBox("Error al cargar la imagen seleccionada. Motivo: " & ex.Message)
+        End Try
+
     End Sub
 End Class
