@@ -1,4 +1,6 @@
 ﻿Imports System.Runtime.CompilerServices
+Imports System.Security.Cryptography
+Imports System.Text
 
 Module Extensiones
 
@@ -24,6 +26,20 @@ Module Extensiones
 
         Return Trim(temp)
 
+    End Function
+
+    <Extension()>
+    Function hashMD5(ByVal sCadena As String) As String
+        ' Objeto de codificación
+        Dim ueCodigo As New UnicodeEncoding()
+        ' Objeto para instanciar las codificación
+        Dim Md5 As New MD5CryptoServiceProvider()
+
+        ' Calcula el valor hash de la cadena recibida
+        Dim bHash() As Byte = Md5.ComputeHash(ueCodigo.GetBytes(sCadena))
+
+        ' Convierte el valor anterior en cadena y lo devuelve
+        Return Convert.ToBase64String(bHash)
     End Function
 
 End Module

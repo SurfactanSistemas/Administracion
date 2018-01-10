@@ -1,14 +1,19 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports Emgu.CV
 
 Public Class Form1
 
-    Private X_Img = 0, Y_Img = 0
-
+    Private capture As VideoCapture
+    Private m = New Mat
+    Private WHashNombre = ""
+    Private _Extension = ".png"
+    
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ClasesCompartidas.Globals.empresa = "SURFACTAN"
         picFoto.AllowDrop = True
         btnLimpiar.PerformClick()
+        
     End Sub
 
     Private Sub txtNroDocumento_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroDocumento.KeyDown
@@ -37,6 +42,10 @@ Public Class Form1
         Next
 
         picFoto.Image = My.Resources.sin_imagen
+
+        If File.Exists(WHashNombre) Then
+            File.Delete(WHashNombre)
+        End If
 
         txtNroDocumento.Focus()
 
@@ -85,11 +94,29 @@ Public Class Form1
                     ' Cargamos la foto en caso de que exista.
 
                     Dim WDestino As String = Configuration.ConfigurationManager.AppSettings("FOTOS_IDENTIFICACIONES")
+
                     If Directory.Exists(WDestino) Then
 
-                        If File.Exists(WDestino & txtNroDocumento.Text & ".png") Then
+                        If File.Exists(WDestino & txtNroDocumento.Text & _Extension) Then
 
-                            picFoto.Image = Image.FromFile(WDestino & txtNroDocumento.Text & ".png")
+                            If Not Directory.Exists(WDestino & "temp\") Then
+                                Directory.CreateDirectory(WDestino & "temp\")
+                            End If
+
+                            ' Creamos la ruta al directorio temporal con un nombre unico para evitar conflictos.
+                            WHashNombre = WDestino & "temp\" & txtNroDocumento.Text.hashMD5 & Date.Now.Ticks & _Extension
+
+                            File.Copy(WDestino & txtNroDocumento.Text & _Extension, WHashNombre, True)
+
+                            ' Para evitar bloqueo por recurso utilizado por otro proceso al querer eliminar el archivo temporal.
+                            Dim img1 = Image.FromFile(WHashNombre)
+                            Dim img2 = New Bitmap(img1)
+
+                            img1.Dispose()
+                            img1 = Nothing
+
+                            ' Cargamos la foto.
+                            picFoto.Image = img2
 
                         End If
 
@@ -315,7 +342,7 @@ Public Class Form1
     Private Sub _GuardarFoto(ByVal wdni As String)
         Try
 
-            Dim img As Bitmap = New Bitmap(200, 200)
+            Dim img As Bitmap = New Bitmap(200, 150)
 
             pnlFotoFinal.DrawToBitmap(img, New Rectangle(0, 0, img.Width, img.Height))
 
@@ -324,10 +351,10 @@ Public Class Form1
                 Directory.CreateDirectory(_CarpetaDestino)
             End If
 
-            img.Save(_CarpetaDestino & wdni & ".png")
+            img.Save(_CarpetaDestino & wdni & _Extension)
 
         Catch ex As Exception
-            Throw New Exception("Motivo: " & ex.Message)
+            Throw New Exception(ex.Message)
         End Try
     End Sub
 
@@ -382,9 +409,6 @@ Public Class Form1
             cm = Nothing
 
         End Try
-
-        Return False
-
     End Function
 
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
@@ -397,7 +421,6 @@ Public Class Form1
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
-        Dim dr As SqlDataReader
 
         Try
 
@@ -413,7 +436,6 @@ Public Class Form1
             MsgBox("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
             cn = Nothing
             cm = Nothing
@@ -627,5 +649,62 @@ Public Class Form1
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         picFoto_MouseDoubleClick(Nothing, Nothing)
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+
+        If capture Is Nothing Then
+            capture = New VideoCapture
+
+            AddHandler capture.ImageGrabbed, AddressOf _Capture_ImageGrabbed
+
+        End If
+
+        capture.Start()
+
+        pnlCamaraWeb.Visible = True
+
+    End Sub
+
+    Private Sub _Capture_ImageGrabbed(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+        Try
+
+            capture.Retrieve(m)
+
+            PictureBox1.Image = m.Bitmap
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+
+        If capture IsNot Nothing Then
+            capture.Pause()
+
+            picFoto.Image = PictureBox1.Image
+
+        End If
+
+        Button4.PerformClick()
+    End Sub
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        pnlCamaraWeb.Visible = False
+
+        capture.Stop()
+        capture = Nothing
+
+        txtNroDocumento.Focus()
+    End Sub
+
+    Private Sub Form1_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+        If WHashNombre <> "" AndAlso File.Exists(WHashNombre) Then
+            picFoto.Dispose()
+            File.Delete(WHashNombre)
+        End If
     End Sub
 End Class

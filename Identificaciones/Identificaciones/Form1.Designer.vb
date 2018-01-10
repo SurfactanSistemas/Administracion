@@ -25,8 +25,6 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Me.TableLayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnImprimir = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
@@ -51,9 +49,13 @@ Partial Class Form1
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.pnlFotoFinal = New System.Windows.Forms.Panel()
         Me.picFoto = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.pnlConsulta = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.lstFiltrada = New System.Windows.Forms.ListBox()
@@ -62,6 +64,10 @@ Partial Class Form1
         Me.lstConsulta = New System.Windows.Forms.ListBox()
         Me.cmbIndices = New System.Windows.Forms.ComboBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.pnlCamaraWeb = New System.Windows.Forms.Panel()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPrincipal.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutCabecera.SuspendLayout()
@@ -73,6 +79,10 @@ Partial Class Form1
         CType(Me.picFoto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlConsulta.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.pnlCamaraWeb.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPrincipal
@@ -106,40 +116,6 @@ Partial Class Form1
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(844, 70)
         Me.Panel4.TabIndex = 2
-        '
-        'Button2
-        '
-        Me.Button2.BackgroundImage = Global.Identificaciones.My.Resources.Resources.camara_reflex
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(800, 61)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(39, 26)
-        Me.Button2.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.Button2, "Tomar Imagen con Camara Web")
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Folder
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(800, 28)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(39, 26)
-        Me.Button1.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.Button1, "Cargar Imagen desde Archivo")
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnImprimir
         '
@@ -264,9 +240,7 @@ Partial Class Form1
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.Button2)
         Me.Panel3.Controls.Add(Me.txtNombres)
-        Me.Panel3.Controls.Add(Me.Button1)
         Me.Panel3.Controls.Add(Me.txtDescProveedor)
         Me.Panel3.Controls.Add(Me.txtObservaciones)
         Me.Panel3.Controls.Add(Me.txtProveedor)
@@ -404,6 +378,8 @@ Partial Class Form1
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox1.Controls.Add(Me.Button1)
+        Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.pnlFotoFinal)
         Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
@@ -414,26 +390,89 @@ Partial Class Form1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Foto"
         '
+        'Button1
+        '
+        Me.Button1.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Folder
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(124, 187)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(39, 26)
+        Me.Button1.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.Button1, "Cargar Imagen desde Archivo")
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.BackgroundImage = Global.Identificaciones.My.Resources.Resources.camara_reflex
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Location = New System.Drawing.Point(67, 187)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(39, 26)
+        Me.Button2.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.Button2, "Tomar Imagen con Camara Web")
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'pnlFotoFinal
         '
         Me.pnlFotoFinal.BackColor = System.Drawing.Color.Transparent
         Me.pnlFotoFinal.Controls.Add(Me.picFoto)
         Me.pnlFotoFinal.Location = New System.Drawing.Point(15, 20)
         Me.pnlFotoFinal.Name = "pnlFotoFinal"
-        Me.pnlFotoFinal.Size = New System.Drawing.Size(200, 200)
+        Me.pnlFotoFinal.Size = New System.Drawing.Size(200, 150)
         Me.pnlFotoFinal.TabIndex = 0
         '
         'picFoto
         '
         Me.picFoto.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.picFoto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picFoto.Image = Global.Identificaciones.My.Resources.Resources.sin_imagen
-        Me.picFoto.Location = New System.Drawing.Point(2, 2)
+        Me.picFoto.Location = New System.Drawing.Point(0, 0)
         Me.picFoto.Name = "picFoto"
-        Me.picFoto.Size = New System.Drawing.Size(198, 198)
+        Me.picFoto.Size = New System.Drawing.Size(200, 150)
         Me.picFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picFoto.TabIndex = 0
         Me.picFoto.TabStop = False
         Me.ToolTip1.SetToolTip(Me.picFoto, "Doble Click para Cargar Imagen desde Archivo")
+        '
+        'Button3
+        '
+        Me.Button3.BackgroundImage = Global.Identificaciones.My.Resources.Resources.camara_reflex
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button3.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Location = New System.Drawing.Point(111, 12)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(39, 26)
+        Me.Button3.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.Button3, "Capturar Imagen")
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Salir2
+        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button4.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button4.FlatAppearance.BorderSize = 0
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Location = New System.Drawing.Point(194, 12)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(39, 26)
+        Me.Button4.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.Button4, "Cancelar")
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'pnlConsulta
         '
@@ -507,11 +546,54 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'pnlCamaraWeb
+        '
+        Me.pnlCamaraWeb.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlCamaraWeb.Controls.Add(Me.GroupBox3)
+        Me.pnlCamaraWeb.Location = New System.Drawing.Point(243, 4)
+        Me.pnlCamaraWeb.Name = "pnlCamaraWeb"
+        Me.pnlCamaraWeb.Size = New System.Drawing.Size(359, 362)
+        Me.pnlCamaraWeb.TabIndex = 2
+        Me.pnlCamaraWeb.Visible = False
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.Panel6)
+        Me.GroupBox3.Controls.Add(Me.PictureBox1)
+        Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox3.Location = New System.Drawing.Point(7, 2)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(344, 354)
+        Me.GroupBox3.TabIndex = 0
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Cámara Web"
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel6.Controls.Add(Me.Button3)
+        Me.Panel6.Controls.Add(Me.Button4)
+        Me.Panel6.Location = New System.Drawing.Point(0, 302)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(344, 52)
+        Me.Panel6.TabIndex = 2
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(32, 16)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(280, 280)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(844, 371)
+        Me.Controls.Add(Me.pnlCamaraWeb)
         Me.Controls.Add(Me.pnlConsulta)
         Me.Controls.Add(Me.TableLayoutPrincipal)
         Me.Location = New System.Drawing.Point(10, 10)
@@ -534,6 +616,10 @@ Partial Class Form1
         Me.pnlConsulta.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.pnlCamaraWeb.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.Panel6.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -576,5 +662,11 @@ Partial Class Form1
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents pnlCamaraWeb As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents Panel6 As System.Windows.Forms.Panel
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
 
 End Class
