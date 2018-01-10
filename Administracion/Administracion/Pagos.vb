@@ -6735,20 +6735,22 @@ Public Class Pagos
 
         acumCaba = 0.0
 
-        For Each row As DataGridViewRow In gridPagos.Rows
-            With row
-                If Trim(.Cells(4).Value) <> "" Then
+        If Val(WPorceIbCaba) <> 0 And Val(WTipoIbCaba) <> 2 Then
+            For Each row As DataGridViewRow In gridPagos.Rows
+                With row
+                    If Trim(.Cells(4).Value) <> "" Then
 
-                    ZZSuma = 0.0
+                        ZZSuma = 0.0
 
-                    ZZSuma = Val(.Cells(4).Value) / 1.21
+                        ZZSuma = Val(.Cells(4).Value) / 1.21
 
-                    acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
-                Else
-                    Exit For
-                End If
-            End With
-        Next
+                        acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
+                    Else
+                        Exit For
+                    End If
+                End With
+            Next
+        End If
 
         txtIBCiudad.Text = _NormalizarNumero(acumCaba)
 

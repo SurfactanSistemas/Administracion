@@ -639,7 +639,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         'calculo de retencion de Ingresos brutos CABA. SOLO PARA SURFACTAN.
                         '
                         If varEmpresa = 1 Then
-                            varRetIbII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumulaNeto)
+
+                            If Val(varPorceIbCaba) <> 0 And Val(varTipoIbCaba) <> 2 Then
+                                varRetIbII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumulaNeto)
+                            End If
+
                         End If
 
 

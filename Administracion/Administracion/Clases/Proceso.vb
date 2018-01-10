@@ -527,26 +527,12 @@ Module Proceso
         'varRetIbCaba = 0.0
         varAcumulaIb = 0.0
         varRete = 0.0
-
-        If varTipoIbCaba = 3 Or varTipoIbCaba = 4 Or varPorceIbCaba <> 0 Then
-            If varTipoIbCaba <> 2 Then
-                If varAcumulaNeto >= 300 Then
-                    If varPorceIbCaba <> 0 Then
-                        varRete = varAcumulaNeto * (varPorceIbCaba / 100)
-                    Else
-                        If varTipoIbCaba = 3 Then
-                            varRete = varAcumulaNeto * (3 / 100)
-                        Else
-                            varRete = varAcumulaNeto * (4.5 / 100)
-                        End If
-                    End If
-                End If
-                varAcumulaIb = varAcumulaIb + varRete 'redondeo(varRete)
-            End If
+        
+        If varAcumulaNeto >= 300 Then
+            varRete = varAcumulaNeto * (varPorceIbCaba / 100)
         End If
+        varAcumulaIb = varAcumulaIb + varRete
 
-        'varRetIbCaba = varAcumulaIb
-        'Return redondeo(varRetIbCaba)
         Return redondeo(varAcumulaIb)
     End Function
 
