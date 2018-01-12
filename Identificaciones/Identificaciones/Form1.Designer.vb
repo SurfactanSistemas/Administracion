@@ -68,6 +68,7 @@ Partial Class Form1
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TableLayoutPrincipal.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutCabecera.SuspendLayout()
@@ -119,61 +120,97 @@ Partial Class Form1
         '
         'btnImprimir
         '
-        Me.btnImprimir.Location = New System.Drawing.Point(630, 19)
+        Me.btnImprimir.BackgroundImage = Global.Identificaciones.My.Resources.Resources.credencial
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.Location = New System.Drawing.Point(641, 19)
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(83, 39)
         Me.btnImprimir.TabIndex = 0
-        Me.btnImprimir.Text = "Imprimir Credencial"
         Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Credencial")
         Me.btnImprimir.UseVisualStyleBackColor = True
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(526, 19)
+        Me.btnCerrar.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Salir2
+        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.BorderSize = 0
+        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrar.Location = New System.Drawing.Point(537, 19)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(83, 39)
         Me.btnCerrar.TabIndex = 0
-        Me.btnCerrar.Text = "Cerrar"
         Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(422, 19)
+        Me.btnLimpiar.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Limpiar
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.BorderSize = 0
+        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiar.Location = New System.Drawing.Point(433, 19)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(83, 39)
         Me.btnLimpiar.TabIndex = 0
-        Me.btnLimpiar.Text = "Limpiar"
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Campos")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnConsultas
         '
-        Me.btnConsultas.Location = New System.Drawing.Point(318, 19)
+        Me.btnConsultas.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsultas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsultas.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsultas.FlatAppearance.BorderSize = 0
+        Me.btnConsultas.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsultas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsultas.Location = New System.Drawing.Point(329, 19)
         Me.btnConsultas.Name = "btnConsultas"
         Me.btnConsultas.Size = New System.Drawing.Size(83, 39)
         Me.btnConsultas.TabIndex = 0
-        Me.btnConsultas.Text = "Consulta"
         Me.ToolTip1.SetToolTip(Me.btnConsultas, "Consulta de Proveedores")
         Me.btnConsultas.UseVisualStyleBackColor = True
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(214, 19)
+        Me.btnEliminar.BackgroundImage = Global.Identificaciones.My.Resources.Resources.eliminar
+        Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnEliminar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.BorderSize = 0
+        Me.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEliminar.Location = New System.Drawing.Point(225, 19)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(83, 39)
         Me.btnEliminar.TabIndex = 0
-        Me.btnEliminar.Text = "Eliminar"
         Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar Identificación actual")
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(110, 19)
+        Me.btnGuardar.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Aceptar_N2
+        Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnGuardar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnGuardar.FlatAppearance.BorderSize = 0
+        Me.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGuardar.Location = New System.Drawing.Point(121, 19)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(83, 39)
         Me.btnGuardar.TabIndex = 0
-        Me.btnGuardar.Text = "Guardar"
         Me.ToolTip1.SetToolTip(Me.btnGuardar, "Guardar / Actualizar Identificación")
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
@@ -550,9 +587,9 @@ Partial Class Form1
         '
         Me.pnlCamaraWeb.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlCamaraWeb.Controls.Add(Me.GroupBox3)
-        Me.pnlCamaraWeb.Location = New System.Drawing.Point(243, 4)
+        Me.pnlCamaraWeb.Location = New System.Drawing.Point(243, 3)
         Me.pnlCamaraWeb.Name = "pnlCamaraWeb"
-        Me.pnlCamaraWeb.Size = New System.Drawing.Size(359, 362)
+        Me.pnlCamaraWeb.Size = New System.Drawing.Size(359, 364)
         Me.pnlCamaraWeb.TabIndex = 2
         Me.pnlCamaraWeb.Visible = False
         '
@@ -668,5 +705,6 @@ Partial Class Form1
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
 
 End Class

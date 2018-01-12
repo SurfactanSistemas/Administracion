@@ -5,7 +5,7 @@ Imports Emgu.CV
 Public Class Form1
 
     Private capture As VideoCapture
-    Private m = New Mat
+    Private m As Mat = New Mat
     Private WHashNombre = ""
     Private _Extension = ".png"
     
@@ -264,7 +264,7 @@ Public Class Form1
 
         Try
             _GrabarIdentificacion(WClave, WDNI, WApellido, WNombres, WProveedor, WObservacionesI, WObservacionesII)
-            MsgBox("Identificación guardada con éxito!", MsgBoxStyle.Information)
+            '    MsgBox("Identificación guardada con éxito!", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -654,6 +654,7 @@ Public Class Form1
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
 
         If capture Is Nothing Then
+            
             capture = New VideoCapture
 
             AddHandler capture.ImageGrabbed, AddressOf _Capture_ImageGrabbed
@@ -669,11 +670,17 @@ Public Class Form1
     Private Sub _Capture_ImageGrabbed(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Try
+            If Not IsNothing(capture) Then
 
-            capture.Retrieve(m)
+                If capture.Retrieve(m) Then
 
-            PictureBox1.Image = m.Bitmap
+                    PictureBox1.Image = m.Bitmap
 
+                    System.Threading.Thread.Sleep(100)
+
+                End If
+
+            End If
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -683,20 +690,23 @@ Public Class Form1
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
 
         If capture IsNot Nothing Then
-            capture.Pause()
+            
+            capture.Dispose()
+
+            capture = Nothing
 
             picFoto.Image = PictureBox1.Image
 
+            pnlCamaraWeb.Visible = False
+
+            txtNroDocumento.Focus()
+
         End If
 
-        Button4.PerformClick()
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
         pnlCamaraWeb.Visible = False
-
-        capture.Stop()
-        capture = Nothing
 
         txtNroDocumento.Focus()
     End Sub
@@ -706,5 +716,53 @@ Public Class Form1
             picFoto.Dispose()
             File.Delete(WHashNombre)
         End If
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+
+        Dim dni = txtNroDocumento.Text
+
+        btnGuardar.PerformClick()
+
+        txtNroDocumento.Text = dni
+
+        txtNroDocumento_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        
+        Dim tabla As New DataTable("Detalles")
+
+        With tabla
+
+            .Columns.Add("Dni")
+            .Columns.Add("Apellidos")
+            .Columns.Add("Nombres")
+            .Columns.Add("DescProveedor")
+            .Columns.Add("Foto")
+            .Columns.Add("Empresa")
+            .Columns.Add("Inicio")
+            .Columns.Add("Final")
+
+        End With
+
+        Dim row = tabla.NewRow
+
+        With row
+            .Item("Dni") = txtNroDocumento.Text
+            .Item("Apellidos") = txtApellido.Text
+            .Item("Nombres") = txtNombres.Text
+            .Item("DescProveedor") = txtDescProveedor.Text
+            .Item("Foto") = Configuration.ConfigurationManager.AppSettings("FOTOS_IDENTIFICACIONES") & txtNroDocumento.Text & _Extension
+            .Item("Empresa") = "Surfactan S.A."
+            .Item("Inicio") = Date.Now.ToString("dd/MM/yyyy")
+            .Item("Final") = Date.Now.AddDays(7).ToString("dd/MM/yyyy")
+        End With
+
+        tabla.Rows.Add(row)
+
+        With VistaPrevia
+            .Reporte = New Identificacion
+            .Reporte.SetDataSource(tabla)
+            .Mostrar()
+        End With
+
     End Sub
 End Class
