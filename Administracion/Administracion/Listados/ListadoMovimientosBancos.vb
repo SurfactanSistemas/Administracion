@@ -616,7 +616,7 @@ Public Class ListadoMovimientosBancos
 
         Next
 
-
+        _ActualizarObservacionesVacias()
 
         varUno = "{Movban.Banco} in " + txtDesdeBanco.Text + " to " + txtHastaBanco.Text
         varFormula = varUno
@@ -635,6 +635,126 @@ Public Class ListadoMovimientosBancos
         End With
 
     End Sub
+
+    Private Sub _ActualizarObservacionesVacias()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Da as Clave, Observaciones, Proveedor FROM MovBan WHERE Observaciones = '' or Observaciones IS NULL")
+        Dim dr As SqlDataReader
+        Dim WObs = "", WProv = "", WDa = ""
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+
+                    With dr
+
+                        WDa = IIf(IsDBNull(.Item("Clave")), "", .Item("Clave"))
+                        WObs = IIf(IsDBNull(.Item("Observaciones")), "", .Item("Observaciones"))
+                        WProv = IIf(IsDBNull(.Item("Proveedor")), "", .Item("Proveedor"))
+
+                        If Trim(WObs) = "" Then
+
+                            If Val(WProv) <> 0 Then
+                                WObs = _ObtenerNombreProveedor(WProv)
+                            End If
+
+                            If Trim(WObs) <> "" Then
+
+                                _ActualizarObservacion(WDa, WObs)
+
+                            End If
+
+                        End If
+
+                    End With
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer actualizar la observación la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _ActualizarObservacion(ByVal wDa As String, ByVal wObs As String)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("UPDATE Movban SET Observaciones = '" & Trim(wObs) & "' WHERE da = '" & wDa & "'")
+        
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer actualizar la observación la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Function _ObtenerNombreProveedor(ByVal wProv As String) As String
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Nombre FROM Proveedor WHERE Proveedor = '" & Trim(wProv) & "'")
+        Dim dr As SqlDataReader
+        Dim WNom = ""
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                WNom = IIf(IsDBNull(dr.Item("Nombre")), "", dr.Item("Nombre"))
+
+                WNom = Trim(WNom)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer buscar la informacion para actualizar la observacion desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return WNom
+    End Function
 
     Private Sub txtDesdeBanco_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeBanco.MouseDoubleClick
         btnConsulta.PerformClick()
