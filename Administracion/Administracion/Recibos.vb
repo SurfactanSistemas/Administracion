@@ -983,6 +983,26 @@ Public Class Recibos
         ' Chequeamos si el numero se corresponde con algun Recibo existente y se avisa al usuario de que no se permite actualizar.
         Dim WMarcaDiferencia As String = ""
 
+
+        ' Comprobamos que todos los Tipos de Pagos de Tipo 2, tengan un numero definido y distinto de 0
+
+        For Each row In gridFormasPago2.Rows
+
+            With row
+                If Not IsNothing(.Cells(0).Value) AndAlso Val(.Cells(0).Value) = 2 Then
+
+                    ' Controlamos que no se ingrese un numero = 0 para los cheques.
+                    If IsNothing(.Cells(1).Value) OrElse Val(.Cells(1).Value) = 0 Then
+                        MsgBox("Se debe informar un numero valido para el cheque.", MsgBoxStyle.Exclamation)
+                        Exit Sub
+                    End If
+
+                End If
+            End With
+
+        Next
+
+
         If Val(txtRecibo.Text) <> 0 Then
 
             If _ReciboYaExistente(Trim(txtRecibo.Text)) Then
@@ -2874,6 +2894,21 @@ Public Class Recibos
                         End If
 
                         If iCol = 4 Then ' Avanzamos a la fila siguiente.
+
+                            With gridFormasPago2.Rows(iRow)
+
+                                If Not IsNothing(.Cells(0).Value) AndAlso Val(.Cells(0).Value) = 2 Then
+
+                                    ' Controlamos que no se ingrese un numero = 0 para los cheques.
+                                    If IsNothing(.Cells(1).Value) OrElse Val(.Cells(1).Value) = 0 Then
+                                        MsgBox("Se debe informar un numero valido para el cheque.", MsgBoxStyle.Exclamation)
+                                        Return True
+                                    End If
+
+                                End If
+
+                            End With
+
                             If Val(gridFormasPago2.Rows(iRow).Cells(0).Value) = 4 Then
 
                                 _PedirCuentaContable(iRow)
@@ -2887,6 +2922,8 @@ Public Class Recibos
                                 End If
 
                             End If
+
+
 
                             gridFormasPago2.Rows(iRow).Cells(4).Value = _NormalizarNumero(valor)
 
