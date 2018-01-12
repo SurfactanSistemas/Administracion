@@ -404,6 +404,7 @@ Public Class Depositos
                 End If
             Else
                 _TraerChequeRecibo(row, cheq.clave)
+                sumarImportes()
             End If
 
             Dim nuevafila = gridCheques.Rows.Add()
