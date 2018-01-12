@@ -1252,6 +1252,98 @@ Public Class Pagos
         Return utilizada
     End Function
 
+    Private Sub _RecalcularNotaDeCreditoDebito(ByVal clave As String, ByVal WSaldo As String, ByVal XRow As Integer)
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT cp.Tipo, cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
+                                              & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" _
+                                              & Trim(txtProveedor.Text) & "' and cp.Clave = '" & clave & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha DESC")
+        Dim dr As SqlDataReader
+
+        'SQLConnector.conexionSql(cn, cm)
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    .Read()
+
+                    Dim XTipo, XNroInterno, XSaldo, XSaldoUS, XLetra, XPunto, XNumero, XParidad, XPago, XParidadTotal As String
+
+                    XTipo = .Item("Tipo").ToString()
+                    XNroInterno = .Item("NroInterno").ToString()
+                    XSaldo = WSaldo '_NormalizarNumero(.Item("Saldo").ToString())
+
+                    XLetra = .Item("Letra").ToString()
+                    XPunto = .Item("Punto").ToString()
+                    XNumero = .Item("Numero").ToString()
+
+                    XSaldoUS = 0
+                    XParidadTotal = 0
+                    XParidad = 0.0 '.Item("Paridad")
+                    XPago = 0 '.Item("Pago").ToString()
+
+                    If Val(XNroInterno) <> 0 Then
+
+                        Dim WIvaComp As DataRow = _BuscarInfoIvaComp(XNroInterno)
+
+                        If Not IsNothing(WIvaComp) Then
+                            With WIvaComp
+                                XParidad = IIf(IsDBNull(.Item("Paridad")), "0", Proceso.formatonumerico(.Item("Paridad")))
+                                XPago = IIf(IsDBNull(.Item("Pago")), "0", Val(.Item("Pago")))
+                            End With
+                        End If
+
+                    End If
+
+                    If Val(XPago) = 2 Then
+
+                        If Val(XParidad) <> 0 Then
+                            XParidadTotal = _TraerCambioDivisa(txtFechaParidad.Text)
+
+                            XSaldoUS = (Val(_NormalizarNumero(XSaldo)) / Val(XParidad.Replace(",", "."))) * Val(_NormalizarNumero(XParidadTotal, 4))
+
+                            Dim diferencia As String = Val(_NormalizarNumero(XSaldoUS)) - Val(_NormalizarNumero(XSaldo))
+
+                            ' Si hay diferencia se agrega una ND.
+                            If Val(diferencia) <> 0 Then
+
+                                With gridPagos.Rows(XRow)
+
+                                    '.Cells(0).Value = IIf(Val(diferencia) > 0, "02", "03")
+                                    '.Cells(1).Value = XLetra
+                                    '.Cells(2).Value = XPunto
+                                    '.Cells(3).Value = "99999999"
+                                    .Cells(4).Value = _NormalizarNumero(diferencia)
+                                    '.Cells(5).Value = IIf(Val(diferencia) > 0, "N/D por Diferencia de Cambio ", "N/C por Diferencia de Cambio ") ' "N/D por Diferencia de Cambio "
+
+                                End With
+
+                            End If
+
+                        End If
+
+                    End If
+
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
     Private Sub _ProcesarCtaCte(ByVal clave As String)
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT cp.Tipo, cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
@@ -3754,6 +3846,31 @@ Public Class Pagos
 
                     Select Case iCol
                         Case 4
+                            ' Detectamos si la siguiente fila es una nota de debito, y en caso de que si, se recalcula el monto.
+
+                            If iRow < 14 Then ' solo se procesa hasta la anteultima fila.
+
+                                ' Es una nota de Debito o Crédito.
+                                If Val(.Rows(iRow + 1).Cells(3).Value) = 99999999 Or Val(.Rows(iRow + 1).Cells(0).Value) = 2 Or Val(.Rows(iRow + 1).Cells(0).Value) = 3 Then
+
+                                    Dim WLetra = UCase(.Rows(iRow).Cells(1).Value)
+                                    Dim WTipo = Proceso.ceros(.Rows(iRow).Cells(0).Value, 2)
+                                    Dim WPunto = Proceso.ceros(.Rows(iRow).Cells(2).Value, 4)
+                                    Dim WNumero = Proceso.ceros(.Rows(iRow).Cells(3).Value, 8)
+                                    Dim WSaldo = Proceso.formatonumerico(.Rows(iRow).Cells(iCol).Value)
+
+                                    Dim ZZClaveCtaCtePrv = txtProveedor.Text & WLetra & WTipo & WPunto & WNumero
+
+                                    Try
+                                        _RecalcularNotaDeCreditoDebito(ZZClaveCtaCtePrv, WSaldo, iRow + 1)
+                                    Catch ex As Exception
+                                        MsgBox(ex.Message)
+                                    End Try
+
+                                End If
+
+                            End If
+
                             sumarImportes()
                             .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                         Case 5
