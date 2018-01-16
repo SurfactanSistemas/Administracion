@@ -61,8 +61,6 @@ Public Class ListadoIvaCompras
 
     Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
-        Dim txtUno As String
-
         Dim txtEmpresa As String
         Dim txtFormula As String
         Dim x As Char = Chr(34)

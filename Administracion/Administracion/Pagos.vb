@@ -1820,7 +1820,7 @@ Public Class Pagos
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Numero) as Numero FROM Numero WHERE Codigo = '" & Val(Codigo) & "'")
         Dim dr As SqlDataReader
-        Dim trans As SqlTransaction
+        Dim trans As SqlTransaction = Nothing
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -2764,7 +2764,7 @@ Public Class Pagos
         Dim XClave, XTipomovi, XTipocomp, XLetracomp, XPuntocomp, XNrocomp, XRenglon, XObservaciones, XCuenta, XDebito, XCredito, XFechaOrd, XTitulo, XDebitolist, XCreditolist, XNroInterno, RenglonDife, XSaldolist, Xlista, XAcumulado
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
-        Dim trans As SqlTransaction
+        Dim trans As SqlTransaction = Nothing
 
 
         For Each row As DataGridViewRow In gridPagos.Rows
@@ -4978,7 +4978,7 @@ Public Class Pagos
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteRetIva
-        Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba
+        Dim WTipoIbCaba, WTipoiva, WTipoprv
         Dim WEmpNombre As String = "SURFACTAN S.A."
         Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
         Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
@@ -5019,12 +5019,9 @@ Public Class Pagos
                     WPrvDireccion = .Item("Direccion")
                     WPrvCuit = .Item("Cuit")
                     WPrvIb = .Item("NroIb")
-                    WTipoIb = .Item("CodIb")
                     WTipoIbCaba = .Item("CodIbCaba")
                     WTipoiva = Val(.Item("Iva"))
                     WTipoprv = Val(.Item("Tipo")) + 1
-                    WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
-                    WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
 
                 End If
             End With
@@ -7374,7 +7371,6 @@ Public Class Pagos
         Dim WMes As String
         Dim Dia As Integer
         Dim WDia As String
-        Dim Di As Integer
         Dim aa As Integer
         Dim Ds(20) As Integer
 
@@ -7433,7 +7429,7 @@ Public Class Pagos
 
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
-        Dim trans As SqlTransaction
+        Dim trans As SqlTransaction = Nothing
 
         cn.ConnectionString = _CS()
         cm.Connection = cn

@@ -543,8 +543,11 @@ Public Class CuentaCorrientePantalla
         If GRilla.SelectedCells.Count < 2 Then : Exit Sub
         End If
 
+        Dim _c
+
         For Each _cell As DataGridViewCell In GRilla.SelectedCells
-            If IsNothing(_filas.Find(Function(_f) _f.Index = _cell.RowIndex)) Then
+            _c = _cell
+            If IsNothing(_filas.Find(Function(_f) _f.Index = _c.RowIndex)) Then
 
                 _filas.Add(GRilla.Rows(_cell.RowIndex))
 

@@ -4045,11 +4045,12 @@ Public Class Recibos
         End With
 
         ' Calculamos totales y subtotales en base a los tipos de créditos.
+        Dim _ciclo = 0
         For Ciclo = 0 To 40
-
+            _ciclo = Ciclo
             If Val(Vector(Ciclo, 9)) <> 0 Then
 
-                Dim _cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = Ciclo)
+                Dim _cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = _ciclo)
                 Select Case Val(Vector(Ciclo, 5))
                     Case 1
                         If IsNothing(_cuenta) Then
