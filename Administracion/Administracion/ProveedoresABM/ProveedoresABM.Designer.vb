@@ -38,6 +38,7 @@ Partial Class ProveedoresABM
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.GrupoConsultas = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.btnCerrarConsultas = New Administracion.CustomButton()
         Me.CKBProveedorInactivo = New System.Windows.Forms.CheckBox()
         Me.txtClienteAsociadoDescripcion = New System.Windows.Forms.TextBox()
         Me.txtClienteAsociado = New System.Windows.Forms.TextBox()
@@ -123,7 +124,6 @@ Partial Class ProveedoresABM
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.txtCAI = New Administracion.CustomTextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.btnCerrarConsultas = New Administracion.CustomButton()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -363,7 +363,7 @@ Partial Class ProveedoresABM
         'GrupoConsultas
         '
         Me.GrupoConsultas.Controls.Add(Me.GroupBox4)
-        Me.GrupoConsultas.Location = New System.Drawing.Point(110, 88)
+        Me.GrupoConsultas.Location = New System.Drawing.Point(110, 72)
         Me.GrupoConsultas.Name = "GrupoConsultas"
         Me.GrupoConsultas.Size = New System.Drawing.Size(543, 243)
         Me.GrupoConsultas.TabIndex = 98
@@ -384,6 +384,23 @@ Partial Class ProveedoresABM
         Me.GroupBox4.TabIndex = 81
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Consultas"
+        '
+        'btnCerrarConsultas
+        '
+        Me.btnCerrarConsultas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnCerrarConsultas.Cleanable = False
+        Me.btnCerrarConsultas.EnterIndex = -1
+        Me.btnCerrarConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrarConsultas.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.btnCerrarConsultas.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsultas.LabelAssociationKey = -1
+        Me.btnCerrarConsultas.Location = New System.Drawing.Point(191, 171)
+        Me.btnCerrarConsultas.Name = "btnCerrarConsultas"
+        Me.btnCerrarConsultas.Size = New System.Drawing.Size(116, 31)
+        Me.btnCerrarConsultas.TabIndex = 94
+        Me.btnCerrarConsultas.Text = "Cerrar"
+        Me.ToolTip1.SetToolTip(Me.btnCerrarConsultas, "Cerrar Ventana de Consultas")
+        Me.btnCerrarConsultas.UseVisualStyleBackColor = False
         '
         'CKBProveedorInactivo
         '
@@ -1160,7 +1177,7 @@ Partial Class ProveedoresABM
         Me.txtObservaciones.EnterIndex = 11
         Me.txtObservaciones.LabelAssociationKey = 11
         Me.txtObservaciones.Location = New System.Drawing.Point(124, 125)
-        Me.txtObservaciones.MaxLength = 50
+        Me.txtObservaciones.MaxLength = 200
         Me.txtObservaciones.Name = "txtObservaciones"
         Me.txtObservaciones.Size = New System.Drawing.Size(502, 20)
         Me.txtObservaciones.TabIndex = 30
@@ -1556,23 +1573,6 @@ Partial Class ProveedoresABM
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
-        '
-        'btnCerrarConsultas
-        '
-        Me.btnCerrarConsultas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnCerrarConsultas.Cleanable = False
-        Me.btnCerrarConsultas.EnterIndex = -1
-        Me.btnCerrarConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrarConsultas.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.btnCerrarConsultas.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsultas.LabelAssociationKey = -1
-        Me.btnCerrarConsultas.Location = New System.Drawing.Point(191, 171)
-        Me.btnCerrarConsultas.Name = "btnCerrarConsultas"
-        Me.btnCerrarConsultas.Size = New System.Drawing.Size(116, 31)
-        Me.btnCerrarConsultas.TabIndex = 94
-        Me.btnCerrarConsultas.Text = "Cerrar"
-        Me.ToolTip1.SetToolTip(Me.btnCerrarConsultas, "Cerrar Ventana de Consultas")
-        Me.btnCerrarConsultas.UseVisualStyleBackColor = False
         '
         'ProveedoresABM
         '
