@@ -1084,6 +1084,8 @@ Public Class IngresoOrdenTrabajo
 
                 _EliminarOrdenTrabajo()
 
+                btnLimpiar.PerformClick()
+
                 MsgBox("Se ha eliminado satisfactoriamente la Orden de Trabajo.", MsgBoxStyle.Information)
 
             Catch ex As Exception
