@@ -783,7 +783,6 @@ Public Class IngresoOrdenTrabajo
         Dim ZSQL = ""
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
-        Dim dr As SqlDataReader
         Dim WDescripciones(5) As String
         Dim WObservaciones(3) As String
         Dim WRequisitos(6) As String
@@ -799,7 +798,7 @@ Public Class IngresoOrdenTrabajo
             WObservaciones = _PrepararObservaciones()
             WRequisitos = _PrepararRequisitos()
             WReferencias = _PrepararReferencias()
-            
+
             ZSQL = ""
             ZSQL = ZSQL + "INSERT INTO OrdenTrabajo ("
             ZSQL = ZSQL + "Orden ,"
@@ -818,6 +817,9 @@ Public Class IngresoOrdenTrabajo
             ZSQL = ZSQL + "ObservacionesI ,"
             ZSQL = ZSQL + "ObservacionesII ,"
             ZSQL = ZSQL + "ObservacionesIII ,"
+            ZSQL = ZSQL + "ObservacionesIV ,"
+            ZSQL = ZSQL + "ObservacionesV ,"
+            ZSQL = ZSQL + "ObservacionesVI ,"
             ZSQL = ZSQL + "Encargado ,"
             ZSQL = ZSQL + "RequisitoI ,"
             ZSQL = ZSQL + "RequisitoII ,"
@@ -846,6 +848,9 @@ Public Class IngresoOrdenTrabajo
             ZSQL = ZSQL + "'" & WObservaciones(1) & "',"
             ZSQL = ZSQL + "'" & WObservaciones(2) & "',"
             ZSQL = ZSQL + "'" & WObservaciones(3) & "',"
+            ZSQL = ZSQL + "'',"
+            ZSQL = ZSQL + "'',"
+            ZSQL = ZSQL + "'',"
             ZSQL = ZSQL + "'" + txtEncargado.Text + "',"
             ZSQL = ZSQL + "'" & WRequisitos(1) & "',"
             ZSQL = ZSQL + "'" & WRequisitos(2) & "',"
@@ -857,7 +862,7 @@ Public Class IngresoOrdenTrabajo
             ZSQL = ZSQL + "'" & WReferencias(2) & "',"
             ZSQL = ZSQL + "'" + Str$(cmbAplicacion.SelectedIndex) + "',"
             ZSQL = ZSQL + "'" + Str$(cmbEstabilidad.SelectedIndex) + "')"
-            
+
             cm.CommandText = ZSQL
             cm.ExecuteNonQuery()
 
@@ -865,7 +870,6 @@ Public Class IngresoOrdenTrabajo
             Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
             cn = Nothing
             cm = Nothing
@@ -877,7 +881,6 @@ Public Class IngresoOrdenTrabajo
         Dim ZSQL = ""
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
-        Dim dr As SqlDataReader
         Dim WDescripciones(5) As String
         Dim WObservaciones(3) As String
         Dim WRequisitos(6) As String
@@ -892,7 +895,7 @@ Public Class IngresoOrdenTrabajo
             WDescripciones = _PrepararDescripciones()
             WObservaciones = _PrepararObservaciones()
             WRequisitos = _PrepararRequisitos()
-            WReferencias= _PrepararReferencias()
+            WReferencias = _PrepararReferencias()
 
             ZSQL = ""
             ZSQL = ZSQL + "UPDATE OrdenTrabajo SET "
@@ -911,6 +914,9 @@ Public Class IngresoOrdenTrabajo
             ZSQL = ZSQL + " ObservacionesI = " + "'" & WObservaciones(1) & "',"
             ZSQL = ZSQL + " ObservacionesII = " + "'" & WObservaciones(2) & "',"
             ZSQL = ZSQL + " ObservacionesIII = " + "'" & WObservaciones(3) & "',"
+            ZSQL = ZSQL + " ObservacionesIV = " + "'',"
+            ZSQL = ZSQL + " ObservacionesV = " + "'',"
+            ZSQL = ZSQL + " ObservacionesVI = " + "'',"
             ZSQL = ZSQL + " Encargado = " + "'" + txtEncargado.Text + "',"
             ZSQL = ZSQL + " RequisitoI = " + "'" & WRequisitos(1) & "',"
             ZSQL = ZSQL + " RequisitoII = " + "'" & WRequisitos(2) & "',"
@@ -931,7 +937,6 @@ Public Class IngresoOrdenTrabajo
             Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
             cn = Nothing
             cm = Nothing
