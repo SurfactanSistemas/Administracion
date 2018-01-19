@@ -79,7 +79,7 @@ Partial Class IngresoOrdenTrabajo
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.pnlConsulta = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
         Me.lstFiltrada = New System.Windows.Forms.ListBox()
         Me.lstConsulta = New System.Windows.Forms.ListBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
@@ -261,7 +261,7 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtObservacionesII
         '
-        Me.txtObservacionesII.Location = New System.Drawing.Point(224, 160)
+        Me.txtObservacionesII.Location = New System.Drawing.Point(224, 165)
         Me.txtObservacionesII.MaxLength = 300
         Me.txtObservacionesII.Multiline = True
         Me.txtObservacionesII.Name = "txtObservacionesII"
@@ -270,11 +270,11 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtDescTrabajo
         '
-        Me.txtDescTrabajo.Location = New System.Drawing.Point(224, 99)
+        Me.txtDescTrabajo.Location = New System.Drawing.Point(224, 83)
         Me.txtDescTrabajo.MaxLength = 500
         Me.txtDescTrabajo.Multiline = True
         Me.txtDescTrabajo.Name = "txtDescTrabajo"
-        Me.txtDescTrabajo.Size = New System.Drawing.Size(500, 53)
+        Me.txtDescTrabajo.Size = New System.Drawing.Size(500, 76)
         Me.txtDescTrabajo.TabIndex = 3
         '
         'txtEncargado
@@ -287,7 +287,7 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtUso
         '
-        Me.txtUso.Location = New System.Drawing.Point(223, 71)
+        Me.txtUso.Location = New System.Drawing.Point(223, 57)
         Me.txtUso.MaxLength = 100
         Me.txtUso.Name = "txtUso"
         Me.txtUso.Size = New System.Drawing.Size(500, 20)
@@ -320,7 +320,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(65, 103)
+        Me.Label11.Location = New System.Drawing.Point(65, 86)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(151, 18)
         Me.Label11.TabIndex = 2
@@ -331,7 +331,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label10.Location = New System.Drawing.Point(184, 69)
+        Me.Label10.Location = New System.Drawing.Point(184, 55)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(32, 18)
         Me.Label10.TabIndex = 2
@@ -339,7 +339,7 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtMuestra
         '
-        Me.txtMuestra.Location = New System.Drawing.Point(223, 43)
+        Me.txtMuestra.Location = New System.Drawing.Point(223, 33)
         Me.txtMuestra.MaxLength = 50
         Me.txtMuestra.Name = "txtMuestra"
         Me.txtMuestra.Size = New System.Drawing.Size(500, 20)
@@ -350,7 +350,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label9.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label9.Location = New System.Drawing.Point(156, 44)
+        Me.Label9.Location = New System.Drawing.Point(156, 34)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(60, 18)
         Me.Label9.TabIndex = 2
@@ -358,7 +358,7 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtMaterial
         '
-        Me.txtMaterial.Location = New System.Drawing.Point(223, 15)
+        Me.txtMaterial.Location = New System.Drawing.Point(223, 9)
         Me.txtMaterial.MaxLength = 50
         Me.txtMaterial.Name = "txtMaterial"
         Me.txtMaterial.Size = New System.Drawing.Size(500, 20)
@@ -369,7 +369,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label8.Location = New System.Drawing.Point(14, 16)
+        Me.Label8.Location = New System.Drawing.Point(14, 10)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(202, 18)
         Me.Label8.TabIndex = 2
@@ -709,14 +709,14 @@ Partial Class IngresoOrdenTrabajo
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(202, 82)
+        Me.pnlConsulta.Location = New System.Drawing.Point(404, 82)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(404, 355)
         Me.pnlConsulta.TabIndex = 2
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button1)
+        Me.GroupBox1.Controls.Add(Me.btnCerrarConsulta)
         Me.GroupBox1.Controls.Add(Me.lstFiltrada)
         Me.GroupBox1.Controls.Add(Me.lstConsulta)
         Me.GroupBox1.Controls.Add(Me.txtAyuda)
@@ -728,15 +728,15 @@ Partial Class IngresoOrdenTrabajo
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Consulta Clientes"
         '
-        'Button1
+        'btnCerrarConsulta
         '
-        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Button1.Location = New System.Drawing.Point(124, 293)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(115, 28)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Cerrar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(124, 293)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(115, 28)
+        Me.btnCerrarConsulta.TabIndex = 0
+        Me.btnCerrarConsulta.Text = "Cerrar"
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
         '
         'lstFiltrada
         '
@@ -862,6 +862,6 @@ Partial Class IngresoOrdenTrabajo
     Friend WithEvents lstFiltrada As System.Windows.Forms.ListBox
     Friend WithEvents lstConsulta As System.Windows.Forms.ListBox
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnCerrarConsulta As System.Windows.Forms.Button
     Friend WithEvents WIndice As System.Windows.Forms.ListBox
 End Class

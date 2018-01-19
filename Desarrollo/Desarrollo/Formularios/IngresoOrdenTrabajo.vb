@@ -6,7 +6,7 @@ Public Class IngresoOrdenTrabajo
         btnLimpiar.PerformClick()
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click, Button1.Click
+    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
@@ -92,6 +92,9 @@ Public Class IngresoOrdenTrabajo
                     txtFecha.Text = IIf(IsDBNull(.Item("Fecha")), "", .Item("Fecha"))
                     txtFechaComprometida.Text = IIf(IsDBNull(.Item("FechaEntrega")), "", .Item("FechaEntrega"))
                     txtCliente.Text = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+
+                    txtDescCliente.Text = _TraerNombreCliente(txtCliente.Text)
+
                     txtObservaciones.Text = IIf(IsDBNull(.Item("Observaciones")), "", .Item("Observaciones"))
                     txtMaterial.Text = IIf(IsDBNull(.Item("Material")), "", .Item("Material"))
                     txtMuestra.Text = IIf(IsDBNull(.Item("Muestra")), "", .Item("Muestra"))
@@ -257,6 +260,8 @@ Public Class IngresoOrdenTrabajo
                 If Trim(txtCliente.Text) = "" Then
 
                     txtDescCliente.Text = ""
+
+                    btnConsultas.PerformClick()
 
                 ElseIf Trim(txtCliente.Text).Length < 6 Then
 
@@ -493,6 +498,7 @@ Public Class IngresoOrdenTrabajo
             lstConsulta.Visible = True
             lstFiltrada.Visible = False
             txtAyuda.Text = ""
+            txtAyuda.Focus()
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -616,7 +622,7 @@ Public Class IngresoOrdenTrabajo
         origen.SelectedItem = filtrado.SelectedItem
 
         ' Llamamos al evento que tenga asosiado el control de origen.
-        'lstConsulta_Click(Nothing, Nothing)
+        lstConsulta_Click(Nothing, Nothing)
 
 
         ' Sacamos de vista los resultados filtrados.
@@ -642,11 +648,19 @@ Public Class IngresoOrdenTrabajo
             txtCliente.Text = WClave
             txtDescCliente.Text = _TraerNombreCliente(WClave)
 
-            pnlConsulta.Visible = False
+            btnCerrarConsulta.PerformClick()
 
-            txtObservaciones.Focus()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
+    End Sub
+
+    Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
+        btnConsultas.PerformClick()
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
+        pnlConsulta.Visible = False
+        txtObservaciones.Focus()
     End Sub
 End Class
