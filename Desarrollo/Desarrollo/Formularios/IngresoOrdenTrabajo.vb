@@ -485,10 +485,15 @@ Public Class IngresoOrdenTrabajo
     End Sub
 
     Private Sub btnConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultas.Click
-        pnlConsulta.Visible = True
-
+        
         Try
             _CargarClientes()
+
+            pnlConsulta.Visible = True
+            lstConsulta.Visible = True
+            lstFiltrada.Visible = False
+            txtAyuda.Text = ""
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
@@ -498,18 +503,40 @@ Public Class IngresoOrdenTrabajo
     Private Sub _CargarClientes()
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cliente, Razon FROM Cliente")
+        Dim cm As SqlCommand = New SqlCommand("")
         Dim dr As SqlDataReader
-        Dim WRazon = "", WCliente = ""
+        Dim WRazones(), WClaves() As String
+        Dim WAux = 0
 
         Try
             WIndice.Items.Clear()
             lstConsulta.Items.Clear()
             lstFiltrada.Items.Clear()
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = Helper._ConectarA("SurfactanSA")
             cn.Open()
             cm.Connection = cn
+
+            cm.CommandText = "SELECT Count(*) as Total FROM Cliente"
+
+            dr = cm.ExecuteReader
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                ReDim WRazones(dr.Item("Total") - 1)
+                ReDim WClaves(dr.Item("Total") - 1)
+
+            Else
+                Exit Sub
+            End If
+
+            If Not dr.IsClosed Then
+                dr.Close()
+            End If
+
+            cm.CommandText = "SELECT Cliente, Razon FROM Cliente WHERE Cliente is not null AND Razon is not null"
 
             dr = cm.ExecuteReader()
 
@@ -518,21 +545,18 @@ Public Class IngresoOrdenTrabajo
                 Do While dr.Read()
 
                     With dr
-                        WRazon = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
-                        WCliente = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+                        
+                        WRazones(WAux) = .Item("Razon")
+                        WClaves(WAux) = .Item("Cliente")
 
-                        If Trim(WRazon) <> "" And Trim(WCliente) <> "" Then
+                        WAux += 1
 
-                            lstConsulta.Items.Add(WRazon)
-                            WIndice.Items.Add(WCliente)
-
-                            WCliente = ""
-                            WRazon = ""
-                        End If
                     End With
 
-
                 Loop
+
+                lstConsulta.Items.AddRange(WRazones)
+                WIndice.Items.AddRange(WClaves)
 
             End If
 
@@ -604,4 +628,25 @@ Public Class IngresoOrdenTrabajo
         _FiltrarDinamicamente()
     End Sub
 
+    Private Sub lstConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
+
+        Try
+            Dim WValor = lstConsulta.SelectedItem
+
+            If IsNothing(WValor) OrElse Trim(WValor) = "" Then Exit Sub
+
+            Dim WClave = "", WNombre = ""
+
+            WClave = WIndice.Items(lstConsulta.SelectedIndex)
+
+            txtCliente.Text = WClave
+            txtDescCliente.Text = _TraerNombreCliente(WClave)
+
+            pnlConsulta.Visible = False
+
+            txtObservaciones.Focus()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
 End Class
