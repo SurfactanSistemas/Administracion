@@ -1071,4 +1071,53 @@ Public Class IngresoOrdenTrabajo
         End Try
 
     End Function
+
+    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+
+        If Trim(txtOrden.Text).Replace("-", "") = "" Then Exit Sub
+
+        If _ExisteOrdenTrabajo() Then
+
+            If MsgBox("¿Está seguro de querer Eliminar por completo esta Orden de Trabajo?", vbYesNo) = MsgBoxResult.No Then Exit Sub
+
+            Try
+
+                _EliminarOrdenTrabajo()
+
+                MsgBox("Se ha eliminado satisfactoriamente la Orden de Trabajo.", MsgBoxStyle.Information)
+
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            End Try
+
+        End If
+
+    End Sub
+
+    Private Sub _EliminarOrdenTrabajo()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "DELETE FROM OrdenTrabajo WHERE Orden = '" & txtOrden.Text & "'"
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
 End Class
