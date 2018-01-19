@@ -38,7 +38,9 @@ Public Class Globals
         If empresa Is Nothing Then
             Throw New ApplicationException("No fue seleccionada la empresa")
         Else
+
             Return ConfigurationManager.ConnectionStrings(empresa).ConnectionString
+
         End If
     End Function
 

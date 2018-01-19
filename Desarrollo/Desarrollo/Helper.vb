@@ -1,40 +1,15 @@
 ﻿Imports System.Data.SqlClient
-Imports ClasesCompartidas
 
 Module Helper
 
     Private Const VALIDA_CUIT = "54327654321"
-
-    Public ReadOnly Property Empresas As List(Of String)
-        Get
-            ' DETERMINO LAS EMPRESAS CON LAS QUE TRABAJAR.
-            Select Case UCase(Trim(ClasesCompartidas.Globals.empresa))
-
-                Case "SURFACTAN", "LOCAL"
-
-                    Return New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
-
-                Case "PELLITAL"
-                    '
-                    ' PELLITAL_II ESTA MAL ESCRITA PORQUE LA BASE DE DATOS LO TIENE ASI AL NOMBRE.
-                    '
-                    Return New List(Of String) From {"PellitalSA", "Pelitall_II", "Pellital_III", "Pellital_V"}
-
-                Case Else
-
-                    Return New List(Of String) From {}
-
-            End Select
-
-        End Get
-    End Property
 
     Public Function getNombrePC() As String
         Return My.Computer.Name
     End Function
 
     Public Function _EsPellital() As Boolean
-        Return ClasesCompartidas.Globals.empresa.Equals("PELLITAL")
+        Return Conexion.EsPellital
     End Function
 
     Public Sub _PurgarSaldosCtaCtePrvs()
@@ -97,29 +72,18 @@ Module Helper
 
     End Function
 
-    Public Function _ConectarA(Optional ByVal empresa As String = "SurfactanSA") As String
+    Public Function _ConectarDesarrollo() As String
 
-        If _EsPellital() AndAlso empresa = "SurfactanSA" Then
-            empresa = "Pellital_III"
-        End If
-
-        Dim _empresa = Empresas.Find(Function(e) UCase(e) = UCase(empresa))
-
-        If Not IsNothing(_empresa) Then
-
-            Dim cs = ClasesCompartidas.Globals.getConnectionString()
-
-            If _EsPellital() Then
-                Return cs.Replace("Catalog=Pellital_III", "Catalog=" & _empresa)
-            End If
-
-            Return cs.Replace("Catalog=SurfactanSA", "Catalog=" & _empresa)
-
-        Else
-            Throw New Exception("No se pudo encontrar la empresa a la que se quiere conectar.")
-        End If
+        Return _ConectarA(ClasesCompartidas.Globals.empresa)
 
     End Function
+
+    Public Function _ConectarA(Optional ByVal empresa As String = "") As String
+
+        Return Conexion._ConectarA(empresa)
+
+    End Function
+
 
     Public Function ordenaFecha(ByVal fecha As String)
 
