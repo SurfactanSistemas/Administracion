@@ -513,6 +513,15 @@ Public Class ListadoEstaAnual
         varTituloII = ""
         txtCorteTipoDY = ""
 
+        If TipoDY.Checked = True Then
+            If leederecha(txtDesdeTerminado.Text, 2) <> "DY" Then
+                txtDesdeTerminado.Text = "DY-00000-000"
+            End If
+            If leederecha(txtHastaTerminado.Text, 2) <> "DY" Then
+                txtHastaTerminado.Text = "DY-99999-999"
+            End If
+        End If
+
         If LTrim(RTrim(txtClienteFiltro.Text)) = "" Then
             txtDesdeCliente = ""
             txtHastaCliente = "Z99999"
@@ -567,6 +576,27 @@ Public Class ListadoEstaAnual
 
 
         SQLConnector.retrieveDataTable("limpiar_estaanu")
+
+
+        Dim tabla As DataTable
+        tabla = SQLConnector.retrieveDataTable("buscar_estadistica_productosII", 0, 9999, 0, 9999, 0, 9999, "", "Z99999", txtDesdeTerminado.Text, txtHastaTerminado.Text, txtDesde, txtHasta)
+
+        For Each row As DataRow In tabla.Rows
+
+            Dim CampoEstadistica As New LeeEstadisticaProducto(row.Item(0).ToString)
+
+            txtArticulo = CampoEstadistica.Articulo
+
+            Busca_Nombre(txtArticulo)
+            SQLConnector.executeProcedure("Modifica_Estadistica_DescriTerminado", txtDesde, txtHasta, txtArticulo, txtDescripcion)
+
+            varBarra = varBarra + 1
+            If varBarra > 5000 Then
+                varBarra = 1
+            End If
+            ProgressBar1.Value = varBarra
+
+        Next
 
 
         Dim tablaII As DataTable
