@@ -84,6 +84,11 @@ Partial Class IngresoOrdenTrabajo
         Me.lstConsulta = New System.Windows.Forms.ListBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.WIndice = New System.Windows.Forms.ListBox()
+        Me.pnlNotas = New System.Windows.Forms.Panel()
+        Me.txtNota = New System.Windows.Forms.RichTextBox()
+        Me.btnCerrarNota = New System.Windows.Forms.Button()
+        Me.rbAplicacion = New System.Windows.Forms.RadioButton()
+        Me.rbEstabilidad = New System.Windows.Forms.RadioButton()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -97,6 +102,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Panel5.SuspendLayout()
         Me.pnlConsulta.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.pnlNotas.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -709,7 +715,7 @@ Partial Class IngresoOrdenTrabajo
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(404, 82)
+        Me.pnlConsulta.Location = New System.Drawing.Point(202, 82)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(404, 355)
         Me.pnlConsulta.TabIndex = 2
@@ -769,12 +775,69 @@ Partial Class IngresoOrdenTrabajo
         Me.WIndice.Name = "WIndice"
         Me.WIndice.Size = New System.Drawing.Size(63, 17)
         Me.WIndice.TabIndex = 4
+        Me.WIndice.Visible = False
+        '
+        'pnlNotas
+        '
+        Me.pnlNotas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlNotas.Controls.Add(Me.rbEstabilidad)
+        Me.pnlNotas.Controls.Add(Me.rbAplicacion)
+        Me.pnlNotas.Controls.Add(Me.btnCerrarNota)
+        Me.pnlNotas.Controls.Add(Me.txtNota)
+        Me.pnlNotas.Location = New System.Drawing.Point(156, 70)
+        Me.pnlNotas.Name = "pnlNotas"
+        Me.pnlNotas.Size = New System.Drawing.Size(497, 379)
+        Me.pnlNotas.TabIndex = 3
+        Me.pnlNotas.Visible = False
+        '
+        'txtNota
+        '
+        Me.txtNota.EnableAutoDragDrop = True
+        Me.txtNota.Location = New System.Drawing.Point(15, 14)
+        Me.txtNota.Name = "txtNota"
+        Me.txtNota.Size = New System.Drawing.Size(467, 328)
+        Me.txtNota.TabIndex = 0
+        Me.txtNota.Text = ""
+        '
+        'btnCerrarNota
+        '
+        Me.btnCerrarNota.Location = New System.Drawing.Point(191, 347)
+        Me.btnCerrarNota.Name = "btnCerrarNota"
+        Me.btnCerrarNota.Size = New System.Drawing.Size(115, 27)
+        Me.btnCerrarNota.TabIndex = 0
+        Me.btnCerrarNota.Text = "Cerrar Nota"
+        Me.btnCerrarNota.UseVisualStyleBackColor = True
+        '
+        'rbAplicacion
+        '
+        Me.rbAplicacion.AutoSize = True
+        Me.rbAplicacion.Location = New System.Drawing.Point(318, 350)
+        Me.rbAplicacion.Name = "rbAplicacion"
+        Me.rbAplicacion.Size = New System.Drawing.Size(74, 17)
+        Me.rbAplicacion.TabIndex = 1
+        Me.rbAplicacion.TabStop = True
+        Me.rbAplicacion.Text = "Aplicacion"
+        Me.rbAplicacion.UseVisualStyleBackColor = True
+        Me.rbAplicacion.Visible = False
+        '
+        'rbEstabilidad
+        '
+        Me.rbEstabilidad.AutoSize = True
+        Me.rbEstabilidad.Location = New System.Drawing.Point(317, 350)
+        Me.rbEstabilidad.Name = "rbEstabilidad"
+        Me.rbEstabilidad.Size = New System.Drawing.Size(76, 17)
+        Me.rbEstabilidad.TabIndex = 1
+        Me.rbEstabilidad.TabStop = True
+        Me.rbEstabilidad.Text = "Estabilidad"
+        Me.rbEstabilidad.UseVisualStyleBackColor = True
+        Me.rbEstabilidad.Visible = False
         '
         'IngresoOrdenTrabajo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(808, 518)
+        Me.Controls.Add(Me.pnlNotas)
         Me.Controls.Add(Me.pnlConsulta)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Location = New System.Drawing.Point(10, 10)
@@ -799,6 +862,8 @@ Partial Class IngresoOrdenTrabajo
         Me.pnlConsulta.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.pnlNotas.ResumeLayout(False)
+        Me.pnlNotas.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -864,4 +929,9 @@ Partial Class IngresoOrdenTrabajo
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
     Friend WithEvents btnCerrarConsulta As System.Windows.Forms.Button
     Friend WithEvents WIndice As System.Windows.Forms.ListBox
+    Friend WithEvents pnlNotas As System.Windows.Forms.Panel
+    Friend WithEvents rbEstabilidad As System.Windows.Forms.RadioButton
+    Friend WithEvents rbAplicacion As System.Windows.Forms.RadioButton
+    Friend WithEvents btnCerrarNota As System.Windows.Forms.Button
+    Friend WithEvents txtNota As System.Windows.Forms.RichTextBox
 End Class

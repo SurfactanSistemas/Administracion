@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 
 Public Class IngresoOrdenTrabajo
 
@@ -260,9 +261,7 @@ Public Class IngresoOrdenTrabajo
                 If Trim(txtCliente.Text) = "" Then
 
                     txtDescCliente.Text = ""
-
-                    btnConsultas.PerformClick()
-
+                    
                 ElseIf Trim(txtCliente.Text).Length < 6 Then
 
                     txtDescCliente.Text = ""
@@ -641,7 +640,7 @@ Public Class IngresoOrdenTrabajo
 
             If IsNothing(WValor) OrElse Trim(WValor) = "" Then Exit Sub
 
-            Dim WClave = "", WNombre = ""
+            Dim WClave = ""
 
             WClave = WIndice.Items(lstConsulta.SelectedIndex)
 
@@ -663,4 +662,413 @@ Public Class IngresoOrdenTrabajo
         pnlConsulta.Visible = False
         txtObservaciones.Focus()
     End Sub
+
+    Private Sub btnNotasAplicacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotasAplicacion.Click
+
+        Dim WArchivo1 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "A" & txtOrden.Text.Trim & ".rtf"
+        Dim WArchivo2 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_2") & "A" & txtOrden.Text.Trim & ".rtf"
+
+        ' Varificamos los dos destinos, ya que dependiendo donde se haya grabado puede existir en alguno de estos dos lugares.
+        If File.Exists(WArchivo1) Then
+
+            txtNota.LoadFile(WArchivo1)
+
+        ElseIf File.Exists(WArchivo2) Then
+
+            txtNota.LoadFile(WArchivo2)
+        Else
+
+            txtNota.LoadFile(Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "Blanco.rtf")
+
+        End If
+
+        rbAplicacion.Checked = True
+        pnlNotas.Visible = True
+
+    End Sub
+
+    Private Sub btnNotasEstabilidad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotasEstabilidad.Click
+
+        Try
+            Dim WArchivo1 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "E" & txtOrden.Text.Trim & ".rtf"
+            Dim WArchivo2 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_2") & "E" & txtOrden.Text.Trim & ".rtf"
+
+            ' Varificamos los dos destinos, ya que dependiendo donde se haya grabado puede existir en alguno de estos dos lugares.
+            If File.Exists(WArchivo1) Then
+
+                txtNota.LoadFile(WArchivo1)
+
+            ElseIf File.Exists(WArchivo2) Then
+
+                txtNota.LoadFile(WArchivo2)
+
+            Else
+
+                txtNota.LoadFile(Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "Blanco.rtf")
+
+            End If
+
+            rbEstabilidad.Checked = True
+            pnlNotas.Visible = True
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+    Private Sub btnCerrarNota_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarNota.Click
+
+        Try
+            ' Para mantener compatibilidad con sistema Viejo.
+            Dim WArchivo = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1")
+            Dim WArchivo2 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_2")
+
+            If rbAplicacion.Checked Then
+
+                WArchivo &= "A"
+                WArchivo2 &= "A"
+
+            ElseIf rbEstabilidad.Checked Then
+
+                WArchivo &= "E"
+                WArchivo2 &= "E"
+
+            Else
+                Exit Sub
+            End If
+
+            WArchivo &= txtOrden.Text & ".rtf"
+            WArchivo2 &= txtOrden.Text & ".rtf"
+
+            txtNota.SaveFile(WArchivo)
+            txtNota.SaveFile(WArchivo2)
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+        pnlNotas.Visible = False
+    End Sub
+
+    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+
+        Try
+            If Trim(txtOrden.Text).Replace("-", "") = "" OrElse Trim(txtOrden.Text).Length < 8 Then Exit Sub
+
+            ' Eliminamos las comas que pudiesen existir para que no rompa la Consulta SQL.
+            For Each txt As TextBox In _CamposDeTexto()
+                txt.Text = txt.Text.Replace(",", " ")
+            Next
+
+            If _ExisteOrdenTrabajo() Then
+
+                _ActualizarOrdenTrabajo()
+
+            Else
+
+                _AltaOrdenTrabajo()
+
+            End If
+
+            btnLimpiar.PerformClick()
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+    Private Sub _AltaOrdenTrabajo()
+        Dim ZSQL = ""
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim WDescripciones(5) As String
+        Dim WObservaciones(3) As String
+        Dim WRequisitos(6) As String
+        Dim WReferencias(2) As String
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            WDescripciones = _PrepararDescripciones()
+            WObservaciones = _PrepararObservaciones()
+            WRequisitos = _PrepararRequisitos()
+            WReferencias = _PrepararReferencias()
+            
+            ZSQL = ""
+            ZSQL = ZSQL + "INSERT INTO OrdenTrabajo ("
+            ZSQL = ZSQL + "Orden ,"
+            ZSQL = ZSQL + "Fecha ,"
+            ZSQL = ZSQL + "FechaEntrega ,"
+            ZSQL = ZSQL + "Cliente ,"
+            ZSQL = ZSQL + "Observaciones ,"
+            ZSQL = ZSQL + "Material ,"
+            ZSQL = ZSQL + "Muestra ,"
+            ZSQL = ZSQL + "Uso ,"
+            ZSQL = ZSQL + "DescripcionI ,"
+            ZSQL = ZSQL + "DescripcionII ,"
+            ZSQL = ZSQL + "DescripcionIII ,"
+            ZSQL = ZSQL + "DescripcionIV ,"
+            ZSQL = ZSQL + "DescripcionV ,"
+            ZSQL = ZSQL + "ObservacionesI ,"
+            ZSQL = ZSQL + "ObservacionesII ,"
+            ZSQL = ZSQL + "ObservacionesIII ,"
+            ZSQL = ZSQL + "Encargado ,"
+            ZSQL = ZSQL + "RequisitoI ,"
+            ZSQL = ZSQL + "RequisitoII ,"
+            ZSQL = ZSQL + "RequisitoIII ,"
+            ZSQL = ZSQL + "RequisitoIV ,"
+            ZSQL = ZSQL + "RequisitoV ,"
+            ZSQL = ZSQL + "RequisitoVI ,"
+            ZSQL = ZSQL + "ReferenciaI ,"
+            ZSQL = ZSQL + "ReferenciaII ,"
+            ZSQL = ZSQL + "Aplicacion ,"
+            ZSQL = ZSQL + "Estabilidad )"
+            ZSQL = ZSQL + "Values ("
+            ZSQL = ZSQL + "'" + txtOrden.Text + "',"
+            ZSQL = ZSQL + "'" + txtFecha.Text + "',"
+            ZSQL = ZSQL + "'" + txtFechaComprometida.Text + "',"
+            ZSQL = ZSQL + "'" + txtCliente.Text + "',"
+            ZSQL = ZSQL + "'" + txtObservaciones.Text + "',"
+            ZSQL = ZSQL + "'" + txtMaterial.Text + "',"
+            ZSQL = ZSQL + "'" + txtMuestra.Text + "',"
+            ZSQL = ZSQL + "'" + txtUso.Text + "',"
+            ZSQL = ZSQL + "'" & WDescripciones(1) & "',"
+            ZSQL = ZSQL + "'" & WDescripciones(2) & "',"
+            ZSQL = ZSQL + "'" & WDescripciones(3) & "',"
+            ZSQL = ZSQL + "'" & WDescripciones(4) & "',"
+            ZSQL = ZSQL + "'" & WDescripciones(5) & "',"
+            ZSQL = ZSQL + "'" & WObservaciones(1) & "',"
+            ZSQL = ZSQL + "'" & WObservaciones(2) & "',"
+            ZSQL = ZSQL + "'" & WObservaciones(3) & "',"
+            ZSQL = ZSQL + "'" + txtEncargado.Text + "',"
+            ZSQL = ZSQL + "'" & WRequisitos(1) & "',"
+            ZSQL = ZSQL + "'" & WRequisitos(2) & "',"
+            ZSQL = ZSQL + "'" & WRequisitos(3) & "',"
+            ZSQL = ZSQL + "'" & WRequisitos(4) & "',"
+            ZSQL = ZSQL + "'" & WRequisitos(5) & "',"
+            ZSQL = ZSQL + "'" & WRequisitos(6) & "',"
+            ZSQL = ZSQL + "'" & WReferencias(1) & "',"
+            ZSQL = ZSQL + "'" & WReferencias(2) & "',"
+            ZSQL = ZSQL + "'" + Str$(cmbAplicacion.SelectedIndex) + "',"
+            ZSQL = ZSQL + "'" + Str$(cmbEstabilidad.SelectedIndex) + "')"
+            
+            cm.CommandText = ZSQL
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
+    Private Sub _ActualizarOrdenTrabajo()
+        Dim ZSQL = ""
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim WDescripciones(5) As String
+        Dim WObservaciones(3) As String
+        Dim WRequisitos(6) As String
+        Dim WReferencias(2) As String
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            WDescripciones = _PrepararDescripciones()
+            WObservaciones = _PrepararObservaciones()
+            WRequisitos = _PrepararRequisitos()
+            WReferencias= _PrepararReferencias()
+
+            ZSQL = ""
+            ZSQL = ZSQL + "UPDATE OrdenTrabajo SET "
+            ZSQL = ZSQL + " Fecha = " + "'" + txtFecha.Text + "',"
+            ZSQL = ZSQL + " FechaEntrega = " + "'" + txtFechaComprometida.Text + "',"
+            ZSQL = ZSQL + " Cliente = " + "'" + txtCliente.Text + "',"
+            ZSQL = ZSQL + " Observaciones = " + "'" + txtObservaciones.Text + "',"
+            ZSQL = ZSQL + " Material = " + "'" + txtMaterial.Text + "',"
+            ZSQL = ZSQL + " Muestra = " + "'" + txtMuestra.Text + "',"
+            ZSQL = ZSQL + " Uso = " + "'" + txtUso.Text + "',"
+            ZSQL = ZSQL + " DescripcionI = " + "'" & WDescripciones(1) & "',"
+            ZSQL = ZSQL + " DescripcionII = " + "'" & WDescripciones(2) & "',"
+            ZSQL = ZSQL + " DescripcionIII = " + "'" & WDescripciones(3) & "',"
+            ZSQL = ZSQL + " DescripcionIV = " + "'" & WDescripciones(4) & "',"
+            ZSQL = ZSQL + " DescripcionV = " + "'" & WDescripciones(5) & "',"
+            ZSQL = ZSQL + " ObservacionesI = " + "'" & WObservaciones(1) & "',"
+            ZSQL = ZSQL + " ObservacionesII = " + "'" & WObservaciones(2) & "',"
+            ZSQL = ZSQL + " ObservacionesIII = " + "'" & WObservaciones(3) & "',"
+            ZSQL = ZSQL + " Encargado = " + "'" + txtEncargado.Text + "',"
+            ZSQL = ZSQL + " RequisitoI = " + "'" & WRequisitos(1) & "',"
+            ZSQL = ZSQL + " RequisitoII = " + "'" & WRequisitos(2) & "',"
+            ZSQL = ZSQL + " RequisitoIII = " + "'" & WRequisitos(3) & "',"
+            ZSQL = ZSQL + " RequisitoIV = " + "'" & WRequisitos(4) & "',"
+            ZSQL = ZSQL + " RequisitoV = " + "'" & WRequisitos(5) & "',"
+            ZSQL = ZSQL + " RequisitoVI = " + "'" & WRequisitos(6) & "',"
+            ZSQL = ZSQL + " ReferenciaI = " + "'" & WReferencias(1) & "',"
+            ZSQL = ZSQL + " ReferenciaII = " + "'" & WReferencias(2) & "',"
+            ZSQL = ZSQL + " Aplicacion = " + "'" + Str$(cmbAplicacion.SelectedIndex) + "',"
+            ZSQL = ZSQL + " Estabilidad = " + "'" + Str$(cmbEstabilidad.SelectedIndex) + "'"
+            ZSQL = ZSQL + " Where Orden = " + "'" + txtOrden.Text + "'"
+
+            cm.CommandText = ZSQL
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Function _PrepararReferencias() As String()
+        Dim WReferencias(2) As String
+        Dim WCorte = 50
+        Dim WIndice = 1
+
+        For i = 1 To 2
+
+            WReferencias(i) = Mid(txtReferencias.Text, WIndice, 50)
+
+            WIndice = WCorte
+
+            WCorte += 50
+
+        Next
+
+        Return WReferencias
+    End Function
+
+    Private Function _PrepararRequisitos() As String()
+        Dim WRequisitos(6) As String
+        Dim WCorte = 50
+        Dim WIndice = 1
+        Dim WAux = 1
+
+        ' Guardamos los Requisitos Funcionales.
+        For i = WAux To 2
+
+            WRequisitos(i) = Mid(txtRequisitosFuncionales.Text, WIndice, 50)
+
+            WIndice = WCorte
+
+            WCorte += 50
+
+            WAux += 1
+        Next
+
+        WIndice = 1
+
+        ' Los Otros Requisitos.
+        For i = WAux To 4
+
+            WRequisitos(i) = Mid(txtOtrosRequisitos.Text, WIndice, 50)
+
+            WIndice = WCorte
+
+            WCorte += 50
+
+            WAux += 1
+        Next
+
+        WIndice = 1
+
+        ' Por ultimo, los Requisitos Legales, Normas y/o Regulaciones.
+        For i = WAux To 6
+
+            WRequisitos(i) = Mid(txtRequisitosNormasRegulaciones.Text, WIndice, 50)
+
+            WIndice = WCorte
+
+            WCorte += 50
+
+            WAux += 1
+        Next
+
+        Return WRequisitos
+    End Function
+
+    Private Function _PrepararObservaciones() As String()
+        Dim WObservaciones(3) As String
+        Dim WCorte = 100
+        Dim WIndice = 1
+
+        For i = 1 To 3
+
+            WObservaciones(i) = Mid(txtObservacionesII.Text, WIndice, 100)
+
+            WIndice = WCorte
+
+            WCorte += 100
+
+        Next
+
+        Return WObservaciones
+    End Function
+
+    Private Function _PrepararDescripciones() As String()
+        Dim WDescripciones(5) As String
+        Dim WCorte = 100
+        Dim WIndice = 1
+
+        For i = 1 To 5
+
+            WDescripciones(i) = Mid(txtDescTrabajo.Text, WIndice, 100)
+
+            WIndice = WCorte
+
+            WCorte += 100
+
+        Next
+
+        Return WDescripciones
+    End Function
+
+    Private Function _ExisteOrdenTrabajo() As Boolean
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Orden FROM OrdenTrabajo WHERE Orden = '" & UCase(txtOrden.Text) & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            Return dr.HasRows
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
 End Class
