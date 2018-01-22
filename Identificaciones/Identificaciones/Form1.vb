@@ -41,6 +41,10 @@ Public Class Form1
             txt.Text = ""
         Next
 
+        For Each txt As MaskedTextBox In {txtDesdeFecha, txtHastaFecha}
+            txt.Clear()
+        Next
+
         picFoto.Image = My.Resources.sin_imagen
 
         If File.Exists(WHashNombre) Then
@@ -83,6 +87,8 @@ Public Class Form1
                     txtApellido.Text = IIf(IsDBNull(.Item("Apellidos")), "", .Item("Apellidos"))
                     txtNombres.Text = IIf(IsDBNull(.Item("Nombres")), "", .Item("Nombres"))
                     txtProveedor.Text = IIf(IsDBNull(.Item("Proveedor")), "", .Item("Proveedor"))
+                    txtDesdeFecha.Text = IIf(IsDBNull(.Item("FechaDesde")), "", .Item("FechaDesde"))
+                    txtHastaFecha.Text = IIf(IsDBNull(.Item("FechaHasta")), "", .Item("FechaHasta"))
                     txtObservaciones.Text = IIf(IsDBNull(.Item("ObservacionesI")), "", .Item("ObservacionesI")) & IIf(IsDBNull(.Item("ObservacionesII")), "", .Item("ObservacionesII"))
 
                     _CargarProveedor()
@@ -99,17 +105,8 @@ Public Class Form1
 
                         If File.Exists(WDestino & txtNroDocumento.Text & _Extension) Then
 
-                            If Not Directory.Exists(WDestino & "temp\") Then
-                                Directory.CreateDirectory(WDestino & "temp\")
-                            End If
-
-                            ' Creamos la ruta al directorio temporal con un nombre unico para evitar conflictos.
-                            WHashNombre = WDestino & "temp\" & txtNroDocumento.Text.hashMD5 & Date.Now.Ticks & _Extension
-
-                            File.Copy(WDestino & txtNroDocumento.Text & _Extension, WHashNombre, True)
-
                             ' Para evitar bloqueo por recurso utilizado por otro proceso al querer eliminar el archivo temporal.
-                            Dim img1 = Image.FromFile(WHashNombre)
+                            Dim img1 = Image.FromFile(WDestino & txtNroDocumento.Text & _Extension)
                             Dim img2 = New Bitmap(img1)
 
                             img1.Dispose()
@@ -227,7 +224,7 @@ Public Class Form1
                 Exit Sub
             End Try
 
-            txtObservaciones.Focus()
+            txtDesdeFecha.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtProveedor.Text = ""
@@ -246,7 +243,7 @@ Public Class Form1
     Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
         If Not _DatosValidos() Then Exit Sub
 
-        Dim WClave, WDNI, WApellido, WNombres, WProveedor, WObservacionesI, WObservacionesII
+        Dim WClave, WDNI, WApellido, WNombres, WProveedor, WObservacionesI, WObservacionesII, WDesdeFecha, WHastaFecha
 
         WDNI = Trim(txtNroDocumento.Text).SliceLeft(8)
         WApellido = Trim(txtApellido.Text).Capitalize.SliceLeft(30)
@@ -256,6 +253,9 @@ Public Class Form1
         WObservacionesI = Trim(txtObservaciones.Text).SliceLeft(200)
         WObservacionesII = ""
 
+        WDesdeFecha = txtDesdeFecha.Text
+        WHastaFecha = txtHastaFecha.Text
+
         If Trim(txtObservaciones.Text).Length > 200 Then
             WObservacionesII = Trim(txtObservaciones.Text).Substring(200, Trim(txtObservaciones.Text).Length - 200)
         End If
@@ -263,7 +263,7 @@ Public Class Form1
         WClave = WProveedor & WDNI
 
         Try
-            _GrabarIdentificacion(WClave, WDNI, WApellido, WNombres, WProveedor, WObservacionesI, WObservacionesII)
+            _GrabarIdentificacion(WClave, WDNI, WApellido, WNombres, WProveedor, WObservacionesI, WObservacionesII, WDesdeFecha, WHastaFecha)
             '    MsgBox("Identificación guardada con éxito!", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
         Catch ex As Exception
@@ -274,14 +274,18 @@ Public Class Form1
 
     End Sub
 
-    Private Sub _GrabarIdentificacion(ByVal WClave As String, ByVal WDNI As String, ByVal WApellido As String, ByVal WNombres As String, ByVal WProveedor As String, ByVal WObservacionesI As String, ByVal WObservacionesII As String)
+    Private Sub _GrabarIdentificacion(ByVal WClave As String, ByVal WDNI As String, ByVal WApellido As String, ByVal WNombres As String, ByVal WProveedor As String, ByVal WObservacionesI As String, ByVal WObservacionesII As String, ByVal WDesdeFecha As String, ByVal WHastaFecha As String)
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
         Dim trans As SqlTransaction = Nothing
         Dim ZSql = ""
+        Dim WDesdeFechaOrd, WHastaFechaOrd
 
         Try
+
+            WDesdeFechaOrd = Helper.ordenaFecha(WDesdeFecha)
+            WHastaFechaOrd = Helper.ordenaFecha(WHastaFecha)
 
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
@@ -301,6 +305,10 @@ Public Class Form1
                  & "Proveedor," _
                  & "Apellidos," _
                  & "Nombres," _
+                 & "FechaDesde," _
+                 & "FechaDesdeOrd," _
+                 & "FechaHasta," _
+                 & "FechaHastaOrd," _
                  & "ObservacionesI," _
                  & "ObservacionesII" _
                  & ")" _
@@ -310,6 +318,10 @@ Public Class Form1
                  & "'" & WProveedor & "'," _
                  & "'" & WApellido & "'," _
                  & "'" & WNombres & "'," _
+                 & "'" & WDesdeFecha & "'," _
+                 & "'" & WDesdeFechaOrd & "'," _
+                 & "'" & WHastaFecha & "'," _
+                 & "'" & WHastaFechaOrd & "'," _
                  & "'" & WObservacionesI & "'," _
                  & "'" & WObservacionesII & "'" _
                  & ")"
@@ -364,6 +376,21 @@ Public Class Form1
 
         ' Se tengan datos minimos.
         If {txtNroDocumento, txtApellido, txtNombres, txtProveedor}.Any(Function(txt) Trim(txt.Text) = "") Then
+            Return False
+        End If
+
+        ' Se tengan las fechas dónde es válida la credencial.
+        If {txtDesdeFecha, txtHastaFecha}.Any(Function(txt) txt.Text.estaVacia) Then
+            Return False
+        End If
+
+        If txtDesdeFecha.Text.esMayorA(txtHastaFecha.Text) Then
+            MsgBox("Las fechas deben ser Iguales o Contiguas", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not Helper._ValidarFecha(txtDesdeFecha.Text) Or Not Helper._ValidarFecha(txtHastaFecha.Text) Then
+            MsgBox("Las fechas deben ser Fechas válidas.", MsgBoxStyle.Exclamation)
             Return False
         End If
 
@@ -455,6 +482,7 @@ Public Class Form1
             _CargarProveedores()
             lstFiltrada.Visible = False
             pnlConsulta.Visible = True
+            txtAyuda.Text = ""
             txtAyuda.Focus()
         Catch ex As Exception
             pnlConsulta.Visible = False
@@ -570,7 +598,7 @@ Public Class Form1
 
             pnlConsulta.Visible = False
 
-            txtObservaciones.Focus()
+            txtDesdeFecha.Focus()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             txtAyuda.Focus()
@@ -720,6 +748,15 @@ Public Class Form1
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
 
+        ' Validamos que la credencial no se imprima despues del periodo de validez.
+        If Not _ImpresionDentroDePeriodoDeValidez() Then
+
+            txtDesdeFecha.Focus()
+
+            Exit Sub
+
+        End If
+
         Dim dni = txtNroDocumento.Text
 
         btnGuardar.PerformClick()
@@ -752,8 +789,8 @@ Public Class Form1
             .Item("DescProveedor") = txtDescProveedor.Text
             .Item("Foto") = Configuration.ConfigurationManager.AppSettings("FOTOS_IDENTIFICACIONES") & txtNroDocumento.Text & _Extension
             .Item("Empresa") = "Surfactan S.A."
-            .Item("Inicio") = Date.Now.ToString("dd/MM/yyyy")
-            .Item("Final") = Date.Now.AddDays(7).ToString("dd/MM/yyyy")
+            .Item("Inicio") = txtDesdeFecha.Text
+            .Item("Final") = txtHastaFecha.Text
         End With
 
         tabla.Rows.Add(row)
@@ -766,10 +803,92 @@ Public Class Form1
 
     End Sub
 
+    Private Function _ImpresionDentroDePeriodoDeValidez() As Boolean
+
+        If txtDesdeFecha.Text.estaVacia Or txtHastaFecha.Text.estaVacia Then
+
+            MsgBox("No hay fechas de validez cargada. La impresión se dentrá hasta que haya periodo válido.", MsgBoxStyle.Exclamation)
+
+            Return False
+
+        End If
+
+        Dim WFechaActual = Date.Now.ToString("dd/MM/yyyy")
+
+        If WFechaActual.esMayorA(txtHastaFecha.Text) Then
+
+            MsgBox("La impresión de la Identificación no puede realizarse después del Periodo de Validez.", MsgBoxStyle.Exclamation)
+
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
     Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNroDocumento.KeyPress, txtProveedor.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
+    Private Sub txtDesdeFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeFecha.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            Dim WDesdeFecha As String = txtDesdeFecha.Text
+            Dim WHastaFecha As String = txtHastaFecha.Text
+
+            If WDesdeFecha.estaVacia Then : Exit Sub : End If
+
+            If Helper._ValidarFecha(WDesdeFecha) Then
+
+                If Not WHastaFecha.estaVacia Then
+
+                    If Not WDesdeFecha.esMenorOIgualA(WHastaFecha) Then
+
+                        MsgBox("La fecha de Inicio del periodo de validez, debe ser anterior o igual a la fecha de finalizacion de la misma.", MsgBoxStyle.Exclamation)
+
+                        Exit Sub
+
+                    End If
+
+                End If
+
+                txtHastaFecha.Focus()
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+
+            txtDesdeFecha.Clear()
+
+        End If
+
+    End Sub
+
+    Private Sub txtHastaFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHastaFecha.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If txtHastaFecha.Text.estaVacia Then : Exit Sub : End If
+
+            If Helper._ValidarFecha(txtHastaFecha.Text) Then
+
+
+                If txtDesdeFecha.Text.esMayorA(txtHastaFecha.Text) Then
+
+                    MsgBox("La fecha de Finalización del periodo de validez, debe ser posterior o igual a la fecha de Inicio de la misma.", MsgBoxStyle.Exclamation)
+
+                    Exit Sub
+                End If
+
+                txtObservaciones.Focus()
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHastaFecha.Clear()
+        End If
+
+    End Sub
 End Class

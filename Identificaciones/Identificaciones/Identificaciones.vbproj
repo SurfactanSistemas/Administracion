@@ -96,7 +96,8 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clases\Extensiones.vb" />
+    <Compile Include="Clases\ExtensionesTipoFecha.vb" />
+    <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
