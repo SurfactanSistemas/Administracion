@@ -30,7 +30,6 @@ Public Class CuentaCorrientePantalla
         Dim WSuma As Double
 
         GRilla.Rows.Clear()
-        GRilla.Rows.Add()
         WRenglon = 0
 
         REM Reviso el cual esta checkeado asi le pongo los valores a Tipo
@@ -44,27 +43,38 @@ Public Class CuentaCorrientePantalla
 
         REM dada fix CAMBIAR Al uso de dao!!
         Dim tabla As DataTable
-        tabla = SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_deuda", txtProveedor.Text, WTipo)
+        tabla = _BuscarCuentaCorrienteProveedorDeuda(txtProveedor.Text, WTipo) 'SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_deuda", txtProveedor.Text, WTipo)
 
         If tabla.Rows.Count > 0 Then
             _NrosInternos.Clear()
-
+            
             For Each row As DataRow In tabla.Rows
 
                 Dim CamposCtaCtePrv As New CtaCteProveedoresDeuda(row.Item(0).ToString, row.Item(1).ToString, row.Item(2).ToString, row.Item(3).ToString, row.Item(4), row.Item(5), row.Item(6).ToString, row.Item(7).ToString, row.Item(8).ToString, row.Item(9).ToString)
 
                 GRilla.Rows.Add()
 
-                GRilla.Item(0, WRenglon).Value = CamposCtaCtePrv.Impre
-                GRilla.Item(1, WRenglon).Value = CamposCtaCtePrv.letra
-                GRilla.Item(2, WRenglon).Value = CamposCtaCtePrv.punto
-                GRilla.Item(3, WRenglon).Value = CamposCtaCtePrv.numero
-                GRilla.Item(4, WRenglon).Value = formatonumerico(CamposCtaCtePrv.total, "########0.#0", ".")
-                GRilla.Item(5, WRenglon).Value = formatonumerico(CamposCtaCtePrv.saldo, "########0.#0", ".")
-                GRilla.Item(6, WRenglon).Value = CamposCtaCtePrv.fecha
-                GRilla.Item(8, WRenglon).Value = Proceso.ordenaFecha(CamposCtaCtePrv.fecha)
-                GRilla.Item(7, WRenglon).Value = CamposCtaCtePrv.vencimiento
-                GRilla.Item(9, WRenglon).Value = Proceso.ordenaFecha(CamposCtaCtePrv.vencimiento)
+                GRilla.Item("Tipo", WRenglon).Value = row.Item("Impre") 'CamposCtaCtePrv.Impre
+                GRilla.Item("Letra", WRenglon).Value = row.Item("Letra") 'CamposCtaCtePrv.letra
+                GRilla.Item("Punto", WRenglon).Value = row.Item("Punto") 'CamposCtaCtePrv.punto
+                GRilla.Item("Numero", WRenglon).Value = row.Item("Numero") 'CamposCtaCtePrv.numero
+                GRilla.Item("Importe", WRenglon).Value = formatonumerico(row.Item("Total"), "########0.#0", ".")
+
+                If row.Item("Total") < 0 Then
+
+                    GRilla.Item("Credito", WRenglon).Value = formatonumerico(-1 * row.Item("Total"), "########0.#0", ".")
+
+                Else
+
+                    GRilla.Item("Debito", WRenglon).Value = formatonumerico(row.Item("Total"), "########0.#0", ".")
+
+                End If
+
+                GRilla.Item("Saldo", WRenglon).Value = formatonumerico(row.Item("Saldo"), "########0.#0", ".")
+                GRilla.Item("Fecha", WRenglon).Value = row.Item("Fecha") 'CamposCtaCtePrv.fecha
+                GRilla.Item("OrdFecha", WRenglon).Value = Proceso.ordenaFecha(row.Item("Fecha"))
+                GRilla.Item("Vencimiento", WRenglon).Value = row.Item("Vencimiento") 'CamposCtaCtePrv.vencimiento
+                GRilla.Item("OrdVencimiento", WRenglon).Value = Proceso.ordenaFecha(row.Item("Vencimiento"))
 
                 WRenglon = WRenglon + 1
                 WSuma = WSuma + CamposCtaCtePrv.saldo
@@ -72,11 +82,68 @@ Public Class CuentaCorrientePantalla
                 _NrosInternos.Add({CamposCtaCtePrv.numero, CamposCtaCtePrv.NroInterno})
 
             Next
+        Else
+            GRilla.Rows.Add()
         End If
 
         GRilla.AllowUserToAddRows = False
         txtSaldo.Text = formatonumerico(WSuma, "########0.#0", ".")
     End Sub
+
+    Private Function _BuscarCuentaCorrienteProveedorDeuda(ByVal WProveedor As String, ByVal wTipo As Char) As DataTable
+        Dim _tabla As New DataTable
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim ZSql = ""
+
+        Try
+
+            ZSql = "select LTRIM(RTRIM(CtaCtePrv.Tipo)) as Tipo " _
+                & ", LTRIM(RTRIM(CtaCtePrv.Letra)) as Letra" _
+                & ", LTRIM(RTRIM(CtaCtePrv.Punto)) as Punto" _
+                & ", LTRIM(RTRIM(CtaCtePrv.Numero)) as Numero" _
+                & ", CtaCtePrv.Total as Total" _
+                & ", CtaCtePrv.Saldo as Saldo" _
+                & ", LTRIM(RTRIM(CtaCtePrv.fecha)) as Fecha" _
+                & ", LTRIM(RTRIM(CtaCtePrv.Vencimiento)) as Vencimiento" _
+                & ", LTRIM(RTRIM(CtaCtePrv.NroInterno)) as NroInterno" _
+                & ", LTRIM(RTRIM(CtaCtePrv.Impre)) as Impre" _
+                & " FROM surfactanSA.dbo.CtaCtePrv CtaCtePrv" _
+                & " WHERE CtaCtePrv.Proveedor = '" & WProveedor & "'" _
+                & "#PARCIAL#" _
+                & " ORDER BY CtaCtePrv.Proveedor, CtaCtePrv.OrdFecha, CtaCtePrv.Tipo,CtaCtePrv.Numero"
+
+            If wTipo = "P" Then
+                ZSql = ZSql.Replace("#PARCIAL#", " AND Saldo <> 0")
+            Else
+                ZSql = ZSql.Replace("#PARCIAL#", "")
+            End If
+
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+            cm.CommandText = ZSql
+
+            dr = cm.ExecuteReader()
+
+            _tabla.Load(dr)
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return _tabla
+    End Function
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
 
@@ -559,12 +626,12 @@ Public Class CuentaCorrientePantalla
 
             With _rows
 
-                If Not IsNothing(.Cells(4).Value) Then
+                If Not IsNothing(.Cells("Importe").Value) Then
 
-                    _Valor = Proceso.formatonumerico(.Cells(4).Value).replace(".", ",")
+                    _Valor = Proceso.formatonumerico(.Cells("Importe").Value).replace(".", ",")
 
-                    If .Cells(4).Value <> "" Then
-                        Select Case .Cells(0).Value
+                    If _Valor <> 0 Then
+                        Select Case .Cells("Tipo").Value
                             Case "FC"
                                 _WTotalFC += _Valor
                             Case "ND"
@@ -578,7 +645,7 @@ Public Class CuentaCorrientePantalla
                     End If
 
                 End If
-                actual = Val(Proceso.ordenaFecha(.Cells(6).Value.ToString))
+                actual = Val(Proceso.ordenaFecha(.Cells("Fecha").Value.ToString))
 
                 ' Determinamos el rango en el cual estamos trabajando.
                 If comienzo = 0 Or final = 0 Then
@@ -648,12 +715,12 @@ Public Class CuentaCorrientePantalla
         Dim num1, num2
 
         Select Case e.Column.Index
-            Case 2, 3, 4, 5
+            Case 1, 3, 4, 5
 
                 num1 = CDbl(e.CellValue1)
                 num2 = CDbl(e.CellValue2)
 
-            Case 6, 7
+            Case 2, 6
 
                 num1 = Proceso.ordenaFecha(e.CellValue1)
                 num2 = Proceso.ordenaFecha(e.CellValue2)

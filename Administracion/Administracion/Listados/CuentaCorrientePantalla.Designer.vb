@@ -23,38 +23,42 @@ Partial Class CuentaCorrientePantalla
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRilla = New System.Windows.Forms.DataGridView()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Saldo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Debito = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Credito = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Saldo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Vencimiento = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdFecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdVencimiento = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.opcCompleto = New System.Windows.Forms.RadioButton()
         Me.opcPendiente = New System.Windows.Forms.RadioButton()
         Me.boxPantallaProveedores = New System.Windows.Forms.GroupBox()
+        Me.btnCerrarConsulta = New Administracion.CustomButton()
+        Me.lstFiltrada = New Administracion.CustomListBox()
+        Me.lstAyuda = New Administracion.CustomListBox()
+        Me.txtAyuda = New Administracion.CustomTextBox()
         Me.pnlSelectivo = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtFechaSelectivo = New System.Windows.Forms.MaskedTextBox()
         Me.btnGrabarSelectivo = New Administracion.CustomButton()
         Me.btnCerrarFechaSelectivo = New Administracion.CustomButton()
-        Me.btnCerrarConsulta = New Administracion.CustomButton()
-        Me.lstFiltrada = New Administracion.CustomListBox()
-        Me.lstAyuda = New Administracion.CustomListBox()
-        Me.txtAyuda = New Administracion.CustomTextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -95,81 +99,67 @@ Partial Class CuentaCorrientePantalla
         'GRilla
         '
         Me.GRilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Importe, Me.Saldo, Me.Fecha, Me.Vencimiento, Me.OrdFecha, Me.OrdVencimiento})
-        Me.GRilla.Location = New System.Drawing.Point(47, 149)
+        Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Numero, Me.Fecha, Me.Debito, Me.Credito, Me.Saldo, Me.Vencimiento, Me.OrdFecha, Me.OrdVencimiento, Me.Importe, Me.Punto, Me.Letra})
+        Me.GRilla.Location = New System.Drawing.Point(42, 149)
         Me.GRilla.Name = "GRilla"
-        Me.GRilla.Size = New System.Drawing.Size(695, 258)
+        Me.GRilla.Size = New System.Drawing.Size(693, 258)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 1
         '
         'Tipo
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle11
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
         Me.Tipo.Width = 50
         '
-        'Letra
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Letra.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Letra.HeaderText = "Letra"
-        Me.Letra.Name = "Letra"
-        Me.Letra.ReadOnly = True
-        Me.Letra.Width = 50
-        '
-        'Punto
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Punto.HeaderText = "Punto"
-        Me.Punto.Name = "Punto"
-        Me.Punto.ReadOnly = True
-        Me.Punto.Width = 50
-        '
         'Numero
         '
         Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle12
         Me.Numero.HeaderText = "Numero"
         Me.Numero.Name = "Numero"
         Me.Numero.ReadOnly = True
         '
-        'Importe
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        DataGridViewCellStyle5.Format = "N2"
-        DataGridViewCellStyle5.NullValue = Nothing
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Importe.HeaderText = "Importe"
-        Me.Importe.Name = "Importe"
-        Me.Importe.ReadOnly = True
-        '
-        'Saldo
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        DataGridViewCellStyle6.Format = "N2"
-        DataGridViewCellStyle6.NullValue = Nothing
-        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle6
-        Me.Saldo.HeaderText = "Saldo"
-        Me.Saldo.Name = "Saldo"
-        Me.Saldo.ReadOnly = True
-        '
         'Fecha
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle13
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
         '
+        'Debito
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Debito.DefaultCellStyle = DataGridViewCellStyle14
+        Me.Debito.HeaderText = "Debito"
+        Me.Debito.Name = "Debito"
+        '
+        'Credito
+        '
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Credito.DefaultCellStyle = DataGridViewCellStyle15
+        Me.Credito.HeaderText = "Crédito"
+        Me.Credito.Name = "Credito"
+        '
+        'Saldo
+        '
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        DataGridViewCellStyle16.Format = "N2"
+        DataGridViewCellStyle16.NullValue = Nothing
+        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle16
+        Me.Saldo.HeaderText = "Saldo"
+        Me.Saldo.Name = "Saldo"
+        Me.Saldo.ReadOnly = True
+        '
         'Vencimiento
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle17
         Me.Vencimiento.HeaderText = "Vencimiento"
         Me.Vencimiento.Name = "Vencimiento"
         Me.Vencimiento.ReadOnly = True
@@ -185,6 +175,37 @@ Partial Class CuentaCorrientePantalla
         Me.OrdVencimiento.HeaderText = "OrdVencimiento"
         Me.OrdVencimiento.Name = "OrdVencimiento"
         Me.OrdVencimiento.Visible = False
+        '
+        'Importe
+        '
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        DataGridViewCellStyle18.Format = "N2"
+        DataGridViewCellStyle18.NullValue = Nothing
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle18
+        Me.Importe.HeaderText = "Importe"
+        Me.Importe.Name = "Importe"
+        Me.Importe.ReadOnly = True
+        Me.Importe.Visible = False
+        '
+        'Punto
+        '
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle19
+        Me.Punto.HeaderText = "Punto"
+        Me.Punto.Name = "Punto"
+        Me.Punto.ReadOnly = True
+        Me.Punto.Visible = False
+        Me.Punto.Width = 50
+        '
+        'Letra
+        '
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Letra.DefaultCellStyle = DataGridViewCellStyle20
+        Me.Letra.HeaderText = "Letra"
+        Me.Letra.Name = "Letra"
+        Me.Letra.ReadOnly = True
+        Me.Letra.Visible = False
+        Me.Letra.Width = 50
         '
         'opcCompleto
         '
@@ -226,6 +247,63 @@ Partial Class CuentaCorrientePantalla
         Me.boxPantallaProveedores.TabIndex = 27
         Me.boxPantallaProveedores.TabStop = False
         Me.boxPantallaProveedores.Visible = False
+        '
+        'btnCerrarConsulta
+        '
+        Me.btnCerrarConsulta.BackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCerrarConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrarConsulta.Cleanable = False
+        Me.btnCerrarConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrarConsulta.EnterIndex = -1
+        Me.btnCerrarConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatAppearance.BorderSize = 0
+        Me.btnCerrarConsulta.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnCerrarConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrarConsulta.LabelAssociationKey = -1
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(233, 177)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(75, 36)
+        Me.btnCerrarConsulta.TabIndex = 31
+        Me.ToolTip1.SetToolTip(Me.btnCerrarConsulta, "Cerrar")
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = False
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(62, 38)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(417, 134)
+        Me.lstFiltrada.TabIndex = 30
+        Me.lstFiltrada.Visible = False
+        '
+        'lstAyuda
+        '
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(62, 38)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(417, 134)
+        Me.lstAyuda.TabIndex = 29
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Cleanable = False
+        Me.txtAyuda.Empty = True
+        Me.txtAyuda.EnterIndex = -1
+        Me.txtAyuda.LabelAssociationKey = -1
+        Me.txtAyuda.Location = New System.Drawing.Point(62, 13)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
+        Me.txtAyuda.TabIndex = 28
+        Me.txtAyuda.Validator = Administracion.ValidatorType.None
         '
         'pnlSelectivo
         '
@@ -309,63 +387,6 @@ Partial Class CuentaCorrientePantalla
         Me.btnCerrarFechaSelectivo.TabIndex = 32
         Me.ToolTip1.SetToolTip(Me.btnCerrarFechaSelectivo, "Cerrar")
         Me.btnCerrarFechaSelectivo.UseVisualStyleBackColor = False
-        '
-        'btnCerrarConsulta
-        '
-        Me.btnCerrarConsulta.BackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnCerrarConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCerrarConsulta.Cleanable = False
-        Me.btnCerrarConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrarConsulta.EnterIndex = -1
-        Me.btnCerrarConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.FlatAppearance.BorderSize = 0
-        Me.btnCerrarConsulta.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnCerrarConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrarConsulta.LabelAssociationKey = -1
-        Me.btnCerrarConsulta.Location = New System.Drawing.Point(233, 177)
-        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
-        Me.btnCerrarConsulta.Size = New System.Drawing.Size(75, 36)
-        Me.btnCerrarConsulta.TabIndex = 31
-        Me.ToolTip1.SetToolTip(Me.btnCerrarConsulta, "Cerrar")
-        Me.btnCerrarConsulta.UseVisualStyleBackColor = False
-        '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(62, 38)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(417, 134)
-        Me.lstFiltrada.TabIndex = 30
-        Me.lstFiltrada.Visible = False
-        '
-        'lstAyuda
-        '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(62, 38)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(417, 134)
-        Me.lstAyuda.TabIndex = 29
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Cleanable = False
-        Me.txtAyuda.Empty = True
-        Me.txtAyuda.EnterIndex = -1
-        Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(62, 13)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
-        Me.txtAyuda.TabIndex = 28
-        Me.txtAyuda.Validator = Administracion.ValidatorType.None
         '
         'Panel1
         '
@@ -780,16 +801,6 @@ Partial Class CuentaCorrientePantalla
     Friend WithEvents lblTotalPagos As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents btnLimpiar As Administracion.CustomButton
-    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Letra As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Punto As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Saldo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Vencimiento As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents OrdFecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents OrdVencimiento As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnCerrarConsulta As Administracion.CustomButton
     Friend WithEvents pnlSelectivo As System.Windows.Forms.Panel
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
@@ -797,4 +808,16 @@ Partial Class CuentaCorrientePantalla
     Friend WithEvents txtFechaSelectivo As System.Windows.Forms.MaskedTextBox
     Friend WithEvents btnGrabarSelectivo As Administracion.CustomButton
     Friend WithEvents btnCerrarFechaSelectivo As Administracion.CustomButton
+    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Debito As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Credito As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Saldo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Vencimiento As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents OrdFecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents OrdVencimiento As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Punto As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Letra As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
