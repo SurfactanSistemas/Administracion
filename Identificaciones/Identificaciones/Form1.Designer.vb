@@ -124,6 +124,7 @@ Partial Class Form1
         '
         Me.btnImprimir.BackgroundImage = Global.Identificaciones.My.Resources.Resources.credencial
         Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
         Me.btnImprimir.FlatAppearance.BorderSize = 0
         Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
@@ -140,6 +141,7 @@ Partial Class Form1
         '
         Me.btnCerrar.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Salir2
         Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatAppearance.BorderSize = 0
         Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
@@ -156,6 +158,7 @@ Partial Class Form1
         '
         Me.btnLimpiar.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Limpiar
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatAppearance.BorderSize = 0
         Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
@@ -172,6 +175,7 @@ Partial Class Form1
         '
         Me.btnConsultas.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Consulta_Dat_N1
         Me.btnConsultas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsultas.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnConsultas.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
         Me.btnConsultas.FlatAppearance.BorderSize = 0
         Me.btnConsultas.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
@@ -188,6 +192,7 @@ Partial Class Form1
         '
         Me.btnEliminar.BackgroundImage = Global.Identificaciones.My.Resources.Resources.eliminar
         Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnEliminar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
         Me.btnEliminar.FlatAppearance.BorderSize = 0
         Me.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
@@ -204,6 +209,7 @@ Partial Class Form1
         '
         Me.btnGuardar.BackgroundImage = Global.Identificaciones.My.Resources.Resources.Aceptar_N2
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnGuardar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
         Me.btnGuardar.FlatAppearance.BorderSize = 0
         Me.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
@@ -344,11 +350,11 @@ Partial Class Form1
         'txtObservaciones
         '
         Me.txtObservaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtObservaciones.Location = New System.Drawing.Point(139, 165)
+        Me.txtObservaciones.Location = New System.Drawing.Point(139, 160)
         Me.txtObservaciones.MaxLength = 200
         Me.txtObservaciones.Multiline = True
         Me.txtObservaciones.Name = "txtObservaciones"
-        Me.txtObservaciones.Size = New System.Drawing.Size(408, 64)
+        Me.txtObservaciones.Size = New System.Drawing.Size(408, 78)
         Me.txtObservaciones.TabIndex = 2
         '
         'txtProveedor
@@ -613,9 +619,9 @@ Partial Class Form1
         '
         Me.pnlCamaraWeb.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlCamaraWeb.Controls.Add(Me.GroupBox3)
-        Me.pnlCamaraWeb.Location = New System.Drawing.Point(243, 6)
+        Me.pnlCamaraWeb.Location = New System.Drawing.Point(243, 5)
         Me.pnlCamaraWeb.Name = "pnlCamaraWeb"
-        Me.pnlCamaraWeb.Size = New System.Drawing.Size(359, 364)
+        Me.pnlCamaraWeb.Size = New System.Drawing.Size(359, 367)
         Me.pnlCamaraWeb.TabIndex = 2
         Me.pnlCamaraWeb.Visible = False
         '

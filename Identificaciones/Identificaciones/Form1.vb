@@ -24,6 +24,10 @@ Public Class Form1
             Try
                 ' Cargamos los datos de la Identificacion en caso de existir.
                 _CargarIdentificacion()
+
+                If Trim(txtObservaciones.Text).StartsWith(vbCrLf) Then
+                    txtObservaciones.Text = txtObservaciones.Text.Substring(1, txtObservaciones.Text.Length - 1)
+                End If
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
@@ -260,6 +264,11 @@ Public Class Form1
         Try
             _GrabarIdentificacion(WClave, WDNI, WApellido, WNombres, WProveedor, WObservacionesI, WObservacionesII, WHastaFecha)
             '    MsgBox("Identificación guardada con éxito!", MsgBoxStyle.Information)
+
+            If MsgBox("¿Desea imprimir la Identificación ahora?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                btnImprimir.PerformClick()
+            End If
+
             btnLimpiar.PerformClick()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -478,8 +487,10 @@ Public Class Form1
     Private Sub _CargarProveedores()
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor WHERE Nombre <> '' ORDER BY Nombre")
+        Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
+        Dim WProveedores(), WIndices() As String
+        Dim WAux = 0
 
         Try
             lstConsulta.Items.Clear()
@@ -489,18 +500,37 @@ Public Class Form1
             cn.Open()
             cm.Connection = cn
 
+            cm.CommandText = "SELECT Count(Proveedor) as Total FROM Proveedor WHERE Nombre <> ''"
+            dr = cm.ExecuteReader
+            dr.Read()
+
+            If dr.Item("Total") = 0 Then Exit Sub
+
+            ReDim WProveedores(dr.Item("Total") - 1)
+            ReDim WIndices(dr.Item("Total") - 1)
+
+            If Not dr.IsClosed Then
+                dr.Close()
+            End If
+
+            cm.CommandText = "SELECT Proveedor, Nombre FROM Proveedor WHERE Nombre <> '' ORDER BY Nombre"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
 
                 Do While dr.Read()
 
-                    lstConsulta.Items.Add(IIf(IsDBNull(dr.Item("Nombre")), "", dr.Item("Nombre")))
-                    cmbIndices.Items.Add(IIf(IsDBNull(dr.Item("Proveedor")), 0, dr.Item("Proveedor")))
+                    WProveedores(WAux) = IIf(IsDBNull(dr.Item("Nombre")), "", dr.Item("Nombre"))
+                    WIndices(WAux) = IIf(IsDBNull(dr.Item("Proveedor")), 0, dr.Item("Proveedor"))
+
+                    WAux += 1
 
                 Loop
 
             End If
+
+            lstConsulta.Items.AddRange(WProveedores)
+            cmbIndices.Items.AddRange(WIndices)
 
         Catch ex As Exception
             Throw New Exception("Hubo un problema al querer traer los Proveedores Disponibles desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
@@ -742,49 +772,55 @@ Public Class Form1
 
         End If
 
-        Dim dni = txtNroDocumento.Text
+        _ImprimirIdentificacion()
 
-        btnGuardar.PerformClick()
+        btnLimpiar.PerformClick()
 
-        txtNroDocumento.Text = dni
+    End Sub
 
-        txtNroDocumento_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-        
-        Dim tabla As New DataTable("Detalles")
+    Private Sub _ImprimirIdentificacion()
 
-        With tabla
+        If Trim(txtNroDocumento.Text) <> "" Then
+            
+            txtNroDocumento_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
-            .Columns.Add("Dni")
-            .Columns.Add("Apellidos")
-            .Columns.Add("Nombres")
-            .Columns.Add("DescProveedor")
-            .Columns.Add("Foto")
-            .Columns.Add("Empresa")
-            .Columns.Add("Observaciones")
-            .Columns.Add("Final")
+            Dim tabla As New DataTable("Detalles")
 
-        End With
+            With tabla
 
-        Dim row = tabla.NewRow
+                .Columns.Add("Dni")
+                .Columns.Add("Apellidos")
+                .Columns.Add("Nombres")
+                .Columns.Add("DescProveedor")
+                .Columns.Add("Foto")
+                .Columns.Add("Empresa")
+                .Columns.Add("Observaciones")
+                .Columns.Add("Final")
 
-        With row
-            .Item("Dni") = txtNroDocumento.Text
-            .Item("Apellidos") = txtApellido.Text
-            .Item("Nombres") = txtNombres.Text
-            .Item("DescProveedor") = txtDescProveedor.Text
-            .Item("Foto") = Configuration.ConfigurationManager.AppSettings("FOTOS_IDENTIFICACIONES") & txtNroDocumento.Text & _Extension
-            .Item("Empresa") = "Surfactan S.A."
-            .Item("Observaciones") = txtObservaciones.Text.Trim
-            .Item("Final") = txtHastaFecha.Text
-        End With
+            End With
 
-        tabla.Rows.Add(row)
+            Dim row = tabla.NewRow
 
-        With VistaPrevia
-            .Reporte = New Identificacion
-            .Reporte.SetDataSource(tabla)
-            .Mostrar()
-        End With
+            With row
+                .Item("Dni") = txtNroDocumento.Text
+                .Item("Apellidos") = txtApellido.Text
+                .Item("Nombres") = txtNombres.Text
+                .Item("DescProveedor") = txtDescProveedor.Text
+                .Item("Foto") = Configuration.ConfigurationManager.AppSettings("FOTOS_IDENTIFICACIONES") & txtNroDocumento.Text & _Extension
+                .Item("Empresa") = "Surfactan S.A."
+                .Item("Observaciones") = txtObservaciones.Text.Trim
+                .Item("Final") = txtHastaFecha.Text
+            End With
+
+            tabla.Rows.Add(row)
+
+            With VistaPrevia
+                .Reporte = New Identificacion
+                .Reporte.SetDataSource(tabla)
+                .Mostrar()
+            End With
+
+        End If
 
     End Sub
 

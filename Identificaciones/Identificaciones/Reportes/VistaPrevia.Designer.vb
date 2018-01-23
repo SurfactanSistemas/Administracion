@@ -41,6 +41,7 @@ Partial Class VistaPrevia
         Me.ClientSize = New System.Drawing.Size(833, 329)
         Me.Controls.Add(Me.CrystalReportViewer2)
         Me.Name = "VistaPrevia"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
 
     End Sub
