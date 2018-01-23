@@ -37,6 +37,8 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.txtHastaFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.txtNombres = New System.Windows.Forms.TextBox()
         Me.txtDescProveedor = New System.Windows.Forms.TextBox()
         Me.txtObservaciones = New System.Windows.Forms.TextBox()
@@ -69,11 +71,6 @@ Partial Class Form1
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.txtHastaFecha = New System.Windows.Forms.MaskedTextBox()
         Me.TableLayoutPrincipal.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutCabecera.SuspendLayout()
@@ -89,7 +86,6 @@ Partial Class Form1
         Me.GroupBox3.SuspendLayout()
         Me.Panel6.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPrincipal
@@ -106,7 +102,7 @@ Partial Class Form1
         Me.TableLayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
         Me.TableLayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
-        Me.TableLayoutPrincipal.Size = New System.Drawing.Size(844, 371)
+        Me.TableLayoutPrincipal.Size = New System.Drawing.Size(844, 376)
         Me.TableLayoutPrincipal.TabIndex = 0
         '
         'Panel4
@@ -118,7 +114,7 @@ Partial Class Form1
         Me.Panel4.Controls.Add(Me.btnEliminar)
         Me.Panel4.Controls.Add(Me.btnGuardar)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(0, 301)
+        Me.Panel4.Location = New System.Drawing.Point(0, 306)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(844, 70)
@@ -283,7 +279,8 @@ Partial Class Form1
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.GroupBox4)
+        Me.Panel3.Controls.Add(Me.txtHastaFecha)
+        Me.Panel3.Controls.Add(Me.Label9)
         Me.Panel3.Controls.Add(Me.txtNombres)
         Me.Panel3.Controls.Add(Me.txtDescProveedor)
         Me.Panel3.Controls.Add(Me.txtObservaciones)
@@ -300,13 +297,35 @@ Partial Class Form1
         Me.Panel3.Location = New System.Drawing.Point(0, 60)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(844, 241)
+        Me.Panel3.Size = New System.Drawing.Size(844, 246)
         Me.Panel3.TabIndex = 1
+        '
+        'txtHastaFecha
+        '
+        Me.txtHastaFecha.Location = New System.Drawing.Point(247, 132)
+        Me.txtHastaFecha.Mask = "00/00/0000"
+        Me.txtHastaFecha.Name = "txtHastaFecha"
+        Me.txtHastaFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtHastaFecha.Size = New System.Drawing.Size(100, 20)
+        Me.txtHastaFecha.TabIndex = 2
+        Me.txtHastaFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label9.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label9.Location = New System.Drawing.Point(57, 133)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(184, 18)
+        Me.Label9.TabIndex = 1
+        Me.Label9.Text = "Identificación Válida hasta el"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'txtNombres
         '
         Me.txtNombres.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtNombres.Location = New System.Drawing.Point(365, 44)
+        Me.txtNombres.Location = New System.Drawing.Point(365, 56)
         Me.txtNombres.MaxLength = 50
         Me.txtNombres.Name = "txtNombres"
         Me.txtNombres.Size = New System.Drawing.Size(182, 23)
@@ -316,7 +335,7 @@ Partial Class Form1
         '
         Me.txtDescProveedor.BackColor = System.Drawing.SystemColors.Control
         Me.txtDescProveedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtDescProveedor.Location = New System.Drawing.Point(247, 76)
+        Me.txtDescProveedor.Location = New System.Drawing.Point(247, 95)
         Me.txtDescProveedor.Name = "txtDescProveedor"
         Me.txtDescProveedor.ReadOnly = True
         Me.txtDescProveedor.Size = New System.Drawing.Size(300, 23)
@@ -325,8 +344,8 @@ Partial Class Form1
         'txtObservaciones
         '
         Me.txtObservaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtObservaciones.Location = New System.Drawing.Point(139, 168)
-        Me.txtObservaciones.MaxLength = 400
+        Me.txtObservaciones.Location = New System.Drawing.Point(139, 165)
+        Me.txtObservaciones.MaxLength = 200
         Me.txtObservaciones.Multiline = True
         Me.txtObservaciones.Name = "txtObservaciones"
         Me.txtObservaciones.Size = New System.Drawing.Size(408, 64)
@@ -335,7 +354,7 @@ Partial Class Form1
         'txtProveedor
         '
         Me.txtProveedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtProveedor.Location = New System.Drawing.Point(139, 76)
+        Me.txtProveedor.Location = New System.Drawing.Point(139, 95)
         Me.txtProveedor.MaxLength = 11
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(102, 23)
@@ -344,7 +363,7 @@ Partial Class Form1
         'txtApellido
         '
         Me.txtApellido.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtApellido.Location = New System.Drawing.Point(139, 44)
+        Me.txtApellido.Location = New System.Drawing.Point(139, 56)
         Me.txtApellido.MaxLength = 30
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(137, 23)
@@ -353,7 +372,7 @@ Partial Class Form1
         'txtNroDocumento
         '
         Me.txtNroDocumento.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtNroDocumento.Location = New System.Drawing.Point(139, 11)
+        Me.txtNroDocumento.Location = New System.Drawing.Point(139, 20)
         Me.txtNroDocumento.MaxLength = 8
         Me.txtNroDocumento.Name = "txtNroDocumento"
         Me.txtNroDocumento.Size = New System.Drawing.Size(137, 23)
@@ -365,7 +384,7 @@ Partial Class Form1
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label7.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label7.Location = New System.Drawing.Point(34, 170)
+        Me.Label7.Location = New System.Drawing.Point(34, 167)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(99, 18)
         Me.Label7.TabIndex = 1
@@ -377,7 +396,7 @@ Partial Class Form1
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label6.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label6.Location = New System.Drawing.Point(284, 46)
+        Me.Label6.Location = New System.Drawing.Point(284, 58)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(71, 18)
         Me.Label6.TabIndex = 1
@@ -388,7 +407,7 @@ Partial Class Form1
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(60, 78)
+        Me.Label5.Location = New System.Drawing.Point(60, 97)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(73, 18)
         Me.Label5.TabIndex = 1
@@ -400,7 +419,7 @@ Partial Class Form1
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(60, 46)
+        Me.Label4.Location = New System.Drawing.Point(60, 58)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(73, 18)
         Me.Label4.TabIndex = 1
@@ -412,7 +431,7 @@ Partial Class Form1
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(27, 13)
+        Me.Label3.Location = New System.Drawing.Point(27, 22)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(106, 18)
         Me.Label3.TabIndex = 1
@@ -522,7 +541,7 @@ Partial Class Form1
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox2)
-        Me.pnlConsulta.Location = New System.Drawing.Point(181, 49)
+        Me.pnlConsulta.Location = New System.Drawing.Point(178, 52)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(381, 272)
         Me.pnlConsulta.TabIndex = 1
@@ -594,7 +613,7 @@ Partial Class Form1
         '
         Me.pnlCamaraWeb.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlCamaraWeb.Controls.Add(Me.GroupBox3)
-        Me.pnlCamaraWeb.Location = New System.Drawing.Point(243, 3)
+        Me.pnlCamaraWeb.Location = New System.Drawing.Point(243, 6)
         Me.pnlCamaraWeb.Name = "pnlCamaraWeb"
         Me.pnlCamaraWeb.Size = New System.Drawing.Size(359, 364)
         Me.pnlCamaraWeb.TabIndex = 2
@@ -632,69 +651,11 @@ Partial Class Form1
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
         '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.txtHastaFecha)
-        Me.GroupBox4.Controls.Add(Me.txtDesdeFecha)
-        Me.GroupBox4.Controls.Add(Me.Label9)
-        Me.GroupBox4.Controls.Add(Me.Label8)
-        Me.GroupBox4.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox4.Location = New System.Drawing.Point(22, 102)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(525, 59)
-        Me.GroupBox4.TabIndex = 3
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Validez de Credencial"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label8.Location = New System.Drawing.Point(59, 19)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(86, 18)
-        Me.Label8.TabIndex = 1
-        Me.Label8.Text = "Desde Fecha"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label9.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label9.Location = New System.Drawing.Point(257, 19)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(81, 18)
-        Me.Label9.TabIndex = 1
-        Me.Label9.Text = "Hasta Fecha"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtDesdeFecha
-        '
-        Me.txtDesdeFecha.Location = New System.Drawing.Point(151, 18)
-        Me.txtDesdeFecha.Mask = "00/00/0000"
-        Me.txtDesdeFecha.Name = "txtDesdeFecha"
-        Me.txtDesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtDesdeFecha.Size = New System.Drawing.Size(100, 20)
-        Me.txtDesdeFecha.TabIndex = 2
-        Me.txtDesdeFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtHastaFecha
-        '
-        Me.txtHastaFecha.Location = New System.Drawing.Point(344, 18)
-        Me.txtHastaFecha.Mask = "00/00/0000"
-        Me.txtHastaFecha.Name = "txtHastaFecha"
-        Me.txtHastaFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtHastaFecha.Size = New System.Drawing.Size(100, 20)
-        Me.txtHastaFecha.TabIndex = 2
-        Me.txtHastaFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(844, 371)
+        Me.ClientSize = New System.Drawing.Size(844, 376)
         Me.Controls.Add(Me.pnlCamaraWeb)
         Me.Controls.Add(Me.pnlConsulta)
         Me.Controls.Add(Me.TableLayoutPrincipal)
@@ -722,8 +683,6 @@ Partial Class Form1
         Me.GroupBox3.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -773,10 +732,7 @@ Partial Class Form1
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents txtHastaFecha As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents txtDesdeFecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents Label8 As System.Windows.Forms.Label
 
 End Class

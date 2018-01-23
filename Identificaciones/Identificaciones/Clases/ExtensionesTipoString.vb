@@ -12,7 +12,7 @@ Module ExtensionesTipoString
 
         If text.Length <= length Then Return text
 
-        Return Microsoft.VisualBasic.Left(text, length)
+        Return Microsoft.VisualBasic.Left(Trim(text), length)
 
     End Function
 
