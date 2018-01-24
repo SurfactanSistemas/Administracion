@@ -774,8 +774,7 @@ Public Class Form1
 
         _ImprimirIdentificacion()
 
-        btnLimpiar.PerformClick()
-
+        txtNroDocumento.Focus()
     End Sub
 
     Private Sub _ImprimirIdentificacion()
