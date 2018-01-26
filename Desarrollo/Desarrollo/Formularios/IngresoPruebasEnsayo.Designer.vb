@@ -23,22 +23,22 @@ Partial Class IngresoPruebasEnsayo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -91,7 +91,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Button7 = New System.Windows.Forms.Button()
+        Me.btnLeerVersionAntLab = New System.Windows.Forms.Button()
         Me.TabEnsayosAdicionales = New System.Windows.Forms.TabPage()
         Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.TabRevisiones = New System.Windows.Forms.TabPage()
@@ -203,6 +203,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnCerrarNota = New System.Windows.Forms.Button()
         Me.txtNota = New System.Windows.Forms.RichTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnLeerVersionAntDatosEntrada = New System.Windows.Forms.Button()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -419,23 +420,23 @@ Partial Class IngresoPruebasEnsayo
         '
         'TipoFormula
         '
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TipoFormula.DefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TipoFormula.DefaultCellStyle = DataGridViewCellStyle1
         Me.TipoFormula.HeaderText = "Tipo"
         Me.TipoFormula.Name = "TipoFormula"
         Me.TipoFormula.Width = 50
         '
         'ArticuloFormula
         '
-        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ArticuloFormula.DefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ArticuloFormula.DefaultCellStyle = DataGridViewCellStyle2
         Me.ArticuloFormula.HeaderText = "Artículo"
         Me.ArticuloFormula.Name = "ArticuloFormula"
         '
         'TerminadoFormula
         '
-        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TerminadoFormula.DefaultCellStyle = DataGridViewCellStyle35
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TerminadoFormula.DefaultCellStyle = DataGridViewCellStyle3
         Me.TerminadoFormula.HeaderText = "Terminado"
         Me.TerminadoFormula.Name = "TerminadoFormula"
         '
@@ -447,22 +448,22 @@ Partial Class IngresoPruebasEnsayo
         '
         'CantidadFormula
         '
-        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CantidadFormula.DefaultCellStyle = DataGridViewCellStyle36
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CantidadFormula.DefaultCellStyle = DataGridViewCellStyle4
         Me.CantidadFormula.HeaderText = "Cantidad"
         Me.CantidadFormula.Name = "CantidadFormula"
         '
         'LoteFormula
         '
-        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.LoteFormula.DefaultCellStyle = DataGridViewCellStyle37
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.LoteFormula.DefaultCellStyle = DataGridViewCellStyle5
         Me.LoteFormula.HeaderText = "Lote"
         Me.LoteFormula.Name = "LoteFormula"
         '
         'StockFormula
         '
-        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.StockFormula.DefaultCellStyle = DataGridViewCellStyle38
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.StockFormula.DefaultCellStyle = DataGridViewCellStyle6
         Me.StockFormula.HeaderText = "Stock"
         Me.StockFormula.Name = "StockFormula"
         Me.StockFormula.Width = 50
@@ -592,8 +593,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'ProcesoEtapa
         '
-        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ProcesoEtapa.DefaultCellStyle = DataGridViewCellStyle39
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ProcesoEtapa.DefaultCellStyle = DataGridViewCellStyle7
         Me.ProcesoEtapa.HeaderText = "Etapa"
         Me.ProcesoEtapa.MaxInputLength = 10
         Me.ProcesoEtapa.Name = "ProcesoEtapa"
@@ -687,7 +688,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabResultadosLaboratorio.Controls.Add(Me.TextBox3)
         Me.TabResultadosLaboratorio.Controls.Add(Me.Label11)
         Me.TabResultadosLaboratorio.Controls.Add(Me.Label7)
-        Me.TabResultadosLaboratorio.Controls.Add(Me.Button7)
+        Me.TabResultadosLaboratorio.Controls.Add(Me.btnLeerVersionAntLab)
         Me.TabResultadosLaboratorio.Location = New System.Drawing.Point(4, 34)
         Me.TabResultadosLaboratorio.Name = "TabResultadosLaboratorio"
         Me.TabResultadosLaboratorio.Size = New System.Drawing.Size(821, 403)
@@ -719,8 +720,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'LaboratorioEnsayo
         '
-        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.LaboratorioEnsayo.DefaultCellStyle = DataGridViewCellStyle40
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.LaboratorioEnsayo.DefaultCellStyle = DataGridViewCellStyle8
         Me.LaboratorioEnsayo.HeaderText = "Ensayo"
         Me.LaboratorioEnsayo.Name = "LaboratorioEnsayo"
         Me.LaboratorioEnsayo.Width = 50
@@ -773,17 +774,17 @@ Partial Class IngresoPruebasEnsayo
         Me.Label7.TabIndex = 12
         Me.Label7.Text = "Visto:"
         '
-        'Button7
+        'btnLeerVersionAntLab
         '
-        Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button7.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button7.Location = New System.Drawing.Point(676, 368)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(136, 25)
-        Me.Button7.TabIndex = 11
-        Me.Button7.Text = "Lee Versión Anterior"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.btnLeerVersionAntLab.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLeerVersionAntLab.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLeerVersionAntLab.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnLeerVersionAntLab.Location = New System.Drawing.Point(676, 368)
+        Me.btnLeerVersionAntLab.Name = "btnLeerVersionAntLab"
+        Me.btnLeerVersionAntLab.Size = New System.Drawing.Size(136, 25)
+        Me.btnLeerVersionAntLab.TabIndex = 11
+        Me.btnLeerVersionAntLab.Text = "Lee Versión Anterior"
+        Me.btnLeerVersionAntLab.UseVisualStyleBackColor = True
         '
         'TabEnsayosAdicionales
         '
@@ -831,8 +832,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'RevisionesVersion
         '
-        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle41
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle9
         Me.RevisionesVersion.HeaderText = "Versión"
         Me.RevisionesVersion.Name = "RevisionesVersion"
         Me.RevisionesVersion.Width = 50
@@ -845,8 +846,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'RevisionesFecha
         '
-        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle42
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle10
         Me.RevisionesFecha.HeaderText = "Fecha"
         Me.RevisionesFecha.Name = "RevisionesFecha"
         Me.RevisionesFecha.Width = 70
@@ -923,8 +924,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'CostoTipo
         '
-        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoTipo.DefaultCellStyle = DataGridViewCellStyle43
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoTipo.DefaultCellStyle = DataGridViewCellStyle11
         Me.CostoTipo.HeaderText = "Tipo"
         Me.CostoTipo.Name = "CostoTipo"
         Me.CostoTipo.ReadOnly = True
@@ -932,16 +933,16 @@ Partial Class IngresoPruebasEnsayo
         '
         'CostoArticulo
         '
-        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoArticulo.DefaultCellStyle = DataGridViewCellStyle44
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoArticulo.DefaultCellStyle = DataGridViewCellStyle12
         Me.CostoArticulo.HeaderText = "Artículo"
         Me.CostoArticulo.Name = "CostoArticulo"
         Me.CostoArticulo.ReadOnly = True
         '
         'CostoTerminado
         '
-        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoTerminado.DefaultCellStyle = DataGridViewCellStyle45
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoTerminado.DefaultCellStyle = DataGridViewCellStyle13
         Me.CostoTerminado.HeaderText = "Terminado"
         Me.CostoTerminado.Name = "CostoTerminado"
         Me.CostoTerminado.ReadOnly = True
@@ -955,23 +956,23 @@ Partial Class IngresoPruebasEnsayo
         '
         'CostoCantidad
         '
-        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoCantidad.DefaultCellStyle = DataGridViewCellStyle46
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoCantidad.DefaultCellStyle = DataGridViewCellStyle14
         Me.CostoCantidad.HeaderText = "Cantidad"
         Me.CostoCantidad.Name = "CostoCantidad"
         Me.CostoCantidad.ReadOnly = True
         '
         'CostoCosto
         '
-        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoCosto.DefaultCellStyle = DataGridViewCellStyle47
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoCosto.DefaultCellStyle = DataGridViewCellStyle15
         Me.CostoCosto.HeaderText = "Costo"
         Me.CostoCosto.Name = "CostoCosto"
         '
         'CostoImporte
         '
-        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoImporte.DefaultCellStyle = DataGridViewCellStyle48
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoImporte.DefaultCellStyle = DataGridViewCellStyle16
         Me.CostoImporte.HeaderText = "Importe"
         Me.CostoImporte.Name = "CostoImporte"
         Me.CostoImporte.ReadOnly = True
@@ -1073,6 +1074,7 @@ Partial Class IngresoPruebasEnsayo
         'TabDatosEntrada
         '
         Me.TabDatosEntrada.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabDatosEntrada.Controls.Add(Me.btnLeerVersionAntDatosEntrada)
         Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarXII)
         Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarXI)
         Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarX)
@@ -1134,7 +1136,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarXII
         '
         Me.ckAVerificarXII.AutoSize = True
-        Me.ckAVerificarXII.Location = New System.Drawing.Point(453, 363)
+        Me.ckAVerificarXII.Location = New System.Drawing.Point(451, 349)
         Me.ckAVerificarXII.Name = "ckAVerificarXII"
         Me.ckAVerificarXII.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarXII.TabIndex = 3
@@ -1143,7 +1145,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarXI
         '
         Me.ckAVerificarXI.AutoSize = True
-        Me.ckAVerificarXI.Location = New System.Drawing.Point(453, 336)
+        Me.ckAVerificarXI.Location = New System.Drawing.Point(451, 322)
         Me.ckAVerificarXI.Name = "ckAVerificarXI"
         Me.ckAVerificarXI.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarXI.TabIndex = 3
@@ -1152,7 +1154,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarX
         '
         Me.ckAVerificarX.AutoSize = True
-        Me.ckAVerificarX.Location = New System.Drawing.Point(453, 309)
+        Me.ckAVerificarX.Location = New System.Drawing.Point(451, 295)
         Me.ckAVerificarX.Name = "ckAVerificarX"
         Me.ckAVerificarX.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarX.TabIndex = 3
@@ -1160,7 +1162,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosXII
         '
-        Me.txtComentariosXII.Location = New System.Drawing.Point(510, 360)
+        Me.txtComentariosXII.Location = New System.Drawing.Point(508, 346)
         Me.txtComentariosXII.MaxLength = 50
         Me.txtComentariosXII.Name = "txtComentariosXII"
         Me.txtComentariosXII.Size = New System.Drawing.Size(290, 20)
@@ -1169,7 +1171,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosXI
         '
-        Me.txtComentariosXI.Location = New System.Drawing.Point(510, 333)
+        Me.txtComentariosXI.Location = New System.Drawing.Point(508, 319)
         Me.txtComentariosXI.MaxLength = 50
         Me.txtComentariosXI.Name = "txtComentariosXI"
         Me.txtComentariosXI.Size = New System.Drawing.Size(290, 20)
@@ -1178,7 +1180,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosX
         '
-        Me.txtComentariosX.Location = New System.Drawing.Point(510, 306)
+        Me.txtComentariosX.Location = New System.Drawing.Point(508, 292)
         Me.txtComentariosX.MaxLength = 50
         Me.txtComentariosX.Name = "txtComentariosX"
         Me.txtComentariosX.Size = New System.Drawing.Size(290, 20)
@@ -1187,7 +1189,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosIX
         '
-        Me.txtComentariosIX.Location = New System.Drawing.Point(510, 279)
+        Me.txtComentariosIX.Location = New System.Drawing.Point(508, 265)
         Me.txtComentariosIX.MaxLength = 50
         Me.txtComentariosIX.Name = "txtComentariosIX"
         Me.txtComentariosIX.Size = New System.Drawing.Size(290, 20)
@@ -1196,7 +1198,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosVIII
         '
-        Me.txtComentariosVIII.Location = New System.Drawing.Point(510, 252)
+        Me.txtComentariosVIII.Location = New System.Drawing.Point(508, 238)
         Me.txtComentariosVIII.MaxLength = 50
         Me.txtComentariosVIII.Name = "txtComentariosVIII"
         Me.txtComentariosVIII.Size = New System.Drawing.Size(290, 20)
@@ -1205,7 +1207,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosVII
         '
-        Me.txtComentariosVII.Location = New System.Drawing.Point(510, 225)
+        Me.txtComentariosVII.Location = New System.Drawing.Point(508, 211)
         Me.txtComentariosVII.MaxLength = 50
         Me.txtComentariosVII.Name = "txtComentariosVII"
         Me.txtComentariosVII.Size = New System.Drawing.Size(290, 20)
@@ -1214,7 +1216,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosVI
         '
-        Me.txtComentariosVI.Location = New System.Drawing.Point(510, 198)
+        Me.txtComentariosVI.Location = New System.Drawing.Point(508, 184)
         Me.txtComentariosVI.MaxLength = 50
         Me.txtComentariosVI.Name = "txtComentariosVI"
         Me.txtComentariosVI.Size = New System.Drawing.Size(290, 20)
@@ -1223,7 +1225,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosV
         '
-        Me.txtComentariosV.Location = New System.Drawing.Point(510, 171)
+        Me.txtComentariosV.Location = New System.Drawing.Point(508, 157)
         Me.txtComentariosV.MaxLength = 50
         Me.txtComentariosV.Name = "txtComentariosV"
         Me.txtComentariosV.Size = New System.Drawing.Size(290, 20)
@@ -1232,7 +1234,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosIV
         '
-        Me.txtComentariosIV.Location = New System.Drawing.Point(510, 144)
+        Me.txtComentariosIV.Location = New System.Drawing.Point(508, 130)
         Me.txtComentariosIV.MaxLength = 50
         Me.txtComentariosIV.Name = "txtComentariosIV"
         Me.txtComentariosIV.Size = New System.Drawing.Size(290, 20)
@@ -1241,7 +1243,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosIII
         '
-        Me.txtComentariosIII.Location = New System.Drawing.Point(510, 117)
+        Me.txtComentariosIII.Location = New System.Drawing.Point(508, 103)
         Me.txtComentariosIII.MaxLength = 50
         Me.txtComentariosIII.Name = "txtComentariosIII"
         Me.txtComentariosIII.Size = New System.Drawing.Size(290, 20)
@@ -1250,7 +1252,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosII
         '
-        Me.txtComentariosII.Location = New System.Drawing.Point(510, 90)
+        Me.txtComentariosII.Location = New System.Drawing.Point(508, 76)
         Me.txtComentariosII.MaxLength = 50
         Me.txtComentariosII.Name = "txtComentariosII"
         Me.txtComentariosII.Size = New System.Drawing.Size(290, 20)
@@ -1259,7 +1261,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosI
         '
-        Me.txtComentariosI.Location = New System.Drawing.Point(510, 63)
+        Me.txtComentariosI.Location = New System.Drawing.Point(508, 49)
         Me.txtComentariosI.MaxLength = 50
         Me.txtComentariosI.Name = "txtComentariosI"
         Me.txtComentariosI.Size = New System.Drawing.Size(290, 20)
@@ -1268,7 +1270,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosXII
         '
-        Me.txtRequisitosXII.Location = New System.Drawing.Point(25, 360)
+        Me.txtRequisitosXII.Location = New System.Drawing.Point(23, 346)
         Me.txtRequisitosXII.MaxLength = 50
         Me.txtRequisitosXII.Name = "txtRequisitosXII"
         Me.txtRequisitosXII.Size = New System.Drawing.Size(290, 20)
@@ -1277,7 +1279,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosXI
         '
-        Me.txtRequisitosXI.Location = New System.Drawing.Point(25, 333)
+        Me.txtRequisitosXI.Location = New System.Drawing.Point(23, 319)
         Me.txtRequisitosXI.MaxLength = 50
         Me.txtRequisitosXI.Name = "txtRequisitosXI"
         Me.txtRequisitosXI.Size = New System.Drawing.Size(290, 20)
@@ -1286,7 +1288,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosX
         '
-        Me.txtRequisitosX.Location = New System.Drawing.Point(25, 306)
+        Me.txtRequisitosX.Location = New System.Drawing.Point(23, 292)
         Me.txtRequisitosX.MaxLength = 50
         Me.txtRequisitosX.Name = "txtRequisitosX"
         Me.txtRequisitosX.Size = New System.Drawing.Size(290, 20)
@@ -1295,7 +1297,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosIX
         '
-        Me.txtRequisitosIX.Location = New System.Drawing.Point(25, 279)
+        Me.txtRequisitosIX.Location = New System.Drawing.Point(23, 265)
         Me.txtRequisitosIX.MaxLength = 50
         Me.txtRequisitosIX.Name = "txtRequisitosIX"
         Me.txtRequisitosIX.Size = New System.Drawing.Size(290, 20)
@@ -1304,7 +1306,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosVIII
         '
-        Me.txtRequisitosVIII.Location = New System.Drawing.Point(25, 252)
+        Me.txtRequisitosVIII.Location = New System.Drawing.Point(23, 238)
         Me.txtRequisitosVIII.MaxLength = 50
         Me.txtRequisitosVIII.Name = "txtRequisitosVIII"
         Me.txtRequisitosVIII.Size = New System.Drawing.Size(290, 20)
@@ -1313,7 +1315,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosVII
         '
-        Me.txtRequisitosVII.Location = New System.Drawing.Point(25, 225)
+        Me.txtRequisitosVII.Location = New System.Drawing.Point(23, 211)
         Me.txtRequisitosVII.MaxLength = 50
         Me.txtRequisitosVII.Name = "txtRequisitosVII"
         Me.txtRequisitosVII.Size = New System.Drawing.Size(290, 20)
@@ -1322,7 +1324,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosVI
         '
-        Me.txtRequisitosVI.Location = New System.Drawing.Point(25, 198)
+        Me.txtRequisitosVI.Location = New System.Drawing.Point(23, 184)
         Me.txtRequisitosVI.MaxLength = 50
         Me.txtRequisitosVI.Name = "txtRequisitosVI"
         Me.txtRequisitosVI.Size = New System.Drawing.Size(290, 20)
@@ -1331,7 +1333,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosV
         '
-        Me.txtRequisitosV.Location = New System.Drawing.Point(25, 171)
+        Me.txtRequisitosV.Location = New System.Drawing.Point(23, 157)
         Me.txtRequisitosV.MaxLength = 50
         Me.txtRequisitosV.Name = "txtRequisitosV"
         Me.txtRequisitosV.Size = New System.Drawing.Size(290, 20)
@@ -1340,7 +1342,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosIV
         '
-        Me.txtRequisitosIV.Location = New System.Drawing.Point(25, 144)
+        Me.txtRequisitosIV.Location = New System.Drawing.Point(23, 130)
         Me.txtRequisitosIV.MaxLength = 50
         Me.txtRequisitosIV.Name = "txtRequisitosIV"
         Me.txtRequisitosIV.Size = New System.Drawing.Size(290, 20)
@@ -1349,7 +1351,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosIII
         '
-        Me.txtRequisitosIII.Location = New System.Drawing.Point(25, 117)
+        Me.txtRequisitosIII.Location = New System.Drawing.Point(23, 103)
         Me.txtRequisitosIII.MaxLength = 50
         Me.txtRequisitosIII.Name = "txtRequisitosIII"
         Me.txtRequisitosIII.Size = New System.Drawing.Size(290, 20)
@@ -1358,7 +1360,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosII
         '
-        Me.txtRequisitosII.Location = New System.Drawing.Point(25, 90)
+        Me.txtRequisitosII.Location = New System.Drawing.Point(23, 76)
         Me.txtRequisitosII.MaxLength = 50
         Me.txtRequisitosII.Name = "txtRequisitosII"
         Me.txtRequisitosII.Size = New System.Drawing.Size(290, 20)
@@ -1367,7 +1369,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosI
         '
-        Me.txtRequisitosI.Location = New System.Drawing.Point(25, 63)
+        Me.txtRequisitosI.Location = New System.Drawing.Point(23, 49)
         Me.txtRequisitosI.MaxLength = 50
         Me.txtRequisitosI.Name = "txtRequisitosI"
         Me.txtRequisitosI.Size = New System.Drawing.Size(290, 20)
@@ -1377,7 +1379,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarIX
         '
         Me.ckAVerificarIX.AutoSize = True
-        Me.ckAVerificarIX.Location = New System.Drawing.Point(453, 282)
+        Me.ckAVerificarIX.Location = New System.Drawing.Point(451, 268)
         Me.ckAVerificarIX.Name = "ckAVerificarIX"
         Me.ckAVerificarIX.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarIX.TabIndex = 3
@@ -1386,7 +1388,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarVIII
         '
         Me.ckAVerificarVIII.AutoSize = True
-        Me.ckAVerificarVIII.Location = New System.Drawing.Point(453, 255)
+        Me.ckAVerificarVIII.Location = New System.Drawing.Point(451, 241)
         Me.ckAVerificarVIII.Name = "ckAVerificarVIII"
         Me.ckAVerificarVIII.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarVIII.TabIndex = 3
@@ -1395,7 +1397,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarVII
         '
         Me.ckAVerificarVII.AutoSize = True
-        Me.ckAVerificarVII.Location = New System.Drawing.Point(453, 228)
+        Me.ckAVerificarVII.Location = New System.Drawing.Point(451, 214)
         Me.ckAVerificarVII.Name = "ckAVerificarVII"
         Me.ckAVerificarVII.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarVII.TabIndex = 3
@@ -1404,7 +1406,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarVI
         '
         Me.ckAVerificarVI.AutoSize = True
-        Me.ckAVerificarVI.Location = New System.Drawing.Point(453, 201)
+        Me.ckAVerificarVI.Location = New System.Drawing.Point(451, 187)
         Me.ckAVerificarVI.Name = "ckAVerificarVI"
         Me.ckAVerificarVI.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarVI.TabIndex = 3
@@ -1413,7 +1415,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarV
         '
         Me.ckAVerificarV.AutoSize = True
-        Me.ckAVerificarV.Location = New System.Drawing.Point(453, 174)
+        Me.ckAVerificarV.Location = New System.Drawing.Point(451, 160)
         Me.ckAVerificarV.Name = "ckAVerificarV"
         Me.ckAVerificarV.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarV.TabIndex = 3
@@ -1422,7 +1424,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarIV
         '
         Me.ckAVerificarIV.AutoSize = True
-        Me.ckAVerificarIV.Location = New System.Drawing.Point(453, 147)
+        Me.ckAVerificarIV.Location = New System.Drawing.Point(451, 133)
         Me.ckAVerificarIV.Name = "ckAVerificarIV"
         Me.ckAVerificarIV.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarIV.TabIndex = 3
@@ -1431,7 +1433,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarIII
         '
         Me.ckAVerificarIII.AutoSize = True
-        Me.ckAVerificarIII.Location = New System.Drawing.Point(453, 120)
+        Me.ckAVerificarIII.Location = New System.Drawing.Point(451, 106)
         Me.ckAVerificarIII.Name = "ckAVerificarIII"
         Me.ckAVerificarIII.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarIII.TabIndex = 3
@@ -1440,7 +1442,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarII
         '
         Me.ckAVerificarII.AutoSize = True
-        Me.ckAVerificarII.Location = New System.Drawing.Point(453, 93)
+        Me.ckAVerificarII.Location = New System.Drawing.Point(451, 79)
         Me.ckAVerificarII.Name = "ckAVerificarII"
         Me.ckAVerificarII.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarII.TabIndex = 3
@@ -1449,7 +1451,7 @@ Partial Class IngresoPruebasEnsayo
         'ckAVerificarI
         '
         Me.ckAVerificarI.AutoSize = True
-        Me.ckAVerificarI.Location = New System.Drawing.Point(453, 66)
+        Me.ckAVerificarI.Location = New System.Drawing.Point(451, 52)
         Me.ckAVerificarI.Name = "ckAVerificarI"
         Me.ckAVerificarI.Size = New System.Drawing.Size(15, 14)
         Me.ckAVerificarI.TabIndex = 3
@@ -1458,7 +1460,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoXII
         '
         Me.ckInformativoXII.AutoSize = True
-        Me.ckInformativoXII.Location = New System.Drawing.Point(361, 363)
+        Me.ckInformativoXII.Location = New System.Drawing.Point(359, 349)
         Me.ckInformativoXII.Name = "ckInformativoXII"
         Me.ckInformativoXII.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoXII.TabIndex = 3
@@ -1467,7 +1469,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoXI
         '
         Me.ckInformativoXI.AutoSize = True
-        Me.ckInformativoXI.Location = New System.Drawing.Point(361, 336)
+        Me.ckInformativoXI.Location = New System.Drawing.Point(359, 322)
         Me.ckInformativoXI.Name = "ckInformativoXI"
         Me.ckInformativoXI.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoXI.TabIndex = 3
@@ -1476,7 +1478,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoX
         '
         Me.ckInformativoX.AutoSize = True
-        Me.ckInformativoX.Location = New System.Drawing.Point(361, 309)
+        Me.ckInformativoX.Location = New System.Drawing.Point(359, 295)
         Me.ckInformativoX.Name = "ckInformativoX"
         Me.ckInformativoX.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoX.TabIndex = 3
@@ -1485,7 +1487,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoIX
         '
         Me.ckInformativoIX.AutoSize = True
-        Me.ckInformativoIX.Location = New System.Drawing.Point(361, 282)
+        Me.ckInformativoIX.Location = New System.Drawing.Point(359, 268)
         Me.ckInformativoIX.Name = "ckInformativoIX"
         Me.ckInformativoIX.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoIX.TabIndex = 3
@@ -1494,7 +1496,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoVIII
         '
         Me.ckInformativoVIII.AutoSize = True
-        Me.ckInformativoVIII.Location = New System.Drawing.Point(361, 255)
+        Me.ckInformativoVIII.Location = New System.Drawing.Point(359, 241)
         Me.ckInformativoVIII.Name = "ckInformativoVIII"
         Me.ckInformativoVIII.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoVIII.TabIndex = 3
@@ -1503,7 +1505,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoVII
         '
         Me.ckInformativoVII.AutoSize = True
-        Me.ckInformativoVII.Location = New System.Drawing.Point(361, 228)
+        Me.ckInformativoVII.Location = New System.Drawing.Point(359, 214)
         Me.ckInformativoVII.Name = "ckInformativoVII"
         Me.ckInformativoVII.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoVII.TabIndex = 3
@@ -1512,7 +1514,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoVI
         '
         Me.ckInformativoVI.AutoSize = True
-        Me.ckInformativoVI.Location = New System.Drawing.Point(361, 201)
+        Me.ckInformativoVI.Location = New System.Drawing.Point(359, 187)
         Me.ckInformativoVI.Name = "ckInformativoVI"
         Me.ckInformativoVI.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoVI.TabIndex = 3
@@ -1521,7 +1523,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoV
         '
         Me.ckInformativoV.AutoSize = True
-        Me.ckInformativoV.Location = New System.Drawing.Point(361, 174)
+        Me.ckInformativoV.Location = New System.Drawing.Point(359, 160)
         Me.ckInformativoV.Name = "ckInformativoV"
         Me.ckInformativoV.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoV.TabIndex = 3
@@ -1530,7 +1532,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoIV
         '
         Me.ckInformativoIV.AutoSize = True
-        Me.ckInformativoIV.Location = New System.Drawing.Point(361, 147)
+        Me.ckInformativoIV.Location = New System.Drawing.Point(359, 133)
         Me.ckInformativoIV.Name = "ckInformativoIV"
         Me.ckInformativoIV.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoIV.TabIndex = 3
@@ -1539,7 +1541,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoIII
         '
         Me.ckInformativoIII.AutoSize = True
-        Me.ckInformativoIII.Location = New System.Drawing.Point(361, 120)
+        Me.ckInformativoIII.Location = New System.Drawing.Point(359, 106)
         Me.ckInformativoIII.Name = "ckInformativoIII"
         Me.ckInformativoIII.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoIII.TabIndex = 3
@@ -1548,7 +1550,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoII
         '
         Me.ckInformativoII.AutoSize = True
-        Me.ckInformativoII.Location = New System.Drawing.Point(361, 93)
+        Me.ckInformativoII.Location = New System.Drawing.Point(359, 79)
         Me.ckInformativoII.Name = "ckInformativoII"
         Me.ckInformativoII.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoII.TabIndex = 3
@@ -1557,7 +1559,7 @@ Partial Class IngresoPruebasEnsayo
         'ckInformativoI
         '
         Me.ckInformativoI.AutoSize = True
-        Me.ckInformativoI.Location = New System.Drawing.Point(361, 66)
+        Me.ckInformativoI.Location = New System.Drawing.Point(359, 52)
         Me.ckInformativoI.Name = "ckInformativoI"
         Me.ckInformativoI.Size = New System.Drawing.Size(15, 14)
         Me.ckInformativoI.TabIndex = 3
@@ -1869,6 +1871,18 @@ Partial Class IngresoPruebasEnsayo
         Me.txtNota.TabIndex = 0
         Me.txtNota.Text = ""
         '
+        'btnLeerVersionAntDatosEntrada
+        '
+        Me.btnLeerVersionAntDatosEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLeerVersionAntDatosEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLeerVersionAntDatosEntrada.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnLeerVersionAntDatosEntrada.Location = New System.Drawing.Point(342, 372)
+        Me.btnLeerVersionAntDatosEntrada.Name = "btnLeerVersionAntDatosEntrada"
+        Me.btnLeerVersionAntDatosEntrada.Size = New System.Drawing.Size(136, 25)
+        Me.btnLeerVersionAntDatosEntrada.TabIndex = 12
+        Me.btnLeerVersionAntDatosEntrada.Text = "Lee Versión Anterior"
+        Me.btnLeerVersionAntDatosEntrada.UseVisualStyleBackColor = True
+        '
         'IngresoPruebasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1983,7 +1997,7 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents Button7 As System.Windows.Forms.Button
+    Friend WithEvents btnLeerVersionAntLab As System.Windows.Forms.Button
     Friend WithEvents RichTextBox3 As System.Windows.Forms.RichTextBox
     Friend WithEvents dgvRevisiones As System.Windows.Forms.DataGridView
     Friend WithEvents cmbTipoCalculo As System.Windows.Forms.ComboBox
@@ -2083,4 +2097,5 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents CostoCantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CostoCosto As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CostoImporte As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnLeerVersionAntDatosEntrada As System.Windows.Forms.Button
 End Class

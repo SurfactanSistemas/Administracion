@@ -1071,10 +1071,14 @@ Public Class IngresoPruebasEnsayo
 
     End Sub
 
-    Private Sub _TraerDatosEntrada()
+    Private Sub _TraerDatosEntrada(Optional ByVal WVersion As String = "")
+
+        If String.IsNullOrEmpty(WVersion) Then
+            WVersion = txtVersion.Text
+        End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Requisito, Informativo, AVerificar, Comentario FROM CargaEnsayoVI WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Requisito, Informativo, AVerificar, Comentario FROM CargaEnsayoVI WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "'")
         Dim dr As SqlDataReader
         Dim WRequisito = "", WInformativo = "", WAVerificar = "", WComentario = ""
         Dim WIndice = 0
@@ -1120,7 +1124,7 @@ Public Class IngresoPruebasEnsayo
                         WAVerificarlos(WIndice).Checked = Val(WAVerificar) = 1
 
                         WIndice += 1
-                    
+
                     End If
 
                 Loop
@@ -1207,9 +1211,14 @@ Public Class IngresoPruebasEnsayo
 
     End Sub
 
-    Private Sub _TraerDatosLaboratorio()
+    Private Sub _TraerDatosLaboratorio(Optional ByVal WVersion As String = "")
+
+        If String.IsNullOrEmpty(WVersion) Then
+            WVersion = txtVersion.Text
+        End If
+
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Ensayo, Descripcion, Esperado, Resultado FROM CargaEnsayoIV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Ensayo, Descripcion, Esperado, Resultado FROM CargaEnsayoIV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "'")
         Dim dr As SqlDataReader
         Dim WEnsayo = "", WDescripcion = "", WEsperado = "", WResultado = ""
         Dim WIndice = 0
@@ -2082,6 +2091,26 @@ Public Class IngresoPruebasEnsayo
 
             _TraerDatosProceso(Val(txtVersion.Text) - 1)
             
+        End If
+
+    End Sub
+
+    Private Sub btnLeerVersionAntLab_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLeerVersionAntLab.Click
+
+        If Val(txtVersion.Text) > 1 Then
+
+            _TraerDatosLaboratorio(Val(txtVersion.Text) - 1)
+
+        End If
+
+    End Sub
+
+    Private Sub btnLeerVersionAntDatosEntrada_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLeerVersionAntDatosEntrada.Click
+
+        If Val(txtVersion.Text) > 1 Then
+
+            _TraerDatosEntrada(Val(txtVersion.Text) - 1)
+
         End If
 
     End Sub
