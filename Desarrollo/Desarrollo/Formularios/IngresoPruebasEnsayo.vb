@@ -444,7 +444,7 @@ Public Class IngresoPruebasEnsayo
     '    pnlNotas.Visible = False
     'End Sub
 
-    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click, Button3.Click, Button2.Click
+    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click, Button3.Click
 
         Try
             If Trim(txtOrden.Text).Replace("-", "") = "" OrElse Trim(txtOrden.Text).Length < 8 Then Exit Sub
@@ -1477,10 +1477,14 @@ Public Class IngresoPruebasEnsayo
 
     End Sub
 
-    Private Sub _TraerDatosFormulaYCosto()
+    Private Sub _TraerDatosFormulaYCosto(Optional ByVal WVersion As String = "")
+
+        If String.IsNullOrEmpty(WVersion) Then
+            WVersion = txtVersion.Text
+        End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Tipo, Articulo, Terminado, Descripcion, Cantidad, Lote, Stock, Costo FROM CargaEnsayoII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "' ORDER BY Articulo, Terminado")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Tipo, Articulo, Terminado, Descripcion, Cantidad, Lote, Stock, Costo FROM CargaEnsayoII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Articulo, Terminado")
         Dim dr As SqlDataReader
         Dim WTipo = "", WArticulo = "", WTerminado = "", WDescripcion = "", WCantidad = "", WLote = "", WStock = "", WCosto = ""
         Dim WIndice = 0
@@ -2055,5 +2059,15 @@ Public Class IngresoPruebasEnsayo
 
     Private Sub cmbTipoCalculo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoCalculo.SelectedIndexChanged
         btnRecalculaCosto.PerformClick()
+    End Sub
+
+    Private Sub btnLeerVersionAntFormula_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLeerVersionAntFormula.Click
+
+        If Val(txtVersion.Text) > 1 Then
+
+            _TraerDatosFormulaYCosto(Val(txtVersion.Text) - 1)
+
+        End If
+
     End Sub
 End Class
