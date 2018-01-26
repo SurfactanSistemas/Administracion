@@ -84,6 +84,15 @@ Module Helper
 
     End Function
 
+    Public Function _ConectarA(ByVal empresa As Integer) As String
+
+        Return Conexion._ConectarASegunID(empresa)
+
+    End Function
+
+    Public Function ordenaFecha(ByVal fecha As DBNull)
+        Return 0
+    End Function
 
     Public Function ordenaFecha(ByVal fecha As String)
 

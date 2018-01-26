@@ -1,7 +1,24 @@
-﻿Public Class Conexion
+﻿Imports System.Data.SqlClient
+
+Public Class Conexion
 
     Public Shared EsPellital As Boolean = False
     Private Shared _EmpresaTrabajo As String = ""
+    Private Shared _Operador As String = ""
+
+    Public Shared Property Operador As String
+
+        Get
+
+            Return IIf(_Operador = "", 0, _Operador)
+
+        End Get
+
+        Private Set(ByVal value As String)
+            _Operador = value
+        End Set
+
+    End Property
 
     Public Shared Property EmpresaDeTrabajo As String
         Get
@@ -65,7 +82,6 @@
 
         End If
 
-
         If EsPellital AndAlso empresa = "SurfactanSA" Then
             empresa = "Pellital_III"
         End If
@@ -85,6 +101,48 @@
         End If
     End Function
 
+    Public Shared Function _ConectarASegunID(ByVal empresa As Integer) As String
+        
+        Dim _empresa = Nothing
+
+        _empresa = DeterminarSegunIDIDBasePara(empresa)
+
+        If Trim(_empresa) = "" Then Throw New Exception("No se pudo encontrar la empresa " & empresa)
+
+        Return _ConectarA(_empresa)
+
+    End Function
+
+    Private Shared Function DeterminarSegunIDIDBasePara(ByVal empresa As Integer) As String
+
+        Select Case empresa
+            Case 1
+                Return "SurfactanSa"
+            Case 2
+                Return "PellitalSa"
+            Case 3
+                Return "Surfactan_II"
+            Case 4
+                Return "Pelitall_II" ' Asi está escrita la Base de Datos en el SQL.
+            Case 5
+                Return "Surfactan_III"
+            Case 6
+                Return "Surfactan_IV"
+            Case 7
+                Return "Surfactan_V"
+            Case 8
+                Return "Pellital_III"
+            Case 9
+                Return "Pellital_V"
+            Case 10
+                Return "Surfactan_VI"
+            Case 11
+                Return "Surfactan_VII"
+            Case Else
+                Return ""
+        End Select
+
+    End Function
 
     Public Shared Function DeterminarBasePara(ByVal empresa As String) As String
 
@@ -109,5 +167,47 @@
                 Return Empresas.Find(Function(e) UCase(e) = UCase(empresa))
 
         End Select
+    End Function
+
+    ''' <summary>
+    ''' Chequea que la Clave exista en la Base de Datos que se está trabajando.
+    ''' </summary>
+    ''' <param name="Clave">Clave ingresada por el Usuario.</param>
+    ''' <returns>Boolean</returns>
+    ''' <remarks>True en caso de existir. Se almacena en la Propiedad Operador de la Clase Conexion, el número correspondiente para esa Clave.</remarks>
+    Public Shared Function _Login(ByVal Clave As String) As Boolean
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Clave, Operador FROM Operador WHERE (Clave = '" & Clave & "' Or Clave = '" & UCase(Clave) & "')")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+                Operador = IIf(IsDBNull(dr.Item("Operador")), "", dr.Item("Operador"))
+                Return True
+            Else
+                Operador = ""
+                Return False
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Function
 End Class

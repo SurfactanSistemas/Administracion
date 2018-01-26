@@ -1,18 +1,18 @@
 ﻿Imports System.Configuration
-Imports System.Data.SqlClient
-Imports System.Net
-Imports ClasesCompartidas
 
 Public Class Login
+
+    Private _MenuPrincipal As Form = New MenuPrincipal
+
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Close()
     End Sub
-    
+
     Private Sub Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         cmbEntity.SelectedIndex = 0
         txtPsw.Text = ""
     End Sub
-    
+
     Private Sub btnAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccept.Click
 
         'Globals.empresa = cmbEntity.SelectedItem
@@ -21,7 +21,7 @@ Public Class Login
 
         ' Validamos la contraseña.
 
-        If Not _EsContraseñaValida() Then
+        If Not Conexion._Login(txtPsw.Text) Then
             MsgBox("La contraseña no es correcta.", MsgBoxStyle.Exclamation)
             Exit Sub
         End If
@@ -40,38 +40,14 @@ Public Class Login
         End If
 
         Me.Visible = False
-        MenuPrincipal.Show()
+
+        _MenuPrincipal.Close()
+
+        _MenuPrincipal = New MenuPrincipal
+
+        _MenuPrincipal.Show()
 
     End Sub
-
-    Private Function _EsContraseñaValida() As Boolean
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Clave FROM Operador WHERE (Clave = '" & txtPsw.Text.Trim & "' Or Clave = '" & UCase(txtPsw.Text.Trim) & "')")
-        Dim dr As SqlDataReader
-
-        Try
-
-            cn.ConnectionString = Helper._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            Return dr.HasRows
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-    End Function
 
     Private Function _PermisosPellitalValidos() As Boolean
 

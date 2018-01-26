@@ -33,8 +33,10 @@ Partial Class MenuPrincipal
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AnálisisDeDesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDePruebasDeEnsayoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -149,7 +151,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem, Me.IngresoDePruebasDeEnsayoToolStripMenuItem, Me.AnálisisDeDesarrolloToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -159,6 +161,12 @@ Partial Class MenuPrincipal
         Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem.Name = "IngresiDeOrdenesDeTrabajoToolStripMenuItem"
         Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
         Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem.Text = "Ingreso de Ordenes de Trabajo"
+        '
+        'AnálisisDeDesarrolloToolStripMenuItem
+        '
+        Me.AnálisisDeDesarrolloToolStripMenuItem.Name = "AnálisisDeDesarrolloToolStripMenuItem"
+        Me.AnálisisDeDesarrolloToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
+        Me.AnálisisDeDesarrolloToolStripMenuItem.Text = "Análisis de Desarrollo"
         '
         'ProcesosToolStripMenuItem
         '
@@ -172,6 +180,12 @@ Partial Class MenuPrincipal
         Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
         Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
+        '
+        'IngresoDePruebasDeEnsayoToolStripMenuItem
+        '
+        Me.IngresoDePruebasDeEnsayoToolStripMenuItem.Name = "IngresoDePruebasDeEnsayoToolStripMenuItem"
+        Me.IngresoDePruebasDeEnsayoToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
+        Me.IngresoDePruebasDeEnsayoToolStripMenuItem.Text = "Ingreso de Pruebas de Ensayo"
         '
         'MenuPrincipal
         '
@@ -208,5 +222,7 @@ Partial Class MenuPrincipal
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents AnálisisDeDesarrolloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoDePruebasDeEnsayoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

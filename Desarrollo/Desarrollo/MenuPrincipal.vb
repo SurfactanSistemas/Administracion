@@ -16,9 +16,35 @@
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Me.Hide()
         With Login
             .Visible = True
             .Focus()
         End With
+    End Sub
+
+    Private Sub AnálisisDeDesarrolloToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AnálisisDeDesarrolloToolStripMenuItem.Click
+
+        With AnalisisDesarrollo
+            .Show()
+            .WindowState = FormWindowState.Normal
+            .Focus()
+        End With
+
+    End Sub
+
+    Private Sub MenuPrincipal_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+        ' TODO Crear rutina para habilitar y deshabilitar opciones de menú segun atributos.
+        'MsgBox(Conexion.Operador)
+    End Sub
+
+    Private Sub IngresoDePruebasDeEnsayoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDePruebasDeEnsayoToolStripMenuItem.Click
+
+        With IngresoPruebasEnsayo
+            .Show()
+            .WindowState = FormWindowState.Normal
+            .Focus()
+        End With
+
     End Sub
 End Class

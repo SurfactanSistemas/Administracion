@@ -9,9 +9,11 @@ Public Class VistaPrevia
     
     Private Sub Reporte_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        With Me.CrystalReportViewer2
+        With Me.CrystalReportViewer1
             .ReportSource = Me.Reporte
+            .Refresh()
         End With
+
     End Sub
 
     Public Sub EstablecerConexion(ByVal Servidor As String, ByVal BaseDatos As String)
@@ -34,7 +36,7 @@ Public Class VistaPrevia
 
         Try
             ' Buscamos el string de conexion.
-            cs = ClasesCompartidas.Globals.getConnectionString()
+            cs = Helper._ConectarA 'ClasesCompartidas.Globals.getConnectionString()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Return
@@ -51,7 +53,7 @@ Public Class VistaPrevia
         conexion.ServerName = cnsb.DataSource
         conexion.UserID = cnsb.UserID
         conexion.Password = cnsb.Password
-        'conexion.IntegratedSecurity = True
+        conexion.IntegratedSecurity = True
 
         Dim tli As New TableLogOnInfo()
         tli.ConnectionInfo = conexion
@@ -72,12 +74,22 @@ Public Class VistaPrevia
 
         _ReconectarBaseDatos()
 
-        With Me.CrystalReportViewer2
-            .SelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-            .Refresh()
+        With Me.CrystalReportViewer1
+
+            .ReportSource = Me.Reporte
+
+            If Not String.IsNullOrEmpty(Me.Formula) Then
+
+                .SelectionFormula = Me.Formula
+
+            End If
+
+            .RefreshReport()
+
         End With
-        Me.ShowDialog()
-        Me.Dispose()
+
+        Me.Show()
+
     End Sub
 
     Public Sub Imprimir(Optional ByVal cant As Integer = 1)
@@ -102,5 +114,10 @@ Public Class VistaPrevia
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
         Me.Reporte.Refresh()
         Me.Reporte.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & NombreArchivo)
+    End Sub
+
+    Public Sub DesdeArchivo(ByVal s As String)
+        Reporte = New ReportDocument
+        Reporte.Load(s)
     End Sub
 End Class

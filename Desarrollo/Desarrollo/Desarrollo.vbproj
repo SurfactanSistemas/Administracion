@@ -87,12 +87,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Conexion.vb" />
+    <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
+    <Compile Include="Formularios\IngresoPruebasEnsayo.Designer.vb">
+      <DependentUpon>IngresoPruebasEnsayo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\IngresoPruebasEnsayo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\IngresoOrdenTrabajo.Designer.vb">
       <DependentUpon>IngresoOrdenTrabajo.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\IngresoOrdenTrabajo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\AnalisisDesarrollo.designer.vb">
+      <DependentUpon>AnalisisDesarrollo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\AnalisisDesarrollo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
@@ -132,8 +145,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\IngresoPruebasEnsayo.resx">
+      <DependentUpon>IngresoPruebasEnsayo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\IngresoOrdenTrabajo.resx">
       <DependentUpon>IngresoOrdenTrabajo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\AnalisisDesarrollo.resx">
+      <DependentUpon>AnalisisDesarrollo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
@@ -152,7 +171,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

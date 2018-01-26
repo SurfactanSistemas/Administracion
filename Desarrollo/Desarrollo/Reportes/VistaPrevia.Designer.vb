@@ -35,7 +35,6 @@ Partial Class VistaPrevia
         Me.CrystalReportViewer1.Name = "CrystalReportViewer1"
         Me.CrystalReportViewer1.ShowCloseButton = False
         Me.CrystalReportViewer1.ShowParameterPanelButton = False
-        Me.CrystalReportViewer1.ShowRefreshButton = False
         Me.CrystalReportViewer1.Size = New System.Drawing.Size(701, 443)
         Me.CrystalReportViewer1.TabIndex = 0
         Me.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
