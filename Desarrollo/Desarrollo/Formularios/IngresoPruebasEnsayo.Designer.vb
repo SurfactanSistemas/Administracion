@@ -30,8 +30,6 @@ Partial Class IngresoPruebasEnsayo
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -39,6 +37,8 @@ Partial Class IngresoPruebasEnsayo
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -92,14 +92,6 @@ Partial Class IngresoPruebasEnsayo
         Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.TabRevisiones = New System.Windows.Forms.TabPage()
         Me.dgvRevisiones = New System.Windows.Forms.DataGridView()
-        Me.RevisionesVersion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesEtapa = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesFecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesParticipantes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesResultados = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesAcciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesResponsables = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesEstado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabCosto = New System.Windows.Forms.TabPage()
         Me.cmbTipoCalculo = New System.Windows.Forms.ComboBox()
         Me.dgvCosto = New System.Windows.Forms.DataGridView()
@@ -204,6 +196,14 @@ Partial Class IngresoPruebasEnsayo
         Me.LaboratorioDescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LaboratorioRequerido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LaboratorioResultado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesVersion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesEtapa = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesFecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesParticipantes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesResultados = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesAcciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesResponsables = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesEstado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -808,57 +808,6 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvRevisiones.RowHeadersWidth = 15
         Me.dgvRevisiones.Size = New System.Drawing.Size(804, 368)
         Me.dgvRevisiones.TabIndex = 5
-        '
-        'RevisionesVersion
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle9
-        Me.RevisionesVersion.HeaderText = "Versión"
-        Me.RevisionesVersion.Name = "RevisionesVersion"
-        Me.RevisionesVersion.Width = 50
-        '
-        'RevisionesEtapa
-        '
-        Me.RevisionesEtapa.HeaderText = "Etapa"
-        Me.RevisionesEtapa.Name = "RevisionesEtapa"
-        Me.RevisionesEtapa.Width = 90
-        '
-        'RevisionesFecha
-        '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle10
-        Me.RevisionesFecha.HeaderText = "Fecha"
-        Me.RevisionesFecha.Name = "RevisionesFecha"
-        Me.RevisionesFecha.Width = 70
-        '
-        'RevisionesParticipantes
-        '
-        Me.RevisionesParticipantes.HeaderText = "Participantes"
-        Me.RevisionesParticipantes.Name = "RevisionesParticipantes"
-        Me.RevisionesParticipantes.Width = 150
-        '
-        'RevisionesResultados
-        '
-        Me.RevisionesResultados.HeaderText = "Resultados"
-        Me.RevisionesResultados.Name = "RevisionesResultados"
-        Me.RevisionesResultados.Width = 250
-        '
-        'RevisionesAcciones
-        '
-        Me.RevisionesAcciones.HeaderText = "Acciones"
-        Me.RevisionesAcciones.Name = "RevisionesAcciones"
-        Me.RevisionesAcciones.Width = 250
-        '
-        'RevisionesResponsables
-        '
-        Me.RevisionesResponsables.HeaderText = "Responsables"
-        Me.RevisionesResponsables.Name = "RevisionesResponsables"
-        Me.RevisionesResponsables.Width = 150
-        '
-        'RevisionesEstado
-        '
-        Me.RevisionesEstado.HeaderText = "Estado"
-        Me.RevisionesEstado.Name = "RevisionesEstado"
         '
         'TabCosto
         '
@@ -1895,6 +1844,65 @@ Partial Class IngresoPruebasEnsayo
         Me.LaboratorioResultado.Name = "LaboratorioResultado"
         Me.LaboratorioResultado.Width = 200
         '
+        'RevisionesVersion
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle9
+        Me.RevisionesVersion.HeaderText = "Versión"
+        Me.RevisionesVersion.MaxInputLength = 10
+        Me.RevisionesVersion.Name = "RevisionesVersion"
+        Me.RevisionesVersion.Width = 50
+        '
+        'RevisionesEtapa
+        '
+        Me.RevisionesEtapa.HeaderText = "Etapa"
+        Me.RevisionesEtapa.MaxInputLength = 20
+        Me.RevisionesEtapa.Name = "RevisionesEtapa"
+        Me.RevisionesEtapa.Width = 90
+        '
+        'RevisionesFecha
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle10
+        Me.RevisionesFecha.HeaderText = "Fecha"
+        Me.RevisionesFecha.MaxInputLength = 10
+        Me.RevisionesFecha.Name = "RevisionesFecha"
+        Me.RevisionesFecha.Width = 70
+        '
+        'RevisionesParticipantes
+        '
+        Me.RevisionesParticipantes.HeaderText = "Participantes"
+        Me.RevisionesParticipantes.MaxInputLength = 50
+        Me.RevisionesParticipantes.Name = "RevisionesParticipantes"
+        Me.RevisionesParticipantes.Width = 150
+        '
+        'RevisionesResultados
+        '
+        Me.RevisionesResultados.HeaderText = "Resultados"
+        Me.RevisionesResultados.MaxInputLength = 50
+        Me.RevisionesResultados.Name = "RevisionesResultados"
+        Me.RevisionesResultados.Width = 250
+        '
+        'RevisionesAcciones
+        '
+        Me.RevisionesAcciones.HeaderText = "Acciones"
+        Me.RevisionesAcciones.MaxInputLength = 50
+        Me.RevisionesAcciones.Name = "RevisionesAcciones"
+        Me.RevisionesAcciones.Width = 250
+        '
+        'RevisionesResponsables
+        '
+        Me.RevisionesResponsables.HeaderText = "Responsables"
+        Me.RevisionesResponsables.MaxInputLength = 20
+        Me.RevisionesResponsables.Name = "RevisionesResponsables"
+        Me.RevisionesResponsables.Width = 150
+        '
+        'RevisionesEstado
+        '
+        Me.RevisionesEstado.HeaderText = "Estado"
+        Me.RevisionesEstado.MaxInputLength = 20
+        Me.RevisionesEstado.Name = "RevisionesEstado"
+        '
         'IngresoPruebasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2066,14 +2074,6 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents ProcesoTiempo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProcesoControl As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProcesoSeguridad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesVersion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesFecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesParticipantes As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesResultados As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesResponsables As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesEstado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtComentariosXII As System.Windows.Forms.TextBox
     Friend WithEvents txtComentariosXI As System.Windows.Forms.TextBox
     Friend WithEvents txtComentariosX As System.Windows.Forms.TextBox
@@ -2110,4 +2110,12 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents LaboratorioDescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LaboratorioRequerido As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LaboratorioResultado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesVersion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesFecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesParticipantes As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesResultados As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesResponsables As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesEstado As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
