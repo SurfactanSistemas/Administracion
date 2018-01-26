@@ -110,7 +110,7 @@ Public Class CuentaCorrientePantalla
                 & ", LTRIM(RTRIM(CtaCtePrv.Vencimiento)) as Vencimiento" _
                 & ", LTRIM(RTRIM(CtaCtePrv.NroInterno)) as NroInterno" _
                 & ", LTRIM(RTRIM(CtaCtePrv.Impre)) as Impre" _
-                & " FROM surfactanSA.dbo.CtaCtePrv CtaCtePrv" _
+                & " FROM CtaCtePrv" _
                 & " WHERE CtaCtePrv.Proveedor = '" & WProveedor & "'" _
                 & "#PARCIAL#" _
                 & " ORDER BY CtaCtePrv.Proveedor, CtaCtePrv.OrdFecha, CtaCtePrv.Tipo,CtaCtePrv.Numero"

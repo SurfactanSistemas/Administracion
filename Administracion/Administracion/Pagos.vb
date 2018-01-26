@@ -1303,7 +1303,7 @@ Public Class Pagos
                     If Val(XPago) = 2 Then
 
                         If Val(XParidad) <> 0 Then
-                            XParidadTotal = _TraerCambioDivisa(txtFechaParidad.Text)
+                            XParidadTotal = txtParidad.Text '_TraerCambioDivisa(txtFechaParidad.Text)
 
                             XSaldoUS = (Val(_NormalizarNumero(XSaldo)) / Val(XParidad.Replace(",", "."))) * Val(_NormalizarNumero(XParidadTotal, 4))
 
@@ -1425,7 +1425,7 @@ Public Class Pagos
                     If Val(XPago) = 2 Then
 
                         If Val(XParidad) <> 0 Then
-                            XParidadTotal = _TraerCambioDivisa(txtFechaParidad.Text)
+                            XParidadTotal = txtParidad.Text '_TraerCambioDivisa(txtFechaParidad.Text)
 
                             XSaldoUS = (Val(_NormalizarNumero(XSaldo)) / Val(XParidad.Replace(",", "."))) * Val(_NormalizarNumero(XParidadTotal, 4))
 
@@ -3436,10 +3436,11 @@ Public Class Pagos
                 formaPagos += Val(_NormalizarNumero(row.Cells(5).Value))
             End If
         Next
-        txtTotal.Text = Proceso.formatonumerico(total)
-        lblPagos.Text = Proceso.formatonumerico(pagos)
-        lblFormaPagos.Text = Proceso.formatonumerico(formaPagos + total)
-        lblDiferencia.Text = Proceso.formatonumerico(pagos - formaPagos - total)
+
+        txtTotal.Text = Proceso.formatonumerico(Str$(total))
+        lblPagos.Text = Proceso.formatonumerico(Str$(pagos))
+        lblFormaPagos.Text = Proceso.formatonumerico(Str$(formaPagos + total))
+        lblDiferencia.Text = Proceso.formatonumerico(Str$(pagos - formaPagos - total))
 
     End Sub
 
@@ -4401,13 +4402,13 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub lblDiferencia_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDiferencia.TextChanged
-        lblDiferencia.Text = _NormalizarNumero(lblDiferencia.Text)
-    End Sub
+    'Private Sub lblDiferencia_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDiferencia.TextChanged
+    '    lblDiferencia.Text = _NormalizarNumero(lblDiferencia.Text)
+    'End Sub
 
-    Private Sub lblFormaPagos_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblFormaPagos.TextChanged
-        lblFormaPagos.Text = _NormalizarNumero(lblFormaPagos.Text)
-    End Sub
+    'Private Sub lblFormaPagos_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblFormaPagos.TextChanged
+    '    lblFormaPagos.Text = _NormalizarNumero(lblFormaPagos.Text)
+    'End Sub
 
     Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
 
