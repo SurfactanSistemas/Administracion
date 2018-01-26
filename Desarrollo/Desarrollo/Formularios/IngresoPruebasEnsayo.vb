@@ -1365,9 +1365,14 @@ Public Class IngresoPruebasEnsayo
         Return WDesc
     End Function
 
-    Private Sub _TraerDatosProceso()
+    Private Sub _TraerDatosProceso(Optional ByVal WVersion As String = "")
+
+        If String.IsNullOrEmpty(WVersion) Then
+            WVersion = txtVersion.Text
+        End If
+
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Etapa, Instrucciones, Equipo, Temperatura, Tiempo, Control, Seguridad FROM CargaEnsayoIII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Etapa, Instrucciones, Equipo, Temperatura, Tiempo, Control, Seguridad FROM CargaEnsayoIII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "'")
         Dim dr As SqlDataReader
         Dim WEtapa = "", WInstrucciones = "", WEquipo = "", WTemperatura = "", WTiempo = "", WControl = "", WSeguridad = ""
         Dim WIndice = 0
@@ -2067,6 +2072,16 @@ Public Class IngresoPruebasEnsayo
 
             _TraerDatosFormulaYCosto(Val(txtVersion.Text) - 1)
 
+        End If
+
+    End Sub
+
+    Private Sub btnLeeVersionAntProceso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLeeVersionAntProceso.Click
+
+        If Val(txtVersion.Text) > 1 Then
+
+            _TraerDatosProceso(Val(txtVersion.Text) - 1)
+            
         End If
 
     End Sub
