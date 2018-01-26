@@ -800,44 +800,11 @@ Public Class IngresoPruebasEnsayo
 
                 If msg.WParam.ToInt32() = Keys.Enter Then
 
-                    If valor <> "" Then
-                        '
-                        ' Chequeamos que el Evento en la Celda, se produzca sin errores. En caso de error, se detiene
-                        ' el evento.
-                        '
-                        If Not _EventosGrillaFormula(valor, iCol, iRow) Then
-                            Return True
-                        End If
-
-                    End If
-
-                    Select Case iCol
-
-                        Case 6
-
-                            Try
-
-                                If iRow + 1 > .Rows.Count - 1 Then
-                                    .Rows.Add()
-                                End If
-
-                                .CurrentCell = .Rows(iRow + 1).Cells(0)
-
-                            Catch ex As Exception
-                                MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-                            End Try
-
-                        Case Else
-
-                            If iCol > 2 Then ' Las primeras tres celdas son controladas por los eventos.
-
-                                .CurrentCell = .Rows(iRow).Cells(iCol + 1)
-
-                            End If
-
-                    End Select
-
-                    Return True
+                    '
+                    ' Chequeamos que el Evento en la Celda, se produzca sin errores. En caso de error, se detiene
+                    ' el evento.
+                    '
+                    Return _EventosGrillaFormula(valor, iCol, iRow)
 
                 ElseIf msg.WParam.ToInt32() = Keys.Escape Then
                     .Rows(iRow).Cells(iCol).Value = ""
@@ -881,39 +848,8 @@ Public Class IngresoPruebasEnsayo
                     ' Chequeamos que el Evento en la Celda, se produzca sin errores. En caso de error, se detiene
                     ' el evento.
                     '
-                    If Not _EventosGrillaProceso(valor, iCol, iRow) Then
-                        Return True
-                    End If
+                    Return _EventosGrillaProceso(valor, iCol, iRow)
 
-                    'End If
-
-                    Select Case iCol
-
-                        Case 6
-
-                            Try
-
-                                If iRow + 1 > .Rows.Count - 1 Then
-                                    .Rows.Add()
-                                End If
-
-                                .CurrentCell = .Rows(iRow + 1).Cells(0)
-
-                            Catch ex As Exception
-                                MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-                            End Try
-
-                        Case Else
-
-                            If iCol > 2 Then ' Las primeras tres celdas son controladas por los eventos.
-
-                                .CurrentCell = .Rows(iRow).Cells(iCol + 1)
-
-                            End If
-
-                    End Select
-
-                    Return True
 
                 ElseIf msg.WParam.ToInt32() = Keys.Escape Then
                     .Rows(iRow).Cells(iCol).Value = ""
@@ -930,7 +866,102 @@ Public Class IngresoPruebasEnsayo
 
         End With
 
+        With dgvLaboratorio
+            If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+                .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                Dim iCol = .CurrentCell.ColumnIndex
+                Dim iRow = .CurrentCell.RowIndex
+                Dim valor As String = IIf(IsNothing(.CurrentCell.Value), "", .CurrentCell.Value)
+
+                ' Limitamos los caracteres permitidos para cada una de las columnas.
+                Select Case iCol
+                    Case 0
+                        If Not _EsNumeroOControl(keyData) Then
+                            Return True
+                        End If
+                    Case -1
+                        If Not _EsDecimalOControl(keyData) Then
+                            Return True
+                        End If
+                End Select
+
+                If msg.WParam.ToInt32() = Keys.Enter Then
+
+                    'If valor <> "" Then
+                    '
+                    ' Chequeamos que el Evento en la Celda, se produzca sin errores. En caso de error, se detiene
+                    ' el evento.
+                    '
+                    Return _EventosGrillaLaboratorio(valor, iCol, iRow)
+
+
+                ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                    .Rows(iRow).Cells(iCol).Value = ""
+
+                    If iCol = 4 Then
+                        .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                    Else
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End If
+
+                    .CurrentCell = .Rows(iRow).Cells(iCol)
+                End If
+            End If
+
+        End With
+
+
         Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
+    Private Function _EventosGrillaLaboratorio(ByVal valor As String, ByVal iCol As Integer, ByVal iRow As Integer) As Boolean
+        Try
+            With dgvLaboratorio
+
+                Select Case iCol
+                    Case 0
+
+                        If Val(valor) = 0 Then
+                            Return False
+                        End If
+
+                        Dim WDesc = _TraerDescripcionEnsayo(valor)
+
+                        If Trim(WDesc) = "" Then Return False
+
+                        .Rows(iRow).Cells("LaboratorioDescripcion").Value = WDesc
+
+                        .CurrentCell = .Rows(iRow).Cells("LaboratorioRequerido")
+
+                    Case 3
+                        If iRow + 1 > .Rows.Count - 1 Then
+
+                            If IsNothing(.Rows(iRow).Cells(0).Value) OrElse Val(.Rows(iRow).Cells(0).Value) = 0 Then
+                                Return False
+                            End If
+
+                            .Rows.Add()
+
+                        End If
+
+                        .CurrentCell = .Rows(iRow + 1).Cells(0)
+
+                    Case Else
+
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+
+                End Select
+
+            End With
+
+            Return True
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            Return False
+        End Try
+
     End Function
 
     Private Function _EventosGrillaProceso(ByVal valor As String, ByVal iCol As Integer, ByVal iRow As Integer) As Boolean
@@ -1044,6 +1075,22 @@ Public Class IngresoPruebasEnsayo
                     If Trim(valor) <> "" And UCase(Trim(valor)) <> "S" Then
                         Return False
                     End If
+
+                    With dgvFormula
+
+                        If iRow + 1 > .Rows.Count - 1 Then
+
+                            If IsNothing(.Rows(iRow).Cells(0).Value) OrElse Trim(.Rows(iRow).Cells(0).Value) = "" Then
+                                Return False
+                            End If
+
+                            .Rows.Add()
+
+                        End If
+
+                        .CurrentCell = .Rows(iRow + 1).Cells(0)
+
+                    End With
 
             End Select
 
