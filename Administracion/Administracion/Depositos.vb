@@ -83,7 +83,7 @@ Public Class Depositos
 
         validador.alsoValidate(Val(Proceso.formatonumerico(txtImporte.Text)) = Val(ZSumaImporte), "El campo importe tiene que ser igual a la suma de los valores (" & ZSumaImporte & ")")
         validador.alsoValidate(Not IsNothing(banco), "Debe ingresar un Banco válido.")
-        validador.alsoValidate(validarTipoUnico(), "Sólo puede realizarse un tipo de depósito por carga")
+        'validador.alsoValidate(validarTipoUnico(), "Sólo puede realizarse un tipo de depósito por carga")
         validador.alsoValidate(validarEstadoGrilla(), "Hay campos en la grilla con estados inválidos")
         validador.alsoValidate(Not DAODeposito.existeDepositoNumero(txtNroDeposito.Text), "Ya existe un depósito con número " & txtNroDeposito.Text)
 
@@ -575,68 +575,41 @@ Public Class Depositos
                     WTipoRecibo = Microsoft.VisualBasic.Left$(row.Cells("ClaveCheque").Value, 1)
                     XClaveRecibo = Mid(row.Cells("ClaveCheque").Value, 2, 10)
 
-                    If Val(WTipoRecibo) = 1 Then
+                    If Not IsNothing(row.Cells("ClaveCheque").Value) AndAlso Trim(row.Cells("ClaveCheque").Value) <> "" Then
 
-                        ZSql = ""
-                        ZSql = ZSql + "UPDATE Recibos SET "
-                        ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
-                        ZSql = ZSql + "Destino = " + "'" + XObservaciones + "'"
-                        ZSql = ZSql + " Where Clave = " + "'" + XClaveRecibo + "'"
+                        If Val(WTipoRecibo) = 1 Then
 
-                        WControlaMarcaRecibos(WIndiceMarca) = Microsoft.VisualBasic.Left$(XClaveRecibo, 6)
+                            ZSql = ""
+                            ZSql = ZSql + "UPDATE Recibos SET "
+                            ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
+                            ZSql = ZSql + "Destino = " + "'" + XObservaciones + "'"
+                            ZSql = ZSql + " Where Clave = " + "'" + XClaveRecibo + "'"
 
-                    Else
+                            WControlaMarcaRecibos(WIndiceMarca) = Microsoft.VisualBasic.Left$(XClaveRecibo, 6)
 
-                        Try
-                            WReciboDefintivo = _BuscarReciboDefinitivo(XClaveRecibo)
-                        Catch ex As Exception
-                            If Not IsNothing(trans) Then
-                                trans.Rollback()
-                            End If
-                            MsgBox("Hubo un problema al consultar el numero de Recibo Provisorio Relacionado desde la base de datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
-                            Exit Sub
-                        End Try
+                        Else
+
+                            Try
+                                WReciboDefintivo = _BuscarReciboDefinitivo(XClaveRecibo)
+                            Catch ex As Exception
+                                If Not IsNothing(trans) Then
+                                    trans.Rollback()
+                                End If
+                                MsgBox("Hubo un problema al consultar el numero de Recibo Provisorio Relacionado desde la base de datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+                                Exit Sub
+                            End Try
 
 
-                        ZSql = ""
-                        ZSql = ZSql + "UPDATE RecibosProvi SET "
-                        ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
-                        ZSql = ZSql + "Destino = " + "'" + XObservaciones + "'"
-                        ZSql = ZSql + " Where Clave = " + "'" + XClaveRecibo + "'"
+                            ZSql = ""
+                            ZSql = ZSql + "UPDATE RecibosProvi SET "
+                            ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
+                            ZSql = ZSql + "Destino = " + "'" + XObservaciones + "'"
+                            ZSql = ZSql + " Where Clave = " + "'" + XClaveRecibo + "'"
 
-                    End If
-
-                    Try
-
-                        'cn.Open()
-                        'trans = cn.BeginTransaction
-
-                        cm.CommandText = ZSql
-                        'cm.Transaction = trans
-                        cm.ExecuteNonQuery()
-                        'trans.Commit()
-
-                    Catch ex As Exception
-                        If Not IsNothing(trans) Then
-                            trans.Rollback()
                         End If
-                        MsgBox("Hubo un problema al querer actualizar el estado del cheque en el registro de Recibos Provisorios relacionado a este Depósito en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
-                        Exit Sub
-                    Finally
-
-                        'cn.Close()
-
-                    End Try
-
-                    If WReciboDefintivo <> 0 Then
-
-                        ZSql = ""
-                        ZSql = ZSql + "UPDATE Recibos SET "
-                        ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
-                        ZSql = ZSql + "Destino = " + "'" + XObservaciones + "'"
-                        ZSql = ZSql + " Where Recibo = " + "'" + Proceso.ceros(WReciboDefintivo, 6) + "' AND Numero2 = '" & WNumero2 & "'"
 
                         Try
+
                             'cn.Open()
                             'trans = cn.BeginTransaction
 
@@ -644,11 +617,12 @@ Public Class Depositos
                             'cm.Transaction = trans
                             cm.ExecuteNonQuery()
                             'trans.Commit()
+
                         Catch ex As Exception
                             If Not IsNothing(trans) Then
                                 trans.Rollback()
                             End If
-                            MsgBox("Hubo un problema al querer actualizar el estado del Recibo Definitivo relacionado a este Depósito en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+                            MsgBox("Hubo un problema al querer actualizar el estado del cheque en el registro de Recibos Provisorios relacionado a este Depósito en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
                             Exit Sub
                         Finally
 
@@ -656,6 +630,35 @@ Public Class Depositos
 
                         End Try
 
+                        If WReciboDefintivo <> 0 Then
+
+                            ZSql = ""
+                            ZSql = ZSql + "UPDATE Recibos SET "
+                            ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
+                            ZSql = ZSql + "Destino = " + "'" + XObservaciones + "'"
+                            ZSql = ZSql + " Where Recibo = " + "'" + Proceso.ceros(WReciboDefintivo, 6) + "' AND Numero2 = '" & WNumero2 & "'"
+
+                            Try
+                                'cn.Open()
+                                'trans = cn.BeginTransaction
+
+                                cm.CommandText = ZSql
+                                'cm.Transaction = trans
+                                cm.ExecuteNonQuery()
+                                'trans.Commit()
+                            Catch ex As Exception
+                                If Not IsNothing(trans) Then
+                                    trans.Rollback()
+                                End If
+                                MsgBox("Hubo un problema al querer actualizar el estado del Recibo Definitivo relacionado a este Depósito en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+                                Exit Sub
+                            Finally
+
+                                'cn.Close()
+
+                            End Try
+
+                        End If
                     End If
 
                     Dim WAux, WActualizaMarca
