@@ -207,18 +207,6 @@ Public Class IngresoPruebasEnsayo
 
     End Sub
 
-    Private Sub txtEncargado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRealizado.KeyDown, TextBox1.KeyDown, txtCantidad.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            '    If Trim(txtEncargado.Text) = "" Then : Exit Sub : End If
-
-            'TabControl1.SelectedIndex = 1
-
-        ElseIf e.KeyData = Keys.Escape Then
-            txtRealizado.Text = ""
-        End If
-
-    End Sub
 
     Private Sub btnConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultas.Click
 
@@ -655,11 +643,12 @@ Public Class IngresoPruebasEnsayo
                     ZCantidad = IIf(IsNothing(.Cells("CantidadFormula").Value), "", .Cells("CantidadFormula").Value)
                     ZLote = IIf(IsNothing(.Cells("LoteFormula").Value), "", .Cells("LoteFormula").Value)
                     ZStock = IIf(IsNothing(.Cells("StockFormula").Value), "", .Cells("StockFormula").Value)
-                    ZCosto = IIf(IsNothing(dgvCosto.Rows(.Index).Cells("CostoCosto").Value), "", Helper.formatonumerico(dgvCosto.Rows(.Index).Cells("CostoCosto").Value))
 
                     ZPartiOri = ""
 
                     If ZTipo <> "" Or ZArticulo <> "" Or ZTerminado <> "" Or ZDescripcion <> "" Or ZCantidad <> "" Then
+
+                        ZCosto = IIf(IsNothing(dgvCosto.Rows(.Index).Cells("CostoCosto").Value), "", Helper.formatonumerico(dgvCosto.Rows(.Index).Cells("CostoCosto").Value))
 
                         WRenglon = Helper.ceros(.Index + 1, 2)
                         WClave = WOrden & WVersion & WRenglon
@@ -1010,11 +999,40 @@ Public Class IngresoPruebasEnsayo
 
     End Function
 
+    Private Function _ExisteEnsayo(ByVal WVersion As String) As Boolean
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Orden FROM CargaEnsayo WHERE Orden = '" & UCase(txtOrden.Text) & "' AND Version = '" & txtVersion.Text & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            Return dr.HasRows
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
+
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
 
         If Trim(txtOrden.Text).Replace("-", "") = "" Then Exit Sub
 
-        If _ExisteEnsayo() Then
+        If _ExisteEnsayo(txtVersion.Text) Then
 
             If MsgBox("¿Está seguro de querer Eliminar por completo este Ensayo?", vbYesNo) = MsgBoxResult.No Then Exit Sub
 
@@ -1036,28 +1054,42 @@ Public Class IngresoPruebasEnsayo
 
     Private Sub _EliminarEnsayo()
 
-        'Dim cn As SqlConnection = New SqlConnection()
-        'Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
 
-        'Try
+        Try
 
-        '    'cn.ConnectionString = Helper._ConectarA
-        '    'cn.Open()
-        '    'cm.Connection = cn
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
 
-        '    'cm.CommandText = "DELETE FROM OrdenTrabajo WHERE Orden = '" & txtOrden.Text & "'"
+            cm.CommandText = "DELETE CargaEnsayo WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
 
-        '    'cm.ExecuteNonQuery()
+            cm.CommandText = "DELETE CargaEnsayoII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
 
-        'Catch ex As Exception
-        '    Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        'Finally
+            cm.CommandText = "DELETE CargaEnsayoIII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
 
-        '    cn.Close()
-        '    cn = Nothing
-        '    cm = Nothing
+            cm.CommandText = "DELETE CargaEnsayoIV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
 
-        'End Try
+            cm.CommandText = "DELETE CargaEnsayoV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
+
+            cm.CommandText = "DELETE CargaEnsayoVI WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer Eliminar la Versión " & txtVersion.Text & " de la Orden de Trabajo " & txtOrden.Text & " consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
 
     End Sub
 
@@ -1697,7 +1729,7 @@ Public Class IngresoPruebasEnsayo
 
     End Function
 
-    Private Sub txtVersion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtVersion.KeyDown, txtComentariosXII.KeyDown, txtComentariosXI.KeyDown, txtComentariosX.KeyDown, txtComentariosIX.KeyDown, txtComentariosVIII.KeyDown, txtComentariosVII.KeyDown, txtComentariosVI.KeyDown, txtComentariosV.KeyDown, txtComentariosIV.KeyDown, txtRequisitosI.KeyDown, txtComentariosIII.KeyDown, txtComentariosII.KeyDown, txtComentariosI.KeyDown, txtRequisitosXII.KeyDown, txtRequisitosII.KeyDown, txtRequisitosIII.KeyDown, txtRequisitosIV.KeyDown, txtRequisitosV.KeyDown, txtRequisitosVI.KeyDown, txtRequisitosVII.KeyDown, txtRequisitosVIII.KeyDown, txtRequisitosIX.KeyDown, txtRequisitosX.KeyDown, txtRequisitosXI.KeyDown
+    Private Sub txtVersion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtVersion.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -2314,7 +2346,7 @@ Public Class IngresoPruebasEnsayo
         End If
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtVersion.KeyPress, txtRequisitosV.KeyPress, txtRequisitosIV.KeyPress, txtRequisitosIII.KeyPress, txtRequisitosII.KeyPress, txtComentariosXII.KeyPress, txtComentariosXI.KeyPress, txtComentariosX.KeyPress, txtComentariosIX.KeyPress, txtComentariosVIII.KeyPress, txtComentariosVII.KeyPress, txtComentariosVI.KeyPress, txtComentariosV.KeyPress, txtComentariosIV.KeyPress, txtComentariosIII.KeyPress, txtComentariosII.KeyPress, txtComentariosI.KeyPress, txtRequisitosXII.KeyPress, txtRequisitosXI.KeyPress, txtRequisitosX.KeyPress, txtRequisitosIX.KeyPress, txtRequisitosVIII.KeyPress, txtRequisitosVII.KeyPress, txtRequisitosVI.KeyPress, txtRequisitosI.KeyPress
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtVersion.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
@@ -2963,5 +2995,338 @@ Public Class IngresoPruebasEnsayo
 
         End Try
 
+    End Sub
+
+    Private Sub txtRequisitosI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosI.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosI.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosI.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosI.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosI.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRequisitosII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosII.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosIII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosII.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRequisitosIII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosIII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosIII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosIII.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosIII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosIII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosIV.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosIII.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRequisitosIV_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosIV.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosIV.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosIV.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosIV_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosIV.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosV.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosIV.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRequisitosV_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosV.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosV.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosV.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosV_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosV.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosVI.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosV.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRequisitosVI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosVI.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosVI.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosVI.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosVI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosVI.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosVII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosVI.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRequisitosVII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosVII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosVII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosVII.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosVII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosVII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosVIII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosVII.Text = ""
+        End If
+
+    End Sub
+
+
+    Private Sub txtRequisitosVIII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosVIII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosVIII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosVIII.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosVIII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosVIII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosIX.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosVIII.Text = ""
+        End If
+
+    End Sub
+
+
+    Private Sub txtRequisitosIX_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosIX.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosIX.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosIX.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosIX_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosIX.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosX.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosIX.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRequisitosX_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosX.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosX.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosX.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosX_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosX.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosXI.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosX.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRequisitosXI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosXI.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosXI.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosXI.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosXI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosXI.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosXII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosXI.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRequisitosXII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosXII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtComentariosXII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRequisitosXII.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtComentariosXII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComentariosXII.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRequisitosI.Text) = "" Then : Exit Sub : End If
+
+            txtRequisitosI.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtComentariosXII.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCantidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCantidad.KeyDown
+        If e.KeyData = Keys.Enter Then
+            '    If Trim(txtEncargado.Text) = "" Then : Exit Sub : End If
+
+            TabControl1.SelectedIndex = 0
+
+            txtCantidad.Text = Helper.formatonumerico(txtCantidad.Text, 4)
+
+            With dgvFormula
+                If .Rows.Count > 0 Then
+                    .CurrentCell = .Rows(0).Cells(0)
+                End If
+            End With
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCantidad.Text = ""
+        End If
     End Sub
 End Class
