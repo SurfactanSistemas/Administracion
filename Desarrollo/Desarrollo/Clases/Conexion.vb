@@ -90,15 +90,22 @@ Public Class Conexion
 
         _empresa = DeterminarBasePara(empresa)
 
-        If Not IsNothing(_empresa) Then
+        Return _ArmarCS(_empresa)
+
+    End Function
+
+    Private Shared Function _ArmarCS(ByVal WEmpresa As String)
+
+        If Not String.IsNullOrEmpty(WEmpresa) Then
 
             Dim cs = Configuration.ConfigurationManager.ConnectionStrings("CS").ToString
 
-            Return cs.Replace("#EMPRESA#", _empresa)
+            Return cs.Replace("#EMPRESA#", WEmpresa)
 
         Else
             Throw New Exception("No se pudo encontrar la empresa a la que se quiere conectar.")
         End If
+
     End Function
 
     Public Shared Function _ConectarASegunID(ByVal empresa As Integer) As String
@@ -109,7 +116,7 @@ Public Class Conexion
 
         If Trim(_empresa) = "" Then Throw New Exception("No se pudo encontrar la empresa " & empresa)
 
-        Return _ConectarA(_empresa)
+        Return _ArmarCS(_empresa)
 
     End Function
 
