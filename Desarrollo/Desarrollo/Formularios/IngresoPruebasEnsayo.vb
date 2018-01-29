@@ -71,6 +71,10 @@ Public Class IngresoPruebasEnsayo
 
         Next
 
+        For Each _nota As RichTextBox In {txtNotasProceso, txtNotasLaboratorio, txtNotasEnsayosAdicionales, txtNotasDocumentacion}
+            _nota.LoadFile(Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "blanco.rtf")
+        Next
+
     End Sub
 
     Private Function _CamposCheckboxs() As CheckBox()
