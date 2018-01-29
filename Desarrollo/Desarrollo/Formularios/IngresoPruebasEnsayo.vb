@@ -2484,4 +2484,14 @@ Public Class IngresoPruebasEnsayo
         End If
 
     End Sub
+
+    Private Sub btnImprimeProceso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimeProceso.Click
+
+        With VistaPrevia
+            .DesdeArchivo(Configuration.ConfigurationManager.AppSettings("reportsLocation") & "listaproceso.rpt")
+            .Formula = "{CargaEnsayoIII.Orden}='" & txtOrden.Text & "' AND {CargaEnsayoIII.Version}='" & txtVersion.Text & "'"
+            .Mostrar()
+        End With
+
+    End Sub
 End Class
