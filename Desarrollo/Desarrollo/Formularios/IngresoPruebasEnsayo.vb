@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 
 Public Class IngresoPruebasEnsayo
 
@@ -218,9 +219,10 @@ Public Class IngresoPruebasEnsayo
     Private Sub btnConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultas.Click
 
         Try
-            _CargarClientes()
+            '_CargarClientes()
 
             pnlConsulta.Visible = True
+            lstOpciones.Visible = True
             lstConsulta.Visible = True
             lstFiltrada.Visible = False
             txtAyuda.Text = ""
@@ -238,18 +240,18 @@ Public Class IngresoPruebasEnsayo
         Dim cm As SqlCommand = New SqlCommand("")
         Dim dr As SqlDataReader
         Dim WRazones(), WClaves() As String
-        Dim WAux = 0
+        Dim WAux = 0, WClave = "", WRazon = ""
 
         Try
             WIndice.Items.Clear()
             lstConsulta.Items.Clear()
             lstFiltrada.Items.Clear()
 
-            cn.ConnectionString = Helper._ConectarA("SurfactanSA")
+            cn.ConnectionString = Helper._ConectarA()
             cn.Open()
             cm.Connection = cn
 
-            cm.CommandText = "SELECT Count(*) as Total FROM Cliente"
+            cm.CommandText = "SELECT Count(DISTINCT Cliente) as Total FROM OrdenTrabajo WHERE Cliente <> '' AND Cliente IS NOT NULL"
 
             dr = cm.ExecuteReader
 
@@ -268,7 +270,7 @@ Public Class IngresoPruebasEnsayo
                 dr.Close()
             End If
 
-            cm.CommandText = "SELECT Cliente, Razon FROM Cliente WHERE Cliente is not null AND Razon is not null"
+            cm.CommandText = "SELECT DISTINCT OT.Cliente, C.Razon FROM OrdenTrabajo as OT FULL OUTER JOIN Cliente as C ON OT.Cliente = C.Cliente WHERE Ot.Cliente <> ''"
 
             dr = cm.ExecuteReader()
 
@@ -276,10 +278,16 @@ Public Class IngresoPruebasEnsayo
 
                 Do While dr.Read()
 
+                    WClave = ""
+                    WRazon = ""
+
                     With dr
 
-                        WRazones(WAux) = .Item("Razon")
-                        WClaves(WAux) = .Item("Cliente")
+                        WRazon = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                        WClave = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+
+                        WRazones(WAux) = UCase(Trim(WClave)) & Space(5) & Trim(WRazon)
+                        WClaves(WAux) = WClave
 
                         WAux += 1
 
@@ -363,16 +371,51 @@ Public Class IngresoPruebasEnsayo
     Private Sub lstConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
 
         Try
-            Dim WValor = lstConsulta.SelectedItem
+            Dim WValor As String = lstConsulta.SelectedItem
 
             If IsNothing(WValor) OrElse Trim(WValor) = "" Then Exit Sub
 
-            'Dim WClave = ""
+            If lstOpciones.SelectedIndex = 0 Then
+                Dim WOrden = "", WVersion = ""
 
-            'WClave = WIndice.Items(lstConsulta.SelectedIndex)
+                WOrden = WValor.SliceLeft(8)
+                WVersion = WValor.Substring(9, 4)
 
-            'txtCliente.Text = WClave
-            'txtDescCliente.Text = _TraerNombreCliente(WClave)
+                txtOrden.Text = WOrden
+                txtVersion.Text = Val(WVersion)
+
+                txtVersion_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+            ElseIf lstOpciones.SelectedIndex = 1 Then
+
+                If WIndice.Items.Count > 0 Then
+
+                    WValor = WValor.Substring(0, 6)
+
+                    _CargarOrdenesTrabajoParaCliente(WValor)
+
+                    WIndice.Items.Clear()
+
+                    txtAyuda.Text = ""
+                    txtAyuda.Focus()
+
+                    Exit Sub
+
+                Else
+
+                    Dim WOrden = "", WVersion = ""
+
+                    WOrden = WValor.SliceLeft(8)
+                    WVersion = WValor.Substring(9, 4)
+
+                    txtOrden.Text = WOrden
+                    txtVersion.Text = Val(WVersion)
+
+                    txtVersion_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+                End If
+
+            End If
 
             btnCerrarConsulta.PerformClick()
 
@@ -381,8 +424,74 @@ Public Class IngresoPruebasEnsayo
         End Try
     End Sub
 
+    Private Sub _CargarOrdenesTrabajoParaCliente(ByVal wValor As String)
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+        Dim WTemp = "", WOrden = "", WVersion = "", WObservaciones = "", WCliente = "", WDescCliente = ""
+        Dim WItem As String = ""
+
+        Try
+            lstConsulta.Items.Clear()
+            WIndice.Items.Clear()
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "SELECT CE.Orden, CE.Version, OT.Observaciones, OT.Cliente, ISNULL(C.Razon, '') " _
+                                              & " as DesCliente FROM CargaEnsayo as CE, OrdenTrabajo as OT " _
+                                              & " FULL OUTER JOIN Cliente as C ON OT.Cliente = C.Cliente WHERE CE.Orden <> '  -     ' " _
+                                              & " AND OT.Cliente = '" & wValor & "' AND CE.Orden = OT.Orden ORDER BY CE.Clave, ce.Orden, ce.Version"
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+
+                    WItem = ""
+                    WTemp = ""
+
+                    WOrden = IIf(IsDBNull(dr.Item("Orden")), "", dr.Item("Orden"))
+                    WVersion = IIf(IsDBNull(dr.Item("Version")), "", dr.Item("Version"))
+                    WObservaciones = IIf(IsDBNull(dr.Item("Observaciones")), "", dr.Item("Observaciones"))
+                    WCliente = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
+                    WDescCliente = IIf(IsDBNull(dr.Item("DesCliente")), "", dr.Item("DesCliente"))
+
+                    WTemp = Trim(WOrden) & "/" & Trim(WVersion)
+
+                    WItem = WTemp.PadRight(15) & Space(5) & Trim(WObservaciones)
+
+                    If Trim(WDescCliente) <> "" Then
+                        WItem &= Space(5) & "(" & Trim(WDescCliente) & ")"
+                    End If
+
+                    lstConsulta.Items.Add(WItem)
+                    WIndice.Items.Add(WTemp)
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
         pnlConsulta.Visible = False
+        lstConsulta.Visible = True
+        lstOpciones.Visible = True
+        lstFiltrada.Visible = False
+        txtAyuda.Text = ""
         'txtObservaciones.Focus()
     End Sub
 
@@ -1401,6 +1510,8 @@ Public Class IngresoPruebasEnsayo
                 _TraerDatosRevisiones()
                 ' Cargamos los Datos de Entrada.
                 _TraerDatosEntrada()
+                ' Cargamos los Archivos RFT.
+                _CargarRFTs()
 
                 txtFecha.Focus()
             Catch ex As Exception
@@ -1413,6 +1524,46 @@ Public Class IngresoPruebasEnsayo
 
     End Sub
 
+    Private Sub _CargarRFTs()
+        Try
+
+            txtNotasProceso.LoadFile(_BuscarArchivo("P"))
+            txtNotasLaboratorio.LoadFile(_BuscarArchivo("E"))
+            txtNotasEnsayosAdicionales.LoadFile(_BuscarArchivo("C"))
+            txtNotasDocumentacion.LoadFile(_BuscarArchivo("V"))
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer recuperar los archivos RFT asociados a esta Orden de Trabajo." & vbCrLf & vbCrLf & " Motivo: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Function _BuscarArchivo(ByVal WPrefijo As String) As String
+
+        If String.IsNullOrEmpty(WPrefijo) Then Throw New Exception("Nombre de Archivo Incorrecto")
+
+        Dim WRutaI = "", WRutaII = "", WNombreArchivo = ""
+
+        WNombreArchivo = UCase(WPrefijo) & txtOrden.Text & Helper.ceros(txtVersion.Text, 4) & ".rtf"
+
+        WRutaI = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1")
+        WRutaII = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_2")
+
+        If File.Exists(WRutaI & WNombreArchivo) Then
+
+            Return WRutaI & WNombreArchivo
+
+        ElseIf File.Exists(WRutaII & WNombreArchivo) Then
+
+            Return WRutaII & WNombreArchivo
+
+        Else
+
+            Return WRutaI & "blanco.rtf"
+
+        End If
+
+    End Function
+
     Private Sub _TraerDatosEntrada(Optional ByVal WVersion As String = "")
 
         If String.IsNullOrEmpty(WVersion) Then
@@ -1420,7 +1571,7 @@ Public Class IngresoPruebasEnsayo
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Requisito, Informativo, AVerificar, Comentario FROM CargaEnsayoVI WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Requisito, Informativo, AVerificar, Comentario FROM CargaEnsayoVI WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WRequisito = "", WInformativo = "", WAVerificar = "", WComentario = ""
         Dim WIndice = 0
@@ -1488,7 +1639,7 @@ Public Class IngresoPruebasEnsayo
 
     Private Sub _TraerDatosRevisiones()
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Version, Etapa, Fecha, Participantes, Resultados, Acciones, Responsables, Estado FROM CargaEnsayoV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Version, Etapa, Fecha, Participantes, Resultados, Acciones, Responsables, Estado FROM CargaEnsayoV WHERE Orden = '" & txtOrden.Text & "' ORDER BY Orden, Renglon")
         Dim dr As SqlDataReader
         Dim WVersion = "", WEtapa = "", WFecha = "", WParticipantes = "", WResultados = "", WAcciones = "", WResponsables = "", WEstado = ""
         Dim WIndice = 0
@@ -1560,7 +1711,7 @@ Public Class IngresoPruebasEnsayo
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Ensayo, Descripcion, Esperado, Resultado FROM CargaEnsayoIV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Ensayo, Descripcion, Esperado, Resultado FROM CargaEnsayoIV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WEnsayo = "", WDescripcion = "", WEsperado = "", WResultado = ""
         Dim WIndice = 0
@@ -1596,7 +1747,7 @@ Public Class IngresoPruebasEnsayo
                     ' Cargamos los datos de la Formula.
                     With dgvLaboratorio.Rows(WIndice)
 
-                        .Cells("LaboratorioEnsayo").Value = UCase(WEnsayo)
+                        .Cells("LaboratorioEnsayo").Value = IIf(Val(WEnsayo) = 0, "", WEnsayo)
                         .Cells("LaboratorioDescripcion").Value = Trim(WDescripcion)
                         .Cells("LaboratorioRequerido").Value = Trim(WEsperado)
                         .Cells("LaboratorioResultado").Value = Trim(WResultado)
@@ -1605,11 +1756,13 @@ Public Class IngresoPruebasEnsayo
 
                 Loop
 
+            Else
+
                 If Not dr.IsClosed Then
                     dr.Close()
                 End If
 
-                cm.CommandText = "SELECT Ensayo, Descripcion, Resultado FROM OrdenTrabajoII WHERE Orden = '" & txtOrden.Text & "'"
+                cm.CommandText = "SELECT Ensayo, Descripcion, Resultado FROM OrdenTrabajoII WHERE Orden = '" & txtOrden.Text & "' ORDER BY Clave"
 
                 dr = cm.ExecuteReader
 
@@ -1645,25 +1798,25 @@ Public Class IngresoPruebasEnsayo
 
                 End If
 
-
-                For Each _row As DataGridViewRow In dgvLaboratorio.Rows
-
-                    With _row
-
-                        WEnsayo = .Cells("LaboratorioEnsayo").Value
-
-                        If Val(WEnsayo) <> 0 Then
-
-                            .Cells("LaboratorioDescripcion").Value = _TraerDescripcionEnsayo(WEnsayo)
-
-                        End If
-
-                    End With
-
-                Next
-
-                dgvLaboratorio.Rows.Add()
             End If
+
+            For Each _row As DataGridViewRow In dgvLaboratorio.Rows
+
+                With _row
+
+                    WEnsayo = .Cells("LaboratorioEnsayo").Value
+
+                    If Val(WEnsayo) <> 0 Then
+
+                        .Cells("LaboratorioDescripcion").Value = _TraerDescripcionEnsayo(WEnsayo)
+
+                    End If
+
+                End With
+
+            Next
+
+            dgvLaboratorio.Rows.Add()
 
         Catch ex As Exception
             Throw New Exception("Hubo un problema al querer consultar los datos de Laboratorio desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
@@ -1723,7 +1876,7 @@ Public Class IngresoPruebasEnsayo
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Etapa, Instrucciones, Equipo, Temperatura, Tiempo, Control, Seguridad FROM CargaEnsayoIII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Etapa, Instrucciones, Equipo, Temperatura, Tiempo, Control, Seguridad FROM CargaEnsayoIII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WEtapa = "", WInstrucciones = "", WEquipo = "", WTemperatura = "", WTiempo = "", WControl = "", WSeguridad = ""
         Dim WIndice = 0
@@ -1840,7 +1993,7 @@ Public Class IngresoPruebasEnsayo
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Tipo, Articulo, Terminado, Descripcion, Cantidad, Lote, Stock, Costo FROM CargaEnsayoII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Articulo, Terminado")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Tipo, Articulo, Terminado, Descripcion, Cantidad, Lote, Stock, Costo FROM CargaEnsayoII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WTipo = "", WArticulo = "", WTerminado = "", WDescripcion = "", WCantidad = "", WLote = "", WStock = "", WCosto = ""
         Dim WIndice = 0
@@ -2034,13 +2187,13 @@ Public Class IngresoPruebasEnsayo
 
                 WImporte = WCantidad * WCosto
 
-                If WImporte <> 0 Then
+                'If WImporte <> 0 Then
 
-                    .Cells("CostoImporte").Value = Helper.formatonumerico(Str$(WImporte))
+                .Cells("CostoImporte").Value = Helper.formatonumerico(Str$(WImporte))
 
-                    WCostoTotal += WImporte
+                WCostoTotal += WImporte
 
-                End If
+                'End If
 
             End With
 
@@ -2492,6 +2645,97 @@ Public Class IngresoPruebasEnsayo
             .Formula = "{CargaEnsayoIII.Orden}='" & txtOrden.Text & "' AND {CargaEnsayoIII.Version}='" & txtVersion.Text & "'"
             .Mostrar()
         End With
+
+    End Sub
+
+    Private Sub lstOpciones_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstOpciones.MouseClick
+        Try
+
+            If lstOpciones.SelectedIndex = 0 Then
+
+                _CargarConsultaEnsayos()
+
+            ElseIf lstOpciones.SelectedIndex = 1 Then
+
+                _CargarClientes()
+
+            End If
+
+            pnlConsulta.Visible = True
+            lstOpciones.Visible = False
+            lstFiltrada.Visible = False
+            lstConsulta.Visible = True
+            txtAyuda.Text = ""
+            txtAyuda.Focus()
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            pnlConsulta.Visible = False
+            lstOpciones.Visible = True
+            lstFiltrada.Visible = False
+            lstConsulta.Visible = True
+        End Try
+    End Sub
+
+    Private Sub _CargarConsultaEnsayos()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+        Dim WTemp = "", WOrden = "", WVersion = "", WObservaciones = "", WCliente = "", WDescCliente = ""
+        Dim WItem As String = ""
+
+        Try
+            lstConsulta.Items.Clear()
+            WIndice.Items.Clear()
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "SELECT CE.Orden, CE.Version, OT.Observaciones, OT.Cliente, ISNULL(C.Razon, '') " _
+                                              & " as DesCliente FROM CargaEnsayo as CE, OrdenTrabajo as OT " _
+                                              & " FULL OUTER JOIN Cliente as C ON OT.Cliente = C.Cliente WHERE CE.Orden <> '  -     ' " _
+                                              & " AND CE.Orden = OT.Orden ORDER BY CE.Clave, ce.Orden, ce.Version"
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+
+                    WItem = ""
+                    WTemp = ""
+
+                    WOrden = IIf(IsDBNull(dr.Item("Orden")), "", dr.Item("Orden"))
+                    WVersion = IIf(IsDBNull(dr.Item("Version")), "", dr.Item("Version"))
+                    WObservaciones = IIf(IsDBNull(dr.Item("Observaciones")), "", dr.Item("Observaciones"))
+                    WCliente = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
+                    WDescCliente = IIf(IsDBNull(dr.Item("DesCliente")), "", dr.Item("DesCliente"))
+
+                    WTemp = Trim(WOrden) & "/" & Trim(WVersion)
+
+                    WItem = WTemp.PadRight(15) & Space(5) & Trim(WObservaciones)
+
+                    If Trim(WDescCliente) <> "" Then
+                        WItem &= Space(5) & "(" & Trim(WDescCliente) & ")"
+                    End If
+
+                    lstConsulta.Items.Add(WItem)
+                    WIndice.Items.Add(WTemp)
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
 
     End Sub
 End Class

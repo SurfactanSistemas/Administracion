@@ -68,7 +68,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnLeerVersionAntFormula = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabProceso = New System.Windows.Forms.TabPage()
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.txtNotasProceso = New System.Windows.Forms.RichTextBox()
         Me.dgvProceso = New System.Windows.Forms.DataGridView()
         Me.ProcesoEtapa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProcesoDetallesTrabajo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -82,7 +82,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnImprimeProceso = New System.Windows.Forms.Button()
         Me.btnLeeVersionAntProceso = New System.Windows.Forms.Button()
         Me.TabResultadosLaboratorio = New System.Windows.Forms.TabPage()
-        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
+        Me.txtNotasLaboratorio = New System.Windows.Forms.RichTextBox()
         Me.dgvLaboratorio = New System.Windows.Forms.DataGridView()
         Me.LaboratorioEnsayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LaboratorioDescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -93,7 +93,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnLeerVersionAntLab = New System.Windows.Forms.Button()
         Me.TabEnsayosAdicionales = New System.Windows.Forms.TabPage()
-        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
+        Me.txtNotasEnsayosAdicionales = New System.Windows.Forms.RichTextBox()
         Me.TabRevisiones = New System.Windows.Forms.TabPage()
         Me.dgvRevisiones = New System.Windows.Forms.DataGridView()
         Me.RevisionesVersion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -121,7 +121,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label14 = New System.Windows.Forms.Label()
         Me.btnRecalculaCosto = New System.Windows.Forms.Button()
         Me.TabDocumentacion = New System.Windows.Forms.TabPage()
-        Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
+        Me.txtNotasDocumentacion = New System.Windows.Forms.RichTextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.TabDatosEntrada = New System.Windows.Forms.TabPage()
         Me.btnLeerVersionAntDatosEntrada = New System.Windows.Forms.Button()
@@ -204,6 +204,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnCerrarNota = New System.Windows.Forms.Button()
         Me.txtNota = New System.Windows.Forms.RichTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstOpciones = New System.Windows.Forms.ListBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -556,7 +557,7 @@ Partial Class IngresoPruebasEnsayo
         'TabProceso
         '
         Me.TabProceso.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.TabProceso.Controls.Add(Me.RichTextBox1)
+        Me.TabProceso.Controls.Add(Me.txtNotasProceso)
         Me.TabProceso.Controls.Add(Me.dgvProceso)
         Me.TabProceso.Controls.Add(Me.txtRealizadoII)
         Me.TabProceso.Controls.Add(Me.Label10)
@@ -570,14 +571,14 @@ Partial Class IngresoPruebasEnsayo
         Me.TabProceso.TabIndex = 1
         Me.TabProceso.Text = "Proceso"
         '
-        'RichTextBox1
+        'txtNotasProceso
         '
-        Me.RichTextBox1.EnableAutoDragDrop = True
-        Me.RichTextBox1.Location = New System.Drawing.Point(8, 229)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(804, 128)
-        Me.RichTextBox1.TabIndex = 9
-        Me.RichTextBox1.Text = ""
+        Me.txtNotasProceso.EnableAutoDragDrop = True
+        Me.txtNotasProceso.Location = New System.Drawing.Point(8, 229)
+        Me.txtNotasProceso.Name = "txtNotasProceso"
+        Me.txtNotasProceso.Size = New System.Drawing.Size(804, 128)
+        Me.txtNotasProceso.TabIndex = 9
+        Me.txtNotasProceso.Text = ""
         '
         'dgvProceso
         '
@@ -686,7 +687,7 @@ Partial Class IngresoPruebasEnsayo
         'TabResultadosLaboratorio
         '
         Me.TabResultadosLaboratorio.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.TabResultadosLaboratorio.Controls.Add(Me.RichTextBox2)
+        Me.TabResultadosLaboratorio.Controls.Add(Me.txtNotasLaboratorio)
         Me.TabResultadosLaboratorio.Controls.Add(Me.dgvLaboratorio)
         Me.TabResultadosLaboratorio.Controls.Add(Me.TextBox3)
         Me.TabResultadosLaboratorio.Controls.Add(Me.Label11)
@@ -698,14 +699,14 @@ Partial Class IngresoPruebasEnsayo
         Me.TabResultadosLaboratorio.TabIndex = 2
         Me.TabResultadosLaboratorio.Text = "Resultados Laboratorio"
         '
-        'RichTextBox2
+        'txtNotasLaboratorio
         '
-        Me.RichTextBox2.EnableAutoDragDrop = True
-        Me.RichTextBox2.Location = New System.Drawing.Point(99, 228)
-        Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.Size = New System.Drawing.Size(713, 128)
-        Me.RichTextBox2.TabIndex = 15
-        Me.RichTextBox2.Text = ""
+        Me.txtNotasLaboratorio.EnableAutoDragDrop = True
+        Me.txtNotasLaboratorio.Location = New System.Drawing.Point(99, 228)
+        Me.txtNotasLaboratorio.Name = "txtNotasLaboratorio"
+        Me.txtNotasLaboratorio.Size = New System.Drawing.Size(713, 128)
+        Me.txtNotasLaboratorio.TabIndex = 15
+        Me.txtNotasLaboratorio.Text = ""
         '
         'dgvLaboratorio
         '
@@ -799,21 +800,21 @@ Partial Class IngresoPruebasEnsayo
         'TabEnsayosAdicionales
         '
         Me.TabEnsayosAdicionales.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.TabEnsayosAdicionales.Controls.Add(Me.RichTextBox3)
+        Me.TabEnsayosAdicionales.Controls.Add(Me.txtNotasEnsayosAdicionales)
         Me.TabEnsayosAdicionales.Location = New System.Drawing.Point(4, 34)
         Me.TabEnsayosAdicionales.Name = "TabEnsayosAdicionales"
         Me.TabEnsayosAdicionales.Size = New System.Drawing.Size(821, 403)
         Me.TabEnsayosAdicionales.TabIndex = 3
         Me.TabEnsayosAdicionales.Text = "Ensayos Adicionales"
         '
-        'RichTextBox3
+        'txtNotasEnsayosAdicionales
         '
-        Me.RichTextBox3.EnableAutoDragDrop = True
-        Me.RichTextBox3.Location = New System.Drawing.Point(23, 18)
-        Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.Size = New System.Drawing.Size(774, 367)
-        Me.RichTextBox3.TabIndex = 16
-        Me.RichTextBox3.Text = ""
+        Me.txtNotasEnsayosAdicionales.EnableAutoDragDrop = True
+        Me.txtNotasEnsayosAdicionales.Location = New System.Drawing.Point(23, 18)
+        Me.txtNotasEnsayosAdicionales.Name = "txtNotasEnsayosAdicionales"
+        Me.txtNotasEnsayosAdicionales.Size = New System.Drawing.Size(774, 367)
+        Me.txtNotasEnsayosAdicionales.TabIndex = 16
+        Me.txtNotasEnsayosAdicionales.Text = ""
         '
         'TabRevisiones
         '
@@ -1066,7 +1067,7 @@ Partial Class IngresoPruebasEnsayo
         'TabDocumentacion
         '
         Me.TabDocumentacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.TabDocumentacion.Controls.Add(Me.RichTextBox4)
+        Me.TabDocumentacion.Controls.Add(Me.txtNotasDocumentacion)
         Me.TabDocumentacion.Controls.Add(Me.Label16)
         Me.TabDocumentacion.Location = New System.Drawing.Point(4, 34)
         Me.TabDocumentacion.Name = "TabDocumentacion"
@@ -1074,14 +1075,14 @@ Partial Class IngresoPruebasEnsayo
         Me.TabDocumentacion.TabIndex = 6
         Me.TabDocumentacion.Text = "Documentación"
         '
-        'RichTextBox4
+        'txtNotasDocumentacion
         '
-        Me.RichTextBox4.EnableAutoDragDrop = True
-        Me.RichTextBox4.Location = New System.Drawing.Point(23, 40)
-        Me.RichTextBox4.Name = "RichTextBox4"
-        Me.RichTextBox4.Size = New System.Drawing.Size(774, 347)
-        Me.RichTextBox4.TabIndex = 17
-        Me.RichTextBox4.Text = ""
+        Me.txtNotasDocumentacion.EnableAutoDragDrop = True
+        Me.txtNotasDocumentacion.Location = New System.Drawing.Point(23, 40)
+        Me.txtNotasDocumentacion.Name = "txtNotasDocumentacion"
+        Me.txtNotasDocumentacion.Size = New System.Drawing.Size(774, 347)
+        Me.txtNotasDocumentacion.TabIndex = 17
+        Me.txtNotasDocumentacion.Text = ""
         '
         'Label16
         '
@@ -1647,7 +1648,7 @@ Partial Class IngresoPruebasEnsayo
         'WIndice
         '
         Me.WIndice.FormattingEnabled = True
-        Me.WIndice.Location = New System.Drawing.Point(733, 16)
+        Me.WIndice.Location = New System.Drawing.Point(783, 12)
         Me.WIndice.Name = "WIndice"
         Me.WIndice.Size = New System.Drawing.Size(63, 17)
         Me.WIndice.TabIndex = 4
@@ -1798,13 +1799,14 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(772, 49)
+        Me.pnlConsulta.Location = New System.Drawing.Point(76, 167)
         Me.pnlConsulta.Name = "pnlConsulta"
-        Me.pnlConsulta.Size = New System.Drawing.Size(108, 89)
+        Me.pnlConsulta.Size = New System.Drawing.Size(720, 350)
         Me.pnlConsulta.TabIndex = 2
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lstOpciones)
         Me.GroupBox1.Controls.Add(Me.btnCerrarConsulta)
         Me.GroupBox1.Controls.Add(Me.lstFiltrada)
         Me.GroupBox1.Controls.Add(Me.lstConsulta)
@@ -1812,7 +1814,7 @@ Partial Class IngresoPruebasEnsayo
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox1.Location = New System.Drawing.Point(18, 10)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(368, 334)
+        Me.GroupBox1.Size = New System.Drawing.Size(683, 334)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Consulta Clientes"
@@ -1820,7 +1822,7 @@ Partial Class IngresoPruebasEnsayo
         'btnCerrarConsulta
         '
         Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnCerrarConsulta.Location = New System.Drawing.Point(124, 293)
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(284, 293)
         Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
         Me.btnCerrarConsulta.Size = New System.Drawing.Size(115, 28)
         Me.btnCerrarConsulta.TabIndex = 0
@@ -1830,25 +1832,25 @@ Partial Class IngresoPruebasEnsayo
         'lstFiltrada
         '
         Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.Location = New System.Drawing.Point(18, 49)
+        Me.lstFiltrada.Location = New System.Drawing.Point(19, 49)
         Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(326, 238)
+        Me.lstFiltrada.Size = New System.Drawing.Size(643, 238)
         Me.lstFiltrada.TabIndex = 2
         Me.lstFiltrada.Visible = False
         '
         'lstConsulta
         '
         Me.lstConsulta.FormattingEnabled = True
-        Me.lstConsulta.Location = New System.Drawing.Point(18, 49)
+        Me.lstConsulta.Location = New System.Drawing.Point(19, 49)
         Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(326, 238)
+        Me.lstConsulta.Size = New System.Drawing.Size(643, 238)
         Me.lstConsulta.TabIndex = 1
         '
         'txtAyuda
         '
-        Me.txtAyuda.Location = New System.Drawing.Point(18, 20)
+        Me.txtAyuda.Location = New System.Drawing.Point(20, 19)
         Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(326, 20)
+        Me.txtAyuda.Size = New System.Drawing.Size(642, 20)
         Me.txtAyuda.TabIndex = 0
         '
         'pnlNotas
@@ -1905,6 +1907,15 @@ Partial Class IngresoPruebasEnsayo
         Me.txtNota.Size = New System.Drawing.Size(467, 328)
         Me.txtNota.TabIndex = 0
         Me.txtNota.Text = ""
+        '
+        'lstOpciones
+        '
+        Me.lstOpciones.FormattingEnabled = True
+        Me.lstOpciones.Items.AddRange(New Object() {"Ensayos", "Ensayos por Cliente"})
+        Me.lstOpciones.Location = New System.Drawing.Point(20, 48)
+        Me.lstOpciones.Name = "lstOpciones"
+        Me.lstOpciones.Size = New System.Drawing.Size(643, 238)
+        Me.lstOpciones.TabIndex = 3
         '
         'IngresoPruebasEnsayo
         '
@@ -2008,20 +2019,20 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents RichTextBox1 As System.Windows.Forms.RichTextBox
+    Friend WithEvents txtNotasProceso As System.Windows.Forms.RichTextBox
     Friend WithEvents dgvProceso As System.Windows.Forms.DataGridView
     Friend WithEvents txtRealizadoII As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents btnImprimeProceso As System.Windows.Forms.Button
     Friend WithEvents btnLeeVersionAntProceso As System.Windows.Forms.Button
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents RichTextBox2 As System.Windows.Forms.RichTextBox
+    Friend WithEvents txtNotasLaboratorio As System.Windows.Forms.RichTextBox
     Friend WithEvents dgvLaboratorio As System.Windows.Forms.DataGridView
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents btnLeerVersionAntLab As System.Windows.Forms.Button
-    Friend WithEvents RichTextBox3 As System.Windows.Forms.RichTextBox
+    Friend WithEvents txtNotasEnsayosAdicionales As System.Windows.Forms.RichTextBox
     Friend WithEvents dgvRevisiones As System.Windows.Forms.DataGridView
     Friend WithEvents cmbTipoCalculo As System.Windows.Forms.ComboBox
     Friend WithEvents dgvCosto As System.Windows.Forms.DataGridView
@@ -2031,7 +2042,7 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents btnRecalculaCosto As System.Windows.Forms.Button
-    Friend WithEvents RichTextBox4 As System.Windows.Forms.RichTextBox
+    Friend WithEvents txtNotasDocumentacion As System.Windows.Forms.RichTextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents ckAVerificarI As System.Windows.Forms.CheckBox
     Friend WithEvents ckInformativoI As System.Windows.Forms.CheckBox
@@ -2121,4 +2132,5 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents RevisionesAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RevisionesResponsables As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RevisionesEstado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents lstOpciones As System.Windows.Forms.ListBox
 End Class
