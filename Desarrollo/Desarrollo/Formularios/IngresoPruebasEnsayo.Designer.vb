@@ -88,7 +88,7 @@ Partial Class IngresoPruebasEnsayo
         Me.LaboratorioDescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LaboratorioRequerido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LaboratorioResultado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtVisto = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnLeerVersionAntLab = New System.Windows.Forms.Button()
@@ -689,7 +689,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabResultadosLaboratorio.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.TabResultadosLaboratorio.Controls.Add(Me.txtNotasLaboratorio)
         Me.TabResultadosLaboratorio.Controls.Add(Me.dgvLaboratorio)
-        Me.TabResultadosLaboratorio.Controls.Add(Me.TextBox3)
+        Me.TabResultadosLaboratorio.Controls.Add(Me.txtVisto)
         Me.TabResultadosLaboratorio.Controls.Add(Me.Label11)
         Me.TabResultadosLaboratorio.Controls.Add(Me.Label7)
         Me.TabResultadosLaboratorio.Controls.Add(Me.btnLeerVersionAntLab)
@@ -755,13 +755,13 @@ Partial Class IngresoPruebasEnsayo
         Me.LaboratorioResultado.Name = "LaboratorioResultado"
         Me.LaboratorioResultado.Width = 200
         '
-        'TextBox3
+        'txtVisto
         '
-        Me.TextBox3.Location = New System.Drawing.Point(99, 370)
-        Me.TextBox3.MaxLength = 50
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(551, 20)
-        Me.TextBox3.TabIndex = 13
+        Me.txtVisto.Location = New System.Drawing.Point(99, 370)
+        Me.txtVisto.MaxLength = 50
+        Me.txtVisto.Name = "txtVisto"
+        Me.txtVisto.Size = New System.Drawing.Size(551, 20)
+        Me.txtVisto.TabIndex = 13
         '
         'Label11
         '
@@ -1674,6 +1674,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtOrden
         '
+        Me.txtOrden.Culture = New System.Globalization.CultureInfo("es-AR")
         Me.txtOrden.Location = New System.Drawing.Point(180, 12)
         Me.txtOrden.Mask = "AA-00000"
         Me.txtOrden.Name = "txtOrden"
@@ -1684,6 +1685,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtFecha
         '
+        Me.txtFecha.Culture = New System.Globalization.CultureInfo("es-AR")
         Me.txtFecha.Location = New System.Drawing.Point(523, 12)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
@@ -1799,7 +1801,7 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(76, 167)
+        Me.pnlConsulta.Location = New System.Drawing.Point(76, 130)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(720, 350)
         Me.pnlConsulta.TabIndex = 2
@@ -2028,7 +2030,7 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtNotasLaboratorio As System.Windows.Forms.RichTextBox
     Friend WithEvents dgvLaboratorio As System.Windows.Forms.DataGridView
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtVisto As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents btnLeerVersionAntLab As System.Windows.Forms.Button

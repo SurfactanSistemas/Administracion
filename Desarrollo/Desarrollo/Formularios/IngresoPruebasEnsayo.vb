@@ -432,7 +432,7 @@ Public Class IngresoPruebasEnsayo
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
-        Dim WTemp = "", WOrden = "", WVersion = "", WObservaciones = "", WCliente = "", WDescCliente = ""
+        Dim WTemp = "", WOrden = "", WVersion = "", WObservaciones = "", WDescCliente = ""
         Dim WItem As String = ""
 
         Try
@@ -443,7 +443,7 @@ Public Class IngresoPruebasEnsayo
             cn.Open()
             cm.Connection = cn
 
-            cm.CommandText = "SELECT CE.Orden, CE.Version, OT.Observaciones, OT.Cliente, ISNULL(C.Razon, '') " _
+            cm.CommandText = "SELECT CE.Orden, CE.Version, OT.Observaciones, ISNULL(C.Razon, '') " _
                                               & " as DesCliente FROM CargaEnsayo as CE, OrdenTrabajo as OT " _
                                               & " FULL OUTER JOIN Cliente as C ON OT.Cliente = C.Cliente WHERE CE.Orden <> '  -     ' " _
                                               & " AND OT.Cliente = '" & wValor & "' AND CE.Orden = OT.Orden ORDER BY CE.Clave, ce.Orden, ce.Version"
@@ -459,7 +459,6 @@ Public Class IngresoPruebasEnsayo
                     WOrden = IIf(IsDBNull(dr.Item("Orden")), "", dr.Item("Orden"))
                     WVersion = IIf(IsDBNull(dr.Item("Version")), "", dr.Item("Version"))
                     WObservaciones = IIf(IsDBNull(dr.Item("Observaciones")), "", dr.Item("Observaciones"))
-                    WCliente = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
                     WDescCliente = IIf(IsDBNull(dr.Item("DesCliente")), "", dr.Item("DesCliente"))
 
                     WTemp = Trim(WOrden) & "/" & Trim(WVersion)
@@ -567,15 +566,7 @@ Public Class IngresoPruebasEnsayo
                 txt.Text = txt.Text.Replace(",", " ")
             Next
 
-            If _ExisteEnsayo() Then
-
-                _ActualizarOrdenTrabajo()
-
-            Else
-
-                _AltaOrdenTrabajo()
-
-            End If
+            GuardarVersionDeOrdenTrabajo()
 
             btnLimpiar.PerformClick()
 
@@ -585,178 +576,408 @@ Public Class IngresoPruebasEnsayo
 
     End Sub
 
-    Private Sub _AltaOrdenTrabajo()
-        'Dim ZSQL = ""
-        'Dim cn As SqlConnection = New SqlConnection()
-        'Dim cm As SqlCommand = New SqlCommand("")
-        'Dim WDescripciones(5) As String
-        'Dim WObservaciones(3) As String
-        'Dim WRequisitos(6) As String
-        'Dim WReferencias(2) As String
+    Private Sub GuardarVersionDeOrdenTrabajo()
+        Dim WOrden = "", WVersion = "", WOrdFecha = ""
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim trans As SqlTransaction = Nothing
+        Dim ZSql = "", WClave = ""
 
-        'Try
+        Try
 
-        '    cn.ConnectionString = Helper._ConectarA
-        '    cn.Open()
-        '    cm.Connection = cn
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            trans = cn.BeginTransaction
+            cm.Connection = cn
+            cm.Transaction = trans
 
-        '    WDescripciones = _PrepararDescripciones()
-        '    WObservaciones = _PrepararObservaciones()
-        '    WRequisitos = _PrepararRequisitos()
-        '    WReferencias = _PrepararReferencias()
+            ' Limpiamos la información de la versión anteriormente guardada.
+            cm.CommandText = "DELETE CargaEnsayo WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
 
-        '    ZSQL = ""
-        '    ZSQL = ZSQL & "INSERT INTO OrdenTrabajo ("
-        '    ZSQL = ZSQL & "Orden ,"
-        '    ZSQL = ZSQL & "Fecha ,"
-        '    ZSQL = ZSQL & "OrdFecha ,"
-        '    ZSQL = ZSQL & "FechaEntrega ,"
-        '    ZSQL = ZSQL & "OrdFechaEntrega ,"
-        '    ZSQL = ZSQL & "Cliente ,"
-        '    ZSQL = ZSQL & "Observaciones ,"
-        '    ZSQL = ZSQL & "Material ,"
-        '    ZSQL = ZSQL & "Muestra ,"
-        '    ZSQL = ZSQL & "Uso ,"
-        '    ZSQL = ZSQL & "DescripcionI ,"
-        '    ZSQL = ZSQL & "DescripcionII ,"
-        '    ZSQL = ZSQL & "DescripcionIII ,"
-        '    ZSQL = ZSQL & "DescripcionIV ,"
-        '    ZSQL = ZSQL & "DescripcionV ,"
-        '    ZSQL = ZSQL & "DescripcionVI ,"
-        '    ZSQL = ZSQL & "ObservacionesI ,"
-        '    ZSQL = ZSQL & "ObservacionesII ,"
-        '    ZSQL = ZSQL & "ObservacionesIII ,"
-        '    ZSQL = ZSQL & "ObservacionesIV ,"
-        '    ZSQL = ZSQL & "ObservacionesV ,"
-        '    ZSQL = ZSQL & "ObservacionesVI ,"
-        '    ZSQL = ZSQL & "Encargado ,"
-        '    ZSQL = ZSQL & "RequisitoI ,"
-        '    ZSQL = ZSQL & "RequisitoII ,"
-        '    ZSQL = ZSQL & "RequisitoIII ,"
-        '    ZSQL = ZSQL & "RequisitoIV ,"
-        '    ZSQL = ZSQL & "RequisitoV ,"
-        '    ZSQL = ZSQL & "RequisitoVI ,"
-        '    ZSQL = ZSQL & "ReferenciaI ,"
-        '    ZSQL = ZSQL & "ReferenciaII ,"
-        '    ZSQL = ZSQL & "Aplicacion ,"
-        '    ZSQL = ZSQL & "Estabilidad )"
-        '    ZSQL = ZSQL & "Values ("
-        '    ZSQL = ZSQL & "'" & txtOrden.Text & "',"
-        '    ZSQL = ZSQL & "'" & txtFecha.Text & "',"
-        '    ZSQL = ZSQL & "'" & Helper.ordenaFecha(txtFecha.Text) & "',"
-        '    ZSQL = ZSQL & "'" & txtFechaComprometida.Text & "',"
-        '    ZSQL = ZSQL & "'" & Helper.ordenaFecha(txtFechaComprometida.Text) & "',"
-        '    ZSQL = ZSQL & "'" & txtCliente.Text & "',"
-        '    ZSQL = ZSQL & "'" & txtObservaciones.Text & "',"
-        '    ZSQL = ZSQL & "'" & txtMaterial.Text & "',"
-        '    ZSQL = ZSQL & "'" & txtMuestra.Text & "',"
-        '    ZSQL = ZSQL & "'" & txtUso.Text & "',"
-        '    ZSQL = ZSQL & "'" & WDescripciones(1) & "',"
-        '    ZSQL = ZSQL & "'" & WDescripciones(2) & "',"
-        '    ZSQL = ZSQL & "'" & WDescripciones(3) & "',"
-        '    ZSQL = ZSQL & "'" & WDescripciones(4) & "',"
-        '    ZSQL = ZSQL & "'" & WDescripciones(5) & "',"
-        '    ZSQL = ZSQL & "'',"
-        '    ZSQL = ZSQL & "'" & WObservaciones(1) & "',"
-        '    ZSQL = ZSQL & "'" & WObservaciones(2) & "',"
-        '    ZSQL = ZSQL & "'" & WObservaciones(3) & "',"
-        '    ZSQL = ZSQL & "'',"
-        '    ZSQL = ZSQL & "'',"
-        '    ZSQL = ZSQL & "'',"
-        '    ZSQL = ZSQL & "'" & txtEncargado.Text & "',"
-        '    ZSQL = ZSQL & "'" & WRequisitos(1) & "',"
-        '    ZSQL = ZSQL & "'" & WRequisitos(2) & "',"
-        '    ZSQL = ZSQL & "'" & WRequisitos(3) & "',"
-        '    ZSQL = ZSQL & "'" & WRequisitos(4) & "',"
-        '    ZSQL = ZSQL & "'" & WRequisitos(5) & "',"
-        '    ZSQL = ZSQL & "'" & WRequisitos(6) & "',"
-        '    ZSQL = ZSQL & "'" & WReferencias(1) & "',"
-        '    ZSQL = ZSQL & "'" & WReferencias(2) & "',"
-        '    ZSQL = ZSQL & "'" & Str$(cmbAplicacion.SelectedIndex) & "',"
-        '    ZSQL = ZSQL & "'" & Str$(cmbEstabilidad.SelectedIndex) & "')"
+            cm.CommandText = "DELETE CargaEnsayoII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
 
-        '    cm.CommandText = ZSQL
-        '    cm.ExecuteNonQuery()
+            cm.CommandText = "DELETE CargaEnsayoIII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
 
-        'Catch ex As Exception
-        '    Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        'Finally
+            cm.CommandText = "DELETE CargaEnsayoIV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
 
-        '    cn.Close()
-        '    cn = Nothing
-        '    cm = Nothing
+            cm.CommandText = "DELETE CargaEnsayoV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
 
-        'End Try
-    End Sub
+            cm.CommandText = "DELETE CargaEnsayoVI WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.ExecuteNonQuery()
+            
+            ' Guardamos los datos generales de la version.
 
-    Private Sub _ActualizarOrdenTrabajo()
-        'Dim ZSQL = ""
-        'Dim cn As SqlConnection = New SqlConnection()
-        'Dim cm As SqlCommand = New SqlCommand("")
-        'Dim WDescripciones(5) As String
-        'Dim WObservaciones(3) As String
-        'Dim WRequisitos(6) As String
-        'Dim WReferencias(2) As String
+            WOrden = UCase(txtOrden.Text)
+            WVersion = Helper.ceros(txtVersion.Text, 4)
+            WClave = WOrden & WVersion
+            WOrdFecha = Helper.ordenaFecha(txtFecha.Text)
 
-        'Try
+            ZSql = ""
+            ZSql = ZSql & "INSERT INTO CargaEnsayo ("
+            ZSql = ZSql & "Clave ,"
+            ZSql = ZSql & "Orden ,"
+            ZSql = ZSql & "Version ,"
+            ZSql = ZSql & "Fecha ,"
+            ZSql = ZSql & "OrdFecha ,"
+            ZSql = ZSql & "Cantidad ,"
+            ZSql = ZSql & "Realizado ,"
+            ZSql = ZSql & "RealizadoII ,"
+            ZSql = ZSql & "Visto )"
+            ZSql = ZSql & "Values ("
+            ZSql = ZSql & "'" & WClave & "',"
+            ZSql = ZSql & "'" & WOrden & "',"
+            ZSql = ZSql & "'" & txtVersion.Text & "',"
+            ZSql = ZSql & "'" & txtFecha.Text & "',"
+            ZSql = ZSql & "'" & WOrdFecha & "',"
+            ZSql = ZSql & "'" & txtCantidad.Text & "',"
+            ZSql = ZSql & "'" & txtRealizado.Text & "',"
+            ZSql = ZSql & "'" & txtRealizadoII.Text & "',"
+            ZSql = ZSql & "'" & txtVisto.Text & "')"
 
-        '    cn.ConnectionString = Helper._ConectarA
-        '    cn.Open()
-        '    cm.Connection = cn
+            cm.CommandText = ZSql
+            cm.ExecuteNonQuery()
 
-        '    WDescripciones = _PrepararDescripciones()
-        '    WObservaciones = _PrepararObservaciones()
-        '    WRequisitos = _PrepararRequisitos()
-        '    WReferencias = _PrepararReferencias()
+            ' Guardamos datos de la Fórmula.
+            Dim ZTipo = "", ZArticulo = "", ZTerminado = "", ZDescripcion = "", ZCantidad = "", ZLote = "", ZStock = "", ZCosto = "", ZPartiOri = "", WRenglon = ""
+            For Each _row As DataGridViewRow In dgvFormula.Rows
 
-        '    ZSQL = ""
-        '    ZSQL = ZSQL & "UPDATE OrdenTrabajo SET "
-        '    ZSQL = ZSQL & " Fecha = " & "'" & txtFecha.Text & "',"
-        '    ZSQL = ZSQL & " OrdFecha = " & "'" & Helper.ordenaFecha(txtFecha.Text) & "',"
-        '    ZSQL = ZSQL & " FechaEntrega = " & "'" & txtFechaComprometida.Text & "',"
-        '    ZSQL = ZSQL & " OrdFechaEntrega = " & "'" & Helper.ordenaFecha(txtFechaComprometida.Text) & "',"
-        '    ZSQL = ZSQL & " Cliente = " & "'" & txtCliente.Text & "',"
-        '    ZSQL = ZSQL & " Observaciones = " & "'" & txtObservaciones.Text & "',"
-        '    ZSQL = ZSQL & " Material = " & "'" & txtMaterial.Text & "',"
-        '    ZSQL = ZSQL & " Muestra = " & "'" & txtMuestra.Text & "',"
-        '    ZSQL = ZSQL & " Uso = " & "'" & txtUso.Text & "',"
-        '    ZSQL = ZSQL & " DescripcionI = " & "'" & WDescripciones(1) & "',"
-        '    ZSQL = ZSQL & " DescripcionII = " & "'" & WDescripciones(2) & "',"
-        '    ZSQL = ZSQL & " DescripcionIII = " & "'" & WDescripciones(3) & "',"
-        '    ZSQL = ZSQL & " DescripcionIV = " & "'" & WDescripciones(4) & "',"
-        '    ZSQL = ZSQL & " DescripcionV = " & "'" & WDescripciones(5) & "',"
-        '    ZSQL = ZSQL & " DescripcionVI = " & "'',"
-        '    ZSQL = ZSQL & " ObservacionesI = " & "'" & WObservaciones(1) & "',"
-        '    ZSQL = ZSQL & " ObservacionesII = " & "'" & WObservaciones(2) & "',"
-        '    ZSQL = ZSQL & " ObservacionesIII = " & "'" & WObservaciones(3) & "',"
-        '    ZSQL = ZSQL & " ObservacionesIV = " & "'',"
-        '    ZSQL = ZSQL & " ObservacionesV = " & "'',"
-        '    ZSQL = ZSQL & " ObservacionesVI = " & "'',"
-        '    ZSQL = ZSQL & " Encargado = " & "'" & txtEncargado.Text & "',"
-        '    ZSQL = ZSQL & " RequisitoI = " & "'" & WRequisitos(1) & "',"
-        '    ZSQL = ZSQL & " RequisitoII = " & "'" & WRequisitos(2) & "',"
-        '    ZSQL = ZSQL & " RequisitoIII = " & "'" & WRequisitos(3) & "',"
-        '    ZSQL = ZSQL & " RequisitoIV = " & "'" & WRequisitos(4) & "',"
-        '    ZSQL = ZSQL & " RequisitoV = " & "'" & WRequisitos(5) & "',"
-        '    ZSQL = ZSQL & " RequisitoVI = " & "'" & WRequisitos(6) & "',"
-        '    ZSQL = ZSQL & " ReferenciaI = " & "'" & WReferencias(1) & "',"
-        '    ZSQL = ZSQL & " ReferenciaII = " & "'" & WReferencias(2) & "',"
-        '    ZSQL = ZSQL & " Aplicacion = " & "'" & Str$(cmbAplicacion.SelectedIndex) & "',"
-        '    ZSQL = ZSQL & " Estabilidad = " & "'" & Str$(cmbEstabilidad.SelectedIndex) & "'"
-        '    ZSQL = ZSQL & " Where Orden = " & "'" & txtOrden.Text & "'"
+                With _row
 
-        '    cm.CommandText = ZSQL
-        '    cm.ExecuteNonQuery()
+                    ZTipo = IIf(IsNothing(.Cells("TipoFormula").Value), "", .Cells("TipoFormula").Value)
+                    ZArticulo = IIf(IsNothing(.Cells("ArticuloFormula").Value), "", .Cells("ArticuloFormula").Value)
+                    ZTerminado = IIf(IsNothing(.Cells("TerminadoFormula").Value), "", .Cells("TerminadoFormula").Value)
+                    ZDescripcion = IIf(IsNothing(.Cells("DescripcionFormula").Value), "", .Cells("DescripcionFormula").Value)
+                    ZCantidad = IIf(IsNothing(.Cells("CantidadFormula").Value), "", .Cells("CantidadFormula").Value)
+                    ZLote = IIf(IsNothing(.Cells("LoteFormula").Value), "", .Cells("LoteFormula").Value)
+                    ZStock = IIf(IsNothing(.Cells("StockFormula").Value), "", .Cells("StockFormula").Value)
+                    ZCosto = IIf(IsNothing(dgvCosto.Rows(.Index).Cells("CostoCosto").Value), "", Helper.formatonumerico(dgvCosto.Rows(.Index).Cells("CostoCosto").Value))
 
-        'Catch ex As Exception
-        '    Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        'Finally
+                    ZPartiOri = ""
 
-        '    cn.Close()
-        '    cn = Nothing
-        '    cm = Nothing
+                    If ZTipo <> "" Or ZArticulo <> "" Or ZTerminado <> "" Or ZDescripcion <> "" Or ZCantidad <> "" Then
 
-        'End Try
+                        WRenglon = Helper.ceros(.Index + 1, 2)
+                        WClave = WOrden & WVersion & WRenglon
+
+                        ZSql = ""
+                        ZSql = ZSql + "INSERT INTO CargaEnsayoII ("
+                        ZSql = ZSql + "Clave ,"
+                        ZSql = ZSql + "Orden ,"
+                        ZSql = ZSql + "Version ,"
+                        ZSql = ZSql + "Renglon ,"
+                        ZSql = ZSql + "Tipo ,"
+                        ZSql = ZSql + "Articulo ,"
+                        ZSql = ZSql + "Terminado ,"
+                        ZSql = ZSql + "Descripcion ,"
+                        ZSql = ZSql + "Cantidad ,"
+                        ZSql = ZSql + "Costo ,"
+                        ZSql = ZSql + "Lote ,"
+                        ZSql = ZSql + "Stock ,"
+                        ZSql = ZSql + "PartiOri )"
+                        ZSql = ZSql + "Values ("
+                        ZSql = ZSql + "'" + WClave + "',"
+                        ZSql = ZSql + "'" + txtOrden.Text + "',"
+                        ZSql = ZSql + "'" + txtVersion.Text + "',"
+                        ZSql = ZSql + "'" + Str$(CInt(WRenglon)) + "',"
+                        ZSql = ZSql + "'" + ZTipo + "',"
+                        ZSql = ZSql + "'" + ZArticulo + "',"
+                        ZSql = ZSql + "'" + ZTerminado + "',"
+                        ZSql = ZSql + "'" + ZDescripcion + "',"
+                        ZSql = ZSql + "'" + ZCantidad + "',"
+                        ZSql = ZSql + "'" + ZCosto + "',"
+                        ZSql = ZSql + "'" + ZLote + "',"
+                        ZSql = ZSql + "'" + ZStock + "',"
+                        ZSql = ZSql + "'" + ZPartiOri + "')"
+
+                        cm.CommandText = ZSql
+                        cm.ExecuteNonQuery()
+
+                    End If
+
+                End With
+
+            Next
+
+            ' Guardamos los datos del Proceso.
+            Dim WEtapa = "", WInstrucciones = "", WEquipo = "", WTemperatura = "", WTiempo = "", WControl = "", WSeguridad = ""
+            For Each _row As DataGridViewRow In dgvProceso.Rows
+
+                With _row
+
+                    WEtapa = IIf(IsNothing(.Cells("ProcesoEtapa").Value), "", .Cells("ProcesoEtapa").Value)
+                    WInstrucciones = IIf(IsNothing(.Cells("ProcesoDetallesTrabajo").Value), "", .Cells("ProcesoDetallesTrabajo").Value)
+                    WEquipo = IIf(IsNothing(.Cells("ProcesoEquipo").Value), "", .Cells("ProcesoEquipo").Value)
+                    WTemperatura = IIf(IsNothing(.Cells("ProcesoTemperatura").Value), "", .Cells("ProcesoTemperatura").Value)
+                    WTiempo = IIf(IsNothing(.Cells("ProcesoTiempo").Value), "", .Cells("ProcesoTiempo").Value)
+                    WControl = IIf(IsNothing(.Cells("ProcesoControl").Value), "", .Cells("ProcesoControl").Value)
+                    WSeguridad = IIf(IsNothing(.Cells("ProcesoSeguridad").Value), "", .Cells("ProcesoSeguridad").Value)
+
+                    If WEtapa <> "" Or WInstrucciones <> "" Or WEquipo <> "" Or WTemperatura <> "" Or WTiempo <> "" Or WControl <> "" Or WSeguridad <> "" Then
+
+                        WRenglon = Helper.ceros(.Index + 1, 2)
+
+                        WClave = WOrden & WVersion & WRenglon
+
+                        ZSql = ""
+                        ZSql = ZSql & "INSERT INTO CargaEnsayoIII ("
+                        ZSql = ZSql & "Clave ,"
+                        ZSql = ZSql & "Orden ,"
+                        ZSql = ZSql & "Version ,"
+                        ZSql = ZSql & "Renglon ,"
+                        ZSql = ZSql & "Etapa ,"
+                        ZSql = ZSql & "Instrucciones ,"
+                        ZSql = ZSql & "Equipo ,"
+                        ZSql = ZSql & "Temperatura ,"
+                        ZSql = ZSql & "Tiempo ,"
+                        ZSql = ZSql & "Control ,"
+                        ZSql = ZSql & "Seguridad )"
+                        ZSql = ZSql & "Values ("
+                        ZSql = ZSql & "'" & WClave & "',"
+                        ZSql = ZSql & "'" & txtOrden.Text & "',"
+                        ZSql = ZSql & "'" & txtVersion.Text & "',"
+                        ZSql = ZSql & "'" & Str$(CInt(WRenglon)) & "',"
+                        ZSql = ZSql & "'" & WEtapa & "',"
+                        ZSql = ZSql & "'" & WInstrucciones & "',"
+                        ZSql = ZSql & "'" & WEquipo & "',"
+                        ZSql = ZSql & "'" & WTemperatura & "',"
+                        ZSql = ZSql & "'" & WTiempo & "',"
+                        ZSql = ZSql & "'" & WControl & "',"
+                        ZSql = ZSql & "'" & WSeguridad & "')"
+
+                        cm.CommandText = ZSql
+                        cm.ExecuteNonQuery()
+
+                    End If
+
+                End With
+                
+            Next
+
+            ' Guardamos los datos de Laboratorio.
+            Dim WEnsayo = "", WDescripcion = "", WEsperado = "", WResultado = ""
+            For Each _row As DataGridViewRow In dgvLaboratorio.Rows
+
+                With _row
+
+                    WEnsayo = iif(isnothing(.Cells("LaboratorioEnsayo").Value), "", .Cells("LaboratorioEnsayo").Value)
+                    WDescripcion = IIf(IsNothing(.Cells("LaboratorioDescripcion").Value), "", .Cells("LaboratorioDescripcion").Value)
+                    WEsperado = IIf(IsNothing(.Cells("LaboratorioRequerido").Value), "", .Cells("LaboratorioRequerido").Value)
+                    WResultado = IIf(IsNothing(.Cells("LaboratorioResultado").Value), "", .Cells("LaboratorioResultado").Value)
+
+                    If WEnsayo <> "" Or WDescripcion <> "" Or WEsperado <> "" Or WResultado <> "" Then
+
+                        WRenglon = Helper.ceros(.Index + 1, 2)
+
+                        WClave = WOrden & WVersion & WRenglon
+
+                        ZSql = ""
+                        ZSql = ZSql & "INSERT INTO CargaEnsayoIV ("
+                        ZSql = ZSql & "Clave ,"
+                        ZSql = ZSql & "Orden ,"
+                        ZSql = ZSql & "Version ,"
+                        ZSql = ZSql & "Renglon ,"
+                        ZSql = ZSql & "Ensayo ,"
+                        ZSql = ZSql & "Descripcion ,"
+                        ZSql = ZSql & "Esperado ,"
+                        ZSql = ZSql & "Resultado )"
+                        ZSql = ZSql & "Values ("
+                        ZSql = ZSql & "'" & WClave & "',"
+                        ZSql = ZSql & "'" & txtOrden.Text & "',"
+                        ZSql = ZSql & "'" & txtVersion.Text & "',"
+                        ZSql = ZSql & "'" & Str$(CInt(WRenglon)) & "',"
+                        ZSql = ZSql & "'" & WEnsayo & "',"
+                        ZSql = ZSql & "'" & WDescripcion & "',"
+                        ZSql = ZSql & "'" & WEsperado & "',"
+                        ZSql = ZSql & "'" & WResultado & "')"
+
+                        cm.CommandText = ZSql
+                        cm.ExecuteNonQuery()
+
+                    End If
+
+                End With
+
+            Next
+
+            ' Guardamos los datos de Revisiones.
+            Dim ZVersion = "", ZEtapa = "", ZFecha = "", ZParticipantes = "", ZResultados = "", ZAcciones = "", ZResponsables = "", ZEstado = ""
+            For Each _row As DataGridViewRow In dgvRevisiones.Rows
+
+                With _row
+
+                    ZVersion = IIf(IsNothing(.Cells("RevisionesVersion").Value), "", .Cells("RevisionesVersion").Value)
+                    ZEtapa = IIf(IsNothing(.Cells("RevisionesEtapa").Value), "", .Cells("RevisionesEtapa").Value)
+                    ZFecha = IIf(IsNothing(.Cells("RevisionesFecha").Value), "", .Cells("RevisionesFecha").Value)
+                    ZParticipantes = IIf(IsNothing(.Cells("RevisionesParticipantes").Value), "", .Cells("RevisionesParticipantes").Value)
+                    ZResultados = IIf(IsNothing(.Cells("RevisionesResultados").Value), "", .Cells("RevisionesResultados").Value)
+                    ZAcciones = IIf(IsNothing(.Cells("RevisionesAcciones").Value), "", .Cells("RevisionesAcciones").Value)
+                    ZResponsables = IIf(IsNothing(.Cells("RevisionesResponsables").Value), "", .Cells("RevisionesResponsables").Value)
+                    ZEstado = IIf(IsNothing(.Cells("RevisionesEstado").Value), "", .Cells("RevisionesEstado").Value)
+
+                    If ZVersion <> "" Or ZEtapa <> "" Or ZFecha <> "" Or ZParticipantes <> "" Or ZResultados <> "" Or ZAcciones <> "" Or ZResponsables <> "" Or ZEstado <> "" Then
+
+                        WRenglon = Helper.ceros(.Index + 1, 2)
+                        WClave = WOrden & WRenglon
+
+                        ZSql = ""
+                        ZSql = ZSql + "INSERT INTO CargaEnsayoV ("
+                        ZSql = ZSql + "Clave ,"
+                        ZSql = ZSql + "Orden ,"
+                        ZSql = ZSql + "Renglon ,"
+                        ZSql = ZSql + "Version ,"
+                        ZSql = ZSql + "Etapa ,"
+                        ZSql = ZSql + "Fecha ,"
+                        ZSql = ZSql + "Participantes ,"
+                        ZSql = ZSql + "Resultados ,"
+                        ZSql = ZSql + "Acciones ,"
+                        ZSql = ZSql + "Responsables ,"
+                        ZSql = ZSql + "Estado )"
+                        ZSql = ZSql + "Values ("
+                        ZSql = ZSql + "'" + WClave + "',"
+                        ZSql = ZSql + "'" + txtOrden.Text + "',"
+                        ZSql = ZSql + "'" + Str$(CInt(WRenglon)) + "',"
+                        ZSql = ZSql + "'" + ZVersion + "',"
+                        ZSql = ZSql + "'" + ZEtapa + "',"
+                        ZSql = ZSql + "'" + ZFecha + "',"
+                        ZSql = ZSql + "'" + ZParticipantes + "',"
+                        ZSql = ZSql + "'" + ZResultados + "',"
+                        ZSql = ZSql + "'" + ZAcciones + "',"
+                        ZSql = ZSql + "'" + ZResponsables + "',"
+                        ZSql = ZSql + "'" + ZEstado + "')"
+
+                        cm.CommandText = ZSql
+                        cm.ExecuteNonQuery()
+
+                    End If
+
+                End With
+
+            Next
+
+            ' Guardamos los datos de los Requisitos.
+            Dim ZRequisito = "", ZInformativo = "", ZAVerificar = "", ZComentario = ""
+
+            For iRow = 1 To 12
+
+                Select Case iRow
+                    Case 1
+                        ZRequisito = txtRequisitosI.Text
+                        ZInformativo = IIf(ckInformativoI.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarI.Checked, "1", "0")
+                        ZComentario = txtComentariosI.Text
+                    Case 2
+                        ZRequisito = txtRequisitosII.Text
+                        ZInformativo = IIf(ckInformativoII.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarII.Checked, "1", "0")
+                        ZComentario = txtComentariosII.Text
+                    Case 3
+                        ZRequisito = txtRequisitosIII.Text
+                        ZInformativo = IIf(ckInformativoIII.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarIII.Checked, "1", "0")
+                        ZComentario = txtComentariosIII.Text
+                    Case 4
+                        ZRequisito = txtRequisitosIV.Text
+                        ZInformativo = IIf(ckInformativoIV.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarIV.Checked, "1", "0")
+                        ZComentario = txtComentariosIV.Text
+                    Case 5
+                        ZRequisito = txtRequisitosV.Text
+                        ZInformativo = IIf(ckInformativoV.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarV.Checked, "1", "0")
+                        ZComentario = txtComentariosV.Text
+                    Case 6
+                        ZRequisito = txtRequisitosVI.Text
+                        ZInformativo = IIf(ckInformativoVI.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarVI.Checked, "1", "0")
+                        ZComentario = txtComentariosVI.Text
+                    Case 7
+                        ZRequisito = txtRequisitosVII.Text
+                        ZInformativo = IIf(ckInformativoVII.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarVII.Checked, "1", "0")
+                        ZComentario = txtComentariosVII.Text
+                    Case 8
+                        ZRequisito = txtRequisitosVIII.Text
+                        ZInformativo = IIf(ckInformativoVIII.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarVIII.Checked, "1", "0")
+                        ZComentario = txtComentariosVIII.Text
+                    Case 9
+                        ZRequisito = txtRequisitosIX.Text
+                        ZInformativo = IIf(ckInformativoIX.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarIX.Checked, "1", "0")
+                        ZComentario = txtComentariosIX.Text
+                    Case 10
+                        ZRequisito = txtRequisitosX.Text
+                        ZInformativo = IIf(ckInformativoX.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarX.Checked, "1", "0")
+                        ZComentario = txtComentariosX.Text
+                    Case 11
+                        ZRequisito = txtRequisitosXI.Text
+                        ZInformativo = IIf(ckInformativoXI.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarXI.Checked, "1", "0")
+                        ZComentario = txtComentariosXI.Text
+                    Case 12
+                        ZRequisito = txtRequisitosXII.Text
+                        ZInformativo = IIf(ckInformativoXII.Checked, "1", "0")
+                        ZAVerificar = IIf(ckAVerificarXII.Checked, "1", "0")
+                        ZComentario = txtComentariosXII.Text
+                End Select
+
+                WRenglon = Helper.ceros(iRow, 2)
+
+                WClave = WOrden & WVersion & WRenglon
+
+                ZSql = ""
+                ZSql = ZSql + "INSERT INTO CargaEnsayoVI ("
+                ZSql = ZSql + "Clave ,"
+                ZSql = ZSql + "Orden ,"
+                ZSql = ZSql + "Version ,"
+                ZSql = ZSql + "Renglon ,"
+                ZSql = ZSql + "Requisito ,"
+                ZSql = ZSql + "Informativo ,"
+                ZSql = ZSql + "AVerificar ,"
+                ZSql = ZSql + "Comentario )"
+                ZSql = ZSql + "Values ("
+                ZSql = ZSql + "'" + WClave + "',"
+                ZSql = ZSql + "'" + txtOrden.Text + "',"
+                ZSql = ZSql + "'" + txtVersion.Text + "',"
+                ZSql = ZSql + "'" + Str$(WRenglon) + "',"
+                ZSql = ZSql + "'" + ZRequisito + "',"
+                ZSql = ZSql + "'" + ZInformativo + "',"
+                ZSql = ZSql + "'" + ZAVerificar + "',"
+                ZSql = ZSql + "'" + ZComentario + "')"
+
+                cm.CommandText = ZSql
+                cm.ExecuteNonQuery()
+
+            Next iRow
+
+            ' Guardamos las anotaciones.
+            Dim WDestino = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1")
+            txtNotasProceso.SaveFile(WDestino & "P" & WOrden & WVersion & ".rtf")
+            txtNotasLaboratorio.SaveFile(WDestino & "E" & WOrden & WVersion & ".rtf")
+            txtNotasEnsayosAdicionales.SaveFile(WDestino & "C" & WOrden & WVersion & ".rtf")
+            txtNotasDocumentacion.SaveFile(WDestino & "V" & WOrden & WVersion & ".rtf")
+
+            trans.Commit()
+
+        Catch ex As Exception
+            If Not IsNothing(trans) Then
+                trans.Rollback()
+            End If
+            Throw New Exception("Hubo un problema al querer Guardar la Versión de la Orden de Trabajo en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
 
     End Sub
 
@@ -1966,11 +2187,13 @@ Public Class IngresoPruebasEnsayo
                     txtCantidad.Text = IIf(IsDBNull(.Item("Cantidad")), "", .Item("Cantidad"))
                     txtRealizado.Text = IIf(IsDBNull(.Item("Realizado")), "", .Item("Realizado"))
                     txtRealizadoII.Text = IIf(IsDBNull(.Item("RealizadoII")), "", .Item("RealizadoII"))
+                    txtVisto.Text = IIf(IsDBNull(.Item("Visto")), "", .Item("Visto"))
 
                     txtCantidad.Text = Helper.formatonumerico(txtCantidad.Text, 3)
 
                     txtRealizado.Text = Trim(txtRealizado.Text)
                     txtRealizadoII.Text = Trim(txtRealizadoII.Text)
+                    txtVisto.Text = Trim(txtVisto.Text)
 
                 End With
 
@@ -2685,7 +2908,7 @@ Public Class IngresoPruebasEnsayo
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
-        Dim WTemp = "", WOrden = "", WVersion = "", WObservaciones = "", WCliente = "", WDescCliente = ""
+        Dim WTemp = "", WOrden = "", WVersion = "", WObservaciones = "", WDescCliente = ""
         Dim WItem As String = ""
 
         Try
@@ -2696,7 +2919,7 @@ Public Class IngresoPruebasEnsayo
             cn.Open()
             cm.Connection = cn
 
-            cm.CommandText = "SELECT CE.Orden, CE.Version, OT.Observaciones, OT.Cliente, ISNULL(C.Razon, '') " _
+            cm.CommandText = "SELECT CE.Orden, CE.Version, OT.Observaciones, ISNULL(C.Razon, '') " _
                                               & " as DesCliente FROM CargaEnsayo as CE, OrdenTrabajo as OT " _
                                               & " FULL OUTER JOIN Cliente as C ON OT.Cliente = C.Cliente WHERE CE.Orden <> '  -     ' " _
                                               & " AND CE.Orden = OT.Orden ORDER BY CE.Clave, ce.Orden, ce.Version"
@@ -2712,7 +2935,6 @@ Public Class IngresoPruebasEnsayo
                     WOrden = IIf(IsDBNull(dr.Item("Orden")), "", dr.Item("Orden"))
                     WVersion = IIf(IsDBNull(dr.Item("Version")), "", dr.Item("Version"))
                     WObservaciones = IIf(IsDBNull(dr.Item("Observaciones")), "", dr.Item("Observaciones"))
-                    WCliente = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
                     WDescCliente = IIf(IsDBNull(dr.Item("DesCliente")), "", dr.Item("DesCliente"))
 
                     WTemp = Trim(WOrden) & "/" & Trim(WVersion)
