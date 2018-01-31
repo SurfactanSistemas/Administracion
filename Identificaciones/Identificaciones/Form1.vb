@@ -816,7 +816,8 @@ Public Class Form1
             With VistaPrevia
                 .Reporte = New Identificacion
                 .Reporte.SetDataSource(tabla)
-                .Mostrar()
+                '.Mostrar()
+                .Imprimir()
             End With
 
         End If
