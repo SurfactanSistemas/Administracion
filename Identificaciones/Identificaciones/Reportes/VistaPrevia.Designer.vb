@@ -33,8 +33,17 @@ Partial Class VistaPrevia
         Me.CrystalReportViewer2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CrystalReportViewer2.Location = New System.Drawing.Point(0, 0)
         Me.CrystalReportViewer2.Name = "CrystalReportViewer2"
+        Me.CrystalReportViewer2.ShowCloseButton = False
+        Me.CrystalReportViewer2.ShowGotoPageButton = False
+        Me.CrystalReportViewer2.ShowGroupTreeButton = False
+        Me.CrystalReportViewer2.ShowPageNavigateButtons = False
+        Me.CrystalReportViewer2.ShowParameterPanelButton = False
+        Me.CrystalReportViewer2.ShowRefreshButton = False
+        Me.CrystalReportViewer2.ShowTextSearchButton = False
+        Me.CrystalReportViewer2.ShowZoomButton = False
         Me.CrystalReportViewer2.Size = New System.Drawing.Size(833, 329)
         Me.CrystalReportViewer2.TabIndex = 0
+        Me.CrystalReportViewer2.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
         '
         'VistaPrevia
         '
