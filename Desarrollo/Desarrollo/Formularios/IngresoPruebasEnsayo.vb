@@ -112,7 +112,7 @@ Public Class IngresoPruebasEnsayo
     End Function
 
     Private Function _CamposDeTexto() As TextBox()
-        Return {txtVersion, txtCantidad, txtRealizado, txtRealizadoII, txtAyuda, txtCostoTotal, txtCostoPorKilo}.Union(_CamposRequisitos).ToArray.Union(_CamposComentarios).ToArray
+        Return {txtVersion, txtCantidad, txtDescripcionHojaPiloto, txtHojaProduccion, txtRealizado, txtRealizadoII, txtAyuda, txtCostoTotal, txtCostoPorKilo}.Union(_CamposRequisitos).ToArray.Union(_CamposComentarios).ToArray
     End Function
 
     Private Sub txtOrden_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrden.KeyDown
@@ -3361,7 +3361,7 @@ Public Class IngresoPruebasEnsayo
             Try
                 _GenerarHojaPiloto()
 
-                btnLimpiar.PerformClick()
+                'btnLimpiar.PerformClick()
 
             Catch ex As Exception
                 MsgBox("Se detuvo la generación de Hoja Piloto." & vbCrLf & vbCrLf & " Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
@@ -3381,6 +3381,15 @@ Public Class IngresoPruebasEnsayo
         Dim cm As SqlCommand = New SqlCommand("")
         Dim dr As SqlDataReader
         Dim trans As SqlTransaction = Nothing
+        Dim WPaso = 0
+
+        'Calculamos los datos para la barra de progreso.
+        prgbHojaPiloto.Visible = True
+        prgbHojaPiloto.Maximum = 100
+        prgbHojaPiloto.Minimum = 0
+        prgbHojaPiloto.Value = 0
+        WPaso = 100 / dgvFormula.Rows.Count * 0.1
+        prgbHojaPiloto.Step = WPaso
 
         ' Verificamos que no haya ya un numero de Hoja.
         If Val(txtHojaProduccion.Text) > 0 Then
@@ -3421,6 +3430,8 @@ Public Class IngresoPruebasEnsayo
             End If
         End If
 
+        prgbHojaPiloto.Step += WPaso
+        
         ' Verificamos Stock de items cargados en Fórmula.
         For Each _row As DataGridViewRow In dgvFormula.Rows
 
@@ -3746,6 +3757,9 @@ Public Class IngresoPruebasEnsayo
 
                     End Select
 
+                    Threading.Thread.Sleep(100)
+                    prgbHojaPiloto.Increment(1)
+
                 Next
 
                 ' Actualizamos datos generales de la Hoja.
@@ -3766,9 +3780,15 @@ Public Class IngresoPruebasEnsayo
 
                 trans.Commit()
 
+                prgbHojaPiloto.Value = 100
+
                 ' ACA LLAMAR A LA IMPRESION
 
                 _ImprimirHojaPiloto()
+
+                ' Ocultamos el Panel
+                pnlHojaPiloto.Visible = False
+                txtDescripcionHojaPiloto.Text = ""
 
             Catch ex As Exception
                 If Not IsNothing(trans) Then
@@ -4345,4 +4365,5 @@ Public Class IngresoPruebasEnsayo
         txtDescripcionHojaPiloto.Text = ""
         pnlHojaPiloto.Visible = False
     End Sub
+
 End Class
