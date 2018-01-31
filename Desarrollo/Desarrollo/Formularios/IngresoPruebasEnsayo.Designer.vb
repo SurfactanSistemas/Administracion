@@ -23,22 +23,22 @@ Partial Class IngresoPruebasEnsayo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -50,23 +50,20 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabFormula = New System.Windows.Forms.TabPage()
+        Me.pnlHojaPiloto = New System.Windows.Forms.Panel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnCancelarHojaPiloto = New System.Windows.Forms.Button()
+        Me.txtDescripcionHojaPiloto = New System.Windows.Forms.TextBox()
         Me.cmbPlanta = New System.Windows.Forms.ComboBox()
         Me.dgvFormula = New System.Windows.Forms.DataGridView()
-        Me.TipoFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ArticuloFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TerminadoFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CantidadFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LoteFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtHojaProduccion = New System.Windows.Forms.TextBox()
         Me.txtRealizado = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.btnLeerVersionAntFormula = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnHojaPiloto = New System.Windows.Forms.Button()
         Me.TabProceso = New System.Windows.Forms.TabPage()
         Me.txtNotasProceso = New System.Windows.Forms.RichTextBox()
         Me.dgvProceso = New System.Windows.Forms.DataGridView()
@@ -205,6 +202,13 @@ Partial Class IngresoPruebasEnsayo
         Me.btnCerrarNota = New System.Windows.Forms.Button()
         Me.txtNota = New System.Windows.Forms.RichTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TipoFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ArticuloFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TerminadoFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CantidadFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LoteFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -214,6 +218,8 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabFormula.SuspendLayout()
+        Me.pnlHojaPiloto.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         CType(Me.dgvFormula, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabProceso.SuspendLayout()
         CType(Me.dgvProceso, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -376,16 +382,17 @@ Partial Class IngresoPruebasEnsayo
         'TabFormula
         '
         Me.TabFormula.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabFormula.Controls.Add(Me.pnlHojaPiloto)
         Me.TabFormula.Controls.Add(Me.cmbPlanta)
         Me.TabFormula.Controls.Add(Me.dgvFormula)
-        Me.TabFormula.Controls.Add(Me.TextBox1)
+        Me.TabFormula.Controls.Add(Me.txtHojaProduccion)
         Me.TabFormula.Controls.Add(Me.txtRealizado)
         Me.TabFormula.Controls.Add(Me.Label9)
         Me.TabFormula.Controls.Add(Me.Label8)
         Me.TabFormula.Controls.Add(Me.Label13)
         Me.TabFormula.Controls.Add(Me.Button3)
         Me.TabFormula.Controls.Add(Me.btnLeerVersionAntFormula)
-        Me.TabFormula.Controls.Add(Me.Button1)
+        Me.TabFormula.Controls.Add(Me.btnHojaPiloto)
         Me.TabFormula.Location = New System.Drawing.Point(4, 34)
         Me.TabFormula.Margin = New System.Windows.Forms.Padding(0)
         Me.TabFormula.Name = "TabFormula"
@@ -393,6 +400,46 @@ Partial Class IngresoPruebasEnsayo
         Me.TabFormula.Size = New System.Drawing.Size(821, 403)
         Me.TabFormula.TabIndex = 0
         Me.TabFormula.Text = "Fórmula"
+        '
+        'pnlHojaPiloto
+        '
+        Me.pnlHojaPiloto.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlHojaPiloto.Controls.Add(Me.GroupBox2)
+        Me.pnlHojaPiloto.Location = New System.Drawing.Point(161, 148)
+        Me.pnlHojaPiloto.Name = "pnlHojaPiloto"
+        Me.pnlHojaPiloto.Size = New System.Drawing.Size(498, 106)
+        Me.pnlHojaPiloto.TabIndex = 4
+        Me.pnlHojaPiloto.Visible = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.btnCancelarHojaPiloto)
+        Me.GroupBox2.Controls.Add(Me.txtDescripcionHojaPiloto)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox2.Location = New System.Drawing.Point(18, 10)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(460, 82)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Generación de Hoja Piloto"
+        '
+        'btnCancelarHojaPiloto
+        '
+        Me.btnCancelarHojaPiloto.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCancelarHojaPiloto.Location = New System.Drawing.Point(127, 44)
+        Me.btnCancelarHojaPiloto.Name = "btnCancelarHojaPiloto"
+        Me.btnCancelarHojaPiloto.Size = New System.Drawing.Size(207, 28)
+        Me.btnCancelarHojaPiloto.TabIndex = 0
+        Me.btnCancelarHojaPiloto.Text = "Cancelar Generación de Hoja Piloto"
+        Me.btnCancelarHojaPiloto.UseVisualStyleBackColor = True
+        '
+        'txtDescripcionHojaPiloto
+        '
+        Me.txtDescripcionHojaPiloto.Location = New System.Drawing.Point(22, 18)
+        Me.txtDescripcionHojaPiloto.MaxLength = 50
+        Me.txtDescripcionHojaPiloto.Name = "txtDescripcionHojaPiloto"
+        Me.txtDescripcionHojaPiloto.Size = New System.Drawing.Size(417, 20)
+        Me.txtDescripcionHojaPiloto.TabIndex = 0
         '
         'cmbPlanta
         '
@@ -420,64 +467,14 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvFormula.Size = New System.Drawing.Size(804, 306)
         Me.dgvFormula.TabIndex = 4
         '
-        'TipoFormula
+        'txtHojaProduccion
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TipoFormula.DefaultCellStyle = DataGridViewCellStyle1
-        Me.TipoFormula.HeaderText = "Tipo"
-        Me.TipoFormula.Name = "TipoFormula"
-        Me.TipoFormula.Width = 50
-        '
-        'ArticuloFormula
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ArticuloFormula.DefaultCellStyle = DataGridViewCellStyle2
-        Me.ArticuloFormula.HeaderText = "Artículo"
-        Me.ArticuloFormula.Name = "ArticuloFormula"
-        '
-        'TerminadoFormula
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TerminadoFormula.DefaultCellStyle = DataGridViewCellStyle3
-        Me.TerminadoFormula.HeaderText = "Terminado"
-        Me.TerminadoFormula.Name = "TerminadoFormula"
-        '
-        'DescripcionFormula
-        '
-        Me.DescripcionFormula.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionFormula.HeaderText = "Descripcion"
-        Me.DescripcionFormula.Name = "DescripcionFormula"
-        '
-        'CantidadFormula
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CantidadFormula.DefaultCellStyle = DataGridViewCellStyle4
-        Me.CantidadFormula.HeaderText = "Cantidad"
-        Me.CantidadFormula.Name = "CantidadFormula"
-        '
-        'LoteFormula
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.LoteFormula.DefaultCellStyle = DataGridViewCellStyle5
-        Me.LoteFormula.HeaderText = "Lote"
-        Me.LoteFormula.Name = "LoteFormula"
-        '
-        'StockFormula
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.StockFormula.DefaultCellStyle = DataGridViewCellStyle6
-        Me.StockFormula.HeaderText = "Stock"
-        Me.StockFormula.Name = "StockFormula"
-        Me.StockFormula.Width = 50
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(388, 335)
-        Me.TextBox1.MaxLength = 50
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(117, 20)
-        Me.TextBox1.TabIndex = 3
+        Me.txtHojaProduccion.Location = New System.Drawing.Point(388, 335)
+        Me.txtHojaProduccion.MaxLength = 50
+        Me.txtHojaProduccion.Name = "txtHojaProduccion"
+        Me.txtHojaProduccion.ReadOnly = True
+        Me.txtHojaProduccion.Size = New System.Drawing.Size(117, 20)
+        Me.txtHojaProduccion.TabIndex = 3
         '
         'txtRealizado
         '
@@ -526,7 +523,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(108, 24)
         Me.Button3.TabIndex = 0
-        Me.Button3.Text = "Agregar Renglón"
+        Me.Button3.Text = "ReimprimirHojaProduccion"
         Me.Button3.UseVisualStyleBackColor = True
         Me.Button3.Visible = False
         '
@@ -542,17 +539,17 @@ Partial Class IngresoPruebasEnsayo
         Me.btnLeerVersionAntFormula.Text = "Lee Versión Anterior"
         Me.btnLeerVersionAntFormula.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnHojaPiloto
         '
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button1.Location = New System.Drawing.Point(11, 332)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(219, 27)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "HOJA PILOTO EN PLANTA"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnHojaPiloto.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnHojaPiloto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnHojaPiloto.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnHojaPiloto.Location = New System.Drawing.Point(11, 332)
+        Me.btnHojaPiloto.Name = "btnHojaPiloto"
+        Me.btnHojaPiloto.Size = New System.Drawing.Size(219, 27)
+        Me.btnHojaPiloto.TabIndex = 0
+        Me.btnHojaPiloto.Text = "HOJA PILOTO EN PLANTA"
+        Me.btnHojaPiloto.UseVisualStyleBackColor = True
         '
         'TabProceso
         '
@@ -597,8 +594,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'ProcesoEtapa
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ProcesoEtapa.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ProcesoEtapa.DefaultCellStyle = DataGridViewCellStyle33
         Me.ProcesoEtapa.HeaderText = "Etapa"
         Me.ProcesoEtapa.MaxInputLength = 10
         Me.ProcesoEtapa.Name = "ProcesoEtapa"
@@ -726,8 +723,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'LaboratorioEnsayo
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.LaboratorioEnsayo.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.LaboratorioEnsayo.DefaultCellStyle = DataGridViewCellStyle34
         Me.LaboratorioEnsayo.HeaderText = "Ensayo"
         Me.LaboratorioEnsayo.MaxInputLength = 10
         Me.LaboratorioEnsayo.Name = "LaboratorioEnsayo"
@@ -844,8 +841,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'RevisionesVersion
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle35
         Me.RevisionesVersion.HeaderText = "Versión"
         Me.RevisionesVersion.MaxInputLength = 10
         Me.RevisionesVersion.Name = "RevisionesVersion"
@@ -860,8 +857,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'RevisionesFecha
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle36
         Me.RevisionesFecha.HeaderText = "Fecha"
         Me.RevisionesFecha.MaxInputLength = 10
         Me.RevisionesFecha.Name = "RevisionesFecha"
@@ -946,8 +943,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'CostoTipo
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoTipo.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoTipo.DefaultCellStyle = DataGridViewCellStyle37
         Me.CostoTipo.HeaderText = "Tipo"
         Me.CostoTipo.Name = "CostoTipo"
         Me.CostoTipo.ReadOnly = True
@@ -955,16 +952,16 @@ Partial Class IngresoPruebasEnsayo
         '
         'CostoArticulo
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoArticulo.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoArticulo.DefaultCellStyle = DataGridViewCellStyle38
         Me.CostoArticulo.HeaderText = "Artículo"
         Me.CostoArticulo.Name = "CostoArticulo"
         Me.CostoArticulo.ReadOnly = True
         '
         'CostoTerminado
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoTerminado.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoTerminado.DefaultCellStyle = DataGridViewCellStyle39
         Me.CostoTerminado.HeaderText = "Terminado"
         Me.CostoTerminado.Name = "CostoTerminado"
         Me.CostoTerminado.ReadOnly = True
@@ -978,23 +975,23 @@ Partial Class IngresoPruebasEnsayo
         '
         'CostoCantidad
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoCantidad.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoCantidad.DefaultCellStyle = DataGridViewCellStyle40
         Me.CostoCantidad.HeaderText = "Cantidad"
         Me.CostoCantidad.Name = "CostoCantidad"
         Me.CostoCantidad.ReadOnly = True
         '
         'CostoCosto
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoCosto.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoCosto.DefaultCellStyle = DataGridViewCellStyle41
         Me.CostoCosto.HeaderText = "Costo"
         Me.CostoCosto.Name = "CostoCosto"
         '
         'CostoImporte
         '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoImporte.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoImporte.DefaultCellStyle = DataGridViewCellStyle42
         Me.CostoImporte.HeaderText = "Importe"
         Me.CostoImporte.Name = "CostoImporte"
         Me.CostoImporte.ReadOnly = True
@@ -1801,9 +1798,9 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(76, 130)
+        Me.pnlConsulta.Location = New System.Drawing.Point(748, 130)
         Me.pnlConsulta.Name = "pnlConsulta"
-        Me.pnlConsulta.Size = New System.Drawing.Size(720, 350)
+        Me.pnlConsulta.Size = New System.Drawing.Size(48, 33)
         Me.pnlConsulta.TabIndex = 2
         '
         'GroupBox1
@@ -1919,6 +1916,60 @@ Partial Class IngresoPruebasEnsayo
         Me.txtNota.TabIndex = 0
         Me.txtNota.Text = ""
         '
+        'TipoFormula
+        '
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TipoFormula.DefaultCellStyle = DataGridViewCellStyle43
+        Me.TipoFormula.HeaderText = "Tipo"
+        Me.TipoFormula.MaxInputLength = 1
+        Me.TipoFormula.Name = "TipoFormula"
+        Me.TipoFormula.Width = 50
+        '
+        'ArticuloFormula
+        '
+        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ArticuloFormula.DefaultCellStyle = DataGridViewCellStyle44
+        Me.ArticuloFormula.HeaderText = "Artículo"
+        Me.ArticuloFormula.MaxInputLength = 10
+        Me.ArticuloFormula.Name = "ArticuloFormula"
+        '
+        'TerminadoFormula
+        '
+        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TerminadoFormula.DefaultCellStyle = DataGridViewCellStyle45
+        Me.TerminadoFormula.HeaderText = "Terminado"
+        Me.TerminadoFormula.MaxInputLength = 12
+        Me.TerminadoFormula.Name = "TerminadoFormula"
+        '
+        'DescripcionFormula
+        '
+        Me.DescripcionFormula.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescripcionFormula.HeaderText = "Descripcion"
+        Me.DescripcionFormula.Name = "DescripcionFormula"
+        '
+        'CantidadFormula
+        '
+        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CantidadFormula.DefaultCellStyle = DataGridViewCellStyle46
+        Me.CantidadFormula.HeaderText = "Cantidad"
+        Me.CantidadFormula.Name = "CantidadFormula"
+        '
+        'LoteFormula
+        '
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.LoteFormula.DefaultCellStyle = DataGridViewCellStyle47
+        Me.LoteFormula.HeaderText = "Lote"
+        Me.LoteFormula.Name = "LoteFormula"
+        '
+        'StockFormula
+        '
+        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.StockFormula.DefaultCellStyle = DataGridViewCellStyle48
+        Me.StockFormula.HeaderText = "Stock"
+        Me.StockFormula.MaxInputLength = 1
+        Me.StockFormula.Name = "StockFormula"
+        Me.StockFormula.Width = 50
+        '
         'IngresoPruebasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1943,6 +1994,9 @@ Partial Class IngresoPruebasEnsayo
         Me.TabControl1.ResumeLayout(False)
         Me.TabFormula.ResumeLayout(False)
         Me.TabFormula.PerformLayout()
+        Me.pnlHojaPiloto.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         CType(Me.dgvFormula, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabProceso.ResumeLayout(False)
         Me.TabProceso.PerformLayout()
@@ -2017,8 +2071,8 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents btnLeerVersionAntFormula As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents btnHojaPiloto As System.Windows.Forms.Button
+    Friend WithEvents txtHojaProduccion As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents txtNotasProceso As System.Windows.Forms.RichTextBox
@@ -2074,13 +2128,6 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents TipoFormula As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ArticuloFormula As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TerminadoFormula As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DescripcionFormula As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CantidadFormula As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents LoteFormula As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents StockFormula As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtCantidad As System.Windows.Forms.TextBox
     Friend WithEvents txtVersion As System.Windows.Forms.TextBox
     Friend WithEvents ProcesoEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2135,4 +2182,15 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents RevisionesResponsables As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RevisionesEstado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lstOpciones As System.Windows.Forms.ListBox
+    Friend WithEvents pnlHojaPiloto As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnCancelarHojaPiloto As System.Windows.Forms.Button
+    Friend WithEvents txtDescripcionHojaPiloto As System.Windows.Forms.TextBox
+    Friend WithEvents TipoFormula As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ArticuloFormula As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TerminadoFormula As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescripcionFormula As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CantidadFormula As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LoteFormula As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents StockFormula As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

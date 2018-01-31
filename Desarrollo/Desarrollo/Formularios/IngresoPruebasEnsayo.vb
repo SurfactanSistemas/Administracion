@@ -61,6 +61,8 @@ Public Class IngresoPruebasEnsayo
         Next
 
         pnlConsulta.Visible = False
+        pnlHojaPiloto.Visible = False
+        txtDescripcionHojaPiloto.Text = ""
 
         For Each grid As DataGridView In {dgvFormula, dgvCosto, dgvProceso, dgvLaboratorio, dgvRevisiones}
 
@@ -544,7 +546,7 @@ Public Class IngresoPruebasEnsayo
     '    pnlNotas.Visible = False
     'End Sub
 
-    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click, Button3.Click
+    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
 
         Try
             If Trim(txtOrden.Text).Replace("-", "") = "" OrElse Trim(txtOrden.Text).Length < 8 Then Exit Sub
@@ -1637,9 +1639,18 @@ Public Class IngresoPruebasEnsayo
 
                     End With
 
+                Case 4
+                    With dgvFormula
+                        .Rows(iRow).Cells(iCol).Value = Helper.formatonumerico(valor, 3)
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End With
+                Case Else
+                    With dgvFormula
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End With
             End Select
 
-            dgvFormula.Rows(iRow).Cells(iCol).Value = UCase(valor)
+            dgvFormula.Rows(iRow).Cells(iCol).Value = UCase(dgvFormula.Rows(iRow).Cells(iCol).Value)
 
             Return True
 
@@ -2252,9 +2263,9 @@ Public Class IngresoPruebasEnsayo
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Tipo, Articulo, Terminado, Descripcion, Cantidad, Lote, Stock, Costo FROM CargaEnsayoII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Tipo, Articulo, Terminado, Descripcion, Cantidad, Lote, Stock, Costo, Hoja FROM CargaEnsayoII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
-        Dim WTipo = "", WArticulo = "", WTerminado = "", WDescripcion = "", WCantidad = "", WLote = "", WStock = "", WCosto = ""
+        Dim WTipo = "", WArticulo = "", WTerminado = "", WDescripcion = "", WCantidad = "", WLote = "", WStock = "", WCosto = "", WHoja = ""
         Dim WIndice = 0
 
         Try
@@ -2285,11 +2296,14 @@ Public Class IngresoPruebasEnsayo
                         WLote = IIf(IsDBNull(.Item("Lote")), "", .Item("Lote"))
                         WStock = IIf(IsDBNull(.Item("Stock")), "", .Item("Stock"))
                         WCosto = IIf(IsDBNull(.Item("Costo")), "", .Item("Costo"))
+                        WHoja = IIf(IsDBNull(.Item("Hoja")), "", .Item("Hoja"))
 
                         WCantidad = Helper.formatonumerico(WCantidad, 3)
                         WCosto = Helper.formatonumerico(WCosto)
 
                     End With
+
+                    txtHojaProduccion.Text = WHoja
 
                     WIndice = dgvFormula.Rows.Add
 
@@ -3322,11 +3336,1013 @@ Public Class IngresoPruebasEnsayo
             With dgvFormula
                 If .Rows.Count > 0 Then
                     .CurrentCell = .Rows(0).Cells(0)
+                    .Focus()
                 End If
             End With
 
         ElseIf e.KeyData = Keys.Escape Then
             txtCantidad.Text = ""
         End If
+    End Sub
+
+    Private Sub btnHojaPiloto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHojaPiloto.Click
+
+        pnlHojaPiloto.Visible = True
+        txtDescripcionHojaPiloto.Text = ""
+        txtDescripcionHojaPiloto.Focus()
+
+    End Sub
+
+    Private Sub txtDescripcionHojaPiloto_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcionHojaPiloto.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDescripcionHojaPiloto.Text) = "" Then : Exit Sub : End If
+
+            Try
+                _GenerarHojaPiloto()
+
+                btnLimpiar.PerformClick()
+
+            Catch ex As Exception
+                MsgBox("Se detuvo la generación de Hoja Piloto." & vbCrLf & vbCrLf & " Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+            End Try
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDescripcionHojaPiloto.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub _GenerarHojaPiloto()
+
+        Dim WEmpresa = 0
+        Dim WTipo = "", WArticulo = "", WTerminado = "", WCantidad = "", WLote = "0", WHoja = 0, WCodigo = "", WDescripcion = ""
+        Dim WClave = "", WRenglon = 0, WFecha = "", WProducto = "", WTeorico = "0", WReal = "0", WFechaIng = "", WFechaIngOrd = "", WWDate = "", WWImporte = "0", WMARCA = "", WSaldo = "0", WLote1 = "0", WCanti1 = "0", WLote2 = "0", WCanti2 = "0", WLote3 = "0", WCanti3 = "0", WCosto1 = "0", WCosto2 = "0", WCosto3 = "0", WMarcaant = "", WSaldoant = "0", WRealant = "0", WFechaOrd = "", WEquipo = "", WMarcaLabora = "", WEstado = "", WVersionI = "0", WVersionII = "0", WVersionIII = "0", WEstadoII = "", WImpreArticulo = "", WFechaInicio = "", WHoraInicio = "", WFechaFinal = "", WHoraFinal = "", WPorceDife = "0", WImpresionI = "", WImpresionII = "", WMotivoDesvio = "0", WObservaDesvio = "", WImpreReal = "0", WOperario = "0", WEstadoHoja = "0", WEtapa = "0", WFechaInicioEtapa = "", WHoraInicioEtapa = "", WTimerInicioEtapa = "0", WAlarma = "", WControlI = "0", WControlII = "0", WDesdeI = "0", WHastaI = "0", WTiempoI = "0", WTiempoII = "0", WAlarmaI = "", WAlarmaII = "", WAlarmaITiempo = "0", WAlarmaITempe = "0", WTiempoIII = "0", WTemperatura = "0", WTipoEtapa = "0", WEnvasamiento = "", WEquipoII = "0", WDesde = "0", WHasta = "0", WLista = "", WSuma1 = "0", WSuma2 = "0", WSuma3 = "0", WSuma4 = "0", WSuma5 = "0", WSuma6 = "0", WIdentificacion = "", WNroPedido = "0", WFechaVencimiento = "", WOrdFechaVencimiento = "", WRevalida = "0", WFechaRevalida = "", WOrdFechaRevalida = "", WMesesRevalida = "0", WMarcaVencida = "", WLoteColorante = "", WTipoOri = "", WImpreVersion = "0", WImpreFechaVersion = "", WLiberaFarma = "", WFechaReanalisis = "", WImpreAlmacenero = "", WSeguridad = "", WSaldoCierre = "0", WCosto = "0", ZSql = "", WImporte = "0", WDate = ""
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim trans As SqlTransaction = Nothing
+
+        ' Verificamos que no haya ya un numero de Hoja.
+        If Val(txtHojaProduccion.Text) > 0 Then
+            Throw New Exception("Hoja de Producción ya ingresada")
+        End If
+
+        ' Verificamos que se haya elegido una planta.
+        If cmbPlanta.SelectedIndex = 0 Then
+            Throw New Exception("NO SE INFORMO PLANTA EN LA QUE SE DEBE DESCONTAR EL STOCK")
+        End If
+
+        ' Determinamos la Planta con la que trabajar.
+        If Helper._EsPellital Then
+            WEmpresa = 8
+        Else
+
+            Select Case cmbPlanta.SelectedIndex
+                Case 1
+                    WEmpresa = 3
+                Case 2
+                    WEmpresa = 1
+                Case 3
+                    WEmpresa = 5
+                Case Else
+                    Throw New Exception("No se ha seleccionado una Planta válida.")
+            End Select
+
+        End If
+
+        ' Modificamos la empresa, segun casos especiales.
+        If WEmpresa = 3 Then
+            If UCase(txtOrden.Text).StartsWith("IF") Then
+                WEmpresa = 5
+            End If
+
+            If UCase(txtOrden.Text).StartsWith("IP") Then
+                WEmpresa = 1
+            End If
+        End If
+
+        ' Verificamos Stock de items cargados en Fórmula.
+        For Each _row As DataGridViewRow In dgvFormula.Rows
+
+            WTipo = IIf(IsNothing(_row.Cells("TipoFormula").Value), "", _row.Cells("TipoFormula").Value)
+            WArticulo = IIf(IsNothing(_row.Cells("ArticuloFormula").Value), "", _row.Cells("ArticuloFormula").Value)
+            WTerminado = IIf(IsNothing(_row.Cells("TerminadoFormula").Value), "", _row.Cells("TerminadoFormula").Value)
+            WCantidad = IIf(IsNothing(_row.Cells("CantidadFormula").Value), "", _row.Cells("CantidadFormula").Value)
+            WLote = IIf(IsNothing(_row.Cells("LoteFormula").Value), "", _row.Cells("LoteFormula").Value)
+
+            If Trim(WCantidad) = "" Then Continue For
+
+
+            Select Case UCase(WTipo)
+                Case "M"
+
+                    If Not _StockSuficienteMP(WArticulo, WCantidad, WEmpresa) Then
+                        Throw New Exception("Producto Inexistente o Stock Insuficiente del Artículo " & WArticulo)
+                    End If
+
+                Case "T"
+
+                    If Not _StockSuficienteTerminado(WTerminado, WCantidad, WEmpresa) Then
+                        Throw New Exception("Producto Inexistente o Stock Insuficiente para el Producto Terminado " & WTerminado)
+                    End If
+
+            End Select
+
+        Next
+
+        ' Calculamos el Siguiente Número de Hoja Correspondiente según Empresa.
+        Try
+            WHoja = _SiguienteNumeroHojaProduccion(WEmpresa)
+            txtHojaProduccion.Text = WHoja
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+        
+        Try
+            ' Generamos el Código y damos de alta el nuevo código en caso de no existir.
+
+            WCodigo = txtOrden.Text & "-100"
+            WDescripcion = Trim(txtDescripcionHojaPiloto.Text)
+
+            If Not _ExisteTerminado(WCodigo, WEmpresa) Then
+
+                _CrearTerminado(WCodigo, WDescripcion, WEmpresa)
+
+            End If
+
+            ' Guardamos los datos generales de la Hoja
+
+            WFecha = Date.Now.ToString("dd/MM/yyyy")
+            WFechaOrd = Helper.ordenaFecha(WFecha)
+            WProducto = txtOrden.Text & "-100"
+            WTeorico = Helper.formatonumerico(txtCantidad.Text, 4)
+            WFechaIng = "  /  /    "
+            WDate = Date.Now.ToString("MM-dd-yyyy")
+            WSaldo = WTeorico
+            WLote = "0"
+
+            Try
+
+                ' Damos de alta la Hoja.
+
+                cn.ConnectionString = Helper._ConectarA(WEmpresa)
+                cn.Open()
+                trans = cn.BeginTransaction
+                cm.Connection = cn
+                cm.Transaction = trans
+
+                For Each _row As DataGridViewRow In dgvFormula.Rows
+
+                    With _row
+
+                        WTipo = IIf(IsNothing(.Cells("TipoFormula").Value), "", .Cells("TipoFormula").Value)
+                        WArticulo = IIf(IsNothing(.Cells("ArticuloFormula").Value), "", .Cells("ArticuloFormula").Value)
+                        WTerminado = IIf(IsNothing(.Cells("TerminadoFormula").Value), "", .Cells("TerminadoFormula").Value)
+                        WCantidad = IIf(IsNothing(.Cells("CantidadFormula").Value), "", .Cells("CantidadFormula").Value)
+
+                        If WCantidad = "" Then Continue For
+
+                        WRenglon = .Index + 1
+
+                    End With
+
+                    WClave = Helper.ceros(WHoja, 6) & Helper.ceros(WRenglon, 2)
+
+                    ZSql = ""
+                    ZSql &= "INSERT INTO Hoja (Clave,"
+                    ZSql &= "Hoja,"
+                    ZSql &= "Renglon,"
+                    ZSql &= "Fecha,"
+                    ZSql &= "Producto,"
+                    ZSql &= "Cantidad,"
+                    ZSql &= "Tipo,"
+                    ZSql &= "Lote,"
+                    ZSql &= "Articulo,"
+                    ZSql &= "Terminado,"
+                    ZSql &= "Teorico,"
+                    ZSql &= "Real,"
+                    ZSql &= "FechaIng,"
+                    ZSql &= "FechaIngOrd,"
+                    ZSql &= "WDate,"
+                    ZSql &= "WImporte,"
+                    ZSql &= "MARCA,"
+                    ZSql &= "Saldo,"
+                    ZSql &= "Lote1,"
+                    ZSql &= "Canti1,"
+                    ZSql &= "Lote2,"
+                    ZSql &= "Canti2,"
+                    ZSql &= "Lote3,"
+                    ZSql &= "Canti3,"
+                    ZSql &= "Costo1,"
+                    ZSql &= "Costo2,"
+                    ZSql &= "Costo3,"
+                    ZSql &= "Marcaant,"
+                    ZSql &= "Saldoant,"
+                    ZSql &= "Realant,"
+                    ZSql &= "FechaOrd,"
+                    ZSql &= "Equipo,"
+                    ZSql &= "MarcaLabora,"
+                    ZSql &= "Estado,"
+                    ZSql &= "VersionI,"
+                    ZSql &= "VersionII,"
+                    ZSql &= "VersionIII,"
+                    ZSql &= "EstadoII,"
+                    ZSql &= "ImpreArticulo,"
+                    ZSql &= "FechaInicio,"
+                    ZSql &= "HoraInicio,"
+                    ZSql &= "FechaFinal,"
+                    ZSql &= "HoraFinal,"
+                    ZSql &= "PorceDife,"
+                    ZSql &= "ImpresionI,"
+                    ZSql &= "ImpresionII,"
+                    ZSql &= "MotivoDesvio,"
+                    ZSql &= "ObservaDesvio,"
+                    ZSql &= "ImpreReal,"
+                    ZSql &= "Operario,"
+                    ZSql &= "EstadoHoja,"
+                    ZSql &= "Etapa,"
+                    ZSql &= "FechaInicioEtapa,"
+                    ZSql &= "HoraInicioEtapa,"
+                    ZSql &= "TimerInicioEtapa,"
+                    ZSql &= "Alarma,"
+                    ZSql &= "ControlI,"
+                    ZSql &= "ControlII,"
+                    ZSql &= "DesdeI,"
+                    ZSql &= "HastaI,"
+                    ZSql &= "TiempoI,"
+                    ZSql &= "TiempoII,"
+                    ZSql &= "AlarmaI,"
+                    ZSql &= "AlarmaII,"
+                    ZSql &= "AlarmaITiempo,"
+                    ZSql &= "AlarmaITempe,"
+                    ZSql &= "TiempoIII,"
+                    ZSql &= "Temperatura,"
+                    ZSql &= "TipoEtapa,"
+                    ZSql &= "Envasamiento,"
+                    ZSql &= "EquipoII,"
+                    ZSql &= "Desde,"
+                    ZSql &= "Hasta,"
+                    ZSql &= "Lista,"
+                    ZSql &= "Suma1,"
+                    ZSql &= "Suma2,"
+                    ZSql &= "Suma3,"
+                    ZSql &= "Suma4,"
+                    ZSql &= "Suma5,"
+                    ZSql &= "Suma6,"
+                    ZSql &= "Identificacion,"
+                    ZSql &= "NroPedido,"
+                    ZSql &= "FechaVencimiento,"
+                    ZSql &= "OrdFechaVencimiento,"
+                    ZSql &= "Revalida,"
+                    ZSql &= "FechaRevalida,"
+                    ZSql &= "OrdFechaRevalida,"
+                    ZSql &= "MesesRevalida,"
+                    ZSql &= "MarcaVencida,"
+                    ZSql &= "LoteColorante,"
+                    ZSql &= "TipoOri,"
+                    ZSql &= "ImpreVersion,"
+                    ZSql &= "ImpreFechaVersion,"
+                    ZSql &= "LiberaFarma,"
+                    ZSql &= "FechaReanalisis,"
+                    ZSql &= "ImpreAlmacenero,"
+                    ZSql &= "Seguridad,"
+                    ZSql &= "SaldoCierre,"
+                    ZSql &= "Costo"
+                    ZSql &= ")"
+                    ZSql &= "VALUES("
+                    ZSql &= "'" & WClave & "',"
+                    ZSql &= "" & Str$(WHoja) & ","
+                    ZSql &= "" & Str$(WRenglon) & ","
+                    ZSql &= "'" & WFecha & "',"
+                    ZSql &= "'" & WProducto & "',"
+                    ZSql &= "" & WCantidad & ","
+                    ZSql &= "'" & WTipo & "',"
+                    ZSql &= "" & WLote & ","
+                    ZSql &= "'" & WArticulo & "',"
+                    ZSql &= "'" & WTerminado & "',"
+                    ZSql &= "" & WTeorico & ","
+                    ZSql &= "" & WReal & ","
+                    ZSql &= "'" & WFechaIng & "',"
+                    ZSql &= "'" & WFechaIngOrd & "',"
+                    ZSql &= "'" & WWDate & "',"
+                    ZSql &= "" & WWImporte & ","
+                    ZSql &= "'" & WMARCA & "',"
+                    ZSql &= "" & WSaldo & ","
+                    ZSql &= "" & WLote1 & ","
+                    ZSql &= "" & WCanti1 & ","
+                    ZSql &= "" & WLote2 & ","
+                    ZSql &= "" & WCanti2 & ","
+                    ZSql &= "" & WLote3 & ","
+                    ZSql &= "" & WCanti3 & ","
+                    ZSql &= "" & WCosto1 & ","
+                    ZSql &= "" & WCosto2 & ","
+                    ZSql &= "" & WCosto3 & ","
+                    ZSql &= "'" & WMarcaant & "',"
+                    ZSql &= "" & WSaldoant & ","
+                    ZSql &= "" & WRealant & ","
+                    ZSql &= "'" & WFechaOrd & "',"
+                    ZSql &= "'" & WEquipo & "',"
+                    ZSql &= "'" & WMarcaLabora & "',"
+                    ZSql &= "'" & WEstado & "',"
+                    ZSql &= "" & WVersionI & ","
+                    ZSql &= "" & WVersionII & ","
+                    ZSql &= "" & WVersionIII & ","
+                    ZSql &= "'" & WEstadoII & "',"
+                    ZSql &= "'" & WImpreArticulo & "',"
+                    ZSql &= "'" & WFechaInicio & "',"
+                    ZSql &= "'" & WHoraInicio & "',"
+                    ZSql &= "'" & WFechaFinal & "',"
+                    ZSql &= "'" & WHoraFinal & "',"
+                    ZSql &= "" & WPorceDife & ","
+                    ZSql &= "'" & WImpresionI & "',"
+                    ZSql &= "'" & WImpresionII & "',"
+                    ZSql &= "" & WMotivoDesvio & ","
+                    ZSql &= "'" & WObservaDesvio & "',"
+                    ZSql &= "" & WImpreReal & ","
+                    ZSql &= "" & WOperario & ","
+                    ZSql &= "" & WEstadoHoja & ","
+                    ZSql &= "" & WEtapa & ","
+                    ZSql &= "'" & WFechaInicioEtapa & "',"
+                    ZSql &= "'" & WHoraInicioEtapa & "',"
+                    ZSql &= "" & WTimerInicioEtapa & ","
+                    ZSql &= "'" & WAlarma & "',"
+                    ZSql &= "" & WControlI & ","
+                    ZSql &= "" & WControlII & ","
+                    ZSql &= "" & WDesdeI & ","
+                    ZSql &= "" & WHastaI & ","
+                    ZSql &= "" & WTiempoI & ","
+                    ZSql &= "" & WTiempoII & ","
+                    ZSql &= "'" & WAlarmaI & "',"
+                    ZSql &= "'" & WAlarmaII & "',"
+                    ZSql &= "" & WAlarmaITiempo & ","
+                    ZSql &= "" & WAlarmaITempe & ","
+                    ZSql &= "" & WTiempoIII & ","
+                    ZSql &= "" & WTemperatura & ","
+                    ZSql &= "" & WTipoEtapa & ","
+                    ZSql &= "'" & WEnvasamiento & "',"
+                    ZSql &= "" & WEquipoII & ","
+                    ZSql &= "" & WDesde & ","
+                    ZSql &= "" & WHasta & ","
+                    ZSql &= "'" & WLista & "',"
+                    ZSql &= "" & WSuma1 & ","
+                    ZSql &= "" & WSuma2 & ","
+                    ZSql &= "" & WSuma3 & ","
+                    ZSql &= "" & WSuma4 & ","
+                    ZSql &= "" & WSuma5 & ","
+                    ZSql &= "" & WSuma6 & ","
+                    ZSql &= "'" & WIdentificacion & "',"
+                    ZSql &= "" & WNroPedido & ","
+                    ZSql &= "'" & WFechaVencimiento & "',"
+                    ZSql &= "'" & WOrdFechaVencimiento & "',"
+                    ZSql &= "" & WRevalida & ","
+                    ZSql &= "'" & WFechaRevalida & "',"
+                    ZSql &= "'" & WOrdFechaRevalida & "',"
+                    ZSql &= "" & WMesesRevalida & ","
+                    ZSql &= "'" & WMarcaVencida & "',"
+                    ZSql &= "'" & WLoteColorante & "',"
+                    ZSql &= "'" & WTipoOri & "',"
+                    ZSql &= "" & WImpreVersion & ","
+                    ZSql &= "'" & WImpreFechaVersion & "',"
+                    ZSql &= "'" & WLiberaFarma & "',"
+                    ZSql &= "'" & WFechaReanalisis & "',"
+                    ZSql &= "'" & WImpreAlmacenero & "',"
+                    ZSql &= "'" & WSeguridad & "',"
+                    ZSql &= "" & WSaldoCierre & ","
+                    ZSql &= "" & WCosto & ")"
+
+                    cm.CommandText = ZSql
+
+                    cm.ExecuteNonQuery()
+
+                    ' Actualizamos el Saldo en Proceso del Terminado
+                    If WRenglon = 1 Then
+
+                        ZSql = ""
+                        ZSql = "UPDATE Terminado SET Proceso = Proceso + " & Helper.formatonumerico(txtCantidad.Text, 4) & ", WDate = '" & WDate & "' WHERE Codigo = '" & WCodigo & "'"
+
+                        cm.CommandText = ZSql
+                        cm.ExecuteNonQuery()
+
+                    End If
+
+                    ' Actualizamos los valores de Salidas segun el tipo
+
+                    Select Case UCase(WTipo)
+                        Case "T"
+
+                            ZSql = ""
+                            ZSql = "UPDATE Terminado SET Salidas = Salidas + " & Helper.formatonumerico(WCantidad, 3) & ", WDate = '" & WDate & "' WHERE Codigo = '" & WTerminado & "'"
+
+                            cm.CommandText = ZSql
+                            cm.ExecuteNonQuery()
+
+                        Case "M"
+
+                            ZSql = ""
+                            ZSql = "UPDATE Articulo SET Salidas = Salidas + " & Helper.formatonumerico(txtCantidad.Text, 4) & ", WDate = '" & WDate & "' WHERE Codigo = '" & WArticulo & "'"
+
+                            cm.CommandText = ZSql
+                            cm.ExecuteNonQuery()
+
+                    End Select
+
+                Next
+
+                ' Actualizamos datos generales de la Hoja.
+                
+                ZSql = ""
+                ZSql = "UPDATE Hoja SET Equipo = '', VersionI = 0, VersionII = 0, VersionIII = 0, MarcaLabora = 'S' WHERE Hoja = '" & WHoja & "'"
+
+                cm.CommandText = ZSql
+                cm.ExecuteNonQuery()
+
+                ' Actualizamos CargaEnsayoII
+
+                ZSql = ""
+                ZSql = "UPDATE CargaEnsayoII SET Hoja = '" & WHoja & "' WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+
+                cm.CommandText = ZSql
+                cm.ExecuteNonQuery()
+
+                trans.Commit()
+
+                ' ACA LLAMAR A LA IMPRESION
+
+                _ImprimirHojaPiloto()
+
+            Catch ex As Exception
+                If Not IsNothing(trans) Then
+                    trans.Rollback()
+                End If
+                Throw New Exception("Hubo un problema al querer generar la Hoja Piloto en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Finally
+
+                dr = Nothing
+                cn.Close()
+                cn = Nothing
+                cm = Nothing
+
+            End Try
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+
+
+    End Sub
+
+    Private Sub _ImprimirHojaPiloto()
+        Dim ZSql = "", WTipo = "", WArticulo = "", WTerminado = "", WLote = "", WHoja = "", WLinea = "", WFecha = "", WCodigo1 = "", WCodigo2 = "", WArticulo1 = "", WArticulo2 = "", WCantidad = "", WDetalle = "", WTeorico = ""
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "DELETE ImpreHoja"
+            cm.ExecuteNonQuery()
+
+            WHoja = txtHojaProduccion.Text
+
+            If Val(WHoja) = 0 Then
+                Throw New Exception("Número de Hoja de Produccion Inválida.")
+            End If
+
+            WTeorico = Helper.formatonumerico(txtCantidad.Text, 4)
+            WCodigo1 = txtOrden.Text.SliceLeft(2)
+            WCodigo2 = txtOrden.Text.SliceRight(5) & "/100"
+            WFecha = txtFecha.Text
+
+            For Each _row As DataGridViewRow In dgvFormula.Rows
+
+                With _row
+
+                    WTipo = IIf(IsNothing(.Cells("TipoFormula").Value), "", .Cells("TipoFormula").Value)
+                    WArticulo = IIf(IsNothing(.Cells("ArticuloFormula").Value), "", .Cells("ArticuloFormula").Value)
+                    WTerminado = IIf(IsNothing(.Cells("TerminadoFormula").Value), "", .Cells("TerminadoFormula").Value)
+                    WDetalle = IIf(IsNothing(.Cells("DescripcionFormula").Value), "", .Cells("DescripcionFormula").Value)
+                    WCantidad = IIf(IsNothing(.Cells("CantidadFormula").Value), "", .Cells("CantidadFormula").Value)
+                    WLote = IIf(IsNothing(.Cells("LoteFormula").Value), "", .Cells("LoteFormula").Value)
+
+                    If Trim(WCantidad) = "" Then Continue For
+
+                    WLinea = Str$(.Index + 1)
+
+                End With
+
+                If UCase(WTipo) = "M" Then
+                    WArticulo1 = WArticulo.SliceLeft(2)
+                    WArticulo2 = Mid$(WArticulo, 4, 3) + "-" + WArticulo.SliceRight(3)
+                Else
+                    WArticulo1 = WTerminado.SliceLeft(2)
+                    WArticulo2 = Mid$(WTerminado, 4, 5) + "-" + WTerminado.SliceRight(3)
+                End If
+
+                ZSql = ""
+                ZSql = ZSql & "INSERT INTO ImpreHoja ("
+                ZSql = ZSql & "Hoja ,"
+                ZSql = ZSql & "Renglon ,"
+                ZSql = ZSql & "Fecha ,"
+                ZSql = ZSql & "Codigo1 ,"
+                ZSql = ZSql & "Codigo2 ,"
+                ZSql = ZSql & "Maquina ,"
+                ZSql = ZSql & "Articulo1 ,"
+                ZSql = ZSql & "Articulo2 ,"
+                ZSql = ZSql & "Cantidad ,"
+                ZSql = ZSql & "Teorico ,"
+                ZSql = ZSql & "Metodo ,"
+                ZSql = ZSql & "Efluentes ,"
+                ZSql = ZSql & "DesEfluentesI ,"
+                ZSql = ZSql & "DesEfluentesII ,"
+                ZSql = ZSql & "VersionI ,"
+                ZSql = ZSql & "VersionII ,"
+                ZSql = ZSql & "VersionIII ,"
+                ZSql = ZSql & "Detalle ,"
+                ZSql = ZSql & "Equipo )"
+                ZSql = ZSql & "Values ("
+                ZSql = ZSql & "'" + WHoja + "',"
+                ZSql = ZSql & "'" + WLinea + "',"
+                ZSql = ZSql & "'" + WFecha + "',"
+                ZSql = ZSql & "'" + WCodigo1 + "',"
+                ZSql = ZSql & "'" + WCodigo2 + "',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'" + WArticulo1 + "',"
+                ZSql = ZSql & "'" + WArticulo2 + "',"
+                ZSql = ZSql & "'" + WCantidad + "',"
+                ZSql = ZSql & "'" + WTeorico + "',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'" + WDetalle + "',"
+                ZSql = ZSql & "'')"
+
+                cm.CommandText = ZSql
+                cm.ExecuteNonQuery()
+
+            Next
+
+            WArticulo1 = ""
+            WArticulo2 = ""
+            WDetalle = ""
+            WCantidad = ""
+
+            ' Completamos las filas que falten.
+            For i = Val(WLinea) + 1 To 14
+
+                WLinea = Str$(i)
+
+                ZSql = ""
+                ZSql = ZSql & "INSERT INTO ImpreHoja ("
+                ZSql = ZSql & "Hoja ,"
+                ZSql = ZSql & "Renglon ,"
+                ZSql = ZSql & "Fecha ,"
+                ZSql = ZSql & "Codigo1 ,"
+                ZSql = ZSql & "Codigo2 ,"
+                ZSql = ZSql & "Maquina ,"
+                ZSql = ZSql & "Articulo1 ,"
+                ZSql = ZSql & "Articulo2 ,"
+                ZSql = ZSql & "Cantidad ,"
+                ZSql = ZSql & "Teorico ,"
+                ZSql = ZSql & "Metodo ,"
+                ZSql = ZSql & "Efluentes ,"
+                ZSql = ZSql & "DesEfluentesI ,"
+                ZSql = ZSql & "DesEfluentesII ,"
+                ZSql = ZSql & "VersionI ,"
+                ZSql = ZSql & "VersionII ,"
+                ZSql = ZSql & "VersionIII ,"
+                ZSql = ZSql & "Detalle ,"
+                ZSql = ZSql & "Equipo )"
+                ZSql = ZSql & "Values ("
+                ZSql = ZSql & "'" + WHoja + "',"
+                ZSql = ZSql & "'" + WLinea + "',"
+                ZSql = ZSql & "'" + WFecha + "',"
+                ZSql = ZSql & "'" + WCodigo1 + "',"
+                ZSql = ZSql & "'" + WCodigo2 + "',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'" + WArticulo1 + "',"
+                ZSql = ZSql & "'" + WArticulo2 + "',"
+                ZSql = ZSql & "'" + WCantidad + "',"
+                ZSql = ZSql & "'" + WTeorico + "',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'',"
+                ZSql = ZSql & "'" + WDetalle + "',"
+                ZSql = ZSql & "'')"
+
+                cm.CommandText = ZSql
+                cm.ExecuteNonQuery()
+            Next
+
+            ' Generamos el Reporte y lo mostramos por pantalla. > Cambiar dsp para que salga impreso directamente.
+            With VistaPrevia
+                .DesdeArchivo(Configuration.ConfigurationManager.AppSettings("reportslocation") & "imprehojadesarrollo.rpt")
+                .Formula = "{ImpreHoja.Hoja}=" & WHoja
+                .Mostrar()
+            End With
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer Imprimir la Hoja Piloto para la Orden " & txtOrden.Text & " Version " & txtVersion.Text & "." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _CrearTerminado(ByVal wCodigo As String, ByVal wDescripcion As String, ByVal wEmpresa As Integer)
+        If String.IsNullOrEmpty(wCodigo) Or String.IsNullOrEmpty(wDescripcion) Or wEmpresa = 0 Then
+            Throw New Exception("Datos para dar de alta Nuevo Código de Terminado incorrectos.")
+        End If
+
+        Dim ZSql = "", WEmpresas() = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+
+        ' Determinamos en que plantas se van a realizar las altas.
+        Select Case Val(wEmpresa)
+
+            Case 3
+                WEmpresas(1) = 1
+                WEmpresas(2) = 3
+                WEmpresas(3) = 5
+                WEmpresas(4) = 6
+                WEmpresas(5) = 7
+
+            Case 4
+                WEmpresas(1) = 2
+                WEmpresas(2) = 4
+                WEmpresas(3) = 8
+                WEmpresas(4) = 9
+
+            Case 5
+                WEmpresas(1) = 2
+                WEmpresas(2) = 4
+                WEmpresas(3) = 8
+                WEmpresas(4) = 9
+
+            Case 10
+                WEmpresas(1) = 10
+
+        End Select
+
+        ' Preparamos la consulta.
+        ZSql = ""
+        ZSql = ZSql & "INSERT INTO Terminado ("
+        ZSql = ZSql & "Codigo ,"
+        ZSql = ZSql & "Descripcion ,"
+        ZSql = ZSql & "Linea ,"
+        ZSql = ZSql & "Unidad ,"
+        ZSql = ZSql & "Inicial ,"
+        ZSql = ZSql & "Entradas ,"
+        ZSql = ZSql & "Salidas ,"
+        ZSql = ZSql & "Minimo ,"
+        ZSql = ZSql & "Deposito ,"
+        ZSql = ZSql & "Pedido ,"
+        ZSql = ZSql & "Envase1 ,"
+        ZSql = ZSql & "Envase2 ,"
+        ZSql = ZSql & "Envase3 ,"
+        ZSql = ZSql & "Envase4 ,"
+        ZSql = ZSql & "Envase5 ,"
+        ZSql = ZSql & "Envase6 ,"
+        ZSql = ZSql & "Proceso ,"
+        ZSql = ZSql & "Costo ,"
+        ZSql = ZSql & "Factor ,"
+        ZSql = ZSql & "WDate ,"
+        ZSql = ZSql & "ImpreAdi ,"
+        ZSql = ZSql & "Clase ,"
+        ZSql = ZSql & "Intervencion ,"
+        ZSql = ZSql & "Naciones ,"
+        ZSql = ZSql & "Embalaje ,"
+        ZSql = ZSql & "Controla ,"
+        ZSql = ZSql & "Observaciones ,"
+        ZSql = ZSql & "TipoEti ,"
+        ZSql = ZSql & "Escrito ,"
+        ZSql = ZSql & "Minimo1 ,"
+        ZSql = ZSql & "Conservacion ,"
+        ZSql = ZSql & "ConservacionII ,"
+        ZSql = ZSql & "Vida ,"
+        ZSql = ZSql & "Seguridad ,"
+        ZSql = ZSql & "Version ,"
+        ZSql = ZSql & "VersionI ,"
+        ZSql = ZSql & "VersionII ,"
+        ZSql = ZSql & "FechaVersion ,"
+        ZSql = ZSql & "FechaVersionI ,"
+        ZSql = ZSql & "FechaVersionII ,"
+        ZSql = ZSql & "Estado ,"
+        ZSql = ZSql & "EstadoI ,"
+        ZSql = ZSql & "EstadoII ,"
+        ZSql = ZSql & "Observa ,"
+        ZSql = ZSql & "ObservaI ,"
+        ZSql = ZSql & "ObservaII ,"
+        ZSql = ZSql & "Metodo ,"
+        ZSql = ZSql & "Efluentes )"
+        ZSql = ZSql & "Values ("
+        ZSql = ZSql & "'" + wCodigo + "',"
+        ZSql = ZSql & "'" + wDescripcion.SliceLeft(50) + "',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'" & Date.Now.ToString("MM-dd-yyyy") & "',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'',"
+        ZSql = ZSql & "'')"
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+
+        Try
+            If Not _VerificaConexionConTodasLasPlantas() Then
+                Throw New Exception("No se ha podido verificar la conexión para todas las Plantas.")
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+
+
+
+        Try
+            For i = 1 To 10
+
+                If WEmpresas(i) = 0 OrElse _ExisteTerminado(wCodigo, WEmpresas(i)) Then
+                    Continue For
+                End If
+
+                cn.ConnectionString = Helper._ConectarA(WEmpresas(i))
+                cn.Open()
+                cm.Connection = cn
+                cm.CommandText = ZSql
+
+                cm.ExecuteNonQuery()
+
+                ZSql = ""
+                ZSql = "UPDATE Terminado SET Envase = '', Dife = '', Stock = '', FechaCierre = '', OrdFechaCierre = '', Fabrica = '', Caracteristicas = '', Carga = '', EstadoProducto = '', ListaProducto = '', ImpreEnvase1 = '', ImpreEnvase2 = '', ImpreEnvase3 = '', ImpreEnvase4 = '', ImpreEnvase5 = '', ImpreEnvase6 = '', ImpreEnvase7 = '', Precio1 = '', Precio2 = '', MarcaPrecio = '', CodigoEmpresa = '', DescriEtiqueta = '', LoteAutorizado = '', Marca = '', EstadoHoja = '', DescripcionIngles = '', DescriEtiquetaIngles = '', ConservacionIngles = '', ConservacionIIIngles = '', Sedronar = '', ImpreVto = '', Secundario = '', Riesgo = '', DescriOnu = '', responsable = '', MarcaMsds = '', FabricaII = '', FabricaIII = '', CodSedronar = '', Restriccion = '', Mono = '', PorceSedronar = '', TipoProceso = '', CodRnpa = '' WHERE Codigo ='" & wCodigo & "'"
+
+                cm.CommandText = ZSql
+                cm.ExecuteNonQuery()
+
+                cn.Close()
+
+            Next
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer dar de Alta al Producto " & wCodigo & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+
+    End Sub
+
+    Private Function _VerificaConexionConTodasLasPlantas() As Boolean
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+
+        Try
+
+            For i = 1 To 9
+
+                cn.ConnectionString = Helper._ConectarA(i)
+                cn.Open()
+                cm.Connection = cn
+                cn.Close()
+
+            Next
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return True
+    End Function
+
+    Private Function _ExisteTerminado(ByVal wCodigo As String, ByVal WEmpresa As Integer) As Boolean
+
+        If String.IsNullOrEmpty(wCodigo) Or WEmpresa = 0 Then
+            Throw New Exception("Datos del Producto " & wCodigo & " incorrectos")
+        End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo FROM Terminado WHERE Codigo = '" & wCodigo & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA(WEmpresa)
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            Return dr.HasRows
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer verificar la existencia del Producto " & wCodigo & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
+
+    Private Function _SiguienteNumeroHojaProduccion(ByVal wEmpresa As Integer) As Integer
+        Dim Whoja = 0
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Hoja) as UltimaHoja FROM Hoja")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA(wEmpresa)
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                Whoja = dr.Item("UltimaHoja")
+            
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la última Hoja de Producción en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return Whoja + 1
+    End Function
+
+    Private Function _StockSuficienteTerminado(ByVal wTerminado As String, ByVal wCantidad As String, ByVal wEmpresa As Integer) As Boolean
+
+        If String.IsNullOrEmpty(wTerminado) Or String.IsNullOrEmpty(wCantidad) Then
+            Return False
+        End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT (Inicial + Entradas - Salidas) as Saldo FROM Terminado WHERE Codigo = '" & wTerminado & "'")
+        Dim dr As SqlDataReader
+        Dim XCantidad = 0.0, XSaldo = 0.0
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA(wEmpresa)
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                XCantidad = Val(Helper.formatonumerico(wCantidad))
+                XSaldo = dr.Item("Saldo")
+
+                Return XCantidad <= XSaldo
+
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar el Saldo de " & wTerminado & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Function
+
+    Private Function _StockSuficienteMP(ByVal wArticulo As String, ByVal wCantidad As String, ByVal Wempresa As Integer) As Boolean
+
+        If String.IsNullOrEmpty(wArticulo) Or String.IsNullOrEmpty(wCantidad) Then
+            Return False
+        End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT (Inicial + Entradas - Salidas) as Saldo FROM Articulo WHERE Codigo = '" & wArticulo & "'")
+        Dim dr As SqlDataReader
+        Dim XCantidad = 0.0, XSaldo = 0.0
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA(Wempresa)
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                XCantidad = Val(Helper.formatonumerico(wCantidad))
+                XSaldo = dr.Item("Saldo")
+
+                Return XCantidad <= XSaldo
+
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar el Saldo de " & wArticulo & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        If Val(txtHojaProduccion.Text) > 0 Then
+            _ImprimirHojaPiloto()
+        End If
+    End Sub
+
+    Private Sub btnCancelarHojaPiloto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelarHojaPiloto.Click
+        txtDescripcionHojaPiloto.Text = ""
+        pnlHojaPiloto.Visible = False
     End Sub
 End Class
