@@ -58,7 +58,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             txtCodProveedor.Focus()
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
         Finally
 
             dr = Nothing
