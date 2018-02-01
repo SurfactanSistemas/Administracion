@@ -316,10 +316,13 @@ Public Class Grafico
     Private Sub _ProcesarComparativoMensual()
 
         Dim wacu = 0.0
-        Dim WIndice = 0, WIndice2 = 0, WIndiceLineas = 0
+        Dim WIndice = 0, WIndice2 = 0, WIndice3 = 0, WIndiceLineas = 0
         Dim aux = ""
         Dim WValores(9) As String
         Dim WLineas(9) As String
+        Dim WSeries() As String
+
+        ReDim WSeries(Tabla.Rows.Count)
 
         Titulo = "COMPARATIVO ENTRE PERIODOS" & vbCrLf & " - "
 
@@ -359,25 +362,42 @@ Public Class Grafico
 
         End If
 
+        ' Determinamos las Series.
+        WIndice3 = 0
+
+        For Each _row As DataRow In Tabla.Rows
+
+            aux = "Período: " & _row.Item("Titulo1")
+
+            For i = 27 To 16 Step -1
+
+                If Not IsDBNull(_row.Item(i)) Then
+
+                    aux &= " al " & _row.Item(i)
+
+                    Exit For
+                End If
+
+            Next
+
+            WSeries(WIndice3) = aux
+            WIndice3 += 1
+        Next
+
         Chart1.Series.Clear()
 
-        For Each row As DataRow In Tabla.Rows
+        For i = 0 To WIndice3 - 1
 
-            With row
+            If Chart1.Series.IsUniqueName(WSeries(i)) Then
 
+                Chart1.Series.Add(WSeries(i))
 
-                For i = 1 To 12
-                    If Not IsDBNull(.Item("Titulo" & i)) AndAlso Chart1.Series.IsUniqueName(Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)) Then
-
-                        Chart1.Series.Add(Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4))
-
-                    End If
-                Next
-
-
-            End With
+            End If
 
         Next
+
+        Dim ztemp = ""
+        WIndice3 = 0
 
         For Each row As DataRow In Tabla.Rows
 
@@ -398,10 +418,15 @@ Public Class Grafico
                     End If
 
                     'If wacu <> 0 Then
+                    ztemp = IIf(IsDBNull(.Item("Titulo" & i)), "", .Item("Titulo" & i))
 
-                    aux = Microsoft.VisualBasic.Right(Trim(.Item("Titulo" & i)), 4)
+                    aux = Microsoft.VisualBasic.Right(Trim(ztemp), 4)
 
-                    Chart1.Series(aux).Points.AddXY(.Item("Titulo" & i), wacu)
+                    If ztemp = "" Then
+                        Exit For
+                    End If
+
+                    Chart1.Series(WSeries(WIndice3)).Points.AddXY(ztemp, wacu)
 
                     If Not WValores.Contains(.Item(2)) Then
 
@@ -423,7 +448,7 @@ Public Class Grafico
             End With
 
             wacu = 0.0
-
+            WIndice3 += 1
         Next
 
         For i = 0 To WValores.Length - 1
