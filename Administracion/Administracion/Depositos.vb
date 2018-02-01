@@ -1096,7 +1096,14 @@ Public Class Depositos
                             Else
 
                                 Select Case Val(valor)
-                                    Case 1, 2
+                                    Case 1
+                                        .Rows(iRow).Cells("importe").Value = txtImporte.Text
+
+                                        If iRow + 1 > .Rows.Count - 1 Then
+                                            .Rows.Add()
+                                        End If
+                                        .CurrentCell = .Rows(iRow + 1).Cells(0)
+                                    Case 2
                                         .CurrentCell = .Rows(iRow).Cells(4)
                                     Case 3
                                         .CurrentCell.Value = ""
