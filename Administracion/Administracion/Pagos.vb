@@ -7644,4 +7644,10 @@ Public Class Pagos
         End With
 
     End Sub
+
+    Private Sub txtGanancias_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtGanancias.TextChanged, txtIBCiudad.TextChanged, txtIngresosBrutos.TextChanged, txtIVA.TextChanged, txtTotal.TextChanged
+        For Each txt As TextBox In {txtGanancias, txtIBCiudad, txtIngresosBrutos, txtIVA, txtTotal}
+            txt.Text = Proceso.formatonumerico(txt.Text)
+        Next
+    End Sub
 End Class
