@@ -1,4 +1,6 @@
-﻿Public Class MenuPrincipal
+﻿Imports Desarrollo.Clases
+
+Public Class MenuPrincipal
 
     Private Sub IngresiDeOrdenesDeTrabajoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresiDeOrdenesDeTrabajoToolStripMenuItem.Click
 
@@ -35,7 +37,14 @@
 
     Private Sub MenuPrincipal_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
         ' TODO Crear rutina para habilitar y deshabilitar opciones de menú segun atributos.
-        'MsgBox(Conexion.Operador)
+
+        ' Menu 1: Maestros.
+        With Me
+            .IngresiDeOrdenesDeTrabajoToolStripMenuItem.Enabled = Conexion.WAtributosOperador(1, 1)
+            .IngresoDePruebasDeEnsayoToolStripMenuItem.Enabled = Conexion.WAtributosOperador(1, 2)
+            .AnálisisDeDesarrolloToolStripMenuItem.Enabled = Conexion.WAtributosOperador(1, 5)
+        End With
+
     End Sub
 
     Private Sub IngresoDePruebasDeEnsayoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDePruebasDeEnsayoToolStripMenuItem.Click

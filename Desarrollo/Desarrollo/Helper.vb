@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports Desarrollo.Clases
 
 Module Helper
 

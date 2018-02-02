@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports Desarrollo.Clases
 
 Public Class Login
 
@@ -19,9 +20,9 @@ Public Class Login
 
         Conexion.EmpresaDeTrabajo = cmbEntity.SelectedItem
 
-        ' Validamos la contraseña.
+        ' Validamos la contraseña | Proceso 4 = "Desarrollo".
 
-        If Not Conexion._Login(txtPsw.Text) Then
+        If Not Conexion._Login(txtPsw.Text, 4) Then
             MsgBox("La contraseña no es correcta.", MsgBoxStyle.Exclamation)
             Exit Sub
         End If
