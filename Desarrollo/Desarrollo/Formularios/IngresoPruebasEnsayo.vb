@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports Desarrollo.Clases
 
 Public Class IngresoPruebasEnsayo
 
@@ -1004,7 +1005,7 @@ Public Class IngresoPruebasEnsayo
     Private Function _ExisteEnsayo(ByVal WVersion As String) As Boolean
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Orden FROM CargaEnsayo WHERE Orden = '" & UCase(txtOrden.Text) & "' AND Version = '" & txtVersion.Text & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Orden FROM CargaEnsayo WHERE Orden = '" & UCase(txtOrden.Text) & "' AND Version = '" & WVersion & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -1842,7 +1843,7 @@ Public Class IngresoPruebasEnsayo
         Dim cm As SqlCommand = New SqlCommand("SELECT Requisito, Informativo, AVerificar, Comentario FROM CargaEnsayoVI WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WRequisito = "", WInformativo = "", WAVerificar = "", WComentario = ""
-        Dim WIndice = 0
+        Dim XIndice = 0
         Dim WRequisitos = {txtRequisitosI, txtRequisitosII, txtRequisitosIII, txtRequisitosIV, txtRequisitosV, _
                            txtRequisitosVI, txtRequisitosVII, txtRequisitosVIII, txtRequisitosIX, txtRequisitosX, _
                            txtRequisitosXI, txtRequisitosXII}
@@ -1877,14 +1878,14 @@ Public Class IngresoPruebasEnsayo
 
                     End With
 
-                    If WIndice < 12 Then
+                    If XIndice < 12 Then
 
-                        WRequisitos(WIndice).Text = Trim(WRequisito)
-                        WComentarios(WIndice).Text = Trim(WComentario)
-                        WInformativos(WIndice).Checked = Val(WInformativo) = 1
-                        WAVerificarlos(WIndice).Checked = Val(WAVerificar) = 1
+                        WRequisitos(XIndice).Text = Trim(WRequisito)
+                        WComentarios(XIndice).Text = Trim(WComentario)
+                        WInformativos(XIndice).Checked = Val(WInformativo) = 1
+                        WAVerificarlos(XIndice).Checked = Val(WAVerificar) = 1
 
-                        WIndice += 1
+                        XIndice += 1
 
                     End If
 
@@ -1910,7 +1911,7 @@ Public Class IngresoPruebasEnsayo
         Dim cm As SqlCommand = New SqlCommand("SELECT Version, Etapa, Fecha, Participantes, Resultados, Acciones, Responsables, Estado FROM CargaEnsayoV WHERE Orden = '" & txtOrden.Text & "' ORDER BY Orden, Renglon")
         Dim dr As SqlDataReader
         Dim WVersion = "", WEtapa = "", WFecha = "", WParticipantes = "", WResultados = "", WAcciones = "", WResponsables = "", WEstado = ""
-        Dim WIndice = 0
+        Dim XIndice = 0
 
         Try
 
@@ -1938,10 +1939,10 @@ Public Class IngresoPruebasEnsayo
 
                     End With
 
-                    WIndice = dgvRevisiones.Rows.Add
+                    XIndice = dgvRevisiones.Rows.Add
 
                     ' Cargamos los datos de la Formula.
-                    With dgvRevisiones.Rows(WIndice)
+                    With dgvRevisiones.Rows(XIndice)
 
                         .Cells("RevisionesVersion").Value = Trim(WVersion)
                         .Cells("RevisionesEtapa").Value = Trim(WEtapa)
@@ -1982,7 +1983,7 @@ Public Class IngresoPruebasEnsayo
         Dim cm As SqlCommand = New SqlCommand("SELECT Ensayo, Descripcion, Esperado, Resultado FROM CargaEnsayoIV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WEnsayo = "", WDescripcion = "", WEsperado = "", WResultado = ""
-        Dim WIndice = 0
+        Dim XIndice = 0
 
         Try
 
@@ -2010,10 +2011,10 @@ Public Class IngresoPruebasEnsayo
 
                     End With
 
-                    WIndice = dgvLaboratorio.Rows.Add
+                    XIndice = dgvLaboratorio.Rows.Add
 
                     ' Cargamos los datos de la Formula.
-                    With dgvLaboratorio.Rows(WIndice)
+                    With dgvLaboratorio.Rows(XIndice)
 
                         .Cells("LaboratorioEnsayo").Value = IIf(Val(WEnsayo) = 0, "", WEnsayo)
                         .Cells("LaboratorioDescripcion").Value = Trim(WDescripcion)
@@ -2050,10 +2051,10 @@ Public Class IngresoPruebasEnsayo
 
                         End With
 
-                        WIndice = dgvLaboratorio.Rows.Add
+                        XIndice = dgvLaboratorio.Rows.Add
 
                         ' Cargamos los datos de la Formula.
-                        With dgvLaboratorio.Rows(WIndice)
+                        With dgvLaboratorio.Rows(XIndice)
 
                             .Cells("LaboratorioEnsayo").Value = UCase(WEnsayo)
                             .Cells("LaboratorioDescripcion").Value = Trim(WDescripcion)
@@ -2147,7 +2148,7 @@ Public Class IngresoPruebasEnsayo
         Dim cm As SqlCommand = New SqlCommand("SELECT Etapa, Instrucciones, Equipo, Temperatura, Tiempo, Control, Seguridad FROM CargaEnsayoIII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WEtapa = "", WInstrucciones = "", WEquipo = "", WTemperatura = "", WTiempo = "", WControl = "", WSeguridad = ""
-        Dim WIndice = 0
+        Dim XIndice = 0
 
         Try
 
@@ -2174,10 +2175,10 @@ Public Class IngresoPruebasEnsayo
 
                     End With
 
-                    WIndice = dgvProceso.Rows.Add
+                    XIndice = dgvProceso.Rows.Add
 
                     ' Cargamos los datos de la Formula.
-                    With dgvProceso.Rows(WIndice)
+                    With dgvProceso.Rows(XIndice)
 
                         .Cells("ProcesoEtapa").Value = UCase(WEtapa)
                         .Cells("ProcesoDetallesTrabajo").Value = Trim(WInstrucciones)
@@ -2266,7 +2267,7 @@ Public Class IngresoPruebasEnsayo
         Dim cm As SqlCommand = New SqlCommand("SELECT Tipo, Articulo, Terminado, Descripcion, Cantidad, Lote, Stock, Costo, Hoja FROM CargaEnsayoII WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WTipo = "", WArticulo = "", WTerminado = "", WDescripcion = "", WCantidad = "", WLote = "", WStock = "", WCosto = "", WHoja = ""
-        Dim WIndice = 0
+        Dim XIndice = 0
 
         Try
 
@@ -2305,10 +2306,10 @@ Public Class IngresoPruebasEnsayo
 
                     txtHojaProduccion.Text = WHoja
 
-                    WIndice = dgvFormula.Rows.Add
+                    XIndice = dgvFormula.Rows.Add
 
                     ' Cargamos los datos de la Formula.
-                    With dgvFormula.Rows(WIndice)
+                    With dgvFormula.Rows(XIndice)
 
                         .Cells("TipoFormula").Value = UCase(WTipo)
                         .Cells("ArticuloFormula").Value = WArticulo
@@ -2322,7 +2323,7 @@ Public Class IngresoPruebasEnsayo
 
                     ' Cargamos los datos de los costos.
                     dgvCosto.Rows.Add()
-                    With dgvCosto.Rows(WIndice)
+                    With dgvCosto.Rows(XIndice)
 
                         .Cells("CostoTipo").Value = UCase(WTipo)
                         .Cells("CostoArticulo").Value = WArticulo
@@ -3376,10 +3377,9 @@ Public Class IngresoPruebasEnsayo
 
         Dim WEmpresa = 0
         Dim WTipo = "", WArticulo = "", WTerminado = "", WCantidad = "", WLote = "0", WHoja = 0, WCodigo = "", WDescripcion = ""
-        Dim WClave = "", WRenglon = 0, WFecha = "", WProducto = "", WTeorico = "0", WReal = "0", WFechaIng = "", WFechaIngOrd = "", WWDate = "", WWImporte = "0", WMARCA = "", WSaldo = "0", WLote1 = "0", WCanti1 = "0", WLote2 = "0", WCanti2 = "0", WLote3 = "0", WCanti3 = "0", WCosto1 = "0", WCosto2 = "0", WCosto3 = "0", WMarcaant = "", WSaldoant = "0", WRealant = "0", WFechaOrd = "", WEquipo = "", WMarcaLabora = "", WEstado = "", WVersionI = "0", WVersionII = "0", WVersionIII = "0", WEstadoII = "", WImpreArticulo = "", WFechaInicio = "", WHoraInicio = "", WFechaFinal = "", WHoraFinal = "", WPorceDife = "0", WImpresionI = "", WImpresionII = "", WMotivoDesvio = "0", WObservaDesvio = "", WImpreReal = "0", WOperario = "0", WEstadoHoja = "0", WEtapa = "0", WFechaInicioEtapa = "", WHoraInicioEtapa = "", WTimerInicioEtapa = "0", WAlarma = "", WControlI = "0", WControlII = "0", WDesdeI = "0", WHastaI = "0", WTiempoI = "0", WTiempoII = "0", WAlarmaI = "", WAlarmaII = "", WAlarmaITiempo = "0", WAlarmaITempe = "0", WTiempoIII = "0", WTemperatura = "0", WTipoEtapa = "0", WEnvasamiento = "", WEquipoII = "0", WDesde = "0", WHasta = "0", WLista = "", WSuma1 = "0", WSuma2 = "0", WSuma3 = "0", WSuma4 = "0", WSuma5 = "0", WSuma6 = "0", WIdentificacion = "", WNroPedido = "0", WFechaVencimiento = "", WOrdFechaVencimiento = "", WRevalida = "0", WFechaRevalida = "", WOrdFechaRevalida = "", WMesesRevalida = "0", WMarcaVencida = "", WLoteColorante = "", WTipoOri = "", WImpreVersion = "0", WImpreFechaVersion = "", WLiberaFarma = "", WFechaReanalisis = "", WImpreAlmacenero = "", WSeguridad = "", WSaldoCierre = "0", WCosto = "0", ZSql = "", WImporte = "0", WDate = ""
+        Dim WClave = "", WRenglon = 0, WFecha = "", WProducto = "", WTeorico = "0", WReal = "0", WFechaIng = "", WFechaIngOrd = "", WWDate = "", WWImporte = "0", WMARCA = "", WSaldo = "0", WLote1 = "0", WCanti1 = "0", WLote2 = "0", WCanti2 = "0", WLote3 = "0", WCanti3 = "0", WCosto1 = "0", WCosto2 = "0", WCosto3 = "0", WMarcaant = "", WSaldoant = "0", WRealant = "0", WFechaOrd = "", WEquipo = "", WMarcaLabora = "", WEstado = "", WVersionI = "0", WVersionII = "0", WVersionIII = "0", WEstadoII = "", WImpreArticulo = "", WFechaInicio = "", WHoraInicio = "", WFechaFinal = "", WHoraFinal = "", WPorceDife = "0", WImpresionI = "", WImpresionII = "", WMotivoDesvio = "0", WObservaDesvio = "", WImpreReal = "0", WOperario = "0", WEstadoHoja = "0", WEtapa = "0", WFechaInicioEtapa = "", WHoraInicioEtapa = "", WTimerInicioEtapa = "0", WAlarma = "", WControlI = "0", WControlII = "0", WDesdeI = "0", WHastaI = "0", WTiempoI = "0", WTiempoII = "0", WAlarmaI = "", WAlarmaII = "", WAlarmaITiempo = "0", WAlarmaITempe = "0", WTiempoIII = "0", WTemperatura = "0", WTipoEtapa = "0", WEnvasamiento = "", WEquipoII = "0", WDesde = "0", WHasta = "0", WLista = "", WSuma1 = "0", WSuma2 = "0", WSuma3 = "0", WSuma4 = "0", WSuma5 = "0", WSuma6 = "0", WIdentificacion = "", WNroPedido = "0", WFechaVencimiento = "", WOrdFechaVencimiento = "", WRevalida = "0", WFechaRevalida = "", WOrdFechaRevalida = "", WMesesRevalida = "0", WMarcaVencida = "", WLoteColorante = "", WTipoOri = "", WImpreVersion = "0", WImpreFechaVersion = "", WLiberaFarma = "", WFechaReanalisis = "", WImpreAlmacenero = "", WSeguridad = "", WSaldoCierre = "0", WCosto = "0", ZSql = "", WDate = ""
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
-        Dim dr As SqlDataReader
         Dim trans As SqlTransaction = Nothing
         Dim WPaso = 0
 
@@ -3431,7 +3431,7 @@ Public Class IngresoPruebasEnsayo
         End If
 
         prgbHojaPiloto.Step += WPaso
-        
+
         ' Verificamos Stock de items cargados en Fórmula.
         For Each _row As DataGridViewRow In dgvFormula.Rows
 
@@ -3468,7 +3468,7 @@ Public Class IngresoPruebasEnsayo
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
-        
+
         Try
             ' Generamos el Código y damos de alta el nuevo código en caso de no existir.
 
@@ -3763,7 +3763,7 @@ Public Class IngresoPruebasEnsayo
                 Next
 
                 ' Actualizamos datos generales de la Hoja.
-                
+
                 ZSql = ""
                 ZSql = "UPDATE Hoja SET Equipo = '', VersionI = 0, VersionII = 0, VersionIII = 0, MarcaLabora = 'S' WHERE Hoja = '" & WHoja & "'"
 
@@ -3797,7 +3797,6 @@ Public Class IngresoPruebasEnsayo
                 Throw New Exception("Hubo un problema al querer generar la Hoja Piloto en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
             Finally
 
-                dr = Nothing
                 cn.Close()
                 cn = Nothing
                 cm = Nothing
@@ -3812,7 +3811,7 @@ Public Class IngresoPruebasEnsayo
     End Sub
 
     Private Sub _ImprimirHojaPiloto()
-        Dim ZSql = "", WTipo = "", WArticulo = "", WTerminado = "", WLote = "", WHoja = "", WLinea = "", WFecha = "", WCodigo1 = "", WCodigo2 = "", WArticulo1 = "", WArticulo2 = "", WCantidad = "", WDetalle = "", WTeorico = ""
+        Dim ZSql = "", WTipo = "", WArticulo = "", WTerminado = "", WHoja = "", WLinea = "", WFecha = "", WCodigo1 = "", WCodigo2 = "", WArticulo1 = "", WArticulo2 = "", WCantidad = "", WDetalle = "", WTeorico = ""
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
 
@@ -3845,7 +3844,6 @@ Public Class IngresoPruebasEnsayo
                     WTerminado = IIf(IsNothing(.Cells("TerminadoFormula").Value), "", .Cells("TerminadoFormula").Value)
                     WDetalle = IIf(IsNothing(.Cells("DescripcionFormula").Value), "", .Cells("DescripcionFormula").Value)
                     WCantidad = IIf(IsNothing(.Cells("CantidadFormula").Value), "", .Cells("CantidadFormula").Value)
-                    WLote = IIf(IsNothing(.Cells("LoteFormula").Value), "", .Cells("LoteFormula").Value)
 
                     If Trim(WCantidad) = "" Then Continue For
 

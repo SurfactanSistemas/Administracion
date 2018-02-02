@@ -2,69 +2,72 @@
 Imports System.Security.Cryptography
 Imports System.Text
 
-Module ExtensionesTipoString
+Namespace Clases
 
-    ''' <summary>
-    ''' Devuelve la cadena con la longitud indicada, comenzando desde la Izquierda.
-    ''' </summary>
-    <Extension()>
-    Function SliceLeft(ByVal text As String, ByVal length As Integer) As String
+    Module ExtensionesTipoString
 
-        If text.Length <= length Then Return text
+        ''' <summary>
+        ''' Devuelve la cadena con la longitud indicada, comenzando desde la Izquierda.
+        ''' </summary>
+        <Extension()>
+        Function SliceLeft(ByVal text As String, ByVal length As Integer) As String
 
-        Return Microsoft.VisualBasic.Left(text, length)
+            If text.Length <= length Then Return text
 
-    End Function
+            Return Microsoft.VisualBasic.Left(text, length)
 
-    ''' <summary>
-    ''' Devuelve la cadena con la longitud indicada, comenzando desde la Derecha.
-    ''' </summary>
-    <Extension()>
-    Function SliceRight(ByVal text As String, ByVal length As Integer) As String
+        End Function
 
-        If text.Length <= length Then Return text
+        ''' <summary>
+        ''' Devuelve la cadena con la longitud indicada, comenzando desde la Derecha.
+        ''' </summary>
+        <Extension()>
+        Function SliceRight(ByVal text As String, ByVal length As Integer) As String
 
-        Return Microsoft.VisualBasic.Right(text, length)
+            If text.Length <= length Then Return text
 
-    End Function
+            Return Microsoft.VisualBasic.Right(text, length)
 
-    ''' <summary>
-    ''' Devuelve la cadena Capitalizada.
-    ''' </summary>
-    <Extension()>
-    Function Capitalize(ByVal texto As String) As String
+        End Function
 
-        If String.IsNullOrEmpty(texto) OrElse texto.Length = 0 Then Return texto
+        ''' <summary>
+        ''' Devuelve la cadena Capitalizada.
+        ''' </summary>
+        <Extension()>
+        Function Capitalize(ByVal texto As String) As String
 
-        Dim temp As String = ""
+            If String.IsNullOrEmpty(texto) OrElse texto.Length = 0 Then Return texto
 
-        texto = LCase(texto)
+            Dim temp As String = ""
 
-        For Each txt As String In texto.Split(" ")
+            texto = LCase(texto)
 
-            temp &= UCase(txt.Substring(0, 1)) & txt.Substring(1) & " "
+            For Each txt As String In texto.Split(" ")
 
-        Next
+                temp &= UCase(txt.Substring(0, 1)) & txt.Substring(1) & " "
 
-        Return Trim(temp)
+            Next
 
-    End Function
+            Return Trim(temp)
 
-    ''' <summary>
-    ''' Devuelve el Valor de Hash calculado en MD5.
-    ''' </summary>
-    <Extension()>
-    Function hashMD5(ByVal sCadena As String) As String
-        ' Objeto de codificación
-        Dim ueCodigo As New UnicodeEncoding()
-        ' Objeto para instanciar las codificación
-        Dim Md5 As New MD5CryptoServiceProvider()
+        End Function
 
-        ' Calcula el valor hash de la cadena recibida
-        Dim bHash() As Byte = Md5.ComputeHash(ueCodigo.GetBytes(sCadena))
+        ''' <summary>
+        ''' Devuelve el Valor de Hash calculado en MD5.
+        ''' </summary>
+        <Extension()>
+        Function hashMD5(ByVal sCadena As String) As String
+            ' Objeto de codificación
+            Dim ueCodigo As New UnicodeEncoding()
+            ' Objeto para instanciar las codificación
+            Dim Md5 As New MD5CryptoServiceProvider()
 
-        ' Convierte el valor anterior en cadena y lo devuelve
-        Return Convert.ToBase64String(bHash)
-    End Function
+            ' Calcula el valor hash de la cadena recibida
+            Dim bHash() As Byte = Md5.ComputeHash(ueCodigo.GetBytes(sCadena))
 
-End Module
+            ' Convierte el valor anterior en cadena y lo devuelve
+            Return Convert.ToBase64String(bHash)
+        End Function
+
+    End Module
+End Namespace

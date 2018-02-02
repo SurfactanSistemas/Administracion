@@ -42,6 +42,7 @@ Public Class MenuPrincipal
         With Me
             .IngresiDeOrdenesDeTrabajoToolStripMenuItem.Enabled = Conexion.WAtributosOperador(1, 1)
             .IngresoDePruebasDeEnsayoToolStripMenuItem.Enabled = Conexion.WAtributosOperador(1, 2)
+            ' 3 y 4 quedan por ahora en desuso.
             .AnálisisDeDesarrolloToolStripMenuItem.Enabled = Conexion.WAtributosOperador(1, 5)
         End With
 
