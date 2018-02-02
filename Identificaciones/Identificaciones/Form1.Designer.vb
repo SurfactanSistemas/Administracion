@@ -134,7 +134,7 @@ Partial Class Form1
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(83, 39)
         Me.btnImprimir.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Credencial")
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Identificación")
         Me.btnImprimir.UseVisualStyleBackColor = True
         '
         'btnCerrar
@@ -151,7 +151,7 @@ Partial Class Form1
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(83, 39)
         Me.btnCerrar.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Salir del Sistema")
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'btnLimpiar
@@ -168,7 +168,7 @@ Partial Class Form1
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(83, 39)
         Me.btnLimpiar.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Campos")
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Campos de Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnConsultas
@@ -185,7 +185,7 @@ Partial Class Form1
         Me.btnConsultas.Name = "btnConsultas"
         Me.btnConsultas.Size = New System.Drawing.Size(83, 39)
         Me.btnConsultas.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.btnConsultas, "Consulta de Proveedores")
+        Me.ToolTip1.SetToolTip(Me.btnConsultas, "Abrir Ayuda de Selección de Proveedores")
         Me.btnConsultas.UseVisualStyleBackColor = True
         '
         'btnEliminar
@@ -447,9 +447,9 @@ Partial Class Form1
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.Transparent
-        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.pnlFotoFinal)
+        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox1.Location = New System.Drawing.Point(565, 3)
@@ -469,12 +469,13 @@ Partial Class Form1
         Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(124, 187)
+        Me.Button1.Location = New System.Drawing.Point(198, 201)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(39, 26)
+        Me.Button1.Size = New System.Drawing.Size(17, 15)
         Me.Button1.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.Button1, "Cargar Imagen desde Archivo")
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'Button2
         '
@@ -486,11 +487,11 @@ Partial Class Form1
         Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(67, 187)
+        Me.Button2.Location = New System.Drawing.Point(96, 187)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(39, 26)
         Me.Button2.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.Button2, "Tomar Imagen con Camara Web")
+        Me.ToolTip1.SetToolTip(Me.Button2, "Abrir Cámara Web")
         Me.Button2.UseVisualStyleBackColor = True
         '
         'pnlFotoFinal
@@ -504,7 +505,7 @@ Partial Class Form1
         '
         'picFoto
         '
-        Me.picFoto.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.picFoto.Cursor = System.Windows.Forms.Cursors.Default
         Me.picFoto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picFoto.Image = Global.Identificaciones.My.Resources.Resources.sin_imagen
         Me.picFoto.Location = New System.Drawing.Point(0, 0)
@@ -540,7 +541,7 @@ Partial Class Form1
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(39, 26)
         Me.Button4.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.Button4, "Cancelar")
+        Me.ToolTip1.SetToolTip(Me.Button4, "Cerrar Cámara Web")
         Me.Button4.UseVisualStyleBackColor = True
         '
         'pnlConsulta
@@ -584,7 +585,7 @@ Partial Class Form1
         Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
         Me.btnCerrarConsulta.Size = New System.Drawing.Size(118, 29)
         Me.btnCerrarConsulta.TabIndex = 0
-        Me.btnCerrarConsulta.Text = "Cerrar Consulta"
+        Me.btnCerrarConsulta.Text = "Cerrar Ayuda de Selección de Proveedores"
         Me.btnCerrarConsulta.UseVisualStyleBackColor = True
         '
         'txtAyuda

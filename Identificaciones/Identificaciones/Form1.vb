@@ -658,15 +658,15 @@ Public Class Form1
 
     End Sub
 
-    Private Sub picFoto_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles picFoto.DragEnter
+    Private Sub picFoto_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs)
         _PermitirDrag(e)
     End Sub
 
-    Private Sub picFoto_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles picFoto.DragDrop
+    Private Sub picFoto_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs)
         _ProcesarDragDeArchivo(e)
     End Sub
 
-    Private Sub picFoto_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picFoto.MouseDoubleClick
+    Private Sub picFoto_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
 
         Try
             With OpenFileDialog1
