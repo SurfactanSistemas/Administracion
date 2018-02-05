@@ -1546,9 +1546,9 @@ Public Class ComparacionesMensualesValorUnico
         Dim WAnioFinal = Val(txtAnioHasta.Text)
 
         ' Se controla que se consulten solo meses cerrados.
-        If WMesFinal = Date.Now.Month And WAnioFinal = Date.Now.Year Then
-            WMesFinal = WMesFinal - 1
-        End If
+        'If WMesFinal = Date.Now.Month And WAnioFinal = Date.Now.Year Then
+        '    WMesFinal = WMesFinal - 1
+        'End If
 
         ''
         '' Guardamos la posicion del mes chequeado y le sumamos uno para que coincida con el numero de mes.
