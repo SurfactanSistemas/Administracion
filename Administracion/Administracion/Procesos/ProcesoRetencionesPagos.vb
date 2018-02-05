@@ -112,12 +112,17 @@ Public Class ProcesoRetencionesPagos
         If TipoProceso.SelectedIndex = 0 Then
             REM XNombre = WDir + "\AR-30610524598-" + Nombre.text + "-6-LOTE1.txt"
             If Trim(nombreArchivo) <> "" Then
+
                 nombreArchivo = nombreArchivo + "\AR-30549165083-" + txtNombre.Text + "-6-LOTE1.txt"
+
+                If Proceso._EsPellital() Then
+                    nombreArchivo = nombreArchivo + "\AR-30610524598-" + txtNombre.Text + "-6-LOTE1.txt"
+                End If
+
             End If
         Else
             nombreArchivo = nombreArchivo + "\" + txtNombre.Text + ".txt"
         End If
-
 
         File.Create(nombreArchivo).Dispose()
 
@@ -135,7 +140,8 @@ Public Class ProcesoRetencionesPagos
 
                     Dim CamposReteIb As New ProcesoReteIb(row.Item(0).ToString, row.Item(1), row.Item(2).ToString, row.Item(3).ToString, row.Item(4).ToString, row.Item(5).ToString, row.Item(6).ToString)
 
-                    WCuit = sacaguiones(CamposReteIb.cuit)
+                    'WCuit = sacaguiones(CamposReteIb.cuit)
+                    WCuit = Trim(CamposReteIb.cuit)
                     WFecha = CamposReteIb.fecha
                     WSucursal = "0001"
                     WOrden = ceros(CamposReteIb.orden, 8)
