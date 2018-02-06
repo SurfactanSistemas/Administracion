@@ -156,6 +156,7 @@ Partial Class ProcesoRetencionesPagos
         'TipoProceso
         '
         Me.TipoProceso.Cleanable = False
+        Me.TipoProceso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.TipoProceso.Empty = False
         Me.TipoProceso.EnterIndex = -1
         Me.TipoProceso.FormattingEnabled = True

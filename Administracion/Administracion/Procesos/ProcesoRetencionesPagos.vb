@@ -16,7 +16,6 @@ Public Class ProcesoRetencionesPagos
     Dim WImporte As String
     Dim WRetencion As String
     Dim WCertificado As String
-    Dim WTipoProceso As String
     Dim WBase As String
 
     Dim WCampo1 As String
@@ -55,49 +54,6 @@ Public Class ProcesoRetencionesPagos
     End Sub
 
 
-
-    Private Sub txtdesde_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                Handles txtDesde.KeyPress
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            If ValidaFecha(txtDesde.Text) = "S" Then
-                txtHasta.Focus()
-            End If
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtDesde.Text = "  /  /    "
-            Me.txtDesde.SelectionStart = 0
-        End If
-    End Sub
-
-    Private Sub txthasta_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                Handles txtHasta.KeyPress
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            If ValidaFecha(txtHasta.Text) = "S" Then
-                txtNombre.Focus()
-            End If
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtHasta.Text = "  /  /    "
-            Me.txtHasta.SelectionStart = 0
-        End If
-    End Sub
-
-    Private Sub txtnombre_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtNombre.KeyPress
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            txtDesde.Focus()
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtNombre.Text = ""
-        End If
-    End Sub
-
     Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
         Me.Hide()
         MenuPrincipal.Show()
@@ -105,6 +61,9 @@ Public Class ProcesoRetencionesPagos
 
 
     Private Sub btnAceptaRetePago_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptaRetePago.Click
+
+        If Trim(txtNombre.Text) = "" Then Exit Sub
+
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
             nombreArchivo = FolderBrowserDialog1.SelectedPath
         End If
@@ -166,25 +125,33 @@ Public Class ProcesoRetencionesPagos
                     WFecha = CamposReteGanan.fecha
                     WCertificado = ceros(CamposReteGanan.certificadogan, 16)
                     WImporte = ceros(formatonumerico(redondeo(CamposReteGanan.Importe), "########0.#0", "."), 16)
+
                     Select Case CamposReteGanan.tipo
                         Case 1
-                            WTipoProceso = "116"
+                            WCampo6 = "116"
                         Case 2
-                            WTipoProceso = "27 "
+                            WCampo6 = "27 "
                         Case 4
-                            WTipoProceso = "124"
+                            WCampo6 = "124"
                         Case 5
-                            WTipoProceso = "094"
+                            WCampo6 = "094"
                         Case 6
-                            WTipoProceso = "95 "
+                            WCampo6 = "95 "
                         Case Else
-                            WTipoProceso = "78 "
+                            WCampo6 = "78 "
                     End Select
                     WBase = ceros(formatonumerico(redondeo(CamposReteGanan.Importe), "########0.#0", "."), 14)
                     WRetencion = ceros(formatonumerico(redondeo(CamposReteGanan.retencion), "########0.#0", "."), 14)
-                    WCuit = agregaespacios((CamposReteGanan.cuit), 20)
+                    'WCuit = agregaespacios((CamposReteGanan.cuit), 20)
+                    WCuit = CamposReteGanan.cuit
+
+                    WCuit = WCuit.Replace("-", "")
+
+                    WCuit = ceros(WCuit, 11)
+
                     WSucursal = "0001"
-                    WOrden = ceros(CamposReteGanan.orden, 8)
+                    'WOrden = ceros(CamposReteGanan.orden, 8)
+                    WOrden = ceros(CamposReteGanan.orden, 16)
 
                     WCampo1 = "06"
                     WCampo2 = WFecha
@@ -192,21 +159,21 @@ Public Class ProcesoRetencionesPagos
                     WCampo4 = WImporte
                     WCampo5 = "217"
                     WCampo7 = "1"
-                    WCampo8 = WBase
+                    WCampo8 = ceros(WBase, 14)
                     WCampo9 = WFecha
                     WCampo10 = "01 "
-                    WCampo11 = WRetencion
+                    WCampo11 = ceros(WRetencion, 14)
                     WCampo12 = "000000"
                     WCampo13 = Space$(10)
                     WCampo14 = "80"
-                    WCampo15 = WCuit
-                    WCampo16 = WCertificado
+                    WCampo15 = WCuit.PadRight(20)
+                    WCampo16 = ceros(WCertificado, 14)
                     WCampo17 = Space$(30)
                     WCampo18 = "0"
                     WCampo19 = Space$(11)
                     WCampo20 = Space$(11)
 
-                    escritor.Write(WCampo1 + WCampo2 + WCampo3 + WCampo4 + WCampo5 + WCampo6 + WCampo7 + WCampo8 + WCampo9 + WCampo10 + WCampo11 + WCampo12 + WCampo1 + WCampo13 + WCampo14 + WCampo15 + WCampo16 + WCampo17 + WCampo18 + WCampo19 + WCampo20 + vbCrLf)
+                    escritor.Write(WCampo1 + WCampo2 + WCampo3 + WCampo4 + WCampo5 + WCampo6 + WCampo7 + WCampo8 + WCampo9 + WCampo10 + WCampo11 + WCampo12 + WCampo13 + WCampo14 + WCampo15 + WCampo16 + WCampo17 + WCampo18 + WCampo19 + WCampo20 + vbCrLf)
 
                 Next
 
@@ -214,10 +181,55 @@ Public Class ProcesoRetencionesPagos
 
                 MsgBox("Proceso Finalizado de Ganancias", MsgBoxStyle.Information)
 
-            Case Else
-
         End Select
 
     End Sub
 
+    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
+        
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesde.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            If Proceso._ValidarFecha(txtDesde.Text) Then
+                txtHasta.Focus()
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesde.Clear()
+        End If
+
+    End Sub
+
+    Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtHasta.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            If Proceso._ValidarFecha(txtHasta.Text) Then
+                txtNombre.Focus()
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHasta.Clear()
+        End If
+    End Sub
+
+    Private Sub txtNombre_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNombre.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtNombre.Text) = "" Then : Exit Sub : End If
+
+            With TipoProceso
+                .DroppedDown = True
+                .Focus()
+            End With
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNombre.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub ProcesoRetencionesPagos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesde.Focus()
+    End Sub
 End Class
