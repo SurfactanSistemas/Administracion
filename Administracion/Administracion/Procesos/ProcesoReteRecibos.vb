@@ -1,7 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports ClasesCompartidas
 Imports System.IO
-Imports System.Runtime.Remoting
 
 Public Class ProcesoReteRecibos
 
@@ -148,7 +147,6 @@ Public Class ProcesoReteRecibos
                     With row
 
                         Vector(WIndice, 0) = .Item("Cuit")
-                        Vector(WIndice, 1) = .Item("Cliente")
                         Vector(WIndice, 2) = .Item("Fecha")
                         Vector(WIndice, 3) = IIf(IsDBNull(.Item("ComproIB")), "", .Item("ComproIB"))
                         Vector(WIndice, 4) = Str$(.Item("RetOtra"))
@@ -192,13 +190,12 @@ Public Class ProcesoReteRecibos
 
                 Next
 
-                Dim WCliente = "", WRetOtra = ""
+                Dim WRetOtra = ""
 
                 For i = 0 To WIndice
 
                     WCuit = Vector(i, 0)
                     WCuit = _left(WCuit, 13)
-                    WCliente = Vector(i, 1)
                     WFecha = Vector(i, 2)
                     WComproIb = Vector(i, 3)
                     WImporte = Vector(i, 4)
@@ -293,7 +290,7 @@ Public Class ProcesoReteRecibos
         Dim tabla As New DataTable
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT r.Cliente, r.Fecha, r.ComproIb, r.RetOtra, r.Recibo, cli.Cuit, " & _
+        Dim cm As SqlCommand = New SqlCommand("SELECT r.Fecha, r.ComproIb, r.RetOtra, r.Recibo, cli.Cuit, " & _
                                               " RetIb1,RetIb2,RetIb3,RetIb4,RetIb5,RetIb6,RetIb7, NroRetIb1, NroRetIb2, " & _
                                               " NroRetIb3, NroRetIb4, NroRetIb5, NroRetIb6, NroRetIb7 FROM Recibos r JOIN Cliente cli ON cli.Cliente = r.Cliente WHERE FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " AND RetOtra <> 0 AND Renglon = 1")
         Dim dr As SqlDataReader
