@@ -1,4 +1,6 @@
-﻿Public Class MenuPrincipal
+﻿Imports System.IO
+
+Public Class MenuPrincipal
     Dim forms As New List(Of Form)
     Dim loginOpen As Boolean = False
 
@@ -130,7 +132,7 @@
         abrir(New ListadoAsientoResumen)
     End Sub
 
-   
+
     Private Sub SubdiarioDeIvaComprasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SubdiarioDeIvaComprasToolStripMenuItem.Click
         abrir(New ListadoIvaCompras)
     End Sub
@@ -143,7 +145,7 @@
         abrir(New ListadoDepositos)
     End Sub
 
-    
+
     Private Sub ListadoDeRecibosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeRecibosToolStripMenuItem1.Click
         abrir(New ListadoRecibos)
     End Sub

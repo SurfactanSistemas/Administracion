@@ -1,4 +1,5 @@
-﻿Imports ClasesCompartidas
+﻿Imports System.Data.SqlClient
+Imports ClasesCompartidas
 Imports System.IO
 
 Public Class ProcesoReteRecibos
@@ -54,8 +55,8 @@ Public Class ProcesoReteRecibos
 
 
     Private Sub txtdesde_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                Handles txtDesde.KeyPress
+                ByVal e As System.Windows.Forms.KeyPressEventArgs)
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             If ValidaFecha(txtDesde.Text) = "S" Then
@@ -69,8 +70,8 @@ Public Class ProcesoReteRecibos
     End Sub
 
     Private Sub txthasta_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                Handles txtHasta.KeyPress
+                ByVal e As System.Windows.Forms.KeyPressEventArgs)
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             If ValidaFecha(txtHasta.Text) = "S" Then
@@ -84,8 +85,8 @@ Public Class ProcesoReteRecibos
     End Sub
 
     Private Sub txtnombre_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtNombre.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             txtDesde.Focus()
@@ -100,8 +101,11 @@ Public Class ProcesoReteRecibos
         MenuPrincipal.Show()
     End Sub
 
-
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
+
+        If Trim(txtNombre.Text) = "" Then Exit Sub
+
+        txtNombre.Text = Trim(txtNombre.Text)
 
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
             nombreArchivo = FolderBrowserDialog1.SelectedPath
@@ -128,7 +132,8 @@ Public Class ProcesoReteRecibos
                     WCuit = leederecha(CamposReteIva.cuit, 13)
                     WFecha = CamposReteIva.fecha
                     WComproIva = ceros(CamposReteIva.comproiva, 16)
-                    WImporte = ceros(formatonumerico(redondeo(CamposReteIva.retiva), "########0.#0", "."), 16)
+                    WImporte = ceros(CamposReteIva.retiva, 16)
+                    WImporte = WImporte.Replace(",", ".")
 
                     WCampo1 = "248"
                     WCampo2 = WCuit
@@ -211,4 +216,58 @@ Public Class ProcesoReteRecibos
 
     End Sub
 
+    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesde.Text) = "" Then : Exit Sub : End If
+
+            If Proceso._ValidarFecha(txtDesde.Text) Then
+                txtHasta.Focus()
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesde.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtHasta.Text) = "" Then : Exit Sub : End If
+
+            If Proceso._ValidarFecha(txtHasta.Text) Then
+
+                With TipoProceso
+                    .DroppedDown = True
+                    .Focus()
+                End With
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHasta.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub TipoProceso_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TipoProceso.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            txtNombre.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            TipoProceso.SelectedIndex = 0
+        End If
+
+    End Sub
+
+    Private Sub TipoProceso_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TipoProceso.DropDownClosed
+        txtNombre.Focus()
+    End Sub
+
+    Private Sub ProcesoReteRecibos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesde.Focus()
+    End Sub
 End Class

@@ -45,7 +45,7 @@ Partial Class ProcesoReteRecibos
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(163, 13)
+        Me.txtDesde.Location = New System.Drawing.Point(171, 19)
         Me.txtDesde.Mask = "##/##/####"
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -55,7 +55,7 @@ Partial Class ProcesoReteRecibos
         '
         'txtHasta
         '
-        Me.txtHasta.Location = New System.Drawing.Point(395, 13)
+        Me.txtHasta.Location = New System.Drawing.Point(403, 19)
         Me.txtHasta.Mask = "##/##/####"
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -77,7 +77,7 @@ Partial Class ProcesoReteRecibos
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(311, 152)
+        Me.btnCancela.Location = New System.Drawing.Point(307, 152)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(98, 43)
         Me.btnCancela.TabIndex = 20
@@ -98,7 +98,7 @@ Partial Class ProcesoReteRecibos
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAcepta.LabelAssociationKey = -1
-        Me.btnAcepta.Location = New System.Drawing.Point(177, 152)
+        Me.btnAcepta.Location = New System.Drawing.Point(173, 152)
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(101, 43)
         Me.btnAcepta.TabIndex = 19
@@ -108,11 +108,12 @@ Partial Class ProcesoReteRecibos
         'TipoProceso
         '
         Me.TipoProceso.Cleanable = False
+        Me.TipoProceso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.TipoProceso.Empty = False
         Me.TipoProceso.EnterIndex = -1
         Me.TipoProceso.FormattingEnabled = True
         Me.TipoProceso.LabelAssociationKey = -1
-        Me.TipoProceso.Location = New System.Drawing.Point(395, 55)
+        Me.TipoProceso.Location = New System.Drawing.Point(171, 55)
         Me.TipoProceso.Name = "TipoProceso"
         Me.TipoProceso.Size = New System.Drawing.Size(106, 21)
         Me.TipoProceso.TabIndex = 3
@@ -124,7 +125,8 @@ Partial Class ProcesoReteRecibos
         Me.txtNombre.Empty = True
         Me.txtNombre.EnterIndex = -1
         Me.txtNombre.LabelAssociationKey = -1
-        Me.txtNombre.Location = New System.Drawing.Point(163, 55)
+        Me.txtNombre.Location = New System.Drawing.Point(403, 56)
+        Me.txtNombre.MaxLength = 8
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(106, 20)
         Me.txtNombre.TabIndex = 2
@@ -136,7 +138,7 @@ Partial Class ProcesoReteRecibos
         Me.CustomLabel4.ControlAssociationKey = -1
         Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(293, 56)
+        Me.CustomLabel4.Location = New System.Drawing.Point(74, 58)
         Me.CustomLabel4.Name = "CustomLabel4"
         Me.CustomLabel4.Size = New System.Drawing.Size(87, 18)
         Me.CustomLabel4.TabIndex = 16
@@ -148,7 +150,7 @@ Partial Class ProcesoReteRecibos
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(94, 56)
+        Me.CustomLabel3.Location = New System.Drawing.Point(329, 58)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(59, 18)
         Me.CustomLabel3.TabIndex = 13
@@ -160,7 +162,7 @@ Partial Class ProcesoReteRecibos
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(299, 14)
+        Me.CustomLabel2.Location = New System.Drawing.Point(307, 20)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(81, 18)
         Me.CustomLabel2.TabIndex = 12
@@ -172,7 +174,7 @@ Partial Class ProcesoReteRecibos
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(67, 14)
+        Me.CustomLabel1.Location = New System.Drawing.Point(75, 20)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(86, 18)
         Me.CustomLabel1.TabIndex = 11
