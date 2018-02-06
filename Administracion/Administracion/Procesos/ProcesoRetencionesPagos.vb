@@ -132,7 +132,8 @@ Public Class ProcesoRetencionesPagos
 
                     WFecha = CamposReteGanan.fecha
                     WCertificado = ceros(CamposReteGanan.certificadogan, 16)
-                    WImporte = ceros(formatonumerico(redondeo(CamposReteGanan.Importe), "########0.#0", "."), 16)
+                    WImporte = ceros(Str$(CamposReteGanan.Importe), 16)
+                    WImporte = WImporte.Replace(",", ".")
 
                     Select Case CamposReteGanan.tipo
                         Case 1
@@ -148,8 +149,10 @@ Public Class ProcesoRetencionesPagos
                         Case Else
                             WCampo6 = "78 "
                     End Select
-                    WBase = ceros(formatonumerico(redondeo(CamposReteGanan.Importe), "########0.#0", "."), 14)
-                    WRetencion = ceros(formatonumerico(redondeo(CamposReteGanan.retencion), "########0.#0", "."), 14)
+                    WBase = ceros(Str$(CamposReteGanan.Importe), 14)
+                    WBase = WBase.Replace(",", ".")
+                    WRetencion = ceros(redondeo(CamposReteGanan.retencion), 14)
+                    WRetencion = WRetencion.Replace(",", ".")
                     'WCuit = agregaespacios((CamposReteGanan.cuit), 20)
                     WCuit = CamposReteGanan.cuit
 
