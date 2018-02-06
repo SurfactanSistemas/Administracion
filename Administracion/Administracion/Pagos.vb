@@ -6635,10 +6635,10 @@ Public Class Pagos
                 Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
 
                 Select Case Val(_mes)
-                    Case Is < 7
+                    Case Is < 6
                         txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2018"
                     Case Else
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2019"
+                        txtFechaAux.Text = txtFechaAux.Text & Mid(txtFecha.Text, 7, 4)
                 End Select
 
             End If
