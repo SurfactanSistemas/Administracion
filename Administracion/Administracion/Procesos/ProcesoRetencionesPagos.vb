@@ -1,5 +1,6 @@
 ﻿Imports ClasesCompartidas
 Imports System.IO
+Imports Microsoft.Office.Interop.Outlook
 
 Public Class ProcesoRetencionesPagos
 
@@ -63,6 +64,13 @@ Public Class ProcesoRetencionesPagos
     Private Sub btnAceptaRetePago_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptaRetePago.Click
 
         If Trim(txtNombre.Text) = "" Then Exit Sub
+
+        Select Case TipoProceso.SelectedIndex
+            Case 0
+                txtNombre.Text = _Left(txtNombre.Text, 50)
+            Case 1
+                txtNombre.Text = _Left(txtNombre.Text, 8)
+        End Select
 
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
             nombreArchivo = FolderBrowserDialog1.SelectedPath
@@ -185,8 +193,12 @@ Public Class ProcesoRetencionesPagos
 
     End Sub
 
+    Private Function _Left(ByVal texto As String, ByVal longitud As Integer) As String
+        Return Microsoft.VisualBasic.Left(texto, longitud)
+    End Function
+
     Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
             If Trim(txtDesde.Text.Replace("/", "")) = "" Then : Exit Sub : End If
 
@@ -205,7 +217,10 @@ Public Class ProcesoRetencionesPagos
             If Trim(txtHasta.Text.Replace("/", "")) = "" Then : Exit Sub : End If
 
             If Proceso._ValidarFecha(txtHasta.Text) Then
-                txtNombre.Focus()
+                With TipoProceso
+                    .DroppedDown = True
+                    .Focus()
+                End With
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -218,10 +233,7 @@ Public Class ProcesoRetencionesPagos
         If e.KeyData = Keys.Enter Then
             If Trim(txtNombre.Text) = "" Then : Exit Sub : End If
 
-            With TipoProceso
-                .DroppedDown = True
-                .Focus()
-            End With
+            txtDesde.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtNombre.Text = ""
@@ -231,5 +243,36 @@ Public Class ProcesoRetencionesPagos
 
     Private Sub ProcesoRetencionesPagos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtDesde.Focus()
+    End Sub
+
+    Private Sub TipoProceso_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TipoProceso.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            txtNombre.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            TipoProceso.SelectedIndex = 0
+        End If
+
+    End Sub
+
+    Private Sub TipoProceso_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TipoProceso.SelectedIndexChanged
+
+        With txtNombre
+            Select Case TipoProceso.SelectedIndex
+                Case 0
+                    .MaxLength = 50
+                Case 1
+                    .MaxLength = 8
+            End Select
+        End With
+
+    End Sub
+
+    Private Sub TipoProceso_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TipoProceso.DropDownClosed
+
+        txtNombre.Focus()
+
     End Sub
 End Class

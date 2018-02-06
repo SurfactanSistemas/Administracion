@@ -90,7 +90,7 @@ Partial Class ProcesoRetencionesPagos
         Me.CustomLabel4.ControlAssociationKey = -1
         Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(308, 59)
+        Me.CustomLabel4.Location = New System.Drawing.Point(65, 56)
         Me.CustomLabel4.Name = "CustomLabel4"
         Me.CustomLabel4.Size = New System.Drawing.Size(87, 18)
         Me.CustomLabel4.TabIndex = 15
@@ -102,7 +102,7 @@ Partial Class ProcesoRetencionesPagos
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(93, 59)
+        Me.CustomLabel3.Location = New System.Drawing.Point(334, 56)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(59, 18)
         Me.CustomLabel3.TabIndex = 10
@@ -161,7 +161,7 @@ Partial Class ProcesoRetencionesPagos
         Me.TipoProceso.EnterIndex = -1
         Me.TipoProceso.FormattingEnabled = True
         Me.TipoProceso.LabelAssociationKey = -1
-        Me.TipoProceso.Location = New System.Drawing.Point(405, 58)
+        Me.TipoProceso.Location = New System.Drawing.Point(162, 55)
         Me.TipoProceso.Name = "TipoProceso"
         Me.TipoProceso.Size = New System.Drawing.Size(106, 21)
         Me.TipoProceso.TabIndex = 17
@@ -173,7 +173,7 @@ Partial Class ProcesoRetencionesPagos
         Me.txtNombre.Empty = True
         Me.txtNombre.EnterIndex = -1
         Me.txtNombre.LabelAssociationKey = -1
-        Me.txtNombre.Location = New System.Drawing.Point(164, 58)
+        Me.txtNombre.Location = New System.Drawing.Point(405, 55)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(106, 20)
         Me.txtNombre.TabIndex = 13
