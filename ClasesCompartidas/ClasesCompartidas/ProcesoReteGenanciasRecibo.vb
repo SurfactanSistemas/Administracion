@@ -9,13 +9,13 @@
     Public cuit As String
 
     Public Sub New(ByVal fechaord2 As String, ByVal retganancias2 As Double, ByVal renglon2 As String, ByVal cliente2 As String,
-                   ByVal comproganan2 As String, ByVal cuit2 As String)
+                   ByVal comproganan2 As String, ByVal cuit2 As String, ByVal fecha2 As String)
 
         fechaord = fechaord2
         retganancias = retganancias2
         renglon = renglon2
         cliente = cliente2
-        REM fecha = fecha2
+        fecha = fecha2
         comproganan = comproganan2
         cuit = cuit2
 

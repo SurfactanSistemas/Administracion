@@ -155,22 +155,23 @@ Public Class ProcesoReteRecibos
 
                 For Each row As DataRow In tabla.Rows
 
-                    Dim CamposReteGanancias As New ProcesoReteGenanciasRecibo(row.Item(0).ToString, row.Item(1), row.Item(2).ToString, row.Item(3).ToString, row.Item(4).ToString, row.Item(5).ToString)
+                    Dim CamposReteGanancias As New ProcesoReteGenanciasRecibo(row.Item(0).ToString, row.Item(1), row.Item(2).ToString, row.Item(3).ToString, row.Item(4).ToString, row.Item(5).ToString, row.Item(6).ToString)
 
                     WCuit = sacaguiones(CamposReteGanancias.cuit)
-                    REM WFecha = CamposReteGanancias.fecha
-                    WFecha = "01/01/2016"
-                    WComproGanan = ceros(CamposReteGanancias.comproganan, 16)
-                    WImporte = ceros(formatonumerico(redondeo(CamposReteGanancias.retganancias), "########0.#0", "."), 16)
+                    WFecha = CamposReteGanancias.fecha
+                    WCuit = _left(WCuit, 13)
+                    'WFecha = "01/01/2016"
+                    WComproGanan = ceros(CamposReteGanancias.comproganan, 30)
+                    WImporte = ceros(CamposReteGanancias.retganancias, 15)
 
                     WCampo1 = "1"
                     WCampo2 = WCuit
                     WCampo3 = WFecha
                     WCampo4 = "078"
-                    WCampo6 = WImporte
+                    WCampo6 = WImporte.Replace(",", ".")
                     WCampo5 = WComproganan
 
-                    escritor.Write(WCampo1 + WCampo2 + WCampo3 + WCampo4 + WCampo5 + WCampo6 + vbCrLf)
+                    escritor.Write(WCampo1 + WCampo2 + WCampo3 + WCampo4 + WCampo6 + WCampo5 + vbCrLf)
 
                 Next
 
@@ -215,6 +216,10 @@ Public Class ProcesoReteRecibos
         End Select
 
     End Sub
+
+    Private Function _left(ByVal s As String, ByVal i As Integer) As String
+        Return Microsoft.VisualBasic.Left(s, i)
+    End Function
 
     Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
 
