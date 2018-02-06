@@ -104,7 +104,7 @@ Public Class Compras
         CBLetra.SelectedItem = "A"
         cmbFormaPago.SelectedIndex = 0
 
-        If Val(proveedorAMostrar.codIva) = 5 Then
+        If Val(proveedorAMostrar.codIva) = 5 Or Val(proveedorAMostrar.codIva) = 3 Then
             cmbTipo.SelectedItem = "FC"
             CBLetra.SelectedItem = "C"
             _HabilitarDeshabilitarControlesSegunLetra()

@@ -27,17 +27,6 @@ Public Class ProcesoReteRecibos
     Dim WCampo7 As String
     Dim WCampo8 As String
     Dim WCampo9 As String
-    Dim WCampo10 As String
-    Dim WCampo11 As String
-    Dim WCampo12 As String
-    Dim WCampo13 As String
-    Dim WCampo14 As String
-    Dim WCampo15 As String
-    Dim WCampo16 As String
-    Dim WCampo17 As String
-    Dim WCampo18 As String
-    Dim WCampo19 As String
-    Dim WCampo20 As String
 
     Private Sub ProcesoReteRecibos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
@@ -53,48 +42,6 @@ Public Class ProcesoReteRecibos
 
     End Sub
 
-
-    Private Sub txtdesde_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            If ValidaFecha(txtDesde.Text) = "S" Then
-                txtHasta.Focus()
-            End If
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtDesde.Text = "  /  /    "
-            Me.txtDesde.SelectionStart = 0
-        End If
-    End Sub
-
-    Private Sub txthasta_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            If ValidaFecha(txtHasta.Text) = "S" Then
-                txtNombre.Focus()
-            End If
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtHasta.Text = "  /  /    "
-            Me.txtHasta.SelectionStart = 0
-        End If
-    End Sub
-
-    Private Sub txtnombre_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            txtDesde.Focus()
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtNombre.Text = ""
-        End If
-    End Sub
 
     Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
         Me.Hide()
@@ -181,34 +128,42 @@ Public Class ProcesoReteRecibos
 
             Case Else
                 Dim tabla As DataTable
-                tabla = SQLConnector.retrieveDataTable("procesoReteIbrecibos", ordDesde, ordHasta)
+                Dim Vector(10000, 20) As String
+                Dim ZRetIb(100, 3) As Double
+                Dim WIndice = 0
+
+                tabla = _TraerRetencionesIBRecibos(ordDesde, ordHasta) 'SQLConnector.retrieveDataTable("procesoReteIbrecibos", ordDesde, ordHasta)
 
                 For Each row As DataRow In tabla.Rows
 
-                    Dim CamposReteIb As New ProcesoReteIbRecibos(row.Item(0).ToString, row.Item(1), row.Item(2).ToString, row.Item(3).ToString, row.Item(4).ToString, row.Item(5).ToString, row.Item(6).ToString)
+                    Vector(WIndice, 0) = ""
 
-                    WCuit = leederecha(CamposReteIb.cuit, 13)
-                    WFecha = CamposReteIb.fecha
-                    WFecha = "01/01/2016"
-                    WComproIb = ceros(CamposReteIb.comproib, 16)
-                    WImporte = ceros(formatonumerico(redondeo(CamposReteIb.retotra), "########0.#0", "."), 11)
-                    WRecibo = "121212121"
+                    '    Dim CamposReteIb As New ProcesoReteIbRecibos(row.Item(0).ToString, row.Item(1), row.Item(2).ToString, row.Item(3).ToString, row.Item(4).ToString, row.Item(5).ToString, row.Item(6).ToString)
 
-                    WCampo1 = "902"
-                    WCampo2 = WCuit
-                    WCampo3 = WFecha
-                    WCampo4 = "0001"
-                    WCampo5 = WComproIb
-                    WCampo6 = "R"
-                    WCampo7 = "A"
-                    WCampo8 = WRecibo
-                    WCampo9 = WImporte
+                    '    WCuit = leederecha(CamposReteIb.cuit, 13)
+                    '    WFecha = CamposReteIb.fecha
+                    '    WFecha = "01/01/2016"
+                    '    WComproIb = ceros(CamposReteIb.comproib, 16)
+                    '    WImporte = ceros(formatonumerico(redondeo(CamposReteIb.retotra), "########0.#0", "."), 11)
+                    '    WRecibo = "121212121"
 
-                    escritor.Write(WCampo1 + WCampo2 + WCampo3 + WCampo4 + WCampo5 + WCampo6 + WCampo7 + WCampo8 + WCampo9 + vbCrLf)
+                    '    WCampo1 = "902"
+                    '    WCampo2 = WCuit
+                    '    WCampo3 = WFecha
+                    '    WCampo4 = "0001"
+                    '    WCampo5 = WComproIb
+                    '    WCampo6 = "R"
+                    '    WCampo7 = "A"
+                    '    WCampo8 = WRecibo
+                    '    WCampo9 = WImporte
+
+                    '    escritor.Write(WCampo1 + WCampo2 + WCampo3 + WCampo4 + WCampo5 + WCampo6 + WCampo7 + WCampo8 + WCampo9 + vbCrLf)
+
+                    WIndice += 1
 
                 Next
 
-                escritor.Close()
+                'escritor.Close()
 
                 MsgBox("Proceso Finalizado de Retenciones de Ingresos Brutos", MsgBoxStyle.Information)
 
@@ -216,6 +171,42 @@ Public Class ProcesoReteRecibos
         End Select
 
     End Sub
+
+    Private Function _TraerRetencionesIBRecibos(ByVal WDesde As String, ByVal WHasta As String) As DataTable
+
+        Dim tabla As New DataTable
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Recibos WHERE FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " RetOtra <> 0 AND Renglon = 1")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return tabla
+    End Function
 
     Private Function _left(ByVal s As String, ByVal i As Integer) As String
         Return Microsoft.VisualBasic.Left(s, i)
