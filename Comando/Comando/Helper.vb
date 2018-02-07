@@ -563,4 +563,8 @@ Module Helper
         Return Microsoft.VisualBasic.Left(Trim(str), len)
     End Function
 
+    Public Function _Right(ByVal str As String, ByVal len As Integer)
+        Return Microsoft.VisualBasic.Right(Trim(str), len)
+    End Function
+
 End Module

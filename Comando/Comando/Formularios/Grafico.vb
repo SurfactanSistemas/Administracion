@@ -347,18 +347,34 @@ Public Class Grafico
 
             Titulo = ReplaceLastComma(Titulo)
 
-            Titulo &= " -" & vbCrLf & " - " & Tabla.Rows(0).Item(16) & " Al "
+            Titulo &= " -" & vbCrLf & " - "
 
+            Titulo &= "Meses: " & Helper._Left(Tabla.Rows(0).Item(16), 2) & " Al "
+
+            Dim WUltimoMes = 0
             For i = 27 To 16 Step -1
 
                 If Not IsDBNull(Tabla.Rows(0).Item(i)) Then
 
-                    Titulo &= Tabla.Rows(0).Item(i) & " -" & vbCrLf & "( "
-
+                    Titulo &= Helper._Left(Tabla.Rows(0).Item(i), 2)
+                    WUltimoMes = i
                     Exit For
+
                 End If
 
             Next
+
+            Titulo &= " -" & vbCrLf & "- Periodos: " & Helper._Right(Tabla.Rows(0).Item(16), 4)
+
+            For i = 1 To Tabla.Rows.Count - 1
+
+                Titulo &= ", " & Helper._Right(Tabla.Rows(i).Item(WUltimoMes), 4)
+
+            Next
+
+            Titulo &= " -" & vbCrLf
+
+            Titulo = ReplaceLastComma(Titulo)
 
         End If
 
@@ -450,6 +466,8 @@ Public Class Grafico
             wacu = 0.0
             WIndice3 += 1
         Next
+
+        Titulo &= "( "
 
         For i = 0 To WValores.Length - 1
             If Not IsNothing(WValores(i)) Then
@@ -691,7 +709,7 @@ Public Class Grafico
             .Titles.Clear()
             .Titles.Add("Titulo")
             .Titles(0).Text = Titulo
-            .Titles(0).Font = New Font(FontFamily.GenericSansSerif, 12, GraphicsUnit.Point)
+            .Titles(0).Font = New Font(FontFamily.GenericSansSerif, 11, GraphicsUnit.Point)
         End With
     End Sub
 
@@ -715,7 +733,7 @@ Public Class Grafico
 
         If Tipo = -1 Then
 
-            Dim tabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
+            Dim WTabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
 
             With Chart1
 
@@ -724,12 +742,12 @@ Public Class Grafico
             End With
 
 
-            Chart1.Series.Add(tabla(rowIndex).Item(1))
+            Chart1.Series.Add(WTabla(rowIndex).Item(1))
 
             For i = 4 To 15
 
-                If Not IsDBNull(tabla(rowIndex).Item(i)) AndAlso tabla(rowIndex).Item(i) <> 0 Then
-                    Chart1.Series(tabla(rowIndex).Item(1).ToString).Points.AddXY(tabla(rowIndex).Item(i + 12), tabla(rowIndex).Item(i))
+                If Not IsDBNull(WTabla(rowIndex).Item(i)) AndAlso WTabla(rowIndex).Item(i) <> 0 Then
+                    Chart1.Series(WTabla(rowIndex).Item(1).ToString).Points.AddXY(WTabla(rowIndex).Item(i + 12), WTabla(rowIndex).Item(i))
                 End If
 
             Next
@@ -933,7 +951,7 @@ Public Class Grafico
         Else
 
 
-            Dim tabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
+            Dim WTabla = TablaGrilla.DataSet.Tables(1).Select("", "Descripcion DESC")
 
             With Chart1
 
@@ -942,12 +960,12 @@ Public Class Grafico
 
             End With
 
-            Chart1.Series.Add(tabla(rowIndex).Item(2))
+            Chart1.Series.Add(WTabla(rowIndex).Item(2))
 
             For i = 4 To 15
 
-                If Not IsDBNull(tabla(rowIndex).Item(i)) AndAlso tabla(rowIndex).Item(i) <> 0 Then
-                    Chart1.Series(tabla(rowIndex).Item(2).ToString).Points.AddXY(tabla(rowIndex).Item(i + 12), tabla(rowIndex).Item(i))
+                If Not IsDBNull(WTabla(rowIndex).Item(i)) AndAlso WTabla(rowIndex).Item(i) <> 0 Then
+                    Chart1.Series(WTabla(rowIndex).Item(2).ToString).Points.AddXY(WTabla(rowIndex).Item(i + 12), WTabla(rowIndex).Item(i))
                 End If
 
             Next

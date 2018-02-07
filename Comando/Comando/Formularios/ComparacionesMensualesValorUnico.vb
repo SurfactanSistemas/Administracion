@@ -168,14 +168,26 @@ Public Class ComparacionesMensualesValorUnico
                     Return Nothing
                 End If
 
-                anios(1) = Val(txtAnioDesde.Text)
-                anios(2) = Val(txtAnioHasta.Text)
-                anios(3) = Val(txtAnioDesde.Text) - 1
-                anios(4) = Val(txtAnioHasta.Text) - 1
+                If Val(txtAnioDesde.Text) = Val(txtAnioHasta.Text) Then
 
-                For i = 1 To 4 Step 2
-                    _BuscarDatosComparativoMensual(anios(i), anios(i + 1), WDatos, datos, WMeses)
-                Next
+                    For Each WAnio In clbAniosAComparar.CheckedItems
+
+                        _BuscarDatosComparativoMensual(Val(WAnio), Val(WAnio), WDatos, datos, WMeses)
+
+                    Next
+
+                Else
+
+                    anios(1) = Val(txtAnioDesde.Text)
+                    anios(2) = Val(txtAnioHasta.Text)
+                    anios(3) = Val(txtAnioDesde.Text) - 1
+                    anios(4) = Val(txtAnioHasta.Text) - 1
+
+                    For i = 1 To 4 Step 2
+                        _BuscarDatosComparativoMensual(anios(i), anios(i + 1), WDatos, datos, WMeses)
+                    Next
+
+                End If
 
                 If datos.Rows.Count = 0 OrElse datos.Rows.Count - 9 = 0 Then
                     Throw New Exception("No existen datos para alguno de los siguientes Años: " & anios(1) & " o " & anios(3))
@@ -359,7 +371,7 @@ Public Class ComparacionesMensualesValorUnico
         Dim WAnio1 = anio1, WAnio2 = anio2
         Dim WDato = ""
         Dim WCantDatos = (From d In wDatos Where Trim(d) <> "").Count
-        
+
         Try
 
             cn.ConnectionString = Helper._ConectarA
@@ -1166,7 +1178,7 @@ Public Class ComparacionesMensualesValorUnico
 
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
-            
+
             ' Armamos la consulta de los campos a comparar para cada mes.
             For j = 1 To 10
 
@@ -1256,7 +1268,7 @@ Public Class ComparacionesMensualesValorUnico
                     End If
 
                 Else
-                    
+
                     Dim aux1 = 0
 
                     For i = Val(txtMesDesde.Text) To 12
@@ -1308,7 +1320,7 @@ Public Class ComparacionesMensualesValorUnico
                         End If
 
                     Next
-                    
+
                     ' Chequeamos que hayan datos que buscar.
                     If Trim(WDatosABuscar) = "" Then
                         Return
@@ -1693,7 +1705,7 @@ Public Class ComparacionesMensualesValorUnico
             MsgBox("Se debe seleccionar por lo menos una familia para generar un reporte.", MsgBoxStyle.Exclamation)
             Exit Sub
         End If
-        
+
         '
         ' BUSCAMOS LOS DATOS CON LOS CUALES TRABAJAR.
         '
@@ -1708,7 +1720,7 @@ Public Class ComparacionesMensualesValorUnico
         End Try
 
         If tabla Is Nothing Then : Exit Sub : End If
-        
+
         If tabla.Tables(0).Rows.Count = 0 Then
             MsgBox("No hay datos para graficar.", MsgBoxStyle.Information)
             txtMesDesde.Focus()
@@ -1719,7 +1731,7 @@ Public Class ComparacionesMensualesValorUnico
             .Tabla = tabla.Tables(0)
             .TablaGrilla = tabla.Tables(1)
             .TablaConsolidados = tabla.Tables(2)
-            
+
             Select Case cmbPeriodo.SelectedIndex
                 Case 0 ' Mensual
 
@@ -1800,11 +1812,13 @@ Public Class ComparacionesMensualesValorUnico
     End Sub
 
     Private Sub btnSeleccionarAnios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSeleccionarAnios.Click
-        pnlAnios.Visible = True
+
+        PanelSeleccionAnios.Visible = True
+
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        pnlAnios.Visible = False
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click, Button2.Click
+        PanelSeleccionAnios.Visible = False
     End Sub
 
     Private Sub cmbPeriodo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPeriodo.SelectedIndexChanged
@@ -1817,6 +1831,8 @@ Public Class ComparacionesMensualesValorUnico
                 ckConsolidado.Checked = True
 
             Case 2
+                btnSeleccionarAnios.Visible = True
+                btnSeleccionarAnios.PerformClick()
 
                 For Each ck As CheckBox In _ValoresComparables()
 
@@ -1863,7 +1879,7 @@ Public Class ComparacionesMensualesValorUnico
 
                 btnSeleccionarAnios.Visible = False
                 Button1.PerformClick()
-                
+
 
         End Select
 
@@ -1956,6 +1972,26 @@ Public Class ComparacionesMensualesValorUnico
             If Not _ValidaDatosPeriodo() Then
 
                 Exit Sub
+
+            End If
+
+
+            Dim WAnioHasta, WAnioDesde
+
+            WAnioDesde = Val(txtAnioDesde.Text)
+            WAnioHasta = Val(txtAnioHasta.Text)
+
+            If WAnioDesde > 0 And WAnioHasta > 0 And WAnioHasta = WAnioDesde Then
+
+                clbAniosAComparar.Items.Clear()
+
+                Dim WAnioActual = WAnioDesde
+
+                For i = 0 To 3
+
+                    clbAniosAComparar.Items.Add(Val(WAnioActual) - i)
+
+                Next
 
             End If
 
