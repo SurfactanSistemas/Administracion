@@ -26,8 +26,6 @@ Partial Class ProcesoPercepciones
         Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.TipoProceso = New Administracion.CustomComboBox()
-        Me.txtNombre = New Administracion.CustomTextBox()
         Me.CustomLabel4 = New Administracion.CustomLabel()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
@@ -36,19 +34,23 @@ Partial Class ProcesoPercepciones
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.CustomButton3 = New Administracion.CustomButton()
-        Me.CustomButton2 = New Administracion.CustomButton()
-        Me.CustomButton1 = New Administracion.CustomButton()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.CustomLabel5 = New Administracion.CustomLabel()
+        Me.txtNombre = New Administracion.CustomTextBox()
+        Me.TipoProceso = New Administracion.CustomComboBox()
+        Me.LugarProceso = New Administracion.CustomComboBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCancela = New Administracion.CustomButton()
         Me.btnAcepta = New Administracion.CustomButton()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtHasta
         '
-        Me.txtHasta.Location = New System.Drawing.Point(429, 18)
+        Me.txtHasta.Location = New System.Drawing.Point(411, 14)
         Me.txtHasta.Mask = "##/##/####"
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -58,7 +60,7 @@ Partial Class ProcesoPercepciones
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(192, 18)
+        Me.txtDesde.Location = New System.Drawing.Point(174, 14)
         Me.txtDesde.Mask = "##/##/####"
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -66,42 +68,17 @@ Partial Class ProcesoPercepciones
         Me.txtDesde.TabIndex = 18
         Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'TipoProceso
-        '
-        Me.TipoProceso.Cleanable = False
-        Me.TipoProceso.Empty = False
-        Me.TipoProceso.EnterIndex = -1
-        Me.TipoProceso.FormattingEnabled = True
-        Me.TipoProceso.LabelAssociationKey = -1
-        Me.TipoProceso.Location = New System.Drawing.Point(429, 54)
-        Me.TipoProceso.Name = "TipoProceso"
-        Me.TipoProceso.Size = New System.Drawing.Size(106, 21)
-        Me.TipoProceso.TabIndex = 21
-        Me.TipoProceso.Validator = Administracion.ValidatorType.None
-        '
-        'txtNombre
-        '
-        Me.txtNombre.Cleanable = False
-        Me.txtNombre.Empty = True
-        Me.txtNombre.EnterIndex = -1
-        Me.txtNombre.LabelAssociationKey = -1
-        Me.txtNombre.Location = New System.Drawing.Point(192, 54)
-        Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(106, 20)
-        Me.txtNombre.TabIndex = 20
-        Me.txtNombre.Validator = Administracion.ValidatorType.None
-        '
         'CustomLabel4
         '
         Me.CustomLabel4.AutoSize = True
         Me.CustomLabel4.ControlAssociationKey = -1
         Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(322, 55)
+        Me.CustomLabel4.Location = New System.Drawing.Point(350, 51)
         Me.CustomLabel4.Name = "CustomLabel4"
-        Me.CustomLabel4.Size = New System.Drawing.Size(87, 18)
+        Me.CustomLabel4.Size = New System.Drawing.Size(41, 18)
         Me.CustomLabel4.TabIndex = 17
-        Me.CustomLabel4.Text = "Tipo Proceso"
+        Me.CustomLabel4.Text = "Lugar"
         '
         'CustomLabel3
         '
@@ -109,7 +86,7 @@ Partial Class ProcesoPercepciones
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(115, 55)
+        Me.CustomLabel3.Location = New System.Drawing.Point(97, 51)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(59, 18)
         Me.CustomLabel3.TabIndex = 11
@@ -121,7 +98,7 @@ Partial Class ProcesoPercepciones
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(328, 20)
+        Me.CustomLabel2.Location = New System.Drawing.Point(310, 16)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(81, 18)
         Me.CustomLabel2.TabIndex = 10
@@ -133,7 +110,7 @@ Partial Class ProcesoPercepciones
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(88, 20)
+        Me.CustomLabel1.Location = New System.Drawing.Point(70, 16)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(86, 18)
         Me.CustomLabel1.TabIndex = 8
@@ -174,81 +151,94 @@ Partial Class ProcesoPercepciones
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.GroupBox1)
         Me.Panel2.Controls.Add(Me.CustomLabel1)
         Me.Panel2.Controls.Add(Me.CustomLabel2)
         Me.Panel2.Controls.Add(Me.CustomLabel3)
+        Me.Panel2.Controls.Add(Me.CustomLabel5)
         Me.Panel2.Controls.Add(Me.CustomLabel4)
         Me.Panel2.Controls.Add(Me.txtDesde)
         Me.Panel2.Controls.Add(Me.txtHasta)
         Me.Panel2.Controls.Add(Me.txtNombre)
         Me.Panel2.Controls.Add(Me.TipoProceso)
+        Me.Panel2.Controls.Add(Me.LugarProceso)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(586, 98)
+        Me.Panel2.Size = New System.Drawing.Size(586, 118)
         Me.Panel2.TabIndex = 29
         '
-        'CustomButton3
+        'GroupBox1
         '
-        Me.CustomButton3.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
-        Me.CustomButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.CustomButton3.Cleanable = False
-        Me.CustomButton3.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CustomButton3.EnterIndex = -1
-        Me.CustomButton3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.CustomButton3.FlatAppearance.BorderSize = 0
-        Me.CustomButton3.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CustomButton3.LabelAssociationKey = -1
-        Me.CustomButton3.Location = New System.Drawing.Point(350, 228)
-        Me.CustomButton3.Name = "CustomButton3"
-        Me.CustomButton3.Size = New System.Drawing.Size(77, 49)
-        Me.CustomButton3.TabIndex = 27
-        Me.ToolTip1.SetToolTip(Me.CustomButton3, "Imprimir Informe")
-        Me.CustomButton3.UseVisualStyleBackColor = True
+        Me.GroupBox1.Controls.Add(Me.ProgressBar1)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox1.Location = New System.Drawing.Point(308, 75)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(209, 39)
+        Me.GroupBox1.TabIndex = 23
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Progreso"
+        Me.GroupBox1.Visible = False
         '
-        'CustomButton2
+        'ProgressBar1
         '
-        Me.CustomButton2.BackgroundImage = Global.Administracion.My.Resources.Resources.pdf_icon
-        Me.CustomButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.CustomButton2.Cleanable = False
-        Me.CustomButton2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CustomButton2.EnterIndex = -1
-        Me.CustomButton2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.CustomButton2.FlatAppearance.BorderSize = 0
-        Me.CustomButton2.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CustomButton2.LabelAssociationKey = -1
-        Me.CustomButton2.Location = New System.Drawing.Point(260, 228)
-        Me.CustomButton2.Name = "CustomButton2"
-        Me.CustomButton2.Size = New System.Drawing.Size(69, 49)
-        Me.CustomButton2.TabIndex = 26
-        Me.ToolTip1.SetToolTip(Me.CustomButton2, "Informe en PDF")
-        Me.CustomButton2.UseVisualStyleBackColor = True
+        Me.ProgressBar1.Location = New System.Drawing.Point(20, 17)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(172, 14)
+        Me.ProgressBar1.TabIndex = 22
         '
-        'CustomButton1
+        'CustomLabel5
         '
-        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
-        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.CustomButton1.Cleanable = False
-        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CustomButton1.EnterIndex = -1
-        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.BorderSize = 0
-        Me.CustomButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CustomButton1.LabelAssociationKey = -1
-        Me.CustomButton1.Location = New System.Drawing.Point(160, 228)
-        Me.CustomButton1.Name = "CustomButton1"
-        Me.CustomButton1.Size = New System.Drawing.Size(78, 49)
-        Me.CustomButton1.TabIndex = 24
-        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Informe por Pantalla")
-        Me.CustomButton1.UseVisualStyleBackColor = True
+        Me.CustomLabel5.AutoSize = True
+        Me.CustomLabel5.ControlAssociationKey = -1
+        Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel5.Location = New System.Drawing.Point(70, 83)
+        Me.CustomLabel5.Name = "CustomLabel5"
+        Me.CustomLabel5.Size = New System.Drawing.Size(87, 18)
+        Me.CustomLabel5.TabIndex = 17
+        Me.CustomLabel5.Text = "Tipo Proceso"
+        '
+        'txtNombre
+        '
+        Me.txtNombre.Cleanable = False
+        Me.txtNombre.Empty = True
+        Me.txtNombre.EnterIndex = -1
+        Me.txtNombre.LabelAssociationKey = -1
+        Me.txtNombre.Location = New System.Drawing.Point(174, 50)
+        Me.txtNombre.MaxLength = 8
+        Me.txtNombre.Name = "txtNombre"
+        Me.txtNombre.Size = New System.Drawing.Size(106, 20)
+        Me.txtNombre.TabIndex = 20
+        Me.txtNombre.Validator = Administracion.ValidatorType.None
+        '
+        'TipoProceso
+        '
+        Me.TipoProceso.Cleanable = False
+        Me.TipoProceso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.TipoProceso.Empty = False
+        Me.TipoProceso.EnterIndex = -1
+        Me.TipoProceso.FormattingEnabled = True
+        Me.TipoProceso.Items.AddRange(New Object() {"Cobranzas", "Facturación"})
+        Me.TipoProceso.LabelAssociationKey = -1
+        Me.TipoProceso.Location = New System.Drawing.Point(174, 83)
+        Me.TipoProceso.Name = "TipoProceso"
+        Me.TipoProceso.Size = New System.Drawing.Size(106, 21)
+        Me.TipoProceso.TabIndex = 21
+        Me.TipoProceso.Validator = Administracion.ValidatorType.None
+        '
+        'LugarProceso
+        '
+        Me.LugarProceso.Cleanable = False
+        Me.LugarProceso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.LugarProceso.Empty = False
+        Me.LugarProceso.EnterIndex = -1
+        Me.LugarProceso.FormattingEnabled = True
+        Me.LugarProceso.LabelAssociationKey = -1
+        Me.LugarProceso.Location = New System.Drawing.Point(411, 50)
+        Me.LugarProceso.Name = "LugarProceso"
+        Me.LugarProceso.Size = New System.Drawing.Size(106, 21)
+        Me.LugarProceso.TabIndex = 21
+        Me.LugarProceso.Validator = Administracion.ValidatorType.None
         '
         'btnCancela
         '
@@ -264,9 +254,9 @@ Partial Class ProcesoPercepciones
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(309, 157)
+        Me.btnCancela.Location = New System.Drawing.Point(307, 191)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(112, 56)
+        Me.btnCancela.Size = New System.Drawing.Size(77, 49)
         Me.btnCancela.TabIndex = 23
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
@@ -285,9 +275,9 @@ Partial Class ProcesoPercepciones
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAcepta.LabelAssociationKey = -1
-        Me.btnAcepta.Location = New System.Drawing.Point(162, 157)
+        Me.btnAcepta.Location = New System.Drawing.Point(194, 191)
         Me.btnAcepta.Name = "btnAcepta"
-        Me.btnAcepta.Size = New System.Drawing.Size(115, 56)
+        Me.btnAcepta.Size = New System.Drawing.Size(77, 49)
         Me.btnAcepta.TabIndex = 22
         Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
@@ -296,12 +286,9 @@ Partial Class ProcesoPercepciones
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(579, 290)
+        Me.ClientSize = New System.Drawing.Size(579, 260)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.CustomButton3)
-        Me.Controls.Add(Me.CustomButton2)
-        Me.Controls.Add(Me.CustomButton1)
         Me.Controls.Add(Me.btnCancela)
         Me.Controls.Add(Me.btnAcepta)
         Me.Name = "ProcesoPercepciones"
@@ -309,6 +296,7 @@ Partial Class ProcesoPercepciones
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -319,16 +307,17 @@ Partial Class ProcesoPercepciones
     Friend WithEvents txtHasta As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtDesde As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtNombre As Administracion.CustomTextBox
-    Friend WithEvents TipoProceso As Administracion.CustomComboBox
+    Friend WithEvents LugarProceso As Administracion.CustomComboBox
     Friend WithEvents btnAcepta As Administracion.CustomButton
     Friend WithEvents btnCancela As Administracion.CustomButton
     Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
-    Friend WithEvents CustomButton1 As Administracion.CustomButton
-    Friend WithEvents CustomButton2 As Administracion.CustomButton
-    Friend WithEvents CustomButton3 As Administracion.CustomButton
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents CustomLabel5 As Administracion.CustomLabel
+    Friend WithEvents TipoProceso As Administracion.CustomComboBox
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
 End Class
