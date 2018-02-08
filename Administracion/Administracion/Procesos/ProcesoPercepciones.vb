@@ -98,9 +98,11 @@ Public Class ProcesoPercepciones
 
 
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
-        Dim Vector(10000, 10) As String
+        Dim Vector(10000, 15) As String
         Dim WIndice = 0
         Dim XCodigo As String = "A0009000"
+        Dim nombreArchivo1, nombreArchivo2, nombreArchivo3 As String
+        Dim escritor, escritor1, escritor2, escritor3 As System.IO.StreamWriter
 
         If Proceso._EsPellital() Then
             XCodigo = "A0006000"
@@ -109,7 +111,7 @@ Public Class ProcesoPercepciones
         ProgressBar1.Value = 0
         GroupBox1.Visible = True
 
-        If Trim(txtNombre.Text) = "" Then Exit Sub
+        If Trim(txtNombre.Text) = "" And LugarProceso.SelectedIndex = 0 Then Exit Sub
 
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
             nombreArchivo = FolderBrowserDialog1.SelectedPath
@@ -118,20 +120,28 @@ Public Class ProcesoPercepciones
         End If
 
         If LugarProceso.SelectedIndex = 0 Then
-            REM XNombre = WDir + "\AR-30610524598-" + Nombre.Text + "-7-LOTE1.txt"
-            nombreArchivo = nombreArchivo + "\AR-30549165083-" + txtNombre.Text + "7-LOTE1.txt"
 
-            If Proceso._EsPellital() Then
-                nombreArchivo = nombreArchivo + "\AR-30610524598-" + txtNombre.Text + "7-LOTE1.txt"
+            If LugarProceso.SelectedIndex = 0 Then
+                REM XNombre = WDir + "\AR-30610524598-" + Nombre.Text + "-7-LOTE1.txt"
+                nombreArchivo = nombreArchivo + "\AR-30549165083-" + txtNombre.Text + "7-LOTE1.txt"
+
+                If Proceso._EsPellital() Then
+                    nombreArchivo = nombreArchivo + "\AR-30610524598-" + txtNombre.Text + "7-LOTE1.txt"
+                End If
+
+            Else
+                nombreArchivo = nombreArchivo + "\" + txtNombre.Text + ".txt"
             End If
 
         Else
-            nombreArchivo = nombreArchivo + "\" + txtNombre.Text + ".txt"
+
+            nombreArchivo &= "\"
+            nombreArchivo1 = nombreArchivo & "\" & "Datos.txt"
+            nombreArchivo2 = nombreArchivo & "\" & "RetPer.txt"
+            nombreArchivo3 = nombreArchivo & "\" & "NcFact.txt"
+
         End If
 
-        File.Create(nombreArchivo).Dispose()
-
-        Dim escritor As New System.IO.StreamWriter(nombreArchivo)
         Dim WStep = 0.0
 
         ordDesde = ordenaFecha(txtDesde.Text)
@@ -143,6 +153,9 @@ Public Class ProcesoPercepciones
         Select Case LugarProceso.SelectedIndex
                 Case 0 ' Buenos Aires.
 
+                    File.Create(nombreArchivo).Dispose()
+
+                    escritor = New System.IO.StreamWriter(nombreArchivo)
                     Dim tabla As DataTable
 
                     ' Procesa Cobranzas
@@ -273,7 +286,7 @@ Public Class ProcesoPercepciones
                         Next
 
                     End If
-                    
+
                     For i = 0 To WIndice
 
                         WClave = Vector(i, 1)
@@ -335,32 +348,126 @@ Public Class ProcesoPercepciones
 
                     MsgBox("Proceso Finalizado de Percepciones de Ingresoe Brutos", MsgBoxStyle.Information)
 
-                Case Else
+                Case Else ' TUCUMAN
+
+                    escritor1 = New StreamWriter(nombreArchivo1)
+                    escritor2 = New StreamWriter(nombreArchivo2)
+                    escritor3 = New StreamWriter(nombreArchivo3)
+
+                    Dim ZEntra(1000) As String
+                    Dim ZLugarEntra = 0
+                    Dim WEntra = ""
+
                     Dim tabla As DataTable
-                    tabla = SQLConnector.retrieveDataTable("procesoperceibtucuman", ordDesde, ordHasta)
+                    tabla = _TraerCtaCtesIbTucuman(ordDesde, ordHasta) 'SQLConnector.retrieveDataTable("procesoperceibtucuman", ordDesde, ordHasta)
 
-                    For Each row As DataRow In tabla.Rows
+                    WIndice = 0
 
-                        Dim CamposPercepcionTucuman As New ProcesoPercepcionTucuman(row.Item(0).ToString, row.Item(1), row.Item(2).ToString, row.Item(3).ToString, row.Item(4).ToString, row.Item(5).ToString, row.Item(6), row.Item(7).ToString, row.Item(8), row.Item(9))
+                    ProgressBar1.Step = 1
+                    ProgressBar1.Maximum = tabla.Rows.Count * 2 + 1
+
+                    For Each WCtaCte As DataRow In tabla.Rows
+                        
+                        With WCtaCte
+
+                            Vector(WIndice, 1) = IIf(IsDBNull(.Item("OrdFecha")), "", .Item("OrdFecha"))
+                            Vector(WIndice, 2) = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+                            Vector(WIndice, 3) = IIf(IsDBNull(.Item("Tipo")), "", .Item("Tipo"))
+                            Vector(WIndice, 4) = IIf(IsDBNull(.Item("Numero")), "", .Item("Numero"))
+                            Vector(WIndice, 5) = IIf(IsDBNull(.Item("Neto")), "", .Item("Neto"))
+                            Vector(WIndice, 6) = IIf(IsDBNull(.Item("ImpoIbTucu")), "", .Item("ImpoIbTucu"))
+                            Vector(WIndice, 7) = IIf(IsDBNull(.Item("Cuit")), "", .Item("Cuit"))
+                            Vector(WIndice, 8) = IIf(IsDBNull(.Item("NroIbTucu")), "", .Item("NroIbTucu"))
+                            Vector(WIndice, 9) = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                            Vector(WIndice, 10) = IIf(IsDBNull(.Item("Direccion")), "", .Item("Direccion"))
+                            Vector(WIndice, 11) = IIf(IsDBNull(.Item("Localidad")), "", .Item("Localidad"))
+                            Vector(WIndice, 12) = IIf(IsDBNull(.Item("Provincia")), "", .Item("Provincia"))
+                            Vector(WIndice, 13) = IIf(IsDBNull(.Item("Postal")), "", .Item("Postal"))
+                            Vector(WIndice, 14) = IIf(IsDBNull(.Item("IbTucu")), "0", .Item("IbTucu"))
+                            Vector(WIndice, 15) = IIf(IsDBNull(.Item("PorceCm05Tucu")), "0", .Item("PorceCm05Tucu"))
+
+                            If Vector(WIndice, 15) = 0 Then
+                                Vector(WIndice, 15) = "1"
+                            End If
+
+                        End With
+
+                        WIndice += 1
+
+                        ProgressBar1.Increment(1)
+                    Next
+
+                    Dim WCliente = "", WTipo = "", WImpoIb = "", WNroIbTucu = "", WNombre = "", WDomicilio = "", WPuerta = "", WLocalidad = "", WProvincia = "", WPostal = "", WCodIBTucu = "", WPorceCm05Tucu = ""
+
+                    For i = 0 To WIndice
+
+                        WFecha = Vector(i, 1)
+
+                        If Trim(WFecha) = "" Then Continue For
+
+                        WCliente = Vector(i, 2)
+                        WTipo = Vector(i, 3)
+                        WNumero = Vector(i, 4)
+                        WNeto = Vector(i, 5)
+                        WImpoIb = Vector(i, 6)
+                        WPorceIb = "1.75"
+
+                        WCuit = Vector(i, 7)
+                        WCuit = WCuit.Replace("-", "")
+
+                        WNroIbTucu = Vector(i, 8)
+                        WNombre = Vector(i, 9)
+                        WDomicilio = Vector(i, 10)
+                        WPuerta = "00000"
+                        WLocalidad = Vector(i, 11)
+                        WProvincia = Vector(i, 12)
+                        WPostal = Vector(i, 13)
+                        WCodIBTucu = Vector(i, 14)
+                        WPorceCm05Tucu = Vector(i, 15)
 
 
-                        WFecha = CamposPercepcionTucuman.fecha
-                        WCuit = sacaguiones(CamposPercepcionTucuman.cuit)
-                        WNumero = ceros(CamposPercepcionTucuman.numero, 8)
-                        WNeto = ceros(formatonumerico(redondeo(CamposPercepcionTucuman.neto), "########0.#0", "."), 15)
-                        WPorceIbII = 1.75
-                        WPorceIb = ceros(formatonumerico(redondeo(WPorceIbII), "########0.#0", "."), 6)
-                        WImporte = ceros(formatonumerico(redondeo(CamposPercepcionTucuman.impoibtucu), "########0.#0", "."), 15)
+                        Select Case Val(WCodIBTucu)
+                            Case 1, 2, 3
 
+                                If Val(WPorceCm05Tucu) <> 1 Then
 
-                        REM fecha
+                                    WNeto = Val(WNeto.Replace(",", ".")) * Val(WPorceCm05Tucu.Replace(",", "."))
+                                    
+                                End If
+
+                        End Select
+
+                        If Val(WNroIbTucu) = 0 Then
+                            WNroIbTucu = "99999999999"
+                        End If
+
+                        WImpoIb = Proceso.formatonumerico(WImpoIb)
+
+                        WNeto = Proceso.formatonumerico(WNeto)
+
+                        WNeto = Str$(Val(WNeto))
+
+                        WNeto = WNeto.Replace(",", ".")
+
+                        If WImpoIb.EndsWith("0") Then
+                            WImpoIb = Mid(WImpoIb, 1, WImpoIb.Length - 1)
+                        End If
+
+                        WPorceIb = ceros(WPorceIb, 6)
+                        WImpoIb = ceros(WImpoIb, 15)
+                        WNeto = ceros(WNeto, 15)
+                        WNumero = ceros(WNumero, 8)
+                        WCuit = ceros(WCuit, 11)
+                        WPostal = ceros(WPostal, 4)
+                        WNroIbTucu = ceros(WNroIbTucu, 11)
+
                         WCampo1 = WFecha
-                        REM tipo de documento
+
                         WCampo2 = "80"
-                        REM documento
+
                         WCampo3 = WCuit
-                        REM tipo de comprobante
-                        Select Case Val(CamposPercepcionTucuman.tipo)
+
+                        Select Case Val(WTipo)
                             Case 1, 3
                                 WCampo4 = "01"
                             Case 4
@@ -368,39 +475,169 @@ Public Class ProcesoPercepciones
                             Case Else
                                 WCampo4 = "03"
                         End Select
-                        REM Letra de comprobante
+
                         WCampo5 = "A"
-                        REM Punto de Venta
-                        WCampo6 = "0001"
-                        REM Numero del Comprobante
-                        WCampo7 = WNumero
-                        REM Numero del Comprobante
+
+                        WCampo6 = "0009"
+
+                        WCampo7 = "000" & Microsoft.VisualBasic.Right$(WNumero, 5)
+
                         WCampo8 = WNeto
-                        REM alicutoa
+
                         WCampo9 = WPorceIb
-                        REM importe de la retencion
-                        WCampo10 = WImporte
-                        REM nor de ingresos brutos
-                        REM Campo11 = Left$(WNroIbTucu + Space$(11), 11)
+
+                        WCampo10 = WImpoIb
+                        
                         WCampo11 = ""
 
-                        escritor.Write(WCampo1 + WCampo2 + WCampo3 + WCampo4 + WCampo5 + WCampo6 + WCampo7 + WCampo8 + WCampo9 + WCampo10 + WCampo11 + vbCrLf)
+                        escritor1.Write(WCampo1 + WCampo2 + WCampo3 + WCampo4 + WCampo5 + WCampo6 + WCampo7 + WCampo8 + WCampo9 + WCampo10 + WCampo11 + vbCrLf)
+
+                        WEntra = "S"
+
+                        For j = 0 To ZLugarEntra
+
+                            If ZEntra(ZLugarEntra) = WCliente Then
+                                WEntra = "N"
+                                Exit For
+                            End If
+
+                        Next
+
+                        If WEntra = "S" Then
+
+                            WCampo1 = "80"
+                            WCampo2 = WCuit
+                            WCampo3 = WNombre.PadRight(40)
+                            WCampo3 = Mid(WCampo3, 1, 40)
+
+                            WCampo4 = WDomicilio.PadRight(40)
+                            WCampo4 = Mid(WCampo4, 1, 40)
+                            WCampo5 = WPuerta
+
+                            WCampo6 = WLocalidad.PadRight(15)
+                            WCampo6 = Mid(WCampo6, 1, 15)
+
+                            WCampo7 = _ImpreProvincia(WProvincia)
+                            WCampo7 = Mid(WCampo7.PadRight(15), 1, 15)
+
+                            WCampo8 = WNroIbTucu.PadRight(11)
+                            WCampo8 = Mid(WCampo8, 1, 11)
+
+                            WCampo9 = Space(4) & WPostal
+
+                            escritor2.Write(WCampo1 & WCampo2 & WCampo3 & WCampo4 & WCampo5 & WCampo6 & WCampo7 & WCampo8 & WCampo9 & vbCrLf)
+
+                            ZLugarEntra += 1
+                            ZEntra(ZLugarEntra) = WCliente
+
+                        End If
+
+                        ProgressBar1.Increment(1)
 
                     Next
 
-                    escritor.Close()
-
+                    escritor1.Dispose()
+                    escritor2.Dispose()
+                    escritor3.Dispose()
 
                     MsgBox("Proceso Finalizado de Percepciones de Ingresoe Brutos", MsgBoxStyle.Information)
 
             End Select
 
         Catch ex As Exception
-            escritor.Dispose()
+            If Not IsNothing(escritor) Then
+                escritor.Dispose()
+            End If
+
+            If Not IsNothing(escritor1) Then
+                escritor1.Dispose()
+            End If
+            If Not IsNothing(escritor2) Then
+                escritor2.Dispose()
+            End If
+            If Not IsNothing(escritor3) Then
+                escritor3.Dispose()
+            End If
+
+
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             Exit Sub
         End Try
     End Sub
+
+    Private Function _ImpreProvincia(ByVal WNumero)
+        Dim provincia(25) As String
+
+        Provincia(0) = "Capital Federal"
+        Provincia(1) = "Buenos Aires"
+        Provincia(2) = "Catamarca"
+        Provincia(3) = "Cordoba"
+        Provincia(4) = "Corrientes"
+        Provincia(5) = "Chaco"
+        Provincia(6) = "Chubut"
+        Provincia(7) = "Entre Rios"
+        Provincia(8) = "Formosa"
+        Provincia(9) = "Jujuy"
+        Provincia(10) = "La Pampa"
+        Provincia(11) = "La Rioja"
+        Provincia(12) = "Mendoza"
+        Provincia(13) = "Misiones"
+        Provincia(14) = "Neuquen"
+        Provincia(15) = "Rio Negro"
+        Provincia(16) = "Salta"
+        Provincia(17) = "San Juan"
+        Provincia(18) = "San Luis"
+        Provincia(19) = "Santa Cruz"
+        Provincia(20) = "Santa Fe"
+        Provincia(21) = "Santiago del Estero"
+        Provincia(22) = "Tucuman"
+        Provincia(23) = "Tierra del Fuego"
+        Provincia(24) = "Exterior"
+        Provincia(25) = ""
+
+        Return provincia(WNumero)
+
+    End Function
+
+    Private Function _TraerCtaCtesIbTucuman(ByVal WDesde As String, ByVal WHasta As String) As DataTable
+
+        Dim tabla As New DataTable
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT c.OrdFecha, c.Cliente, c.Tipo, c.Numero, c.Neto, c.ImpoIbTucu," & _
+                                              " cli.Cuit, cli.NroIbTucu, cli.Razon, cli.Direccion, cli.Localidad," & _
+                                              " cli.Provincia, cli.Postal, cli.IbTucu, cli.PorceCm05Tucu" & _
+                                              " FROM CtaCte as c JOIN Cliente as cli ON cli.Cliente = c.Cliente" & _
+                                              " WHERE c.OrdFecha BETWEEN " & WDesde & " AND " & WHasta & " AND c.ImpoIbTucu > 0")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar las Ctas Ctes (Tucumán) desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return tabla
+    End Function
 
     Private Function _TraerCtasCtes(ByVal WDesde As String, ByVal WHasta As String) As DataTable
         Dim tabla As New DataTable
