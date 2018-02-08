@@ -24,14 +24,7 @@ Public Class ProcesoPercepcionesIvaCompras
         Label2.Text = Globals.NombreEmpresa()
         txtDesde.Text = "  /  /    "
         txtHasta.Text = "  /  /    "
-
-        LugarProceso.Items.Clear()
-        LugarProceso.Items.Add("Buenos Aires")
-        LugarProceso.Items.Add("Tucuman")
-
-        LugarProceso.SelectedIndex = 0
-        TipoProceso.SelectedIndex = 0
-
+        
     End Sub
 
 
@@ -244,43 +237,8 @@ Public Class ProcesoPercepcionesIvaCompras
 
     End Sub
 
-    Private Sub LugarProceso_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles LugarProceso.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-
-            With TipoProceso
-
-                If LugarProceso.SelectedIndex = 0 Then
-                    .Enabled = True
-                    .DroppedDown = True
-                    .Focus()
-                Else
-                    .Enabled = False
-                End If
-
-            End With
-
-        ElseIf e.KeyData = Keys.Escape Then
-            LugarProceso.SelectedIndex = 0
-        End If
-
-    End Sub
-
     Private Sub ProcesoPercepciones_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtDesde.Focus()
     End Sub
 
-    Private Sub LugarProceso_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LugarProceso.DropDownClosed
-        With TipoProceso
-
-            If LugarProceso.SelectedIndex = 0 Then
-                .Enabled = True
-                .DroppedDown = True
-                .Focus()
-            Else
-                .Enabled = False
-            End If
-
-        End With
-    End Sub
 End Class
