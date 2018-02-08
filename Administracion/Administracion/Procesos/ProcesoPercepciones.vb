@@ -13,14 +13,10 @@ Public Class ProcesoPercepciones
 
     Dim WCuit As String
     Dim WFecha As String
-    Dim WImporte As String
     Dim WTipoFac As String
     Dim WNumero As String
     Dim WNeto As String
-    Dim WImporteII As Double
-    Dim WNetoII As Double
     Dim WPorceIb As String
-    Dim WPorceIbII As Double
 
     Dim WCampo1 As String
     Dim WCampo2 As String
@@ -48,48 +44,6 @@ Public Class ProcesoPercepciones
 
     End Sub
 
-
-    Private Sub txtdesde_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            If ValidaFecha(txtDesde.Text) = "S" Then
-                txtHasta.Focus()
-            End If
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtDesde.Text = "  /  /    "
-            Me.txtDesde.SelectionStart = 0
-        End If
-    End Sub
-
-    Private Sub txthasta_KeyPress(ByVal sender As Object, _
-                ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            If ValidaFecha(txtHasta.Text) = "S" Then
-                txtNombre.Focus()
-            End If
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtHasta.Text = "  /  /    "
-            Me.txtHasta.SelectionStart = 0
-        End If
-    End Sub
-
-    Private Sub txtnombre_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            txtDesde.Focus()
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtNombre.Text = ""
-        End If
-    End Sub
 
     Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
         Me.Hide()
@@ -142,8 +96,6 @@ Public Class ProcesoPercepciones
 
         End If
 
-        Dim WStep = 0.0
-
         ordDesde = ordenaFecha(txtDesde.Text)
         ordHasta = ordenaFecha(txtHasta.Text)
 
@@ -192,7 +144,7 @@ Public Class ProcesoPercepciones
                         ProgressBar1.Increment(1)
                     Next
 
-                    Dim WClave = "", WTipo = "", WCliente = "", WImpoIb = "", WRecibo = 0, WSale = ""
+                    Dim WClave = "", WTipo = "", WImpoIb = "", WRecibo = 0, WSale = ""
                     Dim WCtaCte As DataRow = Nothing
                     Dim WReciboFactura As DataTable = Nothing
 
@@ -297,7 +249,6 @@ Public Class ProcesoPercepciones
                             WFecha = Vector(i, 2)
                             WTipo = Vector(i, 3)
                             WNumero = Vector(i, 4)
-                            WCliente = Vector(i, 5)
                             WNeto = Vector(i, 6)
                             WImpoIb = Vector(i, 7)
 
@@ -546,16 +497,20 @@ Public Class ProcesoPercepciones
 
         Catch ex As Exception
             If Not IsNothing(escritor) Then
+                ' ReSharper disable once VBWarnings::BC42104
                 escritor.Dispose()
             End If
 
             If Not IsNothing(escritor1) Then
+                ' ReSharper disable once VBWarnings::BC42104
                 escritor1.Dispose()
             End If
             If Not IsNothing(escritor2) Then
+                ' ReSharper disable once VBWarnings::BC42104
                 escritor2.Dispose()
             End If
             If Not IsNothing(escritor3) Then
+                ' ReSharper disable once VBWarnings::BC42104
                 escritor3.Dispose()
             End If
 
@@ -565,37 +520,37 @@ Public Class ProcesoPercepciones
         End Try
     End Sub
 
-    Private Function _ImpreProvincia(ByVal WNumero)
+    Private Function _ImpreProvincia(ByVal WNum As Object)
         Dim provincia(25) As String
 
-        Provincia(0) = "Capital Federal"
-        Provincia(1) = "Buenos Aires"
-        Provincia(2) = "Catamarca"
-        Provincia(3) = "Cordoba"
-        Provincia(4) = "Corrientes"
-        Provincia(5) = "Chaco"
-        Provincia(6) = "Chubut"
-        Provincia(7) = "Entre Rios"
-        Provincia(8) = "Formosa"
-        Provincia(9) = "Jujuy"
-        Provincia(10) = "La Pampa"
-        Provincia(11) = "La Rioja"
-        Provincia(12) = "Mendoza"
-        Provincia(13) = "Misiones"
-        Provincia(14) = "Neuquen"
-        Provincia(15) = "Rio Negro"
-        Provincia(16) = "Salta"
-        Provincia(17) = "San Juan"
-        Provincia(18) = "San Luis"
-        Provincia(19) = "Santa Cruz"
-        Provincia(20) = "Santa Fe"
-        Provincia(21) = "Santiago del Estero"
-        Provincia(22) = "Tucuman"
-        Provincia(23) = "Tierra del Fuego"
-        Provincia(24) = "Exterior"
-        Provincia(25) = ""
+        provincia(0) = "Capital Federal"
+        provincia(1) = "Buenos Aires"
+        provincia(2) = "Catamarca"
+        provincia(3) = "Cordoba"
+        provincia(4) = "Corrientes"
+        provincia(5) = "Chaco"
+        provincia(6) = "Chubut"
+        provincia(7) = "Entre Rios"
+        provincia(8) = "Formosa"
+        provincia(9) = "Jujuy"
+        provincia(10) = "La Pampa"
+        provincia(11) = "La Rioja"
+        provincia(12) = "Mendoza"
+        provincia(13) = "Misiones"
+        provincia(14) = "Neuquen"
+        provincia(15) = "Rio Negro"
+        provincia(16) = "Salta"
+        provincia(17) = "San Juan"
+        provincia(18) = "San Luis"
+        provincia(19) = "Santa Cruz"
+        provincia(20) = "Santa Fe"
+        provincia(21) = "Santiago del Estero"
+        provincia(22) = "Tucuman"
+        provincia(23) = "Tierra del Fuego"
+        provincia(24) = "Exterior"
+        provincia(25) = ""
 
-        Return provincia(WNumero)
+        Return provincia(WNum)
 
     End Function
 
@@ -674,10 +629,10 @@ Public Class ProcesoPercepciones
         Return tabla
     End Function
 
-    Private Function _TraerReciboFactura(ByVal WTipo As String, ByVal WNumero As String) As DataTable
+    Private Function _TraerReciboFactura(ByVal WTipo As String, ByVal WNum As String) As DataTable
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Recibo FROM Recibos WHERE Tipo1 = '" & WTipo & "' AND Numero1 = '" & WNumero & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Recibo FROM Recibos WHERE Tipo1 = '" & WTipo & "' AND Numero1 = '" & WNum & "'")
         Dim dr As SqlDataReader
         Dim ReciboFactura As New DataTable
 
@@ -722,12 +677,12 @@ Public Class ProcesoPercepciones
         Return Microsoft.VisualBasic.Right(wClave, i)
     End Function
 
-    Private Function _TraerCtaCte(ByVal WTipo As String, ByVal WNumero As String) As DataRow
+    Private Function _TraerCtaCte(ByVal WTipo As String, ByVal WNum As String) As DataRow
 
         WNumero = Proceso.ceros(WNumero, 8)
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Neto, ImpoIb FROM CtaCte WHERE Clave = '" & WTipo & WNumero & "01" & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Neto, ImpoIb FROM CtaCte WHERE Clave = '" & WTipo & WNum & "01" & "'")
         Dim dr As SqlDataReader
         Dim CtaCte As New DataTable
 
@@ -804,7 +759,6 @@ Public Class ProcesoPercepciones
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
-        Dim dr As SqlDataReader
 
         Try
 
@@ -820,56 +774,12 @@ Public Class ProcesoPercepciones
             Throw New Exception("Hubo un problema al querer Modificar los Importes de Iva en las Cta Ctes en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
             cn = Nothing
             cm = Nothing
 
         End Try
 
-    End Sub
-
-    Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim viewer As New ReportViewer("Bancos", Globals.reportPathWithName("bancosnew.rpt"), "")
-        viewer.Show()
-        'viewer.imprimirReporte()
-        'viewer.descargarComoPDF()
-
-
-        ' Dim cryRpt As New ReportDocument
-        'cryRpt.Load("C:\surfactan\sistemas\administracion\crystalreport\bancosnew.rpt")
-        'CrystalReportViewer1.ReportSource = cryRpt
-        'CrystalReportViewer1.Refresh()
-
-        'REM cryRpt.PrintToPrinter(1, False, 1, 1)
-        'cryRpt.PrintToPrinter(1, False, 1, 1)
-
-        'Dim CrExportOptions As ExportOptions
-        'Dim CrDiskFileDestinationOptions As New DiskFileDestinationOptions()
-        'Dim CrFormatTypeOptions As New PdfRtfWordFormatOptions()
-
-        'CrExportOptions = cryRpt.ExportOptions
-        'With CrExportOptions
-        '    .ExportDestinationType = ExportDestinationType.DiskFile
-        '    .ExportFormatType = ExportFormatType.PortableDocFormat
-        '    .DestinationOptions = CrDiskFileDestinationOptions
-        '    .FormatOptions = CrFormatTypeOptions
-        'End With
-
-        ''Exporta y crea el pdf.
-        'cryRpt.Export()
-
-    End Sub
-
-    Private Sub CustomButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim viewer As New ReportViewer("Bancos", "C:\surfactan\sistemas\administracion\crystalreport\bancosnew.rpt", "")
-        viewer.descargarComoPDF()
-        MsgBox("Descargado en: " & System.Windows.Forms.Application.StartupPath & "\Reportes")
-    End Sub
-
-    Private Sub CustomButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim viewer As New ReportViewer("Bancos", "C:\surfactan\sistemas\administracion\crystalreport\bancosnew.rpt", "")
-        viewer.imprimirReporte()
     End Sub
 
     Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
