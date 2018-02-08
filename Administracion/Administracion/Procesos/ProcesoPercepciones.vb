@@ -100,6 +100,11 @@ Public Class ProcesoPercepciones
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
         Dim Vector(10000, 10) As String
         Dim WIndice = 0
+        Dim XCodigo As String = "A0009000"
+
+        If Proceso._EsPellital() Then
+            XCodigo = "A0006000"
+        End If
 
         ProgressBar1.Value = 0
         GroupBox1.Visible = True
@@ -108,6 +113,8 @@ Public Class ProcesoPercepciones
 
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
             nombreArchivo = FolderBrowserDialog1.SelectedPath
+        Else
+            Exit Sub
         End If
 
         If LugarProceso.SelectedIndex = 0 Then
@@ -134,71 +141,63 @@ Public Class ProcesoPercepciones
             _ModificarCtaCteImporteIva0()
         
         Select Case LugarProceso.SelectedIndex
-            Case 0
+                Case 0 ' Buenos Aires.
+
                     Dim tabla As DataTable
 
+                    ' Procesa Cobranzas
                     If TipoProceso.SelectedIndex = 0 Then
+
                         tabla = _TraerRecibos(ordDesde, ordHasta) 'SQLConnector.retrieveDataTable("procesoperceib", ordDesde, ordHasta)
 
-                        ProgressBar1.Step = 1
-                        ProgressBar1.Maximum = tabla.Rows.Count * 4 + 1
+                    Else
+                        ' Procesa Ventas.
+                        tabla = _TraerCtasCtes(ordDesde, ordHasta)
 
-                        For Each row As DataRow In tabla.Rows
+                    End If
 
-                            With row
+                    ProgressBar1.Step = 1
+                    ProgressBar1.Maximum = tabla.Rows.Count * 4 + 1
 
-                                Vector(WIndice, 0) = IIf(IsDBNull(.Item("Cuit")), "", .Item("Cuit"))
-                                Vector(WIndice, 1) = IIf(IsDBNull(.Item("Clave")), "", .Item("Clave"))
-                                Vector(WIndice, 2) = IIf(IsDBNull(.Item("Fecha")), "", .Item("Fecha"))
-                                Vector(WIndice, 3) = IIf(IsDBNull(.Item("Tipo1")), "", .Item("Tipo1"))
-                                Vector(WIndice, 4) = IIf(IsDBNull(.Item("Numero1")), "", .Item("Numero1"))
-                                Vector(WIndice, 5) = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
-                                Vector(WIndice, 6) = ""
-                                Vector(WIndice, 7) = ""
+                    For Each row As DataRow In tabla.Rows
 
-                            End With
+                        With row
 
-                            WIndice += 1
+                            Vector(WIndice, 0) = IIf(IsDBNull(.Item("Cuit")), "", .Item("Cuit"))
+                            Vector(WIndice, 1) = IIf(IsDBNull(.Item("Clave")), "", .Item("Clave"))
+                            Vector(WIndice, 2) = IIf(IsDBNull(.Item("Fecha")), "", .Item("Fecha"))
+                            Vector(WIndice, 3) = IIf(IsDBNull(.Item("Tipo")), "", .Item("Tipo"))
+                            Vector(WIndice, 4) = IIf(IsDBNull(.Item("Numero")), "", .Item("Numero"))
+                            Vector(WIndice, 5) = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+                            Vector(WIndice, 6) = ""
+                            Vector(WIndice, 7) = ""
 
-                            ProgressBar1.Increment(1)
-                        Next
+                        End With
 
-                        Dim WClave = "", WTipo = "", WCliente = "", WImpoIb = "", WRecibo = 0, WSale = ""
-                        Dim WCtaCte As DataRow = Nothing
-                        Dim WReciboFactura As DataTable = Nothing
+                        WIndice += 1
 
-                        For i = 0 To WIndice
+                        ProgressBar1.Increment(1)
+                    Next
 
-                            WClave = Vector(i, 1)
-                            WFecha = Vector(i, 2)
-                            WTipo = Vector(i, 3)
-                            WNumero = Vector(i, 4)
+                    Dim WClave = "", WTipo = "", WCliente = "", WImpoIb = "", WRecibo = 0, WSale = ""
+                    Dim WCtaCte As DataRow = Nothing
+                    Dim WReciboFactura As DataTable = Nothing
 
-                            WCtaCte = _TraerCtaCte(WTipo, WNumero)
+                    For i = 0 To WIndice
 
-                            If Not IsNothing(WCtaCte) Then
+                        WClave = Vector(i, 1)
+                        WFecha = Vector(i, 2)
+                        WTipo = Vector(i, 3)
+                        WNumero = Vector(i, 4)
 
-                                WNeto = IIf(IsDBNull(WCtaCte.Item("Neto")), "0", WCtaCte.Item("Neto"))
-                                WImpoIb = IIf(IsDBNull(WCtaCte.Item("ImpoIb")), "0", WCtaCte.Item("ImpoIb"))
+                        WCtaCte = _TraerCtaCte(WTipo, WNumero)
 
-                                If Val(WImpoIb) = 0 Then
+                        If Not IsNothing(WCtaCte) Then
 
-                                    Vector(i, 1) = ""
-                                    Vector(i, 2) = ""
-                                    Vector(i, 3) = ""
-                                    Vector(i, 4) = ""
-                                    Vector(i, 5) = ""
-                                    Vector(i, 6) = ""
-                                    Vector(i, 7) = ""
+                            WNeto = IIf(IsDBNull(WCtaCte.Item("Neto")), "0", WCtaCte.Item("Neto"))
+                            WImpoIb = IIf(IsDBNull(WCtaCte.Item("ImpoIb")), "0", WCtaCte.Item("ImpoIb"))
 
-                                Else
-
-                                    Vector(i, 6) = Str$(WNeto)
-                                    Vector(i, 7) = Str$(WImpoIb)
-
-                                End If
-
-                            Else
+                            If Val(WImpoIb) = 0 Then
 
                                 Vector(i, 1) = ""
                                 Vector(i, 2) = ""
@@ -208,12 +207,30 @@ Public Class ProcesoPercepciones
                                 Vector(i, 6) = ""
                                 Vector(i, 7) = ""
 
+                            Else
+
+                                Vector(i, 6) = Str$(WNeto)
+                                Vector(i, 7) = Str$(WImpoIb)
+
                             End If
 
-                            ProgressBar1.Increment(1)
+                        Else
 
-                        Next
+                            Vector(i, 1) = ""
+                            Vector(i, 2) = ""
+                            Vector(i, 3) = ""
+                            Vector(i, 4) = ""
+                            Vector(i, 5) = ""
+                            Vector(i, 6) = ""
+                            Vector(i, 7) = ""
 
+                        End If
+
+                        ProgressBar1.Increment(1)
+
+                    Next
+
+                    If TipoProceso.SelectedIndex = 0 Then ' Limpiamos los Recibos en caso de que se procese Cobranzas.
                         For i = 0 To WIndice
 
 
@@ -255,65 +272,62 @@ Public Class ProcesoPercepciones
 
                         Next
 
-                        ' Ya solo falta recorrer una vez mas y ya grabar en txt.
+                    End If
+                    
+                    For i = 0 To WIndice
 
-                        For i = 0 To WIndice
+                        WClave = Vector(i, 1)
 
-                            WClave = Vector(i, 1)
+                        If Trim(WClave) <> "" Then
 
-                            If Trim(WClave) <> "" Then
+                            WCuit = Vector(i, 0)
+                            WFecha = Vector(i, 2)
+                            WTipo = Vector(i, 3)
+                            WNumero = Vector(i, 4)
+                            WCliente = Vector(i, 5)
+                            WNeto = Vector(i, 6)
+                            WImpoIb = Vector(i, 7)
 
-                                WCuit = Vector(i, 0)
-                                WFecha = Vector(i, 2)
-                                WTipo = Vector(i, 3)
-                                WNumero = Vector(i, 4)
-                                WCliente = Vector(i, 5)
-                                WNeto = Vector(i, 6)
-                                WImpoIb = Vector(i, 7)
+                            WImpoIb = Proceso.formatonumerico(WImpoIb)
+                            WNeto = Proceso.formatonumerico(WNeto)
+
+                            If Val(WImpoIb) > 0 Then
+
+                                WNeto = ceros(WNeto, 12)
+                                WImpoIb = ceros(WImpoIb, 11)
+
+                                WTipoFac = "F"
+
+                            Else
+
+                                WNeto = Str$(Math.Abs(Val(WNeto)))
+                                WImpoIb = Str$(Math.Abs(Val(WImpoIb)))
 
                                 WImpoIb = Proceso.formatonumerico(WImpoIb)
                                 WNeto = Proceso.formatonumerico(WNeto)
 
-                                If Val(WImpoIb) > 0 Then
+                                WNeto = ceros(WNeto, 11)
+                                WImpoIb = ceros(WImpoIb, 10)
 
-                                    WNeto = ceros(WNeto, 12)
-                                    WImpoIb = ceros(WImpoIb, 11)
+                                WNeto = "-" & WNeto
+                                WImpoIb = "-" & WImpoIb
 
-                                    WTipoFac = "F"
-
-                                Else
-
-                                    WNeto = Str$(Math.Abs(Val(WNeto)))
-                                    WImpoIb = Str$(Math.Abs(Val(WImpoIb)))
-
-                                    WImpoIb = Proceso.formatonumerico(WImpoIb)
-                                    WNeto = Proceso.formatonumerico(WNeto)
-
-                                    WNeto = ceros(WNeto, 11)
-                                    WImpoIb = ceros(WImpoIb, 10)
-
-                                    WNeto = "-" & WNeto
-                                    WImpoIb = "-" & WImpoIb
-
-                                    WTipoFac = "C"
-
-                                End If
-
-                                WRecibo = "00" & _Left(Vector(i, 1), 6)
-                                WCuit = _Left(Vector(i, 0), 13)
-                                WNumero = ceros(WNumero, 8)
-
-                                escritor.Write(WCuit & WFecha & WTipoFac & "A0009000" & _Right(WNumero, 5) & WNeto & WImpoIb & WFecha & "A" & vbCrLf)
+                                WTipoFac = "C"
 
                             End If
 
-                            ProgressBar1.Increment(1)
+                            WRecibo = "00" & _Left(Vector(i, 1), 6)
+                            WCuit = _Left(Vector(i, 0), 13)
+                            WNumero = ceros(WNumero, 8)
 
-                        Next
+                            escritor.Write(WCuit & WFecha & WTipoFac & XCodigo & _Right(WNumero, 5) & WNeto & WImpoIb & WFecha & "A" & vbCrLf)
 
-                    Else
+                        End If
 
-                    End If
+                        ProgressBar1.Increment(1)
+
+                    Next
+
 
                     escritor.Close()
 
@@ -388,6 +402,41 @@ Public Class ProcesoPercepciones
         End Try
     End Sub
 
+    Private Function _TraerCtasCtes(ByVal WDesde As String, ByVal WHasta As String) As DataTable
+        Dim tabla As New DataTable
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT r.Clave, r.Fecha, r.Tipo, r.Numero, r.Cliente, c.Cuit FROM CtaCte r JOIN Cliente c ON c.Cliente = r.Cliente WHERE r.OrdFecha BETWEEN " & WDesde & " AND " & WHasta & " ORDER BY r.Numero")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer traer las Ctas Ctes desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return tabla
+    End Function
+
     Private Function _TraerReciboFactura(ByVal WTipo As String, ByVal WNumero As String) As DataTable
 
         Dim cn As SqlConnection = New SqlConnection()
@@ -438,6 +487,8 @@ Public Class ProcesoPercepciones
 
     Private Function _TraerCtaCte(ByVal WTipo As String, ByVal WNumero As String) As DataRow
 
+        WNumero = Proceso.ceros(WNumero, 8)
+
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Neto, ImpoIb FROM CtaCte WHERE Clave = '" & WTipo & WNumero & "01" & "'")
         Dim dr As SqlDataReader
@@ -481,7 +532,7 @@ Public Class ProcesoPercepciones
         Dim tabla As New DataTable
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT r.Clave, r.Fecha, r.Tipo1, r.Numero1, r.Cliente, c.Cuit FROM Recibos r JOIN Cliente c ON c.Cliente = r.Cliente WHERE FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " AND TipoReg = '1' ORDER BY Clave")
+        Dim cm As SqlCommand = New SqlCommand("SELECT r.Clave, r.Fecha, r.Tipo1 as Tipo, r.Numero1 as Numero, r.Cliente, c.Cuit FROM Recibos r JOIN Cliente c ON c.Cliente = r.Cliente WHERE FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " AND TipoReg = '1' ORDER BY Clave")
         Dim dr As SqlDataReader
 
         Try
