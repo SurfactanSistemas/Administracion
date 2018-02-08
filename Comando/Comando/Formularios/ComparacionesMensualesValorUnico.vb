@@ -1820,8 +1820,8 @@ Public Class ComparacionesMensualesValorUnico
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click, Button2.Click
         PanelSeleccionAnios.Visible = False
     End Sub
-
-    Private Sub cmbPeriodo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPeriodo.SelectedIndexChanged
+    
+    Private Sub _ProcesarPeriodo()
 
         Select Case cmbPeriodo.SelectedIndex
             Case 1
@@ -1831,6 +1831,28 @@ Public Class ComparacionesMensualesValorUnico
                 ckConsolidado.Checked = True
 
             Case 2
+
+                If clbAniosAComparar.Items.Count = 0 Then
+                    Dim WAnioHasta, WAnioDesde
+
+                    WAnioDesde = Val(txtAnioDesde.Text)
+                    WAnioHasta = Val(txtAnioHasta.Text)
+
+                    If WAnioDesde > 0 And WAnioHasta > 0 And WAnioHasta = WAnioDesde Then
+
+                        clbAniosAComparar.Items.Clear()
+
+                        Dim WAnioActual = WAnioDesde
+
+                        For i = 0 To 3
+
+                            clbAniosAComparar.Items.Add(Val(WAnioActual) - i)
+
+                        Next
+
+                    End If
+                End If
+
                 btnSeleccionarAnios.Visible = True
                 btnSeleccionarAnios.PerformClick()
 
@@ -1890,7 +1912,6 @@ Public Class ComparacionesMensualesValorUnico
                 End If
             Next
         End If
-
     End Sub
 
     Private Sub txtMesDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMesDesde.KeyDown
@@ -2080,5 +2101,21 @@ Public Class ComparacionesMensualesValorUnico
 
         End If
 
+    End Sub
+
+    Private Sub cmbPeriodo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbPeriodo.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            _ProcesarPeriodo()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbPeriodo.SelectedIndex = 0
+        End If
+
+    End Sub
+
+    Private Sub cmbPeriodo_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPeriodo.DropDownClosed
+        _ProcesarPeriodo()
     End Sub
 End Class
