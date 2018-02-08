@@ -18,8 +18,8 @@ Public Class ListadoCuentaCorrienteProveedores
     End Sub
 
     Private Sub txtdesdeproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtDesdeProveedor.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             txtHastaProveedor.Text = txtDesdeProveedor.Text
@@ -34,8 +34,8 @@ Public Class ListadoCuentaCorrienteProveedores
     End Sub
 
     Private Sub txthastaproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
-                   Handles txtHastaProveedor.KeyPress
+                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
+
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
             txtDesdeProveedor.Focus()
@@ -57,7 +57,13 @@ Public Class ListadoCuentaCorrienteProveedores
 
         Me.Size = New System.Drawing.Size(606, 505)
 
-        lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre("")
+        Dim WProveedores = DAOProveedor.buscarProveedoresActivoPorNombre("")
+
+        lstAyuda.Items.Clear()
+
+        For Each WProveedor As Proveedor In WProveedores
+            lstAyuda.Items.Add(WProveedor.id.PadLeft(11) & Space(5) & WProveedor.razonSocial)
+        Next
 
         txtAyuda.Text = ""
         txtAyuda.Visible = True
@@ -74,7 +80,16 @@ Public Class ListadoCuentaCorrienteProveedores
     End Sub
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
-        mostrarProveedor(lstAyuda.SelectedValue)
+
+        If String.IsNullOrEmpty(lstAyuda.SelectedItem) Then Exit Sub
+
+        Dim Wcodigo = Microsoft.VisualBasic.Left$(lstAyuda.SelectedItem, 11)
+
+        Dim WProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(Trim(Wcodigo))
+
+        If IsNothing(WProveedor) Then Exit Sub
+
+        mostrarProveedor(WProveedor)
     End Sub
 
     Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
@@ -192,8 +207,10 @@ Public Class ListadoCuentaCorrienteProveedores
         Dim filtrado As ListBox = lstFiltrada
         Dim texto As TextBox = txtAyuda
 
+        If String.IsNullOrEmpty(filtrado.SelectedItem) Then Exit Sub
+
         ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
-        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
+        origen.SelectedIndex = filtrado.SelectedIndex
 
         ' Llamamos al evento que tenga asosiado el control de origen.
         lstAyuda_Click(Nothing, Nothing)
@@ -225,5 +242,31 @@ Public Class ListadoCuentaCorrienteProveedores
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         _Imprimir(Reporte.Imprimir)
+    End Sub
+
+    Private Sub txtDesdeProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeProveedor.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesdeProveedor.Text) = "" Then : Exit Sub : End If
+
+            txtHastaProveedor.Text = txtDesdeProveedor.Text
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesdeProveedor.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHastaProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHastaProveedor.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtHastaProveedor.Text) = "" Then : Exit Sub : End If
+
+            txtDesdeProveedor.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHastaProveedor.Text = ""
+        End If
+
     End Sub
 End Class

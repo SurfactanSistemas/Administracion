@@ -149,7 +149,15 @@ Public Class CuentaCorrientePantalla
 
         boxPantallaProveedores.Visible = True
 
-        lstAyuda.DataSource = DAOProveedor.buscarProveedoresActivoPorNombre("")
+        Dim WProveedores = DAOProveedor.buscarProveedoresActivoPorNombre("")
+
+        lstAyuda.Items.Clear()
+
+        For Each WProveedor As Proveedor In WProveedores
+
+            lstAyuda.Items.Add(WProveedor.id.PadLeft(11) & Space(5) & WProveedor.razonSocial)
+
+        Next
 
         txtAyuda.Text = ""
         txtAyuda.Focus()
@@ -261,7 +269,16 @@ Public Class CuentaCorrientePantalla
     End Sub
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
-        mostrarProveedor(lstAyuda.SelectedValue)
+
+        If String.IsNullOrEmpty(lstAyuda.SelectedItem) Then Exit Sub
+
+        Dim Wcodigo = Microsoft.VisualBasic.Left$(lstAyuda.SelectedItem, 11)
+
+        Dim WProveedor = DAOProveedor.buscarProveedorPorCodigo(Wcodigo)
+
+        If IsNothing(WProveedor) Then Exit Sub
+
+        mostrarProveedor(WProveedor)
     End Sub
 
     Private Sub _TraerProveedorSelectivo()

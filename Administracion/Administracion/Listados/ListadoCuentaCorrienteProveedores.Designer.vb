@@ -39,9 +39,9 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.btnPorPantalla = New Administracion.CustomButton()
         Me.btnImprimir = New Administracion.CustomButton()
+        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.Grupo1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -92,9 +92,9 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.lstAyuda.EnterIndex = -1
         Me.lstAyuda.FormattingEnabled = True
         Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(83, 314)
+        Me.lstAyuda.Location = New System.Drawing.Point(48, 314)
         Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(417, 147)
+        Me.lstAyuda.Size = New System.Drawing.Size(495, 147)
         Me.lstAyuda.TabIndex = 27
         Me.lstAyuda.Visible = False
         '
@@ -104,9 +104,9 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.txtAyuda.Empty = True
         Me.txtAyuda.EnterIndex = -1
         Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(83, 288)
+        Me.txtAyuda.Location = New System.Drawing.Point(48, 288)
         Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(417, 20)
+        Me.txtAyuda.Size = New System.Drawing.Size(495, 20)
         Me.txtAyuda.TabIndex = 26
         Me.txtAyuda.Validator = Administracion.ValidatorType.None
         Me.txtAyuda.Visible = False
@@ -245,18 +245,6 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Panel2.Size = New System.Drawing.Size(590, 155)
         Me.Panel2.TabIndex = 29
         '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(83, 314)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(417, 147)
-        Me.lstFiltrada.TabIndex = 30
-        Me.lstFiltrada.Visible = False
-        '
         'btnPorPantalla
         '
         Me.btnPorPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
@@ -297,11 +285,23 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir reporte")
         Me.btnImprimir.UseVisualStyleBackColor = True
         '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(48, 314)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(495, 147)
+        Me.lstFiltrada.TabIndex = 30
+        Me.lstFiltrada.Visible = False
+        '
         'ListadoCuentaCorrienteProveedores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(590, 271)
+        Me.ClientSize = New System.Drawing.Size(590, 277)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lstAyuda)
