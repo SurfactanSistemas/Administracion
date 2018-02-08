@@ -491,6 +491,8 @@ Public Class ProcesoPercepciones
                     escritor2.Dispose()
                     escritor3.Dispose()
 
+                    GroupBox1.Visible = False
+
                     MsgBox("Proceso Finalizado de Percepciones de Ingresoe Brutos", MsgBoxStyle.Information)
 
             End Select

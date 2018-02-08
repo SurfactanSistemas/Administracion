@@ -246,4 +246,7 @@ Public Class MenuPrincipal
         abrir(New ListadoCuentaCorrienteProveedoresSelectivoPreparacion)
     End Sub
 
+    Private Sub ToolStripMenuItem6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem6.Click
+        abrir(New ProcesoPercepcionesIvaCompras)
+    End Sub
 End Class
