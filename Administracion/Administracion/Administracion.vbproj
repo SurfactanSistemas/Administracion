@@ -463,6 +463,12 @@
     <Compile Include="Pagos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesYRetencionesCiudadNuevo.Designer.vb">
+      <DependentUpon>ProcesoPercepcionesYRetencionesCiudadNuevo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesYRetencionesCiudadNuevo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Procesos\ProcesoPercepcionesIvaCompras.Designer.vb">
       <DependentUpon>ProcesoPercepcionesIvaCompras.vb</DependentUpon>
     </Compile>
@@ -979,6 +985,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pagos.resx">
       <DependentUpon>Pagos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoPercepcionesYRetencionesCiudadNuevo.resx">
+      <DependentUpon>ProcesoPercepcionesYRetencionesCiudadNuevo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Procesos\ProcesoPercepcionesIvaCompras.resx">
       <DependentUpon>ProcesoPercepcionesIvaCompras.vb</DependentUpon>

@@ -17,37 +17,6 @@ Public Class ListadoCuentaCorrienteProveedores
         Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
-    Private Sub txtdesdeproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            txtHastaProveedor.Text = txtDesdeProveedor.Text
-            txtHastaProveedor.Focus()
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtDesdeProveedor.Text = ""
-        End If
-        If Not IsNumeric(e.KeyChar) Then
-            e.Handled = True
-        End If
-    End Sub
-
-    Private Sub txthastaproveedor_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            txtDesdeProveedor.Focus()
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtHastaProveedor.Text = ""
-        End If
-        If Not IsNumeric(e.KeyChar) Then
-            e.Handled = True
-        End If
-    End Sub
-
     Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
         Me.Close()
         MenuPrincipal.Show()
@@ -210,7 +179,7 @@ Public Class ListadoCuentaCorrienteProveedores
         If String.IsNullOrEmpty(filtrado.SelectedItem) Then Exit Sub
 
         ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
-        origen.SelectedIndex = filtrado.SelectedIndex
+        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
 
         ' Llamamos al evento que tenga asosiado el control de origen.
         lstAyuda_Click(Nothing, Nothing)

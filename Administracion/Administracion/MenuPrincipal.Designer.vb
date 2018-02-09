@@ -88,6 +88,7 @@ Partial Class MenuPrincipal
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.lblCargando = New Administracion.CustomLabel()
+        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -406,7 +407,7 @@ Partial Class MenuPrincipal
         '
         'ProcesosToolStripMenuItem
         '
-        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripSeparator1, Me.ToolStripMenuItem5, Me.ToolStripMenuItem3, Me.SifereToolStripMenuItem, Me.RetencionEsOpToolStripMenuItem, Me.RetencionesRecibvosaToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem6, Me.ToolStripSeparator2, Me.FinDelSistemaToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripSeparator1, Me.ToolStripMenuItem5, Me.ToolStripMenuItem3, Me.SifereToolStripMenuItem, Me.RetencionEsOpToolStripMenuItem, Me.RetencionesRecibvosaToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripSeparator2, Me.FinDelSistemaToolStripMenuItem})
         Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
         Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.ProcesosToolStripMenuItem.Text = "Procesos"
@@ -414,71 +415,71 @@ Partial Class MenuPrincipal
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(308, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(375, 22)
         Me.ToolStripMenuItem1.Text = "Cierre del Mes"
         '
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(308, 22)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(375, 22)
         Me.ToolStripMenuItem4.Text = "Depuracion de Cuentas Corrientes"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(305, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(372, 6)
         '
         'ToolStripMenuItem5
         '
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(308, 22)
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(375, 22)
         Me.ToolStripMenuItem5.Text = "Proceso de CITI"
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(308, 22)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(375, 22)
         Me.ToolStripMenuItem3.Text = "Proceso de Retenciones Sifere"
         '
         'SifereToolStripMenuItem
         '
         Me.SifereToolStripMenuItem.Name = "SifereToolStripMenuItem"
-        Me.SifereToolStripMenuItem.Size = New System.Drawing.Size(308, 22)
+        Me.SifereToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
         Me.SifereToolStripMenuItem.Text = "Proceso de Retenciones Sifere"
         '
         'RetencionEsOpToolStripMenuItem
         '
         Me.RetencionEsOpToolStripMenuItem.Name = "RetencionEsOpToolStripMenuItem"
-        Me.RetencionEsOpToolStripMenuItem.Size = New System.Drawing.Size(308, 22)
+        Me.RetencionEsOpToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
         Me.RetencionEsOpToolStripMenuItem.Text = "Proceso de Retenciones de Ordenes de Pago"
         '
         'RetencionesRecibvosaToolStripMenuItem
         '
         Me.RetencionesRecibvosaToolStripMenuItem.Name = "RetencionesRecibvosaToolStripMenuItem"
-        Me.RetencionesRecibvosaToolStripMenuItem.Size = New System.Drawing.Size(308, 22)
+        Me.RetencionesRecibvosaToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
         Me.RetencionesRecibvosaToolStripMenuItem.Text = "Proceso de Retenciones de Recibos"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(308, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(375, 22)
         Me.ToolStripMenuItem2.Text = "Proceso Percepciones de Facturacion"
         '
         'ToolStripMenuItem6
         '
         Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(308, 22)
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(375, 22)
         Me.ToolStripMenuItem6.Text = "Proceso de Percepcione de Compras "
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(305, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(372, 6)
         '
         'FinDelSistemaToolStripMenuItem
         '
         Me.FinDelSistemaToolStripMenuItem.Name = "FinDelSistemaToolStripMenuItem"
-        Me.FinDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(308, 22)
+        Me.FinDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
         Me.FinDelSistemaToolStripMenuItem.Text = "Fin del Sistema"
         '
         'btnCambio
@@ -521,6 +522,12 @@ Partial Class MenuPrincipal
         Me.lblCargando.TabIndex = 2
         Me.lblCargando.Text = "CARGANDO, POR FAVOR ESPERE..."
         Me.lblCargando.Visible = False
+        '
+        'ToolStripMenuItem7
+        '
+        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
+        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(375, 22)
+        Me.ToolStripMenuItem7.Text = "Proceso de Percepciones y Retenciones de Ciudad Bs. As."
         '
         'MenuPrincipal
         '
@@ -609,4 +616,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ListadoDeRetencionesDeIngresosBrutosCiudadDeBuenosAiresToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeProveedorAPagoSemanalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents ToolStripMenuItem7 As System.Windows.Forms.ToolStripMenuItem
 End Class
