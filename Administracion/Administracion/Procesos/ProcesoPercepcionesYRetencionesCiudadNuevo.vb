@@ -13,7 +13,6 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
 
     Dim WCuit As String
     Dim WFecha As String
-    Dim WTipoFac As String
     Dim WNumero As String
     Dim WNeto As String
     Dim WPorceIb As String
@@ -44,14 +43,7 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
         Label2.Text = Globals.NombreEmpresa()
         txtDesde.Text = "  /  /    "
         txtHasta.Text = "  /  /    "
-
-        LugarProceso.Items.Clear()
-        LugarProceso.Items.Add("Buenos Aires")
-        LugarProceso.Items.Add("Tucuman")
-
-        LugarProceso.SelectedIndex = 0
-        TipoProceso.SelectedIndex = 0
-
+        
     End Sub
 
 
@@ -65,9 +57,7 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
         Dim Vector(10000, 21) As String
         Dim VectorEntra(10000, 2) As String
         Dim WIndice = 0, WIndiceEntra = 0
-        Dim XCodigo As String = "A0009000"
-        Dim nombreArchivo1, nombreArchivo2, nombreArchivo3 As String
-        Dim escritor, escritor1, escritor2, escritor3 As System.IO.StreamWriter
+        Dim escritor As System.IO.StreamWriter
 
         ProgressBar1.Value = 0
         GroupBox1.Visible = True
@@ -88,8 +78,6 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
 
         escritor = New StreamWriter(nombreArchivo)
 
-        Dim WEntra = ""
-
         Dim tabla As DataTable
         tabla = _TraerCtaCtesIbCiudad(ordDesde, ordHasta) 'SQLConnector.retrieveDataTable("procesoperceibtucuman", ordDesde, ordHasta)
 
@@ -99,7 +87,7 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
         ProgressBar1.Step = 1
         ProgressBar1.Maximum = tabla.Rows.Count * 2 + 1
 
-        Dim WClave = "", WCliente = "", WTipo = "", WImpoIb = "", WNroIbTucu = "", WNombre = "", WDomicilio = "", WPuerta = "", WLocalidad = "", WProvincia = "", WPostal = "", WCodIBTucu = "", WPorceCm05Tucu = "", WAlicuota = 0.0
+        Dim WClave = "", WTipo = "", WImpoIb = "", WNombre = "", WPostal = "", WAlicuota = 0.0
         Dim WIva1 = 0.0, WIva2 = 0.0, WImpoIbTucu = 0.0, WImpoIbCiudad = 0.0, WTotal = 0.0
 
         For Each WCtaCte As DataRow In tabla.Rows
@@ -147,11 +135,8 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
                 Vector(WIndice, 14) = IIf(IsDBNull(.Item("Cuit")), "0", .Item("Cuit"))
                 Vector(WIndice, 15) = IIf(IsDBNull(.Item("NroIbCiudad")), "0", .Item("NroIbCiudad"))
                 Vector(WIndice, 16) = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
-                Vector(WIndice, 17) = IIf(IsDBNull(.Item("Direccion")), "", .Item("Direccion"))
-                Vector(WIndice, 18) = IIf(IsDBNull(.Item("Provincia")), "", .Item("Provincia"))
-                Vector(WIndice, 19) = IIf(IsDBNull(.Item("Postal")), "", .Item("Postal"))
-                Vector(WIndice, 20) = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
-                Vector(WIndice, 21) = IIf(IsDBNull(.Item("IbCiudadII")), "0", .Item("IbCiudadII"))
+                Vector(WIndice, 17) = IIf(IsDBNull(.Item("Postal")), "", .Item("Postal"))
+                Vector(WIndice, 18) = IIf(IsDBNull(.Item("IbCiudadII")), "0", .Item("IbCiudadII"))
 
             End With
 
@@ -161,7 +146,7 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
 
         Next
 
-        Dim WNroIbCiudad = "", WRazon = "", WDireccion = "", WPorceIbCaba = 0.0, WIbCiudadII = 0.0, WOtros = 0.0, WIva = 0.0
+        Dim WNroIbCiudad = "", WIbCiudadII = 0.0, WOtros = 0.0, WIva = 0.0
         Dim WImpre = ""
 
         For i = 0 To WIndice
@@ -173,7 +158,6 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
             WFecha = Vector(i, 2)
             WTipo = Vector(i, 3)
             WNumero = Vector(i, 4)
-            WCliente = Vector(i, 5)
             WNeto = Val(Vector(i, 6))
             WIva1 = Val(Vector(i, 7))
             WIva2 = Val(Vector(i, 8))
@@ -185,12 +169,8 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
             WCuit = Vector(i, 14)
             WNroIbCiudad = Vector(i, 15)
             WNombre = Vector(i, 16)
-            WDireccion = Vector(i, 17)
-            WProvincia = Val(Vector(i, 18))
-            WPostal = Vector(i, 19)
-            WPorceIbCaba = Val(Vector(i, 20))
-            WIbCiudadII = Val(Vector(i, 21))
-            WPuerta = "00000"
+            WPostal = Vector(i, 17)
+            WIbCiudadII = Val(Vector(i, 18))
 
             If WImpoIbCiudad <= 0 Then Continue For
 
@@ -350,12 +330,7 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
         Next
 
         WCuit = ""
-        WNroIbTucu = ""
         WNombre = ""
-        WDomicilio = ""
-        WPuerta = "00000"
-        WLocalidad = ""
-        WProvincia = "0"
         WPostal = ""
 
         Dim WOrdenPago As DataTable
@@ -640,48 +615,13 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
         Return tabla
     End Function
 
-    Private Function _ImpreProvincia(ByVal WNum As Object)
-        Dim provincia(25) As String
-
-        provincia(0) = "Capital Federal"
-        provincia(1) = "Buenos Aires"
-        provincia(2) = "Catamarca"
-        provincia(3) = "Cordoba"
-        provincia(4) = "Corrientes"
-        provincia(5) = "Chaco"
-        provincia(6) = "Chubut"
-        provincia(7) = "Entre Rios"
-        provincia(8) = "Formosa"
-        provincia(9) = "Jujuy"
-        provincia(10) = "La Pampa"
-        provincia(11) = "La Rioja"
-        provincia(12) = "Mendoza"
-        provincia(13) = "Misiones"
-        provincia(14) = "Neuquen"
-        provincia(15) = "Rio Negro"
-        provincia(16) = "Salta"
-        provincia(17) = "San Juan"
-        provincia(18) = "San Luis"
-        provincia(19) = "Santa Cruz"
-        provincia(20) = "Santa Fe"
-        provincia(21) = "Santiago del Estero"
-        provincia(22) = "Tucuman"
-        provincia(23) = "Tierra del Fuego"
-        provincia(24) = "Exterior"
-        provincia(25) = ""
-
-        Return provincia(WNum)
-
-    End Function
-
     Private Function _TraerCtaCtesIbCiudad(ByVal WDesde As String, ByVal WHasta As String) As DataTable
 
         Dim tabla As New DataTable
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT c.Clave, c.Fecha, c.Tipo, c.Numero, c.Cliente, c.Neto, c.Iva1, c.Iva2, c.ImpoIb, c.ImpoIbTucu, c.ImpoIbCiudad, c.Total," & _
-                                              " cli.Cuit, cli.NroIbCiudad, cli.Razon, cli.Direccion, cli.Localidad," & _
-                                              " cli.Provincia, cli.Postal, cli.IbCiudadII, cli.PorceIbCaba" & _
+                                              " cli.Cuit, cli.NroIbCiudad, cli.Razon, cli.Localidad, cli.Postal, cli.IbCiudadII" & _
                                               " FROM CtaCte as c JOIN Cliente as cli ON cli.Cliente = c.Cliente" & _
                                               " WHERE c.OrdFecha BETWEEN " & WDesde & " AND " & WHasta & " AND c.ImpoIbCiudad <> 0")
         Dim dr As SqlDataReader
@@ -701,7 +641,7 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
             End If
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar las Ctas Ctes (Tucumán) desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Throw New Exception("Hubo un problema al querer consultar las Ctas Ctes desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -712,81 +652,6 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
         End Try
 
         Return tabla
-    End Function
-
-    Private Function _TraerCtasCtes(ByVal WDesde As String, ByVal WHasta As String) As DataTable
-        Dim tabla As New DataTable
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT r.Clave, r.Fecha, r.Tipo, r.Numero, r.Cliente, c.Cuit FROM CtaCte r JOIN Cliente c ON c.Cliente = r.Cliente WHERE r.OrdFecha BETWEEN " & WDesde & " AND " & WHasta & " ORDER BY r.Numero")
-        Dim dr As SqlDataReader
-
-        Try
-
-            cn.ConnectionString = Proceso._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-
-                tabla.Load(dr)
-
-            End If
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer traer las Ctas Ctes desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return tabla
-    End Function
-
-    Private Function _TraerReciboFactura(ByVal WTipo As String, ByVal WNum As String) As DataTable
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Recibo FROM Recibos WHERE Tipo1 = '" & WTipo & "' AND Numero1 = '" & WNum & "'")
-        Dim dr As SqlDataReader
-        Dim ReciboFactura As New DataTable
-
-        Try
-
-            cn.ConnectionString = Proceso._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-
-                ReciboFactura.Load(dr)
-
-            End If
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer Consultar la Factura del Recibo en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        If ReciboFactura.Rows.Count > 0 Then
-            Return ReciboFactura
-        Else
-            Return Nothing
-        End If
-
     End Function
 
     Private Function _Left(ByVal wClave As String, ByVal i As Integer) As String
@@ -796,111 +661,6 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
     Private Function _Right(ByVal wClave As String, ByVal i As Integer) As String
         Return Microsoft.VisualBasic.Right(wClave, i)
     End Function
-
-    Private Function _TraerCtaCte(ByVal WTipo As String, ByVal WNum As String) As DataRow
-
-        WNumero = Proceso.ceros(WNumero, 8)
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Neto, ImpoIb FROM CtaCte WHERE Clave = '" & WTipo & WNum & "01" & "'")
-        Dim dr As SqlDataReader
-        Dim CtaCte As New DataTable
-
-        Try
-
-            cn.ConnectionString = Proceso._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader(CommandBehavior.SingleRow)
-
-            If dr.HasRows Then
-
-                CtaCte.Load(dr)
-
-            End If
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer Consultar la Cta Cte en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        If CtaCte.Rows.Count > 0 Then
-            Return CtaCte.Rows(0)
-        Else
-            Return Nothing
-        End If
-
-    End Function
-
-    Private Function _TraerRecibos(ByVal WDesde As String, ByVal WHasta As String) As DataTable
-
-        Dim tabla As New DataTable
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT r.Clave, r.Fecha, r.Tipo1 as Tipo, r.Numero1 as Numero, r.Cliente, c.Cuit FROM Recibos r JOIN Cliente c ON c.Cliente = r.Cliente WHERE FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " AND TipoReg = '1' ORDER BY Clave")
-        Dim dr As SqlDataReader
-
-        Try
-
-            cn.ConnectionString = Proceso._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-
-                tabla.Load(dr)
-
-            End If
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer traer los Recibos desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return tabla
-    End Function
-
-    Private Sub _ModificarCtaCteImporteIva0()
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
-
-        Try
-
-            cn.ConnectionString = Proceso._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            cm.CommandType = CommandType.StoredProcedure
-            cm.CommandText = "ModificaCtacteImporteIva0"
-            cm.ExecuteNonQuery()
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer Modificar los Importes de Iva en las Cta Ctes en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-    End Sub
 
     Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
 
@@ -923,7 +683,7 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
             If Trim(txtHasta.Text) = "" Then : Exit Sub : End If
 
             If Proceso._ValidarFecha(txtHasta.Text) Then
-                txtNombre.Focus()
+                txtDesde.Focus()
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -932,59 +692,8 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
 
     End Sub
 
-    Private Sub txtNombre_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNombre.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            If Trim(txtNombre.Text) = "" Then : Exit Sub : End If
-
-            With LugarProceso
-                .DroppedDown = True
-                .Focus()
-            End With
-
-        ElseIf e.KeyData = Keys.Escape Then
-            txtNombre.Text = ""
-        End If
-
-    End Sub
-
-    Private Sub LugarProceso_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles LugarProceso.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-
-            With TipoProceso
-
-                If LugarProceso.SelectedIndex = 0 Then
-                    .Enabled = True
-                    .DroppedDown = True
-                    .Focus()
-                Else
-                    .Enabled = False
-                End If
-
-            End With
-
-        ElseIf e.KeyData = Keys.Escape Then
-            LugarProceso.SelectedIndex = 0
-        End If
-
-    End Sub
-
     Private Sub ProcesoPercepciones_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtDesde.Focus()
     End Sub
 
-    Private Sub LugarProceso_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LugarProceso.DropDownClosed
-        With TipoProceso
-
-            If LugarProceso.SelectedIndex = 0 Then
-                .Enabled = True
-                .DroppedDown = True
-                .Focus()
-            Else
-                .Enabled = False
-            End If
-
-        End With
-    End Sub
 End Class
