@@ -463,6 +463,12 @@
     <Compile Include="Pagos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesAduanerasSIAPRE.Designer.vb">
+      <DependentUpon>ProcesoPercepcionesAduanerasSIAPRE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesAduanerasSIAPRE.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Procesos\ProcesoPercepcionesGananciasAduana.Designer.vb">
       <DependentUpon>ProcesoPercepcionesGananciasAduana.vb</DependentUpon>
     </Compile>
@@ -991,6 +997,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pagos.resx">
       <DependentUpon>Pagos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoPercepcionesAduanerasSIAPRE.resx">
+      <DependentUpon>ProcesoPercepcionesAduanerasSIAPRE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Procesos\ProcesoPercepcionesGananciasAduana.resx">
       <DependentUpon>ProcesoPercepcionesGananciasAduana.vb</DependentUpon>
