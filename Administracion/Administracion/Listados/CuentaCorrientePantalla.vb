@@ -79,7 +79,7 @@ Public Class CuentaCorrientePantalla
                 WRenglon = WRenglon + 1
                 WSuma = WSuma + CamposCtaCtePrv.saldo
 
-                _NrosInternos.Add({CamposCtaCtePrv.numero, CamposCtaCtePrv.NroInterno})
+                _NrosInternos.Add({row.Item("Numero"), row.Item("NroInterno")})
 
             Next
         Else
@@ -469,7 +469,7 @@ Public Class CuentaCorrientePantalla
         Dim _Numero As String = "" ' Guardamos el numero de factura para buscar el nro interno.
 
         If e.RowIndex >= 0 Then
-            _Numero = GRilla.Rows(e.RowIndex).Cells(3).Value
+            _Numero = GRilla.Rows(e.RowIndex).Cells("Numero").Value
         Else
             Exit Sub
         End If
@@ -490,7 +490,7 @@ Public Class CuentaCorrientePantalla
             Case "OP", "AN"
                 With Pagos
                     .SoloLectura = True
-                    .txtOrdenPago.Text = Val(GRilla.Rows(e.RowIndex).Cells(3).Value)
+                    .txtOrdenPago.Text = Val(GRilla.Rows(e.RowIndex).Cells("Numero").Value)
                     .txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
                     .ShowDialog()
                 End With
