@@ -4923,25 +4923,26 @@ Public Class Pagos
         '
         ' COMENTADO EN ESPERA DE LA EVOLUCION DEL PROBLEMA EN MAQUINA DE MARIA LAURA.
         '
-        'With VistaPrevia
-        '    .Reporte = crdoc
-        '    '.Mostrar()
-        '    .Imprimir()
-        'End With
-
-        Dim viewer As New ReportViewer("Orden de Pago", Globals.reportPathWithName("wInformeOrdenPago.rpt"), "")
-
-        With viewer
-            .reporte.SetDataSource(Tabla)
-
-            Select Case Reporte.Imprimir
-                Case Reporte.Pantalla
-                    .ShowDialog()
-                Case Reporte.Imprimir
-                    .imprimirReporte()
-            End Select
-
+        With VistaPrevia
+            .Reporte = crdoc
+            '.Mostrar()
+            .Imprimir()
+            .Reporte.Dispose()
         End With
+
+        'Dim viewer As New ReportViewer("Orden de Pago", Globals.reportPathWithName("wInformeOrdenPago.rpt"), "")
+
+        'With viewer
+        '    .reporte.SetDataSource(Tabla)
+
+        '    Select Case Reporte.Imprimir
+        '        Case Reporte.Pantalla
+        '            .ShowDialog()
+        '        Case Reporte.Imprimir
+        '            .imprimirReporte()
+        '    End Select
+        '    .reporte.Dispose()
+        'End With
 
 
         ' Imprimimos Discrimianción de Valores de Terceros Entregados si el Tipo2 es = 3
@@ -5291,6 +5292,7 @@ Public Class Pagos
             .Reporte = crdoc
             '.Mostrar()
             .Imprimir()
+            .Dispose()
         End With
     End Sub
 
@@ -5627,6 +5629,7 @@ Public Class Pagos
             .Reporte = crdoc
             '.Mostrar()
             .Imprimir()
+            .Reporte.Dispose()
         End With
     End Sub
 
@@ -6091,10 +6094,8 @@ Public Class Pagos
             .Reporte = crdoc
             '.Mostrar()
             .Imprimir()
+            .Reporte.Dispose()
         End With
-
-
-
 
     End Sub
 
@@ -6213,6 +6214,7 @@ Public Class Pagos
             .Reporte = crdoc
             '.Mostrar()
             .Imprimir()
+            .Dispose()
         End With
 
     End Sub
@@ -6402,6 +6404,7 @@ Public Class Pagos
                 .Reporte = crdoc
                 '.Mostrar()
                 .Imprimir()
+                .Reporte.Dispose()
             End With
 
         End If
@@ -7650,4 +7653,5 @@ Public Class Pagos
             txt.Text = Proceso.formatonumerico(txt.Text)
         Next
     End Sub
+
 End Class
