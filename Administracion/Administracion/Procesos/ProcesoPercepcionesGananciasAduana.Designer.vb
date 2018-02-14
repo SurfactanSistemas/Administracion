@@ -37,14 +37,17 @@ Partial Class ProcesoPercepcionesGananciasAduana
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCancela = New Administracion.CustomButton()
         Me.btnAcepta = New Administracion.CustomButton()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtHasta
         '
-        Me.txtHasta.Location = New System.Drawing.Point(411, 37)
+        Me.txtHasta.Location = New System.Drawing.Point(411, 21)
         Me.txtHasta.Mask = "##/##/####"
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -54,7 +57,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(174, 37)
+        Me.txtDesde.Location = New System.Drawing.Point(174, 21)
         Me.txtDesde.Mask = "##/##/####"
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -68,7 +71,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(310, 39)
+        Me.CustomLabel2.Location = New System.Drawing.Point(310, 23)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(81, 18)
         Me.CustomLabel2.TabIndex = 10
@@ -80,7 +83,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(70, 39)
+        Me.CustomLabel1.Location = New System.Drawing.Point(70, 23)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(86, 18)
         Me.CustomLabel1.TabIndex = 8
@@ -121,6 +124,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.GroupBox2)
         Me.Panel2.Controls.Add(Me.GroupBox1)
         Me.Panel2.Controls.Add(Me.CustomLabel1)
         Me.Panel2.Controls.Add(Me.CustomLabel2)
@@ -128,16 +132,16 @@ Partial Class ProcesoPercepcionesGananciasAduana
         Me.Panel2.Controls.Add(Me.txtHasta)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(586, 118)
+        Me.Panel2.Size = New System.Drawing.Size(586, 150)
         Me.Panel2.TabIndex = 29
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.ProgressBar1)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(73, 61)
+        Me.GroupBox1.Location = New System.Drawing.Point(77, 111)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(444, 46)
+        Me.GroupBox1.Size = New System.Drawing.Size(444, 35)
         Me.GroupBox1.TabIndex = 23
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Progreso"
@@ -147,7 +151,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         '
         Me.ProgressBar1.Location = New System.Drawing.Point(25, 16)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(394, 23)
+        Me.ProgressBar1.Size = New System.Drawing.Size(394, 10)
         Me.ProgressBar1.TabIndex = 22
         '
         'btnCancela
@@ -164,7 +168,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(307, 191)
+        Me.btnCancela.Location = New System.Drawing.Point(307, 206)
         Me.btnCancela.Name = "btnCancela"
         Me.btnCancela.Size = New System.Drawing.Size(77, 49)
         Me.btnCancela.TabIndex = 23
@@ -185,12 +189,37 @@ Partial Class ProcesoPercepcionesGananciasAduana
         Me.btnAcepta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAcepta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAcepta.LabelAssociationKey = -1
-        Me.btnAcepta.Location = New System.Drawing.Point(194, 191)
+        Me.btnAcepta.Location = New System.Drawing.Point(194, 206)
         Me.btnAcepta.Name = "btnAcepta"
         Me.btnAcepta.Size = New System.Drawing.Size(77, 49)
         Me.btnAcepta.TabIndex = 22
         Me.ToolTip1.SetToolTip(Me.btnAcepta, "Aceptar")
         Me.btnAcepta.UseVisualStyleBackColor = True
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox2.Location = New System.Drawing.Point(52, 47)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(483, 60)
+        Me.GroupBox2.TabIndex = 23
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "ATENCIÓN"
+        Me.GroupBox2.Visible = False
+        '
+        'Label3
+        '
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
+        Me.Label3.ForeColor = System.Drawing.Color.Lime
+        Me.Label3.Location = New System.Drawing.Point(6, 15)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(471, 41)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "RECUERDE, HAY QUE EXPORTAR EL EXCEL CON LAS PERCEPCIONES QUE ESTÁN CARGADAS EN LA" & _
+            " AFIP, PASAR AL ARCHIVO ADUANA DENTRO DE 0001AUXI Y DESPUÉS EJECUTAR ESTE PROCES" & _
+            "O"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ProcesoPercepcionesGananciasAduana
         '
@@ -207,6 +236,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -224,4 +254,6 @@ Partial Class ProcesoPercepcionesGananciasAduana
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 End Class
