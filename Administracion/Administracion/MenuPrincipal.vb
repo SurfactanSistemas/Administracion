@@ -1,5 +1,4 @@
-﻿Imports System.IO
-
+﻿
 Public Class MenuPrincipal
     Dim forms As New List(Of Form)
     Dim loginOpen As Boolean = False
@@ -252,5 +251,9 @@ Public Class MenuPrincipal
 
     Private Sub ToolStripMenuItem7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem7.Click
         abrir(New ProcesoPercepcionesYRetencionesCiudadNuevo)
+    End Sub
+
+    Private Sub ToolStripMenuItem9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem9.Click
+        abrir(New ProcesoPercepcionesGananciasAduana)
     End Sub
 End Class
