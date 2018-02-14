@@ -44,7 +44,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         '
         'txtHasta
         '
-        Me.txtHasta.Location = New System.Drawing.Point(411, 23)
+        Me.txtHasta.Location = New System.Drawing.Point(411, 37)
         Me.txtHasta.Mask = "##/##/####"
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -54,7 +54,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(174, 23)
+        Me.txtDesde.Location = New System.Drawing.Point(174, 37)
         Me.txtDesde.Mask = "##/##/####"
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -68,7 +68,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(310, 25)
+        Me.CustomLabel2.Location = New System.Drawing.Point(310, 39)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(81, 18)
         Me.CustomLabel2.TabIndex = 10
@@ -80,7 +80,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(70, 25)
+        Me.CustomLabel1.Location = New System.Drawing.Point(70, 39)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(86, 18)
         Me.CustomLabel1.TabIndex = 8
@@ -135,7 +135,7 @@ Partial Class ProcesoPercepcionesGananciasAduana
         '
         Me.GroupBox1.Controls.Add(Me.ProgressBar1)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(73, 50)
+        Me.GroupBox1.Location = New System.Drawing.Point(73, 61)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(444, 46)
         Me.GroupBox1.TabIndex = 23
