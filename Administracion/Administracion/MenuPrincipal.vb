@@ -260,4 +260,12 @@ Public Class MenuPrincipal
     Private Sub ToolStripMenuItem10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem10.Click
         abrir(New ProcesoPercepcionesAduanerasSIAPRE)
     End Sub
+
+    Private Sub ToolStripMenuItem11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem11.Click
+        abrir(New ProcesoRecuperoIva)
+    End Sub
+
+    Private Sub ToolStripMenuItem5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem5.Click
+        abrir(New ProcesoCiti)
+    End Sub
 End Class

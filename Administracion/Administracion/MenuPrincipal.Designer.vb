@@ -86,6 +86,7 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCambio = New System.Windows.Forms.Button()
@@ -409,7 +410,7 @@ Partial Class MenuPrincipal
         '
         'ProcesosToolStripMenuItem
         '
-        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripSeparator1, Me.ToolStripMenuItem5, Me.ToolStripMenuItem3, Me.SifereToolStripMenuItem, Me.RetencionEsOpToolStripMenuItem, Me.RetencionesRecibvosaToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripSeparator2, Me.FinDelSistemaToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripSeparator1, Me.ToolStripMenuItem5, Me.ToolStripMenuItem3, Me.SifereToolStripMenuItem, Me.RetencionEsOpToolStripMenuItem, Me.RetencionesRecibvosaToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11, Me.ToolStripSeparator2, Me.FinDelSistemaToolStripMenuItem})
         Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
         Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.ProcesosToolStripMenuItem.Text = "Procesos"
@@ -490,6 +491,12 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
         Me.ToolStripMenuItem10.Size = New System.Drawing.Size(375, 22)
         Me.ToolStripMenuItem10.Text = "Proceso de Percepciones Aduaneras SIAPRE"
+        '
+        'ToolStripMenuItem11
+        '
+        Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
+        Me.ToolStripMenuItem11.Size = New System.Drawing.Size(375, 22)
+        Me.ToolStripMenuItem11.Text = "Proceso Recupero de Iva"
         '
         'ToolStripSeparator2
         '
@@ -633,4 +640,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ToolStripMenuItem7 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem9 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem10 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripMenuItem
 End Class
