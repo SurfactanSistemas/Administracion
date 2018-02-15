@@ -112,6 +112,8 @@ Public Class ProcesoCiti
 
                     WIndice += 1
 
+                    'If .Item("NroInterno") = 155009 Then Stop
+
                     Vector(WIndice, 1) = IIf(IsDBNull(.Item("Letra")), "", .Item("Letra"))
                     Vector(WIndice, 2) = IIf(IsDBNull(.Item("Tipo")), "", .Item("Tipo"))
                     Vector(WIndice, 3) = IIf(IsDBNull(.Item("Punto")), "", .Item("Punto"))
@@ -148,7 +150,7 @@ Public Class ProcesoCiti
                     WIva += Val(Proceso.formatonumerico(Vector(WIndice, 16))) ' Iva 10.5
 
 
-                    If Val(Vector(WIndice, 7)) = 0 And WIva <> 0 And Trim(Vector(WIndice, 7)) = "" Then
+                    If Val(Vector(WIndice, 7)) = 0 And WIva <> 0 And Trim(Vector(WIndice, 13)) = "" Then
 
                         ZNeto = 0
 
@@ -180,6 +182,8 @@ Public Class ProcesoCiti
                 ' Buscamos los datos de la Factura en IvaCompAdicional en caso de existir.
                 WIvaCompAdicional = _TraerDatosIvaCompAdicional(WNroInterno)
 
+                'If WIndice2 = 70 Then Stop
+
                 If WIvaCompAdicional.Rows.Count > 0 Then
 
                     ' Agregamos una por una las facturas al nuevo Vector.
@@ -210,6 +214,15 @@ Public Class ProcesoCiti
                             If Val(VectorII(WIndice2, 3)) = 0 Then
                                 VectorII(WIndice2, 3) = "1"
                             End If
+
+                            Select Case UCase(VectorII(WIndice2, 2))
+                                Case "NC", "C"
+                                    VectorII(WIndice2, 2) = "03"
+                                Case "ND", "D"
+                                    VectorII(WIndice2, 2) = "02"
+                                Case Else
+                                    VectorII(WIndice2, 2) = "01"
+                            End Select
 
                             VectorII(WIndice2, 5) = Proceso.ordenaFecha(VectorII(WIndice2, 5))
 
@@ -261,7 +274,9 @@ Public Class ProcesoCiti
                 WIva105 = VectorII(i, 16)
                 WCuit = VectorII(i, 17)
                 WRazon = VectorII(i, 18)
-                
+
+                'If i = 71 Then Stop
+
                 WNeto = CInt(Val(Proceso.formatonumerico(WNeto)) * 100)
                 WExento = CInt(Val(Proceso.formatonumerico(WExento)) * 100)
                 WIva21 = CInt(Val(Proceso.formatonumerico(WIva21)) * 100)
@@ -274,7 +289,7 @@ Public Class ProcesoCiti
                 WDespacho = _Left(WDespacho & Space(16), 16)
 
                 If Trim(WDespacho) <> "" Then
-                    WDespacho = _Left(Trim(WDespacho) & "".PadRight(16), 16)
+                    WDespacho = _Left(Trim(WDespacho) & "".PadRight(16, "0"), 16)
                 End If
 
                 WLetra = UCase(WLetra)
@@ -504,7 +519,7 @@ Public Class ProcesoCiti
 
                 WCampo25 = ceros("0", 15)
 
-                If ZSuma = 704 Then Stop
+                'If ZSuma = 704 Then Stop
 
                 If Val(WCuit) <> 0 Then
 
@@ -524,8 +539,311 @@ Public Class ProcesoCiti
                 ProgressBar1.Increment(1)
             Next
 
+            ' Procesamos las Alicuotas.
+
             escritor.Dispose()
             escritor2.Dispose()
+
+            nombreArchivo = WDestino & "\" & "REGINFO_CV_COMPRAS_ALICUOTAS" & ".txt"
+            nombreArchivo2 = WDestino & "\" & "REGINFO_CV_COMPRAS_ALICUOTASNro" & ".txt"
+
+            escritor = New StreamWriter(nombreArchivo)
+            escritor2 = New StreamWriter(nombreArchivo2)
+
+            ZSuma = 0
+            ZResto = 0
+            For i = 1 To WIndice2
+
+                WLetra = VectorII(i, 1)
+                WLetra = UCase(WLetra)
+
+                If WLetra <> "A" And WLetra <> "M" Then Continue For
+
+                WTipo = VectorII(i, 2)
+                WPunto = VectorII(i, 3)
+                WNumero = VectorII(i, 4)
+                WFecha = VectorII(i, 5)
+                WProveedor = VectorII(i, 6)
+                WNeto = VectorII(i, 7)
+                WExento = VectorII(i, 8)
+                WIva21 = VectorII(i, 9)
+                WIva5 = VectorII(i, 10)
+                WIva27 = VectorII(i, 11)
+                WIb = VectorII(i, 12)
+                WDespacho = VectorII(i, 13)
+                WNroInterno = VectorII(i, 14)
+                WFecha2 = VectorII(i, 15)
+                WIva105 = VectorII(i, 16)
+                WCuit = VectorII(i, 17)
+                WRazon = VectorII(i, 18)
+
+                'If i = 71 Then Stop
+
+                WNeto = Proceso.formatonumerico(WNeto)
+                WNeto = Str$(Int(Math.Abs(Val(WNeto)) * 100))
+
+                WExento = Proceso.formatonumerico(WExento)
+                WExento = Str$(Int(Math.Abs(Val(WExento)) * 100))
+
+                WIva21 = Proceso.formatonumerico(WIva21)
+                WIva21 = Str$(Int(Math.Abs(Val(WIva21)) * 100))
+
+                WIva5 = Proceso.formatonumerico(WIva5)
+                WIva5 = Str$(Int(Math.Abs(Val(WIva5)) * 100))
+
+                WIva27 = Proceso.formatonumerico(WIva27)
+                WIva27 = Str$(Int(Math.Abs(Val(WIva27)) * 100))
+
+                WIva105 = Proceso.formatonumerico(WIva105)
+                WIva105 = Str$(Int(Math.Abs(Val(WIva105)) * 100))
+
+                WIb = Proceso.formatonumerico(WIb)
+                WIb = Str$(Int(Math.Abs(Val(WIb)) * 100))
+
+                WDespacho = Trim(WDespacho).Replace(" ", "")
+                WDespacho = _Left(WDespacho & Space(16), 16)
+
+                If Trim(WDespacho) <> "" Then
+                    WDespacho = _Left(Trim(WDespacho) & "".PadRight(16, "0"), 16)
+                End If
+
+                If WLetra = "B" Or WLetra = "C" Then
+                    ZResto = Val(WExento)
+                    WExento = "0"
+                End If
+
+                Select Case Trim(WProveedor)
+                    Case "10065511620", "10070956507", "10065786411"
+                        WIva = Val(WIva21) + Val(WIva27) + Val(WIva105)
+                        WIva27 = WIva
+                        WIva21 = 0
+                        WIva105 = 0
+                    Case "10053718600", "10050001091", "10099924210", "10050000845"
+                        WIva = Val(WIva21) + Val(WIva27) + Val(WIva105)
+                        WIva105 = WIva
+                        WIva21 = 0
+                        WIva27 = 0
+                End Select
+
+                WIva = Val(WIva21) + Val(WIva27) + Val(WIva105)
+
+                If WIva = 0 Then
+                    WNeto = Val(WNeto) + Val(WExento)
+                    WExento = 0
+                End If
+
+                ZTotal = Val(WNeto) + Val(WExento) + Val(WIva21) + Val(WIva5) + Val(WIva27) + Val(WIva105) + Val(WIb)
+
+                WCodigoExento = " "
+
+                If WIva = 0 Then
+                    WCodigoExento = "N"
+                End If
+
+                ZAlicuota = 0
+                If Val(WIva21) <> 0 Then
+                    ZAlicuota += 1
+                End If
+                If Val(WIva27) <> 0 Then
+                    ZAlicuota += 1
+                End If
+                If Val(WIva105) <> 0 Then
+                    ZAlicuota += 1
+                End If
+                If WIva = 0 And Val(WNeto) <> 0 Then
+                    ZAlicuota += 1
+                End If
+                If WLetra = "B" Or WLetra = "C" Then
+                    ZAlicuota = 0
+                End If
+
+                If Trim(WProveedor) <> "" Then
+
+                    XProveedor = _TraerDatosProveedor(WProveedor)
+
+                    If Not IsNothing(XProveedor) Then
+
+                        With XProveedor
+                            WRazon = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                            WCuit = IIf(IsDBNull(.Item("Cuit")), "", .Item("Cuit"))
+                        End With
+
+                    End If
+
+                End If
+
+                WRazon = _Left(WRazon & Space(30), 30)
+
+                If Val(WCuit) <> 0 And Trim(WDespacho) = "" Then
+
+                    'If ZSuma = 332 Then Stop
+
+                    Select Case UCase(WLetra)
+                        Case "A"
+
+                            Select Case Val(WTipo)
+                                Case 1
+                                    WCampo1 = "1"
+                                Case 2
+                                    WCampo1 = "2"
+                                Case 3
+                                    WCampo1 = "3"
+                                Case Else
+                                    WCampo1 = "0"
+                            End Select
+
+                        Case "M"
+
+                            Select Case Val(WTipo)
+                                Case 1
+                                    WCampo1 = "51"
+                                Case 2
+                                    WCampo1 = "52"
+                                Case 3
+                                    WCampo1 = "53"
+                                Case Else
+                                    WCampo1 = "0"
+                            End Select
+
+                        Case Else
+                            WCampo1 = "0"
+                    End Select
+
+                    If Trim(WDespacho) <> "" Then
+                        WCampo1 = "066"
+                        WPunto = "0"
+                        WNumero = "0"
+                    End If
+
+                    WCampo1 = ceros(WCampo1, 3)
+
+                    WCampo2 = ceros(WPunto, 5)
+
+                    WCampo3 = ceros(WNumero, 20)
+
+                    WCampo4 = "80"
+
+                    WCuit = WCuit.Replace("-", "")
+                    WCampo5 = ceros(WCuit, 20)
+
+                    If Val(WIva21) <> 0 Then
+
+                        If ZAlicuota = 1 Then
+
+                            WCampo6 = Str$(Math.Abs(Val(WNeto)))
+                            
+                        Else
+
+                            ZImpo = CInt(Val(WIva21) / 21 * 100)
+                            WCampo6 = Str$(Math.Abs(ZImpo))
+
+                        End If
+
+                        WCampo6 = ceros(WCampo6, 15)
+
+                        WCampo7 = "0005"
+
+                        WCampo8 = Str$(Math.Abs(Val(WIva21)))
+                        WCampo8 = ceros(WCampo8, 15)
+
+                        ZSuma += 1
+
+                        WImpre = WCampo1 & WCampo2 & WCampo3 & WCampo4 & WCampo5 & WCampo6 & WCampo7 & WCampo8 & vbCrLf
+
+                        escritor.Write(WImpre)
+                        escritor2.Write(Str$(ZSuma) & " " & WNroInterno & " " & WImpre)
+
+                    End If
+
+                    If Val(WIva105) <> 0 Then
+
+                        If ZAlicuota = 1 Then
+
+                            WCampo6 = Str$(Math.Abs(Val(WNeto)))
+
+                        Else
+
+                            ZImpo = CInt(Val(WIva105) / 10.5 * 100)
+                            WCampo6 = Str$(Math.Abs(ZImpo))
+
+                        End If
+
+                        WCampo6 = ceros(WCampo6, 15)
+
+                        WCampo7 = "0004"
+
+                        WCampo8 = Str$(Math.Abs(Val(WIva105)))
+                        WCampo8 = ceros(WCampo8, 15)
+
+                        'If ZSuma = 62 Then Stop
+
+                        ZSuma += 1
+
+                        WImpre = WCampo1 & WCampo2 & WCampo3 & WCampo4 & WCampo5 & WCampo6 & WCampo7 & WCampo8 & vbCrLf
+
+                        escritor.Write(WImpre)
+                        escritor2.Write(Str$(ZSuma) & " " & WNroInterno & " " & WImpre)
+
+                    End If
+
+                    If Val(WIva27) <> 0 Then
+
+                        If ZAlicuota = 1 Then
+
+                            WCampo6 = Str$(Math.Abs(Val(WNeto)))
+
+                        Else
+
+                            ZImpo = CInt(Val(WIva27) / 27 * 100)
+                            WCampo6 = Str$(Math.Abs(ZImpo))
+
+                        End If
+
+                        WCampo6 = ceros(WCampo6, 15)
+
+                        WCampo7 = "0006"
+
+                        WCampo8 = Str$(Math.Abs(Val(WIva27)))
+                        WCampo8 = ceros(WCampo8, 15)
+
+                        ZSuma += 1
+
+                        WImpre = WCampo1 & WCampo2 & WCampo3 & WCampo4 & WCampo5 & WCampo6 & WCampo7 & WCampo8 & vbCrLf
+
+                        escritor.Write(WImpre)
+                        escritor2.Write(Str$(ZSuma) & " " & WNroInterno & " " & WImpre)
+
+                    End If
+
+                    If WIva = 0 And Val(WNeto) <> 0 Then
+
+                        WCampo6 = Str$(Math.Abs(Val(WNeto)))
+
+                        WCampo6 = ceros(WCampo6, 15)
+
+                        WCampo7 = "0003"
+
+                        WCampo8 = "0"
+                        WCampo8 = ceros(WCampo8, 15)
+
+                        ZSuma += 1
+
+                        WImpre = WCampo1 & WCampo2 & WCampo3 & WCampo4 & WCampo5 & WCampo6 & WCampo7 & WCampo8 & vbCrLf
+
+                        escritor.Write(WImpre)
+                        escritor2.Write(Str$(ZSuma) & " " & WNroInterno & " " & WImpre)
+
+                    End If
+
+
+                End If
+
+            Next
+
+            escritor.Dispose()
+            escritor2.Dispose()
+
+            ' Procesamos 
 
             GroupBox1.Visible = False
 
