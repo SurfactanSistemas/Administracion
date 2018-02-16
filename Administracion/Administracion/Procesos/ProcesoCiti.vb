@@ -838,6 +838,8 @@ Public Class ProcesoCiti
 
                 End If
 
+                ProgressBar1.Increment(1)
+
             Next
 
             escritor.Dispose()
@@ -970,6 +972,8 @@ Public Class ProcesoCiti
                 WCampo4 = ceros(WCampo4, 15)
 
                 escritor.Write(WCampo1 & WCampo2 & WCampo3 & WCampo4 & vbCrLf)
+
+                ProgressBar1.Increment(1)
 
             Next
 
@@ -1218,13 +1222,149 @@ Public Class ProcesoCiti
                                WCampo11 & WCampo12 & WCampo13 & WCampo14 & WCampo15 & WCampo16 & WCampo17 & WCampo18 & WCampo19 & _
                                WCampo20 & WCampo21 & WCampo22 & vbCrLf)
 
+                ProgressBar1.Increment(1)
+
+            Next
+
+            escritor.Dispose()
+
+            ' Procesamos las Alicuotas de Ventas CBTE.
+
+            nombreArchivo = WDestino & "\" & "REGINFO_CV_VENTAS_ALICUOTAS" & ".txt"
+
+            escritor = New StreamWriter(nombreArchivo)
+
+            For i = 1 To WIndice
+
+
+                WLetra = Vector(i, 1)
+                WTipo = Vector(i, 2)
+                WPunto = Vector(i, 3)
+                WNumero = Vector(i, 4)
+                WFecha = Vector(i, 5)
+                WCLiente = Vector(i, 6)
+                WNeto = Vector(i, 7)
+                WIva1 = Vector(i, 8)
+                WIva2 = Vector(i, 9)
+                WImpoIbTucu = Vector(i, 10)
+                WImpoIbCiudad = Vector(i, 11)
+                WImpoIb = Vector(i, 12)
+                WVencimiento = Vector(i, 13)
+                WNumero2 = Vector(i, 14)
+                WVtoOrd = Vector(i, 15)
+                WRazon = Vector(i, 16)
+                WCuit = Vector(i, 17)
+
+                WNeto = Proceso.formatonumerico(WNeto)
+                WNeto = Str$(Int(Math.Abs(Val(WNeto)) * 100))
+
+                WIva1 = Proceso.formatonumerico(WIva1)
+                WIva1 = Str$(Int(Math.Abs(Val(WIva1)) * 100))
+
+                WIva2 = Proceso.formatonumerico(WIva2)
+                WIva2 = Str$(Int(Math.Abs(Val(WIva2)) * 100))
+
+                WImpoIbTucu = Proceso.formatonumerico(WImpoIbTucu)
+                WImpoIbTucu = Str$(Int(Math.Abs(Val(WImpoIbTucu)) * 100))
+
+                WImpoIbCiudad = Proceso.formatonumerico(WImpoIbCiudad)
+                WImpoIbCiudad = Str$(Int(Math.Abs(Val(WImpoIbCiudad)) * 100))
+
+                WImpoIb = Proceso.formatonumerico(WImpoIb)
+                WImpoIb = Str$(Int(Math.Abs(Val(WImpoIb)) * 100))
+
+                WExento = "0"
+
+                ZTotal = Val(WNeto) + Val(WIva1) + Val(WIva2) + Val(WImpoIbTucu) + Val(WImpoIbCiudad) + Val(WImpoIb)
+                WIva = Val(WIva1) + Val(WIva2)
+
+                WCodigoExento = " "
+
+                If WIva = 0 Then
+                    WCodigoExento = "N"
+                End If
+
+                WRazon = _Left(Trim(WRazon) & Space(30), 30)
+                WCuit = WCuit.Replace("-", "")
+
+                Select Case UCase(WLetra)
+                    Case "A"
+                        Select Case Val(WTipo)
+                            Case 1, 3
+                                WCampo1 = "001"
+                            Case 4
+                                WCampo1 = "002"
+                            Case 2, 5
+                                WCampo1 = "003"
+                            Case Else
+                                WCampo1 = "000"
+                        End Select
+                    Case "B"
+                        Select Case Val(WTipo)
+                            Case 1, 3
+                                WCampo1 = "006"
+                            Case 4
+                                WCampo1 = "007"
+                            Case 2, 5
+                                WCampo1 = "008"
+                            Case Else
+                                WCampo1 = "000"
+                        End Select
+                    Case "C"
+                        Select Case Val(WTipo)
+                            Case 1
+                                WCampo1 = "011"
+                            Case 2
+                                WCampo1 = "012"
+                            Case 3
+                                WCampo1 = "013"
+                            Case Else
+                                WCampo1 = "000"
+                        End Select
+                    Case "M"
+                        Select Case Val(WTipo)
+                            Case 1
+                                WCampo1 = "051"
+                            Case 2
+                                WCampo1 = "052"
+                            Case 3
+                                WCampo1 = "053"
+                            Case Else
+                                WCampo1 = "000"
+                        End Select
+                    Case Else
+                        WCampo1 = "000"
+                End Select
+
+                If Val(WNumero2) > 800000 Or Val(WNumero2) > 810000 Then
+                    WCampo1 = "019"
+                    WPunto = "00003"
+                End If
+
+                WCampo2 = ceros(WPunto, 5)
+                WCampo3 = ceros(WNumero, 20)
+
+                WCampo4 = Str$(Math.Abs(Val(WNeto)))
+                WCampo4 = ceros(WCampo4, 15)
+
+                WCampo5 = "0005"
+
+                If WIva = 0 Then WCampo5 = "0003"
+
+                WCampo6 = Str$(Math.Abs(WIva))
+                WCampo6 = ceros(WCampo6, 15)
+
+                escritor.Write(WCampo1 & WCampo2 & WCampo3 & WCampo4 & WCampo5 & WCampo6 & vbCrLf)
+
+                ProgressBar1.Increment(1)
+
             Next
 
             escritor.Dispose()
 
             GroupBox1.Visible = False
 
-            MsgBox("Finalizado Proceso de Percepciones Aduanera SIAPRE", MsgBoxStyle.Information)
+            MsgBox("Finalizado Proceso CITI", MsgBoxStyle.Information)
 
         Catch ex As Exception
 
