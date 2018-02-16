@@ -973,6 +973,252 @@ Public Class ProcesoCiti
 
             Next
 
+            escritor.Dispose()
+
+            ' Procesamos las VENTAS CBTE.
+            Array.Clear(Vector, 0, Vector.Length)
+            WIndice = 0
+
+            nombreArchivo = WDestino & "\" & "REGINFO_CV_VENTAS_CBTE" & ".txt"
+
+            escritor = New StreamWriter(nombreArchivo)
+
+            tabla = _TraerCtaCte(ordDesde, ordHasta)
+
+            Dim WCLiente, WIva1, WIva2, WImpoIbTucu, WImpoIbCiudad, WImpoIb, WVencimiento, WMes, WAnio As String
+
+            For Each WCtaCte As DataRow In tabla.Rows
+
+                With WCtaCte
+                    WTipo = IIf(IsDBNull(.Item("Tipo")), "", .Item("Tipo"))
+                    WNumero = IIf(IsDBNull(.Item("Numero")), "", .Item("Numero"))
+                    WFecha = IIf(IsDBNull(.Item("Fecha")), "", .Item("Fecha"))
+                    WCliente = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+                    WNeto = IIf(IsDBNull(.Item("Neto")), "", .Item("Neto"))
+                    WIva1 = IIf(IsDBNull(.Item("Iva1")), "", .Item("Iva1"))
+                    WIva2 = IIf(IsDBNull(.Item("Iva2")), "", .Item("Iva2"))
+                    WImpoIbTucu = IIf(IsDBNull(.Item("ImpoIbTucu")), "", .Item("ImpoIbTucu"))
+                    WImpoIbCiudad = IIf(IsDBNull(.Item("ImpoIbCiudad")), "", .Item("ImpoIbCiudad"))
+                    WImpoIb = IIf(IsDBNull(.Item("ImpoIb")), "", .Item("ImpoIb"))
+                    WVencimiento = IIf(IsDBNull(.Item("Vencimiento")), "", .Item("Vencimiento"))
+                    WRazon = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                    WCuit = IIf(IsDBNull(.Item("Cuit")), "", .Item("Cuit"))
+                End With
+
+                WIndice += 1
+
+                Vector(WIndice, 1) = "A"
+                Vector(WIndice, 2) = WTipo
+                Vector(WIndice, 3) = "0009"
+
+                If Proceso._EsPellital() Then
+                    Vector(WIndice, 3) = "0006"
+                End If
+
+
+                Select Case Val(WNumero)
+
+                    Case Is < 200000
+                        Vector(WIndice, 4) = Str(Val(WNumero) - 100000)
+
+                    Case Is < 300000
+                        Vector(WIndice, 1) = "A"
+                        Vector(WIndice, 4) = Str(Val(WNumero) - 200000)
+
+                    Case Is < 810000
+                        Vector(WIndice, 4) = Str(Val(WNumero) - 800000)
+
+                    Case Else
+                        Vector(WIndice, 4) = Str(Val(WNumero) - 810000)
+
+                End Select
+
+                Vector(WIndice, 5) = Proceso.ordenaFecha(WFecha)
+                Vector(WIndice, 6) = WCLiente
+                Vector(WIndice, 7) = Proceso.formatonumerico(WNeto)
+                Vector(WIndice, 8) = Proceso.formatonumerico(WIva1)
+                Vector(WIndice, 9) = Proceso.formatonumerico(WIva2)
+                Vector(WIndice, 10) = Proceso.formatonumerico(WImpoIbTucu)
+                Vector(WIndice, 11) = Proceso.formatonumerico(WImpoIbCiudad)
+                Vector(WIndice, 12) = Proceso.formatonumerico(WImpoIb)
+
+                WMes = Mid$(WFecha, 4, 2)
+                WAnio = Mid$(WFecha, 7, 4)
+
+                If Val(WMes) = 12 Then
+                    Vector(WIndice, 13) = WAnio & WMes & "31"
+                Else
+                    Vector(WIndice, 13) = WAnio & ceros((Val(WMes) + 1), 2) & "01"
+                End If
+
+                Vector(WIndice, 14) = WNumero
+                Vector(WIndice, 15) = Proceso.ordenaFecha(WVencimiento)
+                Vector(WIndice, 16) = WRazon
+                Vector(WIndice, 17) = WCuit
+
+            Next
+
+            Dim WNumero2, WVtoOrd As String
+
+            ZTotal = 0
+            WIva = 0
+
+            For i = 1 To WIndice
+
+                WLetra = Vector(i, 1)
+                WTipo = Vector(i, 2)
+                WPunto = Vector(i, 3)
+                WNumero = Vector(i, 4)
+                WFecha = Vector(i, 5)
+                WCLiente = Vector(i, 6)
+                WNeto = Vector(i, 7)
+                WIva1 = Vector(i, 8)
+                WIva2 = Vector(i, 9)
+                WImpoIbTucu = Vector(i, 10)
+                WImpoIbCiudad = Vector(i, 11)
+                WImpoIb = Vector(i, 12)
+                WVencimiento = Vector(i, 13)
+                WNumero2 = Vector(i, 14)
+                WVtoOrd = Vector(i, 15)
+                WRazon = Vector(i, 16)
+                WCuit = Vector(i, 17)
+
+                WNeto = Proceso.formatonumerico(WNeto)
+                WNeto = Str$(Int(Math.Abs(Val(WNeto)) * 100))
+
+                WIva1 = Proceso.formatonumerico(WIva1)
+                WIva1 = Str$(Int(Math.Abs(Val(WIva1)) * 100))
+
+                WIva2 = Proceso.formatonumerico(WIva2)
+                WIva2 = Str$(Int(Math.Abs(Val(WIva2)) * 100))
+
+                WImpoIbTucu = Proceso.formatonumerico(WImpoIbTucu)
+                WImpoIbTucu = Str$(Int(Math.Abs(Val(WImpoIbTucu)) * 100))
+
+                WImpoIbCiudad = Proceso.formatonumerico(WImpoIbCiudad)
+                WImpoIbCiudad = Str$(Int(Math.Abs(Val(WImpoIbCiudad)) * 100))
+
+                WImpoIb = Proceso.formatonumerico(WImpoIb)
+                WImpoIb = Str$(Int(Math.Abs(Val(WImpoIb)) * 100))
+
+                WExento = "0"
+
+                ZTotal = Val(WNeto) + Val(WIva1) + Val(WIva2) + Val(WImpoIbTucu) + Val(WImpoIbCiudad) + Val(WImpoIb)
+                WIva = Val(WIva1) + Val(WIva2)
+
+                WCodigoExento = " "
+
+                If WIva = 0 Then
+                    WCodigoExento = "N"
+                End If
+
+                WRazon = _Left(Trim(WRazon) & Space(30), 30)
+                WCuit = WCuit.Replace("-", "")
+                
+                WCampo1 = WFecha
+
+                Select Case WLetra
+                    Case "A"
+                        Select Case Val(WTipo)
+                            Case 1, 3
+                                WCampo2 = "001"
+                            Case 4
+                                WCampo2 = "002"
+                            Case 2, 5
+                                WCampo2 = "003"
+                            Case Else
+                                WCampo2 = "000"
+                        End Select
+                    Case "B"
+                        Select Case Val(WTipo)
+                            Case 1, 3
+                                WCampo2 = "006"
+                            Case 4
+                                WCampo2 = "007"
+                            Case 2, 5
+                                WCampo2 = "008"
+                            Case Else
+                                WCampo2 = "000"
+                        End Select
+                    Case "C"
+                        Select Case Val(WTipo)
+                            Case 1
+                                WCampo2 = "011"
+                            Case 2
+                                WCampo2 = "012"
+                            Case 3
+                                WCampo2 = "013"
+                            Case Else
+                                WCampo2 = "000"
+                        End Select
+                    Case "M"
+                        Select Case Val(WTipo)
+                            Case 1
+                                WCampo2 = "051"
+                            Case 2
+                                WCampo2 = "052"
+                            Case 3
+                                WCampo2 = "053"
+                            Case Else
+                                WCampo2 = "000"
+                        End Select
+                    Case Else
+                        WCampo2 = "000"
+                End Select
+
+                If Val(WNumero2) > 800000 Or Val(WNumero2) > 810000 Then
+                    WCampo2 = "019"
+                    WPunto = "00003"
+                End If
+
+                WCampo3 = ceros(WPunto, 5)
+                WCampo4 = ceros(WNumero, 20)
+                WCampo5 = ceros(WNumero, 20)
+                WCampo6 = "80"
+                WCampo7 = ceros(WCuit, 20)
+                WCampo8 = WRazon
+
+                WCampo9 = Str$(Math.Abs(ZTotal))
+                WCampo9 = ceros(WCampo9, 15)
+
+                WCampo10 = ceros("0", 15)
+
+                WCampo11 = ceros("0", 15)
+
+                WCampo12 = Str$(Math.Abs(Val(WExento)))
+                WCampo12 = ceros(WCampo12, 15)
+
+                WCampo13 = ceros("0", 15)
+
+                ZTotal = Val(WImpoIbTucu) + Val(WImpoIbCiudad) + Val(WImpoIb)
+
+                WCampo14 = Str$(Math.Abs(ZTotal))
+                WCampo14 = ceros(WCampo14, 15)
+
+                WCampo15 = ceros("0", 15)
+                WCampo16 = ceros("0", 15)
+
+                WCampo17 = "PES"
+
+                WCampo18 = ceros("1000000", 10)
+
+                WCampo19 = "1"
+
+                WCampo20 = WCodigoExento
+
+                WCampo21 = ceros("0", 15)
+
+                WCampo22 = WVencimiento
+
+                If Val(WCampo2) = 19 Then
+                    WCampo22 = ceros("0", 8)
+                End If
+
+                escritor.Write(WCampo1 & WCampo2 & WCampo3 & WCampo4 & WCampo5 & WCampo6 & WCampo7 & WCampo8 & WCampo9 & WCampo10 & _
+                               WCampo11 & WCampo12 & WCampo13 & WCampo14 & WCampo15 & WCampo16 & WCampo17 & WCampo18 & WCampo19 & _
+                               WCampo20 & WCampo21 & WCampo22 & vbCrLf)
+
+            Next
 
             escritor.Dispose()
 
@@ -995,6 +1241,45 @@ Public Class ProcesoCiti
             Exit Sub
         End Try
     End Sub
+
+    Private Function _TraerCtaCte(ByVal WDesde As String, ByVal WHasta As String) As DataTable
+        Dim tabla As New DataTable
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT c.Tipo, c.Numero, c.Fecha, c.Cliente, c.Neto, c.Iva1, c.Iva2, c.ImpoIbTucu, c.ImpoIbCiudad, c.ImpoIb, c.Vencimiento, " & _
+                                              " cli.Razon, cli.Cuit" & _
+                                              " FROM CtaCte as c JOIN Cliente as cli ON cli.Cliente = c.Cliente " & _
+                                              " WHERE c.OrdFecha BETWEEN " & WDesde & " AND " & WHasta & "" & _
+                                              " AND (c.Tipo IN('01','02','03','04','05') OR c.Tipo IN('1','2','3','4','5'))")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los datos de las Cuentas Corrientes desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return tabla
+    End Function
 
     Private Function _TraerDatosProveedor(ByVal wProveedor As String) As DataRow
         Dim tabla As New DataTable
