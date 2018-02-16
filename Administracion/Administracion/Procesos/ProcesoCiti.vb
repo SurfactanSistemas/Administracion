@@ -14,7 +14,7 @@ Public Class ProcesoCiti
         WCampo6, WCampo7, WCampo8, WCampo9, WCampo10, _
         WCampo11, WCampo12, WCampo13, WCampo14, WCampo15, WCampo16, _
         WCampo17, WCampo18, WCampo19, WCampo20, WCampo21, WCampo22, _
-        WCampo23, WCampo24, WCampo25, WCampo26, WCampo27, WCampo28 As String
+        WCampo23, WCampo24, WCampo25 As String
 
     Private Sub ProcesoPercepciones_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
@@ -33,7 +33,6 @@ Public Class ProcesoCiti
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
         Dim Vector(10000, 21) As String
         Dim VectorII(10000, 21) As String
-        Dim VectorIII(10000, 21) As String
         Dim WIndice = 0, WIndice2 = 0
         Dim WDestino, nombreArchivo2 As String
         Dim escritor As System.IO.StreamWriter
@@ -168,8 +167,7 @@ Public Class ProcesoCiti
 
             Next
 
-            Dim WCuenta = "", WCodigo = "", WDespacho = "", WDebito = ""
-            Dim WLetra, WTipo, WPunto, WNumero, WProveedor, WNeto, WExento, WIva5, WIva21, WIva27, WIva105, WIb, WNroInterno As String
+            Dim WDespacho, WLetra, WTipo, WPunto, WNumero, WProveedor, WNeto, WExento, WIva5, WIva21, WIva27, WIva105, WIb, WNroInterno As String
             Dim WImpre = ""
             Dim WIvaCompAdicional As DataTable
 
@@ -245,7 +243,7 @@ Public Class ProcesoCiti
             Next
 
             Dim ZSuma, ZTotal, ZImpo, ZAlicuota, ZResto As Double
-            Dim WRazon, WFecha2, WCodigoExento As String
+            Dim WRazon, WCodigoExento As String
             Dim XProveedor As DataRow
 
             ZSuma = 0
@@ -270,7 +268,6 @@ Public Class ProcesoCiti
                 WIb = VectorII(i, 12)
                 WDespacho = VectorII(i, 13)
                 WNroInterno = VectorII(i, 14)
-                WFecha2 = VectorII(i, 15)
                 WIva105 = VectorII(i, 16)
                 WCuit = VectorII(i, 17)
                 WRazon = VectorII(i, 18)
@@ -374,7 +371,7 @@ Public Class ProcesoCiti
                 If WLetra = "B" Or WLetra = "C" Then
                     ZAlicuota = 0
                 End If
-                
+
                 If Trim(WProveedor) <> "" Then
 
                     XProveedor = _TraerDatosProveedor(WProveedor)
@@ -572,7 +569,6 @@ Public Class ProcesoCiti
                 WIb = VectorII(i, 12)
                 WDespacho = VectorII(i, 13)
                 WNroInterno = VectorII(i, 14)
-                WFecha2 = VectorII(i, 15)
                 WIva105 = VectorII(i, 16)
                 WCuit = VectorII(i, 17)
                 WRazon = VectorII(i, 18)
@@ -731,7 +727,7 @@ Public Class ProcesoCiti
                         If ZAlicuota = 1 Then
 
                             WCampo6 = Str$(Math.Abs(Val(WNeto)))
-                            
+
                         Else
 
                             ZImpo = CInt(Val(WIva21) / 21 * 100)
@@ -870,7 +866,6 @@ Public Class ProcesoCiti
                 WIb = VectorII(i, 12)
                 WDespacho = VectorII(i, 13)
                 WNroInterno = VectorII(i, 14)
-                WFecha2 = VectorII(i, 15)
                 WIva105 = VectorII(i, 16)
                 WCuit = VectorII(i, 17)
                 WRazon = VectorII(i, 18)
@@ -1062,7 +1057,7 @@ Public Class ProcesoCiti
 
             Next
 
-            Dim WNumero2, WVtoOrd As String
+            Dim WNumero2 As String
 
             ZTotal = 0
             WIva = 0
@@ -1083,7 +1078,6 @@ Public Class ProcesoCiti
                 WImpoIb = Vector(i, 12)
                 WVencimiento = Vector(i, 13)
                 WNumero2 = Vector(i, 14)
-                WVtoOrd = Vector(i, 15)
                 WRazon = Vector(i, 16)
                 WCuit = Vector(i, 17)
 
@@ -1118,7 +1112,7 @@ Public Class ProcesoCiti
 
                 WRazon = _Left(Trim(WRazon) & Space(30), 30)
                 WCuit = WCuit.Replace("-", "")
-                
+
                 WCampo1 = WFecha
 
                 Select Case WLetra
@@ -1251,7 +1245,6 @@ Public Class ProcesoCiti
                 WImpoIb = Vector(i, 12)
                 WVencimiento = Vector(i, 13)
                 WNumero2 = Vector(i, 14)
-                WVtoOrd = Vector(i, 15)
                 WRazon = Vector(i, 16)
                 WCuit = Vector(i, 17)
 
