@@ -843,7 +843,138 @@ Public Class ProcesoCiti
             escritor.Dispose()
             escritor2.Dispose()
 
-            ' Procesamos 
+            ' Procesamos las Importaciones.
+
+            nombreArchivo = WDestino & "\" & "REGINFO_CV_COMPRAS_IMPORTACIONES" & ".txt"
+
+            escritor = New StreamWriter(nombreArchivo)
+
+            For i = 1 To WIndice2
+
+                WDespacho = VectorII(i, 13)
+
+                If Trim(WDespacho) = "" Then Continue For
+
+                WTipo = VectorII(i, 2)
+                WPunto = VectorII(i, 3)
+                WNumero = VectorII(i, 4)
+                WFecha = VectorII(i, 5)
+                WProveedor = VectorII(i, 6)
+                WNeto = VectorII(i, 7)
+                WExento = VectorII(i, 8)
+                WIva21 = VectorII(i, 9)
+                WIva5 = VectorII(i, 10)
+                WIva27 = VectorII(i, 11)
+                WIb = VectorII(i, 12)
+                WDespacho = VectorII(i, 13)
+                WNroInterno = VectorII(i, 14)
+                WFecha2 = VectorII(i, 15)
+                WIva105 = VectorII(i, 16)
+                WCuit = VectorII(i, 17)
+                WRazon = VectorII(i, 18)
+
+                'If i = 71 Then Stop
+
+                WNeto = Proceso.formatonumerico(WNeto)
+                WNeto = Str$(Int(Math.Abs(Val(WNeto)) * 100))
+
+                WExento = Proceso.formatonumerico(WExento)
+                WExento = Str$(Int(Math.Abs(Val(WExento)) * 100))
+
+                WIva21 = Proceso.formatonumerico(WIva21)
+                WIva21 = Str$(Int(Math.Abs(Val(WIva21)) * 100))
+
+                WIva5 = Proceso.formatonumerico(WIva5)
+                WIva5 = Str$(Int(Math.Abs(Val(WIva5)) * 100))
+
+                WIva27 = Proceso.formatonumerico(WIva27)
+                WIva27 = Str$(Int(Math.Abs(Val(WIva27)) * 100))
+
+                WIva105 = Proceso.formatonumerico(WIva105)
+                WIva105 = Str$(Int(Math.Abs(Val(WIva105)) * 100))
+
+                WIb = Proceso.formatonumerico(WIb)
+                WIb = Str$(Int(Math.Abs(Val(WIb)) * 100))
+
+                WDespacho = WDespacho.Replace(" ", "")
+
+                If Trim(WDespacho) <> "" Then
+                    WDespacho = _Left(Trim(WDespacho) & ceros("0", 16), 16)
+                End If
+
+                If WLetra = "B" Or WLetra = "C" Then
+                    ZResto = Val(WExento)
+                    WExento = "0"
+                End If
+
+                Select Case Trim(WProveedor)
+                    Case "10065511620", "10070956507", "10065786411"
+                        WIva = Val(WIva21) + Val(WIva27) + Val(WIva105)
+                        WIva27 = WIva
+                        WIva21 = 0
+                        WIva105 = 0
+                    Case "10053718600", "10050001091", "10099924210", "10050000845"
+                        WIva = Val(WIva21) + Val(WIva27) + Val(WIva105)
+                        WIva105 = WIva
+                        WIva21 = 0
+                        WIva27 = 0
+                End Select
+
+                WIva = Val(WIva21) + Val(WIva27) + Val(WIva105)
+
+                If WIva = 0 Then
+                    WNeto = Val(WNeto) + Val(WExento)
+                    WExento = 0
+                End If
+
+                ZTotal = Val(WNeto) + Val(WExento) + Val(WIva21) + Val(WIva5) + Val(WIva27) + Val(WIva105) + Val(WIb)
+
+                WCodigoExento = " "
+
+                If WIva = 0 Then
+                    WCodigoExento = "N"
+                End If
+
+                ZAlicuota = 1
+
+                If Trim(WProveedor) <> "" Then
+
+                    XProveedor = _TraerDatosProveedor(WProveedor)
+
+                    If Not IsNothing(XProveedor) Then
+
+                        With XProveedor
+                            WRazon = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                            WCuit = IIf(IsDBNull(.Item("Cuit")), "", .Item("Cuit"))
+                        End With
+
+                    End If
+
+                End If
+
+                WRazon = _Left(WRazon & Space(30), 30)
+
+                If Val(WNeto) <> 0 Then
+                    ZImpo = Val(WNeto)
+                Else
+                    ZImpo = CInt(Val(WIva21) / 21 * 100)
+                End If
+                WCampo1 = WDespacho
+
+                WCampo2 = Str$(Math.Abs(ZImpo))
+                WCampo2 = ceros(WCampo2, 15)
+
+                WCampo3 = "0005"
+
+                WCampo4 = Str$(Math.Abs(Val(WIva21)))
+                WCampo4 = ceros(WCampo4, 15)
+
+                escritor.Write(WCampo1 & WCampo2 & WCampo3 & WCampo4 & vbCrLf)
+
+            Next
+
+
+            escritor.Dispose()
 
             GroupBox1.Visible = False
 
