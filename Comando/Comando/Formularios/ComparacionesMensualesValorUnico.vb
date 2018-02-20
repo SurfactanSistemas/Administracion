@@ -10,11 +10,14 @@ Public Class ComparacionesMensualesValorUnico
     Private Sub _Limpiar()
         _CargarAniosComparables()
 
+        rbMenusal.Checked = True
         ckConsolidado.Checked = True
         cmbTipoGrafico.SelectedIndex = 0
         cmbPeriodo.SelectedIndex = 0
         txtAnioDesde.Text = _BuscarAnoPorDefecto()
         txtAnioHasta.Text = txtAnioDesde.Text
+        txtFechaDiaria.Text = Date.Now.ToString("dd/MM/yyyy")
+
     End Sub
 
     Private Function _BuscarAnoPorDefecto() As String
@@ -100,6 +103,10 @@ Public Class ComparacionesMensualesValorUnico
     Private Function _ArmarBuscarFamilias() As String
         Dim chks() As CheckBox = {ckQuimicos, ckColorantes, ckFarma, ckBiocidas, ckPapel, ckFazonPellital, _
                                   ckFazonFarma, ckFazonQuimicos, ckVarios}
+
+        If (cmbPeriodo.SelectedIndex = 2 Or (rbDiaria.Checked And cmbPeriodo.SelectedIndex = 1)) And ckConsolidado.Checked Then
+            Return "Linea IN('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11')"
+        End If
 
         Dim WBuscarFamilias = " Linea in ("
 
@@ -502,7 +509,7 @@ Public Class ComparacionesMensualesValorUnico
 
                     For i = 0 To 11
 
-                        If wMeses(i) > -1 Then
+                        If wMeses(i) > -1 And Not IsNothing(wMeses(i)) Then
 
                             WValoresABuscar &= "Importe" & Val(wMeses(i)) & ","
 
@@ -1430,59 +1437,13 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _DescripcionSegunTipo(ByVal item As Object) As String
 
-        Select Case Val(item)
-            Case 1
-                Return "Ventas U$S"
-            Case 2
-                Return "Kilos"
-            Case 3
-                Return "Costo"
-            Case 4
-                Return "Stock"
-            Case 5
-                Return "Pedidos"
-            Case 6
-                Return "Atraso"
-            Case 7
-                Return "Factor"
-            Case 8
-                Return "Precio"
-            Case 9
-                Return "% Venta"
-            Case 10
-                Return "% Atraso"
-            Case 11
-                Return "Rotación"
-            Case Else
-                Return ""
-        End Select
+        Return Helper._DescripcionSegunTipo(item)
 
     End Function
 
     Private Function _NombreLineaSegunNumero(ByVal item As Object) As String
 
-        Select Case Val(item)
-            Case 1
-                Return "Químicos"
-            Case 2
-                Return "Colorantes"
-            Case 3
-                Return "Farma"
-            Case 4
-                Return "Biocidas"
-            Case 5
-                Return "Papel"
-            Case 6
-                Return "Fazón Pellital"
-            Case 7
-                Return "Fazón Farma"
-            Case 8
-                Return "Fazón Químicos"
-            Case 9
-                Return "Varios"
-            Case Else
-                Return ""
-        End Select
+        Return Helper._NombreLineaSegunNumero(item)
 
     End Function
 
@@ -1688,6 +1649,15 @@ Public Class ComparacionesMensualesValorUnico
         Dim tabla As DataSet
 
         '
+        ' VERIFICAMOS SI ES UNA COMPARACIÓN DIARIA. EN CASO DE QUE SI, LO PROCESAMOS A PARTE.
+        '
+
+        If rbDiaria.Checked Then
+            _ProcesarComparacionDiaria()
+            Exit Sub
+        End If
+
+        '
         ' VALIDAMOS QUE EL PERIODO SEA DE UN AÑO.
         '
         If Not _ValidaDatosPeriodo() Then
@@ -1757,6 +1727,373 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
+    Private Sub _ProcesarComparacionDiaria()
+
+        Dim WMes, WDesde, WAnio As String
+        Dim WValores() As String
+        Dim WDatosRows As DataRowCollection
+        Dim WDatos As DataTable = _ArmarTablaDiario()
+        Dim WTipo As Short = -1
+
+        Try
+            WMes = Mid$(txtFechaDiaria.Text, 4, 2) 'txtMesDesdeCompDiario.Text
+            WAnio = Mid$(txtFechaDiaria.Text, 7, 4) 'txtAnioCompDiario.Text
+            WDesde = Mid$(txtFechaDiaria.Text, 1, 2) 'txtDesdeDia.Text
+
+            ' Validamos Mes.
+            If Val(WMes) < 1 Or Val(WMes) > 12 Then Throw New Exception("El mes debe ser un valor válido.")
+
+            ' Validamos los dias.
+            If Val(WDesde) < 1 Or Val(WDesde) > 31 Then Throw New Exception("El Inicio del Período debe ser válido.")
+            
+            ' Extraemos los datos, segun sea el tipo de comparacion diaria que se seleccionó.
+
+            Select Case cmbPeriodo.SelectedIndex
+                Case 0
+
+                    WValores = _TraerValoresAComparar()
+
+                    ' Verificamos que se haya seleccionado por lo menos un valor a comparar.
+                    If Not WValores.Any(Function(v) Not IsNothing(v)) Then Throw New Exception("No se ha seleccionado ningún valor a comparar.")
+
+                    ' Obtenemos los datos del mes indicado.
+                    WDatosRows = _TraerDatosDiariosEntreLineas(WMes, WDesde, WAnio, WValores) '_TraerDatosDiarios(WMes, WDia, WAnio, WValores)
+
+                    For Each WRow As DataRow In WDatosRows
+                        WDatos.ImportRow(WRow)
+                    Next
+
+                    ' Obtenemos los datos del mes anterior.
+                    ' Calculamos que mes seria.
+
+                    If Val(WMes) = 1 Then
+
+                        WMes = "12"
+                        WAnio = Val(WAnio - 1)
+
+                    Else
+                        WMes = Val(WMes - 1)
+                    End If
+
+                    WDatosRows = _TraerDatosDiariosEntreLineas(WMes, WDesde, WAnio, WValores)  '_TraerDatosDiarios(WMes, WDia, WAnio, WValores)
+
+                    For Each WRow As DataRow In WDatosRows
+                        WDatos.ImportRow(WRow)
+                    Next
+
+                    WTipo = 1
+
+                    'If ckConsolidado.Checked Then
+                    '    WTipo = 2
+                    'End If
+
+                    DataGridView1.DataSource = WDatos
+
+                    ' Cargamos la descripcion de las Lineas.
+                    For Each row As DataRow In WDatos.Rows
+                        row.Item("LineaDesc") = _NombreLineaSegunNumero(row.Item("Linea"))
+                    Next
+
+                Case 1
+
+                    WValores = _TraerValoresAComparar()
+
+                    ' Verificamos que se haya seleccionado por lo menos un valor a comparar.
+                    If Not WValores.Any(Function(v) Not IsNothing(v)) Then Throw New Exception("No se ha seleccionado ningún valor a comparar.")
+
+                    ' Obtenemos los datos del mes indicado.
+
+
+                    If ckConsolidado.Checked Then
+
+                        WDatosRows = _TraerDatosDiariosEntrePeriodosConsolidado(WMes, WDesde, WAnio, WValores)
+
+                        For Each WRow As DataRow In WDatosRows
+                            WDatos.ImportRow(WRow)
+                        Next
+
+                    Else
+
+                        WDatosRows = _TraerDatosDiariosEntrePeriodos(WMes, WDesde, WAnio, WValores)
+
+                        For Each WRow As DataRow In WDatosRows
+                            WDatos.ImportRow(WRow)
+                        Next
+
+                    End If
+
+
+                    ' Obtenemos los datos del mes anterior.
+                    ' Calculamos que mes seria.
+
+                    If Val(WMes) = 1 Then
+
+                        WMes = "12"
+                        WAnio = Val(WAnio - 1)
+
+                    Else
+                        WMes = Val(WMes - 1)
+                    End If
+
+                    If ckConsolidado.Checked Then
+
+                        WDatosRows = _TraerDatosDiariosEntrePeriodosConsolidado(WMes, WDesde, WAnio, WValores)
+
+                        For Each WRow As DataRow In WDatosRows
+                            WDatos.ImportRow(WRow)
+                        Next
+
+                    Else
+                        WDatosRows = _TraerDatosDiariosEntrePeriodos(WMes, WDesde, WAnio, WValores)
+
+                        For Each WRow As DataRow In WDatosRows
+                            WDatos.ImportRow(WRow)
+                        Next
+
+                        ' Cargamos la descripcion de las Lineas.
+                        For Each row As DataRow In WDatos.Rows
+                            row.Item("LineaDesc") = _NombreLineaSegunNumero(row.Item("Linea"))
+                        Next
+
+                    End If
+
+                    ' Obtenemos los datos del mismo dia y mes del año anterior.
+                    ' Calculamos que mes seria.
+                    
+                    ' En el caso de que el mes sea enero, en el paso anterior se tuvo que retroceder el año, asi que lo recomponemos al año original.
+                    If WMes = "12" Then
+                        WMes = "0"
+                        WAnio = Val(WAnio) + 1
+                    End If
+
+                    WMes = Val(WMes) + 1
+                    WAnio = Val(WAnio) - 1
+
+                    If ckConsolidado.Checked Then
+
+                        WDatosRows = _TraerDatosDiariosEntrePeriodosConsolidado(WMes, WDesde, WAnio, WValores)
+
+                        For Each WRow As DataRow In WDatosRows
+                            WDatos.ImportRow(WRow)
+                        Next
+
+                    Else
+                        WDatosRows = _TraerDatosDiariosEntrePeriodos(WMes, WDesde, WAnio, WValores)
+
+                        For Each WRow As DataRow In WDatosRows
+                            WDatos.ImportRow(WRow)
+                        Next
+
+                        ' Cargamos la descripcion de las Lineas.
+                        For Each row As DataRow In WDatos.Rows
+                            row.Item("LineaDesc") = _NombreLineaSegunNumero(row.Item("Linea"))
+                        Next
+
+                    End If
+
+
+                    WTipo = 2
+
+                    If ckConsolidado.Checked Then
+                        WTipo = 3
+                    End If
+
+                    DataGridView1.DataSource = WDatos
+
+
+            End Select
+
+            If WDatos.Rows.Count = 0 Then Throw New Exception("No hay datos que graficar.")
+
+            With GraficoDiario
+
+                .Tipo = WTipo
+                .Tabla = WDatos
+                ._ProcesarGrafico()
+                .Show()
+
+            End With
+
+        Catch ex As Exception
+            MsgBox("Error al querer graficar." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+    Private Function _TraerDatosDiariosEntrePeriodosConsolidado(ByVal wMes As String, ByVal wDesde As String, ByVal wAnio As String, ByVal wValores As String()) As DataRowCollection
+        Dim Tabla As DataTable = _ArmarTablaDiario()
+        Dim WBuscarLineas As String = _ArmarBuscarFamilias()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim WBuscarTipos As String = ""
+
+        Try
+
+            For i = 0 To wValores.Length - 1
+
+                If Not IsNothing(wValores(i)) Then
+
+                    WBuscarTipos &= "'" & wValores(i) & "', "
+
+                End If
+
+            Next
+
+            If WBuscarTipos = "" Then Return Nothing
+
+            WBuscarTipos = Trim(WBuscarTipos).Substring(0, Trim(WBuscarTipos).Length - 1)
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "SELECT Tipo, Dia, Mes, Ano, sum(Importe) as Importe FROM ComandoDatosDiario WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = " & wDesde & " AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "' GROUP BY Tipo, Dia, Mes, Ano"
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los datos para graficar." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return Tabla.Rows
+    End Function
+
+
+    Private Function _TraerDatosDiariosEntreLineas(ByVal wMes As String, ByVal wDesde As String, ByVal wAnio As String, ByVal wValores As String()) As DataRowCollection
+        Dim Tabla As DataTable = _ArmarTablaDiario()
+        Dim WBuscarLineas As String = _ArmarBuscarFamilias()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim WBuscarTipos As String = ""
+
+        Try
+
+            For i = 0 To wValores.Length - 1
+
+                If Not IsNothing(wValores(i)) Then
+
+                    WBuscarTipos &= "'" & wValores(i) & "', "
+
+                End If
+
+            Next
+
+            If WBuscarTipos = "" Then Return Nothing
+
+            WBuscarTipos = Trim(WBuscarTipos).Substring(0, Trim(WBuscarTipos).Length - 1)
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "SELECT Linea, Tipo, Mes, Ano, sum(Importe) as Importe FROM ComandoDatosDiario WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = " & wDesde & " AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "' GROUP BY Linea, Tipo, Mes, Ano"
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los datos para graficar." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return Tabla.Rows
+    End Function
+
+    Private Function _TraerDatosDiariosEntrePeriodos(ByVal wMes As String, ByVal WDia As String, ByVal wAnio As String, ByVal WValores As String()) As DataRowCollection
+        Dim Tabla As New DataTable '= _ArmarTablaDiario()
+        Dim WBuscarLineas As String = _ArmarBuscarFamilias()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim WBuscarTipos As String = ""
+
+        Try
+
+
+            For i = 0 To WValores.Length - 1
+
+                If Not IsNothing(WValores(i)) Then
+
+                    WBuscarTipos &= "'" & WValores(i) & "', "
+
+                End If
+
+            Next
+
+            If WBuscarTipos = "" Then Return Nothing
+
+            WBuscarTipos = Trim(WBuscarTipos).Substring(0, Trim(WBuscarTipos).Length - 1)
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "SELECT Clave, Linea, Tipo, Dia, Mes, Ano, Importe FROM ComandoDatosDiario WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = '" & wdia & "' AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "'"
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los datos para graficar." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return Tabla.Rows
+    End Function
+
+    Private Function _ArmarTablaDiario() As DataTable
+        Dim tabla As New DataTable
+
+        With tabla.Columns
+            .Add("Linea")
+            .Add("Tipo")
+            .Add("Dia")
+            .Add("Mes")
+            .Add("Ano")
+            .Add("Importe", System.Type.GetType("System.Double"))
+            .Add("LineaDesc")
+        End With
+
+        Return tabla
+    End Function
+
     Private Function _PeriodoValido() As Boolean
 
         Dim valido = False
@@ -1793,7 +2130,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Dim control As CheckBox = sender
 
-        If cmbPeriodo.SelectedIndex = 2 Then
+        If cmbPeriodo.SelectedIndex = 2 Or (rbDiaria.Checked And cmbPeriodo.SelectedIndex = 1) Then
 
             For Each ck As CheckBox In _ValoresComparables()
 
@@ -1820,98 +2157,142 @@ Public Class ComparacionesMensualesValorUnico
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click, Button2.Click
         PanelSeleccionAnios.Visible = False
     End Sub
-    
+
     Private Sub _ProcesarPeriodo()
 
-        Select Case cmbPeriodo.SelectedIndex
-            Case 1
+        If rbDiaria.Checked Then
 
-                cmbTipoGrafico.SelectedIndex = 0
-                btnSeleccionarAnios.Visible = False
-                ckConsolidado.Checked = True
 
-            Case 2
+            Select Case cmbPeriodo.SelectedIndex
+                
+                Case 1
 
-                If clbAniosAComparar.Items.Count = 0 Then
-                    Dim WAnioHasta, WAnioDesde
+                    For Each ck As CheckBox In _ValoresComparables()
 
-                    WAnioDesde = Val(txtAnioDesde.Text)
-                    WAnioHasta = Val(txtAnioHasta.Text)
+                        If _ValoresComparables.Count(Function(_ck) _ck.Checked) = 1 Then
+                            Exit For
+                        End If
 
-                    If WAnioDesde > 0 And WAnioHasta > 0 And WAnioHasta = WAnioDesde Then
+                        ck.Checked = False
 
-                        clbAniosAComparar.Items.Clear()
+                    Next
 
-                        Dim WAnioActual = WAnioDesde
+                    Dim control As New CheckBox
 
-                        For i = 0 To 3
+                    If Familias.Count(Function(_ck) _ck.Checked) > 1 Then
 
-                            clbAniosAComparar.Items.Add(Val(WAnioActual) - i)
+                        For Each ck As CheckBox In Familias()
+
+                            ck.Checked = False
+
+                            If Familias.Count(Function(_ck) _ck.Checked) = 1 Then
+                                control = ck
+                                Exit For
+                            End If
 
                         Next
 
                     End If
-                End If
 
-                btnSeleccionarAnios.Visible = True
-                btnSeleccionarAnios.PerformClick()
+                    ckConsolidado.Checked = False
+                    control.Checked = True
 
-                For Each ck As CheckBox In _ValoresComparables()
+            End Select
 
-                    If _ValoresComparables.Count(Function(_ck) _ck.Checked) = 1 Then
-                        Exit For
+
+        Else
+
+            Select Case cmbPeriodo.SelectedIndex
+                Case 1
+
+                    cmbTipoGrafico.SelectedIndex = 0
+                    btnSeleccionarAnios.Visible = False
+                    ckConsolidado.Checked = True
+
+                Case 2
+
+                    If clbAniosAComparar.Items.Count = 0 Then
+                        Dim WAnioHasta, WAnioDesde
+
+                        WAnioDesde = Val(txtAnioDesde.Text)
+                        WAnioHasta = Val(txtAnioHasta.Text)
+
+                        If WAnioDesde > 0 And WAnioHasta > 0 And WAnioHasta = WAnioDesde Then
+
+                            clbAniosAComparar.Items.Clear()
+
+                            Dim WAnioActual = WAnioDesde
+
+                            For i = 0 To 3
+
+                                clbAniosAComparar.Items.Add(Val(WAnioActual) - i)
+
+                            Next
+
+                            btnSeleccionarAnios.Visible = True
+                            btnSeleccionarAnios.PerformClick()
+
+                        End If
                     End If
 
-                    ck.Checked = False
+                    For Each ck As CheckBox In _ValoresComparables()
 
-                Next
-
-                If Familias.Count(Function(_ck) _ck.Checked) > 1 Then
-
-                    For Each ck As CheckBox In Familias()
-
-                        ck.Checked = False
-
-                        If Familias.Count(Function(_ck) _ck.Checked) = 1 Then
+                        If _ValoresComparables.Count(Function(_ck) _ck.Checked) = 1 Then
                             Exit For
                         End If
 
+                        ck.Checked = False
+
                     Next
-                End If
+
+                    If Familias.Count(Function(_ck) _ck.Checked) > 1 Then
+
+                        For Each ck As CheckBox In Familias()
+
+                            ck.Checked = False
+
+                            If Familias.Count(Function(_ck) _ck.Checked) = 1 Then
+                                Exit For
+                            End If
+
+                        Next
+                    End If
 
 
-                If ckConsolidado.Checked Then
-                    ckConsolidado.Checked = False
-                End If
+                    If ckConsolidado.Checked Then
+                        ckConsolidado.Checked = False
+                    End If
 
 
-                If ckTodosValores.Checked Then
-                    ckTodosValores.Checked = False
-                End If
+                    If ckTodosValores.Checked Then
+                        ckTodosValores.Checked = False
+                    End If
 
-                If Trim(txtMesDesde.Text) = "" Then
-                    txtMesDesde.Text = "1"
-                End If
+                    If Trim(txtMesDesde.Text) = "" Then
+                        txtMesDesde.Text = "1"
+                    End If
 
-                If Trim(txtMesHasta.Text) = "" Then
-                    txtMesHasta.Text = "12"
-                End If
+                    If Trim(txtMesHasta.Text) = "" Then
+                        txtMesHasta.Text = "12"
+                    End If
 
-            Case Else
+                Case Else
 
-                btnSeleccionarAnios.Visible = False
-                Button1.PerformClick()
+                    btnSeleccionarAnios.Visible = False
+                    Button1.PerformClick()
 
 
-        End Select
+            End Select
 
-        If Not ckConsolidado.Checked Then
-            For Each ck As CheckBox In Familias()
-                If Familias.Count(Function(c) c.Checked) > 1 Then
-                    ck.Checked = False
-                End If
-            Next
+            If Not ckConsolidado.Checked Then
+                For Each ck As CheckBox In Familias()
+                    If Familias.Count(Function(c) c.Checked) > 1 Then
+                        ck.Checked = False
+                    End If
+                Next
+            End If
         End If
+        
     End Sub
 
     Private Sub txtMesDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMesDesde.KeyDown
@@ -2035,7 +2416,7 @@ Public Class ComparacionesMensualesValorUnico
         Dim WMesHasta = Val(txtMesHasta.Text)
         Dim WAnioDesde = Val(txtAnioDesde.Text)
         Dim WAnioHasta = Val(txtAnioHasta.Text)
-        
+
         If WAnioDesde <> WAnioHasta Then
 
             If WAnioHasta < WAnioDesde Then
@@ -2118,4 +2499,130 @@ Public Class ComparacionesMensualesValorUnico
     Private Sub cmbPeriodo_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPeriodo.DropDownClosed
         _ProcesarPeriodo()
     End Sub
+
+    'Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+
+    '    Dim WRand As New Random
+    '    Dim WImporte1, WImporte2, WImporte3 As Double
+    '    Dim Vector(11, 7) As String
+    '    Dim ZSql As String
+    '    Dim cn As SqlConnection = New SqlConnection()
+    '    Dim cm As SqlCommand = New SqlCommand("")
+    '    Dim WClave, WAno, WMes, WDia As String
+
+    '    Try
+
+    '        cn.ConnectionString = Helper._ConectarA
+    '        cn.Open()
+    '        cm.Connection = cn
+
+    '        cm.CommandText = "DELETE FROM ComandoDatosDiario"
+    '        cm.ExecuteNonQuery()
+
+    '        For A = 2017 To 2018
+
+    '            For i = 1 To 12
+
+    '                For d = 1 To 31
+
+    '                    For Each WLinea As Integer In {1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+    '                        Dim XTipo As String
+
+    '                        For j = 1 To 11
+
+    '                            XTipo = j
+    '                            WAno = A
+    '                            WMes = i
+    '                            WDia = d
+    '                            WImporte1 = (WRand.NextDouble() * (350.1 - 1000.9)) + 1000.9
+    '                            WImporte1 = Val(Helper.formatonumerico(WImporte1))
+
+    '                            WImporte2 = (WRand.NextDouble() * (350.1 - 1000.9)) + 1000.9
+    '                            WImporte2 = Val(Helper.formatonumerico(WImporte2))
+
+    '                            WImporte3 = (WRand.NextDouble() * (350.1 - 1000.9)) + 1000.9
+    '                            WImporte3 = Val(Helper.formatonumerico(WImporte3))
+
+    '                            WClave = ceros(WLinea, 4) & WAno & ceros(WMes, 2) & ceros(WDia, 2) & ceros(XTipo, 2)
+
+    '                            ZSql = ""
+    '                            ZSql = "INSERT INTO ComandoDatosDiario (Clave, Linea, Ano, Mes, Dia, Tipo, Importe1, Importe2, Importe3) " & _
+    '                                   " VALUES ('" & WClave & "', " & WLinea & ", " & WAno & ", " & WMes & ", " & WDia & ", " & XTipo & ", " & Str$(WImporte1) & ", " & Str$(WImporte2) & ", " & Str$(WImporte3) & ")"
+
+    '                            cm.CommandText = ZSql
+    '                            cm.ExecuteNonQuery()
+    '                        Next
+
+    '                    Next
+
+    '                Next
+
+    '            Next
+
+    '        Next
+
+    '        MsgBox("Termino")
+
+    '    Catch ex As Exception
+    '        Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+    '    Finally
+
+    '        cn.Close()
+    '        cn = Nothing
+    '        cm = Nothing
+
+    '    End Try
+
+    'End Sub
+
+    Private Sub rbMenusal_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbMenusal.CheckedChanged
+
+        If rbMenusal.Checked Then
+            gbDesde.Enabled = True
+            gbHasta.Enabled = True
+            gbComparativoDiario.Enabled = False
+            cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos"}
+            txtMesDesde.Focus()
+        End If
+
+    End Sub
+
+    Private Sub rbDiaria_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbDiaria.CheckedChanged
+
+        If rbDiaria.Checked Then
+            gbDesde.Enabled = False
+            gbHasta.Enabled = False
+            gbComparativoDiario.Enabled = True
+            cmbPeriodo.DataSource = {"Comparativo Entre Lineas", "Comparativo Entre Periodos"}
+            btnSeleccionarAnios.Visible = False
+            txtFechaDiaria.Focus()
+            txtFechaDiaria.SelectionStart = 0
+            txtFechaDiaria.SelectionLength = txtFechaDiaria.Text.Length
+        End If
+
+    End Sub
+
+    Private Sub Lineas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckBiocidas.CheckedChanged, ckColorantes.CheckedChanged, ckFarma.CheckedChanged, ckFazonFarma.CheckedChanged, ckFazonPellital.CheckedChanged, ckFazonQuimicos.CheckedChanged, ckPapel.CheckedChanged, ckQuimicos.CheckedChanged, ckVarios.CheckedChanged
+
+        Dim control As CheckBox = sender
+
+        If cmbPeriodo.SelectedIndex = 2 Or (rbDiaria.Checked And cmbPeriodo.SelectedIndex = 1) Then
+
+            For Each ck As CheckBox In Familias()
+
+                If control.Checked = False Then
+                    Exit For
+                End If
+
+                If control.Name <> ck.Name Then
+                    ck.Checked = False
+                End If
+
+            Next
+
+        End If
+
+    End Sub
+
 End Class

@@ -94,6 +94,12 @@
     <Compile Include="Formularios\ComparacionesMensualesValorUnico.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\GraficoDiario.Designer.vb">
+      <DependentUpon>GraficoDiario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\GraficoDiario.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Grafico.Designer.vb">
       <DependentUpon>Grafico.vb</DependentUpon>
     </Compile>
@@ -140,6 +146,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Formularios\ComparacionesMensualesValorUnico.resx">
       <DependentUpon>ComparacionesMensualesValorUnico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\GraficoDiario.resx">
+      <DependentUpon>GraficoDiario.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Grafico.resx">
       <DependentUpon>Grafico.vb</DependentUpon>

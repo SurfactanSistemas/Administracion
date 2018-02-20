@@ -567,4 +567,61 @@ Module Helper
         Return Microsoft.VisualBasic.Right(Trim(str), len)
     End Function
 
+    Public Function _DescripcionSegunTipo(ByVal item As Object) As String
+
+        Select Case Val(item)
+            Case 1
+                Return "Ventas U$S"
+            Case 2
+                Return "Kilos"
+            Case 3
+                Return "Costo"
+            Case 4
+                Return "Stock"
+            Case 5
+                Return "Pedidos"
+            Case 6
+                Return "Atraso"
+            Case 7
+                Return "Factor"
+            Case 8
+                Return "Precio"
+            Case 9
+                Return "% Venta"
+            Case 10
+                Return "% Atraso"
+            Case 11
+                Return "Rotación"
+            Case Else
+                Return ""
+        End Select
+
+    End Function
+
+    Public Function _NombreLineaSegunNumero(ByVal item As Object) As String
+
+        Select Case Val(item)
+            Case 1
+                Return "Químicos"
+            Case 2
+                Return "Colorantes"
+            Case 3
+                Return "Farma"
+            Case 4
+                Return "Biocidas"
+            Case 5
+                Return "Papel"
+            Case 6
+                Return "Fazón Pellital"
+            Case 7
+                Return "Fazón Farma"
+            Case 8
+                Return "Fazón Químicos"
+            Case 9
+                Return "Varios"
+            Case Else
+                Return ""
+        End Select
+
+    End Function
 End Module

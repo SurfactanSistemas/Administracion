@@ -22,9 +22,9 @@ Partial Class ComparacionesMensualesValorUnico
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnGenerar = New System.Windows.Forms.Button()
         Me.cmbTipoGrafico = New System.Windows.Forms.ComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -63,10 +63,10 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ckAnios = New System.Windows.Forms.CheckedListBox()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.gbDesde = New System.Windows.Forms.GroupBox()
         Me.txtMesDesde = New System.Windows.Forms.MaskedTextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.gbHasta = New System.Windows.Forms.GroupBox()
         Me.txtMesHasta = New System.Windows.Forms.MaskedTextBox()
         Me.txtAnioHasta = New System.Windows.Forms.MaskedTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -75,6 +75,13 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.clbAniosAComparar = New System.Windows.Forms.CheckedListBox()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.rbDiaria = New System.Windows.Forms.RadioButton()
+        Me.rbMenusal = New System.Windows.Forms.RadioButton()
+        Me.gbComparativoDiario = New System.Windows.Forms.GroupBox()
+        Me.txtFechaDiaria = New System.Windows.Forms.MaskedTextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -82,16 +89,18 @@ Partial Class ComparacionesMensualesValorUnico
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAnios.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
+        Me.gbDesde.SuspendLayout()
+        Me.gbHasta.SuspendLayout()
         Me.PanelSeleccionAnios.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox9.SuspendLayout()
+        Me.gbComparativoDiario.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnGenerar
         '
         Me.btnGenerar.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.btnGenerar.Location = New System.Drawing.Point(459, 308)
+        Me.btnGenerar.Location = New System.Drawing.Point(475, 318)
         Me.btnGenerar.Name = "btnGenerar"
         Me.btnGenerar.Size = New System.Drawing.Size(153, 38)
         Me.btnGenerar.TabIndex = 0
@@ -102,9 +111,9 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.cmbTipoGrafico.FormattingEnabled = True
         Me.cmbTipoGrafico.Items.AddRange(New Object() {"Barras", "Lineas"})
-        Me.cmbTipoGrafico.Location = New System.Drawing.Point(501, 24)
+        Me.cmbTipoGrafico.Location = New System.Drawing.Point(13, 85)
         Me.cmbTipoGrafico.Name = "cmbTipoGrafico"
-        Me.cmbTipoGrafico.Size = New System.Drawing.Size(89, 21)
+        Me.cmbTipoGrafico.Size = New System.Drawing.Size(14, 21)
         Me.cmbTipoGrafico.TabIndex = 2
         Me.cmbTipoGrafico.Visible = False
         '
@@ -121,7 +130,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox2.Controls.Add(Me.ckQuimicos)
         Me.GroupBox2.Controls.Add(Me.ckConsolidado)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox2.Location = New System.Drawing.Point(342, 148)
+        Me.GroupBox2.Location = New System.Drawing.Point(358, 158)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(270, 148)
         Me.GroupBox2.TabIndex = 4
@@ -240,7 +249,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox3.Controls.Add(Me.ckPedidos)
         Me.GroupBox3.Controls.Add(Me.ckTodosValores)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox3.Location = New System.Drawing.Point(13, 115)
+        Me.GroupBox3.Location = New System.Drawing.Point(13, 125)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(310, 181)
         Me.GroupBox3.TabIndex = 4
@@ -420,7 +429,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox5.Controls.Add(Me.btnSeleccionarAnios)
         Me.GroupBox5.Controls.Add(Me.cmbPeriodo)
         Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox5.Location = New System.Drawing.Point(342, 62)
+        Me.GroupBox5.Location = New System.Drawing.Point(358, 72)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(270, 83)
         Me.GroupBox5.TabIndex = 7
@@ -450,36 +459,35 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'DataGridView1
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridView1.Location = New System.Drawing.Point(12, 382)
         Me.DataGridView1.Name = "DataGridView1"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.DataGridView1.Size = New System.Drawing.Size(585, 150)
         Me.DataGridView1.TabIndex = 8
-        Me.DataGridView1.Visible = False
         '
         'pnlAnios
         '
@@ -521,19 +529,19 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckAnios.Size = New System.Drawing.Size(311, 118)
         Me.ckAnios.TabIndex = 0
         '
-        'GroupBox7
+        'gbDesde
         '
-        Me.GroupBox7.Controls.Add(Me.txtMesDesde)
-        Me.GroupBox7.Controls.Add(Me.txtAnioDesde)
-        Me.GroupBox7.Controls.Add(Me.Label4)
-        Me.GroupBox7.Controls.Add(Me.Label3)
-        Me.GroupBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox7.Location = New System.Drawing.Point(13, 5)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(230, 51)
-        Me.GroupBox7.TabIndex = 10
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Desde"
+        Me.gbDesde.Controls.Add(Me.txtMesDesde)
+        Me.gbDesde.Controls.Add(Me.txtAnioDesde)
+        Me.gbDesde.Controls.Add(Me.Label4)
+        Me.gbDesde.Controls.Add(Me.Label3)
+        Me.gbDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
+        Me.gbDesde.Location = New System.Drawing.Point(119, 11)
+        Me.gbDesde.Name = "gbDesde"
+        Me.gbDesde.Size = New System.Drawing.Size(230, 51)
+        Me.gbDesde.TabIndex = 10
+        Me.gbDesde.TabStop = False
+        Me.gbDesde.Text = "Desde"
         '
         'txtMesDesde
         '
@@ -554,19 +562,19 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Label4.TabIndex = 1
         Me.Label4.Text = "Mes:"
         '
-        'GroupBox8
+        'gbHasta
         '
-        Me.GroupBox8.Controls.Add(Me.txtMesHasta)
-        Me.GroupBox8.Controls.Add(Me.txtAnioHasta)
-        Me.GroupBox8.Controls.Add(Me.Label5)
-        Me.GroupBox8.Controls.Add(Me.Label6)
-        Me.GroupBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox8.Location = New System.Drawing.Point(252, 5)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(230, 51)
-        Me.GroupBox8.TabIndex = 10
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Hasta"
+        Me.gbHasta.Controls.Add(Me.txtMesHasta)
+        Me.gbHasta.Controls.Add(Me.txtAnioHasta)
+        Me.gbHasta.Controls.Add(Me.Label5)
+        Me.gbHasta.Controls.Add(Me.Label6)
+        Me.gbHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
+        Me.gbHasta.Location = New System.Drawing.Point(358, 11)
+        Me.gbHasta.Name = "gbHasta"
+        Me.gbHasta.Size = New System.Drawing.Size(230, 51)
+        Me.gbHasta.TabIndex = 10
+        Me.gbHasta.TabStop = False
+        Me.gbHasta.Text = "Hasta"
         '
         'txtMesHasta
         '
@@ -609,7 +617,7 @@ Partial Class ComparacionesMensualesValorUnico
         'PanelSeleccionAnios
         '
         Me.PanelSeleccionAnios.Controls.Add(Me.GroupBox1)
-        Me.PanelSeleccionAnios.Location = New System.Drawing.Point(166, 75)
+        Me.PanelSeleccionAnios.Location = New System.Drawing.Point(176, 172)
         Me.PanelSeleccionAnios.Name = "PanelSeleccionAnios"
         Me.PanelSeleccionAnios.Size = New System.Drawing.Size(294, 214)
         Me.PanelSeleccionAnios.TabIndex = 11
@@ -646,14 +654,93 @@ Partial Class ComparacionesMensualesValorUnico
         Me.clbAniosAComparar.Size = New System.Drawing.Size(218, 118)
         Me.clbAniosAComparar.TabIndex = 0
         '
+        'GroupBox9
+        '
+        Me.GroupBox9.Controls.Add(Me.rbDiaria)
+        Me.GroupBox9.Controls.Add(Me.rbMenusal)
+        Me.GroupBox9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.GroupBox9.Location = New System.Drawing.Point(5, 11)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(108, 108)
+        Me.GroupBox9.TabIndex = 12
+        Me.GroupBox9.TabStop = False
+        Me.GroupBox9.Text = "Comparación"
+        '
+        'rbDiaria
+        '
+        Me.rbDiaria.AutoSize = True
+        Me.rbDiaria.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
+        Me.rbDiaria.Location = New System.Drawing.Point(13, 74)
+        Me.rbDiaria.Name = "rbDiaria"
+        Me.rbDiaria.Size = New System.Drawing.Size(64, 22)
+        Me.rbDiaria.TabIndex = 0
+        Me.rbDiaria.Text = "Diaria"
+        Me.rbDiaria.UseVisualStyleBackColor = True
+        '
+        'rbMenusal
+        '
+        Me.rbMenusal.AutoSize = True
+        Me.rbMenusal.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
+        Me.rbMenusal.Location = New System.Drawing.Point(13, 28)
+        Me.rbMenusal.Name = "rbMenusal"
+        Me.rbMenusal.Size = New System.Drawing.Size(82, 22)
+        Me.rbMenusal.TabIndex = 0
+        Me.rbMenusal.Text = "Mensual"
+        Me.rbMenusal.UseVisualStyleBackColor = True
+        '
+        'gbComparativoDiario
+        '
+        Me.gbComparativoDiario.Controls.Add(Me.txtFechaDiaria)
+        Me.gbComparativoDiario.Controls.Add(Me.Label10)
+        Me.gbComparativoDiario.Location = New System.Drawing.Point(119, 67)
+        Me.gbComparativoDiario.Name = "gbComparativoDiario"
+        Me.gbComparativoDiario.Size = New System.Drawing.Size(228, 52)
+        Me.gbComparativoDiario.TabIndex = 13
+        Me.gbComparativoDiario.TabStop = False
+        Me.gbComparativoDiario.Text = "Comparativo Diario"
+        '
+        'txtFechaDiaria
+        '
+        Me.txtFechaDiaria.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
+        Me.txtFechaDiaria.Location = New System.Drawing.Point(75, 19)
+        Me.txtFechaDiaria.Mask = "00/00/0000"
+        Me.txtFechaDiaria.Name = "txtFechaDiaria"
+        Me.txtFechaDiaria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaDiaria.Size = New System.Drawing.Size(102, 24)
+        Me.txtFechaDiaria.TabIndex = 9
+        Me.txtFechaDiaria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
+        Me.Label10.Location = New System.Drawing.Point(39, 21)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(34, 18)
+        Me.Label10.TabIndex = 6
+        Me.Label10.Text = "Dia:"
+        '
+        'Button3
+        '
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
+        Me.Button3.Location = New System.Drawing.Point(12, 333)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(153, 38)
+        Me.Button3.TabIndex = 14
+        Me.Button3.Text = "POblar"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(626, 365)
+        Me.ClientSize = New System.Drawing.Size(647, 558)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.PanelSeleccionAnios)
-        Me.Controls.Add(Me.GroupBox8)
-        Me.Controls.Add(Me.GroupBox7)
+        Me.Controls.Add(Me.gbComparativoDiario)
+        Me.Controls.Add(Me.GroupBox9)
+        Me.Controls.Add(Me.gbHasta)
+        Me.Controls.Add(Me.gbDesde)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
@@ -677,12 +764,16 @@ Partial Class ComparacionesMensualesValorUnico
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlAnios.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
+        Me.gbDesde.ResumeLayout(False)
+        Me.gbDesde.PerformLayout()
+        Me.gbHasta.ResumeLayout(False)
+        Me.gbHasta.PerformLayout()
         Me.PanelSeleccionAnios.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
+        Me.gbComparativoDiario.ResumeLayout(False)
+        Me.gbComparativoDiario.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -722,10 +813,10 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckAnios As System.Windows.Forms.CheckedListBox
     Friend WithEvents btnSeleccionarAnios As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents gbDesde As System.Windows.Forms.GroupBox
     Friend WithEvents txtMesDesde As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
+    Friend WithEvents gbHasta As System.Windows.Forms.GroupBox
     Friend WithEvents txtMesHasta As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtAnioHasta As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -736,4 +827,11 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents clbAniosAComparar As System.Windows.Forms.CheckedListBox
+    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
+    Friend WithEvents rbDiaria As System.Windows.Forms.RadioButton
+    Friend WithEvents rbMenusal As System.Windows.Forms.RadioButton
+    Friend WithEvents gbComparativoDiario As System.Windows.Forms.GroupBox
+    Friend WithEvents txtFechaDiaria As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class
