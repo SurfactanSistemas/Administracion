@@ -4769,6 +4769,7 @@ Public Class Pagos
                 If Val(.Cells(5).Value) <> 0 Then
 
                     WCredito(Lugar, 4) = .Cells(5).Value
+
                     Select Case Val(.Cells(0).Value)
                         Case 2
                             WCredito(Lugar, 1) = "999999"
@@ -4780,7 +4781,9 @@ Public Class Pagos
                             WCredito(Lugar, 1) = WCtaEfectivo
                     End Select
 
-                    If Val(.Cells(0).Value) <> 3 Or Val(txtProveedor.Text) = 0 Then
+                    If Val(.Cells(0).Value) = 3 Then
+                        SumaTercero = SumaTercero + Val(Proceso.formatonumerico(.Cells(5).Value))
+                    ElseIf Val(.Cells(0).Value) <> 3 Or Val(txtProveedor.Text) = 0 Then
 
                         WImpre2(Impre2, 1) = .Cells(1).Value
                         WImpre2(Impre2, 2) = .Cells(4).Value
@@ -4792,8 +4795,7 @@ Public Class Pagos
                         WCredito(Lugar, 4) = .Cells(5).Value
 
                         Impre2 = Impre2 + 1
-                    ElseIf Val(.Cells(0).Value) = 3 Then
-                        SumaTercero = SumaTercero + Val(Proceso.formatonumerico(.Cells(5).Value))
+
                     End If
 
                     Lugar = Lugar + 1
