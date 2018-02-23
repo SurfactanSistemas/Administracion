@@ -89,8 +89,8 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnCambio = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnCambio = New System.Windows.Forms.Button()
         Me.lblCargando = New Administracion.CustomLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -509,18 +509,6 @@ Partial Class MenuPrincipal
         Me.FinDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
         Me.FinDelSistemaToolStripMenuItem.Text = "Fin del Sistema"
         '
-        'btnCambio
-        '
-        Me.btnCambio.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCambio.Location = New System.Drawing.Point(329, 239)
-        Me.btnCambio.Name = "btnCambio"
-        Me.btnCambio.Size = New System.Drawing.Size(157, 46)
-        Me.btnCambio.TabIndex = 1
-        Me.btnCambio.Text = "Cambio de Empresa"
-        Me.btnCambio.UseVisualStyleBackColor = True
-        '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 3
@@ -537,6 +525,18 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(817, 526)
         Me.TableLayoutPanel1.TabIndex = 3
+        '
+        'btnCambio
+        '
+        Me.btnCambio.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCambio.Location = New System.Drawing.Point(329, 239)
+        Me.btnCambio.Name = "btnCambio"
+        Me.btnCambio.Size = New System.Drawing.Size(157, 46)
+        Me.btnCambio.TabIndex = 1
+        Me.btnCambio.Text = "Cambio de Empresa"
+        Me.btnCambio.UseVisualStyleBackColor = True
         '
         'lblCargando
         '

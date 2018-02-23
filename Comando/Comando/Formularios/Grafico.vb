@@ -1103,6 +1103,7 @@ Public Class Grafico
         Dim WCampo = ""
         Dim WCampos = ""
         Dim WValores = ""
+        Dim aux As String = ""
         Dim WRow() As DataRow
         Dim WTabla As DataTable
         Dim WLineaDes = ""
@@ -1174,7 +1175,10 @@ Public Class Grafico
                     For x = 1 To 12
 
                         WCampos &= WCampo & x & ","
-                        WValores &= Helper.formatonumerico(WRow(j).Item("Valor" & x)) & ","
+
+                        aux = IIf(IsDBNull(WRow(j).Item("Valor" & x)), "0", WRow(j).Item("Valor" & x))
+
+                        WValores &= Helper.formatonumerico(aux) & ","
 
                     Next
 

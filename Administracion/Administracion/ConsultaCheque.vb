@@ -117,7 +117,8 @@ Public Class ConsultaCheque
         SQLConnector.conexionSql(cn, cm)
 
         Try
-            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, d.Proveedor, b.Nombre, d.Observaciones FROM Pagos as d, Proveedor as b Where d.Proveedor = b.Proveedor and Tiporeg = '2' and (Tipo2 = '3' Or Tipo2= '03') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') Order by FechaOrd2"
+            'cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, d.Proveedor, b.Nombre, d.Observaciones FROM Pagos as d, Proveedor as b Where d.Proveedor = b.Proveedor and Tiporeg = '2' and (Tipo2 = '3' Or Tipo2= '03') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') Order by FechaOrd2"
+            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, isnull(b.Proveedor, '') as Proveedor, isnull(b.Nombre, '') as Nombre, d.Observaciones FROM Pagos as d FULL OUTER JOIN Proveedor as b ON b.Proveedor = d.Proveedor  Where d.Tiporeg = '2' and (d.Tipo2 = '3' Or d.Tipo2= '03') and d.Numero2 LIKE '%" & cheque & "' Order by FechaOrd2"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then

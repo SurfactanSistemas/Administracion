@@ -5402,7 +5402,7 @@ Public Class Pagos
                 WPunto = .Cells(2).Value
                 WNumero = .Cells(3).Value
 
-                If Trim(WTipo) = "" Then : Exit For : End If
+                'If Trim(WTipo) = "" Then : Exit For : End If
 
                 ZRechazado = 0
                 ZNroInterno = "0"
@@ -6842,7 +6842,7 @@ Public Class Pagos
                 _RecalcularIBCABA()
             End If
 
-            'sumarImportes()
+            sumarImportes()
         End If
 
     End Sub
@@ -6854,6 +6854,7 @@ Public Class Pagos
         acumCaba = 0.0
 
         If Val(WPorceIbCaba) <> 0 And Val(WTipoIbCaba) <> 2 Then
+
             For Each row As DataGridViewRow In gridPagos.Rows
                 With row
                     If Trim(.Cells(4).Value) <> "" Then
@@ -6868,6 +6869,7 @@ Public Class Pagos
                     End If
                 End With
             Next
+
         End If
 
         txtIBCiudad.Text = _NormalizarNumero(acumCaba)

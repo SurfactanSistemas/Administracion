@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Text.RegularExpressions
 
 Module Helper
 
@@ -623,5 +624,10 @@ Module Helper
                 Return ""
         End Select
 
+    End Function
+
+    Public Function ReplaceLastComma(ByVal s As String) As Object
+        Static re As New Regex("\s*,\s*([^,]*)$")
+        Return re.Replace(s, " y $1")
     End Function
 End Module
