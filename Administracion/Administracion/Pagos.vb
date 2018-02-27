@@ -6844,7 +6844,7 @@ Public Class Pagos
                 _RecalcularIBCABA()
             End If
 
-            sumarImportes()
+            'sumarImportes()
         End If
 
     End Sub
