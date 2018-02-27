@@ -1,7 +1,7 @@
 ﻿Imports ClasesCompartidas
 Imports System.IO
 
-Public Class ListadoIvaCompras
+Public Class ListadoIvaCompras ' AKA `Libro Iva Compras`.
 
 
     Private Sub ListadoIvaCompras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -96,7 +96,7 @@ Public Class ListadoIvaCompras
                                             row.Item(6), row.Item(7), row.Item(8),
                                             row.Item(9), row.Item(10), row.Item(11), row.Item(12),
                                             row.Item(13), row.Item(14), row.Item(15), row.Item(16), row.Item(17))
-
+            txtImpre = row.Item(18)
 
             txtGraba = "S"
 
@@ -113,14 +113,23 @@ Public Class ListadoIvaCompras
 
                 txtGraba = "N"
 
-                txtOrdFecha = ordenaFecha(CampoIvaComp.fecha)
+                txtOrdFecha = ordenaFecha(CampoIvaCompAdicional.fecha)
+
+                Select Case CampoIvaCompAdicional.tipo
+                    Case "NC", "C"
+                        txtImpre = "N/C"
+                    Case "ND", "D"
+                        txtImpre = "N/D"
+                    Case Else
+                        txtImpre = "FC"
+                End Select
 
                 SQLConnector.executeProcedure("alta_ListaIvaCompras", CampoIvaComp.NroInterno, CampoIvaComp.proveedor, CampoIvaCompAdicional.tipo,
                                                CampoIvaCompAdicional.letra, ceros(CampoIvaCompAdicional.punto, 4), ceros(CampoIvaCompAdicional.numero, 8),
                                                CampoIvaCompAdicional.fecha, CampoIvaComp.periodo,
                                                CampoIvaCompAdicional.neto, CampoIvaCompAdicional.iva21, CampoIvaCompAdicional.perceiva,
                                                CampoIvaCompAdicional.iva27, CampoIvaCompAdicional.iva105,
-                                               CampoIvaCompAdicional.perceib, CampoIvaCompAdicional.exento, CampoIvaCompAdicional.tipo,
+                                               CampoIvaCompAdicional.perceib, CampoIvaCompAdicional.exento, txtImpre,
                                                txtOrdFecha, txtTitulo, txtTituloII, CampoIvaCompAdicional.razon, CampoIvaCompAdicional.cuit)
 
             Next
@@ -133,18 +142,7 @@ Public Class ListadoIvaCompras
                 If CampoIvaComp.soloiva = 1 Then
                     varNeto = 0
                 End If
-
-                Select Case Val(CampoIvaComp.tipo)
-                    Case 1
-                        txtImpre = "FC"
-                    Case 2
-                        txtImpre = "N/D"
-                    Case Else
-                        txtImpre = "N/C"
-                End Select
-
-
-
+                
                 SQLConnector.executeProcedure("alta_ListaIvaCompras", CampoIvaComp.NroInterno, CampoIvaComp.proveedor, CampoIvaComp.tipo,
                                                CampoIvaComp.letra, CampoIvaComp.punto, CampoIvaComp.numero, CampoIvaComp.fecha, CampoIvaComp.periodo,
                                                varNeto, CampoIvaComp.iva21, CampoIvaComp.iva5, CampoIvaComp.iva27, CampoIvaComp.iva105,
@@ -178,5 +176,9 @@ Public Class ListadoIvaCompras
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         _Imprimir(Reporte.Imprimir)
+    End Sub
+
+    Private Sub ListadoIvaCompras_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesdeFecha.Focus()
     End Sub
 End Class
