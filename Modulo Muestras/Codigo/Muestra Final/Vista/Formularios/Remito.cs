@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ClassConexion;
 using System.Diagnostics;
+using System.IO;
 
 namespace Vista
 {
@@ -252,75 +253,110 @@ namespace Vista
         private void ImprimirHojasDSeguridad(string[,] HojasDeSeguridad)
         {
 
-            // Avisamos para que puedan sacar las hojas de remitos.
-            MessageBox.Show("Se van a imprimir las hojas de seguridad. Por favor, coloque hojas A4 para las misma.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            string desc = "";
-            string cod = "";
-
-            // Borramos el directorio en caso de que exista.
-            if (System.IO.Directory.Exists(@"C:\pdfprint"))
+            try
             {
 
-                System.IO.Directory.Delete(@"C:\pdfprint", true);
+                // Avisamos para que puedan sacar las hojas de remitos.
+                MessageBox.Show("Se van a imprimir las hojas de seguridad. Por favor, coloque hojas A4 para las misma.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                string desc = "";
+                string cod = "";
+
+                // Borramos el directorio en caso de que exista.
+                if (System.IO.Directory.Exists(@"C:\pdfprint"))
+                {
+
+                    System.IO.Directory.Delete(@"C:\pdfprint", true);
+
+                }
+
+                // Creamos el directorio donde alojaremos los pdf a imprimir.
+                System.IO.Directory.CreateDirectory(@"C:\pdfprint");
+
+                for (int i = 0; i < HojasDeSeguridad.GetLength(0); i++)
+                {
+                    // Formateamos la descripcion y el codigo segun sea el tipo.
+                    desc = HojasDeSeguridad[i, 0].Trim();
+                    cod = HojasDeSeguridad[i, 1].Trim();
+
+                    // Eliminamos los espacios y "/" del nombre del Producto.
+                    desc = desc.Replace(" ", "").Replace("/", "");
+
+                    string WRutaFds = "";
+                    string nom = "";
+
+                    //if (cod.StartsWith("PT") || cod.StartsWith("CO"))
+                    if (!cod.StartsWith("DY"))
+                    {
+                        // Eliminamos los "-".
+                        cod = cod.Replace("-", "");
+
+                        string temp = cod.Replace("PT", "");
+
+                        // Los 25000 (Farma), se guardan con el formato FDS25000100-NOMBREDELPRODUCTO PARTIDA
+                        if (temp.StartsWith("25"))
+                        {
+                            // Buscamos el archivo que coincida con el codigo de producto.
+                            foreach (string file in Directory.GetFiles(@"w:\impresion pdf\fds"))
+                            {
+                                if (file.Contains(temp))
+                                {
+                                    WRutaFds = file;
+                                    break;
+                                }
+                            }
+                        }
+                        else // En los demas casos, siguen el formato normal FDSNOMBREPRODUCTO06570100
+                        {
+                            WRutaFds = ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", desc + cod.Substring(2, cod.Length - 2));
+                        }
+
+                    }
+                    else // Los DY, siguen el siguiente formato FDSDY-600-101
+                    {
+                        string[] ZCod = cod.Split('-');
+
+                        // Eliminamos los ceros de mas que pudiesen estar presentes en el codigo intermedio. EJ: DY-00302-100 -> DY-302-100.
+                        ZCod[1] = int.Parse(ZCod[1]).ToString();
+
+                        cod = string.Join("-", ZCod);
+
+                        WRutaFds = ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", cod);
+                    }
+
+                    if (File.Exists(WRutaFds))
+                    {
+                        nom = Path.GetFileNameWithoutExtension(WRutaFds);
+
+                        File.Copy(WRutaFds, DESTINO_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom));
+
+                    }
+                    else
+                    {
+                        // Notificamos al usuario la NO existencia de alguna Hoja de Seguridad.
+                        MessageBox.Show("¡No existe FDS del " + HojasDeSeguridad[i, 0].Trim() + " (" + HojasDeSeguridad[i, 1].Trim() + ")!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+
+                // Imprimimos las hojas guardadas.
+
+                // Recorremos e imprimimos los archivos copiados a la carpeta "pdfprint"
+                foreach (string file in Directory.GetFiles(@"C:\pdfprint"))
+                {
+                    Process p = new Process();
+                    p.StartInfo = new ProcessStartInfo()
+                    {
+                        CreateNoWindow = true,
+                        Verb = "print",
+                        FileName = file //put the correct path here
+                    };
+                    p.Start();
+                }
 
             }
-
-            // Creamos el directorio donde alojaremos los pdf a imprimir.
-            System.IO.Directory.CreateDirectory(@"C:\pdfprint");
-
-            for (int i = 0; i < HojasDeSeguridad.GetLength(0); i++)
+            catch (Exception ex)
             {
-                // Formateamos la descripcion y el codigo segun sea el tipo.
-                desc = HojasDeSeguridad[i, 0].Trim();
-                cod = HojasDeSeguridad[i, 1].Trim();
-
-                // Eliminamos los espacios y "/" del nombre del Producto.
-                desc = desc.Replace(" ", "").Replace("/", "");
-
-                if (cod.StartsWith("PT") || cod.StartsWith("CO"))
-                {
-                    // Eliminamos los "-" y el prefijo "PT" del Código del Producto.
-                    cod = cod.Replace("-", "").Replace("PT", "");
-                }
-                else
-                {
-                    string[] ZCod = cod.Split('-');
-
-                    // Eliminamos los ceros de mas que pudiesen estar presentes en el codigo intermedio. EJ: DY-00302-100 -> DY-302-100.
-                    ZCod[1] = int.Parse(ZCod[1]).ToString();
-
-                    cod = string.Join("-", ZCod);
-                }
-
-                string nom = (cod.StartsWith("PT")) ? desc + cod : cod;
-
-                if (System.IO.File.Exists(ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom)))
-                {
-
-                    System.IO.File.Copy(ORIGEN_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom), DESTINO_HOJA_SEGURIDAD.Replace("#NOMBREPDF#", nom));
-
-                }
-                else
-                {
-                    // Notificamos al usuario la NO existencia de alguna Hoja de Seguridad.
-                    MessageBox.Show("¡No existe FDS del " + HojasDeSeguridad[i, 0].Trim() + " (" + HojasDeSeguridad[i, 1].Trim() + ")!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-
-            // Imprimimos las hojas guardadas.
-
-            // Recorremos e imprimimos los archivos copiados a la carpeta "pdfprint"
-            foreach (string file in System.IO.Directory.GetFiles(@"C:\pdfprint"))
-            {
-                Process p = new Process();
-                p.StartInfo = new ProcessStartInfo()
-                {
-                    CreateNoWindow = true,
-                    Verb = "print",
-                    FileName = file //put the correct path here
-                };
-                p.Start();
+                MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
         }
