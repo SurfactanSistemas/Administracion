@@ -275,7 +275,7 @@ Public Class Recibos
     End Sub
 
     Private Function _SumarDebitos() As Boolean
-        Dim _Paridad, _TipoCompo, _TotalUs As String
+        Dim _Paridad, _TipoCompo As String
         Dim _Error As Boolean = False
         lblTotalDebitos.Text = 0
         lblDolares.Text = 0
@@ -284,12 +284,11 @@ Public Class Recibos
 
             _Paridad = 0
             _TipoCompo = 0
-            _TotalUs = 0
 
             If Val(row.Cells(4).Value) <> 0 Then
 
                 Dim cn As SqlConnection = New SqlConnection()
-                Dim cm As SqlCommand = New SqlCommand("SELECT TotalUs, Paridad, TipoCompo FROM CtaCte WHERE clave = '" & row.Cells(0).Value & ceros(row.Cells(3).Value, 8) & "01'")
+                Dim cm As SqlCommand = New SqlCommand("SELECT Paridad, TipoCompo FROM CtaCte WHERE clave = '" & row.Cells(0).Value & ceros(row.Cells(3).Value, 8) & "01'")
                 Dim dr As SqlDataReader
 
                 SQLConnector.conexionSql(cn, cm)
@@ -306,8 +305,7 @@ Public Class Recibos
 
                             _Paridad = _NormalizarNumero(.Item("Paridad").ToString)
                             _TipoCompo = Val(IIf(IsDBNull(.Item("TipoCompo")), 0, .Item("TipoCompo")))
-                            _TotalUs = _NormalizarNumero(.Item("TotalUs").ToString)
-
+                            
                         End With
 
                     End If
@@ -332,7 +330,8 @@ Public Class Recibos
 
                     lblTotalDebitos.Text += Val(_NormalizarNumero(row.Cells(4).Value))
 
-                    If _TipoCompo <> 2 And _Paridad <> 0 Then
+                    'If _TipoCompo <> 2 And _Paridad <> 0 Then
+                    If _Paridad <> 0 Then
 
                         lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_NormalizarNumero(_Paridad)))
 
