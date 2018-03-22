@@ -50,8 +50,6 @@ Public Class CuentaCorrientePantalla
             
             For Each row As DataRow In tabla.Rows
 
-                Dim CamposCtaCtePrv As New CtaCteProveedoresDeuda(row.Item(0).ToString, row.Item(1).ToString, row.Item(2).ToString, row.Item(3).ToString, row.Item(4), row.Item(5), row.Item(6).ToString, row.Item(7).ToString, row.Item(8).ToString, row.Item(9).ToString)
-
                 GRilla.Rows.Add()
 
                 GRilla.Item("Tipo", WRenglon).Value = row.Item("Impre") 'CamposCtaCtePrv.Impre
@@ -77,7 +75,7 @@ Public Class CuentaCorrientePantalla
                 GRilla.Item("OrdVencimiento", WRenglon).Value = Proceso.ordenaFecha(row.Item("Vencimiento"))
 
                 WRenglon = WRenglon + 1
-                WSuma = WSuma + CamposCtaCtePrv.saldo
+                WSuma = WSuma + row.Item("Saldo") 'CamposCtaCtePrv.saldo
 
                 _NrosInternos.Add({row.Item("Numero"), row.Item("NroInterno")})
 
@@ -796,4 +794,5 @@ Public Class CuentaCorrientePantalla
         End If
 
     End Sub
+
 End Class
