@@ -250,7 +250,7 @@ namespace Vista
             }
         }
 
-        private void ImprimirHojasDSeguridad(string[,] HojasDeSeguridad)
+        private void ImprimirHojasDSeguridad(string[,] arrHojasDeSeguridad)
         {
 
             try
@@ -273,11 +273,11 @@ namespace Vista
                 // Creamos el directorio donde alojaremos los pdf a imprimir.
                 System.IO.Directory.CreateDirectory(@"C:\pdfprint");
 
-                for (int i = 0; i < HojasDeSeguridad.GetLength(0); i++)
+                for (int i = 0; i < arrHojasDeSeguridad.GetLength(0); i++)
                 {
                     // Formateamos la descripcion y el codigo segun sea el tipo.
-                    desc = HojasDeSeguridad[i, 0].Trim();
-                    cod = HojasDeSeguridad[i, 1].Trim();
+                    desc = arrHojasDeSeguridad[i, 0].Trim();
+                    cod = arrHojasDeSeguridad[i, 1].Trim();
 
                     // Eliminamos los espacios y "/" del nombre del Producto.
                     desc = desc.Replace(" ", "").Replace("/", "");
@@ -334,7 +334,7 @@ namespace Vista
                     else
                     {
                         // Notificamos al usuario la NO existencia de alguna Hoja de Seguridad.
-                        MessageBox.Show("¡No existe FDS del " + HojasDeSeguridad[i, 0].Trim() + " (" + HojasDeSeguridad[i, 1].Trim() + ")!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("¡No existe FDS del " + arrHojasDeSeguridad[i, 0].Trim() + " (" + arrHojasDeSeguridad[i, 1].Trim() + ")!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
 
