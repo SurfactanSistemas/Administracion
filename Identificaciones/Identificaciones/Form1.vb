@@ -435,7 +435,7 @@ Public Class Form1
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
         If Trim(txtNroDocumento.Text) = "" Or Trim(txtProveedor.Text) = "" Then Exit Sub
 
-        If MsgBox("¿Está seguro de que quiere ELIMINAR esta Identificación?", MsgBoxStyle.YesNo) = vbYesNo Then
+        If MsgBox("¿Está seguro de que quiere ELIMINAR esta Identificación?", MsgBoxStyle.YesNo) = vbNo Then
             txtNroDocumento.Focus()
             Exit Sub
         End If
@@ -630,43 +630,7 @@ Public Class Form1
         txtProveedor.Focus()
     End Sub
 
-    Private Sub _PermitirDrag(ByVal e As System.Windows.Forms.DragEventArgs)
-        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
-            e.Effect = DragDropEffects.Copy
-        End If
-    End Sub
-
-    Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
-        Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
-        Dim WExtensionesPermitidas = {".bmp", ".jpg", ".jpeg", ".png"}
-
-        If archivos.Length = 0 Then Exit Sub
-
-        Try
-
-            Dim extension = Path.GetExtension(archivos(0))
-
-            If Not WExtensionesPermitidas.Contains(extension) Then
-                Throw New Exception("Tipo de Archivo no permitido.")
-            End If
-
-            picFoto.Image = Image.FromFile(archivos(0))
-
-        Catch ex As Exception
-            MsgBox("No se pudo cargar la imagen. Motivo: " & ex.Message)
-        End Try
-
-    End Sub
-
-    Private Sub picFoto_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs)
-        _PermitirDrag(e)
-    End Sub
-
-    Private Sub picFoto_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs)
-        _ProcesarDragDeArchivo(e)
-    End Sub
-
-    Private Sub picFoto_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    Private Sub picFoto_MouseDoubleClick()
 
         Try
             With OpenFileDialog1
@@ -691,7 +655,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        picFoto_MouseDoubleClick(Nothing, Nothing)
+        picFoto_MouseDoubleClick()
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
