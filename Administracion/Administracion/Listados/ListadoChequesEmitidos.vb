@@ -129,7 +129,7 @@ Public Class ListadoChequesEmitidos
         txtDos = " and {Pagos.Importe2} <> 0 "
         txtTres = " and {Pagos.Banco2} in " + txtDesdeBanco.Text + " to " + txtHastaBanco.Text
         txtCuatro = " and {Pagos.Tipo2} =  " + x + "02" + x
-        txtCinco = " and {Pagos.Numero2} <>  " + x + "00000000" + x
+        txtCinco = "" '" and {Pagos.Numero2} <>  " + x + "00000000" + x
         txtFormula = txtUno + txtDos + txtTres + txtCuatro + txtCinco
 
 
