@@ -521,7 +521,7 @@ namespace Vista
 
                 default:
 
-                    throw new Exception("Tipo de Etiqueta Inválida.");
+                    throw new Exception("Tipo de Etiqueta Inválido.");
 
             }
         }
@@ -545,12 +545,16 @@ namespace Vista
 
                 case "Frasco": // Etiqueta P/Frascos
 
-                    // Por temas de diferencias en impresoras entre Toma
-                    return new EtiquetaFrasco();
+                    // Por temas de diferencias en impresoras entre Tomasek y el resto.
+                    //return new EtiquetaFrasco();  // Se reemplaza el formato de hoja A4 a Ejecutivo para que
+                                                    // en las impresoras no lance advertencias de que la hoja es mas
+                                                    // chica que la prederterminada entre impresion e impresion.
+                    
+                    return new EtiquetaFrascoDaniel();
 
                 default:
 
-                    throw new Exception("Tipo de Etiqueta Inválida.");
+                    throw new Exception("Tipo de Etiqueta Inválido.");
 
             }
         }

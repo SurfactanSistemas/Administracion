@@ -101,6 +101,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EtiquetaFrascoDaniel.cs">
+      <DependentUpon>EtiquetaFrascoDaniel.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="EtiquetaFrascoConMargenes.cs">
       <DependentUpon>EtiquetaFrascoConMargenes.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -241,6 +247,10 @@
       <DependentUpon>ReportImpre.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="EtiquetaFrascoDaniel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EtiquetaFrascoDaniel.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="EtiquetaFrascoConMargenes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EtiquetaFrascoConMargenes.cs</LastGenOutput>
