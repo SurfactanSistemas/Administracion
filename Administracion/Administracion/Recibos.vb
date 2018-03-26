@@ -3167,6 +3167,7 @@ Public Class Recibos
             .Cells(2).Value = ""
             .Cells(3).Value = _Banco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
         End With
+
         ' Buscamos si existe el cuit.
         _Cuit = _TraerNumeroCuit(_ClaveBanco & _Sucursal & _NumCta)
 

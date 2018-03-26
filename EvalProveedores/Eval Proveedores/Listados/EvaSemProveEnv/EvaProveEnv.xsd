@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="EvaProveEnv" targetNamespace="http://tempuri.org/EvaProveEnv.xsd" xmlns:mstns="http://tempuri.org/EvaProveEnv.xsd" xmlns="http://tempuri.org/EvaProveEnv.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="EvaProveEnv" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="EvaProveEnv" msprop:Generator_UserDSName="EvaProveEnv">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DsEvaProveEnv" msprop:Generator_TableClassName="DsEvaProveEnvDataTable" msprop:Generator_TableVarName="tableDsEvaProveEnv" msprop:Generator_TablePropName="DsEvaProveEnv" msprop:Generator_RowDeletingName="DsEvaProveEnvRowDeleting" msprop:Generator_RowChangingName="DsEvaProveEnvRowChanging" msprop:Generator_RowEvHandlerName="DsEvaProveEnvRowChangeEventHandler" msprop:Generator_RowDeletedName="DsEvaProveEnvRowDeleted" msprop:Generator_UserTableName="DsEvaProveEnv" msprop:Generator_RowChangedName="DsEvaProveEnvRowChanged" msprop:Generator_RowEvArgName="DsEvaProveEnvRowChangeEvent" msprop:Generator_RowClassName="DsEvaProveEnvRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Proveedor" msprop:Generator_ColumnVarNameInTable="columnProveedor" msprop:Generator_ColumnPropNameInRow="Proveedor" msprop:Generator_ColumnPropNameInTable="ProveedorColumn" msprop:Generator_UserColumnName="Proveedor" type="xs:string" minOccurs="0" />
+              <xs:element name="Items" msprop:Generator_ColumnVarNameInTable="columnItems" msprop:Generator_ColumnPropNameInRow="Items" msprop:Generator_ColumnPropNameInTable="ItemsColumn" msprop:Generator_UserColumnName="Items" type="xs:string" minOccurs="0" />
+              <xs:element name="Aprob" msprop:Generator_ColumnVarNameInTable="columnAprob" msprop:Generator_ColumnPropNameInRow="Aprob" msprop:Generator_ColumnPropNameInTable="AprobColumn" msprop:Generator_UserColumnName="Aprob" type="xs:string" minOccurs="0" />
+              <xs:element name="Desvio" msprop:Generator_ColumnVarNameInTable="columnDesvio" msprop:Generator_ColumnPropNameInRow="Desvio" msprop:Generator_ColumnPropNameInTable="DesvioColumn" msprop:Generator_UserColumnName="Desvio" type="xs:string" minOccurs="0" />
+              <xs:element name="Rechaz." msprop:Generator_ColumnVarNameInTable="_columnRechaz_" msprop:Generator_ColumnPropNameInRow="_Rechaz_" msprop:Generator_ColumnPropNameInTable="_Rechaz_Column" msprop:Generator_UserColumnName="Rechaz." type="xs:string" minOccurs="0" />
+              <xs:element name="Atraso" msprop:Generator_ColumnVarNameInTable="columnAtraso" msprop:Generator_ColumnPropNameInRow="Atraso" msprop:Generator_ColumnPropNameInTable="AtrasoColumn" msprop:Generator_UserColumnName="Atraso" type="xs:string" minOccurs="0" />
+              <xs:element name="Calidad" msprop:Generator_ColumnVarNameInTable="columnCalidad" msprop:Generator_ColumnPropNameInRow="Calidad" msprop:Generator_ColumnPropNameInTable="CalidadColumn" msprop:Generator_UserColumnName="Calidad" type="xs:string" minOccurs="0" />
+              <xs:element name="Entrega" msprop:Generator_ColumnVarNameInTable="columnEntrega" msprop:Generator_ColumnPropNameInRow="Entrega" msprop:Generator_ColumnPropNameInTable="EntregaColumn" msprop:Generator_UserColumnName="Entrega" type="xs:string" minOccurs="0" />
+              <xs:element name="Desde" msprop:Generator_ColumnVarNameInTable="columnDesde" msprop:Generator_ColumnPropNameInRow="Desde" msprop:Generator_ColumnPropNameInTable="DesdeColumn" msprop:Generator_UserColumnName="Desde" type="xs:string" minOccurs="0" />
+              <xs:element name="Hasta" msprop:Generator_ColumnVarNameInTable="columnHasta" msprop:Generator_ColumnPropNameInRow="Hasta" msprop:Generator_ColumnPropNameInTable="HastaColumn" msprop:Generator_UserColumnName="Hasta" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

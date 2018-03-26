@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSEvaSemProve" targetNamespace="http://tempuri.org/DSEvaSemProve.xsd" xmlns:mstns="http://tempuri.org/DSEvaSemProve.xsd" xmlns="http://tempuri.org/DSEvaSemProve.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSEvaSemProve" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSEvaSemProve" msprop:Generator_UserDSName="DSEvaSemProve">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DSEvaSemestral" msprop:Generator_TableClassName="DSEvaSemestralDataTable" msprop:Generator_TableVarName="tableDSEvaSemestral" msprop:Generator_TablePropName="DSEvaSemestral" msprop:Generator_RowDeletingName="DSEvaSemestralRowDeleting" msprop:Generator_RowChangingName="DSEvaSemestralRowChanging" msprop:Generator_RowEvHandlerName="DSEvaSemestralRowChangeEventHandler" msprop:Generator_RowDeletedName="DSEvaSemestralRowDeleted" msprop:Generator_UserTableName="DSEvaSemestral" msprop:Generator_RowChangedName="DSEvaSemestralRowChanged" msprop:Generator_RowEvArgName="DSEvaSemestralRowChangeEvent" msprop:Generator_RowClassName="DSEvaSemestralRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Proveedor" msprop:Generator_ColumnVarNameInTable="columnProveedor" msprop:Generator_ColumnPropNameInRow="Proveedor" msprop:Generator_ColumnPropNameInTable="ProveedorColumn" msprop:Generator_UserColumnName="Proveedor" type="xs:string" minOccurs="0" />
+              <xs:element name="Items" msprop:Generator_ColumnVarNameInTable="columnItems" msprop:Generator_ColumnPropNameInRow="Items" msprop:Generator_ColumnPropNameInTable="ItemsColumn" msprop:Generator_UserColumnName="Items" type="xs:string" minOccurs="0" />
+              <xs:element name="Aprobado" msprop:Generator_ColumnVarNameInTable="columnAprobado" msprop:Generator_ColumnPropNameInRow="Aprobado" msprop:Generator_ColumnPropNameInTable="AprobadoColumn" msprop:Generator_UserColumnName="Aprobado" type="xs:string" minOccurs="0" />
+              <xs:element name="Desviado" msprop:Generator_ColumnVarNameInTable="columnDesviado" msprop:Generator_ColumnPropNameInRow="Desviado" msprop:Generator_ColumnPropNameInTable="DesviadoColumn" msprop:Generator_UserColumnName="Desviado" type="xs:string" minOccurs="0" />
+              <xs:element name="Rechazado" msprop:Generator_ColumnVarNameInTable="columnRechazado" msprop:Generator_ColumnPropNameInRow="Rechazado" msprop:Generator_ColumnPropNameInTable="RechazadoColumn" msprop:Generator_UserColumnName="Rechazado" type="xs:string" minOccurs="0" />
+              <xs:element name="Certificado" msprop:Generator_ColumnVarNameInTable="columnCertificado" msprop:Generator_ColumnPropNameInRow="Certificado" msprop:Generator_ColumnPropNameInTable="CertificadoColumn" msprop:Generator_UserColumnName="Certificado" type="xs:string" minOccurs="0" />
+              <xs:element name="Enviado" msprop:Generator_ColumnVarNameInTable="columnEnviado" msprop:Generator_ColumnPropNameInRow="Enviado" msprop:Generator_ColumnPropNameInTable="EnviadoColumn" msprop:Generator_UserColumnName="Enviado" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0025_Cert" msprop:Generator_ColumnVarNameInTable="_column_Cert" msprop:Generator_ColumnPropNameInRow="__Cert" msprop:Generator_ColumnPropNameInTable="__CertColumn" msprop:Generator_UserColumnName="%Cert" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0025_Env" msprop:Generator_ColumnVarNameInTable="_column_Env" msprop:Generator_ColumnPropNameInRow="__Env" msprop:Generator_ColumnPropNameInTable="__EnvColumn" msprop:Generator_UserColumnName="%Env" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0025_Total" msprop:Generator_ColumnVarNameInTable="_column_Total" msprop:Generator_ColumnPropNameInRow="__Total" msprop:Generator_ColumnPropNameInTable="__TotalColumn" msprop:Generator_UserColumnName="%Total" type="xs:string" minOccurs="0" />
+              <xs:element name="Atraso" msprop:Generator_ColumnVarNameInTable="columnAtraso" msprop:Generator_ColumnPropNameInRow="Atraso" msprop:Generator_ColumnPropNameInTable="AtrasoColumn" msprop:Generator_UserColumnName="Atraso" type="xs:string" minOccurs="0" />
+              <xs:element name="Calidad" msprop:Generator_ColumnVarNameInTable="columnCalidad" msprop:Generator_ColumnPropNameInRow="Calidad" msprop:Generator_ColumnPropNameInTable="CalidadColumn" msprop:Generator_UserColumnName="Calidad" type="xs:string" minOccurs="0" />
+              <xs:element name="Entrega" msprop:Generator_ColumnVarNameInTable="columnEntrega" msprop:Generator_ColumnPropNameInRow="Entrega" msprop:Generator_ColumnPropNameInTable="EntregaColumn" msprop:Generator_UserColumnName="Entrega" type="xs:string" minOccurs="0" />
+              <xs:element name="Desde" msprop:Generator_ColumnVarNameInTable="columnDesde" msprop:Generator_ColumnPropNameInRow="Desde" msprop:Generator_ColumnPropNameInTable="DesdeColumn" msprop:Generator_UserColumnName="Desde" type="xs:string" minOccurs="0" />
+              <xs:element name="Hasta" msprop:Generator_ColumnVarNameInTable="columnHasta" msprop:Generator_ColumnPropNameInRow="Hasta" msprop:Generator_ColumnPropNameInTable="HastaColumn" msprop:Generator_UserColumnName="Hasta" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
