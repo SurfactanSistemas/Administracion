@@ -19,7 +19,7 @@ Public Class ConsultaInformacionPersonal
 
         ' Posicionamos en Orden y mostramos la primer pestaña.
         TabControl1.SelectedIndex = 0
-        txtOrden.Focus()
+        txtDni.Focus()
 
     End Sub
 
@@ -29,7 +29,7 @@ Public Class ConsultaInformacionPersonal
             _txt.Text = ""
         Next
 
-        For Each _m As MaskedTextBox In {txtOrden, txtCliente, txtFecha, txtFechaComprometida}
+        For Each _m As MaskedTextBox In {}
             _m.Clear()
         Next
 
@@ -46,7 +46,10 @@ Public Class ConsultaInformacionPersonal
     End Function
 
     Private Sub IngresoOrdenTrabajo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        txtOrden.Focus()
+        txtDni.Focus
     End Sub
 
+Private Sub TabPage3_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles TabPage3.Click
+
+End Sub
 End Class
