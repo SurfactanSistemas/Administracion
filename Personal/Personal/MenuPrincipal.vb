@@ -22,7 +22,6 @@ Public Class MenuPrincipal
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Conexion.EmpresaDeTrabajo = "SURFACTAN"
-        Me.ConsultaDeInformacionPersonalToolStripMenuItem.PerformClick
 
     End Sub
 
@@ -37,13 +36,9 @@ Public Class MenuPrincipal
 
     Private Sub ConsultaDeInformacionPersonalToolStripMenuItem_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles ConsultaDeInformacionPersonalToolStripMenuItem.Click
 
-        Me.Visible = False
-
         With ConsultaInformacionPersonal
-            .ShowDialog
+            .Show
         End With
-
-        Me.Close
 
     End Sub
 End Class
