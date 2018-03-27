@@ -21,7 +21,7 @@ Public Class MenuPrincipal
 
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Conexion.EmpresaDeTrabajo = "SURFACTAN"
+        Conexion.EmpresaDeTrabajo = "SurfactanSA"
 
     End Sub
 
