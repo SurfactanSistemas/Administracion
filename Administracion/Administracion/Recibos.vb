@@ -4733,7 +4733,7 @@ Public Class Recibos
                     Case Is < 7
                         txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2018"
                     Case Else
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2019"
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2018"
                 End Select
 
             End If
