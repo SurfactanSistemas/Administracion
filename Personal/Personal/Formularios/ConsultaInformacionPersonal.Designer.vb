@@ -67,11 +67,6 @@ Partial Class ConsultaInformacionPersonal
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.dgvHijos = New System.Windows.Forms.DataGridView()
-        Me.NombreHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ApellidoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DniHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EdadHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FechaNacimientoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.txtFechaCasamiento = New System.Windows.Forms.MaskedTextBox()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -85,10 +80,6 @@ Partial Class ConsultaInformacionPersonal
         Me.Label15 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvIndumentaria = New System.Windows.Forms.DataGridView()
-        Me.Indumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Talle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesIndumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TipoInd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmbUbicacion = New System.Windows.Forms.ComboBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.txtLegajo = New System.Windows.Forms.TextBox()
@@ -101,15 +92,25 @@ Partial Class ConsultaInformacionPersonal
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.dgvEducacion = New System.Windows.Forms.DataGridView()
-        Me.TipoFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TituloFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnConsultas = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.NombreHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ApellidoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DniHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EdadHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaNacimientoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Indumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Talle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesIndumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoInd = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TituloFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -353,7 +354,7 @@ Partial Class ConsultaInformacionPersonal
         'txtDni
         '
         Me.txtDni.Location = New System.Drawing.Point(195, 17)
-        Me.txtDni.MaxLength = 50
+        Me.txtDni.MaxLength = 8
         Me.txtDni.Name = "txtDni"
         Me.txtDni.Size = New System.Drawing.Size(92, 20)
         Me.txtDni.TabIndex = 7
@@ -384,15 +385,15 @@ Partial Class ConsultaInformacionPersonal
         'txtAclaracion
         '
         Me.txtAclaracion.Location = New System.Drawing.Point(140, 93)
-        Me.txtAclaracion.MaxLength = 50
+        Me.txtAclaracion.MaxLength = 100
         Me.txtAclaracion.Name = "txtAclaracion"
         Me.txtAclaracion.Size = New System.Drawing.Size(491, 20)
         Me.txtAclaracion.TabIndex = 13
         '
         'txtLocalidad
         '
-        Me.txtLocalidad.Location = New System.Drawing.Point(395, 55)
-        Me.txtLocalidad.MaxLength = 50
+        Me.txtLocalidad.Location = New System.Drawing.Point(505, 58)
+        Me.txtLocalidad.MaxLength = 20
         Me.txtLocalidad.Name = "txtLocalidad"
         Me.txtLocalidad.Size = New System.Drawing.Size(126, 20)
         Me.txtLocalidad.TabIndex = 13
@@ -400,26 +401,26 @@ Partial Class ConsultaInformacionPersonal
         '
         'txtCodPostal
         '
-        Me.txtCodPostal.Location = New System.Drawing.Point(250, 55)
-        Me.txtCodPostal.MaxLength = 50
+        Me.txtCodPostal.Location = New System.Drawing.Point(342, 58)
+        Me.txtCodPostal.MaxLength = 8
         Me.txtCodPostal.Name = "txtCodPostal"
-        Me.txtCodPostal.Size = New System.Drawing.Size(58, 20)
+        Me.txtCodPostal.Size = New System.Drawing.Size(76, 20)
         Me.txtCodPostal.TabIndex = 13
         Me.txtCodPostal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDpto
         '
-        Me.txtDpto.Location = New System.Drawing.Point(84, 55)
-        Me.txtDpto.MaxLength = 50
+        Me.txtDpto.Location = New System.Drawing.Point(84, 58)
+        Me.txtDpto.MaxLength = 15
         Me.txtDpto.Name = "txtDpto"
-        Me.txtDpto.Size = New System.Drawing.Size(58, 20)
+        Me.txtDpto.Size = New System.Drawing.Size(146, 20)
         Me.txtDpto.TabIndex = 13
         Me.txtDpto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtNumero
         '
         Me.txtNumero.Location = New System.Drawing.Point(563, 26)
-        Me.txtNumero.MaxLength = 50
+        Me.txtNumero.MaxLength = 6
         Me.txtNumero.Name = "txtNumero"
         Me.txtNumero.Size = New System.Drawing.Size(68, 20)
         Me.txtNumero.TabIndex = 13
@@ -428,7 +429,7 @@ Partial Class ConsultaInformacionPersonal
         'txtCalle
         '
         Me.txtCalle.Location = New System.Drawing.Point(84, 26)
-        Me.txtCalle.MaxLength = 50
+        Me.txtCalle.MaxLength = 100
         Me.txtCalle.Name = "txtCalle"
         Me.txtCalle.Size = New System.Drawing.Size(389, 20)
         Me.txtCalle.TabIndex = 13
@@ -449,7 +450,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label12.Location = New System.Drawing.Point(319, 56)
+        Me.Label12.Location = New System.Drawing.Point(429, 59)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(70, 18)
         Me.Label12.TabIndex = 9
@@ -460,7 +461,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(148, 56)
+        Me.Label11.Location = New System.Drawing.Point(240, 59)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(96, 18)
         Me.Label11.TabIndex = 7
@@ -471,7 +472,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label10.Location = New System.Drawing.Point(31, 56)
+        Me.Label10.Location = New System.Drawing.Point(31, 59)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(42, 18)
         Me.Label10.TabIndex = 5
@@ -572,7 +573,7 @@ Partial Class ConsultaInformacionPersonal
         Me.txtFechaIngreso.Name = "txtFechaIngreso"
         Me.txtFechaIngreso.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFechaIngreso.ReadOnly = True
-        Me.txtFechaIngreso.Size = New System.Drawing.Size(78, 20)
+        Me.txtFechaIngreso.Size = New System.Drawing.Size(82, 20)
         Me.txtFechaIngreso.TabIndex = 2
         Me.txtFechaIngreso.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -636,33 +637,6 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvHijos.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText
         Me.dgvHijos.Size = New System.Drawing.Size(667, 143)
         Me.dgvHijos.TabIndex = 0
-        '
-        'NombreHijo
-        '
-        Me.NombreHijo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.NombreHijo.HeaderText = "Nombre"
-        Me.NombreHijo.Name = "NombreHijo"
-        '
-        'ApellidoHijo
-        '
-        Me.ApellidoHijo.HeaderText = "Apellido"
-        Me.ApellidoHijo.Name = "ApellidoHijo"
-        '
-        'DniHijo
-        '
-        Me.DniHijo.HeaderText = "DNI"
-        Me.DniHijo.Name = "DniHijo"
-        '
-        'EdadHijo
-        '
-        Me.EdadHijo.HeaderText = "Edad"
-        Me.EdadHijo.Name = "EdadHijo"
-        Me.EdadHijo.Width = 50
-        '
-        'FechaNacimientoHijo
-        '
-        Me.FechaNacimientoHijo.HeaderText = "Fecha Nac."
-        Me.FechaNacimientoHijo.Name = "FechaNacimientoHijo"
         '
         'GroupBox3
         '
@@ -729,7 +703,7 @@ Partial Class ConsultaInformacionPersonal
         'txtDniConyugue
         '
         Me.txtDniConyugue.Location = New System.Drawing.Point(316, 56)
-        Me.txtDniConyugue.MaxLength = 100
+        Me.txtDniConyugue.MaxLength = 8
         Me.txtDniConyugue.Name = "txtDniConyugue"
         Me.txtDniConyugue.Size = New System.Drawing.Size(103, 20)
         Me.txtDniConyugue.TabIndex = 7
@@ -749,7 +723,7 @@ Partial Class ConsultaInformacionPersonal
         'txtEdadConyugue
         '
         Me.txtEdadConyugue.Location = New System.Drawing.Point(173, 56)
-        Me.txtEdadConyugue.MaxLength = 100
+        Me.txtEdadConyugue.MaxLength = 3
         Me.txtEdadConyugue.Name = "txtEdadConyugue"
         Me.txtEdadConyugue.Size = New System.Drawing.Size(67, 20)
         Me.txtEdadConyugue.TabIndex = 5
@@ -769,7 +743,7 @@ Partial Class ConsultaInformacionPersonal
         'txtNombreCompletoConyugue
         '
         Me.txtNombreCompletoConyugue.Location = New System.Drawing.Point(173, 27)
-        Me.txtNombreCompletoConyugue.MaxLength = 100
+        Me.txtNombreCompletoConyugue.MaxLength = 50
         Me.txtNombreCompletoConyugue.Name = "txtNombreCompletoConyugue"
         Me.txtNombreCompletoConyugue.Size = New System.Drawing.Size(482, 20)
         Me.txtNombreCompletoConyugue.TabIndex = 3
@@ -820,34 +794,6 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvIndumentaria.RowTemplate.Height = 30
         Me.dgvIndumentaria.Size = New System.Drawing.Size(702, 213)
         Me.dgvIndumentaria.TabIndex = 9
-        '
-        'Indumentaria
-        '
-        Me.Indumentaria.HeaderText = "Indumentaria"
-        Me.Indumentaria.Name = "Indumentaria"
-        Me.Indumentaria.ReadOnly = True
-        Me.Indumentaria.Width = 180
-        '
-        'Talle
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talle.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Talle.HeaderText = "Talle"
-        Me.Talle.Name = "Talle"
-        Me.Talle.Width = 70
-        '
-        'ObservacionesIndumentaria
-        '
-        Me.ObservacionesIndumentaria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ObservacionesIndumentaria.HeaderText = "Observaciones"
-        Me.ObservacionesIndumentaria.Name = "ObservacionesIndumentaria"
-        '
-        'TipoInd
-        '
-        Me.TipoInd.HeaderText = "TipoInd"
-        Me.TipoInd.Name = "TipoInd"
-        Me.TipoInd.ReadOnly = True
-        Me.TipoInd.Visible = False
         '
         'cmbUbicacion
         '
@@ -970,7 +916,7 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvEducacion.AllowUserToDeleteRows = False
         Me.dgvEducacion.AllowUserToResizeRows = False
         Me.dgvEducacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEducacion.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TipoFormacion, Me.TituloFormacion, Me.ObservacionesFormacion})
+        Me.dgvEducacion.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TipoFormacion, Me.TituloFormacion, Me.ObservacionesFormacion, Me.IdFormacion})
         Me.dgvEducacion.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvEducacion.Location = New System.Drawing.Point(8, 11)
         Me.dgvEducacion.Name = "dgvEducacion"
@@ -979,27 +925,6 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvEducacion.RowTemplate.Height = 25
         Me.dgvEducacion.Size = New System.Drawing.Size(719, 315)
         Me.dgvEducacion.TabIndex = 0
-        '
-        'TipoFormacion
-        '
-        Me.TipoFormacion.HeaderText = "Tipo"
-        Me.TipoFormacion.Name = "TipoFormacion"
-        Me.TipoFormacion.ReadOnly = True
-        Me.TipoFormacion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.TipoFormacion.Width = 120
-        '
-        'TituloFormacion
-        '
-        Me.TituloFormacion.HeaderText = "Titulo"
-        Me.TituloFormacion.Name = "TituloFormacion"
-        Me.TituloFormacion.ReadOnly = True
-        Me.TituloFormacion.Width = 200
-        '
-        'ObservacionesFormacion
-        '
-        Me.ObservacionesFormacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ObservacionesFormacion.HeaderText = "Observaciones"
-        Me.ObservacionesFormacion.Name = "ObservacionesFormacion"
         '
         'Panel5
         '
@@ -1059,6 +984,96 @@ Partial Class ConsultaInformacionPersonal
         Me.btnAceptar.TabIndex = 0
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
+        '
+        'NombreHijo
+        '
+        Me.NombreHijo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.NombreHijo.HeaderText = "Nombre"
+        Me.NombreHijo.MaxInputLength = 25
+        Me.NombreHijo.Name = "NombreHijo"
+        '
+        'ApellidoHijo
+        '
+        Me.ApellidoHijo.HeaderText = "Apellido"
+        Me.ApellidoHijo.MaxInputLength = 15
+        Me.ApellidoHijo.Name = "ApellidoHijo"
+        '
+        'DniHijo
+        '
+        Me.DniHijo.HeaderText = "DNI"
+        Me.DniHijo.MaxInputLength = 8
+        Me.DniHijo.Name = "DniHijo"
+        '
+        'EdadHijo
+        '
+        Me.EdadHijo.HeaderText = "Edad"
+        Me.EdadHijo.MaxInputLength = 2
+        Me.EdadHijo.Name = "EdadHijo"
+        Me.EdadHijo.Width = 50
+        '
+        'FechaNacimientoHijo
+        '
+        Me.FechaNacimientoHijo.HeaderText = "Fecha Nac."
+        Me.FechaNacimientoHijo.MaxInputLength = 10
+        Me.FechaNacimientoHijo.Name = "FechaNacimientoHijo"
+        '
+        'Indumentaria
+        '
+        Me.Indumentaria.HeaderText = "Indumentaria"
+        Me.Indumentaria.Name = "Indumentaria"
+        Me.Indumentaria.ReadOnly = True
+        Me.Indumentaria.Width = 180
+        '
+        'Talle
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talle.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Talle.HeaderText = "Talle"
+        Me.Talle.MaxInputLength = 2
+        Me.Talle.Name = "Talle"
+        Me.Talle.Width = 70
+        '
+        'ObservacionesIndumentaria
+        '
+        Me.ObservacionesIndumentaria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ObservacionesIndumentaria.HeaderText = "Observaciones"
+        Me.ObservacionesIndumentaria.MaxInputLength = 100
+        Me.ObservacionesIndumentaria.Name = "ObservacionesIndumentaria"
+        '
+        'TipoInd
+        '
+        Me.TipoInd.HeaderText = "TipoInd"
+        Me.TipoInd.Name = "TipoInd"
+        Me.TipoInd.ReadOnly = True
+        Me.TipoInd.Visible = False
+        '
+        'TipoFormacion
+        '
+        Me.TipoFormacion.HeaderText = "Tipo"
+        Me.TipoFormacion.Name = "TipoFormacion"
+        Me.TipoFormacion.ReadOnly = True
+        Me.TipoFormacion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.TipoFormacion.Width = 120
+        '
+        'TituloFormacion
+        '
+        Me.TituloFormacion.HeaderText = "Titulo"
+        Me.TituloFormacion.Name = "TituloFormacion"
+        Me.TituloFormacion.ReadOnly = True
+        Me.TituloFormacion.Width = 200
+        '
+        'ObservacionesFormacion
+        '
+        Me.ObservacionesFormacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ObservacionesFormacion.HeaderText = "Observaciones"
+        Me.ObservacionesFormacion.MaxInputLength = 100
+        Me.ObservacionesFormacion.Name = "ObservacionesFormacion"
+        '
+        'IdFormacion
+        '
+        Me.IdFormacion.HeaderText = "IdFormacion"
+        Me.IdFormacion.Name = "IdFormacion"
+        Me.IdFormacion.Visible = False
         '
         'ConsultaInformacionPersonal
         '
@@ -1148,11 +1163,6 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents dgvHijos As System.Windows.Forms.DataGridView
-    Friend WithEvents NombreHijo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ApellidoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DniHijo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EdadHijo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FechaNacimientoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtFechaCasamiento As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents txtFechaNacimientoConyugue As System.Windows.Forms.MaskedTextBox
@@ -1180,6 +1190,11 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents txtCalle As System.Windows.Forms.TextBox
     Friend WithEvents txtLegajo As System.Windows.Forms.TextBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents NombreHijo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ApellidoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DniHijo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EdadHijo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FechaNacimientoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Indumentaria As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Talle As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ObservacionesIndumentaria As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1187,4 +1202,5 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents TipoFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TituloFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ObservacionesFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents IdFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

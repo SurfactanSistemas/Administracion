@@ -149,6 +149,7 @@ Public Class ConsultaInformacionPersonal
         Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Personal WHERE Dni = '" & txtDni.Text & "'")
         Dim dr As SqlDataReader
         Dim WFila As Short
+        Dim WObsPrimaria, WObsSecundaria, WObsTerciaria As String
 
         Try
 
@@ -204,7 +205,28 @@ Public Class ConsultaInformacionPersonal
                         dgvIndumentaria.Rows(WFila).Cells("TipoInd").Value = Str$(i)
 
                     Next
+
+                    ' Obtenemos los datos de los Estudios.
+                    WObsPrimaria = IIf(IsDBNull(.Item("ObsPrimaria")), "", .Item("ObsPrimaria"))
+                    WObsSecundaria = IIf(IsDBNull(.Item("ObsSecundaria")), "", .Item("ObsSecundaria"))
+                    WObsTerciaria = IIf(IsDBNull(.Item("ObsTerciaria")), "", .Item("ObsTerciaria"))
                     
+
+                    For Each row As DataGridViewRow In dgvEducacion.Rows
+
+                        Select Case val(row.Cells("IdFormacion").Value)
+                            Case 1 ' Primaria
+                                row.Cells("ObservacionesFormacion").Value = Trim(WObsPrimaria)
+                            Case 2 ' Secundaria
+                                row.Cells("ObservacionesFormacion").Value = Trim(WObsSecundaria)
+                            Case 3 ' Terciaria
+                                row.Cells("ObservacionesFormacion").Value = Trim(WObsTerciaria)
+                            Case Else
+                                row.Cells("ObservacionesFormacion").Value = ""
+                        End Select
+
+                    Next
+
                     for Each txt As TextBox In _CamposDeTexto
                         txt.Text = Trim(txt.Text)
                     Next
@@ -277,6 +299,7 @@ Public Class ConsultaInformacionPersonal
 
                                     dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Primaria"
                                     dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = "" 'IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "1" 'IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
 
                                 Case Else
                                     WEstado = ""
@@ -292,6 +315,7 @@ Public Class ConsultaInformacionPersonal
 
                                     dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Secundaria"
                                     dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = IIf(IsDBNull(.Item("EstadoII")), "", .Item("EstadoII"))
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "2"
 
                                 Case Else
                                     WEstado = ""
@@ -307,6 +331,7 @@ Public Class ConsultaInformacionPersonal
 
                                     dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Terciaria/Universitaria"
                                     dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII"))
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "3"
 
                                 Case Else
                                     WEstado = ""
