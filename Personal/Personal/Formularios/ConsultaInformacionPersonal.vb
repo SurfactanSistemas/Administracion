@@ -2,9 +2,6 @@
 
 Public Class ConsultaInformacionPersonal
 
-    Private WEnCCT = {"", "A1", "A2"}
-    Private WFueraCCT = {"", "Supervisor", "Jefe"}
-
     Private Sub IngresoOrdenTrabajo_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         btnLimpiar.PerformClick()
     End Sub
@@ -632,9 +629,9 @@ Public Class ConsultaInformacionPersonal
         
         Select Case cmbEstado.SelectedIndex
             Case 1
-                cmbCategoria.DataSource = WEnCCT
+                cmbCategoria.DataSource = Configuration.ConfigurationManager.AppSettings("CAT_EN_CCT").Split(",").ToArray()
             Case 2
-                cmbCategoria.DataSource = WFueraCCT
+                cmbCategoria.DataSource = Configuration.ConfigurationManager.AppSettings("CAT_FUERA_CCT").Split(",").ToArray()
             Case Else
                 cmbCategoria.DataSource = {"", "", "", ""}
         End Select
