@@ -85,10 +85,6 @@ Partial Class ConsultaInformacionPersonal
         Me.Label15 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvIndumentaria = New System.Windows.Forms.DataGridView()
-        Me.Indumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Talle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesIndumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TipoInd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmbUbicacion = New System.Windows.Forms.ComboBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.txtLegajo = New System.Windows.Forms.TextBox()
@@ -101,15 +97,19 @@ Partial Class ConsultaInformacionPersonal
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.dgvEducacion = New System.Windows.Forms.DataGridView()
-        Me.TipoFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TituloFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnConsultas = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.TipoFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TituloFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Indumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Talle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesIndumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoInd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -320,7 +320,7 @@ Partial Class ConsultaInformacionPersonal
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.ItemSize = New System.Drawing.Size(184, 30)
-        Me.TabControl1.Location = New System.Drawing.Point(38, 28)
+        Me.TabControl1.Location = New System.Drawing.Point(38, 18)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -394,7 +394,7 @@ Partial Class ConsultaInformacionPersonal
         Me.txtLocalidad.Location = New System.Drawing.Point(395, 55)
         Me.txtLocalidad.MaxLength = 50
         Me.txtLocalidad.Name = "txtLocalidad"
-        Me.txtLocalidad.Size = New System.Drawing.Size(58, 20)
+        Me.txtLocalidad.Size = New System.Drawing.Size(126, 20)
         Me.txtLocalidad.TabIndex = 13
         Me.txtLocalidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -811,39 +811,14 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvIndumentaria.AllowUserToResizeRows = False
         Me.dgvIndumentaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvIndumentaria.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Indumentaria, Me.Talle, Me.ObservacionesIndumentaria, Me.TipoInd})
+        Me.dgvIndumentaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvIndumentaria.Location = New System.Drawing.Point(16, 105)
         Me.dgvIndumentaria.Name = "dgvIndumentaria"
         Me.dgvIndumentaria.RowHeadersWidth = 15
-        Me.dgvIndumentaria.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvIndumentaria.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.dgvIndumentaria.RowTemplate.Height = 30
         Me.dgvIndumentaria.Size = New System.Drawing.Size(702, 213)
         Me.dgvIndumentaria.TabIndex = 9
-        '
-        'Indumentaria
-        '
-        Me.Indumentaria.HeaderText = "Indumentaria"
-        Me.Indumentaria.Name = "Indumentaria"
-        Me.Indumentaria.Width = 180
-        '
-        'Talle
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talle.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Talle.HeaderText = "Talle"
-        Me.Talle.Name = "Talle"
-        Me.Talle.Width = 70
-        '
-        'ObservacionesIndumentaria
-        '
-        Me.ObservacionesIndumentaria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ObservacionesIndumentaria.HeaderText = "Observaciones"
-        Me.ObservacionesIndumentaria.Name = "ObservacionesIndumentaria"
-        '
-        'TipoInd
-        '
-        Me.TipoInd.HeaderText = "TipoInd"
-        Me.TipoInd.Name = "TipoInd"
-        Me.TipoInd.Visible = False
         '
         'cmbUbicacion
         '
@@ -967,34 +942,14 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvEducacion.AllowUserToResizeRows = False
         Me.dgvEducacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvEducacion.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TipoFormacion, Me.TituloFormacion, Me.ObservacionesFormacion})
+        Me.dgvEducacion.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvEducacion.Location = New System.Drawing.Point(8, 11)
         Me.dgvEducacion.Name = "dgvEducacion"
-        Me.dgvEducacion.ReadOnly = True
         Me.dgvEducacion.RowHeadersWidth = 15
+        Me.dgvEducacion.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvEducacion.RowTemplate.Height = 25
         Me.dgvEducacion.Size = New System.Drawing.Size(719, 315)
         Me.dgvEducacion.TabIndex = 0
-        '
-        'TipoFormacion
-        '
-        Me.TipoFormacion.HeaderText = "Tipo"
-        Me.TipoFormacion.Name = "TipoFormacion"
-        Me.TipoFormacion.ReadOnly = True
-        Me.TipoFormacion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.TipoFormacion.Width = 120
-        '
-        'TituloFormacion
-        '
-        Me.TituloFormacion.HeaderText = "Titulo"
-        Me.TituloFormacion.Name = "TituloFormacion"
-        Me.TituloFormacion.ReadOnly = True
-        Me.TituloFormacion.Width = 200
-        '
-        'ObservacionesFormacion
-        '
-        Me.ObservacionesFormacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ObservacionesFormacion.HeaderText = "Observaciones"
-        Me.ObservacionesFormacion.Name = "ObservacionesFormacion"
-        Me.ObservacionesFormacion.ReadOnly = True
         '
         'Panel5
         '
@@ -1054,6 +1009,55 @@ Partial Class ConsultaInformacionPersonal
         Me.btnAceptar.TabIndex = 0
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
+        '
+        'TipoFormacion
+        '
+        Me.TipoFormacion.HeaderText = "Tipo"
+        Me.TipoFormacion.Name = "TipoFormacion"
+        Me.TipoFormacion.ReadOnly = True
+        Me.TipoFormacion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.TipoFormacion.Width = 120
+        '
+        'TituloFormacion
+        '
+        Me.TituloFormacion.HeaderText = "Titulo"
+        Me.TituloFormacion.Name = "TituloFormacion"
+        Me.TituloFormacion.ReadOnly = True
+        Me.TituloFormacion.Width = 200
+        '
+        'ObservacionesFormacion
+        '
+        Me.ObservacionesFormacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ObservacionesFormacion.HeaderText = "Observaciones"
+        Me.ObservacionesFormacion.Name = "ObservacionesFormacion"
+        '
+        'Indumentaria
+        '
+        Me.Indumentaria.HeaderText = "Indumentaria"
+        Me.Indumentaria.Name = "Indumentaria"
+        Me.Indumentaria.ReadOnly = True
+        Me.Indumentaria.Width = 180
+        '
+        'Talle
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talle.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Talle.HeaderText = "Talle"
+        Me.Talle.Name = "Talle"
+        Me.Talle.Width = 70
+        '
+        'ObservacionesIndumentaria
+        '
+        Me.ObservacionesIndumentaria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ObservacionesIndumentaria.HeaderText = "Observaciones"
+        Me.ObservacionesIndumentaria.Name = "ObservacionesIndumentaria"
+        '
+        'TipoInd
+        '
+        Me.TipoInd.HeaderText = "TipoInd"
+        Me.TipoInd.Name = "TipoInd"
+        Me.TipoInd.ReadOnly = True
+        Me.TipoInd.Visible = False
         '
         'ConsultaInformacionPersonal
         '
@@ -1157,10 +1161,6 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents txtEdadConyugue As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents dgvIndumentaria As System.Windows.Forms.DataGridView
-    Friend WithEvents Indumentaria As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Talle As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ObservacionesIndumentaria As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TipoInd As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cmbUbicacion As System.Windows.Forms.ComboBox
     Friend WithEvents Label22 As System.Windows.Forms.Label
     Friend WithEvents txtSueldoBruto As System.Windows.Forms.TextBox
@@ -1179,6 +1179,10 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents txtCalle As System.Windows.Forms.TextBox
     Friend WithEvents txtLegajo As System.Windows.Forms.TextBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents Indumentaria As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Talle As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ObservacionesIndumentaria As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoInd As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TipoFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TituloFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ObservacionesFormacion As System.Windows.Forms.DataGridViewTextBoxColumn

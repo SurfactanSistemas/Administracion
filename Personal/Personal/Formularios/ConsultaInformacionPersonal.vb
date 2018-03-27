@@ -27,11 +27,11 @@ Public Class ConsultaInformacionPersonal
         _txt.Text = ""
       Next
 
-      For Each _m As MaskedTextBox In {}
+      For Each _m As MaskedTextBox In {txtFechaCasamiento, txtFechaEgreso, txtFechaIngreso, txtFechaNacimiento, txtFechaNacimientoConyugue}
         _m.Clear()
       Next
 
-      For Each _c As ComboBox In {}
+      For Each _c As ComboBox In {cmbCategoria, cmbEstado, cmbUbicacion}
         _c.SelectedIndex = 0
       Next
 
@@ -39,7 +39,7 @@ Public Class ConsultaInformacionPersonal
     End Sub
 
     Private Function _CamposDeTexto() As TextBox()
-      Return {txtAyuda}
+      Return {txtDni, txtCalle, txtNumero, txtDpto, txtCodPostal, txtLocalidad, txtAclaracion, txtNombreCompletoConyugue, txtEdadConyugue, txtDniConyugue, txtSueldoBruto, txtAyuda}
     End Function
 
     Private Sub IngresoOrdenTrabajo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
@@ -73,12 +73,94 @@ Public Class ConsultaInformacionPersonal
             ' Busco los datos provenientes del Legajo.
             _CargarDatosLegajo()
 
-
+            ' Busco los Datos Personales.
+            _CargarDatosPersonales()
 
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
 
+    End Sub
+
+    Private Sub _CargarDatosPersonales()
+        
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Personal WHERE Dni = '" & txtDni.Text & "'")
+        Dim dr As SqlDataReader
+        Dim WFila As Short
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                With dr
+                    .Read
+
+                    txtFechaNacimiento.Text = IIf(IsDBNull(.Item("FechaNac")), "", .Item("FechaNac"))
+                    txtCalle.Text = IIf(IsDBNull(.Item("Calle")), "", .Item("Calle"))
+                    txtNumero.Text = IIf(IsDBNull(.Item("Numero")), "", .Item("Numero"))
+                    txtDpto.Text = IIf(IsDBNull(.Item("Dpto")), "", .Item("Dpto"))
+                    txtCodPostal.Text = IIf(IsDBNull(.Item("Postal")), "", .Item("Postal"))
+                    txtLocalidad.Text = IIf(IsDBNull(.Item("Localidad")), "", .Item("Localidad"))
+                    txtAclaracion.Text = IIf(IsDBNull(.Item("Aclaracion")), "", .Item("Aclaracion"))
+                    txtNombreCompletoConyugue.Text = IIf(IsDBNull(.Item("ConyugeNombre")), "", .Item("ConyugeNombre"))
+                    txtEdadConyugue.Text = IIf(IsDBNull(.Item("ConyugeEdad")), "", .Item("ConyugeEdad"))
+                    txtDniConyugue.Text = IIf(IsDBNull(.Item("ConyugeDni")), "", .Item("ConyugeDni"))
+                    txtFechaNacimientoConyugue.Text = IIf(IsDBNull(.Item("ConyugeFechaNac")), "", .Item("ConyugeFechaNac"))
+                    txtFechaCasamiento.Text = IIf(IsDBNull(.Item("FechaCasamiento")), "", .Item("FechaCasamiento"))
+                    cmbEstado.SelectedIndex = IIf(IsDBNull(.Item("Estado")), 0, .Item("Estado"))
+                    cmbCategoria.SelectedIndex = IIf(IsDBNull(.Item("Categoria")), 0, .Item("Categoria"))
+                    cmbUbicacion.SelectedIndex = IIf(IsDBNull(.Item("Ubicacion")), 0, .Item("Ubicacion"))
+                    txtSueldoBruto.Text = IIf(IsDBNull(.Item("SueldoBruto")), "0", .Item("SueldoBruto"))
+                    txtSueldoBruto.Text = Helper.formatonumerico(txtSueldoBruto.Text)
+
+                    ' Cargo Informacion de la Indumentaria.
+                    WFila = 0
+                    dgvIndumentaria.Rows.Clear
+
+                    ' Buzo: 1, Camisa: 2, Campera: 3, Pantalón: 4, Remera: 5, Zapato: 6
+                    Dim WIndumentaria As String() = {"", "Buzo", "Camisa", "Campera", "Pantalon", "Remera", "Zapato"}
+                    Dim WItem, WTalle, WObs As String
+
+                    For i = 1 to 6
+
+                        WItem = WIndumentaria(i)
+
+                        WFila = dgvIndumentaria.Rows.Add
+                        dgvIndumentaria.Rows(WFila).Cells("Indumentaria").Value = WItem
+
+                        WTalle = IIf(IsDBNull(.Item(WItem)), "", .Item(WItem))
+                        dgvIndumentaria.Rows(wfila).Cells("Talle").Value= Trim(WTalle)
+
+                        WObs = IIf(IsDBNull(.Item("Obs" & WItem)), "", .Item("Obs" & WItem))
+                        dgvIndumentaria.Rows(wfila).Cells("ObservacionesIndumentaria").Value= Trim(WObs)
+                        dgvIndumentaria.Rows(WFila).Cells("TipoInd").Value = Str$(i)
+
+                    Next
+                    
+                    for Each txt As TextBox In _CamposDeTexto
+                        txt.Text = Trim(txt.Text)
+                    Next
+
+                End With
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        
     End Sub
 
     Private Sub _CargarDatosLegajo()
@@ -153,7 +235,7 @@ Public Class ConsultaInformacionPersonal
                                     WEstado = ""
                             End Select
                             
-                            ' Grabamos Terciaria
+                            ' Grabamos Terciaria/Universitaria
                             WEstado = IIf(IsDBNull(.Item("EstaIII")), "", .Item("EstaIII"))
                             
                             Select Case Val(WEstado)
@@ -161,7 +243,7 @@ Public Class ConsultaInformacionPersonal
 
                                     WFilaFormacion = dgvEducacion.Rows.Add
 
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Terciaria"
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Terciaria/Universitaria"
                                     dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII"))
 
                                 Case Else
