@@ -2,6 +2,9 @@
 
 Public Class ConsultaInformacionPersonal
 
+    Private WEnCCT = {"", "A1", "A2"}
+    Private WFueraCCT = {"", "Supervisor", "Jefe"}
+
     Private Sub IngresoOrdenTrabajo_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         btnLimpiar.PerformClick()
     End Sub
@@ -78,6 +81,8 @@ Public Class ConsultaInformacionPersonal
 
             ' Cargo los datos de los Hijos
             _CargarDatosHijos()
+
+
 
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -569,49 +574,7 @@ Public Class ConsultaInformacionPersonal
         End If
         
     End Sub
-
-    Private Sub cmbEstado_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbEstado.KeyDown
-        
-        If e.KeyData = Keys.Enter Then
-	        'If Trim(cmbEstado.Text) = "" Then : Exit Sub : End If
-
-            With cmbCategoria
-                .DroppedDown=True
-                .Focus
-            End With
-
-        ElseIf e.KeyData = Keys.Escape Then
-            cmbEstado.SelectedIndex = 0
-        End If
-        
-    End Sub
-
-    Private Sub cmbEstado_TextChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles cmbEstado.TextChanged
-        With cmbCategoria
-            .DroppedDown=True
-            .Focus
-        End With
-    End Sub
-
-    Private Sub cmbCategoria_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCategoria.KeyDown
-        
-        If e.KeyData = Keys.Enter Then
-	        'If Trim(cmbEstado.Text) = "" Then : Exit Sub : End If
-            
-            txtSueldoBruto.Focus
-
-        ElseIf e.KeyData = Keys.Escape Then
-            cmbCategoria.SelectedIndex = 0
-        End If
-        
-    End Sub
-
-    Private Sub cmbCategoria_TextChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles cmbCategoria.TextChanged
-
-        txtSueldoBruto.Focus
-
-    End Sub
-
+    
     'Private Sub txtLegajo_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLegajo.KeyDown
         
     '    If e.KeyData = Keys.Enter Then
@@ -642,20 +605,7 @@ Public Class ConsultaInformacionPersonal
         End If
         
     End Sub
-
-    Private Sub cmbUbicacion_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbUbicacion.KeyDown
-        If e.KeyData = Keys.Enter Then
-	        'If Trim(cmbEstado.Text) = "" Then : Exit Sub : End If
-
-            TabControl1.SelectTab(3)
-
-            dgvEducacion.Focus
-
-        ElseIf e.KeyData = Keys.Escape Then
-            cmbUbicacion.SelectedIndex = 0
-        End If
-    End Sub
-
+    
     Private Sub TabControl1_SelectedIndexChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
         Select Case TabControl1.SelectedIndex
             Case 0
@@ -668,4 +618,31 @@ Public Class ConsultaInformacionPersonal
                 dgvEducacion.Focus
         End Select
     End Sub
+
+    Private Sub cmbEstado_DropDownClosed( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles cmbEstado.DropDownClosed
+        
+        With cmbCategoria
+            .DroppedDown=True
+            .Focus
+        End With
+
+    End Sub
+
+    Private Sub cmbEstado_SelectedIndexChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles cmbEstado.SelectedIndexChanged
+        
+        Select Case cmbEstado.SelectedIndex
+            Case 1
+                cmbCategoria.DataSource = WEnCCT
+            Case 2
+                cmbCategoria.DataSource = WFueraCCT
+            Case Else
+                cmbCategoria.DataSource = {"", "", "", ""}
+        End Select
+        
+    End Sub
+
+    Private Sub cmbCategoria_DropDownClosed( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles cmbCategoria.DropDownClosed
+        txtSueldoBruto.Focus
+    End Sub
+
 End Class
