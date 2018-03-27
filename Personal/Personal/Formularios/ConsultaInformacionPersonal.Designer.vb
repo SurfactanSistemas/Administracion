@@ -22,7 +22,7 @@ Partial Class ConsultaInformacionPersonal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -633,6 +633,7 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvHijos.Location = New System.Drawing.Point(6, 19)
         Me.dgvHijos.Name = "dgvHijos"
         Me.dgvHijos.RowHeadersWidth = 15
+        Me.dgvHijos.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText
         Me.dgvHijos.Size = New System.Drawing.Size(667, 143)
         Me.dgvHijos.TabIndex = 0
         '
@@ -1040,8 +1041,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'Talle
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talle.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talle.DefaultCellStyle = DataGridViewCellStyle1
         Me.Talle.HeaderText = "Talle"
         Me.Talle.Name = "Talle"
         Me.Talle.Width = 70

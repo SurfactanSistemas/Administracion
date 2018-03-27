@@ -76,10 +76,69 @@ Public Class ConsultaInformacionPersonal
             ' Busco los Datos Personales.
             _CargarDatosPersonales()
 
+            ' Cargo los datos de los Hijos
+            _CargarDatosHijos()
+
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
 
+    End Sub
+
+    Private Sub _CargarDatosHijos()
+        
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM PersonalHijos WHERE Dni = '" & txtDni.Text & "'")
+        Dim dr As SqlDataReader
+        Dim WNombre, WApellido, WDni, WEdad, WFechaNac As String
+        Dim WFila As Short
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            dgvHijos.Rows.Clear
+            WFila = 0
+
+            With dr
+                If .HasRows Then
+
+                    Do While .Read()
+
+                        WNombre = IIf(IsDBNull(.Item("Nombre")), "", .Item("Nombre"))
+                        WApellido = IIf(IsDBNull(.Item("Apellido")), "", .Item("Apellido"))
+                        WDni = IIf(IsDBNull(.Item("DniHijo")), "", .Item("DniHijo"))
+                        WEdad = IIf(IsDBNull(.Item("Edad")), "", .Item("Edad"))
+                        WFechaNac = IIf(IsDBNull(.Item("FechaNac")), "", .Item("FechaNac"))
+
+                        WFila = dgvHijos.Rows.Add
+
+                        dgvHijos.Rows(WFila).Cells("NombreHijo").Value = Trim(WNombre)
+                        dgvHijos.Rows(WFila).Cells("ApellidoHijo").Value = Trim(WApellido)
+                        dgvHijos.Rows(WFila).Cells("DniHijo").Value = Trim(WDni)
+                        dgvHijos.Rows(WFila).Cells("EdadHijo").Value = Trim(WEdad)
+                        dgvHijos.Rows(WFila).Cells("FechaNacimientoHijo").Value = Trim(WFechaNac)
+
+                    Loop
+
+                End If
+            End With
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        
     End Sub
 
     Private Sub _CargarDatosPersonales()
@@ -96,6 +155,8 @@ Public Class ConsultaInformacionPersonal
             cm.Connection = cn
 
             dr = cm.ExecuteReader()
+
+            dgvIndumentaria.Rows.Clear
 
             If dr.HasRows Then
                 With dr
@@ -121,8 +182,7 @@ Public Class ConsultaInformacionPersonal
 
                     ' Cargo Informacion de la Indumentaria.
                     WFila = 0
-                    dgvIndumentaria.Rows.Clear
-
+                    
                     ' Buzo: 1, Camisa: 2, Campera: 3, Pantalón: 4, Remera: 5, Zapato: 6
                     Dim WIndumentaria As String() = {"", "Buzo", "Camisa", "Campera", "Pantalon", "Remera", "Zapato"}
                     Dim WItem, WTalle, WObs As String
