@@ -84,9 +84,12 @@ Public Class ConsultaInformacionPersonal
     Private Sub _CargarDatosLegajo()
         
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo, FechaVersion, FIngreso, FEgreso, Descripcion FROM Legajo WHERE Dni = '" & txtDni.Text & "' AND Renglon = 1")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo, FechaVersion, FIngreso, FEgreso, Descripcion, " _
+                                              & " EstaI, EstaII, EstaIII, EstadoI, EstadoII, EstadoIII " _
+                                              & " FROM Legajo WHERE Dni = '" & txtDni.Text & "' AND Renglon = 1")
         Dim dr As SqlDataReader
-        Dim WLegajoActual, WLegajos, WAux, WFechaVersion, WFechaVersionOrd, WNombreCompleto, WFechaIngreso, WFechaEgreso As String
+        Dim WLegajoActual, WLegajos, WAux, WFechaVersion, WFechaVersionOrd, WNombreCompleto, WFechaIngreso, WFechaEgreso, WEstado As String
+        Dim WFilaFormacion As Short
 
         Try
 
@@ -111,11 +114,59 @@ Public Class ConsultaInformacionPersonal
                         WLegajos &= IIf(Trim(wlegajos) <> "", " - " & WLegajoActual, WLegajoActual)
 
                         If Val(WAux) > Val(WFechaVersionOrd) then
+
                             WFechaVersionOrd = WAux
 
                             WNombreCompleto = IIf(IsDBNull(.Item("Descripcion")), "", .Item("Descripcion"))
                             WFechaIngreso = IIf(IsDBNull(.Item("FIngreso")), "", .Item("FIngreso"))
                             WFechaEgreso = IIf(IsDBNull(.Item("FEgreso")), "", .Item("FEgreso"))
+
+                            dgvEducacion.Rows.Clear
+
+                            ' Grabamos Primaria.
+                            WEstado = IIf(IsDBNull(.Item("EstaI")), "", .Item("EstaI"))
+                            
+                            Select Case Val(WEstado)
+                                Case 1, 2, 8
+
+                                    WFilaFormacion = dgvEducacion.Rows.Add
+
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Primaria"
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = "" 'IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
+
+                                Case Else
+                                    WEstado = ""
+                            End Select
+
+                            ' Grabamos Secundaria
+                            WEstado = IIf(IsDBNull(.Item("EstaII")), "", .Item("EstaII"))
+                            
+                            Select Case Val(WEstado)
+                                Case 1, 2, 8
+
+                                    WFilaFormacion = dgvEducacion.Rows.Add
+
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Secundaria"
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = IIf(IsDBNull(.Item("EstadoII")), "", .Item("EstadoII"))
+
+                                Case Else
+                                    WEstado = ""
+                            End Select
+                            
+                            ' Grabamos Terciaria
+                            WEstado = IIf(IsDBNull(.Item("EstaIII")), "", .Item("EstaIII"))
+                            
+                            Select Case Val(WEstado)
+                                Case 1, 2, 8
+
+                                    WFilaFormacion = dgvEducacion.Rows.Add
+
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Terciaria"
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII"))
+
+                                Case Else
+                                    WEstado = ""
+                            End Select
 
                         End If
 
