@@ -22,7 +22,10 @@ Partial Class ConsultaInformacionPersonal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -66,6 +69,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.dgvHijos = New System.Windows.Forms.DataGridView()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.txtFechaCasamiento = New System.Windows.Forms.MaskedTextBox()
@@ -80,6 +84,10 @@ Partial Class ConsultaInformacionPersonal
         Me.Label15 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvIndumentaria = New System.Windows.Forms.DataGridView()
+        Me.Indumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Talle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesIndumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoInd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmbUbicacion = New System.Windows.Forms.ComboBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.txtLegajo = New System.Windows.Forms.TextBox()
@@ -92,6 +100,10 @@ Partial Class ConsultaInformacionPersonal
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.dgvEducacion = New System.Windows.Forms.DataGridView()
+        Me.TipoFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TituloFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnConsultas = New System.Windows.Forms.Button()
@@ -103,14 +115,6 @@ Partial Class ConsultaInformacionPersonal
         Me.DniHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EdadHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaNacimientoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Indumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Talle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesIndumentaria = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TipoInd = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TipoFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TituloFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -614,6 +618,7 @@ Partial Class ConsultaInformacionPersonal
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.txtFechaAux)
         Me.GroupBox4.Controls.Add(Me.dgvHijos)
         Me.GroupBox4.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox4.Location = New System.Drawing.Point(30, 151)
@@ -622,6 +627,18 @@ Partial Class ConsultaInformacionPersonal
         Me.GroupBox4.TabIndex = 4
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Hijo(s)"
+        '
+        'txtFechaAux
+        '
+        Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFechaAux.Location = New System.Drawing.Point(573, 88)
+        Me.txtFechaAux.Mask = "00/00/0000"
+        Me.txtFechaAux.Name = "txtFechaAux"
+        Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaAux.Size = New System.Drawing.Size(80, 13)
+        Me.txtFechaAux.TabIndex = 1
+        Me.txtFechaAux.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtFechaAux.Visible = False
         '
         'dgvHijos
         '
@@ -795,6 +812,36 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvIndumentaria.Size = New System.Drawing.Size(702, 213)
         Me.dgvIndumentaria.TabIndex = 9
         '
+        'Indumentaria
+        '
+        Me.Indumentaria.HeaderText = "Indumentaria"
+        Me.Indumentaria.Name = "Indumentaria"
+        Me.Indumentaria.ReadOnly = True
+        Me.Indumentaria.Width = 180
+        '
+        'Talle
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talle.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Talle.HeaderText = "Talle"
+        Me.Talle.MaxInputLength = 2
+        Me.Talle.Name = "Talle"
+        Me.Talle.Width = 70
+        '
+        'ObservacionesIndumentaria
+        '
+        Me.ObservacionesIndumentaria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ObservacionesIndumentaria.HeaderText = "Observaciones"
+        Me.ObservacionesIndumentaria.MaxInputLength = 100
+        Me.ObservacionesIndumentaria.Name = "ObservacionesIndumentaria"
+        '
+        'TipoInd
+        '
+        Me.TipoInd.HeaderText = "TipoInd"
+        Me.TipoInd.Name = "TipoInd"
+        Me.TipoInd.ReadOnly = True
+        Me.TipoInd.Visible = False
+        '
         'cmbUbicacion
         '
         Me.cmbUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -926,6 +973,34 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvEducacion.Size = New System.Drawing.Size(719, 315)
         Me.dgvEducacion.TabIndex = 0
         '
+        'TipoFormacion
+        '
+        Me.TipoFormacion.HeaderText = "Tipo"
+        Me.TipoFormacion.Name = "TipoFormacion"
+        Me.TipoFormacion.ReadOnly = True
+        Me.TipoFormacion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.TipoFormacion.Width = 120
+        '
+        'TituloFormacion
+        '
+        Me.TituloFormacion.HeaderText = "Titulo"
+        Me.TituloFormacion.Name = "TituloFormacion"
+        Me.TituloFormacion.ReadOnly = True
+        Me.TituloFormacion.Width = 200
+        '
+        'ObservacionesFormacion
+        '
+        Me.ObservacionesFormacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ObservacionesFormacion.HeaderText = "Observaciones"
+        Me.ObservacionesFormacion.MaxInputLength = 100
+        Me.ObservacionesFormacion.Name = "ObservacionesFormacion"
+        '
+        'IdFormacion
+        '
+        Me.IdFormacion.HeaderText = "IdFormacion"
+        Me.IdFormacion.Name = "IdFormacion"
+        Me.IdFormacion.Visible = False
+        '
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.btnCerrar)
@@ -1000,12 +1075,16 @@ Partial Class ConsultaInformacionPersonal
         '
         'DniHijo
         '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle1
         Me.DniHijo.HeaderText = "DNI"
         Me.DniHijo.MaxInputLength = 8
         Me.DniHijo.Name = "DniHijo"
         '
         'EdadHijo
         '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle2
         Me.EdadHijo.HeaderText = "Edad"
         Me.EdadHijo.MaxInputLength = 2
         Me.EdadHijo.Name = "EdadHijo"
@@ -1013,67 +1092,11 @@ Partial Class ConsultaInformacionPersonal
         '
         'FechaNacimientoHijo
         '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle3
         Me.FechaNacimientoHijo.HeaderText = "Fecha Nac."
         Me.FechaNacimientoHijo.MaxInputLength = 10
         Me.FechaNacimientoHijo.Name = "FechaNacimientoHijo"
-        '
-        'Indumentaria
-        '
-        Me.Indumentaria.HeaderText = "Indumentaria"
-        Me.Indumentaria.Name = "Indumentaria"
-        Me.Indumentaria.ReadOnly = True
-        Me.Indumentaria.Width = 180
-        '
-        'Talle
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talle.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Talle.HeaderText = "Talle"
-        Me.Talle.MaxInputLength = 2
-        Me.Talle.Name = "Talle"
-        Me.Talle.Width = 70
-        '
-        'ObservacionesIndumentaria
-        '
-        Me.ObservacionesIndumentaria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ObservacionesIndumentaria.HeaderText = "Observaciones"
-        Me.ObservacionesIndumentaria.MaxInputLength = 100
-        Me.ObservacionesIndumentaria.Name = "ObservacionesIndumentaria"
-        '
-        'TipoInd
-        '
-        Me.TipoInd.HeaderText = "TipoInd"
-        Me.TipoInd.Name = "TipoInd"
-        Me.TipoInd.ReadOnly = True
-        Me.TipoInd.Visible = False
-        '
-        'TipoFormacion
-        '
-        Me.TipoFormacion.HeaderText = "Tipo"
-        Me.TipoFormacion.Name = "TipoFormacion"
-        Me.TipoFormacion.ReadOnly = True
-        Me.TipoFormacion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.TipoFormacion.Width = 120
-        '
-        'TituloFormacion
-        '
-        Me.TituloFormacion.HeaderText = "Titulo"
-        Me.TituloFormacion.Name = "TituloFormacion"
-        Me.TituloFormacion.ReadOnly = True
-        Me.TituloFormacion.Width = 200
-        '
-        'ObservacionesFormacion
-        '
-        Me.ObservacionesFormacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ObservacionesFormacion.HeaderText = "Observaciones"
-        Me.ObservacionesFormacion.MaxInputLength = 100
-        Me.ObservacionesFormacion.Name = "ObservacionesFormacion"
-        '
-        'IdFormacion
-        '
-        Me.IdFormacion.HeaderText = "IdFormacion"
-        Me.IdFormacion.Name = "IdFormacion"
-        Me.IdFormacion.Visible = False
         '
         'ConsultaInformacionPersonal
         '
@@ -1103,6 +1126,7 @@ Partial Class ConsultaInformacionPersonal
         Me.GroupBox2.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         CType(Me.dgvHijos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
@@ -1190,11 +1214,6 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents txtCalle As System.Windows.Forms.TextBox
     Friend WithEvents txtLegajo As System.Windows.Forms.TextBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
-    Friend WithEvents NombreHijo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ApellidoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DniHijo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EdadHijo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FechaNacimientoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Indumentaria As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Talle As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ObservacionesIndumentaria As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1203,4 +1222,10 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents TituloFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ObservacionesFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents IdFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents NombreHijo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ApellidoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DniHijo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EdadHijo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FechaNacimientoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -1,6 +1,11 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class ConsultaInformacionPersonal
+    
+     Private Const YMARGEN = 1.5
+     Private Const XMARGEN = 3
+     Private WRow, Wcol As Integer
+    
     Private Sub IngresoOrdenTrabajo_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         btnLimpiar.PerformClick()
     End Sub
@@ -13,6 +18,8 @@ Public Class ConsultaInformacionPersonal
         ' Limpiamos los campos.
         _LimpiarCampos()
 
+        WRow = -1
+        Wcol = -1
         TabControl1.SelectedIndex = 0
         txtDni.Focus()
     End Sub
@@ -24,7 +31,7 @@ Public Class ConsultaInformacionPersonal
         Next
 
         For Each _m As MaskedTextBox In _
-            {txtFechaCasamiento, txtFechaEgreso, txtFechaIngreso, txtFechaNacimiento, txtFechaNacimientoConyugue}
+            {txtFechaCasamiento, txtFechaEgreso, txtFechaIngreso, txtFechaNacimiento, txtFechaNacimientoConyugue, txtFechaAux}
             _m.Clear()
         Next
 
@@ -47,6 +54,7 @@ Public Class ConsultaInformacionPersonal
             '.Add
         End With
 
+        txtFechaAux.Visible=False
         pnlConsulta.Visible = False
     End Sub
 
@@ -143,6 +151,8 @@ Public Class ConsultaInformacionPersonal
 
                 End If
             End With
+
+            dgvHijos.Rows.Add
 
         Catch ex As Exception
             Throw _
@@ -702,4 +712,438 @@ Public Class ConsultaInformacionPersonal
         Handles cmbCategoria.DropDownClosed
         txtSueldoBruto.Focus
     End Sub
+
+    Private Sub btnAceptar_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles btnAceptar.Click
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim trans As SqlTransaction = Nothing
+        Dim WDni, WFechaNac, WFechaNacOrd, WCalle, WNumero, WDpto, WPostal, WLocalidad, WAclaracion, _
+            WConyugeNombre, WConyugeEdad, WConyugeDni, WConyugeFechaNac, WConyugeFechaNacOrd, _
+            WFechaCasamiento, WFechaCasamientoOrd, WEstado, WCategoria, WUbicacion, WZapato, WRemera, _
+            WBuzo, WCampera, WPantalon, WCamisa, WObsZapato, WObsRemera, WObsBuzo, WObsCampera, _
+            WObsPantalon, WObsCamisa, WObsPrimaria, WObsSecundaria, WObsTerciaria, ZSql As String
+        Dim WSueldoBruto As Double
+
+        Try
+            WDni = txtDni.Text
+            WFechaNac = txtFechaNacimiento.Text
+            WFechaNacOrd = Helper.ordenaFecha(WFechaNac)
+            WCalle = Trim(txtCalle.Text)
+            WNumero = Trim(txtNumero.Text)
+            WDpto = Trim(txtDpto.Text)
+            WPostal = Trim(txtCodPostal.Text)
+            WLocalidad = Trim(txtLocalidad.Text)
+            WAclaracion = Trim(txtAclaracion.Text)
+            WConyugeNombre = Trim(txtNombreCompletoConyugue.Text)
+            WConyugeEdad = Trim(txtEdadConyugue.Text)
+            WConyugeDni = Trim(txtDniConyugue.Text)
+            WConyugeFechaNac = txtFechaNacimientoConyugue.Text
+            WConyugeFechaNacOrd = Helper.ordenaFecha(WConyugeFechaNac)
+            WFechaCasamiento = txtFechaCasamiento.Text
+            WFechaCasamientoOrd = Helper.ordenafecha(WFechaCasamiento)
+            WEstado = cmbEstado.SelectedIndex
+            WCategoria = cmbCategoria.SelectedIndex
+            WUbicacion = cmbUbicacion.SelectedIndex
+            WSueldoBruto = Val(Helper.formatonumerico(txtSueldoBruto.Text))
+            
+            For Each row As DataGridViewRow In dgvIndumentaria.Rows
+
+                Select Val(row.Cells("TipoInd").Value)
+
+                    Case 1
+                        WBuzo = row.Cells("Talle").Value
+                        WObsBuzo = row.Cells("ObservacionesIndumentaria").Value
+                    Case 2
+                        WCamisa = row.Cells("Talle").Value
+                        WObsCamisa = row.Cells("ObservacionesIndumentaria").Value
+                    Case 3
+                        WCampera  = row.Cells("Talle").Value
+                        WObsCampera = row.Cells("ObservacionesIndumentaria").Value
+                    Case 4
+                        WPantalon = row.Cells("Talle").Value
+                        WObsPantalon = row.Cells("ObservacionesIndumentaria").Value
+                    Case 5
+                        WRemera = row.Cells("Talle").Value
+                        WObsRemera = row.Cells("ObservacionesIndumentaria").Value
+                    Case 6
+                        WZapato = row.Cells("Talle").Value
+                        WObsZapato = row.Cells("ObservacionesIndumentaria").Value
+                    
+                End Select
+
+            Next
+
+            For Each row As DataGridViewRow In dgvEducacion.Rows
+
+                Select Case Val(row.Cells("IdFormacion").Value)
+
+                    Case 1
+                        WObsPrimaria = row.Cells("ObservacionesFormacion").Value
+                    Case 2
+                        WObsSecundaria = row.Cells("ObservacionesFormacion").Value
+                    Case 3
+                        WObsTerciaria = row.Cells("ObservacionesFormacion").Value
+                End Select
+
+            Next
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            trans = cn.BeginTransaction
+            cm.Connection = cn
+            cm.Transaction = trans
+
+            cm.CommandText = "DELETE FROM Personal WHERE Dni = '" & WDni & "'"
+            cm.ExecuteNonQuery
+
+            ZSql = ""
+            ZSql = "INSERT INTO Personal "
+            ZSql &= " ("
+            ZSql &= " Dni,"
+            ZSql &= " FechaNac,"
+            ZSql &= " FechaNacOrd,"
+            ZSql &= " Calle,"
+            ZSql &= " Numero,"
+            ZSql &= " Dpto,"
+            ZSql &= " Postal,"
+            ZSql &= " Localidad,"
+            ZSql &= " Aclaracion,"
+            ZSql &= " ConyugeNombre,"
+            ZSql &= " ConyugeEdad,"
+            ZSql &= " ConyugeDni,"
+            ZSql &= " ConyugeFechaNac,"
+            ZSql &= " ConyugeFechaNacOrd,"
+            ZSql &= " FechaCasamiento,"
+            ZSql &= " FechaCasamientoOrd,"
+            ZSql &= " Estado,"
+            ZSql &= " Categoria,"
+            ZSql &= " SueldoBruto,"
+            ZSql &= " Ubicacion,"
+            ZSql &= " Zapato,"
+            ZSql &= " Remera,"
+            ZSql &= " Buzo,"
+            ZSql &= " Campera,"
+            ZSql &= " Pantalon,"
+            ZSql &= " Camisa,"
+            ZSql &= " ObsZapato,"
+            ZSql &= " ObsRemera,"
+            ZSql &= " ObsBuzo,"
+            ZSql &= " ObsCampera,"
+            ZSql &= " ObsPantalon,"
+            ZSql &= " ObsCamisa,"
+            ZSql &= " ObsPrimaria,"
+            ZSql &= " ObsSecundaria,"
+            ZSql &= " ObsTerciaria "
+            ZSql &= ") VALUES ("
+            ZSql &= "'" & WDni & "',"
+            ZSql &= "'" & WFechaNac & "',"
+            ZSql &= "'" & WFechaNacOrd & "',"
+            ZSql &= "'" & WCalle & "',"
+            ZSql &= "'" & WNumero & "',"
+            ZSql &= "'" & WDpto & "',"
+            ZSql &= "'" & WPostal & "',"
+            ZSql &= "'" & WLocalidad & "',"
+            ZSql &= "'" & WAclaracion & "',"
+            ZSql &= "'" & WConyugeNombre & "',"
+            ZSql &= "'" & WConyugeEdad & "',"
+            ZSql &= "'" & WConyugeDni & "',"
+            ZSql &= "'" & WConyugeFechaNac & "',"
+            ZSql &= "'" & WConyugeFechaNacOrd & "',"
+            ZSql &= "'" & WFechaCasamiento & "',"
+            ZSql &= "'" & WFechaCasamientoOrd & "',"
+            ZSql &= "'" & WEstado & "',"
+            ZSql &= "'" & WCategoria & "',"
+            ZSql &= "" & Str$(WSueldoBruto) & ","
+            ZSql &= "'" & WUbicacion & "',"
+            ZSql &= "'" & WZapato & "',"
+            ZSql &= "'" & WRemera & "',"
+            ZSql &= "'" & WBuzo & "',"
+            ZSql &= "'" & WCampera & "',"
+            ZSql &= "'" & WPantalon & "',"
+            ZSql &= "'" & WCamisa & "',"
+            ZSql &= "'" & WObsZapato & "',"
+            ZSql &= "'" & WObsRemera & "',"
+            ZSql &= "'" & WObsBuzo & "',"
+            ZSql &= "'" & WObsCampera & "',"
+            ZSql &= "'" & WObsPantalon & "',"
+            ZSql &= "'" & WObsCamisa & "',"
+            ZSql &= "'" & WObsPrimaria & "',"
+            ZSql &= "'" & WObsSecundaria & "',"
+            ZSql &= "'" & WObsTerciaria & "'"
+            ZSql &= "" & ")" & ""
+
+            cm.CommandText=ZSql
+            cm.ExecuteNonQuery
+
+            cm.CommandText = "DELETE FROM PersonalHijos WHERE Dni = '" & WDni & "'"
+            cm.ExecuteNonQuery
+
+            Dim WClave, WNombre, WApellido, WEdad, WDniHijo, WFechaNacimientoHijo, WFechaNacimientoHijoOrd, WRenglon As String
+            Dim XRenglon As Short = 0
+
+            For Each row As DataGridViewRow In dgvHijos.Rows
+
+                XRenglon += 1
+
+                WClave = WDni + Helper.ceros(XRenglon, 2)
+
+                With row
+
+                    WNombre = IIf(IsNothing(.Cells("NombreHijo").Value), "", .Cells("NombreHijo").Value)
+                    WApellido = IIf(IsNothing(.Cells("ApellidoHijo").Value), "", .Cells("ApellidoHijo").Value)
+                    WEdad = IIf(IsNothing(.Cells("EdadHijo").Value), "", .Cells("EdadHijo").Value)
+                    WDnihijo = IIf(IsNothing(.Cells("DniHijo").Value), "", .Cells("DniHijo").Value)
+                    WFechaNacimientoHijo = IIf(IsNothing(.Cells("FechaNacimientoHijo").Value), "", .Cells("FechaNacimientoHijo").Value)
+                    WFechaNacimientoHijoOrd = Helper.ordenaFecha(WFechaNacimientoHijo)
+
+                    If Trim(WNombre) ="" and Trim(WApellido)="" then Continue For
+
+                    ZSql = ""
+                    ZSql = "INSERT INTO PersonalHijos "
+                    ZSql &= " ("
+                    ZSql &= " Clave,"
+                    ZSql &= " Dni,"
+                    ZSql &= " Renglon,"
+                    ZSql &= " Nombre,"
+                    ZSql &= " Apellido,"
+                    ZSql &= " DniHijo,"
+                    ZSql &= " Edad,"
+                    ZSql &= " FechaNac,"
+                    ZSql &= " FechaNacOrd"
+                    ZSql &= ") VALUES ("
+                    ZSql &= "'" & WClave & "',"
+                    ZSql &= "'" & WDni & "',"
+                    ZSql &= "'" & WRenglon & "',"
+                    ZSql &= "'" & WNombre & "',"
+                    ZSql &= "'" & WApellido & "',"
+                    ZSql &= "'" & WDniHijo & "',"
+                    ZSql &= "'" & WEdad & "',"
+                    ZSql &= "'" & WFechaNacimientoHijo & "',"
+                    ZSql &= "'" & WFechaNacimientoHijoOrd & "'"
+                    ZSql &= "" & ")" & ""
+
+                    cm.CommandText=ZSql
+                    cm.ExecuteNonQuery
+
+                End With
+
+            Next
+
+            trans.Commit
+
+            btnLimpiar.PerformClick
+
+        Catch ex As Exception
+
+            If Not IsNothing(trans) then
+                trans.Rollback
+            End If
+
+            MsgBox("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        
+    End Sub
+
+    
+        
+            
+    Private Function _EsNumero(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
+    End Function
+
+    Private Function _EsControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        Select Case keycode
+            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
+                valido = True
+            Case Else
+                valido = False
+        End Select
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
+    End Function
+
+    Private Function _EsNumeroOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimalOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    
+        
+    'With txtCodigo
+    '    .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+
+    '    Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
+
+    '    .ClearSelection()
+    '	 .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
+    '    _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN
+    '    _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - XMARGEN
+    '    txtFechaAux.Location = _location
+    '    txtFechaAux.Text = .Rows(iRow).Cells(2).Value
+    '    WRow = iRow
+    '    Wcol = iCol
+    '    txtFechaAux.Visible = True
+    '    txtFechaAux.Focus()
+    'End With
+
+    Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+            
+            If Helper._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
+
+                With dgvHijos
+                    .Rows(WRow).Cells(4).Value = txtFechaAux.Text
+
+                    Try
+                        .CurrentCell = .Rows(WRow + 1).Cells(0)
+                    Catch ex As Exception
+                        .Rows.Add
+                        .CurrentCell = .Rows(WRow + 1).Cells(0)
+                    End Try
+                    
+                    .Focus()
+
+                    txtFechaAux.Visible = False
+                    txtFechaAux.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
+                End With
+                
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaAux.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCodigo_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvHijos.CellEnter
+        With dgvHijos
+            If e.ColumnIndex = 4 Then
+                .ClearSelection()
+                .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
+                Dim _location As Point = .GetCellDisplayRectangle(4, e.RowIndex, False).Location
+
+                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN
+                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - XMARGEN
+                txtFechaAux.Location = _location
+                txtFechaAux.Text = .Rows(e.RowIndex).Cells(4).Value
+                WRow = e.RowIndex
+                Wcol = e.ColumnIndex
+                txtFechaAux.Visible = True
+                txtFechaAux.Focus()
+            End If
+        End With
+    End Sub
+    
+    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+
+        With dgvHijos
+            If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+                .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                Dim iCol = .CurrentCell.ColumnIndex
+                Dim iRow = .CurrentCell.RowIndex
+                Dim valor = IIf(IsNothing(.CurrentCell.Value), "", .CurrentCell.Value)
+                Dim NUM_COLS = 5
+                ' Limitamos los caracteres permitidos para cada una de las columnas.
+                Select Case iCol
+                    Case 2,3
+                        If Not _EsNumeroOControl(keyData) Then
+                            Return True
+                        End If
+                    'Case 4
+                    '    If Not _EsDecimalOControl(keyData) Then
+                    '        Return True
+                    '    End If
+                    'Case Else
+
+                End Select
+
+                If msg.WParam.ToInt32() = Keys.Enter Then
+
+                    If valor <> "" Then
+                        
+                        Select Case iCol
+                            Case 0
+                                Dim _apellido As String = IIf(IsNothing(.Rows(iRow).Cells(iCol + 1).value), "", .Rows(iRow).Cells(iCol + 1).value)
+
+                                If Trim(_apellido) = "" then
+                                    Try
+                                        .Rows(iRow).Cells(iCol + 1).value = .Rows(iRow - 1).Cells(iCol + 1).value
+                                    Catch ex As Exception
+                                        .Rows(iRow).Cells(iCol + 1).value = ""
+                                    End Try
+                                End If
+
+                        End Select
+
+                    End If
+
+                    Select Case iCol
+                        Case NUM_COLS -1
+                            
+                            Try
+                                .CurrentCell = .Rows(iRow + 1).Cells(0)
+                            Catch ex As Exception
+                                .Rows.Add
+                                .CurrentCell = .Rows(iRow + 1).Cells(0)
+                            End Try
+
+                        Case Else
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End Select
+
+                    Return True
+
+                ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                    .Rows(iRow).Cells(iCol).Value = ""
+
+                    If iCol = NUM_COLS - 1 Then
+                        .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                    Else
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End If
+
+                    .CurrentCell = .Rows(iRow).Cells(iCol)
+                End If
+            End If
+
+        End With
+        
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+      
 End Class
