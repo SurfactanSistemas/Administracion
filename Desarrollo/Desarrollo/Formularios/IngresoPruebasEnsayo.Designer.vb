@@ -26,16 +26,9 @@ Partial Class IngresoPruebasEnsayo
         Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle70 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle71 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle72 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle74 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle75 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle73 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle76 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle78 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle79 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -54,6 +47,13 @@ Partial Class IngresoPruebasEnsayo
         Dim DataGridViewCellStyle89 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle90 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle91 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle73 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -72,13 +72,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtDescripcionHojaPiloto = New System.Windows.Forms.TextBox()
         Me.cmbPlanta = New System.Windows.Forms.ComboBox()
         Me.dgvFormula = New System.Windows.Forms.DataGridView()
-        Me.TipoFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ArticuloFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TerminadoFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CantidadFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LoteFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtHojaProduccion = New System.Windows.Forms.TextBox()
         Me.txtRealizado = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -90,13 +83,6 @@ Partial Class IngresoPruebasEnsayo
         Me.TabProceso = New System.Windows.Forms.TabPage()
         Me.txtNotasProceso = New System.Windows.Forms.RichTextBox()
         Me.dgvProceso = New System.Windows.Forms.DataGridView()
-        Me.ProcesoEtapa = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProcesoDetallesTrabajo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProcesoEquipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProcesoTemperatura = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProcesoTiempo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProcesoControl = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProcesoSeguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtRealizadoII = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.btnImprimeProceso = New System.Windows.Forms.Button()
@@ -142,12 +128,8 @@ Partial Class IngresoPruebasEnsayo
         Me.btnRecalculaCosto = New System.Windows.Forms.Button()
         Me.TabDocumentacion = New System.Windows.Forms.TabPage()
         Me.txtNotasDocumentacion = New System.Windows.Forms.RichTextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.TabDatosEntrada = New System.Windows.Forms.TabPage()
         Me.btnLeerVersionAntDatosEntrada = New System.Windows.Forms.Button()
-        Me.ckAVerificarXII = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarXI = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarX = New System.Windows.Forms.CheckBox()
         Me.txtComentariosXII = New System.Windows.Forms.TextBox()
         Me.txtComentariosXI = New System.Windows.Forms.TextBox()
         Me.txtComentariosX = New System.Windows.Forms.TextBox()
@@ -172,30 +154,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosIII = New System.Windows.Forms.TextBox()
         Me.txtRequisitosII = New System.Windows.Forms.TextBox()
         Me.txtRequisitosI = New System.Windows.Forms.TextBox()
-        Me.ckAVerificarIX = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarVIII = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarVII = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarVI = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarV = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarIV = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarIII = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarII = New System.Windows.Forms.CheckBox()
-        Me.ckAVerificarI = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoXII = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoXI = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoX = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoIX = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoVIII = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoVII = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoVI = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoV = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoIV = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoIII = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoII = New System.Windows.Forms.CheckBox()
-        Me.ckInformativoI = New System.Windows.Forms.CheckBox()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.WIndice = New System.Windows.Forms.ListBox()
         Me.txtCantidad = New System.Windows.Forms.TextBox()
@@ -225,6 +184,20 @@ Partial Class IngresoPruebasEnsayo
         Me.btnCerrarNota = New System.Windows.Forms.Button()
         Me.txtNota = New System.Windows.Forms.RichTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TipoFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ArticuloFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TerminadoFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CantidadFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LoteFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcesoEtapa = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcesoDetallesTrabajo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcesoEquipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcesoTemperatura = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcesoTiempo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcesoControl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcesoSeguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -415,7 +388,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabFormula.Padding = New System.Windows.Forms.Padding(3)
         Me.TabFormula.Size = New System.Drawing.Size(821, 403)
         Me.TabFormula.TabIndex = 0
-        Me.TabFormula.Text = "Fórmula"
+        Me.TabFormula.Text = "Composición"
         '
         'pnlHojaPiloto
         '
@@ -515,60 +488,6 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvFormula.RowHeadersWidth = 15
         Me.dgvFormula.Size = New System.Drawing.Size(804, 306)
         Me.dgvFormula.TabIndex = 4
-        '
-        'TipoFormula
-        '
-        DataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TipoFormula.DefaultCellStyle = DataGridViewCellStyle64
-        Me.TipoFormula.HeaderText = "Tipo"
-        Me.TipoFormula.MaxInputLength = 1
-        Me.TipoFormula.Name = "TipoFormula"
-        Me.TipoFormula.Width = 50
-        '
-        'ArticuloFormula
-        '
-        DataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ArticuloFormula.DefaultCellStyle = DataGridViewCellStyle65
-        Me.ArticuloFormula.HeaderText = "Artículo"
-        Me.ArticuloFormula.MaxInputLength = 10
-        Me.ArticuloFormula.Name = "ArticuloFormula"
-        '
-        'TerminadoFormula
-        '
-        DataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TerminadoFormula.DefaultCellStyle = DataGridViewCellStyle66
-        Me.TerminadoFormula.HeaderText = "Terminado"
-        Me.TerminadoFormula.MaxInputLength = 12
-        Me.TerminadoFormula.Name = "TerminadoFormula"
-        '
-        'DescripcionFormula
-        '
-        Me.DescripcionFormula.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionFormula.HeaderText = "Descripcion"
-        Me.DescripcionFormula.Name = "DescripcionFormula"
-        '
-        'CantidadFormula
-        '
-        DataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CantidadFormula.DefaultCellStyle = DataGridViewCellStyle67
-        Me.CantidadFormula.HeaderText = "Cantidad"
-        Me.CantidadFormula.Name = "CantidadFormula"
-        '
-        'LoteFormula
-        '
-        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.LoteFormula.DefaultCellStyle = DataGridViewCellStyle68
-        Me.LoteFormula.HeaderText = "Lote"
-        Me.LoteFormula.Name = "LoteFormula"
-        '
-        'StockFormula
-        '
-        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.StockFormula.DefaultCellStyle = DataGridViewCellStyle69
-        Me.StockFormula.HeaderText = "Stock"
-        Me.StockFormula.MaxInputLength = 1
-        Me.StockFormula.Name = "StockFormula"
-        Me.StockFormula.Width = 50
         '
         'txtHojaProduccion
         '
@@ -719,52 +638,6 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvProceso.Size = New System.Drawing.Size(804, 210)
         Me.dgvProceso.TabIndex = 8
         '
-        'ProcesoEtapa
-        '
-        DataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ProcesoEtapa.DefaultCellStyle = DataGridViewCellStyle73
-        Me.ProcesoEtapa.HeaderText = "Etapa"
-        Me.ProcesoEtapa.MaxInputLength = 10
-        Me.ProcesoEtapa.Name = "ProcesoEtapa"
-        Me.ProcesoEtapa.Width = 45
-        '
-        'ProcesoDetallesTrabajo
-        '
-        Me.ProcesoDetallesTrabajo.HeaderText = "Detalles de Trabajo"
-        Me.ProcesoDetallesTrabajo.MaxInputLength = 90
-        Me.ProcesoDetallesTrabajo.Name = "ProcesoDetallesTrabajo"
-        Me.ProcesoDetallesTrabajo.Width = 525
-        '
-        'ProcesoEquipo
-        '
-        Me.ProcesoEquipo.HeaderText = "Equipo"
-        Me.ProcesoEquipo.MaxInputLength = 15
-        Me.ProcesoEquipo.Name = "ProcesoEquipo"
-        '
-        'ProcesoTemperatura
-        '
-        Me.ProcesoTemperatura.HeaderText = "Temperatura"
-        Me.ProcesoTemperatura.MaxInputLength = 20
-        Me.ProcesoTemperatura.Name = "ProcesoTemperatura"
-        '
-        'ProcesoTiempo
-        '
-        Me.ProcesoTiempo.HeaderText = "Tiempo"
-        Me.ProcesoTiempo.MaxInputLength = 15
-        Me.ProcesoTiempo.Name = "ProcesoTiempo"
-        '
-        'ProcesoControl
-        '
-        Me.ProcesoControl.HeaderText = "Control"
-        Me.ProcesoControl.MaxInputLength = 20
-        Me.ProcesoControl.Name = "ProcesoControl"
-        '
-        'ProcesoSeguridad
-        '
-        Me.ProcesoSeguridad.HeaderText = "Seguridad"
-        Me.ProcesoSeguridad.MaxInputLength = 15
-        Me.ProcesoSeguridad.Name = "ProcesoSeguridad"
-        '
         'txtRealizadoII
         '
         Me.txtRealizadoII.Location = New System.Drawing.Point(114, 370)
@@ -821,7 +694,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabResultadosLaboratorio.Name = "TabResultadosLaboratorio"
         Me.TabResultadosLaboratorio.Size = New System.Drawing.Size(821, 403)
         Me.TabResultadosLaboratorio.TabIndex = 2
-        Me.TabResultadosLaboratorio.Text = "Resultados Laboratorio"
+        Me.TabResultadosLaboratorio.Text = "Ensayos de Laboratorio"
         '
         'txtNotasLaboratorio
         '
@@ -953,7 +826,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabEnsayosAdicionales.Name = "TabEnsayosAdicionales"
         Me.TabEnsayosAdicionales.Size = New System.Drawing.Size(821, 403)
         Me.TabEnsayosAdicionales.TabIndex = 3
-        Me.TabEnsayosAdicionales.Text = "Ensayos Adicionales"
+        Me.TabEnsayosAdicionales.Text = "Otros Ensayos"
         '
         'txtNotasEnsayosAdicionales
         '
@@ -1264,40 +1137,25 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.TabDocumentacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.TabDocumentacion.Controls.Add(Me.txtNotasDocumentacion)
-        Me.TabDocumentacion.Controls.Add(Me.Label16)
         Me.TabDocumentacion.Location = New System.Drawing.Point(4, 34)
         Me.TabDocumentacion.Name = "TabDocumentacion"
         Me.TabDocumentacion.Size = New System.Drawing.Size(821, 403)
         Me.TabDocumentacion.TabIndex = 6
-        Me.TabDocumentacion.Text = "Documentación"
+        Me.TabDocumentacion.Text = "Documentación Adicional"
         '
         'txtNotasDocumentacion
         '
         Me.txtNotasDocumentacion.EnableAutoDragDrop = True
-        Me.txtNotasDocumentacion.Location = New System.Drawing.Point(23, 40)
+        Me.txtNotasDocumentacion.Location = New System.Drawing.Point(23, 16)
         Me.txtNotasDocumentacion.Name = "txtNotasDocumentacion"
-        Me.txtNotasDocumentacion.Size = New System.Drawing.Size(774, 347)
+        Me.txtNotasDocumentacion.Size = New System.Drawing.Size(774, 371)
         Me.txtNotasDocumentacion.TabIndex = 17
         Me.txtNotasDocumentacion.Text = ""
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label16.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label16.Location = New System.Drawing.Point(23, 16)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(108, 18)
-        Me.Label16.TabIndex = 0
-        Me.Label16.Text = "Consultas Varias"
         '
         'TabDatosEntrada
         '
         Me.TabDatosEntrada.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.TabDatosEntrada.Controls.Add(Me.btnLeerVersionAntDatosEntrada)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarXII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarXI)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarX)
         Me.TabDatosEntrada.Controls.Add(Me.txtComentariosXII)
         Me.TabDatosEntrada.Controls.Add(Me.txtComentariosXI)
         Me.TabDatosEntrada.Controls.Add(Me.txtComentariosX)
@@ -1322,30 +1180,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabDatosEntrada.Controls.Add(Me.txtRequisitosIII)
         Me.TabDatosEntrada.Controls.Add(Me.txtRequisitosII)
         Me.TabDatosEntrada.Controls.Add(Me.txtRequisitosI)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarIX)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarVIII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarVII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarVI)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarV)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarIV)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarIII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckAVerificarI)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoXII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoXI)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoX)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoIX)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoVIII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoVII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoVI)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoV)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoIV)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoIII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoII)
-        Me.TabDatosEntrada.Controls.Add(Me.ckInformativoI)
         Me.TabDatosEntrada.Controls.Add(Me.Label20)
-        Me.TabDatosEntrada.Controls.Add(Me.Label19)
-        Me.TabDatosEntrada.Controls.Add(Me.Label18)
         Me.TabDatosEntrada.Controls.Add(Me.Label17)
         Me.TabDatosEntrada.Location = New System.Drawing.Point(4, 34)
         Me.TabDatosEntrada.Name = "TabDatosEntrada"
@@ -1365,138 +1200,111 @@ Partial Class IngresoPruebasEnsayo
         Me.btnLeerVersionAntDatosEntrada.Text = "Lee Versión Anterior"
         Me.btnLeerVersionAntDatosEntrada.UseVisualStyleBackColor = True
         '
-        'ckAVerificarXII
-        '
-        Me.ckAVerificarXII.AutoSize = True
-        Me.ckAVerificarXII.Location = New System.Drawing.Point(451, 349)
-        Me.ckAVerificarXII.Name = "ckAVerificarXII"
-        Me.ckAVerificarXII.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarXII.TabIndex = 3
-        Me.ckAVerificarXII.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarXI
-        '
-        Me.ckAVerificarXI.AutoSize = True
-        Me.ckAVerificarXI.Location = New System.Drawing.Point(451, 322)
-        Me.ckAVerificarXI.Name = "ckAVerificarXI"
-        Me.ckAVerificarXI.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarXI.TabIndex = 3
-        Me.ckAVerificarXI.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarX
-        '
-        Me.ckAVerificarX.AutoSize = True
-        Me.ckAVerificarX.Location = New System.Drawing.Point(451, 295)
-        Me.ckAVerificarX.Name = "ckAVerificarX"
-        Me.ckAVerificarX.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarX.TabIndex = 3
-        Me.ckAVerificarX.UseVisualStyleBackColor = True
-        '
         'txtComentariosXII
         '
-        Me.txtComentariosXII.Location = New System.Drawing.Point(508, 346)
+        Me.txtComentariosXII.Location = New System.Drawing.Point(406, 346)
         Me.txtComentariosXII.MaxLength = 50
         Me.txtComentariosXII.Name = "txtComentariosXII"
-        Me.txtComentariosXII.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosXII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosXII.TabIndex = 3
         Me.txtComentariosXII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosXI
         '
-        Me.txtComentariosXI.Location = New System.Drawing.Point(508, 319)
+        Me.txtComentariosXI.Location = New System.Drawing.Point(406, 319)
         Me.txtComentariosXI.MaxLength = 50
         Me.txtComentariosXI.Name = "txtComentariosXI"
-        Me.txtComentariosXI.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosXI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosXI.TabIndex = 3
         Me.txtComentariosXI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosX
         '
-        Me.txtComentariosX.Location = New System.Drawing.Point(508, 292)
+        Me.txtComentariosX.Location = New System.Drawing.Point(406, 292)
         Me.txtComentariosX.MaxLength = 50
         Me.txtComentariosX.Name = "txtComentariosX"
-        Me.txtComentariosX.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosX.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosX.TabIndex = 3
         Me.txtComentariosX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosIX
         '
-        Me.txtComentariosIX.Location = New System.Drawing.Point(508, 265)
+        Me.txtComentariosIX.Location = New System.Drawing.Point(406, 265)
         Me.txtComentariosIX.MaxLength = 50
         Me.txtComentariosIX.Name = "txtComentariosIX"
-        Me.txtComentariosIX.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosIX.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosIX.TabIndex = 3
         Me.txtComentariosIX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosVIII
         '
-        Me.txtComentariosVIII.Location = New System.Drawing.Point(508, 238)
+        Me.txtComentariosVIII.Location = New System.Drawing.Point(406, 238)
         Me.txtComentariosVIII.MaxLength = 50
         Me.txtComentariosVIII.Name = "txtComentariosVIII"
-        Me.txtComentariosVIII.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosVIII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosVIII.TabIndex = 3
         Me.txtComentariosVIII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosVII
         '
-        Me.txtComentariosVII.Location = New System.Drawing.Point(508, 211)
+        Me.txtComentariosVII.Location = New System.Drawing.Point(406, 211)
         Me.txtComentariosVII.MaxLength = 50
         Me.txtComentariosVII.Name = "txtComentariosVII"
-        Me.txtComentariosVII.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosVII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosVII.TabIndex = 3
         Me.txtComentariosVII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosVI
         '
-        Me.txtComentariosVI.Location = New System.Drawing.Point(508, 184)
+        Me.txtComentariosVI.Location = New System.Drawing.Point(406, 184)
         Me.txtComentariosVI.MaxLength = 50
         Me.txtComentariosVI.Name = "txtComentariosVI"
-        Me.txtComentariosVI.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosVI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosVI.TabIndex = 3
         Me.txtComentariosVI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosV
         '
-        Me.txtComentariosV.Location = New System.Drawing.Point(508, 157)
+        Me.txtComentariosV.Location = New System.Drawing.Point(406, 157)
         Me.txtComentariosV.MaxLength = 50
         Me.txtComentariosV.Name = "txtComentariosV"
-        Me.txtComentariosV.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosV.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosV.TabIndex = 3
         Me.txtComentariosV.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosIV
         '
-        Me.txtComentariosIV.Location = New System.Drawing.Point(508, 130)
+        Me.txtComentariosIV.Location = New System.Drawing.Point(406, 130)
         Me.txtComentariosIV.MaxLength = 50
         Me.txtComentariosIV.Name = "txtComentariosIV"
-        Me.txtComentariosIV.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosIV.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosIV.TabIndex = 3
         Me.txtComentariosIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosIII
         '
-        Me.txtComentariosIII.Location = New System.Drawing.Point(508, 103)
+        Me.txtComentariosIII.Location = New System.Drawing.Point(406, 103)
         Me.txtComentariosIII.MaxLength = 50
         Me.txtComentariosIII.Name = "txtComentariosIII"
-        Me.txtComentariosIII.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosIII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosIII.TabIndex = 3
         Me.txtComentariosIII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosII
         '
-        Me.txtComentariosII.Location = New System.Drawing.Point(508, 76)
+        Me.txtComentariosII.Location = New System.Drawing.Point(406, 76)
         Me.txtComentariosII.MaxLength = 50
         Me.txtComentariosII.Name = "txtComentariosII"
-        Me.txtComentariosII.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosII.TabIndex = 3
         Me.txtComentariosII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosI
         '
-        Me.txtComentariosI.Location = New System.Drawing.Point(508, 49)
+        Me.txtComentariosI.Location = New System.Drawing.Point(406, 49)
         Me.txtComentariosI.MaxLength = 50
         Me.txtComentariosI.Name = "txtComentariosI"
-        Me.txtComentariosI.Size = New System.Drawing.Size(290, 20)
+        Me.txtComentariosI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosI.TabIndex = 3
         Me.txtComentariosI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1505,7 +1313,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosXII.Location = New System.Drawing.Point(23, 346)
         Me.txtRequisitosXII.MaxLength = 50
         Me.txtRequisitosXII.Name = "txtRequisitosXII"
-        Me.txtRequisitosXII.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosXII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosXII.TabIndex = 3
         Me.txtRequisitosXII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1514,7 +1322,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosXI.Location = New System.Drawing.Point(23, 319)
         Me.txtRequisitosXI.MaxLength = 50
         Me.txtRequisitosXI.Name = "txtRequisitosXI"
-        Me.txtRequisitosXI.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosXI.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosXI.TabIndex = 3
         Me.txtRequisitosXI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1523,7 +1331,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosX.Location = New System.Drawing.Point(23, 292)
         Me.txtRequisitosX.MaxLength = 50
         Me.txtRequisitosX.Name = "txtRequisitosX"
-        Me.txtRequisitosX.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosX.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosX.TabIndex = 3
         Me.txtRequisitosX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1532,7 +1340,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosIX.Location = New System.Drawing.Point(23, 265)
         Me.txtRequisitosIX.MaxLength = 50
         Me.txtRequisitosIX.Name = "txtRequisitosIX"
-        Me.txtRequisitosIX.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosIX.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosIX.TabIndex = 3
         Me.txtRequisitosIX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1541,7 +1349,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosVIII.Location = New System.Drawing.Point(23, 238)
         Me.txtRequisitosVIII.MaxLength = 50
         Me.txtRequisitosVIII.Name = "txtRequisitosVIII"
-        Me.txtRequisitosVIII.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosVIII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosVIII.TabIndex = 3
         Me.txtRequisitosVIII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1550,7 +1358,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosVII.Location = New System.Drawing.Point(23, 211)
         Me.txtRequisitosVII.MaxLength = 50
         Me.txtRequisitosVII.Name = "txtRequisitosVII"
-        Me.txtRequisitosVII.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosVII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosVII.TabIndex = 3
         Me.txtRequisitosVII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1559,7 +1367,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosVI.Location = New System.Drawing.Point(23, 184)
         Me.txtRequisitosVI.MaxLength = 50
         Me.txtRequisitosVI.Name = "txtRequisitosVI"
-        Me.txtRequisitosVI.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosVI.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosVI.TabIndex = 3
         Me.txtRequisitosVI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1568,7 +1376,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosV.Location = New System.Drawing.Point(23, 157)
         Me.txtRequisitosV.MaxLength = 50
         Me.txtRequisitosV.Name = "txtRequisitosV"
-        Me.txtRequisitosV.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosV.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosV.TabIndex = 3
         Me.txtRequisitosV.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1577,7 +1385,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosIV.Location = New System.Drawing.Point(23, 130)
         Me.txtRequisitosIV.MaxLength = 50
         Me.txtRequisitosIV.Name = "txtRequisitosIV"
-        Me.txtRequisitosIV.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosIV.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosIV.TabIndex = 3
         Me.txtRequisitosIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1586,7 +1394,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosIII.Location = New System.Drawing.Point(23, 103)
         Me.txtRequisitosIII.MaxLength = 50
         Me.txtRequisitosIII.Name = "txtRequisitosIII"
-        Me.txtRequisitosIII.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosIII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosIII.TabIndex = 3
         Me.txtRequisitosIII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1595,7 +1403,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosII.Location = New System.Drawing.Point(23, 76)
         Me.txtRequisitosII.MaxLength = 50
         Me.txtRequisitosII.Name = "txtRequisitosII"
-        Me.txtRequisitosII.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosII.TabIndex = 3
         Me.txtRequisitosII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1604,238 +1412,27 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosI.Location = New System.Drawing.Point(23, 49)
         Me.txtRequisitosI.MaxLength = 50
         Me.txtRequisitosI.Name = "txtRequisitosI"
-        Me.txtRequisitosI.Size = New System.Drawing.Size(290, 20)
+        Me.txtRequisitosI.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosI.TabIndex = 3
         Me.txtRequisitosI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'ckAVerificarIX
-        '
-        Me.ckAVerificarIX.AutoSize = True
-        Me.ckAVerificarIX.Location = New System.Drawing.Point(451, 268)
-        Me.ckAVerificarIX.Name = "ckAVerificarIX"
-        Me.ckAVerificarIX.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarIX.TabIndex = 3
-        Me.ckAVerificarIX.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarVIII
-        '
-        Me.ckAVerificarVIII.AutoSize = True
-        Me.ckAVerificarVIII.Location = New System.Drawing.Point(451, 241)
-        Me.ckAVerificarVIII.Name = "ckAVerificarVIII"
-        Me.ckAVerificarVIII.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarVIII.TabIndex = 3
-        Me.ckAVerificarVIII.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarVII
-        '
-        Me.ckAVerificarVII.AutoSize = True
-        Me.ckAVerificarVII.Location = New System.Drawing.Point(451, 214)
-        Me.ckAVerificarVII.Name = "ckAVerificarVII"
-        Me.ckAVerificarVII.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarVII.TabIndex = 3
-        Me.ckAVerificarVII.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarVI
-        '
-        Me.ckAVerificarVI.AutoSize = True
-        Me.ckAVerificarVI.Location = New System.Drawing.Point(451, 187)
-        Me.ckAVerificarVI.Name = "ckAVerificarVI"
-        Me.ckAVerificarVI.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarVI.TabIndex = 3
-        Me.ckAVerificarVI.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarV
-        '
-        Me.ckAVerificarV.AutoSize = True
-        Me.ckAVerificarV.Location = New System.Drawing.Point(451, 160)
-        Me.ckAVerificarV.Name = "ckAVerificarV"
-        Me.ckAVerificarV.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarV.TabIndex = 3
-        Me.ckAVerificarV.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarIV
-        '
-        Me.ckAVerificarIV.AutoSize = True
-        Me.ckAVerificarIV.Location = New System.Drawing.Point(451, 133)
-        Me.ckAVerificarIV.Name = "ckAVerificarIV"
-        Me.ckAVerificarIV.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarIV.TabIndex = 3
-        Me.ckAVerificarIV.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarIII
-        '
-        Me.ckAVerificarIII.AutoSize = True
-        Me.ckAVerificarIII.Location = New System.Drawing.Point(451, 106)
-        Me.ckAVerificarIII.Name = "ckAVerificarIII"
-        Me.ckAVerificarIII.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarIII.TabIndex = 3
-        Me.ckAVerificarIII.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarII
-        '
-        Me.ckAVerificarII.AutoSize = True
-        Me.ckAVerificarII.Location = New System.Drawing.Point(451, 79)
-        Me.ckAVerificarII.Name = "ckAVerificarII"
-        Me.ckAVerificarII.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarII.TabIndex = 3
-        Me.ckAVerificarII.UseVisualStyleBackColor = True
-        '
-        'ckAVerificarI
-        '
-        Me.ckAVerificarI.AutoSize = True
-        Me.ckAVerificarI.Location = New System.Drawing.Point(451, 52)
-        Me.ckAVerificarI.Name = "ckAVerificarI"
-        Me.ckAVerificarI.Size = New System.Drawing.Size(15, 14)
-        Me.ckAVerificarI.TabIndex = 3
-        Me.ckAVerificarI.UseVisualStyleBackColor = True
-        '
-        'ckInformativoXII
-        '
-        Me.ckInformativoXII.AutoSize = True
-        Me.ckInformativoXII.Location = New System.Drawing.Point(359, 349)
-        Me.ckInformativoXII.Name = "ckInformativoXII"
-        Me.ckInformativoXII.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoXII.TabIndex = 3
-        Me.ckInformativoXII.UseVisualStyleBackColor = True
-        '
-        'ckInformativoXI
-        '
-        Me.ckInformativoXI.AutoSize = True
-        Me.ckInformativoXI.Location = New System.Drawing.Point(359, 322)
-        Me.ckInformativoXI.Name = "ckInformativoXI"
-        Me.ckInformativoXI.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoXI.TabIndex = 3
-        Me.ckInformativoXI.UseVisualStyleBackColor = True
-        '
-        'ckInformativoX
-        '
-        Me.ckInformativoX.AutoSize = True
-        Me.ckInformativoX.Location = New System.Drawing.Point(359, 295)
-        Me.ckInformativoX.Name = "ckInformativoX"
-        Me.ckInformativoX.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoX.TabIndex = 3
-        Me.ckInformativoX.UseVisualStyleBackColor = True
-        '
-        'ckInformativoIX
-        '
-        Me.ckInformativoIX.AutoSize = True
-        Me.ckInformativoIX.Location = New System.Drawing.Point(359, 268)
-        Me.ckInformativoIX.Name = "ckInformativoIX"
-        Me.ckInformativoIX.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoIX.TabIndex = 3
-        Me.ckInformativoIX.UseVisualStyleBackColor = True
-        '
-        'ckInformativoVIII
-        '
-        Me.ckInformativoVIII.AutoSize = True
-        Me.ckInformativoVIII.Location = New System.Drawing.Point(359, 241)
-        Me.ckInformativoVIII.Name = "ckInformativoVIII"
-        Me.ckInformativoVIII.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoVIII.TabIndex = 3
-        Me.ckInformativoVIII.UseVisualStyleBackColor = True
-        '
-        'ckInformativoVII
-        '
-        Me.ckInformativoVII.AutoSize = True
-        Me.ckInformativoVII.Location = New System.Drawing.Point(359, 214)
-        Me.ckInformativoVII.Name = "ckInformativoVII"
-        Me.ckInformativoVII.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoVII.TabIndex = 3
-        Me.ckInformativoVII.UseVisualStyleBackColor = True
-        '
-        'ckInformativoVI
-        '
-        Me.ckInformativoVI.AutoSize = True
-        Me.ckInformativoVI.Location = New System.Drawing.Point(359, 187)
-        Me.ckInformativoVI.Name = "ckInformativoVI"
-        Me.ckInformativoVI.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoVI.TabIndex = 3
-        Me.ckInformativoVI.UseVisualStyleBackColor = True
-        '
-        'ckInformativoV
-        '
-        Me.ckInformativoV.AutoSize = True
-        Me.ckInformativoV.Location = New System.Drawing.Point(359, 160)
-        Me.ckInformativoV.Name = "ckInformativoV"
-        Me.ckInformativoV.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoV.TabIndex = 3
-        Me.ckInformativoV.UseVisualStyleBackColor = True
-        '
-        'ckInformativoIV
-        '
-        Me.ckInformativoIV.AutoSize = True
-        Me.ckInformativoIV.Location = New System.Drawing.Point(359, 133)
-        Me.ckInformativoIV.Name = "ckInformativoIV"
-        Me.ckInformativoIV.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoIV.TabIndex = 3
-        Me.ckInformativoIV.UseVisualStyleBackColor = True
-        '
-        'ckInformativoIII
-        '
-        Me.ckInformativoIII.AutoSize = True
-        Me.ckInformativoIII.Location = New System.Drawing.Point(359, 106)
-        Me.ckInformativoIII.Name = "ckInformativoIII"
-        Me.ckInformativoIII.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoIII.TabIndex = 3
-        Me.ckInformativoIII.UseVisualStyleBackColor = True
-        '
-        'ckInformativoII
-        '
-        Me.ckInformativoII.AutoSize = True
-        Me.ckInformativoII.Location = New System.Drawing.Point(359, 79)
-        Me.ckInformativoII.Name = "ckInformativoII"
-        Me.ckInformativoII.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoII.TabIndex = 3
-        Me.ckInformativoII.UseVisualStyleBackColor = True
-        '
-        'ckInformativoI
-        '
-        Me.ckInformativoI.AutoSize = True
-        Me.ckInformativoI.Location = New System.Drawing.Point(359, 52)
-        Me.ckInformativoI.Name = "ckInformativoI"
-        Me.ckInformativoI.Size = New System.Drawing.Size(15, 14)
-        Me.ckInformativoI.TabIndex = 3
-        Me.ckInformativoI.UseVisualStyleBackColor = True
         '
         'Label20
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label20.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label20.Location = New System.Drawing.Point(713, 17)
+        Me.Label20.Location = New System.Drawing.Point(559, 21)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(87, 18)
         Me.Label20.TabIndex = 0
         Me.Label20.Text = "Comentarios"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label19.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label19.Location = New System.Drawing.Point(426, 17)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(71, 18)
-        Me.Label19.TabIndex = 0
-        Me.Label19.Text = "A Verificar"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label18.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label18.Location = New System.Drawing.Point(328, 17)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(81, 18)
-        Me.Label18.TabIndex = 0
-        Me.Label18.Text = "Informativo"
         '
         'Label17
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label17.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label17.Location = New System.Drawing.Point(20, 17)
+        Me.Label17.Location = New System.Drawing.Point(132, 17)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(159, 18)
         Me.Label17.TabIndex = 0
@@ -1870,7 +1467,6 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtOrden
         '
-        Me.txtOrden.Culture = New System.Globalization.CultureInfo("es-AR")
         Me.txtOrden.Location = New System.Drawing.Point(180, 12)
         Me.txtOrden.Mask = "AA-00000"
         Me.txtOrden.Name = "txtOrden"
@@ -1881,7 +1477,6 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtFecha
         '
-        Me.txtFecha.Culture = New System.Globalization.CultureInfo("es-AR")
         Me.txtFecha.Location = New System.Drawing.Point(523, 12)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
@@ -2115,6 +1710,106 @@ Partial Class IngresoPruebasEnsayo
         Me.txtNota.TabIndex = 0
         Me.txtNota.Text = ""
         '
+        'TipoFormula
+        '
+        DataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TipoFormula.DefaultCellStyle = DataGridViewCellStyle64
+        Me.TipoFormula.HeaderText = "Tipo"
+        Me.TipoFormula.MaxInputLength = 1
+        Me.TipoFormula.Name = "TipoFormula"
+        Me.TipoFormula.Width = 50
+        '
+        'ArticuloFormula
+        '
+        DataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ArticuloFormula.DefaultCellStyle = DataGridViewCellStyle65
+        Me.ArticuloFormula.HeaderText = "Materia Prima"
+        Me.ArticuloFormula.MaxInputLength = 10
+        Me.ArticuloFormula.Name = "ArticuloFormula"
+        '
+        'TerminadoFormula
+        '
+        DataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TerminadoFormula.DefaultCellStyle = DataGridViewCellStyle66
+        Me.TerminadoFormula.HeaderText = "P.T."
+        Me.TerminadoFormula.MaxInputLength = 12
+        Me.TerminadoFormula.Name = "TerminadoFormula"
+        '
+        'DescripcionFormula
+        '
+        Me.DescripcionFormula.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescripcionFormula.HeaderText = "Descripcion"
+        Me.DescripcionFormula.Name = "DescripcionFormula"
+        '
+        'CantidadFormula
+        '
+        DataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CantidadFormula.DefaultCellStyle = DataGridViewCellStyle67
+        Me.CantidadFormula.HeaderText = "Cantidad"
+        Me.CantidadFormula.Name = "CantidadFormula"
+        '
+        'LoteFormula
+        '
+        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.LoteFormula.DefaultCellStyle = DataGridViewCellStyle68
+        Me.LoteFormula.HeaderText = "Lote"
+        Me.LoteFormula.Name = "LoteFormula"
+        '
+        'StockFormula
+        '
+        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.StockFormula.DefaultCellStyle = DataGridViewCellStyle69
+        Me.StockFormula.HeaderText = "Stock"
+        Me.StockFormula.MaxInputLength = 1
+        Me.StockFormula.Name = "StockFormula"
+        Me.StockFormula.Width = 50
+        '
+        'ProcesoEtapa
+        '
+        DataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ProcesoEtapa.DefaultCellStyle = DataGridViewCellStyle73
+        Me.ProcesoEtapa.HeaderText = "Etapa"
+        Me.ProcesoEtapa.MaxInputLength = 10
+        Me.ProcesoEtapa.Name = "ProcesoEtapa"
+        Me.ProcesoEtapa.Width = 45
+        '
+        'ProcesoDetallesTrabajo
+        '
+        Me.ProcesoDetallesTrabajo.HeaderText = "Instrucciones"
+        Me.ProcesoDetallesTrabajo.MaxInputLength = 90
+        Me.ProcesoDetallesTrabajo.Name = "ProcesoDetallesTrabajo"
+        Me.ProcesoDetallesTrabajo.Width = 525
+        '
+        'ProcesoEquipo
+        '
+        Me.ProcesoEquipo.HeaderText = "Equipo"
+        Me.ProcesoEquipo.MaxInputLength = 15
+        Me.ProcesoEquipo.Name = "ProcesoEquipo"
+        '
+        'ProcesoTemperatura
+        '
+        Me.ProcesoTemperatura.HeaderText = "Temperatura"
+        Me.ProcesoTemperatura.MaxInputLength = 20
+        Me.ProcesoTemperatura.Name = "ProcesoTemperatura"
+        '
+        'ProcesoTiempo
+        '
+        Me.ProcesoTiempo.HeaderText = "Tiempo"
+        Me.ProcesoTiempo.MaxInputLength = 15
+        Me.ProcesoTiempo.Name = "ProcesoTiempo"
+        '
+        'ProcesoControl
+        '
+        Me.ProcesoControl.HeaderText = "Control"
+        Me.ProcesoControl.MaxInputLength = 20
+        Me.ProcesoControl.Name = "ProcesoControl"
+        '
+        'ProcesoSeguridad
+        '
+        Me.ProcesoSeguridad.HeaderText = "Seguridad"
+        Me.ProcesoSeguridad.MaxInputLength = 15
+        Me.ProcesoSeguridad.Name = "ProcesoSeguridad"
+        '
         'IngresoPruebasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2156,7 +1851,6 @@ Partial Class IngresoPruebasEnsayo
         Me.TabCosto.PerformLayout()
         CType(Me.dgvCosto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabDocumentacion.ResumeLayout(False)
-        Me.TabDocumentacion.PerformLayout()
         Me.TabDatosEntrada.ResumeLayout(False)
         Me.TabDatosEntrada.PerformLayout()
         Me.Panel5.ResumeLayout(False)
@@ -2244,44 +1938,10 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents btnRecalculaCosto As System.Windows.Forms.Button
     Friend WithEvents txtNotasDocumentacion As System.Windows.Forms.RichTextBox
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents ckAVerificarI As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoI As System.Windows.Forms.CheckBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents ckAVerificarXII As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarXI As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarX As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarIX As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarVIII As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarVII As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarVI As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarV As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarIV As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarIII As System.Windows.Forms.CheckBox
-    Friend WithEvents ckAVerificarII As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoXII As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoXI As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoX As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoIX As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoVIII As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoVII As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoVI As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoV As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoIV As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoIII As System.Windows.Forms.CheckBox
-    Friend WithEvents ckInformativoII As System.Windows.Forms.CheckBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents txtCantidad As System.Windows.Forms.TextBox
     Friend WithEvents txtVersion As System.Windows.Forms.TextBox
-    Friend WithEvents ProcesoEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProcesoDetallesTrabajo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProcesoEquipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProcesoTemperatura As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProcesoTiempo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProcesoControl As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProcesoSeguridad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtComentariosXII As System.Windows.Forms.TextBox
     Friend WithEvents txtComentariosXI As System.Windows.Forms.TextBox
     Friend WithEvents txtComentariosX As System.Windows.Forms.TextBox
@@ -2331,6 +1991,7 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents btnCancelarHojaPiloto As System.Windows.Forms.Button
     Friend WithEvents txtDescripcionHojaPiloto As System.Windows.Forms.TextBox
+    Friend WithEvents prgbHojaPiloto As System.Windows.Forms.ProgressBar
     Friend WithEvents TipoFormula As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ArticuloFormula As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TerminadoFormula As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2338,5 +1999,11 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents CantidadFormula As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LoteFormula As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents StockFormula As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents prgbHojaPiloto As System.Windows.Forms.ProgressBar
+    Friend WithEvents ProcesoEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProcesoDetallesTrabajo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProcesoEquipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProcesoTemperatura As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProcesoTiempo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProcesoControl As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProcesoSeguridad As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

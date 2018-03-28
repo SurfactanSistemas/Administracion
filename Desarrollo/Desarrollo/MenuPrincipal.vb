@@ -50,7 +50,7 @@ Public Class MenuPrincipal
 
     Private Sub IngresoDePruebasDeEnsayoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDePruebasDeEnsayoToolStripMenuItem.Click
 
-        With IngresoPruebasEnsayo
+        With New IngresoPruebasEnsayo
             .Show()
             .WindowState = FormWindowState.Normal
             .Focus()

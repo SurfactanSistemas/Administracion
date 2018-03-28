@@ -31,6 +31,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.WIndice = New System.Windows.Forms.ListBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.txtObservacionesII = New System.Windows.Forms.TextBox()
@@ -43,8 +44,6 @@ Partial Class IngresoOrdenTrabajo
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtMuestra = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtMaterial = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.cmbEstabilidad = New System.Windows.Forms.ComboBox()
         Me.cmbAplicacion = New System.Windows.Forms.ComboBox()
@@ -83,12 +82,11 @@ Partial Class IngresoOrdenTrabajo
         Me.lstFiltrada = New System.Windows.Forms.ListBox()
         Me.lstConsulta = New System.Windows.Forms.ListBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.WIndice = New System.Windows.Forms.ListBox()
         Me.pnlNotas = New System.Windows.Forms.Panel()
-        Me.txtNota = New System.Windows.Forms.RichTextBox()
-        Me.btnCerrarNota = New System.Windows.Forms.Button()
-        Me.rbAplicacion = New System.Windows.Forms.RadioButton()
         Me.rbEstabilidad = New System.Windows.Forms.RadioButton()
+        Me.rbAplicacion = New System.Windows.Forms.RadioButton()
+        Me.btnCerrarNota = New System.Windows.Forms.Button()
+        Me.txtNota = New System.Windows.Forms.RichTextBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -209,6 +207,8 @@ Partial Class IngresoOrdenTrabajo
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.pnlNotas)
+        Me.Panel3.Controls.Add(Me.pnlConsulta)
         Me.Panel3.Controls.Add(Me.WIndice)
         Me.Panel3.Controls.Add(Me.TabControl1)
         Me.Panel3.Controls.Add(Me.txtFechaComprometida)
@@ -228,6 +228,15 @@ Partial Class IngresoOrdenTrabajo
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(808, 402)
         Me.Panel3.TabIndex = 0
+        '
+        'WIndice
+        '
+        Me.WIndice.FormattingEnabled = True
+        Me.WIndice.Location = New System.Drawing.Point(733, 16)
+        Me.WIndice.Name = "WIndice"
+        Me.WIndice.Size = New System.Drawing.Size(63, 17)
+        Me.WIndice.TabIndex = 4
+        Me.WIndice.Visible = False
         '
         'TabControl1
         '
@@ -255,15 +264,13 @@ Partial Class IngresoOrdenTrabajo
         Me.TabPage1.Controls.Add(Me.Label10)
         Me.TabPage1.Controls.Add(Me.txtMuestra)
         Me.TabPage1.Controls.Add(Me.Label9)
-        Me.TabPage1.Controls.Add(Me.txtMaterial)
-        Me.TabPage1.Controls.Add(Me.Label8)
         Me.TabPage1.Location = New System.Drawing.Point(4, 34)
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(734, 257)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Descripción de la Orden"
+        Me.TabPage1.Text = "Descripción del Proyecto"
         '
         'txtObservacionesII
         '
@@ -293,10 +300,12 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtUso
         '
-        Me.txtUso.Location = New System.Drawing.Point(223, 57)
-        Me.txtUso.MaxLength = 100
+        Me.txtUso.Location = New System.Drawing.Point(223, 35)
+        Me.txtUso.MaxLength = 200
+        Me.txtUso.Multiline = True
         Me.txtUso.Name = "txtUso"
-        Me.txtUso.Size = New System.Drawing.Size(500, 20)
+        Me.txtUso.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtUso.Size = New System.Drawing.Size(500, 42)
         Me.txtUso.TabIndex = 3
         '
         'Label12
@@ -337,15 +346,15 @@ Partial Class IngresoOrdenTrabajo
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label10.Location = New System.Drawing.Point(184, 55)
+        Me.Label10.Location = New System.Drawing.Point(115, 35)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(32, 18)
+        Me.Label10.Size = New System.Drawing.Size(101, 18)
         Me.Label10.TabIndex = 2
-        Me.Label10.Text = "Uso"
+        Me.Label10.Text = "Uso/Aplicación"
         '
         'txtMuestra
         '
-        Me.txtMuestra.Location = New System.Drawing.Point(223, 33)
+        Me.txtMuestra.Location = New System.Drawing.Point(223, 9)
         Me.txtMuestra.MaxLength = 50
         Me.txtMuestra.Name = "txtMuestra"
         Me.txtMuestra.Size = New System.Drawing.Size(500, 20)
@@ -356,30 +365,11 @@ Partial Class IngresoOrdenTrabajo
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label9.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label9.Location = New System.Drawing.Point(156, 34)
+        Me.Label9.Location = New System.Drawing.Point(156, 10)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(60, 18)
         Me.Label9.TabIndex = 2
         Me.Label9.Text = "Muestra"
-        '
-        'txtMaterial
-        '
-        Me.txtMaterial.Location = New System.Drawing.Point(223, 9)
-        Me.txtMaterial.MaxLength = 50
-        Me.txtMaterial.Name = "txtMaterial"
-        Me.txtMaterial.Size = New System.Drawing.Size(500, 20)
-        Me.txtMaterial.TabIndex = 3
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label8.Location = New System.Drawing.Point(14, 10)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(202, 18)
-        Me.Label8.TabIndex = 2
-        Me.Label8.Text = "Material Provisto por el Cliente"
         '
         'TabPage2
         '
@@ -572,7 +562,7 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(321, 16)
+        Me.txtFecha.Location = New System.Drawing.Point(343, 16)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -613,29 +603,29 @@ Partial Class IngresoOrdenTrabajo
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label7.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label7.Location = New System.Drawing.Point(34, 70)
+        Me.Label7.Location = New System.Drawing.Point(102, 70)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(99, 18)
+        Me.Label7.Size = New System.Drawing.Size(44, 18)
         Me.Label7.TabIndex = 0
-        Me.Label7.Text = "Observaciones"
+        Me.Label7.Text = "Titulo"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(271, 17)
+        Me.Label4.Location = New System.Drawing.Point(237, 17)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(44, 18)
+        Me.Label4.Size = New System.Drawing.Size(100, 18)
         Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Fecha"
+        Me.Label4.Text = "Fecha de Inicio"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label6.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label6.Location = New System.Drawing.Point(80, 43)
+        Me.Label6.Location = New System.Drawing.Point(93, 43)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(53, 18)
         Me.Label6.TabIndex = 0
@@ -646,7 +636,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(19, 17)
+        Me.Label3.Location = New System.Drawing.Point(32, 17)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(114, 18)
         Me.Label3.TabIndex = 0
@@ -715,7 +705,7 @@ Partial Class IngresoOrdenTrabajo
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(202, 82)
+        Me.pnlConsulta.Location = New System.Drawing.Point(202, 24)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(404, 355)
         Me.pnlConsulta.TabIndex = 2
@@ -768,15 +758,6 @@ Partial Class IngresoOrdenTrabajo
         Me.txtAyuda.Size = New System.Drawing.Size(326, 20)
         Me.txtAyuda.TabIndex = 0
         '
-        'WIndice
-        '
-        Me.WIndice.FormattingEnabled = True
-        Me.WIndice.Location = New System.Drawing.Point(733, 16)
-        Me.WIndice.Name = "WIndice"
-        Me.WIndice.Size = New System.Drawing.Size(63, 17)
-        Me.WIndice.TabIndex = 4
-        Me.WIndice.Visible = False
-        '
         'pnlNotas
         '
         Me.pnlNotas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
@@ -784,41 +765,11 @@ Partial Class IngresoOrdenTrabajo
         Me.pnlNotas.Controls.Add(Me.rbAplicacion)
         Me.pnlNotas.Controls.Add(Me.btnCerrarNota)
         Me.pnlNotas.Controls.Add(Me.txtNota)
-        Me.pnlNotas.Location = New System.Drawing.Point(156, 70)
+        Me.pnlNotas.Location = New System.Drawing.Point(156, 12)
         Me.pnlNotas.Name = "pnlNotas"
         Me.pnlNotas.Size = New System.Drawing.Size(497, 379)
         Me.pnlNotas.TabIndex = 3
         Me.pnlNotas.Visible = False
-        '
-        'txtNota
-        '
-        Me.txtNota.EnableAutoDragDrop = True
-        Me.txtNota.Location = New System.Drawing.Point(15, 14)
-        Me.txtNota.Name = "txtNota"
-        Me.txtNota.Size = New System.Drawing.Size(467, 328)
-        Me.txtNota.TabIndex = 0
-        Me.txtNota.Text = ""
-        '
-        'btnCerrarNota
-        '
-        Me.btnCerrarNota.Location = New System.Drawing.Point(191, 347)
-        Me.btnCerrarNota.Name = "btnCerrarNota"
-        Me.btnCerrarNota.Size = New System.Drawing.Size(115, 27)
-        Me.btnCerrarNota.TabIndex = 0
-        Me.btnCerrarNota.Text = "Cerrar Nota"
-        Me.btnCerrarNota.UseVisualStyleBackColor = True
-        '
-        'rbAplicacion
-        '
-        Me.rbAplicacion.AutoSize = True
-        Me.rbAplicacion.Location = New System.Drawing.Point(318, 350)
-        Me.rbAplicacion.Name = "rbAplicacion"
-        Me.rbAplicacion.Size = New System.Drawing.Size(74, 17)
-        Me.rbAplicacion.TabIndex = 1
-        Me.rbAplicacion.TabStop = True
-        Me.rbAplicacion.Text = "Aplicacion"
-        Me.rbAplicacion.UseVisualStyleBackColor = True
-        Me.rbAplicacion.Visible = False
         '
         'rbEstabilidad
         '
@@ -832,13 +783,41 @@ Partial Class IngresoOrdenTrabajo
         Me.rbEstabilidad.UseVisualStyleBackColor = True
         Me.rbEstabilidad.Visible = False
         '
+        'rbAplicacion
+        '
+        Me.rbAplicacion.AutoSize = True
+        Me.rbAplicacion.Location = New System.Drawing.Point(318, 350)
+        Me.rbAplicacion.Name = "rbAplicacion"
+        Me.rbAplicacion.Size = New System.Drawing.Size(74, 17)
+        Me.rbAplicacion.TabIndex = 1
+        Me.rbAplicacion.TabStop = True
+        Me.rbAplicacion.Text = "Aplicacion"
+        Me.rbAplicacion.UseVisualStyleBackColor = True
+        Me.rbAplicacion.Visible = False
+        '
+        'btnCerrarNota
+        '
+        Me.btnCerrarNota.Location = New System.Drawing.Point(191, 347)
+        Me.btnCerrarNota.Name = "btnCerrarNota"
+        Me.btnCerrarNota.Size = New System.Drawing.Size(115, 27)
+        Me.btnCerrarNota.TabIndex = 0
+        Me.btnCerrarNota.Text = "Cerrar Nota"
+        Me.btnCerrarNota.UseVisualStyleBackColor = True
+        '
+        'txtNota
+        '
+        Me.txtNota.EnableAutoDragDrop = True
+        Me.txtNota.Location = New System.Drawing.Point(15, 14)
+        Me.txtNota.Name = "txtNota"
+        Me.txtNota.Size = New System.Drawing.Size(467, 328)
+        Me.txtNota.TabIndex = 0
+        Me.txtNota.Text = ""
+        '
         'IngresoOrdenTrabajo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(808, 518)
-        Me.Controls.Add(Me.pnlNotas)
-        Me.Controls.Add(Me.pnlConsulta)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Location = New System.Drawing.Point(10, 10)
         Me.Name = "IngresoOrdenTrabajo"
@@ -904,8 +883,6 @@ Partial Class IngresoOrdenTrabajo
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents txtMuestra As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents txtMaterial As System.Windows.Forms.TextBox
-    Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents cmbAplicacion As System.Windows.Forms.ComboBox
     Friend WithEvents txtReferencias As System.Windows.Forms.TextBox
     Friend WithEvents txtRequisitosNormasRegulaciones As System.Windows.Forms.TextBox

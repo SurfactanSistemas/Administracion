@@ -48,11 +48,7 @@ Public Class IngresoPruebasEnsayo
         For Each _txt As TextBox In _CamposDeTexto()
             _txt.Text = ""
         Next
-
-        For Each _ck As CheckBox In _CamposCheckboxs()
-            _ck.Checked = False
-        Next
-
+        
         For Each _m As MaskedTextBox In {txtOrden, txtFecha}
             _m.Clear()
         Next
@@ -79,24 +75,6 @@ Public Class IngresoPruebasEnsayo
         Next
 
     End Sub
-
-    Private Function _CamposCheckboxs() As CheckBox()
-        Return _CamposAVerificar().ToArray.Union(_CamposInformativos).ToArray
-    End Function
-
-    Private Function _CamposAVerificar() As CheckBox()
-
-        Return {ckAVerificarI, ckAVerificarII, ckAVerificarIII, ckAVerificarIV, ckAVerificarV, _
-                ckAVerificarVI, ckAVerificarVII, ckAVerificarVIII, ckAVerificarIX, ckAVerificarX, _
-                ckAVerificarXI, ckAVerificarXII}
-    End Function
-
-    Private Function _CamposInformativos() As CheckBox()
-
-        Return {ckInformativoI, ckInformativoII, ckInformativoIII, ckInformativoIV, ckInformativoV, _
-                ckInformativoVI, ckInformativoVII, ckInformativoVIII, ckInformativoIX, ckInformativoX, _
-                ckInformativoXI, ckInformativoXII}
-    End Function
 
     Private Function _CamposComentarios() As TextBox()
 
@@ -859,63 +837,63 @@ Public Class IngresoPruebasEnsayo
                 Select Case iRow
                     Case 1
                         ZRequisito = txtRequisitosI.Text
-                        ZInformativo = IIf(ckInformativoI.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarI.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosI.Text
                     Case 2
                         ZRequisito = txtRequisitosII.Text
-                        ZInformativo = IIf(ckInformativoII.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarII.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosII.Text
                     Case 3
                         ZRequisito = txtRequisitosIII.Text
-                        ZInformativo = IIf(ckInformativoIII.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarIII.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosIII.Text
                     Case 4
                         ZRequisito = txtRequisitosIV.Text
-                        ZInformativo = IIf(ckInformativoIV.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarIV.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosIV.Text
                     Case 5
                         ZRequisito = txtRequisitosV.Text
-                        ZInformativo = IIf(ckInformativoV.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarV.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosV.Text
                     Case 6
                         ZRequisito = txtRequisitosVI.Text
-                        ZInformativo = IIf(ckInformativoVI.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarVI.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosVI.Text
                     Case 7
                         ZRequisito = txtRequisitosVII.Text
-                        ZInformativo = IIf(ckInformativoVII.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarVII.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosVII.Text
                     Case 8
                         ZRequisito = txtRequisitosVIII.Text
-                        ZInformativo = IIf(ckInformativoVIII.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarVIII.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosVIII.Text
                     Case 9
                         ZRequisito = txtRequisitosIX.Text
-                        ZInformativo = IIf(ckInformativoIX.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarIX.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosIX.Text
                     Case 10
                         ZRequisito = txtRequisitosX.Text
-                        ZInformativo = IIf(ckInformativoX.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarX.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosX.Text
                     Case 11
                         ZRequisito = txtRequisitosXI.Text
-                        ZInformativo = IIf(ckInformativoXI.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarXI.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosXI.Text
                     Case 12
                         ZRequisito = txtRequisitosXII.Text
-                        ZInformativo = IIf(ckInformativoXII.Checked, "1", "0")
-                        ZAVerificar = IIf(ckAVerificarXII.Checked, "1", "0")
+                        ZInformativo = "0"
+                        ZAVerificar = "0"
                         ZComentario = txtComentariosXII.Text
                 End Select
 
@@ -1842,7 +1820,7 @@ Public Class IngresoPruebasEnsayo
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Requisito, Informativo, AVerificar, Comentario FROM CargaEnsayoVI WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & WVersion & "' ORDER BY Clave")
         Dim dr As SqlDataReader
-        Dim WRequisito = "", WInformativo = "", WAVerificar = "", WComentario = ""
+        Dim WRequisito = "", WComentario = ""
         Dim XIndice = 0
         Dim WRequisitos = {txtRequisitosI, txtRequisitosII, txtRequisitosIII, txtRequisitosIV, txtRequisitosV, _
                            txtRequisitosVI, txtRequisitosVII, txtRequisitosVIII, txtRequisitosIX, txtRequisitosX, _
@@ -1850,12 +1828,6 @@ Public Class IngresoPruebasEnsayo
         Dim WComentarios = {txtComentariosI, txtComentariosII, txtComentariosIII, txtComentariosIV, txtComentariosV, _
                            txtComentariosVI, txtComentariosVII, txtComentariosVIII, txtComentariosIX, txtComentariosX, _
                            txtComentariosXI, txtComentariosXII}
-        Dim WInformativos = {ckInformativoI, ckInformativoII, ckInformativoIII, ckInformativoIV, ckInformativoV, _
-                           ckInformativoVI, ckInformativoVII, ckInformativoVIII, ckInformativoIX, ckInformativoX, _
-                           ckInformativoXI, ckInformativoXII}
-        Dim WAVerificarlos = {ckAVerificarI, ckAVerificarII, ckAVerificarIII, ckAVerificarIV, ckAVerificarV, _
-                           ckAVerificarVI, ckAVerificarVII, ckAVerificarVIII, ckAVerificarIX, ckAVerificarX, _
-                           ckAVerificarXI, ckAVerificarXII}
 
         Try
 
@@ -1872,8 +1844,6 @@ Public Class IngresoPruebasEnsayo
                     With dr
 
                         WRequisito = IIf(IsDBNull(.Item("Requisito")), "", .Item("Requisito"))
-                        WInformativo = IIf(IsDBNull(.Item("Informativo")), 0, .Item("Informativo"))
-                        WAVerificar = IIf(IsDBNull(.Item("AVerificar")), 0, .Item("AVerificar"))
                         WComentario = IIf(IsDBNull(.Item("Comentario")), "", .Item("Comentario"))
 
                     End With
@@ -1882,8 +1852,6 @@ Public Class IngresoPruebasEnsayo
 
                         WRequisitos(XIndice).Text = Trim(WRequisito)
                         WComentarios(XIndice).Text = Trim(WComentario)
-                        WInformativos(XIndice).Checked = Val(WInformativo) = 1
-                        WAVerificarlos(XIndice).Checked = Val(WAVerificar) = 1
 
                         XIndice += 1
 
@@ -4364,4 +4332,15 @@ Public Class IngresoPruebasEnsayo
         pnlHojaPiloto.Visible = False
     End Sub
 
+    Private Sub IngresoPruebasEnsayo_FormClosing( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+
+        If Trim(txtOrden.Text.Replace("-", "")) = "" Then Exit Sub
+
+        If MsgBox("¿Esta seguro de querer salir? Los dato que no se hayan guardado se perderán", MsgBoxStyle.YesNo) = MsgBoxResult.Yes then exit sub
+
+        e.Cancel = True
+
+        txtOrden.Focus
+
+    End Sub
 End Class

@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports Desarrollo.Clases
 
 Public Class IngresoOrdenTrabajo
 
@@ -42,7 +43,7 @@ Public Class IngresoOrdenTrabajo
     End Sub
 
     Private Function _CamposDeTexto() As TextBox()
-        Return {txtDescCliente, txtObservaciones, txtMaterial, txtMuestra, txtUso, txtObservacionesII, txtEncargado, txtRequisitosFuncionales, txtOtrosRequisitos, txtRequisitosNormasRegulaciones, txtReferencias, txtDescTrabajo, txtAyuda}
+        Return {txtDescCliente, txtObservaciones, txtMuestra, txtUso, txtObservacionesII, txtEncargado, txtRequisitosFuncionales, txtOtrosRequisitos, txtRequisitosNormasRegulaciones, txtReferencias, txtDescTrabajo, txtAyuda}
     End Function
 
     Private Sub txtOrden_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrden.KeyDown
@@ -97,7 +98,7 @@ Public Class IngresoOrdenTrabajo
                     txtDescCliente.Text = _TraerNombreCliente(txtCliente.Text)
 
                     txtObservaciones.Text = IIf(IsDBNull(.Item("Observaciones")), "", .Item("Observaciones"))
-                    txtMaterial.Text = IIf(IsDBNull(.Item("Material")), "", .Item("Material"))
+                    
                     txtMuestra.Text = IIf(IsDBNull(.Item("Muestra")), "", .Item("Muestra"))
                     txtUso.Text = IIf(IsDBNull(.Item("Uso")), "", .Item("Uso"))
 
@@ -337,27 +338,14 @@ Public Class IngresoOrdenTrabajo
             'If Trim(txtObservaciones.Text) = "" Then : Exit Sub : End If
 
             TabControl1.SelectedIndex = 0
-            txtMaterial.Focus()
+            txtMuestra.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtObservaciones.Text = ""
         End If
 
     End Sub
-
-    Private Sub txtMaterial_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMaterial.KeyDown
-        
-        If e.KeyData = Keys.Enter Then
-            'If Trim(txtMaterial.Text) = "" Then : Exit Sub : End If
-
-            txtMuestra.Focus()
-
-        ElseIf e.KeyData = Keys.Escape Then
-            txtMaterial.Text = ""
-        End If
-
-    End Sub
-
+    
     Private Sub txtMuestra_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMuestra.KeyDown
 
         If e.KeyData = Keys.Enter Then
@@ -842,7 +830,7 @@ Public Class IngresoOrdenTrabajo
             ZSQL = ZSQL & "'" & Helper.ordenaFecha(txtFechaComprometida.Text) & "',"
             ZSQL = ZSQL & "'" & txtCliente.Text & "',"
             ZSQL = ZSQL & "'" & txtObservaciones.Text & "',"
-            ZSQL = ZSQL & "'" & txtMaterial.Text & "',"
+            ZSQL = ZSQL & "'" & "" & "',"
             ZSQL = ZSQL & "'" & txtMuestra.Text & "',"
             ZSQL = ZSQL & "'" & txtUso.Text & "',"
             ZSQL = ZSQL & "'" & WDescripciones(1) & "',"
@@ -911,9 +899,9 @@ Public Class IngresoOrdenTrabajo
             ZSQL = ZSQL & " OrdFechaEntrega = " & "'" & Helper.ordenaFecha(txtFechaComprometida.Text) & "',"
             ZSQL = ZSQL & " Cliente = " & "'" & txtCliente.Text & "',"
             ZSQL = ZSQL & " Observaciones = " & "'" & txtObservaciones.Text & "',"
-            ZSQL = ZSQL & " Material = " & "'" & txtMaterial.Text & "',"
+            ZSQL = ZSQL & " Material = " & "'" & "" & "',"
             ZSQL = ZSQL & " Muestra = " & "'" & txtMuestra.Text & "',"
-            ZSQL = ZSQL & " Uso = " & "'" & txtUso.Text & "',"
+            ZSQL = ZSQL & " Uso = " & "'" & txtUso.Text.sliceleft(200) & "',"
             ZSQL = ZSQL & " DescripcionI = " & "'" & WDescripciones(1) & "',"
             ZSQL = ZSQL & " DescripcionII = " & "'" & WDescripciones(2) & "',"
             ZSQL = ZSQL & " DescripcionIII = " & "'" & WDescripciones(3) & "',"
@@ -957,13 +945,13 @@ Public Class IngresoOrdenTrabajo
     Private Function _PrepararReferencias() As String()
         Dim WReferencias(2) As String
         Dim WCorte = 50
-        Dim WIndice = 1
+        Dim ZIndice = 1
 
         For i = 1 To 2
 
-            WReferencias(i) = Mid(txtReferencias.Text, WIndice, 50)
+            WReferencias(i) = Mid(txtReferencias.Text, ZIndice, 50)
 
-            WIndice = WCorte
+            ZIndice = WCorte
 
             WCorte += 50
 
@@ -975,43 +963,43 @@ Public Class IngresoOrdenTrabajo
     Private Function _PrepararRequisitos() As String()
         Dim WRequisitos(6) As String
         Dim WCorte = 50
-        Dim WIndice = 1
+        Dim ZIndice = 1
         Dim WAux = 1
 
         ' Guardamos los Requisitos Funcionales.
         For i = WAux To 2
 
-            WRequisitos(i) = Mid(txtRequisitosFuncionales.Text, WIndice, 50)
+            WRequisitos(i) = Mid(txtRequisitosFuncionales.Text, ZIndice, 50)
 
-            WIndice = WCorte
+            ZIndice = WCorte
 
             WCorte += 50
 
             WAux += 1
         Next
 
-        WIndice = 1
+        ZIndice = 1
 
         ' Los Otros Requisitos.
         For i = WAux To 4
 
-            WRequisitos(i) = Mid(txtOtrosRequisitos.Text, WIndice, 50)
+            WRequisitos(i) = Mid(txtOtrosRequisitos.Text, ZIndice, 50)
 
-            WIndice = WCorte
+            ZIndice = WCorte
 
             WCorte += 50
 
             WAux += 1
         Next
 
-        WIndice = 1
+        ZIndice = 1
 
         ' Por ultimo, los Requisitos Legales, Normas y/o Regulaciones.
         For i = WAux To 6
 
-            WRequisitos(i) = Mid(txtRequisitosNormasRegulaciones.Text, WIndice, 50)
+            WRequisitos(i) = Mid(txtRequisitosNormasRegulaciones.Text, ZIndice, 50)
 
-            WIndice = WCorte
+            ZIndice = WCorte
 
             WCorte += 50
 
@@ -1024,13 +1012,13 @@ Public Class IngresoOrdenTrabajo
     Private Function _PrepararObservaciones() As String()
         Dim WObservaciones(3) As String
         Dim WCorte = 100
-        Dim WIndice = 1
+        Dim ZIndice = 1
 
         For i = 1 To 3
 
-            WObservaciones(i) = Mid(txtObservacionesII.Text, WIndice, 100)
+            WObservaciones(i) = Mid(txtObservacionesII.Text, ZIndice, 100)
 
-            WIndice = WCorte
+            ZIndice = WCorte
 
             WCorte += 100
 
@@ -1042,13 +1030,13 @@ Public Class IngresoOrdenTrabajo
     Private Function _PrepararDescripciones() As String()
         Dim WDescripciones(5) As String
         Dim WCorte = 100
-        Dim WIndice = 1
+        Dim ZIndice = 1
 
         For i = 1 To 5
 
-            WDescripciones(i) = Mid(txtDescTrabajo.Text, WIndice, 100)
+            WDescripciones(i) = Mid(txtDescTrabajo.Text, ZIndice, 100)
 
-            WIndice = WCorte
+            ZIndice = WCorte
 
             WCorte += 100
 
