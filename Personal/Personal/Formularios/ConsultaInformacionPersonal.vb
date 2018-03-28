@@ -1146,4 +1146,20 @@ Public Class ConsultaInformacionPersonal
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
       
+    Private Sub dgvHijos_RowHeaderMouseDoubleClick( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvHijos.RowHeaderMouseDoubleClick
+
+        Try
+            With dgvHijos
+                Dim iRow As Short = e.RowIndex
+                If MsgBox("¿Está seguro de que quiere eliminar el registro?", MsgBoxStyle.YesNo) = MsgBoxResult.No then Exit Sub
+                .Rows.Remove(.Rows(iRow))
+                If .Rows.Count = 0 then
+                    .Rows.Add
+                End If
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+        
+    End Sub
 End Class
