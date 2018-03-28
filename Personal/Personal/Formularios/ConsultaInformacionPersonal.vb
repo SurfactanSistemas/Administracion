@@ -1218,4 +1218,13 @@ Public Class ConsultaInformacionPersonal
 
     End Function
 
+    Private Sub ConsultaInformacionPersonal_FormClosing( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+
+        If Trim(txtDni.Text) = "" then Exit Sub
+
+        If MsgBox("¿Está seguro de que quiere cerrar el formulario? Se perderán aquellos datos que no se hayan guardado.", MsgBoxStyle.YesNo) = MsgBoxResult.No then
+            e.Cancel = True
+        End If
+
+    End Sub
 End Class
