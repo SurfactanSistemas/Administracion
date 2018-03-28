@@ -283,6 +283,26 @@ Public Class ConsultaInformacionPersonal
                     Next
 
                 End With
+            Else
+                ' Buzo: 1, Camisa: 2, Campera: 3, Pantalón: 4, Remera: 5, Zapato: 6
+                    Dim WIndumentaria As String() = {"", "Buzo", "Camisa", "Campera", "Pantalon", "Remera", "Zapato"}
+                    Dim WItem, WTalle, WObs As String
+
+                    For i = 1 to 6
+
+                        WItem = WIndumentaria(i)
+
+                        WFila = dgvIndumentaria.Rows.Add
+                        dgvIndumentaria.Rows(WFila).Cells("Indumentaria").Value = WItem
+
+                        WTalle = ""
+                        dgvIndumentaria.Rows(wfila).Cells("Talle").Value = Trim(WTalle)
+
+                        WObs = ""
+                        dgvIndumentaria.Rows(wfila).Cells("ObservacionesIndumentaria").Value = Trim(WObs)
+                        dgvIndumentaria.Rows(WFila).Cells("TipoInd").Value = Str$(i)
+
+                    Next
             End If
 
         Catch ex As Exception
@@ -1198,6 +1218,8 @@ Public Class ConsultaInformacionPersonal
     Private Function _CalcularEdad(ByVal WFecha As String) As String
 
         Try
+            If WFecha.estaVacia then Return ""
+
             Dim WDia, WMes, WAnio As Short
             Dim WNacimiento As Date
 
@@ -1371,5 +1393,47 @@ Public Class ConsultaInformacionPersonal
     Private Sub btnCerrarConsulta_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
         pnlConsulta.Visible=False
         txtDni.Focus
+    End Sub
+
+    Private Sub btnEliminar_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles btnEliminar.Click
+
+        If Trim(txtDni.Text) = "" then Exit Sub
+
+        If MsgBox("¿Seguro de que quiere eliminar los datos del Personal?", MsgBoxStyle.YesNo) = MsgBoxResult.No then Exit Sub
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM Personal WHERE Dni = '" & txtDni.Text & "'")
+        Dim trans As SqlTransaction = Nothing
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            trans = cn.BeginTransaction
+            cm.Connection = cn
+            cm.Transaction=trans
+
+            cm.ExecuteNonQuery
+
+            cm.CommandText = "DELETE FROM PersonalHijos WHERE Dni = '" & txtDni.Text & "'"
+            cm.ExecuteNonQuery
+
+            trans.Commit
+
+            btnLimpiar.PerformClick
+
+        Catch ex As Exception
+            If Not IsNothing(trans) then
+                trans.Rollback
+            End If
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        
     End Sub
 End Class

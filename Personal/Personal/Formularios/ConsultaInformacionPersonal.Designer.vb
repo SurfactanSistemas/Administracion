@@ -22,10 +22,10 @@ Partial Class ConsultaInformacionPersonal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -696,16 +696,16 @@ Partial Class ConsultaInformacionPersonal
         '
         'DniHijo
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle9
         Me.DniHijo.HeaderText = "DNI"
         Me.DniHijo.MaxInputLength = 8
         Me.DniHijo.Name = "DniHijo"
         '
         'EdadHijo
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle10
         Me.EdadHijo.HeaderText = "Edad"
         Me.EdadHijo.MaxInputLength = 2
         Me.EdadHijo.Name = "EdadHijo"
@@ -713,8 +713,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'FechaNacimientoHijo
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle11
         Me.FechaNacimientoHijo.HeaderText = "Fecha Nac."
         Me.FechaNacimientoHijo.MaxInputLength = 10
         Me.FechaNacimientoHijo.Name = "FechaNacimientoHijo"
@@ -885,8 +885,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'Talle
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talle.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talle.DefaultCellStyle = DataGridViewCellStyle12
         Me.Talle.HeaderText = "Talle"
         Me.Talle.MaxInputLength = 2
         Me.Talle.Name = "Talle"
