@@ -61,7 +61,7 @@ Public Class ConsultaInformacionPersonal
     Private Function _CamposDeTexto() As TextBox()
         Return _
             {txtDni, txtCalle, txtNumero, txtDpto, txtCodPostal, txtLocalidad, txtAclaracion, txtNombreCompletoConyugue,
-             txtEdadConyugue, txtDniConyugue, txtSueldoBruto, txtAyuda, txtNombreCompleto, txtLegajo}
+             txtEdadConyugue, txtDniConyugue, txtSueldoBruto, txtAyuda, txtNombreCompleto, txtLegajo, txtEdad}
     End Function
 
     Private Sub IngresoOrdenTrabajo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) _
@@ -103,6 +103,31 @@ Public Class ConsultaInformacionPersonal
             ' Cargo los datos de los Hijos
             _CargarDatosHijos()
 
+            ' Recalculamos edad de Hijos.
+             Dim WFecha As String
+
+            For Each row As DataGridViewRow In dgvHijos.Rows
+                With row
+                    WFecha = IIf(IsNothing(.Cells("FechaNacimientoHijo").Value), "", .Cells("FechaNacimientoHijo").Value)        
+
+                    If not WFecha.estaVacia then
+                        
+                        .Cells("EdadHijo").Value = _CalcularEdad(WFecha)
+
+                    End If
+
+                End With
+            Next
+
+            ' Recalculamos edad de Conyuge.
+            If Not txtFechaNacimientoConyugue.Text.estaVacia then
+                txtEdadConyugue.Text = _CalcularEdad(txtFechaNacimientoConyugue.Text)
+            End If
+
+            ' Recalculamos edad del Personal.
+            If Not txtFechaNacimiento.Text.estaVacia then
+                txtEdad.Text = _CalcularEdad(txtFechaNacimiento.Text)
+            End If
 
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -427,6 +452,7 @@ Public Class ConsultaInformacionPersonal
             'If txtFechaNacimiento.Text.estaVacia Then : Exit Sub : End If
 
             If Helper._ValidarFecha(txtFechaNacimiento.Text) then
+                txtEdad.Text = _CalcularEdad(txtFechaNacimiento.Text)
                 txtCalle.Focus
             End If
 
@@ -591,6 +617,7 @@ Public Class ConsultaInformacionPersonal
             ' Validamos la fecha introducida sólo en los casos en que haya colocado alguna.
             If Not txtFechaNacimientoConyugue.Text.estaVacia then
                 If Helper._ValidarFecha(txtFechaNacimientoConyugue.Text) then
+                    txtEdadConyugue.Text = _CalcularEdad(txtFechaNacimientoConyugue.Text)
                     txtFechaCasamiento.Focus
                 Else
                     Exit Sub
@@ -612,28 +639,18 @@ Public Class ConsultaInformacionPersonal
 
             If Not txtFechaCasamiento.Text.estaVacia then
 
-                If Helper._ValidarFecha(txtFechaCasamiento.Text) then
+                If Not Helper._ValidarFecha(txtFechaCasamiento.Text) then
 
-                    TabControl1.SelectTab(2)
-
-                    With cmbEstado
-                        .DroppedDown = True
-                        .Focus
-                    End With
-
-                Else
                     Exit Sub
+
                 End If
-            Else
-
-                TabControl1.SelectTab(2)
-
-                With cmbEstado
-                    .DroppedDown = True
-                    .Focus
-                End With
 
             End If
+
+            With dgvHijos
+                .CurrentCell = .Rows(0).Cells(0)
+                .Focus
+            End With
 
         ElseIf e.KeyData = Keys.Escape Then
             txtFechaCasamiento.Clear
@@ -660,8 +677,8 @@ Public Class ConsultaInformacionPersonal
 
             txtSueldoBruto.Text = Helper.formatonumerico(txtSueldoBruto.Text)
 
-            With cmbUbicacion
-                .DroppedDown = True
+            With dgvIndumentaria
+                .CurrentCell = .Rows(0).Cells(0)
                 .Focus
             End With
 
@@ -971,9 +988,9 @@ Public Class ConsultaInformacionPersonal
         Return valido
     End Function
 
-    Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
-        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
-    End Function
+    'Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
+    '    Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
+    'End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
         Dim valido As Boolean = False
@@ -987,17 +1004,17 @@ Public Class ConsultaInformacionPersonal
         Return valido
     End Function
 
-    Private Function _EsDecimalOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+    'Private Function _EsDecimalOControl(ByVal keycode) As Boolean
+    '    Dim valido As Boolean = False
 
-        If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
-            valido = True
-        Else
-            valido = False
-        End If
+    '    If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
+    '        valido = True
+    '    Else
+    '        valido = False
+    '    End If
 
-        Return valido
-    End Function
+    '    Return valido
+    'End Function
 
     
         
@@ -1042,6 +1059,21 @@ Public Class ConsultaInformacionPersonal
                 End With
                 
             End If
+
+            Dim WFecha As String
+
+            For Each row As DataGridViewRow In dgvHijos.Rows
+                With row
+                    WFecha = IIf(IsNothing(.Cells("FechaNacimientoHijo").Value), "", .Cells("FechaNacimientoHijo").Value)        
+
+                    If not WFecha.estaVacia then
+                        
+                        .Cells("EdadHijo").Value = _CalcularEdad(WFecha)
+
+                    End If
+
+                End With
+            Next
 
         ElseIf e.KeyData = Keys.Escape Then
             txtFechaAux.Text = ""
@@ -1107,7 +1139,7 @@ Public Class ConsultaInformacionPersonal
                                         .Rows(iRow).Cells(iCol + 1).value = ""
                                     End Try
                                 End If
-
+                        
                         End Select
 
                     End If
@@ -1162,4 +1194,28 @@ Public Class ConsultaInformacionPersonal
         End Try
         
     End Sub
+
+    Private Function _CalcularEdad(ByVal WFecha As String) As String
+
+        Try
+            Dim WDia, WMes, WAnio As Short
+            Dim WNacimiento As Date
+
+            WDia = Mid(wfecha, 1, 2)
+            WMes = Mid(wfecha, 4, 2)
+            WAnio = Mid(wfecha, 7, 4)
+
+            WNacimiento = New Date(WAnio, WMes, WDia)
+
+            If Date.Compare(WNacimiento, Date.Now) > 0 then Return 0
+
+            Return Date.Now.AddTicks(-WNacimiento.Ticks).Year - 1
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            Return ""
+        End Try
+
+    End Function
+
 End Class

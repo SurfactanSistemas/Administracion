@@ -22,10 +22,10 @@ Partial Class ConsultaInformacionPersonal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -115,6 +115,8 @@ Partial Class ConsultaInformacionPersonal
         Me.DniHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EdadHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaNacimientoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtEdad = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -336,6 +338,8 @@ Partial Class ConsultaInformacionPersonal
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabPage1.Controls.Add(Me.txtEdad)
+        Me.TabPage1.Controls.Add(Me.Label24)
         Me.TabPage1.Controls.Add(Me.txtDni)
         Me.TabPage1.Controls.Add(Me.GroupBox2)
         Me.TabPage1.Controls.Add(Me.txtFechaNacimiento)
@@ -821,8 +825,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'Talle
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talle.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talle.DefaultCellStyle = DataGridViewCellStyle5
         Me.Talle.HeaderText = "Talle"
         Me.Talle.MaxInputLength = 2
         Me.Talle.Name = "Talle"
@@ -1075,16 +1079,16 @@ Partial Class ConsultaInformacionPersonal
         '
         'DniHijo
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle6
         Me.DniHijo.HeaderText = "DNI"
         Me.DniHijo.MaxInputLength = 8
         Me.DniHijo.Name = "DniHijo"
         '
         'EdadHijo
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle7
         Me.EdadHijo.HeaderText = "Edad"
         Me.EdadHijo.MaxInputLength = 2
         Me.EdadHijo.Name = "EdadHijo"
@@ -1092,11 +1096,33 @@ Partial Class ConsultaInformacionPersonal
         '
         'FechaNacimientoHijo
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle8
         Me.FechaNacimientoHijo.HeaderText = "Fecha Nac."
         Me.FechaNacimientoHijo.MaxInputLength = 10
         Me.FechaNacimientoHijo.Name = "FechaNacimientoHijo"
+        '
+        'txtEdad
+        '
+        Me.txtEdad.BackColor = System.Drawing.SystemColors.Window
+        Me.txtEdad.Location = New System.Drawing.Point(336, 78)
+        Me.txtEdad.MaxLength = 6
+        Me.txtEdad.Name = "txtEdad"
+        Me.txtEdad.ReadOnly = True
+        Me.txtEdad.Size = New System.Drawing.Size(68, 20)
+        Me.txtEdad.TabIndex = 15
+        Me.txtEdad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label24.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label24.Location = New System.Drawing.Point(290, 79)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(42, 18)
+        Me.Label24.TabIndex = 14
+        Me.Label24.Text = "Edad:"
         '
         'ConsultaInformacionPersonal
         '
@@ -1228,4 +1254,6 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents DniHijo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EdadHijo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FechaNacimientoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtEdad As System.Windows.Forms.TextBox
+    Friend WithEvents Label24 As System.Windows.Forms.Label
 End Class
