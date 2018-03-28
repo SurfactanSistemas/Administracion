@@ -22,10 +22,10 @@ Partial Class ConsultaInformacionPersonal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -44,6 +44,8 @@ Partial Class ConsultaInformacionPersonal
         Me.WIndice = New System.Windows.Forms.ListBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.txtEdad = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
         Me.txtDni = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtAclaracion = New System.Windows.Forms.TextBox()
@@ -71,6 +73,11 @@ Partial Class ConsultaInformacionPersonal
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.dgvHijos = New System.Windows.Forms.DataGridView()
+        Me.NombreHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ApellidoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DniHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EdadHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaNacimientoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.txtFechaCasamiento = New System.Windows.Forms.MaskedTextBox()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -110,13 +117,6 @@ Partial Class ConsultaInformacionPersonal
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
-        Me.NombreHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ApellidoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DniHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EdadHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FechaNacimientoHijo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtEdad = New System.Windows.Forms.TextBox()
-        Me.Label24 = New System.Windows.Forms.Label()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -258,9 +258,9 @@ Partial Class ConsultaInformacionPersonal
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(645, 0)
+        Me.pnlConsulta.Location = New System.Drawing.Point(203, 22)
         Me.pnlConsulta.Name = "pnlConsulta"
-        Me.pnlConsulta.Size = New System.Drawing.Size(45, 33)
+        Me.pnlConsulta.Size = New System.Drawing.Size(403, 358)
         Me.pnlConsulta.TabIndex = 2
         '
         'GroupBox1
@@ -358,6 +358,28 @@ Partial Class ConsultaInformacionPersonal
         Me.TabPage1.Size = New System.Drawing.Size(734, 332)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "DATOS GENERALES"
+        '
+        'txtEdad
+        '
+        Me.txtEdad.BackColor = System.Drawing.SystemColors.Window
+        Me.txtEdad.Location = New System.Drawing.Point(336, 78)
+        Me.txtEdad.MaxLength = 6
+        Me.txtEdad.Name = "txtEdad"
+        Me.txtEdad.ReadOnly = True
+        Me.txtEdad.Size = New System.Drawing.Size(68, 20)
+        Me.txtEdad.TabIndex = 15
+        Me.txtEdad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label24.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label24.Location = New System.Drawing.Point(290, 79)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(42, 18)
+        Me.Label24.TabIndex = 14
+        Me.Label24.Text = "Edad:"
         '
         'txtDni
         '
@@ -659,6 +681,44 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvHijos.Size = New System.Drawing.Size(667, 143)
         Me.dgvHijos.TabIndex = 0
         '
+        'NombreHijo
+        '
+        Me.NombreHijo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.NombreHijo.HeaderText = "Nombre"
+        Me.NombreHijo.MaxInputLength = 25
+        Me.NombreHijo.Name = "NombreHijo"
+        '
+        'ApellidoHijo
+        '
+        Me.ApellidoHijo.HeaderText = "Apellido"
+        Me.ApellidoHijo.MaxInputLength = 15
+        Me.ApellidoHijo.Name = "ApellidoHijo"
+        '
+        'DniHijo
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DniHijo.HeaderText = "DNI"
+        Me.DniHijo.MaxInputLength = 8
+        Me.DniHijo.Name = "DniHijo"
+        '
+        'EdadHijo
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle6
+        Me.EdadHijo.HeaderText = "Edad"
+        Me.EdadHijo.MaxInputLength = 2
+        Me.EdadHijo.Name = "EdadHijo"
+        Me.EdadHijo.Width = 50
+        '
+        'FechaNacimientoHijo
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle7
+        Me.FechaNacimientoHijo.HeaderText = "Fecha Nac."
+        Me.FechaNacimientoHijo.MaxInputLength = 10
+        Me.FechaNacimientoHijo.Name = "FechaNacimientoHijo"
+        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.txtFechaCasamiento)
@@ -825,8 +885,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'Talle
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talle.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talle.DefaultCellStyle = DataGridViewCellStyle8
         Me.Talle.HeaderText = "Talle"
         Me.Talle.MaxInputLength = 2
         Me.Talle.Name = "Talle"
@@ -1063,66 +1123,6 @@ Partial Class ConsultaInformacionPersonal
         Me.btnAceptar.TabIndex = 0
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
-        '
-        'NombreHijo
-        '
-        Me.NombreHijo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.NombreHijo.HeaderText = "Nombre"
-        Me.NombreHijo.MaxInputLength = 25
-        Me.NombreHijo.Name = "NombreHijo"
-        '
-        'ApellidoHijo
-        '
-        Me.ApellidoHijo.HeaderText = "Apellido"
-        Me.ApellidoHijo.MaxInputLength = 15
-        Me.ApellidoHijo.Name = "ApellidoHijo"
-        '
-        'DniHijo
-        '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle10
-        Me.DniHijo.HeaderText = "DNI"
-        Me.DniHijo.MaxInputLength = 8
-        Me.DniHijo.Name = "DniHijo"
-        '
-        'EdadHijo
-        '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle11
-        Me.EdadHijo.HeaderText = "Edad"
-        Me.EdadHijo.MaxInputLength = 2
-        Me.EdadHijo.Name = "EdadHijo"
-        Me.EdadHijo.Width = 50
-        '
-        'FechaNacimientoHijo
-        '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle12
-        Me.FechaNacimientoHijo.HeaderText = "Fecha Nac."
-        Me.FechaNacimientoHijo.MaxInputLength = 10
-        Me.FechaNacimientoHijo.Name = "FechaNacimientoHijo"
-        '
-        'txtEdad
-        '
-        Me.txtEdad.BackColor = System.Drawing.SystemColors.Window
-        Me.txtEdad.Location = New System.Drawing.Point(336, 78)
-        Me.txtEdad.MaxLength = 6
-        Me.txtEdad.Name = "txtEdad"
-        Me.txtEdad.ReadOnly = True
-        Me.txtEdad.Size = New System.Drawing.Size(68, 20)
-        Me.txtEdad.TabIndex = 15
-        Me.txtEdad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label24.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label24.Location = New System.Drawing.Point(290, 79)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(42, 18)
-        Me.Label24.TabIndex = 14
-        Me.Label24.Text = "Edad:"
         '
         'ConsultaInformacionPersonal
         '

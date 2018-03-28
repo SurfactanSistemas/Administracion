@@ -1227,4 +1227,149 @@ Public Class ConsultaInformacionPersonal
         End If
 
     End Sub
+
+    Private Sub btnConsultas_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles btnConsultas.Click
+        
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim WVector(1,2) As String
+        Dim WRenglon As Integer = 0
+
+        Try
+
+            lstConsulta.Items.Clear
+            lstFiltrada.Items.Clear
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            Array.Clear(WVector, 0, WVector.Length)
+            cm.CommandText="SELECT COUNT(Distinct Dni) as Total FROM Legajo WHERE Dni <> '' and Dni <> 0"
+            
+            dr = cm.ExecuteReader()
+            dr.Read
+
+            If dr.Item("Total") = 0 then Exit Sub
+
+            ReDim WVector(dr.Item("Total") - 1, 2)
+
+            If Not dr.IsClosed then
+                dr.Close
+            End If
+
+            cm.CommandText = "SELECT Distinct Dni, Descripcion FROM Legajo WHERE Dni <> '' and Dni <> 0 Order by Descripcion"
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+
+                    WVector(WRenglon, 1) = dr.Item("Dni")
+                    WVector(WRenglon, 2) = dr.Item("Descripcion")
+
+                    WRenglon += 1
+                Loop
+
+            End If
+
+            For i = 0 to WRenglon - 1
+                lstConsulta.Items.Add(WVector(i, 1).PadRight(15) & Trim(WVector(i, 2)))
+                WIndice.Items.Add(WVector(i, 1))
+            Next
+
+            pnlConsulta.Visible=True
+            txtAyuda.Text = ""
+            txtAyuda.Focus
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        
+    End Sub
+    
+        
+    ' Rutinas de Filtrado Dinámico.
+	Private Sub _FiltrarDinamicamente()
+		Dim origen As ListBox = lstConsulta
+		Dim final As ListBox = lstFiltrada
+		Dim cadena As String = Trim(txtAyuda.Text)
+
+		final.Items.Clear()
+
+		If UCase(Trim(cadena)) <> "" Then
+
+		    For Each item In origen.Items
+
+		        If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
+
+		            final.Items.Add(item)
+
+		        End If
+
+		    Next
+
+		    final.Visible = True
+		    origen.Visible = false
+
+		Else
+
+		    final.Visible = False
+		    origen.Visible = True
+
+		End If
+	End Sub
+
+	Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+		Dim origen As ListBox = lstConsulta
+		Dim filtrado As ListBox = lstFiltrada
+		Dim texto As TextBox = txtAyuda
+
+		If IsNothing(filtrado.SelectedItem) Then : Exit Sub : End If
+
+		' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
+		origen.SelectedItem = filtrado.SelectedItem
+
+		' Llamamos al evento que tenga asosiado el control de origen.
+		lstConsulta_Click(Nothing, Nothing)
+
+
+		' Sacamos de vista los resultados filtrados.
+		filtrado.Visible = False
+		texto.Text = ""
+	End Sub
+
+	Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+		_FiltrarDinamicamente()
+	End Sub
+    
+    Private Sub lstConsulta_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles lstConsulta.Click
+
+        Try
+            
+            If lstConsulta.SelectedItem = "" then Exit Sub
+
+            txtDni.Text = WIndice.Items(lstConsulta.SelectedIndex)
+
+            txtDni_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+            pnlConsulta.Visible=False
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+    Private Sub btnCerrarConsulta_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
+        pnlConsulta.Visible=False
+        txtDni.Focus
+    End Sub
 End Class
