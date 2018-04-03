@@ -17,6 +17,9 @@ namespace Modulo_Capacitacion.Maestros.Temas
         {
             InitializeComponent();
             DGV_Temas.DataSource = temas.ListarTodos();
+            DataGridViewColumn columna = DGV_Temas.Columns["Descripcion"];
+            if (columna != null)
+                columna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
 
         private void codigoToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 using ClassConexion;
-using System.Data;
 
 namespace Negocio
 {
@@ -27,8 +23,8 @@ namespace Negocio
         public object Observacion;
         public string EstadoCurso;
         public int EstaCurso;
-
-        public System.Data.DataTable ListarTodos()
+        
+        public DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
             string consulta = "select * from Curso order by Codigo asc";
@@ -74,13 +70,17 @@ namespace Negocio
                 int.TryParse(DT.Rows[0]["Horas"].ToString(),out prueba);
                 if (prueba == 0) obj.Horas = null;
                 else { obj.Horas = prueba; }
-                Responsable R1 = new Responsable();
-                R1.Codigo = int.Parse(DT.Rows[0]["ResponsableII"].ToString());
-                R1 = R1.BuscarUno(R1.Codigo.ToString());
+                    Responsable R1 = new Responsable
+                    {
+                        Codigo = int.Parse(DT.Rows[0]["ResponsableII"].ToString())
+                    };
+                    R1 = R1.BuscarUno(R1.Codigo.ToString());
 
-                Responsable R2 = new Responsable();
-                R2.Codigo = int.Parse(DT.Rows[0]["ResponsableIII"].ToString());
-                R2 = R2.BuscarUno(R2.Codigo.ToString());
+                    Responsable R2 = new Responsable
+                    {
+                        Codigo = int.Parse(DT.Rows[0]["ResponsableIII"].ToString())
+                    };
+                    R2 = R2.BuscarUno(R2.Codigo.ToString());
            
                 //obj.ResponsableII = int.Parse(DT.Rows[0]["ResponsableII"].ToString());
                 //obj.ResponsableIII = int.Parse(DT.Rows[0]["ResponsableIII"].ToString());
@@ -152,12 +152,16 @@ namespace Negocio
                 int.TryParse(DT.Rows[0]["Horas"].ToString(), out prueba);
                 if (prueba == 0) obj.Horas = null;
                 else { obj.Horas = prueba; }
-                Responsable R1 = new Responsable();
-                R1.Codigo = int.Parse(DT.Rows[0]["ResponsableII"].ToString());
+                Responsable R1 = new Responsable
+                {
+                    Codigo = int.Parse(DT.Rows[0]["ResponsableII"].ToString())
+                };
                 R1 = R1.BuscarUno(R1.Codigo.ToString());
 
-                Responsable R2 = new Responsable();
-                R2.Codigo = int.Parse(DT.Rows[0]["ResponsableIII"].ToString());
+                Responsable R2 = new Responsable
+                {
+                    Codigo = int.Parse(DT.Rows[0]["ResponsableIII"].ToString())
+                };
                 R2 = R2.BuscarUno(R2.Codigo.ToString());
 
                 //obj.ResponsableII = int.Parse(DT.Rows[0]["ResponsableII"].ToString());
@@ -199,14 +203,14 @@ namespace Negocio
             return valor;
         }
 
-        public System.Data.DataTable ListarTemas()
+        public DataTable ListarTemas()
         {
             Conexion repo = new Conexion();
             string consulta = "select * from Tema order by Tema asc";
             return repo.Listar(consulta);
         }
 
-        public System.Data.DataTable ListarTemasPlani()
+        public DataTable ListarTemasPlani()
         {
             Conexion repo = new Conexion();
             string consulta = "Select C.codigo, C.Descripcion from Curso C order by Codigo";
