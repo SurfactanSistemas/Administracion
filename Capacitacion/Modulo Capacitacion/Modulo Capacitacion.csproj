@@ -1,0 +1,858 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5F597B8F-999D-4058-955A-881149268840}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Modulo_Capacitacion</RootNamespace>
+    <AssemblyName>Modulo Capacitacion</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Cronograma Por Sector y Tema\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Cronograma Por Sector y Tema\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Cronograma Por Sector y Tema\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Cronograma Por Sector y Tema\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Cronograma Por Sector y Tema\listacronosectortema.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>listacronosectortema.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Cursos Por Responsable\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Cursos Por Responsable\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CursosRealizadosporTemas\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CursosRealizadosporTemas\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\CursosRealizadosporTemas\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CursosRealizadosporTemas\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\CursosRealizadosporTemas\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CursosRealizadosporTemas\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\Cursos\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Cursos\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Cursos\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Cursos\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Cursos\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Cursos\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\Evolucion de Temas Programados\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Evolucion de Temas Programados\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Horas Cursadas Por Legajo\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Horas Cursadas Por Legajo\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Horas Cursadas Por Legajo\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Horas Cursadas Por Legajo\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Horas Cursadas Por Legajo\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Informe de Competencias\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Informe de Competencias\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Informe de Competencias\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Informe de Competencias\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Informe de Competencias\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Informe de Competencias\RepotSObserv.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepotSObserv.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\LegajosConNecesidadesPendientes\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\LegajosConNecesidadesPendientes\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\LegajosConNecesidadesPendientes\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\LegajosConNecesidadesPendientes\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\LegajosConNecesidadesPendientes\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\LegajosConNecesidadesPendientes\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\LegajosporPerfil\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\LegajosporPerfil\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\LegajosporPerfil\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\LegajosporPerfil\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\LegajosporPerfil\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\LegajosporPerfil\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\Perfil\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Perfil\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Perfil\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Perfil\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Perfil\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Perfil\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\Plan Capacitacion Anual\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Plan Capacitacion Anual\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Planilla de Temas no Programados\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Planilla de Temas no Programados\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Promedio de Calificacion\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Promedio de Calificacion\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosPorSector\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosPorSector\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosPorSector\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosPorSector\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajoConsolidado\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajoConsolidado\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajoConsolidado\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajoConsolidado\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajoConsolidado\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajoConsolidado\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajo\DSInforme.cs">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajo\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajo\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajo\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajo\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajo\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajo\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosPorSector\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosPorSector\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Temas Realizados y No Realizados\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Temas Realizados y No Realizados\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Cursos\AgModCurso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Cursos\AgModCurso.Designer.cs">
+      <DependentUpon>AgModCurso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Cursos\Cursos_Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Cursos\Cursos_Inicio.Designer.cs">
+      <DependentUpon>Cursos_Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Legajos\AgModLegajo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Legajos\AgModLegajo.Designer.cs">
+      <DependentUpon>AgModLegajo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Legajos\Legajos_Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Legajos\Legajos_Inicio.Designer.cs">
+      <DependentUpon>Legajos_Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Legajos\Observaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Legajos\Observaciones.Designer.cs">
+      <DependentUpon>Observaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Perfiles\AgModPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Perfiles\AgModPerfil.Designer.cs">
+      <DependentUpon>AgModPerfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Perfiles\Perfiles_Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Perfiles\Perfiles_Inicio.Designer.cs">
+      <DependentUpon>Perfiles_Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Sectores\AgModSector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Sectores\AgModSector.Designer.cs">
+      <DependentUpon>AgModSector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Sectores\Sectores_Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Sectores\Sectores_Inicio.Designer.cs">
+      <DependentUpon>Sectores_Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Temas\AgModTema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Temas\AgModTema.Designer.cs">
+      <DependentUpon>AgModTema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Temas\Temas_Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Temas\Temas_Inicio.Designer.cs">
+      <DependentUpon>Temas_Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\VersionLegajo\IngVersLegajo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\VersionLegajo\IngVersLegajo.Designer.cs">
+      <DependentUpon>IngVersLegajo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\VersionPerfiles\IngVersPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\VersionPerfiles\IngVersPerfil.Designer.cs">
+      <DependentUpon>IngVersPerfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\IngresoDeCursosRealizados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\IngresoDeCursosRealizados.Designer.cs">
+      <DependentUpon>IngresoDeCursosRealizados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\IngreDeCursosRealizados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\IngreDeCursosRealizados.Designer.cs">
+      <DependentUpon>IngreDeCursosRealizados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\IngrePlanificacionAnual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\IngrePlanificacionAnual.Designer.cs">
+      <DependentUpon>IngrePlanificacionAnual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\ListadoDeCursosRealizadosPorLegajo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\ListadoDeCursosRealizadosPorLegajo.Designer.cs">
+      <DependentUpon>ListadoDeCursosRealizadosPorLegajo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Rpt_ListadoDeCursosRealizadosPorLegajo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_ListadoDeCursosRealizadosPorLegajo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Cronograma Por Sector y Tema\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Cronograma Por Sector y Tema\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Cronograma Por Sector y Tema\listacronosectortema.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>listacronosectortema.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Cursos Por Responsable\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CursosRealizadosporTemas\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CursosRealizadosporTemas\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CursosRealizadosporTemas\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Cursos\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Cursos\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Cursos\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Evolucion de Temas Programados\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Horas Cursadas Por Legajo\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Horas Cursadas Por Legajo\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Informe de Competencias\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Informe de Competencias\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Informe de Competencias\RepotSObserv.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepotSObserv.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\LegajosConNecesidadesPendientes\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\LegajosConNecesidadesPendientes\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\LegajosConNecesidadesPendientes\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\LegajosporPerfil\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\LegajosporPerfil\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\LegajosporPerfil\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Perfil\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Perfil\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Perfil\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Plan Capacitacion Anual\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Planilla de Temas no Programados\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Promedio de Calificacion\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasRealizadosPorSector\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasRealizadosPorSector\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasPorLegajoConsolidado\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasPorLegajoConsolidado\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasPorLegajoConsolidado\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasPorLegajo\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasPorLegajo\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasPorLegajo\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasRealizadosPorSector\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Temas Realizados y No Realizados\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Cursos\AgModCurso.resx">
+      <DependentUpon>AgModCurso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Cursos\Cursos_Inicio.resx">
+      <DependentUpon>Cursos_Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Legajos\AgModLegajo.resx">
+      <DependentUpon>AgModLegajo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Legajos\Legajos_Inicio.resx">
+      <DependentUpon>Legajos_Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Legajos\Observaciones.resx">
+      <DependentUpon>Observaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Perfiles\AgModPerfil.resx">
+      <DependentUpon>AgModPerfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Perfiles\Perfiles_Inicio.resx">
+      <DependentUpon>Perfiles_Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Sectores\AgModSector.resx">
+      <DependentUpon>AgModSector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Sectores\Sectores_Inicio.resx">
+      <DependentUpon>Sectores_Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Temas\AgModTema.resx">
+      <DependentUpon>AgModTema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Temas\Temas_Inicio.resx">
+      <DependentUpon>Temas_Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\VersionLegajo\IngVersLegajo.resx">
+      <DependentUpon>IngVersLegajo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\VersionPerfiles\IngVersPerfil.resx">
+      <DependentUpon>IngVersPerfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\IngresoDeCursosRealizados.resx">
+      <DependentUpon>IngresoDeCursosRealizados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\IngreDeCursosRealizados.resx">
+      <DependentUpon>IngreDeCursosRealizados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\IngrePlanificacionAnual.resx">
+      <DependentUpon>IngrePlanificacionAnual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Reportes\ListadoDeCursosRealizadosPorLegajo.resx">
+      <DependentUpon>ListadoDeCursosRealizadosPorLegajo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Rpt_ListadoDeCursosRealizadosPorLegajo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_ListadoDeCursosRealizadosPorLegajo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="bin\Debug\Modulo Capacitacion.exe.config" />
+    <None Include="bin\Debug\Modulo Capacitacion.vshost.exe.config" />
+    <None Include="bin\Debug\Modulo Capacitacion.vshost.exe.manifest" />
+    <None Include="Listados\CursosRealizadosporTemas\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\CursosRealizadosporTemas\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\CursosRealizadosporTemas\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\Cursos\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\Cursos\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\Cursos\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\Horas Cursadas Por Legajo\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\Horas Cursadas Por Legajo\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\Horas Cursadas Por Legajo\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\Informe de Competencias\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\Informe de Competencias\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\Informe de Competencias\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\LegajosConNecesidadesPendientes\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\LegajosConNecesidadesPendientes\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\LegajosConNecesidadesPendientes\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\LegajosporPerfil\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\LegajosporPerfil\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\LegajosporPerfil\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\Perfil\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\Perfil\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\Perfil\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\TemasRealizadosPorSector\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\TemasRealizadosPorSector\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\TemasRealizadosPorSector\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\TemasPorLegajoConsolidado\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\TemasPorLegajoConsolidado\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\TemasPorLegajoConsolidado\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\TemasPorLegajo\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\TemasPorLegajo\DSInforme.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\TemasPorLegajo\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\Negocio.Curso.datasource" />
+    <None Include="Properties\DataSources\Negocio.Legajo.datasource" />
+    <None Include="Properties\DataSources\Negocio.Perfil.datasource" />
+    <None Include="Properties\DataSources\Negocio.Sector.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marcadeagua.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\choferes agregar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\choferes modificar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eliminar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imprimir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apagar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grabar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\limpiar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apagar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agregar cursos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editar cursos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agregar sectores.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editar sectores.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agregar temas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editar temas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agregar perfiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editar perfiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agregar legajo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editar legajo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Modulo Capacitacion.exe" />
+    <Content Include="bin\Debug\Modulo Capacitacion.pdb" />
+    <Content Include="bin\Debug\Modulo Capacitacion.vshost.exe" />
+    <None Include="Resources\remito modificar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
+      <Project>{C6CCA416-B083-403E-B128-F045B18C4D2F}</Project>
+      <Name>Negocio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
