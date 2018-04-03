@@ -30,6 +30,14 @@
         {
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.TB_Responsable3 = new System.Windows.Forms.ComboBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.TB_CodResponsable3 = new System.Windows.Forms.ComboBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.TB_Responsable2 = new System.Windows.Forms.ComboBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.TB_CodResponsable2 = new System.Windows.Forms.ComboBox();
             this.CB_Donde = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -49,14 +57,6 @@
             this.TB_Codigo = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBCurso = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.TB_Responsable2 = new System.Windows.Forms.ComboBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.TB_CodResponsable2 = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.TB_Responsable3 = new System.Windows.Forms.ComboBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.TB_CodResponsable3 = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -104,6 +104,71 @@
             this.panel3.Size = new System.Drawing.Size(504, 324);
             this.panel3.TabIndex = 0;
             // 
+            // panel4
+            // 
+            this.panel4.Location = new System.Drawing.Point(481, 207);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(19, 29);
+            this.panel4.TabIndex = 111;
+            // 
+            // TB_Responsable3
+            // 
+            this.TB_Responsable3.FormattingEnabled = true;
+            this.TB_Responsable3.Location = new System.Drawing.Point(404, 209);
+            this.TB_Responsable3.Name = "TB_Responsable3";
+            this.TB_Responsable3.Size = new System.Drawing.Size(93, 21);
+            this.TB_Responsable3.TabIndex = 110;
+            // 
+            // panel5
+            // 
+            this.panel5.Location = new System.Drawing.Point(383, 208);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(19, 29);
+            this.panel5.TabIndex = 109;
+            // 
+            // TB_CodResponsable3
+            // 
+            this.TB_CodResponsable3.FormattingEnabled = true;
+            this.TB_CodResponsable3.Location = new System.Drawing.Point(348, 210);
+            this.TB_CodResponsable3.Name = "TB_CodResponsable3";
+            this.TB_CodResponsable3.Size = new System.Drawing.Size(50, 21);
+            this.TB_CodResponsable3.TabIndex = 108;
+            this.TB_CodResponsable3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodResponsable3_KeyDown);
+            // 
+            // panel7
+            // 
+            this.panel7.Location = new System.Drawing.Point(481, 172);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(19, 29);
+            this.panel7.TabIndex = 107;
+            // 
+            // TB_Responsable2
+            // 
+            this.TB_Responsable2.FormattingEnabled = true;
+            this.TB_Responsable2.Location = new System.Drawing.Point(404, 174);
+            this.TB_Responsable2.Name = "TB_Responsable2";
+            this.TB_Responsable2.Size = new System.Drawing.Size(93, 21);
+            this.TB_Responsable2.TabIndex = 106;
+            this.TB_Responsable2.SelectedIndexChanged += new System.EventHandler(this.TB_Responsable2_SelectedIndexChanged);
+            this.TB_Responsable2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Responsable2_KeyDown);
+            // 
+            // panel6
+            // 
+            this.panel6.Location = new System.Drawing.Point(383, 173);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(19, 29);
+            this.panel6.TabIndex = 105;
+            // 
+            // TB_CodResponsable2
+            // 
+            this.TB_CodResponsable2.FormattingEnabled = true;
+            this.TB_CodResponsable2.Location = new System.Drawing.Point(348, 175);
+            this.TB_CodResponsable2.Name = "TB_CodResponsable2";
+            this.TB_CodResponsable2.Size = new System.Drawing.Size(50, 21);
+            this.TB_CodResponsable2.TabIndex = 104;
+            this.TB_CodResponsable2.SelectedIndexChanged += new System.EventHandler(this.TB_CodResponsable2_SelectedIndexChanged);
+            this.TB_CodResponsable2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodResponsable2_KeyDown);
+            // 
             // CB_Donde
             // 
             this.CB_Donde.FormattingEnabled = true;
@@ -149,7 +214,6 @@
             this.TB_Responsable.Name = "TB_Responsable";
             this.TB_Responsable.Size = new System.Drawing.Size(99, 20);
             this.TB_Responsable.TabIndex = 34;
-            this.TB_Responsable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Responsable_KeyDown);
             // 
             // label3
             // 
@@ -297,74 +361,6 @@
             this.LBCurso.TabIndex = 0;
             this.LBCurso.Text = "INGRESO DE TEMA";
             // 
-            // panel7
-            // 
-            this.panel7.Location = new System.Drawing.Point(481, 172);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(19, 29);
-            this.panel7.TabIndex = 107;
-            // 
-            // TB_Responsable2
-            // 
-            this.TB_Responsable2.FormattingEnabled = true;
-            this.TB_Responsable2.Location = new System.Drawing.Point(404, 174);
-            this.TB_Responsable2.Name = "TB_Responsable2";
-            this.TB_Responsable2.Size = new System.Drawing.Size(93, 21);
-            this.TB_Responsable2.TabIndex = 106;
-            this.TB_Responsable2.SelectedIndexChanged += new System.EventHandler(this.TB_Responsable2_SelectedIndexChanged);
-            this.TB_Responsable2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Responsable2_KeyDown);
-            // 
-            // panel6
-            // 
-            this.panel6.Location = new System.Drawing.Point(383, 173);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(19, 29);
-            this.panel6.TabIndex = 105;
-            // 
-            // TB_CodResponsable2
-            // 
-            this.TB_CodResponsable2.FormattingEnabled = true;
-            this.TB_CodResponsable2.Location = new System.Drawing.Point(348, 175);
-            this.TB_CodResponsable2.Name = "TB_CodResponsable2";
-            this.TB_CodResponsable2.Size = new System.Drawing.Size(50, 21);
-            this.TB_CodResponsable2.TabIndex = 104;
-            this.TB_CodResponsable2.SelectedIndexChanged += new System.EventHandler(this.TB_CodResponsable2_SelectedIndexChanged);
-            this.TB_CodResponsable2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodResponsable2_KeyDown_1);
-            // 
-            // panel4
-            // 
-            this.panel4.Location = new System.Drawing.Point(481, 207);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(19, 29);
-            this.panel4.TabIndex = 111;
-            // 
-            // TB_Responsable3
-            // 
-            this.TB_Responsable3.FormattingEnabled = true;
-            this.TB_Responsable3.Location = new System.Drawing.Point(404, 209);
-            this.TB_Responsable3.Name = "TB_Responsable3";
-            this.TB_Responsable3.Size = new System.Drawing.Size(93, 21);
-            this.TB_Responsable3.TabIndex = 110;
-            this.TB_Responsable3.SelectedIndexChanged += new System.EventHandler(this.TB_Responsable3_SelectedIndexChanged);
-            this.TB_Responsable3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Responsable3_KeyDown);
-            // 
-            // panel5
-            // 
-            this.panel5.Location = new System.Drawing.Point(383, 208);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(19, 29);
-            this.panel5.TabIndex = 109;
-            // 
-            // TB_CodResponsable3
-            // 
-            this.TB_CodResponsable3.FormattingEnabled = true;
-            this.TB_CodResponsable3.Location = new System.Drawing.Point(348, 210);
-            this.TB_CodResponsable3.Name = "TB_CodResponsable3";
-            this.TB_CodResponsable3.Size = new System.Drawing.Size(50, 21);
-            this.TB_CodResponsable3.TabIndex = 108;
-            this.TB_CodResponsable3.SelectedIndexChanged += new System.EventHandler(this.TB_CodResponsable3_SelectedIndexChanged);
-            this.TB_CodResponsable3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodResponsable3_KeyDown_1);
-            // 
             // AgModTema
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -374,7 +370,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AgModTema";
-            this.Load += new System.EventHandler(this.AgModTema_Load);
+            this.Shown += new System.EventHandler(this.AgModTema_Shown);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

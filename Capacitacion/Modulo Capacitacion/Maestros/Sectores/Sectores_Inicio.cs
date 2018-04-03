@@ -90,13 +90,7 @@ namespace Modulo_Capacitacion.Maestros.Sectores
         {
             BTModifSector.PerformClick();
         }
-
-        private void DGV_Sectores_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            DGV_Sectores.Rows[e.RowIndex].Selected = true;
-            BTModifSector.PerformClick();
-        }
-
+        
         private void TBFiltro_KeyUp(object sender, KeyEventArgs e)
         {
             if (TBFiltro.Text != "")

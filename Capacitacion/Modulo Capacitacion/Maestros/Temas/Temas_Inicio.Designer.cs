@@ -176,6 +176,7 @@
             this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Temas.Size = new System.Drawing.Size(985, 413);
             this.DGV_Temas.TabIndex = 6;
+            this.DGV_Temas.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Temas_RowHeaderMouseDoubleClick);
             // 
             // Codigo
             // 

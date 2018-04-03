@@ -12,9 +12,6 @@ namespace Modulo_Capacitacion.Maestros.Temas
         {
             InitializeComponent();
             DGV_Temas.DataSource = temas.ListarTodos();
-            DataGridViewColumn columna = DGV_Temas.Columns["Descripcion"];
-            if (columna != null)
-                columna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
 
 
@@ -29,7 +26,10 @@ namespace Modulo_Capacitacion.Maestros.Temas
             {
                 if (DGV_Temas.SelectedRows.Count != 1) throw new Exception("No hay filas seleccionadas o se selecciono mas de una");
                 string IdAEliminar = DGV_Temas.SelectedRows[0].Cells[0].Value.ToString();
-                temas.Eliminar(IdAEliminar);
+                if (MessageBox.Show("¿Está seguro de querer ELIMINAR el Tema seleccionado?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    temas.Eliminar(IdAEliminar);
+                }
                 ActualizarGrilla();
             }
             catch (Exception err)
@@ -87,13 +87,18 @@ namespace Modulo_Capacitacion.Maestros.Temas
                 if (dataTable != null)
                     dataTable.DefaultView.RowFilter = string.Format("CONVERT(Codigo, System.String) like '%{0}%' "
                                                     + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Detalle, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(TemaI, System.String) like '%{0}%'"
                                                     + " OR CONVERT(Responsable, System.String) like '%{0}%'", TBFiltro.Text);
             }
             else
             {
                 ActualizarGrilla();
             }
+        }
+
+        private void DGV_Temas_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            BTModifTema.PerformClick();
         }
 
     }

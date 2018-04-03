@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -13,8 +9,7 @@ namespace Modulo_Capacitacion.Maestros.Temas
     public partial class AgModTema : Form
     {
         private Responsable R = new Responsable();
-        private int UltimoId;
-        bool EsModificar = false;
+        bool EsModificar;
         private Tema TemaAModificar;
         Tema nuevoTema = new Tema();
         DataTable dtResponsable;
@@ -25,16 +20,26 @@ namespace Modulo_Capacitacion.Maestros.Temas
             InitializeComponent();
         }
 
-        public AgModTema(int UltimoId)
+        public AgModTema(int _UltimoId)
         {
-            // TODO: Complete member initialization
-            this.UltimoId = UltimoId;
             EsModificar = false;
             
             InitializeComponent();
-            TB_Codigo.Text = this.UltimoId.ToString();
+            TB_Codigo.Text = _UltimoId.ToString();
             CargarCombo();
             CargarREsponsables();
+            TB_Descripcion.Focus();
+        }
+
+        public AgModTema(Tema TemaAModificar)
+        {
+            this.TemaAModificar = TemaAModificar;
+            EsModificar = true;
+
+            InitializeComponent();
+            CargarCombo();
+            CargarCampos(this.TemaAModificar);
+            TB_Descripcion.Focus();
         }
 
         private void CargarREsponsables()
@@ -42,8 +47,7 @@ namespace Modulo_Capacitacion.Maestros.Temas
             dtResponsable = R.ListarTodos();
 
 
-            DataRow fila;
-            fila = dtResponsable.NewRow();
+            var fila = dtResponsable.NewRow();
             dtResponsable.Rows.InsertAt(fila, 0);
 
             dtResponsable2 = dtResponsable.Copy();
@@ -130,24 +134,14 @@ namespace Modulo_Capacitacion.Maestros.Temas
             TB_CodResponsable3.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
-        public AgModTema(Tema TemaAModificar)
-        {
-            // TODO: Complete member initialization
-            this.TemaAModificar = TemaAModificar;
-            EsModificar = true;
-            
-            InitializeComponent();
-            CargarCombo();
-            CargarCampos(this.TemaAModificar);
-            
-        }
-
         public void CargarCombo()
         {
-            Dictionary<int, string> comboLugar = new Dictionary<int, string>();
-            comboLugar.Add(0, "");
-            comboLugar.Add(1, "En la Empresa");
-            comboLugar.Add(2, "Otros Conocimientos");
+            Dictionary<int, string> comboLugar = new Dictionary<int, string>
+            {
+                {0, ""},
+                {1, "En la Empresa"},
+                {2, "Otros Conocimientos"}
+            };
             CB_Donde.DataSource = new BindingSource(comboLugar, null);
             CB_Donde.DisplayMember = "Value";
             CB_Donde.ValueMember = "Key";
@@ -156,15 +150,15 @@ namespace Modulo_Capacitacion.Maestros.Temas
         private void CargarCampos(Tema tema)
         {
             TB_Codigo.Text = tema.Codigo.ToString();
-            TB_Responsable.Text = tema.Responsable;
-            TB_Descripcion.Text = tema.Descripcion;
-            TB_Detalle_1.Text = tema.TemaI;
-            TB_Detalle_2.Text = tema.TemaII;
-            TB_Detalle_3.Text = tema.TemaIII;
-            TB_CodResponsable2.Text = tema.ResponsableII.Codigo.ToString();
-            TB_Responsable2.Text = tema.ResponsableII.Descripcion;
-            TB_CodResponsable3.Text = tema.ResponsableIII.Codigo.ToString();
-            TB_Responsable3.Text = tema.ResponsableIII.Descripcion;
+            TB_Responsable.Text = tema.Responsable.Trim();
+            TB_Descripcion.Text = tema.Descripcion.Trim();
+            TB_Detalle_1.Text = tema.TemaI.Trim();
+            TB_Detalle_2.Text = tema.TemaII.Trim();
+            TB_Detalle_3.Text = tema.TemaIII.Trim();
+            TB_CodResponsable2.Text = tema.ResponsableII.Codigo.ToString().Trim();
+            TB_Responsable2.Text = tema.ResponsableII.Descripcion.Trim();
+            TB_CodResponsable3.Text = tema.ResponsableIII.Codigo.ToString().Trim();
+            TB_Responsable3.Text = tema.ResponsableIII.Descripcion.Trim();
             CB_Donde.SelectedValue = tema.Tipo;
         }
 
@@ -176,10 +170,10 @@ namespace Modulo_Capacitacion.Maestros.Temas
                                 MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    this.Close();
+                    Close();
                 }
             }
-            else { this.Close(); }
+            else { Close(); }
             
         }
 
@@ -209,15 +203,19 @@ namespace Modulo_Capacitacion.Maestros.Temas
                 {
                     
                     nuevoTema.Codigo = int.Parse(TB_Codigo.Text);
-                    nuevoTema.Descripcion = TB_Descripcion.Text;
-                    nuevoTema.TemaI = TB_Detalle_1.Text;
-                    nuevoTema.TemaII = TB_Detalle_2.Text;
-                    nuevoTema.TemaIII = TB_Detalle_3.Text;
-                    nuevoTema.Responsable = TB_Responsable.Text;
-                    nuevoTema.ResponsableII = new Responsable();
-                    nuevoTema.ResponsableII.Codigo = int.Parse(TB_CodResponsable2.Text);
-                    nuevoTema.ResponsableIII = new Responsable();
-                    nuevoTema.ResponsableIII.Codigo = int.Parse(TB_CodResponsable3.Text);
+                    nuevoTema.Descripcion = TB_Descripcion.Text.Trim();
+                    nuevoTema.TemaI = TB_Detalle_1.Text.Trim();
+                    nuevoTema.TemaII = TB_Detalle_2.Text.Trim();
+                    nuevoTema.TemaIII = TB_Detalle_3.Text.Trim();
+                    nuevoTema.Responsable = TB_Responsable.Text.Trim();
+                    nuevoTema.ResponsableII = new Responsable
+                    {
+                        Codigo = int.Parse(TB_CodResponsable2.Text)
+                    };
+                    nuevoTema.ResponsableIII = new Responsable
+                    {
+                        Codigo = int.Parse(TB_CodResponsable3.Text)
+                    };
 
                     nuevoTema.Tipo = int.Parse(CB_Donde.SelectedValue.ToString());
 
@@ -226,19 +224,23 @@ namespace Modulo_Capacitacion.Maestros.Temas
                 else
                 {
 
-                    this.TemaAModificar.Codigo = int.Parse(TB_Codigo.Text);
-                    this.TemaAModificar.Descripcion = TB_Descripcion.Text;
-                    this.TemaAModificar.TemaI = TB_Detalle_1.Text;
-                    this.TemaAModificar.TemaII = TB_Detalle_2.Text;
-                    this.TemaAModificar.TemaIII = TB_Detalle_3.Text;
-                    this.TemaAModificar.Responsable = TB_Responsable.Text;
-                    this.TemaAModificar.ResponsableII = new Responsable();
-                    this.TemaAModificar.ResponsableII.Codigo = int.Parse(TB_CodResponsable2.Text);
-                    this.TemaAModificar.ResponsableIII = new Responsable();
-                    this.TemaAModificar.ResponsableIII.Codigo = int.Parse(TB_CodResponsable3.Text);
-                    this.TemaAModificar.Tipo = int.Parse(CB_Donde.SelectedValue.ToString());
+                    TemaAModificar.Codigo = int.Parse(TB_Codigo.Text);
+                    TemaAModificar.Descripcion = TB_Descripcion.Text.Trim();
+                    TemaAModificar.TemaI = TB_Detalle_1.Text.Trim();
+                    TemaAModificar.TemaII = TB_Detalle_2.Text.Trim();
+                    TemaAModificar.TemaIII = TB_Detalle_3.Text.Trim();
+                    TemaAModificar.Responsable = TB_Responsable.Text.Trim();
+                    TemaAModificar.ResponsableII = new Responsable
+                    {
+                        Codigo = int.Parse(TB_CodResponsable2.Text)
+                    };
+                    TemaAModificar.ResponsableIII = new Responsable
+                    {
+                        Codigo = int.Parse(TB_CodResponsable3.Text)
+                    };
+                    TemaAModificar.Tipo = int.Parse(CB_Donde.SelectedValue.ToString());
 
-                    nuevoTema.Modificar(this.TemaAModificar);
+                    nuevoTema.Modificar(TemaAModificar);
 
                     
                 }
@@ -250,12 +252,8 @@ namespace Modulo_Capacitacion.Maestros.Temas
 
             finally
             {
-                this.Close();
+                Close();
             }
-        }
-
-        private void AgModTema_Load(object sender, EventArgs e)
-        {
         }
 
         private void TB_CodResponsable2_KeyDown(object sender, KeyEventArgs e)
@@ -264,6 +262,12 @@ namespace Modulo_Capacitacion.Maestros.Temas
             {
                 try
                 {
+
+                    if (TB_CodResponsable2.Text.Trim() == "")
+                    {
+                        return;
+                    }
+
                     R = R.BuscarUno(TB_CodResponsable2.Text);
 
                     if (R.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
@@ -271,6 +275,8 @@ namespace Modulo_Capacitacion.Maestros.Temas
                     TB_Responsable2.Text = R.Descripcion;
                     e.SuppressKeyPress = true;
                     e.Handled = true;
+
+                    TB_CodResponsable3.Focus();
                 }
                 catch (Exception err)
                 {
@@ -285,6 +291,12 @@ namespace Modulo_Capacitacion.Maestros.Temas
             {
                 try
                 {
+
+                    if (TB_CodResponsable3.Text.Trim() == "")
+                    {
+                        return;
+                    }
+
                     R = R.BuscarUno(TB_CodResponsable3.Text);
 
                     if (R.Codigo == 0) throw new Exception("No existe Responsable con el codigo ingresado");
@@ -302,27 +314,28 @@ namespace Modulo_Capacitacion.Maestros.Temas
 
         private void TB_Descripcion_KeyDown(object sender, KeyEventArgs e)
         {
-            TB_Detalle_1.Focus();
+            if (e.KeyCode == Keys.Enter)
+            {
+                TB_Detalle_1.Focus();
+            }
         }
 
         private void TB_Detalle_1_KeyDown(object sender, KeyEventArgs e)
         {
-            TB_Detalle_2.Focus();
+            if (e.KeyCode == Keys.Enter)
+                TB_Detalle_2.Focus();
         }
 
         private void TB_Detalle_2_KeyDown(object sender, KeyEventArgs e)
         {
-            TB_Detalle_3.Focus();
+            if (e.KeyCode == Keys.Enter)
+                TB_Detalle_3.Focus();
         }
 
         private void TB_Detalle_3_KeyDown(object sender, KeyEventArgs e)
         {
-            TB_CodResponsable2.Focus();
-        }
-
-        private void TB_Responsable_KeyDown(object sender, KeyEventArgs e)
-        {
-            
+            if (e.KeyCode == Keys.Enter) 
+                TB_CodResponsable2.Focus();
         }
 
         private void TB_Responsable2_KeyDown(object sender, KeyEventArgs e)
@@ -362,11 +375,6 @@ namespace Modulo_Capacitacion.Maestros.Temas
             }
         }
 
-        private void TB_CodResponsable3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void TB_CodResponsable3_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -379,14 +387,9 @@ namespace Modulo_Capacitacion.Maestros.Temas
             }
         }
 
-        private void TB_Responsable3_SelectedIndexChanged(object sender, EventArgs e)
+        private void AgModTema_Shown(object sender, EventArgs e)
         {
-
-        }
-
-        private void TB_Responsable3_KeyDown(object sender, KeyEventArgs e)
-        {
-            
+            TB_Descripcion.Focus();
         }
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,6 +42,7 @@
             this.BTModifSector = new System.Windows.Forms.Button();
             this.BTAgregarSector = new System.Windows.Forms.Button();
             this.P_Filtrado = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.TBFiltro = new System.Windows.Forms.TextBox();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.CMS_Sectores = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -50,7 +51,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Sectores)).BeginInit();
@@ -113,21 +113,20 @@
             this.DGV_Sectores.Location = new System.Drawing.Point(85, 0);
             this.DGV_Sectores.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Sectores.Name = "DGV_Sectores";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Sectores.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Sectores.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_Sectores.RowHeadersWidth = 15;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Sectores.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Sectores.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Sectores.Size = new System.Drawing.Size(712, 364);
             this.DGV_Sectores.TabIndex = 5;
-            this.DGV_Sectores.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Sectores_CellMouseDoubleClick);
             this.DGV_Sectores.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Sectores_RowHeaderMouseDoubleClick);
             // 
             // Codigo
@@ -209,6 +208,17 @@
             this.P_Filtrado.Name = "P_Filtrado";
             this.P_Filtrado.Size = new System.Drawing.Size(797, 52);
             this.P_Filtrado.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(67, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 17);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Filtrar:";
             // 
             // TBFiltro
             // 
@@ -297,17 +307,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(85, 364);
             this.panel2.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(67, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 17);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Filtrar:";
             // 
             // btnImprimir
             // 
