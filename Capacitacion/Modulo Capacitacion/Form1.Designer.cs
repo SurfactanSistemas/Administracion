@@ -63,10 +63,11 @@
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -99,49 +100,49 @@
             // ingresoDeSectoresToolStripMenuItem
             // 
             this.ingresoDeSectoresToolStripMenuItem.Name = "ingresoDeSectoresToolStripMenuItem";
-            this.ingresoDeSectoresToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.ingresoDeSectoresToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.ingresoDeSectoresToolStripMenuItem.Text = "Ingreso de Sectores";
             this.ingresoDeSectoresToolStripMenuItem.Click += new System.EventHandler(this.ingresoDeSectoresToolStripMenuItem_Click);
             // 
             // ingresoDeTemasToolStripMenuItem
             // 
             this.ingresoDeTemasToolStripMenuItem.Name = "ingresoDeTemasToolStripMenuItem";
-            this.ingresoDeTemasToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.ingresoDeTemasToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.ingresoDeTemasToolStripMenuItem.Text = "Ingreso de Temas";
             this.ingresoDeTemasToolStripMenuItem.Click += new System.EventHandler(this.ingresoDeTemasToolStripMenuItem_Click);
             // 
             // ingresoDeCursosToolStripMenuItem
             // 
             this.ingresoDeCursosToolStripMenuItem.Name = "ingresoDeCursosToolStripMenuItem";
-            this.ingresoDeCursosToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.ingresoDeCursosToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.ingresoDeCursosToolStripMenuItem.Text = "Ingreso de Cursos";
             this.ingresoDeCursosToolStripMenuItem.Click += new System.EventHandler(this.ingresoDeCursosToolStripMenuItem_Click);
             // 
             // ingresoDePerfilesToolStripMenuItem
             // 
             this.ingresoDePerfilesToolStripMenuItem.Name = "ingresoDePerfilesToolStripMenuItem";
-            this.ingresoDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.ingresoDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.ingresoDePerfilesToolStripMenuItem.Text = "Ingreso de Perfiles";
             this.ingresoDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.ingresoDePerfilesToolStripMenuItem_Click);
             // 
             // ingresoDeLegajosToolStripMenuItem
             // 
             this.ingresoDeLegajosToolStripMenuItem.Name = "ingresoDeLegajosToolStripMenuItem";
-            this.ingresoDeLegajosToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.ingresoDeLegajosToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.ingresoDeLegajosToolStripMenuItem.Text = "Ingreso de Legajos";
             this.ingresoDeLegajosToolStripMenuItem.Click += new System.EventHandler(this.ingresoDeLegajosToolStripMenuItem_Click);
             // 
             // consultaDeVersionDeLegajosToolStripMenuItem
             // 
             this.consultaDeVersionDeLegajosToolStripMenuItem.Name = "consultaDeVersionDeLegajosToolStripMenuItem";
-            this.consultaDeVersionDeLegajosToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.consultaDeVersionDeLegajosToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.consultaDeVersionDeLegajosToolStripMenuItem.Text = "Consulta de Version de Legajos";
             this.consultaDeVersionDeLegajosToolStripMenuItem.Click += new System.EventHandler(this.consultaDeVersionDeLegajosToolStripMenuItem_Click);
             // 
             // consultaDeVersionDePerfilesToolStripMenuItem
             // 
             this.consultaDeVersionDePerfilesToolStripMenuItem.Name = "consultaDeVersionDePerfilesToolStripMenuItem";
-            this.consultaDeVersionDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.consultaDeVersionDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.consultaDeVersionDePerfilesToolStripMenuItem.Text = "Consulta de Version de Perfiles";
             this.consultaDeVersionDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.consultaDeVersionDePerfilesToolStripMenuItem_Click);
             // 
@@ -329,9 +330,11 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(74)))), ((int)(((byte)(95)))));
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 26);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(890, 40);
+            this.panel1.Size = new System.Drawing.Size(784, 40);
             this.panel1.TabIndex = 3;
             // 
             // label1
@@ -341,34 +344,50 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 19);
+            this.label1.Size = new System.Drawing.Size(194, 19);
             this.label1.TabIndex = 0;
-            this.label1.Text = "CAPACITACIÓN";
+            this.label1.Text = "SISTEMA DE CAPACITACIÓN";
             // 
-            // pictureBox1
+            // tableLayoutPanel1
             // 
-            this.pictureBox1.Image = global::Modulo_Capacitacion.Properties.Resources.marcadeagua;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 66);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(784, 502);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
+            this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.marcadeagua2;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 40);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(784, 498);
+            this.panel2.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -411,7 +430,8 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 

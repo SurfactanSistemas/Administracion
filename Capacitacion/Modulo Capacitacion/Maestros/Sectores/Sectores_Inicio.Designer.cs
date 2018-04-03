@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,11 +41,8 @@
             this.BT_Eliminar = new System.Windows.Forms.Button();
             this.BTModifSector = new System.Windows.Forms.Button();
             this.BTAgregarSector = new System.Windows.Forms.Button();
-            this.BT_MenuFiltros = new System.Windows.Forms.Button();
             this.P_Filtrado = new System.Windows.Forms.Panel();
-            this.BT_Filtrar = new System.Windows.Forms.Button();
             this.TBFiltro = new System.Windows.Forms.TextBox();
-            this.LBFiltro = new System.Windows.Forms.Label();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.CMS_Sectores = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.codigoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +50,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnImprimir = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Sectores)).BeginInit();
             this.P_Filtrado.SuspendLayout();
@@ -114,18 +113,18 @@
             this.DGV_Sectores.Location = new System.Drawing.Point(85, 0);
             this.DGV_Sectores.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Sectores.Name = "DGV_Sectores";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Sectores.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Sectores.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DGV_Sectores.RowHeadersWidth = 15;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Sectores.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Sectores.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Sectores.Size = new System.Drawing.Size(712, 364);
             this.DGV_Sectores.TabIndex = 5;
             this.DGV_Sectores.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Sectores_CellMouseDoubleClick);
@@ -153,7 +152,7 @@
             this.Bt_Fin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Bt_Fin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Bt_Fin.ForeColor = System.Drawing.SystemColors.Control;
-            this.Bt_Fin.Location = new System.Drawing.Point(18, 233);
+            this.Bt_Fin.Location = new System.Drawing.Point(19, 288);
             this.Bt_Fin.Margin = new System.Windows.Forms.Padding(0);
             this.Bt_Fin.Name = "Bt_Fin";
             this.Bt_Fin.Size = new System.Drawing.Size(47, 53);
@@ -167,7 +166,7 @@
             this.BT_Eliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Eliminar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Eliminar.Location = new System.Drawing.Point(16, 150);
+            this.BT_Eliminar.Location = new System.Drawing.Point(17, 150);
             this.BT_Eliminar.Name = "BT_Eliminar";
             this.BT_Eliminar.Size = new System.Drawing.Size(50, 70);
             this.BT_Eliminar.TabIndex = 10;
@@ -180,7 +179,7 @@
             this.BTModifSector.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTModifSector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTModifSector.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTModifSector.Location = new System.Drawing.Point(18, 84);
+            this.BTModifSector.Location = new System.Drawing.Point(19, 84);
             this.BTModifSector.Margin = new System.Windows.Forms.Padding(0);
             this.BTModifSector.Name = "BTModifSector";
             this.BTModifSector.Size = new System.Drawing.Size(47, 53);
@@ -194,63 +193,30 @@
             this.BTAgregarSector.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTAgregarSector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTAgregarSector.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTAgregarSector.Location = new System.Drawing.Point(16, 7);
+            this.BTAgregarSector.Location = new System.Drawing.Point(17, 7);
             this.BTAgregarSector.Name = "BTAgregarSector";
             this.BTAgregarSector.Size = new System.Drawing.Size(50, 64);
             this.BTAgregarSector.TabIndex = 6;
             this.BTAgregarSector.UseVisualStyleBackColor = true;
             this.BTAgregarSector.Click += new System.EventHandler(this.BTAgregarSector_Click);
             // 
-            // BT_MenuFiltros
-            // 
-            this.BT_MenuFiltros.Location = new System.Drawing.Point(15, 16);
-            this.BT_MenuFiltros.Name = "BT_MenuFiltros";
-            this.BT_MenuFiltros.Size = new System.Drawing.Size(75, 23);
-            this.BT_MenuFiltros.TabIndex = 0;
-            this.BT_MenuFiltros.Text = "Filtrar Por";
-            this.BT_MenuFiltros.UseVisualStyleBackColor = true;
-            this.BT_MenuFiltros.Click += new System.EventHandler(this.BT_MenuFiltros_Click);
-            // 
             // P_Filtrado
             // 
-            this.P_Filtrado.Controls.Add(this.BT_Filtrar);
+            this.P_Filtrado.Controls.Add(this.label3);
             this.P_Filtrado.Controls.Add(this.TBFiltro);
-            this.P_Filtrado.Controls.Add(this.LBFiltro);
-            this.P_Filtrado.Location = new System.Drawing.Point(96, 1);
+            this.P_Filtrado.Dock = System.Windows.Forms.DockStyle.Top;
+            this.P_Filtrado.Location = new System.Drawing.Point(0, 0);
             this.P_Filtrado.Name = "P_Filtrado";
-            this.P_Filtrado.Size = new System.Drawing.Size(404, 52);
+            this.P_Filtrado.Size = new System.Drawing.Size(797, 52);
             this.P_Filtrado.TabIndex = 1;
-            this.P_Filtrado.Visible = false;
-            // 
-            // BT_Filtrar
-            // 
-            this.BT_Filtrar.Location = new System.Drawing.Point(297, 16);
-            this.BT_Filtrar.Name = "BT_Filtrar";
-            this.BT_Filtrar.Size = new System.Drawing.Size(75, 23);
-            this.BT_Filtrar.TabIndex = 2;
-            this.BT_Filtrar.Text = "Filtrar";
-            this.BT_Filtrar.UseVisualStyleBackColor = true;
-            this.BT_Filtrar.Click += new System.EventHandler(this.BT_Filtrar_Click);
             // 
             // TBFiltro
             // 
             this.TBFiltro.Location = new System.Drawing.Point(129, 17);
             this.TBFiltro.Name = "TBFiltro";
-            this.TBFiltro.Size = new System.Drawing.Size(146, 20);
-            this.TBFiltro.TabIndex = 1;
-            this.TBFiltro.TextChanged += new System.EventHandler(this.TBFiltro_TextChanged);
-            this.TBFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
-            // 
-            // LBFiltro
-            // 
-            this.LBFiltro.AutoSize = true;
-            this.LBFiltro.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBFiltro.ForeColor = System.Drawing.Color.White;
-            this.LBFiltro.Location = new System.Drawing.Point(4, 17);
-            this.LBFiltro.Name = "LBFiltro";
-            this.LBFiltro.Size = new System.Drawing.Size(46, 18);
-            this.LBFiltro.TabIndex = 0;
-            this.LBFiltro.Text = "label3";
+            this.TBFiltro.Size = new System.Drawing.Size(504, 20);
+            this.TBFiltro.TabIndex = 3;
+            this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
             // 
             // P_Verde
             // 
@@ -258,7 +224,6 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.P_Verde.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.P_Verde.Controls.Add(this.P_Filtrado);
-            this.P_Verde.Controls.Add(this.BT_MenuFiltros);
             this.P_Verde.Location = new System.Drawing.Point(0, 35);
             this.P_Verde.Margin = new System.Windows.Forms.Padding(0);
             this.P_Verde.Name = "P_Verde";
@@ -278,14 +243,12 @@
             this.codigoToolStripMenuItem.Name = "codigoToolStripMenuItem";
             this.codigoToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.codigoToolStripMenuItem.Text = "Codigo";
-            this.codigoToolStripMenuItem.Click += new System.EventHandler(this.codigoToolStripMenuItem_Click);
             // 
             // descripcionToolStripMenuItem
             // 
             this.descripcionToolStripMenuItem.Name = "descripcionToolStripMenuItem";
             this.descripcionToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.descripcionToolStripMenuItem.Text = "Descripcion";
-            this.descripcionToolStripMenuItem.Click += new System.EventHandler(this.descripcionToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -326,6 +289,7 @@
             this.panel2.Controls.Add(this.BTAgregarSector);
             this.panel2.Controls.Add(this.BTModifSector);
             this.panel2.Controls.Add(this.Bt_Fin);
+            this.panel2.Controls.Add(this.btnImprimir);
             this.panel2.Controls.Add(this.BT_Eliminar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -333,6 +297,30 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(85, 364);
             this.panel2.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(67, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 17);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Filtrar:";
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnImprimir.Location = new System.Drawing.Point(17, 215);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(50, 70);
+            this.btnImprimir.TabIndex = 10;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // Sectores_Inicio
             // 
@@ -344,6 +332,7 @@
             this.MinimumSize = new System.Drawing.Size(572, 442);
             this.Name = "Sectores_Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Shown += new System.EventHandler(this.Sectores_Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Sectores)).EndInit();
@@ -368,11 +357,8 @@
         private System.Windows.Forms.Button BTModifSector;
         private System.Windows.Forms.Button BT_Eliminar;
         private System.Windows.Forms.Button Bt_Fin;
-        private System.Windows.Forms.Button BT_MenuFiltros;
         private System.Windows.Forms.Panel P_Filtrado;
-        private System.Windows.Forms.Button BT_Filtrar;
         private System.Windows.Forms.TextBox TBFiltro;
-        private System.Windows.Forms.Label LBFiltro;
         private System.Windows.Forms.Panel P_Verde;
         private System.Windows.Forms.ContextMenuStrip CMS_Sectores;
         private System.Windows.Forms.ToolStripMenuItem codigoToolStripMenuItem;
@@ -382,5 +368,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnImprimir;
     }
 }

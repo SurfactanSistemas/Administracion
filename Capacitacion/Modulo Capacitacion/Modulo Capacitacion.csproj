@@ -59,6 +59,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\VistaPrevia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\VistaPrevia.Designer.cs">
+      <DependentUpon>VistaPrevia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listados\Cronograma Por Sector y Tema\ImpreInforme.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +267,12 @@
     <Compile Include="Listados\Promedio de Calificacion\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\Sectores\ListadoSectores.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoSectores.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\TemasRealizadosPorSector\DSInforme.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -453,6 +465,9 @@
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\VistaPrevia.resx">
+      <DependentUpon>VistaPrevia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\Cronograma Por Sector y Tema\ImpreInforme.resx">
       <DependentUpon>ImpreInforme.cs</DependentUpon>
     </EmbeddedResource>
@@ -543,6 +558,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Promedio de Calificacion\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Sectores\ListadoSectores.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoSectores.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\TemasRealizadosPorSector\ImpreInforme.resx">
       <DependentUpon>ImpreInforme.cs</DependentUpon>
@@ -836,6 +855,7 @@
     <Content Include="bin\Debug\Modulo Capacitacion.exe" />
     <Content Include="bin\Debug\Modulo Capacitacion.pdb" />
     <Content Include="bin\Debug\Modulo Capacitacion.vshost.exe" />
+    <None Include="Resources\marcadeagua2.jpg" />
     <None Include="Resources\remito modificar.png" />
   </ItemGroup>
   <ItemGroup>
