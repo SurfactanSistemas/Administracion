@@ -101,5 +101,11 @@ namespace Modulo_Capacitacion.Maestros.Temas
             BTModifTema.PerformClick();
         }
 
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            Listados.Temas.Inicio frm = new Listados.Temas.Inicio();
+            frm.ShowDialog();
+        }
+
     }
 }

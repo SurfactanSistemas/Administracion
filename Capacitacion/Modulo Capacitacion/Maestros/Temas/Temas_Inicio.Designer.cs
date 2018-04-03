@@ -51,13 +51,14 @@
             this.ResponsableI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ResponsableII = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ResponsableIV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bt_Fin = new System.Windows.Forms.Button();
-            this.BT_Eliminar = new System.Windows.Forms.Button();
-            this.BTModifTema = new System.Windows.Forms.Button();
-            this.BTAgregarTema = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.BTAgregarTema = new System.Windows.Forms.Button();
+            this.BTModifTema = new System.Windows.Forms.Button();
+            this.BT_Eliminar = new System.Windows.Forms.Button();
+            this.Bt_Fin = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -267,60 +268,6 @@
             this.ResponsableIV.Visible = false;
             this.ResponsableIV.Width = 104;
             // 
-            // Bt_Fin
-            // 
-            this.Bt_Fin.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar;
-            this.Bt_Fin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Bt_Fin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Bt_Fin.ForeColor = System.Drawing.SystemColors.Control;
-            this.Bt_Fin.Location = new System.Drawing.Point(21, 169);
-            this.Bt_Fin.Margin = new System.Windows.Forms.Padding(0);
-            this.Bt_Fin.Name = "Bt_Fin";
-            this.Bt_Fin.Size = new System.Drawing.Size(55, 67);
-            this.Bt_Fin.TabIndex = 17;
-            this.Bt_Fin.UseVisualStyleBackColor = true;
-            this.Bt_Fin.Click += new System.EventHandler(this.Bt_Fin_Click);
-            // 
-            // BT_Eliminar
-            // 
-            this.BT_Eliminar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.eliminar;
-            this.BT_Eliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Eliminar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Eliminar.Location = new System.Drawing.Point(21, 244);
-            this.BT_Eliminar.Name = "BT_Eliminar";
-            this.BT_Eliminar.Size = new System.Drawing.Size(55, 67);
-            this.BT_Eliminar.TabIndex = 16;
-            this.BT_Eliminar.UseVisualStyleBackColor = true;
-            this.BT_Eliminar.Click += new System.EventHandler(this.BT_Eliminar_Click);
-            // 
-            // BTModifTema
-            // 
-            this.BTModifTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.editar_temas;
-            this.BTModifTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BTModifTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTModifTema.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTModifTema.Location = new System.Drawing.Point(21, 19);
-            this.BTModifTema.Margin = new System.Windows.Forms.Padding(0);
-            this.BTModifTema.Name = "BTModifTema";
-            this.BTModifTema.Size = new System.Drawing.Size(55, 67);
-            this.BTModifTema.TabIndex = 15;
-            this.BTModifTema.UseVisualStyleBackColor = true;
-            this.BTModifTema.Click += new System.EventHandler(this.BTModifTema_Click);
-            // 
-            // BTAgregarTema
-            // 
-            this.BTAgregarTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.agregar_temas;
-            this.BTAgregarTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BTAgregarTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTAgregarTema.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTAgregarTema.Location = new System.Drawing.Point(21, 94);
-            this.BTAgregarTema.Name = "BTAgregarTema";
-            this.BTAgregarTema.Size = new System.Drawing.Size(55, 67);
-            this.BTAgregarTema.TabIndex = 7;
-            this.BTAgregarTema.UseVisualStyleBackColor = true;
-            this.BTAgregarTema.Click += new System.EventHandler(this.BTAgregarTema_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -358,6 +305,7 @@
             // 
             this.panel2.Controls.Add(this.BTAgregarTema);
             this.panel2.Controls.Add(this.BTModifTema);
+            this.panel2.Controls.Add(this.btnImprimir);
             this.panel2.Controls.Add(this.BT_Eliminar);
             this.panel2.Controls.Add(this.Bt_Fin);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -366,6 +314,73 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(96, 413);
             this.panel2.TabIndex = 0;
+            // 
+            // BTAgregarTema
+            // 
+            this.BTAgregarTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.agregar_temas;
+            this.BTAgregarTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BTAgregarTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTAgregarTema.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTAgregarTema.Location = new System.Drawing.Point(21, 34);
+            this.BTAgregarTema.Name = "BTAgregarTema";
+            this.BTAgregarTema.Size = new System.Drawing.Size(55, 67);
+            this.BTAgregarTema.TabIndex = 7;
+            this.BTAgregarTema.UseVisualStyleBackColor = true;
+            this.BTAgregarTema.Click += new System.EventHandler(this.BTAgregarTema_Click);
+            // 
+            // BTModifTema
+            // 
+            this.BTModifTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.editar_temas;
+            this.BTModifTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BTModifTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTModifTema.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTModifTema.Location = new System.Drawing.Point(21, 116);
+            this.BTModifTema.Margin = new System.Windows.Forms.Padding(0);
+            this.BTModifTema.Name = "BTModifTema";
+            this.BTModifTema.Size = new System.Drawing.Size(55, 67);
+            this.BTModifTema.TabIndex = 15;
+            this.BTModifTema.UseVisualStyleBackColor = true;
+            this.BTModifTema.Click += new System.EventHandler(this.BTModifTema_Click);
+            // 
+            // BT_Eliminar
+            // 
+            this.BT_Eliminar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.eliminar;
+            this.BT_Eliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Eliminar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Eliminar.Location = new System.Drawing.Point(21, 200);
+            this.BT_Eliminar.Name = "BT_Eliminar";
+            this.BT_Eliminar.Size = new System.Drawing.Size(55, 67);
+            this.BT_Eliminar.TabIndex = 16;
+            this.BT_Eliminar.UseVisualStyleBackColor = true;
+            this.BT_Eliminar.Click += new System.EventHandler(this.BT_Eliminar_Click);
+            // 
+            // Bt_Fin
+            // 
+            this.Bt_Fin.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar;
+            this.Bt_Fin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Bt_Fin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Bt_Fin.ForeColor = System.Drawing.SystemColors.Control;
+            this.Bt_Fin.Location = new System.Drawing.Point(21, 346);
+            this.Bt_Fin.Margin = new System.Windows.Forms.Padding(0);
+            this.Bt_Fin.Name = "Bt_Fin";
+            this.Bt_Fin.Size = new System.Drawing.Size(55, 67);
+            this.Bt_Fin.TabIndex = 17;
+            this.Bt_Fin.UseVisualStyleBackColor = true;
+            this.Bt_Fin.Click += new System.EventHandler(this.Bt_Fin_Click);
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnImprimir.Location = new System.Drawing.Point(21, 276);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(55, 67);
+            this.btnImprimir.TabIndex = 16;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // Temas_Inicio
             // 
@@ -416,5 +431,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableII;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableIV;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnImprimir;
     }
 }
