@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -15,7 +10,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         Curso C = new Curso();
         Tema T = new Tema();
         private Curso CursoAModificar;
-        bool EsModificar = false;
+        bool EsModificar;
 
         DataTable dtTema;
 
@@ -28,7 +23,6 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         public AgModCurso(Curso CursoAModificar)
         {
-            // TODO: Complete member initialization
             InitializeComponent();
             this.CursoAModificar = CursoAModificar;
             EsModificar = true;
@@ -40,12 +34,12 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void CargoDatos()
         {
-            TB_Codigo.Text = this.CursoAModificar.Tema.ToString();
-            TB_DescCurso.Text = this.CursoAModificar.Descripcion;
-            TB_CodTema.Text = this.CursoAModificar.Curso_Id.ToString();
-            TB_DescTema.Text = this.CursoAModificar.DescripcionCurso;
+            TB_Codigo.Text = CursoAModificar.Tema.ToString();
+            TB_DescCurso.Text = CursoAModificar.Descripcion;
+            TB_CodTema.Text = CursoAModificar.Curso_Id.ToString();
+            TB_DescTema.Text = CursoAModificar.DescripcionCurso;
            
-            TB_Horas.Text = this.CursoAModificar.Horas.ToString();
+            TB_Horas.Text = CursoAModificar.Horas.ToString();
 
             //BuscarDescripcionTema();
         }
@@ -56,7 +50,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
             {
                 TB_CodTema.Enabled = false;
                 TB_DescTema.Enabled = false;
-                TB_DescTema.Text = this.CursoAModificar.DescripcionCurso;
+                TB_DescTema.Text = CursoAModificar.DescripcionCurso;
             } 
             
 
@@ -67,8 +61,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
             //dtTema.Clear();
             dtTema = T.ListarTemas();
 
-            DataRow fila;
-            fila = dtTema.NewRow();
+            var fila = dtTema.NewRow();
             dtTema.Rows.InsertAt(fila, 0);
 
 
@@ -114,12 +107,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
             TB_CodTema.AutoCompleteMode = AutoCompleteMode.Suggest;
             TB_CodTema.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
-
-        private void TB_CodTema_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-        }
-
+        
         private void BuscarDescripcionTema()
         {
             int valor = 0;
@@ -135,17 +123,9 @@ namespace Modulo_Capacitacion.Maestros.Cursos
             
         }
 
-        private void TB_CodTema_TextChanged(object sender, EventArgs e)
-        {
-            if (!EsModificar) { 
-                TB_DescTema.Text = "";
-                TB_Codigo.Text = "";
-            }
-        }
-
         private void BT_Salir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
@@ -172,25 +152,23 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
                 C.Curso_Id = int.Parse(TB_Codigo.Text);
                 C.Tema = int.Parse(TB_CodTema.Text);
-                C.Descripcion = TB_DescCurso.Text;
+                C.Descripcion = TB_DescCurso.Text.Trim();
                 C.Horas = float.Parse(TB_Horas.Text);
 
-                if (!EsModificar) { 
-                C.Agregar();
+                if (!EsModificar)
+                { 
+                    C.Agregar();
                 }
                 else
                 {
                     C.Modificar(C);
                 }
-                this.Close();
+
+                Close();
             }
             catch (Exception err)
             {
                 MessageBox.Show(err.Message,"Error");
-            }
-            finally
-            {
-                
             }
         }
 
@@ -198,20 +176,14 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         {
             try
             {
-                
-
                 if (e.KeyCode == Keys.Enter)
                 {
                     BuscarDescripcionTema();
 
                     BuscarUltimoCurso();
 
-                    
-
                     TB_DescCurso.Focus();
                 }
-
-                
             }
             catch (Exception err)
             {
@@ -236,28 +208,39 @@ namespace Modulo_Capacitacion.Maestros.Cursos
                 }
             }
             
-            
         }
 
         private void TB_CodTema_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-                if (TB_CodTema.Text != "" && TB_CodTema.Text != "System.Data.DataRowView")
+            if (TB_CodTema.Text != "" && TB_CodTema.Text != "System.Data.DataRowView")
+            {
+                TB_DescCurso.Focus();
+                if (EsModificar == false)
                 {
-                    TB_DescCurso.Focus();
-                    if (EsModificar == false)
-                    {
-                        BuscarUltimoCurso();
-                    }
-                    
+                    BuscarUltimoCurso();
                 }
-            
-            
+                    
+            }   
         }
 
         private void TB_DescCurso_KeyDown(object sender, KeyEventArgs e)
         {
-            TB_Horas.Focus();
+            if (e.KeyCode == Keys.Enter)
+            {
+                TB_Horas.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_DescCurso.Text = "";
+            }
+        }
+
+        private void TB_Horas_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                TB_Horas.Text = "";
+            }
         }
     }
 }

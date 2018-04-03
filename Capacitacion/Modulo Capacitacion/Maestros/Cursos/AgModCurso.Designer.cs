@@ -149,14 +149,17 @@
             // 
             this.TB_Horas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Horas.Location = new System.Drawing.Point(128, 124);
+            this.TB_Horas.MaxLength = 6;
             this.TB_Horas.Name = "TB_Horas";
             this.TB_Horas.Size = new System.Drawing.Size(84, 20);
             this.TB_Horas.TabIndex = 32;
+            this.TB_Horas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Horas_KeyDown);
             // 
             // TB_DescCurso
             // 
             this.TB_DescCurso.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_DescCurso.Location = new System.Drawing.Point(128, 89);
+            this.TB_DescCurso.MaxLength = 80;
             this.TB_DescCurso.Name = "TB_DescCurso";
             this.TB_DescCurso.Size = new System.Drawing.Size(357, 20);
             this.TB_DescCurso.TabIndex = 31;
@@ -178,7 +181,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(328, 175);
+            this.BT_Salir.Location = new System.Drawing.Point(315, 175);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 27;
@@ -191,7 +194,7 @@
             this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_LimpiarPant.Location = new System.Drawing.Point(245, 171);
+            this.BT_LimpiarPant.Location = new System.Drawing.Point(232, 175);
             this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
             this.BT_LimpiarPant.Name = "BT_LimpiarPant";
             this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
@@ -205,7 +208,7 @@
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(162, 175);
+            this.BT_Guardar.Location = new System.Drawing.Point(149, 175);
             this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
             this.BT_Guardar.Name = "BT_Guardar";
             this.BT_Guardar.Size = new System.Drawing.Size(40, 40);

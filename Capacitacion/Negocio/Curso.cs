@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ClassConexion;
 using System.Data;
+using ClassConexion;
 
 namespace Negocio
 {
@@ -16,10 +13,10 @@ namespace Negocio
         public float? Horas;
         public int Curso_Id;
 
-        public System.Data.DataTable ListarTodos()
+        public DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
-            string consulta = "select T.Clave, T.Tema, C.Descripcion as CursoDesc, T.Descripcion, T.Curso, T.Horas from Tema T inner join Curso C on C.Codigo = T.Curso order by clave asc";
+            string consulta = "SELECT T.Clave, T.Tema, C.Descripcion as CursoDesc, T.Descripcion, T.Curso, T.Horas FROM Tema T INNER JOIN Curso C ON C.Codigo = T.Curso WHERE T.Curso > 0 ORDER BY T.Clave";
 
             return repo.Listar(consulta);
         }
@@ -33,8 +30,8 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-            var clave2 = this.Curso_Id.ToString().PadLeft(4, '0');
-            var clave1 = this.Tema.ToString().PadLeft(4, '0');
+            var clave2 = Curso_Id.ToString().PadLeft(4, '0');
+            var clave1 = Tema.ToString().PadLeft(4, '0');
             var horas = Horas.ToString().Replace(",",".");
             
 
@@ -119,7 +116,7 @@ namespace Negocio
             return obj;
         }
 
-        public System.Data.DataTable ListarTodosListado()
+        public DataTable ListarTodosListado()
         {
             Conexion repo = new Conexion();
             string consulta = "select C.Codigo, C.Descripcion, C.Responsable from Curso C where C.Codigo <> 0 order by Codigo asc";
@@ -127,7 +124,7 @@ namespace Negocio
             return repo.Listar(consulta);
         }
 
-        public System.Data.DataTable ListarPorResponsable(string Resp)
+        public DataTable ListarPorResponsable(string Resp)
         {
             Conexion repo = new Conexion();
             string consulta = "select C.Codigo, C.Descripcion, C.Responsable from Curso C where C.Codigo <> 0 and C.Responsable = '" +Resp + "' order by Codigo asc";
@@ -136,7 +133,7 @@ namespace Negocio
             return repo.Listar(consulta);
         }
 
-        public System.Data.DataTable ListaPorTema(int Curso)
+        public DataTable ListaPorTema(int Curso)
         {
             Conexion repo = new Conexion();
             string consulta = "select * from Tema where Curso = " + Curso;
