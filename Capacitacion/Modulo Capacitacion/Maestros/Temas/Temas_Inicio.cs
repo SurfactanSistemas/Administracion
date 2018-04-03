@@ -40,6 +40,7 @@ namespace Modulo_Capacitacion.Maestros.Temas
 
         private void ActualizarGrilla()
         {
+            TBFiltro.Text = "";
             DGV_Temas.DataSource = temas.ListarTodos();
         }
 

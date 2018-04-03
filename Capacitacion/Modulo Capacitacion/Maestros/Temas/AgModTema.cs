@@ -194,14 +194,11 @@ namespace Modulo_Capacitacion.Maestros.Temas
         {
             try
             {
-                if (TB_Descripcion.Text == "" || TB_Detalle_1.Text == "" || TB_Detalle_2.Text == "" ||
-                    TB_Responsable.Text == "" || TB_CodResponsable2.Text == "" || TB_CodResponsable3.Text == "" ||
-                    CB_Donde.SelectedValue.ToString() == "") 
-                    throw new Exception("Se deben completar todos los campos");
+                if (TB_Descripcion.Text.Trim() == "") throw new Exception("La tarea debe tener una descripción.");
 
                 if (!EsModificar)
                 {
-                    
+
                     nuevoTema.Codigo = int.Parse(TB_Codigo.Text);
                     nuevoTema.Descripcion = TB_Descripcion.Text.Trim();
                     nuevoTema.TemaI = TB_Detalle_1.Text.Trim();
@@ -210,14 +207,14 @@ namespace Modulo_Capacitacion.Maestros.Temas
                     nuevoTema.Responsable = TB_Responsable.Text.Trim();
                     nuevoTema.ResponsableII = new Responsable
                     {
-                        Codigo = int.Parse(TB_CodResponsable2.Text)
+                        Codigo = TB_CodResponsable2.Text.Trim() == "" ? 0 : int.Parse(TB_CodResponsable2.Text)
                     };
                     nuevoTema.ResponsableIII = new Responsable
                     {
-                        Codigo = int.Parse(TB_CodResponsable3.Text)
+                        Codigo = TB_CodResponsable3.Text.Trim() == "" ? 0 : int.Parse(TB_CodResponsable3.Text)
                     };
 
-                    nuevoTema.Tipo = int.Parse(CB_Donde.SelectedValue.ToString());
+                    nuevoTema.Tipo = CB_Donde.SelectedValue.ToString().Trim() == "" ? 0 : int.Parse(CB_Donde.SelectedValue.ToString());
 
                     nuevoTema.Agregar();
                 }
@@ -232,27 +229,24 @@ namespace Modulo_Capacitacion.Maestros.Temas
                     TemaAModificar.Responsable = TB_Responsable.Text.Trim();
                     TemaAModificar.ResponsableII = new Responsable
                     {
-                        Codigo = int.Parse(TB_CodResponsable2.Text)
+                        Codigo = TB_CodResponsable2.Text.Trim() == "" ? 0 : int.Parse(TB_CodResponsable2.Text)
                     };
                     TemaAModificar.ResponsableIII = new Responsable
                     {
-                        Codigo = int.Parse(TB_CodResponsable3.Text)
+                        Codigo = TB_CodResponsable3.Text.Trim() == "" ? 0 : int.Parse(TB_CodResponsable3.Text)
                     };
-                    TemaAModificar.Tipo = int.Parse(CB_Donde.SelectedValue.ToString());
+
+                    TemaAModificar.Tipo = CB_Donde.SelectedValue.ToString().Trim() == "" ? 0 : int.Parse(CB_Donde.SelectedValue.ToString());
 
                     nuevoTema.Modificar(TemaAModificar);
 
-                    
                 }
+
+                Close();
             }
             catch (Exception err)
             {
                 MessageBox.Show(err.Message,"Error");
-            }
-
-            finally
-            {
-                Close();
             }
         }
 
@@ -357,34 +351,6 @@ namespace Modulo_Capacitacion.Maestros.Temas
         {
             TB_CodResponsable3.Focus();
             TB_Responsable.Text = TB_Responsable2.Text;
-        }
-
-        private void TB_CodResponsable2_KeyDown_1(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (TB_Responsable2.Text == "")
-                {
-                    TB_Responsable2.Focus();
-                }
-                else
-                {
-                    TB_CodResponsable3.Focus();
-                    TB_Responsable.Text = TB_Responsable2.Text;
-                }
-            }
-        }
-
-        private void TB_CodResponsable3_KeyDown_1(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (TB_Responsable3.Text == "")
-                {
-                    TB_Responsable3.Focus();
-                }
-               
-            }
         }
 
         private void AgModTema_Shown(object sender, EventArgs e)

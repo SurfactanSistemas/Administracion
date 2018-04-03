@@ -40,7 +40,12 @@ namespace Negocio
             {
                 R.Codigo = int.Parse(DT.Rows[0]["Codigo"].ToString());
                 R.Descripcion = DT.Rows[0]["Descripcion"].ToString();
-            }          
+            }
+            else
+            {
+                R.Codigo = int.Parse(IdAModificar);
+                R.Descripcion = "";
+            }
 
             return R;
         }
