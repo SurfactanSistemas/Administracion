@@ -60,62 +60,62 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         private void CargarDatosPerfilABM()
         {
             TB_Codigo.Text = P.Codigo.ToString();
-            TB_DecPerfil.Text = P.Descripcion;
+            TB_DecPerfil.Text = P.Descripcion.Trim();
             TB_Fecha.Text = P.Vigencia;
-            TB_Version.Text = (P.Version).ToString();
+            TB_Version.Text = (P.Version).ToString().Trim();
 
-            TB_CodSec.Text = this.P.sector.Codigo.ToString();
-            TB_DescSector.Text = this.P.sector.Descripcion;
+            TB_CodSec.Text = this.P.sector.Codigo.ToString().Trim();
+            TB_DescSector.Text = this.P.sector.Descripcion.Trim();
 
-            TB_CodResp1.Text = this.P.R.Codigo.ToString();
-            TB_DescResp1.Text = this.P.R.Descripcion;
+            TB_CodResp1.Text = this.P.R.Codigo.ToString().Trim();
+            TB_DescResp1.Text = this.P.R.Descripcion.Trim();
 
-            TB_CodResp2.Text = this.P.R2.Codigo.ToString();
-            TB_DescResp2.Text = this.P.R2.Descripcion;
+            TB_CodResp2.Text = this.P.R2.Codigo.ToString().Trim();
+            TB_DescResp2.Text = this.P.R2.Descripcion.Trim();
 
-            TB_Tareas1.Text = this.P.TareasI;
-            TB_Tareas2.Text = this.P.TareasII;
-            TB_Tareas3.Text = this.P.TareasIII;
+            TB_Tareas1.Text = this.P.TareasI.Trim();
+            TB_Tareas2.Text = this.P.TareasII.Trim();
+            TB_Tareas3.Text = this.P.TareasIII.Trim();
 
-            TB_Primaria.Text = P.DescriI;
-            TB_ObservPrimaria.Text = P.ObservaI;
+            TB_Primaria.Text = P.DescriI.Trim();
+            TB_ObservPrimaria.Text = P.ObservaI.Trim();
             CB_NecPrim.Checked = P.NecesariaI == 1 ? true : false;
             CB_DesPrim.Checked = P.DeseableI == 1 ? true : false;
 
-            TB_Secundaria.Text = P.DescriII;
-            TB_ObservSecundaria.Text = P.ObservaII;
+            TB_Secundaria.Text = P.DescriII.Trim();
+            TB_ObservSecundaria.Text = P.ObservaII.Trim();
             CB_NecSec.Checked = P.NecesariaII == 1 ? true : false;
             CB_DesSec.Checked = P.DeseableII == 1 ? true : false;
 
-            TB_Terciaria.Text = P.DescriIII;
-            TB_ObservTerciaria.Text = P.ObservaIII;
+            TB_Terciaria.Text = P.DescriIII.Trim();
+            TB_ObservTerciaria.Text = P.ObservaIII.Trim();
             CB_NecTerc.Checked = P.NecesariaIII == 1 ? true : false;
             CB_DesTerc.Checked = P.DeseableIII == 1 ? true : false;
 
-            TB_Idioma.Text = P.DescriIV;
-            TB_ObservIdioma.Text = P.ObservaIV;
+            TB_Idioma.Text = P.DescriIV.Trim();
+            TB_ObservIdioma.Text = P.ObservaIV.Trim();
             CB_NecIdioma.Checked = P.NecesariaIV == 1 ? true : false;
             CB_DesIdioma.Checked = P.DeseableIV == 1 ? true : false;
 
-            TB_Exp.Text = P.DescriV;
-            TB_ObservExp.Text = P.ObservaV;
+            TB_Exp.Text = P.DescriV.Trim();
+            TB_ObservExp.Text = P.ObservaV.Trim();
             CB_NecExp.Checked = P.NecesariaV == 1 ? true : false;
             CB_DesExp.Checked = P.DeseableV == 1 ? true : false;
 
-            TB_CondFisica.Text = P.Fisica;
+            TB_CondFisica.Text = P.Fisica.Trim();
             CB_NecCondFisica.Checked = P.NecesariaVI == 1 ? true : false;
             CB_DesCondFisica.Checked = P.DeseableVI == 1 ? true : false;
 
-            TB_Otros1.Text = P.OtrosI;
+            TB_Otros1.Text = P.OtrosI.Trim();
             CB_DesOtros1.Checked = P.DeseableVII == 1 ? true : false;
             CB_NecOtros1.Checked = P.NecesariaVII == 1 ? true : false;
 
-            TB_Otros2.Text = P.OtrosII;
+            TB_Otros2.Text = P.OtrosII.Trim();
             CB_DesOtros2.Checked = P.DeseableVIII == 1 ? true : false;
             CB_NecOtros2.Checked = P.NecesariaVIII == 1 ? true : false;
 
-            TB_Equiv1.Text = P.EquivalenciasI;
-            TB_Equiv2.Text = P.EquivalenciasII;
+            TB_Equiv1.Text = P.EquivalenciasI.Trim();
+            TB_Equiv2.Text = P.EquivalenciasII.Trim();
         }
 
         private void CargarTemas()
@@ -557,7 +557,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             
             P = new Perfil();
             P.Codigo = int.Parse(TB_Codigo.Text);
-            P.Descripcion = TB_DecPerfil.Text;
+            P.Descripcion = TB_DecPerfil.Text.Trim();
             P.Vigencia = TB_Fecha.Text;
             P.Version = int.Parse(TB_Version.Text);
 
@@ -576,49 +576,49 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             P.R2 = R2.Codigo == 0 ? CargarRes2() : R2;
             //P.R = R;
             //P.R2 = R2;
-            P.TareasI = TB_Tareas1.Text;
-            P.TareasII = TB_Tareas2.Text;
-            P.TareasIII = TB_Tareas3.Text;
+            P.TareasI = TB_Tareas1.Text.Trim();
+            P.TareasII = TB_Tareas2.Text.Trim();
+            P.TareasIII = TB_Tareas3.Text.Trim();
 
-            P.DescriI = TB_Primaria.Text;
-            P.ObservaI = TB_ObservPrimaria.Text;
+            P.DescriI = TB_Primaria.Text.Trim();
+            P.ObservaI = TB_ObservPrimaria.Text.Trim();
             P.NecesariaI = CB_NecPrim.Checked ? 1 : 0;
             P.DeseableI = CB_DesPrim.Checked ? 1 : 0;
 
-            P.DescriII = TB_Secundaria.Text;
-            P.ObservaII = TB_ObservSecundaria.Text;
+            P.DescriII = TB_Secundaria.Text.Trim();
+            P.ObservaII = TB_ObservSecundaria.Text.Trim();
             P.NecesariaII = CB_NecSec.Checked ? 1 : 0;
             P.DeseableII = CB_DesSec.Checked ? 1 : 0;
 
-            P.DescriIII = TB_Terciaria.Text;
-            P.ObservaIII = TB_ObservTerciaria.Text;
+            P.DescriIII = TB_Terciaria.Text.Trim();
+            P.ObservaIII = TB_ObservTerciaria.Text.Trim();
             P.NecesariaIII = CB_NecTerc.Checked ? 1 : 0;
             P.DeseableIII = CB_DesTerc.Checked ? 1 : 0;
 
-            P.DescriIV = TB_Idioma.Text;
-            P.ObservaIV = TB_ObservIdioma.Text;
+            P.DescriIV = TB_Idioma.Text.Trim();
+            P.ObservaIV = TB_ObservIdioma.Text.Trim();
             P.NecesariaIV = CB_NecIdioma.Checked ? 1 : 0;
             P.DeseableIV = CB_DesIdioma.Checked ? 1 : 0;
 
-            P.DescriV = TB_Exp.Text;
-            P.ObservaV = TB_ObservExp.Text;
+            P.DescriV = TB_Exp.Text.Trim();
+            P.ObservaV = TB_ObservExp.Text.Trim();
             P.NecesariaV = CB_NecExp.Checked ? 1 : 0;
             P.DeseableV = CB_DesExp.Checked ? 1 : 0;
 
-            P.Fisica = TB_CondFisica.Text;
+            P.Fisica = TB_CondFisica.Text.Trim();
             P.NecesariaVI = CB_NecCondFisica.Checked ? 1 : 0;
             P.DeseableVI = CB_DesCondFisica.Checked ? 1 : 0;
 
-            P.OtrosI = TB_Otros1.Text;
+            P.OtrosI = TB_Otros1.Text.Trim();
             P.DeseableVII = CB_DesOtros1.Checked ? 1 : 0;
             P.NecesariaVII = CB_NecOtros1.Checked ? 1 : 0;
 
-            P.OtrosII = TB_Otros2.Text;
+            P.OtrosII = TB_Otros2.Text.Trim();
             P.DeseableVIII = CB_DesOtros2.Checked ? 1 : 0;
             P.NecesariaVIII = CB_NecOtros2.Checked ? 1 : 0;
 
-            P.EquivalenciasI = TB_Equiv1.Text;
-            P.EquivalenciasII = TB_Equiv2.Text;
+            P.EquivalenciasI = TB_Equiv1.Text.Trim();
+            P.EquivalenciasII = TB_Equiv2.Text.Trim();
 
             List<Tema> Temas = new List<Tema>();
             foreach (DataGridViewRow row in DGV_Temas.Rows)
