@@ -28,33 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.P_Filtrado = new System.Windows.Forms.Panel();
-            this.BT_Filtrar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.TBFiltro = new System.Windows.Forms.TextBox();
-            this.LBFiltro = new System.Windows.Forms.Label();
-            this.BT_MenuFiltros = new System.Windows.Forms.Button();
             this.DGV_Temas = new System.Windows.Forms.DataGridView();
-            this.Bt_Fin = new System.Windows.Forms.Button();
-            this.BT_Eliminar = new System.Windows.Forms.Button();
-            this.BTModifTema = new System.Windows.Forms.Button();
-            this.BTAgregarTema = new System.Windows.Forms.Button();
-            this.CMS_Temas = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.codigoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.descripcionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.responableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TemaI = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,11 +51,17 @@
             this.ResponsableI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ResponsableII = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ResponsableIV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bt_Fin = new System.Windows.Forms.Button();
+            this.BT_Eliminar = new System.Windows.Forms.Button();
+            this.BTModifTema = new System.Windows.Forms.Button();
+            this.BTAgregarTema = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).BeginInit();
-            this.CMS_Temas.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -117,7 +108,6 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.P_Verde.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.P_Verde.Controls.Add(this.P_Filtrado);
-            this.P_Verde.Controls.Add(this.BT_MenuFiltros);
             this.P_Verde.Location = new System.Drawing.Point(0, 39);
             this.P_Verde.Margin = new System.Windows.Forms.Padding(0);
             this.P_Verde.Name = "P_Verde";
@@ -126,54 +116,33 @@
             // 
             // P_Filtrado
             // 
-            this.P_Filtrado.Controls.Add(this.BT_Filtrar);
+            this.P_Filtrado.Controls.Add(this.label3);
             this.P_Filtrado.Controls.Add(this.TBFiltro);
-            this.P_Filtrado.Controls.Add(this.LBFiltro);
-            this.P_Filtrado.Location = new System.Drawing.Point(491, 2);
+            this.P_Filtrado.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.P_Filtrado.Location = new System.Drawing.Point(0, 0);
+            this.P_Filtrado.Margin = new System.Windows.Forms.Padding(0);
             this.P_Filtrado.Name = "P_Filtrado";
-            this.P_Filtrado.Size = new System.Drawing.Size(404, 52);
+            this.P_Filtrado.Size = new System.Drawing.Size(1081, 52);
             this.P_Filtrado.TabIndex = 1;
-            this.P_Filtrado.Visible = false;
             // 
-            // BT_Filtrar
+            // label3
             // 
-            this.BT_Filtrar.Location = new System.Drawing.Point(297, 16);
-            this.BT_Filtrar.Name = "BT_Filtrar";
-            this.BT_Filtrar.Size = new System.Drawing.Size(75, 23);
-            this.BT_Filtrar.TabIndex = 2;
-            this.BT_Filtrar.Text = "Filtrar";
-            this.BT_Filtrar.UseVisualStyleBackColor = true;
-            this.BT_Filtrar.Click += new System.EventHandler(this.BT_Filtrar_Click);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(90, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Filtrar:";
             // 
             // TBFiltro
             // 
-            this.TBFiltro.Location = new System.Drawing.Point(129, 17);
+            this.TBFiltro.Location = new System.Drawing.Point(148, 16);
             this.TBFiltro.Name = "TBFiltro";
-            this.TBFiltro.Size = new System.Drawing.Size(146, 20);
+            this.TBFiltro.Size = new System.Drawing.Size(646, 20);
             this.TBFiltro.TabIndex = 1;
-            this.TBFiltro.TextChanged += new System.EventHandler(this.TBFiltro_TextChanged);
-            this.TBFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
-            // 
-            // LBFiltro
-            // 
-            this.LBFiltro.AutoSize = true;
-            this.LBFiltro.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBFiltro.ForeColor = System.Drawing.Color.White;
-            this.LBFiltro.Location = new System.Drawing.Point(4, 17);
-            this.LBFiltro.Name = "LBFiltro";
-            this.LBFiltro.Size = new System.Drawing.Size(46, 18);
-            this.LBFiltro.TabIndex = 0;
-            this.LBFiltro.Text = "label3";
-            // 
-            // BT_MenuFiltros
-            // 
-            this.BT_MenuFiltros.Location = new System.Drawing.Point(15, 16);
-            this.BT_MenuFiltros.Name = "BT_MenuFiltros";
-            this.BT_MenuFiltros.Size = new System.Drawing.Size(75, 23);
-            this.BT_MenuFiltros.TabIndex = 0;
-            this.BT_MenuFiltros.Text = "Filtrar Por";
-            this.BT_MenuFiltros.UseVisualStyleBackColor = true;
-            this.BT_MenuFiltros.Click += new System.EventHandler(this.BT_MenuFiltros_Click);
+            this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
             // 
             // DGV_Temas
             // 
@@ -199,14 +168,103 @@
             this.DGV_Temas.Location = new System.Drawing.Point(96, 0);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Temas.Size = new System.Drawing.Size(985, 413);
             this.DGV_Temas.TabIndex = 6;
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "Codigo";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Codigo.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.Width = 65;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descripcion.DataPropertyName = "Descripcion";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Descripcion.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            // 
+            // TemaI
+            // 
+            this.TemaI.DataPropertyName = "TemaI";
+            this.TemaI.HeaderText = "Detalle";
+            this.TemaI.Name = "TemaI";
+            this.TemaI.Width = 65;
+            // 
+            // TemaII
+            // 
+            this.TemaII.DataPropertyName = "TemaII";
+            this.TemaII.HeaderText = "DetalleII";
+            this.TemaII.Name = "TemaII";
+            this.TemaII.Visible = false;
+            this.TemaII.Width = 71;
+            // 
+            // TemaIII
+            // 
+            this.TemaIII.DataPropertyName = "TemaIII";
+            this.TemaIII.HeaderText = "DetalleIII";
+            this.TemaIII.Name = "TemaIII";
+            this.TemaIII.Visible = false;
+            this.TemaIII.Width = 74;
+            // 
+            // Responsable
+            // 
+            this.Responsable.DataPropertyName = "Responsable";
+            this.Responsable.HeaderText = "Responsable";
+            this.Responsable.Name = "Responsable";
+            this.Responsable.Width = 94;
+            // 
+            // Horas
+            // 
+            this.Horas.DataPropertyName = "Horas";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Horas.HeaderText = "Horas";
+            this.Horas.Name = "Horas";
+            this.Horas.Visible = false;
+            this.Horas.Width = 60;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo";
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.Visible = false;
+            this.Tipo.Width = 53;
+            // 
+            // ResponsableI
+            // 
+            this.ResponsableI.DataPropertyName = "ResponsableII";
+            this.ResponsableI.HeaderText = "ResponsableI";
+            this.ResponsableI.Name = "ResponsableI";
+            this.ResponsableI.Visible = false;
+            this.ResponsableI.Width = 97;
+            // 
+            // ResponsableII
+            // 
+            this.ResponsableII.DataPropertyName = "ResponsableIII";
+            this.ResponsableII.HeaderText = "ResponsableII";
+            this.ResponsableII.Name = "ResponsableII";
+            this.ResponsableII.Visible = false;
+            // 
+            // ResponsableIV
+            // 
+            this.ResponsableIV.DataPropertyName = "ResponsableIV";
+            this.ResponsableIV.HeaderText = "ResponsableIV";
+            this.ResponsableIV.Name = "ResponsableIV";
+            this.ResponsableIV.Visible = false;
+            this.ResponsableIV.Width = 104;
             // 
             // Bt_Fin
             // 
@@ -262,44 +320,6 @@
             this.BTAgregarTema.UseVisualStyleBackColor = true;
             this.BTAgregarTema.Click += new System.EventHandler(this.BTAgregarTema_Click);
             // 
-            // CMS_Temas
-            // 
-            this.CMS_Temas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.codigoToolStripMenuItem,
-            this.descripcionToolStripMenuItem,
-            this.responableToolStripMenuItem,
-            this.tipoToolStripMenuItem});
-            this.CMS_Temas.Name = "CMS_Temas";
-            this.CMS_Temas.Size = new System.Drawing.Size(141, 92);
-            // 
-            // codigoToolStripMenuItem
-            // 
-            this.codigoToolStripMenuItem.Name = "codigoToolStripMenuItem";
-            this.codigoToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.codigoToolStripMenuItem.Text = "Codigo";
-            this.codigoToolStripMenuItem.Click += new System.EventHandler(this.codigoToolStripMenuItem_Click);
-            // 
-            // descripcionToolStripMenuItem
-            // 
-            this.descripcionToolStripMenuItem.Name = "descripcionToolStripMenuItem";
-            this.descripcionToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.descripcionToolStripMenuItem.Text = "Descripcion";
-            this.descripcionToolStripMenuItem.Click += new System.EventHandler(this.descripcionToolStripMenuItem_Click);
-            // 
-            // responableToolStripMenuItem
-            // 
-            this.responableToolStripMenuItem.Name = "responableToolStripMenuItem";
-            this.responableToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.responableToolStripMenuItem.Text = "Responsable";
-            this.responableToolStripMenuItem.Click += new System.EventHandler(this.responableToolStripMenuItem_Click);
-            // 
-            // tipoToolStripMenuItem
-            // 
-            this.tipoToolStripMenuItem.Name = "tipoToolStripMenuItem";
-            this.tipoToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.tipoToolStripMenuItem.Text = "Tipo";
-            this.tipoToolStripMenuItem.Click += new System.EventHandler(this.tipoToolStripMenuItem_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -346,95 +366,6 @@
             this.panel2.Size = new System.Drawing.Size(96, 413);
             this.panel2.TabIndex = 0;
             // 
-            // Codigo
-            // 
-            this.Codigo.DataPropertyName = "Codigo";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Codigo.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.Name = "Codigo";
-            this.Codigo.Width = 65;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Descripcion.DataPropertyName = "Descripcion";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Descripcion.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            // 
-            // TemaI
-            // 
-            this.TemaI.DataPropertyName = "TemaI";
-            this.TemaI.HeaderText = "Detalle";
-            this.TemaI.Name = "TemaI";
-            this.TemaI.Width = 65;
-            // 
-            // TemaII
-            // 
-            this.TemaII.DataPropertyName = "TemaII";
-            this.TemaII.HeaderText = "DetalleII";
-            this.TemaII.Name = "TemaII";
-            this.TemaII.Visible = false;
-            this.TemaII.Width = 71;
-            // 
-            // TemaIII
-            // 
-            this.TemaIII.DataPropertyName = "TemaIII";
-            this.TemaIII.HeaderText = "DetalleIII";
-            this.TemaIII.Name = "TemaIII";
-            this.TemaIII.Visible = false;
-            this.TemaIII.Width = 74;
-            // 
-            // Responsable
-            // 
-            this.Responsable.DataPropertyName = "Responsable";
-            this.Responsable.HeaderText = "Responsable";
-            this.Responsable.Name = "Responsable";
-            this.Responsable.Width = 94;
-            // 
-            // Horas
-            // 
-            this.Horas.DataPropertyName = "Horas";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Horas.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Horas.HeaderText = "Horas";
-            this.Horas.Name = "Horas";
-            this.Horas.Visible = false;
-            this.Horas.Width = 60;
-            // 
-            // Tipo
-            // 
-            this.Tipo.DataPropertyName = "Tipo";
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.Visible = false;
-            this.Tipo.Width = 53;
-            // 
-            // ResponsableI
-            // 
-            this.ResponsableI.DataPropertyName = "ResponsableII";
-            this.ResponsableI.HeaderText = "ResponsableI";
-            this.ResponsableI.Name = "ResponsableI";
-            this.ResponsableI.Visible = false;
-            this.ResponsableI.Width = 97;
-            // 
-            // ResponsableII
-            // 
-            this.ResponsableII.DataPropertyName = "ResponsableIII";
-            this.ResponsableII.HeaderText = "ResponsableII";
-            this.ResponsableII.Name = "ResponsableII";
-            this.ResponsableII.Visible = false;
-            // 
-            // ResponsableIV
-            // 
-            this.ResponsableIV.DataPropertyName = "ResponsableIV";
-            this.ResponsableIV.HeaderText = "ResponsableIV";
-            this.ResponsableIV.Name = "ResponsableIV";
-            this.ResponsableIV.Visible = false;
-            this.ResponsableIV.Width = 104;
-            // 
             // Temas_Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,14 +374,12 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Temas_Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Temas_Inicio_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.P_Verde.ResumeLayout(false);
             this.P_Filtrado.ResumeLayout(false);
             this.P_Filtrado.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).EndInit();
-            this.CMS_Temas.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -465,20 +394,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel P_Verde;
         private System.Windows.Forms.Panel P_Filtrado;
-        private System.Windows.Forms.Button BT_Filtrar;
         private System.Windows.Forms.TextBox TBFiltro;
-        private System.Windows.Forms.Label LBFiltro;
-        private System.Windows.Forms.Button BT_MenuFiltros;
         private System.Windows.Forms.DataGridView DGV_Temas;
         private System.Windows.Forms.Button BTAgregarTema;
         private System.Windows.Forms.Button Bt_Fin;
         private System.Windows.Forms.Button BT_Eliminar;
         private System.Windows.Forms.Button BTModifTema;
-        private System.Windows.Forms.ContextMenuStrip CMS_Temas;
-        private System.Windows.Forms.ToolStripMenuItem codigoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem descripcionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem responableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tipoToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel2;
@@ -493,5 +414,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableI;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableII;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableIV;
+        private System.Windows.Forms.Label label3;
     }
 }

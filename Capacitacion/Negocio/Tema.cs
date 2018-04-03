@@ -27,7 +27,7 @@ namespace Negocio
         public DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
-            string consulta = "select * from Curso order by Codigo asc";
+            string consulta = "SELECT * FROM Curso WHERE Codigo > 0 ORDER BY Codigo";
             return repo.Listar(consulta);
         }
 
