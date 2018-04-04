@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.BT_MasObserv = new System.Windows.Forms.Button();
@@ -130,20 +135,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.DGV_Temas = new System.Windows.Forms.DataGridView();
-            this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Necesaria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.DGV_CursosRealiz = new System.Windows.Forms.DataGridView();
-            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DesCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Año = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cursos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.TB_FechaIng = new System.Windows.Forms.DateTimePicker();
             this.TB_DescLegajo = new System.Windows.Forms.TextBox();
@@ -155,6 +148,18 @@
             this.TB_Codigo = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBLegajo = new System.Windows.Forms.Label();
+            this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Necesaria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DesCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Año = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cursos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -219,7 +224,7 @@
             // TB_PerfilAct
             // 
             this.TB_PerfilAct.BackColor = System.Drawing.Color.Firebrick;
-            this.TB_PerfilAct.Location = new System.Drawing.Point(4, 47);
+            this.TB_PerfilAct.Location = new System.Drawing.Point(5, 46);
             this.TB_PerfilAct.Name = "TB_PerfilAct";
             this.TB_PerfilAct.Size = new System.Drawing.Size(421, 20);
             this.TB_PerfilAct.TabIndex = 49;
@@ -243,6 +248,7 @@
             this.TB_CUIL.Name = "TB_CUIL";
             this.TB_CUIL.Size = new System.Drawing.Size(85, 20);
             this.TB_CUIL.TabIndex = 47;
+            this.TB_CUIL.Visible = false;
             // 
             // TB_DNI
             // 
@@ -261,6 +267,7 @@
             this.label16.Size = new System.Drawing.Size(40, 18);
             this.label16.TabIndex = 44;
             this.label16.Text = "CUIL:";
+            this.label16.Visible = false;
             // 
             // label14
             // 
@@ -274,8 +281,9 @@
             // 
             // DTP_Fecha
             // 
+            this.DTP_Fecha.CustomFormat = "dd/MM/yyyy";
             this.DTP_Fecha.Enabled = false;
-            this.DTP_Fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTP_Fecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DTP_Fecha.Location = new System.Drawing.Point(504, 46);
             this.DTP_Fecha.Name = "DTP_Fecha";
             this.DTP_Fecha.Size = new System.Drawing.Size(103, 20);
@@ -1271,76 +1279,18 @@
             this.Deseable,
             this.Estado,
             this.Observaciones});
-            this.DGV_Temas.Location = new System.Drawing.Point(10, 20);
+            this.DGV_Temas.Location = new System.Drawing.Point(13, 11);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.DGV_Temas.Size = new System.Drawing.Size(932, 282);
+            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            this.DGV_Temas.Size = new System.Drawing.Size(932, 444);
             this.DGV_Temas.TabIndex = 7;
-            // 
-            // Tema
-            // 
-            this.Tema.DataPropertyName = "Curso";
-            this.Tema.HeaderText = "Tema";
-            this.Tema.Name = "Tema";
-            this.Tema.ReadOnly = true;
-            this.Tema.Width = 59;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
-            this.Descripcion.Width = 88;
-            // 
-            // Necesaria
-            // 
-            this.Necesaria.DataPropertyName = "Necesaria";
-            this.Necesaria.HeaderText = "Necesaria";
-            this.Necesaria.Name = "Necesaria";
-            this.Necesaria.ReadOnly = true;
-            this.Necesaria.Width = 80;
-            // 
-            // Deseable
-            // 
-            this.Deseable.DataPropertyName = "Deseable";
-            this.Deseable.HeaderText = "Deseable";
-            this.Deseable.Name = "Deseable";
-            this.Deseable.ReadOnly = true;
-            this.Deseable.Width = 77;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Items.AddRange(new object[] {
-            "",
-            "Exced",
-            "Cumple",
-            "Reforzar",
-            "En Entren",
-            "No Cumple",
-            "No Aplica",
-            "No Evalua",
-            "Cumple Act"});
-            this.Estado.Name = "Estado";
-            this.Estado.Width = 46;
-            // 
-            // Observaciones
-            // 
-            this.Observaciones.HeaderText = "Observaciones";
-            this.Observaciones.Name = "Observaciones";
-            this.Observaciones.Width = 103;
             // 
             // tabPage3
             // 
@@ -1368,64 +1318,18 @@
             this.Tipo,
             this.Año,
             this.Cursos});
-            this.DGV_CursosRealiz.Location = new System.Drawing.Point(22, 33);
+            this.DGV_CursosRealiz.Location = new System.Drawing.Point(16, 12);
             this.DGV_CursosRealiz.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_CursosRealiz.Name = "DGV_CursosRealiz";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_CursosRealiz.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_CursosRealiz.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.DGV_CursosRealiz.Size = new System.Drawing.Size(915, 391);
+            dataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_CursosRealiz.RowHeadersDefaultCellStyle = dataGridViewCellStyle36;
+            this.DGV_CursosRealiz.Size = new System.Drawing.Size(927, 442);
             this.DGV_CursosRealiz.TabIndex = 8;
-            // 
-            // Curso
-            // 
-            this.Curso.DataPropertyName = "Tema";
-            this.Curso.HeaderText = "Tema";
-            this.Curso.Name = "Curso";
-            this.Curso.Width = 59;
-            // 
-            // DesCurso
-            // 
-            this.DesCurso.DataPropertyName = "DesCurso";
-            this.DesCurso.HeaderText = "Descripcion";
-            this.DesCurso.Name = "DesCurso";
-            this.DesCurso.Width = 88;
-            // 
-            // Horas
-            // 
-            this.Horas.DataPropertyName = "Horas";
-            this.Horas.HeaderText = "Horas";
-            this.Horas.Name = "Horas";
-            this.Horas.Width = 60;
-            // 
-            // Tipo
-            // 
-            this.Tipo.DataPropertyName = "TipoII";
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.Width = 53;
-            // 
-            // Año
-            // 
-            this.Año.DataPropertyName = "Ano";
-            this.Año.HeaderText = "Año";
-            this.Año.Name = "Año";
-            this.Año.Width = 51;
-            // 
-            // Cursos
-            // 
-            this.Cursos.DataPropertyName = "DesTema";
-            this.Cursos.HeaderText = "Curso";
-            this.Cursos.Name = "Cursos";
-            this.Cursos.Width = 59;
             // 
             // label4
             // 
@@ -1439,7 +1343,8 @@
             // 
             // TB_FechaIng
             // 
-            this.TB_FechaIng.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.TB_FechaIng.CustomFormat = "dd/MM/yyyy";
+            this.TB_FechaIng.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.TB_FechaIng.Location = new System.Drawing.Point(504, 21);
             this.TB_FechaIng.Name = "TB_FechaIng";
             this.TB_FechaIng.Size = new System.Drawing.Size(103, 20);
@@ -1545,6 +1450,117 @@
             this.LBLegajo.TabIndex = 0;
             this.LBLegajo.Text = "INGRESO DE LEGAJO";
             // 
+            // Tema
+            // 
+            this.Tema.DataPropertyName = "Curso";
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle28;
+            this.Tema.HeaderText = "Tema";
+            this.Tema.Name = "Tema";
+            this.Tema.ReadOnly = true;
+            this.Tema.Width = 59;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            // 
+            // Necesaria
+            // 
+            this.Necesaria.DataPropertyName = "Necesaria";
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Necesaria.DefaultCellStyle = dataGridViewCellStyle29;
+            this.Necesaria.HeaderText = "Necesaria";
+            this.Necesaria.Name = "Necesaria";
+            this.Necesaria.ReadOnly = true;
+            this.Necesaria.Width = 80;
+            // 
+            // Deseable
+            // 
+            this.Deseable.DataPropertyName = "Deseable";
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Deseable.DefaultCellStyle = dataGridViewCellStyle30;
+            this.Deseable.HeaderText = "Deseable";
+            this.Deseable.Name = "Deseable";
+            this.Deseable.ReadOnly = true;
+            this.Deseable.Width = 77;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Items.AddRange(new object[] {
+            "",
+            "Exced",
+            "Cumple",
+            "Reforzar",
+            "En Entren",
+            "No Cumple",
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
+            this.Estado.MinimumWidth = 46;
+            this.Estado.Name = "Estado";
+            this.Estado.Width = 46;
+            // 
+            // Observaciones
+            // 
+            this.Observaciones.HeaderText = "Observaciones";
+            this.Observaciones.Name = "Observaciones";
+            this.Observaciones.Width = 103;
+            // 
+            // Curso
+            // 
+            this.Curso.DataPropertyName = "Tema";
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle32;
+            this.Curso.HeaderText = "Tema";
+            this.Curso.Name = "Curso";
+            this.Curso.Width = 59;
+            // 
+            // DesCurso
+            // 
+            this.DesCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DesCurso.DataPropertyName = "DesCurso";
+            this.DesCurso.HeaderText = "Descripcion";
+            this.DesCurso.Name = "DesCurso";
+            // 
+            // Horas
+            // 
+            this.Horas.DataPropertyName = "Horas";
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle33;
+            this.Horas.HeaderText = "Horas";
+            this.Horas.Name = "Horas";
+            this.Horas.Width = 60;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "TipoII";
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tipo.DefaultCellStyle = dataGridViewCellStyle34;
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.Width = 53;
+            // 
+            // Año
+            // 
+            this.Año.DataPropertyName = "Ano";
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Año.DefaultCellStyle = dataGridViewCellStyle35;
+            this.Año.HeaderText = "Año";
+            this.Año.Name = "Año";
+            this.Año.Width = 51;
+            // 
+            // Cursos
+            // 
+            this.Cursos.DataPropertyName = "DesTema";
+            this.Cursos.HeaderText = "Curso";
+            this.Cursos.Name = "Cursos";
+            this.Cursos.Width = 59;
+            // 
             // AgModLegajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1555,6 +1571,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AgModLegajo";
             this.Load += new System.EventHandler(this.AgModLegajo_Load);
+            this.Shown += new System.EventHandler(this.AgModLegajo_Shown);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -1669,12 +1686,6 @@
         private System.Windows.Forms.DataGridView DGV_CursosRealiz;
         private System.Windows.Forms.TextBox TB_VersPer;
         private System.Windows.Forms.DateTimePicker DTP_Fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DesCurso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Año;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cursos;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ComboBox TB_CodSector;
         private System.Windows.Forms.Panel panel5;
@@ -1696,6 +1707,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
         private System.Windows.Forms.DataGridViewComboBoxColumn Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DesCurso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Año;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cursos;
 
     }
 }

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -16,13 +13,13 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private Legajo LegajoViejo = new Legajo();
         private Legajo L = new Legajo();
         private Perfil Per = new Perfil();
-        private bool AModificar = false;
+        private bool AModificar;
         Cursada C = new Cursada();
         LegajoVersion LegajoVer = new LegajoVersion();
         Sector S = new Sector();
         DataTable dtSectores;
         DataTable dtPerfil;
-        bool Cargado = false;
+        bool Cargado;
         string ObservExtra1 = "";
         string ObservExtra2 = "";
         string ObservExtra3 = "";
@@ -35,8 +32,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         {
             InitializeComponent();
             
-            Legajo L = new Legajo();
-            TB_Codigo.Text = L.ObtenerUltimoId().ToString();
+            Legajo _L = new Legajo();
+            TB_Codigo.Text = _L.ObtenerUltimoId().ToString();
             tabControl1.TabPages.Remove(tabPage3);
             CargarSectores();
             CargarPerfil();
@@ -51,10 +48,9 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             DGV_CursosRealiz.DataSource = C.BuscarUnoGrilla(TB_Codigo.Text);
         }
 
-        public AgModLegajo(Negocio.Legajo LegajoAModificar)
+        public AgModLegajo(Legajo LegajoAModificar)
         {
             InitializeComponent();
-            // TODO: Complete member initialization
             L = LegajoAModificar;
             LegajoViejo = LegajoAModificar;
 
@@ -68,10 +64,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             CargarTemas(L.Temas);
             CargarDatosLegajoVer();
 
+            TB_DescPerfil.Enabled = false;
+            TB_CodSector.Enabled = false;
+            TB_DescSec.Enabled = false;
+
             //Cargo cursos realizados de cursadas
             CargarCursadas();
-
-            
 
             ComprobarModifPerfil();
 
@@ -79,11 +77,6 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             {
                 InhabilitarModifiaciones();
             }
-        }
-
-        private void InhabilitarPerfilySector()
-        {
-            throw new NotImplementedException();
         }
 
         private void ComprobarModifPerfil()
@@ -146,7 +139,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             
         }
 
-        private void CargarTemas(List<Negocio.Tema> list)
+        private void CargarTemas(List<Tema> list)
         {
             DataTable dtTemasGuardados = new DataTable();
             dtTemasGuardados.Rows.Clear();
@@ -212,8 +205,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void CargarDatosABM()
         {
-            TB_Codigo.Text = L.Codigo.ToString();
-            TB_DescLegajo.Text = L.Descripcion;
+            TB_Codigo.Text = L.Codigo.ToString().Trim();
+            TB_DescLegajo.Text = L.Descripcion.Trim();
             TB_DNI.Text = L.DNI;
             TB_CUIL.Text = L.CUIL;
             TB_FechaIng.Text = L.FIngreso;
@@ -221,7 +214,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             DateTime FEgresoParse;
             DateTime.TryParse(L.FEgreso, out FEgresoParse);
 
-            if (FEgresoParse.ToString() == "01/01/0001 12:00:00 a.m.")
+            if (FEgresoParse.ToString("d/M/yyyy") == "1/1/0001")
             {
                 TB_FechaEgreso.Text = "00/00/0000";
             } 
@@ -231,31 +224,28 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 TB_FechaEgreso.BackColor = Color.Red;
             }
 
-
-
-            
             int valorVersion = int.Parse(L.Version);
-            TB_Version.Text =  valorVersion.ToString();
+            TB_Version.Text = valorVersion.ToString().Trim();
             DTP_Fecha.Text = L.FechaVersion;
             TB_CodPerfil.Text = L.Perfil.Codigo.ToString();
 
             //Falta los combos y observaciones
-            TB_ObservPrimariaLeg.Text = L.EstadoI;
-            TB_ObservSecundariaLeg.Text = L.EstadoII;
-            TB_ObservTerciariaLeg.Text = L.EstadoIII;
-            TB_ObservIdiomaLeg.Text = L.EstadoIV;
-            TB_ObservExpLeg.Text = L.EstadoV;
-            TB_ObservCondFisicaLeg.Text = L.EstadoVI;
-            TB_Otros1Leg.Text = L.EstadoVII;
-            TB_Otros2Leg.Text = L.EstadoVIII;
-            TB_Equiv1Leg.Text = L.EstadoIX;
-            TB_Equiv2Leg.Text = L.EstadoX;
+            TB_ObservPrimariaLeg.Text = L.EstadoI.Trim();
+            TB_ObservSecundariaLeg.Text = L.EstadoII.Trim();
+            TB_ObservTerciariaLeg.Text = L.EstadoIII.Trim();
+            TB_ObservIdiomaLeg.Text = L.EstadoIV.Trim();
+            TB_ObservExpLeg.Text = L.EstadoV.Trim();
+            TB_ObservCondFisicaLeg.Text = L.EstadoVI.Trim();
+            TB_Otros1Leg.Text = L.EstadoVII.Trim();
+            TB_Otros2Leg.Text = L.EstadoVIII.Trim();
+            TB_Equiv1Leg.Text = L.EstadoIX.Trim();
+            TB_Equiv2Leg.Text = L.EstadoX.Trim();
 
 
 
             CB_EstPrim.SelectedIndex = int.Parse(L.EstaI);
             CB_EstSec.SelectedIndex = int.Parse(L.EstaII);
-            CB_EstTerc.SelectedIndex = int.Parse(L.EstaIII); ;
+            CB_EstTerc.SelectedIndex = int.Parse(L.EstaIII);
             CB_EstIdioma.SelectedIndex = int.Parse(L.EstaIV);
             CB_EstExp.SelectedIndex = int.Parse(L.EstaV);
             CB_EstCondFisic.SelectedIndex = int.Parse(L.EstaVI);
@@ -263,51 +253,6 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             CB_EstOtros2.SelectedIndex = int.Parse(L.EstaVIII);
             CB_EstEquiv1.SelectedIndex = int.Parse(L.EstaIX);
             CB_Estequiv2.SelectedIndex = int.Parse(L.EstaX);
-        }
-
-        private string ObtenerValorCombo(string p)
-        {
-            switch (p)
-            {
-                case "1":
-                    return "Exced";
-                case "2":
-                    return "Cumple";
-                case "3":
-                    return "Reforzar";
-                case "4":
-                    return "En Entren";
-                case "5":
-                    return "No Cumple";
-                case "6":
-                    return "No Aplica";
-                case "7":
-                    return "No Evalua";
-                case "8":
-                    return "Cumple Act";
-
-                default:
-                    return "";
-            }
-        }
-
-        private void TB_CodPerfil_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                try
-                {
-                    CargarDatosPefil();
-                    CargarTemas(Per);
-                    CargarCursadas();
-                    e.SuppressKeyPress = true;
-                    e.Handled = true;
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message, "Error");
-                }
-            }
         }
 
         private void CargarTemas(Perfil PerfilTemas)
@@ -335,58 +280,58 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             if (Per.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
 
-            TB_DescPerfil.Text = Per.Descripcion;
-            TB_CodSector.Text = Per.sector.Codigo.ToString();
-            TB_DescSec.Text = Per.sector.Descripcion;
-            TB_VersPer.Text = Per.Version.ToString();
-            TB_Tareas1.Text = Per.TareasI;
-            TB_Tareas2.Text = Per.TareasII;
-            TB_Tareas3.Text = Per.TareasIII;
+            TB_DescPerfil.Text = Per.Descripcion.Trim();
+            TB_CodSector.Text = Per.sector.Codigo.ToString().Trim();
+            TB_DescSec.Text = Per.sector.Descripcion.Trim();
+            TB_VersPer.Text = Per.Version.ToString().Trim();
+            TB_Tareas1.Text = Per.TareasI.Trim();
+            TB_Tareas2.Text = Per.TareasII.Trim();
+            TB_Tareas3.Text = Per.TareasIII.Trim();
 
-            TB_Primaria.Text = Per.DescriI;
-            TB_ObservPrimaria.Text = Per.ObservaI;
-            CB_NecPrim.Checked = Per.NecesariaI == 1 ? true : false;
-            CB_DesPrim.Checked = Per.DeseableI == 1 ? true : false;
+            TB_Primaria.Text = Per.DescriI.Trim();
+            TB_ObservPrimaria.Text = Per.ObservaI.Trim();
+            CB_NecPrim.Checked = Per.NecesariaI == 1;
+            CB_DesPrim.Checked = Per.DeseableI == 1;
 
-            TB_Secundaria.Text = Per.DescriII;
-            TB_ObservSecundaria.Text = Per.ObservaII;
-            CB_NecSec.Checked = Per.NecesariaII == 1 ? true : false;
-            CB_DesSec.Checked = Per.DeseableII == 1 ? true : false;
+            TB_Secundaria.Text = Per.DescriII.Trim();
+            TB_ObservSecundaria.Text = Per.ObservaII.Trim();
+            CB_NecSec.Checked = Per.NecesariaII == 1;
+            CB_DesSec.Checked = Per.DeseableII == 1;
 
-            TB_Terciaria.Text = Per.DescriIII;
-            TB_ObservTerciaria.Text = Per.ObservaIII;
-            CB_NecTerc.Checked = Per.NecesariaIII == 1 ? true : false;
-            CB_DesTerc.Checked = Per.DeseableIII == 1 ? true : false;
+            TB_Terciaria.Text = Per.DescriIII.Trim();
+            TB_ObservTerciaria.Text = Per.ObservaIII.Trim();
+            CB_NecTerc.Checked = Per.NecesariaIII == 1;
+            CB_DesTerc.Checked = Per.DeseableIII == 1;
 
-            TB_Idioma.Text = Per.DescriIV;
-            TB_ObservIdioma.Text = Per.ObservaIV;
-            CB_NecIdioma.Checked = Per.NecesariaIV == 1 ? true : false;
-            CB_DesIdioma.Checked = Per.DeseableIV == 1 ? true : false;
+            TB_Idioma.Text = Per.DescriIV.Trim();
+            TB_ObservIdioma.Text = Per.ObservaIV.Trim();
+            CB_NecIdioma.Checked = Per.NecesariaIV == 1;
+            CB_DesIdioma.Checked = Per.DeseableIV == 1;
 
-            TB_Exp.Text = Per.DescriV;
-            TB_ObservExp.Text = Per.ObservaV;
-            CB_NecExp.Checked = Per.NecesariaV == 1 ? true : false;
-            CB_DesExp.Checked = Per.DeseableV == 1 ? true : false;
+            TB_Exp.Text = Per.DescriV.Trim();
+            TB_ObservExp.Text = Per.ObservaV.Trim();
+            CB_NecExp.Checked = Per.NecesariaV == 1;
+            CB_DesExp.Checked = Per.DeseableV == 1;
 
-            TB_CondFisica.Text = Per.Fisica;
-            CB_NecCondFisica.Checked = Per.NecesariaVI == 1 ? true : false;
-            CB_DesCondFisica.Checked = Per.DeseableVI == 1 ? true : false;
+            TB_CondFisica.Text = Per.Fisica.Trim();
+            CB_NecCondFisica.Checked = Per.NecesariaVI == 1;
+            CB_DesCondFisica.Checked = Per.DeseableVI == 1;
 
-            TB_Otros1.Text = Per.OtrosI;
-            CB_DesOtros1.Checked = Per.DeseableVII == 1 ? true : false;
-            CB_NecOtros1.Checked = Per.NecesariaVII == 1 ? true : false;
+            TB_Otros1.Text = Per.OtrosI.Trim();
+            CB_DesOtros1.Checked = Per.DeseableVII == 1;
+            CB_NecOtros1.Checked = Per.NecesariaVII == 1;
 
-            TB_Otros2.Text = Per.OtrosII;
-            CB_DesOtros2.Checked = Per.DeseableVIII == 1 ? true : false;
-            CB_NecOtros2.Checked = Per.NecesariaVIII == 1 ? true : false;
+            TB_Otros2.Text = Per.OtrosII.Trim();
+            CB_DesOtros2.Checked = Per.DeseableVIII == 1;
+            CB_NecOtros2.Checked = Per.NecesariaVIII == 1;
 
-            TB_Equiv1.Text = Per.EquivalenciasI;
-            TB_Equiv2.Text = Per.EquivalenciasII;
+            TB_Equiv1.Text = Per.EquivalenciasI.Trim();
+            TB_Equiv2.Text = Per.EquivalenciasII.Trim();
         }
 
         private void BT_Salir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
@@ -510,7 +455,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 }
 
 
-                this.Close();
+                Close();
 
             }
             catch (Exception err)
@@ -570,7 +515,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             L.Descripcion = TB_DescLegajo.Text;
             L.DNI = TB_DNI.Text;
             L.CUIL = TB_CUIL.Text;
-            L.FIngreso = DTP_Fecha.Text.ToString();
+            L.FIngreso = DTP_Fecha.Text;
             L.EstadoI = TB_ObservPrimariaLeg.Text;
             L.EstadoII = TB_ObservSecundariaLeg.Text;
             L.EstadoIII = TB_ObservTerciariaLeg.Text;
@@ -603,11 +548,13 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             List<Tema> Temas = new List<Tema>();
             foreach (DataGridViewRow row in DGV_Temas.Rows)
             {
-                Tema T = new Tema();
-                T.Codigo = int.Parse(row.Cells[0].Value.ToString());
-                T.Descripcion = row.Cells[1].Value.ToString();
-                T.Necesaria = row.Cells[2].Value.ToString() == "X" ? 1 : 0;
-                T.Deseable = row.Cells[3].Value.ToString() == "X" ? 1 : 0;
+                Tema T = new Tema
+                {
+                    Codigo = int.Parse(row.Cells[0].Value.ToString()),
+                    Descripcion = row.Cells[1].Value.ToString(),
+                    Necesaria = row.Cells[2].Value.ToString() == "X" ? 1 : 0,
+                    Deseable = row.Cells[3].Value.ToString() == "X" ? 1 : 0
+                };
                 string EstaCurs = row.Cells[4].Value == null ? "" : row.Cells[4].Value.ToString();
                 string result = BuscarEstado(EstaCurs);
 
@@ -621,18 +568,22 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             L.FechaVersion = DTP_Fecha.Text;
             L.Version = TB_Version.Text;
 
-            L.Perfil = new Perfil();
-            L.Perfil.Codigo = int.Parse(TB_CodPerfil.Text);
+            L.Perfil = new Perfil
+            {
+                Codigo = int.Parse(TB_CodPerfil.Text),
+                Descripcion = TB_DescPerfil.Text
+            };
             //L.ImprePerfil = TB_DescPerfil.Text;
-            L.Perfil.Descripcion = TB_DescPerfil.Text;
 
             L.FEgreso = TB_FechaEgreso.Text;
             //L.PerfilVersion = TB_VersPer.Text;
             L.Perfil.Version = int.Parse(TB_VersPer.Text);
 
-            L.Sector = new Sector();
-            L.Sector.Codigo = int.Parse(TB_CodSector.Text);
-            L.Sector.Descripcion = TB_DescSec.Text;
+            L.Sector = new Sector
+            {
+                Codigo = int.Parse(TB_CodSector.Text),
+                Descripcion = TB_DescSec.Text
+            };
         }
 
         private string BuscarEstado(string EstaCurs)
@@ -694,8 +645,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         {
             dtSectores = S.ListarTodos();
 
-            DataRow fila;
-            fila = dtSectores.NewRow();
+            var fila = dtSectores.NewRow();
             dtSectores.Rows.InsertAt(fila, 0);
 
 
@@ -746,8 +696,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         {
             dtPerfil = Per.ListarTodos();
 
-            DataRow fila;
-            fila = dtPerfil.NewRow();
+            var fila = dtPerfil.NewRow();
             dtPerfil.Rows.InsertAt(fila, 0);
 
 
@@ -795,7 +744,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void TB_CodPerfil_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Cargado == true)
+            if (Cargado)
             {
                 if (AModificar == false)
                 {
@@ -858,7 +807,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void TB_DescPerfil_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Cargado == true)
+            if (Cargado)
             {
                 if(AModificar == false)
                 {
@@ -897,7 +846,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void BT_MasObserv_Click(object sender, EventArgs e)
         {
-            Legajos.Observaciones Ini = new Observaciones(L.ObservExtI, L.ObservExtII, L.ObservExtIII, L.ObservExtIII, L.ObservExtIV, L.ObservExtV);
+            Observaciones Ini = new Observaciones(L.ObservExtI, L.ObservExtII, L.ObservExtIII, L.ObservExtIII, L.ObservExtIV, L.ObservExtV);
             Ini.ShowDialog();
             ObservExtra1 = Ini.ObservExt1;
             ObservExtra2 = Ini.ObservExt2;
@@ -907,5 +856,10 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         }
 
         public object Estacurso { get; set; }
+
+        private void AgModLegajo_Shown(object sender, EventArgs e)
+        {
+            TB_DescLegajo.Focus();
+        }
     }
 }

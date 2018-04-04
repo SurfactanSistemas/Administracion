@@ -300,7 +300,7 @@ namespace Negocio
             {
                 obj.Codigo = int.Parse(DT.Rows[0]["Codigo"].ToString());
                 obj.DNI = DT.Rows[0]["dni"].ToString();
-                obj.CUIL = DT.Rows[0]["CUIL"].ToString();
+                //obj.CUIL = DT.Rows[0]["CUIL"].ToString();
                 //obj.Curso = int.Parse(DT.Rows[0])
                 obj.FechaVersion = DT.Rows[0]["FechaVersion"].ToString();
                 obj.Descripcion = DT.Rows[0]["Descripcion"].ToString();

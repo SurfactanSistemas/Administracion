@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using CrystalDecisions.CrystalReports.Engine;
+using Modulo_Capacitacion.Listados;
+using Modulo_Capacitacion.Listados.Perfiles;
 using Negocio;
 
 namespace Modulo_Capacitacion.Maestros.Legajos
@@ -44,22 +47,23 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             agrModLegajo.ShowDialog();
 
             ActualizarGrilla();
-            P_Filtrado.Visible = false;
-
         }
 
         private void ActualizarGrilla()
         {
-            dtMuestraInicio.Rows.Clear();
+            TBFiltro.Text = "";
+
             dtLegajos = L.ListarTodos();
             ArmardtMuestra();
             DGV_Legajos.DataSource = dtMuestraInicio;
+
+            TBFiltro.Focus();
         }
 
         private void ArmardtMuestra()
         {
-            
-
+            dtMuestraInicio = new DataTable();
+            CargarDt();
 
             foreach (DataRow fila in dtLegajos.Rows)
             {
@@ -78,92 +82,17 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             }
         }
 
-        private void BT_MenuFiltros_Click(object sender, EventArgs e)
-        {
-            Button btnSender = (Button)sender;
-            Point ptLowerLeft = new Point(0, btnSender.Height);
-            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
-            CMS_Legajo.Show(ptLowerLeft);
-
-            BT_Filtrar.Text = "Limp. Filtro";
-            TBFiltro.Text = "";
-        }
-
-        private void codigoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrepararFiltrado("Codigo");
-        }
-
-        private void descripcionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrepararFiltrado("Descripcion");
-        }
-
-        private void fechaIngresoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrepararFiltrado("FIngreso");
-        }
-
-        private void perfilToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrepararFiltrado("Perfil");
-        }
-
-        private void PrepararFiltrado(string opcion)
-        {
-            P_Filtrado.Visible = true;
-            TBFiltro.Text = "";
-            LBFiltro.Text = opcion;
-            TBFiltro.Focus();
-        }
-
-        private void BT_Filtrar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                if (BT_Filtrar.Text == "Filtrar")
-                {
-                    //DGV_Legajos.Rows.Clear();
-                    (DGV_Legajos.DataSource as DataTable).DefaultView.RowFilter = string.Format("CONVERT(" + LBFiltro.Text + ", System.String) like '%{0}%'", TBFiltro.Text);
-                    BT_Filtrar.Text = "Limp. Filtro";
-                }
-                else
-                {
-                    LimpiarFiltro();
-                    
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message, "Error");
-            }
-        }
-
-        private void LimpiarFiltro()
-        {
-            (DGV_Legajos.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
-            P_Filtrado.Visible = false;
-            TBFiltro.Text = "";
-            BT_Filtrar.Visible = true;
-        }
-
-        private void TBFiltro_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                BT_Filtrar.PerformClick();
-                e.SuppressKeyPress = true;
-                e.Handled = true;
-            }
-        }
-
         private void BT_Eliminar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (DGV_Legajos.SelectedRows.Count != 1) throw new Exception("No hay filas seleccionadas o se selecciono mas de una");                
-                L.Eliminar(DGV_Legajos.SelectedRows[0].Cells[0].Value.ToString());
+                if (DGV_Legajos.SelectedRows.Count != 1) throw new Exception("No hay filas seleccionadas o se selecciono mas de una");
+
+                if (MessageBox.Show("¿Está seguro de querer eliminar el Legajo indicado?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    L.Eliminar(DGV_Legajos.SelectedRows[0].Cells[0].Value.ToString());
+                }
+
                 ActualizarGrilla();
             }
             catch (Exception err)
@@ -187,8 +116,6 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 AgMod.ShowDialog();
 
                 ActualizarGrilla();
-                LimpiarFiltro();
-                P_Filtrado.Visible = false;
             }
             catch (Exception err)
             {
@@ -196,19 +123,49 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             }
         }
 
-        private void TBFiltro_TextChanged(object sender, EventArgs e)
+        private void TBFiltro_KeyUp(object sender, KeyEventArgs e)
         {
-            BT_Filtrar.Text = "Filtrar";
+            if (TBFiltro.Text != "")
+            {
+                DataTable dataTable = DGV_Legajos.DataSource as DataTable;
+                if (dataTable != null)
+                    dataTable.DefaultView.RowFilter = string.Format("CONVERT(Codigo, System.String) like '%{0}%' "
+                                                    + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(Vigencia, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(Sector, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(Perfil, System.String) like '%{0}%'", TBFiltro.Text);
+            }
+            else
+            {
+                ActualizarGrilla();
+            }
         }
 
-        private void Legajos_Inicio_Load(object sender, EventArgs e)
+        private void DGV_Perfiles_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
+            BTModifLegajo.PerformClick();
         }
 
-        private void CMS_Legajo_Opening(object sender, CancelEventArgs e)
+        private void Legajos_Inicio_Shown(object sender, EventArgs e)
         {
+            TBFiltro.Focus();
+        }
 
+        private void TBFiltro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                TBFiltro.Text = "";
+            }
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            ReportDocument reporte = new ListadoPerfiles();
+
+            VistaPrevia rp = new VistaPrevia();
+            rp.CargarReporte(reporte);
+            rp.ShowDialog();
         }
     }
 }
