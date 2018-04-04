@@ -42,85 +42,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
         private void Bt_Fin_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-
-        private void BT_MenuFiltros_Click(object sender, EventArgs e)
-        {
-            Button btnSender = (Button)sender;
-            Point ptLowerLeft = new Point(0, btnSender.Height);
-            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
-            CMS_Perfil.Show(ptLowerLeft);
-
-
-            BT_Filtrar.Text = "Limp. Filtro";
-            TBFiltro.Text = "";
-        }
-
-        private void descripcionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrepararFiltrado("Descripcion");
-        }
-
-        private void versionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrepararFiltrado("Version");
-        }
-
-        private void codigoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrepararFiltrado("Codigo");
-        }
-
-        private void sectorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrepararFiltrado("Sector");
-        }
-
-        private void PrepararFiltrado(string opcion)
-        {
-            P_Filtrado.Visible = true;
-            TBFiltro.Text = "";
-            LBFiltro.Text = opcion;
-            TBFiltro.Focus();
-        }
-
-        private void BT_Filtrar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (BT_Filtrar.Text == "Filtrar")
-                {
-                    (DGV_Perfiles.DataSource as DataTable).DefaultView.RowFilter = string.Format("CONVERT(" + LBFiltro.Text + ", System.String) like '%{0}%'", TBFiltro.Text);
-                    BT_Filtrar.Text = "Limp. Filtro";
-                }
-                else
-                {
-                    (DGV_Perfiles.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
-                    P_Filtrado.Visible = false;
-                    TBFiltro.Text = "";
-                    BT_Filtrar.Visible = true;
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message,"Error");
-            }
-        }
-
-        private void TBFiltro_TextChanged(object sender, EventArgs e)
-        {
-            BT_Filtrar.Text = "Filtrar";
-        }
-
-        private void TBFiltro_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                BT_Filtrar.PerformClick();
-                e.SuppressKeyPress = true;
-                e.Handled = true;
-            }
+            Close();
         }
 
         private void BT_Eliminar_Click(object sender, EventArgs e)
@@ -160,9 +82,49 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             }
         }
 
-        private void Perfiles_Inicio_Load(object sender, EventArgs e)
-        {
 
+        private void TBFiltro_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (TBFiltro.Text != "")
+            {
+                DataTable dataTable = DGV_Perfiles.DataSource as DataTable;
+                if (dataTable != null)
+                    dataTable.DefaultView.RowFilter = string.Format("CONVERT(Codigo, System.String) like '%{0}%' "
+                                                    + " OR CONVERT(Perfil, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(Sector, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(Vigencia, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(Version, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(Descripcion, System.String) like '%{0}%'", TBFiltro.Text);
+            }
+            else
+            {
+                ActualizarGrilla();
+            }
         }
+
+        private void DGV_Perfiles_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            BTModifSector.PerformClick();
+        }
+
+        private void Periles_Inicio_Shown(object sender, EventArgs e)
+        {
+            TBFiltro.Focus();
+        }
+
+        private void TBFiltro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                TBFiltro.Text = "";
+            }
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            Listados.Cursos.Inicio frm = new Listados.Cursos.Inicio();
+            frm.ShowDialog();
+        }
+        
     }
 }

@@ -455,8 +455,8 @@ namespace Negocio
         public System.Data.DataTable ListarTodosInicio()
         {
             Conexion repo = new Conexion();
-            string consulta = "SELECT T.Codigo, T.Descripcion,T.Vigencia,T.Version, " +
-            "S.Descripcion as Sector, T.TareasI as Descripcion_Tareas " +
+            string consulta = "SELECT T.Codigo, T.Descripcion as Perfil,T.Vigencia,T.Version, " +
+            "S.Descripcion as Sector, T.TareasI as Descripcion " +
             "FROM Tarea T inner join Sector S on S.Codigo = T.Sector " +
             "where T.Renglon = 1   order by T.Codigo asc";
             

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -125,6 +125,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.TB_Codigo = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -132,6 +133,7 @@
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -853,16 +855,10 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.groupBox1);
             this.tabPage4.Controls.Add(this.BT_Eliminar);
-            this.tabPage4.Controls.Add(this.panel10);
-            this.tabPage4.Controls.Add(this.TB_DescTemas);
-            this.tabPage4.Controls.Add(this.panel11);
-            this.tabPage4.Controls.Add(this.TB_CodTemas);
             this.tabPage4.Controls.Add(this.BTModifTema);
             this.tabPage4.Controls.Add(this.BTAgregarTema);
-            this.tabPage4.Controls.Add(this.CB_Deseable);
-            this.tabPage4.Controls.Add(this.CB_Necesario);
-            this.tabPage4.Controls.Add(this.label14);
             this.tabPage4.Controls.Add(this.DGV_Temas);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -888,7 +884,7 @@
             // 
             // panel10
             // 
-            this.panel10.Location = new System.Drawing.Point(534, 317);
+            this.panel10.Location = new System.Drawing.Point(518, 14);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(19, 29);
             this.panel10.TabIndex = 103;
@@ -896,7 +892,7 @@
             // TB_DescTemas
             // 
             this.TB_DescTemas.FormattingEnabled = true;
-            this.TB_DescTemas.Location = new System.Drawing.Point(209, 321);
+            this.TB_DescTemas.Location = new System.Drawing.Point(193, 18);
             this.TB_DescTemas.Name = "TB_DescTemas";
             this.TB_DescTemas.Size = new System.Drawing.Size(343, 21);
             this.TB_DescTemas.TabIndex = 102;
@@ -904,7 +900,7 @@
             // 
             // panel11
             // 
-            this.panel11.Location = new System.Drawing.Point(153, 319);
+            this.panel11.Location = new System.Drawing.Point(137, 14);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(19, 29);
             this.panel11.TabIndex = 101;
@@ -912,7 +908,7 @@
             // TB_CodTemas
             // 
             this.TB_CodTemas.FormattingEnabled = true;
-            this.TB_CodTemas.Location = new System.Drawing.Point(96, 321);
+            this.TB_CodTemas.Location = new System.Drawing.Point(80, 18);
             this.TB_CodTemas.Name = "TB_CodTemas";
             this.TB_CodTemas.Size = new System.Drawing.Size(76, 21);
             this.TB_CodTemas.TabIndex = 100;
@@ -949,7 +945,7 @@
             // CB_Deseable
             // 
             this.CB_Deseable.AutoSize = true;
-            this.CB_Deseable.Location = new System.Drawing.Point(708, 324);
+            this.CB_Deseable.Location = new System.Drawing.Point(692, 21);
             this.CB_Deseable.Name = "CB_Deseable";
             this.CB_Deseable.Size = new System.Drawing.Size(15, 14);
             this.CB_Deseable.TabIndex = 64;
@@ -959,7 +955,7 @@
             // CB_Necesario
             // 
             this.CB_Necesario.AutoSize = true;
-            this.CB_Necesario.Location = new System.Drawing.Point(615, 320);
+            this.CB_Necesario.Location = new System.Drawing.Point(599, 21);
             this.CB_Necesario.Name = "CB_Necesario";
             this.CB_Necesario.Size = new System.Drawing.Size(15, 14);
             this.CB_Necesario.TabIndex = 63;
@@ -970,7 +966,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(36, 320);
+            this.label14.Location = new System.Drawing.Point(20, 19);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(47, 18);
             this.label14.TabIndex = 38;
@@ -990,17 +986,17 @@
             this.DGV_Temas.Location = new System.Drawing.Point(16, 20);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Temas.Size = new System.Drawing.Size(748, 285);
             this.DGV_Temas.TabIndex = 7;
             this.DGV_Temas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Temas_CellClick);
@@ -1138,6 +1134,21 @@
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.panel11);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.CB_Necesario);
+            this.groupBox1.Controls.Add(this.panel10);
+            this.groupBox1.Controls.Add(this.CB_Deseable);
+            this.groupBox1.Controls.Add(this.TB_DescTemas);
+            this.groupBox1.Controls.Add(this.TB_CodTemas);
+            this.groupBox1.Location = new System.Drawing.Point(24, 312);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(726, 51);
+            this.groupBox1.TabIndex = 105;
+            this.groupBox1.TabStop = false;
+            // 
             // AgModPerfil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1157,8 +1168,9 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1260,5 +1272,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Necesaria;
         private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
         private System.Windows.Forms.Button BT_Eliminar;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
