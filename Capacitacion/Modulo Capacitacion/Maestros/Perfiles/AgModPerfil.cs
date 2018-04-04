@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -20,9 +17,8 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         Tema T = new Tema();
         Responsable R = new Responsable();
         Responsable R2 = new Responsable();
-        public int indexRow = 0;
-        private Perfil PerfilAModificar;
-        public bool AModificar = false;
+        public int indexRow;
+        public bool AModificar;
         DataTable dtSectores;
         DataTable dtTemas;
         DataTable dtResponsable;
@@ -64,55 +60,55 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             TB_Fecha.Text = P.Vigencia;
             TB_Version.Text = (P.Version).ToString().Trim();
 
-            TB_CodSec.Text = this.P.sector.Codigo.ToString().Trim();
-            TB_DescSector.Text = this.P.sector.Descripcion.Trim();
+            TB_CodSec.Text = P.sector.Codigo.ToString().Trim();
+            TB_DescSector.Text = P.sector.Descripcion.Trim();
 
-            TB_CodResp1.Text = this.P.R.Codigo.ToString().Trim();
-            TB_DescResp1.Text = this.P.R.Descripcion.Trim();
+            TB_CodResp1.Text = P.R.Codigo.ToString().Trim();
+            TB_DescResp1.Text = P.R.Descripcion.Trim();
 
-            TB_CodResp2.Text = this.P.R2.Codigo.ToString().Trim();
-            TB_DescResp2.Text = this.P.R2.Descripcion.Trim();
+            TB_CodResp2.Text = P.R2.Codigo.ToString().Trim();
+            TB_DescResp2.Text = P.R2.Descripcion.Trim();
 
-            TB_Tareas1.Text = this.P.TareasI.Trim();
-            TB_Tareas2.Text = this.P.TareasII.Trim();
-            TB_Tareas3.Text = this.P.TareasIII.Trim();
+            TB_Tareas1.Text = P.TareasI.Trim();
+            TB_Tareas2.Text = P.TareasII.Trim();
+            TB_Tareas3.Text = P.TareasIII.Trim();
 
             TB_Primaria.Text = P.DescriI.Trim();
             TB_ObservPrimaria.Text = P.ObservaI.Trim();
-            CB_NecPrim.Checked = P.NecesariaI == 1 ? true : false;
-            CB_DesPrim.Checked = P.DeseableI == 1 ? true : false;
+            CB_NecPrim.Checked = P.NecesariaI == 1;
+            CB_DesPrim.Checked = P.DeseableI == 1;
 
             TB_Secundaria.Text = P.DescriII.Trim();
             TB_ObservSecundaria.Text = P.ObservaII.Trim();
-            CB_NecSec.Checked = P.NecesariaII == 1 ? true : false;
-            CB_DesSec.Checked = P.DeseableII == 1 ? true : false;
+            CB_NecSec.Checked = P.NecesariaII == 1;
+            CB_DesSec.Checked = P.DeseableII == 1;
 
             TB_Terciaria.Text = P.DescriIII.Trim();
             TB_ObservTerciaria.Text = P.ObservaIII.Trim();
-            CB_NecTerc.Checked = P.NecesariaIII == 1 ? true : false;
-            CB_DesTerc.Checked = P.DeseableIII == 1 ? true : false;
+            CB_NecTerc.Checked = P.NecesariaIII == 1;
+            CB_DesTerc.Checked = P.DeseableIII == 1;
 
             TB_Idioma.Text = P.DescriIV.Trim();
             TB_ObservIdioma.Text = P.ObservaIV.Trim();
-            CB_NecIdioma.Checked = P.NecesariaIV == 1 ? true : false;
-            CB_DesIdioma.Checked = P.DeseableIV == 1 ? true : false;
+            CB_NecIdioma.Checked = P.NecesariaIV == 1;
+            CB_DesIdioma.Checked = P.DeseableIV == 1;
 
             TB_Exp.Text = P.DescriV.Trim();
             TB_ObservExp.Text = P.ObservaV.Trim();
-            CB_NecExp.Checked = P.NecesariaV == 1 ? true : false;
-            CB_DesExp.Checked = P.DeseableV == 1 ? true : false;
+            CB_NecExp.Checked = P.NecesariaV == 1;
+            CB_DesExp.Checked = P.DeseableV == 1;
 
             TB_CondFisica.Text = P.Fisica.Trim();
-            CB_NecCondFisica.Checked = P.NecesariaVI == 1 ? true : false;
-            CB_DesCondFisica.Checked = P.DeseableVI == 1 ? true : false;
+            CB_NecCondFisica.Checked = P.NecesariaVI == 1;
+            CB_DesCondFisica.Checked = P.DeseableVI == 1;
 
             TB_Otros1.Text = P.OtrosI.Trim();
-            CB_DesOtros1.Checked = P.DeseableVII == 1 ? true : false;
-            CB_NecOtros1.Checked = P.NecesariaVII == 1 ? true : false;
+            CB_DesOtros1.Checked = P.DeseableVII == 1;
+            CB_NecOtros1.Checked = P.NecesariaVII == 1;
 
             TB_Otros2.Text = P.OtrosII.Trim();
-            CB_DesOtros2.Checked = P.DeseableVIII == 1 ? true : false;
-            CB_NecOtros2.Checked = P.NecesariaVIII == 1 ? true : false;
+            CB_DesOtros2.Checked = P.DeseableVIII == 1;
+            CB_NecOtros2.Checked = P.NecesariaVIII == 1;
 
             TB_Equiv1.Text = P.EquivalenciasI.Trim();
             TB_Equiv2.Text = P.EquivalenciasII.Trim();
@@ -158,42 +154,37 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             TB_Codigo.Text = P.ObtenerUltimoId().ToString();
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
+        //private void TB_CodSec_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        try
+        //        {
+        //            S = S.BuscarUno(TB_CodSec.Text);
 
-        }
+        //            if (S.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
 
-        private void TB_CodSec_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                try
-                {
-                    S = S.BuscarUno(TB_CodSec.Text);
+        //            TB_DescSector.Text = S.Descripcion;
+        //            e.SuppressKeyPress = true;
+        //            e.Handled = true;
+        //        }
+        //        catch (Exception err)
+        //        {
+        //            MessageBox.Show(err.Message, "Error");
+        //        }
+        //    }
+        //}
 
-                    if (S.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
-
-                    TB_DescSector.Text = S.Descripcion;
-                    e.SuppressKeyPress = true;
-                    e.Handled = true;
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message, "Error");
-                }
-            }
-        }
-
-        private void TB_CodTemas_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                T = T.BuscarUno(TB_CodTemas.Text);
-                TB_DescTemas.Text = T.Descripcion;                
-                e.SuppressKeyPress = true;
-                e.Handled = true;
-            }
-        }
+        //private void TB_CodTemas_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        T = T.BuscarUno(TB_CodTemas.Text);
+        //        TB_DescTemas.Text = T.Descripcion;                
+        //        e.SuppressKeyPress = true;
+        //        e.Handled = true;
+        //    }
+        //}
 
         private void BTAgregarTema_Click(object sender, EventArgs e)
         {
@@ -230,51 +221,51 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             CB_Deseable.Checked = false;
         }
 
-        private void TB_CodResp1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                try
-                {
-                    R = R.BuscarUno(TB_CodResp1.Text);
+        //private void TB_CodResp1_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        try
+        //        {
+        //            R = R.BuscarUno(TB_CodResp1.Text);
 
-                    if (R.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
+        //            if (R.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
 
-                    TB_DescResp1.Text = R.Descripcion;
-                    e.SuppressKeyPress = true;
-                    e.Handled = true;
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message, "Error");
-                }
-            }
-        }
+        //            TB_DescResp1.Text = R.Descripcion;
+        //            e.SuppressKeyPress = true;
+        //            e.Handled = true;
+        //        }
+        //        catch (Exception err)
+        //        {
+        //            MessageBox.Show(err.Message, "Error");
+        //        }
+        //    }
+        //}
 
-        private void TB_CodResp2_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                try
-                {
-                    R2 = R2.BuscarUno(TB_CodResp2.Text);
+        //private void TB_CodResp2_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        try
+        //        {
+        //            R2 = R2.BuscarUno(TB_CodResp2.Text);
 
-                    if (R2.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
+        //            if (R2.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
 
-                    TB_DescResp2.Text = R2.Descripcion;
-                    e.SuppressKeyPress = true;
-                    e.Handled = true;
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message, "Error");
-                }
-            }
-        }
+        //            TB_DescResp2.Text = R2.Descripcion;
+        //            e.SuppressKeyPress = true;
+        //            e.Handled = true;
+        //        }
+        //        catch (Exception err)
+        //        {
+        //            MessageBox.Show(err.Message, "Error");
+        //        }
+        //    }
+        //}
 
         private void BT_Salir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
@@ -342,7 +333,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             try
             {
-                if (TB_CodTemas.Text == "" || TB_DescTemas.Text == "") { throw new Exception("No se puede modificar"); };
+                if (TB_CodTemas.Text == "" || TB_DescTemas.Text == "") { throw new Exception("No se puede modificar"); }
 
                 DataGridViewRow nuevaRow = DGV_Temas.Rows[indexRow];
 
@@ -493,7 +484,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
                 }
                 
 
-                this.Close();
+                Close();
 
             }
             catch (Exception err)
@@ -554,14 +545,52 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
         private void CargarDatosPerfil()
         {
-            
-            P = new Perfil();
-            P.Codigo = int.Parse(TB_Codigo.Text);
-            P.Descripcion = TB_DecPerfil.Text.Trim();
-            P.Vigencia = TB_Fecha.Text;
-            P.Version = int.Parse(TB_Version.Text);
 
-            P.sector = S.Codigo == 0 ? CargarSector() : S ;
+            P = new Perfil
+            {
+                Codigo = int.Parse(TB_Codigo.Text),
+                Descripcion = TB_DecPerfil.Text.Trim(),
+                Vigencia = TB_Fecha.Text,
+                Version = int.Parse(TB_Version.Text),
+                sector = S.Codigo == 0 ? CargarSector() : S,
+                R = R.Codigo == 0 ? CargarRes1() : R,
+                R2 = R2.Codigo == 0 ? CargarRes2() : R2,
+                TareasI = TB_Tareas1.Text.Trim(),
+                TareasII = TB_Tareas2.Text.Trim(),
+                TareasIII = TB_Tareas3.Text.Trim(),
+                DescriI = TB_Primaria.Text.Trim(),
+                ObservaI = TB_ObservPrimaria.Text.Trim(),
+                NecesariaI = CB_NecPrim.Checked ? 1 : 0,
+                DeseableI = CB_DesPrim.Checked ? 1 : 0,
+                DescriII = TB_Secundaria.Text.Trim(),
+                ObservaII = TB_ObservSecundaria.Text.Trim(),
+                NecesariaII = CB_NecSec.Checked ? 1 : 0,
+                DeseableII = CB_DesSec.Checked ? 1 : 0,
+                DescriIII = TB_Terciaria.Text.Trim(),
+                ObservaIII = TB_ObservTerciaria.Text.Trim(),
+                NecesariaIII = CB_NecTerc.Checked ? 1 : 0,
+                DeseableIII = CB_DesTerc.Checked ? 1 : 0,
+                DescriIV = TB_Idioma.Text.Trim(),
+                ObservaIV = TB_ObservIdioma.Text.Trim(),
+                NecesariaIV = CB_NecIdioma.Checked ? 1 : 0,
+                DeseableIV = CB_DesIdioma.Checked ? 1 : 0,
+                DescriV = TB_Exp.Text.Trim(),
+                ObservaV = TB_ObservExp.Text.Trim(),
+                NecesariaV = CB_NecExp.Checked ? 1 : 0,
+                DeseableV = CB_DesExp.Checked ? 1 : 0,
+                Fisica = TB_CondFisica.Text.Trim(),
+                NecesariaVI = CB_NecCondFisica.Checked ? 1 : 0,
+                DeseableVI = CB_DesCondFisica.Checked ? 1 : 0,
+                OtrosI = TB_Otros1.Text.Trim(),
+                DeseableVII = CB_DesOtros1.Checked ? 1 : 0,
+                NecesariaVII = CB_NecOtros1.Checked ? 1 : 0,
+                OtrosII = TB_Otros2.Text.Trim(),
+                DeseableVIII = CB_DesOtros2.Checked ? 1 : 0,
+                NecesariaVIII = CB_NecOtros2.Checked ? 1 : 0,
+                EquivalenciasI = TB_Equiv1.Text.Trim(),
+                EquivalenciasII = TB_Equiv2.Text.Trim()
+            };
+
 
             //if (S.Codigo != 0)
             //{
@@ -572,89 +601,62 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             //    P.sector = CargarSector();
             //}
 
-            P.R = R.Codigo == 0 ? CargarRes1() : R;
-            P.R2 = R2.Codigo == 0 ? CargarRes2() : R2;
             //P.R = R;
             //P.R2 = R2;
-            P.TareasI = TB_Tareas1.Text.Trim();
-            P.TareasII = TB_Tareas2.Text.Trim();
-            P.TareasIII = TB_Tareas3.Text.Trim();
 
-            P.DescriI = TB_Primaria.Text.Trim();
-            P.ObservaI = TB_ObservPrimaria.Text.Trim();
-            P.NecesariaI = CB_NecPrim.Checked ? 1 : 0;
-            P.DeseableI = CB_DesPrim.Checked ? 1 : 0;
 
-            P.DescriII = TB_Secundaria.Text.Trim();
-            P.ObservaII = TB_ObservSecundaria.Text.Trim();
-            P.NecesariaII = CB_NecSec.Checked ? 1 : 0;
-            P.DeseableII = CB_DesSec.Checked ? 1 : 0;
 
-            P.DescriIII = TB_Terciaria.Text.Trim();
-            P.ObservaIII = TB_ObservTerciaria.Text.Trim();
-            P.NecesariaIII = CB_NecTerc.Checked ? 1 : 0;
-            P.DeseableIII = CB_DesTerc.Checked ? 1 : 0;
 
-            P.DescriIV = TB_Idioma.Text.Trim();
-            P.ObservaIV = TB_ObservIdioma.Text.Trim();
-            P.NecesariaIV = CB_NecIdioma.Checked ? 1 : 0;
-            P.DeseableIV = CB_DesIdioma.Checked ? 1 : 0;
 
-            P.DescriV = TB_Exp.Text.Trim();
-            P.ObservaV = TB_ObservExp.Text.Trim();
-            P.NecesariaV = CB_NecExp.Checked ? 1 : 0;
-            P.DeseableV = CB_DesExp.Checked ? 1 : 0;
 
-            P.Fisica = TB_CondFisica.Text.Trim();
-            P.NecesariaVI = CB_NecCondFisica.Checked ? 1 : 0;
-            P.DeseableVI = CB_DesCondFisica.Checked ? 1 : 0;
 
-            P.OtrosI = TB_Otros1.Text.Trim();
-            P.DeseableVII = CB_DesOtros1.Checked ? 1 : 0;
-            P.NecesariaVII = CB_NecOtros1.Checked ? 1 : 0;
 
-            P.OtrosII = TB_Otros2.Text.Trim();
-            P.DeseableVIII = CB_DesOtros2.Checked ? 1 : 0;
-            P.NecesariaVIII = CB_NecOtros2.Checked ? 1 : 0;
 
-            P.EquivalenciasI = TB_Equiv1.Text.Trim();
-            P.EquivalenciasII = TB_Equiv2.Text.Trim();
 
             List<Tema> Temas = new List<Tema>();
+            // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (DataGridViewRow row in DGV_Temas.Rows)
             {
-                Tema T = new Tema();
-                T.Codigo = int.Parse(row.Cells[0].Value.ToString());
-                T.Descripcion = row.Cells[1].Value.ToString();
-                T.Necesaria = row.Cells[2].Value.ToString() == "X" ? 1 : 0;
-                T.Deseable = row.Cells[3].Value.ToString() == "X" ? 1 : 0;
+                Tema _Tema = new Tema
+                {
+                    Codigo = int.Parse(row.Cells[0].Value.ToString()),
+                    Descripcion = row.Cells[1].Value.ToString(),
+                    Necesaria = row.Cells[2].Value.ToString() == "X" ? 1 : 0,
+                    Deseable = row.Cells[3].Value.ToString() == "X" ? 1 : 0
+                };
 
-                Temas.Add(T);
+                Temas.Add(_Tema);
             }
             P.Temas = Temas;
         }
 
         private Responsable CargarRes1()
         {
-            Responsable Res = new Responsable();
-            Res.Codigo = int.Parse(TB_CodResp1.Text);
-            Res.Descripcion = TB_DescResp1.Text;
+            Responsable Res = new Responsable
+            {
+                Codigo = int.Parse(TB_CodResp1.Text),
+                Descripcion = TB_DescResp1.Text
+            };
             return Res;
         }
 
         private Responsable CargarRes2()
         {
-            Responsable Res = new Responsable();
-            Res.Codigo = int.Parse(TB_CodResp2.Text);
-            Res.Descripcion = TB_DescResp2.Text;
+            Responsable Res = new Responsable
+            {
+                Codigo = int.Parse(TB_CodResp2.Text),
+                Descripcion = TB_DescResp2.Text
+            };
             return Res;
         }
 
         private Sector CargarSector()
         {
-            Sector Sec= new Sector();
-            Sec.Codigo = int.Parse(TB_CodSec.Text);
-            Sec.Descripcion = TB_DescSector.Text;
+            Sector Sec = new Sector
+            {
+                Codigo = int.Parse(TB_CodSec.Text),
+                Descripcion = TB_DescSector.Text
+            };
             return Sec;
         }
 
@@ -683,8 +685,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             dtTemas = T.ListarTemas();
 
-            DataRow fila;
-            fila = dtTemas.NewRow();
+            var fila = dtTemas.NewRow();
             dtTemas.Rows.InsertAt(fila, 0);
 
 
@@ -734,8 +735,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             dtSectores = S.ListarTodos();
 
-            DataRow fila;
-            fila = dtSectores.NewRow();
+            var fila = dtSectores.NewRow();
             dtSectores.Rows.InsertAt(fila, 0);
 
 
@@ -784,10 +784,9 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         private void CargarREsponsables()
         {
             dtResponsable = R.ListarTodos();
-            
 
-            DataRow fila;
-            fila = dtResponsable.NewRow();
+
+            var fila = dtResponsable.NewRow();
             dtResponsable.Rows.InsertAt(fila, 0);
 
             dtResponsable2 = dtResponsable.Copy();
@@ -986,15 +985,21 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             {
                 TB_ObservPrimaria.Focus();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_Primaria.Text = "";
+            }
         }
 
         private void TB_ObservPrimaria_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CB_NecPrim.Focus();
-                CB_NecPrim.Select();
-                CB_NecPrim.BackColor = Color.DarkSlateGray;
+                TB_Secundaria.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_ObservPrimaria.Text = "";
             }
         }
 
@@ -1002,7 +1007,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (CB_NecPrim.Checked == true)
+                if (CB_NecPrim.Checked)
                 {
                     TB_Secundaria.Focus();
                 }
@@ -1033,15 +1038,21 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             {
                 TB_ObservSecundaria.Focus();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_Secundaria.Text = "";
+            }
         }
 
         private void TB_ObservSecundaria_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CB_NecSec.Focus();
-                CB_NecSec.Select();
-                CB_NecSec.BackColor = Color.DarkSlateGray;
+                TB_Terciaria.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_ObservSecundaria.Text = "";
             }
         }
 
@@ -1049,7 +1060,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (CB_NecSec.Checked == true)
+                if (CB_NecSec.Checked)
                 {
                     TB_Terciaria.Focus();
                 }
@@ -1079,15 +1090,21 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             {
                 TB_ObservTerciaria.Focus();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_Terciaria.Text = "";
+            }
         }
 
         private void TB_ObservTerciaria_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CB_NecTerc.Focus();
-                CB_NecTerc.Select();
-                CB_NecTerc.BackColor = Color.DarkSlateGray;
+                TB_Idioma.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_ObservTerciaria.Text = "";
             }
         }
 
@@ -1095,7 +1112,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (CB_NecTerc.Checked == true)
+                if (CB_NecTerc.Checked)
                 {
                     TB_Idioma.Focus();
                 }
@@ -1125,15 +1142,21 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             {
                 TB_ObservIdioma.Focus();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_Idioma.Text = "";
+            }
         }
 
         private void TB_ObservIdioma_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CB_NecIdioma.Focus();
-                CB_NecIdioma.Select();
-                CB_NecIdioma.BackColor = Color.DarkSlateGray;
+                TB_Exp.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_ObservIdioma.Text = "";
             }
         }
 
@@ -1141,7 +1164,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (CB_NecIdioma.Checked == true)
+                if (CB_NecIdioma.Checked)
                 {
                     TB_Exp.Focus();
                 }
@@ -1171,15 +1194,21 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             {
                 TB_ObservExp.Focus();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_Exp.Text = "";
+            }
         }
 
         private void TB_ObservExp_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CB_NecExp.Focus();
-                CB_NecExp.Select();
-                CB_NecExp.BackColor = Color.DarkSlateGray;
+                TB_CondFisica.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_ObservExp.Text = "";
             }
         }
 
@@ -1187,7 +1216,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (CB_NecExp.Checked == true)
+                if (CB_NecExp.Checked)
                 {
                     TB_CondFisica.Focus();
                 }
@@ -1217,15 +1246,21 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             {
                 TB_ObservCondFisica.Focus();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_CondFisica.Text = "";
+            }
         }
 
         private void TB_ObservCondFisica_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CB_NecCondFisica.Focus();
-                CB_NecCondFisica.Select();
-                CB_NecCondFisica.BackColor = Color.DarkSlateGray;
+                TB_Otros1.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_ObservCondFisica.Text = "";
             }
         }
 
@@ -1233,7 +1268,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (CB_NecCondFisica.Checked == true)
+                if (CB_NecCondFisica.Checked)
                 {
                     TB_Otros1.Focus();
                 }
@@ -1261,9 +1296,11 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CB_NecOtros1.Focus();
-                CB_NecOtros1.Select();
-                CB_NecOtros1.BackColor = Color.DarkSlateGray;
+                TB_Otros2.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_Otros1.Text = "";
             }
         }
 
@@ -1271,7 +1308,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (CB_NecOtros1.Checked == true)
+                if (CB_NecOtros1.Checked)
                 {
                     TB_Otros2.Focus();
                 }
@@ -1299,9 +1336,11 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CB_NecOtros2.Focus();
-                CB_NecOtros2.Select();
-                CB_NecOtros2.BackColor = Color.DarkSlateGray;
+                TB_Equiv1.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_Otros2.Text = "";
             }
         }
 
@@ -1309,7 +1348,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (CB_NecOtros2.Checked == true)
+                if (CB_NecOtros2.Checked)
                 {
                     TB_Equiv1.Focus();
                 }
@@ -1335,12 +1374,22 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
         private void TB_Equiv1_KeyDown(object sender, KeyEventArgs e)
         {
-            TB_Equiv2.Focus();
+            if (e.KeyCode == Keys.Enter)
+            {
+                TB_Equiv2.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TB_Equiv1.Text = "";
+            }
         }
 
         private void TB_Equiv2_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Escape)
+            {
+                TB_Equiv2.Text = "";
+            }
         }
 
         private void TB_CodTemas_KeyDown_1(object sender, KeyEventArgs e)
@@ -1372,7 +1421,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (CB_Necesario.Checked == true)
+                if (CB_Necesario.Checked)
                 {
                     BT_Guardar.Focus();
                      
@@ -1407,14 +1456,19 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
                 TB_CodTemas.Text = row.Cells[0].Value.ToString();
                 TB_DescTemas.Text = row.Cells[1].Value.ToString();
-                CB_Necesario.Checked = row.Cells[2].Value.ToString() == "X" ? true : false;
-                CB_Deseable.Checked = row.Cells[3].Value.ToString() == "X" ? true : false;
+                CB_Necesario.Checked = row.Cells[2].Value.ToString() == "X";
+                CB_Deseable.Checked = row.Cells[3].Value.ToString() == "X";
             }
 
             BT_Eliminar.Visible = true;
             BTModifTema.Visible = true;
 
             BTAgregarTema.Visible = false;
+        }
+
+        private void AgModPerfil_Shown(object sender, EventArgs e)
+        {
+            TB_DecPerfil.Focus();
         }
 
         

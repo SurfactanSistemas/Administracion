@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,6 +53,9 @@
             this.perfilBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DGV_Perfiles = new System.Windows.Forms.DataGridView();
             this.perfilBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -61,6 +64,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Perfiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -70,9 +76,10 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(74)))), ((int)(((byte)(95)))));
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(1, -1);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(737, 39);
+            this.panel1.Size = new System.Drawing.Size(899, 38);
             this.panel1.TabIndex = 4;
             // 
             // label2
@@ -92,7 +99,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(568, 6);
+            this.label1.Location = new System.Drawing.Point(730, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 24);
             this.label1.TabIndex = 0;
@@ -105,9 +112,10 @@
             this.P_Verde.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.P_Verde.Controls.Add(this.P_Filtrado);
             this.P_Verde.Controls.Add(this.BT_MenuFiltros);
-            this.P_Verde.Location = new System.Drawing.Point(0, 37);
+            this.P_Verde.Location = new System.Drawing.Point(0, 38);
+            this.P_Verde.Margin = new System.Windows.Forms.Padding(0);
             this.P_Verde.Name = "P_Verde";
-            this.P_Verde.Size = new System.Drawing.Size(741, 55);
+            this.P_Verde.Size = new System.Drawing.Size(899, 55);
             this.P_Verde.TabIndex = 5;
             // 
             // P_Filtrado
@@ -167,10 +175,10 @@
             this.Bt_Fin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Bt_Fin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Bt_Fin.ForeColor = System.Drawing.SystemColors.Control;
-            this.Bt_Fin.Location = new System.Drawing.Point(15, 388);
+            this.Bt_Fin.Location = new System.Drawing.Point(11, 264);
             this.Bt_Fin.Margin = new System.Windows.Forms.Padding(0);
             this.Bt_Fin.Name = "Bt_Fin";
-            this.Bt_Fin.Size = new System.Drawing.Size(47, 53);
+            this.Bt_Fin.Size = new System.Drawing.Size(50, 54);
             this.Bt_Fin.TabIndex = 18;
             this.Bt_Fin.UseVisualStyleBackColor = true;
             this.Bt_Fin.Click += new System.EventHandler(this.Bt_Fin_Click);
@@ -181,9 +189,9 @@
             this.BT_Eliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Eliminar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Eliminar.Location = new System.Drawing.Point(14, 294);
+            this.BT_Eliminar.Location = new System.Drawing.Point(11, 186);
             this.BT_Eliminar.Name = "BT_Eliminar";
-            this.BT_Eliminar.Size = new System.Drawing.Size(50, 70);
+            this.BT_Eliminar.Size = new System.Drawing.Size(50, 54);
             this.BT_Eliminar.TabIndex = 17;
             this.BT_Eliminar.UseVisualStyleBackColor = true;
             this.BT_Eliminar.Click += new System.EventHandler(this.BT_Eliminar_Click);
@@ -194,10 +202,10 @@
             this.BTModifSector.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTModifSector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTModifSector.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTModifSector.Location = new System.Drawing.Point(9, 209);
+            this.BTModifSector.Location = new System.Drawing.Point(11, 108);
             this.BTModifSector.Margin = new System.Windows.Forms.Padding(0);
             this.BTModifSector.Name = "BTModifSector";
-            this.BTModifSector.Size = new System.Drawing.Size(47, 53);
+            this.BTModifSector.Size = new System.Drawing.Size(50, 54);
             this.BTModifSector.TabIndex = 16;
             this.BTModifSector.UseVisualStyleBackColor = true;
             this.BTModifSector.Click += new System.EventHandler(this.BTModifSector_Click);
@@ -208,9 +216,9 @@
             this.BTAgregarPerfil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTAgregarPerfil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTAgregarPerfil.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTAgregarPerfil.Location = new System.Drawing.Point(15, 110);
+            this.BTAgregarPerfil.Location = new System.Drawing.Point(11, 30);
             this.BTAgregarPerfil.Name = "BTAgregarPerfil";
-            this.BTAgregarPerfil.Size = new System.Drawing.Size(50, 64);
+            this.BTAgregarPerfil.Size = new System.Drawing.Size(50, 54);
             this.BTAgregarPerfil.TabIndex = 15;
             this.BTAgregarPerfil.UseVisualStyleBackColor = true;
             this.BTAgregarPerfil.Click += new System.EventHandler(this.BTAgregarPerfil_Click);
@@ -267,48 +275,88 @@
             this.DGV_Perfiles.AllowUserToAddRows = false;
             this.DGV_Perfiles.AllowUserToDeleteRows = false;
             this.DGV_Perfiles.AllowUserToResizeRows = false;
-            this.DGV_Perfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_Perfiles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DGV_Perfiles.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.DGV_Perfiles.ColumnHeadersHeight = 34;
-            this.DGV_Perfiles.Location = new System.Drawing.Point(75, 93);
+            this.DGV_Perfiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGV_Perfiles.Location = new System.Drawing.Point(72, 0);
             this.DGV_Perfiles.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Perfiles.Name = "DGV_Perfiles";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Perfiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Perfiles.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.DGV_Perfiles.Size = new System.Drawing.Size(666, 367);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Perfiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Perfiles.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.DGV_Perfiles.Size = new System.Drawing.Size(827, 441);
             this.DGV_Perfiles.TabIndex = 19;
             // 
             // perfilBindingSource1
             // 
             this.perfilBindingSource1.DataSource = typeof(Negocio.Perfil);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.P_Verde, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(899, 534);
+            this.tableLayoutPanel1.TabIndex = 20;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 72F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.DGV_Perfiles, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 93);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(899, 441);
+            this.tableLayoutPanel2.TabIndex = 6;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.BTAgregarPerfil);
+            this.panel2.Controls.Add(this.BT_Eliminar);
+            this.panel2.Controls.Add(this.BTModifSector);
+            this.panel2.Controls.Add(this.Bt_Fin);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(72, 441);
+            this.panel2.TabIndex = 0;
+            // 
             // Perfiles_Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 460);
-            this.Controls.Add(this.DGV_Perfiles);
-            this.Controls.Add(this.Bt_Fin);
-            this.Controls.Add(this.BT_Eliminar);
-            this.Controls.Add(this.BTModifSector);
-            this.Controls.Add(this.BTAgregarPerfil);
-            this.Controls.Add(this.P_Verde);
-            this.Controls.Add(this.panel1);
-            this.MaximizeBox = false;
+            this.ClientSize = new System.Drawing.Size(899, 534);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(754, 498);
             this.Name = "Perfiles_Inicio";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Perfiles_Inicio_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -320,6 +368,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Perfiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -348,5 +399,8 @@
         private System.Windows.Forms.BindingSource perfilBindingSource1;
         private System.Windows.Forms.BindingSource temasBindingSource;
         private System.Windows.Forms.DataGridView DGV_Perfiles;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Panel panel2;
     }
 }

@@ -100,6 +100,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.BT_Eliminar = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.TB_DescTemas = new System.Windows.Forms.ComboBox();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -124,7 +125,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.TB_Codigo = new System.Windows.Forms.TextBox();
-            this.BT_Eliminar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -871,6 +871,21 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "CONOCIMIENTOS PARA EL PUESTO";
             // 
+            // BT_Eliminar
+            // 
+            this.BT_Eliminar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.eliminar;
+            this.BT_Eliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Eliminar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Eliminar.Location = new System.Drawing.Point(601, 373);
+            this.BT_Eliminar.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_Eliminar.Name = "BT_Eliminar";
+            this.BT_Eliminar.Size = new System.Drawing.Size(47, 41);
+            this.BT_Eliminar.TabIndex = 104;
+            this.BT_Eliminar.UseVisualStyleBackColor = true;
+            this.BT_Eliminar.Visible = false;
+            this.BT_Eliminar.Click += new System.EventHandler(this.BT_Eliminar_Click);
+            // 
             // panel10
             // 
             this.panel10.Location = new System.Drawing.Point(534, 317);
@@ -1123,21 +1138,6 @@
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
             // 
-            // BT_Eliminar
-            // 
-            this.BT_Eliminar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.eliminar;
-            this.BT_Eliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Eliminar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Eliminar.Location = new System.Drawing.Point(601, 373);
-            this.BT_Eliminar.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_Eliminar.Name = "BT_Eliminar";
-            this.BT_Eliminar.Size = new System.Drawing.Size(47, 41);
-            this.BT_Eliminar.TabIndex = 104;
-            this.BT_Eliminar.UseVisualStyleBackColor = true;
-            this.BT_Eliminar.Visible = false;
-            this.BT_Eliminar.Click += new System.EventHandler(this.BT_Eliminar_Click);
-            // 
             // AgModPerfil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1147,6 +1147,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "AgModPerfil";
             this.Load += new System.EventHandler(this.AgModPerfil_Load);
+            this.Shown += new System.EventHandler(this.AgModPerfil_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
