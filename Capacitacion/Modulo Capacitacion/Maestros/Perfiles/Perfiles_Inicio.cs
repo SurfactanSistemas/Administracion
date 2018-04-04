@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using CrystalDecisions.CrystalReports.Engine;
+using Modulo_Capacitacion.Listados;
+using Modulo_Capacitacion.Listados.Perfiles;
 using Negocio;
 
 namespace Modulo_Capacitacion.Maestros.Perfiles
@@ -51,7 +54,12 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             {
                 if (DGV_Perfiles.SelectedRows.Count != 1) throw new Exception("No hay filas seleccionadas o se selecciono mas de una");
                 string IdAEliminar = DGV_Perfiles.SelectedRows[0].Cells[0].Value.ToString();
-                P.Eliminar(IdAEliminar);
+
+                if (MessageBox.Show("¿Está seguro de querer eliminar el perfil seleccionado?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    P.Eliminar(IdAEliminar);
+                }
+
                 ActualizarGrilla();
             }
             catch (Exception err)
@@ -122,8 +130,11 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            Listados.Cursos.Inicio frm = new Listados.Cursos.Inicio();
-            frm.ShowDialog();
+            ReportDocument reporte = new ListadoPerfiles();
+
+            VistaPrevia rp = new VistaPrevia();
+            rp.CargarReporte(reporte);
+            rp.ShowDialog();
         }
         
     }
