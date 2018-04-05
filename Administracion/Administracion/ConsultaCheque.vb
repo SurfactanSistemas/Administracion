@@ -52,7 +52,7 @@ Public Class ConsultaCheque
         SQLConnector.conexionSql(cn, cm)
 
         Try
-            cm.CommandText = "SELECT r.Numero2, r.Banco2, r.Importe2, r.Fecha, r.Fecha2, r.Recibo, r.Cliente, cli.Razon FROM Recibos as r, Cliente as cli WHERE r.Cliente = cli.Cliente and Tiporeg= '2' and (Tipo2 = '2' or Tipo2 = '02') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') order by FechaOrd2"
+            cm.CommandText = "SELECT r.Numero2, r.Banco2, r.Importe2, r.Fecha, r.Fecha2, r.Recibo, r.Cliente, cli.Razon FROM Recibos as r, Cliente as cli WHERE r.Cliente = cli.Cliente and Tiporeg= '2' and (Tipo2 = '2' or Tipo2 = '02' or Tipo2 = ' 2') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') order by FechaOrd2"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
@@ -85,7 +85,7 @@ Public Class ConsultaCheque
         SQLConnector.conexionSql(cn, cm)
 
         Try
-            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Deposito, d.Banco, b.Cuenta, b.Nombre FROM Depositos as d, Banco as b Where d.Banco = b.Banco and (Tipo2 = '3' Or Tipo2= '03') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') Order by FechaOrd"
+            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Deposito, d.Banco, b.Cuenta, b.Nombre FROM Depositos as d, Banco as b Where d.Banco = b.Banco and (Tipo2 = ' 3' Or Tipo2 = '3' Or Tipo2= '03') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') Order by FechaOrd"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
@@ -118,7 +118,7 @@ Public Class ConsultaCheque
 
         Try
             'cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, d.Proveedor, b.Nombre, d.Observaciones FROM Pagos as d, Proveedor as b Where d.Proveedor = b.Proveedor and Tiporeg = '2' and (Tipo2 = '3' Or Tipo2= '03') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') Order by FechaOrd2"
-            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, isnull(b.Proveedor, '') as Proveedor, isnull(b.Nombre, '') as Nombre, d.Observaciones FROM Pagos as d FULL OUTER JOIN Proveedor as b ON b.Proveedor = d.Proveedor  Where d.Tiporeg = '2' and (d.Tipo2 = '3' Or d.Tipo2= '03') and d.Numero2 LIKE '%" & cheque & "' Order by FechaOrd2"
+            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, isnull(b.Proveedor, '') as Proveedor, isnull(b.Nombre, '') as Nombre, d.Observaciones FROM Pagos as d FULL OUTER JOIN Proveedor as b ON b.Proveedor = d.Proveedor  Where d.Tiporeg = '2' and (d.Tipo2 = '3' Or d.Tipo2= '03' Or d.Tipo2= ' 3') and d.Numero2 LIKE '%" & cheque & "' Order by FechaOrd2"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then

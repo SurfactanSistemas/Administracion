@@ -3617,9 +3617,8 @@ Public Class Pagos
 
     Private Function _EsControl(ByVal keycode) As Boolean
         Dim valido As Boolean = False
-
         Select Case keycode
-            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
+            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back, Keys.Subtract
                 valido = True
             Case Else
                 valido = False
@@ -3634,7 +3633,7 @@ Public Class Pagos
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
         Dim valido As Boolean = False
-
+        Debug.Print(keycode.ToString)
         If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
         Else
@@ -3646,7 +3645,6 @@ Public Class Pagos
 
     Private Function _EsDecimalOControl(ByVal keycode) As Boolean
         Dim valido As Boolean = False
-
         If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
         Else
