@@ -213,8 +213,11 @@ namespace Modulo_Capacitacion.Novedades
             TB_CodLegajo.Text = "";
             TB_DesLegajo.Text = "";
             TB_Año.Text = "";
+            LimpiarCamposTema();
             //DGV_Cronograma.Rows.Clear();
             DGV_Crono.DataSource = null;
+
+            TB_CodLegajo.Focus();
         }
 
         private void BT_Guardar_Click(object sender, EventArgs e)
@@ -314,12 +317,15 @@ namespace Modulo_Capacitacion.Novedades
                     Legajo L = new Legajo();
                     L = L.BuscarUno(TB_CodLegajo.Text);
                     TB_DesLegajo.Text = L.Descripcion;
+                    lblAtencion.Visible = false;
 
                     if (dtCronograma.Rows.Count == 0)
                     {
                         //Busco los cursos asociados al legajo!!
                         Modificar = false;
                         dtCronograma = L.BuscarCursosPlanificacion(TB_CodLegajo.Text);
+                        // Mostramos la ventana de Atencion.
+                        lblAtencion.Visible = true;
                     }
 
                     DGV_Crono.DataSource = dtCronograma;
@@ -346,7 +352,7 @@ namespace Modulo_Capacitacion.Novedades
         {
             BuscarCodigoTema();
             CargarCursos();
-            
+            CB_Curso.Focus();
         }
 
         private void BuscarCodigoTema()
@@ -389,8 +395,7 @@ namespace Modulo_Capacitacion.Novedades
             AutoCompleteStringCollection stringCodArti = new AutoCompleteStringCollection();
             foreach (DataRow row in dtCursos.Rows)
             {
-                stringCodArti.Add(Convert.ToString(row["Descripcion"]));
-
+                stringCodArti.Add(Convert.ToString(row["Descripcion"]).Trim());
             }
 
             CB_Curso.AutoCompleteCustomSource = stringCodArti;
@@ -461,6 +466,22 @@ namespace Modulo_Capacitacion.Novedades
             TB_DescTemas.Text = "";
             CB_Curso.Text = "";
             CB_Curso.Visible = false;
+        }
+
+        private void TB_Año_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) TB_Buscar.PerformClick();
+            if (e.KeyCode == Keys.Escape) TB_Año.Text = "";
+        }
+
+        private void IngrePlanificacionAnual_Shown(object sender, EventArgs e)
+        {
+            TB_CodLegajo.Focus();
+        }
+
+        private void TB_CodLegajo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape) TB_CodLegajo.Text = "";
         }
     }
 }
