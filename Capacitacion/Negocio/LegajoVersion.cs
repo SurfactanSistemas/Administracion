@@ -131,8 +131,8 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-            string consulta = "select * from legajoversion where codigo = " + cod + " and version = " + ver +
-            " and convert(datetime,FIngreso,103) >= convert(datetime,'" + fecha + "',103)";
+            string consulta = "select * from legajoversion where codigo = " + cod + " and version = " + ver;
+            //" and convert(datetime,FIngreso,103) >= convert(datetime,'" + fecha + "',103)";
 
             System.Data.DataTable DT = repo.BuscarUno(consulta);
 

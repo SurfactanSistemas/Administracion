@@ -343,12 +343,16 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
         {
             if (Cargado == true)
             {
+                LimpiarPantalla();
                 BuscarVersion();
             }
             
         }
 
-        
+        private void IngVersPerfil_Shown(object sender, EventArgs e)
+        {
+            TB_Codigo.Focus();
+        }
 
         //private void BuscarMaxCodigo()
         //{

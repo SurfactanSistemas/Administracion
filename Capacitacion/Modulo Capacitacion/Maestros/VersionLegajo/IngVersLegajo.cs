@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -17,8 +13,8 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
         PerfilVersion PerVer = new PerfilVersion();
         Legajo L = new Legajo();
         DataTable dtLegajos;
-        bool Cargado = false;
-        bool Limpiando = false;
+        bool Cargado;
+        bool Limpiando;
         string Perfil;
 
         public IngVersLegajo()
@@ -175,53 +171,120 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             //tnego el codigo de perfil y la version
             //Per = Per.BuscarUno(TB_CodPer.Text, TB_VerPer.Text);
 
-            PerVer = PerVer.BuscarUno(Perfil, TB_VerPer.Text);
+            int ZVersion = 0;
 
-            TB_DescPer.Text = PerVer.Descripcion;
-            TB_CodSec.Text = PerVer.sector.Codigo.ToString();
-            TB_DescSector.Text = PerVer.sector.Descripcion;
-            TB_Tareas1.Text = PerVer.TareasI;
-            TB_Tareas2.Text = PerVer.TareasII;
-            TB_Tareas3.Text = PerVer.TareasIII;
-            TB_Primaria.Text = PerVer.DescriI;
-            TB_ObservPrimaria.Text = PerVer.ObservaI;
-            CB_NecPrim.Checked = PerVer.NecesariaI == 1 ? true : false;
-            CB_DesPrim.Checked = PerVer.DeseableI == 1 ? true : false;
+            Perfil _Perfil = Per.BuscarUno(Perfil);
 
-            TB_Secundaria.Text = PerVer.DescriII;
-            TB_ObservSecundaria.Text = PerVer.ObservaII;
-            CB_NecSec.Checked = PerVer.NecesariaII == 1 ? true : false;
-            CB_DesSec.Checked = PerVer.DeseableII == 1 ? true : false;
+            if (_Perfil.Version > 0)
+            {
+                ZVersion = _Perfil.Version;
+            }
 
-            TB_Terciaria.Text = PerVer.DescriIII;
-            TB_ObservTerciaria.Text = PerVer.ObservaIII;
-            CB_NecTerc.Checked = PerVer.NecesariaIII == 1 ? true : false;
-            CB_DesTerc.Checked = PerVer.DeseableIII == 1 ? true : false;
+            if (ZVersion == 0 || ZVersion == int.Parse(TB_VerPer.Text))
+            {
+                Per = Per.BuscarUno(Perfil);
 
-            TB_Idioma.Text = PerVer.DescriIV;
-            TB_ObservIdioma.Text = PerVer.ObservaIV;
-            CB_NecIdioma.Checked = PerVer.NecesariaIV == 1 ? true : false;
-            CB_DesIdioma.Checked = PerVer.DeseableIV == 1 ? true : false;
+                TB_DescPer.Text = Per.Descripcion;
+                TB_CodSec.Text = Per.sector.Codigo.ToString();
+                TB_DescSector.Text = Per.sector.Descripcion;
+                TB_Tareas1.Text = Per.TareasI;
+                TB_Tareas2.Text = Per.TareasII;
+                TB_Tareas3.Text = Per.TareasIII;
+                TB_Primaria.Text = Per.DescriI;
+                TB_ObservPrimaria.Text = Per.ObservaI;
+                CB_NecPrim.Checked = Per.NecesariaI == 1 ? true : false;
+                CB_DesPrim.Checked = Per.DeseableI == 1 ? true : false;
 
-            TB_Exp.Text = PerVer.DescriV;
-            TB_ObservExp.Text = PerVer.ObservaV;
-            CB_NecExp.Checked = PerVer.NecesariaV == 1 ? true : false;
-            CB_DesExp.Checked = PerVer.DeseableV == 1 ? true : false;
+                TB_Secundaria.Text = Per.DescriII;
+                TB_ObservSecundaria.Text = Per.ObservaII;
+                CB_NecSec.Checked = Per.NecesariaII == 1 ? true : false;
+                CB_DesSec.Checked = Per.DeseableII == 1 ? true : false;
 
-            TB_CondFisica.Text = PerVer.Fisica;
-            CB_NecCondFisica.Checked = PerVer.NecesariaVI == 1 ? true : false;
-            CB_DesCondFisica.Checked = PerVer.DeseableVI == 1 ? true : false;
+                TB_Terciaria.Text = Per.DescriIII;
+                TB_ObservTerciaria.Text = Per.ObservaIII;
+                CB_NecTerc.Checked = Per.NecesariaIII == 1 ? true : false;
+                CB_DesTerc.Checked = Per.DeseableIII == 1 ? true : false;
 
-            TB_Otros1.Text = PerVer.OtrosI;
-            CB_DesOtros1.Checked = PerVer.DeseableVII == 1 ? true : false;
-            CB_NecOtros1.Checked = PerVer.NecesariaVII == 1 ? true : false;
+                TB_Idioma.Text = Per.DescriIV;
+                TB_ObservIdioma.Text = Per.ObservaIV;
+                CB_NecIdioma.Checked = Per.NecesariaIV == 1 ? true : false;
+                CB_DesIdioma.Checked = Per.DeseableIV == 1 ? true : false;
 
-            TB_Otros2.Text = PerVer.OtrosII;
-            CB_DesOtros2.Checked = PerVer.DeseableVIII == 1 ? true : false;
-            CB_NecOtros2.Checked = PerVer.NecesariaVIII == 1 ? true : false;
+                TB_Exp.Text = Per.DescriV;
+                TB_ObservExp.Text = Per.ObservaV;
+                CB_NecExp.Checked = Per.NecesariaV == 1 ? true : false;
+                CB_DesExp.Checked = Per.DeseableV == 1 ? true : false;
 
-            TB_Equiv1.Text = PerVer.EquivalenciasI;
-            TB_Equiv2.Text = PerVer.EquivalenciasII;
+                TB_CondFisica.Text = Per.Fisica;
+                CB_NecCondFisica.Checked = Per.NecesariaVI == 1 ? true : false;
+                CB_DesCondFisica.Checked = Per.DeseableVI == 1 ? true : false;
+
+                TB_Otros1.Text = Per.OtrosI;
+                CB_DesOtros1.Checked = Per.DeseableVII == 1 ? true : false;
+                CB_NecOtros1.Checked = Per.NecesariaVII == 1 ? true : false;
+
+                TB_Otros2.Text = Per.OtrosII;
+                CB_DesOtros2.Checked = Per.DeseableVIII == 1 ? true : false;
+                CB_NecOtros2.Checked = Per.NecesariaVIII == 1 ? true : false;
+
+                TB_Equiv1.Text = Per.EquivalenciasI;
+                TB_Equiv2.Text = Per.EquivalenciasII;
+            }
+            else
+            {
+                PerVer = PerVer.BuscarUno(Perfil, TB_VerPer.Text);
+
+                if (PerVer.Version > 0)
+                {
+                    TB_DescPer.Text = PerVer.Descripcion;
+                    TB_CodSec.Text = PerVer.sector.Codigo.ToString();
+                    TB_DescSector.Text = PerVer.sector.Descripcion;
+                    TB_Tareas1.Text = PerVer.TareasI;
+                    TB_Tareas2.Text = PerVer.TareasII;
+                    TB_Tareas3.Text = PerVer.TareasIII;
+                    TB_Primaria.Text = PerVer.DescriI;
+                    TB_ObservPrimaria.Text = PerVer.ObservaI;
+                    CB_NecPrim.Checked = PerVer.NecesariaI == 1 ? true : false;
+                    CB_DesPrim.Checked = PerVer.DeseableI == 1 ? true : false;
+
+                    TB_Secundaria.Text = PerVer.DescriII;
+                    TB_ObservSecundaria.Text = PerVer.ObservaII;
+                    CB_NecSec.Checked = PerVer.NecesariaII == 1 ? true : false;
+                    CB_DesSec.Checked = PerVer.DeseableII == 1 ? true : false;
+
+                    TB_Terciaria.Text = PerVer.DescriIII;
+                    TB_ObservTerciaria.Text = PerVer.ObservaIII;
+                    CB_NecTerc.Checked = PerVer.NecesariaIII == 1 ? true : false;
+                    CB_DesTerc.Checked = PerVer.DeseableIII == 1 ? true : false;
+
+                    TB_Idioma.Text = PerVer.DescriIV;
+                    TB_ObservIdioma.Text = PerVer.ObservaIV;
+                    CB_NecIdioma.Checked = PerVer.NecesariaIV == 1 ? true : false;
+                    CB_DesIdioma.Checked = PerVer.DeseableIV == 1 ? true : false;
+
+                    TB_Exp.Text = PerVer.DescriV;
+                    TB_ObservExp.Text = PerVer.ObservaV;
+                    CB_NecExp.Checked = PerVer.NecesariaV == 1 ? true : false;
+                    CB_DesExp.Checked = PerVer.DeseableV == 1 ? true : false;
+
+                    TB_CondFisica.Text = PerVer.Fisica;
+                    CB_NecCondFisica.Checked = PerVer.NecesariaVI == 1 ? true : false;
+                    CB_DesCondFisica.Checked = PerVer.DeseableVI == 1 ? true : false;
+
+                    TB_Otros1.Text = PerVer.OtrosI;
+                    CB_DesOtros1.Checked = PerVer.DeseableVII == 1 ? true : false;
+                    CB_NecOtros1.Checked = PerVer.NecesariaVII == 1 ? true : false;
+
+                    TB_Otros2.Text = PerVer.OtrosII;
+                    CB_DesOtros2.Checked = PerVer.DeseableVIII == 1 ? true : false;
+                    CB_NecOtros2.Checked = PerVer.NecesariaVIII == 1 ? true : false;
+
+                    TB_Equiv1.Text = PerVer.EquivalenciasI;
+                    TB_Equiv2.Text = PerVer.EquivalenciasII;
+                }
+
+            }
+
         }
 
         private void CargarDatosABM()
@@ -286,12 +349,12 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
 
         private void BT_Salir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void TB_Codigo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Cargado == true)
+            if (Cargado)
             {
                 //TB_FechaIng.Text = TB_FechaIngAyuda.Text;
                 //BuscarVersiones();
@@ -304,18 +367,18 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             try
             {
                 
-                    //Buscardatosdelegajo
-                    if (TB_Codigo.Text == "" || TB_VersionLegajo.Text == "" || TB_FechaIng.Text == "") throw new Exception("No se puede asi macho");
+                //Buscardatosdelegajo
+                if (TB_Codigo.Text == "" || TB_VersionLegajo.Text == "" || TB_FechaIng.Text == "") throw new Exception("No se puede asi macho");
 
-                    LV = LV.BuscarUnaVersion(TB_Codigo.Text, TB_VersionLegajo.Text, TB_FechaIng.Text);
+                LV = LV.BuscarUnaVersion(TB_Codigo.Text, TB_VersionLegajo.Text, TB_FechaIng.Text);
 
-                    if (LV.Codigo == 0) throw new Exception("No se encontro registro con los datos ingresados.");
+                if (LV.Codigo == 0) throw new Exception("No se encontro registro con los datos ingresados.");
 
-                    //Cargo los datos
-                    CargarDatosABM();
-                    CargarDatosPefil();
-                    CargarTemas(LV.Temas);
-                    BuscarCantVersiones();
+                //Cargo los datos
+                CargarDatosABM();
+                CargarDatosPefil();
+                CargarTemas(LV.Temas);
+                BuscarCantVersiones();
                 
             }
             catch (Exception err)
@@ -339,7 +402,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
 
         private void TB_DescLegajo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((Cargado == true) && (Limpiando == false))
+            if (Cargado && (Limpiando == false))
             {
                 if (TB_Codigo.Text != "")
                 {
@@ -461,9 +524,9 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             
         }
 
-        private void IngVersLegajo_Load(object sender, EventArgs e)
+        private void IngVersLegajo_Shown(object sender, EventArgs e)
         {
-
+            TB_Codigo.Focus();
         }
     }
 }

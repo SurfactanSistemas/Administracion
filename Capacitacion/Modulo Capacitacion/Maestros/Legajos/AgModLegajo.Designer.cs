@@ -1391,7 +1391,6 @@
             this.DGV_CursosRealiz.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.DGV_CursosRealiz.Size = new System.Drawing.Size(927, 442);
             this.DGV_CursosRealiz.TabIndex = 8;
-            this.DGV_CursosRealiz.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_CursosRealiz_CellContentClick);
             // 
             // Curso
             // 

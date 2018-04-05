@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.TB_Version = new System.Windows.Forms.ComboBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.TB_DecPerfil = new System.Windows.Forms.ComboBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.TB_Codigo = new System.Windows.Forms.ComboBox();
             this.DTP_FechaVigenciaII = new System.Windows.Forms.DateTimePicker();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -100,11 +105,6 @@
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.TB_Codigo = new System.Windows.Forms.ComboBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.TB_DecPerfil = new System.Windows.Forms.ComboBox();
-            this.TB_Version = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -162,6 +162,48 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(790, 593);
             this.panel3.TabIndex = 3;
+            // 
+            // TB_Version
+            // 
+            this.TB_Version.FormattingEnabled = true;
+            this.TB_Version.Location = new System.Drawing.Point(441, 20);
+            this.TB_Version.Name = "TB_Version";
+            this.TB_Version.Size = new System.Drawing.Size(58, 21);
+            this.TB_Version.TabIndex = 129;
+            this.TB_Version.SelectedIndexChanged += new System.EventHandler(this.TB_Version_SelectedIndexChanged);
+            
+            // 
+            // panel7
+            // 
+            this.panel7.Location = new System.Drawing.Point(363, 13);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(19, 29);
+            this.panel7.TabIndex = 128;
+            // 
+            // TB_DecPerfil
+            // 
+            this.TB_DecPerfil.FormattingEnabled = true;
+            this.TB_DecPerfil.Location = new System.Drawing.Point(129, 18);
+            this.TB_DecPerfil.Name = "TB_DecPerfil";
+            this.TB_DecPerfil.Size = new System.Drawing.Size(253, 21);
+            this.TB_DecPerfil.TabIndex = 127;
+            this.TB_DecPerfil.SelectedIndexChanged += new System.EventHandler(this.TB_DecPerfil_SelectedIndexChanged);
+            this.TB_DecPerfil.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DecPerfil_KeyDown);
+            // 
+            // panel6
+            // 
+            this.panel6.Location = new System.Drawing.Point(104, 17);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(19, 29);
+            this.panel6.TabIndex = 126;
+            // 
+            // TB_Codigo
+            // 
+            this.TB_Codigo.FormattingEnabled = true;
+            this.TB_Codigo.Location = new System.Drawing.Point(56, 19);
+            this.TB_Codigo.Name = "TB_Codigo";
+            this.TB_Codigo.Size = new System.Drawing.Size(67, 21);
+            this.TB_Codigo.TabIndex = 125;
             // 
             // DTP_FechaVigenciaII
             // 
@@ -768,17 +810,17 @@
             this.DGV_Temas.Location = new System.Drawing.Point(16, 20);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Temas.Size = new System.Drawing.Size(748, 418);
             this.DGV_Temas.TabIndex = 7;
             // 
@@ -862,47 +904,6 @@
             this.LFechaAviso.TabIndex = 4;
             this.LFechaAviso.Text = "Perfil:";
             // 
-            // panel6
-            // 
-            this.panel6.Location = new System.Drawing.Point(104, 17);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(19, 29);
-            this.panel6.TabIndex = 126;
-            // 
-            // TB_Codigo
-            // 
-            this.TB_Codigo.FormattingEnabled = true;
-            this.TB_Codigo.Location = new System.Drawing.Point(56, 19);
-            this.TB_Codigo.Name = "TB_Codigo";
-            this.TB_Codigo.Size = new System.Drawing.Size(67, 21);
-            this.TB_Codigo.TabIndex = 125;
-            // 
-            // panel7
-            // 
-            this.panel7.Location = new System.Drawing.Point(363, 13);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(19, 29);
-            this.panel7.TabIndex = 128;
-            // 
-            // TB_DecPerfil
-            // 
-            this.TB_DecPerfil.FormattingEnabled = true;
-            this.TB_DecPerfil.Location = new System.Drawing.Point(129, 18);
-            this.TB_DecPerfil.Name = "TB_DecPerfil";
-            this.TB_DecPerfil.Size = new System.Drawing.Size(253, 21);
-            this.TB_DecPerfil.TabIndex = 127;
-            this.TB_DecPerfil.SelectedIndexChanged += new System.EventHandler(this.TB_DecPerfil_SelectedIndexChanged);
-            this.TB_DecPerfil.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DecPerfil_KeyDown);
-            // 
-            // TB_Version
-            // 
-            this.TB_Version.FormattingEnabled = true;
-            this.TB_Version.Location = new System.Drawing.Point(441, 20);
-            this.TB_Version.Name = "TB_Version";
-            this.TB_Version.Size = new System.Drawing.Size(58, 21);
-            this.TB_Version.TabIndex = 129;
-            this.TB_Version.SelectedIndexChanged += new System.EventHandler(this.TB_Version_SelectedIndexChanged);
-            // 
             // IngVersPerfil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -912,6 +913,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "IngVersPerfil";
             this.Load += new System.EventHandler(this.IngVersPerfil_Load);
+            this.Shown += new System.EventHandler(this.IngVersPerfil_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IngVersPerfil_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
