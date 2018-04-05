@@ -161,11 +161,10 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            ReportDocument reporte = new ListadoPerfiles();
+            Listados.Legajos.Inicio frm = new Listados.Legajos.Inicio();
+            frm.ShowDialog();
 
-            VistaPrevia rp = new VistaPrevia();
-            rp.CargarReporte(reporte);
-            rp.ShowDialog();
+            ActualizarGrilla();
         }
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGV_Legajos = new System.Windows.Forms.DataGridView();
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +52,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnImprimir = new System.Windows.Forms.Button();
             this.legajoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Legajos)).BeginInit();
             this.P_Verde.SuspendLayout();
@@ -84,14 +85,14 @@
             this.DGV_Legajos.Location = new System.Drawing.Point(85, 0);
             this.DGV_Legajos.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Legajos.Name = "DGV_Legajos";
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.DGV_Legajos.Size = new System.Drawing.Size(622, 326);
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.DGV_Legajos.Size = new System.Drawing.Size(677, 441);
             this.DGV_Legajos.TabIndex = 26;
             this.DGV_Legajos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
             // 
@@ -121,8 +122,8 @@
             // Vigencia
             // 
             this.Vigencia.DataPropertyName = "Vigencia";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle1;
             this.Vigencia.HeaderText = "Vigencia";
             this.Vigencia.Name = "Vigencia";
             this.Vigencia.Width = 73;
@@ -150,7 +151,7 @@
             this.P_Verde.Location = new System.Drawing.Point(0, 39);
             this.P_Verde.Margin = new System.Windows.Forms.Padding(0);
             this.P_Verde.Name = "P_Verde";
-            this.P_Verde.Size = new System.Drawing.Size(707, 59);
+            this.P_Verde.Size = new System.Drawing.Size(762, 59);
             this.P_Verde.TabIndex = 21;
             // 
             // P_Filtrado
@@ -161,7 +162,7 @@
             this.P_Filtrado.Location = new System.Drawing.Point(0, 0);
             this.P_Filtrado.Margin = new System.Windows.Forms.Padding(0);
             this.P_Filtrado.Name = "P_Filtrado";
-            this.P_Filtrado.Size = new System.Drawing.Size(707, 59);
+            this.P_Filtrado.Size = new System.Drawing.Size(762, 59);
             this.P_Filtrado.TabIndex = 1;
             // 
             // TBFiltro
@@ -194,7 +195,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(707, 39);
+            this.panel1.Size = new System.Drawing.Size(762, 39);
             this.panel1.TabIndex = 20;
             // 
             // label2
@@ -214,7 +215,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(543, 6);
+            this.label1.Location = new System.Drawing.Point(598, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 24);
             this.label1.TabIndex = 0;
@@ -226,10 +227,10 @@
             this.Bt_Fin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Bt_Fin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Bt_Fin.ForeColor = System.Drawing.SystemColors.Control;
-            this.Bt_Fin.Location = new System.Drawing.Point(16, 259);
+            this.Bt_Fin.Location = new System.Drawing.Point(10, 322);
             this.Bt_Fin.Margin = new System.Windows.Forms.Padding(0);
             this.Bt_Fin.Name = "Bt_Fin";
-            this.Bt_Fin.Size = new System.Drawing.Size(47, 53);
+            this.Bt_Fin.Size = new System.Drawing.Size(56, 74);
             this.Bt_Fin.TabIndex = 25;
             this.Bt_Fin.UseVisualStyleBackColor = true;
             this.Bt_Fin.Click += new System.EventHandler(this.Bt_Fin_Click);
@@ -240,9 +241,9 @@
             this.BT_Eliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Eliminar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Eliminar.Location = new System.Drawing.Point(14, 173);
+            this.BT_Eliminar.Location = new System.Drawing.Point(11, 170);
             this.BT_Eliminar.Name = "BT_Eliminar";
-            this.BT_Eliminar.Size = new System.Drawing.Size(50, 70);
+            this.BT_Eliminar.Size = new System.Drawing.Size(56, 74);
             this.BT_Eliminar.TabIndex = 24;
             this.BT_Eliminar.UseVisualStyleBackColor = true;
             this.BT_Eliminar.Click += new System.EventHandler(this.BT_Eliminar_Click);
@@ -253,10 +254,10 @@
             this.BTModifLegajo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTModifLegajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTModifLegajo.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTModifLegajo.Location = new System.Drawing.Point(16, 104);
+            this.BTModifLegajo.Location = new System.Drawing.Point(11, 89);
             this.BTModifLegajo.Margin = new System.Windows.Forms.Padding(0);
             this.BTModifLegajo.Name = "BTModifLegajo";
-            this.BTModifLegajo.Size = new System.Drawing.Size(47, 53);
+            this.BTModifLegajo.Size = new System.Drawing.Size(56, 74);
             this.BTModifLegajo.TabIndex = 23;
             this.BTModifLegajo.UseVisualStyleBackColor = true;
             this.BTModifLegajo.Click += new System.EventHandler(this.BTModifLegajo_Click);
@@ -267,7 +268,7 @@
             this.BTAgregarLegajo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTAgregarLegajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTAgregarLegajo.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTAgregarLegajo.Location = new System.Drawing.Point(11, 14);
+            this.BTAgregarLegajo.Location = new System.Drawing.Point(11, 8);
             this.BTAgregarLegajo.Name = "BTAgregarLegajo";
             this.BTAgregarLegajo.Size = new System.Drawing.Size(56, 74);
             this.BTAgregarLegajo.TabIndex = 22;
@@ -289,7 +290,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(707, 424);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(762, 539);
             this.tableLayoutPanel1.TabIndex = 27;
             // 
             // tableLayoutPanel2
@@ -305,20 +306,34 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(707, 326);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(762, 441);
             this.tableLayoutPanel2.TabIndex = 22;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.BTAgregarLegajo);
             this.panel2.Controls.Add(this.BTModifLegajo);
+            this.panel2.Controls.Add(this.btnImprimir);
             this.panel2.Controls.Add(this.BT_Eliminar);
             this.panel2.Controls.Add(this.Bt_Fin);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(79, 320);
+            this.panel2.Size = new System.Drawing.Size(79, 435);
             this.panel2.TabIndex = 0;
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnImprimir.Location = new System.Drawing.Point(11, 245);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(56, 74);
+            this.btnImprimir.TabIndex = 24;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // legajoBindingSource
             // 
@@ -328,7 +343,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 424);
+            this.ClientSize = new System.Drawing.Size(762, 539);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(723, 462);
             this.Name = "Legajos_Inicio";
@@ -372,5 +387,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Vigencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sector;
         private System.Windows.Forms.DataGridViewTextBoxColumn Perfil;
+        private System.Windows.Forms.Button btnImprimir;
     }
 }

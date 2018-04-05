@@ -59,6 +59,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\Legajos\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Legajos\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Legajos\ListadoLegajos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoLegajos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\Perfiles\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -477,6 +489,13 @@
     </Compile>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Legajos\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Legajos\ListadoLegajos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoLegajos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Perfiles\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>

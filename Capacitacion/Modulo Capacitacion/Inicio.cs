@@ -26,15 +26,13 @@ namespace Modulo_Capacitacion
 
         private void ingresoDePlanificacionAnualDeCapacitacionPorLegajoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IngrePlanificacionAnual form = new IngrePlanificacionAnual();
-            form.StartPosition = FormStartPosition.CenterScreen;
+            IngrePlanificacionAnual form = new IngrePlanificacionAnual {StartPosition = FormStartPosition.CenterScreen};
             form.ShowDialog();
         }
 
         private void ingresoDeSectoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Sectores_Inicio form = new Sectores_Inicio();
-            form.StartPosition = FormStartPosition.CenterScreen;
+            Sectores_Inicio form = new Sectores_Inicio {StartPosition = FormStartPosition.CenterScreen};
             form.ShowDialog();
         }
 

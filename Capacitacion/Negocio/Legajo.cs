@@ -232,7 +232,7 @@ namespace Negocio
                 + " EstaCurso,Perfil,ClavePerfil, NecesariaCurso,DeseableCurso,FechaVersion,"
                 + " Version,ImprePerfil, Fegreso, PerfilVersion, Sector, DesSector, ObservaI1,"
                 + " ObservaI2, ObservaI3, ObservaI4, ObservaI5, ObservaII1, ObservaII2, ObservaII3,"
-                + " ObservaII4, ObservaII5, dni, CUIL)"
+                + " ObservaII4, ObservaII5, dni)"
                 + " values " +
                 "('" + clave1 + clave2 + "'," + Codigo + "," + renglon + ",'" + Descripcion + "','" + FIngreso + "','" + EstadoI + "',"
                 + " '" + EstadoII + "','" + EstadoIII + "','" + EstadoIV + "','" + EstadoV + "','" + EstadoVI + "','" + EstadoVII + "',"
@@ -242,7 +242,7 @@ namespace Negocio
                 + " " +t.Estado + "," + Perfil.Codigo + ",'" + claper1 + claper2 + "','" + nece + "','" + dese + "','" + FechaVersion + "',"
                 + " " + Version + " ,'" + Perfil.Descripcion + "','" + FEgreso + "'," + Perfil.Version + "," + Sector.Codigo + ",'" + Sector.Descripcion + "',"
                 + "' ',' ', ' ', ' ', ' ', '" + ObservExtI + "','" + ObservExtII + "','" + ObservExtIII + "','" + ObservExtIV + "','" + ObservExtV + "', '"
-                + DNI +"', '" + CUIL + "' )";
+                + DNI +"')";
 
                 Repo.Agregar(consulta);
 

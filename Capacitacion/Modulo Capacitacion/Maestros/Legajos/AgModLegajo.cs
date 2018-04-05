@@ -412,7 +412,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
                         //COLOCO LA FECHA DEL DIA 
                         DateTime Hoy = DateTime.Today;
-                        L.FechaVersion = Hoy.ToString("d");
+                        L.FechaVersion = Hoy.ToString("dd/MM/yyyy");
 
                         //SUMO UNO A VERSION
 
@@ -429,7 +429,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     {
                         //COLOCO LA FECHA DEL DIA 
                         DateTime Hoy = DateTime.Today;
-                        L.FechaVersion = Hoy.ToString("d");
+                        L.FechaVersion = Hoy.ToString("dd/MM/yyyy");
                         
                         
                         L.ModificarN(L);
