@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,11 +17,12 @@ namespace Eval_Proveedores
         public Inicio()
         {
             InitializeComponent();
-        }
-
-        private void evaluacionDeOtrosProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            using (
+                SqlConnection cnx =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString))
+            {
+                cnx.Open();
+            }
         }
 
         private void ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem_Click(object sender, EventArgs e)

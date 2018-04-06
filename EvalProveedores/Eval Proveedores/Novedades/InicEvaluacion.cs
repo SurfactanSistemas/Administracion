@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Negocio;
 using Logica_Negocio;
+using Negocio;
+
 
 namespace Eval_Proveedores.Novedades
 {
@@ -19,7 +16,7 @@ namespace Eval_Proveedores.Novedades
         Proveedor P = new Proveedor();
         ProveedorBOL PBOL = new ProveedorBOL();
         string columna = "";
-        int ValidClave = 0;
+        int ValidClave;
 
 
         public InicEvaluacion()
@@ -36,7 +33,11 @@ namespace Eval_Proveedores.Novedades
 
         private void TraerLista()
         {
-            DataTable dtEva = EVAGBOL.ListaGen();
+            DataTable dtEva;
+            DataRow[] row;
+
+            dtEva = ckSoloUltimas.Checked ? EVAGBOL.ListaGenUltimos() : EVAGBOL.ListaGen();
+
             DataTable dtProve = PBOL.Lista();
             dtEva.Columns.Add("NombProve", typeof(string));
             dtEva.Columns.Add("Estado", typeof(string));
@@ -44,33 +45,26 @@ namespace Eval_Proveedores.Novedades
             dtEva.Columns.Add("DescFecha", typeof(string));
             foreach (DataRow fila in dtEva.Rows)
             {
-                foreach (DataRow filaProve in dtProve.Rows)
+                fila["Clave"] = fila["Proveedor"] + fila["Mes"].ToString().PadLeft(2, '0') + fila["Ano"];
+
+                row = dtProve.Select("Proveedor='" + fila["Proveedor"].ToString() + "'");
+
+                if (row.Length > 0)
                 {
-                    if ((fila[1].ToString()) == (filaProve[0].ToString()))
+                    fila["NombProve"] = row[0]["Nombre"];
+
+                    if (row[0]["Estado"].ToString() == "")
                     {
-                        fila["NombProve"] = filaProve["Nombre"];
-                        if (filaProve["Estado"].ToString() == "")
-                        {
-                            fila["Estado"] = "Sin Evaluar";
-                            
-                        }
-                        else
-                        {
-                            if (int.Parse(filaProve["Estado"].ToString()) == 2)
-                            {
-                                fila["Estado"] = "Inhabilitado";
+                        fila["Estado"] = "Sin Evaluar";
 
-                            }
-                            else
-                            {
-                                fila["Estado"] = "Habilitado";
-                            }
-                        }
                     }
-
+                    else
+                    {
+                        fila["Estado"] = int.Parse(row[0]["Estado"].ToString()) == 2 ? "Inhabilitado" : "Habilitado";
+                    }
                 }
 
-                int Tipo = int.Parse(fila[46].ToString());
+                int Tipo = int.Parse(fila["Tipo"].ToString());
                 switch (Tipo)
                 {
                     case 1: 
@@ -94,7 +88,7 @@ namespace Eval_Proveedores.Novedades
                             break;
                 }
 
-                fila["DescFecha"] = fila[2].ToString() + " / " + fila[3];
+                fila["DescFecha"] = fila["Mes"] + " / " + fila["Ano"];
                 
             }
 
@@ -108,6 +102,7 @@ namespace Eval_Proveedores.Novedades
 
         private void BuscarInhabilitados()
         {
+            
             foreach (DataGridViewRow row in DGV_Evaluaciones.Rows)
             {
                 string Estado = Convert.ToString(row.Cells["Estado"].Value);
@@ -137,10 +132,10 @@ namespace Eval_Proveedores.Novedades
 
                     if (DGV_Evaluaciones.SelectedRows.Count > 1) throw new Exception("Se ha seleccionado mas de una  Evaluación");
 
-                    int Tipo = int.Parse(DGV_Evaluaciones.SelectedRows[0].Cells[4].Value.ToString());
-                    string Clave = DGV_Evaluaciones.SelectedRows[0].Cells[0].Value.ToString();
-                    string NombProve = DGV_Evaluaciones.SelectedRows[0].Cells[2].Value.ToString();
-                    string Estado = DGV_Evaluaciones.SelectedRows[0].Cells[3].Value.ToString();
+                    int Tipo = int.Parse(DGV_Evaluaciones.SelectedRows[0].Cells["Tipo"].Value.ToString());
+                    string Clave = DGV_Evaluaciones.SelectedRows[0].Cells["Clave"].Value.ToString();
+                    string NombProve = DGV_Evaluaciones.SelectedRows[0].Cells["NombProve"].Value.ToString();
+                    string Estado = DGV_Evaluaciones.SelectedRows[0].Cells["Estado"].Value.ToString();
 
                     if (Tipo == 1)
                     {
@@ -234,24 +229,25 @@ namespace Eval_Proveedores.Novedades
             CMS_Filtros.Show(ptLowerLeft);
 
             BT_Filtrar.Text = "Limp. Filtro";
-            TBFiltro.Text = "";
+            TBFiltroMes.Text = "";
         }
 
         private void nombreProveedorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             (DGV_Evaluaciones.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
             columna = "NombProve";
-            HabilitarPanelFiltrado();
-            LBFiltro.Text = "Nombre Proveedor";
-            TBFiltro.Visible = true;
+            PProve.Visible = true;
+            LB_Prove.Text = "Nombre";
+            TB_Filtro2.Visible = true;
+            TB_Filtro2.Focus();
         }
 
-        
 
         private void tipoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             (DGV_Evaluaciones.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
             CB_Tipo.Text = "";
+            PProve.Visible = false;
             P_Filtrado.Visible = false;
             CB_Tipo.Visible = true;
             LBFiltro.Text = "Tipo";
@@ -265,30 +261,36 @@ namespace Eval_Proveedores.Novedades
         {
             (DGV_Evaluaciones.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
             columna = "Periodo";
+            PProve.Visible = false;
             HabilitarPanelFiltrado();
             LBFiltro.Text = "Periodo";
-            TBFiltro.Visible = true;
+            TBFiltroMes.Visible = true;
         }
 
         private void HabilitarPanelFiltrado()
         {
             P_Filtrado.Visible = true;
-            TBFiltro.Focus();
+            TBFiltroMes.Focus();
         }
 
         private void BT_Filtrar_Click(object sender, EventArgs e)
         {
             if (BT_Filtrar.Text == "Filtrar")
             {
-                (DGV_Evaluaciones.DataSource as DataTable).DefaultView.RowFilter = string.Format("CONVERT(" + columna + ", System.String) like '%{0}%'", TBFiltro.Text);
+                DataTable table = DGV_Evaluaciones.DataSource as DataTable;
+                if (table != null)
+                    table.DefaultView.RowFilter = string.Format("CONVERT(" + columna + ", System.String) like '%{0}%'", TBFiltroAno.Text + TBFiltroMes.Text.PadLeft(2, '0'));
                 BT_Filtrar.Text = "Limp. Filtro";
             }
             else
             {
-                (DGV_Evaluaciones.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+                DataTable table = DGV_Evaluaciones.DataSource as DataTable;
+                if (table != null)
+                    table.DefaultView.RowFilter = string.Empty;
 
                 P_Filtrado.Visible = false;
-                TBFiltro.Text = "";
+                TBFiltroMes.Text = "";
+                TBFiltroAno.Text = "";
                 BT_Filtrar.Visible = true;
             }
         }
@@ -310,50 +312,7 @@ namespace Eval_Proveedores.Novedades
 
         private void DGV_Evaluaciones_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            ValidarClave();
-            if (ValidClave == 1)
-            {
-                try
-                {
-                    if (DGV_Evaluaciones.SelectedRows.Count == 0) throw new Exception("No se ha seleccionado ninguna Evaluación");
-
-                    if (DGV_Evaluaciones.SelectedRows.Count > 1) throw new Exception("Se ha seleccionado mas de una  Evaluación");
-
-                    int Tipo = int.Parse(DGV_Evaluaciones.SelectedRows[0].Cells[4].Value.ToString());
-                    string Clave = DGV_Evaluaciones.SelectedRows[0].Cells[0].Value.ToString();
-                    string NombProve = DGV_Evaluaciones.SelectedRows[0].Cells[2].Value.ToString();
-                    string Estado = DGV_Evaluaciones.SelectedRows[0].Cells[3].Value.ToString();
-
-                    if (Tipo == 1)
-                    {
-                        EvaluaTransp EvaTrans = EVATRABOL.Find(Clave);
-
-                        IngEvalTransp ModEvaTrans = new IngEvalTransp(EvaTrans, Estado, NombProve);
-                        ModEvaTrans.ShowDialog();
-                        TraerLista();
-                        P_Filtrado.Visible = false;
-                    }
-                    else
-                    {
-                        EvaluaVarios Eva = EVAVABOL.Find(Clave);
-
-                        IngEvalMantenimiento ModEva = new IngEvalMantenimiento(Eva, Estado, NombProve, Tipo);
-                        ModEva.ShowDialog();
-                        TraerLista();
-                        P_Filtrado.Visible = false;
-                    }
-
-
-                }
-                catch (Exception err)
-                {
-
-                    MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-
-            }
-            
+            BTModifEvaluacion.PerformClick();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -397,6 +356,19 @@ namespace Eval_Proveedores.Novedades
                 BT_Filtrar2.PerformClick();
                 e.SuppressKeyPress = true;
                 e.Handled = true;
+            }
+        }
+
+        private void ckSoloUltimas_CheckedChanged(object sender, EventArgs e)
+        {
+            TraerLista();
+        }
+
+        private void TBFiltroMes_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TBFiltroAno.Focus();
             }
         }
     }

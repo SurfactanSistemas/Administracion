@@ -182,7 +182,7 @@ namespace Negocio
         public System.Data.DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
-            string consulta = "select * from Legajo where Renglon = 1 order by Codigo asc";
+            string consulta = "select * from Legajo where Renglon = 1 order by Descripcion, Codigo";
             System.Data.DataTable Dt = repo.Listar(consulta);
             return Dt;
         }

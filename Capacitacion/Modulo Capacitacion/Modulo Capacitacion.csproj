@@ -487,6 +487,12 @@
       <DependentUpon>Rpt_ListadoDeCursosRealizadosPorLegajo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\wlistacursoplani.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wlistacursoplani.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
@@ -703,6 +709,10 @@
     <EmbeddedResource Include="Reportes\Rpt_ListadoDeCursosRealizadosPorLegajo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_ListadoDeCursosRealizadosPorLegajo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\wlistacursoplani.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wlistacursoplani.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

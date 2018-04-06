@@ -22,13 +22,13 @@ Partial Class ConsultaInformacionPersonal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -114,18 +114,18 @@ Partial Class ConsultaInformacionPersonal
         Me.TituloFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ObservacionesFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdFormacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.btnConsultas = New System.Windows.Forms.Button()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnEliminar = New System.Windows.Forms.Button()
-        Me.btnAceptar = New System.Windows.Forms.Button()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.dgvArchivos = New System.Windows.Forms.DataGridView()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Icono = New System.Windows.Forms.DataGridViewImageColumn()
         Me.RutaArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.btnConsultas = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.btnAceptar = New System.Windows.Forms.Button()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -146,9 +146,9 @@ Partial Class ConsultaInformacionPersonal
         CType(Me.dgvIndumentaria, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage4.SuspendLayout()
         CType(Me.dgvEducacion, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel5.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -269,7 +269,7 @@ Partial Class ConsultaInformacionPersonal
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(203, 384)
+        Me.pnlConsulta.Location = New System.Drawing.Point(203, 22)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(403, 358)
         Me.pnlConsulta.TabIndex = 2
@@ -708,16 +708,16 @@ Partial Class ConsultaInformacionPersonal
         '
         'DniHijo
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle1
         Me.DniHijo.HeaderText = "DNI"
         Me.DniHijo.MaxInputLength = 8
         Me.DniHijo.Name = "DniHijo"
         '
         'EdadHijo
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle2
         Me.EdadHijo.HeaderText = "Edad"
         Me.EdadHijo.MaxInputLength = 2
         Me.EdadHijo.Name = "EdadHijo"
@@ -725,8 +725,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'FechaNacimientoHijo
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle3
         Me.FechaNacimientoHijo.HeaderText = "Fecha Nac."
         Me.FechaNacimientoHijo.MaxInputLength = 10
         Me.FechaNacimientoHijo.Name = "FechaNacimientoHijo"
@@ -897,8 +897,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'Talle
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talle.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talle.DefaultCellStyle = DataGridViewCellStyle4
         Me.Talle.HeaderText = "Talle"
         Me.Talle.MaxInputLength = 2
         Me.Talle.Name = "Talle"
@@ -1077,6 +1077,79 @@ Partial Class ConsultaInformacionPersonal
         Me.IdFormacion.Name = "IdFormacion"
         Me.IdFormacion.Visible = False
         '
+        'TabPage5
+        '
+        Me.TabPage5.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabPage5.Controls.Add(Me.dgvArchivos)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 34)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(734, 332)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "ARCHIVOS"
+        '
+        'dgvArchivos
+        '
+        Me.dgvArchivos.AllowDrop = True
+        Me.dgvArchivos.AllowUserToAddRows = False
+        Me.dgvArchivos.AllowUserToDeleteRows = False
+        Me.dgvArchivos.AllowUserToOrderColumns = True
+        Me.dgvArchivos.AllowUserToResizeRows = False
+        Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Observacion, Me.Icono, Me.RutaArchivo})
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.dgvArchivos.Location = New System.Drawing.Point(8, 11)
+        Me.dgvArchivos.MultiSelect = False
+        Me.dgvArchivos.Name = "dgvArchivos"
+        Me.dgvArchivos.RowTemplate.Height = 40
+        Me.dgvArchivos.Size = New System.Drawing.Size(718, 310)
+        Me.dgvArchivos.TabIndex = 10
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 12
+        Me.Fecha.MinimumWidth = 100
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        Me.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Observacion
+        '
+        Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Observacion.HeaderText = "Observación"
+        Me.Observacion.Name = "Observacion"
+        Me.Observacion.ReadOnly = True
+        Me.Observacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Icono
+        '
+        Me.Icono.HeaderText = ""
+        Me.Icono.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.Icono.Name = "Icono"
+        Me.Icono.ReadOnly = True
+        Me.Icono.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Icono.Width = 50
+        '
+        'RutaArchivo
+        '
+        Me.RutaArchivo.HeaderText = "Tipo"
+        Me.RutaArchivo.Name = "RutaArchivo"
+        Me.RutaArchivo.Visible = False
+        Me.RutaArchivo.Width = 80
+        '
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.btnCerrar)
@@ -1136,79 +1209,6 @@ Partial Class ConsultaInformacionPersonal
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'TabPage5
-        '
-        Me.TabPage5.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.TabPage5.Controls.Add(Me.dgvArchivos)
-        Me.TabPage5.Location = New System.Drawing.Point(4, 34)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(734, 332)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "ARCHIVOS"
-        '
-        'dgvArchivos
-        '
-        Me.dgvArchivos.AllowDrop = True
-        Me.dgvArchivos.AllowUserToAddRows = False
-        Me.dgvArchivos.AllowUserToDeleteRows = False
-        Me.dgvArchivos.AllowUserToOrderColumns = True
-        Me.dgvArchivos.AllowUserToResizeRows = False
-        Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Observacion, Me.Icono, Me.RutaArchivo})
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle11
-        Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.dgvArchivos.Location = New System.Drawing.Point(8, 11)
-        Me.dgvArchivos.MultiSelect = False
-        Me.dgvArchivos.Name = "dgvArchivos"
-        Me.dgvArchivos.RowTemplate.Height = 40
-        Me.dgvArchivos.Size = New System.Drawing.Size(718, 310)
-        Me.dgvArchivos.TabIndex = 10
-        '
-        'Fecha
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle9
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.MaxInputLength = 12
-        Me.Fecha.MinimumWidth = 100
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        Me.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Observacion
-        '
-        Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle10
-        Me.Observacion.HeaderText = "Observación"
-        Me.Observacion.Name = "Observacion"
-        Me.Observacion.ReadOnly = True
-        Me.Observacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Icono
-        '
-        Me.Icono.HeaderText = ""
-        Me.Icono.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
-        Me.Icono.Name = "Icono"
-        Me.Icono.ReadOnly = True
-        Me.Icono.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Icono.Width = 50
-        '
-        'RutaArchivo
-        '
-        Me.RutaArchivo.HeaderText = "Tipo"
-        Me.RutaArchivo.Name = "RutaArchivo"
-        Me.RutaArchivo.Visible = False
-        Me.RutaArchivo.Width = 80
-        '
         'ConsultaInformacionPersonal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1246,9 +1246,9 @@ Partial Class ConsultaInformacionPersonal
         CType(Me.dgvIndumentaria, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage4.ResumeLayout(False)
         CType(Me.dgvEducacion, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel5.ResumeLayout(False)
         Me.TabPage5.ResumeLayout(False)
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel5.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

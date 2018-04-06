@@ -52,8 +52,10 @@
             this.Mes11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mes12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TB_Año = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.BT_Salir = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BT_Guardar = new System.Windows.Forms.Button();
+            this.BT_Limpiar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -94,6 +96,8 @@
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
             this.panel3.Controls.Add(this.DGV_Cronograma);
             this.panel3.Controls.Add(this.TB_Año);
+            this.panel3.Controls.Add(this.BT_Limpiar);
+            this.panel3.Controls.Add(this.BT_Guardar);
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Location = new System.Drawing.Point(7, 6);
@@ -128,7 +132,7 @@
             this.Mes12});
             this.DGV_Cronograma.Location = new System.Drawing.Point(11, 40);
             this.DGV_Cronograma.Name = "DGV_Cronograma";
-            this.DGV_Cronograma.Size = new System.Drawing.Size(760, 430);
+            this.DGV_Cronograma.Size = new System.Drawing.Size(760, 432);
             this.DGV_Cronograma.TabIndex = 36;
             this.DGV_Cronograma.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Cronograma_CellDoubleClick);
             // 
@@ -273,6 +277,19 @@
             this.TB_Año.TabIndex = 35;
             this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
             // 
+            // BT_Salir
+            // 
+            this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Salir.Location = new System.Drawing.Point(479, 486);
+            this.BT_Salir.Name = "BT_Salir";
+            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.TabIndex = 27;
+            this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -283,18 +300,31 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Año:";
             // 
-            // BT_Salir
+            // BT_Guardar
             // 
-            this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
-            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(365, 493);
-            this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Salir.TabIndex = 27;
-            this.BT_Salir.UseVisualStyleBackColor = true;
-            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
+            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.grabar;
+            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Guardar.Location = new System.Drawing.Point(271, 486);
+            this.BT_Guardar.Name = "BT_Guardar";
+            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
+            this.BT_Guardar.TabIndex = 27;
+            this.BT_Guardar.UseVisualStyleBackColor = true;
+            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
+            // 
+            // BT_Limpiar
+            // 
+            this.BT_Limpiar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.limpiar;
+            this.BT_Limpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Limpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Limpiar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Limpiar.Location = new System.Drawing.Point(375, 486);
+            this.BT_Limpiar.Name = "BT_Limpiar";
+            this.BT_Limpiar.Size = new System.Drawing.Size(40, 40);
+            this.BT_Limpiar.TabIndex = 27;
+            this.BT_Limpiar.UseVisualStyleBackColor = true;
+            this.BT_Limpiar.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
             // 
             // IngreDeCursosRealizados
             // 
@@ -343,5 +373,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes12;
+        private System.Windows.Forms.Button BT_Limpiar;
+        private System.Windows.Forms.Button BT_Guardar;
     }
 }

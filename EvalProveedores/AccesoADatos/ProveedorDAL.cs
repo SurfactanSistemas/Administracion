@@ -53,7 +53,7 @@ namespace AccesoADatos
             {
                 cnx.Open();
 
-                const string sqlQuery = "SELECT * FROM Proveedor ORDER BY Proveedor ASC";
+                const string sqlQuery = "SELECT Proveedor, Nombre, Estado FROM Proveedor ORDER BY Proveedor ASC";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, cnx))
                 {
                     SqlDataReader dataReader = cmd.ExecuteReader();

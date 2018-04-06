@@ -49,10 +49,9 @@
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -229,16 +228,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "EVALUACION DE PROVEEDORES";
             // 
-            // pictureBox1
+            // panel2
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::Eval_Proveedores.Properties.Resources.marcadeagua;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 24);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(784, 538);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.panel2.BackgroundImage = global::Eval_Proveedores.Properties.Resources.marcadeagua2;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 64);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(784, 498);
+            this.panel2.TabIndex = 3;
             // 
             // Inicio
             // 
@@ -246,16 +243,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Inicio";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,7 +260,6 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem maestrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ingCamionesToolStripMenuItem;
@@ -285,6 +281,7 @@
         private System.Windows.Forms.ToolStripMenuItem listadoDeCheckListDeHojaDeRutaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeEvaluacionesToolStripMenuItem;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 

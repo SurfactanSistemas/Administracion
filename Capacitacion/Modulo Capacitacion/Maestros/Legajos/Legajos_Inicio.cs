@@ -33,6 +33,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             dtMuestraInicio.Columns.Add("Vigencia", typeof(string));
             dtMuestraInicio.Columns.Add("Sector", typeof(string));
             dtMuestraInicio.Columns.Add("Perfil", typeof(string));
+            dtMuestraInicio.Columns.Add("Dni", typeof(string));
+            dtMuestraInicio.Columns.Add("Egreso", typeof(string));
         }
 
         private void Bt_Fin_Click(object sender, EventArgs e)
@@ -57,6 +59,15 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             ArmardtMuestra();
             DGV_Legajos.DataSource = dtMuestraInicio;
 
+            if (ckSoloActivos.Checked)
+            {
+                DataTable dataTable = DGV_Legajos.DataSource as DataTable;
+                if (dataTable != null)
+                    dataTable.DefaultView.RowFilter = "CONVERT(Egreso, System.String) = '00/00/0000' OR CONVERT(Egreso, System.String) = '  /  /    '";
+            }
+
+            DGV_Legajos.Columns["Egreso"].Visible = false;
+
             TBFiltro.Focus();
         }
 
@@ -76,6 +87,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 dr["Vigencia"] = fila[30].ToString();
                 dr["Perfil"] = fila[32].ToString();
                 dr["Sector"] = fila[55].ToString();
+                dr["Dni"] = fila["Dni"].ToString();
+                dr["Egreso"] = fila["FEgreso"].ToString();
 
                 dtMuestraInicio.Rows.Add(dr);
 
@@ -133,6 +146,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                                                     + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
                                                     + " OR CONVERT(Vigencia, System.String) like '%{0}%'"
                                                     + " OR CONVERT(Sector, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(Dni, System.String) like '%{0}%'"
                                                     + " OR CONVERT(Perfil, System.String) like '%{0}%'", TBFiltro.Text);
             }
             else
@@ -164,6 +178,11 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             Listados.Legajos.Inicio frm = new Listados.Legajos.Inicio();
             frm.ShowDialog();
 
+            ActualizarGrilla();
+        }
+
+        private void ckSoloActivos_CheckedChanged(object sender, EventArgs e)
+        {
             ActualizarGrilla();
         }
     }

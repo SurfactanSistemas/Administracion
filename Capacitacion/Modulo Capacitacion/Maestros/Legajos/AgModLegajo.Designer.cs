@@ -224,7 +224,8 @@
             // TB_PerfilAct
             // 
             this.TB_PerfilAct.BackColor = System.Drawing.Color.Firebrick;
-            this.TB_PerfilAct.Location = new System.Drawing.Point(5, 46);
+            this.TB_PerfilAct.ForeColor = System.Drawing.SystemColors.Control;
+            this.TB_PerfilAct.Location = new System.Drawing.Point(548, 71);
             this.TB_PerfilAct.Name = "TB_PerfilAct";
             this.TB_PerfilAct.Size = new System.Drawing.Size(421, 20);
             this.TB_PerfilAct.TabIndex = 49;

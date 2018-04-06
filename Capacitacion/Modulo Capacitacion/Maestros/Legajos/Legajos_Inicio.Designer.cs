@@ -32,14 +32,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGV_Legajos = new System.Windows.Forms.DataGridView();
-            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Vigencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.P_Filtrado = new System.Windows.Forms.Panel();
+            this.ckSoloActivos = new System.Windows.Forms.CheckBox();
             this.TBFiltro = new System.Windows.Forms.TextBox();
             this.LBFiltro = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -54,6 +49,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.legajoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Vigencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Legajos)).BeginInit();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -92,55 +93,9 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.DGV_Legajos.Size = new System.Drawing.Size(677, 441);
+            this.DGV_Legajos.Size = new System.Drawing.Size(750, 441);
             this.DGV_Legajos.TabIndex = 26;
             this.DGV_Legajos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
-            // 
-            // Clave
-            // 
-            this.Clave.DataPropertyName = "Clave";
-            this.Clave.HeaderText = "Clave";
-            this.Clave.Name = "Clave";
-            this.Clave.Visible = false;
-            this.Clave.Width = 59;
-            // 
-            // Codigo
-            // 
-            this.Codigo.DataPropertyName = "Codigo";
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.Name = "Codigo";
-            this.Codigo.Visible = false;
-            this.Codigo.Width = 65;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Nombre de Empleado";
-            this.Descripcion.Name = "Descripcion";
-            // 
-            // Vigencia
-            // 
-            this.Vigencia.DataPropertyName = "Vigencia";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Vigencia.HeaderText = "Vigencia";
-            this.Vigencia.Name = "Vigencia";
-            this.Vigencia.Width = 73;
-            // 
-            // Sector
-            // 
-            this.Sector.DataPropertyName = "Sector";
-            this.Sector.HeaderText = "Sector";
-            this.Sector.Name = "Sector";
-            this.Sector.Width = 63;
-            // 
-            // Perfil
-            // 
-            this.Perfil.DataPropertyName = "Perfil";
-            this.Perfil.HeaderText = "Perfil";
-            this.Perfil.Name = "Perfil";
-            this.Perfil.Width = 55;
             // 
             // P_Verde
             // 
@@ -151,19 +106,34 @@
             this.P_Verde.Location = new System.Drawing.Point(0, 39);
             this.P_Verde.Margin = new System.Windows.Forms.Padding(0);
             this.P_Verde.Name = "P_Verde";
-            this.P_Verde.Size = new System.Drawing.Size(762, 59);
+            this.P_Verde.Size = new System.Drawing.Size(835, 59);
             this.P_Verde.TabIndex = 21;
             // 
             // P_Filtrado
             // 
+            this.P_Filtrado.Controls.Add(this.ckSoloActivos);
             this.P_Filtrado.Controls.Add(this.TBFiltro);
             this.P_Filtrado.Controls.Add(this.LBFiltro);
             this.P_Filtrado.Dock = System.Windows.Forms.DockStyle.Fill;
             this.P_Filtrado.Location = new System.Drawing.Point(0, 0);
             this.P_Filtrado.Margin = new System.Windows.Forms.Padding(0);
             this.P_Filtrado.Name = "P_Filtrado";
-            this.P_Filtrado.Size = new System.Drawing.Size(762, 59);
+            this.P_Filtrado.Size = new System.Drawing.Size(835, 59);
             this.P_Filtrado.TabIndex = 1;
+            // 
+            // ckSoloActivos
+            // 
+            this.ckSoloActivos.AutoSize = true;
+            this.ckSoloActivos.Checked = true;
+            this.ckSoloActivos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckSoloActivos.ForeColor = System.Drawing.SystemColors.Control;
+            this.ckSoloActivos.Location = new System.Drawing.Point(707, 18);
+            this.ckSoloActivos.Name = "ckSoloActivos";
+            this.ckSoloActivos.Size = new System.Drawing.Size(85, 17);
+            this.ckSoloActivos.TabIndex = 2;
+            this.ckSoloActivos.Text = "Solo Activos";
+            this.ckSoloActivos.UseVisualStyleBackColor = true;
+            this.ckSoloActivos.CheckedChanged += new System.EventHandler(this.ckSoloActivos_CheckedChanged);
             // 
             // TBFiltro
             // 
@@ -195,7 +165,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(762, 39);
+            this.panel1.Size = new System.Drawing.Size(835, 39);
             this.panel1.TabIndex = 20;
             // 
             // label2
@@ -215,7 +185,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(598, 6);
+            this.label1.Location = new System.Drawing.Point(671, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 24);
             this.label1.TabIndex = 0;
@@ -290,7 +260,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(762, 539);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(835, 539);
             this.tableLayoutPanel1.TabIndex = 27;
             // 
             // tableLayoutPanel2
@@ -306,7 +276,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(762, 441);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(835, 441);
             this.tableLayoutPanel2.TabIndex = 22;
             // 
             // panel2
@@ -339,11 +309,57 @@
             // 
             this.legajoBindingSource.DataSource = typeof(Negocio.Legajo);
             // 
+            // Clave
+            // 
+            this.Clave.DataPropertyName = "Clave";
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.Visible = false;
+            this.Clave.Width = 59;
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "Codigo";
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.Visible = false;
+            this.Codigo.Width = 65;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Nombre de Empleado";
+            this.Descripcion.Name = "Descripcion";
+            // 
+            // Vigencia
+            // 
+            this.Vigencia.DataPropertyName = "Vigencia";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Vigencia.HeaderText = "Vigencia";
+            this.Vigencia.Name = "Vigencia";
+            this.Vigencia.Width = 73;
+            // 
+            // Sector
+            // 
+            this.Sector.DataPropertyName = "Sector";
+            this.Sector.HeaderText = "Sector";
+            this.Sector.Name = "Sector";
+            this.Sector.Width = 63;
+            // 
+            // Perfil
+            // 
+            this.Perfil.DataPropertyName = "Perfil";
+            this.Perfil.HeaderText = "Perfil";
+            this.Perfil.Name = "Perfil";
+            this.Perfil.Width = 55;
+            // 
             // Legajos_Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(762, 539);
+            this.ClientSize = new System.Drawing.Size(835, 539);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(723, 462);
             this.Name = "Legajos_Inicio";
@@ -381,12 +397,13 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnImprimir;
+        private System.Windows.Forms.CheckBox ckSoloActivos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Vigencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sector;
         private System.Windows.Forms.DataGridViewTextBoxColumn Perfil;
-        private System.Windows.Forms.Button btnImprimir;
     }
 }

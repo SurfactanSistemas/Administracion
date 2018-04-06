@@ -43,10 +43,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.TB_Estado = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblCalificacion3 = new System.Windows.Forms.Label();
+            this.lblCalificacion2 = new System.Windows.Forms.Label();
+            this.lblCalificacion1 = new System.Windows.Forms.Label();
+            this.BT_Inhabilitar = new System.Windows.Forms.Button();
             this.TB_Año = new System.Windows.Forms.MaskedTextBox();
             this.TB_Mes = new System.Windows.Forms.MaskedTextBox();
+            this.BT_CalificProve = new System.Windows.Forms.Button();
             this.TB_ObservEva = new System.Windows.Forms.TextBox();
             this.TB_ObservProve = new System.Windows.Forms.TextBox();
+            this.BT_Salir = new System.Windows.Forms.Button();
+            this.BT_LimpiarPant = new System.Windows.Forms.Button();
+            this.BT_Guardar = new System.Windows.Forms.Button();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
@@ -95,11 +103,6 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.BT_Inhabilitar = new System.Windows.Forms.Button();
-            this.BT_CalificProve = new System.Windows.Forms.Button();
-            this.BT_Salir = new System.Windows.Forms.Button();
-            this.BT_LimpiarPant = new System.Windows.Forms.Button();
-            this.BT_Guardar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -244,6 +247,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblCalificacion3);
+            this.groupBox2.Controls.Add(this.lblCalificacion2);
+            this.groupBox2.Controls.Add(this.lblCalificacion1);
             this.groupBox2.Controls.Add(this.BT_Inhabilitar);
             this.groupBox2.Controls.Add(this.TB_Año);
             this.groupBox2.Controls.Add(this.TB_Mes);
@@ -278,6 +284,58 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EVALUACIÓN";
             // 
+            // lblCalificacion3
+            // 
+            this.lblCalificacion3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.lblCalificacion3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCalificacion3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblCalificacion3.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblCalificacion3.Location = new System.Drawing.Point(754, 315);
+            this.lblCalificacion3.Name = "lblCalificacion3";
+            this.lblCalificacion3.Size = new System.Drawing.Size(121, 21);
+            this.lblCalificacion3.TabIndex = 110;
+            this.lblCalificacion3.Text = "label1";
+            this.lblCalificacion3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCalificacion2
+            // 
+            this.lblCalificacion2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.lblCalificacion2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCalificacion2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblCalificacion2.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblCalificacion2.Location = new System.Drawing.Point(616, 315);
+            this.lblCalificacion2.Name = "lblCalificacion2";
+            this.lblCalificacion2.Size = new System.Drawing.Size(121, 21);
+            this.lblCalificacion2.TabIndex = 110;
+            this.lblCalificacion2.Text = "label1";
+            this.lblCalificacion2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCalificacion1
+            // 
+            this.lblCalificacion1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.lblCalificacion1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCalificacion1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblCalificacion1.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblCalificacion1.Location = new System.Drawing.Point(476, 317);
+            this.lblCalificacion1.Name = "lblCalificacion1";
+            this.lblCalificacion1.Size = new System.Drawing.Size(121, 21);
+            this.lblCalificacion1.TabIndex = 110;
+            this.lblCalificacion1.Text = "label1";
+            this.lblCalificacion1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BT_Inhabilitar
+            // 
+            this.BT_Inhabilitar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Inhabilitar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BT_Inhabilitar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Inhabilitar.Location = new System.Drawing.Point(719, 405);
+            this.BT_Inhabilitar.Name = "BT_Inhabilitar";
+            this.BT_Inhabilitar.Size = new System.Drawing.Size(142, 27);
+            this.BT_Inhabilitar.TabIndex = 109;
+            this.toolTip1.SetToolTip(this.BT_Inhabilitar, "Calificar");
+            this.BT_Inhabilitar.UseVisualStyleBackColor = true;
+            this.BT_Inhabilitar.Click += new System.EventHandler(this.BT_Inhabilitar_Click);
+            // 
             // TB_Año
             // 
             this.TB_Año.Location = new System.Drawing.Point(127, 28);
@@ -298,9 +356,22 @@
             this.TB_Mes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Mes_KeyDown_1);
             this.TB_Mes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TB_Mes_KeyPress_1);
             // 
+            // BT_CalificProve
+            // 
+            this.BT_CalificProve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_CalificProve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_CalificProve.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_CalificProve.Location = new System.Drawing.Point(476, 345);
+            this.BT_CalificProve.Name = "BT_CalificProve";
+            this.BT_CalificProve.Size = new System.Drawing.Size(40, 40);
+            this.BT_CalificProve.TabIndex = 83;
+            this.toolTip1.SetToolTip(this.BT_CalificProve, "Calificar");
+            this.BT_CalificProve.UseVisualStyleBackColor = true;
+            this.BT_CalificProve.Click += new System.EventHandler(this.BT_CalificProve_Click);
+            // 
             // TB_ObservEva
             // 
-            this.TB_ObservEva.Location = new System.Drawing.Point(443, 439);
+            this.TB_ObservEva.Location = new System.Drawing.Point(408, 439);
             this.TB_ObservEva.Multiline = true;
             this.TB_ObservEva.Name = "TB_ObservEva";
             this.TB_ObservEva.Size = new System.Drawing.Size(350, 82);
@@ -314,10 +385,51 @@
             this.TB_ObservProve.Size = new System.Drawing.Size(350, 82);
             this.TB_ObservProve.TabIndex = 21;
             // 
+            // BT_Salir
+            // 
+            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Salir.Location = new System.Drawing.Point(259, 347);
+            this.BT_Salir.Name = "BT_Salir";
+            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.TabIndex = 78;
+            this.toolTip1.SetToolTip(this.BT_Salir, "Salir");
+            this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
+            // 
+            // BT_LimpiarPant
+            // 
+            this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_LimpiarPant.Location = new System.Drawing.Point(188, 347);
+            this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_LimpiarPant.Name = "BT_LimpiarPant";
+            this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
+            this.BT_LimpiarPant.TabIndex = 77;
+            this.toolTip1.SetToolTip(this.BT_LimpiarPant, "Limpiar\r\nPantalla");
+            this.BT_LimpiarPant.UseVisualStyleBackColor = true;
+            this.BT_LimpiarPant.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
+            // 
+            // BT_Guardar
+            // 
+            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Guardar.Location = new System.Drawing.Point(114, 347);
+            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_Guardar.Name = "BT_Guardar";
+            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
+            this.BT_Guardar.TabIndex = 76;
+            this.toolTip1.SetToolTip(this.BT_Guardar, "Guardar");
+            this.BT_Guardar.UseVisualStyleBackColor = true;
+            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
+            // 
             // textBox16
             // 
             this.textBox16.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox16.Location = new System.Drawing.Point(501, 405);
+            this.textBox16.Location = new System.Drawing.Point(454, 405);
             this.textBox16.Name = "textBox16";
             this.textBox16.ReadOnly = true;
             this.textBox16.Size = new System.Drawing.Size(259, 27);
@@ -327,7 +439,7 @@
             // textBox15
             // 
             this.textBox15.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox15.Location = new System.Drawing.Point(89, 405);
+            this.textBox15.Location = new System.Drawing.Point(101, 405);
             this.textBox15.Name = "textBox15";
             this.textBox15.ReadOnly = true;
             this.textBox15.Size = new System.Drawing.Size(239, 27);
@@ -355,30 +467,33 @@
             // 
             // TB_Promedio3
             // 
-            this.TB_Promedio3.Location = new System.Drawing.Point(754, 318);
+            this.TB_Promedio3.Location = new System.Drawing.Point(443, 316);
             this.TB_Promedio3.Name = "TB_Promedio3";
             this.TB_Promedio3.ReadOnly = true;
-            this.TB_Promedio3.Size = new System.Drawing.Size(121, 20);
+            this.TB_Promedio3.Size = new System.Drawing.Size(18, 20);
             this.TB_Promedio3.TabIndex = 69;
             this.TB_Promedio3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio3_MouseClick);
+            this.TB_Promedio3.TextChanged += new System.EventHandler(this._ActualizarCalificacion);
             // 
             // TB_Promedio2
             // 
-            this.TB_Promedio2.Location = new System.Drawing.Point(616, 318);
+            this.TB_Promedio2.Location = new System.Drawing.Point(425, 316);
             this.TB_Promedio2.Name = "TB_Promedio2";
             this.TB_Promedio2.ReadOnly = true;
-            this.TB_Promedio2.Size = new System.Drawing.Size(121, 20);
+            this.TB_Promedio2.Size = new System.Drawing.Size(18, 20);
             this.TB_Promedio2.TabIndex = 68;
             this.TB_Promedio2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio2_MouseClick);
+            this.TB_Promedio2.TextChanged += new System.EventHandler(this._ActualizarCalificacion);
             // 
             // TB_Promedio1
             // 
-            this.TB_Promedio1.Location = new System.Drawing.Point(476, 318);
+            this.TB_Promedio1.Location = new System.Drawing.Point(405, 316);
             this.TB_Promedio1.Name = "TB_Promedio1";
             this.TB_Promedio1.ReadOnly = true;
-            this.TB_Promedio1.Size = new System.Drawing.Size(121, 20);
+            this.TB_Promedio1.Size = new System.Drawing.Size(18, 20);
             this.TB_Promedio1.TabIndex = 67;
             this.TB_Promedio1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio1_MouseClick);
+            this.TB_Promedio1.TextChanged += new System.EventHandler(this._ActualizarCalificacion);
             // 
             // textBox9
             // 
@@ -799,6 +914,7 @@
             this.CB_Calif11.TabIndex = 6;
             this.CB_Calif11.Visible = false;
             this.CB_Calif11.SelectedIndexChanged += new System.EventHandler(this.CB_Calif11_SelectedIndexChanged);
+            this.CB_Calif11.TextUpdate += new System.EventHandler(this._ActualizarCalificacion);
             this.CB_Calif11.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif11_KeyDown);
             this.CB_Calif11.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif11_MouseClick);
             // 
@@ -842,84 +958,12 @@
             this.label2.TabIndex = 42;
             this.label2.Text = "Periodo:";
             // 
-            // BT_Inhabilitar
-            // 
-            this.BT_Inhabilitar.BackgroundImage = global::Eval_Proveedores.Properties.Resources.INHABILITAR;
-            this.BT_Inhabilitar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Inhabilitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Inhabilitar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Inhabilitar.Location = new System.Drawing.Point(798, 392);
-            this.BT_Inhabilitar.Name = "BT_Inhabilitar";
-            this.BT_Inhabilitar.Size = new System.Drawing.Size(40, 40);
-            this.BT_Inhabilitar.TabIndex = 109;
-            this.toolTip1.SetToolTip(this.BT_Inhabilitar, "Calificar");
-            this.BT_Inhabilitar.UseVisualStyleBackColor = true;
-            this.BT_Inhabilitar.Click += new System.EventHandler(this.BT_Inhabilitar_Click);
-            // 
-            // BT_CalificProve
-            // 
-            this.BT_CalificProve.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Calificar;
-            this.BT_CalificProve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_CalificProve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_CalificProve.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_CalificProve.Location = new System.Drawing.Point(476, 345);
-            this.BT_CalificProve.Name = "BT_CalificProve";
-            this.BT_CalificProve.Size = new System.Drawing.Size(40, 40);
-            this.BT_CalificProve.TabIndex = 83;
-            this.toolTip1.SetToolTip(this.BT_CalificProve, "Calificar");
-            this.BT_CalificProve.UseVisualStyleBackColor = true;
-            this.BT_CalificProve.Click += new System.EventHandler(this.BT_CalificProve_Click);
-            // 
-            // BT_Salir
-            // 
-            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
-            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(259, 347);
-            this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Salir.TabIndex = 78;
-            this.toolTip1.SetToolTip(this.BT_Salir, "Salir");
-            this.BT_Salir.UseVisualStyleBackColor = true;
-            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
-            // 
-            // BT_LimpiarPant
-            // 
-            this.BT_LimpiarPant.BackgroundImage = global::Eval_Proveedores.Properties.Resources.LimpiarPant1;
-            this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_LimpiarPant.Location = new System.Drawing.Point(188, 347);
-            this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_LimpiarPant.Name = "BT_LimpiarPant";
-            this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
-            this.BT_LimpiarPant.TabIndex = 77;
-            this.toolTip1.SetToolTip(this.BT_LimpiarPant, "Limpiar\r\nPantalla");
-            this.BT_LimpiarPant.UseVisualStyleBackColor = true;
-            this.BT_LimpiarPant.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
-            // 
-            // BT_Guardar
-            // 
-            this.BT_Guardar.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Grabar;
-            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(114, 347);
-            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_Guardar.Name = "BT_Guardar";
-            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
-            this.BT_Guardar.TabIndex = 76;
-            this.toolTip1.SetToolTip(this.BT_Guardar, "Guardar");
-            this.BT_Guardar.UseVisualStyleBackColor = true;
-            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
-            // 
             // IngEvalMantenimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(911, 682);
+            this.ClientSize = new System.Drawing.Size(911, 681);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
@@ -1022,5 +1066,8 @@
         private System.Windows.Forms.MaskedTextBox TB_Año;
         private System.Windows.Forms.ComboBox CB_ObservProve;
         private System.Windows.Forms.Button BT_Inhabilitar;
+        private System.Windows.Forms.Label lblCalificacion3;
+        private System.Windows.Forms.Label lblCalificacion2;
+        private System.Windows.Forms.Label lblCalificacion1;
     }
 }

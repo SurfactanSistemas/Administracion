@@ -16,14 +16,14 @@ namespace Modulo_Capacitacion.Reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Rpt_ListadoDeCursosRealizadosPorLegajo : ReportClass {
+    public class wlistacursoplani : ReportClass {
         
-        public Rpt_ListadoDeCursosRealizadosPorLegajo() {
+        public wlistacursoplani() {
         }
         
         public override string ResourceName {
             get {
-                return "Rpt_ListadoDeCursosRealizadosPorLegajo.rpt";
+                return "wlistacursoplani.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Modulo_Capacitacion.Reportes {
         
         public override string FullResourceName {
             get {
-                return "Modulo_Capacitacion.Reportes.Rpt_ListadoDeCursosRealizadosPorLegajo.rpt";
+                return "Modulo_Capacitacion.Reportes.wlistacursoplani.rpt";
             }
             set {
                 // Do nothing
@@ -50,7 +50,7 @@ namespace Modulo_Capacitacion.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section1 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[0];
             }
@@ -58,7 +58,7 @@ namespace Modulo_Capacitacion.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section2 {
+        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[1];
             }
@@ -66,7 +66,7 @@ namespace Modulo_Capacitacion.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace Modulo_Capacitacion.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection1 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace Modulo_Capacitacion.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,33 +90,25 @@ namespace Modulo_Capacitacion.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Año {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
             get {
-                return this.DataDefinition.ParameterFields[0];
+                return this.ReportDefinition.Sections[5];
             }
         }
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Curso {
+        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
             get {
-                return this.DataDefinition.ParameterFields[1];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Realizado {
-            get {
-                return this.DataDefinition.ParameterFields[2];
+                return this.ReportDefinition.Sections[6];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRpt_ListadoDeCursosRealizadosPorLegajo : Component, ICachedReport {
+    public class Cachedwlistacursoplani : Component, ICachedReport {
         
-        public CachedRpt_ListadoDeCursosRealizadosPorLegajo() {
+        public Cachedwlistacursoplani() {
         }
         
         [Browsable(false)]
@@ -153,7 +145,7 @@ namespace Modulo_Capacitacion.Reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Rpt_ListadoDeCursosRealizadosPorLegajo rpt = new Rpt_ListadoDeCursosRealizadosPorLegajo();
+            wlistacursoplani rpt = new wlistacursoplani();
             rpt.Site = this.Site;
             return rpt;
         }

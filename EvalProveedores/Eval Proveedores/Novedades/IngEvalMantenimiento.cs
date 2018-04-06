@@ -70,6 +70,15 @@ namespace Eval_Proveedores.Novedades
             CargarCBprimeraFila();
             CargarCBSegFila();
             CargarCBRestoFila();
+
+            lblCalificacion1.Text = "";
+            lblCalificacion2.Text = "";
+            lblCalificacion3.Text = "";
+
+            TB_Promedio1.Visible = false;
+            TB_Promedio2.Visible = false;
+            TB_Promedio3.Visible = false;
+
             if (Modificar == true)
             {
                 BuscarTitulo();
@@ -94,7 +103,7 @@ namespace Eval_Proveedores.Novedades
 
                 if (Eva.Sector1 != 0)
                 {
-                    CB_Sec1.Text = Eva.DesSector1;
+                    CB_Sec1.SelectedIndex = Eva.Sector1;
                     CB_Calif11.SelectedIndex = int.Parse(Eva.Calif11.ToString());
                     CB_Calif12.SelectedIndex = int.Parse(Eva.Calif12.ToString());
                     CB_Calif13.SelectedIndex = int.Parse(Eva.Calif13.ToString());
@@ -106,7 +115,7 @@ namespace Eval_Proveedores.Novedades
 
                 if (Eva.Sector2 != 0)
                 {
-                    CB_Sec2.Text = Eva.DesSector2;
+                    CB_Sec2.SelectedIndex = Eva.Sector2;
                     CB_Calif21.SelectedIndex = int.Parse(Eva.Calif21.ToString());
                     CB_Calif22.SelectedIndex = int.Parse(Eva.Calif22.ToString());
                     CB_Calif23.SelectedIndex = int.Parse(Eva.Calif23.ToString());
@@ -118,7 +127,7 @@ namespace Eval_Proveedores.Novedades
 
                 if (Eva.Sector3 != 0)
                 {
-                    CB_Sec3.Text = Eva.DesSector3;
+                    CB_Sec3.SelectedIndex = Eva.Sector3;
                     CB_Calif31.SelectedIndex = int.Parse(Eva.Calif31.ToString());
                     CB_Calif32.SelectedIndex = int.Parse(Eva.Calif32.ToString());
                     CB_Calif33.SelectedIndex = int.Parse(Eva.Calif33.ToString());
@@ -129,7 +138,7 @@ namespace Eval_Proveedores.Novedades
                 }
 
                 TB_PromedioTot.Text = Eva.PromedioTot.ToString();
-                TB_ObservEva.Text = Eva.Observ.ToString();
+                TB_ObservEva.Text = Eva.Observ;
 
                 
                 
@@ -1384,28 +1393,72 @@ namespace Eval_Proveedores.Novedades
             TB_Estado.Visible = true;
         }
 
-        
+        private void _ActualizarCalificacion(object sender, EventArgs e)
+        {
+            short WCalif1, WCalif2, WCalif3;
 
-        
+            TB_Promedio1.Visible = false;
+            TB_Promedio2.Visible = false;
+            TB_Promedio3.Visible = false;
 
-        
+            WCalif1 = TB_Promedio1.Text == "" ? short.Parse("0") :short.Parse(TB_Promedio1.Text);
+            WCalif2 = TB_Promedio2.Text == "" ? short.Parse("0") :short.Parse(TB_Promedio2.Text);
+            WCalif3 = TB_Promedio3.Text == "" ? short.Parse("0") :short.Parse(TB_Promedio3.Text);
 
-       
+            lblCalificacion1.Text = _ObtenerDescripcionCalificacion(WCalif1);
+            lblCalificacion2.Text = _ObtenerDescripcionCalificacion(WCalif2);
+            lblCalificacion3.Text = _ObtenerDescripcionCalificacion(WCalif3);
 
-        
+            lblCalificacion1.BackColor = _DeterminarColorPorCalificacion(WCalif1);
+            lblCalificacion2.BackColor = _DeterminarColorPorCalificacion(WCalif2);
+            lblCalificacion3.BackColor = _DeterminarColorPorCalificacion(WCalif3);
 
-        
+        }
 
-       
+        private Color _DeterminarColorPorCalificacion(short WCalif1)
+        {
+            switch (WCalif1)
+            {
+                case 1:
+                    {
+                        return Color.OrangeRed;
+                    }
+                case 5:
+                    {
+                        return Color.Orange;
+                    }
+                case 10:
+                    {
+                        return Color.ForestGreen;
+                    }
+                default:
+                    {
+                        return Color.LightGray;
+                    }
+            }
+        }
 
-       
-
-        
-
-        
-
-        
-
-
+        private string _ObtenerDescripcionCalificacion(short WCalif1)
+        {
+            switch (WCalif1)
+            {
+                case 1:
+                {
+                    return "NO APTO";
+                }
+                case 5:
+                {
+                    return "CONDICIONAL";
+                }
+                case 10:
+                {
+                    return "APTO";
+                }
+                default:
+                {
+                    return "";
+                }
+            }
+        }
     }
 }

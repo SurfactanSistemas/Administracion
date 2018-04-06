@@ -26,5 +26,15 @@ namespace Logica_Negocio
         {
             return _EvaGeneral.ListaGen();
         }
+
+        public System.Data.DataTable ListaGenUltimos()
+        {
+            return _EvaGeneral.ListaGenUltimos();
+        }
+
+        static public string ObtenerObservaciones(string Clave)
+        {
+            return (new EvaGeneralDAL()).ObtenerObservaciones(Clave);
+        }
     }
 }

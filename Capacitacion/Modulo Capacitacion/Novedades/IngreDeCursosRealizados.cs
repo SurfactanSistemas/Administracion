@@ -38,6 +38,7 @@ namespace Modulo_Capacitacion.Novedades
 
             if (DGV_Cronograma.DataSource != null)
                 ((DataTable)DGV_Cronograma.DataSource).Rows.Clear();
+            TB_Año.Focus();
         }
 
         private void TB_Año_KeyDown(object sender, KeyEventArgs e)
@@ -78,8 +79,8 @@ namespace Modulo_Capacitacion.Novedades
                     item.Agregar();
                 }
 
-                this.Close();
-                
+                BT_Limpiar.PerformClick();
+
             }
             catch (Exception err)
             {
@@ -133,13 +134,19 @@ namespace Modulo_Capacitacion.Novedades
 
                 curso = int.Parse(row.Cells[0].Value.ToString());
             }
-            //aca llamo al form y le paso los paremetros
-            ListadoDeCursosRealizadosPorLegajo rpt = new ListadoDeCursosRealizadosPorLegajo(int.Parse(TB_Año.Text), curso);
-            rpt.StartPosition = FormStartPosition.CenterScreen;
-            rpt.WindowState = FormWindowState.Maximized;
-            //rpt.FormBorderStyle = FormBorderStyle.None;
-            //rpt.TopMost = true;
-            rpt.Show();
+
+            Listados.VistaPrevia frm = new Listados.VistaPrevia();
+            frm.CargarReporte(new wlistacursoplani(), "{Cronograma.Curso}=" + curso + " AND {Cronograma.Ano}=" + TB_Año.Text);
+
+            frm.Show();
+
+            ////aca llamo al form y le paso los paremetros
+            //ListadoDeCursosRealizadosPorLegajo rpt = new ListadoDeCursosRealizadosPorLegajo(int.Parse(TB_Año.Text), curso);
+            //rpt.StartPosition = FormStartPosition.CenterScreen;
+            //rpt.WindowState = FormWindowState.Maximized;
+            ////rpt.FormBorderStyle = FormBorderStyle.None;
+            ////rpt.TopMost = true;
+            //rpt.Show();
         }
 
         private void IngreDeCursosRealizados_Load(object sender, EventArgs e)
