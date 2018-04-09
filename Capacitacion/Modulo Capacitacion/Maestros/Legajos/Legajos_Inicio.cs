@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 using Modulo_Capacitacion.Listados.Legajos;
 using Negocio;
@@ -228,6 +229,9 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 if (column != null)
                     column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+                int WWidth = pnlDiscriminarLegajos.Width;
+
+                pnlDiscriminarLegajos.Location = new Point((this.Width/2) - WWidth/2, pnlDiscriminarLegajos.Location.Y);
                 pnlDiscriminarLegajos.Visible = true;
             }
             else
