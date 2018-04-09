@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Data.SqlClient;
 using System.Windows.Forms;
+using Modulo_Capacitacion.Listados;
+using Modulo_Capacitacion.Listados.AvisoCronograma;
+using Modulo_Capacitacion.Listados.CronogramaCursos;
 using Negocio;
-using Modulo_Capacitacion.Reportes;
 
 namespace Modulo_Capacitacion.Novedades
 {
@@ -26,12 +26,14 @@ namespace Modulo_Capacitacion.Novedades
 
         private void BT_Salir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
         {
             TB_Año.Text = "";
+            txtMes.Text = "";
+            pnlAviso.Visible = false;
             //DGV_Cronograma.DataSource = null;
 
             //DGV_Cronograma.Rows.Clear();
@@ -46,7 +48,8 @@ namespace Modulo_Capacitacion.Novedades
             if (e.KeyCode == Keys.Enter)
             {
                 //Buscar cronograma?
-                if (TB_Año.Text == "") throw new Exception("Se deben cargar los datos del año");
+                //if (TB_Año.Text == "") throw new Exception("Se deben cargar los datos del año");
+                if (TB_Año.Text == "") return;
 
                 DGV_Cronograma.DataSource = Cr2.BuscarUnoPorAño(TB_Año.Text);
 
@@ -124,9 +127,24 @@ namespace Modulo_Capacitacion.Novedades
             if (DGV_Cronograma.Rows.Count == 0) throw new Exception("No hay datos de cronogorama");
         }
 
-        private void DGV_Cronograma_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+
+        private void IngreDeCursosRealizados_Load(object sender, EventArgs e)
         {
-            int indexRow = e.RowIndex;
+
+        }
+
+        private void IngreDeCursosRealizados_Shown(object sender, EventArgs e)
+        {
+            TB_Año.Focus();
+        }
+
+        //private void DGV_Cronograma_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    _ImprimirReporteCronograma(e.RowIndex);
+        //}
+
+        private void _ImprimirReporteCronograma(int indexRow)
+        {
             int curso = 0;
             if (indexRow >= 0)
             {
@@ -135,23 +153,91 @@ namespace Modulo_Capacitacion.Novedades
                 curso = int.Parse(row.Cells[0].Value.ToString());
             }
 
-            Listados.VistaPrevia frm = new Listados.VistaPrevia();
+            VistaPrevia frm = new VistaPrevia();
             frm.CargarReporte(new wlistacursoplani(), "{Cronograma.Curso}=" + curso + " AND {Cronograma.Ano}=" + TB_Año.Text);
 
             frm.Show();
-
-            ////aca llamo al form y le paso los paremetros
-            //ListadoDeCursosRealizadosPorLegajo rpt = new ListadoDeCursosRealizadosPorLegajo(int.Parse(TB_Año.Text), curso);
-            //rpt.StartPosition = FormStartPosition.CenterScreen;
-            //rpt.WindowState = FormWindowState.Maximized;
-            ////rpt.FormBorderStyle = FormBorderStyle.None;
-            ////rpt.TopMost = true;
-            //rpt.Show();
+        }
+        
+        private void DGV_Cronograma_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            _ImprimirReporteCronograma(e.RowIndex);
         }
 
-        private void IngreDeCursosRealizados_Load(object sender, EventArgs e)
+        private void btnImprimirAviso_Click(object sender, EventArgs e)
         {
+            pnlAviso.Visible = true;
+            txtMes.Text = "";
+            txtMes.Focus();
+        }
 
+        private void txtMes_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Select)
+            {
+                txtMes.Text = "";
+            }
+        }
+
+        private void btnMostrarAviso_Click(object sender, EventArgs e)
+        {
+            if (txtMes.Text.Trim() == "") return;
+            // Busco primero los Cursos.
+
+            short[] WColumnaMeses = { -1, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7 };
+
+            short WMes = short.Parse(txtMes.Text);
+            short WColumna = -1;
+            short[] WCursos = new short[1000];
+            short WRenglon = 0;
+
+            // Determino la columna segun el mes indicado.
+            WColumna = WColumnaMeses[WMes];
+
+            // Controlamos que se haya elegido un mes valido.
+            if (WColumna < 1) return;
+
+            // Extraigo de la grilla, aquellos cursos que tienen informado que se realizan.
+
+            foreach (DataGridViewRow row in DGV_Cronograma.Rows)
+            {
+                if (row.Cells["Mes" + WColumna].Value.ToString().ToUpper() == "X")
+                {
+                    if (row.Cells["Curso"].Value.ToString() != "")
+                    {
+                        WRenglon++;
+                        WCursos[WRenglon] = short.Parse(row.Cells["Curso"].Value.ToString());
+                    }
+                }
+            }
+
+            string WCursosAListar = "[";
+            //string WCursosAListar = "";
+
+            for (int i = 1; i <= WRenglon; i++)
+            {
+                WCursosAListar += WCursos[i] + ",";
+            }
+
+            if (WCursosAListar.Length == 1) return;
+
+            WCursosAListar = WCursosAListar.Substring(0, WCursosAListar.Length - 2);
+
+            WCursosAListar += "]";
+
+            Listados.VistaPrevia frm = new VistaPrevia();
+            Listados.AvisoCronograma.AvisoCronograma reporte = new Listados.AvisoCronograma.AvisoCronograma();
+            
+            reporte.SetParameterValue("Mes", txtMes.Text);
+
+            frm.CargarReporte(reporte, "{Cronograma.Ano}=" + TB_Año.Text + " AND {Cronograma.Curso}IN" + WCursosAListar + " AND {Cronograma.Curso}={Curso.Codigo} AND {Cronograma.Legajo}={Legajo.Codigo} AND {Cronograma.Sector}={Sector.Codigo} AND {Cronograma.Tema}={Tema.Tema} AND {Legajo.Sector}={Sector.Codigo} AND {Legajo.Curso}={Curso.Codigo} AND {Tema.Curso}={Curso.Codigo}");
+
+            frm.Show();
+
+            //for (int i = 0; i < WRenglon; i++)
+            //{
+            //    MessageBox.Show(WCursos[i].ToString());
+            //}
         }
     }
 }

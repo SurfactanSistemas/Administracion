@@ -59,6 +59,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\AvisoCronograma\AvisoCronograma.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvisoCronograma.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\Legajos\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -487,7 +493,7 @@
       <DependentUpon>Rpt_ListadoDeCursosRealizadosPorLegajo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\wlistacursoplani.cs">
+    <Compile Include="Listados\CronogramaCursos\wlistacursoplani.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>wlistacursoplani.rpt</DependentUpon>
@@ -495,6 +501,10 @@
     </Compile>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\AvisoCronograma\AvisoCronograma.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AvisoCronograma.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Legajos\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
@@ -710,7 +720,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_ListadoDeCursosRealizadosPorLegajo.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\wlistacursoplani.rpt">
+    <EmbeddedResource Include="Listados\CronogramaCursos\wlistacursoplani.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>wlistacursoplani.cs</LastGenOutput>
     </EmbeddedResource>
@@ -897,6 +907,8 @@
     <Content Include="bin\Debug\Modulo Capacitacion.exe" />
     <Content Include="bin\Debug\Modulo Capacitacion.pdb" />
     <Content Include="bin\Debug\Modulo Capacitacion.vshost.exe" />
+    <None Include="Resources\Screen_preview.png" />
+    <None Include="Resources\Enviar_Email.png" />
     <None Include="Resources\marcadeagua2.jpg" />
     <None Include="Resources\remito modificar.png" />
   </ItemGroup>

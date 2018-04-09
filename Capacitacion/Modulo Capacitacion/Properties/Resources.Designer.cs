@@ -213,6 +213,16 @@ namespace Modulo_Capacitacion.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Enviar_Email {
+            get {
+                object obj = ResourceManager.GetObject("Enviar_Email", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap grabar {
             get {
                 object obj = ResourceManager.GetObject("grabar", resourceCulture);
@@ -266,6 +276,16 @@ namespace Modulo_Capacitacion.Properties {
         internal static System.Drawing.Bitmap remito_modificar {
             get {
                 object obj = ResourceManager.GetObject("remito modificar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screen_preview {
+            get {
+                object obj = ResourceManager.GetObject("Screen_preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

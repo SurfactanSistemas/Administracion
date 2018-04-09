@@ -28,6 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -52,14 +64,27 @@
             this.Mes11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mes12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TB_Año = new System.Windows.Forms.TextBox();
-            this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.BT_Guardar = new System.Windows.Forms.Button();
+            this.pnlAviso = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtMes = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.btnImprimirAvisoCursos = new System.Windows.Forms.Button();
+            this.btnEnviarEmailAviso = new System.Windows.Forms.Button();
+            this.btnMostrarAviso = new System.Windows.Forms.Button();
+            this.btnCerrarAviso = new System.Windows.Forms.Button();
             this.BT_Limpiar = new System.Windows.Forms.Button();
+            this.BT_Guardar = new System.Windows.Forms.Button();
+            this.btnImprimirAviso = new System.Windows.Forms.Button();
+            this.BT_Salir = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Cronograma)).BeginInit();
+            this.pnlAviso.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -94,10 +119,12 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.pnlAviso);
             this.panel3.Controls.Add(this.DGV_Cronograma);
             this.panel3.Controls.Add(this.TB_Año);
             this.panel3.Controls.Add(this.BT_Limpiar);
             this.panel3.Controls.Add(this.BT_Guardar);
+            this.panel3.Controls.Add(this.btnImprimirAviso);
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Location = new System.Drawing.Point(7, 6);
@@ -108,8 +135,6 @@
             // DGV_Cronograma
             // 
             this.DGV_Cronograma.AllowUserToAddRows = false;
-            this.DGV_Cronograma.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.DGV_Cronograma.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.DGV_Cronograma.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Cronograma.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Curso,
@@ -130,8 +155,9 @@
             this.Mes10,
             this.Mes11,
             this.Mes12});
-            this.DGV_Cronograma.Location = new System.Drawing.Point(11, 40);
+            this.DGV_Cronograma.Location = new System.Drawing.Point(15, 40);
             this.DGV_Cronograma.Name = "DGV_Cronograma";
+            this.DGV_Cronograma.RowHeadersWidth = 10;
             this.DGV_Cronograma.Size = new System.Drawing.Size(760, 432);
             this.DGV_Cronograma.TabIndex = 36;
             this.DGV_Cronograma.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Cronograma_CellDoubleClick);
@@ -142,15 +168,15 @@
             this.Curso.HeaderText = "Tema";
             this.Curso.Name = "Curso";
             this.Curso.ReadOnly = true;
-            this.Curso.Width = 59;
+            this.Curso.Width = 40;
             // 
             // Descripcion
             // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Descripcion.DataPropertyName = "Descripcion";
             this.Descripcion.HeaderText = "Descripcion";
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.ReadOnly = true;
-            this.Descripcion.Width = 88;
             // 
             // Personas
             // 
@@ -158,7 +184,7 @@
             this.Personas.HeaderText = "Personas";
             this.Personas.Name = "Personas";
             this.Personas.ReadOnly = true;
-            this.Personas.Width = 76;
+            this.Personas.Width = 60;
             // 
             // Horas
             // 
@@ -166,7 +192,7 @@
             this.Horas.HeaderText = "Horas";
             this.Horas.Name = "Horas";
             this.Horas.ReadOnly = true;
-            this.Horas.Width = 60;
+            this.Horas.Width = 50;
             // 
             // Cursada
             // 
@@ -174,7 +200,7 @@
             this.Cursada.HeaderText = "Cursada";
             this.Cursada.Name = "Cursada";
             this.Cursada.ReadOnly = true;
-            this.Cursada.Width = 71;
+            this.Cursada.Width = 50;
             // 
             // Resta
             // 
@@ -182,91 +208,115 @@
             this.Resta.HeaderText = "Resta";
             this.Resta.Name = "Resta";
             this.Resta.ReadOnly = true;
-            this.Resta.Width = 60;
+            this.Resta.Width = 50;
             // 
             // Mes1
             // 
             this.Mes1.DataPropertyName = "Mes1";
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes1.DefaultCellStyle = dataGridViewCellStyle37;
             this.Mes1.HeaderText = "Jun";
             this.Mes1.Name = "Mes1";
-            this.Mes1.Width = 49;
+            this.Mes1.Width = 30;
             // 
             // Mes2
             // 
             this.Mes2.DataPropertyName = "Mes2";
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes2.DefaultCellStyle = dataGridViewCellStyle38;
             this.Mes2.HeaderText = "Jul";
             this.Mes2.Name = "Mes2";
-            this.Mes2.Width = 45;
+            this.Mes2.Width = 30;
             // 
             // Mes3
             // 
             this.Mes3.DataPropertyName = "Mes3";
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes3.DefaultCellStyle = dataGridViewCellStyle39;
             this.Mes3.HeaderText = "Ago";
             this.Mes3.Name = "Mes3";
-            this.Mes3.Width = 51;
+            this.Mes3.Width = 30;
             // 
             // Mes4
             // 
             this.Mes4.DataPropertyName = "Mes4";
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes4.DefaultCellStyle = dataGridViewCellStyle40;
             this.Mes4.HeaderText = "Sep";
             this.Mes4.Name = "Mes4";
-            this.Mes4.Width = 51;
+            this.Mes4.Width = 30;
             // 
             // Mes5
             // 
             this.Mes5.DataPropertyName = "Mes5";
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes5.DefaultCellStyle = dataGridViewCellStyle41;
             this.Mes5.HeaderText = "Oct";
             this.Mes5.Name = "Mes5";
-            this.Mes5.Width = 49;
+            this.Mes5.Width = 30;
             // 
             // Mes6
             // 
             this.Mes6.DataPropertyName = "Mes6";
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes6.DefaultCellStyle = dataGridViewCellStyle42;
             this.Mes6.HeaderText = "Nov";
             this.Mes6.Name = "Mes6";
-            this.Mes6.Width = 52;
+            this.Mes6.Width = 30;
             // 
             // Mes7
             // 
             this.Mes7.DataPropertyName = "Mes7";
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes7.DefaultCellStyle = dataGridViewCellStyle43;
             this.Mes7.HeaderText = "Dic";
             this.Mes7.Name = "Mes7";
-            this.Mes7.Width = 48;
+            this.Mes7.Width = 30;
             // 
             // Mes8
             // 
             this.Mes8.DataPropertyName = "Mes8";
+            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes8.DefaultCellStyle = dataGridViewCellStyle44;
             this.Mes8.HeaderText = "Ene";
             this.Mes8.Name = "Mes8";
-            this.Mes8.Width = 51;
+            this.Mes8.Width = 30;
             // 
             // Mes9
             // 
             this.Mes9.DataPropertyName = "Mes9";
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes9.DefaultCellStyle = dataGridViewCellStyle45;
             this.Mes9.HeaderText = "Feb";
             this.Mes9.Name = "Mes9";
-            this.Mes9.Width = 50;
+            this.Mes9.Width = 30;
             // 
             // Mes10
             // 
             this.Mes10.DataPropertyName = "Mes10";
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes10.DefaultCellStyle = dataGridViewCellStyle46;
             this.Mes10.HeaderText = "Mar";
             this.Mes10.Name = "Mes10";
-            this.Mes10.Width = 50;
+            this.Mes10.Width = 30;
             // 
             // Mes11
             // 
             this.Mes11.DataPropertyName = "Mes11";
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes11.DefaultCellStyle = dataGridViewCellStyle47;
             this.Mes11.HeaderText = "Abr";
             this.Mes11.Name = "Mes11";
-            this.Mes11.Width = 48;
+            this.Mes11.Width = 30;
             // 
             // Mes12
             // 
             this.Mes12.DataPropertyName = "Mes12";
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes12.DefaultCellStyle = dataGridViewCellStyle48;
             this.Mes12.HeaderText = "May";
             this.Mes12.Name = "Mes12";
-            this.Mes12.Width = 52;
+            this.Mes12.Width = 30;
             // 
             // TB_Año
             // 
@@ -276,19 +326,6 @@
             this.TB_Año.Size = new System.Drawing.Size(54, 20);
             this.TB_Año.TabIndex = 35;
             this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
-            // 
-            // BT_Salir
-            // 
-            this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
-            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(479, 486);
-            this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Salir.TabIndex = 27;
-            this.BT_Salir.UseVisualStyleBackColor = true;
-            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
             // 
             // label1
             // 
@@ -300,18 +337,112 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Año:";
             // 
-            // BT_Guardar
+            // pnlAviso
             // 
-            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.grabar;
-            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(271, 486);
-            this.BT_Guardar.Name = "BT_Guardar";
-            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
-            this.BT_Guardar.TabIndex = 27;
-            this.BT_Guardar.UseVisualStyleBackColor = true;
-            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
+            this.pnlAviso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
+            this.pnlAviso.Controls.Add(this.panel5);
+            this.pnlAviso.Controls.Add(this.groupBox1);
+            this.pnlAviso.Location = new System.Drawing.Point(247, 192);
+            this.pnlAviso.Name = "pnlAviso";
+            this.pnlAviso.Size = new System.Drawing.Size(296, 157);
+            this.pnlAviso.TabIndex = 37;
+            this.pnlAviso.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.txtMes);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Location = new System.Drawing.Point(18, 10);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(260, 81);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Generar Aviso de Cursos por Sector y Mes.";
+            // 
+            // txtMes
+            // 
+            this.txtMes.Location = new System.Drawing.Point(133, 37);
+            this.txtMes.MaxLength = 2;
+            this.txtMes.Name = "txtMes";
+            this.txtMes.Size = new System.Drawing.Size(39, 20);
+            this.txtMes.TabIndex = 0;
+            this.txtMes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMes_KeyDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(89, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 17);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Mes:";
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.Control;
+            this.panel5.Controls.Add(this.btnImprimirAvisoCursos);
+            this.panel5.Controls.Add(this.btnEnviarEmailAviso);
+            this.panel5.Controls.Add(this.btnMostrarAviso);
+            this.panel5.Controls.Add(this.btnCerrarAviso);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(0, 98);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(296, 59);
+            this.panel5.TabIndex = 1;
+            // 
+            // btnImprimirAvisoCursos
+            // 
+            this.btnImprimirAvisoCursos.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
+            this.btnImprimirAvisoCursos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimirAvisoCursos.FlatAppearance.BorderSize = 0;
+            this.btnImprimirAvisoCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimirAvisoCursos.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnImprimirAvisoCursos.Location = new System.Drawing.Point(162, 9);
+            this.btnImprimirAvisoCursos.Name = "btnImprimirAvisoCursos";
+            this.btnImprimirAvisoCursos.Size = new System.Drawing.Size(40, 40);
+            this.btnImprimirAvisoCursos.TabIndex = 27;
+            this.btnImprimirAvisoCursos.UseVisualStyleBackColor = true;
+            // 
+            // btnEnviarEmailAviso
+            // 
+            this.btnEnviarEmailAviso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Enviar_Email;
+            this.btnEnviarEmailAviso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEnviarEmailAviso.FlatAppearance.BorderSize = 0;
+            this.btnEnviarEmailAviso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEnviarEmailAviso.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnEnviarEmailAviso.Location = new System.Drawing.Point(26, 9);
+            this.btnEnviarEmailAviso.Name = "btnEnviarEmailAviso";
+            this.btnEnviarEmailAviso.Size = new System.Drawing.Size(40, 40);
+            this.btnEnviarEmailAviso.TabIndex = 27;
+            this.btnEnviarEmailAviso.UseVisualStyleBackColor = true;
+            // 
+            // btnMostrarAviso
+            // 
+            this.btnMostrarAviso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Screen_preview;
+            this.btnMostrarAviso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnMostrarAviso.FlatAppearance.BorderSize = 0;
+            this.btnMostrarAviso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarAviso.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnMostrarAviso.Location = new System.Drawing.Point(94, 9);
+            this.btnMostrarAviso.Name = "btnMostrarAviso";
+            this.btnMostrarAviso.Size = new System.Drawing.Size(40, 40);
+            this.btnMostrarAviso.TabIndex = 27;
+            this.btnMostrarAviso.UseVisualStyleBackColor = true;
+            this.btnMostrarAviso.Click += new System.EventHandler(this.btnMostrarAviso_Click);
+            // 
+            // btnCerrarAviso
+            // 
+            this.btnCerrarAviso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.btnCerrarAviso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCerrarAviso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarAviso.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnCerrarAviso.Location = new System.Drawing.Point(230, 9);
+            this.btnCerrarAviso.Name = "btnCerrarAviso";
+            this.btnCerrarAviso.Size = new System.Drawing.Size(40, 40);
+            this.btnCerrarAviso.TabIndex = 27;
+            this.btnCerrarAviso.UseVisualStyleBackColor = true;
             // 
             // BT_Limpiar
             // 
@@ -319,12 +450,51 @@
             this.BT_Limpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Limpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Limpiar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Limpiar.Location = new System.Drawing.Point(375, 486);
+            this.BT_Limpiar.Location = new System.Drawing.Point(321, 486);
             this.BT_Limpiar.Name = "BT_Limpiar";
             this.BT_Limpiar.Size = new System.Drawing.Size(40, 40);
             this.BT_Limpiar.TabIndex = 27;
             this.BT_Limpiar.UseVisualStyleBackColor = true;
             this.BT_Limpiar.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
+            // 
+            // BT_Guardar
+            // 
+            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.grabar;
+            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Guardar.Location = new System.Drawing.Point(212, 486);
+            this.BT_Guardar.Name = "BT_Guardar";
+            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
+            this.BT_Guardar.TabIndex = 27;
+            this.BT_Guardar.UseVisualStyleBackColor = true;
+            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
+            // 
+            // btnImprimirAviso
+            // 
+            this.btnImprimirAviso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
+            this.btnImprimirAviso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimirAviso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimirAviso.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnImprimirAviso.Location = new System.Drawing.Point(430, 486);
+            this.btnImprimirAviso.Name = "btnImprimirAviso";
+            this.btnImprimirAviso.Size = new System.Drawing.Size(40, 40);
+            this.btnImprimirAviso.TabIndex = 27;
+            this.btnImprimirAviso.UseVisualStyleBackColor = true;
+            this.btnImprimirAviso.Click += new System.EventHandler(this.btnImprimirAviso_Click);
+            // 
+            // BT_Salir
+            // 
+            this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Salir.Location = new System.Drawing.Point(539, 486);
+            this.BT_Salir.Name = "BT_Salir";
+            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.TabIndex = 27;
+            this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
             // 
             // IngreDeCursosRealizados
             // 
@@ -335,12 +505,17 @@
             this.Controls.Add(this.panel1);
             this.Name = "IngreDeCursosRealizados";
             this.Load += new System.EventHandler(this.IngreDeCursosRealizados_Load);
+            this.Shown += new System.EventHandler(this.IngreDeCursosRealizados_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Cronograma)).EndInit();
+            this.pnlAviso.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -355,6 +530,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TB_Año;
         private System.Windows.Forms.DataGridView DGV_Cronograma;
+        private System.Windows.Forms.Button BT_Limpiar;
+        private System.Windows.Forms.Button BT_Guardar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Personas;
@@ -373,7 +550,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes12;
-        private System.Windows.Forms.Button BT_Limpiar;
-        private System.Windows.Forms.Button BT_Guardar;
+        private System.Windows.Forms.Button btnImprimirAviso;
+        private System.Windows.Forms.Panel pnlAviso;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button btnImprimirAvisoCursos;
+        private System.Windows.Forms.Button btnEnviarEmailAviso;
+        private System.Windows.Forms.Button btnMostrarAviso;
+        private System.Windows.Forms.Button btnCerrarAviso;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtMes;
     }
 }
