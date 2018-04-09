@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data.SqlClient;
-using System.Data;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace ClassConexion
 {
@@ -12,8 +10,6 @@ namespace ClassConexion
         SqlConnection conexion;
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable DT = new DataTable();
-
-        string CS = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
 
         //todo lo comun
         public void AbrirConexion()
@@ -40,8 +36,7 @@ namespace ClassConexion
 
         public void Agregar(string consulta)
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
+            SqlCommand cmd = new SqlCommand {CommandType = CommandType.Text};
             AbrirConexion();
             cmd.Connection = conexion;
             cmd.CommandText = consulta;
@@ -65,12 +60,14 @@ namespace ClassConexion
         {
             AbrirConexion();
             string consulta = "select max(Codigo) + 1 as Id from Sector where codigo != '1000'";
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = consulta;
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = consulta
+            };
             AbrirConexion();
             cmd.Connection = conexion;
-            string value = System.Convert.ToString(cmd.ExecuteScalar());
+            string value = Convert.ToString(cmd.ExecuteScalar());
 
             CerrarConexion();
 
@@ -92,8 +89,7 @@ namespace ClassConexion
 
         public void Modificar(string consulta)
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
+            SqlCommand cmd = new SqlCommand {CommandType = CommandType.Text};
             AbrirConexion();
             cmd.Connection = conexion;
 
@@ -106,8 +102,7 @@ namespace ClassConexion
 
         public void Eliminar(string consulta)
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
+            SqlCommand cmd = new SqlCommand {CommandType = CommandType.Text};
             AbrirConexion();
             cmd.Connection = conexion;
             cmd.CommandText = consulta;
@@ -118,13 +113,15 @@ namespace ClassConexion
 
         public string TraerUltimoId(string consulta)
         {
-            AbrirConexion();            
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = consulta;
+            AbrirConexion();
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = consulta
+            };
             AbrirConexion();
             cmd.Connection = conexion;
-            string value = System.Convert.ToString(cmd.ExecuteScalar());
+            string value = Convert.ToString(cmd.ExecuteScalar());
             
             CerrarConexion();
 
@@ -134,12 +131,14 @@ namespace ClassConexion
         public string TraerVersionMax(string consulta)
         {
             AbrirConexion();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = consulta;
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = consulta
+            };
             AbrirConexion();
             cmd.Connection = conexion;
-            string value = System.Convert.ToString(cmd.ExecuteScalar());
+            string value = Convert.ToString(cmd.ExecuteScalar());
 
             CerrarConexion();
 
