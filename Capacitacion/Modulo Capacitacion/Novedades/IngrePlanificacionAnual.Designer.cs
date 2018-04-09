@@ -34,6 +34,16 @@
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.TB_CodTemas = new System.Windows.Forms.ComboBox();
+            this.CB_Curso = new System.Windows.Forms.ComboBox();
+            this.TB_DescTemas = new System.Windows.Forms.ComboBox();
+            this.LB_Curso = new System.Windows.Forms.Label();
+            this.BT_AgregarCurso = new System.Windows.Forms.Button();
+            this.lblAtencion = new System.Windows.Forms.Label();
             this.DGV_Crono = new System.Windows.Forms.DataGridView();
             this.NombProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,14 +51,6 @@
             this.DescPer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Observ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PromedioTot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CB_Curso = new System.Windows.Forms.ComboBox();
-            this.LB_Curso = new System.Windows.Forms.Label();
-            this.BT_AgregarCurso = new System.Windows.Forms.Button();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.TB_DescTemas = new System.Windows.Forms.ComboBox();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.TB_CodTemas = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.TB_Buscar = new System.Windows.Forms.Button();
             this.BT_LimpiarPant = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
@@ -60,13 +62,11 @@
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
-            this.lblAtencion = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Crono)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Crono)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -119,6 +119,112 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(790, 550);
             this.panel3.TabIndex = 3;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.panel11);
+            this.groupBox1.Controls.Add(this.panel10);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.TB_CodTemas);
+            this.groupBox1.Controls.Add(this.CB_Curso);
+            this.groupBox1.Controls.Add(this.TB_DescTemas);
+            this.groupBox1.Controls.Add(this.LB_Curso);
+            this.groupBox1.Controls.Add(this.BT_AgregarCurso);
+            this.groupBox1.Location = new System.Drawing.Point(61, 387);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(668, 110);
+            this.groupBox1.TabIndex = 144;
+            this.groupBox1.TabStop = false;
+            // 
+            // panel11
+            // 
+            this.panel11.Location = new System.Drawing.Point(161, 23);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(19, 29);
+            this.panel11.TabIndex = 136;
+            // 
+            // panel10
+            // 
+            this.panel10.Location = new System.Drawing.Point(530, 21);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(19, 29);
+            this.panel10.TabIndex = 138;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(44, 24);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(45, 18);
+            this.label14.TabIndex = 134;
+            this.label14.Text = "Tema:";
+            // 
+            // TB_CodTemas
+            // 
+            this.TB_CodTemas.FormattingEnabled = true;
+            this.TB_CodTemas.Location = new System.Drawing.Point(104, 25);
+            this.TB_CodTemas.Name = "TB_CodTemas";
+            this.TB_CodTemas.Size = new System.Drawing.Size(76, 21);
+            this.TB_CodTemas.TabIndex = 135;
+            // 
+            // CB_Curso
+            // 
+            this.CB_Curso.FormattingEnabled = true;
+            this.CB_Curso.Location = new System.Drawing.Point(217, 69);
+            this.CB_Curso.Name = "CB_Curso";
+            this.CB_Curso.Size = new System.Drawing.Size(326, 21);
+            this.CB_Curso.TabIndex = 141;
+            this.CB_Curso.Visible = false;
+            // 
+            // TB_DescTemas
+            // 
+            this.TB_DescTemas.FormattingEnabled = true;
+            this.TB_DescTemas.Location = new System.Drawing.Point(217, 25);
+            this.TB_DescTemas.Name = "TB_DescTemas";
+            this.TB_DescTemas.Size = new System.Drawing.Size(326, 21);
+            this.TB_DescTemas.TabIndex = 137;
+            this.TB_DescTemas.SelectedIndexChanged += new System.EventHandler(this.TB_DescTemas_SelectedIndexChanged);
+            // 
+            // LB_Curso
+            // 
+            this.LB_Curso.AutoSize = true;
+            this.LB_Curso.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_Curso.Location = new System.Drawing.Point(156, 73);
+            this.LB_Curso.Name = "LB_Curso";
+            this.LB_Curso.Size = new System.Drawing.Size(47, 18);
+            this.LB_Curso.TabIndex = 140;
+            this.LB_Curso.Text = "Curso:";
+            this.LB_Curso.Visible = false;
+            // 
+            // BT_AgregarCurso
+            // 
+            this.BT_AgregarCurso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.agregar_cursos;
+            this.BT_AgregarCurso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_AgregarCurso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_AgregarCurso.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_AgregarCurso.Location = new System.Drawing.Point(585, 37);
+            this.BT_AgregarCurso.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_AgregarCurso.Name = "BT_AgregarCurso";
+            this.BT_AgregarCurso.Size = new System.Drawing.Size(40, 40);
+            this.BT_AgregarCurso.TabIndex = 139;
+            this.BT_AgregarCurso.UseVisualStyleBackColor = true;
+            this.BT_AgregarCurso.Click += new System.EventHandler(this.BT_AgregarCurso_Click);
+            // 
+            // lblAtencion
+            // 
+            this.lblAtencion.BackColor = System.Drawing.Color.Red;
+            this.lblAtencion.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblAtencion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
+            this.lblAtencion.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblAtencion.Location = new System.Drawing.Point(457, 16);
+            this.lblAtencion.Name = "lblAtencion";
+            this.lblAtencion.Size = new System.Drawing.Size(320, 78);
+            this.lblAtencion.TabIndex = 143;
+            this.lblAtencion.Text = "ESTOS CURSOS NO SE ENCUENTRAN GRABADOS, SE LOS TRAE DE MANERA AUTOMATICA DESDE EL" +
+                " \'MAESTRO\' DE LEGAJOS.";
+            this.lblAtencion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAtencion.Visible = false;
             // 
             // DGV_Crono
             // 
@@ -191,81 +297,6 @@
             this.PromedioTot.HeaderText = "Realizado";
             this.PromedioTot.Name = "PromedioTot";
             this.PromedioTot.Width = 70;
-            // 
-            // CB_Curso
-            // 
-            this.CB_Curso.FormattingEnabled = true;
-            this.CB_Curso.Location = new System.Drawing.Point(217, 69);
-            this.CB_Curso.Name = "CB_Curso";
-            this.CB_Curso.Size = new System.Drawing.Size(326, 21);
-            this.CB_Curso.TabIndex = 141;
-            this.CB_Curso.Visible = false;
-            // 
-            // LB_Curso
-            // 
-            this.LB_Curso.AutoSize = true;
-            this.LB_Curso.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Curso.Location = new System.Drawing.Point(156, 73);
-            this.LB_Curso.Name = "LB_Curso";
-            this.LB_Curso.Size = new System.Drawing.Size(47, 18);
-            this.LB_Curso.TabIndex = 140;
-            this.LB_Curso.Text = "Curso:";
-            this.LB_Curso.Visible = false;
-            // 
-            // BT_AgregarCurso
-            // 
-            this.BT_AgregarCurso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.agregar_cursos;
-            this.BT_AgregarCurso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_AgregarCurso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_AgregarCurso.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_AgregarCurso.Location = new System.Drawing.Point(585, 37);
-            this.BT_AgregarCurso.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_AgregarCurso.Name = "BT_AgregarCurso";
-            this.BT_AgregarCurso.Size = new System.Drawing.Size(40, 40);
-            this.BT_AgregarCurso.TabIndex = 139;
-            this.BT_AgregarCurso.UseVisualStyleBackColor = true;
-            this.BT_AgregarCurso.Click += new System.EventHandler(this.BT_AgregarCurso_Click);
-            // 
-            // panel10
-            // 
-            this.panel10.Location = new System.Drawing.Point(530, 21);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(19, 29);
-            this.panel10.TabIndex = 138;
-            // 
-            // TB_DescTemas
-            // 
-            this.TB_DescTemas.FormattingEnabled = true;
-            this.TB_DescTemas.Location = new System.Drawing.Point(217, 25);
-            this.TB_DescTemas.Name = "TB_DescTemas";
-            this.TB_DescTemas.Size = new System.Drawing.Size(326, 21);
-            this.TB_DescTemas.TabIndex = 137;
-            this.TB_DescTemas.SelectedIndexChanged += new System.EventHandler(this.TB_DescTemas_SelectedIndexChanged);
-            // 
-            // panel11
-            // 
-            this.panel11.Location = new System.Drawing.Point(161, 23);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(19, 29);
-            this.panel11.TabIndex = 136;
-            // 
-            // TB_CodTemas
-            // 
-            this.TB_CodTemas.FormattingEnabled = true;
-            this.TB_CodTemas.Location = new System.Drawing.Point(104, 25);
-            this.TB_CodTemas.Name = "TB_CodTemas";
-            this.TB_CodTemas.Size = new System.Drawing.Size(76, 21);
-            this.TB_CodTemas.TabIndex = 135;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(44, 24);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(45, 18);
-            this.label14.TabIndex = 134;
-            this.label14.Text = "Tema:";
             // 
             // TB_Buscar
             // 
@@ -379,37 +410,6 @@
             this.LFechaAviso.TabIndex = 4;
             this.LFechaAviso.Text = "Legajo:";
             // 
-            // lblAtencion
-            // 
-            this.lblAtencion.BackColor = System.Drawing.Color.Red;
-            this.lblAtencion.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblAtencion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
-            this.lblAtencion.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblAtencion.Location = new System.Drawing.Point(457, 16);
-            this.lblAtencion.Name = "lblAtencion";
-            this.lblAtencion.Size = new System.Drawing.Size(320, 78);
-            this.lblAtencion.TabIndex = 143;
-            this.lblAtencion.Text = "ESTOS CURSOS NO SE ENCUENTRAN GRABADOS, SE LOS TRAE DE MANERA AUTOMATICA DESDE EL" +
-                " \'MAESTRO\' DE LEGAJOS.";
-            this.lblAtencion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblAtencion.Visible = false;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.panel11);
-            this.groupBox1.Controls.Add(this.panel10);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.TB_CodTemas);
-            this.groupBox1.Controls.Add(this.CB_Curso);
-            this.groupBox1.Controls.Add(this.TB_DescTemas);
-            this.groupBox1.Controls.Add(this.LB_Curso);
-            this.groupBox1.Controls.Add(this.BT_AgregarCurso);
-            this.groupBox1.Location = new System.Drawing.Point(61, 387);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(668, 110);
-            this.groupBox1.TabIndex = 144;
-            this.groupBox1.TabStop = false;
-            // 
             // IngrePlanificacionAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,9 +425,9 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Crono)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Crono)).EndInit();
             this.ResumeLayout(false);
 
         }

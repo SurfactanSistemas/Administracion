@@ -182,9 +182,19 @@ namespace Modulo_Capacitacion.Novedades
         private void btnMostrarAviso_Click(object sender, EventArgs e)
         {
             if (txtMes.Text.Trim() == "") return;
+
+            VistaPrevia frm = _PrepararAviso();
+
+            if (frm != null) frm.Show();
+
+            btnCerrarAviso.PerformClick();
+        }
+
+        private VistaPrevia _PrepararAviso()
+        {
             // Busco primero los Cursos.
 
-            short[] WColumnaMeses = { -1, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7 };
+            short[] WColumnaMeses = {-1, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7};
 
             short WMes = short.Parse(txtMes.Text);
             short WColumna = -1;
@@ -195,7 +205,7 @@ namespace Modulo_Capacitacion.Novedades
             WColumna = WColumnaMeses[WMes];
 
             // Controlamos que se haya elegido un mes valido.
-            if (WColumna < 1) return;
+            if (WColumna < 1) return null;
 
             // Extraigo de la grilla, aquellos cursos que tienen informado que se realizan.
 
@@ -219,7 +229,7 @@ namespace Modulo_Capacitacion.Novedades
                 WCursosAListar += WCursos[i] + ",";
             }
 
-            if (WCursosAListar.Length == 1) return;
+            if (WCursosAListar.Length == 1) return null;
 
             WCursosAListar = WCursosAListar.Substring(0, WCursosAListar.Length - 2);
 
@@ -227,17 +237,43 @@ namespace Modulo_Capacitacion.Novedades
 
             Listados.VistaPrevia frm = new VistaPrevia();
             Listados.AvisoCronograma.AvisoCronograma reporte = new Listados.AvisoCronograma.AvisoCronograma();
-            
+
             reporte.SetParameterValue("Mes", txtMes.Text);
 
-            frm.CargarReporte(reporte, "{Cronograma.Ano}=" + TB_Año.Text + " AND {Cronograma.Curso}IN" + WCursosAListar + " AND {Cronograma.Curso}={Curso.Codigo} AND {Cronograma.Legajo}={Legajo.Codigo} AND {Cronograma.Sector}={Sector.Codigo} AND {Cronograma.Tema}={Tema.Tema} AND {Legajo.Sector}={Sector.Codigo} AND {Legajo.Curso}={Curso.Codigo} AND {Tema.Curso}={Curso.Codigo}");
+            frm.CargarReporte(reporte,
+                "{Cronograma.Ano}=" + TB_Año.Text + " AND {Cronograma.Curso}IN" + WCursosAListar +
+                " AND {Cronograma.Curso}={Curso.Codigo} AND {Cronograma.Legajo}={Legajo.Codigo} AND {Cronograma.Sector}={Sector.Codigo} AND {Cronograma.Tema}={Tema.Tema} AND {Legajo.Sector}={Sector.Codigo} AND {Legajo.Curso}={Curso.Codigo} AND {Tema.Curso}={Curso.Codigo}");
+            return frm;
+        }
 
-            frm.Show();
+        private void btnCerrarAviso_Click(object sender, EventArgs e)
+        {
+            pnlAviso.Visible = false;
+            txtMes.Text = "";
+        }
 
-            //for (int i = 0; i < WRenglon; i++)
-            //{
-            //    MessageBox.Show(WCursos[i].ToString());
-            //}
+        private void btnImprimirAvisoCursos_Click(object sender, EventArgs e)
+        {
+            if (txtMes.Text.Trim() == "") return;
+
+            VistaPrevia frm = _PrepararAviso();
+
+            if (frm != null) frm.Imprimir();
+
+            btnCerrarAviso.PerformClick();
+        }
+
+        private void btnEnviarEmailAviso_Click(object sender, EventArgs e)
+        {
+            if (txtMes.Text.Trim() == "") return;
+
+            VistaPrevia frm = _PrepararAviso();
+
+            string WDirecciones = ConfigurationManager.AppSettings["DETINATARIOS_AVISO_CRONOGRAMA"];
+
+            if (frm != null) frm.EnviarPorEmail(WDirecciones, "AvisoCronograma2017");
+
+            btnCerrarAviso.PerformClick();
         }
     }
 }

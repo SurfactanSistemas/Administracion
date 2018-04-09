@@ -92,7 +92,7 @@ namespace Modulo_Capacitacion
         {
             IngreDeCursosRealizados form = new IngreDeCursosRealizados();
             form.StartPosition = FormStartPosition.CenterScreen;
-            form.ShowDialog();
+            form.Show();
         }
 
         private void ingresoDeCursosRealizadosToolStripMenuItem_Click(object sender, EventArgs e)

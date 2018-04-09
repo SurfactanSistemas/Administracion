@@ -483,5 +483,6 @@ namespace Modulo_Capacitacion.Novedades
         {
             if (e.KeyCode == Keys.Escape) TB_CodLegajo.Text = "";
         }
+
     }
 }
