@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using ClassConexion;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Negocio
 {
@@ -179,10 +182,26 @@ namespace Negocio
 
         public List<Tema> Temas { get; set; }
 
+        public System.Data.DataTable ListarLegajosDiscriminado(string WNombrePersonal)
+        {
+            Conexion repo = new Conexion();
+            string consulta = "SELECT Codigo, Descripcion, FechaVersion as Vigencia, Perfil, Sector FROM Legajo WHERE Renglon = 1 AND Descripcion = '" + WNombrePersonal.Trim() + "' ORDER BY Descripcion, Codigo, VigenciaOrd";
+            System.Data.DataTable Dt = repo.Listar(consulta);
+            return Dt;
+        }
+
+        public System.Data.DataTable ListarTodosParaGrilla()
+        {
+            Conexion repo = new Conexion();
+            string consulta = "SELECT Clave, Codigo, Descripcion, FechaVersion, Perfil, Sector, Dni, FEgreso, Actualizado, VigenciaOrd FROM Legajo WHERE Renglon = 1 ORDER BY Descripcion, Codigo, VigenciaOrd";
+            System.Data.DataTable Dt = repo.Listar(consulta);
+            return Dt;
+        }
+
         public System.Data.DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
-            string consulta = "select * from Legajo where Renglon = 1 order by Descripcion, Codigo";
+            string consulta = "select * from Legajo where Renglon = 1 order by Descripcion, Codigo, VigenciaOrd";
             System.Data.DataTable Dt = repo.Listar(consulta);
             return Dt;
         }
@@ -374,6 +393,45 @@ namespace Negocio
 
             }
             return obj;
+        }
+
+        public void ActualizarFechasIngresoOrden()
+        {
+            DataTable WLegajos = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT DISTINCT Codigo, FechaVersion FROM Legajo WHERE Renglon = 1 ORDER BY Codigo";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            WLegajos.Load(dr);
+                        }
+                    }
+
+                    string[] WFechaOrd = new string[3];
+                    string aux = "";
+
+                    foreach (DataRow row in WLegajos.Rows)
+                    {
+                        WFechaOrd = row["FechaVersion"].ToString().Split('/');
+                        Array.Reverse(WFechaOrd);
+                        aux = string.Join("", WFechaOrd);
+
+                        cmd.CommandText = "UPDATE Legajo SET VigenciaOrd = '" + aux + "' WHERE Codigo = '" + row["Codigo"] + "'";
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
         }
 
         public void ActualizarPerfil(int Perfil, int Version)

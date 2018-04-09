@@ -36,6 +36,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             dtMuestraInicio.Columns.Add("Dni", typeof(string));
             dtMuestraInicio.Columns.Add("Egreso", typeof(string));
             dtMuestraInicio.Columns.Add("Actualizado", typeof(string));
+            dtMuestraInicio.Columns.Add("VigenciaOrd", typeof(string));
+            dtMuestraInicio.Columns.Add("Mostrar", typeof(string));
         }
 
         private void Bt_Fin_Click(object sender, EventArgs e)
@@ -56,27 +58,69 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         {
             TBFiltro.Text = "";
 
-            dtLegajos = L.ListarTodos();
+            L.ActualizarFechasIngresoOrden();
+            //dtLegajos = L.ListarTodos();
+            dtLegajos = L.ListarTodosParaGrilla();
             ArmardtMuestra();
             DGV_Legajos.DataSource = dtMuestraInicio;
+
+            _ProcesarPersonalConMasDeUnPerfil();
 
             if (ckSoloActivos.Checked)
             {
                 DataTable dataTable = DGV_Legajos.DataSource as DataTable;
                 if (dataTable != null)
-                    dataTable.DefaultView.RowFilter = "CONVERT(Egreso, System.String) = '00/00/0000' OR CONVERT(Egreso, System.String) = '  /  /    '";
+                    dataTable.DefaultView.RowFilter = "(CONVERT(Egreso, System.String) = '00/00/0000' OR CONVERT(Egreso, System.String) = '  /  /    ') AND CONVERT(Mostrar, System.String) <> 'N'";
             }
 
             if (ckSoloNoActualizados.Checked)
             {
                 DataTable dataTable = DGV_Legajos.DataSource as DataTable;
                 if (dataTable != null)
-                    dataTable.DefaultView.RowFilter = "CONVERT(Actualizado, System.String) = 'N' OR CONVERT(Actualizado, System.String) = 'n'";
+                    dataTable.DefaultView.RowFilter = "(CONVERT(Actualizado, System.String) = 'N' OR CONVERT(Actualizado, System.String) = 'n') AND CONVERT(Mostrar, System.String) <> 'N'";
             }
 
             _OcultarColumnasAuxiliares();
 
             TBFiltro.Focus();
+        }
+
+        private void _ProcesarPersonalConMasDeUnPerfil()
+        {
+            string WAnterior = "", WActual  = "";
+
+            DataTable table = DGV_Legajos.DataSource as DataTable;
+
+            if (table == null) return;
+
+            foreach (DataRow _row in table.Rows)
+            {
+                WActual = _row["Descripcion"].ToString();
+
+                if (WActual.Trim() == WAnterior.Trim())
+                {
+                    _row["Mostrar"] = "N";
+                }
+
+                WAnterior = WActual.Trim();
+
+            }
+
+            DataRow[] row = table.Select("Mostrar='N'");
+
+            foreach (DataRow r in row)
+            {
+                DataRow[] r2 = table.Select("Descripcion='" + r["Descripcion"] + "'");
+
+                foreach (DataRow r3 in r2)
+                {
+                    r3["Vigencia"] = "";
+                    r3["Sector"] = "";
+                    r3["Perfil"] = "";
+                }
+
+            }
+
         }
 
         private void _OcultarColumnasAuxiliares()
@@ -100,15 +144,17 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 DataRow dr;
                 dr = dtMuestraInicio.NewRow();
 
-                dr["Clave"] = fila[0].ToString();
-                dr["Codigo"] = fila[1].ToString();
-                dr["Descripcion"] = fila[3].ToString();
-                dr["Vigencia"] = fila[30].ToString();
-                dr["Perfil"] = fila[32].ToString();
-                dr["Sector"] = fila[55].ToString();
+                dr["Clave"] = fila["Clave"].ToString();
+                dr["Codigo"] = fila["Codigo"].ToString();
+                dr["Descripcion"] = fila["Descripcion"].ToString();
+                dr["Vigencia"] = fila["FechaVersion"].ToString();
+                dr["Perfil"] = fila["Perfil"].ToString();
+                dr["Sector"] = fila["Sector"].ToString();
                 dr["Dni"] = fila["Dni"].ToString();
                 dr["Egreso"] = fila["FEgreso"].ToString();
                 dr["Actualizado"] = fila["Actualizado"].ToString();
+                dr["VigenciaOrd"] = fila["VigenciaOrd"].ToString();
+                dr["Mostrar"] = "";
 
                 dtMuestraInicio.Rows.Add(dr);
 
@@ -136,11 +182,16 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void BTModifLegajo_Click(object sender, EventArgs e)
         {
+            _AbrirModificarLegajo(DGV_Legajos);
+        }
+
+        private void _AbrirModificarLegajo(DataGridView grid)
+        {
             try
             {
-                if (DGV_Legajos.SelectedRows.Count != 1) throw new Exception("Se debe seleccionar una fila a modificar");
+                if (grid.SelectedRows.Count != 1) throw new Exception("Se debe seleccionar una fila a modificar");
 
-                string IdAModificar = DGV_Legajos.SelectedRows[0].Cells[1].Value.ToString();
+                string IdAModificar = grid.SelectedRows[0].Cells["Codigo"].Value.ToString();
                 Legajo LegajoAModificar = new Legajo();
                 LegajoAModificar = L.BuscarUno(IdAModificar);
 
@@ -162,12 +213,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             {
                 DataTable dataTable = DGV_Legajos.DataSource as DataTable;
                 if (dataTable != null)
-                    dataTable.DefaultView.RowFilter = string.Format("CONVERT(Codigo, System.String) like '%{0}%' "
+                    dataTable.DefaultView.RowFilter = string.Format("(CONVERT(Codigo, System.String) like '%{0}%' "
                                                     + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
                                                     + " OR CONVERT(Vigencia, System.String) like '%{0}%'"
                                                     + " OR CONVERT(Sector, System.String) like '%{0}%'"
                                                     + " OR CONVERT(Dni, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Perfil, System.String) like '%{0}%'", TBFiltro.Text);
+                                                    + " OR CONVERT(Perfil, System.String) like '%{0}%') AND CONVERT(Mostrar, System.String) <> 'N'", TBFiltro.Text);
             }
             else
             {
@@ -177,7 +228,23 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void DGV_Perfiles_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            BTModifLegajo.PerformClick();
+            DataGridViewRow row = DGV_Legajos.Rows[e.RowIndex];
+            if (row.Cells["Vigencia"].Value.ToString() == "" && row.Cells["Sector"].Value.ToString() == "" && row.Cells["Perfil"].Value.ToString() == "")
+            {
+                DataTable WLegajos = L.ListarLegajosDiscriminado(row.Cells["Descripcion"].Value.ToString());
+
+                dgvDiscriminarLegajos.DataSource = WLegajos;
+                DataGridViewColumn column = dgvDiscriminarLegajos.Columns["Descripcion"];
+                if (column != null)
+                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                pnlDiscriminarLegajos.Visible = true;
+            }
+            else
+            {
+                BTModifLegajo.PerformClick();
+            }
+
         }
 
         private void Legajos_Inicio_Shown(object sender, EventArgs e)
@@ -204,6 +271,18 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void ckSoloActivos_CheckedChanged(object sender, EventArgs e)
         {
             ActualizarGrilla();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pnlDiscriminarLegajos.Visible = false;
+            TBFiltro.Focus();
+        }
+
+        private void dgvDiscriminarLegajos_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            pnlDiscriminarLegajos.Visible = false;
+            _AbrirModificarLegajo(dgvDiscriminarLegajos);
         }
     }
 }
