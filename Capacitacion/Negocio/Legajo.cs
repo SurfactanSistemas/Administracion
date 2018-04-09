@@ -1,159 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using ClassConexion;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using ClassConexion;
 
 namespace Negocio
 {
     public class Legajo : IRepoMetodos<Legajo>
     {
-        int _Codigo;
+        public int Codigo { set; get; }
 
-        public int Codigo
-        {
-            set { _Codigo = value; }
-            get { return _Codigo; }
-        }
+        public string Descripcion { set; get; }
 
-        string _Descripcion;
+        public string DNI { set; get; }
 
-        public string Descripcion
-        {
-            set { _Descripcion = value; }
-            get { return _Descripcion; }
-        }
+        public string CUIL { set; get; }
 
-        string _DNI;
+        public string FIngreso { set; get; }
 
-        public string DNI
-        {
-            set { _DNI = value; }
-            get { return _DNI; }
-        }
-
-        string _CUIL;
-
-        public string CUIL
-        {
-            set { _CUIL = value; }
-            get { return _CUIL; }
-        }
-
-        string _FIngreso;
-
-        public string FIngreso
-        {
-            set { _FIngreso = value; }
-            get { return _FIngreso; }
-        }
-
-        string _EstadoI;
-
-        public string EstadoI
-        {
-            set { _EstadoI = value; }
-            get { return _EstadoI; }
-        }
+        public string EstadoI { set; get; }
 
 
-        string _EstadoII;
+        public string EstadoII { set; get; }
 
-        public string EstadoII
-        {
-            set { _EstadoII = value; }
-            get { return _EstadoII; }
-        }
+        public string EstadoIII { set; get; }
 
-        string _EstadoIII;
+        public string EstadoX { set; get; }
 
-        public string EstadoIII
-        {
-            set { _EstadoIII = value; }
-            get { return _EstadoIII; }
-        }
-
-        string _EstadoX;
-
-        public string EstadoX
-        {
-            set { _EstadoX = value; }
-            get { return _EstadoX; }
-        }
-
-        string _EstadoIV;
-
-        public string EstadoIV
-        {
-            set { _EstadoIV = value; }
-            get { return _EstadoIV; }
-        }
+        public string EstadoIV { set; get; }
 
 
-        string _EstadoV;
-
-        public string EstadoV
-        {
-            set { _EstadoV = value; }
-            get { return _EstadoV; }
-        }
+        public string EstadoV { set; get; }
 
 
-        string _EstadoVI;
+        public string EstadoVI { set; get; }
 
-        public string EstadoVI
-        {
-            set { _EstadoVI = value; }
-            get { return _EstadoVI; }
-        }
-
-        string _EstadoVII;
-
-        public string EstadoVII
-        {
-            set { _EstadoVII = value; }
-            get { return _EstadoVII; }
-        }
+        public string EstadoVII { set; get; }
 
 
-        string _EstadoVIII;
-
-        public string EstadoVIII
-        {
-            set { _EstadoVIII = value; }
-            get { return _EstadoVIII; }
-        }
+        public string EstadoVIII { set; get; }
 
 
-        string _EstadoIX;
+        public string EstadoIX { set; get; }
 
-        public string EstadoIX
-        {
-            set { _EstadoIX = value; }
-            get { return _EstadoIX; }
-        }
-
-        string _FechaVersion;
-
-        public string FechaVersion
-        {
-            set { _FechaVersion = value; }
-            get { return _FechaVersion; }
-        }
+        public string FechaVersion { set; get; }
 
 
-        string _Version;
+        public string Version { set; get; }
 
-        public string Version
-        {
-            set { _Version = value; }
-            get { return _Version; }
-        }
-        
-        
 
         public Perfil Perfil;
 
@@ -182,27 +77,27 @@ namespace Negocio
 
         public List<Tema> Temas { get; set; }
 
-        public System.Data.DataTable ListarLegajosDiscriminado(string WNombrePersonal)
+        public DataTable ListarLegajosDiscriminado(string WNombrePersonal)
         {
             Conexion repo = new Conexion();
             string consulta = "SELECT Codigo, Descripcion, FechaVersion as Vigencia, Perfil, Sector FROM Legajo WHERE Renglon = 1 AND Descripcion = '" + WNombrePersonal.Trim() + "' ORDER BY Descripcion, Codigo, VigenciaOrd";
-            System.Data.DataTable Dt = repo.Listar(consulta);
+            DataTable Dt = repo.Listar(consulta);
             return Dt;
         }
 
-        public System.Data.DataTable ListarTodosParaGrilla()
+        public DataTable ListarTodosParaGrilla()
         {
             Conexion repo = new Conexion();
             string consulta = "SELECT Clave, Codigo, Descripcion, FechaVersion, Perfil, Sector, Dni, FEgreso, Actualizado, VigenciaOrd FROM Legajo WHERE Renglon = 1 ORDER BY Descripcion, Codigo, VigenciaOrd";
-            System.Data.DataTable Dt = repo.Listar(consulta);
+            DataTable Dt = repo.Listar(consulta);
             return Dt;
         }
 
-        public System.Data.DataTable ListarTodos()
+        public DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
             string consulta = "select * from Legajo where Renglon = 1 order by Descripcion, Codigo, VigenciaOrd";
-            System.Data.DataTable Dt = repo.Listar(consulta);
+            DataTable Dt = repo.Listar(consulta);
             return Dt;
         }
 
@@ -215,10 +110,10 @@ namespace Negocio
         }
 
 
-        public int CantidadLegajo(int Codigo, int Version)
+        public int CantidadLegajo(int WCodigo, int WVersion)
         {
             Conexion repo = new Conexion();
-            string consulta = "select COUNT (Renglon) from legajo where Codigo = " + Codigo +" and version = " + Version;
+            string consulta = "select COUNT (Renglon) from legajo where Codigo = " + WCodigo +" and version = " + WVersion;
             int valor = int.Parse(repo.TraerUltimoId(consulta));
             return valor;
         }
@@ -229,13 +124,13 @@ namespace Negocio
 
             int renglon = 1;
 
-            foreach (var t in this.Temas)
+            foreach (var t in Temas)
             {
-                var clave1 = this.Codigo.ToString().PadLeft(6, '0');
+                var clave1 = Codigo.ToString().PadLeft(6, '0');
                 var clave2 = renglon.ToString().PadLeft(2, '0');
 
                 var claper1 = Perfil.Codigo.ToString().PadLeft(6, '0');
-                var claper2 = "1".ToString().PadLeft(2, '0');
+                var claper2 = "1".PadLeft(2, '0');
 
                 string nece = t.Necesaria == 1 ? "X" : "";
                 string dese = t.Deseable == 1 ? "X" : "";
@@ -270,48 +165,11 @@ namespace Negocio
             
         }
 
-        private string ObtenerValor(string Esta)
-        {
-            //estados d ela primera pantalla
-            switch (Esta)
-            {
-                case "":
-                    return "0";
-                case "Exced":
-                    return "1";
-                case "Cumple":
-                    return "2";
-                case "Reforzar":
-                    return "3";
-                
-
-                default:
-                    return "";
-            }
-        }
-
-        private string ObtenerEstado(string p)
-        {
-            switch (p)
-            {
-                case "Cumple":
-                    return "0";
-                case "No Cumple":
-                    return "1";
-                case "No Aplica":
-                    return "2";
-                case "Cumple Act.":
-                    return "3";
-                default:
-                    return "";
-            }
-        }
-
         public Legajo BuscarUno(string IdAModificar)
         {
             Conexion repo = new Conexion();
             string consulta = "select * from legajo where codigo = " + IdAModificar + "order by Renglon";
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
 
             Legajo obj = new Legajo();
 
@@ -352,29 +210,28 @@ namespace Negocio
                 obj.ObservExtIII = DT.Rows[0]["ObservaII3"].ToString();
                 obj.ObservExtIV = DT.Rows[0]["ObservaII4"].ToString();
                 obj.ObservExtV = DT.Rows[0]["ObservaII5"].ToString();
-                obj.Perfil = new Perfil();
-                obj.Perfil.Codigo = int.Parse((DT.Rows[0]["Perfil"].ToString()));
+                obj.Perfil = new Perfil
+                {
+                    Codigo = int.Parse((DT.Rows[0]["Perfil"].ToString())),
+                    Descripcion = DT.Rows[0]["ImprePerfil"].ToString()
+                };
                 //obj.ImprePerfil = DT.Rows[0]["ImprePerfil"].ToString();
                 //obj.PerfilVersion = DT.Rows[0]["PerfilVersion"].ToString();
-                obj.Perfil.Descripcion = DT.Rows[0]["ImprePerfil"].ToString();
 
                 int perver = 0;
                 int.TryParse(DT.Rows[0]["PerfilVersion"].ToString(), out perver);
                 obj.Perfil.Version = perver;
 
-                Sector S = new Sector();
-                S.Codigo = int.Parse(DT.Rows[0]["Sector"].ToString());
+                Sector S = new Sector {Codigo = int.Parse(DT.Rows[0]["Sector"].ToString())};
                 S = S.BuscarUno(S.Codigo.ToString());
                 obj.Sector = new Sector();
                 obj.Sector = S;
 
                 obj.Temas = new List<Tema>();
                 //FALTA TEMAS
-                int renglon = 1;
-                foreach (System.Data.DataRow item in DT.Rows)
+                foreach (DataRow item in DT.Rows)
                 {
-                    Tema T = new Tema();
-                    T.Codigo = int.Parse(item["Curso"].ToString());
+                    Tema T = new Tema {Codigo = int.Parse(item["Curso"].ToString())};
                     //T = T.BuscarUno(T.Codigo.ToString(), renglon);
                     T = T.BuscarUno_Tema(T.Codigo.ToString());
                     //T.Descripcion = T.
@@ -383,7 +240,6 @@ namespace Negocio
                     T.EstadoCurso = item["EstadoCurso"].ToString();
                     T.EstaCurso = int.Parse(item["EstaCurso"].ToString());
                     obj.Temas.Add(T);
-                    renglon++;
                 }
 
                 //double hora_parse = 0;
@@ -418,13 +274,12 @@ namespace Negocio
                     }
 
                     string[] WFechaOrd = new string[3];
-                    string aux = "";
 
                     foreach (DataRow row in WLegajos.Rows)
                     {
                         WFechaOrd = row["FechaVersion"].ToString().Split('/');
                         Array.Reverse(WFechaOrd);
-                        aux = string.Join("", WFechaOrd);
+                        string aux = string.Join("", WFechaOrd);
 
                         cmd.CommandText = "UPDATE Legajo SET VigenciaOrd = '" + aux + "' WHERE Codigo = '" + row["Codigo"] + "'";
                         cmd.ExecuteNonQuery();
@@ -434,10 +289,10 @@ namespace Negocio
             }
         }
 
-        public void ActualizarPerfil(int Perfil, int Version)
+        public void ActualizarPerfil(int WPerfil, int WVersion)
         {
             Conexion repo = new Conexion();
-            string consulta = "update Legajo set Actualizado = 'N' where Perfil = " + Perfil + " and PerfilVersion = " + Version;
+            string consulta = "update Legajo set Actualizado = 'N' where Perfil = " + WPerfil + " and PerfilVersion = " + WVersion;
             repo.Modificar(consulta);
         
         }
@@ -481,30 +336,30 @@ namespace Negocio
         }
 
 
-        public System.Data.DataTable BuscarCursosPlanificacion(string p)
+        public DataTable BuscarCursosPlanificacion(string p)
         {
             Conexion repo = new Conexion();
             string consulta = "select L.Curso as Tema, C.Descripcion as DesTema,  L.Tema as Curso, " +
                 "'' as DesCurso, C.Horas, 0.0 as Realizado  from legajo L " +
             " inner join Curso C on C.Codigo = L.Curso  where L.codigo = " + p + " and L.EstaCurso <> 1 and L.EstaCurso <> 2 and L.EstaCurso<>6 ";
 
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
             return DT;
         }
 
 
-        public System.Data.DataTable BuscarCursos(string p)
+        public DataTable BuscarCursos(string p)
         {
             Conexion repo = new Conexion();
             string consulta = "select L.Curso as Tema, C.Descripcion as DesTema,  L.Tema as Curso, " +
                 "'' as DesCurso, C.Horas, 0.0 as Realizado  from legajo L " +
             " inner join Curso C on C.Codigo = L.Curso  where L.codigo = " + p;
 
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
             return DT;
         }
 
-        public System.Data.DataTable ListarLegajosdeCompetencias(int Desd, int Hast)
+        public DataTable ListarLegajosdeCompetencias(int Desd, int Hast)
         {
             Conexion repo = new Conexion();
             string consulta = "select distinct  L.Codigo, L.Descripcion, L.Perfil ,L.ImprePerfil,L.Sector, L.DesSector, L.Version, L.Fegreso,L.FIngreso, " +
@@ -522,25 +377,25 @@ namespace Negocio
                    "from legajo L"+ 
 				   "inner join tarea T on T.Codigo = L.Perfil inner join Curso C on L.Curso = C.Codigo "+
                    "where L.codigo = between " + Desd + " and " + Hast +" order by L.codigo, L.Cursoo";
-            System.Data.DataTable Dt = repo.Listar(consulta);
+            DataTable Dt = repo.Listar(consulta);
             return Dt;
         }
 
-        public System.Data.DataTable LegajoporPerfil(int PerfilDesde, int PerfilHasta)
+        public DataTable LegajoporPerfil(int PerfilDesde, int PerfilHasta)
         {
             Conexion repo = new Conexion();
             string consulta = "select L.Perfil, L.ImprePerfil, L.Codigo, L.Descripcion, L.Version, L.FechaVersion from Legajo L where L.Perfil >= " + PerfilDesde + " and L.Perfil <= " + PerfilHasta + " order by L.Perfil, L.Codigo desc ";
 
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
             return DT;
         }
 
-        public System.Data.DataTable LegajoConNecesidades(int DesdeTema, int HastaTema)
+        public DataTable LegajoConNecesidades(int DesdeTema, int HastaTema)
         {
             Conexion repo = new Conexion();
             string consulta = "select L.Curso, C.Descripcion, L.Codigo, L.Descripcion, CASE WHEN L.EstaCurso = 3 THEN 'Reforzar'  WHEN L.EstaCurso = 4 THEN 'En Entrenamiento' WHEN L.EstaCurso = 5 THEN 'No Cumple' WHEN L.EstaCurso = 8 THEN 'Cumple Actualmente' END as Estado from Legajo L inner join Curso C on C.Codigo = L.Curso where Curso >= " + DesdeTema + " and Curso <= "+HastaTema + " and EstaCurso <> 0 and EstaCurso<> 1  and EstaCurso <> 2  and EstaCurso <> 6 and EstaCurso <> 7 order by Codigo desc  ";
 
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
             return DT;
         }
 

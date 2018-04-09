@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using CrystalDecisions.CrystalReports.Engine;
-using Modulo_Capacitacion.Listados;
-using Modulo_Capacitacion.Listados.Perfiles;
+using Modulo_Capacitacion.Listados.Legajos;
 using Negocio;
 
 namespace Modulo_Capacitacion.Maestros.Legajos
@@ -42,13 +35,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void Bt_Fin_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void BTAgregarLegajo_Click(object sender, EventArgs e)
         {
-            AgModLegajo agrModLegajo = new AgModLegajo();
-            agrModLegajo.StartPosition = FormStartPosition.CenterScreen;
+            AgModLegajo agrModLegajo = new AgModLegajo {StartPosition = FormStartPosition.CenterScreen};
             agrModLegajo.ShowDialog();
 
             ActualizarGrilla();
@@ -68,14 +60,14 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             if (ckSoloActivos.Checked)
             {
-                DataTable dataTable = DGV_Legajos.DataSource as DataTable;
+                DataTable dataTable = (DataTable) DGV_Legajos.DataSource;
                 if (dataTable != null)
                     dataTable.DefaultView.RowFilter = "(CONVERT(Egreso, System.String) = '00/00/0000' OR CONVERT(Egreso, System.String) = '  /  /    ') AND CONVERT(Mostrar, System.String) <> 'N'";
             }
 
             if (ckSoloNoActualizados.Checked)
             {
-                DataTable dataTable = DGV_Legajos.DataSource as DataTable;
+                DataTable dataTable = (DataTable) DGV_Legajos.DataSource;
                 if (dataTable != null)
                     dataTable.DefaultView.RowFilter = "(CONVERT(Actualizado, System.String) = 'N' OR CONVERT(Actualizado, System.String) = 'n') AND CONVERT(Mostrar, System.String) <> 'N'";
             }
@@ -87,7 +79,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void _ProcesarPersonalConMasDeUnPerfil()
         {
-            string WAnterior = "", WActual  = "";
+            string WAnterior = "";
 
             DataTable table = DGV_Legajos.DataSource as DataTable;
 
@@ -95,7 +87,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             foreach (DataRow _row in table.Rows)
             {
-                WActual = _row["Descripcion"].ToString();
+                string WActual  = _row["Descripcion"].ToString();
 
                 if (WActual.Trim() == WAnterior.Trim())
                 {
@@ -125,7 +117,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void _OcultarColumnasAuxiliares()
         {
-            foreach (string columna in new String[] {"Egreso", "Actualizado"})
+            foreach (string columna in new[] {"Egreso", "Actualizado"})
             {
                 using (var column = DGV_Legajos.Columns[columna])
                 {
@@ -141,8 +133,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             foreach (DataRow fila in dtLegajos.Rows)
             {
-                DataRow dr;
-                dr = dtMuestraInicio.NewRow();
+                var dr = dtMuestraInicio.NewRow();
 
                 dr["Clave"] = fila["Clave"].ToString();
                 dr["Codigo"] = fila["Codigo"].ToString();
@@ -195,8 +186,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 Legajo LegajoAModificar = new Legajo();
                 LegajoAModificar = L.BuscarUno(IdAModificar);
 
-                AgModLegajo AgMod = new AgModLegajo(LegajoAModificar);
-                AgMod.StartPosition = FormStartPosition.CenterScreen;
+                AgModLegajo AgMod = new AgModLegajo(LegajoAModificar) {StartPosition = FormStartPosition.CenterScreen};
                 AgMod.ShowDialog();
 
                 ActualizarGrilla();
@@ -262,7 +252,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            Listados.Legajos.Inicio frm = new Listados.Legajos.Inicio();
+            Inicio frm = new Inicio();
             frm.ShowDialog();
 
             ActualizarGrilla();
