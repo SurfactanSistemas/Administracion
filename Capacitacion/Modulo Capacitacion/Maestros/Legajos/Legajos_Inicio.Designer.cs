@@ -49,6 +49,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.legajoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ckSoloNoActualizados = new System.Windows.Forms.CheckBox();
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,7 +94,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.DGV_Legajos.Size = new System.Drawing.Size(750, 441);
+            this.DGV_Legajos.Size = new System.Drawing.Size(863, 441);
             this.DGV_Legajos.TabIndex = 26;
             this.DGV_Legajos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
             // 
@@ -106,11 +107,12 @@
             this.P_Verde.Location = new System.Drawing.Point(0, 39);
             this.P_Verde.Margin = new System.Windows.Forms.Padding(0);
             this.P_Verde.Name = "P_Verde";
-            this.P_Verde.Size = new System.Drawing.Size(835, 59);
+            this.P_Verde.Size = new System.Drawing.Size(948, 59);
             this.P_Verde.TabIndex = 21;
             // 
             // P_Filtrado
             // 
+            this.P_Filtrado.Controls.Add(this.ckSoloNoActualizados);
             this.P_Filtrado.Controls.Add(this.ckSoloActivos);
             this.P_Filtrado.Controls.Add(this.TBFiltro);
             this.P_Filtrado.Controls.Add(this.LBFiltro);
@@ -118,7 +120,7 @@
             this.P_Filtrado.Location = new System.Drawing.Point(0, 0);
             this.P_Filtrado.Margin = new System.Windows.Forms.Padding(0);
             this.P_Filtrado.Name = "P_Filtrado";
-            this.P_Filtrado.Size = new System.Drawing.Size(835, 59);
+            this.P_Filtrado.Size = new System.Drawing.Size(948, 59);
             this.P_Filtrado.TabIndex = 1;
             // 
             // ckSoloActivos
@@ -165,7 +167,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(835, 39);
+            this.panel1.Size = new System.Drawing.Size(948, 39);
             this.panel1.TabIndex = 20;
             // 
             // label2
@@ -185,7 +187,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(671, 6);
+            this.label1.Location = new System.Drawing.Point(784, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 24);
             this.label1.TabIndex = 0;
@@ -260,7 +262,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(835, 539);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(948, 539);
             this.tableLayoutPanel1.TabIndex = 27;
             // 
             // tableLayoutPanel2
@@ -276,7 +278,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(835, 441);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(948, 441);
             this.tableLayoutPanel2.TabIndex = 22;
             // 
             // panel2
@@ -308,6 +310,18 @@
             // legajoBindingSource
             // 
             this.legajoBindingSource.DataSource = typeof(Negocio.Legajo);
+            // 
+            // ckSoloNoActualizados
+            // 
+            this.ckSoloNoActualizados.AutoSize = true;
+            this.ckSoloNoActualizados.ForeColor = System.Drawing.SystemColors.Control;
+            this.ckSoloNoActualizados.Location = new System.Drawing.Point(804, 17);
+            this.ckSoloNoActualizados.Name = "ckSoloNoActualizados";
+            this.ckSoloNoActualizados.Size = new System.Drawing.Size(112, 17);
+            this.ckSoloNoActualizados.TabIndex = 2;
+            this.ckSoloNoActualizados.Text = "Solo sin Actualizar";
+            this.ckSoloNoActualizados.UseVisualStyleBackColor = true;
+            this.ckSoloNoActualizados.CheckedChanged += new System.EventHandler(this.ckSoloActivos_CheckedChanged);
             // 
             // Clave
             // 
@@ -359,7 +373,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 539);
+            this.ClientSize = new System.Drawing.Size(948, 539);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(723, 462);
             this.Name = "Legajos_Inicio";
@@ -399,6 +413,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.CheckBox ckSoloActivos;
+        private System.Windows.Forms.CheckBox ckSoloNoActualizados;
         private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
