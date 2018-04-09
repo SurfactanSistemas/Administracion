@@ -74,13 +74,20 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     dataTable.DefaultView.RowFilter = "CONVERT(Actualizado, System.String) = 'N' OR CONVERT(Actualizado, System.String) = 'n'";
             }
 
-            DataGridViewColumn column = DGV_Legajos.Columns["Egreso"];
-            if (column != null) column.Visible = false;
-
-            column = DGV_Legajos.Columns["Actualizado"];
-            if (column != null) column.Visible = false;
+            _OcultarColumnasAuxiliares();
 
             TBFiltro.Focus();
+        }
+
+        private void _OcultarColumnasAuxiliares()
+        {
+            foreach (string columna in new String[] {"Egreso", "Actualizado"})
+            {
+                using (var column = DGV_Legajos.Columns[columna])
+                {
+                    if (column != null) column.Visible = false;
+                }
+            }
         }
 
         private void ArmardtMuestra()
