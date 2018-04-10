@@ -46,7 +46,7 @@ namespace Modulo_Capacitacion.Listados
                 reporte.SetParameterValue(p.Name, p.CurrentValues[0]);
             }
 
-            if (formula.Trim() != "")
+            if (formula != null && formula.Trim() != "")
             {
                 reporte.RecordSelectionFormula = formula;
             }

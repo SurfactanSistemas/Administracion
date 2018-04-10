@@ -65,6 +65,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -196,7 +197,8 @@
             this.listadoDeHorasCursadasPorLegajoToolStripMenuItem,
             this.listadoDePromedioDeCapacitaciónToolStripMenuItem,
             this.listadoDeCursosPorResponsableToolStripMenuItem,
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem});
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem,
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem});
             this.listadosToolStripMenuItem.Name = "listadosToolStripMenuItem";
             this.listadosToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.listadosToolStripMenuItem.Text = "Listados";
@@ -373,6 +375,13 @@
             this.panel2.Size = new System.Drawing.Size(784, 498);
             this.panel2.TabIndex = 4;
             // 
+            // listadoDeCursosPendientesPorSectorToolStripMenuItem
+            // 
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Name = "listadoDeCursosPendientesPorSectorToolStripMenuItem";
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Text = "Listado de Cursos Pendientes Por Sector";
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCursosPendientesPorSectorToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -432,6 +441,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStripMenuItem listadoDeCursosPendientesPorSectorToolStripMenuItem;
     }
 }
 

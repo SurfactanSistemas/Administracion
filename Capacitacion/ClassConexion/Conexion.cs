@@ -58,7 +58,7 @@ namespace ClassConexion
 
         public string TraerSectorMax()
         {
-            AbrirConexion();
+            //AbrirConexion();
             string consulta = "select max(Codigo) + 1 as Id from Sector where codigo != '1000'";
             SqlCommand cmd = new SqlCommand
             {
@@ -111,9 +111,26 @@ namespace ClassConexion
             CerrarConexion();
         }
 
+        public string TraerValor(string consulta, object valorDefecto = null)
+        {
+            //AbrirConexion();
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = consulta
+            };
+            AbrirConexion();
+            cmd.Connection = conexion;
+            string value = Convert.ToString(cmd.ExecuteScalar());
+
+            CerrarConexion();
+
+            return value;
+        }
+
         public string TraerUltimoId(string consulta)
         {
-            AbrirConexion();
+            //AbrirConexion();
             SqlCommand cmd = new SqlCommand
             {
                 CommandType = CommandType.Text,
@@ -130,7 +147,7 @@ namespace ClassConexion
 
         public string TraerVersionMax(string consulta)
         {
-            AbrirConexion();
+            //AbrirConexion();
             SqlCommand cmd = new SqlCommand
             {
                 CommandType = CommandType.Text,

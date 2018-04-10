@@ -68,6 +68,27 @@
       <DependentUpon>AvisoCronograma.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\CursosPendientesPorSector\CursosPendientesPorSector.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CursosPendientesPorSector.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\CursosPendientesPorSector\CursosPendientesPorSectorDetalles.cs">
+      <DependentUpon>CursosPendientesPorSectorDetalles.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\CursosPendientesPorSector\CursosPendientesPorSectorDetalles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CursosPendientesPorSectorDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CursosPendientesPorSector\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\CursosPendientesPorSector\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listados\Legajos\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -509,6 +530,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AvisoCronograma.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CursosPendientesPorSector\CursosPendientesPorSector.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CursosPendientesPorSector.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CursosPendientesPorSector\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\Legajos\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
@@ -733,6 +761,17 @@
     <None Include="bin\Debug\Modulo Capacitacion.exe.config" />
     <None Include="bin\Debug\Modulo Capacitacion.vshost.exe.config" />
     <None Include="bin\Debug\Modulo Capacitacion.vshost.exe.manifest" />
+    <None Include="Listados\CursosPendientesPorSector\CursosPendientesPorSectorDetalles.xsc">
+      <DependentUpon>CursosPendientesPorSectorDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\CursosPendientesPorSector\CursosPendientesPorSectorDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CursosPendientesPorSectorDetalles.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\CursosPendientesPorSector\CursosPendientesPorSectorDetalles.xss">
+      <DependentUpon>CursosPendientesPorSectorDetalles.xsd</DependentUpon>
+    </None>
     <None Include="Listados\CursosRealizadosporTemas\DSInforme.xsc">
       <DependentUpon>DSInforme.xsd</DependentUpon>
     </None>
@@ -919,6 +958,10 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClassConexion\ClassConexion.csproj">
+      <Project>{69A6EB95-7F83-4BF5-AFA3-B9B8FFD68761}</Project>
+      <Name>ClassConexion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Negocio\Negocio.csproj">
       <Project>{C6CCA416-B083-403E-B128-F045B18C4D2F}</Project>
       <Name>Negocio</Name>

@@ -143,5 +143,11 @@ namespace Modulo_Capacitacion
             Listados.LegajosConNecesidadesPendientes.Inicio Ini = new Listados.LegajosConNecesidadesPendientes.Inicio();
             Ini.ShowDialog();
         }
+
+        private void listadoDeCursosPendientesPorSectorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.CursosPendientesPorSector.Inicio frm = new Listados.CursosPendientesPorSector.Inicio();
+            frm.Show();
+        }
     }
 }

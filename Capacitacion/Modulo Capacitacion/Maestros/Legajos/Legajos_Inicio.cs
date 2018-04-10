@@ -231,7 +231,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
                 int WWidth = pnlDiscriminarLegajos.Width;
 
-                pnlDiscriminarLegajos.Location = new Point((this.Width/2) - WWidth/2, pnlDiscriminarLegajos.Location.Y);
+                pnlDiscriminarLegajos.Location = new Point((Width/2) - WWidth/2, pnlDiscriminarLegajos.Location.Y);
                 pnlDiscriminarLegajos.Visible = true;
             }
             else
