@@ -123,13 +123,65 @@ namespace Negocio
             return repo.Listar(consulta);
         }
 
+        public Boolean ExisteEnCronograma(int Año, int Legajo, int Curso)
+        {
+            ClassConexion.Conexion repo = new ClassConexion.Conexion();
 
+            string consulta = "select Cr.Legajo From Cronograma Cr where Cr.Ano = " + Año + " and Cr.Legajo = " + Legajo + " and Curso = " + Curso;
+
+
+            DataTable DT = repo.BuscarUno(consulta);
+
+            return DT.Rows.Count > 0;
+        }
 
         public System.Data.DataTable BuscarUnoCursada(int Año, int Legajo, int Curso)
         {
             ClassConexion.Conexion repo = new ClassConexion.Conexion();
 
             string consulta = "select * From Cronograma Cr where Cr.Ano = " + Año + " and Cr.Legajo = " + Legajo + " and Curso = " + Curso;
+
+
+            DataTable DT = repo.BuscarUno(consulta);
+
+            return DT;
+        }
+
+        public System.Data.DataTable CronogramaPendiente(int Año)
+        {
+            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+
+            string consulta = "select C.Horas, C.Realizado, C.Legajo, C.Curso, Cu.Descripcion from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso  where C.Ano = " + Año + " and C.Horas > C.Realizado order by C.Curso desc";
+
+
+
+            DataTable DT = repo.BuscarUno(consulta);
+
+            return DT;
+        }
+
+
+        public System.Data.DataTable CronogramaHoras(int Año, int TemaDesde, int TemaHasta)
+        {
+            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+
+            string consulta = "select C.Ano, C.Curso, Cu.Descripcion, C.Tema, C.DesTema, C.Legajo, C.DesLegajo, C.Horas, C.Realizado from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso  where Curso >= " + TemaDesde + " and Curso <= " + TemaHasta + " and Ano = " + Año + " order by Legajo desc";
+
+
+
+
+            DataTable DT = repo.BuscarUno(consulta);
+
+            return DT;
+        }
+
+        public System.Data.DataTable CronogramaSectorTema(int Año, int SectorDesde, int SectorHasta)
+        {
+            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+
+            string consulta = "Select C.Sector, C.DesSector, C.Curso, Cu.Descripcion, C.Legajo, C.DesLegajo, C.Horas from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso where C.Sector >= " + SectorDesde + " and C.Sector <= " + SectorHasta + " and Ano = " + Año + " order by C.Sector, C.Curso, Legajo";
+
+
 
 
             DataTable DT = repo.BuscarUno(consulta);

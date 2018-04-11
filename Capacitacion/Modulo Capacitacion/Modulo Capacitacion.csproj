@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper.cs" />
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +67,29 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AvisoCronograma.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\CronogramaPorSectoryTema\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CronogramaPorSectoryTema\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\CronogramaPorSectoryTema\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CronogramaPorSectoryTema\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\CronogramaPorSectoryTema\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CronogramaPorSectoryTema\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\CursosPendientesPorSector\CursosPendientesPorSector.cs">
@@ -87,6 +111,53 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Listados\CursosPendientesPorSector\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CursosPorResponsable\DSInforme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CursosPorResponsable\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\CursosPorResponsable\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CursosPorResponsable\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\CursosPorResponsable\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CursosPorResponsable\Reporte1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\Cursos\ListadoCursos1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoCursos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\InformedeCompetencias\imprelegajo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprelegajo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\InformedeCompetencias\imprelegajoii.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprelegajoii.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\InformedeCompetencias\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\InformedeCompetencias\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Listados\Legajos\Inicio.cs">
@@ -113,17 +184,38 @@
     <Compile Include="Listados\Cursos\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados\Cursos\ListadoCursos.cs">
-      <DependentUpon>ListadoCursos.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Listados\Perfiles\ListadoPerfiles.cs">
       <DependentUpon>ListadoPerfiles.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosyNoRealizados\DSInforme.cs">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosyNoRealizados\DSInforme.Designer.cs">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosyNoRealizados\ImpreInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosyNoRealizados\ImpreInforme.Designer.cs">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosyNoRealizados\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosyNoRealizados\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\TemasRealizadosyNoRealizados\Reporte1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\Temas\Inicio.cs">
       <SubType>Form</SubType>
@@ -142,29 +234,6 @@
     </Compile>
     <Compile Include="Listados\VistaPrevia.Designer.cs">
       <DependentUpon>VistaPrevia.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Cronograma Por Sector y Tema\ImpreInforme.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados\Cronograma Por Sector y Tema\ImpreInforme.Designer.cs">
-      <DependentUpon>ImpreInforme.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Cronograma Por Sector y Tema\Inicio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados\Cronograma Por Sector y Tema\Inicio.Designer.cs">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Cronograma Por Sector y Tema\listacronosectortema.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>listacronosectortema.rpt</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Cursos Por Responsable\Inicio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados\Cursos Por Responsable\Inicio.Designer.cs">
-      <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Listados\CursosRealizadosporTemas\DSInforme.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -211,29 +280,6 @@
     </Compile>
     <Compile Include="Listados\Horas Cursadas Por Legajo\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Informe de Competencias\DSInforme.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DSInforme.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Informe de Competencias\ImpreInforme.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados\Informe de Competencias\ImpreInforme.Designer.cs">
-      <DependentUpon>ImpreInforme.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Informe de Competencias\Inicio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados\Informe de Competencias\Inicio.Designer.cs">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Informe de Competencias\RepotSObserv.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RepotSObserv.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\LegajosConNecesidadesPendientes\DSInforme.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -401,12 +447,6 @@
     <Compile Include="Listados\TemasRealizadosPorSector\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados\Temas Realizados y No Realizados\Inicio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados\Temas Realizados y No Realizados\Inicio.Designer.cs">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </Compile>
     <Compile Include="Maestros\Cursos\AgModCurso.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -530,11 +570,46 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AvisoCronograma.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CronogramaPorSectoryTema\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CronogramaPorSectoryTema\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CronogramaPorSectoryTema\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\CursosPendientesPorSector\CursosPendientesPorSector.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CursosPendientesPorSector.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\CursosPendientesPorSector\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CursosPorResponsable\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CursosPorResponsable\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CursosPorResponsable\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Cursos\ListadoCursos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoCursos1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformedeCompetencias\imprelegajo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprelegajo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformedeCompetencias\imprelegajoii.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprelegajoii.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformedeCompetencias\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Legajos\Inicio.resx">
@@ -550,13 +625,19 @@
     <EmbeddedResource Include="Listados\Cursos\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Cursos\ListadoCursos.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ListadoCursos.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Listados\Perfiles\ListadoPerfiles.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoPerfiles.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasRealizadosyNoRealizados\ImpreInforme.resx">
+      <DependentUpon>ImpreInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasRealizadosyNoRealizados\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasRealizadosyNoRealizados\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Temas\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
@@ -567,19 +648,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Cronograma Por Sector y Tema\ImpreInforme.resx">
-      <DependentUpon>ImpreInforme.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Cronograma Por Sector y Tema\Inicio.resx">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Cronograma Por Sector y Tema\listacronosectortema.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>listacronosectortema.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Cursos Por Responsable\Inicio.resx">
-      <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\CursosRealizadosporTemas\ImpreInforme.resx">
       <DependentUpon>ImpreInforme.cs</DependentUpon>
@@ -599,16 +667,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Horas Cursadas Por Legajo\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Informe de Competencias\ImpreInforme.resx">
-      <DependentUpon>ImpreInforme.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Informe de Competencias\Inicio.resx">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Informe de Competencias\RepotSObserv.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RepotSObserv.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\LegajosConNecesidadesPendientes\ImpreInforme.resx">
       <DependentUpon>ImpreInforme.cs</DependentUpon>
@@ -681,9 +739,6 @@
       <LastGenOutput>Reporte.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\TemasRealizadosPorSector\Inicio.resx">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Temas Realizados y No Realizados\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Cursos\AgModCurso.resx">
@@ -761,6 +816,17 @@
     <None Include="bin\Debug\Modulo Capacitacion.exe.config" />
     <None Include="bin\Debug\Modulo Capacitacion.vshost.exe.config" />
     <None Include="bin\Debug\Modulo Capacitacion.vshost.exe.manifest" />
+    <None Include="Listados\CronogramaPorSectoryTema\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\CronogramaPorSectoryTema\DSInforme.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Listados\CronogramaPorSectoryTema\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
     <None Include="Listados\CursosPendientesPorSector\CursosPendientesPorSectorDetalles.xsc">
       <DependentUpon>CursosPendientesPorSectorDetalles.xsd</DependentUpon>
     </None>
@@ -771,6 +837,17 @@
     </None>
     <None Include="Listados\CursosPendientesPorSector\CursosPendientesPorSectorDetalles.xss">
       <DependentUpon>CursosPendientesPorSectorDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\CursosPorResponsable\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\CursosPorResponsable\DSInforme.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Listados\CursosPorResponsable\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
     </None>
     <None Include="Listados\CursosRealizadosporTemas\DSInforme.xsc">
       <DependentUpon>DSInforme.xsd</DependentUpon>
@@ -792,17 +869,6 @@
       <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
     </None>
     <None Include="Listados\Horas Cursadas Por Legajo\DSInforme.xss">
-      <DependentUpon>DSInforme.xsd</DependentUpon>
-    </None>
-    <None Include="Listados\Informe de Competencias\DSInforme.xsc">
-      <DependentUpon>DSInforme.xsd</DependentUpon>
-    </None>
-    <None Include="Listados\Informe de Competencias\DSInforme.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Listados\Informe de Competencias\DSInforme.xss">
       <DependentUpon>DSInforme.xsd</DependentUpon>
     </None>
     <None Include="Listados\LegajosConNecesidadesPendientes\DSInforme.xsc">
@@ -869,6 +935,17 @@
       <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
     </None>
     <None Include="Listados\TemasPorLegajo\DSInforme.xss">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\TemasRealizadosyNoRealizados\DSInforme.xsc">
+      <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\TemasRealizadosyNoRealizados\DSInforme.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Listados\TemasRealizadosyNoRealizados\DSInforme.xss">
       <DependentUpon>DSInforme.xsd</DependentUpon>
     </None>
     <None Include="Properties\DataSources\Negocio.Curso.datasource" />

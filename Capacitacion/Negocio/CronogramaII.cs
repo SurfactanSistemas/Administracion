@@ -73,6 +73,20 @@ namespace Negocio
             return DT;
         }
 
+        public System.Data.DataTable ListarPorCurso(int Año, int Curso)
+        {
+            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+
+            //string consulta = "select curso,count(*) as Personas,sum(horas) as Horas ,sum(Realizado) as Cursadas,"
+            //+ "(sum(horas) -sum(Realizado)) as Resta  from cronograma where  ano = " + p + " group by curso order by curso asc";
+
+            string consulta = "select Cr.Mes1, Cr.Mes2, Cr.Mes3, Cr.Mes4, Cr.Mes5, Cr.Mes6, Cr.Mes7, Cr.Mes8, Cr.Mes9, Cr.Mes10, Cr.Mes11, Cr.Mes12 from CronogramaII Cr where Cr.Ano = " + Año+" and Curso = " + Curso;
+
+            DataTable DT = repo.BuscarUno(consulta);
+
+            return DT;
+        }
+
         public DataTable ListarTodos()
         {
             throw new NotImplementedException();

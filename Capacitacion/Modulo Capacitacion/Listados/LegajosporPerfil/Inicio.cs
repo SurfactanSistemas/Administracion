@@ -86,5 +86,18 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil
         {
             Close();
         }
+
+        private void TB_Desde_MouseDown(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void TB_Desde_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TB_Hasta.Focus();
+            }
+        }
     }
 }

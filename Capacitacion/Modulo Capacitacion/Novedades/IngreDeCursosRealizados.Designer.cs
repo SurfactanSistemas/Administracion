@@ -52,7 +52,6 @@
             this.btnCerrarAviso = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtMes = new System.Windows.Forms.TextBox();
             this.DGV_Cronograma = new System.Windows.Forms.DataGridView();
             this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,6 +77,9 @@
             this.btnImprimirAviso = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.cmbMes = new System.Windows.Forms.ComboBox();
+            this.txtAnoConsulta = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -213,8 +215,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtAnoConsulta);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.cmbMes);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtMes);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Location = new System.Drawing.Point(18, 10);
             this.groupBox1.Name = "groupBox1";
@@ -227,20 +231,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(89, 39);
+            this.label2.Location = new System.Drawing.Point(53, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Mes:";
-            // 
-            // txtMes
-            // 
-            this.txtMes.Location = new System.Drawing.Point(133, 37);
-            this.txtMes.MaxLength = 2;
-            this.txtMes.Name = "txtMes";
-            this.txtMes.Size = new System.Drawing.Size(39, 20);
-            this.txtMes.TabIndex = 0;
-            this.txtMes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMes_KeyDown);
             // 
             // DGV_Cronograma
             // 
@@ -499,6 +494,48 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Año:";
             // 
+            // cmbMes
+            // 
+            this.cmbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMes.FormattingEnabled = true;
+            this.cmbMes.Items.AddRange(new object[] {
+            "",
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"});
+            this.cmbMes.Location = new System.Drawing.Point(96, 24);
+            this.cmbMes.Name = "cmbMes";
+            this.cmbMes.Size = new System.Drawing.Size(111, 21);
+            this.cmbMes.TabIndex = 2;
+            this.cmbMes.SelectedIndexChanged += new System.EventHandler(this.cmbMes_SelectedIndexChanged);
+            // 
+            // txtAnoConsulta
+            // 
+            this.txtAnoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAnoConsulta.Location = new System.Drawing.Point(97, 50);
+            this.txtAnoConsulta.Name = "txtAnoConsulta";
+            this.txtAnoConsulta.Size = new System.Drawing.Size(54, 20);
+            this.txtAnoConsulta.TabIndex = 37;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(52, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 18);
+            this.label3.TabIndex = 36;
+            this.label3.Text = "Año:";
+            // 
             // IngreDeCursosRealizados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -562,6 +599,8 @@
         private System.Windows.Forms.Button btnCerrarAviso;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtMes;
+        private System.Windows.Forms.ComboBox cmbMes;
+        private System.Windows.Forms.TextBox txtAnoConsulta;
+        private System.Windows.Forms.Label label3;
     }
 }

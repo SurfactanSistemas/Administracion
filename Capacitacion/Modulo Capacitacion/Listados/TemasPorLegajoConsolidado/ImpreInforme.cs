@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
@@ -37,24 +32,18 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             {
                 DataRow dr = dtInforme.Rows[i];
                 Ds.Tables[0].Rows.Add
-                (new object[]
-                {
+                (
                     dr[0].ToString(),
                     dr[1].ToString(),
                     dr[2].ToString(),
-                    dr[4],
-                    dr[5].ToString(),
-                    dr[6].ToString(),
-                    dr[7].ToString(),
-                    dr[8].ToString(),
-                    dr[9].ToString(),
-                    dr[10].ToString(),
-                    dr[11].ToString(),
-                    
-                    
-
-                }
-
+                    dr[4], 
+                    dr[5].ToString(), 
+                    dr[6].ToString(), 
+                    dr[7].ToString(), 
+                    dr[8].ToString(), 
+                    dr[9].ToString(), 
+                    dr[10].ToString(), 
+                    dr[11].ToString()
                 );
             }
 
@@ -63,14 +52,10 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
                 //Hago visible el report viewer
                 CRVInforme.Visible = true;
 
-
                 //Instancio el ReportImpre creado
                 Reporte RImpre = new Reporte();
                 //ReporteConsolidado RImpre = new ReporteConsolidado();
                 //RepoteCons RImpre = new RepoteCons();
-
-                
-
 
                 //Cargo el reportImpre con el dataset DS
                 RImpre.SetDataSource(Ds);
@@ -81,12 +66,12 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             else
             {
                 //Instancio el ReportImpre creado
-                //Reporte RImpre = new Reporte();
+                Reporte RImpre = new Reporte();
 
                 //Cargo el reportImpre con el dataset DS
-                //RImpre.SetDataSource(Ds);
+                RImpre.SetDataSource(Ds);
 
-                //RImpre.PrintToPrinter(1, true, 1, 999);
+                RImpre.PrintToPrinter(1, true, 0, 0);
                 Close();
             }
             

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using ClassConexion;
@@ -55,7 +56,7 @@ namespace Negocio
 
         public void ModificarCursadaConsol(int Valor, string Clave)
         {
-            Conexion repo = new Conexion();
+            Conexion  repo = new Conexion();
 
             string consulta = "update Cursadas set TipoCursada = " + Valor + " where Clave = '" + Clave +"'";
                
@@ -75,6 +76,15 @@ namespace Negocio
 
             System.Data.DataTable DT = Repo.Listar(consulta);
             return DT;
+        }
+
+        public System.Data.DataTable ListarCursadaCons2(int Desde, int Hasta)
+        {
+
+
+            Conexion repo = new Conexion();
+            string consulta = "SELECT  C.curso, C.Legajo, C.Clave, C.Ano FROM Cursadas C where C.Ano>= " + Desde + " and C.Ano <= " + Hasta + " order by Clave";
+            return repo.Listar(consulta);
         }
 
         public System.Data.DataTable ListarCursadaCons(int Desde, int Hasta)
@@ -121,8 +131,6 @@ namespace Negocio
 
         public System.Data.DataTable ListarCursoporSector(int SectorDesd, int SectorHast, int FechaDesde, int FechaHasta)
         {
-
-
             Conexion repo = new Conexion();
             string consulta = "select C.Sector, S.Descripcion, C.Legajo, C.DesLegajo, C.Curso, C.DesCurso, C.Tema, C.DesTema, C.Horas, C.Codigo, C.Fecha, C.Observaciones,  CASE WHEN C.TipoCursada = 0 THEN 'Si' ELSE 'No' END as Planificada  from Cursadas C inner join Sector S on S.Codigo = C.Sector where C.Sector >= " + SectorDesd + " and C.Sector <= " + SectorHast + " and OrdFecha > = " + FechaDesde + " and OrdFecha < = " + FechaHasta + "Order by Curso desc";
 
@@ -131,5 +139,15 @@ namespace Negocio
         }
 
 
+        public DataTable ListarCursoporSector(int SectorDesd, int SectorHast, int FechaDesde, int FechaHasta, string WTipoCursada)
+        {
+            Conexion repo = new Conexion();
+
+            if (WTipoCursada.Trim() != "") WTipoCursada = " AND TipoCursada = '" + WTipoCursada + "'";
+
+            string consulta = "select C.Sector, S.Descripcion, C.Legajo, C.DesLegajo, C.Curso, C.DesCurso, C.Tema, C.DesTema, C.Horas, C.Codigo, C.Fecha, C.Observaciones,  CASE WHEN C.TipoCursada = 0 THEN 'Si' ELSE 'No' END as Planificada  from Cursadas C inner join Sector S on S.Codigo = C.Sector where C.Sector >= " + SectorDesd + " and C.Sector <= " + SectorHast + " and OrdFecha > = " + FechaDesde + " and OrdFecha < = " + FechaHasta + "" + WTipoCursada + " Order by Curso desc";
+
+            return repo.Listar(consulta);
+        }
     }
 }

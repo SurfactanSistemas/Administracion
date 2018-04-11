@@ -91,23 +91,26 @@
             // 
             // TB_Hasta
             // 
-            this.TB_Hasta.Location = new System.Drawing.Point(178, 79);
+            this.TB_Hasta.Location = new System.Drawing.Point(214, 79);
+            this.TB_Hasta.MaxLength = 4;
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(70, 20);
             this.TB_Hasta.TabIndex = 85;
             // 
             // TB_Desde
             // 
-            this.TB_Desde.Location = new System.Drawing.Point(178, 38);
+            this.TB_Desde.Location = new System.Drawing.Point(214, 38);
+            this.TB_Desde.MaxLength = 4;
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.Size = new System.Drawing.Size(70, 20);
             this.TB_Desde.TabIndex = 84;
+            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(67, 79);
+            this.label2.Location = new System.Drawing.Point(103, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 18);
             this.label2.TabIndex = 83;
@@ -119,7 +122,7 @@
             this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(67, 130);
+            this.BT_Pantalla.Location = new System.Drawing.Point(76, 130);
             this.BT_Pantalla.Name = "BT_Pantalla";
             this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
             this.BT_Pantalla.TabIndex = 81;
@@ -132,7 +135,7 @@
             this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(168, 130);
+            this.BT_Imprimir.Location = new System.Drawing.Point(171, 130);
             this.BT_Imprimir.Name = "BT_Imprimir";
             this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
             this.BT_Imprimir.TabIndex = 80;
@@ -144,7 +147,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(258, 130);
+            this.BT_Salir.Location = new System.Drawing.Point(266, 130);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
@@ -154,7 +157,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(62, 38);
+            this.label1.Location = new System.Drawing.Point(98, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 18);
             this.label1.TabIndex = 1;
@@ -168,6 +171,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Inicio";
+            this.Shown += new System.EventHandler(this.Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

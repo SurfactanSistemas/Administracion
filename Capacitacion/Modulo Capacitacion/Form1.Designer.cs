@@ -59,13 +59,13 @@
             this.listadoDePromedioDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeCursosPorResponsableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -215,6 +215,7 @@
             this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Name = "informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem";
             this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
             this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Text = "Informe de Competencias y Necesidades de Capacitación";
+            this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem_Click);
             // 
             // listadoDeTemasRealizadosPorLegajoToolStripMenuItem
             // 
@@ -274,6 +275,7 @@
             this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem.Name = "listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem";
             this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
             this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem.Text = "Listado de Temas Realizados y No Realizados";
+            this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem.Click += new System.EventHandler(this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem_Click);
             // 
             // listadoDeTemasToolStripMenuItem
             // 
@@ -306,12 +308,21 @@
             this.listadoDeCursosPorResponsableToolStripMenuItem.Name = "listadoDeCursosPorResponsableToolStripMenuItem";
             this.listadoDeCursosPorResponsableToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
             this.listadoDeCursosPorResponsableToolStripMenuItem.Text = "Listado de Cursos por Responsable";
+            this.listadoDeCursosPorResponsableToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCursosPorResponsableToolStripMenuItem_Click);
             // 
             // listadoDeCronogramaPorSectorYTemaToolStripMenuItem
             // 
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Name = "listadoDeCronogramaPorSectorYTemaToolStripMenuItem";
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Text = "Listado de Cronograma por Sector y Tema";
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem_Click);
+            // 
+            // listadoDeCursosPendientesPorSectorToolStripMenuItem
+            // 
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Name = "listadoDeCursosPendientesPorSectorToolStripMenuItem";
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Text = "Listado de Cursos Pendientes Por Sector";
+            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCursosPendientesPorSectorToolStripMenuItem_Click);
             // 
             // procesosToolStripMenuItem
             // 
@@ -374,13 +385,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(784, 498);
             this.panel2.TabIndex = 4;
-            // 
-            // listadoDeCursosPendientesPorSectorToolStripMenuItem
-            // 
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Name = "listadoDeCursosPendientesPorSectorToolStripMenuItem";
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Text = "Listado de Cursos Pendientes Por Sector";
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCursosPendientesPorSectorToolStripMenuItem_Click);
             // 
             // Form1
             // 

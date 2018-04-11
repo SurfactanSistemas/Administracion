@@ -127,14 +127,15 @@ namespace Modulo_Capacitacion.Listados
                 mailItem.Attachments.Add(WRutaArchivo);
 
                 // Si se pasaron las direcciones, se envia directamente el email, sino se abre en una ventana para que el usuario lo termine de completar.
-                if (WDirecciones == "")
-                {
-                    mailItem.Display();
-                }
-                else
-                {
-                    mailItem.Send();   
-                }
+                //if (WDirecciones == "")
+                //{
+                //    mailItem.Display();
+                //}
+                //else
+                //{
+                //    mailItem.Send();   
+                //}
+                mailItem.Display();
                 
                 // Borramos el archivo temporal de el escritorio.
                 BorrarPDF(WRutaArchivo);

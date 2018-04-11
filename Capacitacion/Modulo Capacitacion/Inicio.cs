@@ -149,5 +149,29 @@ namespace Modulo_Capacitacion
             Listados.CursosPendientesPorSector.Inicio frm = new Listados.CursosPendientesPorSector.Inicio();
             frm.Show();
         }
+
+        private void listadoDeCursosPorResponsableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.CursosPorResponsable.Inicio frm = new Listados.CursosPorResponsable.Inicio();
+            frm.Show();
+        }
+
+        private void listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.TemasRealizadosyNoRealizados.Inicio frm = new Listados.TemasRealizadosyNoRealizados.Inicio();
+            frm.Show();
+        }
+
+        private void listadoDeCronogramaPorSectorYTemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.CronogramaPorSectoryTema.Inicio frm = new Listados.CronogramaPorSectoryTema.Inicio();
+            frm.Show();
+        }
+
+        private void informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.InformedeCompetencias.Inicio frm = new Listados.InformedeCompetencias.Inicio();
+            frm.Show();
+        }
     }
 }

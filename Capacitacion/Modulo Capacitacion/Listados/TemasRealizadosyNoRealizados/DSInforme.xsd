@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSInforme" targetNamespace="http://tempuri.org/DSInforme.xsd" xmlns:mstns="http://tempuri.org/DSInforme.xsd" xmlns="http://tempuri.org/DSInforme.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSInforme" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSInforme" msprop:Generator_UserDSName="DSInforme">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DSInforme" msprop:Generator_TableClassName="DSInformeDataTable" msprop:Generator_TableVarName="tableDSInforme" msprop:Generator_RowChangedName="DSInformeRowChanged" msprop:Generator_TablePropName="_DSInforme" msprop:Generator_RowDeletingName="DSInformeRowDeleting" msprop:Generator_RowChangingName="DSInformeRowChanging" msprop:Generator_RowEvHandlerName="DSInformeRowChangeEventHandler" msprop:Generator_RowDeletedName="DSInformeRowDeleted" msprop:Generator_RowClassName="DSInformeRow" msprop:Generator_UserTableName="DSInforme" msprop:Generator_RowEvArgName="DSInformeRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Año" msprop:Generator_ColumnVarNameInTable="columnAño" msprop:Generator_ColumnPropNameInRow="Año" msprop:Generator_ColumnPropNameInTable="AñoColumn" msprop:Generator_UserColumnName="Año" type="xs:string" minOccurs="0" />
+              <xs:element name="CodCurso" msprop:Generator_ColumnVarNameInTable="columnCodCurso" msprop:Generator_ColumnPropNameInRow="CodCurso" msprop:Generator_ColumnPropNameInTable="CodCursoColumn" msprop:Generator_UserColumnName="CodCurso" type="xs:int" minOccurs="0" />
+              <xs:element name="DescCurso" msprop:Generator_ColumnVarNameInTable="columnDescCurso" msprop:Generator_ColumnPropNameInRow="DescCurso" msprop:Generator_ColumnPropNameInTable="DescCursoColumn" msprop:Generator_UserColumnName="DescCurso" type="xs:string" minOccurs="0" />
+              <xs:element name="CodTema" msprop:Generator_ColumnVarNameInTable="columnCodTema" msprop:Generator_ColumnPropNameInRow="CodTema" msprop:Generator_ColumnPropNameInTable="CodTemaColumn" msprop:Generator_UserColumnName="CodTema" type="xs:string" minOccurs="0" />
+              <xs:element name="DescTema" msprop:Generator_ColumnVarNameInTable="columnDescTema" msprop:Generator_ColumnPropNameInRow="DescTema" msprop:Generator_ColumnPropNameInTable="DescTemaColumn" msprop:Generator_UserColumnName="DescTema" type="xs:string" minOccurs="0" />
+              <xs:element name="CodLegajo" msprop:Generator_ColumnVarNameInTable="columnCodLegajo" msprop:Generator_ColumnPropNameInRow="CodLegajo" msprop:Generator_ColumnPropNameInTable="CodLegajoColumn" msprop:Generator_UserColumnName="CodLegajo" type="xs:string" minOccurs="0" />
+              <xs:element name="DescLegajo" msprop:Generator_ColumnVarNameInTable="columnDescLegajo" msprop:Generator_ColumnPropNameInRow="DescLegajo" msprop:Generator_ColumnPropNameInTable="DescLegajoColumn" msprop:Generator_UserColumnName="DescLegajo" type="xs:string" minOccurs="0" />
+              <xs:element name="Horas" msprop:Generator_ColumnVarNameInTable="columnHoras" msprop:Generator_ColumnPropNameInRow="Horas" msprop:Generator_ColumnPropNameInTable="HorasColumn" msprop:Generator_UserColumnName="Horas" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Realizado" msprop:Generator_ColumnVarNameInTable="columnRealizado" msprop:Generator_ColumnPropNameInRow="Realizado" msprop:Generator_ColumnPropNameInTable="RealizadoColumn" msprop:Generator_UserColumnName="Realizado" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

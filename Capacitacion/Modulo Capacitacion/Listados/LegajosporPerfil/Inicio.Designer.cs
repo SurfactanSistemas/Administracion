@@ -102,6 +102,8 @@
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.Size = new System.Drawing.Size(100, 20);
             this.TB_Desde.TabIndex = 84;
+            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
+            this.TB_Desde.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TB_Desde_MouseDown);
             // 
             // label2
             // 

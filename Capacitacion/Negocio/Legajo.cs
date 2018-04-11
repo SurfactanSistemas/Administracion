@@ -363,20 +363,18 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
             string consulta = "select distinct  L.Codigo, L.Descripcion, L.Perfil ,L.ImprePerfil,L.Sector, L.DesSector, L.Version, L.Fegreso,L.FIngreso, " +
-"T.TareasI, T.TareasII, T.TareasIII, T.DescriI,T.DescriII,t.DescriIII, T.DescriIV, T.DescriV,T.Fisica,T.OtrosI,T.OtrosII, " +
-"T.Equivalencias,T.EquivalenciasII, T.ObservaI, T.ObservaII, T.ObservaIII, T.ObservaIV, T.ObservaV, "+
-"T.NecesariaI, T.NecesariaII,T.NecesariaIII, T.NecesariaIV,T.NecesariaV, T.NecesariaVI,T.NecesariaVII, T.NecesariaVIII, "+
-"T.DeseableI, T.DeseableII,T.DeseableIII, T.DeseableIV,T.DeseableV, T.DeseableVI,T.DeseableVII, T.DeseableVIII,L.renglon, "+
-
-"L.EstadoI, " +
-
-               "L.EstadoII,L.EstadoIII,L.EstadoIV,L.EstadoV,L.EstadoVI,L.EstadoVII, "+
+                "T.TareasI, T.TareasII, T.TareasIII, T.DescriI,T.DescriII,t.DescriIII, T.DescriIV, T.DescriV,T.Fisica,T.OtrosI,T.OtrosII, " +
+                "T.Equivalencias,T.EquivalenciasII, T.ObservaI, T.ObservaII, T.ObservaIII, T.ObservaIV, T.ObservaV, "+
+                "T.NecesariaI, T.NecesariaII,T.NecesariaIII, T.NecesariaIV,T.NecesariaV, T.NecesariaVI,T.NecesariaVII, T.NecesariaVIII, "+
+                "T.DeseableI, T.DeseableII,T.DeseableIII, T.DeseableIV,T.DeseableV, T.DeseableVI,T.DeseableVII, T.DeseableVIII,L.renglon, "+
+                "L.EstadoI, " +
+                "L.EstadoII,L.EstadoIII,L.EstadoIV,L.EstadoV,L.EstadoVI,L.EstadoVII, "+
                 "L.EstadoVIII,L.EstadoIX,L.EstadoX,  L.EstaI, "+
                 "L.EstaII,L.EstaIII,L.EstaIV,L.EstaV,L.EstaVI,L.EstaVII,L.EstaVIII,L.EstaIX,L.EstaX, "+
-             "L.Curso, C.Descripcion as DescCurso,  L.NecesariaCurso,L.DeseableCurso,L.EstaCurso,L.EstadoCurso "+
-                   "from legajo L"+ 
-				   "inner join tarea T on T.Codigo = L.Perfil inner join Curso C on L.Curso = C.Codigo "+
-                   "where L.codigo = between " + Desd + " and " + Hast +" order by L.codigo, L.Cursoo";
+                "L.Curso, C.Descripcion as DescCurso,  L.NecesariaCurso,L.DeseableCurso,L.EstaCurso,L.EstadoCurso "+
+                "from legajo L"+ 
+                "inner join tarea T on T.Codigo = L.Perfil inner join Curso C on L.Curso = C.Codigo "+
+                "where L.codigo between " + Desd + " and " + Hast +" order by L.codigo, L.Curso";
             DataTable Dt = repo.Listar(consulta);
             return Dt;
         }
@@ -393,13 +391,24 @@ namespace Negocio
         public DataTable LegajoConNecesidades(int DesdeTema, int HastaTema)
         {
             Conexion repo = new Conexion();
-            string consulta = "select L.Curso, C.Descripcion, L.Codigo, L.Descripcion, CASE WHEN L.EstaCurso = 3 THEN 'Reforzar'  WHEN L.EstaCurso = 4 THEN 'En Entrenamiento' WHEN L.EstaCurso = 5 THEN 'No Cumple' WHEN L.EstaCurso = 8 THEN 'Cumple Actualmente' END as Estado from Legajo L inner join Curso C on C.Codigo = L.Curso where Curso >= " + DesdeTema + " and Curso <= "+HastaTema + " and EstaCurso <> 0 and EstaCurso<> 1  and EstaCurso <> 2  and EstaCurso <> 6 and EstaCurso <> 7 order by Codigo desc  ";
+            //string consulta = "select L.Curso, C.Descripcion, L.Codigo, L.Descripcion, CASE WHEN L.EstaCurso = 3 THEN 'Reforzar'  WHEN L.EstaCurso = 4 THEN 'En Entrenamiento' WHEN L.EstaCurso = 5 THEN 'No Cumple' WHEN L.EstaCurso = 8 THEN 'Cumple Actualmente' END as Estado from Legajo L inner join Curso C on C.Codigo = L.Curso where Curso >= " + DesdeTema + " and Curso <= "+HastaTema + " and EstaCurso <> 0 and EstaCurso<> 1  and EstaCurso <> 2  and EstaCurso <> 6 and EstaCurso <> 7 order by Codigo desc  ";
+            string consulta = "select L.Curso, C.Descripcion, L.Codigo, L.Descripcion, CASE WHEN L.EstaCurso = 3 THEN 'Reforzar'  WHEN L.EstaCurso = 4 THEN 'En Entrenamiento' WHEN L.EstaCurso = 5 THEN 'No Cumple' WHEN L.EstaCurso = 8 THEN 'Cumple Actualmente' END as Estado from Legajo L inner join Curso C on C.Codigo = L.Curso where Curso >= " + DesdeTema + " and Curso <= " + HastaTema + " and EstaCurso IN (3,4,5,8) AND (L.FEgreso = '  /  /    '  OR L.FEgreso = '00/00/0000' OR L.FEgreso = '') order by L.Codigo desc";
 
             DataTable DT = repo.BuscarUno(consulta);
             return DT;
         }
 
 
+
+        public System.Data.DataTable LegajoPerfilResponsable(int Legajo)
+        {
+            Conexion repo = new Conexion();
+            string consulta = "select distinct L.Perfil, T.Responsable, T.ResponsableII, L.Descripcion from Legajo L inner join Tarea T on T.Codigo = L.Perfil where L.Codigo = " + Legajo;
+
+
+            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            return DT;
+        }
 
         public void Modificar(Legajo t)
         {
