@@ -49,15 +49,23 @@ Public Class MenuPrincipal
     Public Sub _CargarTodasLasProformas()
         Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WFechaLimite, WPackingList, WRowIndex
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total, p.FechaLimiteOrd, p.PackingList FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente ORDER BY p.FechaOrd, p.Proforma")
+        Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
+        Dim WFiltro = "AND Estado = 0 AND Cerrada = 0"
+
+        If ckMostrarCerradasAprobadas.Checked then WFiltro = ""
+
+        Dim ZSql = "SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total, p.FechaLimiteOrd, p.PackingList FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente  " & WFiltro & "  ORDER BY p.FechaOrd, p.Proforma"
 
         Try
 
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
             cm.Connection = cn
+            cm.CommandText = ZSql
             dr = cm.ExecuteReader()
+            
+            dgvPrincipal.Rows.Clear()
 
             If dr.HasRows Then
 
@@ -70,8 +78,6 @@ Public Class MenuPrincipal
                 WFechaLimite = ""
                 WPackingList = ""
                 WRowIndex = 0
-
-                dgvPrincipal.Rows.Clear()
 
                 Do While dr.Read()
 
@@ -547,5 +553,9 @@ Public Class MenuPrincipal
         End If
 
         e.Handled = True
+    End Sub
+
+    Private Sub ckMostrarCerradasAprobadas_CheckedChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles ckMostrarCerradasAprobadas.CheckedChanged
+        _CargarTodasLasProformas()
     End Sub
 End Class
