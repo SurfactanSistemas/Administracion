@@ -33,7 +33,7 @@ namespace Eval_Proveedores
 
         private void procesosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            //Close();
         }
 
         private void ingChoferesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -112,6 +112,11 @@ namespace Eval_Proveedores
         {
             Listados.CheckListHojaRuta.Inicio Ini = new Listados.CheckListHojaRuta.Inicio();
             Ini.ShowDialog();
+        }
+
+        private void salirDelSistemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
