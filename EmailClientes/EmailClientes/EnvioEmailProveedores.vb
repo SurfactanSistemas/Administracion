@@ -1,0 +1,479 @@
+﻿Imports Microsoft.Office.Interop
+Imports System.Data.SqlClient
+Imports ClasesCompartidas
+Imports EmailClientes.Clases
+
+Public Class EnvioEmailProveedores
+
+    Private _Asunto As String
+    Private _CuerpoEmail As String
+    Private _LineasExtras As String
+    Private _ArchivoAdjunto As String
+    Private WListaEmails As String
+    '
+    ' TODO - CONSULTAR EN CASO DE USO EN PELLITAL, QUE DIRECCION SE UTILIZA O SI SE EVITA EL ENVIO DE EMAIL EN CASO DE NO UTILIZARLO.
+    '
+    Private _To As String = "surfactan@surfactan.com.ar" '"gferreyra@surfactan.com.ar" ' Cambiar por la direccion de Surfactan y posibles otras.
+
+
+    Private Sub btnEnviar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnviar.Click
+
+        _Asunto = Trim(txtAsunto.Text)
+
+        _CuerpoEmail = Trim(txtCuerpoEmail.Text)
+
+        _LineasExtras = _ParsearLineasExtras()
+
+        WListaEmails = Trim(txtDestinatarios.Text)
+
+        _ProcesarEnvioEmails()
+
+    End Sub
+
+    Private Sub _ProcesarEnvioEmails()
+        Try
+            _EnviarEmail()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    
+    Private Sub _EnviarEmail()
+        Dim _Outlook As New Outlook.Application
+
+        Try
+            Dim _Mail As Outlook.MailItem = _Outlook.CreateItem(Outlook.OlItemType.olMailItem)
+
+            With _Mail
+
+                .To = _To
+                .BCC = WListaEmails
+                .Subject = _Asunto
+                .Body = _CuerpoEmail + vbCrLf + _LineasExtras
+
+                If Trim(_ArchivoAdjunto) <> "" Then
+                    .Attachments.Add(_ArchivoAdjunto)
+                End If
+
+            End With
+
+            '_Mail.Send()
+            _Mail.Display()
+
+            _Mail = Nothing
+
+            Me.Close()
+
+        Catch ex As Exception
+            Throw New Exception("Ocurrió un problema al querer enviar el email a los proveedores.")
+        Finally
+            _Outlook = Nothing
+        End Try
+
+    End Sub
+
+    Private Function _ParsearLineasExtras()
+        Dim LineasParseadas As String = ""
+
+        If Trim(txtLineaExtraI.Text) <> "" Then
+            LineasParseadas &= Trim(txtLineaExtraI.Text) + vbCrLf
+        End If
+        If Trim(txtLineaExtraII.Text) <> "" Then
+            LineasParseadas &= Trim(txtLineaExtraII.Text) + vbCrLf
+        End If
+        If Trim(txtLineaExtraIII.Text) <> "" Then
+            LineasParseadas &= Trim(txtLineaExtraIII.Text) + vbCrLf
+        End If
+        If Trim(txtLineaExtraIV.Text) <> "" Then
+            LineasParseadas &= Trim(txtLineaExtraIV.Text) + vbCrLf
+        End If
+
+        Return LineasParseadas
+    End Function
+
+    Private Sub btnCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnAdjuntar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdjuntar.Click
+        _AdjuntarArchivo()
+    End Sub
+
+    Private Sub EnvioEmailProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Conexion.EmpresaDeTrabajo = "Surfactan"
+        Label2.Text = "SURFACTAN" 'Globals.NombreEmpresa()
+
+        txtAsunto.Text = ""
+        txtCuerpoEmail.Text = ""
+        txtLineaExtraI.Text = ""
+        txtLineaExtraII.Text = ""
+        txtLineaExtraIII.Text = ""
+        txtLineaExtraIV.Text = ""
+        txtNombreArchivoAdjunto.Text = ""
+        pnlDestinatarios.Visible=False
+    End Sub
+
+    Private sub _TraerClientesDestinatarios()
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+        Dim _FechaUltimo As String
+        Dim _Inhabilitado As String = ""
+        Dim WProveedor, WRazon, WEmail, WRubro As String
+
+        'Calculo un año hacia atrás a partir del dia de hoy.
+        _FechaUltimo = _ObtenerFechaLimite()
+
+        Dim tabla As New DataTable
+
+        Try
+            cn.ConnectionString = Helper._ConectarA() '"Data Source=193.168.0.7;Initial Catalog=SurfactanSA;User ID=usuarioadmin; Password=usuarioadmin"
+
+            cm.CommandText = "select distinct CtaCte.Cliente, Cliente.Razon, Cliente.EmailFactura as Email, Cliente.Rubro FROM Cliente, CtaCte WHERE Cliente.Cliente = CtaCte.Cliente and CtaCte.OrdFecha >= " & _FechaUltimo & " and Cliente.EmailFactura <> '' ORDER BY Razon"
+            cm.Connection = cn
+
+            cn.Open()
+
+            dr = cm.ExecuteReader()
+
+            With tabla.Columns
+                .Add("Enviar")
+                .Add("Cliente")
+                .Add("Razon")
+                .Add("Email")
+                .Add("Rubro")
+            End With
+
+            If dr.HasRows Then
+
+                Do While dr.Read()
+
+                    '_Inhabilitado = IIf(IsDBNull(dr.Item("Inhabilitado")), "0", dr.Item("Inhabilitado"))
+
+                    'If _Inhabilitado <> "1" Then
+                        WProveedor = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
+                        WRazon = IIf(IsDBNull(dr.Item("Razon")), "", dr.Item("Razon"))
+                        WEmail = IIf(IsDBNull(dr.Item("Email")), "", dr.Item("Email"))
+                        WRubro = IIf(IsDBNull(dr.Item("Rubro")), "", dr.Item("Rubro"))
+                        
+                        Dim WRow As DataRow = tabla.NewRow
+
+                        WRow.Item("Enviar") = ""
+                        WRow.Item("Cliente") = WProveedor
+                        WRow.Item("Razon") = WRazon
+                        WRow.Item("Email") = Trim(WEmail)
+                        WRow.Item("Rubro") = WRubro
+
+                        tabla.Rows.Add(WRow)
+
+                    'End If
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar las direcciones de E-Mail de los Clientes.", MsgBoxStyle.Critical)
+        Finally
+            cn.Close()
+            cm = Nothing
+            dr = Nothing
+        End Try
+
+        DataGridView1.DataSource = Nothing
+        DataGridView1.Columns.Clear
+
+        If tabla.Rows.Count > 0 then
+            DataGridView1.DataSource = tabla
+
+            With DataGridView1.Columns(0)
+                .Width = 20
+                .HeaderText=""
+                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .SortMode = DataGridViewColumnSortMode.NotSortable
+            End With
+            
+            With DataGridView1.Columns(1)
+                .Width = 80
+                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            End With
+
+            With DataGridView1.Columns(2)
+                .Width = 200
+            End With
+
+            With DataGridView1.Columns(3)
+                .Width = 160
+            End With
+
+            With DataGridView1.Columns(4)
+                .Visible=False
+            End With
+
+        End If
+    End sub
+
+    Private Function _ObtenerFechaLimite()
+        Dim fecha As String = ""
+
+        fecha += (Today.Year - 1).ToString()
+
+        If Today.Month > 9 Then
+            fecha += Today.Month.ToString()
+        Else
+            fecha += "0" + Today.Month.ToString()
+        End If
+
+        Return fecha + "01"
+    End Function
+
+    Private Sub _AdjuntarArchivo()
+
+        OFDAdjuntarArchivo.FileName = ""
+
+        If OFDAdjuntarArchivo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+
+            _ArchivoAdjunto = OFDAdjuntarArchivo.FileName
+
+            txtNombreArchivoAdjunto.Text = _ArchivoAdjunto
+
+        End If
+
+        OFDAdjuntarArchivo.Dispose()
+
+    End Sub
+
+    Private Sub txtNombreArchivoAdjunto_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNombreArchivoAdjunto.DoubleClick
+        _AdjuntarArchivo()
+    End Sub
+
+
+    Private Sub txtNombreArchivoAdjunto_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtNombreArchivoAdjunto.DragEnter
+        _PermitirDrag(e)
+    End Sub
+
+    Private Sub _PermitirDrag(ByVal e As System.Windows.Forms.DragEventArgs)
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
+
+    Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
+        Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+        _ArchivoAdjunto = archivos(0)
+        txtNombreArchivoAdjunto.Text = _ArchivoAdjunto
+    End Sub
+
+    Private Sub txtNombreArchivoAdjunto_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtNombreArchivoAdjunto.DragDrop
+        _ProcesarDragDeArchivo(e)
+    End Sub
+
+    Private Sub btnAdjuntar_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles btnAdjuntar.DragEnter
+        _PermitirDrag(e)
+    End Sub
+
+    Private Sub btnAdjuntar_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles btnAdjuntar.DragDrop
+        _ProcesarDragDeArchivo(e)
+    End Sub
+
+    Private Sub txtAsunto_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAsunto.KeyDown
+        
+        If e.KeyData = Keys.Enter Then
+	       ' If Trim(txtAsunto.Text) = "" Then : Exit Sub : End If
+
+            txtCuerpoEmail.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtAsunto.Text = ""
+        End If
+        
+    End Sub
+
+    Private Sub txtLineaExtraI_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLineaExtraI.KeyDown
+        
+        If e.KeyData = Keys.Enter Then
+	        'If Trim(txtLineaExtraI.Text) = "" Then : Exit Sub : End If
+
+            txtLineaExtraII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtLineaExtraI.Text = ""
+        End If
+        
+    End Sub
+
+    Private Sub txtLineaExtraII_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLineaExtraII.KeyDown
+        
+        If e.KeyData = Keys.Enter Then
+	        'If Trim(txtLineaExtraII.Text) = "" Then : Exit Sub : End If
+
+            txtLineaExtraIII.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtLineaExtraII.Text = ""
+        End If
+        
+    End Sub
+
+    Private Sub txtLineaExtraIII_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLineaExtraIII.KeyDown
+        
+        If e.KeyData = Keys.Enter Then
+	     '   If Trim(txtLineaExtraIII.Text) = "" Then : Exit Sub : End If
+            txtLineaExtraIV.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtLineaExtraIII.Text = ""
+        End If
+        
+    End Sub
+
+    Private Sub txtLineaExtraIV_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLineaExtraIV.KeyDown
+        
+        If e.KeyData = Keys.Escape Then
+            txtLineaExtraIV.Text = ""
+        End If
+        
+    End Sub
+
+    Private Sub EnvioEmailProveedores_Shown( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtAsunto.Focus
+    End Sub
+
+    Private Sub txtDestinatarios_MouseDoubleClick( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDestinatarios.MouseDoubleClick
+        cmbTipoProv.DataSource = _CargarRubros()
+        cmbTipoProv.ValueMember = "Rubro"
+        cmbTipoProv.DisplayMember = "Descripcion"
+        cmbTipoProv.SelectedIndex = -1
+        If DataGridView1.Rows.Count = 0 then _TraerClientesDestinatarios()
+    End Sub
+
+    Private Function _CargarRubros() As Datatable
+        
+        Dim tabla As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Rubro, LTRIM(RTRIM(Nombre)) as Descripcion FROM Rubros")
+        Dim dr As SqlDataReader
+        
+        Try
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                tabla.Load(dr)
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+      
+        Return tabla
+    End Function
+
+    Private Sub Button1_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles Button1.Click
+        pnlDestinatarios.Visible=False
+        txtCuerpoEmail.Focus
+    End Sub
+
+    Private Sub DataGridView1_CellMouseClick( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseClick
+        If e.ColumnIndex = 0 and e.RowIndex > -1 then
+            If DataGridView1.Rows(e.RowIndex).Cells(0).Value = "X" then
+                DataGridView1.Rows(e.RowIndex).Cells(0).Value = ""
+            Else
+                DataGridView1.Rows(e.RowIndex).Cells(0).Value = "X"
+            End If
+        End If
+    End Sub
+
+    Private Sub cmbTipoProv_SelectedIndexChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles cmbTipoProv.SelectedIndexChanged
+        Dim tabla As DataTable = CType(DataGridView1.DataSource, DataTable)
+
+        If cmbTipoProv.SelectedIndex > -1 then
+            If Not IsNothing(tabla) then
+                tabla.DefaultView.RowFilter = "CONVERT(Rubro, System.String) = '" & cmbTipoProv.SelectedValue & "'"
+            End If
+        Else
+            If Not IsNothing(tabla) then
+                tabla.DefaultView.RowFilter = String.Empty
+            End If
+        End If
+    End Sub
+
+    Private Sub Button4_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles Button4.Click
+        cmbTipoProv.SelectedIndex = -1
+    End Sub
+
+    Private Sub DataGridView1_SortCompare( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles DataGridView1.SortCompare
+        If e.Column.Index = 0 then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub Button3_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles Button3.Click
+        If cmbTipoProv.SelectedIndex > -1 then
+                
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                If row.Cells("Rubro").Value = cmbTipoProv.SelectedValue.ToString then
+                    row.Cells("Enviar").Value = "X"
+                End If
+            Next
+
+        Else
+                
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                row.Cells("Enviar").Value = "X"
+            Next
+
+        End If
+    End Sub
+
+    Private Sub Button5_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles Button5.Click
+        If cmbTipoProv.SelectedIndex > -1 then
+                
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                If row.Cells("Rubro").Value = cmbTipoProv.SelectedValue.ToString then
+                    row.Cells("Enviar").Value = ""
+                End If
+            Next
+
+        Else
+                
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                row.Cells("Enviar").Value = ""
+            Next
+
+        End If
+    End Sub
+
+    Private Sub Button2_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles Button2.Click
+        
+        txtDestinatarios.Text = ""
+
+        For Each WProveedor As DataGridViewRow In DataGridView1.Rows
+            If WProveedor.Cells("Enviar").Value = "X" then
+                txtDestinatarios.Text &= WProveedor.Cells("Email").Value & "; "
+            End If
+        Next
+
+        Button1.PerformClick
+
+    End Sub
+
+    Private Sub Button6_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles Button6.Click
+        cmbTipoProv.DataSource = _CargarRubros()
+        cmbTipoProv.ValueMember = "Rubro"
+        cmbTipoProv.DisplayMember = "Descripcion"
+        cmbTipoProv.SelectedIndex = -1
+        If DataGridView1.Rows.Count = 0 then _TraerClientesDestinatarios()
+        pnlDestinatarios.Visible = True
+    End Sub
+End Class
