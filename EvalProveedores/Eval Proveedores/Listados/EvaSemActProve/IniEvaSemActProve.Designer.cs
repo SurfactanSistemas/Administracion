@@ -186,6 +186,7 @@
             this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
             this.TB_Hasta.TabIndex = 4;
             this.TB_Hasta.ValidatingType = typeof(System.DateTime);
+            this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
             // 
             // TB_Desde
             // 

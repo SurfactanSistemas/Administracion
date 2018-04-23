@@ -196,6 +196,22 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
             TB_Desde.Focus();
         }
 
-        
+        private void TB_Hasta_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (TB_Hasta.Text.Replace('/', ' ').Trim() == "") return;
+
+                TB_Desde.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                TB_Hasta.Clear();
+            }
+	        
+        }
+
     }
 }

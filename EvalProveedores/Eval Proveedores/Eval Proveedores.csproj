@@ -80,6 +80,12 @@
     <Compile Include="Listados\CalcTeoricoSemProve\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\CalculoEvaluacionSemestralProveedorEnvases\wcalificaenvase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wcalificaenvase.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\CalculoEvaluacionSemestralProvMP\wcalifica.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -440,6 +446,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Listados\CalcTeoricoSemProve\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CalculoEvaluacionSemestralProveedorEnvases\wcalificaenvase.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wcalificaenvase.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\CalculoEvaluacionSemestralProvMP\wcalifica.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
