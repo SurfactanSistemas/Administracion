@@ -92,6 +92,7 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.lblCargando = New Administracion.CustomLabel()
+        Me.EnvioEnEMailAClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -107,7 +108,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresosDeCuentasContablesToolStripMenuItem, Me.IngresoDeProveedoresToolStripMenuItem, Me.IngresoDeBancosToolStripMenuItem, Me.IngresoDeRubrosDeProveedoresToolStripMenuItem, Me.EnvioEnEMailAProveedoresToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresosDeCuentasContablesToolStripMenuItem, Me.IngresoDeProveedoresToolStripMenuItem, Me.IngresoDeBancosToolStripMenuItem, Me.IngresoDeRubrosDeProveedoresToolStripMenuItem, Me.EnvioEnEMailAProveedoresToolStripMenuItem, Me.EnvioEnEMailAClientesToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -550,6 +551,12 @@ Partial Class MenuPrincipal
         Me.lblCargando.Text = "CARGANDO, POR FAVOR ESPERE..."
         Me.lblCargando.Visible = False
         '
+        'EnvioEnEMailAClientesToolStripMenuItem
+        '
+        Me.EnvioEnEMailAClientesToolStripMenuItem.Name = "EnvioEnEMailAClientesToolStripMenuItem"
+        Me.EnvioEnEMailAClientesToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
+        Me.EnvioEnEMailAClientesToolStripMenuItem.Text = "Envio en E-Mail a Clientes"
+        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -641,4 +648,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ToolStripMenuItem9 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem10 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EnvioEnEMailAClientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
