@@ -47,6 +47,7 @@
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -140,72 +141,81 @@
             // consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem
             // 
             this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Name = "consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem";
-            this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
-            this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Text = "Consulta de Evaluación Semestral actual de Proveedores";
+            this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Text = "Consulta de Evaluación Semestral actual de Proveedores de Materia Prima";
             this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Click += new System.EventHandler(this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem_Click);
             // 
             // listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem
             // 
             this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Name = "listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem";
-            this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
+            this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
             this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Text = "Listado de CheckList de Informes de Recepción";
             this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem_Click);
             // 
             // listadoDeEvaluaciónDeTransportistaToolStripMenuItem
             // 
             this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Name = "listadoDeEvaluaciónDeTransportistaToolStripMenuItem";
-            this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
+            this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
             this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Text = "Listado de Evaluación de Transportista";
             this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem_Click);
             // 
             // listadoDeEvaluaciónDeServicioToolStripMenuItem
             // 
             this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Name = "listadoDeEvaluaciónDeServicioToolStripMenuItem";
-            this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
+            this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
             this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Text = "Listado de Evaluación de Servicio";
             this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeServicioToolStripMenuItem_Click);
             // 
             // listadoDeProveedoresPorRubroToolStripMenuItem
             // 
             this.listadoDeProveedoresPorRubroToolStripMenuItem.Name = "listadoDeProveedoresPorRubroToolStripMenuItem";
-            this.listadoDeProveedoresPorRubroToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
+            this.listadoDeProveedoresPorRubroToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
             this.listadoDeProveedoresPorRubroToolStripMenuItem.Text = "Listado de Proveedores por Rubro";
             this.listadoDeProveedoresPorRubroToolStripMenuItem.Click += new System.EventHandler(this.listadoDeProveedoresPorRubroToolStripMenuItem_Click);
             // 
             // listadoDeVencimientoDeCamionesToolStripMenuItem
             // 
             this.listadoDeVencimientoDeCamionesToolStripMenuItem.Name = "listadoDeVencimientoDeCamionesToolStripMenuItem";
-            this.listadoDeVencimientoDeCamionesToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
+            this.listadoDeVencimientoDeCamionesToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
             this.listadoDeVencimientoDeCamionesToolStripMenuItem.Text = "Listado de Vencimiento de Camiones";
             this.listadoDeVencimientoDeCamionesToolStripMenuItem.Click += new System.EventHandler(this.listadoDeVencimientoDeCamionesToolStripMenuItem_Click);
             // 
             // listadoDeVencimientoDeChoferesToolStripMenuItem
             // 
             this.listadoDeVencimientoDeChoferesToolStripMenuItem.Name = "listadoDeVencimientoDeChoferesToolStripMenuItem";
-            this.listadoDeVencimientoDeChoferesToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
+            this.listadoDeVencimientoDeChoferesToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
             this.listadoDeVencimientoDeChoferesToolStripMenuItem.Text = "Listado de Vencimiento de Choferes";
             this.listadoDeVencimientoDeChoferesToolStripMenuItem.Click += new System.EventHandler(this.listadoDeVencimientoDeChoferesToolStripMenuItem_Click);
             // 
             // listadoDeCheckListDeHojaDeRutaToolStripMenuItem
             // 
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Name = "listadoDeCheckListDeHojaDeRutaToolStripMenuItem";
-            this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
+            this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Text = "Listado de CheckList de Hoja de Ruta";
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem_Click);
             // 
             // consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem
             // 
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Name = "consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem";
-            this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
+            this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Text = "Consulta de Eval Semestral Actual de Proveedores de Envases";
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Click += new System.EventHandler(this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem_Click);
             // 
             // procesosToolStripMenuItem
             // 
+            this.procesosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salirDelSistemaToolStripMenuItem});
             this.procesosToolStripMenuItem.Name = "procesosToolStripMenuItem";
             this.procesosToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.procesosToolStripMenuItem.Text = "Salir";
             this.procesosToolStripMenuItem.Click += new System.EventHandler(this.procesosToolStripMenuItem_Click);
+            // 
+            // salirDelSistemaToolStripMenuItem
+            // 
+            this.salirDelSistemaToolStripMenuItem.Name = "salirDelSistemaToolStripMenuItem";
+            this.salirDelSistemaToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.salirDelSistemaToolStripMenuItem.Text = "Salir del Sistema";
+            this.salirDelSistemaToolStripMenuItem.Click += new System.EventHandler(this.salirDelSistemaToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -282,6 +292,7 @@
         private System.Windows.Forms.ToolStripMenuItem consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeEvaluacionesToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStripMenuItem salirDelSistemaToolStripMenuItem;
     }
 }
 

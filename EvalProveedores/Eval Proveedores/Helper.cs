@@ -450,5 +450,10 @@ namespace Eval_Proveedores
             
             return (WValor.Trim() + ".") + "".PadRight(WCantDigitos, '0');
         }
+
+        public static string FormatoNumerico(double wValor, int WCantDigitos = 2)
+        {
+            return FormatoNumerico(wValor.ToString(), WCantDigitos);
+        }
     }
 }

@@ -55,6 +55,9 @@
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -76,6 +79,12 @@
     </Compile>
     <Compile Include="Listados\CalcTeoricoSemProve\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CalculoEvaluacionSemestralProvMP\wcalifica.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wcalifica.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\CheckListHojaRuta\DS.cs">
       <DependentUpon>DS.xsd</DependentUpon>
@@ -303,6 +312,12 @@
       <DependentUpon>ReportVencChofer.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\VistaPrevia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\VistaPrevia.designer.cs">
+      <DependentUpon>VistaPrevia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maestros\IngCamiones\AgModCamiones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -426,6 +441,10 @@
     <EmbeddedResource Include="Listados\CalcTeoricoSemProve\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CalculoEvaluacionSemestralProvMP\wcalifica.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wcalifica.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\CheckListHojaRuta\ImpreHojaRuta.resx">
       <DependentUpon>ImpreHojaRuta.cs</DependentUpon>
     </EmbeddedResource>
@@ -515,6 +534,9 @@
     <EmbeddedResource Include="Listados\VencChoferes\ReportVencChofer.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportVencChofer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\VistaPrevia.resx">
+      <DependentUpon>VistaPrevia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\IngCamiones\AgModCamiones.resx">
       <DependentUpon>AgModCamiones.cs</DependentUpon>
