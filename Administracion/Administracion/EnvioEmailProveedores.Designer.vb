@@ -23,6 +23,7 @@ Partial Class EnvioEmailProveedores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -35,6 +36,9 @@ Partial Class EnvioEmailProveedores
         Me.txtLineaExtraIII = New System.Windows.Forms.TextBox()
         Me.txtLineaExtraIV = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtDestinatarios = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.btnAdjuntar = New System.Windows.Forms.Button()
         Me.txtNombreArchivoAdjunto = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -42,8 +46,28 @@ Partial Class EnvioEmailProveedores
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.btnEnviar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.pnlDestinatarios = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.cmbTipoProv = New System.Windows.Forms.ComboBox()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Enviar = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Proveedor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoProv = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.pnlDestinatarios.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -84,7 +108,7 @@ Partial Class EnvioEmailProveedores
         Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(40, 64)
+        Me.Label3.Location = New System.Drawing.Point(68, 15)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(56, 18)
         Me.Label3.TabIndex = 2
@@ -92,7 +116,7 @@ Partial Class EnvioEmailProveedores
         '
         'txtAsunto
         '
-        Me.txtAsunto.Location = New System.Drawing.Point(105, 63)
+        Me.txtAsunto.Location = New System.Drawing.Point(133, 14)
         Me.txtAsunto.Name = "txtAsunto"
         Me.txtAsunto.Size = New System.Drawing.Size(474, 20)
         Me.txtAsunto.TabIndex = 3
@@ -103,7 +127,7 @@ Partial Class EnvioEmailProveedores
         Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(33, 96)
+        Me.Label4.Location = New System.Drawing.Point(56, 132)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(66, 18)
         Me.Label4.TabIndex = 4
@@ -111,7 +135,8 @@ Partial Class EnvioEmailProveedores
         '
         'txtCuerpoEmail
         '
-        Me.txtCuerpoEmail.Location = New System.Drawing.Point(106, 102)
+        Me.txtCuerpoEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCuerpoEmail.Location = New System.Drawing.Point(132, 105)
         Me.txtCuerpoEmail.Multiline = True
         Me.txtCuerpoEmail.Name = "txtCuerpoEmail"
         Me.txtCuerpoEmail.Size = New System.Drawing.Size(473, 179)
@@ -119,28 +144,28 @@ Partial Class EnvioEmailProveedores
         '
         'txtLineaExtraI
         '
-        Me.txtLineaExtraI.Location = New System.Drawing.Point(106, 287)
+        Me.txtLineaExtraI.Location = New System.Drawing.Point(133, 294)
         Me.txtLineaExtraI.Name = "txtLineaExtraI"
         Me.txtLineaExtraI.Size = New System.Drawing.Size(473, 20)
         Me.txtLineaExtraI.TabIndex = 6
         '
         'txtLineaExtraII
         '
-        Me.txtLineaExtraII.Location = New System.Drawing.Point(105, 313)
+        Me.txtLineaExtraII.Location = New System.Drawing.Point(132, 320)
         Me.txtLineaExtraII.Name = "txtLineaExtraII"
         Me.txtLineaExtraII.Size = New System.Drawing.Size(473, 20)
         Me.txtLineaExtraII.TabIndex = 6
         '
         'txtLineaExtraIII
         '
-        Me.txtLineaExtraIII.Location = New System.Drawing.Point(106, 339)
+        Me.txtLineaExtraIII.Location = New System.Drawing.Point(133, 346)
         Me.txtLineaExtraIII.Name = "txtLineaExtraIII"
         Me.txtLineaExtraIII.Size = New System.Drawing.Size(473, 20)
         Me.txtLineaExtraIII.TabIndex = 6
         '
         'txtLineaExtraIV
         '
-        Me.txtLineaExtraIV.Location = New System.Drawing.Point(105, 365)
+        Me.txtLineaExtraIV.Location = New System.Drawing.Point(132, 372)
         Me.txtLineaExtraIV.Name = "txtLineaExtraIV"
         Me.txtLineaExtraIV.Size = New System.Drawing.Size(473, 20)
         Me.txtLineaExtraIV.TabIndex = 6
@@ -148,13 +173,61 @@ Partial Class EnvioEmailProveedores
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.txtDestinatarios)
+        Me.Panel2.Controls.Add(Me.Label6)
+        Me.Panel2.Controls.Add(Me.Button6)
         Me.Panel2.Controls.Add(Me.btnAdjuntar)
         Me.Panel2.Controls.Add(Me.txtNombreArchivoAdjunto)
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.txtLineaExtraIV)
+        Me.Panel2.Controls.Add(Me.txtAsunto)
+        Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Controls.Add(Me.txtLineaExtraIII)
+        Me.Panel2.Controls.Add(Me.txtCuerpoEmail)
+        Me.Panel2.Controls.Add(Me.txtLineaExtraII)
+        Me.Panel2.Controls.Add(Me.txtLineaExtraI)
         Me.Panel2.Location = New System.Drawing.Point(0, 42)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(649, 402)
+        Me.Panel2.Size = New System.Drawing.Size(649, 432)
         Me.Panel2.TabIndex = 8
+        '
+        'txtDestinatarios
+        '
+        Me.txtDestinatarios.Location = New System.Drawing.Point(133, 40)
+        Me.txtDestinatarios.Multiline = True
+        Me.txtDestinatarios.Name = "txtDestinatarios"
+        Me.txtDestinatarios.Size = New System.Drawing.Size(449, 59)
+        Me.txtDestinatarios.TabIndex = 8
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label6.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label6.Location = New System.Drawing.Point(30, 40)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(94, 18)
+        Me.Label6.TabIndex = 7
+        Me.Label6.Text = "Destinatarios:"
+        '
+        'Button6
+        '
+        Me.Button6.AllowDrop = True
+        Me.Button6.BackgroundImage = Global.Administracion.My.Resources.Resources.add1
+        Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button6.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Button6.FlatAppearance.BorderSize = 0
+        Me.Button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button6.Location = New System.Drawing.Point(587, 51)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(44, 36)
+        Me.Button6.TabIndex = 0
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'btnAdjuntar
         '
@@ -167,7 +240,7 @@ Partial Class EnvioEmailProveedores
         Me.btnAdjuntar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.btnAdjuntar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.btnAdjuntar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdjuntar.Location = New System.Drawing.Point(21, 339)
+        Me.btnAdjuntar.Location = New System.Drawing.Point(48, 374)
         Me.btnAdjuntar.Name = "btnAdjuntar"
         Me.btnAdjuntar.Size = New System.Drawing.Size(66, 52)
         Me.btnAdjuntar.TabIndex = 0
@@ -177,7 +250,7 @@ Partial Class EnvioEmailProveedores
         'txtNombreArchivoAdjunto
         '
         Me.txtNombreArchivoAdjunto.AllowDrop = True
-        Me.txtNombreArchivoAdjunto.Location = New System.Drawing.Point(221, 358)
+        Me.txtNombreArchivoAdjunto.Location = New System.Drawing.Point(248, 402)
         Me.txtNombreArchivoAdjunto.Name = "txtNombreArchivoAdjunto"
         Me.txtNombreArchivoAdjunto.ReadOnly = True
         Me.txtNombreArchivoAdjunto.Size = New System.Drawing.Size(357, 20)
@@ -190,7 +263,7 @@ Partial Class EnvioEmailProveedores
         Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(103, 358)
+        Me.Label5.Location = New System.Drawing.Point(130, 403)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(112, 18)
         Me.Label5.TabIndex = 4
@@ -211,9 +284,9 @@ Partial Class EnvioEmailProveedores
         Me.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancelar.Location = New System.Drawing.Point(322, 459)
+        Me.btnCancelar.Location = New System.Drawing.Point(352, 480)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(117, 48)
+        Me.btnCancelar.Size = New System.Drawing.Size(67, 40)
         Me.btnCancelar.TabIndex = 7
         Me.ToolTip1.SetToolTip(Me.btnCancelar, "Cancelar Envio de Email")
         Me.btnCancelar.UseVisualStyleBackColor = True
@@ -229,39 +302,217 @@ Partial Class EnvioEmailProveedores
         Me.btnEnviar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnEnviar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnEnviar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEnviar.Location = New System.Drawing.Point(199, 459)
+        Me.btnEnviar.Location = New System.Drawing.Point(229, 480)
         Me.btnEnviar.Name = "btnEnviar"
-        Me.btnEnviar.Size = New System.Drawing.Size(117, 48)
+        Me.btnEnviar.Size = New System.Drawing.Size(67, 40)
         Me.btnEnviar.TabIndex = 7
         Me.ToolTip1.SetToolTip(Me.btnEnviar, "Enviar Email")
         Me.btnEnviar.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(294, 10)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(67, 40)
+        Me.Button1.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.Button1, "Cancelar Envio de Email")
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.BackgroundImage = Global.Administracion.My.Resources.Resources.exportar
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Location = New System.Drawing.Point(171, 10)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(67, 40)
+        Me.Button2.TabIndex = 8
+        Me.ToolTip1.SetToolTip(Me.Button2, "Enviar Email")
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'pnlDestinatarios
+        '
+        Me.pnlDestinatarios.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlDestinatarios.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlDestinatarios.Controls.Add(Me.GroupBox1)
+        Me.pnlDestinatarios.Controls.Add(Me.Panel4)
+        Me.pnlDestinatarios.Location = New System.Drawing.Point(56, 45)
+        Me.pnlDestinatarios.Name = "pnlDestinatarios"
+        Me.pnlDestinatarios.Size = New System.Drawing.Size(536, 434)
+        Me.pnlDestinatarios.TabIndex = 9
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Button5)
+        Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Controls.Add(Me.Button3)
+        Me.GroupBox1.Controls.Add(Me.Button4)
+        Me.GroupBox1.Controls.Add(Me.cmbTipoProv)
+        Me.GroupBox1.Controls.Add(Me.DataGridView1)
+        Me.GroupBox1.Location = New System.Drawing.Point(14, 10)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(30)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(502, 344)
+        Me.GroupBox1.TabIndex = 1
+        Me.GroupBox1.TabStop = False
+        '
+        'Button5
+        '
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button5.Location = New System.Drawing.Point(139, 53)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(114, 21)
+        Me.Button5.TabIndex = 4
+        Me.Button5.Text = "Limpiar Grupo"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label7.Location = New System.Drawing.Point(34, 18)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(138, 15)
+        Me.Label7.TabIndex = 3
+        Me.Label7.Text = "Filtrar por Tipo Prov."
+        '
+        'Button3
+        '
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button3.Location = New System.Drawing.Point(19, 53)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(114, 21)
+        Me.Button3.TabIndex = 2
+        Me.Button3.Text = "Marcar Grupo"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button4.Location = New System.Drawing.Point(354, 16)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(114, 21)
+        Me.Button4.TabIndex = 2
+        Me.Button4.Text = "Mostrar Todos"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'cmbTipoProv
+        '
+        Me.cmbTipoProv.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTipoProv.FormattingEnabled = True
+        Me.cmbTipoProv.Location = New System.Drawing.Point(180, 16)
+        Me.cmbTipoProv.Name = "cmbTipoProv"
+        Me.cmbTipoProv.Size = New System.Drawing.Size(168, 21)
+        Me.cmbTipoProv.TabIndex = 1
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Enviar, Me.Proveedor, Me.Razon, Me.Email, Me.TipoProv})
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 80)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.RowHeadersWidth = 10
+        Me.DataGridView1.Size = New System.Drawing.Size(490, 258)
+        Me.DataGridView1.TabIndex = 0
+        '
+        'Enviar
+        '
+        Me.Enviar.HeaderText = ""
+        Me.Enviar.MaxInputLength = 1
+        Me.Enviar.Name = "Enviar"
+        Me.Enviar.ReadOnly = True
+        Me.Enviar.Width = 20
+        '
+        'Proveedor
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Proveedor.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Proveedor.HeaderText = "Proveedor"
+        Me.Proveedor.Name = "Proveedor"
+        Me.Proveedor.ReadOnly = True
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon"
+        Me.Razon.MinimumWidth = 165
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        '
+        'Email
+        '
+        Me.Email.HeaderText = "Email"
+        Me.Email.Name = "Email"
+        Me.Email.ReadOnly = True
+        Me.Email.Width = 150
+        '
+        'TipoProv
+        '
+        Me.TipoProv.HeaderText = "TipoProv"
+        Me.TipoProv.Name = "TipoProv"
+        Me.TipoProv.ReadOnly = True
+        Me.TipoProv.Visible = False
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel4.Controls.Add(Me.Button1)
+        Me.Panel4.Controls.Add(Me.Button2)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel4.Location = New System.Drawing.Point(0, 369)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(532, 61)
+        Me.Panel4.TabIndex = 0
         '
         'EnvioEmailProveedores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(649, 524)
+        Me.ClientSize = New System.Drawing.Size(648, 524)
+        Me.Controls.Add(Me.pnlDestinatarios)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnEnviar)
-        Me.Controls.Add(Me.txtLineaExtraIV)
-        Me.Controls.Add(Me.txtLineaExtraIII)
-        Me.Controls.Add(Me.txtLineaExtraII)
-        Me.Controls.Add(Me.txtLineaExtraI)
-        Me.Controls.Add(Me.txtCuerpoEmail)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.txtAsunto)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
+        Me.Location = New System.Drawing.Point(10, 10)
         Me.MaximizeBox = False
         Me.Name = "EnvioEmailProveedores"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.pnlDestinatarios.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
@@ -283,4 +534,23 @@ Partial Class EnvioEmailProveedores
     Friend WithEvents txtNombreArchivoAdjunto As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents txtDestinatarios As System.Windows.Forms.TextBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents pnlDestinatarios As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents Panel4 As System.Windows.Forms.Panel
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents cmbTipoProv As System.Windows.Forms.ComboBox
+    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents Enviar As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Proveedor As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Email As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoProv As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents Button6 As System.Windows.Forms.Button
 End Class

@@ -1842,7 +1842,7 @@ Public Class Pagos
 
             dr.Close()
 
-            cm.CommandText = "UPDATE Numero SET Numero = " & Val(WNumero) & " WHERE Codigo = '" & Val(Codigo) & "'"
+            cm.CommandText = "UPDATE Numero SET Numero = Numero + 1 WHERE Codigo = '" & Val(Codigo) & "'"
             cm.ExecuteNonQuery()
 
             trans.Commit()
@@ -1859,7 +1859,7 @@ Public Class Pagos
             trans = Nothing
         End Try
 
-        Return WNumero
+        Return WNumero + 1
     End Function
 
     Private Function _ExisteCtaCtePrv(ByVal Clave) As Boolean
@@ -6826,23 +6826,33 @@ Public Class Pagos
 
     Private Sub _RecalcularRetenciones()
 
+        txtGanancias.Text = "0.00"
+        txtIBCiudad.Text = "0.00"
+        txtIngresosBrutos.Text = "0.00"
+        txtIVA.Text = "0.00"
+        txtTotal.Text = "0.00"
+
         If optCtaCte.Checked Or optAnticipos.Checked Then
-            ' Recalculo de Retenciones de Ganancias.
-            _RecalcularRetencionGanancias()
+            If Not ckNoCalcRetenciones.Checked then
+                ' Recalculo de Retenciones de Ganancias.
+                _RecalcularRetencionGanancias()
 
-            ' Recalculo de Retenciones por Iva.
-            _RecalcularRetencionIVA()
+                ' Recalculo de Retenciones por Iva.
+                _RecalcularRetencionIVA()
 
-            ' Recalculo IB Provincia
-            _RecalcularIBProvincia()
+                ' Recalculo IB Provincia
+                _RecalcularIBProvincia()
 
-            ' PELLITAL NO RETIENE EN CABA
-            If Not Proceso._EsPellital() Then
-                ' Recalculo IB CABA
-                _RecalcularIBCABA()
+                ' PELLITAL NO RETIENE EN CABA
+                If Not Proceso._EsPellital() Then
+                    ' Recalculo IB CABA
+                    _RecalcularIBCABA()
+                End If
+
+                txtTotal.Text = Proceso.formatonumerico(Val(Proceso.formatonumerico(txtIVA.Text)) + Val(Proceso.formatonumerico(txtGanancias.Text)) + Val(Proceso.formatonumerico(txtIBCiudad.Text)) + Val(Proceso.formatonumerico(txtIngresosBrutos.Text)))
+
+                'sumarImportes()
             End If
-
-            'sumarImportes()
         End If
 
     End Sub
@@ -7656,4 +7666,7 @@ Public Class Pagos
         Next
     End Sub
 
+    Private Sub ckNoCalcRetenciones_CheckedChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles ckNoCalcRetenciones.CheckedChanged
+        _RecalcularRetenciones()
+    End Sub
 End Class
