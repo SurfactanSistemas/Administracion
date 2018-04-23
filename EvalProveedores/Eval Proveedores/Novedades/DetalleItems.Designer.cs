@@ -69,9 +69,10 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.panel1.Controls.Add(this.LBCamion);
-            this.panel1.Location = new System.Drawing.Point(0, -1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(922, 39);
+            this.panel1.Size = new System.Drawing.Size(920, 39);
             this.panel1.TabIndex = 4;
             // 
             // LBCamion
@@ -119,10 +120,11 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle11;
-            this.DGV_EvalSemProve.Location = new System.Drawing.Point(1, 38);
+            this.DGV_EvalSemProve.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGV_EvalSemProve.Location = new System.Drawing.Point(0, 39);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
             this.DGV_EvalSemProve.RowHeadersWidth = 10;
-            this.DGV_EvalSemProve.Size = new System.Drawing.Size(918, 351);
+            this.DGV_EvalSemProve.Size = new System.Drawing.Size(920, 349);
             this.DGV_EvalSemProve.TabIndex = 10;
             // 
             // CodigoProve
@@ -166,9 +168,9 @@
             // 
             // DescArticulo
             // 
+            this.DescArticulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.DescArticulo.HeaderText = "Descripcion";
             this.DescArticulo.Name = "DescArticulo";
-            this.DescArticulo.Width = 150;
             // 
             // Certificado
             // 
@@ -281,8 +283,8 @@
             this.ClientSize = new System.Drawing.Size(920, 388);
             this.Controls.Add(this.DGV_EvalSemProve);
             this.Controls.Add(this.panel1);
-            this.MaximizeBox = false;
             this.Name = "DetalleItems";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.DetalleItems_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

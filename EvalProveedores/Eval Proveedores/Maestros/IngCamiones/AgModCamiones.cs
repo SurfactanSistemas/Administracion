@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -154,6 +156,8 @@ namespace Eval_Proveedores.IngCamiones
                 TB_EntCargasPelig.Text = FechaEnt5;
                 TB_ObservCargasPelig.Text = Coment5;
 
+                _CargarDatosRENPRE(Codigo);
+
                 Modificar = true;
 
 
@@ -170,7 +174,37 @@ namespace Eval_Proveedores.IngCamiones
             
         }
 
+        private void _CargarDatosRENPRE(string  WCodigo)
+        {
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT isnull(VencimientoRENPRE, '') VencimientoRENPRE, isnull(FechaEntregaRENPRE, '') FechaEntregaRENPRE, isnull(ObsRENPRE, '') ObsRENPRE FROM Camion WHERE Codigo = '" + WCodigo + "'";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            txtFechaEntregaRENPRE.Text = dr["FechaEntregaRENPRE"].ToString();
+                            txtVencimientoRENPRE.Text = dr["VencimientoRENPRE"].ToString();
+                            txtObsRENPRE.Text = dr["ObsRENPRE"].ToString();
+                        }
+                    }
+                }
+
+            }
+
         
+        }
+
 
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
@@ -293,6 +327,8 @@ namespace Eval_Proveedores.IngCamiones
                     MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
 
+                _ActualizarDatosRENPRE();
+
                 Close();
                           
                }
@@ -301,6 +337,40 @@ namespace Eval_Proveedores.IngCamiones
                 
                 MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void _ActualizarDatosRENPRE()
+        {
+            string WCodigo = "", WVencimiento = "", WFechaEntrega = "", WVencimientoOrd = "", WFechaEntregaOrd = "", WObs = "";
+
+            WCodigo = TB_CodCamion.Text.Trim();
+            WVencimiento = txtVencimientoRENPRE.Text;
+            WVencimientoOrd = Helper.OrdenarFecha(WVencimiento);
+            WFechaEntrega = txtFechaEntregaRENPRE.Text;
+            WFechaEntregaOrd = Helper.OrdenarFecha(WFechaEntrega);
+            WObs = Helper.Left(txtObsRENPRE.Text, 50);
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "UPDATE Camion SET " 
+                                    + " ObsRENPRE = '" + WObs + "', "
+                                    + " VencimientoRENPRE = '" + WVencimiento + "', "
+                                    + " VencimientoRENPREOrd = '" + WVencimientoOrd + "', "
+                                    + " FechaEntregaRENPRE = '" + WFechaEntrega + "', "
+                                    + " FechaEntregaRENPREOrd = '" + WFechaEntregaOrd + "'"
+                                    + " WHERE Codigo = '" + WCodigo + "'";
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+
+        
         }
 
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
@@ -337,6 +407,10 @@ namespace Eval_Proveedores.IngCamiones
                 TB_VencCargasPelig.Text = "";
                 TB_EntCargasPelig.Text = "";
                 TB_ObservCargasPelig.Text = "";
+
+                txtFechaEntregaRENPRE.Clear();
+                txtObsRENPRE.Text = "";
+                txtVencimientoRENPRE.Clear();
 
             }
             
@@ -864,6 +938,40 @@ namespace Eval_Proveedores.IngCamiones
         private void TB_ObservCargasPelig_KeyDown(object sender, KeyEventArgs e)
         {
 
+        }
+
+        private void txtVencimientoRENPRE_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtVencimientoRENPRE.Text.Trim() == "") return;
+
+                txtFechaEntregaRENPRE.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtVencimientoRENPRE.Text = "";
+            }
+	        
+        }
+
+        private void txtFechaEntregaRENPRE_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtFechaEntregaRENPRE.Text.Trim() == "") return;
+
+                txtObsRENPRE.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtFechaEntregaRENPRE.Text = "";
+            }
+	        
         }
 
        

@@ -103,21 +103,21 @@
             // listaDeEvaluacionesToolStripMenuItem
             // 
             this.listaDeEvaluacionesToolStripMenuItem.Name = "listaDeEvaluacionesToolStripMenuItem";
-            this.listaDeEvaluacionesToolStripMenuItem.Size = new System.Drawing.Size(369, 22);
+            this.listaDeEvaluacionesToolStripMenuItem.Size = new System.Drawing.Size(397, 22);
             this.listaDeEvaluacionesToolStripMenuItem.Text = "Lista de Evaluaciones de Servicio";
             this.listaDeEvaluacionesToolStripMenuItem.Click += new System.EventHandler(this.listaDeEvaluacionesToolStripMenuItem_Click);
             // 
             // actDeEvaluacionSemetralDeProveedoresToolStripMenuItem
             // 
             this.actDeEvaluacionSemetralDeProveedoresToolStripMenuItem.Name = "actDeEvaluacionSemetralDeProveedoresToolStripMenuItem";
-            this.actDeEvaluacionSemetralDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(369, 22);
-            this.actDeEvaluacionSemetralDeProveedoresToolStripMenuItem.Text = "Act. de Evaluacion Semetral de Proveedores";
+            this.actDeEvaluacionSemetralDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(397, 22);
+            this.actDeEvaluacionSemetralDeProveedoresToolStripMenuItem.Text = "Act. de Evaluacion Semetral de Proveedores de Materia Prima";
             this.actDeEvaluacionSemetralDeProveedoresToolStripMenuItem.Click += new System.EventHandler(this.actDeEvaluacionSemetralDeProveedoresToolStripMenuItem_Click);
             // 
             // ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem
             // 
             this.ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem.Name = "ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem";
-            this.ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem.Size = new System.Drawing.Size(369, 22);
+            this.ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem.Size = new System.Drawing.Size(397, 22);
             this.ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem.Text = "Act. de Evaluación Semestral de Proveedores de Envases";
             this.ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem.Click += new System.EventHandler(this.ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem_Click);
             // 

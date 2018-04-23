@@ -46,7 +46,7 @@ namespace Eval_Proveedores.Novedades
 
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.CommandText = "SELECT * FROM Articulo WHERE Codigo = '" + _Articulo +"'";
+                    cmd.CommandText = "SELECT Descripcion FROM Articulo WHERE Codigo = '" + _Articulo +"'";
                     cmd.Connection = cnn;
 
                     using (SqlDataReader rd = cmd.ExecuteReader())
@@ -90,43 +90,34 @@ namespace Eval_Proveedores.Novedades
             {
                 _index = DGV_EvalSemProve.Rows.Add();
 
-                DGV_EvalSemProve.Rows[_index].Cells["Articulo"].Value = fila[0].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["Orden"].Value = fila[1].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["Desviad"].Value = fila[3].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["DescArticulo"].Value = _TraerDescArticulo(fila[0].ToString());
-                DGV_EvalSemProve.Rows[_index].Cells["Atraso"].Value = _CalcularAtraso(fila[2], fila[10]);
-                DGV_EvalSemProve.Rows[_index].Cells["Desvio"].Value = _EsPorDesvio(fila[15].ToString()) ? "X" : "";
+                DGV_EvalSemProve.Rows[_index].Cells["Articulo"].Value = fila["Articulo"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["Orden"].Value = fila["Orden"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["Desviad"].Value = fila["Clave"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["DescArticulo"].Value = fila["DesArticulo"].ToString(); //_TraerDescArticulo(fila["Articulo"].ToString());
+                DGV_EvalSemProve.Rows[_index].Cells["Atraso"].Value = _CalcularAtraso(fila["FechaOrd"], fila["OrdFecha2"]);
+                DGV_EvalSemProve.Rows[_index].Cells["Desvio"].Value = _EsPorDesvio(fila["Laudo"].ToString()) ? "X" : "";
+                DGV_EvalSemProve.Rows[_index].Cells["Aprobado"].Value = (_EsPorDesvio(fila["Laudo"].ToString()) || _DeterminarRechazado(fila["Devuelta"].ToString()) == "") ? "X" : "";
 
+                DGV_EvalSemProve.Rows[_index].Cells["Certificado"].Value = fila["Certificado1"].ToString() == "1" ? "SI" : "NO";
 
-                if (fila[5].ToString() == "1")
-                {
-                    DGV_EvalSemProve.Rows[_index].Cells["Certificado"].Value = "SI";
-                    DGV_EvalSemProve.Rows[_index].Cells["Aprobado"].Value = "X";
-                }
-                else
-                {
-                    DGV_EvalSemProve.Rows[_index].Cells["Certificado"].Value = "NO";
-                    DGV_EvalSemProve.Rows[_index].Cells["Aprobado"].Value = "";
-                }
+                DGV_EvalSemProve.Rows[_index].Cells["Envase"].Value = fila["Estado1"].ToString() == "1" ? "SI" : "NO";
 
-                if (fila[6].ToString() == "1")
-                {
-                    DGV_EvalSemProve.Rows[_index].Cells["Envase"].Value = "SI";
-                }
-                else
-                {
-                    DGV_EvalSemProve.Rows[_index].Cells["Envase"].Value = "NO";
-                }
-                DGV_EvalSemProve.Rows[_index].Cells["Informe"].Value = fila[6].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["Cantidad"].Value = fila[7].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["FechaEntrega"].Value = fila[8].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["FechaPosibleEntrega"].Value = fila[9].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["Liberada"].Value = fila[13].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["Laudo"].Value = fila[15].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["Devuelta"].Value = fila[16].ToString();
-                DGV_EvalSemProve.Rows[_index].Cells["Rechazado"].Value = _DeterminarRechazado(fila[16].ToString());
+                DGV_EvalSemProve.Rows[_index].Cells["Informe"].Value = fila["Informe"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["Cantidad"].Value = fila["Cantidad"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["FechaEntrega"].Value = fila["fecha"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["FechaPosibleEntrega"].Value = fila["Fecha2"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["Liberada"].Value = fila["Liberada"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["Laudo"].Value = fila["Laudo"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["Devuelta"].Value = fila["Devuelta"].ToString();
+                DGV_EvalSemProve.Rows[_index].Cells["Rechazado"].Value = _DeterminarRechazado(fila["Devuelta"].ToString());
 
                  //dtItems.Rows.Add(filaItems);
+            }
+
+            foreach (string WColumna in new string[] { "Cantidad", "FechaPosibleEntrega" })
+            {
+                DataGridViewColumn column = DGV_EvalSemProve.Columns[WColumna];
+                if (column != null) column.Visible = false;
             }
 
             //foreach (DataGridViewRow row in DGV_EvalSemProve.Rows)

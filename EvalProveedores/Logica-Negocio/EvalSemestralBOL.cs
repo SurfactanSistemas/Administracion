@@ -18,6 +18,11 @@ namespace Logica_Negocio
             return _EvaSemDAL.ListaInforme(Desde, Hasta, Donde, Tipo);
         }
 
+        public System.Data.DataTable ListaInformeProve(string Desde, string Hasta, string Donde, int Tipo, string Prove)
+        {
+            return _EvaSemDAL.ListaInformeProve(int.Parse(Desde), int.Parse(Hasta), Donde, Tipo, Prove);
+        }
+
         public System.Data.DataTable ListaInformeProve(int Desde, int Hasta, string Donde, int Tipo, string Prove)
         {
             return _EvaSemDAL.ListaInformeProve(Desde, Hasta, Donde, Tipo, Prove);

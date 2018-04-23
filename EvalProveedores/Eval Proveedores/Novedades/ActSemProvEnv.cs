@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using Logica_Negocio;
 using Negocio;
@@ -16,20 +14,8 @@ namespace Eval_Proveedores.Novedades
         ProveedorBOL PBOL = new ProveedorBOL();
         DataTable dtEvaluacion = new DataTable();
         DataTable dtInformeMuestra = new DataTable();
-        DataTable dtInforme = new DataTable();
         EvalSemestralBOL ESBOL = new EvalSemestralBOL();
         DataTable dtInformeDetalle;
-        int OrdFechaDesde;
-        int ordFechaHAsta;
-        bool Encontrado = false;
-        bool InformeMuestraEncontrado = false;
-        int FilaEncontradaInformeMuestra;
-        int Items1;
-        int Certfic;
-        DataRow filaEval;
-        DataRow filaInformeMuestra;
-        int FilaEncontrada;
-        Proveedor P = new Proveedor();
         Proveedor Prove = new Proveedor();
 
 
@@ -43,9 +29,9 @@ namespace Eval_Proveedores.Novedades
             CargarDtEvaluacion();
             CargardtInformeMuestra();
 
-            DGV_EvalSemProve.Visible = false;
+            //DGV_EvalSemProve.Visible = false;
 
-            LB_Titulo.Visible = false;
+            //LB_Titulo.Visible = false;
         }
 
         private void CargarDtEvaluacion()
@@ -94,63 +80,54 @@ namespace Eval_Proveedores.Novedades
                 string Hasta = TB_Hasta.Text.Substring(6, 4) + TB_Hasta.Text.Substring(3, 2) + TB_Hasta.Text.Substring(0, 2);
 
 
-                if (Desde == "") throw new Exception("Se debe ingresar la fecha Desde donde desea listar");
-                if (Desde == "") throw new Exception("Se debe ingresar la fecha Hasta donde desea listar");
-
-                if (CB_TipoEva.Text == "") throw new Exception("Se debe elegir el tipo de evaluación");
+                if (Desde == "") return;
+                if (Hasta == "") return;
 
                 dtEvaluacion.Clear();
                 dtInformeMuestra.Clear();
 
-                OrdFechaDesde = int.Parse(Desde);
-                ordFechaHAsta = int.Parse(Hasta);
+                DGV_EvalSemProve.Rows.Clear();
 
-                //TIPO D EPROVEEDOR
-                int Tipo = 2;
+                DataTable WProveedores = _ProcesarEvaluacionProveedores();
 
-                dtInforme = ESBOL.ListaInforme(OrdFechaDesde, ordFechaHAsta, "SurfactanSA", Tipo);
-                CargarInforme(dtInforme);
+                DataRow[] WProveedoresFinales = WProveedores.Select("Pasa = 'S'");
 
-                dtInforme = ESBOL.ListaInforme(OrdFechaDesde, ordFechaHAsta, "Surfactan_V", Tipo);
-                CargarInforme(dtInforme);
+                if (ckIncluirSinMovimientos.Checked)
+                {
+                    WProveedoresFinales = WProveedores.Select();
+                }
 
-                dtInforme = ESBOL.ListaInforme(OrdFechaDesde, ordFechaHAsta, "Surfactan_II", Tipo);
-                CargarInforme(dtInforme);
+                int WRenglon = 0;
 
-                 CargarMuestraInforme();
+                foreach (DataRow WProveedor in WProveedoresFinales)
+                {
+                    WRenglon = DGV_EvalSemProve.Rows.Add();
 
-                 DGV_EvalSemProve.DataSource = dtInformeMuestra;
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Proveedor"].Value = WProveedor["Proveedor"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Razon"].Value = WProveedor["Razon"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Movimientos"].Value = WProveedor["Movimientos"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Aprobados"].Value = WProveedor["Aprobados"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Retrasos"].Value = WProveedor["Retrasos"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Desvios"].Value = WProveedor["Desvios"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["EnvasesOk"].Value = WProveedor["EnvasesOk"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["CertificadosOk"].Value = WProveedor["CertificadosOk"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Categoria1"].Value = WProveedor["CategoriaI"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Categoria2"].Value = WProveedor["CategoriaII"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Fechas"].Value = WProveedor["Fechacategoria"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["EvaCal"].Value = Helper._DeterminarCalidad(WProveedor["CategoriaI"].ToString());
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["EvaEnt"].Value = Helper._DeterminarCalidadEntrega(WProveedor["CategoriaII"].ToString());
 
-                 //CONSULTO QUE TIPO DE EVALUACION SE DESEA PARA MOSTRAR LOS CAMPOS
-                 if (CB_TipoEva.Text == "CALIDAD")
-                 {
+                }
 
+                progressBar1.Value = 0;
+                progressBar1.Visible = false;
 
-                     DGV_EvalSemProve.Columns["EvaCal"].Visible = true;
-
-                     DGV_EvalSemProve.Columns["EvaEnt"].Visible = false;
-
-                     DGV_EvalSemProve.Columns["Cate1"].Visible = true;
-
-                     DGV_EvalSemProve.Columns["Cate2"].Visible = false;
-                 }
-
-                 if (CB_TipoEva.Text == "ENTREGA")
-                 {
-                     DGV_EvalSemProve.Columns["EvaCal"].Visible = false;
-
-                     DGV_EvalSemProve.Columns["EvaEnt"].Visible = true;
-
-                     DGV_EvalSemProve.Columns["Cate1"].Visible = false;
-
-                     DGV_EvalSemProve.Columns["Cate2"].Visible = true;
-                 }
+                if (DGV_EvalSemProve.Columns["Razon"] != null)
+                    DGV_EvalSemProve.Sort(DGV_EvalSemProve.Columns["Razon"], ListSortDirection.Ascending);
 
 
-                 DGV_EvalSemProve.Visible = true;
 
-                 LB_Titulo.Visible = true;
-
+                LB_Titulo.Visible = true;
 
             }
             catch (Exception err)
@@ -160,552 +137,9 @@ namespace Eval_Proveedores.Novedades
             }
         }
 
-
-
-
-
-        private void CargarInforme(DataTable dtInforme)
+        private DataTable _ProcesarEvaluacionProveedores()
         {
-             //RECORRO LA LISTA DTINFORME
-            for (int i = 0; i < dtInforme.Rows.Count; i++)
-            {
-                DataRow fila = dtInforme.Rows[i];
-                int contador = 0;
-                int filaGrabar = 0;
-                Encontrado = false;
-                filaEval = dtEvaluacion.NewRow();
-
-                //CONSULTO SI LA TABLA EVALUACION TIENE FILAS
-                if (dtEvaluacion.Rows.Count > 0)
-                {
-                   
-                        //RECORRO LA LISTA GUARDADA DE EVALUACIONES PARA VER SI SE ENCUENTRA LA CLAVE.
-                        for (int j = 0; j < dtEvaluacion.Rows.Count; j++)
-                        {
-                            DataRow filaComp = dtEvaluacion.Rows[j];
-
-                            if (filaComp["Clave"].ToString() == fila[3].ToString())
-                            {
-                                //SI ENCUENTRO LA CLAVE QUIERE DECIR QUE YA SE EVALUO
-                                Encontrado = true;
-                                FilaEncontrada = j;
-                            }
-                        }
-                    
-                }
-
-
-
-
-
-                //SI LA CLAVE NO ESTA GUARDAD EN LA TABLE EVALUACION
-                //CONTROLO ATRASO, CERTIFICADO Y ENVIADO
-                if (Encontrado == false)
-                {
-                    //AGREGO LA CLAVE A LA FILA PARA COMPRARA SI EXISTE MAS DE UN LAUDO PARA EL MISMO ITEM
-                    filaEval["Clave"] = fila[3].ToString();
-
-                    //AGREGO EL PROVEEDOR PARA SABER CUANTOS ITEMS TIENE.
-                    filaEval["CodProve"] = fila[11].ToString();
-
-                    /*
-                    
-
-                    
-
-                    //CARGO LA FECHA DE EVALUACION DEL PROVEEDOR
-                    filaEval["Fecha"] = fila[21].ToString();
-                     * */
-
-                    //COMPRUEBO QUE LA FECHA2 DE LA ORDEN SEA MENOR QUE LA FECHA DEL INFORME
-                    int Fecha;
-                    int Fecha2;
-
-                    int.TryParse(fila[2].ToString(), out Fecha);
-                    int.TryParse(fila[10].ToString(), out Fecha2);
-
-
-                    if (Fecha > Fecha2)
-                    {
-                        filaEval["Atraso"] = 1;
-                    }
-
-
-                    //COMPRUEBO QUE CERTIFICADO SEA IGUAL A 1
-                    if (fila[4].ToString() == "1")
-                    {
-                        filaEval["Certificado"] = 1;
-                    }
-
-                    //COMPRUEBO QUE ESTADO IGUAL A 1
-
-                    if (fila[5].ToString() == "1")
-                    {
-                        filaEval["Enviado"] = 1;
-                    }
-                }
-
-
-
-                //COMPRUEBO SI LAUDO ES DISTINTO DE NULO, YA QUE LOS ENVASES NO SE LES INGRESA LAUDO
-                if (fila[15].ToString() != "")
-                {
-
-                    int liberada;
-                    int liberadaant;
-                    int devueltaant;
-                    int Devuelta;
-                    int Cantidad;
-                    int CantidadGuardad;
-
-                    int Laudo = int.Parse(fila[15].ToString());
-
-                    int.TryParse(fila[13].ToString(), out liberada);
-                    int.TryParse(fila[14].ToString(), out liberadaant);
-                    int.TryParse(fila[17].ToString(), out devueltaant);
-                    int.TryParse(fila[16].ToString(), out Devuelta);
-                    int.TryParse(fila[7].ToString(), out Cantidad);
-                    //int.TryParse(filaEval["CantidadGuardada"].ToString(), out CantidadGuardad);
-
-
-
-
-                    //COMPRUEBO QUE MARCA TENGA X
-                    if (fila[12].ToString() == "X")
-                    {
-
-
-
-
-
-                        //CONSULTO SI LIBERADA ES > 0
-                        if (liberadaant > 0)
-                        {
-                            //CONSULTA SI FUE APROBADA POR DESVIO
-                            if ((Laudo >= 190000 && Laudo <= 194999) || (Laudo >= 990000 && Laudo <= 994999) || (Laudo >= 290000 && Laudo <= 294999) ||
-                                (Laudo >= 390000 && Laudo <= 394999) || (Laudo >= 490000 && Laudo <= 494999) || (Laudo >= 590000 && Laudo <= 594999) ||
-                                (Laudo >= 690000 && Laudo <= 694999) || (Laudo >= 790000 && Laudo <= 794999) || (Laudo >= 890000 && Laudo <= 894999))
-                            {
-                                if (Encontrado == true)
-                                {
-                                    dtEvaluacion.Rows[FilaEncontrada]["Desviado"] = 1;
-                                }
-                                else
-                                {
-                                    filaEval["Desviado"] = 1;
-                                }
-                            }
-                            else
-                            {
-                                if (Encontrado == true)
-                                {
-                                    dtEvaluacion.Rows[FilaEncontrada]["Aprobado"] = 1;
-                                }
-                                else
-                                {
-                                    filaEval["Aprobado"] = 1;
-                                }
-                            }
-                        }
-                        if (devueltaant > 0)
-                        {
-                            if (Encontrado == true)
-                            {
-                                dtEvaluacion.Rows[FilaEncontrada]["Rechazado"] = 1;
-                            }
-                            else
-                            {
-                                filaEval["Rechazado"] = 1;
-                            }
-                        }
-
-
-
-
-
-
-
-
-
-
-                    }
-                    //SINO TIENE MARCA
-                    else
-                    {
-                        //CONSULTO SI LIBERADA ES > 0
-                        if (liberada > 0)
-                        {
-                            //CONSULTA SI FUE APROBADA POR DESVIO
-                            if ((Laudo >= 190000 && Laudo <= 194999) || (Laudo >= 990000 && Laudo <= 994999) || (Laudo >= 290000 && Laudo <= 294999) ||
-                                (Laudo >= 390000 && Laudo <= 394999) || (Laudo >= 490000 && Laudo <= 494999) || (Laudo >= 590000 && Laudo <= 594999) ||
-                                (Laudo >= 690000 && Laudo <= 694999) || (Laudo >= 790000 && Laudo <= 794999) || (Laudo >= 890000 && Laudo <= 894999))
-                            {
-                                if (Encontrado == true)
-                                {
-                                    dtEvaluacion.Rows[FilaEncontrada]["Desviado"] = 1;
-                                }
-                                else
-                                {
-                                    filaEval["Desviado"] = 1;
-                                }
-                            }
-                            else
-                            {
-                                if (Encontrado == true)
-                                {
-                                    dtEvaluacion.Rows[FilaEncontrada]["Aprobado"] = 1;
-                                }
-                                else
-                                {
-                                    filaEval["Aprobado"] = 1;
-                                }
-                            }
-                        }
-                        if (Devuelta > 0)
-                        {
-                            if (Encontrado == true)
-                            {
-                                dtEvaluacion.Rows[FilaEncontrada]["Rechazado"] = 1;
-                            }
-                            else
-                            {
-                                filaEval["Rechazado"] = 1;
-                            }
-                        }
-                    }
-                }
-
-
-
-
-
-                if (Encontrado == false)
-                {
-                    dtEvaluacion.Rows.Add(filaEval);
-                }
-
-
-
-
-
-
-
-
-
-
-            }
-        }
-
-
-
-        private void CargarMuestraInforme()
-        {
-            for (int i = 0; i < dtEvaluacion.Rows.Count; i++)
-            {
-                DataRow fila = dtEvaluacion.Rows[i];
-                InformeMuestraEncontrado = false;
-                filaInformeMuestra = dtInformeMuestra.NewRow();
-
-
-                for (int j = 0; j < dtInformeMuestra.Rows.Count; j++)
-                {
-                    DataRow filamuestra = dtInformeMuestra.Rows[j];
-
-                    if (fila[0].ToString() == filamuestra[0].ToString())
-                    {
-                        InformeMuestraEncontrado = true;
-                        FilaEncontradaInformeMuestra = j;
-                        //dtInformeMuestra.Rows[j][1] = +1;
-
-
-                    }
-                }
-
-
-                if (InformeMuestraEncontrado == false)
-                {
-                    filaInformeMuestra["CodProve"] = fila[0].ToString();
-
-                    P = PBOL.Find(fila[0].ToString());
-                    filaInformeMuestra["DescProve"] = P.Descripcion;
-
-                    //CARGAR CALIDAD DEL PROVEEDOR
-                    int Calidad = P.Categoria1;
-                    filaInformeMuestra["CatI"] = Calidad;
-                    CargarCalidad(Calidad);
-
-                    //CARGAR ENTREGA DEL PROVEEDOR
-                    int Entrega = P.Categoria2;
-                    filaInformeMuestra["CatII"] = Entrega;
-                    CargarEntrega(Entrega);
-
-
-                    filaInformeMuestra["Fecha"] = P.FechaCat;
-
-                }
-
-                if (InformeMuestraEncontrado == true)
-                {
-                    int CantItems;
-
-                    int.TryParse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Items"].ToString(), out CantItems);
-
-                    dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Items"] = CantItems + 1;
-
-                }
-                else
-                {
-                    filaInformeMuestra["Items"] = 1;
-                }
-
-
-
-
-                if (fila[3].ToString() == "1")
-                {
-                    if (InformeMuestraEncontrado == true)
-                    {
-                        int CantAprobado;
-                        int.TryParse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Aprobado"].ToString(), out CantAprobado);
-
-                        dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Aprobado"] = CantAprobado + 1;
-
-                    }
-                    else
-                    {
-                        filaInformeMuestra["Aprobado"] = 1;
-                    }
-
-                }
-
-                if (fila[4].ToString() == "1")
-                {
-                    if (InformeMuestraEncontrado == true)
-                    {
-                        int CantDesv;
-                        int.TryParse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Desviado"].ToString(), out CantDesv);
-
-
-                        dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Desviado"] = CantDesv + 1;
-
-                    }
-                    else
-                    {
-                        filaInformeMuestra["Desviado"] = 1;
-                    }
-
-                }
-
-                if (fila[5].ToString() == "1")
-                {
-                    if (InformeMuestraEncontrado == true)
-                    {
-                        int CantRechazo;
-                        int.TryParse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Rechazado"].ToString(), out CantRechazo);
-
-
-                        dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Rechazado"] = CantRechazo + 1;
-
-                    }
-                    else
-                    {
-                        filaInformeMuestra["Rechazado"] = 1;
-                    }
-
-                }
-
-                if (fila[2].ToString() == "1")
-                {
-                    if (InformeMuestraEncontrado == true)
-                    {
-                        int CantCert;
-
-                        int.TryParse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Certificado"].ToString(), out CantCert);
-                        dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Certificado"] = CantCert + 1;
-
-                    }
-                    else
-                    {
-                        filaInformeMuestra["Certificado"] = 1;
-                    }
-
-                }
-
-                if (fila[3].ToString() == "1")
-                {
-                    if (InformeMuestraEncontrado == true)
-                    {
-                        int CantEnviado;
-                        int.TryParse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Enviado"].ToString(), out CantEnviado);
-                        dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Enviado"] = CantEnviado + 1;
-
-                    }
-                    else
-                    {
-                        filaInformeMuestra["Enviado"] = 1;
-                    }
-
-                }
-
-
-
-
-
-
-
-
-                double PorcCert;
-                
-                /*
-                if (InformeMuestraEncontrado == true)
-                {
-                    int.TryParse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Certificado"].ToString(), out Certfic);
-                    Items1 = int.Parse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Items"].ToString());
-                    PorcCert = (Certfic * 100) / Items1;
-                    dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["PorcCert"] = PorcCert;
-
-                }
-                else
-                {
-                    int.TryParse(filaInformeMuestra["Certificado"].ToString(), out Certfic);
-                    Items1 = int.Parse(filaInformeMuestra["Items"].ToString());
-                    PorcCert = (Certfic * 100) / Items1;
-                    filaInformeMuestra["PorcCert"] = PorcCert;
-                }
-
-
-                
-
-
-
-
-                int Env;
-
-                int.TryParse(filaInformeMuestra["Enviado"].ToString(), out Env);
-                double PorcEnv;
-
-
-
-
-
-
-
-                if (InformeMuestraEncontrado == true)
-                {
-                    int.TryParse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Enviado"].ToString(), out Env);
-                    PorcEnv = (Env * 100) / Items1;
-                    dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["PorcEnv"] = PorcEnv;
-
-                }
-                else
-                {
-                    int.TryParse(filaInformeMuestra["Enviado"].ToString(), out Env);
-                    PorcEnv = (Env * 100) / Items1;
-                    filaInformeMuestra["PorcEnv"] = PorcEnv;
-                }
-
-
-
-
-
-                double PorcTot = (((PorcEnv + PorcCert) * 100) / 200);
-
-                if (InformeMuestraEncontrado == true)
-                {
-                    dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["PorcTotal"] = PorcTot;
-
-                }
-                else
-                {
-                    filaInformeMuestra["PorcTotal"] = PorcTot;
-                }
-
-                */
-
-
-                if (fila[6].ToString() == "1")
-                {
-                    if (InformeMuestraEncontrado == true)
-                    {
-                        int CantAtraso;
-
-                        int.TryParse(dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Atraso"].ToString(), out CantAtraso);
-                        dtInformeMuestra.Rows[FilaEncontradaInformeMuestra]["Atraso"] = CantAtraso + 1;
-
-                    }
-                    else
-                    {
-                        filaInformeMuestra["Atraso"] = 1;
-                    }
-
-                }
-
-                if (InformeMuestraEncontrado == false)
-                {
-                    dtInformeMuestra.Rows.Add(filaInformeMuestra);
-
-                }
-
-            }
-        }
-
-        private void CargarEntrega(int Entrega)
-        {
-            switch (Entrega)
-            {
-                case 1:
-                    filaInformeMuestra["Categoria2"] = "Muy Bueno";
-                    break;
-
-                case 2:
-                    filaInformeMuestra["Categoria2"] = "Bueno";
-                    break;
-
-                case 3:
-                    filaInformeMuestra["Categoria2"] = "Regular";
-                    break;
-
-                case 4:
-                    filaInformeMuestra["Categoria2"] = "Malo";
-                    break;
-
-                default:
-                    filaInformeMuestra["Categoria2"] = "Sin Calificar";
-                    break;
-
-            }
-        }
-
-        //CARGO LA CALIDAD DEL PROVEEDOR SEGUN EL NUMERO
-        private void CargarCalidad(int Calidad)
-        {
-            switch (Calidad)
-            {
-                case 1:
-                    filaInformeMuestra["Categoria1"] = "A";
-
-                    break;
-
-                case 2:
-                    filaInformeMuestra["Categoria1"] = "B";
-                    break;
-
-                case 3:
-                    filaInformeMuestra["Categoria1"] = "C";
-                    //filaEval["Categoria1"] = "C";
-                    break;
-
-                case 4:
-                    filaInformeMuestra["Categoria1"] = "E";
-
-                    break;
-
-                default:
-                    filaInformeMuestra["Categoria1"] = "E";
-
-                    break;
-
-            }
+            return Helper._ProcesarEvaluacionProveedores("2", TB_Desde.Text, TB_Hasta.Text, ref progressBar1);
         }
 
         private void BT_Salir_Click(object sender, EventArgs e)
@@ -715,71 +149,11 @@ namespace Eval_Proveedores.Novedades
 
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow filaDG in DGV_EvalSemProve.Rows)
-            {
 
-                if (CB_TipoEva.Text == "CALIDAD")
-                {
-                    string Modificado = Convert.ToString(filaDG.Cells["EvaCal"].Value);
-                    if (Modificado != "")
-                    {
-                        Prove.Codigo = Convert.ToString(filaDG.Cells["CodigoProve"].Value);
+            pnlClave.Visible = true;
+            txtClave.Text = "";
+            txtClave.Focus();
 
-                        DateTime Hoy = DateTime.Today;
-                        Prove.FechaCat = Hoy.ToString("d");
-
-                        if (Convert.ToString(filaDG.Cells["EvaCal"].Value) == "A") Prove.Categoria1 = 1;
-
-                        else if (Convert.ToString(filaDG.Cells["EvaCal"].Value) == "B") Prove.Categoria1 = 2;
-
-                        else if (Convert.ToString(filaDG.Cells["EvaCal"].Value) == "C") Prove.Categoria1 = 3;
-
-                        else if (Convert.ToString(filaDG.Cells["EvaCal"].Value) == "D") Prove.Categoria1 = 4;
-
-
-
-                        Prove.Categoria2 = Convert.ToInt32(filaDG.Cells["CatII"].Value);
-
-
-
-                        ActualizarProve();
-
-
-                    }
-
-                }
-
-
-                if (CB_TipoEva.Text == "ENTREGA")
-                {
-                    string Modificado = Convert.ToString(filaDG.Cells["EvaEnt"].Value);
-
-                    if (Modificado != "")
-                    {
-                        Prove.Codigo = Convert.ToString(filaDG.Cells["CodigoProve"].Value);
-
-                        DateTime Hoy = DateTime.Today;
-                        Prove.FechaCat = Hoy.ToString("d");
-
-                        if (Convert.ToString(filaDG.Cells["EvaEnt"].Value) == "Muy Bueno") Prove.Categoria2 = 1;
-
-                        else if (Convert.ToString(filaDG.Cells["EvaEnt"].Value) == "Bueno") Prove.Categoria2 = 2;
-
-                        else if (Convert.ToString(filaDG.Cells["EvaEnt"].Value) == "Regular") Prove.Categoria2 = 3;
-
-                        else if (Convert.ToString(filaDG.Cells["EvaEnt"].Value) == "Malo") Prove.Categoria2 = 4;
-
-                        Prove.Categoria1 = Convert.ToInt32(filaDG.Cells["CatI"].Value);
-
-                        ActualizarProve();
-                    }
-
-                }
-            }
-
-            MessageBox.Show("La evaluación se agregó con éxito", "Agregar Evaluación",
-                MessageBoxButtons.OK, MessageBoxIcon.None);
-            Close();
         }
 
         //CON ESTE METODO SE MANTINEN TODAS LAS BASES ACTUALIZADAS, YA QUE MODIFICA EL PROVEEDOR EN CADA BASE.
@@ -797,25 +171,151 @@ namespace Eval_Proveedores.Novedades
 
         private void DGV_EvalSemProve_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            string Prove = DGV_EvalSemProve.SelectedRows[0].Cells[2].Value.ToString();
+            _MostrarDetalles(e.RowIndex);
+        }
 
-            Int64 ProveNum = Int64.Parse(DGV_EvalSemProve.SelectedRows[0].Cells[2].Value.ToString());
+        private void _MostrarDetalles(int WRowIndex)
+        {
+            string _Prove = DGV_EvalSemProve.Rows[WRowIndex].Cells["Proveedor"].Value.ToString();
 
-            dtInformeDetalle = dtInforme.Clone();
+            dtInformeDetalle = new DataTable();
 
-            dtInformeDetalle.Clear();
+            dtInformeDetalle.Columns.Add("Articulo", typeof(string));
+            dtInformeDetalle.Columns.Add("Orden", typeof(int));
+            dtInformeDetalle.Columns.Add("Desviad", typeof(string));
+            dtInformeDetalle.Columns.Add("DesArticulo", typeof(string));
+            dtInformeDetalle.Columns.Add("Atraso", typeof(string));
+            dtInformeDetalle.Columns.Add("Desvio", typeof(string));
+            dtInformeDetalle.Columns.Add("Informe", typeof(int));
+            dtInformeDetalle.Columns.Add("Cantidad", typeof(double));
+            dtInformeDetalle.Columns.Add("FechaEntrega", typeof(string));
+            dtInformeDetalle.Columns.Add("FechaPosibleEntrega", typeof(string));
+            dtInformeDetalle.Columns.Add("Liberada", typeof(string));
+            dtInformeDetalle.Columns.Add("Laudo", typeof(int));
+            dtInformeDetalle.Columns.Add("Devuelta", typeof(string));
+            dtInformeDetalle.Columns.Add("Rechazado", typeof(string));
+            dtInformeDetalle.Columns.Add("Clave", typeof(string));
+            dtInformeDetalle.Columns.Add("FechaOrd", typeof(string));
+            dtInformeDetalle.Columns.Add("OrdFecha2", typeof(string));
+            dtInformeDetalle.Columns.Add("Fecha", typeof(string));
+            dtInformeDetalle.Columns.Add("Fecha2", typeof(string));
+            dtInformeDetalle.Columns.Add("Certificado1", typeof(string));
+            dtInformeDetalle.Columns.Add("Estado1", typeof(string));
+            dtInformeDetalle.Columns.Add("SaldoOC", typeof(double));
+            dtInformeDetalle.Columns.Add("DesconOC", typeof(double));
+            dtInformeDetalle.Columns.Add("EnvaseOC", typeof(string));
+            dtInformeDetalle.Columns.Add("DescEnvaseOC", typeof(string));
+            dtInformeDetalle.Columns.Add("CSEmpresa", typeof(string));
 
-            DataTable dtInformeProve = ESBOL.ListaInformeProve(OrdFechaDesde, ordFechaHAsta, "SurfactanSA", 1, Prove);
-            CargarInformeProve(dtInformeProve);
+            DataRow WDatosOC;
 
-            dtInformeProve = ESBOL.ListaInformeProve(OrdFechaDesde, ordFechaHAsta, "Surfactan_V", 1, Prove);
-            CargarInformeProve(dtInformeProve);
+            foreach (string _Empresa in Helper._Empresas)
+            {
+                DataTable dtInformeProve = ESBOL.ListaInformeProve(Helper.OrdenarFecha(TB_Desde.Text), Helper.OrdenarFecha(TB_Hasta.Text), _Empresa, 1, _Prove);
 
-            dtInformeProve = ESBOL.ListaInformeProve(OrdFechaDesde, ordFechaHAsta, "Surfactan_II", 1, Prove);
-            CargarInformeProve(dtInformeProve);
+                dtInformeProve.Columns.Add("DesArticulo", typeof(string));
+                dtInformeProve.Columns.Add("SaldoOC", typeof(double));
+                dtInformeProve.Columns.Add("DesconOC", typeof(double));
+                dtInformeProve.Columns.Add("EnvaseOC", typeof(string));
+                dtInformeProve.Columns.Add("DescEnvaseOC", typeof(string));
+                dtInformeProve.Columns.Add("CSEmpresa", typeof(string));
 
-            DetalleItems Detalle = new DetalleItems(dtInformeDetalle);
+                foreach (DataRow row in dtInformeProve.Rows)
+                {
+                    if (row["DesArticulo"].ToString() == "")
+                    {
+                        row["DesArticulo"] = _TraerDescripcionArticulo(row["Articulo"].ToString(), _Empresa);
+                    }
+
+                    row["SaldoOC"] = 0;
+                    row["Cantidad"] = 0;
+                    row["DesconOC"] = 0;
+                    row["EnvaseOC"] = "0";
+                    row["DescEnvaseOC"] = "";
+
+                    WDatosOC = _TraerInformacionOC(row["Orden"], row["Articulo"], _Empresa);
+
+                    if (WDatosOC != null)
+                    {
+
+                        row["SaldoOC"] = WDatosOC["Saldo"];
+                        row["Cantidad"] = WDatosOC["Cantidad"];
+                        row["DesconOC"] = WDatosOC["Recibida"];
+                        row["EnvaseOC"] = WDatosOC["Envase"];
+                        row["DescEnvaseOC"] = WDatosOC["DescEnvase"];
+
+                    }
+
+                    row["CSEmpresa"] = _Empresa;
+                }
+
+                CargarInformeProve(dtInformeProve);
+            }
+
+            DetalleItemsEnvases Detalle = new DetalleItemsEnvases(dtInformeDetalle);
             Detalle.Show();
+        }
+
+        private DataRow _TraerInformacionOC(object _Orden, object _Articulo, string WEmpresa)
+        {
+            DataTable tabla = new DataTable();
+            string WOrden = _Orden.ToString();
+            string WArticulo = _Articulo.ToString();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings[WEmpresa].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT o.Saldo, o.Recibida, o.Cantidad, i.Envase, isnull(e.Descripcion, '') as DescEnvase FROM Orden o, Informe i FULL OUTER JOIN Envases e ON i.Envase = e.Envases WHERE o.Orden = i.Orden AND o.Articulo = i.Articulo AND o.Orden = '" + WOrden + "' AND o.Articulo = '" + WArticulo + "'";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            tabla.Load(dr);
+                        }
+                    }
+                }
+
+            }
+
+            if (tabla.Rows.Count > 0) return tabla.Rows[0];
+
+            return null;
+        }
+
+        private string _TraerDescripcionArticulo(string WArticulo, string _Empresa)
+        {
+            string Descripcion = "";
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings[_Empresa].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT Descripcion FROM Articulo WHERE Codigo = '" + WArticulo + "'";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            Descripcion = dr["Descripcion"].ToString();
+                            Descripcion = Descripcion.Trim();
+                        }
+                    }
+                }
+
+            }
+
+            return Descripcion;
         }
 
         private void CargarInformeProve(DataTable dtInformeProve)
@@ -835,7 +335,166 @@ namespace Eval_Proveedores.Novedades
                 TB_Hasta.Focus();
             }
         }
-       
-        
+
+        private void ckIncluirSinMovimientos_CheckedChanged(object sender, EventArgs e)
+        {
+            BT_Buscar.PerformClick();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            pnlClave.Visible = false;
+            txtClave.Text = "";
+        }
+
+        private void txtClave_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtClave.Text.Trim() == "") return;
+
+                if (txtClave.Text.ToUpper() != "EVALUA") return;
+
+                button3.PerformClick();
+
+                BT_Guardar.PerformClick();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtClave.Text = "";
+            }
+        }
+
+        private void BT_Guardar_Click_1(object sender, EventArgs e)
+        {
+            SqlTransaction trans = null;
+
+            try
+            {
+                string WProveedor = "", WFechaCategoria = "", WFechaCategoriaOrd = "", WCategoriaI = "", WCategoriaII = "", WTemp = "";
+
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+                    trans = conn.BeginTransaction();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "";
+                        cmd.Transaction = trans;
+
+                        foreach (DataGridViewRow WRow in DGV_EvalSemProve.Rows)
+                        {
+                            WProveedor = WRow.Cells["Proveedor"].Value.ToString();
+                            WTemp = WRow.Cells["EvaCal"].Value.ToString();
+                            WCategoriaI = _TraerCalidad(WTemp);
+                            WTemp = WRow.Cells["EvaEnt"].Value.ToString();
+                            WCategoriaII = _TraerEnt(WTemp);
+
+                            if (_DatosActualizados(WRow, WCategoriaI, WCategoriaII))
+                            {
+                                WFechaCategoria = DateTime.Now.ToString("dd/MM/yyyy");
+                                WFechaCategoriaOrd = Helper.OrdenarFecha(WFechaCategoria);
+
+                                cmd.CommandText = "UPDATE Proveedor SET FechaCategoria = '" + WFechaCategoria + "', "
+                                                + " OrdFechaCategoria = '" + WFechaCategoriaOrd + "', "
+                                                + " CategoriaI = '" + WCategoriaI + "', "
+                                                + " CategoriaII = '" + WCategoriaII + "' "
+                                                + " WHERE Proveedor  = '" + WProveedor + "'";
+
+                                cmd.ExecuteNonQuery();
+                            }
+
+                        }
+
+                        trans.Commit();
+
+                        MessageBox.Show("La evaluación se agregó con éxito", "Agregar Evaluación",
+                        MessageBoxButtons.OK, MessageBoxIcon.None);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                if (trans != null)
+                    trans.Rollback();
+
+                MessageBox.Show("Hubo un problema al querer actualizar las Calificaciones de los Proveedores. Motivo: " + ex.Message);
+            }
+        }
+
+        private bool _DatosActualizados(DataGridViewRow WRow, string WCategoriaI, string WCategoriaII)
+        {
+            return WRow.Cells["Categoria1"].Value.ToString().Trim() != WCategoriaI || WRow.Cells["Categoria2"].Value.ToString().Trim() != WCategoriaII;
+        }
+
+        private string _TraerEnt(string wTemp)
+        {
+            switch (wTemp.ToUpper())
+            {
+                case "MUY BUENO":
+                    {
+                        return "1";
+                    }
+                case "BUENO":
+                    {
+                        return "2";
+                    }
+                case "REGULAR":
+                    {
+                        return "3";
+                    }
+                case "MALO":
+                    {
+                        return "4";
+                    }
+                default:
+                    {
+                        return "0";
+                    }
+            }
+        }
+
+        private string _TraerCalidad(string wTemp)
+        {
+            switch (wTemp.ToUpper())
+            {
+                case "A":
+                    {
+                        return "1";
+                    }
+                case "B":
+                    {
+                        return "2";
+                    }
+                case "C":
+                    {
+                        return "3";
+                    }
+                case "E":
+                    {
+                        return "4";
+                    }
+                default:
+                    {
+                        return "0";
+                    }
+
+            }
+        }
+
+        private void DGV_EvalSemProve_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            if (e.ColumnIndex > -1)
+                if (DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "EvaCal" || DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "EvaEnt") return;
+
+            _MostrarDetalles(e.RowIndex);
+        }
     }
 }

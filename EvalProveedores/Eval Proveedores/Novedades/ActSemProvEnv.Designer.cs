@@ -28,33 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_TitEva = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.BT_Salir = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
+            this.pnlClave = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtClave = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.ckIncluirSinMovimientos = new System.Windows.Forms.CheckBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.BT_Salir = new System.Windows.Forms.Button();
+            this.btnPedirClave = new System.Windows.Forms.Button();
             this.LB_Titulo = new System.Windows.Forms.Label();
             this.CB_TipoEva = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.DGV_EvalSemProve = new System.Windows.Forms.DataGridView();
-            this.CodigoProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Aprobad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Desviad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rechaz = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Certific = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Envi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Atra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fechas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cate1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Movimientos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Aprobados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Desvios = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rechazados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CertificadosOk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EnvasesOk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Retrasos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Categoria1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Categoria2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EvaCal = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.EvaEnt = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.CatI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CatII = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fechas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BT_Buscar = new System.Windows.Forms.Button();
             this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,6 +76,8 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.pnlClave.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,8 +113,12 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.BT_Guardar);
+            this.panel3.Controls.Add(this.pnlClave);
+            this.panel3.Controls.Add(this.ckIncluirSinMovimientos);
+            this.panel3.Controls.Add(this.progressBar1);
+            this.panel3.Controls.Add(this.BT_Salir);
+            this.panel3.Controls.Add(this.btnPedirClave);
             this.panel3.Controls.Add(this.LB_Titulo);
             this.panel3.Controls.Add(this.CB_TipoEva);
             this.panel3.Controls.Add(this.label2);
@@ -114,6 +133,82 @@
             this.panel3.Size = new System.Drawing.Size(851, 511);
             this.panel3.TabIndex = 0;
             // 
+            // BT_Guardar
+            // 
+            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.BT_Guardar.Location = new System.Drawing.Point(712, 458);
+            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_Guardar.Name = "BT_Guardar";
+            this.BT_Guardar.Size = new System.Drawing.Size(70, 40);
+            this.BT_Guardar.TabIndex = 83;
+            this.BT_Guardar.Text = "Guardar";
+            this.BT_Guardar.UseVisualStyleBackColor = true;
+            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click_1);
+            // 
+            // pnlClave
+            // 
+            this.pnlClave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
+            this.pnlClave.Controls.Add(this.groupBox1);
+            this.pnlClave.Controls.Add(this.button3);
+            this.pnlClave.Location = new System.Drawing.Point(325, 205);
+            this.pnlClave.Name = "pnlClave";
+            this.pnlClave.Size = new System.Drawing.Size(200, 100);
+            this.pnlClave.TabIndex = 82;
+            this.pnlClave.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtClave);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Location = new System.Drawing.Point(14, 10);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(173, 56);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Clave";
+            // 
+            // txtClave
+            // 
+            this.txtClave.Location = new System.Drawing.Point(24, 21);
+            this.txtClave.Name = "txtClave";
+            this.txtClave.Size = new System.Drawing.Size(124, 20);
+            this.txtClave.TabIndex = 0;
+            this.txtClave.UseSystemPasswordChar = true;
+            this.txtClave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtClave_KeyDown);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button3.Location = new System.Drawing.Point(65, 71);
+            this.button3.Margin = new System.Windows.Forms.Padding(0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(70, 22);
+            this.button3.TabIndex = 77;
+            this.button3.Text = "Cancelar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // ckIncluirSinMovimientos
+            // 
+            this.ckIncluirSinMovimientos.AutoSize = true;
+            this.ckIncluirSinMovimientos.Location = new System.Drawing.Point(473, 25);
+            this.ckIncluirSinMovimientos.Name = "ckIncluirSinMovimientos";
+            this.ckIncluirSinMovimientos.Size = new System.Drawing.Size(197, 17);
+            this.ckIncluirSinMovimientos.TabIndex = 81;
+            this.ckIncluirSinMovimientos.Text = "Incluir Proveedores Sin Movimientos";
+            this.ckIncluirSinMovimientos.UseVisualStyleBackColor = true;
+            this.ckIncluirSinMovimientos.CheckedChanged += new System.EventHandler(this.ckIncluirSinMovimientos_CheckedChanged);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(279, 61);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(562, 25);
+            this.progressBar1.TabIndex = 80;
+            this.progressBar1.Visible = false;
+            // 
             // BT_Salir
             // 
             this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
@@ -127,25 +222,25 @@
             this.BT_Salir.UseVisualStyleBackColor = true;
             this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
             // 
-            // BT_Guardar
+            // btnPedirClave
             // 
-            this.BT_Guardar.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Grabar;
-            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(341, 458);
-            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_Guardar.Name = "BT_Guardar";
-            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
-            this.BT_Guardar.TabIndex = 77;
-            this.BT_Guardar.UseVisualStyleBackColor = true;
-            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
+            this.btnPedirClave.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Aceptar_N2;
+            this.btnPedirClave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPedirClave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPedirClave.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPedirClave.Location = new System.Drawing.Point(341, 458);
+            this.btnPedirClave.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPedirClave.Name = "btnPedirClave";
+            this.btnPedirClave.Size = new System.Drawing.Size(40, 40);
+            this.btnPedirClave.TabIndex = 77;
+            this.btnPedirClave.UseVisualStyleBackColor = true;
+            this.btnPedirClave.Click += new System.EventHandler(this.BT_Guardar_Click);
             // 
             // LB_Titulo
             // 
             this.LB_Titulo.AutoSize = true;
             this.LB_Titulo.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Titulo.Location = new System.Drawing.Point(69, 69);
+            this.LB_Titulo.Location = new System.Drawing.Point(13, 69);
             this.LB_Titulo.Name = "LB_Titulo";
             this.LB_Titulo.Size = new System.Drawing.Size(248, 18);
             this.LB_Titulo.TabIndex = 12;
@@ -157,20 +252,22 @@
             this.CB_TipoEva.Items.AddRange(new object[] {
             "CALIDAD",
             "ENTREGA"});
-            this.CB_TipoEva.Location = new System.Drawing.Point(538, 22);
+            this.CB_TipoEva.Location = new System.Drawing.Point(694, 22);
             this.CB_TipoEva.Name = "CB_TipoEva";
             this.CB_TipoEva.Size = new System.Drawing.Size(147, 21);
             this.CB_TipoEva.TabIndex = 11;
+            this.CB_TipoEva.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(422, 26);
+            this.label2.Location = new System.Drawing.Point(729, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 18);
             this.label2.TabIndex = 10;
             this.label2.Text = "Evaluación de:";
+            this.label2.Visible = false;
             // 
             // DGV_EvalSemProve
             // 
@@ -179,123 +276,142 @@
             this.DGV_EvalSemProve.AllowUserToResizeRows = false;
             this.DGV_EvalSemProve.ColumnHeadersHeight = 34;
             this.DGV_EvalSemProve.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CodigoProve,
-            this.Descripcion,
-            this.Item,
-            this.Aprobad,
-            this.Desviad,
-            this.Rechaz,
-            this.Certific,
-            this.Envi,
-            this.Atra,
-            this.Fechas,
-            this.Cate1,
-            this.Cate2,
+            this.Proveedor,
+            this.Razon,
+            this.Movimientos,
+            this.Aprobados,
+            this.Desvios,
+            this.Rechazados,
+            this.CertificadosOk,
+            this.EnvasesOk,
+            this.Retrasos,
+            this.Categoria1,
+            this.Categoria2,
             this.EvaCal,
             this.EvaEnt,
             this.CatI,
-            this.CatII});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DGV_EvalSemProve.Location = new System.Drawing.Point(71, 102);
+            this.CatII,
+            this.Fechas});
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle7;
+            this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.DGV_EvalSemProve.Location = new System.Drawing.Point(9, 102);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
-            this.DGV_EvalSemProve.Size = new System.Drawing.Size(708, 341);
+            this.DGV_EvalSemProve.RowHeadersWidth = 15;
+            this.DGV_EvalSemProve.Size = new System.Drawing.Size(832, 341);
             this.DGV_EvalSemProve.TabIndex = 9;
-            this.DGV_EvalSemProve.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_EvalSemProve_RowHeaderMouseDoubleClick);
+            this.DGV_EvalSemProve.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellDoubleClick);
             // 
-            // CodigoProve
+            // Proveedor
             // 
-            this.CodigoProve.DataPropertyName = "CodProve";
-            this.CodigoProve.HeaderText = "CodigoProve";
-            this.CodigoProve.Name = "CodigoProve";
-            this.CodigoProve.Visible = false;
+            this.Proveedor.DataPropertyName = "CodProve";
+            this.Proveedor.HeaderText = "CodigoProve";
+            this.Proveedor.Name = "Proveedor";
+            this.Proveedor.Visible = false;
             // 
-            // Descripcion
+            // Razon
             // 
-            this.Descripcion.DataPropertyName = "DescProve";
-            this.Descripcion.HeaderText = "Proveedor";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.Width = 130;
+            this.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Razon.DataPropertyName = "DescProve";
+            this.Razon.HeaderText = "Proveedor";
+            this.Razon.Name = "Razon";
+            this.Razon.ReadOnly = true;
             // 
-            // Item
+            // Movimientos
             // 
-            this.Item.DataPropertyName = "Items";
-            this.Item.HeaderText = "Items";
-            this.Item.Name = "Item";
-            this.Item.Width = 40;
+            this.Movimientos.DataPropertyName = "Items";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Movimientos.HeaderText = "Items";
+            this.Movimientos.Name = "Movimientos";
+            this.Movimientos.ReadOnly = true;
+            this.Movimientos.Width = 40;
             // 
-            // Aprobad
+            // Aprobados
             // 
-            this.Aprobad.DataPropertyName = "Aprobado";
-            this.Aprobad.HeaderText = "Aprob.";
-            this.Aprobad.Name = "Aprobad";
-            this.Aprobad.Width = 40;
+            this.Aprobados.DataPropertyName = "Aprobado";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Aprobados.HeaderText = "Aprob.";
+            this.Aprobados.Name = "Aprobados";
+            this.Aprobados.ReadOnly = true;
+            this.Aprobados.Width = 40;
             // 
-            // Desviad
+            // Desvios
             // 
-            this.Desviad.DataPropertyName = "Desviado";
-            this.Desviad.HeaderText = "Desv.";
-            this.Desviad.Name = "Desviad";
-            this.Desviad.Width = 40;
+            this.Desvios.DataPropertyName = "Desviado";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Desvios.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Desvios.HeaderText = "Desv.";
+            this.Desvios.Name = "Desvios";
+            this.Desvios.ReadOnly = true;
+            this.Desvios.Width = 40;
             // 
-            // Rechaz
+            // Rechazados
             // 
-            this.Rechaz.DataPropertyName = "Rechazado";
-            this.Rechaz.HeaderText = "Rech.";
-            this.Rechaz.Name = "Rechaz";
-            this.Rechaz.Width = 40;
+            this.Rechazados.DataPropertyName = "Rechazado";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Rechazados.HeaderText = "Rech.";
+            this.Rechazados.Name = "Rechazados";
+            this.Rechazados.ReadOnly = true;
+            this.Rechazados.Width = 40;
             // 
-            // Certific
+            // CertificadosOk
             // 
-            this.Certific.DataPropertyName = "Certificado";
-            this.Certific.HeaderText = "Cert.";
-            this.Certific.Name = "Certific";
-            this.Certific.Width = 40;
+            this.CertificadosOk.DataPropertyName = "Certificado";
+            this.CertificadosOk.HeaderText = "Cert.";
+            this.CertificadosOk.Name = "CertificadosOk";
+            this.CertificadosOk.ReadOnly = true;
+            this.CertificadosOk.Visible = false;
+            this.CertificadosOk.Width = 40;
             // 
-            // Envi
+            // EnvasesOk
             // 
-            this.Envi.DataPropertyName = "Enviado";
-            this.Envi.HeaderText = "Env.";
-            this.Envi.Name = "Envi";
-            this.Envi.Width = 40;
+            this.EnvasesOk.DataPropertyName = "Enviado";
+            this.EnvasesOk.HeaderText = "Env.";
+            this.EnvasesOk.Name = "EnvasesOk";
+            this.EnvasesOk.ReadOnly = true;
+            this.EnvasesOk.Visible = false;
+            this.EnvasesOk.Width = 40;
             // 
-            // Atra
+            // Retrasos
             // 
-            this.Atra.DataPropertyName = "Atraso";
-            this.Atra.HeaderText = "Atraso";
-            this.Atra.Name = "Atra";
-            this.Atra.Width = 40;
+            this.Retrasos.DataPropertyName = "Atraso";
+            this.Retrasos.HeaderText = "Atraso";
+            this.Retrasos.Name = "Retrasos";
+            this.Retrasos.ReadOnly = true;
+            this.Retrasos.Width = 40;
             // 
-            // Fechas
+            // Categoria1
             // 
-            this.Fechas.DataPropertyName = "Fecha";
-            this.Fechas.HeaderText = "Fecha";
-            this.Fechas.Name = "Fechas";
-            this.Fechas.Width = 80;
+            this.Categoria1.DataPropertyName = "Categoria1";
+            this.Categoria1.HeaderText = "Calidad";
+            this.Categoria1.Name = "Categoria1";
+            this.Categoria1.ReadOnly = true;
+            this.Categoria1.Visible = false;
+            this.Categoria1.Width = 70;
             // 
-            // Cate1
+            // Categoria2
             // 
-            this.Cate1.DataPropertyName = "Categoria1";
-            this.Cate1.HeaderText = "Calidad";
-            this.Cate1.Name = "Cate1";
-            this.Cate1.Width = 70;
-            // 
-            // Cate2
-            // 
-            this.Cate2.DataPropertyName = "Categoria2";
-            this.Cate2.HeaderText = "Entrega";
-            this.Cate2.Name = "Cate2";
-            this.Cate2.Width = 70;
+            this.Categoria2.DataPropertyName = "Categoria2";
+            this.Categoria2.HeaderText = "Entrega";
+            this.Categoria2.Name = "Categoria2";
+            this.Categoria2.ReadOnly = true;
+            this.Categoria2.Visible = false;
+            this.Categoria2.Width = 70;
             // 
             // EvaCal
             // 
-            this.EvaCal.HeaderText = "Evaluacion";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle5;
+            this.EvaCal.HeaderText = "Evaluacion Calidad";
             this.EvaCal.Items.AddRange(new object[] {
             "A",
             "B",
@@ -303,11 +419,11 @@
             "D",
             "E"});
             this.EvaCal.Name = "EvaCal";
-            this.EvaCal.Width = 80;
+            this.EvaCal.Width = 110;
             // 
             // EvaEnt
             // 
-            this.EvaEnt.HeaderText = "Evaluacion";
+            this.EvaEnt.HeaderText = "Evaluacion Entregas";
             this.EvaEnt.Items.AddRange(new object[] {
             "Muy Bueno",
             "Bueno",
@@ -315,13 +431,14 @@
             "Malo",
             "Sin Calificar"});
             this.EvaEnt.Name = "EvaEnt";
-            this.EvaEnt.Width = 80;
+            this.EvaEnt.Width = 130;
             // 
             // CatI
             // 
             this.CatI.DataPropertyName = "CatI";
             this.CatI.HeaderText = "CatI";
             this.CatI.Name = "CatI";
+            this.CatI.ReadOnly = true;
             this.CatI.Visible = false;
             // 
             // CatII
@@ -329,7 +446,18 @@
             this.CatII.DataPropertyName = "CatII";
             this.CatII.HeaderText = "CatII";
             this.CatII.Name = "CatII";
+            this.CatII.ReadOnly = true;
             this.CatII.Visible = false;
+            // 
+            // Fechas
+            // 
+            this.Fechas.DataPropertyName = "Fecha";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Fechas.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Fechas.HeaderText = "Fecha";
+            this.Fechas.Name = "Fechas";
+            this.Fechas.ReadOnly = true;
+            this.Fechas.Width = 80;
             // 
             // BT_Buscar
             // 
@@ -337,7 +465,7 @@
             this.BT_Buscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BT_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Buscar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Buscar.Location = new System.Drawing.Point(736, 10);
+            this.BT_Buscar.Location = new System.Drawing.Point(409, 8);
             this.BT_Buscar.Name = "BT_Buscar";
             this.BT_Buscar.Size = new System.Drawing.Size(46, 48);
             this.BT_Buscar.TabIndex = 8;
@@ -388,7 +516,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(868, 563);
+            this.ClientSize = new System.Drawing.Size(868, 562);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
@@ -401,6 +529,9 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.pnlClave.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).EndInit();
             this.ResumeLayout(false);
 
@@ -413,7 +544,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Button BT_Guardar;
+        private System.Windows.Forms.Button btnPedirClave;
         private System.Windows.Forms.Label LB_Titulo;
         private System.Windows.Forms.ComboBox CB_TipoEva;
         private System.Windows.Forms.Label label2;
@@ -423,21 +554,28 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MaskedTextBox TB_Desde;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoProve;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Item;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Aprobad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Desviad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rechaz;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Certific;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Envi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Atra;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fechas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cate1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cate2;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.CheckBox ckIncluirSinMovimientos;
+        private System.Windows.Forms.Panel pnlClave;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtClave;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button BT_Guardar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Razon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Movimientos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Aprobados;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Desvios;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rechazados;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CertificadosOk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EnvasesOk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Retrasos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria2;
         private System.Windows.Forms.DataGridViewComboBoxColumn EvaCal;
         private System.Windows.Forms.DataGridViewComboBoxColumn EvaEnt;
         private System.Windows.Forms.DataGridViewTextBoxColumn CatI;
         private System.Windows.Forms.DataGridViewTextBoxColumn CatII;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fechas;
     }
 }

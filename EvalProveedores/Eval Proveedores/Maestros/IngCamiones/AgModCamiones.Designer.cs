@@ -84,6 +84,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txtVencimientoRENPRE = new System.Windows.Forms.MaskedTextBox();
+            this.txtFechaEntregaRENPRE = new System.Windows.Forms.MaskedTextBox();
+            this.txtObsRENPRE = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -137,20 +142,25 @@
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.BT_LimpiarPant);
             this.panel3.Controls.Add(this.BT_Guardar);
+            this.panel3.Controls.Add(this.txtObsRENPRE);
             this.panel3.Controls.Add(this.TB_ObservCargasPelig);
             this.panel3.Controls.Add(this.TB_ObservSeguro);
             this.panel3.Controls.Add(this.TB_ObservHabDominio);
             this.panel3.Controls.Add(this.textBox9);
+            this.panel3.Controls.Add(this.txtFechaEntregaRENPRE);
             this.panel3.Controls.Add(this.TB_EntCargasPelig);
             this.panel3.Controls.Add(this.TB_EntSeguro);
             this.panel3.Controls.Add(this.TB_EntHabDominio);
             this.panel3.Controls.Add(this.textBox8);
+            this.panel3.Controls.Add(this.txtVencimientoRENPRE);
             this.panel3.Controls.Add(this.TB_VencCargasPelig);
             this.panel3.Controls.Add(this.TB_VencSeguro);
             this.panel3.Controls.Add(this.TB_VencHabDominio);
             this.panel3.Controls.Add(this.textBox7);
+            this.panel3.Controls.Add(this.checkBox1);
             this.panel3.Controls.Add(this.CB_CargasPeligrosas);
             this.panel3.Controls.Add(this.textBox6);
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.label5);
@@ -159,7 +169,7 @@
             this.panel3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel3.Location = new System.Drawing.Point(12, 9);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(854, 452);
+            this.panel3.Size = new System.Drawing.Size(854, 483);
             this.panel3.TabIndex = 0;
             this.panel3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseClick);
             // 
@@ -705,17 +715,68 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Codigo:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(20, 449);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(232, 18);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Habilitacion RENPRE (ex SEDRONAR)";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(328, 452);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
+            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_CargasPeligrosas_MouseClick);
+            // 
+            // txtVencimientoRENPRE
+            // 
+            this.txtVencimientoRENPRE.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVencimientoRENPRE.Location = new System.Drawing.Point(371, 446);
+            this.txtVencimientoRENPRE.Mask = "00/00/0000";
+            this.txtVencimientoRENPRE.Name = "txtVencimientoRENPRE";
+            this.txtVencimientoRENPRE.Size = new System.Drawing.Size(100, 26);
+            this.txtVencimientoRENPRE.TabIndex = 19;
+            this.txtVencimientoRENPRE.ValidatingType = typeof(System.DateTime);
+            this.txtVencimientoRENPRE.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_VencCargasPelig_MouseClick);
+            this.txtVencimientoRENPRE.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtVencimientoRENPRE_KeyDown);
+            // 
+            // txtFechaEntregaRENPRE
+            // 
+            this.txtFechaEntregaRENPRE.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFechaEntregaRENPRE.Location = new System.Drawing.Point(486, 446);
+            this.txtFechaEntregaRENPRE.Mask = "00/00/0000";
+            this.txtFechaEntregaRENPRE.Name = "txtFechaEntregaRENPRE";
+            this.txtFechaEntregaRENPRE.Size = new System.Drawing.Size(100, 26);
+            this.txtFechaEntregaRENPRE.TabIndex = 20;
+            this.txtFechaEntregaRENPRE.ValidatingType = typeof(System.DateTime);
+            this.txtFechaEntregaRENPRE.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_EntCargasPelig_MouseClick);
+            this.txtFechaEntregaRENPRE.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFechaEntregaRENPRE_KeyDown);
+            // 
+            // txtObsRENPRE
+            // 
+            this.txtObsRENPRE.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtObsRENPRE.Location = new System.Drawing.Point(592, 446);
+            this.txtObsRENPRE.Name = "txtObsRENPRE";
+            this.txtObsRENPRE.Size = new System.Drawing.Size(241, 26);
+            this.txtObsRENPRE.TabIndex = 21;
+            // 
             // AgModCamiones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(871, 506);
+            this.ClientSize = new System.Drawing.Size(871, 542);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(887, 544);
-            this.MinimumSize = new System.Drawing.Size(887, 544);
             this.Name = "AgModCamiones";
             this.Load += new System.EventHandler(this.AgModCamiones_Load);
             this.panel1.ResumeLayout(false);
@@ -790,5 +851,10 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.ComboBox TB_CodProveedor;
         private System.Windows.Forms.ComboBox TB_NombChofer;
+        private System.Windows.Forms.TextBox txtObsRENPRE;
+        private System.Windows.Forms.MaskedTextBox txtFechaEntregaRENPRE;
+        private System.Windows.Forms.MaskedTextBox txtVencimientoRENPRE;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
