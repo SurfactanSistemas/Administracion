@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -186,20 +188,21 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
         private void TB_Codigo_KeyDown(object sender, KeyEventArgs e)
         {
             BuscarVersion();
-            
         }
 
         private void BuscarVersion()
         {
             try
             {
-                
-                    if (TB_Codigo.Text == "" || TB_Version.Text == "") throw new Exception("Se deben cargar los datos de CODIGO y VERISON");
+                if (TB_Codigo.Text != "")
+                    txtVersionActual.Text = _TraerVersionActual();
 
-                    PerVer = PerVer.BuscarUno(TB_Codigo.Text, TB_Version.Text);
-                    CargarTemas();
+                if (TB_Version.Text == "") return;
 
-                    CargarDatosPerfilABM();
+                PerVer = PerVer.BuscarUno(TB_Codigo.Text, TB_Version.Text);
+                CargarTemas();
+
+                CargarDatosPerfilABM();
 
                 
             }
@@ -207,6 +210,36 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
             {
                 MessageBox.Show(err.Message, "Error");
             }
+        }
+
+        private string _TraerVersionActual()
+        {
+            string Version = "";
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT Version FROM Tarea WHERE Codigo = '" + TB_Codigo.Text + "'";
+ 
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            Version = dr["Version"].ToString();
+                        }
+                    }
+                }
+
+            }
+
+            return Version;
         }
 
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
@@ -353,7 +386,7 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
         {
             TB_Codigo.Focus();
         }
-
+        
         //private void BuscarMaxCodigo()
         //{
         //    TB_Codigo.Text = PerVer.ObtenerUltimoId().ToString();

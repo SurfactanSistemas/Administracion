@@ -33,12 +33,11 @@
             this.LBChofer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.CB_Tipo = new System.Windows.Forms.ComboBox();
             this.TB_AñoDesde = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.TB_HorasHasta = new System.Windows.Forms.TextBox();
             this.BT_Pantalla = new System.Windows.Forms.Button();
             this.BT_Imprimir = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
@@ -79,12 +78,11 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.progressBar1);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.CB_Tipo);
             this.panel3.Controls.Add(this.TB_AñoDesde);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.TB_HorasHasta);
             this.panel3.Controls.Add(this.BT_Pantalla);
             this.panel3.Controls.Add(this.BT_Imprimir);
             this.panel3.Controls.Add(this.BT_Salir);
@@ -93,21 +91,19 @@
             this.panel3.Size = new System.Drawing.Size(397, 222);
             this.panel3.TabIndex = 0;
             // 
-            // label1
+            // progressBar1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(49, 62);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 18);
-            this.label1.TabIndex = 90;
-            this.label1.Text = "Hasta Horas:";
+            this.progressBar1.Location = new System.Drawing.Point(17, 109);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(362, 32);
+            this.progressBar1.TabIndex = 90;
+            this.progressBar1.Visible = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(48, 98);
+            this.label4.Location = new System.Drawing.Point(49, 62);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 18);
             this.label4.TabIndex = 89;
@@ -116,7 +112,10 @@
             // CB_Tipo
             // 
             this.CB_Tipo.FormattingEnabled = true;
-            this.CB_Tipo.Location = new System.Drawing.Point(196, 98);
+            this.CB_Tipo.Items.AddRange(new object[] {
+            "Completo",
+            "Sólo Activos"});
+            this.CB_Tipo.Location = new System.Drawing.Point(197, 62);
             this.CB_Tipo.Name = "CB_Tipo";
             this.CB_Tipo.Size = new System.Drawing.Size(111, 21);
             this.CB_Tipo.TabIndex = 88;
@@ -138,20 +137,13 @@
             this.label3.TabIndex = 86;
             this.label3.Text = "Año:";
             // 
-            // TB_HorasHasta
-            // 
-            this.TB_HorasHasta.Location = new System.Drawing.Point(196, 62);
-            this.TB_HorasHasta.Name = "TB_HorasHasta";
-            this.TB_HorasHasta.Size = new System.Drawing.Size(51, 20);
-            this.TB_HorasHasta.TabIndex = 85;
-            // 
             // BT_Pantalla
             // 
             this.BT_Pantalla.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Pantalla.BackgroundImage")));
             this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(87, 140);
+            this.BT_Pantalla.Location = new System.Drawing.Point(83, 159);
             this.BT_Pantalla.Name = "BT_Pantalla";
             this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
             this.BT_Pantalla.TabIndex = 81;
@@ -164,11 +156,12 @@
             this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(188, 140);
+            this.BT_Imprimir.Location = new System.Drawing.Point(184, 159);
             this.BT_Imprimir.Name = "BT_Imprimir";
             this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
             this.BT_Imprimir.TabIndex = 80;
             this.BT_Imprimir.UseVisualStyleBackColor = true;
+            this.BT_Imprimir.Click += new System.EventHandler(this.BT_Imprimir_Click);
             // 
             // BT_Salir
             // 
@@ -176,11 +169,12 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(278, 140);
+            this.BT_Salir.Location = new System.Drawing.Point(274, 159);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
             this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
             // 
             // Inicio
             // 
@@ -191,6 +185,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Inicio";
             this.Load += new System.EventHandler(this.Inicio_Load);
+            this.Shown += new System.EventHandler(this.Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -210,10 +205,9 @@
         private System.Windows.Forms.ComboBox CB_Tipo;
         private System.Windows.Forms.TextBox TB_AñoDesde;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TB_HorasHasta;
         private System.Windows.Forms.Button BT_Pantalla;
         private System.Windows.Forms.Button BT_Imprimir;
         private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

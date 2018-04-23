@@ -173,5 +173,43 @@ namespace Modulo_Capacitacion
             Listados.InformedeCompetencias.Inicio frm = new Listados.InformedeCompetencias.Inicio();
             frm.Show();
         }
+
+        private void planDeCapacitaciónAnualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.PlanCapacitacionAnual.Inicio frm = new Listados.PlanCapacitacionAnual.Inicio();
+            frm.Show();
+        }
+
+        private void planillasDeTemasNoProgramadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.PlanilladeTemasnoProgramados.Inicio frm =
+                new Listados.PlanilladeTemasnoProgramados.Inicio();
+            frm.Show();
+        }
+
+        private void listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.EvoluciondeTemasProgramados.Inicio frm = new Listados.EvoluciondeTemasProgramados.Inicio();
+            frm.Show();
+        }
+
+        private void listadoDeHorasCursadasPorLegajoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.HorasCursadasPorLegajo.Inicio frm = new Listados.HorasCursadasPorLegajo.Inicio();
+            frm.Show();
+        }
+
+        private void listadoDePromedioDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.PromediodeCalificacion.Inicio frm = new Listados.PromediodeCalificacion.Inicio();
+            frm.Show();
+        }
+
+        private void toolStripMenuNecesidadesCompetenciasPorSector_Click(object sender, EventArgs e)
+        {
+            Listados.InformedeCompetenciasNecesidadesPorSector.Inicio frm =
+                new Listados.InformedeCompetenciasNecesidadesPorSector.Inicio();
+            frm.Show();
+        }
     }
 }

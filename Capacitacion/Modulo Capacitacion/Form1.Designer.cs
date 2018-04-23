@@ -65,6 +65,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.toolStripMenuNecesidadesCompetenciasPorSector = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -183,6 +184,7 @@
             this.listadosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.perfilDelPuestoToolStripMenuItem,
             this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem,
+            this.toolStripMenuNecesidadesCompetenciasPorSector,
             this.listadoDeTemasRealizadosPorLegajoToolStripMenuItem,
             this.listadoDeCursosRealizadosPorTemaToolStripMenuItem,
             this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem,
@@ -236,6 +238,7 @@
             this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem.Name = "listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem";
             this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
             this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem.Text = "Listado de Evaluación de Temas Programados";
+            this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem_Click);
             // 
             // listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem
             // 
@@ -256,6 +259,7 @@
             this.planDeCapacitaciónAnualToolStripMenuItem.Name = "planDeCapacitaciónAnualToolStripMenuItem";
             this.planDeCapacitaciónAnualToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
             this.planDeCapacitaciónAnualToolStripMenuItem.Text = "Plan de Capacitación Anual";
+            this.planDeCapacitaciónAnualToolStripMenuItem.Click += new System.EventHandler(this.planDeCapacitaciónAnualToolStripMenuItem_Click);
             // 
             // listadoDeLegajosPorPerfilToolStripMenuItem
             // 
@@ -269,6 +273,7 @@
             this.planillasDeTemasNoProgramadosToolStripMenuItem.Name = "planillasDeTemasNoProgramadosToolStripMenuItem";
             this.planillasDeTemasNoProgramadosToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
             this.planillasDeTemasNoProgramadosToolStripMenuItem.Text = "Planillas de Temas no Programados";
+            this.planillasDeTemasNoProgramadosToolStripMenuItem.Click += new System.EventHandler(this.planillasDeTemasNoProgramadosToolStripMenuItem_Click);
             // 
             // listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem
             // 
@@ -296,12 +301,14 @@
             this.listadoDeHorasCursadasPorLegajoToolStripMenuItem.Name = "listadoDeHorasCursadasPorLegajoToolStripMenuItem";
             this.listadoDeHorasCursadasPorLegajoToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
             this.listadoDeHorasCursadasPorLegajoToolStripMenuItem.Text = "Listado de Horas Cursadas por Legajo";
+            this.listadoDeHorasCursadasPorLegajoToolStripMenuItem.Click += new System.EventHandler(this.listadoDeHorasCursadasPorLegajoToolStripMenuItem_Click);
             // 
             // listadoDePromedioDeCapacitaciónToolStripMenuItem
             // 
             this.listadoDePromedioDeCapacitaciónToolStripMenuItem.Name = "listadoDePromedioDeCapacitaciónToolStripMenuItem";
             this.listadoDePromedioDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
             this.listadoDePromedioDeCapacitaciónToolStripMenuItem.Text = "Listado de Promedio de Capacitación";
+            this.listadoDePromedioDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.listadoDePromedioDeCapacitaciónToolStripMenuItem_Click);
             // 
             // listadoDeCursosPorResponsableToolStripMenuItem
             // 
@@ -335,7 +342,7 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -375,6 +382,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
             this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // toolStripMenuNecesidadesCompetenciasPorSector
+            // 
+            this.toolStripMenuNecesidadesCompetenciasPorSector.Name = "toolStripMenuNecesidadesCompetenciasPorSector";
+            this.toolStripMenuNecesidadesCompetenciasPorSector.Size = new System.Drawing.Size(430, 22);
+            this.toolStripMenuNecesidadesCompetenciasPorSector.Text = "Listado de Competencias y Necesidades Pendientes por Sector";
+            this.toolStripMenuNecesidadesCompetenciasPorSector.Click += new System.EventHandler(this.toolStripMenuNecesidadesCompetenciasPorSector_Click);
             // 
             // panel2
             // 
@@ -446,6 +460,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripMenuItem listadoDeCursosPendientesPorSectorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuNecesidadesCompetenciasPorSector;
     }
 }
 

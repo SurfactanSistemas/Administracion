@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -99,9 +100,10 @@ namespace Modulo_Capacitacion
             }
         }
 
-        public static void ActualizarTipoCursada(ref ProgressBar pgb)
+        public static void ActualizarTipoCursada(ref ProgressBar pgb, bool WResetearBarra = false)
         {
             WRenglon = 0;
+            pgb.Value = WResetearBarra ? 0 : pgb.Value;
             pgb.Visible = true;
             using (SqlConnection conn = new SqlConnection())
             {
@@ -122,7 +124,7 @@ namespace Modulo_Capacitacion
                         //Array.Resize(ref WValores, int.Parse(dr["Total"].ToString()));
                         int WTotal = int.Parse(dr["Total"].ToString());
 
-                        pgb.Maximum = WTotal;
+                        pgb.Maximum = WResetearBarra ? WTotal : pgb.Maximum + WTotal;
 
                         string[,] WValores = new string[WTotal, 4];
 
@@ -159,7 +161,7 @@ namespace Modulo_Capacitacion
 
                             dr = cmd.ExecuteReader();
 
-                            if (dr.HasRows)
+                            if (!dr.HasRows)
                             {
                                 WClaves += "'" + WValores[i,0] + "',";
                             }
@@ -182,6 +184,45 @@ namespace Modulo_Capacitacion
 
             }
 
+        }
+
+        public static void ActualizarCantidadPersonasHoras(string txtAno)
+        {
+            DataTable WPersonas = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "UPDATE CronogramaII SET Personas = 0, Horas = 0 WHERE Ano = '" + txtAno + "'";
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT Curso, COUNT(distinct legajo) as Cantidad, SUM(horas) as Horas "
+                                    + " FROM cronograma WHERE Ano = '" + txtAno + "' AND Curso IN "
+                                    + " (SELECT Curso FROM CronogramaII WHERE Ano = '" + txtAno + "') "
+                                    + " GROUP BY Curso";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            WPersonas.Load(dr);
+                        }
+                    }
+
+                    foreach (DataRow WPersona in WPersonas.Rows)
+                    {
+                        cmd.CommandText = "UPDATE CronogramaII SET Personas = " + WPersona["Cantidad"].ToString().Replace(',', '.') + ", Horas = " + WPersona["Horas"].ToString().Replace(',', '.') + " WHERE Ano = '" + txtAno + "' AND Curso = '" + WPersona["Curso"] + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+            }
         }
     }
 }

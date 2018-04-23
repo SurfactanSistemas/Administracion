@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using Negocio;
 
@@ -102,8 +104,11 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             {
                 if (e.KeyCode == Keys.Enter)
                 {
+                    if (TB_Codigo.Text == "") return;
+                    txtVersionActual.Text = _TraerVersionActual();
+
                     //Buscardatosdelegajo
-                    if (TB_Codigo.Text == "" || TB_VersionLegajo.Text == "" || TB_FechaIng.Text == "") throw new Exception("No se puede asi macho");
+                    if (TB_VersionLegajo.Text == "" || TB_FechaIng.Text == "") return;
 
                     LV = LV.BuscarUnaVersion(TB_Codigo.Text, TB_VersionLegajo.Text, TB_FechaIng.Text);
 
@@ -354,12 +359,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
 
         private void TB_Codigo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Cargado)
-            {
-                //TB_FechaIng.Text = TB_FechaIngAyuda.Text;
-                //BuscarVersiones();
-            }
-            
+            txtVersionActual.Text = _TraerVersionActual();
         }
 
         private void BuscarVersiones()
@@ -368,7 +368,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             {
                 
                 //Buscardatosdelegajo
-                if (TB_Codigo.Text == "" || TB_VersionLegajo.Text == "" || TB_FechaIng.Text == "") throw new Exception("No se puede asi macho");
+                if (TB_Codigo.Text == "" || TB_VersionLegajo.Text == "" || TB_FechaIng.Text == "") return;
 
                 LV = LV.BuscarUnaVersion(TB_Codigo.Text, TB_VersionLegajo.Text, TB_FechaIng.Text);
 
@@ -393,13 +393,41 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             TB_CantidadVersiones.Text = LV.MaxVersiones(TB_Codigo.Text);
             TB_CantidadVersiones.ReadOnly = true;
 
+            txtVersionActual.Text = _TraerVersionActual();
         }
 
-        private void TB_Codigo_KeyDown_1(object sender, KeyEventArgs e)
+        private string _TraerVersionActual()
         {
+            string Version = "";
 
+            if (TB_Codigo.Text == "") return "";
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT Version FROM Legajo WHERE Codigo = '" + TB_Codigo.Text + "'";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            Version = dr["Version"].ToString();
+                        }
+                    }
+                }
+
+            }
+
+            return Version;
         }
-
+        
         private void TB_DescLegajo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Cargado && (Limpiando == false))
@@ -484,6 +512,8 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             TB_Equiv2Leg.Text = "";
             DGV_Temas.Rows.Clear();
             Limpiando = false;
+            txtVersionActual.Text = "";
+
             TB_VersionLegajo.Focus();
         }
 
@@ -528,5 +558,6 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
         {
             TB_Codigo.Focus();
         }
+
     }
 }

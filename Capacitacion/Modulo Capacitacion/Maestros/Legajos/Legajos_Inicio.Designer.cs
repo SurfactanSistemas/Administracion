@@ -29,11 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGV_Legajos = new System.Windows.Forms.DataGridView();
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Vigencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.P_Filtrado = new System.Windows.Forms.Panel();
+            this.ckSoloNoActualizados = new System.Windows.Forms.CheckBox();
             this.ckSoloActivos = new System.Windows.Forms.CheckBox();
             this.TBFiltro = new System.Windows.Forms.TextBox();
             this.LBFiltro = new System.Windows.Forms.Label();
@@ -48,17 +55,11 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnImprimir = new System.Windows.Forms.Button();
-            this.ckSoloNoActualizados = new System.Windows.Forms.CheckBox();
-            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Vigencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlDiscriminarLegajos = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvDiscriminarLegajos = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.legajoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Legajos)).BeginInit();
             this.P_Verde.SuspendLayout();
@@ -70,6 +71,7 @@
             this.pnlDiscriminarLegajos.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscriminarLegajos)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.legajoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,16 +96,61 @@
             this.DGV_Legajos.Location = new System.Drawing.Point(85, 0);
             this.DGV_Legajos.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Legajos.Name = "DGV_Legajos";
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Legajos.Size = new System.Drawing.Size(863, 441);
             this.DGV_Legajos.TabIndex = 26;
             this.DGV_Legajos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
+            // 
+            // Clave
+            // 
+            this.Clave.DataPropertyName = "Clave";
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.Visible = false;
+            this.Clave.Width = 59;
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "Codigo";
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.Width = 65;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Nombre de Empleado";
+            this.Descripcion.Name = "Descripcion";
+            // 
+            // Vigencia
+            // 
+            this.Vigencia.DataPropertyName = "Vigencia";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Vigencia.HeaderText = "Vigencia";
+            this.Vigencia.Name = "Vigencia";
+            this.Vigencia.Width = 73;
+            // 
+            // Sector
+            // 
+            this.Sector.DataPropertyName = "Sector";
+            this.Sector.HeaderText = "Sector";
+            this.Sector.Name = "Sector";
+            this.Sector.Width = 63;
+            // 
+            // Perfil
+            // 
+            this.Perfil.DataPropertyName = "Perfil";
+            this.Perfil.HeaderText = "Perfil";
+            this.Perfil.Name = "Perfil";
+            this.Perfil.Width = 55;
             // 
             // P_Verde
             // 
@@ -130,17 +177,27 @@
             this.P_Filtrado.Size = new System.Drawing.Size(948, 59);
             this.P_Filtrado.TabIndex = 1;
             // 
+            // ckSoloNoActualizados
+            // 
+            this.ckSoloNoActualizados.AutoSize = true;
+            this.ckSoloNoActualizados.ForeColor = System.Drawing.SystemColors.Control;
+            this.ckSoloNoActualizados.Location = new System.Drawing.Point(804, 20);
+            this.ckSoloNoActualizados.Name = "ckSoloNoActualizados";
+            this.ckSoloNoActualizados.Size = new System.Drawing.Size(112, 17);
+            this.ckSoloNoActualizados.TabIndex = 2;
+            this.ckSoloNoActualizados.Text = "Solo sin Actualizar";
+            this.ckSoloNoActualizados.UseVisualStyleBackColor = true;
+            this.ckSoloNoActualizados.CheckedChanged += new System.EventHandler(this.ckSoloActivos_CheckedChanged);
+            // 
             // ckSoloActivos
             // 
             this.ckSoloActivos.AutoSize = true;
-            this.ckSoloActivos.Checked = true;
-            this.ckSoloActivos.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckSoloActivos.ForeColor = System.Drawing.SystemColors.Control;
-            this.ckSoloActivos.Location = new System.Drawing.Point(707, 18);
+            this.ckSoloActivos.Location = new System.Drawing.Point(700, 19);
             this.ckSoloActivos.Name = "ckSoloActivos";
-            this.ckSoloActivos.Size = new System.Drawing.Size(85, 17);
+            this.ckSoloActivos.Size = new System.Drawing.Size(100, 17);
             this.ckSoloActivos.TabIndex = 2;
-            this.ckSoloActivos.Text = "Solo Activos";
+            this.ckSoloActivos.Text = "Incluir Inactivos";
             this.ckSoloActivos.UseVisualStyleBackColor = true;
             this.ckSoloActivos.CheckedChanged += new System.EventHandler(this.ckSoloActivos_CheckedChanged);
             // 
@@ -314,68 +371,11 @@
             this.btnImprimir.UseVisualStyleBackColor = true;
             this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
-            // ckSoloNoActualizados
-            // 
-            this.ckSoloNoActualizados.AutoSize = true;
-            this.ckSoloNoActualizados.ForeColor = System.Drawing.SystemColors.Control;
-            this.ckSoloNoActualizados.Location = new System.Drawing.Point(804, 17);
-            this.ckSoloNoActualizados.Name = "ckSoloNoActualizados";
-            this.ckSoloNoActualizados.Size = new System.Drawing.Size(112, 17);
-            this.ckSoloNoActualizados.TabIndex = 2;
-            this.ckSoloNoActualizados.Text = "Solo sin Actualizar";
-            this.ckSoloNoActualizados.UseVisualStyleBackColor = true;
-            this.ckSoloNoActualizados.CheckedChanged += new System.EventHandler(this.ckSoloActivos_CheckedChanged);
-            // 
-            // Clave
-            // 
-            this.Clave.DataPropertyName = "Clave";
-            this.Clave.HeaderText = "Clave";
-            this.Clave.Name = "Clave";
-            this.Clave.Visible = false;
-            this.Clave.Width = 59;
-            // 
-            // Codigo
-            // 
-            this.Codigo.DataPropertyName = "Codigo";
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.Name = "Codigo";
-            this.Codigo.Width = 65;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Nombre de Empleado";
-            this.Descripcion.Name = "Descripcion";
-            // 
-            // Vigencia
-            // 
-            this.Vigencia.DataPropertyName = "Vigencia";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Vigencia.HeaderText = "Vigencia";
-            this.Vigencia.Name = "Vigencia";
-            this.Vigencia.Width = 73;
-            // 
-            // Sector
-            // 
-            this.Sector.DataPropertyName = "Sector";
-            this.Sector.HeaderText = "Sector";
-            this.Sector.Name = "Sector";
-            this.Sector.Width = 63;
-            // 
-            // Perfil
-            // 
-            this.Perfil.DataPropertyName = "Perfil";
-            this.Perfil.HeaderText = "Perfil";
-            this.Perfil.Name = "Perfil";
-            this.Perfil.Width = 55;
-            // 
             // pnlDiscriminarLegajos
             // 
             this.pnlDiscriminarLegajos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
+            this.pnlDiscriminarLegajos.Controls.Add(this.panel3);
             this.pnlDiscriminarLegajos.Controls.Add(this.groupBox1);
-            this.pnlDiscriminarLegajos.Controls.Add(this.button1);
             this.pnlDiscriminarLegajos.Location = new System.Drawing.Point(190, 167);
             this.pnlDiscriminarLegajos.Name = "pnlDiscriminarLegajos";
             this.pnlDiscriminarLegajos.Size = new System.Drawing.Size(651, 344);
@@ -386,7 +386,7 @@
             // 
             this.groupBox1.Controls.Add(this.dgvDiscriminarLegajos);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(17, 17);
+            this.groupBox1.Location = new System.Drawing.Point(17, 7);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(616, 271);
             this.groupBox1.TabIndex = 0;
@@ -413,13 +413,23 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(304, 291);
+            this.button1.Location = new System.Drawing.Point(304, 4);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 53);
+            this.button1.Size = new System.Drawing.Size(43, 52);
             this.button1.TabIndex = 25;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 284);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(651, 60);
+            this.panel3.TabIndex = 26;
             // 
             // legajoBindingSource
             // 
@@ -448,6 +458,7 @@
             this.pnlDiscriminarLegajos.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscriminarLegajos)).EndInit();
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.legajoBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -484,5 +495,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvDiscriminarLegajos;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel3;
     }
 }

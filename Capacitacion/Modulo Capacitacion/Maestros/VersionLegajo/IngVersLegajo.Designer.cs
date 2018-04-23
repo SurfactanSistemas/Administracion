@@ -40,7 +40,9 @@
             this.TB_Codigo = new System.Windows.Forms.ComboBox();
             this.DTP_FechaVersionII = new System.Windows.Forms.DateTimePicker();
             this.TB_FechaVersionI = new System.Windows.Forms.DateTimePicker();
+            this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.txtVersionActual = new System.Windows.Forms.TextBox();
             this.TB_CantidadVersiones = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.TB_VersionLegajo = new System.Windows.Forms.TextBox();
@@ -177,7 +179,9 @@
             this.panel3.Controls.Add(this.TB_Codigo);
             this.panel3.Controls.Add(this.DTP_FechaVersionII);
             this.panel3.Controls.Add(this.TB_FechaVersionI);
+            this.panel3.Controls.Add(this.label17);
             this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.txtVersionActual);
             this.panel3.Controls.Add(this.TB_CantidadVersiones);
             this.panel3.Controls.Add(this.label15);
             this.panel3.Controls.Add(this.TB_VersionLegajo);
@@ -196,7 +200,7 @@
             // 
             // panel6
             // 
-            this.panel6.Location = new System.Drawing.Point(715, 13);
+            this.panel6.Location = new System.Drawing.Point(818, 13);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(19, 29);
             this.panel6.TabIndex = 128;
@@ -205,7 +209,7 @@
             // TB_FechaIngAyuda
             // 
             this.TB_FechaIngAyuda.FormattingEnabled = true;
-            this.TB_FechaIngAyuda.Location = new System.Drawing.Point(645, 15);
+            this.TB_FechaIngAyuda.Location = new System.Drawing.Point(748, 15);
             this.TB_FechaIngAyuda.Name = "TB_FechaIngAyuda";
             this.TB_FechaIngAyuda.Size = new System.Drawing.Size(89, 21);
             this.TB_FechaIngAyuda.TabIndex = 127;
@@ -213,7 +217,7 @@
             // 
             // panel5
             // 
-            this.panel5.Location = new System.Drawing.Point(414, 12);
+            this.panel5.Location = new System.Drawing.Point(503, 12);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(19, 29);
             this.panel5.TabIndex = 126;
@@ -223,7 +227,7 @@
             this.TB_DescLegajo.FormattingEnabled = true;
             this.TB_DescLegajo.Location = new System.Drawing.Point(171, 17);
             this.TB_DescLegajo.Name = "TB_DescLegajo";
-            this.TB_DescLegajo.Size = new System.Drawing.Size(262, 21);
+            this.TB_DescLegajo.Size = new System.Drawing.Size(348, 21);
             this.TB_DescLegajo.TabIndex = 125;
             this.TB_DescLegajo.SelectedIndexChanged += new System.EventHandler(this.TB_DescLegajo_SelectedIndexChanged);
             this.TB_DescLegajo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DescLegajo_KeyDown);
@@ -243,13 +247,13 @@
             this.TB_Codigo.Size = new System.Drawing.Size(89, 21);
             this.TB_Codigo.TabIndex = 123;
             this.TB_Codigo.SelectedIndexChanged += new System.EventHandler(this.TB_Codigo_SelectedIndexChanged);
-            this.TB_Codigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Codigo_KeyDown_1);
+            this.TB_Codigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Codigo_KeyDown);
             // 
             // DTP_FechaVersionII
             // 
             this.DTP_FechaVersionII.Enabled = false;
             this.DTP_FechaVersionII.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DTP_FechaVersionII.Location = new System.Drawing.Point(629, 52);
+            this.DTP_FechaVersionII.Location = new System.Drawing.Point(732, 52);
             this.DTP_FechaVersionII.Name = "DTP_FechaVersionII";
             this.DTP_FechaVersionII.Size = new System.Drawing.Size(105, 20);
             this.DTP_FechaVersionII.TabIndex = 46;
@@ -258,25 +262,45 @@
             // 
             this.TB_FechaVersionI.Enabled = false;
             this.TB_FechaVersionI.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.TB_FechaVersionI.Location = new System.Drawing.Point(519, 53);
+            this.TB_FechaVersionI.Location = new System.Drawing.Point(622, 53);
             this.TB_FechaVersionI.Name = "TB_FechaVersionI";
             this.TB_FechaVersionI.Size = new System.Drawing.Size(103, 20);
             this.TB_FechaVersionI.TabIndex = 45;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(371, 53);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(97, 18);
+            this.label17.TabIndex = 44;
+            this.label17.Text = "Versión Actual";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(211, 52);
+            this.label16.Location = new System.Drawing.Point(158, 53);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(126, 18);
             this.label16.TabIndex = 44;
             this.label16.Text = "Cant. de versiones:";
             // 
+            // txtVersionActual
+            // 
+            this.txtVersionActual.BackColor = System.Drawing.SystemColors.Window;
+            this.txtVersionActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVersionActual.Location = new System.Drawing.Point(469, 53);
+            this.txtVersionActual.Name = "txtVersionActual";
+            this.txtVersionActual.ReadOnly = true;
+            this.txtVersionActual.Size = new System.Drawing.Size(37, 20);
+            this.txtVersionActual.TabIndex = 43;
+            // 
             // TB_CantidadVersiones
             // 
             this.TB_CantidadVersiones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_CantidadVersiones.Location = new System.Drawing.Point(343, 52);
+            this.TB_CantidadVersiones.Location = new System.Drawing.Point(290, 53);
             this.TB_CantidadVersiones.Name = "TB_CantidadVersiones";
             this.TB_CantidadVersiones.Size = new System.Drawing.Size(74, 20);
             this.TB_CantidadVersiones.TabIndex = 43;
@@ -1351,7 +1375,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(451, 52);
+            this.label4.Location = new System.Drawing.Point(554, 52);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 18);
             this.label4.TabIndex = 36;
@@ -1361,7 +1385,7 @@
             // 
             this.TB_FechaIng.Enabled = false;
             this.TB_FechaIng.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.TB_FechaIng.Location = new System.Drawing.Point(519, 19);
+            this.TB_FechaIng.Location = new System.Drawing.Point(622, 19);
             this.TB_FechaIng.Name = "TB_FechaIng";
             this.TB_FechaIng.Size = new System.Drawing.Size(103, 20);
             this.TB_FechaIng.TabIndex = 35;
@@ -1412,7 +1436,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(442, 19);
+            this.label1.Location = new System.Drawing.Point(545, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 18);
             this.label1.TabIndex = 6;
@@ -1595,5 +1619,7 @@
         private System.Windows.Forms.ComboBox TB_Codigo;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ComboBox TB_FechaIngAyuda;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtVersionActual;
     }
 }

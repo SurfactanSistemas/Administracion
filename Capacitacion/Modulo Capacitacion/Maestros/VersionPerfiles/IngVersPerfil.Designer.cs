@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -105,6 +105,8 @@
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
+            this.txtVersionActual = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -158,6 +160,8 @@
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.LFechaAviso);
+            this.panel3.Controls.Add(this.txtVersionActual);
+            this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(6, 8);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(790, 593);
@@ -166,16 +170,15 @@
             // TB_Version
             // 
             this.TB_Version.FormattingEnabled = true;
-            this.TB_Version.Location = new System.Drawing.Point(441, 20);
+            this.TB_Version.Location = new System.Drawing.Point(440, 10);
             this.TB_Version.Name = "TB_Version";
             this.TB_Version.Size = new System.Drawing.Size(58, 21);
             this.TB_Version.TabIndex = 129;
             this.TB_Version.SelectedIndexChanged += new System.EventHandler(this.TB_Version_SelectedIndexChanged);
-            
             // 
             // panel7
             // 
-            this.panel7.Location = new System.Drawing.Point(363, 13);
+            this.panel7.Location = new System.Drawing.Point(362, 6);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(19, 29);
             this.panel7.TabIndex = 128;
@@ -183,7 +186,7 @@
             // TB_DecPerfil
             // 
             this.TB_DecPerfil.FormattingEnabled = true;
-            this.TB_DecPerfil.Location = new System.Drawing.Point(129, 18);
+            this.TB_DecPerfil.Location = new System.Drawing.Point(128, 10);
             this.TB_DecPerfil.Name = "TB_DecPerfil";
             this.TB_DecPerfil.Size = new System.Drawing.Size(253, 21);
             this.TB_DecPerfil.TabIndex = 127;
@@ -192,7 +195,7 @@
             // 
             // panel6
             // 
-            this.panel6.Location = new System.Drawing.Point(104, 17);
+            this.panel6.Location = new System.Drawing.Point(103, 6);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(19, 29);
             this.panel6.TabIndex = 126;
@@ -200,15 +203,16 @@
             // TB_Codigo
             // 
             this.TB_Codigo.FormattingEnabled = true;
-            this.TB_Codigo.Location = new System.Drawing.Point(56, 19);
+            this.TB_Codigo.Location = new System.Drawing.Point(55, 10);
             this.TB_Codigo.Name = "TB_Codigo";
             this.TB_Codigo.Size = new System.Drawing.Size(67, 21);
             this.TB_Codigo.TabIndex = 125;
+            this.TB_Codigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Codigo_KeyDown);
             // 
             // DTP_FechaVigenciaII
             // 
             this.DTP_FechaVigenciaII.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DTP_FechaVigenciaII.Location = new System.Drawing.Point(680, 18);
+            this.DTP_FechaVigenciaII.Location = new System.Drawing.Point(679, 10);
             this.DTP_FechaVigenciaII.Name = "DTP_FechaVigenciaII";
             this.DTP_FechaVigenciaII.Size = new System.Drawing.Size(103, 20);
             this.DTP_FechaVigenciaII.TabIndex = 38;
@@ -810,17 +814,17 @@
             this.DGV_Temas.Location = new System.Drawing.Point(16, 20);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Temas.Size = new System.Drawing.Size(748, 418);
             this.DGV_Temas.TabIndex = 7;
             // 
@@ -856,7 +860,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(382, 23);
+            this.label4.Location = new System.Drawing.Point(381, 11);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 18);
             this.label4.TabIndex = 36;
@@ -865,7 +869,7 @@
             // TB_Fecha
             // 
             this.TB_Fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.TB_Fecha.Location = new System.Drawing.Point(572, 19);
+            this.TB_Fecha.Location = new System.Drawing.Point(571, 10);
             this.TB_Fecha.Name = "TB_Fecha";
             this.TB_Fecha.Size = new System.Drawing.Size(103, 20);
             this.TB_Fecha.TabIndex = 35;
@@ -888,7 +892,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(501, 21);
+            this.label1.Location = new System.Drawing.Point(503, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 18);
             this.label1.TabIndex = 6;
@@ -898,11 +902,30 @@
             // 
             this.LFechaAviso.AutoSize = true;
             this.LFechaAviso.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LFechaAviso.Location = new System.Drawing.Point(10, 21);
+            this.LFechaAviso.Location = new System.Drawing.Point(9, 11);
             this.LFechaAviso.Name = "LFechaAviso";
             this.LFechaAviso.Size = new System.Drawing.Size(45, 18);
             this.LFechaAviso.TabIndex = 4;
             this.LFechaAviso.Text = "Perfil:";
+            // 
+            // txtVersionActual
+            // 
+            this.txtVersionActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVersionActual.Location = new System.Drawing.Point(571, 36);
+            this.txtVersionActual.Name = "txtVersionActual";
+            this.txtVersionActual.ReadOnly = true;
+            this.txtVersionActual.Size = new System.Drawing.Size(41, 20);
+            this.txtVersionActual.TabIndex = 36;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(479, 38);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 15);
+            this.label3.TabIndex = 35;
+            this.label3.Text = "Version Actual:";
             // 
             // IngVersPerfil
             // 
@@ -1006,5 +1029,7 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.ComboBox TB_DecPerfil;
         private System.Windows.Forms.ComboBox TB_Version;
+        private System.Windows.Forms.TextBox txtVersionActual;
+        private System.Windows.Forms.Label label3;
     }
 }

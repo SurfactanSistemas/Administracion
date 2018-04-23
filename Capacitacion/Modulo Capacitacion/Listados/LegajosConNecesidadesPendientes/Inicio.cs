@@ -63,5 +63,10 @@ namespace Modulo_Capacitacion.Listados.LegajosConNecesidadesPendientes
         {
             TB_Desde.Focus();
         }
+
+        private void BT_Salir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

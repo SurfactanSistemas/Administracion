@@ -59,7 +59,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             _ProcesarPersonalConMasDeUnPerfil();
 
-            if (ckSoloActivos.Checked)
+            if (!ckSoloActivos.Checked)
             {
                 DataTable dataTable = (DataTable) DGV_Legajos.DataSource;
                 if (dataTable != null)
@@ -229,10 +229,27 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 if (column != null)
                     column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+                column = dgvDiscriminarLegajos.Columns["Grisar"];
+                if (column != null)
+                    column.Visible = false;
+
+                column = dgvDiscriminarLegajos.Columns["Codigo"];
+                if (column != null)
+                    column.Width = 50;
+
                 int WWidth = pnlDiscriminarLegajos.Width;
 
                 pnlDiscriminarLegajos.Location = new Point((Width/2) - WWidth/2, pnlDiscriminarLegajos.Location.Y);
                 pnlDiscriminarLegajos.Visible = true;
+
+                foreach (DataGridViewRow _row in dgvDiscriminarLegajos.Rows)
+                {
+                    if (_row.Cells["Grisar"].Value.ToString() == "S")
+                    {
+                        _row.DefaultCellStyle.BackColor = Color.DarkGray;
+                        _row.DefaultCellStyle.ForeColor = Color.White;
+                    }
+                }
             }
             else
             {

@@ -26,6 +26,10 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         private void CargarPerfiles()
         {
             DGV_Perfiles.DataSource = P.ListarTodosInicio();
+            if (DGV_Perfiles.Columns["Descripcion"] != null)
+                DGV_Perfiles.Columns["Descripcion"].Visible = false;
+            if (DGV_Perfiles.Columns["Perfil"] != null)
+                DGV_Perfiles.Columns["Perfil"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void BTAgregarPerfil_Click(object sender, EventArgs e)

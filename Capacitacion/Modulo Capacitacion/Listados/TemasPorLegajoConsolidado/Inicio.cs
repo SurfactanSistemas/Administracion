@@ -153,5 +153,10 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
         {
             TB_AñoDesde.Focus();
         }
+
+        private void BT_Salir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

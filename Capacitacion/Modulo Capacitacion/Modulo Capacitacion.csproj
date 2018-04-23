@@ -69,6 +69,24 @@
       <DependentUpon>AvisoCronograma.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajo.cs">
+      <DependentUpon>imprelegajo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajoii.cs">
+      <DependentUpon>imprelegajoii.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\InformedeCompetenciasNecesidadesPorSector\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\InformedeCompetenciasNecesidadesPorSector\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listados\CronogramaPorSectoryTema\DSInforme.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,6 +160,24 @@
       <DependentUpon>ListadoCursos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\EvoluciondeTemasProgramados\wlistaevolucionTemasProgramados.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wlistaevolucionTemasProgramados.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\HorasCursadasPorLegajo\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\HorasCursadasPorLegajo\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\HorasCursadasPorLegajo\wHorasCursadasPorLegajo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wHorasCursadasPorLegajo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\InformedeCompetencias\imprelegajo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -189,6 +225,24 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnual\PlanCapacitacionAnual.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlanCapacitacionAnual.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\PlanilladeTemasnoProgramados\PlanillaTemasNoProgramados.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlanillaTemasNoProgramados.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\PromediodeCalificacion\wPromedioCalificacion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wPromedioCalificacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\TemasRealizadosyNoRealizados\DSInforme.cs">
       <DependentUpon>DSInforme.xsd</DependentUpon>
@@ -258,27 +312,10 @@
       <DependentUpon>Reporte.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Listados\Evolucion de Temas Programados\Inicio.cs">
+    <Compile Include="Listados\EvoluciondeTemasProgramados\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Evolucion de Temas Programados\Inicio.Designer.cs">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Horas Cursadas Por Legajo\DSInforme.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DSInforme.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Horas Cursadas Por Legajo\ImpreInforme.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados\Horas Cursadas Por Legajo\ImpreInforme.Designer.cs">
-      <DependentUpon>ImpreInforme.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Horas Cursadas Por Legajo\Inicio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados\Horas Cursadas Por Legajo\Inicio.Designer.cs">
+    <Compile Include="Listados\EvoluciondeTemasProgramados\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Listados\LegajosConNecesidadesPendientes\DSInforme.Designer.cs">
@@ -350,22 +387,22 @@
       <DependentUpon>Reporte.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Listados\Plan Capacitacion Anual\Inicio.cs">
+    <Compile Include="Listados\PlanCapacitacionAnual\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Plan Capacitacion Anual\Inicio.Designer.cs">
+    <Compile Include="Listados\PlanCapacitacionAnual\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados\Planilla de Temas no Programados\Inicio.cs">
+    <Compile Include="Listados\PlanilladeTemasnoProgramados\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Planilla de Temas no Programados\Inicio.Designer.cs">
+    <Compile Include="Listados\PlanilladeTemasnoProgramados\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados\Promedio de Calificacion\Inicio.cs">
+    <Compile Include="Listados\PromediodeCalificacion\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Promedio de Calificacion\Inicio.Designer.cs">
+    <Compile Include="Listados\PromediodeCalificacion\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Listados\Sectores\ListadoSectores.cs">
@@ -570,6 +607,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AvisoCronograma.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprelegajo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajoii.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprelegajoii.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformedeCompetenciasNecesidadesPorSector\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\CronogramaPorSectoryTema\ImpreInforme.resx">
       <DependentUpon>ImpreInforme.cs</DependentUpon>
     </EmbeddedResource>
@@ -601,6 +649,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoCursos1.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\EvoluciondeTemasProgramados\wlistaevolucionTemasProgramados.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wlistaevolucionTemasProgramados.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\HorasCursadasPorLegajo\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\HorasCursadasPorLegajo\wHorasCursadasPorLegajo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wHorasCursadasPorLegajo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\InformedeCompetencias\imprelegajo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprelegajo.cs</LastGenOutput>
@@ -628,6 +687,18 @@
     <EmbeddedResource Include="Listados\Perfiles\ListadoPerfiles.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoPerfiles.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnual\PlanCapacitacionAnual.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PlanCapacitacionAnual.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanilladeTemasnoProgramados\PlanillaTemasNoProgramados.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PlanillaTemasNoProgramados.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PromediodeCalificacion\wPromedioCalificacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wPromedioCalificacion.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\TemasRealizadosyNoRealizados\ImpreInforme.resx">
       <DependentUpon>ImpreInforme.cs</DependentUpon>
@@ -659,13 +730,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Evolucion de Temas Programados\Inicio.resx">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Horas Cursadas Por Legajo\ImpreInforme.resx">
-      <DependentUpon>ImpreInforme.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Horas Cursadas Por Legajo\Inicio.resx">
+    <EmbeddedResource Include="Listados\EvoluciondeTemasProgramados\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\LegajosConNecesidadesPendientes\ImpreInforme.resx">
@@ -698,13 +763,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Plan Capacitacion Anual\Inicio.resx">
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnual\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Planilla de Temas no Programados\Inicio.resx">
+    <EmbeddedResource Include="Listados\PlanilladeTemasnoProgramados\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Promedio de Calificacion\Inicio.resx">
+    <EmbeddedResource Include="Listados\PromediodeCalificacion\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Sectores\ListadoSectores.rpt">
@@ -858,17 +923,6 @@
       <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
     </None>
     <None Include="Listados\CursosRealizadosporTemas\DSInforme.xss">
-      <DependentUpon>DSInforme.xsd</DependentUpon>
-    </None>
-    <None Include="Listados\Horas Cursadas Por Legajo\DSInforme.xsc">
-      <DependentUpon>DSInforme.xsd</DependentUpon>
-    </None>
-    <None Include="Listados\Horas Cursadas Por Legajo\DSInforme.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DSInforme.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Listados\Horas Cursadas Por Legajo\DSInforme.xss">
       <DependentUpon>DSInforme.xsd</DependentUpon>
     </None>
     <None Include="Listados\LegajosConNecesidadesPendientes\DSInforme.xsc">
