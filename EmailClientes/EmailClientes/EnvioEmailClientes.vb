@@ -1,15 +1,16 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.SqlClient
-Imports ClasesCompartidas
 Imports EmailClientes.Clases
 
-Public Class EnvioEmailProveedores
+Public Class EnvioEmailClientes
 
     Private _Asunto As String
     Private _CuerpoEmail As String
     Private _LineasExtras As String
     Private _ArchivoAdjunto As String
-    Private WListaEmails As String
+    Private _ListaEmails() As String
+    Private Const LIMITE_DE_DIRECCIONES_POR_EMAIL = 10
+
     '
     ' TODO - CONSULTAR EN CASO DE USO EN PELLITAL, QUE DIRECCION SE UTILIZA O SI SE EVITA EL ENVIO DE EMAIL EN CASO DE NO UTILIZARLO.
     '
@@ -18,27 +19,81 @@ Public Class EnvioEmailProveedores
 
     Private Sub btnEnviar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnviar.Click
 
-        _Asunto = Trim(txtAsunto.Text)
-
-        _CuerpoEmail = Trim(txtCuerpoEmail.Text)
-
-        _LineasExtras = _ParsearLineasExtras()
-
-        WListaEmails = Trim(txtDestinatarios.Text)
-
-        _ProcesarEnvioEmails()
-
-    End Sub
-
-    Private Sub _ProcesarEnvioEmails()
         Try
-            _EnviarEmail()
+            _Asunto = Trim(txtAsunto.Text)
+
+            _CuerpoEmail = Trim(txtCuerpoEmail.Text)
+
+            _LineasExtras = _ParsearLineasExtras()
+
+            _ListaEmails = _ProcesarProveedoresDestinatarios()
+
+            'WListaEmails = Trim(txtDestinatarios.Text)
+
+            _ProcesarEnvioEmails()
+
+            Label8.Visible = False
+            With ProgressBar2
+                .Value = 0
+                .Visible = False
+            End With
+
+            MsgBox("Los correos han sido enviados.", MsgBoxStyle.Information)
+        
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+
+    End Sub
+
+    Private Function _ProcesarProveedoresDestinatarios() As String()
+        Return txtDestinatarios.Text.Replace(" ", "").Split(";")
+    End Function
+
+    Private Sub _ProcesarEnvioEmails()
+        Dim _CantGrupos As Integer = Math.Floor(_ListaEmails.Length / LIMITE_DE_DIRECCIONES_POR_EMAIL)	
+        Dim _SubGrupoEmails As New List(Of String)	
+        Dim _IndiceEmailActual As Integer = 0
+
+        With ProgressBar2
+            .Visible = True
+            .Value = 0
+            .Maximum = _ListaEmails.Length + 5
+        End With
+
+        ' Procesamos los grupos posibles.	
+        For i As Integer = 1 To _CantGrupos	
+	
+            For j As Integer = 0 To LIMITE_DE_DIRECCIONES_POR_EMAIL - 1	
+	
+                _SubGrupoEmails.Add(_ListaEmails(_IndiceEmailActual))	
+	
+                _IndiceEmailActual += 1
+
+                ProgressBar2.Increment(1)
+	
+            Next	
+	
+                _EnviarEmail(_SubGrupoEmails) ' Descomentar para que comience a funcionar, no olvidarse tambien de descomentar el de mas abajo.	
+            
+	
+            _SubGrupoEmails.Clear() ' Limpiamos para el siguiente grupo.	
+	
+        Next	
+	
+        _SubGrupoEmails.Clear() ' Limpiamos antes de procesar los remanentes.	
+	
+        ' Procesamos los remanentes.	
+        For i As Integer = _IndiceEmailActual To _ListaEmails.Length - 1	
+            _SubGrupoEmails.Add(_ListaEmails(i))	
+
+            ProgressBar2.Increment(1)
+        Next
+            
+        _EnviarEmail(_SubGrupoEmails)
     End Sub
     
-    Private Sub _EnviarEmail()
+    Private Sub _EnviarEmail(ByVal emails As List(Of String))
         Dim _Outlook As New Outlook.Application
 
         Try
@@ -47,7 +102,7 @@ Public Class EnvioEmailProveedores
             With _Mail
 
                 .To = _To
-                .BCC = WListaEmails
+                .BCC = String.Join(";", emails) 'WListaEmails
                 .Subject = _Asunto
                 .Body = _CuerpoEmail + vbCrLf + _LineasExtras
 
@@ -57,15 +112,15 @@ Public Class EnvioEmailProveedores
 
             End With
 
-            '_Mail.Send()
-            _Mail.Display()
+            _Mail.Send()
+            '_Mail.Display()
 
             _Mail = Nothing
 
             Me.Close()
 
         Catch ex As Exception
-            Throw New Exception("Ocurrió un problema al querer enviar el email a los proveedores.")
+            Throw New Exception("Ocurrió un problema al querer enviar el email a los Clientes.")
         Finally
             _Outlook = Nothing
         End Try
@@ -118,7 +173,6 @@ Public Class EnvioEmailProveedores
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
         Dim _FechaUltimo As String
-        Dim _Inhabilitado As String = ""
         Dim WProveedor, WRazon, WEmail, WRubro As String
 
         'Calculo un año hacia atrás a partir del dia de hoy.
@@ -457,13 +511,20 @@ Public Class EnvioEmailProveedores
     Private Sub Button2_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles Button2.Click
         
         txtDestinatarios.Text = ""
+        With ProgressBar1
+            .Value=0
+            .Maximum = DataGridView1.Rows.Count
+            .Visible=True
+        End With
 
         For Each WProveedor As DataGridViewRow In DataGridView1.Rows
             If WProveedor.Cells("Enviar").Value = "X" then
                 txtDestinatarios.Text &= WProveedor.Cells("Email").Value & "; "
             End If
+            ProgressBar1.Increment(1)
         Next
 
+        ProgressBar1.Visible=False
         Button1.PerformClick
 
     End Sub

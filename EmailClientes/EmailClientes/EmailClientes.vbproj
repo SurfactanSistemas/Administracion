@@ -96,10 +96,10 @@
     <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
-    <Compile Include="EnvioEmailProveedores.Designer.vb">
-      <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
+    <Compile Include="EnvioEmailClientes.Designer.vb">
+      <DependentUpon>EnvioEmailClientes.vb</DependentUpon>
     </Compile>
-    <Compile Include="EnvioEmailProveedores.vb">
+    <Compile Include="EnvioEmailClientes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\IngresoOrdenTrabajo.Designer.vb">
@@ -151,8 +151,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EnvioEmailProveedores.resx">
-      <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
+    <EmbeddedResource Include="EnvioEmailClientes.resx">
+      <DependentUpon>EnvioEmailClientes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\IngresoOrdenTrabajo.resx">
       <DependentUpon>IngresoOrdenTrabajo.vb</DependentUpon>
