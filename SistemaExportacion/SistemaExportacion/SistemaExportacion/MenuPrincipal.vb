@@ -47,15 +47,15 @@ Public Class MenuPrincipal
     End Sub
 
     Public Sub _CargarTodasLasProformas()
-        Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WFechaLimite, WPackingList, WRowIndex
+        Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WFechaLimite, WPackingList, WRowIndex, WEntregado
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
-        Dim WFiltro = "AND Estado = 0 AND Cerrada = 0"
+        Dim WFiltro = "AND (Entregado <> 'X' OR Entregado IS NULL)"
 
-        If ckMostrarCerradasAprobadas.Checked then WFiltro = ""
+        If ckMostrarEntregadas.Checked then WFiltro = ""
 
-        Dim ZSql = "SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total, p.FechaLimiteOrd, p.PackingList FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente  " & WFiltro & "  ORDER BY p.FechaOrd, p.Proforma"
+        Dim ZSql = "SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total, p.FechaLimiteOrd, p.PackingList, isnull(p.Entregado, '') as Entregado FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente  " & WFiltro & "  ORDER BY p.FechaOrd, p.Proforma"
 
         Try
 
@@ -77,6 +77,7 @@ Public Class MenuPrincipal
                 WTotal = 0.0
                 WFechaLimite = ""
                 WPackingList = ""
+                WEntregado = ""
                 WRowIndex = 0
 
                 Do While dr.Read()
@@ -97,6 +98,7 @@ Public Class MenuPrincipal
                         WTotal = IIf(IsDBNull(.Item("Total")), 0.0, .Item("Total"))
                         WFechaLimite = IIf(IsDBNull(.Item("FechaLimiteOrd")), "", .Item("FechaLimiteOrd"))
                         WPackingList = IIf(IsDBNull(.Item("PackingList")), "", .Item("PackingList"))
+                        WEntregado = IIf(IsDBNull(.Item("Entregado")), "", .Item("Entregado"))
 
                         WRowIndex = dgvPrincipal.Rows.Add
                     End With
@@ -110,6 +112,7 @@ Public Class MenuPrincipal
                         .Cells("Total").Value = Helper.formatonumerico(WTotal)
                         .Cells("FechaLimite").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
                         .Cells("PackingList").Value = WPackingList
+                        .Cells("Entregado").Value = UCase(WEntregado)
                     End With
 
                 Loop
@@ -555,7 +558,7 @@ Public Class MenuPrincipal
         e.Handled = True
     End Sub
 
-    Private Sub ckMostrarCerradasAprobadas_CheckedChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles ckMostrarCerradasAprobadas.CheckedChanged
+    Private Sub ckMostrarCerradasAprobadas_CheckedChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles ckMostrarEntregadas.CheckedChanged
         _CargarTodasLasProformas()
     End Sub
 End Class

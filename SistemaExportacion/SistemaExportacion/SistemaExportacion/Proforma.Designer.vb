@@ -112,6 +112,9 @@ Partial Class Proforma
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnEntregado = New System.Windows.Forms.Button()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.gbEntregado = New System.Windows.Forms.GroupBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -119,6 +122,7 @@ Partial Class Proforma
         Me.GrupoConsulta.SuspendLayout()
         CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        Me.gbEntregado.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -216,11 +220,13 @@ Partial Class Proforma
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.gbEntregado)
         Me.Panel1.Controls.Add(Me.GrupoConsulta)
         Me.Panel1.Controls.Add(Me.ckCerrado)
         Me.Panel1.Controls.Add(Me.ckPakingList)
         Me.Panel1.Controls.Add(Me.ckEnviarDocumentacion)
         Me.Panel1.Controls.Add(Me.cmbVia)
+        Me.Panel1.Controls.Add(Me.btnEntregado)
         Me.Panel1.Controls.Add(Me.btnHistorialArchivosRelacionados)
         Me.Panel1.Controls.Add(Me.Label15)
         Me.Panel1.Controls.Add(Me.txtObservacionesIII)
@@ -1096,6 +1102,43 @@ Partial Class Proforma
         Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Proforma")
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
+        'btnEntregado
+        '
+        Me.btnEntregado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEntregado.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEntregado.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnEntregado.Location = New System.Drawing.Point(24, 463)
+        Me.btnEntregado.Name = "btnEntregado"
+        Me.btnEntregado.Size = New System.Drawing.Size(174, 38)
+        Me.btnEntregado.TabIndex = 13
+        Me.btnEntregado.Text = "Indicar Entrega de Proforma"
+        Me.btnEntregado.UseVisualStyleBackColor = True
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Calibri", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.Label26.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label26.Location = New System.Drawing.Point(51, 17)
+        Me.Label26.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(168, 23)
+        Me.Label26.TabIndex = 18
+        Me.Label26.Text = "Proforma Entregada"
+        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'gbEntregado
+        '
+        Me.gbEntregado.Controls.Add(Me.Label26)
+        Me.gbEntregado.ForeColor = System.Drawing.SystemColors.Control
+        Me.gbEntregado.Location = New System.Drawing.Point(212, 452)
+        Me.gbEntregado.Name = "gbEntregado"
+        Me.gbEntregado.Size = New System.Drawing.Size(266, 51)
+        Me.gbEntregado.TabIndex = 19
+        Me.gbEntregado.TabStop = False
+        Me.gbEntregado.Text = "Estado de Entrega"
+        Me.gbEntregado.Visible = False
+        '
         'Proforma
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1114,6 +1157,8 @@ Partial Class Proforma
         Me.GrupoConsulta.PerformLayout()
         CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        Me.gbEntregado.ResumeLayout(False)
+        Me.gbEntregado.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1198,4 +1243,7 @@ Partial Class Proforma
     Friend WithEvents Label24 As System.Windows.Forms.Label
     Friend WithEvents txtFechaLimite As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents gbEntregado As System.Windows.Forms.GroupBox
+    Friend WithEvents Label26 As System.Windows.Forms.Label
+    Friend WithEvents btnEntregado As System.Windows.Forms.Button
 End Class

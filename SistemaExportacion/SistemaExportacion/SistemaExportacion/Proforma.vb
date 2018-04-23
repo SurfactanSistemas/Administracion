@@ -155,10 +155,10 @@ Public Class Proforma
 
     Private Sub _TraerProforma(ByVal NroProforma As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
+        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma, p.Entregado FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
         Dim dr As SqlDataReader
         Dim WRenglon, WEstado, WNroProforma, WFecha, WCliente, WDescripcionCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WFlete, WSeguro, WTotal, WDescripcionMonto, WPais, WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WRowIndex
-        Dim WNroPedido, WNroFactura, WSaldoFactura, WEnviarDocumentacion, WProformaCerrada, WPackingList, WIdioma, WFechaLimite
+        Dim WNroPedido, WNroFactura, WEntregado, WEnviarDocumentacion, WProformaCerrada, WPackingList, WIdioma, WFechaLimite
 
         WRenglon = 0
         WEstado = 0
@@ -187,7 +187,7 @@ Public Class Proforma
         ' Completarlas cuando se definan desde ventas.
         WNroPedido = ""
         WNroFactura = ""
-        WSaldoFactura = ""
+        WEntregado = ""
         WEnviarDocumentacion = ""
         WProformaCerrada = ""
         WPackingList = ""
@@ -239,6 +239,7 @@ Public Class Proforma
                             WPackingList = IIf(IsDBNull(.Item("PackingList")), "0", .Item("PackingList"))
                             WIdioma = IIf(IsDBNull(.Item("Idioma")), 0, .Item("Idioma"))
                             WFechaLimite = IIf(IsDBNull(.Item("FechaLimite")), "", .Item("FechaLimite"))
+                            WEntregado = IIf(IsDBNull(.Item("Entregado")), "", .Item("Entregado"))
 
                             txtNroProforma.Text = WNroProforma
                             txtFecha.Text = WFecha
@@ -276,6 +277,11 @@ Public Class Proforma
 
                             txtFlete.Text = Helper.formatonumerico(WFlete)
                             txtSeguro.Text = Helper.formatonumerico(WSeguro)
+
+                            If UCase(WEntregado) = "X" then
+                                btnEntregado.Visible=False
+                                gbEntregado.Visible = True
+                            End If
 
                             If Val(WEstado) = 1 Then
                                 Me.Bloqueado = True
@@ -1155,8 +1161,9 @@ Public Class Proforma
         Dim cn As New SqlConnection()
         Dim trans As SqlTransaction = Nothing
         Dim cm As New SqlCommand()
+        Dim dr As SqlDataReader
         Dim WClave, WRenglon, WEstado, XRenglon, WNroProforma, XNroProforma, WFecha, WFechaOrd, WCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WSeguro, WFlete, WTotal, WDescripcionMonto, WSql, WPais
-        Dim WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WProformaCerrada, WPackingList, WEnviarDoc, WIdioma, WViaDesc
+        Dim WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WProformaCerrada, WPackingList, WEnviarDoc, WIdioma, WViaDesc, WEntregado, WEntregadoFecha, WEntregadoFechaOrd
         Dim WProd As String, WDescriProducto, WCant, WPrecio, WDesc, WSinFDS, WFechaLimite, WFechaLimiteOrd
 
 
@@ -1170,6 +1177,9 @@ Public Class Proforma
         WPackingList = "0"
         WEnviarDoc = "0"
         WDescriProducto = ""
+        WEntregado = ""
+        WEntregadoFecha = ""
+        WEntregadoFechaOrd = ""
 
         WClave = ""
         WRenglon = 0
@@ -1266,10 +1276,23 @@ Public Class Proforma
 
             cm.Connection = cn
 
-
-            WSql = "DELETE ProformaExportacion WHERE Proforma = '" & XNroProforma & "'"
+            WSql = "SELECT ISNULL(Entregado, '') as Entregado, ISNULL(FechaEntregado, '') as EntregadoFecha, ISNULL(FechaEntregadoOrd, '') as EntregadoFechaOrd FROM ProformaExportacion WHERE Proforma = '" & XNroProforma & "'"
 
             cm.Transaction = trans
+            cm.CommandText = WSql
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows then
+                dr.Read
+                WEntregado = dr.Item("Entregado")
+                WEntregadoFecha = dr.Item("EntregadoFecha")
+                WEntregadoFechaOrd = dr.Item("EntregadoFechaOrd")
+            End If
+
+            If not dr.IsClosed then dr.Close
+
+            WSql = "DELETE ProformaExportacion WHERE Proforma = '" & XNroProforma & "'"
 
             cm.CommandText = WSql
 
@@ -1302,6 +1325,9 @@ Public Class Proforma
 
                             cm.ExecuteNonQuery()
 
+                            cm.CommandText = "UPDATE ProformaExportacion SET Entregado = '" & WEntregado & "', FechaEntregado = '" & WEntregadoFecha & "', FechaEntregadoOrd = '" & WEntregadoFechaOrd & "' WHERE Proforma = '" & XNroProforma & "'"
+                            cm.ExecuteNonQuery()
+
                             If Not _TieneFDS(WProd, WDesc) Then
                                 WSinFDS &= WProd & " (" & WDesc & ") " & vbCrLf
                             End If
@@ -1329,6 +1355,11 @@ Public Class Proforma
         Catch ex As Exception
             If Not IsNothing(trans) Then
                 ' En caso de una Excepcion, vuelvo para atras los cambios.
+                If Not IsNothing(dr) then
+                    If not dr.IsClosed then
+                        dr.Close
+                    End If
+                End If
                 trans.Rollback()
                 trans = Nothing
             End If
@@ -1468,6 +1499,8 @@ Public Class Proforma
         txtNroProforma.Focus()
 
         GrupoConsulta.Visible = False
+
+        gbEntregado.Visible=False
 
         txtFechaAux.Visible = False
 
@@ -2090,5 +2123,38 @@ Public Class Proforma
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             Exit Sub
         End Try
+    End Sub
+
+    Private Sub btnEntregado_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles btnEntregado.Click
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            Dim WFechaEntrega = Date.Now.ToString("dd/MM/yyyy")
+            Dim WFechaEntregaOrd = Helper.ordenaFecha(WFechaEntrega)
+
+            cm.CommandText="UPDATE ProformaExportacion SET Entregado = 'X', FechaEntregado = '" & WFechaEntrega & "', FechaEntregadoOrd = '" & WFechaEntregaOrd & "' WHERE Proforma = '" & txtNroProforma.Text & "'"
+
+            cm.ExecuteNonQuery
+
+            btnCerrar.PerformClick()
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        
     End Sub
 End Class
