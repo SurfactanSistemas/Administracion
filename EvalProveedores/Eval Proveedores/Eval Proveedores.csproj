@@ -243,6 +243,12 @@
     <Compile Include="Listados\ListaEvaTransp\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\ListaEvaTransp\listaevaluatransportista.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>listaevaluatransportista.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\ListaEvaTransp\ReportEvaluacTransp.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -510,6 +516,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListaEvaTransp\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListaEvaTransp\listaevaluatransportista.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>listaevaluatransportista.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListaEvaTransp\ReportEvaluacTransp.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

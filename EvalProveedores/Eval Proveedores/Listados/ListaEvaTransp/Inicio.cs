@@ -103,10 +103,14 @@ namespace Eval_Proveedores.Listados.ListaEvaTransp
 
                 string PeriodoHasta = TB_Hasta.Text.Substring(6, 4) + TB_Hasta.Text.Substring(3, 2);
 
-                DataTable dtEva = ETBOL.ListaListaProveFecha(PeriodoDesde, PeriodoHasta, TB_Prove.Text);
-                
-                ImpreEvaTransp Impre = new ImpreEvaTransp(dtEva, Tipo, TB_Prove.Text, TB_DescProve.Text);
-                Impre.ShowDialog();
+                VistaPrevia frm = new VistaPrevia();
+                frm.CargarReporte(new listaevaluatransportista(), "{EvaluaI.Periodo} IN '" + PeriodoDesde + "' to '" + PeriodoHasta + "' AND {EvaluaI.Proveedor} = '" + TB_Prove.Text + "' AND {EvaluaI.Proveedor} = {Proveedor.Proveedor}");
+                if (Tipo == "Pantalla") frm.Show();
+                if (Tipo == "Imprimir") frm.Imprimir();
+                //DataTable dtEva = ETBOL.ListaListaProveFecha(PeriodoDesde, PeriodoHasta, TB_Prove.Text);
+
+                //ImpreEvaTransp Impre = new ImpreEvaTransp(dtEva, Tipo, TB_Prove.Text, TB_DescProve.Text);
+                //Impre.ShowDialog();
             }
             catch (Exception err)
             {
