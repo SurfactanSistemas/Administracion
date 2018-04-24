@@ -108,11 +108,14 @@
             // 
             // TB_DescProve
             // 
+            this.TB_DescProve.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.TB_DescProve.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.TB_DescProve.FormattingEnabled = true;
             this.TB_DescProve.Location = new System.Drawing.Point(319, 23);
             this.TB_DescProve.Name = "TB_DescProve";
             this.TB_DescProve.Size = new System.Drawing.Size(197, 21);
             this.TB_DescProve.TabIndex = 87;
+            this.TB_DescProve.SelectedIndexChanged += new System.EventHandler(this.TB_DescProve_SelectedIndexChanged);
             // 
             // panel4
             // 
@@ -123,11 +126,14 @@
             // 
             // TB_Prove
             // 
+            this.TB_Prove.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.TB_Prove.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.TB_Prove.FormattingEnabled = true;
             this.TB_Prove.Location = new System.Drawing.Point(193, 23);
             this.TB_Prove.Name = "TB_Prove";
             this.TB_Prove.Size = new System.Drawing.Size(119, 21);
             this.TB_Prove.TabIndex = 85;
+            this.TB_Prove.SelectedIndexChanged += new System.EventHandler(this.TB_Prove_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -186,6 +192,7 @@
             this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
             this.TB_Hasta.TabIndex = 4;
             this.TB_Hasta.ValidatingType = typeof(System.DateTime);
+            this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
             // 
             // TB_Desde
             // 
@@ -195,6 +202,7 @@
             this.TB_Desde.Size = new System.Drawing.Size(100, 20);
             this.TB_Desde.TabIndex = 3;
             this.TB_Desde.ValidatingType = typeof(System.DateTime);
+            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
             // 
             // label2
             // 
@@ -221,7 +229,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(550, 288);
+            this.ClientSize = new System.Drawing.Size(550, 287);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
@@ -229,6 +237,7 @@
             this.MinimumSize = new System.Drawing.Size(566, 326);
             this.Name = "Inicio";
             this.Load += new System.EventHandler(this.Inicio_Load);
+            this.Shown += new System.EventHandler(this.Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

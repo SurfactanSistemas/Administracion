@@ -47,16 +47,17 @@ namespace Eval_Proveedores.Listados.ListaEvaTransp
             TB_DescProve.DisplayMember = "Nombre";
             TB_DescProve.ValueMember = "Proveedor";
 
-            AutoCompleteStringCollection stringDescProve = new AutoCompleteStringCollection();
-            foreach (DataRow row in dtProveedores.Rows)
-            {
-                stringDescProve.Add(Convert.ToString(row["Nombre"]));
+            //AutoCompleteStringCollection stringDescProve = new AutoCompleteStringCollection()
+            
+            //foreach (DataRow row in dtProveedores.Rows)
+            //{
+            //    stringDescProve.Add(Convert.ToString(row["Nombre"]));
 
-            }
+            //}
 
-            TB_DescProve.AutoCompleteCustomSource = stringDescProve;
-            TB_DescProve.AutoCompleteMode = AutoCompleteMode.Suggest;
-            TB_DescProve.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //TB_DescProve.AutoCompleteCustomSource = stringDescProve;
+            //TB_DescProve.AutoCompleteMode = AutoCompleteMode.Suggest;
+            //TB_DescProve.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
         private void CargarCodProveedor()
@@ -65,16 +66,16 @@ namespace Eval_Proveedores.Listados.ListaEvaTransp
             TB_Prove.DisplayMember = "Proveedor";
             TB_Prove.ValueMember = "Proveedor";
 
-            AutoCompleteStringCollection stringCodProve = new AutoCompleteStringCollection();
-            foreach (DataRow row in dtProveedores.Rows)
-            {
-                stringCodProve.Add(Convert.ToString(row["Proveedor"]));
+            //AutoCompleteStringCollection stringCodProve = new AutoCompleteStringCollection();
+            //foreach (DataRow row in dtProveedores.Rows)
+            //{
+            //    stringCodProve.Add(Convert.ToString(row["Proveedor"]));
 
-            }
+            //}
 
-            TB_Prove.AutoCompleteCustomSource = stringCodProve;
-            TB_Prove.AutoCompleteMode = AutoCompleteMode.Suggest;
-            TB_Prove.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //TB_Prove.AutoCompleteCustomSource = stringCodProve;
+            //TB_Prove.AutoCompleteMode = AutoCompleteMode.Suggest;
+            //TB_Prove.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
         private void BT_Pantalla_Click(object sender, EventArgs e)
@@ -125,5 +126,46 @@ namespace Eval_Proveedores.Listados.ListaEvaTransp
         {
             Close();
         }
+
+        private void Inicio_Shown(object sender, EventArgs e)
+        {
+            TB_DescProve.Focus();
+        }
+
+        private void TB_DescProve_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TB_Desde.Focus();
+        }
+
+        private void TB_Prove_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TB_Desde.Focus();
+        }
+
+        private void TB_Desde_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (TB_Desde.Text.Trim() == "") return;
+
+                TB_Hasta.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                TB_Desde.Text = "";
+            }
+	        
+        }
+
+        private void TB_Hasta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Escape)
+            {
+                TB_Hasta.Clear();
+            }
+        }
+
     }
 }

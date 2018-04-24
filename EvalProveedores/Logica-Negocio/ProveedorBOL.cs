@@ -25,8 +25,6 @@ namespace Logica_Negocio
         public Proveedor Find(string Codigo)
         {
             return _ProveedorDAL.BuscarUno(Codigo);
-
-
         }
 
         public System.Data.DataTable ListaRubroFecha(string RubroDesde)
