@@ -7,6 +7,7 @@ Public Class ConsultaInformacionPersonal
     Private Const YMARGEN = 1.5
     Private Const XMARGEN = 3
     Private WRow, Wcol As Integer
+    Private WCARGADOPORNOMBRE As Boolean
 
     Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.xlsm|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
     
@@ -22,6 +23,7 @@ Public Class ConsultaInformacionPersonal
         ' Limpiamos los campos.
         _LimpiarCampos()
 
+        WCARGADOPORNOMBRE = False
         WRow = -1
         Wcol = -1
         TabControl1.SelectedIndex = 0
@@ -43,24 +45,13 @@ Public Class ConsultaInformacionPersonal
             _c.SelectedIndex = 0
         Next
 
+        For Each dgv As DataGridView In {dgvHijos, dgvEducacion, dgvIndumentaria, dgvArchivos}
+            dgv.Rows.clear
+        Next
+
         With dgvHijos.Rows
             .Clear
             .Add
-        End With
-
-        With dgvEducacion.Rows
-            .Clear
-            '.Add
-        End With
-
-        With dgvIndumentaria.Rows
-            .Clear
-            '.Add
-        End With
-
-        With dgvArchivos.Rows
-            .Clear
-            '.Add
         End With
 
         txtFechaAux.Visible=False
@@ -105,52 +96,87 @@ Public Class ConsultaInformacionPersonal
         Try
             Dim WDatos = txtDni.Text
 
-            _LimpiarCampos()
-
             txtDni.Text = WDatos
 
             ' Busco los datos provenientes del Legajo.
             _CargarDatosLegajo()
-
-            ' Busco los Datos Personales.
-            _CargarDatosPersonales()
-
-            ' Cargo los datos de los Hijos
-            _CargarDatosHijos()
-
-            ' Cargamos los archivos relacionados.
-            _CargarArchivosRelacionados()
-
-            ' Recalculamos edad de Hijos.
-             Dim WFecha As String
-
-            For Each row As DataGridViewRow In dgvHijos.Rows
-                With row
-                    WFecha = IIf(IsNothing(.Cells("FechaNacimientoHijo").Value), "", .Cells("FechaNacimientoHijo").Value)        
-
-                    If not WFecha.estaVacia then
-                        
-                        .Cells("EdadHijo").Value = _CalcularEdad(WFecha)
-
-                    End If
-
-                End With
-            Next
-
-            ' Recalculamos edad de Conyuge.
-            If Not txtFechaNacimientoConyugue.Text.estaVacia then
-                txtEdadConyugue.Text = _CalcularEdad(txtFechaNacimientoConyugue.Text)
+            
+            If WCARGADOPORNOMBRE then
+                Exit Sub
             End If
 
-            ' Recalculamos edad del Personal.
-            If Not txtFechaNacimiento.Text.estaVacia then
-                txtEdad.Text = _CalcularEdad(txtFechaNacimiento.Text)
+            If _ExisteLegajoConDni() then
+
+                ' Busco los Datos Personales.
+                _CargarDatosPersonales()
+
+                ' Cargo los datos de los Hijos
+                _CargarDatosHijos()
+
+                ' Cargamos los archivos relacionados.
+                _CargarArchivosRelacionados()
+                
+                ' Recalculamos edad de Hijos.
+                Dim WFecha As String
+
+                For Each row As DataGridViewRow In dgvHijos.Rows
+                    With row
+                        WFecha = IIf(IsNothing(.Cells("FechaNacimientoHijo").Value), "", .Cells("FechaNacimientoHijo").Value)        
+
+                        If not WFecha.estaVacia then
+                        
+                            .Cells("EdadHijo").Value = _CalcularEdad(WFecha)
+
+                        End If
+
+                    End With
+                Next
+
+                ' Recalculamos edad de Conyuge.
+                If Not txtFechaNacimientoConyugue.Text.estaVacia then
+                    txtEdadConyugue.Text = _CalcularEdad(txtFechaNacimientoConyugue.Text)
+                End If
+
+                ' Recalculamos edad del Personal.
+                If Not txtFechaNacimiento.Text.estaVacia then
+                    txtEdad.Text = _CalcularEdad(txtFechaNacimiento.Text)
+                End If
+    
             End If
 
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
     End Sub
+
+    Private Function _ExisteLegajoConDni() As Boolean
+        
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Dni FROM Personal WHERE Dni = '" & txtDni.Text & "' AND Dni IS NOT NULL AND Dni <> ''")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            Return dr.HasRows
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        Return False
+    End Function
 
     Private Sub _CargarDatosHijos()
 
@@ -386,6 +412,10 @@ Public Class ConsultaInformacionPersonal
                             WFechaIngreso = IIf(IsDBNull(.Item("FIngreso")), "", .Item("FIngreso"))
                             WFechaEgreso = IIf(IsDBNull(.Item("FEgreso")), "", .Item("FEgreso"))
 
+                            If txtNombreCompleto.Text.Trim() <> "" andalso WNombreCompleto.Trim() <> txtNombreCompleto.Text.Trim() then
+                                WCARGADOPORNOMBRE = False
+                            End If
+
                             dgvEducacion.Rows.Clear
 
                             ' Grabamos Primaria.
@@ -451,6 +481,139 @@ Public Class ConsultaInformacionPersonal
                 txtFechaIngreso.Text = WFechaIngreso
                 txtFechaEgreso.Text = IIf(WFechaEgreso = "00/00/0000", "  /  /    ", WFechaEgreso)
                 txtNombreCompleto.Text = trim(WNombreCompleto)
+
+            End If
+
+        Catch ex As Exception
+            Throw _
+                New Exception(
+                    "Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Sub
+
+    Private Sub _CargarDatosLegajoPorNombre()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Codigo, FechaVersion, FIngreso, FEgreso, Descripcion, " _
+                                              & " EstaI, EstaII, EstaIII, EstadoI, EstadoII, EstadoIII, Dni " _
+                                              & " FROM Legajo WHERE Descripcion = '" & txtNombreCompleto.Text & "' AND Renglon = 1")
+        Dim dr As SqlDataReader
+        Dim WLegajoActual,
+            WLegajos,
+            WAux,
+            WFechaVersion,
+            WFechaVersionOrd,
+            WNombreCompleto,
+            WFechaIngreso,
+            WFechaEgreso,
+            WEstado,
+            WDni As String
+        Dim WFilaFormacion As Short
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                WLegajos = ""
+
+                Do While dr.Read
+
+                    With dr
+
+                        WFechaVersion = IIf(IsDBNull(.Item("FechaVersion")), "", .Item("FechaVersion"))
+                        WAux = Helper.ordenaFecha(WFechaVersion)
+                        WLegajoActual = IIf(IsDBNull(.Item("Codigo")), "", .Item("Codigo"))
+
+                        WLegajos &= IIf(Trim(wlegajos) <> "", " - " & WLegajoActual, WLegajoActual)
+
+                        If Val(WAux) > Val(WFechaVersionOrd) then
+
+                            WFechaVersionOrd = WAux
+
+                            WNombreCompleto = IIf(IsDBNull(.Item("Descripcion")), "", .Item("Descripcion"))
+                            WFechaIngreso = IIf(IsDBNull(.Item("FIngreso")), "", .Item("FIngreso"))
+                            WFechaEgreso = IIf(IsDBNull(.Item("FEgreso")), "", .Item("FEgreso"))
+
+                            dgvEducacion.Rows.Clear
+
+                            ' Grabamos Primaria.
+                            WEstado = IIf(IsDBNull(.Item("EstaI")), "", .Item("EstaI"))
+                            WDni = IIf(IsDBNull(.Item("Dni")), "", .Item("Dni"))
+
+                            Select Case Val(WEstado)
+                                Case 1, 2, 8
+
+                                    WFilaFormacion = dgvEducacion.Rows.Add
+
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Primaria"
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = "" _
+                                    'IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "1" _
+                                    'IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
+
+                                Case Else
+                                    WEstado = ""
+                            End Select
+
+                            ' Grabamos Secundaria
+                            WEstado = IIf(IsDBNull(.Item("EstaII")), "", .Item("EstaII"))
+
+                            Select Case Val(WEstado)
+                                Case 1, 2, 8
+
+                                    WFilaFormacion = dgvEducacion.Rows.Add
+
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Secundaria"
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
+                                        IIf(IsDBNull(.Item("EstadoII")), "", .Item("EstadoII"))
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "2"
+
+                                Case Else
+                                    WEstado = ""
+                            End Select
+
+                            ' Grabamos Terciaria/Universitaria
+                            WEstado = IIf(IsDBNull(.Item("EstaIII")), "", .Item("EstaIII"))
+
+                            Select Case Val(WEstado)
+                                Case 1, 2, 8
+
+                                    WFilaFormacion = dgvEducacion.Rows.Add
+
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value =
+                                        "Terciaria/Universitaria"
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
+                                        IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII"))
+                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "3"
+
+                                Case Else
+                                    WEstado = ""
+                            End Select
+
+                        End If
+
+                    End With
+
+                Loop
+
+                txtLegajo.Text = WLegajos
+                txtFechaIngreso.Text = WFechaIngreso
+                txtFechaEgreso.Text = IIf(WFechaEgreso = "00/00/0000", "  /  /    ", WFechaEgreso)
+                txtNombreCompleto.Text = trim(WNombreCompleto)
+                txtDni.Text = trim(WDni)
 
             End If
 
@@ -770,6 +933,8 @@ Public Class ConsultaInformacionPersonal
 
     Private Sub btnAceptar_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles btnAceptar.Click
 
+        If (txtDni.Text.Trim = "") then Exit Sub
+
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
         Dim trans As SqlTransaction = Nothing
@@ -984,6 +1149,9 @@ Public Class ConsultaInformacionPersonal
                 End With
 
             Next
+
+            cm.CommandText = "UPDATE Legajo SET Dni = '" & txtDni.Text.Trim() & "' WHERE Descripcion = '" & txtNombreCompleto.Text.Trim() & "'"
+            cm.ExecuteNonQuery
 
             trans.Commit
 
@@ -1286,7 +1454,11 @@ Public Class ConsultaInformacionPersonal
             cm.Connection = cn
 
             Array.Clear(WVector, 0, WVector.Length)
-            cm.CommandText="SELECT COUNT(Distinct Dni) as Total FROM Legajo WHERE Dni <> '' and Dni <> 0"
+
+            cm.CommandText = "UPDATE Legajo SET FEgreso = '  /  /    ' WHERE FEgreso is null"
+            cm.ExecuteNonQuery
+
+            cm.CommandText="SELECT COUNT(Distinct Descripcion) as Total FROM Legajo WHERE FEgreso IN ('  /  /    ', '00/00/0000')"
             
             dr = cm.ExecuteReader()
             dr.Read
@@ -1299,15 +1471,14 @@ Public Class ConsultaInformacionPersonal
                 dr.Close
             End If
 
-            cm.CommandText = "SELECT Distinct Dni, Descripcion FROM Legajo WHERE Dni <> '' and Dni <> 0 Order by Descripcion"
+            cm.CommandText = "SELECT Distinct Descripcion FROM Legajo WHERE FEgreso IN ('  /  /    ', '00/00/0000')"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
 
                 Do While dr.Read()
 
-                    WVector(WRenglon, 1) = dr.Item("Dni")
-                    WVector(WRenglon, 2) = dr.Item("Descripcion")
+                    WVector(WRenglon, 1) = dr.Item("Descripcion")
 
                     WRenglon += 1
                 Loop
@@ -1315,7 +1486,7 @@ Public Class ConsultaInformacionPersonal
             End If
 
             For i = 0 to WRenglon - 1
-                lstConsulta.Items.Add(WVector(i, 1).PadRight(15) & Trim(WVector(i, 2)))
+                lstConsulta.Items.Add(WVector(i, 1))
                 WIndice.Items.Add(WVector(i, 1))
             Next
 
@@ -1396,11 +1567,82 @@ Public Class ConsultaInformacionPersonal
             
             If lstConsulta.SelectedItem = "" then Exit Sub
 
-            txtDni.Text = WIndice.Items(lstConsulta.SelectedIndex)
+            txtNombreCompleto.Text = WIndice.Items(lstConsulta.SelectedIndex)
 
-            txtDni_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            'txtDni_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            _CargarDatosLegajoPorNombre()
+
+            WCARGADOPORNOMBRE = True
+
+            If Not _ExisteLegajoConDni() then
+                
+                For Each txt As TextBox In {{txtCalle, txtNumero, txtDpto, txtCodPostal, txtLocalidad, txtAclaracion, txtNombreCompletoConyugue, txtEdadConyugue, txtDniConyugue, txtSueldoBruto, txtAyuda, txtEdad}}
+                    txt.Text = ""
+                Next
+
+                For Each _m As MaskedTextBox In _
+                    {txtFechaCasamiento, txtFechaNacimiento, txtFechaNacimientoConyugue, txtFechaAux}
+                    _m.Clear()
+                Next
+
+                For Each _c As ComboBox In {cmbCategoria, cmbEstado, cmbUbicacion}
+                    _c.SelectedIndex = 0
+                Next
+
+                For Each dgv As DataGridView In {dgvHijos, dgvEducacion, dgvIndumentaria, dgvArchivos}
+                    dgv.Rows.clear
+                Next
+                
+                dgvHijos.Rows.Add
+
+            End If
+
+            If (txtDni.Text.Trim() <> "") then
+                
+                WCARGADOPORNOMBRE = False
+                ' Busco los Datos Personales.
+                _CargarDatosPersonales()
+
+                ' Cargo los datos de los Hijos
+                _CargarDatosHijos()
+
+                ' Cargamos los archivos relacionados.
+                _CargarArchivosRelacionados()
+                
+                ' Recalculamos edad de Hijos.
+                Dim WFecha As String
+
+                For Each row As DataGridViewRow In dgvHijos.Rows
+                    With row
+                        WFecha = IIf(IsNothing(.Cells("FechaNacimientoHijo").Value), "", .Cells("FechaNacimientoHijo").Value)        
+
+                        If not WFecha.estaVacia then
+                        
+                            .Cells("EdadHijo").Value = _CalcularEdad(WFecha)
+
+                        End If
+
+                    End With
+                Next
+
+                ' Recalculamos edad de Conyuge.
+                If Not txtFechaNacimientoConyugue.Text.estaVacia then
+                    txtEdadConyugue.Text = _CalcularEdad(txtFechaNacimientoConyugue.Text)
+                End If
+
+                ' Recalculamos edad del Personal.
+                If Not txtFechaNacimiento.Text.estaVacia then
+                    txtEdad.Text = _CalcularEdad(txtFechaNacimiento.Text)
+                End If
+    
+            End If
 
             pnlConsulta.Visible=False
+
+            txtFechaNacimiento.Focus()
+            If WCARGADOPORNOMBRE then
+                txtDni.Focus
+            End If
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -1605,5 +1847,20 @@ Public Class ConsultaInformacionPersonal
         Return icono
     End Function
 
+	Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDni.KeyPress, txtNumero.KeyPress, txtDniConyugue.KeyPress
+	    If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+	        e.Handled = True
+	    End If
+	End Sub
+    
+    
+	  
+	    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSueldoBruto.KeyPress
+	        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
+	            e.Handled = True
+	        End If
+	    End Sub
+        
+      
 
 End Class
