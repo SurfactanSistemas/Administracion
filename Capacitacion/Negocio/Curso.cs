@@ -16,7 +16,8 @@ namespace Negocio
         public DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
-            string consulta = "SELECT T.Clave, T.Tema, C.Descripcion as CursoDesc, T.Descripcion, T.Curso, T.Horas FROM Tema T INNER JOIN Curso C ON C.Codigo = T.Curso WHERE T.Curso > 0 ORDER BY T.Clave";
+            //string consulta = "SELECT T.Clave, T.Tema, C.Descripcion as CursoDesc, T.Descripcion, T.Curso, T.Horas FROM Tema T INNER JOIN Curso C ON C.Codigo = T.Curso WHERE T.Curso > 0 ORDER BY T.Clave";
+            string consulta = "SELECT Codigo as Tema, LTRIM(RTRIM(Descripcion)) as Descripcion FROM Curso WHERE Descripcion <> '' Order by Codigo";
 
             return repo.Listar(consulta);
         }

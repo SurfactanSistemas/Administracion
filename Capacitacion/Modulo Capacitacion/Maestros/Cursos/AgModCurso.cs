@@ -34,12 +34,12 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void CargoDatos()
         {
-            TB_Codigo.Text = CursoAModificar.Tema.ToString();
-            TB_DescCurso.Text = CursoAModificar.Descripcion;
-            TB_CodTema.Text = CursoAModificar.Curso_Id.ToString();
-            TB_DescTema.Text = CursoAModificar.DescripcionCurso;
-           
-            TB_Horas.Text = CursoAModificar.Horas.ToString();
+            TB_Codigo.Text = CursoAModificar.Tema.ToString().Trim();
+            TB_DescCurso.Text = CursoAModificar.Descripcion.Trim();
+            TB_CodTema.Text = CursoAModificar.Curso_Id.ToString().Trim();
+            TB_DescTema.Text = CursoAModificar.DescripcionCurso.Trim();
+
+            TB_Horas.Text = CursoAModificar.Horas.ToString().Trim();
 
             //BuscarDescripcionTema();
         }

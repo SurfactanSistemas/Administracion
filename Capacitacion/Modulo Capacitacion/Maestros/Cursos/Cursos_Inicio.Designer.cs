@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,7 +40,7 @@
             this.P_Filtrado = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.TBFiltro = new System.Windows.Forms.TextBox();
-            this.DGV_Cursos = new System.Windows.Forms.DataGridView();
+            this.dgvTemas = new System.Windows.Forms.DataGridView();
             this.CMS_Curso = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.claveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,25 +50,36 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.BTAgregarCurso = new System.Windows.Forms.Button();
+            this.BTModifCurso = new System.Windows.Forms.Button();
+            this.Bt_Fin = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
+            this.BT_Eliminar = new System.Windows.Forms.Button();
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Curs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BTAgregarCurso = new System.Windows.Forms.Button();
-            this.BTModifCurso = new System.Windows.Forms.Button();
-            this.Bt_Fin = new System.Windows.Forms.Button();
-            this.btnImprimir = new System.Windows.Forms.Button();
-            this.BT_Eliminar = new System.Windows.Forms.Button();
+            this.pnlCursos = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgvCursos = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnCerrarCursos = new System.Windows.Forms.Button();
+            this.btnMostrarCursos = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Cursos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTemas)).BeginInit();
             this.CMS_Curso.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.pnlCursos.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -81,7 +92,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(814, 50);
+            this.panel1.Size = new System.Drawing.Size(851, 50);
             this.panel1.TabIndex = 5;
             // 
             // label2
@@ -101,7 +112,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(658, 12);
+            this.label1.Location = new System.Drawing.Point(695, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 24);
             this.label1.TabIndex = 0;
@@ -116,7 +127,7 @@
             this.P_Verde.Location = new System.Drawing.Point(0, 50);
             this.P_Verde.Margin = new System.Windows.Forms.Padding(0);
             this.P_Verde.Name = "P_Verde";
-            this.P_Verde.Size = new System.Drawing.Size(814, 51);
+            this.P_Verde.Size = new System.Drawing.Size(851, 51);
             this.P_Verde.TabIndex = 6;
             // 
             // P_Filtrado
@@ -126,7 +137,7 @@
             this.P_Filtrado.Dock = System.Windows.Forms.DockStyle.Fill;
             this.P_Filtrado.Location = new System.Drawing.Point(0, 0);
             this.P_Filtrado.Name = "P_Filtrado";
-            this.P_Filtrado.Size = new System.Drawing.Size(814, 51);
+            this.P_Filtrado.Size = new System.Drawing.Size(851, 51);
             this.P_Filtrado.TabIndex = 1;
             // 
             // label3
@@ -149,37 +160,39 @@
             this.TBFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
             this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
             // 
-            // DGV_Cursos
+            // dgvTemas
             // 
-            this.DGV_Cursos.AllowUserToAddRows = false;
-            this.DGV_Cursos.AllowUserToDeleteRows = false;
-            this.DGV_Cursos.AllowUserToResizeRows = false;
-            this.DGV_Cursos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.DGV_Cursos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.DGV_Cursos.ColumnHeadersHeight = 34;
-            this.DGV_Cursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvTemas.AllowUserToAddRows = false;
+            this.dgvTemas.AllowUserToDeleteRows = false;
+            this.dgvTemas.AllowUserToResizeRows = false;
+            this.dgvTemas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvTemas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvTemas.ColumnHeadersHeight = 34;
+            this.dgvTemas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Clave,
             this.Tema,
             this.Descripcion,
             this.Curs,
             this.DescCurso,
             this.Horas});
-            this.DGV_Cursos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DGV_Cursos.Location = new System.Drawing.Point(83, 0);
-            this.DGV_Cursos.Margin = new System.Windows.Forms.Padding(0);
-            this.DGV_Cursos.Name = "DGV_Cursos";
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Cursos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.DGV_Cursos.RowHeadersWidth = 25;
-            this.DGV_Cursos.Size = new System.Drawing.Size(731, 471);
-            this.DGV_Cursos.TabIndex = 7;
-            this.DGV_Cursos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Cursos_RowHeaderMouseDoubleClick);
+            this.dgvTemas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTemas.Location = new System.Drawing.Point(83, 0);
+            this.dgvTemas.Margin = new System.Windows.Forms.Padding(0);
+            this.dgvTemas.Name = "dgvTemas";
+            this.dgvTemas.ReadOnly = true;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle24.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTemas.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            this.dgvTemas.RowHeadersWidth = 25;
+            this.dgvTemas.Size = new System.Drawing.Size(768, 471);
+            this.dgvTemas.TabIndex = 7;
+            this.dgvTemas.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTemas_CellMouseDoubleClick);
+            this.dgvTemas.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Cursos_RowHeaderMouseDoubleClick);
             // 
             // CMS_Curso
             // 
@@ -231,7 +244,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(814, 572);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(851, 572);
             this.tableLayoutPanel1.TabIndex = 22;
             // 
             // tableLayoutPanel2
@@ -240,19 +253,20 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 731F));
             this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.DGV_Cursos, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.dgvTemas, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 101);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(814, 471);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(851, 471);
             this.tableLayoutPanel2.TabIndex = 7;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.BTAgregarCurso);
+            this.panel2.Controls.Add(this.btnMostrarCursos);
             this.panel2.Controls.Add(this.BTModifCurso);
             this.panel2.Controls.Add(this.Bt_Fin);
             this.panel2.Controls.Add(this.btnImprimir);
@@ -263,55 +277,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(83, 471);
             this.panel2.TabIndex = 0;
-            // 
-            // Clave
-            // 
-            this.Clave.DataPropertyName = "Clave";
-            this.Clave.HeaderText = "Clave";
-            this.Clave.Name = "Clave";
-            this.Clave.Visible = false;
-            this.Clave.Width = 59;
-            // 
-            // Tema
-            // 
-            this.Tema.DataPropertyName = "Tema";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tema.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Tema.HeaderText = "Curso";
-            this.Tema.Name = "Tema";
-            this.Tema.Width = 59;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            // 
-            // Curs
-            // 
-            this.Curs.DataPropertyName = "Curso";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Curs.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Curs.HeaderText = "Tema";
-            this.Curs.Name = "Curs";
-            this.Curs.Width = 59;
-            // 
-            // DescCurso
-            // 
-            this.DescCurso.DataPropertyName = "CursoDesc";
-            this.DescCurso.HeaderText = "Descripcion";
-            this.DescCurso.Name = "DescCurso";
-            this.DescCurso.Width = 88;
-            // 
-            // Horas
-            // 
-            this.Horas.DataPropertyName = "Horas";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Horas.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Horas.HeaderText = "Horas";
-            this.Horas.Name = "Horas";
-            this.Horas.Width = 60;
             // 
             // BTAgregarCurso
             // 
@@ -332,12 +297,13 @@
             this.BTModifCurso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BTModifCurso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTModifCurso.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTModifCurso.Location = new System.Drawing.Point(17, 99);
+            this.BTModifCurso.Location = new System.Drawing.Point(47, 437);
             this.BTModifCurso.Margin = new System.Windows.Forms.Padding(0);
             this.BTModifCurso.Name = "BTModifCurso";
-            this.BTModifCurso.Size = new System.Drawing.Size(49, 57);
+            this.BTModifCurso.Size = new System.Drawing.Size(25, 25);
             this.BTModifCurso.TabIndex = 19;
             this.BTModifCurso.UseVisualStyleBackColor = true;
+            this.BTModifCurso.Visible = false;
             this.BTModifCurso.Click += new System.EventHandler(this.BTModifCurso_Click);
             // 
             // Bt_Fin
@@ -380,11 +346,159 @@
             this.BT_Eliminar.UseVisualStyleBackColor = true;
             this.BT_Eliminar.Click += new System.EventHandler(this.BT_Eliminar_Click);
             // 
+            // Clave
+            // 
+            this.Clave.DataPropertyName = "Clave";
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.ReadOnly = true;
+            this.Clave.Visible = false;
+            this.Clave.Width = 59;
+            // 
+            // Tema
+            // 
+            this.Tema.DataPropertyName = "Tema";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle21;
+            this.Tema.HeaderText = "Tema";
+            this.Tema.Name = "Tema";
+            this.Tema.ReadOnly = true;
+            this.Tema.Width = 59;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            // 
+            // Curs
+            // 
+            this.Curs.DataPropertyName = "Curso";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curs.DefaultCellStyle = dataGridViewCellStyle22;
+            this.Curs.HeaderText = "Tema";
+            this.Curs.Name = "Curs";
+            this.Curs.ReadOnly = true;
+            this.Curs.Visible = false;
+            this.Curs.Width = 59;
+            // 
+            // DescCurso
+            // 
+            this.DescCurso.DataPropertyName = "CursoDesc";
+            this.DescCurso.HeaderText = "Descripcion";
+            this.DescCurso.Name = "DescCurso";
+            this.DescCurso.ReadOnly = true;
+            this.DescCurso.Visible = false;
+            this.DescCurso.Width = 88;
+            // 
+            // Horas
+            // 
+            this.Horas.DataPropertyName = "Horas";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle23;
+            this.Horas.HeaderText = "Horas";
+            this.Horas.Name = "Horas";
+            this.Horas.ReadOnly = true;
+            this.Horas.Visible = false;
+            this.Horas.Width = 60;
+            // 
+            // pnlCursos
+            // 
+            this.pnlCursos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
+            this.pnlCursos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCursos.Controls.Add(this.panel3);
+            this.pnlCursos.Controls.Add(this.groupBox1);
+            this.pnlCursos.Location = new System.Drawing.Point(118, 125);
+            this.pnlCursos.Name = "pnlCursos";
+            this.pnlCursos.Size = new System.Drawing.Size(638, 373);
+            this.pnlCursos.TabIndex = 23;
+            this.pnlCursos.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.dgvCursos);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Location = new System.Drawing.Point(8, 11);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(617, 302);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tema: ";
+            // 
+            // dgvCursos
+            // 
+            this.dgvCursos.AllowUserToAddRows = false;
+            this.dgvCursos.AllowUserToDeleteRows = false;
+            this.dgvCursos.AllowUserToResizeRows = false;
+            this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCursos.Location = new System.Drawing.Point(12, 44);
+            this.dgvCursos.Name = "dgvCursos";
+            this.dgvCursos.ReadOnly = true;
+            this.dgvCursos.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.dgvCursos.Size = new System.Drawing.Size(593, 246);
+            this.dgvCursos.TabIndex = 0;
+            this.dgvCursos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCursos_CellMouseDoubleClick);
+            this.dgvCursos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCursos_RowHeaderMouseDoubleClick);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(284, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 18);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Cursos";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.btnCerrarCursos);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 323);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(636, 48);
+            this.panel3.TabIndex = 1;
+            // 
+            // btnCerrarCursos
+            // 
+            this.btnCerrarCursos.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar;
+            this.btnCerrarCursos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCerrarCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarCursos.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnCerrarCursos.Location = new System.Drawing.Point(300, 4);
+            this.btnCerrarCursos.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCerrarCursos.Name = "btnCerrarCursos";
+            this.btnCerrarCursos.Size = new System.Drawing.Size(36, 41);
+            this.btnCerrarCursos.TabIndex = 22;
+            this.btnCerrarCursos.UseVisualStyleBackColor = true;
+            this.btnCerrarCursos.Click += new System.EventHandler(this.btnCerrarCursos_Click);
+            // 
+            // btnMostrarCursos
+            // 
+            this.btnMostrarCursos.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.editar_cursos;
+            this.btnMostrarCursos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnMostrarCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarCursos.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnMostrarCursos.Location = new System.Drawing.Point(16, 100);
+            this.btnMostrarCursos.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMostrarCursos.Name = "btnMostrarCursos";
+            this.btnMostrarCursos.Size = new System.Drawing.Size(49, 57);
+            this.btnMostrarCursos.TabIndex = 19;
+            this.btnMostrarCursos.UseVisualStyleBackColor = true;
+            this.btnMostrarCursos.Click += new System.EventHandler(this.btnMostrarCursos_Click);
+            // 
             // Cursos_Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 572);
+            this.ClientSize = new System.Drawing.Size(851, 572);
+            this.Controls.Add(this.pnlCursos);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(830, 509);
             this.Name = "Cursos_Inicio";
@@ -396,11 +510,16 @@
             this.P_Verde.ResumeLayout(false);
             this.P_Filtrado.ResumeLayout(false);
             this.P_Filtrado.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Cursos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTemas)).EndInit();
             this.CMS_Curso.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.pnlCursos.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -412,7 +531,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel P_Verde;
         private System.Windows.Forms.TextBox TBFiltro;
-        private System.Windows.Forms.DataGridView DGV_Cursos;
+        private System.Windows.Forms.DataGridView dgvTemas;
         private System.Windows.Forms.Button Bt_Fin;
         private System.Windows.Forms.Button BT_Eliminar;
         private System.Windows.Forms.Button BTModifCurso;
@@ -428,12 +547,19 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Curs;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescCurso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
-        private System.Windows.Forms.Button btnImprimir;
+        private System.Windows.Forms.Panel pnlCursos;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dgvCursos;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnCerrarCursos;
+        private System.Windows.Forms.Button btnMostrarCursos;
     }
 }

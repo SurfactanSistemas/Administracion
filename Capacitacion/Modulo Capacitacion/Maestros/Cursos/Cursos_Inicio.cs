@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using Negocio;
 
@@ -9,6 +11,9 @@ namespace Modulo_Capacitacion.Maestros.Cursos
     {
         public Curso curso = new Curso();
 
+        private int POSICION_FINAL = 0;
+        private int POSICION_INICIAL = 0;
+
         public Cursos_Inicio()
         {
             InitializeComponent();
@@ -16,6 +21,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void Cursos_Inicio_Load(object sender, EventArgs e)
         {
+            pnlCursos.Visible = false;
             ActualizarGrilla();
         }
 
@@ -28,8 +34,8 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         {
             try
             {
-                if (DGV_Cursos.SelectedRows.Count != 1) throw new Exception("No hay filas seleccionadas o se selecciono mas de una");
-                string IdAEliminar = DGV_Cursos.SelectedRows[0].Cells[0].Value.ToString();
+                if (dgvTemas.SelectedRows.Count != 1) throw new Exception("No hay filas seleccionadas o se selecciono mas de una");
+                string IdAEliminar = dgvTemas.SelectedRows[0].Cells[0].Value.ToString();
 
                 if (MessageBox.Show("¿Está seguro de querer eliminar el curso indicado?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -46,7 +52,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void ActualizarGrilla()
         {
-            DGV_Cursos.DataSource = curso.ListarTodos();
+            dgvTemas.DataSource = curso.ListarTodos();
         }
 
         private void BTAgregarCurso_Click(object sender, EventArgs e)
@@ -61,9 +67,9 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         {
             try
             {
-                if (DGV_Cursos.SelectedRows.Count != 1) throw new Exception("Se debe seleccionar una fila a modificar");
+                if (dgvCursos.SelectedRows.Count != 1) throw new Exception("Se debe seleccionar una fila a modificar");
 
-                string IdAModificar = DGV_Cursos.SelectedRows[0].Cells[0].Value.ToString();
+                string IdAModificar = dgvCursos.SelectedRows[0].Cells["Clave"].Value.ToString();
                 Curso CursoAModificar = new Curso();
                 CursoAModificar = curso.BuscarUno(IdAModificar);
 
@@ -73,7 +79,9 @@ namespace Modulo_Capacitacion.Maestros.Cursos
                 };
                 modificarCurso.ShowDialog();
 
-                ActualizarGrilla();
+                dgvCursos.DataSource = _TraerCursos(CursoAModificar.Curso_Id.ToString());
+
+                //ActualizarGrilla();
             }
             catch (Exception err)
             {
@@ -85,12 +93,12 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         {
             if (TBFiltro.Text != "")
             {
-                DataTable dataTable = DGV_Cursos.DataSource as DataTable;
+                DataTable dataTable = dgvTemas.DataSource as DataTable;
                 if (dataTable != null)
                     dataTable.DefaultView.RowFilter = string.Format("CONVERT(Tema, System.String) like '%{0}%' "
-                                                    + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Curso, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(CursoDesc, System.String) like '%{0}%'", TBFiltro.Text);
+                                                    //+ " OR CONVERT(Descripcion, System.String) like '%{0}%'"
+                                                    //+ " OR CONVERT(Curso, System.String) like '%{0}%'"
+                                                    + " OR CONVERT(Descripcion, System.String) like '%{0}%'", TBFiltro.Text);
             }
             else
             {
@@ -100,7 +108,62 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void DGV_Cursos_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            BTModifCurso.PerformClick();
+            if (e.RowIndex < 0) return;
+
+            string WTema = dgvTemas.Rows[e.RowIndex].Cells["Tema"].Value.ToString();
+            string WDescripcion = dgvTemas.Rows[e.RowIndex].Cells["Descripcion"].Value.ToString();
+            
+            _CargarCursosDisponibles(WTema, WDescripcion);
+
+            //BTModifCurso.PerformClick();
+        }
+
+        private void _CargarCursosDisponibles(string WTema, string wDescripcion)
+        {
+            dgvCursos.DataSource = _TraerCursos(WTema);
+
+            groupBox1.Text = "Tema: " + wDescripcion.ToUpper().Trim();
+
+            DataGridViewColumn dataGridViewColumn = dgvCursos.Columns["Descripcion"];
+            if (dataGridViewColumn != null)
+                dataGridViewColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            foreach (string columna in new[] {"Clave"})
+            {
+                DataGridViewColumn column = dgvCursos.Columns[columna];
+                if (column != null) column.Visible = false;
+            }
+
+            pnlCursos.Location = new System.Drawing.Point((Width/2) - pnlCursos.Width / 2 , pnlCursos.Location.Y);
+            pnlCursos.Visible = true;
+        }
+
+        private DataTable _TraerCursos(string wTema)
+        {
+            DataTable tabla = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT Clave as Clave, Tema as Curso, Descripcion FROM Tema WHERE Curso = '" + wTema + "' ORDER BY Tema";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            tabla.Load(dr);
+                        }
+                    }
+                }
+
+            }
+
+            return tabla;
         }
 
         private void Cursos_Inicio_Shown(object sender, EventArgs e)
@@ -120,6 +183,51 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         {
             Listados.Cursos.Inicio frm = new Listados.Cursos.Inicio();
             frm.ShowDialog();
+        }
+
+        private void btnCerrarCursos_Click(object sender, EventArgs e)
+        {
+            dgvCursos.DataSource = null;
+            pnlCursos.Visible = false;
+        }
+
+        private void dgvCursos_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            BTModifCurso_Click(null, null);
+        }
+
+        private void dgvCursos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
+            dgvCursos.Rows[e.RowIndex].Selected = true;
+
+            BTModifCurso_Click(null, null);
+        }
+
+        private void btnMostrarCursos_Click(object sender, EventArgs e)
+        {
+            if (dgvTemas.SelectedCells.Count < 0) return;
+
+            //dgvTemas.Rows[dgvTemas.SelectedCells[0].RowIndex].Selected = true;
+
+            string WTema = dgvTemas.Rows[dgvTemas.SelectedCells[0].RowIndex].Cells["Tema"].Value.ToString();
+            string WDescripcion = dgvTemas.Rows[dgvTemas.SelectedCells[0].RowIndex].Cells["Descripcion"].Value.ToString();
+
+            _CargarCursosDisponibles(WTema, WDescripcion);
+   
+        }
+
+        private void dgvTemas_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
+            string WTema = dgvTemas.Rows[e.RowIndex].Cells["Tema"].Value.ToString();
+            string WDescripcion = dgvTemas.Rows[e.RowIndex].Cells["Descripcion"].Value.ToString();
+
+            _CargarCursosDisponibles(WTema, WDescripcion);
         }
 
     }
