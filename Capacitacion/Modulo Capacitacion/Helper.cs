@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Modulo_Capacitacion
@@ -8,6 +9,11 @@ namespace Modulo_Capacitacion
     class Helper
     {
         private static int WRenglon;
+
+        public static Point _CentrarH(int containerWidth, Control control)
+        {
+            return new Point(containerWidth / 2 - control.Width / 2, control.Location.Y);
+        }
 
         public static void PurgarOrdFechaCursadas()
         {

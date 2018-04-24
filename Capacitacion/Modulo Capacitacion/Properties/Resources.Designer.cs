@@ -163,6 +163,16 @@ namespace Modulo_Capacitacion.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Consulta_Dat_N1 {
+            get {
+                object obj = ResourceManager.GetObject("Consulta_Dat_N1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap editar_cursos {
             get {
                 object obj = ResourceManager.GetObject("editar cursos", resourceCulture);

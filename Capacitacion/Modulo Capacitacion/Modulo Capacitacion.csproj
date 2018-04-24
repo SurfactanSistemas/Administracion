@@ -562,6 +562,12 @@
     <Compile Include="Maestros\VersionPerfiles\IngVersPerfil.Designer.cs">
       <DependentUpon>IngVersPerfil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Novedades\ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.Designer.cs">
+      <DependentUpon>ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Novedades\IngresoDeCursosRealizados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -845,6 +851,9 @@
     <EmbeddedResource Include="Maestros\VersionPerfiles\IngVersPerfil.resx">
       <DependentUpon>IngVersPerfil.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.resx">
+      <DependentUpon>ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Novedades\IngresoDeCursosRealizados.resx">
       <DependentUpon>IngresoDeCursosRealizados.cs</DependentUpon>
     </EmbeddedResource>
@@ -1080,6 +1089,7 @@
     <Content Include="bin\Debug\Modulo Capacitacion.exe" />
     <Content Include="bin\Debug\Modulo Capacitacion.pdb" />
     <Content Include="bin\Debug\Modulo Capacitacion.vshost.exe" />
+    <None Include="Resources\Consulta Dat N1.png" />
     <None Include="Resources\Aceptar N2.png" />
     <None Include="Resources\Screen_preview.png" />
     <None Include="Resources\Enviar_Email.png" />

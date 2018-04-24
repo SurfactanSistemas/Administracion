@@ -211,5 +211,12 @@ namespace Modulo_Capacitacion
                 new Listados.InformedeCompetenciasNecesidadesPorSector.Inicio();
             frm.Show();
         }
+
+        private void actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ActualizacionDeCompetenciasYNecesidadesDeCapacitacion frm =
+                new ActualizacionDeCompetenciasYNecesidadesDeCapacitacion();
+            frm.Show();
+        }
     }
 }

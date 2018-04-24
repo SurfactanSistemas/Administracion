@@ -80,7 +80,7 @@ namespace Negocio
         public DataTable ListarLegajosDiscriminado(string WNombrePersonal)
         {
             Conexion repo = new Conexion();
-            string consulta = "SELECT Codigo, Descripcion, FechaVersion as Vigencia, Perfil, Sector, Grisar = CASE FEgreso WHEN '  /  /    ' THEN 'N' WHEN '00/00/0000' THEN 'N' WHEN NULL THEN 'N' ELSE 'S' END FROM Legajo WHERE Renglon = 1 AND Descripcion = '" + WNombrePersonal.Trim() + "' ORDER BY Descripcion, Codigo, VigenciaOrd";
+            string consulta = "SELECT Legajo.Codigo, Legajo.Descripcion, Legajo.FechaVersion as Vigencia, Legajo.Perfil, Perfil.Sector, Grisar = CASE Legajo.FEgreso WHEN '  /  /    ' THEN 'N' WHEN '00/00/0000' THEN 'N' WHEN NULL THEN 'N' ELSE 'S' END FROM Legajo, Tarea as Perfil WHERE Legajo.Perfil = Perfil.Codigo AND Perfil.Renglon = 1 AND Legajo.Renglon = 1 AND Legajo.Descripcion = '" + WNombrePersonal.Trim() + "' ORDER BY Descripcion, Codigo, VigenciaOrd";
             DataTable Dt = repo.Listar(consulta);
             return Dt;
         }
@@ -168,7 +168,7 @@ namespace Negocio
         public Legajo BuscarUno(string IdAModificar)
         {
             Conexion repo = new Conexion();
-            string consulta = "select * from legajo where codigo = " + IdAModificar + "order by Renglon";
+            string consulta = "select *, Perfil.Sector as WSector from legajo as L, Tarea as Perfil where L.Perfil = Perfil.Codigo AND Perfil.Renglon = 1 AND L.codigo = " + IdAModificar + "order by L.Renglon";
             DataTable DT = repo.BuscarUno(consulta);
 
             Legajo obj = new Legajo();
@@ -222,7 +222,7 @@ namespace Negocio
                 int.TryParse(DT.Rows[0]["PerfilVersion"].ToString(), out perver);
                 obj.Perfil.Version = perver;
 
-                Sector S = new Sector {Codigo = int.Parse(DT.Rows[0]["Sector"].ToString())};
+                Sector S = new Sector {Codigo = int.Parse(DT.Rows[0]["WSector"].ToString())};
                 S = S.BuscarUno(S.Codigo.ToString());
                 obj.Sector = new Sector();
                 obj.Sector = S;
