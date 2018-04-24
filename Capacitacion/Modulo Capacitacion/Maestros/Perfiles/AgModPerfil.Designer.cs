@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -100,16 +100,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.BT_Eliminar = new System.Windows.Forms.Button();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.TB_DescTemas = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.CB_Necesario = new System.Windows.Forms.CheckBox();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.CB_Deseable = new System.Windows.Forms.CheckBox();
+            this.TB_DescTemas = new System.Windows.Forms.ComboBox();
             this.TB_CodTemas = new System.Windows.Forms.ComboBox();
+            this.BT_Eliminar = new System.Windows.Forms.Button();
             this.BTModifTema = new System.Windows.Forms.Button();
             this.BTAgregarTema = new System.Windows.Forms.Button();
-            this.CB_Deseable = new System.Windows.Forms.CheckBox();
-            this.CB_Necesario = new System.Windows.Forms.CheckBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.DGV_Temas = new System.Windows.Forms.DataGridView();
             this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -125,15 +126,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.TB_Codigo = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -867,6 +867,83 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "CONOCIMIENTOS PARA EL PUESTO";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.panel11);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.CB_Necesario);
+            this.groupBox1.Controls.Add(this.panel10);
+            this.groupBox1.Controls.Add(this.CB_Deseable);
+            this.groupBox1.Controls.Add(this.TB_DescTemas);
+            this.groupBox1.Controls.Add(this.TB_CodTemas);
+            this.groupBox1.Location = new System.Drawing.Point(24, 312);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(726, 51);
+            this.groupBox1.TabIndex = 105;
+            this.groupBox1.TabStop = false;
+            // 
+            // panel11
+            // 
+            this.panel11.Location = new System.Drawing.Point(137, 14);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(19, 29);
+            this.panel11.TabIndex = 101;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(20, 19);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(47, 18);
+            this.label14.TabIndex = 38;
+            this.label14.Text = "Curso:";
+            // 
+            // CB_Necesario
+            // 
+            this.CB_Necesario.AutoSize = true;
+            this.CB_Necesario.Location = new System.Drawing.Point(599, 21);
+            this.CB_Necesario.Name = "CB_Necesario";
+            this.CB_Necesario.Size = new System.Drawing.Size(15, 14);
+            this.CB_Necesario.TabIndex = 63;
+            this.CB_Necesario.UseVisualStyleBackColor = true;
+            this.CB_Necesario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Necesario_KeyDown);
+            // 
+            // panel10
+            // 
+            this.panel10.Location = new System.Drawing.Point(518, 14);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(19, 29);
+            this.panel10.TabIndex = 103;
+            // 
+            // CB_Deseable
+            // 
+            this.CB_Deseable.AutoSize = true;
+            this.CB_Deseable.Location = new System.Drawing.Point(692, 21);
+            this.CB_Deseable.Name = "CB_Deseable";
+            this.CB_Deseable.Size = new System.Drawing.Size(15, 14);
+            this.CB_Deseable.TabIndex = 64;
+            this.CB_Deseable.UseVisualStyleBackColor = true;
+            this.CB_Deseable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Deseable_KeyDown);
+            // 
+            // TB_DescTemas
+            // 
+            this.TB_DescTemas.FormattingEnabled = true;
+            this.TB_DescTemas.Location = new System.Drawing.Point(193, 18);
+            this.TB_DescTemas.Name = "TB_DescTemas";
+            this.TB_DescTemas.Size = new System.Drawing.Size(343, 21);
+            this.TB_DescTemas.TabIndex = 102;
+            this.TB_DescTemas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DescTemas_KeyDown);
+            // 
+            // TB_CodTemas
+            // 
+            this.TB_CodTemas.FormattingEnabled = true;
+            this.TB_CodTemas.Location = new System.Drawing.Point(80, 18);
+            this.TB_CodTemas.Name = "TB_CodTemas";
+            this.TB_CodTemas.Size = new System.Drawing.Size(76, 21);
+            this.TB_CodTemas.TabIndex = 100;
+            this.TB_CodTemas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodTemas_KeyDown_1);
+            // 
             // BT_Eliminar
             // 
             this.BT_Eliminar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.eliminar;
@@ -881,38 +958,6 @@
             this.BT_Eliminar.UseVisualStyleBackColor = true;
             this.BT_Eliminar.Visible = false;
             this.BT_Eliminar.Click += new System.EventHandler(this.BT_Eliminar_Click);
-            // 
-            // panel10
-            // 
-            this.panel10.Location = new System.Drawing.Point(518, 14);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(19, 29);
-            this.panel10.TabIndex = 103;
-            // 
-            // TB_DescTemas
-            // 
-            this.TB_DescTemas.FormattingEnabled = true;
-            this.TB_DescTemas.Location = new System.Drawing.Point(193, 18);
-            this.TB_DescTemas.Name = "TB_DescTemas";
-            this.TB_DescTemas.Size = new System.Drawing.Size(343, 21);
-            this.TB_DescTemas.TabIndex = 102;
-            this.TB_DescTemas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DescTemas_KeyDown);
-            // 
-            // panel11
-            // 
-            this.panel11.Location = new System.Drawing.Point(137, 14);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(19, 29);
-            this.panel11.TabIndex = 101;
-            // 
-            // TB_CodTemas
-            // 
-            this.TB_CodTemas.FormattingEnabled = true;
-            this.TB_CodTemas.Location = new System.Drawing.Point(80, 18);
-            this.TB_CodTemas.Name = "TB_CodTemas";
-            this.TB_CodTemas.Size = new System.Drawing.Size(76, 21);
-            this.TB_CodTemas.TabIndex = 100;
-            this.TB_CodTemas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodTemas_KeyDown_1);
             // 
             // BTModifTema
             // 
@@ -942,36 +987,6 @@
             this.BTAgregarTema.UseVisualStyleBackColor = true;
             this.BTAgregarTema.Click += new System.EventHandler(this.BTAgregarTema_Click);
             // 
-            // CB_Deseable
-            // 
-            this.CB_Deseable.AutoSize = true;
-            this.CB_Deseable.Location = new System.Drawing.Point(692, 21);
-            this.CB_Deseable.Name = "CB_Deseable";
-            this.CB_Deseable.Size = new System.Drawing.Size(15, 14);
-            this.CB_Deseable.TabIndex = 64;
-            this.CB_Deseable.UseVisualStyleBackColor = true;
-            this.CB_Deseable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Deseable_KeyDown);
-            // 
-            // CB_Necesario
-            // 
-            this.CB_Necesario.AutoSize = true;
-            this.CB_Necesario.Location = new System.Drawing.Point(599, 21);
-            this.CB_Necesario.Name = "CB_Necesario";
-            this.CB_Necesario.Size = new System.Drawing.Size(15, 14);
-            this.CB_Necesario.TabIndex = 63;
-            this.CB_Necesario.UseVisualStyleBackColor = true;
-            this.CB_Necesario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Necesario_KeyDown);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(20, 19);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(47, 18);
-            this.label14.TabIndex = 38;
-            this.label14.Text = "Curso:";
-            // 
             // DGV_Temas
             // 
             this.DGV_Temas.AllowUserToAddRows = false;
@@ -986,17 +1001,17 @@
             this.DGV_Temas.Location = new System.Drawing.Point(16, 20);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Temas.Size = new System.Drawing.Size(748, 285);
             this.DGV_Temas.TabIndex = 7;
             this.DGV_Temas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Temas_CellClick);
@@ -1093,7 +1108,7 @@
             // 
             // BT_Guardar
             // 
-            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.grabar;
+            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
@@ -1134,21 +1149,6 @@
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.panel11);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.CB_Necesario);
-            this.groupBox1.Controls.Add(this.panel10);
-            this.groupBox1.Controls.Add(this.CB_Deseable);
-            this.groupBox1.Controls.Add(this.TB_DescTemas);
-            this.groupBox1.Controls.Add(this.TB_CodTemas);
-            this.groupBox1.Location = new System.Drawing.Point(24, 312);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(726, 51);
-            this.groupBox1.TabIndex = 105;
-            this.groupBox1.TabStop = false;
-            // 
             // AgModPerfil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1168,9 +1168,9 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).EndInit();
             this.ResumeLayout(false);
 
         }

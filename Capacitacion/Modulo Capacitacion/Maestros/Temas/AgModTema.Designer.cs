@@ -291,7 +291,7 @@
             // 
             // BT_Guardar
             // 
-            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.grabar;
+            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;

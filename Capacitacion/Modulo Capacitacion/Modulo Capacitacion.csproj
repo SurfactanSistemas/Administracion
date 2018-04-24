@@ -1080,6 +1080,7 @@
     <Content Include="bin\Debug\Modulo Capacitacion.exe" />
     <Content Include="bin\Debug\Modulo Capacitacion.pdb" />
     <Content Include="bin\Debug\Modulo Capacitacion.vshost.exe" />
+    <None Include="Resources\Aceptar N2.png" />
     <None Include="Resources\Screen_preview.png" />
     <None Include="Resources\Enviar_Email.png" />
     <None Include="Resources\marcadeagua2.jpg" />

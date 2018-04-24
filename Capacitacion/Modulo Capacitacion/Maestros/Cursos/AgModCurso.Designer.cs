@@ -40,12 +40,12 @@
             this.TB_Horas = new System.Windows.Forms.TextBox();
             this.TB_DescCurso = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.BT_Salir = new System.Windows.Forms.Button();
-            this.BT_LimpiarPant = new System.Windows.Forms.Button();
-            this.BT_Guardar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.TB_Codigo = new System.Windows.Forms.TextBox();
+            this.BT_Salir = new System.Windows.Forms.Button();
+            this.BT_LimpiarPant = new System.Windows.Forms.Button();
+            this.BT_Guardar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -175,47 +175,6 @@
             this.label2.TabIndex = 28;
             this.label2.Text = "Descripción:";
             // 
-            // BT_Salir
-            // 
-            this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
-            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(315, 175);
-            this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Salir.TabIndex = 27;
-            this.BT_Salir.UseVisualStyleBackColor = true;
-            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
-            // 
-            // BT_LimpiarPant
-            // 
-            this.BT_LimpiarPant.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.limpiar;
-            this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_LimpiarPant.Location = new System.Drawing.Point(232, 175);
-            this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_LimpiarPant.Name = "BT_LimpiarPant";
-            this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
-            this.BT_LimpiarPant.TabIndex = 26;
-            this.BT_LimpiarPant.UseVisualStyleBackColor = true;
-            this.BT_LimpiarPant.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
-            // 
-            // BT_Guardar
-            // 
-            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.grabar;
-            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(149, 175);
-            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_Guardar.Name = "BT_Guardar";
-            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
-            this.BT_Guardar.TabIndex = 25;
-            this.BT_Guardar.UseVisualStyleBackColor = true;
-            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -245,6 +204,47 @@
             this.TB_Codigo.ReadOnly = true;
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
+            // 
+            // BT_Salir
+            // 
+            this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Salir.Location = new System.Drawing.Point(315, 175);
+            this.BT_Salir.Name = "BT_Salir";
+            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.TabIndex = 27;
+            this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
+            // 
+            // BT_LimpiarPant
+            // 
+            this.BT_LimpiarPant.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.limpiar;
+            this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_LimpiarPant.Location = new System.Drawing.Point(232, 175);
+            this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_LimpiarPant.Name = "BT_LimpiarPant";
+            this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
+            this.BT_LimpiarPant.TabIndex = 26;
+            this.BT_LimpiarPant.UseVisualStyleBackColor = true;
+            this.BT_LimpiarPant.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
+            // 
+            // BT_Guardar
+            // 
+            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
+            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Guardar.Location = new System.Drawing.Point(149, 175);
+            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_Guardar.Name = "BT_Guardar";
+            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
+            this.BT_Guardar.TabIndex = 25;
+            this.BT_Guardar.UseVisualStyleBackColor = true;
+            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
             // 
             // AgModCurso
             // 
