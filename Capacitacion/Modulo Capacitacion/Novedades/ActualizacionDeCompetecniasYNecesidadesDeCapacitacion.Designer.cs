@@ -28,55 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.dgvGrilla = new System.Windows.Forms.DataGridView();
-            this.pnlAyuda = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.gbAyuda = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtFiltrar = new System.Windows.Forms.TextBox();
-            this.dgvAyuda = new System.Windows.Forms.DataGridView();
-            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Necesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Calificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnCerrarAyuda = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
             this.BT_Limpiar = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
-            this.txtTema = new System.Windows.Forms.TextBox();
-            this.txtDescTema = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cmbOrganizar = new System.Windows.Forms.ComboBox();
-            this.rbPerfil = new System.Windows.Forms.RadioButton();
-            this.rbSector = new System.Windows.Forms.RadioButton();
-            this.btnBuscar = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbSector = new System.Windows.Forms.RadioButton();
+            this.rbPerfil = new System.Windows.Forms.RadioButton();
+            this.cmbOrganizar = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtDescTema = new System.Windows.Forms.TextBox();
+            this.txtTema = new System.Windows.Forms.TextBox();
+            this.dgvGrilla = new System.Windows.Forms.DataGridView();
+            this.pnlAyuda = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.btnCerrarAyuda = new System.Windows.Forms.Button();
+            this.gbAyuda = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFiltrar = new System.Windows.Forms.TextBox();
+            this.dgvAyuda = new System.Windows.Forms.DataGridView();
+            this.pnlProgreso = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.cmbAuxi = new System.Windows.Forms.ComboBox();
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescPerfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Necesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCalificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).BeginInit();
             this.pnlAyuda.SuspendLayout();
             this.panel6.SuspendLayout();
             this.gbAyuda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAyuda)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.pnlProgreso.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -133,7 +149,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 109F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(870, 550);
@@ -151,6 +167,63 @@
             this.panel4.Size = new System.Drawing.Size(864, 63);
             this.panel4.TabIndex = 0;
             // 
+            // BT_Guardar
+            // 
+            this.BT_Guardar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
+            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Guardar.Location = new System.Drawing.Point(289, 11);
+            this.BT_Guardar.Name = "BT_Guardar";
+            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
+            this.BT_Guardar.TabIndex = 27;
+            this.BT_Guardar.UseVisualStyleBackColor = true;
+            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
+            // 
+            // BT_Limpiar
+            // 
+            this.BT_Limpiar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.BT_Limpiar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.limpiar;
+            this.BT_Limpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Limpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Limpiar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Limpiar.Location = new System.Drawing.Point(412, 11);
+            this.BT_Limpiar.Name = "BT_Limpiar";
+            this.BT_Limpiar.Size = new System.Drawing.Size(40, 40);
+            this.BT_Limpiar.TabIndex = 27;
+            this.BT_Limpiar.UseVisualStyleBackColor = true;
+            this.BT_Limpiar.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
+            // 
+            // BT_Salir
+            // 
+            this.BT_Salir.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Salir.Location = new System.Drawing.Point(535, 11);
+            this.BT_Salir.Name = "BT_Salir";
+            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.TabIndex = 27;
+            this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
+            // 
+            // btnAyuda
+            // 
+            this.btnAyuda.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnAyuda.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.btnAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyuda.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnAyuda.Location = new System.Drawing.Point(780, 11);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(40, 40);
+            this.btnAyuda.TabIndex = 27;
+            this.btnAyuda.UseVisualStyleBackColor = true;
+            this.btnAyuda.Visible = false;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.groupBox1);
@@ -158,28 +231,142 @@
             this.panel5.Location = new System.Drawing.Point(10, 3);
             this.panel5.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(850, 103);
+            this.panel5.Size = new System.Drawing.Size(850, 76);
             this.panel5.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnBuscar);
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.txtDescTema);
+            this.groupBox1.Controls.Add(this.txtTema);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(850, 76);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnBuscar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscar.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnBuscar.Location = new System.Drawing.Point(619, 13);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(54, 55);
+            this.btnBuscar.TabIndex = 29;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rbSector);
+            this.groupBox2.Controls.Add(this.rbPerfil);
+            this.groupBox2.Controls.Add(this.cmbOrganizar);
+            this.groupBox2.Location = new System.Drawing.Point(32, 13);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(577, 53);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Organizar Por:";
+            // 
+            // rbSector
+            // 
+            this.rbSector.AutoSize = true;
+            this.rbSector.Location = new System.Drawing.Point(137, 22);
+            this.rbSector.Name = "rbSector";
+            this.rbSector.Size = new System.Drawing.Size(56, 17);
+            this.rbSector.TabIndex = 3;
+            this.rbSector.Text = "Sector";
+            this.rbSector.UseVisualStyleBackColor = true;
+            this.rbSector.Click += new System.EventHandler(this.rbSector_Click);
+            // 
+            // rbPerfil
+            // 
+            this.rbPerfil.AutoSize = true;
+            this.rbPerfil.Checked = true;
+            this.rbPerfil.Location = new System.Drawing.Point(55, 22);
+            this.rbPerfil.Name = "rbPerfil";
+            this.rbPerfil.Size = new System.Drawing.Size(48, 17);
+            this.rbPerfil.TabIndex = 3;
+            this.rbPerfil.TabStop = true;
+            this.rbPerfil.Text = "Perfil";
+            this.rbPerfil.UseVisualStyleBackColor = true;
+            this.rbPerfil.Click += new System.EventHandler(this.rbPerfil_Click);
+            // 
+            // cmbOrganizar
+            // 
+            this.cmbOrganizar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOrganizar.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.cmbOrganizar.FormattingEnabled = true;
+            this.cmbOrganizar.Location = new System.Drawing.Point(217, 20);
+            this.cmbOrganizar.Name = "cmbOrganizar";
+            this.cmbOrganizar.Size = new System.Drawing.Size(305, 21);
+            this.cmbOrganizar.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(776, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Tema:";
+            this.label2.Visible = false;
+            // 
+            // txtDescTema
+            // 
+            this.txtDescTema.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtDescTema.Location = new System.Drawing.Point(819, 46);
+            this.txtDescTema.Name = "txtDescTema";
+            this.txtDescTema.ReadOnly = true;
+            this.txtDescTema.Size = new System.Drawing.Size(21, 20);
+            this.txtDescTema.TabIndex = 0;
+            this.txtDescTema.Visible = false;
+            // 
+            // txtTema
+            // 
+            this.txtTema.Location = new System.Drawing.Point(796, 46);
+            this.txtTema.Name = "txtTema";
+            this.txtTema.Size = new System.Drawing.Size(17, 20);
+            this.txtTema.TabIndex = 0;
+            this.txtTema.Visible = false;
+            this.txtTema.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTema_KeyDown);
+            this.txtTema.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtTema_MouseDoubleClick);
             // 
             // dgvGrilla
             // 
+            this.dgvGrilla.AllowUserToAddRows = false;
+            this.dgvGrilla.AllowUserToDeleteRows = false;
+            this.dgvGrilla.AllowUserToOrderColumns = true;
+            this.dgvGrilla.AllowUserToResizeRows = false;
             this.dgvGrilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrilla.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Clave,
             this.Perfil,
+            this.DescPerfil,
             this.Legajo,
             this.Nombre,
+            this.Curso,
+            this.DescCurso,
             this.Necesario,
             this.Deseable,
+            this.idCalificacion,
             this.Calificacion,
             this.Observaciones});
             this.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvGrilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvGrilla.Location = new System.Drawing.Point(10, 112);
+            this.dgvGrilla.Location = new System.Drawing.Point(10, 85);
             this.dgvGrilla.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.dgvGrilla.Name = "dgvGrilla";
-            this.dgvGrilla.Size = new System.Drawing.Size(850, 366);
+            this.dgvGrilla.RowHeadersWidth = 15;
+            this.dgvGrilla.Size = new System.Drawing.Size(850, 393);
             this.dgvGrilla.TabIndex = 2;
+            this.dgvGrilla.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGrilla_CellMouseClick);
             // 
             // pnlAyuda
             // 
@@ -201,6 +388,20 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(68, 42);
             this.panel6.TabIndex = 1;
+            // 
+            // btnCerrarAyuda
+            // 
+            this.btnCerrarAyuda.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnCerrarAyuda.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.btnCerrarAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCerrarAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarAyuda.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnCerrarAyuda.Location = new System.Drawing.Point(17, 3);
+            this.btnCerrarAyuda.Name = "btnCerrarAyuda";
+            this.btnCerrarAyuda.Size = new System.Drawing.Size(34, 38);
+            this.btnCerrarAyuda.TabIndex = 28;
+            this.btnCerrarAyuda.UseVisualStyleBackColor = true;
+            this.btnCerrarAyuda.Click += new System.EventHandler(this.button1_Click);
             // 
             // gbAyuda
             // 
@@ -245,24 +446,87 @@
             this.dgvAyuda.TabIndex = 0;
             this.dgvAyuda.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAyuda_CellMouseDoubleClick);
             // 
+            // pnlProgreso
+            // 
+            this.pnlProgreso.Controls.Add(this.groupBox3);
+            this.pnlProgreso.Location = new System.Drawing.Point(710, 420);
+            this.pnlProgreso.Name = "pnlProgreso";
+            this.pnlProgreso.Size = new System.Drawing.Size(20, 23);
+            this.pnlProgreso.TabIndex = 10;
+            this.pnlProgreso.Visible = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.progressBar1);
+            this.groupBox3.Location = new System.Drawing.Point(20, 16);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(556, 57);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Procesando";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(25, 20);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(506, 23);
+            this.progressBar1.TabIndex = 0;
+            // 
+            // cmbAuxi
+            // 
+            this.cmbAuxi.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cmbAuxi.FormattingEnabled = true;
+            this.cmbAuxi.Items.AddRange(new object[] {
+            "",
+            "Exede",
+            "Cumple",
+            "Reforzar",
+            "En Entrenamiento",
+            "No Cumple",
+            "No Aplica",
+            "No Evalúa",
+            "Cumple Act."});
+            this.cmbAuxi.Location = new System.Drawing.Point(716, 367);
+            this.cmbAuxi.Name = "cmbAuxi";
+            this.cmbAuxi.Size = new System.Drawing.Size(121, 21);
+            this.cmbAuxi.TabIndex = 11;
+            this.cmbAuxi.SelectedIndexChanged += new System.EventHandler(this.cmbAuxi_SelectedIndexChanged);
+            this.cmbAuxi.DropDownClosed += new System.EventHandler(this.cmbAuxi_DropDownClosed);
+            // 
             // Clave
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Clave.DefaultCellStyle = dataGridViewCellStyle1;
             this.Clave.HeaderText = "Clave";
             this.Clave.Name = "Clave";
             this.Clave.ReadOnly = true;
+            this.Clave.Visible = false;
+            this.Clave.Width = 50;
             // 
             // Perfil
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Perfil.DefaultCellStyle = dataGridViewCellStyle2;
             this.Perfil.HeaderText = "Perfil";
             this.Perfil.Name = "Perfil";
-            this.Perfil.Width = 150;
+            this.Perfil.ReadOnly = true;
+            this.Perfil.Width = 30;
+            // 
+            // DescPerfil
+            // 
+            this.DescPerfil.HeaderText = "Perfil";
+            this.DescPerfil.Name = "DescPerfil";
+            this.DescPerfil.ReadOnly = true;
+            this.DescPerfil.Width = 150;
             // 
             // Legajo
             // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Legajo.DefaultCellStyle = dataGridViewCellStyle3;
             this.Legajo.HeaderText = "Legajo";
             this.Legajo.Name = "Legajo";
             this.Legajo.ReadOnly = true;
-            this.Legajo.Width = 60;
+            this.Legajo.Width = 40;
             // 
             // Nombre
             // 
@@ -271,8 +535,28 @@
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             // 
+            // Curso
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Curso.HeaderText = "Curso";
+            this.Curso.Name = "Curso";
+            this.Curso.ReadOnly = true;
+            this.Curso.Visible = false;
+            this.Curso.Width = 30;
+            // 
+            // DescCurso
+            // 
+            this.DescCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DescCurso.HeaderText = "Curso";
+            this.DescCurso.Name = "DescCurso";
+            this.DescCurso.ReadOnly = true;
+            this.DescCurso.Width = 59;
+            // 
             // Necesario
             // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Necesario.DefaultCellStyle = dataGridViewCellStyle5;
             this.Necesario.HeaderText = "Necesario";
             this.Necesario.Name = "Necesario";
             this.Necesario.ReadOnly = true;
@@ -280,10 +564,18 @@
             // 
             // Deseable
             // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Deseable.DefaultCellStyle = dataGridViewCellStyle6;
             this.Deseable.HeaderText = "Deseable";
             this.Deseable.Name = "Deseable";
             this.Deseable.ReadOnly = true;
             this.Deseable.Width = 70;
+            // 
+            // idCalificacion
+            // 
+            this.idCalificacion.HeaderText = "idCalificacion";
+            this.idCalificacion.Name = "idCalificacion";
+            this.idCalificacion.Visible = false;
             // 
             // Calificacion
             // 
@@ -298,185 +590,13 @@
             this.Observaciones.Name = "Observaciones";
             this.Observaciones.Width = 200;
             // 
-            // btnCerrarAyuda
-            // 
-            this.btnCerrarAyuda.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCerrarAyuda.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
-            this.btnCerrarAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCerrarAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrarAyuda.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCerrarAyuda.Location = new System.Drawing.Point(17, 3);
-            this.btnCerrarAyuda.Name = "btnCerrarAyuda";
-            this.btnCerrarAyuda.Size = new System.Drawing.Size(34, 38);
-            this.btnCerrarAyuda.TabIndex = 28;
-            this.btnCerrarAyuda.UseVisualStyleBackColor = true;
-            this.btnCerrarAyuda.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // BT_Guardar
-            // 
-            this.BT_Guardar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BT_Guardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
-            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(249, 11);
-            this.BT_Guardar.Name = "BT_Guardar";
-            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
-            this.BT_Guardar.TabIndex = 27;
-            this.BT_Guardar.UseVisualStyleBackColor = true;
-            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
-            // 
-            // BT_Limpiar
-            // 
-            this.BT_Limpiar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BT_Limpiar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.limpiar;
-            this.BT_Limpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Limpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Limpiar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Limpiar.Location = new System.Drawing.Point(358, 11);
-            this.BT_Limpiar.Name = "BT_Limpiar";
-            this.BT_Limpiar.Size = new System.Drawing.Size(40, 40);
-            this.BT_Limpiar.TabIndex = 27;
-            this.BT_Limpiar.UseVisualStyleBackColor = true;
-            this.BT_Limpiar.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
-            // 
-            // BT_Salir
-            // 
-            this.BT_Salir.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
-            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(576, 11);
-            this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Salir.TabIndex = 27;
-            this.BT_Salir.UseVisualStyleBackColor = true;
-            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
-            // 
-            // btnAyuda
-            // 
-            this.btnAyuda.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnAyuda.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
-            this.btnAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAyuda.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnAyuda.Location = new System.Drawing.Point(467, 11);
-            this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(40, 40);
-            this.btnAyuda.TabIndex = 27;
-            this.btnAyuda.UseVisualStyleBackColor = true;
-            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
-            // 
-            // txtTema
-            // 
-            this.txtTema.Location = new System.Drawing.Point(76, 14);
-            this.txtTema.Name = "txtTema";
-            this.txtTema.Size = new System.Drawing.Size(57, 20);
-            this.txtTema.TabIndex = 0;
-            this.txtTema.Visible = false;
-            this.txtTema.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTema_KeyDown);
-            this.txtTema.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtTema_MouseDoubleClick);
-            // 
-            // txtDescTema
-            // 
-            this.txtDescTema.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtDescTema.Location = new System.Drawing.Point(139, 14);
-            this.txtDescTema.Name = "txtDescTema";
-            this.txtDescTema.ReadOnly = true;
-            this.txtDescTema.Size = new System.Drawing.Size(470, 20);
-            this.txtDescTema.TabIndex = 0;
-            this.txtDescTema.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Tema:";
-            this.label2.Visible = false;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.rbSector);
-            this.groupBox2.Controls.Add(this.rbPerfil);
-            this.groupBox2.Controls.Add(this.cmbOrganizar);
-            this.groupBox2.Location = new System.Drawing.Point(32, 40);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(577, 53);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Organizar Por:";
-            // 
-            // cmbOrganizar
-            // 
-            this.cmbOrganizar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbOrganizar.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.cmbOrganizar.FormattingEnabled = true;
-            this.cmbOrganizar.Location = new System.Drawing.Point(217, 20);
-            this.cmbOrganizar.Name = "cmbOrganizar";
-            this.cmbOrganizar.Size = new System.Drawing.Size(305, 21);
-            this.cmbOrganizar.TabIndex = 2;
-            // 
-            // rbPerfil
-            // 
-            this.rbPerfil.AutoSize = true;
-            this.rbPerfil.Checked = true;
-            this.rbPerfil.Location = new System.Drawing.Point(55, 22);
-            this.rbPerfil.Name = "rbPerfil";
-            this.rbPerfil.Size = new System.Drawing.Size(48, 17);
-            this.rbPerfil.TabIndex = 3;
-            this.rbPerfil.TabStop = true;
-            this.rbPerfil.Text = "Perfil";
-            this.rbPerfil.UseVisualStyleBackColor = true;
-            this.rbPerfil.Click += new System.EventHandler(this.rbPerfil_Click);
-            // 
-            // rbSector
-            // 
-            this.rbSector.AutoSize = true;
-            this.rbSector.Location = new System.Drawing.Point(137, 22);
-            this.rbSector.Name = "rbSector";
-            this.rbSector.Size = new System.Drawing.Size(56, 17);
-            this.rbSector.TabIndex = 3;
-            this.rbSector.Text = "Sector";
-            this.rbSector.UseVisualStyleBackColor = true;
-            this.rbSector.Click += new System.EventHandler(this.rbSector_Click);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnBuscar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
-            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnBuscar.Location = new System.Drawing.Point(650, 24);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(54, 62);
-            this.btnBuscar.TabIndex = 29;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtDescTema);
-            this.groupBox1.Controls.Add(this.txtTema);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(850, 103);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            // 
             // ActualizacionDeCompetenciasYNecesidadesDeCapacitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(870, 589);
+            this.Controls.Add(this.cmbAuxi);
+            this.Controls.Add(this.pnlProgreso);
             this.Controls.Add(this.pnlAyuda);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -491,16 +611,18 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).EndInit();
             this.pnlAyuda.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.gbAyuda.ResumeLayout(false);
             this.gbAyuda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAyuda)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.pnlProgreso.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -526,14 +648,6 @@
         private System.Windows.Forms.TextBox txtFiltrar;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button btnCerrarAyuda;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Perfil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Necesario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -543,5 +657,21 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDescTema;
         private System.Windows.Forms.TextBox txtTema;
+        private System.Windows.Forms.Panel pnlProgreso;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ComboBox cmbAuxi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Perfil;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescPerfil;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescCurso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Necesario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCalificacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
     }
 }
