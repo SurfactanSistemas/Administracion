@@ -218,5 +218,11 @@ namespace Modulo_Capacitacion
                 new ActualizacionDeCompetenciasYNecesidadesDeCapacitacion();
             frm.Show();
         }
+
+        private void asignaciónDeCursosPorPerfilOSectorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignarCursosPorPerfilYSector frm = new AsignarCursosPorPerfilYSector();
+            frm.Show();
+        }
     }
 }

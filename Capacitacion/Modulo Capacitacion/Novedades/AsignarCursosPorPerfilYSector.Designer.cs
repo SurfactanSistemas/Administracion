@@ -1,6 +1,6 @@
 ﻿namespace Modulo_Capacitacion.Novedades
 {
-    partial class ActualizacionDeCompetenciasYNecesidadesDeCapacitacion
+    partial class AsignarCursosPorPerfilYSector
     {
         /// <summary>
         /// Required designer variable.
@@ -46,6 +46,8 @@
             this.btnAyuda = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtAno = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rbSector = new System.Windows.Forms.RadioButton();
@@ -62,10 +64,10 @@
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Necesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idCalificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Calificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescTema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Realizar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlAyuda = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -112,9 +114,9 @@
             this.LBPerfil.ForeColor = System.Drawing.Color.White;
             this.LBPerfil.Location = new System.Drawing.Point(22, 11);
             this.LBPerfil.Name = "LBPerfil";
-            this.LBPerfil.Size = new System.Drawing.Size(485, 19);
+            this.LBPerfil.Size = new System.Drawing.Size(328, 19);
             this.LBPerfil.TabIndex = 0;
-            this.LBPerfil.Text = "ACTUALIZACIÓN DE COMPETENCIAS Y NECESIDADES DE CAPACITACIÓN";
+            this.LBPerfil.Text = "ASIGNACIÓN DE CURSOS POR PERFIL O SECTOR";
             // 
             // panel2
             // 
@@ -149,7 +151,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(870, 550);
@@ -231,11 +233,13 @@
             this.panel5.Location = new System.Drawing.Point(10, 3);
             this.panel5.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(850, 76);
+            this.panel5.Size = new System.Drawing.Size(850, 78);
             this.panel5.TabIndex = 1;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtAno);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label2);
@@ -244,18 +248,35 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(850, 76);
+            this.groupBox1.Size = new System.Drawing.Size(850, 78);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // txtAno
+            // 
+            this.txtAno.Location = new System.Drawing.Point(663, 34);
+            this.txtAno.Name = "txtAno";
+            this.txtAno.Size = new System.Drawing.Size(76, 20);
+            this.txtAno.TabIndex = 33;
+            this.txtAno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(628, 38);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Año:";
+            // 
             // btnBuscar
             // 
-            this.btnBuscar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnBuscar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
             this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnBuscar.Location = new System.Drawing.Point(619, 13);
+            this.btnBuscar.Location = new System.Drawing.Point(771, 14);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(54, 55);
             this.btnBuscar.TabIndex = 29;
@@ -267,7 +288,7 @@
             this.groupBox2.Controls.Add(this.rbSector);
             this.groupBox2.Controls.Add(this.rbPerfil);
             this.groupBox2.Controls.Add(this.cmbOrganizar);
-            this.groupBox2.Location = new System.Drawing.Point(32, 13);
+            this.groupBox2.Location = new System.Drawing.Point(26, 15);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(577, 53);
             this.groupBox2.TabIndex = 3;
@@ -321,7 +342,7 @@
             // txtDescTema
             // 
             this.txtDescTema.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtDescTema.Location = new System.Drawing.Point(819, 46);
+            this.txtDescTema.Location = new System.Drawing.Point(819, 31);
             this.txtDescTema.Name = "txtDescTema";
             this.txtDescTema.ReadOnly = true;
             this.txtDescTema.Size = new System.Drawing.Size(21, 20);
@@ -330,7 +351,7 @@
             // 
             // txtTema
             // 
-            this.txtTema.Location = new System.Drawing.Point(796, 46);
+            this.txtTema.Location = new System.Drawing.Point(796, 31);
             this.txtTema.Name = "txtTema";
             this.txtTema.Size = new System.Drawing.Size(17, 20);
             this.txtTema.TabIndex = 0;
@@ -353,18 +374,18 @@
             this.Nombre,
             this.Curso,
             this.DescCurso,
-            this.Necesario,
-            this.Deseable,
-            this.idCalificacion,
-            this.Calificacion,
+            this.Tema,
+            this.DescTema,
+            this.Realizar,
+            this.Horas,
             this.Observaciones});
             this.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvGrilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvGrilla.Location = new System.Drawing.Point(10, 85);
+            this.dgvGrilla.Location = new System.Drawing.Point(10, 87);
             this.dgvGrilla.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.dgvGrilla.Name = "dgvGrilla";
             this.dgvGrilla.RowHeadersWidth = 15;
-            this.dgvGrilla.Size = new System.Drawing.Size(850, 393);
+            this.dgvGrilla.Size = new System.Drawing.Size(850, 391);
             this.dgvGrilla.TabIndex = 2;
             // 
             // Clave
@@ -413,7 +434,7 @@
             // 
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.Curso.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Curso.HeaderText = "Curso";
+            this.Curso.HeaderText = "Tema";
             this.Curso.Name = "Curso";
             this.Curso.ReadOnly = true;
             this.Curso.Visible = false;
@@ -422,46 +443,47 @@
             // DescCurso
             // 
             this.DescCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.DescCurso.HeaderText = "Curso";
+            this.DescCurso.HeaderText = "Descripcion";
             this.DescCurso.Name = "DescCurso";
             this.DescCurso.ReadOnly = true;
-            this.DescCurso.Width = 59;
+            this.DescCurso.Width = 88;
             // 
-            // Necesario
+            // Tema
             // 
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Necesario.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Necesario.HeaderText = "Necesario";
-            this.Necesario.Name = "Necesario";
-            this.Necesario.ReadOnly = true;
-            this.Necesario.Width = 70;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Tema.HeaderText = "Curso";
+            this.Tema.Name = "Tema";
+            this.Tema.ReadOnly = true;
+            this.Tema.Width = 70;
             // 
-            // Deseable
+            // DescTema
             // 
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Deseable.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Deseable.HeaderText = "Deseable";
-            this.Deseable.Name = "Deseable";
-            this.Deseable.ReadOnly = true;
-            this.Deseable.Width = 70;
+            this.DescTema.DefaultCellStyle = dataGridViewCellStyle6;
+            this.DescTema.HeaderText = "Descripcion";
+            this.DescTema.Name = "DescTema";
+            this.DescTema.ReadOnly = true;
+            this.DescTema.Width = 70;
             // 
-            // idCalificacion
+            // Realizar
             // 
-            this.idCalificacion.HeaderText = "idCalificacion";
-            this.idCalificacion.Name = "idCalificacion";
-            this.idCalificacion.Visible = false;
+            this.Realizar.HeaderText = "¿Se Realiza?";
+            this.Realizar.Name = "Realizar";
+            this.Realizar.Visible = false;
             // 
-            // Calificacion
+            // Horas
             // 
-            this.Calificacion.HeaderText = "Calificacion";
-            this.Calificacion.Name = "Calificacion";
-            this.Calificacion.ReadOnly = true;
+            this.Horas.HeaderText = "Cant. Horas";
+            this.Horas.Name = "Horas";
+            this.Horas.ReadOnly = true;
             // 
             // Observaciones
             // 
             this.Observaciones.HeaderText = "Observaciones";
             this.Observaciones.MaxInputLength = 30;
             this.Observaciones.Name = "Observaciones";
+            this.Observaciones.Visible = false;
             this.Observaciones.Width = 200;
             // 
             // pnlAyuda
@@ -469,9 +491,9 @@
             this.pnlAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlAyuda.Controls.Add(this.panel6);
             this.pnlAyuda.Controls.Add(this.gbAyuda);
-            this.pnlAyuda.Location = new System.Drawing.Point(731, 394);
+            this.pnlAyuda.Location = new System.Drawing.Point(688, 394);
             this.pnlAyuda.Name = "pnlAyuda";
-            this.pnlAyuda.Size = new System.Drawing.Size(68, 88);
+            this.pnlAyuda.Size = new System.Drawing.Size(111, 88);
             this.pnlAyuda.TabIndex = 9;
             this.pnlAyuda.Visible = false;
             // 
@@ -482,7 +504,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel6.Location = new System.Drawing.Point(0, 46);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(68, 42);
+            this.panel6.Size = new System.Drawing.Size(111, 42);
             this.panel6.TabIndex = 1;
             // 
             // btnCerrarAyuda
@@ -492,7 +514,7 @@
             this.btnCerrarAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCerrarAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrarAyuda.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCerrarAyuda.Location = new System.Drawing.Point(17, 3);
+            this.btnCerrarAyuda.Location = new System.Drawing.Point(38, 3);
             this.btnCerrarAyuda.Name = "btnCerrarAyuda";
             this.btnCerrarAyuda.Size = new System.Drawing.Size(34, 38);
             this.btnCerrarAyuda.TabIndex = 28;
@@ -589,7 +611,7 @@
             this.cmbAuxi.SelectedIndexChanged += new System.EventHandler(this.cmbAuxi_SelectedIndexChanged);
             this.cmbAuxi.DropDownClosed += new System.EventHandler(this.cmbAuxi_DropDownClosed);
             // 
-            // ActualizacionDeCompetenciasYNecesidadesDeCapacitacion
+            // AsignarCursosPorPerfilYSector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -599,7 +621,7 @@
             this.Controls.Add(this.pnlAyuda);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "ActualizacionDeCompetenciasYNecesidadesDeCapacitacion";
+            this.Name = "AsignarCursosPorPerfilYSector";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.IngreDeCursosRealizados_Load);
             this.Shown += new System.EventHandler(this.IngreDeCursosRealizados_Shown);
@@ -660,6 +682,8 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ComboBox cmbAuxi;
+        private System.Windows.Forms.TextBox txtAno;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
         private System.Windows.Forms.DataGridViewTextBoxColumn Perfil;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescPerfil;
@@ -667,10 +691,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescCurso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Necesario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idCalificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescTema;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Realizar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
     }
 }

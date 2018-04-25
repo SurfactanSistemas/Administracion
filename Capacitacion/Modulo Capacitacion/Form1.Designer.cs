@@ -41,6 +41,7 @@
             this.ingresoDePlanificacionAnualDeCapacitacionPorLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ingresoDeCursosRealizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.perfilDelPuestoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -155,7 +156,8 @@
             this.ingresoDePlanificacionAnualDeCapacitacionPorLegajoToolStripMenuItem,
             this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem,
             this.ingresoDeCursosRealizadosToolStripMenuItem,
-            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem});
+            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem,
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem});
             this.novedadesToolStripMenuItem.Name = "novedadesToolStripMenuItem";
             this.novedadesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.novedadesToolStripMenuItem.Text = "Novedades";
@@ -180,6 +182,13 @@
             this.ingresoDeCursosRealizadosToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
             this.ingresoDeCursosRealizadosToolStripMenuItem.Text = "Ingreso de Cursos Realizados";
             this.ingresoDeCursosRealizadosToolStripMenuItem.Click += new System.EventHandler(this.ingresoDeCursosRealizadosToolStripMenuItem_Click);
+            // 
+            // actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem
+            // 
+            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Name = "actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem";
+            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
+            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Text = "Actualizacion de Competencias y Necesidades de Capacitación";
+            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem_Click);
             // 
             // listadosToolStripMenuItem
             // 
@@ -402,12 +411,12 @@
             this.panel2.Size = new System.Drawing.Size(784, 498);
             this.panel2.TabIndex = 4;
             // 
-            // actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem
+            // asignaciónDeCursosPorPerfilOSectorToolStripMenuItem
             // 
-            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Name = "actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem";
-            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
-            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Text = "Actualizacion de Competencias y Necesidades de Capacitación";
-            this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem_Click);
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Name = "asignaciónDeCursosPorPerfilOSectorToolStripMenuItem";
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Text = "Asignación de Cursos por Perfil o Sector";
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -471,6 +480,7 @@
         private System.Windows.Forms.ToolStripMenuItem listadoDeCursosPendientesPorSectorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuNecesidadesCompetenciasPorSector;
         private System.Windows.Forms.ToolStripMenuItem actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asignaciónDeCursosPorPerfilOSectorToolStripMenuItem;
     }
 }
 
