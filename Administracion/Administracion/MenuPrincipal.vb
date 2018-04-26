@@ -1,5 +1,4 @@
-﻿
-Public Class MenuPrincipal
+﻿Public Class MenuPrincipal
     Dim forms As New List(Of Form)
     Dim loginOpen As Boolean = False
 

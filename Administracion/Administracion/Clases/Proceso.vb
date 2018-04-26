@@ -251,14 +251,7 @@ Module Proceso
 
     Public Function formatonumerico(ByVal valor As Double, ByVal formato As String, ByVal formatoII As String)
 
-        Dim txtnumero As String
-
-        txtnumero = Format(valor, formato)
-        If formatoII = "." Then
-            txtnumero = txtnumero.Replace(",", ".")
-        End If
-
-        Return txtnumero
+        Return Proceso.formatonumerico(valor.ToString())
 
     End Function
 

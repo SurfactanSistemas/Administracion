@@ -161,30 +161,20 @@ Public Class CuentaCorrientePantalla
         txtAyuda.Focus()
     End Sub
 
-    Private Sub txtAyuda_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAyuda.KeyPress
-        If e.KeyChar = Convert.ToChar(Keys.Return) Then
-            e.Handled = True
-            lstAyuda.DataSource = DAOProveedor.buscarProveedorPorNombre(txtAyuda.Text)
-        ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
-            e.Handled = True
-            txtAyuda.Text = ""
-        End If
-    End Sub
-
     Private Sub _TraerSaldoCuentaProveedor(ByVal proveedor As Proveedor)
 
         If IsNothing(proveedor.cliente) Then : Exit Sub
         End If
 
         Dim cliente As String = proveedor.cliente.id
-        Dim saldo As String = "0,00"
+        Dim WSaldo As String = "0,00"
 
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
         Dim dr As SqlDataReader
 
         If Trim(cliente) = "" Then
-            lblSaldoCuentaProveedor.Text = saldo
+            lblSaldoCuentaProveedor.Text = WSaldo
             Exit Sub
         End If
 
@@ -218,7 +208,7 @@ Public Class CuentaCorrientePantalla
             With dr
                 If .HasRows Then
                     .Read()
-                    saldo = .Item("SaldoTotal")
+                    WSaldo = .Item("SaldoTotal")
 
                     gbSaldoCtaCliente.Visible = True
                 Else
@@ -239,7 +229,7 @@ Public Class CuentaCorrientePantalla
         End Try
 
         lblClienteAsociado.Text = Trim(cliente)
-        lblSaldoCuentaProveedor.Text = "$ " & formatonumerico(saldo, "########0.#0", ".")
+        lblSaldoCuentaProveedor.Text = "$ " & formatonumerico(WSaldo, "########0.#0", ".")
     End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
@@ -320,12 +310,12 @@ Public Class CuentaCorrientePantalla
         Call _Proceso()
     End Sub
 
-    Private Function _AltaProveedorSelectivo(ByVal CodProveedor As String, ByVal fecha As String) As Boolean
+    Private Function _AltaProveedorSelectivo(ByVal CodProveedor As String, ByVal WFecha As String) As Boolean
         Dim exito As Boolean = False
-        Dim _Fecha As String = Trim(fecha)
-        Dim _FechaOrd As String = String.Join("", _Fecha.Split("/").Reverse())
+        Dim XFecha As String = Trim(WFecha)
+        Dim _FechaOrd As String = String.Join("", XFecha.Split("/").Reverse())
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("INSERT INTO ProveedorSelectivo (Proveedor, Fecha, FechaOrd) Values ('" & CodProveedor & "', '" & _Fecha & "', '" & _FechaOrd & "')")
+        Dim cm As SqlCommand = New SqlCommand("INSERT INTO ProveedorSelectivo (Proveedor, Fecha, FechaOrd) Values ('" & CodProveedor & "', '" & XFecha & "', '" & _FechaOrd & "')")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -352,7 +342,7 @@ Public Class CuentaCorrientePantalla
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Fecha FROM ProveedorSelectivo ORDER BY FechaOrd DESC")
         Dim dr As SqlDataReader
-        Dim _Fecha As String = ""
+        Dim WFecha As String = ""
 
         Try
 
@@ -366,7 +356,7 @@ Public Class CuentaCorrientePantalla
 
                 dr.Read()
 
-                _Fecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                WFecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
 
             End If
 
@@ -382,15 +372,15 @@ Public Class CuentaCorrientePantalla
         End Try
 
 
-        Return _Fecha
+        Return WFecha
 
 
     End Function
 
-    Private Function _EliminarProveedorSelectivo(ByVal codProv As String, ByVal fecha As String) As Boolean
+    Private Function _EliminarProveedorSelectivo(ByVal codProv As String, ByVal WFecha As String) As Boolean
         Dim exito As Boolean = False
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(codProv) & "' AND Fecha = '" & fecha & "'")
+        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(codProv) & "' AND Fecha = '" & WFecha & "'")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -429,14 +419,14 @@ Public Class CuentaCorrientePantalla
 
     End Sub
 
-    Private Sub _GrabarSelectivo(ByVal fecha As String)
+    Private Sub _GrabarSelectivo(ByVal WFecha As String)
 
         If Trim(txtProveedor.Text) <> "" Then
             If CBProveedorSelectivo.Checked Then
 
                 If MsgBox("¿Está seguro de que quiere colocar al proveedor actual al listado de Proveedores Selectivos?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
 
-                    If Not _AltaProveedorSelectivo(txtProveedor.Text, fecha) Then
+                    If Not _AltaProveedorSelectivo(txtProveedor.Text, WFecha) Then
                         CBProveedorSelectivo.Checked = False
                         MsgBox("Hubo un error al querer colocar al proveeedor en la lista de Proveedores Selectivo.", MsgBoxStyle.Critical)
                     End If
@@ -449,7 +439,7 @@ Public Class CuentaCorrientePantalla
 
                 If MsgBox("¿Está seguro de que quiere eliminar al proveedor actual del listado de Proveedores Selectivos?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
 
-                    If Not _EliminarProveedorSelectivo(txtProveedor.Text, fecha) Then
+                    If Not _EliminarProveedorSelectivo(txtProveedor.Text, WFecha) Then
                         CBProveedorSelectivo.Checked = True
                         MsgBox("Hubo un error al querer eliminar al proveeedor de la lista de Proveedores Selectivo.", MsgBoxStyle.Critical)
                     End If
@@ -464,16 +454,18 @@ Public Class CuentaCorrientePantalla
 
     Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
         Dim _NroInterno As String = ""
-        Dim _Numero As String = "" ' Guardamos el numero de factura para buscar el nro interno.
+        Dim WNumero As String = "" ' Guardamos el numero de factura para buscar el nro interno.
 
         If e.RowIndex >= 0 Then
-            _Numero = GRilla.Rows(e.RowIndex).Cells("Numero").Value
+            WNumero = GRilla.Rows(e.RowIndex).Cells("Numero").Value
         Else
             Exit Sub
         End If
 
+        If IsNothing(WNumero) then Exit Sub
+
         Try
-            _NroInterno = _NrosInternos.FindLast(Function(n) n(0) = _Numero)(1)
+            _NroInterno = _NrosInternos.FindLast(Function(n) n(0) = WNumero)(1)
         Catch ex As Exception
             _NroInterno = Nothing
         End Try
@@ -488,7 +480,7 @@ Public Class CuentaCorrientePantalla
             Case "OP", "AN"
                 With Pagos
                     .SoloLectura = True
-                    .txtOrdenPago.Text = Val(GRilla.Rows(e.RowIndex).Cells("Numero").Value)
+                    .txtOrdenPago.Text = WNumero
                     .txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
                     .ShowDialog()
                 End With
