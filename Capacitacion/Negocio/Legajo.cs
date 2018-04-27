@@ -80,7 +80,7 @@ namespace Negocio
         public DataTable ListarLegajosDiscriminado(string WNombrePersonal)
         {
             Conexion repo = new Conexion();
-            string consulta = "SELECT Legajo.Codigo, Legajo.Descripcion, Legajo.FechaVersion as Vigencia, Legajo.Perfil, Perfil.Sector, Grisar = CASE Legajo.FEgreso WHEN '  /  /    ' THEN 'N' WHEN '00/00/0000' THEN 'N' WHEN NULL THEN 'N' ELSE 'S' END FROM Legajo, Tarea as Perfil WHERE Legajo.Perfil = Perfil.Codigo AND Perfil.Renglon = 1 AND Legajo.Renglon = 1 AND Legajo.Descripcion = '" + WNombrePersonal.Trim() + "' ORDER BY Descripcion, Codigo, VigenciaOrd";
+            string consulta = "SELECT Legajo.Codigo, Legajo.Descripcion, Legajo.FechaVersion as Vigencia, Legajo.Perfil, Perfil.Sector, Grisar = CASE Legajo.FEgreso WHEN '  /  /    ' THEN 'N' WHEN '00/00/0000' THEN 'N' WHEN NULL THEN 'N' ELSE 'S' END FROM Legajo, Tarea as Perfil WHERE Legajo.Perfil = Perfil.Codigo AND Perfil.Renglon = 1 AND Legajo.Renglon = 1 AND Legajo.Descripcion = '" + WNombrePersonal.Trim() + "' ORDER BY Legajo.Descripcion, Legajo.Codigo, Legajo.VigenciaOrd";
             DataTable Dt = repo.Listar(consulta);
             return Dt;
         }
