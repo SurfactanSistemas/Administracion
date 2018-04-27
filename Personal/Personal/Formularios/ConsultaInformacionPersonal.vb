@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports Microsoft.VisualBasic.FileIO
+Imports Microsoft.Office.Interop
 
 Public Class ConsultaInformacionPersonal
     
@@ -1863,4 +1864,228 @@ Public Class ConsultaInformacionPersonal
         
       
 
+    Private Sub Button1_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles Button1.Click
+        Dim WInformacion As New DataTable()
+        With WInformacion.Columns
+            .Add("Legajo")
+            .Add("Nombre")
+            .Add("Planta")
+            .Add("Domicilio")
+            .Add("CP")
+            .Add("Telefono")
+            .Add("Localidad")
+            .Add("FechaNac")
+            .Add("FechaNacOrd")
+            .Add("DNI")
+            .Add("Cuil")
+            .Add("Sector")
+            .Add("Categoria")
+            .Add("LugarTrabajo")
+        End With
+
+        Dim WExcel As new Excel.Application
+
+        WExcel.Workbooks.Open("C:\Users\soporte2\Desktop\NOMINA.xlsx")
+
+        Dim WSheet As Excel.Worksheet = WExcel.Workbooks(1).Worksheets(1)
+        Dim WRow As DataRow
+
+        For i= 2 to 129
+
+            WRow = WInformacion.NewRow
+
+            With WRow
+
+                .Item("Legajo") = WSheet.Cells(i, 1).Value
+                .Item("Planta") = WSheet.Cells(i, 3).Value
+                .Item("Nombre") = WSheet.Cells(i, 5).Value
+                .Item("Domicilio") = WSheet.Cells(i, 6).Value
+                .Item("CP") = WSheet.Cells(i, 7).Value
+                .Item("Telefono") = WSheet.Cells(i, 8).Value
+                .Item("Localidad") = WSheet.Cells(i, 9).Value
+                .Item("FechaNac") = WSheet.Cells(i, 10).Value
+                .Item("FechaNacOrd") = Helper.ordenaFecha(WSheet.Cells(i, 10).Value)
+                .Item("DNI") = WSheet.Cells(i, 12).Value
+                .Item("Cuil") = WSheet.Cells(i, 14).Value
+                .Item("Sector") = WSheet.Cells(i, 16).Value
+                .Item("Categoria") = WSheet.Cells(i, 15).Value
+                .Item("LugarTrabajo") = WSheet.Cells(i, 17).Value
+
+            End With
+
+            WInformacion.Rows.Add(WRow)
+
+        Next
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim trans As SqlTransaction = Nothing
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            trans = cn.BeginTransaction
+
+            cm.Connection = cn
+            cm.Transaction = trans
+
+            Dim WLegajo, WNombre, WFechaNac, WFechaNacOrd, WTelefono, WCuil, WDni, WLocalidad, WSector, WCategoria, WLugarTrabajo, WCP, WDomicilio, WPlanta As String
+
+            For Each row As DataRow In WInformacion.Rows
+
+                WLegajo = IIf(IsDBNull(row.Item("Legajo")), "", row.Item("Legajo"))
+                WNombre = IIf(IsDBNull(row.Item("Nombre")), "", row.Item("Nombre"))
+                WFechaNac = IIf(IsDBNull(row.Item("FechaNac")), "", row.Item("FechaNac"))
+                WFechaNacOrd = IIf(IsDBNull(row.Item("FechaNacOrd")), "", row.Item("FechaNacOrd"))
+                WTelefono = IIf(IsDBNull(row.Item("Telefono")), "", row.Item("Telefono"))
+                WCuil = IIf(IsDBNull(row.Item("Cuil")), "", row.Item("Cuil"))
+                WDni = IIf(IsDBNull(row.Item("Dni")), "", row.Item("Dni"))
+                WLocalidad = IIf(IsDBNull(row.Item("Localidad")), "", row.Item("Localidad"))
+                WSector = IIf(IsDBNull(row.Item("Sector")), "", row.Item("Sector"))
+                WCategoria = IIf(IsDBNull(row.Item("Categoria")), "", row.Item("Categoria"))
+                WLugarTrabajo = IIf(IsDBNull(row.Item("LugarTrabajo")), "", row.Item("LugarTrabajo"))
+                WCP = IIf(IsDBNull(row.Item("CP")), "", row.Item("CP"))
+                WDomicilio = IIf(IsDBNull(row.Item("Domicilio")), "", row.Item("Domicilio"))
+                WPlanta = IIf(IsDBNull(row.Item("Planta")), "", row.Item("Planta"))
+
+                If WLegajo.Trim = "" then Continue For
+
+
+                WDni = Helper.leederecha(WDni, 10)
+                WFechaNac = Helper.leederecha(WFechaNac, 10)
+                WFechaNacOrd = Helper.leederecha(WFechaNacOrd, 8)
+                WDomicilio = Helper.leederecha(WDomicilio, 100)
+                WCP = Helper.leederecha(WCP, 8)
+                WLocalidad = Helper.leederecha(WLocalidad, 20)
+                WTelefono = Helper.leederecha(WTelefono.Replace("-", ""), 15)
+                WCuil = Helper.leederecha(WCuil.Replace("-", ""), 15)
+
+                cm.CommandText = "SELECT Dni FROM Personal WHERE Dni = '" & WDni & "'"
+                dr = cm.ExecuteReader
+
+                If dr.HasRows then
+
+                    If Not dr.IsClosed then dr.Close
+
+                    cm.CommandText = "UPDATE Personal SET " _
+                                    & " FechaNac = '" & WFechaNac & "'," _
+                                    & " FechaNacOrd = '" & WFechaNacOrd & "'," _
+                                    & " Calle = '" & WDomicilio & "'," _
+                                    & " Postal = '" & WCP & "'," _
+                                    & " Localidad = '" & WLocalidad & "'," _
+                                    & " Categoria = '" & _DeterminarValorCat(WCategoria) & "'," _
+                                    & " Estado = '" & _DeterminarValorEstado(WCategoria) & "'," _
+                                    & " Ubicacion = '" & WPlanta & "'," _
+                                    & " Telefono = '" & WTelefono & "'" _
+                                    & " WHERE Dni = '" & WDni & "'"
+
+                Else
+                    If Not dr.IsClosed then dr.Close
+
+                    cm.CommandText = "INSERT INTO Personal (Dni, FechaNac, FechaNacOrd, Calle, Postal, Localidad, Categoria, Ubicacion, Telefono) " _
+                                    & " VALUES " _
+                                    & " ('" & WDni & "', '" & WFechaNac & "','" & WFechaNacOrd & "','" & WDomicilio & "','" & WCP & "','" & WLocalidad & "','" & _DeterminarValorCat(WCategoria) & "','" & WPlanta & "','" & WTelefono & "')"
+
+                End If
+
+                If Not dr.IsClosed then dr.Close
+                cm.ExecuteNonQuery
+
+                cm.CommandText = "UPDATE Legajo SET " _
+                                    & " Dni = '" & WDni & "'," _
+                                    & " Cuil = '" & WCuil & "'" _
+                                    & " WHERE Codigo = '" & WLegajo & "'"
+
+                cm.ExecuteNonQuery
+
+                cm.CommandText = "UPDATE Legajo SET " _
+                                    & " Dni = '" & WDni & "'," _
+                                    & " Cuil = '" & WCuil & "'" _
+                                    & " WHERE Descripcion = '" & WNombre & "'"
+
+                cm.ExecuteNonQuery
+            Next
+
+            trans.Commit
+
+            MsgBox("Actualizado")
+
+        Catch ex As Exception
+            If Not IsNothing(trans) then trans.Rollback
+
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        
+        WExcel.Workbooks.Close
+        WExcel = Nothing
+    End Sub
+
+    Private Function _DeterminarValorEstado(wCategoria As String) As String
+        Dim WDesc = ""        
+        
+        Select Case UCase(wCategoria.Trim)
+            Case "B", "A","A1","A2"    
+
+                WDesc = "1"
+
+            Case "ADMINISTRATIVO","ANALISTA", "COMPRAS", "DIRECTOR", "GERENTE", "JEFE", "JUBILADO", "SUBJEFE", "SUPERVISOR", "TECNICO", "VENTAS"
+
+                WDesc = "2"
+
+            Case Else
+                WDesc = "0"
+        End Select
+
+        Return WDesc
+    End Function
+
+    Private Function _DeterminarValorCat(ByVal wCategoria As String) As String
+        Dim WDesc = ""        
+        
+        Select Case UCase(wCategoria.Trim)
+            Case "B"    
+                WDesc = "1"
+            Case "A"
+                WDesc = "2"
+            Case "A1"
+                WDesc = "3"
+            Case "A2"
+                WDesc = "4"
+            Case "ADMINISTRATIVO"
+                WDesc = "1"
+            Case "ANALISTA"
+                WDesc = "2"
+            Case "COMPRAS"
+                WDesc = "3"
+            Case "DIRECTOR"
+                WDesc = "4"
+            Case "GERENTE"
+                WDesc = "5"
+            Case "JEFE"
+                WDesc = "6"
+            Case "JUBILADO"
+                WDesc = "7"
+            Case "SUBJEFE"
+                WDesc = "8"
+            Case "SUPERVISOR"
+                WDesc = "9"
+            Case "TECNICO"
+                WDesc = "10"
+            Case "VENTAS"
+                WDesc = "11"
+            Case Else
+                WDesc = ""
+        End Select
+
+        Return WDesc
+    End Function
 End Class
