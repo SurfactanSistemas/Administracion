@@ -55,18 +55,6 @@
             this.txtDescTema = new System.Windows.Forms.TextBox();
             this.txtTema = new System.Windows.Forms.TextBox();
             this.dgvGrilla = new System.Windows.Forms.DataGridView();
-            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescPerfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Necesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idCalificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Calificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlAyuda = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnCerrarAyuda = new System.Windows.Forms.Button();
@@ -78,6 +66,20 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.cmbAuxi = new System.Windows.Forms.ComboBox();
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescPerfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Necesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCalificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCalificacionAnterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MarcarActualizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -356,8 +358,10 @@
             this.Necesario,
             this.Deseable,
             this.idCalificacion,
+            this.idCalificacionAnterior,
             this.Calificacion,
-            this.Observaciones});
+            this.Observaciones,
+            this.MarcarActualizacion});
             this.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvGrilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvGrilla.Location = new System.Drawing.Point(10, 85);
@@ -366,103 +370,7 @@
             this.dgvGrilla.RowHeadersWidth = 15;
             this.dgvGrilla.Size = new System.Drawing.Size(850, 393);
             this.dgvGrilla.TabIndex = 2;
-            // 
-            // Clave
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Clave.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Clave.HeaderText = "Clave";
-            this.Clave.Name = "Clave";
-            this.Clave.ReadOnly = true;
-            this.Clave.Visible = false;
-            this.Clave.Width = 50;
-            // 
-            // Perfil
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Perfil.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Perfil.HeaderText = "Perfil";
-            this.Perfil.Name = "Perfil";
-            this.Perfil.ReadOnly = true;
-            this.Perfil.Width = 30;
-            // 
-            // DescPerfil
-            // 
-            this.DescPerfil.HeaderText = "Perfil";
-            this.DescPerfil.Name = "DescPerfil";
-            this.DescPerfil.ReadOnly = true;
-            this.DescPerfil.Width = 150;
-            // 
-            // Legajo
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Legajo.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Legajo.HeaderText = "Legajo";
-            this.Legajo.Name = "Legajo";
-            this.Legajo.ReadOnly = true;
-            this.Legajo.Width = 40;
-            // 
-            // Nombre
-            // 
-            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // Curso
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Curso.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Curso.HeaderText = "Curso";
-            this.Curso.Name = "Curso";
-            this.Curso.ReadOnly = true;
-            this.Curso.Visible = false;
-            this.Curso.Width = 30;
-            // 
-            // DescCurso
-            // 
-            this.DescCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.DescCurso.HeaderText = "Curso";
-            this.DescCurso.Name = "DescCurso";
-            this.DescCurso.ReadOnly = true;
-            this.DescCurso.Width = 59;
-            // 
-            // Necesario
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Necesario.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Necesario.HeaderText = "Necesario";
-            this.Necesario.Name = "Necesario";
-            this.Necesario.ReadOnly = true;
-            this.Necesario.Width = 70;
-            // 
-            // Deseable
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Deseable.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Deseable.HeaderText = "Deseable";
-            this.Deseable.Name = "Deseable";
-            this.Deseable.ReadOnly = true;
-            this.Deseable.Width = 70;
-            // 
-            // idCalificacion
-            // 
-            this.idCalificacion.HeaderText = "idCalificacion";
-            this.idCalificacion.Name = "idCalificacion";
-            this.idCalificacion.Visible = false;
-            // 
-            // Calificacion
-            // 
-            this.Calificacion.HeaderText = "Calificacion";
-            this.Calificacion.Name = "Calificacion";
-            this.Calificacion.ReadOnly = true;
-            // 
-            // Observaciones
-            // 
-            this.Observaciones.HeaderText = "Observaciones";
-            this.Observaciones.MaxInputLength = 30;
-            this.Observaciones.Name = "Observaciones";
-            this.Observaciones.Width = 200;
+            this.dgvGrilla.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGrilla_CellMouseClick);
             // 
             // pnlAyuda
             // 
@@ -589,6 +497,115 @@
             this.cmbAuxi.SelectedIndexChanged += new System.EventHandler(this.cmbAuxi_SelectedIndexChanged);
             this.cmbAuxi.DropDownClosed += new System.EventHandler(this.cmbAuxi_DropDownClosed);
             // 
+            // Clave
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Clave.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.ReadOnly = true;
+            this.Clave.Visible = false;
+            this.Clave.Width = 50;
+            // 
+            // Perfil
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Perfil.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Perfil.HeaderText = "Perfil";
+            this.Perfil.Name = "Perfil";
+            this.Perfil.ReadOnly = true;
+            this.Perfil.Width = 30;
+            // 
+            // DescPerfil
+            // 
+            this.DescPerfil.HeaderText = "Perfil";
+            this.DescPerfil.Name = "DescPerfil";
+            this.DescPerfil.ReadOnly = true;
+            this.DescPerfil.Width = 150;
+            // 
+            // Legajo
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Legajo.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Legajo.HeaderText = "Legajo";
+            this.Legajo.Name = "Legajo";
+            this.Legajo.ReadOnly = true;
+            this.Legajo.Width = 40;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Curso
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Curso.HeaderText = "Curso";
+            this.Curso.Name = "Curso";
+            this.Curso.ReadOnly = true;
+            this.Curso.Visible = false;
+            this.Curso.Width = 30;
+            // 
+            // DescCurso
+            // 
+            this.DescCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DescCurso.HeaderText = "Curso";
+            this.DescCurso.Name = "DescCurso";
+            this.DescCurso.ReadOnly = true;
+            this.DescCurso.Width = 59;
+            // 
+            // Necesario
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Necesario.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Necesario.HeaderText = "Necesario";
+            this.Necesario.Name = "Necesario";
+            this.Necesario.ReadOnly = true;
+            this.Necesario.Width = 70;
+            // 
+            // Deseable
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Deseable.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Deseable.HeaderText = "Deseable";
+            this.Deseable.Name = "Deseable";
+            this.Deseable.ReadOnly = true;
+            this.Deseable.Width = 70;
+            // 
+            // idCalificacion
+            // 
+            this.idCalificacion.HeaderText = "idCalificacion";
+            this.idCalificacion.Name = "idCalificacion";
+            this.idCalificacion.Visible = false;
+            // 
+            // idCalificacionAnterior
+            // 
+            this.idCalificacionAnterior.HeaderText = "idCalificacionAnterior";
+            this.idCalificacionAnterior.Name = "idCalificacionAnterior";
+            this.idCalificacionAnterior.Visible = false;
+            // 
+            // Calificacion
+            // 
+            this.Calificacion.HeaderText = "Calificacion";
+            this.Calificacion.Name = "Calificacion";
+            this.Calificacion.ReadOnly = true;
+            // 
+            // Observaciones
+            // 
+            this.Observaciones.HeaderText = "Observaciones";
+            this.Observaciones.MaxInputLength = 30;
+            this.Observaciones.Name = "Observaciones";
+            this.Observaciones.Width = 200;
+            // 
+            // MarcarActualizacion
+            // 
+            this.MarcarActualizacion.HeaderText = "MarcarActualizacion";
+            this.MarcarActualizacion.Name = "MarcarActualizacion";
+            this.MarcarActualizacion.Visible = false;
+            // 
             // ActualizacionDeCompetenciasYNecesidadesDeCapacitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -670,7 +687,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Necesario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCalificacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCalificacionAnterior;
         private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MarcarActualizacion;
     }
 }

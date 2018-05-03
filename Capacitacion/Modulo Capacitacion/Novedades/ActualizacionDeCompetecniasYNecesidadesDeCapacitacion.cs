@@ -9,7 +9,11 @@ namespace Modulo_Capacitacion.Novedades
 {
     public partial class ActualizacionDeCompetenciasYNecesidadesDeCapacitacion : Form
     {
-        
+
+        private Color WAnteriorBackColor;
+        private Color WAnteriorForeColor;
+        private Color WBackColorOriginal;
+
         public ActualizacionDeCompetenciasYNecesidadesDeCapacitacion()
         {
             InitializeComponent();
@@ -63,7 +67,7 @@ namespace Modulo_Capacitacion.Novedades
                 }
 
                 MessageBox.Show("Datos Actualizados correctamente");
-                btnBuscar.PerformClick();
+                //btnBuscar.PerformClick();
 
             }
             catch (Exception err)
@@ -82,6 +86,7 @@ namespace Modulo_Capacitacion.Novedades
             rbPerfil.Checked = true;
             pnlProgreso.Visible = false;
 
+            WBackColorOriginal = dgvGrilla.DefaultCellStyle.BackColor;
             _CargarPerfiles();
         }
 
@@ -378,6 +383,7 @@ namespace Modulo_Capacitacion.Novedades
                                 dgvGrilla.Rows[WRowindex].Cells["Necesario"].Value = dr["Necesario"];
                                 dgvGrilla.Rows[WRowindex].Cells["Deseable"].Value = dr["Deseable"];
                                 dgvGrilla.Rows[WRowindex].Cells["idCalificacion"].Value = dr["Calificacion"];
+                                dgvGrilla.Rows[WRowindex].Cells["idCalificacionAnterior"].Value = dr["Calificacion"];
                                 dgvGrilla.Rows[WRowindex].Cells["Calificacion"].Value = _TraerDescripcionCalificacion(dr["Calificacion"].ToString());
                                 dgvGrilla.Rows[WRowindex].Cells["Observaciones"].Value = dr["Observaciones"].ToString().Trim();
 
@@ -519,6 +525,9 @@ namespace Modulo_Capacitacion.Novedades
 
             var WCellRectangule = WGrilla.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
 
+            WAnteriorBackColor = WGrilla.DefaultCellStyle.SelectionBackColor;
+            WAnteriorForeColor = WGrilla.DefaultCellStyle.SelectionForeColor;
+
             WGrilla.DefaultCellStyle.SelectionBackColor = WGrilla.DefaultCellStyle.BackColor;
             WGrilla.DefaultCellStyle.SelectionForeColor = WGrilla.DefaultCellStyle.ForeColor;
 
@@ -534,12 +543,22 @@ namespace Modulo_Capacitacion.Novedades
         private void cmbAuxi_DropDownClosed(object sender, EventArgs e)
         {
             cmbAuxi.Visible = false;
+            dgvGrilla.DefaultCellStyle.SelectionBackColor = WAnteriorBackColor;
+            dgvGrilla.DefaultCellStyle.SelectionForeColor = WAnteriorForeColor;
             dgvGrilla.Focus();
         }
 
         private void cmbAuxi_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgvGrilla.CurrentCell.Value = cmbAuxi.SelectedItem;
+            dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].DefaultCellStyle.BackColor = WBackColorOriginal;
+            
+            if (dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].Cells["IdCalificacionAnterior"].Value.ToString() !=
+                cmbAuxi.SelectedIndex.ToString())
+            {
+                dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+            }
+
             dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].Cells["IdCalificacion"].Value = cmbAuxi.SelectedIndex;
         }
     }
