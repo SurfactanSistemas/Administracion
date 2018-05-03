@@ -82,6 +82,8 @@
             this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ckIncluirSinMovimientos = new System.Windows.Forms.CheckBox();
+            this.lblTipoListado = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -122,6 +124,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.ckIncluirSinMovimientos);
             this.panel3.Controls.Add(this.pnlClave);
             this.panel3.Controls.Add(this.progressBar1);
             this.panel3.Controls.Add(this.button2);
@@ -136,6 +139,7 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.TB_Desde);
             this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.lblTipoListado);
             this.panel3.Location = new System.Drawing.Point(8, 8);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(851, 511);
@@ -250,7 +254,7 @@
             this.CB_TipoEva.Items.AddRange(new object[] {
             "CALIDAD",
             "ENTREGA"});
-            this.CB_TipoEva.Location = new System.Drawing.Point(644, 23);
+            this.CB_TipoEva.Location = new System.Drawing.Point(689, 18);
             this.CB_TipoEva.Name = "CB_TipoEva";
             this.CB_TipoEva.Size = new System.Drawing.Size(147, 21);
             this.CB_TipoEva.TabIndex = 11;
@@ -260,7 +264,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(528, 27);
+            this.label2.Location = new System.Drawing.Point(750, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 18);
             this.label2.TabIndex = 10;
@@ -541,6 +545,26 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Desde:";
             // 
+            // ckIncluirSinMovimientos
+            // 
+            this.ckIncluirSinMovimientos.AutoSize = true;
+            this.ckIncluirSinMovimientos.Location = new System.Drawing.Point(486, 25);
+            this.ckIncluirSinMovimientos.Name = "ckIncluirSinMovimientos";
+            this.ckIncluirSinMovimientos.Size = new System.Drawing.Size(197, 17);
+            this.ckIncluirSinMovimientos.TabIndex = 82;
+            this.ckIncluirSinMovimientos.Text = "Incluir Proveedores Sin Movimientos";
+            this.ckIncluirSinMovimientos.UseVisualStyleBackColor = true;
+            this.ckIncluirSinMovimientos.CheckedChanged += new System.EventHandler(this.ckIncluirSinMovimientos_CheckedChanged);
+            // 
+            // lblTipoListado
+            // 
+            this.lblTipoListado.Font = new System.Drawing.Font("Calibri", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoListado.Location = new System.Drawing.Point(210, 68);
+            this.lblTipoListado.Name = "lblTipoListado";
+            this.lblTipoListado.Size = new System.Drawing.Size(302, 18);
+            this.lblTipoListado.TabIndex = 83;
+            this.lblTipoListado.Text = "LISTADO DE PROVEEDORES";
+            // 
             // ActSemProv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -610,5 +634,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox ckIncluirSinMovimientos;
+        private System.Windows.Forms.Label lblTipoListado;
     }
 }
