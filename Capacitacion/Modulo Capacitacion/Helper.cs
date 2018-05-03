@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -8,6 +9,9 @@ namespace Modulo_Capacitacion
 {
     class Helper
     {
+
+        public static string[] _Empresas = { "SurfactanSA", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "Pelitall_II", "Pellital_III", "Pellital_V" };
+
         private static int WRenglon;
 
         public static Point _CentrarH(int containerWidth, Control control)
@@ -229,6 +233,108 @@ namespace Modulo_Capacitacion
                 }
 
             }
+        }
+
+        public static string OrdenarFecha(string WFecha)
+        {
+            string WFechaOrd = "0";
+
+            if (WFecha.Trim().Length == 10)
+            {
+                string[] items = WFecha.Split('/');
+
+                Array.Reverse(items);
+
+                WFechaOrd = string.Join("", items);
+            }
+
+            return WFechaOrd;
+        }
+
+        public static string Left(string WTexto, int WLongitud)
+        {
+            if (WTexto.Length <= WLongitud) return WTexto;
+
+            return WTexto.Substring(0, WLongitud);
+        }
+
+        public static string Right(string WTexto, int WLongitud)
+        {
+            if (WTexto.Length <= WLongitud) return WTexto;
+
+            return WTexto.Substring(WTexto.Length - WLongitud, WLongitud);
+        }
+
+        public static string Mid(string WTexto, int WInicio, int WFinal)
+        {
+            //if (WInicio >= WFinal) return WTexto;
+
+            try
+            {
+                return WTexto.Substring(WInicio, WFinal);
+            }
+            catch (Exception)
+            {
+                return WTexto;
+            }
+        }
+
+        public static string Ceros(string WTexto, int WLargo)
+        {
+            return WTexto.PadLeft(WLargo, '0');
+        }
+
+        public static string Ceros(int WTexto, int WLargo)
+        {
+            return Ceros(WTexto.ToString(), WLargo);
+        }
+
+        public static string Ceros(object WTexto, int WLargo)
+        {
+            return Ceros(WTexto.ToString(), WLargo);
+        }
+
+        public static string FormatoNumerico(string WValor, int WCantDigitos = 2, string WSeparadorDecimales = ".")
+        {
+            string WValorArmado = "";
+
+            if (WValor.Trim() == "") WValor = "0";
+
+            // Normalizamos el numero, porque hay casos en que vienen del estilo '.5' o '5.'
+            if (WValor.Trim().EndsWith(".")) WValor += "0";
+            if (WValor.Trim().EndsWith(".")) WValor += "0";
+            if (WValor.Trim().StartsWith(",")) WValor = "0" + WValor;
+            if (WValor.Trim().StartsWith(".")) WValor = "0" + WValor;
+
+            WValor = WValor.Replace('.', ',');
+
+            WValor = Math.Round(double.Parse(WValor), WCantDigitos).ToString();
+
+            if (WValor.IndexOf(',') > -1)
+            {
+                int i = WValor.IndexOf(',');
+
+                WValorArmado = WValor.Substring(0, i);
+
+                WValorArmado += WSeparadorDecimales;
+
+                string WDecimales = WValor.Substring(i + 1, WValor.Length - i - 1);
+
+                return WValorArmado + WDecimales.PadRight(WCantDigitos, '0');
+            }
+
+            return (WValor.Trim() + ".") + "".PadRight(WCantDigitos, '0');
+        }
+
+        public static string FormatoNumerico(double wValor, int WCantDigitos = 2)
+        {
+            return FormatoNumerico(wValor.ToString(), WCantDigitos);
+        }
+
+        public static object FormatoNumerico(object wValor)
+        {
+            if (wValor == null) wValor = "0";
+            return FormatoNumerico(wValor.ToString());
         }
     }
 }

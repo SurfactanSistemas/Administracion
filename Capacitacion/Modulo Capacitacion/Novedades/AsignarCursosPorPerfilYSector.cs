@@ -22,13 +22,93 @@ namespace Modulo_Capacitacion.Novedades
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
         {
             dgvGrilla.Rows.Clear();
-            dgvAyuda.Rows.Clear();
+            dgvAyuda.DataSource = null;
             txtFiltrar.Text = "";
             cmbAuxi.Visible = false;
+            rbPerfil.Checked = true;
             _CargarPerfiles();
         }
 
         private void BT_Guardar_Click(object sender, EventArgs e)
+        {
+
+            if (rbTema.Checked)
+            {
+                _GrabarActualizacionPorTema();
+                return;
+            }
+
+            SqlTransaction trans = null;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+                    trans = conn.BeginTransaction();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.Transaction = trans;
+
+                        string WAnt = "";
+                        int WRenglon = 0;
+
+                        foreach (DataGridViewRow row in dgvGrilla.Rows)
+                        {
+                            var WLegajo = row.Cells["Legajo"].Value ?? "";
+                            var WTipo = row.Cells["Tipo"].Value ?? "";
+                            var WRealizar = row.Cells["Realizar"].Value ?? "";
+                            var WCurso = row.Cells["Curso"].Value ?? "";
+                            var WHoras = row.Cells["Horas"].Value ?? "";
+                            var WTema = row.Cells["Tema"].Value ?? "";
+                            string XClave = "";
+
+                            if (WTipo.ToString() == "") continue;
+
+                            if (WAnt != WLegajo.ToString() && WLegajo.ToString() != "")
+                            {
+                                WRenglon = 0;
+                                WAnt = WLegajo.ToString();
+
+                                cmd.CommandText = "DELETE FROM Cronograma WHERE Legajo = '" + WLegajo + "' AND Ano = '" + txtAno.Text + "'";
+
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            if (WRealizar.ToString() == "X")
+                            {
+                                WRenglon++;
+                                
+                                XClave = Helper.Ceros(WAnt, 6) + Helper.Ceros(txtAno.Text, 4) +
+                                         Helper.Ceros(WRenglon, 2);
+
+                                cmd.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo) "
+                                                + " VALUES ("
+                                                + " '" + XClave + "', '" + WAnt + "', '" + txtAno.Text + "', '" + WRenglon + "', '" + WCurso + "', " + WHoras + ", '0', '" + WTema + "', '', '','', '', '' "
+                                                + " )";
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        trans.Commit();
+                    }
+                }
+
+                MessageBox.Show("Datos Actualizados correctamente");
+                btnBuscar.PerformClick();
+
+            }
+            catch (Exception err)
+            {
+                if (trans != null) trans.Rollback();
+                MessageBox.Show("Ocurrio un problema al querer actualizar los datos. " + Environment.NewLine + " Motivo" + err.Message, "Error");
+            }
+        }
+
+        private void _GrabarActualizacionPorTema()
         {
             SqlTransaction trans = null;
             try
@@ -44,17 +124,78 @@ namespace Modulo_Capacitacion.Novedades
                         cmd.Connection = conn;
                         cmd.Transaction = trans;
 
+                        string WAnt = "";
+                        int WRenglon = 0;
+
                         foreach (DataGridViewRow row in dgvGrilla.Rows)
                         {
-                            var WClave = row.Cells["Clave"].Value;
-                            var WCalificacion = row.Cells["idCalificacion"].Value;
-                            var WObservaciones = row.Cells["Observaciones"].Value;
+                            var WLegajo = row.Cells["Legajo"].Value ?? "";
+                            var WTipo = row.Cells["Tipo"].Value ?? "";
+                            var WRealizar = row.Cells["Realizar"].Value ?? "";
+                            var WCurso = row.Cells["Curso"].Value ?? "";
+                            var WHoras = row.Cells["Horas"].Value ?? "";
+                            var WTema = row.Cells["Tema"].Value ?? "";
+                            string XClave = "";
 
-                            if (WClave == null) continue;
+                            if (WTipo.ToString() == "") continue;
 
-                            cmd.CommandText = "UPDATE Legajo SET EstaCurso = '" + WCalificacion + "', EstadoCurso = '" + WObservaciones + "' WHERE Clave = '" + WClave + "'";
+                            WRenglon = 0;
+
+                            WAnt = WLegajo.ToString();
+
+                            cmd.CommandText = "DELETE FROM Cronograma WHERE Legajo = '" + WLegajo + "' AND Ano = '" + txtAno.Text + "' AND Curso = '" + cmbOrganizar.SelectedValue + "'";
+
                             cmd.ExecuteNonQuery();
 
+                            // Si está marcado para que se realizar, lo vuelvo a grabar.
+                            if (WRealizar.ToString() == "X")
+                            {
+                                WRenglon++;
+
+                                XClave = Helper.Ceros(WAnt, 6) + Helper.Ceros(txtAno.Text, 4) +
+                                         Helper.Ceros(WRenglon, 2);
+
+                                cmd.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo) "
+                                                + " VALUES ("
+                                                + " '" + XClave + "', '" + WAnt + "', '" + txtAno.Text + "', '" + WRenglon + "', '" + WCurso + "', " + WHoras + ", '0', '" + WTema + "', '', '','', '', '' "
+                                                + " )";
+
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // Obtengo y regrabo los cursos correspondientes al Legajo y Año para mantener la correlatividad en la numeracion de Renglones.
+                            WRenglon = 0;
+                            cmd.CommandText = "SELECT Legajo, Ano, Curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo FROM Cronograma WHERE Legajo = '" + WAnt + "' AND Ano = '" + txtAno.Text + "'";
+
+                            DataTable WRegrabar = new DataTable();
+                            using (SqlDataReader dr = cmd.ExecuteReader())
+                            {
+                                if (dr.HasRows)
+                                {
+                                    WRegrabar.Load(dr);
+                                }
+                            }
+
+                            if (WRegrabar.Rows.Count > 0)
+                            {
+                                cmd.CommandText = "DELETE FROM Cronograma WHERE Legajo = '" + WAnt + "' AND Ano = '" + txtAno.Text + "'";
+                                cmd.ExecuteNonQuery();
+
+                                foreach (DataRow WRow in WRegrabar.Rows)
+                                {
+                                    WRenglon++;
+                                    
+                                    XClave = Helper.Ceros(WRow["Legajo"], 6) + Helper.Ceros(txtAno.Text, 4) +
+                                             Helper.Ceros(WRenglon, 2);
+
+                                    cmd.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo) "
+                                                    + " VALUES ("
+                                                    + " '" + XClave + "', '" + WRow["Legajo"] + "', '" + txtAno.Text + "', '" + WRenglon + "', '" + WRow["Curso"] + "', " + Helper.FormatoNumerico(WRow["Horas"]) + ", " + Helper.FormatoNumerico(WRow["Realizado"]) + ", '" + WRow["Tema"] + "', '" + WRow["DesTema"] + "', '" + WRow["Observaciones"] + "','" + WRow["ObservacionesII"] + "', '" + WRow["DesSector"] + "', '" + WRow["DesLegajo"] + "' "
+                                                    + " )";
+
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
                         }
 
                         trans.Commit();
@@ -83,7 +224,37 @@ namespace Modulo_Capacitacion.Novedades
 
             _CargarPerfiles();
 
+            txtAno.Text = _TraerAnoPorDefault();
             txtAno.Focus();
+        }
+
+        private string _TraerAnoPorDefault()
+        {
+            string WAno = "";
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT Max(Ano) as Ano FROM Cronograma";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+                            WAno = dr["Ano"].ToString();
+                        }
+                    }
+                }
+
+            }
+
+            return WAno;
         }
 
         private void _CargarPerfiles()
@@ -146,6 +317,48 @@ namespace Modulo_Capacitacion.Novedades
             {
                 _CargarSectores();
             }
+            else if (rbTema.Checked)
+            {
+                _CargarTemas();
+            }
+        }
+
+        private void _CargarTemas()
+        {
+            DataTable sectores = _TraerTemas();
+
+            cmbOrganizar.DataSource = sectores;
+            cmbOrganizar.ValueMember = "Codigo";
+            cmbOrganizar.DisplayMember = "Descripcion";
+        }
+
+        private DataTable _TraerTemas()
+        {
+            DataTable tabla = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = "SELECT DISTINCT Codigo, UPPER(LTRIM(RTRIM(Descripcion))) Descripcion FROM Curso WHERE Descripcion <> '' ORDER BY Descripcion";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            tabla.Load(dr);
+                        }
+                    }
+                }
+
+            }
+
+            return tabla;
         }
 
         private void _CargarSectores()
@@ -198,25 +411,26 @@ namespace Modulo_Capacitacion.Novedades
 
         private void txtTema_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            _AbrirAyuda();
+            //_AbrirAyuda();
         }
 
-        private void _AbrirAyuda()
+        private void _AbrirAyuda(string WTema)
         {
-            DataTable temas = _TraerTemas();
-            dgvAyuda.DataSource = temas;
+            DataTable cursos = _TraerCursos(WTema);
+            dgvAyuda.DataSource = cursos;
 
             DataGridViewColumn column = dgvAyuda.Columns["Descripcion"];
             if (column != null)
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            pnlAyuda.Size = new Size(725, 375);
             pnlAyuda.Location = Helper._CentrarH(Width, pnlAyuda);
             pnlAyuda.Visible = true;
             txtFiltrar.Text = "";
             txtFiltrar.Focus();
         }
 
-        private DataTable _TraerTemas()
+        private DataTable _TraerCursos(string wTema)
         {
             DataTable tabla = new DataTable();
 
@@ -228,7 +442,7 @@ namespace Modulo_Capacitacion.Novedades
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT Codigo, UPPER(LTRIM(RTRIM(Descripcion))) Descripcion FROM Curso WHERE Descripcion <> '' ORDER BY Descripcion";
+                    cmd.CommandText = "SELECT Tema as Curso, UPPER(LTRIM(RTRIM(Descripcion))) Descripcion FROM Tema WHERE Descripcion <> '' and Curso = '" + wTema + "' ORDER BY Curso";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -298,9 +512,65 @@ namespace Modulo_Capacitacion.Novedades
         {
             if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
 
-            string tema = dgvAyuda.Rows[e.RowIndex].Cells["Codigo"].Value.ToString();
+            string tema = dgvAyuda.Rows[e.RowIndex].Cells["Curso"].Value.ToString();
 
-            txtTema.Text = tema;
+            //txtTema.Text = tema;
+
+            int wRowIndex = dgvGrilla.CurrentCell.RowIndex;
+
+            if (wRowIndex < 0) return;
+
+            if (!rbTema.Checked)
+            {
+                dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value = tema;
+
+                string WCurso = dgvGrilla.Rows[wRowIndex].Cells["Curso"].Value.ToString();
+                DataTable WInfoCurso = _TraerDescripcionCurso(WCurso, tema);
+
+                dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = "";
+                dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = "0";
+
+                if (WInfoCurso.Rows.Count > 0)
+                {
+                    dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = WInfoCurso.Rows[0]["Descripcion"];
+                    dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = WInfoCurso.Rows[0]["Horas"];
+                }
+
+                dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value =
+                    Helper.FormatoNumerico(dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value);
+
+                dgvGrilla.Rows[wRowIndex].Cells["Realizar"].Value = "X";
+            }
+            else
+            {
+
+                foreach (DataGridViewCell cells in dgvGrilla.SelectedCells)
+                {
+                    wRowIndex = cells.RowIndex;
+                    var WTipo = dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value ?? "";
+
+                    if (WTipo.ToString() == "") continue;
+
+                    dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value = tema;
+
+                    string WCurso = dgvGrilla.Rows[wRowIndex].Cells["Curso"].Value.ToString();
+                    DataTable WInfoCurso = _TraerDescripcionCurso(WCurso, tema);
+
+                    dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = "";
+                    dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = "0";
+
+                    if (WInfoCurso.Rows.Count > 0)
+                    {
+                        dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = WInfoCurso.Rows[0]["Descripcion"];
+                        dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = WInfoCurso.Rows[0]["Horas"];
+                    }
+
+                    dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value =
+                        Helper.FormatoNumerico(dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value);
+
+                    dgvGrilla.Rows[wRowIndex].Cells["Realizar"].Value = "X";
+                }
+            }
 
             btnCerrarAyuda.PerformClick();
 
@@ -308,9 +578,37 @@ namespace Modulo_Capacitacion.Novedades
 
         }
 
+        private DataTable _TraerDescripcionCurso(string wCurso, string tema)
+        {
+            DataTable tabla = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT UPPER(LTRIM(RTRIM(Descripcion))) as Descripcion, Horas FROM Tema WHERE Curso = '" + wCurso + "' AND Tema = '" + tema + "'";
+                     
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            tabla.Load(dr);
+                        }
+                    }
+                }
+
+            }
+
+            return tabla;
+        }
+
         private void btnAyuda_Click(object sender, EventArgs e)
         {
-            _AbrirAyuda();
+            //_AbrirAyuda();
         }
 
         private void txtFiltrar_KeyPress(object sender, KeyPressEventArgs e)
@@ -335,75 +633,75 @@ namespace Modulo_Capacitacion.Novedades
             dgvGrilla.Rows.Clear();
             pnlProgreso.Visible = false;
 
-            using (SqlConnection conn = new SqlConnection())
+            if (txtAno.Text.Trim() == "") return;
+
+            DataTable tabla = new DataTable();
+
+            if (rbPerfil.Checked)
+                tabla = _TraerDatosPorPerfiles();
+
+            if (rbSector.Checked)
+                tabla = _TraerDatosPorSector();
+
+            if (rbTema.Checked)
+                tabla = _TraerDatosPorTema();
+
+            string WAnt = "";
+
+            if (tabla.Rows.Count == 0) return;
+
+            foreach (DataRow dr in tabla.Select("", "Legajo ASC, Curso ASC"))
             {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
-                conn.Open();
+                WRowindex = dgvGrilla.Rows.Add();
 
-                using (SqlCommand cmd = new SqlCommand())
+                if (dr["Legajo"].ToString() != WAnt)
                 {
-                    cmd.Connection = conn;
-                    
-                    if (rbPerfil.Checked)
-                        cmd.CommandText = "SELECT Legajo.Clave, Legajo.Perfil, Tarea.Descripcion as DescPerfil, Legajo.Renglon, Legajo.Codigo as Legajo, Legajo.Descripcion as Nombre, Legajo.Curso, ISNULL(Curso.Descripcion, '') as DescCurso, ISNULL(Legajo.NecesariaCurso, '') as Necesario, ISNULL(Legajo.DeseableCurso, '') as Deseable, ISNULL(Legajo.Estacurso, '') as Calificacion, ISNULL(Legajo.EstadoCurso, '') as Observaciones FROM Legajo FULL OUTER JOIN Curso ON Legajo.Curso = Curso.Codigo FULL OUTER JOIN Tarea ON Legajo.Perfil = Tarea.Codigo WHERE Tarea.Renglon = 1 AND Legajo.Perfil = '" + cmbOrganizar.SelectedValue + "' AND Legajo.Clave IS NOT NULL AND Legajo.FEgreso IN ('  /  /    ', '00/00/0000') ORDER BY Legajo.Codigo, Legajo.Renglon";
+                    if (WRowindex != 0) WRowindex = dgvGrilla.Rows.Add();
 
-                    if (rbSector.Checked)
-                        cmd.CommandText = "SELECT Legajo.Clave, Legajo.Perfil, Tarea.Descripcion as DescPerfil, Legajo.Renglon, Legajo.Codigo as Legajo, Legajo.Descripcion as Nombre, Legajo.Curso, ISNULL(Curso.Descripcion, '') as DescCurso, ISNULL(Legajo.NecesariaCurso, '') as Necesario, ISNULL(Legajo.DeseableCurso, '') as Deseable, ISNULL(Legajo.Estacurso, '') as Calificacion, ISNULL(Legajo.EstadoCurso, '') as Observaciones FROM Legajo FULL OUTER JOIN Curso ON Legajo.Curso = Curso.Codigo FULL OUTER JOIN Tarea ON Legajo.Perfil = Tarea.Codigo WHERE Tarea.Renglon = 1 AND Legajo.Clave IS NOT NULL AND Legajo.FEgreso IN ('  /  /    ', '00/00/0000') AND Legajo.Sector = '" + cmbOrganizar.SelectedValue + "' ORDER BY Legajo.Perfil, Legajo.Codigo, Legajo.Renglon";
-                    
-                    //pnlProgreso.Location = Helper._CentrarH(Width, pnlProgreso);
-                    //pnlProgreso.Visible = true;
-                    //progressBar1.Maximum = 100;
-                    //progressBar1.Value = 0;
+                    WAnt = dr["Legajo"].ToString();
 
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.HasRows)
-                        {
-                            while (dr.Read())
-                            {
-                                WRowindex = dgvGrilla.Rows.Add();
-
-                                if (dr["Renglon"].ToString() == "1")
-                                {
-                                    if (WRowindex != 0) WRowindex = dgvGrilla.Rows.Add();
-
-                                    dgvGrilla.Rows[WRowindex].Cells["Perfil"].Value = dr["Perfil"];
-                                    dgvGrilla.Rows[WRowindex].Cells["DescPerfil"].Value = dr["DescPerfil"];
-                                    dgvGrilla.Rows[WRowindex].Cells["Legajo"].Value = dr["Legajo"];
-                                    dgvGrilla.Rows[WRowindex].Cells["Nombre"].Value = dr["Nombre"];
-                                }
-
-                                //dgvGrilla.Rows[WRowindex].Cells["Clave"].Value = dr["Clave"];
-                                //dgvGrilla.Rows[WRowindex].Cells["Curso"].Value = dr["Curso"];
-                                //dgvGrilla.Rows[WRowindex].Cells["DescCurso"].Value = dr["DescCurso"].ToString().Trim().PadRight(5, ' ');
-                                //dgvGrilla.Rows[WRowindex].Cells["Necesario"].Value = dr["Necesario"];
-                                //dgvGrilla.Rows[WRowindex].Cells["Deseable"].Value = dr["Deseable"];
-                                //dgvGrilla.Rows[WRowindex].Cells["idCalificacion"].Value = dr["Calificacion"];
-                                //dgvGrilla.Rows[WRowindex].Cells["Calificacion"].Value = _TraerDescripcionCalificacion(dr["Calificacion"].ToString());
-                                //dgvGrilla.Rows[WRowindex].Cells["Observaciones"].Value = dr["Observaciones"].ToString().Trim();
-
-                                if (progressBar1.Value < progressBar1.Maximum) progressBar1.Increment(1);
-                            }
-                        }
-                    }
-                    pnlProgreso.Visible = false;
+                    dgvGrilla.Rows[WRowindex].Cells["Perfil"].Value = dr["Perfil"];
+                    dgvGrilla.Rows[WRowindex].Cells["DescPerfil"].Value = dr["DescPerfil"];
+                    dgvGrilla.Rows[WRowindex].Cells["Legajo"].Value = dr["Legajo"];
+                    dgvGrilla.Rows[WRowindex].Cells["Nombre"].Value = dr["Nombre"];
                 }
 
+                dgvGrilla.Rows[WRowindex].Cells["Clave"].Value = dr["Clave"];
+                dgvGrilla.Rows[WRowindex].Cells["Tipo"].Value = dr["Tipo"];
+                dgvGrilla.Rows[WRowindex].Cells["Curso"].Value = dr["Curso"];
+                dgvGrilla.Rows[WRowindex].Cells["DescCurso"].Value = dr["DescCurso"].ToString().Trim().PadRight(5, ' ');
+                dgvGrilla.Rows[WRowindex].Cells["Horas"].Value = Helper.FormatoNumerico(dr["Horas"]);
+                dgvGrilla.Rows[WRowindex].Cells["Realizado"].Value = Helper.FormatoNumerico(dr["Realizado"]);
+                dgvGrilla.Rows[WRowindex].Cells["Tema"].Value = dr["Tema"];
+                dgvGrilla.Rows[WRowindex].Cells["DescTema"].Value = dr["DescTema"];
+                dgvGrilla.Rows[WRowindex].Cells["Realizar"].Value = dr["Realizar"];
             }
 
             var WColNombre = dgvGrilla.Columns["Nombre"];
             var WColCurso = dgvGrilla.Columns["DescCurso"];
             var WColPerfil = dgvGrilla.Columns["DescPerfil"];
+            var WColDescTema = dgvGrilla.Columns["DescTema"];
+            var WColTipo = dgvGrilla.Columns["Tipo"];
+            var WColTema = dgvGrilla.Columns["Curso"];
+
+            if (WColTipo != null) WColTipo.Visible = false;
 
             if (rbPerfil.Checked)
             {
-                if (WColCurso != null) WColCurso.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                if (WColCurso != null) WColCurso.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 if (WColNombre != null) WColNombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
+                if (WColDescTema != null) WColDescTema.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 foreach (string Columna in new []{"Perfil", "DescPerfil"})
                 {
                     DataGridViewColumn c = dgvGrilla.Columns[Columna];
                     if (c != null) c.Visible = false;
+                }
+
+                foreach (string Columna in new[] { "Curso", "DescCurso" })
+                {
+                    DataGridViewColumn c = dgvGrilla.Columns[Columna];
+                    if (c != null) c.Visible = true;
                 }
             }
 
@@ -412,6 +710,22 @@ namespace Modulo_Capacitacion.Novedades
                 if (WColCurso != null) WColCurso.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 if (WColNombre != null) WColNombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 if (WColPerfil != null) WColPerfil.Width = 175;
+                if (WColDescTema != null) WColDescTema.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+                foreach (string Columna in new[] { "Perfil", "DescPerfil", "Curso", "DescCurso" })
+                {
+                    DataGridViewColumn c = dgvGrilla.Columns[Columna];
+                    if (c != null) c.Visible = true;
+                }
+            }
+
+            if (rbTema.Checked)
+            {
+                if (WColCurso != null) WColCurso.Visible = false;
+                if (WColNombre != null) WColNombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                if (WColPerfil != null) WColPerfil.Width = 175;
+                if (WColDescTema != null) WColDescTema.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                if (WColTema != null) WColTema.Visible = false;
 
                 foreach (string Columna in new[] { "Perfil", "DescPerfil" })
                 {
@@ -421,115 +735,228 @@ namespace Modulo_Capacitacion.Novedades
             }
         }
 
-        private string _TraerDescripcionCalificacion(string WIDCalificacion)
+        private DataTable _TraerDatosPorTema()
         {
-            if (WIDCalificacion.Trim() == "") WIDCalificacion = "0";
-            switch (int.Parse(WIDCalificacion))
+            DataTable tabla = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
             {
-                case 1:
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
                 {
-                    return "Exede";
-                }
-                case 2:
-                {
-                    return "Cumple";
-                }
-                case 3:
-                {
-                    return "Reforzar";
-                }
-                case 4:
-                {
-                    return "En Entrenamiento";
-                }
-                case 5:
-                {
-                    return "No Cumple";
-                }
-                case 6:
-                {
-                    return "No Aplica";
-                }
-                case 7:
-                {
-                    return "No Evalúa";
-                }
-                case 8:
-                {
-                    return "Cumple Act.";
-                }
-                default:
-                {
-                    return "";
+                    cmd.Connection = conn;
+                    cmd.CommandText =
+                        "SELECT Clave = '', Tipo = '1', l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.EstaCurso IN (3,4,5,7,8) AND p.Curso = '" +
+                        cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows) tabla.Load(dr);
+                    }
+
+                    DataTable WProgramados = tabla.Copy();
+
+                    WProgramados.Rows.Clear();
+                    WProgramados.Columns.Clear();
+
+                    cmd.CommandText =
+                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema WHERE cr.Ano = '" +
+                        txtAno.Text + "' AND p.Renglon = 1 and cr.Curso = '" + cmbOrganizar.SelectedValue +
+                        "' and l.Renglon =1 ORDER BY cr.Legajo, Cr.Renglon";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows) WProgramados.Load(dr);
+                    }
+
+                    foreach (DataColumn col in tabla.Columns)
+                        col.ReadOnly = false;
+
+                    foreach (DataColumn col in WProgramados.Columns)
+                        col.ReadOnly = false;
+
+                    if (tabla.Rows.Count > 0)
+                    {
+                        if (WProgramados.Rows.Count > 0)
+                        {
+                            foreach (DataRow row in tabla.Rows)
+                            {
+                                DataRow[] wRow =
+                                    WProgramados.Select("Legajo = '" + row["Legajo"] + "' AND Curso = '" + row["Curso"] + "'");
+
+                                if (wRow.Length > 0)
+                                {
+                                    row["Realizar"] = "X";
+                                }
+                            }
+                        }
+
+                        foreach (DataRow r in tabla.Select("Realizar = 'X'"))
+                        {
+                            tabla.Rows.Remove(r);
+                        }
+                    }
+
+                    foreach (DataRow row in WProgramados.Rows)
+                    {
+                        tabla.ImportRow(row);
+                    }
                 }
             }
+
+            return tabla;
         }
 
-        private string _TraerCalificacionPorDescripcion(string WCalificacion)
+        private DataTable _TraerDatosPorPerfiles()
         {
-            switch (WCalificacion)
+            DataTable tabla = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
             {
-                case "Exede":
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText =
+                        "SELECT Clave = '', Tipo = '1', l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.EstaCurso IN (3,4,5,7,8) AND l.Perfil = '" +
+                        cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        return "1";
+                        if (dr.HasRows) tabla.Load(dr);
                     }
-                case "Cumple":
+
+                    DataTable WProgramados = tabla.Copy();
+
+                    WProgramados.Rows.Clear();
+                    WProgramados.Columns.Clear();
+
+                    cmd.CommandText =
+                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema WHERE cr.Ano = '" +
+                        txtAno.Text + "' AND p.Renglon = 1 and l.Perfil = '" + cmbOrganizar.SelectedValue +
+                        "' and l.Renglon =1 ORDER BY cr.Legajo, Cr.Renglon";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        return "2";
+                        if (dr.HasRows) WProgramados.Load(dr);
                     }
-                case "Reforzar":
+
+                    foreach (DataColumn col in tabla.Columns)
+                        col.ReadOnly = false;
+
+                    foreach (DataColumn col in WProgramados.Columns)
+                        col.ReadOnly = false;
+
+                    if (tabla.Rows.Count > 0)
                     {
-                        return "3";
+                        if (WProgramados.Rows.Count > 0)
+                        {
+                            foreach (DataRow row in tabla.Rows)
+                            {
+                                DataRow[] wRow =
+                                    WProgramados.Select("Legajo = '" + row["Legajo"] + "' AND Curso = '" + row["Curso"] + "'");
+
+                                if (wRow.Length > 0)
+                                {
+                                    row["Realizar"] = "X";
+                                }
+                            }
+                        }
+
+                        foreach (DataRow r in tabla.Select("Realizar = 'X'"))
+                        {
+                            tabla.Rows.Remove(r);
+                        }
                     }
-                case "En Entrenamiento":
+
+                    foreach (DataRow row in WProgramados.Rows)
                     {
-                        return "4";
+                        tabla.ImportRow(row);
                     }
-                case "No Cumple":
-                    {
-                        return "5";
-                    }
-                case "No Aplica":
-                    {
-                        return "6";
-                    }
-                case "No Evalúa":
-                    {
-                        return "7";
-                    }
-                case "Cumple Act.":
-                    {
-                        return "8";
-                    }
-                default:
-                    {
-                        return "0";
-                    }
+
+                    tabla.DefaultView.Sort = "Legajo ASC";
+                }
             }
+
+            return tabla;
         }
 
-        private void dgvGrilla_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private DataTable _TraerDatosPorSector()
         {
-            var WGrilla = dgvGrilla;
+            DataTable tabla = new DataTable();
 
-            DataGridViewColumn column = WGrilla.Columns["Calificacion"];
-            if (column != null && column.Index != e.ColumnIndex) return;
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
 
-            var WClave = WGrilla.Rows[e.RowIndex].Cells["Clave"].Value;
-            if (WClave == null || WClave.ToString() == "") return;
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText =
+                        "SELECT Clave = '', Tipo = '1', l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.EstaCurso IN (3,4,5,7,8) AND l.Sector = '" +
+                        cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
 
-            var WCellRectangule = WGrilla.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows) tabla.Load(dr);
+                    }
 
-            WGrilla.DefaultCellStyle.SelectionBackColor = WGrilla.DefaultCellStyle.BackColor;
-            WGrilla.DefaultCellStyle.SelectionForeColor = WGrilla.DefaultCellStyle.ForeColor;
+                    DataTable WProgramados = tabla.Copy();
 
-            cmbAuxi.Location = new Point(WCellRectangule.Location.X + WGrilla.Margin.Left, WCellRectangule.Location.Y + WGrilla.Location.Y + WCellRectangule.Height * 2 - WGrilla.Margin.Top * 2);
-            cmbAuxi.Width = WCellRectangule.Width;
-            cmbAuxi.Height = WCellRectangule.Height + WGrilla.Margin.Top + WGrilla.ColumnHeadersHeight;
+                    WProgramados.Rows.Clear();
+                    WProgramados.Columns.Clear();
 
-            cmbAuxi.Visible = true;
-            cmbAuxi.SelectedIndex = int.Parse(_TraerCalificacionPorDescripcion(WGrilla.CurrentCell.Value.ToString()));
-            cmbAuxi.DroppedDown = true;
+                    cmd.CommandText =
+                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema WHERE cr.Ano = '" +
+                        txtAno.Text + "' AND p.Renglon = 1 and l.Sector = '" + cmbOrganizar.SelectedValue +
+                        "' and l.Renglon =1 ORDER BY cr.Legajo, Cr.Renglon";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows) WProgramados.Load(dr);
+                    }
+
+                    foreach (DataColumn col in tabla.Columns)
+                        col.ReadOnly = false;
+
+                    foreach (DataColumn col in WProgramados.Columns)
+                        col.ReadOnly = false;
+
+                    if (tabla.Rows.Count > 0)
+                    {
+                        if (WProgramados.Rows.Count > 0)
+                        {
+                            foreach (DataRow row in tabla.Rows)
+                            {
+                                DataRow[] wRow =
+                                    WProgramados.Select("Legajo = '" + row["Legajo"] + "' AND Curso = '" + row["Curso"] + "'");
+
+                                if (wRow.Length > 0)
+                                {
+                                    row["Realizar"] = "X";
+                                }
+                            }
+                        }
+
+                        foreach (DataRow r in tabla.Select("Realizar = 'X'"))
+                        {
+                            tabla.Rows.Remove(r);
+                        }
+                    }
+
+                    foreach (DataRow row in WProgramados.Rows)
+                    {
+                        tabla.ImportRow(row);
+                    }
+                }
+            }
+
+            return tabla;
         }
 
         private void cmbAuxi_DropDownClosed(object sender, EventArgs e)
@@ -542,6 +969,149 @@ namespace Modulo_Capacitacion.Novedades
         {
             dgvGrilla.CurrentCell.Value = cmbAuxi.SelectedItem;
             dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].Cells["IdCalificacion"].Value = cmbAuxi.SelectedIndex;
+        }
+
+        private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Evitamos que se copien las cabeceras.
+            dgvGrilla.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+
+            // Copiamos el contenido de las celdas seleccionadas en el ClipBoard.
+            _CopiarSeleccion();
+        }
+
+        private void _CopiarSeleccion()
+        {
+            if (dgvGrilla.GetCellCount(DataGridViewElementStates.Selected) > 0)
+            {
+                // Evitamos que los 'Rows Headers' ocupen espacio.
+                dgvGrilla.RowHeadersVisible = false;
+
+                object data = dgvGrilla.GetClipboardContent();
+                if (data != null)
+                    Clipboard.SetDataObject(data);
+
+                // Volvemos a mostrar los 'Rows Headers'
+                dgvGrilla.RowHeadersVisible = true;
+            }
+        }
+
+        private void copiarConCabecerasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Activamos que se copien las cabeceras.
+            dgvGrilla.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+
+            // Copiamos el contenido de las celdas seleccionadas en el ClipBoard.
+            _CopiarSeleccion();
+
+        }
+
+        private void dgvGrilla_CellMouseClick_1(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            DataGridView WGrilla = dgvGrilla;
+
+            DataGridViewColumn column = WGrilla.Columns["Realizar"];
+            if (column != null && column.Index == e.ColumnIndex)
+            {
+                var WValor = WGrilla.Rows[e.RowIndex].Cells["Realizar"].Value ?? "";
+                var WTipo = WGrilla.Rows[e.RowIndex].Cells["Tipo"].Value ?? "";
+
+                if (WTipo.ToString() != "")
+                    WGrilla.Rows[e.RowIndex].Cells["Realizar"].Value = WValor.ToString() == "" ? "X" : "";
+            }
+        }
+
+        private void marcarParaRealizarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvGrilla.SelectedCells.Count > 0)
+            {
+                foreach (DataGridViewTextBoxCell celda in dgvGrilla.SelectedCells)
+                {
+                    var WTipo = dgvGrilla.Rows[celda.RowIndex].Cells["Tipo"].Value ?? "";
+
+                    if (WTipo.ToString() != "")
+                        dgvGrilla.Rows[celda.RowIndex].Cells["Realizar"].Value = "X";
+                }
+            }
+        }
+
+        private void desmarcarParaRealizarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvGrilla.SelectedCells.Count > 0)
+            {
+                foreach (DataGridViewTextBoxCell celda in dgvGrilla.SelectedCells)
+                {
+                    var WTipo = dgvGrilla.Rows[celda.RowIndex].Cells["Tipo"].Value ?? "";
+
+                    if (WTipo.ToString() != "")
+                        dgvGrilla.Rows[celda.RowIndex].Cells["Realizar"].Value = "";
+                }
+            }
+        }
+
+        private void dgvGrilla_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (dgvGrilla.SelectedCells.Count > 1) return;
+
+                DataGridView.HitTestInfo WHit = dgvGrilla.HitTest(e.X, e.Y);
+
+                if (WHit.Type == DataGridViewHitTestType.Cell)
+                {
+                    dgvGrilla.CurrentCell = dgvGrilla.Rows[WHit.RowIndex].Cells[WHit.ColumnIndex];
+                }
+            }
+        }
+
+        private void asignarModificarCursoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvGrilla.Rows.Count == 0) return;
+            if (dgvGrilla.SelectedCells.Count == 0) return;
+
+            int wRowIndex = dgvGrilla.CurrentCell.RowIndex;
+
+            var WTema = dgvGrilla.Rows[wRowIndex].Cells["Curso"].Value ?? "";
+
+            if (!rbTema.Checked)
+            {
+                WTema = cmbOrganizar.SelectedValue.ToString();
+            }
+
+            if (WTema.ToString() == "") return;
+
+            _AbrirAyuda(WTema.ToString());
+
+        }
+
+        private void quitarCursoAsignadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvGrilla.SelectedCells.Count == 0) return;
+
+            int wRowIndex = dgvGrilla.CurrentCell.RowIndex;
+
+            dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value = "0";
+            dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = "";
+            dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = "0";
+        }
+
+        private void cmbOrganizar_DropDownClosed(object sender, EventArgs e)
+        {
+            txtAno.Focus();
+        }
+
+        private void dgvGrilla_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex < 0) return;
+
+            dgvGrilla.ClearSelection();
+
+            for (int i = 0; i < dgvGrilla.Rows.Count; i++)
+            {
+                dgvGrilla.Rows[i].Cells[e.ColumnIndex].Selected = true;
+            }
         }
     }
 }

@@ -42,6 +42,7 @@
             this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ingresoDeCursosRealizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.perfilDelPuestoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +69,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -173,7 +173,7 @@
             // 
             this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem.Name = "ingresoDeCornogramaDeCapacitaciónToolStripMenuItem";
             this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
-            this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem.Text = "Ingreso de Cornograma de Capacitación";
+            this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem.Text = "Ingreso de Cronograma de Capacitación";
             this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem_Click);
             // 
             // ingresoDeCursosRealizadosToolStripMenuItem
@@ -189,6 +189,13 @@
             this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
             this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Text = "Actualizacion de Competencias y Necesidades de Capacitación";
             this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem_Click);
+            // 
+            // asignaciónDeCursosPorPerfilOSectorToolStripMenuItem
+            // 
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Name = "asignaciónDeCursosPorPerfilOSectorToolStripMenuItem";
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Text = "Asignación de Cursos por Perfil o Sector";
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem_Click);
             // 
             // listadosToolStripMenuItem
             // 
@@ -410,13 +417,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(784, 498);
             this.panel2.TabIndex = 4;
-            // 
-            // asignaciónDeCursosPorPerfilOSectorToolStripMenuItem
-            // 
-            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Name = "asignaciónDeCursosPorPerfilOSectorToolStripMenuItem";
-            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
-            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Text = "Asignación de Cursos por Perfil o Sector";
-            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem_Click);
             // 
             // Form1
             // 
