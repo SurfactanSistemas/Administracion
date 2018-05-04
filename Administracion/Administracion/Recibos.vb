@@ -525,7 +525,7 @@ Public Class Recibos
             '_NormalizarFecha(_fecha)
             'txtFecha.Text = _fecha
             _DeterminarParidad()
-            mostrarCliente(recibo.cliente.id)
+            If Not IsNothing(recibo.cliente) then mostrarCliente(recibo.cliente.id)
             txtRetGanancias.Text = _NormalizarNumero(recibo.retGanancias)
             txtRetIB.Text = _NormalizarNumero(recibo.retIB)
             txtRetIva.Text = _NormalizarNumero(recibo.retIVA)

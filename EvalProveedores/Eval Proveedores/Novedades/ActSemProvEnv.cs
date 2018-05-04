@@ -76,12 +76,12 @@ namespace Eval_Proveedores.Novedades
         {
             try
             {
-                string Desde = TB_Desde.Text.Substring(6, 4) + TB_Desde.Text.Substring(3, 2) + TB_Desde.Text.Substring(0, 2);
-                string Hasta = TB_Hasta.Text.Substring(6, 4) + TB_Hasta.Text.Substring(3, 2) + TB_Hasta.Text.Substring(0, 2);
+                string Desde = Helper.OrdenarFecha(TB_Desde.Text); //TB_Desde.Text.Substring(6, 4) + TB_Desde.Text.Substring(3, 2) + TB_Desde.Text.Substring(0, 2);
+                string Hasta = Helper.OrdenarFecha(TB_Hasta.Text); //TB_Hasta.Text.Substring(6, 4) + TB_Hasta.Text.Substring(3, 2) + TB_Hasta.Text.Substring(0, 2);
 
 
-                if (Desde == "") return;
-                if (Hasta == "") return;
+                if (Desde == "0") return;
+                if (Hasta == "0") return;
 
                 dtEvaluacion.Clear();
                 dtInformeMuestra.Clear();
@@ -92,9 +92,12 @@ namespace Eval_Proveedores.Novedades
 
                 DataRow[] WProveedoresFinales = WProveedores.Select("Pasa = 'S'");
 
+                lblTipoListado.Text = "(Sólo Proveedores con Movimientos)";
+
                 if (ckIncluirSinMovimientos.Checked)
                 {
                     WProveedoresFinales = WProveedores.Select();
+                    lblTipoListado.Text = "(Proveedores con y sin Movimientos)";
                 }
 
                 int WRenglon = 0;

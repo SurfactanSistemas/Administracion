@@ -26,12 +26,12 @@ namespace Eval_Proveedores.Novedades
         {
             try
             {
-                string Desde = TB_Desde.Text.Substring(6, 4) + TB_Desde.Text.Substring(3, 2) + TB_Desde.Text.Substring(0, 2);
-                string Hasta = TB_Hasta.Text.Substring(6, 4) + TB_Hasta.Text.Substring(3, 2) + TB_Hasta.Text.Substring(0, 2);
+                string Desde = Helper.OrdenarFecha(TB_Desde.Text); //TB_Desde.Text.Substring(6, 4) + TB_Desde.Text.Substring(3, 2) + TB_Desde.Text.Substring(0, 2);
+                string Hasta = Helper.OrdenarFecha(TB_Hasta.Text); //TB_Hasta.Text.Substring(6, 4) + TB_Hasta.Text.Substring(3, 2) + TB_Hasta.Text.Substring(0, 2);
 
 
-                if (Desde == "") throw new Exception("Se debe ingresar la fecha Desde donde desea listar");
-                if (Hasta == "") throw new Exception("Se debe ingresar la fecha Hasta donde desea listar");
+                if (Desde == "0") return; //throw new Exception("Se debe ingresar la fecha Desde donde desea listar");
+                if (Hasta == "0") return; //throw new Exception("Se debe ingresar la fecha Hasta donde desea listar");
 
                 dtEvaluacion.Clear();
                 dtInformeMuestra.Clear();
@@ -40,6 +40,14 @@ namespace Eval_Proveedores.Novedades
                 DataTable WProveedores = _ProcesarEvaluacionProveedores();
 
                 DataRow[] WProveedoresFinales = WProveedores.Select("Pasa = 'S'");
+
+                lblTipoListado.Text = "(Sólo Proveedores con Movimientos)";
+
+                if (ckIncluirSinMovimientos.Checked)
+                {
+                    WProveedoresFinales = WProveedores.Select();
+                    lblTipoListado.Text = "(Proveedores con y sin Movimientos)";
+                }
 
                 int WRenglon = 0;
                 double ZMovimientos = 0, ZCertificadosOk = 0, ZEnvasesOk = 0;
@@ -140,10 +148,6 @@ namespace Eval_Proveedores.Novedades
 
             CargarDtEvaluacion();
             CargardtInformeMuestra();
-
-            //DGV_EvalSemProve.Visible = false;
-
-            LB_Titulo.Visible = false;
         }
 
         private void BT_Salir_Click(object sender, EventArgs e)
@@ -389,6 +393,11 @@ namespace Eval_Proveedores.Novedades
 	        	txtClave.Text = "";
 	        }
 	        
+        }
+
+        private void ckIncluirSinMovimientos_CheckedChanged(object sender, EventArgs e)
+        {
+            button1.PerformClick();
         }
 
     }

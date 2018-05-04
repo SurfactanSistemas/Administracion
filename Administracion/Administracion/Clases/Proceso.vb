@@ -37,7 +37,7 @@ Module Proceso
     End Function
 
     Public Sub _PurgarSaldosCtaCtePrvs()
-        Dim ZSql = "Update CtaCtePrv set Saldo = 0 where Saldo > -0.01 and Saldo < 0.01 and Saldo <> 0"""
+        Dim ZSql = "Update CtaCtePrv set Saldo = 0 where Saldo > -0.1 and Saldo < 0.1 and Saldo <> 0"
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand(ZSql)

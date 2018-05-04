@@ -258,7 +258,7 @@ Public Class Pagos
                 XClave = ""
 
                 With row
-                    If Trim(.Cells(0).Value) <> "" Then
+                    'If val(.Cells(4).Value) <> 0 Then
                         XTipo1 = .Cells(0).Value
                         XLetra1 = .Cells(1).Value
                         XPunto1 = .Cells(2).Value
@@ -279,7 +279,7 @@ Public Class Pagos
                             End Try
 
                         End If
-                    End If
+                    'End If
 
                 End With
             End If
@@ -332,6 +332,7 @@ Public Class Pagos
         ' Verificar imputaciones en Facturas a Cancelar.
         If optCtaCte.Checked Then
             If Not _ImputacionesFacturasACancelar() Then
+                MsgBox("Error en la imputacion de facturas a cancelar")
                 Return False
             End If
         End If
@@ -2139,7 +2140,7 @@ Public Class Pagos
                         cm.ExecuteNonQuery()
 
                     Catch ex As Exception
-                        MsgBox("Hubo un problema al querer grabar la Orden de Pago en la Base de Datos.", MsgBoxStyle.Critical)
+                        MsgBox("Hubo un problema al querer grabar la Orden de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
                         cn.Close()
@@ -2156,7 +2157,7 @@ Public Class Pagos
                         cm.ExecuteNonQuery()
 
                     Catch ex As Exception
-                        MsgBox("Hubo un problema al querer actualizar la Cuenta Corriente en la Base de Datos.", MsgBoxStyle.Critical)
+                        MsgBox("Hubo un problema al querer actualizar la Cuenta Corriente en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
                         cn.Close()
@@ -2296,7 +2297,7 @@ Public Class Pagos
                         cm.ExecuteNonQuery()
 
                     Catch ex As Exception
-                        MsgBox("Hubo un problema al querer grabar la Forma de Pago en la Base de Datos.", MsgBoxStyle.Critical)
+                        MsgBox("Hubo un problema al querer grabar la Forma de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
                         cn.Close()
@@ -2326,7 +2327,7 @@ Public Class Pagos
                         cm.ExecuteNonQuery()
 
                     Catch ex As Exception
-                        MsgBox("Hubo un problema al querer Actualizar los datos de Cheques en la Base de Datos.", MsgBoxStyle.Critical)
+                        MsgBox("Hubo un problema al querer Actualizar los datos de Cheques en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
                         cn.Close()
@@ -2360,7 +2361,7 @@ Public Class Pagos
                             cm.ExecuteNonQuery()
 
                         Catch ex As Exception
-                            MsgBox("Hubo un problema al querer actualizar el estado del Cheque en la Base de Datos.", MsgBoxStyle.Critical)
+                            MsgBox("Hubo un problema al querer actualizar el estado del Cheque en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
                             cn.Close()
@@ -2391,7 +2392,7 @@ Public Class Pagos
                             cm.ExecuteNonQuery()
 
                         Catch ex As Exception
-                            MsgBox("Hubo un problema al querer actualizar la Cuenta corriente en la Base de Datos.", MsgBoxStyle.Critical)
+                            MsgBox("Hubo un problema al querer actualizar la Cuenta corriente en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
                             cn.Close()
@@ -2484,7 +2485,7 @@ Public Class Pagos
                 cm.ExecuteNonQuery()
 
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos.", MsgBoxStyle.Critical)
+                MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                 Exit Sub
             Finally
                 cn.Close()
@@ -2574,7 +2575,7 @@ Public Class Pagos
                 cm.ExecuteNonQuery()
 
             Catch ex As Exception
-                MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos.", MsgBoxStyle.Critical)
+                MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                 Exit Sub
             Finally
                 cn.Close()
@@ -2597,7 +2598,7 @@ Public Class Pagos
             cm.ExecuteNonQuery()
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer Actualizar la información de Retención en la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer Actualizar la información de Retención en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         Finally
             cn.Close()
@@ -2633,7 +2634,7 @@ Public Class Pagos
             cm.ExecuteNonQuery()
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer Actualizar la informacion de la Orden de Pago en la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer Actualizar la informacion de la Orden de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         Finally
             cn.Close()
@@ -2673,7 +2674,7 @@ Public Class Pagos
                             End If
 
                         Catch ex As Exception
-                            MsgBox("Hubo un problema al querer la información de la Orden de Compra en la Base de Datos.", MsgBoxStyle.Critical)
+                            MsgBox("Hubo un problema al querer la información de la Orden de Compra en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
                             cn.Close()
@@ -2693,7 +2694,7 @@ Public Class Pagos
                                     cm.ExecuteNonQuery()
 
                                 Catch ex As Exception
-                                    MsgBox("Hubo un problema al querer Actualizar la información de la Orden de Pago en la Base de Datos.", MsgBoxStyle.Critical)
+                                    MsgBox("Hubo un problema al querer Actualizar la información de la Orden de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                                     Exit Sub
                                 Finally
                                     cn.Close()
@@ -2731,7 +2732,7 @@ Public Class Pagos
             cm.ExecuteNonQuery()
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer Actualizar los datos de certificados de Retenciones de la Orden de Pagos en la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer Actualizar los datos de certificados de Retenciones de la Orden de Pagos en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         Finally
             cn.Close()
@@ -7264,17 +7265,17 @@ Public Class Pagos
         Return Val(Proceso.formatonumerico(Trim(numero), decimales))
     End Function
 
-    Private Sub gridPagos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridPagos.CellMouseDoubleClick
-        Dim iRow As DataGridViewRow
+    'Private Sub gridPagos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridPagos.CellMouseDoubleClick
+    '    Dim iRow As DataGridViewRow
 
-        iRow = gridPagos.Rows(e.RowIndex)
+    '    iRow = gridPagos.Rows(e.RowIndex)
 
-        If MsgBox("¿Está seguro de querer eliminar la fila?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.No Then
-            Exit Sub
-        End If
+    '    If MsgBox("¿Está seguro de querer eliminar la fila?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.No Then
+    '        Exit Sub
+    '    End If
 
-        gridPagos.Rows.Remove(iRow)
-    End Sub
+    '    gridPagos.Rows.Remove(iRow)
+    'End Sub
 
     Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
 

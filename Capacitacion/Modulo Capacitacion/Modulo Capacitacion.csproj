@@ -562,6 +562,18 @@
     <Compile Include="Maestros\VersionPerfiles\IngVersPerfil.Designer.cs">
       <DependentUpon>IngVersPerfil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Novedades\ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.Designer.cs">
+      <DependentUpon>ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\AsignarCursosPorPerfilYSector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\AsignarCursosPorPerfilYSector.Designer.cs">
+      <DependentUpon>AsignarCursosPorPerfilYSector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Novedades\IngresoDeCursosRealizados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -582,6 +594,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\Cursada\planillacursada.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>planillacursada.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ListadoDeCursosRealizadosPorLegajo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -845,6 +863,12 @@
     <EmbeddedResource Include="Maestros\VersionPerfiles\IngVersPerfil.resx">
       <DependentUpon>IngVersPerfil.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.resx">
+      <DependentUpon>ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\AsignarCursosPorPerfilYSector.resx">
+      <DependentUpon>AsignarCursosPorPerfilYSector.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Novedades\IngresoDeCursosRealizados.resx">
       <DependentUpon>IngresoDeCursosRealizados.cs</DependentUpon>
     </EmbeddedResource>
@@ -864,6 +888,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reportes\Cursada\planillacursada.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>planillacursada.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ListadoDeCursosRealizadosPorLegajo.resx">
       <DependentUpon>ListadoDeCursosRealizadosPorLegajo.cs</DependentUpon>
     </EmbeddedResource>
@@ -1080,6 +1108,7 @@
     <Content Include="bin\Debug\Modulo Capacitacion.exe" />
     <Content Include="bin\Debug\Modulo Capacitacion.pdb" />
     <Content Include="bin\Debug\Modulo Capacitacion.vshost.exe" />
+    <None Include="Resources\Consulta Dat N1.png" />
     <None Include="Resources\Aceptar N2.png" />
     <None Include="Resources\Screen_preview.png" />
     <None Include="Resources\Enviar_Email.png" />

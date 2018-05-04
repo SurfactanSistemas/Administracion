@@ -118,7 +118,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void _OcultarColumnasAuxiliares()
         {
-            foreach (string columna in new[] {"Egreso", "Actualizado"})
+            foreach (string columna in new[] {"Egreso", "Actualizado", "Grisar", "Mostrar", "VigenciaOrd"})
             {
                 using (var column = DGV_Legajos.Columns[columna])
                 {
@@ -229,9 +229,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 if (column != null)
                     column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-                column = dgvDiscriminarLegajos.Columns["Grisar"];
-                if (column != null)
-                    column.Visible = false;
+                foreach (var WColumna in new[]{"Grisar", "Mostrar", "VigenciaOrd"})
+                {
+                    column = dgvDiscriminarLegajos.Columns[WColumna];
+                    if (column != null)
+                        column.Visible = false;
+                }
 
                 column = dgvDiscriminarLegajos.Columns["Codigo"];
                 if (column != null)

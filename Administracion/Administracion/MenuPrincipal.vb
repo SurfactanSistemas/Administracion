@@ -3,6 +3,11 @@
     Dim loginOpen As Boolean = False
 
     Private Sub abrir(ByVal form As Form)
+        Try
+            Proceso._PurgarSaldosCtaCtePrvs()
+        Catch ex As Exception
+            '""
+        End Try
         Dim opennedForm As Form = forms.Find(Function(openForm) openForm.GetType() = form.GetType())
         If IsNothing(opennedForm) OrElse opennedForm.IsDisposed Then
             forms.Add(form)

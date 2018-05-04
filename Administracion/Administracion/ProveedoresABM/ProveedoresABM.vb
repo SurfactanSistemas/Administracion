@@ -139,6 +139,7 @@ Public Class ProveedoresABM
                     & "Region =  '" & NormalizarIndex(cmbRegion.SelectedIndex) & "', " _
                     & "PorceIb =  " & Proceso.formatonumerico(txtPorcelProv.Text) & ", " _
                     & "Estado =  '" & NormalizarIndex(cmbEstado.SelectedIndex) & "', " _
+                    & "IbCiudadII =  '" & NormalizarIndex(cmbInscripcionIB.SelectedIndex) & "', " _
                     & "Califica =  '" & NormalizarIndex(cmbCalificacion.SelectedIndex) & "', " _
                     & "FechaCalifica =  '" & Mid(Trim(txtCalificacion.Text), 1, 10) & "', " _
                     & "OrdFechaCalifica =  '" & Mid(_FechaComoOrd(txtCalificacion.Text), 1, 10) & "', " _
@@ -472,8 +473,14 @@ Public Class ProveedoresABM
         cmbEstado.SelectedIndex = proveedor.estado
         cmbCalificacion.SelectedIndex = proveedor.calificacion
         txtCalificacion.Text = proveedor.vtoCalificacion
-        txtClienteAsociado.Text = Trim(proveedor.cliente.id)
-        txtClienteAsociadoDescripcion.Text = Trim(proveedor.cliente.razon)
+
+        txtClienteAsociado.Text = ""
+        txtClienteAsociadoDescripcion.Text = ""
+
+        If Not IsNothing(proveedor.cliente) then
+            txtClienteAsociado.Text = Trim(proveedor.cliente.id)
+            txtClienteAsociadoDescripcion.Text = Trim(proveedor.cliente.razon)
+        End If
 
         CKBProveedorInactivo.Checked = proveedor.Inhabilitado <> "0"
 
