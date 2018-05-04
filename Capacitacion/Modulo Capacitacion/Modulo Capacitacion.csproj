@@ -594,6 +594,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\Cursada\planillacursada.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>planillacursada.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ListadoDeCursosRealizadosPorLegajo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -882,6 +888,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reportes\Cursada\planillacursada.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>planillacursada.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ListadoDeCursosRealizadosPorLegajo.resx">
       <DependentUpon>ListadoDeCursosRealizadosPorLegajo.cs</DependentUpon>
     </EmbeddedResource>

@@ -331,7 +331,7 @@ namespace Modulo_Capacitacion
             return FormatoNumerico(wValor.ToString(), WCantDigitos);
         }
 
-        public static object FormatoNumerico(object wValor)
+        public static string FormatoNumerico(object wValor)
         {
             if (wValor == null) wValor = "0";
             return FormatoNumerico(wValor.ToString());
