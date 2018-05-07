@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
@@ -99,7 +100,35 @@ namespace Eval_Proveedores.Novedades
 
         private DataTable _ProcesarEvaluacionProveedores()
         {
-            return Helper._ProcesarEvaluacionProveedores("1", TB_Desde.Text, TB_Hasta.Text, ref progressBar1);
+            return Helper._ProcesarEvaluacionProveedores("1", TB_Desde.Text, TB_Hasta.Text, ref progressBar1, EmpresasAConsultar());
+        }
+
+        private string[] EmpresasAConsultar()
+        {
+            List<string> WEmpresas = new List<string>();
+
+            if (ckTodos.Checked)
+            {
+                WEmpresas.AddRange(_Empresas);
+            }
+            else
+            {
+                if (ckPlantaI.Checked) WEmpresas.Add(_Empresas[0]);
+                if (ckPlantaII.Checked) WEmpresas.Add(_Empresas[1]);
+                if (ckPlantaIII.Checked) WEmpresas.Add(_Empresas[2]);
+                if (ckPlantaVI.Checked) WEmpresas.Add(_Empresas[3]);
+                if (ckPlantaV.Checked) WEmpresas.Add(_Empresas[4]);
+                if (ckPlantaVI.Checked) WEmpresas.Add(_Empresas[5]);
+                if (ckPlantaVII.Checked) WEmpresas.Add(_Empresas[6]);
+                if (ckPellital.Checked)
+                {
+                    WEmpresas.Add(_Empresas[7]);
+                    WEmpresas.Add(_Empresas[8]);
+                    WEmpresas.Add(_Empresas[9]);
+                }
+            }
+
+            return WEmpresas.ToArray();
         }
 
         private void CargardtInformeMuestra()
@@ -146,6 +175,7 @@ namespace Eval_Proveedores.Novedades
         {
             pnlClave.Visible = false;
 
+            ckTodos.Checked = true;
             CargarDtEvaluacion();
             CargardtInformeMuestra();
         }
@@ -398,6 +428,36 @@ namespace Eval_Proveedores.Novedades
         private void ckIncluirSinMovimientos_CheckedChanged(object sender, EventArgs e)
         {
             button1.PerformClick();
+        }
+
+        private void ckTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckTodos.Checked)
+            {
+                foreach (CheckBox ck in new[] { ckPlantaI, ckPlantaII, ckPlantaIII, ckPlantaIV, ckPlantaV, ckPlantaVI, ckPlantaVII, ckPellital })
+                {
+                    ck.Checked = true;
+                }
+            }
+        }
+
+        private void Plantas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!((CheckBox) sender).Checked)
+            {
+                ckTodos.Checked = false;
+            }
+        }
+
+        private void ckTodos_Click(object sender, EventArgs e)
+        {
+            if (!ckTodos.Checked)
+            {
+                foreach (CheckBox ck in new[] { ckPlantaI, ckPlantaII, ckPlantaIII, ckPlantaIV, ckPlantaV, ckPlantaVI, ckPlantaVII, ckPellital })
+                {
+                    ck.Checked = false;
+                }
+            }
         }
 
     }

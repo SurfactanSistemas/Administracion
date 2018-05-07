@@ -39,7 +39,6 @@
             this.LB_TitEva = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.BT_Guardar = new System.Windows.Forms.Button();
             this.pnlClave = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtClave = new System.Windows.Forms.TextBox();
@@ -48,6 +47,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.btnPedirClave = new System.Windows.Forms.Button();
+            this.lblTipoListado = new System.Windows.Forms.Label();
             this.LB_Titulo = new System.Windows.Forms.Label();
             this.CB_TipoEva = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,13 +73,24 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblTipoListado = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ckPellital = new System.Windows.Forms.CheckBox();
+            this.ckPlantaVII = new System.Windows.Forms.CheckBox();
+            this.ckPlantaVI = new System.Windows.Forms.CheckBox();
+            this.ckPlantaV = new System.Windows.Forms.CheckBox();
+            this.ckPlantaIV = new System.Windows.Forms.CheckBox();
+            this.ckPlantaIII = new System.Windows.Forms.CheckBox();
+            this.ckPlantaII = new System.Windows.Forms.CheckBox();
+            this.ckPlantaI = new System.Windows.Forms.CheckBox();
+            this.ckTodos = new System.Windows.Forms.CheckBox();
+            this.BT_Guardar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.pnlClave.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -114,6 +125,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Controls.Add(this.BT_Guardar);
             this.panel3.Controls.Add(this.pnlClave);
             this.panel3.Controls.Add(this.ckIncluirSinMovimientos);
@@ -134,19 +146,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(851, 511);
             this.panel3.TabIndex = 0;
-            // 
-            // BT_Guardar
-            // 
-            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.BT_Guardar.Location = new System.Drawing.Point(712, 458);
-            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_Guardar.Name = "BT_Guardar";
-            this.BT_Guardar.Size = new System.Drawing.Size(70, 40);
-            this.BT_Guardar.TabIndex = 83;
-            this.BT_Guardar.Text = "Guardar";
-            this.BT_Guardar.UseVisualStyleBackColor = true;
-            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click_1);
             // 
             // pnlClave
             // 
@@ -194,10 +193,9 @@
             // 
             // ckIncluirSinMovimientos
             // 
-            this.ckIncluirSinMovimientos.AutoSize = true;
-            this.ckIncluirSinMovimientos.Location = new System.Drawing.Point(473, 25);
+            this.ckIncluirSinMovimientos.Location = new System.Drawing.Point(393, 23);
             this.ckIncluirSinMovimientos.Name = "ckIncluirSinMovimientos";
-            this.ckIncluirSinMovimientos.Size = new System.Drawing.Size(197, 17);
+            this.ckIncluirSinMovimientos.Size = new System.Drawing.Size(163, 39);
             this.ckIncluirSinMovimientos.TabIndex = 81;
             this.ckIncluirSinMovimientos.Text = "Incluir Proveedores Sin Movimientos";
             this.ckIncluirSinMovimientos.UseVisualStyleBackColor = true;
@@ -205,7 +203,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(281, 69);
+            this.progressBar1.Location = new System.Drawing.Point(281, 91);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(560, 25);
             this.progressBar1.TabIndex = 80;
@@ -238,11 +236,19 @@
             this.btnPedirClave.UseVisualStyleBackColor = true;
             this.btnPedirClave.Click += new System.EventHandler(this.BT_Guardar_Click);
             // 
+            // lblTipoListado
+            // 
+            this.lblTipoListado.Font = new System.Drawing.Font("Calibri", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoListado.Location = new System.Drawing.Point(289, 94);
+            this.lblTipoListado.Name = "lblTipoListado";
+            this.lblTipoListado.Size = new System.Drawing.Size(248, 18);
+            this.lblTipoListado.TabIndex = 12;
+            // 
             // LB_Titulo
             // 
             this.LB_Titulo.AutoSize = true;
             this.LB_Titulo.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Titulo.Location = new System.Drawing.Point(13, 72);
+            this.LB_Titulo.Location = new System.Drawing.Point(13, 94);
             this.LB_Titulo.Name = "LB_Titulo";
             this.LB_Titulo.Size = new System.Drawing.Size(248, 18);
             this.LB_Titulo.TabIndex = 12;
@@ -254,9 +260,9 @@
             this.CB_TipoEva.Items.AddRange(new object[] {
             "CALIDAD",
             "ENTREGA"});
-            this.CB_TipoEva.Location = new System.Drawing.Point(694, 22);
+            this.CB_TipoEva.Location = new System.Drawing.Point(823, 22);
             this.CB_TipoEva.Name = "CB_TipoEva";
-            this.CB_TipoEva.Size = new System.Drawing.Size(147, 21);
+            this.CB_TipoEva.Size = new System.Drawing.Size(18, 21);
             this.CB_TipoEva.TabIndex = 11;
             this.CB_TipoEva.Visible = false;
             // 
@@ -264,7 +270,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(729, 40);
+            this.label2.Location = new System.Drawing.Point(820, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 18);
             this.label2.TabIndex = 10;
@@ -303,10 +309,10 @@
             dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle21;
             this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.DGV_EvalSemProve.Location = new System.Drawing.Point(9, 102);
+            this.DGV_EvalSemProve.Location = new System.Drawing.Point(9, 122);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
             this.DGV_EvalSemProve.RowHeadersWidth = 15;
-            this.DGV_EvalSemProve.Size = new System.Drawing.Size(832, 341);
+            this.DGV_EvalSemProve.Size = new System.Drawing.Size(832, 321);
             this.DGV_EvalSemProve.TabIndex = 9;
             this.DGV_EvalSemProve.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellDoubleClick);
             // 
@@ -467,7 +473,7 @@
             this.BT_Buscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BT_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Buscar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Buscar.Location = new System.Drawing.Point(409, 8);
+            this.BT_Buscar.Location = new System.Drawing.Point(341, 16);
             this.BT_Buscar.Name = "BT_Buscar";
             this.BT_Buscar.Size = new System.Drawing.Size(46, 48);
             this.BT_Buscar.TabIndex = 8;
@@ -476,7 +482,7 @@
             // 
             // TB_Hasta
             // 
-            this.TB_Hasta.Location = new System.Drawing.Point(281, 24);
+            this.TB_Hasta.Location = new System.Drawing.Point(231, 32);
             this.TB_Hasta.Mask = "00/00/0000";
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
@@ -487,7 +493,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(229, 26);
+            this.label1.Location = new System.Drawing.Point(179, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 18);
             this.label1.TabIndex = 5;
@@ -495,7 +501,7 @@
             // 
             // TB_Desde
             // 
-            this.TB_Desde.Location = new System.Drawing.Point(71, 23);
+            this.TB_Desde.Location = new System.Drawing.Point(71, 31);
             this.TB_Desde.Mask = "00/00/0000";
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.Size = new System.Drawing.Size(100, 20);
@@ -507,19 +513,143 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(13, 26);
+            this.label3.Location = new System.Drawing.Point(13, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 18);
             this.label3.TabIndex = 3;
             this.label3.Text = "Desde:";
             // 
-            // lblTipoListado
+            // groupBox2
             // 
-            this.lblTipoListado.Font = new System.Drawing.Font("Calibri", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoListado.Location = new System.Drawing.Point(289, 72);
-            this.lblTipoListado.Name = "lblTipoListado";
-            this.lblTipoListado.Size = new System.Drawing.Size(248, 18);
-            this.lblTipoListado.TabIndex = 12;
+            this.groupBox2.Controls.Add(this.ckPellital);
+            this.groupBox2.Controls.Add(this.ckPlantaVII);
+            this.groupBox2.Controls.Add(this.ckPlantaVI);
+            this.groupBox2.Controls.Add(this.ckPlantaV);
+            this.groupBox2.Controls.Add(this.ckPlantaIV);
+            this.groupBox2.Controls.Add(this.ckPlantaIII);
+            this.groupBox2.Controls.Add(this.ckPlantaII);
+            this.groupBox2.Controls.Add(this.ckPlantaI);
+            this.groupBox2.Controls.Add(this.ckTodos);
+            this.groupBox2.Location = new System.Drawing.Point(562, 4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(280, 83);
+            this.groupBox2.TabIndex = 85;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Empresas";
+            // 
+            // ckPellital
+            // 
+            this.ckPellital.AutoSize = true;
+            this.ckPellital.Location = new System.Drawing.Point(195, 60);
+            this.ckPellital.Name = "ckPellital";
+            this.ckPellital.Size = new System.Drawing.Size(56, 17);
+            this.ckPellital.TabIndex = 91;
+            this.ckPellital.Text = "Pellital";
+            this.ckPellital.UseVisualStyleBackColor = true;
+            this.ckPellital.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaVII
+            // 
+            this.ckPlantaVII.AutoSize = true;
+            this.ckPlantaVII.Location = new System.Drawing.Point(195, 37);
+            this.ckPlantaVII.Name = "ckPlantaVII";
+            this.ckPlantaVII.Size = new System.Drawing.Size(72, 17);
+            this.ckPlantaVII.TabIndex = 90;
+            this.ckPlantaVII.Text = "Planta VII";
+            this.ckPlantaVII.UseVisualStyleBackColor = true;
+            this.ckPlantaVII.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaVI
+            // 
+            this.ckPlantaVI.AutoSize = true;
+            this.ckPlantaVI.Location = new System.Drawing.Point(195, 14);
+            this.ckPlantaVI.Name = "ckPlantaVI";
+            this.ckPlantaVI.Size = new System.Drawing.Size(69, 17);
+            this.ckPlantaVI.TabIndex = 93;
+            this.ckPlantaVI.Text = "Planta VI";
+            this.ckPlantaVI.UseVisualStyleBackColor = true;
+            this.ckPlantaVI.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaV
+            // 
+            this.ckPlantaV.AutoSize = true;
+            this.ckPlantaV.Location = new System.Drawing.Point(108, 61);
+            this.ckPlantaV.Name = "ckPlantaV";
+            this.ckPlantaV.Size = new System.Drawing.Size(66, 17);
+            this.ckPlantaV.TabIndex = 92;
+            this.ckPlantaV.Text = "Planta V";
+            this.ckPlantaV.UseVisualStyleBackColor = true;
+            this.ckPlantaV.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaIV
+            // 
+            this.ckPlantaIV.AutoSize = true;
+            this.ckPlantaIV.Location = new System.Drawing.Point(108, 37);
+            this.ckPlantaIV.Name = "ckPlantaIV";
+            this.ckPlantaIV.Size = new System.Drawing.Size(69, 17);
+            this.ckPlantaIV.TabIndex = 89;
+            this.ckPlantaIV.Text = "Planta IV";
+            this.ckPlantaIV.UseVisualStyleBackColor = true;
+            this.ckPlantaIV.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaIII
+            // 
+            this.ckPlantaIII.AutoSize = true;
+            this.ckPlantaIII.Location = new System.Drawing.Point(108, 14);
+            this.ckPlantaIII.Name = "ckPlantaIII";
+            this.ckPlantaIII.Size = new System.Drawing.Size(68, 17);
+            this.ckPlantaIII.TabIndex = 86;
+            this.ckPlantaIII.Text = "Planta III";
+            this.ckPlantaIII.UseVisualStyleBackColor = true;
+            this.ckPlantaIII.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaII
+            // 
+            this.ckPlantaII.AutoSize = true;
+            this.ckPlantaII.Location = new System.Drawing.Point(19, 61);
+            this.ckPlantaII.Name = "ckPlantaII";
+            this.ckPlantaII.Size = new System.Drawing.Size(65, 17);
+            this.ckPlantaII.TabIndex = 85;
+            this.ckPlantaII.Text = "Planta II";
+            this.ckPlantaII.UseVisualStyleBackColor = true;
+            this.ckPlantaII.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaI
+            // 
+            this.ckPlantaI.AutoSize = true;
+            this.ckPlantaI.Location = new System.Drawing.Point(19, 38);
+            this.ckPlantaI.Name = "ckPlantaI";
+            this.ckPlantaI.Size = new System.Drawing.Size(62, 17);
+            this.ckPlantaI.TabIndex = 88;
+            this.ckPlantaI.Text = "Planta I";
+            this.ckPlantaI.UseVisualStyleBackColor = true;
+            this.ckPlantaI.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckTodos
+            // 
+            this.ckTodos.AutoSize = true;
+            this.ckTodos.Location = new System.Drawing.Point(19, 15);
+            this.ckTodos.Name = "ckTodos";
+            this.ckTodos.Size = new System.Drawing.Size(56, 17);
+            this.ckTodos.TabIndex = 87;
+            this.ckTodos.Text = "Todos";
+            this.ckTodos.UseVisualStyleBackColor = true;
+            this.ckTodos.CheckedChanged += new System.EventHandler(this.ckTodos_CheckedChanged);
+            this.ckTodos.Click += new System.EventHandler(this.ckTodos_Click);
+            // 
+            // BT_Guardar
+            // 
+            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.BT_Guardar.Location = new System.Drawing.Point(712, 458);
+            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_Guardar.Name = "BT_Guardar";
+            this.BT_Guardar.Size = new System.Drawing.Size(70, 40);
+            this.BT_Guardar.TabIndex = 83;
+            this.BT_Guardar.Text = "Guardar";
+            this.BT_Guardar.UseVisualStyleBackColor = true;
+            this.BT_Guardar.Visible = false;
+            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click_1);
             // 
             // ActSemProvEnv
             // 
@@ -543,6 +673,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -570,7 +702,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button BT_Guardar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Razon;
         private System.Windows.Forms.DataGridViewTextBoxColumn Movimientos;
@@ -588,5 +719,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CatII;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fechas;
         private System.Windows.Forms.Label lblTipoListado;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox ckPellital;
+        private System.Windows.Forms.CheckBox ckPlantaVII;
+        private System.Windows.Forms.CheckBox ckPlantaVI;
+        private System.Windows.Forms.CheckBox ckPlantaV;
+        private System.Windows.Forms.CheckBox ckPlantaIV;
+        private System.Windows.Forms.CheckBox ckPlantaIII;
+        private System.Windows.Forms.CheckBox ckPlantaII;
+        private System.Windows.Forms.CheckBox ckPlantaI;
+        private System.Windows.Forms.CheckBox ckTodos;
+        private System.Windows.Forms.Button BT_Guardar;
     }
 }

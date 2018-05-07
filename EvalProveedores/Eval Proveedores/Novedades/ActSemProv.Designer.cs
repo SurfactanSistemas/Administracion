@@ -29,24 +29,35 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_TitEva = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ckPellital = new System.Windows.Forms.CheckBox();
+            this.ckPlantaVII = new System.Windows.Forms.CheckBox();
+            this.ckPlantaVI = new System.Windows.Forms.CheckBox();
+            this.ckPlantaV = new System.Windows.Forms.CheckBox();
+            this.ckPlantaIV = new System.Windows.Forms.CheckBox();
+            this.ckPlantaIII = new System.Windows.Forms.CheckBox();
+            this.ckPlantaII = new System.Windows.Forms.CheckBox();
+            this.ckPlantaI = new System.Windows.Forms.CheckBox();
+            this.ckTodos = new System.Windows.Forms.CheckBox();
+            this.ckIncluirSinMovimientos = new System.Windows.Forms.CheckBox();
             this.pnlClave = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtClave = new System.Windows.Forms.TextBox();
@@ -81,12 +92,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.ckIncluirSinMovimientos = new System.Windows.Forms.CheckBox();
             this.lblTipoListado = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.pnlClave.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).BeginInit();
@@ -124,9 +135,10 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.progressBar1);
+            this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Controls.Add(this.ckIncluirSinMovimientos);
             this.panel3.Controls.Add(this.pnlClave);
-            this.panel3.Controls.Add(this.progressBar1);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.BT_Guardar);
@@ -144,6 +156,134 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(851, 511);
             this.panel3.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.ckPellital);
+            this.groupBox2.Controls.Add(this.ckPlantaVII);
+            this.groupBox2.Controls.Add(this.ckPlantaVI);
+            this.groupBox2.Controls.Add(this.ckPlantaV);
+            this.groupBox2.Controls.Add(this.ckPlantaIV);
+            this.groupBox2.Controls.Add(this.ckPlantaIII);
+            this.groupBox2.Controls.Add(this.ckPlantaII);
+            this.groupBox2.Controls.Add(this.ckPlantaI);
+            this.groupBox2.Controls.Add(this.ckTodos);
+            this.groupBox2.Location = new System.Drawing.Point(558, 1);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(280, 83);
+            this.groupBox2.TabIndex = 84;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Empresas";
+            // 
+            // ckPellital
+            // 
+            this.ckPellital.AutoSize = true;
+            this.ckPellital.Location = new System.Drawing.Point(195, 60);
+            this.ckPellital.Name = "ckPellital";
+            this.ckPellital.Size = new System.Drawing.Size(56, 17);
+            this.ckPellital.TabIndex = 91;
+            this.ckPellital.Text = "Pellital";
+            this.ckPellital.UseVisualStyleBackColor = true;
+            this.ckPellital.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaVII
+            // 
+            this.ckPlantaVII.AutoSize = true;
+            this.ckPlantaVII.Location = new System.Drawing.Point(195, 37);
+            this.ckPlantaVII.Name = "ckPlantaVII";
+            this.ckPlantaVII.Size = new System.Drawing.Size(72, 17);
+            this.ckPlantaVII.TabIndex = 90;
+            this.ckPlantaVII.Text = "Planta VII";
+            this.ckPlantaVII.UseVisualStyleBackColor = true;
+            this.ckPlantaVII.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaVI
+            // 
+            this.ckPlantaVI.AutoSize = true;
+            this.ckPlantaVI.Location = new System.Drawing.Point(195, 14);
+            this.ckPlantaVI.Name = "ckPlantaVI";
+            this.ckPlantaVI.Size = new System.Drawing.Size(69, 17);
+            this.ckPlantaVI.TabIndex = 93;
+            this.ckPlantaVI.Text = "Planta VI";
+            this.ckPlantaVI.UseVisualStyleBackColor = true;
+            this.ckPlantaVI.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaV
+            // 
+            this.ckPlantaV.AutoSize = true;
+            this.ckPlantaV.Location = new System.Drawing.Point(108, 61);
+            this.ckPlantaV.Name = "ckPlantaV";
+            this.ckPlantaV.Size = new System.Drawing.Size(66, 17);
+            this.ckPlantaV.TabIndex = 92;
+            this.ckPlantaV.Text = "Planta V";
+            this.ckPlantaV.UseVisualStyleBackColor = true;
+            this.ckPlantaV.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaIV
+            // 
+            this.ckPlantaIV.AutoSize = true;
+            this.ckPlantaIV.Location = new System.Drawing.Point(108, 37);
+            this.ckPlantaIV.Name = "ckPlantaIV";
+            this.ckPlantaIV.Size = new System.Drawing.Size(69, 17);
+            this.ckPlantaIV.TabIndex = 89;
+            this.ckPlantaIV.Text = "Planta IV";
+            this.ckPlantaIV.UseVisualStyleBackColor = true;
+            this.ckPlantaIV.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaIII
+            // 
+            this.ckPlantaIII.AutoSize = true;
+            this.ckPlantaIII.Location = new System.Drawing.Point(108, 14);
+            this.ckPlantaIII.Name = "ckPlantaIII";
+            this.ckPlantaIII.Size = new System.Drawing.Size(68, 17);
+            this.ckPlantaIII.TabIndex = 86;
+            this.ckPlantaIII.Text = "Planta III";
+            this.ckPlantaIII.UseVisualStyleBackColor = true;
+            this.ckPlantaIII.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaII
+            // 
+            this.ckPlantaII.AutoSize = true;
+            this.ckPlantaII.Location = new System.Drawing.Point(19, 61);
+            this.ckPlantaII.Name = "ckPlantaII";
+            this.ckPlantaII.Size = new System.Drawing.Size(65, 17);
+            this.ckPlantaII.TabIndex = 85;
+            this.ckPlantaII.Text = "Planta II";
+            this.ckPlantaII.UseVisualStyleBackColor = true;
+            this.ckPlantaII.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaI
+            // 
+            this.ckPlantaI.AutoSize = true;
+            this.ckPlantaI.Location = new System.Drawing.Point(19, 38);
+            this.ckPlantaI.Name = "ckPlantaI";
+            this.ckPlantaI.Size = new System.Drawing.Size(62, 17);
+            this.ckPlantaI.TabIndex = 88;
+            this.ckPlantaI.Text = "Planta I";
+            this.ckPlantaI.UseVisualStyleBackColor = true;
+            this.ckPlantaI.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckTodos
+            // 
+            this.ckTodos.AutoSize = true;
+            this.ckTodos.Location = new System.Drawing.Point(19, 15);
+            this.ckTodos.Name = "ckTodos";
+            this.ckTodos.Size = new System.Drawing.Size(56, 17);
+            this.ckTodos.TabIndex = 87;
+            this.ckTodos.Text = "Todos";
+            this.ckTodos.UseVisualStyleBackColor = true;
+            this.ckTodos.CheckedChanged += new System.EventHandler(this.ckTodos_CheckedChanged);
+            this.ckTodos.Click += new System.EventHandler(this.ckTodos_Click);
+            // 
+            // ckIncluirSinMovimientos
+            // 
+            this.ckIncluirSinMovimientos.Location = new System.Drawing.Point(416, 19);
+            this.ckIncluirSinMovimientos.Name = "ckIncluirSinMovimientos";
+            this.ckIncluirSinMovimientos.Size = new System.Drawing.Size(137, 34);
+            this.ckIncluirSinMovimientos.TabIndex = 82;
+            this.ckIncluirSinMovimientos.Text = "Incluir Proveedores Sin Movimientos";
+            this.ckIncluirSinMovimientos.UseVisualStyleBackColor = true;
+            this.ckIncluirSinMovimientos.CheckedChanged += new System.EventHandler(this.ckIncluirSinMovimientos_CheckedChanged);
             // 
             // pnlClave
             // 
@@ -190,11 +330,10 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(203, 63);
+            this.progressBar1.Location = new System.Drawing.Point(203, 89);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(634, 28);
             this.progressBar1.TabIndex = 80;
-            this.progressBar1.Visible = false;
             // 
             // button2
             // 
@@ -242,7 +381,7 @@
             // 
             this.LB_Titulo.AutoSize = true;
             this.LB_Titulo.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Titulo.Location = new System.Drawing.Point(13, 68);
+            this.LB_Titulo.Location = new System.Drawing.Point(26, 99);
             this.LB_Titulo.Name = "LB_Titulo";
             this.LB_Titulo.Size = new System.Drawing.Size(171, 18);
             this.LB_Titulo.TabIndex = 12;
@@ -254,9 +393,9 @@
             this.CB_TipoEva.Items.AddRange(new object[] {
             "CALIDAD",
             "ENTREGA"});
-            this.CB_TipoEva.Location = new System.Drawing.Point(689, 18);
+            this.CB_TipoEva.Location = new System.Drawing.Point(833, 18);
             this.CB_TipoEva.Name = "CB_TipoEva";
-            this.CB_TipoEva.Size = new System.Drawing.Size(147, 21);
+            this.CB_TipoEva.Size = new System.Drawing.Size(24, 21);
             this.CB_TipoEva.TabIndex = 11;
             this.CB_TipoEva.Visible = false;
             // 
@@ -264,7 +403,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(750, 42);
+            this.label2.Location = new System.Drawing.Point(830, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 18);
             this.label2.TabIndex = 10;
@@ -295,26 +434,26 @@
             this.EvaCal,
             this.EvaEnt,
             this.Fechas});
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle41.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle41.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle41;
             this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.DGV_EvalSemProve.Location = new System.Drawing.Point(14, 97);
+            this.DGV_EvalSemProve.Location = new System.Drawing.Point(14, 128);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle42.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle42;
             this.DGV_EvalSemProve.RowHeadersWidth = 15;
-            this.DGV_EvalSemProve.Size = new System.Drawing.Size(822, 341);
+            this.DGV_EvalSemProve.Size = new System.Drawing.Size(822, 310);
             this.DGV_EvalSemProve.TabIndex = 9;
             this.DGV_EvalSemProve.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellDoubleClick);
             // 
@@ -336,8 +475,8 @@
             // Movimientos
             // 
             this.Movimientos.DataPropertyName = "Items";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle29;
             this.Movimientos.HeaderText = "Items";
             this.Movimientos.Name = "Movimientos";
             this.Movimientos.ReadOnly = true;
@@ -346,8 +485,8 @@
             // Aprobados
             // 
             this.Aprobados.DataPropertyName = "Aprobado";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle30;
             this.Aprobados.HeaderText = "Aprob.";
             this.Aprobados.Name = "Aprobados";
             this.Aprobados.ReadOnly = true;
@@ -356,8 +495,8 @@
             // Desvios
             // 
             this.Desvios.DataPropertyName = "Desviado";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Desvios.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Desvios.DefaultCellStyle = dataGridViewCellStyle31;
             this.Desvios.HeaderText = "Desv.";
             this.Desvios.Name = "Desvios";
             this.Desvios.ReadOnly = true;
@@ -366,8 +505,8 @@
             // Rechazados
             // 
             this.Rechazados.DataPropertyName = "Rechazado";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle32;
             this.Rechazados.HeaderText = "Rech.";
             this.Rechazados.Name = "Rechazados";
             this.Rechazados.ReadOnly = true;
@@ -376,8 +515,8 @@
             // CertificadosOk
             // 
             this.CertificadosOk.DataPropertyName = "Certificado";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CertificadosOk.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CertificadosOk.DefaultCellStyle = dataGridViewCellStyle33;
             this.CertificadosOk.HeaderText = "Cert.";
             this.CertificadosOk.Name = "CertificadosOk";
             this.CertificadosOk.ReadOnly = true;
@@ -386,8 +525,8 @@
             // EnvasesOk
             // 
             this.EnvasesOk.DataPropertyName = "Enviado";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.EnvasesOk.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.EnvasesOk.DefaultCellStyle = dataGridViewCellStyle34;
             this.EnvasesOk.HeaderText = "Env.";
             this.EnvasesOk.Name = "EnvasesOk";
             this.EnvasesOk.ReadOnly = true;
@@ -396,8 +535,8 @@
             // PorCert
             // 
             this.PorCert.DataPropertyName = "PorcCert";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorCert.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorCert.DefaultCellStyle = dataGridViewCellStyle35;
             this.PorCert.HeaderText = "%Cert.";
             this.PorCert.Name = "PorCert";
             this.PorCert.ReadOnly = true;
@@ -406,8 +545,8 @@
             // PorEnv
             // 
             this.PorEnv.DataPropertyName = "PorcEnv";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorEnv.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorEnv.DefaultCellStyle = dataGridViewCellStyle36;
             this.PorEnv.HeaderText = "%Env.";
             this.PorEnv.Name = "PorEnv";
             this.PorEnv.ReadOnly = true;
@@ -416,8 +555,8 @@
             // PorcTotal
             // 
             this.PorcTotal.DataPropertyName = "PorcTotal";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorcTotal.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorcTotal.DefaultCellStyle = dataGridViewCellStyle37;
             this.PorcTotal.HeaderText = "%";
             this.PorcTotal.Name = "PorcTotal";
             this.PorcTotal.ReadOnly = true;
@@ -426,8 +565,8 @@
             // Retrasos
             // 
             this.Retrasos.DataPropertyName = "Atraso";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle38;
             this.Retrasos.HeaderText = "Atraso";
             this.Retrasos.Name = "Retrasos";
             this.Retrasos.ReadOnly = true;
@@ -453,8 +592,8 @@
             // 
             // EvaCal
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle39;
             this.EvaCal.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.EvaCal.HeaderText = "Calidad";
             this.EvaCal.Items.AddRange(new object[] {
@@ -482,8 +621,8 @@
             // Fechas
             // 
             this.Fechas.DataPropertyName = "Fecha";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Fechas.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Fechas.DefaultCellStyle = dataGridViewCellStyle40;
             this.Fechas.HeaderText = "Fecha";
             this.Fechas.Name = "Fechas";
             this.Fechas.ReadOnly = true;
@@ -495,7 +634,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(414, 11);
+            this.button1.Location = new System.Drawing.Point(360, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(46, 48);
             this.button1.TabIndex = 8;
@@ -505,7 +644,7 @@
             // 
             // TB_Hasta
             // 
-            this.TB_Hasta.Location = new System.Drawing.Point(281, 24);
+            this.TB_Hasta.Location = new System.Drawing.Point(238, 24);
             this.TB_Hasta.Mask = "00/00/0000";
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
@@ -518,7 +657,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(229, 26);
+            this.label1.Location = new System.Drawing.Point(186, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 18);
             this.label1.TabIndex = 5;
@@ -545,21 +684,10 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Desde:";
             // 
-            // ckIncluirSinMovimientos
-            // 
-            this.ckIncluirSinMovimientos.AutoSize = true;
-            this.ckIncluirSinMovimientos.Location = new System.Drawing.Point(486, 25);
-            this.ckIncluirSinMovimientos.Name = "ckIncluirSinMovimientos";
-            this.ckIncluirSinMovimientos.Size = new System.Drawing.Size(197, 17);
-            this.ckIncluirSinMovimientos.TabIndex = 82;
-            this.ckIncluirSinMovimientos.Text = "Incluir Proveedores Sin Movimientos";
-            this.ckIncluirSinMovimientos.UseVisualStyleBackColor = true;
-            this.ckIncluirSinMovimientos.CheckedChanged += new System.EventHandler(this.ckIncluirSinMovimientos_CheckedChanged);
-            // 
             // lblTipoListado
             // 
             this.lblTipoListado.Font = new System.Drawing.Font("Calibri", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoListado.Location = new System.Drawing.Point(210, 68);
+            this.lblTipoListado.Location = new System.Drawing.Point(206, 98);
             this.lblTipoListado.Name = "lblTipoListado";
             this.lblTipoListado.Size = new System.Drawing.Size(302, 18);
             this.lblTipoListado.TabIndex = 83;
@@ -585,6 +713,8 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.pnlClave.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -636,5 +766,15 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox ckIncluirSinMovimientos;
         private System.Windows.Forms.Label lblTipoListado;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox ckPellital;
+        private System.Windows.Forms.CheckBox ckPlantaVII;
+        private System.Windows.Forms.CheckBox ckPlantaVI;
+        private System.Windows.Forms.CheckBox ckPlantaV;
+        private System.Windows.Forms.CheckBox ckPlantaIV;
+        private System.Windows.Forms.CheckBox ckPlantaIII;
+        private System.Windows.Forms.CheckBox ckPlantaII;
+        private System.Windows.Forms.CheckBox ckPlantaI;
+        private System.Windows.Forms.CheckBox ckTodos;
     }
 }

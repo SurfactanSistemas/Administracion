@@ -54,10 +54,12 @@ namespace Eval_Proveedores
             }
         }
 
-        public static DataTable _ProcesarEvaluacionProveedores(string WTipoProv, string WDesde, string WHasta, ref ProgressBar progressBar)
+        public static DataTable _ProcesarEvaluacionProveedores(string WTipoProv, string WDesde, string WHasta, ref ProgressBar progressBar, string[] WEmpresasAConsultar = null)
         {
             DataTable WProveedores = new DataTable();
 
+            progressBar.Value = 0;
+            progressBar.Visible = true;
             WProveedores = _TraerInformacionBasicaDeProveedores(WTipoProv);
 
             WProveedores.Columns.Add("Movimientos", typeof(int));
@@ -72,9 +74,10 @@ namespace Eval_Proveedores
             if (WProveedores.Rows.Count == 0) return WProveedores;
 
             // Hago los calculos pertinentes recorriendo cada una de las empresas.
-            progressBar.Value = 0;
             progressBar.Maximum = WProveedores.Rows.Count;
-            progressBar.Visible = true;
+
+            // Determinamos las empresas a consultar.
+            string[] XEmpresas = WEmpresasAConsultar ?? _Empresas;
 
             foreach (DataRow WProveedor in WProveedores.Rows)
             {
@@ -83,7 +86,7 @@ namespace Eval_Proveedores
 
                 WProveedor["Pasa"] = " ";
 
-                foreach (string WEmpresa in _Empresas)
+                foreach (string WEmpresa in XEmpresas)
                 {
                     DataTable WInformes = _TraerInformesPorProveedorEmpresa(WProveedor["Proveedor"].ToString(), WDesde, WHasta, WEmpresa);
 

@@ -1,22 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using Logica_Negocio;
-using Negocio;
 
 namespace Eval_Proveedores.Novedades
 {
     public partial class ActSemProvEnv : Form
     {
-        ProveedorBOL PBOL = new ProveedorBOL();
         DataTable dtEvaluacion = new DataTable();
         DataTable dtInformeMuestra = new DataTable();
         EvalSemestralBOL ESBOL = new EvalSemestralBOL();
         DataTable dtInformeDetalle;
-        Proveedor Prove = new Proveedor();
 
 
         public ActSemProvEnv()
@@ -29,6 +27,7 @@ namespace Eval_Proveedores.Novedades
             CargarDtEvaluacion();
             CargardtInformeMuestra();
 
+            ckTodos.Checked = true;
             //DGV_EvalSemProve.Visible = false;
 
             //LB_Titulo.Visible = false;
@@ -142,7 +141,35 @@ namespace Eval_Proveedores.Novedades
 
         private DataTable _ProcesarEvaluacionProveedores()
         {
-            return Helper._ProcesarEvaluacionProveedores("2", TB_Desde.Text, TB_Hasta.Text, ref progressBar1);
+            return Helper._ProcesarEvaluacionProveedores("2", TB_Desde.Text, TB_Hasta.Text, ref progressBar1, EmpresasAConsultar());
+        }
+
+        private string[] EmpresasAConsultar()
+        {
+            List<string> WEmpresas = new List<string>();
+
+            if (ckTodos.Checked)
+            {
+                WEmpresas.AddRange(Helper._Empresas);
+            }
+            else
+            {
+                if (ckPlantaI.Checked) WEmpresas.Add(Helper._Empresas[0]);
+                if (ckPlantaII.Checked) WEmpresas.Add(Helper._Empresas[1]);
+                if (ckPlantaIII.Checked) WEmpresas.Add(Helper._Empresas[2]);
+                if (ckPlantaVI.Checked) WEmpresas.Add(Helper._Empresas[3]);
+                if (ckPlantaV.Checked) WEmpresas.Add(Helper._Empresas[4]);
+                if (ckPlantaVI.Checked) WEmpresas.Add(Helper._Empresas[5]);
+                if (ckPlantaVII.Checked) WEmpresas.Add(Helper._Empresas[6]);
+                if (ckPellital.Checked)
+                {
+                    WEmpresas.Add(Helper._Empresas[7]);
+                    WEmpresas.Add(Helper._Empresas[8]);
+                    WEmpresas.Add(Helper._Empresas[9]);
+                }
+            }
+
+            return WEmpresas.ToArray();
         }
 
         private void BT_Salir_Click(object sender, EventArgs e)
@@ -157,24 +184,6 @@ namespace Eval_Proveedores.Novedades
             txtClave.Text = "";
             txtClave.Focus();
 
-        }
-
-        //CON ESTE METODO SE MANTINEN TODAS LAS BASES ACTUALIZADAS, YA QUE MODIFICA EL PROVEEDOR EN CADA BASE.
-        private void ActualizarProve()
-        {
-            string Donde = "SurfactanSA";
-            PBOL.Modificar(Prove, Donde);
-
-            Donde = "Surfactan_II";
-            PBOL.Modificar(Prove, Donde);
-
-            Donde = "Surfactan_V";
-            PBOL.Modificar(Prove, Donde);
-        }
-
-        private void DGV_EvalSemProve_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            _MostrarDetalles(e.RowIndex);
         }
 
         private void _MostrarDetalles(int WRowIndex)
@@ -498,6 +507,36 @@ namespace Eval_Proveedores.Novedades
                 if (DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "EvaCal" || DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "EvaEnt") return;
 
             _MostrarDetalles(e.RowIndex);
+        }
+
+        private void ckTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckTodos.Checked)
+            {
+                foreach (CheckBox ck in new[] { ckPlantaI, ckPlantaII, ckPlantaIII, ckPlantaIV, ckPlantaV, ckPlantaVI, ckPlantaVII, ckPellital })
+                {
+                    ck.Checked = true;
+                }
+            }
+        }
+
+        private void Plantas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!((CheckBox)sender).Checked)
+            {
+                ckTodos.Checked = false;
+            }
+        }
+
+        private void ckTodos_Click(object sender, EventArgs e)
+        {
+            if (!ckTodos.Checked)
+            {
+                foreach (CheckBox ck in new[] { ckPlantaI, ckPlantaII, ckPlantaIII, ckPlantaIV, ckPlantaV, ckPlantaVI, ckPlantaVII, ckPellital })
+                {
+                    ck.Checked = false;
+                }
+            }
         }
     }
 }
