@@ -19,7 +19,8 @@ Public Class CuentaCorrientePantalla
         opcCompleto.Checked = False
         pnlSelectivo.Visible = False
 
-        GRilla.Columns(6).ValueType = GetType(Date)
+        GRilla.Columns("Fecha").ValueType = GetType(Date)
+        GRilla.Columns("Vencimiento").ValueType = GetType(Date)
 
         Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
@@ -30,6 +31,7 @@ Public Class CuentaCorrientePantalla
         Dim WSuma As Double
 
         GRilla.Rows.Clear()
+        _NrosInternos.Clear()
         WRenglon = 0
 
         REM Reviso el cual esta checkeado asi le pongo los valores a Tipo
@@ -46,7 +48,6 @@ Public Class CuentaCorrientePantalla
         tabla = _BuscarCuentaCorrienteProveedorDeuda(txtProveedor.Text, WTipo) 'SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_deuda", txtProveedor.Text, WTipo)
 
         If tabla.Rows.Count > 0 Then
-            _NrosInternos.Clear()
             
             For Each row As DataRow In tabla.Rows
 
@@ -56,19 +57,19 @@ Public Class CuentaCorrientePantalla
                 GRilla.Item("Letra", WRenglon).Value = row.Item("Letra") 'CamposCtaCtePrv.letra
                 GRilla.Item("Punto", WRenglon).Value = row.Item("Punto") 'CamposCtaCtePrv.punto
                 GRilla.Item("Numero", WRenglon).Value = row.Item("Numero") 'CamposCtaCtePrv.numero
-                GRilla.Item("Importe", WRenglon).Value = formatonumerico(row.Item("Total"), "########0.#0", ".")
+                GRilla.Item("Importe", WRenglon).Value = formatonumerico(row.Item("Total"))
 
                 If row.Item("Total") < 0 Then
 
-                    GRilla.Item("Credito", WRenglon).Value = formatonumerico(-1 * row.Item("Total"), "########0.#0", ".")
+                    GRilla.Item("Credito", WRenglon).Value = formatonumerico(-1 * row.Item("Total"))
 
                 Else
 
-                    GRilla.Item("Debito", WRenglon).Value = formatonumerico(row.Item("Total"), "########0.#0", ".")
+                    GRilla.Item("Debito", WRenglon).Value = formatonumerico(row.Item("Total"))
 
                 End If
 
-                GRilla.Item("Saldo", WRenglon).Value = formatonumerico(row.Item("Saldo"), "########0.#0", ".")
+                GRilla.Item("Saldo", WRenglon).Value = formatonumerico(row.Item("Saldo"))
                 GRilla.Item("Fecha", WRenglon).Value = row.Item("Fecha") 'CamposCtaCtePrv.fecha
                 GRilla.Item("OrdFecha", WRenglon).Value = Proceso.ordenaFecha(row.Item("Fecha"))
                 GRilla.Item("Vencimiento", WRenglon).Value = row.Item("Vencimiento") 'CamposCtaCtePrv.vencimiento
@@ -85,7 +86,7 @@ Public Class CuentaCorrientePantalla
         End If
 
         GRilla.AllowUserToAddRows = False
-        txtSaldo.Text = formatonumerico(WSuma, "########0.#0", ".")
+        txtSaldo.Text = formatonumerico(WSuma)
     End Sub
 
     Private Function _BuscarCuentaCorrienteProveedorDeuda(ByVal WProveedor As String, ByVal wTipo As Char) As DataTable
@@ -98,16 +99,16 @@ Public Class CuentaCorrientePantalla
 
         Try
 
-            ZSql = "select LTRIM(RTRIM(CtaCtePrv.Tipo)) as Tipo " _
-                & ", LTRIM(RTRIM(CtaCtePrv.Letra)) as Letra" _
-                & ", LTRIM(RTRIM(CtaCtePrv.Punto)) as Punto" _
-                & ", LTRIM(RTRIM(CtaCtePrv.Numero)) as Numero" _
-                & ", CtaCtePrv.Total as Total" _
-                & ", CtaCtePrv.Saldo as Saldo" _
-                & ", LTRIM(RTRIM(CtaCtePrv.fecha)) as Fecha" _
-                & ", LTRIM(RTRIM(CtaCtePrv.Vencimiento)) as Vencimiento" _
-                & ", LTRIM(RTRIM(CtaCtePrv.NroInterno)) as NroInterno" _
-                & ", LTRIM(RTRIM(CtaCtePrv.Impre)) as Impre" _
+            ZSql = "select LTRIM(RTRIM(ISNULL(CtaCtePrv.Tipo, ''))) as Tipo " _
+                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Letra, ''))) as Letra" _
+                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Punto, ''))) as Punto" _
+                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Numero, ''))) as Numero" _
+                & ", ISNULL(CtaCtePrv.Total, 0) as Total" _
+                & ", ISNULL(CtaCtePrv.Saldo, 0) as Saldo" _
+                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.fecha, ''))) as Fecha" _
+                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Vencimiento, ''))) as Vencimiento" _
+                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.NroInterno, 0))) as NroInterno" _
+                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Impre, ''))) as Impre" _
                 & " FROM CtaCtePrv" _
                 & " WHERE CtaCtePrv.Proveedor = '" & WProveedor & "'" _
                 & "#PARCIAL#" _
@@ -130,7 +131,7 @@ Public Class CuentaCorrientePantalla
             _tabla.Load(dr)
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Throw New Exception("Hubo un problema al querer traer los Movimientos del Proveedor desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -144,37 +145,83 @@ Public Class CuentaCorrientePantalla
     End Function
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+        Try
+            
+            boxPantallaProveedores.Visible = True
 
-        boxPantallaProveedores.Visible = True
+            'Dim WProveedores = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
-        Dim WProveedores = DAOProveedor.buscarProveedoresActivoPorNombre("")
+            Dim WProveedores As new DataTable
 
-        lstAyuda.Items.Clear()
+            WProveedores = _TraerProveedoresActivos()
 
-        For Each WProveedor As Proveedor In WProveedores
+            lstAyuda.Items.Clear()
 
-            lstAyuda.Items.Add(WProveedor.id.PadLeft(11) & Space(5) & WProveedor.razonSocial)
+            If Not IsNothing(WProveedores) then
 
-        Next
+                For Each WProveedor As DataRow In WProveedores.Rows
 
-        txtAyuda.Text = ""
-        txtAyuda.Focus()
+                    lstAyuda.Items.Add(WProveedor.Item("Proveedor").PadLeft(11) & Space(5) & WProveedor.Item("Nombre"))
+
+                Next
+            
+            End If
+
+            txtAyuda.Text = ""
+            txtAyuda.Focus()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
-    Private Sub _TraerSaldoCuentaProveedor(ByVal proveedor As Proveedor)
+    Private Function _TraerProveedoresActivos() As DataTable
+        
+        Dim tabla As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor WHERE Inhabilitado <> '1' OR Inhabilitado is null")
+        Dim dr As SqlDataReader
 
-        If IsNothing(proveedor.cliente) Then : Exit Sub
-        End If
+        Try
 
-        Dim cliente As String = proveedor.cliente.id
-        Dim WSaldo As String = "0,00"
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer listar los Proveedores Activos desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+      
+        Return tabla
+
+    End Function
+
+    Private Sub _TraerSaldoCuentaProveedor(ByVal proveedor As DataRow)
+
+        Dim cliente As String = IIf(IsDBNull(proveedor.Item("ClienteAsociado")), "", proveedor.Item("ClienteAsociado"))
+        Dim WSaldo As String = "0"
 
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
         Dim dr As SqlDataReader
 
         If Trim(cliente) = "" Then
-            lblSaldoCuentaProveedor.Text = WSaldo
+            lblSaldoCuentaProveedor.Text = Proceso.formatonumerico(WSaldo)
             Exit Sub
         End If
 
@@ -229,10 +276,10 @@ Public Class CuentaCorrientePantalla
         End Try
 
         lblClienteAsociado.Text = Trim(cliente)
-        lblSaldoCuentaProveedor.Text = "$ " & formatonumerico(WSaldo, "########0.#0", ".")
+        lblSaldoCuentaProveedor.Text = "$ " & formatonumerico(WSaldo)
     End Sub
 
-    Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
+    Private Sub mostrarProveedor(ByVal proveedor As DataRow)
 
         If IsNothing(proveedor) Then : Exit Sub
         End If
@@ -246,8 +293,8 @@ Public Class CuentaCorrientePantalla
 
 
         'lstFiltrada.Visible = False
-        txtProveedor.Text = proveedor.id
-        txtRazon.Text = proveedor.razonSocial
+        txtProveedor.Text = proveedor.Item("Proveedor")
+        txtRazon.Text = proveedor.Item("Nombre")
         boxPantallaProveedores.Visible = False
         _TraerProveedorSelectivo()
         _TraerSaldoCuentaProveedor(proveedor)
@@ -262,12 +309,55 @@ Public Class CuentaCorrientePantalla
 
         Dim Wcodigo = Microsoft.VisualBasic.Left$(lstAyuda.SelectedItem, 11)
 
-        Dim WProveedor = DAOProveedor.buscarProveedorPorCodigo(Wcodigo)
+        Dim WProveedor As New DataTable
+
+        WProveedor = _TraerProveedorPorCodigo(WCodigo)
+
+        'Dim WProveedor = DAOProveedor.buscarProveedorPorCodigo(Wcodigo)
 
         If IsNothing(WProveedor) Then Exit Sub
 
-        mostrarProveedor(WProveedor)
+        If WProveedor.Rows.Count > 0 then
+            mostrarProveedor(WProveedor.Rows(0))    
+        End If
+
     End Sub
+
+    Private Function _TraerProveedorPorCodigo(ByVal WCodigo As String) As DataTable
+        
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & WCodigo & "'")
+        Dim dr As SqlDataReader
+        Dim tabla As New DataTable
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+               tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los datos completos del Proveedor desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        
+        Return tabla
+
+    End Function
 
     Private Sub _TraerProveedorSelectivo()
         Dim cn As SqlConnection = New SqlConnection()
@@ -290,7 +380,7 @@ Public Class CuentaCorrientePantalla
             End If
 
         Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer consultar los datos de Proveedor selectivo desde la Base de Datos." & vbCrlf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
         Finally
 
             dr = Nothing
@@ -508,20 +598,33 @@ Public Class CuentaCorrientePantalla
                 Exit Sub
             End If
 
-            Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
-            If IsNothing(CampoProveedor) Then
-                MsgBox("Proveedor incorrecto")
-                txtProveedor.Focus()
-            Else
-                mostrarProveedor(CampoProveedor)
+            Try
+                Dim WProveedor as DataTable = _TraerDatosProveedor(txtProveedor.Text)
 
-                If GRilla.Rows.Count > 0 Then
-                    GRilla.CurrentCell = GRilla.Rows(0).Cells(0)
-                Else
-                    txtProveedor.Focus()
+                If WProveedor.Rows.Count > 0 then
+                    
+                    txtProveedor.Text = WProveedor.Rows(0).Item("Proveedor")
+                    txtRazon.Text = WProveedor.Rows(0).Item("Nombre")
+
                 End If
 
-            End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            'Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
+            'If IsNothing(CampoProveedor) Then
+            '    MsgBox("Proveedor incorrecto")
+            '    txtProveedor.Focus()
+            'Else
+            '    mostrarProveedor(CampoProveedor)
+
+            '    If GRilla.Rows.Count > 0 Then
+            '        GRilla.CurrentCell = GRilla.Rows(0).Cells(0)
+            '    Else
+            '        txtProveedor.Focus()
+            '    End If
+
+            'End If
 
         ElseIf e.KeyData = Keys.Escape Then
             txtProveedor.Text = ""
@@ -531,6 +634,41 @@ Public Class CuentaCorrientePantalla
             e.Handled = True
         End If
     End Sub
+
+    Private Function _TraerDatosProveedor(ByVal WProveedor As string) As datatable
+        Dim tabla As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, RTRIM(LTRIM(Nombre)) Nombre FROM Proveedor WHERE Proveedor = '" & WProveedor & "' ")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                tabla.Load(dr)
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los datos del Proveedor desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+        
+        Return tabla
+
+    End Function
 
     Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
 
