@@ -16,8 +16,6 @@ namespace Eval_Proveedores.Novedades
         DataTable dtInformeMuestra = new DataTable();
         DataTable dtInformeDetalle = new DataTable();
         string[] _Empresas = { "SurfactanSA", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "Pelitall_II", "Pellital_III", "Pellital_V" };
-        private bool WDelay = false;
-        private int WAcumula = 0;
 
         public ActSemProv()
         {
@@ -305,11 +303,6 @@ namespace Eval_Proveedores.Novedades
                 }
 
             }
-        }
-        
-        private void DGV_EvalSemProve_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-
         }
 
         private void _MostrarDetalles(string _Prove)

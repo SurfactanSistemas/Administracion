@@ -538,5 +538,57 @@ namespace Eval_Proveedores.Novedades
                 }
             }
         }
+
+        private void btnPantalla_Click(object sender, EventArgs e)
+        {
+            string[] WEmpresas = GenerarArregloPlantas();
+
+            Listados.EvaSemProveEnv.Inicio frm = new Listados.EvaSemProveEnv.Inicio();
+
+            frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, 1);
+
+            frm.Close();
+        }
+
+        private string[] GenerarArregloPlantas()
+        {
+            string WEmpresas = "";
+
+            if (ckTodos.Checked)
+            {
+                WEmpresas += "1, 2, 3, 4, 5, 6, 7, Pellital";
+            }
+            else
+            {
+                if (ckPlantaI.Checked) WEmpresas += "1,";
+                if (ckPlantaII.Checked) WEmpresas += "2,";
+                if (ckPlantaIII.Checked) WEmpresas += "3,";
+                if (ckPlantaVI.Checked) WEmpresas += "4,";
+                if (ckPlantaV.Checked) WEmpresas += "5,";
+                if (ckPlantaVI.Checked) WEmpresas += "6,";
+                if (ckPlantaVII.Checked) WEmpresas += "7,";
+                if (ckPellital.Checked)
+                {
+                    WEmpresas += "Pellital";
+                }
+            }
+
+            // Elimino ultima coma al final en caso de existir.
+            WEmpresas = WEmpresas.TrimEnd(',');
+
+            return WEmpresas.Split(',');
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            string[] WEmpresas = GenerarArregloPlantas();
+
+            Listados.EvaSemProveEnv.Inicio frm = new Listados.EvaSemProveEnv.Inicio();
+
+            frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, 2);
+
+            frm.Close();
+        }
+
     }
 }
