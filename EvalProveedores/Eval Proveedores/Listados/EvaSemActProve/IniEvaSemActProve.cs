@@ -64,6 +64,23 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
                         cmd.CommandText = "";
                         cmd.Transaction = trans;
 
+                        cmd.CommandText = "UPDATE Proveedor SET "
+                                              + " Impre1 = " + "0" + ", "
+                                              + " Impre2 = " + "0" + ", "
+                                              + " Impre3 = " + "0" + ", "
+                                              + " Impre4 = " + "0" + ", "
+                                              + " Impre5 = " + "0" + ", "
+                                              + " Impre6 = " + "0" + ", "
+                                              + " Impre7 = '" + "" + "', "
+                                              + " Impre8 = '" + "" + "', "
+                                              + " Impre9 = '" + "" + "', "
+                                              + " Impre10 = " + "0" + ", "
+                                              + " Impre11 = '" + "" + "', "
+                                              + " Impre12 = '" + "" + "', "
+                                              + " Periodo = '" + "" + "'";
+
+                        cmd.ExecuteNonQuery();
+
                         foreach (DataRow WProveedor in WProveedoresFinales)
                         {
                             //WRenglon = DGV_EvalSemProve.Rows.Add();
@@ -318,5 +335,78 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
             }
         }
 
+        public void GenerarReporteDesdeFuera(string[] WEmpresas, string WDesde, string WHasta, int Tipo)
+        {
+            ckTodos.Checked = false;
+            ckTodos_Click(null, null);
+
+            foreach (string wEmpresa in WEmpresas)
+            {
+                switch (wEmpresa.Trim())
+                {
+                    case "1":
+                    {
+                        ckPlantaI.Checked = true;
+                        break;
+                    }
+                    case "2":
+                    {
+                        ckPlantaII.Checked = true;
+                        break;
+                    }
+                    case "3":
+                    {
+                        ckPlantaIII.Checked = true;
+                        break;
+                    }
+                    case "4":
+                    {
+                        ckPlantaIV.Checked = true;
+                        break;
+                    }
+                    case "5":
+                    {
+                        ckPlantaV.Checked = true;
+                        break;
+                    }
+                    case "6":
+                    {
+                        ckPlantaVI.Checked = true;
+                        break;
+                    }
+                    case "7":
+                    {
+                        ckPlantaVII.Checked = true;
+                        break;
+                    }
+                    case "Pellital":
+                    {
+                        ckPellital.Checked = true;
+                        break;
+                    }
+                }
+            }
+
+            TB_Desde.Text = WDesde;
+            TB_Hasta.Text = WHasta;
+
+            switch (Tipo)
+            {
+                case 1:
+                {
+                    _MostrarReporte("Pantalla");
+                    break;
+                }
+                case 2:
+                {
+                    _MostrarReporte("Imprimir");
+                    break;
+                }
+                default:
+                {
+                    return;
+                }
+            }
+        }
     }
 }

@@ -315,5 +315,10 @@ namespace Eval_Proveedores.Listados.EvaSemProveEnv
             }
         }
 
+        public void GenerarReporteDesdeFuera(string[] WEmpresas)
+        {
+            
+        }
+
     }
 }

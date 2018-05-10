@@ -29,24 +29,25 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_TitEva = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ckPellital = new System.Windows.Forms.CheckBox();
             this.ckPlantaVII = new System.Windows.Forms.CheckBox();
@@ -62,9 +63,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtClave = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.button2 = new System.Windows.Forms.Button();
-            this.BT_Salir = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
             this.LB_Titulo = new System.Windows.Forms.Label();
             this.CB_TipoEva = new System.Windows.Forms.ComboBox();
@@ -87,13 +85,22 @@
             this.EvaCal = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.EvaEnt = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Fechas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
             this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTipoListado = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnPantalla = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.BT_Salir = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pnlReporte = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -101,6 +108,8 @@
             this.pnlClave.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).BeginInit();
+            this.pnlReporte.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -135,10 +144,13 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.pnlReporte);
             this.panel3.Controls.Add(this.progressBar1);
             this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Controls.Add(this.ckIncluirSinMovimientos);
             this.panel3.Controls.Add(this.pnlClave);
+            this.panel3.Controls.Add(this.btnPantalla);
+            this.panel3.Controls.Add(this.btnImprimir);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.BT_Guardar);
@@ -156,6 +168,13 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(851, 511);
             this.panel3.TabIndex = 0;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(203, 89);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(634, 28);
+            this.progressBar1.TabIndex = 80;
             // 
             // groupBox2
             // 
@@ -328,40 +347,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(203, 89);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(634, 28);
-            this.progressBar1.TabIndex = 80;
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Aceptar_N2;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.SystemColors.Control;
-            this.button2.Location = new System.Drawing.Point(360, 458);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 40);
-            this.button2.TabIndex = 79;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // BT_Salir
-            // 
-            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
-            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(451, 458);
-            this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Salir.TabIndex = 79;
-            this.toolTip1.SetToolTip(this.BT_Salir, "Fin");
-            this.BT_Salir.UseVisualStyleBackColor = true;
-            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
-            // 
             // BT_Guardar
             // 
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -434,24 +419,24 @@
             this.EvaCal,
             this.EvaEnt,
             this.Fechas});
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle41.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle41.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle55.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle55.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle55.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle55.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle55.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle55.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle55;
             this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_EvalSemProve.Location = new System.Drawing.Point(14, 128);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
-            dataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle42.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle56.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle56.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle56.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle56;
             this.DGV_EvalSemProve.RowHeadersWidth = 15;
             this.DGV_EvalSemProve.Size = new System.Drawing.Size(822, 310);
             this.DGV_EvalSemProve.TabIndex = 9;
@@ -475,8 +460,8 @@
             // Movimientos
             // 
             this.Movimientos.DataPropertyName = "Items";
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle43;
             this.Movimientos.HeaderText = "Items";
             this.Movimientos.Name = "Movimientos";
             this.Movimientos.ReadOnly = true;
@@ -485,8 +470,8 @@
             // Aprobados
             // 
             this.Aprobados.DataPropertyName = "Aprobado";
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle44;
             this.Aprobados.HeaderText = "Aprob.";
             this.Aprobados.Name = "Aprobados";
             this.Aprobados.ReadOnly = true;
@@ -495,8 +480,8 @@
             // Desvios
             // 
             this.Desvios.DataPropertyName = "Desviado";
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Desvios.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Desvios.DefaultCellStyle = dataGridViewCellStyle45;
             this.Desvios.HeaderText = "Desv.";
             this.Desvios.Name = "Desvios";
             this.Desvios.ReadOnly = true;
@@ -505,8 +490,8 @@
             // Rechazados
             // 
             this.Rechazados.DataPropertyName = "Rechazado";
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle46;
             this.Rechazados.HeaderText = "Rech.";
             this.Rechazados.Name = "Rechazados";
             this.Rechazados.ReadOnly = true;
@@ -515,8 +500,8 @@
             // CertificadosOk
             // 
             this.CertificadosOk.DataPropertyName = "Certificado";
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CertificadosOk.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CertificadosOk.DefaultCellStyle = dataGridViewCellStyle47;
             this.CertificadosOk.HeaderText = "Cert.";
             this.CertificadosOk.Name = "CertificadosOk";
             this.CertificadosOk.ReadOnly = true;
@@ -525,8 +510,8 @@
             // EnvasesOk
             // 
             this.EnvasesOk.DataPropertyName = "Enviado";
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.EnvasesOk.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.EnvasesOk.DefaultCellStyle = dataGridViewCellStyle48;
             this.EnvasesOk.HeaderText = "Env.";
             this.EnvasesOk.Name = "EnvasesOk";
             this.EnvasesOk.ReadOnly = true;
@@ -535,8 +520,8 @@
             // PorCert
             // 
             this.PorCert.DataPropertyName = "PorcCert";
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorCert.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorCert.DefaultCellStyle = dataGridViewCellStyle49;
             this.PorCert.HeaderText = "%Cert.";
             this.PorCert.Name = "PorCert";
             this.PorCert.ReadOnly = true;
@@ -545,8 +530,8 @@
             // PorEnv
             // 
             this.PorEnv.DataPropertyName = "PorcEnv";
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorEnv.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorEnv.DefaultCellStyle = dataGridViewCellStyle50;
             this.PorEnv.HeaderText = "%Env.";
             this.PorEnv.Name = "PorEnv";
             this.PorEnv.ReadOnly = true;
@@ -555,8 +540,8 @@
             // PorcTotal
             // 
             this.PorcTotal.DataPropertyName = "PorcTotal";
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorcTotal.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorcTotal.DefaultCellStyle = dataGridViewCellStyle51;
             this.PorcTotal.HeaderText = "%";
             this.PorcTotal.Name = "PorcTotal";
             this.PorcTotal.ReadOnly = true;
@@ -565,8 +550,8 @@
             // Retrasos
             // 
             this.Retrasos.DataPropertyName = "Atraso";
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle52;
             this.Retrasos.HeaderText = "Atraso";
             this.Retrasos.Name = "Retrasos";
             this.Retrasos.ReadOnly = true;
@@ -592,8 +577,8 @@
             // 
             // EvaCal
             // 
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle53;
             this.EvaCal.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.EvaCal.HeaderText = "Calidad";
             this.EvaCal.Items.AddRange(new object[] {
@@ -621,26 +606,12 @@
             // Fechas
             // 
             this.Fechas.DataPropertyName = "Fecha";
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Fechas.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Fechas.DefaultCellStyle = dataGridViewCellStyle54;
             this.Fechas.HeaderText = "Fecha";
             this.Fechas.Name = "Fechas";
             this.Fechas.ReadOnly = true;
             this.Fechas.Width = 80;
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(360, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 48);
-            this.button1.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.button1, "Buscar");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // TB_Hasta
             // 
@@ -693,6 +664,115 @@
             this.lblTipoListado.TabIndex = 83;
             this.lblTipoListado.Text = "LISTADO DE PROVEEDORES";
             // 
+            // btnPantalla
+            // 
+            this.btnPantalla.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Screen_preview;
+            this.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPantalla.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPantalla.Location = new System.Drawing.Point(359, 458);
+            this.btnPantalla.Name = "btnPantalla";
+            this.btnPantalla.Size = new System.Drawing.Size(40, 40);
+            this.btnPantalla.TabIndex = 79;
+            this.btnPantalla.UseVisualStyleBackColor = true;
+            this.btnPantalla.Click += new System.EventHandler(this.btnPantalla_Click);
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Imprimir;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnImprimir.Location = new System.Drawing.Point(451, 458);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(40, 40);
+            this.btnImprimir.TabIndex = 79;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Aceptar_N2;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.SystemColors.Control;
+            this.button2.Location = new System.Drawing.Point(267, 458);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(40, 40);
+            this.button2.TabIndex = 79;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // BT_Salir
+            // 
+            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
+            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Salir.Location = new System.Drawing.Point(543, 458);
+            this.BT_Salir.Name = "BT_Salir";
+            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.TabIndex = 79;
+            this.toolTip1.SetToolTip(this.BT_Salir, "Fin");
+            this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(360, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(46, 48);
+            this.button1.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.button1, "Buscar");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // pnlReporte
+            // 
+            this.pnlReporte.Controls.Add(this.groupBox3);
+            this.pnlReporte.Location = new System.Drawing.Point(16, 444);
+            this.pnlReporte.Name = "pnlReporte";
+            this.pnlReporte.Size = new System.Drawing.Size(48, 83);
+            this.pnlReporte.TabIndex = 6;
+            this.pnlReporte.Visible = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.progressBar2);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Location = new System.Drawing.Point(16, 14);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(450, 58);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(35, 15);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(381, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "GENERANDO REPORTE, POR FAVOR ESPERE UN MOMENTO...";
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(43, 38);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(365, 17);
+            this.progressBar2.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar2.TabIndex = 1;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // ActSemProv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,6 +799,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).EndInit();
+            this.pnlReporte.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -776,5 +859,12 @@
         private System.Windows.Forms.CheckBox ckPlantaII;
         private System.Windows.Forms.CheckBox ckPlantaI;
         private System.Windows.Forms.CheckBox ckTodos;
+        private System.Windows.Forms.Button btnPantalla;
+        private System.Windows.Forms.Button btnImprimir;
+        private System.Windows.Forms.Panel pnlReporte;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Timer timer1;
     }
 }

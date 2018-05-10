@@ -243,6 +243,16 @@ namespace Eval_Proveedores.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Screen_preview {
+            get {
+                object obj = ResourceManager.GetObject("Screen_preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap UNO_MAS2 {
             get {
                 object obj = ResourceManager.GetObject("UNO MAS2", resourceCulture);
