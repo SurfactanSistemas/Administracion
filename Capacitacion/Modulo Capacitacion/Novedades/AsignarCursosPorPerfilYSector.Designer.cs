@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -129,9 +129,9 @@
             this.LBPerfil.ForeColor = System.Drawing.Color.White;
             this.LBPerfil.Location = new System.Drawing.Point(22, 11);
             this.LBPerfil.Name = "LBPerfil";
-            this.LBPerfil.Size = new System.Drawing.Size(328, 19);
+            this.LBPerfil.Size = new System.Drawing.Size(376, 19);
             this.LBPerfil.TabIndex = 0;
-            this.LBPerfil.Text = "ASIGNACIÓN DE CURSOS POR PERFIL O SECTOR";
+            this.LBPerfil.Text = "ASIGNACIÓN DE CURSOS POR PERFIL, SECTOR O TEMA";
             // 
             // panel2
             // 
@@ -426,8 +426,8 @@
             // 
             // Clave
             // 
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Clave.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Clave.DefaultCellStyle = dataGridViewCellStyle19;
             this.Clave.HeaderText = "Clave";
             this.Clave.Name = "Clave";
             this.Clave.ReadOnly = true;
@@ -444,8 +444,8 @@
             // 
             // Perfil
             // 
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Perfil.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Perfil.DefaultCellStyle = dataGridViewCellStyle20;
             this.Perfil.HeaderText = "Perfil";
             this.Perfil.Name = "Perfil";
             this.Perfil.ReadOnly = true;
@@ -462,8 +462,8 @@
             // 
             // Legajo
             // 
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Legajo.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Legajo.DefaultCellStyle = dataGridViewCellStyle21;
             this.Legajo.HeaderText = "Legajo";
             this.Legajo.Name = "Legajo";
             this.Legajo.ReadOnly = true;
@@ -480,8 +480,8 @@
             // 
             // Curso
             // 
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Curso.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle22;
             this.Curso.HeaderText = "Tema";
             this.Curso.Name = "Curso";
             this.Curso.ReadOnly = true;
@@ -498,8 +498,8 @@
             // 
             // Tema
             // 
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tema.DefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle23;
             this.Tema.HeaderText = "Curso";
             this.Tema.Name = "Tema";
             this.Tema.ReadOnly = true;
@@ -508,8 +508,8 @@
             // 
             // DescTema
             // 
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DescTema.DefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DescTema.DefaultCellStyle = dataGridViewCellStyle24;
             this.DescTema.HeaderText = "Descripcion";
             this.DescTema.Name = "DescTema";
             this.DescTema.ReadOnly = true;
@@ -518,9 +518,9 @@
             // 
             // Realizar
             // 
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle43.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Realizar.DefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Realizar.DefaultCellStyle = dataGridViewCellStyle25;
             this.Realizar.HeaderText = "   ¿Se Realiza?";
             this.Realizar.Name = "Realizar";
             this.Realizar.ReadOnly = true;
@@ -529,8 +529,8 @@
             // 
             // Horas
             // 
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Horas.DefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle26;
             this.Horas.HeaderText = "Cant. Horas";
             this.Horas.Name = "Horas";
             this.Horas.ReadOnly = true;
@@ -539,8 +539,8 @@
             // 
             // Realizado
             // 
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Realizado.DefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Realizado.DefaultCellStyle = dataGridViewCellStyle27;
             this.Realizado.HeaderText = "      Hs Realizadas";
             this.Realizado.Name = "Realizado";
             this.Realizado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -613,9 +613,9 @@
             this.pnlAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlAyuda.Controls.Add(this.panel6);
             this.pnlAyuda.Controls.Add(this.gbAyuda);
-            this.pnlAyuda.Location = new System.Drawing.Point(686, 367);
+            this.pnlAyuda.Location = new System.Drawing.Point(666, 326);
             this.pnlAyuda.Name = "pnlAyuda";
-            this.pnlAyuda.Size = new System.Drawing.Size(113, 115);
+            this.pnlAyuda.Size = new System.Drawing.Size(133, 156);
             this.pnlAyuda.TabIndex = 9;
             this.pnlAyuda.Visible = false;
             // 
@@ -624,9 +624,9 @@
             this.panel6.BackColor = System.Drawing.SystemColors.Control;
             this.panel6.Controls.Add(this.btnCerrarAyuda);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 73);
+            this.panel6.Location = new System.Drawing.Point(0, 114);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(113, 42);
+            this.panel6.Size = new System.Drawing.Size(133, 42);
             this.panel6.TabIndex = 1;
             // 
             // btnCerrarAyuda
@@ -636,7 +636,7 @@
             this.btnCerrarAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCerrarAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrarAyuda.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCerrarAyuda.Location = new System.Drawing.Point(39, 3);
+            this.btnCerrarAyuda.Location = new System.Drawing.Point(49, 3);
             this.btnCerrarAyuda.Name = "btnCerrarAyuda";
             this.btnCerrarAyuda.Size = new System.Drawing.Size(34, 38);
             this.btnCerrarAyuda.TabIndex = 28;

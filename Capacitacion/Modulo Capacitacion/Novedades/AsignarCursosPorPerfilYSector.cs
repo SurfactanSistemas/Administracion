@@ -820,9 +820,10 @@ namespace Modulo_Capacitacion.Novedades
 
                 using (SqlCommand cmd = new SqlCommand())
                 {
+                    // AND l.EstaCurso IN (3,4,5,7,8)
                     cmd.Connection = conn;
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = '1', l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.EstaCurso IN (3,4,5,7,8) AND l.Perfil = '" +
+                        "SELECT Clave = '', Tipo = '1', l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000')  AND l.Perfil = '" +
                         cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
