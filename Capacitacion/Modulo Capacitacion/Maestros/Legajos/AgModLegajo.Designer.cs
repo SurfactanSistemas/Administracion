@@ -160,6 +160,7 @@
             this.TB_Codigo = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBLegajo = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -203,6 +204,7 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.LFechaAviso);
             this.panel3.Controls.Add(this.TB_Codigo);
+            this.panel3.Controls.Add(this.textBox2);
             this.panel3.Location = new System.Drawing.Point(8, 8);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(974, 627);
@@ -1562,6 +1564,17 @@
             this.LBLegajo.TabIndex = 0;
             this.LBLegajo.Text = "INGRESO DE LEGAJO";
             // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(705, 585);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(216, 26);
+            this.textBox2.TabIndex = 51;
+            this.textBox2.Text = "  OBSERVACIONES DEL LEGAJO";
+            this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
+            // 
             // AgModLegajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1714,6 +1727,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Año;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cursos;
+        private System.Windows.Forms.TextBox textBox2;
 
     }
 }

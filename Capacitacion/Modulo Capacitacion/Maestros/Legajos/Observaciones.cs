@@ -56,8 +56,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             ObservExt3 = TB_ObservExt3.Text;
             ObservExt4 = TB_ObservExt4.Text;
             ObservExt5 = TB_ObservExt5.Text;
-            MessageBox.Show("Se han guardado las observaciones correctamente", "Guardar Observaciones",
-            MessageBoxButtons.OK, MessageBoxIcon.None);
+            //MessageBox.Show("Se han guardado las observaciones correctamente", "Guardar Observaciones",
+            //MessageBoxButtons.OK, MessageBoxIcon.None);
             Close();
 
         }

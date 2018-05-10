@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using Negocio;
@@ -63,6 +65,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             CargarDatosPefil();
             CargarTemas(L.Temas);
             CargarDatosLegajoVer();
+            CargarObservaciones();
 
             TB_DescPerfil.Enabled = false;
             TB_CodSector.Enabled = false;
@@ -76,6 +79,41 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             if (TB_FechaEgreso.BackColor == Color.Red)
             {
                 InhabilitarModifiaciones();
+            }
+        }
+
+        private void CargarObservaciones()
+        {
+            if (TB_Codigo.Text.Trim() != "")
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT ObservaI1, ObservaI2, ObservaI3, ObservaI4, ObservaI5 FROM Legajo WHERE Codigo = '" + TB_Codigo.Text + "' AND Renglon = 1";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+
+                                ObservExtra1 = dr["ObservaI1"] == null ? "" : dr["ObservaI1"].ToString().Trim();
+                                ObservExtra2 = dr["ObservaI2"] == null ? "" : dr["ObservaI2"].ToString().Trim();
+                                ObservExtra3 = dr["ObservaI3"] == null ? "" : dr["ObservaI3"].ToString().Trim();
+                                ObservExtra4 = dr["ObservaI4"] == null ? "" : dr["ObservaI4"].ToString().Trim();
+                                ObservExtra5 = dr["ObservaI5"] == null ? "" : dr["ObservaI5"].ToString().Trim();
+
+                            }
+                        }
+                    }
+
+                }
+        
             }
         }
 
@@ -853,6 +891,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             ObservExtra3 = Ini.ObservExt3;
             ObservExtra4 = Ini.ObservExt4;
             ObservExtra5 = Ini.ObservExt5;
+
+            L.ObservExtI = Ini.ObservExt1;
+            L.ObservExtII = Ini.ObservExt2;
+            L.ObservExtIII = Ini.ObservExt3;
+            L.ObservExtIV = Ini.ObservExt4;
+            L.ObservExtV = Ini.ObservExt5;
         }
 
         public object Estacurso { get; set; }
@@ -860,6 +904,11 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void AgModLegajo_Shown(object sender, EventArgs e)
         {
             TB_DescLegajo.Focus();
+        }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            BT_MasObserv.PerformClick();
         }
     }
 }
