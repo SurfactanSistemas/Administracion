@@ -28,6 +28,14 @@ namespace Eval_Proveedores.Novedades
             InitializeComponent();
         }
 
+        public DetalleItems(DataTable dtInformeDetalle, string WProveedor)
+        {
+            // TODO: Complete member initialization
+            this.dtInformeDetalle = dtInformeDetalle;
+            InitializeComponent();
+            lblProveedor.Text = WProveedor;
+        }
+
         private void DetalleItems_Load(object sender, EventArgs e)
         {
 

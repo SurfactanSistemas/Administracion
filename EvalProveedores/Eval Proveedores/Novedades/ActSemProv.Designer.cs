@@ -29,24 +29,28 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_TitEva = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlReporte = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.label4 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ckPellital = new System.Windows.Forms.CheckBox();
@@ -63,6 +67,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtClave = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.btnPantalla = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.BT_Salir = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
             this.LB_Titulo = new System.Windows.Forms.Label();
             this.CB_TipoEva = new System.Windows.Forms.ComboBox();
@@ -85,31 +93,27 @@
             this.EvaCal = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.EvaEnt = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Fechas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTipoListado = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnPantalla = new System.Windows.Forms.Button();
-            this.btnImprimir = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.BT_Salir = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.pnlReporte = new System.Windows.Forms.Panel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.pnlReporte.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlClave.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).BeginInit();
-            this.pnlReporte.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -168,6 +172,43 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(851, 511);
             this.panel3.TabIndex = 0;
+            // 
+            // pnlReporte
+            // 
+            this.pnlReporte.Controls.Add(this.groupBox3);
+            this.pnlReporte.Location = new System.Drawing.Point(16, 444);
+            this.pnlReporte.Name = "pnlReporte";
+            this.pnlReporte.Size = new System.Drawing.Size(48, 83);
+            this.pnlReporte.TabIndex = 6;
+            this.pnlReporte.Visible = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.progressBar2);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Location = new System.Drawing.Point(16, 14);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(450, 58);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(43, 38);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(365, 17);
+            this.progressBar2.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar2.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(35, 15);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(381, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "GENERANDO REPORTE, POR FAVOR ESPERE UN MOMENTO...";
             // 
             // progressBar1
             // 
@@ -347,6 +388,59 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // btnPantalla
+            // 
+            this.btnPantalla.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Screen_preview;
+            this.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPantalla.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPantalla.Location = new System.Drawing.Point(359, 458);
+            this.btnPantalla.Name = "btnPantalla";
+            this.btnPantalla.Size = new System.Drawing.Size(40, 40);
+            this.btnPantalla.TabIndex = 79;
+            this.btnPantalla.UseVisualStyleBackColor = true;
+            this.btnPantalla.Click += new System.EventHandler(this.btnPantalla_Click);
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Imprimir;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnImprimir.Location = new System.Drawing.Point(451, 458);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(40, 40);
+            this.btnImprimir.TabIndex = 79;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Aceptar_N2;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.SystemColors.Control;
+            this.button2.Location = new System.Drawing.Point(267, 458);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(40, 40);
+            this.button2.TabIndex = 79;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // BT_Salir
+            // 
+            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
+            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Salir.Location = new System.Drawing.Point(543, 458);
+            this.BT_Salir.Name = "BT_Salir";
+            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.TabIndex = 79;
+            this.toolTip1.SetToolTip(this.BT_Salir, "Fin");
+            this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
+            // 
             // BT_Guardar
             // 
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -419,24 +513,25 @@
             this.EvaCal,
             this.EvaEnt,
             this.Fechas});
-            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle55.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle55.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle55.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle55.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle55.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle55.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle55;
+            this.DGV_EvalSemProve.ContextMenuStrip = this.contextMenuStrip1;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle13;
             this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_EvalSemProve.Location = new System.Drawing.Point(14, 128);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
-            dataGridViewCellStyle56.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle56.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle56.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle56;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.DGV_EvalSemProve.RowHeadersWidth = 15;
             this.DGV_EvalSemProve.Size = new System.Drawing.Size(822, 310);
             this.DGV_EvalSemProve.TabIndex = 9;
@@ -460,8 +555,8 @@
             // Movimientos
             // 
             this.Movimientos.DataPropertyName = "Items";
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle1;
             this.Movimientos.HeaderText = "Items";
             this.Movimientos.Name = "Movimientos";
             this.Movimientos.ReadOnly = true;
@@ -470,8 +565,8 @@
             // Aprobados
             // 
             this.Aprobados.DataPropertyName = "Aprobado";
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle2;
             this.Aprobados.HeaderText = "Aprob.";
             this.Aprobados.Name = "Aprobados";
             this.Aprobados.ReadOnly = true;
@@ -480,8 +575,8 @@
             // Desvios
             // 
             this.Desvios.DataPropertyName = "Desviado";
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Desvios.DefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Desvios.DefaultCellStyle = dataGridViewCellStyle3;
             this.Desvios.HeaderText = "Desv.";
             this.Desvios.Name = "Desvios";
             this.Desvios.ReadOnly = true;
@@ -490,8 +585,8 @@
             // Rechazados
             // 
             this.Rechazados.DataPropertyName = "Rechazado";
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle4;
             this.Rechazados.HeaderText = "Rech.";
             this.Rechazados.Name = "Rechazados";
             this.Rechazados.ReadOnly = true;
@@ -500,8 +595,8 @@
             // CertificadosOk
             // 
             this.CertificadosOk.DataPropertyName = "Certificado";
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CertificadosOk.DefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CertificadosOk.DefaultCellStyle = dataGridViewCellStyle5;
             this.CertificadosOk.HeaderText = "Cert.";
             this.CertificadosOk.Name = "CertificadosOk";
             this.CertificadosOk.ReadOnly = true;
@@ -510,8 +605,8 @@
             // EnvasesOk
             // 
             this.EnvasesOk.DataPropertyName = "Enviado";
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.EnvasesOk.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.EnvasesOk.DefaultCellStyle = dataGridViewCellStyle6;
             this.EnvasesOk.HeaderText = "Env.";
             this.EnvasesOk.Name = "EnvasesOk";
             this.EnvasesOk.ReadOnly = true;
@@ -520,8 +615,8 @@
             // PorCert
             // 
             this.PorCert.DataPropertyName = "PorcCert";
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorCert.DefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorCert.DefaultCellStyle = dataGridViewCellStyle7;
             this.PorCert.HeaderText = "%Cert.";
             this.PorCert.Name = "PorCert";
             this.PorCert.ReadOnly = true;
@@ -530,8 +625,8 @@
             // PorEnv
             // 
             this.PorEnv.DataPropertyName = "PorcEnv";
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorEnv.DefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorEnv.DefaultCellStyle = dataGridViewCellStyle8;
             this.PorEnv.HeaderText = "%Env.";
             this.PorEnv.Name = "PorEnv";
             this.PorEnv.ReadOnly = true;
@@ -540,8 +635,8 @@
             // PorcTotal
             // 
             this.PorcTotal.DataPropertyName = "PorcTotal";
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorcTotal.DefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorcTotal.DefaultCellStyle = dataGridViewCellStyle9;
             this.PorcTotal.HeaderText = "%";
             this.PorcTotal.Name = "PorcTotal";
             this.PorcTotal.ReadOnly = true;
@@ -550,8 +645,8 @@
             // Retrasos
             // 
             this.Retrasos.DataPropertyName = "Atraso";
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle10;
             this.Retrasos.HeaderText = "Atraso";
             this.Retrasos.Name = "Retrasos";
             this.Retrasos.ReadOnly = true;
@@ -577,8 +672,8 @@
             // 
             // EvaCal
             // 
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle11;
             this.EvaCal.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.EvaCal.HeaderText = "Calidad";
             this.EvaCal.Items.AddRange(new object[] {
@@ -606,12 +701,26 @@
             // Fechas
             // 
             this.Fechas.DataPropertyName = "Fecha";
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Fechas.DefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Fechas.DefaultCellStyle = dataGridViewCellStyle12;
             this.Fechas.HeaderText = "Fecha";
             this.Fechas.Name = "Fechas";
             this.Fechas.ReadOnly = true;
             this.Fechas.Width = 80;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(360, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(46, 48);
+            this.button1.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.button1, "Buscar");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // TB_Hasta
             // 
@@ -664,114 +773,32 @@
             this.lblTipoListado.TabIndex = 83;
             this.lblTipoListado.Text = "LISTADO DE PROVEEDORES";
             // 
-            // btnPantalla
-            // 
-            this.btnPantalla.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Screen_preview;
-            this.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPantalla.Location = new System.Drawing.Point(359, 458);
-            this.btnPantalla.Name = "btnPantalla";
-            this.btnPantalla.Size = new System.Drawing.Size(40, 40);
-            this.btnPantalla.TabIndex = 79;
-            this.btnPantalla.UseVisualStyleBackColor = true;
-            this.btnPantalla.Click += new System.EventHandler(this.btnPantalla_Click);
-            // 
-            // btnImprimir
-            // 
-            this.btnImprimir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Imprimir;
-            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnImprimir.Location = new System.Drawing.Point(451, 458);
-            this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(40, 40);
-            this.btnImprimir.TabIndex = 79;
-            this.btnImprimir.UseVisualStyleBackColor = true;
-            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Aceptar_N2;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.SystemColors.Control;
-            this.button2.Location = new System.Drawing.Point(267, 458);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 40);
-            this.button2.TabIndex = 79;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // BT_Salir
-            // 
-            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
-            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(543, 458);
-            this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Salir.TabIndex = 79;
-            this.toolTip1.SetToolTip(this.BT_Salir, "Fin");
-            this.BT_Salir.UseVisualStyleBackColor = true;
-            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(360, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 48);
-            this.button1.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.button1, "Buscar");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // pnlReporte
-            // 
-            this.pnlReporte.Controls.Add(this.groupBox3);
-            this.pnlReporte.Location = new System.Drawing.Point(16, 444);
-            this.pnlReporte.Name = "pnlReporte";
-            this.pnlReporte.Size = new System.Drawing.Size(48, 83);
-            this.pnlReporte.TabIndex = 6;
-            this.pnlReporte.Visible = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.progressBar2);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(16, 14);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(450, 58);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(35, 15);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(381, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "GENERANDO REPORTE, POR FAVOR ESPERE UN MOMENTO...";
-            // 
-            // progressBar2
-            // 
-            this.progressBar2.Location = new System.Drawing.Point(43, 38);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(365, 17);
-            this.progressBar2.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar2.TabIndex = 1;
-            // 
             // timer1
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copiarToolStripMenuItem,
+            this.copiarConCabecerasToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 48);
+            // 
+            // copiarToolStripMenuItem
+            // 
+            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.copiarToolStripMenuItem.Text = "Copiar";
+            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
+            // 
+            // copiarConCabecerasToolStripMenuItem
+            // 
+            this.copiarConCabecerasToolStripMenuItem.Name = "copiarConCabecerasToolStripMenuItem";
+            this.copiarConCabecerasToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.copiarConCabecerasToolStripMenuItem.Text = "Copiar con Cabeceras";
+            this.copiarConCabecerasToolStripMenuItem.Click += new System.EventHandler(this.copiarConCabecerasToolStripMenuItem_Click);
             // 
             // ActSemProv
             // 
@@ -793,15 +820,16 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.pnlReporte.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.pnlClave.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).EndInit();
-            this.pnlReporte.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -866,5 +894,8 @@
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem copiarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copiarConCabecerasToolStripMenuItem;
     }
 }

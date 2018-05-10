@@ -305,7 +305,7 @@ namespace Eval_Proveedores.Novedades
             }
         }
 
-        private void _MostrarDetalles(string _Prove)
+        private void _MostrarDetalles(string _Prove, string descProve)
         {
             dtInformeDetalle = new DataTable();
 
@@ -331,14 +331,55 @@ namespace Eval_Proveedores.Novedades
             dtInformeDetalle.Columns.Add("Certificado1", typeof(string));
             dtInformeDetalle.Columns.Add("Estado1", typeof(string));
 
-            foreach (string _Empresa in _Empresas)
+            foreach (string _Empresa in EmpresasAConsultar())
             {
                 DataTable dtInformeProve = ESBOL.ListaInformeProve(Helper.OrdenarFecha(TB_Desde.Text), Helper.OrdenarFecha(TB_Hasta.Text), _Empresa, 1, _Prove);
                 CargarInformeProve(dtInformeProve);
             }
 
-            DetalleItems Detalle = new DetalleItems(dtInformeDetalle);
+            descProve += "     " + GenerarTextoPlantas();
+
+            DetalleItems Detalle = new DetalleItems(dtInformeDetalle, descProve);
             Detalle.Show();
+        }
+
+        private string GenerarTextoPlantas()
+        {
+            string WEmpresas = "( Plantas: ";
+
+            if (ckTodos.Checked)
+            {
+                WEmpresas += "1, 2, 3, 4, 5, 6, 7 y Pellital";
+            }
+            else
+            {
+                if (ckPlantaI.Checked) WEmpresas += "1, ";
+                if (ckPlantaII.Checked) WEmpresas += "2, ";
+                if (ckPlantaIII.Checked) WEmpresas += "3, ";
+                if (ckPlantaVI.Checked) WEmpresas += "4, ";
+                if (ckPlantaV.Checked) WEmpresas += "5, ";
+                if (ckPlantaVI.Checked) WEmpresas += "6, ";
+                if (ckPlantaVII.Checked) WEmpresas += "7, ";
+                if (ckPellital.Checked)
+                {
+                    WEmpresas += "Pellital";
+                }
+            }
+
+            // Elimino espacios en blanco al final.
+            WEmpresas = WEmpresas.Trim();
+            // Elimino ultima coma al final en caso de existir.
+            WEmpresas = WEmpresas.TrimEnd(',');
+            // Reemplazo la ultima ',' por un 'y'.
+            int indice = WEmpresas.LastIndexOf(',');
+
+            if (indice > -1 && !ckTodos.Checked)
+                WEmpresas = WEmpresas.Substring(0, indice) + " y" +
+                            WEmpresas.Substring(indice + 1, WEmpresas.Length - 1 - indice);
+
+            WEmpresas += " )";
+
+            return WEmpresas;
         }
 
         private void CargarInformeProve(DataTable dtInformeProve)
@@ -366,7 +407,8 @@ namespace Eval_Proveedores.Novedades
             if (e.RowIndex < 0) return;
 
             string _Prove = DGV_EvalSemProve.Rows[e.RowIndex].Cells["Proveedor"].Value.ToString();
-            _MostrarDetalles(_Prove);
+            string _DescProve = DGV_EvalSemProve.Rows[e.RowIndex].Cells["Razon"].Value.ToString();
+            _MostrarDetalles(_Prove, _DescProve);
         }
 
         private void TB_Hasta_KeyDown(object sender, KeyEventArgs e)
@@ -512,6 +554,41 @@ namespace Eval_Proveedores.Novedades
             pnlReporte.Visible = false;
 
             frm.Close();
+        }
+
+        private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Evitamos que se copien las cabeceras.
+            DGV_EvalSemProve.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+
+            // Copiamos el contenido de las celdas seleccionadas en el ClipBoard.
+            _CopiarSeleccion();
+        }
+
+        private void _CopiarSeleccion()
+        {
+            if (DGV_EvalSemProve.GetCellCount(DataGridViewElementStates.Selected) > 0)
+            {
+                // Evitamos que los 'Rows Headers' ocupen espacio.
+                DGV_EvalSemProve.RowHeadersVisible = false;
+
+                object data = DGV_EvalSemProve.GetClipboardContent();
+                if (data != null)
+                    Clipboard.SetDataObject(data);
+
+                // Volvemos a mostrar los 'Rows Headers'
+                DGV_EvalSemProve.RowHeadersVisible = true;
+            }
+        }
+
+        private void copiarConCabecerasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Activamos que se copien las cabeceras.
+            DGV_EvalSemProve.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+
+            // Copiamos el contenido de las celdas seleccionadas en el ClipBoard.
+            _CopiarSeleccion();
+
         }
 
     }

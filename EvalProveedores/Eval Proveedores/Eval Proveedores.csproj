@@ -157,6 +157,17 @@
       <DependentUpon>ReportInforme.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\DetalleItemsEnvases\Detalles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\DetalleItemsEnvases\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\EvaSemActProve\DSEvaSemProve.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -481,6 +492,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportInforme.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\DetalleItemsEnvases\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\EvaSemActProve\ImpreEvaSemProve.resx">
       <DependentUpon>ImpreEvaSemProve.cs</DependentUpon>
     </EmbeddedResource>
@@ -656,6 +671,17 @@
     </None>
     <None Include="Listados\CheckListRecepcion\DSInforme.xss">
       <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\DetalleItemsEnvases\Detalles.xsc">
+      <DependentUpon>Detalles.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\DetalleItemsEnvases\Detalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Detalles.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\DetalleItemsEnvases\Detalles.xss">
+      <DependentUpon>Detalles.xsd</DependentUpon>
     </None>
     <None Include="Listados\EvaSemActProve\DSEvaSemProve.xsc">
       <DependentUpon>DSEvaSemProve.xsd</DependentUpon>

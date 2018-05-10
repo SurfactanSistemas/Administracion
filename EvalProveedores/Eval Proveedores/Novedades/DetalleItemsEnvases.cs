@@ -22,6 +22,14 @@ namespace Eval_Proveedores.Novedades
             InitializeComponent();
         }
 
+        public DetalleItemsEnvases(DataTable dtInformeDetalle, string WProveedor)
+        {
+            // TODO: Complete member initialization
+            this.dtInformeDetalle = dtInformeDetalle;
+            InitializeComponent();
+            lblProveedor.Text = WProveedor;
+        }
+
         private void DetalleItems_Load(object sender, EventArgs e)
         {
             pnlEstadoEnvases.Visible = false;
@@ -56,6 +64,7 @@ namespace Eval_Proveedores.Novedades
                 WOrden = fila["Orden"].ToString();
                 WArticulo = fila["Articulo"].ToString();
 
+                DGV_EvalSemProve.Rows[_index].Cells["Renglon"].Value = _index;
                 DGV_EvalSemProve.Rows[_index].Cells["Articulo"].Value = WArticulo;
                 DGV_EvalSemProve.Rows[_index].Cells["Orden"].Value = WOrden;
                 DGV_EvalSemProve.Rows[_index].Cells["Desviad"].Value = fila["Clave"].ToString();
@@ -314,6 +323,44 @@ namespace Eval_Proveedores.Novedades
         private void DGV_EvalSemProve_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             _MostrarDetalles(e.RowIndex);
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            Listados.VistaPrevia frm = new Listados.VistaPrevia();
+
+            Listados.DetalleItemsEnvases.Reporte rpt = new Listados.DetalleItemsEnvases.Reporte();
+
+            Listados.DetalleItemsEnvases.Detalles tabla = new Listados.DetalleItemsEnvases.Detalles();
+
+            foreach (DataGridViewRow row in DGV_EvalSemProve.Rows)
+            {
+                DataRow _r = tabla.Tables[0].NewRow();
+
+                _r["Clave"] = row.Cells["Renglon"].Value;
+                _r["Informe"] = row.Cells["Informe"].Value;
+                _r["Orden"] = row.Cells["Orden"].Value;
+                _r["Articulo"] = row.Cells["Articulo"].Value;
+                _r["Aprobado"] = row.Cells["Aprobado"].Value;
+                _r["Desvio"] = row.Cells["Desvio"].Value;
+                _r["Rechazado"] = row.Cells["Rechazado"].Value;
+                _r["Atraso"] = row.Cells["Atraso"].Value;
+                _r["Cantidad"] = row.Cells["Cantidad"].Value;
+                _r["SaldoOC"] = row.Cells["SaldoOC"].Value;
+                _r["DesconOC"] = row.Cells["DesconOC"].Value;
+                _r["EnvaseOC"] = row.Cells["EnvaseOC"].Value;
+                _r["DescEnvaseOC"] = row.Cells["DescEnvaseOC"].Value;
+                _r["FechaEntrega"] = row.Cells["FechaEntrega"].Value;
+                _r["FechaPosibleEntrega"] = row.Cells["FechaPosibleEntrega"].Value;
+
+                tabla.Tables[0].Rows.Add(_r);
+            }
+
+            rpt.SetDataSource(tabla);
+
+            frm.CargarReporte(rpt);
+
+            frm.Show();
         }
 
     }
