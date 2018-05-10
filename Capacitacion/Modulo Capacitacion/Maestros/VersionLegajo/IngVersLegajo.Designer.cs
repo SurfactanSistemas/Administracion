@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -150,6 +150,15 @@
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBLegajo = new System.Windows.Forms.Label();
+            this.pnlConsulta = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dgvConsultaLegajos = new System.Windows.Forms.DataGridView();
+            this.ckMostrarEgresados = new System.Windows.Forms.CheckBox();
+            this.btnConsulta = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtFiltrar = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -157,6 +166,10 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).BeginInit();
             this.panel1.SuspendLayout();
+            this.pnlConsulta.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaLegajos)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -171,6 +184,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.pnlConsulta);
             this.panel3.Controls.Add(this.panel6);
             this.panel3.Controls.Add(this.TB_FechaIngAyuda);
             this.panel3.Controls.Add(this.panel5);
@@ -189,6 +203,7 @@
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.TB_FechaIng);
             this.panel3.Controls.Add(this.BT_Salir);
+            this.panel3.Controls.Add(this.btnConsulta);
             this.panel3.Controls.Add(this.BT_LimpiarPant);
             this.panel3.Controls.Add(this.BT_Guardar);
             this.panel3.Controls.Add(this.label1);
@@ -1232,17 +1247,17 @@
             this.DGV_Temas.Location = new System.Drawing.Point(10, 24);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.DGV_Temas.Size = new System.Drawing.Size(932, 401);
             this.DGV_Temas.TabIndex = 67;
             // 
@@ -1397,7 +1412,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(466, 564);
+            this.BT_Salir.Location = new System.Drawing.Point(518, 564);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 27;
@@ -1417,6 +1432,7 @@
             this.BT_LimpiarPant.TabIndex = 26;
             this.BT_LimpiarPant.UseVisualStyleBackColor = true;
             this.BT_LimpiarPant.Visible = false;
+            this.BT_LimpiarPant.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
             // 
             // BT_Guardar
             // 
@@ -1472,6 +1488,111 @@
             this.LBLegajo.TabIndex = 0;
             this.LBLegajo.Text = "CONSULTA DE VERSION DE LEGAJOS";
             // 
+            // pnlConsulta
+            // 
+            this.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
+            this.pnlConsulta.Controls.Add(this.panel8);
+            this.pnlConsulta.Controls.Add(this.groupBox1);
+            this.pnlConsulta.Location = new System.Drawing.Point(200, 108);
+            this.pnlConsulta.Name = "pnlConsulta";
+            this.pnlConsulta.Size = new System.Drawing.Size(575, 403);
+            this.pnlConsulta.TabIndex = 129;
+            this.pnlConsulta.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtFiltrar);
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.dgvConsultaLegajos);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Location = new System.Drawing.Point(15, 11);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(544, 336);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Consulta de Legajos";
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.SystemColors.Control;
+            this.panel8.Controls.Add(this.ckMostrarEgresados);
+            this.panel8.Controls.Add(this.button1);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel8.Location = new System.Drawing.Point(0, 353);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(575, 50);
+            this.panel8.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(269, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(40, 40);
+            this.button1.TabIndex = 27;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dgvConsultaLegajos
+            // 
+            this.dgvConsultaLegajos.AllowUserToAddRows = false;
+            this.dgvConsultaLegajos.AllowUserToDeleteRows = false;
+            this.dgvConsultaLegajos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConsultaLegajos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvConsultaLegajos.Location = new System.Drawing.Point(6, 51);
+            this.dgvConsultaLegajos.Name = "dgvConsultaLegajos";
+            this.dgvConsultaLegajos.ReadOnly = true;
+            this.dgvConsultaLegajos.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.dgvConsultaLegajos.Size = new System.Drawing.Size(532, 279);
+            this.dgvConsultaLegajos.TabIndex = 0;
+            this.dgvConsultaLegajos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvConsultaLegajos_CellMouseDoubleClick);
+            // 
+            // ckMostrarEgresados
+            // 
+            this.ckMostrarEgresados.AutoSize = true;
+            this.ckMostrarEgresados.Location = new System.Drawing.Point(355, 15);
+            this.ckMostrarEgresados.Name = "ckMostrarEgresados";
+            this.ckMostrarEgresados.Size = new System.Drawing.Size(158, 17);
+            this.ckMostrarEgresados.TabIndex = 28;
+            this.ckMostrarEgresados.Text = "Mostrar También Egresados";
+            this.ckMostrarEgresados.UseVisualStyleBackColor = true;
+            this.ckMostrarEgresados.CheckedChanged += new System.EventHandler(this.ckMostrarEgresados_CheckedChanged);
+            // 
+            // btnConsulta
+            // 
+            this.btnConsulta.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsulta.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnConsulta.Location = new System.Drawing.Point(417, 564);
+            this.btnConsulta.Margin = new System.Windows.Forms.Padding(0);
+            this.btnConsulta.Name = "btnConsulta";
+            this.btnConsulta.Size = new System.Drawing.Size(40, 40);
+            this.btnConsulta.TabIndex = 26;
+            this.btnConsulta.UseVisualStyleBackColor = true;
+            this.btnConsulta.Click += new System.EventHandler(this.btnConsulta_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(41, 26);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(32, 13);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Filtrar";
+            // 
+            // txtFiltrar
+            // 
+            this.txtFiltrar.Location = new System.Drawing.Point(82, 23);
+            this.txtFiltrar.Name = "txtFiltrar";
+            this.txtFiltrar.Size = new System.Drawing.Size(454, 20);
+            this.txtFiltrar.TabIndex = 2;
+            this.txtFiltrar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFiltrar_KeyDown);
+            this.txtFiltrar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltrar_KeyUp);
+            // 
             // IngVersLegajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1495,6 +1616,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pnlConsulta.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaLegajos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1621,5 +1748,14 @@
         private System.Windows.Forms.ComboBox TB_FechaIngAyuda;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtVersionActual;
+        private System.Windows.Forms.Panel pnlConsulta;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.CheckBox ckMostrarEgresados;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dgvConsultaLegajos;
+        private System.Windows.Forms.Button btnConsulta;
+        private System.Windows.Forms.TextBox txtFiltrar;
+        private System.Windows.Forms.Label label18;
     }
 }

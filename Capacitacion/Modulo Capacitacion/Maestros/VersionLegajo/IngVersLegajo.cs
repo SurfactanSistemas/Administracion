@@ -24,15 +24,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             InitializeComponent();
             CargarLegajos();
             Cargado = true;
-
+            pnlConsulta.Visible = false;
+            ckMostrarEgresados.Checked = false;
         }
 
         private void CargarLegajos()
         {
             dtLegajos = L.ListarTodos();
 
-            DataRow fila;
-            fila = dtLegajos.NewRow();
+            var fila = dtLegajos.NewRow();
             dtLegajos.Rows.InsertAt(fila, 0);
 
 
@@ -197,40 +197,40 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
                 TB_Tareas3.Text = Per.TareasIII;
                 TB_Primaria.Text = Per.DescriI;
                 TB_ObservPrimaria.Text = Per.ObservaI;
-                CB_NecPrim.Checked = Per.NecesariaI == 1 ? true : false;
-                CB_DesPrim.Checked = Per.DeseableI == 1 ? true : false;
+                CB_NecPrim.Checked = Per.NecesariaI == 1 ;
+                CB_DesPrim.Checked = Per.DeseableI == 1 ;
 
                 TB_Secundaria.Text = Per.DescriII;
                 TB_ObservSecundaria.Text = Per.ObservaII;
-                CB_NecSec.Checked = Per.NecesariaII == 1 ? true : false;
-                CB_DesSec.Checked = Per.DeseableII == 1 ? true : false;
+                CB_NecSec.Checked = Per.NecesariaII == 1 ;
+                CB_DesSec.Checked = Per.DeseableII == 1 ;
 
                 TB_Terciaria.Text = Per.DescriIII;
                 TB_ObservTerciaria.Text = Per.ObservaIII;
-                CB_NecTerc.Checked = Per.NecesariaIII == 1 ? true : false;
-                CB_DesTerc.Checked = Per.DeseableIII == 1 ? true : false;
+                CB_NecTerc.Checked = Per.NecesariaIII == 1 ;
+                CB_DesTerc.Checked = Per.DeseableIII == 1 ;
 
                 TB_Idioma.Text = Per.DescriIV;
                 TB_ObservIdioma.Text = Per.ObservaIV;
-                CB_NecIdioma.Checked = Per.NecesariaIV == 1 ? true : false;
-                CB_DesIdioma.Checked = Per.DeseableIV == 1 ? true : false;
+                CB_NecIdioma.Checked = Per.NecesariaIV == 1 ;
+                CB_DesIdioma.Checked = Per.DeseableIV == 1 ;
 
                 TB_Exp.Text = Per.DescriV;
                 TB_ObservExp.Text = Per.ObservaV;
-                CB_NecExp.Checked = Per.NecesariaV == 1 ? true : false;
-                CB_DesExp.Checked = Per.DeseableV == 1 ? true : false;
+                CB_NecExp.Checked = Per.NecesariaV == 1 ;
+                CB_DesExp.Checked = Per.DeseableV == 1 ;
 
                 TB_CondFisica.Text = Per.Fisica;
-                CB_NecCondFisica.Checked = Per.NecesariaVI == 1 ? true : false;
-                CB_DesCondFisica.Checked = Per.DeseableVI == 1 ? true : false;
+                CB_NecCondFisica.Checked = Per.NecesariaVI == 1 ;
+                CB_DesCondFisica.Checked = Per.DeseableVI == 1 ;
 
                 TB_Otros1.Text = Per.OtrosI;
-                CB_DesOtros1.Checked = Per.DeseableVII == 1 ? true : false;
-                CB_NecOtros1.Checked = Per.NecesariaVII == 1 ? true : false;
+                CB_DesOtros1.Checked = Per.DeseableVII == 1 ;
+                CB_NecOtros1.Checked = Per.NecesariaVII == 1 ;
 
                 TB_Otros2.Text = Per.OtrosII;
-                CB_DesOtros2.Checked = Per.DeseableVIII == 1 ? true : false;
-                CB_NecOtros2.Checked = Per.NecesariaVIII == 1 ? true : false;
+                CB_DesOtros2.Checked = Per.DeseableVIII == 1 ;
+                CB_NecOtros2.Checked = Per.NecesariaVIII == 1 ;
 
                 TB_Equiv1.Text = Per.EquivalenciasI;
                 TB_Equiv2.Text = Per.EquivalenciasII;
@@ -249,40 +249,40 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
                     TB_Tareas3.Text = PerVer.TareasIII;
                     TB_Primaria.Text = PerVer.DescriI;
                     TB_ObservPrimaria.Text = PerVer.ObservaI;
-                    CB_NecPrim.Checked = PerVer.NecesariaI == 1 ? true : false;
-                    CB_DesPrim.Checked = PerVer.DeseableI == 1 ? true : false;
+                    CB_NecPrim.Checked = PerVer.NecesariaI == 1 ;
+                    CB_DesPrim.Checked = PerVer.DeseableI == 1 ;
 
                     TB_Secundaria.Text = PerVer.DescriII;
                     TB_ObservSecundaria.Text = PerVer.ObservaII;
-                    CB_NecSec.Checked = PerVer.NecesariaII == 1 ? true : false;
-                    CB_DesSec.Checked = PerVer.DeseableII == 1 ? true : false;
+                    CB_NecSec.Checked = PerVer.NecesariaII == 1 ;
+                    CB_DesSec.Checked = PerVer.DeseableII == 1 ;
 
                     TB_Terciaria.Text = PerVer.DescriIII;
                     TB_ObservTerciaria.Text = PerVer.ObservaIII;
-                    CB_NecTerc.Checked = PerVer.NecesariaIII == 1 ? true : false;
-                    CB_DesTerc.Checked = PerVer.DeseableIII == 1 ? true : false;
+                    CB_NecTerc.Checked = PerVer.NecesariaIII == 1 ;
+                    CB_DesTerc.Checked = PerVer.DeseableIII == 1 ;
 
                     TB_Idioma.Text = PerVer.DescriIV;
                     TB_ObservIdioma.Text = PerVer.ObservaIV;
-                    CB_NecIdioma.Checked = PerVer.NecesariaIV == 1 ? true : false;
-                    CB_DesIdioma.Checked = PerVer.DeseableIV == 1 ? true : false;
+                    CB_NecIdioma.Checked = PerVer.NecesariaIV == 1 ;
+                    CB_DesIdioma.Checked = PerVer.DeseableIV == 1 ;
 
                     TB_Exp.Text = PerVer.DescriV;
                     TB_ObservExp.Text = PerVer.ObservaV;
-                    CB_NecExp.Checked = PerVer.NecesariaV == 1 ? true : false;
-                    CB_DesExp.Checked = PerVer.DeseableV == 1 ? true : false;
+                    CB_NecExp.Checked = PerVer.NecesariaV == 1 ;
+                    CB_DesExp.Checked = PerVer.DeseableV == 1 ;
 
                     TB_CondFisica.Text = PerVer.Fisica;
-                    CB_NecCondFisica.Checked = PerVer.NecesariaVI == 1 ? true : false;
-                    CB_DesCondFisica.Checked = PerVer.DeseableVI == 1 ? true : false;
+                    CB_NecCondFisica.Checked = PerVer.NecesariaVI == 1 ;
+                    CB_DesCondFisica.Checked = PerVer.DeseableVI == 1 ;
 
                     TB_Otros1.Text = PerVer.OtrosI;
-                    CB_DesOtros1.Checked = PerVer.DeseableVII == 1 ? true : false;
-                    CB_NecOtros1.Checked = PerVer.NecesariaVII == 1 ? true : false;
+                    CB_DesOtros1.Checked = PerVer.DeseableVII == 1 ;
+                    CB_NecOtros1.Checked = PerVer.NecesariaVII == 1 ;
 
                     TB_Otros2.Text = PerVer.OtrosII;
-                    CB_DesOtros2.Checked = PerVer.DeseableVIII == 1 ? true : false;
-                    CB_NecOtros2.Checked = PerVer.NecesariaVIII == 1 ? true : false;
+                    CB_DesOtros2.Checked = PerVer.DeseableVIII == 1 ;
+                    CB_NecOtros2.Checked = PerVer.NecesariaVIII == 1 ;
 
                     TB_Equiv1.Text = PerVer.EquivalenciasI;
                     TB_Equiv2.Text = PerVer.EquivalenciasII;
@@ -344,12 +344,6 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
                 default:
                     return "";
             }
-        }
-
-        private void TB_Codigo_TextChanged(object sender, EventArgs e)
-        {
-            string maxVersiones = LV.MaxVersiones(TB_Codigo.Text);
-            TB_CantidadVersiones.Text = maxVersiones;
         }
 
         private void BT_Salir_Click(object sender, EventArgs e)
@@ -439,8 +433,6 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
                 
                 CompletarFechaIng();
                 TB_VersionLegajo.Focus();
-                string FechaEgreso = TB_Codigo.Text;
-                
             }
             
         }
@@ -559,5 +551,119 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             TB_Codigo.Focus();
         }
 
+        private void BT_LimpiarPant_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pnlConsulta.Visible = false;
+            TB_Codigo.Focus();
+        }
+
+        private void btnConsulta_Click(object sender, EventArgs e)
+        {
+
+            DataTable WLegajos = _TraerLegajosConsulta();
+
+            dgvConsultaLegajos.DataSource = WLegajos;
+
+            if (!ckMostrarEgresados.Checked)
+            {
+                DataTable tabla = (DataTable) dgvConsultaLegajos.DataSource;
+                if (tabla != null)
+                {
+                    tabla.DefaultView.RowFilter = "Egresado <> 'S'";
+                }
+            }
+
+            DataGridViewColumn columna = dgvConsultaLegajos.Columns["Egresado"];
+            if (columna != null) columna.Visible = false;
+
+            columna = dgvConsultaLegajos.Columns["Descripcion"];
+            if (columna != null) columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            pnlConsulta.Visible = dgvConsultaLegajos.Rows.Count > 0;
+
+            txtFiltrar.Focus();
+        }
+
+        private DataTable _TraerLegajosConsulta()
+        {
+
+            try
+            {
+                DataTable tabla = new DataTable();
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT l2.Actual as Legajo, LTRIM(RTRIM(ISNULL(Legajo.Descripcion, ''))) Descripcion, Egresado = CASE Legajo.FEgreso WHEN '  /  /    ' THEN 'N' WHEN '00/00/0000' THEN 'N' ELSE 'S' END FROM Legajo INNER JOIN (SELECT Descripcion, MIN(Codigo) as Actual FROM Legajo GROUP BY Descripcion) l2 ON Legajo.Descripcion = l2.Descripcion WHERE Legajo.Codigo = l2.Actual AND Legajo.Renglon = '1' AND Legajo.Descripcion <> '' ORDER BY Legajo.Descripcion";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                tabla.Load(dr);
+                            }
+                        }
+                    }
+
+                }
+
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al consultar los legajos disponibles desde la Base de Datos. Motivo: " + ex.Message);
+            }
+        
+        }
+
+        private void ckMostrarEgresados_CheckedChanged(object sender, EventArgs e)
+        {
+            btnConsulta.PerformClick();
+        }
+
+        private void txtFiltrar_KeyUp(object sender, KeyEventArgs e)
+        {
+            DataTable tabla = dgvConsultaLegajos.DataSource as DataTable;
+
+            if (tabla != null)
+            {
+                if (ckMostrarEgresados.Checked) tabla.DefaultView.RowFilter = string.Format("CONVERT(Legajo, System.String) LIKE '%{0}%' OR Descripcion LIKE '%{0}%'", txtFiltrar.Text);
+                if (!ckMostrarEgresados.Checked) tabla.DefaultView.RowFilter = string.Format("CONVERT(Legajo, System.String) LIKE '%{0}%' OR Descripcion LIKE '%{0}%' AND Egresado <> 'S'", txtFiltrar.Text);
+            }
+        }
+
+        private void txtFiltrar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Escape)
+            {
+                txtFiltrar.Text = "";
+            }
+        }
+
+        private void dgvConsultaLegajos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dgvConsultaLegajos.CurrentRow != null)
+            {
+                var WCodigo = dgvConsultaLegajos.CurrentRow.Cells["Legajo"].Value ?? "";
+
+                if (WCodigo.ToString() != "")
+                {
+                    TB_Codigo.SelectedValue = WCodigo;
+                }
+
+                button1.PerformClick();
+
+                txtVersionActual.Focus();
+            }
+        }
     }
 }
