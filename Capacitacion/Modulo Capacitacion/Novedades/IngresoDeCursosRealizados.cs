@@ -1207,5 +1207,13 @@ namespace Modulo_Capacitacion.Novedades
 
             btnLimpiar.PerformClick();
         }
+
+        private void txtAyuda_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Escape)
+            {
+                txtAyuda.Text = "";
+            }
+        }
     }
 }

@@ -35,8 +35,23 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvGrilla = new System.Windows.Forms.DataGridView();
+            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.asignarNuevoLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarFilaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnAyudaCursos = new System.Windows.Forms.Button();
+            this.btnAyuda = new System.Windows.Forms.Button();
+            this.btnAyudaTema = new System.Windows.Forms.Button();
             this.txtFecha = new System.Windows.Forms.MaskedTextBox();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.txtDesTema = new System.Windows.Forms.TextBox();
@@ -45,6 +60,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbTipoProgramacion = new System.Windows.Forms.ComboBox();
             this.txtTemas = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtInstructor = new System.Windows.Forms.TextBox();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
@@ -58,44 +74,28 @@
             this.txtDesCurso = new System.Windows.Forms.TextBox();
             this.txtTema = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlAyuda = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtAyuda = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.dgvAyuda = new System.Windows.Forms.DataGridView();
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnCerrarAyuda = new System.Windows.Forms.Button();
-            this.btnAyuda = new System.Windows.Forms.Button();
-            this.btnAyudaTema = new System.Windows.Forms.Button();
-            this.btnAyudaCursos = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbLegajos = new System.Windows.Forms.GroupBox();
             this.cmbTipoLegajos = new System.Windows.Forms.ComboBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarFilaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asignarNuevoLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnImprimir = new System.Windows.Forms.Button();
+            this.dgvAyuda = new System.Windows.Forms.DataGridView();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtAyuda = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pnlAyuda.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAyuda)).BeginInit();
             this.panel7.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.gbLegajos.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAyuda)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -180,6 +180,68 @@
             this.dgvGrilla.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGrilla_RowHeaderMouseDoubleClick);
             this.dgvGrilla.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvGrilla_MouseDown);
             // 
+            // Legajo
+            // 
+            this.Legajo.DataPropertyName = "Legajo";
+            this.Legajo.HeaderText = "Legajo";
+            this.Legajo.Name = "Legajo";
+            this.Legajo.Width = 64;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.DataPropertyName = "Descripcion";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // Observaciones
+            // 
+            this.Observaciones.DataPropertyName = "Observaciones";
+            this.Observaciones.HeaderText = "Observaciones";
+            this.Observaciones.MaxInputLength = 50;
+            this.Observaciones.MinimumWidth = 300;
+            this.Observaciones.Name = "Observaciones";
+            this.Observaciones.Width = 300;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.asignarNuevoLegajoToolStripMenuItem,
+            this.copiarToolStripMenuItem,
+            this.copiarConCabecerasToolStripMenuItem,
+            this.eliminarFilaToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(191, 92);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // asignarNuevoLegajoToolStripMenuItem
+            // 
+            this.asignarNuevoLegajoToolStripMenuItem.Name = "asignarNuevoLegajoToolStripMenuItem";
+            this.asignarNuevoLegajoToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.asignarNuevoLegajoToolStripMenuItem.Text = "Asignar Nuevo Legajo";
+            this.asignarNuevoLegajoToolStripMenuItem.Click += new System.EventHandler(this.asignarNuevoLegajoToolStripMenuItem_Click);
+            // 
+            // copiarToolStripMenuItem
+            // 
+            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.copiarToolStripMenuItem.Text = "Copiar";
+            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
+            // 
+            // copiarConCabecerasToolStripMenuItem
+            // 
+            this.copiarConCabecerasToolStripMenuItem.Name = "copiarConCabecerasToolStripMenuItem";
+            this.copiarConCabecerasToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.copiarConCabecerasToolStripMenuItem.Text = "Copiar con Cabeceras";
+            this.copiarConCabecerasToolStripMenuItem.Click += new System.EventHandler(this.copiarConCabecerasToolStripMenuItem_Click);
+            // 
+            // eliminarFilaToolStripMenuItem
+            // 
+            this.eliminarFilaToolStripMenuItem.Name = "eliminarFilaToolStripMenuItem";
+            this.eliminarFilaToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.eliminarFilaToolStripMenuItem.Text = "Eliminar Fila";
+            this.eliminarFilaToolStripMenuItem.Click += new System.EventHandler(this.eliminarFilaToolStripMenuItem_Click);
+            // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.Control;
@@ -193,6 +255,58 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(797, 68);
             this.panel5.TabIndex = 5;
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(507, 10);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(65, 49);
+            this.button2.TabIndex = 0;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimir.FlatAppearance.BorderSize = 0;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.Location = new System.Drawing.Point(413, 10);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(65, 49);
+            this.btnImprimir.TabIndex = 0;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.limpiar;
+            this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnLimpiar.FlatAppearance.BorderSize = 0;
+            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpiar.Location = new System.Drawing.Point(319, 10);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(65, 49);
+            this.btnLimpiar.TabIndex = 0;
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
+            this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGuardar.FlatAppearance.BorderSize = 0;
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Location = new System.Drawing.Point(225, 10);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(65, 49);
+            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // panel4
             // 
@@ -228,6 +342,44 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(797, 157);
             this.panel4.TabIndex = 4;
+            // 
+            // btnAyudaCursos
+            // 
+            this.btnAyudaCursos.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.btnAyudaCursos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAyudaCursos.FlatAppearance.BorderSize = 0;
+            this.btnAyudaCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyudaCursos.Location = new System.Drawing.Point(524, 4);
+            this.btnAyudaCursos.Name = "btnAyudaCursos";
+            this.btnAyudaCursos.Size = new System.Drawing.Size(26, 30);
+            this.btnAyudaCursos.TabIndex = 55;
+            this.btnAyudaCursos.UseVisualStyleBackColor = true;
+            this.btnAyudaCursos.Click += new System.EventHandler(this.btnAyudaCursos_Click);
+            // 
+            // btnAyuda
+            // 
+            this.btnAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAyuda.FlatAppearance.BorderSize = 0;
+            this.btnAyuda.Location = new System.Drawing.Point(622, 75);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(162, 45);
+            this.btnAyuda.TabIndex = 0;
+            this.btnAyuda.Text = "Asignar Legajos";
+            this.btnAyuda.UseVisualStyleBackColor = true;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
+            // 
+            // btnAyudaTema
+            // 
+            this.btnAyudaTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.btnAyudaTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAyudaTema.FlatAppearance.BorderSize = 0;
+            this.btnAyudaTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyudaTema.Location = new System.Drawing.Point(200, 6);
+            this.btnAyudaTema.Name = "btnAyudaTema";
+            this.btnAyudaTema.Size = new System.Drawing.Size(26, 30);
+            this.btnAyudaTema.TabIndex = 54;
+            this.btnAyudaTema.UseVisualStyleBackColor = true;
+            this.btnAyudaTema.Click += new System.EventHandler(this.btnAyudaTema_Click);
             // 
             // txtFecha
             // 
@@ -313,6 +465,16 @@
             this.txtTemas.Size = new System.Drawing.Size(695, 20);
             this.txtTemas.TabIndex = 34;
             this.txtTemas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTemas_KeyDown);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(535, 44);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(123, 18);
+            this.label10.TabIndex = 49;
+            this.label10.Text = "Tipo Programación";
             // 
             // label8
             // 
@@ -450,68 +612,6 @@
             this.label5.TabIndex = 42;
             this.label5.Text = "Tema:";
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
-            this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnGuardar.FlatAppearance.BorderSize = 0;
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Location = new System.Drawing.Point(225, 10);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(65, 49);
-            this.btnGuardar.TabIndex = 0;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.limpiar;
-            this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnLimpiar.FlatAppearance.BorderSize = 0;
-            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLimpiar.Location = new System.Drawing.Point(319, 10);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(65, 49);
-            this.btnLimpiar.TabIndex = 0;
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(507, 10);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(65, 49);
-            this.button2.TabIndex = 0;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // Legajo
-            // 
-            this.Legajo.DataPropertyName = "Legajo";
-            this.Legajo.HeaderText = "Legajo";
-            this.Legajo.Name = "Legajo";
-            this.Legajo.Width = 64;
-            // 
-            // Nombre
-            // 
-            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Nombre.DataPropertyName = "Descripcion";
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Observaciones
-            // 
-            this.Observaciones.DataPropertyName = "Observaciones";
-            this.Observaciones.HeaderText = "Observaciones";
-            this.Observaciones.MaxInputLength = 50;
-            this.Observaciones.MinimumWidth = 300;
-            this.Observaciones.Name = "Observaciones";
-            this.Observaciones.Width = 300;
-            // 
             // pnlAyuda
             // 
             this.pnlAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
@@ -522,54 +622,6 @@
             this.pnlAyuda.Size = new System.Drawing.Size(556, 375);
             this.pnlAyuda.TabIndex = 9;
             this.pnlAyuda.Visible = false;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.gbLegajos);
-            this.groupBox1.Controls.Add(this.dgvAyuda);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.txtAyuda);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(14, 13);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(528, 307);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Ayuda";
-            // 
-            // txtAyuda
-            // 
-            this.txtAyuda.Location = new System.Drawing.Point(66, 24);
-            this.txtAyuda.Name = "txtAyuda";
-            this.txtAyuda.Size = new System.Drawing.Size(443, 20);
-            this.txtAyuda.TabIndex = 0;
-            this.txtAyuda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyUp);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 27);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Filtrar:";
-            // 
-            // dgvAyuda
-            // 
-            this.dgvAyuda.AllowUserToAddRows = false;
-            this.dgvAyuda.AllowUserToDeleteRows = false;
-            this.dgvAyuda.AllowUserToResizeRows = false;
-            this.dgvAyuda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAyuda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvAyuda.Location = new System.Drawing.Point(26, 50);
-            this.dgvAyuda.Name = "dgvAyuda";
-            this.dgvAyuda.ReadOnly = true;
-            this.dgvAyuda.RowHeadersWidth = 5;
-            this.dgvAyuda.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
-            this.dgvAyuda.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.dgvAyuda.Size = new System.Drawing.Size(482, 214);
-            this.dgvAyuda.TabIndex = 2;
-            this.dgvAyuda.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAyuda_CellMouseDoubleClick);
             // 
             // panel7
             // 
@@ -594,53 +646,19 @@
             this.btnCerrarAyuda.UseVisualStyleBackColor = true;
             this.btnCerrarAyuda.Click += new System.EventHandler(this.btnCerrarAyuda_Click);
             // 
-            // btnAyuda
+            // groupBox1
             // 
-            this.btnAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAyuda.FlatAppearance.BorderSize = 0;
-            this.btnAyuda.Location = new System.Drawing.Point(622, 75);
-            this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(162, 45);
-            this.btnAyuda.TabIndex = 0;
-            this.btnAyuda.Text = "Asignar Legajos";
-            this.btnAyuda.UseVisualStyleBackColor = true;
-            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
-            // 
-            // btnAyudaTema
-            // 
-            this.btnAyudaTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
-            this.btnAyudaTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAyudaTema.FlatAppearance.BorderSize = 0;
-            this.btnAyudaTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAyudaTema.Location = new System.Drawing.Point(200, 6);
-            this.btnAyudaTema.Name = "btnAyudaTema";
-            this.btnAyudaTema.Size = new System.Drawing.Size(26, 30);
-            this.btnAyudaTema.TabIndex = 54;
-            this.btnAyudaTema.UseVisualStyleBackColor = true;
-            this.btnAyudaTema.Click += new System.EventHandler(this.btnAyudaTema_Click);
-            // 
-            // btnAyudaCursos
-            // 
-            this.btnAyudaCursos.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
-            this.btnAyudaCursos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAyudaCursos.FlatAppearance.BorderSize = 0;
-            this.btnAyudaCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAyudaCursos.Location = new System.Drawing.Point(524, 4);
-            this.btnAyudaCursos.Name = "btnAyudaCursos";
-            this.btnAyudaCursos.Size = new System.Drawing.Size(26, 30);
-            this.btnAyudaCursos.TabIndex = 55;
-            this.btnAyudaCursos.UseVisualStyleBackColor = true;
-            this.btnAyudaCursos.Click += new System.EventHandler(this.btnAyudaCursos_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(535, 44);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(123, 18);
-            this.label10.TabIndex = 49;
-            this.label10.Text = "Tipo Programación";
+            this.groupBox1.Controls.Add(this.gbLegajos);
+            this.groupBox1.Controls.Add(this.dgvAyuda);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.txtAyuda);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Location = new System.Drawing.Point(14, 13);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(528, 307);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ayuda";
             // 
             // gbLegajos
             // 
@@ -667,57 +685,39 @@
             this.cmbTipoLegajos.TabIndex = 0;
             this.cmbTipoLegajos.DropDownClosed += new System.EventHandler(this.comboBox1_DropDownClosed);
             // 
-            // contextMenuStrip1
+            // dgvAyuda
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.asignarNuevoLegajoToolStripMenuItem,
-            this.copiarToolStripMenuItem,
-            this.copiarConCabecerasToolStripMenuItem,
-            this.eliminarFilaToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(191, 92);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            this.dgvAyuda.AllowUserToAddRows = false;
+            this.dgvAyuda.AllowUserToDeleteRows = false;
+            this.dgvAyuda.AllowUserToResizeRows = false;
+            this.dgvAyuda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAyuda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvAyuda.Location = new System.Drawing.Point(26, 50);
+            this.dgvAyuda.Name = "dgvAyuda";
+            this.dgvAyuda.ReadOnly = true;
+            this.dgvAyuda.RowHeadersWidth = 5;
+            this.dgvAyuda.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.dgvAyuda.Size = new System.Drawing.Size(482, 214);
+            this.dgvAyuda.TabIndex = 2;
+            this.dgvAyuda.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAyuda_CellMouseDoubleClick);
             // 
-            // copiarToolStripMenuItem
+            // label9
             // 
-            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
-            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.copiarToolStripMenuItem.Text = "Copiar";
-            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 27);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Filtrar:";
             // 
-            // copiarConCabecerasToolStripMenuItem
+            // txtAyuda
             // 
-            this.copiarConCabecerasToolStripMenuItem.Name = "copiarConCabecerasToolStripMenuItem";
-            this.copiarConCabecerasToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.copiarConCabecerasToolStripMenuItem.Text = "Copiar con Cabeceras";
-            this.copiarConCabecerasToolStripMenuItem.Click += new System.EventHandler(this.copiarConCabecerasToolStripMenuItem_Click);
-            // 
-            // eliminarFilaToolStripMenuItem
-            // 
-            this.eliminarFilaToolStripMenuItem.Name = "eliminarFilaToolStripMenuItem";
-            this.eliminarFilaToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.eliminarFilaToolStripMenuItem.Text = "Eliminar Fila";
-            this.eliminarFilaToolStripMenuItem.Click += new System.EventHandler(this.eliminarFilaToolStripMenuItem_Click);
-            // 
-            // asignarNuevoLegajoToolStripMenuItem
-            // 
-            this.asignarNuevoLegajoToolStripMenuItem.Name = "asignarNuevoLegajoToolStripMenuItem";
-            this.asignarNuevoLegajoToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.asignarNuevoLegajoToolStripMenuItem.Text = "Asignar Nuevo Legajo";
-            this.asignarNuevoLegajoToolStripMenuItem.Click += new System.EventHandler(this.asignarNuevoLegajoToolStripMenuItem_Click);
-            // 
-            // btnImprimir
-            // 
-            this.btnImprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
-            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnImprimir.FlatAppearance.BorderSize = 0;
-            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimir.Location = new System.Drawing.Point(413, 10);
-            this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(65, 49);
-            this.btnImprimir.TabIndex = 0;
-            this.btnImprimir.UseVisualStyleBackColor = true;
-            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            this.txtAyuda.Location = new System.Drawing.Point(66, 24);
+            this.txtAyuda.Name = "txtAyuda";
+            this.txtAyuda.Size = new System.Drawing.Size(443, 20);
+            this.txtAyuda.TabIndex = 0;
+            this.txtAyuda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyDown);
+            this.txtAyuda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyUp);
             // 
             // IngresoDeCursosRealizados
             // 
@@ -736,16 +736,16 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.pnlAyuda.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAyuda)).EndInit();
-            this.panel7.ResumeLayout(false);
             this.gbLegajos.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAyuda)).EndInit();
             this.ResumeLayout(false);
 
         }
