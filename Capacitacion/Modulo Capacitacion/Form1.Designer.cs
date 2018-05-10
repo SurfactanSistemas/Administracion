@@ -194,7 +194,7 @@
             // 
             this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Name = "asignaciónDeCursosPorPerfilOSectorToolStripMenuItem";
             this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
-            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Text = "Asignación de Cursos por Perfil o Sector";
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Text = "Asignación de Cursos por Perfil, Sector o Tema";
             this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem_Click);
             // 
             // listadosToolStripMenuItem
