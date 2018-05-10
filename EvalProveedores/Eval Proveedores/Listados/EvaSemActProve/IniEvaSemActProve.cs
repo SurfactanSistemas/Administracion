@@ -20,6 +20,7 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
         private void IniEvaSemActProve_Load(object sender, EventArgs e)
         {
             rbSoloConMovimientos.Checked = true;
+            ckTodos.Checked = true;
         }
 
         private void BT_Pantalla_Click(object sender, EventArgs e)
