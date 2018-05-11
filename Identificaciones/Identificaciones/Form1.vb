@@ -294,7 +294,7 @@ Public Class Form1
             cm.Connection = cn
             cm.Transaction = trans
 
-            ZSql = "DELETE FROM Identificaciones WHERE Clave = '" & WClave & "'"
+            ZSql = "DELETE FROM Identificaciones WHERE Dni = '" & WDNI & "'"
             cm.CommandText = ZSql
 
             cm.ExecuteNonQuery()
