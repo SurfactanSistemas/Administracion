@@ -68,8 +68,8 @@ Partial Class Form1
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.pnlCamaraWeb = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.WebCam1 = New WebCAM.WebCam()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TableLayoutPrincipal.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -85,7 +85,6 @@ Partial Class Form1
         Me.pnlCamaraWeb.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.Panel6.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPrincipal
@@ -628,8 +627,8 @@ Partial Class Form1
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.WebCam1)
         Me.GroupBox3.Controls.Add(Me.Panel6)
-        Me.GroupBox3.Controls.Add(Me.PictureBox1)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox3.Location = New System.Drawing.Point(7, 2)
@@ -638,6 +637,16 @@ Partial Class Form1
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Cámara Web"
+        '
+        'WebCam1
+        '
+        Me.WebCam1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.WebCam1.Imagen = Nothing
+        Me.WebCam1.Location = New System.Drawing.Point(32, 31)
+        Me.WebCam1.MilisegundosCaptura = 100
+        Me.WebCam1.Name = "WebCam1"
+        Me.WebCam1.Size = New System.Drawing.Size(279, 253)
+        Me.WebCam1.TabIndex = 3
         '
         'Panel6
         '
@@ -649,15 +658,6 @@ Partial Class Form1
         Me.Panel6.Size = New System.Drawing.Size(344, 52)
         Me.Panel6.TabIndex = 2
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(32, 16)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(280, 280)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -668,6 +668,8 @@ Partial Class Form1
         Me.Controls.Add(Me.TableLayoutPrincipal)
         Me.Location = New System.Drawing.Point(10, 10)
         Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(860, 415)
+        Me.MinimumSize = New System.Drawing.Size(860, 415)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Identificaciones - Menu Principal"
@@ -689,7 +691,6 @@ Partial Class Form1
         Me.pnlCamaraWeb.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -737,9 +738,9 @@ Partial Class Form1
     Friend WithEvents Panel6 As System.Windows.Forms.Panel
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents txtHastaFecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents WebCam1 As WebCAM.WebCam
 
 End Class

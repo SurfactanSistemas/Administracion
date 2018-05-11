@@ -1,11 +1,8 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
-Imports Emgu.CV
 
 Public Class Form1
 
-    Private capture As VideoCapture
-    Private m As Mat = New Mat
     Private WHashNombre = ""
     Private _Extension = ".png"
     
@@ -659,60 +656,25 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-
-        If capture Is Nothing Then
-            
-            capture = New VideoCapture
-
-            AddHandler capture.ImageGrabbed, AddressOf _Capture_ImageGrabbed
-
-        End If
-
-        capture.Start()
-
+        WebCam1.Start
         pnlCamaraWeb.Visible = True
-
-    End Sub
-
-    Private Sub _Capture_ImageGrabbed(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        Try
-            If Not IsNothing(capture) Then
-
-                If capture.Retrieve(m) Then
-
-                    PictureBox1.Image = m.Bitmap
-
-                    System.Threading.Thread.Sleep(100)
-
-                End If
-
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
 
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
 
-        If capture IsNot Nothing Then
-            
-            capture.Dispose()
+        picFoto.Image = WebCam1.Imagen
 
-            capture = Nothing
+        pnlCamaraWeb.Visible = False
 
-            picFoto.Image = PictureBox1.Image
-
-            pnlCamaraWeb.Visible = False
-
-            txtNroDocumento.Focus()
-
-        End If
+        txtNroDocumento.Focus()
 
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        
+        WebCam1.Stop
+        WebCam1.Dispose
         pnlCamaraWeb.Visible = False
 
         txtNroDocumento.Focus()
