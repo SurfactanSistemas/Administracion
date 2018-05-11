@@ -5,12 +5,13 @@ Public Class Form1
 
     Private WHashNombre = ""
     Private _Extension = ".png"
-    
+
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ClasesCompartidas.Globals.empresa = "SURFACTAN"
         picFoto.AllowDrop = True
         btnLimpiar.PerformClick()
         
+        Timer1.Start
     End Sub
 
     Private Sub txtNroDocumento_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroDocumento.KeyDown
@@ -662,19 +663,18 @@ Public Class Form1
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-
         picFoto.Image = WebCam1.Imagen
 
         pnlCamaraWeb.Visible = False
+        WebCam1.Stop
 
         txtNroDocumento.Focus()
 
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
-        
         WebCam1.Stop
-        WebCam1.Dispose
+
         pnlCamaraWeb.Visible = False
 
         txtNroDocumento.Focus()
@@ -801,5 +801,9 @@ Public Class Form1
             txtHastaFecha.Clear()
         End If
 
+    End Sub
+
+    Private Sub Timer1_Tick( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles Timer1.Tick
+        GC.Collect
     End Sub
 End Class

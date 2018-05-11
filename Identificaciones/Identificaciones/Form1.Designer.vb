@@ -658,6 +658,11 @@ Partial Class Form1
         Me.Panel6.Size = New System.Drawing.Size(344, 52)
         Me.Panel6.TabIndex = 2
         '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 10000
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
