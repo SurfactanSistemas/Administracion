@@ -631,7 +631,7 @@ Partial Class ProveedoresABM
         Me.cmbCertificados.Empty = True
         Me.cmbCertificados.EnterIndex = 31
         Me.cmbCertificados.FormattingEnabled = True
-        Me.cmbCertificados.Items.AddRange(New Object() {"", "ISO 9001", "ISO 9001/14001", "ISO 17025", "SENASA"})
+        Me.cmbCertificados.Items.AddRange(New Object() {"", "ISO 9001", "ISO 9001/14001", "ISO 17025", "SENASA", "ISO 22000"})
         Me.cmbCertificados.LabelAssociationKey = 27
         Me.cmbCertificados.Location = New System.Drawing.Point(124, 314)
         Me.cmbCertificados.Name = "cmbCertificados"
