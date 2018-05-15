@@ -38,11 +38,6 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.asignarNuevoLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarFilaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvAsignados = new System.Windows.Forms.DataGridView();
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,12 +74,16 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtAyuda = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtAno = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCandidatos)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsignados)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -152,6 +151,8 @@
             this.panel3.Controls.Add(this.button5);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.button4);
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.button1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 141);
@@ -171,14 +172,14 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3});
-            this.dgvCandidatos.ContextMenuStrip = this.contextMenuStrip1;
-            this.dgvCandidatos.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dgvCandidatos.Location = new System.Drawing.Point(0, 0);
+            this.dgvCandidatos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvCandidatos.Location = new System.Drawing.Point(13, 21);
             this.dgvCandidatos.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.dgvCandidatos.Name = "dgvCandidatos";
             this.dgvCandidatos.RowHeadersWidth = 15;
-            this.dgvCandidatos.Size = new System.Drawing.Size(365, 335);
+            this.dgvCandidatos.Size = new System.Drawing.Size(370, 314);
             this.dgvCandidatos.TabIndex = 37;
+            this.dgvCandidatos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCandidatos_CellContentDoubleClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -204,42 +205,6 @@
             this.dataGridViewTextBoxColumn3.Visible = false;
             this.dataGridViewTextBoxColumn3.Width = 300;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.asignarNuevoLegajoToolStripMenuItem,
-            this.copiarToolStripMenuItem,
-            this.copiarConCabecerasToolStripMenuItem,
-            this.eliminarFilaToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(191, 92);
-            // 
-            // asignarNuevoLegajoToolStripMenuItem
-            // 
-            this.asignarNuevoLegajoToolStripMenuItem.Name = "asignarNuevoLegajoToolStripMenuItem";
-            this.asignarNuevoLegajoToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.asignarNuevoLegajoToolStripMenuItem.Text = "Asignar Nuevo Legajo";
-            // 
-            // copiarToolStripMenuItem
-            // 
-            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
-            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.copiarToolStripMenuItem.Text = "Copiar";
-            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
-            // 
-            // copiarConCabecerasToolStripMenuItem
-            // 
-            this.copiarConCabecerasToolStripMenuItem.Name = "copiarConCabecerasToolStripMenuItem";
-            this.copiarConCabecerasToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.copiarConCabecerasToolStripMenuItem.Text = "Copiar con Cabeceras";
-            this.copiarConCabecerasToolStripMenuItem.Click += new System.EventHandler(this.copiarConCabecerasToolStripMenuItem_Click);
-            // 
-            // eliminarFilaToolStripMenuItem
-            // 
-            this.eliminarFilaToolStripMenuItem.Name = "eliminarFilaToolStripMenuItem";
-            this.eliminarFilaToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.eliminarFilaToolStripMenuItem.Text = "Eliminar Fila";
-            // 
             // dgvAsignados
             // 
             this.dgvAsignados.AllowUserToAddRows = false;
@@ -251,13 +216,12 @@
             this.Legajo,
             this.Nombre,
             this.Observaciones});
-            this.dgvAsignados.ContextMenuStrip = this.contextMenuStrip1;
-            this.dgvAsignados.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dgvAsignados.Location = new System.Drawing.Point(432, 0);
+            this.dgvAsignados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvAsignados.Location = new System.Drawing.Point(414, 21);
             this.dgvAsignados.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.dgvAsignados.Name = "dgvAsignados";
             this.dgvAsignados.RowHeadersWidth = 15;
-            this.dgvAsignados.Size = new System.Drawing.Size(365, 335);
+            this.dgvAsignados.Size = new System.Drawing.Size(370, 314);
             this.dgvAsignados.TabIndex = 36;
             this.dgvAsignados.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGrilla_RowHeaderMouseDoubleClick);
             this.dgvAsignados.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvGrilla_MouseDown);
@@ -291,52 +255,56 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(374, 181);
+            this.button5.Location = new System.Drawing.Point(384, 181);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(49, 27);
+            this.button5.Size = new System.Drawing.Size(20, 27);
             this.button5.TabIndex = 0;
             this.button5.Text = "<";
             this.toolTip1.SetToolTip(this.button5, "Quitar Legajo");
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
             // 
             // button3
             // 
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(374, 94);
+            this.button3.Location = new System.Drawing.Point(384, 94);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(49, 27);
+            this.button3.Size = new System.Drawing.Size(20, 27);
             this.button3.TabIndex = 0;
             this.button3.Text = ">";
             this.toolTip1.SetToolTip(this.button3, "Agregar Legajo");
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             // 
             // button4
             // 
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(374, 214);
+            this.button4.Location = new System.Drawing.Point(384, 214);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(49, 27);
+            this.button4.Size = new System.Drawing.Size(20, 27);
             this.button4.TabIndex = 0;
             this.button4.Text = "<<";
             this.toolTip1.SetToolTip(this.button4, "Quitar Todos");
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
             // 
             // button1
             // 
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(374, 127);
+            this.button1.Location = new System.Drawing.Point(384, 127);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 27);
+            this.button1.Size = new System.Drawing.Size(20, 27);
             this.button1.TabIndex = 0;
             this.button1.Text = ">>";
             this.toolTip1.SetToolTip(this.button1, "Agregar Todos");
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             // 
             // panel5
             // 
@@ -401,12 +369,14 @@
             this.btnGuardar.Size = new System.Drawing.Size(65, 49);
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.Control;
             this.panel4.Controls.Add(this.cmbVerPorII);
             this.panel4.Controls.Add(this.cmbVerPorI);
+            this.panel4.Controls.Add(this.button6);
             this.panel4.Controls.Add(this.btnAyuda);
             this.panel4.Controls.Add(this.btnAyudaTema);
             this.panel4.Controls.Add(this.label2);
@@ -414,8 +384,10 @@
             this.panel4.Controls.Add(this.LFechaAviso);
             this.panel4.Controls.Add(this.txtFiltrarI);
             this.panel4.Controls.Add(this.txtDesTema);
+            this.panel4.Controls.Add(this.txtAno);
             this.panel4.Controls.Add(this.txtCodigo);
             this.panel4.Controls.Add(this.txtTema);
+            this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
@@ -428,10 +400,11 @@
             // 
             this.cmbVerPorII.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVerPorII.FormattingEnabled = true;
-            this.cmbVerPorII.Location = new System.Drawing.Point(226, 108);
+            this.cmbVerPorII.Location = new System.Drawing.Point(229, 108);
             this.cmbVerPorII.Name = "cmbVerPorII";
-            this.cmbVerPorII.Size = new System.Drawing.Size(139, 21);
+            this.cmbVerPorII.Size = new System.Drawing.Size(191, 21);
             this.cmbVerPorII.TabIndex = 55;
+            this.cmbVerPorII.SelectedIndexChanged += new System.EventHandler(this.cmbVerPorII_SelectedIndexChanged);
             // 
             // cmbVerPorI
             // 
@@ -442,7 +415,7 @@
             "Perfil",
             "Sector",
             "Planta"});
-            this.cmbVerPorI.Location = new System.Drawing.Point(82, 108);
+            this.cmbVerPorI.Location = new System.Drawing.Point(100, 108);
             this.cmbVerPorI.Name = "cmbVerPorI";
             this.cmbVerPorI.Size = new System.Drawing.Size(118, 21);
             this.cmbVerPorI.TabIndex = 55;
@@ -452,12 +425,13 @@
             // 
             this.btnAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAyuda.FlatAppearance.BorderSize = 0;
-            this.btnAyuda.Location = new System.Drawing.Point(608, 18);
+            this.btnAyuda.Location = new System.Drawing.Point(531, 78);
             this.btnAyuda.Name = "btnAyuda";
             this.btnAyuda.Size = new System.Drawing.Size(162, 45);
             this.btnAyuda.TabIndex = 0;
             this.btnAyuda.Text = "Asignar Legajos";
             this.btnAyuda.UseVisualStyleBackColor = true;
+            this.btnAyuda.Visible = false;
             // 
             // btnAyudaTema
             // 
@@ -465,7 +439,7 @@
             this.btnAyudaTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAyudaTema.FlatAppearance.BorderSize = 0;
             this.btnAyudaTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAyudaTema.Location = new System.Drawing.Point(61, 24);
+            this.btnAyudaTema.Location = new System.Drawing.Point(230, 26);
             this.btnAyudaTema.Name = "btnAyudaTema";
             this.btnAyudaTema.Size = new System.Drawing.Size(26, 30);
             this.btnAyudaTema.TabIndex = 54;
@@ -476,7 +450,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 109);
+            this.label2.Location = new System.Drawing.Point(35, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 18);
             this.label2.TabIndex = 4;
@@ -486,7 +460,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 80);
+            this.label1.Location = new System.Drawing.Point(35, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 18);
             this.label1.TabIndex = 4;
@@ -506,10 +480,10 @@
             // txtFiltrarI
             // 
             this.txtFiltrarI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFiltrarI.Location = new System.Drawing.Point(61, 79);
+            this.txtFiltrarI.Location = new System.Drawing.Point(87, 79);
             this.txtFiltrarI.MaxLength = 6;
             this.txtFiltrarI.Name = "txtFiltrarI";
-            this.txtFiltrarI.Size = new System.Drawing.Size(304, 20);
+            this.txtFiltrarI.Size = new System.Drawing.Size(278, 20);
             this.txtFiltrarI.TabIndex = 5;
             this.txtFiltrarI.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltrarI_KeyUp);
             // 
@@ -517,10 +491,10 @@
             // 
             this.txtDesTema.Enabled = false;
             this.txtDesTema.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDesTema.Location = new System.Drawing.Point(94, 29);
+            this.txtDesTema.Location = new System.Drawing.Point(264, 29);
             this.txtDesTema.Name = "txtDesTema";
             this.txtDesTema.ReadOnly = true;
-            this.txtDesTema.Size = new System.Drawing.Size(500, 20);
+            this.txtDesTema.Size = new System.Drawing.Size(404, 20);
             this.txtDesTema.TabIndex = 52;
             this.txtDesTema.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtDesTema_MouseDoubleClick);
             // 
@@ -538,7 +512,7 @@
             // txtTema
             // 
             this.txtTema.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTema.Location = new System.Drawing.Point(60, 29);
+            this.txtTema.Location = new System.Drawing.Point(229, 31);
             this.txtTema.Name = "txtTema";
             this.txtTema.Size = new System.Drawing.Size(28, 20);
             this.txtTema.TabIndex = 41;
@@ -549,7 +523,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(16, 30);
+            this.label5.Location = new System.Drawing.Point(177, 32);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 18);
             this.label5.TabIndex = 42;
@@ -560,9 +534,9 @@
             this.pnlAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlAyuda.Controls.Add(this.panel7);
             this.pnlAyuda.Controls.Add(this.groupBox1);
-            this.pnlAyuda.Location = new System.Drawing.Point(117, 102);
+            this.pnlAyuda.Location = new System.Drawing.Point(120, 130);
             this.pnlAyuda.Name = "pnlAyuda";
-            this.pnlAyuda.Size = new System.Drawing.Size(562, 385);
+            this.pnlAyuda.Size = new System.Drawing.Size(562, 328);
             this.pnlAyuda.TabIndex = 9;
             this.pnlAyuda.Visible = false;
             // 
@@ -571,7 +545,7 @@
             this.panel7.BackColor = System.Drawing.SystemColors.Control;
             this.panel7.Controls.Add(this.btnCerrarAyuda);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 336);
+            this.panel7.Location = new System.Drawing.Point(0, 279);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(562, 49);
             this.panel7.TabIndex = 1;
@@ -634,7 +608,7 @@
             this.dgvAyuda.AllowUserToResizeRows = false;
             this.dgvAyuda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAyuda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvAyuda.Location = new System.Drawing.Point(26, 50);
+            this.dgvAyuda.Location = new System.Drawing.Point(26, 43);
             this.dgvAyuda.Name = "dgvAyuda";
             this.dgvAyuda.ReadOnly = true;
             this.dgvAyuda.RowHeadersWidth = 5;
@@ -646,7 +620,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 27);
+            this.label9.Location = new System.Drawing.Point(25, 20);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 13);
             this.label9.TabIndex = 1;
@@ -654,12 +628,65 @@
             // 
             // txtAyuda
             // 
-            this.txtAyuda.Location = new System.Drawing.Point(66, 24);
+            this.txtAyuda.Location = new System.Drawing.Point(66, 17);
             this.txtAyuda.Name = "txtAyuda";
-            this.txtAyuda.Size = new System.Drawing.Size(443, 20);
+            this.txtAyuda.Size = new System.Drawing.Size(441, 20);
             this.txtAyuda.TabIndex = 0;
             this.txtAyuda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyDown);
             this.txtAyuda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyUp);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(35, 31);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 18);
+            this.label3.TabIndex = 42;
+            this.label3.Text = "Año:";
+            // 
+            // txtAno
+            // 
+            this.txtAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAno.Location = new System.Drawing.Point(86, 30);
+            this.txtAno.MaxLength = 6;
+            this.txtAno.Name = "txtAno";
+            this.txtAno.Size = new System.Drawing.Size(59, 20);
+            this.txtAno.TabIndex = 5;
+            this.txtAno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtAno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAno_KeyDown);
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.Location = new System.Drawing.Point(675, 27);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(95, 24);
+            this.button6.TabIndex = 0;
+            this.button6.Text = "Buscar";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(168, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 14);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Candidatos";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(571, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 14);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Asignados";
             // 
             // AsignacionTemasPorSectorPerfilYPlanta
             // 
@@ -671,13 +698,14 @@
             this.Controls.Add(this.panel1);
             this.Name = "AsignacionTemasPorSectorPerfilYPlanta";
             this.Load += new System.EventHandler(this.IngresoDeCursosRealizados_Load);
+            this.Shown += new System.EventHandler(this.AsignacionTemasPorSectorPerfilYPlanta_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCandidatos)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAsignados)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -721,11 +749,6 @@
         private System.Windows.Forms.Button btnAyudaTema;
         private System.Windows.Forms.GroupBox gbLegajos;
         private System.Windows.Forms.ComboBox cmbTipoLegajos;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem copiarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copiarConCabecerasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eliminarFilaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem asignarNuevoLegajoToolStripMenuItem;
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.DataGridView dgvCandidatos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -744,5 +767,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox txtAno;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label4;
     }
 }
