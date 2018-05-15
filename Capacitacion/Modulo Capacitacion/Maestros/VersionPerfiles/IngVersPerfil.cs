@@ -386,7 +386,102 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
         {
             TB_Codigo.Focus();
         }
-        
+
+        private void btnCerrarAyuda_Click(object sender, EventArgs e)
+        {
+            pnlAyuda.Visible = false;
+            TB_Codigo.Focus();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable WPerfiles = _TraerPerfiles();
+                dgvAyuda.DataSource = WPerfiles;
+
+                DataGridViewColumn columna = dgvAyuda.Columns["Descripcion"];
+                if (columna != null) columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                columna = dgvAyuda.Columns["Codigo"];
+                if (columna != null) columna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+                pnlAyuda.Visible = true;
+                txtAyuda.Text = "";
+                txtAyuda.Focus();
+
+            }
+            catch (Exception ex)
+            {
+                pnlAyuda.Visible = false;
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private DataTable _TraerPerfiles()
+        {
+
+            try
+            {
+                DataTable tabla = new DataTable();
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT Codigo, Descripcion FROM Tarea WHERE Renglon = 1 ORDER BY Codigo";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                tabla.Load(dr);
+                            }
+                        }
+                    }
+
+                }
+
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+
+        }
+
+        private void txtAyuda_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                DataTable auxi = (DataTable) dgvAyuda.DataSource;
+
+                if (auxi != null) auxi.DefaultView.RowFilter = string.Format("CONVERT(Codigo, System.String) LIKE '%{0}%' OR Descripcion LIKE '%{0}%'", txtAyuda.Text);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dgvAyuda_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var WCodigo = dgvAyuda.Rows[e.RowIndex].Cells["Codigo"].Value ?? "";
+
+            if (WCodigo.ToString() == "") return;
+
+            TB_Codigo.Text = WCodigo.ToString();
+
+            btnCerrarAyuda.PerformClick();
+
+            TB_Version.Focus();
+        }
+
         //private void BuscarMaxCodigo()
         //{
         //    TB_Codigo.Text = PerVer.ObtenerUltimoId().ToString();

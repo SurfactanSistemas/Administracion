@@ -279,7 +279,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             TB_Equiv1Leg.Text = L.EstadoIX.Trim();
             TB_Equiv2Leg.Text = L.EstadoX.Trim();
 
-
+            L.EstaX = string.IsNullOrEmpty(L.EstaX.Trim()) ? "0" : L.EstaX;
 
             CB_EstPrim.SelectedIndex = int.Parse(L.EstaI);
             CB_EstSec.SelectedIndex = int.Parse(L.EstaII);

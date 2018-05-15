@@ -690,11 +690,25 @@ namespace Eval_Proveedores.Novedades
            // GB_Prove.Visible = false;
         }
 
+        private int ValidarClave()
+        {
+            int WResp = 0;
+
+            LoginAdmin Log = new LoginAdmin(WResp);
+            Log.ShowDialog();
+            WResp = Log.ValidClave;
+
+            return WResp;
+        }
+
+
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
             //GB_Prove.Visible = false;
             try
             {
+
+                if (ValidarClave() != 1) return;
 
                 if (TB_CodProveedor.Text == "") throw new Exception("Se debe ingresar el proveedor que desea evaluar");
 

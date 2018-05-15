@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
+namespace Eval_Proveedores.Listados.DetalleItemsMP {
     
     
     /// <summary>
@@ -301,9 +301,9 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
             
             private global::System.Data.DataColumn columnDesconOC;
             
-            private global::System.Data.DataColumn columnEnvaseOC;
+            private global::System.Data.DataColumn columnCertificado;
             
-            private global::System.Data.DataColumn columnDescEnvaseOC;
+            private global::System.Data.DataColumn columnEnvase;
             
             private global::System.Data.DataColumn columnFechaEntrega;
             
@@ -314,6 +314,10 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
             private global::System.Data.DataColumn columnPeriodo;
             
             private global::System.Data.DataColumn columnPlantas;
+            
+            private global::System.Data.DataColumn columnLaudo;
+            
+            private global::System.Data.DataColumn columnDevuelta;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -438,17 +442,17 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EnvaseOCColumn {
+            public global::System.Data.DataColumn CertificadoColumn {
                 get {
-                    return this.columnEnvaseOC;
+                    return this.columnCertificado;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DescEnvaseOCColumn {
+            public global::System.Data.DataColumn EnvaseColumn {
                 get {
-                    return this.columnDescEnvaseOC;
+                    return this.columnEnvase;
                 }
             }
             
@@ -489,6 +493,22 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
             public global::System.Data.DataColumn PlantasColumn {
                 get {
                     return this.columnPlantas;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LaudoColumn {
+                get {
+                    return this.columnLaudo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DevueltaColumn {
+                get {
+                    return this.columnDevuelta;
                 }
             }
             
@@ -541,13 +561,15 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
                         double Cantidad, 
                         double SaldoOc, 
                         double DesconOC, 
-                        string EnvaseOC, 
-                        string DescEnvaseOC, 
+                        string Certificado, 
+                        string Envase, 
                         string FechaEntrega, 
                         string FechaPosibleEntrega, 
                         string Proveedor, 
                         string Periodo, 
-                        string Plantas) {
+                        string Plantas, 
+                        string Laudo, 
+                        double Devuelta) {
                 DetalleItemsRow rowDetalleItemsRow = ((DetalleItemsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Clave,
@@ -561,13 +583,15 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
                         Cantidad,
                         SaldoOc,
                         DesconOC,
-                        EnvaseOC,
-                        DescEnvaseOC,
+                        Certificado,
+                        Envase,
                         FechaEntrega,
                         FechaPosibleEntrega,
                         Proveedor,
                         Periodo,
-                        Plantas};
+                        Plantas,
+                        Laudo,
+                        Devuelta};
                 rowDetalleItemsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDetalleItemsRow);
                 return rowDetalleItemsRow;
@@ -601,13 +625,15 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
                 this.columnCantidad = base.Columns["Cantidad"];
                 this.columnSaldoOc = base.Columns["SaldoOc"];
                 this.columnDesconOC = base.Columns["DesconOC"];
-                this.columnEnvaseOC = base.Columns["EnvaseOC"];
-                this.columnDescEnvaseOC = base.Columns["DescEnvaseOC"];
+                this.columnCertificado = base.Columns["Certificado"];
+                this.columnEnvase = base.Columns["Envase"];
                 this.columnFechaEntrega = base.Columns["FechaEntrega"];
                 this.columnFechaPosibleEntrega = base.Columns["FechaPosibleEntrega"];
                 this.columnProveedor = base.Columns["Proveedor"];
                 this.columnPeriodo = base.Columns["Periodo"];
                 this.columnPlantas = base.Columns["Plantas"];
+                this.columnLaudo = base.Columns["Laudo"];
+                this.columnDevuelta = base.Columns["Devuelta"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -635,10 +661,10 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
                 base.Columns.Add(this.columnSaldoOc);
                 this.columnDesconOC = new global::System.Data.DataColumn("DesconOC", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDesconOC);
-                this.columnEnvaseOC = new global::System.Data.DataColumn("EnvaseOC", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEnvaseOC);
-                this.columnDescEnvaseOC = new global::System.Data.DataColumn("DescEnvaseOC", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDescEnvaseOC);
+                this.columnCertificado = new global::System.Data.DataColumn("Certificado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCertificado);
+                this.columnEnvase = new global::System.Data.DataColumn("Envase", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEnvase);
                 this.columnFechaEntrega = new global::System.Data.DataColumn("FechaEntrega", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFechaEntrega);
                 this.columnFechaPosibleEntrega = new global::System.Data.DataColumn("FechaPosibleEntrega", typeof(string), null, global::System.Data.MappingType.Element);
@@ -649,6 +675,10 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
                 base.Columns.Add(this.columnPeriodo);
                 this.columnPlantas = new global::System.Data.DataColumn("Plantas", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPlantas);
+                this.columnLaudo = new global::System.Data.DataColumn("Laudo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLaudo);
+                this.columnDevuelta = new global::System.Data.DataColumn("Devuelta", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDevuelta);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -967,33 +997,33 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string EnvaseOC {
+            public string Certificado {
                 get {
                     try {
-                        return ((string)(this[this.tableDetalleItems.EnvaseOCColumn]));
+                        return ((string)(this[this.tableDetalleItems.CertificadoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EnvaseOC\' in table \'DetalleItems\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Certificado\' in table \'DetalleItems\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDetalleItems.EnvaseOCColumn] = value;
+                    this[this.tableDetalleItems.CertificadoColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DescEnvaseOC {
+            public string Envase {
                 get {
                     try {
-                        return ((string)(this[this.tableDetalleItems.DescEnvaseOCColumn]));
+                        return ((string)(this[this.tableDetalleItems.EnvaseColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DescEnvaseOC\' in table \'DetalleItems\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Envase\' in table \'DetalleItems\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDetalleItems.DescEnvaseOCColumn] = value;
+                    this[this.tableDetalleItems.EnvaseColumn] = value;
                 }
             }
             
@@ -1074,6 +1104,38 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
                 }
                 set {
                     this[this.tableDetalleItems.PlantasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Laudo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDetalleItems.LaudoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Laudo\' in table \'DetalleItems\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDetalleItems.LaudoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Devuelta {
+                get {
+                    try {
+                        return ((double)(this[this.tableDetalleItems.DevueltaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Devuelta\' in table \'DetalleItems\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDetalleItems.DevueltaColumn] = value;
                 }
             }
             
@@ -1211,26 +1273,26 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsEnvaseOCNull() {
-                return this.IsNull(this.tableDetalleItems.EnvaseOCColumn);
+            public bool IsCertificadoNull() {
+                return this.IsNull(this.tableDetalleItems.CertificadoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetEnvaseOCNull() {
-                this[this.tableDetalleItems.EnvaseOCColumn] = global::System.Convert.DBNull;
+            public void SetCertificadoNull() {
+                this[this.tableDetalleItems.CertificadoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDescEnvaseOCNull() {
-                return this.IsNull(this.tableDetalleItems.DescEnvaseOCColumn);
+            public bool IsEnvaseNull() {
+                return this.IsNull(this.tableDetalleItems.EnvaseColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDescEnvaseOCNull() {
-                this[this.tableDetalleItems.DescEnvaseOCColumn] = global::System.Convert.DBNull;
+            public void SetEnvaseNull() {
+                this[this.tableDetalleItems.EnvaseColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1291,6 +1353,30 @@ namespace Eval_Proveedores.Listados.DetalleItemsEnvases {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPlantasNull() {
                 this[this.tableDetalleItems.PlantasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLaudoNull() {
+                return this.IsNull(this.tableDetalleItems.LaudoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLaudoNull() {
+                this[this.tableDetalleItems.LaudoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDevueltaNull() {
+                return this.IsNull(this.tableDetalleItems.DevueltaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDevueltaNull() {
+                this[this.tableDetalleItems.DevueltaColumn] = global::System.Convert.DBNull;
             }
         }
         

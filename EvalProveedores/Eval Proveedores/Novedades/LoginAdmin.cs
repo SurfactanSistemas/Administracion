@@ -27,6 +27,7 @@ namespace Eval_Proveedores.Novedades
 
         private void LoginAdmin_Load(object sender, EventArgs e)
         {
+            TB_Clave.Text = "";
             TB_Clave.Focus();
         }
 
@@ -67,6 +68,11 @@ namespace Eval_Proveedores.Novedades
                     TB_Clave.Text = "";
                 }
             }
+        }
+
+        private void LoginAdmin_Shown(object sender, EventArgs e)
+        {
+            TB_Clave.Focus();
         }
     }
 }

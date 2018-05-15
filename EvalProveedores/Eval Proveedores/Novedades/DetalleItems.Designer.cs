@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblProveedor = new System.Windows.Forms.Label();
             this.LBCamion = new System.Windows.Forms.Label();
             this.DGV_EvalSemProve = new System.Windows.Forms.DataGridView();
             this.CodigoProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,9 +62,11 @@
             this.Liberada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Laudo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Devuelta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblProveedor = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnImprimir = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -76,6 +79,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(920, 39);
             this.panel1.TabIndex = 4;
+            // 
+            // lblProveedor
+            // 
+            this.lblProveedor.AutoSize = true;
+            this.lblProveedor.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProveedor.ForeColor = System.Drawing.Color.White;
+            this.lblProveedor.Location = new System.Drawing.Point(163, 11);
+            this.lblProveedor.Name = "lblProveedor";
+            this.lblProveedor.Size = new System.Drawing.Size(0, 19);
+            this.lblProveedor.TabIndex = 0;
             // 
             // LBCamion
             // 
@@ -114,19 +127,19 @@
             this.Liberada,
             this.Laudo,
             this.Devuelta});
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle55.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle55.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle55.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle55.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle55.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle55.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle55;
             this.DGV_EvalSemProve.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGV_EvalSemProve.Location = new System.Drawing.Point(0, 39);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
             this.DGV_EvalSemProve.RowHeadersWidth = 10;
-            this.DGV_EvalSemProve.Size = new System.Drawing.Size(920, 349);
+            this.DGV_EvalSemProve.Size = new System.Drawing.Size(920, 419);
             this.DGV_EvalSemProve.TabIndex = 10;
             // 
             // CodigoProve
@@ -154,8 +167,8 @@
             // Orden
             // 
             this.Orden.DataPropertyName = "Orden";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Orden.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Orden.DefaultCellStyle = dataGridViewCellStyle45;
             this.Orden.HeaderText = "Orden";
             this.Orden.Name = "Orden";
             this.Orden.Width = 40;
@@ -177,8 +190,8 @@
             // Certificado
             // 
             this.Certificado.DataPropertyName = "Certifica";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Certificado.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Certificado.DefaultCellStyle = dataGridViewCellStyle46;
             this.Certificado.HeaderText = "Certificado";
             this.Certificado.Name = "Certificado";
             this.Certificado.Width = 60;
@@ -193,8 +206,8 @@
             // Informe
             // 
             this.Informe.DataPropertyName = "Informe";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Informe.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Informe.DefaultCellStyle = dataGridViewCellStyle47;
             this.Informe.HeaderText = "Informe";
             this.Informe.Name = "Informe";
             this.Informe.Width = 50;
@@ -202,8 +215,8 @@
             // Cantidad
             // 
             this.Cantidad.DataPropertyName = "Cantidad";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Cantidad.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Cantidad.DefaultCellStyle = dataGridViewCellStyle48;
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.Width = 50;
@@ -211,8 +224,8 @@
             // FechaEntrega
             // 
             this.FechaEntrega.DataPropertyName = "fecha";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.FechaEntrega.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.FechaEntrega.DefaultCellStyle = dataGridViewCellStyle49;
             this.FechaEntrega.HeaderText = "Fecha Ent.";
             this.FechaEntrega.Name = "FechaEntrega";
             this.FechaEntrega.Width = 70;
@@ -220,38 +233,38 @@
             // FechaPosibleEntrega
             // 
             this.FechaPosibleEntrega.DataPropertyName = "Fecha2";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.FechaPosibleEntrega.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.FechaPosibleEntrega.DefaultCellStyle = dataGridViewCellStyle50;
             this.FechaPosibleEntrega.HeaderText = "Fecha Posib. Ent.";
             this.FechaPosibleEntrega.Name = "FechaPosibleEntrega";
             this.FechaPosibleEntrega.Width = 90;
             // 
             // Aprobado
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Aprobado.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Aprobado.DefaultCellStyle = dataGridViewCellStyle51;
             this.Aprobado.HeaderText = "Aprobado";
             this.Aprobado.Name = "Aprobado";
             // 
             // Desvio
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Desvio.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Desvio.DefaultCellStyle = dataGridViewCellStyle52;
             this.Desvio.HeaderText = "Desvio";
             this.Desvio.Name = "Desvio";
             this.Desvio.Width = 50;
             // 
             // Rechazado
             // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Rechazado.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Rechazado.DefaultCellStyle = dataGridViewCellStyle53;
             this.Rechazado.HeaderText = "Rechazado";
             this.Rechazado.Name = "Rechazado";
             // 
             // Atraso
             // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Atraso.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Atraso.DefaultCellStyle = dataGridViewCellStyle54;
             this.Atraso.HeaderText = "Atraso";
             this.Atraso.Name = "Atraso";
             this.Atraso.Width = 50;
@@ -277,30 +290,47 @@
             this.Devuelta.Name = "Devuelta";
             this.Devuelta.Width = 70;
             // 
-            // lblProveedor
+            // panel2
             // 
-            this.lblProveedor.AutoSize = true;
-            this.lblProveedor.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProveedor.ForeColor = System.Drawing.Color.White;
-            this.lblProveedor.Location = new System.Drawing.Point(163, 11);
-            this.lblProveedor.Name = "lblProveedor";
-            this.lblProveedor.Size = new System.Drawing.Size(0, 19);
-            this.lblProveedor.TabIndex = 0;
+            this.panel2.Controls.Add(this.btnImprimir);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 394);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(920, 64);
+            this.panel2.TabIndex = 11;
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Imprimir;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimir.FlatAppearance.BorderSize = 0;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.Location = new System.Drawing.Point(434, 10);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(53, 45);
+            this.btnImprimir.TabIndex = 1;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // DetalleItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(920, 388);
+            this.ClientSize = new System.Drawing.Size(920, 458);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.DGV_EvalSemProve);
             this.Controls.Add(this.panel1);
             this.Name = "DetalleItems";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.DetalleItems_Load);
+            this.ResizeBegin += new System.EventHandler(this.DetalleItemsEnvases_ResizeEnd);
+            this.ResizeEnd += new System.EventHandler(this.DetalleItemsEnvases_ResizeEnd);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.DetalleItemsEnvases_Paint);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_EvalSemProve)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -330,5 +360,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Laudo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Devuelta;
         private System.Windows.Forms.Label lblProveedor;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnImprimir;
     }
 }

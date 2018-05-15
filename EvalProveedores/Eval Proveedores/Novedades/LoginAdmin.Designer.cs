@@ -90,8 +90,10 @@
             this.TB_Clave.Mask = "9999";
             this.TB_Clave.Name = "TB_Clave";
             this.TB_Clave.PasswordChar = '*';
+            this.TB_Clave.PromptChar = ' ';
             this.TB_Clave.Size = new System.Drawing.Size(53, 20);
             this.TB_Clave.TabIndex = 26;
+            this.TB_Clave.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Clave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Clave_KeyDown);
             // 
             // BT_Salir
@@ -138,7 +140,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(389, 179);
+            this.ClientSize = new System.Drawing.Size(389, 178);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
@@ -146,6 +148,7 @@
             this.MinimumSize = new System.Drawing.Size(405, 217);
             this.Name = "LoginAdmin";
             this.Load += new System.EventHandler(this.LoginAdmin_Load);
+            this.Shown += new System.EventHandler(this.LoginAdmin_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

@@ -339,7 +339,7 @@ namespace Eval_Proveedores.Novedades
 
             descProve += "     " + GenerarTextoPlantas();
 
-            DetalleItems Detalle = new DetalleItems(dtInformeDetalle, descProve);
+            DetalleItems Detalle = new DetalleItems(dtInformeDetalle, _Prove, descProve, TB_Desde.Text + " al " + TB_Hasta.Text, GenerarTextoPlantas());
             Detalle.Show();
         }
 

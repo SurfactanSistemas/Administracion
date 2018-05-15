@@ -333,11 +333,23 @@ namespace Eval_Proveedores.Novedades
             CB_Punt35.DataSource = Lista1.ToArray();
         }
 
+        private int ValidarClave()
+        {
+            int WResp = 0;
+
+            LoginAdmin Log = new LoginAdmin(WResp);
+            Log.ShowDialog();
+            WResp = Log.ValidClave;
+
+            return WResp;
+        }
 
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
-            GuardarEva();
-            
+            if (ValidarClave() == 1)
+            {
+                GuardarEva();
+            }
         }
 
         private void CargarEva()

@@ -69,6 +69,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -157,7 +158,8 @@
             this.ingresoDeCornogramaDeCapacitaciónToolStripMenuItem,
             this.ingresoDeCursosRealizadosToolStripMenuItem,
             this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem,
-            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem});
+            this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem,
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem});
             this.novedadesToolStripMenuItem.Name = "novedadesToolStripMenuItem";
             this.novedadesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.novedadesToolStripMenuItem.Text = "Novedades";
@@ -418,6 +420,13 @@
             this.panel2.Size = new System.Drawing.Size(784, 498);
             this.panel2.TabIndex = 4;
             // 
+            // asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem
+            // 
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Name = "asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem";
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Text = "Asignacion de Temas por Perfil, Sector y Planta";
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Click += new System.EventHandler(this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -481,6 +490,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuNecesidadesCompetenciasPorSector;
         private System.Windows.Forms.ToolStripMenuItem actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignaciónDeCursosPorPerfilOSectorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem;
     }
 }
 

@@ -2,13 +2,19 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
+using Eval_Proveedores.Listados;
+using Eval_Proveedores.Listados.DetalleItemsEnvases;
 
 namespace Eval_Proveedores.Novedades
 {
     public partial class DetalleItemsEnvases : Form
     {
         private DataTable dtInformeDetalle;
+        private string WCodProv = "";
+        private string WPeriodo = "";
+        private string WPlantas = "";
 
         public DetalleItemsEnvases()
         {
@@ -17,17 +23,18 @@ namespace Eval_Proveedores.Novedades
 
         public DetalleItemsEnvases(DataTable dtInformeDetalle)
         {
-            // TODO: Complete member initialization
             this.dtInformeDetalle = dtInformeDetalle;
             InitializeComponent();
         }
 
-        public DetalleItemsEnvases(DataTable dtInformeDetalle, string WProveedor)
+        public DetalleItemsEnvases(DataTable dtInformeDetalle, string _CodProv, string WProveedor, string _Periodo, string _Plantas)
         {
-            // TODO: Complete member initialization
             this.dtInformeDetalle = dtInformeDetalle;
             InitializeComponent();
             lblProveedor.Text = WProveedor;
+            WCodProv = _CodProv;
+            WPeriodo = _Periodo;
+            WPlantas = _Plantas;
         }
 
         private void DetalleItems_Load(object sender, EventArgs e)
@@ -36,23 +43,13 @@ namespace Eval_Proveedores.Novedades
             //DGV_EvalSemProve.Columns.Clear();
             ArmarDt();
             //DGV_EvalSemProve.DataSource = dtItems;
+
+            btnImprimir.Location = Helper._CentrarH(Width, btnImprimir);
+
         }
 
         private void ArmarDt()
         {
-            //dtItems.Columns.Add("Articulo", typeof(string));
-            //dtItems.Columns.Add("Orden", typeof(string));
-            //dtItems.Columns.Add("Clave", typeof(string));
-            //dtItems.Columns.Add("DescArticulo", typeof(string));
-            //dtItems.Columns.Add("Certifica", typeof(string));
-            //dtItems.Columns.Add("Envase", typeof(string));
-            //dtItems.Columns.Add("Informe", typeof(string));
-            //dtItems.Columns.Add("Cantidad", typeof(string));
-            //dtItems.Columns.Add("Fecha", typeof(string));
-            //dtItems.Columns.Add("Fecha2", typeof(string));
-            //dtItems.Columns.Add("Liberada", typeof(string));
-            //dtItems.Columns.Add("Laudo", typeof(string));
-            //dtItems.Columns.Add("Devuelta", typeof(string));
             int _index = 0;
             DGV_EvalSemProve.Rows.Clear();
             string WOrden = "", WArticulo = "";
@@ -69,18 +66,14 @@ namespace Eval_Proveedores.Novedades
                 DGV_EvalSemProve.Rows[_index].Cells["Orden"].Value = WOrden;
                 DGV_EvalSemProve.Rows[_index].Cells["Desviad"].Value = fila["Clave"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["DescArticulo"].Value = fila["DesArticulo"].ToString(); //_TraerDescArticulo(fila["Articulo"].ToString());
-                DGV_EvalSemProve.Rows[_index].Cells["Atraso"].Value = _CalcularAtraso(fila["FechaOrd"].ToString(), fila["OrdFecha2"].ToString());
+                DGV_EvalSemProve.Rows[_index].Cells["Atraso"].Value = _CalcularAtraso(Helper.OrdenarFecha(fila["Fecha"].ToString()), Helper.OrdenarFecha(fila["Fecha2"].ToString()));
                 DGV_EvalSemProve.Rows[_index].Cells["Desvio"].Value = _EsPorDesvio(fila["Laudo"].ToString()) ? "X" : "";
                 DGV_EvalSemProve.Rows[_index].Cells["Aprobado"].Value = (_EsPorDesvio(fila["Laudo"].ToString()) || _DeterminarRechazado(fila["Devuelta"].ToString()) == "") ? "X" : "";
-
-                //DGV_EvalSemProve.Rows[_index].Cells["Certificado"].Value = fila["Certificado1"].ToString() == "1" ? "SI" : "NO";
-
-                //DGV_EvalSemProve.Rows[_index].Cells["Envase"].Value = fila["Estado1"].ToString() == "1" ? "SI" : "NO";
 
                 DGV_EvalSemProve.Rows[_index].Cells["Informe"].Value = fila["Informe"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["Cantidad"].Value = Helper.FormatoNumerico(fila["Cantidad"].ToString());
                 DGV_EvalSemProve.Rows[_index].Cells["FechaEntrega"].Value = fila["fecha"].ToString();
-                //DGV_EvalSemProve.Rows[_index].Cells["FechaPosibleEntrega"].Value = fila["Fecha2"].ToString();
+                
                 DGV_EvalSemProve.Rows[_index].Cells["Liberada"].Value = fila["Liberada"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["Laudo"].Value = fila["Laudo"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["Devuelta"].Value = fila["Devuelta"].ToString();
@@ -91,7 +84,6 @@ namespace Eval_Proveedores.Novedades
                 DGV_EvalSemProve.Rows[_index].Cells["DescEnvaseOC"].Value = fila["DescEnvaseOC"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["CSEmpresa"].Value = fila["CSEmpresa"].ToString();
 
-                 //dtItems.Rows.Add(filaItems);
             }
 
             foreach (string WColumna in new[] { "FechaPosibleEntrega", "CSEmpresa" })
@@ -100,12 +92,6 @@ namespace Eval_Proveedores.Novedades
                 if (column != null) column.Visible = false;
             }
 
-            //foreach (DataGridViewRow row in DGV_EvalSemProve.Rows)
-            //{
-
-            //    row.Cells["DescArticulo"].Value = _TraerDescArticulo(row.Cells["Articulo"].ToString());
-
-            //}
         }
 
         private string _DeterminarRechazado(string _Rechazado)
@@ -225,7 +211,7 @@ namespace Eval_Proveedores.Novedades
                 lblDescEns5.Text = WEnsayos[4]["Descripcion"].ToString();
             }
 
-            pnlEstadoEnvases.Location = new System.Drawing.Point((Width/2) - (pnlEstadoEnvases.Width/2),
+            pnlEstadoEnvases.Location = new Point((Width/2) - (pnlEstadoEnvases.Width/2),
                 pnlEstadoEnvases.Location.Y);
             pnlEstadoEnvases.Visible = true;
         }
@@ -238,7 +224,7 @@ namespace Eval_Proveedores.Novedades
 
             for (int i = 1; i <= 5; i++)
             {
-                tabla.Rows.Add(new object[]{i, ""});
+                tabla.Rows.Add(i, "");
             }
 
             string[] WEnsayo = new string[6];
@@ -327,31 +313,34 @@ namespace Eval_Proveedores.Novedades
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            Listados.VistaPrevia frm = new Listados.VistaPrevia();
+            VistaPrevia frm = new VistaPrevia();
 
-            Listados.DetalleItemsEnvases.Reporte rpt = new Listados.DetalleItemsEnvases.Reporte();
+            Reporte rpt = new Reporte();
 
-            Listados.DetalleItemsEnvases.Detalles tabla = new Listados.DetalleItemsEnvases.Detalles();
+            Detalles tabla = new Detalles();
 
-            foreach (DataGridViewRow row in DGV_EvalSemProve.Rows)
+            foreach (DataRow row in dtInformeDetalle.Rows)
             {
                 DataRow _r = tabla.Tables[0].NewRow();
 
-                _r["Clave"] = row.Cells["Renglon"].Value;
-                _r["Informe"] = row.Cells["Informe"].Value;
-                _r["Orden"] = row.Cells["Orden"].Value;
-                _r["Articulo"] = row.Cells["Articulo"].Value;
-                _r["Aprobado"] = row.Cells["Aprobado"].Value;
-                _r["Desvio"] = row.Cells["Desvio"].Value;
-                _r["Rechazado"] = row.Cells["Rechazado"].Value;
-                _r["Atraso"] = row.Cells["Atraso"].Value;
-                _r["Cantidad"] = row.Cells["Cantidad"].Value;
-                _r["SaldoOC"] = row.Cells["SaldoOC"].Value;
-                _r["DesconOC"] = row.Cells["DesconOC"].Value;
-                _r["EnvaseOC"] = row.Cells["EnvaseOC"].Value;
-                _r["DescEnvaseOC"] = row.Cells["DescEnvaseOC"].Value;
-                _r["FechaEntrega"] = row.Cells["FechaEntrega"].Value;
-                _r["FechaPosibleEntrega"] = row.Cells["FechaPosibleEntrega"].Value;
+                _r["Clave"] = row["Clave"];
+                _r["Informe"] = row["Informe"];
+                _r["Orden"] = row["Orden"];
+                _r["Articulo"] = row["Articulo"];
+                _r["Aprobado"] = (_EsPorDesvio(row["Laudo"].ToString()) || _DeterminarRechazado(row["Devuelta"].ToString()) == "") ? 1 : 0;
+                _r["Desvio"] = _EsPorDesvio(row["Laudo"].ToString()) ? 1 : 0;
+                _r["Rechazado"] = _DeterminarRechazado(row["Devuelta"].ToString()) == "X" ? 1 : 0;
+                _r["Atraso"] = _CalcularAtraso(Helper.OrdenarFecha(row["Fecha"].ToString()), Helper.OrdenarFecha(row["Fecha2"].ToString())); ;
+                _r["Cantidad"] =  double.Parse(row["Cantidad"].ToString());
+                _r["SaldoOC"] = double.Parse(row["SaldoOC"].ToString());
+                _r["DesconOC"] = double.Parse(row["DesconOC"].ToString());
+                _r["EnvaseOC"] = row["EnvaseOC"];
+                _r["DescEnvaseOC"] = row["DescEnvaseOC"];
+                _r["FechaEntrega"] = row["Fecha"];
+                _r["FechaPosibleEntrega"] = "";
+                _r["Proveedor"] = WCodProv;
+                _r["Plantas"] = WPlantas;
+                _r["Periodo"] = WPeriodo;
 
                 tabla.Tables[0].Rows.Add(_r);
             }
@@ -363,5 +352,14 @@ namespace Eval_Proveedores.Novedades
             frm.Show();
         }
 
+        private void DetalleItemsEnvases_ResizeEnd(object sender, EventArgs e)
+        {
+            btnImprimir.Location = Helper._CentrarH(Width, btnImprimir);
+        }
+
+        private void DetalleItemsEnvases_Paint(object sender, PaintEventArgs e)
+        {
+            btnImprimir.Location = Helper._CentrarH(Width, btnImprimir);
+        }
     }
 }

@@ -111,6 +111,7 @@ namespace Eval_Proveedores.Novedades
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Aprobados"].Value = WProveedor["Aprobados"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Retrasos"].Value = WProveedor["Retrasos"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Desvios"].Value = WProveedor["Desvios"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Rechazados"].Value = WProveedor["Rechazados"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["EnvasesOk"].Value = WProveedor["EnvasesOk"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["CertificadosOk"].Value = WProveedor["CertificadosOk"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Categoria1"].Value = WProveedor["CategoriaI"];
@@ -267,7 +268,7 @@ namespace Eval_Proveedores.Novedades
             
             _DescProve += "    " + GenerarTextoPlantas();
 
-            DetalleItemsEnvases Detalle = new DetalleItemsEnvases(dtInformeDetalle, _DescProve);
+            DetalleItemsEnvases Detalle = new DetalleItemsEnvases(dtInformeDetalle, _Prove, _DescProve, TB_Desde.Text + " al " + TB_Hasta.Text, GenerarTextoPlantas().TrimStart('(').TrimEnd(')').Trim());
             Detalle.Show();
         }
 

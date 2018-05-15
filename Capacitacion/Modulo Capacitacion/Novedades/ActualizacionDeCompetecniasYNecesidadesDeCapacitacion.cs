@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -49,16 +50,113 @@ namespace Modulo_Capacitacion.Novedades
                         cmd.Connection = conn;
                         cmd.Transaction = trans;
 
+                        bool WActualizaVersion = MessageBox.Show(
+                            "¿Desea Actualizar Version? Recuerde que esto afecta a todos los Legajos aqui listados.",
+                            "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+
+                        List<string> WAProcesar = new List<string>();
+
+                        if (WActualizaVersion)
+                        {
+                            // Guardamos la version actual de cada uno de los legajos antes de actualizar los datos de las Necesidades y Competencias de cada uno.
+                            foreach (DataGridViewRow _row in dgvGrilla.Rows)
+                            {
+                                var WLegajo = _row.Cells["Legajo"].Value ?? "";
+
+                                if (WLegajo.ToString() == "") continue;
+                                if (WAProcesar.Exists(l => l == WLegajo.ToString())) continue;
+
+                                WAProcesar.Add(WLegajo.ToString());
+                            }
+
+                            // Traemos los datos del legajo.
+                            DataTable WDatos = _TraerDatosLegajo(WAProcesar);
+
+                            if (WDatos.Rows.Count > 0)
+                            {
+                                string WLegajo = "";
+                                // Guardamos la version del Legajo.
+                                foreach (DataRow Row in WDatos.Rows)
+                                {
+                                    WLegajo = Row["Codigo"].ToString();
+
+                                    cmd.CommandText = "INSERT INTO LegajoVersion (Clave ,Codigo ,Version ,Renglon ,Descripcion ,FIngreso ,Perfil ,EstadoI ,EstadoII ,EstadoIII ,EstadoIV ,EstadoV ,EstadoVI ,EstadoVII ,EstadoVIII ,EstadoIX ,Curso ,EstadoCurso ,EstaI ,EstaII ,EstaIII ,EstaIV ,EstaV ,EstaVI ,EstaVII ,EstaVIII ,EstaIX ,EstaCurso ,ClavePerfil ,NecesariaCurso ,DeseableCurso ,FechaVersionI ,FechaVersionII ,Fegreso ,Tema ,PerfilVersion ,EstaX ,EstadoX) VALUES ("
+                                                    + "'" + Helper.Ceros(Row["Codigo"].ToString(), 6) + Helper.Ceros(Row["Version"].ToString(), 4) + Helper.Ceros(Row["Renglon"].ToString(), 2) + "',"
+                                                    + "'" + Row["Codigo"] + "',"
+                                                    + "'" + Row["Version"] + "',"
+                                                    + "'" + Row["Renglon"] + "',"
+                                                    + "'" + Row["Descripcion"] + "',"
+                                                    + "'" + Row["FIngreso"] + "',"
+                                                    + "" + Row["Perfil"] + ","
+                                                    + "'" + Row["EstadoI"] + "',"
+                                                    + "'" + Row["EstadoII"] + "',"
+                                                    + "'" + Row["EstadoIII"] + "',"
+                                                    + "'" + Row["EstadoIV"] + "',"
+                                                    + "'" + Row["EstadoV"] + "',"
+                                                    + "'" + Row["EstadoVI"] + "',"
+                                                    + "'" + Row["EstadoVII"] + "',"
+                                                    + "'" + Row["EstadoVIII"] + "',"
+                                                    + "'" + Row["EstadoIX"] + "',"
+                                                    + "" + Row["Curso"] + ","
+                                                    + "'" + Row["EstadoCurso"] + "',"
+                                                    + "" + Row["EstaI"] + ","
+                                                    + "" + Row["EstaII"] + ","
+                                                    + "" + Row["EstaIII"] + ","
+                                                    + "" + Row["EstaIV"] + ","
+                                                    + "" + Row["EstaV"] + ","
+                                                    + "" + Row["EstaVI"] + ","
+                                                    + "" + Row["EstaVII"] + ","
+                                                    + "" + Row["EstaVIII"] + ","
+                                                    + "" + Row["EstaIX"] + ","
+                                                    + "" + Row["EstaCurso"] + ","
+                                                    + "'" + Row["ClavePerfil"] + "',"
+                                                    + "'" + Row["NecesariaCurso"] + "',"
+                                                    + "'" + Row["DeseableCurso"] + "',"
+                                                    + "'" + Row["FechaVersion"] + "',"
+                                                    + "'" + DateTime.Now.ToString("dd/MM/yyyy") + "',"
+                                                    + "'" + Row["FEgreso"] + "',"
+                                                    + "'" + Row["Tema"] + "',"
+                                                    + "" + Row["PerfilVersion"] + ","
+                                                    + "'" + Row["EstaX"] + "',"
+                                                    + "'" + Row["EstadoX"] + "'"
+                                                    + ")";
+
+
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                // Incrementamos la numeracion de la Version en el Legajo.
+                                cmd.CommandText = "UPDATE Legajo SET Version = Version + 1 WHERE Codigo = '" + WLegajo + "'";
+                                cmd.ExecuteNonQuery();
+                            }
+
+
+                        }
+
+                        // Actualizamos cada uno de los renglones
                         foreach (DataGridViewRow row in dgvGrilla.Rows)
                         {
                             var WClave = row.Cells["Clave"].Value;
                             var WCalificacion = row.Cells["idCalificacion"].Value;
                             var WObservaciones = row.Cells["Observaciones"].Value;
-
+                            var WMarca = row.Cells["Marca"].Value;
+                            var WMarcar = row.Cells["MarcarActualizacion"].Value;
+                            
                             if (WClave == null) continue;
+
+                            string WLegajo = int.Parse(Helper.Left(WClave.ToString(), 6)).ToString();
 
                             cmd.CommandText = "UPDATE Legajo SET EstaCurso = '" + WCalificacion + "', EstadoCurso = '" + WObservaciones + "' WHERE Clave = '" + WClave + "'";
                             cmd.ExecuteNonQuery();
+
+                            cmd.CommandText = "DELETE LegajoMarcaModificacion WHERE Clave = '" + WClave + "'";
+                            cmd.ExecuteNonQuery();
+
+                            if (WMarca.ToString() == "X" || WMarcar.ToString() == "X")
+                            {
+                                cmd.CommandText = "INSERT INTO LegajoMarcaModificacion (Clave, Legajo, Fecha, FechaOrd, Actualizado) VALUES ('" + WClave + "', '" + WLegajo + "', '" + DateTime.Now.ToString("dd/MM/yyyy") + "', '" + Helper.OrdenarFecha(DateTime.Now.ToString("dd/MM/yyyy")) + "', 'X')";
+                                cmd.ExecuteNonQuery();
+                            }
 
                         }
 
@@ -67,7 +165,7 @@ namespace Modulo_Capacitacion.Novedades
                 }
 
                 MessageBox.Show("Datos Actualizados correctamente");
-                //btnBuscar.PerformClick();
+                btnBuscar.PerformClick();
 
             }
             catch (Exception err)
@@ -75,6 +173,52 @@ namespace Modulo_Capacitacion.Novedades
                 if (trans != null) trans.Rollback();
                 MessageBox.Show("Ocurrio un problema al querer actualizar los datos. " + Environment.NewLine + " Motivo" + err.Message, "Error");
             }
+        }
+
+        private DataTable _TraerDatosLegajo(List<string> wLegajo)
+        {
+
+            try
+            {
+                DataTable tabla = new DataTable();
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+
+                        string WLegajos = "";
+
+                        foreach (string l in wLegajo)
+                        {
+                            WLegajos += l + ",";
+                        }
+
+                        WLegajos = WLegajos.TrimEnd(',');
+
+                        cmd.CommandText = "SELECT * FROM Legajo WHERE Codigo IN (" + WLegajos + ") ORDER BY Codigo, Renglon";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                tabla.Load(dr);
+                            }
+                        }
+                    }
+
+                }
+
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+        
         }
 
 
@@ -349,10 +493,10 @@ namespace Modulo_Capacitacion.Novedades
                     cmd.Connection = conn;
                     
                     if (rbPerfil.Checked)
-                        cmd.CommandText = "SELECT Legajo.Clave, Legajo.Perfil, Tarea.Descripcion as DescPerfil, Legajo.Renglon, Legajo.Codigo as Legajo, Legajo.Descripcion as Nombre, Legajo.Curso, ISNULL(Curso.Descripcion, '') as DescCurso, ISNULL(Legajo.NecesariaCurso, '') as Necesario, ISNULL(Legajo.DeseableCurso, '') as Deseable, ISNULL(Legajo.Estacurso, '') as Calificacion, ISNULL(Legajo.EstadoCurso, '') as Observaciones FROM Legajo FULL OUTER JOIN Curso ON Legajo.Curso = Curso.Codigo FULL OUTER JOIN Tarea ON Legajo.Perfil = Tarea.Codigo WHERE Tarea.Renglon = 1 AND Legajo.Perfil = '" + cmbOrganizar.SelectedValue + "' AND Legajo.Clave IS NOT NULL AND Legajo.FEgreso IN ('  /  /    ', '00/00/0000') ORDER BY Legajo.Codigo, Legajo.Renglon";
+                        cmd.CommandText = "SELECT Legajo.Clave, Legajo.Perfil, Tarea.Descripcion as DescPerfil, Legajo.Renglon, Legajo.Codigo as Legajo, Legajo.Descripcion as Nombre, Legajo.Curso, ISNULL(Curso.Descripcion, '') as DescCurso, ISNULL(Legajo.NecesariaCurso, '') as Necesario, ISNULL(Legajo.DeseableCurso, '') as Deseable, ISNULL(Legajo.Estacurso, '') as Calificacion, ISNULL(Legajo.EstadoCurso, '') as Observaciones, Marca = ISNULL(LMM.Actualizado, '') FROM Legajo FULL OUTER JOIN Curso ON Legajo.Curso = Curso.Codigo FULL OUTER JOIN Tarea ON Legajo.Perfil = Tarea.Codigo FULL OUTER JOIN LegajoMarcaModificacion LMM ON Legajo.Clave = LMM.Clave WHERE Tarea.Renglon = 1 AND Legajo.Perfil = '" + cmbOrganizar.SelectedValue + "' AND Legajo.Clave IS NOT NULL AND Legajo.FEgreso IN ('  /  /    ', '00/00/0000') ORDER BY Legajo.Descripcion, Legajo.Codigo, Legajo.Renglon";
 
                     if (rbSector.Checked)
-                        cmd.CommandText = "SELECT Legajo.Clave, Legajo.Perfil, Tarea.Descripcion as DescPerfil, Legajo.Renglon, Legajo.Codigo as Legajo, Legajo.Descripcion as Nombre, Legajo.Curso, ISNULL(Curso.Descripcion, '') as DescCurso, ISNULL(Legajo.NecesariaCurso, '') as Necesario, ISNULL(Legajo.DeseableCurso, '') as Deseable, ISNULL(Legajo.Estacurso, '') as Calificacion, ISNULL(Legajo.EstadoCurso, '') as Observaciones FROM Legajo FULL OUTER JOIN Curso ON Legajo.Curso = Curso.Codigo FULL OUTER JOIN Tarea ON Legajo.Perfil = Tarea.Codigo WHERE Tarea.Renglon = 1 AND Legajo.Clave IS NOT NULL AND Legajo.FEgreso IN ('  /  /    ', '00/00/0000') AND Legajo.Sector = '" + cmbOrganizar.SelectedValue + "' ORDER BY Legajo.Perfil, Legajo.Codigo, Legajo.Renglon";
+                        cmd.CommandText = "SELECT Legajo.Clave, Legajo.Perfil, Tarea.Descripcion as DescPerfil, Legajo.Renglon, Legajo.Codigo as Legajo, Legajo.Descripcion as Nombre, Legajo.Curso, ISNULL(Curso.Descripcion, '') as DescCurso, ISNULL(Legajo.NecesariaCurso, '') as Necesario, ISNULL(Legajo.DeseableCurso, '') as Deseable, ISNULL(Legajo.Estacurso, '') as Calificacion, ISNULL(Legajo.EstadoCurso, '') as Observaciones, Marca = ISNULL(LMM.Actualizado, '') FROM Legajo FULL OUTER JOIN Curso ON Legajo.Curso = Curso.Codigo FULL OUTER JOIN Tarea ON Legajo.Perfil = Tarea.Codigo FULL OUTER JOIN LegajoMarcaModificacion LMM ON Legajo.Clave = LMM.Clave WHERE Tarea.Renglon = 1 AND Legajo.Clave IS NOT NULL AND Legajo.FEgreso IN ('  /  /    ', '00/00/0000') AND Legajo.Sector = '" + cmbOrganizar.SelectedValue + "' ORDER BY Legajo.Perfil, Legajo.Descripcion, Legajo.Codigo, Legajo.Renglon";
                     
                     //pnlProgreso.Location = Helper._CentrarH(Width, pnlProgreso);
                     //pnlProgreso.Visible = true;
@@ -386,6 +530,9 @@ namespace Modulo_Capacitacion.Novedades
                                 dgvGrilla.Rows[WRowindex].Cells["idCalificacionAnterior"].Value = dr["Calificacion"];
                                 dgvGrilla.Rows[WRowindex].Cells["Calificacion"].Value = _TraerDescripcionCalificacion(dr["Calificacion"].ToString());
                                 dgvGrilla.Rows[WRowindex].Cells["Observaciones"].Value = dr["Observaciones"].ToString().Trim();
+                                dgvGrilla.Rows[WRowindex].Cells["Marca"].Value = dr["Marca"].ToString().Trim();
+                                dgvGrilla.Rows[WRowindex].Cells["MarcarActualizacion"].Value = dr["Marca"].ToString().Trim();
+
 
                                 if (progressBar1.Value < progressBar1.Maximum) progressBar1.Increment(1);
                             }
@@ -422,6 +569,24 @@ namespace Modulo_Capacitacion.Novedades
                 {
                     DataGridViewColumn c = dgvGrilla.Columns[Columna];
                     if (c != null) c.Visible = true;
+                }
+            }
+
+            ProcesarColoracionActualizacion();
+
+            if (dgvGrilla.Rows.Count == 0) MessageBox.Show("No hay datos que listar.");
+        }
+
+        private void ProcesarColoracionActualizacion()
+        {
+            foreach (DataGridViewRow row in dgvGrilla.Rows)
+            {
+                var WMarca = row.Cells["Marca"].Value ?? "";
+
+                if (WMarca.ToString() == "X")
+                {
+                    row.DefaultCellStyle.BackColor = Color.Green;
+                    row.DefaultCellStyle.ForeColor = Color.White;
                 }
             }
         }
@@ -552,11 +717,24 @@ namespace Modulo_Capacitacion.Novedades
         {
             dgvGrilla.CurrentCell.Value = cmbAuxi.SelectedItem;
             dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].DefaultCellStyle.BackColor = WBackColorOriginal;
-            
+            dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+            dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].Cells["MarcarActualizacion"].Value = "";
+
+
+            var WMarca = dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].Cells["Marca"].Value ?? "";
+
+            if (WMarca.ToString() == "X")
+            {
+                dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].DefaultCellStyle.BackColor = Color.Green;
+                dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].DefaultCellStyle.ForeColor = Color.White;
+            }
+
             if (dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].Cells["IdCalificacionAnterior"].Value.ToString() !=
                 cmbAuxi.SelectedIndex.ToString())
             {
                 dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+                dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].Cells["MarcarActualizacion"].Value = "X";
             }
 
             dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].Cells["IdCalificacion"].Value = cmbAuxi.SelectedIndex;

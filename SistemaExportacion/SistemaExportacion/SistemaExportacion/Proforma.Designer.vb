@@ -38,6 +38,8 @@ Partial Class Proforma
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.gbEntregado = New System.Windows.Forms.GroupBox()
+        Me.Label26 = New System.Windows.Forms.Label()
         Me.GrupoConsulta = New System.Windows.Forms.GroupBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.lstOpcionesConsulta = New System.Windows.Forms.ListBox()
@@ -48,6 +50,7 @@ Partial Class Proforma
         Me.ckPakingList = New System.Windows.Forms.CheckBox()
         Me.ckEnviarDocumentacion = New System.Windows.Forms.CheckBox()
         Me.cmbVia = New System.Windows.Forms.ComboBox()
+        Me.btnEntregado = New System.Windows.Forms.Button()
         Me.btnHistorialArchivosRelacionados = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtObservacionesIII = New System.Windows.Forms.TextBox()
@@ -112,17 +115,14 @@ Partial Class Proforma
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnEntregado = New System.Windows.Forms.Button()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.gbEntregado = New System.Windows.Forms.GroupBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.gbEntregado.SuspendLayout()
         Me.GrupoConsulta.SuspendLayout()
         CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
-        Me.gbEntregado.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -285,6 +285,31 @@ Partial Class Proforma
         Me.Panel1.Size = New System.Drawing.Size(793, 509)
         Me.Panel1.TabIndex = 2
         '
+        'gbEntregado
+        '
+        Me.gbEntregado.Controls.Add(Me.Label26)
+        Me.gbEntregado.ForeColor = System.Drawing.SystemColors.Control
+        Me.gbEntregado.Location = New System.Drawing.Point(212, 452)
+        Me.gbEntregado.Name = "gbEntregado"
+        Me.gbEntregado.Size = New System.Drawing.Size(266, 51)
+        Me.gbEntregado.TabIndex = 19
+        Me.gbEntregado.TabStop = False
+        Me.gbEntregado.Text = "Estado de Entrega"
+        Me.gbEntregado.Visible = False
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Calibri", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.Label26.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label26.Location = New System.Drawing.Point(51, 17)
+        Me.Label26.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(168, 23)
+        Me.Label26.TabIndex = 18
+        Me.Label26.Text = "Proforma Entregada"
+        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'GrupoConsulta
         '
         Me.GrupoConsulta.Controls.Add(Me.txtAyuda)
@@ -391,6 +416,18 @@ Partial Class Proforma
         Me.cmbVia.Name = "cmbVia"
         Me.cmbVia.Size = New System.Drawing.Size(117, 21)
         Me.cmbVia.TabIndex = 14
+        '
+        'btnEntregado
+        '
+        Me.btnEntregado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEntregado.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEntregado.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnEntregado.Location = New System.Drawing.Point(24, 463)
+        Me.btnEntregado.Name = "btnEntregado"
+        Me.btnEntregado.Size = New System.Drawing.Size(174, 38)
+        Me.btnEntregado.TabIndex = 13
+        Me.btnEntregado.Text = "Indicar Entrega de Proforma"
+        Me.btnEntregado.UseVisualStyleBackColor = True
         '
         'btnHistorialArchivosRelacionados
         '
@@ -560,7 +597,7 @@ Partial Class Proforma
         '
         Me.cmbCondicion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondicion.FormattingEnabled = True
-        Me.cmbCondicion.Items.AddRange(New Object() {"", "FOB", "CIF", "CFR", "CPT", "EXW", "FCA"})
+        Me.cmbCondicion.Items.AddRange(New Object() {"", "FOB", "CIF", "CFR", "CPT", "EXW", "FCA", "FAS", "CIP", "DAF", "DES", "DEQ", "DDA", "DDP", "DAP"})
         Me.cmbCondicion.Location = New System.Drawing.Point(98, 103)
         Me.cmbCondicion.Name = "cmbCondicion"
         Me.cmbCondicion.Size = New System.Drawing.Size(65, 21)
@@ -1102,43 +1139,6 @@ Partial Class Proforma
         Me.ToolTip1.SetToolTip(Me.btnAceptar, "Grabar / Actualizar Proforma")
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'btnEntregado
-        '
-        Me.btnEntregado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEntregado.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEntregado.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEntregado.Location = New System.Drawing.Point(24, 463)
-        Me.btnEntregado.Name = "btnEntregado"
-        Me.btnEntregado.Size = New System.Drawing.Size(174, 38)
-        Me.btnEntregado.TabIndex = 13
-        Me.btnEntregado.Text = "Indicar Entrega de Proforma"
-        Me.btnEntregado.UseVisualStyleBackColor = True
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Font = New System.Drawing.Font("Calibri", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label26.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label26.Location = New System.Drawing.Point(51, 17)
-        Me.Label26.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(168, 23)
-        Me.Label26.TabIndex = 18
-        Me.Label26.Text = "Proforma Entregada"
-        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'gbEntregado
-        '
-        Me.gbEntregado.Controls.Add(Me.Label26)
-        Me.gbEntregado.ForeColor = System.Drawing.SystemColors.Control
-        Me.gbEntregado.Location = New System.Drawing.Point(212, 452)
-        Me.gbEntregado.Name = "gbEntregado"
-        Me.gbEntregado.Size = New System.Drawing.Size(266, 51)
-        Me.gbEntregado.TabIndex = 19
-        Me.gbEntregado.TabStop = False
-        Me.gbEntregado.Text = "Estado de Entrega"
-        Me.gbEntregado.Visible = False
-        '
         'Proforma
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1153,12 +1153,12 @@ Partial Class Proforma
         Me.LayoutCuerpoPrincipal.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.gbEntregado.ResumeLayout(False)
+        Me.gbEntregado.PerformLayout()
         Me.GrupoConsulta.ResumeLayout(False)
         Me.GrupoConsulta.PerformLayout()
         CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
-        Me.gbEntregado.ResumeLayout(False)
-        Me.gbEntregado.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
