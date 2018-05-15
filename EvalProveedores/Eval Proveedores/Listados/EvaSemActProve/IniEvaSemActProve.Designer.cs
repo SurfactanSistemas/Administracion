@@ -44,10 +44,21 @@
             this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ckPellital = new System.Windows.Forms.CheckBox();
+            this.ckPlantaVII = new System.Windows.Forms.CheckBox();
+            this.ckPlantaVI = new System.Windows.Forms.CheckBox();
+            this.ckPlantaV = new System.Windows.Forms.CheckBox();
+            this.ckPlantaIV = new System.Windows.Forms.CheckBox();
+            this.ckPlantaIII = new System.Windows.Forms.CheckBox();
+            this.ckPlantaII = new System.Windows.Forms.CheckBox();
+            this.ckPlantaI = new System.Windows.Forms.CheckBox();
+            this.ckTodos = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -78,7 +89,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(526, 246);
+            this.panel2.Size = new System.Drawing.Size(526, 294);
             this.panel2.TabIndex = 5;
             // 
             // panel3
@@ -95,16 +106,17 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Location = new System.Drawing.Point(10, 7);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(507, 233);
+            this.panel3.Size = new System.Drawing.Size(507, 277);
             this.panel3.TabIndex = 0;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.rbTodos);
             this.groupBox1.Controls.Add(this.rbSoloConMovimientos);
-            this.groupBox1.Location = new System.Drawing.Point(20, 96);
+            this.groupBox1.Location = new System.Drawing.Point(20, 52);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(467, 50);
+            this.groupBox1.Size = new System.Drawing.Size(467, 136);
             this.groupBox1.TabIndex = 85;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
@@ -133,7 +145,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(20, 152);
+            this.progressBar1.Location = new System.Drawing.Point(20, 193);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(467, 24);
             this.progressBar1.TabIndex = 84;
@@ -145,7 +157,7 @@
             this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(148, 184);
+            this.BT_Pantalla.Location = new System.Drawing.Point(148, 226);
             this.BT_Pantalla.Name = "BT_Pantalla";
             this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
             this.BT_Pantalla.TabIndex = 83;
@@ -158,7 +170,7 @@
             this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(231, 184);
+            this.BT_Imprimir.Location = new System.Drawing.Point(231, 226);
             this.BT_Imprimir.Name = "BT_Imprimir";
             this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
             this.BT_Imprimir.TabIndex = 80;
@@ -171,7 +183,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(319, 184);
+            this.BT_Salir.Location = new System.Drawing.Point(319, 226);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
@@ -180,7 +192,7 @@
             // 
             // TB_Hasta
             // 
-            this.TB_Hasta.Location = new System.Drawing.Point(272, 69);
+            this.TB_Hasta.Location = new System.Drawing.Point(374, 24);
             this.TB_Hasta.Mask = "00/00/0000";
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
@@ -190,7 +202,7 @@
             // 
             // TB_Desde
             // 
-            this.TB_Desde.Location = new System.Drawing.Point(272, 24);
+            this.TB_Desde.Location = new System.Drawing.Point(137, 24);
             this.TB_Desde.Mask = "00/00/0000";
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.Size = new System.Drawing.Size(100, 20);
@@ -202,7 +214,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(134, 69);
+            this.label2.Location = new System.Drawing.Point(277, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 18);
             this.label2.TabIndex = 2;
@@ -212,18 +224,136 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(134, 27);
+            this.label1.Location = new System.Drawing.Point(33, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "Desde Fecha:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.ckPellital);
+            this.groupBox2.Controls.Add(this.ckPlantaVII);
+            this.groupBox2.Controls.Add(this.ckPlantaVI);
+            this.groupBox2.Controls.Add(this.ckPlantaV);
+            this.groupBox2.Controls.Add(this.ckPlantaIV);
+            this.groupBox2.Controls.Add(this.ckPlantaIII);
+            this.groupBox2.Controls.Add(this.ckPlantaII);
+            this.groupBox2.Controls.Add(this.ckPlantaI);
+            this.groupBox2.Controls.Add(this.ckTodos);
+            this.groupBox2.Location = new System.Drawing.Point(100, 42);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(280, 83);
+            this.groupBox2.TabIndex = 86;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Empresas";
+            // 
+            // ckPellital
+            // 
+            this.ckPellital.AutoSize = true;
+            this.ckPellital.Location = new System.Drawing.Point(195, 60);
+            this.ckPellital.Name = "ckPellital";
+            this.ckPellital.Size = new System.Drawing.Size(56, 17);
+            this.ckPellital.TabIndex = 91;
+            this.ckPellital.Text = "Pellital";
+            this.ckPellital.UseVisualStyleBackColor = true;
+            this.ckPellital.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaVII
+            // 
+            this.ckPlantaVII.AutoSize = true;
+            this.ckPlantaVII.Location = new System.Drawing.Point(195, 37);
+            this.ckPlantaVII.Name = "ckPlantaVII";
+            this.ckPlantaVII.Size = new System.Drawing.Size(72, 17);
+            this.ckPlantaVII.TabIndex = 90;
+            this.ckPlantaVII.Text = "Planta VII";
+            this.ckPlantaVII.UseVisualStyleBackColor = true;
+            this.ckPlantaVII.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaVI
+            // 
+            this.ckPlantaVI.AutoSize = true;
+            this.ckPlantaVI.Location = new System.Drawing.Point(195, 14);
+            this.ckPlantaVI.Name = "ckPlantaVI";
+            this.ckPlantaVI.Size = new System.Drawing.Size(69, 17);
+            this.ckPlantaVI.TabIndex = 93;
+            this.ckPlantaVI.Text = "Planta VI";
+            this.ckPlantaVI.UseVisualStyleBackColor = true;
+            this.ckPlantaVI.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaV
+            // 
+            this.ckPlantaV.AutoSize = true;
+            this.ckPlantaV.Location = new System.Drawing.Point(108, 61);
+            this.ckPlantaV.Name = "ckPlantaV";
+            this.ckPlantaV.Size = new System.Drawing.Size(66, 17);
+            this.ckPlantaV.TabIndex = 92;
+            this.ckPlantaV.Text = "Planta V";
+            this.ckPlantaV.UseVisualStyleBackColor = true;
+            this.ckPlantaV.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaIV
+            // 
+            this.ckPlantaIV.AutoSize = true;
+            this.ckPlantaIV.Location = new System.Drawing.Point(108, 37);
+            this.ckPlantaIV.Name = "ckPlantaIV";
+            this.ckPlantaIV.Size = new System.Drawing.Size(69, 17);
+            this.ckPlantaIV.TabIndex = 89;
+            this.ckPlantaIV.Text = "Planta IV";
+            this.ckPlantaIV.UseVisualStyleBackColor = true;
+            this.ckPlantaIV.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaIII
+            // 
+            this.ckPlantaIII.AutoSize = true;
+            this.ckPlantaIII.Location = new System.Drawing.Point(108, 14);
+            this.ckPlantaIII.Name = "ckPlantaIII";
+            this.ckPlantaIII.Size = new System.Drawing.Size(68, 17);
+            this.ckPlantaIII.TabIndex = 86;
+            this.ckPlantaIII.Text = "Planta III";
+            this.ckPlantaIII.UseVisualStyleBackColor = true;
+            this.ckPlantaIII.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaII
+            // 
+            this.ckPlantaII.AutoSize = true;
+            this.ckPlantaII.Location = new System.Drawing.Point(19, 61);
+            this.ckPlantaII.Name = "ckPlantaII";
+            this.ckPlantaII.Size = new System.Drawing.Size(65, 17);
+            this.ckPlantaII.TabIndex = 85;
+            this.ckPlantaII.Text = "Planta II";
+            this.ckPlantaII.UseVisualStyleBackColor = true;
+            this.ckPlantaII.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckPlantaI
+            // 
+            this.ckPlantaI.AutoSize = true;
+            this.ckPlantaI.Location = new System.Drawing.Point(19, 38);
+            this.ckPlantaI.Name = "ckPlantaI";
+            this.ckPlantaI.Size = new System.Drawing.Size(62, 17);
+            this.ckPlantaI.TabIndex = 88;
+            this.ckPlantaI.Text = "Planta I";
+            this.ckPlantaI.UseVisualStyleBackColor = true;
+            this.ckPlantaI.CheckedChanged += new System.EventHandler(this.Plantas_CheckedChanged);
+            // 
+            // ckTodos
+            // 
+            this.ckTodos.AutoSize = true;
+            this.ckTodos.Location = new System.Drawing.Point(19, 15);
+            this.ckTodos.Name = "ckTodos";
+            this.ckTodos.Size = new System.Drawing.Size(56, 17);
+            this.ckTodos.TabIndex = 87;
+            this.ckTodos.Text = "Todos";
+            this.ckTodos.UseVisualStyleBackColor = true;
+            this.ckTodos.CheckedChanged += new System.EventHandler(this.ckTodos_CheckedChanged);
+            this.ckTodos.Click += new System.EventHandler(this.ckTodos_Click);
             // 
             // IniEvaSemActProve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(526, 285);
+            this.ClientSize = new System.Drawing.Size(526, 333);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
@@ -237,6 +367,8 @@
             this.panel3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -258,5 +390,15 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbTodos;
         private System.Windows.Forms.RadioButton rbSoloConMovimientos;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox ckPellital;
+        private System.Windows.Forms.CheckBox ckPlantaVII;
+        private System.Windows.Forms.CheckBox ckPlantaVI;
+        private System.Windows.Forms.CheckBox ckPlantaV;
+        private System.Windows.Forms.CheckBox ckPlantaIV;
+        private System.Windows.Forms.CheckBox ckPlantaIII;
+        private System.Windows.Forms.CheckBox ckPlantaII;
+        private System.Windows.Forms.CheckBox ckPlantaI;
+        private System.Windows.Forms.CheckBox ckTodos;
     }
 }

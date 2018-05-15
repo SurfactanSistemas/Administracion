@@ -32,7 +32,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -155,6 +155,28 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportInforme.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\DetalleItemsMP\Detalles.Designer.cs">
+      <DependentUpon>Detalles.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\DetalleItemsMP\Reporte.cs">
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\DetalleItemsEnvases\Detalles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\DetalleItemsEnvases\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\EvaSemActProve\DSEvaSemProve.Designer.cs">
@@ -481,6 +503,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportInforme.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\DetalleItemsMP\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\DetalleItemsEnvases\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\EvaSemActProve\ImpreEvaSemProve.resx">
       <DependentUpon>ImpreEvaSemProve.cs</DependentUpon>
     </EmbeddedResource>
@@ -656,6 +686,28 @@
     </None>
     <None Include="Listados\CheckListRecepcion\DSInforme.xss">
       <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\DetalleItemsMP\Detalles.xsc">
+      <DependentUpon>Detalles.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\DetalleItemsMP\Detalles.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Detalles.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Listados\DetalleItemsMP\Detalles.xss">
+      <DependentUpon>Detalles.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\DetalleItemsEnvases\Detalles.xsc">
+      <DependentUpon>Detalles.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\DetalleItemsEnvases\Detalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Detalles.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\DetalleItemsEnvases\Detalles.xss">
+      <DependentUpon>Detalles.xsd</DependentUpon>
     </None>
     <None Include="Listados\EvaSemActProve\DSEvaSemProve.xsc">
       <DependentUpon>DSEvaSemProve.xsd</DependentUpon>
@@ -854,6 +906,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Aceptar N2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screen_preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Eval_Proveedores.IngCamiones;
+using Eval_Proveedores.IngChoferes;
+using Eval_Proveedores.Listados.EvaSemActProve;
+using Eval_Proveedores.Novedades;
 
 namespace Eval_Proveedores
 {
@@ -27,8 +24,8 @@ namespace Eval_Proveedores
 
         private void ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Novedades.ActSemProvEnv Env = new Novedades.ActSemProvEnv();
-            Env.ShowDialog();
+            ActSemProvEnv Env = new ActSemProvEnv();
+            Env.Show();
         }
 
         private void procesosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -38,80 +35,80 @@ namespace Eval_Proveedores
 
         private void ingChoferesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IngChoferes.inicioChoferes Choferes = new IngChoferes.inicioChoferes();
-            Choferes.ShowDialog();
+            inicioChoferes Choferes = new inicioChoferes();
+            Choferes.Show();
         }
 
         private void ingCamionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IngCamiones.InicioCamiones Camiones = new IngCamiones.InicioCamiones();
-            Camiones.ShowDialog();
+            InicioCamiones Camiones = new InicioCamiones();
+            Camiones.Show();
         }
 
         private void listaDeEvaluacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Novedades.InicEvaluacion IniEva = new Novedades.InicEvaluacion();
-            IniEva.ShowDialog();
+            InicEvaluacion IniEva = new InicEvaluacion();
+            IniEva.Show();
         }
 
         private void listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listados.CheckListRecepcion.Inicio IniInforme = new Listados.CheckListRecepcion.Inicio();
-            IniInforme.ShowDialog();
+            IniInforme.Show();
         }
 
         private void listadoDeEvaluaciónDeTransportistaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listados.ListaEvaTransp.Inicio IniEvaTransp = new Listados.ListaEvaTransp.Inicio();
-            IniEvaTransp.ShowDialog();
+            IniEvaTransp.Show();
         }
 
         private void listadoDeProveedoresPorRubroToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listados.ProvRubro.Inicio InicioProvRubro = new Listados.ProvRubro.Inicio();
-            InicioProvRubro.ShowDialog();
+            InicioProvRubro.Show();
         }
 
         private void listadoDeVencimientoDeCamionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listados.VencCamiones.Inicio InicioVencCamion = new Listados.VencCamiones.Inicio();
-            InicioVencCamion.ShowDialog();
+            InicioVencCamion.Show();
         }
 
         private void listadoDeVencimientoDeChoferesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listados.VencChoferes.Inicio InicioVencChofer = new Listados.VencChoferes.Inicio();
-            InicioVencChofer.ShowDialog();
+            InicioVencChofer.Show();
         }
 
         private void listadoDeEvaluaciónDeServicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listados.EvaServicio.Inicio InicioEvaServ = new Listados.EvaServicio.Inicio();
-            InicioEvaServ.ShowDialog();
+            InicioEvaServ.Show();
         }
 
         private void actDeEvaluacionSemetralDeProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Novedades.ActSemProv ActSem = new Novedades.ActSemProv();
-            ActSem.ShowDialog();
+            ActSemProv ActSem = new ActSemProv();
+            ActSem.Show();
         }
 
         private void consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Listados.EvaSemActProve.IniEvaSemActProve IniEva = new Listados.EvaSemActProve.IniEvaSemActProve();
-            IniEva.ShowDialog();
+            IniEvaSemActProve IniEva = new IniEvaSemActProve();
+            IniEva.Show();
         }
 
         private void consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listados.EvaSemProveEnv.Inicio IniEv = new Listados.EvaSemProveEnv.Inicio();
-            IniEv.ShowDialog();
+            IniEv.Show();
         }
 
         private void listadoDeCheckListDeHojaDeRutaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listados.CheckListHojaRuta.Inicio Ini = new Listados.CheckListHojaRuta.Inicio();
-            Ini.ShowDialog();
+            Ini.Show();
         }
 
         private void salirDelSistemaToolStripMenuItem_Click(object sender, EventArgs e)

@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
+using Eval_Proveedores.Listados;
+using Eval_Proveedores.Listados.DetalleItemsMP;
 
 namespace Eval_Proveedores.Novedades
 {
@@ -15,6 +17,9 @@ namespace Eval_Proveedores.Novedades
     {
         private DataTable dtInformeDetalle;
         DataTable dtItems = new DataTable();
+        private string WCodProv = "";
+        private string WPeriodo = "";
+        private string WPlantas = "";
 
         public DetalleItems()
         {
@@ -26,6 +31,17 @@ namespace Eval_Proveedores.Novedades
             // TODO: Complete member initialization
             this.dtInformeDetalle = dtInformeDetalle;
             InitializeComponent();
+        }
+
+        public DetalleItems(DataTable dtInformeDetalle, string _CodProv, string WProveedor, string _Periodo, string _Plantas)
+        {
+            // TODO: Complete member initialization
+            this.dtInformeDetalle = dtInformeDetalle;
+            InitializeComponent();
+            lblProveedor.Text = WProveedor;
+            WCodProv = _CodProv;
+            WPeriodo = _Periodo;
+            WPlantas = _Plantas;
         }
 
         private void DetalleItems_Load(object sender, EventArgs e)
@@ -94,7 +110,7 @@ namespace Eval_Proveedores.Novedades
                 DGV_EvalSemProve.Rows[_index].Cells["Orden"].Value = fila["Orden"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["Desviad"].Value = fila["Clave"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["DescArticulo"].Value = fila["DesArticulo"].ToString(); //_TraerDescArticulo(fila["Articulo"].ToString());
-                DGV_EvalSemProve.Rows[_index].Cells["Atraso"].Value = _CalcularAtraso(fila["FechaOrd"], fila["OrdFecha2"]);
+                DGV_EvalSemProve.Rows[_index].Cells["Atraso"].Value = _CalcularAtraso(Helper.OrdenarFecha(fila["Fecha"].ToString()), Helper.OrdenarFecha(fila["Fecha2"].ToString()));
                 DGV_EvalSemProve.Rows[_index].Cells["Desvio"].Value = _EsPorDesvio(fila["Laudo"].ToString()) ? "X" : "";
                 DGV_EvalSemProve.Rows[_index].Cells["Aprobado"].Value = (_EsPorDesvio(fila["Laudo"].ToString()) || _DeterminarRechazado(fila["Devuelta"].ToString()) == "") ? "X" : "";
 
@@ -181,5 +197,60 @@ namespace Eval_Proveedores.Novedades
 
             return diferencia;
         }
+
+        private void DetalleItemsEnvases_ResizeEnd(object sender, EventArgs e)
+        {
+            btnImprimir.Location = Helper._CentrarH(Width, btnImprimir);
+        }
+
+        private void DetalleItemsEnvases_Paint(object sender, PaintEventArgs e)
+        {
+            btnImprimir.Location = Helper._CentrarH(Width, btnImprimir);
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            VistaPrevia frm = new VistaPrevia();
+
+            Reporte rpt = new Reporte();
+
+            Detalles tabla = new Detalles();
+
+            foreach (DataRow row in dtInformeDetalle.Rows)
+            {
+                DataRow _r = tabla.Tables[0].NewRow();
+
+                _r["Clave"] = row["Desviad"];
+                _r["Informe"] = row["Informe"];
+                _r["Orden"] = row["Orden"];
+                _r["Articulo"] = row["Articulo"];
+                _r["Aprobado"] = (_EsPorDesvio(row["Laudo"].ToString()) || _DeterminarRechazado(row["Devuelta"].ToString()) == "") ? 1 : 0;
+                _r["Desvio"] = _EsPorDesvio(row["Laudo"].ToString()) ? 1 : 0;
+                _r["Rechazado"] = _DeterminarRechazado(row["Devuelta"].ToString()) == "X" ? 1 : 0;
+                _r["Atraso"] = _CalcularAtraso(Helper.OrdenarFecha(row["Fecha"].ToString()), Helper.OrdenarFecha(row["Fecha2"].ToString())); ;
+                _r["Cantidad"] = double.Parse(row["Liberada"].ToString());
+                _r["Laudo"] = row["Laudo"];
+                _r["Devuelta"] = double.Parse(row["Devuelta"].ToString());
+                //_r["DesconOC"] = double.Parse(row["DesconOC"].ToString());
+                _r["Certificado"] = row["Certificado1"].ToString() == "1" ? "SI" : "NO";
+                _r["Envase"] = row["Estado1"].ToString() == "1" ? "SI" : "NO";
+                //_r["DescEnvaseOC"] = row["DescEnvaseOC"];
+                _r["FechaEntrega"] = row["Fecha"];
+                _r["FechaPosibleEntrega"] = "";
+                _r["Proveedor"] = WCodProv;
+                _r["Plantas"] = WPlantas;
+                _r["Periodo"] = WPeriodo;
+
+                tabla.Tables[0].Rows.Add(_r);
+            }
+
+            rpt.SetDataSource(tabla);
+
+            frm.CargarReporte(rpt);
+
+            frm.Show();
+        }
+
+
     }
 }

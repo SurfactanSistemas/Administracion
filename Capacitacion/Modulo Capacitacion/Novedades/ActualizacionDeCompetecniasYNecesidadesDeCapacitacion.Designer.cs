@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -66,6 +67,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.cmbAuxi = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescPerfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,6 +83,7 @@
             this.Calificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MarcarActualizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -159,6 +163,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.button1);
             this.panel4.Controls.Add(this.BT_Guardar);
             this.panel4.Controls.Add(this.BT_Limpiar);
             this.panel4.Controls.Add(this.BT_Salir);
@@ -180,6 +185,7 @@
             this.BT_Guardar.Name = "BT_Guardar";
             this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
             this.BT_Guardar.TabIndex = 27;
+            this.toolTip1.SetToolTip(this.BT_Guardar, "Grabar Actualizaciones");
             this.BT_Guardar.UseVisualStyleBackColor = true;
             this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
             // 
@@ -194,6 +200,7 @@
             this.BT_Limpiar.Name = "BT_Limpiar";
             this.BT_Limpiar.Size = new System.Drawing.Size(40, 40);
             this.BT_Limpiar.TabIndex = 27;
+            this.toolTip1.SetToolTip(this.BT_Limpiar, "Limpiar Pantalla");
             this.BT_Limpiar.UseVisualStyleBackColor = true;
             this.BT_Limpiar.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
             // 
@@ -208,6 +215,7 @@
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 27;
+            this.toolTip1.SetToolTip(this.BT_Salir, "Salir del Formulario");
             this.BT_Salir.UseVisualStyleBackColor = true;
             this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
             // 
@@ -261,6 +269,7 @@
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(54, 55);
             this.btnBuscar.TabIndex = 29;
+            this.toolTip1.SetToolTip(this.btnBuscar, "Procesar Búsqueda");
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
@@ -361,7 +370,8 @@
             this.idCalificacionAnterior,
             this.Calificacion,
             this.Observaciones,
-            this.MarcarActualizacion});
+            this.MarcarActualizacion,
+            this.Marca});
             this.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvGrilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvGrilla.Location = new System.Drawing.Point(10, 85);
@@ -497,6 +507,20 @@
             this.cmbAuxi.SelectedIndexChanged += new System.EventHandler(this.cmbAuxi_SelectedIndexChanged);
             this.cmbAuxi.DropDownClosed += new System.EventHandler(this.cmbAuxi_DropDownClosed);
             // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button1.Location = new System.Drawing.Point(9, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(147, 40);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "Limpiar Todas las Marcas";
+            this.toolTip1.SetToolTip(this.button1, "Elimina todas las marcas de los legajos actualizados hasta la fecha");
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Clave
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
@@ -605,6 +629,14 @@
             this.MarcarActualizacion.HeaderText = "MarcarActualizacion";
             this.MarcarActualizacion.Name = "MarcarActualizacion";
             this.MarcarActualizacion.Visible = false;
+            this.MarcarActualizacion.Width = 30;
+            // 
+            // Marca
+            // 
+            this.Marca.HeaderText = "Marca";
+            this.Marca.Name = "Marca";
+            this.Marca.Visible = false;
+            this.Marca.Width = 30;
             // 
             // ActualizacionDeCompetenciasYNecesidadesDeCapacitacion
             // 
@@ -677,6 +709,8 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ComboBox cmbAuxi;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
         private System.Windows.Forms.DataGridViewTextBoxColumn Perfil;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescPerfil;
@@ -691,5 +725,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn MarcarActualizacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
     }
 }

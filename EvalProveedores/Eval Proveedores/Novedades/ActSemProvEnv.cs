@@ -111,6 +111,7 @@ namespace Eval_Proveedores.Novedades
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Aprobados"].Value = WProveedor["Aprobados"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Retrasos"].Value = WProveedor["Retrasos"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Desvios"].Value = WProveedor["Desvios"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Rechazados"].Value = WProveedor["Rechazados"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["EnvasesOk"].Value = WProveedor["EnvasesOk"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["CertificadosOk"].Value = WProveedor["CertificadosOk"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Categoria1"].Value = WProveedor["CategoriaI"];
@@ -189,6 +190,7 @@ namespace Eval_Proveedores.Novedades
         private void _MostrarDetalles(int WRowIndex)
         {
             string _Prove = DGV_EvalSemProve.Rows[WRowIndex].Cells["Proveedor"].Value.ToString();
+            string _DescProve = DGV_EvalSemProve.Rows[WRowIndex].Cells["Razon"].Value.ToString();
 
             dtInformeDetalle = new DataTable();
 
@@ -221,7 +223,7 @@ namespace Eval_Proveedores.Novedades
 
             DataRow WDatosOC;
 
-            foreach (string _Empresa in Helper._Empresas)
+            foreach (string _Empresa in EmpresasAConsultar())
             {
                 DataTable dtInformeProve = ESBOL.ListaInformeProve(Helper.OrdenarFecha(TB_Desde.Text), Helper.OrdenarFecha(TB_Hasta.Text), _Empresa, 1, _Prove);
 
@@ -263,9 +265,50 @@ namespace Eval_Proveedores.Novedades
 
                 CargarInformeProve(dtInformeProve);
             }
+            
+            _DescProve += "    " + GenerarTextoPlantas();
 
-            DetalleItemsEnvases Detalle = new DetalleItemsEnvases(dtInformeDetalle);
+            DetalleItemsEnvases Detalle = new DetalleItemsEnvases(dtInformeDetalle, _Prove, _DescProve, TB_Desde.Text + " al " + TB_Hasta.Text, GenerarTextoPlantas().TrimStart('(').TrimEnd(')').Trim());
             Detalle.Show();
+        }
+
+        private string GenerarTextoPlantas()
+        {
+            string WEmpresas = "( Plantas: ";
+
+            if (ckTodos.Checked)
+            {
+                WEmpresas += "1, 2, 3, 4, 5, 6, 7 y Pellital";
+            }
+            else
+            {
+                if (ckPlantaI.Checked) WEmpresas += "1, ";
+                if (ckPlantaII.Checked) WEmpresas += "2, ";
+                if (ckPlantaIII.Checked) WEmpresas += "3, ";
+                if (ckPlantaVI.Checked) WEmpresas += "4, ";
+                if (ckPlantaV.Checked) WEmpresas += "5, ";
+                if (ckPlantaVI.Checked) WEmpresas += "6, ";
+                if (ckPlantaVII.Checked) WEmpresas += "7, ";
+                if (ckPellital.Checked)
+                {
+                    WEmpresas += "Pellital";
+                }
+            }
+
+            // Elimino espacios en blanco al final.
+            WEmpresas = WEmpresas.Trim();
+            // Elimino ultima coma al final en caso de existir.
+            WEmpresas = WEmpresas.TrimEnd(',');
+            // Reemplazo la ultima ',' por un 'y'.
+            int indice = WEmpresas.LastIndexOf(',');
+
+            if (indice > -1 && !ckTodos.Checked)
+                WEmpresas = WEmpresas.Substring(0, indice) + " y" +
+                            WEmpresas.Substring(indice + 1, WEmpresas.Length - 1 - indice);
+
+            WEmpresas += " )";
+
+            return WEmpresas;
         }
 
         private DataRow _TraerInformacionOC(object _Orden, object _Articulo, string WEmpresa)
@@ -538,5 +581,94 @@ namespace Eval_Proveedores.Novedades
                 }
             }
         }
+
+        private void btnPantalla_Click(object sender, EventArgs e)
+        {
+            string[] WEmpresas = GenerarArregloPlantas();
+
+            Listados.EvaSemProveEnv.Inicio frm = new Listados.EvaSemProveEnv.Inicio();
+
+            frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, 1);
+
+            frm.Close();
+        }
+
+        private string[] GenerarArregloPlantas()
+        {
+            string WEmpresas = "";
+
+            if (ckTodos.Checked)
+            {
+                WEmpresas += "1, 2, 3, 4, 5, 6, 7, Pellital";
+            }
+            else
+            {
+                if (ckPlantaI.Checked) WEmpresas += "1,";
+                if (ckPlantaII.Checked) WEmpresas += "2,";
+                if (ckPlantaIII.Checked) WEmpresas += "3,";
+                if (ckPlantaVI.Checked) WEmpresas += "4,";
+                if (ckPlantaV.Checked) WEmpresas += "5,";
+                if (ckPlantaVI.Checked) WEmpresas += "6,";
+                if (ckPlantaVII.Checked) WEmpresas += "7,";
+                if (ckPellital.Checked)
+                {
+                    WEmpresas += "Pellital";
+                }
+            }
+
+            // Elimino ultima coma al final en caso de existir.
+            WEmpresas = WEmpresas.TrimEnd(',');
+
+            return WEmpresas.Split(',');
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            string[] WEmpresas = GenerarArregloPlantas();
+
+            Listados.EvaSemProveEnv.Inicio frm = new Listados.EvaSemProveEnv.Inicio();
+
+            frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, 2);
+
+            frm.Close();
+        }
+
+
+        private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Evitamos que se copien las cabeceras.
+            DGV_EvalSemProve.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+
+            // Copiamos el contenido de las celdas seleccionadas en el ClipBoard.
+            _CopiarSeleccion();
+        }
+
+        private void _CopiarSeleccion()
+        {
+            if (DGV_EvalSemProve.GetCellCount(DataGridViewElementStates.Selected) > 0)
+            {
+                // Evitamos que los 'Rows Headers' ocupen espacio.
+                DGV_EvalSemProve.RowHeadersVisible = false;
+
+                object data = DGV_EvalSemProve.GetClipboardContent();
+                if (data != null)
+                    Clipboard.SetDataObject(data);
+
+                // Volvemos a mostrar los 'Rows Headers'
+                DGV_EvalSemProve.RowHeadersVisible = true;
+            }
+        }
+
+        private void copiarConCabecerasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Activamos que se copien las cabeceras.
+            DGV_EvalSemProve.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+
+            // Copiamos el contenido de las celdas seleccionadas en el ClipBoard.
+            _CopiarSeleccion();
+
+        }
+
+
     }
 }

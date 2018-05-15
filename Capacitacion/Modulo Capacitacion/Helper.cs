@@ -19,6 +19,41 @@ namespace Modulo_Capacitacion
             return new Point(containerWidth / 2 - control.Width / 2, control.Location.Y);
         }
 
+        public static void Limpiar(TextBox[] controles)
+        {
+            foreach (TextBox txt in controles)
+            {
+                txt.Text = "";
+            }
+        }
+
+        public static void Limpiar(ComboBox[] controles)
+        {
+            foreach (ComboBox cmb in controles)
+            {
+                if (cmb.Items.Count == 0) continue;
+
+                cmb.SelectedIndex = 0;
+            }
+        }
+
+        public static void Limpiar(MaskedTextBox[] controles)
+        {
+            foreach (MaskedTextBox msk in controles)
+            {
+                msk.Clear();
+            }
+        }
+
+        public static void Limpiar(DataGridView[] controles)
+        {
+            foreach (DataGridView dgv in controles)
+            {
+                dgv.DataSource = null;
+                dgv.Rows.Clear();
+            }
+        }
+
         public static void PurgarOrdFechaCursadas()
         {
             using (SqlConnection conn = new SqlConnection())

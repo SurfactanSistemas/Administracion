@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,6 +10,8 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
 {
     public partial class IniEvaSemActProve : Form
     {
+        string[] _Empresas = { "SurfactanSA", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "Pelitall_II", "Pellital_III", "Pellital_V" };
+
         public IniEvaSemActProve()
         {
             InitializeComponent();
@@ -17,6 +20,7 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
         private void IniEvaSemActProve_Load(object sender, EventArgs e)
         {
             rbSoloConMovimientos.Checked = true;
+            ckTodos.Checked = true;
         }
 
         private void BT_Pantalla_Click(object sender, EventArgs e)
@@ -59,6 +63,23 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
                         cmd.Connection = conn;
                         cmd.CommandText = "";
                         cmd.Transaction = trans;
+
+                        cmd.CommandText = "UPDATE Proveedor SET "
+                                              + " Impre1 = " + "0" + ", "
+                                              + " Impre2 = " + "0" + ", "
+                                              + " Impre3 = " + "0" + ", "
+                                              + " Impre4 = " + "0" + ", "
+                                              + " Impre5 = " + "0" + ", "
+                                              + " Impre6 = " + "0" + ", "
+                                              + " Impre7 = '" + "" + "', "
+                                              + " Impre8 = '" + "" + "', "
+                                              + " Impre9 = '" + "" + "', "
+                                              + " Impre10 = " + "0" + ", "
+                                              + " Impre11 = '" + "" + "', "
+                                              + " Impre12 = '" + "" + "', "
+                                              + " Periodo = '" + "" + "'";
+
+                        cmd.ExecuteNonQuery();
 
                         foreach (DataRow WProveedor in WProveedoresFinales)
                         {
@@ -129,11 +150,16 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
                                               + " Impre10 = " + ZImpre10 + ", "
                                               + " Impre11 = '" + ZImpre11 + "', "
                                               + " Impre12 = '" + ZImpre12 + "', "
-                                              + " Periodo = '" + "Del " + TB_Desde.Text + " al " + TB_Hasta.Text + "'"
+                                              + " Periodo = '" + "" + "'"
                                               + " WHERE Proveedor = '" + WProveedor["Proveedor"] + "'";
 
                             cmd.ExecuteNonQuery();
                         }
+
+                        cmd.CommandText = "UPDATE Proveedor SET "
+                                              + " Periodo = '" + "Del " + TB_Desde.Text + " al " + TB_Hasta.Text + "     " + GenerarTextoPlantas() + "'";
+
+                        cmd.ExecuteNonQuery();
 
                         trans.Commit();
                     }
@@ -150,7 +176,7 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
             }
             catch (Exception ex)
             {
-                if (trans != null) trans.Rollback();
+                if (trans != null && trans.Connection != null) trans.Rollback();
                 progressBar1.Visible = false;
                 MessageBox.Show(
                     "Ocurrió un problema al querer procesar la información de las Evaluaciones Semestrales de los Proveedores de Materia Prima. Motivo: " +
@@ -158,9 +184,75 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
             }
         }
 
+        private string GenerarTextoPlantas()
+        {
+            string WEmpresas = "(Plantas: ";
+
+            if (ckTodos.Checked)
+            {
+                WEmpresas += "1, 2, 3, 4, 5, 6, 7 y Pellital)";
+            }
+            else
+            {
+                if (ckPlantaI.Checked) WEmpresas += "1, ";
+                if (ckPlantaII.Checked) WEmpresas += "2, ";
+                if (ckPlantaIII.Checked) WEmpresas += "3, ";
+                if (ckPlantaVI.Checked) WEmpresas += "4, ";
+                if (ckPlantaV.Checked) WEmpresas += "5, ";
+                if (ckPlantaVI.Checked) WEmpresas += "6, ";
+                if (ckPlantaVII.Checked) WEmpresas += "7, ";
+                if (ckPellital.Checked)
+                {
+                    WEmpresas += "Pellital";
+                }
+            }
+
+            // Elimino espacios en blanco al final.
+            WEmpresas = WEmpresas.Trim();
+            // Elimino ultima coma al final en caso de existir.
+            WEmpresas = WEmpresas.TrimEnd(',');
+            // Reemplazo la ultima ',' por un 'y'.
+            int indice = WEmpresas.LastIndexOf(',');
+
+            if (indice > -1 && !ckTodos.Checked)
+                WEmpresas = WEmpresas.Substring(0, indice) + " y" + WEmpresas.Substring(indice + 1, WEmpresas.Length - 1 - indice);
+
+            WEmpresas += ")";
+
+            return WEmpresas;
+        }
+
+        private string[] EmpresasAConsultar()
+        {
+            List<string> WEmpresas = new List<string>();
+
+            if (ckTodos.Checked)
+            {
+                WEmpresas.AddRange(_Empresas);
+            }
+            else
+            {
+                if (ckPlantaI.Checked) WEmpresas.Add(_Empresas[0]);
+                if (ckPlantaII.Checked) WEmpresas.Add(_Empresas[1]);
+                if (ckPlantaIII.Checked) WEmpresas.Add(_Empresas[2]);
+                if (ckPlantaVI.Checked) WEmpresas.Add(_Empresas[3]);
+                if (ckPlantaV.Checked) WEmpresas.Add(_Empresas[4]);
+                if (ckPlantaVI.Checked) WEmpresas.Add(_Empresas[5]);
+                if (ckPlantaVII.Checked) WEmpresas.Add(_Empresas[6]);
+                if (ckPellital.Checked)
+                {
+                    WEmpresas.Add(_Empresas[7]);
+                    WEmpresas.Add(_Empresas[8]);
+                    WEmpresas.Add(_Empresas[9]);
+                }
+            }
+
+            return WEmpresas.ToArray();
+        }
+
         private DataTable _ProcesarEvaluacionProveedores()
         {
-            return Helper._ProcesarEvaluacionProveedores("1", TB_Desde.Text, TB_Hasta.Text, ref progressBar1);
+            return Helper._ProcesarEvaluacionProveedores("1", TB_Desde.Text, TB_Hasta.Text, ref progressBar1, EmpresasAConsultar());
         }
 
         private void BT_Imprimir_Click(object sender, EventArgs e)
@@ -213,5 +305,108 @@ namespace Eval_Proveedores.Listados.EvaSemActProve
 	        
         }
 
+        private void ckTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckTodos.Checked)
+            {
+                foreach (CheckBox ck in new[] { ckPlantaI, ckPlantaII, ckPlantaIII, ckPlantaIV, ckPlantaV, ckPlantaVI, ckPlantaVII, ckPellital })
+                {
+                    ck.Checked = true;
+                }
+            }
+        }
+
+        private void Plantas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!((CheckBox)sender).Checked)
+            {
+                ckTodos.Checked = false;
+            }
+        }
+
+        private void ckTodos_Click(object sender, EventArgs e)
+        {
+            if (!ckTodos.Checked)
+            {
+                foreach (CheckBox ck in new[] { ckPlantaI, ckPlantaII, ckPlantaIII, ckPlantaIV, ckPlantaV, ckPlantaVI, ckPlantaVII, ckPellital })
+                {
+                    ck.Checked = false;
+                }
+            }
+        }
+
+        public void GenerarReporteDesdeFuera(string[] WEmpresas, string WDesde, string WHasta, int Tipo)
+        {
+            ckTodos.Checked = false;
+            ckTodos_Click(null, null);
+
+            foreach (string wEmpresa in WEmpresas)
+            {
+                switch (wEmpresa.Trim())
+                {
+                    case "1":
+                    {
+                        ckPlantaI.Checked = true;
+                        break;
+                    }
+                    case "2":
+                    {
+                        ckPlantaII.Checked = true;
+                        break;
+                    }
+                    case "3":
+                    {
+                        ckPlantaIII.Checked = true;
+                        break;
+                    }
+                    case "4":
+                    {
+                        ckPlantaIV.Checked = true;
+                        break;
+                    }
+                    case "5":
+                    {
+                        ckPlantaV.Checked = true;
+                        break;
+                    }
+                    case "6":
+                    {
+                        ckPlantaVI.Checked = true;
+                        break;
+                    }
+                    case "7":
+                    {
+                        ckPlantaVII.Checked = true;
+                        break;
+                    }
+                    case "Pellital":
+                    {
+                        ckPellital.Checked = true;
+                        break;
+                    }
+                }
+            }
+
+            TB_Desde.Text = WDesde;
+            TB_Hasta.Text = WHasta;
+
+            switch (Tipo)
+            {
+                case 1:
+                {
+                    _MostrarReporte("Pantalla");
+                    break;
+                }
+                case 2:
+                {
+                    _MostrarReporte("Imprimir");
+                    break;
+                }
+                default:
+                {
+                    return;
+                }
+            }
+        }
     }
 }

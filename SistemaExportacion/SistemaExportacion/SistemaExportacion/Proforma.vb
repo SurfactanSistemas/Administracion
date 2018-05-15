@@ -1887,7 +1887,7 @@ Public Class Proforma
         txtSeguro.Text = Helper.formatonumerico(txtSeguro.Text)
         txtTotal.Text = Helper.formatonumerico(txtTotal.Text)
 
-        txtTotal.Text = Val(txtSubTotal.Text) + Val(txtFlete.Text) + Val(txtSeguro.Text)
+        txtTotal.Text = Val(txtSubTotal.Text) - Val(txtFlete.Text) - Val(txtSeguro.Text)
 
         txtTotal.Text = Helper.formatonumerico(txtTotal.Text)
     End Sub

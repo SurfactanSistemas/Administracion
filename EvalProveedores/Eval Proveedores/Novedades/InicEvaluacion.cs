@@ -123,9 +123,9 @@ namespace Eval_Proveedores.Novedades
 
         private void BTModifEvaluacion_Click(object sender, EventArgs e)
         {
-            ValidarClave();
-            if (ValidClave == 1)
-            {
+            //ValidarClave();
+            //if (ValidClave == 1)
+            //{
                 try
                 {
                     if (DGV_Evaluaciones.SelectedRows.Count == 0) throw new Exception("No se ha seleccionado ninguna Evaluación");
@@ -165,7 +165,7 @@ namespace Eval_Proveedores.Novedades
 
                     MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
+            //}
             
         }
 

@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Eval_Proveedores
@@ -9,6 +10,11 @@ namespace Eval_Proveedores
     class Helper
     {
         public static string[] _Empresas = { "SurfactanSA", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "Pelitall_II", "Pellital_III", "Pellital_V" };
+
+        public static Point _CentrarH(int containerWidth, Control control)
+        {
+            return new Point(containerWidth / 2 - control.Width / 2, control.Location.Y);
+        }
 
         public static string OrdenarFecha(string WFecha)
         {
@@ -112,7 +118,7 @@ namespace Eval_Proveedores
 
                         WDiasRetrasos += WDiferenciaDias;
 
-                        DataTable WLaudos = _TraerArticulosPorInforme(WInforme["Informe"].ToString(), WEmpresa);
+                        DataTable WLaudos = _TraerArticulosPorInforme(WInforme["Informe"].ToString(), WInforme["Articulo"].ToString(), WEmpresa);
 
                         string WNumLaudo = "";
 
@@ -168,7 +174,7 @@ namespace Eval_Proveedores
                 WProveedor["Movimientos"] = WMovimientos;
                 WProveedor["CertificadosOk"] = WCertificadosOk;
                 WProveedor["EnvasesOk"] = WEnvasesOk;
-                WProveedor["Retrasos"] = WMovimientos != 0 ? WDiasRetrasos / WMovimientos : WDiasRetrasos;
+                WProveedor["Retrasos"] = WMovimientos != 0 ? Math.Ceiling((double)WDiasRetrasos / WMovimientos) : WDiasRetrasos;
                 WProveedor["Aprobados"] = WAprobados;
                 WProveedor["Desvios"] = WDesvio;
                 WProveedor["Rechazados"] = WRechazados;
@@ -283,7 +289,7 @@ namespace Eval_Proveedores
                                                 && (XLaudo <= 894999)))))))));
         }
 
-        public static DataTable _TraerArticulosPorInforme(string WInforme, string WEmpresa)
+        public static DataTable _TraerArticulosPorInforme(string WInforme, string WArticulo, string WEmpresa)
         {
             DataTable tabla = new DataTable();
             using (SqlConnection conn = new SqlConnection())
@@ -294,7 +300,7 @@ namespace Eval_Proveedores
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT Laudo, Marca, DevueltaAnt, Devuelta FROM Laudo WHERE Informe = '" + WInforme + "' ORDER BY Renglon";
+                    cmd.CommandText = "SELECT Laudo, Marca, DevueltaAnt, Devuelta FROM Laudo WHERE Informe = '" + WInforme + "' AND Articulo = '" + WArticulo + "' ORDER BY Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {

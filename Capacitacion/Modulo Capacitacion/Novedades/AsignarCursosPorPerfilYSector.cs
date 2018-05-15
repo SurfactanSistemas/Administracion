@@ -650,7 +650,7 @@ namespace Modulo_Capacitacion.Novedades
 
             if (tabla.Rows.Count == 0) return;
 
-            foreach (DataRow dr in tabla.Select("", "Legajo ASC, Curso ASC"))
+            foreach (DataRow dr in rbPerfil.Checked ? tabla.Select("", "DesSector, Nombre ASC, Curso ASC") : tabla.Select("", "Nombre ASC, Curso ASC"))
             {
                 WRowindex = dgvGrilla.Rows.Add();
 
@@ -659,6 +659,12 @@ namespace Modulo_Capacitacion.Novedades
                     if (WRowindex != 0) WRowindex = dgvGrilla.Rows.Add();
 
                     WAnt = dr["Legajo"].ToString();
+
+                    if (!rbSector.Checked)
+                    {
+                        dgvGrilla.Rows[WRowindex].Cells["Sector"].Value = dr["Sector"];
+                        dgvGrilla.Rows[WRowindex].Cells["DesSector"].Value = dr["DesSector"]; 
+                    }
 
                     dgvGrilla.Rows[WRowindex].Cells["Perfil"].Value = dr["Perfil"];
                     dgvGrilla.Rows[WRowindex].Cells["DescPerfil"].Value = dr["DescPerfil"];
@@ -717,6 +723,12 @@ namespace Modulo_Capacitacion.Novedades
                     DataGridViewColumn c = dgvGrilla.Columns[Columna];
                     if (c != null) c.Visible = true;
                 }
+
+                foreach (string Columna in new[] { "Sector", "DescSector" })
+                {
+                    DataGridViewColumn c = dgvGrilla.Columns[Columna];
+                    if (c != null) c.Visible = false;
+                }
             }
 
             if (rbTema.Checked)
@@ -748,7 +760,7 @@ namespace Modulo_Capacitacion.Novedades
                 {
                     cmd.Connection = conn;
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = '1', l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.EstaCurso IN (3,4,5,7,8) AND p.Curso = '" +
+                        "SELECT Clave = '', Tipo = '1', l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Sector, Sector.Descripcion as DesSector, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.EstaCurso IN (3,4,5,7,8) AND p.Curso = '" +
                         cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -762,7 +774,7 @@ namespace Modulo_Capacitacion.Novedades
                     WProgramados.Columns.Clear();
 
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema WHERE cr.Ano = '" +
+                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Sector, Sector.Descripcion as DesSector, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE cr.Ano = '" +
                         txtAno.Text + "' AND p.Renglon = 1 and cr.Curso = '" + cmbOrganizar.SelectedValue +
                         "' and l.Renglon =1 ORDER BY cr.Legajo, Cr.Renglon";
 
@@ -823,7 +835,7 @@ namespace Modulo_Capacitacion.Novedades
                     // AND l.EstaCurso IN (3,4,5,7,8)
                     cmd.Connection = conn;
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = '1', l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000')  AND l.Perfil = '" +
+                        "SELECT Clave = '', Tipo = '1', l.Codigo as Legajo, l.Renglon, l.Sector, Sector.Descripcion as DesSector, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000')  AND l.Perfil = '" +
                         cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -837,7 +849,7 @@ namespace Modulo_Capacitacion.Novedades
                     WProgramados.Columns.Clear();
 
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema WHERE cr.Ano = '" +
+                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, l.Sector, Sector.Descripcion as DesSector, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE cr.Ano = '" +
                         txtAno.Text + "' AND p.Renglon = 1 and l.Perfil = '" + cmbOrganizar.SelectedValue +
                         "' and l.Renglon =1 ORDER BY cr.Legajo, Cr.Renglon";
 
@@ -879,7 +891,7 @@ namespace Modulo_Capacitacion.Novedades
                         tabla.ImportRow(row);
                     }
 
-                    tabla.DefaultView.Sort = "Legajo ASC";
+                    if (tabla.Rows.Count > 0) tabla.DefaultView.Sort = "Legajo ASC";
                 }
             }
 

@@ -1235,7 +1235,7 @@ Public Class Recibos
                 XSucursalCheque = ""
                 XChequeCheque = ""
                 XCuentaCheque = ""
-                XCuit = ""
+                XCuit = "00000000000"
                 XEstado2 = ""
                 XDestino = ""
 

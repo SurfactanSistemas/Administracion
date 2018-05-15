@@ -115,9 +115,9 @@
             this.LBPerfil.ForeColor = System.Drawing.Color.White;
             this.LBPerfil.Location = new System.Drawing.Point(22, 11);
             this.LBPerfil.Name = "LBPerfil";
-            this.LBPerfil.Size = new System.Drawing.Size(465, 19);
+            this.LBPerfil.Size = new System.Drawing.Size(239, 19);
             this.LBPerfil.TabIndex = 0;
-            this.LBPerfil.Text = "INGRESO DE PLANIFICACION ANUAL DE CAPACITACION POR LEGAJO";
+            this.LBPerfil.Text = "INGRESO DE CURSOS REALIZADOS";
             // 
             // panel2
             // 

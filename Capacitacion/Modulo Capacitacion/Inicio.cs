@@ -224,5 +224,11 @@ namespace Modulo_Capacitacion
             AsignarCursosPorPerfilYSector frm = new AsignarCursosPorPerfilYSector();
             frm.Show();
         }
+
+        private void asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignacionTemasPorSectorPerfilYPlanta frm = new AsignacionTemasPorSectorPerfilYPlanta();
+            frm.Show();
+        }
     }
 }
