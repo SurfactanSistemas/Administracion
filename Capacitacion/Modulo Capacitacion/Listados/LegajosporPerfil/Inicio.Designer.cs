@@ -49,9 +49,10 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.panel1.Controls.Add(this.LBChofer);
-            this.panel1.Location = new System.Drawing.Point(0, -1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(477, 39);
+            this.panel1.Size = new System.Drawing.Size(427, 39);
             this.panel1.TabIndex = 6;
             // 
             // LBChofer
@@ -69,9 +70,10 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(74)))), ((int)(((byte)(95)))));
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(0, 37);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(476, 214);
+            this.panel2.Size = new System.Drawing.Size(427, 220);
             this.panel2.TabIndex = 9;
             // 
             // panel3
@@ -86,7 +88,7 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Location = new System.Drawing.Point(7, 7);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(413, 199);
+            this.panel3.Size = new System.Drawing.Size(413, 204);
             this.panel3.TabIndex = 0;
             // 
             // TB_Hasta
@@ -95,6 +97,7 @@
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
             this.TB_Hasta.TabIndex = 85;
+            this.TB_Hasta.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 
             // TB_Desde
             // 
@@ -103,6 +106,7 @@
             this.TB_Desde.Size = new System.Drawing.Size(100, 20);
             this.TB_Desde.TabIndex = 84;
             this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
+            this.TB_Desde.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             this.TB_Desde.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TB_Desde_MouseDown);
             // 
             // label2
@@ -121,7 +125,7 @@
             this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(87, 135);
+            this.BT_Pantalla.Location = new System.Drawing.Point(98, 135);
             this.BT_Pantalla.Name = "BT_Pantalla";
             this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
             this.BT_Pantalla.TabIndex = 81;
@@ -134,7 +138,7 @@
             this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(188, 135);
+            this.BT_Imprimir.Location = new System.Drawing.Point(186, 135);
             this.BT_Imprimir.Name = "BT_Imprimir";
             this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
             this.BT_Imprimir.TabIndex = 80;
@@ -147,7 +151,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(278, 135);
+            this.BT_Salir.Location = new System.Drawing.Point(274, 135);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
@@ -168,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 250);
+            this.ClientSize = new System.Drawing.Size(427, 259);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Inicio";

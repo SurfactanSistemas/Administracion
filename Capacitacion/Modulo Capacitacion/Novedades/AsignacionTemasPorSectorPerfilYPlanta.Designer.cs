@@ -45,6 +45,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
@@ -54,6 +56,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.cmbVerPorII = new System.Windows.Forms.ComboBox();
             this.cmbVerPorI = new System.Windows.Forms.ComboBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnAyudaTema = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,8 +64,10 @@
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.txtFiltrarI = new System.Windows.Forms.TextBox();
             this.txtDesTema = new System.Windows.Forms.TextBox();
+            this.txtAno = new System.Windows.Forms.TextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtTema = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pnlAyuda = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -74,11 +79,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtAyuda = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtAno = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -292,6 +292,26 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Visible = false;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(571, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 14);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Asignados";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(168, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 14);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Candidatos";
+            // 
             // button1
             // 
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -331,6 +351,7 @@
             this.button2.Size = new System.Drawing.Size(65, 49);
             this.button2.TabIndex = 0;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnImprimir
             // 
@@ -421,6 +442,18 @@
             this.cmbVerPorI.TabIndex = 55;
             this.cmbVerPorI.SelectedIndexChanged += new System.EventHandler(this.cmbVerPorI_SelectedIndexChanged);
             // 
+            // button6
+            // 
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.Location = new System.Drawing.Point(675, 27);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(95, 24);
+            this.button6.TabIndex = 0;
+            this.button6.Text = "Buscar";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // btnAyuda
             // 
             this.btnAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -498,6 +531,17 @@
             this.txtDesTema.TabIndex = 52;
             this.txtDesTema.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtDesTema_MouseDoubleClick);
             // 
+            // txtAno
+            // 
+            this.txtAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAno.Location = new System.Drawing.Point(86, 30);
+            this.txtAno.MaxLength = 6;
+            this.txtAno.Name = "txtAno";
+            this.txtAno.Size = new System.Drawing.Size(59, 20);
+            this.txtAno.TabIndex = 5;
+            this.txtAno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtAno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAno_KeyDown);
+            // 
             // txtCodigo
             // 
             this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -518,6 +562,16 @@
             this.txtTema.TabIndex = 41;
             this.txtTema.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTema.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(35, 31);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 18);
+            this.label3.TabIndex = 42;
+            this.label3.Text = "Año:";
             // 
             // label5
             // 
@@ -634,59 +688,6 @@
             this.txtAyuda.TabIndex = 0;
             this.txtAyuda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyDown);
             this.txtAyuda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyUp);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(35, 31);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 18);
-            this.label3.TabIndex = 42;
-            this.label3.Text = "Año:";
-            // 
-            // txtAno
-            // 
-            this.txtAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAno.Location = new System.Drawing.Point(86, 30);
-            this.txtAno.MaxLength = 6;
-            this.txtAno.Name = "txtAno";
-            this.txtAno.Size = new System.Drawing.Size(59, 20);
-            this.txtAno.TabIndex = 5;
-            this.txtAno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtAno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAno_KeyDown);
-            // 
-            // button6
-            // 
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.Location = new System.Drawing.Point(675, 27);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(95, 24);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "Buscar";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(168, 3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 14);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Candidatos";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(571, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 14);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Asignados";
             // 
             // AsignacionTemasPorSectorPerfilYPlanta
             // 

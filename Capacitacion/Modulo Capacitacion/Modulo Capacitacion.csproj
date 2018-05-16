@@ -69,6 +69,12 @@
       <DependentUpon>AvisoCronograma.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\Ayuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Ayuda.Designer.cs">
+      <DependentUpon>Ayuda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajo.cs">
       <DependentUpon>imprelegajo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -630,6 +636,9 @@
     <EmbeddedResource Include="Listados\AvisoCronograma\AvisoCronograma.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AvisoCronograma.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Ayuda.resx">
+      <DependentUpon>Ayuda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

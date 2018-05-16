@@ -408,5 +408,49 @@ namespace Modulo_Capacitacion.Listados.PromediodeCalificacion
         {
             Close();
         }
+
+        private void Ayuda_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            DataTable tabla = _TraerSector();
+            Ayuda frm = new Ayuda(tabla, ((TextBox)sender).Text);
+
+            frm.ShowDialog();
+            ((TextBox)sender).Text = frm.Valor == null ? "" : frm.Valor.ToString();
+            frm.Dispose();
+        }
+
+        private DataTable _TraerSector()
+        {
+            try
+            {
+                DataTable tabla = new DataTable();
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT Codigo, Descripcion FROM Sector WHERE Descripcion <> '' ORDER BY Codigo";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                tabla.Load(dr);
+                            }
+                        }
+                    }
+
+                }
+
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+        }
     }
 }

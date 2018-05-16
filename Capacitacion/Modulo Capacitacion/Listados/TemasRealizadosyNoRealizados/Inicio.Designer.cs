@@ -117,6 +117,7 @@
             this.TB_TemaHasta.Size = new System.Drawing.Size(70, 20);
             this.TB_TemaHasta.TabIndex = 85;
             this.TB_TemaHasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_TemaHasta_KeyDown);
+            this.TB_TemaHasta.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 
             // TB_TemaDesde
             // 
@@ -125,6 +126,7 @@
             this.TB_TemaDesde.Size = new System.Drawing.Size(70, 20);
             this.TB_TemaDesde.TabIndex = 84;
             this.TB_TemaDesde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_TemaDesde_KeyDown);
+            this.TB_TemaDesde.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 
             // label2
             // 

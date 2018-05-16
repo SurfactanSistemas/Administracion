@@ -209,9 +209,12 @@ namespace Modulo_Capacitacion.Novedades
             if (cmbVerPorII.Enabled)
             {
                 cmbVerPorII.DataSource = tabla2;
-                cmbVerPorII.DisplayMember = "Descripcion";
-                cmbVerPorII.ValueMember = "Codigo";
-                cmbVerPorII.SelectedIndex = 0;
+                if (tabla2.Rows.Count > 0)
+                {
+                    cmbVerPorII.DisplayMember = "Descripcion";
+                    cmbVerPorII.ValueMember = "Codigo";
+                    cmbVerPorII.SelectedIndex = 0;
+                }
             }
 
             dgvCandidatos.DataSource = tabla;
@@ -687,6 +690,11 @@ namespace Modulo_Capacitacion.Novedades
             {
                 throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

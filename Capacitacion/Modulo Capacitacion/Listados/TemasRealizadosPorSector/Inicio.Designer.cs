@@ -33,6 +33,7 @@
             this.LBChofer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.CB_Tipo = new System.Windows.Forms.ComboBox();
             this.TB_Año = new System.Windows.Forms.TextBox();
@@ -44,7 +45,6 @@
             this.BT_Imprimir = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -99,6 +99,14 @@
             this.panel3.Size = new System.Drawing.Size(477, 215);
             this.panel3.TabIndex = 0;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(42, 96);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(395, 45);
+            this.progressBar1.TabIndex = 99;
+            this.progressBar1.Visible = false;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -146,6 +154,7 @@
             this.TB_Hasta.Size = new System.Drawing.Size(80, 20);
             this.TB_Hasta.TabIndex = 85;
             this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
+            this.TB_Hasta.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 
             // TB_Desde
             // 
@@ -154,6 +163,7 @@
             this.TB_Desde.Size = new System.Drawing.Size(80, 20);
             this.TB_Desde.TabIndex = 84;
             this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
+            this.TB_Desde.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 
             // label2
             // 
@@ -213,14 +223,6 @@
             this.label1.Size = new System.Drawing.Size(93, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "Sector Desde:";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(42, 96);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(395, 45);
-            this.progressBar1.TabIndex = 99;
-            this.progressBar1.Visible = false;
             // 
             // Inicio
             // 

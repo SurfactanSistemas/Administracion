@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -68,5 +70,49 @@ namespace Modulo_Capacitacion.Listados.LegajosConNecesidadesPendientes
         {
             Close();
         }
+        private void Ayuda_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            DataTable tabla = _TraerTemas();
+            Ayuda frm = new Ayuda(tabla, ((TextBox)sender).Text);
+
+            frm.ShowDialog();
+            ((TextBox)sender).Text = frm.Valor == null ? "" : frm.Valor.ToString();
+            frm.Dispose();
+        }
+
+        private DataTable _TraerTemas()
+        {
+            try
+            {
+                DataTable tabla = new DataTable();
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT Codigo, Descripcion FROM Curso WHERE Descripcion <> '' ORDER BY Codigo";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                tabla.Load(dr);
+                            }
+                        }
+                    }
+
+                }
+
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+        }
+
     }
 }
