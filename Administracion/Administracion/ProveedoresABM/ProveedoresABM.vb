@@ -136,6 +136,7 @@ Public Class ProveedoresABM
                     & "CategoriaI =  '" & NormalizarIndex(cmbCategoria1.SelectedIndex) & "', " _
                     & "CategoriaII =  '" & NormalizarIndex(cmbCategoria2.SelectedIndex) & "', " _
                     & "Iso =  '" & NormalizarIndex(cmbCertificados.SelectedIndex) & "', " _
+                    & "VtoIso =  '" & txtCertificados.Text & "', " _
                     & "Region =  '" & NormalizarIndex(cmbRegion.SelectedIndex) & "', " _
                     & "PorceIb =  " & Proceso.formatonumerico(txtPorcelProv.Text) & ", " _
                     & "Estado =  '" & NormalizarIndex(cmbEstado.SelectedIndex) & "', " _

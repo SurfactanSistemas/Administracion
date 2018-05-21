@@ -225,9 +225,11 @@ namespace Eval_Proveedores.Novedades
 
             foreach (string _Empresa in EmpresasAConsultar())
             {
-                DataTable dtInformeProve = ESBOL.ListaInformeProve(Helper.OrdenarFecha(TB_Desde.Text), Helper.OrdenarFecha(TB_Hasta.Text), _Empresa, 1, _Prove);
+                DataTable dtInformeProve = new DataTable();
 
-                dtInformeProve.Columns.Add("DesArticulo", typeof(string));
+                dtInformeProve = ESBOL.ListaInformeProve(Helper.OrdenarFecha(TB_Desde.Text), Helper.OrdenarFecha(TB_Hasta.Text), _Empresa, 1, _Prove);
+
+                //dtInformeProve.Columns.Add("DesArticulo", typeof(string));
                 dtInformeProve.Columns.Add("SaldoOC", typeof(double));
                 dtInformeProve.Columns.Add("DesconOC", typeof(double));
                 dtInformeProve.Columns.Add("EnvaseOC", typeof(string));

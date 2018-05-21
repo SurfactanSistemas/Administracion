@@ -275,7 +275,11 @@
 
     Private Sub EnvioEnEMailAClientesToolStripMenuItem_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles EnvioEnEMailAClientesToolStripMenuItem.Click
         
-        Process.Start("\\193.168.0.2\g$\vb\Net\EmailsClientes\Ejecutable\EmailClientes.exe")
+        If not Proceso._EsPellital() then Process.Start("\\193.168.0.2\g$\vb\Net\EmailsClientes\Ejecutable\EmailClientes.exe")
 
+    End Sub
+
+    Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 End Class

@@ -1394,7 +1394,7 @@ Public Class Pagos
 
                         If Not IsNothing(WIvaComp) Then
                             With WIvaComp
-                                XParidad = IIf(IsDBNull(.Item("Paridad")), "0", Proceso.formatonumerico(.Item("Paridad")))
+                                XParidad = IIf(IsDBNull(.Item("Paridad")), "0", Proceso.formatonumerico(.Item("Paridad"), 4))
                                 XPago = IIf(IsDBNull(.Item("Pago")), "0", Val(.Item("Pago")))
                             End With
                         End If
@@ -3525,7 +3525,7 @@ Public Class Pagos
     Private Sub optAnticipos_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optAnticipos.CheckedChanged
         If optAnticipos.Checked Then
             'gridPagos.Rows.Clear()
-            _LimpiarGrillas()
+            '_LimpiarGrillas()
             With gridPagos
                 '.Rows.Clear()
                 Dim r = _ProximaFilaVaciaPagos()
@@ -3539,7 +3539,7 @@ Public Class Pagos
 
     Private Sub optVarios_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optVarios.CheckedChanged
         If optVarios.Checked Then
-            _LimpiarGrillas()
+            '_LimpiarGrillas()
             With gridPagos
                 '.Rows.Clear()
                 Dim r = _ProximaFilaVaciaPagos() '.Rows.Add("", "", "", "", "", txtObservaciones.Text)
@@ -3554,7 +3554,7 @@ Public Class Pagos
 
     Private Sub optChequeRechazado_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optChequeRechazado.CheckedChanged
         If optChequeRechazado.Checked Then
-            _LimpiarGrillas()
+            '_LimpiarGrillas()
             With gridPagos
                 '.Rows.Clear()
                 Dim r = _ProximaFilaVaciaPagos()
@@ -3570,7 +3570,7 @@ Public Class Pagos
 
     Private Sub optCtaCte_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optCtaCte.CheckedChanged
         If optCtaCte.Checked Then
-            _LimpiarGrillas()
+            '_LimpiarGrillas()
             'gridPagos.Rows.Clear()
             Try
                 'gridPagos.Columns(5).ReadOnly = True
