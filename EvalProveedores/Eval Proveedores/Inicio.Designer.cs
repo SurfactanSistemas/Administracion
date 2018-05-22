@@ -50,7 +50,6 @@
             this.salirDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -238,22 +237,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "EVALUACION DE PROVEEDORES";
             // 
-            // panel2
-            // 
-            this.panel2.BackgroundImage = global::Eval_Proveedores.Properties.Resources.marcadeagua2;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 64);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(784, 498);
-            this.panel2.TabIndex = 3;
-            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -291,7 +280,6 @@
         private System.Windows.Forms.ToolStripMenuItem listadoDeCheckListDeHojaDeRutaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeEvaluacionesToolStripMenuItem;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripMenuItem salirDelSistemaToolStripMenuItem;
     }
 }

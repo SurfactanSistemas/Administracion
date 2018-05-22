@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_TitEva = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -67,14 +67,6 @@
             this.CB_TipoEva = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.DGV_EvalSemProve = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_Buscar = new System.Windows.Forms.Button();
-            this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Movimientos = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,6 +83,16 @@
             this.CatI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CatII = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fechas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_Buscar = new System.Windows.Forms.Button();
+            this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -167,6 +169,7 @@
             this.btnPantalla.Name = "btnPantalla";
             this.btnPantalla.Size = new System.Drawing.Size(40, 40);
             this.btnPantalla.TabIndex = 87;
+            this.toolTip1.SetToolTip(this.btnPantalla, "Resumen por Pantalla");
             this.btnPantalla.UseVisualStyleBackColor = true;
             this.btnPantalla.Click += new System.EventHandler(this.btnPantalla_Click);
             // 
@@ -180,6 +183,7 @@
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(40, 40);
             this.btnImprimir.TabIndex = 86;
+            this.toolTip1.SetToolTip(this.btnImprimir, "Imprimir Resumen de Entregas");
             this.btnImprimir.UseVisualStyleBackColor = true;
             this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
@@ -356,6 +360,7 @@
             this.button3.Size = new System.Drawing.Size(70, 22);
             this.button3.TabIndex = 77;
             this.button3.Text = "Cancelar";
+            this.toolTip1.SetToolTip(this.button3, "Cancelar");
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -387,6 +392,7 @@
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
+            this.toolTip1.SetToolTip(this.BT_Salir, "Cerrar ventana");
             this.BT_Salir.UseVisualStyleBackColor = true;
             this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
             // 
@@ -401,6 +407,7 @@
             this.btnPedirClave.Name = "btnPedirClave";
             this.btnPedirClave.Size = new System.Drawing.Size(40, 40);
             this.btnPedirClave.TabIndex = 77;
+            this.toolTip1.SetToolTip(this.btnPedirClave, "Grabar");
             this.btnPedirClave.UseVisualStyleBackColor = true;
             this.btnPedirClave.Click += new System.EventHandler(this.BT_Guardar_Click);
             // 
@@ -469,14 +476,14 @@
             this.CatII,
             this.Fechas});
             this.DGV_EvalSemProve.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle30;
             this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_EvalSemProve.Location = new System.Drawing.Point(9, 122);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
@@ -484,6 +491,159 @@
             this.DGV_EvalSemProve.Size = new System.Drawing.Size(832, 321);
             this.DGV_EvalSemProve.TabIndex = 9;
             this.DGV_EvalSemProve.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellDoubleClick);
+            // 
+            // Proveedor
+            // 
+            this.Proveedor.DataPropertyName = "CodProve";
+            this.Proveedor.HeaderText = "CodigoProve";
+            this.Proveedor.Name = "Proveedor";
+            this.Proveedor.Visible = false;
+            // 
+            // Razon
+            // 
+            this.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Razon.DataPropertyName = "DescProve";
+            this.Razon.HeaderText = "Proveedor";
+            this.Razon.Name = "Razon";
+            this.Razon.ReadOnly = true;
+            // 
+            // Movimientos
+            // 
+            this.Movimientos.DataPropertyName = "Items";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle16;
+            this.Movimientos.HeaderText = "Items";
+            this.Movimientos.Name = "Movimientos";
+            this.Movimientos.ReadOnly = true;
+            this.Movimientos.Width = 40;
+            // 
+            // Aprobados
+            // 
+            this.Aprobados.DataPropertyName = "Aprobado";
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle24;
+            this.Aprobados.HeaderText = "Aprob.";
+            this.Aprobados.Name = "Aprobados";
+            this.Aprobados.ReadOnly = true;
+            this.Aprobados.Width = 40;
+            // 
+            // Desvios
+            // 
+            this.Desvios.DataPropertyName = "Desviado";
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Desvios.DefaultCellStyle = dataGridViewCellStyle25;
+            this.Desvios.HeaderText = "Desv.";
+            this.Desvios.Name = "Desvios";
+            this.Desvios.ReadOnly = true;
+            this.Desvios.Width = 40;
+            // 
+            // Rechazados
+            // 
+            this.Rechazados.DataPropertyName = "Rechazado";
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle26;
+            this.Rechazados.HeaderText = "Rech.";
+            this.Rechazados.Name = "Rechazados";
+            this.Rechazados.ReadOnly = true;
+            this.Rechazados.Width = 40;
+            // 
+            // CertificadosOk
+            // 
+            this.CertificadosOk.DataPropertyName = "Certificado";
+            this.CertificadosOk.HeaderText = "Cert.";
+            this.CertificadosOk.Name = "CertificadosOk";
+            this.CertificadosOk.ReadOnly = true;
+            this.CertificadosOk.Visible = false;
+            this.CertificadosOk.Width = 40;
+            // 
+            // EnvasesOk
+            // 
+            this.EnvasesOk.DataPropertyName = "Enviado";
+            this.EnvasesOk.HeaderText = "Env.";
+            this.EnvasesOk.Name = "EnvasesOk";
+            this.EnvasesOk.ReadOnly = true;
+            this.EnvasesOk.Visible = false;
+            this.EnvasesOk.Width = 40;
+            // 
+            // Retrasos
+            // 
+            this.Retrasos.DataPropertyName = "Atraso";
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle27;
+            this.Retrasos.HeaderText = "Atraso";
+            this.Retrasos.Name = "Retrasos";
+            this.Retrasos.ReadOnly = true;
+            this.Retrasos.Width = 40;
+            // 
+            // Categoria1
+            // 
+            this.Categoria1.DataPropertyName = "Categoria1";
+            this.Categoria1.HeaderText = "Calidad";
+            this.Categoria1.Name = "Categoria1";
+            this.Categoria1.ReadOnly = true;
+            this.Categoria1.Visible = false;
+            this.Categoria1.Width = 70;
+            // 
+            // Categoria2
+            // 
+            this.Categoria2.DataPropertyName = "Categoria2";
+            this.Categoria2.HeaderText = "Entrega";
+            this.Categoria2.Name = "Categoria2";
+            this.Categoria2.ReadOnly = true;
+            this.Categoria2.Visible = false;
+            this.Categoria2.Width = 70;
+            // 
+            // EvaCal
+            // 
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle28;
+            this.EvaCal.HeaderText = "Evaluacion Calidad";
+            this.EvaCal.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"});
+            this.EvaCal.Name = "EvaCal";
+            this.EvaCal.Width = 110;
+            // 
+            // EvaEnt
+            // 
+            this.EvaEnt.HeaderText = "Evaluacion Entregas";
+            this.EvaEnt.Items.AddRange(new object[] {
+            "Muy Bueno",
+            "Bueno",
+            "Regular",
+            "Malo",
+            "Sin Calificar"});
+            this.EvaEnt.Name = "EvaEnt";
+            this.EvaEnt.Width = 130;
+            // 
+            // CatI
+            // 
+            this.CatI.DataPropertyName = "CatI";
+            this.CatI.HeaderText = "CatI";
+            this.CatI.Name = "CatI";
+            this.CatI.ReadOnly = true;
+            this.CatI.Visible = false;
+            // 
+            // CatII
+            // 
+            this.CatII.DataPropertyName = "CatII";
+            this.CatII.HeaderText = "CatII";
+            this.CatII.Name = "CatII";
+            this.CatII.ReadOnly = true;
+            this.CatII.Visible = false;
+            // 
+            // Fechas
+            // 
+            this.Fechas.DataPropertyName = "Fecha";
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Fechas.DefaultCellStyle = dataGridViewCellStyle29;
+            this.Fechas.HeaderText = "Fecha";
+            this.Fechas.Name = "Fechas";
+            this.Fechas.ReadOnly = true;
+            this.Fechas.Width = 80;
             // 
             // contextMenuStrip1
             // 
@@ -559,158 +719,9 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Desde:";
             // 
-            // Proveedor
+            // timer1
             // 
-            this.Proveedor.DataPropertyName = "CodProve";
-            this.Proveedor.HeaderText = "CodigoProve";
-            this.Proveedor.Name = "Proveedor";
-            this.Proveedor.Visible = false;
-            // 
-            // Razon
-            // 
-            this.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Razon.DataPropertyName = "DescProve";
-            this.Razon.HeaderText = "Proveedor";
-            this.Razon.Name = "Razon";
-            this.Razon.ReadOnly = true;
-            // 
-            // Movimientos
-            // 
-            this.Movimientos.DataPropertyName = "Items";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Movimientos.HeaderText = "Items";
-            this.Movimientos.Name = "Movimientos";
-            this.Movimientos.ReadOnly = true;
-            this.Movimientos.Width = 40;
-            // 
-            // Aprobados
-            // 
-            this.Aprobados.DataPropertyName = "Aprobado";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Aprobados.HeaderText = "Aprob.";
-            this.Aprobados.Name = "Aprobados";
-            this.Aprobados.ReadOnly = true;
-            this.Aprobados.Width = 40;
-            // 
-            // Desvios
-            // 
-            this.Desvios.DataPropertyName = "Desviado";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Desvios.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Desvios.HeaderText = "Desv.";
-            this.Desvios.Name = "Desvios";
-            this.Desvios.ReadOnly = true;
-            this.Desvios.Width = 40;
-            // 
-            // Rechazados
-            // 
-            this.Rechazados.DataPropertyName = "Rechazado";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Rechazados.HeaderText = "Rech.";
-            this.Rechazados.Name = "Rechazados";
-            this.Rechazados.ReadOnly = true;
-            this.Rechazados.Width = 40;
-            // 
-            // CertificadosOk
-            // 
-            this.CertificadosOk.DataPropertyName = "Certificado";
-            this.CertificadosOk.HeaderText = "Cert.";
-            this.CertificadosOk.Name = "CertificadosOk";
-            this.CertificadosOk.ReadOnly = true;
-            this.CertificadosOk.Visible = false;
-            this.CertificadosOk.Width = 40;
-            // 
-            // EnvasesOk
-            // 
-            this.EnvasesOk.DataPropertyName = "Enviado";
-            this.EnvasesOk.HeaderText = "Env.";
-            this.EnvasesOk.Name = "EnvasesOk";
-            this.EnvasesOk.ReadOnly = true;
-            this.EnvasesOk.Visible = false;
-            this.EnvasesOk.Width = 40;
-            // 
-            // Retrasos
-            // 
-            this.Retrasos.DataPropertyName = "Atraso";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Retrasos.HeaderText = "Atraso";
-            this.Retrasos.Name = "Retrasos";
-            this.Retrasos.ReadOnly = true;
-            this.Retrasos.Width = 40;
-            // 
-            // Categoria1
-            // 
-            this.Categoria1.DataPropertyName = "Categoria1";
-            this.Categoria1.HeaderText = "Calidad";
-            this.Categoria1.Name = "Categoria1";
-            this.Categoria1.ReadOnly = true;
-            this.Categoria1.Visible = false;
-            this.Categoria1.Width = 70;
-            // 
-            // Categoria2
-            // 
-            this.Categoria2.DataPropertyName = "Categoria2";
-            this.Categoria2.HeaderText = "Entrega";
-            this.Categoria2.Name = "Categoria2";
-            this.Categoria2.ReadOnly = true;
-            this.Categoria2.Visible = false;
-            this.Categoria2.Width = 70;
-            // 
-            // EvaCal
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle6;
-            this.EvaCal.HeaderText = "Evaluacion Calidad";
-            this.EvaCal.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E"});
-            this.EvaCal.Name = "EvaCal";
-            this.EvaCal.Width = 110;
-            // 
-            // EvaEnt
-            // 
-            this.EvaEnt.HeaderText = "Evaluacion Entregas";
-            this.EvaEnt.Items.AddRange(new object[] {
-            "Muy Bueno",
-            "Bueno",
-            "Regular",
-            "Malo",
-            "Sin Calificar"});
-            this.EvaEnt.Name = "EvaEnt";
-            this.EvaEnt.Width = 130;
-            // 
-            // CatI
-            // 
-            this.CatI.DataPropertyName = "CatI";
-            this.CatI.HeaderText = "CatI";
-            this.CatI.Name = "CatI";
-            this.CatI.ReadOnly = true;
-            this.CatI.Visible = false;
-            // 
-            // CatII
-            // 
-            this.CatII.DataPropertyName = "CatII";
-            this.CatII.HeaderText = "CatII";
-            this.CatII.Name = "CatII";
-            this.CatII.ReadOnly = true;
-            this.CatII.Visible = false;
-            // 
-            // Fechas
-            // 
-            this.Fechas.DataPropertyName = "Fecha";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Fechas.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Fechas.HeaderText = "Fecha";
-            this.Fechas.Name = "Fechas";
-            this.Fechas.ReadOnly = true;
-            this.Fechas.Width = 80;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ActSemProvEnv
             // 
@@ -797,5 +808,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CatI;
         private System.Windows.Forms.DataGridViewTextBoxColumn CatII;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fechas;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

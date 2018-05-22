@@ -16,6 +16,9 @@ namespace Eval_Proveedores.Novedades
         DataTable dtInformeMuestra = new DataTable();
         DataTable dtInformeDetalle = new DataTable();
         string[] _Empresas = { "SurfactanSA", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "Pelitall_II", "Pellital_III", "Pellital_V" };
+        Listados.EvaSemActProve.IniEvaSemActProve frm = new Listados.EvaSemActProve.IniEvaSemActProve();
+        private int WTipoImpresion = 1;
+        bool WImprimiendo = false;
 
         public ActSemProv()
         {
@@ -66,6 +69,7 @@ namespace Eval_Proveedores.Novedades
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Aprobados"].Value = WProveedor["Aprobados"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Retrasos"].Value = WProveedor["Retrasos"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Desvios"].Value = WProveedor["Desvios"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Rechazados"].Value = WProveedor["Rechazados"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["EnvasesOk"].Value = WProveedor["EnvasesOk"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["CertificadosOk"].Value = WProveedor["CertificadosOk"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Categoria1"].Value = WProveedor["CategoriaI"];
@@ -175,6 +179,8 @@ namespace Eval_Proveedores.Novedades
             pnlClave.Visible = false;
 
             ckTodos.Checked = true;
+            WTipoImpresion = 1;
+            WImprimiendo = false;
             CargarDtEvaluacion();
             CargardtInformeMuestra();
         }
@@ -498,15 +504,13 @@ namespace Eval_Proveedores.Novedades
 
         private void btnPantalla_Click(object sender, EventArgs e)
         {
-            string[] WEmpresas = GenerarArregloPlantas();
+            WTipoImpresion = 1;
 
-            Listados.EvaSemActProve.IniEvaSemActProve frm = new Listados.EvaSemActProve.IniEvaSemActProve();
-            
-            frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, 1);
+            WImprimiendo = true;
 
-            pnlReporte.Visible = false;
+            frm.Show();
 
-            frm.Close();
+            timer1.Start();
         }
 
         private string[] GenerarArregloPlantas()
@@ -540,20 +544,33 @@ namespace Eval_Proveedores.Novedades
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (WImprimiendo)
+            {
 
+                WImprimiendo = false;
+
+                string[] WEmpresas = GenerarArregloPlantas();
+
+                frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, WTipoImpresion);
+
+                frm.Close();
+
+                frm = new Listados.EvaSemActProve.IniEvaSemActProve();
+
+                timer1.Stop();
+
+            }
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            string[] WEmpresas = GenerarArregloPlantas();
+            WTipoImpresion = 2;
 
-            Listados.EvaSemActProve.IniEvaSemActProve frm = new Listados.EvaSemActProve.IniEvaSemActProve();
+            WImprimiendo = true;
 
-            frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, 2);
+            frm.Show();
 
-            pnlReporte.Visible = false;
-
-            frm.Close();
+            timer1.Start();
         }
 
         private void copiarToolStripMenuItem_Click(object sender, EventArgs e)

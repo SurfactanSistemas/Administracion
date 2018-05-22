@@ -15,7 +15,9 @@ namespace Eval_Proveedores.Novedades
         DataTable dtInformeMuestra = new DataTable();
         EvalSemestralBOL ESBOL = new EvalSemestralBOL();
         DataTable dtInformeDetalle;
-
+        Listados.EvaSemProveEnv.Inicio frm = new Listados.EvaSemProveEnv.Inicio();
+        private int WTipoImpresion = 1;
+        bool WImprimiendo = false;
 
         public ActSemProvEnv()
         {
@@ -28,6 +30,8 @@ namespace Eval_Proveedores.Novedades
             CargardtInformeMuestra();
 
             ckTodos.Checked = true;
+            WTipoImpresion = 1;
+            WImprimiendo = false;
             //DGV_EvalSemProve.Visible = false;
 
             //LB_Titulo.Visible = false;
@@ -327,7 +331,7 @@ namespace Eval_Proveedores.Novedades
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT o.Saldo, o.Recibida, o.Cantidad, i.Envase, isnull(e.Descripcion, '') as DescEnvase FROM Orden o, Informe i FULL OUTER JOIN Envases e ON i.Envase = e.Envases WHERE o.Orden = i.Orden AND o.Articulo = i.Articulo AND o.Orden = '" + WOrden + "' AND o.Articulo = '" + WArticulo + "'";
+                    cmd.CommandText = "SELECT o.Saldo, o.Recibida, Cantidad = (l.Liberada + l.Devuelta), i.Envase, isnull(e.Descripcion, '') as DescEnvase FROM Orden o, Informe i FULL OUTER JOIN Envases e ON i.Envase = e.Envases LEFT OUTER JOIN Laudo l ON i.Informe = l.Informe and i.Articulo = l.Articulo WHERE o.Orden = i.Orden AND o.Articulo = i.Articulo AND o.Orden = '" + WOrden + "' AND o.Articulo = '" + WArticulo + "'";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -586,13 +590,13 @@ namespace Eval_Proveedores.Novedades
 
         private void btnPantalla_Click(object sender, EventArgs e)
         {
-            string[] WEmpresas = GenerarArregloPlantas();
+            WTipoImpresion = 1;
 
-            Listados.EvaSemProveEnv.Inicio frm = new Listados.EvaSemProveEnv.Inicio();
+            WImprimiendo = true;
 
-            frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, 1);
+            frm.Show();
 
-            frm.Close();
+            timer1.Start();
         }
 
         private string[] GenerarArregloPlantas()
@@ -626,13 +630,14 @@ namespace Eval_Proveedores.Novedades
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            string[] WEmpresas = GenerarArregloPlantas();
 
-            Listados.EvaSemProveEnv.Inicio frm = new Listados.EvaSemProveEnv.Inicio();
+            WTipoImpresion = 2;
 
-            frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, 2);
+            WImprimiendo = true;
 
-            frm.Close();
+            frm.Show();
+
+            timer1.Start();
         }
 
 
@@ -669,6 +674,26 @@ namespace Eval_Proveedores.Novedades
             // Copiamos el contenido de las celdas seleccionadas en el ClipBoard.
             _CopiarSeleccion();
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (WImprimiendo)
+            {
+                
+                WImprimiendo = false;
+
+                string[] WEmpresas = GenerarArregloPlantas();
+                
+                frm.GenerarReporteDesdeFuera(WEmpresas, TB_Desde.Text, TB_Hasta.Text, WTipoImpresion);
+
+                frm.Close();
+
+                frm = new Listados.EvaSemProveEnv.Inicio();
+
+                timer1.Stop();
+
+            }
         }
 
 

@@ -404,6 +404,11 @@ namespace Eval_Proveedores.Listados.EvaSemProveEnv
             TB_Desde.Text = WDesde;
             TB_Hasta.Text = WHasta;
 
+            Enabled = false;
+            BT_Imprimir.Visible = false;
+            BT_Pantalla.Visible = false;
+            BT_Salir.Visible = false;
+
             switch (Tipo)
             {
                 case 1:
@@ -422,6 +427,7 @@ namespace Eval_Proveedores.Listados.EvaSemProveEnv
                 }
             }
 
+            Enabled = true;
         }
     }
 }

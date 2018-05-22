@@ -91,7 +91,7 @@ namespace Eval_Proveedores
                 int WAprobados = 0, WRechazados = 0, WDesvio = 0, WDevuelta = 0;
 
                 WProveedor["Pasa"] = " ";
-
+                
                 foreach (string WEmpresa in XEmpresas)
                 {
                     DataTable WInformes = _TraerInformesPorProveedorEmpresa(WProveedor["Proveedor"].ToString(), WDesde, WHasta, WEmpresa);
@@ -125,12 +125,13 @@ namespace Eval_Proveedores
                         foreach (DataRow WLaudo in WLaudos.Rows)
                         {
                             string WMarca = WLaudo["Marca"] == null ? "" : WLaudo["Marca"].ToString();
+                            int WDevueltaAnt = 0;
 
                             WNumLaudo = WLaudo["Laudo"].ToString();
 
                             if (WMarca.ToUpper() == "X")
                             {
-                                int WDevueltaAnt = WLaudo["DevueltaAnt"] == null
+                                WDevueltaAnt = WLaudo["DevueltaAnt"] == null
                                     ? 0
                                     : int.Parse(WLaudo["DevueltaAnt"].ToString());
 
@@ -141,31 +142,32 @@ namespace Eval_Proveedores
                             }
                             else
                             {
-                                int WDevueltaAnt = WLaudo["Devuelta"] == null ? 0 : int.Parse(WLaudo["Devuelta"].ToString());
+                                WDevueltaAnt = WLaudo["Devuelta"] == null ? 0 : int.Parse(WLaudo["Devuelta"].ToString());
 
                                 if (WDevueltaAnt != 0)
                                 {
                                     WDevuelta++;
                                 }
                             }
-                        }
 
-                        if (WDevuelta > 0)
-                        {
-                            WRechazados++;
-                        }
-                        else
-                        {
-                            if (WNumLaudo == "") WNumLaudo = "0";
-                            int XLaudo = int.Parse(WNumLaudo);
-
-                            if (_EsDevio(XLaudo))
+                            if (WDevueltaAnt != 0)
                             {
-                                WDesvio++;
+                                WRechazados++;
                             }
                             else
                             {
-                                WAprobados++;
+                                if (WNumLaudo == "") continue;
+                                
+                                int XLaudo = int.Parse(WNumLaudo);
+
+                                if (_EsDevio(XLaudo))
+                                {
+                                    WDesvio++;
+                                }
+                                else
+                                {
+                                    WAprobados++;
+                                }
                             }
                         }
                     }
@@ -175,7 +177,7 @@ namespace Eval_Proveedores
                 WProveedor["CertificadosOk"] = WCertificadosOk;
                 WProveedor["EnvasesOk"] = WEnvasesOk;
                 WProveedor["Retrasos"] = WMovimientos != 0 ? Math.Ceiling((double)WDiasRetrasos / WMovimientos) : WDiasRetrasos;
-                WProveedor["Aprobados"] = WAprobados;
+                WProveedor["Aprobados"] = WMovimientos - WRechazados; //WAprobados;
                 WProveedor["Desvios"] = WDesvio;
                 WProveedor["Rechazados"] = WRechazados;
 
