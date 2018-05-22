@@ -3403,9 +3403,603 @@ Public Class Recibos
 
         ' Chequeamos que se haya cargado un recibo antes de mandar a imprimir.
         If Val(txtRecibo.Text) > 0 Then
-            _PrepararEImprimirRecibo()
+            
+            If Proceso._EsPellital then
+                _PrepararEImprimirReciboPellital
+            Else
+                _PrepararEImprimirRecibo()
+            End If
+
         End If
 
+    End Sub
+
+    Private Sub _PrepararEImprimirReciboPellital()
+        ' Comprobamos que el Recibo exista.
+        If Not _ReciboYaExistente(Trim(txtRecibo.Text)) Then
+            MsgBox("El Nº de Recibo indicado no se corresponde con ninguno registrado en la Base de Datos." _
+                   & vbCrLf & vbCrLf & _
+                   "Se detendrá el proceso de impresión", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        Dim Retencion, Cheque, Documento, Total2f, Pesos, Bonos, Dolares, Ajuste, Compe, Transfe, Total2, Total1 As Double
+        Dim Vector(30, 10) As String
+        Dim WEntra(100, 120) As String
+        Dim ImpreTipo(100) As String
+        Dim XLugar As Integer = 0
+        Dim iRow As Integer = 0
+
+        ' Inicializamos todas las variable a utilizar.
+        If optVarios.Checked Then
+            WRazon = Space$(30)
+            WDireccion = Space$(30)
+            WLocalidad = Space$(30)
+            WProvincia = ""
+            WPostal = ""
+        End If
+
+        WRecibo = Val(txtRecibo.Text)
+        WFecha = txtFecha.Text
+        WCliente = txtCliente.Text
+
+        Retencion = Val(txtRetGanancias.Text) + Val(txtRetIva.Text) + Val(_NormalizarNumero(txtRetIB.Text)) + Val(txtRetSuss.Text)
+
+        Cheque = 0
+        Documento = 0
+        Total2f = 0
+        Pesos = 0
+        Bonos = 0
+        Dolares = 0
+        Ajuste = 0
+        Compe = 0
+        Transfe = 0
+        Total2 = 0
+
+        XTipo = ""
+        XNumero = ""
+
+        ' Limpiamos los vectores para re poblarlos.
+        Array.Clear(Vector, 0, Vector.Length)
+        Array.Clear(WEntra, 0, WEntra.Length)
+
+        ImpreTipo(1) = "FC"
+
+        ' Extraemos los valores de Débitos y Créditos.
+        For iRow = 0 To 19
+
+            If iRow < gridPagos2.Rows.Count Then
+                If Trim(gridPagos2.Rows(iRow).Cells(4).Value) <> "" Then
+                    With gridPagos2.Rows(iRow)
+                        Vector(iRow, 0) = .Cells(0).Value
+                        Vector(iRow, 1) = .Cells(1).Value
+                        Vector(iRow, 2) = .Cells(2).Value
+                        Vector(iRow, 3) = .Cells(3).Value
+                        Vector(iRow, 4) = _NormalizarNumero(.Cells(4).Value)
+                    End With
+                End If
+            Else
+                For i = 0 To 4
+                    Vector(iRow, i) = ""
+                Next
+            End If
+
+            If iRow < gridFormasPago2.Rows.Count Then
+                If Trim(gridFormasPago2.Rows(iRow).Cells(4).Value) <> "" Then
+                    With gridFormasPago2.Rows(iRow)
+                        Vector(iRow, 5) = .Cells(0).Value
+                        Vector(iRow, 6) = .Cells(1).Value
+                        Vector(iRow, 7) = .Cells(2).Value
+                        Vector(iRow, 8) = .Cells(3).Value
+                        Vector(iRow, 9) = _NormalizarNumero(.Cells(4).Value)
+                    End With
+                End If
+            Else
+                For i = 5 To 9
+                    Vector(iRow, i) = ""
+                Next
+            End If
+
+            XTipo = ceros(Vector(iRow, 0), 2)
+            XNumero = ceros(Vector(iRow, 3), 8)
+
+            'Solo realizamos la llamada a la base de datos en caso de haber datos por los que solicitar la fecha.
+            If Val(XTipo) > 0 And Val(XNumero) > 0 Then
+                Vector(iRow, 10) = _ObtenerFechaCtaCte(XTipo & XNumero & "01")
+            Else
+                Vector(iRow, 10) = ""
+            End If
+
+        Next iRow
+
+        ' Calculamos totales y subtotales en base a los tipos de créditos.
+        For Ciclo = 0 To 19
+
+            If Val(Vector(Ciclo, 9)) <> 0 Then
+                Dim _cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = Ciclo)
+                Select Case Val(Vector(Ciclo, 5))
+                    Case 1
+                        If IsNothing(_cuenta) Then
+                            Pesos = Pesos + Val(Vector(Ciclo, 9))
+                        Else
+                            If Val(_cuenta(1)) <> 2 Then
+                                Pesos = Pesos + Val(Vector(Ciclo, 9))
+                            Else
+                                Dolares = Dolares + Val(Vector(Ciclo, 9))
+                            End If
+                        End If
+                    Case 4
+                        If Not IsNothing(_cuenta) Then
+                            Select Case Val(_cuenta(1))
+                                Case 2
+                                    Dolares = Dolares + Val(Vector(Ciclo, 9))
+                                Case 5
+                                    Compe = Compe + Val(Vector(Ciclo, 9))
+                                Case 21, 22, 25
+                                    Transfe = Transfe + Val(Vector(Ciclo, 9))
+                                Case 91
+                                    Ajuste = Ajuste + Val(Vector(Ciclo, 9))
+                                Case 157, 7, 8
+                                    Bonos = Bonos + Val(Vector(Ciclo, 9))
+                                Case Else
+                                    REM Pesos = Pesos + Val(Vector(Ciclo, 9))
+                            End Select
+                        End If
+                    Case 2
+                        Cheque = Cheque + Val(Vector(Ciclo, 9))
+                    Case Else
+                        Documento = Documento + Val(Vector(Ciclo, 9))
+                End Select
+            End If
+
+            If Val(Vector(Ciclo, 4)) <> 0 Then
+                Total2 = Total2 + Val(Vector(Ciclo, 4))
+            End If
+
+        Next Ciclo
+
+        Total1 = Pesos + Cheque + Documento + Retencion + Dolares + Compe + Transfe + Ajuste + Bonos
+
+        For Ciclo = 0 To 19
+            If Val(Vector(Ciclo, 9)) <> 0 And (Val(Vector(Ciclo, 5)) = 2 Or Val(Vector(Ciclo, 5)) = 3) Then
+                Vector(Ciclo, 6) = ceros(Vector(Ciclo, 6), 6)
+                Vector(Ciclo, 8) = LSet(Vector(Ciclo, 8), 20)
+                For Pasa = 1 To 24
+                    Select Case Ciclo
+                        Case 0
+                            WEntra(Pasa, 17) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 18) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 19) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 20) = Vector(Ciclo, 8)
+                        Case 1
+                            WEntra(Pasa, 21) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 22) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 23) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 24) = Vector(Ciclo, 8)
+                        Case 2
+                            WEntra(Pasa, 25) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 26) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 27) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 28) = Vector(Ciclo, 8)
+                        Case 3
+                            WEntra(Pasa, 29) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 30) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 31) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 32) = Vector(Ciclo, 8)
+                        Case 4
+                            WEntra(Pasa, 33) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 34) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 35) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 36) = Vector(Ciclo, 8)
+                        Case 5
+                            WEntra(Pasa, 37) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 38) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 39) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 40) = Vector(Ciclo, 8)
+                        Case 6
+                            WEntra(Pasa, 41) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 42) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 43) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 44) = Vector(Ciclo, 8)
+                        Case 7
+                            WEntra(Pasa, 45) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 46) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 47) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 48) = Vector(Ciclo, 8)
+                        Case 8
+                            WEntra(Pasa, 49) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 50) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 51) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 52) = Vector(Ciclo, 8)
+                        Case 9
+                            WEntra(Pasa, 53) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 54) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 55) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 56) = Vector(Ciclo, 8)
+                        Case 10
+                            WEntra(Pasa, 57) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 58) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 59) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 60) = Vector(Ciclo, 8)
+                        Case 11
+                            WEntra(Pasa, 61) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 62) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 63) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 64) = Vector(Ciclo, 8)
+                        Case 12
+                            WEntra(Pasa, 65) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 66) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 67) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 68) = Vector(Ciclo, 8)
+                        Case 13
+                            WEntra(Pasa, 69) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 70) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 71) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 72) = Vector(Ciclo, 8)
+                        Case 14
+                            WEntra(Pasa, 73) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 74) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 75) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 76) = Vector(Ciclo, 8)
+                        Case 15
+                            WEntra(Pasa, 77) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 78) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 79) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 80) = Vector(Ciclo, 8)
+                        Case 16
+                            WEntra(Pasa, 81) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 82) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 83) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 84) = Vector(Ciclo, 8)
+                        Case 17
+                            WEntra(Pasa, 85) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 86) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 87) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 88) = Vector(Ciclo, 8)
+                        Case 18
+                            WEntra(Pasa, 89) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 90) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 91) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 92) = Vector(Ciclo, 8)
+                        Case 19
+                            WEntra(Pasa, 93) = Vector(Ciclo, 6)
+                            WEntra(Pasa, 94) = Vector(Ciclo, 7)
+                            WEntra(Pasa, 95) = Vector(Ciclo, 9)
+                            WEntra(Pasa, 96) = Vector(Ciclo, 8)
+                        Case Else
+                    End Select
+                Next Pasa
+            End If
+        Next Ciclo
+
+        XLugar = 1
+
+        WEntra(XLugar, 1) = txtRecibo.Text
+        WEntra(XLugar, 2) = txtFecha.Text
+        WEntra(XLugar, 3) = txtCliente.Text
+        WEntra(XLugar, 4) = WRazon
+        WEntra(XLugar, 5) = WDireccion
+        WEntra(XLugar, 6) = WLocalidad
+        WEntra(XLugar, 7) = WProvincia
+        WEntra(XLugar, 8) = WPostal
+        WEntra(XLugar, 9) = "Efectivo "
+        WEntra(XLugar, 10) = Str$(Pesos)
+        WEntra(XLugar, 11) = ""
+        WEntra(XLugar, 12) = ""
+        WEntra(XLugar, 13) = ""
+        WEntra(XLugar, 14) = ""
+        WEntra(XLugar, 15) = ""
+        WEntra(XLugar, 16) = ""
+
+        XLugar = XLugar + 1
+
+        WEntra(XLugar, 1) = txtRecibo.Text
+        WEntra(XLugar, 2) = txtFecha.Text
+        WEntra(XLugar, 3) = txtCliente.Text
+        WEntra(XLugar, 4) = WRazon
+        WEntra(XLugar, 5) = WDireccion
+        WEntra(XLugar, 6) = WLocalidad
+        WEntra(XLugar, 7) = WProvincia
+        WEntra(XLugar, 8) = WPostal
+        WEntra(XLugar, 9) = ""
+        WEntra(XLugar, 10) = ""
+        WEntra(XLugar, 11) = ""
+        WEntra(XLugar, 12) = ""
+        WEntra(XLugar, 13) = ""
+        WEntra(XLugar, 14) = ""
+        WEntra(XLugar, 15) = ""
+        WEntra(XLugar, 16) = ""
+
+        XLugar = XLugar + 1
+
+        WEntra(XLugar, 1) = txtRecibo.Text
+        WEntra(XLugar, 2) = txtFecha.Text
+        WEntra(XLugar, 3) = txtCliente.Text
+        WEntra(XLugar, 4) = WRazon
+        WEntra(XLugar, 5) = WDireccion
+        WEntra(XLugar, 6) = WLocalidad
+        WEntra(XLugar, 7) = WProvincia
+        WEntra(XLugar, 8) = WPostal
+        WEntra(XLugar, 9) = "Cheques "
+        WEntra(XLugar, 10) = Str$(Cheque)
+        WEntra(XLugar, 11) = ""
+        WEntra(XLugar, 12) = ""
+        WEntra(XLugar, 13) = ""
+        WEntra(XLugar, 14) = ""
+        WEntra(XLugar, 15) = ""
+        WEntra(XLugar, 16) = ""
+
+        XLugar = XLugar + 1
+
+        WEntra(XLugar, 1) = txtRecibo.Text
+        WEntra(XLugar, 2) = txtFecha.Text
+        WEntra(XLugar, 3) = txtCliente.Text
+        WEntra(XLugar, 4) = WRazon
+        WEntra(XLugar, 5) = WDireccion
+        WEntra(XLugar, 6) = WLocalidad
+        WEntra(XLugar, 7) = WProvincia
+        WEntra(XLugar, 8) = WPostal
+        WEntra(XLugar, 9) = ""
+        WEntra(XLugar, 10) = ""
+        WEntra(XLugar, 11) = ""
+        WEntra(XLugar, 12) = ""
+        WEntra(XLugar, 13) = ""
+        WEntra(XLugar, 14) = ""
+        WEntra(XLugar, 15) = ""
+        WEntra(XLugar, 16) = ""
+
+
+        For Ciclo = 0 To 17
+
+            XLugar = XLugar + 1
+
+            WEntra(XLugar, 1) = txtRecibo.Text
+            WEntra(XLugar, 2) = txtFecha.Text
+            WEntra(XLugar, 3) = txtCliente.Text
+            WEntra(XLugar, 4) = WRazon
+            WEntra(XLugar, 5) = WDireccion
+            WEntra(XLugar, 6) = WLocalidad
+            WEntra(XLugar, 7) = WProvincia
+            WEntra(XLugar, 8) = WPostal
+
+            Select Case Ciclo
+                Case 0
+                    WEntra(XLugar, 9) = "Documentos "
+                    WEntra(XLugar, 10) = Str$(Documento)
+                    WEntra(XLugar, 11) = ""
+                Case 2
+                    WEntra(XLugar, 9) = "Retencion Ganancias "
+                    WEntra(XLugar, 10) = txtRetGanancias.Text
+                    WEntra(XLugar, 11) = ""
+                Case 4
+                    WEntra(XLugar, 9) = "Retencion Iva "
+                    WEntra(XLugar, 10) = txtRetIva.Text
+                    WEntra(XLugar, 11) = ""
+                Case 6
+                    WEntra(XLugar, 9) = "Retencion I.Brutos "
+                    WEntra(XLugar, 10) = txtRetIB.Text
+                    WEntra(XLugar, 11) = ""
+                Case 8
+                    WEntra(XLugar, 9) = "Moneda Ext."
+                    If Val(txtParidad.Text) <> 0 Then
+                        WEntra(XLugar, 10) = Str$(Val(_NormalizarNumero(Dolares)) / Val(_NormalizarNumero(txtParidad.Text)))
+                    Else
+                        WEntra(XLugar, 10) = Str$(Dolares)
+                    End If
+                    WEntra(XLugar, 11) = "U$S"
+                Case 10
+                    WEntra(XLugar, 9) = "Compensacion"
+                    WEntra(XLugar, 10) = Str$(Compe)
+                    WEntra(XLugar, 11) = ""
+                Case 12
+                    WEntra(XLugar, 9) = "Bonos"
+                    WEntra(XLugar, 10) = Str$(Bonos)
+                    WEntra(XLugar, 11) = ""
+                Case 14
+                    WEntra(XLugar, 9) = "Ajuste"
+                    WEntra(XLugar, 10) = Str$(Ajuste)
+                    WEntra(XLugar, 11) = ""
+                Case 16
+                    WEntra(XLugar, 9) = "Transferencia"
+                    WEntra(XLugar, 10) = Str$(Transfe)
+                    WEntra(XLugar, 11) = ""
+                Case 17
+                    WEntra(XLugar, 9) = "Ret. Suss"
+                    WEntra(XLugar, 10) = txtRetSuss.Text
+                    WEntra(XLugar, 11) = ""
+                Case Else
+                    WEntra(XLugar, 9) = ""
+                    WEntra(XLugar, 10) = ""
+                    WEntra(XLugar, 11) = ""
+            End Select
+
+            If Val(Vector(Ciclo, 4)) <> 0 And optCtaCte.Checked Then
+                Call ceros(Vector(Ciclo, 3), 6)
+                WEntra(XLugar, 12) = Vector(Ciclo, 10)
+                WEntra(XLugar, 13) = ImpreTipo(Val(Vector(Ciclo, 0)))
+                WEntra(XLugar, 14) = Vector(Ciclo, 3)
+                If Val(_Provincia) = 24 Then
+                    WEntra(XLugar, 15) = "U$S"
+                    WEntra(XLugar, 16) = Vector(Ciclo, 4)
+                Else
+                    WEntra(XLugar, 15) = " $ "
+                    WEntra(XLugar, 16) = Vector(Ciclo, 4)
+                End If
+            Else
+                WEntra(XLugar, 12) = ""
+                WEntra(XLugar, 13) = ""
+                WEntra(XLugar, 14) = ""
+                WEntra(XLugar, 15) = ""
+            End If
+        Next Ciclo
+
+        XLugar = XLugar + 1
+
+        WEntra(XLugar, 1) = txtRecibo.Text
+        WEntra(XLugar, 2) = txtFecha.Text
+        WEntra(XLugar, 3) = txtCliente.Text
+        WEntra(XLugar, 4) = WRazon
+        WEntra(XLugar, 5) = WDireccion
+        WEntra(XLugar, 6) = WLocalidad
+        WEntra(XLugar, 7) = WProvincia
+        WEntra(XLugar, 8) = WPostal
+        WEntra(XLugar, 9) = ""
+        WEntra(XLugar, 10) = ""
+        WEntra(XLugar, 11) = ""
+        WEntra(XLugar, 12) = ""
+        WEntra(XLugar, 13) = ""
+        WEntra(XLugar, 14) = ""
+        WEntra(XLugar, 15) = ""
+        WEntra(XLugar, 16) = ""
+
+        XLugar = XLugar + 1
+
+        WEntra(XLugar, 1) = txtRecibo.Text
+        WEntra(XLugar, 2) = txtFecha.Text
+        WEntra(XLugar, 3) = txtCliente.Text
+        WEntra(XLugar, 4) = WRazon
+        WEntra(XLugar, 5) = WDireccion
+        WEntra(XLugar, 6) = WLocalidad
+        WEntra(XLugar, 7) = WProvincia
+        WEntra(XLugar, 8) = WPostal
+        WEntra(XLugar, 9) = ""
+        WEntra(XLugar, 10) = Str$(Total1)
+        WEntra(XLugar, 11) = ""
+        WEntra(XLugar, 12) = ""
+        WEntra(XLugar, 13) = ""
+        WEntra(XLugar, 14) = ""
+        If Val(_Provincia) = 24 Then
+            WEntra(XLugar, 15) = "U$S"
+            WEntra(XLugar, 16) = Str$(Total2)
+        Else
+            WEntra(XLugar, 15) = " $ "
+            WEntra(XLugar, 16) = Str$(Total2)
+        End If
+
+        _ImprimirReciboPellital(WEntra)
+
+    End Sub
+
+    Private Sub _ImprimirReciboPellital(ByVal WEntra)
+        Dim table As New DataTable("Detalles")
+        Dim row As DataRow
+        Dim crdoc As ReportDocument
+        crdoc = New ReciboDefinitivo
+
+        ' Creo las Columnas
+        _PrepararTabla(table)
+
+        ' Lleno la tabla con la informacion del Recibo.
+        For i = 1 To 24
+
+            row = table.NewRow()
+
+            row.Item("Recibo") = WEntra(i, 1)
+            row.Item("Renglon") = i
+            row.Item("Fecha") = WEntra(i, 2)
+            row.Item("Cliente") = WEntra(i, 3)
+            row.Item("Razon") = WEntra(i, 4)
+            row.Item("Direccion") = WEntra(i, 5)
+            row.Item("Localidad") = WEntra(i, 6)
+            row.Item("Provincia") = WEntra(i, 7)
+            row.Item("Postal") = WEntra(i, 8)
+            row.Item("Impre1") = WEntra(i, 9)
+            row.Item("Importe1") = Val(WEntra(i, 10))
+            row.Item("Signo1") = WEntra(i, 11)
+            row.Item("Fecha2") = WEntra(i, 12)
+            row.Item("Tipo2") = WEntra(i, 13)
+            row.Item("Numero2") = WEntra(i, 14)
+            row.Item("Signo2") = WEntra(i, 15)
+            row.Item("Importe2") = Val(WEntra(i, 16))
+            row.Item("Cheque1") = WEntra(i, 17)
+            row.Item("Venci1") = WEntra(i, 18)
+            row.Item("Impo1") = Val(WEntra(i, 19))
+            row.Item("Banco1") = WEntra(i, 20)
+            row.Item("Cheque2") = WEntra(i, 21)
+            row.Item("Venci2") = WEntra(i, 22)
+            row.Item("Impo2") = Val(WEntra(i, 23))
+            row.Item("Banco2") = WEntra(i, 24)
+            row.Item("Cheque3") = WEntra(i, 25)
+            row.Item("Venci3") = WEntra(i, 26)
+            row.Item("Impo3") = Val(WEntra(i, 27))
+            row.Item("Banco3") = WEntra(i, 28)
+            row.Item("Cheque4") = WEntra(i, 29)
+            row.Item("Venci4") = WEntra(i, 30)
+            row.Item("Impo4") = Val(WEntra(i, 31))
+            row.Item("Banco4") = WEntra(i, 32)
+            row.Item("Cheque5") = WEntra(i, 33)
+            row.Item("Venci5") = WEntra(i, 34)
+            row.Item("Impo5") = Val(WEntra(i, 35))
+            row.Item("Banco5") = WEntra(i, 36)
+            row.Item("Cheque6") = WEntra(i, 37)
+            row.Item("Venci6") = WEntra(i, 38)
+            row.Item("Impo6") = Val(WEntra(i, 39))
+            row.Item("Banco6") = WEntra(i, 40)
+            row.Item("Cheque7") = WEntra(i, 41)
+            row.Item("Venci7") = WEntra(i, 42)
+            row.Item("Impo7") = Val(WEntra(i, 43))
+            row.Item("Banco7") = WEntra(i, 44)
+            row.Item("Cheque8") = WEntra(i, 45)
+            row.Item("Venci8") = WEntra(i, 46)
+            row.Item("Impo8") = Val(WEntra(i, 47))
+            row.Item("Banco8") = WEntra(i, 48)
+            row.Item("Cheque9") = WEntra(i, 49)
+            row.Item("Venci9") = WEntra(i, 50)
+            row.Item("Impo9") = Val(WEntra(i, 51))
+            row.Item("Banco9") = WEntra(i, 52)
+            row.Item("Cheque10") = WEntra(i, 53)
+            row.Item("Venci10") = WEntra(i, 54)
+            row.Item("Impo10") = Val(WEntra(i, 55))
+            row.Item("Banco10") = WEntra(i, 56)
+            row.Item("Cheque11") = WEntra(i, 57)
+            row.Item("Venci11") = WEntra(i, 58)
+            row.Item("Impo11") = Val(WEntra(i, 59))
+            row.Item("Banco11") = WEntra(i, 60)
+            row.Item("Cheque12") = WEntra(i, 61)
+            row.Item("Venci12") = WEntra(i, 62)
+            row.Item("Impo12") = Val(WEntra(i, 63))
+            row.Item("Banco12") = WEntra(i, 64)
+            row.Item("Cheque13") = WEntra(i, 65)
+            row.Item("Venci13") = WEntra(i, 66)
+            row.Item("Impo13") = Val(WEntra(i, 67))
+            row.Item("Banco13") = WEntra(i, 68)
+            row.Item("Cheque14") = WEntra(i, 69)
+            row.Item("Venci14") = WEntra(i, 70)
+            row.Item("Impo14") = Val(WEntra(i, 71))
+            row.Item("Banco14") = WEntra(i, 72)
+            row.Item("Cheque15") = WEntra(i, 73)
+            row.Item("Venci15") = WEntra(i, 74)
+            row.Item("Impo15") = Val(WEntra(i, 75))
+            row.Item("Banco15") = WEntra(i, 76)
+            row.Item("Cheque16") = WEntra(i, 77)
+            row.Item("Venci16") = WEntra(i, 78)
+            row.Item("Impo16") = Val(WEntra(i, 79))
+            row.Item("Banco16") = WEntra(i, 80)
+            row.Item("Cheque17") = WEntra(i, 81)
+            row.Item("Venci17") = WEntra(i, 82)
+            row.Item("Impo17") = Val(WEntra(i, 83))
+            row.Item("Banco17") = WEntra(i, 84)
+            row.Item("Cheque18") = WEntra(i, 85)
+            row.Item("Venci18") = WEntra(i, 86)
+            row.Item("Impo18") = Val(WEntra(i, 87))
+            row.Item("Banco18") = WEntra(i, 88)
+            row.Item("Cheque19") = WEntra(i, 89)
+            row.Item("Venci19") = WEntra(i, 90)
+            row.Item("Impo19") = Val(WEntra(i, 91))
+            row.Item("Banco19") = WEntra(i, 92)
+            row.Item("Cheque20") = WEntra(i, 93)
+            row.Item("Venci20") = WEntra(i, 94)
+            row.Item("Impo20") = Val(WEntra(i, 95))
+            row.Item("Banco20") = WEntra(i, 96)
+            row.Item("Observaciones") = LSet(Trim(txtObservaciones.Text), 50)
+
+            table.Rows.Add(row)
+
+        Next
+
+        crdoc.SetDataSource(table)
+
+        _Imprimir(crdoc, 2)
     End Sub
 
     Private Sub _PrepararTabla(ByRef table As DataTable)
@@ -3422,6 +4016,11 @@ Public Class Recibos
             .Columns.Add("Postal")
             .Columns.Add("Impre1")
             .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
+
+            .Columns.Add("Fecha2")
+            .Columns.Add("Tipo2")
+            .Columns.Add("Numero2")
+            .Columns.Add("Importe2").DataType = System.Type.GetType("System.Double")
 
             .Columns.Add("Fecha21")
             .Columns.Add("Tipo21")
@@ -3512,9 +4111,11 @@ Public Class Recibos
             .Columns.Add("Venci20")
             .Columns.Add("Impo20").DataType = System.Type.GetType("System.Double")
             .Columns.Add("Banco20")
-            .Columns.Add("Signo1")
             .Columns.Add("Signo21")
             .Columns.Add("Signo22")
+
+            .Columns.Add("Signo1")
+            .Columns.Add("Signo2")
             .Columns.Add("Observaciones")
         End With
     End Sub
