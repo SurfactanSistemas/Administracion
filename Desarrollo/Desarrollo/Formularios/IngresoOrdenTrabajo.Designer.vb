@@ -31,6 +31,17 @@ Partial Class IngresoOrdenTrabajo
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pnlNotas = New System.Windows.Forms.Panel()
+        Me.rbEstabilidad = New System.Windows.Forms.RadioButton()
+        Me.rbAplicacion = New System.Windows.Forms.RadioButton()
+        Me.btnCerrarNota = New System.Windows.Forms.Button()
+        Me.txtNota = New System.Windows.Forms.RichTextBox()
+        Me.pnlConsulta = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
+        Me.lstFiltrada = New System.Windows.Forms.ListBox()
+        Me.lstConsulta = New System.Windows.Forms.ListBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.WIndice = New System.Windows.Forms.ListBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -76,17 +87,6 @@ Partial Class IngresoOrdenTrabajo
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
-        Me.pnlConsulta = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
-        Me.lstFiltrada = New System.Windows.Forms.ListBox()
-        Me.lstConsulta = New System.Windows.Forms.ListBox()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.pnlNotas = New System.Windows.Forms.Panel()
-        Me.rbEstabilidad = New System.Windows.Forms.RadioButton()
-        Me.rbAplicacion = New System.Windows.Forms.RadioButton()
-        Me.btnCerrarNota = New System.Windows.Forms.Button()
-        Me.txtNota = New System.Windows.Forms.RichTextBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -94,13 +94,13 @@ Partial Class IngresoOrdenTrabajo
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.pnlNotas.SuspendLayout()
+        Me.pnlConsulta.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.Panel5.SuspendLayout()
-        Me.pnlConsulta.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.pnlNotas.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -115,7 +115,7 @@ Partial Class IngresoOrdenTrabajo
         Me.LayoutPrincipal.RowCount = 2
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(808, 518)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(839, 602)
         Me.LayoutPrincipal.TabIndex = 1
         '
         'LayoutMenu
@@ -133,14 +133,14 @@ Partial Class IngresoOrdenTrabajo
         Me.LayoutMenu.Name = "LayoutMenu"
         Me.LayoutMenu.RowCount = 1
         Me.LayoutMenu.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutMenu.Size = New System.Drawing.Size(808, 46)
+        Me.LayoutMenu.Size = New System.Drawing.Size(839, 46)
         Me.LayoutMenu.TabIndex = 0
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(561, 0)
+        Me.Panel4.Location = New System.Drawing.Point(592, 0)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(247, 46)
@@ -185,7 +185,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Panel1.Location = New System.Drawing.Point(0, 46)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(808, 472)
+        Me.Panel1.Size = New System.Drawing.Size(839, 556)
         Me.Panel1.TabIndex = 1
         '
         'TableLayoutPanel1
@@ -201,7 +201,7 @@ Partial Class IngresoOrdenTrabajo
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(808, 472)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(839, 556)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel3
@@ -226,13 +226,125 @@ Partial Class IngresoOrdenTrabajo
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(808, 402)
+        Me.Panel3.Size = New System.Drawing.Size(839, 486)
         Me.Panel3.TabIndex = 0
+        '
+        'pnlNotas
+        '
+        Me.pnlNotas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlNotas.Controls.Add(Me.rbEstabilidad)
+        Me.pnlNotas.Controls.Add(Me.rbAplicacion)
+        Me.pnlNotas.Controls.Add(Me.btnCerrarNota)
+        Me.pnlNotas.Controls.Add(Me.txtNota)
+        Me.pnlNotas.Location = New System.Drawing.Point(171, 49)
+        Me.pnlNotas.Name = "pnlNotas"
+        Me.pnlNotas.Size = New System.Drawing.Size(496, 389)
+        Me.pnlNotas.TabIndex = 3
+        Me.pnlNotas.Visible = False
+        '
+        'rbEstabilidad
+        '
+        Me.rbEstabilidad.AutoSize = True
+        Me.rbEstabilidad.Location = New System.Drawing.Point(317, 350)
+        Me.rbEstabilidad.Name = "rbEstabilidad"
+        Me.rbEstabilidad.Size = New System.Drawing.Size(76, 17)
+        Me.rbEstabilidad.TabIndex = 1
+        Me.rbEstabilidad.TabStop = True
+        Me.rbEstabilidad.Text = "Estabilidad"
+        Me.rbEstabilidad.UseVisualStyleBackColor = True
+        Me.rbEstabilidad.Visible = False
+        '
+        'rbAplicacion
+        '
+        Me.rbAplicacion.AutoSize = True
+        Me.rbAplicacion.Location = New System.Drawing.Point(318, 350)
+        Me.rbAplicacion.Name = "rbAplicacion"
+        Me.rbAplicacion.Size = New System.Drawing.Size(74, 17)
+        Me.rbAplicacion.TabIndex = 1
+        Me.rbAplicacion.TabStop = True
+        Me.rbAplicacion.Text = "Aplicacion"
+        Me.rbAplicacion.UseVisualStyleBackColor = True
+        Me.rbAplicacion.Visible = False
+        '
+        'btnCerrarNota
+        '
+        Me.btnCerrarNota.Location = New System.Drawing.Point(191, 347)
+        Me.btnCerrarNota.Name = "btnCerrarNota"
+        Me.btnCerrarNota.Size = New System.Drawing.Size(115, 27)
+        Me.btnCerrarNota.TabIndex = 0
+        Me.btnCerrarNota.Text = "Cerrar Nota"
+        Me.btnCerrarNota.UseVisualStyleBackColor = True
+        '
+        'txtNota
+        '
+        Me.txtNota.EnableAutoDragDrop = True
+        Me.txtNota.Location = New System.Drawing.Point(15, 14)
+        Me.txtNota.Name = "txtNota"
+        Me.txtNota.Size = New System.Drawing.Size(467, 328)
+        Me.txtNota.TabIndex = 0
+        Me.txtNota.Text = ""
+        '
+        'pnlConsulta
+        '
+        Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlConsulta.Controls.Add(Me.GroupBox1)
+        Me.pnlConsulta.Location = New System.Drawing.Point(214, 61)
+        Me.pnlConsulta.Name = "pnlConsulta"
+        Me.pnlConsulta.Size = New System.Drawing.Size(410, 364)
+        Me.pnlConsulta.TabIndex = 2
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnCerrarConsulta)
+        Me.GroupBox1.Controls.Add(Me.lstFiltrada)
+        Me.GroupBox1.Controls.Add(Me.lstConsulta)
+        Me.GroupBox1.Controls.Add(Me.txtAyuda)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox1.Location = New System.Drawing.Point(18, 10)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(368, 334)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Consulta"
+        '
+        'btnCerrarConsulta
+        '
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(124, 293)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(115, 28)
+        Me.btnCerrarConsulta.TabIndex = 0
+        Me.btnCerrarConsulta.Text = "Cerrar"
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.Location = New System.Drawing.Point(18, 49)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(326, 238)
+        Me.lstFiltrada.TabIndex = 2
+        Me.lstFiltrada.Visible = False
+        '
+        'lstConsulta
+        '
+        Me.lstConsulta.FormattingEnabled = True
+        Me.lstConsulta.Location = New System.Drawing.Point(18, 49)
+        Me.lstConsulta.Name = "lstConsulta"
+        Me.lstConsulta.Size = New System.Drawing.Size(326, 238)
+        Me.lstConsulta.TabIndex = 1
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(18, 20)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(326, 20)
+        Me.txtAyuda.TabIndex = 0
         '
         'WIndice
         '
         Me.WIndice.FormattingEnabled = True
-        Me.WIndice.Location = New System.Drawing.Point(733, 16)
+        Me.WIndice.Location = New System.Drawing.Point(721, 19)
         Me.WIndice.Name = "WIndice"
         Me.WIndice.Size = New System.Drawing.Size(63, 17)
         Me.WIndice.TabIndex = 4
@@ -243,11 +355,11 @@ Partial Class IngresoOrdenTrabajo
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.ItemSize = New System.Drawing.Size(369, 30)
-        Me.TabControl1.Location = New System.Drawing.Point(38, 103)
+        Me.TabControl1.Location = New System.Drawing.Point(9, 103)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(742, 295)
+        Me.TabControl1.Size = New System.Drawing.Size(816, 372)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl1.TabIndex = 3
         '
@@ -268,13 +380,13 @@ Partial Class IngresoOrdenTrabajo
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(734, 257)
+        Me.TabPage1.Size = New System.Drawing.Size(808, 334)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Descripción del Proyecto"
         '
         'txtObservacionesII
         '
-        Me.txtObservacionesII.Location = New System.Drawing.Point(224, 165)
+        Me.txtObservacionesII.Location = New System.Drawing.Point(234, 215)
         Me.txtObservacionesII.MaxLength = 300
         Me.txtObservacionesII.Multiline = True
         Me.txtObservacionesII.Name = "txtObservacionesII"
@@ -283,7 +395,7 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtDescTrabajo
         '
-        Me.txtDescTrabajo.Location = New System.Drawing.Point(224, 83)
+        Me.txtDescTrabajo.Location = New System.Drawing.Point(234, 133)
         Me.txtDescTrabajo.MaxLength = 500
         Me.txtDescTrabajo.Multiline = True
         Me.txtDescTrabajo.Name = "txtDescTrabajo"
@@ -292,7 +404,7 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtEncargado
         '
-        Me.txtEncargado.Location = New System.Drawing.Point(224, 221)
+        Me.txtEncargado.Location = New System.Drawing.Point(234, 271)
         Me.txtEncargado.MaxLength = 50
         Me.txtEncargado.Name = "txtEncargado"
         Me.txtEncargado.Size = New System.Drawing.Size(226, 20)
@@ -300,12 +412,12 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtUso
         '
-        Me.txtUso.Location = New System.Drawing.Point(223, 35)
+        Me.txtUso.Location = New System.Drawing.Point(233, 69)
         Me.txtUso.MaxLength = 200
         Me.txtUso.Multiline = True
         Me.txtUso.Name = "txtUso"
         Me.txtUso.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtUso.Size = New System.Drawing.Size(500, 42)
+        Me.txtUso.Size = New System.Drawing.Size(500, 58)
         Me.txtUso.TabIndex = 3
         '
         'Label12
@@ -313,7 +425,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label12.Location = New System.Drawing.Point(117, 162)
+        Me.Label12.Location = New System.Drawing.Point(127, 212)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(99, 18)
         Me.Label12.TabIndex = 2
@@ -324,7 +436,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label13.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label13.Location = New System.Drawing.Point(64, 222)
+        Me.Label13.Location = New System.Drawing.Point(74, 272)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(152, 18)
         Me.Label13.TabIndex = 2
@@ -335,7 +447,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(65, 86)
+        Me.Label11.Location = New System.Drawing.Point(75, 136)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(151, 18)
         Me.Label11.TabIndex = 2
@@ -346,7 +458,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label10.Location = New System.Drawing.Point(115, 35)
+        Me.Label10.Location = New System.Drawing.Point(125, 69)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(101, 18)
         Me.Label10.TabIndex = 2
@@ -354,7 +466,7 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtMuestra
         '
-        Me.txtMuestra.Location = New System.Drawing.Point(223, 9)
+        Me.txtMuestra.Location = New System.Drawing.Point(233, 43)
         Me.txtMuestra.MaxLength = 50
         Me.txtMuestra.Name = "txtMuestra"
         Me.txtMuestra.Size = New System.Drawing.Size(500, 20)
@@ -365,7 +477,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label9.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label9.Location = New System.Drawing.Point(156, 10)
+        Me.Label9.Location = New System.Drawing.Point(166, 44)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(60, 18)
         Me.Label9.TabIndex = 2
@@ -392,7 +504,7 @@ Partial Class IngresoOrdenTrabajo
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(0)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(734, 257)
+        Me.TabPage2.Size = New System.Drawing.Size(808, 334)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Requisitos"
         '
@@ -400,7 +512,7 @@ Partial Class IngresoOrdenTrabajo
         '
         Me.cmbEstabilidad.FormattingEnabled = True
         Me.cmbEstabilidad.Items.AddRange(New Object() {"", "Si", "No"})
-        Me.cmbEstabilidad.Location = New System.Drawing.Point(212, 204)
+        Me.cmbEstabilidad.Location = New System.Drawing.Point(520, 300)
         Me.cmbEstabilidad.Name = "cmbEstabilidad"
         Me.cmbEstabilidad.Size = New System.Drawing.Size(121, 21)
         Me.cmbEstabilidad.TabIndex = 2
@@ -409,30 +521,32 @@ Partial Class IngresoOrdenTrabajo
         '
         Me.cmbAplicacion.FormattingEnabled = True
         Me.cmbAplicacion.Items.AddRange(New Object() {"", "Si", "No"})
-        Me.cmbAplicacion.Location = New System.Drawing.Point(212, 168)
+        Me.cmbAplicacion.Location = New System.Drawing.Point(149, 300)
         Me.cmbAplicacion.Name = "cmbAplicacion"
         Me.cmbAplicacion.Size = New System.Drawing.Size(121, 21)
         Me.cmbAplicacion.TabIndex = 2
         '
         'txtReferencias
         '
-        Me.txtReferencias.Location = New System.Drawing.Point(212, 135)
+        Me.txtReferencias.Location = New System.Drawing.Point(215, 221)
         Me.txtReferencias.MaxLength = 100
+        Me.txtReferencias.Multiline = True
         Me.txtReferencias.Name = "txtReferencias"
-        Me.txtReferencias.Size = New System.Drawing.Size(500, 20)
+        Me.txtReferencias.Size = New System.Drawing.Size(565, 62)
         Me.txtReferencias.TabIndex = 1
         '
         'txtRequisitosNormasRegulaciones
         '
-        Me.txtRequisitosNormasRegulaciones.Location = New System.Drawing.Point(212, 98)
+        Me.txtRequisitosNormasRegulaciones.Location = New System.Drawing.Point(215, 153)
         Me.txtRequisitosNormasRegulaciones.MaxLength = 100
+        Me.txtRequisitosNormasRegulaciones.Multiline = True
         Me.txtRequisitosNormasRegulaciones.Name = "txtRequisitosNormasRegulaciones"
-        Me.txtRequisitosNormasRegulaciones.Size = New System.Drawing.Size(500, 20)
+        Me.txtRequisitosNormasRegulaciones.Size = New System.Drawing.Size(565, 62)
         Me.txtRequisitosNormasRegulaciones.TabIndex = 1
         '
         'btnNotasEstabilidad
         '
-        Me.btnNotasEstabilidad.Location = New System.Drawing.Point(351, 202)
+        Me.btnNotasEstabilidad.Location = New System.Drawing.Point(659, 298)
         Me.btnNotasEstabilidad.Name = "btnNotasEstabilidad"
         Me.btnNotasEstabilidad.Size = New System.Drawing.Size(122, 25)
         Me.btnNotasEstabilidad.TabIndex = 0
@@ -441,7 +555,7 @@ Partial Class IngresoOrdenTrabajo
         '
         'btnNotasAplicacion
         '
-        Me.btnNotasAplicacion.Location = New System.Drawing.Point(351, 166)
+        Me.btnNotasAplicacion.Location = New System.Drawing.Point(288, 298)
         Me.btnNotasAplicacion.Name = "btnNotasAplicacion"
         Me.btnNotasAplicacion.Size = New System.Drawing.Size(122, 25)
         Me.btnNotasAplicacion.TabIndex = 0
@@ -453,7 +567,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label17.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label17.Location = New System.Drawing.Point(116, 136)
+        Me.Label17.Location = New System.Drawing.Point(128, 224)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(81, 18)
         Me.Label17.TabIndex = 0
@@ -461,29 +575,31 @@ Partial Class IngresoOrdenTrabajo
         '
         'txtOtrosRequisitos
         '
-        Me.txtOtrosRequisitos.Location = New System.Drawing.Point(212, 62)
+        Me.txtOtrosRequisitos.Location = New System.Drawing.Point(215, 85)
         Me.txtOtrosRequisitos.MaxLength = 100
+        Me.txtOtrosRequisitos.Multiline = True
         Me.txtOtrosRequisitos.Name = "txtOtrosRequisitos"
-        Me.txtOtrosRequisitos.Size = New System.Drawing.Size(500, 20)
+        Me.txtOtrosRequisitos.Size = New System.Drawing.Size(565, 62)
         Me.txtOtrosRequisitos.TabIndex = 1
         '
         'Label16
         '
-        Me.Label16.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label16.Font = New System.Drawing.Font("Calibri", 9.25!, System.Drawing.FontStyle.Bold)
         Me.Label16.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label16.Location = New System.Drawing.Point(35, 85)
+        Me.Label16.Location = New System.Drawing.Point(28, 152)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(162, 49)
+        Me.Label16.Size = New System.Drawing.Size(181, 39)
         Me.Label16.TabIndex = 0
         Me.Label16.Text = "Requisitos Legales / Normas / Regulaciones"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtRequisitosFuncionales
         '
-        Me.txtRequisitosFuncionales.Location = New System.Drawing.Point(212, 24)
+        Me.txtRequisitosFuncionales.Location = New System.Drawing.Point(215, 17)
         Me.txtRequisitosFuncionales.MaxLength = 100
+        Me.txtRequisitosFuncionales.Multiline = True
         Me.txtRequisitosFuncionales.Name = "txtRequisitosFuncionales"
-        Me.txtRequisitosFuncionales.Size = New System.Drawing.Size(500, 20)
+        Me.txtRequisitosFuncionales.Size = New System.Drawing.Size(565, 62)
         Me.txtRequisitosFuncionales.TabIndex = 1
         '
         'Label19
@@ -491,7 +607,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label19.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label19.Location = New System.Drawing.Point(121, 205)
+        Me.Label19.Location = New System.Drawing.Point(429, 301)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(76, 18)
         Me.Label19.TabIndex = 0
@@ -502,7 +618,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label15.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label15.Location = New System.Drawing.Point(87, 63)
+        Me.Label15.Location = New System.Drawing.Point(99, 85)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(110, 18)
         Me.Label15.TabIndex = 0
@@ -513,7 +629,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label18.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label18.Location = New System.Drawing.Point(125, 169)
+        Me.Label18.Location = New System.Drawing.Point(62, 301)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(72, 18)
         Me.Label18.TabIndex = 0
@@ -524,7 +640,7 @@ Partial Class IngresoOrdenTrabajo
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label14.Location = New System.Drawing.Point(47, 25)
+        Me.Label14.Location = New System.Drawing.Point(59, 20)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(150, 18)
         Me.Label14.TabIndex = 0
@@ -650,10 +766,10 @@ Partial Class IngresoOrdenTrabajo
         Me.Panel5.Controls.Add(Me.btnEliminar)
         Me.Panel5.Controls.Add(Me.btnAceptar)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(0, 402)
+        Me.Panel5.Location = New System.Drawing.Point(0, 486)
         Me.Panel5.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(808, 70)
+        Me.Panel5.Size = New System.Drawing.Size(839, 70)
         Me.Panel5.TabIndex = 1
         '
         'btnCerrar
@@ -701,123 +817,11 @@ Partial Class IngresoOrdenTrabajo
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'pnlConsulta
-        '
-        Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(202, 24)
-        Me.pnlConsulta.Name = "pnlConsulta"
-        Me.pnlConsulta.Size = New System.Drawing.Size(404, 355)
-        Me.pnlConsulta.TabIndex = 2
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.btnCerrarConsulta)
-        Me.GroupBox1.Controls.Add(Me.lstFiltrada)
-        Me.GroupBox1.Controls.Add(Me.lstConsulta)
-        Me.GroupBox1.Controls.Add(Me.txtAyuda)
-        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(18, 10)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(368, 334)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Consulta Clientes"
-        '
-        'btnCerrarConsulta
-        '
-        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnCerrarConsulta.Location = New System.Drawing.Point(124, 293)
-        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
-        Me.btnCerrarConsulta.Size = New System.Drawing.Size(115, 28)
-        Me.btnCerrarConsulta.TabIndex = 0
-        Me.btnCerrarConsulta.Text = "Cerrar"
-        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
-        '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.Location = New System.Drawing.Point(18, 49)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(326, 238)
-        Me.lstFiltrada.TabIndex = 2
-        Me.lstFiltrada.Visible = False
-        '
-        'lstConsulta
-        '
-        Me.lstConsulta.FormattingEnabled = True
-        Me.lstConsulta.Location = New System.Drawing.Point(18, 49)
-        Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(326, 238)
-        Me.lstConsulta.TabIndex = 1
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Location = New System.Drawing.Point(18, 20)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(326, 20)
-        Me.txtAyuda.TabIndex = 0
-        '
-        'pnlNotas
-        '
-        Me.pnlNotas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.pnlNotas.Controls.Add(Me.rbEstabilidad)
-        Me.pnlNotas.Controls.Add(Me.rbAplicacion)
-        Me.pnlNotas.Controls.Add(Me.btnCerrarNota)
-        Me.pnlNotas.Controls.Add(Me.txtNota)
-        Me.pnlNotas.Location = New System.Drawing.Point(156, 12)
-        Me.pnlNotas.Name = "pnlNotas"
-        Me.pnlNotas.Size = New System.Drawing.Size(497, 379)
-        Me.pnlNotas.TabIndex = 3
-        Me.pnlNotas.Visible = False
-        '
-        'rbEstabilidad
-        '
-        Me.rbEstabilidad.AutoSize = True
-        Me.rbEstabilidad.Location = New System.Drawing.Point(317, 350)
-        Me.rbEstabilidad.Name = "rbEstabilidad"
-        Me.rbEstabilidad.Size = New System.Drawing.Size(76, 17)
-        Me.rbEstabilidad.TabIndex = 1
-        Me.rbEstabilidad.TabStop = True
-        Me.rbEstabilidad.Text = "Estabilidad"
-        Me.rbEstabilidad.UseVisualStyleBackColor = True
-        Me.rbEstabilidad.Visible = False
-        '
-        'rbAplicacion
-        '
-        Me.rbAplicacion.AutoSize = True
-        Me.rbAplicacion.Location = New System.Drawing.Point(318, 350)
-        Me.rbAplicacion.Name = "rbAplicacion"
-        Me.rbAplicacion.Size = New System.Drawing.Size(74, 17)
-        Me.rbAplicacion.TabIndex = 1
-        Me.rbAplicacion.TabStop = True
-        Me.rbAplicacion.Text = "Aplicacion"
-        Me.rbAplicacion.UseVisualStyleBackColor = True
-        Me.rbAplicacion.Visible = False
-        '
-        'btnCerrarNota
-        '
-        Me.btnCerrarNota.Location = New System.Drawing.Point(191, 347)
-        Me.btnCerrarNota.Name = "btnCerrarNota"
-        Me.btnCerrarNota.Size = New System.Drawing.Size(115, 27)
-        Me.btnCerrarNota.TabIndex = 0
-        Me.btnCerrarNota.Text = "Cerrar Nota"
-        Me.btnCerrarNota.UseVisualStyleBackColor = True
-        '
-        'txtNota
-        '
-        Me.txtNota.EnableAutoDragDrop = True
-        Me.txtNota.Location = New System.Drawing.Point(15, 14)
-        Me.txtNota.Name = "txtNota"
-        Me.txtNota.Size = New System.Drawing.Size(467, 328)
-        Me.txtNota.TabIndex = 0
-        Me.txtNota.Text = ""
-        '
         'IngresoOrdenTrabajo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(808, 518)
+        Me.ClientSize = New System.Drawing.Size(839, 602)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Location = New System.Drawing.Point(10, 10)
         Me.Name = "IngresoOrdenTrabajo"
@@ -832,17 +836,17 @@ Partial Class IngresoOrdenTrabajo
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        Me.pnlNotas.ResumeLayout(False)
+        Me.pnlNotas.PerformLayout()
+        Me.pnlConsulta.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.Panel5.ResumeLayout(False)
-        Me.pnlConsulta.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.pnlNotas.ResumeLayout(False)
-        Me.pnlNotas.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

@@ -23,40 +23,40 @@ Partial Class IngresoPruebasEnsayo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle171 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle178 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle179 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle172 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle173 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle174 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle175 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle176 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle177 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle180 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle182 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle183 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle181 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle184 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle186 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle187 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle185 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle188 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle191 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle192 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle189 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle190 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle193 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle200 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle201 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle194 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle195 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle196 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle197 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle198 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle199 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle204 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle202 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle203 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -200,13 +200,15 @@ Partial Class IngresoPruebasEnsayo
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.pnlConsulta = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lstOpciones = New System.Windows.Forms.ListBox()
-        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
-        Me.lstFiltrada = New System.Windows.Forms.ListBox()
-        Me.lstConsulta = New System.Windows.Forms.ListBox()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
+        Me.lstConsulta = New System.Windows.Forms.ListBox()
+        Me.lstFiltrada = New System.Windows.Forms.ListBox()
+        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
+        Me.lstOpciones = New System.Windows.Forms.ListBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtBuscarEnTodosLosCampos = New System.Windows.Forms.TextBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -250,7 +252,7 @@ Partial Class IngresoPruebasEnsayo
         Me.LayoutPrincipal.RowCount = 2
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(892, 643)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(1058, 643)
         Me.LayoutPrincipal.TabIndex = 1
         '
         'LayoutMenu
@@ -268,14 +270,14 @@ Partial Class IngresoPruebasEnsayo
         Me.LayoutMenu.Name = "LayoutMenu"
         Me.LayoutMenu.RowCount = 1
         Me.LayoutMenu.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutMenu.Size = New System.Drawing.Size(892, 46)
+        Me.LayoutMenu.Size = New System.Drawing.Size(1058, 46)
         Me.LayoutMenu.TabIndex = 0
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(645, 0)
+        Me.Panel4.Location = New System.Drawing.Point(811, 0)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(247, 46)
@@ -320,7 +322,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel1.Location = New System.Drawing.Point(0, 46)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(892, 597)
+        Me.Panel1.Size = New System.Drawing.Size(1058, 597)
         Me.Panel1.TabIndex = 1
         '
         'TableLayoutPanel1
@@ -336,7 +338,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(892, 597)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1058, 597)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel3
@@ -357,7 +359,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(892, 527)
+        Me.Panel3.Size = New System.Drawing.Size(1058, 527)
         Me.Panel3.TabIndex = 0
         '
         'pnlNotas
@@ -367,9 +369,9 @@ Partial Class IngresoPruebasEnsayo
         Me.pnlNotas.Controls.Add(Me.rbAplicacion)
         Me.pnlNotas.Controls.Add(Me.btnCerrarNota)
         Me.pnlNotas.Controls.Add(Me.txtNota)
-        Me.pnlNotas.Location = New System.Drawing.Point(196, 72)
+        Me.pnlNotas.Location = New System.Drawing.Point(279, 71)
         Me.pnlNotas.Name = "pnlNotas"
-        Me.pnlNotas.Size = New System.Drawing.Size(501, 382)
+        Me.pnlNotas.Size = New System.Drawing.Size(501, 385)
         Me.pnlNotas.TabIndex = 3
         Me.pnlNotas.Visible = False
         '
@@ -427,13 +429,13 @@ Partial Class IngresoPruebasEnsayo
         Me.TabControl1.Controls.Add(Me.TabDatosEntrada)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.ItemSize = New System.Drawing.Size(200, 30)
-        Me.TabControl1.Location = New System.Drawing.Point(35, 44)
+        Me.TabControl1.Location = New System.Drawing.Point(7, 44)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.Padding = New System.Drawing.Point(19, 3)
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(829, 474)
+        Me.TabControl1.Size = New System.Drawing.Size(1042, 474)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight
         Me.TabControl1.TabIndex = 3
         '
@@ -451,11 +453,11 @@ Partial Class IngresoPruebasEnsayo
         Me.TabFormula.Controls.Add(Me.Button3)
         Me.TabFormula.Controls.Add(Me.btnLeerVersionAntFormula)
         Me.TabFormula.Controls.Add(Me.btnHojaPiloto)
-        Me.TabFormula.Location = New System.Drawing.Point(4, 64)
+        Me.TabFormula.Location = New System.Drawing.Point(4, 34)
         Me.TabFormula.Margin = New System.Windows.Forms.Padding(0)
         Me.TabFormula.Name = "TabFormula"
         Me.TabFormula.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabFormula.Size = New System.Drawing.Size(821, 406)
+        Me.TabFormula.Size = New System.Drawing.Size(1034, 436)
         Me.TabFormula.TabIndex = 0
         Me.TabFormula.Text = "Composición"
         '
@@ -463,7 +465,7 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.pnlHojaPiloto.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlHojaPiloto.Controls.Add(Me.GroupBox2)
-        Me.pnlHojaPiloto.Location = New System.Drawing.Point(161, 148)
+        Me.pnlHojaPiloto.Location = New System.Drawing.Point(268, 148)
         Me.pnlHojaPiloto.Name = "pnlHojaPiloto"
         Me.pnlHojaPiloto.Size = New System.Drawing.Size(498, 106)
         Me.pnlHojaPiloto.TabIndex = 4
@@ -513,7 +515,7 @@ Partial Class IngresoPruebasEnsayo
         Me.cmbPlanta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlanta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPlanta.FormattingEnabled = True
-        Me.cmbPlanta.Location = New System.Drawing.Point(109, 368)
+        Me.cmbPlanta.Location = New System.Drawing.Point(214, 403)
         Me.cmbPlanta.Name = "cmbPlanta"
         Me.cmbPlanta.Size = New System.Drawing.Size(121, 24)
         Me.cmbPlanta.TabIndex = 5
@@ -525,43 +527,43 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvFormula.AllowUserToOrderColumns = True
         Me.dgvFormula.AllowUserToResizeColumns = False
         Me.dgvFormula.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvFormula.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle171.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle171.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle171.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle171.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle171.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle171.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle171.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvFormula.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle171
         Me.dgvFormula.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvFormula.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TipoFormula, Me.ArticuloFormula, Me.TerminadoFormula, Me.DescripcionFormula, Me.CantidadFormula, Me.LoteFormula, Me.StockFormula})
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvFormula.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle178.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle178.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle178.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle178.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle178.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle178.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle178.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvFormula.DefaultCellStyle = DataGridViewCellStyle178
         Me.dgvFormula.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvFormula.Location = New System.Drawing.Point(8, 12)
+        Me.dgvFormula.Location = New System.Drawing.Point(9, 12)
         Me.dgvFormula.Name = "dgvFormula"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvFormula.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle179.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle179.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle179.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle179.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle179.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle179.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle179.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvFormula.RowHeadersDefaultCellStyle = DataGridViewCellStyle179
         Me.dgvFormula.RowHeadersWidth = 15
-        Me.dgvFormula.Size = New System.Drawing.Size(804, 308)
+        Me.dgvFormula.Size = New System.Drawing.Size(1016, 349)
         Me.dgvFormula.TabIndex = 4
         '
         'TipoFormula
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TipoFormula.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle172.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TipoFormula.DefaultCellStyle = DataGridViewCellStyle172
         Me.TipoFormula.HeaderText = "Tipo"
         Me.TipoFormula.MaxInputLength = 1
         Me.TipoFormula.Name = "TipoFormula"
@@ -569,16 +571,16 @@ Partial Class IngresoPruebasEnsayo
         '
         'ArticuloFormula
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ArticuloFormula.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle173.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ArticuloFormula.DefaultCellStyle = DataGridViewCellStyle173
         Me.ArticuloFormula.HeaderText = "Materia Prima"
         Me.ArticuloFormula.MaxInputLength = 10
         Me.ArticuloFormula.Name = "ArticuloFormula"
         '
         'TerminadoFormula
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.TerminadoFormula.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle174.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.TerminadoFormula.DefaultCellStyle = DataGridViewCellStyle174
         Me.TerminadoFormula.HeaderText = "P.T."
         Me.TerminadoFormula.MaxInputLength = 12
         Me.TerminadoFormula.Name = "TerminadoFormula"
@@ -591,22 +593,22 @@ Partial Class IngresoPruebasEnsayo
         '
         'CantidadFormula
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CantidadFormula.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle175.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CantidadFormula.DefaultCellStyle = DataGridViewCellStyle175
         Me.CantidadFormula.HeaderText = "Cantidad"
         Me.CantidadFormula.Name = "CantidadFormula"
         '
         'LoteFormula
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.LoteFormula.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle176.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.LoteFormula.DefaultCellStyle = DataGridViewCellStyle176
         Me.LoteFormula.HeaderText = "Lote"
         Me.LoteFormula.Name = "LoteFormula"
         '
         'StockFormula
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.StockFormula.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle177.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.StockFormula.DefaultCellStyle = DataGridViewCellStyle177
         Me.StockFormula.HeaderText = "Stock"
         Me.StockFormula.MaxInputLength = 1
         Me.StockFormula.Name = "StockFormula"
@@ -614,7 +616,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtHojaProduccion
         '
-        Me.txtHojaProduccion.Location = New System.Drawing.Point(388, 335)
+        Me.txtHojaProduccion.Location = New System.Drawing.Point(493, 370)
         Me.txtHojaProduccion.MaxLength = 50
         Me.txtHojaProduccion.Name = "txtHojaProduccion"
         Me.txtHojaProduccion.ReadOnly = True
@@ -623,7 +625,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRealizado
         '
-        Me.txtRealizado.Location = New System.Drawing.Point(388, 370)
+        Me.txtRealizado.Location = New System.Drawing.Point(493, 405)
         Me.txtRealizado.MaxLength = 50
         Me.txtRealizado.Name = "txtRealizado"
         Me.txtRealizado.Size = New System.Drawing.Size(271, 20)
@@ -634,7 +636,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label9.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label9.Location = New System.Drawing.Point(253, 336)
+        Me.Label9.Location = New System.Drawing.Point(358, 371)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(131, 18)
         Me.Label9.TabIndex = 2
@@ -645,7 +647,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label8.Location = New System.Drawing.Point(36, 371)
+        Me.Label8.Location = New System.Drawing.Point(141, 406)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(51, 18)
         Me.Label8.TabIndex = 2
@@ -656,7 +658,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label13.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label13.Location = New System.Drawing.Point(261, 371)
+        Me.Label13.Location = New System.Drawing.Point(366, 406)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(96, 18)
         Me.Label13.TabIndex = 2
@@ -664,7 +666,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(792, 368)
+        Me.Button3.Location = New System.Drawing.Point(897, 403)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(22, 24)
         Me.Button3.TabIndex = 0
@@ -677,7 +679,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnLeerVersionAntFormula.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLeerVersionAntFormula.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLeerVersionAntFormula.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLeerVersionAntFormula.Location = New System.Drawing.Point(673, 333)
+        Me.btnLeerVersionAntFormula.Location = New System.Drawing.Point(778, 368)
         Me.btnLeerVersionAntFormula.Name = "btnLeerVersionAntFormula"
         Me.btnLeerVersionAntFormula.Size = New System.Drawing.Size(136, 25)
         Me.btnLeerVersionAntFormula.TabIndex = 0
@@ -689,7 +691,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnHojaPiloto.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnHojaPiloto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHojaPiloto.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnHojaPiloto.Location = New System.Drawing.Point(11, 332)
+        Me.btnHojaPiloto.Location = New System.Drawing.Point(116, 367)
         Me.btnHojaPiloto.Name = "btnHojaPiloto"
         Me.btnHojaPiloto.Size = New System.Drawing.Size(219, 27)
         Me.btnHojaPiloto.TabIndex = 0
@@ -705,11 +707,11 @@ Partial Class IngresoPruebasEnsayo
         Me.TabProceso.Controls.Add(Me.Label10)
         Me.TabProceso.Controls.Add(Me.btnImprimeProceso)
         Me.TabProceso.Controls.Add(Me.btnLeeVersionAntProceso)
-        Me.TabProceso.Location = New System.Drawing.Point(4, 64)
+        Me.TabProceso.Location = New System.Drawing.Point(4, 34)
         Me.TabProceso.Margin = New System.Windows.Forms.Padding(0)
         Me.TabProceso.Name = "TabProceso"
         Me.TabProceso.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabProceso.Size = New System.Drawing.Size(821, 406)
+        Me.TabProceso.Size = New System.Drawing.Size(1034, 436)
         Me.TabProceso.TabIndex = 1
         Me.TabProceso.Text = "Proceso"
         '
@@ -718,7 +720,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtNotasProceso.EnableAutoDragDrop = True
         Me.txtNotasProceso.Location = New System.Drawing.Point(8, 229)
         Me.txtNotasProceso.Name = "txtNotasProceso"
-        Me.txtNotasProceso.Size = New System.Drawing.Size(804, 128)
+        Me.txtNotasProceso.Size = New System.Drawing.Size(1016, 165)
         Me.txtNotasProceso.TabIndex = 9
         Me.txtNotasProceso.Text = ""
         '
@@ -728,43 +730,43 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvProceso.AllowUserToDeleteRows = False
         Me.dgvProceso.AllowUserToResizeColumns = False
         Me.dgvProceso.AllowUserToResizeRows = False
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvProceso.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle180.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle180.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle180.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle180.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle180.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle180.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle180.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvProceso.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle180
         Me.dgvProceso.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProceso.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ProcesoEtapa, Me.ProcesoDetallesTrabajo, Me.ProcesoEquipo, Me.ProcesoTemperatura, Me.ProcesoTiempo, Me.ProcesoControl, Me.ProcesoSeguridad})
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvProceso.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle182.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle182.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle182.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle182.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle182.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle182.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle182.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvProceso.DefaultCellStyle = DataGridViewCellStyle182
         Me.dgvProceso.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvProceso.Location = New System.Drawing.Point(8, 11)
+        Me.dgvProceso.Location = New System.Drawing.Point(6, 11)
         Me.dgvProceso.Name = "dgvProceso"
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvProceso.RowHeadersDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle183.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle183.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle183.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle183.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle183.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle183.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle183.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvProceso.RowHeadersDefaultCellStyle = DataGridViewCellStyle183
         Me.dgvProceso.RowHeadersWidth = 15
-        Me.dgvProceso.Size = New System.Drawing.Size(804, 210)
+        Me.dgvProceso.Size = New System.Drawing.Size(1022, 210)
         Me.dgvProceso.TabIndex = 8
         '
         'ProcesoEtapa
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ProcesoEtapa.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle181.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ProcesoEtapa.DefaultCellStyle = DataGridViewCellStyle181
         Me.ProcesoEtapa.HeaderText = "Etapa"
         Me.ProcesoEtapa.MaxInputLength = 10
         Me.ProcesoEtapa.Name = "ProcesoEtapa"
@@ -775,7 +777,7 @@ Partial Class IngresoPruebasEnsayo
         Me.ProcesoDetallesTrabajo.HeaderText = "Instrucciones"
         Me.ProcesoDetallesTrabajo.MaxInputLength = 90
         Me.ProcesoDetallesTrabajo.Name = "ProcesoDetallesTrabajo"
-        Me.ProcesoDetallesTrabajo.Width = 525
+        Me.ProcesoDetallesTrabajo.Width = 460
         '
         'ProcesoEquipo
         '
@@ -809,7 +811,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRealizadoII
         '
-        Me.txtRealizadoII.Location = New System.Drawing.Point(114, 370)
+        Me.txtRealizadoII.Location = New System.Drawing.Point(114, 402)
         Me.txtRealizadoII.MaxLength = 50
         Me.txtRealizadoII.Name = "txtRealizadoII"
         Me.txtRealizadoII.Size = New System.Drawing.Size(271, 20)
@@ -820,7 +822,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label10.Location = New System.Drawing.Point(11, 371)
+        Me.Label10.Location = New System.Drawing.Point(11, 403)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(96, 18)
         Me.Label10.TabIndex = 6
@@ -831,7 +833,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnImprimeProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImprimeProceso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImprimeProceso.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnImprimeProceso.Location = New System.Drawing.Point(565, 368)
+        Me.btnImprimeProceso.Location = New System.Drawing.Point(565, 400)
         Me.btnImprimeProceso.Name = "btnImprimeProceso"
         Me.btnImprimeProceso.Size = New System.Drawing.Size(136, 25)
         Me.btnImprimeProceso.TabIndex = 5
@@ -843,7 +845,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnLeeVersionAntProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLeeVersionAntProceso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLeeVersionAntProceso.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLeeVersionAntProceso.Location = New System.Drawing.Point(423, 368)
+        Me.btnLeeVersionAntProceso.Location = New System.Drawing.Point(423, 400)
         Me.btnLeeVersionAntProceso.Name = "btnLeeVersionAntProceso"
         Me.btnLeeVersionAntProceso.Size = New System.Drawing.Size(136, 25)
         Me.btnLeeVersionAntProceso.TabIndex = 5
@@ -859,9 +861,9 @@ Partial Class IngresoPruebasEnsayo
         Me.TabResultadosLaboratorio.Controls.Add(Me.Label11)
         Me.TabResultadosLaboratorio.Controls.Add(Me.Label7)
         Me.TabResultadosLaboratorio.Controls.Add(Me.btnLeerVersionAntLab)
-        Me.TabResultadosLaboratorio.Location = New System.Drawing.Point(4, 64)
+        Me.TabResultadosLaboratorio.Location = New System.Drawing.Point(4, 34)
         Me.TabResultadosLaboratorio.Name = "TabResultadosLaboratorio"
-        Me.TabResultadosLaboratorio.Size = New System.Drawing.Size(821, 373)
+        Me.TabResultadosLaboratorio.Size = New System.Drawing.Size(1034, 436)
         Me.TabResultadosLaboratorio.TabIndex = 2
         Me.TabResultadosLaboratorio.Text = "Ensayos de Laboratorio"
         '
@@ -870,7 +872,7 @@ Partial Class IngresoPruebasEnsayo
         Me.txtNotasLaboratorio.EnableAutoDragDrop = True
         Me.txtNotasLaboratorio.Location = New System.Drawing.Point(99, 228)
         Me.txtNotasLaboratorio.Name = "txtNotasLaboratorio"
-        Me.txtNotasLaboratorio.Size = New System.Drawing.Size(713, 128)
+        Me.txtNotasLaboratorio.Size = New System.Drawing.Size(925, 128)
         Me.txtNotasLaboratorio.TabIndex = 15
         Me.txtNotasLaboratorio.Text = ""
         '
@@ -881,43 +883,43 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvLaboratorio.AllowUserToOrderColumns = True
         Me.dgvLaboratorio.AllowUserToResizeColumns = False
         Me.dgvLaboratorio.AllowUserToResizeRows = False
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvLaboratorio.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle184.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle184.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle184.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle184.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle184.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle184.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle184.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvLaboratorio.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle184
         Me.dgvLaboratorio.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvLaboratorio.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.LaboratorioEnsayo, Me.LaboratorioDescripcion, Me.LaboratorioRequerido, Me.LaboratorioResultado})
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvLaboratorio.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle186.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle186.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle186.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle186.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle186.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle186.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle186.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvLaboratorio.DefaultCellStyle = DataGridViewCellStyle186
         Me.dgvLaboratorio.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvLaboratorio.Location = New System.Drawing.Point(8, 10)
         Me.dgvLaboratorio.Name = "dgvLaboratorio"
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvLaboratorio.RowHeadersDefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle187.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle187.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle187.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle187.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle187.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle187.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle187.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvLaboratorio.RowHeadersDefaultCellStyle = DataGridViewCellStyle187
         Me.dgvLaboratorio.RowHeadersWidth = 15
-        Me.dgvLaboratorio.Size = New System.Drawing.Size(804, 210)
+        Me.dgvLaboratorio.Size = New System.Drawing.Size(1016, 210)
         Me.dgvLaboratorio.TabIndex = 14
         '
         'LaboratorioEnsayo
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.LaboratorioEnsayo.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle185.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.LaboratorioEnsayo.DefaultCellStyle = DataGridViewCellStyle185
         Me.LaboratorioEnsayo.HeaderText = "Ensayo"
         Me.LaboratorioEnsayo.MaxInputLength = 10
         Me.LaboratorioEnsayo.Name = "LaboratorioEnsayo"
@@ -991,18 +993,18 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.TabEnsayosAdicionales.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.TabEnsayosAdicionales.Controls.Add(Me.txtNotasEnsayosAdicionales)
-        Me.TabEnsayosAdicionales.Location = New System.Drawing.Point(4, 64)
+        Me.TabEnsayosAdicionales.Location = New System.Drawing.Point(4, 34)
         Me.TabEnsayosAdicionales.Name = "TabEnsayosAdicionales"
-        Me.TabEnsayosAdicionales.Size = New System.Drawing.Size(821, 406)
+        Me.TabEnsayosAdicionales.Size = New System.Drawing.Size(1034, 436)
         Me.TabEnsayosAdicionales.TabIndex = 3
         Me.TabEnsayosAdicionales.Text = "Otros Ensayos"
         '
         'txtNotasEnsayosAdicionales
         '
         Me.txtNotasEnsayosAdicionales.EnableAutoDragDrop = True
-        Me.txtNotasEnsayosAdicionales.Location = New System.Drawing.Point(23, 18)
+        Me.txtNotasEnsayosAdicionales.Location = New System.Drawing.Point(13, 18)
         Me.txtNotasEnsayosAdicionales.Name = "txtNotasEnsayosAdicionales"
-        Me.txtNotasEnsayosAdicionales.Size = New System.Drawing.Size(774, 367)
+        Me.txtNotasEnsayosAdicionales.Size = New System.Drawing.Size(1008, 401)
         Me.txtNotasEnsayosAdicionales.TabIndex = 16
         Me.txtNotasEnsayosAdicionales.Text = ""
         '
@@ -1010,9 +1012,9 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.TabRevisiones.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.TabRevisiones.Controls.Add(Me.dgvRevisiones)
-        Me.TabRevisiones.Location = New System.Drawing.Point(4, 64)
+        Me.TabRevisiones.Location = New System.Drawing.Point(4, 34)
         Me.TabRevisiones.Name = "TabRevisiones"
-        Me.TabRevisiones.Size = New System.Drawing.Size(821, 406)
+        Me.TabRevisiones.Size = New System.Drawing.Size(1034, 436)
         Me.TabRevisiones.TabIndex = 4
         Me.TabRevisiones.Text = "Revisiones"
         '
@@ -1023,47 +1025,47 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvRevisiones.AllowUserToOrderColumns = True
         Me.dgvRevisiones.AllowUserToResizeColumns = False
         Me.dgvRevisiones.AllowUserToResizeRows = False
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvRevisiones.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle188.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle188.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle188.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle188.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle188.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle188.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle188.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvRevisiones.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle188
         Me.dgvRevisiones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvRevisiones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RevisionesVersion, Me.RevisionesEtapa, Me.RevisionesFecha, Me.RevisionesParticipantes, Me.RevisionesResultados, Me.RevisionesAcciones, Me.RevisionesResponsables, Me.RevisionesEstado})
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvRevisiones.DefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle191.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle191.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle191.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle191.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle191.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle191.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle191.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvRevisiones.DefaultCellStyle = DataGridViewCellStyle191
         Me.dgvRevisiones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvRevisiones.Location = New System.Drawing.Point(8, 17)
+        Me.dgvRevisiones.Location = New System.Drawing.Point(9, 16)
         Me.dgvRevisiones.Name = "dgvRevisiones"
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvRevisiones.RowHeadersDefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle192.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle192.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle192.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle192.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle192.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle192.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle192.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvRevisiones.RowHeadersDefaultCellStyle = DataGridViewCellStyle192
         Me.dgvRevisiones.RowHeadersWidth = 15
-        Me.dgvRevisiones.Size = New System.Drawing.Size(804, 368)
+        Me.dgvRevisiones.Size = New System.Drawing.Size(1016, 404)
         Me.dgvRevisiones.TabIndex = 5
         '
         'RevisionesVersion
         '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle19
-        Me.RevisionesVersion.HeaderText = "Versión"
+        DataGridViewCellStyle189.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle189
+        Me.RevisionesVersion.HeaderText = "Ver"
         Me.RevisionesVersion.MaxInputLength = 10
         Me.RevisionesVersion.Name = "RevisionesVersion"
-        Me.RevisionesVersion.Width = 50
+        Me.RevisionesVersion.Width = 30
         '
         'RevisionesEtapa
         '
@@ -1074,8 +1076,8 @@ Partial Class IngresoPruebasEnsayo
         '
         'RevisionesFecha
         '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle190.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle190
         Me.RevisionesFecha.HeaderText = "Fecha"
         Me.RevisionesFecha.MaxInputLength = 10
         Me.RevisionesFecha.Name = "RevisionesFecha"
@@ -1086,21 +1088,21 @@ Partial Class IngresoPruebasEnsayo
         Me.RevisionesParticipantes.HeaderText = "Participantes"
         Me.RevisionesParticipantes.MaxInputLength = 50
         Me.RevisionesParticipantes.Name = "RevisionesParticipantes"
-        Me.RevisionesParticipantes.Width = 150
+        Me.RevisionesParticipantes.Width = 128
         '
         'RevisionesResultados
         '
         Me.RevisionesResultados.HeaderText = "Resultados"
         Me.RevisionesResultados.MaxInputLength = 50
         Me.RevisionesResultados.Name = "RevisionesResultados"
-        Me.RevisionesResultados.Width = 250
+        Me.RevisionesResultados.Width = 230
         '
         'RevisionesAcciones
         '
         Me.RevisionesAcciones.HeaderText = "Acciones"
         Me.RevisionesAcciones.MaxInputLength = 50
         Me.RevisionesAcciones.Name = "RevisionesAcciones"
-        Me.RevisionesAcciones.Width = 250
+        Me.RevisionesAcciones.Width = 230
         '
         'RevisionesResponsables
         '
@@ -1114,6 +1116,7 @@ Partial Class IngresoPruebasEnsayo
         Me.RevisionesEstado.HeaderText = "Estado"
         Me.RevisionesEstado.MaxInputLength = 20
         Me.RevisionesEstado.Name = "RevisionesEstado"
+        Me.RevisionesEstado.Width = 70
         '
         'TabCosto
         '
@@ -1126,9 +1129,9 @@ Partial Class IngresoPruebasEnsayo
         Me.TabCosto.Controls.Add(Me.Label12)
         Me.TabCosto.Controls.Add(Me.Label14)
         Me.TabCosto.Controls.Add(Me.btnRecalculaCosto)
-        Me.TabCosto.Location = New System.Drawing.Point(4, 64)
+        Me.TabCosto.Location = New System.Drawing.Point(4, 34)
         Me.TabCosto.Name = "TabCosto"
-        Me.TabCosto.Size = New System.Drawing.Size(821, 406)
+        Me.TabCosto.Size = New System.Drawing.Size(1034, 436)
         Me.TabCosto.TabIndex = 5
         Me.TabCosto.Text = "Costo"
         '
@@ -1138,7 +1141,7 @@ Partial Class IngresoPruebasEnsayo
         Me.cmbTipoCalculo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.cmbTipoCalculo.FormattingEnabled = True
         Me.cmbTipoCalculo.Items.AddRange(New Object() {"Costo Standard y Estimado", "Costo Última Compra"})
-        Me.cmbTipoCalculo.Location = New System.Drawing.Point(338, 373)
+        Me.cmbTipoCalculo.Location = New System.Drawing.Point(335, 398)
         Me.cmbTipoCalculo.Name = "cmbTipoCalculo"
         Me.cmbTipoCalculo.Size = New System.Drawing.Size(200, 24)
         Me.cmbTipoCalculo.TabIndex = 11
@@ -1149,43 +1152,43 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvCosto.AllowUserToDeleteRows = False
         Me.dgvCosto.AllowUserToResizeColumns = False
         Me.dgvCosto.AllowUserToResizeRows = False
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvCosto.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle193.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle193.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle193.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle193.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle193.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle193.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle193.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCosto.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle193
         Me.dgvCosto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCosto.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CostoTipo, Me.CostoArticulo, Me.CostoTerminado, Me.CostoDescripcion, Me.CostoCantidad, Me.CostoCosto, Me.CostoImporte})
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvCosto.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle200.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle200.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle200.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle200.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle200.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle200.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle200.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvCosto.DefaultCellStyle = DataGridViewCellStyle200
         Me.dgvCosto.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvCosto.Location = New System.Drawing.Point(8, 8)
         Me.dgvCosto.Name = "dgvCosto"
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvCosto.RowHeadersDefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle201.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle201.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle201.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle201.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle201.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle201.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle201.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCosto.RowHeadersDefaultCellStyle = DataGridViewCellStyle201
         Me.dgvCosto.RowHeadersWidth = 15
-        Me.dgvCosto.Size = New System.Drawing.Size(804, 317)
+        Me.dgvCosto.Size = New System.Drawing.Size(1016, 338)
         Me.dgvCosto.TabIndex = 10
         '
         'CostoTipo
         '
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoTipo.DefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle194.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoTipo.DefaultCellStyle = DataGridViewCellStyle194
         Me.CostoTipo.HeaderText = "Tipo"
         Me.CostoTipo.Name = "CostoTipo"
         Me.CostoTipo.ReadOnly = True
@@ -1193,16 +1196,16 @@ Partial Class IngresoPruebasEnsayo
         '
         'CostoArticulo
         '
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoArticulo.DefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle195.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoArticulo.DefaultCellStyle = DataGridViewCellStyle195
         Me.CostoArticulo.HeaderText = "Artículo"
         Me.CostoArticulo.Name = "CostoArticulo"
         Me.CostoArticulo.ReadOnly = True
         '
         'CostoTerminado
         '
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoTerminado.DefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle196.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoTerminado.DefaultCellStyle = DataGridViewCellStyle196
         Me.CostoTerminado.HeaderText = "Terminado"
         Me.CostoTerminado.Name = "CostoTerminado"
         Me.CostoTerminado.ReadOnly = True
@@ -1216,30 +1219,30 @@ Partial Class IngresoPruebasEnsayo
         '
         'CostoCantidad
         '
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoCantidad.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle197.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoCantidad.DefaultCellStyle = DataGridViewCellStyle197
         Me.CostoCantidad.HeaderText = "Cantidad"
         Me.CostoCantidad.Name = "CostoCantidad"
         Me.CostoCantidad.ReadOnly = True
         '
         'CostoCosto
         '
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoCosto.DefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle198.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoCosto.DefaultCellStyle = DataGridViewCellStyle198
         Me.CostoCosto.HeaderText = "Costo"
         Me.CostoCosto.Name = "CostoCosto"
         '
         'CostoImporte
         '
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CostoImporte.DefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle199.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CostoImporte.DefaultCellStyle = DataGridViewCellStyle199
         Me.CostoImporte.HeaderText = "Importe"
         Me.CostoImporte.Name = "CostoImporte"
         Me.CostoImporte.ReadOnly = True
         '
         'txtCostoPorKilo
         '
-        Me.txtCostoPorKilo.Location = New System.Drawing.Point(674, 373)
+        Me.txtCostoPorKilo.Location = New System.Drawing.Point(671, 398)
         Me.txtCostoPorKilo.MaxLength = 50
         Me.txtCostoPorKilo.Name = "txtCostoPorKilo"
         Me.txtCostoPorKilo.ReadOnly = True
@@ -1252,7 +1255,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label15.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label15.Location = New System.Drawing.Point(574, 374)
+        Me.Label15.Location = New System.Drawing.Point(571, 399)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(94, 18)
         Me.Label15.TabIndex = 7
@@ -1260,7 +1263,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtCostoTotal
         '
-        Me.txtCostoTotal.Location = New System.Drawing.Point(674, 340)
+        Me.txtCostoTotal.Location = New System.Drawing.Point(671, 365)
         Me.txtCostoTotal.MaxLength = 50
         Me.txtCostoTotal.Name = "txtCostoTotal"
         Me.txtCostoTotal.ReadOnly = True
@@ -1273,7 +1276,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label12.Location = New System.Drawing.Point(592, 341)
+        Me.Label12.Location = New System.Drawing.Point(589, 366)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(76, 18)
         Me.Label12.TabIndex = 7
@@ -1284,7 +1287,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label14.Location = New System.Drawing.Point(249, 375)
+        Me.Label14.Location = New System.Drawing.Point(246, 400)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(83, 18)
         Me.Label14.TabIndex = 8
@@ -1295,7 +1298,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnRecalculaCosto.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRecalculaCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRecalculaCosto.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnRecalculaCosto.Location = New System.Drawing.Point(319, 337)
+        Me.btnRecalculaCosto.Location = New System.Drawing.Point(316, 362)
         Me.btnRecalculaCosto.Name = "btnRecalculaCosto"
         Me.btnRecalculaCosto.Size = New System.Drawing.Size(219, 27)
         Me.btnRecalculaCosto.TabIndex = 6
@@ -1306,18 +1309,18 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.TabDocumentacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.TabDocumentacion.Controls.Add(Me.txtNotasDocumentacion)
-        Me.TabDocumentacion.Location = New System.Drawing.Point(4, 64)
+        Me.TabDocumentacion.Location = New System.Drawing.Point(4, 34)
         Me.TabDocumentacion.Name = "TabDocumentacion"
-        Me.TabDocumentacion.Size = New System.Drawing.Size(821, 406)
+        Me.TabDocumentacion.Size = New System.Drawing.Size(1034, 436)
         Me.TabDocumentacion.TabIndex = 6
         Me.TabDocumentacion.Text = "Documentación Adicional"
         '
         'txtNotasDocumentacion
         '
         Me.txtNotasDocumentacion.EnableAutoDragDrop = True
-        Me.txtNotasDocumentacion.Location = New System.Drawing.Point(23, 16)
+        Me.txtNotasDocumentacion.Location = New System.Drawing.Point(23, 33)
         Me.txtNotasDocumentacion.Name = "txtNotasDocumentacion"
-        Me.txtNotasDocumentacion.Size = New System.Drawing.Size(774, 371)
+        Me.txtNotasDocumentacion.Size = New System.Drawing.Size(988, 371)
         Me.txtNotasDocumentacion.TabIndex = 17
         Me.txtNotasDocumentacion.Text = ""
         '
@@ -1351,27 +1354,27 @@ Partial Class IngresoPruebasEnsayo
         Me.TabDatosEntrada.Controls.Add(Me.txtRequisitosI)
         Me.TabDatosEntrada.Controls.Add(Me.Label20)
         Me.TabDatosEntrada.Controls.Add(Me.Label17)
-        Me.TabDatosEntrada.Location = New System.Drawing.Point(4, 64)
+        Me.TabDatosEntrada.Location = New System.Drawing.Point(4, 34)
         Me.TabDatosEntrada.Name = "TabDatosEntrada"
-        Me.TabDatosEntrada.Size = New System.Drawing.Size(821, 406)
+        Me.TabDatosEntrada.Size = New System.Drawing.Size(1034, 436)
         Me.TabDatosEntrada.TabIndex = 7
         Me.TabDatosEntrada.Text = "Datos de Entrada"
         '
         'btnLeerVersionAntDatosEntrada
         '
         Me.btnLeerVersionAntDatosEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLeerVersionAntDatosEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLeerVersionAntDatosEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLeerVersionAntDatosEntrada.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLeerVersionAntDatosEntrada.Location = New System.Drawing.Point(342, 372)
+        Me.btnLeerVersionAntDatosEntrada.Location = New System.Drawing.Point(398, 386)
         Me.btnLeerVersionAntDatosEntrada.Name = "btnLeerVersionAntDatosEntrada"
-        Me.btnLeerVersionAntDatosEntrada.Size = New System.Drawing.Size(136, 25)
+        Me.btnLeerVersionAntDatosEntrada.Size = New System.Drawing.Size(217, 33)
         Me.btnLeerVersionAntDatosEntrada.TabIndex = 12
         Me.btnLeerVersionAntDatosEntrada.Text = "Lee Versión Anterior"
         Me.btnLeerVersionAntDatosEntrada.UseVisualStyleBackColor = True
         '
         'txtComentariosXII
         '
-        Me.txtComentariosXII.Location = New System.Drawing.Point(406, 346)
+        Me.txtComentariosXII.Location = New System.Drawing.Point(591, 346)
         Me.txtComentariosXII.MaxLength = 50
         Me.txtComentariosXII.Name = "txtComentariosXII"
         Me.txtComentariosXII.Size = New System.Drawing.Size(392, 20)
@@ -1380,7 +1383,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosXI
         '
-        Me.txtComentariosXI.Location = New System.Drawing.Point(406, 319)
+        Me.txtComentariosXI.Location = New System.Drawing.Point(591, 319)
         Me.txtComentariosXI.MaxLength = 50
         Me.txtComentariosXI.Name = "txtComentariosXI"
         Me.txtComentariosXI.Size = New System.Drawing.Size(392, 20)
@@ -1389,7 +1392,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosX
         '
-        Me.txtComentariosX.Location = New System.Drawing.Point(406, 292)
+        Me.txtComentariosX.Location = New System.Drawing.Point(591, 292)
         Me.txtComentariosX.MaxLength = 50
         Me.txtComentariosX.Name = "txtComentariosX"
         Me.txtComentariosX.Size = New System.Drawing.Size(392, 20)
@@ -1398,7 +1401,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosIX
         '
-        Me.txtComentariosIX.Location = New System.Drawing.Point(406, 265)
+        Me.txtComentariosIX.Location = New System.Drawing.Point(591, 265)
         Me.txtComentariosIX.MaxLength = 50
         Me.txtComentariosIX.Name = "txtComentariosIX"
         Me.txtComentariosIX.Size = New System.Drawing.Size(392, 20)
@@ -1407,7 +1410,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosVIII
         '
-        Me.txtComentariosVIII.Location = New System.Drawing.Point(406, 238)
+        Me.txtComentariosVIII.Location = New System.Drawing.Point(591, 238)
         Me.txtComentariosVIII.MaxLength = 50
         Me.txtComentariosVIII.Name = "txtComentariosVIII"
         Me.txtComentariosVIII.Size = New System.Drawing.Size(392, 20)
@@ -1416,7 +1419,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosVII
         '
-        Me.txtComentariosVII.Location = New System.Drawing.Point(406, 211)
+        Me.txtComentariosVII.Location = New System.Drawing.Point(591, 211)
         Me.txtComentariosVII.MaxLength = 50
         Me.txtComentariosVII.Name = "txtComentariosVII"
         Me.txtComentariosVII.Size = New System.Drawing.Size(392, 20)
@@ -1425,7 +1428,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosVI
         '
-        Me.txtComentariosVI.Location = New System.Drawing.Point(406, 184)
+        Me.txtComentariosVI.Location = New System.Drawing.Point(591, 184)
         Me.txtComentariosVI.MaxLength = 50
         Me.txtComentariosVI.Name = "txtComentariosVI"
         Me.txtComentariosVI.Size = New System.Drawing.Size(392, 20)
@@ -1434,7 +1437,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosV
         '
-        Me.txtComentariosV.Location = New System.Drawing.Point(406, 157)
+        Me.txtComentariosV.Location = New System.Drawing.Point(591, 157)
         Me.txtComentariosV.MaxLength = 50
         Me.txtComentariosV.Name = "txtComentariosV"
         Me.txtComentariosV.Size = New System.Drawing.Size(392, 20)
@@ -1443,7 +1446,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosIV
         '
-        Me.txtComentariosIV.Location = New System.Drawing.Point(406, 130)
+        Me.txtComentariosIV.Location = New System.Drawing.Point(591, 130)
         Me.txtComentariosIV.MaxLength = 50
         Me.txtComentariosIV.Name = "txtComentariosIV"
         Me.txtComentariosIV.Size = New System.Drawing.Size(392, 20)
@@ -1452,7 +1455,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosIII
         '
-        Me.txtComentariosIII.Location = New System.Drawing.Point(406, 103)
+        Me.txtComentariosIII.Location = New System.Drawing.Point(591, 103)
         Me.txtComentariosIII.MaxLength = 50
         Me.txtComentariosIII.Name = "txtComentariosIII"
         Me.txtComentariosIII.Size = New System.Drawing.Size(392, 20)
@@ -1461,7 +1464,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosII
         '
-        Me.txtComentariosII.Location = New System.Drawing.Point(406, 76)
+        Me.txtComentariosII.Location = New System.Drawing.Point(591, 76)
         Me.txtComentariosII.MaxLength = 50
         Me.txtComentariosII.Name = "txtComentariosII"
         Me.txtComentariosII.Size = New System.Drawing.Size(392, 20)
@@ -1470,7 +1473,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtComentariosI
         '
-        Me.txtComentariosI.Location = New System.Drawing.Point(406, 49)
+        Me.txtComentariosI.Location = New System.Drawing.Point(591, 49)
         Me.txtComentariosI.MaxLength = 50
         Me.txtComentariosI.Name = "txtComentariosI"
         Me.txtComentariosI.Size = New System.Drawing.Size(392, 20)
@@ -1479,7 +1482,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosXII
         '
-        Me.txtRequisitosXII.Location = New System.Drawing.Point(23, 346)
+        Me.txtRequisitosXII.Location = New System.Drawing.Point(52, 346)
         Me.txtRequisitosXII.MaxLength = 50
         Me.txtRequisitosXII.Name = "txtRequisitosXII"
         Me.txtRequisitosXII.Size = New System.Drawing.Size(377, 20)
@@ -1488,7 +1491,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosXI
         '
-        Me.txtRequisitosXI.Location = New System.Drawing.Point(23, 319)
+        Me.txtRequisitosXI.Location = New System.Drawing.Point(52, 319)
         Me.txtRequisitosXI.MaxLength = 50
         Me.txtRequisitosXI.Name = "txtRequisitosXI"
         Me.txtRequisitosXI.Size = New System.Drawing.Size(377, 20)
@@ -1497,7 +1500,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosX
         '
-        Me.txtRequisitosX.Location = New System.Drawing.Point(23, 292)
+        Me.txtRequisitosX.Location = New System.Drawing.Point(52, 292)
         Me.txtRequisitosX.MaxLength = 50
         Me.txtRequisitosX.Name = "txtRequisitosX"
         Me.txtRequisitosX.Size = New System.Drawing.Size(377, 20)
@@ -1506,7 +1509,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosIX
         '
-        Me.txtRequisitosIX.Location = New System.Drawing.Point(23, 265)
+        Me.txtRequisitosIX.Location = New System.Drawing.Point(52, 265)
         Me.txtRequisitosIX.MaxLength = 50
         Me.txtRequisitosIX.Name = "txtRequisitosIX"
         Me.txtRequisitosIX.Size = New System.Drawing.Size(377, 20)
@@ -1515,7 +1518,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosVIII
         '
-        Me.txtRequisitosVIII.Location = New System.Drawing.Point(23, 238)
+        Me.txtRequisitosVIII.Location = New System.Drawing.Point(52, 238)
         Me.txtRequisitosVIII.MaxLength = 50
         Me.txtRequisitosVIII.Name = "txtRequisitosVIII"
         Me.txtRequisitosVIII.Size = New System.Drawing.Size(377, 20)
@@ -1524,7 +1527,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosVII
         '
-        Me.txtRequisitosVII.Location = New System.Drawing.Point(23, 211)
+        Me.txtRequisitosVII.Location = New System.Drawing.Point(52, 211)
         Me.txtRequisitosVII.MaxLength = 50
         Me.txtRequisitosVII.Name = "txtRequisitosVII"
         Me.txtRequisitosVII.Size = New System.Drawing.Size(377, 20)
@@ -1533,7 +1536,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosVI
         '
-        Me.txtRequisitosVI.Location = New System.Drawing.Point(23, 184)
+        Me.txtRequisitosVI.Location = New System.Drawing.Point(52, 184)
         Me.txtRequisitosVI.MaxLength = 50
         Me.txtRequisitosVI.Name = "txtRequisitosVI"
         Me.txtRequisitosVI.Size = New System.Drawing.Size(377, 20)
@@ -1542,7 +1545,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosV
         '
-        Me.txtRequisitosV.Location = New System.Drawing.Point(23, 157)
+        Me.txtRequisitosV.Location = New System.Drawing.Point(52, 157)
         Me.txtRequisitosV.MaxLength = 50
         Me.txtRequisitosV.Name = "txtRequisitosV"
         Me.txtRequisitosV.Size = New System.Drawing.Size(377, 20)
@@ -1551,7 +1554,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosIV
         '
-        Me.txtRequisitosIV.Location = New System.Drawing.Point(23, 130)
+        Me.txtRequisitosIV.Location = New System.Drawing.Point(52, 130)
         Me.txtRequisitosIV.MaxLength = 50
         Me.txtRequisitosIV.Name = "txtRequisitosIV"
         Me.txtRequisitosIV.Size = New System.Drawing.Size(377, 20)
@@ -1560,7 +1563,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosIII
         '
-        Me.txtRequisitosIII.Location = New System.Drawing.Point(23, 103)
+        Me.txtRequisitosIII.Location = New System.Drawing.Point(52, 103)
         Me.txtRequisitosIII.MaxLength = 50
         Me.txtRequisitosIII.Name = "txtRequisitosIII"
         Me.txtRequisitosIII.Size = New System.Drawing.Size(377, 20)
@@ -1569,7 +1572,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosII
         '
-        Me.txtRequisitosII.Location = New System.Drawing.Point(23, 76)
+        Me.txtRequisitosII.Location = New System.Drawing.Point(52, 76)
         Me.txtRequisitosII.MaxLength = 50
         Me.txtRequisitosII.Name = "txtRequisitosII"
         Me.txtRequisitosII.Size = New System.Drawing.Size(377, 20)
@@ -1578,7 +1581,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'txtRequisitosI
         '
-        Me.txtRequisitosI.Location = New System.Drawing.Point(23, 49)
+        Me.txtRequisitosI.Location = New System.Drawing.Point(52, 49)
         Me.txtRequisitosI.MaxLength = 50
         Me.txtRequisitosI.Name = "txtRequisitosI"
         Me.txtRequisitosI.Size = New System.Drawing.Size(377, 20)
@@ -1590,7 +1593,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label20.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label20.Location = New System.Drawing.Point(559, 21)
+        Me.Label20.Location = New System.Drawing.Point(588, 21)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(87, 18)
         Me.Label20.TabIndex = 0
@@ -1601,7 +1604,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label17.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label17.Location = New System.Drawing.Point(132, 17)
+        Me.Label17.Location = New System.Drawing.Point(271, 18)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(159, 18)
         Me.Label17.TabIndex = 0
@@ -1611,9 +1614,9 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.TabPage1.Controls.Add(Me.dgvArchivos)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 64)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 34)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(821, 373)
+        Me.TabPage1.Size = New System.Drawing.Size(1034, 436)
         Me.TabPage1.TabIndex = 8
         Me.TabPage1.Text = "Archivos Relacionados"
         '
@@ -1626,26 +1629,26 @@ Partial Class IngresoPruebasEnsayo
         Me.dgvArchivos.AllowUserToResizeRows = False
         Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Observacion, Me.Icono, Me.RutaArchivo})
-        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle34.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle204.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle204.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle204.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle204.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle204.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle204.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle204.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle204
         Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.dgvArchivos.Location = New System.Drawing.Point(19, 19)
+        Me.dgvArchivos.Location = New System.Drawing.Point(9, 11)
         Me.dgvArchivos.MultiSelect = False
         Me.dgvArchivos.Name = "dgvArchivos"
         Me.dgvArchivos.RowTemplate.Height = 40
-        Me.dgvArchivos.Size = New System.Drawing.Size(783, 335)
+        Me.dgvArchivos.Size = New System.Drawing.Size(1016, 414)
         Me.dgvArchivos.TabIndex = 9
         '
         'Fecha
         '
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle202.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle202
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.MaxInputLength = 12
         Me.Fecha.MinimumWidth = 100
@@ -1656,8 +1659,8 @@ Partial Class IngresoPruebasEnsayo
         'Observacion
         '
         Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle203.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle203
         Me.Observacion.HeaderText = "Observación"
         Me.Observacion.Name = "Observacion"
         Me.Observacion.ReadOnly = True
@@ -1781,12 +1784,12 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel5.Location = New System.Drawing.Point(0, 527)
         Me.Panel5.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(892, 70)
+        Me.Panel5.Size = New System.Drawing.Size(1058, 70)
         Me.Panel5.TabIndex = 1
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(635, 11)
+        Me.btnCerrar.Location = New System.Drawing.Point(718, 11)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(75, 49)
         Me.btnCerrar.TabIndex = 0
@@ -1795,7 +1798,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'btnConsultas
         '
-        Me.btnConsultas.Location = New System.Drawing.Point(522, 11)
+        Me.btnConsultas.Location = New System.Drawing.Point(605, 11)
         Me.btnConsultas.Name = "btnConsultas"
         Me.btnConsultas.Size = New System.Drawing.Size(75, 49)
         Me.btnConsultas.TabIndex = 0
@@ -1804,7 +1807,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(409, 11)
+        Me.btnLimpiar.Location = New System.Drawing.Point(492, 11)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 49)
         Me.btnLimpiar.TabIndex = 0
@@ -1813,7 +1816,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(296, 11)
+        Me.btnEliminar.Location = New System.Drawing.Point(379, 11)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(75, 49)
         Me.btnEliminar.TabIndex = 0
@@ -1822,7 +1825,7 @@ Partial Class IngresoPruebasEnsayo
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(183, 11)
+        Me.btnAceptar.Location = New System.Drawing.Point(266, 11)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(75, 49)
         Me.btnAceptar.TabIndex = 0
@@ -1833,13 +1836,58 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(83, 143)
+        Me.pnlConsulta.Location = New System.Drawing.Point(170, 144)
         Me.pnlConsulta.Name = "pnlConsulta"
-        Me.pnlConsulta.Size = New System.Drawing.Size(726, 357)
+        Me.pnlConsulta.Size = New System.Drawing.Size(718, 329)
         Me.pnlConsulta.TabIndex = 2
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(20, 19)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(647, 20)
+        Me.txtAyuda.TabIndex = 0
+        '
+        'lstConsulta
+        '
+        Me.lstConsulta.FormattingEnabled = True
+        Me.lstConsulta.Location = New System.Drawing.Point(19, 49)
+        Me.lstConsulta.Name = "lstConsulta"
+        Me.lstConsulta.Size = New System.Drawing.Size(643, 212)
+        Me.lstConsulta.TabIndex = 1
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.Location = New System.Drawing.Point(19, 49)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(643, 212)
+        Me.lstFiltrada.TabIndex = 2
+        Me.lstFiltrada.Visible = False
+        '
+        'btnCerrarConsulta
+        '
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(538, 269)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(115, 28)
+        Me.btnCerrarConsulta.TabIndex = 0
+        Me.btnCerrarConsulta.Text = "Cerrar"
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
+        '
+        'lstOpciones
+        '
+        Me.lstOpciones.FormattingEnabled = True
+        Me.lstOpciones.Items.AddRange(New Object() {"Ensayos", "Ensayos por Cliente"})
+        Me.lstOpciones.Location = New System.Drawing.Point(20, 48)
+        Me.lstOpciones.Name = "lstOpciones"
+        Me.lstOpciones.Size = New System.Drawing.Size(647, 212)
+        Me.lstOpciones.TabIndex = 3
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtBuscarEnTodosLosCampos)
+        Me.GroupBox1.Controls.Add(Me.Label16)
         Me.GroupBox1.Controls.Add(Me.lstOpciones)
         Me.GroupBox1.Controls.Add(Me.btnCerrarConsulta)
         Me.GroupBox1.Controls.Add(Me.lstFiltrada)
@@ -1848,59 +1896,33 @@ Partial Class IngresoPruebasEnsayo
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox1.Location = New System.Drawing.Point(18, 10)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(683, 334)
+        Me.GroupBox1.Size = New System.Drawing.Size(683, 309)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Consulta Clientes"
+        Me.GroupBox1.Text = "Consulta"
         '
-        'lstOpciones
+        'Label16
         '
-        Me.lstOpciones.FormattingEnabled = True
-        Me.lstOpciones.Items.AddRange(New Object() {"Ensayos", "Ensayos por Cliente"})
-        Me.lstOpciones.Location = New System.Drawing.Point(20, 48)
-        Me.lstOpciones.Name = "lstOpciones"
-        Me.lstOpciones.Size = New System.Drawing.Size(643, 238)
-        Me.lstOpciones.TabIndex = 3
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(28, 277)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(145, 13)
+        Me.Label16.TabIndex = 4
+        Me.Label16.Text = "Buscar en Todos los Campos"
+        Me.Label16.Visible = False
         '
-        'btnCerrarConsulta
+        'txtBuscarEnTodosLosCampos
         '
-        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnCerrarConsulta.Location = New System.Drawing.Point(284, 293)
-        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
-        Me.btnCerrarConsulta.Size = New System.Drawing.Size(115, 28)
-        Me.btnCerrarConsulta.TabIndex = 0
-        Me.btnCerrarConsulta.Text = "Cerrar"
-        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
-        '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.Location = New System.Drawing.Point(19, 49)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(643, 238)
-        Me.lstFiltrada.TabIndex = 2
-        Me.lstFiltrada.Visible = False
-        '
-        'lstConsulta
-        '
-        Me.lstConsulta.FormattingEnabled = True
-        Me.lstConsulta.Location = New System.Drawing.Point(19, 49)
-        Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(643, 238)
-        Me.lstConsulta.TabIndex = 1
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Location = New System.Drawing.Point(20, 19)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(642, 20)
-        Me.txtAyuda.TabIndex = 0
+        Me.txtBuscarEnTodosLosCampos.Location = New System.Drawing.Point(183, 273)
+        Me.txtBuscarEnTodosLosCampos.Name = "txtBuscarEnTodosLosCampos"
+        Me.txtBuscarEnTodosLosCampos.Size = New System.Drawing.Size(224, 20)
+        Me.txtBuscarEnTodosLosCampos.TabIndex = 5
         '
         'IngresoPruebasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(892, 643)
+        Me.ClientSize = New System.Drawing.Size(1058, 643)
         Me.Controls.Add(Me.pnlConsulta)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Location = New System.Drawing.Point(10, 10)
@@ -1975,11 +1997,6 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents txtOrden As System.Windows.Forms.MaskedTextBox
     Friend WithEvents pnlConsulta As System.Windows.Forms.Panel
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents lstFiltrada As System.Windows.Forms.ListBox
-    Friend WithEvents lstConsulta As System.Windows.Forms.ListBox
-    Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
-    Friend WithEvents btnCerrarConsulta As System.Windows.Forms.Button
     Friend WithEvents WIndice As System.Windows.Forms.ListBox
     Friend WithEvents pnlNotas As System.Windows.Forms.Panel
     Friend WithEvents rbEstabilidad As System.Windows.Forms.RadioButton
@@ -2065,15 +2082,6 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents LaboratorioDescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LaboratorioRequerido As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LaboratorioResultado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesVersion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesFecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesParticipantes As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesResultados As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesResponsables As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesEstado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents lstOpciones As System.Windows.Forms.ListBox
     Friend WithEvents pnlHojaPiloto As System.Windows.Forms.Panel
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents btnCancelarHojaPiloto As System.Windows.Forms.Button
@@ -2086,6 +2094,12 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents CantidadFormula As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LoteFormula As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents StockFormula As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents dgvArchivos As System.Windows.Forms.DataGridView
+    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Observacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Icono As System.Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents RutaArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProcesoEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProcesoDetallesTrabajo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProcesoEquipo As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2093,10 +2107,20 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents ProcesoTiempo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProcesoControl As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProcesoSeguridad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents dgvArchivos As System.Windows.Forms.DataGridView
-    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Observacion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Icono As System.Windows.Forms.DataGridViewImageColumn
-    Friend WithEvents RutaArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesVersion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesFecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesParticipantes As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesResultados As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesResponsables As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesEstado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents lstOpciones As System.Windows.Forms.ListBox
+    Friend WithEvents btnCerrarConsulta As System.Windows.Forms.Button
+    Friend WithEvents lstFiltrada As System.Windows.Forms.ListBox
+    Friend WithEvents lstConsulta As System.Windows.Forms.ListBox
+    Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
+    Friend WithEvents txtBuscarEnTodosLosCampos As System.Windows.Forms.TextBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
 End Class

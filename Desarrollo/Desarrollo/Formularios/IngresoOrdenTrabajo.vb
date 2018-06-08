@@ -363,7 +363,7 @@ Public Class IngresoOrdenTrabajo
         If e.KeyData = Keys.Enter Then
             '    If Trim(txtUso.Text) = "" Then : Exit Sub : End If
 
-            txtDescTrabajo.Focus()
+            'txtDescTrabajo.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtUso.Text = ""
@@ -376,9 +376,9 @@ Public Class IngresoOrdenTrabajo
         If e.KeyData = Keys.Enter Then
 
             ' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
-            If Not e.Modifiers = Keys.Shift Then
-                txtObservacionesII.Focus()
-            End If
+            'If Not e.Modifiers = Keys.Shift Then
+            '    txtObservacionesII.Focus()
+            'End If
 
         End If
 
@@ -388,10 +388,10 @@ Public Class IngresoOrdenTrabajo
 
         If e.KeyData = Keys.Enter Then
 
-            ' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
-            If Not e.Modifiers = Keys.Shift Then
-                txtEncargado.Focus()
-            End If
+            '' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
+            'If Not e.Modifiers = Keys.Shift Then
+            '    txtEncargado.Focus()
+            'End If
 
         End If
 
@@ -415,10 +415,10 @@ Public Class IngresoOrdenTrabajo
     Private Sub txtRequisitosFuncionales_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosFuncionales.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            ' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
-            If Not e.Modifiers = Keys.Shift Then
-                txtOtrosRequisitos.Focus()
-            End If
+            '' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
+            'If Not e.Modifiers = Keys.Shift Then
+            '    txtOtrosRequisitos.Focus()
+            'End If
 
         End If
     End Sub
@@ -426,10 +426,10 @@ Public Class IngresoOrdenTrabajo
     Private Sub txtOtrosRequisitos_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOtrosRequisitos.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            ' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
-            If Not e.Modifiers = Keys.Shift Then
-                txtRequisitosNormasRegulaciones.Focus()
-            End If
+            '' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
+            'If Not e.Modifiers = Keys.Shift Then
+            '    txtRequisitosNormasRegulaciones.Focus()
+            'End If
 
         End If
     End Sub
@@ -437,10 +437,10 @@ Public Class IngresoOrdenTrabajo
     Private Sub txtRequisitosNormasRegulaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosNormasRegulaciones.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            ' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
-            If Not e.Modifiers = Keys.Shift Then
-                txtReferencias.Focus()
-            End If
+            '' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
+            'If Not e.Modifiers = Keys.Shift Then
+            '    txtReferencias.Focus()
+            'End If
 
         End If
     End Sub
@@ -448,12 +448,12 @@ Public Class IngresoOrdenTrabajo
     Private Sub txtReferencias_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtReferencias.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            ' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
-            If Not e.Modifiers = Keys.Shift Then
+            '' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
+            'If Not e.Modifiers = Keys.Shift Then
 
-                cmbAplicacion.Focus()
+            '    cmbAplicacion.Focus()
                 
-            End If
+            'End If
 
         End If
     End Sub
@@ -1124,4 +1124,5 @@ Public Class IngresoOrdenTrabajo
         End Try
 
     End Sub
+
 End Class

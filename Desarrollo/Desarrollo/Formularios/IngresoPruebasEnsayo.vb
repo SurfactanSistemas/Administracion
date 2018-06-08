@@ -6,6 +6,7 @@ Imports Microsoft.VisualBasic.FileIO
 Public Class IngresoPruebasEnsayo
 
     Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.xlsm|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
+    Private WAuxiOT = "", WAuxiCargaIII = "", WAuxiCargaV = ""
 
     Private Sub IngresoOrdenTrabajo_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         btnLimpiar.PerformClick()
@@ -201,6 +202,9 @@ Public Class IngresoPruebasEnsayo
             lstOpciones.Visible = True
             lstConsulta.Visible = True
             lstFiltrada.Visible = False
+            Label16.Visible=False
+            txtBuscarEnTodosLosCampos.Visible=False
+            txtBuscarEnTodosLosCampos.Text=""
             txtAyuda.Text = ""
             txtAyuda.Focus()
 
@@ -341,7 +345,215 @@ Public Class IngresoPruebasEnsayo
     End Sub
 
     Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+        
+        '
+        ' Filtramos de manera normal sólo por contenido mostrado en pantalla.
+        '
         _FiltrarDinamicamente()
+
+        ''
+        '' Filtramos por el contenido de todos los campos guardados en el ensayo.
+        ''
+        '_FiltrarPorTodosLosCampos()
+
+    End Sub
+
+    Private Sub _FiltrarPorTodosLosCampos(ByVal WBuscar As String)
+        '
+        ' Buscamos todos las Ordenes con sus versiones mas recientes.
+        '
+        Dim WEnsayos(1,2) As String
+        Dim XIndice As Integer = 0
+        Dim WBuscarEn As String()
+
+        Dim WObservaciones = "", WCliente = "", WDesCliente = "", WVersion = ""
+        Dim WListar As New List(Of Object())
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT COUNT(DISTINCT Orden) Total FROM CargaEnsayo")
+        Dim dr As SqlDataReader
+
+        WAuxiOT = ""
+        WBuscarEn = New String() {"Observaciones", "Material", "Muestra", "Uso", "DescripcionI", "DescripcionII", "DescripcionIII", "DescripcionIV", "DescripcionV", "ObservacionesI", "ObservacionesII", "ObservacionesIII", "RequisitoI", "RequisitoII", "RequisitoIII", "RequisitoIV", "RequisitoV", "RequisitoVI", "ReferenciaI", "ReferenciaII"}
+        For Each WCampo As String In WBuscarEn
+            If (WAuxiOT.Trim() <> "") Then WAuxiOT &= " OR "
+
+            WAuxiOT &= "ot." & WCampo & " LIKE '%" & WBuscar.Trim() & "%'"
+
+        Next
+        WAuxiOT = WAuxiOT.TrimEnd(",", " ")
+
+        WBuscarEn = New String() {"Etapa", "Instrucciones", "Equipo", "Temperatura", "Tiempo", "Control", "Seguridad"}
+
+        WAuxiCargaIII = ""
+
+        For Each WCampo As String In WBuscarEn
+            If (WAuxiCargaIII.Trim() <> "") Then WAuxiCargaIII &= " OR "
+
+            WAuxiCargaIII &= "c3." & WCampo & " LIKE '%" & WBuscar.Trim() & "%'"
+
+        Next
+
+        WAuxiCargaIII = WAuxiCargaIII.TrimEnd(",", " ")
+
+        WBuscarEn = New String() {"Version", "Etapa", "Fecha", "Participantes", "Resultados", "Acciones", "Responsables", "Estado"}
+
+        WAuxiCargaV = ""
+
+        For Each WCampo As String In WBuscarEn
+            If (WAuxiCargaV.Trim() <> "") Then WAuxiCargaV &= " OR "
+
+            WAuxiCargaV &= "c5." & WCampo & " LIKE '%" & WBuscar.Trim() & "%'"
+
+        Next
+
+        WAuxiCargaV = WAuxiCargaV.TrimEnd(",", " ")
+
+        Try
+            Enabled = False
+            Opacity = 90
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            Array.Clear(WEnsayos, 0, WEnsayos.Length)
+
+            If dr.HasRows Then
+                dr.Read()
+
+                '
+                ' Redimensiono el array para el total de Ensayos.
+                '
+                ReDim WEnsayos(dr.Item("Total"), 2)
+
+                If Not dr.IsClosed Then dr.Close()
+
+                cm.CommandText = "SELECT Orden, Max(Version) Version FROM CargaEnsayo GROUP BY Orden ORDER BY Orden"
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+
+                    '
+                    ' Cargo el array con los datos de los ensayos y sus versiones mas actuales.
+                    '
+                    XIndice = 0
+
+                    While dr.Read()
+                        XIndice += 1
+                        WEnsayos(XIndice, 1) = dr.Item("Orden")
+                        WEnsayos(XIndice, 2) = dr.Item("Version")
+                    End While
+
+                    'For i = 0 to XIndice
+
+                    If Not dr.IsClosed Then dr.Close()
+
+                    '
+                    ' Busco coincidencias en OrdenTrabajo
+                    '
+
+                    cm.CommandText = "SELECT ot.Orden, ot.Observaciones, ot.Cliente, ISNULL(Cliente.Razon, '') as DesCliente, Max(ce.Version) Version FROM OrdenTrabajo ot INNER JOIN CargaEnsayo ce ON ot.Orden = ce.Orden LEFT OUTER JOIN Cliente ON ot.Cliente = Cliente.Cliente WHERE " & WAuxiOT & " GROUP BY ot.Orden, ot.Observaciones, ot.Cliente, Cliente.Razon"
+
+                    dr = cm.ExecuteReader
+
+                    If dr.HasRows Then
+
+                        While dr.Read()
+
+                            WObservaciones = dr.Item("Observaciones")
+                            WCliente = dr.Item("Cliente")
+                            WDesCliente = dr.Item("DesCliente")
+                            WVersion = dr.Item("Version")
+
+                            WListar.Add({dr.Item("Orden"), WVersion, WObservaciones, WCliente, WDesCliente})
+
+                        End While
+
+                    End If
+
+                    If Not dr.IsClosed Then dr.Close()
+
+                    '
+                    ' Busco Coincidencias en CargaEnsayosIII
+                    '
+
+                    cm.CommandText = "SELECT c3.Orden, c3.Version, ISNULL(ot.Observaciones, '') Observaciones, ISNULL(ot.Cliente, '') Cliente, ISNULL(cli.Razon, '') DesCliente FROM CargaEnsayoIII c3 INNER JOIN (SELECT Orden, MAX(Version) Actual FROM CargaEnsayo GROUP BY Orden) ce ON c3.Orden = ce.Orden LEFT OUTER JOIN OrdenTrabajo ot ON c3.Orden = ot.Orden LEFT OUTER JOIN Cliente cli ON ot.Cliente = cli.Cliente WHERE c3.Version = ce.Actual AND " & WAuxiCargaIII
+
+                    dr = cm.ExecuteReader
+
+                    If dr.HasRows Then
+
+                        While dr.Read()
+                            WObservaciones = dr.Item("Observaciones")
+                            WCliente = dr.Item("Cliente")
+                            WDesCliente = dr.Item("DesCliente")
+                            WVersion = dr.Item("Version")
+
+                            If Not WListar.Exists(Function(x) x(0) = dr.Item("Orden")) Then WListar.Add({dr.Item("Orden"), WVersion, WObservaciones, WCliente, WDesCliente})
+                        End While
+
+                    End If
+
+                    If Not dr.IsClosed Then dr.Close()
+                    '
+                    ' Busco Coincidencias en CargaEnsayoV.
+                    '
+
+                    cm.CommandText = "SELECT c5.Orden, ce.Actual as Version, ISNULL(ot.Observaciones, '') Observaciones, ISNULL(ot.Cliente, '') Cliente, ISNULL(cli.Razon, '') DesCliente FROM CargaEnsayoV c5 INNER JOIN (SELECT Orden, Max(Version) Actual FROM CargaEnsayo GROUP BY Orden) ce ON c5.Orden = ce.Orden LEFT OUTER JOIN OrdenTrabajo ot ON c5.Orden = ot.Orden LEFT OUTER JOIN Cliente cli ON ot.Cliente = cli.Cliente WHERE " & WAuxiCargaV
+
+                    dr = cm.ExecuteReader
+
+                    If dr.HasRows Then
+                        While dr.Read()
+                            WObservaciones = dr.Item("Observaciones")
+                            WCliente = dr.Item("Cliente")
+                            WDesCliente = dr.Item("DesCliente")
+                            WVersion = dr.Item("Version")
+
+                            If Not WListar.Exists(Function(x) x(0) = dr.Item("Orden")) Then WListar.Add({dr.Item("Orden"), WVersion, WObservaciones, WCliente, WDesCliente})
+                        End While
+                    End If
+
+                    'Next
+
+                    Dim WTemp = ""
+                    lstConsulta.Items.Clear()
+                    WIndice.Items.Clear()
+
+                    If WListar.Count > 0 Then
+
+                        For Each WEnsayo As Object In WListar.OrderBy(Function(x) x(0)).ToList
+
+                            WTemp = WEnsayo(0).trim() & "/" & WEnsayo(1).trim() ' Orden / Version
+                            WIndice.Items.Add(WTemp)
+
+                            lstConsulta.Items.Add(WTemp.PadRight(15) & Space(5) & WEnsayo(2).trim() & Space(5) & WEnsayo(4).trim())
+
+                        Next
+
+                    End If
+
+                End If
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Enabled = True
+        Opacity = 100
+        
     End Sub
 
     Private Sub lstConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
@@ -957,7 +1169,7 @@ Public Class IngresoPruebasEnsayo
     Private Function _ExisteEnsayo() As Boolean
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Orden FROM OrdenTrabajo WHERE Orden = '" & UCase(txtOrden.Text) & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Orden FROM CargaEnsayo WHERE Orden = '" & UCase(txtOrden.Text) & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -2897,10 +3109,21 @@ Public Class IngresoPruebasEnsayo
 
     Private Sub lstOpciones_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstOpciones.MouseClick
         Try
+            Label16.Visible = False
+            With txtBuscarEnTodosLosCampos
+                .Text = ""
+                .Visible = False
+            End With
 
             If lstOpciones.SelectedIndex = 0 Then
 
                 _CargarConsultaEnsayos()
+
+                Label16.Visible = true
+                With txtBuscarEnTodosLosCampos
+                    .Text = ""
+                    .Visible = True
+                End With
 
             ElseIf lstOpciones.SelectedIndex = 1 Then
 
@@ -4350,6 +4573,7 @@ Public Class IngresoPruebasEnsayo
     End Sub
 
     Private Sub dgvArchivos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvArchivos.CellMouseDoubleClick
+        If e.RowIndex < 0 then Exit Sub
         With dgvArchivos.Rows(e.RowIndex)
             If Not IsNothing(.Cells("RutaArchivo").Value) Then
 
@@ -4500,4 +4724,16 @@ Public Class IngresoPruebasEnsayo
         Return icono
     End Function
 
+    Private Sub txtBuscarEnTodosLosCampos_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBuscarEnTodosLosCampos.KeyDown
+        
+        If e.KeyData = Keys.Enter Then
+	        If Trim(txtBuscarEnTodosLosCampos.Text) = "" Then : Exit Sub : End If
+
+            _FiltrarPorTodosLosCampos(txtbuscarentodosloscampos.Text)
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtBuscarEnTodosLosCampos.Text = ""
+        End If
+        
+    End Sub
 End Class
