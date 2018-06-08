@@ -735,6 +735,7 @@ Public Class Recibos
                         .Cells(1).Value = IIf(IsDBNull(dr.Item("Numero2")), "", dr.Item("Numero2"))
                         .Cells(2).Value = IIf(IsDBNull(dr.Item("Fecha2")), "", dr.Item("Fecha2"))
                         .Cells(3).Value = IIf(IsDBNull(dr.Item("banco2")), "", dr.Item("banco2"))
+                        .Cells("NroCuit").Value = IIf(IsDBNull(dr.Item("Cuit")), "00000000000", dr.Item("Cuit"))
                         .Cells(4).Value = _NormalizarNumero(Str$(IIf(IsDBNull(dr.Item("Importe2")), "0", dr.Item("Importe2"))))
                     End With
 
@@ -746,10 +747,11 @@ Public Class Recibos
                                                      IIf(IsDBNull(.Item("SucursalCheque")), "", .Item("SucursalCheque")), _
                                                      IIf(IsDBNull(.Item("ChequeCheque")), "", .Item("ChequeCheque")), _
                                                      IIf(IsDBNull(.Item("CuentaCheque")), "", .Item("CuentaCheque")), _
-                                                     IIf(IsDBNull(.Item("Cuit")), "", .Item("Cuit")), _
+                                                     IIf(IsDBNull(.Item("Cuit")), "00000000000", .Item("Cuit")), _
                                                      "", _
                                                      "" _
                                                 })
+
                         End With
                     End If
 
@@ -1235,7 +1237,7 @@ Public Class Recibos
                 XSucursalCheque = ""
                 XChequeCheque = ""
                 XCuentaCheque = ""
-                XCuit = "00000000000"
+                XCuit = IIf(IsNothing(gridFormasPago2.Rows(iRow).Cells("NroCuit").Value), "00000000000", gridFormasPago2.Rows(iRow).Cells("NroCuit").Value)
                 XEstado2 = ""
                 XDestino = ""
 
@@ -3300,6 +3302,8 @@ Public Class Recibos
         End If
 
         _ClavesCheques.Add({row, _clave, _banco, _sucursal, _cheque, _cuenta, _cuit, _estado, _destino})
+
+        gridFormasPago2.Rows(row).Cells("NroCuit").Value = _cuit
 
     End Sub
 

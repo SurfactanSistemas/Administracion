@@ -25,6 +25,8 @@
 
         With Me
 
+            If Val(txtInfo.Text) = 0 then txtInfo.Text = "00000000000"
+
             .Valor = txtInfo.Text
 
             .Close()

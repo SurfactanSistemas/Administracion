@@ -34,7 +34,7 @@ namespace AccesoADatos
             using (SqlConnection cnx = new SqlConnection(ConfigurationManager.ConnectionStrings[Donde].ConnectionString))
             {
                 cnx.Open();
-                string sqlQuery = "select distinct I.Clave, I.Articulo, A.Descripcion as DesArticulo, I.Orden, I.Fechaord,  I.Certificado1, I.Estado1, I.Informe, I.Cantidad, I.fecha, O.Fecha2, O.OrdFecha2 , O.Proveedor, L.Marca, L.Liberada, L.Liberadaant, L.Laudo, L.Devuelta, L.Devueltaant, P.TipoProv  from Informe I join Orden O on I.Orden = o.Orden and I.Articulo = O.Articulo LEFT join Laudo L on  L.Informe = I.Informe and I.Articulo = L.Articulo join Proveedor P on P.TipoProv = " + Tipo + " LEFT OUTER JOIN Articulo A ON A.Codigo = I.Articulo where I.fechaord >= " + Desde + " and I.Fechaord <= " + Hasta + "and O.Proveedor = '" + Prove + "'";
+                string sqlQuery = "select distinct I.Clave, I.Articulo, A.Descripcion as DesArticulo, I.Orden, I.Fechaord,  I.Certificado1, I.Estado1, I.Informe, I.Cantidad, I.fecha, O.Fecha2, O.OrdFecha2 , O.Proveedor, L.Marca, L.Liberada, L.Liberadaant, L.Laudo, L.Devuelta, L.Devueltaant, P.TipoProv  from Informe I join Orden O on I.Orden = o.Orden and I.Articulo = O.Articulo LEFT join Laudo L on  L.Informe = I.Informe and I.Articulo = L.Articulo join Proveedor P on P.TipoProv = " + Tipo + " LEFT OUTER JOIN Articulo A ON A.Codigo = I.Articulo where I.fechaord >= " + Desde + " and I.Fechaord <= " + Hasta + "and O.Proveedor = '" + Prove + "' AND (L.Liberada <> 0 OR L.Devuelta <> 0)";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, cnx))
                 {
                     SqlDataReader dataReader = cmd.ExecuteReader();

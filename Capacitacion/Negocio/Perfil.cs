@@ -193,7 +193,7 @@ namespace Negocio
         public Perfil BuscarUno(string IdAModificar)
         {
             Conexion repo = new Conexion();
-            string consulta = "select * from Tarea where Codigo = " + IdAModificar;
+            string consulta = "select * from Tarea where Codigo = " + IdAModificar + " Order by Renglon";
             System.Data.DataTable DT = repo.BuscarUno(consulta);
             Perfil obj = new Perfil();
 
@@ -264,8 +264,8 @@ namespace Negocio
                     //T = T.BuscarUno(T.Codigo.ToString(), renglon);
                     T = T.BuscarUno_Tema(T.Codigo.ToString());
                     //T.Descripcion = T.
-                    T.Necesaria = DT.Rows[renglon][34].ToString() == "X" ? 1 : 0;
-                    T.Deseable = DT.Rows[renglon][35].ToString() == "X" ? 1 : 0;
+                    T.Necesaria = DT.Rows[renglon]["NecesariaCurso"].ToString() == "1" ? 1 : 0;
+                    T.Deseable = DT.Rows[renglon]["DeseableCurso"].ToString() == "1" ? 1 : 0;
                     //T.Deseable = item["DeseableCurso"].ToString() == "1" ? 1 : 0;
                     obj.Temas.Add(T);
                     renglon++;

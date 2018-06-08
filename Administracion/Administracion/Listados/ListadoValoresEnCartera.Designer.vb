@@ -143,7 +143,7 @@ Partial Class ListadoValoresEnCartera
         Me.txtFecha2.Name = "txtFecha2"
         Me.txtFecha2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFecha2.Size = New System.Drawing.Size(106, 20)
-        Me.txtFecha2.TabIndex = 2
+        Me.txtFecha2.TabIndex = 1
         '
         'txtFecha1
         '

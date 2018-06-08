@@ -302,7 +302,7 @@ namespace Eval_Proveedores
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT Laudo, Marca, DevueltaAnt, Devuelta FROM Laudo WHERE Informe = '" + WInforme + "' AND Articulo = '" + WArticulo + "' ORDER BY Renglon";
+                    cmd.CommandText = "SELECT Laudo, Marca, DevueltaAnt, Devuelta FROM Laudo WHERE Informe = '" + WInforme + "' AND Articulo = '" + WArticulo + "' AND (Liberada <> 0 OR Devuelta <> 0) ORDER BY Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -465,6 +465,26 @@ namespace Eval_Proveedores
         public static string FormatoNumerico(double wValor, int WCantDigitos = 2)
         {
             return FormatoNumerico(wValor.ToString(), WCantDigitos);
+        }
+
+        public static object _CalcularAtraso(string _FechaOrd, string _FechaOrd2)
+        {
+            int diferencia = 0;
+            
+            _FechaOrd = _FechaOrd == "" ? "00000000" : _FechaOrd;
+            _FechaOrd2 = _FechaOrd2 == "" ? "00000000" : _FechaOrd2;
+
+            int base1 = (int.Parse(_FechaOrd.Substring(0, 4)) * 365) + (int.Parse(_FechaOrd.Substring(4, 2)) * 30) + (int.Parse(_FechaOrd.Substring(6, 2)) * 1);
+            int base2 = (int.Parse(_FechaOrd2.Substring(0, 4)) * 365) + (int.Parse(_FechaOrd2.Substring(4, 2)) * 30) + (int.Parse(_FechaOrd2.Substring(6, 2)) * 1);
+
+            diferencia = base1 - base2;
+
+            if (diferencia < 0 || diferencia > 100)
+            {
+                diferencia = 0;
+            }
+
+            return diferencia;
         }
     }
 }

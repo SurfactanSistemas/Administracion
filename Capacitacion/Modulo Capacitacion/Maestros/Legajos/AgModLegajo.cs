@@ -63,7 +63,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             AModificar = true;
             CargarDatosABM();
             CargarDatosPefil();
-            CargarTemas(L.Temas);
+            //CargarTemas(L.Temas);
+            CargarTemas(Per.Temas);
             CargarDatosLegajoVer();
             CargarObservaciones();
 
@@ -203,7 +204,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                // Estado.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
                // Estado.HeaderText = "Estado";
                 //Estado. = 1;
-                row.Cells[4].Value = ObtenerValor(item.EstaCurso);
+                row.Cells[4].Value = _BuscarEstadoCurso(item.Codigo);
                     //ObtenerValor(item.EstaCurso);
                 //observacion
                 //row.Cells[5].Value = item.Observacion;
@@ -212,6 +213,42 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
                 DGV_Temas.Rows.Add(row);
             }
+        }
+
+        private string _BuscarEstadoCurso(int WCodigoCurso)
+        {
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT ISNULL(EstaCurso, 0) EstaCurso FROM Legajo WHERE Codigo = '" + TB_Codigo.Text + "' AND Curso = '" + WCodigoCurso + "' ";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+
+                                return ObtenerValor(int.Parse(dr["EstaCurso"].ToString()));
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+
+            return "";
         }
 
         private string ObtenerValor(int Esta)
@@ -314,7 +351,15 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void CargarDatosPefil()
         {
             BuscarCodperfil();
-            Per = Per.BuscarUno(TB_CodPerfil.Text);
+
+            if (_BuscarPerfilPorVersion())
+            {
+                Per = Per.BuscarUno(TB_CodPerfil.Text, TB_VersPer.Text);
+            }
+            else
+            {
+                Per = Per.BuscarUno(TB_CodPerfil.Text);
+            }
 
             if (Per.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
 
@@ -365,6 +410,64 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             TB_Equiv1.Text = Per.EquivalenciasI.Trim();
             TB_Equiv2.Text = Per.EquivalenciasII.Trim();
+        }
+
+        private bool _BuscarPerfilPorVersion()
+        {
+            bool WBuscarPorVersion = false;
+
+            try
+            {
+                int WVersionPerfilLegajo = 0;
+                int WVersionTarea = 0;
+
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT VersionDePerfil = CASE WHEN Fegreso IS NULL OR Fegreso IN ('00/00/0000', '  /  /    ') THEN '0' ELSE PerfilVersion END FROM Legajo WHERE Codigo = '" + TB_Codigo.Text + "' AND Renglon = '1'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+                                WVersionPerfilLegajo = int.Parse(dr["VersionDePerfil"].ToString());
+                            }
+                        }
+
+                        cmd.CommandText = "SELECT Version FROM Tarea WHERE Codigo = '" + TB_CodPerfil.Text + "' AND Renglon = '1'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+                                WVersionTarea = int.Parse(dr["Version"].ToString());
+                            }
+                        }
+
+                        TB_VersPer.Text = WVersionTarea.ToString();
+
+                        if (!(WVersionPerfilLegajo == 0 || WVersionTarea == 0 || WVersionTarea == WVersionPerfilLegajo))
+                        {
+                            TB_VersPer.Text = WVersionPerfilLegajo.ToString();
+                            WBuscarPorVersion = true;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+
+            return WBuscarPorVersion;
         }
 
         private void BT_Salir_Click(object sender, EventArgs e)

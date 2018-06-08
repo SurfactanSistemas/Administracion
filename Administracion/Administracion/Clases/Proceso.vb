@@ -400,19 +400,23 @@ Module Proceso
         Dim varTasa1(100) As Double
 
         varParametro(0) = 0
-        varParametro(1) = 2000
-        varParametro(2) = 4000
-        varParametro(3) = 8000
-        varParametro(4) = 14000
-        varParametro(5) = 24000
-        varParametro(6) = 1000000
+        varParametro(1) = 5000 '2000
+        varParametro(2) = 10000 '4000
+        varParametro(3) = 15000 '8000
+        varParametro(4) = 20000 '14000
+        varParametro(5) = 30000 '24000
+        varParametro(6) = 40000 '1000000
+        varParametro(7) = 60000 '1000000
+        varParametro(8) = 1000000
 
-        varTasa1(1) = 0.1
-        varTasa1(2) = 0.14
-        varTasa1(3) = 0.18
-        varTasa1(4) = 0.22
-        varTasa1(5) = 0.26
-        varTasa1(6) = 0.28
+        varTasa1(1) = 0.05 '0.1
+        varTasa1(2) = 0.09 '0.14
+        varTasa1(3) = 0.12 '0.18
+        varTasa1(4) = 0.15 '0.22
+        varTasa1(5) = 0.19 '0.26
+        varTasa1(6) = 0.23 '0.28
+        varTasa1(7) = 0.27 '0.28
+        varTasa1(8) = 0.31 '0.28
 
         varRetencion = 0
 
@@ -422,15 +426,15 @@ Module Proceso
 
             Select Case varTipoprv
                 Case 1
-                    varMinimo = 100000
+                    varMinimo = 142400 '100000
                 Case 2
-                    varMinimo = 7500
+                    varMinimo = 10700 '7500
                 Case 3
-                    varMinimo = 5000
+                    varMinimo = 7120 '5000
                 Case 6
-                    varMinimo = 30000
+                    varMinimo = 42700 '30000
                 Case 7
-                    varMinimo = 30000
+                    varMinimo = 42700 '30000
             End Select
 
             varAcumuladPago = varAcumulaNeto + varBase
@@ -458,7 +462,7 @@ Module Proceso
                     varTope = 0
                     varTope1 = 0
 
-                    For da = 0 To 5
+                    For da = 0 To 7
                         If varAuxi >= varParametro(da) And varAuxi < varParametro(da + 1) Then
                             varTope1 = varAuxi
                             varTope = varParametro(da)
@@ -482,7 +486,7 @@ Module Proceso
 
             varRetencion = varRetencion - varAcuRetenido
 
-            If varRetencion < 20 Then
+            If varRetencion < 150 Then
                 varRetencion = 0
             Else
                 If varRetencion > varAcumulaNeto Then

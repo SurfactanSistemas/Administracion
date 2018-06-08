@@ -4,7 +4,11 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows.Forms;
+using Eval_Proveedores.Listados;
+using Eval_Proveedores.Listados.EvaSemActProve;
+using Eval_Proveedores.Listados.InformePerformanceProveedores;
 using Logica_Negocio;
 
 namespace Eval_Proveedores.Novedades
@@ -16,9 +20,9 @@ namespace Eval_Proveedores.Novedades
         DataTable dtInformeMuestra = new DataTable();
         DataTable dtInformeDetalle = new DataTable();
         string[] _Empresas = { "SurfactanSA", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "Pelitall_II", "Pellital_III", "Pellital_V" };
-        Listados.EvaSemActProve.IniEvaSemActProve frm = new Listados.EvaSemActProve.IniEvaSemActProve();
+        IniEvaSemActProve frm = new IniEvaSemActProve();
         private int WTipoImpresion = 1;
-        bool WImprimiendo = false;
+        bool WImprimiendo;
 
         public ActSemProv()
         {
@@ -63,6 +67,7 @@ namespace Eval_Proveedores.Novedades
                     ZCertificadosOk = double.Parse(WProveedor["CertificadosOk"].ToString());
                     ZEnvasesOk = double.Parse(WProveedor["EnvasesOk"].ToString());
 
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["MarcaPerformance"].Value = "0";
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Proveedor"].Value = WProveedor["Proveedor"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Razon"].Value = WProveedor["Razon"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Movimientos"].Value = WProveedor["Movimientos"];
@@ -181,6 +186,9 @@ namespace Eval_Proveedores.Novedades
             ckTodos.Checked = true;
             WTipoImpresion = 1;
             WImprimiendo = false;
+
+            cmbTipoInforme.SelectedIndex = 0;
+
             CargarDtEvaluacion();
             CargardtInformeMuestra();
         }
@@ -555,7 +563,7 @@ namespace Eval_Proveedores.Novedades
 
                 frm.Close();
 
-                frm = new Listados.EvaSemActProve.IniEvaSemActProve();
+                frm = new IniEvaSemActProve();
 
                 timer1.Stop();
 
@@ -608,5 +616,658 @@ namespace Eval_Proveedores.Novedades
 
         }
 
+        private void btnCerrarPerformance_Click(object sender, EventArgs e)
+        {
+            pnlPerformance.Visible = false;
+        }
+
+        private void btnPerformance_Click(object sender, EventArgs e)
+        {
+            _ActualizarCantProvSeleccionados();
+            pnlPerformance.Location = Helper._CentrarH(Width, pnlPerformance);
+            pnlPerformance.Visible = true;
+        }
+
+        private void cmbTipoInforme_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _ActualizarCantProvSeleccionados();
+        }
+
+        private void _ActualizarCantProvSeleccionados()
+        {
+            int WCantidad = 0;
+
+            switch (cmbTipoInforme.SelectedIndex)
+            {
+                case 0: // Sólo seleccionados.
+                    {
+                        WCantidad =
+                            DGV_EvalSemProve.Rows.Cast<DataGridViewRow>()
+                                .Count(row => row.Cells["MarcaPerformance"].Value.ToString() == "1");
+                        break;
+                    }
+                case 1: // Todos dentro del Periodo.
+                    {
+                        WCantidad = DGV_EvalSemProve.Rows.Count;
+                        break;
+                    }
+                case 2: // Todos con Desvíos.
+                    {
+                        WCantidad =
+                            DGV_EvalSemProve.Rows.Cast<DataGridViewRow>()
+                                .Count(row => int.Parse(row.Cells["Desvios"].Value.ToString()) > 0);
+                        break;
+                    }
+                case 3: // Todos con Rechazos.
+                    {
+                        WCantidad =
+                            DGV_EvalSemProve.Rows.Cast<DataGridViewRow>()
+                                .Count(row => int.Parse(row.Cells["Rechazados"].Value.ToString()) > 0);
+                        break;
+                    }
+                case 4: // Todos con Desvios y/o Rechazos.
+                    {
+                        WCantidad =
+                            DGV_EvalSemProve.Rows.Cast<DataGridViewRow>()
+                                .Count(
+                                    row =>
+                                        (int.Parse(row.Cells["Rechazados"].Value.ToString()) > 0 ||
+                                         int.Parse(row.Cells["Desvios"].Value.ToString()) > 0));
+                        break;
+                    }
+            }
+
+            lblCantProv.Text = string.Format("Cant. Proveedores Seleccionados: {0}", WCantidad);
+        }
+
+        private void btnGenerarInformePerformance_Click(object sender, EventArgs e)
+        {
+            DataGridView WGrilla = DGV_EvalSemProve;
+
+            switch (cmbTipoInforme.SelectedIndex)
+            {
+                case 0: // Solo seleccionados.
+                    {
+                        _GenerarInformePorSeleccionados(WGrilla);
+
+                        break;
+                    }
+                case 1: // Todos.
+                    {
+                        _GenerarInformeParaTodos(WGrilla);
+
+                        break;
+                    }
+                case 2: // Con desvios.
+                    {
+                        _GenerarInformeParaTodosConDesvios(WGrilla);
+
+                        break;
+                    }
+                case 3: // Con rechazos
+                    {
+                        _GenerarInformeParaTodosConRechazos(WGrilla);
+
+                        break;
+                    }
+                case 4: // Con desvios.
+                    {
+                        _GenerarInformeParaTodosConRechazosYODesvios(WGrilla);
+                        break;
+                    }
+            }
+
+
+
+        }
+
+        private void _GenerarInformeParaTodosConRechazosYODesvios(DataGridView WGrilla)
+        {
+            foreach (DataGridViewRow row in WGrilla.Rows)
+            {
+
+                var WRechazados = row.Cells["Rechazados"].Value ?? "0";
+                var WDesvios = row.Cells["Desvios"].Value ?? "0";
+
+                if (int.Parse(WRechazados.ToString()) == 0 && int.Parse(WDesvios.ToString()) == 0) continue;
+
+                DataTable WTabla = (new Detalles()).Tables["Detalles"].Clone();
+                DataTable WTablaArticulos = (new Detalles()).Tables["Articulos"].Clone();
+                DataTable WArticulos = new DataTable();
+
+                // Extraemos los datos generales.
+                var WCodProv = row.Cells["Proveedor"].Value ?? "";
+                var WDesProv = row.Cells["Razon"].Value ?? "";
+                var WTotalItems = row.Cells["Movimientos"].Value ?? "0";
+                var WAprobados = row.Cells["Aprobados"].Value ?? "0";
+
+                var WDiasAtraso = row.Cells["Retrasos"].Value ?? "0";
+                var WCatCalidad = row.Cells["EvaCal"].Value ?? "";
+                var WCatEntrega = row.Cells["EvaEnt"].Value ?? "";
+                var WCertificadosOk = row.Cells["CertificadosOk"].Value ?? "0";
+                var WEnvasesOk = row.Cells["EnvasesOk"].Value ?? "0";
+                var WFechaCalificacion = row.Cells["Fechas"].Value ?? "";
+                var WPorceCartificados = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WCertificadosOk.ToString()));
+                var WPorceEnvases = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WEnvasesOk.ToString()));
+                var WPeriodo = TB_Desde.Text + " al " + TB_Hasta.Text;
+
+                WTabla.Rows.Clear();
+
+                if (int.Parse(WRechazados.ToString()) > 0 || int.Parse(WDesvios.ToString()) > 0)
+                {
+                    WArticulos = _TraerArticulosEntre(WCodProv, Helper.OrdenarFecha(TB_Desde.Text),
+                        Helper.OrdenarFecha(TB_Hasta.Text));
+                }
+
+                DataRow _r = WTabla.NewRow();
+
+                _r["CodProv"] = WCodProv;
+                _r["DesProv"] = WDesProv;
+                _r["Periodo"] = WPeriodo;
+                _r["CatCalidad"] = WCatCalidad;
+                _r["CatEntrega"] = WCatEntrega;
+                _r["TotalItems"] = WTotalItems;
+                _r["Aprobados"] = WAprobados;
+                _r["Desvios"] = WDesvios;
+                _r["Rechazados"] = WRechazados;
+                _r["DiasAtraso"] = WDiasAtraso;
+                _r["PorceCertificados"] = WPorceCartificados;
+                _r["PorceEnvases"] = WPorceEnvases;
+                _r["FechaCalificacion"] = WFechaCalificacion;
+                _r["Sectores"] = _DeterminarSectores();
+
+                WTabla.Rows.Add(_r);
+
+                if (WArticulos.Rows.Count > 0)
+                {
+                    foreach (DataRow WArticulo in WArticulos.Rows)
+                    {
+                        _r = WTablaArticulos.NewRow();
+
+                        _r["Laudo"] = WArticulo["Laudo"];
+                        _r["Proveedor"] = WCodProv;
+                        _r["FechaArticulo"] = WArticulo["Fecha"];
+                        _r["CodArticulo"] = WArticulo["Articulo"];
+                        _r["DesArticulo"] = WArticulo["DesArticulo"];
+                        _r["Cantidad"] = Helper.FormatoNumerico(WArticulo["Cantidad"].ToString());
+                        _r["TipoLaudo"] = !Helper._EsDevio(int.Parse(WArticulo["Laudo"].ToString())) &&
+                                          WArticulo["Tipo"].ToString() == "Desvio"
+                            ? ""
+                            : WArticulo["Tipo"];
+
+                        WTablaArticulos.Rows.Add(_r);
+                    }
+                }
+
+                VistaPrevia vistaPrevia = new VistaPrevia();
+
+                Reporte rpt = new Reporte();
+
+                DataSet ds = new DataSet();
+                ds.Tables.Add(WTabla);
+                ds.Tables.Add(WTablaArticulos);
+
+                rpt.SetDataSource(ds);
+
+                vistaPrevia.CargarReporte(rpt);
+
+                vistaPrevia.Show();
+            }
+        }
+
+        private void _GenerarInformeParaTodosConRechazos(DataGridView WGrilla)
+        {
+            foreach (DataGridViewRow row in WGrilla.Rows)
+            {
+
+                var WRechazados = row.Cells["Rechazados"].Value ?? "0";
+
+                if (int.Parse(WRechazados.ToString()) == 0) continue;
+
+                DataTable WTabla = (new Detalles()).Tables["Detalles"].Clone();
+                DataTable WTablaArticulos = (new Detalles()).Tables["Articulos"].Clone();
+                DataTable WArticulos = new DataTable();
+
+                // Extraemos los datos generales.
+                var WCodProv = row.Cells["Proveedor"].Value ?? "";
+                var WDesProv = row.Cells["Razon"].Value ?? "";
+                var WTotalItems = row.Cells["Movimientos"].Value ?? "0";
+                var WAprobados = row.Cells["Aprobados"].Value ?? "0";
+                var WDesvios = row.Cells["Desvios"].Value ?? "0";
+
+                var WDiasAtraso = row.Cells["Retrasos"].Value ?? "0";
+                var WCatCalidad = row.Cells["EvaCal"].Value ?? "";
+                var WCatEntrega = row.Cells["EvaEnt"].Value ?? "";
+                var WCertificadosOk = row.Cells["CertificadosOk"].Value ?? "0";
+                var WEnvasesOk = row.Cells["EnvasesOk"].Value ?? "0";
+                var WFechaCalificacion = row.Cells["Fechas"].Value ?? "";
+                var WPorceCartificados = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WCertificadosOk.ToString()));
+                var WPorceEnvases = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WEnvasesOk.ToString()));
+                var WPeriodo = TB_Desde.Text + " al " + TB_Hasta.Text;
+
+                WTabla.Rows.Clear();
+
+                if (int.Parse(WRechazados.ToString()) > 0 || int.Parse(WDesvios.ToString()) > 0)
+                {
+                    WArticulos = _TraerArticulosEntre(WCodProv, Helper.OrdenarFecha(TB_Desde.Text),
+                        Helper.OrdenarFecha(TB_Hasta.Text));
+                }
+
+                var _r = WTabla.NewRow();
+
+                _r["CodProv"] = WCodProv;
+                _r["DesProv"] = WDesProv;
+                _r["Periodo"] = WPeriodo;
+                _r["CatCalidad"] = WCatCalidad;
+                _r["CatEntrega"] = WCatEntrega;
+                _r["TotalItems"] = WTotalItems;
+                _r["Aprobados"] = WAprobados;
+                _r["Desvios"] = WDesvios;
+                _r["Rechazados"] = WRechazados;
+                _r["DiasAtraso"] = WDiasAtraso;
+                _r["PorceCertificados"] = WPorceCartificados;
+                _r["PorceEnvases"] = WPorceEnvases;
+                _r["FechaCalificacion"] = WFechaCalificacion;
+                _r["Sectores"] = _DeterminarSectores();
+
+                WTabla.Rows.Add(_r);
+
+                if (WArticulos.Rows.Count > 0)
+                {
+                    foreach (DataRow WArticulo in WArticulos.Rows)
+                    {
+                        _r = WTablaArticulos.NewRow();
+
+                        _r["Laudo"] = WArticulo["Laudo"];
+                        _r["Proveedor"] = WCodProv;
+                        _r["FechaArticulo"] = WArticulo["Fecha"];
+                        _r["CodArticulo"] = WArticulo["Articulo"];
+                        _r["DesArticulo"] = WArticulo["DesArticulo"];
+                        _r["Cantidad"] = Helper.FormatoNumerico(WArticulo["Cantidad"].ToString());
+                        _r["TipoLaudo"] = !Helper._EsDevio(int.Parse(WArticulo["Laudo"].ToString())) &&
+                                          WArticulo["Tipo"].ToString() == "Desvio"
+                            ? ""
+                            : WArticulo["Tipo"];
+
+                        WTablaArticulos.Rows.Add(_r);
+                    }
+                }
+
+                VistaPrevia vistaPrevia = new VistaPrevia();
+
+                Reporte rpt = new Reporte();
+
+                DataSet ds = new DataSet();
+                ds.Tables.Add(WTabla);
+                ds.Tables.Add(WTablaArticulos);
+
+                rpt.SetDataSource(ds);
+
+                vistaPrevia.CargarReporte(rpt);
+
+                vistaPrevia.Show();
+            }
+        }
+
+        private void _GenerarInformeParaTodosConDesvios(DataGridView WGrilla)
+        {
+            foreach (DataGridViewRow row in WGrilla.Rows)
+            {
+                var WDesvios = row.Cells["Desvios"].Value ?? "0";
+
+                if (int.Parse(WDesvios.ToString()) == 0) continue;
+
+                DataTable WTabla = (new Detalles()).Tables["Detalles"].Clone();
+                DataTable WTablaArticulos = (new Detalles()).Tables["Articulos"].Clone();
+                DataTable WArticulos = new DataTable();
+
+                // Extraemos los datos generales.
+                var WCodProv = row.Cells["Proveedor"].Value ?? "";
+                var WDesProv = row.Cells["Razon"].Value ?? "";
+                var WTotalItems = row.Cells["Movimientos"].Value ?? "0";
+                var WAprobados = row.Cells["Aprobados"].Value ?? "0";
+
+                var WRechazados = row.Cells["Rechazados"].Value ?? "0";
+                var WDiasAtraso = row.Cells["Retrasos"].Value ?? "0";
+                var WCatCalidad = row.Cells["EvaCal"].Value ?? "";
+                var WCatEntrega = row.Cells["EvaEnt"].Value ?? "";
+                var WCertificadosOk = row.Cells["CertificadosOk"].Value ?? "0";
+                var WEnvasesOk = row.Cells["EnvasesOk"].Value ?? "0";
+                var WFechaCalificacion = row.Cells["Fechas"].Value ?? "";
+                var WPorceCartificados = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WCertificadosOk.ToString()));
+                var WPorceEnvases = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WEnvasesOk.ToString()));
+                var WPeriodo = TB_Desde.Text + " al " + TB_Hasta.Text;
+
+                WTabla.Rows.Clear();
+
+                if (int.Parse(WRechazados.ToString()) > 0 || int.Parse(WDesvios.ToString()) > 0)
+                {
+                    WArticulos = _TraerArticulosEntre(WCodProv, Helper.OrdenarFecha(TB_Desde.Text),
+                        Helper.OrdenarFecha(TB_Hasta.Text));
+                }
+
+                var _r = WTabla.NewRow();
+
+                _r["CodProv"] = WCodProv;
+                _r["DesProv"] = WDesProv;
+                _r["Periodo"] = WPeriodo;
+                _r["CatCalidad"] = WCatCalidad;
+                _r["CatEntrega"] = WCatEntrega;
+                _r["TotalItems"] = WTotalItems;
+                _r["Aprobados"] = WAprobados;
+                _r["Desvios"] = WDesvios;
+                _r["Rechazados"] = WRechazados;
+                _r["DiasAtraso"] = WDiasAtraso;
+                _r["PorceCertificados"] = WPorceCartificados;
+                _r["PorceEnvases"] = WPorceEnvases;
+                _r["FechaCalificacion"] = WFechaCalificacion;
+                _r["Sectores"] = _DeterminarSectores();
+
+                WTabla.Rows.Add(_r);
+
+                if (WArticulos.Rows.Count > 0)
+                {
+                    foreach (DataRow WArticulo in WArticulos.Rows)
+                    {
+                        _r = WTablaArticulos.NewRow();
+
+                        _r["Laudo"] = WArticulo["Laudo"];
+                        _r["Proveedor"] = WCodProv;
+                        _r["FechaArticulo"] = WArticulo["Fecha"];
+                        _r["CodArticulo"] = WArticulo["Articulo"];
+                        _r["DesArticulo"] = WArticulo["DesArticulo"];
+                        _r["Cantidad"] = Helper.FormatoNumerico(WArticulo["Cantidad"].ToString());
+                        _r["TipoLaudo"] = !Helper._EsDevio(int.Parse(WArticulo["Laudo"].ToString())) &&
+                                          WArticulo["Tipo"].ToString() == "Desvio"
+                            ? ""
+                            : WArticulo["Tipo"];
+
+                        WTablaArticulos.Rows.Add(_r);
+                    }
+                }
+
+                VistaPrevia vistaPrevia = new VistaPrevia();
+
+                Reporte rpt = new Reporte();
+
+                DataSet ds = new DataSet();
+                ds.Tables.Add(WTabla);
+                ds.Tables.Add(WTablaArticulos);
+
+                rpt.SetDataSource(ds);
+
+                vistaPrevia.CargarReporte(rpt);
+
+                vistaPrevia.Show();
+            }
+        }
+
+        private void _GenerarInformeParaTodos(DataGridView WGrilla)
+        {
+            foreach (DataGridViewRow row in WGrilla.Rows)
+            {
+                DataTable WTabla = (new Detalles()).Tables["Detalles"].Clone();
+                DataTable WTablaArticulos = (new Detalles()).Tables["Articulos"].Clone();
+                DataTable WArticulos = new DataTable();
+
+                // Extraemos los datos generales.
+                var WCodProv = row.Cells["Proveedor"].Value ?? "";
+                var WDesProv = row.Cells["Razon"].Value ?? "";
+                var WTotalItems = row.Cells["Movimientos"].Value ?? "0";
+                var WAprobados = row.Cells["Aprobados"].Value ?? "0";
+                var WDesvios = row.Cells["Desvios"].Value ?? "0";
+                var WRechazados = row.Cells["Rechazados"].Value ?? "0";
+                var WDiasAtraso = row.Cells["Retrasos"].Value ?? "0";
+                var WCatCalidad = row.Cells["EvaCal"].Value ?? "";
+                var WCatEntrega = row.Cells["EvaEnt"].Value ?? "";
+                var WCertificadosOk = row.Cells["CertificadosOk"].Value ?? "0";
+                var WEnvasesOk = row.Cells["EnvasesOk"].Value ?? "0";
+                var WFechaCalificacion = row.Cells["Fechas"].Value ?? "";
+                var WPorceCartificados = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WCertificadosOk.ToString()));
+                var WPorceEnvases = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WEnvasesOk.ToString()));
+                var WPeriodo = TB_Desde.Text + " al " + TB_Hasta.Text;
+
+                WTabla.Rows.Clear();
+
+                if (int.Parse(WRechazados.ToString()) > 0 || int.Parse(WDesvios.ToString()) > 0)
+                {
+                    WArticulos = _TraerArticulosEntre(WCodProv, Helper.OrdenarFecha(TB_Desde.Text),
+                        Helper.OrdenarFecha(TB_Hasta.Text));
+                }
+
+                var _r = WTabla.NewRow();
+
+                _r["CodProv"] = WCodProv;
+                _r["DesProv"] = WDesProv;
+                _r["Periodo"] = WPeriodo;
+                _r["CatCalidad"] = WCatCalidad;
+                _r["CatEntrega"] = WCatEntrega;
+                _r["TotalItems"] = WTotalItems;
+                _r["Aprobados"] = WAprobados;
+                _r["Desvios"] = WDesvios;
+                _r["Rechazados"] = WRechazados;
+                _r["DiasAtraso"] = WDiasAtraso;
+                _r["PorceCertificados"] = WPorceCartificados;
+                _r["PorceEnvases"] = WPorceEnvases;
+                _r["FechaCalificacion"] = WFechaCalificacion;
+                _r["Sectores"] = _DeterminarSectores();
+
+                WTabla.Rows.Add(_r);
+
+                if (WArticulos.Rows.Count > 0)
+                {
+                    foreach (DataRow WArticulo in WArticulos.Rows)
+                    {
+                        _r = WTablaArticulos.NewRow();
+
+                        _r["Laudo"] = WArticulo["Laudo"];
+                        _r["Proveedor"] = WCodProv;
+                        _r["FechaArticulo"] = WArticulo["Fecha"];
+                        _r["CodArticulo"] = WArticulo["Articulo"];
+                        _r["DesArticulo"] = WArticulo["DesArticulo"];
+                        _r["Cantidad"] = Helper.FormatoNumerico(WArticulo["Cantidad"].ToString());
+                        _r["TipoLaudo"] = !Helper._EsDevio(int.Parse(WArticulo["Laudo"].ToString())) &&
+                                          WArticulo["Tipo"].ToString() == "Desvio"
+                            ? ""
+                            : WArticulo["Tipo"];
+
+                        WTablaArticulos.Rows.Add(_r);
+                    }
+                }
+
+                VistaPrevia vistaPrevia = new VistaPrevia();
+
+                Reporte rpt = new Reporte();
+
+                DataSet ds = new DataSet();
+                ds.Tables.Add(WTabla);
+                ds.Tables.Add(WTablaArticulos);
+
+                rpt.SetDataSource(ds);
+
+                vistaPrevia.CargarReporte(rpt);
+
+                vistaPrevia.Show();
+            }
+
+        }
+
+        private void _GenerarInformePorSeleccionados(DataGridView WGrilla)
+        {
+            foreach (DataGridViewRow row in WGrilla.Rows)
+            {
+                var WMarcado = row.Cells["MarcaPerformance"].Value ?? "";
+
+                if (WMarcado.ToString() != "1") continue;
+
+                DataTable WTabla = (new Detalles()).Tables["Detalles"].Clone();
+                DataTable WTablaArticulos = (new Detalles()).Tables["Articulos"].Clone();
+                DataTable WArticulos = new DataTable();
+
+                // Extraemos los datos generales.
+                var WCodProv = row.Cells["Proveedor"].Value ?? "";
+                var WDesProv = row.Cells["Razon"].Value ?? "";
+                var WTotalItems = row.Cells["Movimientos"].Value ?? "0";
+                var WAprobados = row.Cells["Aprobados"].Value ?? "0";
+                var WDesvios = row.Cells["Desvios"].Value ?? "0";
+                var WRechazados = row.Cells["Rechazados"].Value ?? "0";
+                var WDiasAtraso = row.Cells["Retrasos"].Value ?? "0";
+                var WCatCalidad = row.Cells["EvaCal"].Value ?? "";
+                var WCatEntrega = row.Cells["EvaEnt"].Value ?? "";
+                var WCertificadosOk = row.Cells["CertificadosOk"].Value ?? "0";
+                var WEnvasesOk = row.Cells["EnvasesOk"].Value ?? "0";
+                var WFechaCalificacion = row.Cells["Fechas"].Value ?? "";
+                var WPorceCartificados = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WCertificadosOk.ToString()));
+                var WPorceEnvases = Helper._DeterminarPorcentajeRelacion(double.Parse(WTotalItems.ToString()),
+                    double.Parse(WEnvasesOk.ToString()));
+                var WPeriodo = TB_Desde.Text + " al " + TB_Hasta.Text;
+                var WSectores = _DeterminarSectores();
+
+                WTabla.Rows.Clear();
+
+                if (int.Parse(WRechazados.ToString()) > 0 || int.Parse(WDesvios.ToString()) > 0)
+                {
+                    WArticulos = _TraerArticulosEntre(WCodProv, Helper.OrdenarFecha(TB_Desde.Text),
+                        Helper.OrdenarFecha(TB_Hasta.Text));
+                }
+
+                var _r = WTabla.NewRow();
+
+                _r["CodProv"] = WCodProv;
+                _r["DesProv"] = WDesProv;
+                _r["Periodo"] = WPeriodo;
+                _r["CatCalidad"] = WCatCalidad;
+                _r["CatEntrega"] = WCatEntrega;
+                _r["TotalItems"] = WTotalItems;
+                _r["Aprobados"] = WAprobados;
+                _r["Desvios"] = WDesvios;
+                _r["Rechazados"] = WRechazados;
+                _r["DiasAtraso"] = WDiasAtraso;
+                _r["PorceCertificados"] = WPorceCartificados;
+                _r["PorceEnvases"] = WPorceEnvases;
+                _r["FechaCalificacion"] = WFechaCalificacion;
+                _r["Sectores"] = WSectores;
+
+                WTabla.Rows.Add(_r);
+
+                if (WArticulos.Rows.Count > 0)
+                {
+                    foreach (DataRow WArticulo in WArticulos.Rows)
+                    {
+                        _r = WTablaArticulos.NewRow();
+
+                        _r["Laudo"] = WArticulo["Laudo"];
+                        _r["Proveedor"] = WCodProv;
+                        _r["FechaArticulo"] = WArticulo["Fecha"];
+                        _r["CodArticulo"] = WArticulo["Articulo"];
+                        _r["DesArticulo"] = WArticulo["DesArticulo"];
+                        _r["Cantidad"] = Helper.FormatoNumerico(WArticulo["Cantidad"].ToString());
+                        _r["TipoLaudo"] = !Helper._EsDevio(int.Parse(WArticulo["Laudo"].ToString())) &&
+                                          WArticulo["Tipo"].ToString() == "Desvio"
+                            ? ""
+                            : WArticulo["Tipo"];
+
+                        WTablaArticulos.Rows.Add(_r);
+                    }
+                }
+
+                VistaPrevia vistaPrevia = new VistaPrevia();
+
+                Reporte rpt = new Reporte();
+
+                DataSet ds = new DataSet();
+                ds.Tables.Add(WTabla);
+                ds.Tables.Add(WTablaArticulos);
+
+                rpt.SetDataSource(ds);
+
+                vistaPrevia.CargarReporte(rpt);
+
+                vistaPrevia.Show();
+            }
+        }
+
+        private string _DeterminarSectores()
+        {
+            CheckBox[] _Emp = new[] { ckPlantaI, ckPlantaII, ckPlantaIII, ckPlantaIV, ckPlantaV, ckPlantaVI, ckPlantaVII };
+
+            string WSectores = _Emp.Any(ck => ck.Checked) ? "Surfactan " : "";
+
+            if (_Emp.Count(ck => ck.Checked) != _Emp.Count())
+            {
+                if (WSectores.Trim() != "") WSectores += ": Planta(s) ";
+
+                foreach (CheckBox ck in _Emp.Where(ck => ck.Checked))
+                {
+                    WSectores += ck.Text.Replace("Planta ", "") + ", ";
+                }
+            }
+
+            WSectores = WSectores.TrimEnd(' ', ',');
+
+            if (ckPellital.Checked)
+            {
+                if (WSectores != "") WSectores += ", ";
+
+                WSectores += "Pellital";
+            }
+
+            WSectores = WSectores.TrimEnd(' ', ',');
+
+            int i = WSectores.LastIndexOf(',');
+
+            if (i > -1) WSectores = WSectores.Substring(0, i) + " y " + WSectores.Substring(i + 1, WSectores.Length - i - 1);
+
+            return WSectores;
+        }
+
+        private DataTable _TraerArticulosEntre(object wCodProv, string WDesdeOrd, string WHastaOrd)
+        {
+
+            try
+            {
+                DataTable tabla = new DataTable();
+
+                foreach (string WEmpresa in EmpresasAConsultar())
+                {
+                    using (SqlConnection conn = new SqlConnection())
+                    {
+                        conn.ConnectionString = ConfigurationManager.ConnectionStrings[WEmpresa].ConnectionString;
+                        conn.Open();
+
+                        using (SqlCommand cmd = new SqlCommand())
+                        {
+                            cmd.Connection = conn;
+                            cmd.CommandText = "SELECT i.Fecha, l.Laudo, l.Articulo, i.NombreComercial as DesArticulo, Cantidad = l.Liberada + l.Devuelta, Tipo = CASE WHEN l.Liberada= 0 AND l.Devuelta = 0 THEN '' WHEN l.Liberada > 0 THEN 'Desvio' ELSE 'Rechazo' END FROM Laudo l INNER JOIN Informe i ON l.Informe = i.Informe AND l.Articulo = i.Articulo WHERE i.Fechaord BETWEEN '" + WDesdeOrd + "' AND '" + WHastaOrd + "' AND i.Proveedor = '" + wCodProv + "' ORDER BY i.Fechaord DESC";
+
+                            using (SqlDataReader dr = cmd.ExecuteReader())
+                            {
+                                if (dr.HasRows)
+                                {
+                                    tabla.Load(dr);
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+
+        }
     }
 }

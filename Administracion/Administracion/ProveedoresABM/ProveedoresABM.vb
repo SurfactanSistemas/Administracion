@@ -670,7 +670,8 @@ Public Class ProveedoresABM
         If opcion <> "" Then
 
             If LCase(opcion) = "proveedor" Then
-                _ListarConsulta("Nombre", "Proveedor")
+                LBConsulta_Opciones.SelectedIndex = 0
+                _ListarConsulta("Proveedor, Nombre", "Proveedor")
             ElseIf LCase(opcion) = "cuenta" Then
                 _ListarConsulta("Descripcion", "Cuenta")
             End If
@@ -730,7 +731,7 @@ Public Class ProveedoresABM
 
         Select Case LBConsulta_Opciones.SelectedIndex
             Case 0
-                _ListarConsulta("Nombre", "Proveedor")
+                _ListarConsulta("Proveedor, Nombre", "Proveedor")
             Case 1
                 _ListarConsulta("Descripcion", "Cuenta")
             Case 2
@@ -826,7 +827,7 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub _TraerProveedor(ByVal nombre As String)
-        Dim proveedor As List(Of Proveedor) = DAOProveedor.buscarProveedorPorNombre(Trim(nombre))
+        Dim proveedor As List(Of Proveedor) = DAOProveedor.buscarProveedorPorNombre(Trim(nombre.Substring(11, nombre.Length - 11)))
 
         If Not IsNothing(proveedor) AndAlso proveedor.Count > 0 Then
 
@@ -857,7 +858,12 @@ Public Class ProveedoresABM
 
                 Do While dr.Read()
 
-                    LBConsulta.Items.Add(dr.Item(0))
+                    If LBConsulta_Opciones.SelectedIndex = 0 then
+                        LBConsulta.Items.Add(dr.Item(0) & "    " & dr.Item(1))
+                    Else
+                        LBConsulta.Items.Add(dr.Item(0))
+                    End If
+                    
 
                 Loop
 

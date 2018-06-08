@@ -171,7 +171,7 @@ Public Class DAORecibo
                                     .Replace("#SucursalCheque#", "") _
                                     .Replace("#ChequeCheque#", "") _
                                     .Replace("#CuentaCheque#", "") _
-                                    .Replace("#Cuit#", "") & ","
+                                    .Replace("#Cuit#", .Cells("NroCuit").Value) & ","
                     End If
 
                     SQL &= temp

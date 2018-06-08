@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -553,11 +554,17 @@ namespace Vista
 
                     DataRow datacliente1 = CS.BuscarCliente(cliente);
 
+                    string WPedido = DGV_Muestra.SelectedRows[0].Cells["Pedido"].Value.ToString();
+
+                    string WDirEntrega = _TraerDireccionEntregaPorPedido(WPedido, _CodCliente);
+
+                    if (WDirEntrega.Trim() == "") throw new Exception("No se encuentra dirección de Entrega de Cliente");
+
                     string CodClient1 = datacliente1[0].ToString();
                     string DirClient1 = datacliente1[1].ToString();
                     string LocalidadClient1 = datacliente1[2].ToString();
                     string Cuit1 = datacliente1[3].ToString();
-                    string DirEntrega1 = datacliente1[4].ToString();
+                    string DirEntrega1 = WDirEntrega; //datacliente1[4].ToString();
                     ImpreRemito impre_1 = new ImpreRemito(_dt, DirEntrega1, CodClient1, DirClient1, LocalidadClient1, Cuit1, cliente, HojasDeSeguridad);
                     impre_1.ShowDialog();
                     goto finalizado;
@@ -642,11 +649,17 @@ namespace Vista
                 //cargo el nombre cliente
                 DataRow datacliente = CS.BuscarCliente(cliente);
 
+                string _Pedido = DGV_Muestra.SelectedRows[0].Cells["Pedido"].Value.ToString();
+
+                string _DirEntrega = _TraerDireccionEntregaPorPedido(_Pedido, _CodCliente);
+
+                if (_DirEntrega.Trim() == "") throw new Exception("No se encuentra dirección de Entrega de Cliente");
+
                 string CodClient = datacliente[0].ToString();
                 string DirClient = datacliente[1].ToString();
                 string LocalidadClient = datacliente[2].ToString();
                 string Cuit = datacliente[3].ToString();
-                string DirEntrega = datacliente[4].ToString();
+                string DirEntrega = _DirEntrega; //datacliente[4].ToString();
 
                 string datos = numero_remito + ";" + cliente;
                 AgregarColumnasRemito(_dt);
@@ -686,6 +699,42 @@ namespace Vista
             }
         finalizado: ;
            
+        }
+
+        private string _TraerDireccionEntregaPorPedido(string wPedido, string codCliente)
+        {
+            string WDireccion = "";
+            
+            try
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT Direccion = CASE m.DirEntrega WHEN 1 THEN ISNULL(c.DirEntrega, '') WHEN 2 THEN ISNULL(c.DirEntregaII, '') WHEN 3 THEN ISNULL(c.DirEntregaIII, '') WHEN 4 THEN ISNULL(c.DirEntregaIV, '') WHEN 5 THEN ISNULL(c.DirEntregaV, '') ELSE '' END FROM Muestra m INNER JOIN Cliente c ON m.Cliente = c.Cliente WHERE m.Pedido = '" + wPedido + "' and m.Cliente = '" + codCliente + "'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+                                WDireccion = dr["Direccion"].ToString();
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+
+            return WDireccion.Trim();
         }
 
         private void AgregarColumnasRemito(DataTable _dt)

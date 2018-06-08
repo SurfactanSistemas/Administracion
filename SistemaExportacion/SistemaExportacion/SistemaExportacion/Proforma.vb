@@ -10,7 +10,7 @@ Public Class Proforma
     Private WRow, Wcol As Integer
 
     ' Constantes
-    Private Const PRODUCTOS_MAX = 6
+    Private Const PRODUCTOS_MAX = 8
     Private Const SEPARADOR_CONSULTA = "____"
 
     ' Control de Idiomas

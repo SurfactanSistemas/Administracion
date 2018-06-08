@@ -57,4 +57,8 @@ Public Class MenuPrincipal
         End With
 
     End Sub
+
+    Private Sub MenuPrincipal_FormClosed( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+        Login.Dispose()
+    End Sub
 End Class

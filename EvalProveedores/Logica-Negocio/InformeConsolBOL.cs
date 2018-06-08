@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -15,6 +16,11 @@ namespace Logica_Negocio
         public System.Data.DataTable Lista()
         {
             return _InformeDAL.Lista();
+        }
+
+        public DataTable Lista(string WDesde, string WHasta)
+        {
+            return _InformeDAL.Lista(WDesde, WHasta);
         }
     }
 }

@@ -248,6 +248,23 @@
       <DependentUpon>ReportEvaServ.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\InformePerformanceProveedores\Detalles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\InformePerformanceProveedores\Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\InformePerformanceProveedores\ReporteArticulos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteArticulos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\ListaEvaTransp\DSEvaluaTransp.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -541,6 +558,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportEvaServ.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformePerformanceProveedores\Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformePerformanceProveedores\ReporteArticulos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteArticulos.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListaEvaTransp\ImpreEvaTransp.resx">
       <DependentUpon>ImpreEvaTransp.cs</DependentUpon>
     </EmbeddedResource>
@@ -741,6 +766,17 @@
     </None>
     <None Include="Listados\EvaServicio\DSEvaServ.xss">
       <DependentUpon>DSEvaServ.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\InformePerformanceProveedores\Detalles.xsc">
+      <DependentUpon>Detalles.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\InformePerformanceProveedores\Detalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Detalles.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\InformePerformanceProveedores\Detalles.xss">
+      <DependentUpon>Detalles.xsd</DependentUpon>
     </None>
     <None Include="Listados\ListaEvaTransp\DSEvaluaTransp.xsc">
       <DependentUpon>DSEvaluaTransp.xsd</DependentUpon>

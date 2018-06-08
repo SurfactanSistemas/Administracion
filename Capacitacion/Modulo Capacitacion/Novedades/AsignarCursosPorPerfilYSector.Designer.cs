@@ -81,6 +81,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.cmbAuxi = new System.Windows.Forms.ComboBox();
+            this.ckSoloSugeridos = new System.Windows.Forms.CheckBox();
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,6 +92,7 @@
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescTema = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Realizar = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,7 +124,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(997, 39);
+            this.panel1.Size = new System.Drawing.Size(1370, 39);
             this.panel1.TabIndex = 7;
             // 
             // LBPerfil
@@ -144,7 +146,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Margin = new System.Windows.Forms.Padding(30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(997, 550);
+            this.panel2.Size = new System.Drawing.Size(1370, 550);
             this.panel2.TabIndex = 8;
             // 
             // panel3
@@ -155,7 +157,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(30);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(997, 550);
+            this.panel3.Size = new System.Drawing.Size(1370, 550);
             this.panel3.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -172,7 +174,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(997, 550);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1370, 550);
             this.tableLayoutPanel1.TabIndex = 28;
             // 
             // panel4
@@ -184,7 +186,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 484);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(991, 63);
+            this.panel4.Size = new System.Drawing.Size(1364, 63);
             this.panel4.TabIndex = 0;
             // 
             // BT_Guardar
@@ -194,7 +196,7 @@
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(352, 11);
+            this.BT_Guardar.Location = new System.Drawing.Point(539, 11);
             this.BT_Guardar.Name = "BT_Guardar";
             this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
             this.BT_Guardar.TabIndex = 27;
@@ -208,7 +210,7 @@
             this.BT_Limpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Limpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Limpiar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Limpiar.Location = new System.Drawing.Point(475, 11);
+            this.BT_Limpiar.Location = new System.Drawing.Point(662, 11);
             this.BT_Limpiar.Name = "BT_Limpiar";
             this.BT_Limpiar.Size = new System.Drawing.Size(40, 40);
             this.BT_Limpiar.TabIndex = 27;
@@ -222,7 +224,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(598, 11);
+            this.BT_Salir.Location = new System.Drawing.Point(785, 11);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 27;
@@ -236,7 +238,7 @@
             this.btnAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAyuda.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnAyuda.Location = new System.Drawing.Point(843, 11);
+            this.btnAyuda.Location = new System.Drawing.Point(1030, 11);
             this.btnAyuda.Name = "btnAyuda";
             this.btnAyuda.Size = new System.Drawing.Size(40, 40);
             this.btnAyuda.TabIndex = 27;
@@ -251,11 +253,12 @@
             this.panel5.Location = new System.Drawing.Point(10, 3);
             this.panel5.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(977, 88);
+            this.panel5.Size = new System.Drawing.Size(1350, 88);
             this.panel5.TabIndex = 1;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ckSoloSugeridos);
             this.groupBox1.Controls.Add(this.txtAno);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnBuscar);
@@ -266,7 +269,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(977, 88);
+            this.groupBox1.Size = new System.Drawing.Size(1350, 88);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -408,6 +411,7 @@
             this.Nombre,
             this.Curso,
             this.DescCurso,
+            this.Calificacion,
             this.Tema,
             this.DescTema,
             this.Realizar,
@@ -423,7 +427,7 @@
             this.dgvGrilla.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.dgvGrilla.RowHeadersWidth = 15;
             this.dgvGrilla.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvGrilla.Size = new System.Drawing.Size(977, 381);
+            this.dgvGrilla.Size = new System.Drawing.Size(1350, 381);
             this.dgvGrilla.TabIndex = 2;
             this.dgvGrilla.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGrilla_CellMouseClick_1);
             this.dgvGrilla.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGrilla_ColumnHeaderMouseClick);
@@ -608,6 +612,18 @@
             this.cmbAuxi.SelectedIndexChanged += new System.EventHandler(this.cmbAuxi_SelectedIndexChanged);
             this.cmbAuxi.DropDownClosed += new System.EventHandler(this.cmbAuxi_DropDownClosed);
             // 
+            // ckSoloSugeridos
+            // 
+            this.ckSoloSugeridos.AutoSize = true;
+            this.ckSoloSugeridos.Checked = true;
+            this.ckSoloSugeridos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckSoloSugeridos.Location = new System.Drawing.Point(932, 40);
+            this.ckSoloSugeridos.Name = "ckSoloSugeridos";
+            this.ckSoloSugeridos.Size = new System.Drawing.Size(131, 17);
+            this.ckSoloSugeridos.TabIndex = 34;
+            this.ckSoloSugeridos.Text = "Mostrar sólo sugeridos";
+            this.ckSoloSugeridos.UseVisualStyleBackColor = true;
+            // 
             // Clave
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
@@ -669,11 +685,12 @@
             // 
             // Nombre
             // 
-            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Nombre.HeaderText = "Nombre";
+            this.Nombre.MinimumWidth = 150;
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Nombre.Width = 150;
             // 
             // Curso
             // 
@@ -688,10 +705,19 @@
             // DescCurso
             // 
             this.DescCurso.HeaderText = "Descripcion";
+            this.DescCurso.MinimumWidth = 350;
             this.DescCurso.Name = "DescCurso";
             this.DescCurso.ReadOnly = true;
             this.DescCurso.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.DescCurso.Width = 200;
+            this.DescCurso.Width = 350;
+            // 
+            // Calificacion
+            // 
+            this.Calificacion.HeaderText = "Calificación";
+            this.Calificacion.MinimumWidth = 70;
+            this.Calificacion.Name = "Calificacion";
+            this.Calificacion.ReadOnly = true;
+            this.Calificacion.Width = 70;
             // 
             // Tema
             // 
@@ -708,10 +734,11 @@
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.DescTema.DefaultCellStyle = dataGridViewCellStyle7;
             this.DescTema.HeaderText = "Descripcion";
+            this.DescTema.MinimumWidth = 350;
             this.DescTema.Name = "DescTema";
             this.DescTema.ReadOnly = true;
             this.DescTema.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.DescTema.Width = 200;
+            this.DescTema.Width = 350;
             // 
             // Realizar
             // 
@@ -719,6 +746,7 @@
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Realizar.DefaultCellStyle = dataGridViewCellStyle8;
             this.Realizar.HeaderText = "   ¿Se Realiza?";
+            this.Realizar.MinimumWidth = 55;
             this.Realizar.Name = "Realizar";
             this.Realizar.ReadOnly = true;
             this.Realizar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -729,10 +757,11 @@
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.Horas.DefaultCellStyle = dataGridViewCellStyle9;
             this.Horas.HeaderText = "Cant. Horas";
+            this.Horas.MinimumWidth = 40;
             this.Horas.Name = "Horas";
             this.Horas.ReadOnly = true;
             this.Horas.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Horas.Width = 70;
+            this.Horas.Width = 40;
             // 
             // Realizado
             // 
@@ -755,7 +784,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 589);
+            this.ClientSize = new System.Drawing.Size(1370, 589);
             this.Controls.Add(this.cmbAuxi);
             this.Controls.Add(this.pnlProgreso);
             this.Controls.Add(this.pnlAyuda);
@@ -833,6 +862,7 @@
         private System.Windows.Forms.ToolStripMenuItem asignarModificarCursoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitarCursoAsignadoToolStripMenuItem;
         private System.Windows.Forms.RadioButton rbTema;
+        private System.Windows.Forms.CheckBox ckSoloSugeridos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sector;
@@ -843,6 +873,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescCurso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescTema;
         private System.Windows.Forms.DataGridViewTextBoxColumn Realizar;

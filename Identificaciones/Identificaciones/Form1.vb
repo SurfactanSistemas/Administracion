@@ -372,26 +372,28 @@ Public Class Form1
         ' Validamos que:
 
         ' Se tengan datos minimos.
-        If {txtNroDocumento, txtApellido, txtNombres, txtProveedor}.Any(Function(txt) Trim(txt.Text) = "") Then
+        If {txtNroDocumento, txtApellido, txtNombres}.Any(Function(txt) Trim(txt.Text) = "") Then
             Return False
         End If
 
-        ' Se tengan las fechas dónde es válida la credencial.
-        If {txtHastaFecha}.Any(Function(txt) txt.Text.estaVacia) Then
-            Return False
-        End If
+        '' Se tengan las fechas dónde es válida la credencial.
+        'If {txtHastaFecha}.Any(Function(txt) txt.Text.estaVacia) Then
+        '    Return False
+        'End If
 
-        If Not Helper._ValidarFecha(txtHastaFecha.Text) Then
-            MsgBox("Las fechas deben ser Fechas válidas.", MsgBoxStyle.Exclamation)
-            Return False
-        End If
+        'If Not Helper._ValidarFecha(txtHastaFecha.Text) Then
+        '    MsgBox("Las fechas deben ser Fechas válidas.", MsgBoxStyle.Exclamation)
+        '    Return False
+        'End If
 
         ' El documento sea de long válida.
         If Len(txtNroDocumento.Text) < 8 Then Return False
 
         Try
             ' El proveedor exista.
-            If Not _ExisteProveedor() Then Return False
+            If txtProveedor.Text.Trim() <> "" then
+                If Not _ExisteProveedor() Then Return False
+            End if
         Catch ex As Exception
             MsgBox(ex.Message)
             Return False
@@ -754,9 +756,9 @@ Public Class Form1
 
         If txtHastaFecha.Text.estaVacia Then
 
-            MsgBox("No hay fechas de validez cargada. La impresión se dentrá hasta que haya un periodo válido.", MsgBoxStyle.Exclamation)
+            'MsgBox("No hay fechas de validez cargada. La impresión se dentrá hasta que haya un periodo válido.", MsgBoxStyle.Exclamation)
 
-            Return False
+            Return true
 
         End If
 
