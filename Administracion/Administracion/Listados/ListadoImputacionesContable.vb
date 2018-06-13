@@ -591,10 +591,10 @@ Public Class ListadoImputacionesContable
                     txtRenglonII = 0
                 End If
 
+                varProvincia = CampoRecibos.provincia
 
                 Select Case Val(CampoRecibos.tiporeg)
                     Case 1
-                        varProvincia = CampoRecibos.provincia
 
                         If CampoRecibos.tiporec = "3" Then
                             txtCuenta = CampoRecibos.cuenta

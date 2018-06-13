@@ -29,6 +29,7 @@ Partial Class MenuPrincipal
         Me.IngresoDeBancosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeRubrosDeProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnvioEnEMailAProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnvioEnEMailAClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeNovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsultaDeRemitosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -92,7 +93,6 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.lblCargando = New Administracion.CustomLabel()
-        Me.EnvioEnEMailAClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -142,6 +142,12 @@ Partial Class MenuPrincipal
         Me.EnvioEnEMailAProveedoresToolStripMenuItem.Name = "EnvioEnEMailAProveedoresToolStripMenuItem"
         Me.EnvioEnEMailAProveedoresToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
         Me.EnvioEnEMailAProveedoresToolStripMenuItem.Text = "Envio en E-Mail a Proveedores"
+        '
+        'EnvioEnEMailAClientesToolStripMenuItem
+        '
+        Me.EnvioEnEMailAClientesToolStripMenuItem.Name = "EnvioEnEMailAClientesToolStripMenuItem"
+        Me.EnvioEnEMailAClientesToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
+        Me.EnvioEnEMailAClientesToolStripMenuItem.Text = "Envio en E-Mail a Clientes"
         '
         'NovedadesToolStripMenuItem
         '
@@ -550,12 +556,6 @@ Partial Class MenuPrincipal
         Me.lblCargando.TabIndex = 2
         Me.lblCargando.Text = "CARGANDO, POR FAVOR ESPERE..."
         Me.lblCargando.Visible = False
-        '
-        'EnvioEnEMailAClientesToolStripMenuItem
-        '
-        Me.EnvioEnEMailAClientesToolStripMenuItem.Name = "EnvioEnEMailAClientesToolStripMenuItem"
-        Me.EnvioEnEMailAClientesToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
-        Me.EnvioEnEMailAClientesToolStripMenuItem.Text = "Envio en E-Mail a Clientes"
         '
         'MenuPrincipal
         '
