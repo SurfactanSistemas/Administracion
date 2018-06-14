@@ -43,14 +43,14 @@ namespace ClassConexion
 
             //Modfico Razon por Cliente
             string str = "select M.Codigo as 'Id', M.Pedido, M.Fecha,";
-            str += "Case When M.Ensayo <> '' Then M.Ensayo When M.Producto <> '' Then M.Producto When M.Articulo <> '' Then M.Articulo End as 'Codigo',";
-            str += "M.Nombre, M.Cantidad, M.DescriCliente, M.Razon , M.Cliente, M.Observaciones, M.Fecha2 , M.Remito, M.HojaRuta,";
-            str += "Case When M.Ensayo2 <> '' Then M.Ensayo2 When M.Producto2 <> '' Then M.Producto2 When M.Articulo2 <> '' Then M.Articulo2 End as 'CodigoConf',";
-            str += "M.Nombre2, M.Lote2, M.Observaciones2, M.Cantidad2, ";
-            str += "Case When M.Stock2 = '1' Then 'S' Else null End as 'ActualizarStock', M.OrdenTrabajo, M.DesVendedor as 'NombreVend', (select distinct Lote1 from pedido p where p.pedido = m.pedido and (P.Terminado = M.Producto or P.Articulo = M.Articulo)) Lote1 ";
-            str += "from Muestra M ";
-            str += "where M.OrdFecha between '" + des_año + "' and '" + hasta_año + "' ";
-            str += "order by M.Pedido desc ";
+            str += " Case When M.Ensayo <> '' Then M.Ensayo When M.Producto <> '' Then M.Producto When M.Articulo <> '' Then M.Articulo End as 'Codigo',";
+            str += " M.Nombre, M.Cantidad, M.DescriCliente, M.Razon , M.Cliente, M.Observaciones, M.Fecha2 , M.Remito, M.HojaRuta,";
+            str += " Case When M.Ensayo2 <> '' Then M.Ensayo2 When M.Producto2 <> '' Then M.Producto2 When M.Articulo2 <> '' Then M.Articulo2 End as 'CodigoConf',";
+            str += " M.Nombre2, M.Lote2, M.Observaciones2, M.Cantidad2, ";
+            str += " Case When M.Stock2 = '1' Then 'S' Else null End as 'ActualizarStock', M.OrdenTrabajo, M.DesVendedor as 'NombreVend', (select distinct Lote1 from pedido p where p.pedido = m.pedido and (P.Terminado = M.Producto or P.Articulo = M.Articulo)) Lote1";
+            str += " from Muestra M ";
+            str += " where M.OrdFecha between '" + des_año + "' and '" + hasta_año + "' ";
+            str += " order by M.Pedido desc ";
 
             adapter.SelectCommand = new SqlCommand(str, conexion);
 
@@ -174,6 +174,30 @@ namespace ClassConexion
             SqlCommand cmd = new SqlCommand {CommandType = CommandType.Text};
 
             string str = "select DescriCliente from Muestra where Articulo = '" + cod + "' and Pedido = '" + pedido + "'";
+
+            cmd.CommandText = str;
+
+            AbrirConexion();
+
+            cmd.Connection = conexion;
+
+            string value = Convert.ToString(cmd.ExecuteScalar());
+
+            CerrarConexion();
+
+            return value;
+        }
+
+        /*
+         * 1 -> Surfactan I
+         * 3 -> Surfactan VII
+         * 4 -> Surfactan V
+         */
+        public string TraerRemitoMax(int WEmpresaRemito)
+        {
+            SqlCommand cmd = new SqlCommand { CommandType = CommandType.Text };
+
+            string str = "select max(Remito) + 1 as Remito from Muestra";
 
             cmd.CommandText = str;
 

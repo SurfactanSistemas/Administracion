@@ -124,6 +124,17 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Detalles" msprop:Generator_TableClassName="DetallesDataTable" msprop:Generator_TableVarName="tableDetalles" msprop:Generator_RowChangedName="DetallesRowChanged" msprop:Generator_TablePropName="Detalles" msprop:Generator_RowDeletingName="DetallesRowDeleting" msprop:Generator_RowChangingName="DetallesRowChanging" msprop:Generator_RowEvHandlerName="DetallesRowChangeEventHandler" msprop:Generator_RowDeletedName="DetallesRowDeleted" msprop:Generator_RowClassName="DetallesRow" msprop:Generator_UserTableName="Detalles" msprop:Generator_RowEvArgName="DetallesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Pedido" msprop:Generator_ColumnVarNameInTable="columnPedido" msprop:Generator_ColumnPropNameInRow="Pedido" msprop:Generator_ColumnPropNameInTable="PedidoColumn" msprop:Generator_UserColumnName="Pedido" type="xs:string" minOccurs="0" />
+              <xs:element name="Cai" msprop:Generator_ColumnVarNameInTable="columnCai" msprop:Generator_ColumnPropNameInRow="Cai" msprop:Generator_ColumnPropNameInTable="CaiColumn" msprop:Generator_UserColumnName="Cai" type="xs:string" minOccurs="0" />
+              <xs:element name="FechaCai" msprop:Generator_ColumnVarNameInTable="columnFechaCai" msprop:Generator_ColumnPropNameInRow="FechaCai" msprop:Generator_ColumnPropNameInTable="FechaCaiColumn" msprop:Generator_UserColumnName="FechaCai" type="xs:string" minOccurs="0" />
+              <xs:element name="NroRemito" msprop:Generator_ColumnVarNameInTable="columnNroRemito" msprop:Generator_ColumnPropNameInRow="NroRemito" msprop:Generator_ColumnPropNameInTable="NroRemitoColumn" msprop:Generator_UserColumnName="NroRemito" type="xs:string" minOccurs="0" />
+              <xs:element name="Punto" msprop:Generator_ColumnVarNameInTable="columnPunto" msprop:Generator_ColumnPropNameInRow="Punto" msprop:Generator_ColumnPropNameInTable="PuntoColumn" msprop:Generator_UserColumnName="Punto" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

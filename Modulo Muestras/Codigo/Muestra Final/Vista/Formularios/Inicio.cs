@@ -548,7 +548,7 @@ namespace Vista
                     HojasDeSeguridad[i, 1] = DGV_Muestra.SelectedRows[i].Cells["Codigo"].Value.ToString().Trim();
                 }
 
-                if (numero_remito != "")
+                if (numero_remito != "" && numero_remito != "0")
                 {
                     _dt = CS.BuscarListaRemito(numero_remito, _CodCliente);
 
@@ -565,7 +565,9 @@ namespace Vista
                     string LocalidadClient1 = datacliente1[2].ToString();
                     string Cuit1 = datacliente1[3].ToString();
                     string DirEntrega1 = WDirEntrega; //datacliente1[4].ToString();
-                    ImpreRemito impre_1 = new ImpreRemito(_dt, DirEntrega1, CodClient1, DirClient1, LocalidadClient1, Cuit1, cliente, HojasDeSeguridad);
+                    string[] WDatosRemito = _BuscarDatosRemito(WPedido, numero_remito);
+
+                    ImpreRemito impre_1 = new ImpreRemito(_dt, DirEntrega1, CodClient1, DirClient1, LocalidadClient1, Cuit1, cliente, HojasDeSeguridad, WDatosRemito);
                     impre_1.ShowDialog();
                     goto finalizado;
                     //goto Error;
@@ -699,6 +701,84 @@ namespace Vista
             }
         finalizado: ;
            
+        }
+
+        private string[] _BuscarDatosRemito(string WPedido, string WRemito)
+        {
+            string[] WDatos = new string[5];
+            int WEmpresaRemito = -1;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT ISNULL(TipoPedido, '') TipoPedido FROM Pedido WHERE Pedido = '" + WPedido + "' AND Renglon = '1'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+
+                                string WTipoPedido = dr["TipoPedido"].ToString().Trim();
+
+                                if (WTipoPedido == "") return new string[5];
+
+                                switch (WTipoPedido)
+                                {
+                                    case "1":
+                                    case "5":
+                                        {
+                                            WEmpresaRemito = 1;
+                                            break;
+                                        }
+                                    case "4":
+                                        {
+                                            WEmpresaRemito = 3;
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            WEmpresaRemito = 4;
+                                            break;
+                                        }
+                                }
+                            }
+
+                        }
+
+                        cmd.CommandText = "SELECT * FROM NumeroRemito WHERE Punto = '" + WEmpresaRemito + "' AND Desde <= '" + WRemito + "' AND Hasta >= '" + WRemito + "'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+
+                                WDatos[0] = WPedido;
+                                WDatos[1] = dr["Cai"].ToString();
+                                WDatos[2] = dr["Fecha"].ToString();
+                                WDatos[3] = WRemito.PadLeft(8, '0');
+                                WDatos[4] = dr["Punto"].ToString().PadLeft(4, '0');
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+
+            return WDatos;
+
         }
 
         private string _TraerDireccionEntregaPorPedido(string wPedido, string codCliente)

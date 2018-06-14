@@ -57,6 +57,7 @@
             this.Controls.Add(this.CRVRemito);
             this.Name = "ImpreRemito";
             this.Text = "ImpreRemito";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ImpreRemito_Load);
             this.ResumeLayout(false);
 

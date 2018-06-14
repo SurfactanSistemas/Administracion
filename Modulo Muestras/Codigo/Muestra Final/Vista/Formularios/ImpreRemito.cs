@@ -21,6 +21,7 @@ namespace Vista
         private string LocalidadClient;
         private string Cuit;
         private string cliente;
+        private string[] WDatosRemitos;
 
         private string[,] HojasDeSeguridad;
         private const string ORIGEN_HOJA_SEGURIDAD = "W:\\impresion pdf\\fds\\fds#NOMBREPDF#.pdf";
@@ -28,7 +29,7 @@ namespace Vista
 
 
 
-        public ImpreRemito(DataTable DT, string DirEnt, string CodClient, string DirClient, string LocalidadClient, string Cuit, string cliente, string[,] FDSs)
+        public ImpreRemito(DataTable DT, string DirEnt, string CodClient, string DirClient, string LocalidadClient, string Cuit, string cliente, string[,] FDSs, string[] wDatosRemito)
         {
             // TODO: Complete member initialization
             InitializeComponent();
@@ -40,9 +41,10 @@ namespace Vista
             this.Cuit = Cuit;
             this.cliente = cliente;
             this.HojasDeSeguridad = FDSs;
+            this.WDatosRemitos = wDatosRemito;
         }
 
-        public ImpreRemito(DataTable DT, string DirEnt, string CodClient, string DirClient, string LocalidadClient, string Cuit, string cliente)
+        public ImpreRemito(DataTable DT, string DirEnt, string CodClient, string DirClient, string LocalidadClient, string Cuit, string cliente, string[] wDatosRemito)
         {
             // TODO: Complete member initialization
             InitializeComponent();
@@ -53,12 +55,13 @@ namespace Vista
             this.LocalidadClient = LocalidadClient;
             this.Cuit = Cuit;
             this.cliente = cliente;
+            this.WDatosRemitos = wDatosRemito;
         }
 
         private void ImpreRemito_Load(object sender, EventArgs e)
         {
             DSRemito1 Ds = new DSRemito1();
-            Ds.Tables[0].Rows.Add
+            Ds.Tables["DataTable1"].Rows.Add
                 (new object[]
                 {
                     cliente,
@@ -74,16 +77,27 @@ namespace Vista
             for (int i = 0; i < DT.Rows.Count; i++)
             {
                 DataRow dr = DT.Rows[i];
-                Ds.Tables[i+1].Rows.Add
+                Ds.Tables["DataTable" + (i+2).ToString().Trim()].Rows.Add
                     (new object[]
                     {
                         dr[0].ToString(),
-                        dr[1].ToString() + "KG Netos",
+                        dr[1].ToString().Trim(),
                         dr["Peligroso"].ToString(),
                         dr["PeligrosoII"].ToString(),
                     }
                     );
             }
+
+            Ds.Tables["Detalles"].Rows.Add
+                    (new object[]
+                    {
+                        this.WDatosRemitos[0],
+                        this.WDatosRemitos[1],
+                        this.WDatosRemitos[2],
+                        this.WDatosRemitos[3],
+                        this.WDatosRemitos[4],
+                    }
+                    );
 
             if (this.HojasDeSeguridad != null)
             {
@@ -102,7 +116,7 @@ namespace Vista
             }
 
             CRVRemito.Visible = true;
-            ImpRemito RImp = new ImpRemito();
+            ImpRemito2 RImp = new ImpRemito2();
             RImp.SetDataSource(Ds);
             CRVRemito.ReportSource = RImp;
             

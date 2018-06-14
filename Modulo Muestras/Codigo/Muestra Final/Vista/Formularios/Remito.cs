@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -29,6 +31,11 @@ namespace Vista
         private string Cuit;
         private string cliente;
 
+        // Variables para Número de Remito por Estación de Trabajo.
+        private int WEmpresaRemito = -1;
+        private int WCodigoRemito = -1;
+        private string[] WDatosRemito = new string[5];
+
         //  Ultimo nro de mov de laboratorio
         private string MovLabNumero;
         private string MovlabRenglon;
@@ -43,7 +50,6 @@ namespace Vista
         public Remito(string datos, DataTable dt, List<string> erroresLote, List<string> sinEnsayo, string DirEntrega, string CodClient, string DirClient, string LocalidadClient, string Cuit, string cliente, string[,] FDSs)
         {
             InitializeComponent();
-            AsignarDatos(datos);
 
             //reimprimir
             this.datos = datos;
@@ -56,6 +62,10 @@ namespace Vista
             this.cliente = cliente;
             this.HojasDeSeguridad = FDSs;
 
+            // Determinamos la Empresa en la Cual Trabajaremos.
+            _DeterminarEmpresaRemito(dt);
+
+            AsignarDatos(datos);
 
             DGV_Remito.DataSource = dt;
 
@@ -78,21 +88,219 @@ namespace Vista
 
         }
 
-        private void AsignarDatos(string datos)
-        {            
-            string[] datos_separados = datos.Split(';');
+        private void _DeterminarEmpresaRemito(DataTable dt)
+        {
+            WEmpresaRemito = -1;
 
-            TBCliente.Text = datos_separados[1];
-            if (datos_separados[0] == "") TBNumRemito.Text = Cs.TraerRemitoMax();
-            else {
-                TBNumRemito.Text = datos_separados[0];
-                reimprimir = true;
+            string WPedido = "";
+
+            if (dt.Rows.Count > 0)
+            {
+                WPedido = dt.Rows[0]["Pedido"].ToString();
+                WPedido = WPedido.Trim();
             }
-            TBFecha.Text = DateTime.Now.ToString("dd/MM/yyyy"); //DateTime.Now.ToShortDateString();
 
-            
+            if (WPedido == "") return;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT ISNULL(TipoPedido, '') TipoPedido FROM Pedido WHERE Pedido = '" + WPedido + "' AND Renglon = '1'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+
+                                string WTipoPedido = dr["TipoPedido"].ToString().Trim();
+
+                                if (WTipoPedido == "") return;
+
+                                switch (WTipoPedido)
+                                {
+                                    case "1":
+                                    case "5":
+                                    {
+                                        WEmpresaRemito = 1;
+                                        break;
+                                    }
+                                    case "4":
+                                    {
+                                        WEmpresaRemito = 3;
+                                        break;
+                                    }
+                                    default:
+                                    {
+                                        WEmpresaRemito = 4;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar el numero próximo de Remito en la Base de Datos. Motivo: " + ex.Message);
+            }
         }
-        
+
+        private string _TraerTipoProducto(string WPedido, string WProducto)
+        {
+            string WTipoProd = "";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT ISNULL(TipoPro, '') TipoPro FROM Pedido WHERE Terminado = '" + WProducto.Trim() + "' AND Pedido = '" + WPedido.Trim() + "'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+
+                                WTipoProd = dr["TipoPro"].ToString();
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+
+            return WTipoProd;
+        }
+
+        private void AsignarDatos(string _datos)
+        {
+            try
+            {
+                string[] datos_separados = _datos.Split(';');
+
+                TBCliente.Text = datos_separados[1];
+                if (datos_separados[0] == "" || datos_separados[0] == "0")
+                {
+                    int WProximoNumero = _TraerProximoNumeroRemitoPorEstacionDeTrabajo();
+
+                    if (WProximoNumero < 0) throw new Exception("No existe numeración de Remito disponible para la Empresa Involucrada.");
+
+                    TBNumRemito.Text = WProximoNumero.ToString();
+                }
+                else {
+                    TBNumRemito.Text = datos_separados[0];
+                    reimprimir = true;
+                }
+
+                TBFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /*
+         * 1 -> Surfactan I
+         * 3 -> Surfactan VII
+         * 4 -> Surfactan V
+         */
+        private int _TraerProximoNumeroRemitoPorEstacionDeTrabajo()
+        {
+            int WProximoNumero = -1;
+            int WCandidato = -1;
+            WCodigoRemito = -1;
+
+            try
+            {
+                if (WEmpresaRemito == -1) throw new Exception("No se determinó la empresa a la cual corresponde el remito.");
+
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT * FROM NumeroRemito WHERE Ultimo <> Hasta AND Punto = '" + WEmpresaRemito + "' ORDER BY Codigo";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                while (dr.Read() && WProximoNumero < 0)
+                                {
+                                    WCandidato = int.Parse(dr["Ultimo"].ToString());
+
+                                    // Vemos si es Cero -> Le damos el Valor de 'Desde'.
+
+                                    if (WCandidato == 0)
+                                    {
+                                        WCandidato = -1;
+                                        WCandidato += int.Parse(dr["Desde"].ToString());
+                                    }
+
+                                    // Incrementamos en Uno.
+
+                                    WCandidato++;
+
+                                    // Vemos si se encuentra entre los valores 'Desde' y 'Hasta'.
+
+                                    if (WCandidato < int.Parse(dr["Desde"].ToString()) ||
+                                        WCandidato > int.Parse(dr["Hasta"].ToString()) || WCandidato < 0 )
+                                    {
+                                        // Invalidamos el Candidato.
+                                        WCandidato = -1;
+
+                                        // Buscamos en el Siguiente Registro.
+                                        continue;
+                                    }
+
+                                    // En caso de que este correcto, salimos. Sino buscamos en el siguiente registro.
+                                    WProximoNumero = WCandidato;
+                                    WCodigoRemito = int.Parse(dr["Codigo"].ToString());
+
+                                    WDatosRemito[0] = dt.Rows[0]["Pedido"].ToString();
+                                    WDatosRemito[1] = dr["Cai"].ToString();
+                                    WDatosRemito[2] = dr["Fecha"].ToString();
+                                    WDatosRemito[3] = WProximoNumero.ToString();
+                                    WDatosRemito[4] = dr["Punto"].ToString();
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al traer el Próximo número de remito desde la Base de Datos. Motivo: " + ex.Message);
+            }
+
+            return WProximoNumero;
+        }
+
         private void BTCancelar_Click(object sender, EventArgs e)
         {
             Close();
@@ -105,7 +313,7 @@ namespace Vista
             // Verificamos que el numero de remito no haya sido cargado con anterioridad.
             
             if (Cs.RemitoExistente(TBNumRemito.Text.Trim())) {
-                MessageBox.Show("El Número de remito ya fue utilizado con anterioridad y no puede volver a utilizarse.", "",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("El Número de remito ya fue utilizado con anterioridad y no puede volver a utilizarse. Por favor, avise a Sistemas para que actualice la numeración de los Remitos.", "",MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TBNumRemito.Focus();
                 return;
             }
@@ -115,11 +323,12 @@ namespace Vista
                 if (TBNumRemito.Text == "") throw new Exception("Se debe ingresar el numero de remito");
                 if (reimprimir)
                 {
-                    ImpreRemito impre = new ImpreRemito(dt, DirEntrega, CodClient, DirClient, LocalidadClient, Cuit, cliente, HojasDeSeguridad);
+                    ImpreRemito impre = new ImpreRemito(dt, DirEntrega, CodClient, DirClient, LocalidadClient, Cuit, cliente, HojasDeSeguridad, WDatosRemito);
                     impre.ShowDialog();
                 }
                 else
                 {
+                    if (WEmpresaRemito < 0 || WCodigoRemito < 0) throw new Exception("No se encuentra bien definido las referencias a la numeraciónn del Remito o el Puesto de Trabajo correspondiente.");
 
                     for (int i = 0; i < DGV_Remito.Rows.Count; i++)
                     {
@@ -231,7 +440,7 @@ namespace Vista
                     }
                 }
 
-                ImpreRemito impre_1 = new ImpreRemito(dt, DirEntrega, CodClient, DirClient, LocalidadClient, Cuit, cliente);
+                ImpreRemito impre_1 = new ImpreRemito(dt, DirEntrega, CodClient, DirClient, LocalidadClient, Cuit, cliente, WDatosRemito);
                 impre_1.ShowDialog();
 
                 // Verifico que se haya cargado algun articulo para comenzar a imprimir.
@@ -242,11 +451,37 @@ namespace Vista
 
                 }
 
+                _ActualizarUltimaNumeracionRemito();
+
                 Close();
             }
             catch (Exception err)
             {
                 MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void _ActualizarUltimaNumeracionRemito()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "UPDATE NumeroRemito SET Ultimo = "+ TBNumRemito.Text +" WHERE Codigo = '" + WCodigoRemito + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la numeración del último remito utilizado en la Base de Datos. Avise a SISTEMAS para que sea actualizado de manera manual antes de continuar. Motivo: " + ex.Message);
             }
         }
 

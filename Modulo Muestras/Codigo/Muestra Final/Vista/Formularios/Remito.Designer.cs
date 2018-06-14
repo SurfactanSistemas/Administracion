@@ -228,6 +228,7 @@
             // 
             // TBNumRemito
             // 
+            this.TBNumRemito.Enabled = false;
             this.TBNumRemito.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBNumRemito.Location = new System.Drawing.Point(251, 18);
             this.TBNumRemito.Name = "TBNumRemito";
