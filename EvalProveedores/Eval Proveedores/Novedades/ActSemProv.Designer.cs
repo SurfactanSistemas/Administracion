@@ -84,17 +84,6 @@
             this.CB_TipoEva = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.DGV_EvalSemProve = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblTipoListado = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MarcaPerformance = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -113,6 +102,17 @@
             this.EvaCal = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.EvaEnt = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Fechas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblTipoListado = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -653,98 +653,6 @@
             this.DGV_EvalSemProve.TabIndex = 9;
             this.DGV_EvalSemProve.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellDoubleClick);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copiarToolStripMenuItem,
-            this.copiarConCabecerasToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 48);
-            // 
-            // copiarToolStripMenuItem
-            // 
-            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
-            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.copiarToolStripMenuItem.Text = "Copiar";
-            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
-            // 
-            // copiarConCabecerasToolStripMenuItem
-            // 
-            this.copiarConCabecerasToolStripMenuItem.Name = "copiarConCabecerasToolStripMenuItem";
-            this.copiarConCabecerasToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.copiarConCabecerasToolStripMenuItem.Text = "Copiar con Cabeceras";
-            this.copiarConCabecerasToolStripMenuItem.Click += new System.EventHandler(this.copiarConCabecerasToolStripMenuItem_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(360, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 48);
-            this.button1.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.button1, "Buscar");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // TB_Hasta
-            // 
-            this.TB_Hasta.Location = new System.Drawing.Point(238, 24);
-            this.TB_Hasta.Mask = "00/00/0000";
-            this.TB_Hasta.Name = "TB_Hasta";
-            this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
-            this.TB_Hasta.TabIndex = 6;
-            this.TB_Hasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_Hasta.ValidatingType = typeof(System.DateTime);
-            this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(186, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 18);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Hasta:";
-            // 
-            // TB_Desde
-            // 
-            this.TB_Desde.Location = new System.Drawing.Point(71, 23);
-            this.TB_Desde.Mask = "00/00/0000";
-            this.TB_Desde.Name = "TB_Desde";
-            this.TB_Desde.Size = new System.Drawing.Size(100, 20);
-            this.TB_Desde.TabIndex = 4;
-            this.TB_Desde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_Desde.ValidatingType = typeof(System.DateTime);
-            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(13, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 18);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Desde:";
-            // 
-            // lblTipoListado
-            // 
-            this.lblTipoListado.Font = new System.Drawing.Font("Calibri", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoListado.Location = new System.Drawing.Point(206, 98);
-            this.lblTipoListado.Name = "lblTipoListado";
-            this.lblTipoListado.Size = new System.Drawing.Size(302, 18);
-            this.lblTipoListado.TabIndex = 83;
-            this.lblTipoListado.Text = "LISTADO DE PROVEEDORES";
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Proveedor
             // 
             this.Proveedor.DataPropertyName = "CodProve";
@@ -923,6 +831,98 @@
             this.Fechas.Name = "Fechas";
             this.Fechas.ReadOnly = true;
             this.Fechas.Width = 80;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copiarToolStripMenuItem,
+            this.copiarConCabecerasToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 48);
+            // 
+            // copiarToolStripMenuItem
+            // 
+            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.copiarToolStripMenuItem.Text = "Copiar";
+            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
+            // 
+            // copiarConCabecerasToolStripMenuItem
+            // 
+            this.copiarConCabecerasToolStripMenuItem.Name = "copiarConCabecerasToolStripMenuItem";
+            this.copiarConCabecerasToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.copiarConCabecerasToolStripMenuItem.Text = "Copiar con Cabeceras";
+            this.copiarConCabecerasToolStripMenuItem.Click += new System.EventHandler(this.copiarConCabecerasToolStripMenuItem_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(360, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(46, 48);
+            this.button1.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.button1, "Buscar");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // TB_Hasta
+            // 
+            this.TB_Hasta.Location = new System.Drawing.Point(238, 24);
+            this.TB_Hasta.Mask = "00/00/0000";
+            this.TB_Hasta.Name = "TB_Hasta";
+            this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
+            this.TB_Hasta.TabIndex = 6;
+            this.TB_Hasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Hasta.ValidatingType = typeof(System.DateTime);
+            this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(186, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 18);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Hasta:";
+            // 
+            // TB_Desde
+            // 
+            this.TB_Desde.Location = new System.Drawing.Point(71, 23);
+            this.TB_Desde.Mask = "00/00/0000";
+            this.TB_Desde.Name = "TB_Desde";
+            this.TB_Desde.Size = new System.Drawing.Size(100, 20);
+            this.TB_Desde.TabIndex = 4;
+            this.TB_Desde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Desde.ValidatingType = typeof(System.DateTime);
+            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(13, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 18);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Desde:";
+            // 
+            // lblTipoListado
+            // 
+            this.lblTipoListado.Font = new System.Drawing.Font("Calibri", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoListado.Location = new System.Drawing.Point(206, 98);
+            this.lblTipoListado.Name = "lblTipoListado";
+            this.lblTipoListado.Size = new System.Drawing.Size(302, 18);
+            this.lblTipoListado.TabIndex = 83;
+            this.lblTipoListado.Text = "LISTADO DE PROVEEDORES";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ActSemProv
             // 

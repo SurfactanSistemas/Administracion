@@ -29,6 +29,7 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtCarpeta = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.SuspendLayout()
         '
         'btnGenerar
@@ -88,6 +89,10 @@ Partial Class Form1
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Carpeta"
         '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "xls"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -114,5 +119,6 @@ Partial Class Form1
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtCarpeta As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
 
 End Class
