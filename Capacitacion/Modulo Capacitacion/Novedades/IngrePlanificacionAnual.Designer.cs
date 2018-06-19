@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -45,12 +49,6 @@
             this.BT_AgregarCurso = new System.Windows.Forms.Button();
             this.lblAtencion = new System.Windows.Forms.Label();
             this.DGV_Crono = new System.Windows.Forms.DataGridView();
-            this.NombProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescPer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PromedioTot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TB_Buscar = new System.Windows.Forms.Button();
             this.BT_LimpiarPant = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
@@ -62,6 +60,12 @@
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
+            this.NombProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescPer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PromedioTot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -138,7 +142,7 @@
             // 
             // panel11
             // 
-            this.panel11.Location = new System.Drawing.Point(161, 23);
+            this.panel11.Location = new System.Drawing.Point(143, 19);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(19, 29);
             this.panel11.TabIndex = 136;
@@ -162,16 +166,17 @@
             // 
             // TB_CodTemas
             // 
+            this.TB_CodTemas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodTemas.FormattingEnabled = true;
             this.TB_CodTemas.Location = new System.Drawing.Point(104, 25);
             this.TB_CodTemas.Name = "TB_CodTemas";
-            this.TB_CodTemas.Size = new System.Drawing.Size(76, 21);
+            this.TB_CodTemas.Size = new System.Drawing.Size(37, 21);
             this.TB_CodTemas.TabIndex = 135;
             // 
             // CB_Curso
             // 
             this.CB_Curso.FormattingEnabled = true;
-            this.CB_Curso.Location = new System.Drawing.Point(217, 69);
+            this.CB_Curso.Location = new System.Drawing.Point(168, 72);
             this.CB_Curso.Name = "CB_Curso";
             this.CB_Curso.Size = new System.Drawing.Size(326, 21);
             this.CB_Curso.TabIndex = 141;
@@ -180,9 +185,9 @@
             // TB_DescTemas
             // 
             this.TB_DescTemas.FormattingEnabled = true;
-            this.TB_DescTemas.Location = new System.Drawing.Point(217, 25);
+            this.TB_DescTemas.Location = new System.Drawing.Point(168, 25);
             this.TB_DescTemas.Name = "TB_DescTemas";
-            this.TB_DescTemas.Size = new System.Drawing.Size(326, 21);
+            this.TB_DescTemas.Size = new System.Drawing.Size(375, 21);
             this.TB_DescTemas.TabIndex = 137;
             this.TB_DescTemas.SelectedIndexChanged += new System.EventHandler(this.TB_DescTemas_SelectedIndexChanged);
             // 
@@ -190,7 +195,7 @@
             // 
             this.LB_Curso.AutoSize = true;
             this.LB_Curso.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Curso.Location = new System.Drawing.Point(156, 73);
+            this.LB_Curso.Location = new System.Drawing.Point(94, 73);
             this.LB_Curso.Name = "LB_Curso";
             this.LB_Curso.Size = new System.Drawing.Size(47, 18);
             this.LB_Curso.TabIndex = 140;
@@ -231,7 +236,7 @@
             this.DGV_Crono.AllowUserToAddRows = false;
             this.DGV_Crono.AllowUserToDeleteRows = false;
             this.DGV_Crono.AllowUserToResizeRows = false;
-            this.DGV_Crono.ColumnHeadersHeight = 34;
+            this.DGV_Crono.ColumnHeadersHeight = 25;
             this.DGV_Crono.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NombProve,
             this.Estado,
@@ -242,61 +247,20 @@
             this.DGV_Crono.Location = new System.Drawing.Point(8, 103);
             this.DGV_Crono.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Crono.Name = "DGV_Crono";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Crono.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Crono.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Crono.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.DGV_Crono.RowHeadersWidth = 15;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Crono.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.DGV_Crono.Size = new System.Drawing.Size(775, 266);
             this.DGV_Crono.TabIndex = 142;
-            // 
-            // NombProve
-            // 
-            this.NombProve.DataPropertyName = "Tema";
-            this.NombProve.HeaderText = "Tema";
-            this.NombProve.Name = "NombProve";
-            this.NombProve.Width = 50;
-            // 
-            // Estado
-            // 
-            this.Estado.DataPropertyName = "DesTema";
-            this.Estado.HeaderText = "Descripcion Tema";
-            this.Estado.Name = "Estado";
-            this.Estado.Width = 250;
-            // 
-            // DescTipo
-            // 
-            this.DescTipo.DataPropertyName = "Curso";
-            this.DescTipo.HeaderText = "Curso";
-            this.DescTipo.Name = "DescTipo";
-            this.DescTipo.Width = 50;
-            // 
-            // DescPer
-            // 
-            this.DescPer.DataPropertyName = "DesCurso";
-            this.DescPer.HeaderText = "Descripcion Curso";
-            this.DescPer.Name = "DescPer";
-            this.DescPer.Width = 250;
-            // 
-            // Observ
-            // 
-            this.Observ.DataPropertyName = "Horas";
-            this.Observ.HeaderText = "Horas";
-            this.Observ.Name = "Observ";
-            this.Observ.Width = 50;
-            // 
-            // PromedioTot
-            // 
-            this.PromedioTot.DataPropertyName = "Realizado";
-            this.PromedioTot.HeaderText = "Realizado";
-            this.PromedioTot.Name = "PromedioTot";
-            this.PromedioTot.Width = 70;
             // 
             // TB_Buscar
             // 
@@ -346,25 +310,26 @@
             // TB_DesLegajo
             // 
             this.TB_DesLegajo.FormattingEnabled = true;
-            this.TB_DesLegajo.Location = new System.Drawing.Point(179, 21);
+            this.TB_DesLegajo.Location = new System.Drawing.Point(165, 21);
             this.TB_DesLegajo.Name = "TB_DesLegajo";
-            this.TB_DesLegajo.Size = new System.Drawing.Size(262, 21);
+            this.TB_DesLegajo.Size = new System.Drawing.Size(276, 21);
             this.TB_DesLegajo.TabIndex = 129;
             this.TB_DesLegajo.SelectedIndexChanged += new System.EventHandler(this.TB_DesLegajo_SelectedIndexChanged);
             // 
             // panel4
             // 
-            this.panel4.Location = new System.Drawing.Point(154, 20);
+            this.panel4.Location = new System.Drawing.Point(143, 16);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(19, 29);
             this.panel4.TabIndex = 128;
             // 
             // TB_CodLegajo
             // 
+            this.TB_CodLegajo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodLegajo.FormattingEnabled = true;
             this.TB_CodLegajo.Location = new System.Drawing.Point(84, 22);
             this.TB_CodLegajo.Name = "TB_CodLegajo";
-            this.TB_CodLegajo.Size = new System.Drawing.Size(89, 21);
+            this.TB_CodLegajo.Size = new System.Drawing.Size(53, 21);
             this.TB_CodLegajo.TabIndex = 127;
             this.TB_CodLegajo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodLegajo_KeyDown);
             // 
@@ -375,6 +340,7 @@
             this.TB_Año.Name = "TB_Año";
             this.TB_Año.Size = new System.Drawing.Size(54, 20);
             this.TB_Año.TabIndex = 35;
+            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
             // 
             // BT_Salir
@@ -409,6 +375,56 @@
             this.LFechaAviso.Size = new System.Drawing.Size(52, 18);
             this.LFechaAviso.TabIndex = 4;
             this.LFechaAviso.Text = "Legajo:";
+            // 
+            // NombProve
+            // 
+            this.NombProve.DataPropertyName = "Tema";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.NombProve.DefaultCellStyle = dataGridViewCellStyle1;
+            this.NombProve.HeaderText = "Tema";
+            this.NombProve.Name = "NombProve";
+            this.NombProve.Width = 50;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "DesTema";
+            this.Estado.HeaderText = "Descripcion Tema";
+            this.Estado.Name = "Estado";
+            this.Estado.Width = 250;
+            // 
+            // DescTipo
+            // 
+            this.DescTipo.DataPropertyName = "Curso";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DescTipo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DescTipo.HeaderText = "Curso";
+            this.DescTipo.Name = "DescTipo";
+            this.DescTipo.Width = 50;
+            // 
+            // DescPer
+            // 
+            this.DescPer.DataPropertyName = "DesCurso";
+            this.DescPer.HeaderText = "Descripcion Curso";
+            this.DescPer.Name = "DescPer";
+            this.DescPer.Width = 250;
+            // 
+            // Observ
+            // 
+            this.Observ.DataPropertyName = "Horas";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Observ.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Observ.HeaderText = "Horas";
+            this.Observ.Name = "Observ";
+            this.Observ.Width = 50;
+            // 
+            // PromedioTot
+            // 
+            this.PromedioTot.DataPropertyName = "Realizado";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PromedioTot.DefaultCellStyle = dataGridViewCellStyle4;
+            this.PromedioTot.HeaderText = "Realizado";
+            this.PromedioTot.Name = "PromedioTot";
+            this.PromedioTot.Width = 70;
             // 
             // IngrePlanificacionAnual
             // 
@@ -458,13 +474,13 @@
         private System.Windows.Forms.ComboBox CB_Curso;
         private System.Windows.Forms.Label LB_Curso;
         private System.Windows.Forms.DataGridView DGV_Crono;
+        private System.Windows.Forms.Label lblAtencion;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombProve;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescTipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescPer;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observ;
         private System.Windows.Forms.DataGridViewTextBoxColumn PromedioTot;
-        private System.Windows.Forms.Label lblAtencion;
-        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

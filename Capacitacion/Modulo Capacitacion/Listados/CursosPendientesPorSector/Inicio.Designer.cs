@@ -133,6 +133,7 @@
             this.txtAno.Name = "txtAno";
             this.txtAno.Size = new System.Drawing.Size(51, 20);
             this.txtAno.TabIndex = 87;
+            this.txtAno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAno_KeyDown);
             // 
             // cmbMes

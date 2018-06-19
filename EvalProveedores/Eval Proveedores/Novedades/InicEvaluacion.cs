@@ -28,7 +28,8 @@ namespace Eval_Proveedores.Novedades
         {
             P_Filtrado.Visible = false;
             TraerLista();
-            DGV_Evaluaciones.Focus();
+            //DGV_Evaluaciones.Focus();
+            txtCodigo.Focus();
         }
 
         private void TraerLista()
@@ -370,6 +371,37 @@ namespace Eval_Proveedores.Novedades
             {
                 TBFiltroAno.Focus();
             }
+        }
+
+        private void txtCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtCodigo.Text.Trim() == "") return;
+
+                foreach (DataGridViewRow row in DGV_Evaluaciones.Rows)
+                {
+                    var WCodigo = row.Cells["Proveedor"].Value ?? "";
+
+                    if (WCodigo.ToString().Trim() != "")
+                    {
+                        if (txtCodigo.Text.Trim() == WCodigo.ToString().Trim())
+                        {
+                            row.Selected = true;
+                            DGV_Evaluaciones_RowHeaderMouseDoubleClick(null, null);
+                            txtCodigo.Text = "";
+                            return;
+                        }
+                    }
+                }
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtCodigo.Text = "";
+            }
+	        
         }
     }
 }

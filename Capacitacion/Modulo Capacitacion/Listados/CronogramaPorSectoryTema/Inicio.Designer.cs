@@ -99,6 +99,7 @@
             this.TB_Año.Name = "TB_Año";
             this.TB_Año.Size = new System.Drawing.Size(51, 20);
             this.TB_Año.TabIndex = 87;
+            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -116,6 +117,7 @@
             this.TB_HastaSector.Name = "TB_HastaSector";
             this.TB_HastaSector.Size = new System.Drawing.Size(51, 20);
             this.TB_HastaSector.TabIndex = 85;
+            this.TB_HastaSector.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_HastaSector.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_HastaSector_KeyDown);
             this.TB_HastaSector.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 
@@ -125,6 +127,7 @@
             this.TB_DesdeSector.Name = "TB_DesdeSector";
             this.TB_DesdeSector.Size = new System.Drawing.Size(51, 20);
             this.TB_DesdeSector.TabIndex = 84;
+            this.TB_DesdeSector.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_DesdeSector.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DesdeSector_KeyDown);
             this.TB_DesdeSector.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 

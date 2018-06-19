@@ -96,6 +96,7 @@
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(72, 20);
             this.TB_Hasta.TabIndex = 85;
+            this.TB_Hasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
             // 
             // TB_Desde
@@ -105,6 +106,7 @@
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.Size = new System.Drawing.Size(72, 20);
             this.TB_Desde.TabIndex = 84;
+            this.TB_Desde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
             // 
             // label2

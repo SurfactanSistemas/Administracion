@@ -91,6 +91,7 @@
             this.txtAno.Name = "txtAno";
             this.txtAno.Size = new System.Drawing.Size(70, 20);
             this.txtAno.TabIndex = 84;
+            this.txtAno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAno_KeyDown);
             // 
             // BT_Pantalla

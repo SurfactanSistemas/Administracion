@@ -191,10 +191,11 @@
             // 
             // TB_CodProveedor
             // 
+            this.TB_CodProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodProveedor.FormattingEnabled = true;
             this.TB_CodProveedor.Location = new System.Drawing.Point(91, 20);
             this.TB_CodProveedor.Name = "TB_CodProveedor";
-            this.TB_CodProveedor.Size = new System.Drawing.Size(160, 26);
+            this.TB_CodProveedor.Size = new System.Drawing.Size(138, 26);
             this.TB_CodProveedor.TabIndex = 1;
             this.TB_CodProveedor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodProveedor_KeyDown);
             // 
@@ -338,11 +339,13 @@
             // 
             // TB_Año
             // 
-            this.TB_Año.Location = new System.Drawing.Point(127, 28);
+            this.TB_Año.Location = new System.Drawing.Point(127, 29);
             this.TB_Año.Mask = "9999";
             this.TB_Año.Name = "TB_Año";
+            this.TB_Año.PromptChar = ' ';
             this.TB_Año.Size = new System.Drawing.Size(46, 20);
             this.TB_Año.TabIndex = 4;
+            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown_1);
             this.TB_Año.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TB_Año_KeyPress);
             // 
@@ -351,8 +354,10 @@
             this.TB_Mes.Location = new System.Drawing.Point(90, 29);
             this.TB_Mes.Mask = "99";
             this.TB_Mes.Name = "TB_Mes";
+            this.TB_Mes.PromptChar = ' ';
             this.TB_Mes.Size = new System.Drawing.Size(24, 20);
             this.TB_Mes.TabIndex = 3;
+            this.TB_Mes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Mes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Mes_KeyDown_1);
             this.TB_Mes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TB_Mes_KeyPress_1);
             // 
@@ -463,6 +468,7 @@
             this.TB_PromedioTot.ReadOnly = true;
             this.TB_PromedioTot.Size = new System.Drawing.Size(121, 20);
             this.TB_PromedioTot.TabIndex = 70;
+            this.TB_PromedioTot.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_PromedioTot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_PromedioTot_MouseClick);
             // 
             // TB_Promedio3

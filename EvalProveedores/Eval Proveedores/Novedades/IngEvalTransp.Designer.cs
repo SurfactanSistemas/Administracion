@@ -218,10 +218,11 @@
             // 
             // TB_CodProveedor
             // 
+            this.TB_CodProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodProveedor.FormattingEnabled = true;
             this.TB_CodProveedor.Location = new System.Drawing.Point(77, 22);
             this.TB_CodProveedor.Name = "TB_CodProveedor";
-            this.TB_CodProveedor.Size = new System.Drawing.Size(111, 26);
+            this.TB_CodProveedor.Size = new System.Drawing.Size(103, 26);
             this.TB_CodProveedor.TabIndex = 84;
             this.TB_CodProveedor.SelectedIndexChanged += new System.EventHandler(this.TB_CodProveedor_SelectedIndexChanged);
             // 
@@ -392,8 +393,10 @@
             this.TB_Mes.Location = new System.Drawing.Point(125, 29);
             this.TB_Mes.Mask = "99";
             this.TB_Mes.Name = "TB_Mes";
+            this.TB_Mes.PromptChar = ' ';
             this.TB_Mes.Size = new System.Drawing.Size(24, 20);
             this.TB_Mes.TabIndex = 104;
+            this.TB_Mes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Mes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Mes_KeyDown);
             this.TB_Mes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TB_Mes_KeyPress);
             // 
@@ -404,6 +407,7 @@
             this.TB_CodChof2.ReadOnly = true;
             this.TB_CodChof2.Size = new System.Drawing.Size(64, 20);
             this.TB_CodChof2.TabIndex = 96;
+            this.TB_CodChof2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_CodChof2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_CodChof2_MouseClick);
             // 
             // TB_DescDom3
@@ -431,6 +435,7 @@
             this.TB_CodChof3.ReadOnly = true;
             this.TB_CodChof3.Size = new System.Drawing.Size(66, 20);
             this.TB_CodChof3.TabIndex = 100;
+            this.TB_CodChof3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_CodChof3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_CodChof3_MouseClick);
             // 
             // TB_DescDom2
@@ -449,6 +454,7 @@
             this.TB_CodChof1.ReadOnly = true;
             this.TB_CodChof1.Size = new System.Drawing.Size(66, 20);
             this.TB_CodChof1.TabIndex = 92;
+            this.TB_CodChof1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_CodChof1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_CodChof1_MouseClick);
             // 
             // textBox3
@@ -476,8 +482,10 @@
             this.TB_Venc.Location = new System.Drawing.Point(110, 106);
             this.TB_Venc.Mask = "00/00/0000";
             this.TB_Venc.Name = "TB_Venc";
+            this.TB_Venc.PromptChar = ' ';
             this.TB_Venc.Size = new System.Drawing.Size(140, 20);
             this.TB_Venc.TabIndex = 89;
+            this.TB_Venc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Venc.ValidatingType = typeof(System.DateTime);
             this.TB_Venc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Venc_KeyDown);
             // 
@@ -486,8 +494,10 @@
             this.TB_Fecha.Location = new System.Drawing.Point(110, 68);
             this.TB_Fecha.Mask = "00/00/0000";
             this.TB_Fecha.Name = "TB_Fecha";
+            this.TB_Fecha.PromptChar = ' ';
             this.TB_Fecha.Size = new System.Drawing.Size(140, 20);
             this.TB_Fecha.TabIndex = 88;
+            this.TB_Fecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Fecha.ValidatingType = typeof(System.DateTime);
             // 
             // label7
@@ -618,11 +628,12 @@
             // 
             // TB_PromedioTot
             // 
-            this.TB_PromedioTot.Location = new System.Drawing.Point(1012, 443);
+            this.TB_PromedioTot.Location = new System.Drawing.Point(1012, 446);
             this.TB_PromedioTot.Name = "TB_PromedioTot";
             this.TB_PromedioTot.ReadOnly = true;
             this.TB_PromedioTot.Size = new System.Drawing.Size(137, 20);
             this.TB_PromedioTot.TabIndex = 70;
+            this.TB_PromedioTot.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_PromedioTot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_PromedioTot_MouseClick);
             // 
             // TB_Promedio33
@@ -632,6 +643,7 @@
             this.TB_Promedio33.ReadOnly = true;
             this.TB_Promedio33.Size = new System.Drawing.Size(106, 20);
             this.TB_Promedio33.TabIndex = 69;
+            this.TB_Promedio33.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Promedio33.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio33_MouseClick);
             // 
             // TB_Promedio22
@@ -641,6 +653,7 @@
             this.TB_Promedio22.ReadOnly = true;
             this.TB_Promedio22.Size = new System.Drawing.Size(90, 20);
             this.TB_Promedio22.TabIndex = 68;
+            this.TB_Promedio22.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Promedio22.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio22_MouseClick);
             // 
             // TB_Promedio11
@@ -650,6 +663,7 @@
             this.TB_Promedio11.ReadOnly = true;
             this.TB_Promedio11.Size = new System.Drawing.Size(90, 20);
             this.TB_Promedio11.TabIndex = 67;
+            this.TB_Promedio11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Promedio11.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio11_MouseClick);
             // 
             // textBox9
@@ -721,6 +735,7 @@
             this.TB_Promedio5.Size = new System.Drawing.Size(95, 20);
             this.TB_Promedio5.TabIndex = 105;
             this.TB_Promedio5.Text = "                  ";
+            this.TB_Promedio5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Promedio5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio5_MouseClick);
             // 
             // LB_Param41
@@ -789,6 +804,7 @@
             this.TB_Promedio4.Size = new System.Drawing.Size(95, 20);
             this.TB_Promedio4.TabIndex = 105;
             this.TB_Promedio4.Text = "                  ";
+            this.TB_Promedio4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Promedio4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio4_MouseClick);
             // 
             // LB_Param3
@@ -848,6 +864,7 @@
             this.TB_Promedio3.Size = new System.Drawing.Size(95, 20);
             this.TB_Promedio3.TabIndex = 105;
             this.TB_Promedio3.Text = "                  ";
+            this.TB_Promedio3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Promedio3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio3_MouseClick);
             // 
             // LB_Param2
@@ -907,6 +924,7 @@
             this.TB_Promedio1.Size = new System.Drawing.Size(95, 20);
             this.TB_Promedio1.TabIndex = 104;
             this.TB_Promedio1.Text = "                  ";
+            this.TB_Promedio1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Promedio1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio1_MouseClick);
             // 
             // label6
@@ -966,6 +984,7 @@
             this.TB_Promedio2.Size = new System.Drawing.Size(95, 20);
             this.TB_Promedio2.TabIndex = 105;
             this.TB_Promedio2.Text = "                  ";
+            this.TB_Promedio2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Promedio2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio2_MouseClick);
             // 
             // LB_Param1
@@ -1012,8 +1031,10 @@
             this.TB_Año.Location = new System.Drawing.Point(177, 29);
             this.TB_Año.Mask = "9999";
             this.TB_Año.Name = "TB_Año";
+            this.TB_Año.PromptChar = ' ';
             this.TB_Año.Size = new System.Drawing.Size(36, 20);
             this.TB_Año.TabIndex = 105;
+            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
             this.TB_Año.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TB_Año_KeyPress);
             // 
@@ -1045,7 +1066,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1195, 745);
+            this.ClientSize = new System.Drawing.Size(1195, 744);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;

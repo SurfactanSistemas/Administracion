@@ -386,6 +386,7 @@
             this.txtFecha.Location = new System.Drawing.Point(91, 43);
             this.txtFecha.Mask = "00/00/0000";
             this.txtFecha.Name = "txtFecha";
+            this.txtFecha.PromptChar = ' ';
             this.txtFecha.Size = new System.Drawing.Size(86, 20);
             this.txtFecha.TabIndex = 53;
             this.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -617,9 +618,9 @@
             this.pnlAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlAyuda.Controls.Add(this.panel7);
             this.pnlAyuda.Controls.Add(this.groupBox1);
-            this.pnlAyuda.Location = new System.Drawing.Point(123, 107);
+            this.pnlAyuda.Location = new System.Drawing.Point(124, 107);
             this.pnlAyuda.Name = "pnlAyuda";
-            this.pnlAyuda.Size = new System.Drawing.Size(556, 375);
+            this.pnlAyuda.Size = new System.Drawing.Size(555, 375);
             this.pnlAyuda.TabIndex = 9;
             this.pnlAyuda.Visible = false;
             // 
@@ -630,7 +631,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel7.Location = new System.Drawing.Point(0, 326);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(556, 49);
+            this.panel7.Size = new System.Drawing.Size(555, 49);
             this.panel7.TabIndex = 1;
             // 
             // btnCerrarAyuda

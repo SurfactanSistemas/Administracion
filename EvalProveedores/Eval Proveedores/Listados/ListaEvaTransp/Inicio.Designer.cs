@@ -128,10 +128,11 @@
             // 
             this.TB_Prove.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.TB_Prove.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.TB_Prove.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_Prove.FormattingEnabled = true;
             this.TB_Prove.Location = new System.Drawing.Point(193, 23);
             this.TB_Prove.Name = "TB_Prove";
-            this.TB_Prove.Size = new System.Drawing.Size(119, 21);
+            this.TB_Prove.Size = new System.Drawing.Size(100, 21);
             this.TB_Prove.TabIndex = 85;
             this.TB_Prove.SelectedIndexChanged += new System.EventHandler(this.TB_Prove_SelectedIndexChanged);
             // 
@@ -189,8 +190,10 @@
             this.TB_Hasta.Location = new System.Drawing.Point(193, 110);
             this.TB_Hasta.Mask = "00/00/0000";
             this.TB_Hasta.Name = "TB_Hasta";
+            this.TB_Hasta.PromptChar = ' ';
             this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
             this.TB_Hasta.TabIndex = 4;
+            this.TB_Hasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Hasta.ValidatingType = typeof(System.DateTime);
             this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
             // 
@@ -199,8 +202,10 @@
             this.TB_Desde.Location = new System.Drawing.Point(193, 65);
             this.TB_Desde.Mask = "00/00/0000";
             this.TB_Desde.Name = "TB_Desde";
+            this.TB_Desde.PromptChar = ' ';
             this.TB_Desde.Size = new System.Drawing.Size(100, 20);
             this.TB_Desde.TabIndex = 3;
+            this.TB_Desde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Desde.ValidatingType = typeof(System.DateTime);
             this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
             // 

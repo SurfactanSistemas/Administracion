@@ -105,6 +105,7 @@
             this.TB_HastaSector.Name = "TB_HastaSector";
             this.TB_HastaSector.Size = new System.Drawing.Size(111, 20);
             this.TB_HastaSector.TabIndex = 85;
+            this.TB_HastaSector.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_HastaSector.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 
             // TB_DesdeSector
@@ -113,6 +114,7 @@
             this.TB_DesdeSector.Name = "TB_DesdeSector";
             this.TB_DesdeSector.Size = new System.Drawing.Size(111, 20);
             this.TB_DesdeSector.TabIndex = 84;
+            this.TB_DesdeSector.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_DesdeSector.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DesdeSector_KeyDown);
             this.TB_DesdeSector.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -285,7 +285,7 @@
             // TB_DescResp1
             // 
             this.TB_DescResp1.FormattingEnabled = true;
-            this.TB_DescResp1.Location = new System.Drawing.Point(555, 11);
+            this.TB_DescResp1.Location = new System.Drawing.Point(555, 13);
             this.TB_DescResp1.Name = "TB_DescResp1";
             this.TB_DescResp1.Size = new System.Drawing.Size(75, 21);
             this.TB_DescResp1.TabIndex = 102;
@@ -294,7 +294,7 @@
             // TB_DescResp2
             // 
             this.TB_DescResp2.FormattingEnabled = true;
-            this.TB_DescResp2.Location = new System.Drawing.Point(696, 12);
+            this.TB_DescResp2.Location = new System.Drawing.Point(696, 13);
             this.TB_DescResp2.Name = "TB_DescResp2";
             this.TB_DescResp2.Size = new System.Drawing.Size(75, 21);
             this.TB_DescResp2.TabIndex = 106;
@@ -302,39 +302,41 @@
             // 
             // panel6
             // 
-            this.panel6.Location = new System.Drawing.Point(534, 10);
+            this.panel6.Location = new System.Drawing.Point(534, 9);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(19, 29);
             this.panel6.TabIndex = 101;
             // 
             // panel9
             // 
-            this.panel9.Location = new System.Drawing.Point(675, 11);
+            this.panel9.Location = new System.Drawing.Point(675, 9);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(19, 29);
             this.panel9.TabIndex = 105;
             // 
             // TB_CodResp1
             // 
+            this.TB_CodResp1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodResp1.FormattingEnabled = true;
-            this.TB_CodResp1.Location = new System.Drawing.Point(499, 12);
+            this.TB_CodResp1.Location = new System.Drawing.Point(499, 13);
             this.TB_CodResp1.Name = "TB_CodResp1";
-            this.TB_CodResp1.Size = new System.Drawing.Size(50, 21);
+            this.TB_CodResp1.Size = new System.Drawing.Size(33, 21);
             this.TB_CodResp1.TabIndex = 100;
             this.TB_CodResp1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodResp1_KeyDown_1);
             // 
             // TB_CodResp2
             // 
+            this.TB_CodResp2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodResp2.FormattingEnabled = true;
             this.TB_CodResp2.Location = new System.Drawing.Point(640, 13);
             this.TB_CodResp2.Name = "TB_CodResp2";
-            this.TB_CodResp2.Size = new System.Drawing.Size(50, 21);
+            this.TB_CodResp2.Size = new System.Drawing.Size(33, 21);
             this.TB_CodResp2.TabIndex = 104;
             this.TB_CodResp2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodResp2_KeyDown_1);
             // 
             // panel5
             // 
-            this.panel5.Location = new System.Drawing.Point(431, 11);
+            this.panel5.Location = new System.Drawing.Point(431, 9);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(19, 29);
             this.panel5.TabIndex = 99;
@@ -342,7 +344,7 @@
             // TB_DescSector
             // 
             this.TB_DescSector.FormattingEnabled = true;
-            this.TB_DescSector.Location = new System.Drawing.Point(194, 15);
+            this.TB_DescSector.Location = new System.Drawing.Point(194, 13);
             this.TB_DescSector.Name = "TB_DescSector";
             this.TB_DescSector.Size = new System.Drawing.Size(256, 21);
             this.TB_DescSector.TabIndex = 98;
@@ -350,17 +352,18 @@
             // 
             // panel4
             // 
-            this.panel4.Location = new System.Drawing.Point(156, 13);
+            this.panel4.Location = new System.Drawing.Point(156, 9);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(19, 29);
             this.panel4.TabIndex = 97;
             // 
             // TB_CodSec
             // 
+            this.TB_CodSec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodSec.FormattingEnabled = true;
-            this.TB_CodSec.Location = new System.Drawing.Point(73, 15);
+            this.TB_CodSec.Location = new System.Drawing.Point(73, 13);
             this.TB_CodSec.Name = "TB_CodSec";
-            this.TB_CodSec.Size = new System.Drawing.Size(102, 21);
+            this.TB_CodSec.Size = new System.Drawing.Size(84, 21);
             this.TB_CodSec.TabIndex = 96;
             this.TB_CodSec.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodSec_KeyDown_1);
             // 
@@ -836,7 +839,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(456, 17);
+            this.label3.Location = new System.Drawing.Point(456, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 18);
             this.label3.TabIndex = 38;
@@ -846,7 +849,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 16);
+            this.label2.Location = new System.Drawing.Point(13, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 18);
             this.label2.TabIndex = 35;
@@ -855,6 +858,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.panel11);
             this.tabPage4.Controls.Add(this.groupBox1);
             this.tabPage4.Controls.Add(this.BT_Eliminar);
             this.tabPage4.Controls.Add(this.BTModifTema);
@@ -869,7 +873,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.panel11);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.CB_Necesario);
             this.groupBox1.Controls.Add(this.panel10);
@@ -884,7 +887,7 @@
             // 
             // panel11
             // 
-            this.panel11.Location = new System.Drawing.Point(137, 14);
+            this.panel11.Location = new System.Drawing.Point(128, 369);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(19, 29);
             this.panel11.TabIndex = 101;
@@ -929,18 +932,19 @@
             // TB_DescTemas
             // 
             this.TB_DescTemas.FormattingEnabled = true;
-            this.TB_DescTemas.Location = new System.Drawing.Point(193, 18);
+            this.TB_DescTemas.Location = new System.Drawing.Point(119, 18);
             this.TB_DescTemas.Name = "TB_DescTemas";
-            this.TB_DescTemas.Size = new System.Drawing.Size(343, 21);
+            this.TB_DescTemas.Size = new System.Drawing.Size(417, 21);
             this.TB_DescTemas.TabIndex = 102;
             this.TB_DescTemas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DescTemas_KeyDown);
             // 
             // TB_CodTemas
             // 
+            this.TB_CodTemas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodTemas.FormattingEnabled = true;
             this.TB_CodTemas.Location = new System.Drawing.Point(80, 18);
             this.TB_CodTemas.Name = "TB_CodTemas";
-            this.TB_CodTemas.Size = new System.Drawing.Size(76, 21);
+            this.TB_CodTemas.Size = new System.Drawing.Size(33, 21);
             this.TB_CodTemas.TabIndex = 100;
             this.TB_CodTemas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodTemas_KeyDown_1);
             // 
@@ -1001,17 +1005,17 @@
             this.DGV_Temas.Location = new System.Drawing.Point(16, 20);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.DGV_Temas.Size = new System.Drawing.Size(748, 285);
             this.DGV_Temas.TabIndex = 7;
             this.DGV_Temas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Temas_CellClick);
@@ -1078,6 +1082,7 @@
             this.TB_Version.Size = new System.Drawing.Size(54, 20);
             this.TB_Version.TabIndex = 29;
             this.TB_Version.Text = "1";
+            this.TB_Version.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // BT_Salir
             // 
@@ -1148,6 +1153,7 @@
             this.TB_Codigo.ReadOnly = true;
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
+            this.TB_Codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // AgModPerfil
             // 

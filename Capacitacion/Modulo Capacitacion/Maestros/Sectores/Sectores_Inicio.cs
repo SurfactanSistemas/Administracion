@@ -107,7 +107,8 @@ namespace Modulo_Capacitacion.Maestros.Sectores
 
         private void Sectores_Inicio_Shown(object sender, EventArgs e)
         {
-            TBFiltro.Focus();
+            //TBFiltro.Focus();
+            txtCodigo.Focus();
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
@@ -118,6 +119,37 @@ namespace Modulo_Capacitacion.Maestros.Sectores
             rp.CargarReporte(reporte);
 
             rp.ShowDialog();
+        }
+
+        private void txtCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtCodigo.Text.Trim() == "") return;
+
+                foreach (DataGridViewRow row in DGV_Sectores.Rows)
+                {
+                    var WCodigo = row.Cells["Codigo"].Value ?? "";
+
+                    if (WCodigo.ToString().Trim() != "")
+                    {
+                        if (WCodigo.ToString().Trim() == txtCodigo.Text.Trim())
+                        {
+                            row.Selected = true;
+                            DGV_Sectores_RowHeaderMouseDoubleClick(null, null);
+                            txtCodigo.Text = "";
+                            return;
+                        }
+                    }
+                }
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtCodigo.Text = "";
+            }
+	        
         }
     }
 }

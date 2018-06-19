@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -96,25 +97,25 @@
             this.TB_CodSec = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.DGV_Temas = new System.Windows.Forms.DataGridView();
-            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Necesaria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.TB_Fecha = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.txtVersionActual = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.pnlAyuda = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgvAyuda = new System.Windows.Forms.DataGridView();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtAyuda = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnCerrarAyuda = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtAyuda = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.dgvAyuda = new System.Windows.Forms.DataGridView();
+            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Necesaria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -123,9 +124,9 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).BeginInit();
             this.pnlAyuda.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAyuda)).BeginInit();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -215,10 +216,11 @@
             // 
             // TB_Codigo
             // 
+            this.TB_Codigo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_Codigo.FormattingEnabled = true;
             this.TB_Codigo.Location = new System.Drawing.Point(55, 10);
             this.TB_Codigo.Name = "TB_Codigo";
-            this.TB_Codigo.Size = new System.Drawing.Size(67, 21);
+            this.TB_Codigo.Size = new System.Drawing.Size(42, 21);
             this.TB_Codigo.TabIndex = 125;
             this.TB_Codigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Codigo_KeyDown);
             // 
@@ -799,6 +801,7 @@
             this.TB_CodSec.ReadOnly = true;
             this.TB_CodSec.Size = new System.Drawing.Size(84, 20);
             this.TB_CodSec.TabIndex = 36;
+            this.TB_CodSec.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tabPage4
             // 
@@ -818,7 +821,7 @@
             this.DGV_Temas.AllowUserToResizeRows = false;
             this.DGV_Temas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DGV_Temas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.DGV_Temas.ColumnHeadersHeight = 34;
+            this.DGV_Temas.ColumnHeadersHeight = 25;
             this.DGV_Temas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Curso,
             this.Descripcion,
@@ -827,47 +830,20 @@
             this.DGV_Temas.Location = new System.Drawing.Point(16, 20);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.DGV_Temas.RowHeadersWidth = 15;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.DGV_Temas.Size = new System.Drawing.Size(748, 418);
             this.DGV_Temas.TabIndex = 7;
-            // 
-            // Curso
-            // 
-            this.Curso.DataPropertyName = "Curso";
-            this.Curso.HeaderText = "Tema";
-            this.Curso.Name = "Curso";
-            this.Curso.Width = 59;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.Width = 88;
-            // 
-            // Necesaria
-            // 
-            this.Necesaria.DataPropertyName = "Necesaria";
-            this.Necesaria.HeaderText = "Necesaria";
-            this.Necesaria.Name = "Necesaria";
-            this.Necesaria.Width = 80;
-            // 
-            // Deseable
-            // 
-            this.Deseable.DataPropertyName = "Deseable";
-            this.Deseable.HeaderText = "Deseable";
-            this.Deseable.Name = "Deseable";
-            this.Deseable.Width = 77;
             // 
             // label4
             // 
@@ -887,6 +863,19 @@
             this.TB_Fecha.Size = new System.Drawing.Size(103, 20);
             this.TB_Fecha.TabIndex = 35;
             this.TB_Fecha.Value = new System.DateTime(2018, 2, 1, 0, 0, 0, 0);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(319, 547);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(40, 40);
+            this.button1.TabIndex = 27;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // BT_Salir
             // 
@@ -929,6 +918,7 @@
             this.txtVersionActual.ReadOnly = true;
             this.txtVersionActual.Size = new System.Drawing.Size(41, 20);
             this.txtVersionActual.TabIndex = 36;
+            this.txtVersionActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -940,79 +930,23 @@
             this.label3.TabIndex = 35;
             this.label3.Text = "Version Actual:";
             // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(319, 547);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 40);
-            this.button1.TabIndex = 27;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // pnlAyuda
             // 
             this.pnlAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlAyuda.Controls.Add(this.panel4);
             this.pnlAyuda.Controls.Add(this.groupBox1);
-            this.pnlAyuda.Location = new System.Drawing.Point(166, 165);
+            this.pnlAyuda.Location = new System.Drawing.Point(166, 162);
             this.pnlAyuda.Name = "pnlAyuda";
-            this.pnlAyuda.Size = new System.Drawing.Size(473, 350);
+            this.pnlAyuda.Size = new System.Drawing.Size(473, 353);
             this.pnlAyuda.TabIndex = 8;
             this.pnlAyuda.Visible = false;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtAyuda);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.dgvAyuda);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(9, 14);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(454, 286);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
-            // dgvAyuda
-            // 
-            this.dgvAyuda.AllowUserToAddRows = false;
-            this.dgvAyuda.AllowUserToDeleteRows = false;
-            this.dgvAyuda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAyuda.Location = new System.Drawing.Point(14, 59);
-            this.dgvAyuda.Name = "dgvAyuda";
-            this.dgvAyuda.ReadOnly = true;
-            this.dgvAyuda.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.dgvAyuda.Size = new System.Drawing.Size(426, 216);
-            this.dgvAyuda.TabIndex = 0;
-            this.dgvAyuda.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAyuda_CellMouseDoubleClick);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(30, 31);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(35, 13);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "Filtrar:";
-            // 
-            // txtAyuda
-            // 
-            this.txtAyuda.Location = new System.Drawing.Point(75, 27);
-            this.txtAyuda.Name = "txtAyuda";
-            this.txtAyuda.Size = new System.Drawing.Size(364, 20);
-            this.txtAyuda.TabIndex = 2;
-            this.txtAyuda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyUp);
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.Control;
             this.panel4.Controls.Add(this.btnCerrarAyuda);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 304);
+            this.panel4.Location = new System.Drawing.Point(0, 307);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(473, 46);
             this.panel4.TabIndex = 1;
@@ -1029,6 +963,78 @@
             this.btnCerrarAyuda.TabIndex = 27;
             this.btnCerrarAyuda.UseVisualStyleBackColor = true;
             this.btnCerrarAyuda.Click += new System.EventHandler(this.btnCerrarAyuda_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtAyuda);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.dgvAyuda);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Location = new System.Drawing.Point(9, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(454, 292);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            // 
+            // txtAyuda
+            // 
+            this.txtAyuda.Location = new System.Drawing.Point(68, 19);
+            this.txtAyuda.Name = "txtAyuda";
+            this.txtAyuda.Size = new System.Drawing.Size(364, 20);
+            this.txtAyuda.TabIndex = 2;
+            this.txtAyuda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyUp);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(23, 23);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(35, 13);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "Filtrar:";
+            // 
+            // dgvAyuda
+            // 
+            this.dgvAyuda.AllowUserToAddRows = false;
+            this.dgvAyuda.AllowUserToDeleteRows = false;
+            this.dgvAyuda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAyuda.Location = new System.Drawing.Point(14, 44);
+            this.dgvAyuda.Name = "dgvAyuda";
+            this.dgvAyuda.ReadOnly = true;
+            this.dgvAyuda.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.dgvAyuda.Size = new System.Drawing.Size(426, 235);
+            this.dgvAyuda.TabIndex = 0;
+            this.dgvAyuda.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAyuda_CellMouseDoubleClick);
+            // 
+            // Curso
+            // 
+            this.Curso.DataPropertyName = "Curso";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Curso.HeaderText = "Tema";
+            this.Curso.Name = "Curso";
+            this.Curso.Width = 59;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.Width = 88;
+            // 
+            // Necesaria
+            // 
+            this.Necesaria.DataPropertyName = "Necesaria";
+            this.Necesaria.HeaderText = "Necesaria";
+            this.Necesaria.Name = "Necesaria";
+            this.Necesaria.Width = 80;
+            // 
+            // Deseable
+            // 
+            this.Deseable.DataPropertyName = "Deseable";
+            this.Deseable.HeaderText = "Deseable";
+            this.Deseable.Name = "Deseable";
+            this.Deseable.Width = 77;
             // 
             // IngVersPerfil
             // 
@@ -1053,10 +1059,10 @@
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).EndInit();
             this.pnlAyuda.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAyuda)).EndInit();
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1128,10 +1134,6 @@
         private System.Windows.Forms.Button BT_Salir;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LFechaAviso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Necesaria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
         private System.Windows.Forms.DateTimePicker DTP_FechaVigenciaII;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ComboBox TB_Codigo;
@@ -1148,5 +1150,9 @@
         private System.Windows.Forms.DataGridView dgvAyuda;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnCerrarAyuda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Necesaria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
     }
 }

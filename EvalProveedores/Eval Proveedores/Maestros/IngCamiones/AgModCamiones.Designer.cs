@@ -58,20 +58,25 @@
             this.BT_Salir = new System.Windows.Forms.Button();
             this.BT_LimpiarPant = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
+            this.txtObsRENPRE = new System.Windows.Forms.TextBox();
             this.TB_ObservCargasPelig = new System.Windows.Forms.TextBox();
             this.TB_ObservSeguro = new System.Windows.Forms.TextBox();
             this.TB_ObservHabDominio = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
+            this.txtFechaEntregaRENPRE = new System.Windows.Forms.MaskedTextBox();
             this.TB_EntCargasPelig = new System.Windows.Forms.MaskedTextBox();
             this.TB_EntSeguro = new System.Windows.Forms.MaskedTextBox();
             this.TB_EntHabDominio = new System.Windows.Forms.MaskedTextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtVencimientoRENPRE = new System.Windows.Forms.MaskedTextBox();
             this.TB_VencCargasPelig = new System.Windows.Forms.MaskedTextBox();
             this.TB_VencSeguro = new System.Windows.Forms.MaskedTextBox();
             this.TB_VencHabDominio = new System.Windows.Forms.MaskedTextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.CB_CargasPeligrosas = new System.Windows.Forms.CheckBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -84,11 +89,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.txtVencimientoRENPRE = new System.Windows.Forms.MaskedTextBox();
-            this.txtFechaEntregaRENPRE = new System.Windows.Forms.MaskedTextBox();
-            this.txtObsRENPRE = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -169,7 +169,7 @@
             this.panel3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel3.Location = new System.Drawing.Point(12, 9);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(854, 483);
+            this.panel3.Size = new System.Drawing.Size(863, 483);
             this.panel3.TabIndex = 0;
             this.panel3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseClick);
             // 
@@ -199,8 +199,10 @@
             this.TB_EntRuta.Location = new System.Drawing.Point(486, 283);
             this.TB_EntRuta.Mask = "00/00/0000";
             this.TB_EntRuta.Name = "TB_EntRuta";
+            this.TB_EntRuta.PromptChar = ' ';
             this.TB_EntRuta.Size = new System.Drawing.Size(100, 26);
             this.TB_EntRuta.TabIndex = 8;
+            this.TB_EntRuta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_EntRuta.ValidatingType = typeof(System.DateTime);
             this.TB_EntRuta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_EntRuta_KeyDown);
             // 
@@ -210,8 +212,10 @@
             this.TB_VencRuta.Location = new System.Drawing.Point(371, 283);
             this.TB_VencRuta.Mask = "00/00/0000";
             this.TB_VencRuta.Name = "TB_VencRuta";
+            this.TB_VencRuta.PromptChar = ' ';
             this.TB_VencRuta.Size = new System.Drawing.Size(100, 26);
             this.TB_VencRuta.TabIndex = 7;
+            this.TB_VencRuta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_VencRuta.ValidatingType = typeof(System.DateTime);
             this.TB_VencRuta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_VencRuta_KeyDown);
             // 
@@ -221,8 +225,10 @@
             this.TB_EntRTO.Location = new System.Drawing.Point(486, 317);
             this.TB_EntRTO.Mask = "00/00/0000";
             this.TB_EntRTO.Name = "TB_EntRTO";
+            this.TB_EntRTO.PromptChar = ' ';
             this.TB_EntRTO.Size = new System.Drawing.Size(100, 26);
             this.TB_EntRTO.TabIndex = 11;
+            this.TB_EntRTO.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_EntRTO.ValidatingType = typeof(System.DateTime);
             this.TB_EntRTO.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_EntRTO_MouseClick);
             this.TB_EntRTO.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_EntRTO_KeyDown);
@@ -233,8 +239,10 @@
             this.TB_VencRTO.Location = new System.Drawing.Point(371, 317);
             this.TB_VencRTO.Mask = "00/00/0000";
             this.TB_VencRTO.Name = "TB_VencRTO";
+            this.TB_VencRTO.PromptChar = ' ';
             this.TB_VencRTO.Size = new System.Drawing.Size(100, 26);
             this.TB_VencRTO.TabIndex = 10;
+            this.TB_VencRTO.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_VencRTO.ValidatingType = typeof(System.DateTime);
             this.TB_VencRTO.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_VencRTO_MouseClick);
             this.TB_VencRTO.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_VencRTO_KeyDown);
@@ -336,6 +344,7 @@
             this.TB_CodCamion.ReadOnly = true;
             this.TB_CodCamion.Size = new System.Drawing.Size(100, 26);
             this.TB_CodCamion.TabIndex = 101;
+            this.TB_CodCamion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
             // 
@@ -388,6 +397,7 @@
             this.TB_CodChofer.ReadOnly = true;
             this.TB_CodChofer.Size = new System.Drawing.Size(100, 26);
             this.TB_CodChofer.TabIndex = 6;
+            this.TB_CodChofer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_CodChofer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_CodChofer_MouseClick);
             // 
             // label9
@@ -455,10 +465,18 @@
             this.BT_Guardar.UseVisualStyleBackColor = true;
             this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
             // 
+            // txtObsRENPRE
+            // 
+            this.txtObsRENPRE.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtObsRENPRE.Location = new System.Drawing.Point(592, 446);
+            this.txtObsRENPRE.Name = "txtObsRENPRE";
+            this.txtObsRENPRE.Size = new System.Drawing.Size(241, 26);
+            this.txtObsRENPRE.TabIndex = 21;
+            // 
             // TB_ObservCargasPelig
             // 
             this.TB_ObservCargasPelig.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_ObservCargasPelig.Location = new System.Drawing.Point(592, 410);
+            this.TB_ObservCargasPelig.Location = new System.Drawing.Point(592, 411);
             this.TB_ObservCargasPelig.Name = "TB_ObservCargasPelig";
             this.TB_ObservCargasPelig.Size = new System.Drawing.Size(241, 26);
             this.TB_ObservCargasPelig.TabIndex = 21;
@@ -468,7 +486,7 @@
             // TB_ObservSeguro
             // 
             this.TB_ObservSeguro.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_ObservSeguro.Location = new System.Drawing.Point(592, 380);
+            this.TB_ObservSeguro.Location = new System.Drawing.Point(592, 379);
             this.TB_ObservSeguro.Name = "TB_ObservSeguro";
             this.TB_ObservSeguro.Size = new System.Drawing.Size(241, 26);
             this.TB_ObservSeguro.TabIndex = 18;
@@ -478,7 +496,7 @@
             // TB_ObservHabDominio
             // 
             this.TB_ObservHabDominio.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_ObservHabDominio.Location = new System.Drawing.Point(592, 349);
+            this.TB_ObservHabDominio.Location = new System.Drawing.Point(592, 348);
             this.TB_ObservHabDominio.Name = "TB_ObservHabDominio";
             this.TB_ObservHabDominio.Size = new System.Drawing.Size(241, 26);
             this.TB_ObservHabDominio.TabIndex = 15;
@@ -495,14 +513,30 @@
             this.textBox9.TabIndex = 34;
             this.textBox9.Text = "              OBSERVACIONES";
             // 
+            // txtFechaEntregaRENPRE
+            // 
+            this.txtFechaEntregaRENPRE.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFechaEntregaRENPRE.Location = new System.Drawing.Point(486, 446);
+            this.txtFechaEntregaRENPRE.Mask = "00/00/0000";
+            this.txtFechaEntregaRENPRE.Name = "txtFechaEntregaRENPRE";
+            this.txtFechaEntregaRENPRE.PromptChar = ' ';
+            this.txtFechaEntregaRENPRE.Size = new System.Drawing.Size(100, 26);
+            this.txtFechaEntregaRENPRE.TabIndex = 20;
+            this.txtFechaEntregaRENPRE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtFechaEntregaRENPRE.ValidatingType = typeof(System.DateTime);
+            this.txtFechaEntregaRENPRE.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_EntCargasPelig_MouseClick);
+            this.txtFechaEntregaRENPRE.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFechaEntregaRENPRE_KeyDown);
+            // 
             // TB_EntCargasPelig
             // 
             this.TB_EntCargasPelig.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_EntCargasPelig.Location = new System.Drawing.Point(486, 410);
+            this.TB_EntCargasPelig.Location = new System.Drawing.Point(486, 411);
             this.TB_EntCargasPelig.Mask = "00/00/0000";
             this.TB_EntCargasPelig.Name = "TB_EntCargasPelig";
+            this.TB_EntCargasPelig.PromptChar = ' ';
             this.TB_EntCargasPelig.Size = new System.Drawing.Size(100, 26);
             this.TB_EntCargasPelig.TabIndex = 20;
+            this.TB_EntCargasPelig.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_EntCargasPelig.ValidatingType = typeof(System.DateTime);
             this.TB_EntCargasPelig.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_EntCargasPelig_MouseClick);
             this.TB_EntCargasPelig.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_EntCargasPelig_KeyDown);
@@ -510,11 +544,13 @@
             // TB_EntSeguro
             // 
             this.TB_EntSeguro.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_EntSeguro.Location = new System.Drawing.Point(486, 380);
+            this.TB_EntSeguro.Location = new System.Drawing.Point(486, 379);
             this.TB_EntSeguro.Mask = "00/00/0000";
             this.TB_EntSeguro.Name = "TB_EntSeguro";
+            this.TB_EntSeguro.PromptChar = ' ';
             this.TB_EntSeguro.Size = new System.Drawing.Size(100, 26);
             this.TB_EntSeguro.TabIndex = 17;
+            this.TB_EntSeguro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_EntSeguro.ValidatingType = typeof(System.DateTime);
             this.TB_EntSeguro.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_EntSeguro_MouseClick);
             this.TB_EntSeguro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_EntSeguro_KeyDown);
@@ -522,11 +558,13 @@
             // TB_EntHabDominio
             // 
             this.TB_EntHabDominio.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_EntHabDominio.Location = new System.Drawing.Point(486, 349);
+            this.TB_EntHabDominio.Location = new System.Drawing.Point(486, 348);
             this.TB_EntHabDominio.Mask = "00/00/0000";
             this.TB_EntHabDominio.Name = "TB_EntHabDominio";
+            this.TB_EntHabDominio.PromptChar = ' ';
             this.TB_EntHabDominio.Size = new System.Drawing.Size(100, 26);
             this.TB_EntHabDominio.TabIndex = 14;
+            this.TB_EntHabDominio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_EntHabDominio.ValidatingType = typeof(System.DateTime);
             this.TB_EntHabDominio.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_EntHabDominio_MouseClick);
             this.TB_EntHabDominio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_EntHabDominio_KeyDown);
@@ -537,18 +575,35 @@
             this.textBox8.Location = new System.Drawing.Point(486, 246);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(105, 27);
+            this.textBox8.Size = new System.Drawing.Size(100, 27);
             this.textBox8.TabIndex = 33;
-            this.textBox8.Text = "  F. ENTREGA";
+            this.textBox8.Text = "F. ENTREGA";
+            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtVencimientoRENPRE
+            // 
+            this.txtVencimientoRENPRE.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVencimientoRENPRE.Location = new System.Drawing.Point(371, 446);
+            this.txtVencimientoRENPRE.Mask = "00/00/0000";
+            this.txtVencimientoRENPRE.Name = "txtVencimientoRENPRE";
+            this.txtVencimientoRENPRE.PromptChar = ' ';
+            this.txtVencimientoRENPRE.Size = new System.Drawing.Size(100, 26);
+            this.txtVencimientoRENPRE.TabIndex = 19;
+            this.txtVencimientoRENPRE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtVencimientoRENPRE.ValidatingType = typeof(System.DateTime);
+            this.txtVencimientoRENPRE.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_VencCargasPelig_MouseClick);
+            this.txtVencimientoRENPRE.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtVencimientoRENPRE_KeyDown);
             // 
             // TB_VencCargasPelig
             // 
             this.TB_VencCargasPelig.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_VencCargasPelig.Location = new System.Drawing.Point(371, 410);
+            this.TB_VencCargasPelig.Location = new System.Drawing.Point(371, 411);
             this.TB_VencCargasPelig.Mask = "00/00/0000";
             this.TB_VencCargasPelig.Name = "TB_VencCargasPelig";
+            this.TB_VencCargasPelig.PromptChar = ' ';
             this.TB_VencCargasPelig.Size = new System.Drawing.Size(100, 26);
             this.TB_VencCargasPelig.TabIndex = 19;
+            this.TB_VencCargasPelig.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_VencCargasPelig.ValidatingType = typeof(System.DateTime);
             this.TB_VencCargasPelig.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_VencCargasPelig_MouseClick);
             this.TB_VencCargasPelig.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_VencCargasPelig_KeyDown);
@@ -556,11 +611,13 @@
             // TB_VencSeguro
             // 
             this.TB_VencSeguro.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_VencSeguro.Location = new System.Drawing.Point(371, 380);
+            this.TB_VencSeguro.Location = new System.Drawing.Point(371, 379);
             this.TB_VencSeguro.Mask = "00/00/0000";
             this.TB_VencSeguro.Name = "TB_VencSeguro";
+            this.TB_VencSeguro.PromptChar = ' ';
             this.TB_VencSeguro.Size = new System.Drawing.Size(100, 26);
             this.TB_VencSeguro.TabIndex = 16;
+            this.TB_VencSeguro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_VencSeguro.ValidatingType = typeof(System.DateTime);
             this.TB_VencSeguro.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_VencSeguro_MouseClick);
             this.TB_VencSeguro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_VencSeguro_KeyDown);
@@ -568,11 +625,13 @@
             // TB_VencHabDominio
             // 
             this.TB_VencHabDominio.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_VencHabDominio.Location = new System.Drawing.Point(371, 349);
+            this.TB_VencHabDominio.Location = new System.Drawing.Point(371, 348);
             this.TB_VencHabDominio.Mask = "00/00/0000";
             this.TB_VencHabDominio.Name = "TB_VencHabDominio";
+            this.TB_VencHabDominio.PromptChar = ' ';
             this.TB_VencHabDominio.Size = new System.Drawing.Size(100, 26);
             this.TB_VencHabDominio.TabIndex = 13;
+            this.TB_VencHabDominio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_VencHabDominio.ValidatingType = typeof(System.DateTime);
             this.TB_VencHabDominio.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_VencHabDominio_MouseClick);
             this.TB_VencHabDominio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_VencHabDominio_KeyDown);
@@ -583,14 +642,26 @@
             this.textBox7.Location = new System.Drawing.Point(371, 246);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(105, 27);
+            this.textBox7.Size = new System.Drawing.Size(102, 27);
             this.textBox7.TabIndex = 32;
             this.textBox7.Text = "VENCIMIENTO";
+            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(328, 452);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
+            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_CargasPeligrosas_MouseClick);
             // 
             // CB_CargasPeligrosas
             // 
             this.CB_CargasPeligrosas.AutoSize = true;
-            this.CB_CargasPeligrosas.Location = new System.Drawing.Point(328, 416);
+            this.CB_CargasPeligrosas.Location = new System.Drawing.Point(328, 417);
             this.CB_CargasPeligrosas.Name = "CB_CargasPeligrosas";
             this.CB_CargasPeligrosas.Size = new System.Drawing.Size(15, 14);
             this.CB_CargasPeligrosas.TabIndex = 11;
@@ -607,11 +678,21 @@
             this.textBox6.TabIndex = 31;
             this.textBox6.Text = " APLICA";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(20, 450);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(232, 18);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Habilitacion RENPRE (ex SEDRONAR)";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(20, 413);
+            this.label7.Location = new System.Drawing.Point(20, 415);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(270, 18);
             this.label7.TabIndex = 9;
@@ -621,7 +702,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(21, 320);
+            this.label6.Location = new System.Drawing.Point(21, 321);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(154, 18);
             this.label6.TabIndex = 8;
@@ -631,7 +712,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(22, 286);
+            this.label5.Location = new System.Drawing.Point(22, 287);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 18);
             this.label5.TabIndex = 7;
@@ -672,10 +753,11 @@
             // 
             // TB_CodProveedor
             // 
+            this.TB_CodProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodProveedor.FormattingEnabled = true;
             this.TB_CodProveedor.Location = new System.Drawing.Point(147, 22);
             this.TB_CodProveedor.Name = "TB_CodProveedor";
-            this.TB_CodProveedor.Size = new System.Drawing.Size(111, 26);
+            this.TB_CodProveedor.Size = new System.Drawing.Size(102, 26);
             this.TB_CodProveedor.TabIndex = 3;
             // 
             // panel4
@@ -714,59 +796,6 @@
             this.label3.Size = new System.Drawing.Size(55, 18);
             this.label3.TabIndex = 2;
             this.label3.Text = "Codigo:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 449);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(232, 18);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Habilitacion RENPRE (ex SEDRONAR)";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(328, 452);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Visible = false;
-            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_CargasPeligrosas_MouseClick);
-            // 
-            // txtVencimientoRENPRE
-            // 
-            this.txtVencimientoRENPRE.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVencimientoRENPRE.Location = new System.Drawing.Point(371, 446);
-            this.txtVencimientoRENPRE.Mask = "00/00/0000";
-            this.txtVencimientoRENPRE.Name = "txtVencimientoRENPRE";
-            this.txtVencimientoRENPRE.Size = new System.Drawing.Size(100, 26);
-            this.txtVencimientoRENPRE.TabIndex = 19;
-            this.txtVencimientoRENPRE.ValidatingType = typeof(System.DateTime);
-            this.txtVencimientoRENPRE.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_VencCargasPelig_MouseClick);
-            this.txtVencimientoRENPRE.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtVencimientoRENPRE_KeyDown);
-            // 
-            // txtFechaEntregaRENPRE
-            // 
-            this.txtFechaEntregaRENPRE.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFechaEntregaRENPRE.Location = new System.Drawing.Point(486, 446);
-            this.txtFechaEntregaRENPRE.Mask = "00/00/0000";
-            this.txtFechaEntregaRENPRE.Name = "txtFechaEntregaRENPRE";
-            this.txtFechaEntregaRENPRE.Size = new System.Drawing.Size(100, 26);
-            this.txtFechaEntregaRENPRE.TabIndex = 20;
-            this.txtFechaEntregaRENPRE.ValidatingType = typeof(System.DateTime);
-            this.txtFechaEntregaRENPRE.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_EntCargasPelig_MouseClick);
-            this.txtFechaEntregaRENPRE.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFechaEntregaRENPRE_KeyDown);
-            // 
-            // txtObsRENPRE
-            // 
-            this.txtObsRENPRE.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtObsRENPRE.Location = new System.Drawing.Point(592, 446);
-            this.txtObsRENPRE.Name = "txtObsRENPRE";
-            this.txtObsRENPRE.Size = new System.Drawing.Size(241, 26);
-            this.txtObsRENPRE.TabIndex = 21;
             // 
             // AgModCamiones
             // 

@@ -130,6 +130,7 @@
             this.TB_AñoDesde.Name = "TB_AñoDesde";
             this.TB_AñoDesde.Size = new System.Drawing.Size(51, 20);
             this.TB_AñoDesde.TabIndex = 87;
+            this.TB_AñoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_AñoDesde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_AñoDesde_KeyDown);
             // 
             // label3
@@ -148,6 +149,7 @@
             this.TB_AñoHasta.Name = "TB_AñoHasta";
             this.TB_AñoHasta.Size = new System.Drawing.Size(51, 20);
             this.TB_AñoHasta.TabIndex = 85;
+            this.TB_AñoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_AñoHasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_AñoHasta_KeyDown);
             // 
             // BT_Pantalla

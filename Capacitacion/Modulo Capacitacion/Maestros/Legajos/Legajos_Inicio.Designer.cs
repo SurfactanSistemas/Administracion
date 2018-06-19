@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGV_Legajos = new System.Windows.Forms.DataGridView();
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,11 +56,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.pnlDiscriminarLegajos = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvDiscriminarLegajos = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.legajoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Legajos)).BeginInit();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -69,9 +71,9 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlDiscriminarLegajos.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscriminarLegajos)).BeginInit();
-            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.legajoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,13 +98,13 @@
             this.DGV_Legajos.Location = new System.Drawing.Point(85, 0);
             this.DGV_Legajos.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Legajos.Name = "DGV_Legajos";
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.DGV_Legajos.Size = new System.Drawing.Size(863, 441);
             this.DGV_Legajos.TabIndex = 26;
             this.DGV_Legajos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
@@ -132,8 +134,8 @@
             // Vigencia
             // 
             this.Vigencia.DataPropertyName = "Vigencia";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle5;
             this.Vigencia.HeaderText = "Vigencia";
             this.Vigencia.Name = "Vigencia";
             this.Vigencia.Width = 73;
@@ -168,6 +170,8 @@
             // 
             this.P_Filtrado.Controls.Add(this.ckSoloNoActualizados);
             this.P_Filtrado.Controls.Add(this.ckSoloActivos);
+            this.P_Filtrado.Controls.Add(this.txtCodigo);
+            this.P_Filtrado.Controls.Add(this.label3);
             this.P_Filtrado.Controls.Add(this.TBFiltro);
             this.P_Filtrado.Controls.Add(this.LBFiltro);
             this.P_Filtrado.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -181,7 +185,7 @@
             // 
             this.ckSoloNoActualizados.AutoSize = true;
             this.ckSoloNoActualizados.ForeColor = System.Drawing.SystemColors.Control;
-            this.ckSoloNoActualizados.Location = new System.Drawing.Point(804, 20);
+            this.ckSoloNoActualizados.Location = new System.Drawing.Point(804, 21);
             this.ckSoloNoActualizados.Name = "ckSoloNoActualizados";
             this.ckSoloNoActualizados.Size = new System.Drawing.Size(112, 17);
             this.ckSoloNoActualizados.TabIndex = 2;
@@ -193,7 +197,7 @@
             // 
             this.ckSoloActivos.AutoSize = true;
             this.ckSoloActivos.ForeColor = System.Drawing.SystemColors.Control;
-            this.ckSoloActivos.Location = new System.Drawing.Point(700, 19);
+            this.ckSoloActivos.Location = new System.Drawing.Point(700, 21);
             this.ckSoloActivos.Name = "ckSoloActivos";
             this.ckSoloActivos.Size = new System.Drawing.Size(100, 17);
             this.ckSoloActivos.TabIndex = 2;
@@ -203,9 +207,9 @@
             // 
             // TBFiltro
             // 
-            this.TBFiltro.Location = new System.Drawing.Point(149, 17);
+            this.TBFiltro.Location = new System.Drawing.Point(339, 19);
             this.TBFiltro.Name = "TBFiltro";
-            this.TBFiltro.Size = new System.Drawing.Size(537, 20);
+            this.TBFiltro.Size = new System.Drawing.Size(355, 20);
             this.TBFiltro.TabIndex = 1;
             this.TBFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
             this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
@@ -215,7 +219,7 @@
             this.LBFiltro.AutoSize = true;
             this.LBFiltro.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBFiltro.ForeColor = System.Drawing.Color.White;
-            this.LBFiltro.Location = new System.Drawing.Point(94, 17);
+            this.LBFiltro.Location = new System.Drawing.Point(284, 20);
             this.LBFiltro.Name = "LBFiltro";
             this.LBFiltro.Size = new System.Drawing.Size(49, 18);
             this.LBFiltro.TabIndex = 0;
@@ -382,6 +386,31 @@
             this.pnlDiscriminarLegajos.TabIndex = 28;
             this.pnlDiscriminarLegajos.Visible = false;
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 284);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(651, 60);
+            this.panel3.TabIndex = 26;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(304, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 52);
+            this.button1.TabIndex = 25;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvDiscriminarLegajos);
@@ -406,34 +435,29 @@
             this.dgvDiscriminarLegajos.TabIndex = 0;
             this.dgvDiscriminarLegajos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvDiscriminarLegajos_RowHeaderMouseDoubleClick);
             // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(304, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 52);
-            this.button1.TabIndex = 25;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 284);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(651, 60);
-            this.panel3.TabIndex = 26;
-            // 
             // legajoBindingSource
             // 
             this.legajoBindingSource.DataSource = typeof(Negocio.Legajo);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(127, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 18);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Código:";
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(182, 19);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(77, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
             // 
             // Legajos_Inicio
             // 
@@ -456,9 +480,9 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.pnlDiscriminarLegajos.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscriminarLegajos)).EndInit();
-            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.legajoBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -496,5 +520,7 @@
         private System.Windows.Forms.DataGridView dgvDiscriminarLegajos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.Label label3;
     }
 }

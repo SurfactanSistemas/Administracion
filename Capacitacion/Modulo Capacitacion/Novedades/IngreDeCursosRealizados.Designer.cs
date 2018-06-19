@@ -234,6 +234,7 @@
             this.txtAnoConsulta.Name = "txtAnoConsulta";
             this.txtAnoConsulta.Size = new System.Drawing.Size(54, 20);
             this.txtAnoConsulta.TabIndex = 37;
+            this.txtAnoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -472,6 +473,7 @@
             this.TB_Año.Name = "TB_Año";
             this.TB_Año.Size = new System.Drawing.Size(54, 20);
             this.TB_Año.TabIndex = 35;
+            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
             // 
             // BT_Limpiar
