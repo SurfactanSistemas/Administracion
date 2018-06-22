@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
-using Negocio;
 using System.Data;
 using System.Data.SqlClient;
-using System.Collections.Generic;
+using Negocio;
 
 namespace AccesoADatos
 {
@@ -32,7 +32,7 @@ namespace AccesoADatos
                         {
                             Codigo = Convert.ToString(dataReader["Codigo"]),
                             Descripcion = Convert.ToString(dataReader["Descripcion"]),
-                            Estado = Convert.ToInt32(dataReader["Estado"]),
+                            Estado = Convert.ToInt32(dataReader["Estado"])
 
                             
 
@@ -46,7 +46,7 @@ namespace AccesoADatos
             return Proveedores;
         }
 
-        public System.Data.DataTable Lista()
+        public DataTable Lista()
         {
             DataTable dtProveedores = new DataTable(); ;
             using (SqlConnection cnx = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString))
@@ -140,7 +140,7 @@ namespace AccesoADatos
                             Estado = Esta,
                             Categoria1 = CateI,
                             Categoria2 = CateII,
-                            FechaCat = Convert.ToString(dataReader["FechaCategoria"]),
+                            FechaCat = Convert.ToString(dataReader["FechaCategoria"])
                         };
 
                         return Prove;
@@ -151,7 +151,7 @@ namespace AccesoADatos
                         {
                             Codigo = "",
                             Descripcion = "",
-                            Estado = 0,
+                            Estado = 0
                         };
 
                         return Prove;
@@ -200,7 +200,7 @@ namespace AccesoADatos
             return dtProveedores;
         }
 
-        public System.Data.DataTable ListaPorTipo(int Tipo)
+        public DataTable ListaPorTipo(int Tipo)
         {
             DataTable dtProve = new DataTable(); ;
             using (SqlConnection cnx = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString))
@@ -218,7 +218,7 @@ namespace AccesoADatos
             }
         }
 
-        public System.Data.DataTable ListaSinTipo()
+        public DataTable ListaSinTipo()
         {
             DataTable dtProve = new DataTable(); ;
             using (SqlConnection cnx = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString))
