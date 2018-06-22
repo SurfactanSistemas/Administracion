@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HojaRuta.Novedades
@@ -59,6 +53,11 @@ namespace HojaRuta.Novedades
 
                 // En caso de ser != 0, cargar la Hoja de Ruta.
 
+                if (txtNroHoja.Text.Trim() != "0")
+                {
+                    _TraerHojaRuta(txtNroHoja.Text);
+                }
+
                 txtFecha.Focus();
 
             }
@@ -69,14 +68,106 @@ namespace HojaRuta.Novedades
 	        
         }
 
-        private void cmbTipoPedido_Click(object sender, EventArgs e)
+        private void _TraerHojaRuta(string WHojaRuta)
         {
-            if (cmbTipoPedido.SelectedIndex >= 0) cmbEstado.Focus();
+            try
+            {
+                btnLimpiar.PerformClick();
+                dgvPedidos.Rows.Clear();
+                double WKilosTotales = 0;
+
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT * FROM HojaRuta WHERE Hoja = '" + WHojaRuta + "' ORDER BY Renglon";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (!dr.HasRows) return;
+
+                            while (dr.Read())
+                            {
+                                txtNroHoja.Text = WHojaRuta;
+                                txtFecha.Text = dr["Fecha"].ToString();
+                                txtKilos.Text = dr["Kilos"].ToString();
+                                txtChofer.Text = dr["Chofer"].ToString();
+                                txtCamion.Text = dr["Camion"].ToString();
+                                txtNroViaje.Text = dr["NroViaje"].ToString();
+                                txtRetiraProv.Text = dr["RetiraProv"].ToString();
+                                cmbEstado.SelectedIndex = int.Parse(dr["TipoEstado"].ToString());
+                                int WIndice = dgvPedidos.Rows.Add();
+
+                                DataGridViewRow r = dgvPedidos.Rows[WIndice];
+                                r.Cells["Pedido"].Value = dr["Pedido"].ToString();
+                                r.Cells["Cliente"].Value = dr["Cliente"].ToString();
+                                r.Cells["Razon"].Value = _TraerRazonSocial(r.Cells["Cliente"].Value);
+                                r.Cells["Remito"].Value = dr["Remito"].ToString();
+                                r.Cells["Segur"].Value = dr["Seguridad"].ToString();
+                                r.Cells["Kilos"].Value = dr["Kilos"].ToString();
+                            }
+
+                            foreach (DataGridViewRow row in dgvPedidos.Rows)
+                            {
+                                var WValor = row.Cells["Kilos"].Value ?? "0";
+                                WKilosTotales += double.Parse(WValor.ToString());
+                                row.Cells["Kilos"].Value = Helper.FormatoNumerico(WValor.ToString());
+                            }
+
+                            txtDesCamion.Text = _TraerCamion(txtCamion.Text);
+                            txtDesChofer.Text = _TraerChofer(txtChofer.Text);
+                            txtKilos.Text = Helper.FormatoNumerico(WKilosTotales.ToString());
+                            dgvPedidos.Rows.Add();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+        
         }
 
-        private void cmbEstado_Click(object sender, EventArgs e)
+        private string _TraerRazonSocial(object WCliente)
         {
-            if (cmbEstado.SelectedIndex >= 0) txtKilos.Focus();
+            string WDesc = "";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT ISNULL(Razon, '') Razon FROM Cliente WHERE CLiente = '" + WCliente + "'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+
+                                WDesc = dr["Razon"].ToString();
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+
+            return WDesc.Trim();
         }
 
         private void txtKilos_KeyDown(object sender, KeyEventArgs e)
@@ -105,11 +196,16 @@ namespace HojaRuta.Novedades
             {
                 if (txtChofer.Text.Trim() == "") return;
 
-                // Buscar Chofer.
+                try
+                {
+                    txtDesChofer.Text = _TraerChofer(txtChofer.Text);
 
-                txtDesChofer.Text = _TraerChofer(txtChofer.Text);
-
-                txtCamion.Focus();
+                    txtCamion.Focus();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
 
             }
             else if (e.KeyData == Keys.Escape)
@@ -165,9 +261,16 @@ namespace HojaRuta.Novedades
             {
                 if (txtCamion.Text.Trim() == "") return;
 
-                txtDesCamion.Text = _TraerCamion(txtCamion.Text);
+                try
+                {
+                    txtDesCamion.Text = _TraerCamion(txtCamion.Text);
 
-                txtNroViaje.Focus();
+                    txtNroViaje.Focus();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
 
             }
             else if (e.KeyData == Keys.Escape)
@@ -336,6 +439,44 @@ namespace HojaRuta.Novedades
         private void HojaRuta_Load(object sender, EventArgs e)
         {
             btnLimpiar.PerformClick();
+        }
+
+        private void cmbTipoPedido_DropDownClosed(object sender, EventArgs e)
+        {
+            if (cmbTipoPedido.SelectedIndex >= 0) cmbEstado.Focus();
+        }
+
+        private void cmbEstado_DropDownClosed(object sender, EventArgs e)
+        {
+            if (cmbEstado.SelectedIndex >= 0) txtKilos.Focus();
+        }
+
+        private void btnPedidos_Click(object sender, EventArgs e)
+        {
+            _ListarPedidosSegunTipo(cmbTipoPedido.SelectedIndex);
+        }
+
+        private void _ListarPedidosSegunTipo(int WTipoPedido)
+        {
+            Auxiliares.ListaPedidos frm = new Auxiliares.ListaPedidos(WTipoPedido);
+            frm.Show(this);
+        }
+
+        internal void Prueba(object WPedido)
+        {
+            int I = -1;
+            foreach (DataGridViewRow row in dgvPedidos.Rows)
+            {
+                var r = row.Cells["Pedido"].Value ?? "";
+                if (string.IsNullOrEmpty(r.ToString()) && I == -1)
+                {
+                    I = row.Index;
+                }
+            }
+
+            if (I == -1) I = dgvPedidos.Rows.Add();
+
+            dgvPedidos.Rows[I].Cells["Pedido"].Value = WPedido;
         }
     }
 }

@@ -29,18 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBChofer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnCerrar = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,6 +64,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btnCot = new System.Windows.Forms.Button();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,8 +75,11 @@
             this.Envases = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.COT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCerrar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnPedidos = new System.Windows.Forms.Button();
             this.btnConsulta = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -122,6 +124,7 @@
             this.panel3.Controls.Add(this.dgvPedidos);
             this.panel3.Controls.Add(this.btnCerrar);
             this.panel3.Controls.Add(this.btnLimpiar);
+            this.panel3.Controls.Add(this.btnPedidos);
             this.panel3.Controls.Add(this.btnConsulta);
             this.panel3.Controls.Add(this.btnGuardar);
             this.panel3.Controls.Add(this.groupBox2);
@@ -129,48 +132,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(886, 412);
             this.panel3.TabIndex = 0;
-            // 
-            // btnCerrar
-            // 
-            this.btnCerrar.BackgroundImage = global::HojaRuta.Properties.Resources.Fin21;
-            this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCerrar.Location = new System.Drawing.Point(521, 364);
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(40, 40);
-            this.btnCerrar.TabIndex = 40;
-            this.toolTip1.SetToolTip(this.btnCerrar, "Cerrar");
-            this.btnCerrar.UseVisualStyleBackColor = true;
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.BackgroundImage = global::HojaRuta.Properties.Resources.LimpiarPant1;
-            this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnLimpiar.Location = new System.Drawing.Point(456, 364);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(40, 40);
-            this.btnLimpiar.TabIndex = 39;
-            this.toolTip1.SetToolTip(this.btnLimpiar, "Limpiar Formulario");
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.BackgroundImage = global::HojaRuta.Properties.Resources.Grabar;
-            this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnGuardar.Location = new System.Drawing.Point(326, 364);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(0);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(40, 40);
-            this.btnGuardar.TabIndex = 38;
-            this.toolTip1.SetToolTip(this.btnGuardar, "Grabar");
-            this.btnGuardar.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -232,6 +193,7 @@
             this.txtNroHoja.Name = "txtNroHoja";
             this.txtNroHoja.Size = new System.Drawing.Size(69, 20);
             this.txtNroHoja.TabIndex = 2;
+            this.txtNroHoja.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtNroHoja.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNroHoja_KeyDown);
             this.txtNroHoja.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumerosEnteros);
             // 
@@ -298,7 +260,7 @@
             this.cmbTipoPedido.Name = "cmbTipoPedido";
             this.cmbTipoPedido.Size = new System.Drawing.Size(94, 21);
             this.cmbTipoPedido.TabIndex = 4;
-            this.cmbTipoPedido.Click += new System.EventHandler(this.cmbTipoPedido_Click);
+            this.cmbTipoPedido.DropDownClosed += new System.EventHandler(this.cmbTipoPedido_DropDownClosed);
             this.cmbTipoPedido.Enter += new System.EventHandler(this.cmbTipoPedido_Enter);
             this.cmbTipoPedido.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbTipoPedido_KeyDown);
             // 
@@ -312,7 +274,7 @@
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(91, 21);
             this.cmbEstado.TabIndex = 4;
-            this.cmbEstado.Click += new System.EventHandler(this.cmbEstado_Click);
+            this.cmbEstado.DropDownClosed += new System.EventHandler(this.cmbEstado_DropDownClosed);
             this.cmbEstado.Enter += new System.EventHandler(this.cmbEstado_Enter);
             this.cmbEstado.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbEstado_KeyDown);
             // 
@@ -324,6 +286,7 @@
             this.txtKilos.Name = "txtKilos";
             this.txtKilos.Size = new System.Drawing.Size(60, 20);
             this.txtKilos.TabIndex = 2;
+            this.txtKilos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtKilos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKilos_KeyDown);
             this.txtKilos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumerosDecimales);
             // 
@@ -345,6 +308,7 @@
             this.txtChofer.Name = "txtChofer";
             this.txtChofer.Size = new System.Drawing.Size(40, 20);
             this.txtChofer.TabIndex = 2;
+            this.txtChofer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtChofer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChofer_KeyDown);
             this.txtChofer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumerosEnteros);
             // 
@@ -365,6 +329,7 @@
             this.txtCamion.Name = "txtCamion";
             this.txtCamion.Size = new System.Drawing.Size(40, 20);
             this.txtCamion.TabIndex = 2;
+            this.txtCamion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCamion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCamion_KeyDown);
             this.txtCamion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumerosEnteros);
             // 
@@ -386,6 +351,7 @@
             this.txtNroViaje.Name = "txtNroViaje";
             this.txtNroViaje.Size = new System.Drawing.Size(40, 20);
             this.txtNroViaje.TabIndex = 2;
+            this.txtNroViaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtNroViaje.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNroViaje_KeyDown);
             this.txtNroViaje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumerosEnteros);
             // 
@@ -427,6 +393,7 @@
             this.txtHoraViaje.Name = "txtHoraViaje";
             this.txtHoraViaje.Size = new System.Drawing.Size(40, 20);
             this.txtHoraViaje.TabIndex = 2;
+            this.txtHoraViaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtHoraViaje.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHoraViaje_KeyDown);
             this.txtHoraViaje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumerosDecimales);
             // 
@@ -474,20 +441,22 @@
             // 
             // Pedido
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Pedido.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Pedido.DefaultCellStyle = dataGridViewCellStyle1;
             this.Pedido.HeaderText = "Pedido";
             this.Pedido.MaxInputLength = 6;
             this.Pedido.Name = "Pedido";
-            this.Pedido.Width = 70;
+            this.Pedido.Width = 50;
             // 
             // Cliente
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Cliente.DefaultCellStyle = dataGridViewCellStyle2;
             this.Cliente.HeaderText = "Cliente";
             this.Cliente.MaxInputLength = 6;
             this.Cliente.Name = "Cliente";
             this.Cliente.ReadOnly = true;
-            this.Cliente.Width = 70;
+            this.Cliente.Width = 60;
             // 
             // Razon
             // 
@@ -498,8 +467,8 @@
             // 
             // Remito
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Remito.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Remito.DefaultCellStyle = dataGridViewCellStyle3;
             this.Remito.HeaderText = "Remito";
             this.Remito.Name = "Remito";
             this.Remito.ReadOnly = true;
@@ -513,8 +482,8 @@
             // 
             // Kilos
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Kilos.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Kilos.DefaultCellStyle = dataGridViewCellStyle4;
             this.Kilos.HeaderText = "Kilos";
             this.Kilos.Name = "Kilos";
             this.Kilos.ReadOnly = true;
@@ -522,8 +491,8 @@
             // 
             // Bultos
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Bultos.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Bultos.DefaultCellStyle = dataGridViewCellStyle5;
             this.Bultos.HeaderText = "Bultos";
             this.Bultos.Name = "Bultos";
             this.Bultos.Width = 50;
@@ -542,12 +511,55 @@
             // 
             // COT
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.COT.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.COT.DefaultCellStyle = dataGridViewCellStyle6;
             this.COT.HeaderText = "COT";
             this.COT.MaxInputLength = 10;
             this.COT.Name = "COT";
             this.COT.Width = 80;
+            // 
+            // btnCerrar
+            // 
+            this.btnCerrar.BackgroundImage = global::HojaRuta.Properties.Resources.Fin21;
+            this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrar.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnCerrar.Location = new System.Drawing.Point(543, 364);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(40, 40);
+            this.btnCerrar.TabIndex = 40;
+            this.toolTip1.SetToolTip(this.btnCerrar, "Cerrar");
+            this.btnCerrar.UseVisualStyleBackColor = true;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackgroundImage = global::HojaRuta.Properties.Resources.LimpiarPant1;
+            this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnLimpiar.Location = new System.Drawing.Point(483, 364);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(40, 40);
+            this.btnLimpiar.TabIndex = 39;
+            this.toolTip1.SetToolTip(this.btnLimpiar, "Limpiar Formulario");
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnPedidos
+            // 
+            this.btnPedidos.BackgroundImage = global::HojaRuta.Properties.Resources.Modificar1;
+            this.btnPedidos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPedidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPedidos.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPedidos.Location = new System.Drawing.Point(423, 364);
+            this.btnPedidos.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPedidos.Name = "btnPedidos";
+            this.btnPedidos.Size = new System.Drawing.Size(40, 40);
+            this.btnPedidos.TabIndex = 38;
+            this.toolTip1.SetToolTip(this.btnPedidos, "Pedidos");
+            this.btnPedidos.UseVisualStyleBackColor = true;
+            this.btnPedidos.Click += new System.EventHandler(this.btnPedidos_Click);
             // 
             // btnConsulta
             // 
@@ -555,13 +567,27 @@
             this.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsulta.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnConsulta.Location = new System.Drawing.Point(391, 364);
+            this.btnConsulta.Location = new System.Drawing.Point(363, 364);
             this.btnConsulta.Margin = new System.Windows.Forms.Padding(0);
             this.btnConsulta.Name = "btnConsulta";
             this.btnConsulta.Size = new System.Drawing.Size(40, 40);
             this.btnConsulta.TabIndex = 38;
             this.toolTip1.SetToolTip(this.btnConsulta, "Abrir Consulta");
             this.btnConsulta.UseVisualStyleBackColor = true;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.BackgroundImage = global::HojaRuta.Properties.Resources.Grabar;
+            this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnGuardar.Location = new System.Drawing.Point(303, 364);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(0);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(40, 40);
+            this.btnGuardar.TabIndex = 38;
+            this.toolTip1.SetToolTip(this.btnGuardar, "Grabar");
+            this.btnGuardar.UseVisualStyleBackColor = true;
             // 
             // HojaRuta
             // 
@@ -570,7 +596,9 @@
             this.ClientSize = new System.Drawing.Size(906, 472);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Location = new System.Drawing.Point(5, 5);
             this.Name = "HojaRuta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Load += new System.EventHandler(this.HojaRuta_Load);
             this.Shown += new System.EventHandler(this.HojaRuta_Shown);
             this.panel1.ResumeLayout(false);
@@ -618,6 +646,8 @@
         private System.Windows.Forms.TextBox txtNroViaje;
         private System.Windows.Forms.Button btnCot;
         private System.Windows.Forms.DataGridView dgvPedidos;
+        private System.Windows.Forms.Button btnConsulta;
+        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Razon;
@@ -628,7 +658,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Envases;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn COT;
-        private System.Windows.Forms.Button btnConsulta;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnPedidos;
     }
 }
