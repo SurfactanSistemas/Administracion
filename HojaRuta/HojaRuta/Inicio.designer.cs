@@ -42,6 +42,7 @@ namespace HojaRuta
             this.salirDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.hojaDeRutaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,8 @@ namespace HojaRuta
             // 
             // novedadesToolStripMenuItem
             // 
+            this.novedadesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hojaDeRutaToolStripMenuItem});
             this.novedadesToolStripMenuItem.Name = "novedadesToolStripMenuItem";
             this.novedadesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.novedadesToolStripMenuItem.Text = "Novedades";
@@ -124,6 +127,13 @@ namespace HojaRuta
             this.label1.TabIndex = 0;
             this.label1.Text = "HOJA DE RUTA";
             // 
+            // hojaDeRutaToolStripMenuItem
+            // 
+            this.hojaDeRutaToolStripMenuItem.Name = "hojaDeRutaToolStripMenuItem";
+            this.hojaDeRutaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hojaDeRutaToolStripMenuItem.Text = "Hoja de Ruta";
+            this.hojaDeRutaToolStripMenuItem.Click += new System.EventHandler(this.hojaDeRutaToolStripMenuItem_Click);
+            // 
             // Inicio
             // 
             this.BackColor = System.Drawing.Color.White;
@@ -153,6 +163,7 @@ namespace HojaRuta
         private Panel panel1;
         private Label label1;
         private ToolStripMenuItem salirDelSistemaToolStripMenuItem;
+        private ToolStripMenuItem hojaDeRutaToolStripMenuItem;
     }
 }
 

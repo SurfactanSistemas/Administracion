@@ -33,5 +33,11 @@ namespace HojaRuta
         {
             Close();
         }
+
+        private void hojaDeRutaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Novedades.HojaRuta frm = new Novedades.HojaRuta();
+            frm.Show();
+        }
     }
 }

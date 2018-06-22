@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace HojaRuta
@@ -485,6 +486,40 @@ namespace HojaRuta
             }
 
             return diferencia;
+        }
+
+        public static void SoloNumerosEnteros(object sender, ref KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        public static void SoloDecimales(object sender, ref KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            TextBox textBox = sender as TextBox;
+
+            if (textBox != null && ((e.KeyChar == '.') && (textBox.Text.IndexOf('.') > -1)))
+            {
+                e.Handled = true;
+            }
+        }
+
+        public static bool _ValidarFecha(string WFecha)
+        {
+            if (string.IsNullOrEmpty(WFecha.Trim())) return false;
+
+            return
+                (new Regex(@"(0[1-9]|1[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(19[0-9][0-9]|2[0-1][0-9][0-9])")
+                            .IsMatch(WFecha));
         }
     }
 }
