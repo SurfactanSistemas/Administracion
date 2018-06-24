@@ -6,7 +6,7 @@ Public Class CtaCtePrvPantallaDetallesCliente
 
     Private _Cliente As String = ""
 
-    Public Property Cliente() As String
+    Public Property Cliente As String
         Get
             Return _Cliente
         End Get
@@ -17,7 +17,7 @@ Public Class CtaCtePrvPantallaDetallesCliente
 
     Private _Saldo As String = ""
 
-    Public Property SaldoTotal() As String
+    Public Property SaldoTotal As String
         Get
             Return _Saldo
         End Get
@@ -44,8 +44,8 @@ Public Class CtaCtePrvPantallaDetallesCliente
             Exit Sub
         End If
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM CtaCte WHERE Cliente = '" & Me.Cliente & "' and Saldo <> '0'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT * FROM CtaCte WHERE Cliente = '" & Me.Cliente & "' and Saldo <> '0'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)

@@ -40,8 +40,8 @@ Public Class DetallesRemitosProveedor
     End Sub
 
     Private Sub _TraerInfoRemitos()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
         Dim remitos() As String
         Dim codProveedor, proveedor, orden, articulo, descripcion, cantPed, moneda, precio, condPago, informe, est, fApr, cantRecibida As String
@@ -110,8 +110,8 @@ Public Class DetallesRemitosProveedor
     End Sub
 
     Private Sub _TraerDetallesDeRemitos(ByVal RemitosABuscar As List(Of Object))
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
         Dim _ConnectionString, remito, codProveedor, orden, articulo, descripcion, cantPed
         Dim moneda, precio, condPago, informe, est, fApr, cantRecibida
@@ -249,7 +249,7 @@ Public Class DetallesRemitosProveedor
                                 est = "Rech."
                             End If
                         Loop
-                        
+
                     Else
 
                         cantRecibida = 0.0

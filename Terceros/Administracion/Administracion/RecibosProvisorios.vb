@@ -21,7 +21,7 @@ Public Class RecibosProvisorios
         WRow = -1
         Wcol = -1
 
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
 
         commonEventsHandler.setIndexTab(Me)
         lstSeleccion.Items.Add(New QueryController("Clientes", AddressOf DAOCliente.buscarClientePorNombre, AddressOf mostrarCliente))
@@ -189,7 +189,7 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function sumarValores() As Boolean
-        Dim _Error As Boolean = False
+        Dim _Error = False
 
         lblTotal.Text = Val(_NormalizarNumero(txtRetGanancias.Text)) _
                         + Val(_NormalizarNumero(txtRetIva.Text)) _
@@ -251,8 +251,8 @@ Public Class RecibosProvisorios
     End Sub
 
     Private Sub mostrarRecibo(ByVal recibo As String)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + recibo + "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + recibo + "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -398,9 +398,9 @@ Public Class RecibosProvisorios
     End Sub
 
     Private Function _TraerProximoNumeroDeReciboProvisorio()
-        Dim proximo As String = ""
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Recibo FROM RecibosProvi ORDER BY Recibo DESC")
+        Dim proximo = ""
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 Recibo FROM RecibosProvi ORDER BY Recibo DESC")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -432,7 +432,7 @@ Public Class RecibosProvisorios
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
         Dim validador As New Validator
-        Dim _tipoRec As Integer = 0
+        Dim _tipoRec = 0
 
         If Val(txtRecibo.Text) = 0 Then
             txtRecibo.Text = _TraerProximoNumeroDeReciboProvisorio()
@@ -672,8 +672,8 @@ Public Class RecibosProvisorios
 
     Private Sub _DeterminarParidad(Optional ByVal fecha As String = "")
         Dim _Fecha As String = IIf(fecha = "", txtFecha.Text, fecha)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cambio FROM Cambios WHERE Fecha = '" & _Fecha & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Cambio FROM Cambios WHERE Fecha = '" & _Fecha & "'")
         Dim dr As SqlDataReader
 
         If Trim(txtFecha.Text) <> "" Then
@@ -818,7 +818,7 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         Select Case keycode
             Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
@@ -835,7 +835,7 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -847,7 +847,7 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _EsDecimalOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -1053,9 +1053,9 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _ObtenerNombreBanco(ByVal claveBanco As String) As String
-        Dim _NombreBanco As String = ""
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Nombre FROM BCRA WHERE Banco = '" & Val(claveBanco) & "'")
+        Dim _NombreBanco = ""
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Nombre FROM BCRA WHERE Banco = '" & Val(claveBanco) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1100,7 +1100,7 @@ Public Class RecibosProvisorios
 
     Private Function _ProcesarCheque(ByVal row As Integer, ByVal ClaveCheque As String) As Boolean
         Dim _ClaveBanco, _Banco, _Sucursal, _NumCheque, _NumCta, _Cuit As String
-        Dim _LecturaCorrecta As Boolean = True
+        Dim _LecturaCorrecta = True
 
         If Not _FormatoValidoDeCheque(ClaveCheque) Then
             MsgBox("El formato del cheque no es valido.", MsgBoxStyle.Exclamation)
@@ -1131,7 +1131,7 @@ Public Class RecibosProvisorios
 
         ' Buscamos si existe el cuit.
         _Cuit = _TraerNumeroCuit(_ClaveBanco & _Sucursal & _NumCta)
-        
+
         With gridRecibos.Rows(row)
             .Cells(0).Value = "02"
             .Cells(1).Value = _NumCheque
@@ -1158,7 +1158,7 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _ChequeYaCargado(ByVal ClaveCheque) As Boolean
-        Dim _cargado As Boolean = False
+        Dim _cargado = False
 
         If _ChequeUtilizadoEnRecibo(ClaveCheque) Then
 
@@ -1181,9 +1181,9 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _ChequeUtilizadoEnRecibo(ByVal ClaveCheque As String) As Boolean
-        Dim utilizado As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 ClaveCheque FROM Recibos WHERE ClaveCheque = '" & ClaveCheque & "'")
+        Dim utilizado = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 ClaveCheque FROM Recibos WHERE ClaveCheque = '" & ClaveCheque & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1211,9 +1211,9 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _ChequeUtilizadoEnReciboProvisorio(ByVal ClaveCheque As String) As Boolean
-        Dim utilizado As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 ClaveCheque FROM RecibosProvi WHERE ClaveCheque = '" & ClaveCheque & "'")
+        Dim utilizado = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 ClaveCheque FROM RecibosProvi WHERE ClaveCheque = '" & ClaveCheque & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1241,9 +1241,9 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _TraerNumeroCuit(ByVal clave As String) As String
-        Dim _cuit As String = ""
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cuit FROM Cuit WHERE Clave = '" & Trim(clave) & "'")
+        Dim _cuit = ""
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Cuit FROM Cuit WHERE Clave = '" & Trim(clave) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1372,9 +1372,9 @@ Public Class RecibosProvisorios
     End Sub
 
     Private Function _CuentaContableValida(ByRef cuenta As String)
-        Dim _CuentaValida As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cuenta FROM Cuenta WHERE Cuenta= '" & Trim(cuenta) & "'")
+        Dim _CuentaValida = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Cuenta FROM Cuenta WHERE Cuenta= '" & Trim(cuenta) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1498,8 +1498,8 @@ Public Class RecibosProvisorios
     Private Sub _EliminarReciboProvisorio(ByVal recibo As String)
         recibo = Trim(recibo)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM RecibosProvi WHERE Recibo = '" & recibo & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM RecibosProvi WHERE Recibo = '" & recibo & "'")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -1520,11 +1520,11 @@ Public Class RecibosProvisorios
     End Sub
 
     Private Function _ReciboProvisorioYaAsignado() As Boolean
-        Dim asignado As Boolean = False
-        Dim definitivo As String = ""
+        Dim asignado = False
+        Dim definitivo = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ReciboDefinitivo FROM RecibosProvi WHERE Recibo = '" & Trim(txtRecibo.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT ReciboDefinitivo FROM RecibosProvi WHERE Recibo = '" & Trim(txtRecibo.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1558,10 +1558,10 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _TodosLosChequesPendientes() As Boolean
-        Dim _TodosPendientes As Boolean = True
+        Dim _TodosPendientes = True
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" & Trim(txtRecibo.Text) & "' AND (Tipo2 = '02' OR Tipo2 = '2') AND Estado2 <> 'P'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" & Trim(txtRecibo.Text) & "' AND (Tipo2 = '02' OR Tipo2 = '2') AND Estado2 <> 'P'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1674,8 +1674,8 @@ Public Class RecibosProvisorios
     End Sub
 
     Private Sub btnIntereses_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIntereses.Click
-        Dim tabla As DataTable = New DataTable("Detalles")
-        Dim DiasTasa As String = ""
+        Dim tabla = New DataTable("Detalles")
+        Dim DiasTasa = ""
         Dim XTipo2, XNumero2, XFecha2, XBanco2, XImporte2 As String
 
         _PedirInformacion("Informe la tasa Mensual", New TextBox, DiasTasa)

@@ -28,7 +28,7 @@ Public Class ProveedoresABM
         'cmbProvincia.DisplayMember = "ToString"
         'cmbProvincia.ValueMember = "valueMember"
         'cmbProvincia.DataSource = provincias
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
 
         cmbRubro.DisplayMember = "ToString"
         cmbRubro.ValueMember = "valueMember"
@@ -47,7 +47,7 @@ Public Class ProveedoresABM
 
         cmbEstado.BackColor = WBColorAntEstado
         cmbEstado.ForeColor = WColorAntEstado 'Color.White
-        
+
         setDefaults()
     End Sub
 
@@ -106,8 +106,8 @@ Public Class ProveedoresABM
 
     Private Sub _ActualizarProveedorEnEmpresa(ByVal cs As String)
         Dim ZSql As String
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
 
         ZSql = "UPDATE Proveedor " _
                     & " SET " _
@@ -124,31 +124,31 @@ Public Class ProveedoresABM
                     & "Iva =  '" & NormalizarIndex(cmbIVA.SelectedIndex) & "', " _
                     & "Dias =  '" & Mid(Trim(txtDiasPlazo.Text), 1, 20) & "', " _
                     & "Empresa =  '1', " _
-                    & "Cuenta =  '" & Mid(Trim(txtCuenta.Text), 1, 10) & "', " _
+                    & "Cuenta =  '', " _
                     & "NombreCheque =  '" & Mid(Trim(txtCheque.Text), 1, 50) & "', " _
                     & "wdate =  '" & Date.Now.ToString("dd-MM-yyyy") & "', " _
                     & "CodIb =  '" & NormalizarIndex(cmbCondicionIB1.SelectedIndex) & "', " _
                     & "NroIb =  '" & Mid(Trim(txtNroIB.Text), 1, 20) & "', " _
-                    & "NroInsc =  '" & Mid(Trim(txtNroSEDRONAR1.Text), 1, 15) & "', " _
+                    & "NroInsc =  '', " _
                     & "Cai =  '', " _
                     & "VtoCai =  '', " _
                     & "TipoProv =  '" & NormalizarIndex(cmbRubro.SelectedIndex) & "', " _
-                    & "CategoriaI =  '" & NormalizarIndex(cmbCategoria1.SelectedIndex) & "', " _
-                    & "CategoriaII =  '" & NormalizarIndex(cmbCategoria2.SelectedIndex) & "', " _
-                    & "Iso =  '" & NormalizarIndex(cmbCertificados.SelectedIndex) & "', " _
-                    & "VtoIso =  '" & txtCertificados.Text & "', " _
-                    & "Region =  '" & NormalizarIndex(cmbRegion.SelectedIndex) & "', " _
+                    & "CategoriaI =  '', " _
+                    & "CategoriaII =  '', " _
+                    & "Iso =  '', " _
+                    & "VtoIso =  '', " _
+                    & "Region =  '', " _
                     & "PorceIb =  " & Proceso.formatonumerico(txtPorcelProv.Text) & ", " _
                     & "Estado =  '" & NormalizarIndex(cmbEstado.SelectedIndex) & "', " _
                     & "IbCiudadII =  '" & NormalizarIndex(cmbInscripcionIB.SelectedIndex) & "', " _
-                    & "Califica =  '" & NormalizarIndex(cmbCalificacion.SelectedIndex) & "', " _
-                    & "FechaCalifica =  '" & Mid(Trim(txtCalificacion.Text), 1, 10) & "', " _
-                    & "OrdFechaCalifica =  '" & Mid(_FechaComoOrd(txtCalificacion.Text), 1, 10) & "', " _
+                    & "Califica =  '', " _
+                    & "FechaCalifica =  '', " _
+                    & "OrdFechaCalifica =  '', " _
                     & "ObservacionesII =  '" & observaciones & "', " _
-                    & "FechaCategoria =  '" & Mid(Trim(txtCategoria.Text), 1, 10) & "', " _
-                    & "OrdFechaCategoria =  '" & Mid(_FechaComoOrd(txtCategoria.Text), 1, 10) & "', " _
-                    & "FechaNroInsc =  '" & Mid(Trim(txtNroSEDRONAR2.Text), 1, 10) & "', " _
-                    & "OrdFechaNroInsc =  '" & Mid(_FechaComoOrd(txtNroSEDRONAR2.Text), 1, 10) & "', " _
+                    & "FechaCategoria =  '', " _
+                    & "OrdFechaCategoria =  '', " _
+                    & "FechaNroInsc =  '', " _
+                    & "OrdFechaNroInsc =  '', " _
                     & "PorceIbCaba =  " & Proceso.formatonumerico(txtPorcelCABA.Text) & ", " _
                     & "Cufe =  '" & Mid(Trim(cufe1.Item1), 1, 20) & "', " _
                     & "CufeII =  '" & Mid(Trim(cufe2.Item1), 1, 20) & "', " _
@@ -170,7 +170,7 @@ Public Class ProveedoresABM
                     & "ContactoCargo3 = '" & Mid(Trim(_Contacto3.Item2), 1, 50) & "', " _
                     & "ContactoTelefono3 = '" & Mid(Trim(_Contacto3.Item3), 1, 50) & "', " _
                     & "ContactoEmail3 = '" & Mid(Trim(_Contacto3.Item4), 1, 50) & "', " _
-                    & "ClienteAsociado = '" & Mid(Trim(txtClienteAsociado.Text), 1, 6) & "', " _
+                    & "ClienteAsociado = '', " _
                     & "Inhabilitado = '" & Trim(_Inhabilitado) & "' " _
                     & " WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'"
 
@@ -201,8 +201,8 @@ Public Class ProveedoresABM
 
         Dim Xcs As String = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
 
         ' DETERMINO LAS EMPRESAS CON LAS QUE TRABAJAR.
@@ -253,7 +253,7 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub agregar()
-        Dim _Autorizado As Boolean = False
+        Dim _Autorizado = False
 
         If Trim(txtCodigo.Text) = "" Then
             Exit Sub
@@ -268,58 +268,6 @@ Public Class ProveedoresABM
             End If
         End If
 
-
-        ' Validamos la cuenta corriente en caso de que haya colocado alguna.
-        If Trim(txtCuenta.Text) <> "" Then
-            Dim cuentacontable As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
-
-            If IsNothing(cuentacontable) Then
-                MsgBox("La cuenta contable indicada no existe.", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-        End If
-
-
-        ' Validamos que se haya indicado fecha para sedronar en caso de que se haya colocado un valor.
-        ' y que esta sea valida.
-        If Trim(txtNroSEDRONAR1.Text) <> "" Then
-
-            If Trim(txtNroSEDRONAR2.Text).Replace("/", "") = "" And Not Proceso._ValidarFecha(txtNroSEDRONAR2.Text) Then
-                MsgBox("Se debe informar la fecha de vencimiento de Sedronar.", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-
-        End If
-
-        ' Validamos los campos de fechas restantes.
-
-        If cmbCalificacion.SelectedIndex > 0 Then
-
-            If Not Proceso._ValidarFecha(txtCalificacion.Text) Then
-                MsgBox("Debe ingresarse fecha de la Calificación.", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-
-        End If
-
-        If cmbCertificados.SelectedIndex > 0 Then
-
-            If Not Proceso._ValidarFecha(txtCertificados.Text) Then
-                MsgBox("Debe ingresarse fecha del certificado.", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-
-        End If
-
-
-        If Trim(txtClienteAsociado.Text) <> "" Then
-            Dim c As Cliente = DAOCliente.buscarClientePorCodigo(Trim(txtClienteAsociado.Text))
-
-            If IsNothing(c) Then
-                MsgBox("El cliente indicado no es un cliente válido.", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-        End If
 
         With PedirClaveAutorizacion
 
@@ -356,7 +304,7 @@ Public Class ProveedoresABM
         proveedor.localidad = txtLocalidad.Text
         proveedor.provincia = cmbProvincia.SelectedIndex
         proveedor.codPostal = txtCodigoPostal.Text
-        proveedor.region = cmbRegion.SelectedIndex
+        proveedor.region = 0
         proveedor.telefono = txtTelefono.Text
         proveedor.diasPlazo = txtDiasPlazo.Text
         proveedor.email = txtEmail.Text
@@ -364,7 +312,7 @@ Public Class ProveedoresABM
         proveedor.cuit = txtCUIT.Text
         proveedor.tipo = cmbTipoProveedor.SelectedIndex
         proveedor.codIva = cmbIVA.SelectedIndex
-        proveedor.cuenta = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
+        proveedor.cuenta = DAOCuentaContable.buscarCuentaContablePorCodigo(0)
         proveedor.nombreCheque = txtCheque.Text
         proveedor.condicionIB1 = cmbCondicionIB1.SelectedIndex
         proveedor.condicionIB2 = cmbCondicionIB2.SelectedIndex
@@ -372,19 +320,19 @@ Public Class ProveedoresABM
         proveedor.porceIBProvincia = Val(WPorcelProv)
         proveedor.porceIBCABA = Val(WPorcelCABA)
         proveedor.RawRubro = cmbRubro.SelectedIndex
-        proveedor.numeroSEDRONAR = txtNroSEDRONAR1.Text
-        proveedor.vtoSEDRONAR = txtNroSEDRONAR2.Text
-        proveedor.categoria = cmbCategoria1.SelectedIndex
-        proveedor.categoriaCalif = cmbCategoria2.SelectedIndex
-        proveedor.vtoCategoria = txtCategoria.Text
+        proveedor.numeroSEDRONAR = ""
+        proveedor.vtoSEDRONAR = ""
+        proveedor.categoria = 0
+        proveedor.categoriaCalif = 0
+        proveedor.vtoCategoria = ""
         proveedor.tipoInscripcionIB = cmbInscripcionIB.SelectedIndex
         proveedor.cai = "" 'txtCAI.Text
         proveedor.vtoCAI = "" 'txtCAIVto.Text
-        proveedor.certificados = cmbCertificados.SelectedIndex
-        proveedor.vtoCertificados = txtCertificados.Text
+        proveedor.certificados = 0
+        proveedor.vtoCertificados = ""
         proveedor.estado = cmbEstado.SelectedIndex
-        proveedor.calificacion = cmbCalificacion.SelectedIndex
-        proveedor.vtoCalificacion = txtCalificacion.Text
+        proveedor.calificacion = 0
+        proveedor.vtoCalificacion = ""
 
         proveedor.observacionCompleta = observaciones
         proveedor.cufe1 = cufe1.Item1
@@ -394,7 +342,7 @@ Public Class ProveedoresABM
         proveedor.dirCUFE2 = cufe2.Item2
         proveedor.dirCUFE3 = cufe3.Item2
 
-        Dim cliente As Cliente = DAOCliente.buscarClientePorCodigo(Trim(txtClienteAsociado.Text))
+        Dim cliente As Cliente = DAOCliente.buscarClientePorCodigo(0)
 
         proveedor.cliente = IIf(Not IsNothing(cliente), cliente, New Cliente())
 
@@ -444,7 +392,6 @@ Public Class ProveedoresABM
         txtLocalidad.Text = proveedor.localidad
         cmbProvincia.SelectedIndex = proveedor.provincia
         txtCodigoPostal.Text = proveedor.codPostal
-        cmbRegion.SelectedIndex = proveedor.region
         txtTelefono.Text = proveedor.telefono
         txtDiasPlazo.Text = proveedor.diasPlazo
         txtEmail.Text = proveedor.email
@@ -452,7 +399,6 @@ Public Class ProveedoresABM
         txtCUIT.Text = proveedor.cuit
         cmbTipoProveedor.SelectedIndex = proveedor.tipo
         cmbIVA.SelectedIndex = proveedor.codIva
-        mostrarCuenta(proveedor.cuenta)
         txtCheque.Text = proveedor.nombreCheque
         cmbCondicionIB1.SelectedIndex = proveedor.condicionIB1
         cmbCondicionIB2.SelectedIndex = proveedor.condicionIB2
@@ -461,34 +407,14 @@ Public Class ProveedoresABM
         txtPorcelCABA.Text = proveedor.porceIBCABA
         'mostrarRubro(proveedor.rubro)
         cmbRubro.SelectedIndex = proveedor.RawRubro
-        txtNroSEDRONAR1.Text = proveedor.numeroSEDRONAR
-        txtNroSEDRONAR2.Text = proveedor.vtoSEDRONAR
-        cmbCategoria1.SelectedIndex = proveedor.categoria
-        cmbCategoria2.SelectedIndex = proveedor.categoriaCalif
-        txtCategoria.Text = proveedor.vtoCategoria
         cmbInscripcionIB.SelectedIndex = proveedor.tipoInscripcionIB
         txtCAI.Text = "" 'proveedor.cai
         txtCAIVto.Text = "" ' proveedor.vtoCAI
-        cmbCertificados.SelectedIndex = proveedor.certificados
-        txtCertificados.Text = proveedor.vtoCertificados
         cmbEstado.SelectedIndex = proveedor.estado
-        cmbCalificacion.SelectedIndex = proveedor.calificacion
-        txtCalificacion.Text = proveedor.vtoCalificacion
-
-        txtClienteAsociado.Text = ""
-        txtClienteAsociadoDescripcion.Text = ""
-
-        If Not IsNothing(proveedor.cliente) then
-            txtClienteAsociado.Text = Trim(proveedor.cliente.id)
-            txtClienteAsociadoDescripcion.Text = Trim(proveedor.cliente.razon)
-        End If
 
         CKBProveedorInactivo.Checked = proveedor.Inhabilitado <> "0"
 
         observaciones = proveedor.observacionCompleta
-        cufe1 = Tuple.Create(proveedor.cufe1, proveedor.dirCUFE1)
-        cufe2 = Tuple.Create(proveedor.cufe2, proveedor.dirCUFE2)
-        cufe3 = Tuple.Create(proveedor.cufe3, proveedor.dirCUFE3)
 
         txtPaginaWeb.Text = proveedor.PaginaWeb(0).ToString
 
@@ -511,9 +437,9 @@ Public Class ProveedoresABM
     End Sub
 
     Private Function _ProveedorEmbargado() As Boolean
-        Dim embargado As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Embargo FROM Proveedor WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'")
+        Dim embargado = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Embargo FROM Proveedor WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -545,28 +471,6 @@ Public Class ProveedoresABM
         Return embargado
     End Function
 
-    Private Sub mostrarCuenta(ByVal cuenta As CuentaContable)
-        If Not IsNothing(cuenta) Then
-            txtCuenta.Text = cuenta.id
-            txtCuentaDescripcion.Text = cuenta.descripcion
-        End If
-    End Sub
-
-    '    Private Sub mostrarRubro(ByVal rubro As RubroProveedor)
-    '        If Not IsNothing(rubro) Then
-    '            cmbRubro.SelectedItem = rubro.descripcion
-    '        Else
-    '            cmbRubro.SelectedValue = -1
-    '        End If
-    '    End Sub
-
-    '    Private Sub listado()
-    '        'DirectCast(Me.Controls("controlButtonsGroupBox").Controls("btnLastReg"), CustomButton).PerformClick()
-    '        'Do While txtCodigo.Text <> "00000000001"
-    '        '    DirectCast(Me.Controls("controlButtonsGroupBox").Controls("btnPreviousReg"), CustomButton).PerformClick()
-    '        'Loop
-    '    End Sub
-
     Private Sub btnObservaciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnObservaciones.Click
         Dim formularioObservaciones As New ObservacionesProveedor()
 
@@ -574,27 +478,6 @@ Public Class ProveedoresABM
         If formularioObservaciones.ShowDialog(Me) = DialogResult.OK Then
             observaciones = formularioObservaciones.CustomTextBox1.Text
         End If
-    End Sub
-
-    Private Sub btnCUFE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCUFE.Click
-
-        With CUFEProveedor
-
-            .txtCUFE1.Text = cufe1.Item1
-            .txtCUFE1Fecha.Text = cufe1.Item2
-            .txtCUFE2.Text = cufe2.Item1
-            .txtCUFE2Fecha.Text = cufe2.Item2
-            .txtCUFE3.Text = cufe3.Item1
-            .txtCUFE3Fecha.Text = cufe3.Item2()
-
-            .ShowDialog()
-
-            cufe1 = Tuple.Create(.txtCUFE1.Text, .txtCUFE1Fecha.Text)
-            cufe2 = Tuple.Create(.txtCUFE2.Text, .txtCUFE2Fecha.Text)
-            cufe3 = Tuple.Create(.txtCUFE3.Text, .txtCUFE3Fecha.Text)
-
-        End With
-
     End Sub
 
     Private Sub btnPrimerRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerRegistro.Click
@@ -753,46 +636,9 @@ Public Class ProveedoresABM
         Select Case TipoConsulta
             Case "Proveedor"
                 _TraerProveedor(LBConsulta.SelectedItem)
-            Case "Cuenta"
-                _TraerCuenta(LBConsulta.SelectedItem)
-            Case "Cliente"
-                _TraerCliente(LBConsulta.SelectedItem)
             Case "TipoProv"
                 _TraerRubros(LBConsulta.SelectedItem)
         End Select
-
-    End Sub
-
-    Private Sub _TraerCliente(ByVal clave As String)
-        If Trim(clave) = "" Then : Exit Sub : End If
-        Try
-            ' Lo buscamos por nombre
-            Dim cliente As List(Of Cliente) = DAOCliente.buscarClientePorNombre(Trim(clave))
-
-            If cliente.Count > 0 Then
-
-                txtClienteAsociado.Text = Trim(cliente(0).id)
-                txtClienteAsociadoDescripcion.Text = Trim(cliente(0).razon)
-
-            Else
-                ' Lo buscamos por codigo.
-                Dim cliente2 As Cliente = DAOCliente.buscarClientePorCodigo(Trim(clave))
-                If Not IsNothing(cliente2) Then
-
-                    txtClienteAsociado.Text = Trim(cliente2.id)
-                    txtClienteAsociadoDescripcion.Text = Trim(cliente2.razon)
-
-                Else
-                    txtClienteAsociadoDescripcion.Text = ""
-                End If
-
-            End If
-        Catch ex As Exception
-            MsgBox("No se pudo consultar la base de datos para el cliente indicado.", MsgBoxStyle.Information)
-            Exit Sub
-        End Try
-
-        _ContraerFormulario()
 
     End Sub
 
@@ -805,10 +651,6 @@ Public Class ProveedoresABM
         Select Case TipoConsulta
             Case "Proveedor"
                 _TraerProveedor(LBConsulta_Filtrada.SelectedItem)
-            Case "Cuenta"
-                _TraerCuenta(LBConsulta_Filtrada.SelectedItem)
-            Case "Cliente"
-                _TraerCliente(LBConsulta_Filtrada.SelectedItem)
             Case "TipoProv"
                 _TraerRubros(LBConsulta.SelectedItem)
         End Select
@@ -842,8 +684,8 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub _ListarConsulta(ByVal columnas As String, ByVal tabla As String)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT " + columnas + " FROM " + tabla)
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT " + columnas + " FROM " + tabla)
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -858,12 +700,12 @@ Public Class ProveedoresABM
 
                 Do While dr.Read()
 
-                    If LBConsulta_Opciones.SelectedIndex = 0 then
+                    If LBConsulta_Opciones.SelectedIndex = 0 Then
                         LBConsulta.Items.Add(dr.Item(0) & "    " & dr.Item(1))
                     Else
                         LBConsulta.Items.Add(dr.Item(0))
                     End If
-                    
+
 
                 Loop
 
@@ -892,20 +734,6 @@ Public Class ProveedoresABM
             cn = Nothing
 
         End Try
-    End Sub
-
-    Private Sub _TraerCuenta(ByVal descripcion)
-        Dim cuenta As New List(Of CuentaContable)
-        cuenta = DAOCuentaContable.buscarCuentaContablePorDescripcion(descripcion)
-
-        If Not IsNothing(cuenta) Then
-
-            txtCuenta.Text = cuenta(0).id
-            txtCuentaDescripcion.Text = cuenta(0).descripcion
-
-            _ContraerFormulario()
-            txtCheque.Focus()
-        End If
     End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
@@ -981,7 +809,7 @@ Public Class ProveedoresABM
 
     Private Sub txtCodigoPostal_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigoPostal.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbRegion)
+            txtTelefono.Focus()
         ElseIf e.KeyData = Keys.Escape Then
             txtCodigoPostal.Text = ""
         End If
@@ -1012,8 +840,8 @@ Public Class ProveedoresABM
     End Sub
 
     Private Function _CuitValido(ByVal cuit As String) As Boolean
-        Dim valido As Boolean = False
-        Dim suma As Integer = 0
+        Dim valido = False
+        Dim suma = 0
 
         cuit = cuit.Replace("-", "")
 
@@ -1043,38 +871,9 @@ Public Class ProveedoresABM
 
     Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtCuenta)
+            _SaltarA(txtCheque)
         ElseIf e.KeyData = Keys.Escape Then
             txtObservaciones.Text = ""
-        End If
-    End Sub
-
-    Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
-        If e.KeyData = Keys.Enter Then
-
-
-            If Trim(txtCuenta.Text) <> "" Then
-                Dim cuenta As CuentaContable = DAOCuentaContable.buscarCuentaContablePorCodigo(txtCuenta.Text)
-                If Not IsNothing(cuenta) Then
-                    txtCuentaDescripcion.Text = cuenta.descripcion
-                    _SaltarA(txtCheque)
-                Else
-                    txtCuentaDescripcion.Text = ""
-                    txtCuenta.Focus()
-                End If
-            Else
-                _SaltarA(txtCheque)
-            End If
-
-            
-        ElseIf e.KeyData = Keys.Escape Then
-            txtCuenta.Text = ""
-        End If
-    End Sub
-
-    Private Sub txtCuentaDescripcion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuentaDescripcion.KeyDown
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(txtCheque)
         End If
     End Sub
 
@@ -1104,59 +903,10 @@ Public Class ProveedoresABM
 
     Private Sub txtPorcelCABA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPorcelCABA.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtNroSEDRONAR1)
+            txtPaginaWeb.Focus()
         ElseIf e.KeyData = Keys.Escape Then
             txtPorcelCABA.Text = ""
         End If
-    End Sub
-
-    Private Sub txtNroSEDRONAR1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroSEDRONAR1.KeyDown
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(txtNroSEDRONAR2)
-        ElseIf e.KeyData = Keys.Escape Then
-            txtNroSEDRONAR1.Text = ""
-        End If
-    End Sub
-
-    Private Sub txtNroSEDRONAR2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroSEDRONAR2.KeyDown
-        If e.KeyData = Keys.Enter Then
-            If _ValidarFecha(txtNroSEDRONAR2.Text) Then : Exit Sub : End If
-
-            _SaltarA(cmbCertificados)
-        ElseIf e.KeyData = Keys.Escape Then
-            txtNroSEDRONAR2.Text = ""
-        End If
-    End Sub
-
-    Private Sub txtCategoria_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCategoria.KeyDown
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbInscripcionIB)
-        ElseIf e.KeyData = Keys.Escape Then
-            txtCategoria.Text = ""
-        End If
-    End Sub
-
-    Private Sub txtCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCertificados.KeyDown
-        If e.KeyData = Keys.Enter Then
-            If _ValidarFecha(txtCertificados.Text) Then : Exit Sub : End If
-            _SaltarA(cmbCalificacion)
-        ElseIf e.KeyData = Keys.Escape Then
-            txtCertificados.Text = ""
-        End If
-    End Sub
-
-    Private Sub cmbRegion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbRegion.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(txtTelefono)
-        ElseIf e.KeyData = Keys.Escape Then
-            cmbRegion.SelectedIndex = 0
-        End If
-
-    End Sub
-
-    Private Sub cmbRegion_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRegion.TextChanged
-        _SaltarA(txtTelefono)
     End Sub
 
     Private Sub cmbTipoProveedor_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoProveedor.TextChanged
@@ -1223,42 +973,12 @@ Public Class ProveedoresABM
         _SaltarA(cmbInscripcionIB)
     End Sub
 
-    Private Sub cmbRubro_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRubro.TextChanged
-        _SaltarA(txtNroSEDRONAR1)
-    End Sub
-
     Private Sub cmbRubro_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbRubro.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtNroSEDRONAR1)
+            cmbCondicionIB1.Focus()
         ElseIf e.KeyData = Keys.Escape Then
             cmbRubro.SelectedIndex = 0
         End If
-    End Sub
-
-    Private Sub cmbCategoria1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCategoria1.KeyDown
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbCategoria2)
-        ElseIf e.KeyData = Keys.Escape Then
-            cmbCategoria1.SelectedIndex = 0
-        End If
-    End Sub
-
-    Private Sub cmbCategoria1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCategoria1.TextChanged
-        _SaltarA(cmbCategoria2)
-    End Sub
-
-    Private Sub cmbCategoria2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCategoria2.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(txtCategoria)
-        ElseIf e.KeyData = Keys.Escape Then
-            cmbCategoria2.SelectedIndex = 0
-        End If
-
-    End Sub
-
-    Private Sub cmbCategoria2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCategoria2.TextChanged
-        _SaltarA(txtCategoria)
     End Sub
 
     Private Sub cmbInscripcionIB_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbInscripcionIB.KeyDown
@@ -1287,34 +1007,6 @@ Public Class ProveedoresABM
 
     Private Sub cmbEstado_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbEstado.TextChanged
         _SaltarA(txtPaginaWeb)
-    End Sub
-
-    Private Sub cmbCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCertificados.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(txtCertificados)
-        ElseIf e.KeyData = Keys.Escape Then
-            cmbCertificados.SelectedIndex = 0
-        End If
-
-    End Sub
-
-    Private Sub cmbCertificados_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCertificados.TextChanged
-        _SaltarA(txtCertificados)
-    End Sub
-
-    Private Sub cmbCalificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCalificacion.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            _SaltarA(txtCalificacion)
-        ElseIf e.KeyData = Keys.Escape Then
-            cmbCalificacion.SelectedIndex = 0
-        End If
-
-    End Sub
-
-    Private Sub cmbCalificacion_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCalificacion.TextChanged
-        _SaltarA(txtCalificacion)
     End Sub
 
     Private Sub btnContactos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnContactos.Click
@@ -1405,24 +1097,8 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub txtCuenta_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCuenta.MouseDoubleClick
-
-        _AbrirConsulta("Cuenta")
-        txtFiltrar.Focus()
-
-    End Sub
-
-    Private Sub txtCalificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCalificacion.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            If _ValidarFecha(txtCalificacion.Text) Then : Exit Sub : End If
-            _SaltarA(cmbEstado)
-        End If
-
-    End Sub
-
     Private Function _ValidarFecha(ByVal fecha As String) As Boolean
-        Dim valido As Boolean = True
+        Dim valido = True
 
         If Trim(fecha.Replace("/", "")) = "" Then
             valido = Proceso._ValidarFecha(fecha)
@@ -1430,26 +1106,6 @@ Public Class ProveedoresABM
 
         Return valido
     End Function
-
-    'Private Sub txtCertificados_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
-
-    '    If Trim(txtCertificados.Text).Length = 10 Then
-    '        e.Cancel = _ValidarFecha(txtCertificados.Text)
-    '    End If
-
-    'End Sub
-
-    'Private Sub txtNroSEDRONAR2_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
-    '    If Trim(txtNroSEDRONAR2.Text).Length = 10 Then
-    '        e.Cancel = _ValidarFecha(txtNroSEDRONAR2.Text)
-    '    End If
-    'End Sub
-
-    'Private Sub txtCalificacion_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
-    '    If Trim(txtCalificacion.Text).Length = 10 Then
-    '        e.Cancel = _ValidarFecha(txtCalificacion.Text)
-    '    End If
-    'End Sub
 
     Private Sub cmbProvincia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbProvincia.KeyDown
 
@@ -1463,23 +1119,11 @@ Public Class ProveedoresABM
         _SaltarA(txtLocalidad)
     End Sub
 
-    Private Sub txtClienteAsociado_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtClienteAsociado.MouseDoubleClick
+    Private Sub txtClienteAsociado_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         LBConsulta_Opciones.SelectedIndex = 2
         LBConsulta_Opciones_SelectedIndexChanged(Nothing, Nothing)
         _ExpandirFormulario()
         txtFiltrar.Focus()
-    End Sub
-
-    Private Sub txtClienteAsociado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtClienteAsociado.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            If Trim(txtClienteAsociado.Text) <> "" Then
-                _TraerCliente(Trim(txtClienteAsociado.Text))
-            Else
-                txtClienteAsociadoDescripcion.Text = ""
-            End If
-        End If
-
     End Sub
 
     Private Sub CKBProveedorInactivo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CKBProveedorInactivo.CheckedChanged
@@ -1492,23 +1136,42 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress, txtCodigoPostal.KeyPress, txtCuenta.KeyPress
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress, txtCodigoPostal.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        'Dim _provedores As New List(Of String) From {"01000000012", "01000000001", "00000000008", "10008321238", "1000466464 ", "00000000010", "00000000009", "10067727539", "10999888782", "10014871417", "10053801902"}
 
-        'For Each _Proveedor As String In _provedores
-        '    txtCodigo.Text = _Proveedor
-        '    txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        Dim WProveedores As DataTable = _TraerProveedores()
 
-        '    btnAgregar.PerformClick()
-        'Next
+        For Each _Proveedor As DataRow In WProveedores.Rows
+            txtCodigo.Text = _Proveedor.Item("Proveedor")
+            txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        Next
 
     End Sub
+
+    Private Function _TraerProveedores() As DataTable
+        Dim cn As New SqlConnection
+        Dim cm As New SqlCommand
+        Dim dr As SqlDataReader
+        Dim tabla As New DataTable
+
+        cn.ConnectionString = Proceso._ConectarA
+        cn.Open()
+        cm.Connection = cn
+        cm.CommandText = "SELECT Proveedor from proveedor order by Proveedor"
+
+        dr = cm.ExecuteReader
+
+        If dr.HasRows Then
+            tabla.Load(dr)
+        End If
+
+        Return tabla
+    End Function
 
     Private Sub btnCerrarConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsultas.Click
         _ContraerFormulario()

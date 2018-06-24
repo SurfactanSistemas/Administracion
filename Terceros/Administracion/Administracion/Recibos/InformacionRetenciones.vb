@@ -3,7 +3,7 @@
     Private _valor As String = ""
     Protected _TipoInformacion As String = ""
 
-    Public Property TipoInformacion() As String
+    Public Property TipoInformacion As String
         Get
             Return _TipoInformacion
         End Get
@@ -13,7 +13,7 @@
     End Property
 
 
-    Public Property Valor() As String
+    Public Property Valor As String
 
         Get
             Return _valor

@@ -4,7 +4,7 @@ Public Class ConsultaNumeroFactura
     Public numero As Integer = 0
 
     Private Sub ConsultaNumeroFactura_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         Dim handler As New CommonEventsHandler
         handler.setIndexTabNotCRUDForm(Me)
     End Sub

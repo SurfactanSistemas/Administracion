@@ -1,7 +1,7 @@
 ﻿Public Class ObservacionesProveedor
 
     Private Sub ObservacionesProveedor_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Label2.Text = ClasesCompartidas.Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
     End Sub
 
     Private Sub ObservacionesProveedor_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown

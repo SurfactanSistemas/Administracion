@@ -4,7 +4,7 @@ Imports ClasesCompartidas
 Public Class CierreMes
 
     Private Sub CierreMes_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtMes.Text = ""
         txtAno.Text = ""
         cmbEstado.SelectedIndex = 2
@@ -33,8 +33,8 @@ Public Class CierreMes
 
     Private Sub _VerificarEstado()
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Estado FROM Cierre WHERE Mes = '" & txtMes.Text & "' AND Ano = '" & txtAno.Text & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Estado FROM Cierre WHERE Mes = '" & txtMes.Text & "' AND Ano = '" & txtAno.Text & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -97,8 +97,8 @@ Public Class CierreMes
 
         If cmbEstado.SelectedIndex = 2 Then Exit Sub
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Cierre WHERE Mes = '" & txtMes.Text & "' AND Ano = '" & txtAno.Text & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT * FROM Cierre WHERE Mes = '" & txtMes.Text & "' AND Ano = '" & txtAno.Text & "'")
         Dim dr As SqlDataReader
         Dim ZSql = ""
 

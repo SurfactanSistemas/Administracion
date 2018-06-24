@@ -13,11 +13,11 @@ Public Class CarpetasPagos
     End Sub
 
     Private Function _ValidarCarpeta(ByVal _Carpeta As String) As Boolean
-        Dim valida As Boolean = False
+        Dim valida = False
         ' Seguimos en caso de que no se la haya validado con anterioridad.
         Dim _Empresas = Proceso.Empresas
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Carpeta, Proveedor FROM Orden WHERE Carpeta = '" & _Carpeta & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Carpeta, Proveedor FROM Orden WHERE Carpeta = '" & _Carpeta & "'")
         Dim dr As SqlDataReader
 
         For Each _Empresa As String In _Empresas

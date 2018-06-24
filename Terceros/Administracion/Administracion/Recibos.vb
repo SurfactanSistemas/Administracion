@@ -53,7 +53,7 @@ Public Class Recibos
 
     Private Sub Recibos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
 
         WRow = -1
         Wcol = -1
@@ -93,8 +93,8 @@ Public Class Recibos
     End Sub
 
     Private Sub _CargarCtasCtes()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Impre, Numero, Fecha, Saldo FROM CtaCte WHERE Saldo <> 0 AND Cliente = '" & Trim(txtCliente.Text) & "' order by OrdFecha, Numero")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Impre, Numero, Fecha, Saldo FROM CtaCte WHERE Saldo <> 0 AND Cliente = '" & Trim(txtCliente.Text) & "' order by OrdFecha, Numero")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -125,8 +125,8 @@ Public Class Recibos
     End Sub
 
     Private Sub _CargarClientes()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cliente, Razon FROM Cliente")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Cliente, Razon FROM Cliente")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -221,8 +221,8 @@ Public Class Recibos
 
     Private Sub _AsignarCtaCte(ByVal stringCtaCte As String)
         Dim cuenta As String() = stringCtaCte.Replace(_SEPARADOR, "$").Split("$")
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Tipo, Saldo, TotalUs, Paridad FROM CtaCte WHERE Numero = '" & cuenta(1) & "' and Impre = '" & cuenta(0) & "' and Cliente = '" & Trim(txtCliente.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Numero, Tipo, Saldo, TotalUs, Paridad FROM CtaCte WHERE Numero = '" & cuenta(1) & "' and Impre = '" & cuenta(0) & "' and Cliente = '" & Trim(txtCliente.Text) & "'")
         Dim dr As SqlDataReader
         Dim row As Integer
 
@@ -275,79 +275,21 @@ Public Class Recibos
     End Sub
 
     Private Function _SumarDebitos() As Boolean
-        Dim _Paridad, _TipoCompo As String
-        Dim _Error As Boolean = False
+        Dim _Error = False
         lblTotalDebitos.Text = 0
-        lblDolares.Text = 0
 
         For Each row As DataGridViewRow In gridPagos2.Rows
 
-            _Paridad = 0
-            _TipoCompo = 0
-
             If Val(row.Cells(4).Value) <> 0 Then
 
-                Dim cn As SqlConnection = New SqlConnection()
-                Dim cm As SqlCommand = New SqlCommand("SELECT Paridad, TipoCompo FROM CtaCte WHERE clave = '" & row.Cells(0).Value & ceros(row.Cells(3).Value, 8) & "01'")
-                Dim dr As SqlDataReader
-
-                SQLConnector.conexionSql(cn, cm)
-
-                Try
-
-                    dr = cm.ExecuteReader()
-
-                    If dr.HasRows Then
-
-                        With dr
-
-                            .Read()
-
-                            _Paridad = _NormalizarNumero(.Item("Paridad").ToString)
-                            _TipoCompo = Val(IIf(IsDBNull(.Item("TipoCompo")), 0, .Item("TipoCompo")))
-                            
-                        End With
-
-                    End If
-
-                Catch ex As Exception
-                    MsgBox("Hubo un problema al querer consultar la informacón de la Cuenta Corriente.", MsgBoxStyle.Critical)
-                    _Error = True
-                Finally
-
-                    cn.Close()
-
-                End Try
-
-                'If _Provincia = 24 And Val(_TotalUs) <> 0 Then
-                If _Provincia = 24 Then
-
-                    lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_NormalizarNumero(_Paridad)))
-
-                    lblDolares.Text += Val(_NormalizarNumero(row.Cells(4).Value))
-
-                Else
-
-                    lblTotalDebitos.Text += Val(_NormalizarNumero(row.Cells(4).Value))
-
-                    'If _TipoCompo <> 2 And _Paridad <> 0 Then
-                    If _Paridad <> 0 Then
-
-                        lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_NormalizarNumero(_Paridad)))
-
-                    End If
-
-                End If
+                lblTotalDebitos.Text += Val(_NormalizarNumero(row.Cells(4).Value))
 
             End If
         Next
 
         lblTotalDebitos.Text = _NormalizarNumero(lblTotalDebitos.Text)
         lblDiferencia.Text = Val(_NormalizarNumero(lblTotalDebitos.Text)) - Val(_NormalizarNumero(lblTotalCreditos.Text))
-        lblDolares.Text = _NormalizarNumero(lblDolares.Text)
-
-        _RecalcularDolaresfinales()
-
+        
         Return _Error
 
     End Function
@@ -355,18 +297,6 @@ Public Class Recibos
     Private Function _Redondear(ByVal numero As String) As String
         Return _NormalizarNumero(Math.Round(Val(_NormalizarNumero(numero)), 2))
     End Function
-
-    Private Sub _RecalcularDolaresfinales()
-        If Val(_NormalizarNumero(txtParidad.Text)) > 0 Then
-            lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) - (Val(_NormalizarNumero(lblTotalDebitos.Text)) / Val(_NormalizarNumero(txtParidad.Text)))
-            lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) * -1
-
-            'lblDolares.Text = _NormalizarNumero(lblDolares.Text)
-        Else
-            lblDolares.Text = "0.00"
-        End If
-
-    End Sub
 
     Private Function _CuentaUtilizada(ByRef NumeroCuenta As String)
 
@@ -452,7 +382,6 @@ Public Class Recibos
         _ClavesCheques.Clear()
         _CuentasContables.Clear()
 
-        lblDolares.Text = "0.0"
         lblTotalCreditos.Text = "0.0"
         lblTotalDebitos.Text = "0.0"
         lblDiferencia.Text = "0.0"
@@ -525,7 +454,7 @@ Public Class Recibos
             '_NormalizarFecha(_fecha)
             'txtFecha.Text = _fecha
             _DeterminarParidad()
-            If Not IsNothing(recibo.cliente) then mostrarCliente(recibo.cliente.id)
+            If Not IsNothing(recibo.cliente) Then mostrarCliente(recibo.cliente.id)
             txtRetGanancias.Text = _NormalizarNumero(recibo.retGanancias)
             txtRetIB.Text = _NormalizarNumero(recibo.retIB)
             txtRetIva.Text = _NormalizarNumero(recibo.retIVA)
@@ -619,7 +548,7 @@ Public Class Recibos
     End Sub
 
     Private Function _NormalizarFecha(ByRef fecha As String) As Boolean
-        Dim _FechaValida As Boolean = True
+        Dim _FechaValida = True
         Dim _Fecha As String() = fecha.Split("/")
 
         Try
@@ -650,8 +579,8 @@ Public Class Recibos
     End Sub
 
     Private Sub mostrarReciboProvisorio(ByVal _ReciboProvisorio As String)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + _ReciboProvisorio + "' order by Renglon")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + _ReciboProvisorio + "' order by Renglon")
         Dim dr As SqlDataReader
         Dim _reciboProvi = 0
 
@@ -795,8 +724,8 @@ Public Class Recibos
 
     Private Sub _DeterminarParidad(Optional ByVal fecha As String = "")
         Dim _Fecha As String = IIf(fecha = "", txtFecha.Text, fecha)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cambio FROM Cambios WHERE Fecha = '" & _Fecha & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Cambio FROM Cambios WHERE Fecha = '" & _Fecha & "'")
         Dim dr As SqlDataReader
 
         If Trim(txtFecha.Text) <> "" Then
@@ -835,7 +764,7 @@ Public Class Recibos
     End Function
 
     Private Function _SumarCreditos() As Boolean
-        Dim _Error As Boolean = False
+        Dim _Error = False
 
         txtRetGanancias.Text = _NormalizarNumero(txtRetGanancias.Text)
         txtRetIva.Text = _NormalizarNumero(txtRetIva.Text)
@@ -894,8 +823,8 @@ Public Class Recibos
     End Sub
 
     Private Sub mostrarCliente(ByVal cliente As String)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal, c.EmailFacturaII as Email " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal, c.EmailFacturaII as Email " _
                                               & " FROM Cliente as c, Provincia as p WHERE c.Cliente = '" & cliente & "' AND p.Provincia = c.Provincia")
         Dim dr As SqlDataReader
 
@@ -982,7 +911,7 @@ Public Class Recibos
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
         ' Comprobamos que el numero de recibo sea cero. En caso de que no,
         ' Chequeamos si el numero se corresponde con algun Recibo existente y se avisa al usuario de que no se permite actualizar.
-        Dim WMarcaDiferencia As String = ""
+        Dim WMarcaDiferencia = ""
 
 
         ' Comprobamos que todos los Tipos de Pagos de Tipo 2, tengan un numero definido y distinto de 0
@@ -1048,18 +977,6 @@ Public Class Recibos
             If Trim(txtRecibo.Text) = "" Or Trim(txtFecha.Text) = "" Then
                 MsgBox("Por favor verifique que tanto el número de Recibo como la fecha del mismo se encuentren cargados.", MsgBoxStyle.Information)
                 Exit Sub
-            End If
-
-            ' Comprbamos la diferencia de cambio y consultamos con el usuario sobre si graba igual o no.
-            If optCtaCte.Checked And _ExisteDiferenciaDeCambio() Then
-                If MsgBox("Existe una diferencia de cambio de U$S " & lblDolares.Text & vbCrLf & "¿Desea grabar igualmente el recibo?", MsgBoxStyle.OkCancel, MsgBoxStyle.Information) = DialogResult.Cancel Then
-                    Exit Sub
-                    ' Comentado hasta que este completamente desarrollado el resto.
-                    'Else
-                    '    If MsgBox("¿Desea avisar a Ventas sobre esta diferencia de Cambio?", MsgBoxStyle.YesNo, MsgBoxStyle.Information) = DialogResult.Yes Then
-                    '        WMarcaDiferencia = "X"
-                    '    End If
-                End If
             End If
 
             ' Comprobamos que los creditos indicados como de tipo 4 tengan su respectiva cuenta contable asignada.
@@ -1147,7 +1064,7 @@ Public Class Recibos
     End Sub
 
     Private Function _ReciboYaExistente(ByVal recibo As String) As Boolean
-        Dim _existe As Boolean = False
+        Dim _existe = False
         cm.CommandText = "SELECT Recibo From Recibos WHERE Recibo = '" & recibo & "'"
 
         SQLConnector.conexionSql(cn, cm)
@@ -1177,9 +1094,9 @@ Public Class Recibos
 
         Dim iRow As Integer
         Dim _Cheque As Object = Nothing
-        Dim _CuitExistente As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim _CuitExistente = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
 
         ' Ahora guardamos los creditos.
@@ -1589,7 +1506,7 @@ Public Class Recibos
     End Sub
 
     Private Function _SeDebeMarcarRecibo() As Boolean
-        Dim _Marcar As Boolean = True
+        Dim _Marcar = True
 
         cm.CommandText = "SELECT Estado2 FROM Recibos WHERE Recibo = '" & txtRecibo.Text & "'"
         SQLConnector.conexionSql(cn, cm)
@@ -1630,7 +1547,7 @@ Public Class Recibos
         ' Actualizamos los datos de retenciones, comprobante y diferencias de cambio.
         XSql = ""
         XSql = XSql & "UPDATE Recibos SET "
-        XSql = XSql & " DifCambio = " & _NormalizarNumero(lblDolares.Text) & ","
+        XSql = XSql & " DifCambio = 0,"
         XSql = XSql & " RetSuss = " & _NormalizarNumero(txtRetSuss.Text) & ","
         XSql = XSql & " ComproGanan = " & "'" & Val(Trim(_ComprobanteRetGanancias)) & "',"
         XSql = XSql & " ComproIva = " & "'" & Val(Trim(_ComprobanteRetIva)) & "',"
@@ -1780,9 +1697,9 @@ Public Class Recibos
 
         Dim iRow, WRow As Integer
         Dim _Cheque As Object = Nothing
-        Dim _CuitExistente As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim _CuitExistente = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
 
         For iRow = 0 To gridPagos2.Rows.Count - 1
@@ -2291,7 +2208,7 @@ Public Class Recibos
     End Sub
 
     Private Function _NoImputadosCorrectamenteValoresVarios() As Boolean
-        Dim _Error As Boolean = False
+        Dim _Error = False
 
         For Each credito As DataGridViewRow In gridFormasPago2.Rows
 
@@ -2308,7 +2225,7 @@ Public Class Recibos
     End Function
 
     Private Function _CuentaContableIngresada(ByVal index As Integer)
-        Dim _Ingresada As Boolean = False
+        Dim _Ingresada = False
         Dim _CuentaContable As Object = _CuentasContables.FindLast(Function(c) c(0) = index)
 
         If Not IsNothing(_CuentaContable) Then
@@ -2320,12 +2237,8 @@ Public Class Recibos
         Return _Ingresada
     End Function
 
-    Private Function _ExisteDiferenciaDeCambio() As Boolean
-        Return Val(lblDolares.Text) < 0
-    End Function
-
     Private Function _ErrorEnSumaDeSaldos() As Boolean
-        Dim _Error As Boolean = False
+        Dim _Error = False
 
         If _SumarCreditos() Or _SumarDebitos() Then
             _Error = True
@@ -2362,7 +2275,7 @@ Public Class Recibos
     End Function
 
     Private Function _NumeracionDeReciboSiguiente()
-        Dim ultimo As Integer = 0
+        Dim ultimo = 0
 
         cm.CommandText = "SELECT Recibo FROM Recibos WHERE Recibo < 600000 ORDER BY Recibo DESC"
         SQLConnector.conexionSql(cn, cm)
@@ -2719,7 +2632,7 @@ Public Class Recibos
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         Select Case keycode
             Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
@@ -2736,7 +2649,7 @@ Public Class Recibos
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -2748,7 +2661,7 @@ Public Class Recibos
     End Function
 
     Private Function _EsDecimalOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -3048,7 +2961,7 @@ Public Class Recibos
     End Function
 
     Private Function _ChequeYaCargado(ByVal ClaveCheque) As Boolean
-        Dim _cargado As Boolean = False
+        Dim _cargado = False
 
         If _ChequeUtilizadoEnRecibo(ClaveCheque) Then
 
@@ -3071,7 +2984,7 @@ Public Class Recibos
     End Function
 
     Private Function _ChequeUtilizadoEnRecibo(ByVal ClaveCheque As String) As Boolean
-        Dim utilizado As Boolean = False
+        Dim utilizado = False
         cm.CommandText = "SELECT TOP 1 ClaveCheque FROM Recibos WHERE ClaveCheque = '" & ClaveCheque & "'"
 
         SQLConnector.conexionSql(cn, cm)
@@ -3096,7 +3009,7 @@ Public Class Recibos
     End Function
 
     Private Function _ChequeUtilizadoEnReciboProvisorio(ByVal ClaveCheque As String) As Boolean
-        Dim utilizado As Boolean = False
+        Dim utilizado = False
         cm.CommandText = "SELECT TOP 1 ClaveCheque FROM RecibosProvi WHERE ClaveCheque = '" & ClaveCheque & "'"
 
         SQLConnector.conexionSql(cn, cm)
@@ -3134,7 +3047,7 @@ Public Class Recibos
 
     Private Function _ProcesarCheque(ByVal row As Integer, ByVal ClaveCheque As String) As Boolean
         Dim _ClaveBanco, _Banco, _Sucursal, _NumCheque, _NumCta, _Cuit As String
-        Dim _LecturaCorrecta As Boolean = True
+        Dim _LecturaCorrecta = True
 
         If Not _FormatoValidoDeCheque(ClaveCheque) Then
             MsgBox("El formato del cheque no es valido.", MsgBoxStyle.Exclamation)
@@ -3180,7 +3093,7 @@ Public Class Recibos
     End Function
 
     Private Function _ObtenerNombreBanco(ByVal claveBanco As String) As String
-        Dim _NombreBanco As String = ""
+        Dim _NombreBanco = ""
         cm.CommandText = "SELECT Nombre FROM BCRA WHERE Banco = '" & Val(claveBanco) & "'"
 
         SQLConnector.conexionSql(cn, cm)
@@ -3209,7 +3122,7 @@ Public Class Recibos
     End Function
 
     Private Function _TraerNumeroCuit(ByVal clave As String) As String
-        Dim _cuit As String = ""
+        Dim _cuit = ""
         cm.CommandText = "SELECT Cuit FROM Cuit WHERE Clave = '" & Trim(clave) & "'"
 
         SQLConnector.conexionSql(cn, cm)
@@ -3308,7 +3221,7 @@ Public Class Recibos
     End Sub
 
     Private Sub _PedirCuentaContable(ByVal row As Integer)
-        Dim cuenta As String = ""
+        Dim cuenta = ""
         Dim buscar As Object = Nothing
 
         buscar = _CuentasContables.FindLast(Function(c) c(0) = row)
@@ -3331,7 +3244,7 @@ Public Class Recibos
     End Sub
 
     Private Function _CuentaContableValida(ByRef cuenta As String)
-        Dim _CuentaValida As Boolean = False
+        Dim _CuentaValida = False
 
         cm.CommandText = "SELECT Cuenta FROM Cuenta WHERE Cuenta= '" & Trim(cuenta) & "'"
         SQLConnector.conexionSql(cn, cm)
@@ -3407,9 +3320,9 @@ Public Class Recibos
 
         ' Chequeamos que se haya cargado un recibo antes de mandar a imprimir.
         If Val(txtRecibo.Text) > 0 Then
-            
-            If Proceso._EsPellital then
-                _PrepararEImprimirReciboPellital
+
+            If Proceso._EsPellital Then
+                _PrepararEImprimirReciboPellital()
             Else
                 _PrepararEImprimirRecibo()
             End If
@@ -3431,8 +3344,8 @@ Public Class Recibos
         Dim Vector(30, 10) As String
         Dim WEntra(100, 120) As String
         Dim ImpreTipo(100) As String
-        Dim XLugar As Integer = 0
-        Dim iRow As Integer = 0
+        Dim XLugar = 0
+        Dim iRow = 0
 
         ' Inicializamos todas las variable a utilizar.
         If optVarios.Checked Then
@@ -4131,8 +4044,8 @@ Public Class Recibos
         Dim detallado As New DataTable("Detallado")
         Dim row As DataRow
         Dim crdoc As ReportDocument
-        Dim cantidad As Integer = 2
-        Dim enviarEmail As Boolean = False
+        Dim cantidad = 2
+        Dim enviarEmail = False
         crdoc = New ReciboDefinitivoEmail
 
         If Trim(WEmail) <> "" Then
@@ -4159,7 +4072,7 @@ Public Class Recibos
         End If
 
         ' Ajustes varios para acomodar la informacion en un pdf en vez de ser preimpreso.
-        Dim ultimo As Integer = 1
+        Dim ultimo = 1
         Dim WTemp(22, 5) As String
 
         For i = 5 To 22
@@ -4363,7 +4276,7 @@ Public Class Recibos
             .Columns.Add("Renglon")
         End With
 
-        Dim WCRenglon As Integer = 0
+        Dim WCRenglon = 0
         ' Ahora asignamos los datos de los cheques.
         For w = 0 To 39
 
@@ -4537,10 +4450,10 @@ Public Class Recibos
         Dim Vector(50, 10) As String
         Dim WEntra(100, 180) As String
         Dim WCheques(100, 5) As String
-        Dim WRCheques As Integer = 0
+        Dim WRCheques = 0
         Dim ImpreTipo(100) As String
-        Dim XLugar As Integer = 0
-        Dim iRow As Integer = 0
+        Dim XLugar = 0
+        Dim iRow = 0
 
         ' Inicializamos todas las variable a utilizar.
         If optVarios.Checked Then
@@ -5127,7 +5040,7 @@ Public Class Recibos
     End Sub
 
     Private Function _ObtenerFechaCtaCte(ByVal clave As String) As String
-        Dim fecha As String = ""
+        Dim fecha = ""
 
         cm.CommandText = "SELECT fecha FROM CtaCte WHERE Clave = '" & clave & "'"
 
@@ -5157,9 +5070,9 @@ Public Class Recibos
 
     Private Sub btnDias_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDias.Click
         Dim Suma1, Suma2, Suma3, Suma4 As Double
-        Dim FechaBase As String = "01/01/2006"
+        Dim FechaBase = "01/01/2006"
         Dim XFecha1 = ""
-        Dim iRow As Integer = 0
+        Dim iRow = 0
 
         Suma1 = 0
         Suma2 = 0
@@ -5243,8 +5156,8 @@ Public Class Recibos
     End Sub
 
     Private Sub btnIntereses_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIntereses.Click
-        Dim tabla As DataTable = New DataTable("Detalles")
-        Dim DiasTasa As String = ""
+        Dim tabla = New DataTable("Detalles")
+        Dim DiasTasa = ""
         _PedirInformacion("Informe la tasa Mensual", New TextBox, DiasTasa)
 
         Dim ZZSuma As Double = 0
@@ -5430,10 +5343,6 @@ Public Class Recibos
 
     Private Sub Recibos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtProvi.Focus()
-    End Sub
-
-    Private Sub lblDolares_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDolares.TextChanged
-        CustomLabel14.Text = _NormalizarNumero(Val(_NormalizarNumero(lblDolares.Text)) * Val(txtParidad.Text))
     End Sub
 
 End Class

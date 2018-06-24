@@ -9,7 +9,7 @@ Public Class BancosABM
     Private Const EXPANDED_HEIGHT = 480
 
     Private Sub BancosABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         _LimpiarCampos()
         _ContraerFormulario()
     End Sub
@@ -291,8 +291,8 @@ Public Class BancosABM
     End Sub
 
     Private Sub _ListarConsulta(ByVal columnas As String, ByVal tabla As String)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT " + columnas + " FROM " + tabla)
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT " + columnas + " FROM " + tabla)
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -383,8 +383,8 @@ Public Class BancosABM
     End Sub
 
     Private Sub _Actualizar()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("Update Banco SET Nombre='" + Trim(txtNombre.Text) + "', Cuenta='" + Trim(txtCuenta.Text) + "' WHERE Banco = '" + Trim(txtCodigo.Text) + "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("Update Banco SET Nombre='" + Trim(txtNombre.Text) + "', Cuenta='" + Trim(txtCuenta.Text) + "' WHERE Banco = '" + Trim(txtCodigo.Text) + "'")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -482,7 +482,7 @@ Public Class BancosABM
     End Sub
 
     Private Sub btnListado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnListado.Click
-        
+
         With VistaPrevia
             .Reporte = New ListadoBancos
             .Mostrar()

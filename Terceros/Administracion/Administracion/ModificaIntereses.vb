@@ -3,7 +3,7 @@
 Public Class ModificaIntereses
 
     Private Sub CargaIntereses_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
 
         Dim gridBuilder As New GridBuilder(gridCtaCte)
 

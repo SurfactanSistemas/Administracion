@@ -39,7 +39,7 @@ Public Class AplicacionComprobantes
     End Sub
 
     Private Function _DatosValidos(ByVal tipo As String, ByVal valor As Double, ByVal iRow As Integer, ByVal iCol As Integer) As Boolean
-        Dim _valido As Boolean = True
+        Dim _valido = True
 
         Select Case Val(tipo)
 
@@ -61,7 +61,7 @@ Public Class AplicacionComprobantes
     End Function
 
     Private Sub AplicacionComprobantes_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         Dim gridFormasBuilder As New GridBuilder(dtgCuentas)
         gridFormasBuilder.addTextColumn(0, "Tipo", True)
         gridFormasBuilder.addTextColumn(1, "Letra", True)
@@ -131,9 +131,9 @@ Public Class AplicacionComprobantes
     End Sub
 
     Private Function _ObtenerProximoCodigo() As Integer
-        Dim ultimo As Integer = 0
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Codigo as Ultimo FROM AplicaProve ORDER BY Codigo DESC")
+        Dim ultimo = 0
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 Codigo as Ultimo FROM AplicaProve ORDER BY Codigo DESC")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -170,8 +170,8 @@ Public Class AplicacionComprobantes
     Private Sub btnGraba_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraba.Click
         Dim saldo As Double = 0 ' Convert.ToDouble(txtSaldo.Text)
         Dim importe As Double = 0
-        Dim WCodigo As Integer = 0
-        Dim WRenglon As Integer = 0
+        Dim WCodigo = 0
+        Dim WRenglon = 0
         Dim WTipo, WLetra, WPunto, WNumero, WFecha, WProveedor, WImporte
 
         Try
@@ -240,8 +240,8 @@ Public Class AplicacionComprobantes
 
     Private Sub _ActualizarCtaCteProveedor(ByVal wProveedor As Object, ByVal _WTipo As Object, ByVal wLetra As Object, ByVal wPunto As Object, ByVal wNumero As Object, ByVal wFecha As Object, ByVal wImporte As Object)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Clave, Saldo FROM CtaCtePrv WHERE Proveedor = '" & Trim(wProveedor) & "' AND Tipo = '" & _WTipo & "' and Letra = '" & UCase(wLetra) & "' and Numero = '" & Proceso.ceros(wNumero, 8) & "' AND Punto = '" & Proceso.ceros(wPunto, 4) & "' ANd Fecha = '" & wFecha & "' AND Saldo <> 0")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Clave, Saldo FROM CtaCtePrv WHERE Proveedor = '" & Trim(wProveedor) & "' AND Tipo = '" & _WTipo & "' and Letra = '" & UCase(wLetra) & "' and Numero = '" & Proceso.ceros(wNumero, 8) & "' AND Punto = '" & Proceso.ceros(wPunto, 4) & "' ANd Fecha = '" & wFecha & "' AND Saldo <> 0")
         Dim dr As SqlDataReader
         Dim WClave = "", WSaldo = 0.0, XImporte = 0.0
 
@@ -293,21 +293,21 @@ Public Class AplicacionComprobantes
     End Sub
 
     Private Sub _DarDeAltaRenglonAplicacionComprobante(ByVal row As DataGridViewRow, ByVal WRenglon As Integer, ByVal WCodigo As Integer)
-        Dim ZSql As String = ""
+        Dim ZSql = ""
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
         Dim dr As SqlDataReader
-        Dim ZZClave As String = ""
-        Dim ZZCodigo As String = ""
-        Dim ZZRenglon As String = ""
+        Dim ZZClave = ""
+        Dim ZZCodigo = ""
+        Dim ZZRenglon = ""
         Dim ZZFecha As String = Date.Now.ToString("dd/MM/yyyy")
         Dim ZZOrdFecha As String = Proceso.ordenaFecha(ZZFecha)
         Dim ZZProveedor As String = Trim(txtProveedor.Text)
-        Dim ZZTipo As String = ""
-        Dim ZZLetra As String = ""
-        Dim ZZPunto As String = ""
-        Dim ZZNumero As String = ""
-        Dim ZZImporte As String = ""
+        Dim ZZTipo = ""
+        Dim ZZLetra = ""
+        Dim ZZPunto = ""
+        Dim ZZNumero = ""
+        Dim ZZImporte = ""
 
         With row
             ZZClave = ceros(WCodigo, 8) & ceros(WRenglon, 3)
@@ -501,7 +501,7 @@ Public Class AplicacionComprobantes
     End Function
 
     Private Sub _RecalcularSaldo()
-        Dim tipo As String = ""
+        Dim tipo = ""
         Dim valorAplica As Double = 0
         Dim valor As Double = 0
         Dim iRow, iCol As Integer

@@ -4,7 +4,7 @@ Imports System.IO
 Public Class ListadoCuentaCorrienteProveedoresFecha
 
     Private Sub ListadoCuentaCorrienteProveedoresFecha_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Text = "  /  /    "
 
@@ -108,8 +108,8 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
         Dim x As Char = Chr(34)
         Dim WSuma As Double
         Dim WOrden As Integer
-        Dim txtCorte As String = ""
-        Dim txtLLave As Integer = 0
+        Dim txtCorte = ""
+        Dim txtLLave = 0
         Dim txtEmpresa As String
 
         Dim varOrdFecha As String

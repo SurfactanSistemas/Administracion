@@ -40,10 +40,10 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
     Dim WCampo21 As String
 
     Private Sub ProcesoPercepciones_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtDesde.Text = "  /  /    "
         txtHasta.Text = "  /  /    "
-        
+
     End Sub
 
 
@@ -398,7 +398,7 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
             WCampo5 = " "
             WCampo6 = WNumero
             WCampo7 = WFecha
-            
+
             WCampo9 = ceros(WNroIbCiudad, 16)
             WCampo10 = "2"
             WCampo11 = WCuit
@@ -546,8 +546,8 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
 
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Importe1 FROM Pagos WHERE Orden = '" & wOrden & "' AND TipoReg='1' ORDER BY Renglon")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Importe1 FROM Pagos WHERE Orden = '" & wOrden & "' AND TipoReg='1' ORDER BY Renglon")
         Dim dr As SqlDataReader
 
         Try
@@ -561,7 +561,7 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
             If dr.HasRows Then
 
                 tabla.Load(dr)
-                
+
             End If
 
         Catch ex As Exception
@@ -581,8 +581,8 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
     Private Function _TraerPagos(ByVal WDesde As String, ByVal WHasta As String) As DataTable
 
         Dim tabla As New DataTable
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT p.Orden, p.Proveedor, p.Fecha, p.Importe, p.Retencion, p.CertificadoIbCiudad, p.RetIbCiudad, " & _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT p.Orden, p.Proveedor, p.Fecha, p.Importe, p.Retencion, p.CertificadoIbCiudad, p.RetIbCiudad, " & _
                                               " pr.Nombre, pr.Iva, pr.NroIb, pr.Cuit, pr.IbCiudadII FROM Pagos p JOIN Proveedor pr ON pr.Proveedor = p.Proveedor " & _
                                               " WHERE FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " AND p.Renglon = '01'")
         Dim dr As SqlDataReader
@@ -619,8 +619,8 @@ Public Class ProcesoPercepcionesYRetencionesCiudadNuevo
 
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT c.Clave, c.Fecha, c.Tipo, c.Numero, c.Cliente, c.Neto, c.Iva1, c.Iva2, c.ImpoIb, c.ImpoIbTucu, c.ImpoIbCiudad, c.Total," & _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT c.Clave, c.Fecha, c.Tipo, c.Numero, c.Cliente, c.Neto, c.Iva1, c.Iva2, c.ImpoIb, c.ImpoIbTucu, c.ImpoIbCiudad, c.Total," & _
                                               " cli.Cuit, cli.NroIbCiudad, cli.Razon, cli.Localidad, cli.Postal, cli.IbCiudadII" & _
                                               " FROM CtaCte as c JOIN Cliente as cli ON cli.Cliente = c.Cliente" & _
                                               " WHERE c.OrdFecha BETWEEN " & WDesde & " AND " & WHasta & " AND c.ImpoIbCiudad <> 0")

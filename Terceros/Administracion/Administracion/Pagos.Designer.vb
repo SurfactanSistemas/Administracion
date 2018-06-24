@@ -65,7 +65,6 @@ Partial Class Pagos
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ckNoCalcRetenciones = New System.Windows.Forms.CheckBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.btnDifeCambio = New System.Windows.Forms.Button()
         Me.pnlPedirCuenta = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.WProceso = New System.Windows.Forms.Label()
@@ -417,7 +416,6 @@ Partial Class Pagos
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.Panel2.Controls.Add(Me.ckNoCalcRetenciones)
         Me.Panel2.Controls.Add(Me.Button1)
-        Me.Panel2.Controls.Add(Me.btnDifeCambio)
         Me.Panel2.Controls.Add(Me.pnlPedirCuenta)
         Me.Panel2.Controls.Add(Me.txtFechaAux)
         Me.Panel2.Controls.Add(Me.lstSeleccion)
@@ -492,20 +490,6 @@ Partial Class Pagos
         Me.Button1.Text = "Recalcular Retenciones"
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
-        '
-        'btnDifeCambio
-        '
-        Me.btnDifeCambio.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnDifeCambio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDifeCambio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDifeCambio.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnDifeCambio.Location = New System.Drawing.Point(18, 388)
-        Me.btnDifeCambio.Name = "btnDifeCambio"
-        Me.btnDifeCambio.Size = New System.Drawing.Size(148, 45)
-        Me.btnDifeCambio.TabIndex = 126
-        Me.btnDifeCambio.Text = "Diferencia de Cambio"
-        Me.ToolTip1.SetToolTip(Me.btnDifeCambio, "Análisis Diferencia de Cambio en Orden de Pago")
-        Me.btnDifeCambio.UseVisualStyleBackColor = True
         '
         'pnlPedirCuenta
         '
@@ -1356,7 +1340,6 @@ Partial Class Pagos
     Friend WithEvents pnlPedirCuenta As System.Windows.Forms.Panel
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents txtCuenta As Administracion.CustomTextBox
-    Friend WithEvents btnDifeCambio As System.Windows.Forms.Button
     Friend WithEvents WProceso As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn

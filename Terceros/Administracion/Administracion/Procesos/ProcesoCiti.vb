@@ -17,7 +17,7 @@ Public Class ProcesoCiti
         WCampo23, WCampo24, WCampo25 As String
 
     Private Sub ProcesoPercepciones_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtDesde.Text = "  /  /    "
         txtHasta.Text = "  /  /    "
 
@@ -37,7 +37,7 @@ Public Class ProcesoCiti
         Dim WDestino, nombreArchivo2 As String
         Dim escritor As System.IO.StreamWriter
         Dim escritor2 As System.IO.StreamWriter
-        
+
         ProgressBar1.Value = 0
         GroupBox1.Visible = True
 
@@ -1378,8 +1378,8 @@ Public Class ProcesoCiti
     Private Function _TraerCtaCte(ByVal WDesde As String, ByVal WHasta As String) As DataTable
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT c.Tipo, c.Numero, c.Fecha, c.Cliente, c.Neto, c.Iva1, c.Iva2, c.ImpoIbTucu, c.ImpoIbCiudad, c.ImpoIb, c.Vencimiento, " & _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT c.Tipo, c.Numero, c.Fecha, c.Cliente, c.Neto, c.Iva1, c.Iva2, c.ImpoIbTucu, c.ImpoIbCiudad, c.ImpoIb, c.Vencimiento, " & _
                                               " cli.Razon, cli.Cuit" & _
                                               " FROM CtaCte as c JOIN Cliente as cli ON cli.Cliente = c.Cliente " & _
                                               " WHERE c.OrdFecha BETWEEN " & WDesde & " AND " & WHasta & "" & _
@@ -1417,8 +1417,8 @@ Public Class ProcesoCiti
     Private Function _TraerDatosProveedor(ByVal wProveedor As String) As DataRow
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Nombre as Razon, Cuit" & _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Nombre as Razon, Cuit" & _
                                               " FROM Proveedor" & _
                                               " WHERE Proveedor = '" & wProveedor & "'")
         Dim dr As SqlDataReader
@@ -1458,8 +1458,8 @@ Public Class ProcesoCiti
     Private Function _TraerDatosIvaCompAdicional(ByVal wNroInterno As String) As DataTable
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Letra, Tipo, Punto, Numero, fecha, Neto, Exento, Iva21, Iva27, Iva105, PerceIb, PerceIva, Razon, Cuit" & _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Letra, Tipo, Punto, Numero, fecha, Neto, Exento, Iva21, Iva27, Iva105, PerceIb, PerceIva, Razon, Cuit" & _
                                               " FROM IvaCompAdicional" & _
                                               " WHERE NroInterno = '" & wNroInterno & "' ORDER BY Renglon")
         Dim dr As SqlDataReader
@@ -1496,8 +1496,8 @@ Public Class ProcesoCiti
 
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Letra, Tipo, Punto, Numero, fecha, Proveedor, Neto, Periodo, Exento, Iva5, Iva21, Iva27, Iva105, Ib, Despacho, NroInterno" & _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Letra, Tipo, Punto, Numero, fecha, Proveedor, Neto, Periodo, Exento, Iva5, Iva21, Iva27, Iva105, Ib, Despacho, NroInterno" & _
                                               " FROM IvaComp" & _
                                               " WHERE Letra IN('A', 'B', 'C', 'M') AND Tipo IN('01', '02', '03')")
         Dim dr As SqlDataReader

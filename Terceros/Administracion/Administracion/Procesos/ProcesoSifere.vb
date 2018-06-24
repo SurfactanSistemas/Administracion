@@ -27,7 +27,7 @@ Public Class ProcesoSifere
         TipoProceso.Items.Add("No Aduana")
         TipoProceso.Items.Add("Aduana")
         TipoProceso.SelectedIndex = 0
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
     End Sub
 
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click

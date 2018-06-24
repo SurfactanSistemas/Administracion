@@ -5,7 +5,7 @@ Imports System.Data.SqlClient
 Public Class ListadoRecibos
 
     Private Sub ListadoRecibos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 
@@ -54,8 +54,8 @@ Public Class ListadoRecibos
     Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         ' Reseteamos los datos de los recibos.
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("ModificaReciboImpolista0")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("ModificaReciboImpolista0")
 
         SQLConnector.conexionSql(cn, cm)
 

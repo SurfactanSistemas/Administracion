@@ -27,7 +27,7 @@ Public Class DAORecibo
     End Function
 
     Public Shared Sub agregarRecibo(ByVal recibo As Recibo)
-        Dim renglon As Integer = 1
+        Dim renglon = 1
         For Each formaPago As FormaPago In recibo.formasPago
             SQLConnector.executeProcedure("alta_recibo_forma_pago", recibo.codigo, ceros(renglon, 2), recibo.codigoCliente, recibo.fecha,
                                         recibo.retGanancias, recibo.retIVA, recibo.retIB, recibo.retSuss, ceros(formaPago.tipo, 2),
@@ -55,9 +55,9 @@ Public Class DAORecibo
         ByVal CompIB3 As String, ByVal RetIB4 As String, ByVal CompIB4 As String, ByVal RetIB5 As String, ByVal CompIB5 As String, ByVal RetIB6 As String,
         ByVal CompIB6 As String, ByVal RetIB7 As String, ByVal CompIB7 As String, ByVal RetIB8 As String, ByVal CompIB8 As String, ByVal _cheques As List(Of Object), ByVal _CuentasContables As List(Of Object))
 
-        Dim renglon As Integer = 1
+        Dim renglon = 1
         Dim estado2 As Char = ""
-        Dim _fechaord2 As String = ""
+        Dim _fechaord2 = ""
         Dim _fechaord As String() = fecha2.Split("/")
         Dim ConsultaSQL_Template As String = "('#CLAVE#', '" & id & "', '#RENGLON#', '" & cli.id & "', '" & fecha2 & "','" & _fechaord(2).ToString() & _fechaord(1).ToString() & _fechaord(0).ToString() & "', '#TIPOREC#', '" & ganancias & "', '" & CompGanancias & "','" & IVA & "', '" & CompIva & "','" & IB & "', '" & Suss & "', '" & CompSuss & "',0,2, '#TIPO#', '#NUMERO2#', '#FECHA2#', '#FECHAORD2#', '#BANCO2#', #IMPORTE2#, " & valorTotal & ", 1, 0, '', '#CUENTA#', '#ESTADO2#', " & RetIB1.ToString() & ", '" & CompIB1.ToString() & "', " & RetIB2.ToString() & ", '" & CompIB2.ToString() & "', " & RetIB3.ToString() & ", '" _
                                         & CompIB3.ToString() & "', " & RetIB4.ToString() & ", '" & CompIB4.ToString() & "', " & RetIB5.ToString() & ", '" & CompIB5.ToString() & "', " & RetIB6.ToString() & ", '" & CompIB6.ToString() & "', " & RetIB7.ToString() & ", '" & CompIB7.ToString() & "', " & RetIB8.ToString() & ", '" & CompIB8.ToString() _
@@ -65,8 +65,8 @@ Public Class DAORecibo
 
 
 
-        Dim SQL As String = ""
-        Dim _tipoRec As String = ""
+        Dim SQL = ""
+        Dim _tipoRec = ""
 
         Select Case tipoRec
             Case 1
@@ -127,11 +127,11 @@ Public Class DAORecibo
 
                     _fechaord2 = String.Join("", .Cells(2).Value.ToString.Split("/").Reverse())
 
-                    Dim temp As String = ""
+                    Dim temp = ""
 
                     Dim _Cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = (.Index))
 
-                    Dim WCuenta As String = ""
+                    Dim WCuenta = ""
 
                     If Not IsNothing(_Cuenta) Then
                         WCuenta = _Cuenta(1)
@@ -185,9 +185,9 @@ Public Class DAORecibo
         Next
 
         If Trim(SQL) <> "" Then
-            
-            Dim cn As SqlConnection = New SqlConnection()
-            Dim cm As SqlCommand = New SqlCommand()
+
+            Dim cn = New SqlConnection()
+            Dim cm = New SqlCommand()
             Dim trans As SqlTransaction = Nothing
 
             Try
@@ -230,8 +230,8 @@ Public Class DAORecibo
 
     Private Shared Sub _GrabarCuit(ByVal banco, ByVal sucursal, ByVal cuenta, ByVal cuit)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
 
         Dim _CuitExistente = False
@@ -307,7 +307,7 @@ Public Class DAORecibo
             Dim tabla As DataTable = SQLConnector.retrieveDataTable("get_recibo", codRecibo)
             Dim cantidad As Integer = tabla.Rows.Count
             Dim row As DataRow = tabla.Rows(0)
-            Dim cuenta As String = ""
+            Dim cuenta = ""
             If Not (IsNothing(row("Cuenta").ToString)) Then
                 cuenta = row("Cuenta").ToString
             End If
@@ -335,7 +335,7 @@ Public Class DAORecibo
         Try
             Dim tabla As DataTable = SQLConnector.retrieveDataTable("get_recibo_provisorio_sin_numero", codRecibo)
             Dim row As DataRow = tabla.Rows(0)
-            Dim recibo As ReciboProvisorio = New ReciboProvisorio(row("Recibo").ToString, CustomConvert.asTextDate(row("Fecha").ToString), DAOCliente.buscarClientePorCodigo(row("Cliente").ToString),
+            Dim recibo = New ReciboProvisorio(row("Recibo").ToString, CustomConvert.asTextDate(row("Fecha").ToString), DAOCliente.buscarClientePorCodigo(row("Cliente").ToString),
                                         asDouble(row("RetGanancias")), asDouble(row("RetOtra")), asDouble(row("RetIva")), asDouble(row("RetSuss")), asDouble(row("Paridad")),
                                         asDouble(row("Importe")))
             Dim formasPago As New List(Of FormaPago)

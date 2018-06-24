@@ -5,7 +5,7 @@ Imports System.Data.SqlClient
 Public Class ListadoValoresEnCarteraCuit
 
     Private Sub ListadoValoresEnCarteraCuit_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
         txtCuit.Text = ""
@@ -76,8 +76,8 @@ Public Class ListadoValoresEnCarteraCuit
         varDesdefechaOrd = ordenaFecha(txtDesdeFecha.Text)
         varHastafechaOrd = ordenaFecha(txthastafecha.Text)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Clave, Destino, Estado2 FROM Recibos WHERE Cuit = '" & txtCuit.Text & "' AND FechaOrd2 BETWEEN " & varDesdefechaOrd & " AND " & varHastafechaOrd & " ORDER BY Clave")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Clave, Destino, Estado2 FROM Recibos WHERE Cuit = '" & txtCuit.Text & "' AND FechaOrd2 BETWEEN " & varDesdefechaOrd & " AND " & varHastafechaOrd & " ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WClave, WDestino, WEstado2
 
@@ -153,8 +153,8 @@ Public Class ListadoValoresEnCarteraCuit
 
     Private Sub _ActualizarRecibo(ByVal wClave As Object, ByVal wDestino As Object, ByVal wEstado2 As Object)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("")
         Dim dr As SqlDataReader
         Dim WProveedor, WDesProveedor, WOrden
 

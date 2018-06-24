@@ -6,7 +6,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Dim varRenglon As Integer
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivoPreparacion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtCodProveedor.Text = ""
         varRenglon = 0
 
@@ -21,7 +21,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand("SELECT ps.Proveedor, ps.FechaOrd, p.Nombre, ps.Observaciones, ps.Desde, ps.Hasta FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Fecha = '" & txtFechaPago.Text & "' AND ps.Proveedor = p.Proveedor")
         Dim dr As SqlDataReader
-        Dim WObservaciones As String = ""
+        Dim WObservaciones = ""
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -86,8 +86,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Function _BuscarProveedor(ByVal proveedor As String) As Object
         Dim _Proveedor As Object = Nothing
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor WHERE Proveedor = '" & proveedor & "' OR Nombre = '" & proveedor & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor WHERE Proveedor = '" & proveedor & "' OR Nombre = '" & proveedor & "'")
         Dim dr As SqlDataReader
 
         If Trim(proveedor) = "" Then : Return _Proveedor : End If
@@ -125,7 +125,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     End Function
 
     Private Function _ProveedorYaAgregado(ByVal _Proveedor As String, ByVal Excepto As Integer) As Boolean
-        Dim _YaAgregado As Boolean = False
+        Dim _YaAgregado = False
 
         For Each row As DataGridViewRow In GRilla.Rows
 
@@ -598,7 +598,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         Select Case keycode
             Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
@@ -611,7 +611,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True

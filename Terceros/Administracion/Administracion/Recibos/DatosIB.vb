@@ -5,7 +5,7 @@
     End Sub
 
     Private Sub txtRetIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB1.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
             If Val(txtRetIB1.Text) <> 0 Then
@@ -215,7 +215,7 @@
     End Sub
 
     Private Sub txtCompIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB8.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
             _SaltarA(txtRetIB4)

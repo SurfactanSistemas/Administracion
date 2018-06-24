@@ -84,8 +84,8 @@ Public Class Apertura
     End Sub
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
-        Dim _FechasInvalidas As Boolean = False
-        Dim _CuitsInvalidos As Boolean = False
+        Dim _FechasInvalidas = False
+        Dim _CuitsInvalidos = False
 
         ' Eliminamos la filas en blanco
         For Each row As DataGridViewRow In gridApertura.Rows
@@ -145,7 +145,7 @@ Public Class Apertura
     End Sub
 
     Private Function _Normalizarfecha(ByVal fecha As String) As String
-        Dim xfecha As String = ""
+        Dim xfecha = ""
         Dim _temp As String = fecha
         Dim _Fecha As String() = fecha.Split("/")
 
@@ -171,7 +171,7 @@ Public Class Apertura
     End Function
 
     Private Function _ValidarFecha(ByVal fecha As String) As Boolean
-        Dim valida As Boolean = True
+        Dim valida = True
 
         If Trim(fecha.Replace("/", "")) <> "" Then
 
@@ -304,10 +304,10 @@ Public Class Apertura
     End Function
 
     Private Function _BuscarRazonSocial(ByVal cuit As String) As String
-        Dim _RazonSocial As String = ""
+        Dim _RazonSocial = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Razon FROM IvaCompAdicional WHERE Cuit = '" & Trim(cuit) & "' AND Razon <> ''")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Razon FROM IvaCompAdicional WHERE Cuit = '" & Trim(cuit) & "' AND Razon <> ''")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -404,7 +404,7 @@ Public Class Apertura
 
         If e.ColumnIndex = 6 Then
             Dim _location As Point = gridApertura.GetCellDisplayRectangle(6, e.RowIndex, False).Location
-            
+
             gridApertura.ClearSelection()
             _location.Y += 4
             _location.X += 7

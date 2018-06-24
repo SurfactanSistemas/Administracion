@@ -11,7 +11,7 @@ Public Class CuentaContableABM
         Actualiza = False
         _ContraerFormulario()
 
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
 
     End Sub
 
@@ -186,8 +186,8 @@ Public Class CuentaContableABM
     End Sub
 
     Private Sub _Actualizar()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("Update Cuenta SET Descripcion='" + Trim(txtDescripcion.Text) + "' WHERE Cuenta = '" + Trim(txtCodigo.Text) + "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("Update Cuenta SET Descripcion='" + Trim(txtDescripcion.Text) + "' WHERE Cuenta = '" + Trim(txtCodigo.Text) + "'")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -213,8 +213,8 @@ Public Class CuentaContableABM
     End Sub
 
     Private Sub _ListarConsulta()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Descripcion FROM Cuenta")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Descripcion FROM Cuenta")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)

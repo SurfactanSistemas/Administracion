@@ -21,10 +21,10 @@ Public Class ProcesoPercepcionesIvaCompras
     Dim WCampo6 As String
 
     Private Sub ProcesoPercepciones_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtDesde.Text = "  /  /    "
         txtHasta.Text = "  /  /    "
-        
+
     End Sub
 
 
@@ -52,7 +52,7 @@ Public Class ProcesoPercepcionesIvaCompras
 
         REM XNombre = WDir + "\AR-30610524598-" + Nombre.Text + "-7-LOTE1.txt"
         nombreArchivo = nombreArchivo + "\" + txtNombre.Text + ".txt"
-        
+
         ordDesde = ordenaFecha(txtDesde.Text)
         ordHasta = ordenaFecha(txtHasta.Text)
 
@@ -161,8 +161,8 @@ Public Class ProcesoPercepcionesIvaCompras
 
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT i.Punto, i.Numero, i.Proveedor, i.Iva5, p.Cuit, i.Periodo, i.Fecha FROM IvaComp as i JOIN Proveedor as p ON p.Proveedor = i.Proveedor ORDER BY i.OrdFecha")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT i.Punto, i.Numero, i.Proveedor, i.Iva5, p.Cuit, i.Periodo, i.Fecha FROM IvaComp as i JOIN Proveedor as p ON p.Proveedor = i.Proveedor ORDER BY i.OrdFecha")
         Dim dr As SqlDataReader
 
         Try

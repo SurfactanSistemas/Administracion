@@ -7,7 +7,7 @@ Public Class ListadoProyeccionCobrosAnalitico
         txtDesdeProveedor.Text = ""
         txtHastaProveedor.Text = ""
         txtFechaEmision.Text = "  /  /    "
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
 
         Proceso._PurgarSaldosCtaCtePrvs()
     End Sub

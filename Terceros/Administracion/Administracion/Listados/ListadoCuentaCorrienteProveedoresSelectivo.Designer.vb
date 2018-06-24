@@ -33,13 +33,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.GrupoConsultas = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnImprimir = New Administracion.CustomButton()
-        Me.btnPantalla = New Administracion.CustomButton()
-        Me.btnLimpiarTodo = New Administracion.CustomButton()
-        Me.CustomButton1 = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.btnCancela = New Administracion.CustomButton()
+        Me.btnCerrarConsulta = New Administracion.CustomButton()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
         Me.lstAyuda = New Administracion.CustomListBox()
@@ -47,8 +41,13 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnImprimir = New Administracion.CustomButton()
+        Me.btnPantalla = New Administracion.CustomButton()
+        Me.btnLimpiarTodo = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnCancela = New Administracion.CustomButton()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
-        Me.btnCerrarConsulta = New Administracion.CustomButton()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -74,6 +73,8 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.GRilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.GRilla.Location = New System.Drawing.Point(16, 64)
         Me.GRilla.Name = "GRilla"
+        Me.GRilla.RowHeadersWidth = 15
+        Me.GRilla.RowTemplate.Height = 18
         Me.GRilla.Size = New System.Drawing.Size(557, 284)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
@@ -160,125 +161,27 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Consulta"
         '
-        'btnImprimir
+        'btnCerrarConsulta
         '
-        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
-        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnImprimir.Cleanable = False
-        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnImprimir.EnterIndex = -1
-        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.BorderSize = 0
-        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(485, 417)
-        Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(67, 40)
-        Me.btnImprimir.TabIndex = 61
-        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Reporte")
-        Me.btnImprimir.UseVisualStyleBackColor = True
-        '
-        'btnPantalla
-        '
-        Me.btnPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
-        Me.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnPantalla.Cleanable = False
-        Me.btnPantalla.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnPantalla.EnterIndex = -1
-        Me.btnPantalla.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatAppearance.BorderSize = 0
-        Me.btnPantalla.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPantalla.LabelAssociationKey = -1
-        Me.btnPantalla.Location = New System.Drawing.Point(397, 417)
-        Me.btnPantalla.Name = "btnPantalla"
-        Me.btnPantalla.Size = New System.Drawing.Size(67, 40)
-        Me.btnPantalla.TabIndex = 61
-        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Reporte por Pantalla")
-        Me.btnPantalla.UseVisualStyleBackColor = True
-        '
-        'btnLimpiarTodo
-        '
-        Me.btnLimpiarTodo.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
-        Me.btnLimpiarTodo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnLimpiarTodo.Cleanable = False
-        Me.btnLimpiarTodo.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLimpiarTodo.EnterIndex = -1
-        Me.btnLimpiarTodo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiarTodo.FlatAppearance.BorderSize = 0
-        Me.btnLimpiarTodo.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLimpiarTodo.LabelAssociationKey = -1
-        Me.btnLimpiarTodo.Location = New System.Drawing.Point(309, 417)
-        Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
-        Me.btnLimpiarTodo.Size = New System.Drawing.Size(67, 40)
-        Me.btnLimpiarTodo.TabIndex = 61
-        Me.ToolTip1.SetToolTip(Me.btnLimpiarTodo, "Limpiar Seleccionados / Todos")
-        Me.btnLimpiarTodo.UseVisualStyleBackColor = True
-        '
-        'CustomButton1
-        '
-        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.refresh
-        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.CustomButton1.Cleanable = False
-        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CustomButton1.EnterIndex = -1
-        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.BorderSize = 0
-        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CustomButton1.LabelAssociationKey = -1
-        Me.CustomButton1.Location = New System.Drawing.Point(222, 417)
-        Me.CustomButton1.Name = "CustomButton1"
-        Me.CustomButton1.Size = New System.Drawing.Size(69, 40)
-        Me.CustomButton1.TabIndex = 58
-        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Cargar Listado Parcial de Proveedores Selectivo")
-        Me.CustomButton1.UseVisualStyleBackColor = True
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cleanable = False
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(131, 417)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(69, 40)
-        Me.btnConsulta.TabIndex = 58
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consultar Proveedores")
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'btnCancela
-        '
-        Me.btnCancela.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnCancela.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCancela.Cleanable = False
-        Me.btnCancela.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCancela.EnterIndex = -1
-        Me.btnCancela.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.FlatAppearance.BorderSize = 0
-        Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(36, 417)
-        Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(74, 40)
-        Me.btnCancela.TabIndex = 57
-        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar Ventana")
-        Me.btnCancela.UseVisualStyleBackColor = True
+        Me.btnCerrarConsulta.BackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrarConsulta.Cleanable = False
+        Me.btnCerrarConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrarConsulta.EnterIndex = -1
+        Me.btnCerrarConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatAppearance.BorderSize = 0
+        Me.btnCerrarConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.LabelAssociationKey = -1
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(155, 196)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(78, 23)
+        Me.btnCerrarConsulta.TabIndex = 63
+        Me.btnCerrarConsulta.Text = "Cerrar Consulta"
+        Me.ToolTip1.SetToolTip(Me.btnCerrarConsulta, "Cerrar Ventana")
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = False
         '
         'lstFiltrada
         '
@@ -368,6 +271,106 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
+        'btnImprimir
+        '
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cleanable = False
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.EnterIndex = -1
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.LabelAssociationKey = -1
+        Me.btnImprimir.Location = New System.Drawing.Point(485, 420)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(67, 40)
+        Me.btnImprimir.TabIndex = 61
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Reporte")
+        Me.btnImprimir.UseVisualStyleBackColor = True
+        '
+        'btnPantalla
+        '
+        Me.btnPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
+        Me.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnPantalla.Cleanable = False
+        Me.btnPantalla.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPantalla.EnterIndex = -1
+        Me.btnPantalla.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.BorderSize = 0
+        Me.btnPantalla.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPantalla.LabelAssociationKey = -1
+        Me.btnPantalla.Location = New System.Drawing.Point(375, 420)
+        Me.btnPantalla.Name = "btnPantalla"
+        Me.btnPantalla.Size = New System.Drawing.Size(67, 40)
+        Me.btnPantalla.TabIndex = 61
+        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Reporte por Pantalla")
+        Me.btnPantalla.UseVisualStyleBackColor = True
+        '
+        'btnLimpiarTodo
+        '
+        Me.btnLimpiarTodo.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiarTodo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiarTodo.Cleanable = False
+        Me.btnLimpiarTodo.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiarTodo.EnterIndex = -1
+        Me.btnLimpiarTodo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiarTodo.FlatAppearance.BorderSize = 0
+        Me.btnLimpiarTodo.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiarTodo.LabelAssociationKey = -1
+        Me.btnLimpiarTodo.Location = New System.Drawing.Point(265, 420)
+        Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
+        Me.btnLimpiarTodo.Size = New System.Drawing.Size(67, 40)
+        Me.btnLimpiarTodo.TabIndex = 61
+        Me.ToolTip1.SetToolTip(Me.btnLimpiarTodo, "Limpiar Seleccionados / Todos")
+        Me.btnLimpiarTodo.UseVisualStyleBackColor = True
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cleanable = False
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.EnterIndex = -1
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.LabelAssociationKey = -1
+        Me.btnConsulta.Location = New System.Drawing.Point(153, 420)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(69, 40)
+        Me.btnConsulta.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consultar Proveedores")
+        Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'btnCancela
+        '
+        Me.btnCancela.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCancela.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCancela.Cleanable = False
+        Me.btnCancela.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCancela.EnterIndex = -1
+        Me.btnCancela.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatAppearance.BorderSize = 0
+        Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancela.LabelAssociationKey = -1
+        Me.btnCancela.Location = New System.Drawing.Point(36, 420)
+        Me.btnCancela.Name = "btnCancela"
+        Me.btnCancela.Size = New System.Drawing.Size(74, 40)
+        Me.btnCancela.TabIndex = 57
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar Ventana")
+        Me.btnCancela.UseVisualStyleBackColor = True
+        '
         'lstAyuda_Filtrada
         '
         Me.lstAyuda_Filtrada.Cleanable = False
@@ -380,28 +383,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.lstAyuda_Filtrada.TabIndex = 62
         Me.lstAyuda_Filtrada.Visible = False
         '
-        'btnCerrarConsulta
-        '
-        Me.btnCerrarConsulta.BackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCerrarConsulta.Cleanable = False
-        Me.btnCerrarConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrarConsulta.EnterIndex = -1
-        Me.btnCerrarConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.FlatAppearance.BorderSize = 0
-        Me.btnCerrarConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnCerrarConsulta.LabelAssociationKey = -1
-        Me.btnCerrarConsulta.Location = New System.Drawing.Point(155, 196)
-        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
-        Me.btnCerrarConsulta.Size = New System.Drawing.Size(78, 23)
-        Me.btnCerrarConsulta.TabIndex = 63
-        Me.btnCerrarConsulta.Text = "Cerrar Consulta"
-        Me.ToolTip1.SetToolTip(Me.btnCerrarConsulta, "Cerrar Ventana")
-        Me.btnCerrarConsulta.UseVisualStyleBackColor = False
-        '
         'ListadoCuentaCorrienteProveedoresSelectivo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -411,7 +392,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
         Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnLimpiarTodo)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.CustomButton1)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnCancela)
         Me.Controls.Add(Me.Panel2)
@@ -449,7 +429,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivo
     Friend WithEvents lstAyuda_Filtrada As Administracion.CustomListBox
     Friend WithEvents btnPantalla As Administracion.CustomButton
     Friend WithEvents btnImprimir As Administracion.CustomButton
-    Friend WithEvents CustomButton1 As Administracion.CustomButton
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GrupoConsultas As System.Windows.Forms.Panel

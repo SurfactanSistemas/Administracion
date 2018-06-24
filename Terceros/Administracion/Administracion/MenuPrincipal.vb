@@ -52,10 +52,6 @@
         abrir(New Depositos)
     End Sub
 
-    Private Sub SifereToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SifereToolStripMenuItem.Click
-        abrir(New ProcesoSifere)
-    End Sub
-
     Private Sub RetencionEsOpToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RetencionEsOpToolStripMenuItem.Click
         abrir(New ProcesoRetencionesPagos)
     End Sub
@@ -193,30 +189,6 @@
         abrir(New ListadoRetencionIBCiudad)
     End Sub
 
-    Private Sub ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem.Click
-        abrir(New ListadoCuentaCorrienteProveedoresAnalisitico)
-    End Sub
-
-    Private Sub ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem.Click
-        abrir(New ListadoProyeccionCobrosAnalitico)
-    End Sub
-
-    '    Private Sub ListadoDeAgendaDeVencimientosDeLertasYDespachosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        abrir(New ListadoAgenda)
-    '    End Sub
-
-    Private Sub ControlDeRecibosProvisoriosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ControlDeRecibosProvisoriosToolStripMenuItem1.Click
-        abrir(New ListadoRecibosProvisorios)
-    End Sub
-
-    Private Sub ListadoDeDeudaDePymeNacionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeDeudaDePymeNacionToolStripMenuItem1.Click
-        abrir(New ListadoDeudaPyme)
-    End Sub
-
-    '    Private Sub ListadoDeProyeccionDePagosDeImportacionesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        abrir(New ListadoPagosImportaciones)
-    '    End Sub
-
     Private Sub ConsultaDeChequesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsultaDeChequesToolStripMenuItem.Click
         abrir(New ConsultaCheque)
     End Sub
@@ -229,24 +201,8 @@
         abrir(New AplicacionComprobantes)
     End Sub
 
-    Private Sub IngresoDeRecibosProvisoriosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeRecibosProvisoriosToolStripMenuItem1.Click
-        abrir(New RecibosProvisorios)
-    End Sub
-
-    Private Sub IngresoDeRecibosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeRecibosToolStripMenuItem1.Click
-        abrir(New Recibos)
-    End Sub
-
-    Private Sub ConsultaDeRemitosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsultaDeRemitosToolStripMenuItem.Click
-        abrir(New ConsultaRemitos)
-    End Sub
-
     Private Sub EnvioEnEMailAProveedoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnvioEnEMailAProveedoresToolStripMenuItem.Click
         abrir(New EnvioEmailProveedores)
-    End Sub
-
-    Private Sub IngresoDeProveedorAPagoSemanalToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeProveedorAPagoSemanalToolStripMenuItem.Click
-        abrir(New ListadoCuentaCorrienteProveedoresSelectivoPreparacion)
     End Sub
 
     Private Sub ToolStripMenuItem6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem6.Click
@@ -257,29 +213,15 @@
         abrir(New ProcesoPercepcionesYRetencionesCiudadNuevo)
     End Sub
 
-    Private Sub ToolStripMenuItem9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem9.Click
-        abrir(New ProcesoPercepcionesGananciasAduana)
-    End Sub
-
-    Private Sub ToolStripMenuItem10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem10.Click
-        abrir(New ProcesoPercepcionesAduanerasSIAPRE)
-    End Sub
-
-    Private Sub ToolStripMenuItem11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem11.Click
-        abrir(New ProcesoRecuperoIva)
-    End Sub
-
     Private Sub ToolStripMenuItem5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem5.Click
         abrir(New ProcesoCiti)
     End Sub
 
-    Private Sub EnvioEnEMailAClientesToolStripMenuItem_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles EnvioEnEMailAClientesToolStripMenuItem.Click
-        
-        If not Proceso._EsPellital() then Process.Start("\\193.168.0.2\g$\vb\Net\EmailsClientes\Ejecutable\EmailClientes.exe")
-
-    End Sub
-
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Proceso._PurgarSaldosCtaCtePrvs()
+    End Sub
+
+    Private Sub RecibosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecibosToolStripMenuItem.Click
+        abrir(New Recibos)
     End Sub
 End Class

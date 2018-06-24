@@ -14,6 +14,6 @@ Public Class DepuraCtaCte
     End Sub
 
     Private Sub DepuraCtaCte_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
     End Sub
 End Class

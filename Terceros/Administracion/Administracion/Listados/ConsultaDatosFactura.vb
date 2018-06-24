@@ -7,7 +7,7 @@ Public Class ConsultaDatosFactura
 
     Private _NroInterno As String
 
-    Public Property NroInterno() As String
+    Public Property NroInterno As String
         Get
             Return _NroInterno
         End Get
@@ -34,14 +34,14 @@ Public Class ConsultaDatosFactura
     End Sub
 
     Private Sub _ObtenerDatosDeNroInterno(ByVal _NroInterno)
-        Dim XProveedor As String
+        Dim XProveedor As String = ""
 
         Dim cs As String = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
-        Dim XCs As String = ""
+        Dim XCs = ""
         Dim _Empresas = Proceso.Empresas 'As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ic.Numero, ic.Fecha, ic.Remito, ic.Proveedor, ic.Despacho, ic.Paridad, ic.Fecha as FechaEmision, ic.Vencimiento, ic.Vencimiento1, ic.Pago as Moneda, ic.Periodo as FechaIva from IvaComp as ic WHERE ic.NroInterno = '" & _NroInterno & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT ic.Numero, ic.Fecha, ic.Remito, ic.Proveedor, ic.Despacho, ic.Paridad, ic.Fecha as FechaEmision, ic.Vencimiento, ic.Vencimiento1, ic.Pago as Moneda, ic.Periodo as FechaIva from IvaComp as ic WHERE ic.NroInterno = '" & _NroInterno & "'")
         Dim dr As SqlDataReader
 
         ' Extraemos datos de proveedor y remito.
@@ -192,7 +192,7 @@ Public Class ConsultaDatosFactura
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
-                Dim i As Integer = 0
+                Dim i = 0
                 Do While dr.Read()
                     i = DGVArticulos.Rows.Add
                     With DGVArticulos.Rows(i)

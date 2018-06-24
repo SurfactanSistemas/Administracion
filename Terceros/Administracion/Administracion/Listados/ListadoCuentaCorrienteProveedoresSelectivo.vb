@@ -8,7 +8,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Dim _Claves As New List(Of Object)
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Clear()
         varRenglon = 0
@@ -22,8 +22,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim _Proveedores As New List(Of Object)
         'Dim _CargadosHaceMasDeUnaSemana As Integer = 0
         'Dim _FechaLimite As String = _DeterminarFechaLimite()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, FechaOrd FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Proveedor, FechaOrd FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -90,7 +90,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Function _ProveedorYaAgregado(ByVal _Proveedor As String) As Boolean
-        Dim _YaAgregado As Boolean = False
+        Dim _YaAgregado = False
 
         For Each row As DataGridViewRow In GRilla.Rows
 
@@ -108,7 +108,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Function
 
     Private Function _ProveedorYaAgregado(ByVal _Proveedor As String, ByVal Excepto As Integer) As Boolean
-        Dim _YaAgregado As Boolean = False
+        Dim _YaAgregado = False
 
         For Each row As DataGridViewRow In GRilla.Rows
 
@@ -177,7 +177,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Sub _ListarProveedores()
         Dim _Proveedores As List(Of Proveedor) = DAOProveedor.buscarProveedoresActivoPorNombre()
-        Dim item As String = ""
+        Dim item = ""
 
         If _Proveedores.Count > 0 Then
 
@@ -231,8 +231,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Sub _LimpiarImpCtaCtePrvNet()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM impCtaCtePrvNet")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM impCtaCtePrvNet")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -253,8 +253,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Function _BuscarTipoCambio(ByVal fecha As String) As Double
         Dim Paridad = 0.0
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT CambioDivisa FROM Cambios WHERE Fecha = '" & fecha & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT CambioDivisa FROM Cambios WHERE Fecha = '" & fecha & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -292,10 +292,10 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Function _BuscarCtaCtePrvSelectivo(ByVal proveedor As String) As DataTable
         Dim tabla As New DataTable
-        Dim cn As SqlConnection = New SqlConnection()
+        Dim cn = New SqlConnection()
         Dim cm = "SELECT Tipo, Letra, Punto, Numero, Total, Saldo, Fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Pago, Paridad FROM CtaCtePrv WHERE Proveedor = '" & proveedor.Trim() & "' AND Saldo <> 0 ORDER BY Proveedor, OrdFecha, NroInterno"
         Dim dr As New SqlDataAdapter(cm, cn)
-        
+
         Try
             cn.ConnectionString = Proceso._ConectarA
             cn.Open()
@@ -322,7 +322,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Function _BuscarProveedor(ByVal codProveedor As String) As DataRow
         Dim proveedor As New DataTable
-        Dim cn As SqlConnection = New SqlConnection()
+        Dim cn = New SqlConnection()
         Dim cm = "SELECT CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & codProveedor & "'"
         Dim dr As New SqlDataAdapter(cm, cn)
 
@@ -353,7 +353,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Function _BuscarCompra(ByVal NroInterno As Integer) As DataRow
         Dim compra As New DataTable
-        Dim cn As SqlConnection = New SqlConnection()
+        Dim cn = New SqlConnection()
         Dim cm = "SELECT Letra, Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
         Dim dr As New SqlDataAdapter(cm, cn)
 
@@ -383,7 +383,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
 
     Private Function _BuscarAcumulado(ByVal proveedor As String, ByVal fecha As String) As DataRow
         Dim acumulado As New DataTable
-        Dim cn As SqlConnection = New SqlConnection()
+        Dim cn = New SqlConnection()
         Dim cm = "SELECT Neto, Retenido, Anticipo, Bruto, Iva FROM Retencion WHERE Proveedor = '" & proveedor & "' AND Fecha = '" & fecha & "'"
         Dim dr As New SqlDataAdapter(cm, cn)
 
@@ -422,7 +422,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         Dim txtFormula As String
         Dim x As Char = Chr(34)
 
-        Dim WOrden As Integer = 0
+        Dim WOrden = 0
         Dim txtEmpresa As String
 
         Dim varOrdFecha As String
@@ -522,7 +522,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
                         Else
                             If Val(varParidad) = 0 Then
                                 MsgBox("La factura con Nro Interno " & CCPrv.nroInterno & " del Proveedor " & CCPrv.Proveedor & ", no posee Paridad cargada.", MsgBoxStyle.Information)
-                                
+
                                 varTotal = 0
                                 varSaldo = 0
                                 varTotalUs = 0
@@ -854,23 +854,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
-        
+
         _Imprimir(Reporte.Imprimir)
         MsgBox("El reporte se ha impreso correctamente.", MsgBoxStyle.Information)
-
-    End Sub
-
-    Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomButton1.Click
-
-        If txtFechaEmision.Text.Replace(" ", "").Length = 10 Then
-            _CargarProveedoresPreCargados()
-        Else
-            MsgBox("Debe indicar una fecha de Pago.", MsgBoxStyle.Exclamation)
-            txtFechaEmision.Focus()
-            Exit Sub
-        End If
-
-        txtDesdeProveedor.Focus()
 
     End Sub
 
@@ -899,7 +885,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         Select Case keycode
             Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
@@ -912,7 +898,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -1007,15 +993,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaEmision.Text).Replace("/", "") = "" Then : Exit Sub : End If
 
-            If _ExistenProveedoresCargados() Then
-
-                If MsgBox("Existen Proveedores cargados para esta fecha ¿Desea traerlos?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                    CustomButton1.PerformClick()
-                    Exit Sub
-                End If
-
-            End If
-
             txtDesdeProveedor.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -1027,8 +1004,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
     Private Function _ExistenProveedoresCargados() As Boolean
         Dim WExistenProveedoresCargados As Boolean
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Proveedor FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 Proveedor FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
         Dim dr As SqlDataReader
 
         Try

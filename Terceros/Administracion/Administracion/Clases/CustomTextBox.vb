@@ -20,9 +20,9 @@ Public Enum NumericType
 End Enum
 
 Public Interface CustomControl
-    Property EnterIndex() As Integer
-    Property Cleanable() As Boolean
-    Property LabelAssociationKey() As Integer
+    Property EnterIndex As Integer
+    Property Cleanable As Boolean
+    Property LabelAssociationKey As Integer
 End Interface
 
 Public Interface ValidableControl
@@ -81,7 +81,7 @@ Public Class CustomTextBox
         associationKey = key
     End Sub
 
-    Public Property EnterIndex() As Integer Implements CustomControl.EnterIndex
+    Public Property EnterIndex As Integer Implements CustomControl.EnterIndex
         Get
             Return CType(getEnterIndex(), Integer)
         End Get
@@ -90,7 +90,7 @@ Public Class CustomTextBox
         End Set
     End Property
 
-    Public Property Cleanable() As Boolean Implements CustomControl.Cleanable
+    Public Property Cleanable As Boolean Implements CustomControl.Cleanable
         Get
             Return CType(getCleanStatus(), Boolean)
         End Get
@@ -99,7 +99,7 @@ Public Class CustomTextBox
         End Set
     End Property
 
-    Public Property Empty() As Boolean Implements ValidableControl.Empty
+    Public Property Empty As Boolean Implements ValidableControl.Empty
         Get
             Return CType(getEmptyPermitted(), Boolean)
         End Get
@@ -108,7 +108,7 @@ Public Class CustomTextBox
         End Set
     End Property
 
-    Public Property Validator() As ValidatorType Implements ValidableControl.Validator
+    Public Property Validator As ValidatorType Implements ValidableControl.Validator
         Get
             Return CType(getValidatorType(), ValidatorType)
         End Get
@@ -117,7 +117,7 @@ Public Class CustomTextBox
         End Set
     End Property
 
-    Public Property LabelAssociationKey() As Integer Implements CustomControl.LabelAssociationKey
+    Public Property LabelAssociationKey As Integer Implements CustomControl.LabelAssociationKey
         Get
             Return CType(getAssociationKey(), Integer)
         End Get
@@ -179,7 +179,7 @@ Public Class CustomComboBox
         associationKey = key
     End Sub
 
-    Public Property EnterIndex() As Integer Implements CustomControl.EnterIndex
+    Public Property EnterIndex As Integer Implements CustomControl.EnterIndex
         Get
             Return CType(getEnterIndex(), Integer)
         End Get
@@ -188,7 +188,7 @@ Public Class CustomComboBox
         End Set
     End Property
 
-    Public Property Cleanable() As Boolean Implements CustomControl.Cleanable
+    Public Property Cleanable As Boolean Implements CustomControl.Cleanable
         Get
             Return CType(getCleanStatus(), Boolean)
         End Get
@@ -197,7 +197,7 @@ Public Class CustomComboBox
         End Set
     End Property
 
-    Public Property Empty() As Boolean Implements ValidableControl.Empty
+    Public Property Empty As Boolean Implements ValidableControl.Empty
         Get
             Return CType(getEmptyPermitted(), Boolean)
         End Get
@@ -206,7 +206,7 @@ Public Class CustomComboBox
         End Set
     End Property
 
-    Public Property Validator() As ValidatorType Implements ValidableControl.Validator
+    Public Property Validator As ValidatorType Implements ValidableControl.Validator
         Get
             Return CType(getValidatorType(), ValidatorType)
         End Get
@@ -215,7 +215,7 @@ Public Class CustomComboBox
         End Set
     End Property
 
-    Public Property LabelAssociationKey() As Integer Implements CustomControl.LabelAssociationKey
+    Public Property LabelAssociationKey As Integer Implements CustomControl.LabelAssociationKey
         Get
             Return CType(getAssociationKey(), Integer)
         End Get
@@ -258,7 +258,7 @@ Public Class CustomListBox
         associationKey = key
     End Sub
 
-    Public Property EnterIndex() As Integer Implements CustomControl.EnterIndex
+    Public Property EnterIndex As Integer Implements CustomControl.EnterIndex
         Get
             Return CType(getEnterIndex(), Integer)
         End Get
@@ -267,7 +267,7 @@ Public Class CustomListBox
         End Set
     End Property
 
-    Public Property Cleanable() As Boolean Implements CustomControl.Cleanable
+    Public Property Cleanable As Boolean Implements CustomControl.Cleanable
         Get
             Return CType(getCleanStatus(), Boolean)
         End Get
@@ -276,7 +276,7 @@ Public Class CustomListBox
         End Set
     End Property
 
-    Public Property LabelAssociationKey() As Integer Implements CustomControl.LabelAssociationKey
+    Public Property LabelAssociationKey As Integer Implements CustomControl.LabelAssociationKey
         Get
             Return CType(getAssociationKey(), Integer)
         End Get
@@ -319,7 +319,7 @@ Public Class CustomButton
         associationKey = key
     End Sub
 
-    Public Property EnterIndex() As Integer Implements CustomControl.EnterIndex
+    Public Property EnterIndex As Integer Implements CustomControl.EnterIndex
         Get
             Return CType(getEnterIndex(), Integer)
         End Get
@@ -328,7 +328,7 @@ Public Class CustomButton
         End Set
     End Property
 
-    Public Property Cleanable() As Boolean Implements CustomControl.Cleanable
+    Public Property Cleanable As Boolean Implements CustomControl.Cleanable
         Get
             Return CType(getCleanStatus(), Boolean)
         End Get
@@ -337,7 +337,7 @@ Public Class CustomButton
         End Set
     End Property
 
-    Public Property LabelAssociationKey() As Integer Implements CustomControl.LabelAssociationKey
+    Public Property LabelAssociationKey As Integer Implements CustomControl.LabelAssociationKey
         Get
             Return CType(getAssociationKey(), Integer)
         End Get
@@ -362,7 +362,7 @@ Public Class CustomLabel
         associationKey = key
     End Sub
 
-    Public Property ControlAssociationKey() As Integer
+    Public Property ControlAssociationKey As Integer
         Get
             Return CType(getAssociationKey(), Integer)
         End Get

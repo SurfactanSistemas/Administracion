@@ -5,7 +5,7 @@ Public Class ListadoIvaCompras ' AKA `Libro Iva Compras`.
 
 
     Private Sub ListadoIvaCompras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
 
@@ -142,7 +142,7 @@ Public Class ListadoIvaCompras ' AKA `Libro Iva Compras`.
                 If CampoIvaComp.soloiva = 1 Then
                     varNeto = 0
                 End If
-                
+
                 SQLConnector.executeProcedure("alta_ListaIvaCompras", CampoIvaComp.NroInterno, CampoIvaComp.proveedor, CampoIvaComp.tipo,
                                                CampoIvaComp.letra, CampoIvaComp.punto, CampoIvaComp.numero, CampoIvaComp.fecha, CampoIvaComp.periodo,
                                                varNeto, CampoIvaComp.iva21, CampoIvaComp.iva5, CampoIvaComp.iva27, CampoIvaComp.iva105,

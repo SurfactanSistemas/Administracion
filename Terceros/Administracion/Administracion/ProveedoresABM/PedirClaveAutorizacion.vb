@@ -16,8 +16,8 @@ Public Class PedirClaveAutorizacion
         Me.Autorizado = False
         Dim clave As String = Trim(TextBox1.Text)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Clave FROM Operador WHERE (Clave = '" & UCase(clave) & "' OR Clave = '" & LCase(clave) & "') and GrabaIV = 'S'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Clave FROM Operador WHERE (Clave = '" & UCase(clave) & "' OR Clave = '" & LCase(clave) & "') and GrabaIV = 'S'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -54,7 +54,7 @@ Public Class PedirClaveAutorizacion
     End Sub
 
     Private Sub PedirClaveAutorizacion_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
     End Sub
 
     Private Sub PedirClaveAutorizacion_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown

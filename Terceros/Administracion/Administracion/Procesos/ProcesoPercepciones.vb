@@ -31,7 +31,7 @@ Public Class ProcesoPercepciones
     Dim WCampo11 As String
 
     Private Sub ProcesoPercepciones_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label2.Text = Globals.NombreEmpresa()
+        Label2.Text = Proceso.NombreEmpresa()
         txtDesde.Text = "  /  /    "
         txtHasta.Text = "  /  /    "
 
@@ -54,7 +54,7 @@ Public Class ProcesoPercepciones
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
         Dim Vector(10000, 15) As String
         Dim WIndice = 0
-        Dim XCodigo As String = "A0009000"
+        Dim XCodigo = "A0009000"
         Dim nombreArchivo1, nombreArchivo2, nombreArchivo3 As String
         Dim escritor, escritor1, escritor2, escritor3 As System.IO.StreamWriter
 
@@ -101,8 +101,8 @@ Public Class ProcesoPercepciones
 
         Try
             _ModificarCtaCteImporteIva0()
-        
-        Select Case LugarProceso.SelectedIndex
+
+            Select Case LugarProceso.SelectedIndex
                 Case 0 ' Buenos Aires.
 
                     File.Create(nombreArchivo).Dispose()
@@ -318,7 +318,7 @@ Public Class ProcesoPercepciones
                     ProgressBar1.Maximum = tabla.Rows.Count * 2 + 1
 
                     For Each WCtaCte As DataRow In tabla.Rows
-                        
+
                         With WCtaCte
 
                             Vector(WIndice, 1) = IIf(IsDBNull(.Item("OrdFecha")), "", .Item("OrdFecha"))
@@ -383,7 +383,7 @@ Public Class ProcesoPercepciones
                                 If Val(WPorceCm05Tucu) <> 1 Then
 
                                     WNeto = Val(WNeto.Replace(",", ".")) * Val(WPorceCm05Tucu.Replace(",", "."))
-                                    
+
                                 End If
 
                         End Select
@@ -438,7 +438,7 @@ Public Class ProcesoPercepciones
                         WCampo9 = WPorceIb
 
                         WCampo10 = WImpoIb
-                        
+
                         WCampo11 = ""
 
                         escritor1.Write(WCampo1 + WCampo2 + WCampo3 + WCampo4 + WCampo5 + WCampo6 + WCampo7 + WCampo8 + WCampo9 + WCampo10 + WCampo11 + vbCrLf)
@@ -560,8 +560,8 @@ Public Class ProcesoPercepciones
 
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT c.OrdFecha, c.Cliente, c.Tipo, c.Numero, c.Neto, c.ImpoIbTucu," & _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT c.OrdFecha, c.Cliente, c.Tipo, c.Numero, c.Neto, c.ImpoIbTucu," & _
                                               " cli.Cuit, cli.NroIbTucu, cli.Razon, cli.Direccion, cli.Localidad," & _
                                               " cli.Provincia, cli.Postal, cli.IbTucu, cli.PorceCm05Tucu" & _
                                               " FROM CtaCte as c JOIN Cliente as cli ON cli.Cliente = c.Cliente" & _
@@ -599,8 +599,8 @@ Public Class ProcesoPercepciones
     Private Function _TraerCtasCtes(ByVal WDesde As String, ByVal WHasta As String) As DataTable
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT r.Clave, r.Fecha, r.Tipo, r.Numero, r.Cliente, c.Cuit FROM CtaCte r JOIN Cliente c ON c.Cliente = r.Cliente WHERE r.OrdFecha BETWEEN " & WDesde & " AND " & WHasta & " ORDER BY r.Numero")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT r.Clave, r.Fecha, r.Tipo, r.Numero, r.Cliente, c.Cuit FROM CtaCte r JOIN Cliente c ON c.Cliente = r.Cliente WHERE r.OrdFecha BETWEEN " & WDesde & " AND " & WHasta & " ORDER BY r.Numero")
         Dim dr As SqlDataReader
 
         Try
@@ -633,8 +633,8 @@ Public Class ProcesoPercepciones
 
     Private Function _TraerReciboFactura(ByVal WTipo As String, ByVal WNum As String) As DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Recibo FROM Recibos WHERE Tipo1 = '" & WTipo & "' AND Numero1 = '" & WNum & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Recibo FROM Recibos WHERE Tipo1 = '" & WTipo & "' AND Numero1 = '" & WNum & "'")
         Dim dr As SqlDataReader
         Dim ReciboFactura As New DataTable
 
@@ -683,8 +683,8 @@ Public Class ProcesoPercepciones
 
         WNumero = Proceso.ceros(WNumero, 8)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Neto, ImpoIb FROM CtaCte WHERE Clave = '" & WTipo & WNum & "01" & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Neto, ImpoIb FROM CtaCte WHERE Clave = '" & WTipo & WNum & "01" & "'")
         Dim dr As SqlDataReader
         Dim CtaCte As New DataTable
 
@@ -725,8 +725,8 @@ Public Class ProcesoPercepciones
 
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT r.Clave, r.Fecha, r.Tipo1 as Tipo, r.Numero1 as Numero, r.Cliente, c.Cuit FROM Recibos r JOIN Cliente c ON c.Cliente = r.Cliente WHERE FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " AND TipoReg = '1' ORDER BY Clave")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT r.Clave, r.Fecha, r.Tipo1 as Tipo, r.Numero1 as Numero, r.Cliente, c.Cuit FROM Recibos r JOIN Cliente c ON c.Cliente = r.Cliente WHERE FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " AND TipoReg = '1' ORDER BY Clave")
         Dim dr As SqlDataReader
 
         Try
@@ -759,8 +759,8 @@ Public Class ProcesoPercepciones
 
     Private Sub _ModificarCtaCteImporteIva0()
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("")
 
         Try
 
@@ -831,7 +831,7 @@ Public Class ProcesoPercepciones
     End Sub
 
     Private Sub LugarProceso_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles LugarProceso.KeyDown
-        
+
         If e.KeyData = Keys.Enter Then
 
             With TipoProceso
