@@ -1371,7 +1371,7 @@ Public Class IngresoPruebasEnsayo
                 ElseIf msg.WParam.ToInt32() = Keys.Escape Then
                     .Rows(iRow).Cells(iCol).Value = ""
 
-                    If iCol = 4 Then
+                    If iCol = .ColumnCount - 1 Then
                         .CurrentCell = .Rows(iRow).Cells(iCol - 1)
                     Else
                         .CurrentCell = .Rows(iRow).Cells(iCol + 1)
@@ -1416,7 +1416,7 @@ Public Class IngresoPruebasEnsayo
                 ElseIf msg.WParam.ToInt32() = Keys.Escape Then
                     .Rows(iRow).Cells(iCol).Value = ""
 
-                    If iCol = 4 Then
+                    If iCol = .ColumnCount - 1 Then
                         .CurrentCell = .Rows(iRow).Cells(iCol - 1)
                     Else
                         .CurrentCell = .Rows(iRow).Cells(iCol + 1)
@@ -1461,7 +1461,7 @@ Public Class IngresoPruebasEnsayo
                 ElseIf msg.WParam.ToInt32() = Keys.Escape Then
                     .Rows(iRow).Cells(iCol).Value = ""
 
-                    If iCol = 4 Then
+                    If iCol = .ColumnCount - 1 Then
                         .CurrentCell = .Rows(iRow).Cells(iCol - 1)
                     Else
                         .CurrentCell = .Rows(iRow).Cells(iCol + 1)
@@ -1506,7 +1506,7 @@ Public Class IngresoPruebasEnsayo
                 ElseIf msg.WParam.ToInt32() = Keys.Escape Then
                     .Rows(iRow).Cells(iCol).Value = ""
 
-                    If iCol = 4 Then
+                    If iCol = .ColumnCount - 1 Then
                         .CurrentCell = .Rows(iRow).Cells(iCol - 1)
                     Else
                         .CurrentCell = .Rows(iRow).Cells(iCol + 1)
@@ -1551,7 +1551,7 @@ Public Class IngresoPruebasEnsayo
                 ElseIf msg.WParam.ToInt32() = Keys.Escape Then
                     .Rows(iRow).Cells(iCol).Value = ""
 
-                    If iCol = 4 Then
+                    If iCol = .ColumnCount - 1 Then
                         .CurrentCell = .Rows(iRow).Cells(iCol - 1)
                     Else
                         .CurrentCell = .Rows(iRow).Cells(iCol + 1)
@@ -2827,10 +2827,10 @@ Public Class IngresoPruebasEnsayo
 
     End Function
 
-    Private Function _TraerParidad(ByVal fecha As String) As Double
+    Private Function _TraerParidad(ByVal Wfecha As String) As Double
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cambio FROM Cambios WHERE Fecha = '" & fecha & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Cambio FROM Cambios WHERE Fecha = '" & Wfecha & "'")
         Dim dr As SqlDataReader
 
         Dim WParidad As Double = 0.0
@@ -2852,7 +2852,7 @@ Public Class IngresoPruebasEnsayo
             End If
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la paridad del dia " & fecha & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Throw New Exception("Hubo un problema al querer consultar la paridad del dia " & Wfecha & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -4667,7 +4667,6 @@ Public Class IngresoPruebasEnsayo
         
         If Not Directory.Exists(_RutaCarpetaArchivos) Then
             Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
-            Exit Sub
         End If
 
         WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtOrden.Text
@@ -4699,7 +4698,7 @@ Public Class IngresoPruebasEnsayo
     End Sub
 
     Private Function _ObtenerIconoSegunTipoArchivo(ByVal extension As String)
-        Dim icono = Nothing
+        Dim Wicono = Nothing
 
         'My.Resources.pdf_icon
 
@@ -4707,21 +4706,21 @@ Public Class IngresoPruebasEnsayo
         Select Case UCase(extension)
 
             Case ".DOC", ".DOCX"
-                icono = My.Resources.Word_icon
+                Wicono = My.Resources.Word_icon
             Case ".XLS", ".XLSX", ".XLSM"
-                icono = My.Resources.Excel_icon
+                Wicono = My.Resources.Excel_icon
             Case ".PDF"
-                icono = My.Resources.pdf_icono
+                Wicono = My.Resources.pdf_icono
             Case ".JPG", ".JPEG", ".BMP", ".ICO", ".PNG"
-                icono = My.Resources.imagen_icono
+                Wicono = My.Resources.imagen_icono
             Case ".TXT"
-                icono = My.Resources.txt_icono
+                Wicono = My.Resources.txt_icono
             Case Else
-                icono = My.Resources.archivo_default
+                Wicono = My.Resources.archivo_default
         End Select
 
 
-        Return icono
+        Return Wicono
     End Function
 
     Private Sub txtBuscarEnTodosLosCampos_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBuscarEnTodosLosCampos.KeyDown
@@ -4735,5 +4734,17 @@ Public Class IngresoPruebasEnsayo
             txtBuscarEnTodosLosCampos.Text = ""
         End If
         
+    End Sub
+
+    Private Sub dgvRevisiones_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvRevisiones.RowHeaderMouseDoubleClick
+
+        If e.RowIndex < -1 Then Exit Sub
+
+        If MsgBox("¿Quiere eliminar la fila?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            Dim WRow = dgvRevisiones.Rows(e.RowIndex)
+
+            dgvRevisiones.Rows.Remove(WRow)
+        End If
+
     End Sub
 End Class

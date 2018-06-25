@@ -65,9 +65,9 @@ namespace HojaRuta.Auxiliares
                         cmd.Connection = conn;
                         cmd.CommandText = " SELECT DISTINCT p.Pedido, c.Razon, Tipo = CASE p.TipoPed WHEN 5 THEN 'Muestra' ELSE 'Pedido' END, "
                                         + " Dire = CASE p.DirEntrega WHEN 1 THEN c.DirEntrega WHEN 2 THEN c.DirEntregaII WHEN 3 THEN c.DirEntregaIII WHEN 4 THEN c.DirEntregaIV ELSE c.DirEntregaV END, "
-                                        + " CantidadKilos = (SELECT SUM(CantiLote1+CantiLote2+CantiLote3+CantiLote4+CantiLote5+UltimoCantiLote1+UltimoCantiLote2+UltimoCantiLote3+UltimoCantiLote4+UltimoCantiLote5) from Pedido WHERE Pedido = p.Pedido), p.CantidadFac "
+                                        + " CantidadKilos = (SELECT SUM(CantiLote1+CantiLote2+CantiLote3+CantiLote4+CantiLote5+UltimoCantiLote1+UltimoCantiLote2+UltimoCantiLote3+UltimoCantiLote4+UltimoCantiLote5) from Pedido WHERE Pedido = p.Pedido), CantidadFac = (SELECT SUM(CantidadFac) from Pedido WHERE Pedido = p.Pedido) "
                                         + " FROM pedido p, cliente c WHERE p.Cliente = c.Cliente AND p.TipoPedido IN (" + WTipos + ") AND p.Tipoped <> 4 AND p.pedido > 326800 AND p.HojaRuta = 0 AND (p.CantidadFac <> 0 OR p.Cantidad > p.Facturado) AND p.Autorizo = 'X' AND p.Cliente <> 'P00005' ORDER BY p.Pedido";
-
+                        
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
                             if (dr.HasRows)
@@ -120,13 +120,66 @@ namespace HojaRuta.Auxiliares
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            _EnviarPedido(e.RowIndex);
+        }
+
+        private void _EnviarPedido(int index)
+        {
+            if (index < 0) return;
+
             if (dataGridView1.CurrentRow != null)
-                ((Novedades.HojaRuta) Owner).Prueba(dataGridView1.CurrentRow.Cells["Pedido"].Value);
+            {
+                try
+                {
+                    ((Novedades.HojaRuta)Owner)._TraerPedidoDeLista(dataGridView1.CurrentRow.Cells["Pedido"].Value);
+
+                    dataGridView1.CurrentCell = null;
+                    dataGridView1.Rows[index].Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void ListaPedidos_Load(object sender, EventArgs e)
         {
             this.Location = new Point(this.Width/2, 15);
+        }
+
+        private void dataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            _EnviarPedido(e.RowIndex);
+        }
+
+        private void ListaPedidos_Shown(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            DataTable tabla = dataGridView1.DataSource as DataTable;
+
+            if (tabla != null)
+                tabla.DefaultView.RowFilter = string.Format("CONVERT(Pedido, System.String) LIKE '%{0}%' OR Razon LIKE '%{0}%' OR Tipo LIKE '%{0}%' OR Direccion LIKE '%{0}%'", textBox1.Text);
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Escape) textBox1.Text = "";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataTable tabla = dataGridView1.DataSource as DataTable;
+
+            if (tabla != null)
+                tabla.DefaultView.RowFilter = string.Empty;
+
+            textBox1.Text = "";
+            textBox1.Focus();
         }
     }
 }
