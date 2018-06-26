@@ -1035,7 +1035,7 @@ Public Class ProveedoresABM
             If dr.HasRows Then
 
                 With dr
-
+                    .Read()
                     cmbCertificados2.SelectedIndex = IIf(IsDBNull(.Item("Iso2")), 0, .Item("Iso2"))
                     txtCertificados2.Text = IIf(IsDBNull(.Item("VtoIso2")), "", .Item("VtoIso2"))
                     cmbCertificados2.SelectedIndex = IIf(IsDBNull(.Item("Iso3")), 0, .Item("Iso3"))
@@ -1046,7 +1046,7 @@ Public Class ProveedoresABM
             End If
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Throw New Exception("Hubo un problema al traer los datos de los Certificados Extras desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing

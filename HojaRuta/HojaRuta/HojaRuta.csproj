@@ -69,6 +69,12 @@
     <Compile Include="Auxiliares\CheckListExportacion.Designer.cs">
       <DependentUpon>CheckListExportacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Auxiliares\ConsultaAyuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\ConsultaAyuda.Designer.cs">
+      <DependentUpon>ConsultaAyuda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Auxiliares\ListaPedidos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Auxiliares\CheckListExportacion.resx">
       <DependentUpon>CheckListExportacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\ConsultaAyuda.resx">
+      <DependentUpon>ConsultaAyuda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\ListaPedidos.resx">
       <DependentUpon>ListaPedidos.cs</DependentUpon>

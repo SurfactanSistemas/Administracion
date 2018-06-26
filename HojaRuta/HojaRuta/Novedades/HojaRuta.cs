@@ -9,6 +9,8 @@ namespace HojaRuta.Novedades
 {
     public partial class HojaRuta : Form
     {
+        private Auxiliares.ConsultaAyuda frmAyuda;
+
         public HojaRuta()
         {
             InitializeComponent();
@@ -422,18 +424,14 @@ namespace HojaRuta.Novedades
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            foreach (
-                TextBox txt in
-                    new[]
-                    {txtNroHoja, txtCamion, txtChofer, txtDesCamion, txtDesChofer, txtKilos, txtNroViaje, txtRetiraProv}
-                )
+            foreach (TextBox txt in this.groupBox2.Controls.OfType<TextBox>())
             {
                 txt.Text = "";
             }
 
-            foreach (ComboBox cmb in new[] {cmbEstado, cmbTipoPedido})
+            foreach (ComboBox cmb in groupBox2.Controls.OfType<ComboBox>())
             {
-                cmb.SelectedIndex = 0;
+                if (cmb.Items.Count > 0) cmb.SelectedIndex = 0;
             }
 
             txtFecha.Clear();
@@ -705,6 +703,224 @@ namespace HojaRuta.Novedades
             {
                 throw new Exception("Error al determinar la peligrosidad del los Productos Terminados desde la Base de Datos. Motivo: " + ex.Message);
             }
+        }
+
+        private void btnConsulta_Click(object sender, EventArgs e)
+        {
+            if (frmAyuda != null) frmAyuda.Dispose();
+
+            frmAyuda = new Auxiliares.ConsultaAyuda();
+            frmAyuda.Show(this);
+        }
+
+        internal void _RecibirDatosAyuda(string WId, short WtipoConsulta)
+        {
+            switch (WtipoConsulta)
+            {
+                case 1:
+                {
+                    txtCamion.Text = WId;
+                    txtCamion_KeyDown(null, new KeyEventArgs(Keys.Enter));
+                    break;
+                }
+                case 2:
+                {
+                    txtChofer.Text = WId;
+                    txtChofer_KeyDown(null, new KeyEventArgs(Keys.Enter));
+                    break;
+                }
+            }
+
+            if (frmAyuda != null) frmAyuda.Dispose();
+        }
+
+        private void txtChofer_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (frmAyuda != null) frmAyuda.Dispose();
+
+            frmAyuda = new Auxiliares.ConsultaAyuda("2");
+            frmAyuda.Show(this);
+        }
+
+        private void txtCamion_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (frmAyuda != null) frmAyuda.Dispose();
+
+            frmAyuda = new Auxiliares.ConsultaAyuda("1");
+            frmAyuda.Show(this);
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            SqlTransaction trans = null;
+            try
+            {
+                var WCamion = txtCamion.Text.Trim();
+                var WChofer = txtChofer.Text.Trim();
+                var WNroViaje = txtNroViaje.Text.Trim();
+
+                // Controlo Fecha.
+                if (txtFecha.Text.Replace("/", "").Trim() == "")
+                {
+                    throw new Exception("Fecha No Informada");
+                }
+
+                // Controlo Camión.
+                if (WCamion == "")
+                {
+                    throw new Exception("Camión no informado.");
+                }
+
+                // Controlo Chofer.
+                if (WChofer== "")
+                {
+                    throw new Exception("Chofer no informado.");
+                }
+
+                // Controlo Nro Viaje.
+                if (WNroViaje == "" || WNroViaje == "0")
+                {
+                    throw new Exception("Nro de Viaje no informado.");
+                }
+
+                var WFecha = txtFecha.Text;
+                var WOrdFecha = int.Parse(Helper.OrdenarFecha(WFecha));
+                var WFechaInicio = DateTime.Now.ToString("dd/MM/yyyy");
+                var WOrdFechaInicio = int.Parse(Helper.OrdenarFecha(WFechaInicio));
+                var WNuevaFecha = DateTime.Now.AddDays(15).ToString("dd/MM/yyyy");
+                var WOrdNuevaFecha = int.Parse(Helper.OrdenarFecha(WNuevaFecha));
+
+                // Controlo Validez de la Fecha ingresada.
+                if (!Helper._ValidarFecha(txtFecha.Text))
+                {
+                    throw new Exception("Fecha Inválida.");
+                }
+
+                // Controlo que se encuentre dentro de los cuatros dias.
+                if ((WOrdFechaInicio - WOrdFecha) > 4 || (WOrdFechaInicio - WOrdFecha) < 0)
+                {
+                    throw new Exception("La fecha de la hoja de ruta exede los 4 dias desde la fecha actual o no es anterior");
+                }
+
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+                    trans = conn.BeginTransaction();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.Transaction = trans;
+                        cmd.CommandText = "SELECT FechaVtoI, FechaVtoII, FechaVtoIII, FechaVtoIV, FechaVtoV, AplicaV FROM Camion WHERE Codigo = '" + WCamion + "'";
+
+                        SqlDataReader dr = cmd.ExecuteReader();
+
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            var WCamionFechaVtoI = dr["FechaVtoI"] != null ? dr["FechaVtoI"].ToString() : "";
+                            var WCamionFechaVtoII = dr["FechaVtoII"] != null ? dr["FechaVtoII"].ToString() : "";
+                            var WCamionFechaVtoIII = dr["FechaVtoIII"] != null ? dr["FechaVtoIII"].ToString() : "";
+                            var WCamionFechaVtoIV = dr["FechaVtoIV"] != null ? dr["FechaVtoIV"].ToString() : "";
+                            var WCamionFechaVtoV = dr["FechaVtoV"] != null ? dr["FechaVtoV"].ToString() : "";
+                            var WAplicaV = dr["AplicaV"] != null ? dr["AplicaV"].ToString() : "0";
+
+                            var WOrdCamionFechaVtoI = int.Parse(Helper.OrdenarFecha(WCamionFechaVtoI));
+                            var WOrdCamionFechaVtoII = int.Parse(Helper.OrdenarFecha(WCamionFechaVtoII));
+                            var WOrdCamionFechaVtoIII = int.Parse(Helper.OrdenarFecha(WCamionFechaVtoIII));
+                            var WOrdCamionFechaVtoIV = int.Parse(Helper.OrdenarFecha(WCamionFechaVtoIV));
+                            var WOrdCamionFechaVtoV = int.Parse(Helper.OrdenarFecha(WCamionFechaVtoV));
+
+                            if (WOrdCamionFechaVtoI < WOrdFecha)
+                            {
+                                throw new Exception("La fecha de vigencia de Ruta esta vencida: " + WCamionFechaVtoI);
+                            }
+
+                            if (WOrdCamionFechaVtoII < WOrdFecha)
+                            {
+                                throw new Exception(
+                                    "La fecha de vigencia de Revision Tecnica Obligatoria esta vencida: " +
+                                    WCamionFechaVtoII);
+                            }
+
+                            if (WOrdCamionFechaVtoIII < WOrdFecha)
+                            {
+                                throw new Exception("La fecha de vigencia de Habilitacion de Dominio esta vencida: " +
+                                                    WCamionFechaVtoIII);
+                            }
+
+                            if (WOrdCamionFechaVtoIV < WOrdFecha)
+                            {
+                                throw new Exception("La fecha de vigencia de Seguro esta vencida: " + WCamionFechaVtoIV);
+                            }
+
+                            if (int.Parse(WAplicaV) == 1 && WOrdCamionFechaVtoI < WOrdFecha)
+                            {
+                                throw new Exception(
+                                    "La fecha de vigencia de Cert. para transporte de cargas peligrosas esta vencida: " +
+                                    WCamionFechaVtoV);
+                            }
+
+                            // Verifico proximidad de Vencimiento.
+                            if (WOrdCamionFechaVtoI < WOrdFecha && WOrdCamionFechaVtoI > 0)
+                            {
+                                throw new Exception("La fecha de vigencia de Ruta esta vencida: " + WCamionFechaVtoI);
+                            }
+
+                            if (WOrdCamionFechaVtoII < WOrdFecha && WOrdCamionFechaVtoII > 0)
+                            {
+                                throw new Exception(
+                                    "La fecha de vigencia de Revision Tecnica Obligatoria esta vencida: " +
+                                    WCamionFechaVtoII);
+                            }
+
+                            if (WOrdCamionFechaVtoIII < WOrdFecha && WOrdCamionFechaVtoIII > 0)
+                            {
+                                throw new Exception("La fecha de vigencia de Habilitacion de Dominio esta vencida: " +
+                                                    WCamionFechaVtoIII);
+                            }
+
+                            if (WOrdCamionFechaVtoIV < WOrdFecha && WOrdCamionFechaVtoIV > 0)
+                            {
+                                throw new Exception("La fecha de vigencia de Seguro esta vencida: " + WCamionFechaVtoIV);
+                            }
+
+                            if (WOrdCamionFechaVtoV < WOrdFecha && WOrdCamionFechaVtoV > 0)
+                            {
+                                throw new Exception(
+                                    "La fecha de vigencia de Cert. para transporte de cargas peligrosas esta vencida: " +
+                                    WCamionFechaVtoV);
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Camion Inexistente");
+                        }
+
+                        if (!dr.IsClosed) dr.Close();
+
+                        cmd.CommandText = "SELECT * FROM Chofer WHERE Codigo = '" + WChofer + "'";
+
+                        dr = cmd.ExecuteReader();
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                if (trans != null) trans.Rollback();
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+        
+
         }
     }
 }
