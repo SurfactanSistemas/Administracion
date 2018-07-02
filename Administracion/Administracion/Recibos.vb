@@ -449,6 +449,16 @@ Public Class Recibos
         _RetIB8 = ""
         _CompIB8 = ""
 
+        WRazon = ""
+        WDireccion = ""
+        WLocalidad = ""
+        WProvincia = ""
+        WPostal = ""
+        WRecibo = ""
+        WFecha = ""
+        WCliente = ""
+        WEmail = ""
+
         _ClavesCheques.Clear()
         _CuentasContables.Clear()
 

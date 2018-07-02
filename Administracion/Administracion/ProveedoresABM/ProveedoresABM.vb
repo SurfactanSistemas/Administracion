@@ -69,6 +69,14 @@ Public Class ProveedoresABM
 
         Next
 
+        For Each cmb As ComboBox In Me.GroupBox5.Controls.OfType(Of ComboBox)()
+            cmb.SelectedIndex = 0
+        Next
+
+        For Each msk As MaskedTextBox In Me.GroupBox5.Controls.OfType(Of MaskedTextBox)()
+            msk.Clear()
+        Next
+
         cmbInscripcionIB.SelectedIndex = 0
         cmbCondicionIB1.SelectedIndex = 0
         cmbCondicionIB2.SelectedIndex = 0
@@ -245,6 +253,10 @@ Public Class ProveedoresABM
             End Try
 
         Next
+
+        If (_ProveedorExistente(txtCodigo.Text)) Then
+            _ActualizarCertificadosProveedor(txtCodigo.Text)
+        End If
 
         MsgBox("Proveedor Actualiza correctamente!", MsgBoxStyle.Information)
 
@@ -1038,7 +1050,7 @@ Public Class ProveedoresABM
                     .Read()
                     cmbCertificados2.SelectedIndex = IIf(IsDBNull(.Item("Iso2")), 0, .Item("Iso2"))
                     txtCertificados2.Text = IIf(IsDBNull(.Item("VtoIso2")), "", .Item("VtoIso2"))
-                    cmbCertificados2.SelectedIndex = IIf(IsDBNull(.Item("Iso3")), 0, .Item("Iso3"))
+                    cmbCertificados3.SelectedIndex = IIf(IsDBNull(.Item("Iso3")), 0, .Item("Iso3"))
                     txtCertificados3.Text = IIf(IsDBNull(.Item("VtoIso3")), "", .Item("VtoIso3"))
 
                 End With
