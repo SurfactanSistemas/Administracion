@@ -38,11 +38,16 @@ namespace HojaRuta
             this.ingCamionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ingChoferesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novedadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hojaDeRutaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoVencimientosDeCamionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeVencimientosDeChoferesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.hojaDeRutaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaHojaDeRutaCOTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaHojaDeRutaClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +57,7 @@ namespace HojaRuta
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.maestrosToolStripMenuItem,
             this.novedadesToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.procesosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -71,24 +77,56 @@ namespace HojaRuta
             // ingCamionesToolStripMenuItem
             // 
             this.ingCamionesToolStripMenuItem.Name = "ingCamionesToolStripMenuItem";
-            this.ingCamionesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ingCamionesToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.ingCamionesToolStripMenuItem.Text = "Ing. Camiones";
             this.ingCamionesToolStripMenuItem.Click += new System.EventHandler(this.ingCamionesToolStripMenuItem_Click);
             // 
             // ingChoferesToolStripMenuItem
             // 
             this.ingChoferesToolStripMenuItem.Name = "ingChoferesToolStripMenuItem";
-            this.ingChoferesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ingChoferesToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.ingChoferesToolStripMenuItem.Text = "Ing. Choferes";
             this.ingChoferesToolStripMenuItem.Click += new System.EventHandler(this.ingChoferesToolStripMenuItem_Click);
             // 
             // novedadesToolStripMenuItem
             // 
             this.novedadesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hojaDeRutaToolStripMenuItem});
+            this.hojaDeRutaToolStripMenuItem,
+            this.consultaHojaDeRutaCOTToolStripMenuItem,
+            this.consultaHojaDeRutaClienteToolStripMenuItem});
             this.novedadesToolStripMenuItem.Name = "novedadesToolStripMenuItem";
             this.novedadesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.novedadesToolStripMenuItem.Text = "Novedades";
+            // 
+            // hojaDeRutaToolStripMenuItem
+            // 
+            this.hojaDeRutaToolStripMenuItem.Name = "hojaDeRutaToolStripMenuItem";
+            this.hojaDeRutaToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.hojaDeRutaToolStripMenuItem.Text = "Hoja de Ruta";
+            this.hojaDeRutaToolStripMenuItem.Click += new System.EventHandler(this.hojaDeRutaToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listadoVencimientosDeCamionesToolStripMenuItem,
+            this.listadoDeVencimientosDeChoferesToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(62, 20);
+            this.toolStripMenuItem1.Text = "Listados";
+            // 
+            // listadoVencimientosDeCamionesToolStripMenuItem
+            // 
+            this.listadoVencimientosDeCamionesToolStripMenuItem.Name = "listadoVencimientosDeCamionesToolStripMenuItem";
+            this.listadoVencimientosDeCamionesToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
+            this.listadoVencimientosDeCamionesToolStripMenuItem.Text = "Listado Vencimientos de Camiones";
+            this.listadoVencimientosDeCamionesToolStripMenuItem.Click += new System.EventHandler(this.listadoVencimientosDeCamionesToolStripMenuItem_Click);
+            // 
+            // listadoDeVencimientosDeChoferesToolStripMenuItem
+            // 
+            this.listadoDeVencimientosDeChoferesToolStripMenuItem.Name = "listadoDeVencimientosDeChoferesToolStripMenuItem";
+            this.listadoDeVencimientosDeChoferesToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
+            this.listadoDeVencimientosDeChoferesToolStripMenuItem.Text = "Listado de Vencimientos de Choferes";
+            this.listadoDeVencimientosDeChoferesToolStripMenuItem.Click += new System.EventHandler(this.listadoDeVencimientosDeChoferesToolStripMenuItem_Click);
             // 
             // procesosToolStripMenuItem
             // 
@@ -127,12 +165,19 @@ namespace HojaRuta
             this.label1.TabIndex = 0;
             this.label1.Text = "HOJA DE RUTA";
             // 
-            // hojaDeRutaToolStripMenuItem
+            // consultaHojaDeRutaCOTToolStripMenuItem
             // 
-            this.hojaDeRutaToolStripMenuItem.Name = "hojaDeRutaToolStripMenuItem";
-            this.hojaDeRutaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.hojaDeRutaToolStripMenuItem.Text = "Hoja de Ruta";
-            this.hojaDeRutaToolStripMenuItem.Click += new System.EventHandler(this.hojaDeRutaToolStripMenuItem_Click);
+            this.consultaHojaDeRutaCOTToolStripMenuItem.Name = "consultaHojaDeRutaCOTToolStripMenuItem";
+            this.consultaHojaDeRutaCOTToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.consultaHojaDeRutaCOTToolStripMenuItem.Text = "Consulta Hoja de Ruta (COT)";
+            this.consultaHojaDeRutaCOTToolStripMenuItem.Click += new System.EventHandler(this.consultaHojaDeRutaCOTToolStripMenuItem_Click);
+            // 
+            // consultaHojaDeRutaClienteToolStripMenuItem
+            // 
+            this.consultaHojaDeRutaClienteToolStripMenuItem.Name = "consultaHojaDeRutaClienteToolStripMenuItem";
+            this.consultaHojaDeRutaClienteToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.consultaHojaDeRutaClienteToolStripMenuItem.Text = "Consulta Hoja de Ruta (Cliente)";
+            this.consultaHojaDeRutaClienteToolStripMenuItem.Click += new System.EventHandler(this.consultaHojaDeRutaClienteToolStripMenuItem_Click);
             // 
             // Inicio
             // 
@@ -164,6 +209,11 @@ namespace HojaRuta
         private Label label1;
         private ToolStripMenuItem salirDelSistemaToolStripMenuItem;
         private ToolStripMenuItem hojaDeRutaToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem listadoVencimientosDeCamionesToolStripMenuItem;
+        private ToolStripMenuItem listadoDeVencimientosDeChoferesToolStripMenuItem;
+        private ToolStripMenuItem consultaHojaDeRutaCOTToolStripMenuItem;
+        private ToolStripMenuItem consultaHojaDeRutaClienteToolStripMenuItem;
     }
 }
 

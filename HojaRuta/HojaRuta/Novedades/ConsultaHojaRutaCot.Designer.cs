@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace HojaRuta.Novedades
 {
-    partial class HojaRuta
+    partial class ConsultaHojaRutaCot
     {
         /// <summary>
         /// Required designer variable.
@@ -42,14 +42,15 @@ namespace HojaRuta.Novedades
             this.LBChofer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnCheckList = new System.Windows.Forms.Button();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
             this.btnCerrar = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnPedidos = new System.Windows.Forms.Button();
             this.btnConsulta = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnCheckList = new System.Windows.Forms.Button();
             this.btnCot = new System.Windows.Forms.Button();
             this.cmbEstado = new System.Windows.Forms.ComboBox();
             this.cmbTipoPedido = new System.Windows.Forms.ComboBox();
@@ -128,9 +129,9 @@ namespace HojaRuta.Novedades
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.btnCheckList);
             this.panel3.Controls.Add(this.dgvPedidos);
             this.panel3.Controls.Add(this.btnCerrar);
+            this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.btnLimpiar);
             this.panel3.Controls.Add(this.btnPedidos);
             this.panel3.Controls.Add(this.btnConsulta);
@@ -140,17 +141,6 @@ namespace HojaRuta.Novedades
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(886, 412);
             this.panel3.TabIndex = 0;
-            // 
-            // btnCheckList
-            // 
-            this.btnCheckList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckList.Location = new System.Drawing.Point(623, 368);
-            this.btnCheckList.Name = "btnCheckList";
-            this.btnCheckList.Size = new System.Drawing.Size(137, 34);
-            this.btnCheckList.TabIndex = 5;
-            this.btnCheckList.Text = "Check List Exportación";
-            this.btnCheckList.UseVisualStyleBackColor = true;
-            this.btnCheckList.Click += new System.EventHandler(this.btnCheckList_Click);
             // 
             // dgvPedidos
             // 
@@ -173,6 +163,7 @@ namespace HojaRuta.Novedades
             this.dgvPedidos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvPedidos.Location = new System.Drawing.Point(7, 178);
             this.dgvPedidos.Name = "dgvPedidos";
+            this.dgvPedidos.ReadOnly = true;
             this.dgvPedidos.RowHeadersWidth = 15;
             this.dgvPedidos.RowTemplate.Height = 18;
             this.dgvPedidos.Size = new System.Drawing.Size(872, 178);
@@ -184,7 +175,7 @@ namespace HojaRuta.Novedades
             this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCerrar.Location = new System.Drawing.Point(543, 365);
+            this.btnCerrar.Location = new System.Drawing.Point(483, 365);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(40, 40);
             this.btnCerrar.TabIndex = 40;
@@ -192,13 +183,28 @@ namespace HojaRuta.Novedades
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::HojaRuta.Properties.Resources.Imprimir;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(364, 365);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(40, 40);
+            this.button1.TabIndex = 39;
+            this.toolTip1.SetToolTip(this.button1, "Imprimir Hoja de Ruta");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnLimpiar
             // 
             this.btnLimpiar.BackgroundImage = global::HojaRuta.Properties.Resources.LimpiarPant1;
             this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnLimpiar.Location = new System.Drawing.Point(483, 365);
+            this.btnLimpiar.Location = new System.Drawing.Point(423, 365);
             this.btnLimpiar.Margin = new System.Windows.Forms.Padding(0);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(40, 40);
@@ -213,13 +219,14 @@ namespace HojaRuta.Novedades
             this.btnPedidos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPedidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPedidos.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPedidos.Location = new System.Drawing.Point(423, 365);
+            this.btnPedidos.Location = new System.Drawing.Point(743, 365);
             this.btnPedidos.Margin = new System.Windows.Forms.Padding(0);
             this.btnPedidos.Name = "btnPedidos";
             this.btnPedidos.Size = new System.Drawing.Size(40, 40);
             this.btnPedidos.TabIndex = 38;
             this.toolTip1.SetToolTip(this.btnPedidos, "Pedidos");
             this.btnPedidos.UseVisualStyleBackColor = true;
+            this.btnPedidos.Visible = false;
             this.btnPedidos.Click += new System.EventHandler(this.btnPedidos_Click);
             // 
             // btnConsulta
@@ -228,13 +235,14 @@ namespace HojaRuta.Novedades
             this.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsulta.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnConsulta.Location = new System.Drawing.Point(363, 365);
+            this.btnConsulta.Location = new System.Drawing.Point(836, 365);
             this.btnConsulta.Margin = new System.Windows.Forms.Padding(0);
             this.btnConsulta.Name = "btnConsulta";
             this.btnConsulta.Size = new System.Drawing.Size(40, 40);
             this.btnConsulta.TabIndex = 38;
             this.toolTip1.SetToolTip(this.btnConsulta, "Abrir Consulta");
             this.btnConsulta.UseVisualStyleBackColor = true;
+            this.btnConsulta.Visible = false;
             this.btnConsulta.Click += new System.EventHandler(this.btnConsulta_Click);
             // 
             // btnGuardar
@@ -243,17 +251,19 @@ namespace HojaRuta.Novedades
             this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnGuardar.Location = new System.Drawing.Point(303, 365);
+            this.btnGuardar.Location = new System.Drawing.Point(783, 365);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(0);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(40, 40);
             this.btnGuardar.TabIndex = 38;
             this.toolTip1.SetToolTip(this.btnGuardar, "Grabar");
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Visible = false;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnCheckList);
             this.groupBox2.Controls.Add(this.btnCot);
             this.groupBox2.Controls.Add(this.cmbEstado);
             this.groupBox2.Controls.Add(this.cmbTipoPedido);
@@ -284,14 +294,27 @@ namespace HojaRuta.Novedades
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
+            // btnCheckList
+            // 
+            this.btnCheckList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCheckList.Location = new System.Drawing.Point(757, 114);
+            this.btnCheckList.Name = "btnCheckList";
+            this.btnCheckList.Size = new System.Drawing.Size(26, 20);
+            this.btnCheckList.TabIndex = 5;
+            this.btnCheckList.Text = "Check List Exportación";
+            this.btnCheckList.UseVisualStyleBackColor = true;
+            this.btnCheckList.Visible = false;
+            this.btnCheckList.Click += new System.EventHandler(this.btnCheckList_Click);
+            // 
             // btnCot
             // 
             this.btnCot.Location = new System.Drawing.Point(719, 114);
             this.btnCot.Name = "btnCot";
-            this.btnCot.Size = new System.Drawing.Size(105, 23);
+            this.btnCot.Size = new System.Drawing.Size(32, 19);
             this.btnCot.TabIndex = 5;
             this.btnCot.Text = "C.O.T.";
             this.btnCot.UseVisualStyleBackColor = true;
+            this.btnCot.Visible = false;
             this.btnCot.Click += new System.EventHandler(this.btnCot_Click);
             // 
             // cmbEstado
@@ -549,6 +572,7 @@ namespace HojaRuta.Novedades
             this.Pedido.HeaderText = "Pedido";
             this.Pedido.MaxInputLength = 6;
             this.Pedido.Name = "Pedido";
+            this.Pedido.ReadOnly = true;
             this.Pedido.Width = 50;
             // 
             // Cliente
@@ -599,6 +623,7 @@ namespace HojaRuta.Novedades
             this.Bultos.DefaultCellStyle = dataGridViewCellStyle5;
             this.Bultos.HeaderText = "Bultos";
             this.Bultos.Name = "Bultos";
+            this.Bultos.ReadOnly = true;
             this.Bultos.Width = 50;
             // 
             // Envases
@@ -606,12 +631,14 @@ namespace HojaRuta.Novedades
             this.Envases.HeaderText = "Envases a";
             this.Envases.MaxInputLength = 30;
             this.Envases.Name = "Envases";
+            this.Envases.ReadOnly = true;
             // 
             // Observacion
             // 
             this.Observacion.HeaderText = "Observacion";
             this.Observacion.MaxInputLength = 30;
             this.Observacion.Name = "Observacion";
+            this.Observacion.ReadOnly = true;
             // 
             // COT
             // 
@@ -620,21 +647,24 @@ namespace HojaRuta.Novedades
             this.COT.HeaderText = "COT";
             this.COT.MaxInputLength = 10;
             this.COT.Name = "COT";
+            this.COT.ReadOnly = true;
             this.COT.Width = 80;
             // 
             // Integridad
             // 
             this.Integridad.HeaderText = "Integridad";
             this.Integridad.Name = "Integridad";
+            this.Integridad.ReadOnly = true;
             this.Integridad.Visible = false;
             // 
             // Archivo
             // 
             this.Archivo.HeaderText = "Archivo";
             this.Archivo.Name = "Archivo";
+            this.Archivo.ReadOnly = true;
             this.Archivo.Visible = false;
             // 
-            // HojaRuta
+            // ConsultaHojaRutaCot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -645,10 +675,10 @@ namespace HojaRuta.Novedades
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(922, 511);
             this.MinimumSize = new System.Drawing.Size(922, 511);
-            this.Name = "HojaRuta";
+            this.Name = "ConsultaHojaRutaCot";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Load += new System.EventHandler(this.HojaRuta_Load);
-            this.Shown += new System.EventHandler(this.HojaRuta_Shown);
+            this.Load += new System.EventHandler(this.ConsultaHojaRutaCot_Load);
+            this.Shown += new System.EventHandler(this.ConsultaHojaRutaCot_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -699,6 +729,7 @@ namespace HojaRuta.Novedades
         private Button btnPedidos;
         private Button btnCheckList;
         private Timer timer1;
+        private Button button1;
         private DataGridViewTextBoxColumn Pedido;
         private DataGridViewTextBoxColumn Cliente;
         private DataGridViewTextBoxColumn Razon;

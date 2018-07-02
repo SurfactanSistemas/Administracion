@@ -1,11 +1,14 @@
-﻿namespace HojaRuta.Auxiliares
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace HojaRuta.Auxiliares
 {
     partial class CheckListExportacion
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -815,65 +818,65 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtChofer;
-        private System.Windows.Forms.TextBox txtChapa;
-        private System.Windows.Forms.TextBox txtDesExpreso;
-        private System.Windows.Forms.ComboBox cmbProveedor;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.CheckBox ckItem53;
-        private System.Windows.Forms.CheckBox ckItem52;
-        private System.Windows.Forms.CheckBox ckItem51;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.CheckBox ckItem43;
-        private System.Windows.Forms.CheckBox ckItem42;
-        private System.Windows.Forms.CheckBox ckItem41;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckBox ckItem33;
-        private System.Windows.Forms.CheckBox ckItem32;
-        private System.Windows.Forms.CheckBox ckItem31;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox ckItem23;
-        private System.Windows.Forms.CheckBox ckItem22;
-        private System.Windows.Forms.CheckBox ckItem21;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox ckItem13;
-        private System.Windows.Forms.CheckBox ckItem12;
-        private System.Windows.Forms.CheckBox ckItem11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.CheckBox ckItem83;
-        private System.Windows.Forms.CheckBox ckItem82;
-        private System.Windows.Forms.CheckBox ckItem81;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.CheckBox ckItem73;
-        private System.Windows.Forms.CheckBox ckItem72;
-        private System.Windows.Forms.CheckBox ckItem71;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.CheckBox ckItem63;
-        private System.Windows.Forms.CheckBox ckItem62;
-        private System.Windows.Forms.CheckBox ckItem61;
-        private System.Windows.Forms.TextBox txtRombo;
-        private System.Windows.Forms.TextBox txtObservaciones;
-        private System.Windows.Forms.TextBox txtPlaca;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Button button1;
+        private Panel panel1;
+        private Label label1;
+        private Label label2;
+        private GroupBox groupBox1;
+        private TextBox txtChofer;
+        private TextBox txtChapa;
+        private TextBox txtDesExpreso;
+        private ComboBox cmbProveedor;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Label label6;
+        private GroupBox groupBox6;
+        private CheckBox ckItem53;
+        private CheckBox ckItem52;
+        private CheckBox ckItem51;
+        private GroupBox groupBox5;
+        private CheckBox ckItem43;
+        private CheckBox ckItem42;
+        private CheckBox ckItem41;
+        private GroupBox groupBox4;
+        private CheckBox ckItem33;
+        private CheckBox ckItem32;
+        private CheckBox ckItem31;
+        private GroupBox groupBox3;
+        private CheckBox ckItem23;
+        private CheckBox ckItem22;
+        private CheckBox ckItem21;
+        private GroupBox groupBox2;
+        private CheckBox ckItem13;
+        private CheckBox ckItem12;
+        private CheckBox ckItem11;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private Label label11;
+        private GroupBox groupBox9;
+        private CheckBox ckItem83;
+        private CheckBox ckItem82;
+        private CheckBox ckItem81;
+        private GroupBox groupBox8;
+        private CheckBox ckItem73;
+        private CheckBox ckItem72;
+        private CheckBox ckItem71;
+        private GroupBox groupBox7;
+        private CheckBox ckItem63;
+        private CheckBox ckItem62;
+        private CheckBox ckItem61;
+        private TextBox txtRombo;
+        private TextBox txtObservaciones;
+        private TextBox txtPlaca;
+        private Label label14;
+        private Label label15;
+        private Label label13;
+        private Label label12;
+        private Label label17;
+        private Label label18;
+        private Label label16;
+        private Button button1;
     }
 }

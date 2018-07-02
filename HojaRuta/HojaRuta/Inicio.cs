@@ -39,5 +39,29 @@ namespace HojaRuta
             Novedades.HojaRuta frm = new Novedades.HojaRuta();
             frm.Show();
         }
+
+        private void listadoVencimientosDeCamionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.VencimientoCamiones.Inicio frm = new Listados.VencimientoCamiones.Inicio();
+            frm.Show();
+        }
+
+        private void listadoDeVencimientosDeChoferesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.VencimientoChoferes.Inicio frm = new Listados.VencimientoChoferes.Inicio();
+            frm.Show();
+        }
+
+        private void consultaHojaDeRutaCOTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Novedades.ConsultaHojaRutaCot frm = new Novedades.ConsultaHojaRutaCot();
+            frm.Show();
+        }
+
+        private void consultaHojaDeRutaClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Novedades.ConsultaHojaRutaCliente frm = new Novedades.ConsultaHojaRutaCliente();
+            frm.Show();
+        }
     }
 }

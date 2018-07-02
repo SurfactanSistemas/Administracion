@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -12,12 +13,12 @@ using HojaRuta.Reportes;
 
 namespace HojaRuta.Novedades
 {
-    public partial class HojaRuta : Form
+    public partial class ConsultaHojaRutaCot : Form
     {
         private ConsultaAyuda frmAyuda;
         private string WHojaCot = "";
 
-        public HojaRuta()
+        public ConsultaHojaRutaCot()
         {
             InitializeComponent();
         }
@@ -49,7 +50,7 @@ namespace HojaRuta.Novedades
 
         }
 
-        private void HojaRuta_Shown(object sender, EventArgs e)
+        private void ConsultaHojaRutaCot_Shown(object sender, EventArgs e)
         {
             txtNroHoja.Focus();
         }
@@ -439,23 +440,31 @@ namespace HojaRuta.Novedades
             foreach (TextBox txt in groupBox2.Controls.OfType<TextBox>())
             {
                 txt.Text = "";
+                txt.Enabled = false;
+                txt.BackColor = Color.WhiteSmoke;
             }
 
             foreach (ComboBox cmb in groupBox2.Controls.OfType<ComboBox>())
             {
                 if (cmb.Items.Count > 0) cmb.SelectedIndex = 0;
+                cmb.Enabled = false;
+                cmb.BackColor = Color.WhiteSmoke;
             }
 
+            txtFecha.Enabled = false;
             txtFecha.Clear();
+            txtFecha.BackColor = Color.WhiteSmoke;
 
             dgvPedidos.Rows.Clear();
 
             dgvPedidos.Rows.Add();
+            dgvPedidos.ReadOnly = true;
 
+            txtNroHoja.Enabled = true;
             txtNroHoja.Focus();
         }
 
-        private void HojaRuta_Load(object sender, EventArgs e)
+        private void ConsultaHojaRutaCot_Load(object sender, EventArgs e)
         {
             btnLimpiar.PerformClick();
         }
@@ -2170,6 +2179,14 @@ namespace HojaRuta.Novedades
             {
                 timer1.Stop();
                 txtNroHoja_KeyDown(null, new KeyEventArgs(Keys.Enter));
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (txtNroHoja.Text.Trim() != "")
+            {
+                _ImprimirHojaRuta();
             }
         }
     }

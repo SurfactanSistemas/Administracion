@@ -295,13 +295,13 @@ namespace HojaRuta.Auxiliares
                         {
                             cmd.CommandText = string.Format("UPDATE CheckListExpo SET Expreso = {0}, DesExpreso = '{1}', Chapa = '{2}', Chofer = '{3}', Placa = '{4}', Rombo = '{5}', Observaciones = '{6}', " +
                                                             " Item1 = '{7}', Item2 = '{8}', Item3 = '{9}', Item4 = '{10}', Item5 = '{11}', Item6 = '{12}', Item7 = '{13}', Item8 = '{14}', Fecha = '{16}', OrdFecha = '{17}' WHERE Hoja = '{15}'",
-                                                            WExpreso, WDesExpreso, WChapa, WChofer, WPlaca, WRombo, WObservaciones, WItem1, WItem2, WItem3, WItem4, WItem5, WItem6, WItem7, WItem8, this._HojaRuta, this._Fecha, Helper.OrdenarFecha(this._Fecha));
+                                                            WExpreso, WDesExpreso, WChapa, WChofer, WPlaca, WRombo, WObservaciones, WItem1, WItem2, WItem3, WItem4, WItem5, WItem6, WItem7, WItem8, _HojaRuta, _Fecha, Helper.OrdenarFecha(_Fecha));
                         }
                         else
                         {
                             cmd.CommandText = string.Format("INSERT INTO CheckListExpo (Hoja, Expreso, DesExpreso, Chapa, Chofer, Placa, Rombo, Observaciones, Item1, Item2, Item3, Item4, Item5, Item6, Item7, Item8, Fecha, OrdFecha) " +
                                               " VALUES ('{15}', {0} , '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{16}', '{17}')",
-                                              WExpreso, WDesExpreso, WChapa, WChofer, WPlaca, WRombo, WObservaciones, WItem1, WItem2, WItem3, WItem4, WItem5, WItem6, WItem7, WItem8, this._HojaRuta, this._Fecha, Helper.OrdenarFecha(this._Fecha));
+                                              WExpreso, WDesExpreso, WChapa, WChofer, WPlaca, WRombo, WObservaciones, WItem1, WItem2, WItem3, WItem4, WItem5, WItem6, WItem7, WItem8, _HojaRuta, _Fecha, Helper.OrdenarFecha(_Fecha));
                         }
 
                         cmd.ExecuteNonQuery();
@@ -331,7 +331,7 @@ namespace HojaRuta.Auxiliares
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = "SELECT Expreso FROM CheckListExpo WHERE Hoja = '" + this._HojaRuta + "'";
+                        cmd.CommandText = "SELECT Expreso FROM CheckListExpo WHERE Hoja = '" + _HojaRuta + "'";
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
@@ -351,7 +351,7 @@ namespace HojaRuta.Auxiliares
         private bool _DatosValidos()
         {
             // Controlo que todas las opciones tengan por lo menos algun valor indicado.
-            if (this.groupBox1.Controls.OfType<GroupBox>().Any(gb => gb.Controls.OfType<CheckBox>().Count(x => x.Checked) < 1))
+            if (groupBox1.Controls.OfType<GroupBox>().Any(gb => gb.Controls.OfType<CheckBox>().Count(x => x.Checked) < 1))
             {
                 MessageBox.Show("Error en la Carga de Datos");
                 return false;
@@ -365,7 +365,7 @@ namespace HojaRuta.Auxiliares
             }
 
             // Controlo que en caso de ser 'Peligrosa', se hayan completado los datos de correspondientes a 'Transporte de Sustancias Peligrosas'.
-            if (this._Peligroso)
+            if (_Peligroso)
             {
                 if (ckItem61.Checked || ckItem73.Checked || ckItem83.Checked)
                 {
