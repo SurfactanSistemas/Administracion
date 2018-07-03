@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System.Configuration;
 using System.Data;
-using System.Drawing;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.IO;
 
 namespace Vista
 {
@@ -19,18 +15,18 @@ namespace Vista
         int[] CantidadesDeEtiquetas;
         string tipo;
         int posicion;
-        Boolean _Traducir = false;
+        Boolean _Traducir;
         const Boolean _EnProduccion = true; // Dejar en TRUE cuando se está en producción
                                             // Cambiar a FALSE cuando se trabaje en desarrollo.
 
         public ImpreEtiquetChic(DataTable ds, int[] CantidadesDeEtiquetas, string Tipo, int Posicion = 0, Boolean traducir = false)
         {
             InitializeComponent();
-            this.dt = ds;
+            dt = ds;
             this.CantidadesDeEtiquetas = CantidadesDeEtiquetas;
-            this.tipo = Tipo;
-            this.posicion = Posicion;
-            this._Traducir = traducir;
+            tipo = Tipo;
+            posicion = Posicion;
+            _Traducir = traducir;
         }
 
         private void CRVEtiquetas_Load(object sender, EventArgs e)
@@ -42,10 +38,10 @@ namespace Vista
 
             Dss[HojaActual] = new DSEtiq1();
 
-            if (this.tipo != "Grande")
+            if (tipo != "Grande")
             {
                 // Dejamos en blanco las primeras etiquetas en caso de seleccionar una posicion que no se la de por defecto.
-                int WPosicion = (this.tipo == "Chica") ? this.posicion * 2 : this.posicion;
+                int WPosicion = (tipo == "Chica") ? posicion * 2 : posicion;
 
                 for (int j = 0; j < WPosicion; j++)
                 {
@@ -72,7 +68,7 @@ namespace Vista
                     
                     string[] SGA = _ObtenerDatosSGA(dr[2].ToString());
 
-                    if (this.tipo == "Chica") {
+                    if (tipo == "Chica") {
                         Dss[HojaActual].Tables[NumEtiquetaActual].Rows.Add(
                             dr[4], dr[3], dr[9],
                             dr[6], dr[7], dr[0],
@@ -173,7 +169,7 @@ namespace Vista
             {
                 case "PT": case "YQ": case "YF": case "YP":
                     // Porque los datos para la etiquetas de frasco se encuentran en otra tabla.
-                    return (this.tipo == "Frasco" || this.tipo == "Chica") ? "DatosEtiqueta" : "DatosEtiquetaImpre";
+                    return (tipo == "Frasco" || tipo == "Chica") ? "DatosEtiqueta" : "DatosEtiquetaImpre";
                     break;
                 default:
                     return "DatosEtiquetaMP";
@@ -222,7 +218,7 @@ namespace Vista
                         int renglon = 8;
                         int pictograma = 1;
 
-                        int _tipo = (this.tipo == "Chica" || this.tipo == "Frasco" || Tabla == "DatosEtiquetaMP") ? 0 : 1;
+                        int _tipo = (tipo == "Chica" || tipo == "Frasco" || Tabla == "DatosEtiquetaMP") ? 0 : 1;
 
                         switch (_tipo)
                         {
@@ -274,11 +270,11 @@ namespace Vista
                             switch (pal)
                             {
                                 case "1":
-                                    pal = (this._Traducir) ? "Danger" : "Peligro";
+                                    pal = (_Traducir) ? "Danger" : "Peligro";
                                     break;
 
                                 case "2":
-                                    pal = (this._Traducir) ? "Warning" : "Atención";
+                                    pal = (_Traducir) ? "Warning" : "Atención";
                                     break;
 
                                 default:
@@ -291,14 +287,14 @@ namespace Vista
                         }
                         else
                         {
-                            if (this._Traducir)
+                            if (_Traducir)
                             {
-                                datos[7] = datos[7].ToString().Replace("Peligro", "DANGER");
-                                datos[7] = datos[7].ToString().Replace("PELIGRO", "DANGER");
-                                datos[7] = datos[7].ToString().Replace("Atención", "WARNING");
-                                datos[7] = datos[7].ToString().Replace("Atencion", "WARNING");
-                                datos[7] = datos[7].ToString().Replace("ATENCIÓN", "WARNING");
-                                datos[7] = datos[7].ToString().Replace("ATENCION", "WARNING");
+                                datos[7] = datos[7].Replace("Peligro", "DANGER");
+                                datos[7] = datos[7].Replace("PELIGRO", "DANGER");
+                                datos[7] = datos[7].Replace("Atención", "WARNING");
+                                datos[7] = datos[7].Replace("Atencion", "WARNING");
+                                datos[7] = datos[7].Replace("ATENCIÓN", "WARNING");
+                                datos[7] = datos[7].Replace("ATENCION", "WARNING");
                             }
                         }
 
@@ -383,11 +379,11 @@ namespace Vista
                                     switch (pal)
                                     {
                                         case "1":
-                                            pal = (this._Traducir) ? "Danger" : "Peligro";
+                                            pal = (_Traducir) ? "Danger" : "Peligro";
                                             break;
 
                                         case "2":
-                                            pal = (this._Traducir) ? "Warning" : "Atención";
+                                            pal = (_Traducir) ? "Warning" : "Atención";
                                             break;
 
                                         default:
@@ -400,14 +396,14 @@ namespace Vista
                                 }
                                 else
                                 {
-                                    if (this._Traducir)
+                                    if (_Traducir)
                                     {
-                                        datos[7] = datos[7].ToString().Replace("Peligro", "DANGER");
-                                        datos[7] = datos[7].ToString().Replace("PELIGRO", "DANGER");
-                                        datos[7] = datos[7].ToString().Replace("Atención", "WARNING");
-                                        datos[7] = datos[7].ToString().Replace("Atencion", "WARNING");
-                                        datos[7] = datos[7].ToString().Replace("ATENCIÓN", "WARNING");
-                                        datos[7] = datos[7].ToString().Replace("ATENCION", "WARNING");
+                                        datos[7] = datos[7].Replace("Peligro", "DANGER");
+                                        datos[7] = datos[7].Replace("PELIGRO", "DANGER");
+                                        datos[7] = datos[7].Replace("Atención", "WARNING");
+                                        datos[7] = datos[7].Replace("Atencion", "WARNING");
+                                        datos[7] = datos[7].Replace("ATENCIÓN", "WARNING");
+                                        datos[7] = datos[7].Replace("ATENCION", "WARNING");
                                     }
                                 }
 
@@ -439,7 +435,7 @@ namespace Vista
 
         private string _ObtenerRutaImagenSGA(string numero) 
         {
-            switch (this.tipo)
+            switch (tipo)
             {
                 case "Grande":
 
@@ -474,9 +470,9 @@ namespace Vista
         {
             int corrimiento = 0;
 
-            if (this.tipo != "Grande")
+            if (tipo != "Grande")
             {
-                corrimiento += (this.tipo == "Chica") ? this.posicion*2 : this.posicion;
+                corrimiento += (tipo == "Chica") ? posicion*2 : posicion;
             }
 
             return Convert.ToInt32( // Paso a número entero
@@ -490,9 +486,9 @@ namespace Vista
         {
             double total = 0;
 
-            foreach (int cant in this.CantidadesDeEtiquetas)
+            foreach (int cant in CantidadesDeEtiquetas)
             {
-                total += (this.tipo == "Chica") ? cant*2 : cant;
+                total += (tipo == "Chica") ? cant*2 : cant;
             }
 
             return total;
@@ -500,7 +496,7 @@ namespace Vista
 
         public int CantidadDeEtiquetasPorHojaSegunTipo()
         {
-            switch (this.tipo)
+            switch (tipo)
             {
 
                 case "Chica": // Etiqueta Chica (8.5 x 4)
@@ -528,7 +524,7 @@ namespace Vista
 
         private ReportClass ObtenerRptSegunTipo()
         {
-            switch (this.tipo)
+            switch (tipo)
             {
 
                 case "Chica": // Etiqueta Chica (8.5 x 4)

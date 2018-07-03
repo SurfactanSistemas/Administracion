@@ -1,11 +1,14 @@
-﻿namespace Vista
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Vista
 {
     partial class Etiquetas
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -267,23 +270,23 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button BTAceptar;
-        private System.Windows.Forms.Button BTCancelar;
-        private System.Windows.Forms.ComboBox CBTamañoEtiquetas;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ToolTip toolTipCancelar;
-        private System.Windows.Forms.ToolTip toolTipAceptar;
-        protected System.Windows.Forms.DataGridView DGV_Etiquetas;
-        private System.Windows.Forms.ComboBox CBPosicion;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.GroupBox GrupoIdiomaEtiquetas;
-        private System.Windows.Forms.ComboBox cmbIdiomaEtiquetas;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel3;
+        private Label label1;
+        private Button BTAceptar;
+        private Button BTCancelar;
+        private ComboBox CBTamañoEtiquetas;
+        private Label label2;
+        private ToolTip toolTipCancelar;
+        private ToolTip toolTipAceptar;
+        protected DataGridView DGV_Etiquetas;
+        private ComboBox CBPosicion;
+        private Label label4;
+        private DataGridViewTextBoxColumn Codigo;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Cantidad;
+        private GroupBox GrupoIdiomaEtiquetas;
+        private ComboBox cmbIdiomaEtiquetas;
     }
 }

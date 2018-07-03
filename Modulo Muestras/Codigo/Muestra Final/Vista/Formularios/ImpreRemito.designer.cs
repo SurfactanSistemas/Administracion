@@ -1,11 +1,14 @@
-﻿namespace Vista
+﻿using System.ComponentModel;
+using CrystalDecisions.Windows.Forms;
+
+namespace Vista
 {
     partial class ImpreRemito
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -65,6 +68,6 @@
 
         #endregion
 
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer CRVRemito;
+        private CrystalReportViewer CRVRemito;
     }
 }

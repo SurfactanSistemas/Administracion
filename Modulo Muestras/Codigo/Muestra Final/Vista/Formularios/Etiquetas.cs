@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ClassConexion;
 
@@ -30,7 +25,7 @@ namespace Vista
             cmbIdiomaEtiquetas.SelectedIndex = 0;
             //GrupoIdiomaEtiquetas.Visible = false;
 
-            this.PoblarGrilla();
+            PoblarGrilla();
 
             //DeterminarCantidadPosibleDeCorrimientos();
 
@@ -39,7 +34,7 @@ namespace Vista
 
         private void PoblarGrilla()
         {
-            DataTable tabla = this.DT;
+            DataTable tabla = DT;
 
             DGV_Etiquetas.Rows.Clear();
 
@@ -65,7 +60,7 @@ namespace Vista
                 DGV_Etiquetas.Rows.Add(dr["Codigo"].ToString(), dr["DescriCliente"].ToString(), 1);
             }
 
-            this.DT = tabla.Copy();
+            DT = tabla.Copy();
 
         }
 
@@ -227,7 +222,7 @@ namespace Vista
             // Se utiliza una tabla auxiliar para no perder los datos originales.
 
             DataTable tabla = new DataTable();
-            tabla = this.DTOriginal.Copy();
+            tabla = DTOriginal.Copy();
             string WDescripcionIngles = "";
             string WNoTraducidos = "";
 
@@ -263,7 +258,7 @@ namespace Vista
                     }
                     else
                     {
-                        WNoTraducidos += row["Codigo"].ToString() + Environment.NewLine;
+                        WNoTraducidos += row["Codigo"] + Environment.NewLine;
                     }
 
                 }
@@ -275,7 +270,7 @@ namespace Vista
                 MessageBox.Show("Lo siguientes Códigos, no poseen descripción en Inglés disponible: " + Environment.NewLine + WNoTraducidos, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
-            this.PoblarGrilla(tabla);
+            PoblarGrilla(tabla);
         }
     }
 }

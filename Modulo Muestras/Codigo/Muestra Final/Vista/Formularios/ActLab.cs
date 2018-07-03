@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ClassConexion;
-using Negocio;
 
 namespace Vista
 {
@@ -55,7 +49,7 @@ namespace Vista
 
                 string OrderFecha = TBFechaRealiz.Text.Substring(6, 4) + TBFechaRealiz.Text.Substring(3, 2) + TBFechaRealiz.Text.Substring(0, 2);
 
-                string consulta = "update Muestra set Ensayo2 = '" + TBCodEnsayo.Text.ToString() +
+                string consulta = "update Muestra set Ensayo2 = '" + TBCodEnsayo.Text +
                     "', Nombre2 = '" + TBDescMatPrima.Text + "', Fecha2 = '" + TBFechaRealiz.Text + "', OrdFecha2 = '" + OrderFecha + "',"
                     + "Cantidad2 = '" + TbCantEntregada.Text + "' ," + "Observaciones2 = '" + TB_Observaciones.Text + "' where Codigo = '" + LB_Id.Text + "'";
 

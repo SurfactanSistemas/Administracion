@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Vista
 {
@@ -40,8 +35,8 @@ namespace Vista
             this.LocalidadClient = LocalidadClient;
             this.Cuit = Cuit;
             this.cliente = cliente;
-            this.HojasDeSeguridad = FDSs;
-            this.WDatosRemitos = wDatosRemito;
+            HojasDeSeguridad = FDSs;
+            WDatosRemitos = wDatosRemito;
         }
 
         public ImpreRemito(DataTable DT, string DirEnt, string CodClient, string DirClient, string LocalidadClient, string Cuit, string cliente, string[] wDatosRemito)
@@ -55,59 +50,34 @@ namespace Vista
             this.LocalidadClient = LocalidadClient;
             this.Cuit = Cuit;
             this.cliente = cliente;
-            this.WDatosRemitos = wDatosRemito;
+            WDatosRemitos = wDatosRemito;
         }
 
         private void ImpreRemito_Load(object sender, EventArgs e)
         {
             DSRemito1 Ds = new DSRemito1();
             Ds.Tables["DataTable1"].Rows.Add
-                (new object[]
-                {
-                    cliente,
-                    DirClient,
-                    LocalidadClient,
-                    DirEnt,
-                    CodClient,
-                    Cuit,
-
-                }
-                );
+                (cliente, DirClient, LocalidadClient, DirEnt, CodClient, Cuit);
 
             for (int i = 0; i < DT.Rows.Count; i++)
             {
                 DataRow dr = DT.Rows[i];
                 Ds.Tables["DataTable" + (i+2).ToString().Trim()].Rows.Add
-                    (new object[]
-                    {
-                        dr[0].ToString(),
-                        dr[1].ToString().Trim(),
-                        dr["Peligroso"].ToString(),
-                        dr["PeligrosoII"].ToString(),
-                    }
-                    );
+                    (dr[0].ToString(), dr[1].ToString().Trim(), dr["Peligroso"].ToString(), dr["PeligrosoII"].ToString());
             }
 
             Ds.Tables["Detalles"].Rows.Add
-                    (new object[]
-                    {
-                        this.WDatosRemitos[0],
-                        this.WDatosRemitos[1],
-                        this.WDatosRemitos[2],
-                        this.WDatosRemitos[3],
-                        this.WDatosRemitos[4],
-                    }
-                    );
+                    (WDatosRemitos[0], WDatosRemitos[1], WDatosRemitos[2], WDatosRemitos[3], WDatosRemitos[4]);
 
-            if (this.HojasDeSeguridad != null)
+            if (HojasDeSeguridad != null)
             {
-                if (this.HojasDeSeguridad.GetLength(0) > 0)
+                if (HojasDeSeguridad.GetLength(0) > 0)
                 {
-                    if (this.HojasDeSeguridad[0, 0].ToString().Trim() != "")
+                    if (HojasDeSeguridad[0, 0].Trim() != "")
                     {
                         if (MessageBox.Show("¿Quiere reimprimir las hojas de seguridad?","", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 
-                            this.ImprimirHojasDSeguridad(this.HojasDeSeguridad);
+                            ImprimirHojasDSeguridad(HojasDeSeguridad);
                 
                         }
 
@@ -135,15 +105,15 @@ namespace Vista
                 string cod = "";
 
                 // Borramos el directorio en caso de que exista.
-                if (System.IO.Directory.Exists(@"C:\pdfprint"))
+                if (Directory.Exists(@"C:\pdfprint"))
                 {
 
-                    System.IO.Directory.Delete(@"C:\pdfprint", true);
+                    Directory.Delete(@"C:\pdfprint", true);
 
                 }
 
                 // Creamos el directorio donde alojaremos los pdf a imprimir.
-                System.IO.Directory.CreateDirectory(@"C:\pdfprint");
+                Directory.CreateDirectory(@"C:\pdfprint");
 
                 for (int i = 0; i < HojasDeSeguridad.GetLength(0); i++)
                 {
@@ -213,10 +183,10 @@ namespace Vista
                 // Imprimimos las hojas guardadas.
 
                 // Recorremos e imprimimos los archivos copiados a la carpeta "pdfprint"
-                foreach (string file in System.IO.Directory.GetFiles(@"C:\pdfprint"))
+                foreach (string file in Directory.GetFiles(@"C:\pdfprint"))
                 {
                     Process p = new Process();
-                    p.StartInfo = new ProcessStartInfo()
+                    p.StartInfo = new ProcessStartInfo
                     {
                         CreateNoWindow = true,
                         Verb = "print",

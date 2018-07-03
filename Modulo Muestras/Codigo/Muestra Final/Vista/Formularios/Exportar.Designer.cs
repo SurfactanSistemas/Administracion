@@ -1,11 +1,14 @@
-﻿namespace Vista
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Vista
 {
     partial class Exportar
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -192,19 +195,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TBNombreExport;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button BTAceptar;
-        private System.Windows.Forms.Button BTCancelar;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TreeView TV_Directorio;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ToolTip toolTip_Aceptar;
-        private System.Windows.Forms.ToolTip toolTip_Cancelar;
-        private System.Windows.Forms.ImageList imageListIconos;
+        private Label label1;
+        private TextBox TBNombreExport;
+        private FolderBrowserDialog folderBrowserDialog1;
+        private Panel panel1;
+        private Button BTAceptar;
+        private Button BTCancelar;
+        private Panel panel2;
+        private Panel panel3;
+        private Panel panel4;
+        private TreeView TV_Directorio;
+        private Label label2;
+        private ToolTip toolTip_Aceptar;
+        private ToolTip toolTip_Cancelar;
+        private ImageList imageListIconos;
     }
 }

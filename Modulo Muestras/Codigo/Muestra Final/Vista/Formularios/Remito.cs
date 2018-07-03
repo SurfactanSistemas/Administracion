@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using ClassConexion;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using ClassConexion;
 
 namespace Vista
 {
     public partial class Remito : Form
     {
         Conexion Cs = new Conexion();
-        bool reimprimir = false;
+        bool reimprimir;
 
         DataTable DT = new DataTable();
         string Datos;
@@ -60,7 +57,7 @@ namespace Vista
             this.LocalidadClient = LocalidadClient;
             this.Cuit = Cuit;
             this.cliente = cliente;
-            this.HojasDeSeguridad = FDSs;
+            HojasDeSeguridad = FDSs;
 
             // Determinamos la Empresa en la Cual Trabajaremos.
             _DeterminarEmpresaRemito(dt);
@@ -68,6 +65,12 @@ namespace Vista
             AsignarDatos(datos);
 
             DGV_Remito.DataSource = dt;
+
+            TBNumRemito.Text = _TraerProximoNumeroRemitoPorEstacionDeTrabajo().ToString();
+
+            TBNumRemito.Enabled = false;
+
+            cmbTipoRemito.SelectedIndex = 0;
 
             if (erroresLote.Count > 0 || sinEnsayo.Count > 0)
             {
@@ -129,17 +132,12 @@ namespace Vista
                                     case "1":
                                     case "5":
                                     {
-                                        WEmpresaRemito = 1;
-                                        break;
-                                    }
-                                    case "4":
-                                    {
-                                        WEmpresaRemito = 3;
+                                        WEmpresaRemito = 11;
                                         break;
                                     }
                                     default:
                                     {
-                                        WEmpresaRemito = 4;
+                                        WEmpresaRemito = 12;
                                         break;
                                     }
                                 }
@@ -243,7 +241,7 @@ namespace Vista
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = "SELECT * FROM NumeroRemito WHERE Ultimo <> Hasta AND Punto = '" + WEmpresaRemito + "' ORDER BY Codigo";
+                        cmd.CommandText = "SELECT Codigo, Ultimo, Cai, Fecha, Punto FROM NumeroRemito WHERE Punto = '" + WEmpresaRemito + "' ORDER BY Codigo";
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
@@ -253,32 +251,32 @@ namespace Vista
                                 {
                                     WCandidato = int.Parse(dr["Ultimo"].ToString());
 
-                                    // Vemos si es Cero -> Le damos el Valor de 'Desde'.
+                                    //// Vemos si es Cero -> Le damos el Valor de 'Desde'.
 
-                                    if (WCandidato == 0)
-                                    {
-                                        WCandidato = -1;
-                                        WCandidato += int.Parse(dr["Desde"].ToString());
-                                    }
+                                    //if (WCandidato == 0)
+                                    //{
+                                    //    WCandidato = -1;
+                                    //    WCandidato += int.Parse(dr["Desde"].ToString());
+                                    //}
 
-                                    // Incrementamos en Uno.
+                                    //// Incrementamos en Uno.
 
-                                    WCandidato++;
+                                    //WCandidato++;
 
-                                    // Vemos si se encuentra entre los valores 'Desde' y 'Hasta'.
+                                    //// Vemos si se encuentra entre los valores 'Desde' y 'Hasta'.
 
-                                    if (WCandidato < int.Parse(dr["Desde"].ToString()) ||
-                                        WCandidato > int.Parse(dr["Hasta"].ToString()) || WCandidato < 0 )
-                                    {
-                                        // Invalidamos el Candidato.
-                                        WCandidato = -1;
+                                    //if (WCandidato < int.Parse(dr["Desde"].ToString()) ||
+                                    //    WCandidato > int.Parse(dr["Hasta"].ToString()) || WCandidato < 0 )
+                                    //{
+                                    //    // Invalidamos el Candidato.
+                                    //    WCandidato = -1;
 
-                                        // Buscamos en el Siguiente Registro.
-                                        continue;
-                                    }
+                                    //    // Buscamos en el Siguiente Registro.
+                                    //    continue;
+                                    //}
 
                                     // En caso de que este correcto, salimos. Sino buscamos en el siguiente registro.
-                                    WProximoNumero = WCandidato;
+                                    WProximoNumero = WCandidato + 1;
                                     WCodigoRemito = int.Parse(dr["Codigo"].ToString());
 
                                     WDatosRemito[0] = dt.Rows[0]["Pedido"].ToString();
@@ -444,14 +442,14 @@ namespace Vista
                 impre_1.ShowDialog();
 
                 // Verifico que se haya cargado algun articulo para comenzar a imprimir.
-                if (this.HojasDeSeguridad[0, 0].ToString().Trim() != "")
+                if (HojasDeSeguridad[0, 0].Trim() != "")
                 {
 
-                    this.ImprimirHojasDSeguridad(this.HojasDeSeguridad);
+                    ImprimirHojasDSeguridad(HojasDeSeguridad);
 
                 }
 
-                _ActualizarUltimaNumeracionRemito();
+                if (cmbTipoRemito.SelectedIndex == 0 && WEmpresaRemito != -1) _ActualizarUltimaNumeracionRemito();
 
                 Close();
             }
@@ -498,15 +496,15 @@ namespace Vista
                 string cod = "";
 
                 // Borramos el directorio en caso de que exista.
-                if (System.IO.Directory.Exists(@"C:\pdfprint"))
+                if (Directory.Exists(@"C:\pdfprint"))
                 {
 
-                    System.IO.Directory.Delete(@"C:\pdfprint", true);
+                    Directory.Delete(@"C:\pdfprint", true);
 
                 }
 
                 // Creamos el directorio donde alojaremos los pdf a imprimir.
-                System.IO.Directory.CreateDirectory(@"C:\pdfprint");
+                Directory.CreateDirectory(@"C:\pdfprint");
 
                 for (int i = 0; i < arrHojasDeSeguridad.GetLength(0); i++)
                 {
@@ -579,7 +577,7 @@ namespace Vista
                 foreach (string file in Directory.GetFiles(@"C:\pdfprint"))
                 {
                     Process p = new Process();
-                    p.StartInfo = new ProcessStartInfo()
+                    p.StartInfo = new ProcessStartInfo
                     {
                         CreateNoWindow = true,
                         Verb = "print",
@@ -598,9 +596,22 @@ namespace Vista
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.ImprimirHojasDSeguridad(this.HojasDeSeguridad);
+            ImprimirHojasDSeguridad(HojasDeSeguridad);
         }
 
+        private void cmbTipoRemito_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TBNumRemito.Enabled = cmbTipoRemito.SelectedIndex == 1;
 
+            if (TBNumRemito.Enabled)
+            {
+                TBNumRemito.Focus();
+            }
+            else
+            {
+                _DeterminarEmpresaRemito(dt);
+                TBNumRemito.Text = _TraerProximoNumeroRemitoPorEstacionDeTrabajo().ToString();
+            }
+        }
     }
 }

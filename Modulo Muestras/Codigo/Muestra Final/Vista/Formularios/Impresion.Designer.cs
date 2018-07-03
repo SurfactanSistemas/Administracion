@@ -1,11 +1,15 @@
-﻿namespace Vista
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using CrystalDecisions.Windows.Forms;
+
+namespace Vista
 {
     partial class Impresion
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -77,7 +81,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
+        private Panel panel1;
+        private CrystalReportViewer crystalReportViewer1;
     }
 }

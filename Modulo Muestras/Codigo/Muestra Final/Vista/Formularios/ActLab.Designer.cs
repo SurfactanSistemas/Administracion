@@ -1,11 +1,14 @@
-﻿namespace Vista
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Vista
 {
     partial class ActLab
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -252,25 +255,25 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TbCantEntregada;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox TBFechaRealiz;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TBCodEnsayo;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TBDescMatPrima;
-        private System.Windows.Forms.TextBox TBCodMatPrima;
-        private System.Windows.Forms.Button BtGuardar;
-        private System.Windows.Forms.Button BtSalir;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label LB_Id;
-        private System.Windows.Forms.ToolTip toolTip_Cerrar;
-        private System.Windows.Forms.ToolTip toolTip_Guardar;
-        private System.Windows.Forms.TextBox TB_Observaciones;
-        private System.Windows.Forms.Label label6;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel3;
+        private Label label1;
+        private TextBox TbCantEntregada;
+        private Label label4;
+        private TextBox TBFechaRealiz;
+        private Label label3;
+        private TextBox TBCodEnsayo;
+        private Label label2;
+        private TextBox TBDescMatPrima;
+        private TextBox TBCodMatPrima;
+        private Button BtGuardar;
+        private Button BtSalir;
+        private Label label5;
+        private Label LB_Id;
+        private ToolTip toolTip_Cerrar;
+        private ToolTip toolTip_Guardar;
+        private TextBox TB_Observaciones;
+        private Label label6;
     }
 }
