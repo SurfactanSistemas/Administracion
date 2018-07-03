@@ -83,7 +83,7 @@ namespace Vista
             string[] datos_separados = datos.Split(';');
 
             TBCliente.Text = datos_separados[1];
-            if (datos_separados[0] == "") TBNumRemito.Text = Cs.TraerRemitoMax();
+            if (datos_separados[0] == "" || datos_separados[0] == "0") TBNumRemito.Text = Cs.TraerRemitoMax();
             else {
                 TBNumRemito.Text = datos_separados[0];
                 reimprimir = true;
