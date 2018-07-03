@@ -108,5 +108,41 @@ namespace Modulo_Capacitacion.Maestros.Temas
             frm.ShowDialog();
         }
 
+        private void txtCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtCodigo.Text.Trim() == "") return;
+
+                foreach (DataGridViewRow row in DGV_Temas.Rows)
+                {
+                    var WCodigo = row.Cells["Codigo"].Value ?? "";
+
+                    if (WCodigo.ToString().Trim() != "")
+                    {
+                        if (txtCodigo.Text.Trim() == WCodigo.ToString().Trim())
+                        {
+                            row.Selected = true;
+                            DGV_Temas_RowHeaderMouseDoubleClick(null, null);
+                            txtCodigo.Text = "";
+                            return;
+                        }
+                    }
+                }
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtCodigo.Text = "";
+            }
+	        
+        }
+
+        private void Temas_Inicio_Shown(object sender, EventArgs e)
+        {
+            txtCodigo.Focus();
+        }
+
     }
 }

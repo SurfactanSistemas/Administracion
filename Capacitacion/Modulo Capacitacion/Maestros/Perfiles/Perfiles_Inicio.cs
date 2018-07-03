@@ -121,7 +121,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
         private void Periles_Inicio_Shown(object sender, EventArgs e)
         {
-            TBFiltro.Focus();
+            txtCodigo.Focus();
         }
 
         private void TBFiltro_KeyDown(object sender, KeyEventArgs e)
@@ -139,6 +139,37 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             VistaPrevia rp = new VistaPrevia();
             rp.CargarReporte(reporte);
             rp.ShowDialog();
+        }
+
+        private void txtCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtCodigo.Text.Trim() == "") return;
+
+                foreach (DataGridViewRow row in DGV_Perfiles.Rows)
+                {
+                    var WCodigo = row.Cells["Codigo"].Value ?? "";
+
+                    if (WCodigo.ToString().Trim() != "")
+                    {
+                        if (WCodigo.ToString().Trim() == txtCodigo.Text.Trim())
+                        {
+                            row.Selected = true;
+                            DGV_Perfiles_RowHeaderMouseDoubleClick(null, null);
+                            txtCodigo.Text = "";
+                            return;
+                        }
+                    }
+                }
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtCodigo.Text = "";
+            }
+	        
         }
         
     }

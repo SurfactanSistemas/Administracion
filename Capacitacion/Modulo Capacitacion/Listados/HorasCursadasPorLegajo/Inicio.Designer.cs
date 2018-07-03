@@ -126,6 +126,7 @@
             this.TB_AñoDesde.Name = "TB_AñoDesde";
             this.TB_AñoDesde.Size = new System.Drawing.Size(51, 20);
             this.TB_AñoDesde.TabIndex = 87;
+            this.TB_AñoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 

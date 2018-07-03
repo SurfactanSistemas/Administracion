@@ -35,7 +35,8 @@ namespace Eval_Proveedores.IngCamiones
         {
             P_Filtrado.Visible = false;
             TraerLista();
-            DGV_Camiones.Focus();
+            //DGV_Camiones.Focus();
+            txtCodigo.Focus();
         }
 
         private void TraerLista()
@@ -362,6 +363,38 @@ namespace Eval_Proveedores.IngCamiones
 
                 MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtCodigo.Text.Trim() == "") return;
+
+                foreach (DataGridViewRow row in DGV_Camiones.Rows)
+                {
+                    var WCodigo = row.Cells["Codigo"].Value ?? "";
+
+                    if (WCodigo.ToString() != "")
+                    {
+                        if (txtCodigo.Text.Trim() == WCodigo.ToString().Trim())
+                        {
+                            row.Selected = true;
+                            DGV_Camiones_RowHeaderMouseDoubleClick(null,
+                                new DataGridViewCellMouseEventArgs(0, 0, 0, 0, new MouseEventArgs( MouseButtons.Left, 0, 0, 0, 0))
+                            );
+                            txtCodigo.Text = "";
+                            return;
+                        }
+                    }
+                }
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtCodigo.Text = "";
+            }
+	        
         }
     }
 }

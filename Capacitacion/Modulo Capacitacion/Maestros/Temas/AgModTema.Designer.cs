@@ -340,6 +340,7 @@
             this.TB_Codigo.ReadOnly = true;
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
+            this.TB_Codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panel1
             // 

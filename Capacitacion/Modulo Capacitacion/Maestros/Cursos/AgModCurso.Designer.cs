@@ -40,12 +40,12 @@
             this.TB_Horas = new System.Windows.Forms.TextBox();
             this.TB_DescCurso = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.LFechaAviso = new System.Windows.Forms.Label();
-            this.TB_Codigo = new System.Windows.Forms.TextBox();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.BT_LimpiarPant = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.LFechaAviso = new System.Windows.Forms.Label();
+            this.TB_Codigo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -112,25 +112,26 @@
             // TB_DescTema
             // 
             this.TB_DescTema.FormattingEnabled = true;
-            this.TB_DescTema.Location = new System.Drawing.Point(238, 56);
+            this.TB_DescTema.Location = new System.Drawing.Point(193, 56);
             this.TB_DescTema.Name = "TB_DescTema";
-            this.TB_DescTema.Size = new System.Drawing.Size(270, 21);
+            this.TB_DescTema.Size = new System.Drawing.Size(315, 21);
             this.TB_DescTema.TabIndex = 36;
             this.TB_DescTema.SelectedIndexChanged += new System.EventHandler(this.TB_DescTema_SelectedIndexChanged);
             // 
             // panel4
             // 
-            this.panel4.Location = new System.Drawing.Point(212, 49);
+            this.panel4.Location = new System.Drawing.Point(167, 51);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(20, 28);
             this.panel4.TabIndex = 35;
             // 
             // TB_CodTema
             // 
+            this.TB_CodTema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodTema.FormattingEnabled = true;
-            this.TB_CodTema.Location = new System.Drawing.Point(128, 55);
+            this.TB_CodTema.Location = new System.Drawing.Point(128, 56);
             this.TB_CodTema.Name = "TB_CodTema";
-            this.TB_CodTema.Size = new System.Drawing.Size(104, 21);
+            this.TB_CodTema.Size = new System.Drawing.Size(33, 21);
             this.TB_CodTema.TabIndex = 34;
             this.TB_CodTema.SelectedIndexChanged += new System.EventHandler(this.TB_CodTema_SelectedIndexChanged);
             this.TB_CodTema.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodTema_KeyDown_1);
@@ -153,6 +154,7 @@
             this.TB_Horas.Name = "TB_Horas";
             this.TB_Horas.Size = new System.Drawing.Size(84, 20);
             this.TB_Horas.TabIndex = 32;
+            this.TB_Horas.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Horas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Horas_KeyDown);
             // 
             // TB_DescCurso
@@ -174,36 +176,6 @@
             this.label2.Size = new System.Drawing.Size(84, 18);
             this.label2.TabIndex = 28;
             this.label2.Text = "Descripción:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 18);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Tema:";
-            // 
-            // LFechaAviso
-            // 
-            this.LFechaAviso.AutoSize = true;
-            this.LFechaAviso.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LFechaAviso.Location = new System.Drawing.Point(22, 21);
-            this.LFechaAviso.Name = "LFechaAviso";
-            this.LFechaAviso.Size = new System.Drawing.Size(55, 18);
-            this.LFechaAviso.TabIndex = 4;
-            this.LFechaAviso.Text = "Codigo:";
-            // 
-            // TB_Codigo
-            // 
-            this.TB_Codigo.Enabled = false;
-            this.TB_Codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_Codigo.Location = new System.Drawing.Point(128, 21);
-            this.TB_Codigo.Name = "TB_Codigo";
-            this.TB_Codigo.ReadOnly = true;
-            this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
-            this.TB_Codigo.TabIndex = 5;
             // 
             // BT_Salir
             // 
@@ -245,6 +217,37 @@
             this.BT_Guardar.TabIndex = 25;
             this.BT_Guardar.UseVisualStyleBackColor = true;
             this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(22, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 18);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Tema:";
+            // 
+            // LFechaAviso
+            // 
+            this.LFechaAviso.AutoSize = true;
+            this.LFechaAviso.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LFechaAviso.Location = new System.Drawing.Point(22, 21);
+            this.LFechaAviso.Name = "LFechaAviso";
+            this.LFechaAviso.Size = new System.Drawing.Size(55, 18);
+            this.LFechaAviso.TabIndex = 4;
+            this.LFechaAviso.Text = "Codigo:";
+            // 
+            // TB_Codigo
+            // 
+            this.TB_Codigo.Enabled = false;
+            this.TB_Codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_Codigo.Location = new System.Drawing.Point(128, 21);
+            this.TB_Codigo.Name = "TB_Codigo";
+            this.TB_Codigo.ReadOnly = true;
+            this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
+            this.TB_Codigo.TabIndex = 5;
+            this.TB_Codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // AgModCurso
             // 

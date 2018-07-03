@@ -53,14 +53,12 @@ namespace Modulo_Capacitacion.Novedades
                 //if (TB_Año.Text == "") throw new Exception("Se deben cargar los datos del año");
                 if (TB_Año.Text == "") return;
 
-                DGV_Cronograma.DataSource = Cr2.BuscarUnoPorAño(TB_Año.Text);
+                //DGV_Cronograma.DataSource = Cr2.BuscarUnoPorAño(TB_Año.Text);
 
-                if (DGV_Cronograma.Rows.Count == 0)
-                {
-                    //Busco los cursos asociados al legajo!!
-                    Modificar = false;
-                    DGV_Cronograma.DataSource = Cr.BuscarPorAño(TB_Año.Text);
-                }
+                //Busco los cursos asociados al legajo!!
+                Modificar = false;
+                DGV_Cronograma.DataSource = Cr.BuscarPorAño(TB_Año.Text);
+
             }
         }
 
@@ -70,22 +68,73 @@ namespace Modulo_Capacitacion.Novedades
             {
                 //Valido que est todo bien y armo el objeto
                 ValidarDatosABM();
-                CargarCronogramaII();
-                //lo guarod si no s modificar
+                //CargarCronogramaII();
+                ////lo guarod si no s modificar
 
-                if (Modificar)
+                //Cr2.Eliminar(TB_Año.Text);
+                ////sino elimino el viejo  y cargo el nuevo
+
+                //foreach (var item in CronogramasII)
+                //{
+                //    item.Agregar();
+                //}
+                SqlTransaction trans = null;
+                try
                 {
-                    Cr2.Eliminar(TB_Año.Text);
-                }
-                //sino elimino el viejo  y cargo el nuevo
+                    using (SqlConnection conn = new SqlConnection())
+                    {
+                        conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                        conn.Open();
+                        trans = conn.BeginTransaction();
 
-                foreach (var item in CronogramasII)
+                        using (SqlCommand cmd = new SqlCommand())
+                        {
+                            cmd.Connection = conn;
+                            cmd.CommandText = "";
+                            cmd.Transaction = trans;
+
+                            cmd.CommandText = "DELETE FROM CronogramaII WHERE Ano = '" + TB_Año.Text + "'";
+                            cmd.ExecuteNonQuery();
+
+                            foreach (DataGridViewRow row in DGV_Cronograma.Rows)
+                            {
+                                var WCurso = row.Cells["Curso"].Value ?? "";
+                                var WMes1 = row.Cells["Mes1"].Value ?? "";
+                                var WMes2 = row.Cells["Mes2"].Value ?? "";
+                                var WMes3 = row.Cells["Mes3"].Value ?? "";
+                                var WMes4 = row.Cells["Mes4"].Value ?? "";
+                                var WMes5 = row.Cells["Mes5"].Value ?? "";
+                                var WMes6 = row.Cells["Mes6"].Value ?? "";
+                                var WMes7 = row.Cells["Mes7"].Value ?? "";
+                                var WMes8 = row.Cells["Mes8"].Value ?? "";
+                                var WMes9 = row.Cells["Mes9"].Value ?? "";
+                                var WMes10 = row.Cells["Mes10"].Value ?? "";
+                                var WMes11 = row.Cells["Mes11"].Value ?? "";
+                                var WMes12 = row.Cells["Mes12"].Value ?? "";
+
+                                if (WCurso.ToString().Trim() == "") continue;
+
+                                var WClave = TB_Año.Text.PadLeft(4, '0') + WCurso.ToString().PadLeft(4, '0');
+
+                                string ZSql = string.Format("INSERT INTO CronogramaII (Clave, Ano, Curso, Mes1, Mes2, Mes3, Mes4, Mes5, Mes6, Mes7, Mes8, Mes9, Mes10, Mes11, Mes12) " +
+                                                            " VALUES ('{0}', {1}, {2}, '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}')", 
+                                    WClave, TB_Año.Text ,WCurso,WMes1, WMes2, WMes3, WMes4, WMes5, WMes6, WMes7, WMes8, WMes9, WMes10, WMes11, WMes12);
+
+                                cmd.CommandText = ZSql;
+                                cmd.ExecuteNonQuery();
+                            }
+                            
+                            trans.Commit();
+                        }
+                    }
+
+                    BT_Limpiar.PerformClick();
+                }
+                catch (Exception ex)
                 {
-                    item.Agregar();
+                    if (trans != null && trans.Connection != null) trans.Rollback();
+                    throw new Exception("Error al Actualizar los datos de la Planificacion Anual en la Base de Datos. Motivo: " + ex.Message);
                 }
-
-                BT_Limpiar.PerformClick();
-
             }
             catch (Exception err)
             {
@@ -158,7 +207,7 @@ namespace Modulo_Capacitacion.Novedades
             }
 
             VistaPrevia frm = new VistaPrevia();
-            frm.CargarReporte(new wlistacursoplani(), "{Cronograma.Curso}=" + curso + " AND {Cronograma.Ano}=" + TB_Año.Text);
+            frm.CargarReporte(new wlistacursoplani(), "{Cronograma.Curso}=" + curso + " AND {Cronograma.Ano}=" + TB_Año.Text + " AND {Cronograma.Curso} = {Curso.Codigo} AND {Cronograma.Legajo} = {Legajo.Codigo} AND {Legajo.Renglon} = 1");
 
             frm.Show();
         }

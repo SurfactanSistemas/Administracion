@@ -126,6 +126,7 @@
             this.TB_AñoHasta.Name = "TB_AñoHasta";
             this.TB_AñoHasta.Size = new System.Drawing.Size(51, 20);
             this.TB_AñoHasta.TabIndex = 88;
+            this.TB_AñoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_AñoHasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_AñoHasta_KeyDown);
             // 
             // TB_AñoDesde
@@ -134,6 +135,7 @@
             this.TB_AñoDesde.Name = "TB_AñoDesde";
             this.TB_AñoDesde.Size = new System.Drawing.Size(51, 20);
             this.TB_AñoDesde.TabIndex = 87;
+            this.TB_AñoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_AñoDesde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_AñoDesde_KeyDown);
             // 
             // label3
@@ -152,6 +154,7 @@
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(111, 20);
             this.TB_Hasta.TabIndex = 85;
+            this.TB_Hasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
             this.TB_Hasta.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 
@@ -161,6 +164,7 @@
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.Size = new System.Drawing.Size(111, 20);
             this.TB_Desde.TabIndex = 84;
+            this.TB_Desde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
             this.TB_Desde.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ayuda_MouseDoubleClick);
             // 

@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlConsulta = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.ckMostrarEgresados = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtFiltrar = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.dgvConsultaLegajos = new System.Windows.Forms.DataGridView();
             this.panel6 = new System.Windows.Forms.Panel();
             this.TB_FechaIngAyuda = new System.Windows.Forms.ComboBox();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -144,32 +152,24 @@
             this.label4 = new System.Windows.Forms.Label();
             this.TB_FechaIng = new System.Windows.Forms.DateTimePicker();
             this.BT_Salir = new System.Windows.Forms.Button();
+            this.btnConsulta = new System.Windows.Forms.Button();
             this.BT_LimpiarPant = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBLegajo = new System.Windows.Forms.Label();
-            this.pnlConsulta = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dgvConsultaLegajos = new System.Windows.Forms.DataGridView();
-            this.ckMostrarEgresados = new System.Windows.Forms.CheckBox();
-            this.btnConsulta = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtFiltrar = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.pnlConsulta.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaLegajos)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).BeginInit();
             this.panel1.SuspendLayout();
-            this.pnlConsulta.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaLegajos)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -213,6 +213,97 @@
             this.panel3.Size = new System.Drawing.Size(974, 619);
             this.panel3.TabIndex = 1;
             // 
+            // pnlConsulta
+            // 
+            this.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
+            this.pnlConsulta.Controls.Add(this.panel8);
+            this.pnlConsulta.Controls.Add(this.groupBox1);
+            this.pnlConsulta.Location = new System.Drawing.Point(198, 104);
+            this.pnlConsulta.Name = "pnlConsulta";
+            this.pnlConsulta.Size = new System.Drawing.Size(577, 407);
+            this.pnlConsulta.TabIndex = 129;
+            this.pnlConsulta.Visible = false;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.SystemColors.Control;
+            this.panel8.Controls.Add(this.ckMostrarEgresados);
+            this.panel8.Controls.Add(this.button1);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel8.Location = new System.Drawing.Point(0, 357);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(577, 50);
+            this.panel8.TabIndex = 1;
+            // 
+            // ckMostrarEgresados
+            // 
+            this.ckMostrarEgresados.AutoSize = true;
+            this.ckMostrarEgresados.Location = new System.Drawing.Point(355, 15);
+            this.ckMostrarEgresados.Name = "ckMostrarEgresados";
+            this.ckMostrarEgresados.Size = new System.Drawing.Size(158, 17);
+            this.ckMostrarEgresados.TabIndex = 28;
+            this.ckMostrarEgresados.Text = "Mostrar También Egresados";
+            this.ckMostrarEgresados.UseVisualStyleBackColor = true;
+            this.ckMostrarEgresados.CheckedChanged += new System.EventHandler(this.ckMostrarEgresados_CheckedChanged);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(269, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(40, 40);
+            this.button1.TabIndex = 27;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtFiltrar);
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.dgvConsultaLegajos);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Location = new System.Drawing.Point(15, 11);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(544, 336);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Consulta de Legajos";
+            // 
+            // txtFiltrar
+            // 
+            this.txtFiltrar.Location = new System.Drawing.Point(82, 23);
+            this.txtFiltrar.Name = "txtFiltrar";
+            this.txtFiltrar.Size = new System.Drawing.Size(454, 20);
+            this.txtFiltrar.TabIndex = 2;
+            this.txtFiltrar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFiltrar_KeyDown);
+            this.txtFiltrar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltrar_KeyUp);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(41, 26);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(32, 13);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Filtrar";
+            // 
+            // dgvConsultaLegajos
+            // 
+            this.dgvConsultaLegajos.AllowUserToAddRows = false;
+            this.dgvConsultaLegajos.AllowUserToDeleteRows = false;
+            this.dgvConsultaLegajos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConsultaLegajos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvConsultaLegajos.Location = new System.Drawing.Point(6, 51);
+            this.dgvConsultaLegajos.Name = "dgvConsultaLegajos";
+            this.dgvConsultaLegajos.ReadOnly = true;
+            this.dgvConsultaLegajos.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.dgvConsultaLegajos.Size = new System.Drawing.Size(532, 279);
+            this.dgvConsultaLegajos.TabIndex = 0;
+            this.dgvConsultaLegajos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvConsultaLegajos_CellMouseDoubleClick);
+            // 
             // panel6
             // 
             this.panel6.Location = new System.Drawing.Point(818, 13);
@@ -223,16 +314,17 @@
             // 
             // TB_FechaIngAyuda
             // 
+            this.TB_FechaIngAyuda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_FechaIngAyuda.FormattingEnabled = true;
-            this.TB_FechaIngAyuda.Location = new System.Drawing.Point(748, 15);
+            this.TB_FechaIngAyuda.Location = new System.Drawing.Point(748, 17);
             this.TB_FechaIngAyuda.Name = "TB_FechaIngAyuda";
-            this.TB_FechaIngAyuda.Size = new System.Drawing.Size(89, 21);
+            this.TB_FechaIngAyuda.Size = new System.Drawing.Size(64, 21);
             this.TB_FechaIngAyuda.TabIndex = 127;
             this.TB_FechaIngAyuda.Visible = false;
             // 
             // panel5
             // 
-            this.panel5.Location = new System.Drawing.Point(503, 12);
+            this.panel5.Location = new System.Drawing.Point(503, 13);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(19, 29);
             this.panel5.TabIndex = 126;
@@ -240,26 +332,27 @@
             // TB_DescLegajo
             // 
             this.TB_DescLegajo.FormattingEnabled = true;
-            this.TB_DescLegajo.Location = new System.Drawing.Point(171, 17);
+            this.TB_DescLegajo.Location = new System.Drawing.Point(161, 17);
             this.TB_DescLegajo.Name = "TB_DescLegajo";
-            this.TB_DescLegajo.Size = new System.Drawing.Size(348, 21);
+            this.TB_DescLegajo.Size = new System.Drawing.Size(358, 21);
             this.TB_DescLegajo.TabIndex = 125;
             this.TB_DescLegajo.SelectedIndexChanged += new System.EventHandler(this.TB_DescLegajo_SelectedIndexChanged);
             this.TB_DescLegajo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DescLegajo_KeyDown);
             // 
             // panel4
             // 
-            this.panel4.Location = new System.Drawing.Point(146, 16);
+            this.panel4.Location = new System.Drawing.Point(135, 13);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(19, 29);
             this.panel4.TabIndex = 124;
             // 
             // TB_Codigo
             // 
+            this.TB_Codigo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_Codigo.FormattingEnabled = true;
-            this.TB_Codigo.Location = new System.Drawing.Point(76, 18);
+            this.TB_Codigo.Location = new System.Drawing.Point(76, 17);
             this.TB_Codigo.Name = "TB_Codigo";
-            this.TB_Codigo.Size = new System.Drawing.Size(89, 21);
+            this.TB_Codigo.Size = new System.Drawing.Size(57, 21);
             this.TB_Codigo.TabIndex = 123;
             this.TB_Codigo.SelectedIndexChanged += new System.EventHandler(this.TB_Codigo_SelectedIndexChanged);
             this.TB_Codigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Codigo_KeyDown);
@@ -277,7 +370,7 @@
             // 
             this.TB_FechaVersionI.Enabled = false;
             this.TB_FechaVersionI.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.TB_FechaVersionI.Location = new System.Drawing.Point(622, 53);
+            this.TB_FechaVersionI.Location = new System.Drawing.Point(622, 52);
             this.TB_FechaVersionI.Name = "TB_FechaVersionI";
             this.TB_FechaVersionI.Size = new System.Drawing.Size(103, 20);
             this.TB_FechaVersionI.TabIndex = 45;
@@ -306,25 +399,27 @@
             // 
             this.txtVersionActual.BackColor = System.Drawing.SystemColors.Window;
             this.txtVersionActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVersionActual.Location = new System.Drawing.Point(469, 53);
+            this.txtVersionActual.Location = new System.Drawing.Point(469, 52);
             this.txtVersionActual.Name = "txtVersionActual";
             this.txtVersionActual.ReadOnly = true;
             this.txtVersionActual.Size = new System.Drawing.Size(37, 20);
             this.txtVersionActual.TabIndex = 43;
+            this.txtVersionActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // TB_CantidadVersiones
             // 
             this.TB_CantidadVersiones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_CantidadVersiones.Location = new System.Drawing.Point(290, 53);
+            this.TB_CantidadVersiones.Location = new System.Drawing.Point(290, 52);
             this.TB_CantidadVersiones.Name = "TB_CantidadVersiones";
             this.TB_CantidadVersiones.Size = new System.Drawing.Size(74, 20);
             this.TB_CantidadVersiones.TabIndex = 43;
+            this.TB_CantidadVersiones.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(11, 52);
+            this.label15.Location = new System.Drawing.Point(11, 53);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(59, 18);
             this.label15.TabIndex = 42;
@@ -333,10 +428,11 @@
             // TB_VersionLegajo
             // 
             this.TB_VersionLegajo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_VersionLegajo.Location = new System.Drawing.Point(76, 50);
+            this.TB_VersionLegajo.Location = new System.Drawing.Point(76, 52);
             this.TB_VersionLegajo.Name = "TB_VersionLegajo";
             this.TB_VersionLegajo.Size = new System.Drawing.Size(73, 20);
             this.TB_VersionLegajo.TabIndex = 41;
+            this.TB_VersionLegajo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_VersionLegajo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_VersionLegajo_KeyDown);
             // 
             // tabControl1
@@ -1163,6 +1259,7 @@
             this.TB_CodSec.ReadOnly = true;
             this.TB_CodSec.Size = new System.Drawing.Size(50, 20);
             this.TB_CodSec.TabIndex = 40;
+            this.TB_CodSec.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // TB_VerPer
             // 
@@ -1172,6 +1269,7 @@
             this.TB_VerPer.ReadOnly = true;
             this.TB_VerPer.Size = new System.Drawing.Size(50, 20);
             this.TB_VerPer.TabIndex = 39;
+            this.TB_VerPer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -1210,6 +1308,7 @@
             this.TB_CodPer.ReadOnly = true;
             this.TB_CodPer.Size = new System.Drawing.Size(51, 20);
             this.TB_CodPer.TabIndex = 36;
+            this.TB_CodPer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tabPage2
             // 
@@ -1236,7 +1335,7 @@
             this.DGV_Temas.AllowUserToResizeRows = false;
             this.DGV_Temas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DGV_Temas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.DGV_Temas.ColumnHeadersHeight = 34;
+            this.DGV_Temas.ColumnHeadersHeight = 25;
             this.DGV_Temas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tema,
             this.Descripcion,
@@ -1247,17 +1346,18 @@
             this.DGV_Temas.Location = new System.Drawing.Point(10, 24);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.DGV_Temas.RowHeadersWidth = 15;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Temas.Size = new System.Drawing.Size(932, 401);
             this.DGV_Temas.TabIndex = 67;
             // 
@@ -1390,7 +1490,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(554, 52);
+            this.label4.Location = new System.Drawing.Point(554, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 18);
             this.label4.TabIndex = 36;
@@ -1400,7 +1500,7 @@
             // 
             this.TB_FechaIng.Enabled = false;
             this.TB_FechaIng.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.TB_FechaIng.Location = new System.Drawing.Point(622, 19);
+            this.TB_FechaIng.Location = new System.Drawing.Point(622, 17);
             this.TB_FechaIng.Name = "TB_FechaIng";
             this.TB_FechaIng.Size = new System.Drawing.Size(103, 20);
             this.TB_FechaIng.TabIndex = 35;
@@ -1412,12 +1512,26 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(518, 564);
+            this.BT_Salir.Location = new System.Drawing.Point(641, 564);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 27;
             this.BT_Salir.UseVisualStyleBackColor = true;
             this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
+            // 
+            // btnConsulta
+            // 
+            this.btnConsulta.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsulta.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnConsulta.Location = new System.Drawing.Point(540, 564);
+            this.btnConsulta.Margin = new System.Windows.Forms.Padding(0);
+            this.btnConsulta.Name = "btnConsulta";
+            this.btnConsulta.Size = new System.Drawing.Size(40, 40);
+            this.btnConsulta.TabIndex = 26;
+            this.btnConsulta.UseVisualStyleBackColor = true;
+            this.btnConsulta.Click += new System.EventHandler(this.btnConsulta_Click);
             // 
             // BT_LimpiarPant
             // 
@@ -1425,7 +1539,7 @@
             this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_LimpiarPant.Location = new System.Drawing.Point(259, 564);
+            this.BT_LimpiarPant.Location = new System.Drawing.Point(382, 564);
             this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
             this.BT_LimpiarPant.Name = "BT_LimpiarPant";
             this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
@@ -1440,7 +1554,7 @@
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(171, 564);
+            this.BT_Guardar.Location = new System.Drawing.Point(294, 564);
             this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
             this.BT_Guardar.Name = "BT_Guardar";
             this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
@@ -1452,7 +1566,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(545, 19);
+            this.label1.Location = new System.Drawing.Point(545, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 18);
             this.label1.TabIndex = 6;
@@ -1462,7 +1576,7 @@
             // 
             this.LFechaAviso.AutoSize = true;
             this.LFechaAviso.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LFechaAviso.Location = new System.Drawing.Point(16, 21);
+            this.LFechaAviso.Location = new System.Drawing.Point(16, 18);
             this.LFechaAviso.Name = "LFechaAviso";
             this.LFechaAviso.Size = new System.Drawing.Size(52, 18);
             this.LFechaAviso.TabIndex = 4;
@@ -1488,111 +1602,6 @@
             this.LBLegajo.TabIndex = 0;
             this.LBLegajo.Text = "CONSULTA DE VERSION DE LEGAJOS";
             // 
-            // pnlConsulta
-            // 
-            this.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
-            this.pnlConsulta.Controls.Add(this.panel8);
-            this.pnlConsulta.Controls.Add(this.groupBox1);
-            this.pnlConsulta.Location = new System.Drawing.Point(200, 108);
-            this.pnlConsulta.Name = "pnlConsulta";
-            this.pnlConsulta.Size = new System.Drawing.Size(575, 403);
-            this.pnlConsulta.TabIndex = 129;
-            this.pnlConsulta.Visible = false;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtFiltrar);
-            this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.dgvConsultaLegajos);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.Window;
-            this.groupBox1.Location = new System.Drawing.Point(15, 11);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(544, 336);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Consulta de Legajos";
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.SystemColors.Control;
-            this.panel8.Controls.Add(this.ckMostrarEgresados);
-            this.panel8.Controls.Add(this.button1);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 353);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(575, 50);
-            this.panel8.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(269, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 40);
-            this.button1.TabIndex = 27;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // dgvConsultaLegajos
-            // 
-            this.dgvConsultaLegajos.AllowUserToAddRows = false;
-            this.dgvConsultaLegajos.AllowUserToDeleteRows = false;
-            this.dgvConsultaLegajos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvConsultaLegajos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvConsultaLegajos.Location = new System.Drawing.Point(6, 51);
-            this.dgvConsultaLegajos.Name = "dgvConsultaLegajos";
-            this.dgvConsultaLegajos.ReadOnly = true;
-            this.dgvConsultaLegajos.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.dgvConsultaLegajos.Size = new System.Drawing.Size(532, 279);
-            this.dgvConsultaLegajos.TabIndex = 0;
-            this.dgvConsultaLegajos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvConsultaLegajos_CellMouseDoubleClick);
-            // 
-            // ckMostrarEgresados
-            // 
-            this.ckMostrarEgresados.AutoSize = true;
-            this.ckMostrarEgresados.Location = new System.Drawing.Point(355, 15);
-            this.ckMostrarEgresados.Name = "ckMostrarEgresados";
-            this.ckMostrarEgresados.Size = new System.Drawing.Size(158, 17);
-            this.ckMostrarEgresados.TabIndex = 28;
-            this.ckMostrarEgresados.Text = "Mostrar También Egresados";
-            this.ckMostrarEgresados.UseVisualStyleBackColor = true;
-            this.ckMostrarEgresados.CheckedChanged += new System.EventHandler(this.ckMostrarEgresados_CheckedChanged);
-            // 
-            // btnConsulta
-            // 
-            this.btnConsulta.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
-            this.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsulta.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnConsulta.Location = new System.Drawing.Point(417, 564);
-            this.btnConsulta.Margin = new System.Windows.Forms.Padding(0);
-            this.btnConsulta.Name = "btnConsulta";
-            this.btnConsulta.Size = new System.Drawing.Size(40, 40);
-            this.btnConsulta.TabIndex = 26;
-            this.btnConsulta.UseVisualStyleBackColor = true;
-            this.btnConsulta.Click += new System.EventHandler(this.btnConsulta_Click);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(41, 26);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(32, 13);
-            this.label18.TabIndex = 1;
-            this.label18.Text = "Filtrar";
-            // 
-            // txtFiltrar
-            // 
-            this.txtFiltrar.Location = new System.Drawing.Point(82, 23);
-            this.txtFiltrar.Name = "txtFiltrar";
-            this.txtFiltrar.Size = new System.Drawing.Size(454, 20);
-            this.txtFiltrar.TabIndex = 2;
-            this.txtFiltrar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFiltrar_KeyDown);
-            this.txtFiltrar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltrar_KeyUp);
-            // 
             // IngVersLegajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1608,6 +1617,12 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.pnlConsulta.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaLegajos)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1616,12 +1631,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Temas)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.pnlConsulta.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaLegajos)).EndInit();
             this.ResumeLayout(false);
 
         }

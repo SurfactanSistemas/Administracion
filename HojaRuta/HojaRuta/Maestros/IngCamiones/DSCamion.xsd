@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSCamion" targetNamespace="http://tempuri.org/DSCamion.xsd" xmlns:mstns="http://tempuri.org/DSCamion.xsd" xmlns="http://tempuri.org/DSCamion.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSCamion" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSCamion" msprop:Generator_UserDSName="DSCamion">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Camion" msprop:Generator_TableClassName="CamionDataTable" msprop:Generator_TableVarName="tableCamion" msprop:Generator_TablePropName="Camion" msprop:Generator_RowDeletingName="CamionRowDeleting" msprop:Generator_RowChangingName="CamionRowChanging" msprop:Generator_RowEvHandlerName="CamionRowChangeEventHandler" msprop:Generator_RowDeletedName="CamionRowDeleted" msprop:Generator_UserTableName="Camion" msprop:Generator_RowChangedName="CamionRowChanged" msprop:Generator_RowEvArgName="CamionRowChangeEvent" msprop:Generator_RowClassName="CamionRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_UserColumnName="Codigo" type="xs:string" minOccurs="0" />
+              <xs:element name="Desc" msprop:Generator_ColumnVarNameInTable="columnDesc" msprop:Generator_ColumnPropNameInRow="Desc" msprop:Generator_ColumnPropNameInTable="DescColumn" msprop:Generator_UserColumnName="Desc" type="xs:string" minOccurs="0" />
+              <xs:element name="Patente" msprop:Generator_ColumnVarNameInTable="columnPatente" msprop:Generator_ColumnPropNameInRow="Patente" msprop:Generator_ColumnPropNameInTable="PatenteColumn" msprop:Generator_UserColumnName="Patente" type="xs:string" minOccurs="0" />
+              <xs:element name="Estado" msprop:Generator_ColumnVarNameInTable="columnEstado" msprop:Generator_ColumnPropNameInRow="Estado" msprop:Generator_ColumnPropNameInTable="EstadoColumn" msprop:Generator_UserColumnName="Estado" type="xs:string" minOccurs="0" />
+              <xs:element name="Nomb_x0020_Prove" msprop:Generator_ColumnVarNameInTable="columnNomb_Prove" msprop:Generator_ColumnPropNameInRow="Nomb_Prove" msprop:Generator_ColumnPropNameInTable="Nomb_ProveColumn" msprop:Generator_UserColumnName="Nomb Prove" type="xs:string" minOccurs="0" />
+              <xs:element name="Nomb_x0020_Chofer" msprop:Generator_ColumnVarNameInTable="columnNomb_Chofer" msprop:Generator_ColumnPropNameInRow="Nomb_Chofer" msprop:Generator_ColumnPropNameInTable="Nomb_ChoferColumn" msprop:Generator_UserColumnName="Nomb Chofer" type="xs:string" minOccurs="0" />
+              <xs:element name="Vto_x0020_Ruta" msprop:Generator_ColumnVarNameInTable="columnVto_Ruta" msprop:Generator_ColumnPropNameInRow="Vto_Ruta" msprop:Generator_ColumnPropNameInTable="Vto_RutaColumn" msprop:Generator_UserColumnName="Vto Ruta" type="xs:string" minOccurs="0" />
+              <xs:element name="Vto_x0020_RTO" msprop:Generator_ColumnVarNameInTable="columnVto_RTO" msprop:Generator_ColumnPropNameInRow="Vto_RTO" msprop:Generator_ColumnPropNameInTable="Vto_RTOColumn" msprop:Generator_UserColumnName="Vto RTO" type="xs:string" minOccurs="0" />
+              <xs:element name="Vto_x0020_Hab_x0020_Dom" msprop:Generator_ColumnVarNameInTable="columnVto_Hab_Dom" msprop:Generator_ColumnPropNameInRow="Vto_Hab_Dom" msprop:Generator_ColumnPropNameInTable="Vto_Hab_DomColumn" msprop:Generator_UserColumnName="Vto Hab Dom" type="xs:string" minOccurs="0" />
+              <xs:element name="Vto_x0020_Seguro" msprop:Generator_ColumnVarNameInTable="columnVto_Seguro" msprop:Generator_ColumnPropNameInRow="Vto_Seguro" msprop:Generator_ColumnPropNameInTable="Vto_SeguroColumn" msprop:Generator_UserColumnName="Vto Seguro" type="xs:string" minOccurs="0" />
+              <xs:element name="Vto_x0020_Cert._x0020_Carg._x0020_Pel" msprop:Generator_ColumnVarNameInTable="_columnVto_Cert__Carg__Pel" msprop:Generator_ColumnPropNameInRow="_Vto_Cert__Carg__Pel" msprop:Generator_ColumnPropNameInTable="_Vto_Cert__Carg__PelColumn" msprop:Generator_UserColumnName="Vto Cert. Carg. Pel" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

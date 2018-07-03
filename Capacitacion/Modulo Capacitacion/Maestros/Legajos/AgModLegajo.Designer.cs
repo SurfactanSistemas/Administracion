@@ -158,9 +158,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.TB_Codigo = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBLegajo = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -242,6 +242,7 @@
             this.TB_FechaEgreso.ReadOnly = true;
             this.TB_FechaEgreso.Size = new System.Drawing.Size(85, 20);
             this.TB_FechaEgreso.TabIndex = 48;
+            this.TB_FechaEgreso.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_FechaEgreso.ValidatingType = typeof(System.DateTime);
             // 
             // TB_CUIL
@@ -249,8 +250,10 @@
             this.TB_CUIL.Location = new System.Drawing.Point(340, 47);
             this.TB_CUIL.Mask = "99-99999999-9";
             this.TB_CUIL.Name = "TB_CUIL";
+            this.TB_CUIL.PromptChar = ' ';
             this.TB_CUIL.Size = new System.Drawing.Size(85, 20);
             this.TB_CUIL.TabIndex = 47;
+            this.TB_CUIL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_CUIL.Visible = false;
             // 
             // TB_DNI
@@ -258,8 +261,10 @@
             this.TB_DNI.Location = new System.Drawing.Point(76, 46);
             this.TB_DNI.Mask = "99999999";
             this.TB_DNI.Name = "TB_DNI";
+            this.TB_DNI.PromptChar = ' ';
             this.TB_DNI.Size = new System.Drawing.Size(85, 20);
             this.TB_DNI.TabIndex = 46;
+            this.TB_DNI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label16
             // 
@@ -301,6 +306,7 @@
             this.TB_Version.Size = new System.Drawing.Size(51, 20);
             this.TB_Version.TabIndex = 40;
             this.TB_Version.Text = "1";
+            this.TB_Version.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label15
             // 
@@ -426,7 +432,7 @@
             // TB_DescPerfil
             // 
             this.TB_DescPerfil.FormattingEnabled = true;
-            this.TB_DescPerfil.Location = new System.Drawing.Point(235, 17);
+            this.TB_DescPerfil.Location = new System.Drawing.Point(235, 16);
             this.TB_DescPerfil.Name = "TB_DescPerfil";
             this.TB_DescPerfil.Size = new System.Drawing.Size(259, 21);
             this.TB_DescPerfil.TabIndex = 125;
@@ -435,24 +441,25 @@
             // 
             // panel6
             // 
-            this.panel6.Location = new System.Drawing.Point(147, 15);
+            this.panel6.Location = new System.Drawing.Point(106, 12);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(19, 29);
             this.panel6.TabIndex = 124;
             // 
             // TB_CodPerfil
             // 
+            this.TB_CodPerfil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodPerfil.FormattingEnabled = true;
-            this.TB_CodPerfil.Location = new System.Drawing.Point(73, 17);
+            this.TB_CodPerfil.Location = new System.Drawing.Point(73, 16);
             this.TB_CodPerfil.Name = "TB_CodPerfil";
-            this.TB_CodPerfil.Size = new System.Drawing.Size(93, 21);
+            this.TB_CodPerfil.Size = new System.Drawing.Size(32, 21);
             this.TB_CodPerfil.TabIndex = 123;
             this.TB_CodPerfil.SelectedIndexChanged += new System.EventHandler(this.TB_CodPerfil_SelectedIndexChanged);
             this.TB_CodPerfil.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodPerfil_KeyDown_1);
             // 
             // panel5
             // 
-            this.panel5.Location = new System.Drawing.Point(834, 8);
+            this.panel5.Location = new System.Drawing.Point(834, 12);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(19, 29);
             this.panel5.TabIndex = 122;
@@ -460,9 +467,9 @@
             // TB_DescSec
             // 
             this.TB_DescSec.FormattingEnabled = true;
-            this.TB_DescSec.Location = new System.Drawing.Point(637, 13);
+            this.TB_DescSec.Location = new System.Drawing.Point(623, 16);
             this.TB_DescSec.Name = "TB_DescSec";
-            this.TB_DescSec.Size = new System.Drawing.Size(216, 21);
+            this.TB_DescSec.Size = new System.Drawing.Size(230, 21);
             this.TB_DescSec.TabIndex = 121;
             // 
             // panel4
@@ -474,19 +481,21 @@
             // 
             // TB_CodSector
             // 
+            this.TB_CodSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodSector.FormattingEnabled = true;
-            this.TB_CodSector.Location = new System.Drawing.Point(558, 14);
+            this.TB_CodSector.Location = new System.Drawing.Point(558, 16);
             this.TB_CodSector.Name = "TB_CodSector";
-            this.TB_CodSector.Size = new System.Drawing.Size(59, 21);
+            this.TB_CodSector.Size = new System.Drawing.Size(34, 21);
             this.TB_CodSector.TabIndex = 119;
             // 
             // TB_VersPer
             // 
-            this.TB_VersPer.Location = new System.Drawing.Point(167, 17);
+            this.TB_VersPer.Location = new System.Drawing.Point(131, 16);
             this.TB_VersPer.Name = "TB_VersPer";
             this.TB_VersPer.ReadOnly = true;
-            this.TB_VersPer.Size = new System.Drawing.Size(56, 20);
+            this.TB_VersPer.Size = new System.Drawing.Size(92, 20);
             this.TB_VersPer.TabIndex = 118;
+            this.TB_VersPer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // TB_Equiv2Leg
             // 
@@ -1250,7 +1259,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 16);
+            this.label2.Location = new System.Drawing.Point(13, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 18);
             this.label2.TabIndex = 35;
@@ -1274,7 +1283,7 @@
             this.DGV_Temas.AllowUserToResizeRows = false;
             this.DGV_Temas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DGV_Temas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.DGV_Temas.ColumnHeadersHeight = 34;
+            this.DGV_Temas.ColumnHeadersHeight = 25;
             this.DGV_Temas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tema,
             this.Descripcion,
@@ -1292,6 +1301,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.DGV_Temas.RowHeadersWidth = 15;
             this.DGV_Temas.Size = new System.Drawing.Size(932, 444);
             this.DGV_Temas.TabIndex = 7;
             // 
@@ -1374,7 +1384,7 @@
             this.DGV_CursosRealiz.AllowUserToResizeRows = false;
             this.DGV_CursosRealiz.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DGV_CursosRealiz.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.DGV_CursosRealiz.ColumnHeadersHeight = 34;
+            this.DGV_CursosRealiz.ColumnHeadersHeight = 25;
             this.DGV_CursosRealiz.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Curso,
             this.DesCurso,
@@ -1392,6 +1402,7 @@
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV_CursosRealiz.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.DGV_CursosRealiz.RowHeadersWidth = 15;
             this.DGV_CursosRealiz.Size = new System.Drawing.Size(927, 442);
             this.DGV_CursosRealiz.TabIndex = 8;
             // 
@@ -1543,6 +1554,18 @@
             this.TB_Codigo.ReadOnly = true;
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
+            this.TB_Codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(705, 585);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(216, 26);
+            this.textBox2.TabIndex = 51;
+            this.textBox2.Text = "  OBSERVACIONES DEL LEGAJO";
+            this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
             // 
             // panel1
             // 
@@ -1563,17 +1586,6 @@
             this.LBLegajo.Size = new System.Drawing.Size(147, 19);
             this.LBLegajo.TabIndex = 0;
             this.LBLegajo.Text = "INGRESO DE LEGAJO";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(705, 585);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(216, 26);
-            this.textBox2.TabIndex = 51;
-            this.textBox2.Text = "  OBSERVACIONES DEL LEGAJO";
-            this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
             // 
             // AgModLegajo
             // 
@@ -1715,12 +1727,6 @@
         private System.Windows.Forms.MaskedTextBox TB_FechaEgreso;
         private System.Windows.Forms.TextBox TB_PerfilAct;
         private System.Windows.Forms.Button BT_MasObserv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Necesaria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
         private System.Windows.Forms.DataGridViewTextBoxColumn DesCurso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
@@ -1728,6 +1734,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Año;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cursos;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Necesaria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
 
     }
 }

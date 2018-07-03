@@ -28,7 +28,7 @@ namespace Vista
             DTOriginal = DT.Copy();
 
             cmbIdiomaEtiquetas.SelectedIndex = 0;
-            GrupoIdiomaEtiquetas.Visible = false;
+            //GrupoIdiomaEtiquetas.Visible = false;
 
             this.PoblarGrilla();
 
@@ -47,13 +47,13 @@ namespace Vista
             {
                 DGV_Etiquetas.Rows.Add(dr["Codigo"].ToString(), dr["DescriCliente"].ToString(), 1);
 
-                if (!Traducibles && dr["Codigo"].ToString().Trim().StartsWith("PT"))
-                {
-                    Traducibles = true;
-                }
+                //if (!Traducibles && dr["Codigo"].ToString().Trim().StartsWith("PT"))
+                //{
+                //    Traducibles = true;
+                //}
             }
 
-            GrupoIdiomaEtiquetas.Visible = Traducibles;
+            //GrupoIdiomaEtiquetas.Visible = Traducibles;
         }
 
         private void PoblarGrilla(DataTable tabla)
@@ -94,7 +94,7 @@ namespace Vista
                 int[] CantidadesDeEtiquetas = DeterminarCantidadDeEtiquetas();
                 int posicion = CBPosicion.SelectedIndex;
 
-                Boolean trad = (cmbIdiomaEtiquetas.SelectedIndex == 1) ? true : false;
+                Boolean trad = cmbIdiomaEtiquetas.SelectedIndex == 1;
 
                 ImpreEtiquetChic impre = new ImpreEtiquetChic(DT, CantidadesDeEtiquetas, TipoEtiqueta, posicion, trad);
 
@@ -237,13 +237,13 @@ namespace Vista
                 {
                     WDescripcionIngles = "";
 
-                    if (row["Codigo"].ToString().Trim().StartsWith("PT"))
-                    {
-                        // Buscamos la traducción del nombre del Producto.
+                    //if (row["Codigo"].ToString().Trim().StartsWith("PT"))
+                    //{
+                    //    // Buscamos la traducción del nombre del Producto.
                         WDescripcionIngles = BuscarDescripcionIngles(row["Codigo"].ToString());
 
                         // Traducimos Fecha.
-                        row["Fecha"] = row["Fecha"].ToString().Replace("Fecha:", "Date:");
+                        row["Fecha"] = row["Fecha"].ToString().Replace("Fecha:", "Sample Date:");
 
                         // Traducimos Pedido/Lote.
                         row["Lote"] = row["Lote"].ToString().Replace("Lote:", "Batch:");
@@ -255,7 +255,7 @@ namespace Vista
                         // Traducimos Clase.
                         row["Clase"] = row["Clase"].ToString().Replace("Clase:", "Class:");
                         
-                    }
+                    //}
 
                     if (WDescripcionIngles.Trim() != "")
                     {

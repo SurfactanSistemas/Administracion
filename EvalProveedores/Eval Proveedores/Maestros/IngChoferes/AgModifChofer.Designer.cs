@@ -220,6 +220,7 @@
             this.TB_Codigo.ReadOnly = true;
             this.TB_Codigo.Size = new System.Drawing.Size(129, 20);
             this.TB_Codigo.TabIndex = 3;
+            this.TB_Codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Codigo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Codigo_MouseClick);
             // 
             // TB_Nombre
@@ -274,8 +275,10 @@
             this.FecEntCargPel.Location = new System.Drawing.Point(486, 269);
             this.FecEntCargPel.Mask = "00/00/0000";
             this.FecEntCargPel.Name = "FecEntCargPel";
+            this.FecEntCargPel.PromptChar = ' ';
             this.FecEntCargPel.Size = new System.Drawing.Size(100, 20);
             this.FecEntCargPel.TabIndex = 13;
+            this.FecEntCargPel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.FecEntCargPel.ValidatingType = typeof(System.DateTime);
             this.FecEntCargPel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FecEntCargPel_MouseClick);
             this.FecEntCargPel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FecEntCargPel_KeyDown);
@@ -285,8 +288,10 @@
             this.FecEntART.Location = new System.Drawing.Point(486, 230);
             this.FecEntART.Mask = "00/00/0000";
             this.FecEntART.Name = "FecEntART";
+            this.FecEntART.PromptChar = ' ';
             this.FecEntART.Size = new System.Drawing.Size(100, 20);
             this.FecEntART.TabIndex = 10;
+            this.FecEntART.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.FecEntART.ValidatingType = typeof(System.DateTime);
             this.FecEntART.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FecEntART_MouseClick);
             this.FecEntART.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FecEntART_KeyDown);
@@ -296,8 +301,10 @@
             this.FecEntLic.Location = new System.Drawing.Point(486, 193);
             this.FecEntLic.Mask = "00/00/0000";
             this.FecEntLic.Name = "FecEntLic";
+            this.FecEntLic.PromptChar = ' ';
             this.FecEntLic.Size = new System.Drawing.Size(100, 20);
             this.FecEntLic.TabIndex = 7;
+            this.FecEntLic.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.FecEntLic.ValidatingType = typeof(System.DateTime);
             this.FecEntLic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.maskedTextBox4_MouseClick);
             this.FecEntLic.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FecEntLic_KeyDown);
@@ -314,22 +321,26 @@
             // 
             // FecVencCargPel
             // 
-            this.FecVencCargPel.Location = new System.Drawing.Point(371, 263);
+            this.FecVencCargPel.Location = new System.Drawing.Point(371, 269);
             this.FecVencCargPel.Mask = "00/00/0000";
             this.FecVencCargPel.Name = "FecVencCargPel";
+            this.FecVencCargPel.PromptChar = ' ';
             this.FecVencCargPel.Size = new System.Drawing.Size(100, 20);
             this.FecVencCargPel.TabIndex = 12;
+            this.FecVencCargPel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.FecVencCargPel.ValidatingType = typeof(System.DateTime);
             this.FecVencCargPel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FecVencCargPel_MouseClick);
             this.FecVencCargPel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FecVencCargPel_KeyDown);
             // 
             // FecVencART
             // 
-            this.FecVencART.Location = new System.Drawing.Point(371, 228);
+            this.FecVencART.Location = new System.Drawing.Point(371, 230);
             this.FecVencART.Mask = "00/00/0000";
             this.FecVencART.Name = "FecVencART";
+            this.FecVencART.PromptChar = ' ';
             this.FecVencART.Size = new System.Drawing.Size(100, 20);
             this.FecVencART.TabIndex = 9;
+            this.FecVencART.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.FecVencART.ValidatingType = typeof(System.DateTime);
             this.FecVencART.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FecVencART_MouseClick);
             this.FecVencART.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FecVencART_KeyDown);
@@ -339,8 +350,10 @@
             this.FecVencLic.Location = new System.Drawing.Point(371, 193);
             this.FecVencLic.Mask = "00/00/0000";
             this.FecVencLic.Name = "FecVencLic";
+            this.FecVencLic.PromptChar = ' ';
             this.FecVencLic.Size = new System.Drawing.Size(100, 20);
             this.FecVencLic.TabIndex = 6;
+            this.FecVencLic.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.FecVencLic.ValidatingType = typeof(System.DateTime);
             this.FecVencLic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.maskedTextBox1_MouseClick);
             this.FecVencLic.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FecVencLic_KeyDown);
@@ -358,7 +371,7 @@
             // CB_CertPel
             // 
             this.CB_CertPel.AutoSize = true;
-            this.CB_CertPel.Location = new System.Drawing.Point(326, 269);
+            this.CB_CertPel.Location = new System.Drawing.Point(326, 272);
             this.CB_CertPel.Name = "CB_CertPel";
             this.CB_CertPel.Size = new System.Drawing.Size(15, 14);
             this.CB_CertPel.TabIndex = 11;
@@ -379,7 +392,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(22, 269);
+            this.label7.Location = new System.Drawing.Point(22, 270);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(270, 18);
             this.label7.TabIndex = 9;
@@ -389,7 +402,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(21, 230);
+            this.label6.Location = new System.Drawing.Point(21, 231);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 18);
             this.label6.TabIndex = 8;
@@ -399,7 +412,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(22, 196);
+            this.label5.Location = new System.Drawing.Point(22, 194);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(134, 18);
             this.label5.TabIndex = 7;
@@ -450,18 +463,19 @@
             // 
             // panel5
             // 
-            this.panel5.Location = new System.Drawing.Point(188, 21);
+            this.panel5.Location = new System.Drawing.Point(209, 21);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(23, 32);
             this.panel5.TabIndex = 54;
             // 
             // TB_CodProveedor
             // 
+            this.TB_CodProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodProveedor.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_CodProveedor.FormattingEnabled = true;
             this.TB_CodProveedor.Location = new System.Drawing.Point(89, 24);
             this.TB_CodProveedor.Name = "TB_CodProveedor";
-            this.TB_CodProveedor.Size = new System.Drawing.Size(111, 26);
+            this.TB_CodProveedor.Size = new System.Drawing.Size(92, 26);
             this.TB_CodProveedor.TabIndex = 53;
             this.TB_CodProveedor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodProveedor_KeyDown);
             // 
@@ -490,7 +504,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(783, 416);
+            this.ClientSize = new System.Drawing.Size(783, 415);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;

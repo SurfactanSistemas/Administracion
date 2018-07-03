@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSChofer" targetNamespace="http://tempuri.org/DSChofer.xsd" xmlns:mstns="http://tempuri.org/DSChofer.xsd" xmlns="http://tempuri.org/DSChofer.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSChofer" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSChofer" msprop:Generator_UserDSName="DSChofer">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Chofer" msprop:Generator_TableClassName="ChoferDataTable" msprop:Generator_TableVarName="tableChofer" msprop:Generator_RowChangedName="ChoferRowChanged" msprop:Generator_TablePropName="Chofer" msprop:Generator_RowDeletingName="ChoferRowDeleting" msprop:Generator_RowChangingName="ChoferRowChanging" msprop:Generator_RowEvHandlerName="ChoferRowChangeEventHandler" msprop:Generator_RowDeletedName="ChoferRowDeleted" msprop:Generator_RowClassName="ChoferRow" msprop:Generator_UserTableName="Chofer" msprop:Generator_RowEvArgName="ChoferRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_UserColumnName="Codigo" type="xs:string" minOccurs="0" />
+              <xs:element name="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_UserColumnName="Descripcion" type="xs:string" minOccurs="0" />
+              <xs:element name="Aplica" msprop:Generator_ColumnVarNameInTable="columnAplica" msprop:Generator_ColumnPropNameInRow="Aplica" msprop:Generator_ColumnPropNameInTable="AplicaColumn" msprop:Generator_UserColumnName="Aplica" type="xs:string" minOccurs="0" />
+              <xs:element name="Proveedor" msprop:Generator_ColumnVarNameInTable="columnProveedor" msprop:Generator_ColumnPropNameInRow="Proveedor" msprop:Generator_ColumnPropNameInTable="ProveedorColumn" msprop:Generator_UserColumnName="Proveedor" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha_x0020_Vto_x0020_Lic" msprop:Generator_ColumnVarNameInTable="columnFecha_Vto_Lic" msprop:Generator_ColumnPropNameInRow="Fecha_Vto_Lic" msprop:Generator_ColumnPropNameInTable="Fecha_Vto_LicColumn" msprop:Generator_UserColumnName="Fecha Vto Lic" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha_x0020_Vto_x0020_ART" msprop:Generator_ColumnVarNameInTable="columnFecha_Vto_ART" msprop:Generator_ColumnPropNameInRow="Fecha_Vto_ART" msprop:Generator_ColumnPropNameInTable="Fecha_Vto_ARTColumn" msprop:Generator_UserColumnName="Fecha Vto ART" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha_x0020_Vto_x0020_Carg_x0020_Pel" msprop:Generator_ColumnVarNameInTable="columnFecha_Vto_Carg_Pel" msprop:Generator_ColumnPropNameInRow="Fecha_Vto_Carg_Pel" msprop:Generator_ColumnPropNameInTable="Fecha_Vto_Carg_PelColumn" msprop:Generator_UserColumnName="Fecha Vto Carg Pel" type="xs:string" minOccurs="0" />
+              <xs:element name="NombProve" msprop:Generator_ColumnVarNameInTable="columnNombProve" msprop:Generator_ColumnPropNameInRow="NombProve" msprop:Generator_ColumnPropNameInTable="NombProveColumn" msprop:Generator_UserColumnName="NombProve" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

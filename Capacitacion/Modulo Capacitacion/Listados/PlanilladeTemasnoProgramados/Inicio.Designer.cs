@@ -105,6 +105,7 @@
             this.TB_Año.Name = "TB_Año";
             this.TB_Año.Size = new System.Drawing.Size(70, 20);
             this.TB_Año.TabIndex = 85;
+            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
             // 
             // TB_Mes
@@ -113,6 +114,7 @@
             this.TB_Mes.Name = "TB_Mes";
             this.TB_Mes.Size = new System.Drawing.Size(70, 20);
             this.TB_Mes.TabIndex = 84;
+            this.TB_Mes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Mes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Mes_KeyDown);
             // 
             // label2

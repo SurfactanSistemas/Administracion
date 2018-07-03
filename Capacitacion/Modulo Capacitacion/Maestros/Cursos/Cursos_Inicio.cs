@@ -168,7 +168,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void Cursos_Inicio_Shown(object sender, EventArgs e)
         {
-            TBFiltro.Focus();
+            txtCodigo.Focus();
         }
 
         private void TBFiltro_KeyDown(object sender, KeyEventArgs e)
@@ -228,6 +228,36 @@ namespace Modulo_Capacitacion.Maestros.Cursos
             string WDescripcion = dgvTemas.Rows[e.RowIndex].Cells["Descripcion"].Value.ToString();
 
             _CargarCursosDisponibles(WTema, WDescripcion);
+        }
+
+        private void txtCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtCodigo.Text.Trim() == "") return;
+
+                foreach (DataGridViewRow row in dgvTemas.Rows)
+                {
+                    var WCodigo = row.Cells["Tema"].Value ?? "";
+
+                    if (WCodigo.ToString().Trim() != "")
+                    {
+                        if (txtCodigo.Text.Trim() == WCodigo.ToString().Trim())
+                        {
+                            dgvTemas_CellMouseDoubleClick(null, new DataGridViewCellMouseEventArgs(0, row.Index, 0,0, new MouseEventArgs(MouseButtons.None, 0, 0 ,0,0)));
+                            txtCodigo.Text = "";
+                            return;
+                        }
+                    }
+                }
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtCodigo.Text = "";
+            }
+	        
         }
 
     }

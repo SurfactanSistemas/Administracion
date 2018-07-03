@@ -131,8 +131,10 @@
             this.TB_Hasta.Location = new System.Drawing.Point(193, 87);
             this.TB_Hasta.Mask = "00/00/0000";
             this.TB_Hasta.Name = "TB_Hasta";
+            this.TB_Hasta.PromptChar = ' ';
             this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
             this.TB_Hasta.TabIndex = 4;
+            this.TB_Hasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Hasta.ValidatingType = typeof(System.DateTime);
             // 
             // TB_Desde
@@ -140,8 +142,10 @@
             this.TB_Desde.Location = new System.Drawing.Point(193, 42);
             this.TB_Desde.Mask = "00/00/0000";
             this.TB_Desde.Name = "TB_Desde";
+            this.TB_Desde.PromptChar = ' ';
             this.TB_Desde.Size = new System.Drawing.Size(100, 20);
             this.TB_Desde.TabIndex = 3;
+            this.TB_Desde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Desde.ValidatingType = typeof(System.DateTime);
             // 
             // label2
@@ -169,7 +173,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(385, 287);
+            this.ClientSize = new System.Drawing.Size(385, 286);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;

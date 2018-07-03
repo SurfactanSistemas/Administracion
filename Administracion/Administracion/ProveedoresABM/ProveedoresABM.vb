@@ -69,6 +69,14 @@ Public Class ProveedoresABM
 
         Next
 
+        For Each cmb As ComboBox In Me.GroupBox5.Controls.OfType(Of ComboBox)()
+            cmb.SelectedIndex = 0
+        Next
+
+        For Each msk As MaskedTextBox In Me.GroupBox5.Controls.OfType(Of MaskedTextBox)()
+            msk.Clear()
+        Next
+
         cmbInscripcionIB.SelectedIndex = 0
         cmbCondicionIB1.SelectedIndex = 0
         cmbCondicionIB2.SelectedIndex = 0
@@ -246,6 +254,10 @@ Public Class ProveedoresABM
 
         Next
 
+        If (_ProveedorExistente(txtCodigo.Text)) Then
+            _ActualizarCertificadosProveedor(txtCodigo.Text)
+        End If
+
         MsgBox("Proveedor Actualiza correctamente!", MsgBoxStyle.Information)
 
         btnLimpiar.PerformClick()
@@ -408,12 +420,75 @@ Public Class ProveedoresABM
 
         Try
             DAOProveedor.agregarProveedor(proveedor)
+
+            If (_ProveedorExistente(txtCodigo.Text)) Then
+                _ActualizarCertificadosProveedor(txtCodigo.Text)
+            End If
+
             MsgBox("Proveedor guardado correctamente.", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
+
+    Private Sub _ActualizarCertificadosProveedor(ByVal WProveedor As String)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "UPDATE Proveedor SET Iso2 = " & NormalizarIndex(cmbCertificados2.SelectedIndex) & ", VtoIso2 = '" & txtCertificados2.Text & "', Iso3 = " & NormalizarIndex(cmbCertificados3.SelectedIndex) & ", VtoIso3 = '" & txtCertificados3.Text & "' WHERE Proveedor = '" & WProveedor & "'"
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer actualizar los certificados del Proveeodr en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Function _ProveedorExistente(ByVal WProveedor As String) As Boolean
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor FROM Proveedor WHERE Proveedor = '" & WProveedor & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            Return dr.HasRows
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la existencia del Proveedor en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
 
     Private Sub borrar()
         Try
@@ -478,7 +553,7 @@ Public Class ProveedoresABM
         txtClienteAsociado.Text = ""
         txtClienteAsociadoDescripcion.Text = ""
 
-        If Not IsNothing(proveedor.cliente) then
+        If Not IsNothing(proveedor.cliente) Then
             txtClienteAsociado.Text = Trim(proveedor.cliente.id)
             txtClienteAsociadoDescripcion.Text = Trim(proveedor.cliente.razon)
         End If
@@ -858,12 +933,12 @@ Public Class ProveedoresABM
 
                 Do While dr.Read()
 
-                    If LBConsulta_Opciones.SelectedIndex = 0 then
+                    If LBConsulta_Opciones.SelectedIndex = 0 Then
                         LBConsulta.Items.Add(dr.Item(0) & "    " & dr.Item(1))
                     Else
                         LBConsulta.Items.Add(dr.Item(0))
                     End If
-                    
+
 
                 Loop
 
@@ -933,6 +1008,11 @@ Public Class ProveedoresABM
 
             If Not IsNothing(proveedor) Then
                 mostrarProveedor(proveedor)
+
+                If _ProveedorExistente(codigo) Then
+                    _CargarCertificadosExtras(codigo)
+                End If
+
                 _SaltarA(txtRazonSocial)
             Else
 
@@ -948,6 +1028,45 @@ Public Class ProveedoresABM
         ElseIf e.KeyData = Keys.Escape Then
             txtCodigo.Text = ""
         End If
+
+    End Sub
+
+    Private Sub _CargarCertificadosExtras(ByVal WProveedor As String)
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Iso2, VtoIso2, Iso3, VtoIso3 FROM Proveedor WHERE Proveedor = '" & WProveedor & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                With dr
+                    .Read()
+                    cmbCertificados2.SelectedIndex = IIf(IsDBNull(.Item("Iso2")), 0, .Item("Iso2"))
+                    txtCertificados2.Text = IIf(IsDBNull(.Item("VtoIso2")), "", .Item("VtoIso2"))
+                    cmbCertificados3.SelectedIndex = IIf(IsDBNull(.Item("Iso3")), 0, .Item("Iso3"))
+                    txtCertificados3.Text = IIf(IsDBNull(.Item("VtoIso3")), "", .Item("VtoIso3"))
+
+                End With
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al traer los datos de los Certificados Extras desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
 
     End Sub
 
@@ -1066,7 +1185,7 @@ Public Class ProveedoresABM
                 _SaltarA(txtCheque)
             End If
 
-            
+
         ElseIf e.KeyData = Keys.Escape Then
             txtCuenta.Text = ""
         End If
@@ -1136,7 +1255,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCertificados.KeyDown
+    Private Sub txtCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCertificados.KeyDown, txtCertificados3.KeyDown, txtCertificados2.KeyDown
         If e.KeyData = Keys.Enter Then
             If _ValidarFecha(txtCertificados.Text) Then : Exit Sub : End If
             _SaltarA(cmbCalificacion)
@@ -1289,7 +1408,7 @@ Public Class ProveedoresABM
         _SaltarA(txtPaginaWeb)
     End Sub
 
-    Private Sub cmbCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCertificados.KeyDown
+    Private Sub cmbCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCertificados.KeyDown, cmbCertificados3.KeyDown, cmbCertificados2.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCertificados)
@@ -1299,7 +1418,7 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbCertificados_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCertificados.TextChanged
+    Private Sub cmbCertificados_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCertificados.TextChanged, cmbCertificados3.TextChanged, cmbCertificados2.TextChanged
         _SaltarA(txtCertificados)
     End Sub
 

@@ -158,8 +158,6 @@ namespace AccesoADatos
                     }
                 }
             }
-
-            return null;
         }
 
         public DataTable Lista(string RubroDesde)

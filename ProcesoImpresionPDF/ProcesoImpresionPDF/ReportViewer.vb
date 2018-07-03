@@ -26,6 +26,39 @@ Public Class ReportViewer
         CrystalReportViewer3.Refresh()
     End Sub
 
+    Public Sub ExportarExcel(ByVal WNombre As String, ByVal WDestino As String)
+
+        'Dim exportOptions As ExportOptions
+        'Dim diskFileDestinationOptions As New DiskFileDestinationOptions()
+        ''Dim formatTypeOptions As New PdfRtfWordFormatOptions()
+        'Dim formatTypeOptions As New ExcelFormatOptions()
+
+        'Dim folderPath As String = Trim(WDestino)
+        'If Not Directory.Exists(folderPath) Then
+        '    Directory.CreateDirectory(folderPath)
+        'End If
+        'diskFileDestinationOptions.DiskFileName = folderPath & WNombre
+
+        'If Not diskFileDestinationOptions.DiskFileName.EndsWith(".xls") Then
+        '    diskFileDestinationOptions.DiskFileName &= ".xls"
+        'End If
+
+        'exportOptions = reporte.ExportOptions
+        'With exportOptions
+        '    .ExportDestinationType = ExportDestinationType.DiskFile
+        '    .ExportFormatType = ExportFormatType.PortableDocFormat
+        '    .DestinationOptions = diskFileDestinationOptions
+        '    .FormatOptions = formatTypeOptions
+        'End With
+
+        ''Exporta y crea el XLS.
+        reporte.RecordSelectionFormula = formula
+        'reporte.Export()
+
+        reporte.ExportToDisk(ExportFormatType.Excel, WDestino.TrimEnd(".xls"))
+
+    End Sub
+
     Public Sub imprimirReporte()
         reporte.Refresh()
         reporte.RecordSelectionFormula = formula

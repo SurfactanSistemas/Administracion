@@ -1,0 +1,1690 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D0AB16CA-EAF0-49C9-8319-EA4B24006A9F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Administracion.My.MyApplication</StartupObject>
+    <RootNamespace>Administracion</RootNamespace>
+    <AssemblyName>Administracion</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Administracion.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <WarningLevel>1</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Administracion.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <WarningLevel>1</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>Administracion.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Administracion.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>Administracion.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Administracion.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClasesCompartidas">
+      <HintPath>..\..\..\ClasesCompartidas\ClasesCompartidas\bin\Debug\ClasesCompartidas.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AplicacionComprobantes.Designer.vb">
+      <DependentUpon>AplicacionComprobantes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AplicacionComprobantes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BancosABM.Designer.vb">
+      <DependentUpon>BancosABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BancosABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Capa DAO\DAOVendedor.vb" />
+    <Compile Include="Capa DAO\DaoAcumulado.vb" />
+    <Compile Include="Capa DAO\DAOCliente.vb" />
+    <Compile Include="Capa DAO\DAOCierreMes.vb" />
+    <Compile Include="Capa DAO\DAOCompras.vb" />
+    <Compile Include="Capa DAO\DAOCtaCteProveedor.vb" />
+    <Compile Include="Capa DAO\DAODeposito.vb" />
+    <Compile Include="Capa DAO\DAOPagos.vb" />
+    <Compile Include="Capa DAO\DAOProveedor.vb" />
+    <Compile Include="Capa DAO\DAORecibo.vb" />
+    <Compile Include="Capa DAO\DAORubroProveedor.vb" />
+    <Compile Include="Capa DAO\DAOBanco.vb" />
+    <Compile Include="Capa DAO\DAOCuentaContable.vb" />
+    <Compile Include="Capa DAO\DAOTipoCambio.vb" />
+    <Compile Include="CargaIntereses.Designer.vb">
+      <DependentUpon>CargaIntereses.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CargaIntereses.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\QueryController.vb" />
+    <Compile Include="Clases\SinParidadException.vb" />
+    <Compile Include="ComprasNovedades\AperturaCompras.Designer.vb">
+      <DependentUpon>AperturaCompras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasNovedades\AperturaCompras.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasNovedades\ConsultaNumeroFactura.Designer.vb">
+      <DependentUpon>ConsultaNumeroFactura.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasNovedades\ConsultaNumeroFactura.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasNovedades\CuotasPyMENacion.Designer.vb">
+      <DependentUpon>CuotasPyMENacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasNovedades\CuotasPyMENacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasNovedades\PymeNacion.Designer.vb">
+      <DependentUpon>PymeNacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasNovedades\PymeNacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasNovedades\PercIB.Designer.vb">
+      <DependentUpon>PercIB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasNovedades\PercIB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsultaCheque.Designer.vb">
+      <DependentUpon>ConsultaCheque.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaCheque.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsultaRemitos.Designer.vb">
+      <DependentUpon>ConsultaRemitos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaRemitos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetallesRemitosProveedor.Designer.vb">
+      <DependentUpon>DetallesRemitosProveedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DetallesRemitosProveedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnvioEmailProveedores.Designer.vb">
+      <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EnvioEmailProveedores.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ConsultaDatosFactura.Designer.vb">
+      <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ConsultaDatosFactura.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\CtaCtePrvPantallaDetallesCliente.Designer.vb">
+      <DependentUpon>CtaCtePrvPantallaDetallesCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CtaCtePrvPantallaDetallesCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPreparacion.Designer.vb">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivoPreparacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPreparacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoAgenda.Designer.vb">
+      <DependentUpon>ListadoAgenda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoAgenda.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoChequesEmitidos.Designer.vb">
+      <DependentUpon>ListadoChequesEmitidos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoChequesEmitidos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresAnalisitico.Designer.vb">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresAnalisitico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresAnalisitico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresFecha.Designer.vb">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresFecha.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresFecha.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresSelectivo.Designer.vb">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresSelectivo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoDepositos.Designer.vb">
+      <DependentUpon>ListadoDepositos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoDepositos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoDeudaPyme.Designer.vb">
+      <DependentUpon>ListadoDeudaPyme.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoDeudaPyme.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoDiferenciaCambioAcreditacion.Designer.vb">
+      <DependentUpon>ListadoDiferenciaCambioAcreditacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoDiferenciaCambioAcreditacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoDiferenciaCambioCobranza.Designer.vb">
+      <DependentUpon>ListadoDiferenciaCambioCobranza.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoDiferenciaCambioCobranza.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoDiferenciaCambioExterior.Designer.vb">
+      <DependentUpon>ListadoDiferenciaCambioExterior.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoDiferenciaCambioExterior.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoImputacionesContable.Designer.vb">
+      <DependentUpon>ListadoImputacionesContable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoImputacionesContable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoMovimientosBancos.Designer.vb">
+      <DependentUpon>ListadoMovimientosBancos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoMovimientosBancos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoPagos.Designer.vb">
+      <DependentUpon>ListadoPagos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoPagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoPagosPosdatados.Designer.vb">
+      <DependentUpon>ListadoPagosPosdatados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoPagosPosdatados.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoProyeccionCobrosAnalitico.Designer.vb">
+      <DependentUpon>ListadoProyeccionCobrosAnalitico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoProyeccionCobrosAnalitico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoRecibos.Designer.vb">
+      <DependentUpon>ListadoRecibos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoRecibos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoRecibosProvisorios.Designer.vb">
+      <DependentUpon>ListadoRecibosProvisorios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoRecibosProvisorios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoRetencionIB.Designer.vb">
+      <DependentUpon>ListadoRetencionIB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoRetencionIB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoRetencionIBCiudad.Designer.vb">
+      <DependentUpon>ListadoRetencionIBCiudad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoRetencionIBCiudad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoValoresEnCarteraCuit.Designer.vb">
+      <DependentUpon>ListadoValoresEnCarteraCuit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoValoresEnCarteraCuit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoPagosImportaciones.Designer.vb">
+      <DependentUpon>ListadoPagosImportaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoPagosImportaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModificaIntereses.Designer.vb">
+      <DependentUpon>ModificaIntereses.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ModificaIntereses.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos\CarpetasPagos.Designer.vb">
+      <DependentUpon>CarpetasPagos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos\CarpetasPagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\CierreMes.Designer.vb">
+      <DependentUpon>CierreMes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\CierreMes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\Cleanner.vb" />
+    <Compile Include="Clases\CommonEventsHandler.vb" />
+    <Compile Include="Clases\CustomConvert.vb" />
+    <Compile Include="Clases\FormOrganizer.vb" />
+    <Compile Include="Clases\GridBuilder.vb" />
+    <Compile Include="Clases\Proceso.vb" />
+    <Compile Include="ComprasNovedades\Compras.Designer.vb">
+      <DependentUpon>Compras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasNovedades\Compras.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasNovedades\ConsultaCompras.Designer.vb">
+      <DependentUpon>ConsultaCompras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasNovedades\ConsultaCompras.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentaContableABM.Designer.vb">
+      <DependentUpon>CuentaContableABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaContableABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\CustomTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedores.Designer.vb">
+      <DependentUpon>ListadoCuentaCorrienteProveedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedores.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pagos.Designer.vb">
+      <DependentUpon>Pagos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoCiti.Designer.vb">
+      <DependentUpon>ProcesoCiti.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoCiti.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoRecuperoIva.Designer.vb">
+      <DependentUpon>ProcesoRecuperoIva.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoRecuperoIva.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesAduanerasSIAPRE.Designer.vb">
+      <DependentUpon>ProcesoPercepcionesAduanerasSIAPRE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesAduanerasSIAPRE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesGananciasAduana.Designer.vb">
+      <DependentUpon>ProcesoPercepcionesGananciasAduana.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesGananciasAduana.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesYRetencionesCiudadNuevo.Designer.vb">
+      <DependentUpon>ProcesoPercepcionesYRetencionesCiudadNuevo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesYRetencionesCiudadNuevo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesIvaCompras.Designer.vb">
+      <DependentUpon>ProcesoPercepcionesIvaCompras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepcionesIvaCompras.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProveedoresABM\Contactos.Designer.vb">
+      <DependentUpon>Contactos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresABM\Contactos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProveedoresABM\CUFEProveedor.Designer.vb">
+      <DependentUpon>CUFEProveedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresABM\CUFEProveedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Depositos.Designer.vb">
+      <DependentUpon>Depositos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Depositos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\CuentaCorrientePantalla.Designer.vb">
+      <DependentUpon>CuentaCorrientePantalla.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\CuentaCorrientePantalla.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\DepuraCtaCte.Designer.vb">
+      <DependentUpon>DepuraCtaCte.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\DepuraCtaCte.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoAsientoResumen.Designer.vb">
+      <DependentUpon>ListadoAsientoResumen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoAsientoResumen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoIvaCompras.Designer.vb">
+      <DependentUpon>ListadoIvaCompras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoIvaCompras.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoProyeccionCobros.Designer.vb">
+      <DependentUpon>ListadoProyeccionCobros.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoProyeccionCobros.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoValoresEnCartera.Designer.vb">
+      <DependentUpon>ListadoValoresEnCartera.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoValoresEnCartera.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepciones.Designer.vb">
+      <DependentUpon>ProcesoPercepciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoPercepciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProveedoresABM\ObservacionesProveedor.Designer.vb">
+      <DependentUpon>ObservacionesProveedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresABM\ObservacionesProveedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoRetencionesPagos.Designer.vb">
+      <DependentUpon>ProcesoRetencionesPagos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoRetencionesPagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoReteRecibos.Designer.vb">
+      <DependentUpon>ProcesoReteRecibos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoReteRecibos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procesos\ProcesoSifere.Designer.vb">
+      <DependentUpon>ProcesoSifere.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos\ProcesoSifere.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProveedoresABM\PedirClaveAutorizacion.Designer.vb">
+      <DependentUpon>PedirClaveAutorizacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresABM\PedirClaveAutorizacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProveedoresABM\ProveedoresABM.Designer.vb">
+      <DependentUpon>ProveedoresABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresABM\ProveedoresABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recibos.Designer.vb">
+      <DependentUpon>Recibos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recibos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecibosProvisorios.Designer.vb">
+      <DependentUpon>RecibosProvisorios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RecibosProvisorios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecibosSolicitudInformacion.Designer.vb">
+      <DependentUpon>RecibosSolicitudInformacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RecibosSolicitudInformacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recibos\AltaAgenda.Designer.vb">
+      <DependentUpon>AltaAgenda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recibos\AltaAgenda.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recibos\SolicitarInformacionCuit.Designer.vb">
+      <DependentUpon>SolicitarInformacionCuit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recibos\SolicitarInformacionCuit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recibos\DatosIB.Designer.vb">
+      <DependentUpon>DatosIB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recibos\DatosIB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recibos\InformacionRetenciones.Designer.vb">
+      <DependentUpon>InformacionRetenciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recibos\InformacionRetenciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\AnalisisDiferenciaCambioOP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnalisisDiferenciaCambioOP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlDeFacturacion.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlDeFacturacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReciboDefinitivoEmailPellital.vb">
+      <DependentUpon>ReciboDefinitivoEmailPellital.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\ListadoBancos.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoBancos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ListadoCtaCtePrvSelectivo.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoCtaCtePrvSelectivo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ListadoCuentasContables.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoCuentasContables.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ProveedoresPorRubro.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProveedoresPorRubro.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\WListadoRecibos.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WListadoRecibos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ListadoResumidoProveedores.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoResumidoProveedores.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ProveedoresSelectivoPreparacionDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProveedoresSelectivoPreparacionDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ProveedoresSelectivoPreparacionListado.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProveedoresSelectivoPreparacionListado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReciboDefinitivoEmail.vb">
+      <DependentUpon>ReciboDefinitivoEmail.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\DepositoBancario2.vb">
+      <DependentUpon>DepositoBancario2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\DepositoBancario.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepositoBancario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\DepositoDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepositoDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteRetIva.vb">
+      <DependentUpon>OrdenPagoComprobanteRetIva.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteIBCABA.vb">
+      <DependentUpon>OrdenPagoComprobanteIBCABA.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\DiscriminacionTercerosDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiscriminacionTercerosDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\InformeIntereses.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InformeIntereses.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\InformeOrdenPago.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InformeOrdenPago.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\InteresesDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InteresesDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteGanancias.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteIB.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteIB.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteIBDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteIBDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoComprobanteRetGanancias.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoComprobanteRetGanancias.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoDetalles.vb">
+      <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\OrdenPagoDiscriminacionTerceros.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdenPagoDiscriminacionTerceros.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReciboDefinitivo.vb">
+      <DependentUpon>ReciboDefinitivo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\DetallesFacturacion.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DetallesFacturacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\DetallesFacturacion.vb">
+      <DependentUpon>DetallesFacturacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ReciboDetalles.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReciboDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ReciboDetalles.vb">
+      <DependentUpon>ReciboDetalles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\VistaPrevia.Designer.vb">
+      <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\VistaPrevia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportViewer.Designer.vb">
+      <DependentUpon>ReportViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RubrosProveedorABM.Designer.vb">
+      <DependentUpon>RubrosProveedorABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosProveedorABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoSaldosCuentaCorrienteProveedores.Designer.vb">
+      <DependentUpon>ListadoSaldosCuentaCorrienteProveedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoSaldosCuentaCorrienteProveedores.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TipoCambioABM.Designer.vb">
+      <DependentUpon>TipoCambioABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TipoCambioABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.vb">
+      <DependentUpon>Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipal.Designer.vb">
+      <DependentUpon>MenuPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Clases\Validator.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AplicacionComprobantes.resx">
+      <DependentUpon>AplicacionComprobantes.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BancosABM.resx">
+      <DependentUpon>BancosABM.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargaIntereses.resx">
+      <DependentUpon>CargaIntereses.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasNovedades\AperturaCompras.resx">
+      <DependentUpon>AperturaCompras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasNovedades\ConsultaNumeroFactura.resx">
+      <DependentUpon>ConsultaNumeroFactura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasNovedades\CuotasPyMENacion.resx">
+      <DependentUpon>CuotasPyMENacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasNovedades\PymeNacion.resx">
+      <DependentUpon>PymeNacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasNovedades\PercIB.resx">
+      <DependentUpon>PercIB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaCheque.resx">
+      <DependentUpon>ConsultaCheque.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaRemitos.resx">
+      <DependentUpon>ConsultaRemitos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetallesRemitosProveedor.resx">
+      <DependentUpon>DetallesRemitosProveedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnvioEmailProveedores.resx">
+      <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ConsultaDatosFactura.resx">
+      <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CtaCtePrvPantallaDetallesCliente.resx">
+      <DependentUpon>CtaCtePrvPantallaDetallesCliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPreparacion.resx">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivoPreparacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoAgenda.resx">
+      <DependentUpon>ListadoAgenda.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoChequesEmitidos.resx">
+      <DependentUpon>ListadoChequesEmitidos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoCuentaCorrienteProveedoresAnalisitico.resx">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresAnalisitico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoCuentaCorrienteProveedoresFecha.resx">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresFecha.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoCuentaCorrienteProveedoresSelectivo.resx">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoDepositos.resx">
+      <DependentUpon>ListadoDepositos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoDeudaPyme.resx">
+      <DependentUpon>ListadoDeudaPyme.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoDiferenciaCambioAcreditacion.resx">
+      <DependentUpon>ListadoDiferenciaCambioAcreditacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoDiferenciaCambioCobranza.resx">
+      <DependentUpon>ListadoDiferenciaCambioCobranza.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoDiferenciaCambioExterior.resx">
+      <DependentUpon>ListadoDiferenciaCambioExterior.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoImputacionesContable.resx">
+      <DependentUpon>ListadoImputacionesContable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoMovimientosBancos.resx">
+      <DependentUpon>ListadoMovimientosBancos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoPagos.resx">
+      <DependentUpon>ListadoPagos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoPagosImportaciones.resx">
+      <DependentUpon>ListadoPagosImportaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoPagosPosdatados.resx">
+      <DependentUpon>ListadoPagosPosdatados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoProyeccionCobrosAnalitico.resx">
+      <DependentUpon>ListadoProyeccionCobrosAnalitico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoRecibos.resx">
+      <DependentUpon>ListadoRecibos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoRecibosProvisorios.resx">
+      <DependentUpon>ListadoRecibosProvisorios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoRetencionIB.resx">
+      <DependentUpon>ListadoRetencionIB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoRetencionIBCiudad.resx">
+      <DependentUpon>ListadoRetencionIBCiudad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoValoresEnCarteraCuit.resx">
+      <DependentUpon>ListadoValoresEnCarteraCuit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModificaIntereses.resx">
+      <DependentUpon>ModificaIntereses.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pagos\CarpetasPagos.resx">
+      <DependentUpon>CarpetasPagos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\CierreMes.resx">
+      <DependentUpon>CierreMes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasNovedades\Compras.resx">
+      <DependentUpon>Compras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasNovedades\ConsultaCompras.resx">
+      <DependentUpon>ConsultaCompras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentaContableABM.resx">
+      <DependentUpon>CuentaContableABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CuentaCorrientePantalla.resx">
+      <DependentUpon>CuentaCorrientePantalla.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoCuentaCorrienteProveedores.resx">
+      <DependentUpon>ListadoCuentaCorrienteProveedores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pagos.resx">
+      <DependentUpon>Pagos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoCiti.resx">
+      <DependentUpon>ProcesoCiti.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoRecuperoIva.resx">
+      <DependentUpon>ProcesoRecuperoIva.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoPercepcionesAduanerasSIAPRE.resx">
+      <DependentUpon>ProcesoPercepcionesAduanerasSIAPRE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoPercepcionesGananciasAduana.resx">
+      <DependentUpon>ProcesoPercepcionesGananciasAduana.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoPercepcionesYRetencionesCiudadNuevo.resx">
+      <DependentUpon>ProcesoPercepcionesYRetencionesCiudadNuevo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoPercepcionesIvaCompras.resx">
+      <DependentUpon>ProcesoPercepcionesIvaCompras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresABM\Contactos.resx">
+      <DependentUpon>Contactos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresABM\CUFEProveedor.resx">
+      <DependentUpon>CUFEProveedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Depositos.resx">
+      <DependentUpon>Depositos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\DepuraCtaCte.resx">
+      <DependentUpon>DepuraCtaCte.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoAsientoResumen.resx">
+      <DependentUpon>ListadoAsientoResumen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoIvaCompras.resx">
+      <DependentUpon>ListadoIvaCompras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoProyeccionCobros.resx">
+      <DependentUpon>ListadoProyeccionCobros.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoSaldosCuentaCorrienteProveedores.resx">
+      <DependentUpon>ListadoSaldosCuentaCorrienteProveedores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoValoresEnCartera.resx">
+      <DependentUpon>ListadoValoresEnCartera.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresABM\ObservacionesProveedor.resx">
+      <DependentUpon>ObservacionesProveedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoPercepciones.resx">
+      <DependentUpon>ProcesoPercepciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoRetencionesPagos.resx">
+      <DependentUpon>ProcesoRetencionesPagos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoReteRecibos.resx">
+      <DependentUpon>ProcesoReteRecibos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procesos\ProcesoSifere.resx">
+      <DependentUpon>ProcesoSifere.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresABM\PedirClaveAutorizacion.resx">
+      <DependentUpon>PedirClaveAutorizacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresABM\ProveedoresABM.resx">
+      <DependentUpon>ProveedoresABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recibos.resx">
+      <DependentUpon>Recibos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecibosProvisorios.resx">
+      <DependentUpon>RecibosProvisorios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecibosSolicitudInformacion.resx">
+      <DependentUpon>RecibosSolicitudInformacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recibos\AltaAgenda.resx">
+      <DependentUpon>AltaAgenda.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recibos\SolicitarInformacionCuit.resx">
+      <DependentUpon>SolicitarInformacionCuit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recibos\DatosIB.resx">
+      <DependentUpon>DatosIB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recibos\InformacionRetenciones.resx">
+      <DependentUpon>InformacionRetenciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\AnalisisDiferenciaCambioOP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AnalisisDiferenciaCambioOP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlDeFacturacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ControlDeFacturacion.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReciboDefinitivoEmailPellital.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReciboDefinitivoEmailPellital.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ListadoBancos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoBancos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ListadoCtaCtePrvSelectivo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoCtaCtePrvSelectivo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ListadoCuentasContables.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoCuentasContables.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ProveedoresPorRubro.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProveedoresPorRubro.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\WListadoRecibos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WListadoRecibos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ListadoResumidoProveedores.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoResumidoProveedores.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ProveedoresSelectivoPreparacionListado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProveedoresSelectivoPreparacionListado.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReciboDefinitivoEmail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReciboDefinitivoEmail.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\DepositoBancario2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepositoBancario2.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\DepositoBancario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepositoBancario.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteRetIva.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteRetIva.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteIBCABA.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteIBCABA.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\InformeIntereses.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InformeIntereses.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\InformeOrdenPago.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InformeOrdenPago.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteIB.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteIB.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoComprobanteRetGanancias.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteRetGanancias.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\OrdenPagoDiscriminacionTerceros.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrdenPagoDiscriminacionTerceros.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReciboDefinitivo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReciboDefinitivo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\VistaPrevia.resx">
+      <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportViewer.resx">
+      <DependentUpon>ReportViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RubrosProveedorABM.resx">
+      <DependentUpon>RubrosProveedorABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TipoCambioABM.resx">
+      <DependentUpon>TipoCambioABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="CrystalDecisions.CrystalReports.Engine">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.ClientDoc">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.CommLayer">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.CommonControls">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.CommonObjectModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.Controllers">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.CubeDefModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.DataDefModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.DataSetConversion">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.ObjectFactory">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.Prompting">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.ReportDefModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.XmlSerialize">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportSource">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.Shared">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.Windows.Forms">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="FlashControlV71">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="log4net">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="ShockwaveFlashObjects">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="stdole">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Reportes\DepositoDetalles.xsc">
+      <DependentUpon>DepositoDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DepositoDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DepositoDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DepositoDetalles.xss">
+      <DependentUpon>DepositoDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DetallesFacturacion.xsc">
+      <DependentUpon>DetallesFacturacion.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DetallesFacturacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DetallesFacturacion.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DetallesFacturacion.xss">
+      <DependentUpon>DetallesFacturacion.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DiscriminacionTercerosDetalles.xsc">
+      <DependentUpon>DiscriminacionTercerosDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DiscriminacionTercerosDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DiscriminacionTercerosDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DiscriminacionTercerosDetalles.xss">
+      <DependentUpon>DiscriminacionTercerosDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\InteresesDetalles.xsc">
+      <DependentUpon>InteresesDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\InteresesDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InteresesDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\InteresesDetalles.xss">
+      <DependentUpon>InteresesDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteGanancias.xsc">
+      <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteGanancias.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteGanancias.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteGanancias.xss">
+      <DependentUpon>OrdenPagoComprobanteGanancias.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteIBDetalles.xsc">
+      <DependentUpon>OrdenPagoComprobanteIBDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteIBDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrdenPagoComprobanteIBDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\OrdenPagoComprobanteIBDetalles.xss">
+      <DependentUpon>OrdenPagoComprobanteIBDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoDetalles.xsc">
+      <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\OrdenPagoDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrdenPagoDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\OrdenPagoDetalles.xss">
+      <DependentUpon>OrdenPagoDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\ProveedoresSelectivoPreparacionDetalles.xsc">
+      <DependentUpon>ProveedoresSelectivoPreparacionDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\ProveedoresSelectivoPreparacionDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProveedoresSelectivoPreparacionDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\ProveedoresSelectivoPreparacionDetalles.xss">
+      <DependentUpon>ProveedoresSelectivoPreparacionDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\ReciboDetalles.xsc">
+      <DependentUpon>ReciboDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\ReciboDetalles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReciboDetalles.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\ReciboDetalles.xss">
+      <DependentUpon>ReciboDetalles.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\Aceptar N2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\actualizar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Consulta Dat N1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Consulta.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eliminar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\etiqueta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exportar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\formulario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Impresora.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imprimir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pantalla.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Salir2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Limpiar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Informe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnteriorRegistro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PrimerRegistro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SiguienteRegistro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UltimoRegistro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Outlook">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enviar_Email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Attachment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screen_preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calculator.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calculator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calculadora.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Desactivar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogoSurfactan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Experimental.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marcadeagua3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marca2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked" if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

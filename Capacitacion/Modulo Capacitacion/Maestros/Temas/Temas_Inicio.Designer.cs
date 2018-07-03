@@ -56,9 +56,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.BTAgregarTema = new System.Windows.Forms.Button();
             this.BTModifTema = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
             this.BT_Eliminar = new System.Windows.Forms.Button();
             this.Bt_Fin = new System.Windows.Forms.Button();
-            this.btnImprimir = new System.Windows.Forms.Button();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -117,6 +119,8 @@
             // 
             // P_Filtrado
             // 
+            this.P_Filtrado.Controls.Add(this.label4);
+            this.P_Filtrado.Controls.Add(this.txtCodigo);
             this.P_Filtrado.Controls.Add(this.label3);
             this.P_Filtrado.Controls.Add(this.TBFiltro);
             this.P_Filtrado.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -131,7 +135,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(90, 18);
+            this.label3.Location = new System.Drawing.Point(356, 19);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 16);
             this.label3.TabIndex = 2;
@@ -139,9 +143,9 @@
             // 
             // TBFiltro
             // 
-            this.TBFiltro.Location = new System.Drawing.Point(148, 16);
+            this.TBFiltro.Location = new System.Drawing.Point(414, 17);
             this.TBFiltro.Name = "TBFiltro";
-            this.TBFiltro.Size = new System.Drawing.Size(646, 20);
+            this.TBFiltro.Size = new System.Drawing.Size(483, 20);
             this.TBFiltro.TabIndex = 1;
             this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
             // 
@@ -152,7 +156,7 @@
             this.DGV_Temas.AllowUserToResizeRows = false;
             this.DGV_Temas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DGV_Temas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.DGV_Temas.ColumnHeadersHeight = 34;
+            this.DGV_Temas.ColumnHeadersHeight = 30;
             this.DGV_Temas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
             this.Descripcion,
@@ -175,6 +179,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.DGV_Temas.RowHeadersWidth = 15;
             this.DGV_Temas.Size = new System.Drawing.Size(985, 413);
             this.DGV_Temas.TabIndex = 6;
             this.DGV_Temas.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Temas_RowHeaderMouseDoubleClick);
@@ -342,6 +347,19 @@
             this.BTModifTema.UseVisualStyleBackColor = true;
             this.BTModifTema.Click += new System.EventHandler(this.BTModifTema_Click);
             // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnImprimir.Location = new System.Drawing.Point(21, 276);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(55, 67);
+            this.btnImprimir.TabIndex = 16;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
             // BT_Eliminar
             // 
             this.BT_Eliminar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.eliminar;
@@ -369,18 +387,25 @@
             this.Bt_Fin.UseVisualStyleBackColor = true;
             this.Bt_Fin.Click += new System.EventHandler(this.Bt_Fin_Click);
             // 
-            // btnImprimir
+            // txtCodigo
             // 
-            this.btnImprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
-            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnImprimir.Location = new System.Drawing.Point(21, 276);
-            this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(55, 67);
-            this.btnImprimir.TabIndex = 16;
-            this.btnImprimir.UseVisualStyleBackColor = true;
-            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            this.txtCodigo.Location = new System.Drawing.Point(241, 17);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(66, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.Control;
+            this.label4.Location = new System.Drawing.Point(183, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 16);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Filtrar:";
             // 
             // Temas_Inicio
             // 
@@ -390,6 +415,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Temas_Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Shown += new System.EventHandler(this.Temas_Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.P_Verde.ResumeLayout(false);
@@ -432,5 +458,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableIV;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnImprimir;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtCodigo;
     }
 }

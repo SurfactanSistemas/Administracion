@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class Form1
 
@@ -26,6 +25,10 @@ Public Class Form1
                 Select Case Val(txtProceso.Text)
                     Case 1
                         _PrepararGeneracionComposicionFormula()
+                    Case 2
+                        _ExportarTicketsSistemas()
+                    Case 3
+                        _ExportarTicketsMantenimiento()
                     Case Else
                         Exit Sub
                 End Select
@@ -40,7 +43,58 @@ Public Class Form1
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 
+        Close()
+
     End Sub
+
+    Private Sub _ExportarTicketsSistemas()
+        Dim WReporte = "listasistemas.rpt"
+        Dim WNombre = "Tickets Sistemas - " & Date.Now.ToString("dd-MM-yyyy")
+        Dim WDestino = ""
+
+        Dim formula = "{ImpreInsumos.Solicitud} IN 0 TO 9999999"
+        Dim report = New ReportViewer("Composición de Fórmula", Configuration.ConfigurationManager.AppSettings("CARPETA_RPTS") & WReporte, formula)
+
+        With SaveFileDialog1
+
+            .FileName = WNombre
+
+            .ShowDialog()
+
+            WDestino = .FileName
+
+            .Dispose()
+
+        End With
+
+        report.ExportarExcel(WNombre, WDestino)
+
+    End Sub
+
+    Private Sub _ExportarTicketsMantenimiento()
+        Dim WReporte = "listamantenimiento.rpt"
+        Dim WNombre = "Tickets Manteniento - " & Date.Now.ToString("dd-MM-yyyy")
+        Dim WDestino = ""
+
+        Dim formula = "{ImpreInsumos.Solicitud} IN 0 TO 9999999"
+        Dim report = New ReportViewer("Composición de Fórmula", Configuration.ConfigurationManager.AppSettings("CARPETA_RPTS") & WReporte, formula)
+
+        With SaveFileDialog1
+
+            .FileName = WNombre
+
+            .ShowDialog()
+
+            WDestino = .FileName
+
+            .Dispose()
+
+        End With
+
+        report.ExportarExcel(WNombre, WDestino)
+
+    End Sub
+
 
     Private Sub _PrepararGeneracionComposicionFormula()
 

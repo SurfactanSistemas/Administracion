@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{40BF87AB-658D-4D23-A50A-3EE890FC78DA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HojaRuta</RootNamespace>
+    <AssemblyName>HojaRuta</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>HojaRuta.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccesoADatos\CamionDAL.cs" />
+    <Compile Include="AccesoADatos\ChoferDAL.cs" />
+    <Compile Include="AccesoADatos\EvaGeneralDAL.cs" />
+    <Compile Include="AccesoADatos\EvalSemestralDAL.cs" />
+    <Compile Include="AccesoADatos\EvaluaVariosDAL.cs" />
+    <Compile Include="AccesoADatos\EvaTransDAL.cs" />
+    <Compile Include="AccesoADatos\HojaRutaDAL.cs" />
+    <Compile Include="AccesoADatos\InformeConsolDAL.cs" />
+    <Compile Include="AccesoADatos\Properties\AssemblyInfo.cs" />
+    <Compile Include="AccesoADatos\ProveedorDAL.cs" />
+    <Compile Include="AccesoADatos\TipoProveedorDAL.cs" />
+    <Compile Include="Auxiliares\CheckListExportacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\CheckListExportacion.Designer.cs">
+      <DependentUpon>CheckListExportacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\ConsultaAyuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\ConsultaAyuda.Designer.cs">
+      <DependentUpon>ConsultaAyuda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\atrasoExpedicion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\atrasoExpedicion.Designer.cs">
+      <DependentUpon>atrasoExpedicion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\ListaPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\ListaPedidos.Designer.cs">
+      <DependentUpon>ListaPedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio.designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\VencimientoCamiones\DSCamionVenc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCamionVenc.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\VencimientoCamiones\ImpreVencCamion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\VencimientoCamiones\ImpreVencCamion.designer.cs">
+      <DependentUpon>ImpreVencCamion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\VencimientoCamiones\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\VencimientoCamiones\Inicio.designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\VencimientoCamiones\ReportVencCamion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportVencCamion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\VencimientoChoferes\DSChoferVenc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSChoferVenc.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\VencimientoChoferes\ImpreVencChofer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\VencimientoChoferes\ImpreVencChofer.designer.cs">
+      <DependentUpon>ImpreVencChofer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\VencimientoChoferes\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\VencimientoChoferes\Inicio.designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\VencimientoChoferes\ReportVencChofer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportVencChofer.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Logica-Negocio\CamionBOL.cs" />
+    <Compile Include="Logica-Negocio\CheckListBOL.cs" />
+    <Compile Include="Logica-Negocio\CheckListExpoBOL.cs" />
+    <Compile Include="Logica-Negocio\ChoferBOL.cs" />
+    <Compile Include="Logica-Negocio\EvaGeneralBOL.cs" />
+    <Compile Include="Logica-Negocio\EvalSemestralBOL.cs" />
+    <Compile Include="Logica-Negocio\EvaTransBOL.cs" />
+    <Compile Include="Logica-Negocio\EvaVariosBOL.cs" />
+    <Compile Include="Logica-Negocio\InformeConsolBOL.cs" />
+    <Compile Include="Logica-Negocio\Properties\AssemblyInfo.cs" />
+    <Compile Include="Logica-Negocio\ProveedorBOL.cs" />
+    <Compile Include="Logica-Negocio\TipoProveedorBOL.cs" />
+    <Compile Include="Maestros\IngCamiones\AgModCamiones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\IngCamiones\AgModCamiones.Designer.cs">
+      <DependentUpon>AgModCamiones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\IngCamiones\DSCamion.Designer.cs" />
+    <Compile Include="Maestros\IngCamiones\ImpreCamion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\IngCamiones\ImpreCamion.Designer.cs">
+      <DependentUpon>ImpreCamion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\IngCamiones\InicioCamiones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\IngCamiones\InicioCamiones.Designer.cs">
+      <DependentUpon>InicioCamiones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\IngCamiones\ReportCamion1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportCamion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Maestros\IngChoferes\AgModifChofer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\IngChoferes\AgModifChofer.Designer.cs">
+      <DependentUpon>AgModifChofer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\IngChoferes\DSChofer.Designer.cs" />
+    <Compile Include="Maestros\IngChoferes\ImpreChofer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\IngChoferes\ImpreChofer.Designer.cs">
+      <DependentUpon>ImpreChofer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\IngChoferes\inicioChoferes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\IngChoferes\inicioChoferes.Designer.cs">
+      <DependentUpon>inicioChoferes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\IngChoferes\ReportChofer1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportChofer.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Negocio\Camion.cs" />
+    <Compile Include="Negocio\CheckListExpo.cs" />
+    <Compile Include="Negocio\Chofer.cs" />
+    <Compile Include="Negocio\EvaluaGen.cs" />
+    <Compile Include="Negocio\EvaluaTransp.cs" />
+    <Compile Include="Negocio\EvaluaVarios.cs" />
+    <Compile Include="Negocio\InformeConsol.cs" />
+    <Compile Include="Negocio\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="Negocio\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="Negocio\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Negocio\Properties\AssemblyInfo.cs" />
+    <Compile Include="Negocio\Proveedor.cs" />
+    <Compile Include="Novedades\ConsultaHojaRutaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\ConsultaHojaRutaCliente.Designer.cs">
+      <DependentUpon>ConsultaHojaRutaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\ConsultaHojaRutaCot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\ConsultaHojaRutaCot.Designer.cs">
+      <DependentUpon>ConsultaHojaRutaCot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\HojaRuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\HojaRuta.Designer.cs">
+      <DependentUpon>HojaRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\hojarutanuevo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>hojarutanuevo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\VistaPrevia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\VistaPrevia.designer.cs">
+      <DependentUpon>VistaPrevia.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Auxiliares\CheckListExportacion.resx">
+      <DependentUpon>CheckListExportacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\ConsultaAyuda.resx">
+      <DependentUpon>ConsultaAyuda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\atrasoExpedicion.resx">
+      <DependentUpon>atrasoExpedicion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\ListaPedidos.resx">
+      <DependentUpon>ListaPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\VencimientoCamiones\ImpreVencCamion.resx">
+      <DependentUpon>ImpreVencCamion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\VencimientoCamiones\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\VencimientoCamiones\ReportVencCamion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportVencCamion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\VencimientoChoferes\ImpreVencChofer.resx">
+      <DependentUpon>ImpreVencChofer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\VencimientoChoferes\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\VencimientoChoferes\ReportVencChofer.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportVencChofer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\IngCamiones\AgModCamiones.resx">
+      <DependentUpon>AgModCamiones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\IngCamiones\ImpreCamion.resx">
+      <DependentUpon>ImpreCamion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\IngCamiones\InicioCamiones.resx">
+      <DependentUpon>InicioCamiones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\IngCamiones\ReportCamion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportCamion1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\IngChoferes\AgModifChofer.resx">
+      <DependentUpon>AgModifChofer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\IngChoferes\ImpreChofer.resx">
+      <DependentUpon>ImpreChofer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\IngChoferes\inicioChoferes.resx">
+      <DependentUpon>inicioChoferes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\IngChoferes\ReportChofer.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportChofer1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\ConsultaHojaRutaCliente.resx">
+      <DependentUpon>ConsultaHojaRutaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\ConsultaHojaRutaCot.resx">
+      <DependentUpon>ConsultaHojaRutaCot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\HojaRuta.resx">
+      <DependentUpon>HojaRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Reportes\hojarutanuevo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>hojarutanuevo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\VistaPrevia.resx">
+      <DependentUpon>VistaPrevia.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="AccesoADatos\App.config" />
+    <None Include="AccesoADatos\obj\Debug\AccesoADatos.csproj.CopyComplete" />
+    <None Include="AccesoADatos\obj\Debug\AccesoADatos.csproj.CoreCompileInputs.cache" />
+    <None Include="AccesoADatos\obj\Debug\AccesoADatos.csprojAssemblyReference.cache" />
+    <None Include="AccesoADatos\obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="AccesoADatos\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="AccesoADatos\obj\Release\build.force" />
+    <None Include="AccesoADatos\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="AccesoADatos\Properties\DataSources\Negocio.Camion.datasource" />
+    <None Include="App.config" />
+    <None Include="Listados\VencimientoCamiones\DSCamionVenc.xsc">
+      <DependentUpon>DSCamionVenc.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\VencimientoCamiones\DSCamionVenc.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCamionVenc.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Listados\VencimientoCamiones\DSCamionVenc.xss">
+      <DependentUpon>DSCamionVenc.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\VencimientoChoferes\DSChoferVenc.xsc">
+      <DependentUpon>DSChoferVenc.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\VencimientoChoferes\DSChoferVenc.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSChoferVenc.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Listados\VencimientoChoferes\DSChoferVenc.xss">
+      <DependentUpon>DSChoferVenc.xsd</DependentUpon>
+    </None>
+    <None Include="Logica-Negocio\obj\Debug\build.force" />
+    <None Include="Logica-Negocio\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Logica-Negocio\obj\Debug\Logica-Negocio.csproj.CopyComplete" />
+    <None Include="Logica-Negocio\obj\Debug\Logica-Negocio.csproj.CoreCompileInputs.cache" />
+    <None Include="Logica-Negocio\obj\Debug\Logica-Negocio.csprojAssemblyReference.cache" />
+    <None Include="Logica-Negocio\obj\Debug\Logica-Negocio.csprojResolveAssemblyReference.cache" />
+    <None Include="Logica-Negocio\obj\Release\build.force" />
+    <None Include="Logica-Negocio\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Maestros\IngCamiones\DSCamion.xsc">
+      <DependentUpon>DSCamion.xsd</DependentUpon>
+    </None>
+    <None Include="Maestros\IngCamiones\DSCamion.xsd" />
+    <None Include="Maestros\IngCamiones\DSCamion.xss">
+      <DependentUpon>DSCamion.xsd</DependentUpon>
+    </None>
+    <None Include="Maestros\IngChoferes\DSChofer.xsc">
+      <DependentUpon>DSChofer.xsd</DependentUpon>
+    </None>
+    <None Include="Maestros\IngChoferes\DSChofer.xsd" />
+    <None Include="Maestros\IngChoferes\DSChofer.xss">
+      <DependentUpon>DSChofer.xsd</DependentUpon>
+    </None>
+    <None Include="Negocio\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache" />
+    <None Include="Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache" />
+    <None Include="Negocio\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AccesoADatos\AccesoADatos.csproj" />
+    <Content Include="AccesoADatos\bin\Debug\AccesoADatos.dll" />
+    <Content Include="AccesoADatos\bin\Debug\AccesoADatos.pdb" />
+    <Content Include="AccesoADatos\bin\Debug\Negocio.dll" />
+    <Content Include="AccesoADatos\bin\Debug\Negocio.pdb" />
+    <Content Include="AccesoADatos\obj\Debug\AccesoADatos.csproj.FileListAbsolute.txt" />
+    <Content Include="AccesoADatos\obj\Debug\AccesoADatos.dll" />
+    <Content Include="AccesoADatos\obj\Debug\AccesoADatos.pdb" />
+    <Content Include="Logica-Negocio\bin\Debug\AccesoADatos.dll" />
+    <Content Include="Logica-Negocio\bin\Debug\AccesoADatos.pdb" />
+    <Content Include="Logica-Negocio\bin\Debug\Logica-Negocio.dll" />
+    <Content Include="Logica-Negocio\bin\Debug\Logica-Negocio.pdb" />
+    <Content Include="Logica-Negocio\bin\Debug\Negocio.dll" />
+    <Content Include="Logica-Negocio\bin\Debug\Negocio.pdb" />
+    <Content Include="Logica-Negocio\Logica-Negocio.csproj" />
+    <Content Include="Logica-Negocio\obj\Debug\Logica-Negocio.csproj.FileListAbsolute.txt" />
+    <Content Include="Logica-Negocio\obj\Debug\Logica-Negocio.dll" />
+    <Content Include="Logica-Negocio\obj\Debug\Logica-Negocio.pdb" />
+    <Content Include="Negocio\bin\Debug\Negocio.dll" />
+    <Content Include="Negocio\bin\Debug\Negocio.pdb" />
+    <Content Include="Negocio\Negocio.csproj" />
+    <Content Include="Negocio\Negocio.csproj.user" />
+    <Content Include="Negocio\obj\Debug\Negocio.csproj.FileListAbsolute.txt" />
+    <Content Include="Negocio\obj\Debug\Negocio.dll" />
+    <Content Include="Negocio\obj\Debug\Negocio.pdb" />
+    <Content Include="Resources\Aceptar N2.png" />
+    <Content Include="Resources\buscar.png" />
+    <Content Include="Resources\Calificar.png" />
+    <Content Include="Resources\choferes agregar.png" />
+    <Content Include="Resources\choferes modificar.png" />
+    <Content Include="Resources\eliminar.png" />
+    <Content Include="Resources\Fin2.png" />
+    <Content Include="Resources\Fin21.png" />
+    <Content Include="Resources\Grabar.png" />
+    <Content Include="Resources\Imprimir.png" />
+    <Content Include="Resources\INHABILITAR.png" />
+    <Content Include="Resources\INHABILITAR2.png" />
+    <Content Include="Resources\LimpiarPant.png" />
+    <Content Include="Resources\LimpiarPant1.png" />
+    <Content Include="Resources\LogoPellital.jpg" />
+    <Content Include="Resources\LogoSurfactan.jpg" />
+    <Content Include="Resources\marca100.jpg" />
+    <Content Include="Resources\marca2.jpg" />
+    <Content Include="Resources\marcadeagua.jpg" />
+    <Content Include="Resources\marcadeagua2.jpg" />
+    <Content Include="Resources\Modificar1.png" />
+    <Content Include="Resources\Screen_preview.png" />
+    <Content Include="Resources\UNO MAS2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AccesoADatos\bin\Release\" />
+    <Folder Include="AccesoADatos\obj\Debug\TempPE\" />
+    <Folder Include="AccesoADatos\obj\Release\TempPE\" />
+    <Folder Include="Logica-Negocio\bin\Release\" />
+    <Folder Include="Logica-Negocio\obj\Debug\TempPE\" />
+    <Folder Include="Logica-Negocio\obj\Release\TempPE\" />
+    <Folder Include="Negocio\bin\Release\" />
+    <Folder Include="Negocio\obj\Debug\TempPE\" />
+    <Folder Include="Negocio\obj\Release\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

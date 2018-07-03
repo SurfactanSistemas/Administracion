@@ -23,6 +23,7 @@ namespace Eval_Proveedores.Novedades
         IniEvaSemActProve frm = new IniEvaSemActProve();
         private int WTipoImpresion = 1;
         bool WImprimiendo;
+        private string WEvaluador = "";
 
         public ActSemProv()
         {
@@ -206,49 +207,55 @@ namespace Eval_Proveedores.Novedades
             {
                 string WProveedor = "", WFechaCategoria = "", WFechaCategoriaOrd = "", WCategoriaI ="", WCategoriaII = "", WTemp ="";
 
-                using (SqlConnection conn = new SqlConnection())
+                if (WEvaluador.Trim() == "") WEvaluador = "0";
+
+                foreach (string WEmpresa in new[] { "SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII" })
                 {
-                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
-                    conn.Open();
-                    trans = conn.BeginTransaction();
-
-                    using (SqlCommand cmd = new SqlCommand())
+                    using (SqlConnection conn = new SqlConnection())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandText = "";
-                        cmd.Transaction = trans;
+                        conn.ConnectionString = ConfigurationManager.ConnectionStrings[WEmpresa].ConnectionString;
+                        conn.Open();
+                        trans = conn.BeginTransaction();
 
-                        foreach (DataGridViewRow WRow in DGV_EvalSemProve.Rows)
+                        using (SqlCommand cmd = new SqlCommand())
                         {
-                            WProveedor = WRow.Cells["Proveedor"].Value.ToString();
-                            WTemp = WRow.Cells["EvaCal"].Value.ToString();
-                            WCategoriaI = _TraerCalidad(WTemp);
-                            WTemp = WRow.Cells["EvaEnt"].Value.ToString();
-                            WCategoriaII = _TraerEnt(WTemp);
+                            cmd.Connection = conn;
+                            cmd.CommandText = "";
+                            cmd.Transaction = trans;
 
-                            if (_DatosActualizados(WRow, WCategoriaI, WCategoriaII))
+                            foreach (DataGridViewRow WRow in DGV_EvalSemProve.Rows)
                             {
-                                WFechaCategoria = DateTime.Now.ToString("dd/MM/yyyy");
-                                WFechaCategoriaOrd = Helper.OrdenarFecha(WFechaCategoria);
+                                WProveedor = WRow.Cells["Proveedor"].Value.ToString();
+                                WTemp = WRow.Cells["EvaCal"].Value.ToString();
+                                WCategoriaI = _TraerCalidad(WTemp);
+                                WTemp = WRow.Cells["EvaEnt"].Value.ToString();
+                                WCategoriaII = _TraerEnt(WTemp);
 
-                                cmd.CommandText = "UPDATE Proveedor SET FechaCategoria = '" + WFechaCategoria + "', "
-                                                + " OrdFechaCategoria = '" + WFechaCategoriaOrd + "', "
-                                                + " CategoriaI = '" + WCategoriaI + "', "
-                                                + " CategoriaII = '" + WCategoriaII + "' "
-                                                + " WHERE Proveedor  = '" + WProveedor + "'";
+                                if (_DatosActualizados(WRow, WCategoriaI, WCategoriaII))
+                                {
+                                    WFechaCategoria = DateTime.Now.ToString("dd/MM/yyyy");
+                                    WFechaCategoriaOrd = Helper.OrdenarFecha(WFechaCategoria);
 
-                                cmd.ExecuteNonQuery();
-                            }    
+                                    cmd.CommandText = "UPDATE Proveedor SET FechaCategoria = '" + WFechaCategoria + "', "
+                                                    + " OrdFechaCategoria = '" + WFechaCategoriaOrd + "', "
+                                                    + " CategoriaI = '" + WCategoriaI + "', "
+                                                    + " CategoriaII = '" + WCategoriaII + "', "
+                                                    + " Evaluador = " + WEvaluador + " "
+                                                    + " WHERE Proveedor  = '" + WProveedor + "'";
 
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                            }
+
+                            trans.Commit();
                         }
 
-                        trans.Commit();
-
-                        MessageBox.Show("La evaluación se agregó con éxito", "Agregar Evaluación",
-                        MessageBoxButtons.OK, MessageBoxIcon.None);
                     }
-
                 }
+
+                MessageBox.Show("La evaluación se agregó con éxito", "Agregar Evaluación",
+                MessageBoxButtons.OK, MessageBoxIcon.None);
             }
             catch (Exception ex)
             {
@@ -463,16 +470,55 @@ namespace Eval_Proveedores.Novedades
 	        if (e.KeyData == Keys.Enter){
 	        	if (txtClave.Text.Trim() == "") return;
 
-	            if (txtClave.Text.ToUpper() != "EVALUA") return;
+	            if (!_Clave_Valida(txtClave.Text)) return;
 
 	            button3.PerformClick();
 
-	            BT_Guardar.PerformClick();
+	            BT_Guardar_Click(null, null);
 
 	        }else if (e.KeyData == Keys.Escape){
 	        	txtClave.Text = "";
 	        }
 	        
+        }
+
+        private bool _Clave_Valida(string WClave)
+        {
+            bool WClaveCalida = false;
+            WEvaluador = "";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT Operador FROM Operador WHERE UPPER(Clave) = '" + WClave.Trim().ToUpper() + "' AND EvalProveedores = 'S'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+                                WClaveCalida = true;
+                                WEvaluador = dr["Operador"].ToString();
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al corroborar la clave indicada en la Base de Datos. Motivo: " + ex.Message);
+            }
+
+            return WClaveCalida;
+
         }
 
         private void ckIncluirSinMovimientos_CheckedChanged(object sender, EventArgs e)

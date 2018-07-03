@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,23 +47,25 @@
             this.codigoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.perfilBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DGV_Perfiles = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnImprimir = new System.Windows.Forms.Button();
-            this.perfilBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.perfilBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
             this.CMS_Perfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.temasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Perfiles)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,6 +119,8 @@
             // 
             // P_Filtrado
             // 
+            this.P_Filtrado.Controls.Add(this.txtCodigo);
+            this.P_Filtrado.Controls.Add(this.label3);
             this.P_Filtrado.Controls.Add(this.TBFiltro);
             this.P_Filtrado.Controls.Add(this.LBFiltro);
             this.P_Filtrado.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -128,9 +132,9 @@
             // 
             // TBFiltro
             // 
-            this.TBFiltro.Location = new System.Drawing.Point(129, 17);
+            this.TBFiltro.Location = new System.Drawing.Point(289, 17);
             this.TBFiltro.Name = "TBFiltro";
-            this.TBFiltro.Size = new System.Drawing.Size(642, 20);
+            this.TBFiltro.Size = new System.Drawing.Size(424, 20);
             this.TBFiltro.TabIndex = 1;
             this.TBFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
             this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
@@ -140,7 +144,7 @@
             this.LBFiltro.AutoSize = true;
             this.LBFiltro.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBFiltro.ForeColor = System.Drawing.Color.White;
-            this.LBFiltro.Location = new System.Drawing.Point(74, 19);
+            this.LBFiltro.Location = new System.Drawing.Point(234, 18);
             this.LBFiltro.Name = "LBFiltro";
             this.LBFiltro.Size = new System.Drawing.Size(49, 18);
             this.LBFiltro.TabIndex = 0;
@@ -239,6 +243,10 @@
             this.temasBindingSource.DataMember = "Temas";
             this.temasBindingSource.DataSource = this.perfilBindingSource;
             // 
+            // perfilBindingSource
+            // 
+            this.perfilBindingSource.DataSource = typeof(Negocio.Perfil);
+            // 
             // DGV_Perfiles
             // 
             this.DGV_Perfiles.AllowUserToAddRows = false;
@@ -251,13 +259,13 @@
             this.DGV_Perfiles.Location = new System.Drawing.Point(72, 0);
             this.DGV_Perfiles.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Perfiles.Name = "DGV_Perfiles";
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Perfiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Perfiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Perfiles.Size = new System.Drawing.Size(827, 441);
             this.DGV_Perfiles.TabIndex = 19;
             this.DGV_Perfiles.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
@@ -324,13 +332,29 @@
             this.btnImprimir.UseVisualStyleBackColor = true;
             this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
-            // perfilBindingSource
-            // 
-            this.perfilBindingSource.DataSource = typeof(Negocio.Perfil);
-            // 
             // perfilBindingSource1
             // 
             this.perfilBindingSource1.DataSource = typeof(Negocio.Perfil);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(79, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 18);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Código:";
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(137, 17);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(73, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
             // 
             // Perfiles_Inicio
             // 
@@ -349,11 +373,11 @@
             this.P_Filtrado.PerformLayout();
             this.CMS_Perfil.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.temasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Perfiles)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -385,5 +409,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnImprimir;
+        private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.Label label3;
     }
 }

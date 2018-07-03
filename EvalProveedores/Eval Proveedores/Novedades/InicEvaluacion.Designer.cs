@@ -29,37 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P_Verde = new System.Windows.Forms.Panel();
+            this.ckSoloUltimas = new System.Windows.Forms.CheckBox();
             this.PProve = new System.Windows.Forms.Panel();
             this.BT_Filtrar2 = new System.Windows.Forms.Button();
             this.TB_Filtro2 = new System.Windows.Forms.TextBox();
             this.LB_Prove = new System.Windows.Forms.Label();
             this.P_Filtrado = new System.Windows.Forms.Panel();
             this.BT_Filtrar = new System.Windows.Forms.Button();
+            this.TBFiltroAno = new System.Windows.Forms.TextBox();
             this.TBFiltroMes = new System.Windows.Forms.TextBox();
             this.LBFiltro = new System.Windows.Forms.Label();
             this.BT_MenuFiltros = new System.Windows.Forms.Button();
             this.CB_Tipo = new System.Windows.Forms.ComboBox();
             this.DGV_Evaluaciones = new System.Windows.Forms.DataGridView();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.Bt_Fin = new System.Windows.Forms.Button();
-            this.BT_Eliminar = new System.Windows.Forms.Button();
-            this.BTModifEvaluacion = new System.Windows.Forms.Button();
-            this.BTAgregarEvaluacion = new System.Windows.Forms.Button();
-            this.CMS_Filtros = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.nombreProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.periodoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ckSoloUltimas = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.evaluaGenBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.TBFiltroAno = new System.Windows.Forms.TextBox();
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,16 +59,31 @@
             this.Mes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PromedioTot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ano = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.evaluaGenBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.Bt_Fin = new System.Windows.Forms.Button();
+            this.BT_Eliminar = new System.Windows.Forms.Button();
+            this.BTModifEvaluacion = new System.Windows.Forms.Button();
+            this.BTAgregarEvaluacion = new System.Windows.Forms.Button();
+            this.CMS_Filtros = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.nombreProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.periodoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.PProve.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Evaluaciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.evaluaGenBindingSource)).BeginInit();
             this.CMS_Filtros.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.evaluaGenBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -122,7 +124,9 @@
             // 
             this.P_Verde.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.P_Verde.Controls.Add(this.ckSoloUltimas);
+            this.P_Verde.Controls.Add(this.txtCodigo);
             this.P_Verde.Controls.Add(this.PProve);
+            this.P_Verde.Controls.Add(this.label3);
             this.P_Verde.Controls.Add(this.P_Filtrado);
             this.P_Verde.Controls.Add(this.BT_MenuFiltros);
             this.P_Verde.Controls.Add(this.CB_Tipo);
@@ -133,12 +137,26 @@
             this.P_Verde.Size = new System.Drawing.Size(858, 62);
             this.P_Verde.TabIndex = 4;
             // 
+            // ckSoloUltimas
+            // 
+            this.ckSoloUltimas.Checked = true;
+            this.ckSoloUltimas.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckSoloUltimas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckSoloUltimas.ForeColor = System.Drawing.SystemColors.Control;
+            this.ckSoloUltimas.Location = new System.Drawing.Point(712, 14);
+            this.ckSoloUltimas.Name = "ckSoloUltimas";
+            this.ckSoloUltimas.Size = new System.Drawing.Size(96, 34);
+            this.ckSoloUltimas.TabIndex = 14;
+            this.ckSoloUltimas.Text = "Sólo Ultimas";
+            this.ckSoloUltimas.UseVisualStyleBackColor = true;
+            this.ckSoloUltimas.CheckedChanged += new System.EventHandler(this.ckSoloUltimas_CheckedChanged);
+            // 
             // PProve
             // 
             this.PProve.Controls.Add(this.BT_Filtrar2);
             this.PProve.Controls.Add(this.TB_Filtro2);
             this.PProve.Controls.Add(this.LB_Prove);
-            this.PProve.Location = new System.Drawing.Point(203, 5);
+            this.PProve.Location = new System.Drawing.Point(372, 5);
             this.PProve.Name = "PProve";
             this.PProve.Size = new System.Drawing.Size(322, 52);
             this.PProve.TabIndex = 2;
@@ -180,7 +198,7 @@
             this.P_Filtrado.Controls.Add(this.TBFiltroAno);
             this.P_Filtrado.Controls.Add(this.TBFiltroMes);
             this.P_Filtrado.Controls.Add(this.LBFiltro);
-            this.P_Filtrado.Location = new System.Drawing.Point(203, 5);
+            this.P_Filtrado.Location = new System.Drawing.Point(372, 5);
             this.P_Filtrado.Name = "P_Filtrado";
             this.P_Filtrado.Size = new System.Drawing.Size(322, 52);
             this.P_Filtrado.TabIndex = 1;
@@ -195,6 +213,16 @@
             this.BT_Filtrar.Text = "Filtrar";
             this.BT_Filtrar.UseVisualStyleBackColor = true;
             this.BT_Filtrar.Click += new System.EventHandler(this.BT_Filtrar_Click);
+            // 
+            // TBFiltroAno
+            // 
+            this.TBFiltroAno.Location = new System.Drawing.Point(172, 16);
+            this.TBFiltroAno.MaxLength = 4;
+            this.TBFiltroAno.Name = "TBFiltroAno";
+            this.TBFiltroAno.Size = new System.Drawing.Size(55, 20);
+            this.TBFiltroAno.TabIndex = 1;
+            this.TBFiltroAno.TextChanged += new System.EventHandler(this.TBFiltro_TextChanged);
+            this.TBFiltroAno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
             // 
             // TBFiltroMes
             // 
@@ -219,7 +247,7 @@
             // 
             // BT_MenuFiltros
             // 
-            this.BT_MenuFiltros.Location = new System.Drawing.Point(107, 20);
+            this.BT_MenuFiltros.Location = new System.Drawing.Point(276, 20);
             this.BT_MenuFiltros.Name = "BT_MenuFiltros";
             this.BT_MenuFiltros.Size = new System.Drawing.Size(75, 23);
             this.BT_MenuFiltros.TabIndex = 0;
@@ -235,7 +263,7 @@
             "CALIBRACION",
             "MANTENIMIENTO",
             "OTROS"});
-            this.CB_Tipo.Location = new System.Drawing.Point(297, 21);
+            this.CB_Tipo.Location = new System.Drawing.Point(466, 21);
             this.CB_Tipo.Name = "CB_Tipo";
             this.CB_Tipo.Size = new System.Drawing.Size(190, 21);
             this.CB_Tipo.TabIndex = 3;
@@ -267,16 +295,101 @@
             this.DGV_Evaluaciones.Location = new System.Drawing.Point(101, 0);
             this.DGV_Evaluaciones.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Evaluaciones.Name = "DGV_Evaluaciones";
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Evaluaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Evaluaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Evaluaciones.Size = new System.Drawing.Size(757, 351);
             this.DGV_Evaluaciones.TabIndex = 5;
             this.DGV_Evaluaciones.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Evaluaciones_RowHeaderMouseDoubleClick);
+            // 
+            // Clave
+            // 
+            this.Clave.DataPropertyName = "Clave";
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.Visible = false;
+            // 
+            // Proveedor
+            // 
+            this.Proveedor.DataPropertyName = "Proveedor";
+            this.Proveedor.HeaderText = "Proveedor";
+            this.Proveedor.Name = "Proveedor";
+            // 
+            // NombProve
+            // 
+            this.NombProve.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NombProve.DataPropertyName = "NombProve";
+            this.NombProve.HeaderText = "Nombre Proveedor";
+            this.NombProve.Name = "NombProve";
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            this.Estado.HeaderText = "Estado Proveedor";
+            this.Estado.Name = "Estado";
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo";
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.Visible = false;
+            this.Tipo.Width = 50;
+            // 
+            // DescTipo
+            // 
+            this.DescTipo.DataPropertyName = "DescTipo";
+            this.DescTipo.HeaderText = "Tipo";
+            this.DescTipo.Name = "DescTipo";
+            // 
+            // periodoDataGridViewTextBoxColumn
+            // 
+            this.periodoDataGridViewTextBoxColumn.DataPropertyName = "Periodo";
+            this.periodoDataGridViewTextBoxColumn.HeaderText = "Periodo";
+            this.periodoDataGridViewTextBoxColumn.Name = "periodoDataGridViewTextBoxColumn";
+            this.periodoDataGridViewTextBoxColumn.Visible = false;
+            this.periodoDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // DescPer
+            // 
+            this.DescPer.DataPropertyName = "DescFecha";
+            this.DescPer.HeaderText = "Periodo";
+            this.DescPer.Name = "DescPer";
+            // 
+            // Observ
+            // 
+            this.Observ.DataPropertyName = "Observaciones";
+            this.Observ.HeaderText = "Observaciones";
+            this.Observ.Name = "Observ";
+            this.Observ.Width = 200;
+            // 
+            // Mes
+            // 
+            this.Mes.DataPropertyName = "Mes";
+            this.Mes.HeaderText = "Mes";
+            this.Mes.Name = "Mes";
+            this.Mes.Visible = false;
+            // 
+            // PromedioTot
+            // 
+            this.PromedioTot.DataPropertyName = "Promedio";
+            this.PromedioTot.HeaderText = "PromedioTot";
+            this.PromedioTot.Name = "PromedioTot";
+            // 
+            // Ano
+            // 
+            this.Ano.DataPropertyName = "Año";
+            this.Ano.HeaderText = "Año";
+            this.Ano.Name = "Ano";
+            this.Ano.Visible = false;
+            // 
+            // evaluaGenBindingSource
+            // 
+            this.evaluaGenBindingSource.DataSource = typeof(Negocio.EvaluaGen);
             // 
             // Bt_Fin
             // 
@@ -366,20 +479,6 @@
             this.periodoToolStripMenuItem.Text = "Periodo";
             this.periodoToolStripMenuItem.Click += new System.EventHandler(this.periodoToolStripMenuItem_Click);
             // 
-            // ckSoloUltimas
-            // 
-            this.ckSoloUltimas.Checked = true;
-            this.ckSoloUltimas.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckSoloUltimas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckSoloUltimas.ForeColor = System.Drawing.SystemColors.Control;
-            this.ckSoloUltimas.Location = new System.Drawing.Point(543, 14);
-            this.ckSoloUltimas.Name = "ckSoloUltimas";
-            this.ckSoloUltimas.Size = new System.Drawing.Size(96, 34);
-            this.ckSoloUltimas.TabIndex = 14;
-            this.ckSoloUltimas.Text = "Sólo Ultimas";
-            this.ckSoloUltimas.UseVisualStyleBackColor = true;
-            this.ckSoloUltimas.CheckedChanged += new System.EventHandler(this.ckSoloUltimas_CheckedChanged);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -427,100 +526,26 @@
             this.panel2.Size = new System.Drawing.Size(95, 345);
             this.panel2.TabIndex = 0;
             // 
-            // evaluaGenBindingSource
+            // label3
             // 
-            this.evaluaGenBindingSource.DataSource = typeof(Negocio.EvaluaGen);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(80, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 18);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Código:";
             // 
-            // TBFiltroAno
+            // txtCodigo
             // 
-            this.TBFiltroAno.Location = new System.Drawing.Point(172, 16);
-            this.TBFiltroAno.MaxLength = 4;
-            this.TBFiltroAno.Name = "TBFiltroAno";
-            this.TBFiltroAno.Size = new System.Drawing.Size(55, 20);
-            this.TBFiltroAno.TabIndex = 1;
-            this.TBFiltroAno.TextChanged += new System.EventHandler(this.TBFiltro_TextChanged);
-            this.TBFiltroAno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
-            // 
-            // Clave
-            // 
-            this.Clave.DataPropertyName = "Clave";
-            this.Clave.HeaderText = "Clave";
-            this.Clave.Name = "Clave";
-            this.Clave.Visible = false;
-            // 
-            // Proveedor
-            // 
-            this.Proveedor.DataPropertyName = "Proveedor";
-            this.Proveedor.HeaderText = "Proveedor";
-            this.Proveedor.Name = "Proveedor";
-            // 
-            // NombProve
-            // 
-            this.NombProve.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NombProve.DataPropertyName = "NombProve";
-            this.NombProve.HeaderText = "Nombre Proveedor";
-            this.NombProve.Name = "NombProve";
-            // 
-            // Estado
-            // 
-            this.Estado.DataPropertyName = "Estado";
-            this.Estado.HeaderText = "Estado Proveedor";
-            this.Estado.Name = "Estado";
-            // 
-            // Tipo
-            // 
-            this.Tipo.DataPropertyName = "Tipo";
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.Visible = false;
-            this.Tipo.Width = 50;
-            // 
-            // DescTipo
-            // 
-            this.DescTipo.DataPropertyName = "DescTipo";
-            this.DescTipo.HeaderText = "Tipo";
-            this.DescTipo.Name = "DescTipo";
-            // 
-            // periodoDataGridViewTextBoxColumn
-            // 
-            this.periodoDataGridViewTextBoxColumn.DataPropertyName = "Periodo";
-            this.periodoDataGridViewTextBoxColumn.HeaderText = "Periodo";
-            this.periodoDataGridViewTextBoxColumn.Name = "periodoDataGridViewTextBoxColumn";
-            this.periodoDataGridViewTextBoxColumn.Visible = false;
-            this.periodoDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // DescPer
-            // 
-            this.DescPer.DataPropertyName = "DescFecha";
-            this.DescPer.HeaderText = "Periodo";
-            this.DescPer.Name = "DescPer";
-            // 
-            // Observ
-            // 
-            this.Observ.DataPropertyName = "Observaciones";
-            this.Observ.HeaderText = "Observaciones";
-            this.Observ.Name = "Observ";
-            this.Observ.Width = 200;
-            // 
-            // Mes
-            // 
-            this.Mes.DataPropertyName = "Mes";
-            this.Mes.HeaderText = "Mes";
-            this.Mes.Name = "Mes";
-            this.Mes.Visible = false;
-            // 
-            // PromedioTot
-            // 
-            this.PromedioTot.DataPropertyName = "Promedio";
-            this.PromedioTot.HeaderText = "PromedioTot";
-            this.PromedioTot.Name = "PromedioTot";
-            // 
-            // Ano
-            // 
-            this.Ano.DataPropertyName = "Año";
-            this.Ano.HeaderText = "Año";
-            this.Ano.Name = "Ano";
-            this.Ano.Visible = false;
+            this.txtCodigo.Location = new System.Drawing.Point(141, 20);
+            this.txtCodigo.MaxLength = 11;
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(102, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
             // 
             // InicEvaluacion
             // 
@@ -536,16 +561,17 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.P_Verde.ResumeLayout(false);
+            this.P_Verde.PerformLayout();
             this.PProve.ResumeLayout(false);
             this.PProve.PerformLayout();
             this.P_Filtrado.ResumeLayout(false);
             this.P_Filtrado.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Evaluaciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.evaluaGenBindingSource)).EndInit();
             this.CMS_Filtros.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.evaluaGenBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -594,5 +620,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes;
         private System.Windows.Forms.DataGridViewTextBoxColumn PromedioTot;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ano;
+        private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.Label label3;
     }
 }

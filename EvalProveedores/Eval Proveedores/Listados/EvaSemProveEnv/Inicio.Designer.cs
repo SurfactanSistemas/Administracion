@@ -35,15 +35,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbTodos = new System.Windows.Forms.RadioButton();
-            this.rbSoloConMovimientos = new System.Windows.Forms.RadioButton();
-            this.BT_Pantalla = new System.Windows.Forms.Button();
-            this.BT_Imprimir = new System.Windows.Forms.Button();
-            this.BT_Salir = new System.Windows.Forms.Button();
-            this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
-            this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ckPellital = new System.Windows.Forms.CheckBox();
             this.ckPlantaVII = new System.Windows.Forms.CheckBox();
@@ -54,6 +45,15 @@
             this.ckPlantaII = new System.Windows.Forms.CheckBox();
             this.ckPlantaI = new System.Windows.Forms.CheckBox();
             this.ckTodos = new System.Windows.Forms.CheckBox();
+            this.rbTodos = new System.Windows.Forms.RadioButton();
+            this.rbSoloConMovimientos = new System.Windows.Forms.RadioButton();
+            this.BT_Pantalla = new System.Windows.Forms.Button();
+            this.BT_Imprimir = new System.Windows.Forms.Button();
+            this.BT_Salir = new System.Windows.Forms.Button();
+            this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
+            this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -128,107 +128,6 @@
             this.groupBox1.TabIndex = 86;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
-            // 
-            // rbTodos
-            // 
-            this.rbTodos.AutoSize = true;
-            this.rbTodos.Location = new System.Drawing.Point(287, 19);
-            this.rbTodos.Name = "rbTodos";
-            this.rbTodos.Size = new System.Drawing.Size(55, 17);
-            this.rbTodos.TabIndex = 0;
-            this.rbTodos.Text = "Todos";
-            this.rbTodos.UseVisualStyleBackColor = true;
-            // 
-            // rbSoloConMovimientos
-            // 
-            this.rbSoloConMovimientos.AutoSize = true;
-            this.rbSoloConMovimientos.Checked = true;
-            this.rbSoloConMovimientos.Location = new System.Drawing.Point(125, 19);
-            this.rbSoloConMovimientos.Name = "rbSoloConMovimientos";
-            this.rbSoloConMovimientos.Size = new System.Drawing.Size(129, 17);
-            this.rbSoloConMovimientos.TabIndex = 0;
-            this.rbSoloConMovimientos.TabStop = true;
-            this.rbSoloConMovimientos.Text = "Sólo con Movimientos";
-            this.rbSoloConMovimientos.UseVisualStyleBackColor = true;
-            // 
-            // BT_Pantalla
-            // 
-            this.BT_Pantalla.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Pantalla.BackgroundImage")));
-            this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(167, 223);
-            this.BT_Pantalla.Name = "BT_Pantalla";
-            this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
-            this.BT_Pantalla.TabIndex = 83;
-            this.BT_Pantalla.UseVisualStyleBackColor = true;
-            this.BT_Pantalla.Click += new System.EventHandler(this.BT_Pantalla_Click);
-            // 
-            // BT_Imprimir
-            // 
-            this.BT_Imprimir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Imprimir;
-            this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(250, 223);
-            this.BT_Imprimir.Name = "BT_Imprimir";
-            this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Imprimir.TabIndex = 80;
-            this.BT_Imprimir.UseVisualStyleBackColor = true;
-            this.BT_Imprimir.Click += new System.EventHandler(this.BT_Imprimir_Click_1);
-            // 
-            // BT_Salir
-            // 
-            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
-            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(338, 223);
-            this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Salir.TabIndex = 79;
-            this.BT_Salir.UseVisualStyleBackColor = true;
-            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
-            // 
-            // TB_Hasta
-            // 
-            this.TB_Hasta.Location = new System.Drawing.Point(381, 18);
-            this.TB_Hasta.Mask = "00/00/0000";
-            this.TB_Hasta.Name = "TB_Hasta";
-            this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
-            this.TB_Hasta.TabIndex = 4;
-            this.TB_Hasta.ValidatingType = typeof(System.DateTime);
-            this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
-            // 
-            // TB_Desde
-            // 
-            this.TB_Desde.Location = new System.Drawing.Point(162, 18);
-            this.TB_Desde.Mask = "00/00/0000";
-            this.TB_Desde.Name = "TB_Desde";
-            this.TB_Desde.Size = new System.Drawing.Size(100, 20);
-            this.TB_Desde.TabIndex = 3;
-            this.TB_Desde.ValidatingType = typeof(System.DateTime);
-            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(290, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 18);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Hasta Fecha:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(63, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 18);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Desde Fecha:";
             // 
             // groupBox2
             // 
@@ -347,6 +246,111 @@
             this.ckTodos.UseVisualStyleBackColor = true;
             this.ckTodos.CheckedChanged += new System.EventHandler(this.ckTodos_CheckedChanged);
             this.ckTodos.Click += new System.EventHandler(this.ckTodos_Click);
+            // 
+            // rbTodos
+            // 
+            this.rbTodos.AutoSize = true;
+            this.rbTodos.Location = new System.Drawing.Point(287, 19);
+            this.rbTodos.Name = "rbTodos";
+            this.rbTodos.Size = new System.Drawing.Size(55, 17);
+            this.rbTodos.TabIndex = 0;
+            this.rbTodos.Text = "Todos";
+            this.rbTodos.UseVisualStyleBackColor = true;
+            // 
+            // rbSoloConMovimientos
+            // 
+            this.rbSoloConMovimientos.AutoSize = true;
+            this.rbSoloConMovimientos.Checked = true;
+            this.rbSoloConMovimientos.Location = new System.Drawing.Point(125, 19);
+            this.rbSoloConMovimientos.Name = "rbSoloConMovimientos";
+            this.rbSoloConMovimientos.Size = new System.Drawing.Size(129, 17);
+            this.rbSoloConMovimientos.TabIndex = 0;
+            this.rbSoloConMovimientos.TabStop = true;
+            this.rbSoloConMovimientos.Text = "Sólo con Movimientos";
+            this.rbSoloConMovimientos.UseVisualStyleBackColor = true;
+            // 
+            // BT_Pantalla
+            // 
+            this.BT_Pantalla.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Pantalla.BackgroundImage")));
+            this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Pantalla.Location = new System.Drawing.Point(167, 223);
+            this.BT_Pantalla.Name = "BT_Pantalla";
+            this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
+            this.BT_Pantalla.TabIndex = 83;
+            this.BT_Pantalla.UseVisualStyleBackColor = true;
+            this.BT_Pantalla.Click += new System.EventHandler(this.BT_Pantalla_Click);
+            // 
+            // BT_Imprimir
+            // 
+            this.BT_Imprimir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Imprimir;
+            this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Imprimir.Location = new System.Drawing.Point(250, 223);
+            this.BT_Imprimir.Name = "BT_Imprimir";
+            this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Imprimir.TabIndex = 80;
+            this.BT_Imprimir.UseVisualStyleBackColor = true;
+            this.BT_Imprimir.Click += new System.EventHandler(this.BT_Imprimir_Click_1);
+            // 
+            // BT_Salir
+            // 
+            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
+            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Salir.Location = new System.Drawing.Point(338, 223);
+            this.BT_Salir.Name = "BT_Salir";
+            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.TabIndex = 79;
+            this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
+            // 
+            // TB_Hasta
+            // 
+            this.TB_Hasta.Location = new System.Drawing.Point(381, 18);
+            this.TB_Hasta.Mask = "00/00/0000";
+            this.TB_Hasta.Name = "TB_Hasta";
+            this.TB_Hasta.PromptChar = ' ';
+            this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
+            this.TB_Hasta.TabIndex = 4;
+            this.TB_Hasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Hasta.ValidatingType = typeof(System.DateTime);
+            this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
+            // 
+            // TB_Desde
+            // 
+            this.TB_Desde.Location = new System.Drawing.Point(162, 18);
+            this.TB_Desde.Mask = "00/00/0000";
+            this.TB_Desde.Name = "TB_Desde";
+            this.TB_Desde.PromptChar = ' ';
+            this.TB_Desde.Size = new System.Drawing.Size(100, 20);
+            this.TB_Desde.TabIndex = 3;
+            this.TB_Desde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Desde.ValidatingType = typeof(System.DateTime);
+            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(290, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 18);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Hasta Fecha:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(63, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 18);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Desde Fecha:";
             // 
             // Inicio
             // 

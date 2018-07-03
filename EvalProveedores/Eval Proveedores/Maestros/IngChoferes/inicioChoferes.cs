@@ -33,7 +33,8 @@ namespace Eval_Proveedores.IngChoferes
         {
             P_Filtrado.Visible = false;
             TraerLista();
-            DGV_Choferes.Focus();
+            //DGV_Choferes.Focus();
+            txtCodigo.Focus();
         }
 
         private void TraerLista()
@@ -300,6 +301,37 @@ namespace Eval_Proveedores.IngChoferes
 
                 MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtCodigo.Text.Trim() == "") return;
+
+                foreach (DataGridViewRow row in DGV_Choferes.Rows)
+                {
+                    var WCodigo = row.Cells["Codigo"].Value ?? "";
+
+                    if (WCodigo.ToString().Trim() != "")
+                    {
+                        if (txtCodigo.Text.Trim() == WCodigo.ToString().Trim())
+                        {
+                            row.Selected = true;
+                            DGV_Choferes_RowHeaderMouseDoubleClick(null, null);
+                            txtCodigo.Text = "";
+                            return;
+                        }
+                    }
+                }
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtCodigo.Text = "";
+            }
+	        
         }
 
     }
