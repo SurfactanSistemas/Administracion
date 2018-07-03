@@ -548,7 +548,7 @@ namespace Vista
                     HojasDeSeguridad[i, 1] = DGV_Muestra.SelectedRows[i].Cells["Codigo"].Value.ToString().Trim();
                 }
 
-                if (numero_remito != "")
+                if (numero_remito != "" && numero_remito != "0")
                 {
                     _dt = CS.BuscarListaRemito(numero_remito, _CodCliente);
 
@@ -668,6 +668,16 @@ namespace Vista
 
                 for (int i = 0; i < DGV_Muestra.SelectedRows.Count; i++)
                 {
+                    if (Lotes[i] == 0)
+                    {
+                        Lotes[i] = int.Parse(DGV_Muestra.SelectedRows[i].Cells["Lote2"].Value.ToString());
+
+                        if (Lotes[i] == 0)
+                        {
+                            Lotes[i] = int.Parse(DGV_Muestra.SelectedRows[i].Cells["Lote1"].Value.ToString());
+                        }
+                    }
+
                     DataRow newRow = _dt.NewRow();
                     newRow["Descripcion"] = DGV_Muestra.SelectedRows[i].Cells["DescriCliente"].Value.ToString();
                     newRow["Cantidad"] = DGV_Muestra.SelectedRows[i].Cells["Cantidad"].Value.ToString();

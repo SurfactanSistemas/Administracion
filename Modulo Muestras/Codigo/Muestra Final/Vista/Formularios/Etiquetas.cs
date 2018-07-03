@@ -243,11 +243,10 @@ namespace Vista
                         WDescripcionIngles = BuscarDescripcionIngles(row["Codigo"].ToString());
 
                         // Traducimos Fecha.
-                        row["Fecha"] = row["Fecha"].ToString().Replace("Fecha:", "Date:");
+                        row["Fecha"] = row["Fecha"].ToString().Replace("Fecha:", "Sample Date:");
 
                         // Traducimos Pedido/Lote.
-                        //row["Lote"] = row["Lote"].ToString().Replace("Lote:", "Batch:");
-                        row["Lote"] = row["Lote"].ToString().Replace("Lote:", "Sample:"); // A pedido de Ernesto.
+                        row["Lote"] = row["Lote"].ToString().Replace("Lote:", "Batch:");
                         row["Lote"] = row["Lote"].ToString().Replace("Pedido:", "Order:");
 
                         // Traducimos Guía.

@@ -58,7 +58,6 @@ namespace Vista
             this.BtFin = new System.Windows.Forms.Button();
             this.BtImpresion = new System.Windows.Forms.Button();
             this.DGV_Muestra = new System.Windows.Forms.DataGridView();
-            this.muestraBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CMS_Filtros = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pedidoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,6 +85,7 @@ namespace Vista
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip_Eliminar = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.muestraBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -113,10 +113,10 @@ namespace Vista
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Muestra)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.muestraBindingSource)).BeginInit();
             this.CMS_Filtros.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.muestraBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // P_Buscar
@@ -440,10 +440,6 @@ namespace Vista
             this.DGV_Muestra.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Muestra_ColumnHeaderMouseClick);
             this.DGV_Muestra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DGV_Muestra_KeyDown);
             // 
-            // muestraBindingSource
-            // 
-            this.muestraBindingSource.DataSource = typeof(Negocio.Muestra);
-            // 
             // CMS_Filtros
             // 
             this.CMS_Filtros.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -618,6 +614,10 @@ namespace Vista
             this.tableLayoutPanel1.Size = new System.Drawing.Size(787, 551);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
+            // muestraBindingSource
+            // 
+            this.muestraBindingSource.DataSource = typeof(Negocio.Muestra);
+            // 
             // Id
             // 
             this.Id.DataPropertyName = "Id";
@@ -780,7 +780,6 @@ namespace Vista
             this.Lote1.DataPropertyName = "Lote1";
             this.Lote1.HeaderText = "Lote1";
             this.Lote1.Name = "Lote1";
-            this.Lote1.Visible = false;
             // 
             // Muestra
             // 
@@ -802,12 +801,12 @@ namespace Vista
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Muestra)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.muestraBindingSource)).EndInit();
             this.CMS_Filtros.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.muestraBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
