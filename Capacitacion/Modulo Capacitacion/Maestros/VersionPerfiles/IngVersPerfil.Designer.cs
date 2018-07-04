@@ -216,7 +216,6 @@
             // 
             // TB_Codigo
             // 
-            this.TB_Codigo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_Codigo.FormattingEnabled = true;
             this.TB_Codigo.Location = new System.Drawing.Point(55, 10);
             this.TB_Codigo.Name = "TB_Codigo";

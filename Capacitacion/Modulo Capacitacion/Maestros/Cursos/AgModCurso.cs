@@ -15,10 +15,11 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         DataTable dtTema;
 
 
-        public AgModCurso()
+        public AgModCurso(string WTema)
         {
             InitializeComponent();
             CargarCombos();
+            TB_CodTema.Text = WTema;
         }
 
         public AgModCurso(Curso CursoAModificar)
@@ -59,7 +60,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         private void CargarCombos()
         {
             //dtTema.Clear();
-            dtTema = T.ListarTemas();
+            dtTema = (new Curso()).ListarTodos();
 
             var fila = dtTema.NewRow();
             dtTema.Rows.InsertAt(fila, 0);
@@ -112,15 +113,17 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         {
             int valor = 0;
 
-            int.TryParse(TB_CodTema.Text, out valor);
+            int.TryParse(TB_CodTema.SelectedValue.ToString(), out valor);
 
             if (TB_CodTema.Text == "" || valor == 0) throw new Exception("Por favor ingrese un codigo valido");
             //Tema tema = new Tema();
-            T = T.BuscarUno(TB_CodTema.Text);
+            //T = T.BuscarUno(TB_CodTema.Text);
 
-            if (T.Descripcion != null) TB_DescTema.Text = T.Descripcion;
-            else throw new Exception("No se encontro ningun Tema con el numero de codigo ingresado");
-            
+            TB_DescTema.SelectedValue = TB_CodTema.SelectedValue;
+
+            //if (T.Descripcion != null) TB_DescTema.Text = T.Descripcion;
+            //else throw new Exception("No se encontro ningun Tema con el numero de codigo ingresado");
+
         }
 
         private void BT_Salir_Click(object sender, EventArgs e)
@@ -193,6 +196,8 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void BuscarUltimoCurso()
         {
+            if (TB_CodTema.Text.Trim() == "" || TB_CodTema.Text.Trim() == "0") return;
+
             Tema tema = new Tema();
             TB_Codigo.Text = tema.ObtenerUltimo(TB_CodTema.Text).ToString();
         }
@@ -241,6 +246,11 @@ namespace Modulo_Capacitacion.Maestros.Cursos
             {
                 TB_Horas.Text = "";
             }
+        }
+
+        private void AgModCurso_Shown(object sender, EventArgs e)
+        {
+            TB_CodTema.Focus();
         }
     }
 }

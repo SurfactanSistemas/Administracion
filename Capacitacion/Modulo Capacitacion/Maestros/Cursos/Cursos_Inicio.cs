@@ -22,6 +22,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         private void Cursos_Inicio_Load(object sender, EventArgs e)
         {
             pnlCursos.Visible = false;
+            lblTema.Text = "0";
             ActualizarGrilla();
         }
 
@@ -57,7 +58,20 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void BTAgregarCurso_Click(object sender, EventArgs e)
         {
-            AgModCurso agregarOMod = new AgModCurso {StartPosition = FormStartPosition.CenterScreen};
+            var WTema = "";
+
+            if (pnlCursos.Visible)
+            {
+                WTema = lblTema.Text;
+            }
+
+            if (dgvTemas.SelectedRows.Count > 0)
+            {
+                var t = dgvTemas.SelectedRows[0].Cells["Tema"].Value ?? "";
+                WTema = t.ToString();
+            }
+
+            AgModCurso agregarOMod = new AgModCurso(WTema) {StartPosition = FormStartPosition.CenterScreen};
             agregarOMod.ShowDialog();
 
             ActualizarGrilla();
@@ -121,6 +135,8 @@ namespace Modulo_Capacitacion.Maestros.Cursos
         private void _CargarCursosDisponibles(string WTema, string wDescripcion)
         {
             dgvCursos.DataSource = _TraerCursos(WTema);
+
+            lblTema.Text = WTema;
 
             groupBox1.Text = "Tema: " + wDescripcion.ToUpper().Trim();
 
