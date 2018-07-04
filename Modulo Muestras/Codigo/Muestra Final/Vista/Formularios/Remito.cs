@@ -102,7 +102,9 @@ namespace Vista
                 WPedido = dt.Rows[0]["Pedido"].ToString();
                 WPedido = WPedido.Trim();
             }
-            
+
+            string[] datos_separados = this.datos.Split(';');
+
             TBCliente.Text = datos_separados[1];
             if (datos_separados[0] == "" || datos_separados[0] == "0") TBNumRemito.Text = Cs.TraerRemitoMax();
             else {
