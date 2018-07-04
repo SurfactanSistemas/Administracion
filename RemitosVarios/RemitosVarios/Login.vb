@@ -18,6 +18,7 @@ Public Class Login
                 Dim WOp = Environment.GetCommandLineArgs(1)
                 
                 If Val(WOp) = 1 Then
+                    txtPsw.Text = "olula"
                     btnAccept.PerformClick()
                 End If
 

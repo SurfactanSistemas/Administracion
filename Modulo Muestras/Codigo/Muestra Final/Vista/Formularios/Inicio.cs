@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -1043,6 +1044,11 @@ namespace Vista
                 MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void btnRemitosVarios_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"\\193.168.0.2\g$\vb\Net\RemitosVarios\Ejecutable\RemitosVarios.exe", "1");
         }
 
     }
