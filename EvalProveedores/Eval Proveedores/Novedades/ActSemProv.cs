@@ -66,7 +66,10 @@ namespace Eval_Proveedores.Novedades
 
                     ZMovimientos = double.Parse(WProveedor["Movimientos"].ToString());
                     ZCertificadosOk = double.Parse(WProveedor["CertificadosOk"].ToString());
+                    if (ZCertificadosOk > ZMovimientos) ZCertificadosOk = ZMovimientos;
+                    
                     ZEnvasesOk = double.Parse(WProveedor["EnvasesOk"].ToString());
+                    if (ZEnvasesOk > ZMovimientos) ZEnvasesOk = ZMovimientos;
 
                     DGV_EvalSemProve.Rows[WRenglon].Cells["MarcaPerformance"].Value = "0";
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Proveedor"].Value = WProveedor["Proveedor"];
@@ -76,8 +79,8 @@ namespace Eval_Proveedores.Novedades
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Retrasos"].Value = WProveedor["Retrasos"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Desvios"].Value = WProveedor["Desvios"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Rechazados"].Value = WProveedor["Rechazados"];
-                    DGV_EvalSemProve.Rows[WRenglon].Cells["EnvasesOk"].Value = WProveedor["EnvasesOk"];
-                    DGV_EvalSemProve.Rows[WRenglon].Cells["CertificadosOk"].Value = WProveedor["CertificadosOk"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["EnvasesOk"].Value = ZEnvasesOk.ToString(); //WProveedor["EnvasesOk"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["CertificadosOk"].Value = ZCertificadosOk.ToString(); //WProveedor["CertificadosOk"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Categoria1"].Value = WProveedor["CategoriaI"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Categoria2"].Value = WProveedor["CategoriaII"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["PorCert"].Value = Helper._DeterminarPorcentajeRelacion(ZMovimientos, ZCertificadosOk);

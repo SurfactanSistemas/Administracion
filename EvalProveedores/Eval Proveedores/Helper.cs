@@ -109,7 +109,6 @@ namespace Eval_Proveedores
                             WInforme["Fecha"].ToString(),
                             WEmpresa);
 
-                        WMovimientos++;
                         int WCertificado = WInforme["Certificado1"] == null ? 0 : int.Parse(WInforme["Certificado1"].ToString());
                         if (WCertificado == 1) WCertificadosOk++;
 
@@ -121,6 +120,10 @@ namespace Eval_Proveedores
                         DataTable WLaudos = _TraerArticulosPorInforme(WInforme["Informe"].ToString(), WInforme["Articulo"].ToString(), WEmpresa);
 
                         string WNumLaudo = "";
+
+                        if (WLaudos.Rows.Count == 0) continue;
+
+                        WMovimientos++;
 
                         foreach (DataRow WLaudo in WLaudos.Rows)
                         {

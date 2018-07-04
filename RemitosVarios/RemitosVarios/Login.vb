@@ -10,6 +10,23 @@ Public Class Login
     End Sub
 
     Private Sub Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        Try
+
+            If Environment.GetCommandLineArgs.Length > 1 Then
+
+                Dim WOp = Environment.GetCommandLineArgs(1)
+                
+                If Val(WOp) = 1 Then
+                    btnAccept.PerformClick()
+                End If
+
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+        
         cmbEntity.SelectedIndex = 0
         txtPsw.Text = ""
     End Sub
@@ -48,11 +65,15 @@ Public Class Login
 
         Me.Visible = False
 
-        _MenuPrincipal.Close()
+        '_MenuPrincipal.Close()
 
-        _MenuPrincipal = New MenuPrincipal
+        '_MenuPrincipal = New MenuPrincipal
 
-        _MenuPrincipal.Show()
+        '_MenuPrincipal.Show()
+
+        IngresoRemitoVario.Show()
+
+        Close()
 
     End Sub
 
