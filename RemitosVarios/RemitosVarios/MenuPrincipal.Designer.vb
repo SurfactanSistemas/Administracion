@@ -32,9 +32,9 @@ Partial Class MenuPrincipal
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeRemitoVarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IngresoDeRemitoVarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -154,6 +154,12 @@ Partial Class MenuPrincipal
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
         '
+        'IngresoDeRemitoVarioToolStripMenuItem
+        '
+        Me.IngresoDeRemitoVarioToolStripMenuItem.Name = "IngresoDeRemitoVarioToolStripMenuItem"
+        Me.IngresoDeRemitoVarioToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.IngresoDeRemitoVarioToolStripMenuItem.Text = "Ingreso de Remito Vario"
+        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CerrarSistemaToolStripMenuItem})
@@ -166,12 +172,6 @@ Partial Class MenuPrincipal
         Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
         Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
-        '
-        'IngresoDeRemitoVarioToolStripMenuItem
-        '
-        Me.IngresoDeRemitoVarioToolStripMenuItem.Name = "IngresoDeRemitoVarioToolStripMenuItem"
-        Me.IngresoDeRemitoVarioToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
-        Me.IngresoDeRemitoVarioToolStripMenuItem.Text = "Ingreso de Remito Vario"
         '
         'MenuPrincipal
         '

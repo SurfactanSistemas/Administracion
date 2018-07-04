@@ -59,7 +59,7 @@ Public Class IngresoRemitoVario
         btnLimpiar.PerformClick()
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RemitoVario WHERE Remito = '" & WRemito & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM RemitosVarios WHERE Remito = '" & WRemito & "' AND Punto = '" & Conexion.WPunto & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -74,12 +74,24 @@ Public Class IngresoRemitoVario
 
                 dr.Read()
 
-                txtCliente.Text = If(dr.Item("Cliente"), "")
+                txtCliente.Text = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
+                txtRemito.Text = IIf(IsDBNull(dr.Item("Remito")), "", dr.Item("Remito"))
+                txtFecha.Text = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                txtDesCliente.Text = IIf(IsDBNull(dr.Item("Razon")), "", dr.Item("Razon"))
+                txtLocalidad.Text = IIf(IsDBNull(dr.Item("Localidad")), "", dr.Item("Localidad"))
+                txtDireccion.Text = IIf(IsDBNull(dr.Item("Direccion")), "", dr.Item("Direccion"))
+                txtDireccionEntrega.Text = IIf(IsDBNull(dr.Item("DirEntrega")), "", dr.Item("DirEntrega"))
+                txtCuit.Text = IIf(IsDBNull(dr.Item("Cuit")), "", dr.Item("Cuit"))
+                txtObservaciones.Text = IIf(IsDBNull(dr.Item("Observaciones")), "", dr.Item("Observaciones"))
+
+                For Each txt As TextBox In {txtRemito, txtDesCliente, txtLocalidad, txtDireccion, txtDireccionEntrega, txtObservaciones}
+                    txt.Text = txt.Text.Trim()
+                Next
 
             End If
 
         Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Throw New Exception("Hubo un problema al querer consultar el Remito desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -88,6 +100,8 @@ Public Class IngresoRemitoVario
             cm = Nothing
 
         End Try
+
+        txtRemito.Text = WRemito
 
     End Sub
 
@@ -245,6 +259,8 @@ Public Class IngresoRemitoVario
         Dim WCuit = txtCuit.Text
         Dim WFecha = txtFecha.Text
         Dim WFechaOrd = Helper.ordenaFecha(WFecha)
+        Dim WCai = "", WFechaCai = ""
+        Dim WActualizar = True
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
@@ -260,20 +276,79 @@ Public Class IngresoRemitoVario
             cm.Connection = cn
             cm.Transaction = trans
 
+            cm.CommandText = "SELECT Remito, Cai, FechaCai FROM RemitosVarios WHERE Remito = '" & WRemito & "'"
+            dr = cm.ExecuteReader
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                WCai = IIf(IsDBNull(dr.Item("Cai")), "", dr.Item("Cai"))
+                WFechaCai = IIf(IsDBNull(dr.Item("FechaCai")), "", dr.Item("FechaCai"))
+
+                WActualizar = False
+            Else
+                WRemito = "0"
+                WCai = ""
+                WFechaCai = ""
+                txtRemito.Text = "0"
+            End If
+
+            If Not dr.IsClosed Then dr.Close()
+
+            If Val(WRemito) = 0 Then
+
+                cm.CommandText = "SELECT Ultimo, Fecha, Cai FROM NumeroRemito WHERE Punto = '" & Conexion.WPunto & "'"
+                dr = cm.ExecuteReader
+
+                If dr.HasRows Then
+                    dr.Read()
+
+                    WRemito = IIf(IsDBNull(dr.Item("Ultimo")), "0", dr.Item("Ultimo"))
+                    WCai = IIf(IsDBNull(dr.Item("Cai")), "", dr.Item("Cai"))
+                    WFechaCai = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+
+                    WRemito = Val(WRemito) + 1
+
+                    txtRemito.Text = WRemito
+
+                End If
+
+            End If
+
+            If Not dr.IsClosed Then dr.Close()
+
             cm.CommandText = "DELETE FROM RemitosVarios WHERE Remito = '" & WRemito & "'"
             cm.ExecuteNonQuery()
 
-            cm.CommandText = String.Format("INSERT INTO RemitosVarios (Remito, Cliente, Razon, Direccion, Localidad, DirEntrega, Fecha, FechaOrd, Observaciones, Punto, Cuit) " _
-                                         & " VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}')", _
-                                         WRemito, WCliente, WRazon, WDireccion, WLocalidad, WDireccionEntrega, WFecha, WFechaOrd, WObservaciones, WPunto, WCuit)
+            cm.CommandText = String.Format("INSERT INTO RemitosVarios (Remito, Cliente, Razon, Direccion, Localidad, DirEntrega, Fecha, FechaOrd, Observaciones, Punto, Cuit, Cai, FechaCai) " _
+                                         & " VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}')", _
+                                         WRemito, WCliente, WRazon, WDireccion, WLocalidad, WDireccionEntrega, WFecha, WFechaOrd, WObservaciones, WPunto, WCuit, WCai, WFechaCai)
 
             cm.ExecuteNonQuery()
 
+            If WActualizar Then
+                cm.CommandText = "UPDATE NumeroRemito SET Ultimo = '" + WRemito + "' WHERE Punto = '" & WPunto & "'"
+                cm.ExecuteNonQuery()
+            End If
+
             trans.Commit()
+
+            If MsgBox("¿Desea imprimir el remito?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                Dim frm As VistaPrevia = New VistaPrevia()
+
+                frm.Reporte = New ImpRemito2()
+                frm.Formula = "{RemitosVarios.Remito}='" & WRemito & "'"
+
+                'frm.Mostrar()
+                frm.Imprimir()
+            End If
 
             btnLimpiar.PerformClick()
 
         Catch ex As Exception
+            If Not IsNothing(dr) AndAlso Not dr.IsClosed Then dr.Close()
             If Not IsNothing(trans) And Not IsNothing(trans.Connection) Then trans.Rollback()
 
             MsgBox("Hubo un problema al querer guardar el Remito Vario en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
@@ -291,7 +366,7 @@ Public Class IngresoRemitoVario
 
     Private Function _DatosValidos() As Boolean
 
-        If Panel3.Controls.OfType(Of TextBox)().Any(Function(st) (st.Text.Trim() = "" And st.Name <> "txtCliente")) Then
+        If Panel3.Controls.OfType(Of TextBox)().Any(Function(st) (st.Text.Trim() = "" And st.Name <> "txtRemito")) Then
             Return False
         End If
 
@@ -299,11 +374,11 @@ Public Class IngresoRemitoVario
             Return False
         End If
 
-        If GroupBox1.Controls.OfType(Of TextBox)().Any(Function(st) (st.Text.Trim() = "" And st.Name <> "txtCliente")) Then
+        If GroupBox1.Controls.OfType(Of TextBox)().Any(Function(st) st.Text.Trim() = "") Then
             Return False
         End If
 
-        If GroupBox1.Controls.OfType(Of MaskedTextBox)().Any(Function(st) (st.Text.Trim().Replace("/", "") = "")) Then
+        If GroupBox1.Controls.OfType(Of MaskedTextBox)().Any(Function(st) (st.Text.Trim().Replace("/", "") = "" And st.Name <> "txtCliente")) Then
             Return False
         End If
 
@@ -313,8 +388,8 @@ Public Class IngresoRemitoVario
     Private Sub txtCuit_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuit.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtCuit.Text.Replace("-", "")) = "" Then : Exit Sub : End If
-            If txtCuit.Text.Replace(" ", "").Length < 13 Then : Exit Sub : End If
+            'If Trim(txtCuit.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            'If txtCuit.Text.Replace(" ", "").Length = 0 Then : Exit Sub : End If
 
             txtDireccionEntrega.Focus()
 
@@ -353,5 +428,19 @@ Public Class IngresoRemitoVario
     Public Sub AsignarDireccion(ByVal wDireccion As Object)
         txtDireccionEntrega.Text = wDireccion
         txtObservaciones.Focus()
+    End Sub
+
+    Private Sub btnConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultas.Click
+        Dim frm = New AyudaClientes()
+        frm.Show(Me)
+    End Sub
+
+    Public Sub AsignarCliente(ByVal wCliente As Object)
+        txtCliente.Text = wCliente
+        txtCliente_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
+
+    Private Sub txtCliente_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCliente.DoubleClick
+        btnConsultas.PerformClick()
     End Sub
 End Class

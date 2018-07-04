@@ -496,7 +496,6 @@ Partial Class IngresoRemitoVario
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents Panel5 As System.Windows.Forms.Panel
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
-    Friend WithEvents btnConsultas As System.Windows.Forms.Button
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -520,4 +519,5 @@ Partial Class IngresoRemitoVario
     Friend WithEvents txtLocalidad As System.Windows.Forms.TextBox
     Friend WithEvents txtDireccion As System.Windows.Forms.TextBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents btnConsultas As System.Windows.Forms.Button
 End Class

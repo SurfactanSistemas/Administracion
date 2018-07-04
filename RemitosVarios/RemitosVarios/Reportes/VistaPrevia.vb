@@ -95,7 +95,7 @@ Public Class VistaPrevia
     Public Sub Imprimir(Optional ByVal cant As Integer = 1)
         'Me.Reporte.DataSourceConnections.Item(0).SetConnection("EMPRESA01", "SurfactanSA", False)
 
-        _ReconectarBaseDatos()
+        '_ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
         Me.Reporte.Refresh()

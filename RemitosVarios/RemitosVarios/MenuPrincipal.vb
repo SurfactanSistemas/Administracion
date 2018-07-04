@@ -27,4 +27,8 @@
     Private Sub IngresoDeRemitoVarioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeRemitoVarioToolStripMenuItem.Click
         IngresoRemitoVario.Show(Me)
     End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Login.Show()
+    End Sub
 End Class
