@@ -316,7 +316,6 @@
             // 
             // TB_CodResp1
             // 
-            this.TB_CodResp1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodResp1.FormattingEnabled = true;
             this.TB_CodResp1.Location = new System.Drawing.Point(499, 13);
             this.TB_CodResp1.Name = "TB_CodResp1";
@@ -326,7 +325,6 @@
             // 
             // TB_CodResp2
             // 
-            this.TB_CodResp2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodResp2.FormattingEnabled = true;
             this.TB_CodResp2.Location = new System.Drawing.Point(640, 13);
             this.TB_CodResp2.Name = "TB_CodResp2";
@@ -359,7 +357,6 @@
             // 
             // TB_CodSec
             // 
-            this.TB_CodSec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodSec.FormattingEnabled = true;
             this.TB_CodSec.Location = new System.Drawing.Point(73, 13);
             this.TB_CodSec.Name = "TB_CodSec";
@@ -940,7 +937,6 @@
             // 
             // TB_CodTemas
             // 
-            this.TB_CodTemas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodTemas.FormattingEnabled = true;
             this.TB_CodTemas.Location = new System.Drawing.Point(80, 18);
             this.TB_CodTemas.Name = "TB_CodTemas";

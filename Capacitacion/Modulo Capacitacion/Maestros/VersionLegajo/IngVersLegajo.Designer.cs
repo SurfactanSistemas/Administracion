@@ -314,7 +314,6 @@
             // 
             // TB_FechaIngAyuda
             // 
-            this.TB_FechaIngAyuda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_FechaIngAyuda.FormattingEnabled = true;
             this.TB_FechaIngAyuda.Location = new System.Drawing.Point(748, 17);
             this.TB_FechaIngAyuda.Name = "TB_FechaIngAyuda";
@@ -348,7 +347,6 @@
             // 
             // TB_Codigo
             // 
-            this.TB_Codigo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_Codigo.FormattingEnabled = true;
             this.TB_Codigo.Location = new System.Drawing.Point(76, 17);
             this.TB_Codigo.Name = "TB_Codigo";

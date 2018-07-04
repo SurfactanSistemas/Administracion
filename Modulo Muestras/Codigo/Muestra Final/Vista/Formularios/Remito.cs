@@ -102,6 +102,13 @@ namespace Vista
                 WPedido = dt.Rows[0]["Pedido"].ToString();
                 WPedido = WPedido.Trim();
             }
+            
+            TBCliente.Text = datos_separados[1];
+            if (datos_separados[0] == "" || datos_separados[0] == "0") TBNumRemito.Text = Cs.TraerRemitoMax();
+            else {
+                TBNumRemito.Text = datos_separados[0];
+                reimprimir = true;
+            }
 
             if (WPedido == "") return;
 

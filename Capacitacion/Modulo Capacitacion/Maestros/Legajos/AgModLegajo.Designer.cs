@@ -448,7 +448,6 @@
             // 
             // TB_CodPerfil
             // 
-            this.TB_CodPerfil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodPerfil.FormattingEnabled = true;
             this.TB_CodPerfil.Location = new System.Drawing.Point(73, 16);
             this.TB_CodPerfil.Name = "TB_CodPerfil";
@@ -481,7 +480,6 @@
             // 
             // TB_CodSector
             // 
-            this.TB_CodSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodSector.FormattingEnabled = true;
             this.TB_CodSector.Location = new System.Drawing.Point(558, 16);
             this.TB_CodSector.Name = "TB_CodSector";

@@ -514,11 +514,19 @@ namespace ClassConexion
         {
             SqlCommand cmd = new SqlCommand {CommandType = CommandType.Text};
 
+            string cod = DGV.Cells[5].Value.ToString().Trim();
+
+            cod = _FormatearCodigoProducto(cod);
+
             AbrirConexion();
             cmd.Connection = conexion;
 
             //Actualizo Muestras (no existe la columna PARTIDA)
             cmd.CommandText = "update Muestra set Remito = " + NroRemito.Trim() + ", Lote2 = " + DGV.Cells[3].Value.ToString().Trim() + " where Codigo = '" + DGV.Cells[2].Value.ToString().Trim() + "'";
+
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "update Pedido set Remito = " + NroRemito.Trim() + " where Pedido = '" + DGV.Cells[4].Value.ToString().Trim() + "' AND Terminado = '" + cod + "'";
 
             cmd.ExecuteNonQuery();
 

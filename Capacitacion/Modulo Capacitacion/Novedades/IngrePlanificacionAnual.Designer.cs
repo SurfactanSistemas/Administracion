@@ -166,7 +166,6 @@
             // 
             // TB_CodTemas
             // 
-            this.TB_CodTemas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodTemas.FormattingEnabled = true;
             this.TB_CodTemas.Location = new System.Drawing.Point(104, 25);
             this.TB_CodTemas.Name = "TB_CodTemas";
@@ -325,7 +324,6 @@
             // 
             // TB_CodLegajo
             // 
-            this.TB_CodLegajo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodLegajo.FormattingEnabled = true;
             this.TB_CodLegajo.Location = new System.Drawing.Point(84, 22);
             this.TB_CodLegajo.Name = "TB_CodLegajo";

@@ -38,6 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.P_Filtrado = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TBFiltro = new System.Windows.Forms.TextBox();
             this.dgvTemas = new System.Windows.Forms.DataGridView();
@@ -64,12 +66,11 @@
             this.BT_Eliminar = new System.Windows.Forms.Button();
             this.pnlCursos = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblTema = new System.Windows.Forms.Label();
             this.btnCerrarCursos = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -143,6 +144,26 @@
             this.P_Filtrado.Name = "P_Filtrado";
             this.P_Filtrado.Size = new System.Drawing.Size(851, 51);
             this.P_Filtrado.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(135, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 19);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Código:";
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(200, 14);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(89, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
             // 
             // label3
             // 
@@ -437,12 +458,23 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.lblTema);
             this.panel3.Controls.Add(this.btnCerrarCursos);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 323);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(636, 48);
             this.panel3.TabIndex = 1;
+            // 
+            // lblTema
+            // 
+            this.lblTema.AutoSize = true;
+            this.lblTema.Location = new System.Drawing.Point(526, 16);
+            this.lblTema.Name = "lblTema";
+            this.lblTema.Size = new System.Drawing.Size(13, 13);
+            this.lblTema.TabIndex = 23;
+            this.lblTema.Text = "0";
+            this.lblTema.Visible = false;
             // 
             // btnCerrarCursos
             // 
@@ -488,34 +520,14 @@
             this.dgvCursos.AllowUserToDeleteRows = false;
             this.dgvCursos.AllowUserToResizeRows = false;
             this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCursos.Location = new System.Drawing.Point(12, 44);
+            this.dgvCursos.Location = new System.Drawing.Point(5, 42);
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.ReadOnly = true;
             this.dgvCursos.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.dgvCursos.Size = new System.Drawing.Size(593, 246);
+            this.dgvCursos.Size = new System.Drawing.Size(607, 254);
             this.dgvCursos.TabIndex = 0;
             this.dgvCursos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCursos_CellMouseDoubleClick);
             this.dgvCursos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCursos_RowHeaderMouseDoubleClick);
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(200, 14);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(89, 20);
-            this.txtCodigo.TabIndex = 1;
-            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(135, 14);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 19);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Código:";
             // 
             // Cursos_Inicio
             // 
@@ -541,6 +553,7 @@
             this.panel2.ResumeLayout(false);
             this.pnlCursos.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).EndInit();
@@ -587,5 +600,6 @@
         private System.Windows.Forms.Button btnMostrarCursos;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.Label lblTema;
     }
 }

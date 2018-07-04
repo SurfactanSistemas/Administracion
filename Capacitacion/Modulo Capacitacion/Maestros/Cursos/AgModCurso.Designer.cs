@@ -114,7 +114,7 @@
             this.TB_DescTema.FormattingEnabled = true;
             this.TB_DescTema.Location = new System.Drawing.Point(193, 56);
             this.TB_DescTema.Name = "TB_DescTema";
-            this.TB_DescTema.Size = new System.Drawing.Size(315, 21);
+            this.TB_DescTema.Size = new System.Drawing.Size(307, 21);
             this.TB_DescTema.TabIndex = 36;
             this.TB_DescTema.SelectedIndexChanged += new System.EventHandler(this.TB_DescTema_SelectedIndexChanged);
             // 
@@ -127,11 +127,10 @@
             // 
             // TB_CodTema
             // 
-            this.TB_CodTema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodTema.FormattingEnabled = true;
             this.TB_CodTema.Location = new System.Drawing.Point(128, 56);
             this.TB_CodTema.Name = "TB_CodTema";
-            this.TB_CodTema.Size = new System.Drawing.Size(33, 21);
+            this.TB_CodTema.Size = new System.Drawing.Size(56, 21);
             this.TB_CodTema.TabIndex = 34;
             this.TB_CodTema.SelectedIndexChanged += new System.EventHandler(this.TB_CodTema_SelectedIndexChanged);
             this.TB_CodTema.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodTema_KeyDown_1);
@@ -259,6 +258,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AgModCurso";
             this.Load += new System.EventHandler(this.AgModCurso_Load);
+            this.Shown += new System.EventHandler(this.AgModCurso_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
