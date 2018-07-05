@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -43,6 +43,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_TitEva = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -81,9 +82,20 @@
             this.btnPerformance = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
             this.LB_Titulo = new System.Windows.Forms.Label();
-            this.CB_TipoEva = new System.Windows.Forms.ComboBox();
+            this.cmbTipoEvaluacion = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.DGV_EvalSemProve = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblTipoListado = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MarcaPerformance = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,18 +113,8 @@
             this.Categoria2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EvaCal = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.EvaEnt = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Actualiza = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fechas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblTipoListado = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -131,9 +133,10 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.panel1.Controls.Add(this.LB_TitEva);
-            this.panel1.Location = new System.Drawing.Point(-1, -1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(913, 39);
+            this.panel1.Size = new System.Drawing.Size(894, 39);
             this.panel1.TabIndex = 4;
             // 
             // LB_TitEva
@@ -151,9 +154,10 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(74)))), ((int)(((byte)(95)))));
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(1, 37);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(913, 649);
+            this.panel2.Size = new System.Drawing.Size(894, 523);
             this.panel2.TabIndex = 5;
             // 
             // panel3
@@ -172,7 +176,7 @@
             this.panel3.Controls.Add(this.btnPerformance);
             this.panel3.Controls.Add(this.BT_Guardar);
             this.panel3.Controls.Add(this.LB_Titulo);
-            this.panel3.Controls.Add(this.CB_TipoEva);
+            this.panel3.Controls.Add(this.cmbTipoEvaluacion);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.DGV_EvalSemProve);
             this.panel3.Controls.Add(this.button1);
@@ -181,9 +185,9 @@
             this.panel3.Controls.Add(this.TB_Desde);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.lblTipoListado);
-            this.panel3.Location = new System.Drawing.Point(8, 8);
+            this.panel3.Location = new System.Drawing.Point(8, 6);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(851, 511);
+            this.panel3.Size = new System.Drawing.Size(878, 511);
             this.panel3.TabIndex = 0;
             // 
             // pnlPerformance
@@ -311,9 +315,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(203, 89);
+            this.progressBar1.Location = new System.Drawing.Point(217, 94);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(634, 28);
+            this.progressBar1.Size = new System.Drawing.Size(430, 28);
             this.progressBar1.TabIndex = 80;
             // 
             // groupBox2
@@ -327,7 +331,7 @@
             this.groupBox2.Controls.Add(this.ckPlantaII);
             this.groupBox2.Controls.Add(this.ckPlantaI);
             this.groupBox2.Controls.Add(this.ckTodos);
-            this.groupBox2.Location = new System.Drawing.Point(558, 1);
+            this.groupBox2.Location = new System.Drawing.Point(572, 1);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(280, 83);
             this.groupBox2.TabIndex = 84;
@@ -436,7 +440,7 @@
             // 
             // ckIncluirSinMovimientos
             // 
-            this.ckIncluirSinMovimientos.Location = new System.Drawing.Point(416, 19);
+            this.ckIncluirSinMovimientos.Location = new System.Drawing.Point(430, 19);
             this.ckIncluirSinMovimientos.Name = "ckIncluirSinMovimientos";
             this.ckIncluirSinMovimientos.Size = new System.Drawing.Size(137, 34);
             this.ckIncluirSinMovimientos.TabIndex = 82;
@@ -449,7 +453,7 @@
             this.pnlClave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlClave.Controls.Add(this.groupBox1);
             this.pnlClave.Controls.Add(this.button3);
-            this.pnlClave.Location = new System.Drawing.Point(325, 205);
+            this.pnlClave.Location = new System.Drawing.Point(339, 205);
             this.pnlClave.Name = "pnlClave";
             this.pnlClave.Size = new System.Drawing.Size(200, 100);
             this.pnlClave.TabIndex = 81;
@@ -493,7 +497,7 @@
             this.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPantalla.Location = new System.Drawing.Point(359, 458);
+            this.btnPantalla.Location = new System.Drawing.Point(373, 458);
             this.btnPantalla.Name = "btnPantalla";
             this.btnPantalla.Size = new System.Drawing.Size(40, 40);
             this.btnPantalla.TabIndex = 79;
@@ -507,7 +511,7 @@
             this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnImprimir.Location = new System.Drawing.Point(451, 458);
+            this.btnImprimir.Location = new System.Drawing.Point(465, 458);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(40, 40);
             this.btnImprimir.TabIndex = 79;
@@ -521,7 +525,7 @@
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.SystemColors.Control;
-            this.button2.Location = new System.Drawing.Point(267, 458);
+            this.button2.Location = new System.Drawing.Point(281, 458);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(40, 40);
             this.button2.TabIndex = 79;
@@ -535,7 +539,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(543, 458);
+            this.BT_Salir.Location = new System.Drawing.Point(557, 458);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
@@ -575,34 +579,34 @@
             // 
             this.LB_Titulo.AutoSize = true;
             this.LB_Titulo.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Titulo.Location = new System.Drawing.Point(26, 99);
+            this.LB_Titulo.Location = new System.Drawing.Point(40, 99);
             this.LB_Titulo.Name = "LB_Titulo";
             this.LB_Titulo.Size = new System.Drawing.Size(171, 18);
             this.LB_Titulo.TabIndex = 12;
             this.LB_Titulo.Text = "LISTADO DE PROVEEDORES";
             // 
-            // CB_TipoEva
+            // cmbTipoEvaluacion
             // 
-            this.CB_TipoEva.FormattingEnabled = true;
-            this.CB_TipoEva.Items.AddRange(new object[] {
+            this.cmbTipoEvaluacion.FormattingEnabled = true;
+            this.cmbTipoEvaluacion.Items.AddRange(new object[] {
+            "",
             "CALIDAD",
             "ENTREGA"});
-            this.CB_TipoEva.Location = new System.Drawing.Point(833, 18);
-            this.CB_TipoEva.Name = "CB_TipoEva";
-            this.CB_TipoEva.Size = new System.Drawing.Size(24, 21);
-            this.CB_TipoEva.TabIndex = 11;
-            this.CB_TipoEva.Visible = false;
+            this.cmbTipoEvaluacion.Location = new System.Drawing.Point(754, 98);
+            this.cmbTipoEvaluacion.Name = "cmbTipoEvaluacion";
+            this.cmbTipoEvaluacion.Size = new System.Drawing.Size(94, 21);
+            this.cmbTipoEvaluacion.TabIndex = 11;
+            this.cmbTipoEvaluacion.SelectedIndexChanged += new System.EventHandler(this.cmbTipoEvaluacion_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(830, 42);
+            this.label2.Location = new System.Drawing.Point(651, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 18);
             this.label2.TabIndex = 10;
             this.label2.Text = "Evaluación de:";
-            this.label2.Visible = false;
             // 
             // DGV_EvalSemProve
             // 
@@ -628,30 +632,124 @@
             this.Categoria2,
             this.EvaCal,
             this.EvaEnt,
+            this.Actualiza,
             this.Fechas});
             this.DGV_EvalSemProve.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle13;
-            this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.DGV_EvalSemProve.Location = new System.Drawing.Point(14, 128);
-            this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle14;
+            this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.DGV_EvalSemProve.Location = new System.Drawing.Point(10, 128);
+            this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.DGV_EvalSemProve.RowHeadersWidth = 15;
-            this.DGV_EvalSemProve.Size = new System.Drawing.Size(822, 310);
+            this.DGV_EvalSemProve.Size = new System.Drawing.Size(859, 310);
             this.DGV_EvalSemProve.TabIndex = 9;
+            this.DGV_EvalSemProve.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellClick);
             this.DGV_EvalSemProve.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellDoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copiarToolStripMenuItem,
+            this.copiarConCabecerasToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 48);
+            // 
+            // copiarToolStripMenuItem
+            // 
+            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.copiarToolStripMenuItem.Text = "Copiar";
+            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
+            // 
+            // copiarConCabecerasToolStripMenuItem
+            // 
+            this.copiarConCabecerasToolStripMenuItem.Name = "copiarConCabecerasToolStripMenuItem";
+            this.copiarConCabecerasToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.copiarConCabecerasToolStripMenuItem.Text = "Copiar con Cabeceras";
+            this.copiarConCabecerasToolStripMenuItem.Click += new System.EventHandler(this.copiarConCabecerasToolStripMenuItem_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(374, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(46, 48);
+            this.button1.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.button1, "Buscar");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // TB_Hasta
+            // 
+            this.TB_Hasta.Location = new System.Drawing.Point(252, 24);
+            this.TB_Hasta.Mask = "00/00/0000";
+            this.TB_Hasta.Name = "TB_Hasta";
+            this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
+            this.TB_Hasta.TabIndex = 6;
+            this.TB_Hasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Hasta.ValidatingType = typeof(System.DateTime);
+            this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(200, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 18);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Hasta:";
+            // 
+            // TB_Desde
+            // 
+            this.TB_Desde.Location = new System.Drawing.Point(85, 23);
+            this.TB_Desde.Mask = "00/00/0000";
+            this.TB_Desde.Name = "TB_Desde";
+            this.TB_Desde.Size = new System.Drawing.Size(100, 20);
+            this.TB_Desde.TabIndex = 4;
+            this.TB_Desde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Desde.ValidatingType = typeof(System.DateTime);
+            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(27, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 18);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Desde:";
+            // 
+            // lblTipoListado
+            // 
+            this.lblTipoListado.Font = new System.Drawing.Font("Calibri", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoListado.Location = new System.Drawing.Point(220, 99);
+            this.lblTipoListado.Name = "lblTipoListado";
+            this.lblTipoListado.Size = new System.Drawing.Size(302, 18);
+            this.lblTipoListado.TabIndex = 83;
+            this.lblTipoListado.Text = "LISTADO DE PROVEEDORES";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Proveedor
             // 
@@ -822,119 +920,36 @@
             this.EvaEnt.Name = "EvaEnt";
             this.EvaEnt.Width = 80;
             // 
+            // Actualiza
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Actualiza.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Actualiza.HeaderText = "Actualiza";
+            this.Actualiza.MaxInputLength = 1;
+            this.Actualiza.Name = "Actualiza";
+            this.Actualiza.ReadOnly = true;
+            this.Actualiza.Width = 60;
+            // 
             // Fechas
             // 
             this.Fechas.DataPropertyName = "Fecha";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Fechas.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Fechas.DefaultCellStyle = dataGridViewCellStyle13;
             this.Fechas.HeaderText = "Fecha";
             this.Fechas.Name = "Fechas";
             this.Fechas.ReadOnly = true;
             this.Fechas.Width = 80;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copiarToolStripMenuItem,
-            this.copiarConCabecerasToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 48);
-            // 
-            // copiarToolStripMenuItem
-            // 
-            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
-            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.copiarToolStripMenuItem.Text = "Copiar";
-            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
-            // 
-            // copiarConCabecerasToolStripMenuItem
-            // 
-            this.copiarConCabecerasToolStripMenuItem.Name = "copiarConCabecerasToolStripMenuItem";
-            this.copiarConCabecerasToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.copiarConCabecerasToolStripMenuItem.Text = "Copiar con Cabeceras";
-            this.copiarConCabecerasToolStripMenuItem.Click += new System.EventHandler(this.copiarConCabecerasToolStripMenuItem_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(360, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 48);
-            this.button1.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.button1, "Buscar");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // TB_Hasta
-            // 
-            this.TB_Hasta.Location = new System.Drawing.Point(238, 24);
-            this.TB_Hasta.Mask = "00/00/0000";
-            this.TB_Hasta.Name = "TB_Hasta";
-            this.TB_Hasta.Size = new System.Drawing.Size(100, 20);
-            this.TB_Hasta.TabIndex = 6;
-            this.TB_Hasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_Hasta.ValidatingType = typeof(System.DateTime);
-            this.TB_Hasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Hasta_KeyDown);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(186, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 18);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Hasta:";
-            // 
-            // TB_Desde
-            // 
-            this.TB_Desde.Location = new System.Drawing.Point(71, 23);
-            this.TB_Desde.Mask = "00/00/0000";
-            this.TB_Desde.Name = "TB_Desde";
-            this.TB_Desde.Size = new System.Drawing.Size(100, 20);
-            this.TB_Desde.TabIndex = 4;
-            this.TB_Desde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_Desde.ValidatingType = typeof(System.DateTime);
-            this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(13, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 18);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Desde:";
-            // 
-            // lblTipoListado
-            // 
-            this.lblTipoListado.Font = new System.Drawing.Font("Calibri", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoListado.Location = new System.Drawing.Point(206, 98);
-            this.lblTipoListado.Name = "lblTipoListado";
-            this.lblTipoListado.Size = new System.Drawing.Size(302, 18);
-            this.lblTipoListado.TabIndex = 83;
-            this.lblTipoListado.Text = "LISTADO DE PROVEEDORES";
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ActSemProv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(868, 562);
+            this.ClientSize = new System.Drawing.Size(894, 562);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Location = new System.Drawing.Point(20, 20);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(884, 601);
             this.MinimumSize = new System.Drawing.Size(884, 601);
             this.Name = "ActSemProv";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -973,7 +988,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView DGV_EvalSemProve;
-        private System.Windows.Forms.ComboBox CB_TipoEva;
+        private System.Windows.Forms.ComboBox cmbTipoEvaluacion;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label LB_Titulo;
         private System.Windows.Forms.Button BT_Guardar;
@@ -1032,6 +1047,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Categoria2;
         private System.Windows.Forms.DataGridViewComboBoxColumn EvaCal;
         private System.Windows.Forms.DataGridViewComboBoxColumn EvaEnt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Actualiza;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fechas;
     }
 }

@@ -37,6 +37,7 @@ namespace Eval_Proveedores.Novedades
             WTipoImpresion = 1;
             WImprimiendo = false;
             cmbTipoInforme.SelectedIndex = 0;
+            cmbTipoEvaluacion.SelectedIndex = 0;
             //DGV_EvalSemProve.Visible = false;
 
             //LB_Titulo.Visible = false;
@@ -129,6 +130,7 @@ namespace Eval_Proveedores.Novedades
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Fechas"].Value = WProveedor["Fechacategoria"];
                     DGV_EvalSemProve.Rows[WRenglon].Cells["EvaCal"].Value = Helper._DeterminarCalidad(WProveedor["CategoriaI"].ToString());
                     DGV_EvalSemProve.Rows[WRenglon].Cells["EvaEnt"].Value = Helper._DeterminarCalidadEntrega(WProveedor["CategoriaII"].ToString());
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["Actualiza"].Value = "";
 
                 }
 
@@ -507,21 +509,54 @@ namespace Eval_Proveedores.Novedades
                                 WCategoriaI = _TraerCalidad(WTemp);
                                 WTemp = WRow.Cells["EvaEnt"].Value.ToString();
                                 WCategoriaII = _TraerEnt(WTemp);
+                                var WActualiza = WRow.Cells["Actualiza"].Value ?? "";
 
-                                if (_DatosActualizados(WRow, WCategoriaI, WCategoriaII))
+                                if (WActualiza.ToString().ToUpper() == "X")
                                 {
-                                    WFechaCategoria = DateTime.Now.ToString("dd/MM/yyyy");
-                                    WFechaCategoriaOrd = Helper.OrdenarFecha(WFechaCategoria);
+                                    if (cmbTipoEvaluacion.SelectedIndex == 0)
+                                    {
+                                        WFechaCategoria = DateTime.Now.ToString("dd/MM/yyyy");
+                                        WFechaCategoriaOrd = Helper.OrdenarFecha(WFechaCategoria);
 
-                                    cmd.CommandText = "UPDATE Proveedor SET FechaCategoria = '" + WFechaCategoria + "', "
-                                                    + " OrdFechaCategoria = '" + WFechaCategoriaOrd + "', "
-                                                    + " CategoriaI = '" + WCategoriaI + "', "
-                                                    + " CategoriaII = '" + WCategoriaII + "', "
-                                                    + " Evaluador = " + WEvaluador + " "
-                                                    + " WHERE Proveedor  = '" + WProveedor + "'";
+                                        cmd.CommandText = "UPDATE Proveedor SET FechaCategoria = '" + WFechaCategoria +
+                                                          "', "
+                                                          + " OrdFechaCategoria = '" + WFechaCategoriaOrd + "', "
+                                                          + " CategoriaI = '" + WCategoriaI + "', "
+                                                          + " Evaluador = " + WEvaluador + " "
+                                                          + " WHERE Proveedor  = '" + WProveedor + "'";
 
-                                    cmd.ExecuteNonQuery();
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                    else
+                                    {
+                                        WFechaCategoria = DateTime.Now.ToString("dd/MM/yyyy");
+                                        WFechaCategoriaOrd = Helper.OrdenarFecha(WFechaCategoria);
+
+                                        cmd.CommandText = "UPDATE Proveedor SET FechaCategoria = '" + WFechaCategoria + "', "
+                                                        + " OrdFechaCategoria = '" + WFechaCategoriaOrd + "', "
+                                                        + " CategoriaII = '" + WCategoriaII + "', "
+                                                        + " Evaluador = " + WEvaluador + " "
+                                                        + " WHERE Proveedor  = '" + WProveedor + "'";
+
+                                        cmd.ExecuteNonQuery();
+                                    }
                                 }
+
+
+                                //if (_DatosActualizados(WRow, WCategoriaI, WCategoriaII))
+                                //{
+                                //    WFechaCategoria = DateTime.Now.ToString("dd/MM/yyyy");
+                                //    WFechaCategoriaOrd = Helper.OrdenarFecha(WFechaCategoria);
+
+                                //    cmd.CommandText = "UPDATE Proveedor SET FechaCategoria = '" + WFechaCategoria + "', "
+                                //                    + " OrdFechaCategoria = '" + WFechaCategoriaOrd + "', "
+                                //                    + " CategoriaI = '" + WCategoriaI + "', "
+                                //                    + " CategoriaII = '" + WCategoriaII + "', "
+                                //                    + " Evaluador = " + WEvaluador + " "
+                                //                    + " WHERE Proveedor  = '" + WProveedor + "'";
+
+                                //    cmd.ExecuteNonQuery();
+                                //}
 
                             }
 
@@ -605,6 +640,8 @@ namespace Eval_Proveedores.Novedades
         private void DGV_EvalSemProve_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
+            DataGridViewColumn column = DGV_EvalSemProve.Columns["Actualiza"];
+            if (column != null && column.Index == e.ColumnIndex) return;
 
             if (e.ColumnIndex > -1)
                 if (DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "EvaCal" || DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "EvaEnt") return;
@@ -1401,6 +1438,39 @@ namespace Eval_Proveedores.Novedades
                 throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
             }
 
+        }
+
+        private void cmbTipoEvaluacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbTipoEvaluacion.SelectedIndex == 0)
+            {
+                DataGridViewColumn column = DGV_EvalSemProve.Columns["EvaCal"];
+                if (column != null) column.Visible = true;
+
+                column = DGV_EvalSemProve.Columns["EvaEnt"];
+                if (column != null) column.Visible = false;
+            }
+            else
+            {
+                DataGridViewColumn column = DGV_EvalSemProve.Columns["EvaCal"];
+                if (column != null) column.Visible = false;
+
+                column = DGV_EvalSemProve.Columns["EvaEnt"];
+                if (column != null) column.Visible = true;
+            }
+        }
+
+        private void DGV_EvalSemProve_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            DataGridViewColumn column = DGV_EvalSemProve.Columns["Actualiza"];
+            if (column != null && column.Index == e.ColumnIndex)
+            {
+                var WValor = DGV_EvalSemProve.CurrentCell.Value ?? "";
+
+                DGV_EvalSemProve.CurrentCell.Value = WValor.ToString() == "" ? "X" : "";
+            }
         }
     }
 }
