@@ -11,7 +11,7 @@ namespace Modulo_Capacitacion.Maestros.Temas
         public Temas_Inicio()
         {
             InitializeComponent();
-            DGV_Temas.DataSource = temas.ListarTodos();
+            DGV_Temas.DataSource = temas.ListarTodosPrincipal();
         }
 
 
@@ -82,19 +82,13 @@ namespace Modulo_Capacitacion.Maestros.Temas
 
         private void TBFiltro_KeyUp(object sender, KeyEventArgs e)
         {
-            if (TBFiltro.Text != "")
-            {
-                DataTable dataTable = DGV_Temas.DataSource as DataTable;
-                if (dataTable != null)
-                    dataTable.DefaultView.RowFilter = string.Format("CONVERT(Codigo, System.String) like '%{0}%' "
-                                                    + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(TemaI, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Responsable, System.String) like '%{0}%'", TBFiltro.Text);
-            }
-            else
-            {
-                ActualizarGrilla();
-            }
+            DataTable dataTable = DGV_Temas.DataSource as DataTable;
+            if (dataTable != null)
+                dataTable.DefaultView.RowFilter = string.Format("CONVERT(Codigo, System.String) like '%{0}%' "
+                                                + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
+                                                + " OR CONVERT(TemaI, System.String) like '%{0}%'"
+                                                + " OR CONVERT(Responsable, System.String) like '%{0}%'", TBFiltro.Text);
+            
         }
 
         private void DGV_Temas_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -142,6 +136,18 @@ namespace Modulo_Capacitacion.Maestros.Temas
         private void Temas_Inicio_Shown(object sender, EventArgs e)
         {
             txtCodigo.Focus();
+        }
+
+        private void Temas_Inicio_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TBFiltro.Text = "";
+            TBFiltro.Focus();
+            TBFiltro_KeyUp(null, null);
         }
 
     }

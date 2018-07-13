@@ -222,7 +222,8 @@
     End Sub
 
     Private Sub CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem.Click
-        abrir(New ListadoCuentaCorrienteProveedoresSelectivo)
+        'abrir(New ListadoCuentaCorrienteProveedoresSelectivo)
+        abrir(New ListadoCuentaCorrienteProveedoresSelectivoPrueba)
     End Sub
 
     Private Sub AplicacionDeCorpobantesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AplicacionDeCorpobantesToolStripMenuItem.Click
@@ -283,7 +284,7 @@
         Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
 
-    Private Sub CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem.Click
-        abrir(New ListadoCuentaCorrienteProveedoresSelectivoPrueba)
-    End Sub
+    'Private Sub CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem.Click
+    '    abrir(New ListadoCuentaCorrienteProveedoresSelectivoPrueba)
+    'End Sub
 End Class

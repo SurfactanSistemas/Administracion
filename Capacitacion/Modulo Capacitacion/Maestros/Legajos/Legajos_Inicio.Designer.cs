@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGV_Legajos = new System.Windows.Forms.DataGridView();
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +63,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvDiscriminarLegajos = new System.Windows.Forms.DataGridView();
             this.legajoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Legajos)).BeginInit();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -98,13 +99,13 @@
             this.DGV_Legajos.Location = new System.Drawing.Point(85, 0);
             this.DGV_Legajos.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Legajos.Name = "DGV_Legajos";
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Legajos.Size = new System.Drawing.Size(863, 441);
             this.DGV_Legajos.TabIndex = 26;
             this.DGV_Legajos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
@@ -134,8 +135,8 @@
             // Vigencia
             // 
             this.Vigencia.DataPropertyName = "Vigencia";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle3;
             this.Vigencia.HeaderText = "Vigencia";
             this.Vigencia.Name = "Vigencia";
             this.Vigencia.Width = 73;
@@ -168,6 +169,7 @@
             // 
             // P_Filtrado
             // 
+            this.P_Filtrado.Controls.Add(this.button2);
             this.P_Filtrado.Controls.Add(this.ckSoloNoActualizados);
             this.P_Filtrado.Controls.Add(this.ckSoloActivos);
             this.P_Filtrado.Controls.Add(this.txtCodigo);
@@ -185,7 +187,7 @@
             // 
             this.ckSoloNoActualizados.AutoSize = true;
             this.ckSoloNoActualizados.ForeColor = System.Drawing.SystemColors.Control;
-            this.ckSoloNoActualizados.Location = new System.Drawing.Point(804, 21);
+            this.ckSoloNoActualizados.Location = new System.Drawing.Point(824, 22);
             this.ckSoloNoActualizados.Name = "ckSoloNoActualizados";
             this.ckSoloNoActualizados.Size = new System.Drawing.Size(112, 17);
             this.ckSoloNoActualizados.TabIndex = 2;
@@ -197,7 +199,7 @@
             // 
             this.ckSoloActivos.AutoSize = true;
             this.ckSoloActivos.ForeColor = System.Drawing.SystemColors.Control;
-            this.ckSoloActivos.Location = new System.Drawing.Point(700, 21);
+            this.ckSoloActivos.Location = new System.Drawing.Point(720, 22);
             this.ckSoloActivos.Name = "ckSoloActivos";
             this.ckSoloActivos.Size = new System.Drawing.Size(100, 17);
             this.ckSoloActivos.TabIndex = 2;
@@ -207,7 +209,7 @@
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(182, 19);
+            this.txtCodigo.Location = new System.Drawing.Point(169, 20);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(77, 20);
             this.txtCodigo.TabIndex = 1;
@@ -220,7 +222,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(127, 20);
+            this.label3.Location = new System.Drawing.Point(114, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 18);
             this.label3.TabIndex = 0;
@@ -228,9 +230,9 @@
             // 
             // TBFiltro
             // 
-            this.TBFiltro.Location = new System.Drawing.Point(339, 19);
+            this.TBFiltro.Location = new System.Drawing.Point(326, 20);
             this.TBFiltro.Name = "TBFiltro";
-            this.TBFiltro.Size = new System.Drawing.Size(355, 20);
+            this.TBFiltro.Size = new System.Drawing.Size(297, 20);
             this.TBFiltro.TabIndex = 1;
             this.TBFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
             this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
@@ -240,7 +242,7 @@
             this.LBFiltro.AutoSize = true;
             this.LBFiltro.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBFiltro.ForeColor = System.Drawing.Color.White;
-            this.LBFiltro.Location = new System.Drawing.Point(284, 20);
+            this.LBFiltro.Location = new System.Drawing.Point(271, 21);
             this.LBFiltro.Name = "LBFiltro";
             this.LBFiltro.Size = new System.Drawing.Size(49, 18);
             this.LBFiltro.TabIndex = 0;
@@ -460,6 +462,18 @@
             // 
             this.legajoBindingSource.DataSource = typeof(Negocio.Legajo);
             // 
+            // button2
+            // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.SystemColors.Control;
+            this.button2.Location = new System.Drawing.Point(629, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(80, 22);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Limpiar Filtro";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Legajos_Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,5 +537,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button2;
     }
 }

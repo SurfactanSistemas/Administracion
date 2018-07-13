@@ -32,10 +32,12 @@ Public Class IngresoRemitoVario
             If _c.Items.Count > 0 Then _c.SelectedIndex = 0
         Next
 
+        ckBloquear.Checked = False
+
     End Sub
 
     Private Sub IngresoOrdenTrabajo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        txtRemito.Focus()
+        txtCliente.Focus()
     End Sub
 
     Private Sub txtRemito_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemito.KeyDown
@@ -138,12 +140,16 @@ Public Class IngresoRemitoVario
 
                 Dim WCliente As DataRow = _TraerDatosCliente(txtCliente.Text)
 
+                ckBloquear.Checked = False
+
                 If Not IsNothing(WCliente) Then
 
                     txtDesCliente.Text = WCliente.Item("Razon")
                     txtDireccion.Text = WCliente.Item("Direccion")
                     txtLocalidad.Text = WCliente.Item("Localidad")
                     txtCuit.Text = WCliente.Item("Cuit")
+
+                    ckBloquear.Checked = True
 
                     txtDireccionEntrega.Focus()
 
@@ -424,8 +430,10 @@ Public Class IngresoRemitoVario
     End Sub
 
     Private Sub btnDireccionesEntrega_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDireccionesEntrega.Click
-        Dim frm = New DireccionesCliente(txtCliente.Text)
-        frm.Show(Me)
+        If txtCliente.Text.Trim <> "" Then
+            Dim frm = New DireccionesCliente(txtCliente.Text)
+            frm.Show(Me)
+        End If
     End Sub
 
     Public Sub AsignarDireccion(ByVal wDireccion As Object)
@@ -443,7 +451,13 @@ Public Class IngresoRemitoVario
         txtCliente_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
-    Private Sub txtCliente_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCliente.DoubleClick
+    Private Sub txtCliente_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
         btnConsultas.PerformClick()
+    End Sub
+
+    Private Sub ckBloquear_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckBloquear.CheckedChanged
+        For Each c As Control In {txtCuit, txtDesCliente, txtDireccion, txtDireccionEntrega, txtLocalidad}
+            c.Enabled = Not c.Enabled
+        Next
     End Sub
 End Class

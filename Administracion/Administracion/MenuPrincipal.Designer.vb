@@ -73,7 +73,6 @@ Partial Class MenuPrincipal
         Me.ListadoDeDeudaDePymeNacionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
@@ -245,7 +244,7 @@ Partial Class MenuPrincipal
         '
         'ListadosToolStripMenuItem
         '
-        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem, Me.CuentaCorrienteDeProveedoresToolStripMenuItem, Me.SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem, Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem, Me.ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem, Me.ToolStripMenuItem8, Me.ListadosContablesToolStripMenuItem, Me.ListadoDeDepositosToolStripMenuItem, Me.ListadoDePagosPosdatadosToolStripMenuItem, Me.MovmietosDeBancosToolStripMenuItem, Me.ListadoDeValoresEnCarteraToolStripMenuItem, Me.ListadoDeChequesEmitidosToolStripMenuItem, Me.ListadoDeRetencionesDeIngresosBrutosToolStripMenuItem, Me.ControlDeRecibosProvisoriosToolStripMenuItem1, Me.ListadoDeDeudaDePymeNacionToolStripMenuItem1, Me.ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem})
+        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem, Me.CuentaCorrienteDeProveedoresToolStripMenuItem, Me.SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem, Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem, Me.ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem, Me.ToolStripMenuItem8, Me.ListadosContablesToolStripMenuItem, Me.ListadoDeDepositosToolStripMenuItem, Me.ListadoDePagosPosdatadosToolStripMenuItem, Me.MovmietosDeBancosToolStripMenuItem, Me.ListadoDeValoresEnCarteraToolStripMenuItem, Me.ListadoDeChequesEmitidosToolStripMenuItem, Me.ListadoDeRetencionesDeIngresosBrutosToolStripMenuItem, Me.ControlDeRecibosProvisoriosToolStripMenuItem1, Me.ListadoDeDeudaDePymeNacionToolStripMenuItem1, Me.ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem})
         Me.ListadosToolStripMenuItem.Name = "ListadosToolStripMenuItem"
         Me.ListadosToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ListadosToolStripMenuItem.Text = "Listados"
@@ -415,12 +414,6 @@ Partial Class MenuPrincipal
         Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem.Name = "ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem"
         Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
         Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem.Text = "Listado de Proyeccion de Cuenta Corrientes de Proveedores Analiticos"
-        '
-        'CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem
-        '
-        Me.CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem.Name = "CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem"
-        Me.CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
-        Me.CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem.Text = "Cuenta Corriente de Proveedores Selectivo (Prueba)"
         '
         'ProcesosToolStripMenuItem
         '
@@ -656,5 +649,4 @@ Partial Class MenuPrincipal
     Friend WithEvents ToolStripMenuItem10 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EnvioEnEMailAClientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

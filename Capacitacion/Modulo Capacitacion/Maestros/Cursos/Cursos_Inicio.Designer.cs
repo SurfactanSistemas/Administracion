@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,6 +71,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -135,6 +136,7 @@
             // 
             // P_Filtrado
             // 
+            this.P_Filtrado.Controls.Add(this.button1);
             this.P_Filtrado.Controls.Add(this.label5);
             this.P_Filtrado.Controls.Add(this.txtCodigo);
             this.P_Filtrado.Controls.Add(this.label3);
@@ -150,7 +152,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(135, 14);
+            this.label5.Location = new System.Drawing.Point(135, 17);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 19);
             this.label5.TabIndex = 1;
@@ -158,7 +160,7 @@
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(200, 14);
+            this.txtCodigo.Location = new System.Drawing.Point(200, 16);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(89, 20);
             this.txtCodigo.TabIndex = 1;
@@ -170,7 +172,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(297, 15);
+            this.label3.Location = new System.Drawing.Point(297, 17);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 19);
             this.label3.TabIndex = 1;
@@ -178,9 +180,9 @@
             // 
             // TBFiltro
             // 
-            this.TBFiltro.Location = new System.Drawing.Point(380, 14);
+            this.TBFiltro.Location = new System.Drawing.Point(352, 16);
             this.TBFiltro.Name = "TBFiltro";
-            this.TBFiltro.Size = new System.Drawing.Size(400, 20);
+            this.TBFiltro.Size = new System.Drawing.Size(350, 20);
             this.TBFiltro.TabIndex = 1;
             this.TBFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
             this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
@@ -205,14 +207,14 @@
             this.dgvTemas.Margin = new System.Windows.Forms.Padding(0);
             this.dgvTemas.Name = "dgvTemas";
             this.dgvTemas.ReadOnly = true;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTemas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTemas.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvTemas.RowHeadersWidth = 15;
             this.dgvTemas.Size = new System.Drawing.Size(768, 471);
             this.dgvTemas.TabIndex = 7;
@@ -231,8 +233,8 @@
             // Tema
             // 
             this.Tema.DataPropertyName = "Tema";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tema.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle5;
             this.Tema.HeaderText = "Tema";
             this.Tema.Name = "Tema";
             this.Tema.ReadOnly = true;
@@ -249,8 +251,8 @@
             // Curs
             // 
             this.Curs.DataPropertyName = "Curso";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Curs.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curs.DefaultCellStyle = dataGridViewCellStyle6;
             this.Curs.HeaderText = "Tema";
             this.Curs.Name = "Curs";
             this.Curs.ReadOnly = true;
@@ -269,8 +271,8 @@
             // Horas
             // 
             this.Horas.DataPropertyName = "Horas";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Horas.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle7;
             this.Horas.HeaderText = "Horas";
             this.Horas.Name = "Horas";
             this.Horas.ReadOnly = true;
@@ -529,6 +531,19 @@
             this.dgvCursos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCursos_CellMouseDoubleClick);
             this.dgvCursos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCursos_RowHeaderMouseDoubleClick);
             // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(708, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(80, 25);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Limpiar Filtro";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Cursos_Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -601,5 +616,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label lblTema;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -200,21 +200,15 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void TBFiltro_KeyUp(object sender, KeyEventArgs e)
         {
-            if (TBFiltro.Text != "")
-            {
-                DataTable dataTable = DGV_Legajos.DataSource as DataTable;
-                if (dataTable != null)
-                    dataTable.DefaultView.RowFilter = string.Format("(CONVERT(Codigo, System.String) like '%{0}%' "
-                                                    + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Vigencia, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Sector, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Dni, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Perfil, System.String) like '%{0}%') AND CONVERT(Mostrar, System.String) <> 'N'", TBFiltro.Text);
-            }
-            else
-            {
-                ActualizarGrilla();
-            }
+            DataTable dataTable = DGV_Legajos.DataSource as DataTable;
+            if (dataTable != null)
+                dataTable.DefaultView.RowFilter = string.Format("(CONVERT(Codigo, System.String) like '%{0}%' "
+                                                + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
+                                                + " OR CONVERT(Vigencia, System.String) like '%{0}%'"
+                                                + " OR CONVERT(Sector, System.String) like '%{0}%'"
+                                                + " OR CONVERT(Dni, System.String) like '%{0}%'"
+                                                + " OR CONVERT(Perfil, System.String) like '%{0}%') AND CONVERT(Mostrar, System.String) <> 'N'", TBFiltro.Text);
+            
         }
 
         private void DGV_Perfiles_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -332,6 +326,13 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            TBFiltro.Text = "";
+            TBFiltro.Focus();
+            TBFiltro_KeyUp(null, null);
         }
     }
 }

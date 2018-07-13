@@ -40,7 +40,6 @@ Partial Class IngresoRemitoVario
         Me.txtDireccion = New System.Windows.Forms.TextBox()
         Me.txtDesCliente = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtCliente = New System.Windows.Forms.MaskedTextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -57,6 +56,8 @@ Partial Class IngresoRemitoVario
         Me.btnConsultas = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.ckBloquear = New System.Windows.Forms.CheckBox()
+        Me.txtCliente = New System.Windows.Forms.TextBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -139,9 +140,9 @@ Partial Class IngresoRemitoVario
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
         Me.Label1.Location = New System.Drawing.Point(28, 14)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(172, 19)
+        Me.Label1.Size = New System.Drawing.Size(178, 19)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Ingreso de Remito Vario"
+        Me.Label1.Text = "Ingreso de Remito Varios"
         '
         'Panel1
         '
@@ -204,9 +205,9 @@ Partial Class IngresoRemitoVario
         Me.GroupBox1.Controls.Add(Me.btnDireccionesEntrega)
         Me.GroupBox1.Controls.Add(Me.txtCuit)
         Me.GroupBox1.Controls.Add(Me.txtDireccion)
+        Me.GroupBox1.Controls.Add(Me.txtCliente)
         Me.GroupBox1.Controls.Add(Me.txtDesCliente)
         Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.txtCliente)
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.Label9)
@@ -269,10 +270,10 @@ Partial Class IngresoRemitoVario
         '
         'txtDesCliente
         '
-        Me.txtDesCliente.Location = New System.Drawing.Point(226, 19)
+        Me.txtDesCliente.Location = New System.Drawing.Point(204, 19)
         Me.txtDesCliente.MaxLength = 50
         Me.txtDesCliente.Name = "txtDesCliente"
-        Me.txtDesCliente.Size = New System.Drawing.Size(370, 20)
+        Me.txtDesCliente.Size = New System.Drawing.Size(392, 20)
         Me.txtDesCliente.TabIndex = 1
         '
         'Label5
@@ -280,21 +281,11 @@ Partial Class IngresoRemitoVario
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label5.Location = New System.Drawing.Point(150, 22)
+        Me.Label5.Location = New System.Drawing.Point(128, 22)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(69, 14)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Razon Social"
-        '
-        'txtCliente
-        '
-        Me.txtCliente.Location = New System.Drawing.Point(64, 19)
-        Me.txtCliente.Mask = "A00000"
-        Me.txtCliente.Name = "txtCliente"
-        Me.txtCliente.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCliente.Size = New System.Drawing.Size(78, 20)
-        Me.txtCliente.TabIndex = 2
-        Me.txtCliente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label10
         '
@@ -415,6 +406,7 @@ Partial Class IngresoRemitoVario
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.ckBloquear)
         Me.Panel5.Controls.Add(Me.btnCerrar)
         Me.Panel5.Controls.Add(Me.btnConsultas)
         Me.Panel5.Controls.Add(Me.btnLimpiar)
@@ -462,6 +454,25 @@ Partial Class IngresoRemitoVario
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
+        'ckBloquear
+        '
+        Me.ckBloquear.AutoSize = True
+        Me.ckBloquear.Location = New System.Drawing.Point(596, 28)
+        Me.ckBloquear.Name = "ckBloquear"
+        Me.ckBloquear.Size = New System.Drawing.Size(81, 17)
+        Me.ckBloquear.TabIndex = 1
+        Me.ckBloquear.Text = "CheckBox1"
+        Me.ckBloquear.UseVisualStyleBackColor = True
+        Me.ckBloquear.Visible = False
+        '
+        'txtCliente
+        '
+        Me.txtCliente.Location = New System.Drawing.Point(64, 19)
+        Me.txtCliente.MaxLength = 6
+        Me.txtCliente.Name = "txtCliente"
+        Me.txtCliente.Size = New System.Drawing.Size(56, 20)
+        Me.txtCliente.TabIndex = 1
+        '
         'IngresoRemitoVario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -484,6 +495,7 @@ Partial Class IngresoRemitoVario
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -506,7 +518,6 @@ Partial Class IngresoRemitoVario
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents txtObservaciones As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents txtCliente As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtRemito As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents txtDesCliente As System.Windows.Forms.TextBox
@@ -522,4 +533,6 @@ Partial Class IngresoRemitoVario
     Friend WithEvents txtDireccion As System.Windows.Forms.TextBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents btnConsultas As System.Windows.Forms.Button
+    Friend WithEvents ckBloquear As System.Windows.Forms.CheckBox
+    Friend WithEvents txtCliente As System.Windows.Forms.TextBox
 End Class

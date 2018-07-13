@@ -37,6 +37,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.P_Filtrado = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TBFiltro = new System.Windows.Forms.TextBox();
             this.DGV_Temas = new System.Windows.Forms.DataGridView();
@@ -59,8 +61,7 @@
             this.btnImprimir = new System.Windows.Forms.Button();
             this.BT_Eliminar = new System.Windows.Forms.Button();
             this.Bt_Fin = new System.Windows.Forms.Button();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -119,6 +120,7 @@
             // 
             // P_Filtrado
             // 
+            this.P_Filtrado.Controls.Add(this.button1);
             this.P_Filtrado.Controls.Add(this.label4);
             this.P_Filtrado.Controls.Add(this.txtCodigo);
             this.P_Filtrado.Controls.Add(this.label3);
@@ -129,6 +131,26 @@
             this.P_Filtrado.Name = "P_Filtrado";
             this.P_Filtrado.Size = new System.Drawing.Size(1081, 52);
             this.P_Filtrado.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.Control;
+            this.label4.Location = new System.Drawing.Point(183, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 16);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Filtrar:";
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(241, 17);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(66, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
             // 
             // label3
             // 
@@ -145,7 +167,7 @@
             // 
             this.TBFiltro.Location = new System.Drawing.Point(414, 17);
             this.TBFiltro.Name = "TBFiltro";
-            this.TBFiltro.Size = new System.Drawing.Size(483, 20);
+            this.TBFiltro.Size = new System.Drawing.Size(380, 20);
             this.TBFiltro.TabIndex = 1;
             this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
             // 
@@ -387,25 +409,17 @@
             this.Bt_Fin.UseVisualStyleBackColor = true;
             this.Bt_Fin.Click += new System.EventHandler(this.Bt_Fin_Click);
             // 
-            // txtCodigo
+            // button1
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(241, 17);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(66, 20);
-            this.txtCodigo.TabIndex = 1;
-            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(183, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 16);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Filtrar:";
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(800, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 24);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Limpiar Filtro";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Temas_Inicio
             // 
@@ -415,6 +429,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Temas_Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Temas_Inicio_Load);
             this.Shown += new System.EventHandler(this.Temas_Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -460,5 +475,6 @@
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -97,21 +97,16 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
         private void TBFiltro_KeyUp(object sender, KeyEventArgs e)
         {
-            if (TBFiltro.Text != "")
-            {
-                DataTable dataTable = DGV_Perfiles.DataSource as DataTable;
-                if (dataTable != null)
-                    dataTable.DefaultView.RowFilter = string.Format("CONVERT(Codigo, System.String) like '%{0}%' "
-                                                    + " OR CONVERT(Perfil, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Sector, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Vigencia, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Version, System.String) like '%{0}%'"
-                                                    + " OR CONVERT(Descripcion, System.String) like '%{0}%'", TBFiltro.Text);
-            }
-            else
-            {
-                ActualizarGrilla();
-            }
+            
+            DataTable dataTable = DGV_Perfiles.DataSource as DataTable;
+            if (dataTable != null)
+                dataTable.DefaultView.RowFilter = string.Format("CONVERT(Codigo, System.String) like '%{0}%' "
+                                                + " OR CONVERT(Perfil, System.String) like '%{0}%'"
+                                                + " OR CONVERT(Sector, System.String) like '%{0}%'"
+                                                + " OR CONVERT(Vigencia, System.String) like '%{0}%'"
+                                                + " OR CONVERT(Version, System.String) like '%{0}%'"
+                                                + " OR CONVERT(Descripcion, System.String) like '%{0}%'", TBFiltro.Text);
+            
         }
 
         private void DGV_Perfiles_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -170,6 +165,13 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
                 txtCodigo.Text = "";
             }
 	        
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TBFiltro.Text = "";
+            TBFiltro.Focus();
+            TBFiltro_KeyUp(null, null);
         }
         
     }

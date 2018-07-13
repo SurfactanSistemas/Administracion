@@ -74,7 +74,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
             AgModCurso agregarOMod = new AgModCurso(WTema) {StartPosition = FormStartPosition.CenterScreen};
             agregarOMod.ShowDialog();
 
-            ActualizarGrilla();
+            //ActualizarGrilla();
         }
 
         private void BTModifCurso_Click(object sender, EventArgs e)
@@ -105,19 +105,12 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void TBFiltro_KeyUp(object sender, KeyEventArgs e)
         {
-            if (TBFiltro.Text != "")
-            {
                 DataTable dataTable = dgvTemas.DataSource as DataTable;
                 if (dataTable != null)
                     dataTable.DefaultView.RowFilter = string.Format("CONVERT(Tema, System.String) like '%{0}%' "
                                                     //+ " OR CONVERT(Descripcion, System.String) like '%{0}%'"
                                                     //+ " OR CONVERT(Curso, System.String) like '%{0}%'"
                                                     + " OR CONVERT(Descripcion, System.String) like '%{0}%'", TBFiltro.Text);
-            }
-            else
-            {
-                ActualizarGrilla();
-            }
         }
 
         private void DGV_Cursos_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -274,6 +267,13 @@ namespace Modulo_Capacitacion.Maestros.Cursos
                 txtCodigo.Text = "";
             }
 	        
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TBFiltro.Text = "";
+            TBFiltro.Focus();
+            TBFiltro_KeyUp(null, null);
         }
 
     }

@@ -31,6 +31,13 @@ namespace Negocio
             return repo.Listar(consulta);
         }
 
+        public DataTable ListarTodosPrincipal()
+        {
+            Conexion repo = new Conexion();
+            string consulta = "SELECT Codigo, Descripcion, TemaI, TemaII, TemaIII, Responsable, Horas, Tipo, ResponsableII, ResponsableIII, ResponsableIV FROM Curso WHERE Codigo > 0 ORDER BY Codigo";
+            return repo.Listar(consulta);
+        }
+
         public int ObtenerUltimoId()
         {
             Conexion repo = new Conexion();

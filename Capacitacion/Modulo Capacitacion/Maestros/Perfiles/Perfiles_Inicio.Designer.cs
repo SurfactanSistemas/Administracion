@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.P_Filtrado = new System.Windows.Forms.Panel();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.TBFiltro = new System.Windows.Forms.TextBox();
             this.LBFiltro = new System.Windows.Forms.Label();
             this.Bt_Fin = new System.Windows.Forms.Button();
@@ -54,8 +56,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.perfilBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -119,6 +120,7 @@
             // 
             // P_Filtrado
             // 
+            this.P_Filtrado.Controls.Add(this.button1);
             this.P_Filtrado.Controls.Add(this.txtCodigo);
             this.P_Filtrado.Controls.Add(this.label3);
             this.P_Filtrado.Controls.Add(this.TBFiltro);
@@ -130,11 +132,31 @@
             this.P_Filtrado.Size = new System.Drawing.Size(899, 55);
             this.P_Filtrado.TabIndex = 1;
             // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(137, 17);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(73, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(79, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 18);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Código:";
+            // 
             // TBFiltro
             // 
             this.TBFiltro.Location = new System.Drawing.Point(289, 17);
             this.TBFiltro.Name = "TBFiltro";
-            this.TBFiltro.Size = new System.Drawing.Size(424, 20);
+            this.TBFiltro.Size = new System.Drawing.Size(361, 20);
             this.TBFiltro.TabIndex = 1;
             this.TBFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyDown);
             this.TBFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TBFiltro_KeyUp);
@@ -259,13 +281,13 @@
             this.DGV_Perfiles.Location = new System.Drawing.Point(72, 0);
             this.DGV_Perfiles.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Perfiles.Name = "DGV_Perfiles";
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Perfiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Perfiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_Perfiles.Size = new System.Drawing.Size(827, 441);
             this.DGV_Perfiles.TabIndex = 19;
             this.DGV_Perfiles.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
@@ -336,25 +358,17 @@
             // 
             this.perfilBindingSource1.DataSource = typeof(Negocio.Perfil);
             // 
-            // label3
+            // button1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(79, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 18);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Código:";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(137, 17);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(73, 20);
-            this.txtCodigo.TabIndex = 1;
-            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(661, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Limpiar Filtro";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Perfiles_Inicio
             // 
@@ -411,5 +425,6 @@
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
     }
 }
