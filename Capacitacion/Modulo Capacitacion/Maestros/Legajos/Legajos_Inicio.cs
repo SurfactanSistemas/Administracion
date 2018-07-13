@@ -328,5 +328,10 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             }
 	        
         }
+
+        private void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -421,8 +421,22 @@ namespace Modulo_Capacitacion.Novedades
 
         private void AgregarFila()
         {
-            DataRow filaCronograma;
-            filaCronograma = dtCronograma.NewRow();
+            DataRow filaCronograma = null;
+            bool WAgregar = false;
+
+            foreach (DataRow row in dtCronograma.Rows)
+            {
+                if (row["Tema"].ToString() == TB_CodTemas.Text)
+                {
+                    filaCronograma = row;
+                }
+            }
+
+            if (filaCronograma == null)
+            {
+                filaCronograma = dtCronograma.NewRow();
+                WAgregar = true;
+            }
 
             filaCronograma[0] = TB_CodTemas.Text;
             filaCronograma[1] = TB_DescTemas.Text;
@@ -436,8 +450,6 @@ namespace Modulo_Capacitacion.Novedades
                         filaCronograma[3] = CB_Curso.Text;
                         filaCronograma[4] = filaCurso[4].ToString();
                         filaCronograma[5] = 0;
-
-                        
                     }
                 }
             }
@@ -447,12 +459,11 @@ namespace Modulo_Capacitacion.Novedades
                 filaCronograma[3] = "";
                 filaCronograma[4] = 0;
                 filaCronograma[5] = 0;
-
-                
             }
 
 
-            dtCronograma.Rows.Add(filaCronograma);
+            
+            if (WAgregar) dtCronograma.Rows.Add(filaCronograma);
 
             DGV_Crono.DataSource = dtCronograma;
             
@@ -484,5 +495,58 @@ namespace Modulo_Capacitacion.Novedades
             if (e.KeyCode == Keys.Escape) TB_CodLegajo.Text = "";
         }
 
+        internal void AsignarCurso(object wCurso, object wDesCurso, object WHoras, int wRowIndex)
+        {
+            DGV_Crono.Rows[wRowIndex].Cells["Curso"].Value = wCurso;
+            DGV_Crono.Rows[wRowIndex].Cells["DesCurso"].Value = wDesCurso;
+            DGV_Crono.Rows[wRowIndex].Cells["Horas"].Value = WHoras;
+        }
+
+        private void DGV_Crono_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex < 0) return;
+
+            if (DGV_Crono.CurrentRow != null)
+            {
+                Auxiliares.CursosDisponibles frm =
+                    new Auxiliares.CursosDisponibles(DGV_Crono.CurrentRow.Cells["Tema"].Value.ToString(),
+                        DGV_Crono.CurrentRow.Index);
+
+                frm.Show(this);
+            }
+        }
+
+        private void DGV_Crono_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //if (e.ColumnIndex < 0) return;
+
+            DataRow BorrarFila = null;
+
+            foreach (DataRow row in dtCronograma.Rows)
+            {
+                if (DGV_Crono.CurrentRow != null && row["Tema"].ToString() == DGV_Crono.CurrentRow.Cells["Tema"].Value.ToString())
+                {
+                    BorrarFila = row;
+                }
+            }
+
+            if (BorrarFila != null)
+            {
+                DataRow temp = dtCronograma.NewRow();
+
+                temp["Tema"] = BorrarFila["Tema"];
+                temp["DesTema"] = BorrarFila["DesTema"];
+                temp["Horas"] = "0";
+                temp["Realizado"] = "0";
+                temp["Curso"] = "0";
+                temp["DesCurso"] = "";
+
+                dtCronograma.Rows.Remove(BorrarFila);
+                dtCronograma.Rows.Add(temp);
+            }
+
+            DGV_Crono.DataSource = dtCronograma;
+            if (DGV_Crono.Columns["Tema"] != null) DGV_Crono.Sort(DGV_Crono.Columns["Tema"], ListSortDirection.Ascending);
+        }
     }
 }

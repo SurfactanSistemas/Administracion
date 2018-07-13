@@ -412,11 +412,20 @@ namespace Eval_Proveedores
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
+                    
                     cmd.CommandText = "update Proveedor SET FechaCategoria = '' WHERE len(replace(FechaCategoria, ' ','')) < 8 or FechaCategoria is null";
-
                     cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "SELECT Proveedor, Nombre as Razon, CategoriaI, CategoriaII, FechaCategoria FROM Proveedor WHERE TipoProv = '" + WTipoProv + "'";
+                    cmd.CommandText = "update Proveedor SET FechaCalCalidad = '' WHERE len(replace(FechaCalCalidad, ' ','')) < 8 or FechaCalCalidad is null";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "update Proveedor SET FechaCalEnvases = '' WHERE len(replace(FechaCalEnvases, ' ','')) < 8 or FechaCalEnvases is null";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "update Proveedor SET FechaCalEntrega = '' WHERE len(replace(FechaCalEntrega, ' ','')) < 8 or FechaCalEntrega is null";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT Proveedor, Nombre as Razon, CategoriaI, CategoriaII, FechaCategoria, FechaCalCalidad, FechaCalEnvases, FechaCalEntrega FROM Proveedor WHERE TipoProv = '" + WTipoProv + "'";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {

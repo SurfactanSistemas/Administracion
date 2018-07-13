@@ -14,7 +14,8 @@ Public Class IngresoRemitoVario
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         _LimpiarCampos()
-        txtRemito.Focus()
+        txtCliente.Focus()
+        txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
     End Sub
 
     Private Sub _LimpiarCampos()
@@ -333,6 +334,8 @@ Public Class IngresoRemitoVario
             End If
 
             trans.Commit()
+
+            MsgBox("Remito grabado con Nº " & WRemito, MsgBoxStyle.Information)
 
             If MsgBox("¿Desea imprimir el remito?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 

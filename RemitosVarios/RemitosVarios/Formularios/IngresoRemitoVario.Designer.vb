@@ -139,9 +139,9 @@ Partial Class IngresoRemitoVario
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
         Me.Label1.Location = New System.Drawing.Point(28, 14)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(203, 19)
+        Me.Label1.Size = New System.Drawing.Size(172, 19)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Ingreso de Orden de Trabajo"
+        Me.Label1.Text = "Ingreso de Remito Vario"
         '
         'Panel1
         '
@@ -353,15 +353,16 @@ Partial Class IngresoRemitoVario
         '
         'txtRemito
         '
-        Me.txtRemito.Location = New System.Drawing.Point(107, 15)
+        Me.txtRemito.Location = New System.Drawing.Point(577, 14)
         Me.txtRemito.Name = "txtRemito"
         Me.txtRemito.Size = New System.Drawing.Size(78, 20)
         Me.txtRemito.TabIndex = 5
         Me.txtRemito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtRemito.Visible = False
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(275, 15)
+        Me.txtFecha.Location = New System.Drawing.Point(93, 13)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -394,7 +395,7 @@ Partial Class IngresoRemitoVario
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label4.Location = New System.Drawing.Point(225, 16)
+        Me.Label4.Location = New System.Drawing.Point(43, 14)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(44, 18)
         Me.Label4.TabIndex = 0
@@ -405,11 +406,12 @@ Partial Class IngresoRemitoVario
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label3.Location = New System.Drawing.Point(34, 16)
+        Me.Label3.Location = New System.Drawing.Point(504, 15)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(53, 18)
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Remito"
+        Me.Label3.Visible = False
         '
         'Panel5
         '

@@ -43,6 +43,7 @@
             this.ingresoDeCursosRealizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.perfilDelPuestoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,8 +69,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planDeCapacitaciónTentativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -199,6 +199,13 @@
             this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Text = "Asignación de Cursos por Perfil, Sector o Tema";
             this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem_Click);
             // 
+            // asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem
+            // 
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Name = "asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem";
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Text = "Asignacion de Temas por Perfil, Sector y Planta";
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Click += new System.EventHandler(this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem_Click);
+            // 
             // listadosToolStripMenuItem
             // 
             this.listadosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -211,6 +218,7 @@
             this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem,
             this.listadoTemasRealizadosPorSectorToolStripMenuItem,
             this.planDeCapacitaciónAnualToolStripMenuItem,
+            this.planDeCapacitaciónTentativoToolStripMenuItem,
             this.listadoDeLegajosPorPerfilToolStripMenuItem,
             this.planillasDeTemasNoProgramadosToolStripMenuItem,
             this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem,
@@ -400,7 +408,6 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -410,22 +417,12 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // panel2
+            // planDeCapacitaciónTentativoToolStripMenuItem
             // 
-            this.panel2.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.marcadeagua2;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 40);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(784, 498);
-            this.panel2.TabIndex = 4;
-            // 
-            // asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem
-            // 
-            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Name = "asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem";
-            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
-            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Text = "Asignacion de Temas por Perfil, Sector y Planta";
-            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Click += new System.EventHandler(this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem_Click);
+            this.planDeCapacitaciónTentativoToolStripMenuItem.Name = "planDeCapacitaciónTentativoToolStripMenuItem";
+            this.planDeCapacitaciónTentativoToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
+            this.planDeCapacitaciónTentativoToolStripMenuItem.Text = "Plan de Capacitación Anual (Tentativo)";
+            this.planDeCapacitaciónTentativoToolStripMenuItem.Click += new System.EventHandler(this.planDeCapacitaciónTentativoToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -485,12 +482,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripMenuItem listadoDeCursosPendientesPorSectorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuNecesidadesCompetenciasPorSector;
         private System.Windows.Forms.ToolStripMenuItem actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignaciónDeCursosPorPerfilOSectorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem planDeCapacitaciónTentativoToolStripMenuItem;
     }
 }
 

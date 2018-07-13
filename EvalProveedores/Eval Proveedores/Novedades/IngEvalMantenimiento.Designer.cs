@@ -151,7 +151,7 @@
             this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Location = new System.Drawing.Point(7, 7);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(897, 631);
+            this.panel3.Size = new System.Drawing.Size(897, 626);
             this.panel3.TabIndex = 0;
             this.panel3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseClick);
             // 
@@ -248,6 +248,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.BT_Guardar);
             this.groupBox2.Controls.Add(this.lblCalificacion3);
             this.groupBox2.Controls.Add(this.lblCalificacion2);
             this.groupBox2.Controls.Add(this.lblCalificacion1);
@@ -259,7 +260,6 @@
             this.groupBox2.Controls.Add(this.TB_ObservProve);
             this.groupBox2.Controls.Add(this.BT_Salir);
             this.groupBox2.Controls.Add(this.BT_LimpiarPant);
-            this.groupBox2.Controls.Add(this.BT_Guardar);
             this.groupBox2.Controls.Add(this.textBox16);
             this.groupBox2.Controls.Add(this.textBox15);
             this.groupBox2.Controls.Add(this.textBox14);
@@ -392,6 +392,7 @@
             // 
             // BT_Salir
             // 
+            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
@@ -405,6 +406,7 @@
             // 
             // BT_LimpiarPant
             // 
+            this.BT_LimpiarPant.BackgroundImage = global::Eval_Proveedores.Properties.Resources.LimpiarPant1;
             this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
@@ -419,6 +421,7 @@
             // 
             // BT_Guardar
             // 
+            this.BT_Guardar.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Aceptar_N2;
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
@@ -973,7 +976,6 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(927, 720);
             this.MinimumSize = new System.Drawing.Size(927, 720);
             this.Name = "IngEvalMantenimiento";
             this.Load += new System.EventHandler(this.IngEvalTransportista_Load);

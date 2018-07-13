@@ -230,5 +230,11 @@ namespace Modulo_Capacitacion
             AsignacionTemasPorSectorPerfilYPlanta frm = new AsignacionTemasPorSectorPerfilYPlanta();
             frm.Show();
         }
+
+        private void planDeCapacitaciónTentativoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.PlanCapacitacionAnualTentativo.Inicio frm = new Listados.PlanCapacitacionAnualTentativo.Inicio();
+            frm.Show();
+        }
     }
 }

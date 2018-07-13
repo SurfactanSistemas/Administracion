@@ -96,6 +96,7 @@
             this.lblTipoListado = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.ckFaltanteActualizacion = new System.Windows.Forms.CheckBox();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MarcaPerformance = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,6 +116,8 @@
             this.EvaEnt = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Actualiza = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fechas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaCalCalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaCalEntrega = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -136,7 +139,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(894, 39);
+            this.panel1.Size = new System.Drawing.Size(912, 39);
             this.panel1.TabIndex = 4;
             // 
             // LB_TitEva
@@ -157,7 +160,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(894, 523);
+            this.panel2.Size = new System.Drawing.Size(912, 523);
             this.panel2.TabIndex = 5;
             // 
             // panel3
@@ -167,6 +170,7 @@
             this.panel3.Controls.Add(this.pnlReporte);
             this.panel3.Controls.Add(this.progressBar1);
             this.panel3.Controls.Add(this.groupBox2);
+            this.panel3.Controls.Add(this.ckFaltanteActualizacion);
             this.panel3.Controls.Add(this.ckIncluirSinMovimientos);
             this.panel3.Controls.Add(this.pnlClave);
             this.panel3.Controls.Add(this.btnPantalla);
@@ -187,7 +191,7 @@
             this.panel3.Controls.Add(this.lblTipoListado);
             this.panel3.Location = new System.Drawing.Point(8, 6);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(878, 511);
+            this.panel3.Size = new System.Drawing.Size(897, 511);
             this.panel3.TabIndex = 0;
             // 
             // pnlPerformance
@@ -589,7 +593,6 @@
             // 
             this.cmbTipoEvaluacion.FormattingEnabled = true;
             this.cmbTipoEvaluacion.Items.AddRange(new object[] {
-            "",
             "CALIDAD",
             "ENTREGA"});
             this.cmbTipoEvaluacion.Location = new System.Drawing.Point(754, 98);
@@ -633,7 +636,9 @@
             this.EvaCal,
             this.EvaEnt,
             this.Actualiza,
-            this.Fechas});
+            this.Fechas,
+            this.FechaCalCalidad,
+            this.FechaCalEntrega});
             this.DGV_EvalSemProve.ContextMenuStrip = this.contextMenuStrip1;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
@@ -644,7 +649,7 @@
             dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle14;
             this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.DGV_EvalSemProve.Location = new System.Drawing.Point(10, 128);
+            this.DGV_EvalSemProve.Location = new System.Drawing.Point(8, 128);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
             dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -654,7 +659,7 @@
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.DGV_EvalSemProve.RowHeadersWidth = 15;
-            this.DGV_EvalSemProve.Size = new System.Drawing.Size(859, 310);
+            this.DGV_EvalSemProve.Size = new System.Drawing.Size(880, 310);
             this.DGV_EvalSemProve.TabIndex = 9;
             this.DGV_EvalSemProve.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellClick);
             this.DGV_EvalSemProve.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellDoubleClick);
@@ -750,6 +755,16 @@
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // ckFaltanteActualizacion
+            // 
+            this.ckFaltanteActualizacion.Location = new System.Drawing.Point(217, 59);
+            this.ckFaltanteActualizacion.Name = "ckFaltanteActualizacion";
+            this.ckFaltanteActualizacion.Size = new System.Drawing.Size(251, 34);
+            this.ckFaltanteActualizacion.TabIndex = 82;
+            this.ckFaltanteActualizacion.Text = "Mostrar sólo faltantes de Actualización";
+            this.ckFaltanteActualizacion.UseVisualStyleBackColor = true;
+            this.ckFaltanteActualizacion.CheckedChanged += new System.EventHandler(this.ckIncluirSinMovimientos_CheckedChanged);
             // 
             // Proveedor
             // 
@@ -940,12 +955,26 @@
             this.Fechas.ReadOnly = true;
             this.Fechas.Width = 80;
             // 
+            // FechaCalCalidad
+            // 
+            this.FechaCalCalidad.HeaderText = "Fecha Cal. Calidad";
+            this.FechaCalCalidad.Name = "FechaCalCalidad";
+            this.FechaCalCalidad.ReadOnly = true;
+            this.FechaCalCalidad.Width = 80;
+            // 
+            // FechaCalEntrega
+            // 
+            this.FechaCalEntrega.HeaderText = "Fecha Cal. Ent";
+            this.FechaCalEntrega.Name = "FechaCalEntrega";
+            this.FechaCalEntrega.ReadOnly = true;
+            this.FechaCalEntrega.Width = 80;
+            // 
             // ActSemProv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(894, 562);
+            this.ClientSize = new System.Drawing.Size(912, 562);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Location = new System.Drawing.Point(20, 20);
@@ -1030,6 +1059,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCerrarPerformance;
         private System.Windows.Forms.Button btnGenerarInformePerformance;
+        private System.Windows.Forms.CheckBox ckFaltanteActualizacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
         private System.Windows.Forms.DataGridViewCheckBoxColumn MarcaPerformance;
         private System.Windows.Forms.DataGridViewTextBoxColumn Razon;
@@ -1049,5 +1079,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn EvaEnt;
         private System.Windows.Forms.DataGridViewTextBoxColumn Actualiza;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fechas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCalCalidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCalEntrega;
     }
 }

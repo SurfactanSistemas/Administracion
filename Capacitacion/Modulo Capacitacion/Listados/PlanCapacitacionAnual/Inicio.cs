@@ -23,7 +23,7 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnual
 
             VistaPrevia frm = new VistaPrevia();
 
-            frm.CargarReporte(new PlanCapacitacionAnual(), "{CronogramaII.Ano} = " + txtAno.Text);
+            frm.CargarReporte(new PlanCapacitacionAnual(), "{CronogramaII.Ano} = " + txtAno.Text + " AND {CronogramaII.Curso} = {Curso.Codigo}");
             return frm;
         }
 

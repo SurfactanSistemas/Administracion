@@ -60,12 +60,12 @@
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
-            this.NombProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescPer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PromedioTot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DesTema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DesCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Realizado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -237,15 +237,17 @@
             this.DGV_Crono.AllowUserToResizeRows = false;
             this.DGV_Crono.ColumnHeadersHeight = 25;
             this.DGV_Crono.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NombProve,
-            this.Estado,
-            this.DescTipo,
-            this.DescPer,
-            this.Observ,
-            this.PromedioTot});
+            this.Tema,
+            this.DesTema,
+            this.Curso,
+            this.DesCurso,
+            this.Horas,
+            this.Realizado});
+            this.DGV_Crono.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_Crono.Location = new System.Drawing.Point(8, 103);
             this.DGV_Crono.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Crono.Name = "DGV_Crono";
+            this.DGV_Crono.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -258,8 +260,11 @@
             this.DGV_Crono.RowHeadersWidth = 15;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.DGV_Crono.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.DGV_Crono.RowTemplate.Height = 18;
             this.DGV_Crono.Size = new System.Drawing.Size(775, 266);
             this.DGV_Crono.TabIndex = 142;
+            this.DGV_Crono.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Crono_CellMouseDoubleClick);
+            this.DGV_Crono.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Crono_RowHeaderMouseDoubleClick);
             // 
             // TB_Buscar
             // 
@@ -374,55 +379,62 @@
             this.LFechaAviso.TabIndex = 4;
             this.LFechaAviso.Text = "Legajo:";
             // 
-            // NombProve
+            // Tema
             // 
-            this.NombProve.DataPropertyName = "Tema";
+            this.Tema.DataPropertyName = "Tema";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.NombProve.DefaultCellStyle = dataGridViewCellStyle1;
-            this.NombProve.HeaderText = "Tema";
-            this.NombProve.Name = "NombProve";
-            this.NombProve.Width = 50;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Tema.HeaderText = "Tema";
+            this.Tema.Name = "Tema";
+            this.Tema.ReadOnly = true;
+            this.Tema.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Tema.Width = 50;
             // 
-            // Estado
+            // DesTema
             // 
-            this.Estado.DataPropertyName = "DesTema";
-            this.Estado.HeaderText = "Descripcion Tema";
-            this.Estado.Name = "Estado";
-            this.Estado.Width = 250;
+            this.DesTema.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DesTema.DataPropertyName = "DesTema";
+            this.DesTema.HeaderText = "Descripcion Tema";
+            this.DesTema.Name = "DesTema";
+            this.DesTema.ReadOnly = true;
             // 
-            // DescTipo
+            // Curso
             // 
-            this.DescTipo.DataPropertyName = "Curso";
+            this.Curso.DataPropertyName = "Curso";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DescTipo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DescTipo.HeaderText = "Curso";
-            this.DescTipo.Name = "DescTipo";
-            this.DescTipo.Width = 50;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Curso.HeaderText = "Curso";
+            this.Curso.Name = "Curso";
+            this.Curso.ReadOnly = true;
+            this.Curso.Width = 50;
             // 
-            // DescPer
+            // DesCurso
             // 
-            this.DescPer.DataPropertyName = "DesCurso";
-            this.DescPer.HeaderText = "Descripcion Curso";
-            this.DescPer.Name = "DescPer";
-            this.DescPer.Width = 250;
+            this.DesCurso.DataPropertyName = "DesCurso";
+            this.DesCurso.HeaderText = "Descripcion Curso";
+            this.DesCurso.Name = "DesCurso";
+            this.DesCurso.ReadOnly = true;
+            this.DesCurso.Width = 250;
             // 
-            // Observ
+            // Horas
             // 
-            this.Observ.DataPropertyName = "Horas";
+            this.Horas.DataPropertyName = "Horas";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Observ.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Observ.HeaderText = "Horas";
-            this.Observ.Name = "Observ";
-            this.Observ.Width = 50;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Horas.HeaderText = "Horas";
+            this.Horas.Name = "Horas";
+            this.Horas.ReadOnly = true;
+            this.Horas.Width = 50;
             // 
-            // PromedioTot
+            // Realizado
             // 
-            this.PromedioTot.DataPropertyName = "Realizado";
+            this.Realizado.DataPropertyName = "Realizado";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PromedioTot.DefaultCellStyle = dataGridViewCellStyle4;
-            this.PromedioTot.HeaderText = "Realizado";
-            this.PromedioTot.Name = "PromedioTot";
-            this.PromedioTot.Width = 70;
+            this.Realizado.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Realizado.HeaderText = "Realizado";
+            this.Realizado.Name = "Realizado";
+            this.Realizado.ReadOnly = true;
+            this.Realizado.Width = 70;
             // 
             // IngrePlanificacionAnual
             // 
@@ -474,11 +486,11 @@
         private System.Windows.Forms.DataGridView DGV_Crono;
         private System.Windows.Forms.Label lblAtencion;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombProve;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescTipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescPer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Observ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PromedioTot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DesTema;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DesCurso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Realizado;
     }
 }

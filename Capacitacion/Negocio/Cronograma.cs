@@ -72,8 +72,8 @@ namespace Negocio
         {
             ClassConexion.Conexion repo = new ClassConexion.Conexion();
 
-            string consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, Cr.Tema as Curso, '' as DesCurso, Cr.Horas, Cr.Realizado" +
-                                " from cronograma Cr inner join Curso C on C.Codigo = Cr.Curso " 
+            string consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, Cr.Tema as Curso, t.Descripcion as DesCurso, Cr.Horas, Cr.Realizado" +
+                                " from cronograma Cr inner join Curso C on C.Codigo = Cr.Curso LEFT OUTER JOIN Tema t ON cr.Curso = t.Curso AND Cr.Tema = t.Tema" 
                                 + " where Cr.legajo = "+p1+" and Cr.ano = " + p2;
 
             DataTable DT =  repo.BuscarUno(consulta);

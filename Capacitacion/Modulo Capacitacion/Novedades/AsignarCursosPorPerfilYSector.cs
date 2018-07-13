@@ -24,6 +24,7 @@ namespace Modulo_Capacitacion.Novedades
             dgvGrilla.Rows.Clear();
             dgvAyuda.DataSource = null;
             txtFiltrar.Text = "";
+            txtCodigo.Text = "";
             cmbAuxi.Visible = false;
             rbPerfil.Checked = true;
             _CargarPerfiles();
@@ -77,6 +78,26 @@ namespace Modulo_Capacitacion.Novedades
                                 cmd.ExecuteNonQuery();
                             }
 
+                            cmd.CommandText = "SELECT COUNT(DISTINCT Legajo) Legajos FROM Cronograma WHERE Ano = '" + txtAno.Text +
+                                              "' AND Curso = '" + WCurso + "'";
+                            using (SqlDataReader dr = cmd.ExecuteReader())
+                            {
+                                if (dr.HasRows)
+                                {
+                                    dr.Read();
+
+                                    var WCantidadLegajos = int.Parse(dr["Legajos"].ToString());
+
+                                    if (!dr.IsClosed) dr.Close();
+
+                                    if (WCantidadLegajos == 0)
+                                    {
+                                        cmd.CommandText = string.Format("DELETE FROM CronogramaII WHERE Ano = '{0}' AND Curso = '{1}'", txtAno.Text, WCurso);
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+
                             if (WRealizar.ToString() == "X")
                             {
                                 WRenglon++;
@@ -90,6 +111,19 @@ namespace Modulo_Capacitacion.Novedades
                                                 + " )";
 
                                 cmd.ExecuteNonQuery();
+                                
+                                cmd.CommandText = "SELECT Clave FROM CronogramaII WHERE Ano = '" + txtAno.Text +
+                                              "' AND Curso = '" + WCurso + "'";
+                                using (SqlDataReader dr = cmd.ExecuteReader())
+                                {
+                                    if (!dr.HasRows)
+                                    {
+                                        if (!dr.IsClosed) dr.Close();
+
+                                        cmd.CommandText = string.Format("INSERT INTO CronogramaII (Clave, Ano, Curso) VALUES ('{0}', '{1}', '{2}')", txtAno.Text + WCurso.ToString().PadLeft(4, '0'), txtAno.Text, WCurso);
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                }
                             }
                         }
 
@@ -654,9 +688,11 @@ namespace Modulo_Capacitacion.Novedades
 
             if (ckSoloSugeridos.Checked) WFiltro = "Tipo <> 1";
 
-            foreach (DataRow dr in rbPerfil.Checked ? tabla.Select(WFiltro, "DesSector, Nombre ASC, Curso ASC") : tabla.Select(WFiltro, "Nombre ASC, Curso ASC"))
+            foreach (DataRow dr in rbPerfil.Checked ? tabla.Select(WFiltro, "DesSector, Legajo, Nombre ASC, Curso ASC") : tabla.Select(WFiltro, "Legajo, Nombre ASC, Curso ASC"))
             {
                 WRowindex = dgvGrilla.Rows.Add();
+
+                //if (dr["Legajo"].ToString() == "366") MessageBox.Show("Test");
 
                 if (dr["Legajo"].ToString() != WAnt)
                 {
@@ -809,7 +845,7 @@ namespace Modulo_Capacitacion.Novedades
                 {
                     cmd.Connection = conn;
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Sector, Sector.Descripcion as DesSector, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.Codigo = l2.Actual AND p.Curso = '" +
+                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Sector, Sector.Descripcion as DesSector, l.Perfil, p.Descripcion as DescPerfil, l.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON l.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.Codigo = l2.Actual AND p.Curso = '" +
                         cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -825,7 +861,7 @@ namespace Modulo_Capacitacion.Novedades
                     cmd.CommandText =
                         "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.EstaCurso, l.Sector, Sector.Descripcion as DesSector, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE cr.Ano = '" +
                         txtAno.Text + "' AND p.Renglon = 1 and cr.Curso = '" + cmbOrganizar.SelectedValue +
-                        "' and l.Renglon =1 AND l.Codigo = l2.Actual ORDER BY cr.Legajo, Cr.Renglon";
+                        "' and cr.Curso = l.Curso AND l.Codigo = l2.Actual ORDER BY cr.Legajo, Cr.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -884,7 +920,7 @@ namespace Modulo_Capacitacion.Novedades
                     // AND l.EstaCurso IN (3,4,5,7,8)
                     cmd.Connection = conn;
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Sector, Sector.Descripcion as DesSector, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) actual, Descripcion FROM Legajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000')  AND l.Perfil = '" +
+                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Sector, Sector.Descripcion as DesSector, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, l.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) actual, Descripcion FROM Legajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000')  AND l.Perfil = '" +
                         cmbOrganizar.SelectedValue + "' AND l.Codigo = l2.actual ORDER BY l.Codigo, l.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -900,7 +936,7 @@ namespace Modulo_Capacitacion.Novedades
                     cmd.CommandText =
                         "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Perfil, l.EstaCurso, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, l.Sector, Sector.Descripcion as DesSector, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE cr.Ano = '" +
                         txtAno.Text + "' AND p.Renglon = 1 and l.Perfil = '" + cmbOrganizar.SelectedValue +
-                        "' and l.Renglon =1 ORDER BY cr.Legajo, Cr.Renglon";
+                        "' and cr.Curso = l.Curso ORDER BY cr.Legajo, Cr.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -960,7 +996,7 @@ namespace Modulo_Capacitacion.Novedades
                 {
                     cmd.Connection = conn;
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, p.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo AND l.Codigo = l2.Actual and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.Sector = '" +
+                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, l.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON l.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo AND l.Codigo = l2.Actual and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.Sector = '" +
                         cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -973,11 +1009,17 @@ namespace Modulo_Capacitacion.Novedades
                     WProgramados.Rows.Clear();
                     WProgramados.Columns.Clear();
 
-                    cmd.CommandText =
-                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.EstaCurso, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema WHERE cr.Ano = '" +
-                        txtAno.Text + "' AND p.Renglon = 1 and l.Sector = '" + cmbOrganizar.SelectedValue +
-                        "' and l.Renglon =1 AND l.Codigo = l2.Actual ORDER BY cr.Legajo, Cr.Renglon";
 
+
+                    cmd.CommandText = "SELECT DISTINCT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, " +
+                                      "RTRIM(l.Descripcion) as Nombre, l.EstaCurso, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) " +
+                                      "as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, " +
+                                      "ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' " +
+                                      "FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo " +
+                                      "INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion " +
+                                      "FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON l.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema " +
+                                      "WHERE cr.Ano = '" + txtAno.Text + "' and l.Sector = '" + cmbOrganizar.SelectedValue +"' and cr.Curso = l.Curso AND l.Codigo = l2.Actual ORDER BY cr.Legajo, Cr.Renglon";
+                    
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         if (dr.HasRows) WProgramados.Load(dr);
@@ -1179,6 +1221,28 @@ namespace Modulo_Capacitacion.Novedades
         private void ckSoloSugeridos_CheckedChanged(object sender, EventArgs e)
         {
             btnBuscar.PerformClick();
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtCodigo.Text.Trim() == "") return;
+
+                cmbOrganizar.SelectedValue = txtCodigo.Text;
+
+                if (cmbOrganizar.SelectedIndex > 0)
+                {
+                    txtAno.Focus();
+                }
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtCodigo.Text = "";
+            }
+	        
         }
     }
 }

@@ -75,6 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliares\CursosDisponibles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\CursosDisponibles.Designer.cs">
+      <DependentUpon>CursosDisponibles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
@@ -93,6 +99,12 @@
     </Compile>
     <Compile Include="Listados\Ayuda.Designer.cs">
       <DependentUpon>Ayuda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajo.cs">
       <DependentUpon>imprelegajo.rpt</DependentUpon>
@@ -247,6 +259,12 @@
     </Compile>
     <Compile Include="Listados\Perfiles\ListadoPerfiles.cs">
       <DependentUpon>ListadoPerfiles.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\PlanCapacitacionAnualTentativo.cs">
+      <DependentUpon>PlanCapacitacionAnualTentativo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -649,6 +667,9 @@
       <DependentUpon>wlistacursoplani.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="Auxiliares\CursosDisponibles.resx">
+      <DependentUpon>CursosDisponibles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
@@ -658,6 +679,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Ayuda.resx">
       <DependentUpon>Ayuda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -739,6 +763,10 @@
     <EmbeddedResource Include="Listados\Perfiles\ListadoPerfiles.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoPerfiles.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\PlanCapacitacionAnualTentativo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PlanCapacitacionAnualTentativo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\PlanCapacitacionAnual\PlanCapacitacionAnual.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1153,7 +1181,6 @@
     <None Include="Resources\remito modificar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Auxiliares\" />
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>

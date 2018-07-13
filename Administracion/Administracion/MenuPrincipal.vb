@@ -282,4 +282,8 @@
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Proceso._PurgarSaldosCtaCtePrvs()
     End Sub
+
+    Private Sub CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem.Click
+        abrir(New ListadoCuentaCorrienteProveedoresSelectivoPrueba)
+    End Sub
 End Class

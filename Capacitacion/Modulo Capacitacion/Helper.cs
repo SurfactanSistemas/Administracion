@@ -371,5 +371,44 @@ namespace Modulo_Capacitacion
             if (wValor == null) wValor = "0";
             return FormatoNumerico(wValor.ToString());
         }
+
+        public static void ActualizarCantidadPersonasHorasCalendarioTentativo(string txtAno)
+        {
+            DataTable WPersonas = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "UPDATE CronogramaTentativo SET Personas = 0, Horas = 0 WHERE Ano = '" + txtAno + "'";
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT Curso, COUNT(distinct legajo) as Cantidad, SUM(horas) as Horas "
+                                    + " FROM cronograma WHERE Ano = '" + txtAno + "' AND Curso IN "
+                                    + " (SELECT Curso FROM CronogramaTentativo WHERE Ano = '" + txtAno + "') "
+                                    + " GROUP BY Curso";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            WPersonas.Load(dr);
+                        }
+                    }
+
+                    foreach (DataRow WPersona in WPersonas.Rows)
+                    {
+                        cmd.CommandText = "UPDATE CronogramaTentativo SET Personas = " + WPersona["Cantidad"].ToString().Replace(',', '.') + ", Horas = " + WPersona["Horas"].ToString().Replace(',', '.') + " WHERE Ano = '" + txtAno + "' AND Curso = '" + WPersona["Curso"] + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+            }
+        }
     }
 }

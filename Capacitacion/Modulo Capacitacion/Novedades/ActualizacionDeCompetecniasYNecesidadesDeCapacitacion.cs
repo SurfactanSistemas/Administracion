@@ -30,6 +30,7 @@ namespace Modulo_Capacitacion.Novedades
             dgvGrilla.Rows.Clear();
             dgvAyuda.Rows.Clear();
             txtFiltrar.Text = "";
+            txtCodigo.Text = "";
             cmbAuxi.Visible = false;
             _CargarPerfiles();
         }
@@ -738,6 +739,28 @@ namespace Modulo_Capacitacion.Novedades
             }
 
             dgvGrilla.Rows[dgvGrilla.CurrentCell.RowIndex].Cells["IdCalificacion"].Value = cmbAuxi.SelectedIndex;
+        }
+
+        private void txtCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtCodigo.Text.Trim() == "") return;
+
+                cmbOrganizar.SelectedValue = txtCodigo.Text;
+
+                if (cmbOrganizar.SelectedIndex > 0)
+                {
+                    btnBuscar.PerformClick();
+                }
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtCodigo.Text = "";
+            }
+	        
         }
     }
 }

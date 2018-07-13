@@ -62,14 +62,26 @@ namespace Eval_Proveedores.Novedades
 
                 foreach (DataRow WProveedor in WProveedoresFinales)
                 {
-                    WRenglon = DGV_EvalSemProve.Rows.Add();
-
+                    
                     ZMovimientos = double.Parse(WProveedor["Movimientos"].ToString());
                     ZCertificadosOk = double.Parse(WProveedor["CertificadosOk"].ToString());
                     if (ZCertificadosOk > ZMovimientos) ZCertificadosOk = ZMovimientos;
                     
                     ZEnvasesOk = double.Parse(WProveedor["EnvasesOk"].ToString());
                     if (ZEnvasesOk > ZMovimientos) ZEnvasesOk = ZMovimientos;
+
+                    if (ckFaltanteActualizacion.Checked)
+                    {
+                        var WFechaLimite = Helper.OrdenarFecha(TB_Hasta.Text);
+                        var WFechaCal = cmbTipoEvaluacion.SelectedIndex == 0
+                            ? WProveedor["FechaCalCalidad"]
+                            : WProveedor["FechaCalEntrega"];
+                        var WFechaActualizacion = Helper.OrdenarFecha(WFechaCal.ToString());
+
+                        if (int.Parse(WFechaActualizacion.ToString()) >= int.Parse(WFechaLimite.ToString())) continue;
+                    }
+
+                    WRenglon = DGV_EvalSemProve.Rows.Add();
 
                     DGV_EvalSemProve.Rows[WRenglon].Cells["MarcaPerformance"].Value = "0";
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Proveedor"].Value = WProveedor["Proveedor"];
@@ -92,6 +104,8 @@ namespace Eval_Proveedores.Novedades
                     DGV_EvalSemProve.Rows[WRenglon].Cells["EvaCal"].Value = Helper._DeterminarCalidad(WProveedor["CategoriaI"].ToString());
                     DGV_EvalSemProve.Rows[WRenglon].Cells["EvaEnt"].Value = Helper._DeterminarCalidadEntrega(WProveedor["CategoriaII"].ToString());
                     DGV_EvalSemProve.Rows[WRenglon].Cells["Actualiza"].Value = "";
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["FechaCalCalidad"].Value = WProveedor["FechaCalCalidad"];
+                    DGV_EvalSemProve.Rows[WRenglon].Cells["FechaCalEntrega"].Value = WProveedor["FechaCalEntrega"];
 
                 }
 
@@ -248,6 +262,7 @@ namespace Eval_Proveedores.Novedades
                                                           "', "
                                                           + " OrdFechaCategoria = '" + WFechaCategoriaOrd + "', "
                                                           + " CategoriaI = '" + WCategoriaI + "', "
+                                                          + " FechaCalCalidad = '" + WFechaCategoria + "', "
                                                           + " Evaluador = " + WEvaluador + " "
                                                           + " WHERE Proveedor  = '" + WProveedor + "'";
 
@@ -261,6 +276,7 @@ namespace Eval_Proveedores.Novedades
                                         cmd.CommandText = "UPDATE Proveedor SET FechaCategoria = '" + WFechaCategoria + "', "
                                                         + " OrdFechaCategoria = '" + WFechaCategoriaOrd + "', "
                                                         + " CategoriaII = '" + WCategoriaII + "', "
+                                                        + " FechaCalEntrega = '" + WFechaCategoria + "', "
                                                         + " Evaluador = " + WEvaluador + " "
                                                         + " WHERE Proveedor  = '" + WProveedor + "'";
 
@@ -1365,6 +1381,12 @@ namespace Eval_Proveedores.Novedades
                 DataGridViewColumn column = DGV_EvalSemProve.Columns["EvaCal"];
                 if (column != null) column.Visible = true;
 
+                column = DGV_EvalSemProve.Columns["FechaCalCalidad"];
+                if (column != null) column.Visible = true;
+
+                column = DGV_EvalSemProve.Columns["FechaCalEntrega"];
+                if (column != null) column.Visible = false;
+
                 column = DGV_EvalSemProve.Columns["EvaEnt"];
                 if (column != null) column.Visible = false;
             }
@@ -1372,6 +1394,12 @@ namespace Eval_Proveedores.Novedades
             {
                 DataGridViewColumn column = DGV_EvalSemProve.Columns["EvaCal"];
                 if (column != null) column.Visible = false;
+
+                column = DGV_EvalSemProve.Columns["FechaCalCalidad"];
+                if (column != null) column.Visible = false;
+
+                column = DGV_EvalSemProve.Columns["FechaCalEntrega"];
+                if (column != null) column.Visible = true;
 
                 column = DGV_EvalSemProve.Columns["EvaEnt"];
                 if (column != null) column.Visible = true;

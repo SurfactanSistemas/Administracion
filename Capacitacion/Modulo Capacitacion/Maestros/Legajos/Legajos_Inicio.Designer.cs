@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGV_Legajos = new System.Windows.Forms.DataGridView();
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +42,8 @@
             this.P_Filtrado = new System.Windows.Forms.Panel();
             this.ckSoloNoActualizados = new System.Windows.Forms.CheckBox();
             this.ckSoloActivos = new System.Windows.Forms.CheckBox();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.TBFiltro = new System.Windows.Forms.TextBox();
             this.LBFiltro = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -61,8 +63,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvDiscriminarLegajos = new System.Windows.Forms.DataGridView();
             this.legajoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Legajos)).BeginInit();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -98,13 +98,13 @@
             this.DGV_Legajos.Location = new System.Drawing.Point(85, 0);
             this.DGV_Legajos.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Legajos.Name = "DGV_Legajos";
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Legajos.Size = new System.Drawing.Size(863, 441);
             this.DGV_Legajos.TabIndex = 26;
             this.DGV_Legajos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
@@ -134,8 +134,8 @@
             // Vigencia
             // 
             this.Vigencia.DataPropertyName = "Vigencia";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle1;
             this.Vigencia.HeaderText = "Vigencia";
             this.Vigencia.Name = "Vigencia";
             this.Vigencia.Width = 73;
@@ -204,6 +204,27 @@
             this.ckSoloActivos.Text = "Incluir Inactivos";
             this.ckSoloActivos.UseVisualStyleBackColor = true;
             this.ckSoloActivos.CheckedChanged += new System.EventHandler(this.ckSoloActivos_CheckedChanged);
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(182, 19);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(77, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.TextChanged += new System.EventHandler(this.txtCodigo_TextChanged);
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(127, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 18);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Código:";
             // 
             // TBFiltro
             // 
@@ -438,26 +459,6 @@
             // legajoBindingSource
             // 
             this.legajoBindingSource.DataSource = typeof(Negocio.Legajo);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(127, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 18);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Código:";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(182, 19);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(77, 20);
-            this.txtCodigo.TabIndex = 1;
-            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
             // 
             // Legajos_Inicio
             // 

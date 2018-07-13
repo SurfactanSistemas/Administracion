@@ -41,6 +41,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
             this.BT_Limpiar = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
@@ -56,19 +57,6 @@
             this.txtDescTema = new System.Windows.Forms.TextBox();
             this.txtTema = new System.Windows.Forms.TextBox();
             this.dgvGrilla = new System.Windows.Forms.DataGridView();
-            this.pnlAyuda = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.btnCerrarAyuda = new System.Windows.Forms.Button();
-            this.gbAyuda = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtFiltrar = new System.Windows.Forms.TextBox();
-            this.dgvAyuda = new System.Windows.Forms.DataGridView();
-            this.pnlProgreso = new System.Windows.Forms.Panel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.cmbAuxi = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescPerfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,6 +72,19 @@
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MarcarActualizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlAyuda = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.btnCerrarAyuda = new System.Windows.Forms.Button();
+            this.gbAyuda = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFiltrar = new System.Windows.Forms.TextBox();
+            this.dgvAyuda = new System.Windows.Forms.DataGridView();
+            this.pnlProgreso = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.cmbAuxi = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -173,6 +174,20 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(864, 63);
             this.panel4.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button1.Location = new System.Drawing.Point(9, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(147, 40);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "Limpiar Todas las Marcas";
+            this.toolTip1.SetToolTip(this.button1, "Elimina todas las marcas de los legajos actualizados hasta la fecha");
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // BT_Guardar
             // 
@@ -275,6 +290,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtCodigo);
             this.groupBox2.Controls.Add(this.rbSector);
             this.groupBox2.Controls.Add(this.rbPerfil);
             this.groupBox2.Controls.Add(this.cmbOrganizar);
@@ -314,9 +330,9 @@
             this.cmbOrganizar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOrganizar.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cmbOrganizar.FormattingEnabled = true;
-            this.cmbOrganizar.Location = new System.Drawing.Point(217, 20);
+            this.cmbOrganizar.Location = new System.Drawing.Point(250, 19);
             this.cmbOrganizar.Name = "cmbOrganizar";
-            this.cmbOrganizar.Size = new System.Drawing.Size(305, 21);
+            this.cmbOrganizar.Size = new System.Drawing.Size(272, 21);
             this.cmbOrganizar.TabIndex = 2;
             // 
             // label2
@@ -381,6 +397,123 @@
             this.dgvGrilla.Size = new System.Drawing.Size(850, 393);
             this.dgvGrilla.TabIndex = 2;
             this.dgvGrilla.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGrilla_CellMouseClick);
+            // 
+            // Clave
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Clave.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.ReadOnly = true;
+            this.Clave.Visible = false;
+            this.Clave.Width = 50;
+            // 
+            // Perfil
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Perfil.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Perfil.HeaderText = "Perfil";
+            this.Perfil.Name = "Perfil";
+            this.Perfil.ReadOnly = true;
+            this.Perfil.Width = 30;
+            // 
+            // DescPerfil
+            // 
+            this.DescPerfil.HeaderText = "Perfil";
+            this.DescPerfil.Name = "DescPerfil";
+            this.DescPerfil.ReadOnly = true;
+            this.DescPerfil.Width = 150;
+            // 
+            // Legajo
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Legajo.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Legajo.HeaderText = "Legajo";
+            this.Legajo.Name = "Legajo";
+            this.Legajo.ReadOnly = true;
+            this.Legajo.Width = 40;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Curso
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Curso.HeaderText = "Curso";
+            this.Curso.Name = "Curso";
+            this.Curso.ReadOnly = true;
+            this.Curso.Visible = false;
+            this.Curso.Width = 30;
+            // 
+            // DescCurso
+            // 
+            this.DescCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DescCurso.HeaderText = "Curso";
+            this.DescCurso.Name = "DescCurso";
+            this.DescCurso.ReadOnly = true;
+            this.DescCurso.Width = 59;
+            // 
+            // Necesario
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Necesario.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Necesario.HeaderText = "Necesario";
+            this.Necesario.Name = "Necesario";
+            this.Necesario.ReadOnly = true;
+            this.Necesario.Width = 70;
+            // 
+            // Deseable
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Deseable.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Deseable.HeaderText = "Deseable";
+            this.Deseable.Name = "Deseable";
+            this.Deseable.ReadOnly = true;
+            this.Deseable.Width = 70;
+            // 
+            // idCalificacion
+            // 
+            this.idCalificacion.HeaderText = "idCalificacion";
+            this.idCalificacion.Name = "idCalificacion";
+            this.idCalificacion.Visible = false;
+            // 
+            // idCalificacionAnterior
+            // 
+            this.idCalificacionAnterior.HeaderText = "idCalificacionAnterior";
+            this.idCalificacionAnterior.Name = "idCalificacionAnterior";
+            this.idCalificacionAnterior.Visible = false;
+            // 
+            // Calificacion
+            // 
+            this.Calificacion.HeaderText = "Calificacion";
+            this.Calificacion.Name = "Calificacion";
+            this.Calificacion.ReadOnly = true;
+            // 
+            // Observaciones
+            // 
+            this.Observaciones.HeaderText = "Observaciones";
+            this.Observaciones.MaxInputLength = 30;
+            this.Observaciones.Name = "Observaciones";
+            this.Observaciones.Width = 200;
+            // 
+            // MarcarActualizacion
+            // 
+            this.MarcarActualizacion.HeaderText = "MarcarActualizacion";
+            this.MarcarActualizacion.Name = "MarcarActualizacion";
+            this.MarcarActualizacion.Visible = false;
+            this.MarcarActualizacion.Width = 30;
+            // 
+            // Marca
+            // 
+            this.Marca.HeaderText = "Marca";
+            this.Marca.Name = "Marca";
+            this.Marca.Visible = false;
+            this.Marca.Width = 30;
             // 
             // pnlAyuda
             // 
@@ -507,136 +640,14 @@
             this.cmbAuxi.SelectedIndexChanged += new System.EventHandler(this.cmbAuxi_SelectedIndexChanged);
             this.cmbAuxi.DropDownClosed += new System.EventHandler(this.cmbAuxi_DropDownClosed);
             // 
-            // button1
+            // txtCodigo
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(9, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 40);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "Limpiar Todas las Marcas";
-            this.toolTip1.SetToolTip(this.button1, "Elimina todas las marcas de los legajos actualizados hasta la fecha");
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // Clave
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Clave.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Clave.HeaderText = "Clave";
-            this.Clave.Name = "Clave";
-            this.Clave.ReadOnly = true;
-            this.Clave.Visible = false;
-            this.Clave.Width = 50;
-            // 
-            // Perfil
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Perfil.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Perfil.HeaderText = "Perfil";
-            this.Perfil.Name = "Perfil";
-            this.Perfil.ReadOnly = true;
-            this.Perfil.Width = 30;
-            // 
-            // DescPerfil
-            // 
-            this.DescPerfil.HeaderText = "Perfil";
-            this.DescPerfil.Name = "DescPerfil";
-            this.DescPerfil.ReadOnly = true;
-            this.DescPerfil.Width = 150;
-            // 
-            // Legajo
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Legajo.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Legajo.HeaderText = "Legajo";
-            this.Legajo.Name = "Legajo";
-            this.Legajo.ReadOnly = true;
-            this.Legajo.Width = 40;
-            // 
-            // Nombre
-            // 
-            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // Curso
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Curso.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Curso.HeaderText = "Curso";
-            this.Curso.Name = "Curso";
-            this.Curso.ReadOnly = true;
-            this.Curso.Visible = false;
-            this.Curso.Width = 30;
-            // 
-            // DescCurso
-            // 
-            this.DescCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.DescCurso.HeaderText = "Curso";
-            this.DescCurso.Name = "DescCurso";
-            this.DescCurso.ReadOnly = true;
-            this.DescCurso.Width = 59;
-            // 
-            // Necesario
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Necesario.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Necesario.HeaderText = "Necesario";
-            this.Necesario.Name = "Necesario";
-            this.Necesario.ReadOnly = true;
-            this.Necesario.Width = 70;
-            // 
-            // Deseable
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Deseable.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Deseable.HeaderText = "Deseable";
-            this.Deseable.Name = "Deseable";
-            this.Deseable.ReadOnly = true;
-            this.Deseable.Width = 70;
-            // 
-            // idCalificacion
-            // 
-            this.idCalificacion.HeaderText = "idCalificacion";
-            this.idCalificacion.Name = "idCalificacion";
-            this.idCalificacion.Visible = false;
-            // 
-            // idCalificacionAnterior
-            // 
-            this.idCalificacionAnterior.HeaderText = "idCalificacionAnterior";
-            this.idCalificacionAnterior.Name = "idCalificacionAnterior";
-            this.idCalificacionAnterior.Visible = false;
-            // 
-            // Calificacion
-            // 
-            this.Calificacion.HeaderText = "Calificacion";
-            this.Calificacion.Name = "Calificacion";
-            this.Calificacion.ReadOnly = true;
-            // 
-            // Observaciones
-            // 
-            this.Observaciones.HeaderText = "Observaciones";
-            this.Observaciones.MaxInputLength = 30;
-            this.Observaciones.Name = "Observaciones";
-            this.Observaciones.Width = 200;
-            // 
-            // MarcarActualizacion
-            // 
-            this.MarcarActualizacion.HeaderText = "MarcarActualizacion";
-            this.MarcarActualizacion.Name = "MarcarActualizacion";
-            this.MarcarActualizacion.Visible = false;
-            this.MarcarActualizacion.Width = 30;
-            // 
-            // Marca
-            // 
-            this.Marca.HeaderText = "Marca";
-            this.Marca.Name = "Marca";
-            this.Marca.Visible = false;
-            this.Marca.Width = 30;
+            this.txtCodigo.Location = new System.Drawing.Point(205, 19);
+            this.txtCodigo.MaxLength = 3;
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(36, 20);
+            this.txtCodigo.TabIndex = 4;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
             // 
             // ActualizacionDeCompetenciasYNecesidadesDeCapacitacion
             // 
@@ -726,5 +737,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn MarcarActualizacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
+        private System.Windows.Forms.TextBox txtCodigo;
     }
 }

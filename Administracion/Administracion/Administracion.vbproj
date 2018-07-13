@@ -251,6 +251,12 @@
     <Compile Include="Listados\ConsultaDatosFactura.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPrueba.Designer.vb">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivoPrueba.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPrueba.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\CtaCtePrvPantallaDetallesCliente.Designer.vb">
       <DependentUpon>CtaCtePrvPantallaDetallesCliente.vb</DependentUpon>
     </Compile>
@@ -637,6 +643,12 @@
       <DependentUpon>ControlDeFacturacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ListadoCtaCtePrvSelectivoPrueba.vb">
+      <DependentUpon>ListadoCtaCtePrvSelectivoPrueba.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\ReciboDefinitivoEmailPellital.vb">
       <DependentUpon>ReciboDefinitivoEmailPellital.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -902,6 +914,9 @@
     <EmbeddedResource Include="Listados\ConsultaDatosFactura.resx">
       <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoCuentaCorrienteProveedoresSelectivoPrueba.resx">
+      <DependentUpon>ListadoCuentaCorrienteProveedoresSelectivoPrueba.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\CtaCtePrvPantallaDetallesCliente.resx">
       <DependentUpon>CtaCtePrvPantallaDetallesCliente.vb</DependentUpon>
     </EmbeddedResource>
@@ -1092,6 +1107,10 @@
     <EmbeddedResource Include="Reportes\ControlDeFacturacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ControlDeFacturacion.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ListadoCtaCtePrvSelectivoPrueba.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoCtaCtePrvSelectivoPrueba.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReciboDefinitivoEmailPellital.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
