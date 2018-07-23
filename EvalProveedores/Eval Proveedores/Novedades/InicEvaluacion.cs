@@ -403,5 +403,10 @@ namespace Eval_Proveedores.Novedades
             }
 	        
         }
+
+        private void DGV_Evaluaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

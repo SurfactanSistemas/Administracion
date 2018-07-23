@@ -234,8 +234,3 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
-
-Administracion/app.config
-SistemaExportacion/SistemaExportacion/SistemaExportacion/app.config
-Modulo Muestras/Codigo/Muestra Final/Vista/app.config
-Sistema Capacitacion/Capacitacion/app.config

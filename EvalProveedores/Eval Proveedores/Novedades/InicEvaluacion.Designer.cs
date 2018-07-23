@@ -29,16 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.ckSoloUltimas = new System.Windows.Forms.CheckBox();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.PProve = new System.Windows.Forms.Panel();
             this.BT_Filtrar2 = new System.Windows.Forms.Button();
             this.TB_Filtro2 = new System.Windows.Forms.TextBox();
             this.LB_Prove = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.P_Filtrado = new System.Windows.Forms.Panel();
             this.BT_Filtrar = new System.Windows.Forms.Button();
             this.TBFiltroAno = new System.Windows.Forms.TextBox();
@@ -72,8 +74,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.PProve.SuspendLayout();
@@ -151,6 +151,16 @@
             this.ckSoloUltimas.UseVisualStyleBackColor = true;
             this.ckSoloUltimas.CheckedChanged += new System.EventHandler(this.ckSoloUltimas_CheckedChanged);
             // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(141, 20);
+            this.txtCodigo.MaxLength = 11;
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(102, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
+            // 
             // PProve
             // 
             this.PProve.Controls.Add(this.BT_Filtrar2);
@@ -191,6 +201,17 @@
             this.LB_Prove.Size = new System.Drawing.Size(46, 18);
             this.LB_Prove.TabIndex = 0;
             this.LB_Prove.Text = "label3";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(80, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 18);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Código:";
             // 
             // P_Filtrado
             // 
@@ -295,15 +316,16 @@
             this.DGV_Evaluaciones.Location = new System.Drawing.Point(101, 0);
             this.DGV_Evaluaciones.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Evaluaciones.Name = "DGV_Evaluaciones";
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Evaluaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Evaluaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_Evaluaciones.Size = new System.Drawing.Size(757, 351);
             this.DGV_Evaluaciones.TabIndex = 5;
+            this.DGV_Evaluaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Evaluaciones_CellContentClick);
             this.DGV_Evaluaciones.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Evaluaciones_RowHeaderMouseDoubleClick);
             // 
             // Clave
@@ -525,27 +547,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(95, 345);
             this.panel2.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(80, 21);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 18);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Código:";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(141, 20);
-            this.txtCodigo.MaxLength = 11;
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(102, 20);
-            this.txtCodigo.TabIndex = 1;
-            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
             // 
             // InicEvaluacion
             // 

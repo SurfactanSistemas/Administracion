@@ -44,7 +44,7 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
 
                         cmd.CommandText = "SELECT l2.Actual Legajo, Curso FROM Legajo l " +
                                           "INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM Legajo GROUP BY Descripcion) l2 " +
-                                          "ON l.Descripcion = l2.Descripcion AND l.Codigo = l2.Actual WHERE EstaCurso NOT IN (1, 2, 8) " +
+                                          "ON l.Descripcion = l2.Descripcion AND l.Codigo = l2.Actual WHERE EstaCurso NOT IN (1, 2, 6, 7, 8) " +
                                           "AND l.Fegreso IN ('  /  /    ', '00/00/0000') Order by Legajo, Renglon";
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {

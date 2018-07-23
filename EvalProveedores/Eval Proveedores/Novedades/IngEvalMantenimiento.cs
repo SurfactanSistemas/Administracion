@@ -108,6 +108,8 @@ namespace Eval_Proveedores.Novedades
                     CB_Calif12.SelectedIndex = int.Parse(Eva.Calif12.ToString());
                     CB_Calif13.SelectedIndex = int.Parse(Eva.Calif13.ToString());
                     CB_Calif14.SelectedIndex = int.Parse(Eva.Calif14.ToString());
+
+
                     
                     HabilitarCB1();
                     TB_Promedio1.Text = Eva.Promedio11.ToString();
@@ -137,9 +139,11 @@ namespace Eval_Proveedores.Novedades
                     TB_Promedio3.Text = Eva.Promedio33.ToString();
                 }
 
+                SacarPromedio1();
+                TB_Promedio1.Text = Promedio1.ToString(); 
+
                 TB_PromedioTot.Text = Eva.PromedioTot.ToString();
                 TB_ObservEva.Text = Eva.Observ;
-
                 
                 
             }

@@ -354,7 +354,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             if (_BuscarPerfilPorVersion())
             {
-                Per = Per.BuscarUno(TB_CodPerfil.Text, TB_VersPer.Text);
+                Per = Per.BuscarUno(TB_CodPerfil.Text);
+                //Per = Per.BuscarUno(TB_CodPerfil.Text, TB_VersPer.Text);
             }
             else
             {
@@ -583,10 +584,10 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     ////Cargo el legajo de version (el viejo)
                     //CargarDatosLegajoVer();
                     ////Lo guardo en legajoversion
-                    LegajoVer.Agregar();
+                    //LegajoVer.Agregar();
                     //
-                    L.Eliminar(L.Codigo.ToString());
-                    L.Agregar();
+                    //L.Eliminar(L.Codigo.ToString());
+                    //L.Agregar();
                 }
                 else
                 {
@@ -656,7 +657,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             L.Descripcion = TB_DescLegajo.Text;
             L.DNI = TB_DNI.Text;
             L.CUIL = TB_CUIL.Text;
-            L.FIngreso = DTP_Fecha.Text;
+            //L.FIngreso = TB_Fechaing.Text;
             L.EstadoI = TB_ObservPrimariaLeg.Text;
             L.EstadoII = TB_ObservSecundariaLeg.Text;
             L.EstadoIII = TB_ObservTerciariaLeg.Text;
@@ -756,7 +757,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     return "7";
 
                 case "Cumple Act":
-                    return "7";
+                    return "8";
 
                 default:
                     return "";
@@ -1012,6 +1013,11 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void textBox2_Click(object sender, EventArgs e)
         {
             BT_MasObserv.PerformClick();
+        }
+
+        private void TB_FechaEgreso_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
         }
     }
 }

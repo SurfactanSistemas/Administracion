@@ -334,5 +334,10 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             TBFiltro.Focus();
             TBFiltro_KeyUp(null, null);
         }
+
+        private void DGV_Legajos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

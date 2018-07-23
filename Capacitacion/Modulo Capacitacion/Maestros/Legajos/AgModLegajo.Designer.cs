@@ -239,11 +239,11 @@
             this.TB_FechaEgreso.Location = new System.Drawing.Point(701, 21);
             this.TB_FechaEgreso.Mask = "00/00/0000";
             this.TB_FechaEgreso.Name = "TB_FechaEgreso";
-            this.TB_FechaEgreso.ReadOnly = true;
             this.TB_FechaEgreso.Size = new System.Drawing.Size(85, 20);
             this.TB_FechaEgreso.TabIndex = 48;
             this.TB_FechaEgreso.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_FechaEgreso.ValidatingType = typeof(System.DateTime);
+            this.TB_FechaEgreso.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.TB_FechaEgreso_MaskInputRejected);
             // 
             // TB_CUIL
             // 
