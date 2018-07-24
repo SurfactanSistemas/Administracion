@@ -22,7 +22,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void CargarDt()
         {
             dtMuestraInicio.Columns.Add("Clave", typeof(string));
-            dtMuestraInicio.Columns.Add("Codigo", typeof(string));
+            dtMuestraInicio.Columns.Add("Codigo", typeof(int));
             dtMuestraInicio.Columns.Add("Descripcion", typeof(string));
             dtMuestraInicio.Columns.Add("Vigencia", typeof(string));
             dtMuestraInicio.Columns.Add("Sector", typeof(string));
@@ -61,6 +61,9 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             if (!ckSoloActivos.Checked)
             {
+                /*
+                 * Filtramos aquellos que se encuentren activos y estén para mostrar.
+                 */
                 DataTable dataTable = (DataTable) DGV_Legajos.DataSource;
                 if (dataTable != null)
                     dataTable.DefaultView.RowFilter = "(CONVERT(Egreso, System.String) = '00/00/0000' OR CONVERT(Egreso, System.String) = '  /  /    ') AND CONVERT(Mostrar, System.String) <> 'N'";
@@ -68,9 +71,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             if (ckSoloNoActualizados.Checked)
             {
+                /*
+                 * Filtro aquellos que esten activos y que no se encuentren actualizados.
+                 */
                 DataTable dataTable = (DataTable) DGV_Legajos.DataSource;
                 if (dataTable != null)
-                    dataTable.DefaultView.RowFilter = "(CONVERT(Actualizado, System.String) = 'N' OR CONVERT(Actualizado, System.String) = 'n') AND CONVERT(Mostrar, System.String) <> 'N'";
+                    dataTable.DefaultView.RowFilter = "(CONVERT(Actualizado, System.String) = 'N' OR CONVERT(Actualizado, System.String) = 'n') AND CONVERT(Mostrar, System.String) <> 'N' AND (CONVERT(Egreso, System.String) = '00/00/0000' OR CONVERT(Egreso, System.String) = '  /  /    ')";
             }
 
             _OcultarColumnasAuxiliares();
@@ -200,14 +206,22 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void TBFiltro_KeyUp(object sender, KeyEventArgs e)
         {
+            var WFiltro = "";
+
+            if (!ckSoloActivos.Checked)
+            {
+                WFiltro = " AND (CONVERT(Egreso, System.String) = '00/00/0000' OR CONVERT(Egreso, System.String) = '  /  /    ')";
+            }
+
             DataTable dataTable = DGV_Legajos.DataSource as DataTable;
             if (dataTable != null)
-                dataTable.DefaultView.RowFilter = string.Format("(CONVERT(Codigo, System.String) like '%{0}%' "
+                dataTable.DefaultView.RowFilter = string.Format("((CONVERT(Codigo, System.String) like '%{0}%' "
                                                 + " OR CONVERT(Descripcion, System.String) like '%{0}%'"
                                                 + " OR CONVERT(Vigencia, System.String) like '%{0}%'"
                                                 + " OR CONVERT(Sector, System.String) like '%{0}%'"
                                                 + " OR CONVERT(Dni, System.String) like '%{0}%'"
-                                                + " OR CONVERT(Perfil, System.String) like '%{0}%') AND CONVERT(Mostrar, System.String) <> 'N'", TBFiltro.Text);
+                                                + " OR CONVERT(Perfil, System.String) like '%{0}%') AND CONVERT(Mostrar, System.String) <> 'N')"
+                                                + " {1}", TBFiltro.Text, WFiltro);
             
         }
 
@@ -300,20 +314,16 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             {
                 if (txtCodigo.Text.Trim() == "") return;
 
-                foreach (DataGridViewRow row in DGV_Legajos.Rows)
-                {
-                    var WCodigo = row.Cells["Codigo"].Value ?? "";
-                    if (WCodigo.ToString().Trim() != "")
-                    {
-                        if (txtCodigo.Text.Trim() == WCodigo.ToString().Trim())
-                        {
-                            row.Selected = true;
-                            DGV_Perfiles_RowHeaderMouseDoubleClick(null, new DataGridViewCellMouseEventArgs(0, row.Index, 0,0, new MouseEventArgs(MouseButtons.None, 0,0,0,0)));
-                            txtCodigo.Text = "";
-                            return;
-                        }
-                    }
-                }
+                string IdAModificar = txtCodigo.Text.Trim();
+                Legajo LegajoAModificar = new Legajo();
+                LegajoAModificar = L.BuscarUno(IdAModificar);
+
+                if (LegajoAModificar.Codigo == 0) return;
+
+                AgModLegajo AgMod = new AgModLegajo(LegajoAModificar) { StartPosition = FormStartPosition.CenterScreen };
+                AgMod.ShowDialog();
+
+                txtCodigo.Text = "";
 
             }
             else if (e.KeyData == Keys.Escape)

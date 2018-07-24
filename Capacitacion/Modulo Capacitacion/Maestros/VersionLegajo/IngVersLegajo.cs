@@ -301,7 +301,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             int valorVersion = int.Parse(LV.Version);
             TB_VersionLegajo.Text = valorVersion.ToString();
             TB_FechaVersionI.Text = LV.FechaVersionI;
-            DTP_FechaVersionII.Text = LV.FechaVersionII;
+            DTP_FechaVersionII.Text = LV.FechaVersionII.Trim() == "" ? LV.FechaVersionI : LV.FechaVersionII;
             TB_CodPer.Text = LV.Perfil.Codigo.ToString();
             TB_VerPer.Text = LV.Perfil.Version.ToString();
 
