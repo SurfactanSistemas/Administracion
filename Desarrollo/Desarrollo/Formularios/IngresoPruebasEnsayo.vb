@@ -9,6 +9,12 @@ Public Class IngresoPruebasEnsayo
     Private WAuxiOT = "", WAuxiCargaIII = "", WAuxiCargaV = ""
 
     Private Sub IngresoOrdenTrabajo_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        For Each dgv As DataGridView In {dgvArchivos, dgvCosto, dgvFormula, dgvLaboratorio, dgvProceso, dgvRevisiones}
+            For Each c As DataGridViewColumn In dgv.Columns
+                c.SortMode = DataGridViewColumnSortMode.NotSortable
+            Next
+        Next
+
         btnLimpiar.PerformClick()
     End Sub
 

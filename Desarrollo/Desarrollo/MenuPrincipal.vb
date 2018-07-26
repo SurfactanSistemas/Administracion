@@ -52,7 +52,7 @@ Public Class MenuPrincipal
 
         With New IngresoPruebasEnsayo
             .Show()
-            .WindowState = FormWindowState.Normal
+            '.WindowState = FormWindowState.Normal
             .Focus()
         End With
 
