@@ -517,11 +517,11 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
                 {
                     TB_FechaIng.Text = fila[4].ToString();
                     Perfil = fila[5].ToString();
-                    TB_CantidadVersiones.Text = LV.MaxVersiones(fila[1].ToString());
-                    TB_CantidadVersiones.ReadOnly = true;
                 }
             }
-            
+
+            TB_CantidadVersiones.Text = LV.MaxVersiones(TB_Codigo.Text);
+            TB_CantidadVersiones.ReadOnly = true;
         }
 
         private void TB_DescLegajo_KeyDown(object sender, KeyEventArgs e)

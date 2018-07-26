@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pnlConsulta = new System.Windows.Forms.Panel();
@@ -350,7 +350,7 @@
             this.TB_Codigo.FormattingEnabled = true;
             this.TB_Codigo.Location = new System.Drawing.Point(76, 17);
             this.TB_Codigo.Name = "TB_Codigo";
-            this.TB_Codigo.Size = new System.Drawing.Size(57, 21);
+            this.TB_Codigo.Size = new System.Drawing.Size(73, 21);
             this.TB_Codigo.TabIndex = 123;
             this.TB_Codigo.SelectedIndexChanged += new System.EventHandler(this.TB_Codigo_SelectedIndexChanged);
             this.TB_Codigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Codigo_KeyDown);
@@ -377,7 +377,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(371, 53);
+            this.label17.Location = new System.Drawing.Point(371, 50);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(97, 18);
             this.label17.TabIndex = 44;
@@ -387,7 +387,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(158, 53);
+            this.label16.Location = new System.Drawing.Point(158, 50);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(126, 18);
             this.label16.TabIndex = 44;
@@ -397,7 +397,7 @@
             // 
             this.txtVersionActual.BackColor = System.Drawing.SystemColors.Window;
             this.txtVersionActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVersionActual.Location = new System.Drawing.Point(469, 52);
+            this.txtVersionActual.Location = new System.Drawing.Point(469, 49);
             this.txtVersionActual.Name = "txtVersionActual";
             this.txtVersionActual.ReadOnly = true;
             this.txtVersionActual.Size = new System.Drawing.Size(37, 20);
@@ -407,7 +407,7 @@
             // TB_CantidadVersiones
             // 
             this.TB_CantidadVersiones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_CantidadVersiones.Location = new System.Drawing.Point(290, 52);
+            this.TB_CantidadVersiones.Location = new System.Drawing.Point(290, 49);
             this.TB_CantidadVersiones.Name = "TB_CantidadVersiones";
             this.TB_CantidadVersiones.Size = new System.Drawing.Size(74, 20);
             this.TB_CantidadVersiones.TabIndex = 43;
@@ -417,7 +417,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(11, 53);
+            this.label15.Location = new System.Drawing.Point(11, 50);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(59, 18);
             this.label15.TabIndex = 42;
@@ -426,7 +426,7 @@
             // TB_VersionLegajo
             // 
             this.TB_VersionLegajo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_VersionLegajo.Location = new System.Drawing.Point(76, 52);
+            this.TB_VersionLegajo.Location = new System.Drawing.Point(76, 49);
             this.TB_VersionLegajo.Name = "TB_VersionLegajo";
             this.TB_VersionLegajo.Size = new System.Drawing.Size(73, 20);
             this.TB_VersionLegajo.TabIndex = 41;
@@ -440,7 +440,7 @@
             this.tabControl1.Location = new System.Drawing.Point(5, 76);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(966, 467);
+            this.tabControl1.Size = new System.Drawing.Size(966, 482);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 37;
             // 
@@ -528,7 +528,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(958, 441);
+            this.tabPage1.Size = new System.Drawing.Size(958, 456);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "     REQUERIMIENTOS     ";
             // 
@@ -1344,18 +1344,18 @@
             this.DGV_Temas.Location = new System.Drawing.Point(10, 24);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.DGV_Temas.RowHeadersWidth = 15;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.DGV_Temas.Size = new System.Drawing.Size(932, 401);
             this.DGV_Temas.TabIndex = 67;
             // 
@@ -1510,7 +1510,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(641, 564);
+            this.BT_Salir.Location = new System.Drawing.Point(518, 568);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 27;
@@ -1523,7 +1523,7 @@
             this.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsulta.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnConsulta.Location = new System.Drawing.Point(540, 564);
+            this.btnConsulta.Location = new System.Drawing.Point(417, 568);
             this.btnConsulta.Margin = new System.Windows.Forms.Padding(0);
             this.btnConsulta.Name = "btnConsulta";
             this.btnConsulta.Size = new System.Drawing.Size(40, 40);
@@ -1537,7 +1537,7 @@
             this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_LimpiarPant.Location = new System.Drawing.Point(382, 564);
+            this.BT_LimpiarPant.Location = new System.Drawing.Point(174, 564);
             this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
             this.BT_LimpiarPant.Name = "BT_LimpiarPant";
             this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
@@ -1552,7 +1552,7 @@
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(294, 564);
+            this.BT_Guardar.Location = new System.Drawing.Point(86, 564);
             this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
             this.BT_Guardar.Name = "BT_Guardar";
             this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
