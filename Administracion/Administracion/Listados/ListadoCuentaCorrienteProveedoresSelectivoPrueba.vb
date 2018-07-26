@@ -721,7 +721,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                             AcumPesosOrig = (varAcuNeto - AcumDifCambio)
                         Else
-                            AcumPesosOrig += (varSaldo - varRetIb - varRetGan)
+                            AcumPesosOrig = varAcuNeto
                         End If
 
                         Try
