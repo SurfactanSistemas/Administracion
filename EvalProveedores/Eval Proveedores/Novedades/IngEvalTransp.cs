@@ -2407,31 +2407,10 @@ namespace Eval_Proveedores.Novedades
             }
         }
 
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-
-
-
-        
-
-        
-
-
-
+        private void IngEvalTransp_Shown(object sender, EventArgs e)
+        {
+            if (TB_Mes.Text.Trim() != "") TB_Mes.Focus();
+        }
     }
 
 

@@ -39,8 +39,8 @@ namespace Eval_Proveedores.Novedades
 
             dtEva = ckSoloUltimas.Checked ? EVAGBOL.ListaGenUltimos() : EVAGBOL.ListaGen();
 
-            DataTable dtProve = PBOL.Lista();
-            dtEva.Columns.Add("NombProve", typeof(string));
+            //DataTable dtProve = PBOL.Lista();
+            //dtEva.Columns.Add("NombProve", typeof(string));
             dtEva.Columns.Add("Estado", typeof(string));
             dtEva.Columns.Add("DescTipo", typeof(string));
             dtEva.Columns.Add("DescFecha", typeof(string));
@@ -48,22 +48,34 @@ namespace Eval_Proveedores.Novedades
             {
                 fila["Clave"] = fila["Proveedor"] + fila["Mes"].ToString().PadLeft(2, '0') + fila["Ano"];
 
-                row = dtProve.Select("Proveedor='" + fila["Proveedor"].ToString() + "'");
+                //fila["NombProve"] = row[0]["Nombre"];
 
-                if (row.Length > 0)
+                if (fila["ProveEstado"].ToString() == "")
                 {
-                    fila["NombProve"] = row[0]["Nombre"];
+                    fila["Estado"] = "Sin Evaluar";
 
-                    if (row[0]["Estado"].ToString() == "")
-                    {
-                        fila["Estado"] = "Sin Evaluar";
-
-                    }
-                    else
-                    {
-                        fila["Estado"] = int.Parse(row[0]["Estado"].ToString()) == 2 ? "Inhabilitado" : "Habilitado";
-                    }
                 }
+                else
+                {
+                    fila["Estado"] = int.Parse(fila["ProveEstado"].ToString()) == 2 ? "Inhabilitado" : "Habilitado";
+                }
+
+                //row = dtProve.Select("Proveedor='" + fila["Proveedor"].ToString() + "'");
+
+                //if (row.Length > 0)
+                //{
+                //    fila["NombProve"] = row[0]["Nombre"];
+
+                //    if (row[0]["Estado"].ToString() == "")
+                //    {
+                //        fila["Estado"] = "Sin Evaluar";
+
+                //    }
+                //    else
+                //    {
+                //        fila["Estado"] = int.Parse(row[0]["Estado"].ToString()) == 2 ? "Inhabilitado" : "Habilitado";
+                //    }
+                //}
 
                 int Tipo = int.Parse(fila["Tipo"].ToString());
                 switch (Tipo)
@@ -93,7 +105,7 @@ namespace Eval_Proveedores.Novedades
                 
             }
 
-            
+            dtEva.DefaultView.Sort = "Tipo ASC, NombProve ASC";
 
             DGV_Evaluaciones.DataSource = dtEva;
 

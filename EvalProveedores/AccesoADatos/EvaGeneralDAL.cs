@@ -75,7 +75,7 @@ namespace AccesoADatos
             using (SqlConnection cnx = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString))
             {
                 cnx.Open();
-                const string sqlQuery = "select Clave, Proveedor, Ano, Mes, Promedio, Tipo, Periodo, Observaciones from EvaluaI order by Periodo desc";
+                const string sqlQuery = "select e.Clave, e.Proveedor, p.Nombre as NombProve, ISNULL(p.Estado, '') As ProveEstado, e.Ano, e.Mes, e.Promedio, e.Tipo, e.Periodo, e.Observaciones from EvaluaI e LEFT OUTER JOIN Proveedor p ON e.Proveedor = p.Proveedor order by e.Periodo desc";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, cnx))
                 {
                     SqlDataReader dataReader = cmd.ExecuteReader();
@@ -98,6 +98,8 @@ namespace AccesoADatos
             ultimos.Columns.Add("Mes");
             ultimos.Columns.Add("Promedio");
             ultimos.Columns.Add("Observaciones");
+            ultimos.Columns.Add("NombProve");
+            ultimos.Columns.Add("ProveEstado");
 
             DataTable dtEval = ultimos.Clone();
             DataRow row;
@@ -109,7 +111,7 @@ namespace AccesoADatos
 
                 foreach (DataRow _r in ultimos.Rows)
                 {
-                    sqlQuery = "Select Clave, Periodo, Proveedor, Ano, Mes, Promedio, Tipo, Observaciones from EvaluaI Where Proveedor = '" + _r["Proveedor"] + "' AND Tipo = '" + _r["Tipo"] + "' AND Periodo = '" + _r["Periodo"] + "'";
+                    sqlQuery = "Select e.Clave, e.Periodo, e.Proveedor, p.Nombre As NombProve, ISNULL(p.Estado, '') As ProveEstado, e.Ano, e.Mes, e.Promedio, e.Tipo, e.Observaciones from EvaluaI e LEFT OUTER JOIN Proveedor p ON e.Proveedor = p.Proveedor Where e.Proveedor = '" + _r["Proveedor"] + "' AND e.Tipo = '" + _r["Tipo"] + "' AND e.Periodo = '" + _r["Periodo"] + "'";
                     using (SqlCommand cmd = new SqlCommand(sqlQuery, cnx))
                     {
                         SqlDataReader dr = cmd.ExecuteReader();
@@ -121,6 +123,8 @@ namespace AccesoADatos
 
                             row["Clave"] = dr["Clave"];
                             row["Proveedor"] = dr["Proveedor"];
+                            row["NombProve"] = dr["NombProve"];
+                            row["ProveEstado"] = dr["ProveEstado"];
                             row["Ano"] = dr["Ano"];
                             row["Mes"] = dr["Mes"];
                             row["Promedio"] = dr["Promedio"];
