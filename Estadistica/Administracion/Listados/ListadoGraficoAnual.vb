@@ -377,7 +377,7 @@ Public Class ListadoGraficoAnual
 
         If Vendedor.permisos <> 99 Then
             ' Filtramos por vendedor y cambiamos al rpt por vendedor.
-            txtUno = "{Grafico2.codigo} in " & Vendedor.permisos & " to " & Vendedor.permisos
+            '        txtUno = "{Grafico2.codigo} in " & Vendedor.permisos & " to " & Vendedor.permisos
             WReporteI = "WGraficoNetporvendedor.rpt"
         End If
 

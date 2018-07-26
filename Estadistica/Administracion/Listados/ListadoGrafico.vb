@@ -323,7 +323,7 @@ Public Class ListadoGrafico
 
                 ProgressBar1.Visible = False
 
-                txtUno = "{Grafico2.codigo} in " & WDesdeVendedor & " to " & WHastaVendedor
+                txtUno = "{Grafico2.codigo} in 0 to 9999"
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 
@@ -473,7 +473,7 @@ Public Class ListadoGrafico
 
                 ProgressBar1.Visible = False
 
-                txtUno = "{Grafico2.codigo} in " & WDesdeVendedor & " to " & WHastaVendedor
+                txtUno = "{Grafico2.codigo} in 0 to 9999 "
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 
@@ -622,7 +622,7 @@ Public Class ListadoGrafico
 
                 ProgressBar1.Visible = False
 
-                txtUno = "{Grafico2.codigo} in " & WDesdeVendedor & " to " & WHastaVendedor
+                txtUno = "{Grafico2.codigo} in 0 to 9999"
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 
