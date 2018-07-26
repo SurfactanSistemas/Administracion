@@ -139,18 +139,18 @@ namespace Vista
             "5",
             "6",
             "7"});
-            this.CBPosicion.Location = new System.Drawing.Point(443, 27);
+            this.CBPosicion.Location = new System.Drawing.Point(466, 27);
             this.CBPosicion.Name = "CBPosicion";
-            this.CBPosicion.Size = new System.Drawing.Size(79, 21);
+            this.CBPosicion.Size = new System.Drawing.Size(56, 21);
             this.CBPosicion.TabIndex = 11;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(290, 28);
+            this.label4.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(334, 31);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(147, 19);
+            this.label4.Size = new System.Drawing.Size(126, 17);
             this.label4.TabIndex = 10;
             this.label4.Text = "A partir de Posición:";
             // 
@@ -197,12 +197,12 @@ namespace Vista
             this.CBTamañoEtiquetas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBTamañoEtiquetas.FormattingEnabled = true;
             this.CBTamañoEtiquetas.Items.AddRange(new object[] {
-            "Etiqueta Chica (8.5 x 4)",
-            "Etiqueta Autoadhesiva ( ZT-001-100)",
-            "Etiqueta P/Frascos "});
-            this.CBTamañoEtiquetas.Location = new System.Drawing.Point(97, 27);
+            "Etiq. chica (2 x 4 ud. - ZT-200-000)",
+            "Etiq. B/ Verde SGA (ZT-001-100)",
+            "Etiq. p/ Frascos (ZT-140-008)"});
+            this.CBTamañoEtiquetas.Location = new System.Drawing.Point(89, 27);
             this.CBTamañoEtiquetas.Name = "CBTamañoEtiquetas";
-            this.CBTamañoEtiquetas.Size = new System.Drawing.Size(177, 21);
+            this.CBTamañoEtiquetas.Size = new System.Drawing.Size(218, 21);
             this.CBTamañoEtiquetas.TabIndex = 7;
             this.CBTamañoEtiquetas.ValueMember = "Etiqueta Chica (8.5 x 4)";
             this.CBTamañoEtiquetas.SelectedIndexChanged += new System.EventHandler(this.CBTamañoEtiquetas_SelectedIndexChanged);
@@ -240,7 +240,7 @@ namespace Vista
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 28);
+            this.label1.Location = new System.Drawing.Point(16, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 19);
             this.label1.TabIndex = 0;
