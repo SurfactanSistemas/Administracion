@@ -120,6 +120,12 @@
     <Compile Include="Formularios\AnalisisDesarrollo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Proforma.designer.vb">
+      <DependentUpon>Proforma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Proforma.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Helper.vb" />
     <Compile Include="Login.designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
@@ -177,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\AnalisisDesarrollo.resx">
       <DependentUpon>AnalisisDesarrollo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Proforma.resx">
+      <DependentUpon>Proforma.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

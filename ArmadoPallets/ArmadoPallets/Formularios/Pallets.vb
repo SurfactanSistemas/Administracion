@@ -123,4 +123,16 @@ Public Class Pallets
         btn.Enabled = True
         btn.Cursor = Cursors.Hand
     End Sub
+
+    Private Sub btnInfoProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfoProforma.Click
+        If txtProforma.Text.Trim <> "" Then
+
+            Dim frm As New Proforma()
+            frm.StartPosition = FormStartPosition.CenterScreen
+            frm.txtNroProforma.Text = txtProforma.Text
+            frm.txtNroProforma_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            frm.Show(Me)
+
+        End If
+    End Sub
 End Class
