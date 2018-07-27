@@ -42,6 +42,8 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
                 int AñoDesde = int.Parse(Año.ToString() + "0101");
                 int AñoHasta = int.Parse(Año.ToString() + "1231");
 
+                Helper.ActualizarCantidadPersonasHoras(Año.ToString());
+
                 dtInforme = C.ListarCursoporTema(Desd, Hast, AñoDesde, AñoHasta);
                 
 
@@ -98,6 +100,8 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
                 int.TryParse(TB_Año.Text, out Año);
                 int AñoDesde = int.Parse(Año.ToString() + "0101");
                 int AñoHasta = int.Parse(Año.ToString() + "1231");
+
+                Helper.ActualizarCantidadPersonasHoras(Año.ToString());
 
                 dtInforme = C.ListarCursoporTema(Desd, Hast, AñoDesde, AñoHasta);
 
@@ -166,6 +170,28 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
             {
                 throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
             }
+        }
+
+        private void Inicio_Shown(object sender, EventArgs e)
+        {
+            TB_Desde.Focus();
+        }
+
+        private void TB_Año_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (TB_Año.Text.Trim() == "") return;
+
+                CB_Tipo.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                TB_Año.Text = "";
+            }
+	        
         }
 
 

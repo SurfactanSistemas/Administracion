@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
+namespace Modulo_Capacitacion.Listados.InformedeCompetencias {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Reporte : ReportClass {
+    public class imprelegajoiib : ReportClass {
         
-        public Reporte() {
+        public imprelegajoiib() {
         }
         
         public override string ResourceName {
             get {
-                return "Reporte.rpt";
+                return "imprelegajoiib.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
         
         public override string FullResourceName {
             get {
-                return "Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado.Reporte.rpt";
+                return "Modulo_Capacitacion.Listados.InformedeCompetencias.imprelegajoiib.rpt";
             }
             set {
                 // Do nothing
@@ -50,7 +50,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section1 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[0];
             }
@@ -58,7 +58,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section2 {
+        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[1];
             }
@@ -74,7 +74,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection1 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,7 +90,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[5];
             }
@@ -98,33 +98,17 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
-            get {
-                return this.ReportDefinition.Sections[8];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReporte : Component, ICachedReport {
+    public class Cachedimprelegajoiib : Component, ICachedReport {
         
-        public CachedReporte() {
+        public Cachedimprelegajoiib() {
         }
         
         [Browsable(false)]
@@ -161,7 +145,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Reporte rpt = new Reporte();
+            imprelegajoiib rpt = new imprelegajoiib();
             rpt.Site = this.Site;
             return rpt;
         }

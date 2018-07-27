@@ -51,9 +51,6 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
                     dr[9].ToString(),
                     dr[10].ToString(),
                     
-                    
-                    
-
                 }
 
                 );

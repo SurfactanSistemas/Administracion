@@ -486,7 +486,7 @@ namespace Negocio
                 + " T.OtrosII as EspOtrosII, T.NecesariaVIII as NecOtrosII, T.DeseableVIII as DesOtrosII,"
                 + " T.Equivalencias as EquivI, T.EquivalenciasII as EquivII, T.Curso, C.descripcion, T.NecesariaCurso, T.DeseableCurso"
                 + " from Tarea T inner join Sector S on S.codigo = T.Sector inner join Curso C on C.Codigo = T.Curso"
-                + "  where T.Codigo >= " + Desde + " and T.codigo <= " +Hasta + " order by codigo, Renglon asc";
+                + "  where T.Codigo >= " + Desde + " and T.codigo <= " +Hasta + " order by T.codigo, T.Renglon asc";
                 
 
             return repo.Listar(consulta);

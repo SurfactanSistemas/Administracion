@@ -54,9 +54,10 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.panel1.Controls.Add(this.LBChofer);
-            this.panel1.Location = new System.Drawing.Point(-1, -1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(529, 39);
+            this.panel1.Size = new System.Drawing.Size(495, 39);
             this.panel1.TabIndex = 8;
             // 
             // LBChofer
@@ -74,9 +75,10 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(74)))), ((int)(((byte)(95)))));
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(-1, 37);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(532, 302);
+            this.panel2.Size = new System.Drawing.Size(495, 224);
             this.panel2.TabIndex = 11;
             // 
             // panel3
@@ -94,7 +96,7 @@
             this.panel3.Controls.Add(this.BT_Imprimir);
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Location = new System.Drawing.Point(7, 7);
+            this.panel3.Location = new System.Drawing.Point(9, 5);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(477, 215);
             this.panel3.TabIndex = 0;
@@ -235,6 +237,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Inicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Shown += new System.EventHandler(this.Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

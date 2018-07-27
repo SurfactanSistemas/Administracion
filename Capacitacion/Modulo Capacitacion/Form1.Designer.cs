@@ -54,6 +54,7 @@
             this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoTemasRealizadosPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planDeCapacitaciónAnualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planDeCapacitaciónTentativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeLegajosPorPerfilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planillasDeTemasNoProgramadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.planDeCapacitaciónTentativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -296,6 +296,13 @@
             this.planDeCapacitaciónAnualToolStripMenuItem.Text = "Plan de Capacitación Anual";
             this.planDeCapacitaciónAnualToolStripMenuItem.Click += new System.EventHandler(this.planDeCapacitaciónAnualToolStripMenuItem_Click);
             // 
+            // planDeCapacitaciónTentativoToolStripMenuItem
+            // 
+            this.planDeCapacitaciónTentativoToolStripMenuItem.Name = "planDeCapacitaciónTentativoToolStripMenuItem";
+            this.planDeCapacitaciónTentativoToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
+            this.planDeCapacitaciónTentativoToolStripMenuItem.Text = "Plan de Capacitación Anual (Tentativo)";
+            this.planDeCapacitaciónTentativoToolStripMenuItem.Click += new System.EventHandler(this.planDeCapacitaciónTentativoToolStripMenuItem_Click);
+            // 
             // listadoDeLegajosPorPerfilToolStripMenuItem
             // 
             this.listadoDeLegajosPorPerfilToolStripMenuItem.Name = "listadoDeLegajosPorPerfilToolStripMenuItem";
@@ -321,7 +328,7 @@
             // 
             this.listadoDeTemasToolStripMenuItem.Name = "listadoDeTemasToolStripMenuItem";
             this.listadoDeTemasToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeTemasToolStripMenuItem.Text = "Listado de Temas";
+            this.listadoDeTemasToolStripMenuItem.Text = "Listado de Cursos";
             this.listadoDeTemasToolStripMenuItem.Click += new System.EventHandler(this.listadoDeTemasToolStripMenuItem_Click);
             // 
             // listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem
@@ -416,13 +423,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
             this.tableLayoutPanel1.TabIndex = 4;
-            // 
-            // planDeCapacitaciónTentativoToolStripMenuItem
-            // 
-            this.planDeCapacitaciónTentativoToolStripMenuItem.Name = "planDeCapacitaciónTentativoToolStripMenuItem";
-            this.planDeCapacitaciónTentativoToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.planDeCapacitaciónTentativoToolStripMenuItem.Text = "Plan de Capacitación Anual (Tentativo)";
-            this.planDeCapacitaciónTentativoToolStripMenuItem.Click += new System.EventHandler(this.planDeCapacitaciónTentativoToolStripMenuItem_Click);
             // 
             // Form1
             // 

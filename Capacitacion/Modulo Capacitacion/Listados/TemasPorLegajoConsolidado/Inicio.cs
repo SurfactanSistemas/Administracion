@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -17,10 +12,6 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
         Cronograma Cr = new Cronograma();
         DataTable dtInforme;
         string TipoImpre;
-
-        DataTable dtCronograma;
-        int DesdeTipo;
-        int HastaTipo;
 
         public Inicio()
         {

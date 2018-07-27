@@ -251,5 +251,10 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo
             }
 
         }
+
+        private void Inicio_Shown(object sender, EventArgs e)
+        {
+            TB_Desde.Focus();
+        }
     }
 }

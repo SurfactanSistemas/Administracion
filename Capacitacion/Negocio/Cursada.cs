@@ -123,7 +123,7 @@ namespace Negocio
 
 
             Conexion repo = new Conexion();
-            string consulta = "select C.Curso, C.DesCurso, C.Tema, C.DesTema, C.Legajo, C.DesLegajo, C.Horas, C.Codigo, C.Fecha, C.Observaciones,  CASE WHEN C.TipoCursada = 0 THEN 'Si' ELSE 'No' END as Planificada from Cursadas C where Curso >= " + TemaDesd + " and Curso <= " + TemajoHast + " and OrdFecha > = " + FechaDesde +" and OrdFecha < = " + FechaHasta;
+            string consulta = "select C.Curso, Cu.Descripcion, C.Tema, T.Descripcion, C.Legajo, l.Descripcion, C.Horas, C.Codigo, C.Fecha, C.Observaciones,  CASE WHEN C.TipoCursada = 0 THEN 'Si' ELSE 'No' END as Planificada from Cursadas C LEFT OUTER JOIN Legajo l ON l.Codigo = C.Legajo AND l.Renglon = 1 LEFT OUTER JOIN Tema Cu ON Cu.Curso = c.Curso AND Cu.Tema = C.Tema LEFT OUTER JOIN Curso T ON T.Codigo = C.Curso where C.Curso >= " + TemaDesd + " and C.Curso <= " + TemajoHast + " and C.OrdFecha > = " + FechaDesde + " and C.OrdFecha < = " + FechaHasta;
 
 
             return repo.Listar(consulta);

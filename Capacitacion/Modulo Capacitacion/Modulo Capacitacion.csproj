@@ -100,12 +100,6 @@
     <Compile Include="Listados\Ayuda.Designer.cs">
       <DependentUpon>Ayuda.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados\PlanCapacitacionAnualTentativo\Inicio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados\PlanCapacitacionAnualTentativo\Inicio.Designer.cs">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </Compile>
     <Compile Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajo.cs">
       <DependentUpon>imprelegajo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -117,6 +111,18 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\InformedeCompetencias\imprelegajoii.cs">
+      <DependentUpon>imprelegajoii.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Listados\InformedeCompetenciasNecesidadesPorSector\Inicio.cs">
       <SubType>Form</SubType>
@@ -221,10 +227,10 @@
       <DependentUpon>imprelegajo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Listados\InformedeCompetencias\imprelegajoii.cs">
+    <Compile Include="Listados\InformedeCompetencias\imprelegajoiib.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>imprelegajoii.rpt</DependentUpon>
+      <DependentUpon>imprelegajoiib.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\InformedeCompetencias\Inicio.cs">
@@ -680,9 +686,6 @@
     <EmbeddedResource Include="Listados\Ayuda.resx">
       <DependentUpon>Ayuda.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\Inicio.resx">
-      <DependentUpon>Inicio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprelegajo.cs</LastGenOutput>
@@ -690,6 +693,13 @@
     <EmbeddedResource Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajoii.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprelegajoii.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformedeCompetencias\imprelegajoii.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprelegajoii.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\InformedeCompetenciasNecesidadesPorSector\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
@@ -740,9 +750,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprelegajo.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\InformedeCompetencias\imprelegajoii.rpt">
+    <EmbeddedResource Include="Listados\InformedeCompetencias\imprelegajoiib.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>imprelegajoii.cs</LastGenOutput>
+      <LastGenOutput>imprelegajoiib.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\InformedeCompetencias\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>

@@ -36,10 +36,6 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil
                 int.TryParse(TB_Hasta.Text, out Hast);
                 dtInforme = P.ListarPerfilEsp(Desd, Hast);
 
-
-
-
-
                 Tipo = "Pantalla";
 
                 ImpreInforme Impre = new ImpreInforme(dtInforme, Tipo);
@@ -180,6 +176,11 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil
                 throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
             }
         
+        }
+
+        private void Inicio_Shown(object sender, EventArgs e)
+        {
+            TB_Desde.Focus();
         }
     }
 }

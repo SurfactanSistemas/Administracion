@@ -20,7 +20,7 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void BT_Pantalla_Click(object sender, EventArgs e)
@@ -44,6 +44,8 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
                 int Año = 0;
 
                 int.TryParse(TB_Año.Text, out Año);
+
+                Helper.ActualizarCantidadPersonasHoras(Año.ToString());
 
                 dtInforme = C.CronogramaHoras(Año, TemaDesde, TemaHasta);
 
@@ -82,6 +84,8 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
                 int Año = 0;
 
                 int.TryParse(TB_Año.Text, out Año);
+
+                Helper.ActualizarCantidadPersonasHoras(Año.ToString());
 
                 dtInforme = C.CronogramaHoras(Año, TemaDesde, TemaHasta);
 

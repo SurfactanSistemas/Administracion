@@ -184,7 +184,10 @@
             this.ClientSize = new System.Drawing.Size(414, 271);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Inicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.Shown += new System.EventHandler(this.Inicio_Shown);
             this.panel1.ResumeLayout(false);

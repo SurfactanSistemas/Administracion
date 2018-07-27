@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ClassConexion;
 using System.Data;
+using ClassConexion;
 
 namespace Negocio
 {
@@ -14,7 +12,7 @@ namespace Negocio
         public List<Curso> Cursos { get; set; }
 
 
-        public System.Data.DataTable ListarTodos()
+        public DataTable ListarTodos()
         {
 
             throw new NotImplementedException();
@@ -32,10 +30,10 @@ namespace Negocio
 
             int renglon = 1;
 
-            foreach (var item in this.Cursos)
+            foreach (var item in Cursos)
 	        {
-                var clave1 = this.Legajo.Codigo.ToString().PadLeft(6, '0');
-                var clave2 = this.Año.ToString().PadLeft(4, '0');
+                var clave1 = Legajo.Codigo.ToString().PadLeft(6, '0');
+                var clave2 = Año.PadLeft(4, '0');
                 var clave3 = renglon.ToString().PadLeft(2, '0');
 
                 var horas = item.Horas.ToString().Replace(",", ".");
@@ -70,7 +68,7 @@ namespace Negocio
 
         public DataTable BuscarUno(string p1, string p2)
         {
-            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+            Conexion repo = new Conexion();
 
             string consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, Cr.Tema as Curso, t.Descripcion as DesCurso, Cr.Horas, Cr.Realizado" +
                                 " from cronograma Cr inner join Curso C on C.Codigo = Cr.Curso LEFT OUTER JOIN Tema t ON cr.Curso = t.Curso AND Cr.Tema = t.Tema" 
@@ -98,7 +96,7 @@ namespace Negocio
 
         public object BuscarPorAño(string p)
         {
-            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+            Conexion repo = new Conexion();
 
             //string consulta = "select Cr.Curso,C.Descripcion,count(*) as Personas,sum(Cr.horas) as Horas ," + 
             //    " sum(Cr.Realizado) as HorasRealizado, (sum(Cr.horas) -sum(Cr.Realizado)) as Resta, 'N' as Mes1, " + 
@@ -124,7 +122,7 @@ namespace Negocio
             return DT;
         }
 
-        public System.Data.DataTable ListarHorasRealizadas()
+        public DataTable ListarHorasRealizadas()
         {
             Conexion repo = new Conexion();
             string consulta = "select C.DesLegajo, C.Legajo, C.Realizado  from Cronograma C";
@@ -133,7 +131,7 @@ namespace Negocio
 
         public Boolean ExisteEnCronograma(int Año, int Legajo, int Curso)
         {
-            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+            Conexion repo = new Conexion();
 
             string consulta = "select Cr.Legajo From Cronograma Cr where Cr.Ano = " + Año + " and Cr.Legajo = " + Legajo + " and Curso = " + Curso;
 
@@ -143,9 +141,9 @@ namespace Negocio
             return DT.Rows.Count > 0;
         }
 
-        public System.Data.DataTable BuscarUnoCursada(int Año, int Legajo, int Curso)
+        public DataTable BuscarUnoCursada(int Año, int Legajo, int Curso)
         {
-            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+            Conexion repo = new Conexion();
 
             string consulta = "select * From Cronograma Cr where Cr.Ano = " + Año + " and Cr.Legajo = " + Legajo + " and Curso = " + Curso;
 
@@ -155,9 +153,9 @@ namespace Negocio
             return DT;
         }
 
-        public System.Data.DataTable CronogramaPendiente(int Año)
+        public DataTable CronogramaPendiente(int Año)
         {
-            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+            Conexion repo = new Conexion();
 
             string consulta = "select C.Horas, C.Realizado, C.Legajo, C.Curso, Cu.Descripcion from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso  where C.Ano = " + Año + " and C.Horas > C.Realizado order by C.Curso desc";
 
@@ -169,23 +167,20 @@ namespace Negocio
         }
 
 
-        public System.Data.DataTable CronogramaHoras(int Año, int TemaDesde, int TemaHasta)
+        public DataTable CronogramaHoras(int Año, int TemaDesde, int TemaHasta)
         {
-            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+            Conexion repo = new Conexion();
 
-            string consulta = "select C.Ano, C.Curso, Cu.Descripcion, C.Tema, C.DesTema, C.Legajo, C.DesLegajo, C.Horas, C.Realizado from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso  where Curso >= " + TemaDesde + " and Curso <= " + TemaHasta + " and Ano = " + Año + " order by Legajo desc";
-
-
-
+            string consulta = "select C.Ano, C.Curso, Cu.Descripcion, C.Tema, T.Descripcion, C.Legajo, l.Descripcion, C.Horas, C.Realizado from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso LEFT OUTER JOIN Tema T ON T.Curso = C.Curso AND T.Tema = C.Tema LEFT OUTER JOIN Legajo l ON l.Codigo = C.Legajo AND l.Renglon = 1  where C.Curso >= " + TemaDesde + " and C.Curso <= " + TemaHasta + " and C.Ano = " + Año + " AND C.Tema <> 0 AND C.Renglon <> 0 order by C.Legajo desc";
 
             DataTable DT = repo.BuscarUno(consulta);
 
             return DT;
         }
 
-        public System.Data.DataTable CronogramaSectorTema(int Año, int SectorDesde, int SectorHasta)
+        public DataTable CronogramaSectorTema(int Año, int SectorDesde, int SectorHasta)
         {
-            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+            Conexion repo = new Conexion();
 
             string consulta = "Select C.Sector, C.DesSector, C.Curso, Cu.Descripcion, C.Legajo, C.DesLegajo, C.Horas from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso where C.Sector >= " + SectorDesde + " and C.Sector <= " + SectorHasta + " and Ano = " + Año + " order by C.Sector, C.Curso, Legajo";
 

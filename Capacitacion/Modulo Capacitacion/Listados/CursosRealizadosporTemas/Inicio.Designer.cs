@@ -125,6 +125,7 @@
             this.TB_Año.Size = new System.Drawing.Size(51, 20);
             this.TB_Año.TabIndex = 87;
             this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
             // 
             // label3
             // 
@@ -223,6 +224,8 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Inicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Shown += new System.EventHandler(this.Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

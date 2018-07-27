@@ -149,5 +149,10 @@ namespace Modulo_Capacitacion.Listados.Perfil
                 throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
             }
         }
+
+        private void Inicio_Shown(object sender, EventArgs e)
+        {
+            TB_Desde.Focus();
+        }
    }
 }
