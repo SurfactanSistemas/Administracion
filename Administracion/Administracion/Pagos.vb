@@ -18,6 +18,8 @@ Public Class Pagos
     Dim _TipoConsulta As Integer = Nothing
     Private WCertificadoGan, WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
 
+    Private WGrillaReferencia As DataGridView
+
     Private Const XMAXFILAS = 15
     Private Const YMARGEN = 250
     Private Const XMARGEN = 426
@@ -3602,6 +3604,9 @@ Public Class Pagos
                 Else
                     txtFecha.Focus()
                 End If
+
+                WGrillaReferencia = Nothing
+
             Else
                 txtOrdenPago.Text = "0"
                 txtFecha.Focus()
@@ -7640,12 +7645,15 @@ Public Class Pagos
         If MsgBox("¿Está seguro de querer eliminar los datos de la fila?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
             Exit Sub
         End If
+        _RemoverFilaFormaPagos(e.RowIndex)
+    End Sub
+
+    Private Sub _RemoverFilaFormaPagos(ByVal e As Integer)
 
         With gridFormaPagos
-            .Rows.Remove(.Rows(e.RowIndex))
+            .Rows.Remove(.Rows(e))
             .Rows.Add("", "", "", "", "", "", "", "", "")
         End With
-
     End Sub
 
     Private Sub gridPagos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridPagos.RowHeaderMouseDoubleClick
@@ -7653,12 +7661,15 @@ Public Class Pagos
         If MsgBox("¿Está seguro de querer eliminar los datos de la fila?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
             Exit Sub
         End If
+        _RemoverFilaPagos(e.RowIndex)
+    End Sub
+
+    Private Sub _RemoverFilaPagos(ByVal e As Integer)
 
         With gridPagos
-            .Rows.Remove(.Rows(e.RowIndex))
+            .Rows.Remove(.Rows(e))
             .Rows.Add("", "", "", "", "", "", "")
         End With
-
     End Sub
 
     Private Sub txtGanancias_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtGanancias.TextChanged, txtIBCiudad.TextChanged, txtIngresosBrutos.TextChanged, txtIVA.TextChanged, txtTotal.TextChanged
@@ -7669,5 +7680,30 @@ Public Class Pagos
 
     Private Sub ckNoCalcRetenciones_CheckedChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles ckNoCalcRetenciones.CheckedChanged
         _RecalcularRetenciones()
+    End Sub
+
+    Private Sub gridPagos_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles gridPagos.Enter, gridFormaPagos.Enter
+        WGrillaReferencia = CType(sender, DataGridView)
+    End Sub
+
+    Private Sub btnEliminarFila_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminarFila.Click
+        If Not IsNothing(WGrillaReferencia) Then
+
+            'MsgBox("Grilla: " & WGrillaReferencia.Name & "  Fila: " & WGrillaReferencia.CurrentRow.Index)
+
+            If MsgBox("¿Está seguro de querer limpiar la fila?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+
+            With WGrillaReferencia
+                Select Case .Name
+                    Case "gridPagos"
+                        _RemoverFilaPagos(.CurrentRow.Index)
+                    Case "gridFormaPagos"
+                        _RemoverFilaFormaPagos(.CurrentRow.Index)
+                    Case Else
+                        Exit Sub
+                End Select
+            End With
+
+        End If
     End Sub
 End Class
