@@ -22,10 +22,9 @@ Partial Class IngresoPallet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -58,7 +57,6 @@ Partial Class IngresoPallet
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.txtFechaAux3 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaAux2 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.dgvProductos = New System.Windows.Forms.DataGridView()
@@ -69,7 +67,8 @@ Partial Class IngresoPallet
         Me.DescEnvase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CantidadUnidades = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KgUnidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Disponible = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtDisponible = New System.Windows.Forms.MaskedTextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -200,6 +199,7 @@ Partial Class IngresoPallet
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtDisponible)
         Me.GroupBox1.Controls.Add(Me.txtCodigo)
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.txtPedido)
@@ -207,6 +207,7 @@ Partial Class IngresoPallet
         Me.GroupBox1.Controls.Add(Me.txtAltura)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.lblTara)
+        Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.lblBase)
         Me.GroupBox1.Controls.Add(Me.lblDescPallet)
@@ -231,7 +232,7 @@ Partial Class IngresoPallet
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(354, 51)
+        Me.Label10.Location = New System.Drawing.Point(523, 51)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(74, 15)
         Me.Label10.TabIndex = 0
@@ -240,7 +241,7 @@ Partial Class IngresoPallet
         'txtPedido
         '
         Me.txtPedido.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPedido.Location = New System.Drawing.Point(644, 50)
+        Me.txtPedido.Location = New System.Drawing.Point(644, 48)
         Me.txtPedido.Name = "txtPedido"
         Me.txtPedido.Size = New System.Drawing.Size(12, 21)
         Me.txtPedido.TabIndex = 1
@@ -249,7 +250,7 @@ Partial Class IngresoPallet
         'txtProforma
         '
         Me.txtProforma.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtProforma.Location = New System.Drawing.Point(655, 51)
+        Me.txtProforma.Location = New System.Drawing.Point(655, 48)
         Me.txtProforma.Name = "txtProforma"
         Me.txtProforma.Size = New System.Drawing.Size(12, 21)
         Me.txtProforma.TabIndex = 1
@@ -262,12 +263,13 @@ Partial Class IngresoPallet
         Me.txtAltura.Name = "txtAltura"
         Me.txtAltura.Size = New System.Drawing.Size(67, 21)
         Me.txtAltura.TabIndex = 1
+        Me.txtAltura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(188, 51)
+        Me.Label8.Location = New System.Drawing.Point(357, 51)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(38, 15)
         Me.Label8.TabIndex = 0
@@ -279,9 +281,9 @@ Partial Class IngresoPallet
         Me.lblTara.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTara.Cursor = System.Windows.Forms.Cursors.No
         Me.lblTara.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTara.Location = New System.Drawing.Point(428, 48)
+        Me.lblTara.Location = New System.Drawing.Point(597, 48)
         Me.lblTara.Name = "lblTara"
-        Me.lblTara.Size = New System.Drawing.Size(68, 21)
+        Me.lblTara.Size = New System.Drawing.Size(65, 21)
         Me.lblTara.TabIndex = 0
         '
         'Label4
@@ -300,9 +302,9 @@ Partial Class IngresoPallet
         Me.lblBase.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblBase.Cursor = System.Windows.Forms.Cursors.No
         Me.lblBase.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBase.Location = New System.Drawing.Point(228, 48)
+        Me.lblBase.Location = New System.Drawing.Point(397, 48)
         Me.lblBase.Name = "lblBase"
-        Me.lblBase.Size = New System.Drawing.Size(100, 21)
+        Me.lblBase.Size = New System.Drawing.Size(97, 21)
         Me.lblBase.TabIndex = 0
         '
         'lblDescPallet
@@ -434,7 +436,6 @@ Partial Class IngresoPallet
         '
         'Panel7
         '
-        Me.Panel7.Controls.Add(Me.txtFechaAux3)
         Me.Panel7.Controls.Add(Me.txtFechaAux2)
         Me.Panel7.Controls.Add(Me.txtFechaAux)
         Me.Panel7.Controls.Add(Me.dgvProductos)
@@ -444,20 +445,6 @@ Partial Class IngresoPallet
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(833, 181)
         Me.Panel7.TabIndex = 5
-        '
-        'txtFechaAux3
-        '
-        Me.txtFechaAux3.BackColor = System.Drawing.SystemColors.Window
-        Me.txtFechaAux3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFechaAux3.Location = New System.Drawing.Point(751, 32)
-        Me.txtFechaAux3.Margin = New System.Windows.Forms.Padding(0)
-        Me.txtFechaAux3.Mask = "00/00/0000"
-        Me.txtFechaAux3.Name = "txtFechaAux3"
-        Me.txtFechaAux3.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaAux3.Size = New System.Drawing.Size(76, 13)
-        Me.txtFechaAux3.TabIndex = 5
-        Me.txtFechaAux3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtFechaAux3.Visible = False
         '
         'txtFechaAux2
         '
@@ -489,7 +476,7 @@ Partial Class IngresoPallet
         Me.dgvProductos.AllowUserToAddRows = False
         Me.dgvProductos.AllowUserToDeleteRows = False
         Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Terminado, Me.DescTerminado, Me.Partida, Me.Envase, Me.DescEnvase, Me.CantidadUnidades, Me.KgUnidad, Me.Disponible})
+        Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Terminado, Me.DescTerminado, Me.Partida, Me.Envase, Me.DescEnvase, Me.CantidadUnidades, Me.KgUnidad})
         Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvProductos.Location = New System.Drawing.Point(3, 3)
         Me.dgvProductos.Name = "dgvProductos"
@@ -517,8 +504,8 @@ Partial Class IngresoPallet
         '
         'Partida
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Partida.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Partida.DefaultCellStyle = DataGridViewCellStyle4
         Me.Partida.HeaderText = "Partida"
         Me.Partida.MaxInputLength = 6
         Me.Partida.Name = "Partida"
@@ -542,8 +529,8 @@ Partial Class IngresoPallet
         '
         'CantidadUnidades
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CantidadUnidades.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CantidadUnidades.DefaultCellStyle = DataGridViewCellStyle5
         Me.CantidadUnidades.HeaderText = "Cant Unid"
         Me.CantidadUnidades.MaxInputLength = 3
         Me.CantidadUnidades.Name = "CantidadUnidades"
@@ -551,19 +538,31 @@ Partial Class IngresoPallet
         '
         'KgUnidad
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.KgUnidad.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.KgUnidad.DefaultCellStyle = DataGridViewCellStyle6
         Me.KgUnidad.HeaderText = "Kg x Unidad"
         Me.KgUnidad.Name = "KgUnidad"
         Me.KgUnidad.Width = 90
         '
-        'Disponible
+        'txtDisponible
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Disponible.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Disponible.HeaderText = "Disponible"
-        Me.Disponible.Name = "Disponible"
-        Me.Disponible.Width = 80
+        Me.txtDisponible.Location = New System.Drawing.Point(282, 48)
+        Me.txtDisponible.Mask = "00/00/0000"
+        Me.txtDisponible.Name = "txtDisponible"
+        Me.txtDisponible.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtDisponible.Size = New System.Drawing.Size(67, 20)
+        Me.txtDisponible.TabIndex = 3
+        Me.txtDisponible.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(188, 50)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(90, 16)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Disponible el:"
         '
         'IngresoPallet
         '
@@ -630,7 +629,7 @@ Partial Class IngresoPallet
     Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Panel7 As System.Windows.Forms.Panel
     Friend WithEvents txtFechaAux2 As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents txtFechaAux3 As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents btnEliminar As System.Windows.Forms.Button
     Friend WithEvents Terminado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescTerminado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Partida As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -638,6 +637,6 @@ Partial Class IngresoPallet
     Friend WithEvents DescEnvase As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CantidadUnidades As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents KgUnidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Disponible As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btnEliminar As System.Windows.Forms.Button
+    Friend WithEvents txtDisponible As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

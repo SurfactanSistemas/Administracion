@@ -53,6 +53,7 @@ Public Class IngresoPallet
 
                         txtCodigo.Text = IIf(IsDBNull(.Item("CodigoPallet")), "", .Item("CodigoPallet"))
                         txtAltura.Text = IIf(IsDBNull(.Item("Altura")), "", .Item("Altura"))
+                        txtDisponible.Text = IIf(IsDBNull(.Item("FechaDisponible")), "", .Item("FechaDisponible"))
 
                         Dim R = dgvProductos.Rows.Add
 
@@ -61,7 +62,6 @@ Public Class IngresoPallet
                         dgvProductos.Rows(R).Cells("Envase").Value = IIf(IsDBNull(.Item("CodigoEnvase")), "", .Item("CodigoEnvase"))
                         dgvProductos.Rows(R).Cells("CantidadUnidades").Value = IIf(IsDBNull(.Item("Bultos")), "", .Item("Bultos"))
                         dgvProductos.Rows(R).Cells("KgUnidad").Value = IIf(IsDBNull(.Item("KgBultos")), "", .Item("KgBultos"))
-                        dgvProductos.Rows(R).Cells("Disponible").Value = IIf(IsDBNull(.Item("FechaDisponible")), "", .Item("FechaDisponible"))
 
                     Loop
 
@@ -81,7 +81,7 @@ Public Class IngresoPallet
                     _CalcularPesos()
 
                     ' Ocultamos las mascaras auxiliares de la grilla.
-                    For Each msk As MaskedTextBox In {txtFechaAux, txtFechaAux2, txtFechaAux3}
+                    For Each msk As MaskedTextBox In {txtFechaAux, txtFechaAux2}
                         msk.Visible = False
                     Next
 
@@ -175,6 +175,7 @@ Public Class IngresoPallet
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaAux.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            If txtFechaAux.Text.Replace(" ", "").Length < 12 Then : Exit Sub : End If
 
             With dgvProductos
                 .Rows(WRow).Cells("Terminado").Value = UCase(txtFechaAux.Text)
@@ -205,6 +206,7 @@ Public Class IngresoPallet
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaAux2.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            If txtFechaAux2.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
 
             With dgvProductos
                 .Rows(WRow).Cells("Envase").Value = UCase(txtFechaAux2.Text)
@@ -225,35 +227,6 @@ Public Class IngresoPallet
                 End If
 
                 '.Focus()
-            End With
-
-        ElseIf e.KeyData = Keys.Escape Then
-            txtFechaAux2.Text = ""
-        End If
-
-    End Sub
-
-    Private Sub txtFechaAux3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux3.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            If Trim(txtFechaAux3.Text.Replace("/", "")) = "" Then : Exit Sub : End If
-
-            If Not Helper._ValidarFecha(txtFechaAux3.Text) Then Exit Sub
-
-            With dgvProductos
-                .Rows(WRow).Cells("Disponible").Value = UCase(txtFechaAux3.Text)
-
-                .CurrentCell = .Rows(WRow).Cells("Disponible")
-
-                If WRow >= .Rows.Count - 1 Then
-                    .Rows.Add()
-                End If
-
-                .CurrentCell = .Rows(WRow + 1).Cells("Terminado")
-
-                txtFechaAux3.Visible = False
-                txtFechaAux3.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
-                
             End With
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -338,12 +311,11 @@ Public Class IngresoPallet
     Private Sub dgvProductos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProductos.CellEnter
         txtFechaAux.Visible = False
         txtFechaAux2.Visible = False
-        txtFechaAux3.Visible = False
         With dgvProductos
             Dim _location As New Point
 
             Select Case e.ColumnIndex
-                Case 0, 3, 7
+                Case 0, 3
 
                     .ClearSelection()
                     .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
@@ -382,18 +354,6 @@ Public Class IngresoPallet
                         .Focus()
                     End With
 
-                Case 7
-                    Dim _R = .Rows(e.RowIndex).Cells("Disponible").Value
-                    _location.X -= XMARGEN
-
-                    With txtFechaAux3
-                        .Visible = True
-                        .Location = _location
-                        .Clear()
-                        .Text = .Text.Replace(" ", "")
-                        .Text = _R
-                        .Focus()
-                    End With
             End Select
 
         End With
@@ -428,25 +388,8 @@ Public Class IngresoPallet
 
             txtAltura.Text = Helper.formatonumerico(txtAltura.Text)
 
-            With dgvProductos
-                If .Rows.Count > 0 Then
-                    .ClearSelection()
-                    .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
-                    Dim _location As Point = .GetCellDisplayRectangle(0, 0, False).Location
-
-                    _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN * 2
-                    _location.X += .Location.X + XMARGEN '+ (.CurrentCell.Size.Width - txtFechaAux.Size.Width) 
-                    txtFechaAux.Location = _location
-                    txtFechaAux.Clear()
-                    txtFechaAux.Text = .Rows(0).Cells("Terminado").Value
-                    txtFechaAux.Text = txtFechaAux.Text.Replace(" ", "")
-                    WRow = 0
-                    Wcol = 0
-                    txtFechaAux.Visible = True
-                    txtFechaAux.Focus()
-                End If
-            End With
-
+            txtDisponible.Focus()
+            
         ElseIf e.KeyData = Keys.Escape Then
             txtAltura.Text = ""
         End If
@@ -557,7 +500,7 @@ Public Class IngresoPallet
                     End If
 
                     Select Case iCol
-                        Case 7
+                        Case 6
 
                             If iRow < .Rows.Count - 1 Then
                                 .CurrentCell = .Rows(iRow + 1).Cells(0)
@@ -707,7 +650,7 @@ Public Class IngresoPallet
                 Dim WEnvase = If(row.Cells("Envase").Value, "")
                 Dim WCantUnidades = If(row.Cells("CantidadUnidades").Value, "")
                 Dim WKgUnidad = If(row.Cells("KgUnidad").Value, "")
-                Dim WDisponible = If(row.Cells("Disponible").Value, "")
+                Dim WDisponible = txtDisponible.Text
                 Dim WDisponibleOrd = Helper.ordenaFecha(WDisponible)
 
                 If WTerminado.ToString.Replace("-", "").Trim = "" Then
@@ -916,6 +859,38 @@ Public Class IngresoPallet
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+
+    End Sub
+
+    Private Sub txtDisponible_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDisponible.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDisponible.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            If Helper._ValidarFecha(txtDisponible.Text) Then
+                With dgvProductos
+                    If .Rows.Count > 0 Then
+                        .ClearSelection()
+                        .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
+                        Dim _location As Point = .GetCellDisplayRectangle(0, 0, False).Location
+
+                        _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN * 2
+                        _location.X += .Location.X + XMARGEN '+ (.CurrentCell.Size.Width - txtFechaAux.Size.Width) 
+                        txtFechaAux.Location = _location
+                        txtFechaAux.Clear()
+                        txtFechaAux.Text = .Rows(0).Cells("Terminado").Value
+                        txtFechaAux.Text = txtFechaAux.Text.Replace(" ", "")
+                        WRow = 0
+                        Wcol = 0
+                        txtFechaAux.Visible = True
+                        txtFechaAux.Focus()
+                    End If
+                End With
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDisponible.Text = ""
+        End If
 
     End Sub
 End Class

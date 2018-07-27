@@ -106,4 +106,21 @@ Public Class Pallets
         _CargarInformacionPallets()
 
     End Sub
+
+    Private Sub btn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn.Click
+        btn.Enabled = False
+        btn.Cursor = Cursors.No
+
+        Cursor = Cursors.WaitCursor
+        Dim frm As New VistaPrevia()
+        frm.Reporte = New PlanillaPallets
+        frm.Formula = "{ArmadoPallets.Proforma} = '" & txtProforma.Text & "' AND {ArmadoPallets.Pedido} = '" & txtPedido.Text & "' AND {ArmadoPallets.CodigoPallet} = {ArtPallet.Codigo} AND {ArmadoPallets.CodigoEnvase} = {ArtEnvase.Codigo}" &
+                      " AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Cliente} = {Cliente.Cliente} AND {ProformaExportacion.Renglon} = '01'"
+        frm.Mostrar()
+
+
+        Cursor = Cursors.Default
+        btn.Enabled = True
+        btn.Cursor = Cursors.Hand
+    End Sub
 End Class

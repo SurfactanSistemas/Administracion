@@ -86,7 +86,17 @@ Public Class ListadoProformas
         If e.KeyData = Keys.Enter Then
             If Trim(txtPedido.Text) = "" Then : Exit Sub : End If
 
+            For Each row As DataGridViewRow In dgvProformas.Rows
 
+                Dim WProforma = If(row.Cells("Proforma").Value, "")
+                Dim WPedido = If(row.Cells("Pedido").Value, "")
+
+                Dim frm As Pallets = New Pallets(WProforma, WPedido)
+                frm.ShowDialog(Me)
+
+                Exit For
+
+            Next
 
         ElseIf e.KeyData = Keys.Escape Then
             txtPedido.Text = ""
