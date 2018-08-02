@@ -92,7 +92,6 @@ Partial Class MenuPrincipal
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
-        Me.lblCargando = New Label
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -544,7 +543,6 @@ Partial Class MenuPrincipal
         Me.btnCambio.TabIndex = 1
         Me.btnCambio.Text = "Cambio de Empresa"
         Me.btnCambio.UseVisualStyleBackColor = True
-
         '
         'MenuPrincipal
         '
@@ -552,7 +550,6 @@ Partial Class MenuPrincipal
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(817, 550)
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Controls.Add(Me.lblCargando)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MainMenuStrip = Me.MenuStrip1
@@ -578,7 +575,6 @@ Partial Class MenuPrincipal
     Friend WithEvents ListadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProcesosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnCambio As System.Windows.Forms.Button
-    Friend WithEvents lblCargando As Label
     Friend WithEvents DepositosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SifereToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RetencionEsOpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
