@@ -28,7 +28,9 @@ Public Class VistaPrevia
         ' MANDAMOS EL PARÁMETRO DE LA EMPRESA.
 
         If Reporte.ParameterFields.Count > 0 Then
-            Reporte.SetParameterValue(0, ClasesCompartidas.Globals.NombreEmpresa)
+            If Reporte.ParameterFields.Contains("Empresa") Then
+                Reporte.SetParameterValue("Empresa", "Surfactan")
+            End If
         End If
 
         ' CONECTAMOS CON LA BASE DE DATOS QUE CORRESPONDA.

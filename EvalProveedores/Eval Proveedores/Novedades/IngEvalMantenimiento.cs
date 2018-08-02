@@ -529,26 +529,29 @@ namespace Eval_Proveedores.Novedades
 
         private void SacarPromedio1()
         {
-            Promedio1 = 10;
+            Promedio1 = 0;
+            var WCal1 = CB_Calif11.SelectedIndex;
+            var WCal2 = CB_Calif12.SelectedIndex;
+            var WCal3 = CB_Calif13.SelectedIndex;
+            var WCal4 = CB_Calif14.SelectedIndex;
 
-            if ((CB_Calif11.Text == "No Cumple"))
+            if (WCal1 == 4) WCal1 = 1;
+            if (WCal2 == 4) WCal2 = 1;
+            if (WCal3 == 4) WCal3 = 1;
+            if (WCal4 == 4) WCal4 = 1;
+
+            if (WCal1 == 2)
             {
                 Promedio1 = 1;
             }
+            else if (WCal2 == 1 && WCal3 == 1 && WCal4 == 1)
+            {
+                Promedio1 = 10;
+            }
             else
             {
-                if ((CB_Calif12.Text == "Cumple") && (CB_Calif13.Text == "Cumple") && (CB_Calif14.Text == "Cumple"))
-                {
-                    Promedio1 = 10;
-                }
-                else
-                {
-                    Promedio1 = 5;
-                }
+                Promedio1 = 5;
             }
-            
-
-            
         }
 
         #endregion
@@ -596,26 +599,30 @@ namespace Eval_Proveedores.Novedades
 
         private void SacarPromedio2()
         {
-            Promedio2 = 10;
+            Promedio2 = 0;
+            var WCal1 = CB_Calif21.SelectedIndex;
+            var WCal2 = CB_Calif22.SelectedIndex;
+            var WCal3 = CB_Calif23.SelectedIndex;
+            var WCal4 = CB_Calif24.SelectedIndex;
 
-            if ((CB_Calif21.Text == "No Cumple"))
+            if (WCal1 == 4) WCal1 = 1;
+            if (WCal2 == 4) WCal2 = 1;
+            if (WCal3 == 4) WCal3 = 1;
+            if (WCal4 == 4) WCal4 = 1;
+
+            if (WCal1 == 2)
             {
                 Promedio2 = 1;
             }
+            else if (WCal2 == 1 && WCal3 == 1 && WCal4 == 1)
+            {
+                Promedio2 = 10;
+            }
             else
             {
-                if ((CB_Calif22.Text == "Cumple") && (CB_Calif23.Text == "Cumple") && (CB_Calif24.Text == "Cumple"))
-                {
-                    Promedio2 = 10;
-                }
-                else
-                {
-                    Promedio2 = 5;
-                }
+                Promedio2 = 5;
             }
 
-            
-           
         }
 
         #endregion
@@ -660,30 +667,29 @@ namespace Eval_Proveedores.Novedades
 
         private void SacarPromedio3()
         {
-            Promedio3 = 10;
+            Promedio3 = 0;
+            var WCal1 = CB_Calif31.SelectedIndex;
+            var WCal2 = CB_Calif32.SelectedIndex;
+            var WCal3 = CB_Calif33.SelectedIndex;
+            var WCal4 = CB_Calif34.SelectedIndex;
 
-            if ((CB_Calif31.Text == "No Cumple"))
+            if (WCal1 == 4) WCal1 = 1;
+            if (WCal2 == 4) WCal2 = 1;
+            if (WCal3 == 4) WCal3 = 1;
+            if (WCal4 == 4) WCal4 = 1;
+
+            if (WCal1 == 2)
             {
                 Promedio3 = 1;
             }
-
+            else if (WCal2 == 1 && WCal3 == 1 && WCal4 == 1)
+            {
+                Promedio3 = 10;
+            }
             else
             {
-                if ((CB_Calif32.Text == "Cumple") && (CB_Calif33.Text == "Cumple") && (CB_Calif34.Text == "Cumple"))
-                {
-                    Promedio3 = 10;
-                }
-                else
-                {
-                    Promedio3 = 5;
-                }
+                Promedio3 = 5;
             }
-            
-
-
-
-            
-
         }
 
         #endregion

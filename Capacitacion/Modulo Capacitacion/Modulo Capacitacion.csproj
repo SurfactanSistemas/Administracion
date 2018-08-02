@@ -227,12 +227,6 @@
       <DependentUpon>imprelegajo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Listados\InformedeCompetencias\imprelegajoiib.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>imprelegajoiib.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Listados\InformedeCompetencias\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -749,10 +743,6 @@
     <EmbeddedResource Include="Listados\InformedeCompetencias\imprelegajo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprelegajo.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\InformedeCompetencias\imprelegajoiib.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>imprelegajoiib.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\InformedeCompetencias\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>

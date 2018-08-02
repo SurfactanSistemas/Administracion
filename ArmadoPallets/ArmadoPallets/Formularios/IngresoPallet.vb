@@ -8,6 +8,7 @@ Public Class IngresoPallet
     Private Const XMARGEN = 3
     Private WRow, Wcol As Integer
     Private WNroPallet As Integer
+    Dim target As Control
 
     Sub New(Optional ByVal WProforma As String = "", Optional ByVal WPedido As String = "", Optional ByVal XNroPallet As Integer = -1)
 
@@ -18,6 +19,7 @@ Public Class IngresoPallet
         txtProforma.Text = WProforma
         txtPedido.Text = WPedido
         WNroPallet = XNroPallet
+        target = dgvProductos
 
     End Sub
 
@@ -118,63 +120,88 @@ Public Class IngresoPallet
     Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Len(txtCodigo.Text.Replace(" ", "")) < 10 Then : Exit Sub : End If
+            If txtCodigo.Text.Replace("-", "").Trim = "" Then
+                Dim t = txtCodigo
+                Dim frm As New AuxiEnvases(txtProforma.Text, t)
+                frm.ShowDialog(Me)
 
-            txtCodigo.Text = UCase(txtCodigo.Text)
-
-            Dim cn As SqlConnection = New SqlConnection()
-            Dim cm As SqlCommand = New SqlCommand("SELECT Descripcion, TamanioBase, Tara FROM Articulo WHERE Codigo = '" & txtCodigo.Text & "'")
-            Dim dr As SqlDataReader
-
-            Try
-
-                cn.ConnectionString = Helper._ConectarA
-                cn.Open()
-                cm.Connection = cn
-
-                dr = cm.ExecuteReader()
-
-                lblDescPallet.Text = ""
-                lblBase.Text = ""
-                lblTara.Text = ""
-
-                If dr.HasRows Then
-
-                    dr.Read()
-
-                    lblDescPallet.Text = IIf(IsDBNull(dr.Item("Descripcion")), "", dr.Item("Descripcion"))
-                    lblBase.Text = IIf(IsDBNull(dr.Item("TamanioBase")), "", dr.Item("TamanioBase"))
-                    lblTara.Text = IIf(IsDBNull(dr.Item("Tara")), "0", dr.Item("Tara"))
-
-                    lblDescPallet.Text = UCase(lblDescPallet.Text.Trim)
-                    lblBase.Text = UCase(lblBase.Text.Trim)
-                    lblTara.Text = Helper.formatonumerico(lblTara.Text)
-
+                If txtCodigo.Text.Replace("-", "").Trim <> "" Then
                     txtAltura.Focus()
-
+                Else
+                    txtAltura.Text = ""
+                    lblDescPallet.Text = ""
+                    lblTara.Text = ""
+                    lblBase.Text = ""
                 End If
 
-            Catch ex As Exception
-                MsgBox("Hubo un problema al querer consultar la información del Pallet desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-            Finally
+                Exit Sub
+            End If
+                If Len(txtCodigo.Text.Replace(" ", "")) < 10 Then : Exit Sub : End If
 
-                dr = Nothing
-                cn.Close()
-                cn = Nothing
-                cm = Nothing
+                txtCodigo.Text = UCase(txtCodigo.Text)
 
-            End Try
+                Dim cn As SqlConnection = New SqlConnection()
+                Dim cm As SqlCommand = New SqlCommand("SELECT Descripcion, TamanioBase, Tara FROM Articulo WHERE Codigo = '" & txtCodigo.Text & "'")
+                Dim dr As SqlDataReader
 
-        ElseIf e.KeyData = Keys.Escape Then
-            txtCodigo.Clear()
-        End If
+                Try
+
+                    cn.ConnectionString = Helper._ConectarA
+                    cn.Open()
+                    cm.Connection = cn
+
+                    dr = cm.ExecuteReader()
+
+                    lblDescPallet.Text = ""
+                    lblBase.Text = ""
+                    lblTara.Text = ""
+
+                    If dr.HasRows Then
+
+                        dr.Read()
+
+                        lblDescPallet.Text = IIf(IsDBNull(dr.Item("Descripcion")), "", dr.Item("Descripcion"))
+                        lblBase.Text = IIf(IsDBNull(dr.Item("TamanioBase")), "", dr.Item("TamanioBase"))
+                        lblTara.Text = IIf(IsDBNull(dr.Item("Tara")), "0", dr.Item("Tara"))
+
+                        lblDescPallet.Text = UCase(lblDescPallet.Text.Trim)
+                        lblBase.Text = UCase(lblBase.Text.Trim)
+                        lblTara.Text = Helper.formatonumerico(lblTara.Text)
+
+                        txtAltura.Focus()
+
+                    End If
+
+                Catch ex As Exception
+                    MsgBox("Hubo un problema al querer consultar la información del Pallet desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+                Finally
+
+                    dr = Nothing
+                    cn.Close()
+                    cn = Nothing
+                    cm = Nothing
+
+                End Try
+
+            ElseIf e.KeyData = Keys.Escape Then
+                txtCodigo.Clear()
+            End If
 
     End Sub
 
     Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtFechaAux.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+
+            If Trim(txtFechaAux.Text.Replace("-", "")) = "" Then
+                target = txtFechaAux
+                Dim frm As New AuxiProductoPartida(txtProforma.Text, target)
+                frm.ShowDialog(Me)
+                dgvProductos.Focus()
+                Exit Sub
+
+            End If
+
             If txtFechaAux.Text.Replace(" ", "").Length < 12 Then : Exit Sub : End If
 
             With dgvProductos
@@ -205,10 +232,18 @@ Public Class IngresoPallet
     Private Sub txtFechaAux2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux2.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtFechaAux2.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            If Trim(txtFechaAux2.Text.Replace("-", "")) = "" Then
+
+                Dim t = txtFechaAux2
+                Dim frm As New AuxiEnvases(txtProforma.Text, t)
+                frm.ShowDialog(Me)
+
+            End If
+
             If txtFechaAux2.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
 
             With dgvProductos
+
                 .Rows(WRow).Cells("Envase").Value = UCase(txtFechaAux2.Text)
 
                 Dim WDescTerminado As String = _TraerDescripcionEnvase(txtFechaAux2.Text)
@@ -892,5 +927,126 @@ Public Class IngresoPallet
             txtDisponible.Text = ""
         End If
 
+    End Sub
+
+    Private Sub btnAgregarPT_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarPT.Click
+        target = dgvProductos
+        Dim frm As New AuxiProductoPartida(txtProforma.Text, target)
+        frm.ShowDialog(Me)
+        dgvProductos.Focus()
+    End Sub
+
+    Public Sub AgregarTerminadoYPartida(ByVal WTerminado As String, ByVal WPartida As String, ByVal _Col As Integer, ByVal _Row As Integer)
+
+        Select Case target.Name
+
+            Case "dgvProductos"
+
+                If _Col = -1 Or _Row = -1 Then
+
+                    Dim ZRow = 0
+
+                    With dgvProductos.Rows(ZRow)
+                        Dim Aux = If(.Cells("Terminado").Value, "")
+                        If Aux.ToString.Replace("-", "").Trim <> "" Then
+                            ZRow = dgvProductos.Rows.Add
+                        End If
+                    End With
+
+                    With dgvProductos.Rows(ZRow)
+                        .Cells("Terminado").Value = WTerminado
+                        txtFechaAux.Text = WTerminado
+                        .Cells("Partida").Value = WPartida
+                        dgvProductos.CurrentCell = .Cells("Terminado")
+                        txtFechaAux_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                        dgvProductos.CurrentCell = .Cells("Envase")
+
+                    End With
+                Else
+
+                    With dgvProductos.Rows(_Row)
+
+                        .Cells(_Col).Value = WPartida
+                        dgvProductos.CurrentCell = .Cells("Envase")
+
+                    End With
+
+                End If
+
+                dgvProductos.Focus()
+
+            Case "txtFechaAux"
+
+                With dgvProductos.Rows(WRow)
+
+                    .Cells("Terminado").Value = WTerminado
+                    txtFechaAux.Text = WTerminado
+                    .Cells("Partida").Value = WPartida
+                    dgvProductos.CurrentCell = .Cells("Terminado")
+                    txtFechaAux_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                    dgvProductos.CurrentCell = .Cells("Envase")
+
+                End With
+
+        End Select
+
+    End Sub
+
+    Private Sub dgvProductos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvProductos.CellMouseDoubleClick
+        If e.ColumnIndex = dgvProductos.Columns("Partida").Index Then
+
+            Dim ter = If(dgvProductos.CurrentRow.Cells("Terminado").Value, "")
+            target = dgvProductos
+            Dim frm As New AuxiProductoPartida(txtProforma.Text, target, ter, e.ColumnIndex, e.RowIndex)
+            frm.ShowDialog(Me)
+            dgvProductos.Focus()
+
+        End If
+    End Sub
+
+    Private Sub txtFechaAux_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtFechaAux.MouseDoubleClick
+        target = txtFechaAux
+        Dim frm As New AuxiProductoPartida(txtProforma.Text, target, "", WRow, Wcol)
+        frm.ShowDialog(Me)
+        dgvProductos.Focus()
+        Exit Sub
+    End Sub
+
+    Public Sub AgregarEnvase(ByVal _target As Control, ByVal Codigo As String)
+        If Not IsNothing(_target) Then
+
+            If _target.Name = "txtFechaAux2" Then
+                txtFechaAux2.Text = Codigo
+                txtFechaAux2_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            Else
+                txtCodigo.Text = Codigo
+                txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            End If
+        End If
+    End Sub
+
+    Private Sub txtCodigo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigo.MouseDoubleClick
+        Dim t = txtCodigo
+        Dim frm As New AuxiEnvases(txtProforma.Text, t)
+        frm.ShowDialog(Me)
+
+        If txtCodigo.Text.Replace("-", "").Trim <> "" Then
+            txtAltura.Focus()
+        Else
+            txtAltura.Text = ""
+            lblDescPallet.Text = ""
+            lblTara.Text = ""
+            lblBase.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtFechaAux2_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtFechaAux2.MouseDoubleClick
+        Dim t = txtFechaAux2
+        Dim frm As New AuxiEnvases(txtProforma.Text, t)
+        frm.ShowDialog(Me)
+
+        If txtFechaAux2.Text.Replace("-", "").Trim <> "" Then
+            txtFechaAux2_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        End If
     End Sub
 End Class

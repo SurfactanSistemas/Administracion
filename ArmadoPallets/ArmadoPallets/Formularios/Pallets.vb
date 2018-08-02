@@ -17,6 +17,7 @@ Public Class Pallets
     Private Sub Pallets_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ' Cargamos los datos de la Proforma.
         If Trim(txtProforma.Text) <> "" Then
+            txtControlKgTotalesProforma.Text = "0"
             _CargarInformacionPallets()
         End If
     End Sub
@@ -25,7 +26,7 @@ Public Class Pallets
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT ap.Pallet Nro, ap.CodigoPallet Pallet, a.Descripcion, SUM(ap.Bultos) Bultos, (SUM(ap.KgBultos * ap.Bultos) + ISNULL(a.Tara, 0)) KgBrutos, (sum(ap.KgBultos * ap.Bultos)) KgNetos, ap.FechaDisponible As Disponible FROM ArmadoPallets ap LEFT JOIN Articulo a ON a.Codigo = ap.CodigoPallet WHERE ap.Proforma = '" & txtProforma.Text & "' GROUP BY ap.Pallet, ap.CodigoPallet, a.Tara, a.Descripcion, ap.FechaDisponible")
-        Dim dr As SqlDataReader
+        'Dim dr As SqlDataReader
         Dim tabla As New DataTable
         Try
 
@@ -33,17 +34,41 @@ Public Class Pallets
             cn.Open()
             cm.Connection = cn
 
-            dr = cm.ExecuteReader()
 
-            If dr.HasRows Then
-                tabla.Load(dr)
+            Using dr = cm.ExecuteReader
+
+                If dr.HasRows Then
+                    tabla.Load(dr)
+                End If
+
+            End Using
+
+            ' Buscamos la cantidad de Kilos totales del pedido asociado si hubiese alguno.
+
+            txtControlKgTotalesProforma.Text = "0"
+            lblAviso.Visible = False
+
+            If txtPedido.Text.Trim <> "" Then
+                cm.CommandText = "select sum(Cantidad) TotalKilos from Pedido where pedido = '" & txtPedido.Text & "'"
+                Using dr = cm.ExecuteReader
+
+                    If dr.HasRows Then
+                        dr.Read()
+                        txtControlKgTotalesProforma.Text = IIf(IsDBNull(dr.Item("TotalKilos")), "0", dr.Item("TotalKilos"))
+                    End If
+
+                End Using
+
             End If
+
+            With txtControlKgTotalesProforma
+                .Text = Helper.formatonumerico(.Text)
+            End With
 
         Catch ex As Exception
             Throw New Exception("Hubo un problema al cargar los Pallets referidos a esta Proforma desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
             cn = Nothing
             cm = Nothing
@@ -77,6 +102,17 @@ Public Class Pallets
         lblTotalKgNetos.Text = Helper.formatonumerico(WKgNetos)
         lblTotalPallets.Text = dgvPallets.Rows.Count
 
+        Dim a, b
+
+        a = Val(Helper.formatonumerico(lblTotalKgNetos.Text))
+        b = Val(Helper.formatonumerico(txtControlKgTotalesProforma.Text))
+
+        With lblAviso
+            .Visible = False
+            If a <> b Then
+                .Visible = True
+            End If
+        End With
     End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
@@ -90,7 +126,7 @@ Public Class Pallets
     Private Sub btnAgregarPallet_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarPallet.Click
 
         Dim frm As New IngresoPallet(txtProforma.Text, txtPedido.Text, -1)
-        frm.ShowDialog(Me)
+        frm.Show(Me)
 
         _CargarInformacionPallets()
     End Sub
@@ -113,9 +149,8 @@ Public Class Pallets
 
         Cursor = Cursors.WaitCursor
         Dim frm As New VistaPrevia()
-        frm.Reporte = New PlanillaPallets
-        frm.Formula = "{ArmadoPallets.Proforma} = '" & txtProforma.Text & "' AND {ArmadoPallets.Pedido} = '" & txtPedido.Text & "' AND {ArmadoPallets.CodigoPallet} = {ArtPallet.Codigo} AND {ArmadoPallets.CodigoEnvase} = {ArtEnvase.Codigo}" &
-                      " AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Cliente} = {Cliente.Cliente} AND {ProformaExportacion.Renglon} = '01'"
+        frm.Reporte = New NotaEmpaque
+        frm.Formula = "{ArmadoPallets.Proforma} = '" & txtProforma.Text & "' AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Renglon} = '01'"
         frm.Mostrar()
 
 
@@ -127,11 +162,12 @@ Public Class Pallets
     Private Sub btnInfoProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfoProforma.Click
         If txtProforma.Text.Trim <> "" Then
 
+            Proforma.Dispose()
             Dim frm As New Proforma()
             frm.StartPosition = FormStartPosition.CenterScreen
             frm.txtNroProforma.Text = txtProforma.Text
             frm.txtNroProforma_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-            frm.Show(Me)
+            frm.Show(ListadoProformas)
 
         End If
     End Sub

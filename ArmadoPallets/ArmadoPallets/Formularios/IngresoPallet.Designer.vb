@@ -35,6 +35,7 @@ Partial Class IngresoPallet
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtDisponible = New System.Windows.Forms.MaskedTextBox()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtPedido = New System.Windows.Forms.TextBox()
@@ -42,6 +43,7 @@ Partial Class IngresoPallet
         Me.txtAltura = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.lblTara = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lblBase = New System.Windows.Forms.Label()
         Me.lblDescPallet = New System.Windows.Forms.Label()
@@ -49,6 +51,7 @@ Partial Class IngresoPallet
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.btnAgregarPallet = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.btnAgregarPT = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.Panel6 = New System.Windows.Forms.Panel()
@@ -67,8 +70,6 @@ Partial Class IngresoPallet
         Me.DescEnvase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CantidadUnidades = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KgUnidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtDisponible = New System.Windows.Forms.MaskedTextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -219,6 +220,16 @@ Partial Class IngresoPallet
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Información Pallet"
         '
+        'txtDisponible
+        '
+        Me.txtDisponible.Location = New System.Drawing.Point(282, 48)
+        Me.txtDisponible.Mask = "00/00/0000"
+        Me.txtDisponible.Name = "txtDisponible"
+        Me.txtDisponible.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtDisponible.Size = New System.Drawing.Size(67, 20)
+        Me.txtDisponible.TabIndex = 3
+        Me.txtDisponible.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'txtCodigo
         '
         Me.txtCodigo.Location = New System.Drawing.Point(112, 19)
@@ -286,6 +297,16 @@ Partial Class IngresoPallet
         Me.lblTara.Size = New System.Drawing.Size(65, 21)
         Me.lblTara.TabIndex = 0
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(188, 50)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(90, 16)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Disponible el:"
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -332,6 +353,7 @@ Partial Class IngresoPallet
         '
         Me.Panel5.Controls.Add(Me.btnAgregarPallet)
         Me.Panel5.Controls.Add(Me.btnEliminar)
+        Me.Panel5.Controls.Add(Me.btnAgregarPT)
         Me.Panel5.Controls.Add(Me.btnLimpiar)
         Me.Panel5.Controls.Add(Me.btnCerrar)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
@@ -343,7 +365,7 @@ Partial Class IngresoPallet
         '
         'btnAgregarPallet
         '
-        Me.btnAgregarPallet.Location = New System.Drawing.Point(202, 10)
+        Me.btnAgregarPallet.Location = New System.Drawing.Point(150, 10)
         Me.btnAgregarPallet.Name = "btnAgregarPallet"
         Me.btnAgregarPallet.Size = New System.Drawing.Size(80, 43)
         Me.btnAgregarPallet.TabIndex = 0
@@ -352,16 +374,25 @@ Partial Class IngresoPallet
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(434, 10)
+        Me.btnEliminar.Location = New System.Drawing.Point(489, 10)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(80, 43)
         Me.btnEliminar.TabIndex = 0
         Me.btnEliminar.Text = "Eliminar"
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
+        'btnAgregarPT
+        '
+        Me.btnAgregarPT.Location = New System.Drawing.Point(376, 10)
+        Me.btnAgregarPT.Name = "btnAgregarPT"
+        Me.btnAgregarPT.Size = New System.Drawing.Size(80, 43)
+        Me.btnAgregarPT.TabIndex = 0
+        Me.btnAgregarPT.Text = "Agregar Producto"
+        Me.btnAgregarPT.UseVisualStyleBackColor = True
+        '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(318, 10)
+        Me.btnLimpiar.Location = New System.Drawing.Point(263, 10)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(80, 43)
         Me.btnLimpiar.TabIndex = 0
@@ -370,7 +401,7 @@ Partial Class IngresoPallet
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(550, 10)
+        Me.btnCerrar.Location = New System.Drawing.Point(602, 10)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(80, 43)
         Me.btnCerrar.TabIndex = 0
@@ -450,7 +481,7 @@ Partial Class IngresoPallet
         '
         Me.txtFechaAux2.BackColor = System.Drawing.SystemColors.Window
         Me.txtFechaAux2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFechaAux2.Location = New System.Drawing.Point(360, 32)
+        Me.txtFechaAux2.Location = New System.Drawing.Point(440, 32)
         Me.txtFechaAux2.Margin = New System.Windows.Forms.Padding(0)
         Me.txtFechaAux2.Mask = "AA-000-000"
         Me.txtFechaAux2.Name = "txtFechaAux2"
@@ -544,26 +575,6 @@ Partial Class IngresoPallet
         Me.KgUnidad.Name = "KgUnidad"
         Me.KgUnidad.Width = 90
         '
-        'txtDisponible
-        '
-        Me.txtDisponible.Location = New System.Drawing.Point(282, 48)
-        Me.txtDisponible.Mask = "00/00/0000"
-        Me.txtDisponible.Name = "txtDisponible"
-        Me.txtDisponible.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtDisponible.Size = New System.Drawing.Size(67, 20)
-        Me.txtDisponible.TabIndex = 3
-        Me.txtDisponible.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(188, 50)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(90, 16)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Disponible el:"
-        '
         'IngresoPallet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -639,4 +650,5 @@ Partial Class IngresoPallet
     Friend WithEvents KgUnidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtDisponible As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents btnAgregarPT As System.Windows.Forms.Button
 End Class

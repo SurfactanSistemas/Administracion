@@ -22,12 +22,12 @@ Partial Class Pallets
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -43,6 +43,7 @@ Partial Class Pallets
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.txtControlKgTotalesProforma = New System.Windows.Forms.TextBox()
         Me.lblAviso = New System.Windows.Forms.Label()
         Me.btnAgregarPallet = New System.Windows.Forms.Button()
         Me.btn = New System.Windows.Forms.Button()
@@ -239,6 +240,7 @@ Partial Class Pallets
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.txtControlKgTotalesProforma)
         Me.Panel5.Controls.Add(Me.lblAviso)
         Me.Panel5.Controls.Add(Me.btnAgregarPallet)
         Me.Panel5.Controls.Add(Me.btn)
@@ -250,13 +252,21 @@ Partial Class Pallets
         Me.Panel5.Size = New System.Drawing.Size(725, 62)
         Me.Panel5.TabIndex = 1
         '
+        'txtControlKgTotalesProforma
+        '
+        Me.txtControlKgTotalesProforma.Location = New System.Drawing.Point(505, 36)
+        Me.txtControlKgTotalesProforma.Name = "txtControlKgTotalesProforma"
+        Me.txtControlKgTotalesProforma.Size = New System.Drawing.Size(73, 20)
+        Me.txtControlKgTotalesProforma.TabIndex = 2
+        Me.txtControlKgTotalesProforma.Visible = False
+        '
         'lblAviso
         '
         Me.lblAviso.BackColor = System.Drawing.Color.Red
         Me.lblAviso.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblAviso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAviso.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblAviso.Location = New System.Drawing.Point(23, 14)
+        Me.lblAviso.Location = New System.Drawing.Point(23, 12)
         Me.lblAviso.Name = "lblAviso"
         Me.lblAviso.Size = New System.Drawing.Size(226, 38)
         Me.lblAviso.TabIndex = 1
@@ -282,7 +292,7 @@ Partial Class Pallets
         Me.btn.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btn.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn.Location = New System.Drawing.Point(593, 10)
+        Me.btn.Location = New System.Drawing.Point(614, 10)
         Me.btn.Name = "btn"
         Me.btn.Size = New System.Drawing.Size(75, 43)
         Me.btn.TabIndex = 0
@@ -316,8 +326,8 @@ Partial Class Pallets
         'Nro
         '
         Me.Nro.DataPropertyName = "Nro"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Nro.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Nro.DefaultCellStyle = DataGridViewCellStyle7
         Me.Nro.HeaderText = "Nro"
         Me.Nro.Name = "Nro"
         Me.Nro.ReadOnly = True
@@ -325,8 +335,8 @@ Partial Class Pallets
         'Pallet
         '
         Me.Pallet.DataPropertyName = "Pallet"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Pallet.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Pallet.DefaultCellStyle = DataGridViewCellStyle8
         Me.Pallet.HeaderText = "Pallet"
         Me.Pallet.Name = "Pallet"
         Me.Pallet.ReadOnly = True
@@ -343,8 +353,8 @@ Partial Class Pallets
         'Bultos
         '
         Me.Bultos.DataPropertyName = "Bultos"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Bultos.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Bultos.DefaultCellStyle = DataGridViewCellStyle9
         Me.Bultos.HeaderText = "Bultos"
         Me.Bultos.Name = "Bultos"
         Me.Bultos.ReadOnly = True
@@ -352,8 +362,8 @@ Partial Class Pallets
         'KgBrutos
         '
         Me.KgBrutos.DataPropertyName = "KgBrutos"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.KgBrutos.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.KgBrutos.DefaultCellStyle = DataGridViewCellStyle10
         Me.KgBrutos.HeaderText = "Kg Brutos"
         Me.KgBrutos.Name = "KgBrutos"
         Me.KgBrutos.ReadOnly = True
@@ -361,8 +371,8 @@ Partial Class Pallets
         'KgNetos
         '
         Me.KgNetos.DataPropertyName = "KgNetos"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.KgNetos.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.KgNetos.DefaultCellStyle = DataGridViewCellStyle11
         Me.KgNetos.HeaderText = "Kg Netos"
         Me.KgNetos.Name = "KgNetos"
         Me.KgNetos.ReadOnly = True
@@ -370,8 +380,8 @@ Partial Class Pallets
         'Disponible
         '
         Me.Disponible.DataPropertyName = "Disponible"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Disponible.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Disponible.DefaultCellStyle = DataGridViewCellStyle12
         Me.Disponible.HeaderText = "Disponible el"
         Me.Disponible.Name = "Disponible"
         Me.Disponible.ReadOnly = True
@@ -476,6 +486,7 @@ Partial Class Pallets
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
         CType(Me.dgvPallets, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
@@ -516,4 +527,5 @@ Partial Class Pallets
     Friend WithEvents Disponible As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lblAviso As System.Windows.Forms.Label
     Friend WithEvents btnInfoProforma As System.Windows.Forms.Button
+    Friend WithEvents txtControlKgTotalesProforma As System.Windows.Forms.TextBox
 End Class

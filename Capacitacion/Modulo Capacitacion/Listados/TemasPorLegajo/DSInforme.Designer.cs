@@ -459,7 +459,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DSInformeRow AddDSInformeRow(string NºLegajo, string DescLegajo, string NºTema, string DescTema, string NºCurso, string DescCurso, double Horas, string Planilla, string Fecha, string Observaciones, string Planificada) {
+            public DSInformeRow AddDSInformeRow(int NºLegajo, string DescLegajo, int NºTema, string DescTema, int NºCurso, string DescCurso, double Horas, string Planilla, string Fecha, string Observaciones, string Planificada) {
                 DSInformeRow rowDSInformeRow = ((DSInformeRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NºLegajo,
@@ -511,15 +511,15 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnNºLegajo = new global::System.Data.DataColumn("NºLegajo", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNºLegajo = new global::System.Data.DataColumn("NºLegajo", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNºLegajo);
                 this.columnDescLegajo = new global::System.Data.DataColumn("DescLegajo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescLegajo);
-                this.columnNºTema = new global::System.Data.DataColumn("NºTema", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNºTema = new global::System.Data.DataColumn("NºTema", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNºTema);
                 this.columnDescTema = new global::System.Data.DataColumn("DescTema", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescTema);
-                this.columnNºCurso = new global::System.Data.DataColumn("NºCurso", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNºCurso = new global::System.Data.DataColumn("NºCurso", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNºCurso);
                 this.columnDescCurso = new global::System.Data.DataColumn("DescCurso", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescCurso);
@@ -677,10 +677,10 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NºLegajo {
+            public int NºLegajo {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.NºLegajoColumn]));
+                        return ((int)(this[this.tableDSInforme.NºLegajoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'NºLegajo\' in table \'DSInforme\' is DBNull.", e);
@@ -709,10 +709,10 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NºTema {
+            public int NºTema {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.NºTemaColumn]));
+                        return ((int)(this[this.tableDSInforme.NºTemaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'NºTema\' in table \'DSInforme\' is DBNull.", e);
@@ -741,10 +741,10 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NºCurso {
+            public int NºCurso {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.NºCursoColumn]));
+                        return ((int)(this[this.tableDSInforme.NºCursoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'NºCurso\' in table \'DSInforme\' is DBNull.", e);

@@ -40,7 +40,9 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo
 
                 if (TB_AñoHasta.Text == "") throw new Exception("Se debe ingresar el año hasta el que desea realizar la busqueda");
 
-                if (CB_Tipo.Text == "") throw new Exception("Se debe elegir el tipo de informe");
+                //if (CB_Tipo.Text == "") throw new Exception("Se debe elegir el tipo de informe");
+
+                CB_Tipo.SelectedIndex = 1;
 
                 int LegDesd;
                 int.TryParse(TB_Desde.Text, out LegDesd);
@@ -112,7 +114,9 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo
 
                 if (TB_AñoHasta.Text == "") throw new Exception("Se debe ingresar el año hasta el que desea realizar la busqueda");
 
-                if (CB_Tipo.Text == "") throw new Exception("Se debe elegir el tipo de informe");
+                //if (CB_Tipo.Text == "") throw new Exception("Se debe elegir el tipo de informe");
+
+                CB_Tipo.SelectedIndex = 1;
 
                 int LegDesd;
                 int.TryParse(TB_Desde.Text, out LegDesd);
@@ -255,6 +259,11 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo
         private void Inicio_Shown(object sender, EventArgs e)
         {
             TB_Desde.Focus();
+        }
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            CB_Tipo.SelectedIndex = 1;
         }
     }
 }

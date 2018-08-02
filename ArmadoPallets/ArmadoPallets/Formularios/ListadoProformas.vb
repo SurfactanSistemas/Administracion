@@ -91,10 +91,12 @@ Public Class ListadoProformas
                 Dim WProforma = If(row.Cells("Proforma").Value, "")
                 Dim WPedido = If(row.Cells("Pedido").Value, "")
 
-                Dim frm As Pallets = New Pallets(WProforma, WPedido)
-                frm.ShowDialog(Me)
+                If txtPedido.Text = WPedido Then
+                    Dim frm As Pallets = New Pallets(WProforma, WPedido)
+                    frm.ShowDialog(Me)
 
-                Exit For
+                    Exit For
+                End If
 
             Next
 

@@ -46,7 +46,7 @@ namespace Eval_Proveedores.Novedades
             dtEva.Columns.Add("DescFecha", typeof(string));
             foreach (DataRow fila in dtEva.Rows)
             {
-                fila["Clave"] = fila["Proveedor"] + fila["Mes"].ToString().PadLeft(2, '0') + fila["Ano"];
+                fila["Clave"] = fila["Proveedor"] + fila["Mes"].ToString().PadLeft(2, '0') + fila["Ano"].ToString().PadLeft(4, '0');
 
                 //fila["NombProve"] = row[0]["Nombre"];
 

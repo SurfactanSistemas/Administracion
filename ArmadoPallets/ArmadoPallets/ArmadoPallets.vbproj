@@ -90,6 +90,18 @@
     <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
+    <Compile Include="Formularios\Auxiliares\AuxiProductoPartida.Designer.vb">
+      <DependentUpon>AuxiProductoPartida.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Auxiliares\AuxiProductoPartida.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Auxiliares\AuxiEnvases.Designer.vb">
+      <DependentUpon>AuxiEnvases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Auxiliares\AuxiEnvases.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\IngresoPallet.Designer.vb">
       <DependentUpon>IngresoPallet.vb</DependentUpon>
     </Compile>
@@ -155,6 +167,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Reportes\NotaEmpaque.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotaEmpaque.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\PlanillaPallets.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -169,6 +187,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\Auxiliares\AuxiProductoPartida.resx">
+      <DependentUpon>AuxiProductoPartida.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Auxiliares\AuxiEnvases.resx">
+      <DependentUpon>AuxiEnvases.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\IngresoPallet.resx">
       <DependentUpon>IngresoPallet.vb</DependentUpon>
     </EmbeddedResource>
@@ -198,6 +222,10 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\NotaEmpaque.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NotaEmpaque.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\PlanillaPallets.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

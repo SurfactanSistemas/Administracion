@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Modulo_Capacitacion.Listados.InformedeCompetenciasNecesidadesPorSector
-{
+namespace Modulo_Capacitacion.Listados.InformedeCompetenciasNecesidadesPorSector {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -42,7 +41,8 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetenciasNecesidadesPorSector
         
         public override string FullResourceName {
             get {
-                return "Modulo_Capacitacion.Listados.InformedeCompetencias.imprelegajoii.rpt";
+                return "Modulo_Capacitacion.Listados.InformedeCompetenciasNecesidadesPorSector.imprelegaj" +
+                    "oii.rpt";
             }
             set {
                 // Do nothing

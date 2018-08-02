@@ -279,6 +279,7 @@ Public Class Recibos
         Dim _Error As Boolean = False
         lblTotalDebitos.Text = 0
         lblDolares.Text = 0
+        lblDiferencia.Text = 0
 
         For Each row As DataGridViewRow In gridPagos2.Rows
 
