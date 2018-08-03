@@ -22,12 +22,12 @@ Partial Class Pallets
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -264,13 +264,14 @@ Partial Class Pallets
         '
         Me.lblAviso.BackColor = System.Drawing.Color.Red
         Me.lblAviso.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblAviso.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lblAviso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAviso.ForeColor = System.Drawing.SystemColors.Control
         Me.lblAviso.Location = New System.Drawing.Point(23, 12)
         Me.lblAviso.Name = "lblAviso"
         Me.lblAviso.Size = New System.Drawing.Size(226, 38)
         Me.lblAviso.TabIndex = 1
-        Me.lblAviso.Text = "PROFORMA NO CERRADA" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Existen Diferencias en los Kg"
+        Me.lblAviso.Text = "PACKING LIST NO CERRADO" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Existen Diferencias en los Kg"
         Me.lblAviso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btnAgregarPallet
@@ -326,8 +327,8 @@ Partial Class Pallets
         'Nro
         '
         Me.Nro.DataPropertyName = "Nro"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Nro.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Nro.DefaultCellStyle = DataGridViewCellStyle13
         Me.Nro.HeaderText = "Nro"
         Me.Nro.Name = "Nro"
         Me.Nro.ReadOnly = True
@@ -335,8 +336,8 @@ Partial Class Pallets
         'Pallet
         '
         Me.Pallet.DataPropertyName = "Pallet"
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Pallet.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Pallet.DefaultCellStyle = DataGridViewCellStyle14
         Me.Pallet.HeaderText = "Pallet"
         Me.Pallet.Name = "Pallet"
         Me.Pallet.ReadOnly = True
@@ -353,8 +354,8 @@ Partial Class Pallets
         'Bultos
         '
         Me.Bultos.DataPropertyName = "Bultos"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Bultos.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Bultos.DefaultCellStyle = DataGridViewCellStyle15
         Me.Bultos.HeaderText = "Bultos"
         Me.Bultos.Name = "Bultos"
         Me.Bultos.ReadOnly = True
@@ -362,8 +363,8 @@ Partial Class Pallets
         'KgBrutos
         '
         Me.KgBrutos.DataPropertyName = "KgBrutos"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.KgBrutos.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.KgBrutos.DefaultCellStyle = DataGridViewCellStyle16
         Me.KgBrutos.HeaderText = "Kg Brutos"
         Me.KgBrutos.Name = "KgBrutos"
         Me.KgBrutos.ReadOnly = True
@@ -371,8 +372,8 @@ Partial Class Pallets
         'KgNetos
         '
         Me.KgNetos.DataPropertyName = "KgNetos"
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.KgNetos.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.KgNetos.DefaultCellStyle = DataGridViewCellStyle17
         Me.KgNetos.HeaderText = "Kg Netos"
         Me.KgNetos.Name = "KgNetos"
         Me.KgNetos.ReadOnly = True
@@ -380,8 +381,8 @@ Partial Class Pallets
         'Disponible
         '
         Me.Disponible.DataPropertyName = "Disponible"
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Disponible.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Disponible.DefaultCellStyle = DataGridViewCellStyle18
         Me.Disponible.HeaderText = "Disponible el"
         Me.Disponible.Name = "Disponible"
         Me.Disponible.ReadOnly = True

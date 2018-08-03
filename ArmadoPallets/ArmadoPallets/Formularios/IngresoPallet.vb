@@ -247,9 +247,11 @@ Public Class IngresoPallet
                 .Rows(WRow).Cells("Envase").Value = UCase(txtFechaAux2.Text)
 
                 Dim WDescTerminado As String = _TraerDescripcionEnvase(txtFechaAux2.Text)
+                Dim WKgBultoUnidad As String = _TraerKgEnvase(txtFechaAux2.Text)
 
                 If WDescTerminado <> "" Then
                     .Rows(WRow).Cells("DescEnvase").Value = WDescTerminado
+                    .Rows(WRow).Cells("KgUnidad").Value = Helper.formatonumerico(WKgBultoUnidad)
 
                     .CurrentCell = .Rows(WRow).Cells("CantidadUnidades")
 
@@ -269,6 +271,45 @@ Public Class IngresoPallet
         End If
 
     End Sub
+
+    Private Function _TraerKgEnvase(ByVal WCodEnvase As String) As String
+        Dim Kg = 0.0
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Tara as CantidadPorUnidad FROM Articulo WHERE Codigo = '" & WCodEnvase & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            With dr
+                If .HasRows Then
+
+                    .Read()
+
+                    Kg = IIf(IsDBNull(.Item("CantidadPorUnidad")), 0, .Item("CantidadPorUnidad"))
+
+                End If
+            End With
+
+            Return Kg
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
 
     Private Function _TraerDescripcionEnvase(ByVal WEnvase As String) As String
         Dim WDesc = ""
@@ -942,36 +983,36 @@ Public Class IngresoPallet
 
             Case "dgvProductos"
 
-                If _Col = -1 Or _Row = -1 Then
+                ' Referenciamos a la ultima fila.
+                Dim ZRow = dgvProductos.Rows.Count - 1
 
-                    Dim ZRow = 0
-
-                    With dgvProductos.Rows(ZRow)
-                        Dim Aux = If(.Cells("Terminado").Value, "")
-                        If Aux.ToString.Replace("-", "").Trim <> "" Then
-                            ZRow = dgvProductos.Rows.Add
-                        End If
-                    End With
-
-                    With dgvProductos.Rows(ZRow)
-                        .Cells("Terminado").Value = WTerminado
-                        txtFechaAux.Text = WTerminado
-                        .Cells("Partida").Value = WPartida
-                        dgvProductos.CurrentCell = .Cells("Terminado")
-                        txtFechaAux_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-                        dgvProductos.CurrentCell = .Cells("Envase")
-
-                    End With
-                Else
-
-                    With dgvProductos.Rows(_Row)
-
-                        .Cells(_Col).Value = WPartida
-                        dgvProductos.CurrentCell = .Cells("Envase")
-
-                    End With
-
+                ' En el caso de que venga del txtFechaAux (Terminado), guardamos los datos de fila.
+                If _Row <> -1 Then
+                    ZRow = _Row
                 End If
+
+                With dgvProductos.Rows(ZRow)
+                    Dim Aux = If(.Cells("Terminado").Value, "")
+
+                    ' Caso de que la fila se encuentra utilizada y no se venga del txtFechaAux, agregamos una fila y obtenemos el indice de la misma.
+                    If Aux.ToString.Replace("-", "").Trim <> "" And _Row = -1 Then
+                        ZRow = dgvProductos.Rows.Add
+                    End If
+                End With
+
+                '
+                ' Actualizamos los datos del ProductoTerminado.
+                '
+                With dgvProductos.Rows(ZRow)
+
+                    .Cells("Terminado").Value = WTerminado
+                    txtFechaAux.Text = WTerminado
+                    .Cells("Partida").Value = WPartida
+                    dgvProductos.CurrentCell = .Cells("Terminado")
+                    txtFechaAux_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                    dgvProductos.CurrentCell = .Cells("Envase")
+
+                End With
 
                 dgvProductos.Focus()
 

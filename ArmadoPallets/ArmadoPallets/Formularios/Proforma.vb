@@ -135,6 +135,22 @@ Public Class Proforma
 
                     .Cells(4).Value = Helper.formatonumerico((Val(.Cells(2).Value) * Val(.Cells(3).Value)))
 
+                    Dim WProducto = If(.Cells(0).Value, "")
+
+                    If WProducto.trim <> "" Then
+
+                        Dim WCancelado = _BuscarCantidadCancelada(txtNroProforma.Text, WProducto)
+
+                        .Cells("Cancelado").Value = Helper.formatonumerico(WCancelado)
+                        .Cells("SaldoCancelar").Value = Helper.formatonumerico(Val(Helper.formatonumerico(.Cells("Cantidad").Value)) - WCancelado)
+
+                        If Val(.Cells("SaldoCancelar").Value) <> 0 Then
+                            .Cells("SaldoCancelar").Style.BackColor = Color.DarkSalmon
+                            .Cells("SaldoCancelar").Style.ForeColor = Color.White
+                        End If
+
+                    End If
+
                 Else
                     Exit For
                 End If
@@ -144,6 +160,44 @@ Public Class Proforma
 
         _RecalcularTotal()
     End Sub
+
+    Private Function _BuscarCantidadCancelada(ByVal wProforma As Object, ByVal wProducto As Object) As Double
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("select Proforma, Producto, sum(Bultos * KgBultos) Cancelado from ArmadoPallets where Proforma = '" & wProforma & "' AND Producto = '" & wProducto & "' group by Proforma, Producto")
+        Dim dr As SqlDataReader
+        Dim WCancelado = 0.0
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                WCancelado = IIf(IsDBNull(dr.Item("Cancelado")), 0, dr.Item("Cancelado"))
+
+            End If
+
+            Return WCancelado
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
 
     Private Sub _LimpiarGrilla()
 

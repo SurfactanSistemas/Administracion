@@ -410,5 +410,24 @@ namespace Modulo_Capacitacion
 
             }
         }
+
+        /*
+         * Comprobacion muy básica.
+         */
+        public static bool _FechaValida(string WFecha)
+        {
+            if (WFecha.Replace("/", "").Trim() == "") return false;
+            if (WFecha.Replace(" ", "").Length < 10) return false;
+
+            string WDia = WFecha.Substring(0, 2);
+            string WMes = WFecha.Substring(3, 2);
+            string WAnio = WFecha.Substring(6, 4);
+
+            if (int.Parse(WDia) < 1 || int.Parse(WDia) > 31) return false;
+            if (int.Parse(WMes) < 1 || int.Parse(WMes) > 12) return false;
+            if (int.Parse(WAnio) < 1900) return false;
+
+            return true;
+        }
     }
 }

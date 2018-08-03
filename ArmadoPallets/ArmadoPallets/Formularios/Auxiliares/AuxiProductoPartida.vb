@@ -151,28 +151,53 @@ Public Class AuxiProductoPartida
     Private Sub _CargarPartidas()
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Producto As Terminado, T.Descripcion, Hoja FROM Hoja LEFT OUTER JOIN Terminado t ON t.Codigo = Hoja.Producto WHERE Producto = '" & txtTerminado.Text & "' AND Renglon = 1 ORDER BY Hoja DESC")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Producto FROM ProformaExportacion WHERE Proforma = '" & WProforma & "'")
         Dim tabla As New DataTable
+        Dim WProductosProforma As New List(Of String)
 
         Try
 
-            For Each e As String In Conexion.Empresas
+            '"SELECT Producto As Terminado, T.Descripcion, Hoja FROM Hoja LEFT OUTER JOIN Terminado t ON t.Codigo = Hoja.Producto WHERE Producto = '" & txtTerminado.Text & "' AND Renglon = 1 ORDER BY Hoja DESC"
 
-                If cn.IsOpened Then cn.Close()
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
 
-                cn.ConnectionString = Helper._ConectarA(e)
-                cn.Open()
-                cm.Connection = cn
+            Using dr = cm.ExecuteReader
+                If dr.HasRows Then
 
-                Using dr = cm.ExecuteReader
-                    If dr.HasRows Then
+                    While dr.Read
 
-                        tabla.Load(dr)
+                        WProductosProforma.Add(IIf(IsDBNull(dr.Item("Producto")), "", dr.Item("Producto")))
 
-                    End If
-                End Using
+                    End While
 
-            Next
+                End If
+            End Using
+
+            cm.CommandText = "SELECT Producto As Terminado, T.Descripcion, Hoja FROM Hoja LEFT OUTER JOIN Terminado t ON t.Codigo = Hoja.Producto WHERE Producto = '" & txtTerminado.Text & "' AND Renglon = 1 ORDER BY Hoja DESC"
+
+            If WProductosProforma.Contains(txtTerminado.Text) Then
+
+                For Each e As String In Conexion.Empresas
+
+                    If cn.IsOpened Then cn.Close()
+
+                    cn.ConnectionString = Helper._ConectarA(e)
+                    cn.Open()
+                    cm.Connection = cn
+
+                    Using dr = cm.ExecuteReader
+                        If dr.HasRows Then
+
+                            tabla.Load(dr)
+
+                        End If
+                    End Using
+
+                Next
+
+            End If
 
             dgvAyuda.DataSource = tabla
 
@@ -186,6 +211,11 @@ Public Class AuxiProductoPartida
             If Not IsNothing(c) Then c.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
 
             btnAtras.Visible = True
+
+            If dgvAyuda.Rows.Count = 0 Then
+                txtTerminado.Text = ""
+                btnAtras_Click(Nothing, Nothing)
+            End If
 
             TextBox1.Focus()
 

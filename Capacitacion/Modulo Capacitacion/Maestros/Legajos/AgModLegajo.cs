@@ -334,6 +334,9 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         {
 
             DGV_Temas.Rows.Clear();
+
+            if (PerfilTemas.Temas == null) return;
+
             foreach (var item in PerfilTemas.Temas)
             {
                 DataGridViewRow row = new DataGridViewRow();
@@ -350,17 +353,10 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void CargarDatosPefil()
         {
+            //if (TB_CodPerfil.Text == "") return;
             BuscarCodperfil();
 
-            if (_BuscarPerfilPorVersion())
-            {
-                Per = Per.BuscarUno(TB_CodPerfil.Text);
-                //Per = Per.BuscarUno(TB_CodPerfil.Text, TB_VersPer.Text);
-            }
-            else
-            {
-                Per = Per.BuscarUno(TB_CodPerfil.Text);
-            }
+            Per = _BuscarPerfilPorVersion() ? Per.BuscarUno(TB_CodPerfil.Text, TB_VersPer.Text) : Per.BuscarUno(TB_CodPerfil.Text);
 
             if (Per.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
 
@@ -776,9 +772,9 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void AgModLegajo_Load(object sender, EventArgs e)
         {
-            /*CargarSectores();
+            CargarSectores();
             CargarPerfil();
-            Cargado = true;*/
+            Cargado = true;
         }
 
         
@@ -890,7 +886,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             {
                 if (AModificar == false)
                 {
-                    BuscarCodperfil();
+                    TB_DescPerfil.SelectedValue = TB_CodPerfil.SelectedValue;
+                    //BuscarCodperfil();
                     LlenarPerfil();
                     TB_CodSector.Focus();
                 }
@@ -902,9 +899,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         {
             foreach (DataRow fila in dtPerfil.Rows)
             {
-                if (fila[1].ToString() == TB_DescPerfil.Text)
+                if (fila[1].ToString().Trim() == TB_DescPerfil.Text.Trim())
                 {
-                    TB_CodPerfil.Text = fila[0].ToString();
+                    TB_CodPerfil.Enabled = true;
+                    TB_DescPerfil.Enabled = true;
+                    TB_CodPerfil.SelectedValue = fila[0].ToString();
+                    TB_DescPerfil.SelectedValue = TB_CodPerfil.SelectedValue;
                     break;
                 }
             }
@@ -967,6 +967,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             {
                 CargarDatosPefil();
                 CargarTemas(Per);
+                if (Per.Codigo == 0) return;
                 CargarCursadas();
                 //e.SuppressKeyPress = true;
                 //e.Handled = true;
@@ -979,10 +980,19 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void TB_DescLegajo_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            
+            if (e.KeyData == Keys.Enter)
             {
-                TB_CodPerfil.Focus();
+                if (TB_DescLegajo.Text.Trim() == "") return;
+
+                TB_FechaIng.Focus();
+
             }
+            else if (e.KeyData == Keys.Escape)
+            {
+                TB_DescLegajo.Text = "";
+            }
+	        
             
         }
 
@@ -1018,6 +1028,42 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void TB_FechaEgreso_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
+        }
+
+        private void TB_FechaIng_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (TB_FechaIng.Text.Replace("/", "").Trim() == "") return;
+
+                if (!Helper._FechaValida(TB_FechaIng.Text)) return;
+
+                TB_DNI.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                TB_FechaIng.Text = "";
+            }
+	        
+        }
+
+        private void TB_DNI_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                //if (TB_DNI.Text.Trim() == "") return;
+
+                TB_DescPerfil.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                TB_DNI.Text = "";
+            }
+	        
         }
     }
 }

@@ -22,9 +22,9 @@ Partial Class IngresoPallet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -535,8 +535,8 @@ Partial Class IngresoPallet
         '
         'Partida
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Partida.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Partida.DefaultCellStyle = DataGridViewCellStyle1
         Me.Partida.HeaderText = "Partida"
         Me.Partida.MaxInputLength = 6
         Me.Partida.Name = "Partida"
@@ -560,17 +560,18 @@ Partial Class IngresoPallet
         '
         'CantidadUnidades
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CantidadUnidades.DefaultCellStyle = DataGridViewCellStyle5
-        Me.CantidadUnidades.HeaderText = "Cant Unid"
+        Me.CantidadUnidades.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CantidadUnidades.DefaultCellStyle = DataGridViewCellStyle2
+        Me.CantidadUnidades.HeaderText = "Cant Envases"
         Me.CantidadUnidades.MaxInputLength = 3
         Me.CantidadUnidades.Name = "CantidadUnidades"
-        Me.CantidadUnidades.Width = 80
+        Me.CantidadUnidades.Width = 98
         '
         'KgUnidad
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.KgUnidad.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.KgUnidad.DefaultCellStyle = DataGridViewCellStyle3
         Me.KgUnidad.HeaderText = "Kg x Unidad"
         Me.KgUnidad.Name = "KgUnidad"
         Me.KgUnidad.Width = 90
@@ -641,6 +642,9 @@ Partial Class IngresoPallet
     Friend WithEvents Panel7 As System.Windows.Forms.Panel
     Friend WithEvents txtFechaAux2 As System.Windows.Forms.MaskedTextBox
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
+    Friend WithEvents txtDisponible As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents btnAgregarPT As System.Windows.Forms.Button
     Friend WithEvents Terminado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescTerminado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Partida As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -648,7 +652,4 @@ Partial Class IngresoPallet
     Friend WithEvents DescEnvase As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CantidadUnidades As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents KgUnidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents txtDisponible As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents btnAgregarPT As System.Windows.Forms.Button
 End Class

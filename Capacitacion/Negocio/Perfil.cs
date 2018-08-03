@@ -193,7 +193,7 @@ namespace Negocio
         public Perfil BuscarUno(string IdAModificar)
         {
             Conexion repo = new Conexion();
-            string consulta = "select * from Tarea where Codigo = " + IdAModificar + " Order by Renglon";
+            string consulta = "select * from Tarea where Codigo = '" + IdAModificar + "' Order by Renglon";
             System.Data.DataTable DT = repo.BuscarUno(consulta);
             Perfil obj = new Perfil();
 
@@ -264,8 +264,8 @@ namespace Negocio
                     //T = T.BuscarUno(T.Codigo.ToString(), renglon);
                     T = T.BuscarUno_Tema(T.Codigo.ToString());
                     //T.Descripcion = T.
-                    T.Necesaria = DT.Rows[renglon]["NecesariaCurso"].ToString() == "1" ? 1 : 0;
-                    T.Deseable = DT.Rows[renglon]["DeseableCurso"].ToString() == "1" ? 1 : 0;
+                    T.Necesaria = DT.Rows[renglon]["NecesariaCurso"].ToString().ToUpper() == "X" ? 1 : 0;
+                    T.Deseable = DT.Rows[renglon]["DeseableCurso"].ToString().ToUpper() == "X" ? 1 : 0;
                     //T.Deseable = item["DeseableCurso"].ToString() == "1" ? 1 : 0;
                     obj.Temas.Add(T);
                     renglon++;
@@ -433,8 +433,8 @@ namespace Negocio
                     Tema T = new Tema();
                     T.Codigo = int.Parse(item["Curso"].ToString());
                     T = T.BuscarUno_Tema(T.Codigo.ToString());
-                    T.Necesaria = item["NecesariaCurso"].ToString() == "1" ? 1 : 0;
-                    T.Deseable = item["DeseableCurso"].ToString() == "1" ? 1 : 0;
+                    T.Necesaria = item["NecesariaCurso"].ToString().ToUpper() == "X" ? 1 : 0;
+                    T.Deseable = item["DeseableCurso"].ToString().ToUpper() == "X" ? 1 : 0;
                     obj.Temas.Add(T);
                     renglon++;
                 }
