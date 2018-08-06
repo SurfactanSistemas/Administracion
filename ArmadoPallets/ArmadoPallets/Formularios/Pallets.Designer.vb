@@ -63,6 +63,7 @@ Partial Class Pallets
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblAvisoPackingList = New System.Windows.Forms.Label()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -240,6 +241,7 @@ Partial Class Pallets
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.lblAvisoPackingList)
         Me.Panel5.Controls.Add(Me.txtControlKgTotalesProforma)
         Me.Panel5.Controls.Add(Me.lblAviso)
         Me.Panel5.Controls.Add(Me.btnAgregarPallet)
@@ -465,6 +467,21 @@ Partial Class Pallets
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Total PALLETS:"
         '
+        'lblAvisoPackingList
+        '
+        Me.lblAvisoPackingList.BackColor = System.Drawing.Color.Green
+        Me.lblAvisoPackingList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblAvisoPackingList.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblAvisoPackingList.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAvisoPackingList.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblAvisoPackingList.Location = New System.Drawing.Point(23, 12)
+        Me.lblAvisoPackingList.Name = "lblAvisoPackingList"
+        Me.lblAvisoPackingList.Size = New System.Drawing.Size(226, 38)
+        Me.lblAvisoPackingList.TabIndex = 3
+        Me.lblAvisoPackingList.Text = "PACKING LIST FINALIZADO" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click para Enviar Aviso a Ventas"
+        Me.lblAvisoPackingList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblAvisoPackingList.Visible = False
+        '
         'Pallets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -529,4 +546,5 @@ Partial Class Pallets
     Friend WithEvents lblAviso As System.Windows.Forms.Label
     Friend WithEvents btnInfoProforma As System.Windows.Forms.Button
     Friend WithEvents txtControlKgTotalesProforma As System.Windows.Forms.TextBox
+    Friend WithEvents lblAvisoPackingList As System.Windows.Forms.Label
 End Class

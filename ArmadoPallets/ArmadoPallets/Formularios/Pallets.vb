@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SqlClient
-Imports System.IO
+Imports Microsoft.Office.Interop
 
 Public Class Pallets
 
@@ -109,30 +109,37 @@ Public Class Pallets
 
         With lblAviso
             .Visible = False
-            If a <> b Then
-                .Visible = True
-                _ActualizarMarcaProforma(txtProforma.Text, "0")
-            Else
-                _ActualizarMarcaProforma(txtProforma.Text, "1")
+            lblAvisoPackingList.Visible = False
+
+            If b <> 0 Then
+                If a <> b Then
+                    .Visible = True
+                    _ActualizarMarcaProforma(txtProforma.Text, "0")
+                Else
+                    _ActualizarMarcaProforma(txtProforma.Text, "1")
+                End If
             End If
+
         End With
     End Sub
 
     Private Sub _ActualizarMarcaProforma(ByVal WProforma As String, ByVal WMarca As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("UPDATE ProformaExportacion SET PackingList = '" & WMarca & "' WHERE Proforma = '" & WProforma & "'")
-        Dim dr As SqlDataReader
+        Dim cm As SqlCommand = New SqlCommand()
+
         Try
 
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
             cm.Connection = cn
 
+            cm.CommandText = "UPDATE ProformaExportacion SET PackingList = '" & WMarca & "' WHERE Proforma = '" & WProforma & "'"
+
             cm.ExecuteNonQuery()
 
-            cm.CommandText = "SELECT AvisoPackingList as Aviso, PackingList FROM ProformaExportacion WHERE Proforma = '" & WProforma & "' AND Renglon = '01'"
+            cm.CommandText = "SELECT AvisoPackingList as Aviso, PackingList, Cerrada, Entregado FROM ProformaExportacion WHERE Proforma = '" & WProforma & "' AND Renglon = '01'"
 
-            Using dr = cm.ExecuteReader
+            Using dr As SqlDataReader = cm.ExecuteReader
 
                 With dr
                     If .HasRows Then
@@ -140,14 +147,20 @@ Public Class Pallets
 
                         Dim WCompleto = IIf(IsDBNull(.Item("PackingList")), "", .Item("PackingList"))
                         Dim WMarcaAviso = IIf(IsDBNull(.Item("Aviso")), "", .Item("Aviso"))
+                        Dim WCerrada = IIf(IsDBNull(.Item("Cerrada")), "0", .Item("Cerrada"))
+                        Dim WEntregado = IIf(IsDBNull(.Item("Entregado")), "", .Item("Entregado"))
 
                         ' Corroboramos si se ha marcado como PackingList completo.
                         If Val(WCompleto) <> 0 Then
 
-                            ' En Caso de que si, se checkea si ya se ha realizado el aviso a Federico Monti.
+                            '
+                            ' Se checkea si ya se realizo el aviso a Federico Monti y
+                            ' que no se encuentre cerrada ni entregada.
                             ' En caso de que no, se pregunta si se quiere enviar un aviso por email.
-                            If Val(WMarcaAviso) = 0 Then
+                            '
+                            If Val(WMarcaAviso) = 0 And Val(WCerrada) <> 1 And UCase(WEntregado.trim) <> "X" Then
 
+                                lblAvisoPackingList.Visible = True
                                 _AvisarPorEmail(WProforma)
 
                             End If
@@ -160,10 +173,11 @@ Public Class Pallets
             End Using
 
         Catch ex As Exception
+
             MsgBox("Hubo un problema al querer actualizar el Estado del Packing List de la Proforma '" & WProforma & "' en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+
         Finally
 
-            dr = Nothing
             cn.Close()
             cn = Nothing
             cm = Nothing
@@ -173,8 +187,60 @@ Public Class Pallets
 
     Private Sub _AvisarPorEmail(ByVal wProforma As String)
 
-        If MsgBox("¿Desea avisar por Email que ya se encuentra disponible el PackingList de la Proforma '" & wProforma & "' a Federico Monti (fgmonti@surfactan.com.ar)?") = MsgBoxResult.Yes Then
+        If MsgBox("¿Desea avisar por Email que ya se encuentra disponible el PackingList de la Proforma '" & wProforma & "' a Federico Monti (fgmonti@surfactan.com.ar)?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
+            Dim oApp As Outlook._Application
+            Dim oMsg As Outlook._MailItem
+
+            Dim cn As SqlConnection = New SqlConnection()
+            Dim cm As SqlCommand = New SqlCommand("")
+            Dim trans As SqlTransaction = Nothing
+
+            Try
+                If wProforma.ToString.Length < 6 Then : Helper.ceros(wProforma, 6) : End If
+
+                cn.ConnectionString = Helper._ConectarA
+                cn.Open()
+                trans = cn.BeginTransaction
+                cm.Connection = cn
+                cm.Transaction = trans
+
+                cm.CommandText = "UPDATE ProformaExportacion SET AvisoPackingList = '1' WHERE Proforma = '" & wProforma & "'"
+                cm.ExecuteNonQuery()
+
+                oApp = New Outlook.Application()
+
+                oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
+                oMsg.Subject = "Notificación de Packing List Finalizado (Proforma Nº: " & wProforma & ")"
+                oMsg.Body = vbCrLf & vbCrLf & vbCrLf & "Se encuentra FINALIZADA el Packing List correspondiente a la Proforma Nº: " & wProforma
+
+                'WArchivoProforma = Helper._CarpetaArchivosProforma(wProforma) & "Proforma" & wProforma & ".pdf"
+
+                'If Not File.Exists(WArchivoProforma) Then
+                '    _ActualizarPDFProforma(wProforma)
+                'End If
+
+                'oMsg.Attachments.Add(WArchivoProforma)
+
+                ' Modificar por los E-Mails que correspondan.
+                oMsg.To = Configuration.ConfigurationManager.AppSettings("AVISO_PACKINGLIST") '"gferreyra@surfactan.com.ar"
+                'oMsg.To = "nsoto@surfactan.com.ar"
+
+                'oMsg.Display()
+                oMsg.Send()
+
+                trans.Commit()
+
+                MsgBox("Aviso Enviado correctamente a <Federico García Monti> fgmonti@surfactan.com.ar", MsgBoxStyle.Information)
+
+                lblAvisoPackingList.Visible = False
+
+            Catch ex As Exception
+                If Not IsNothing(trans) AndAlso Not IsNothing(trans.Connection) Then trans.Rollback()
+
+                Throw New Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+
+            End Try
         End If
 
     End Sub
@@ -238,5 +304,9 @@ Public Class Pallets
 
     Private Sub lblAviso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblAviso.Click
         btnInfoProforma_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub lblAvisoPackingList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblAvisoPackingList.Click
+        _ActualizarMarcaProforma(txtProforma.Text, "1")
     End Sub
 End Class

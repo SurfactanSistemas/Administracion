@@ -317,7 +317,7 @@ Partial Class Proforma
         Me.GrupoConsulta.Controls.Add(Me.lstFiltrada)
         Me.GrupoConsulta.Controls.Add(Me.lstConsulta)
         Me.GrupoConsulta.Controls.Add(Me.btnCerrarConsulta)
-        Me.GrupoConsulta.Location = New System.Drawing.Point(374, 90)
+        Me.GrupoConsulta.Location = New System.Drawing.Point(169, 90)
         Me.GrupoConsulta.Name = "GrupoConsulta"
         Me.GrupoConsulta.Size = New System.Drawing.Size(373, 321)
         Me.GrupoConsulta.TabIndex = 12

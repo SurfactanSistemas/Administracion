@@ -112,6 +112,9 @@ Public Class MenuPrincipal
                         .Cells("Total").Value = Helper.formatonumerico(WTotal)
                         .Cells("FechaLimite").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
                         .Cells("PackingList").Value = WPackingList
+                        .Cells("PackingListImg").Value = IIf(Val(WPackingList) = 0, My.Resources.cancelado, My.Resources.ok)
+                        .Cells("PackingListImg").Style.BackColor = Color.White
+                        .Cells("PackingListImg").Style.SelectionBackColor = Color.White
                         .Cells("Entregado").Value = UCase(WEntregado)
                     End With
 

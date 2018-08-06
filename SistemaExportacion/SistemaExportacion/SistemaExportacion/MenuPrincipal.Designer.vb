@@ -23,9 +23,9 @@ Partial Class MenuPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -55,6 +55,7 @@ Partial Class MenuPrincipal
         Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaLimite = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PackingList = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PackingListImg = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Entregado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
@@ -151,7 +152,7 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.AllowUserToAddRows = False
         Me.dgvPrincipal.AllowUserToDeleteRows = False
         Me.dgvPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total, Me.FechaLimite, Me.PackingList, Me.Entregado})
+        Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total, Me.FechaLimite, Me.PackingList, Me.PackingListImg, Me.Entregado})
         Me.dgvPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvPrincipal.Location = New System.Drawing.Point(99, 15)
         Me.dgvPrincipal.Margin = New System.Windows.Forms.Padding(15)
@@ -341,8 +342,8 @@ Partial Class MenuPrincipal
         '
         'NroProforma
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
         Me.NroProforma.HeaderText = "Nro Proforma"
         Me.NroProforma.MaxInputLength = 6
         Me.NroProforma.Name = "NroProforma"
@@ -350,8 +351,8 @@ Partial Class MenuPrincipal
         '
         'Fecha
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.MaxInputLength = 10
         Me.Fecha.Name = "Fecha"
@@ -379,8 +380,8 @@ Partial Class MenuPrincipal
         '
         'Total
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
         Me.Total.HeaderText = "Monto Total"
         Me.Total.Name = "Total"
         Me.Total.ReadOnly = True
@@ -396,10 +397,21 @@ Partial Class MenuPrincipal
         'PackingList
         '
         Me.PackingList.HeaderText = "PackingList"
-        Me.PackingList.MaxInputLength = 1
         Me.PackingList.Name = "PackingList"
         Me.PackingList.ReadOnly = True
+        Me.PackingList.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.PackingList.Visible = False
+        '
+        'PackingListImg
+        '
+        Me.PackingListImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.PackingListImg.HeaderText = "Packing List"
+        Me.PackingListImg.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.PackingListImg.Name = "PackingListImg"
+        Me.PackingListImg.ReadOnly = True
+        Me.PackingListImg.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.PackingListImg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.PackingListImg.Width = 90
         '
         'Entregado
         '
@@ -458,6 +470,7 @@ Partial Class MenuPrincipal
     Friend WithEvents Total As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FechaLimite As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PackingList As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PackingListImg As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents Entregado As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class
