@@ -772,9 +772,9 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void AgModLegajo_Load(object sender, EventArgs e)
         {
-            CargarSectores();
-            CargarPerfil();
-            Cargado = true;
+            //CargarSectores();
+            //CargarPerfil();
+            //Cargado = true;
         }
 
         

@@ -2131,6 +2131,7 @@ Public Class Proforma
         Dim dr As SqlDataReader
 
         Try
+            If MsgBox("¿Está seguro de querer marcar como Entregada a la Proforma? Esta acción hará que la misma ya no se encuentre listada por defecto en el Listado Principal del Sistema de Exportación.") <> MsgBoxResult.Yes Then Exit Sub
 
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
@@ -2139,9 +2140,9 @@ Public Class Proforma
             Dim WFechaEntrega = Date.Now.ToString("dd/MM/yyyy")
             Dim WFechaEntregaOrd = Helper.ordenaFecha(WFechaEntrega)
 
-            cm.CommandText="UPDATE ProformaExportacion SET Entregado = 'X', FechaEntregado = '" & WFechaEntrega & "', FechaEntregadoOrd = '" & WFechaEntregaOrd & "' WHERE Proforma = '" & txtNroProforma.Text & "'"
+            cm.CommandText = "UPDATE ProformaExportacion SET Entregado = 'X', FechaEntregado = '" & WFechaEntrega & "', FechaEntregadoOrd = '" & WFechaEntregaOrd & "' WHERE Proforma = '" & txtNroProforma.Text & "'"
 
-            cm.ExecuteNonQuery
+            cm.ExecuteNonQuery()
 
             btnCerrar.PerformClick()
 
