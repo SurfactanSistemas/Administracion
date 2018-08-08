@@ -42,7 +42,7 @@ Public Class IngresoTalonInventario
     Private Sub _CargarMovimiento(ByVal s As String)
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Inventario WHERE Numero = '" & s & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Talon, Tipo, Articulo, Terminado, Cantidad, Lote, Ubicacion, Observaciones FROM Inventario WHERE Numero = '" & s & "' ORDER BY Talon")
         Dim dr As SqlDataReader
         Dim row As Integer = 0
 
@@ -445,4 +445,5 @@ Public Class IngresoTalonInventario
         End Try
 
     End Function
+
 End Class
