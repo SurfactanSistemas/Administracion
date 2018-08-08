@@ -22,20 +22,17 @@ Partial Class IngresoTalonInventario
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtNroMovimiento = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.dgvTalones = New System.Windows.Forms.DataGridView()
         Me.Talon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Terminado = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,9 +42,12 @@ Partial Class IngresoTalonInventario
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Ubicacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnGrabar = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnCerrar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvTalones, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -85,7 +85,7 @@ Partial Class IngresoTalonInventario
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.txtNroMovimiento)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(16, 56)
         Me.GroupBox1.Name = "GroupBox1"
@@ -93,13 +93,13 @@ Partial Class IngresoTalonInventario
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         '
-        'TextBox1
+        'txtNroMovimiento
         '
-        Me.TextBox1.Location = New System.Drawing.Point(132, 16)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(78, 20)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtNroMovimiento.Location = New System.Drawing.Point(132, 16)
+        Me.txtNroMovimiento.Name = "txtNroMovimiento"
+        Me.txtNroMovimiento.Size = New System.Drawing.Size(78, 20)
+        Me.txtNroMovimiento.TabIndex = 1
+        Me.txtNroMovimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label3
         '
@@ -112,62 +112,35 @@ Partial Class IngresoTalonInventario
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Nº Movimiento"
         '
-        'DataGridView1
+        'dgvTalones
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AllowUserToResizeColumns = False
-        Me.DataGridView1.AllowUserToResizeRows = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Talon, Me.Tipo, Me.Terminado, Me.Articulo, Me.Descripcion, Me.Lote, Me.Cantidad, Me.Ubicacion, Me.Observaciones})
-        Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DataGridView1.Location = New System.Drawing.Point(16, 112)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 15
-        Me.DataGridView1.RowTemplate.Height = 18
-        Me.DataGridView1.ShowCellToolTips = False
-        Me.DataGridView1.Size = New System.Drawing.Size(780, 239)
-        Me.DataGridView1.TabIndex = 2
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(231, 359)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(90, 45)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "Grabar"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(361, 359)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(90, 45)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Limpiar"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(491, 359)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(90, 45)
-        Me.Button3.TabIndex = 3
-        Me.Button3.Text = "Limpiar"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.dgvTalones.AllowUserToAddRows = False
+        Me.dgvTalones.AllowUserToDeleteRows = False
+        Me.dgvTalones.AllowUserToResizeColumns = False
+        Me.dgvTalones.AllowUserToResizeRows = False
+        Me.dgvTalones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTalones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Talon, Me.Tipo, Me.Terminado, Me.Articulo, Me.Descripcion, Me.Lote, Me.Cantidad, Me.Ubicacion, Me.Observaciones})
+        Me.dgvTalones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgvTalones.Location = New System.Drawing.Point(16, 112)
+        Me.dgvTalones.Name = "dgvTalones"
+        Me.dgvTalones.RowHeadersWidth = 15
+        Me.dgvTalones.RowTemplate.Height = 18
+        Me.dgvTalones.ShowCellToolTips = False
+        Me.dgvTalones.Size = New System.Drawing.Size(780, 239)
+        Me.dgvTalones.TabIndex = 2
         '
         'Talon
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talon.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talon.DefaultCellStyle = DataGridViewCellStyle29
         Me.Talon.HeaderText = "Talon"
         Me.Talon.Name = "Talon"
         Me.Talon.Width = 50
         '
         'Tipo
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle30
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.Width = 40
@@ -192,16 +165,16 @@ Partial Class IngresoTalonInventario
         '
         'Lote
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Lote.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Lote.DefaultCellStyle = DataGridViewCellStyle31
         Me.Lote.HeaderText = "Lote"
         Me.Lote.Name = "Lote"
         Me.Lote.Width = 50
         '
         'Cantidad
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle32
         Me.Cantidad.HeaderText = "Cantidad"
         Me.Cantidad.Name = "Cantidad"
         Me.Cantidad.Width = 70
@@ -217,15 +190,42 @@ Partial Class IngresoTalonInventario
         Me.Observaciones.Name = "Observaciones"
         Me.Observaciones.Width = 150
         '
+        'btnGrabar
+        '
+        Me.btnGrabar.Location = New System.Drawing.Point(231, 359)
+        Me.btnGrabar.Name = "btnGrabar"
+        Me.btnGrabar.Size = New System.Drawing.Size(90, 45)
+        Me.btnGrabar.TabIndex = 3
+        Me.btnGrabar.Text = "Grabar"
+        Me.btnGrabar.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Location = New System.Drawing.Point(361, 359)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(90, 45)
+        Me.btnLimpiar.TabIndex = 3
+        Me.btnLimpiar.Text = "Limpiar"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.Location = New System.Drawing.Point(491, 359)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(90, 45)
+        Me.btnCerrar.TabIndex = 3
+        Me.btnCerrar.Text = "Cerrar"
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
         'IngresoTalonInventario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(812, 413)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.btnCerrar)
+        Me.Controls.Add(Me.btnLimpiar)
+        Me.Controls.Add(Me.btnGrabar)
+        Me.Controls.Add(Me.dgvTalones)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
@@ -234,7 +234,7 @@ Partial Class IngresoTalonInventario
         Me.Panel1.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvTalones, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -242,12 +242,12 @@ Partial Class IngresoTalonInventario
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtNroMovimiento As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents dgvTalones As System.Windows.Forms.DataGridView
+    Friend WithEvents btnGrabar As System.Windows.Forms.Button
+    Friend WithEvents btnLimpiar As System.Windows.Forms.Button
+    Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents Talon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Terminado As System.Windows.Forms.DataGridViewTextBoxColumn

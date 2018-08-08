@@ -1,15 +1,5 @@
 ﻿Public Class MenuPrincipal
 
-    'Private Sub MuestraToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-    '    With IngresoOrdenTrabajo
-    '        .Show()
-    '        .WindowState = FormWindowState.Normal
-    '        .Focus()
-    '    End With
-
-    'End Sub
-
     Private Sub CerrarSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CerrarSistemaToolStripMenuItem.Click
         Login.Dispose()
         Close()
