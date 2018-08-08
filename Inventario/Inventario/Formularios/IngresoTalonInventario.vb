@@ -199,7 +199,7 @@ Public Class IngresoTalonInventario
                                 Exit Sub
                             End If
 
-                            If {"DY", "DW", "DS"}.Contains(WArticulo.Substring(0, 2).ToUpper) Then
+                            If {"DY", "DW", "DS"}.Contains(WArticulo.Substring(0, 2).ToUpper) AndAlso Conexion.EmpresaDeTrabajo.ToUpper <> "PELLITAL_III" Then
 
                                 WPartida = WLote
 
@@ -259,6 +259,11 @@ Public Class IngresoTalonInventario
 
                         If Not _ExisteHoja(WTerminado, WLote) Then
                             MsgBox("Debe especificarse un Lote válido para el Producto Terminado en el talón " & WTalon)
+                            Exit Sub
+                        End If
+
+                        If _CantidadSuperaTotalOriginal(WTerminado, WLote, WCantidad) Then
+                            MsgBox("La cantidad ingresada supera a la cantidad registrada en la Hoja del Producto indicada.")
                             Exit Sub
                         End If
 
@@ -446,4 +451,200 @@ Public Class IngresoTalonInventario
 
     End Function
 
+
+
+
+    Private Function _EsNumero(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
+    End Function
+
+    Private Function _EsControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        Select Case keycode
+            Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
+                valido = True
+            Case Else
+                valido = False
+        End Select
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
+        Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
+    End Function
+
+    Private Function _EsNumeroOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Private Function _EsDecimalOControl(ByVal keycode) As Boolean
+        Dim valido As Boolean = False
+
+        If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
+            valido = True
+        Else
+            valido = False
+        End If
+
+        Return valido
+    End Function
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+
+        With dgvTalones
+            If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+                .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                Dim iCol = .CurrentCell.ColumnIndex
+                Dim iRow = .CurrentCell.RowIndex
+                Dim valor = If(.CurrentCell.Value, "")
+
+                ' Limitamos los caracteres permitidos para cada una de las columnas.
+                Select Case iCol
+                    Case 0, 5
+                        If Not _EsNumeroOControl(keyData) Then
+                            Return True
+                        End If
+                    Case 6
+                        If Not _EsDecimalOControl(keyData) Then
+                            Return True
+                        End If
+                End Select
+
+                If msg.WParam.ToInt32() = Keys.Enter Then
+
+                    '
+                    ' Procesamos el Valor.
+                    '
+
+                    Select Case iCol
+                        Case 0, 1
+                            If valor.trim = "" Then Return True
+                        Case 5
+                            If Val(valor) = 0 Then Return True
+
+                            Dim WTipo As String = If(.CurrentRow.Cells("Tipo").Value, "")
+                            Dim WArticulo As String = If(.CurrentRow.Cells("Articulo").Value, "")
+                            Dim WTerminado As String = If(.CurrentRow.Cells("Terminado").Value, "")
+
+                            If UCase(WTipo) = "M" Then
+                                If Not _ExisteLaudo(WArticulo, valor) Then
+                                    MsgBox("El Lote ingresado no se corresponde con el Producto que informo anteriormente.")
+                                    Return True
+                                End If
+                            Else
+                                If Not _ExisteHoja(WTerminado, valor) Then
+                                    MsgBox("El Lote ingresado no se corresponde con el Producto que informo anteriormente.")
+                                    Return True
+                                End If
+                            End If
+                        Case 6
+                            If Val(valor) = 0 Then Return True
+                            Dim WTipo As String = If(.CurrentRow.Cells("Tipo").Value, "")
+
+                            If WTipo = "T" Then
+                                Dim WTerminado As String = If(.CurrentRow.Cells("Terminado").Value, "")
+                                Dim WLote As String = If(.CurrentRow.Cells("Lote").Value, "")
+
+                                If _CantidadSuperaTotalOriginal(WTerminado, WLote, valor) Then
+                                    MsgBox("La cantidad ingresada supera a la cantidad registrada en la Hoja del Producto indicada.")
+                                    Return True
+                                End If
+
+                            End If
+
+
+                    End Select
+
+
+                    '
+                    '
+                    '
+                    Select Case iCol
+                        Case 8
+
+                            If iRow = .Rows.Count - 1 Then
+                                .CurrentCell = .Rows(.Rows.Add).Cells("Talon")
+                            Else
+                                .CurrentCell = .Rows(iRow + 1).Cells("Talon")
+                            End If
+
+                        Case Else
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End Select
+
+                    Return True
+
+                ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                    .Rows(iRow).Cells(iCol).Value = ""
+
+                    If iCol = .Columns("Observaciones").Index Then
+                        .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                    Else
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End If
+
+                    .CurrentCell = .Rows(iRow).Cells(iCol)
+                End If
+            End If
+
+        End With
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
+    Private Function _CantidadSuperaTotalOriginal(ByVal wTerminado As String, ByVal wLote As String, ByVal valor As Object) As Boolean
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Cantidad FROM Hoja WHERE Hoja = '" & wLote & "' AND Producto = '" & wTerminado & "' ")
+        Dim dr As SqlDataReader
+
+        Try
+
+            For Each emp As String In Conexion.Empresas
+
+                If cn.IsOpened Then cn.Close()
+
+                cn.ConnectionString = Helper._ConectarA(emp)
+                cn.Open()
+                cm.Connection = cn
+
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+                    dr.Read()
+
+                    Dim WCantidadOrig As Double = IIf(IsDBNull(dr.Item("Cantidad")), 0, dr.Item("Cantidad"))
+                    WCantidadOrig = Val(Helper.formatonumerico(WCantidadOrig))
+                    valor = Val(Helper.formatonumerico(valor))
+
+                    Return valor > WCantidadOrig
+
+                End If
+
+            Next
+
+            Return False
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer corroborar la cantidad de producto original del Laudo " & wLote & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Function
 End Class
