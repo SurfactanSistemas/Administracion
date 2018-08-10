@@ -1430,4 +1430,38 @@ Public Class Depositos
         End If
     End Sub
 
+    Private Sub gridCheques_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridCheques.RowHeaderMouseDoubleClick
+
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim r As DataGridViewRow = gridCheques.Rows(e.RowIndex)
+
+        If MsgBox("¿Está seguro de querer eliminar la fila indicada?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+
+        gridCheques.Rows.Remove(r)
+
+        If gridCheques.Rows.Count = 0 Then
+            gridCheques.Rows.Add()
+        End If
+
+        sumarImportes()
+
+    End Sub
+
+    Private Sub btnEliminarFila_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminarFila.Click
+
+        If gridCheques.SelectedRows.Count = 0 Then Exit Sub
+
+        If MsgBox("¿Está seguro de querer eliminar todas las filas seleccionadas?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+
+        For Each row As DataGridViewRow In gridCheques.SelectedRows
+            gridCheques.Rows.Remove(row)
+        Next
+
+        If gridCheques.Rows.Count = 0 Then
+            gridCheques.Rows.Add()
+        End If
+
+        sumarImportes()
+    End Sub
 End Class
