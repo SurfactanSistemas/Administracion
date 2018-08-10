@@ -22,10 +22,11 @@ Partial Class IngresoTalonInventario
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -45,6 +46,8 @@ Partial Class IngresoTalonInventario
         Me.btnGrabar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.txtTerminadoAux = New System.Windows.Forms.MaskedTextBox()
+        Me.txtArticuloAux = New System.Windows.Forms.MaskedTextBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvTalones, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -123,6 +126,15 @@ Partial Class IngresoTalonInventario
         Me.dgvTalones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvTalones.Location = New System.Drawing.Point(16, 112)
         Me.dgvTalones.Name = "dgvTalones"
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle10.NullValue = Nothing
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvTalones.RowHeadersDefaultCellStyle = DataGridViewCellStyle10
         Me.dgvTalones.RowHeadersWidth = 15
         Me.dgvTalones.RowTemplate.Height = 18
         Me.dgvTalones.ShowCellToolTips = False
@@ -131,16 +143,16 @@ Partial Class IngresoTalonInventario
         '
         'Talon
         '
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talon.DefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talon.DefaultCellStyle = DataGridViewCellStyle6
         Me.Talon.HeaderText = "Talon"
         Me.Talon.Name = "Talon"
         Me.Talon.Width = 50
         '
         'Tipo
         '
-        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle7
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.Width = 40
@@ -162,19 +174,20 @@ Partial Class IngresoTalonInventario
         Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Descripcion.HeaderText = "Descripcion"
         Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
         '
         'Lote
         '
-        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Lote.DefaultCellStyle = DataGridViewCellStyle35
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Lote.DefaultCellStyle = DataGridViewCellStyle8
         Me.Lote.HeaderText = "Lote"
         Me.Lote.Name = "Lote"
         Me.Lote.Width = 50
         '
         'Cantidad
         '
-        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle36
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle9
         Me.Cantidad.HeaderText = "Cantidad"
         Me.Cantidad.Name = "Cantidad"
         Me.Cantidad.Width = 70
@@ -217,25 +230,52 @@ Partial Class IngresoTalonInventario
         Me.btnCerrar.Text = "Cerrar"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
+        'txtTerminadoAux
+        '
+        Me.txtTerminadoAux.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtTerminadoAux.Location = New System.Drawing.Point(587, 286)
+        Me.txtTerminadoAux.Mask = "AA-00000-000"
+        Me.txtTerminadoAux.Name = "txtTerminadoAux"
+        Me.txtTerminadoAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtTerminadoAux.Size = New System.Drawing.Size(76, 13)
+        Me.txtTerminadoAux.TabIndex = 4
+        Me.txtTerminadoAux.Visible = False
+        '
+        'txtArticuloAux
+        '
+        Me.txtArticuloAux.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtArticuloAux.Location = New System.Drawing.Point(669, 286)
+        Me.txtArticuloAux.Mask = "AA-000-000"
+        Me.txtArticuloAux.Name = "txtArticuloAux"
+        Me.txtArticuloAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtArticuloAux.Size = New System.Drawing.Size(74, 13)
+        Me.txtArticuloAux.TabIndex = 4
+        Me.txtArticuloAux.Visible = False
+        '
         'IngresoTalonInventario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(812, 413)
+        Me.Controls.Add(Me.txtArticuloAux)
+        Me.Controls.Add(Me.txtTerminadoAux)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnGrabar)
         Me.Controls.Add(Me.dgvTalones)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Panel1)
+        Me.Location = New System.Drawing.Point(10, 10)
         Me.MaximizeBox = False
         Me.Name = "IngresoTalonInventario"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.dgvTalones, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
@@ -248,6 +288,8 @@ Partial Class IngresoTalonInventario
     Friend WithEvents btnGrabar As System.Windows.Forms.Button
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
+    Friend WithEvents txtTerminadoAux As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtArticuloAux As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Talon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Terminado As System.Windows.Forms.DataGridViewTextBoxColumn

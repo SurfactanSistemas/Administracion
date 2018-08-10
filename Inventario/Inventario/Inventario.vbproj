@@ -90,10 +90,16 @@
     <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
-    <Compile Include="Formularios\IngresoTalonInventario.Designer.vb">
+    <Compile Include="Formularios\Maestros\IngresoTalonInventario.Designer.vb">
       <DependentUpon>IngresoTalonInventario.vb</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\IngresoTalonInventario.vb">
+    <Compile Include="Formularios\Maestros\IngresoTalonInventario.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\VerificacionCorrelatividades.Designer.vb">
+      <DependentUpon>VerificacionCorrelatividades.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\VerificacionCorrelatividades.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
@@ -125,6 +131,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Reportes\Maestros\VerificaCorrelatividad\DSVerificaCorrelatividad.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSVerificaCorrelatividad.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Maestros\VerificaCorrelatividad\VerificaCorrelatividadReporte.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VerificaCorrelatividadReporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\VistaPrevia.Designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
@@ -133,8 +150,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Formularios\IngresoTalonInventario.resx">
+    <EmbeddedResource Include="Formularios\Maestros\IngresoTalonInventario.resx">
       <DependentUpon>IngresoTalonInventario.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\VerificacionCorrelatividades.resx">
+      <DependentUpon>VerificacionCorrelatividades.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
@@ -147,6 +167,10 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Maestros\VerificaCorrelatividad\VerificaCorrelatividadReporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VerificaCorrelatividadReporte.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
@@ -164,6 +188,17 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\Maestros\VerificaCorrelatividad\DSVerificaCorrelatividad.xsc">
+      <DependentUpon>DSVerificaCorrelatividad.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Maestros\VerificaCorrelatividad\DSVerificaCorrelatividad.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSVerificaCorrelatividad.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\Maestros\VerificaCorrelatividad\DSVerificaCorrelatividad.xss">
+      <DependentUpon>DSVerificaCorrelatividad.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

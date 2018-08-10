@@ -30,4 +30,8 @@
         Login.Show()
         Close()
     End Sub
+
+    Private Sub VerificacionDeCorrelatividadDeTalonesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VerificacionDeCorrelatividadDeTalonesToolStripMenuItem.Click
+        _Abrir(New VerificacionCorrelatividades)
+    End Sub
 End Class
