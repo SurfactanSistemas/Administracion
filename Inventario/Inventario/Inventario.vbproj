@@ -90,6 +90,12 @@
     <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
+    <Compile Include="Formularios\Maestros\VerificacionTalonesDuplicados.Designer.vb">
+      <DependentUpon>VerificacionTalonesDuplicados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\VerificacionTalonesDuplicados.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\IngresoTalonInventario.Designer.vb">
       <DependentUpon>IngresoTalonInventario.vb</DependentUpon>
     </Compile>
@@ -142,6 +148,17 @@
       <DependentUpon>VerificaCorrelatividadReporte.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Maestros\VerificaTalonesDuplicados\DSVerificaTalonesDuplicados.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSVerificaTalonesDuplicados.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Maestros\VerificaTalonesDuplicados\VerificarTalonesDuplicados.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VerificarTalonesDuplicados.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\VistaPrevia.Designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
@@ -150,6 +167,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\Maestros\VerificacionTalonesDuplicados.resx">
+      <DependentUpon>VerificacionTalonesDuplicados.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\IngresoTalonInventario.resx">
       <DependentUpon>IngresoTalonInventario.vb</DependentUpon>
     </EmbeddedResource>
@@ -171,6 +191,10 @@
     <EmbeddedResource Include="Reportes\Maestros\VerificaCorrelatividad\VerificaCorrelatividadReporte.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>VerificaCorrelatividadReporte.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Maestros\VerificaTalonesDuplicados\VerificarTalonesDuplicados.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VerificarTalonesDuplicados.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
@@ -199,6 +223,17 @@
     </None>
     <None Include="Reportes\Maestros\VerificaCorrelatividad\DSVerificaCorrelatividad.xss">
       <DependentUpon>DSVerificaCorrelatividad.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Maestros\VerificaTalonesDuplicados\DSVerificaTalonesDuplicados.xsc">
+      <DependentUpon>DSVerificaTalonesDuplicados.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Maestros\VerificaTalonesDuplicados\DSVerificaTalonesDuplicados.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSVerificaTalonesDuplicados.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\Maestros\VerificaTalonesDuplicados\DSVerificaTalonesDuplicados.xss">
+      <DependentUpon>DSVerificaTalonesDuplicados.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

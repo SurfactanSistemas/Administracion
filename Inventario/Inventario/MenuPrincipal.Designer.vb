@@ -33,10 +33,11 @@ Partial Class MenuPrincipal
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeTalónDeInventarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -151,7 +152,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeTalónDeInventarioToolStripMenuItem, Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeTalónDeInventarioToolStripMenuItem, Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem, Me.ToolStripMenuItem1})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -161,6 +162,18 @@ Partial Class MenuPrincipal
         Me.IngresoDeTalónDeInventarioToolStripMenuItem.Name = "IngresoDeTalónDeInventarioToolStripMenuItem"
         Me.IngresoDeTalónDeInventarioToolStripMenuItem.Size = New System.Drawing.Size(287, 22)
         Me.IngresoDeTalónDeInventarioToolStripMenuItem.Text = "Ingreso de talón de Inventario"
+        '
+        'VerificacionDeCorrelatividadDeTalonesToolStripMenuItem
+        '
+        Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem.Name = "VerificacionDeCorrelatividadDeTalonesToolStripMenuItem"
+        Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem.Size = New System.Drawing.Size(287, 22)
+        Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem.Text = "Verificación de Correlatividad de Talones"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(287, 22)
+        Me.ToolStripMenuItem1.Text = "Verificación de Talones Duplicados"
         '
         'ListadosToolStripMenuItem
         '
@@ -180,12 +193,6 @@ Partial Class MenuPrincipal
         Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
         Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
-        '
-        'VerificacionDeCorrelatividadDeTalonesToolStripMenuItem
-        '
-        Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem.Name = "VerificacionDeCorrelatividadDeTalonesToolStripMenuItem"
-        Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem.Size = New System.Drawing.Size(287, 22)
-        Me.VerificacionDeCorrelatividadDeTalonesToolStripMenuItem.Text = "Verificacion de Correlatividad de Talones"
         '
         'MenuPrincipal
         '
@@ -224,5 +231,6 @@ Partial Class MenuPrincipal
     Friend WithEvents IngresoDeTalónDeInventarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerificacionDeCorrelatividadDeTalonesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 
 End Class
