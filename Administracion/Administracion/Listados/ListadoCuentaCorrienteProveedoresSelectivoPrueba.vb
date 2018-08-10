@@ -719,7 +719,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                             AcumDifCambio += varDifCambio
 
-                            AcumPesosOrig = (varAcuNeto - AcumDifCambio)
+                            AcumPesosOrig = IIf(varDifCambio >= 0, (varAcuNeto - AcumDifCambio), varAcuNeto)
+
                         Else
                             AcumPesosOrig = varAcuNeto
                         End If

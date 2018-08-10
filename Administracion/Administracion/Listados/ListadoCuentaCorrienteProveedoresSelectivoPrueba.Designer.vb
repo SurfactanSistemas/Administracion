@@ -118,9 +118,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
         Me.Label1.Location = New System.Drawing.Point(11, 15)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(396, 19)
+        Me.Label1.Size = New System.Drawing.Size(333, 19)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Listado Cuenta Corriente Proveedores Selectivo (Prueba)"
+        Me.Label1.Text = "Listado Cuenta Corriente Proveedores Selectivo"
         '
         'Panel2
         '
