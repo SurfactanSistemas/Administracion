@@ -9,7 +9,7 @@ Public Class ListadoProformas
     Private Sub _CargarProformas()
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT p.Proforma, ISNULL(p.Pedido, '') As Pedido, p.Fecha, p.Cliente, ISNULL(c.Razon, '') Descripcion, p.Pais FROM ProformaExportacion p LEFT OUTER JOIN Cliente c ON p.Cliente = c.Cliente WHERE p.Renglon = 1 ORDER BY p.Proforma")
+        Dim cm As SqlCommand = New SqlCommand("SELECT p.Proforma, ISNULL(p.Pedido, '') As Pedido, p.Fecha, p.Cliente, ISNULL(c.Razon, '') Descripcion, p.Pais FROM ProformaExportacion p LEFT OUTER JOIN Cliente c ON p.Cliente = c.Cliente WHERE p.Renglon = 1 AND (Entregado <> 'X' OR Entregado IS NULL) ORDER BY p.Proforma")
         Dim dr As SqlDataReader
         Dim tabla As New DataTable
         Try
@@ -58,16 +58,16 @@ Public Class ListadoProformas
 
     Private Sub txtFiltrar_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFiltrar.KeyUp
 
-        Dim tabla As DataTable = dgvProformas.DataSource
+        Dim tabla As DataTable = CType(dgvProformas.DataSource, DataTable)
 
         If Not IsNothing(tabla) Then
-
+            
             tabla.DefaultView.RowFilter = String.Format("Proforma LIKE '%{0}%'" _
-                                                      & " OR Pedido LIKE '%{0}%'" _
-                                                      & " OR Fecha LIKE '%{0}%'" _
-                                                      & " OR Descripcion LIKE '%{0}%'" _
-                                                      & " OR Pais LIKE '%{0}%'" _
-                                                      & " OR Cliente LIKE '%{0}%'", txtFiltrar.Text)
+                                                        & " OR Pedido LIKE '%{0}%'" _
+                                                        & " OR Fecha LIKE '%{0}%'" _
+                                                        & " OR Descripcion LIKE '%{0}%'" _
+                                                        & " OR Pais LIKE '%{0}%'" _
+                                                        & " OR Cliente LIKE '%{0}%'", txtFiltrar.Text)
 
         End If
 

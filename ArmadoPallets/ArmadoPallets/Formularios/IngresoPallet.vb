@@ -27,9 +27,12 @@ Public Class IngresoPallet
         WRow = -1
         Wcol = -1
 
-        If Trim(txtProforma.Text) <> "" Then
+        If Val(txtProforma.Text) <> 0 And Val(txtPedido.Text) <> 0 Then
             btnLimpiar.PerformClick()
             _CargarInformacionPallets()
+        Else
+            MsgBox("No se encuentra el número de pedido asociado.")
+            Close()
         End If
     End Sub
 
@@ -670,6 +673,8 @@ Public Class IngresoPallet
 
     Private Sub btnAgregarPallet_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarPallet.Click
 
+        If Val(txtProforma.Text) = 0 Or Val(txtPedido.Text) = 0 Then Exit Sub
+
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
         Dim trans As SqlTransaction = Nothing
@@ -776,6 +781,12 @@ Public Class IngresoPallet
             Next
 
             trans.Commit()
+
+            Dim WOwner As Pallets = CType(Owner, Pallets)
+
+            If Not IsNothing(WOwner) Then
+                WOwner._CargarInformacionPallets()
+            End If
 
             Close()
 

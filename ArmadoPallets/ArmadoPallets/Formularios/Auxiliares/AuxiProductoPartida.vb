@@ -175,7 +175,7 @@ Public Class AuxiProductoPartida
                 End If
             End Using
 
-            cm.CommandText = "SELECT Producto As Terminado, T.Descripcion, Hoja FROM Hoja LEFT OUTER JOIN Terminado t ON t.Codigo = Hoja.Producto WHERE Producto = '" & txtTerminado.Text & "' AND Renglon = 1 ORDER BY Hoja DESC"
+            cm.CommandText = "SELECT Producto As Terminado, Hoja, Cantidad as Teorico, 'Real' = CASE WHEN Real < RealAnt THEN RealAnt ELSE Real END, Saldo FROM Hoja LEFT OUTER JOIN Terminado t ON t.Codigo = Hoja.Producto WHERE Producto = '" & txtTerminado.Text & "' AND Renglon = 1 ORDER BY Hoja DESC"
 
             If WProductosProforma.Contains(txtTerminado.Text) Then
 
@@ -201,15 +201,23 @@ Public Class AuxiProductoPartida
 
             dgvAyuda.DataSource = tabla
 
-            Dim c As DataGridViewColumn = dgvAyuda.Columns("Descripcion")
+            Dim c As DataGridViewColumn = dgvAyuda.Columns("Terminado")
             If Not IsNothing(c) Then c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
-            c = dgvAyuda.Columns("Terminado")
-            If Not IsNothing(c) Then c.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+            For Each _c As String In {"Hoja", "Saldo", "Teorico", "Real"}
 
-            c = dgvAyuda.Columns("Hoja")
-            If Not IsNothing(c) Then c.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+                c = dgvAyuda.Columns(_c)
+                If Not IsNothing(c) Then c.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
 
+            Next
+
+            For Each _c As String In {"Hoja", "Saldo", "Teorico", "Real"}
+
+                c = dgvAyuda.Columns(_c)
+                If Not IsNothing(c) Then c.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            Next
+            
             btnAtras.Visible = True
 
             If dgvAyuda.Rows.Count = 0 Then

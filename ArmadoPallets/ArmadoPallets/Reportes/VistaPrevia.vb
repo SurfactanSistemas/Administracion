@@ -74,7 +74,7 @@ Public Class VistaPrevia
 
     Public Sub Mostrar()
 
-        _ReconectarBaseDatos()
+        '_ReconectarBaseDatos()
 
         With Me.CrystalReportViewer1
 

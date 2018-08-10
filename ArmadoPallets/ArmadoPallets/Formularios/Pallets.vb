@@ -22,7 +22,7 @@ Public Class Pallets
         End If
     End Sub
 
-    Private Sub _CargarInformacionPallets()
+    Public Sub _CargarInformacionPallets()
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT ap.Pallet Nro, ap.CodigoPallet Pallet, a.Descripcion, SUM(ap.Bultos) Bultos, (SUM(ap.KgBultos * ap.Bultos) + ISNULL(a.Tara, 0)) KgBrutos, (sum(ap.KgBultos * ap.Bultos)) KgNetos, ap.FechaDisponible As Disponible FROM ArmadoPallets ap LEFT JOIN Articulo a ON a.Codigo = ap.CodigoPallet WHERE ap.Proforma = '" & txtProforma.Text & "' GROUP BY ap.Pallet, ap.CodigoPallet, a.Tara, a.Descripcion, ap.FechaDisponible")
@@ -258,7 +258,6 @@ Public Class Pallets
         Dim frm As New IngresoPallet(txtProforma.Text, txtPedido.Text, -1)
         frm.Show(Me)
 
-        _CargarInformacionPallets()
     End Sub
 
     Private Sub dgvPallets_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvPallets.CellMouseDoubleClick
