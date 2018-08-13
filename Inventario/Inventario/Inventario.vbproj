@@ -90,6 +90,54 @@
     <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
+    <Compile Include="Formularios\Ayudas\AyudaMP.Designer.vb">
+      <DependentUpon>AyudaMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaPT.Designer.vb">
+      <DependentUpon>AyudaPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Listados\DiferenciaInventarioMPStockAnterior.Designer.vb">
+      <DependentUpon>DiferenciaInventarioMPStockAnterior.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Listados\DiferenciaInventarioMPStockAnterior.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Listados\MPPTConLote0.Designer.vb">
+      <DependentUpon>MPPTConLote0.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Listados\MPPTConLote0.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Listados\DiferenciaInventarioPT.Designer.vb">
+      <DependentUpon>DiferenciaInventarioPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Listados\DiferenciaInventarioPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Listados\DiferenciaInventarioMP.Designer.vb">
+      <DependentUpon>DiferenciaInventarioMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Listados\DiferenciaInventarioMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Listados\RecuentoInventarioPT.Designer.vb">
+      <DependentUpon>RecuentoInventarioPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Listados\RecuentoInventarioPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Listados\RecuentoInventarioMP.Designer.vb">
+      <DependentUpon>RecuentoInventarioMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Listados\RecuentoInventarioMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\VerificacionTalonesDuplicados.Designer.vb">
       <DependentUpon>VerificacionTalonesDuplicados.vb</DependentUpon>
     </Compile>
@@ -109,6 +157,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\IAyudaPT.vb" />
+    <Compile Include="Interfaces\IAyudaMP.vb" />
     <Compile Include="Login.designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -136,6 +186,51 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reportes\Listados\DiferenciaInventarioMP\DSDiferenciaInventario.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSDiferenciaInventario.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Listados\DiferenciaInventarioMP\ReporteDiferenciaInventarioMP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteDiferenciaInventarioMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Listados\DiferenciaInventarioPT\ReporteDiferenciaInventarioPT.vb">
+      <DependentUpon>ReporteDiferenciaInventarioPT.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Listados\MPPTLoteIgualCero\DSLote0.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSLote0.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Listados\MPPTLoteIgualCero\ReporteLote0.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteLote0.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Listados\RecuentoInventarioMP\DSRecuentoInventario.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSRecuentoInventario.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Listados\RecuentoInventarioMP\ReporteRecuentoInventarioMP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteRecuentoInventarioMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Listados\RecuentoInventarioPT\ReporteRecuentoInventarioPT.vb">
+      <DependentUpon>ReporteRecuentoInventarioPT.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reportes\Maestros\VerificaCorrelatividad\DSVerificaCorrelatividad.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -167,6 +262,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\Ayudas\AyudaMP.resx">
+      <DependentUpon>AyudaMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ayudas\AyudaPT.resx">
+      <DependentUpon>AyudaPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Listados\DiferenciaInventarioMPStockAnterior.resx">
+      <DependentUpon>DiferenciaInventarioMPStockAnterior.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Listados\MPPTConLote0.resx">
+      <DependentUpon>MPPTConLote0.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Listados\DiferenciaInventarioPT.resx">
+      <DependentUpon>DiferenciaInventarioPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Listados\DiferenciaInventarioMP.resx">
+      <DependentUpon>DiferenciaInventarioMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Listados\RecuentoInventarioPT.resx">
+      <DependentUpon>RecuentoInventarioPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Listados\RecuentoInventarioMP.resx">
+      <DependentUpon>RecuentoInventarioMP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\VerificacionTalonesDuplicados.resx">
       <DependentUpon>VerificacionTalonesDuplicados.vb</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +306,26 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Listados\DiferenciaInventarioMP\ReporteDiferenciaInventarioMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteDiferenciaInventarioMP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Listados\DiferenciaInventarioPT\ReporteDiferenciaInventarioPT.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteDiferenciaInventarioPT.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Listados\MPPTLoteIgualCero\ReporteLote0.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteLote0.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Listados\RecuentoInventarioMP\ReporteRecuentoInventarioMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteRecuentoInventarioMP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Listados\RecuentoInventarioPT\ReporteRecuentoInventarioPT.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteRecuentoInventarioPT.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Maestros\VerificaCorrelatividad\VerificaCorrelatividadReporte.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -212,6 +351,39 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\Listados\DiferenciaInventarioMP\DSDiferenciaInventario.xsc">
+      <DependentUpon>DSDiferenciaInventario.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Listados\DiferenciaInventarioMP\DSDiferenciaInventario.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSDiferenciaInventario.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\Listados\DiferenciaInventarioMP\DSDiferenciaInventario.xss">
+      <DependentUpon>DSDiferenciaInventario.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Listados\MPPTLoteIgualCero\DSLote0.xsc">
+      <DependentUpon>DSLote0.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Listados\MPPTLoteIgualCero\DSLote0.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSLote0.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\Listados\MPPTLoteIgualCero\DSLote0.xss">
+      <DependentUpon>DSLote0.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Listados\RecuentoInventarioMP\DSRecuentoInventario.xsc">
+      <DependentUpon>DSRecuentoInventario.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Listados\RecuentoInventarioMP\DSRecuentoInventario.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSRecuentoInventario.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\Listados\RecuentoInventarioMP\DSRecuentoInventario.xss">
+      <DependentUpon>DSRecuentoInventario.xsd</DependentUpon>
     </None>
     <None Include="Reportes\Maestros\VerificaCorrelatividad\DSVerificaCorrelatividad.xsc">
       <DependentUpon>DSVerificaCorrelatividad.xsd</DependentUpon>
@@ -286,6 +458,7 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

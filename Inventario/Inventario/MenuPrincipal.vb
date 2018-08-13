@@ -38,4 +38,28 @@
     Private Sub ToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem1.Click
         _Abrir(New VerificacionTalonesDuplicados)
     End Sub
+
+    Private Sub RecuentoDeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecuentoDeToolStripMenuItem.Click
+        _Abrir(New RecuentoInventarioMP)
+    End Sub
+
+    Private Sub RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem.Click
+        _Abrir(New RecuentoInventarioPT)
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
+        _Abrir(New DiferenciaInventarioMP)
+    End Sub
+
+    Private Sub DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Click
+        _Abrir(New DiferenciaInventarioPT)
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem3.Click
+        _Abrir(New MPPTConLote0)
+    End Sub
+
+    Private Sub DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Click
+
+    End Sub
 End Class
