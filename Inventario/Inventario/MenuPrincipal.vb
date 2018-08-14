@@ -70,4 +70,8 @@
     Private Sub ToolStripMenuItem4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem4.Click
         _Abrir(New LimpiarCargaInventario)
     End Sub
+
+    Private Sub ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Click
+        _Abrir(New ControlMarcaLote)
+    End Sub
 End Class

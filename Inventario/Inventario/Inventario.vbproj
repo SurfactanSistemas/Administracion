@@ -169,6 +169,12 @@
     <Compile Include="Formularios\Maestros\VerificacionCorrelatividades.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Procesos\ControlMarcaLote.Designer.vb">
+      <DependentUpon>ControlMarcaLote.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\ControlMarcaLote.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Procesos\LimpiarCargaInventario.Designer.vb">
       <DependentUpon>LimpiarCargaInventario.vb</DependentUpon>
     </Compile>
@@ -332,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\VerificacionCorrelatividades.resx">
       <DependentUpon>VerificacionCorrelatividades.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\ControlMarcaLote.resx">
+      <DependentUpon>ControlMarcaLote.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Procesos\LimpiarCargaInventario.resx">
       <DependentUpon>LimpiarCargaInventario.vb</DependentUpon>
