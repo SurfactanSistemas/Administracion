@@ -103,6 +103,12 @@
     <Compile Include="Formularios\Ayudas\AyudaPT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Ayudas\IngresoClave.Designer.vb">
+      <DependentUpon>IngresoClave.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\IngresoClave.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Listados\DiferenciaInventarioPTStockAnterior.Designer.vb">
       <DependentUpon>DiferenciaInventarioPTStockAnterior.vb</DependentUpon>
     </Compile>
@@ -163,9 +169,16 @@
     <Compile Include="Formularios\Maestros\VerificacionCorrelatividades.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Procesos\LimpiarCargaInventario.Designer.vb">
+      <DependentUpon>LimpiarCargaInventario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\LimpiarCargaInventario.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Helper.vb" />
     <Compile Include="Interfaces\IAyudaPT.vb" />
     <Compile Include="Interfaces\IAyudaMP.vb" />
+    <Compile Include="Interfaces\IClaveAutorizacion.vb" />
     <Compile Include="Login.designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -287,6 +300,9 @@
     <EmbeddedResource Include="Formularios\Ayudas\AyudaPT.resx">
       <DependentUpon>AyudaPT.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ayudas\IngresoClave.resx">
+      <DependentUpon>IngresoClave.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Listados\DiferenciaInventarioPTStockAnterior.resx">
       <DependentUpon>DiferenciaInventarioPTStockAnterior.vb</DependentUpon>
     </EmbeddedResource>
@@ -316,6 +332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\VerificacionCorrelatividades.resx">
       <DependentUpon>VerificacionCorrelatividades.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\LimpiarCargaInventario.resx">
+      <DependentUpon>LimpiarCargaInventario.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

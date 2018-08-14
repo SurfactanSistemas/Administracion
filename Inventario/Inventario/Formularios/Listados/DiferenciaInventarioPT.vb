@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class DiferenciaInventarioPT
+Public Class LimpiarIngresoInventario
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
         Close()

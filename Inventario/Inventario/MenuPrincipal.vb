@@ -52,7 +52,7 @@
     End Sub
 
     Private Sub DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Click
-        _Abrir(New DiferenciaInventarioPT)
+        _Abrir(New LimpiarIngresoInventario)
     End Sub
 
     Private Sub ToolStripMenuItem3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem3.Click
@@ -65,5 +65,9 @@
 
     Private Sub DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem.Click
         _Abrir(New DiferenciaInventarioPTStockAnterior)
+    End Sub
+
+    Private Sub ToolStripMenuItem4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem4.Click
+        _Abrir(New LimpiarCargaInventario)
     End Sub
 End Class
