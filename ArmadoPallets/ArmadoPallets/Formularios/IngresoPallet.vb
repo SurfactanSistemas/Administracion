@@ -27,16 +27,20 @@ Public Class IngresoPallet
         WRow = -1
         Wcol = -1
 
-        If Val(txtProforma.Text) <> 0 And Val(txtPedido.Text) <> 0 Then
-            btnLimpiar.PerformClick()
+        btnLimpiar.PerformClick()
+
+        If Val(txtProforma.Text) <> 0 Then
+
             _CargarInformacionPallets()
-        Else
-            MsgBox("No se encuentra el número de pedido asociado.")
-            Close()
+            'Else
+            '    MsgBox("No se encuentra el número de pedido asociado.")
+            '    Close()
         End If
     End Sub
 
     Private Sub _CargarInformacionPallets()
+
+        txtPedido.Text = txtPedido.Text.Trim.PadLeft(6, "0")
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT CodigoPallet, Altura, Producto, Partida, CodigoEnvase, Bultos, KgBultos, FechaDisponible FROM ArmadoPallets WHERE Proforma = '" & txtProforma.Text & "' AND Pedido = '" & txtPedido.Text & "' AND Pallet = '" & WNroPallet & "' ORDER BY Pallet")
@@ -673,12 +677,14 @@ Public Class IngresoPallet
 
     Private Sub btnAgregarPallet_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarPallet.Click
 
-        If Val(txtProforma.Text) = 0 Or Val(txtPedido.Text) = 0 Then Exit Sub
+        If Val(txtProforma.Text) = 0 Then Exit Sub
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
         Dim trans As SqlTransaction = Nothing
         Try
+
+            txtPedido.Text = txtPedido.Text.Trim.PadLeft(6, "0")
 
             '
             ' Validamos los datos.

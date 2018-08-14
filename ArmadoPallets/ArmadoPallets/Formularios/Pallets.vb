@@ -48,8 +48,8 @@ Public Class Pallets
             txtControlKgTotalesProforma.Text = "0"
             lblAviso.Visible = False
 
-            If txtPedido.Text.Trim <> "" Then
-                cm.CommandText = "select sum(Cantidad) TotalKilos from Pedido where pedido = '" & txtPedido.Text & "'"
+            If txtProforma.Text.Trim <> "" Then
+                cm.CommandText = "select ISNULL(sum(Cantidad),0) TotalKilos from ProformaExportacion where Proforma = '" & txtProforma.Text & "'"
                 Using dr = cm.ExecuteReader
 
                     If dr.HasRows Then
