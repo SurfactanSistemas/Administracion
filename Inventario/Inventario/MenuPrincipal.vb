@@ -62,4 +62,8 @@
     Private Sub DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Click
         _Abrir(New DiferenciaInventarioMPStockAnterior)
     End Sub
+
+    Private Sub DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem.Click
+        _Abrir(New DiferenciaInventarioPTStockAnterior)
+    End Sub
 End Class

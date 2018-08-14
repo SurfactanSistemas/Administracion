@@ -103,6 +103,12 @@
     <Compile Include="Formularios\Ayudas\AyudaPT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Listados\DiferenciaInventarioPTStockAnterior.Designer.vb">
+      <DependentUpon>DiferenciaInventarioPTStockAnterior.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Listados\DiferenciaInventarioPTStockAnterior.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Listados\DiferenciaInventarioMPStockAnterior.Designer.vb">
       <DependentUpon>DiferenciaInventarioMPStockAnterior.vb</DependentUpon>
     </Compile>
@@ -211,6 +217,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reportes\Listados\DiferenciaInventarioStockAnteriorPT\ReporteDiferenciaInventarioStockAnteriorPT.vb">
+      <DependentUpon>ReporteDiferenciaInventarioStockAnteriorPT.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\Listados\MPPTLoteIgualCero\DSLote0.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -275,6 +287,9 @@
     <EmbeddedResource Include="Formularios\Ayudas\AyudaPT.resx">
       <DependentUpon>AyudaPT.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Listados\DiferenciaInventarioPTStockAnterior.resx">
+      <DependentUpon>DiferenciaInventarioPTStockAnterior.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Listados\DiferenciaInventarioMPStockAnterior.resx">
       <DependentUpon>DiferenciaInventarioMPStockAnterior.vb</DependentUpon>
     </EmbeddedResource>
@@ -325,6 +340,10 @@
     <EmbeddedResource Include="Reportes\Listados\DiferenciaInventarioStockAnteriorMP\ReporteDiferenciaInventarioStockAnteriorMP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDiferenciaInventarioStockAnteriorMP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Listados\DiferenciaInventarioStockAnteriorPT\ReporteDiferenciaInventarioStockAnteriorPT.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteDiferenciaInventarioStockAnteriorPT.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Listados\MPPTLoteIgualCero\ReporteLote0.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
