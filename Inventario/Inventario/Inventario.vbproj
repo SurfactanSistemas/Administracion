@@ -90,6 +90,7 @@
     <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
+    <Compile Include="Clases\Query.vb" />
     <Compile Include="Formularios\Ayudas\AyudaMP.Designer.vb">
       <DependentUpon>AyudaMP.vb</DependentUpon>
     </Compile>
@@ -204,6 +205,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reportes\Listados\DiferenciaInventarioStockAnteriorMP\ReporteDiferenciaInventarioStockAnteriorMP.vb">
+      <DependentUpon>ReporteDiferenciaInventarioStockAnteriorMP.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\Listados\MPPTLoteIgualCero\DSLote0.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -314,6 +321,10 @@
     <EmbeddedResource Include="Reportes\Listados\DiferenciaInventarioPT\ReporteDiferenciaInventarioPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDiferenciaInventarioPT.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Listados\DiferenciaInventarioStockAnteriorMP\ReporteDiferenciaInventarioStockAnteriorMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteDiferenciaInventarioStockAnteriorMP.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Listados\MPPTLoteIgualCero\ReporteLote0.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

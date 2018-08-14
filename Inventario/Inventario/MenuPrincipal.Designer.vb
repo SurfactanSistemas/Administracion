@@ -41,9 +41,10 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -183,7 +184,7 @@ Partial Class MenuPrincipal
         '
         'ListadosToolStripMenuItem
         '
-        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecuentoDeToolStripMenuItem, Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem, Me.ToolStripMenuItem2, Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem, Me.ToolStripMenuItem3, Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem})
+        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecuentoDeToolStripMenuItem, Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem, Me.ToolStripMenuItem2, Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem, Me.ToolStripMenuItem3, Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem, Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem})
         Me.ListadosToolStripMenuItem.Name = "ListadosToolStripMenuItem"
         Me.ListadosToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ListadosToolStripMenuItem.Text = "Listados"
@@ -191,32 +192,38 @@ Partial Class MenuPrincipal
         'RecuentoDeToolStripMenuItem
         '
         Me.RecuentoDeToolStripMenuItem.Name = "RecuentoDeToolStripMenuItem"
-        Me.RecuentoDeToolStripMenuItem.Size = New System.Drawing.Size(407, 22)
+        Me.RecuentoDeToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
         Me.RecuentoDeToolStripMenuItem.Text = "Recuento de Inventario de Materia Prima"
         '
         'RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem
         '
         Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem.Name = "RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem"
-        Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem.Size = New System.Drawing.Size(407, 22)
+        Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
         Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem.Text = "Recuento de Inventario de Producto Terminado"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(407, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(442, 22)
         Me.ToolStripMenuItem2.Text = "Diferencia de Inventario de Materia Prima"
         '
         'DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem
         '
         Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Name = "DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem"
-        Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Size = New System.Drawing.Size(407, 22)
+        Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
         Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Text = "Diferencia de Inventario de Producto Terminado"
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(407, 22)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(442, 22)
         Me.ToolStripMenuItem3.Text = "Articulo/Producto Terminado con Lote = 0"
+        '
+        'DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem
+        '
+        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Name = "DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem"
+        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
+        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Text = "Diferencia de Inventario de Materia Prima contra Stock Anterior"
         '
         'ProcesosToolStripMenuItem
         '
@@ -231,11 +238,11 @@ Partial Class MenuPrincipal
         Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
         '
-        'DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem
+        'DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem
         '
-        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Name = "DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem"
-        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Size = New System.Drawing.Size(407, 22)
-        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Text = "Diferencia de Inventario de Materia Prima contra Stock Anterior"
+        Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem.Name = "DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem"
+        Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
+        Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem.Text = "Diferencia de Inventario de Producto Terminado contra Stock Anterior"
         '
         'MenuPrincipal
         '
@@ -281,5 +288,6 @@ Partial Class MenuPrincipal
     Friend WithEvents DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

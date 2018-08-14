@@ -29,6 +29,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         Me.rbPantalla = New System.Windows.Forms.RadioButton()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -58,9 +59,9 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         Me.GroupBox1.Controls.Add(Me.rbImpresora)
         Me.GroupBox1.Controls.Add(Me.rbPantalla)
-        Me.GroupBox1.Location = New System.Drawing.Point(23, 59)
+        Me.GroupBox1.Location = New System.Drawing.Point(23, 54)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(307, 56)
+        Me.GroupBox1.Size = New System.Drawing.Size(307, 47)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Tipo Salida"
@@ -68,7 +69,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         'rbImpresora
         '
         Me.rbImpresora.AutoSize = True
-        Me.rbImpresora.Location = New System.Drawing.Point(174, 23)
+        Me.rbImpresora.Location = New System.Drawing.Point(174, 18)
         Me.rbImpresora.Name = "rbImpresora"
         Me.rbImpresora.Size = New System.Drawing.Size(71, 17)
         Me.rbImpresora.TabIndex = 0
@@ -79,7 +80,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         Me.rbPantalla.AutoSize = True
         Me.rbPantalla.Checked = True
-        Me.rbPantalla.Location = New System.Drawing.Point(61, 23)
+        Me.rbPantalla.Location = New System.Drawing.Point(61, 18)
         Me.rbPantalla.Name = "rbPantalla"
         Me.rbPantalla.Size = New System.Drawing.Size(63, 17)
         Me.rbPantalla.TabIndex = 0
@@ -89,7 +90,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(82, 121)
+        Me.btnAceptar.Location = New System.Drawing.Point(82, 124)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(82, 36)
         Me.btnAceptar.TabIndex = 4
@@ -98,18 +99,26 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(189, 121)
+        Me.btnCerrar.Location = New System.Drawing.Point(189, 124)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(82, 36)
         Me.btnCerrar.TabIndex = 4
         Me.btnCerrar.Text = "Cerrar"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(24, 106)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(304, 13)
+        Me.ProgressBar1.TabIndex = 5
+        '
         'DiferenciaInventarioMPStockAnterior
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(353, 164)
+        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.GroupBox1)
@@ -130,4 +139,5 @@ Partial Class DiferenciaInventarioMPStockAnterior
     Friend WithEvents rbPantalla As System.Windows.Forms.RadioButton
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
 End Class

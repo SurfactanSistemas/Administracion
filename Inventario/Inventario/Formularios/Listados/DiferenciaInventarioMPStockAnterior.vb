@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports Inventario.Clases
 
 Public Class DiferenciaInventarioMPStockAnterior
 
@@ -8,21 +9,147 @@ Public Class DiferenciaInventarioMPStockAnterior
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
 
+        Dim WEntradas, WSalidas As Double
+        Dim WTabla As DataTable = (New DSDiferenciaInventario()).Tables("Detalles").Clone
+
+        Enabled = False
+
+        WEntradas = WSalidas = 0.0
+
+        Dim WArticulos As DataTable = Query.GetAll("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion  FROM Articulo ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
+
+        With ProgressBar1
+            .Value = 0
+            .Maximum = (WArticulos.Rows.Count * 2) + 5
+            .Step = 1
+        End With
+
+        For Each WArticulo As datarow In WArticulos.Rows
+            WEntradas = 0.0
+            WSalidas = 0.0
+
+            '
+            ' Calculamos las entradas de los laudos.
+            '
+            Dim WLaudos As DataRow = Query.GetSingle("SELECT ISNULL(SUM(LiberadaAnt), 0) As Entrada FROM Laudo WHERE MarcaAnt <> 'X' AND Articulo = '" & WArticulo.Item("Codigo") & "'", Conexion.EmpresaDeTrabajo)
+
+            If Not IsNothing(WLaudos) Then
+                WEntradas += WLaudos.Item("Entrada")
+            End If
+
+            '
+            ' Calculamos las Salidas por Hojas de Producción.
+            '
+            Dim WHojas As DataRow = Query.GetSingle("SELECT ISNULL(SUM(Cantidad), 0) As Salida FROM Hoja WHERE Tipo = 'M' AND Articulo = '" & WArticulo.Item("Codigo") & "' AND (MarcaAnt <> 'X' OR (RIGHT(Fecha, 4) + SUBSTRING(fecha, 4,2) + LEFT(fecha, 2))*1 >= 20001218)", Conexion.EmpresaDeTrabajo)
+
+            If Not IsNothing(WHojas) Then
+                WSalidas += WHojas.Item("Salida")
+            End If
+
+            '
+            ' Calculamos Salidas y Entradas por Movimientos Varios.
+            '
+            Dim WMovVarios As DataTable = Query.GetAll("SELECT Articulo, ISNULL(Movi, '') Movi, ISNULL(SUM(Cantidad), 0) Cantidad FROM MovVar WHERE Marca <> 'X' AND Tipo = 'M' AND Articulo = '" & WArticulo.Item("Codigo") & "' GROUP BY Articulo, Movi ", Conexion.EmpresaDeTrabajo)
+
+            For Each WMovVario As DataRow In WMovVarios.Rows
+
+                With WMovVario
+
+                    If .Item("Movi").ToString.ToUpper = "E" Then
+                        WEntradas += .Item("Cantidad")
+                    Else
+                        WSalidas += .Item("Cantidad")
+                    End If
+
+                End With
+
+            Next
+
+            '
+            ' Calculamos las Entradas y Salidas por Guías.
+            '
+            Dim WGuias As DataTable = Query.GetAll("SELECT Articulo, ISNULL(SUM(Cantidad), 0) As Cantidad, Movi FROM Guia WHERE Marca <> 'X' AND Tipo = 'M' AND Articulo = '" & WArticulo.Item("Codigo") & "' GROUP BY Articulo, Movi", Conexion.EmpresaDeTrabajo)
+
+            For Each WGuia As DataRow In WGuias.Rows
+
+                With WGuia
+                    If .Item("Movi").ToString.ToUpper = "E" Then
+                        WEntradas += .Item("Cantidad")
+                    Else
+                        WSalidas += .Item("Cantidad")
+                    End If
+                End With
+
+            Next
+
+            '
+            ' Calculamos Entradas y Salidas por Movimientos de Laboratorio.
+            '
+            Dim WMovsLaboratorio As DataTable = Query.GetAll("SELECT Articulo, ISNULL(SUM(Cantidad), 0) Cantidad, Movi FROM MovLab WHERE Marca <> 'X' AND Tipo = 'M' AND Articulo = '" & WArticulo.Item("Codigo") & "' GROUP BY Articulo, Movi", Conexion.EmpresaDeTrabajo)
+
+            For Each WMovLab As DataRow In WMovsLaboratorio.Rows
+                With WMovLab
+                    If .Item("Movi").ToString.ToUpper = "E" Then
+                        WEntradas += .Item("Cantidad")
+                    Else
+                        WSalidas += .Item("Cantidad")
+                    End If
+                End With
+            Next
+
+            '
+            ' Grabamos la fila para pasar al Reporte.
+            '
+            Dim r As DataRow = WTabla.NewRow
+
+            With r
+                .Item("Articulo") = WArticulo.Item("Codigo")
+                .Item("Terminado") = ""
+                .Item("Descripcion") = WArticulo.Item("Descripcion")
+                .Item("Stock") = WEntradas - WSalidas
+                .Item("Inventario") = 0
+                .Item("Empresa") = IIf(Helper._EsPellital, "PELLITAL S.A.", "SURFACTAN S.A")
+            End With
+
+            WTabla.Rows.Add(r)
+
+            ProgressBar1.Increment(1)
+
+        Next
+
+        For Each row As DataRow In WTabla.Rows
+
+            Dim WInve As DataRow = Query.GetSingle("SELECT ISNULL(SUM(Cantidad), 0) Cantidad FROM Inventario WHERE Articulo = '" & row.Item("Articulo") & "' GROUP BY Articulo", Conexion.EmpresaDeTrabajo)
+
+            If Not IsNothing(WInve) Then
+
+                row.Item("Inventario") = Val(Helper.formatonumerico(WInve.Item("Cantidad")))
+
+            End If
+
+            ProgressBar1.Increment(1)
+
+        Next
+
         'Dim ds As New DSDiferenciaInventario
         'Dim WDatos As sqldataadapter = _TraerDatos()
         'WDatos.Fill(ds, "Detalles")
 
-        'Dim rpt As New ReporteLote0
-        'rpt.SetDataSource(ds)
+        Enabled = True
 
-        'Dim frm As New VistaPrevia
-        'frm.Reporte = rpt
+        Dim rpt As New ReporteDiferenciaInventarioStockAnteriorMP
+        rpt.SetDataSource(WTabla)
 
-        'If rbImpresora.Checked Then
-        '    frm.Imprimir()
-        'Else
-        '    frm.Show(Me)
-        'End If
+        Dim frm As New VistaPrevia
+        frm.Reporte = rpt
+
+        If rbImpresora.Checked Then
+            frm.Imprimir()
+        Else
+            frm.Show(Me)
+        End If
+
+        ProgressBar1.Value = 0
 
     End Sub
 
@@ -54,4 +181,8 @@ Public Class DiferenciaInventarioMPStockAnterior
         End Try
 
     End Function
+
+    Private Sub DiferenciaInventarioMPStockAnterior_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ProgressBar1.Value = 0
+    End Sub
 End Class
