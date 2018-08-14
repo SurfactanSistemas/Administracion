@@ -1,5 +1,4 @@
-﻿Imports System.Data.SqlClient
-Imports Inventario.Clases
+﻿Imports Inventario.Clases
 
 Public Class ControlMarcaLote
 
@@ -23,28 +22,43 @@ Public Class ControlMarcaLote
                 With WProducto
 
                     If .Item("Tipo") = "M" Then
-                        '
-                        ' Controlo si tiene Marca de Controla Lote. En caso de que no, verifico que exista el Lote en algún Laudo o Guía.
-                        '
 
+                        '
+                        ' Controlo que exista la Materia Prima.
+                        '
                         Dim WArticulo As DataRow = Query.GetSingle("SELECT ISNULL(Controla, 0) Controla FROM Articulo WHERE Codigo = '" & .Item("Articulo") & "'")
 
                         If Not IsNothing(WArticulo) Then
 
+                            '
+                            ' Controlo que tenga Marca de Controla Lote.
+                            '
                             If Val(WArticulo.Item("Controla")) = 1 Then
                                 WSinProblemas = False
                                 MsgBox("La Materia Prima " & .Item("Articulo") & " no posee Marca de Control Lote.")
                             Else
 
+                                '
+                                ' Controlo si el Lote se trata de algún Laudo.
+                                '
                                 Dim WLaudo As DataRow = Query.GetSingle("SELECT Laudo FROM Laudo WHERE Laudo = '" & .Item("Lote") & "' AND Articulo = '" & .Item("Articulo") & "'", Conexion.EmpresaDeTrabajo)
 
                                 If IsNothing(WLaudo) Then
 
+                                    '
+                                    ' Por último, controlo si se trata de una Materia Prima que se cargó por Guía de Traslado Interno.
+                                    '
                                     Dim WGuia As DataRow = Query.GetSingle("SELECT Lote FROM Guia WHERE Lote = '" & .Item("Lote") & "' AND Articulo = '" & .Item("Articulo") & "'", Conexion.EmpresaDeTrabajo)
 
                                     If IsNothing(WGuia) Then
+
+                                        '
+                                        ' Emito un mensaje en caso de que no pueda corroborar que se trata de una Materia Prima cargada por Laudo o Guia.
+                                        '
                                         WSinProblemas = False
+
                                         MsgBox("No existe el Lote " & .Item("Lote") & " de la Materia Prima " & .Item("Articulo"))
+
                                     End If
 
                                 End If
@@ -57,28 +71,43 @@ Public Class ControlMarcaLote
                         End If
 
                     Else
-                        '
-                        ' Controlo si el Producto Terminado tiene Marca de no controla Lote. En caso de que no, compruebo la existencia del Lote (Partida) en alguna Hoja de Producción o Guia.
-                        '
 
+                        '
+                        ' Controlo si existe el Producto Terminado.
+                        '
                         Dim WProductoTerminado As DataRow = Query.GetSingle("SELECT ISNULL(Controla, 0) Controla FROM Terminado WHERE Codigo = '" & .Item("Terminado") & "'")
 
                         If Not IsNothing(WProductoTerminado) Then
 
+                            '
+                            ' Controlo si tiene Marca de Controla Lote.
+                            '
                             If Val(WProductoTerminado.Item("Controla")) = 1 Then
                                 WSinProblemas = False
                                 MsgBox("El Producto Terminado " & .Item("Terminado") & " no tiene Marca de Controla Lote.")
                             Else
 
+                                '
+                                ' Controlo Existencia de Lote como Hoja de Producción.
+                                '
                                 Dim WHoja As DataRow = Query.GetSingle("SELECT Hoja FROM Hoja WHERE Hoja = '" & .Item("Lote") & "' AND Producto = '" & .Item("Terminado") & "' and Renglon = 1", Conexion.EmpresaDeTrabajo)
 
                                 If IsNothing(WHoja) Then
 
+                                    '
+                                    ' Por ultimo, controlo si se trata de algun lote Cargado por Guia de Traslado Interno.
+                                    '
                                     Dim WGuia As DataRow = Query.GetSingle("SELECT Lote FROM Guia WHERE Lote = '" & .Item("Lote") & "' AND Terminado = '" & .Item("Terminado") & "'", Conexion.EmpresaDeTrabajo)
 
                                     If IsNothing(WGuia) Then
+
+                                        '
+                                        ' Emito un mensaje en caso de no poder corroborar que exista el Lote ni en ninguna Hoja de Producción o Guia de Traslado Interno.
+                                        '
                                         WSinProblemas = False
+
                                         MsgBox("No existe el Lote " & .Item("Lote") & " del Producto Terminado " & .Item("Terminado"))
+
                                     End If
 
                                 End If
@@ -100,6 +129,9 @@ Public Class ControlMarcaLote
 
             ProgressBar1.Value = 0
 
+            '
+            ' Emito un mensaje por pantalla sobre si hubo o no algún problema durante el Proceso.
+            '
             If WSinProblemas Then
                 MsgBox("Finalizó la revisión sin encontrar ningún problema.")
             Else
