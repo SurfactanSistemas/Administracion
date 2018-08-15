@@ -74,4 +74,8 @@
     Private Sub ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Click
         _Abrir(New ControlMarcaLote)
     End Sub
+
+    Private Sub ToolStripMenuItem5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem5.Click
+        _Abrir(New CierreStock)
+    End Sub
 End Class

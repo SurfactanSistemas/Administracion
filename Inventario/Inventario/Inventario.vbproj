@@ -175,6 +175,12 @@
     <Compile Include="Formularios\Procesos\ControlMarcaLote.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Procesos\CierreStock.Designer.vb">
+      <DependentUpon>CierreStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\CierreStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Procesos\LimpiarCargaInventario.Designer.vb">
       <DependentUpon>LimpiarCargaInventario.vb</DependentUpon>
     </Compile>
@@ -341,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Procesos\ControlMarcaLote.resx">
       <DependentUpon>ControlMarcaLote.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\CierreStock.resx">
+      <DependentUpon>CierreStock.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Procesos\LimpiarCargaInventario.resx">
       <DependentUpon>LimpiarCargaInventario.vb</DependentUpon>

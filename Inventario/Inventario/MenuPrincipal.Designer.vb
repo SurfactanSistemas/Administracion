@@ -45,8 +45,9 @@ Partial Class MenuPrincipal
         Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -235,7 +236,7 @@ Partial Class MenuPrincipal
         '
         'ProcesosToolStripMenuItem
         '
-        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem4, Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem, Me.CerrarSistemaToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem4, Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem, Me.ToolStripMenuItem5, Me.CerrarSistemaToolStripMenuItem})
         Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
         Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.ProcesosToolStripMenuItem.Text = "Procesos"
@@ -246,17 +247,23 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem4.Size = New System.Drawing.Size(301, 22)
         Me.ToolStripMenuItem4.Text = "Limpiar Carga de Inventario"
         '
+        'ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem
+        '
+        Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Name = "ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem"
+        Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
+        Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Text = "Control de Marca de Lote / Control de Lote"
+        '
         'CerrarSistemaToolStripMenuItem
         '
         Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
         Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
         '
-        'ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem
+        'ToolStripMenuItem5
         '
-        Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Name = "ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem"
-        Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
-        Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Text = "Control de Marca de Lote / Control de Lote"
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(301, 22)
+        Me.ToolStripMenuItem5.Text = "Cierre de Stock"
         '
         'MenuPrincipal
         '
@@ -305,5 +312,6 @@ Partial Class MenuPrincipal
     Friend WithEvents DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
 
 End Class
