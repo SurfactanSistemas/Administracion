@@ -12,11 +12,9 @@ Public Class DiferenciaInventarioMPStockAnterior
         Dim WEntradas, WSalidas As Double
         Dim WTabla As DataTable = (New DSDiferenciaInventario()).Tables("Detalles").Clone
 
-        Enabled = False
-
         WEntradas = WSalidas = 0.0
 
-        Dim WArticulos As DataTable = Query.GetAll("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion  FROM Articulo ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
+        Dim WArticulos As DataTable = Query.GetAll("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion  FROM Articulo WHERE Codigo BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "' ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
 
         With ProgressBar1
             .Value = 0
@@ -134,9 +132,7 @@ Public Class DiferenciaInventarioMPStockAnterior
         'Dim ds As New DSDiferenciaInventario
         'Dim WDatos As sqldataadapter = _TraerDatos()
         'WDatos.Fill(ds, "Detalles")
-
-        Enabled = True
-
+        
         Dim rpt As New ReporteDiferenciaInventarioStockAnteriorMP
         rpt.SetDataSource(WTabla)
 
@@ -184,5 +180,41 @@ Public Class DiferenciaInventarioMPStockAnterior
 
     Private Sub DiferenciaInventarioMPStockAnterior_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ProgressBar1.Value = 0
+        txtDesde.Text = "AA-000-000"
+        txtHasta.Text = "ZZ-999-999"
+    End Sub
+
+    Private Sub DiferenciaInventarioMPStockAnterior_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesde.Focus()
+    End Sub
+
+    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesde.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            If txtDesde.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
+
+            txtDesde.Text = txtDesde.Text.ToUpper
+
+            txtHasta.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesde.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtHasta.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            If txtHasta.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
+
+            txtHasta.Text = txtHasta.Text.ToUpper
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHasta.Text = ""
+        End If
+
     End Sub
 End Class

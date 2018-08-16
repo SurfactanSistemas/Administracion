@@ -245,6 +245,12 @@ Public Class IngresoTalonInventario
                                 Throw New Exception("Debe especificarse el Artículo en el talón " & WTalon)
                             End If
 
+                            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+                                If Helper._MateriaPrimaValidaPtaI(WArticulo) Then
+                                    Throw New Exception("No se permite realizar inventario de esta Materia Prima en Planta I.")
+                                End If
+                            End If
+
                             If {"DY", "DW", "DS"}.Contains(WArticulo.Substring(0, 2).ToUpper) AndAlso Conexion.EmpresaDeTrabajo.ToUpper <> "PELLITAL_III" Then
 
                                 WPartida = WLote
@@ -282,6 +288,12 @@ Public Class IngresoTalonInventario
 
                             If WTerminado.Replace("-", "").Trim = "" Or Not _ExisteTerminado(WTerminado) Then
                                 Throw New Exception("Debe especificarse el Producto Terminado en el talón " & WTalon)
+                            End If
+
+                            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+                                If Helper._ProdTerminadoValidoPtaI(WTerminado) Then
+                                    Throw New Exception("No se permite realizar inventario de este Producto Terminado en Planta I.")
+                                End If
                             End If
 
                         Case Else
@@ -744,6 +756,13 @@ Public Class IngresoTalonInventario
 
             If Not _ExisteArticulo(txtArticuloAux.Text) Then Exit Sub
 
+            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+                If Helper._MateriaPrimaValidaPtaI(txtArticuloAux.Text) Then
+                    MsgBox("No se permite realizar inventario de esta Materia Prima en Planta I.")
+                    Exit Sub
+                End If
+            End If
+
             With dgvTalones
                 .Rows(WRow).Cells("Articulo").Value = txtArticuloAux.Text.ToUpper
                 .Rows(WRow).Cells("Descripcion").Value = _TraerDescripcionArticulo(txtArticuloAux.Text)
@@ -870,6 +889,13 @@ Public Class IngresoTalonInventario
             'If Helper._ValidarFecha(Trim(txtTerminadoAux.Text)) And WRow >= 0 And Wcol >= 0 Then
 
             If Not _ExisteTerminado(txtTerminadoAux.Text) Then Exit Sub
+
+            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+                If Helper._ProdTerminadoValidoPtaI(txtTerminadoAux.Text) Then
+                    MsgBox("No se permite realizar inventario de este Producto Terminado en Planta I.")
+                    Exit Sub
+                End If
+            End If
 
             With dgvTalones
                 .Rows(WRow).Cells("Terminado").Value = txtTerminadoAux.Text.ToUpper

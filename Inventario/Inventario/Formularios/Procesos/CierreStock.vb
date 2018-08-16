@@ -44,7 +44,7 @@ Public Class CierreStock
                 .Refresh()
             End With
 
-            WHojas = Query.GetAll("SELECT Clave, ISNULL(Saldo, 0) Saldo, ISNULL(Real, 0) Real, ISNULL(Marca, '') Marca, ISNULL(RealAnt, 0) RealAnt FROM Hoja ORDER BY Hoja", Conexion.EmpresaDeTrabajo)
+            WHojas = Query.GetAll("SELECT Clave, Producto, ISNULL(Saldo, 0) Saldo, ISNULL(Real, 0) Real, ISNULL(Marca, '') Marca, ISNULL(RealAnt, 0) RealAnt FROM Hoja ORDER BY Hoja", Conexion.EmpresaDeTrabajo)
 
             ProgressBar1.Increment(1)
 
@@ -71,7 +71,7 @@ Public Class CierreStock
                 .Refresh()
             End With
 
-            WMovVarios = Query.GetAll("SELECT Clave, ISNULL(Marca, '') Marca, ISNULL(MarcaAnt, '') MarcaAnt FROM MovVar ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
+            WMovVarios = Query.GetAll("SELECT Clave, Articulo, Terminado, ISNULL(Tipo, '') Tipo, ISNULL(Marca, '') Marca, ISNULL(MarcaAnt, '') MarcaAnt FROM MovVar ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
 
             ProgressBar1.Increment(1)
 
@@ -80,7 +80,7 @@ Public Class CierreStock
                 .Refresh()
             End With
 
-            WMovLaboratorio = Query.GetAll("SELECT Clave, ISNULL(Marca, '') Marca, ISNULL(MarcaAnt, '') MarcaAnt FROM MovLab ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
+            WMovLaboratorio = Query.GetAll("SELECT Clave, Articulo, Terminado, ISNULL(Tipo, '') Tipo, ISNULL(Marca, '') Marca, ISNULL(MarcaAnt, '') MarcaAnt FROM MovLab ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
 
             ProgressBar1.Increment(1)
 
@@ -89,7 +89,7 @@ Public Class CierreStock
                 .Refresh()
             End With
 
-            WEstadisticas = Query.GetAll("SELECT Clave, ISNULL(Marca, '') Marca, ISNULL(MarcaAnt, '') MarcaAnt FROM Estadistica ORDER BY Clave", Conexion.EmpresaDeTrabajo)
+            WEstadisticas = Query.GetAll("SELECT Clave, Ter = ISNULL(Articulo, ''), Art = (LEFT(ISNULL(Articulo, ''), 3) + RIGHT(ISNULL(Articulo, ''), 7)), ISNULL(Marca, '') Marca, ISNULL(MarcaAnt, '') MarcaAnt FROM Estadistica ORDER BY Clave", Conexion.EmpresaDeTrabajo)
 
             ProgressBar1.Increment(1)
 
@@ -98,7 +98,7 @@ Public Class CierreStock
                 .Refresh()
             End With
 
-            WDevoluciones = Query.GetAll("SELECT Clave, ISNULL(Marca, '') Marca, ISNULL(MarcaAnt, '') MarcaAnt FROM EntDev ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
+            WDevoluciones = Query.GetAll("SELECT Clave, Terminado, Articulo = (LEFT(Terminado, 3) + RIGHT(Terminado, 7)), ISNULL(Marca, '') Marca, ISNULL(MarcaAnt, '') MarcaAnt FROM EntDev ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
 
             With lblEstado
                 .Text = ""
@@ -215,6 +215,32 @@ Public Class CierreStock
 
                     If Trim(.Item("MarcaAnt")) <> Trim(.Item("Marca")) Then
 
+
+                        ' Si comienza por alguno de estos tres, se lo concidera Producto Terminado, sino como Materia Prima.
+                        Dim WTerm = .Item("Terminado").ToString.Substring(0, 2).ToUpper
+
+                        If {"NK", "PT", "YQ", "YF"}.Contains(WTerm) Then
+
+                            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+
+                                If Helper._ProdTerminadoValidoPtaI(.Item("Terminado")) Then
+                                    Continue For
+                                End If
+
+                            End If
+
+                        Else
+
+                            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+
+                                If Helper._MateriaPrimaValidaPtaI(.Item("Articulo")) Then
+                                    Continue For
+                                End If
+
+                            End If
+
+                        End If
+
                         Dim WClave = .Item("Clave")
                         Dim WMarcaAnt = .Item("Marca")
 
@@ -242,6 +268,30 @@ Public Class CierreStock
                 With row
 
                     If Trim(.Item("MarcaAnt")) <> Trim(.Item("Marca")) Then
+
+                        ' Si comienza por alguno de estos tres, se lo concidera Producto Terminado, sino como Materia Prima.
+                        Dim WTerm  = .Item("Ter").ToString.Substring(0, 2).ToUpper
+                        If {"PT", "YQ", "YF"}.Contains(WTerm) Then
+
+                            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+
+                                If Helper._ProdTerminadoValidoPtaI(.Item("Terminado")) Then
+                                    Continue For
+                                End If
+
+                            End If
+
+                        Else
+
+                            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+
+                                If Helper._MateriaPrimaValidaPtaI(.Item("Articulo")) Then
+                                    Continue For
+                                End If
+
+                            End If
+
+                        End If
 
                         Dim WClave = .Item("Clave")
                         Dim WMarcaAnt = .Item("Marca")
@@ -271,6 +321,20 @@ Public Class CierreStock
 
                     If Trim(.Item("MarcaAnt")) <> Trim(.Item("Marca")) Then
 
+                        If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+
+                            If .Item("Tipo").ToString.ToUpper = "M" Then
+                                If Helper._MateriaPrimaValidaPtaI(.Item("Articulo")) Then
+                                    Continue For
+                                End If
+                            Else
+                                If Helper._ProdTerminadoValidoPtaI(.Item("Terminado")) Then
+                                    Continue For
+                                End If
+                            End If
+
+                        End If
+
                         Dim WClave = .Item("Clave")
                         Dim WMarcaAnt = .Item("Marca")
 
@@ -299,6 +363,20 @@ Public Class CierreStock
 
                     If Trim(.Item("MarcaAnt")) <> Trim(.Item("Marca")) Then
 
+                        If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+
+                            If .Item("Tipo").ToString.ToUpper = "M" Then
+                                If Helper._MateriaPrimaValidaPtaI(.Item("Articulo")) Then
+                                    Continue For
+                                End If
+                            Else
+                                If Helper._ProdTerminadoValidoPtaI(.Item("Terminado")) Then
+                                    Continue For
+                                End If
+                            End If
+
+                        End If
+
                         Dim WClave = .Item("Clave")
                         Dim WMarcaAnt = .Item("Marca")
 
@@ -326,6 +404,20 @@ Public Class CierreStock
                 With row
 
                     If .Item("CantidadAnt") = 0 And .Item("Cantidad") <> 0 Then
+
+                        If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+
+                            If .Item("Tipo").ToString.ToUpper = "M" Then
+                                If Helper._MateriaPrimaValidaPtaI(.Item("Articulo")) Then
+                                    Continue For
+                                End If
+                            Else
+                                If Helper._ProdTerminadoValidoPtaI(.Item("Terminado")) Then
+                                    Continue For
+                                End If
+                            End If
+                            
+                        End If
 
                         Dim WClave = .Item("Clave")
                         Dim WMarcaAnt = .Item("Marca")
@@ -358,6 +450,12 @@ Public Class CierreStock
 
                     If .Item("LiberadaAnt") = 0 And .Item("DevueltaAnt") = 0 Then
                         If .Item("Liberada") <> 0 Or .Item("Devuelta") <> 0 Then
+
+                            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+                                If Helper._MateriaPrimaValidaPtaI(.Item("Articulo")) Then
+                                    Continue For
+                                End If
+                            End If
 
                             Dim WClave = .Item("Clave")
                             Dim WMarcaAnt = .Item("Marca")
@@ -392,6 +490,12 @@ Public Class CierreStock
                 With row
 
                     If .Item("RealAnt") = 0 And .Item("Real") <> 0 Then
+
+                        If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+                            If Helper._ProdTerminadoValidoPtaI(.Item("Producto")) Then
+                                Continue For
+                            End If
+                        End If
 
                         Dim WClave = .Item("Clave")
                         Dim WMarcaAnt = .Item("Marca")

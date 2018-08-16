@@ -48,6 +48,7 @@ Partial Class MenuPrincipal
         Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ActualizaciónDeStockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -236,7 +237,7 @@ Partial Class MenuPrincipal
         '
         'ProcesosToolStripMenuItem
         '
-        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem4, Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem, Me.ToolStripMenuItem5, Me.CerrarSistemaToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem4, Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem, Me.ToolStripMenuItem5, Me.ActualizaciónDeStockToolStripMenuItem, Me.CerrarSistemaToolStripMenuItem})
         Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
         Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.ProcesosToolStripMenuItem.Text = "Procesos"
@@ -264,6 +265,12 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
         Me.ToolStripMenuItem5.Size = New System.Drawing.Size(301, 22)
         Me.ToolStripMenuItem5.Text = "Cierre de Stock"
+        '
+        'ActualizaciónDeStockToolStripMenuItem
+        '
+        Me.ActualizaciónDeStockToolStripMenuItem.Name = "ActualizaciónDeStockToolStripMenuItem"
+        Me.ActualizaciónDeStockToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
+        Me.ActualizaciónDeStockToolStripMenuItem.Text = "Actualización de Stock"
         '
         'MenuPrincipal
         '
@@ -313,5 +320,6 @@ Partial Class MenuPrincipal
     Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ActualizaciónDeStockToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

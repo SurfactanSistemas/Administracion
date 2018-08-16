@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class LimpiarIngresoInventario
+Public Class DiferenciaInventarioPT
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
         Close()
@@ -17,11 +17,12 @@ Public Class LimpiarIngresoInventario
 
         Dim frm As New VistaPrevia
         frm.Reporte = rpt
+        frm.Formula = "{Detalles.Terminado} IN '" & txtDesde.Text & "' TO '" & txtHasta.Text & "'"
 
         If rbImpresora.Checked Then
             frm.Imprimir()
         Else
-            frm.Show(Me)
+            frm.Mostrar()
         End If
 
     End Sub
@@ -54,4 +55,44 @@ Public Class LimpiarIngresoInventario
         End Try
 
     End Function
+
+    Private Sub LimpiarIngresoInventario_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtDesde.Text = "AA-00000-000"
+        txtHasta.Text = "ZZ-99999-999"
+    End Sub
+
+    Private Sub DiferenciaInventarioPT_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesde.Focus()
+    End Sub
+
+    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesde.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            If txtDesde.Text.Replace(" ", "").Length < 12 Then : Exit Sub : End If
+
+            txtDesde.Text = txtDesde.Text.ToUpper
+
+            txtHasta.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesde.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            If Trim(txtHasta.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            If txtHasta.Text.Replace(" ", "").Length < 12 Then : Exit Sub : End If
+
+            txtHasta.Text = txtHasta.Text.ToUpper
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHasta.Text = ""
+        End If
+
+    End Sub
 End Class

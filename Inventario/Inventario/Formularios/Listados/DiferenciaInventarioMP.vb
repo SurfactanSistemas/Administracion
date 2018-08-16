@@ -18,10 +18,13 @@ Public Class DiferenciaInventarioMP
         Dim frm As New VistaPrevia
         frm.Reporte = rpt
 
+        frm.Formula = "{Detalles.Articulo} IN '" & txtDesde.Text & "' TO '" & txtHasta.Text & "'"
+        frm.Refresh()
+
         If rbImpresora.Checked Then
             frm.Imprimir()
         Else
-            frm.Show(Me)
+            frm.Mostrar()
         End If
 
     End Sub
@@ -54,4 +57,43 @@ Public Class DiferenciaInventarioMP
         End Try
 
     End Function
+
+    Private Sub DiferenciaInventarioMP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtDesde.Text = "AA-000-000"
+        txtHasta.Text = "ZZ-999-999"
+    End Sub
+
+    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDesde.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+            If txtDesde.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
+
+            txtDesde.Text = txtDesde.Text.ToUpper
+
+            txtHasta.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesde.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
+        With txtHasta
+            If e.KeyData = Keys.Enter Then
+                If Trim(.Text.Replace("-", "")) = "" Then : Exit Sub : End If
+                If .Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
+
+                .Text = .Text.ToUpper
+
+            ElseIf e.KeyData = Keys.Escape Then
+                .Text = ""
+            End If
+        End With
+    End Sub
+
+    Private Sub DiferenciaInventarioMP_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtDesde.Focus()
+    End Sub
 End Class

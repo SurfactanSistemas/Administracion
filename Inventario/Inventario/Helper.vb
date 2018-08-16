@@ -13,6 +13,43 @@ Module Helper
         Return Conexion.EsPellital
     End Function
 
+    Public Function _MateriaPrimaValidaPtaI(ByVal WArticulo As Object) As Boolean
+
+        If Not _EsPellital() Then
+            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+
+                WArticulo = WArticulo.ToString.Trim.ToUpper
+
+                If WArticulo < "DA-005-100" And WArticulo > "DQ-410-100" Then Return False
+
+                If WArticulo < "CD-020-100" And WArticulo > "CM-000-100" Then Return False
+
+                If WArticulo = "DS-049-100" Then Return True
+
+            End If
+        End If
+
+        Return True
+
+    End Function
+
+
+    Public Function _ProdTerminadoValidoPtaI(ByVal WTerminado As Object) As Boolean
+
+        If Not _EsPellital() Then
+            If Not IsNothing(Conexion.EmpresaDeTrabajo) AndAlso Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+
+                WTerminado = WTerminado.ToString.Trim.ToUpper
+
+                If WTerminado < "RE-05106-100" And WTerminado > "RE-25301-999" Then Return False
+
+            End If
+        End If
+
+        Return True
+
+    End Function
+
     Public Sub _PurgarSaldosCtaCtePrvs()
         Dim ZSql = "Update CtaCtePrv set Saldo = 0 where Saldo > -0.01 and Saldo < 0.01 and Saldo <> 0"""
 
