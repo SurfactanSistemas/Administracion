@@ -237,7 +237,7 @@ Public Class ListadoImputacionesContable
                             End Select
 
                         Else
-                            
+
                             Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(CampoPagos.proveedor)
 
                             If Not IsNothing(CampoProveedor) Then
@@ -561,7 +561,7 @@ Public Class ListadoImputacionesContable
         ZRetIb(8, 2) = "195"
 
         Dim ZExcluir(1000) As String
-        Dim Zex As Integer = 0
+        Dim Zex = 0
 
         txtCorte = ""
         txtRenglonII = 0
@@ -898,7 +898,7 @@ Public Class ListadoImputacionesContable
                                 txtTitulo = "Recibos"
                                 txtEmpresa = 1
                                 txtTituloList = "Surfactan S.A."
-                                
+
                                 If Proceso._EsPellital() Then
                                     txtTituloList = "Pellital S.A."
                                 End If
@@ -1051,8 +1051,8 @@ Public Class ListadoImputacionesContable
 
     Private Function _BuscarRetencionesIBRecibos(ByVal WDesde As String, ByVal WHasta As String) As DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Recibo, Fecha, RetIb1, RetIb2, RetIb3, RetIb4, RetIb5, RetIb6, RetIb7, RetIb8 FROM Recibos WHERE (Renglon = '01' OR Renglon = '1') AND FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Recibo, Fecha, RetIb1, RetIb2, RetIb3, RetIb4, RetIb5, RetIb6, RetIb7, RetIb8 FROM Recibos WHERE (Renglon = '01' OR Renglon = '1') AND FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "'")
         Dim dr As SqlDataReader
         Dim tabla As New DataTable
 
@@ -1065,7 +1065,7 @@ Public Class ListadoImputacionesContable
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
-                
+
                 tabla.Load(dr)
 
                 Return tabla

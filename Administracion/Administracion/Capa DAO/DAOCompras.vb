@@ -40,7 +40,7 @@ Public Class DAOCompras
             datosCuotas(0) = Tuple.Create(datosCuotas(0).Item1, datosCuotas(0).Item2, datosCuotas(0).Item3, Val(Proceso.formatonumerico(datosCuotas(0).Item4)), 0.0)
             crarCuotasPara(compra, datosCuotas)
         End If
-        Dim aumentoInterno As Integer = 0
+        Dim aumentoInterno = 0
         Dim WProveedor As String = compra.codigoProveedor
         Dim WNroInternoAsociado, WNombreProveedor, WNumeroOriginal, WImporteTotal, WFechaOriginal, WFechaOriginalOrd As String
         Dim XNroInternoAsociado, XNombreProveedor, XNumeroOriginal, XImporteTotal, XFechaOriginal, XFechaOriginalOrd As String
@@ -95,7 +95,7 @@ Public Class DAOCompras
         mes = CustomConvert.toIntOrZero(compra.pagoPyme(1))
         anio = CustomConvert.toIntOrZero(compra.pagoPyme(2))
 
-        For x As Integer = 0 To cantidadCuotas - 1
+        For x = 0 To cantidadCuotas - 1
             datosCuotas.Add(Tuple.Create(truncarUltimosDosCon(compra.numero, x + 1), fechaSegun(mes + x, anio),
                                          fechaSegun(mes + x, anio), (compra.total / cantidadCuotas),
                                          Val(Proceso.formatonumerico(compra.total / cantidadCuotas))))

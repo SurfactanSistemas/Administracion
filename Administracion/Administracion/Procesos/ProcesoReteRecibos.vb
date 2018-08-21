@@ -289,8 +289,8 @@ Public Class ProcesoReteRecibos
 
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT r.Fecha, r.ComproIb, r.RetOtra, r.Recibo, cli.Cuit, " & _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT r.Fecha, r.ComproIb, r.RetOtra, r.Recibo, cli.Cuit, " & _
                                               " RetIb1,RetIb2,RetIb3,RetIb4,RetIb5,RetIb6,RetIb7, NroRetIb1, NroRetIb2, " & _
                                               " NroRetIb3, NroRetIb4, NroRetIb5, NroRetIb6, NroRetIb7 FROM Recibos r JOIN Cliente cli ON cli.Cliente = r.Cliente WHERE FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " AND RetOtra <> 0 AND Renglon = 1")
         Dim dr As SqlDataReader

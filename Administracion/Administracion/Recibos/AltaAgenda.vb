@@ -6,7 +6,7 @@ Public Class AltaAgenda
 
     Private _Cliente As String
 
-    Public Property Cliente() As String
+    Public Property Cliente As String
         Get
             Return _Cliente
         End Get
@@ -17,7 +17,7 @@ Public Class AltaAgenda
 
     Private _EsPrimerFecha As Boolean
 
-    Public Property EsPrimerFecha() As Boolean
+    Public Property EsPrimerFecha As Boolean
         Get
             Return _EsPrimerFecha
         End Get
@@ -73,8 +73,8 @@ Public Class AltaAgenda
 
     Private Sub _BuscarFechaAgenda()
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Fecha, Hora, Anotacion, OrdFecha, FechaII, HoraII, AnotacionII, OrdFechaII, Razon FROM Cliente WHERE Cliente = '" & Trim(Me.Cliente) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Fecha, Hora, Anotacion, OrdFecha, FechaII, HoraII, AnotacionII, OrdFechaII, Razon FROM Cliente WHERE Cliente = '" & Trim(Me.Cliente) & "'")
         Dim dr As SqlDataReader
 
         WFecha = ""
@@ -206,7 +206,7 @@ Public Class AltaAgenda
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
-        Dim ZSql As String = ""
+        Dim ZSql = ""
 
         If Trim(txtFecha.Text.Replace("/", "")) = "" Then : Exit Sub : End If
 
@@ -270,8 +270,8 @@ Public Class AltaAgenda
 
         'Exit Sub ' Comentar cuando ya se comience a querer probar.
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand(ZSql)
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand(ZSql)
 
         ClasesCompartidas.SQLConnector.conexionSql(cn, cm)
 

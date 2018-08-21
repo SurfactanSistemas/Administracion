@@ -123,8 +123,8 @@ Public Class ListadoMovimientosBancos
         Dim saldoinicial As Double = 0
         txtDesdeFecha = Proceso.ordenaFecha(txtDesdeFecha)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT SUM(Importe2) as SaldoInicial FROM Pagos WHERE Banco2 = '" & Trim(banco) & "' AND FechaOrd2 < '" & txtDesdeFecha & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT SUM(Importe2) as SaldoInicial FROM Pagos WHERE Banco2 = '" & Trim(banco) & "' AND FechaOrd2 < '" & txtDesdeFecha & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -507,7 +507,7 @@ Public Class ListadoMovimientosBancos
 
         SQLConnector.conexionSql(cn, cm)
 
-        Dim WTipo As Integer = 0
+        Dim WTipo = 0
 
         Try
 
@@ -520,7 +520,7 @@ Public Class ListadoMovimientosBancos
                         WTipo = IIf(IsDBNull(.Item("Tipo2")), 0, Val(.Item("Tipo2")))
                         If WTipo = 4 Then
 
-                            If not proceso._EsPellital() Then
+                            If Not proceso._EsPellital() Then
                                 Select Case Val(.Item("Cuenta"))
                                     Case 21
                                         WInicial(3) = WInicial(3) + .Item("Importe2")
@@ -638,8 +638,8 @@ Public Class ListadoMovimientosBancos
 
     Private Sub _ActualizarObservacionesVacias()
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Da as Clave, Observaciones, Proveedor FROM MovBan WHERE Observaciones = '' or Observaciones IS NULL")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Da as Clave, Observaciones, Proveedor FROM MovBan WHERE Observaciones = '' or Observaciones IS NULL")
         Dim dr As SqlDataReader
         Dim WObs = "", WProv = "", WDa = ""
 
@@ -696,9 +696,9 @@ Public Class ListadoMovimientosBancos
 
     Private Sub _ActualizarObservacion(ByVal wDa As String, ByVal wObs As String)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("UPDATE Movban SET Observaciones = '" & Trim(wObs) & "' WHERE da = '" & wDa & "'")
-        
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("UPDATE Movban SET Observaciones = '" & Trim(wObs) & "' WHERE da = '" & wDa & "'")
+
         Try
 
             cn.ConnectionString = Proceso._ConectarA
@@ -720,8 +720,8 @@ Public Class ListadoMovimientosBancos
 
     Private Function _ObtenerNombreProveedor(ByVal wProv As String) As String
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Nombre FROM Proveedor WHERE Proveedor = '" & Trim(wProv) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Nombre FROM Proveedor WHERE Proveedor = '" & Trim(wProv) & "'")
         Dim dr As SqlDataReader
         Dim WNom = ""
         Try

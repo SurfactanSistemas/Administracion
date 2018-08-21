@@ -2,7 +2,7 @@
 
     Private _valor As String = ""
 
-    Public Property Valor() As String
+    Public Property Valor As String
 
         Get
             Return _valor
@@ -25,7 +25,7 @@
 
         With Me
 
-            If Val(txtInfo.Text) = 0 then txtInfo.Text = "00000000000"
+            If Val(txtInfo.Text) = 0 Then txtInfo.Text = "00000000000"
 
             .Valor = txtInfo.Text
 

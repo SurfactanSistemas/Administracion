@@ -47,7 +47,7 @@ Public Class ProveedoresABM
 
         cmbEstado.BackColor = WBColorAntEstado
         cmbEstado.ForeColor = WColorAntEstado 'Color.White
-        
+
         setDefaults()
     End Sub
 
@@ -114,8 +114,8 @@ Public Class ProveedoresABM
 
     Private Sub _ActualizarProveedorEnEmpresa(ByVal cs As String)
         Dim ZSql As String
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
 
         ZSql = "UPDATE Proveedor " _
                     & " SET " _
@@ -209,8 +209,8 @@ Public Class ProveedoresABM
 
         Dim Xcs As String = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
 
         ' DETERMINO LAS EMPRESAS CON LAS QUE TRABAJAR.
@@ -265,7 +265,7 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub agregar()
-        Dim _Autorizado As Boolean = False
+        Dim _Autorizado = False
 
         If Trim(txtCodigo.Text) = "" Then
             Exit Sub
@@ -434,8 +434,8 @@ Public Class ProveedoresABM
 
     Private Sub _ActualizarCertificadosProveedor(ByVal WProveedor As String)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
 
         Try
@@ -463,8 +463,8 @@ Public Class ProveedoresABM
 
     Private Function _ProveedorExistente(ByVal WProveedor As String) As Boolean
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor FROM Proveedor WHERE Proveedor = '" & WProveedor & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Proveedor FROM Proveedor WHERE Proveedor = '" & WProveedor & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -586,9 +586,9 @@ Public Class ProveedoresABM
     End Sub
 
     Private Function _ProveedorEmbargado() As Boolean
-        Dim embargado As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Embargo FROM Proveedor WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'")
+        Dim embargado = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Embargo FROM Proveedor WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -917,8 +917,8 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub _ListarConsulta(ByVal columnas As String, ByVal tabla As String)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT " + columnas + " FROM " + tabla)
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT " + columnas + " FROM " + tabla)
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1032,8 +1032,8 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub _CargarCertificadosExtras(ByVal WProveedor As String)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Iso2, VtoIso2, Iso3, VtoIso3 FROM Proveedor WHERE Proveedor = '" & WProveedor & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Iso2, VtoIso2, Iso3, VtoIso3 FROM Proveedor WHERE Proveedor = '" & WProveedor & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -1131,8 +1131,8 @@ Public Class ProveedoresABM
     End Sub
 
     Private Function _CuitValido(ByVal cuit As String) As Boolean
-        Dim valido As Boolean = False
-        Dim suma As Integer = 0
+        Dim valido = False
+        Dim suma = 0
 
         cuit = cuit.Replace("-", "")
 
@@ -1541,7 +1541,7 @@ Public Class ProveedoresABM
     End Sub
 
     Private Function _ValidarFecha(ByVal fecha As String) As Boolean
-        Dim valido As Boolean = True
+        Dim valido = True
 
         If Trim(fecha.Replace("/", "")) = "" Then
             valido = Proceso._ValidarFecha(fecha)

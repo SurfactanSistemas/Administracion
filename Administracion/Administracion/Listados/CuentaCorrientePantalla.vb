@@ -48,7 +48,7 @@ Public Class CuentaCorrientePantalla
         tabla = _BuscarCuentaCorrienteProveedorDeuda(txtProveedor.Text, WTipo) 'SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_deuda", txtProveedor.Text, WTipo)
 
         If tabla.Rows.Count > 0 Then
-            
+
             For Each row As DataRow In tabla.Rows
 
                 GRilla.Rows.Add()
@@ -92,8 +92,8 @@ Public Class CuentaCorrientePantalla
     Private Function _BuscarCuentaCorrienteProveedorDeuda(ByVal WProveedor As String, ByVal wTipo As Char) As DataTable
         Dim _tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("")
         Dim dr As SqlDataReader
         Dim ZSql = ""
 
@@ -146,25 +146,25 @@ Public Class CuentaCorrientePantalla
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
         Try
-            
+
             boxPantallaProveedores.Visible = True
 
             'Dim WProveedores = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
-            Dim WProveedores As new DataTable
+            Dim WProveedores As New DataTable
 
             WProveedores = _TraerProveedoresActivos()
 
             lstAyuda.Items.Clear()
 
-            If Not IsNothing(WProveedores) then
+            If Not IsNothing(WProveedores) Then
 
                 For Each WProveedor As DataRow In WProveedores.Rows
 
                     lstAyuda.Items.Add(WProveedor.Item("Proveedor").PadLeft(11) & Space(5) & WProveedor.Item("Nombre"))
 
                 Next
-            
+
             End If
 
             txtAyuda.Text = ""
@@ -176,10 +176,10 @@ Public Class CuentaCorrientePantalla
     End Sub
 
     Private Function _TraerProveedoresActivos() As DataTable
-        
+
         Dim tabla As New DataTable
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor WHERE Inhabilitado <> '1' OR Inhabilitado is null")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor WHERE Inhabilitado <> '1' OR Inhabilitado is null")
         Dim dr As SqlDataReader
 
         Try
@@ -206,7 +206,7 @@ Public Class CuentaCorrientePantalla
             cm = Nothing
 
         End Try
-      
+
         Return tabla
 
     End Function
@@ -214,7 +214,7 @@ Public Class CuentaCorrientePantalla
     Private Sub _TraerSaldoCuentaProveedor(ByVal proveedor As DataRow)
 
         Dim cliente As String = IIf(IsDBNull(proveedor.Item("ClienteAsociado")), "", proveedor.Item("ClienteAsociado"))
-        Dim WSaldo As String = "0"
+        Dim WSaldo = "0"
 
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand()
@@ -317,16 +317,16 @@ Public Class CuentaCorrientePantalla
 
         If IsNothing(WProveedor) Then Exit Sub
 
-        If WProveedor.Rows.Count > 0 then
-            mostrarProveedor(WProveedor.Rows(0))    
+        If WProveedor.Rows.Count > 0 Then
+            mostrarProveedor(WProveedor.Rows(0))
         End If
 
     End Sub
 
     Private Function _TraerProveedorPorCodigo(ByVal WCodigo As String) As DataTable
-        
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & WCodigo & "'")
+
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & WCodigo & "'")
         Dim dr As SqlDataReader
         Dim tabla As New DataTable
 
@@ -340,7 +340,7 @@ Public Class CuentaCorrientePantalla
 
             If dr.HasRows Then
 
-               tabla.Load(dr)
+                tabla.Load(dr)
 
             End If
 
@@ -354,14 +354,14 @@ Public Class CuentaCorrientePantalla
             cm = Nothing
 
         End Try
-        
+
         Return tabla
 
     End Function
 
     Private Sub _TraerProveedorSelectivo()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Proveedor, Fecha FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(txtProveedor.Text) & "' AND FechaOrd >= '" & String.Join("", Date.Now.ToString("dd/MM/yyyy").Split("/").Reverse()) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 Proveedor, Fecha FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(txtProveedor.Text) & "' AND FechaOrd >= '" & String.Join("", Date.Now.ToString("dd/MM/yyyy").Split("/").Reverse()) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -401,11 +401,11 @@ Public Class CuentaCorrientePantalla
     End Sub
 
     Private Function _AltaProveedorSelectivo(ByVal CodProveedor As String, ByVal WFecha As String) As Boolean
-        Dim exito As Boolean = False
+        Dim exito = False
         Dim XFecha As String = Trim(WFecha)
         Dim _FechaOrd As String = String.Join("", XFecha.Split("/").Reverse())
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("INSERT INTO ProveedorSelectivo (Proveedor, Fecha, FechaOrd) Values ('" & CodProveedor & "', '" & XFecha & "', '" & _FechaOrd & "')")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("INSERT INTO ProveedorSelectivo (Proveedor, Fecha, FechaOrd) Values ('" & CodProveedor & "', '" & XFecha & "', '" & _FechaOrd & "')")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -429,10 +429,10 @@ Public Class CuentaCorrientePantalla
 
     Private Function _BuscarFechaSelectivo() As String
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Fecha FROM ProveedorSelectivo ORDER BY FechaOrd DESC")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 Fecha FROM ProveedorSelectivo ORDER BY FechaOrd DESC")
         Dim dr As SqlDataReader
-        Dim WFecha As String = ""
+        Dim WFecha = ""
 
         Try
 
@@ -468,9 +468,9 @@ Public Class CuentaCorrientePantalla
     End Function
 
     Private Function _EliminarProveedorSelectivo(ByVal codProv As String, ByVal WFecha As String) As Boolean
-        Dim exito As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(codProv) & "' AND Fecha = '" & WFecha & "'")
+        Dim exito = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM ProveedorSelectivo WHERE Proveedor = '" & Trim(codProv) & "' AND Fecha = '" & WFecha & "'")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -543,8 +543,8 @@ Public Class CuentaCorrientePantalla
     End Sub
 
     Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
-        Dim _NroInterno As String = ""
-        Dim WNumero As String = "" ' Guardamos el numero de factura para buscar el nro interno.
+        Dim _NroInterno = ""
+        Dim WNumero = "" ' Guardamos el numero de factura para buscar el nro interno.
 
         If e.RowIndex >= 0 Then
             WNumero = GRilla.Rows(e.RowIndex).Cells("Numero").Value
@@ -552,7 +552,7 @@ Public Class CuentaCorrientePantalla
             Exit Sub
         End If
 
-        If IsNothing(WNumero) then Exit Sub
+        If IsNothing(WNumero) Then Exit Sub
 
         Try
             _NroInterno = _NrosInternos.FindLast(Function(n) n(0) = WNumero)(1)
@@ -599,10 +599,10 @@ Public Class CuentaCorrientePantalla
             End If
 
             Try
-                Dim WProveedor as DataTable = _TraerDatosProveedor(txtProveedor.Text)
+                Dim WProveedor As DataTable = _TraerDatosProveedor(txtProveedor.Text)
 
-                If WProveedor.Rows.Count > 0 then
-                    
+                If WProveedor.Rows.Count > 0 Then
+
                     txtProveedor.Text = WProveedor.Rows(0).Item("Proveedor")
                     txtRazon.Text = WProveedor.Rows(0).Item("Nombre")
 
@@ -635,10 +635,10 @@ Public Class CuentaCorrientePantalla
         End If
     End Sub
 
-    Private Function _TraerDatosProveedor(ByVal WProveedor As string) As datatable
+    Private Function _TraerDatosProveedor(ByVal WProveedor As String) As datatable
         Dim tabla As New DataTable
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Proveedor, RTRIM(LTRIM(Nombre)) Nombre FROM Proveedor WHERE Proveedor = '" & WProveedor & "' ")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Proveedor, RTRIM(LTRIM(Nombre)) Nombre FROM Proveedor WHERE Proveedor = '" & WProveedor & "' ")
         Dim dr As SqlDataReader
 
         Try
@@ -665,7 +665,7 @@ Public Class CuentaCorrientePantalla
             cm = Nothing
 
         End Try
-        
+
         Return tabla
 
     End Function

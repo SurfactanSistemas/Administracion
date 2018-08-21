@@ -30,6 +30,7 @@ Public Class Globals
         Try
             Return SQLConnector.tryConnection(ConfigurationManager.ConnectionStrings(connectionName).ConnectionString)
         Catch ex As Exception
+            MsgBox(ex.Message)
             Return False
         End Try
     End Function

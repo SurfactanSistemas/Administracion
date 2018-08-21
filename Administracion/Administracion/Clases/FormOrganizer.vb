@@ -81,7 +81,7 @@ Public Class FormOrganizer
 
             Dim stringToWrite As String = "'name-height-width-left-top. Last line reserved for buttons top" & vbCrLf
             For Each customControl In allControls
-                Dim control As Control = DirectCast(customControl, Control)
+                Dim control = DirectCast(customControl, Control)
                 stringToWrite = stringToWrite & control.Name & vbCrLf & control.Height & vbCrLf & control.Width & vbCrLf & _
                     control.Left & vbCrLf & control.Top & vbCrLf
 
@@ -92,7 +92,7 @@ Public Class FormOrganizer
                 End If
 
                 For Each annexedCustomControl In annexedControlsFor(customControl.LabelAssociationKey)
-                    Dim annexedControl As Control = DirectCast(annexedCustomControl, Control)
+                    Dim annexedControl = DirectCast(annexedCustomControl, Control)
                     stringToWrite = stringToWrite & annexedControl.Name & vbCrLf & annexedControl.Height & vbCrLf & annexedControl.Width & vbCrLf & _
                     annexedControl.Left & vbCrLf & annexedControl.Top & vbCrLf
                 Next
@@ -269,7 +269,7 @@ Public Class FormOrganizer
         Dim lines = reader.ReadToEnd.Split(Environment.NewLine.ToCharArray()).ToList
         lines.RemoveAll(Function(value) value = "")
 
-        For index As Integer = 1 To lines.Count - 2 Step 5
+        For index = 1 To lines.Count - 2 Step 5
             Dim control As Control = form.Controls(lines(index))
             control.Height = lines(index + 1)
             control.Width = lines(index + 2)
@@ -299,7 +299,7 @@ Public Class FormOrganizer
     Private Function organizeSimpleControl(ByVal castControl As Control, ByVal top As Integer, ByVal realLeftMargin As Integer)
         'EXCLUSIVO CONTROLES SIN COLUMNAS
         Dim left As Integer = realLeftMargin
-        Dim control As CustomControl = DirectCast(castControl, CustomControl)
+        Dim control = DirectCast(castControl, CustomControl)
 
         setLabelTopFor(control.LabelAssociationKey, top)
         setLabelLeftFor(control.LabelAssociationKey, realLeftMargin)
@@ -317,7 +317,7 @@ Public Class FormOrganizer
 
         Dim annexedCustomControls = annexedControlsFor(control.LabelAssociationKey)
         For Each annexedCustomControl As CustomControl In annexedCustomControls
-            Dim annexedControl As Control = DirectCast(annexedCustomControl, Control)
+            Dim annexedControl = DirectCast(annexedCustomControl, Control)
             annexedControl.Top = top - 3
             annexedControl.Left = left
             annexedControl.Width = maxWidthFor(annexedCustomControl, -1, maxWidth, widthPercentage)
@@ -343,7 +343,7 @@ Public Class FormOrganizer
         Dim widthPercentage As Double = widthPercentageForColumnControls(controlList)
 
         For Each specificControl In controlList
-            Dim custControl As CustomControl = DirectCast(specificControl, CustomControl)
+            Dim custControl = DirectCast(specificControl, CustomControl)
             Dim index As Integer = controlList.IndexOf(specificControl)
 
             setLabelTopFor(custControl.LabelAssociationKey, top)
@@ -362,7 +362,7 @@ Public Class FormOrganizer
 
             Dim annexedCustomControls = annexedControlsFor(custControl.LabelAssociationKey)
             For Each annexedCustomControl As CustomControl In annexedCustomControls
-                Dim annexedControl As Control = DirectCast(annexedCustomControl, Control)
+                Dim annexedControl = DirectCast(annexedCustomControl, Control)
                 annexedControl.Top = top - 3
                 annexedControl.Left = left
                 annexedControl.Width = maxWidthFor(annexedCustomControl, -1, maxWidth, widthPercentage)
@@ -509,7 +509,7 @@ Public Class FormOrganizer
     End Function
 
     Private Sub organizeNotCRUDButtons(ByVal top As Integer)
-        Dim buttonWidth As Integer = 100
+        Dim buttonWidth = 100
         Dim cancelButtonLeft As Integer = form.Width - rightMargin - buttonWidth
         Dim acceptButtonLeft As Integer = cancelButtonLeft - separation - buttonWidth
 
@@ -855,9 +855,9 @@ Public Class FormOrganizer
         btnCleanClick = AddressOf defaultCleanClick
     End Sub
     Public Sub addQueryFunction(ByVal listFunction As QueryFunction, ByVal name As String, ByVal showFunction As ShowMethod, Optional ByVal customControl As CustomControl = Nothing)
-        Dim controlName As String = ""
+        Dim controlName = ""
         If Not IsNothing(customControl) Then
-            Dim control As Control = DirectCast(customControl, Control)
+            Dim control = DirectCast(customControl, Control)
             controlName = control.Name
             AddHandler control.DoubleClick, AddressOf queryControlDoubleClick
         End If
@@ -867,7 +867,7 @@ Public Class FormOrganizer
 
     Private Sub queryControlDoubleClick(ByVal sender As Object, ByVal e As EventArgs)
         hideSelectionList()
-        Dim control As Control = DirectCast(sender, Control)
+        Dim control = DirectCast(sender, Control)
         Dim queryTuple = queryFunctions.Find(Function(tuple) tuple.Item4 = control.Name)
         queryFunction = queryTuple.Item1
         showMethodFunction = queryTuple.Item3
@@ -953,7 +953,7 @@ Public Class FormOrganizer
 
     Private Sub queryTextEnterPressed(ByVal sender As Object, ByVal e As KeyEventArgs)
         If IsNothing(e) OrElse e.KeyValue = Keys.Enter Then
-            Dim searchText As String = ""
+            Dim searchText = ""
             If usingQueryText Then
                 searchText = queryText.Text
             End If
@@ -978,7 +978,7 @@ Public Class FormOrganizer
     End Sub
 
     Private Function queryTextHeight() As Integer
-        Dim heigth As Integer = 0
+        Dim heigth = 0
         If usingQueryText Then
             heigth = queryText.Height
         End If
@@ -986,7 +986,7 @@ Public Class FormOrganizer
     End Function
 
     Private Function selectionListHeight() As Integer
-        Dim heigth As Integer = 0
+        Dim heigth = 0
         If Not IsNothing(selectionList) Then
             heigth = selectionList.Height
         End If

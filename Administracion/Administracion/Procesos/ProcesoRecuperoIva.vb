@@ -139,8 +139,8 @@ Public Class ProcesoRecuperoIva
 
         Dim tabla As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT i.Debito, i.Cuenta, i.Fecha, iv.Despacho, p.Cuit" & _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT i.Debito, i.Cuenta, i.Fecha, iv.Despacho, p.Cuit" & _
                                               " FROM Imputac as i, IvaComp as iv, Proveedor as p" & _
                                               " WHERE i.NroInterno = iv.NroInterno AND p.Proveedor = i.Proveedor AND i.FechaOrd BETWEEN " & WDesde & " AND " & WHasta & " AND i.Debito <> 0" & _
                                               " AND i.Proveedor IN ('10069345023', '10014123562', '10022098824') AND i.Cuenta = '168'")

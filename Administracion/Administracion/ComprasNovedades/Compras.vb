@@ -64,7 +64,7 @@ Public Class Compras
         apertura = New Apertura
         esModificacion = False
         diasPlazo = 0
-        
+
         _RetIB1 = ""
         _RetIB2 = ""
         _RetIB3 = ""
@@ -140,7 +140,7 @@ Public Class Compras
     End Sub
 
     Private Function _CAIVencido() As Boolean
-        Dim vencido As Boolean = False
+        Dim vencido = False
         Dim vto As String = String.Join("", txtVtoCAI.Text.Split("/").Reverse())
         Dim actual As String = Date.Now.ToString("yyyyMMdd")
 
@@ -246,7 +246,7 @@ Public Class Compras
     End Sub
 
     Private Function _NecesarioFormatear(ByVal numero As String) As Boolean
-        Dim formatear As Boolean = True
+        Dim formatear = True
         Dim regex As New System.Text.RegularExpressions.Regex("([\,|\.]00)$")
 
         If regex.IsMatch(numero) Or numero = "" Then
@@ -330,7 +330,7 @@ Public Class Compras
     End Function
 
     Private Function valoresDebeYHaberCorrectos()
-        Dim estado As Boolean = True
+        Dim estado = True
         For Each row As DataGridViewRow In gridAsientos.Rows
 
             If Not row.IsNewRow Then
@@ -343,7 +343,7 @@ Public Class Compras
     End Function
 
     Private Function asientosCorrectos()
-        Dim estado As Boolean = True
+        Dim estado = True
         For Each row As DataGridViewRow In gridAsientos.Rows
             If Not row.IsNewRow Then
                 If Not IsNothing(row.Cells(0).Value) And Not IsNothing(row.Cells(1).Value) Then
@@ -390,7 +390,7 @@ Public Class Compras
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
-        Dim validoComoPymenacion As Boolean = False
+        Dim validoComoPymenacion = False
 
         _EliminarFilasEnBlanco()
 
@@ -483,8 +483,8 @@ Public Class Compras
             WRechazado = 1
         End If
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("UPDATE IvaComp SET Rechazado = " & WRechazado & " WHERE NroInterno = '" & NroInterno & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("UPDATE IvaComp SET Rechazado = " & WRechazado & " WHERE NroInterno = '" & NroInterno & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -507,7 +507,7 @@ Public Class Compras
     End Sub
 
     Private Function crearCompra() As Compra
-        Dim multiplicadorPorNotaDeCredito As Integer = 1
+        Dim multiplicadorPorNotaDeCredito = 1
         If esNotaDeCredito() Then
             multiplicadorPorNotaDeCredito = -1
         End If
@@ -555,8 +555,8 @@ Public Class Compras
             Exit Sub
         End If
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("UPDATE Proveedor SET Cai = '" & Trim(txtCAI.Text) & "', VtoCai = '" & Trim(txtVtoCAI.Text) & "' WHERE Proveedor = '" & Trim(txtCodigoProveedor.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("UPDATE Proveedor SET Cai = '" & Trim(txtCAI.Text) & "', VtoCai = '" & Trim(txtVtoCAI.Text) & "' WHERE Proveedor = '" & Trim(txtCodigoProveedor.Text) & "'")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -585,7 +585,7 @@ Public Class Compras
     End Function
 
     Private Function _ValidarFecha(ByVal fecha As String, ByVal valido As Boolean) As Boolean
-        Dim invalida As Boolean = False
+        Dim invalida = False
 
         If Trim(fecha.Replace("/", "")) <> "" Then
 
@@ -836,8 +836,8 @@ Public Class Compras
     End Sub
 
     Private Function _BuscarRechazado(ByVal nroInterno As Integer) As Boolean
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Rechazado FROM IvaComp WHERE NroInterno = '" & nroInterno & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 Rechazado FROM IvaComp WHERE NroInterno = '" & nroInterno & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -872,8 +872,8 @@ Public Class Compras
 
     Private Sub traerValoresIb(ByVal nroInterno As String)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 RetIB1, RetIB2, RetIB3, RetIB4, RetIB5, RetIB6, RetIB7, RetIB8, RetIB9, RetIB10, RetIB11, RetIB12, RetIB13, RetIB14 FROM IvaComp WHERE NroInterno = '" & Trim(nroInterno) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 RetIB1, RetIB2, RetIB3, RetIB4, RetIB5, RetIB6, RetIB7, RetIB8, RetIB9, RetIB10, RetIB11, RetIB12, RetIB13, RetIB14 FROM IvaComp WHERE NroInterno = '" & Trim(nroInterno) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1026,7 +1026,7 @@ Public Class Compras
             _PedirDatosPymeNacion()
         End If
     End Sub
-    
+
     Private Sub txtCodigoProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigoProveedor.MouseDoubleClick
 
         Dim consulta As New ConsultaCompras(Me, True)
@@ -1088,10 +1088,10 @@ Public Class Compras
     End Sub
 
     Private Function _ExisteFacturaPorNumero() As String
-        Dim existe As String = ""
+        Dim existe = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT NroInterno FROM CtaCtePrv WHERE Numero = '" & Trim(txtNumero.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT NroInterno FROM CtaCtePrv WHERE Numero = '" & Trim(txtNumero.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1132,7 +1132,7 @@ Public Class Compras
                 Exit Sub
             End If
 
-            Dim _NumeroInterno As String = ""
+            Dim _NumeroInterno = ""
 
             If Trim(txtCodigoProveedor.Text) <> "" And cmbTipo.SelectedIndex >= 0 And CBLetra.SelectedIndex >= 0 And Trim(txtPunto.Text) <> "" And Trim(txtNumero.Text) <> "" Then
                 _NumeroInterno = Trim(DAOCompras.buscarNumeroIntero(txtCodigoProveedor.Text, ceros(cmbTipo.SelectedIndex, 2), CBLetra.SelectedItem, ceros(txtPunto.Text, 4), ceros(txtNumero.Text, 8)))
@@ -1268,7 +1268,7 @@ Public Class Compras
     End Sub
 
     Private Function _ComprobarExistenciaRemito(ByVal _remitos As String) As Boolean
-        Dim _existe As Boolean = False
+        Dim _existe = False
         Dim remito As String = _remitos.Split(",")(0)
         Dim csEmpresa As String = _DeterminarEmpresaDeTrabajo(remito)
 
@@ -1281,7 +1281,7 @@ Public Class Compras
 
             If _PreguntarPorRecalculo Then
 
-                Dim dias As String = ""
+                Dim dias = ""
 
                 dias = _BuscarDiasOCRelacionada(remito)
 
@@ -1312,7 +1312,7 @@ Public Class Compras
     End Sub
 
     Private Function _BuscarDiasOCRelacionada(ByVal remito As String) As String
-        Dim dias As String = ""
+        Dim dias = ""
         Dim cn As New SqlConnection()
         ' ACA  FALTA AGREGAR LA COLUMNA DE DONDE SE EXTRAERÁ EL DATO DE LOS DIAS.
         Dim cm As New SqlCommand("SELECT i.Orden FROM Informe as i, Orden as o WHERE i.Remito = '" & Trim(remito) & "' AND i.Orden = o.Orden ")
@@ -1348,7 +1348,7 @@ Public Class Compras
     End Function
 
     Private Sub txtRemito_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemito.KeyDown
-        Dim _ValidoComoPymeNacion As Boolean = False
+        Dim _ValidoComoPymeNacion = False
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbFormaPago)
@@ -1374,7 +1374,7 @@ Public Class Compras
                 Else
                     MsgBox("Remito Inexistente.", MsgBoxStyle.Information)
                 End If
-                
+
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -1404,13 +1404,13 @@ Public Class Compras
     Private Function _ComprobarPyme() As Boolean
 
         ' Reiniciamos la variable de control.
-        Dim _EsPymeNacion As Boolean = False
+        Dim _EsPymeNacion = False
 
         If Trim(txtRemito.Text) = "" Then : Return _EsPymeNacion : End If
 
         ' Extraemos los remitos a consultar.
         Dim remitos() As String = Trim(txtRemito.Text).Split(",")
-        Dim renglon As Integer = 0
+        Dim renglon = 0
 
         If remitos.Length = 0 Then
             MsgBox("No hay remitos cargados.", MsgBoxStyle.Information)
@@ -1428,7 +1428,7 @@ Public Class Compras
                 txtRemito.Focus()
 
             End If
-            
+
             Return _EsPymeNacion
         End If
 
@@ -1488,8 +1488,8 @@ Public Class Compras
     End Function
 
     Private Function _PrepararSQLRemitosPymeNacion(ByVal remitos() As String) As String
-        Dim sqlRemitos As String = ""
-        Dim _CantRemitos As Integer = 0
+        Dim sqlRemitos = ""
+        Dim _CantRemitos = 0
 
         For Each remito As String In remitos
             If Trim(remito) <> "" Then
@@ -1517,7 +1517,7 @@ Public Class Compras
 
         Dim csTemplate As String = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString
 
-        Dim cs As String = ""
+        Dim cs = ""
 
         For Each Empresa As String In Empresas
 
@@ -1701,9 +1701,9 @@ Public Class Compras
     End Sub
 
     Private Sub _TraerSugerenciaDeCuenta(ByVal celda As DataGridViewCell)
-        Dim sugerencia As String = ""
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 i.Cuenta, c.Descripcion FROM Imputac as i, Cuenta as c WHERE i.Proveedor = '" & Trim(txtCodigoProveedor.Text) & "' AND i.Cuenta = c.Cuenta " _
+        Dim sugerencia = ""
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 i.Cuenta, c.Descripcion FROM Imputac as i, Cuenta as c WHERE i.Proveedor = '" & Trim(txtCodigoProveedor.Text) & "' AND i.Cuenta = c.Cuenta " _
                                               & "ORDER BY i.Renglon DESC, i.NroInterno DESC")
         Dim dr As SqlDataReader
 
@@ -1786,7 +1786,7 @@ Public Class Compras
             Array.Clear(ImpoIb, 0, ImpoIb.Length)
 
             ' Guardamos datos para detalles de asientos.
-            If not proceso._EsPellital() Then
+            If Not proceso._EsPellital() Then
                 ImpoIb(1, 1) = _RetIB1
                 ImpoIb(1, 2) = "163"
             Else
@@ -2088,12 +2088,12 @@ Public Class Compras
     End Sub
 
     Private Function _DisponibleParaDarDeBaja() As Boolean
-        Dim _Disponible As Boolean = True
+        Dim _Disponible = True
 
         Dim XClave As String = Trim(txtCodigoProveedor.Text) & CBLetra.SelectedItem & ceros(cmbTipo.SelectedIndex + 1, 2) & ceros(Trim(txtPunto.Text), 4) & ceros(Trim(txtNumero.Text), 8)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Saldo, Total FROM CtaCtePrv WHERE Clave = '" & XClave & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Saldo, Total FROM CtaCtePrv WHERE Clave = '" & XClave & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -2106,7 +2106,7 @@ Public Class Compras
                 dr.Read()
 
                 If Val(dr.Item("Saldo")) <> Val(dr.Item("Total")) Then
-                    _Disponible = false
+                    _Disponible = False
                 End If
 
             End If
@@ -2126,10 +2126,10 @@ Public Class Compras
     End Function
 
     Private Function _ExisteRegistrosParaBorrar() As Boolean
-        Dim _Existe As Boolean = False
+        Dim _Existe = False
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT NroInterno FROM IvaComp WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT NroInterno FROM IvaComp WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -2161,8 +2161,8 @@ Public Class Compras
 
     Private Sub _BorrarIvaComp()
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM IvaComp WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM IvaComp WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -2185,8 +2185,8 @@ Public Class Compras
     End Sub
 
     Private Sub _BorrarCtaCtePrv()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM CtaCtePrv WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM CtaCtePrv WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -2208,8 +2208,8 @@ Public Class Compras
     End Sub
 
     Private Sub _BorrarImputaciones()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM Imputac WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM Imputac WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -2231,8 +2231,8 @@ Public Class Compras
     End Sub
 
     Private Sub _BorrarIvaCompAdicional()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM IvaCompAdicional WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM IvaCompAdicional WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -2254,8 +2254,8 @@ Public Class Compras
     End Sub
 
     Private Sub _BorrarIvaCompPyMENacion()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM IvaComp WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM IvaComp WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -2277,8 +2277,8 @@ Public Class Compras
     End Sub
 
     Private Sub _BorrarCtaCtePrvPyMENacion()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM CtaCtePrv WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM CtaCtePrv WHERE NroInternoAsociado = '" & Trim(txtNroInterno.Text) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)

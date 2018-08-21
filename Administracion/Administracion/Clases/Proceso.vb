@@ -39,8 +39,8 @@ Module Proceso
     Public Sub _PurgarSaldosCtaCtePrvs()
         Dim ZSql = "Update CtaCtePrv set Saldo = 0 where Saldo > -0.1 and Saldo < 0.1 and Saldo <> 0"
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand(ZSql)
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand(ZSql)
 
         Try
 
@@ -262,8 +262,8 @@ Module Proceso
     End Function
 
     Public Function CuitValido(ByVal cuit As String) As Boolean
-        Dim valido As Boolean = False
-        Dim suma As Integer = 0
+        Dim valido = False
+        Dim suma = 0
         cuit = Trim(cuit)
 
         If cuit.Length = 11 Then
@@ -530,7 +530,7 @@ Module Proceso
         'varRetIbCaba = 0.0
         varAcumulaIb = 0.0
         varRete = 0.0
-        
+
         If varAcumulaNeto >= 300 Then
             varRete = varAcumulaNeto * (varPorceIbCaba / 100)
         End If
@@ -542,7 +542,7 @@ Module Proceso
     ' El parametro opcional es por si se decide utilizar con el evento TypeValidationCompleted (Ej: e.Cancel = _ValidarFecha(txtFecha.Text, e.IsValidInput) )
     ' Retorna FALSE en caso de que no sea una fecha válida.
     Public Function _ValidarFecha(ByVal fecha As String, Optional ByVal valido As Boolean = True) As Boolean
-        Dim valida As Boolean = True
+        Dim valida = True
 
         ' Controlamos que tenga digitos.
         If Trim(fecha.Replace("/", "")) <> "" Then
@@ -585,7 +585,7 @@ Module Proceso
     End Function
 
     Public Function _Normalizarfecha(ByVal fecha As String) As String
-        Dim xfecha As String = ""
+        Dim xfecha = ""
         Dim _temp As String = fecha
         Dim _Fecha As String() = fecha.Split("/")
 

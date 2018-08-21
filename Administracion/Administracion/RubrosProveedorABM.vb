@@ -218,8 +218,8 @@ Public Class RubrosProveedorABM
     End Sub
 
     Private Sub _ListarConsulta()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Descripcion FROM TipoProv")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Descripcion FROM TipoProv")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -269,8 +269,8 @@ Public Class RubrosProveedorABM
     End Sub
 
     Private Sub _Actualizar()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("Update TipoProv SET Descripcion='" + Trim(txtDescripcion.Text) + "' WHERE Codigo = '" + Trim(txtCodigo.Text) + "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("Update TipoProv SET Descripcion='" + Trim(txtDescripcion.Text) + "' WHERE Codigo = '" + Trim(txtCodigo.Text) + "'")
 
         SQLConnector.conexionSql(cn, cm)
 

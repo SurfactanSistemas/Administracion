@@ -9,7 +9,7 @@
     Private Const MES_MAX = 12
     Private Const MES_MIN = 1
 
-    Public Property Cuotas() As Integer
+    Public Property Cuotas As Integer
 
         Get
             Return _Cuotas
@@ -20,7 +20,7 @@
 
     End Property
 
-    Public Property Mes() As Integer
+    Public Property Mes As Integer
 
         Get
             Return _Mes
@@ -31,7 +31,7 @@
 
     End Property
 
-    Public Property Ano() As Integer
+    Public Property Ano As Integer
 
         Get
             Return _Ano
@@ -50,15 +50,15 @@
 
     Private Sub _AsignarNuevoValor()
 
-            With Me
+        With Me
 
-                .Cuotas = Val(txtCantCuotas.Text)
-                .Mes = Val(txtMes.Text)
-                .Ano = Val(txtAno.Text)
+            .Cuotas = Val(txtCantCuotas.Text)
+            .Mes = Val(txtMes.Text)
+            .Ano = Val(txtAno.Text)
 
-                .Close()
+            .Close()
 
-            End With
+        End With
 
     End Sub
 

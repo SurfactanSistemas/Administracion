@@ -54,8 +54,8 @@ Public Class ListadoRecibos
     Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
         ' Reseteamos los datos de los recibos.
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("ModificaReciboImpolista0")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("ModificaReciboImpolista0")
 
         SQLConnector.conexionSql(cn, cm)
 

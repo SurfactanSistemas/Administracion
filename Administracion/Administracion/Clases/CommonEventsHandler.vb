@@ -46,7 +46,7 @@
     End Sub
 
     Public Sub addValidableControlFormatTo(ByVal validableControl As ValidableControl)
-        Dim control As Control = DirectCast(validableControl, Control)
+        Dim control = DirectCast(validableControl, Control)
         Select Case validableControl.Validator
             Case ValidatorType.Numeric, ValidatorType.Positive, ValidatorType.PositiveWithMax
                 AddHandler control.KeyPress, AddressOf numericKeyPressed
@@ -125,7 +125,7 @@
     End Sub
 
     Private Sub deleteOrBackSpaceDownForDateFormat(ByVal sender As Object, ByVal e As KeyEventArgs)
-        Dim customControl As CustomTextBox = DirectCast(sender, CustomTextBox)
+        Dim customControl = DirectCast(sender, CustomTextBox)
         If e.KeyValue = Keys.Delete Then
             deleteCharOf(customControl, customControl.SelectionStart, 1)
             e.SuppressKeyPress = True
@@ -152,7 +152,7 @@
     End Sub
 
     Private Sub dateKeyPressed(ByVal sender As Object, ByVal e As KeyPressEventArgs)
-        Dim customControl As CustomTextBox = DirectCast(sender, CustomTextBox)
+        Dim customControl = DirectCast(sender, CustomTextBox)
         Dim firstSpaceIndex As Integer = customControl.Text.IndexOf(" ")
         Select Case firstSpaceIndex
             Case -1
@@ -226,7 +226,7 @@
             e.Handled = True
         End If
         If Asc(e.KeyChar) = Keys.Escape Then
-            Dim defaultEmptyText As String = ""
+            Dim defaultEmptyText = ""
             If DirectCast(sender, CustomTextBox).Validator = ValidatorType.DateFormat Then
                 defaultEmptyText = "  /  /    "
             End If

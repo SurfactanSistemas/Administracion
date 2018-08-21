@@ -33,8 +33,8 @@ Public Class CierreMes
 
     Private Sub _VerificarEstado()
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Estado FROM Cierre WHERE Mes = '" & txtMes.Text & "' AND Ano = '" & txtAno.Text & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Estado FROM Cierre WHERE Mes = '" & txtMes.Text & "' AND Ano = '" & txtAno.Text & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -97,8 +97,8 @@ Public Class CierreMes
 
         If cmbEstado.SelectedIndex = 2 Then Exit Sub
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM Cierre WHERE Mes = '" & txtMes.Text & "' AND Ano = '" & txtAno.Text & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT * FROM Cierre WHERE Mes = '" & txtMes.Text & "' AND Ano = '" & txtAno.Text & "'")
         Dim dr As SqlDataReader
         Dim ZSql = ""
 

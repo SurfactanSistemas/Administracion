@@ -108,8 +108,8 @@ Public Class ListadoCuentaCorrienteProveedoresFecha
         Dim x As Char = Chr(34)
         Dim WSuma As Double
         Dim WOrden As Integer
-        Dim txtCorte As String = ""
-        Dim txtLLave As Integer = 0
+        Dim txtCorte = ""
+        Dim txtLLave = 0
         Dim txtEmpresa As String
 
         Dim varOrdFecha As String

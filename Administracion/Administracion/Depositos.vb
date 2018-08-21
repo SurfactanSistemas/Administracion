@@ -62,7 +62,7 @@ Public Class Depositos
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             Return False
         End Try
-        
+
 
         Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(Trim(txtCodigoBanco.Text))
 
@@ -95,8 +95,8 @@ Public Class Depositos
             Return False
         End If
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Deposito FROM Depositos WHERE Deposito = '" & _NroDeposito & "' AND (Renglon = '01' OR Renglon = '1')")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Deposito FROM Depositos WHERE Deposito = '" & _NroDeposito & "' AND (Renglon = '01' OR Renglon = '1')")
         Dim dr As SqlDataReader
 
         Try
@@ -210,7 +210,7 @@ Public Class Depositos
             showFunction = AddressOf mostrarCheque
             lstConsulta.DataSource = Nothing
             lstConsulta.Items.Clear()
-            
+
             _ListarChequesTerceros()
 
         End If
@@ -250,11 +250,11 @@ Public Class Depositos
 
     Private Function _TraerChequesEnRecibos() As List(Of Object)
         Dim _ChequesRecibos As New List(Of Object)
-        Dim itemTemplate As String = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
-        Dim item As String = ""
+        Dim itemTemplate = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
+        Dim item = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
                                               & "Fecha2, Banco2, Clave, FechaOrd2, ClaveCheque FROM Recibos WHERE " _
                                               & "TipoReg = '2' AND Estado2 <> 'X' AND Tipo2 = '02' " _
                                               & "ORDER BY FechaOrd2, Numero2")
@@ -298,11 +298,11 @@ Public Class Depositos
 
     Private Function _TraerChequesEnRecibosProvisorios() As List(Of Object)
         Dim _ChequesRecibos As New List(Of Object)
-        Dim itemTemplate As String = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
-        Dim item As String = ""
+        Dim itemTemplate = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
+        Dim item = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
                                               & "Fecha2, Banco2, Clave, FechaOrd2, ClaveCheque FROM RecibosProvi WHERE " _
                                               & "TipoReg = '2' AND Estado2 = 'P' AND ReciboDefinitivo = '0' AND FechaOrd2 > '20080430'" _
                                               & "ORDER BY FechaOrd2, Numero2")
@@ -419,8 +419,8 @@ Public Class Depositos
 
         WTipoRec = Mid(ClaveRecibo, 1, 1)
         Dim ZSql = "SELECT Tipo2, Numero2, Fecha2, Banco2, Importe2 FROM #TABLA# WHERE Clave = '" & Mid(ClaveRecibo, 2, 8) & "'"
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
 
         Try
@@ -491,12 +491,12 @@ Public Class Depositos
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
         If validarCampos() Then
-            Dim cn As SqlConnection = New SqlConnection()
-            Dim cm As SqlCommand = New SqlCommand("")
+            Dim cn = New SqlConnection()
+            Dim cm = New SqlCommand("")
             Dim trans As SqlTransaction = Nothing
             Dim dr As SqlDataReader = Nothing
             Dim WControlaMarcaRecibos(100) As String
-            Dim WIndiceMarca As Integer = 0
+            Dim WIndiceMarca = 0
 
             Dim ZSql = "", XClaveRecibo = "", XObservaciones = "", WReciboDefintivo = 0, WTipoRecibo = ""
             Dim WClave, WDeposito, WRenglon, XRenglon, WBanco, WFecha, WFechaOrd, WImporte, WFechaAcredita, WFechaAcreditaOrd, WTipo2, WNumero2, WFecha2, WImporte2, WObservaciones2, WEmpresa, WImpoLista
@@ -738,10 +738,10 @@ Public Class Depositos
             txtNroDeposito.Focus()
         End If
     End Sub
-    
+
     Private Function _BuscarReciboDefinitivo(ByVal xclaverecibo) As Integer
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ReciboDefinitivo FROM RecibosProvi WHERE Clave = '" & xclaverecibo & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT ReciboDefinitivo FROM RecibosProvi WHERE Clave = '" & xclaverecibo & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -788,8 +788,8 @@ Public Class Depositos
 
             Dim numero As String = ceros(txtNroDeposito.Text, 6)
 
-            Dim cn As SqlConnection = New SqlConnection()
-            Dim cm As SqlCommand = New SqlCommand("")
+            Dim cn = New SqlConnection()
+            Dim cm = New SqlCommand("")
             Dim dr As SqlDataReader
             Dim WDeposito, WRenglon, WBanco, WFecha, WImporte, WFechaAcredita, WTipo2, WNumero2, WFecha2, WImporte2, WObservaciones2, rowIndex
 
@@ -938,7 +938,7 @@ Public Class Depositos
         Dim row As DataRow
         Dim crdoc As ReportDocument = New DepositoBancario
         Dim WDeposito, WRenglon, WFecha, WBanco, WNombre, WTotal, WTitulo, WTipo, WNumero, WImporte, WDescripcion, XTipo
-        Dim XRenglon As Integer = 0
+        Dim XRenglon = 0
 
         WDeposito = ""
         WRenglon = ""
@@ -1202,10 +1202,10 @@ Public Class Depositos
     End Function
 
     Private Function _BuscarClaveRecibo(ByVal Clavecheque) As String
-        Dim clave As String = ""
+        Dim clave = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Clave FROM Recibos WHERE ClaveCheque = '" & Clavecheque & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Clave FROM Recibos WHERE ClaveCheque = '" & Clavecheque & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1268,8 +1268,8 @@ Public Class Depositos
     Private Function _ProcesarCheque(ByVal row As Integer, ByVal ClaveCheque As String) As Boolean
 
         Dim WNumero, WFecha, WBanco, WImporte, WClave As String
-        Dim _LecturaCorrecta As Boolean = True
-        Dim cn As SqlConnection = New SqlConnection()
+        Dim _LecturaCorrecta = True
+        Dim cn = New SqlConnection()
         Dim cm As New SqlCommand
         Dim dr As SqlDataReader
 
@@ -1292,7 +1292,7 @@ Public Class Depositos
         End If
 
         SQLConnector.conexionSql(cn, cm)
-        Dim _Tabla As String = "Recibos"
+        Dim _Tabla = "Recibos"
 
 
         If Mid(WClave, 1, 1) = "2" Then
@@ -1341,7 +1341,7 @@ Public Class Depositos
 
         Return _LecturaCorrecta
     End Function
-    
+
     Private Function _ChequeYaCargado(ByVal ClaveCheque As String, ByVal rowIndex As Integer) As Boolean
 
         Return gridCheques.Rows.Cast(Of DataGridViewRow)().Any(Function(row) ClaveCheque = row.Cells("ClaveCheque").Value And row.Index <> rowIndex)

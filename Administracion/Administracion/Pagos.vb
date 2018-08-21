@@ -42,7 +42,7 @@ Public Class Pagos
             XImporte5, XImporte6, XImporte7, XDate, XParam, XSql, XClaveCheque, XBancoCheque, XSucursalCheque, _
             XChequeCheque, XCuentaCheque, XCuit, XClaveCuit, XNet, XProveedor, XRetIbCiudad, XTipoOrd As String
 
-    Public Property SoloLectura() As Boolean
+    Public Property SoloLectura As Boolean
         Get
             Return _SoloLectura
         End Get
@@ -51,7 +51,7 @@ Public Class Pagos
         End Set
     End Property
 
-    Private Sub Pagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Pagos_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         Me.Text = "Ingreso de Pagos a Proveedores                                                                                                                        " & Globals.NombreEmpresa()
 
@@ -71,7 +71,7 @@ Public Class Pagos
             txtParidad.Text = traerParidad()
         End If
 
-        Proceso._PurgarSaldosCtaCtePrvs()
+        _PurgarSaldosCtaCtePrvs()
 
     End Sub
 
@@ -80,8 +80,8 @@ Public Class Pagos
     End Sub
 
     Private Function _TraerDatosProveedorTipoProvinciaEmbargo() As Object
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Provincia, TipoProv, Embargo FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Provincia, TipoProv, Embargo FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
         Dim dr As SqlDataReader
         Dim WProv = 0, WTipoProv = 0, WEmbargo = "N"
 
@@ -117,8 +117,8 @@ Public Class Pagos
     End Function
 
     Private Function _ExisteOrdenDePago(ByVal NumOrden) As Boolean
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -146,7 +146,7 @@ Public Class Pagos
 
     Private Function _FechasValidasFormasPago() As Boolean
 
-        Dim WOrdFecha1 = Proceso.ordenaFecha(txtFecha.Text), WOrdFecha2 = 0, WFecha2 = ""
+        Dim WOrdFecha1 = ordenaFecha(txtFecha.Text), WOrdFecha2 = 0, WFecha2 = ""
 
         If gridFormaPagos.Rows.Count > 0 Then
             For Each row As DataGridViewRow In gridFormaPagos.Rows
@@ -157,7 +157,7 @@ Public Class Pagos
 
                         If Trim(WFecha2.Replace("/", "")) <> "" And Proceso._ValidarFecha(WFecha2) Then
 
-                            WOrdFecha2 = Proceso.ordenaFecha(WFecha2)
+                            WOrdFecha2 = ordenaFecha(WFecha2)
 
                             If WOrdFecha2 < WOrdFecha1 Then
                                 MsgBox("La Fecha de los valores informados no puede ser menor a la fecha de emision de la orden de pago", MsgBoxStyle.Critical)
@@ -216,8 +216,8 @@ Public Class Pagos
     End Function
 
     Private Function _ExisteFactura(ByVal XClave) As Boolean
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Clave FROM CtaCtePrv WHERE Clave = '" & XClave & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Clave FROM CtaCtePrv WHERE Clave = '" & XClave & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -261,26 +261,26 @@ Public Class Pagos
 
                 With row
                     'If val(.Cells(4).Value) <> 0 Then
-                        XTipo1 = .Cells(0).Value
-                        XLetra1 = .Cells(1).Value
-                        XPunto1 = .Cells(2).Value
-                        XNumero1 = .Cells(3).Value
-                        XImporte1 = .Cells(4).Value
+                    XTipo1 = .Cells(0).Value
+                    XLetra1 = .Cells(1).Value
+                    XPunto1 = .Cells(2).Value
+                    XNumero1 = .Cells(3).Value
+                    XImporte1 = .Cells(4).Value
 
-                        XClave = txtProveedor.Text & XLetra1 & XTipo1 & XPunto1 & XNumero1
+                    XClave = txtProveedor.Text & XLetra1 & XTipo1 & XPunto1 & XNumero1
 
-                        If XNumero1 <> "99999999" And Val(XImporte1) <> 0 Then
+                    If XNumero1 <> "99999999" And Val(XImporte1) <> 0 Then
 
-                            Try
-                                If Not _ExisteFactura(XClave) Then
-                                    Return False
-                                End If
-                            Catch ex As Exception
-                                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                        Try
+                            If Not _ExisteFactura(XClave) Then
                                 Return False
-                            End Try
+                            End If
+                        Catch ex As Exception
+                            MsgBox(ex.Message, MsgBoxStyle.Critical)
+                            Return False
+                        End Try
 
-                        End If
+                    End If
                     'End If
 
                 End With
@@ -303,7 +303,7 @@ Public Class Pagos
 
         ' Se exige banco en caso de que sea tipo Transferencias.
         If optTransferencias.Checked Then
-            if Val(txtBanco.Text) = 0 Then
+            If Val(txtBanco.Text) = 0 Then
                 MsgBox("Se debe informar un banco valido para el tipo de pago informado", MsgBoxStyle.Information)
                 Return False
             Else
@@ -398,10 +398,10 @@ Public Class Pagos
     End Function
 
     Private Function _CS(Optional ByVal empresa As String = "SurfactanSA")
-        Return Proceso._ConectarA(empresa)
+        Return _ConectarA(empresa)
     End Function
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
@@ -473,7 +473,7 @@ Public Class Pagos
     Private Sub mostrarPagos(ByVal pagos As List(Of Pago))
         'gridPagos.Rows.Clear()
 
-        Dim renglon As Integer = 0
+        Dim renglon = 0
 
         For Each pago As Pago In pagos
             With gridPagos.Rows(renglon)
@@ -498,15 +498,15 @@ Public Class Pagos
 
     Private Function _CalcularImpoNeto(ByVal tipo, ByVal letra, ByVal punto, ByVal numero, ByVal importe)
         Dim WImpoNeto = 0.0
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Iva21, Iva5, Iva27, Iva105, Ib, Exento, Neto  FROM IvaComp WHERE Proveedor = '" & txtProveedor.Text & "' AND Tipo = '" & tipo & "' AND Letra = '" & letra & "' AND Punto = '" & punto & "' AND Numero = '" & numero & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Iva21, Iva5, Iva27, Iva105, Ib, Exento, Neto  FROM IvaComp WHERE Proveedor = '" & txtProveedor.Text & "' AND Tipo = '" & tipo & "' AND Letra = '" & letra & "' AND Punto = '" & punto & "' AND Numero = '" & numero & "'")
         Dim dr As SqlDataReader
         Dim WIva21, WIva5, WIva27, WIva105, WIb, WExento, WNeto, WTotal, WPorce
 
-        tipo = Proceso.ceros(tipo, 2)
+        tipo = ceros(tipo, 2)
         letra = UCase(letra)
-        punto = Proceso.ceros(punto, 4)
-        numero = Proceso.ceros(numero, 8)
+        punto = ceros(punto, 4)
+        numero = ceros(numero, 8)
 
         WTotal = 0.0
         WIva21 = 0.0
@@ -572,7 +572,7 @@ Public Class Pagos
     Private Sub mostrarFormaPagos(ByVal formaPagos As List(Of FormaPago))
         'gridFormaPagos.Rows.Clear()
 
-        Dim WRenglon As Integer = 0
+        Dim WRenglon = 0
 
         For Each formaPago As FormaPago In formaPagos
 
@@ -587,7 +587,7 @@ Public Class Pagos
                 .Cells(7).Value = formaPago.cuit
             End With
 
-            WClavesOP(WRenglon) = Proceso.ceros(txtOrdenPago.Text, 6) & Proceso.ceros(WRenglon + 2, 2)
+            WClavesOP(WRenglon) = ceros(txtOrdenPago.Text, 6) & ceros(WRenglon + 2, 2)
 
             WRenglon += 1
 
@@ -619,7 +619,7 @@ Public Class Pagos
         txtNombreBanco.Text = banco.nombre
     End Sub
 
-    Private Sub txtProveedor_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
+    Private Sub txtProveedor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtProveedor.KeyDown
         If e.KeyValue = Keys.Enter Then
 
             If Trim(txtProveedor.Text) <> "" Then
@@ -645,7 +645,7 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub txtBanco_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBanco.KeyDown
+    Private Sub txtBanco_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtBanco.KeyDown
         If e.KeyValue = Keys.Enter Then
 
             If Trim(txtBanco.Text) = "" And Not optVarios.Checked Then
@@ -685,9 +685,9 @@ Public Class Pagos
     End Sub
 
     Private Function _TraerCambioDivisa(ByVal fecha As String) As String
-        Dim _CambioDivisa As String = "0"
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT CambioDivisa FROM Cambios WHERE Fecha = '" & fecha & "'")
+        Dim _CambioDivisa = "0"
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT CambioDivisa FROM Cambios WHERE Fecha = '" & fecha & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -725,8 +725,8 @@ Public Class Pagos
     Private Sub _ListarCtasCtes()
         Dim XClaves As New List(Of Object)
         Dim _Item As String
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
                                               & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" _
                                               & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha ASC, cp.Numero")
         Dim dr As SqlDataReader
@@ -763,11 +763,11 @@ Public Class Pagos
 
                             If Not IsNothing(WIvaComp) Then
                                 With WIvaComp
-                                    XParidad = IIf(IsDBNull(.Item("Paridad")), "0", Proceso.formatonumerico(.Item("Paridad")))
+                                    XParidad = IIf(IsDBNull(.Item("Paridad")), "0", formatonumerico(.Item("Paridad")))
                                     XPago = IIf(IsDBNull(.Item("Pago")), "0", Val(.Item("Pago")))
                                 End With
                             End If
-                            
+
                         End If
 
                         If Val(XPago) <> 2 Then
@@ -785,9 +785,9 @@ Public Class Pagos
                         If Val(XSaldoUS) = 0 Then
                             XSaldoUS = ""
                         End If
-                        _Item = XImpre & "    " & XLetra & "    " & XPunto & "    " & XNumero & "    " & XFecha & RSet(Proceso.formatonumerico(XSaldo), 12)
+                        _Item = XImpre & "    " & XLetra & "    " & XPunto & "    " & XNumero & "    " & XFecha & RSet(formatonumerico(XSaldo), 12)
 
-                        If Val(XSaldoUS) > 0 Then : _Item &= RSet(Proceso.formatonumerico(XSaldoUS), 12) : End If
+                        If Val(XSaldoUS) > 0 Then : _Item &= RSet(formatonumerico(XSaldoUS), 12) : End If
 
                         lstConsulta.Items.Add(_Item)
 
@@ -820,14 +820,14 @@ Public Class Pagos
     End Sub
 
     Private Function _BuscarInfoIvaComp(ByVal xNroInterno As String) As DataRow
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Paridad, Pago FROM IvaComp WHERE NroInterno =  '" & xNroInterno & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Paridad, Pago FROM IvaComp WHERE NroInterno =  '" & xNroInterno & "'")
         Dim dr As SqlDataReader
         Dim tabla As New DataTable
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -855,7 +855,7 @@ Public Class Pagos
 
     Private Sub _ListarProveedores()
         Dim XClaves As New List(Of Object)
-        Dim _Item As String = ""
+        Dim _Item = ""
         Dim proveedores As List(Of Proveedor) = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
         If proveedores.Count > 0 Then
@@ -878,11 +878,11 @@ Public Class Pagos
 
     Private Function _TraerChequesEnRecibos() As List(Of Object)
         Dim _ChequesRecibos As New List(Of Object)
-        Dim itemTemplate As String = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
-        Dim item As String = ""
+        Dim itemTemplate = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
+        Dim item = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
                                               & "Fecha2, Banco2, Clave, FechaOrd2 FROM Recibos WHERE " _
                                               & "TipoReg = '2' AND Estado2 <> 'X' AND Tipo2 = '02' " _
                                               & "ORDER BY FechaOrd2, Numero2")
@@ -901,7 +901,7 @@ Public Class Pagos
 
                         item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero2"), 6)) _
                                             .Replace("#FECHA#", .Item("Fecha2")) _
-                                            .Replace("#IMPORTE#", Proceso.formatonumerico(.Item("Importe2")).ToString.PadLeft(10, "_")) _
+                                            .Replace("#IMPORTE#", formatonumerico(.Item("Importe2")).ToString.PadLeft(10, "_")) _
                                             .Replace("#BANCO#", .Item("Banco2"))
 
                         _ChequesRecibos.Add({item, _
@@ -929,11 +929,11 @@ Public Class Pagos
 
     Private Function _TraerChequesEnRecibosProvisorios() As List(Of Object)
         Dim _ChequesRecibos As New List(Of Object)
-        Dim itemTemplate As String = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
-        Dim item As String = ""
+        Dim itemTemplate = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
+        Dim item = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
                                               & "Fecha2, Banco2, Clave, FechaOrd2 FROM RecibosProvi WHERE " _
                                               & "TipoReg = '2' AND Estado2 = 'P' AND ReciboDefinitivo = '0' AND FechaOrd2 > '20080430'" _
                                               & "ORDER BY FechaOrd2, Numero2")
@@ -952,7 +952,7 @@ Public Class Pagos
 
                         item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero2"), 6)) _
                                             .Replace("#FECHA#", .Item("Fecha2")) _
-                                            .Replace("#IMPORTE#", Proceso.formatonumerico(.Item("Importe2")).ToString.PadLeft(10, "_")) _
+                                            .Replace("#IMPORTE#", formatonumerico(.Item("Importe2")).ToString.PadLeft(10, "_")) _
                                             .Replace("#BANCO#", .Item("Banco2"))
 
                         _ChequesRecibos.Add({item, _
@@ -1019,12 +1019,12 @@ Public Class Pagos
     End Sub
 
     Private Sub _ListarDocumentos()
-        Dim itemTemplate As String = "#NUMERO#  #VENCIMIENTO#  #SALDO#  #CLIENTE#"
-        Dim item As String = ""
+        Dim itemTemplate = "#NUMERO#  #VENCIMIENTO#  #SALDO#  #CLIENTE#"
+        Dim item = ""
         Dim XClaves As New List(Of Object)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Clave, Numero, Vencimiento1, Saldo, Cliente FROM CtaCte " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Clave, Numero, Vencimiento1, Saldo, Cliente FROM CtaCte " _
                                               & "WHERE Tipo = '50' AND Saldo <> 0 AND Cliente <> '' ORDER BY Numero")
         Dim dr As SqlDataReader
 
@@ -1042,7 +1042,7 @@ Public Class Pagos
 
                         item = itemTemplate.Replace("#NUMERO#", ceros(.Item("Numero"), 6)) _
                                             .Replace("#VENCIMIENTO#", .Item("Vencimiento1")) _
-                                            .Replace("#SALDO#", Proceso.formatonumerico(.Item("Saldo"))) _
+                                            .Replace("#SALDO#", formatonumerico(.Item("Saldo"))) _
                                             .Replace("#CLIENTE#", .Item("Cliente"))
 
                         lstConsulta.Items.Add(item)
@@ -1075,8 +1075,8 @@ Public Class Pagos
     Private Sub _ListarCuentasContables()
         Dim XClaves As New List(Of Object)
         Dim _Item As String
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cuenta, Descripcion FROM Cuenta ORDER BY Cuenta")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Cuenta, Descripcion FROM Cuenta ORDER BY Cuenta")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1118,14 +1118,14 @@ Public Class Pagos
         End Try
     End Sub
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsulta.Click
         lstConsulta.Visible = False
         txtConsulta.Visible = False
         lstSeleccion.Visible = True
     End Sub
 
     Private Function _ObtenerClaveConsulta(ByVal _Item As String) As String
-        Dim clave As String = ""
+        Dim clave = ""
 
         Try
             clave = _Claves.FindLast(Function(i) i(0) = _Item)(1)
@@ -1137,7 +1137,7 @@ Public Class Pagos
     End Function
 
     Private Sub mostrarProveedor(ByVal _Item As String)
-        Dim clave As String = ""
+        Dim clave = ""
         Dim proveedor As Proveedor
 
         If Not IsNothing(_Claves) Then
@@ -1166,7 +1166,7 @@ Public Class Pagos
     End Sub
 
     Private Sub _TraerCtaCte(ByVal _Item As String, Optional ByVal indice As Integer = Nothing)
-        Dim XClave As String = ""
+        Dim XClave = ""
 
         If IsNothing(_Claves) Then
             Exit Sub
@@ -1214,26 +1214,26 @@ Public Class Pagos
 
         For Each row As DataGridViewRow In gridPagos.Rows
             If Not row.IsNewRow Then
-                row.Cells(4).Value = IIf(Trim(row.Cells(4).Value) <> "", Proceso.formatonumerico(row.Cells(4).Value), "")
+                row.Cells(4).Value = IIf(Trim(row.Cells(4).Value) <> "", formatonumerico(row.Cells(4).Value), "")
                 pagos += Val(_NormalizarNumero(row.Cells(4).Value))
             End If
         Next
 
         For Each row As DataGridViewRow In gridFormaPagos.Rows
             If Not row.IsNewRow Then
-                row.Cells(5).Value = IIf(Trim(row.Cells(5).Value) <> "", Proceso.formatonumerico(row.Cells(5).Value), "")
+                row.Cells(5).Value = IIf(Trim(row.Cells(5).Value) <> "", formatonumerico(row.Cells(5).Value), "")
                 formaPagos += Val(_NormalizarNumero(row.Cells(5).Value))
             End If
         Next
-        txtTotal.Text = Proceso.formatonumerico(total)
-        lblPagos.Text = Proceso.formatonumerico(pagos)
-        lblFormaPagos.Text = Proceso.formatonumerico(formaPagos + total)
-        lblDiferencia.Text = Proceso.formatonumerico(pagos - formaPagos - total)
+        txtTotal.Text = formatonumerico(total)
+        lblPagos.Text = formatonumerico(pagos)
+        lblFormaPagos.Text = formatonumerico(formaPagos + total)
+        lblDiferencia.Text = formatonumerico(pagos - formaPagos - total)
 
     End Sub
 
     Private Function _CtaCteYaUtilizada(ByVal XClave As String) As Boolean
-        Dim utilizada As Boolean = False
+        Dim utilizada = False
 
         For Each row As DataGridViewRow In gridPagos.Rows
             With row
@@ -1256,8 +1256,8 @@ Public Class Pagos
     End Function
 
     Private Sub _RecalcularNotaDeCreditoDebito(ByVal clave As String, ByVal WSaldo As String, ByVal XRow As Integer)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT cp.Tipo, cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT cp.Tipo, cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
                                               & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" _
                                               & Trim(txtProveedor.Text) & "' and cp.Clave = '" & clave & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha DESC")
         Dim dr As SqlDataReader
@@ -1296,7 +1296,7 @@ Public Class Pagos
 
                         If Not IsNothing(WIvaComp) Then
                             With WIvaComp
-                                XParidad = IIf(IsDBNull(.Item("Paridad")), "0", Proceso.formatonumerico(.Item("Paridad")))
+                                XParidad = IIf(IsDBNull(.Item("Paridad")), "0", formatonumerico(.Item("Paridad")))
                                 XPago = IIf(IsDBNull(.Item("Pago")), "0", Val(.Item("Pago")))
                             End With
                         End If
@@ -1348,8 +1348,8 @@ Public Class Pagos
     End Sub
 
     Private Sub _ProcesarCtaCte(ByVal clave As String)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT cp.Tipo, cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT cp.Tipo, cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " _
                                               & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" _
                                               & Trim(txtProveedor.Text) & "' and cp.Clave = '" & clave & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha DESC")
         Dim dr As SqlDataReader
@@ -1368,7 +1368,7 @@ Public Class Pagos
                     .Read()
 
                     Dim XTipo, XNroInterno, XSaldo, XSaldoUS, XLetra, XPunto, XNumero, XParidad, XPago, XParidadTotal As String
-                    Dim XRow As Integer = 0
+                    Dim XRow = 0
 
                     For i = 0 To XMAXFILAS - 1
                         If gridPagos.Rows(i).Cells(0).Value = "" Then
@@ -1396,7 +1396,7 @@ Public Class Pagos
 
                         If Not IsNothing(WIvaComp) Then
                             With WIvaComp
-                                XParidad = IIf(IsDBNull(.Item("Paridad")), "0", Proceso.formatonumerico(.Item("Paridad"), 4))
+                                XParidad = IIf(IsDBNull(.Item("Paridad")), "0", formatonumerico(.Item("Paridad"), 4))
                                 XPago = IIf(IsDBNull(.Item("Pago")), "0", Val(.Item("Pago")))
                             End With
                         End If
@@ -1408,7 +1408,7 @@ Public Class Pagos
                         .Cells(1).Value = XLetra
                         .Cells(2).Value = XPunto
                         .Cells(3).Value = XNumero
-                        .Cells(4).Value = Proceso.formatonumerico(XSaldo)
+                        .Cells(4).Value = formatonumerico(XSaldo)
 
                         Select Case Val(XTipo)
                             Case 1
@@ -1472,7 +1472,7 @@ Public Class Pagos
     End Sub
 
     Private Sub _TraerChequeDeTercero(ByVal _Item As String, Optional ByVal indice As Integer = Nothing)
-        Dim XClave As String = ""
+        Dim XClave = ""
 
         ' Comprobamos que aun haya lugar para seguir cancelando Facturas.
         If gridFormaPagos.Rows.Count > 15 Then
@@ -1501,7 +1501,7 @@ Public Class Pagos
     End Sub
 
     Private Function _ChequeYaUtilizado(ByVal XClave As String) As Boolean
-        Dim utilizada As Boolean = False
+        Dim utilizada = False
 
         For Each row As DataGridViewRow In gridFormaPagos.Rows
             With row
@@ -1523,9 +1523,9 @@ Public Class Pagos
 
     Private Sub _ProcesarChequeTercero(ByVal clave As String, Optional ByVal indice As Integer = Nothing)
         Dim ZSql As String = "SELECT Numero2, Fecha2, Banco2, Importe2, Cuit FROM #TABLA# WHERE Clave = '" & Mid(clave, 2, 8) & "'"
-        Dim Tabla As String = "Recibos"
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
+        Dim Tabla = "Recibos"
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
 
         If Mid(clave, 1, 1) = "2" Then
@@ -1602,7 +1602,7 @@ Public Class Pagos
     End Sub
 
     Private Function _DocumentoYaUtilizado(ByVal XClave As String) As Boolean
-        Dim utilizada As Boolean = False
+        Dim utilizada = False
 
         For Each row As DataGridViewRow In gridFormaPagos.Rows
             With row
@@ -1623,8 +1623,8 @@ Public Class Pagos
     End Function
 
     Private Sub _ProcesarDocumento(ByVal clave As String, Optional ByVal indice As Integer = Nothing)
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Numero, Vencimiento1, Saldo FROM CtaCte WHERE Clave = '" & clave & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Numero, Vencimiento1, Saldo FROM CtaCte WHERE Clave = '" & clave & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1638,7 +1638,7 @@ Public Class Pagos
                     .Read()
 
                     Dim XTipo, XNumero, XFecha, XImporte, XCuit, XClave As String
-                    Dim XRow As Integer = 0
+                    Dim XRow = 0
 
                     For i = 0 To XMAXFILAS - 1
                         If gridPagos.Rows(i).Cells(0).Value = "" Then
@@ -1704,7 +1704,7 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         'Cleanner.clean(Me)
         Dim WParidad = txtParidad.Text
         Dim WFechaParidad = txtFechaParidad.Text
@@ -1779,7 +1779,7 @@ Public Class Pagos
 
     Private Function traerParidad(ByVal fecha As String) As String
         fecha = _Normalizarfecha(fecha)
-        Dim _Paridad As String = "0"
+        Dim _Paridad = "0"
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand("SELECT CambioDivisa FROM Cambios WHERE Fecha = '" & Trim(fecha) & "'")
         Dim dr As SqlDataReader
@@ -1819,9 +1819,9 @@ Public Class Pagos
     End Function
 
     Private Function _TraerNumeroCertificado(ByVal Codigo) As Integer
-        Dim WNumero As Integer = 0
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Numero) as Numero FROM Numero WHERE Codigo = '" & Val(Codigo) & "'")
+        Dim WNumero = 0
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT MAX(Numero) as Numero FROM Numero WHERE Codigo = '" & Val(Codigo) & "'")
         Dim dr As SqlDataReader
         Dim trans As SqlTransaction = Nothing
 
@@ -1866,8 +1866,8 @@ Public Class Pagos
     End Function
 
     Private Function _ExisteCtaCtePrv(ByVal Clave) As Boolean
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Clave FROM CtaCtePrv WHERE Clave = '" & Clave & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Clave FROM CtaCtePrv WHERE Clave = '" & Clave & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -1891,9 +1891,9 @@ Public Class Pagos
     End Function
 
     Private Function _SiguienteNumeroDeOrdenPago() As Integer
-        Dim siguiente As Integer = 0
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 p.Orden FROM Pagos p ORDER BY p.Orden desc")
+        Dim siguiente = 0
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 p.Orden FROM Pagos p ORDER BY p.Orden desc")
         Dim dr As SqlDataReader
 
         Try
@@ -1932,18 +1932,18 @@ Public Class Pagos
         Return siguiente
     End Function
 
-    Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
+    Private Sub btnAgregar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAgregar.Click
         Dim XParidad, WEntra
         Dim XOrden, XRenglon, XProveedor, XFecha, XFechaOrd, XImporte, XRetencion, XRetotra, XRetIbCiudad, XRetIva, XObservaciones, XCuenta, XTipoOrd, ZValida, ZLetra, ZTipo, ZPunto, ZNumero, XTipo1, XLetra1, XPunto1, XNumero1, XImporte1, XObservaciones2, XImpoNeto, XTipo2, XNumero2, XFecha2, XFechaOrd2, XBanco2, XImporte2, XEmpresa, XClave, XRetganancias, XConcepto, XConsecionaria, XImpolist, ClaveRecibo, XCuit, ImporteCheque, NumeroCheque, FechaCheque, BancoCheque, WLetra, WTipo, WPunto, WNumero, WImporte, ZSql, XClaveCtaprv, XTipoRecibo, XClaveRecibo, XClaveCtaCte
         Dim _banco As Banco = Nothing
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("")
 
         If Not validarDatos() Then
             Exit Sub
         End If
 
-        Dim WOrdPago As Integer = 0
+        Dim WOrdPago = 0
         Try
             WOrdPago = _SiguienteNumeroDeOrdenPago() 'DAOPagos.siguienteNumeroDeOrden()
         Catch ex As Exception
@@ -1951,7 +1951,9 @@ Public Class Pagos
             Exit Sub
         End Try
 
-        txtOrdenPago.Text = Proceso.ceros(WOrdPago, 6)
+        txtOrdenPago.Text = ceros(WOrdPago, 6)
+
+        XNeto = _CalcularSaldoBaseRetencionesGanancias()
 
         ' Damos de alta los numero de Certificados.
         Try
@@ -1991,18 +1993,18 @@ Public Class Pagos
         XOrden = txtOrdenPago.Text
         XProveedor = txtProveedor.Text
         XFecha = txtFecha.Text
-        XFechaOrd = Proceso.ordenaFecha(XFecha)
+        XFechaOrd = ordenaFecha(XFecha)
         XImporte = _NormalizarNumero(lblFormaPagos.Text)
         XRetencion = _NormalizarNumero(txtGanancias.Text)
         XRetotra = _NormalizarNumero(txtIngresosBrutos.Text)
         XRetIbCiudad = _NormalizarNumero(txtIBCiudad.Text)
         XRetIva = _NormalizarNumero(txtIVA.Text)
         XObservaciones = Trim(txtObservaciones.Text)
-        XParidad = Proceso.formatonumerico(txtParidad.Text, 4)
+        XParidad = formatonumerico(txtParidad.Text, 4)
 
 
         ' Damos de alta los Pagos.
-        Dim WRenglon As Integer = 0
+        Dim WRenglon = 0
         Dim row As DataGridViewRow = Nothing
         'For Each row As DataGridViewRow In gridPagos.Rows
         For i = 0 To XMAXFILAS - 1
@@ -2013,7 +2015,7 @@ Public Class Pagos
                 With row
                     WRenglon += 1
 
-                    XRenglon = Proceso.ceros(WRenglon, 2)
+                    XRenglon = ceros(WRenglon, 2)
 
                     ZSql = ""
 
@@ -2097,9 +2099,9 @@ Public Class Pagos
                     XTipo1 = .Cells(0).Value
                     XLetra1 = .Cells(1).Value
                     XPunto1 = .Cells(2).Value
-                    XNumero1 = Proceso.ceros(.Cells(3).Value, 8)
+                    XNumero1 = ceros(.Cells(3).Value, 8)
                     XImporte1 = _NormalizarNumero(.Cells(4).Value)
-                    XObservaciones2 = Proceso.leeizquierda(.Cells(5).Value, 30)
+                    XObservaciones2 = leeizquierda(.Cells(5).Value, 30)
                     XImpoNeto = Val(.Cells(6).Value)
 
                     XTipo2 = ""
@@ -2175,7 +2177,7 @@ Public Class Pagos
                 If Val(.Cells(0).Value) > 0 And Val(.Cells(5).Value) <> 0 Then
                     WRenglon += 1
 
-                    XRenglon = Proceso.ceros(WRenglon, 2)
+                    XRenglon = ceros(WRenglon, 2)
 
                     ZSql = ""
 
@@ -2250,10 +2252,10 @@ Public Class Pagos
                     XImporte1 = 0
                     XImpoNeto = 0
 
-                    XTipo2 = Proceso.ceros(.Cells(0).Value, 2)
-                    XNumero2 = Proceso.ceros(.Cells(1).Value, 8)
+                    XTipo2 = ceros(.Cells(0).Value, 2)
+                    XNumero2 = ceros(.Cells(1).Value, 8)
                     XFecha2 = .Cells(2).Value
-                    XFechaOrd2 = Proceso.ordenaFecha(XFecha2)
+                    XFechaOrd2 = ordenaFecha(XFecha2)
                     XBanco2 = .Cells(3).Value
                     XObservaciones2 = .Cells(4).Value
                     XImporte2 = _NormalizarNumero(.Cells(5).Value)
@@ -2274,7 +2276,7 @@ Public Class Pagos
                         XCuenta = WCuenta(i, 2)
                     End If
                     If Val(XTipo2) = 2 Then
-                        XTipo2 = Proceso.ceros(XTipo2, 2)
+                        XTipo2 = ceros(XTipo2, 2)
                     End If
 
                     ZSql = "INSERT INTO Pagos "
@@ -2412,17 +2414,17 @@ Public Class Pagos
             WLetra = "A"
             WTipo = "04"
             WPunto = "0000"
-            WNumero = Proceso.ceros(txtOrdenPago.Text, 8)
+            WNumero = ceros(txtOrdenPago.Text, 8)
             XProveedor = txtProveedor.Text
 
             XFecha = txtFecha.Text
             XEstado = "1"
             XVencimiento = "  /  /    "
             XVencimiento1 = "  /  /    "
-            XTotal = Val(Proceso.formatonumerico((lblFormaPagos.Text)))
+            XTotal = Val(formatonumerico((lblFormaPagos.Text)))
             XTotal = Val(XTotal * -1)
             XSaldo = 0
-            XOrdFecha = Proceso.ordenaFecha(XFecha)
+            XOrdFecha = ordenaFecha(XFecha)
             XOrdVencimiento = "00000000"
             XImpre = "OP"
             XEmpresa = "1"
@@ -2500,17 +2502,17 @@ Public Class Pagos
             WLetra = "A"
             WTipo = "05"
             WPunto = "0000"
-            WNumero = Proceso.ceros(txtOrdenPago.Text, 8)
+            WNumero = ceros(txtOrdenPago.Text, 8)
             XProveedor = txtProveedor.Text
 
             XFecha = txtFecha.Text
             XEstado = "1"
             XVencimiento = "  /  /    "
             XVencimiento1 = "  /  /    "
-            XTotal = Val(Proceso.formatonumerico(lblFormaPagos.Text))
+            XTotal = Val(formatonumerico(lblFormaPagos.Text))
             XTotal = Val(XTotal * -1)
             XSaldo = XTotal
-            XOrdFecha = Proceso.ordenaFecha(XFecha)
+            XOrdFecha = ordenaFecha(XFecha)
             XOrdVencimiento = "00000000"
             XImpre = "AN"
             XEmpresa = "1"
@@ -2589,7 +2591,7 @@ Public Class Pagos
 
         ' Actualizo retenciones en caso de existir
         Dim _Clave = Microsoft.VisualBasic.Right(txtFecha.Text, 2) & Mid(txtFecha.Text, 4, 2) & txtProveedor.Text
-        XNeto = 0
+        'XNeto = 0
         ZSql = ""
         ZSql &= "UPDATE Retencion SET Neto = Neto + " & Str(XNeto) & ", Retenido = Retenido + " & Str(XRetencion) & " WHERE Clave = '" & _Clave & "'"
 
@@ -2644,7 +2646,7 @@ Public Class Pagos
 
         XEmpresa = "1"
 
-        Dim _Empresas = Proceso.Empresas 'As New List(Of String) From {}
+        Dim _Empresas = Empresas 'As New List(Of String) From {}
 
         If _Empresas.Count > 0 Then
             For Ciclo = 1 To 10
@@ -2759,14 +2761,14 @@ Public Class Pagos
         'Dim ultimoNumero As String = 0
         'Dim tipoDoc As String = ""
         'Dim neto As Double
-        Dim interno As String = ""
+        Dim interno = ""
         'Dim Prov As Proveedor
         Dim XProveedor, XTipo, XLetra, XPunto, XNumero, XFecha, XVencimiento, XVencimiento1, XPeriodo, XImpoNeto, XIva21, XIva5, XIva27, XIb, XExento, XImpre
         Dim WTipoDife, WLetraDife, WPuntoDife, WNumeroDife, WNetoDife, WIvaDife
         Dim XOrdFecha, XContado, XEmpresa, XNetolist, XExentolist, XParidad, XPAgo, ZSqlIvaComp, ZSqlImputac, XParamIvaComp, XParamImputac
         Dim XClave, XTipomovi, XTipocomp, XLetracomp, XPuntocomp, XNrocomp, XRenglon, XObservaciones, XCuenta, XDebito, XCredito, XFechaOrd, XTitulo, XDebitolist, XCreditolist, XNroInterno, RenglonDife, XSaldolist, Xlista, XAcumulado
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("")
         Dim trans As SqlTransaction = Nothing
 
 
@@ -2834,18 +2836,18 @@ Public Class Pagos
                 End Try
 
                 With row
-                    WTipoDife = Proceso.ceros(.Cells(0).Value, 2)
+                    WTipoDife = ceros(.Cells(0).Value, 2)
                     WLetraDife = .Cells(1).Value
-                    WPuntoDife = Proceso.ceros(.Cells(2).Value, 4)
-                    row.Cells(3).Value = Proceso.ceros(interno, 8)
-                    WNumeroDife = Proceso.ceros(interno, 8)
-                    interno = Proceso.ceros(interno, 6)
+                    WPuntoDife = ceros(.Cells(2).Value, 4)
+                    row.Cells(3).Value = ceros(interno, 8)
+                    WNumeroDife = ceros(interno, 8)
+                    interno = ceros(interno, 6)
 
                     If UCase(Trim(WLetraDife)) = "A" Then
-                        WNetoDife = Val(Proceso.formatonumerico(.Cells(4).Value)) / 1.21
-                        WIvaDife = Val(Proceso.formatonumerico(.Cells(4).Value)) - Val(WNetoDife)
+                        WNetoDife = Val(formatonumerico(.Cells(4).Value)) / 1.21
+                        WIvaDife = Val(formatonumerico(.Cells(4).Value)) - Val(WNetoDife)
                     Else
-                        WNetoDife = Val(Proceso.formatonumerico(.Cells(4).Value))
+                        WNetoDife = Val(formatonumerico(.Cells(4).Value))
                         WIvaDife = 0.0
                     End If
 
@@ -2862,8 +2864,8 @@ Public Class Pagos
                 XVencimiento = XFecha
                 XVencimiento1 = XFecha
                 XPeriodo = XFecha
-                XImpoNeto = Val(Proceso.formatonumerico(Val(WNetoDife)))
-                XIva21 = Val(Proceso.formatonumerico(Val(WIvaDife)))
+                XImpoNeto = Val(formatonumerico(Val(WNetoDife)))
+                XIva21 = Val(formatonumerico(Val(WIvaDife)))
                 XIva5 = 0
                 XIva27 = 0
                 XIb = 0
@@ -2880,7 +2882,7 @@ Public Class Pagos
                         XImpre = ""
                 End Select
 
-                XOrdFecha = Proceso.ordenaFecha(XFecha)
+                XOrdFecha = ordenaFecha(XFecha)
                 XContado = "2"
                 XEmpresa = 1
                 XNetolist = 0.0
@@ -2952,7 +2954,7 @@ Public Class Pagos
 
                 REM Renglon 1
 
-                RenglonDife = Proceso.ceros(RenglonDife, 2)
+                RenglonDife = ceros(RenglonDife, 2)
                 XRenglon = RenglonDife
 
                 XTipomovi = "2"
@@ -2965,12 +2967,12 @@ Public Class Pagos
                 Select Case Val(WTipoDife)
                     Case 2
                         XCuenta = "6107"
-                        XDebito = Val(Proceso.formatonumerico(Math.Abs(Val(WNetoDife))))
+                        XDebito = Val(formatonumerico(Math.Abs(Val(WNetoDife))))
                         XCredito = 0
                     Case Else
                         XCuenta = "7308"
                         XDebito = 0
-                        XCredito = Val(Proceso.formatonumerico(Math.Abs(Val(WNetoDife))))
+                        XCredito = Val(formatonumerico(Math.Abs(Val(WNetoDife))))
                 End Select
                 XFechaOrd = XOrdFecha
                 XTitulo = "Compras"
@@ -3031,7 +3033,7 @@ Public Class Pagos
                 ' Renglon 2
 
                 RenglonDife = RenglonDife + 1
-                XRenglon = Proceso.ceros(RenglonDife, 2)
+                XRenglon = ceros(RenglonDife, 2)
 
                 XTipomovi = "2"
                 XTipocomp = WTipoDife
@@ -3043,12 +3045,12 @@ Public Class Pagos
                 Select Case Val(WTipoDife)
                     Case 2
                         XCuenta = "151"
-                        XDebito = Val(Proceso.formatonumerico(Math.Abs(Val(WIvaDife))))
+                        XDebito = Val(formatonumerico(Math.Abs(Val(WIvaDife))))
                         XCredito = 0
                     Case Else
                         XCuenta = "151"
                         XDebito = 0
-                        XCredito = Val(Proceso.formatonumerico(Math.Abs(Val(WIvaDife))))
+                        XCredito = Val(formatonumerico(Math.Abs(Val(WIvaDife))))
                 End Select
                 XFechaOrd = XOrdFecha
                 XTitulo = "Compras"
@@ -3106,7 +3108,7 @@ Public Class Pagos
 
                 RenglonDife = RenglonDife + 1
 
-                XRenglon = Proceso.ceros(RenglonDife, 2)
+                XRenglon = ceros(RenglonDife, 2)
 
                 XTipomovi = "2"
                 XTipocomp = WTipoDife
@@ -3119,10 +3121,10 @@ Public Class Pagos
                     Case 2
                         XCuenta = "2001"
                         XDebito = 0
-                        XCredito = Val(Proceso.formatonumerico(Math.Abs(Val(WNetoDife)) + Math.Abs(Val(WIvaDife))))
+                        XCredito = Val(formatonumerico(Math.Abs(Val(WNetoDife)) + Math.Abs(Val(WIvaDife))))
                     Case Else
                         XCuenta = "2001"
-                        XDebito = Val(Proceso.formatonumerico(Math.Abs(Val(WNetoDife)) + Math.Abs(Val(WIvaDife))))
+                        XDebito = Val(formatonumerico(Math.Abs(Val(WNetoDife)) + Math.Abs(Val(WIvaDife))))
                         XCredito = 0
                 End Select
                 XFechaOrd = XOrdFecha
@@ -3188,10 +3190,10 @@ Public Class Pagos
                 XVencimiento = XFecha
                 XVencimiento1 = XFecha
                 XNroInterno = XNroInterno
-                XTotal = Val(Proceso.formatonumerico(Val(WNetoDife) + Val(WIvaDife)))
-                XSaldo = Val(Proceso.formatonumerico(Val(WNetoDife) + Val(WIvaDife)))
+                XTotal = Val(formatonumerico(Val(WNetoDife) + Val(WIvaDife)))
+                XSaldo = Val(formatonumerico(Val(WNetoDife) + Val(WIvaDife)))
                 XClave = XProveedor & WLetraDife & WTipoDife & WPuntoDife & WNumeroDife
-                XOrdFecha = Proceso.ordenaFecha(XFecha)
+                XOrdFecha = ordenaFecha(XFecha)
                 XOrdVencimiento = XOrdFecha
                 Select Case Val(WTipoDife)
                     Case 1
@@ -3265,7 +3267,7 @@ Public Class Pagos
     Private Sub crearImputaciones(ByVal compra As Compra)
         Dim imputaciones As New List(Of Imputac)
         Dim debitoProv, debitoIva, debitoCuenta, creditoProv, creditoIva, creditoCuenta As Double
-        Dim cuenta As Integer = 0
+        Dim cuenta = 0
         debitoProv = 0
         debitoIva = debitoCuenta = creditoProv = creditoIva = creditoCuenta = debitoProv
         Try
@@ -3301,7 +3303,7 @@ Public Class Pagos
 
     Private Function crearPagos()
         Dim pagos As New List(Of Pago)
-        Dim ultimoNumero As String = ""
+        Dim ultimoNumero = ""
 
         For Each row As DataGridViewRow In gridPagos.Rows
             If Not row.IsNewRow Then
@@ -3339,12 +3341,12 @@ Public Class Pagos
         Return Nothing
     End Function
 
-    Private Sub txtFecha_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub txtFecha_Leave(ByVal sender As Object, ByVal e As EventArgs)
         txtFechaParidad.Text = txtFecha.Text
     End Sub
 
     Private Sub eventoSegunTipoEnFormaDePagoPara(ByVal valor As Integer, ByVal rowIndex As Integer, ByVal columnIndex As Integer)
-        Dim nombre As String = ""
+        Dim nombre = ""
         Dim column As Integer = columnIndex
 
         Select Case valor
@@ -3428,34 +3430,34 @@ Public Class Pagos
 
         For Each row As DataGridViewRow In gridPagos.Rows
             If Not row.IsNewRow Then
-                row.Cells(4).Value = IIf(Trim(row.Cells(4).Value) <> "", Proceso.formatonumerico(row.Cells(4).Value), "")
+                row.Cells(4).Value = IIf(Trim(row.Cells(4).Value) <> "", formatonumerico(row.Cells(4).Value), "")
                 pagos += Val(_NormalizarNumero(row.Cells(4).Value))
             End If
         Next
 
         For Each row As DataGridViewRow In gridFormaPagos.Rows
             If Not row.IsNewRow Then
-                row.Cells(5).Value = IIf(Trim(row.Cells(5).Value) <> "", Proceso.formatonumerico(row.Cells(5).Value), "")
+                row.Cells(5).Value = IIf(Trim(row.Cells(5).Value) <> "", formatonumerico(row.Cells(5).Value), "")
                 formaPagos += Val(_NormalizarNumero(row.Cells(5).Value))
             End If
         Next
 
-        txtTotal.Text = Proceso.formatonumerico(Str$(total))
-        lblPagos.Text = Proceso.formatonumerico(Str$(pagos))
-        lblFormaPagos.Text = Proceso.formatonumerico(Str$(formaPagos + total))
-        lblDiferencia.Text = Proceso.formatonumerico(Str$(pagos - formaPagos - total))
+        txtTotal.Text = formatonumerico(Str$(total))
+        lblPagos.Text = formatonumerico(Str$(pagos))
+        lblFormaPagos.Text = formatonumerico(Str$(formaPagos + total))
+        lblDiferencia.Text = formatonumerico(Str$(pagos - formaPagos - total))
 
     End Sub
 
-    Private Sub gridPagos_RowsAdded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles gridPagos.RowsAdded
+    Private Sub gridPagos_RowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles gridPagos.RowsAdded
         sumarImportes()
     End Sub
 
-    Private Sub gridFormaPagos_RowsAdded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles gridFormaPagos.RowsAdded
+    Private Sub gridFormaPagos_RowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles gridFormaPagos.RowsAdded
         sumarImportes()
     End Sub
 
-    Private Sub gridPagos_UserDeletedRow(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles gridPagos.UserDeletedRow
+    Private Sub gridPagos_UserDeletedRow(ByVal sender As Object, ByVal e As DataGridViewRowEventArgs) Handles gridPagos.UserDeletedRow
         If e.Row.Cells(0).Value <> "" Then
             Dim detalle As DetalleCompraCuentaCorriente = pagos.Find(Function(pago) pago.tipo = e.Row.Cells(0).Value And pago.letra = e.Row.Cells(1).Value And
                                                                          pago.punto = e.Row.Cells(2).Value And pago.numero = e.Row.Cells(3).Value And
@@ -3467,7 +3469,7 @@ Public Class Pagos
         sumarImportes()
     End Sub
 
-    Private Sub gridFormaPagos_UserDeletedRow(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles gridFormaPagos.UserDeletedRow
+    Private Sub gridFormaPagos_UserDeletedRow(ByVal sender As Object, ByVal e As DataGridViewRowEventArgs) Handles gridFormaPagos.UserDeletedRow
         If e.Row.Cells(0).Value = "03" Then
             Dim chequeABorrar As Cheque = cheques.Find(Function(cheque) cheque.numero = e.Row.Cells(1).Value And cheque.fecha = e.Row.Cells(2).Value And cheque.banco = e.Row.Cells(4).Value And cheque.importe = e.Row.Cells(5).Value)
             If Not IsNothing(chequeABorrar) Then
@@ -3479,7 +3481,7 @@ Public Class Pagos
     End Sub
 
     Private Function _ProximaFilaVaciaPagos() As Integer
-        Dim XRow As Integer = 0
+        Dim XRow = 0
 
         For i = 0 To XMAXFILAS - 1
             If gridPagos.Rows(i).Cells(0).Value = "" Then
@@ -3493,7 +3495,7 @@ Public Class Pagos
 
 
     Private Function _ProximaFilaVaciaFormaPagos() As Integer
-        Dim XRow As Integer = 0
+        Dim XRow = 0
 
         For i = 0 To XMAXFILAS - 1
             If gridFormaPagos.Rows(i).Cells(0).Value = "" Then
@@ -3505,7 +3507,7 @@ Public Class Pagos
         Return XRow
     End Function
 
-    Private Sub optTransferencias_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optTransferencias.CheckedChanged
+    Private Sub optTransferencias_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optTransferencias.CheckedChanged
         If optTransferencias.Checked Then
 
             If Val(txtBanco.Text) = 0 Then
@@ -3524,7 +3526,7 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub optAnticipos_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optAnticipos.CheckedChanged
+    Private Sub optAnticipos_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optAnticipos.CheckedChanged
         If optAnticipos.Checked Then
             'gridPagos.Rows.Clear()
             '_LimpiarGrillas()
@@ -3539,7 +3541,7 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub optVarios_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optVarios.CheckedChanged
+    Private Sub optVarios_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optVarios.CheckedChanged
         If optVarios.Checked Then
             '_LimpiarGrillas()
             With gridPagos
@@ -3554,7 +3556,7 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub optChequeRechazado_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optChequeRechazado.CheckedChanged
+    Private Sub optChequeRechazado_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optChequeRechazado.CheckedChanged
         If optChequeRechazado.Checked Then
             '_LimpiarGrillas()
             With gridPagos
@@ -3570,7 +3572,7 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub optCtaCte_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optCtaCte.CheckedChanged
+    Private Sub optCtaCte_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optCtaCte.CheckedChanged
         If optCtaCte.Checked Then
             '_LimpiarGrillas()
             'gridPagos.Rows.Clear()
@@ -3581,7 +3583,7 @@ Public Class Pagos
         End If
     End Sub
 
-    Public Sub txtOrdenPago_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrdenPago.KeyDown
+    Public Sub txtOrdenPago_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtOrdenPago.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtOrdenPago.Text) <> "" Then
@@ -3622,7 +3624,7 @@ Public Class Pagos
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
         Select Case keycode
             Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back, Keys.Subtract
                 valido = True
@@ -3638,7 +3640,7 @@ Public Class Pagos
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
         Debug.Print(keycode.ToString)
         If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -3650,7 +3652,7 @@ Public Class Pagos
     End Function
 
     Private Function _EsDecimalOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
         If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
         Else
@@ -3660,7 +3662,7 @@ Public Class Pagos
         Return valido
     End Function
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
 
         If gridFormaPagos.Focused Or gridFormaPagos.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
             gridFormaPagos.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
@@ -3789,7 +3791,7 @@ Public Class Pagos
                 If iCol = 5 Then
 
                     If valor <> "" Then
-                        gridFormaPagos.Rows(iRow).Cells(iCol).Value = Proceso.formatonumerico(valor)
+                        gridFormaPagos.Rows(iRow).Cells(iCol).Value = formatonumerico(valor)
 
                         sumarImportes()
 
@@ -3859,10 +3861,10 @@ Public Class Pagos
                                 If Val(.Rows(iRow + 1).Cells(3).Value) = 99999999 Or Val(.Rows(iRow + 1).Cells(0).Value) = 2 Or Val(.Rows(iRow + 1).Cells(0).Value) = 3 Then
 
                                     Dim WLetra = UCase(.Rows(iRow).Cells(1).Value)
-                                    Dim WTipo = Proceso.ceros(.Rows(iRow).Cells(0).Value, 2)
-                                    Dim WPunto = Proceso.ceros(.Rows(iRow).Cells(2).Value, 4)
-                                    Dim WNumero = Proceso.ceros(.Rows(iRow).Cells(3).Value, 8)
-                                    Dim WSaldo = Proceso.formatonumerico(.Rows(iRow).Cells(iCol).Value)
+                                    Dim WTipo = ceros(.Rows(iRow).Cells(0).Value, 2)
+                                    Dim WPunto = ceros(.Rows(iRow).Cells(2).Value, 4)
+                                    Dim WNumero = ceros(.Rows(iRow).Cells(3).Value, 8)
+                                    Dim WSaldo = formatonumerico(.Rows(iRow).Cells(iCol).Value)
 
                                     Dim ZZClaveCtaCtePrv = txtProveedor.Text & WLetra & WTipo & WPunto & WNumero
 
@@ -3939,9 +3941,9 @@ Public Class Pagos
     End Function
 
     Private Function _ObtenerNombreBanco(ByVal claveBanco As String) As String
-        Dim _NombreBanco As String = ""
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Nombre FROM BCRA WHERE Banco = '" & Val(claveBanco) & "'")
+        Dim _NombreBanco = ""
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Nombre FROM BCRA WHERE Banco = '" & Val(claveBanco) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -3985,10 +3987,10 @@ Public Class Pagos
     End Function
 
     Private Function _BuscarClaveRecibo(ByVal Clavecheque) As String
-        Dim clave As String = ""
+        Dim clave = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Clave FROM Recibos WHERE ClaveCheque = '" & Clavecheque & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Clave FROM Recibos WHERE ClaveCheque = '" & Clavecheque & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -4063,8 +4065,8 @@ Public Class Pagos
 
     Private Function _ProcesarCheque(ByVal row As Integer, ByVal ClaveCheque As String) As Boolean
         Dim WTipo, WNumero, WFecha, WBanco, WImporte, WClave, WNomBanco, XBanco, WCuit As String
-        Dim _LecturaCorrecta As Boolean = True
-        Dim cn As SqlConnection = New SqlConnection()
+        Dim _LecturaCorrecta = True
+        Dim cn = New SqlConnection()
         Dim cm As New SqlCommand
         Dim dr As SqlDataReader
 
@@ -4133,7 +4135,7 @@ Public Class Pagos
         End If
 
         SQLConnector.conexionSql(cn, cm)
-        Dim _Tabla As String = "Recibos"
+        Dim _Tabla = "Recibos"
 
 
         If Mid(WClave, 1, 1) = "2" Then
@@ -4174,7 +4176,7 @@ Public Class Pagos
                 .Cells(1).Value = WNumero
                 .Cells(2).Value = WFecha
                 .Cells(4).Value = WBanco
-                .Cells(5).Value = Proceso.formatonumerico(WImporte)
+                .Cells(5).Value = formatonumerico(WImporte)
                 .Cells(6).Value = WClave
                 .Cells(7).Value = WCuit
             End With
@@ -4184,7 +4186,7 @@ Public Class Pagos
     End Function
 
     Private Function _ChequeYaCargado(ByVal ClaveCheque) As Boolean
-        Dim _cargado As Boolean = False
+        Dim _cargado = False
         Dim ZZNroCheque = Mid$(ClaveCheque, 12, 8)
 
         For Each row As DataGridViewRow In gridFormaPagos.Rows
@@ -4199,9 +4201,9 @@ Public Class Pagos
     End Function
 
     Private Function _ChequeUtilizadoEnRecibo(ByVal ClaveCheque As String) As Boolean
-        Dim utilizado As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 ClaveCheque FROM Recibos WHERE ClaveCheque = '" & ClaveCheque & "'")
+        Dim utilizado = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 ClaveCheque FROM Recibos WHERE ClaveCheque = '" & ClaveCheque & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -4229,9 +4231,9 @@ Public Class Pagos
     End Function
 
     Private Function _ChequeUtilizadoEnReciboProvisorio(ByVal ClaveCheque As String) As Boolean
-        Dim utilizado As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 ClaveCheque FROM RecibosProvi WHERE ClaveCheque = '" & ClaveCheque & "'")
+        Dim utilizado = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 ClaveCheque FROM RecibosProvi WHERE ClaveCheque = '" & ClaveCheque & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -4259,9 +4261,9 @@ Public Class Pagos
     End Function
 
     Private Function _TraerNumeroCuit(ByVal clave As String) As String
-        Dim _cuit As String = ""
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cuit FROM Cuit WHERE Clave = '" & Trim(clave) & "'")
+        Dim _cuit = ""
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Cuit FROM Cuit WHERE Clave = '" & Trim(clave) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -4353,9 +4355,9 @@ Public Class Pagos
     End Sub
 
     Private Function _CuentaContableValida(ByRef cuenta As String)
-        Dim _CuentaValida As Boolean = False
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cuenta FROM Cuenta WHERE Cuenta= '" & Trim(cuenta) & "'")
+        Dim _CuentaValida = False
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Cuenta FROM Cuenta WHERE Cuenta= '" & Trim(cuenta) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -4391,7 +4393,7 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub btnCarpetas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCarpetas.Click
+    Private Sub btnCarpetas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCarpetas.Click
         With CarpetasPagos
 
             .Carpetas(_Carpetas) ' Asignamos las carpetas en caso de que la orden de pago tenga.
@@ -4414,7 +4416,7 @@ Public Class Pagos
     '    lblFormaPagos.Text = _NormalizarNumero(lblFormaPagos.Text)
     'End Sub
 
-    Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
+    Private Sub txtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFecha.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtFecha.Text.Replace("/", "")) = "" Then : Exit Sub : End If
@@ -4431,7 +4433,7 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
+    Private Sub txtObservaciones_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtObservaciones.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Not optVarios.Checked Then
@@ -4448,7 +4450,7 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub txtFechaParidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaParidad.KeyDown
+    Private Sub txtFechaParidad_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaParidad.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -4477,7 +4479,7 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub txtParidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtParidad.KeyDown
+    Private Sub txtParidad_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtParidad.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Val(txtParidad.Text) <> 0 Then
@@ -4489,41 +4491,41 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub txtGanancias_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtGanancias.KeyDown
+    Private Sub txtGanancias_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtGanancias.KeyDown
         If e.KeyData = Keys.Enter Then
             txtIngresosBrutos.Focus()
         End If
     End Sub
 
-    Private Sub txtIngresosBrutos_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtIngresosBrutos.KeyDown
+    Private Sub txtIngresosBrutos_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtIngresosBrutos.KeyDown
         If e.KeyData = Keys.Enter Then
             cmbTipo.Focus()
         End If
     End Sub
 
-    Private Sub cmbTipo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbTipo.KeyDown
+    Private Sub cmbTipo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbTipo.KeyDown
         If e.KeyData = Keys.Enter Then
             txtIBCiudad.Focus()
         End If
     End Sub
 
-    Private Sub cmbTipo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipo.TextChanged
+    Private Sub cmbTipo_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbTipo.TextChanged
         txtIBCiudad.Focus()
     End Sub
 
-    Private Sub txtIBCiudad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtIBCiudad.KeyDown
+    Private Sub txtIBCiudad_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtIBCiudad.KeyDown
         If e.KeyData = Keys.Enter Then
             txtIVA.Focus()
         End If
     End Sub
 
-    Private Sub txtIVA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtIVA.KeyDown
+    Private Sub txtIVA_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtIVA.KeyDown
         If e.KeyData = Keys.Enter Then
             txtTotal.Focus()
         End If
     End Sub
 
-    Private Sub txtParidad_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtParidad.Leave, txtGanancias.Leave, txtIBCiudad.Leave, txtIngresosBrutos.Leave, txtIVA.Leave, txtTotal.Leave, lblDiferencia.Leave, lblFormaPagos.Leave, lblPagos.Leave
+    Private Sub txtParidad_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtParidad.Leave, txtGanancias.Leave, txtIBCiudad.Leave, txtIngresosBrutos.Leave, txtIVA.Leave, txtTotal.Leave, lblDiferencia.Leave, lblFormaPagos.Leave, lblPagos.Leave
         Dim _controles As New List(Of Control) From {txtGanancias, txtIBCiudad, txtIngresosBrutos, txtIVA, txtTotal, lblDiferencia, lblFormaPagos, lblPagos}
         For Each _c As Control In _controles
             _c.Text = _NormalizarNumero(_c.Text)
@@ -4532,7 +4534,7 @@ Public Class Pagos
         txtParidad.Text = _NormalizarNumero(txtParidad.Text, 4)
     End Sub
 
-    Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
+    Private Sub txtProveedor_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtProveedor.MouseDoubleClick
 
         _TipoConsulta = 0
         _ListarProveedores()
@@ -4547,28 +4549,28 @@ Public Class Pagos
         Return Proceso._ValidarFecha(fecha, valido)
     End Function
 
-    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
+    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As Object, ByVal e As TypeValidationEventArgs)
 
         e.Cancel = Not _ValidarFecha(txtFecha.Text, e.IsValidInput)
 
     End Sub
 
-    Private Sub txtFechaParidad_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
+    Private Sub txtFechaParidad_TypeValidationCompleted(ByVal sender As Object, ByVal e As TypeValidationEventArgs)
         e.Cancel = Not _ValidarFecha(txtFechaParidad.Text, e.IsValidInput)
     End Sub
 
-    Private Sub txtBanco_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtBanco.MouseDoubleClick
+    Private Sub txtBanco_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtBanco.MouseDoubleClick
 
         _TipoConsulta = 1
         _ListarCuentasContables()
 
     End Sub
 
-    Private Sub txtConsulta_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtConsulta.KeyPress
+    Private Sub txtConsulta_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtConsulta.KeyPress
 
     End Sub
 
-    Private Sub txtConsulta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtConsulta.TextChanged
+    Private Sub txtConsulta_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtConsulta.TextChanged
 
         CLBFiltrado.Items.Clear()
 
@@ -4594,12 +4596,12 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub btnChequesTerceros_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChequesTerceros.Click
+    Private Sub btnChequesTerceros_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnChequesTerceros.Click
         lstSeleccion.SelectedIndex = 2
         lstSeleccion_MouseClick(Nothing, Nothing)
     End Sub
 
-    Private Sub btnCtaCte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCtaCte.Click
+    Private Sub btnCtaCte_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCtaCte.Click
         lstSeleccion.SelectedIndex = 1
         lstSeleccion_MouseClick(Nothing, Nothing)
     End Sub
@@ -4609,9 +4611,9 @@ Public Class Pagos
         Pantalla
     End Enum
 
-    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+    Private Sub btnImprimir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimir.Click
         Dim XOrdenPago As String = IIf(Trim(txtOrdenPago.Text) = "", "0", Trim(txtOrdenPago.Text))
-        Dim XEmpCuit As String = "30-54916508-3"
+        Dim XEmpCuit = "30-54916508-3"
         Dim WEmpresa = "SURFACTAN S.A."
         Dim XRazon, XCuitProveedor, WTipo, WLetra, WPunto, WNumero, ClaveCtaprv, WCtaProveedor, WCtaEfectivo, WCtaCheques, ClaveBanco As String
         Dim WRenglon, XTotal, XSubtotal, XCantidad, XLugarResumen As Double
@@ -4625,7 +4627,7 @@ Public Class Pagos
         Dim dr As SqlDataReader
 
         ' CAMBIAMOS EL CUIT SEGUN SEA O NO PELLITAL
-        If Proceso._EsPellital() Then
+        If _EsPellital() Then
             XEmpCuit = "30-61052459-8"
             WEmpresa = "PELLITAL S.A."
         End If
@@ -4696,9 +4698,9 @@ Public Class Pagos
                 WImpresion(XCantidad, 4) = .Cells(5).Value
                 WImpresion(XCantidad, 5) = .Cells(4).Value
                 If Val(WImpresion(XCantidad, 2)) = 3 Or Val(WImpresion(XCantidad, 2)) = 5 Then
-                    XTotal -= Val(Proceso.formatonumerico(WImpresion(XCantidad, 5)))
+                    XTotal -= Val(formatonumerico(WImpresion(XCantidad, 5)))
                 Else
-                    XTotal += Val(Proceso.formatonumerico(WImpresion(XCantidad, 5)))
+                    XTotal += Val(formatonumerico(WImpresion(XCantidad, 5)))
                 End If
 
                 WTipo = .Cells(0).Value
@@ -4743,14 +4745,14 @@ Public Class Pagos
 
         If optCtaCte.Checked Or optAnticipos.Checked Then
             WDebito(1, 1) = WCtaProveedor
-            WDebito(1, 2) = Proceso.formatonumerico(XTotal)
+            WDebito(1, 2) = formatonumerico(XTotal)
         Else
 
             For irow = 0 To gridPagos.Rows.Count - 1
                 With gridPagos.Rows(irow)
                     If Val(.Cells(4).Value) <> 0 Then
                         WDebito(irow + 1, 1) = WCuenta(irow, 1)
-                        WDebito(irow + 1, 2) = Val(Proceso.formatonumerico(.Cells(4).Value))
+                        WDebito(irow + 1, 2) = Val(formatonumerico(.Cells(4).Value))
                     End If
                 End With
             Next
@@ -4786,7 +4788,7 @@ Public Class Pagos
                     End Select
 
                     If Val(.Cells(0).Value) = 3 Then
-                        SumaTercero = SumaTercero + Val(Proceso.formatonumerico(.Cells(5).Value))
+                        SumaTercero = SumaTercero + Val(formatonumerico(.Cells(5).Value))
                     ElseIf Val(.Cells(0).Value) <> 3 Or Val(txtProveedor.Text) = 0 Then
 
                         WImpre2(Impre2, 1) = .Cells(1).Value
@@ -4829,7 +4831,7 @@ Public Class Pagos
         ' Creo las Columnas
         _PrepararTablaOrdenPago(Tabla)
 
-        For WCiclo = 0 To 11
+        For WCiclo = 0 To 14
 
             WFecha1 = ""
             WNumero1 = ""
@@ -4848,13 +4850,13 @@ Public Class Pagos
                 WNumero1 = WImpresion(WCiclo, 3)
                 WComprobante1 = WImpresion(WCiclo, 2)
                 WDescripcion1 = WImpresion(WCiclo, 4)
-                WImporte1 = Val(Proceso.formatonumerico(WImpresion(WCiclo, 5)))
+                WImporte1 = Val(formatonumerico(WImpresion(WCiclo, 5)))
             End If
 
             If Val(WImpre2(WCiclo, 3)) <> 0 Then
                 WNumero2 = WImpre2(WCiclo, 1)
                 WBanco2 = WImpre2(WCiclo, 2)
-                WImporte2 = Val(Proceso.formatonumerico(WImpre2(WCiclo, 3)))
+                WImporte2 = Val(formatonumerico(WImpre2(WCiclo, 3)))
                 WFecha2 = WImpre2(WCiclo, 4)
             End If
 
@@ -4873,19 +4875,19 @@ Public Class Pagos
                 .Item("Numero1") = WNumero1
                 .Item("Comprobante1") = WComprobante1
                 .Item("Descripcion1") = WDescripcion1
-                .Item("Importe1") = Val(Proceso.formatonumerico(WImporte1))
+                .Item("Importe1") = Val(formatonumerico(WImporte1))
                 .Item("Numero2") = WNumero2
                 .Item("Banco2") = WBanco2
-                .Item("Importe2") = Val(Proceso.formatonumerico(WImporte2))
+                .Item("Importe2") = Val(formatonumerico(WImporte2))
                 .Item("Fecha2") = WFecha2
-                .Item("Neto") = Val(Proceso.formatonumerico(XTotal))
-                .Item("Rete1") = Val(Proceso.formatonumerico(txtGanancias.Text))
-                .Item("Rete2") = Val(Proceso.formatonumerico(txtIngresosBrutos.Text)) + Val(Proceso.formatonumerico(txtIBCiudad.Text))
+                .Item("Neto") = Val(formatonumerico(XTotal))
+                .Item("Rete1") = Val(formatonumerico(txtGanancias.Text))
+                .Item("Rete2") = Val(formatonumerico(txtIngresosBrutos.Text)) + Val(formatonumerico(txtIBCiudad.Text))
                 .Item("Total") = Val(txtIVA.Text)
                 .Item("Observaciones") = txtObservaciones.Text
                 .Item("Empresa") = WEmpresa '"Surfactan S.A."
                 .Item("Cuit") = XEmpCuit
-                .Item("Paridad") = Val(Proceso.formatonumerico(XParidadTotal))
+                .Item("Paridad") = Val(formatonumerico(XParidadTotal))
 
             End With
 
@@ -4905,19 +4907,19 @@ Public Class Pagos
                 .Item("Numero1") = WNumero1
                 .Item("Comprobante1") = WComprobante1
                 .Item("Descripcion1") = WDescripcion1
-                .Item("Importe1") = Val(Proceso.formatonumerico(WImporte1))
+                .Item("Importe1") = Val(formatonumerico(WImporte1))
                 .Item("Numero2") = WNumero2
                 .Item("Banco2") = WBanco2
-                .Item("Importe2") = Val(Proceso.formatonumerico(WImporte2))
+                .Item("Importe2") = Val(formatonumerico(WImporte2))
                 .Item("Fecha2") = WFecha2
-                .Item("Neto") = Val(Proceso.formatonumerico(XTotal))
-                .Item("Rete1") = Val(Proceso.formatonumerico(txtGanancias.Text))
-                .Item("Rete2") = Val(Proceso.formatonumerico(txtIngresosBrutos.Text)) + Val(Proceso.formatonumerico(txtIBCiudad.Text))
-                .Item("Total") = Val(Proceso.formatonumerico(txtIVA.Text))
+                .Item("Neto") = Val(formatonumerico(XTotal))
+                .Item("Rete1") = Val(formatonumerico(txtGanancias.Text))
+                .Item("Rete2") = Val(formatonumerico(txtIngresosBrutos.Text)) + Val(formatonumerico(txtIBCiudad.Text))
+                .Item("Total") = Val(formatonumerico(txtIVA.Text))
                 .Item("Observaciones") = txtObservaciones.Text
                 .Item("Empresa") = WEmpresa '"Surfactan S.A."
                 .Item("Cuit") = XEmpCuit
-                .Item("Paridad") = Val(Proceso.formatonumerico(XParidadTotal))
+                .Item("Paridad") = Val(formatonumerico(XParidadTotal))
             End With
 
             Tabla.Rows.Add(row)
@@ -4970,7 +4972,7 @@ Public Class Pagos
 
         ' Imprimimos Comprobante de Retención de Ingresos Brutos CABA si la hubiese y si estuviesemos en SURFACTAN.
 
-        If Val(txtIBCiudad.Text) <> 0 AndAlso Not Proceso._EsPellital() Then
+        If Val(txtIBCiudad.Text) <> 0 AndAlso Not _EsPellital() Then
             _ImprimirComprobanteRetencionIBCiudad()
         End If
 
@@ -4987,11 +4989,11 @@ Public Class Pagos
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteRetIva
         Dim WTipoIbCaba, WTipoiva, WTipoprv
-        Dim WEmpNombre As String = "SURFACTAN S.A."
-        Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
-        Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
-        Dim WEmpCuit As String = "30-54916508-3"
-        Dim WNroIb As String = "902-913585-2"
+        Dim WEmpNombre = "SURFACTAN S.A."
+        Dim WEmpDireccion = "Malvinas Argentinas 4589"
+        Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
+        Dim WEmpCuit = "30-54916508-3"
+        Dim WNroIb = "902-913585-2"
         Dim ImpreCopia(2) As String
         Dim WLetra, WTipo, WPunto, WNumero, WImporte, ZNroInterno, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, ZZTotal, ZZSaldo, ZZSuma, WPrvDireccion, WPrvCuit, WPrvIb
         Dim WBruto, WNeto, WIva, WReteIva
@@ -5001,12 +5003,12 @@ Public Class Pagos
         Dim WRete
         Dim WRenglon = 0
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
         ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
-        If Proceso._EsPellital() Then
+        If _EsPellital() Then
             WEmpCuit = "30-61052459-8"
             WEmpNombre = "PELLITAL S.A."
             WEmpDireccion = "Tucumán 3275"
@@ -5072,9 +5074,9 @@ Public Class Pagos
             .Columns.Add("Numero1")
             .Columns.Add("Fecha1")
             .Columns.Add("Categoria1")
-            .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Porce1").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Retencion1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe1").DataType = Type.GetType("System.Double")
+            .Columns.Add("Porce1").DataType = Type.GetType("System.Double")
+            .Columns.Add("Retencion1").DataType = Type.GetType("System.Double")
         End With
 
 
@@ -5307,25 +5309,25 @@ Public Class Pagos
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteIBCABA
         Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
-        Dim WEmpNombre As String = "SURFACTAN S.A."
-        Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
-        Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
-        Dim WEmpCuit As String = "30-54916508-3"
-        Dim WNroIb As String = "902-913585-2"
+        Dim WEmpNombre = "SURFACTAN S.A."
+        Dim WEmpDireccion = "Malvinas Argentinas 4589"
+        Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
+        Dim WEmpCuit = "30-54916508-3"
+        Dim WNroIb = "902-913585-2"
         Dim ImpreCopia(2) As String
         Dim WLetra, WTipo, WPunto, WNumero, ZNroInterno, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, ZZTotal, ZZSaldo, ZZSuma, WPrvDireccion, WPrvCuit, WPrvIb
         Dim WCategoria, WPorce1 As String
         Dim ZRechazado, WImpoRetenido As Double
         Dim ZFechaCompa = String.Join("", Trim(txtFecha.Text).Split("/").Reverse())
         Dim WRete As Double = 0
-        Dim WRenglon As Integer = 0
+        Dim WRenglon = 0
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
         ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
-        If Proceso._EsPellital() Then
+        If _EsPellital() Then
             WEmpCuit = "30-61052459-8"
             WEmpNombre = "PELLITAL S.A."
             WEmpDireccion = "Tucumán 3275"
@@ -5394,9 +5396,9 @@ Public Class Pagos
             .Columns.Add("Numero1")
             .Columns.Add("Fecha1")
             .Columns.Add("Categoria1")
-            .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Porce1").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Retencion1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe1").DataType = Type.GetType("System.Double")
+            .Columns.Add("Porce1").DataType = Type.GetType("System.Double")
+            .Columns.Add("Retencion1").DataType = Type.GetType("System.Double")
         End With
 
 
@@ -5644,25 +5646,25 @@ Public Class Pagos
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteIB
         Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
-        Dim WEmpNombre As String = "SURFACTAN S.A."
-        Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
-        Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
-        Dim WEmpCuit As String = "30-54916508-3"
-        Dim WNroIb As String = "902-913585-2"
+        Dim WEmpNombre = "SURFACTAN S.A."
+        Dim WEmpDireccion = "Malvinas Argentinas 4589"
+        Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
+        Dim WEmpCuit = "30-54916508-3"
+        Dim WNroIb = "902-913585-2"
         Dim ImpreCopia(2) As String
         Dim WLetra, WTipo, WPunto, WNumero, ZNroInterno, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, WPrvDireccion, WPrvCuit, WPrvIb As String
         Dim ZZTotal, ZZSaldo, ZZSuma As Double
         Dim ZRechazado, WImpoRetenido As Double
         Dim ZFechaCompa = String.Join("", Trim(txtFecha.Text).Split("/").Reverse())
         Dim WRete As Double = 0
-        Dim WRenglon As Integer = 0
+        Dim WRenglon = 0
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
 
         ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
-        If Proceso._EsPellital() Then
+        If _EsPellital() Then
             WEmpCuit = "30-61052459-8"
             WEmpNombre = "PELLITAL S.A."
             WEmpDireccion = "Tucumán 3275"
@@ -5731,9 +5733,9 @@ Public Class Pagos
             .Columns.Add("Numero1")
             .Columns.Add("Fecha1")
             .Columns.Add("Categoria1")
-            .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Porce1").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Retencion1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe1").DataType = Type.GetType("System.Double")
+            .Columns.Add("Porce1").DataType = Type.GetType("System.Double")
+            .Columns.Add("Retencion1").DataType = Type.GetType("System.Double")
         End With
 
 
@@ -6109,16 +6111,16 @@ Public Class Pagos
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteRetGanancias
-        Dim WEmpNombre As String = "SURFACTAN S.A."
-        Dim WEmpDireccion As String = "Malvinas Argentinas 4589"
-        Dim WEmpLocalidad As String = "1644 Victoria Bs.As. Argentina"
-        Dim WEmpCuit As String = "30-54916508-3"
+        Dim WEmpNombre = "SURFACTAN S.A."
+        Dim WEmpDireccion = "Malvinas Argentinas 4589"
+        Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
+        Dim WEmpCuit = "30-54916508-3"
         Dim Mes As String = Val(Mid$(txtFecha.Text, 3, 2))
-        Dim WCuatri As String = ""
+        Dim WCuatri = ""
         Dim WLeyenda(10) As String
 
         ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
-        If Proceso._EsPellital() Then
+        If _EsPellital() Then
             WEmpCuit = "30-61052459-8"
             WEmpNombre = "PELLITAL S.A."
             WEmpDireccion = "Tucumán 3275"
@@ -6162,8 +6164,8 @@ Public Class Pagos
             .Columns.Add("DireccionPrv")
             .Columns.Add("CuitPrv")
             .Columns.Add("Concepto")
-            .Columns.Add("Pagado").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Retenido").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Pagado").DataType = Type.GetType("System.Double")
+            .Columns.Add("Retenido").DataType = Type.GetType("System.Double")
         End With
 
         row = Tabla.NewRow
@@ -6183,9 +6185,9 @@ Public Class Pagos
             .Item("DireccionPrv") = _DatosProv(4)
             .Item("CuitPrv") = _DatosProv(6)
             .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
-            .Item("Pagado") = Val(Proceso.formatonumerico(Total)) - Val(Proceso.formatonumerico(Retencion))
-            .Item("Pagado") = Val(Proceso.formatonumerico(Total))
-            .Item("Retenido") = Val(Proceso.formatonumerico(Retencion))
+            .Item("Pagado") = Val(formatonumerico(Total)) - Val(formatonumerico(Retencion))
+            .Item("Pagado") = Val(formatonumerico(Total))
+            .Item("Retenido") = Val(formatonumerico(Retencion))
         End With
 
         Tabla.Rows.Add(row)
@@ -6207,9 +6209,9 @@ Public Class Pagos
             .Item("DireccionPrv") = _DatosProv(4)
             .Item("CuitPrv") = _DatosProv(6)
             .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
-            .Item("Pagado") = Val(Proceso.formatonumerico(Total)) - Val(Proceso.formatonumerico(Retencion))
-            .Item("Pagado") = Val(Proceso.formatonumerico(Total))
-            .Item("Retenido") = Val(Proceso.formatonumerico(Retencion))
+            .Item("Pagado") = Val(formatonumerico(Total)) - Val(formatonumerico(Retencion))
+            .Item("Pagado") = Val(formatonumerico(Total))
+            .Item("Retenido") = Val(formatonumerico(Retencion))
         End With
 
         Tabla.Rows.Add(row)
@@ -6227,8 +6229,8 @@ Public Class Pagos
 
     Private Function _TraerDatosProveedor(ByVal ordenpago As String) As String()
         Dim datos(8) As String
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT p.CertificadoGan, p.CertificadoIb, p.CertificadoIbCiudad, p.CertificadoIva, pr.Direccion, pr.Nombre, pr.Cuit, pr.Tipo " _
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT p.CertificadoGan, p.CertificadoIb, p.CertificadoIbCiudad, p.CertificadoIva, pr.Direccion, pr.Nombre, pr.Cuit, pr.Tipo " _
                                             & "FROM Pagos as p, Proveedor as pr where p.Orden = '" & Trim(txtOrdenPago.Text) & "' and (p.Renglon = '01' or p.Renglon = '1') and p.Proveedor = pr.Proveedor")
         Dim dr As SqlDataReader
 
@@ -6273,7 +6275,7 @@ Public Class Pagos
     Private Sub _ImprimirDiscriminacionDeValoresDeTerceros(ByVal XRazon As String, ByVal XCuitProveedor As String)
         Dim ZZCorte, ZZOrden, ZZRenglon, ZZProveedor, ZZFecha, ZZNumeroCheque, ZZFechaCheque, ZZBancoCheque, ZZCuit As String
         Dim ZZImporteCheque = 0.0
-        Dim LugarResumen As Integer = 0
+        Dim LugarResumen = 0
 
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
@@ -6417,10 +6419,10 @@ Public Class Pagos
     End Sub
 
     Private Function _DiscriminarValoreDeTerceros(ByVal Orden As String) As Boolean
-        Dim discriminar As Boolean = True
+        Dim discriminar = True
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Tipo2 FROM Pagos WHERE Orden = '" & ceros(Orden, 6) & "' AND (Tipo2 = '3' Or Tipo2 = '03')")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 Tipo2 FROM Pagos WHERE Orden = '" & ceros(Orden, 6) & "' AND (Tipo2 = '3' Or Tipo2 = '03')")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -6457,7 +6459,7 @@ Public Class Pagos
             .Columns.Add("Proveedor")
             .Columns.Add("Fecha")
             .Columns.Add("Cuit")
-            .Columns.Add("Importe").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe").DataType = Type.GetType("System.Double")
             .Columns.Add("Numero")
             .Columns.Add("Fecha1")
             .Columns.Add("Banco")
@@ -6467,10 +6469,10 @@ Public Class Pagos
     End Sub
 
     Private Function _TraerCuentaBanco(ByVal ClaveBanco As String) As String
-        Dim cuenta As String = ""
+        Dim cuenta = ""
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Cuenta FROM Banco WHERE Banco = '" & Trim(ClaveBanco) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Cuenta FROM Banco WHERE Banco = '" & Trim(ClaveBanco) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -6514,23 +6516,23 @@ Public Class Pagos
             .Columns.Add("Numero1")
             .Columns.Add("Comprobante1")
             .Columns.Add("Descripcion1")
-            .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe1").DataType = Type.GetType("System.Double")
             .Columns.Add("Numero2")
             .Columns.Add("Banco2")
-            .Columns.Add("Importe2").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe2").DataType = Type.GetType("System.Double")
             .Columns.Add("Fecha2")
-            .Columns.Add("Neto").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Rete1").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Rete2").DataType = System.Type.GetType("System.Double")
-            .Columns.Add("Total").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Neto").DataType = Type.GetType("System.Double")
+            .Columns.Add("Rete1").DataType = Type.GetType("System.Double")
+            .Columns.Add("Rete2").DataType = Type.GetType("System.Double")
+            .Columns.Add("Total").DataType = Type.GetType("System.Double")
             .Columns.Add("Observaciones")
             .Columns.Add("Empresa")
             .Columns.Add("Cuit")
-            .Columns.Add("Paridad").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Paridad").DataType = Type.GetType("System.Double")
         End With
     End Sub
 
-    Private Sub lstSeleccion_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstSeleccion.MouseClick
+    Private Sub lstSeleccion_MouseClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lstSeleccion.MouseClick
         If Trim(lstSeleccion.SelectedItem) = "" Then : Exit Sub : End If
 
         If Trim(lstSeleccion.SelectedItem) <> "" Then
@@ -6560,7 +6562,7 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub CLBFiltrado_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles CLBFiltrado.MouseClick
+    Private Sub CLBFiltrado_MouseClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles CLBFiltrado.MouseClick
         If Trim(CLBFiltrado.SelectedItem) = "" Then
             Exit Sub
         End If
@@ -6594,7 +6596,7 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub lstConsulta_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstConsulta.MouseClick
+    Private Sub lstConsulta_MouseClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lstConsulta.MouseClick
 
         If Trim(_TipoConsulta) = "" Then
             Exit Sub
@@ -6627,13 +6629,13 @@ Public Class Pagos
     End Sub
 
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOrdenPago.KeyPress, txtProveedor.KeyPress, txtBanco.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtOrdenPago.KeyPress, txtProveedor.KeyPress, txtBanco.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
+    Private Sub txtFechaAux_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaAux.KeyDown
 
         If e.KeyData = Keys.Enter Then
             'If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
@@ -6677,7 +6679,7 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellClick
+    Private Sub gridRecibos_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles gridFormaPagos.CellClick
         With gridFormaPagos
             If e.ColumnIndex = 2 Then
 
@@ -6688,10 +6690,10 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormaPagos.CellEnter
+    Private Sub gridRecibos_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles gridFormaPagos.CellEnter
         With gridFormaPagos
             If e.ColumnIndex = 2 Then
-                
+
                 Dim iRow, iCol As Integer
                 iRow = e.RowIndex
                 iCol = e.ColumnIndex
@@ -6712,9 +6714,9 @@ Public Class Pagos
         End With
     End Sub
 
-    Private Sub btnCalcular_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCalcular.Click
-        Dim tabla As DataTable = New DataTable("Detalles")
-        Dim DiasTasa As String = ""
+    Private Sub btnCalcular_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCalcular.Click
+        Dim tabla = New DataTable("Detalles")
+        Dim DiasTasa = ""
         _PedirInformacion("Informe la tasa Mensual", New TextBox, DiasTasa)
 
         Dim ZZSuma As Double = 0
@@ -6798,10 +6800,10 @@ Public Class Pagos
             .Columns.Add("Numero")
             .Columns.Add("Fecha2")
             .Columns.Add("Banco")
-            .Columns.Add("Importe").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe").DataType = Type.GetType("System.Double")
             .Columns.Add("Dias")
             .Columns.Add("Tasa")
-            .Columns.Add("Intereses").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Intereses").DataType = Type.GetType("System.Double")
         End With
     End Sub
 
@@ -6816,7 +6818,7 @@ Public Class Pagos
         End With
     End Sub
 
-    Private Sub gridFormaPagos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridFormaPagos.CellMouseDoubleClick
+    Private Sub gridFormaPagos_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles gridFormaPagos.CellMouseDoubleClick
 
         'Dim iRow As DataGridViewRow
 
@@ -6839,7 +6841,7 @@ Public Class Pagos
         txtTotal.Text = "0.00"
 
         If optCtaCte.Checked Or optAnticipos.Checked Then
-            If Not ckNoCalcRetenciones.Checked then
+            If Not ckNoCalcRetenciones.Checked Then
                 ' Recalculo de Retenciones de Ganancias.
                 _RecalcularRetencionGanancias()
 
@@ -6850,12 +6852,12 @@ Public Class Pagos
                 _RecalcularIBProvincia()
 
                 ' PELLITAL NO RETIENE EN CABA
-                If Not Proceso._EsPellital() Then
+                If Not _EsPellital() Then
                     ' Recalculo IB CABA
                     _RecalcularIBCABA()
                 End If
 
-                txtTotal.Text = Proceso.formatonumerico(Val(Proceso.formatonumerico(txtIVA.Text)) + Val(Proceso.formatonumerico(txtGanancias.Text)) + Val(Proceso.formatonumerico(txtIBCiudad.Text)) + Val(Proceso.formatonumerico(txtIngresosBrutos.Text)))
+                txtTotal.Text = formatonumerico(Val(formatonumerico(txtIVA.Text)) + Val(formatonumerico(txtGanancias.Text)) + Val(formatonumerico(txtIBCiudad.Text)) + Val(formatonumerico(txtIngresosBrutos.Text)))
 
                 'sumarImportes()
             End If
@@ -6898,7 +6900,7 @@ Public Class Pagos
         Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
         Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZSumaNeto
         Dim ZFactura As DataRow = Nothing
-        Dim ZNroInterno As Integer = 0
+        Dim ZNroInterno = 0
 
         acumProv = 0
         acumCaba = 0
@@ -6982,8 +6984,8 @@ Public Class Pagos
 
     Private Function _BuscarCompra(ByVal proveedor, ByVal tipo, ByVal punto, ByVal letra, ByVal numero)
         Dim compra As New DataTable
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As New SqlCommand("SELECT Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE Proveedor = '" & proveedor & "' and letra = '" & letra & "' and punto = '" & Proceso.ceros(punto, 4) & "' and numero = '" & Proceso.ceros(numero, 8) & "' and tipo = '" & Proceso.ceros(tipo, 2) & "'")
+        Dim cn = New SqlConnection()
+        Dim cm As New SqlCommand("SELECT Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE Proveedor = '" & proveedor & "' and letra = '" & letra & "' and punto = '" & ceros(punto, 4) & "' and numero = '" & ceros(numero, 8) & "' and tipo = '" & ceros(tipo, 2) & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -7017,7 +7019,7 @@ Public Class Pagos
 
     Private Function _BuscarCompra(ByVal NroInterno As Integer)
         Dim compra As New DataTable
-        Dim cn As SqlConnection = New SqlConnection()
+        Dim cn = New SqlConnection()
         Dim cm = "SELECT Iva21, Iva5, Iva27, Iva105, Ib, Exento, Neto FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
         Dim dr As New SqlDataAdapter(cm, cn)
 
@@ -7039,38 +7041,22 @@ Public Class Pagos
         End Try
 
         If compra.Rows.Count > 0 Then
-            Return Proceso._NormalizarFila(compra.Rows(0))
+            Return _NormalizarFila(compra.Rows(0))
         Else
             Return Nothing
         End If
     End Function
 
     Private Sub _RecalcularRetencionGanancias()
-        Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
-        Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal, ZZBase, ZZSumaNeto
-        Dim ZNroInterno As Integer = 0
-        Dim ZFactura As DataRow = Nothing
+        Dim ZZBase As Object = _CalcularSaldoBaseRetencionesGanancias()
 
-        ZNeto = 0.0
-        ZIva = 0.0
-        ZIva5 = 0.0
-        ZIva27 = 0.0
-        ZIva105 = 0.0
-        ZIb = 0.0
-        ZExento = 0.0
-        ZPorce = 0.0
-        ZImporte = 0.0
-        ZZSuma = 0.0
-        ZZTotal = 0.0
-        ZZBase = 0.0
-        ZZSumaNeto = 0.0
+        Dim varRetGan = CaculoRetencionGanancia(Val(WTipoProv), ZZBase, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
 
-        ZTipo = ""
-        ZNumero = ""
-        ZPunto = ""
-        ZLetra = ""
-        ZTotal = 0.0
-        ZZSaldo = 0.0
+        txtGanancias.Text = _NormalizarNumero(varRetGan)
+
+    End Sub
+
+    Private Function _CalcularSaldoBaseRetencionesGanancias() As Object
 
         varAcuNeto = 0
         varAcuRetenido = 0
@@ -7092,9 +7078,38 @@ Public Class Pagos
 
         End If
 
+        Dim ZZBase, ZZSumaNeto
+
+        ZZBase = 0.0
+        ZZSumaNeto = 0.0
+
         ' Recalculo sobre porcentaje neto en Iva Comp.
         For Each row As DataGridViewRow In gridPagos.Rows
             With row
+                Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
+                Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma, ZZTotal
+                Dim ZNroInterno = 0
+                Dim ZFactura As DataRow = Nothing
+
+                ZNeto = 0.0
+                ZIva = 0.0
+                ZIva5 = 0.0
+                ZIva27 = 0.0
+                ZIva105 = 0.0
+                ZIb = 0.0
+                ZExento = 0.0
+                ZPorce = 0.0
+                ZImporte = 0.0
+                ZZSuma = 0.0
+                ZZTotal = 0.0
+
+                ZTipo = ""
+                ZNumero = ""
+                ZPunto = ""
+                ZLetra = ""
+                ZTotal = 0.0
+                ZZSaldo = 0.0
+
                 If Trim(.Cells(4).Value) <> "" Then
                     ZTipo = .Cells(0).Value
                     ZLetra = .Cells(1).Value
@@ -7145,18 +7160,14 @@ Public Class Pagos
         If Val(WTipoIva) = 2 Then
             ZZBase = ZZSumaNeto
         End If
-
-        Dim varRetGan = CaculoRetencionGanancia(Val(WTipoProv), ZZBase, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
-
-        txtGanancias.Text = _NormalizarNumero(varRetGan)
-
-    End Sub
+        Return ZZBase
+    End Function
 
     Private Sub _RecalcularRetencionIVA()
         Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal, ZZSaldo
         Dim ZNeto, ZIva, ZZSuma, ZZTotal, ZZBase
         Dim ZFactura As DataRow = Nothing
-        Dim ZNroInterno As Integer = 0
+        Dim ZNroInterno = 0
 
         ZNeto = 0
         ZIva = 0
@@ -7225,8 +7236,8 @@ Public Class Pagos
 
         Dim dt As New DataTable
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT NroInterno, Total, Saldo FROM CtaCtePrv WHERE clave = '" & _Clave & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT NroInterno, Total, Saldo FROM CtaCtePrv WHERE clave = '" & _Clave & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -7267,7 +7278,7 @@ Public Class Pagos
         If IsDBNull(numero) Then
             numero = ""
         End If
-        Return Val(Proceso.formatonumerico(Trim(numero), decimales))
+        Return Val(formatonumerico(Trim(numero), decimales))
     End Function
 
     'Private Sub gridPagos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridPagos.CellMouseDoubleClick
@@ -7282,15 +7293,15 @@ Public Class Pagos
     '    gridPagos.Rows.Remove(iRow)
     'End Sub
 
-    Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
+    Private Sub txtCuenta_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCuenta.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtCuenta.Text) = "" Then : Exit Sub : End If
 
-            Dim valida As Boolean = False
+            Dim valida = False
 
-            Dim cn As SqlConnection = New SqlConnection()
-            Dim cm As SqlCommand = New SqlCommand("SELECT Cuenta FROM Cuenta WHERE Cuenta = '" & Val(txtCuenta.Text) & "'")
+            Dim cn = New SqlConnection()
+            Dim cm = New SqlCommand("SELECT Cuenta FROM Cuenta WHERE Cuenta = '" & Val(txtCuenta.Text) & "'")
             Dim dr As SqlDataReader
 
             Try
@@ -7345,7 +7356,7 @@ Public Class Pagos
     Private Function _BuscarCambioDiviza(ByVal Fecha As String) As Double
         Dim ZCambioDivisa = 0.0
 
-        Dim cn As SqlConnection = New SqlConnection()
+        Dim cn = New SqlConnection()
         Dim cm As New SqlCommand()
         Dim dr As SqlDataReader
 
@@ -7444,7 +7455,7 @@ Public Class Pagos
         Return WDia + "/" + WMes + "/" + WAno
     End Function
 
-    Private Sub btnDifeCambio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDifeCambio.Click
+    Private Sub btnDifeCambio_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDifeCambio.Click
         Dim ZCambioDivisa = 0.0, ZZParidadOP = 0.0, ZZSumaI = 0.0, ZZSumaII = 0.0, ZZRete = 0.0, ZZParidad = 0.0, ZZCicloDia = 0
         Dim XTipo2 = "", XNumero2 = "", XFecha2 = "", XFechaOrd2 = "", XBanco2 = "", XObservaciones2 = "", XImporte2 = 0.0
         Dim TipoRecibos = "", ClaveRecibos = "", Cuit = "", ClaveCtacte = "", ZZFechaAnterior = "", XFec2 = ""
@@ -7474,7 +7485,7 @@ Public Class Pagos
         ZZSumaI = 0
         ZZSumaII = 0
 
-        ZZRete = Val(Proceso.formatonumerico(txtIBCiudad.Text)) + Val(Proceso.formatonumerico(txtIVA.Text)) + Val(Proceso.formatonumerico(txtGanancias.Text)) + Val(Proceso.formatonumerico(txtIngresosBrutos.Text))
+        ZZRete = Val(formatonumerico(txtIBCiudad.Text)) + Val(formatonumerico(txtIVA.Text)) + Val(formatonumerico(txtGanancias.Text)) + Val(formatonumerico(txtIngresosBrutos.Text))
         ZZSumaII = ZZSumaII + (ZZRete / ZZParidadOP)
 
         For Each row As DataGridViewRow In gridPagos.Rows
@@ -7509,7 +7520,7 @@ Public Class Pagos
                         XTipo2 = .Cells(0).Value
                         XNumero2 = .Cells(1).Value
                         XFecha2 = .Cells(2).Value
-                        XFechaOrd2 = Proceso.ordenaFecha(XFecha2)
+                        XFechaOrd2 = ordenaFecha(XFecha2)
                         XBanco2 = .Cells(3).Value
                         XObservaciones2 = .Cells(4).Value
                         XImporte2 = Val(.Cells(5).Value)
@@ -7567,7 +7578,7 @@ Public Class Pagos
                         Dim ZSql = ""
                         ZSql = ZSql + "UPDATE Pagos SET "
                         ZSql = ZSql + " ImpoList = " + "'" + Str$(ZZParidad) + "'"
-                        ZSql = ZSql + " Where Orden = '" & txtOrdenPago.Text & "' AND (Tipo2 = '" & Val(XTipo2) & "' OR Tipo2 = '" & Proceso.ceros(XTipo2, 2) & "') AND Numero2 = '" & XNumero2 & "'" ' AND Fecha2 = '" & XFecha2 & "'" ' + "'" + WClavesOP(row.Index) + "'"
+                        ZSql = ZSql + " Where Orden = '" & txtOrdenPago.Text & "' AND (Tipo2 = '" & Val(XTipo2) & "' OR Tipo2 = '" & ceros(XTipo2, 2) & "') AND Numero2 = '" & XNumero2 & "'" ' AND Fecha2 = '" & XFecha2 & "'" ' + "'" + WClavesOP(row.Index) + "'"
 
 
                         Try
@@ -7607,7 +7618,7 @@ Public Class Pagos
 
     End Sub
 
-    Private Sub txtFechaAux_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaAux.Leave
+    Private Sub txtFechaAux_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux.Leave
         If WRow >= 0 And Wcol >= 0 Then
             If Trim(txtFechaAux.Text.Replace("/", "")) <> "" And Trim(txtFechaAux.Text).Length = 10 Then
 
@@ -7636,11 +7647,11 @@ Public Class Pagos
         End If
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
         _RecalcularRetenciones()
     End Sub
 
-    Private Sub gridFormaPagos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridFormaPagos.RowHeaderMouseDoubleClick
+    Private Sub gridFormaPagos_RowHeaderMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles gridFormaPagos.RowHeaderMouseDoubleClick
 
         If MsgBox("¿Está seguro de querer eliminar los datos de la fila?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
             Exit Sub
@@ -7656,7 +7667,7 @@ Public Class Pagos
         End With
     End Sub
 
-    Private Sub gridPagos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles gridPagos.RowHeaderMouseDoubleClick
+    Private Sub gridPagos_RowHeaderMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles gridPagos.RowHeaderMouseDoubleClick
 
         If MsgBox("¿Está seguro de querer eliminar los datos de la fila?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
             Exit Sub
@@ -7672,21 +7683,21 @@ Public Class Pagos
         End With
     End Sub
 
-    Private Sub txtGanancias_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtGanancias.TextChanged, txtIBCiudad.TextChanged, txtIngresosBrutos.TextChanged, txtIVA.TextChanged, txtTotal.TextChanged
+    Private Sub txtGanancias_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtGanancias.TextChanged, txtIBCiudad.TextChanged, txtIngresosBrutos.TextChanged, txtIVA.TextChanged, txtTotal.TextChanged
         For Each txt As TextBox In {txtGanancias, txtIBCiudad, txtIngresosBrutos, txtIVA, txtTotal}
-            txt.Text = Proceso.formatonumerico(txt.Text)
+            txt.Text = formatonumerico(txt.Text)
         Next
     End Sub
 
-    Private Sub ckNoCalcRetenciones_CheckedChanged( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles ckNoCalcRetenciones.CheckedChanged
+    Private Sub ckNoCalcRetenciones_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckNoCalcRetenciones.CheckedChanged
         _RecalcularRetenciones()
     End Sub
 
-    Private Sub gridPagos_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles gridPagos.Enter, gridFormaPagos.Enter
+    Private Sub gridPagos_Enter(ByVal sender As Object, ByVal e As EventArgs) Handles gridPagos.Enter, gridFormaPagos.Enter
         WGrillaReferencia = CType(sender, DataGridView)
     End Sub
 
-    Private Sub btnEliminarFila_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminarFila.Click
+    Private Sub btnEliminarFila_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEliminarFila.Click
         If Not IsNothing(WGrillaReferencia) Then
 
             'MsgBox("Grilla: " & WGrillaReferencia.Name & "  Fila: " & WGrillaReferencia.CurrentRow.Index)

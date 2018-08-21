@@ -274,9 +274,9 @@
         abrir(New ProcesoCiti)
     End Sub
 
-    Private Sub EnvioEnEMailAClientesToolStripMenuItem_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles EnvioEnEMailAClientesToolStripMenuItem.Click
-        
-        If not Proceso._EsPellital() then Process.Start("\\193.168.0.2\g$\vb\Net\EmailsClientes\Ejecutable\EmailClientes.exe")
+    Private Sub EnvioEnEMailAClientesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnvioEnEMailAClientesToolStripMenuItem.Click
+
+        If Not Proceso._EsPellital() Then Process.Start("\\193.168.0.2\g$\vb\Net\EmailsClientes\Ejecutable\EmailClientes.exe")
 
     End Sub
 

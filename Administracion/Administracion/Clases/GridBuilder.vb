@@ -74,7 +74,7 @@
     End Sub
 
     Private Function nextNotReadOnlyFrom(ByVal iCol As Integer, ByVal iRow As Integer)
-        Dim i As Integer = 1
+        Dim i = 1
         Do While (iCol + i < dataGrid.Columns.Count)
             If Not (dataGrid(iCol + i, iRow).ReadOnly Or dataGrid(iCol + i, iRow).Frozen) And dataGrid(iCol + i, iRow).Visible Then
                 Return dataGrid(iCol + i, iRow)
