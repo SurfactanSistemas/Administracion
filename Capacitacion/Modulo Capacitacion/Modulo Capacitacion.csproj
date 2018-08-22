@@ -118,6 +118,24 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\AsignarCursos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\AsignarCursos.Designer.cs">
+      <DependentUpon>AsignarCursos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\AsignaTema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\AsignaTema.Designer.cs">
+      <DependentUpon>AsignaTema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\TentativoListaCursos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\TentativoListaCursos.Designer.cs">
+      <DependentUpon>TentativoListaCursos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listados\PlanCapacitacionAnualTentativo\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -691,6 +709,15 @@
     <EmbeddedResource Include="Listados\InformedeCompetencias\imprelegajoii.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprelegajoii.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\AsignarCursos.resx">
+      <DependentUpon>AsignarCursos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\AsignaTema.resx">
+      <DependentUpon>AsignaTema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\TentativoListaCursos.resx">
+      <DependentUpon>TentativoListaCursos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>

@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBChofer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.txtAno = new System.Windows.Forms.TextBox();
-            this.BT_Pantalla = new System.Windows.Forms.Button();
-            this.BT_Imprimir = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -60,9 +58,9 @@
             this.LBChofer.ForeColor = System.Drawing.Color.White;
             this.LBChofer.Location = new System.Drawing.Point(10, 10);
             this.LBChofer.Name = "LBChofer";
-            this.LBChofer.Size = new System.Drawing.Size(301, 19);
+            this.LBChofer.Size = new System.Drawing.Size(302, 19);
             this.LBChofer.TabIndex = 0;
-            this.LBChofer.Text = "PLAN DE CAPACITACIÓN ANUAL (Tentativo)";
+            this.LBChofer.Text = "PLAN TENTATIVO DE CAPACITACIÓN ANUAL";
             // 
             // panel2
             // 
@@ -78,8 +76,7 @@
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
             this.panel3.Controls.Add(this.progressBar1);
             this.panel3.Controls.Add(this.txtAno);
-            this.panel3.Controls.Add(this.BT_Pantalla);
-            this.panel3.Controls.Add(this.BT_Imprimir);
+            this.panel3.Controls.Add(this.btnAceptar);
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Location = new System.Drawing.Point(7, 7);
@@ -89,45 +86,32 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 94);
+            this.progressBar1.Location = new System.Drawing.Point(10, 82);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(359, 22);
+            this.progressBar1.Size = new System.Drawing.Size(359, 30);
             this.progressBar1.TabIndex = 85;
             // 
             // txtAno
             // 
-            this.txtAno.Location = new System.Drawing.Point(174, 61);
+            this.txtAno.Location = new System.Drawing.Point(181, 40);
             this.txtAno.Name = "txtAno";
             this.txtAno.Size = new System.Drawing.Size(70, 20);
             this.txtAno.TabIndex = 84;
             this.txtAno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAno_KeyDown);
             // 
-            // BT_Pantalla
+            // btnAceptar
             // 
-            this.BT_Pantalla.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Pantalla.BackgroundImage")));
-            this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(73, 129);
-            this.BT_Pantalla.Name = "BT_Pantalla";
-            this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
-            this.BT_Pantalla.TabIndex = 81;
-            this.BT_Pantalla.UseVisualStyleBackColor = true;
-            this.BT_Pantalla.Click += new System.EventHandler(this.BT_Pantalla_Click);
-            // 
-            // BT_Imprimir
-            // 
-            this.BT_Imprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
-            this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(174, 129);
-            this.BT_Imprimir.Name = "BT_Imprimir";
-            this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Imprimir.TabIndex = 80;
-            this.BT_Imprimir.UseVisualStyleBackColor = true;
-            this.BT_Imprimir.Click += new System.EventHandler(this.BT_Imprimir_Click);
+            this.btnAceptar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
+            this.btnAceptar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptar.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnAceptar.Location = new System.Drawing.Point(100, 129);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(57, 53);
+            this.btnAceptar.TabIndex = 81;
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.BT_Pantalla_Click);
             // 
             // BT_Salir
             // 
@@ -135,9 +119,9 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(264, 129);
+            this.BT_Salir.Location = new System.Drawing.Point(229, 129);
             this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.Size = new System.Drawing.Size(54, 53);
             this.BT_Salir.TabIndex = 79;
             this.BT_Salir.UseVisualStyleBackColor = true;
             this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
@@ -146,7 +130,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(89, 61);
+            this.label1.Location = new System.Drawing.Point(96, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 18);
             this.label1.TabIndex = 1;
@@ -178,8 +162,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txtAno;
-        private System.Windows.Forms.Button BT_Pantalla;
-        private System.Windows.Forms.Button BT_Imprimir;
+        private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button BT_Salir;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar1;

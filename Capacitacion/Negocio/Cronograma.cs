@@ -108,7 +108,7 @@ namespace Negocio
             string consulta = "select Cr.Curso,C.Descripcion,count(*) as Personas,sum(Cr.horas) as Horas," +
                               " sum(Cr.Realizado) as HorasRealizado, Resta = CASE WHEN (sum(Cr.horas) -sum(Cr.Realizado)) > 0 THEN (sum(Cr.horas) -sum(Cr.Realizado)) ELSE 0 END," +
                               " Cr2.Mes1,  Cr2.Mes2, Cr2.Mes3, Cr2.Mes4, Cr2.Mes5, Cr2.Mes6, Cr2.Mes7, Cr2.Mes8, " +
-                              " Cr2.Mes9,Cr2.Mes10,Cr2.Mes11,Cr2.Mes12  from cronograma Cr inner join Curso C on C.Codigo = Cr.Curso " +
+                              " Cr2.Mes9,Cr2.Mes10,Cr2.Mes11,Cr2.Mes12  from cronograma Cr LEFT OUTER join Curso C on C.Codigo = Cr.Curso " +
                               " LEFT OUTER JOIN CronogramaII Cr2 ON Cr.Ano = Cr2.Ano AND Cr.Curso = Cr2.Curso where Cr.ano = '" + p + "' " +
                               " group by Cr.curso, C.descripcion, Cr2.Mes1, Cr2.Mes2, Cr2.Mes3, Cr2.Mes4, Cr2.Mes5, Cr2.Mes6, Cr2.Mes7, Cr2.Mes8, " +
                               " Cr2.Mes9, Cr2.Mes10, Cr2.Mes11, Cr2.Mes12  order by Cr.curso asc";

@@ -15,10 +15,9 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
 
         private void BT_Pantalla_Click(object sender, EventArgs e)
         {
-            progressBar1.Value = 0;
-            var frm = _PrepararReporte();
-            progressBar1.Value = 0;
-            frm.Show();
+            TentativoListaCursos frm = new TentativoListaCursos(txtAno.Text);
+
+            frm.Show(this);
         }
 
         private VistaPrevia _PrepararReporte()
@@ -105,14 +104,6 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
         
         }
 
-        private void BT_Imprimir_Click(object sender, EventArgs e)
-        {
-            progressBar1.Value = 0;
-            var frm = _PrepararReporte();
-            progressBar1.Value = 0;
-            frm.Imprimir();
-        }
-
         private void Inicio_Shown(object sender, EventArgs e)
         {
             txtAno.Focus();
@@ -120,6 +111,10 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
 
         private void txtAno_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnAceptar.PerformClick();
+            }
             if (e.KeyCode == Keys.Escape) txtAno.Text = "";
         }
 
@@ -131,6 +126,7 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
         private void Inicio_Load(object sender, EventArgs e)
         {
             progressBar1.Value = 0;
+            txtAno.Text = DateTime.Now.Year.ToString();
         }
 
     }

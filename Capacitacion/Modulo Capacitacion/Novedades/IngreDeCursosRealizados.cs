@@ -183,7 +183,7 @@ namespace Modulo_Capacitacion.Novedades
 
         private void IngreDeCursosRealizados_Load(object sender, EventArgs e)
         {
-
+            Helper.ActualizarCantidadPersonasHoras(TB_Año.Text);
         }
 
         private void IngreDeCursosRealizados_Shown(object sender, EventArgs e)
@@ -204,6 +204,7 @@ namespace Modulo_Capacitacion.Novedades
                 DataGridViewRow row = DGV_Cronograma.Rows[indexRow];
 
                 curso = int.Parse(row.Cells[0].Value.ToString());
+
             }
 
             VistaPrevia frm = new VistaPrevia();
