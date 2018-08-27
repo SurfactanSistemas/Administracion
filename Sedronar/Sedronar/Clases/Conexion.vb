@@ -123,7 +123,7 @@ Namespace Clases
 
         End Function
 
-        Private Shared Function DeterminarSegunIDIDBasePara(ByVal empresa As Integer) As String
+        Public Shared Function DeterminarSegunIDIDBasePara(ByVal empresa As Integer) As String
 
             Select Case empresa
                 Case 1
@@ -152,6 +152,35 @@ Namespace Clases
                     Return ""
             End Select
 
+        End Function
+
+        Public Shared Function ObtenerIdEmpresaPorNombre(ByVal empresa As String) As Integer
+            Select Case empresa
+                Case "SurfactanSa"
+                    Return 1
+                Case "PellitalSa"
+                    Return 2
+                Case "Surfactan_II"
+                    Return 3
+                Case "Pelitall_II" ' Asi está escrita la Base de Datos en el SQL.
+                    Return 4
+                Case "Surfactan_III"
+                    Return 5
+                Case "Surfactan_IV"
+                    Return 6
+                Case "Surfactan_V"
+                    Return 7
+                Case "Pellital_III"
+                    Return 8
+                Case "Pellital_V"
+                    Return 9
+                Case "Surfactan_VI"
+                    Return 10
+                Case "Surfactan_VII"
+                    Return 11
+                Case Else
+                    Return 0
+            End Select
         End Function
 
         Public Shared Function DeterminarBasePara(ByVal empresa As String) As String

@@ -232,6 +232,8 @@ Public Class DeclaracionJuradaMP
                     Throw New Exception("Codigo de Materia Prima Inexistente.")
                 End If
 
+                Dim WCodSedronar = WProducto.Item("CodSedronar")
+
                 '
                 'Recuperamos la información de los grupos de información.
                 '
@@ -245,7 +247,161 @@ Public Class DeclaracionJuradaMP
 
                 Dim WMovimientosLaboratorio As DataTable = _TraerInformacionMovimientosLaboratorio(WDesdeFecha, WHastaFecha, WCodigo)
 
+                Dim WFecha = ""
+                Dim WEvento = ""
+                Dim WGtin = ""
+                Dim WCantidad As Double = 0
+                Dim WAnalitica = ""
+                Dim WParcial = ""
+                Dim WTipo = ""
+                Dim WNumero = ""
+                Dim WCufeOrigen = ""
+                Dim WCufeDestino = ""
+                Dim WCufeTransportista = ""
+                Dim WPermiso = ""
+                Dim WPermisoII = ""
+                Dim WDominio = ""
+                Dim WTipoDoc = ""
+                Dim WNroDoc = ""
+                Dim WTipoTransporte = ""
+                Dim WPlaza = ""
+                Dim WDJai = ""
+                Dim WPaso = ""
+                Dim WNroCertificado = ""
+                Dim WClave = ""
+                Dim WSuma As Double = 0
 
+                Dim cn As SqlConnection = New SqlConnection()
+                Dim cm As SqlCommand = New SqlCommand("")
+                Dim dr As SqlDataReader
+                Dim trans As SqlTransaction = Nothing
+
+                Try
+
+                    cn.ConnectionString = Helper._ConectarA
+                    cn.Open()
+                    trans = cn.BeginTransaction
+                    cm.Connection = cn
+                    cm.Transaction = trans
+
+                    '
+                    ' Grabamos los informes.
+                    '
+                    For Each WInforme As DataRow In WInformes.Rows
+                        With WInforme
+
+                            WFecha = OrDefault(.Item("Fecha"), "00/00/0000")
+                            Dim WFechaOrd = Helper.ordenaFecha(WFecha)
+                            WEvento = OrDefault(.Item("Evento"), "")
+                            WCantidad = Val(Helper.formatonumerico(OrDefault(.Item("Laudo"), 0)))
+                            WCodigo = OrDefault(.Item("Remito"), "")
+                            Dim WCufeOk = OrDefault(.Item("CufeOk"), "")
+                            WCufeDestino = WCufeOk
+                            WCufeOrigen = ZZCufe(Val(Conexion.ObtenerIdEmpresaPorNombre(Conexion.EmpresaDeTrabajo)))
+                            WPlaza = OrDefault(.Item("NroDespacho"), "")
+                            WClave = "M" & WCodSedronar & "E" & WEvento & WFechaOrd
+                            WSuma = WCantidad
+
+                            Dim WTipoOrden = OrDefault(.Item("TipoOrden"), "")
+
+                            WDJai = "Falta DJAI"
+
+                            If Val(WTipoOrden) <> 1 Then WDJai = ""
+
+                            If WCantidad = 0 Then Continue For
+
+                            Dim ZSql = ""
+
+                            ZSql = String.Format("INSERT INTO SedronarProceso (Fecha, Evento, Gtin, Cantidad, Tipo, Numero, CufeOrigen, CufeDestino, CufeTransportista, Plaza, Djai, Paso, Clave, Suma) " &
+                                                     " VALUES " &
+                                                     "('{0}', '{1}', '{2}', {3}, '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', {13})",
+                                                     WFecha, WEvento, WCodSedronar, WCantidad, "2", WCodigo, WCufeOrigen, WCufeDestino, "", WPlaza, WDJai, WPaso, WClave, WSuma)
+
+                            cm.CommandText = ZSql
+                            cm.ExecuteNonQuery()
+
+                            If Val(WTipoOrden) = 4 Then
+
+                                WEvento = "66"
+
+                                WCufeOrigen = ZZCufe(Val(Conexion.ObtenerIdEmpresaPorNombre(Conexion.EmpresaDeTrabajo)))
+                                WCufeDestino = ""
+                                WNumero = ""
+                                WPlaza = ""
+                                WPaso = ""
+                                WDJai = ""
+                                WSuma = WSuma * -1
+
+                                Dim WMovi = OrDefault(.Item("Informe"), "")
+                                WClave = "M" & WCodSedronar & WMovi & WFechaOrd
+
+                                ZSql = String.Format("INSERT INTO SedronarProceso (Fecha, Evento, Gtin, Cantidad, Tipo, Numero, CufeOrigen, CufeDestino, CufeTransportista, Plaza, Djai, Paso, Clave, Suma) " &
+                                                     " VALUES " &
+                                                     "('{0}', '{1}', '{2}', {3}, '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', {13})",
+                                                     WFecha, WEvento, WCodSedronar, WCantidad, "", WCodigo, WCufeOrigen, WCufeDestino, "", WPlaza, WDJai, WPaso, WClave, WSuma)
+
+                                cm.CommandText = ZSql
+                                cm.ExecuteNonQuery()
+
+                            End If
+
+                        End With
+
+                    Next
+
+                    '
+                    ' Grabamos las Hojas de Producción.
+                    '
+                    WCufeDestino = ""
+                    WPlaza = ""
+                    WDJai = ""
+                    WPaso = ""
+                    WGtin = WCodSedronar
+                    WCufeOrigen = ZZCufe(Val(Conexion.ObtenerIdEmpresaPorNombre(Conexion.EmpresaDeTrabajo)))
+
+                    For Each row As datarow In WHojasProduccion.Rows
+                        With row
+                            WFecha = OrDefault(.Item("Fecha"), "00/00/0000")
+                            Dim WFechaOrd = Helper.ordenaFecha(WFecha)
+                            WEvento = OrDefault(.Item("Evento"), "")
+                            WCantidad = OrDefault(.Item("Cantidad"), 0)
+                            WNumero = OrDefault(.Item("Hoja"), "")
+                            WSuma = WCantidad * -1
+                            WClave = "M" & WCodSedronar & "S" & WEvento & WFechaOrd
+
+                            Dim ZSql = ""
+
+                            ZSql = String.Format("INSERT INTO SedronarProceso (Fecha, Evento, Gtin, Cantidad, Tipo, Numero, CufeOrigen, CufeDestino, CufeTransportista, Plaza, Djai, Paso, Clave, Suma) " &
+                                                     " VALUES " &
+                                                     "('{0}', '{1}', '{2}', {3}, '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', {13})",
+                                                     WFecha, WEvento, WCodSedronar, WCantidad, "2", WCodigo, WCufeOrigen, WCufeDestino, "", WPlaza, WDJai, WPaso, WClave, WSuma)
+
+                            cm.CommandText = ZSql
+                            cm.ExecuteNonQuery()
+
+                        End With
+                    Next
+
+                    '
+                    ' Grabamos los Movimientos Varios.
+                    '
+                    For Each row As datarow In WMovimientosVarios.Rows
+                        With row
+
+                        End With
+                    Next
+
+                Catch ex As Exception
+                    If Not IsNothing(trans) AndAlso Not IsNothing(trans.Connection) Then trans.Rollback()
+                    Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+                Finally
+
+                    dr = Nothing
+                    cn.Close()
+                    cn = Nothing
+                    cm = Nothing
+
+                End Try
 
             Next
 
@@ -257,17 +413,138 @@ Public Class DeclaracionJuradaMP
     Private Function _TraerInformacionMovimientosLaboratorio(ByVal wDesdeFecha As String, ByVal wHastaFecha As String, ByVal wCodigo As String) As DataTable
         Dim tabla As DataTable = QueryAll("SELECT Fecha, Cantidad, Codigo, Movi FROM MovLab WHERE UPPER(Tipo) = 'M' AND Articulo = '" & wCodigo & "' AND (Right(Fecha, 4) + SUBSTRING(Fecha, 4, 2) + left(Fecha, 2)) BETWEEN '" & wDesdeFecha & "' AND '" & wHastaFecha & "'")
 
+        '
+        ' Procesamos los datos.
+        '
+
+        tabla.Columns.Add("Evento")
+
+        If tabla.Rows.Count > 0 Then
+            For Each row As DataRow In tabla.Rows
+
+                With row
+
+                    .Item("Evento") = ""
+
+                    Dim WConver As Double = OrDefault(.Item("Cantidad"), 0)
+
+                    Select Case UCase(wCodigo)
+                        Case "DC-000-100"
+                            WConver /= 1.17
+                        Case "DS-001-100"
+                            WConver /= 1.84
+                        Case "DA-005-100"
+                            WConver /= 1.053
+                    End Select
+
+                    .Item("Cantidad") = WConver
+
+                    Dim WMovi As String = OrDefault(.Item("Producto"), "")
+
+                    If UCase(WMovi) = "S" Then
+                        .Item("Evento") = "66"
+                    Else
+                        .Item("Evento") = "58"
+                    End If
+
+                End With
+
+            Next
+        End If
+
         Return tabla
     End Function
 
     Private Function _TraerInformacionGuiasInternas(ByVal wDesdeFecha As String, ByVal wHastaFecha As String, ByVal wCodigo As String) As DataTable
         Dim tabla As DataTable = QueryAll("SELECT Fecha, Canti = CASE ISNULL(CantidadAnt, 0) <> 0 THEN CantidadAnt ELSE Cantidad END, Codigo, Movi, Destino, TipoMov FROM Guia WHERE UPPER(Tipo) = 'M' AND Codigo < 900000 AND Articulo = '" & wCodigo & "' AND (Right(Fecha, 4) + SUBSTRING(Fecha, 4, 2) + left(Fecha, 2)) BETWEEN '" & wDesdeFecha & "' AND '" & wHastaFecha & "'")
 
+        '
+        ' Procesamos los datos.
+        '
+        tabla.Columns.Add("Evento")
+        tabla.Columns.Add("CufeOrigen")
+        tabla.Columns.Add("CufeDestino")
+
+        If tabla.Rows.Count > 0 Then
+            For Each row As datarow In tabla.Rows
+                With row
+
+                    .Item("Evento") = ""
+                    .Item("CufeDestino") = ""
+                    .Item("CufeOrigen") = ""
+
+                    Dim WMovi As String = OrDefault(.Item("Movi"), "")
+                    Dim WEvento As String = ""
+                    Dim WLugarCufe As String = ""
+                    Dim WCufeOrigen As String = ""
+                    Dim WCufeDestino As String = ""
+
+                    If Trim(WMovi) = "" Then WMovi = "S"
+
+                    If WMovi = "S" Then
+                        WEvento = "48"
+                        WLugarCufe = .Item("Destino")
+                        WCufeOrigen = ZZCufe(Val(WLugarCufe))
+                        WCufeDestino = ZZCufe(Val(Conexion.ObtenerIdEmpresaPorNombre(Conexion.EmpresaDeTrabajo)))
+                    Else
+                        WEvento = "47"
+                        WLugarCufe = .Item("TipoMov")
+                        WCufeDestino = ZZCufe(Val(WLugarCufe))
+                        WCufeOrigen = ZZCufe(Val(Conexion.ObtenerIdEmpresaPorNombre(Conexion.EmpresaDeTrabajo)))
+                    End If
+
+                    .Item("Evento") = WEvento
+                    .Item("CufeDestino") = WCufeDestino
+                    .Item("CufeOrigen") = WCufeOrigen
+
+                End With
+            Next
+        End If
+
         Return tabla
     End Function
 
     Private Function _TraerInformacionMovimientosVarios(ByVal wDesdeFecha As String, ByVal wHastaFecha As String, ByVal wCodigo As String) As DataTable
         Dim tabla As DataTable = QueryAll("SELECT Fecha, Cantidad, Codigo, Movi FROM Movvar WHERE UPPER(Tipo) = 'M' AND Articulo = '" & wCodigo & "' AND ISNULL(Cantidad, 0) > 0 AND (Right(Fecha, 4) + SUBSTRING(Fecha, 4, 2) + left(Fecha, 2)) BETWEEN '" & wDesdeFecha & "' AND '" & wHastaFecha & "'")
+
+        '
+        ' Procesamos los datos.
+        '
+
+        tabla.Columns.Add("Evento")
+
+        If tabla.Rows.Count > 0 Then
+            For Each row As DataRow In tabla.Rows
+
+                With row
+
+                    .Item("Evento") = ""
+
+                    Dim WConver As Double = OrDefault(.Item("Cantidad"), 0)
+
+                    Select Case UCase(wCodigo)
+                        Case "DC-000-100"
+                            WConver /= 1.17
+                        Case "DS-001-100"
+                            WConver /= 1.84
+                        Case "DA-005-100"
+                            WConver /= 1.053
+                    End Select
+
+                    .Item("Cantidad") = WConver
+
+                    Dim WMovi As String = OrDefault(.Item("Producto"), "")
+
+                    If UCase(WMovi) = "S" Then
+                        .Item("Evento") = "66"
+                    Else
+                        .Item("Evento") = "58"
+                    End If
+
+                End With
+
+            Next
+        End If
 
         Return tabla
     End Function
@@ -277,6 +554,47 @@ Public Class DeclaracionJuradaMP
         ' Buscamos los datos de las hojas que contengan la MP como componente entre las fechas indicadas.
         '
         Dim tabla As DataTable = QueryAll("SELECT Fecha, Cantidad, Hoja, Producto FROM Hojas WHERE UPPER(Tipo) = 'M' AND Articulo = '" & wCodigo & "' AND (Right(Fecha, 4) + SUBSTRING(Fecha, 4, 2) + left(Fecha, 2)) BETWEEN '" & wDesdeFecha & "' AND '" & wHastaFecha & "'")
+
+        '
+        ' Procesamos los datos.
+        '
+
+        tabla.Columns.Add("Evento")
+
+        If tabla.Rows.Count > 0 Then
+
+            For Each row As DataRow In tabla.Rows
+
+                With row
+
+                    .Item("Evento") = ""
+
+                    Dim WConver As Double = OrDefault(.Item("Cantidad"), 0)
+
+                    Select Case UCase(wCodigo)
+                        Case "DC-000-100"
+                            WConver /= 1.17
+                        Case "DS-001-100"
+                            WConver /= 1.84
+                        Case "DA-005-100"
+                            WConver /= 1.053
+                    End Select
+
+                    .Item("Cantidad") = WConver
+
+                    Dim WCodTer As String = .Item("Producto").ToString.Substring(3, 5)
+
+                    If WCodTer >= "40000" And WCodTer <= 41999 Then
+                        .Item("Evento") = "69"
+                    Else
+                        .Item("Evento") = "54"
+                    End If
+
+                End With
+
+            Next
+
+        End If
 
         Return tabla
     End Function
@@ -293,6 +611,7 @@ Public Class DeclaracionJuradaMP
         tabla.Columns.Add("CufeIII")
         tabla.Columns.Add("Evento")
         tabla.Columns.Add("NroDespacho")
+        tabla.Columns.Add("TipoOrden")
         tabla.Columns.Add("Laudo", GetType(System.Double))
 
         '
@@ -335,11 +654,13 @@ Public Class DeclaracionJuradaMP
                 .Item("Laudo") = 0
                 .Item("NroDespacho") = ""
                 .Item("Evento") = ""
+                .Item("TipoOrden") = ""
 
                 If Not IsNothing(WOrden) Then
 
+                    .Item("TipoOrden") = OrDefault(WOrden.Item("Tipo"), 0)
 
-                    Select Case WOrden.Item("Tipo")
+                    Select Case .Item("TipoOrden")
                         Case 4
                             .Item("Laudo") = .Item("Cantidad")
                         Case Else
@@ -386,15 +707,20 @@ Public Class DeclaracionJuradaMP
 
                     .Item("Laudo") = WConver
 
-                    If .Item("Tipo") = 1 Then
-                        .Item("Evento") = "45"
-                    Else
+                    If .Item("Laudo") > 0 Then
 
-                        If .Item("Articulo").ToString.StartsWith("XX") Or .Item("Proveedor") = "10071011210" Then
-                            .Item("Evento") = "68"
-                        Else
-                            .Item("Evento") = "43"
-                        End If
+                        Select Case .Item("TipoOrden")
+                            Case 1
+                                .Item("Evento") = "45"
+                            Case 4
+                                .Item("Evento") = "66"
+                            Case Else
+                                If .Item("Articulo").ToString.StartsWith("XX") Or .Item("Proveedor") = "10071011210" Then
+                                    .Item("Evento") = "68"
+                                Else
+                                    .Item("Evento") = "43"
+                                End If
+                        End Select
 
                     End If
 
