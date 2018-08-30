@@ -26,7 +26,11 @@ Public Class VistaPrevia
         ' MANDAMOS EL PARÁMETRO DE LA EMPRESA.
 
         If Reporte.ParameterFields.Count > 0 Then
-            Reporte.SetParameterValue(0, ClasesCompartidas.Globals.NombreEmpresa)
+
+            If Reporte.ParameterFields(0).ReportName.Length = 0 Then
+                Reporte.SetParameterValue(0, ClasesCompartidas.Globals.NombreEmpresa)
+            End If
+
         End If
 
         ' CONECTAMOS CON LA BASE DE DATOS QUE CORRESPONDA.
@@ -51,7 +55,7 @@ Public Class VistaPrevia
         conexion.ServerName = cnsb.DataSource
         conexion.UserID = cnsb.UserID
         conexion.Password = cnsb.Password
-        'conexion.IntegratedSecurity = True
+        conexion.IntegratedSecurity = False
 
         Dim tli As New TableLogOnInfo()
         tli.ConnectionInfo = conexion
@@ -64,6 +68,18 @@ Public Class VistaPrevia
             _logInfo.ConnectionInfo = conexion
 
             tabla.ApplyLogOnInfo(_logInfo)
+
+        Next
+
+        For Each rpt As ReportDocument In Reporte.Subreports
+
+            For Each s As Object In rpt.Database.Tables
+                Dim _logInfo As TableLogOnInfo = s.LogOnInfo
+
+                _logInfo.ConnectionInfo = conexion
+
+                s.ApplyLogOnInfo(_logInfo)
+            Next
 
         Next
     End Sub

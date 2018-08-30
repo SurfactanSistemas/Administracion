@@ -7528,7 +7528,7 @@ Public Class Pagos
                         TipoRecibos = Mid(ClaveCtacte, 1, 1)
                         ClaveRecibos = Mid(ClaveCtacte, 2, 10)
                         Cuit = .Cells(6).Value
-
+                        Dim ZZFecha = XFecha2
 
                         Select Case Val(XTipo2)
                             Case 2, 3
@@ -7564,7 +7564,7 @@ Public Class Pagos
                                 Loop
 
                                 If ZCambioDivisa = 0 Then
-                                    MsgBox("La fecha " + XFecha2 + " no tiene informado paridad", MsgBoxStyle.Information)
+                                    MsgBox("La fecha " + ZZFecha + " no tiene informado paridad", MsgBoxStyle.Information)
                                     Exit Sub
                                 End If
                                 ZZParidad = ZCambioDivisa
@@ -7611,7 +7611,7 @@ Public Class Pagos
 
         With VistaPrevia
             .Reporte = New AnalisisDiferenciaCambioOP
-            .Formula = "{Pagos.Orden} = '" & txtOrdenPago.Text & "' AND {Pagos.Impolist} <> 0 AND {Pagos.TipoReg}='2'"
+            .Formula = "{Pagos.Orden} IN '" & txtOrdenPago.Text & "' TO '" & txtOrdenPago.Text & "' AND {Pagos.Impolist} <> 0 AND {Pagos.TipoReg} IN '2' TO '2'"
             .Mostrar()
             '.Imprimir()
         End With
