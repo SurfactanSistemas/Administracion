@@ -7577,7 +7577,8 @@ Public Class Pagos
 
                         Dim ZSql = ""
                         ZSql = ZSql + "UPDATE Pagos SET "
-                        ZSql = ZSql + " ImpoList = " + "'" + Str$(ZZParidad) + "'"
+                        ZSql = ZSql + " ImpoList = " + "'" + Str$(ZZParidad) + "',"
+                        ZSql = ZSql + " ImpoListFecha = " + "'" + Date.Now.ToString("dd/MM/yyyy") + "'"
                         ZSql = ZSql + " Where Orden = '" & txtOrdenPago.Text & "' AND (Tipo2 = '" & Val(XTipo2) & "' OR Tipo2 = '" & ceros(XTipo2, 2) & "') AND Numero2 = '" & XNumero2 & "'" ' AND Fecha2 = '" & XFecha2 & "'" ' + "'" + WClavesOP(row.Index) + "'"
 
 
