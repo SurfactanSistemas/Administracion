@@ -29,6 +29,8 @@ Public Class DeclaracionJuradaMP
             If Not IsNothing(dt) Then dt.Rows.Clear()
         Next
 
+        _CargarDatos()
+
         txtDesde.Focus()
     End Sub
 
