@@ -22,6 +22,7 @@ Partial Class DeclaracionJuradaPT
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -41,10 +42,17 @@ Partial Class DeclaracionJuradaPT
         Me.btnAgregar = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.lblEventos = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -76,9 +84,9 @@ Partial Class DeclaracionJuradaPT
         Me.GroupBox1.Controls.Add(Me.txtDesde)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Location = New System.Drawing.Point(20, 66)
+        Me.GroupBox1.Location = New System.Drawing.Point(20, 58)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(452, 92)
+        Me.GroupBox1.Size = New System.Drawing.Size(452, 82)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
@@ -86,7 +94,7 @@ Partial Class DeclaracionJuradaPT
         'ckLimpia
         '
         Me.ckLimpia.AutoSize = True
-        Me.ckLimpia.Location = New System.Drawing.Point(261, 24)
+        Me.ckLimpia.Location = New System.Drawing.Point(261, 19)
         Me.ckLimpia.Name = "ckLimpia"
         Me.ckLimpia.Size = New System.Drawing.Size(140, 17)
         Me.ckLimpia.TabIndex = 2
@@ -95,7 +103,7 @@ Partial Class DeclaracionJuradaPT
         '
         'txtHasta
         '
-        Me.txtHasta.Location = New System.Drawing.Point(150, 55)
+        Me.txtHasta.Location = New System.Drawing.Point(150, 50)
         Me.txtHasta.Mask = "00/00/0000"
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -105,7 +113,7 @@ Partial Class DeclaracionJuradaPT
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(150, 22)
+        Me.txtDesde.Location = New System.Drawing.Point(150, 17)
         Me.txtDesde.Mask = "00/00/0000"
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -116,7 +124,7 @@ Partial Class DeclaracionJuradaPT
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(55, 59)
+        Me.Label3.Location = New System.Drawing.Point(55, 54)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(71, 13)
         Me.Label3.TabIndex = 0
@@ -125,7 +133,7 @@ Partial Class DeclaracionJuradaPT
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(52, 26)
+        Me.Label2.Location = New System.Drawing.Point(52, 21)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(74, 13)
         Me.Label2.TabIndex = 0
@@ -140,7 +148,7 @@ Partial Class DeclaracionJuradaPT
         Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion})
         Me.dgvProductos.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.dgvProductos.Location = New System.Drawing.Point(0, 250)
+        Me.dgvProductos.Location = New System.Drawing.Point(0, 287)
         Me.dgvProductos.Name = "dgvProductos"
         Me.dgvProductos.ReadOnly = True
         Me.dgvProductos.RowHeadersWidth = 15
@@ -168,7 +176,7 @@ Partial Class DeclaracionJuradaPT
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(27, 163)
+        Me.btnAceptar.Location = New System.Drawing.Point(27, 198)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(97, 33)
         Me.btnAceptar.TabIndex = 3
@@ -177,7 +185,7 @@ Partial Class DeclaracionJuradaPT
         '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(141, 163)
+        Me.btnLimpiar.Location = New System.Drawing.Point(141, 198)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(97, 33)
         Me.btnLimpiar.TabIndex = 3
@@ -186,7 +194,7 @@ Partial Class DeclaracionJuradaPT
         '
         'btnConsulta
         '
-        Me.btnConsulta.Location = New System.Drawing.Point(255, 163)
+        Me.btnConsulta.Location = New System.Drawing.Point(255, 198)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(97, 33)
         Me.btnConsulta.TabIndex = 3
@@ -195,7 +203,7 @@ Partial Class DeclaracionJuradaPT
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(369, 163)
+        Me.btnCerrar.Location = New System.Drawing.Point(369, 198)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(97, 33)
         Me.btnCerrar.TabIndex = 3
@@ -207,7 +215,7 @@ Partial Class DeclaracionJuradaPT
         Me.GroupBox2.Controls.Add(Me.btnAgregar)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.txtCodigo)
-        Me.GroupBox2.Location = New System.Drawing.Point(20, 197)
+        Me.GroupBox2.Location = New System.Drawing.Point(20, 234)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(452, 45)
         Me.GroupBox2.TabIndex = 1
@@ -241,11 +249,58 @@ Partial Class DeclaracionJuradaPT
         Me.txtCodigo.TabIndex = 1
         Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.ProgressBar1)
+        Me.GroupBox3.Controls.Add(Me.lblEventos)
+        Me.GroupBox3.Location = New System.Drawing.Point(20, 139)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(452, 50)
+        Me.GroupBox3.TabIndex = 5
+        Me.GroupBox3.TabStop = False
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(8, 33)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(437, 10)
+        Me.ProgressBar1.TabIndex = 1
+        '
+        'lblEventos
+        '
+        Me.lblEventos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblEventos.Location = New System.Drawing.Point(8, 12)
+        Me.lblEventos.Name = "lblEventos"
+        Me.lblEventos.Size = New System.Drawing.Size(437, 15)
+        Me.lblEventos.TabIndex = 0
+        Me.lblEventos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(0, 204)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(21, 26)
+        Me.Button2.TabIndex = 7
+        Me.Button2.Text = "Aceptar"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(0, 172)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(21, 26)
+        Me.Button1.TabIndex = 6
+        Me.Button1.Text = "Aceptar"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'DeclaracionJuradaPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(493, 402)
+        Me.ClientSize = New System.Drawing.Size(493, 439)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnLimpiar)
@@ -254,6 +309,8 @@ Partial Class DeclaracionJuradaPT
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Panel1)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "DeclaracionJuradaPT"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Panel1.ResumeLayout(False)
@@ -263,6 +320,7 @@ Partial Class DeclaracionJuradaPT
         CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -285,4 +343,10 @@ Partial Class DeclaracionJuradaPT
     Friend WithEvents btnAgregar As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtCodigo As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents lblEventos As System.Windows.Forms.Label
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
