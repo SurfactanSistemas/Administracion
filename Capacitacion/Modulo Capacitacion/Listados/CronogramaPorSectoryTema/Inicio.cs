@@ -25,7 +25,7 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectoryTema
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-
+            TB_Año.Text = DateTime.Now.ToString("yyyy");
         }
 
         private void BT_Pantalla_Click(object sender, EventArgs e)
@@ -173,6 +173,26 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectoryTema
             {
                 throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataTable tabla = _TraerSector();
+            Ayuda frm = new Ayuda(tabla, TB_DesdeSector.Text);
+
+            frm.ShowDialog();
+            TB_DesdeSector.Text = frm.Valor == null ? "" : frm.Valor.ToString();
+            frm.Dispose();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DataTable tabla = _TraerSector();
+            Ayuda frm = new Ayuda(tabla, TB_HastaSector.Text);
+
+            frm.ShowDialog();
+            TB_HastaSector.Text = frm.Valor == null ? "" : frm.Valor.ToString();
+            frm.Dispose();
         }
     }
 }

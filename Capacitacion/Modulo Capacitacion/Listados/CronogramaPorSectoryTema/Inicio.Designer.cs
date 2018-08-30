@@ -42,6 +42,8 @@
             this.BT_Imprimir = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -85,6 +87,8 @@
             this.panel3.Controls.Add(this.TB_DesdeSector);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.BT_Pantalla);
+            this.panel3.Controls.Add(this.button2);
+            this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.BT_Imprimir);
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.label1);
@@ -96,6 +100,7 @@
             // TB_Año
             // 
             this.TB_Año.Location = new System.Drawing.Point(247, 116);
+            this.TB_Año.MaxLength = 4;
             this.TB_Año.Name = "TB_Año";
             this.TB_Año.Size = new System.Drawing.Size(51, 20);
             this.TB_Año.TabIndex = 87;
@@ -114,6 +119,7 @@
             // TB_HastaSector
             // 
             this.TB_HastaSector.Location = new System.Drawing.Point(247, 77);
+            this.TB_HastaSector.MaxLength = 4;
             this.TB_HastaSector.Name = "TB_HastaSector";
             this.TB_HastaSector.Size = new System.Drawing.Size(51, 20);
             this.TB_HastaSector.TabIndex = 85;
@@ -124,6 +130,7 @@
             // TB_DesdeSector
             // 
             this.TB_DesdeSector.Location = new System.Drawing.Point(247, 36);
+            this.TB_DesdeSector.MaxLength = 4;
             this.TB_DesdeSector.Name = "TB_DesdeSector";
             this.TB_DesdeSector.Size = new System.Drawing.Size(51, 20);
             this.TB_DesdeSector.TabIndex = 84;
@@ -147,7 +154,7 @@
             this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(84, 176);
+            this.BT_Pantalla.Location = new System.Drawing.Point(83, 176);
             this.BT_Pantalla.Name = "BT_Pantalla";
             this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
             this.BT_Pantalla.TabIndex = 81;
@@ -160,7 +167,7 @@
             this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(185, 176);
+            this.BT_Imprimir.Location = new System.Drawing.Point(178, 176);
             this.BT_Imprimir.Name = "BT_Imprimir";
             this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
             this.BT_Imprimir.TabIndex = 80;
@@ -173,7 +180,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(275, 176);
+            this.BT_Salir.Location = new System.Drawing.Point(273, 176);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
@@ -189,6 +196,32 @@
             this.label1.Size = new System.Drawing.Size(93, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "Sector Desde:";
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(304, 34);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 25);
+            this.button1.TabIndex = 80;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.SystemColors.Control;
+            this.button2.Location = new System.Drawing.Point(304, 74);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(25, 25);
+            this.button2.TabIndex = 80;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Inicio
             // 
@@ -224,5 +257,7 @@
         private System.Windows.Forms.Button BT_Imprimir;
         private System.Windows.Forms.Button BT_Salir;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
