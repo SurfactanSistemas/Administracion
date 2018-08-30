@@ -182,7 +182,7 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-            string consulta = "Select L.Sector, ISNULL(s.Descripcion, '') , C.Curso, Cu.Descripcion, C.Legajo, L.Descripcion, C.Horas from Cronograma C INNER JOIN Legajo L ON L.Codigo = C.Legajo AND L.Renglon = 1 inner join Curso Cu on Cu.Codigo = C.Curso LEFT OUTER JOIN Sector s ON s.Codigo = l.Sector where L.Sector >= " + SectorDesde + " and L.Sector <= " + SectorHasta + " and Ano = " + Año + " order by C.Sector, C.Curso, Legajo";
+            string consulta = "Select L.Sector, UPPER(ISNULL(s.Descripcion, '')) , C.Curso, UPPER(Cu.Descripcion), C.Legajo, UPPER(L.Descripcion), C.Horas from Cronograma C INNER JOIN Legajo L ON L.Codigo = C.Legajo AND L.Renglon = 1 inner join Curso Cu on Cu.Codigo = C.Curso LEFT OUTER JOIN Sector s ON s.Codigo = l.Sector where L.Sector >= " + SectorDesde + " and L.Sector <= " + SectorHasta + " and Ano = " + Año + " order by C.Sector, C.Curso, Legajo";
 
 
 

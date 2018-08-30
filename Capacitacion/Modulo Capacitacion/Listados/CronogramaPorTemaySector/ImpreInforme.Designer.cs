@@ -1,4 +1,4 @@
-﻿namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema
+﻿namespace Modulo_Capacitacion.Listados.CronogramaPorTemaySector
 {
     partial class ImpreInforme
     {
@@ -56,7 +56,6 @@
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.CRVInforme);
             this.Name = "ImpreInforme";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ImpreInforme_Load);
             this.ResumeLayout(false);
 

@@ -1,4 +1,4 @@
-﻿namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema
+﻿namespace Modulo_Capacitacion.Listados.CronogramaPorTemaySector
 {
     partial class Inicio
     {
@@ -67,7 +67,7 @@
             this.LBChofer.Name = "LBChofer";
             this.LBChofer.Size = new System.Drawing.Size(344, 19);
             this.LBChofer.TabIndex = 0;
-            this.LBChofer.Text = "LISTADO DE CRONOGRAMA POR  SECTOR Y TEMA";
+            this.LBChofer.Text = "LISTADO DE CRONOGRAMA POR  TEMA Y SECTOR";
             // 
             // panel2
             // 
@@ -99,7 +99,7 @@
             // 
             // TB_Año
             // 
-            this.TB_Año.Location = new System.Drawing.Point(231, 116);
+            this.TB_Año.Location = new System.Drawing.Point(247, 116);
             this.TB_Año.MaxLength = 4;
             this.TB_Año.Name = "TB_Año";
             this.TB_Año.Size = new System.Drawing.Size(51, 20);
@@ -110,7 +110,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(83, 116);
+            this.label3.Location = new System.Drawing.Point(99, 116);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 18);
             this.label3.TabIndex = 86;
@@ -118,7 +118,7 @@
             // 
             // TB_HastaSector
             // 
-            this.TB_HastaSector.Location = new System.Drawing.Point(231, 77);
+            this.TB_HastaSector.Location = new System.Drawing.Point(247, 77);
             this.TB_HastaSector.MaxLength = 4;
             this.TB_HastaSector.Name = "TB_HastaSector";
             this.TB_HastaSector.Size = new System.Drawing.Size(51, 20);
@@ -129,7 +129,7 @@
             // 
             // TB_DesdeSector
             // 
-            this.TB_DesdeSector.Location = new System.Drawing.Point(231, 36);
+            this.TB_DesdeSector.Location = new System.Drawing.Point(247, 36);
             this.TB_DesdeSector.MaxLength = 4;
             this.TB_DesdeSector.Name = "TB_DesdeSector";
             this.TB_DesdeSector.Size = new System.Drawing.Size(51, 20);
@@ -142,7 +142,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(83, 77);
+            this.label2.Location = new System.Drawing.Point(99, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 18);
             this.label2.TabIndex = 83;
@@ -167,7 +167,7 @@
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.SystemColors.Control;
-            this.button2.Location = new System.Drawing.Point(288, 74);
+            this.button2.Location = new System.Drawing.Point(304, 74);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(25, 25);
             this.button2.TabIndex = 80;
@@ -180,7 +180,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(288, 34);
+            this.button1.Location = new System.Drawing.Point(304, 34);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(25, 25);
             this.button1.TabIndex = 80;
@@ -217,7 +217,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(83, 36);
+            this.label1.Location = new System.Drawing.Point(99, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 18);
             this.label1.TabIndex = 1;

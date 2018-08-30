@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
+namespace Modulo_Capacitacion.Listados.CronogramaPorTemaySector {
     
     
     /// <summary>

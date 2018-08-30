@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
+namespace Modulo_Capacitacion.Listados.CronogramaPorTemaySector {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
         
         public override string FullResourceName {
             get {
-                return "Modulo_Capacitacion.Listados.CronogramaPorSectorYTema.Reporte.rpt";
+                return "Modulo_Capacitacion.Listados.CronogramaPorTemaySector.Reporte.rpt";
             }
             set {
                 // Do nothing

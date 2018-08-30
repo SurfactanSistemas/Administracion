@@ -70,6 +70,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -227,6 +228,7 @@
             this.listadoDeHorasCursadasPorLegajoToolStripMenuItem,
             this.listadoDePromedioDeCapacitaciónToolStripMenuItem,
             this.listadoDeCursosPorResponsableToolStripMenuItem,
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1,
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem,
             this.listadoDeCursosPendientesPorSectorToolStripMenuItem});
             this.listadosToolStripMenuItem.Name = "listadosToolStripMenuItem";
@@ -363,7 +365,7 @@
             // 
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Name = "listadoDeCronogramaPorSectorYTemaToolStripMenuItem";
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Text = "Listado de Cronograma por Sector y Tema";
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Text = "Listado de Cronograma por Tema  y Sector";
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem_Click);
             // 
             // listadoDeCursosPendientesPorSectorToolStripMenuItem
@@ -423,6 +425,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
             this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // listadoDeCronogramaPorSectorYTemaToolStripMenuItem1
+            // 
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Name = "listadoDeCronogramaPorSectorYTemaToolStripMenuItem1";
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Size = new System.Drawing.Size(430, 22);
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Text = "Listado de Cronograma por Sector y Tema";
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Click += new System.EventHandler(this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -488,6 +497,7 @@
         private System.Windows.Forms.ToolStripMenuItem asignaciónDeCursosPorPerfilOSectorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem planDeCapacitaciónTentativoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoDeCronogramaPorSectorYTemaToolStripMenuItem1;
     }
 }
 

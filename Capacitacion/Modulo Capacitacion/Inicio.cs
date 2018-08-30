@@ -164,7 +164,7 @@ namespace Modulo_Capacitacion
 
         private void listadoDeCronogramaPorSectorYTemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Listados.CronogramaPorSectoryTema.Inicio frm = new Listados.CronogramaPorSectoryTema.Inicio();
+            Listados.CronogramaPorTemaySector.Inicio frm = new Listados.CronogramaPorTemaySector.Inicio();
             frm.Show();
         }
 
@@ -234,6 +234,12 @@ namespace Modulo_Capacitacion
         private void planDeCapacitaciónTentativoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listados.PlanCapacitacionAnualTentativo.Inicio frm = new Listados.PlanCapacitacionAnualTentativo.Inicio();
+            frm.Show();
+        }
+
+        private void listadoDeCronogramaPorSectorYTemaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Listados.CronogramaPorSectorYTema.Inicio frm = new Listados.CronogramaPorSectorYTema.Inicio();
             frm.Show();
         }
     }

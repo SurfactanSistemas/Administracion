@@ -10,7 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
-namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema
+namespace Modulo_Capacitacion.Listados.CronogramaPorTemaySector
 {
     public partial class Inicio : Form
     {
