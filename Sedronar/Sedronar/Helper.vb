@@ -592,7 +592,7 @@ Module Helper
         Return xfecha
     End Function
 
-    Public Function OrDefault(ByVal valor As Nullable, ByVal WDefault As Object)
+    Public Function OrDefault(ByVal valor As Object, ByVal WDefault As Object)
 
         If valor Is Nothing OrElse IsDBNull(valor) Then Return WDefault
 
@@ -623,7 +623,7 @@ Module Helper
         Return resultados
     End Function
 
-    Public Function QuerySingle(ByVal q As String, Optional ByVal WBase As String = "SurfactaSa") As DataRow
+    Public Function QuerySingle(ByVal q As String, Optional ByVal WBase As String = "SurfactanSa") As DataRow
         Dim resultados As New DataTable
 
         Using cn As New SqlConnection

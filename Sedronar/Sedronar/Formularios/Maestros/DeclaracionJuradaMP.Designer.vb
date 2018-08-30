@@ -22,29 +22,37 @@ Partial Class DeclaracionJuradaMP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ckLimpia = New System.Windows.Forms.CheckBox()
+        Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
+        Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.dgvProductos = New System.Windows.Forms.DataGridView()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnConsulta = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
-        Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
-        Me.ckLimpia = New System.Windows.Forms.CheckBox()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAgregar = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
-        Me.btnAgregar = New System.Windows.Forms.Button()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.lblEventos = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -76,12 +84,60 @@ Partial Class DeclaracionJuradaMP
         Me.GroupBox1.Controls.Add(Me.txtDesde)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Location = New System.Drawing.Point(20, 66)
+        Me.GroupBox1.Location = New System.Drawing.Point(20, 59)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(452, 92)
+        Me.GroupBox1.Size = New System.Drawing.Size(452, 81)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
+        '
+        'ckLimpia
+        '
+        Me.ckLimpia.AutoSize = True
+        Me.ckLimpia.Location = New System.Drawing.Point(261, 19)
+        Me.ckLimpia.Name = "ckLimpia"
+        Me.ckLimpia.Size = New System.Drawing.Size(140, 17)
+        Me.ckLimpia.TabIndex = 2
+        Me.ckLimpia.Text = "Limpiar Datos Anteriores"
+        Me.ckLimpia.UseVisualStyleBackColor = True
+        '
+        'txtHasta
+        '
+        Me.txtHasta.Location = New System.Drawing.Point(150, 50)
+        Me.txtHasta.Mask = "00/00/0000"
+        Me.txtHasta.Name = "txtHasta"
+        Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtHasta.Size = New System.Drawing.Size(68, 20)
+        Me.txtHasta.TabIndex = 1
+        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtDesde
+        '
+        Me.txtDesde.Location = New System.Drawing.Point(150, 17)
+        Me.txtDesde.Mask = "00/00/0000"
+        Me.txtDesde.Name = "txtDesde"
+        Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtDesde.Size = New System.Drawing.Size(68, 20)
+        Me.txtDesde.TabIndex = 1
+        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(55, 54)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(71, 13)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "Hasta Fecha:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(52, 21)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(74, 13)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Desde Fecha:"
         '
         'dgvProductos
         '
@@ -92,7 +148,7 @@ Partial Class DeclaracionJuradaMP
         Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion})
         Me.dgvProductos.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.dgvProductos.Location = New System.Drawing.Point(0, 250)
+        Me.dgvProductos.Location = New System.Drawing.Point(0, 280)
         Me.dgvProductos.Name = "dgvProductos"
         Me.dgvProductos.ReadOnly = True
         Me.dgvProductos.RowHeadersWidth = 15
@@ -100,101 +156,6 @@ Partial Class DeclaracionJuradaMP
         Me.dgvProductos.ShowCellToolTips = False
         Me.dgvProductos.Size = New System.Drawing.Size(493, 152)
         Me.dgvProductos.TabIndex = 2
-        '
-        'btnAceptar
-        '
-        Me.btnAceptar.Location = New System.Drawing.Point(27, 163)
-        Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(97, 33)
-        Me.btnAceptar.TabIndex = 3
-        Me.btnAceptar.Text = "Aceptar"
-        Me.btnAceptar.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.Location = New System.Drawing.Point(141, 163)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(97, 33)
-        Me.btnLimpiar.TabIndex = 3
-        Me.btnLimpiar.Text = "Limpiar Lista"
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.Location = New System.Drawing.Point(255, 163)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(97, 33)
-        Me.btnConsulta.TabIndex = 3
-        Me.btnConsulta.Text = "Consulta"
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.Location = New System.Drawing.Point(369, 163)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(97, 33)
-        Me.btnCerrar.TabIndex = 3
-        Me.btnCerrar.Text = "Cerrar"
-        Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.btnAgregar)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.txtCodigo)
-        Me.GroupBox2.Location = New System.Drawing.Point(20, 197)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(452, 45)
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(52, 26)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(74, 13)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Desde Fecha:"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(55, 59)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(71, 13)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Hasta Fecha:"
-        '
-        'txtDesde
-        '
-        Me.txtDesde.Location = New System.Drawing.Point(150, 22)
-        Me.txtDesde.Mask = "00/00/0000"
-        Me.txtDesde.Name = "txtDesde"
-        Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtDesde.Size = New System.Drawing.Size(68, 20)
-        Me.txtDesde.TabIndex = 1
-        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtHasta
-        '
-        Me.txtHasta.Location = New System.Drawing.Point(150, 55)
-        Me.txtHasta.Mask = "00/00/0000"
-        Me.txtHasta.Name = "txtHasta"
-        Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtHasta.Size = New System.Drawing.Size(68, 20)
-        Me.txtHasta.TabIndex = 1
-        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'ckLimpia
-        '
-        Me.ckLimpia.AutoSize = True
-        Me.ckLimpia.Location = New System.Drawing.Point(261, 24)
-        Me.ckLimpia.Name = "ckLimpia"
-        Me.ckLimpia.Size = New System.Drawing.Size(140, 17)
-        Me.ckLimpia.TabIndex = 2
-        Me.ckLimpia.Text = "Limpiar Datos Anteriores"
-        Me.ckLimpia.UseVisualStyleBackColor = True
         '
         'Codigo
         '
@@ -212,6 +173,62 @@ Partial Class DeclaracionJuradaMP
         Me.Descripcion.HeaderText = "Descripción"
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
+        '
+        'btnAceptar
+        '
+        Me.btnAceptar.Location = New System.Drawing.Point(27, 195)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(97, 33)
+        Me.btnAceptar.TabIndex = 3
+        Me.btnAceptar.Text = "Aceptar"
+        Me.btnAceptar.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Location = New System.Drawing.Point(141, 195)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(97, 33)
+        Me.btnLimpiar.TabIndex = 3
+        Me.btnLimpiar.Text = "Limpiar Lista"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.Location = New System.Drawing.Point(255, 195)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(97, 33)
+        Me.btnConsulta.TabIndex = 3
+        Me.btnConsulta.Text = "Consulta"
+        Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.Location = New System.Drawing.Point(369, 195)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(97, 33)
+        Me.btnCerrar.TabIndex = 3
+        Me.btnCerrar.Text = "Cerrar"
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.btnAgregar)
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.txtCodigo)
+        Me.GroupBox2.Location = New System.Drawing.Point(20, 228)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(452, 45)
+        Me.GroupBox2.TabIndex = 1
+        Me.GroupBox2.TabStop = False
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.Location = New System.Drawing.Point(249, 14)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(97, 21)
+        Me.btnAgregar.TabIndex = 3
+        Me.btnAgregar.Text = "Agregar"
+        Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'Label4
         '
@@ -232,23 +249,68 @@ Partial Class DeclaracionJuradaMP
         Me.txtCodigo.TabIndex = 1
         Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'btnAgregar
+        'GroupBox3
         '
-        Me.btnAgregar.Location = New System.Drawing.Point(249, 14)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(97, 21)
-        Me.btnAgregar.TabIndex = 3
-        Me.btnAgregar.Text = "Agregar"
-        Me.btnAgregar.UseVisualStyleBackColor = True
+        Me.GroupBox3.Controls.Add(Me.ProgressBar1)
+        Me.GroupBox3.Controls.Add(Me.lblEventos)
+        Me.GroupBox3.Location = New System.Drawing.Point(20, 140)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(452, 50)
+        Me.GroupBox3.TabIndex = 4
+        Me.GroupBox3.TabStop = False
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(8, 33)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(437, 10)
+        Me.ProgressBar1.TabIndex = 1
+        '
+        'lblEventos
+        '
+        Me.lblEventos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblEventos.Location = New System.Drawing.Point(8, 12)
+        Me.lblEventos.Name = "lblEventos"
+        Me.lblEventos.Size = New System.Drawing.Size(437, 15)
+        Me.lblEventos.TabIndex = 0
+        Me.lblEventos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 500
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(0, 196)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(21, 26)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "Aceptar"
+        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(0, 228)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(21, 26)
+        Me.Button2.TabIndex = 3
+        Me.Button2.Text = "Aceptar"
+        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
         '
         'DeclaracionJuradaMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(493, 402)
+        Me.ClientSize = New System.Drawing.Size(493, 432)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnLimpiar)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.dgvProductos)
         Me.Controls.Add(Me.GroupBox2)
@@ -263,6 +325,7 @@ Partial Class DeclaracionJuradaMP
         CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -285,4 +348,10 @@ Partial Class DeclaracionJuradaMP
     Friend WithEvents btnAgregar As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtCodigo As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents lblEventos As System.Windows.Forms.Label
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class

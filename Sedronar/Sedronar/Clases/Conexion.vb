@@ -155,28 +155,28 @@ Namespace Clases
         End Function
 
         Public Shared Function ObtenerIdEmpresaPorNombre(ByVal empresa As String) As Integer
-            Select Case empresa
-                Case "SurfactanSa"
+            Select Case LCase(empresa)
+                Case "surfactansa"
                     Return 1
-                Case "PellitalSa"
+                Case "pellitalsa"
                     Return 2
-                Case "Surfactan_II"
+                Case "surfactan_ii"
                     Return 3
-                Case "Pelitall_II" ' Asi está escrita la Base de Datos en el SQL.
+                Case "pelitall_ii" ' Asi está escrita la Base de Datos en el SQL.
                     Return 4
-                Case "Surfactan_III"
+                Case "surfactan_iii"
                     Return 5
-                Case "Surfactan_IV"
+                Case "surfactan_iv"
                     Return 6
-                Case "Surfactan_V"
+                Case "surfactan_v"
                     Return 7
-                Case "Pellital_III"
+                Case "pellital_iii"
                     Return 8
-                Case "Pellital_V"
+                Case "pellital_v"
                     Return 9
-                Case "Surfactan_VI"
+                Case "surfactan_vi"
                     Return 10
-                Case "Surfactan_VII"
+                Case "surfactan_vii"
                     Return 11
                 Case Else
                     Return 0
