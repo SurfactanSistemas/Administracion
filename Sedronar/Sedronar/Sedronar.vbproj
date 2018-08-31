@@ -220,7 +220,10 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="PlanillaTrimestral-MODELO.xlsx">
+    <None Include="PlanillaTrimestral-MODELO-Ibu.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="PlanillaTrimestral-MODELO-Litio.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

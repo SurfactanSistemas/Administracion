@@ -25,12 +25,13 @@ Partial Class DeclaracionJuradaFarma
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmbTipoProceso = New System.Windows.Forms.ComboBox()
         Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnAceptar = New System.Windows.Forms.Button()
-        Me.btnAceptarIbu = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -60,16 +61,26 @@ Partial Class DeclaracionJuradaFarma
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cmbTipoProceso)
         Me.GroupBox1.Controls.Add(Me.txtHasta)
         Me.GroupBox1.Controls.Add(Me.txtDesde)
         Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Location = New System.Drawing.Point(16, 74)
+        Me.GroupBox1.Location = New System.Drawing.Point(16, 58)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(403, 80)
+        Me.GroupBox1.Size = New System.Drawing.Size(403, 110)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "PARÁMETROS"
+        '
+        'cmbTipoProceso
+        '
+        Me.cmbTipoProceso.FormattingEnabled = True
+        Me.cmbTipoProceso.Location = New System.Drawing.Point(159, 73)
+        Me.cmbTipoProceso.Name = "cmbTipoProceso"
+        Me.cmbTipoProceso.Size = New System.Drawing.Size(135, 21)
+        Me.cmbTipoProceso.TabIndex = 2
         '
         'txtHasta
         '
@@ -100,6 +111,15 @@ Partial Class DeclaracionJuradaFarma
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Hasta Fecha:"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(79, 76)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(74, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Desde Fecha:"
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -111,25 +131,16 @@ Partial Class DeclaracionJuradaFarma
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(26, 174)
+        Me.btnAceptar.Location = New System.Drawing.Point(101, 176)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(106, 34)
         Me.btnAceptar.TabIndex = 3
-        Me.btnAceptar.Text = "Aceptar"
+        Me.btnAceptar.Text = "Generar"
         Me.btnAceptar.UseVisualStyleBackColor = True
-        '
-        'btnAceptarIbu
-        '
-        Me.btnAceptarIbu.Location = New System.Drawing.Point(160, 174)
-        Me.btnAceptarIbu.Name = "btnAceptarIbu"
-        Me.btnAceptarIbu.Size = New System.Drawing.Size(113, 34)
-        Me.btnAceptarIbu.TabIndex = 3
-        Me.btnAceptarIbu.Text = "Proceso Ibuprofeno"
-        Me.btnAceptarIbu.UseVisualStyleBackColor = True
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(302, 174)
+        Me.btnCancelar.Location = New System.Drawing.Point(228, 176)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(106, 34)
         Me.btnCancelar.TabIndex = 3
@@ -142,7 +153,6 @@ Partial Class DeclaracionJuradaFarma
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(435, 222)
         Me.Controls.Add(Me.btnCancelar)
-        Me.Controls.Add(Me.btnAceptarIbu)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Panel1)
@@ -166,6 +176,7 @@ Partial Class DeclaracionJuradaFarma
     Friend WithEvents txtDesde As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtHasta As System.Windows.Forms.MaskedTextBox
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
-    Friend WithEvents btnAceptarIbu As System.Windows.Forms.Button
     Friend WithEvents btnCancelar As System.Windows.Forms.Button
+    Friend WithEvents cmbTipoProceso As System.Windows.Forms.ComboBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 End Class
