@@ -283,6 +283,7 @@ Partial Class DeclaracionJuradaPT
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Aceptar"
         Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
         '
         'Button1
         '
@@ -292,6 +293,7 @@ Partial Class DeclaracionJuradaPT
         Me.Button1.TabIndex = 6
         Me.Button1.Text = "Aceptar"
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'DeclaracionJuradaPT
         '

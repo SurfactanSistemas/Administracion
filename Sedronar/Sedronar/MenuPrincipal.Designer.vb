@@ -33,9 +33,10 @@ Partial Class MenuPrincipal
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeclaraciónJuradaMateriasPrimasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -150,7 +151,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeclaraciónJuradaMateriasPrimasToolStripMenuItem, Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeclaraciónJuradaMateriasPrimasToolStripMenuItem, Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem, Me.ToolStripMenuItem1})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -160,6 +161,18 @@ Partial Class MenuPrincipal
         Me.DeclaraciónJuradaMateriasPrimasToolStripMenuItem.Name = "DeclaraciónJuradaMateriasPrimasToolStripMenuItem"
         Me.DeclaraciónJuradaMateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(295, 22)
         Me.DeclaraciónJuradaMateriasPrimasToolStripMenuItem.Text = "Declaración Jurada Materias Primas"
+        '
+        'DeclaraciónJuradaProductosTerminadosToolStripMenuItem
+        '
+        Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem.Name = "DeclaraciónJuradaProductosTerminadosToolStripMenuItem"
+        Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(295, 22)
+        Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem.Text = "Declaración Jurada Productos Terminados"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(295, 22)
+        Me.ToolStripMenuItem1.Text = "Declaración Jurada FARMA"
         '
         'ProcesosToolStripMenuItem
         '
@@ -173,12 +186,6 @@ Partial Class MenuPrincipal
         Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
         Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
-        '
-        'DeclaraciónJuradaProductosTerminadosToolStripMenuItem
-        '
-        Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem.Name = "DeclaraciónJuradaProductosTerminadosToolStripMenuItem"
-        Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(295, 22)
-        Me.DeclaraciónJuradaProductosTerminadosToolStripMenuItem.Text = "Declaración Jurada Productos Terminados"
         '
         'MenuPrincipal
         '
@@ -216,5 +223,6 @@ Partial Class MenuPrincipal
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents DeclaraciónJuradaMateriasPrimasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DeclaraciónJuradaProductosTerminadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

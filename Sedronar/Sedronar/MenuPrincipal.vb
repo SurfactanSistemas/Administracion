@@ -30,4 +30,8 @@
     Private Sub DeclaraciónJuradaProductosTerminadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeclaraciónJuradaProductosTerminadosToolStripMenuItem.Click
         _Abrir(New DeclaracionJuradaPT)
     End Sub
+
+    Private Sub ToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem1.Click
+        _Abrir(New DeclaracionJuradaFarma)
+    End Sub
 End Class
