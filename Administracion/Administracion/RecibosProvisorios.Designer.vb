@@ -31,23 +31,25 @@ Partial Class RecibosProvisorios
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridRecibos = New System.Windows.Forms.DataGridView()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Ref = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Lectora = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveBanco = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveSucursal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumeroCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NroCta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NroCuit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.optVarios = New System.Windows.Forms.RadioButton()
-        Me.optAnticipos = New System.Windows.Forms.RadioButton()
-        Me.optCtaCte = New System.Windows.Forms.RadioButton()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnLimpiar = New Administracion.CustomButton()
-        Me.btnCerrar = New Administracion.CustomButton()
-        Me.btnIntereses = New Administracion.CustomButton()
-        Me.btnEliminar = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.btnAgregar = New Administracion.CustomButton()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.CustomLabel10 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
@@ -72,21 +74,19 @@ Partial Class RecibosProvisorios
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.txtParidad = New Administracion.CustomTextBox()
         Me.txtRetSuss = New Administracion.CustomTextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.optVarios = New System.Windows.Forms.RadioButton()
+        Me.optAnticipos = New System.Windows.Forms.RadioButton()
+        Me.optCtaCte = New System.Windows.Forms.RadioButton()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Ref = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Lectora = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClaveBanco = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClaveSucursal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumeroCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NroCta = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NroCuit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnLimpiar = New Administracion.CustomButton()
+        Me.btnCerrar = New Administracion.CustomButton()
+        Me.btnIntereses = New Administracion.CustomButton()
+        Me.btnEliminar = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnAgregar = New Administracion.CustomButton()
         CType(Me.gridRecibos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -128,6 +128,103 @@ Partial Class RecibosProvisorios
         Me.gridRecibos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.gridRecibos.Size = New System.Drawing.Size(649, 216)
         Me.gridRecibos.TabIndex = 13
+        '
+        'Tipo
+        '
+        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Tipo.FillWeight = 80.0!
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.MaxInputLength = 31
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.Width = 53
+        '
+        'numero
+        '
+        Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.numero.DefaultCellStyle = DataGridViewCellStyle3
+        Me.numero.FillWeight = 120.0!
+        Me.numero.HeaderText = "Numero/Cta"
+        Me.numero.MaxInputLength = 8
+        Me.numero.Name = "numero"
+        Me.numero.Width = 120
+        '
+        'fecha
+        '
+        Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.fecha.DefaultCellStyle = DataGridViewCellStyle4
+        Me.fecha.FillWeight = 120.0!
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.MaxInputLength = 10
+        Me.fecha.Name = "fecha"
+        Me.fecha.Width = 110
+        '
+        'banco
+        '
+        Me.banco.HeaderText = "Banco"
+        Me.banco.MaxInputLength = 20
+        Me.banco.Name = "banco"
+        '
+        'importe
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.Format = "N2"
+        DataGridViewCellStyle5.NullValue = Nothing
+        Me.importe.DefaultCellStyle = DataGridViewCellStyle5
+        Me.importe.HeaderText = "Importe"
+        Me.importe.Name = "importe"
+        '
+        'Ref
+        '
+        Me.Ref.HeaderText = "Ref"
+        Me.Ref.Name = "Ref"
+        Me.Ref.ReadOnly = True
+        Me.Ref.Visible = False
+        '
+        'Lectora
+        '
+        Me.Lectora.HeaderText = "Lectora"
+        Me.Lectora.Name = "Lectora"
+        Me.Lectora.Visible = False
+        '
+        'ClaveCheque
+        '
+        Me.ClaveCheque.HeaderText = "ClaveCheque"
+        Me.ClaveCheque.Name = "ClaveCheque"
+        Me.ClaveCheque.Visible = False
+        '
+        'ClaveBanco
+        '
+        Me.ClaveBanco.HeaderText = "ClaveBanco"
+        Me.ClaveBanco.Name = "ClaveBanco"
+        Me.ClaveBanco.Visible = False
+        '
+        'ClaveSucursal
+        '
+        Me.ClaveSucursal.HeaderText = "ClaveSucursal"
+        Me.ClaveSucursal.Name = "ClaveSucursal"
+        Me.ClaveSucursal.Visible = False
+        '
+        'NumeroCheque
+        '
+        Me.NumeroCheque.HeaderText = "NumeroCheque"
+        Me.NumeroCheque.Name = "NumeroCheque"
+        Me.NumeroCheque.Visible = False
+        '
+        'NroCta
+        '
+        Me.NroCta.HeaderText = "NroCta"
+        Me.NroCta.Name = "NroCta"
+        Me.NroCta.Visible = False
+        '
+        'NroCuit
+        '
+        Me.NroCuit.HeaderText = "NroCuit"
+        Me.NroCuit.Name = "NroCuit"
+        Me.NroCuit.Visible = False
         '
         'Panel1
         '
@@ -225,178 +322,6 @@ Partial Class RecibosProvisorios
         Me.txtFecha.TabIndex = 2
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.optVarios)
-        Me.GroupBox1.Controls.Add(Me.optAnticipos)
-        Me.GroupBox1.Controls.Add(Me.optCtaCte)
-        Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(22, 101)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(379, 41)
-        Me.GroupBox1.TabIndex = 121
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Tipo"
-        '
-        'optVarios
-        '
-        Me.optVarios.AutoSize = True
-        Me.optVarios.Location = New System.Drawing.Point(257, 14)
-        Me.optVarios.Name = "optVarios"
-        Me.optVarios.Size = New System.Drawing.Size(64, 22)
-        Me.optVarios.TabIndex = 2
-        Me.optVarios.Text = "Varios"
-        Me.optVarios.UseVisualStyleBackColor = True
-        '
-        'optAnticipos
-        '
-        Me.optAnticipos.AutoSize = True
-        Me.optAnticipos.Location = New System.Drawing.Point(168, 14)
-        Me.optAnticipos.Name = "optAnticipos"
-        Me.optAnticipos.Size = New System.Drawing.Size(84, 22)
-        Me.optAnticipos.TabIndex = 1
-        Me.optAnticipos.Text = "Anticipos"
-        Me.optAnticipos.UseVisualStyleBackColor = True
-        '
-        'optCtaCte
-        '
-        Me.optCtaCte.AutoSize = True
-        Me.optCtaCte.Checked = True
-        Me.optCtaCte.Location = New System.Drawing.Point(42, 12)
-        Me.optCtaCte.Name = "optCtaCte"
-        Me.optCtaCte.Size = New System.Drawing.Size(118, 22)
-        Me.optCtaCte.TabIndex = 0
-        Me.optCtaCte.TabStop = True
-        Me.optCtaCte.Text = "Cobro Cta. Cte."
-        Me.optCtaCte.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
-        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnLimpiar.Cleanable = False
-        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLimpiar.EnterIndex = -1
-        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.BorderSize = 0
-        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(574, 481)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(69, 44)
-        Me.btnLimpiar.TabIndex = 125
-        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCerrar.Cleanable = False
-        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrar.EnterIndex = -1
-        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.BorderSize = 0
-        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(469, 481)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(69, 44)
-        Me.btnCerrar.TabIndex = 124
-        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
-        Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'btnIntereses
-        '
-        Me.btnIntereses.BackgroundImage = Global.Administracion.My.Resources.Resources.calculadora
-        Me.btnIntereses.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnIntereses.Cleanable = False
-        Me.btnIntereses.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnIntereses.EnterIndex = -1
-        Me.btnIntereses.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnIntereses.FlatAppearance.BorderSize = 0
-        Me.btnIntereses.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnIntereses.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnIntereses.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnIntereses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnIntereses.LabelAssociationKey = -1
-        Me.btnIntereses.Location = New System.Drawing.Point(364, 481)
-        Me.btnIntereses.Name = "btnIntereses"
-        Me.btnIntereses.Size = New System.Drawing.Size(69, 44)
-        Me.btnIntereses.TabIndex = 123
-        Me.ToolTip1.SetToolTip(Me.btnIntereses, "Intereses")
-        Me.btnIntereses.UseVisualStyleBackColor = True
-        '
-        'btnEliminar
-        '
-        Me.btnEliminar.BackgroundImage = Global.Administracion.My.Resources.Resources.eliminar
-        Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnEliminar.Cleanable = False
-        Me.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnEliminar.EnterIndex = -1
-        Me.btnEliminar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatAppearance.BorderSize = 0
-        Me.btnEliminar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEliminar.LabelAssociationKey = -1
-        Me.btnEliminar.Location = New System.Drawing.Point(154, 481)
-        Me.btnEliminar.Name = "btnEliminar"
-        Me.btnEliminar.Size = New System.Drawing.Size(69, 44)
-        Me.btnEliminar.TabIndex = 122
-        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar el Recibo Provisorio Actual")
-        Me.btnEliminar.UseVisualStyleBackColor = True
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cleanable = False
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(259, 481)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(69, 44)
-        Me.btnConsulta.TabIndex = 122
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta")
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'btnAgregar
-        '
-        Me.btnAgregar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAgregar.Cleanable = False
-        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAgregar.EnterIndex = -1
-        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.BorderSize = 0
-        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(49, 481)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(69, 44)
-        Me.btnAgregar.TabIndex = 121
-        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
-        Me.btnAgregar.UseVisualStyleBackColor = True
-        '
         'CustomLabel1
         '
         Me.CustomLabel1.AutoSize = True
@@ -419,7 +344,7 @@ Partial Class RecibosProvisorios
         Me.CustomLabel10.Name = "CustomLabel10"
         Me.CustomLabel10.Size = New System.Drawing.Size(384, 22)
         Me.CustomLabel10.TabIndex = 118
-        Me.CustomLabel10.Text = "Tipo Doc.: 1) Ef. 2) Ch. 3) Doc. 4) Varios "
+        Me.CustomLabel10.Text = "Tipo Doc.:    1) Ef.    2) Ch.    4) Varios "
         Me.CustomLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'CustomLabel2
@@ -702,6 +627,52 @@ Partial Class RecibosProvisorios
         Me.txtRetSuss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtRetSuss.Validator = Administracion.ValidatorType.PositiveFloat
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.optVarios)
+        Me.GroupBox1.Controls.Add(Me.optAnticipos)
+        Me.GroupBox1.Controls.Add(Me.optCtaCte)
+        Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox1.Location = New System.Drawing.Point(22, 101)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(379, 41)
+        Me.GroupBox1.TabIndex = 121
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Tipo"
+        '
+        'optVarios
+        '
+        Me.optVarios.AutoSize = True
+        Me.optVarios.Location = New System.Drawing.Point(257, 14)
+        Me.optVarios.Name = "optVarios"
+        Me.optVarios.Size = New System.Drawing.Size(64, 22)
+        Me.optVarios.TabIndex = 2
+        Me.optVarios.Text = "Varios"
+        Me.optVarios.UseVisualStyleBackColor = True
+        '
+        'optAnticipos
+        '
+        Me.optAnticipos.AutoSize = True
+        Me.optAnticipos.Location = New System.Drawing.Point(168, 14)
+        Me.optAnticipos.Name = "optAnticipos"
+        Me.optAnticipos.Size = New System.Drawing.Size(84, 22)
+        Me.optAnticipos.TabIndex = 1
+        Me.optAnticipos.Text = "Anticipos"
+        Me.optAnticipos.UseVisualStyleBackColor = True
+        '
+        'optCtaCte
+        '
+        Me.optCtaCte.AutoSize = True
+        Me.optCtaCte.Checked = True
+        Me.optCtaCte.Location = New System.Drawing.Point(42, 12)
+        Me.optCtaCte.Name = "optCtaCte"
+        Me.optCtaCte.Size = New System.Drawing.Size(118, 22)
+        Me.optCtaCte.TabIndex = 0
+        Me.optCtaCte.TabStop = True
+        Me.optCtaCte.Text = "Cobro Cta. Cte."
+        Me.optCtaCte.UseVisualStyleBackColor = True
+        '
         'lstFiltrada
         '
         Me.lstFiltrada.Cleanable = False
@@ -726,102 +697,131 @@ Partial Class RecibosProvisorios
         Me.lstConsulta.TabIndex = 76
         Me.lstConsulta.Visible = False
         '
-        'Tipo
+        'btnLimpiar
         '
-        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Tipo.FillWeight = 80.0!
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.MaxInputLength = 31
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.Width = 53
+        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.Cleanable = False
+        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiar.EnterIndex = -1
+        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.BorderSize = 0
+        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiar.LabelAssociationKey = -1
+        Me.btnLimpiar.Location = New System.Drawing.Point(574, 481)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(69, 44)
+        Me.btnLimpiar.TabIndex = 125
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'numero
+        'btnCerrar
         '
-        Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.numero.DefaultCellStyle = DataGridViewCellStyle3
-        Me.numero.FillWeight = 120.0!
-        Me.numero.HeaderText = "Numero/Cta"
-        Me.numero.MaxInputLength = 8
-        Me.numero.Name = "numero"
-        Me.numero.Width = 120
+        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.Cleanable = False
+        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrar.EnterIndex = -1
+        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.BorderSize = 0
+        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrar.LabelAssociationKey = -1
+        Me.btnCerrar.Location = New System.Drawing.Point(469, 481)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(69, 44)
+        Me.btnCerrar.TabIndex = 124
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
+        Me.btnCerrar.UseVisualStyleBackColor = True
         '
-        'fecha
+        'btnIntereses
         '
-        Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.fecha.DefaultCellStyle = DataGridViewCellStyle4
-        Me.fecha.FillWeight = 120.0!
-        Me.fecha.HeaderText = "Fecha"
-        Me.fecha.MaxInputLength = 10
-        Me.fecha.Name = "fecha"
-        Me.fecha.Width = 110
+        Me.btnIntereses.BackgroundImage = Global.Administracion.My.Resources.Resources.calculadora
+        Me.btnIntereses.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnIntereses.Cleanable = False
+        Me.btnIntereses.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnIntereses.EnterIndex = -1
+        Me.btnIntereses.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnIntereses.FlatAppearance.BorderSize = 0
+        Me.btnIntereses.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnIntereses.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnIntereses.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnIntereses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnIntereses.LabelAssociationKey = -1
+        Me.btnIntereses.Location = New System.Drawing.Point(364, 481)
+        Me.btnIntereses.Name = "btnIntereses"
+        Me.btnIntereses.Size = New System.Drawing.Size(69, 44)
+        Me.btnIntereses.TabIndex = 123
+        Me.ToolTip1.SetToolTip(Me.btnIntereses, "Intereses")
+        Me.btnIntereses.UseVisualStyleBackColor = True
         '
-        'banco
+        'btnEliminar
         '
-        Me.banco.HeaderText = "Banco"
-        Me.banco.MaxInputLength = 20
-        Me.banco.Name = "banco"
+        Me.btnEliminar.BackgroundImage = Global.Administracion.My.Resources.Resources.eliminar
+        Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnEliminar.Cleanable = False
+        Me.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEliminar.EnterIndex = -1
+        Me.btnEliminar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.BorderSize = 0
+        Me.btnEliminar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEliminar.LabelAssociationKey = -1
+        Me.btnEliminar.Location = New System.Drawing.Point(154, 481)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(69, 44)
+        Me.btnEliminar.TabIndex = 122
+        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar el Recibo Provisorio Actual")
+        Me.btnEliminar.UseVisualStyleBackColor = True
         '
-        'importe
+        'btnConsulta
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        DataGridViewCellStyle5.NullValue = Nothing
-        Me.importe.DefaultCellStyle = DataGridViewCellStyle5
-        Me.importe.HeaderText = "Importe"
-        Me.importe.Name = "importe"
+        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cleanable = False
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.EnterIndex = -1
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.LabelAssociationKey = -1
+        Me.btnConsulta.Location = New System.Drawing.Point(259, 481)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(69, 44)
+        Me.btnConsulta.TabIndex = 122
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta")
+        Me.btnConsulta.UseVisualStyleBackColor = True
         '
-        'Ref
+        'btnAgregar
         '
-        Me.Ref.HeaderText = "Ref"
-        Me.Ref.Name = "Ref"
-        Me.Ref.ReadOnly = True
-        Me.Ref.Visible = False
-        '
-        'Lectora
-        '
-        Me.Lectora.HeaderText = "Lectora"
-        Me.Lectora.Name = "Lectora"
-        Me.Lectora.Visible = False
-        '
-        'ClaveCheque
-        '
-        Me.ClaveCheque.HeaderText = "ClaveCheque"
-        Me.ClaveCheque.Name = "ClaveCheque"
-        Me.ClaveCheque.Visible = False
-        '
-        'ClaveBanco
-        '
-        Me.ClaveBanco.HeaderText = "ClaveBanco"
-        Me.ClaveBanco.Name = "ClaveBanco"
-        Me.ClaveBanco.Visible = False
-        '
-        'ClaveSucursal
-        '
-        Me.ClaveSucursal.HeaderText = "ClaveSucursal"
-        Me.ClaveSucursal.Name = "ClaveSucursal"
-        Me.ClaveSucursal.Visible = False
-        '
-        'NumeroCheque
-        '
-        Me.NumeroCheque.HeaderText = "NumeroCheque"
-        Me.NumeroCheque.Name = "NumeroCheque"
-        Me.NumeroCheque.Visible = False
-        '
-        'NroCta
-        '
-        Me.NroCta.HeaderText = "NroCta"
-        Me.NroCta.Name = "NroCta"
-        Me.NroCta.Visible = False
-        '
-        'NroCuit
-        '
-        Me.NroCuit.HeaderText = "NroCuit"
-        Me.NroCuit.Name = "NroCuit"
-        Me.NroCuit.Visible = False
+        Me.btnAgregar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
+        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAgregar.Cleanable = False
+        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAgregar.EnterIndex = -1
+        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.BorderSize = 0
+        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAgregar.LabelAssociationKey = -1
+        Me.btnAgregar.Location = New System.Drawing.Point(49, 481)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(69, 44)
+        Me.btnAgregar.TabIndex = 121
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
+        Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'RecibosProvisorios
         '

@@ -221,6 +221,7 @@ Public Class RecibosProvisorios
     End Function
 
     Private Function _ChequeVencido(ByVal fecha_cheque As String) As Boolean
+        If If(fecha_cheque, "").Replace(" ", "").Length < 10 Then fecha_cheque = "01/01/1901"
         Return IsDate(fecha_cheque) And IsDate(txtFecha.Text) And DateDiff(DateInterval.Day, CDate(fecha_cheque), CDate(txtFecha.Text)) > 30
     End Function
 
@@ -451,6 +452,45 @@ Public Class RecibosProvisorios
             End If
 
         Next
+
+        For Each row As datagridviewrow In gridRecibos.Rows
+            With row
+                Dim WTipo As String = If(.Cells("Tipo").Value, "")
+                Dim WImporte As Double = If(.Cells("Importe").Value, 0)
+
+                If WTipo.Trim = "" And WImporte = 0 Then Continue For
+
+                If WTipo.Trim = "" And WImporte <> 0 Then
+                    MsgBox("Hay importes que no tienen definido su tipo de manera correcta.", MsgBoxStyle.Information)
+                    Exit Sub
+                End If
+
+                If WTipo.Trim <> "" And WImporte = 0 Then
+                    MsgBox("Hay importes que se encuentran en Cero.", MsgBoxStyle.Information)
+                    Exit Sub
+                End If
+
+                Select Case Val(WTipo)
+                    Case 1, 4
+                        Continue For
+                    Case 2
+                        Dim WNumero As String = If(.Cells("Numero").Value, "")
+                        Dim WFecha As String = If(.Cells("Fecha").Value, "")
+                        Dim WBanco As String = If(.Cells("Banco").Value, "")
+
+                        If WNumero.Trim = "" Or WFecha.Trim = "" Or WBanco.Trim = "" Then
+                            MsgBox("Hay cheques que no tiene definidos correctamente su Número, Fecha o Banco.", MsgBoxStyle.Information)
+                            Exit Sub
+                        End If
+
+                    Case Else
+                        MsgBox("Hay importes que no tienen definido su tipo de manera correcta." & vbCrLf & vbCrLf & "Recuerde que los tipos válidos son Efectivo, Cheque y Varios.", MsgBoxStyle.Information)
+                        Exit Sub
+                End Select
+
+            End With
+        Next
+
         validador.validate(Me)
         validador.alsoValidate(Val(_NormalizarNumero(lblTotal.Text)) = Val(_NormalizarNumero(txtTotal.Text)), "La suma de los importes de la tabla no coincide con lo informado en el total")
         validador.alsoValidate(DAORecibo.permiteActualizacionProvisorio(txtRecibo.Text), "Algunos de los cheques del recibo provisorio ya se encuentra procesado por lo que no se puede actualizar el mismo.")
@@ -923,7 +963,7 @@ Public Class RecibosProvisorios
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
-                            If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
+                            If valor = "1" Or valor = "2" Or valor = "4" Then ' No se Pueden cargar Documentos en un Recibo Provisorio.
                                 eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
                             Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
                                 Return True
@@ -1013,8 +1053,10 @@ Public Class RecibosProvisorios
                                 Return True
                             End If
 
+                            If sumarValores() Then Return True
+
                             gridRecibos.CurrentCell = gridRecibos.Rows(iRow + 1).Cells(0)
-                            sumarValores()
+
                         End If
                     End If
 
