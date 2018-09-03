@@ -36,6 +36,26 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
 
         End If
 
+        If rbPorRango.Checked Then
+            If rbMp.Checked And (txtDesde.Text.Replace(" ", "").Length < 10 Or txtHasta.Text.Replace(" ", "").Length < 10) Then
+                MsgBox("El rango indicado no es válido.", MsgBoxStyle.Exclamation, "Actualización de Stock")
+                Exit Sub
+            End If
+            If rbPt.Checked And (txtDesde.Text.Replace(" ", "").Length < 12 Or txtHasta.Text.Replace(" ", "").Length < 12) Then
+                MsgBox("El rango indicado no es válido.", MsgBoxStyle.Exclamation, "Actualización de Stock")
+                Exit Sub
+            End If
+
+            If txtHasta.Text < txtDesde.Text Then
+                MsgBox("El rango indicado no es válido.", MsgBoxStyle.Exclamation, "Actualización de Stock")
+                Exit Sub
+            End If
+
+            txtDesde.Text = txtDesde.Text.ToUpper
+            txtHasta.Text = txtHasta.Text.ToUpper
+
+        End If
+
         WAutorizado = False
         Refresh()
 
@@ -254,7 +274,12 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
 
         If Not isnothing(dr) AndAlso Not dr.IsClosed Then dr.Close()
 
-        cm.CommandText = "SELECT ISNULL(Tipo, '') Tipo, ISNULL(Articulo, '') Articulo, ISNULL(Terminado, '') Terminado, ISNULL(Cantidad, 0) Cantidad, ISNULL(Lote, 0) Lote FROM Inventario ORDER BY Numero"
+        If rbPorRango.Checked Then
+            cm.CommandText = "SELECT ISNULL(Tipo, '') Tipo, ISNULL(Articulo, '') Articulo, ISNULL(Terminado, '') Terminado, ISNULL(Cantidad, 0) Cantidad, ISNULL(Lote, 0) Lote FROM Inventario WHERE Articulo BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "' Or Terminado BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "' ORDER BY Numero"
+        Else
+            cm.CommandText = "SELECT ISNULL(Tipo, '') Tipo, ISNULL(Articulo, '') Articulo, ISNULL(Terminado, '') Terminado, ISNULL(Cantidad, 0) Cantidad, ISNULL(Lote, 0) Lote FROM Inventario ORDER BY Numero"
+        End If
+
         dr = cm.ExecuteReader
 
         If dr.HasRows Then
@@ -390,9 +415,9 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
 
         If Not IsNothing(Conexion.EmpresaDeTrabajo) Then
 
-            If Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+            If rbPorRango.Checked Then
 
-                cm.CommandText = String.Format("UPDATE Articulo SET FechaCierre = '{0}', OrdFechaCierre = '{1}', Inicial = 0, Laboratorio = 0, Pedido = 0 WHERE Codigo BETWEEN 'DA-005-100' AND 'DQ-410-100' OR Codigo BETWEEN 'CD-020-100' AND 'CM-000-100' OR Codigo = 'DS-049-100'", WFechaCierre, WOrdFechaCierre)
+                cm.CommandText = String.Format("UPDATE Articulo SET FechaCierre = '{0}', OrdFechaCierre = '{1}', Inicial = 0, Laboratorio = 0, Pedido = 0 WHERE Codigo BETWEEN '{2}' AND '{3}'", WFechaCierre, WOrdFechaCierre, txtDesde.Text, txtHasta.Text)
 
             Else
                 cm.CommandText = String.Format("UPDATE Articulo SET FechaCierre = '{0}', OrdFechaCierre = '{1}', Inicial = 0, Laboratorio = 0, Pedido = 0", WFechaCierre, WOrdFechaCierre)
@@ -422,9 +447,9 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
 
         If Not IsNothing(Conexion.EmpresaDeTrabajo) Then
 
-            If Conexion.EmpresaDeTrabajo.ToUpper = "SURFACTANSA" Then
+            If rbPorRango.Checked Then
 
-                cm.CommandText = String.Format("UPDATE Terminado SET FechaCierre = '{0}', OrdFechaCierre = '{1}', Inicial = 0, Proceso = 0 WHERE Codigo BETWEEN 'RE-05106-100' AND 'RE-25301-999'", WFechaCierre, WOrdFechaCierre)
+                cm.CommandText = String.Format("UPDATE Terminado SET FechaCierre = '{0}', OrdFechaCierre = '{1}', Inicial = 0, Proceso = 0 WHERE Codigo BETWEEN '{2}' AND '{3}'", WFechaCierre, WOrdFechaCierre, txtDesde.Text, txtHasta.Text)
 
             Else
 
@@ -439,7 +464,13 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
         '
         ' Reseteamos los datos de los Laudos
         '
-        Dim WDatos As DataTable = Query.GetAll("SELECT Clave, Articulo, ISNULL(Marca, '') Marca, ISNULL(Saldo, 0) Saldo FROM Laudo", Conexion.EmpresaDeTrabajo)
+        Dim WDatos As DataTable
+
+        If rbPorRango.Checked Then
+            WDatos = Query.GetAll("SELECT Clave, Articulo, ISNULL(Marca, '') Marca, ISNULL(Saldo, 0) Saldo FROM Laudo WHERE Articulo BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "'", Conexion.EmpresaDeTrabajo)
+        Else
+            WDatos = Query.GetAll("SELECT Clave, Articulo, ISNULL(Marca, '') Marca, ISNULL(Saldo, 0) Saldo FROM Laudo", Conexion.EmpresaDeTrabajo)
+        End If
 
         With lblEstado
             .Text = "Reseteando Valores Laudos de Materia Prima..."
@@ -472,7 +503,12 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
         '
         ' Reseteamos las Hojas de Produccion.
         '
-        WDatos = Query.GetAll("SELECT Clave, Producto, ISNULL(Marca, '') Marca, ISNULL(Saldo, 0) Saldo FROM Hoja", Conexion.EmpresaDeTrabajo)
+
+        If rbPorRango.Checked Then
+            WDatos = Query.GetAll("SELECT Clave, Producto, ISNULL(Marca, '') Marca, ISNULL(Saldo, 0) Saldo FROM Hoja WHERE Producto BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "'", Conexion.EmpresaDeTrabajo)
+        Else
+            WDatos = Query.GetAll("SELECT Clave, Producto, ISNULL(Marca, '') Marca, ISNULL(Saldo, 0) Saldo FROM Hoja", Conexion.EmpresaDeTrabajo)
+        End If
 
         With lblEstado
             .Text = "Reseteando Valores de Hojas de Producción..."
@@ -502,7 +538,11 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
         '
         ' Reseteamos las Guias de Traslado Interno.
         '
-        WDatos = Query.GetAll("SELECT Clave, Articulo, Terminado, Tipo, ISNULL(Marca, '') Marca, ISNULL(Saldo, 0) Saldo FROM Guia", Conexion.EmpresaDeTrabajo)
+        If rbPorRango.Checked Then
+            WDatos = Query.GetAll("SELECT Clave, Articulo, Terminado, Tipo, ISNULL(Marca, '') Marca, ISNULL(Saldo, 0) Saldo FROM Guia WHERE Articulo BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "' OR Terminado BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "'", Conexion.EmpresaDeTrabajo)
+        Else
+            WDatos = Query.GetAll("SELECT Clave, Articulo, Terminado, Tipo, ISNULL(Marca, '') Marca, ISNULL(Saldo, 0) Saldo FROM Guia", Conexion.EmpresaDeTrabajo)
+        End If
 
         With lblEstado
             .Text = "Reseteando Valores de Guías de Traslado Interno..."
@@ -535,8 +575,12 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
 
         '
         ' Reseteamos los Movimientos Varios.
-        '
-        WDatos = Query.GetAll("SELECT Clave, Articulo, Terminado, Tipo, ISNULL(Marca, '') Marca FROM MovVar", Conexion.EmpresaDeTrabajo)
+        ' 
+        If rbPorRango.Checked Then
+            WDatos = Query.GetAll("SELECT Clave, Articulo, Terminado, Tipo, ISNULL(Marca, '') Marca FROM MovVar WHERE Articulo BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "' OR Terminado BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "'", Conexion.EmpresaDeTrabajo)
+        Else
+            WDatos = Query.GetAll("SELECT Clave, Articulo, Terminado, Tipo, ISNULL(Marca, '') Marca FROM MovVar", Conexion.EmpresaDeTrabajo)
+        End If
 
         With lblEstado
             .Text = "Reseteando Valores de Movimientos Varios..."
@@ -570,7 +614,12 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
         '
         ' Reseteamos los Movimientos de Laboratorio.
         '
-        WDatos = Query.GetAll("SELECT Clave, Articulo, Terminado, Tipo, ISNULL(Marca, '') Marca FROM MovLab", Conexion.EmpresaDeTrabajo)
+
+        If rbPorRango.Checked Then
+            WDatos = Query.GetAll("SELECT Clave, Articulo, Terminado, Tipo, ISNULL(Marca, '') Marca FROM MovLab WHERE Articulo BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "' OR Terminado BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "'", Conexion.EmpresaDeTrabajo)
+        Else
+            WDatos = Query.GetAll("SELECT Clave, Articulo, Terminado, Tipo, ISNULL(Marca, '') Marca FROM MovLab", Conexion.EmpresaDeTrabajo)
+        End If
 
         With lblEstado
             .Text = "Reseteando Valores de Movimientos de Laboratorio..."
@@ -604,7 +653,12 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
         '
         ' Reseteamos las Estadisticas.
         '
-        WDatos = Query.GetAll("SELECT Clave, Ter = Articulo, Art = (LEFT(Articulo, 3) + RIGHT(Articulo, 7)), ISNULL(Marca, '') Marca FROM Estadistica", Conexion.EmpresaDeTrabajo)
+
+        If rbPorRango.Checked Then
+            WDatos = Query.GetAll("SELECT Clave, Ter = Articulo, Art = (LEFT(Articulo, 3) + RIGHT(Articulo, 7)), ISNULL(Marca, '') Marca FROM Estadistica WHERE (LEFT(Articulo, 3) + RIGHT(Articulo, 7)) BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "' OR Articulo BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "'", Conexion.EmpresaDeTrabajo)
+        Else
+            WDatos = Query.GetAll("SELECT Clave, Ter = Articulo, Art = (LEFT(Articulo, 3) + RIGHT(Articulo, 7)), ISNULL(Marca, '') Marca FROM Estadistica", Conexion.EmpresaDeTrabajo)
+        End If
 
         With lblEstado
             .Text = "Reseteando Valores de Estadísticas..."
@@ -640,7 +694,12 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
         '
         ' Reseteamos las Entradas por Devolución.
         '
-        WDatos = Query.GetAll("SELECT Clave, Terminado, Articulo = (LEFT(Terminado, 3) + RIGHT(Terminado, 7)), ISNULL(Marca, '') Marca FROM EntDev", Conexion.EmpresaDeTrabajo)
+
+        If rbPorRango.Checked Then
+            WDatos = Query.GetAll("SELECT Clave, Terminado, Articulo = (LEFT(Terminado, 3) + RIGHT(Terminado, 7)), ISNULL(Marca, '') Marca FROM EntDev WHERE (LEFT(Terminado, 3) + RIGHT(Terminado, 7)) BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "' OR Terminado BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "'", Conexion.EmpresaDeTrabajo)
+        Else
+            WDatos = Query.GetAll("SELECT Clave, Terminado, Articulo = (LEFT(Terminado, 3) + RIGHT(Terminado, 7)), ISNULL(Marca, '') Marca FROM EntDev", Conexion.EmpresaDeTrabajo)
+        End If
 
         With lblEstado
             .Text = "Reseteando Valores de Entradas por Devoluciones..."
@@ -714,6 +773,58 @@ Public Class ActualizacionStock : Implements IClaveAutorizacion
         If WAutorizado Then
             btnAceptar.PerformClick()
             WAutorizado = False
+        End If
+
+    End Sub
+
+    Private Sub rbTodos_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbTodos.CheckedChanged, rbPorRango.CheckedChanged, rbPt.CheckedChanged, rbMp.CheckedChanged
+        For Each ctrl As Control In {rbMp, rbPt, txtDesde, txtHasta}
+            ctrl.Enabled = False
+        Next
+
+        If rbPorRango.Checked Then
+            For Each ctrl As Control In {rbMp, rbPt, txtDesde, txtHasta}
+                ctrl.Enabled = True
+            Next
+
+            For Each ctrl As MaskedTextBox In {txtDesde, txtHasta}
+                ctrl.Mask = IIf(rbMp.Checked, "AA-000-000", "AA-00000-000")
+                ctrl.Text = ""
+            Next
+
+            txtDesde.Focus()
+        End If
+
+    End Sub
+
+    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If rbMp.Checked And txtDesde.Text.Replace(" ", "").Length < 10 then Exit Sub
+            If rbPt.Checked And txtDesde.Text.Replace(" ", "").Length < 12 Then Exit Sub
+
+            If txtHasta.Text.Replace("-", "").Trim = "" Then txtHasta.Text = txtDesde.Text
+
+            txtHasta.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesde.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If rbMp.Checked And txtHasta.Text.Replace(" ", "").Length < 10 Then Exit Sub
+            If rbPt.Checked And txtHasta.Text.Replace(" ", "").Length < 12 Then Exit Sub
+
+            If txtDesde.Text.Replace("-", "").Trim = "" Then txtDesde.Text = txtHasta.Text
+
+            txtDesde.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHasta.Text = ""
         End If
 
     End Sub
