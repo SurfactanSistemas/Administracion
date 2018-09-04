@@ -794,7 +794,7 @@ Public Class IngresoPruebasEnsayo
             cm.CommandText = "DELETE CargaEnsayoIV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
             cm.ExecuteNonQuery()
 
-            cm.CommandText = "DELETE CargaEnsayoV WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+            cm.CommandText = "DELETE CargaEnsayoV WHERE Orden = '" & txtOrden.Text & "'" ' AND Version = '" & txtVersion.Text & "'"
             cm.ExecuteNonQuery()
 
             cm.CommandText = "DELETE CargaEnsayoVI WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
