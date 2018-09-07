@@ -362,16 +362,45 @@ namespace Modulo_Capacitacion.Novedades
 
                         if (WLegajo.ToString() == "") continue;
 
+                        string WDescLegajo = "";
+                        string WSector = "";
+                        string WDescSector = "";
+                        string WPerfil = "";
+
+                        cmd.CommandText = "select l.Codigo, l.Descripcion as DescLegajo, l.Perfil, t.Sector, s.Descripcion from legajo l INNER JOIN Tarea t ON t.Codigo = l.Perfil and t.Renglon = 1 INNER JOIN Sector s ON s.Codigo = t.Sector where l.codigo = '" + WLegajo + "' and l.Renglon = 1";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+                                WSector = dr["Sector"].ToString();
+                                WDescSector = dr["Descripcion"].ToString();
+                                WPerfil = dr["Perfil"].ToString();
+                                WDescLegajo = dr["DescLegajo"].ToString();
+                            }
+                        }
+
                         cmd.CommandText = "INSERT INTO Cursadas "
                                         + " (Clave, Codigo, Renglon, Curso, Tema, Fecha, OrdFecha, Horas, " 
                                         + " TipoI, TipoII, Instructor, Actividad, Temas, Legajo, DesLegajo,"
-                                        + " DesSector, DesCurso, DesTema, Observaciones) "
+                                        + " DesSector, DesCurso, DesTema, Observaciones, Perfil, Sector) "
                                         + " VALUES "
                                         + " ('" + WClave + "', " + WCodigo + "," + WRenglon + ", " + WTema + ", " + WCurso + ", '" + WFecha + "', '" + WFechaOrd + "', "
                                         + " " + WHoras + ", " + WTipoI + ", " + WTipoII + ", '" + WInstructor + "', '" + WActividad + "', '" + WTemas + "', "
-                                        + " " + WLegajo + ", '', '', '', '', '" + WObservaciones + "' )";
+                                        + " " + WLegajo + ", '" + WDescLegajo + "', '" + WDescSector + "', '', '', '" + WObservaciones + "', '" + WPerfil + "', '" + WSector + "' )";
                         cmd.ExecuteNonQuery();
 
+                    }
+
+                    foreach (var sql in new[]{"update cursadas set cursadas.DesLegajo = Legajo.Descripcion from Cursadas, Legajo WHERE cursadas.legajo = legajo.Codigo",
+                                              "update cursadas set cursadas.DesSector = LTRIM(RTRIM(Sector.Descripcion)) from Cursadas, Sector WHERE cursadas.Sector = Sector.Codigo",
+                                              "update cursadas set cursadas.DesSector = LTRIM(RTRIM(Sector.Descripcion)) from Cursadas, Sector WHERE cursadas.Sector = Sector.Codigo",
+                                              "update cursadas set cursadas.DesCurso = LEFT(Curso.Descripcion, 50) from Cursadas, Curso WHERE cursadas.Curso = Curso.Codigo ",
+                                              "update cursadas set cursadas.DesTema = LEFT(Tema.Descripcion, 50) from Cursadas, Tema WHERE cursadas.Curso = Tema.Curso AND Cursadas.Tema = tema.Tema"})
+                    {
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
                     }
 
                     trans.Commit();

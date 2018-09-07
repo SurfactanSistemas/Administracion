@@ -48,12 +48,15 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo
                 int.TryParse(TB_Desde.Text, out LegDesd);
                 int LegHast;
                 int.TryParse(TB_Hasta.Text, out LegHast);
-                int AñoDesd;
-                int.TryParse(TB_AñoDesde.Text, out AñoDesd);
-                AñoDesd = int.Parse(AñoDesd.ToString() + "0101");
-                int AñoHast;
-                int.TryParse(TB_AñoHasta.Text, out AñoHast);
-                AñoHast = int.Parse(AñoHast.ToString() + "1231");
+
+                int AñoDesd = int.Parse(Helper.OrdenarFecha(TB_AñoDesde.Text));
+                //int.TryParse(TB_AñoDesde.Text, out AñoDesd);
+                //AñoDesd = int.Parse(AñoDesd.ToString());
+                int AñoHast = int.Parse(Helper.OrdenarFecha(TB_AñoHasta.Text));
+                //int.TryParse(TB_AñoHasta.Text, out AñoHast);
+                //AñoHast = int.Parse(AñoHast.ToString());
+
+                
 
                 dtCursadas = Cu.ListarPorLegajo(LegDesd, LegHast);
 
@@ -264,6 +267,8 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo
         private void Inicio_Load(object sender, EventArgs e)
         {
             CB_Tipo.SelectedIndex = 1;
+            TB_AñoDesde.Clear();
+            TB_AñoHasta.Clear();
         }
     }
 }

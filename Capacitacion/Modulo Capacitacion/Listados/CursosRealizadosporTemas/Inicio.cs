@@ -31,26 +31,20 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
 
                 if (TB_Hasta.Text == "") throw new Exception("Se debe ingresar el tema hasta el que desea realizar la busqueda");
 
-                if (TB_Año.Text == "") throw new Exception("Se debe ingresar el Año");
-
                 int Desd;
                 int.TryParse(TB_Desde.Text, out Desd);
                 int Hast;
                 int.TryParse(TB_Hasta.Text, out Hast);
-                int Año;
-                int.TryParse(TB_Año.Text, out Año);
-                int AñoDesde = int.Parse(Año.ToString() + "0101");
-                int AñoHasta = int.Parse(Año.ToString() + "1231");
+                //int Año;
+                //int.TryParse(TB_AñoDesde.Text, out Año);
+                int AñoDesde = int.Parse(Helper.OrdenarFecha(txtAnioDesde.Text));
+                int AñoHasta = int.Parse(Helper.OrdenarFecha(txtAnioHasta.Text));
 
-                Helper.ActualizarCantidadPersonasHoras(Año.ToString());
+                Helper.ActualizarCantidadPersonasHoras(txtAnioDesde.Text.Substring(6, 4));
+                Helper.ActualizarCantidadPersonasHoras(txtAnioHasta.Text.Substring(6, 4));
 
                 dtInforme = C.ListarCursoporTema(Desd, Hast, AñoDesde, AñoHasta);
                 
-
-
-
-
-
                 Tipo = "Pantalla";
                 
                 ImpreInforme Impre = new ImpreInforme(dtInforme, Tipo);
@@ -76,7 +70,7 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
         {
             if (e.KeyCode == Keys.Enter)
             {
-                TB_Año.Focus();
+                txtAnioDesde.Focus();
             }
         }
 
@@ -88,8 +82,6 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
 
                 if (TB_Hasta.Text == "") throw new Exception("Se debe ingresar el tema hasta el que desea realizar la busqueda");
 
-                if (TB_Año.Text == "") throw new Exception("Se debe ingresar el Año");
-
                 if (CB_Tipo.Text == "") throw new Exception("Se debe elegir un tipo");
 
                 int Desd;
@@ -97,18 +89,14 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
                 int Hast;
                 int.TryParse(TB_Hasta.Text, out Hast);
                 int Año;
-                int.TryParse(TB_Año.Text, out Año);
-                int AñoDesde = int.Parse(Año.ToString() + "0101");
-                int AñoHasta = int.Parse(Año.ToString() + "1231");
+                //int.TryParse(TB_AñoDesde.Text, out Año);
+                int AñoDesde = int.Parse(Helper.OrdenarFecha(txtAnioDesde.Text));
+                int AñoHasta = int.Parse(Helper.OrdenarFecha(txtAnioHasta.Text));
 
-                Helper.ActualizarCantidadPersonasHoras(Año.ToString());
+                Helper.ActualizarCantidadPersonasHoras(txtAnioDesde.Text.Substring(6,4));
+                Helper.ActualizarCantidadPersonasHoras(txtAnioHasta.Text.Substring(6,4));
 
                 dtInforme = C.ListarCursoporTema(Desd, Hast, AñoDesde, AñoHasta);
-
-
-
-
-
 
                 Tipo = "Imprimir";
 
@@ -177,23 +165,43 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
             TB_Desde.Focus();
         }
 
-        private void TB_Año_KeyDown(object sender, KeyEventArgs e)
+
+        private void txtAnioDesde_KeyDown(object sender, KeyEventArgs e)
         {
             
             if (e.KeyData == Keys.Enter)
             {
-                if (TB_Año.Text.Trim() == "") return;
+                if (txtAnioDesde.Text.Replace(" ", "").Length < 10) return;
+
+                txtAnioHasta.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtAnioDesde.Text = "";
+            }
+	        
+        }
+
+        private void txtAnioHasta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtAnioHasta.Text.Replace(" ", "").Length < 10) return;
 
                 CB_Tipo.Focus();
 
             }
             else if (e.KeyData == Keys.Escape)
             {
-                TB_Año.Text = "";
+                txtAnioHasta.Text = "";
             }
-	        
         }
 
-
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            txtAnioDesde.Clear();
+            txtAnioHasta.Clear();
+        }
     }
 }

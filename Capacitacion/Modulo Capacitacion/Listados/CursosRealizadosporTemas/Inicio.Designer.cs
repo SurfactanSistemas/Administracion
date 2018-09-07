@@ -35,7 +35,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.CB_Tipo = new System.Windows.Forms.ComboBox();
-            this.TB_Año = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TB_Hasta = new System.Windows.Forms.TextBox();
             this.TB_Desde = new System.Windows.Forms.TextBox();
@@ -44,6 +43,8 @@
             this.BT_Imprimir = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtAnioDesde = new System.Windows.Forms.MaskedTextBox();
+            this.txtAnioHasta = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -81,9 +82,10 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.txtAnioHasta);
+            this.panel3.Controls.Add(this.txtAnioDesde);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.CB_Tipo);
-            this.panel3.Controls.Add(this.TB_Año);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.TB_Hasta);
             this.panel3.Controls.Add(this.TB_Desde);
@@ -117,15 +119,6 @@
             this.CB_Tipo.Name = "CB_Tipo";
             this.CB_Tipo.Size = new System.Drawing.Size(111, 21);
             this.CB_Tipo.TabIndex = 92;
-            // 
-            // TB_Año
-            // 
-            this.TB_Año.Location = new System.Drawing.Point(203, 104);
-            this.TB_Año.Name = "TB_Año";
-            this.TB_Año.Size = new System.Drawing.Size(51, 20);
-            this.TB_Año.TabIndex = 87;
-            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
             // 
             // label3
             // 
@@ -216,6 +209,28 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Tema Desde:";
             // 
+            // txtAnioDesde
+            // 
+            this.txtAnioDesde.Location = new System.Drawing.Point(203, 104);
+            this.txtAnioDesde.Mask = "00/00/0000";
+            this.txtAnioDesde.Name = "txtAnioDesde";
+            this.txtAnioDesde.PromptChar = ' ';
+            this.txtAnioDesde.Size = new System.Drawing.Size(65, 20);
+            this.txtAnioDesde.TabIndex = 94;
+            this.txtAnioDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtAnioDesde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAnioDesde_KeyDown);
+            // 
+            // txtAnioHasta
+            // 
+            this.txtAnioHasta.Location = new System.Drawing.Point(274, 104);
+            this.txtAnioHasta.Mask = "00/00/0000";
+            this.txtAnioHasta.Name = "txtAnioHasta";
+            this.txtAnioHasta.PromptChar = ' ';
+            this.txtAnioHasta.Size = new System.Drawing.Size(65, 20);
+            this.txtAnioHasta.TabIndex = 94;
+            this.txtAnioHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtAnioHasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAnioHasta_KeyDown);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,6 +240,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Inicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.Inicio_Load);
             this.Shown += new System.EventHandler(this.Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -241,7 +257,6 @@
         private System.Windows.Forms.Label LBChofer;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox TB_Año;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TB_Hasta;
         private System.Windows.Forms.TextBox TB_Desde;
@@ -252,5 +267,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox CB_Tipo;
+        private System.Windows.Forms.MaskedTextBox txtAnioHasta;
+        private System.Windows.Forms.MaskedTextBox txtAnioDesde;
     }
 }

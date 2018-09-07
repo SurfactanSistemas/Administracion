@@ -35,8 +35,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.CB_Tipo = new System.Windows.Forms.ComboBox();
-            this.TB_AñoHasta = new System.Windows.Forms.TextBox();
-            this.TB_AñoDesde = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TB_Hasta = new System.Windows.Forms.TextBox();
             this.TB_Desde = new System.Windows.Forms.TextBox();
@@ -45,6 +43,8 @@
             this.BT_Imprimir = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.TB_AñoDesde = new System.Windows.Forms.MaskedTextBox();
+            this.TB_AñoHasta = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -82,10 +82,10 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.CB_Tipo);
             this.panel3.Controls.Add(this.TB_AñoHasta);
             this.panel3.Controls.Add(this.TB_AñoDesde);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.CB_Tipo);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.TB_Hasta);
             this.panel3.Controls.Add(this.TB_Desde);
@@ -119,24 +119,6 @@
             this.CB_Tipo.Name = "CB_Tipo";
             this.CB_Tipo.Size = new System.Drawing.Size(111, 21);
             this.CB_Tipo.TabIndex = 90;
-            // 
-            // TB_AñoHasta
-            // 
-            this.TB_AñoHasta.Location = new System.Drawing.Point(263, 104);
-            this.TB_AñoHasta.Name = "TB_AñoHasta";
-            this.TB_AñoHasta.Size = new System.Drawing.Size(51, 20);
-            this.TB_AñoHasta.TabIndex = 88;
-            this.TB_AñoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_AñoHasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_AñoHasta_KeyDown);
-            // 
-            // TB_AñoDesde
-            // 
-            this.TB_AñoDesde.Location = new System.Drawing.Point(203, 104);
-            this.TB_AñoDesde.Name = "TB_AñoDesde";
-            this.TB_AñoDesde.Size = new System.Drawing.Size(51, 20);
-            this.TB_AñoDesde.TabIndex = 87;
-            this.TB_AñoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_AñoDesde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_AñoDesde_KeyDown);
             // 
             // label3
             // 
@@ -227,6 +209,28 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Legajo Desde:";
             // 
+            // TB_AñoDesde
+            // 
+            this.TB_AñoDesde.Location = new System.Drawing.Point(203, 102);
+            this.TB_AñoDesde.Mask = "00/00/0000";
+            this.TB_AñoDesde.Name = "TB_AñoDesde";
+            this.TB_AñoDesde.PromptChar = ' ';
+            this.TB_AñoDesde.Size = new System.Drawing.Size(67, 20);
+            this.TB_AñoDesde.TabIndex = 92;
+            this.TB_AñoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_AñoDesde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_AñoDesde_KeyDown);
+            // 
+            // TB_AñoHasta
+            // 
+            this.TB_AñoHasta.Location = new System.Drawing.Point(276, 102);
+            this.TB_AñoHasta.Mask = "00/00/0000";
+            this.TB_AñoHasta.Name = "TB_AñoHasta";
+            this.TB_AñoHasta.PromptChar = ' ';
+            this.TB_AñoHasta.Size = new System.Drawing.Size(65, 20);
+            this.TB_AñoHasta.TabIndex = 92;
+            this.TB_AñoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_AñoHasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_AñoHasta_KeyDown);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,10 +264,10 @@
         private System.Windows.Forms.Button BT_Imprimir;
         private System.Windows.Forms.Button BT_Salir;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TB_AñoHasta;
-        private System.Windows.Forms.TextBox TB_AñoDesde;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox CB_Tipo;
+        private System.Windows.Forms.MaskedTextBox TB_AñoHasta;
+        private System.Windows.Forms.MaskedTextBox TB_AñoDesde;
     }
 }

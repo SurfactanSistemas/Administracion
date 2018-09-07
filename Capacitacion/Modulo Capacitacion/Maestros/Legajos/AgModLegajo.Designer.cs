@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.BT_MasObserv = new System.Windows.Forms.Button();
@@ -183,7 +183,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.Controls.Add(this.BT_MasObserv);
             this.panel3.Controls.Add(this.TB_PerfilAct);
             this.panel3.Controls.Add(this.TB_FechaEgreso);
@@ -227,11 +227,13 @@
             // 
             this.TB_PerfilAct.BackColor = System.Drawing.Color.Firebrick;
             this.TB_PerfilAct.ForeColor = System.Drawing.SystemColors.Control;
-            this.TB_PerfilAct.Location = new System.Drawing.Point(548, 71);
+            this.TB_PerfilAct.Location = new System.Drawing.Point(685, 46);
+            this.TB_PerfilAct.Multiline = true;
             this.TB_PerfilAct.Name = "TB_PerfilAct";
-            this.TB_PerfilAct.Size = new System.Drawing.Size(421, 20);
+            this.TB_PerfilAct.Size = new System.Drawing.Size(267, 36);
             this.TB_PerfilAct.TabIndex = 49;
             this.TB_PerfilAct.Text = "SE HA MODIFICADO LA VERSIÓN DEL PERFIL Y TODAVIA NO SE HA EVALUADO";
+            this.TB_PerfilAct.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TB_PerfilAct.Visible = false;
             // 
             // TB_FechaEgreso
@@ -324,11 +326,12 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.ItemSize = new System.Drawing.Size(200, 30);
             this.tabControl1.Location = new System.Drawing.Point(5, 74);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(966, 493);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 37;
             // 
             // tabPage1
@@ -416,10 +419,11 @@
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(958, 467);
+            this.tabPage1.Size = new System.Drawing.Size(958, 455);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "     REQUERIMIENTOS     ";
             // 
@@ -1268,10 +1272,11 @@
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage2.Controls.Add(this.DGV_Temas);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(958, 467);
+            this.tabPage2.Size = new System.Drawing.Size(958, 455);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "     CONOCIMIENTOS PARA EL PUESTO     ";
             // 
@@ -1293,13 +1298,13 @@
             this.DGV_Temas.Location = new System.Drawing.Point(13, 11);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.DGV_Temas.RowHeadersWidth = 15;
             this.DGV_Temas.Size = new System.Drawing.Size(932, 444);
             this.DGV_Temas.TabIndex = 7;
@@ -1307,12 +1312,12 @@
             // Tema
             // 
             this.Tema.DataPropertyName = "Curso";
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tema.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle10;
             this.Tema.HeaderText = "Tema";
             this.Tema.Name = "Tema";
             this.Tema.ReadOnly = true;
-            this.Tema.Width = 59;
+            this.Tema.Width = 64;
             // 
             // Descripcion
             // 
@@ -1325,22 +1330,22 @@
             // Necesaria
             // 
             this.Necesaria.DataPropertyName = "Necesaria";
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Necesaria.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Necesaria.DefaultCellStyle = dataGridViewCellStyle11;
             this.Necesaria.HeaderText = "Necesaria";
             this.Necesaria.Name = "Necesaria";
             this.Necesaria.ReadOnly = true;
-            this.Necesaria.Width = 80;
+            this.Necesaria.Width = 88;
             // 
             // Deseable
             // 
             this.Deseable.DataPropertyName = "Deseable";
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Deseable.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Deseable.DefaultCellStyle = dataGridViewCellStyle12;
             this.Deseable.HeaderText = "Deseable";
             this.Deseable.Name = "Deseable";
             this.Deseable.ReadOnly = true;
-            this.Deseable.Width = 77;
+            this.Deseable.Width = 85;
             // 
             // Estado
             // 
@@ -1357,22 +1362,23 @@
             "Cumple Act"});
             this.Estado.MinimumWidth = 46;
             this.Estado.Name = "Estado";
-            this.Estado.Width = 46;
+            this.Estado.Width = 57;
             // 
             // Observaciones
             // 
             this.Observaciones.HeaderText = "Observaciones";
             this.Observaciones.Name = "Observaciones";
-            this.Observaciones.Width = 103;
+            this.Observaciones.Width = 126;
             // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage3.Controls.Add(this.DGV_CursosRealiz);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage3.Location = new System.Drawing.Point(4, 34);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(958, 467);
+            this.tabPage3.Size = new System.Drawing.Size(958, 455);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "       CURSOS REALIZADOS      ";
             // 
@@ -1394,25 +1400,26 @@
             this.DGV_CursosRealiz.Location = new System.Drawing.Point(16, 12);
             this.DGV_CursosRealiz.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_CursosRealiz.Name = "DGV_CursosRealiz";
-            dataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_CursosRealiz.RowHeadersDefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_CursosRealiz.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.DGV_CursosRealiz.RowHeadersWidth = 15;
+            this.DGV_CursosRealiz.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DGV_CursosRealiz.Size = new System.Drawing.Size(927, 442);
             this.DGV_CursosRealiz.TabIndex = 8;
             // 
             // Curso
             // 
             this.Curso.DataPropertyName = "Tema";
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Curso.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle14;
             this.Curso.HeaderText = "Tema";
             this.Curso.Name = "Curso";
-            this.Curso.Width = 59;
+            this.Curso.Width = 64;
             // 
             // DesCurso
             // 
@@ -1424,36 +1431,36 @@
             // Horas
             // 
             this.Horas.DataPropertyName = "Horas";
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Horas.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle15;
             this.Horas.HeaderText = "Horas";
             this.Horas.Name = "Horas";
-            this.Horas.Width = 60;
+            this.Horas.Width = 65;
             // 
             // Tipo
             // 
             this.Tipo.DataPropertyName = "TipoII";
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tipo.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tipo.DefaultCellStyle = dataGridViewCellStyle16;
             this.Tipo.HeaderText = "Tipo";
             this.Tipo.Name = "Tipo";
-            this.Tipo.Width = 53;
+            this.Tipo.Width = 56;
             // 
             // Año
             // 
             this.Año.DataPropertyName = "Ano";
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Año.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Año.DefaultCellStyle = dataGridViewCellStyle17;
             this.Año.HeaderText = "Año";
             this.Año.Name = "Año";
-            this.Año.Width = 51;
+            this.Año.Width = 53;
             // 
             // Cursos
             // 
             this.Cursos.DataPropertyName = "DesTema";
             this.Cursos.HeaderText = "Curso";
             this.Cursos.Name = "Cursos";
-            this.Cursos.Width = 59;
+            this.Cursos.Width = 64;
             // 
             // label4
             // 

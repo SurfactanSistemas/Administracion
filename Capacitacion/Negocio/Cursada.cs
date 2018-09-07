@@ -39,11 +39,11 @@ namespace Negocio
         public System.Data.DataTable BuscarUnoGrilla(string IdAModificar)
         {
             Conexion repo = new Conexion();
-            string consulta = "select Curso as Tema, DesCurso, Horas, " + 
-            " CASE WHEN TipoII = 0 THEN 'Progra' ELSE 'No Progr' END as " +
-            " TipoII,  SUBSTRING(ordFecha,0,5) as Ano,DesTema " +
-            " from cursadas where legajo = " + IdAModificar +
-            " order by Curso asc";
+            string consulta = "select cur.Curso as Tema, DesCurso = ISNULL(c.Descripcion, ''), cur.Horas, " +
+            " CASE WHEN cur.TipoII = 0 THEN 'Progra' ELSE 'No Progr' END as " +
+            " TipoII,  SUBSTRING(cur.ordFecha,0,5) as Ano,DesTema = ISNULL(t.Descripcion, '') " +
+            " from cursadas cur LEFT OUTER JOIN Curso c ON c.Codigo = cur.Curso LEFT OUTER JOIN Tema t ON t.Tema = cur.Tema AND t.Curso = c.Codigo where cur.legajo = " + IdAModificar +
+            " order by cur.Curso asc";
 
 
             return repo.Listar(consulta);
