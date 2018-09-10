@@ -231,6 +231,51 @@ namespace Modulo_Capacitacion
 
         }
 
+        public static void ActualizarCantidadPersonasHoras(string WDesdeFecha, string WHastaFecha)
+        {
+            string WAnioI = ""; //;
+            string WAnioII = "";
+
+            WAnioI = !WDesdeFecha.Contains("/") ? WDesdeFecha.Substring(0, 4) : WDesdeFecha.Substring(6, 4);
+            WAnioII = !WHastaFecha.Contains("/") ? WHastaFecha.Substring(0, 4) : WHastaFecha.Substring(6, 4);
+
+            DataTable WPersonas = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "UPDATE CronogramaII SET Personas = 0, Horas = 0 WHERE Ano BETWEEN '" + WAnioI + "' AND '" + WAnioII + "'";
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT Curso, COUNT(distinct legajo) as Cantidad, SUM(horas) as Horas "
+                                    + " FROM cronograma WHERE Ano BETWEEN '" + WAnioI + "' AND '" + WAnioII + "' AND Curso IN "
+                                    + " (SELECT Curso FROM CronogramaII WHERE Ano BETWEEN '" + WAnioI + "' AND '" + WAnioII + "') "
+                                    + " GROUP BY Curso";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            WPersonas.Load(dr);
+                        }
+                    }
+
+                    foreach (DataRow WPersona in WPersonas.Rows)
+                    {
+                        cmd.CommandText = "UPDATE CronogramaII SET Personas = " + WPersona["Cantidad"].ToString().Replace(',', '.') + ", Horas = " + WPersona["Horas"].ToString().Replace(',', '.') + " WHERE Ano BETWEEN '" + WAnioI + "' AND '" + WAnioII + "' AND Curso = '" + WPersona["Curso"] + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+            }
+        }
+
         public static void ActualizarCantidadPersonasHoras(string txtAno)
         {
             DataTable WPersonas = new DataTable();

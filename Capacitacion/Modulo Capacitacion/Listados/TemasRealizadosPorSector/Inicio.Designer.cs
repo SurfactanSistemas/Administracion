@@ -33,10 +33,11 @@
             this.LBChofer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txtAnioHasta = new System.Windows.Forms.MaskedTextBox();
+            this.txtAnioDesde = new System.Windows.Forms.MaskedTextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.CB_Tipo = new System.Windows.Forms.ComboBox();
-            this.TB_Año = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TB_Hasta = new System.Windows.Forms.TextBox();
             this.TB_Desde = new System.Windows.Forms.TextBox();
@@ -84,10 +85,11 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.txtAnioHasta);
+            this.panel3.Controls.Add(this.txtAnioDesde);
             this.panel3.Controls.Add(this.progressBar1);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.CB_Tipo);
-            this.panel3.Controls.Add(this.TB_Año);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.TB_Hasta);
             this.panel3.Controls.Add(this.TB_Desde);
@@ -101,6 +103,28 @@
             this.panel3.Size = new System.Drawing.Size(477, 215);
             this.panel3.TabIndex = 0;
             // 
+            // txtAnioHasta
+            // 
+            this.txtAnioHasta.Location = new System.Drawing.Point(180, 61);
+            this.txtAnioHasta.Mask = "00/00/0000";
+            this.txtAnioHasta.Name = "txtAnioHasta";
+            this.txtAnioHasta.PromptChar = ' ';
+            this.txtAnioHasta.Size = new System.Drawing.Size(66, 20);
+            this.txtAnioHasta.TabIndex = 100;
+            this.txtAnioHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtAnioHasta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAnioHasta_KeyDown);
+            // 
+            // txtAnioDesde
+            // 
+            this.txtAnioDesde.Location = new System.Drawing.Point(108, 61);
+            this.txtAnioDesde.Mask = "00/00/0000";
+            this.txtAnioDesde.Name = "txtAnioDesde";
+            this.txtAnioDesde.PromptChar = ' ';
+            this.txtAnioDesde.Size = new System.Drawing.Size(66, 20);
+            this.txtAnioDesde.TabIndex = 100;
+            this.txtAnioDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtAnioDesde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAnioDesde_KeyDown);
+            // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(42, 96);
@@ -113,7 +137,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(203, 60);
+            this.label4.Location = new System.Drawing.Point(252, 62);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 18);
             this.label4.TabIndex = 98;
@@ -127,28 +151,20 @@
             "Completo",
             "Programados",
             "Sin Programar"});
-            this.CB_Tipo.Location = new System.Drawing.Point(298, 60);
+            this.CB_Tipo.Location = new System.Drawing.Point(344, 61);
             this.CB_Tipo.Name = "CB_Tipo";
-            this.CB_Tipo.Size = new System.Drawing.Size(139, 21);
+            this.CB_Tipo.Size = new System.Drawing.Size(93, 21);
             this.CB_Tipo.TabIndex = 97;
-            // 
-            // TB_Año
-            // 
-            this.TB_Año.Location = new System.Drawing.Point(138, 60);
-            this.TB_Año.Name = "TB_Año";
-            this.TB_Año.Size = new System.Drawing.Size(51, 20);
-            this.TB_Año.TabIndex = 95;
-            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(95, 60);
+            this.label3.Location = new System.Drawing.Point(39, 62);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 18);
+            this.label3.Size = new System.Drawing.Size(61, 18);
             this.label3.TabIndex = 94;
-            this.label3.Text = "Año:";
+            this.label3.Text = "Período:";
             // 
             // TB_Hasta
             // 
@@ -263,8 +279,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox CB_Tipo;
-        private System.Windows.Forms.TextBox TB_Año;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.MaskedTextBox txtAnioHasta;
+        private System.Windows.Forms.MaskedTextBox txtAnioDesde;
     }
 }

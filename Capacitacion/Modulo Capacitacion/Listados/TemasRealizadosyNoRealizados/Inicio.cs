@@ -31,8 +31,6 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
 
                 if (TB_TemaHasta.Text == "") TB_TemaHasta.Text = TB_TemaDesde.Text;
 
-                if (TB_Año.Text == "") throw new Exception("Se debe ingresar el Año");
-
                 int TemaDesde = 0;
 
                 int.TryParse(TB_TemaDesde.Text, out TemaDesde);
@@ -41,13 +39,12 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
 
                 int.TryParse(TB_TemaHasta.Text, out TemaHasta);
 
-                int Año = 0;
+                string WAnioDesde = Helper.OrdenarFecha(txtAnioDesde.Text);
+                string WAnioHasta = Helper.OrdenarFecha(txtAnioHasta.Text);
 
-                int.TryParse(TB_Año.Text, out Año);
+                Helper.ActualizarCantidadPersonasHoras(WAnioDesde, WAnioHasta);
 
-                Helper.ActualizarCantidadPersonasHoras(Año.ToString());
-
-                dtInforme = C.CronogramaHoras(Año, TemaDesde, TemaHasta);
+                dtInforme = C.CronogramaHoras(WAnioDesde, WAnioHasta, TemaDesde, TemaHasta);
 
                 Tipo = "Pantalla";
 
@@ -71,8 +68,6 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
 
                 if (TB_TemaHasta.Text == "") throw new Exception("Se debe ingresar el Tema hasta el cual terminar la busqueda");
 
-                if (TB_Año.Text == "") throw new Exception("Se debe ingresar el Año");
-
                 int TemaDesde = 0;
 
                 int.TryParse(TB_TemaDesde.Text, out TemaDesde);
@@ -81,13 +76,12 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
 
                 int.TryParse(TB_TemaHasta.Text, out TemaHasta);
 
-                int Año = 0;
+                string WAnioDesde = Helper.OrdenarFecha(txtAnioDesde.Text);
+                string WAnioHasta = Helper.OrdenarFecha(txtAnioHasta.Text);
 
-                int.TryParse(TB_Año.Text, out Año);
+                Helper.ActualizarCantidadPersonasHoras(WAnioDesde, WAnioHasta);
 
-                Helper.ActualizarCantidadPersonasHoras(Año.ToString());
-
-                dtInforme = C.CronogramaHoras(Año, TemaDesde, TemaHasta);
+                dtInforme = C.CronogramaHoras(WAnioDesde, WAnioHasta, TemaDesde, TemaHasta);
 
                 Tipo = "Impresion";
 
@@ -121,7 +115,7 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
         {
             if (e.KeyCode == Keys.Enter)
             {
-                TB_Año.Focus();
+                txtAnioDesde.Focus();
             }
         }
 
@@ -172,6 +166,42 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
             {
                 throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
             }
+        }
+
+        private void txtAnioDesde_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtAnioDesde.Text.Replace(" ", "").Length < 10) return;
+                if (!Helper._FechaValida(txtAnioDesde.Text)) return;
+
+                txtAnioHasta.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtAnioDesde.Text = "";
+            }
+	        
+        }
+
+        private void txtAnioHasta_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtAnioHasta.Text.Replace(" ", "").Length < 10) return;
+                if (!Helper._FechaValida(txtAnioHasta.Text)) return;
+
+                txtAnioDesde.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtAnioHasta.Text = "";
+            }
+	        
         }
     }
 }

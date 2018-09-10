@@ -45,16 +45,13 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosPorSector
 
             if (TB_Hasta.Text == "") TB_Hasta.Text = TB_Desde.Text;
 
-            if (TB_Año.Text == "") throw new Exception("Se debe ingresar el Año");
-
             int Desd;
             int.TryParse(TB_Desde.Text, out Desd);
             int Hast;
             int.TryParse(TB_Hasta.Text, out Hast);
-            int Año;
-            int.TryParse(TB_Año.Text, out Año);
-            int AñoDesde = int.Parse(Año.ToString() + "0101");
-            int AñoHasta = int.Parse(Año.ToString() + "1231");
+            
+            int AñoDesde = int.Parse(Helper.OrdenarFecha(txtAnioDesde.Text));
+            int AñoHasta = int.Parse(Helper.OrdenarFecha(txtAnioHasta.Text));
 
             progressBar1.Value = 0;
 
@@ -97,7 +94,7 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosPorSector
         {
             if (e.KeyCode == Keys.Enter)
             {
-                TB_Año.Focus();
+                txtAnioDesde.Focus();
             }
         }
 
@@ -163,6 +160,41 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosPorSector
             catch (Exception ex)
             {
                 throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
+        }
+
+        private void txtAnioDesde_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtAnioDesde.Text.Replace(" ", "").Length < 10) return;
+                if (!Helper._FechaValida(txtAnioDesde.Text)) return;
+
+                txtAnioHasta.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtAnioDesde.Text = "";
+            }
+	        
+        }
+
+        private void txtAnioHasta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtAnioHasta.Text.Replace(" ", "").Length < 10) return;
+                if (!Helper._FechaValida(txtAnioHasta.Text)) return;
+
+                CB_Tipo.DroppedDown = true;
+                CB_Tipo.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtAnioHasta.Text = "";
             }
         }
     }

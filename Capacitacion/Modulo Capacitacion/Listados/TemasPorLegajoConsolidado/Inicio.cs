@@ -36,8 +36,8 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
 
                 //if (CB_Tipo.Text == "") throw new Exception("Debe elegir el tipo de listado");
 
-                int Desde = int.Parse(TB_AñoDesde.Text);
-                int Hasta = int.Parse(TB_AñoHasta.Text);
+                int Desde = int.Parse(TB_AñoDesde.Text.Substring(6, 4));
+                int Hasta = int.Parse(TB_AñoHasta.Text.Substring(6, 4));
 
                 dtCursadas = Cur.ListarCursadaCons2(Desde, Hasta);
 
@@ -65,8 +65,8 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
                     progressBar1.Increment(1);
                 }
 
-                string FechaDesde = TB_AñoDesde.Text + "0101";
-                string FechaHasta = TB_AñoHasta.Text + "1231";
+                string FechaDesde = Helper.OrdenarFecha(TB_AñoDesde.Text); // + "0101";
+                string FechaHasta = Helper.OrdenarFecha(TB_AñoHasta.Text); // + "1231";
 
                 int Tipo = CB_Tipo.SelectedIndex;
                 
@@ -107,14 +107,91 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
 
         private void BT_Imprimir_Click(object sender, EventArgs e)
         {
+            try
+            {
+                progressBar1.Visible = false;
+                progressBar1.Value = 0;
 
+                if (TB_AñoDesde.Text == "") throw new Exception("Debe ingresar el año inicial");
+
+                if (TB_AñoHasta.Text == "") TB_AñoHasta.Text = TB_AñoDesde.Text;
+
+                //if (CB_Tipo.Text == "") throw new Exception("Debe elegir el tipo de listado");
+
+                int Desde = int.Parse(TB_AñoDesde.Text.Substring(6, 4));
+                int Hasta = int.Parse(TB_AñoHasta.Text.Substring(6, 4));
+
+                dtCursadas = Cur.ListarCursadaCons2(Desde, Hasta);
+
+                progressBar1.Maximum = dtCursadas.Rows.Count;
+
+                progressBar1.Visible = true;
+                progressBar1.Step = 1;
+
+                foreach (DataRow fila in dtCursadas.Rows)
+                {
+                    int Año = int.Parse(fila["Ano"].ToString());
+                    int Legajo = int.Parse(fila["Legajo"].ToString());
+                    int Curso = int.Parse(fila["Curso"].ToString());
+                    string Clave = fila["Clave"].ToString();
+
+                    //dtCronograma = Cr.BuscarUnoCursada(Año, Legajo, Curso);
+
+                    int Valor = 0;
+
+                    //if (dtCronograma.Rows.Count > 0 )
+                    if (!Cr.ExisteEnCronograma(Año, Legajo, Curso)) Valor = 1;
+
+                    Cur.ModificarCursadaConsol(Valor, Clave);
+
+                    progressBar1.Increment(1);
+                }
+
+                string FechaDesde = TB_AñoDesde.Text; // + "0101";
+                string FechaHasta = TB_AñoHasta.Text; // + "1231";
+
+                int Tipo = CB_Tipo.SelectedIndex;
+
+
+                switch (Tipo)
+                {
+
+                    case 1:
+
+                        dtInforme = Cur.ListarInformeCons(FechaDesde, FechaHasta, 0, 0);
+                        break;
+
+                    case 2:
+
+                        dtInforme = Cur.ListarInformeCons(FechaDesde, FechaHasta, 1, 1);
+                        break;
+
+                    case 0:
+
+                        dtInforme = Cur.ListarInformeCons(FechaDesde, FechaHasta, 0, 9999);
+                        break;
+                }
+
+                progressBar1.Visible = false;
+
+                TipoImpre = "Imprimir";
+
+                ImpreInforme Impre = new ImpreInforme(dtInforme, TipoImpre);
+                Impre.ShowDialog();
+
+            }
+            catch (Exception err)
+            {
+
+                MessageBox.Show(err.Message, "Error");
+            }
         }
 
         private void TB_AñoDesde_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (TB_AñoDesde.Text.Trim() != "")
+                if (TB_AñoDesde.Text.Replace(" ", "").Length == 10)
                 {
                     TB_AñoHasta.Focus();
                 }
@@ -129,7 +206,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (TB_AñoHasta.Text.Trim() != "")
+                if (TB_AñoHasta.Text.Replace(" ", "").Length == 10)
                 {
                     CB_Tipo.Focus();
                 }

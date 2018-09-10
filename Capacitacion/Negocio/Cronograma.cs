@@ -166,6 +166,22 @@ namespace Negocio
             return DT;
         }
 
+        public DataTable CronogramaHoras(string WDesdeFecha, string WHastaFecha, int TemaDesde, int TemaHasta)
+        {
+            string WAnioI = "";
+            string WAnioII = "";
+
+            WAnioI = WDesdeFecha.Contains("/") ? WDesdeFecha.Substring(6, 4) : WDesdeFecha.Substring(0, 4);
+            WAnioII = WHastaFecha.Contains("/") ? WHastaFecha.Substring(6, 4) : WHastaFecha.Substring(0, 4);
+
+            Conexion repo = new Conexion();
+
+            string consulta = "select C.Ano, C.Curso, Cu.Descripcion, C.Tema, T.Descripcion, C.Legajo, l.Descripcion, C.Horas, C.Realizado from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso LEFT OUTER JOIN Tema T ON T.Curso = C.Curso AND T.Tema = C.Tema LEFT OUTER JOIN Legajo l ON l.Codigo = C.Legajo AND l.Renglon = 1  where C.Curso >= " + TemaDesde + " and C.Curso <= " + TemaHasta + " and C.Ano BETWEEN '" + WAnioI + "' AND '" + WAnioII + "' AND C.Tema <> 0 AND C.Renglon <> 0 order by C.Legajo desc";
+
+            DataTable DT = repo.BuscarUno(consulta);
+
+            return DT;
+        }
 
         public DataTable CronogramaHoras(int Año, int TemaDesde, int TemaHasta)
         {
