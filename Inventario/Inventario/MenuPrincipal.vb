@@ -2,6 +2,23 @@
 
 Public Class MenuPrincipal
 
+    Sub New(Optional ByVal v As Boolean = False)
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+        If v Then
+            CierreStockPtaVToolStripMenuItem.Enabled = False
+            ActualizaciónDeStockToolStripMenuItem.Enabled = False
+            ActualizaciónStockPtaVToolStripMenuItem.Enabled = False
+            ToolStripMenuItem5.Enabled = False
+            ToolStripMenuItem4.Enabled = False
+        End If
+
+    End Sub
+
     Private Sub CerrarSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CerrarSistemaToolStripMenuItem.Click
         Login.Dispose()
         Close()

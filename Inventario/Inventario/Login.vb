@@ -66,7 +66,9 @@ Public Class Login
 
         _MenuPrincipal.Close()
 
-        _MenuPrincipal = New MenuPrincipal
+        Dim WInHabilita As Boolean = Not {"POLOK", "OLULA", "GRANADA"}.Contains(txtPsw.Text.ToUpper)
+
+        _MenuPrincipal = New MenuPrincipal(WInHabilita)
 
         _MenuPrincipal.Show()
 

@@ -220,10 +220,12 @@ Namespace Clases
 
                 Clave = UCase(Clave)
 
-                Return {"POLOK", "OLULA", "GRANADA"}.Contains(Clave)
-                'cm.Connection = cn
+                'Return dr.HasRows
+                cm.Connection = cn
 
-                'dr = cm.ExecuteReader()
+                dr = cm.ExecuteReader()
+
+                Return dr.HasRows
 
                 'If dr.HasRows Then
                 '    dr.Read()
