@@ -300,7 +300,7 @@ Public Class IngresoTalonInventario
                             Exit Sub
                     End Select
 
-                    If Val(WCantidad) = 0 Then
+                    If Val(WCantidad) < 0 Then
                         Throw New Exception("Debe especificarse el la cantidad del Producto en el talón " & WTalon)
                     End If
 
@@ -629,7 +629,7 @@ Public Class IngresoTalonInventario
                             End If
 
                         Case 6
-                            If Val(valor) = 0 Then Return True
+                            If Val(valor) < 0 Then Return True
                             Dim WTipo As String = If(.CurrentRow.Cells("Tipo").Value, "")
 
                             If WTipo = "T" Then

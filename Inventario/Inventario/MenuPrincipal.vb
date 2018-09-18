@@ -1,4 +1,6 @@
-﻿Public Class MenuPrincipal
+﻿Imports Inventario.Clases
+
+Public Class MenuPrincipal
 
     Private Sub CerrarSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CerrarSistemaToolStripMenuItem.Click
         Login.Dispose()
@@ -23,7 +25,15 @@
     End Sub
 
     Private Sub MenuPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         Label2.Text = String.Format("{0} S.A.", IIf(Helper._EsPellital, "PELLITAL", "SURFACTAN"))
+
+        If Conexion.EmpresaDeTrabajo.ToUpper <> "SURFACTAN_V" Then
+            ActualizaciónStockPtaVToolStripMenuItem.Enabled = False
+            CierreStockPtaVToolStripMenuItem.Enabled = False
+            Exit Sub
+        End If
+
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -81,5 +91,13 @@
 
     Private Sub ActualizaciónDeStockToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActualizaciónDeStockToolStripMenuItem.Click
         _Abrir(New ActualizacionStock)
+    End Sub
+
+    Private Sub ActualizaciónStockPtaVToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActualizaciónStockPtaVToolStripMenuItem.Click
+        _Abrir(New ActualizacionStockPtaV)
+    End Sub
+
+    Private Sub CierreStockPtaVToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CierreStockPtaVToolStripMenuItem.Click
+        _Abrir(New CierreStockPtaV)
     End Sub
 End Class

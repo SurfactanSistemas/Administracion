@@ -13,6 +13,14 @@ Module Helper
         Return Conexion.EsPellital
     End Function
 
+    Public Function OrDefault(ByVal valor, ByVal def)
+
+        If IsNothing(valor) OrElse IsDBNull(valor) Then Return def
+
+        Return valor
+
+    End Function
+
     Public Function _MateriaPrimaValidaPtaI(ByVal WArticulo As Object) As Boolean
 
         If Not _EsPellital() Then

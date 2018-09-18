@@ -203,6 +203,18 @@
     <Compile Include="Formularios\Procesos\ActualizacionStock.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Procesos\CierreStockPtaV.Designer.vb">
+      <DependentUpon>CierreStockPtaV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\CierreStockPtaV.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Procesos\ActualizacionStockPtaV.Designer.vb">
+      <DependentUpon>ActualizacionStockPtaV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\ActualizacionStockPtaV.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Procesos\LimpiarCargaInventario.Designer.vb">
       <DependentUpon>LimpiarCargaInventario.vb</DependentUpon>
     </Compile>
@@ -375,6 +387,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Procesos\ActualizacionStock.resx">
       <DependentUpon>ActualizacionStock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\CierreStockPtaV.resx">
+      <DependentUpon>CierreStockPtaV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\ActualizacionStockPtaV.resx">
+      <DependentUpon>ActualizacionStockPtaV.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Procesos\LimpiarCargaInventario.resx">
       <DependentUpon>LimpiarCargaInventario.vb</DependentUpon>

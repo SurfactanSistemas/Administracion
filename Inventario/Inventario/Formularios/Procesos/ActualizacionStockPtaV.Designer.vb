@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ActualizacionStock
+Partial Class ActualizacionStockPtaV
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -53,7 +53,7 @@ Partial Class ActualizacionStock
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(502, 49)
+        Me.Panel1.Size = New System.Drawing.Size(357, 49)
         Me.Panel1.TabIndex = 3
         '
         'Label1
@@ -61,15 +61,15 @@ Partial Class ActualizacionStock
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(88, 18)
+        Me.Label1.Location = New System.Drawing.Point(70, 18)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(171, 18)
+        Me.Label1.Size = New System.Drawing.Size(216, 18)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "ACTUALIZACIÓN DE STOCK"
+        Me.Label1.Text = "ACTUALIZACIÓN DE STOCK (Pta V)"
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(107, 210)
+        Me.btnAceptar.Location = New System.Drawing.Point(32, 210)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(133, 44)
         Me.btnAceptar.TabIndex = 4
@@ -78,7 +78,7 @@ Partial Class ActualizacionStock
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(264, 210)
+        Me.btnCerrar.Location = New System.Drawing.Point(189, 210)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(133, 44)
         Me.btnCerrar.TabIndex = 4
@@ -87,7 +87,7 @@ Partial Class ActualizacionStock
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(91, 177)
+        Me.ProgressBar1.Location = New System.Drawing.Point(16, 177)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(323, 26)
         Me.ProgressBar1.TabIndex = 5
@@ -95,7 +95,7 @@ Partial Class ActualizacionStock
         'lblEstado
         '
         Me.lblEstado.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblEstado.Location = New System.Drawing.Point(91, 155)
+        Me.lblEstado.Location = New System.Drawing.Point(16, 155)
         Me.lblEstado.Name = "lblEstado"
         Me.lblEstado.Size = New System.Drawing.Size(323, 15)
         Me.lblEstado.TabIndex = 6
@@ -104,7 +104,7 @@ Partial Class ActualizacionStock
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(62, 20)
+        Me.Label2.Location = New System.Drawing.Point(92, 41)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(82, 13)
         Me.Label2.TabIndex = 7
@@ -112,7 +112,7 @@ Partial Class ActualizacionStock
         '
         'txtFechaCierre
         '
-        Me.txtFechaCierre.Location = New System.Drawing.Point(150, 16)
+        Me.txtFechaCierre.Location = New System.Drawing.Point(180, 37)
         Me.txtFechaCierre.Mask = "00/00/0000"
         Me.txtFechaCierre.Name = "txtFechaCierre"
         Me.txtFechaCierre.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -135,7 +135,7 @@ Partial Class ActualizacionStock
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 54)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(486, 94)
+        Me.GroupBox1.Size = New System.Drawing.Size(341, 94)
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
@@ -152,7 +152,7 @@ Partial Class ActualizacionStock
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(263, 58)
+        Me.txtDesde.Location = New System.Drawing.Point(385, 58)
         Me.txtDesde.Mask = "AA-000-000"
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -164,7 +164,7 @@ Partial Class ActualizacionStock
         '
         Me.GroupBox2.Controls.Add(Me.rbMp)
         Me.GroupBox2.Controls.Add(Me.rbPt)
-        Me.GroupBox2.Location = New System.Drawing.Point(144, 39)
+        Me.GroupBox2.Location = New System.Drawing.Point(396, 43)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(47, 51)
         Me.GroupBox2.TabIndex = 10
@@ -195,7 +195,7 @@ Partial Class ActualizacionStock
         'rbPorRango
         '
         Me.rbPorRango.AutoSize = True
-        Me.rbPorRango.Location = New System.Drawing.Point(365, 19)
+        Me.rbPorRango.Location = New System.Drawing.Point(366, 60)
         Me.rbPorRango.Name = "rbPorRango"
         Me.rbPorRango.Size = New System.Drawing.Size(106, 17)
         Me.rbPorRango.TabIndex = 9
@@ -206,7 +206,7 @@ Partial Class ActualizacionStock
         '
         Me.rbTodos.AutoSize = True
         Me.rbTodos.Checked = True
-        Me.rbTodos.Location = New System.Drawing.Point(243, 18)
+        Me.rbTodos.Location = New System.Drawing.Point(367, 60)
         Me.rbTodos.Name = "rbTodos"
         Me.rbTodos.Size = New System.Drawing.Size(104, 17)
         Me.rbTodos.TabIndex = 9
@@ -217,24 +217,24 @@ Partial Class ActualizacionStock
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(348, 62)
+        Me.Label3.Location = New System.Drawing.Point(409, 62)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(20, 13)
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "AL"
         '
-        'ActualizacionStock
+        'ActualizacionStockPtaV
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(502, 260)
+        Me.ClientSize = New System.Drawing.Size(357, 260)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.lblEstado)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "ActualizacionStock"
+        Me.Name = "ActualizacionStockPtaV"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
