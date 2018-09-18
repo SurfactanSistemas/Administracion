@@ -611,7 +611,7 @@ namespace Vista
 
                     cant = cant.StartsWith(".") ? "0" + cant : cant;
 
-                    if (DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YQ"))
+                    if (DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YQ") || DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YF"))
                     {
                         if (Double.Parse(cant.Replace(".", ",")) >= 20)
                         {
@@ -628,7 +628,7 @@ namespace Vista
                     }
                     else {
 
-                        if (!DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("ML") && !DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YP") && !DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YF"))
+                        if (!DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("ML") && !DGV_Muestra.SelectedRows[i].Cells[3].Value.ToString().StartsWith("YP"))
                         {
 
                             int _lote1 = int.Parse(CS.BuscarLote1(cod, pedido));
