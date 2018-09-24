@@ -25,4 +25,8 @@
     Private Sub TiposDeSolicitudToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TiposDeSolicitudToolStripMenuItem.Click
         Abrir(New ListadoTiposSolicitud)
     End Sub
+
+    Private Sub ResponsablesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ResponsablesToolStripMenuItem.Click
+        Abrir(New ListadoResponsablesSAC)
+    End Sub
 End Class

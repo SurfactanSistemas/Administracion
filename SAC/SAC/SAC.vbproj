@@ -122,6 +122,18 @@
     <Compile Include="Formularios\AnalisisDesarrollo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.Designer.vb">
+      <DependentUpon>ListadoResponsableSAC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Responsables SAC\NuevoResponsableSAC.Designer.vb">
+      <DependentUpon>NuevoResponsableSAC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Responsables SAC\NuevoResponsableSAC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Tipos de Solicitud\ListadoTiposSolicitud.Designer.vb">
       <DependentUpon>ListadoTiposSolicitud.vb</DependentUpon>
     </Compile>
@@ -135,6 +147,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\INuevoResponsableSac.vb" />
     <Compile Include="Interfaces\INuevoTipoSolicitud.vb" />
     <Compile Include="Login.designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
@@ -177,6 +190,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\AnalisisDesarrollo.resx">
       <DependentUpon>AnalisisDesarrollo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.resx">
+      <DependentUpon>ListadoResponsableSAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Responsables SAC\NuevoResponsableSAC.resx">
+      <DependentUpon>NuevoResponsableSAC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Tipos de Solicitud\ListadoTiposSolicitud.resx">
       <DependentUpon>ListadoTiposSolicitud.vb</DependentUpon>

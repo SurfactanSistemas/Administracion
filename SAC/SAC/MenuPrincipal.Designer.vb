@@ -32,12 +32,12 @@ Partial Class MenuPrincipal
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TiposDeSolicitudToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResponsablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CentrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IndiceGeneralDeAccionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -157,19 +157,6 @@ Partial Class MenuPrincipal
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
         '
-        'ProcesosToolStripMenuItem
-        '
-        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CerrarSistemaToolStripMenuItem})
-        Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
-        Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
-        Me.ProcesosToolStripMenuItem.Text = "Procesos"
-        '
-        'CerrarSistemaToolStripMenuItem
-        '
-        Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
-        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
-        Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
-        '
         'TiposDeSolicitudToolStripMenuItem
         '
         Me.TiposDeSolicitudToolStripMenuItem.Name = "TiposDeSolicitudToolStripMenuItem"
@@ -193,6 +180,19 @@ Partial Class MenuPrincipal
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Name = "IndiceGeneralDeAccionesToolStripMenuItem"
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Text = "Indice General de Acciones"
+        '
+        'ProcesosToolStripMenuItem
+        '
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CerrarSistemaToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
+        Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
+        Me.ProcesosToolStripMenuItem.Text = "Procesos"
+        '
+        'CerrarSistemaToolStripMenuItem
+        '
+        Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
+        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
         '
         'MenuPrincipal
         '
