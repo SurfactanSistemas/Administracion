@@ -72,14 +72,30 @@
     End Sub
 
     Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
-        Dim WTipo As DataRow = Query.GetSingle("SELECT Codigo FROM TipoSac WHERE Codigo = '" & txtCodigo.Text & "'")
-        If Not IsNothing(WTipo) Then
-            Dim frm As New NuevoTipoSolicitud(txtCodigo.Text)
-            frm.ShowDialog(Me)
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtCodigo.Text) = "" Then : Exit Sub : End If
+
+            Dim WTipo As DataRow = Query.GetSingle("SELECT Codigo FROM TipoSac WHERE Codigo = '" & txtCodigo.Text & "'")
+            If Not IsNothing(WTipo) Then
+                Dim frm As New NuevoTipoSolicitud(txtCodigo.Text)
+                frm.ShowDialog(Me)
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCodigo.Text = ""
         End If
+
     End Sub
 
     Private Sub dgvTIpos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvTIpos.RowHeaderMouseDoubleClick
         btnEditar.PerformClick()
     End Sub
+
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
 End Class

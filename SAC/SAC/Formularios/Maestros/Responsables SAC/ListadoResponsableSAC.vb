@@ -93,4 +93,11 @@
     Public Sub _ProcesarNuevoResponsableSac(ByVal WCodigo As Object) Implements INuevoResponsableSac._ProcesarNuevoResponsableSac
         _CargarResponsables()
     End Sub
+
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
 End Class
