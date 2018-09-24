@@ -16,6 +16,10 @@ Public Class DiferenciaInventarioMPStockAnterior
 
         Dim WArticulos As DataTable = Query.GetAll("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion  FROM Articulo WHERE Codigo BETWEEN '" & txtDesde.Text & "' AND '" & txtHasta.Text & "' ORDER BY Codigo", Conexion.EmpresaDeTrabajo)
 
+        If ckSoloInventariado.Checked Then
+            WArticulos = GetAll("SELECT i.Codigo, ISNULL(a.Descripcion, '') Descripcion FROM Inventario i INNER JOIN Articulo a ON i.Articulo = a.Codigo WHERE i.Tipo = 'M'")
+        End If
+
         With ProgressBar1
             .Value = 0
             .Maximum = (WArticulos.Rows.Count * 2) + 5
@@ -182,6 +186,7 @@ Public Class DiferenciaInventarioMPStockAnterior
         ProgressBar1.Value = 0
         txtDesde.Text = "AA-000-000"
         txtHasta.Text = "ZZ-999-999"
+        ckSoloInventariado.Checked = False
     End Sub
 
     Private Sub DiferenciaInventarioMPStockAnterior_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown

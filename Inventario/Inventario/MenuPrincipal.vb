@@ -15,6 +15,7 @@ Public Class MenuPrincipal
             ActualizaciónStockPtaVToolStripMenuItem.Enabled = False
             ToolStripMenuItem5.Enabled = False
             ToolStripMenuItem4.Enabled = False
+            ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem.Enabled = False
         End If
 
     End Sub
@@ -46,9 +47,15 @@ Public Class MenuPrincipal
         Label2.Text = String.Format("{0} S.A.", IIf(Helper._EsPellital, "PELLITAL", "SURFACTAN"))
 
         If Conexion.EmpresaDeTrabajo.ToUpper <> "SURFACTAN_V" Then
+            ActualizaciónDeStockToolStripMenuItem.Enabled = True
+            ToolStripMenuItem5.Enabled = True
             ActualizaciónStockPtaVToolStripMenuItem.Enabled = False
             CierreStockPtaVToolStripMenuItem.Enabled = False
-            Exit Sub
+        Else
+            ActualizaciónDeStockToolStripMenuItem.Enabled = False
+            ToolStripMenuItem5.Enabled = False
+            ActualizaciónStockPtaVToolStripMenuItem.Enabled = True
+            CierreStockPtaVToolStripMenuItem.Enabled = True
         End If
 
     End Sub
@@ -86,11 +93,11 @@ Public Class MenuPrincipal
         _Abrir(New MPPTConLote0)
     End Sub
 
-    Private Sub DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Click
+    Private Sub DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         _Abrir(New DiferenciaInventarioMPStockAnterior)
     End Sub
 
-    Private Sub DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem.Click
+    Private Sub DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         _Abrir(New DiferenciaInventarioPTStockAnterior)
     End Sub
 
@@ -116,5 +123,9 @@ Public Class MenuPrincipal
 
     Private Sub CierreStockPtaVToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CierreStockPtaVToolStripMenuItem.Click
         _Abrir(New CierreStockPtaV)
+    End Sub
+
+    Private Sub ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem.Click
+        _Abrir(New AjusteInventarioMPMovVarios)
     End Sub
 End Class

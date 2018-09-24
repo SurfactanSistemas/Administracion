@@ -293,6 +293,10 @@ Partial Public Class DSVerificaCorrelatividad
         
         Private columnEmpresa As Global.System.Data.DataColumn
         
+        Private columnObservaciones As Global.System.Data.DataColumn
+        
+        Private columnMovimiento As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -369,6 +373,22 @@ Partial Public Class DSVerificaCorrelatividad
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ObservacionesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnObservaciones
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property MovimientoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMovimiento
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -405,9 +425,9 @@ Partial Public Class DSVerificaCorrelatividad
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddDetallesRow(ByVal Numero As Integer, ByVal Descripcion As String, ByVal Estado As String, ByVal Producto As String, ByVal Empresa As String) As DetallesRow
+        Public Overloads Function AddDetallesRow(ByVal Numero As Integer, ByVal Descripcion As String, ByVal Estado As String, ByVal Producto As String, ByVal Empresa As String, ByVal Observaciones As String, ByVal Movimiento As String) As DetallesRow
             Dim rowDetallesRow As DetallesRow = CType(Me.NewRow,DetallesRow)
-            Dim columnValuesArray() As Object = New Object() {Numero, Descripcion, Estado, Producto, Empresa}
+            Dim columnValuesArray() As Object = New Object() {Numero, Descripcion, Estado, Producto, Empresa, Observaciones, Movimiento}
             rowDetallesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDetallesRow)
             Return rowDetallesRow
@@ -435,6 +455,8 @@ Partial Public Class DSVerificaCorrelatividad
             Me.columnEstado = MyBase.Columns("Estado")
             Me.columnProducto = MyBase.Columns("Producto")
             Me.columnEmpresa = MyBase.Columns("Empresa")
+            Me.columnObservaciones = MyBase.Columns("Observaciones")
+            Me.columnMovimiento = MyBase.Columns("Movimiento")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -450,6 +472,10 @@ Partial Public Class DSVerificaCorrelatividad
             MyBase.Columns.Add(Me.columnProducto)
             Me.columnEmpresa = New Global.System.Data.DataColumn("Empresa", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnEmpresa)
+            Me.columnObservaciones = New Global.System.Data.DataColumn("Observaciones", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnObservaciones)
+            Me.columnMovimiento = New Global.System.Data.DataColumn("Movimiento", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnMovimiento)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -671,6 +697,36 @@ Partial Public Class DSVerificaCorrelatividad
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Observaciones() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableDetalles.ObservacionesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Observaciones' in table 'Detalles' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDetalles.ObservacionesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Movimiento() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableDetalles.MovimientoColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Movimiento' in table 'Detalles' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDetalles.MovimientoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsNumeroNull() As Boolean
             Return Me.IsNull(Me.tableDetalles.NumeroColumn)
         End Function
@@ -727,6 +783,30 @@ Partial Public Class DSVerificaCorrelatividad
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetEmpresaNull()
             Me(Me.tableDetalles.EmpresaColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsObservacionesNull() As Boolean
+            Return Me.IsNull(Me.tableDetalles.ObservacionesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetObservacionesNull()
+            Me(Me.tableDetalles.ObservacionesColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsMovimientoNull() As Boolean
+            Return Me.IsNull(Me.tableDetalles.MovimientoColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetMovimientoNull()
+            Me(Me.tableDetalles.MovimientoColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

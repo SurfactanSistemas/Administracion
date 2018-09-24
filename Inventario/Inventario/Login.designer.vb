@@ -106,9 +106,9 @@ Partial Class Login
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
         Me.Label2.Location = New System.Drawing.Point(13, 12)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(238, 26)
+        Me.Label2.Size = New System.Drawing.Size(231, 26)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "SISTEMA DE DESARROLLO"
+        Me.Label2.Text = "SISTEMA DE INVENTARIO"
         '
         'Label3
         '

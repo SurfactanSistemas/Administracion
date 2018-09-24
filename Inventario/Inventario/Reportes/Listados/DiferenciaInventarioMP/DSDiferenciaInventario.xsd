@@ -12,7 +12,7 @@
   <xs:element name="DSDiferenciaInventario" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSDiferenciaInventario" msprop:Generator_UserDSName="DSDiferenciaInventario">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Detalles" msprop:Generator_TableClassName="DetallesDataTable" msprop:Generator_TableVarName="tableDetalles" msprop:Generator_RowChangedName="DetallesRowChanged" msprop:Generator_TablePropName="Detalles" msprop:Generator_RowDeletingName="DetallesRowDeleting" msprop:Generator_RowChangingName="DetallesRowChanging" msprop:Generator_RowEvHandlerName="DetallesRowChangeEventHandler" msprop:Generator_RowDeletedName="DetallesRowDeleted" msprop:Generator_RowClassName="DetallesRow" msprop:Generator_UserTableName="Detalles" msprop:Generator_RowEvArgName="DetallesRowChangeEvent">
+        <xs:element name="Detalles" msprop:Generator_TableClassName="DetallesDataTable" msprop:Generator_TableVarName="tableDetalles" msprop:Generator_TablePropName="Detalles" msprop:Generator_RowDeletingName="DetallesRowDeleting" msprop:Generator_RowChangingName="DetallesRowChanging" msprop:Generator_RowEvHandlerName="DetallesRowChangeEventHandler" msprop:Generator_RowDeletedName="DetallesRowDeleted" msprop:Generator_UserTableName="Detalles" msprop:Generator_RowChangedName="DetallesRowChanged" msprop:Generator_RowEvArgName="DetallesRowChangeEvent" msprop:Generator_RowClassName="DetallesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Articulo" msprop:Generator_ColumnVarNameInTable="columnArticulo" msprop:Generator_ColumnPropNameInRow="Articulo" msprop:Generator_ColumnPropNameInTable="ArticuloColumn" msprop:Generator_UserColumnName="Articulo" type="xs:string" minOccurs="0" />
@@ -21,6 +21,7 @@
               <xs:element name="Stock" msprop:Generator_ColumnVarNameInTable="columnStock" msprop:Generator_ColumnPropNameInRow="Stock" msprop:Generator_ColumnPropNameInTable="StockColumn" msprop:Generator_UserColumnName="Stock" type="xs:double" minOccurs="0" />
               <xs:element name="Inventario" msprop:Generator_ColumnVarNameInTable="columnInventario" msprop:Generator_ColumnPropNameInRow="Inventario" msprop:Generator_ColumnPropNameInTable="InventarioColumn" msprop:Generator_UserColumnName="Inventario" type="xs:double" minOccurs="0" />
               <xs:element name="Empresa" msprop:Generator_ColumnVarNameInTable="columnEmpresa" msprop:Generator_ColumnPropNameInRow="Empresa" msprop:Generator_ColumnPropNameInTable="EmpresaColumn" msprop:Generator_UserColumnName="Empresa" type="xs:string" minOccurs="0" />
+              <xs:element name="Lote" msprop:Generator_ColumnVarNameInTable="columnLote" msprop:Generator_ColumnPropNameInRow="Lote" msprop:Generator_ColumnPropNameInTable="LoteColumn" msprop:Generator_UserColumnName="Lote" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

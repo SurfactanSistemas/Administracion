@@ -27,12 +27,14 @@ Partial Class DiferenciaInventarioPT
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ckSoloInventariados = New System.Windows.Forms.CheckBox()
         Me.rbImpresora = New System.Windows.Forms.RadioButton()
         Me.rbPantalla = New System.Windows.Forms.RadioButton()
         Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.ckAbiertoPorLotes = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -60,7 +62,7 @@ Partial Class DiferenciaInventarioPT
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(92, 161)
+        Me.btnAceptar.Location = New System.Drawing.Point(92, 191)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(82, 36)
         Me.btnAceptar.TabIndex = 4
@@ -69,7 +71,7 @@ Partial Class DiferenciaInventarioPT
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(199, 161)
+        Me.btnCerrar.Location = New System.Drawing.Point(199, 191)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(82, 36)
         Me.btnCerrar.TabIndex = 4
@@ -78,6 +80,8 @@ Partial Class DiferenciaInventarioPT
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.ckAbiertoPorLotes)
+        Me.GroupBox2.Controls.Add(Me.ckSoloInventariados)
         Me.GroupBox2.Controls.Add(Me.rbImpresora)
         Me.GroupBox2.Controls.Add(Me.rbPantalla)
         Me.GroupBox2.Controls.Add(Me.txtHasta)
@@ -86,10 +90,20 @@ Partial Class DiferenciaInventarioPT
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Location = New System.Drawing.Point(10, 53)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(353, 98)
+        Me.GroupBox2.Size = New System.Drawing.Size(353, 132)
         Me.GroupBox2.TabIndex = 6
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Listado"
+        '
+        'ckSoloInventariados
+        '
+        Me.ckSoloInventariados.AutoSize = True
+        Me.ckSoloInventariados.Location = New System.Drawing.Point(24, 95)
+        Me.ckSoloInventariados.Name = "ckSoloInventariados"
+        Me.ckSoloInventariados.Size = New System.Drawing.Size(191, 17)
+        Me.ckSoloInventariados.TabIndex = 3
+        Me.ckSoloInventariados.Text = "Únicamente aquellos inventariados"
+        Me.ckSoloInventariados.UseVisualStyleBackColor = True
         '
         'rbImpresora
         '
@@ -151,11 +165,21 @@ Partial Class DiferenciaInventarioPT
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Desde Terminado"
         '
+        'ckAbiertoPorLotes
+        '
+        Me.ckAbiertoPorLotes.AutoSize = True
+        Me.ckAbiertoPorLotes.Location = New System.Drawing.Point(232, 95)
+        Me.ckAbiertoPorLotes.Name = "ckAbiertoPorLotes"
+        Me.ckAbiertoPorLotes.Size = New System.Drawing.Size(106, 17)
+        Me.ckAbiertoPorLotes.TabIndex = 3
+        Me.ckAbiertoPorLotes.Text = "Abierto por Lotes"
+        Me.ckAbiertoPorLotes.UseVisualStyleBackColor = True
+        '
         'DiferenciaInventarioPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(373, 205)
+        Me.ClientSize = New System.Drawing.Size(373, 232)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnAceptar)
@@ -180,4 +204,6 @@ Partial Class DiferenciaInventarioPT
     Friend WithEvents txtDesde As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents ckSoloInventariados As System.Windows.Forms.CheckBox
+    Friend WithEvents ckAbiertoPorLotes As System.Windows.Forms.CheckBox
 End Class

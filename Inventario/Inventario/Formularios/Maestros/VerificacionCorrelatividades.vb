@@ -14,7 +14,7 @@ Public Class VerificacionCorrelatividades
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Producto = CASE Tipo WHEN 'T' THEN Terminado ELSE Articulo END, ISNULL(Talon, 0) Talon FROM Inventario ORDER BY Talon")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Numero As Movimiento, Producto = CASE Tipo WHEN 'T' THEN Terminado ELSE Articulo END, ISNULL(Talon, 0) Talon, ISNULL(Observaciones, '') Obs FROM Inventario ORDER BY Talon")
         Dim dr As SqlDataReader
         Dim tabla As New DataTable
 
@@ -51,6 +51,8 @@ Public Class VerificacionCorrelatividades
                         .Item("Estado") = IIf(WNumero = tabla.Rows(i2).Item("Talon"), "", "FALTANTE")
                         .Item("Producto") = IIf(WNumero = tabla.Rows(i2).Item("Talon"), tabla.Rows(i2).Item("Producto"), "")
                         .Item("Empresa") = IIf(Helper._EsPellital, "PELLITAL", "SURFACTAN")
+                        .Item("Observaciones") = IIf(WNumero = tabla.Rows(i2).Item("Talon"), tabla.Rows(i2).Item("Obs"), "")
+                        .Item("Movimiento") = IIf(WNumero = tabla.Rows(i2).Item("Talon"), tabla.Rows(i2).Item("Movimiento"), "")
 
                     End With
 

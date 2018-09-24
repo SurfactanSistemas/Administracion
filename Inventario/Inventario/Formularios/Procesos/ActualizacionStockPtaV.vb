@@ -179,7 +179,7 @@ Public Class ActualizacionStockPtaV : Implements IClaveAutorizacion
                             '
                             Dim WGuia As DataRow = _BuscarGuiaArticulo(WArticulo, WLote)
 
-                            If Not IsNothing(WGuia) Then
+                            If Not IsNothing(WGuia) And Val(WLote) <> 0 Then
 
                                 With WGuia
                                     Dim WClave = .Item("Clave")
@@ -193,6 +193,21 @@ Public Class ActualizacionStockPtaV : Implements IClaveAutorizacion
                             End If
 
                         End If
+
+                    End If
+
+                    If WLote = 0 Then
+
+                        Dim WGuia As DataRow = GetSingle("SELECT Clave, ISNULL(Saldo, 0) Saldo, ISNULL(Cantidad, 0) Cantidad FROM Guia WHERE Articulo = '" & WArticulo & "' AND UPPER(Movi) = 'E' ORDER BY FechaOrd DESC", Conexion.EmpresaDeTrabajo)
+
+                        With WGuia
+                            Dim WClave = .Item("Clave")
+                            Dim WCant = Helper.formatonumerico(.Item("Cantidad") + WCantidad)
+                            Dim WSaldo = Helper.formatonumerico(.Item("Saldo") + WCantidad)
+
+                            cm.CommandText = String.Format("UPDATE Guia SET Cantidad = {0}, Saldo = {1}, Marca = '' WHERE Clave = '{2}'", WCant, WSaldo, WClave)
+                            cm.ExecuteNonQuery()
+                        End With
 
                     End If
 

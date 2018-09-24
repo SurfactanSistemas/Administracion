@@ -8,7 +8,7 @@ Public Class VerificacionTalonesDuplicados
     End Sub
 
     Private Sub VerificacionCorrelatividades_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        rbTodos.Checked = True
+        rbSoloDuplicados.Checked = True
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click

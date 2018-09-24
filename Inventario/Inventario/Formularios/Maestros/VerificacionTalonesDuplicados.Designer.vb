@@ -86,22 +86,22 @@ Partial Class VerificacionTalonesDuplicados
         'rbSoloDuplicados
         '
         Me.rbSoloDuplicados.AutoSize = True
+        Me.rbSoloDuplicados.Checked = True
         Me.rbSoloDuplicados.Location = New System.Drawing.Point(196, 23)
         Me.rbSoloDuplicados.Name = "rbSoloDuplicados"
         Me.rbSoloDuplicados.Size = New System.Drawing.Size(102, 17)
         Me.rbSoloDuplicados.TabIndex = 0
+        Me.rbSoloDuplicados.TabStop = True
         Me.rbSoloDuplicados.Text = "Sólo Duplicados"
         Me.rbSoloDuplicados.UseVisualStyleBackColor = True
         '
         'rbTodos
         '
         Me.rbTodos.AutoSize = True
-        Me.rbTodos.Checked = True
         Me.rbTodos.Location = New System.Drawing.Point(66, 23)
         Me.rbTodos.Name = "rbTodos"
         Me.rbTodos.Size = New System.Drawing.Size(55, 17)
         Me.rbTodos.TabIndex = 0
-        Me.rbTodos.TabStop = True
         Me.rbTodos.Text = "Todos"
         Me.rbTodos.UseVisualStyleBackColor = True
         '

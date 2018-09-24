@@ -34,6 +34,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.ckSoloInventariado = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -61,7 +62,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(93, 190)
+        Me.btnAceptar.Location = New System.Drawing.Point(93, 198)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(82, 36)
         Me.btnAceptar.TabIndex = 4
@@ -70,7 +71,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(200, 190)
+        Me.btnCerrar.Location = New System.Drawing.Point(200, 198)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(82, 36)
         Me.btnCerrar.TabIndex = 4
@@ -79,13 +80,14 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(35, 164)
+        Me.ProgressBar1.Location = New System.Drawing.Point(35, 178)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(304, 13)
         Me.ProgressBar1.TabIndex = 5
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.ckSoloInventariado)
         Me.GroupBox2.Controls.Add(Me.rbImpresora)
         Me.GroupBox2.Controls.Add(Me.rbPantalla)
         Me.GroupBox2.Controls.Add(Me.txtHasta)
@@ -94,7 +96,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Location = New System.Drawing.Point(8, 61)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(359, 98)
+        Me.GroupBox2.Size = New System.Drawing.Size(359, 110)
         Me.GroupBox2.TabIndex = 6
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Listado"
@@ -102,7 +104,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         'rbImpresora
         '
         Me.rbImpresora.AutoSize = True
-        Me.rbImpresora.Location = New System.Drawing.Point(246, 58)
+        Me.rbImpresora.Location = New System.Drawing.Point(246, 55)
         Me.rbImpresora.Name = "rbImpresora"
         Me.rbImpresora.Size = New System.Drawing.Size(71, 17)
         Me.rbImpresora.TabIndex = 2
@@ -113,7 +115,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         Me.rbPantalla.AutoSize = True
         Me.rbPantalla.Checked = True
-        Me.rbPantalla.Location = New System.Drawing.Point(246, 28)
+        Me.rbPantalla.Location = New System.Drawing.Point(246, 25)
         Me.rbPantalla.Name = "rbPantalla"
         Me.rbPantalla.Size = New System.Drawing.Size(63, 17)
         Me.rbPantalla.TabIndex = 2
@@ -123,7 +125,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         'txtHasta
         '
-        Me.txtHasta.Location = New System.Drawing.Point(114, 56)
+        Me.txtHasta.Location = New System.Drawing.Point(114, 53)
         Me.txtHasta.Mask = "AA-000-000"
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -133,7 +135,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(114, 26)
+        Me.txtDesde.Location = New System.Drawing.Point(114, 23)
         Me.txtDesde.Mask = "AA-000-000"
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -144,7 +146,7 @@ Partial Class DiferenciaInventarioMPStockAnterior
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(17, 60)
+        Me.Label3.Location = New System.Drawing.Point(17, 57)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(73, 13)
         Me.Label3.TabIndex = 0
@@ -153,11 +155,21 @@ Partial Class DiferenciaInventarioMPStockAnterior
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(14, 30)
+        Me.Label2.Location = New System.Drawing.Point(14, 27)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(76, 13)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Desde Articulo"
+        '
+        'ckSoloInventariado
+        '
+        Me.ckSoloInventariado.AutoSize = True
+        Me.ckSoloInventariado.Location = New System.Drawing.Point(86, 81)
+        Me.ckSoloInventariado.Name = "ckSoloInventariado"
+        Me.ckSoloInventariado.Size = New System.Drawing.Size(249, 17)
+        Me.ckSoloInventariado.TabIndex = 3
+        Me.ckSoloInventariado.Text = "Únicamente aquellos cargados en Inventariado"
+        Me.ckSoloInventariado.UseVisualStyleBackColor = True
         '
         'DiferenciaInventarioMPStockAnterior
         '
@@ -190,4 +202,5 @@ Partial Class DiferenciaInventarioMPStockAnterior
     Friend WithEvents txtDesde As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents ckSoloInventariado As System.Windows.Forms.CheckBox
 End Class

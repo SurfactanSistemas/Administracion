@@ -180,17 +180,17 @@ Public Class IngresoTalonInventario
     Private Sub dgvTalones_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvTalones.RowHeaderMouseDoubleClick
         If e.RowIndex < 0 Then Exit Sub
 
-        If MsgBox("¿Está seguro de eliminar la fila seleccionada?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+        If MsgBox("¿Está seguro de anular la fila seleccionada?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
 
-        With dgvTalones
+        With dgvTalones.Rows(e.RowIndex)
 
-            .Rows.Remove(.Rows(e.RowIndex))
-
-            Dim I = IIf(.Rows.Count < 1, .Rows.Add, .Rows.Count - 1)
-
-            .CurrentCell = .Rows(I).Cells("Talon")
-
-            .Focus()
+            .Cells("Articulo").Value = "  -   -   "
+            .Cells("Terminado").Value = "  -     -   "
+            .Cells("Descripcion").Value = ""
+            .Cells("Ubicacion").Value = ""
+            .Cells("Observaciones").Value = "ANULADO"
+            .Cells("Lote").Value = 0
+            .Cells("Cantidad").Value = 0
 
         End With
 
@@ -241,7 +241,7 @@ Public Class IngresoTalonInventario
                     Select Case UCase(WTipo.Trim)
                         Case "M"
 
-                            If WArticulo.Replace("-", "").Trim = "" Or Not _ExisteArticulo(WArticulo) Then
+                            If WArticulo.Replace("-", "").Trim <> "" And Not _ExisteArticulo(WArticulo) Then
                                 Throw New Exception("Debe especificarse el Artículo en el talón " & WTalon)
                             End If
 
@@ -255,7 +255,7 @@ Public Class IngresoTalonInventario
 
                                 WPartida = WLote
 
-                                cm.CommandText = "SELECT Laudo FROM Laudo WHERE Codigo  = '" & WArticulo & "' AND PartiOri = '" & WLote & "'"
+                                cm.CommandText = "SELECT Laudo FROM Laudo WHERE Articulo  = '" & WArticulo & "' AND PartiOri = '" & WLote & "'"
 
                                 Using dr2 = cm.ExecuteReader
 
@@ -286,7 +286,7 @@ Public Class IngresoTalonInventario
 
                         Case "T"
 
-                            If WTerminado.Replace("-", "").Trim = "" Or Not _ExisteTerminado(WTerminado) Then
+                            If WTerminado.Replace("-", "").Trim <> "" And Not _ExisteTerminado(WTerminado) Then
                                 Throw New Exception("Debe especificarse el Producto Terminado en el talón " & WTalon)
                             End If
 
@@ -304,22 +304,24 @@ Public Class IngresoTalonInventario
                         Throw New Exception("Debe especificarse el la cantidad del Producto en el talón " & WTalon)
                     End If
 
-                    If WTipo = "M" Then
+                    If WArticulo.Replace("-", "").Trim <> "" Or WTerminado.Replace("-", "").Trim <> "" Then
+                        If WTipo = "M" And Val(WLote) <> 0 Then
 
-                        If Not _ExisteLaudo(WArticulo, WLote) Then
-                            Throw New Exception("Debe especificarse un Lote válido para el Articulo en el talón " & WTalon)
+                            If Not _ExisteLaudo(WArticulo, WLote) Then
+                                Throw New Exception("Debe especificarse un Lote válido para el Articulo en el talón " & WTalon)
+                            End If
+
+                        ElseIf WTipo = "T" And Val(WLote) <> 0 Then
+
+                            If Not _ExisteHoja(WTerminado, WLote) Then
+                                Throw New Exception("Debe especificarse un Lote válido para el Producto Terminado en el talón " & WTalon)
+                            End If
+
+                            'If _CantidadSuperaTotalOriginal(WTerminado, WLote, WCantidad) Then
+                            '    Throw New Exception("La cantidad ingresada supera a la cantidad registrada en la Hoja del Producto indicado en el Talón " & WTalon & " .")
+                            'End If
+
                         End If
-
-                    ElseIf WTipo = "T" Then
-
-                        If Not _ExisteHoja(WTerminado, WLote) Then
-                            Throw New Exception("Debe especificarse un Lote válido para el Producto Terminado en el talón " & WTalon)
-                        End If
-
-                        If _CantidadSuperaTotalOriginal(WTerminado, WLote, WCantidad) Then
-                            Throw New Exception("La cantidad ingresada supera a la cantidad registrada en la Hoja del Producto indicado en el Talón " & WTalon & " .")
-                        End If
-
                     End If
 
                     WUbicacion = Trim(WUbicacion)
@@ -371,62 +373,87 @@ Public Class IngresoTalonInventario
 
     Private Function _ExisteHoja(ByVal wTerminado As String, ByVal wLote As String) As Boolean
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Hoja FROM Hoja WHERE Hoja = '" & wLote & "' AND Producto = '" & wTerminado & "' ")
-        Dim dr As SqlDataReader
-
         Try
 
-            For Each emp As String In Conexion.Empresas
+            For Each e As String In {"SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+                Dim WTer As DataRow = GetSingle("SELECT ISNULL(Controla, 0) Controla FROM Terminado WHERE COdigo = '" & wTerminado & "'", e)
 
-                If cn.IsOpened Then cn.Close()
+                If Not IsNothing(WTer) Then
 
-                cn.ConnectionString = Helper._ConectarA(emp)
-                cn.Open()
-                cm.Connection = cn
+                    If Val(WTer.Item("Controla")) = 0 Then
 
-                dr = cm.ExecuteReader()
+                        Dim WHoja As DataRow = GetSingle("SELECT Hoja FROM Hoja WHERE Producto = '" & wTerminado & "' AND Hoja = '" & wLote & "' And Renglon = '1'", e)
 
-                If dr.HasRows Then
-                    Return True
+                        If IsNothing(WHoja) Then
+
+                            Dim WGuia As DataRow = GetSingle("SELECT Clave FROM Guia WHERE Terminado = '" & wTerminado & "' AND Lote = '" & wLote & "'", e)
+
+                            If Not IsNothing(WGuia) Then
+                                Return True
+                            End If
+
+                        Else
+                            Return True
+                        End If
+
+                    End If
+
                 End If
-
             Next
 
             Return False
 
         Catch ex As Exception
             Throw New Exception("Hubo un problema al querer consultar la existencia del Laudo " & wLote & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
         End Try
     End Function
 
     Private Function _ExisteLaudo(ByVal wArticulo As String, ByVal wLote As String) As Boolean
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Laudo FROM Laudo WHERE Laudo = '" & wLote & "' AND Articulo = '" & wArticulo & "' ")
-        Dim dr As SqlDataReader
-
         Try
 
-            For Each emp As String In Conexion.Empresas
+            For Each e As String In {"SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+                If {"DY", "DW", "DS"}.Contains(wArticulo.Substring(0, 2).ToUpper) And Conexion.EmpresaDeTrabajo.ToUpper <> "PELLITAL_III" Then
 
-                If cn.IsOpened Then cn.Close()
+                    Dim WLaudo As DataRow = Query.GetSingle("SELECT Laudo FROM Laudo WHERE Articulo = '" & wArticulo & "' AND PartiOri = '" & wLote & "'", e)
 
-                cn.ConnectionString = Helper._ConectarA(emp)
-                cn.Open()
-                cm.Connection = cn
+                    If IsNothing(WLaudo) Then
 
-                dr = cm.ExecuteReader()
+                        Dim WGuia As DataRow = GetSingle("SELECT Clave FROM Guia WHERE Articulo = '" & wArticulo & "' And PartiOri = '" & wLote & "'", e)
 
-                If dr.HasRows Then
+                        If Not IsNothing(WGuia) Then
+                            Return True
+                        End If
+
+                    End If
+
                     Return True
+
+                Else
+
+                    Dim WArt As DataRow = GetSingle("SELECT ISNULL(Controla, 0) Controla FROM Articulo WHERE Codigo = '" & wArticulo & "'", e)
+
+                    If Not IsNothing(WArt) Then
+
+                        If Val(WArt.Item("Controla")) = 0 Then
+
+                            Dim WLaudo As DataRow = GetSingle("SELECT Laudo FROM Laudo WHERE Articulo = '" & wArticulo & "' AND Laudo = '" & wLote & "'", e)
+
+                            If IsNothing(WLaudo) Then
+
+                                Dim WGuia As DataRow = GetSingle("SELECT Clave FROM Guia WHERE Articulo = '" & wArticulo & "' AND Lote = '" & wLote & "'", e)
+
+                                If Not IsNothing(WGuia) Then
+                                    Return True
+                                End If
+                            Else
+                                Return True
+                            End If
+
+                        End If
+
+                    End If
+
                 End If
 
             Next
@@ -435,13 +462,6 @@ Public Class IngresoTalonInventario
 
         Catch ex As Exception
             Throw New Exception("Hubo un problema al querer consultar la existencia del Laudo " & wLote & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
         End Try
 
     End Function
@@ -565,7 +585,7 @@ Public Class IngresoTalonInventario
                 ' Limitamos los caracteres permitidos para cada una de las columnas.
 
                 Select Case iCol
-                    Case 0, 5
+                    Case 0
                         If Not _EsNumeroOControl(keyData) Then
                             Return True
                         End If
@@ -610,39 +630,41 @@ Public Class IngresoTalonInventario
                             End If
 
                         Case 5
-                            If Val(valor) = 0 Then Return True
+                            If Val(valor) <> 0 Then
 
-                            Dim WTipo As String = If(.CurrentRow.Cells("Tipo").Value, "")
-                            Dim WArticulo As String = If(.CurrentRow.Cells("Articulo").Value, "")
-                            Dim WTerminado As String = If(.CurrentRow.Cells("Terminado").Value, "")
+                                Dim WTipo As String = If(.CurrentRow.Cells("Tipo").Value, "")
+                                Dim WArticulo As String = If(.CurrentRow.Cells("Articulo").Value, "")
+                                Dim WTerminado As String = If(.CurrentRow.Cells("Terminado").Value, "")
 
-                            If UCase(WTipo) = "M" Then
-                                If Not _ExisteLaudo(WArticulo, valor) Then
-                                    MsgBox("El Lote ingresado no se corresponde con el Producto que informo anteriormente.")
-                                    Return True
+                                If UCase(WTipo) = "M" Then
+                                    If Not _ExisteLaudo(WArticulo, valor) Then
+                                        MsgBox("El Lote ingresado no se corresponde con el Producto que informo anteriormente.")
+                                        Return True
+                                    End If
+                                Else
+                                    If Not _ExisteHoja(WTerminado, valor) Then
+                                        MsgBox("El Lote ingresado no se corresponde con el Producto que informo anteriormente.")
+                                        Return True
+                                    End If
                                 End If
-                            Else
-                                If Not _ExisteHoja(WTerminado, valor) Then
-                                    MsgBox("El Lote ingresado no se corresponde con el Producto que informo anteriormente.")
-                                    Return True
-                                End If
+
                             End If
 
                         Case 6
                             If Val(valor) < 0 Then Return True
-                            Dim WTipo As String = If(.CurrentRow.Cells("Tipo").Value, "")
+                            'Dim WTipo As String = If(.CurrentRow.Cells("Tipo").Value, "")
 
-                            If WTipo = "T" Then
+                            'If WTipo = "T" Then
 
-                                Dim WTerminado As String = If(.CurrentRow.Cells("Terminado").Value, "")
-                                Dim WLote As String = If(.CurrentRow.Cells("Lote").Value, "")
+                            '    Dim WTerminado As String = If(.CurrentRow.Cells("Terminado").Value, "")
+                            '    Dim WLote As String = If(.CurrentRow.Cells("Lote").Value, "")
 
-                                If _CantidadSuperaTotalOriginal(WTerminado, WLote, valor) Then
-                                    MsgBox("La cantidad ingresada supera a la cantidad registrada en la Hoja del Producto indicada.")
-                                    Return True
-                                End If
+                            '    If _CantidadSuperaTotalOriginal(WTerminado, WLote, valor) Then
+                            '        MsgBox("La cantidad ingresada supera a la cantidad registrada en la Hoja del Producto indicada.")
+                            '        Return True
+                            '    End If
 
-                            End If
+                            'End If
                             .CurrentCell.Value = Helper.formatonumerico(valor)
 
                     End Select

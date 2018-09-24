@@ -41,8 +41,6 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -51,6 +49,7 @@ Partial Class MenuPrincipal
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CierreStockPtaVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActualizaciónStockPtaVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -190,7 +189,7 @@ Partial Class MenuPrincipal
         '
         'ListadosToolStripMenuItem
         '
-        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecuentoDeToolStripMenuItem, Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem, Me.ToolStripMenuItem2, Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem, Me.ToolStripMenuItem3, Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem, Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem})
+        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecuentoDeToolStripMenuItem, Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem, Me.ToolStripMenuItem2, Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem, Me.ToolStripMenuItem3})
         Me.ListadosToolStripMenuItem.Name = "ListadosToolStripMenuItem"
         Me.ListadosToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ListadosToolStripMenuItem.Text = "Listados"
@@ -198,48 +197,36 @@ Partial Class MenuPrincipal
         'RecuentoDeToolStripMenuItem
         '
         Me.RecuentoDeToolStripMenuItem.Name = "RecuentoDeToolStripMenuItem"
-        Me.RecuentoDeToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
+        Me.RecuentoDeToolStripMenuItem.Size = New System.Drawing.Size(327, 22)
         Me.RecuentoDeToolStripMenuItem.Text = "Recuento de Inventario de Materia Prima"
         '
         'RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem
         '
         Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem.Name = "RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem"
-        Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
+        Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem.Size = New System.Drawing.Size(327, 22)
         Me.RecuentoDeInventarioDeProductoTerminadoToolStripMenuItem.Text = "Recuento de Inventario de Producto Terminado"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(442, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(327, 22)
         Me.ToolStripMenuItem2.Text = "Diferencia de Inventario de Materia Prima"
         '
         'DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem
         '
         Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Name = "DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem"
-        Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
+        Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Size = New System.Drawing.Size(327, 22)
         Me.DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem.Text = "Diferencia de Inventario de Producto Terminado"
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(442, 22)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(327, 22)
         Me.ToolStripMenuItem3.Text = "Articulo/Producto Terminado con Lote = 0"
-        '
-        'DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem
-        '
-        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Name = "DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem"
-        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
-        Me.DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem.Text = "Diferencia de Inventario de Materia Prima contra Stock Anterior"
-        '
-        'DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem
-        '
-        Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem.Name = "DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem"
-        Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem.Size = New System.Drawing.Size(442, 22)
-        Me.DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem.Text = "Diferencia de Inventario de Producto Terminado contra Stock Anterior"
         '
         'ProcesosToolStripMenuItem
         '
-        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem4, Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem, Me.ToolStripMenuItem5, Me.ActualizaciónDeStockToolStripMenuItem, Me.CerrarSistemaToolStripMenuItem, Me.CierreStockPtaVToolStripMenuItem, Me.ActualizaciónStockPtaVToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem4, Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem, Me.ToolStripMenuItem5, Me.ActualizaciónDeStockToolStripMenuItem, Me.CerrarSistemaToolStripMenuItem, Me.CierreStockPtaVToolStripMenuItem, Me.ActualizaciónStockPtaVToolStripMenuItem, Me.ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem})
         Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
         Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.ProcesosToolStripMenuItem.Text = "Procesos"
@@ -247,44 +234,50 @@ Partial Class MenuPrincipal
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(301, 22)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(373, 22)
         Me.ToolStripMenuItem4.Text = "Limpiar Carga de Inventario"
         '
         'ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem
         '
         Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Name = "ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem"
-        Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
+        Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Size = New System.Drawing.Size(373, 22)
         Me.ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem.Text = "Control de Marca de Lote / Control de Lote"
         '
         'ToolStripMenuItem5
         '
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(301, 22)
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(373, 22)
         Me.ToolStripMenuItem5.Text = "Cierre de Stock"
         '
         'ActualizaciónDeStockToolStripMenuItem
         '
         Me.ActualizaciónDeStockToolStripMenuItem.Name = "ActualizaciónDeStockToolStripMenuItem"
-        Me.ActualizaciónDeStockToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
+        Me.ActualizaciónDeStockToolStripMenuItem.Size = New System.Drawing.Size(373, 22)
         Me.ActualizaciónDeStockToolStripMenuItem.Text = "Actualización de Stock"
         '
         'CerrarSistemaToolStripMenuItem
         '
         Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
-        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
+        Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(373, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
         '
         'CierreStockPtaVToolStripMenuItem
         '
         Me.CierreStockPtaVToolStripMenuItem.Name = "CierreStockPtaVToolStripMenuItem"
-        Me.CierreStockPtaVToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
+        Me.CierreStockPtaVToolStripMenuItem.Size = New System.Drawing.Size(373, 22)
         Me.CierreStockPtaVToolStripMenuItem.Text = "Cierre Stock (Pta V)"
         '
         'ActualizaciónStockPtaVToolStripMenuItem
         '
         Me.ActualizaciónStockPtaVToolStripMenuItem.Name = "ActualizaciónStockPtaVToolStripMenuItem"
-        Me.ActualizaciónStockPtaVToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
+        Me.ActualizaciónStockPtaVToolStripMenuItem.Size = New System.Drawing.Size(373, 22)
         Me.ActualizaciónStockPtaVToolStripMenuItem.Text = "Actualización Stock (Pta V)"
+        '
+        'ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem
+        '
+        Me.ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem.Name = "ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem"
+        Me.ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem.Size = New System.Drawing.Size(373, 22)
+        Me.ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem.Text = "Actualizacion de Stock por Ajuste de Movimientos Varios"
         '
         'MenuPrincipal
         '
@@ -329,13 +322,12 @@ Partial Class MenuPrincipal
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DiferenciaDeInventarioDeProductoTerminadoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DiferenciaDeInventarioDeMateriaPrimaContraStockAnteriorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DiferenciaDeInventarioDeProductoTerminadoContraStockAnteriorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ControlDeMarcaDeLoteControlDeLoteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ActualizaciónDeStockToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CierreStockPtaVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ActualizaciónStockPtaVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ActualizacionDeStockPorAjusteDeMovimientosVariosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
