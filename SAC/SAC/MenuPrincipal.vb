@@ -29,4 +29,8 @@
     Private Sub ResponsablesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ResponsablesToolStripMenuItem.Click
         Abrir(New ListadoResponsablesSAC)
     End Sub
+
+    Private Sub CentrosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CentrosToolStripMenuItem.Click
+        Abrir(New ListadoCentros)
+    End Sub
 End Class

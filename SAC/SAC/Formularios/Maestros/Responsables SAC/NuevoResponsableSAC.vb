@@ -1,4 +1,4 @@
-﻿Public Class NuevoResponsableSAC
+﻿Public Class NuevoResponsableSac
 
     Sub New(Optional ByVal WCodigo As Object = Nothing)
 

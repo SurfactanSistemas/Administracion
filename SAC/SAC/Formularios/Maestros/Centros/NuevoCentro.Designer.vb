@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class NuevoResponsableSac
+Partial Class NuevoCentro
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,6 +22,7 @@ Partial Class NuevoResponsableSac
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -33,10 +34,11 @@ Partial Class NuevoResponsableSac
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.txtResponsable = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtClaveSegunridad = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblDescResponsable = New System.Windows.Forms.Label()
+        Me.btnConsultaResp = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -76,7 +78,7 @@ Partial Class NuevoResponsableSac
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(59, 69)
+        Me.Label3.Location = New System.Drawing.Point(65, 69)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(40, 13)
         Me.Label3.TabIndex = 2
@@ -84,7 +86,7 @@ Partial Class NuevoResponsableSac
         '
         'txtCodigo
         '
-        Me.txtCodigo.Location = New System.Drawing.Point(112, 66)
+        Me.txtCodigo.Location = New System.Drawing.Point(118, 66)
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(55, 20)
         Me.txtCodigo.TabIndex = 1
@@ -93,7 +95,7 @@ Partial Class NuevoResponsableSac
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(36, 100)
+        Me.Label4.Location = New System.Drawing.Point(42, 100)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(63, 13)
         Me.Label4.TabIndex = 4
@@ -101,7 +103,7 @@ Partial Class NuevoResponsableSac
         '
         'txtDescripcion
         '
-        Me.txtDescripcion.Location = New System.Drawing.Point(112, 96)
+        Me.txtDescripcion.Location = New System.Drawing.Point(118, 96)
         Me.txtDescripcion.MaxLength = 50
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.Size = New System.Drawing.Size(362, 20)
@@ -143,41 +145,51 @@ Partial Class NuevoResponsableSac
         Me.btnLimpiar.Text = "Limpiar"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'txtEmail
+        'txtResponsable
         '
-        Me.txtEmail.Location = New System.Drawing.Point(112, 130)
-        Me.txtEmail.MaxLength = 50
-        Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(154, 20)
-        Me.txtEmail.TabIndex = 3
+        Me.txtResponsable.Location = New System.Drawing.Point(146, 129)
+        Me.txtResponsable.MaxLength = 50
+        Me.txtResponsable.Name = "txtResponsable"
+        Me.txtResponsable.Size = New System.Drawing.Size(38, 20)
+        Me.txtResponsable.TabIndex = 3
+        Me.txtResponsable.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(67, 134)
+        Me.Label5.Location = New System.Drawing.Point(31, 133)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(32, 13)
+        Me.Label5.Size = New System.Drawing.Size(69, 13)
         Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Email"
+        Me.Label5.Text = "Responsable"
         '
-        'txtClaveSegunridad
+        'lblDescResponsable
         '
-        Me.txtClaveSegunridad.Location = New System.Drawing.Point(320, 129)
-        Me.txtClaveSegunridad.MaxLength = 10
-        Me.txtClaveSegunridad.Name = "txtClaveSegunridad"
-        Me.txtClaveSegunridad.Size = New System.Drawing.Size(154, 20)
-        Me.txtClaveSegunridad.TabIndex = 4
+        Me.lblDescResponsable.BackColor = System.Drawing.Color.Cyan
+        Me.lblDescResponsable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblDescResponsable.Location = New System.Drawing.Point(190, 129)
+        Me.lblDescResponsable.Name = "lblDescResponsable"
+        Me.lblDescResponsable.Size = New System.Drawing.Size(290, 21)
+        Me.lblDescResponsable.TabIndex = 4
+        Me.lblDescResponsable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label6
+        'btnConsultaResp
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(275, 133)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(34, 13)
-        Me.Label6.TabIndex = 4
-        Me.Label6.Text = "Clave"
+        Me.btnConsultaResp.BackgroundImage = Global.SAC.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsultaResp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsultaResp.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsultaResp.FlatAppearance.BorderSize = 0
+        Me.btnConsultaResp.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsultaResp.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsultaResp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsultaResp.Location = New System.Drawing.Point(118, 127)
+        Me.btnConsultaResp.Name = "btnConsultaResp"
+        Me.btnConsultaResp.Size = New System.Drawing.Size(26, 24)
+        Me.btnConsultaResp.TabIndex = 5
+        Me.ToolTip1.SetToolTip(Me.btnConsultaResp, "Abrir consulta de Responsables SAC")
+        Me.btnConsultaResp.UseVisualStyleBackColor = True
         '
-        'NuevoResponsableSAC
+        'NuevoCentro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -185,17 +197,19 @@ Partial Class NuevoResponsableSac
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnEliminar)
+        Me.Controls.Add(Me.btnConsultaResp)
         Me.Controls.Add(Me.btnGrabar)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.txtClaveSegunridad)
+        Me.Controls.Add(Me.lblDescResponsable)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.txtEmail)
+        Me.Controls.Add(Me.txtResponsable)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtDescripcion)
         Me.Controls.Add(Me.txtCodigo)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "NuevoResponsableSAC"
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "NuevoCentro"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
@@ -214,8 +228,9 @@ Partial Class NuevoResponsableSac
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
-    Friend WithEvents txtEmail As System.Windows.Forms.TextBox
+    Friend WithEvents txtResponsable As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents txtClaveSegunridad As System.Windows.Forms.TextBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents lblDescResponsable As System.Windows.Forms.Label
+    Friend WithEvents btnConsultaResp As System.Windows.Forms.Button
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

@@ -110,6 +110,12 @@
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
+    <Compile Include="Formularios\Ayudas\AyudaResponsablesSac.Designer.vb">
+      <DependentUpon>AyudaResponsablesSac.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaResponsablesSac.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\IngresoOrdenTrabajo.Designer.vb">
       <DependentUpon>IngresoOrdenTrabajo.vb</DependentUpon>
     </Compile>
@@ -120,6 +126,18 @@
       <DependentUpon>AnalisisDesarrollo.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\AnalisisDesarrollo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Centros\ListadoCentros.Designer.vb">
+      <DependentUpon>ListadoCentros.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Centros\ListadoCentros.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Centros\NuevoCentro.Designer.vb">
+      <DependentUpon>NuevoCentro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Centros\NuevoCentro.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.Designer.vb">
@@ -147,6 +165,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\IAyudaReponsableSac.vb" />
+    <Compile Include="Interfaces\INuevoCentro.vb" />
     <Compile Include="Interfaces\INuevoResponsableSac.vb" />
     <Compile Include="Interfaces\INuevoTipoSolicitud.vb" />
     <Compile Include="Login.designer.vb">
@@ -185,11 +205,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\Ayudas\AyudaResponsablesSac.resx">
+      <DependentUpon>AyudaResponsablesSac.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\IngresoOrdenTrabajo.resx">
       <DependentUpon>IngresoOrdenTrabajo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\AnalisisDesarrollo.resx">
       <DependentUpon>AnalisisDesarrollo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Centros\ListadoCentros.resx">
+      <DependentUpon>ListadoCentros.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Centros\NuevoCentro.resx">
+      <DependentUpon>NuevoCentro.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.resx">
       <DependentUpon>ListadoResponsableSAC.vb</DependentUpon>
