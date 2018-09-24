@@ -116,18 +116,6 @@
     <Compile Include="Formularios\Ayudas\AyudaResponsablesSac.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\IngresoOrdenTrabajo.Designer.vb">
-      <DependentUpon>IngresoOrdenTrabajo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\IngresoOrdenTrabajo.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\AnalisisDesarrollo.designer.vb">
-      <DependentUpon>AnalisisDesarrollo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\AnalisisDesarrollo.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Formularios\Maestros\Centros\ListadoCentros.Designer.vb">
       <DependentUpon>ListadoCentros.vb</DependentUpon>
     </Compile>
@@ -138,6 +126,12 @@
       <DependentUpon>NuevoCentro.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Maestros\Centros\NuevoCentro.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\IndiceGralSac.Designer.vb">
+      <DependentUpon>IndiceGralSac.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\IndiceGralSac.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.Designer.vb">
@@ -208,17 +202,14 @@
     <EmbeddedResource Include="Formularios\Ayudas\AyudaResponsablesSac.resx">
       <DependentUpon>AyudaResponsablesSac.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\IngresoOrdenTrabajo.resx">
-      <DependentUpon>IngresoOrdenTrabajo.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\AnalisisDesarrollo.resx">
-      <DependentUpon>AnalisisDesarrollo.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Centros\ListadoCentros.resx">
       <DependentUpon>ListadoCentros.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Centros\NuevoCentro.resx">
       <DependentUpon>NuevoCentro.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\IndiceGralSac.resx">
+      <DependentUpon>IndiceGralSac.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.resx">
       <DependentUpon>ListadoResponsableSAC.vb</DependentUpon>

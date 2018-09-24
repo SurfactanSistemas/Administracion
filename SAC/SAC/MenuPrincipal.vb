@@ -33,4 +33,8 @@
     Private Sub CentrosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CentrosToolStripMenuItem.Click
         Abrir(New ListadoCentros)
     End Sub
+
+    Private Sub IndiceGeneralDeAccionesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IndiceGeneralDeAccionesToolStripMenuItem.Click
+        Abrir(New IndiceGralSac)
+    End Sub
 End Class
