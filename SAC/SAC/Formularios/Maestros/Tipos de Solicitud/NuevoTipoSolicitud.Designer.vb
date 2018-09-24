@@ -98,6 +98,7 @@ Partial Class NuevoTipoSolicitud
         'txtDescripcion
         '
         Me.txtDescripcion.Location = New System.Drawing.Point(121, 96)
+        Me.txtDescripcion.MaxLength = 50
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.Size = New System.Drawing.Size(350, 20)
         Me.txtDescripcion.TabIndex = 3
