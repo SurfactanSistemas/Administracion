@@ -63,7 +63,7 @@
         If Trim(cuit) = "" Then
             Return False
         Else
-            Return Val(cuit) = 0 OrElse Proceso.CuitValido(cuit)
+            Return Val(cuit) = 0 OrElse Val(cuit) < 50000000 OrElse Proceso.CuitValido(cuit)
         End If
     End Function
 
