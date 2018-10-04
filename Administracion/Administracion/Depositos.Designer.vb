@@ -40,12 +40,13 @@ Partial Class Depositos
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
-        Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rbVentaCheques = New System.Windows.Forms.RadioButton()
+        Me.rbDepósito = New System.Windows.Forms.RadioButton()
         Me.btnEliminarFila = New System.Windows.Forms.Button()
         Me.lstSeleccion = New Administracion.CustomListBox()
+        Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtImporte = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel4 = New Administracion.CustomLabel()
@@ -59,6 +60,8 @@ Partial Class Depositos
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.lstFiltrado = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnChequeTerceros = New Administracion.CustomButton()
@@ -68,6 +71,7 @@ Partial Class Depositos
         CType(Me.gridCheques, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'gridCheques
@@ -103,6 +107,7 @@ Partial Class Depositos
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.gridCheques.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.gridCheques.RowHeadersWidth = 22
+        Me.gridCheques.ShowCellToolTips = False
         Me.gridCheques.Size = New System.Drawing.Size(446, 206)
         Me.gridCheques.StandardTab = True
         Me.gridCheques.TabIndex = 0
@@ -193,6 +198,7 @@ Partial Class Depositos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.GroupBox1)
         Me.Panel2.Controls.Add(Me.btnEliminarFila)
         Me.Panel2.Controls.Add(Me.lstSeleccion)
         Me.Panel2.Controls.Add(Me.txtFechaAcreditacion)
@@ -217,35 +223,39 @@ Partial Class Depositos
         Me.Panel2.Size = New System.Drawing.Size(772, 373)
         Me.Panel2.TabIndex = 18
         '
-        'txtFechaAcreditacion
+        'GroupBox1
         '
-        Me.txtFechaAcreditacion.Location = New System.Drawing.Point(139, 78)
-        Me.txtFechaAcreditacion.Mask = "00/00/0000"
-        Me.txtFechaAcreditacion.Name = "txtFechaAcreditacion"
-        Me.txtFechaAcreditacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaAcreditacion.Size = New System.Drawing.Size(75, 20)
-        Me.txtFechaAcreditacion.TabIndex = 18
-        Me.txtFechaAcreditacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtFechaAcreditacion.ValidatingType = GetType(Date)
+        Me.GroupBox1.Controls.Add(Me.rbVentaCheques)
+        Me.GroupBox1.Controls.Add(Me.rbDepósito)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox1.Location = New System.Drawing.Point(125, 92)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(329, 40)
+        Me.GroupBox1.TabIndex = 22
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Tipo Operación"
         '
-        'txtFecha
+        'rbVentaCheques
         '
-        Me.txtFecha.Location = New System.Drawing.Point(270, 24)
-        Me.txtFecha.Mask = "00/00/0000"
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFecha.Size = New System.Drawing.Size(100, 20)
-        Me.txtFecha.TabIndex = 17
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtFecha.ValidatingType = GetType(Date)
+        Me.rbVentaCheques.AutoSize = True
+        Me.rbVentaCheques.Location = New System.Drawing.Point(181, 15)
+        Me.rbVentaCheques.Name = "rbVentaCheques"
+        Me.rbVentaCheques.Size = New System.Drawing.Size(113, 17)
+        Me.rbVentaCheques.TabIndex = 0
+        Me.rbVentaCheques.Text = "Venta de Cheques"
+        Me.rbVentaCheques.UseVisualStyleBackColor = True
         '
-        'txtAyuda
+        'rbDepósito
         '
-        Me.txtAyuda.Location = New System.Drawing.Point(459, 9)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(304, 20)
-        Me.txtAyuda.TabIndex = 19
-        Me.txtAyuda.Visible = False
+        Me.rbDepósito.AutoSize = True
+        Me.rbDepósito.Checked = True
+        Me.rbDepósito.Location = New System.Drawing.Point(63, 15)
+        Me.rbDepósito.Name = "rbDepósito"
+        Me.rbDepósito.Size = New System.Drawing.Size(67, 17)
+        Me.rbDepósito.TabIndex = 0
+        Me.rbDepósito.TabStop = True
+        Me.rbDepósito.Text = "Depósito"
+        Me.rbDepósito.UseVisualStyleBackColor = True
         '
         'btnEliminarFila
         '
@@ -269,13 +279,35 @@ Partial Class Depositos
         Me.lstSeleccion.TabIndex = 14
         Me.lstSeleccion.Visible = False
         '
+        'txtFechaAcreditacion
+        '
+        Me.txtFechaAcreditacion.Location = New System.Drawing.Point(139, 65)
+        Me.txtFechaAcreditacion.Mask = "00/00/0000"
+        Me.txtFechaAcreditacion.Name = "txtFechaAcreditacion"
+        Me.txtFechaAcreditacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaAcreditacion.Size = New System.Drawing.Size(75, 20)
+        Me.txtFechaAcreditacion.TabIndex = 18
+        Me.txtFechaAcreditacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtFechaAcreditacion.ValidatingType = GetType(Date)
+        '
+        'txtFecha
+        '
+        Me.txtFecha.Location = New System.Drawing.Point(270, 11)
+        Me.txtFecha.Mask = "00/00/0000"
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFecha.Size = New System.Drawing.Size(100, 20)
+        Me.txtFecha.TabIndex = 17
+        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtFecha.ValidatingType = GetType(Date)
+        '
         'txtImporte
         '
         Me.txtImporte.Cleanable = True
         Me.txtImporte.Empty = False
         Me.txtImporte.EnterIndex = 5
         Me.txtImporte.LabelAssociationKey = 5
-        Me.txtImporte.Location = New System.Drawing.Point(281, 79)
+        Me.txtImporte.Location = New System.Drawing.Point(281, 65)
         Me.txtImporte.MaxLength = 10
         Me.txtImporte.Name = "txtImporte"
         Me.txtImporte.Size = New System.Drawing.Size(89, 20)
@@ -289,7 +321,7 @@ Partial Class Depositos
         Me.CustomLabel3.ControlAssociationKey = 1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(15, 24)
+        Me.CustomLabel3.Location = New System.Drawing.Point(15, 12)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(94, 18)
         Me.CustomLabel3.TabIndex = 3
@@ -301,7 +333,7 @@ Partial Class Depositos
         Me.CustomLabel4.ControlAssociationKey = 3
         Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(15, 54)
+        Me.CustomLabel4.Location = New System.Drawing.Point(15, 39)
         Me.CustomLabel4.Name = "CustomLabel4"
         Me.CustomLabel4.Size = New System.Drawing.Size(45, 18)
         Me.CustomLabel4.TabIndex = 4
@@ -313,7 +345,7 @@ Partial Class Depositos
         Me.CustomLabel7.ControlAssociationKey = 5
         Me.CustomLabel7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel7.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel7.Location = New System.Drawing.Point(220, 80)
+        Me.CustomLabel7.Location = New System.Drawing.Point(220, 66)
         Me.CustomLabel7.Name = "CustomLabel7"
         Me.CustomLabel7.Size = New System.Drawing.Size(58, 18)
         Me.CustomLabel7.TabIndex = 15
@@ -325,7 +357,7 @@ Partial Class Depositos
         Me.CustomLabel5.ControlAssociationKey = 4
         Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(12, 80)
+        Me.CustomLabel5.Location = New System.Drawing.Point(12, 66)
         Me.CustomLabel5.Name = "CustomLabel5"
         Me.CustomLabel5.Size = New System.Drawing.Size(125, 18)
         Me.CustomLabel5.TabIndex = 5
@@ -348,7 +380,7 @@ Partial Class Depositos
         Me.txtCodigoBanco.Empty = False
         Me.txtCodigoBanco.EnterIndex = 3
         Me.txtCodigoBanco.LabelAssociationKey = 3
-        Me.txtCodigoBanco.Location = New System.Drawing.Point(63, 53)
+        Me.txtCodigoBanco.Location = New System.Drawing.Point(63, 38)
         Me.txtCodigoBanco.MaxLength = 5
         Me.txtCodigoBanco.Name = "txtCodigoBanco"
         Me.txtCodigoBanco.Size = New System.Drawing.Size(71, 20)
@@ -375,7 +407,7 @@ Partial Class Depositos
         Me.txtNroDeposito.Empty = False
         Me.txtNroDeposito.EnterIndex = 1
         Me.txtNroDeposito.LabelAssociationKey = 1
-        Me.txtNroDeposito.Location = New System.Drawing.Point(115, 23)
+        Me.txtNroDeposito.Location = New System.Drawing.Point(115, 11)
         Me.txtNroDeposito.MaxLength = 6
         Me.txtNroDeposito.Name = "txtNroDeposito"
         Me.txtNroDeposito.Size = New System.Drawing.Size(96, 20)
@@ -390,7 +422,7 @@ Partial Class Depositos
         Me.txtDescripcionBanco.Enabled = False
         Me.txtDescripcionBanco.EnterIndex = -1
         Me.txtDescripcionBanco.LabelAssociationKey = 3
-        Me.txtDescripcionBanco.Location = New System.Drawing.Point(140, 53)
+        Me.txtDescripcionBanco.Location = New System.Drawing.Point(140, 38)
         Me.txtDescripcionBanco.MaxLength = 50
         Me.txtDescripcionBanco.Name = "txtDescripcionBanco"
         Me.txtDescripcionBanco.Size = New System.Drawing.Size(230, 20)
@@ -404,7 +436,7 @@ Partial Class Depositos
         Me.CustomLabel6.ControlAssociationKey = 2
         Me.CustomLabel6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel6.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel6.Location = New System.Drawing.Point(220, 25)
+        Me.CustomLabel6.Location = New System.Drawing.Point(220, 12)
         Me.CustomLabel6.Name = "CustomLabel6"
         Me.CustomLabel6.Size = New System.Drawing.Size(44, 18)
         Me.CustomLabel6.TabIndex = 7
@@ -433,6 +465,14 @@ Partial Class Depositos
         Me.lstConsulta.Size = New System.Drawing.Size(305, 329)
         Me.lstConsulta.TabIndex = 8
         Me.lstConsulta.Visible = False
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(459, 9)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(304, 20)
+        Me.txtAyuda.TabIndex = 19
+        Me.txtAyuda.Visible = False
         '
         'btnCerrar
         '
@@ -583,6 +623,8 @@ Partial Class Depositos
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -622,4 +664,7 @@ Partial Class Depositos
     Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ClaveCheque As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnEliminarFila As System.Windows.Forms.Button
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents rbVentaCheques As System.Windows.Forms.RadioButton
+    Friend WithEvents rbDepósito As System.Windows.Forms.RadioButton
 End Class

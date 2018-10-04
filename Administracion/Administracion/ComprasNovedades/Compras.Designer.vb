@@ -368,6 +368,7 @@ Partial Class Compras
         Me.txtFechaVto2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtFechaVto2, "Calculado a partir de Fecha IVA")
         Me.txtFechaVto2.ValidatingType = GetType(Date)
+        Me.txtFechaVto2.Visible = False
         '
         'txtFechaVto1
         '

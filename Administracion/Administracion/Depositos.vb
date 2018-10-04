@@ -77,6 +77,30 @@ Public Class Depositos
             End With
         Next
 
+        If Not rbDepósito.Checked Then
+            '
+            ' Comprobamos que la fecha del Cheque sea menor o igual a la fecha del depósito.
+            '
+            Dim WFechaDeposito As Integer = Val(ordenaFecha(txtFechaAcreditacion.Text))
+
+            For Each row As DataGridViewRow In gridCheques.Rows
+                With row
+
+                    Dim WTipo As String = If(.Cells("tipo").Value, "")
+
+                    If Val(WTipo) <> 3 Then Continue For
+
+                    Dim WFechaCheque As Integer = Val(ordenaFecha(If(.Cells("fecha").Value, "  /  /    ")))
+
+                    If WFechaCheque > WFechaDeposito Then
+                        MsgBox("Hay un cheque que tiene una fecha superior a la fecha indicada para el Depósito.")
+                        Return False
+                    End If
+
+                End With
+            Next
+
+        End If
         validador.validate(Me)
 
         Dim ZSumaImporte = Proceso.formatonumerico(Math.Round(sumaImportes(), 2))
@@ -368,6 +392,20 @@ Public Class Depositos
             Dim cheq As Cheque
 
             cheq = lstConsulta.SelectedItem
+
+            If Not rbDepósito.Checked Then
+                '
+                ' Comprobamos que la fecha del Cheque sea menor o igual a la fecha del depósito.
+                '
+                Dim WFechaCheque As Integer = Val(ordenaFecha(cheq.fechaCheque))
+                Dim WFechaDeposito As Integer = Val(ordenaFecha(txtFechaAcreditacion.Text))
+
+                If WFechaCheque > WFechaDeposito Then
+                    MsgBox("El cheque que está intentando agregar, tiene una fecha superior a la fecha indicada para el Depósito.")
+                    Exit Sub
+                End If
+
+            End If
 
             For Each _row As DataGridViewRow In gridCheques.Rows
                 If Not _row.IsNewRow Then
@@ -1117,6 +1155,30 @@ Public Class Depositos
 
                     End If
 
+                    If iCol = 2 Then
+
+                        If Not rbDepósito.Checked Then
+                            '
+                            ' Comprobamos que la fecha del Cheque sea menor o igual a la fecha del depósito.
+                            '
+                            Dim WTipo As String = If(.CurrentRow.Cells("tipo").Value, "")
+
+                            If Val(WTipo) = 3 Then
+
+                                Dim WFechaCheque As Integer = Val(ordenaFecha(valor))
+                                Dim WFechaDeposito As Integer = Val(ordenaFecha(txtFechaAcreditacion.Text))
+
+                                If WFechaCheque > WFechaDeposito Then
+                                    MsgBox("El cheque que está intentando agregar, tiene una fecha superior a la fecha indicada para el Depósito.")
+                                    Return True
+                                End If
+
+                            End If
+
+                        End If
+
+                    End If
+
                     If iCol = 1 Or iCol = 2 Or iCol = 3 Then
                         .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                     End If
@@ -1312,6 +1374,18 @@ Public Class Depositos
                     WFecha = .Item("Fecha2")
                     WImporte = Proceso.formatonumerico(.Item("Importe2"))
                     WBanco = .Item("Banco2")
+
+                    If Not rbDepósito.Checked Then
+                        Dim WFechaDeposito As Integer = Val(ordenaFecha(txtFechaAcreditacion.Text))
+                        Dim WFechaCheque As Integer = Val(ordenaFecha(WFecha))
+
+                        If WFechaCheque > WFechaDeposito Then
+                            MsgBox("La fecha del cheque es posterior a la fecha del Depósito.", MsgBoxStyle.Exclamation)
+                            Return False
+                        End If
+
+                    End If
+
                 End With
             Else
                 Return False

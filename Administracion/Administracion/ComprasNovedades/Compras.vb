@@ -314,10 +314,10 @@ Public Class Compras
             Return False
         End If
 
-        If txtFechaVto2.Text.Replace(" ", "").Length < 10 Then
-            MsgBox("Debe cargarse una fecha de Vencimiento válida", MsgBoxStyle.Exclamation)
-            Return False
-        End If
+        'If txtFechaVto2.Text.Replace(" ", "").Length < 10 Then
+        '    MsgBox("Debe cargarse una fecha de Vencimiento válida", MsgBoxStyle.Exclamation)
+        '    Return False
+        'End If
 
         Return validador.flush
     End Function
@@ -812,7 +812,7 @@ Public Class Compras
         txtFechaEmision.Text = compra.fechaEmision
         txtFechaIVA.Text = compra.fechaIVA
         txtFechaVto1.Text = compra.fechaVto1
-        txtFechaVto2.Text = compra.fechaVto2
+        'txtFechaVto2.Text = compra.fechaVto2
         txtRemito.Text = compra.remito
         cmbFormaPago.SelectedIndex = compra.formaPago
         txtParidad.Text = _FormatearNumero(compra.paridad, 4)
@@ -1212,7 +1212,7 @@ Public Class Compras
                 Dim fecha As Date = Convert.ToDateTime(txtFechaIVA.Text)
                 Dim fecha2 As Date = Convert.ToDateTime(txtFechaEmision.Text)
                 txtFechaVto1.Text = fecha2.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
-                txtFechaVto2.Text = fecha.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
+                'txtFechaVto2.Text = fecha.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
 
             Catch ex As Exception
 
@@ -1230,7 +1230,7 @@ Public Class Compras
         If e.KeyData = Keys.Enter Then
 
             If Proceso._ValidarFecha(txtFechaVto1.Text) Then
-                _SaltarA(txtFechaVto2)
+                _SaltarA(cmbFormaPago)
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -1239,19 +1239,19 @@ Public Class Compras
 
     End Sub
 
-    Private Sub txtFechaVto2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaVto2.KeyDown
+    'Private Sub txtFechaVto2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaVto2.KeyDown
 
-        If e.KeyData = Keys.Enter Then
+    '    If e.KeyData = Keys.Enter Then
 
-            If Proceso._ValidarFecha(txtFechaVto2.Text) Then
-                _SaltarA(cmbFormaPago)
-            End If
+    '        If Proceso._ValidarFecha(txtFechaVto2.Text) Then
+    '            _SaltarA(cmbFormaPago)
+    '        End If
 
-        ElseIf e.KeyData = Keys.Escape Then
-            txtFechaVto2.Clear()
-        End If
+    '    ElseIf e.KeyData = Keys.Escape Then
+    '        txtFechaVto2.Clear()
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub txtFechaIVA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaIVA.KeyDown
 
@@ -1308,7 +1308,7 @@ Public Class Compras
         Dim fecha As Date = Convert.ToDateTime(txtFechaIVA.Text)
         'Dim fecha2 As Date = Convert.ToDateTime(txtFechaEmision.Text)
         'txtFechaVto1.Text = fecha2.AddDays(Val(diasPlazo)).ToString("dd/MM/yyyy")
-        txtFechaVto2.Text = fecha.AddDays(Val(dias)).ToString("dd/MM/yyyy")
+        'txtFechaVto2.Text = fecha.AddDays(Val(dias)).ToString("dd/MM/yyyy")
     End Sub
 
     Private Function _BuscarDiasOCRelacionada(ByVal remito As String) As String
@@ -2073,9 +2073,9 @@ Public Class Compras
         e.Cancel = _ValidarFecha(txtFechaVto1.Text, e.IsValidInput)
     End Sub
 
-    Private Sub txtFechaVto2_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaVto2.TypeValidationCompleted
-        e.Cancel = _ValidarFecha(txtFechaVto2.Text, e.IsValidInput)
-    End Sub
+    'Private Sub txtFechaVto2_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtFechaVto2.TypeValidationCompleted
+    '    e.Cancel = _ValidarFecha(txtFechaVto2.Text, e.IsValidInput)
+    'End Sub
 
     Private Sub txtVtoCAI_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs) Handles txtVtoCAI.TypeValidationCompleted
 

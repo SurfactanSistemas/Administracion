@@ -1041,6 +1041,9 @@ Public Class Recibos
             End If
         End If
 
+        gridFormasPago2.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+        gridPagos2.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
         ' Calculamos nuevamente los saldo de débitos y Créditos.
         If _ErrorEnSumaDeSaldos() Then
             MsgBox("Hay errores en la carga de debitos o creditos. Por favor, verifique los datos y vuelva a intentar.", MsgBoxStyle.Information)
@@ -2978,7 +2981,7 @@ Public Class Recibos
                 _SumarCreditos()
             End If
         End If
-
+        
         If gridPagos2.Focused Or gridPagos2.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
             gridPagos2.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
 
