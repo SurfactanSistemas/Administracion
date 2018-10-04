@@ -430,6 +430,30 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.ActualizacionStock.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.ActualizacionStockPtaV.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.AjusteInventarioMPMovVarios.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.AyudaMP.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.AyudaPT.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.CierreStock.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.CierreStockPtaV.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.ControlMarcaLote.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.DiferenciaInventarioMP.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.DiferenciaInventarioMPStockAnterior.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.DiferenciaInventarioPT.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.DiferenciaInventarioPTStockAnterior.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.IngresoClave.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.IngresoTalonInventario.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.LimpiarCargaInventario.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.Login.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.MenuPrincipal.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.MPPTConLote0.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.RecuentoInventarioMP.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.RecuentoInventarioPT.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.Resources.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.VerificacionCorrelatividades.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.VerificacionTalonesDuplicados.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\Inventario.VistaPrevia.resources" />
     <EmbeddedResource Include="Reportes\Listados\DiferenciaInventarioMP\ReporteDiferenciaInventarioMP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDiferenciaInventarioMP.vb</LastGenOutput>
@@ -491,6 +515,10 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\Inventario.vbproj.GenerateResource.Cache" />
+    <None Include="obj\x86\Debug\Inventario.vbprojResolveAssemblyReference.cache" />
     <None Include="Reportes\Listados\DiferenciaInventarioMP\DSDiferenciaInventario.xsc">
       <DependentUpon>DSDiferenciaInventario.xsd</DependentUpon>
     </None>
@@ -548,6 +576,27 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="obj\x86\Debug\Inventario.exe" />
+    <Content Include="obj\x86\Debug\Inventario.pdb" />
+    <Content Include="obj\x86\Debug\Inventario.vbproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Debug\Inventario.xml" />
+    <Content Include="obj\x86\Debug\TempPE\My Project.Resources.Designer.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.DiferenciaInventarioMP.DSDiferenciaInventario.Designer.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.DiferenciaInventarioMP.ReporteDiferenciaInventarioMP.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.DiferenciaInventarioMP.ReporteDiferenciaInventarioMPAbiertoLotes.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.DiferenciaInventarioPT.ReporteDiferenciaInventarioPT.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.DiferenciaInventarioPT.ReporteDiferenciaInventarioPTAbiertoLotes.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.DiferenciaInventarioStockAnteriorMP.ReporteDiferenciaInventarioStockAnteriorMP.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.DiferenciaInventarioStockAnteriorPT.ReporteDiferenciaInventarioStockAnteriorPT.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.MPPTLoteIgualCero.DSLote0.Designer.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.MPPTLoteIgualCero.ReporteLote0.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.RecuentoInventarioMP.DSRecuentoInventario.Designer.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.RecuentoInventarioMP.ReporteRecuentoInventarioMP.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Listados.RecuentoInventarioPT.ReporteRecuentoInventarioPT.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Maestros.VerificaCorrelatividad.DSVerificaCorrelatividad.Designer.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Maestros.VerificaCorrelatividad.VerificaCorrelatividadReporte.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Maestros.VerificaTalonesDuplicados.DSVerificaTalonesDuplicados.Designer.vb.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Reportes.Maestros.VerificaTalonesDuplicados.VerificarTalonesDuplicados.vb.dll" />
     <Content Include="Resources\Aceptar N2.png" />
     <Content Include="Resources\actualizar.png" />
     <Content Include="Resources\AddInvoice.png" />
