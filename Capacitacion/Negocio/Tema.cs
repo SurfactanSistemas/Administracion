@@ -203,7 +203,7 @@ namespace Negocio
         public int ObtenerUltimo(string tema)
         {
             Conexion repo = new Conexion();
-            string consulta = "select max(tema) + 1 from Tema where curso =  " + tema;
+            string consulta = "select max(tema) + 1 from Tema where Tema < 99 And curso =  " + tema;
             //string consulta = "select max(tema) + 1 from Tema where tema != 86";
             int valor = 0;
             int.TryParse(repo.TraerUltimoId(consulta), out valor);

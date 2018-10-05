@@ -61,9 +61,10 @@ namespace Modulo_Capacitacion.Novedades
                             var WLegajo = row.Cells["Legajo"].Value ?? "";
                             var WTipo = row.Cells["Tipo"].Value ?? "";
                             var WRealizar = row.Cells["Realizar"].Value ?? "";
-                            var WCurso = row.Cells["Curso"].Value ?? "";
+                            var WCurso = row.Cells["Curso"].Value ?? "0";
                             var WHoras = row.Cells["Horas"].Value ?? "";
-                            var WTema = row.Cells["Tema"].Value ?? "";
+                            var WTema = row.Cells["Tema"].Value ?? "0";
+                            var WTema2 = row.Cells["TemaII"].Value ?? "0";
                             string XClave = "";
 
                             if (WTipo.ToString() == "") continue;
@@ -98,16 +99,16 @@ namespace Modulo_Capacitacion.Novedades
                                 }
                             }
 
-                            if (WRealizar.ToString() == "X")
+                            if (int.Parse(WTema.ToString()) != 0 || int.Parse(WTema2.ToString()) != 0)
                             {
                                 WRenglon++;
                                 
                                 XClave = Helper.Ceros(WAnt, 6) + Helper.Ceros(txtAno.Text, 4) +
                                          Helper.Ceros(WRenglon, 2);
 
-                                cmd.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo) "
+                                cmd.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Tema2, Horas, Realizado, Tema, DesTema, DesTema2, Observaciones, ObservacionesII, DesSector, DesLegajo) "
                                                 + " VALUES ("
-                                                + " '" + XClave + "', '" + WAnt + "', '" + txtAno.Text + "', '" + WRenglon + "', '" + WCurso + "', " + WHoras + ", '0', '" + WTema + "', '', '','', '', '' "
+                                                + " '" + XClave + "', '" + WAnt + "', '" + txtAno.Text + "', '" + WRenglon + "', '" + WCurso + "', '" + WTema2 + "', " + WHoras + ", '0', '" + WTema + "', '', '', '','', '', '' "
                                                 + " )";
 
                                 cmd.ExecuteNonQuery();
@@ -169,6 +170,7 @@ namespace Modulo_Capacitacion.Novedades
                             var WCurso = row.Cells["Curso"].Value ?? "";
                             var WHoras = row.Cells["Horas"].Value ?? "";
                             var WTema = row.Cells["Tema"].Value ?? "";
+                            var WTema2 = row.Cells["TemaII"].Value ?? "";
                             string XClave = "";
 
                             if (WTipo.ToString() == "") continue;
@@ -189,9 +191,9 @@ namespace Modulo_Capacitacion.Novedades
                                 XClave = Helper.Ceros(WAnt, 6) + Helper.Ceros(txtAno.Text, 4) +
                                          Helper.Ceros(WRenglon, 2);
 
-                                cmd.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo) "
+                                cmd.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Tema2, DesTema2, Observaciones, ObservacionesII, DesSector, DesLegajo) "
                                                 + " VALUES ("
-                                                + " '" + XClave + "', '" + WAnt + "', '" + txtAno.Text + "', '" + WRenglon + "', '" + WCurso + "', " + WHoras + ", '0', '" + WTema + "', '', '','', '', '' "
+                                                + " '" + XClave + "', '" + WAnt + "', '" + txtAno.Text + "', '" + WRenglon + "', '" + WCurso + "', " + WHoras + ", '0', '" + WTema + "', '', '" + WTema2 + "', '', '','', '', '' "
                                                 + " )";
 
                                 cmd.ExecuteNonQuery();
@@ -199,7 +201,7 @@ namespace Modulo_Capacitacion.Novedades
 
                             // Obtengo y regrabo los cursos correspondientes al Legajo y Año para mantener la correlatividad en la numeracion de Renglones.
                             WRenglon = 0;
-                            cmd.CommandText = "SELECT Legajo, Ano, Curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo FROM Cronograma WHERE Legajo = '" + WAnt + "' AND Ano = '" + txtAno.Text + "'";
+                            cmd.CommandText = "SELECT Legajo, Ano, Curso, Horas, Realizado, Tema, DesTema, Tema2, DesTema2, Observaciones, ObservacionesII, DesSector, DesLegajo FROM Cronograma WHERE Legajo = '" + WAnt + "' AND Ano = '" + txtAno.Text + "'";
 
                             DataTable WRegrabar = new DataTable();
                             using (SqlDataReader dr = cmd.ExecuteReader())
@@ -222,9 +224,9 @@ namespace Modulo_Capacitacion.Novedades
                                     XClave = Helper.Ceros(WRow["Legajo"], 6) + Helper.Ceros(txtAno.Text, 4) +
                                              Helper.Ceros(WRenglon, 2);
 
-                                    cmd.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo) "
+                                    cmd.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Tema2, DesTema2, Observaciones, ObservacionesII, DesSector, DesLegajo) "
                                                     + " VALUES ("
-                                                    + " '" + XClave + "', '" + WRow["Legajo"] + "', '" + txtAno.Text + "', '" + WRenglon + "', '" + WRow["Curso"] + "', " + Helper.FormatoNumerico(WRow["Horas"]) + ", " + Helper.FormatoNumerico(WRow["Realizado"]) + ", '" + WRow["Tema"] + "', '" + WRow["DesTema"] + "', '" + WRow["Observaciones"] + "','" + WRow["ObservacionesII"] + "', '" + WRow["DesSector"] + "', '" + WRow["DesLegajo"] + "' "
+                                                    + " '" + XClave + "', '" + WRow["Legajo"] + "', '" + txtAno.Text + "', '" + WRenglon + "', '" + WRow["Curso"] + "', " + Helper.FormatoNumerico(WRow["Horas"]) + ", " + Helper.FormatoNumerico(WRow["Realizado"]) + ", '" + WRow["Tema"] + "', '" + WRow["DesTema"] + "', '" + WRow["Tema2"] + "', '" + WRow["DesTema2"] + "', '" + WRow["Observaciones"] + "','" + WRow["ObservacionesII"] + "', '" + WRow["DesSector"] + "', '" + WRow["DesLegajo"] + "' "
                                                     + " )";
 
                                     cmd.ExecuteNonQuery();
@@ -448,7 +450,7 @@ namespace Modulo_Capacitacion.Novedades
             //_AbrirAyuda();
         }
 
-        private void _AbrirAyuda(string WTema)
+        private void _AbrirAyuda(string WTema, int rowIndex)
         {
             DataTable cursos = _TraerCursos(WTema);
             dgvAyuda.DataSource = cursos;
@@ -460,6 +462,10 @@ namespace Modulo_Capacitacion.Novedades
             pnlAyuda.Size = new Size(725, 375);
             pnlAyuda.Location = Helper._CentrarH(Width, pnlAyuda);
             pnlAyuda.Visible = true;
+            var columna1 = dgvGrilla.Columns["TemaII"];
+            var columna2 = dgvGrilla.Columns["DescTemaII"];
+            cmbAsignarComo.SelectedIndex = (columna1 != null && rowIndex == columna1.Index) ? 1 : 0;
+            cmbAsignarComo.SelectedIndex = (columna2 != null && rowIndex == columna2.Index) ? 1 : 0;
             txtFiltrar.Text = "";
             txtFiltrar.Focus();
         }
@@ -556,24 +562,40 @@ namespace Modulo_Capacitacion.Novedades
 
             if (!rbTema.Checked)
             {
-                dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value = tema;
-
                 string WCurso = dgvGrilla.Rows[wRowIndex].Cells["Curso"].Value.ToString();
                 DataTable WInfoCurso = _TraerDescripcionCurso(WCurso, tema);
 
-                dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = "";
-                dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = "0";
+                if (cmbAsignarComo.SelectedIndex == 0)
+                {
+                    if (dgvGrilla.Rows[wRowIndex].Cells["TemaII"].Value.ToString() == tema) return;
+                    dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = "";
+                }
+                else
+                {
+                    if (dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value.ToString() == tema) return;
+                    dgvGrilla.Rows[wRowIndex].Cells["DescTemaII"].Value = "";
+                }
 
                 if (WInfoCurso.Rows.Count > 0)
                 {
-                    dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = WInfoCurso.Rows[0]["Descripcion"];
-                    dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = WInfoCurso.Rows[0]["Horas"];
+                    if (cmbAsignarComo.SelectedIndex == 0)
+                    {
+                        dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value = tema;
+                        dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = WInfoCurso.Rows[0]["Descripcion"];
+                    }
+                    else
+                    {
+                        dgvGrilla.Rows[wRowIndex].Cells["TemaII"].Value = tema;
+                        dgvGrilla.Rows[wRowIndex].Cells["DescTemaII"].Value = WInfoCurso.Rows[0]["Descripcion"];
+                    }
+
+                    //dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = WInfoCurso.Rows[0]["Horas"];
                 }
 
-                dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value =
-                    Helper.FormatoNumerico(dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value);
+                //dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value =
+                //    Helper.FormatoNumerico(dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value);
 
-                dgvGrilla.Rows[wRowIndex].Cells["Realizar"].Value = "X";
+                //dgvGrilla.Rows[wRowIndex].Cells["Realizar"].Value = "X";
             }
             else
             {
@@ -585,18 +607,37 @@ namespace Modulo_Capacitacion.Novedades
 
                     if (WTipo.ToString() == "") continue;
 
-                    dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value = tema;
-
                     string WCurso = dgvGrilla.Rows[wRowIndex].Cells["Curso"].Value.ToString();
                     DataTable WInfoCurso = _TraerDescripcionCurso(WCurso, tema);
 
-                    dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = "";
-                    dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = "0";
+                    //dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = "0";
+
+                    if (cmbAsignarComo.SelectedIndex == 0)
+                    {
+                        if (dgvGrilla.Rows[wRowIndex].Cells["TemaII"].Value.ToString() == tema) return;
+                        dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = "";
+                    }
+                    else
+                    {
+                        var value = dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value;
+                        if (value != null && value.ToString() == tema) return;
+                        dgvGrilla.Rows[wRowIndex].Cells["DescTemaII"].Value = "";
+                    }
 
                     if (WInfoCurso.Rows.Count > 0)
                     {
-                        dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = WInfoCurso.Rows[0]["Descripcion"];
-                        dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = WInfoCurso.Rows[0]["Horas"];
+                        if (cmbAsignarComo.SelectedIndex == 0)
+                        {
+                            dgvGrilla.Rows[wRowIndex].Cells["Tema"].Value = tema;
+                            dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = WInfoCurso.Rows[0]["Descripcion"];
+                        }
+                        else
+                        {
+                            dgvGrilla.Rows[wRowIndex].Cells["TemaII"].Value = tema;
+                            dgvGrilla.Rows[wRowIndex].Cells["DescTemaII"].Value = WInfoCurso.Rows[0]["Descripcion"];
+                        }
+                        //dgvGrilla.Rows[wRowIndex].Cells["DescTema"].Value = WInfoCurso.Rows[0]["Descripcion"];
+                        //dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = WInfoCurso.Rows[0]["Horas"];
                     }
 
                     dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value =
@@ -721,6 +762,8 @@ namespace Modulo_Capacitacion.Novedades
                 dgvGrilla.Rows[WRowindex].Cells["Realizado"].Value = Helper.FormatoNumerico(dr["Realizado"]);
                 dgvGrilla.Rows[WRowindex].Cells["Tema"].Value = dr["Tema"];
                 dgvGrilla.Rows[WRowindex].Cells["DescTema"].Value = dr["DescTema"];
+                dgvGrilla.Rows[WRowindex].Cells["TemaII"].Value = dr["TemaII"];
+                dgvGrilla.Rows[WRowindex].Cells["DescTemaII"].Value = dr["DescTemaII"];
                 dgvGrilla.Rows[WRowindex].Cells["Realizar"].Value = dr["Realizar"];
             }
 
@@ -845,7 +888,7 @@ namespace Modulo_Capacitacion.Novedades
                 {
                     cmd.Connection = conn;
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Sector, Sector.Descripcion as DesSector, l.Perfil, p.Descripcion as DescPerfil, l.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON l.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.Codigo = l2.Actual AND p.Curso = '" +
+                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Sector, Sector.Descripcion as DesSector, l.Perfil, p.Descripcion as DescPerfil, l.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, TemaII = 0, DescTemaII = '" + new string(' ', 70) + "', Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON l.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.Codigo = l2.Actual AND p.Curso = '" +
                         cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -859,7 +902,7 @@ namespace Modulo_Capacitacion.Novedades
                     WProgramados.Columns.Clear();
 
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.EstaCurso, l.Sector, Sector.Descripcion as DesSector, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE cr.Ano = '" +
+                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.EstaCurso, l.Sector, Sector.Descripcion as DesSector, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, ISNULL(cr.Tema2, '') as TemaII, RTRIM(ISNULL((SELECT Descripcion FROM Tema t2 WHERE t2.Curso = cr.Curso And t2.Tema = cr.Tema2), '')) as DescTemaII, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE cr.Ano = '" +
                         txtAno.Text + "' AND p.Renglon = 1 and cr.Curso = '" + cmbOrganizar.SelectedValue +
                         "' and cr.Curso = l.Curso AND l.Codigo = l2.Actual ORDER BY cr.Legajo, Cr.Renglon";
 
@@ -920,7 +963,7 @@ namespace Modulo_Capacitacion.Novedades
                     // AND l.EstaCurso IN (3,4,5,7,8)
                     cmd.Connection = conn;
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Sector, Sector.Descripcion as DesSector, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, l.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) actual, Descripcion FROM Legajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000')  AND l.Perfil = '" +
+                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Sector, Sector.Descripcion as DesSector, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, l.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, TemaII = 0, DescTemaII = '" + new string(' ', 70) + "', RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) actual, Descripcion FROM Legajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON p.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE l.Perfil = p.Codigo and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000')  AND l.Perfil = '" +
                         cmbOrganizar.SelectedValue + "' AND l.Codigo = l2.actual ORDER BY l.Codigo, l.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -934,7 +977,7 @@ namespace Modulo_Capacitacion.Novedades
                     WProgramados.Columns.Clear();
 
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Perfil, l.EstaCurso, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, l.Sector, Sector.Descripcion as DesSector, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE cr.Ano = '" +
+                        "SELECT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, RTRIM(l.Descripcion) as Nombre, l.Perfil, l.EstaCurso, RTRIM(ISNULL(p.Descripcion, '')) as DescPerfil, l.Sector, Sector.Descripcion as DesSector, cr.Curso, ISNULL(cr.Tema2, 0) As TemaII, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, RTRIM(ISNULL((SELECT Descripcion FROM Tema t2 WHERE t2.Curso = cr.Curso AND t2.Tema = cr.Tema2), '')) as DescTemaII, Realizar = 'X' FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON cr.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema LEFT OUTER JOIN Sector ON l.Sector = Sector.Codigo WHERE cr.Ano = '" +
                         txtAno.Text + "' AND p.Renglon = 1 and l.Perfil = '" + cmbOrganizar.SelectedValue +
                         "' and cr.Curso = l.Curso ORDER BY cr.Legajo, Cr.Renglon";
 
@@ -996,7 +1039,7 @@ namespace Modulo_Capacitacion.Novedades
                 {
                     cmd.Connection = conn;
                     cmd.CommandText =
-                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, l.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON l.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo AND l.Codigo = l2.Actual and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.Sector = '" +
+                        "SELECT Clave = '', Tipo = CASE WHEN l.EstaCurso IN (3,4,5,7,8) THEN '2' ELSE '1' END, l.EstaCurso, l.Codigo as Legajo, l.Renglon, l.Descripcion as Nombre, l.Perfil, p.Descripcion as DescPerfil, l.Curso, c.Descripcion as DescCurso, ISNULL(p.Tema, '') as Tema, RTRIM(LTRIM(ISNULL(t.Descripcion, ''))) as DescTema, TemaII = 0, DescTemaII = '" + new string(' ', 70) + "', Horas = 0, Realizado = 0, Realizar = '' FROM Legajo l INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion INNER JOIN Tarea p ON l.Perfil = p.Codigo INNER JOIN Curso c ON l.Curso = c.Codigo FULL OUTER JOIN Tema t ON p.Tema = t.Tema WHERE l.Perfil = p.Codigo AND l.Codigo = l2.Actual and l.renglon = p.Renglon AND l.FEgreso IN ('  /  /    ', '00/00/0000') AND l.Sector = '" +
                         cmbOrganizar.SelectedValue + "' ORDER BY l.Codigo, l.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -1014,7 +1057,8 @@ namespace Modulo_Capacitacion.Novedades
                     cmd.CommandText = "SELECT DISTINCT Clave = '', Tipo = '0', cr.Legajo, cr.Renglon, " +
                                       "RTRIM(l.Descripcion) as Nombre, l.EstaCurso, l.Perfil, RTRIM(ISNULL(p.Descripcion, '')) " +
                                       "as DescPerfil, cr.Curso, RTRIM(ISNULL(c.Descripcion, '')) as DescCurso, cr.Horas, cr.Realizado, " +
-                                      "ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X' " +
+                                      "ISNULL(cr.Tema, '') as Tema, RTRIM(ISNULL(t.Descripcion, '')) as DescTema, Realizar = 'X', " +
+                                      "ISNULL(cr.Tema2, '') as TemaII, RTRIM(ISNULL((SELECT Descripcion FROM Tema t2 WHERE t2.Curso = cr.Curso And t2.Tema = cr.Tema2), '')) as DescTemaII " +
                                       "FROM Cronograma cr FULL OUTER JOIN Legajo l ON cr.Legajo = l.Codigo " +
                                       "INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM LEgajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion " +
                                       "FULL OUTER JOIN Tarea p ON l.Perfil = p.Codigo FULL OUTER JOIN Curso c ON l.Curso = c.Codigo FULL OUTER JOIN Tema t ON cr.Curso = t.Curso and cr.Tema = t.Tema " +
@@ -1172,6 +1216,7 @@ namespace Modulo_Capacitacion.Novedades
 
         private void asignarModificarCursoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             if (dgvGrilla.Rows.Count == 0) return;
             if (dgvGrilla.SelectedCells.Count == 0) return;
 
@@ -1186,7 +1231,7 @@ namespace Modulo_Capacitacion.Novedades
 
             if (WTema.ToString() == "") return;
 
-            _AbrirAyuda(WTema.ToString());
+            _AbrirAyuda(WTema.ToString(), dgvGrilla.CurrentCell.ColumnIndex);
 
         }
 

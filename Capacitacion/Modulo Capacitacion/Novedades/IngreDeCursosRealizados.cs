@@ -409,5 +409,10 @@ namespace Modulo_Capacitacion.Novedades
         {
             txtAnoConsulta.Focus();
         }
+
+        private void TB_Año_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -26,30 +26,6 @@ Partial Class IndiceGralSac
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvListado = New System.Windows.Forms.DataGridView()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.clbOrigenes = New System.Windows.Forms.CheckedListBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.clbEstados = New System.Windows.Forms.CheckedListBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.clbTiposSolicitud = New System.Windows.Forms.CheckedListBox()
-        Me.txtAnio = New System.Windows.Forms.TextBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.cmbOrdenIII = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.cmbOrdenII = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.cmbOrdenI = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.clbEmisores = New System.Windows.Forms.CheckedListBox()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.clbResponsables = New System.Windows.Forms.CheckedListBox()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.clbCentros = New System.Windows.Forms.CheckedListBox()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.idTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Anio = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -66,22 +42,46 @@ Partial Class IndiceGralSac
         Me.idEmisor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idOrigen = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idCentro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnCancelar = New System.Windows.Forms.Button()
-        Me.txtFiltrar = New System.Windows.Forms.TextBox()
+        Me.btnAceptar = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.clbCentros = New System.Windows.Forms.CheckedListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cmbOrdenIII = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbOrdenII = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cmbOrdenI = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.clbResponsables = New System.Windows.Forms.CheckedListBox()
+        Me.txtFiltrar = New System.Windows.Forms.TextBox()
+        Me.txtAnio = New System.Windows.Forms.TextBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.clbEmisores = New System.Windows.Forms.CheckedListBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.clbTiposSolicitud = New System.Windows.Forms.CheckedListBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.clbOrigenes = New System.Windows.Forms.CheckedListBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.clbEstados = New System.Windows.Forms.CheckedListBox()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -135,258 +135,6 @@ Partial Class IndiceGralSac
         Me.dgvListado.RowTemplate.Height = 20
         Me.dgvListado.Size = New System.Drawing.Size(1139, 219)
         Me.dgvListado.TabIndex = 2
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.Panel2)
-        Me.GroupBox1.Location = New System.Drawing.Point(10, 10)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(10)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1125, 227)
-        Me.GroupBox1.TabIndex = 3
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Parámetros"
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.clbOrigenes)
-        Me.GroupBox5.Location = New System.Drawing.Point(425, 55)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(167, 107)
-        Me.GroupBox5.TabIndex = 3
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Origen"
-        '
-        'clbOrigenes
-        '
-        Me.clbOrigenes.CheckOnClick = True
-        Me.clbOrigenes.FormattingEnabled = True
-        Me.clbOrigenes.Items.AddRange(New Object() {"Total", "Auditoría", "Reclamo", "I. de No Conformidad", "Proceso / Sist", "Otro"})
-        Me.clbOrigenes.Location = New System.Drawing.Point(10, 18)
-        Me.clbOrigenes.Name = "clbOrigenes"
-        Me.clbOrigenes.Size = New System.Drawing.Size(147, 79)
-        Me.clbOrigenes.TabIndex = 2
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.clbEstados)
-        Me.GroupBox4.Location = New System.Drawing.Point(217, 54)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(202, 107)
-        Me.GroupBox4.TabIndex = 3
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Estado"
-        '
-        'clbEstados
-        '
-        Me.clbEstados.CheckOnClick = True
-        Me.clbEstados.FormattingEnabled = True
-        Me.clbEstados.Items.AddRange(New Object() {"Total", "Iniciada", "Investigación", "Implementación", "Implementación a Verificar", "Implementación Verificada", "Cerrada"})
-        Me.clbEstados.Location = New System.Drawing.Point(10, 18)
-        Me.clbEstados.Name = "clbEstados"
-        Me.clbEstados.Size = New System.Drawing.Size(180, 79)
-        Me.clbEstados.TabIndex = 2
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.clbTiposSolicitud)
-        Me.GroupBox3.Location = New System.Drawing.Point(9, 54)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(202, 107)
-        Me.GroupBox3.TabIndex = 3
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Tipos de Solicitud"
-        '
-        'clbTiposSolicitud
-        '
-        Me.clbTiposSolicitud.CheckOnClick = True
-        Me.clbTiposSolicitud.FormattingEnabled = True
-        Me.clbTiposSolicitud.Location = New System.Drawing.Point(10, 18)
-        Me.clbTiposSolicitud.Name = "clbTiposSolicitud"
-        Me.clbTiposSolicitud.Size = New System.Drawing.Size(180, 79)
-        Me.clbTiposSolicitud.TabIndex = 2
-        '
-        'txtAnio
-        '
-        Me.txtAnio.Location = New System.Drawing.Point(44, 17)
-        Me.txtAnio.Name = "txtAnio"
-        Me.txtAnio.Size = New System.Drawing.Size(57, 20)
-        Me.txtAnio.TabIndex = 1
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.cmbOrdenIII)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.cmbOrdenII)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.cmbOrdenI)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Location = New System.Drawing.Point(120, 4)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(640, 47)
-        Me.GroupBox2.TabIndex = 0
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Orden"
-        '
-        'cmbOrdenIII
-        '
-        Me.cmbOrdenIII.FormattingEnabled = True
-        Me.cmbOrdenIII.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
-        Me.cmbOrdenIII.Location = New System.Drawing.Point(523, 15)
-        Me.cmbOrdenIII.Name = "cmbOrdenIII"
-        Me.cmbOrdenIII.Size = New System.Drawing.Size(92, 21)
-        Me.cmbOrdenIII.TabIndex = 1
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(447, 19)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(48, 13)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Terciario"
-        '
-        'cmbOrdenII
-        '
-        Me.cmbOrdenII.FormattingEnabled = True
-        Me.cmbOrdenII.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
-        Me.cmbOrdenII.Location = New System.Drawing.Point(327, 15)
-        Me.cmbOrdenII.Name = "cmbOrdenII"
-        Me.cmbOrdenII.Size = New System.Drawing.Size(92, 21)
-        Me.cmbOrdenII.TabIndex = 1
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(238, 19)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(61, 13)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Secundario"
-        '
-        'cmbOrdenI
-        '
-        Me.cmbOrdenI.FormattingEnabled = True
-        Me.cmbOrdenI.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
-        Me.cmbOrdenI.Location = New System.Drawing.Point(118, 15)
-        Me.cmbOrdenI.Name = "cmbOrdenI"
-        Me.cmbOrdenI.Size = New System.Drawing.Size(92, 21)
-        Me.cmbOrdenI.TabIndex = 1
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(46, 19)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(44, 13)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Primario"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(13, 21)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(26, 13)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Año"
-        '
-        'TableLayoutPanel1
-        '
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.dgvListado, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 50)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 247.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 472)
-        Me.TableLayoutPanel1.TabIndex = 4
-        '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.clbEmisores)
-        Me.GroupBox6.Location = New System.Drawing.Point(598, 55)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(167, 107)
-        Me.GroupBox6.TabIndex = 3
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Emisor"
-        '
-        'clbEmisores
-        '
-        Me.clbEmisores.CheckOnClick = True
-        Me.clbEmisores.FormattingEnabled = True
-        Me.clbEmisores.Location = New System.Drawing.Point(10, 18)
-        Me.clbEmisores.Name = "clbEmisores"
-        Me.clbEmisores.Size = New System.Drawing.Size(147, 79)
-        Me.clbEmisores.TabIndex = 2
-        '
-        'GroupBox7
-        '
-        Me.GroupBox7.Controls.Add(Me.clbResponsables)
-        Me.GroupBox7.Location = New System.Drawing.Point(771, 55)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(167, 107)
-        Me.GroupBox7.TabIndex = 4
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Responsable"
-        '
-        'clbResponsables
-        '
-        Me.clbResponsables.CheckOnClick = True
-        Me.clbResponsables.FormattingEnabled = True
-        Me.clbResponsables.Location = New System.Drawing.Point(10, 18)
-        Me.clbResponsables.Name = "clbResponsables"
-        Me.clbResponsables.Size = New System.Drawing.Size(147, 79)
-        Me.clbResponsables.TabIndex = 2
-        '
-        'GroupBox8
-        '
-        Me.GroupBox8.Controls.Add(Me.clbCentros)
-        Me.GroupBox8.Location = New System.Drawing.Point(944, 55)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(167, 107)
-        Me.GroupBox8.TabIndex = 4
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Centro"
-        '
-        'clbCentros
-        '
-        Me.clbCentros.CheckOnClick = True
-        Me.clbCentros.FormattingEnabled = True
-        Me.clbCentros.Location = New System.Drawing.Point(10, 18)
-        Me.clbCentros.Name = "clbCentros"
-        Me.clbCentros.Size = New System.Drawing.Size(147, 79)
-        Me.clbCentros.TabIndex = 2
-        '
-        'Panel2
-        '
-        Me.Panel2.AutoScroll = True
-        Me.Panel2.Controls.Add(Me.btnCancelar)
-        Me.Panel2.Controls.Add(Me.btnAceptar)
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.GroupBox8)
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox7)
-        Me.Panel2.Controls.Add(Me.txtFiltrar)
-        Me.Panel2.Controls.Add(Me.txtAnio)
-        Me.Panel2.Controls.Add(Me.GroupBox6)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Controls.Add(Me.GroupBox5)
-        Me.Panel2.Controls.Add(Me.GroupBox4)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 16)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1119, 208)
-        Me.Panel2.TabIndex = 5
         '
         'idTipo
         '
@@ -518,14 +266,41 @@ Partial Class IndiceGralSac
         Me.idCentro.Name = "idCentro"
         Me.idCentro.Width = 71
         '
-        'btnAceptar
+        'GroupBox1
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(435, 167)
-        Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(161, 32)
-        Me.btnAceptar.TabIndex = 5
-        Me.btnAceptar.Text = "Aceptar"
-        Me.btnAceptar.UseVisualStyleBackColor = True
+        Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.Panel2)
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 10)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(10)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(1125, 227)
+        Me.GroupBox1.TabIndex = 3
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Parámetros"
+        '
+        'Panel2
+        '
+        Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.btnCancelar)
+        Me.Panel2.Controls.Add(Me.btnAceptar)
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.Label6)
+        Me.Panel2.Controls.Add(Me.GroupBox8)
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox7)
+        Me.Panel2.Controls.Add(Me.txtFiltrar)
+        Me.Panel2.Controls.Add(Me.txtAnio)
+        Me.Panel2.Controls.Add(Me.GroupBox6)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Controls.Add(Me.GroupBox5)
+        Me.Panel2.Controls.Add(Me.GroupBox4)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 16)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1119, 208)
+        Me.Panel2.TabIndex = 5
         '
         'btnCancelar
         '
@@ -536,12 +311,14 @@ Partial Class IndiceGralSac
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
-        'txtFiltrar
+        'btnAceptar
         '
-        Me.txtFiltrar.Location = New System.Drawing.Point(73, 173)
-        Me.txtFiltrar.Name = "txtFiltrar"
-        Me.txtFiltrar.Size = New System.Drawing.Size(346, 20)
-        Me.txtFiltrar.TabIndex = 1
+        Me.btnAceptar.Location = New System.Drawing.Point(435, 167)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(161, 32)
+        Me.btnAceptar.TabIndex = 5
+        Me.btnAceptar.Text = "Leer Datos"
+        Me.btnAceptar.UseVisualStyleBackColor = True
         '
         'Label7
         '
@@ -551,6 +328,241 @@ Partial Class IndiceGralSac
         Me.Label7.Size = New System.Drawing.Size(40, 13)
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Buscar"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(13, 21)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(26, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Año"
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.Controls.Add(Me.clbCentros)
+        Me.GroupBox8.Location = New System.Drawing.Point(944, 55)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(167, 107)
+        Me.GroupBox8.TabIndex = 4
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "Centro"
+        '
+        'clbCentros
+        '
+        Me.clbCentros.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.clbCentros.CheckOnClick = True
+        Me.clbCentros.Cursor = System.Windows.Forms.Cursors.Default
+        Me.clbCentros.FormattingEnabled = True
+        Me.clbCentros.Location = New System.Drawing.Point(10, 18)
+        Me.clbCentros.Name = "clbCentros"
+        Me.clbCentros.Size = New System.Drawing.Size(147, 77)
+        Me.clbCentros.TabIndex = 2
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.cmbOrdenIII)
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.cmbOrdenII)
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.cmbOrdenI)
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Location = New System.Drawing.Point(120, 4)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(640, 47)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Orden"
+        '
+        'cmbOrdenIII
+        '
+        Me.cmbOrdenIII.FormattingEnabled = True
+        Me.cmbOrdenIII.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
+        Me.cmbOrdenIII.Location = New System.Drawing.Point(523, 15)
+        Me.cmbOrdenIII.Name = "cmbOrdenIII"
+        Me.cmbOrdenIII.Size = New System.Drawing.Size(92, 21)
+        Me.cmbOrdenIII.TabIndex = 1
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(447, 19)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(48, 13)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Terciario"
+        '
+        'cmbOrdenII
+        '
+        Me.cmbOrdenII.FormattingEnabled = True
+        Me.cmbOrdenII.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
+        Me.cmbOrdenII.Location = New System.Drawing.Point(327, 15)
+        Me.cmbOrdenII.Name = "cmbOrdenII"
+        Me.cmbOrdenII.Size = New System.Drawing.Size(92, 21)
+        Me.cmbOrdenII.TabIndex = 1
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(238, 19)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(61, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Secundario"
+        '
+        'cmbOrdenI
+        '
+        Me.cmbOrdenI.FormattingEnabled = True
+        Me.cmbOrdenI.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
+        Me.cmbOrdenI.Location = New System.Drawing.Point(118, 15)
+        Me.cmbOrdenI.Name = "cmbOrdenI"
+        Me.cmbOrdenI.Size = New System.Drawing.Size(92, 21)
+        Me.cmbOrdenI.TabIndex = 1
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(46, 19)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(44, 13)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "Primario"
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.clbResponsables)
+        Me.GroupBox7.Location = New System.Drawing.Point(771, 55)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(167, 107)
+        Me.GroupBox7.TabIndex = 4
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Responsable"
+        '
+        'clbResponsables
+        '
+        Me.clbResponsables.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.clbResponsables.CheckOnClick = True
+        Me.clbResponsables.Cursor = System.Windows.Forms.Cursors.Default
+        Me.clbResponsables.FormattingEnabled = True
+        Me.clbResponsables.Location = New System.Drawing.Point(10, 18)
+        Me.clbResponsables.Name = "clbResponsables"
+        Me.clbResponsables.Size = New System.Drawing.Size(147, 77)
+        Me.clbResponsables.TabIndex = 2
+        '
+        'txtFiltrar
+        '
+        Me.txtFiltrar.Location = New System.Drawing.Point(73, 173)
+        Me.txtFiltrar.Name = "txtFiltrar"
+        Me.txtFiltrar.Size = New System.Drawing.Size(346, 20)
+        Me.txtFiltrar.TabIndex = 1
+        '
+        'txtAnio
+        '
+        Me.txtAnio.Location = New System.Drawing.Point(44, 17)
+        Me.txtAnio.Name = "txtAnio"
+        Me.txtAnio.Size = New System.Drawing.Size(57, 20)
+        Me.txtAnio.TabIndex = 1
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.clbEmisores)
+        Me.GroupBox6.Location = New System.Drawing.Point(598, 55)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(167, 107)
+        Me.GroupBox6.TabIndex = 3
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Emisor"
+        '
+        'clbEmisores
+        '
+        Me.clbEmisores.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.clbEmisores.CheckOnClick = True
+        Me.clbEmisores.Cursor = System.Windows.Forms.Cursors.Default
+        Me.clbEmisores.FormattingEnabled = True
+        Me.clbEmisores.Location = New System.Drawing.Point(10, 18)
+        Me.clbEmisores.Name = "clbEmisores"
+        Me.clbEmisores.Size = New System.Drawing.Size(147, 77)
+        Me.clbEmisores.TabIndex = 2
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.clbTiposSolicitud)
+        Me.GroupBox3.Location = New System.Drawing.Point(9, 54)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(202, 107)
+        Me.GroupBox3.TabIndex = 3
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Tipos de Solicitud"
+        '
+        'clbTiposSolicitud
+        '
+        Me.clbTiposSolicitud.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.clbTiposSolicitud.CheckOnClick = True
+        Me.clbTiposSolicitud.Cursor = System.Windows.Forms.Cursors.Default
+        Me.clbTiposSolicitud.FormattingEnabled = True
+        Me.clbTiposSolicitud.Location = New System.Drawing.Point(10, 18)
+        Me.clbTiposSolicitud.Name = "clbTiposSolicitud"
+        Me.clbTiposSolicitud.Size = New System.Drawing.Size(180, 77)
+        Me.clbTiposSolicitud.TabIndex = 2
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.clbOrigenes)
+        Me.GroupBox5.Location = New System.Drawing.Point(425, 55)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(167, 107)
+        Me.GroupBox5.TabIndex = 3
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Origen"
+        '
+        'clbOrigenes
+        '
+        Me.clbOrigenes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.clbOrigenes.CheckOnClick = True
+        Me.clbOrigenes.Cursor = System.Windows.Forms.Cursors.Default
+        Me.clbOrigenes.FormattingEnabled = True
+        Me.clbOrigenes.Items.AddRange(New Object() {"Total", "Auditoría", "Reclamo", "I. de No Conformidad", "Proceso / Sist", "Otro"})
+        Me.clbOrigenes.Location = New System.Drawing.Point(10, 18)
+        Me.clbOrigenes.Name = "clbOrigenes"
+        Me.clbOrigenes.Size = New System.Drawing.Size(147, 77)
+        Me.clbOrigenes.TabIndex = 2
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.clbEstados)
+        Me.GroupBox4.Location = New System.Drawing.Point(217, 54)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(202, 107)
+        Me.GroupBox4.TabIndex = 3
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Estado"
+        '
+        'clbEstados
+        '
+        Me.clbEstados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.clbEstados.CheckOnClick = True
+        Me.clbEstados.Cursor = System.Windows.Forms.Cursors.Default
+        Me.clbEstados.FormattingEnabled = True
+        Me.clbEstados.Items.AddRange(New Object() {"Total", "Iniciada", "Investigación", "Implementación", "Implementación a Verificar", "Implementación Verificada", "Cerrada"})
+        Me.clbEstados.Location = New System.Drawing.Point(10, 18)
+        Me.clbEstados.Name = "clbEstados"
+        Me.clbEstados.Size = New System.Drawing.Size(180, 77)
+        Me.clbEstados.TabIndex = 2
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.dgvListado, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 50)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 247.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 472)
+        Me.TableLayoutPanel1.TabIndex = 4
         '
         'IndiceGralSac
         '
@@ -567,17 +579,17 @@ Partial Class IndiceGralSac
         Me.Panel1.PerformLayout()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox8.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

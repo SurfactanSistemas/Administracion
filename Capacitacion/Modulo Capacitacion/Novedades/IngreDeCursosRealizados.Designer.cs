@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -303,9 +303,11 @@
             this.Mes10,
             this.Mes11,
             this.Mes12});
+            this.DGV_Cronograma.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_Cronograma.Location = new System.Drawing.Point(15, 40);
             this.DGV_Cronograma.Name = "DGV_Cronograma";
             this.DGV_Cronograma.RowHeadersWidth = 10;
+            this.DGV_Cronograma.ShowCellToolTips = false;
             this.DGV_Cronograma.Size = new System.Drawing.Size(760, 432);
             this.DGV_Cronograma.TabIndex = 36;
             this.DGV_Cronograma.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Cronograma_CellDoubleClick);
@@ -361,8 +363,8 @@
             // Mes1
             // 
             this.Mes1.DataPropertyName = "Mes1";
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes1.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes1.DefaultCellStyle = dataGridViewCellStyle25;
             this.Mes1.HeaderText = "Jun";
             this.Mes1.Name = "Mes1";
             this.Mes1.Width = 30;
@@ -370,8 +372,8 @@
             // Mes2
             // 
             this.Mes2.DataPropertyName = "Mes2";
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes2.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes2.DefaultCellStyle = dataGridViewCellStyle26;
             this.Mes2.HeaderText = "Jul";
             this.Mes2.Name = "Mes2";
             this.Mes2.Width = 30;
@@ -379,8 +381,8 @@
             // Mes3
             // 
             this.Mes3.DataPropertyName = "Mes3";
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes3.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes3.DefaultCellStyle = dataGridViewCellStyle27;
             this.Mes3.HeaderText = "Ago";
             this.Mes3.Name = "Mes3";
             this.Mes3.Width = 30;
@@ -388,8 +390,8 @@
             // Mes4
             // 
             this.Mes4.DataPropertyName = "Mes4";
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes4.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes4.DefaultCellStyle = dataGridViewCellStyle28;
             this.Mes4.HeaderText = "Sep";
             this.Mes4.Name = "Mes4";
             this.Mes4.Width = 30;
@@ -397,8 +399,8 @@
             // Mes5
             // 
             this.Mes5.DataPropertyName = "Mes5";
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes5.DefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes5.DefaultCellStyle = dataGridViewCellStyle29;
             this.Mes5.HeaderText = "Oct";
             this.Mes5.Name = "Mes5";
             this.Mes5.Width = 30;
@@ -406,8 +408,8 @@
             // Mes6
             // 
             this.Mes6.DataPropertyName = "Mes6";
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes6.DefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes6.DefaultCellStyle = dataGridViewCellStyle30;
             this.Mes6.HeaderText = "Nov";
             this.Mes6.Name = "Mes6";
             this.Mes6.Width = 30;
@@ -415,8 +417,8 @@
             // Mes7
             // 
             this.Mes7.DataPropertyName = "Mes7";
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes7.DefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes7.DefaultCellStyle = dataGridViewCellStyle31;
             this.Mes7.HeaderText = "Dic";
             this.Mes7.Name = "Mes7";
             this.Mes7.Width = 30;
@@ -424,8 +426,8 @@
             // Mes8
             // 
             this.Mes8.DataPropertyName = "Mes8";
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes8.DefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes8.DefaultCellStyle = dataGridViewCellStyle32;
             this.Mes8.HeaderText = "Ene";
             this.Mes8.Name = "Mes8";
             this.Mes8.Width = 30;
@@ -433,8 +435,8 @@
             // Mes9
             // 
             this.Mes9.DataPropertyName = "Mes9";
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes9.DefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes9.DefaultCellStyle = dataGridViewCellStyle33;
             this.Mes9.HeaderText = "Feb";
             this.Mes9.Name = "Mes9";
             this.Mes9.Width = 30;
@@ -442,8 +444,8 @@
             // Mes10
             // 
             this.Mes10.DataPropertyName = "Mes10";
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes10.DefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes10.DefaultCellStyle = dataGridViewCellStyle34;
             this.Mes10.HeaderText = "Mar";
             this.Mes10.Name = "Mes10";
             this.Mes10.Width = 30;
@@ -451,8 +453,8 @@
             // Mes11
             // 
             this.Mes11.DataPropertyName = "Mes11";
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes11.DefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes11.DefaultCellStyle = dataGridViewCellStyle35;
             this.Mes11.HeaderText = "Abr";
             this.Mes11.Name = "Mes11";
             this.Mes11.Width = 30;
@@ -460,8 +462,8 @@
             // Mes12
             // 
             this.Mes12.DataPropertyName = "Mes12";
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes12.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes12.DefaultCellStyle = dataGridViewCellStyle36;
             this.Mes12.HeaderText = "May";
             this.Mes12.Name = "Mes12";
             this.Mes12.Width = 30;
@@ -474,6 +476,7 @@
             this.TB_Año.Size = new System.Drawing.Size(54, 20);
             this.TB_Año.TabIndex = 35;
             this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Año.TextChanged += new System.EventHandler(this.TB_Año_TextChanged);
             this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
             // 
             // BT_Limpiar

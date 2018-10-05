@@ -312,11 +312,11 @@ namespace Negocio
                 + " EstadoX = '" + L.EstadoX + "', EstaI = '" + L.EstaI + "', EstaII = '" + L.EstaII + "',"
                 + " EstaIII = '" + L.EstaIII + "', EstaIV = '" + L.EstaIV + "', EstaV = '" + L.EstaV + "',"
                 + " EstaVI = '" + L.EstaVI + "', EstaVII = '" + L.EstaVII + "', EstaVIII = '" + L.EstaVIII + "',"
-                + " EstaIX = '" + L.EstaIX + "', EstaX = '" + L.EstaX + "', FechaVersion = '" + L.FechaVersion + "',"
+                + " EstaIX = '" + L.EstaIX + "', EstaX = '" + L.EstaX + "',"
                 + " ObservaI1 = '" + L.EstadoI + "', ObservaI2 = '" + L.EstadoII + "', ObservaI3 = '" + L.EstadoIII + "',"
                 + " ObservaI4 = '" + L.EstadoIV + "', ObservaI5 = '" + L.EstadoV + "', ObservaII1 = '" + L.ObservExtI + "',"
                 + " ObservaII2 = '" + L.ObservExtII + "', ObservaII3 = '" + L.ObservExtIII + "', ObservaII4 = '" + L.ObservExtIV + "',"
-                + " ObservaII5 = '" + L.ObservExtIV + "', Actualizado = ' '  where Codigo = " + L.Codigo;
+                + " ObservaII5 = '" + L.ObservExtIV + "', Actualizado = ' ', Sector = '" + L.Sector.Codigo + "', DesSector = '" + L.Sector.Descripcion + "', Dni = '" + L.DNI + "'  where Codigo = " + L.Codigo;
 
                 repo.Modificar(consulta);
 
