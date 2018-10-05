@@ -14,12 +14,14 @@ namespace Modulo_Capacitacion.Auxiliares
     public partial class CursosDisponibles : Form
     {
         private int WRowIndex = -1;
+        private string ZTema;
 
         public CursosDisponibles(string WTema, int RowIndex)
         {
             InitializeComponent();
 
             this.WRowIndex = RowIndex;
+            this.ZTema = WTema;
             CargarCursos(WTema);
 
         }
@@ -81,9 +83,11 @@ namespace Modulo_Capacitacion.Auxiliares
                 var WDesCurso = dgvCursos.CurrentRow.Cells["Descripcion"].Value ?? "0";
                 var WHoras = dgvCursos.CurrentRow.Cells["Horas"].Value ?? "0";
 
-                WOwner.AsignarCurso(WCurso, WDesCurso, WHoras, WRowIndex);
+                if (WOwner.AsignarCurso(this.ZTema, WCurso, WDesCurso, WHoras, WRowIndex))
+                {
+                    Close();
+                }
 
-                Close();
             }
 
         }

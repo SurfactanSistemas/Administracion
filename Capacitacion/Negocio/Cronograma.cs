@@ -70,14 +70,19 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-            string consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, Cr.Tema as Curso, t.Descripcion as DesCurso, Cr.Horas, Cr.Realizado" +
+            string consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, Cr.Tema as Curso, t.Descripcion as DesCurso, ISNULL(t.Horas, 0) Horas, Cr.Realizado" +
                                 " from cronograma Cr inner join Curso C on C.Codigo = Cr.Curso LEFT OUTER JOIN Tema t ON cr.Curso = t.Curso AND Cr.Tema = t.Tema" 
                                 + " where Cr.legajo = "+p1+" and Cr.ano = " + p2;
 
-            DataTable DT =  repo.BuscarUno(consulta);
+            DataTable DT =  repo.BuscarUno(consulta).Copy();
 
-            //Cronograma Cr = new Cronograma();
-            //return Cr;
+            consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, Cr.Tema2 as Curso, t.Descripcion as DesCurso, ISNULL(t.Horas, 0) Horas, Cr.Realizado" +
+                    " from cronograma Cr inner join Curso C on C.Codigo = Cr.Curso LEFT OUTER JOIN Tema t ON cr.Curso = t.Curso AND Cr.Tema2 = t.Tema"
+                    + " where ISNULL(Cr.Tema2, 0) <> 0 And Cr.legajo = " + p1 + " and Cr.ano = " + p2;
+
+            DataTable DT2 = repo.BuscarUno(consulta).Copy();
+
+            DT.Load(DT2.CreateDataReader());
 
             return DT;
         }
@@ -97,14 +102,6 @@ namespace Negocio
         public object BuscarPorAño(string p)
         {
             Conexion repo = new Conexion();
-
-            //string consulta = "select Cr.Curso,C.Descripcion,count(*) as Personas,sum(Cr.horas) as Horas," +
-            //                  " sum(Cr.Realizado) as HorasRealizado, Resta = CASE WHEN (sum(Cr.horas) -sum(Cr.Realizado)) > 0 THEN (sum(Cr.horas) -sum(Cr.Realizado)) ELSE 0 END," +
-            //                  " Cr2.Mes1,  Cr2.Mes2, Cr2.Mes3, Cr2.Mes4, Cr2.Mes5, Cr2.Mes6, Cr2.Mes7, Cr2.Mes8, " +
-            //                  " Cr2.Mes9,Cr2.Mes10,Cr2.Mes11,Cr2.Mes12  from cronograma Cr LEFT OUTER join Curso C on C.Codigo = Cr.Curso " +
-            //                  " LEFT OUTER JOIN CronogramaII Cr2 ON Cr.Ano = Cr2.Ano AND Cr.Curso = Cr2.Curso where Cr.ano = '" + p + "' " +
-            //                  " group by Cr.curso, C.descripcion, Cr2.Mes1, Cr2.Mes2, Cr2.Mes3, Cr2.Mes4, Cr2.Mes5, Cr2.Mes6, Cr2.Mes7, Cr2.Mes8, " +
-            //                  " Cr2.Mes9, Cr2.Mes10, Cr2.Mes11, Cr2.Mes12  order by Cr.curso asc";
 
             string consulta = "select Cr.Curso,C.Descripcion, (count(*) + sum(CASE WHEN ISNULL(cr.Tema2, 0) <> 0 then 1 else 0 end)) as Personas, sum(ISNULL(t1.horas, 0) + ISNULL(t2.horas, 0)) as Horas," +
                               " sum(Cr.Realizado) as HorasRealizado, Resta = CASE WHEN (sum(Cr.horas) -sum(Cr.Realizado)) > 0 THEN (sum(Cr.horas) -sum(Cr.Realizado)) ELSE 0 END," +

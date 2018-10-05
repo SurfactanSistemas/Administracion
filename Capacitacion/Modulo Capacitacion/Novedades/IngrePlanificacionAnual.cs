@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using Negocio;
 
@@ -16,10 +14,9 @@ namespace Modulo_Capacitacion.Novedades
         Curso C = new Curso();
         Cronograma Cr = new Cronograma();
         Legajo L = new Legajo();
-        bool Modificar = true;
         DataTable dtLegajos;
         DataTable dtLegajosSinFechaEgreso;
-        bool Cargado = false;
+        bool Cargado;
         DataTable dtTemas;
         DataTable dtCursos;
         DataTable dtCronograma = new DataTable();
@@ -165,47 +162,9 @@ namespace Modulo_Capacitacion.Novedades
             TB_CodLegajo.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
-        private void TB_CodPer_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-
-                    if (TB_CodLegajo.Text == "" || TB_Año.Text == "") throw new Exception("Se deben cargar los datos de legajo y año");
-
-                    DGV_Crono.DataSource = Cr.BuscarUno(TB_CodLegajo.Text, TB_Año.Text);
-
-                    Legajo L = new Legajo();
-                    L = L.BuscarUno(TB_CodLegajo.Text);
-                    TB_DesLegajo.Text = L.Descripcion;
-
-                    if (DGV_Crono.Rows.Count == 0)
-                    {
-                        //Busco los cursos asociados al legajo!!
-                        Modificar = false;
-                        DGV_Crono.DataSource = L.BuscarCursos(TB_CodLegajo.Text);
-                    }
-
-                    //Perfil P = new Perfil();
-                    //P = P.BuscarUno(TB_CodPer.Text);
-
-                    //TB_DecPerfil.Text = P.Descripcion;
-                    //Busco datos en cronograma
-
-
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message, "Error");
-            }
-            
-        }
-
         private void BT_Salir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
@@ -222,47 +181,83 @@ namespace Modulo_Capacitacion.Novedades
 
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
-            //
             ValidarDatosIngresados();
-            CargarDatosCronograma();
 
-            if (Modificar) { 
-                //Modifico existente
-                Cr.Eliminar(Cr.Legajo.Codigo, Cr.Año);
-            }
+            SqlTransaction trans = null;
 
-            InsertarCronograma();
-            this.Close();
-        }
-
-        private void InsertarCronograma()
-        {
-            Cr.Agregar();
-        }
-
-        private void CargarDatosCronograma()
-        {
-            Cr.Legajo = new Legajo();
-            Cr.Legajo.Codigo = int.Parse(TB_CodLegajo.Text);
-            Cr.Legajo.Descripcion = TB_DesLegajo.Text;
-            Cr.Año = TB_Año.Text;
-            //Cr.Tema = new Tema();
-
-
-            List<Curso> Cursos = new List<Curso>();
-            foreach (DataGridViewRow row in DGV_Crono.Rows)
+            try
             {
-                Curso C = new Curso();
-                C.Curso_Id = int.Parse(row.Cells[0].Value.ToString());
-                C.Descripcion = row.Cells[1].Value.ToString();
-                C.Horas = float.Parse(row.Cells[4].Value.ToString());
-                C.Realizado = float.Parse(row.Cells[5].Value.ToString());
-                int result = 0;
-                int.TryParse(row.Cells[2].Value.ToString(), out result);
-                C.Tema = result;
-                Cursos.Add(C);
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                    conn.Open();
+                    trans = conn.BeginTransaction();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "";
+                        cmd.Transaction = trans;
+
+                        cmd.CommandText = "DELETE FROM Cronograma WHERE Legajo = '" + TB_CodLegajo.Text + "' And Ano = '" + TB_Año.Text + "'";
+                        cmd.ExecuteNonQuery();
+
+                        int WRenglon = 0;
+
+                        foreach (DataGridViewRow row in DGV_Crono.Rows)
+                        {
+                            string consulta;
+
+                            var WCurso = row.Cells["Tema"].Value ?? "";
+                            var WTema = row.Cells["Curso"].Value ?? "";
+                            var WHoras = row.Cells["Horas"].Value ?? "";
+                            var WRealizado = row.Cells["Realizado"].Value ?? "";
+
+                            WHoras = Helper.FormatoNumerico(WHoras);
+
+                            cmd.CommandText = "SELECT Clave FROM Cronograma WHERE Legajo = '" + TB_CodLegajo.Text + "' AND Ano = '" + TB_Año.Text + "' And Curso = '" + WCurso + "'";
+
+                            using (SqlDataReader dr = cmd.ExecuteReader())
+                            {
+                                if (dr.HasRows)
+                                {
+                                    // Actualizo el segundo curso.
+                                    dr.Read();
+                                    string WClave = dr["Clave"].ToString();
+
+                                    consulta = "UPDATE Cronograma SET Tema2 = '" + WTema + "' WHERE Clave = '" + WClave + "'";
+                                }
+                                else
+                                {
+                                    WRenglon++;
+                                    // Inserto el Renglon.
+
+                                    var clave1 = TB_CodLegajo.Text.Trim().PadLeft(6, '0');
+                                    var clave2 = TB_Año.Text.Trim().PadLeft(4, '0');
+                                    var clave3 = WRenglon.ToString().PadLeft(2, '0');
+
+                                    consulta = "insert into cronograma (Clave,Legajo,Ano,Renglon,Curso,Horas,Realizado, DesLegajo, Tema,DesTema, Tema2, DesTema2) " +
+                                    " values ('"+ clave1 + clave2 + clave3 +"', "+ TB_CodLegajo.Text +", "+ TB_Año.Text +"," + WRenglon + ", " + WCurso + ", "
+                                    + WHoras + ", " + WRealizado + ", '" + TB_DesLegajo.Text.Trim() + "', " + WTema + ", '', 0, '')";
+                                }
+                            }
+
+                            cmd.CommandText = consulta;
+                            cmd.ExecuteNonQuery();
+                        }
+
+                    }
+
+                    trans.Commit();
+                }
+
+                Close();
             }
-            Cr.Cursos = Cursos;
+            catch (Exception ex)
+            {
+                if (trans != null && trans.Connection != null) trans.Rollback();
+                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+            }
         }
 
         private void ValidarDatosIngresados()
@@ -280,49 +275,27 @@ namespace Modulo_Capacitacion.Novedades
 
         private void TB_DesLegajo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Cargado == true)
+            if (Cargado)
             {
                 TB_Año.Focus();
             }
-        }
-
-        private void BT_Guardar_Click_1(object sender, EventArgs e)
-        {
-            //
-            ValidarDatosIngresados();
-            CargarDatosCronograma();
-
-            if (Modificar)
-            {
-                //Modifico existente
-                Cr.Eliminar(Cr.Legajo.Codigo, Cr.Año);
-            }
-
-            InsertarCronograma();
-            this.Close();
         }
 
         private void TB_Buscar_Click(object sender, EventArgs e)
         {
             try
             {
-                
-
                     if (TB_CodLegajo.Text == "" || TB_Año.Text == "") throw new Exception("Se deben cargar los datos de legajo y año");
 
-
                     dtCronograma = Cr.BuscarUno(TB_CodLegajo.Text, TB_Año.Text);
-                    DGV_Crono.DataSource = Cr.BuscarUno(TB_CodLegajo.Text, TB_Año.Text);
-
-                    Legajo L = new Legajo();
-                    L = L.BuscarUno(TB_CodLegajo.Text);
-                    TB_DesLegajo.Text = L.Descripcion;
+                
+                    Legajo _L = new Legajo();
+                    _L = _L.BuscarUno(TB_CodLegajo.Text);
+                    TB_DesLegajo.Text = _L.Descripcion;
                     lblAtencion.Visible = false;
 
                     if (dtCronograma.Rows.Count == 0)
                     {
-                        //Busco los cursos asociados al legajo!!
-                        Modificar = false;
                         dtCronograma = L.BuscarCursosPlanificacion(TB_CodLegajo.Text);
                         // Mostramos la ventana de Atencion.
                         lblAtencion.Visible = true;
@@ -330,16 +303,6 @@ namespace Modulo_Capacitacion.Novedades
 
                     DGV_Crono.DataSource = dtCronograma;
 
-                
-
-                    //Perfil P = new Perfil();
-                    //P = P.BuscarUno(TB_CodPer.Text);
-
-                    //TB_DecPerfil.Text = P.Descripcion;
-                    //Busco datos en cronograma
-
-
-                
             }
             catch (Exception err)
             {
@@ -424,9 +387,17 @@ namespace Modulo_Capacitacion.Novedades
             DataRow filaCronograma = null;
             bool WAgregar = false;
 
+            DataRow[] rows = dtCronograma.Select("Tema = '" + TB_CodTemas.Text + "'");
+
+            if (rows.Length == 2)
+            {
+                MessageBox.Show("Se pueden agregar unicamente hasta un máximo de 2 Cursos por Tema.");
+                return;
+            }
+
             foreach (DataRow row in dtCronograma.Rows)
             {
-                if (row["Tema"].ToString() == TB_CodTemas.Text)
+                if (row["Tema"].ToString() == TB_CodTemas.Text && row["DesCurso"].ToString().ToUpper() == CB_Curso.Text.ToUpper())
                 {
                     filaCronograma = row;
                 }
@@ -495,11 +466,23 @@ namespace Modulo_Capacitacion.Novedades
             if (e.KeyCode == Keys.Escape) TB_CodLegajo.Text = "";
         }
 
-        internal void AsignarCurso(object wCurso, object wDesCurso, object WHoras, int wRowIndex)
+        internal bool AsignarCurso(string zTema, object wCurso, object wDesCurso, object WHoras, int wRowIndex)
         {
+
+            foreach (DataGridViewRow row in DGV_Crono.Rows)
+            {
+                var WTema = row.Cells["Tema"].Value ?? "";
+                var _Curso = row.Cells["Curso"].Value ?? "";
+
+                if (int.Parse(zTema) == int.Parse(WTema.ToString()) && int.Parse(wCurso.ToString()) == int.Parse(_Curso.ToString())) return false;
+
+            }
+
             DGV_Crono.Rows[wRowIndex].Cells["Curso"].Value = wCurso;
             DGV_Crono.Rows[wRowIndex].Cells["DesCurso"].Value = wDesCurso;
             DGV_Crono.Rows[wRowIndex].Cells["Horas"].Value = WHoras;
+
+            return true;
         }
 
         private void DGV_Crono_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -524,7 +507,7 @@ namespace Modulo_Capacitacion.Novedades
 
             foreach (DataRow row in dtCronograma.Rows)
             {
-                if (DGV_Crono.CurrentRow != null && row["Tema"].ToString() == DGV_Crono.CurrentRow.Cells["Tema"].Value.ToString())
+                if (DGV_Crono.CurrentRow != null && row["Tema"].ToString() == DGV_Crono.CurrentRow.Cells["Tema"].Value.ToString() && row["Curso"].ToString() == DGV_Crono.CurrentRow.Cells["Curso"].Value.ToString())
                 {
                     BorrarFila = row;
                 }

@@ -22,13 +22,13 @@ namespace Modulo_Capacitacion
         private void ingresoDePlanificacionAnualDeCapacitacionPorLegajoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IngrePlanificacionAnual form = new IngrePlanificacionAnual {StartPosition = FormStartPosition.CenterScreen};
-            form.ShowDialog();
+            form.Show(this);
         }
 
         private void ingresoDeSectoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Sectores_Inicio form = new Sectores_Inicio {StartPosition = FormStartPosition.CenterScreen};
-            form.ShowDialog();
+            form.Show(this);
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,7 +44,7 @@ namespace Modulo_Capacitacion
         private void ingresoDeTemasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Temas_Inicio temasForm = new Temas_Inicio {StartPosition = FormStartPosition.CenterScreen};
-            temasForm.ShowDialog();
+            temasForm.Show(this);
         }
 
         private void ingresoDeCursosToolStripMenuItem_Click(object sender, EventArgs e)
