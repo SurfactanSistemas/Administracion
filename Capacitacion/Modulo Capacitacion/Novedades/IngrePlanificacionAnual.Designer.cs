@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -49,12 +50,6 @@
             this.BT_AgregarCurso = new System.Windows.Forms.Button();
             this.lblAtencion = new System.Windows.Forms.Label();
             this.DGV_Crono = new System.Windows.Forms.DataGridView();
-            this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DesTema = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DesCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Realizado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TB_Buscar = new System.Windows.Forms.Button();
             this.BT_LimpiarPant = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
@@ -66,6 +61,12 @@
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
+            this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DesTema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DesCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Realizado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -248,81 +249,24 @@
             this.DGV_Crono.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Crono.Name = "DGV_Crono";
             this.DGV_Crono.ReadOnly = true;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Crono.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Crono.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.DGV_Crono.RowHeadersWidth = 15;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Crono.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Crono.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.DGV_Crono.RowTemplate.Height = 18;
             this.DGV_Crono.ShowCellToolTips = false;
             this.DGV_Crono.Size = new System.Drawing.Size(775, 266);
             this.DGV_Crono.TabIndex = 142;
             this.DGV_Crono.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Crono_CellMouseDoubleClick);
             this.DGV_Crono.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Crono_RowHeaderMouseDoubleClick);
-            // 
-            // Tema
-            // 
-            this.Tema.DataPropertyName = "Tema";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tema.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Tema.HeaderText = "Tema";
-            this.Tema.Name = "Tema";
-            this.Tema.ReadOnly = true;
-            this.Tema.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Tema.Width = 50;
-            // 
-            // DesTema
-            // 
-            this.DesTema.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DesTema.DataPropertyName = "DesTema";
-            this.DesTema.HeaderText = "Descripcion Tema";
-            this.DesTema.Name = "DesTema";
-            this.DesTema.ReadOnly = true;
-            // 
-            // Curso
-            // 
-            this.Curso.DataPropertyName = "Curso";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Curso.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Curso.HeaderText = "Curso";
-            this.Curso.Name = "Curso";
-            this.Curso.ReadOnly = true;
-            this.Curso.Width = 50;
-            // 
-            // DesCurso
-            // 
-            this.DesCurso.DataPropertyName = "DesCurso";
-            this.DesCurso.HeaderText = "Descripcion Curso";
-            this.DesCurso.Name = "DesCurso";
-            this.DesCurso.ReadOnly = true;
-            this.DesCurso.Width = 250;
-            // 
-            // Horas
-            // 
-            this.Horas.DataPropertyName = "Horas";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Horas.DefaultCellStyle = dataGridViewCellStyle9;
-            this.Horas.HeaderText = "Horas";
-            this.Horas.Name = "Horas";
-            this.Horas.ReadOnly = true;
-            this.Horas.Width = 50;
-            // 
-            // Realizado
-            // 
-            this.Realizado.DataPropertyName = "Realizado";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Realizado.DefaultCellStyle = dataGridViewCellStyle10;
-            this.Realizado.HeaderText = "Realizado";
-            this.Realizado.Name = "Realizado";
-            this.Realizado.ReadOnly = true;
-            this.Realizado.Width = 70;
             // 
             // TB_Buscar
             // 
@@ -436,6 +380,66 @@
             this.LFechaAviso.Size = new System.Drawing.Size(52, 18);
             this.LFechaAviso.TabIndex = 4;
             this.LFechaAviso.Text = "Legajo:";
+            // 
+            // Tema
+            // 
+            this.Tema.DataPropertyName = "Tema";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Tema.HeaderText = "Tema";
+            this.Tema.Name = "Tema";
+            this.Tema.ReadOnly = true;
+            this.Tema.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Tema.Width = 50;
+            // 
+            // DesTema
+            // 
+            this.DesTema.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DesTema.DataPropertyName = "DesTema";
+            this.DesTema.HeaderText = "Descripcion Tema";
+            this.DesTema.Name = "DesTema";
+            this.DesTema.ReadOnly = true;
+            // 
+            // Curso
+            // 
+            this.Curso.DataPropertyName = "Curso";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.NullValue = "0";
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Curso.HeaderText = "Curso";
+            this.Curso.Name = "Curso";
+            this.Curso.ReadOnly = true;
+            this.Curso.Width = 50;
+            // 
+            // DesCurso
+            // 
+            this.DesCurso.DataPropertyName = "DesCurso";
+            dataGridViewCellStyle3.NullValue = " ";
+            this.DesCurso.DefaultCellStyle = dataGridViewCellStyle3;
+            this.DesCurso.HeaderText = "Descripcion Curso";
+            this.DesCurso.Name = "DesCurso";
+            this.DesCurso.ReadOnly = true;
+            this.DesCurso.Width = 250;
+            // 
+            // Horas
+            // 
+            this.Horas.DataPropertyName = "Horas";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Horas.HeaderText = "Horas";
+            this.Horas.Name = "Horas";
+            this.Horas.ReadOnly = true;
+            this.Horas.Width = 50;
+            // 
+            // Realizado
+            // 
+            this.Realizado.DataPropertyName = "Realizado";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Realizado.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Realizado.HeaderText = "Realizado";
+            this.Realizado.Name = "Realizado";
+            this.Realizado.ReadOnly = true;
+            this.Realizado.Width = 70;
             // 
             // IngrePlanificacionAnual
             // 

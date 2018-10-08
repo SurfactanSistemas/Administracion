@@ -11,6 +11,7 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
     {
         private int WCurso;
         private string WAnio;
+        private DataTable ZDatos;
 
         public AsignarCursos(DataTable _Datos, object _Curso, string _Anio)
         {
@@ -18,6 +19,7 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
 
             WCurso = int.Parse(_Curso.ToString());
             WAnio = _Anio;
+            ZDatos = _Datos;
 
             var WLegajos = _Datos.Select("Curso = '" + _Curso + "'", "Legajo ASC");
 
@@ -68,6 +70,9 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
 
                         cm.CommandText = "";
 
+                        cm.CommandText = "DELETE FROM Cronograma WHERE Ano = '" + WAnio + "' AND Curso = '" + WCurso + "'";
+                        cm.ExecuteNonQuery();
+
                         foreach (DataGridViewRow row in dgvLegajos.Rows)
                         {
                             var WLegajo = row.Cells["Legajo"].Value ?? "";
@@ -77,9 +82,6 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
                             WHoras = Helper.FormatoNumerico(WHoras);
 
                             if (WLegajo.ToString().Trim() == "") continue;
-
-                            cm.CommandText = "DELETE FROM Cronograma WHERE Ano = '" + WAnio + "' AND Legajo = '" + WLegajo + "' AND Curso = '" + WCurso + "'";
-                            cm.ExecuteNonQuery();
 
                             /*
                              * Chequeamos si era el unico legajo que quedaba en ese curso. En caso de que si, se da de baja el Curso en la Tabla CronogramaII.
@@ -112,13 +114,29 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
 
                             if (WTema.ToString().Trim() != "" && WTema.ToString().Trim() != "0")
                             {
-                                string XClave = Helper.Ceros(WLegajo, 6) + Helper.Ceros(WAnio, 4) +
+                                cm.CommandText = "SELECT Clave FROM Cronograma WHERE Legajo = '" + WLegajo + "' AND Curso = '" + WCurso + "' And Ano = '" + WAnio + "'";
+
+                                using (SqlDataReader dr = cm.ExecuteReader())
+                                {
+                                    if (dr.HasRows)
+                                    {
+                                        dr.Read();
+
+                                        cm.CommandText = "UPDATE Cronograma SET Tema2 = '" + WTema +
+                                                         "', DesTema2 = '' WHERE Clave = '" + dr["Clave"] + "'";
+
+                                    }
+                                    else
+                                    {
+                                        string XClave = Helper.Ceros(WLegajo, 6) + Helper.Ceros(WAnio, 4) +
                                          Helper.Ceros(WRenglon, 2);
 
-                                cm.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo) "
-                                                + " VALUES ("
-                                                + " '" + XClave + "', '" + WLegajo + "', '" + WAnio + "', '" + WRenglon + "', '" + WCurso + "', " + WHoras + ", '0', '" + WTema + "', '', '','', '', '' "
-                                                + " )";
+                                        cm.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo, Tema2, DesTema2) "
+                                                        + " VALUES ("
+                                                        + " '" + XClave + "', '" + WLegajo + "', '" + WAnio + "', '" + WRenglon + "', '" + WCurso + "', " + WHoras + ", '0', '" + WTema + "', '', '','', '', '', 0, '' "
+                                                        + " )";
+                                    }
+                                }
 
                                 cm.ExecuteNonQuery();
                             }
@@ -128,7 +146,7 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
                              */
 
                             WRenglon = 0;
-                            cm.CommandText = "SELECT Legajo, Ano, Curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo FROM Cronograma WHERE Legajo = '" + WLegajo + "' AND Ano = '" + WAnio + "'";
+                            cm.CommandText = "SELECT Legajo, Ano, Curso, Horas, Realizado, Tema, DesTema, Tema2, DesTema2, Observaciones, ObservacionesII, DesSector, DesLegajo FROM Cronograma WHERE Legajo = '" + WLegajo + "' AND Ano = '" + WAnio + "'";
 
                             DataTable WRegrabar = new DataTable();
                             using (SqlDataReader dr = cm.ExecuteReader())
@@ -151,9 +169,9 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
                                     var XClave = Helper.Ceros(WRow["Legajo"], 6) + Helper.Ceros(WAnio, 4) +
                                              Helper.Ceros(WRenglon, 2);
 
-                                    cm.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo) "
+                                    cm.CommandText = "INSERT INTO Cronograma (Clave, Legajo, Ano, Renglon, curso, Horas, Realizado, Tema, DesTema, Observaciones, ObservacionesII, DesSector, DesLegajo, Tema2, DesTema2) "
                                                     + " VALUES ("
-                                                    + " '" + XClave + "', '" + WRow["Legajo"] + "', '" + WAnio + "', '" + WRenglon + "', '" + WRow["Curso"] + "', " + Helper.FormatoNumerico(WRow["Horas"]) + ", " + Helper.FormatoNumerico(WRow["Realizado"]) + ", '" + WRow["Tema"] + "', '" + WRow["DesTema"] + "', '" + WRow["Observaciones"] + "','" + WRow["ObservacionesII"] + "', '" + WRow["DesSector"] + "', '" + WRow["DesLegajo"] + "' "
+                                                    + " '" + XClave + "', '" + WRow["Legajo"] + "', '" + WAnio + "', '" + WRenglon + "', '" + WRow["Curso"] + "', " + Helper.FormatoNumerico(WRow["Horas"]) + ", " + Helper.FormatoNumerico(WRow["Realizado"]) + ", '" + WRow["Tema"] + "', '" + WRow["DesTema"] + "', '" + WRow["Observaciones"] + "','" + WRow["ObservacionesII"] + "', '" + WRow["DesSector"] + "', '" + WRow["DesLegajo"] + "', '" + WRow["Tema2"] + "', '" + WRow["DesTema2"] + "'"
                                                     + " )";
 
                                     cm.ExecuteNonQuery();

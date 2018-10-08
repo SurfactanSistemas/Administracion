@@ -214,6 +214,7 @@ namespace Modulo_Capacitacion.Novedades
                             var WRealizado = row.Cells["Realizado"].Value ?? "";
 
                             WHoras = Helper.FormatoNumerico(WHoras);
+                            WRealizado = Helper.FormatoNumerico(WRealizado);
 
                             cmd.CommandText = "SELECT Clave FROM Cronograma WHERE Legajo = '" + TB_CodLegajo.Text + "' AND Ano = '" + TB_Año.Text + "' And Curso = '" + WCurso + "'";
 

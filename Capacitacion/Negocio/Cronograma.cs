@@ -70,13 +70,13 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-            string consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, Cr.Tema as Curso, t.Descripcion as DesCurso, ISNULL(t.Horas, 0) Horas, Cr.Realizado" +
+            string consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, ISNULL(Cr.Tema, 0) as Curso, ISNULL(t.Descripcion, '') as DesCurso, ISNULL(t.Horas, 0) Horas, Cr.Realizado" +
                                 " from cronograma Cr inner join Curso C on C.Codigo = Cr.Curso LEFT OUTER JOIN Tema t ON cr.Curso = t.Curso AND Cr.Tema = t.Tema" 
                                 + " where Cr.legajo = "+p1+" and Cr.ano = " + p2;
 
             DataTable DT =  repo.BuscarUno(consulta).Copy();
 
-            consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, Cr.Tema2 as Curso, t.Descripcion as DesCurso, ISNULL(t.Horas, 0) Horas, Cr.Realizado" +
+            consulta = "select Cr.Curso as Tema, C.Descripcion as DesTema, ISNULL(Cr.Tema2, 0) as Curso, ISNULL(t.Descripcion, '') as DesCurso, ISNULL(t.Horas, 0) Horas, Cr.Realizado" +
                     " from cronograma Cr inner join Curso C on C.Codigo = Cr.Curso LEFT OUTER JOIN Tema t ON cr.Curso = t.Curso AND Cr.Tema2 = t.Tema"
                     + " where ISNULL(Cr.Tema2, 0) <> 0 And Cr.legajo = " + p1 + " and Cr.ano = " + p2;
 
