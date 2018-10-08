@@ -98,8 +98,6 @@ namespace Negocio
 
         public System.Data.DataTable ListarInformeCons(string DesdeFecha, string HastaFecha, int DesdeTipo, int HastaTipo)
         {
-
-
             Conexion repo = new Conexion();
             string consulta = "SELECT C.Codigo, C.Curso, C.Fecha, C.OrdFecha, C.Horas, C.Legajo, C.DesLegajo, C.Observaciones, C.TipoCursada, C.Tema, C.DesTema, Cur.Descripcion from Cursadas C, Curso Cur where C.Curso = Cur.Codigo and C.OrdFecha >= '" 
                 + DesdeFecha + "' and C.OrdFecha <= '" + HastaFecha + "' and C.Legajo >= 0 and C.Legajo <= 999999 and C.TipoCursada >= " + 
