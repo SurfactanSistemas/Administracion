@@ -22,18 +22,19 @@ Partial Class IndiceGralSac
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvListado = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.clbOrigenes = New System.Windows.Forms.CheckedListBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.clbEstados = New System.Windows.Forms.CheckedListBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.clbTiposSolicitud = New System.Windows.Forms.CheckedListBox()
-        Me.txtAnio = New System.Windows.Forms.TextBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.clbCentros = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cmbOrdenIII = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -41,16 +42,19 @@ Partial Class IndiceGralSac
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cmbOrdenI = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.clbEmisores = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.clbResponsables = New System.Windows.Forms.CheckedListBox()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.clbCentros = New System.Windows.Forms.CheckedListBox()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.idTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtFiltrar = New System.Windows.Forms.TextBox()
+        Me.txtAnio = New System.Windows.Forms.TextBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.clbEmisores = New System.Windows.Forms.CheckedListBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.clbTiposSolicitud = New System.Windows.Forms.CheckedListBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.clbOrigenes = New System.Windows.Forms.CheckedListBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.clbEstados = New System.Windows.Forms.CheckedListBox()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Anio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -62,26 +66,18 @@ Partial Class IndiceGralSac
         Me.Origen = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Emisor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Responsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idResponsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idEmisor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idOrigen = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idCentro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnAceptar = New System.Windows.Forms.Button()
-        Me.btnCancelar = New System.Windows.Forms.Button()
-        Me.txtFiltrar = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -127,12 +123,15 @@ Partial Class IndiceGralSac
         Me.dgvListado.AllowUserToDeleteRows = False
         Me.dgvListado.AllowUserToResizeRows = False
         Me.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvListado.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idTipo, Me.Tipo, Me.Anio, Me.Numero, Me.Fecha, Me.Estado, Me.Titulo, Me.Referencia, Me.Centro, Me.Origen, Me.Emisor, Me.Responsable, Me.idResponsable, Me.idEmisor, Me.idOrigen, Me.idCentro})
+        Me.dgvListado.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Anio, Me.Numero, Me.Fecha, Me.Estado, Me.Titulo, Me.Referencia, Me.Centro, Me.Origen, Me.Emisor, Me.Responsable})
         Me.dgvListado.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvListado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvListado.Location = New System.Drawing.Point(3, 250)
         Me.dgvListado.Name = "dgvListado"
+        Me.dgvListado.ReadOnly = True
         Me.dgvListado.RowHeadersWidth = 15
         Me.dgvListado.RowTemplate.Height = 20
+        Me.dgvListado.ShowCellToolTips = False
         Me.dgvListado.Size = New System.Drawing.Size(1139, 219)
         Me.dgvListado.TabIndex = 2
         '
@@ -150,71 +149,82 @@ Partial Class IndiceGralSac
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
         '
-        'GroupBox5
+        'Panel2
         '
-        Me.GroupBox5.Controls.Add(Me.clbOrigenes)
-        Me.GroupBox5.Location = New System.Drawing.Point(425, 55)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(167, 107)
-        Me.GroupBox5.TabIndex = 3
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Origen"
+        Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.btnCancelar)
+        Me.Panel2.Controls.Add(Me.btnAceptar)
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.Label6)
+        Me.Panel2.Controls.Add(Me.GroupBox8)
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox7)
+        Me.Panel2.Controls.Add(Me.txtFiltrar)
+        Me.Panel2.Controls.Add(Me.txtAnio)
+        Me.Panel2.Controls.Add(Me.GroupBox6)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Controls.Add(Me.GroupBox5)
+        Me.Panel2.Controls.Add(Me.GroupBox4)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 16)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1119, 208)
+        Me.Panel2.TabIndex = 5
         '
-        'clbOrigenes
+        'btnCancelar
         '
-        Me.clbOrigenes.CheckOnClick = True
-        Me.clbOrigenes.FormattingEnabled = True
-        Me.clbOrigenes.Items.AddRange(New Object() {"Total", "Auditoría", "Reclamo", "I. de No Conformidad", "Proceso / Sist", "Otro"})
-        Me.clbOrigenes.Location = New System.Drawing.Point(10, 18)
-        Me.clbOrigenes.Name = "clbOrigenes"
-        Me.clbOrigenes.Size = New System.Drawing.Size(147, 79)
-        Me.clbOrigenes.TabIndex = 2
+        Me.btnCancelar.Location = New System.Drawing.Point(602, 167)
+        Me.btnCancelar.Name = "btnCancelar"
+        Me.btnCancelar.Size = New System.Drawing.Size(161, 32)
+        Me.btnCancelar.TabIndex = 5
+        Me.btnCancelar.Text = "Cancelar"
+        Me.btnCancelar.UseVisualStyleBackColor = True
         '
-        'GroupBox4
+        'btnAceptar
         '
-        Me.GroupBox4.Controls.Add(Me.clbEstados)
-        Me.GroupBox4.Location = New System.Drawing.Point(217, 54)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(202, 107)
-        Me.GroupBox4.TabIndex = 3
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Estado"
+        Me.btnAceptar.Location = New System.Drawing.Point(435, 167)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(161, 32)
+        Me.btnAceptar.TabIndex = 5
+        Me.btnAceptar.Text = "Aceptar"
+        Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'clbEstados
+        'Label7
         '
-        Me.clbEstados.CheckOnClick = True
-        Me.clbEstados.FormattingEnabled = True
-        Me.clbEstados.Items.AddRange(New Object() {"Total", "Iniciada", "Investigación", "Implementación", "Implementación a Verificar", "Implementación Verificada", "Cerrada"})
-        Me.clbEstados.Location = New System.Drawing.Point(10, 18)
-        Me.clbEstados.Name = "clbEstados"
-        Me.clbEstados.Size = New System.Drawing.Size(180, 79)
-        Me.clbEstados.TabIndex = 2
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(27, 177)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(40, 13)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "Buscar"
         '
-        'GroupBox3
+        'Label6
         '
-        Me.GroupBox3.Controls.Add(Me.clbTiposSolicitud)
-        Me.GroupBox3.Location = New System.Drawing.Point(9, 54)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(202, 107)
-        Me.GroupBox3.TabIndex = 3
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Tipos de Solicitud"
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(13, 21)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(26, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Año"
         '
-        'clbTiposSolicitud
+        'GroupBox8
         '
-        Me.clbTiposSolicitud.CheckOnClick = True
-        Me.clbTiposSolicitud.FormattingEnabled = True
-        Me.clbTiposSolicitud.Location = New System.Drawing.Point(10, 18)
-        Me.clbTiposSolicitud.Name = "clbTiposSolicitud"
-        Me.clbTiposSolicitud.Size = New System.Drawing.Size(180, 79)
-        Me.clbTiposSolicitud.TabIndex = 2
+        Me.GroupBox8.Controls.Add(Me.clbCentros)
+        Me.GroupBox8.Location = New System.Drawing.Point(944, 55)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(167, 107)
+        Me.GroupBox8.TabIndex = 4
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "Centro"
         '
-        'txtAnio
+        'clbCentros
         '
-        Me.txtAnio.Location = New System.Drawing.Point(44, 17)
-        Me.txtAnio.Name = "txtAnio"
-        Me.txtAnio.Size = New System.Drawing.Size(57, 20)
-        Me.txtAnio.TabIndex = 1
+        Me.clbCentros.CheckOnClick = True
+        Me.clbCentros.FormattingEnabled = True
+        Me.clbCentros.Location = New System.Drawing.Point(10, 18)
+        Me.clbCentros.Name = "clbCentros"
+        Me.clbCentros.Size = New System.Drawing.Size(147, 79)
+        Me.clbCentros.TabIndex = 2
         '
         'GroupBox2
         '
@@ -285,29 +295,38 @@ Partial Class IndiceGralSac
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Primario"
         '
-        'Label6
+        'GroupBox7
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(13, 21)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(26, 13)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Año"
+        Me.GroupBox7.Controls.Add(Me.clbResponsables)
+        Me.GroupBox7.Location = New System.Drawing.Point(771, 55)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(167, 107)
+        Me.GroupBox7.TabIndex = 4
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Responsable"
         '
-        'TableLayoutPanel1
+        'clbResponsables
         '
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.dgvListado, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 50)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 247.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 472)
-        Me.TableLayoutPanel1.TabIndex = 4
+        Me.clbResponsables.CheckOnClick = True
+        Me.clbResponsables.FormattingEnabled = True
+        Me.clbResponsables.Location = New System.Drawing.Point(10, 18)
+        Me.clbResponsables.Name = "clbResponsables"
+        Me.clbResponsables.Size = New System.Drawing.Size(147, 79)
+        Me.clbResponsables.TabIndex = 2
+        '
+        'txtFiltrar
+        '
+        Me.txtFiltrar.Location = New System.Drawing.Point(73, 173)
+        Me.txtFiltrar.Name = "txtFiltrar"
+        Me.txtFiltrar.Size = New System.Drawing.Size(346, 20)
+        Me.txtFiltrar.TabIndex = 1
+        '
+        'txtAnio
+        '
+        Me.txtAnio.Location = New System.Drawing.Point(44, 17)
+        Me.txtAnio.Name = "txtAnio"
+        Me.txtAnio.Size = New System.Drawing.Size(57, 20)
+        Me.txtAnio.TabIndex = 1
         '
         'GroupBox6
         '
@@ -328,80 +347,88 @@ Partial Class IndiceGralSac
         Me.clbEmisores.Size = New System.Drawing.Size(147, 79)
         Me.clbEmisores.TabIndex = 2
         '
-        'GroupBox7
+        'GroupBox3
         '
-        Me.GroupBox7.Controls.Add(Me.clbResponsables)
-        Me.GroupBox7.Location = New System.Drawing.Point(771, 55)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(167, 107)
-        Me.GroupBox7.TabIndex = 4
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Responsable"
+        Me.GroupBox3.Controls.Add(Me.clbTiposSolicitud)
+        Me.GroupBox3.Location = New System.Drawing.Point(9, 54)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(202, 107)
+        Me.GroupBox3.TabIndex = 3
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Tipos de Solicitud"
         '
-        'clbResponsables
+        'clbTiposSolicitud
         '
-        Me.clbResponsables.CheckOnClick = True
-        Me.clbResponsables.FormattingEnabled = True
-        Me.clbResponsables.Location = New System.Drawing.Point(10, 18)
-        Me.clbResponsables.Name = "clbResponsables"
-        Me.clbResponsables.Size = New System.Drawing.Size(147, 79)
-        Me.clbResponsables.TabIndex = 2
+        Me.clbTiposSolicitud.CheckOnClick = True
+        Me.clbTiposSolicitud.FormattingEnabled = True
+        Me.clbTiposSolicitud.Location = New System.Drawing.Point(10, 18)
+        Me.clbTiposSolicitud.Name = "clbTiposSolicitud"
+        Me.clbTiposSolicitud.Size = New System.Drawing.Size(180, 79)
+        Me.clbTiposSolicitud.TabIndex = 2
         '
-        'GroupBox8
+        'GroupBox5
         '
-        Me.GroupBox8.Controls.Add(Me.clbCentros)
-        Me.GroupBox8.Location = New System.Drawing.Point(944, 55)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(167, 107)
-        Me.GroupBox8.TabIndex = 4
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Centro"
+        Me.GroupBox5.Controls.Add(Me.clbOrigenes)
+        Me.GroupBox5.Location = New System.Drawing.Point(425, 55)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(167, 107)
+        Me.GroupBox5.TabIndex = 3
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Origen"
         '
-        'clbCentros
+        'clbOrigenes
         '
-        Me.clbCentros.CheckOnClick = True
-        Me.clbCentros.FormattingEnabled = True
-        Me.clbCentros.Location = New System.Drawing.Point(10, 18)
-        Me.clbCentros.Name = "clbCentros"
-        Me.clbCentros.Size = New System.Drawing.Size(147, 79)
-        Me.clbCentros.TabIndex = 2
+        Me.clbOrigenes.CheckOnClick = True
+        Me.clbOrigenes.FormattingEnabled = True
+        Me.clbOrigenes.Items.AddRange(New Object() {"Total", "Auditoría", "Reclamo", "I. de No Conformidad", "Proceso / Sist", "Otro"})
+        Me.clbOrigenes.Location = New System.Drawing.Point(10, 18)
+        Me.clbOrigenes.Name = "clbOrigenes"
+        Me.clbOrigenes.Size = New System.Drawing.Size(147, 79)
+        Me.clbOrigenes.TabIndex = 2
         '
-        'Panel2
+        'GroupBox4
         '
-        Me.Panel2.AutoScroll = True
-        Me.Panel2.Controls.Add(Me.btnCancelar)
-        Me.Panel2.Controls.Add(Me.btnAceptar)
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.GroupBox8)
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox7)
-        Me.Panel2.Controls.Add(Me.txtFiltrar)
-        Me.Panel2.Controls.Add(Me.txtAnio)
-        Me.Panel2.Controls.Add(Me.GroupBox6)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Controls.Add(Me.GroupBox5)
-        Me.Panel2.Controls.Add(Me.GroupBox4)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 16)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1119, 208)
-        Me.Panel2.TabIndex = 5
+        Me.GroupBox4.Controls.Add(Me.clbEstados)
+        Me.GroupBox4.Location = New System.Drawing.Point(217, 54)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(202, 107)
+        Me.GroupBox4.TabIndex = 3
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Estado"
         '
-        'idTipo
+        'clbEstados
         '
-        Me.idTipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.idTipo.DataPropertyName = "idTipo"
-        Me.idTipo.HeaderText = "Tipo"
-        Me.idTipo.Name = "idTipo"
-        Me.idTipo.Width = 53
+        Me.clbEstados.CheckOnClick = True
+        Me.clbEstados.FormattingEnabled = True
+        Me.clbEstados.Items.AddRange(New Object() {"Total", "Iniciada", "Investigación", "Implementación", "Implementación a Verificar", "Implementación Verificada", "Cerrada"})
+        Me.clbEstados.Location = New System.Drawing.Point(10, 18)
+        Me.clbEstados.Name = "clbEstados"
+        Me.clbEstados.Size = New System.Drawing.Size(180, 79)
+        Me.clbEstados.TabIndex = 2
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.dgvListado, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 50)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 247.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 472)
+        Me.TableLayoutPanel1.TabIndex = 4
         '
         'Tipo
         '
         Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Tipo.DataPropertyName = "Tipo"
         Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.MaxInputLength = 14
         Me.Tipo.Name = "Tipo"
+        Me.Tipo.ReadOnly = True
         Me.Tipo.Width = 53
         '
         'Anio
@@ -410,6 +437,7 @@ Partial Class IndiceGralSac
         Me.Anio.DataPropertyName = "Anio"
         Me.Anio.HeaderText = "Año"
         Me.Anio.Name = "Anio"
+        Me.Anio.ReadOnly = True
         Me.Anio.Width = 51
         '
         'Numero
@@ -418,14 +446,19 @@ Partial Class IndiceGralSac
         Me.Numero.DataPropertyName = "Numero"
         Me.Numero.HeaderText = "Nro"
         Me.Numero.Name = "Numero"
+        Me.Numero.ReadOnly = True
         Me.Numero.Width = 49
         '
         'Fecha
         '
         Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Fecha.DataPropertyName = "Fecha"
+        DataGridViewCellStyle1.Format = "d"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle1
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
         Me.Fecha.Width = 62
         '
         'Estado
@@ -434,25 +467,25 @@ Partial Class IndiceGralSac
         Me.Estado.DataPropertyName = "Estado"
         Me.Estado.HeaderText = "Estado"
         Me.Estado.Name = "Estado"
+        Me.Estado.ReadOnly = True
         Me.Estado.Width = 65
         '
         'Titulo
         '
-        Me.Titulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Titulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Titulo.DataPropertyName = "Titulo"
         Me.Titulo.HeaderText = "Titulo"
-        Me.Titulo.MinimumWidth = 200
         Me.Titulo.Name = "Titulo"
-        Me.Titulo.Width = 200
+        Me.Titulo.ReadOnly = True
         '
         'Referencia
         '
         Me.Referencia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Referencia.DataPropertyName = "Referencia"
         Me.Referencia.HeaderText = "Referencia"
-        Me.Referencia.MinimumWidth = 200
         Me.Referencia.Name = "Referencia"
-        Me.Referencia.Width = 200
+        Me.Referencia.ReadOnly = True
+        Me.Referencia.Width = 84
         '
         'Centro
         '
@@ -460,6 +493,7 @@ Partial Class IndiceGralSac
         Me.Centro.DataPropertyName = "Centro"
         Me.Centro.HeaderText = "Centro"
         Me.Centro.Name = "Centro"
+        Me.Centro.ReadOnly = True
         Me.Centro.Width = 63
         '
         'Origen
@@ -468,6 +502,7 @@ Partial Class IndiceGralSac
         Me.Origen.DataPropertyName = "Origen"
         Me.Origen.HeaderText = "Origen"
         Me.Origen.Name = "Origen"
+        Me.Origen.ReadOnly = True
         Me.Origen.Width = 63
         '
         'Emisor
@@ -476,6 +511,7 @@ Partial Class IndiceGralSac
         Me.Emisor.DataPropertyName = "Emisor"
         Me.Emisor.HeaderText = "Emisor"
         Me.Emisor.Name = "Emisor"
+        Me.Emisor.ReadOnly = True
         Me.Emisor.Width = 63
         '
         'Responsable
@@ -484,73 +520,8 @@ Partial Class IndiceGralSac
         Me.Responsable.DataPropertyName = "Responsable"
         Me.Responsable.HeaderText = "Resp."
         Me.Responsable.Name = "Responsable"
+        Me.Responsable.ReadOnly = True
         Me.Responsable.Width = 60
-        '
-        'idResponsable
-        '
-        Me.idResponsable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.idResponsable.DataPropertyName = "idResponsable"
-        Me.idResponsable.HeaderText = "idResponsable"
-        Me.idResponsable.Name = "idResponsable"
-        Me.idResponsable.Width = 102
-        '
-        'idEmisor
-        '
-        Me.idEmisor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.idEmisor.DataPropertyName = "idEmisor"
-        Me.idEmisor.HeaderText = "idEmisor"
-        Me.idEmisor.Name = "idEmisor"
-        Me.idEmisor.Width = 71
-        '
-        'idOrigen
-        '
-        Me.idOrigen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.idOrigen.DataPropertyName = "idOrigen"
-        Me.idOrigen.HeaderText = "idOrigen"
-        Me.idOrigen.Name = "idOrigen"
-        Me.idOrigen.Width = 71
-        '
-        'idCentro
-        '
-        Me.idCentro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.idCentro.DataPropertyName = "idCentro"
-        Me.idCentro.HeaderText = "idCentro"
-        Me.idCentro.Name = "idCentro"
-        Me.idCentro.Width = 71
-        '
-        'btnAceptar
-        '
-        Me.btnAceptar.Location = New System.Drawing.Point(435, 167)
-        Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(161, 32)
-        Me.btnAceptar.TabIndex = 5
-        Me.btnAceptar.Text = "Aceptar"
-        Me.btnAceptar.UseVisualStyleBackColor = True
-        '
-        'btnCancelar
-        '
-        Me.btnCancelar.Location = New System.Drawing.Point(602, 167)
-        Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(161, 32)
-        Me.btnCancelar.TabIndex = 5
-        Me.btnCancelar.Text = "Cancelar"
-        Me.btnCancelar.UseVisualStyleBackColor = True
-        '
-        'txtFiltrar
-        '
-        Me.txtFiltrar.Location = New System.Drawing.Point(73, 173)
-        Me.txtFiltrar.Name = "txtFiltrar"
-        Me.txtFiltrar.Size = New System.Drawing.Size(346, 20)
-        Me.txtFiltrar.TabIndex = 1
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(27, 177)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(40, 13)
-        Me.Label7.TabIndex = 0
-        Me.Label7.Text = "Buscar"
         '
         'IndiceGralSac
         '
@@ -567,17 +538,17 @@ Partial Class IndiceGralSac
         Me.Panel1.PerformLayout()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox8.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -609,7 +580,10 @@ Partial Class IndiceGralSac
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
     Friend WithEvents clbCentros As System.Windows.Forms.CheckedListBox
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents idTipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnCancelar As System.Windows.Forms.Button
+    Friend WithEvents btnAceptar As System.Windows.Forms.Button
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents txtFiltrar As System.Windows.Forms.TextBox
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Anio As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -621,12 +595,4 @@ Partial Class IndiceGralSac
     Friend WithEvents Origen As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Emisor As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Responsable As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents idResponsable As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents idEmisor As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents idOrigen As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents idCentro As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btnCancelar As System.Windows.Forms.Button
-    Friend WithEvents btnAceptar As System.Windows.Forms.Button
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents txtFiltrar As System.Windows.Forms.TextBox
 End Class
