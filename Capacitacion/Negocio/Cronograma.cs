@@ -173,9 +173,17 @@ namespace Negocio
 
             Conexion repo = new Conexion();
 
-            string consulta = "select C.Ano, C.Curso, Cu.Descripcion, C.Tema, T.Descripcion, C.Legajo, l.Descripcion, C.Horas, C.Realizado from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso LEFT OUTER JOIN Tema T ON T.Curso = C.Curso AND T.Tema = C.Tema LEFT OUTER JOIN Legajo l ON l.Codigo = C.Legajo AND l.Renglon = 1  where C.Curso >= " + TemaDesde + " and C.Curso <= " + TemaHasta + " and C.Ano BETWEEN '" + WAnioI + "' AND '" + WAnioII + "' AND C.Tema <> 0 AND C.Renglon <> 0 order by C.Legajo desc";
+            string consulta = "select C.Ano, C.Curso, Cu.Descripcion, C.Tema, T.Descripcion, C.Legajo, l.Descripcion, T.Horas, C.Realizado from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso LEFT OUTER JOIN Tema T ON T.Curso = C.Curso AND T.Tema = C.Tema LEFT OUTER JOIN Legajo l ON l.Codigo = C.Legajo AND l.Renglon = 1  where C.Curso >= " + TemaDesde + " and C.Curso <= " + TemaHasta + " and C.Ano BETWEEN '" + WAnioI + "' AND '" + WAnioII + "' AND C.Tema <> 0 AND C.Renglon <> 0 order by C.Legajo desc";
 
             DataTable DT = repo.BuscarUno(consulta);
+
+            repo = new Conexion();
+
+            consulta = "select C.Ano, C.Curso, Cu.Descripcion, C.Tema2 As Tema, T.Descripcion, C.Legajo, l.Descripcion, T.Horas, C.Realizado from Cronograma C inner join Curso Cu on Cu.Codigo = C.Curso LEFT OUTER JOIN Tema T ON T.Curso = C.Curso AND T.Tema = C.Tema2 LEFT OUTER JOIN Legajo l ON l.Codigo = C.Legajo AND l.Renglon = 1  where C.Curso >= " + TemaDesde + " and C.Curso <= " + TemaHasta + " and C.Ano BETWEEN '" + WAnioI + "' AND '" + WAnioII + "' AND ISNULL(C.Tema2, 0) <> 0 AND C.Renglon <> 0 order by C.Legajo desc";
+
+            DataTable DT2 = repo.BuscarUno(consulta);
+
+            DT.Load(DT2.CreateDataReader());
 
             return DT;
         }
