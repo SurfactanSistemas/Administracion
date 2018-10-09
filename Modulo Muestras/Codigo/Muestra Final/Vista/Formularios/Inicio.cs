@@ -644,7 +644,7 @@ namespace Vista
                     DataRow datarow = CS.ListarPeligroso(_id);
 
                     Peligroso[i, 0] = datarow[0].ToString();
-                    Peligroso[i, 1] = datarow[1].ToString();
+                    Peligroso[i, 1] = datarow[1].ToString()
                     
                 }
                 

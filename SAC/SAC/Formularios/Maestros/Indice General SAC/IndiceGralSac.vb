@@ -146,14 +146,14 @@
 
         WOrderBy = WOrderBy.Remove(WOrderBy.Length - 1, 1)
 
-        WDatosSac = Query.GetAll("SELECT LTRIM(RTRIM(t.Descripcion)) Tipo, cs.Ano As Anio, cs.Fecha, cs.Numero, LTRIM(RTRIM(cs.Referencia)) Referencia, " &
+        WDatosSac = Query.GetAll("SELECT cs.Tipo As idTipo, LTRIM(RTRIM(t.Descripcion)) Tipo, cs.Ano As Anio, cs.Fecha, cs.Numero, LTRIM(RTRIM(cs.Referencia)) Referencia, " &
                                  " Estado = CASE cs.Estado WHEN 1 THEN 'Iniciada' WHEN 2 THEN 'Investig.' WHEN 3 THEN 'Implement.' WHEN 4 THEN 'Implem. A Ver.' WHEN 5 THEN 'Implem. Verif.' ELSE 'Cerrada' END, " &
                                  " Origen = CASE cs.Origen WHEN 1 THEN 'Auditoría' WHEN 2 THEN 'Reclamo' WHEN 3 THEN 'I. No Conf.' WHEN 4 THEN 'Proc./Sist.' WHEN 5 THEN 'Otro' END, " &
                                  " LTRIM(RTRIM(cs.Titulo)) Titulo, LTRIM(RTRIM(ce.Descripcion)) Centro, LTRIM(RTRIM(rs.Descripcion)) Emisor, LTRIM(RTRIM(rs2.Descripcion)) Responsable " &
                                  " FROM CargaSac As cs INNER JOIN TipoSac t ON t.Codigo = cs.Tipo " &
-                                 " INNER JOIN CentroSac ce ON ce.Codigo = cs.Centro " &
-                                 " INNER JOIN ResponsableSac rs ON rs.Codigo = cs.ResponsableEmisor " &
-                                 " INNER JOIN ResponsableSac rs2 ON rs2.Codigo = cs.ResponsableDestino " &
+                                 " LEFT OUTER JOIN CentroSac ce ON ce.Codigo = cs.Centro " &
+                                 " LEFT OUTER JOIN ResponsableSac rs ON rs.Codigo = cs.ResponsableEmisor " &
+                                 " LEFT OUTER JOIN ResponsableSac rs2 ON rs2.Codigo = cs.ResponsableDestino " &
                                  " " & WWhere & " " & WOrderBy)
 
         'dgvListado.DataSource = WDatosSac
@@ -237,6 +237,27 @@
         End If
 
         e.Handled = True
+
+    End Sub
+
+    Private Sub dgvListado_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvListado.CellMouseDoubleClick
+
+        Try
+
+            With dgvListado.CurrentRow
+                Dim WTipo As String = OrDefault(.Cells("idTipo").Value, "")
+                Dim WNumero As String = OrDefault(.Cells("Numero").Value, "")
+                Dim WAnio As String = OrDefault(.Cells("Anio").Value, "")
+
+                Dim frm As New NuevoSac(WTipo, WNumero, WAnio)
+
+                frm.Show(Me)
+
+            End With
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
 
     End Sub
 End Class

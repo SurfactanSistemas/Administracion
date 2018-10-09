@@ -56,6 +56,7 @@ Partial Class IndiceGralSac
         Me.clbEstados = New System.Windows.Forms.CheckedListBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Anio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -123,7 +124,7 @@ Partial Class IndiceGralSac
         Me.dgvListado.AllowUserToDeleteRows = False
         Me.dgvListado.AllowUserToResizeRows = False
         Me.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvListado.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Anio, Me.Numero, Me.Fecha, Me.Estado, Me.Titulo, Me.Referencia, Me.Centro, Me.Origen, Me.Emisor, Me.Responsable})
+        Me.dgvListado.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.idTipo, Me.Anio, Me.Numero, Me.Fecha, Me.Estado, Me.Titulo, Me.Referencia, Me.Centro, Me.Origen, Me.Emisor, Me.Responsable})
         Me.dgvListado.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvListado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvListado.Location = New System.Drawing.Point(3, 250)
@@ -431,6 +432,13 @@ Partial Class IndiceGralSac
         Me.Tipo.ReadOnly = True
         Me.Tipo.Width = 53
         '
+        'idTipo
+        '
+        Me.idTipo.HeaderText = "idTipo"
+        Me.idTipo.Name = "idTipo"
+        Me.idTipo.ReadOnly = True
+        Me.idTipo.Visible = False
+        '
         'Anio
         '
         Me.Anio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -585,6 +593,7 @@ Partial Class IndiceGralSac
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtFiltrar As System.Windows.Forms.TextBox
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents idTipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Anio As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn

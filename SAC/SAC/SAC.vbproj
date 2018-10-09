@@ -135,6 +135,18 @@
     <Compile Include="Formularios\Maestros\Indice General SAC\IndiceGralSac.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\NuevaAccion.Designer.vb">
+      <DependentUpon>NuevaAccion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\NuevaAccion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\NuevoSac.Designer.vb">
+      <DependentUpon>NuevoSac.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\NuevoSac.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.Designer.vb">
       <DependentUpon>ListadoResponsableSAC.vb</DependentUpon>
     </Compile>
@@ -161,6 +173,7 @@
     </Compile>
     <Compile Include="Helper.vb" />
     <Compile Include="Interfaces\IAyudaReponsableSac.vb" />
+    <Compile Include="Interfaces\INuevaAccion.vb" />
     <Compile Include="Interfaces\INuevoCentro.vb" />
     <Compile Include="Interfaces\INuevoResponsableSac.vb" />
     <Compile Include="Interfaces\INuevoTipoSolicitud.vb" />
@@ -211,6 +224,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\IndiceGralSac.resx">
       <DependentUpon>IndiceGralSac.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\NuevaAccion.resx">
+      <DependentUpon>NuevaAccion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\NuevoSac.resx">
+      <DependentUpon>NuevoSac.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.resx">
       <DependentUpon>ListadoResponsableSAC.vb</DependentUpon>
