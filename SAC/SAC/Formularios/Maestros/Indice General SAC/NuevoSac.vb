@@ -1,5 +1,9 @@
 ﻿Public Class NuevoSac : Implements INuevaAccion
 
+    Private Const YMARGEN = 2
+    Private Const XMARGEN = 7
+    Private WRow, Wcol As Integer
+    
     Sub New()
 
         ' This call is required by the designer.
@@ -140,7 +144,7 @@
         dgvAcciones.Rows.Clear()
 
         For i = 1 To 12
-            dgvAcciones.Rows.Add()
+            dgvAcciones.Rows.Add(i, "", "", "", "  /  /    ")
         Next
 
         Dim WCargaSacII As DataRow = Query.GetSingle(String.Format("SELECT * FROM CargaSACII WHERE Tipo = '{0}' AND Numero = '{1}' AND Ano = '{2}'", txtTipo.Text, txtNumero.Text, txtAnio.Text))
@@ -177,7 +181,7 @@
 
     End Sub
 
-    Private Sub dgvAcciones_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvAcciones.CellDoubleClick
+    Private Sub dgvAcciones_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
 
         Dim WNroAccion = If(dgvAcciones.CurrentRow.Cells("idAccion").Value, "")
 
@@ -325,34 +329,60 @@
 
                 Dim iCol = .CurrentCell.ColumnIndex
                 Dim iRow = .CurrentCell.RowIndex
-                Dim valor = .CurrentCell.Value
+                Dim valor As String = OrDefault(.CurrentCell.Value, "")
 
                 ' Limitamos los caracteres permitidos para cada una de las columnas.
                 Select Case iCol
-                    Case 1
+                    Case 2
                         If Not _EsNumeroOControl(keyData) Then
                             Return True
                         End If
-                    Case 4
+                    Case -1
                         If Not _EsDecimalOControl(keyData) Then
                             Return True
                         End If
-                    Case Else
-
                 End Select
 
                 If msg.WParam.ToInt32() = Keys.Enter Then
 
-                    If valor <> "" Then
-
-                    End If
+                    '
+                    ' Control de Valores.
+                    '
 
                     Select Case iCol
+                        
+                        Case 2
+
+                            If Val(valor) <> 0 Then
+                                Dim WResp As DataRow = GetSingle("SELECT LTRIM(RTRIM(Descripcion)) As Desc FROM ResponsableSac WHERE Codigo = '" & valor & "'")
+
+                                If Not IsNothing(WResp) Then
+                                    .Rows(iRow).Cells("DescResponsable").Value = OrDefault(WResp.Item("Desc"), "")
+                                End If
+
+                            End If
                         Case 4
-                            If iRow = 4 Then
+
+                            If valor.Replace(" ", "").Length = 10 Then
+                                If Not _ValidarFecha(valor) Then
+                                    Return True
+                                End If
+                            End If
+
+                    End Select
+
+
+                    '
+                    ' Navegación.
+                    '
+                    Select Case iCol
+                        Case 2
+                            .CurrentCell = .Rows(iRow).Cells("Plazo")
+                        Case 4
+                            If iRow = .Rows.Count - 1 Then
                                 .CurrentCell = .Rows(iRow).Cells(iCol)
                             Else
-                                .CurrentCell = .Rows(iRow + 1).Cells(0)
+                                .CurrentCell = .Rows(iRow + 1).Cells("Acciones")
                             End If
 
                         Case Else
@@ -379,4 +409,70 @@
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
+    Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If txtFechaAux.Text.Replace(" ", "").Length = 10 Then
+                If Not _ValidarFecha(Trim(txtFechaAux.Text)) Then
+                    Exit Sub
+                End If
+            End If
+
+            If WRow >= 0 And Wcol >= 0 Then
+
+                With dgvAcciones
+                    .Rows(WRow).Cells("Plazo").Value = txtFechaAux.Text
+
+                    .CurrentCell = IIf(WRow = .Rows.Count - 1, .Rows(WRow).Cells("Plazo"), .Rows(WRow + 1).Cells("Acciones"))
+                    .Focus()
+
+                    txtFechaAux.Visible = False
+                    txtFechaAux.Location = New Point(680, 390) ' Lo reubicamos lejos de la grilla.
+                End With
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaAux.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub dgvAcciones_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvAcciones.CellEnter
+        With dgvAcciones
+            If e.ColumnIndex = .Columns("Plazo").Index Then
+                .ClearSelection()
+                .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
+                Dim _location As Point = .GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, False).Location
+
+                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN
+                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - XMARGEN
+                txtFechaAux.Location = _location
+                txtFechaAux.Text = .Rows(e.RowIndex).Cells("Plazo").Value
+                WRow = e.RowIndex
+                Wcol = e.ColumnIndex
+                txtFechaAux.Visible = True
+                txtFechaAux.Focus()
+            End If
+        End With
+    End Sub
+
+    Private Sub dgvAcciones_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvAcciones.RowHeaderMouseDoubleClick
+
+        Try
+
+            If MsgBox("¿Esta seguro de querer borrar la acción indicada?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+
+            With dgvAcciones.CurrentRow
+                .Cells("Acciones").Value = ""
+                .Cells("Responsable").Value = ""
+                .Cells("DescResponsable").Value = ""
+                .Cells("Plazo").Value = "  /  /    "
+            End With
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
 End Class

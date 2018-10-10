@@ -68,14 +68,15 @@ Partial Class NuevoSac
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.dgvAcciones = New System.Windows.Forms.DataGridView()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.idAccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Acciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Responsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescResponsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Plazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -476,6 +477,7 @@ Partial Class NuevoSac
         '
         Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
         Me.TabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.TabPage2.Controls.Add(Me.txtFechaAux)
         Me.TabPage2.Controls.Add(Me.dgvAcciones)
         Me.TabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage2.Location = New System.Drawing.Point(4, 29)
@@ -484,6 +486,18 @@ Partial Class NuevoSac
         Me.TabPage2.Size = New System.Drawing.Size(1002, 290)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Acciones"
+        '
+        'txtFechaAux
+        '
+        Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFechaAux.Location = New System.Drawing.Point(931, 50)
+        Me.txtFechaAux.Mask = "00/00/0000"
+        Me.txtFechaAux.Name = "txtFechaAux"
+        Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaAux.Size = New System.Drawing.Size(58, 13)
+        Me.txtFechaAux.TabIndex = 2
+        Me.txtFechaAux.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtFechaAux.Visible = False
         '
         'dgvAcciones
         '
@@ -525,6 +539,26 @@ Partial Class NuevoSac
         Me.dgvAcciones.Size = New System.Drawing.Size(986, 271)
         Me.dgvAcciones.TabIndex = 0
         '
+        'Panel2
+        '
+        Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.TabControl1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel2.Location = New System.Drawing.Point(0, 197)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1025, 333)
+        Me.Panel2.TabIndex = 4
+        '
+        'Panel3
+        '
+        Me.Panel3.AutoScroll = True
+        Me.Panel3.Controls.Add(Me.GroupBox1)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel3.Location = New System.Drawing.Point(0, 36)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(1025, 153)
+        Me.Panel3.TabIndex = 5
+        '
         'idAccion
         '
         Me.idAccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -532,7 +566,8 @@ Partial Class NuevoSac
         Me.idAccion.DefaultCellStyle = DataGridViewCellStyle2
         Me.idAccion.HeaderText = "Accion Nº"
         Me.idAccion.Name = "idAccion"
-        Me.idAccion.Width = 74
+        Me.idAccion.ReadOnly = True
+        Me.idAccion.Width = 80
         '
         'Acciones
         '
@@ -564,28 +599,9 @@ Partial Class NuevoSac
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.Plazo.DefaultCellStyle = DataGridViewCellStyle5
         Me.Plazo.HeaderText = "Plazo"
+        Me.Plazo.MinimumWidth = 70
         Me.Plazo.Name = "Plazo"
-        Me.Plazo.Width = 58
-        '
-        'Panel2
-        '
-        Me.Panel2.AutoScroll = True
-        Me.Panel2.Controls.Add(Me.TabControl1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 197)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1025, 333)
-        Me.Panel2.TabIndex = 4
-        '
-        'Panel3
-        '
-        Me.Panel3.AutoScroll = True
-        Me.Panel3.Controls.Add(Me.GroupBox1)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel3.Location = New System.Drawing.Point(0, 36)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1025, 153)
-        Me.Panel3.TabIndex = 5
+        Me.Plazo.Width = 70
         '
         'NuevoSac
         '
@@ -607,6 +623,7 @@ Partial Class NuevoSac
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         CType(Me.dgvAcciones, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
@@ -654,6 +671,7 @@ Partial Class NuevoSac
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents dgvAcciones As System.Windows.Forms.DataGridView
+    Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
     Friend WithEvents idAccion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Acciones As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Responsable As System.Windows.Forms.DataGridViewTextBoxColumn
