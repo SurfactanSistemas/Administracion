@@ -21,6 +21,8 @@
 
         WDatosSac = Nothing
 
+        btnAceptar.PerformClick()
+
     End Sub
 
     Private Sub _CargarCentros()
@@ -101,10 +103,6 @@
         '
         If txtAnio.Text.Length < 4 Or txtAnio.Text.Trim = "" Then txtAnio.Text = Date.Now.ToString("yyyy")
 
-        '
-        ' Limpiamos el contenido del filtro.
-        '
-        txtFiltrar.Text = ""
 
         '
         ' Armamos los campos de consulta.
@@ -258,6 +256,19 @@
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
+
+    End Sub
+
+    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnio.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtAnio.Text).Length < 4 Then : Exit Sub : End If
+
+            btnAceptar.PerformClick()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtAnio.Text = ""
+        End If
 
     End Sub
 End Class

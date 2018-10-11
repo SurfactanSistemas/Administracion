@@ -117,6 +117,24 @@
     <Compile Include="Formularios\Ayudas\AyudaResponsablesSac.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaCentrosSac.Designer.vb">
+      <DependentUpon>AyudaCentrosSac.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaCentrosSac.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaContenedor.Designer.vb">
+      <DependentUpon>AyudaContenedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaContenedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaTipoSac.Designer.vb">
+      <DependentUpon>AyudaTipoSac.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaTipoSac.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Centros\ListadoCentros.Designer.vb">
       <DependentUpon>ListadoCentros.vb</DependentUpon>
     </Compile>
@@ -172,7 +190,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\IAyudaContenedor.vb" />
+    <Compile Include="Interfaces\IAyudaCentroSac.vb" />
     <Compile Include="Interfaces\IAyudaReponsableSac.vb" />
+    <Compile Include="Interfaces\IAyudaTipoSac.vb" />
     <Compile Include="Interfaces\INuevaAccion.vb" />
     <Compile Include="Interfaces\INuevoCentro.vb" />
     <Compile Include="Interfaces\INuevoResponsableSac.vb" />
@@ -215,6 +236,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Formularios\Ayudas\AyudaResponsablesSac.resx">
       <DependentUpon>AyudaResponsablesSac.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ayudas\AyudaCentrosSac.resx">
+      <DependentUpon>AyudaCentrosSac.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ayudas\AyudaContenedor.resx">
+      <DependentUpon>AyudaContenedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ayudas\AyudaTipoSac.resx">
+      <DependentUpon>AyudaTipoSac.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Centros\ListadoCentros.resx">
       <DependentUpon>ListadoCentros.vb</DependentUpon>
