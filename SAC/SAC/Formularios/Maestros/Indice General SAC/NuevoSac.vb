@@ -1,4 +1,6 @@
-﻿Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroSac, IAyudaReponsableSac, IAyudaTipoSac
+﻿Imports System.Data.SqlClient
+
+Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroSac, IAyudaReponsableSac, IAyudaTipoSac
 
     Private Const YMARGEN = 2
     Private Const XMARGEN = 7
@@ -536,10 +538,10 @@
                         Case 2
 
                             If Val(valor) <> 0 Then
-                                Dim WResp As DataRow = GetSingle("SELECT LTRIM(RTRIM(Descripcion)) As Desc FROM ResponsableSac WHERE Codigo = '" & valor & "'")
+                                Dim WResp As DataRow = GetSingle("SELECT LTRIM(RTRIM(Descripcion)) As Descrip FROM ResponsableSac WHERE Codigo = '" & valor & "'")
 
                                 If Not IsNothing(WResp) Then
-                                    .Rows(iRow).Cells("DescResponsable").Value = OrDefault(WResp.Item("Desc"), "")
+                                    .Rows(iRow).Cells("DescResponsable").Value = OrDefault(WResp.Item("Descrip"), "")
                                 End If
 
                             End If
@@ -618,7 +620,7 @@
                         Case 2
 
                             If Val(valor) <> 0 Then
-                                .Rows(iRow).Cells("DescResponsable").Value = _TraerDescripcionResponsable(valor)
+                                .Rows(iRow).Cells("ImpleDescResponsable").Value = _TraerDescripcionResponsable(valor)
                             End If
 
                         Case 4
@@ -828,7 +830,7 @@
                 With dgvImplementaciones
                     .Rows(WRow).Cells("ImpleFecha").Value = txtFechaAux2.Text
 
-                    .CurrentCell = IIf(WRow = .Rows.Count - 1, .Rows(WRow).Cells("ImpleFecha"), .Rows(WRow + 1).Cells("ImpleAcciones"))
+                    .CurrentCell = .Rows(WRow).Cells("Estado")
                     .Focus()
 
                     txtFechaAux2.Visible = False
@@ -1021,7 +1023,9 @@
     End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
-        If MsgBox("¿Está seguro de querer salir? Las modificaciones que no se hayan guardado se perderán.", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+        If txtTipo.Text.Trim <> "" And txtAnio.Text.Trim <> "" And txtNumero.Text.Trim <> "" Then
+            If MsgBox("¿Está seguro de querer salir? Las modificaciones que no se hayan guardado se perderán.", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+        End If
 
         Close()
     End Sub
@@ -1103,16 +1107,294 @@
         txtTipo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
+    Private Function _TraerValorRefEstado(ByVal valor As Object)
+
+        Select Case OrDefault(valor, "")
+            Case "Imple."
+                Return 1
+            Case "Nula"
+                Return 2
+            Case Else
+                Return 0
+        End Select
+
+    End Function
+
     Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand("")
+        Dim trans As SqlTransaction = Nothing
+
         '
         ' Validamos los datos minimos para dar de alta la sac.
         '
         Try
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            trans = cn.BeginTransaction
+
+            cm.Connection = cn
+            cm.Transaction = trans
 
             _DatosValidos()
 
+            '
+            ' Guardo los datos generales.
+            '
+            Dim WTipo As String = txtTipo.Text.Trim
+            Dim WNumero As String = txtNumero.Text.Trim
+            Dim WAnio As String = txtAnio.Text
+            Dim WFechaSac As String = txtFecha.Text
+            Dim WOrdFechaSac As String = ordenaFecha(txtFecha.Text)
+            Dim WOrigen As String = cmbOrigen.SelectedIndex
+            Dim WEstado As String = cmbEstado.SelectedIndex
+            Dim WTitulo As String = txtTitulo.Text.Trim.Replace("'", "")
+            Dim WReferencia As String = txtReferencia.Text.Trim.Replace("'", "")
+            Dim WCentro As String = Val(txtCentro.Text)
+            Dim WEmisor As String = Val(txtEmisor.Text)
+            Dim WResponsable As String = Val(txtResponsable.Text)
+            Dim WClave As String = WTipo.PadLeft(4, "0") & WAnio.PadLeft(4, "0") & WNumero.PadLeft(6, "0")
+
+            Dim WNoConformidad As String = txtIngresoNoCon.Text.Trim.Replace("'", "")
+            Dim WCausa As String = txtIngresoCausa.Text.Trim.Replace("'", "")
+
+            Dim WSql As String = ""
+
+            '
+            ' Grabamos los datos generales. Verificando primero si existe anteriormente el SAC.
+            '
+            cm.CommandText = String.Format("SELECT Clave FROM CargaSac WHERE Clave = '{0}'", WClave)
+
+            Using dr As SqlDataReader = cm.ExecuteReader
+
+                If dr.HasRows Then
+                    dr.Read()
+                    WSql = String.Format("UPDATE CargaSAC SET Fecha = '{3}', OrdFecha = '{12}', Origen = '{4}', Estado = '{5}', " &
+                                         " Titulo = '{6}', Referencia = '{7}', Centro = '{8}', ResponsableEmisor = '{9}', ResponsableDestino = '{10}', " &
+                                         " IngresoNoCon = '{13}', IngresoCausa = '{14}' " &
+                                         " WHERE Clave = '{11}'",
+                                         WTipo, WNumero, WAnio, WFechaSac, WOrigen, WEstado, WTitulo, WReferencia, WCentro, WEmisor, WResponsable, WClave, WOrdFechaSac, WNoConformidad, WCausa)
+                Else
+
+                    WSql = String.Format("INSERT INTO CargaSAC (Clave, Tipo, Numero, Ano, Fecha, OrdFecha, Origen, Estado, Titulo, Referencia, Centro, ResponsableEmisor, ResponsableDestino, IngresoNoCon, IngresoCausa) " &
+                                         " VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}')",
+                                         WClave, WTipo, WNumero, WAnio, WFechaSac, WOrdFechaSac, WOrigen, WEstado, WTitulo, WReferencia, WCentro, WEmisor, WResponsable, WNoConformidad, WCausa)
+                End If
+
+            End Using
+
+            'Debug.Print(WSql)
+
+            cm.CommandText = WSql
+            cm.ExecuteNonQuery()
+
+
+            '
+            ' Grabamos 'Acciones'
+            '
+            WSql = String.Format("SELECT Clave FROM CargaSACII WHERE Clave = '{0}'", WClave)
+            cm.CommandText = WSql
+
+            Using dr As SqlDataReader = cm.ExecuteReader
+
+                If Not dr.HasRows Then
+
+                    If Not dr.IsClosed Then dr.Close()
+
+                    WSql = "INSERT INTO CargaSacII (Clave) VALUES ('" & WClave & "')"
+                    cm.CommandText = WSql
+                    cm.ExecuteNonQuery()
+
+                End If
+
+            End Using
+
+            Dim WDatos As String = ""
+
+            For i = 1 To 12
+
+                Dim row As DataGridViewRow = dgvAcciones.Rows(i - 1)
+
+                With row
+                    Dim WAccion As String = OrDefault(.Cells("Acciones").Value, "")
+                    WAccion = WAccion.Replace("'", "").PadRight(120, " ")
+                    Dim WAccionI As String = WAccion.Substring(0, 60)
+                    Dim WAccionII As String = WAccion.Substring(60, 60)
+                    Dim WResp As String = OrDefault(.Cells("Responsable").Value, "0")
+                    Dim WPlazo As String = OrDefault(.Cells("Plazo").Value, "  /  /    ")
+
+                    WDatos &= String.Format(" Accion{0}1 = '{1}', Accion{0}2 = '{2}', Responsable{0} = '{3}', Plazo{0} = '{4}',", i, WAccionI, WAccionII, WResp, WPlazo)
+
+                End With
+
+            Next
+
+            WDatos = WDatos.Remove(WDatos.Length - 1, 1)
+
+            WSql = String.Format("UPDATE CargaSACII SET Tipo = '{2}', Numero = '{3}', Ano = '{4}', {0} WHERE Clave = '{1}'", WDatos, WClave, WTipo, WNumero, WAnio)
+
+            'Debug.Print(WSql)
+
+            cm.CommandText = WSql
+            cm.ExecuteNonQuery()
+
+
+            '
+            ' Grabamos Implementaciones.
+            '
+            WSql = String.Format("SELECT Clave FROM CargaSACIII WHERE Clave = '{0}'", WClave)
+            cm.CommandText = WSql
+
+            Using dr As SqlDataReader = cm.ExecuteReader
+
+                If Not dr.HasRows Then
+
+                    If Not dr.IsClosed Then dr.Close()
+
+                    WSql = "INSERT INTO CargaSacIII (Clave) VALUES ('" & WClave & "')"
+                    cm.CommandText = WSql
+                    cm.ExecuteNonQuery()
+
+                End If
+
+            End Using
+
+            WDatos = ""
+
+            For i = 1 To 12
+
+                Dim row As DataGridViewRow = dgvImplementaciones.Rows(i - 1)
+
+                With row
+                    Dim WComentario As String = OrDefault(.Cells("Comentarios").Value, "")
+                    WComentario = WComentario.Replace("'", "").PadRight(100, " ")
+                    Dim WComentarioI As String = WComentario.Substring(0, 50)
+                    Dim WComentarioII As String = WComentario.Substring(50, 50)
+                    Dim WResp As String = OrDefault(.Cells("ImpleResponsable").Value, "0")
+                    Dim WImpleFecha As String = OrDefault(.Cells("ImpleFecha").Value, "  /  /    ")
+                    Dim WImpleEstado As String = _TraerValorRefEstado(.Cells("Estado").Value)
+
+                    WDatos &= String.Format(" Comentario{0}1 = '{1}', Comentario{0}2 = '{2}', Responsable{0} = '{3}', Fecha{0} = '{4}', Estado{0} = '{5}',", i, WComentarioI, WComentarioII, WResp, WImpleFecha, WImpleEstado)
+
+                End With
+
+            Next
+
+            WDatos = WDatos.Remove(WDatos.Length - 1, 1)
+
+            WSql = String.Format("UPDATE CargaSACIII SET Tipo = '{2}', Numero = '{3}', Ano = '{4}', {0} WHERE Clave = '{1}'", WDatos, WClave, WTipo, WNumero, WAnio)
+
+            'Debug.Print(WSql)
+
+            cm.CommandText = WSql
+            cm.ExecuteNonQuery()
+
+
+            '
+            ' Grabamos Verificaciones.
+            '
+            WSql = String.Format("SELECT Clave FROM CargaSACIV WHERE Clave = '{0}'", WClave)
+            cm.CommandText = WSql
+
+            Using dr As SqlDataReader = cm.ExecuteReader
+
+                If Not dr.HasRows Then
+
+                    If Not dr.IsClosed Then dr.Close()
+
+                    WSql = "INSERT INTO CargaSacIV (Clave) VALUES ('" & WClave & "')"
+                    cm.CommandText = WSql
+                    cm.ExecuteNonQuery()
+
+                End If
+
+            End Using
+
+            WDatos = ""
+
+            For i = 1 To 12
+
+                Dim row As DataGridViewRow = dgvVerificaciones.Rows(i - 1)
+
+                With row
+
+                    Dim WRespI As String = OrDefault(.Cells("VerResponsableI").Value, "0")
+                    Dim WRespII As String = OrDefault(.Cells("VerResponsableII").Value, "0")
+                    Dim WVerFechaI As String = OrDefault(.Cells("VerFechaI").Value, "  /  /    ")
+                    Dim WVerFechaII As String = OrDefault(.Cells("VerFechaII").Value, "  /  /    ")
+                    Dim WVerEstadoI As String = _TraerValorRefEstado(.Cells("VerEstadoI").Value)
+                    Dim WVerEstadoII As String = _TraerValorRefEstado(.Cells("VerEstadoII").Value)
+                    Dim WComentario As String = OrDefault(.Cells("VerComentario").Value, "")
+                    WComentario = WComentario.Replace("'", "").PadRight(100, " ")
+                    Dim WVerComentarioI As String = WComentario.Substring(0, 50)
+                    Dim WVerComentarioII As String = WComentario.Substring(50, 50)
+
+                    If i < 7 Then
+
+                        WDatos &= String.Format(" Responsable{0} = '{1}', Responsable1{0} = '{2}', Fecha{0} = '{3}', Fecha1{0} = '{4}', Estado{0} = '{5}', Estado1{0} = '{6}', Comentario{0}1 = '{7}', Comentario{0}2 = '{8}',",
+                                                i, WRespI, WRespII, WVerFechaI, WVerFechaII, WVerEstadoI, WVerEstadoII, WVerComentarioI, WVerComentarioII)
+
+                    Else
+
+                        WDatos &= String.Format(" Responsable{0}1 = '{1}', Responsable{0}2 = '{2}', Fecha{0}1 = '{3}', Fecha{0}2 = '{4}', Estado{0}1 = '{5}', Estado{0}2 = '{6}', Comentario{0}1 = '{7}', Comentario{0}2 = '{8}',",
+                                                i, WRespI, WRespII, WVerFechaI, WVerFechaII, WVerEstadoI, WVerEstadoII, WVerComentarioI, WVerComentarioII)
+
+                    End If
+
+                End With
+
+            Next
+
+            WDatos = WDatos.Remove(WDatos.Length - 1, 1)
+
+            WSql = String.Format("UPDATE CargaSACIV SET Tipo = '{2}', Numero = '{3}', Ano = '{4}', {0} WHERE Clave = '{1}'", WDatos, WClave, WTipo, WNumero, WAnio)
+
+            'Debug.Print(WSql)
+
+            cm.CommandText = WSql
+            cm.ExecuteNonQuery()
+
+
+            '
+            ' Grabamos Comentarios.
+            '
+            WSql = String.Format("SELECT Clave FROM CargaSACAdicional WHERE Clave = '{0}'", WClave)
+            cm.CommandText = WSql
+
+            Using dr As SqlDataReader = cm.ExecuteReader
+
+                If Not dr.HasRows Then
+
+                    If Not dr.IsClosed Then dr.Close()
+
+                    WSql = "INSERT INTO CargaSacAdicional (Clave) VALUES ('" & WClave & "')"
+                    cm.CommandText = WSql
+                    cm.ExecuteNonQuery()
+
+                End If
+
+            End Using
+
+            WDatos = "Dato1 = '" & txtComentarios.Text.Trim.Replace("'", "") & "'"
+
+            WSql = String.Format("UPDATE CargaSACAdicional SET Tipo = '{2}', Numero = '{3}', Ano = '{4}', {0} WHERE Clave = '{1}'", WDatos, WClave, WTipo, WNumero, WAnio)
+
+            '            Debug.Print(WSql)
+            cm.CommandText = WSql
+            cm.ExecuteNonQuery()
+
+            trans.Commit()
+
+            MsgBox("Actualización realizada con Éxito", MsgBoxStyle.Information)
+
+            btnLimpiar.PerformClick()
+
         Catch ex As Exception
+            If Not IsNothing(trans) AndAlso Not IsNothing(trans.Connection) Then trans.Rollback()
+
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+
         End Try
 
     End Sub

@@ -22,7 +22,7 @@ Partial Class IndiceGralSac
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -173,9 +173,9 @@ Partial Class IndiceGralSac
         '
         Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Fecha.DataPropertyName = "Fecha"
-        DataGridViewCellStyle1.Format = "d"
-        DataGridViewCellStyle1.NullValue = Nothing
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Format = "d"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
@@ -414,9 +414,11 @@ Partial Class IndiceGralSac
         'txtAnio
         '
         Me.txtAnio.Location = New System.Drawing.Point(44, 17)
+        Me.txtAnio.MaxLength = 4
         Me.txtAnio.Name = "txtAnio"
         Me.txtAnio.Size = New System.Drawing.Size(57, 20)
         Me.txtAnio.TabIndex = 1
+        Me.txtAnio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GroupBox6
         '
