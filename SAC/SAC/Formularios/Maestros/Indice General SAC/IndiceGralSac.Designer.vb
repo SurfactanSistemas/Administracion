@@ -65,6 +65,7 @@ Partial Class IndiceGralSac
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.clbEstados = New System.Windows.Forms.CheckedListBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnNuevaSolicitud = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -260,6 +261,7 @@ Partial Class IndiceGralSac
         'Panel2
         '
         Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.btnNuevaSolicitud)
         Me.Panel2.Controls.Add(Me.btnCancelar)
         Me.Panel2.Controls.Add(Me.btnAceptar)
         Me.Panel2.Controls.Add(Me.Label6)
@@ -279,18 +281,18 @@ Partial Class IndiceGralSac
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(948, 11)
+        Me.btnCancelar.Location = New System.Drawing.Point(970, 11)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(161, 32)
+        Me.btnCancelar.Size = New System.Drawing.Size(130, 32)
         Me.btnCancelar.TabIndex = 5
-        Me.btnCancelar.Text = "Cancelar"
+        Me.btnCancelar.Text = "Cerrar"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(781, 11)
+        Me.btnAceptar.Location = New System.Drawing.Point(686, 11)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(161, 32)
+        Me.btnAceptar.Size = New System.Drawing.Size(130, 32)
         Me.btnAceptar.TabIndex = 5
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
@@ -333,7 +335,7 @@ Partial Class IndiceGralSac
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Location = New System.Drawing.Point(120, 4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(640, 47)
+        Me.GroupBox2.Size = New System.Drawing.Size(559, 47)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Orden"
@@ -342,7 +344,7 @@ Partial Class IndiceGralSac
         '
         Me.cmbOrdenIII.FormattingEnabled = True
         Me.cmbOrdenIII.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
-        Me.cmbOrdenIII.Location = New System.Drawing.Point(523, 15)
+        Me.cmbOrdenIII.Location = New System.Drawing.Point(453, 15)
         Me.cmbOrdenIII.Name = "cmbOrdenIII"
         Me.cmbOrdenIII.Size = New System.Drawing.Size(92, 21)
         Me.cmbOrdenIII.TabIndex = 1
@@ -350,7 +352,7 @@ Partial Class IndiceGralSac
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(447, 19)
+        Me.Label5.Location = New System.Drawing.Point(390, 19)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(48, 13)
         Me.Label5.TabIndex = 0
@@ -360,7 +362,7 @@ Partial Class IndiceGralSac
         '
         Me.cmbOrdenII.FormattingEnabled = True
         Me.cmbOrdenII.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
-        Me.cmbOrdenII.Location = New System.Drawing.Point(327, 15)
+        Me.cmbOrdenII.Location = New System.Drawing.Point(283, 15)
         Me.cmbOrdenII.Name = "cmbOrdenII"
         Me.cmbOrdenII.Size = New System.Drawing.Size(92, 21)
         Me.cmbOrdenII.TabIndex = 1
@@ -368,7 +370,7 @@ Partial Class IndiceGralSac
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(238, 19)
+        Me.Label4.Location = New System.Drawing.Point(207, 19)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(61, 13)
         Me.Label4.TabIndex = 0
@@ -378,7 +380,7 @@ Partial Class IndiceGralSac
         '
         Me.cmbOrdenI.FormattingEnabled = True
         Me.cmbOrdenI.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
-        Me.cmbOrdenI.Location = New System.Drawing.Point(118, 15)
+        Me.cmbOrdenI.Location = New System.Drawing.Point(100, 15)
         Me.cmbOrdenI.Name = "cmbOrdenI"
         Me.cmbOrdenI.Size = New System.Drawing.Size(92, 21)
         Me.cmbOrdenI.TabIndex = 1
@@ -386,7 +388,7 @@ Partial Class IndiceGralSac
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(46, 19)
+        Me.Label3.Location = New System.Drawing.Point(41, 19)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 13)
         Me.Label3.TabIndex = 0
@@ -513,6 +515,15 @@ Partial Class IndiceGralSac
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 472)
         Me.TableLayoutPanel1.TabIndex = 4
         '
+        'btnNuevaSolicitud
+        '
+        Me.btnNuevaSolicitud.Location = New System.Drawing.Point(828, 11)
+        Me.btnNuevaSolicitud.Name = "btnNuevaSolicitud"
+        Me.btnNuevaSolicitud.Size = New System.Drawing.Size(130, 32)
+        Me.btnNuevaSolicitud.TabIndex = 6
+        Me.btnNuevaSolicitud.Text = "Nueva Solicitud"
+        Me.btnNuevaSolicitud.UseVisualStyleBackColor = True
+        '
         'IndiceGralSac
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -584,4 +595,5 @@ Partial Class IndiceGralSac
     Friend WithEvents Origen As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Emisor As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Responsable As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnNuevaSolicitud As System.Windows.Forms.Button
 End Class

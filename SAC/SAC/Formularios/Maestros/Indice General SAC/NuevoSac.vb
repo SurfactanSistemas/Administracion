@@ -206,6 +206,17 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Sub _CargarDatosGenerales()
         Try
+            Dim WTipo = txtTipo.Text
+            Dim WAnio = txtAnio.Text
+            Dim WNumero = txtNumero.Text
+
+            btnLimpiar.PerformClick()
+
+            txtTipo.Text = WTipo
+            txtTipo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            txtAnio.Text = WAnio
+            txtNumero.Text = WNumero
+
             Dim WDatos As DataRow = GetSingle(String.Format("SELECT * FROM CargaSAC WHERe Tipo = '{0}' And Numero = '{1}' And Ano = '{2}'", txtTipo.Text, txtNumero.Text, txtAnio.Text))
 
             If Not IsNothing(WDatos) Then
@@ -233,10 +244,9 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
                 End With
 
-                txtFecha.Focus()
-            Else
-                _LimpiarCampos()
             End If
+
+            txtFecha.Focus()
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -245,7 +255,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Sub _LimpiarCampos()
 
-        For Each t As TextBox In {txtCentro, txtEmisor, txtFecha, txtReferencia, txtResponsable, txtTitulo}
+        For Each t As Control In {txtCentro, txtEmisor, txtFecha, txtReferencia, txtResponsable, txtTitulo}
             t.Text = ""
         Next
 
@@ -426,7 +436,18 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Sub
 
     Private Sub NuevoSac_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Dim WTipo = txtTipo.Text
+        Dim WNumero = txtNumero.Text
+        Dim WAnio = txtAnio.Text
+
+        btnLimpiar_Click(Nothing, Nothing)
+
+        txtTipo.Text = WTipo
+        txtNumero.Text = WNumero
+        txtAnio.Text = WAnio
+
         txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
         With dgvVerificaciones
 
             For Each column As DataGridViewColumn In .Columns
@@ -1049,8 +1070,13 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         '
         ' Reseteamos Combos.
         '
-        cmbEstado.SelectedIndex = 0
-        cmbOrigen.SelectedIndex = 0
+        cmbEstado.SelectedIndex = 1
+        cmbOrigen.SelectedIndex = 1
+
+        txtAnio.Text = Date.Now.Year
+        txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+
+        TabControl1.SelectedIndex = 0
 
         txtTipo.Focus()
     End Sub
@@ -1388,6 +1414,14 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             MsgBox("Actualización realizada con Éxito", MsgBoxStyle.Information)
 
+            Dim WOwner As INuevoSAC = CType(Owner, INuevoSAC)
+
+            If Not IsNothing(WOwner) Then
+                WOwner._ProcesarNuevoSAC(txtTipo.Text, txtNumero.Text, txtAnio.Text)
+                Close()
+                Exit Sub
+            End If
+
             btnLimpiar.PerformClick()
 
         Catch ex As Exception
@@ -1411,6 +1445,14 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         If Val(txtNumero.Text.Trim) = 0 Then
             Throw New Exception("Se debe indicar un Número de SAC válido.")
+        End If
+
+        If cmbEstado.SelectedIndex <= 0 Then
+            Throw New Exception("Se debe indicar un Estado de SAC válido.")
+        End If
+
+        If cmbOrigen.SelectedIndex <= 0 Then
+            Throw New Exception("Se debe indicar un Origen de SAC válido.")
         End If
 
         If txtFecha.Text.Replace(" ", "").Length < 10 OrElse Not _ValidarFecha(txtFecha.Text) Then
@@ -1449,4 +1491,78 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Return Not IsNothing(WTipo)
 
     End Function
+
+    Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If txtFecha.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
+            If Not _ValidarFecha(txtFecha.Text) Then Exit Sub
+
+            txtCentro.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFecha.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtTitulo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTitulo.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtTitulo.Text) = "" Then : Exit Sub : End If
+
+            txtReferencia.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtTitulo.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtReferencia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtReferencia.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            '    If Trim(txtReferencia.Text) = "" Then : Exit Sub : End If
+            TabControl1.SelectedIndex = 0
+            txtIngresoNoCon.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtReferencia.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtAnio_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTipo.Leave, txtAnio.Leave
+        btnProximoNumeroLibre.Enabled = txtAnio.Text.Trim <> "" And txtTipo.Text.Trim <> ""
+    End Sub
+
+    Private Sub btnProximoNumeroLibre_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProximoNumeroLibre.Click
+
+        If txtTipo.Text.Trim = "" Or txtAnio.Text.Trim = "" Then
+            MsgBox("Se debe definir primero el Tipo de Solicitud y el Año al cual pertenece", MsgBoxStyle.Exclamation)
+            txtTipo.Focus()
+            Exit Sub
+        End If
+
+        If Val(txtNumero.Text) <> 0 Then
+            If MsgBox("¿Está seguro de querer traer próximo número libre? Las modificaciones que no se hayan guardado se perderán.", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
+                txtFecha.Focus()
+                Exit Sub
+            End If
+        End If
+
+        Dim WUltimo As DataRow = GetSingle("SELECT ISNULL(MAX(Numero), 0) Ultimo FROM CargaSac WHERE Tipo = '" & txtTipo.Text & "' AND Ano = '" & txtAnio.Text & "'")
+
+        If Not IsNothing(WUltimo) Then
+            txtNumero.Text = WUltimo.Item("Ultimo") + 1
+            txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        End If
+
+        txtFecha.Focus()
+
+    End Sub
+
+    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+
+    End Sub
 End Class

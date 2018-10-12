@@ -190,6 +190,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\INuevoSac.vb" />
     <Compile Include="Interfaces\IAyudaContenedor.vb" />
     <Compile Include="Interfaces\IAyudaCentroSac.vb" />
     <Compile Include="Interfaces\IAyudaReponsableSac.vb" />

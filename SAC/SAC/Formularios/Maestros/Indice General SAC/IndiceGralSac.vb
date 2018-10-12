@@ -1,4 +1,4 @@
-﻿Public Class IndiceGralSac
+﻿Public Class IndiceGralSac : Implements INuevoSAC
 
     Private WDatosSac As DataTable
 
@@ -270,5 +270,14 @@
             txtAnio.Text = ""
         End If
 
+    End Sub
+
+    Private Sub btnNuevaSolicitud_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaSolicitud.Click
+        Dim frm As New NuevoSac
+        frm.Show(Me)
+    End Sub
+
+    Public Sub _ProcesarNuevoSAC(ByVal WTipo As Object, ByVal WNumero As Object, ByVal WAnio As Object) Implements INuevoSAC._ProcesarNuevoSAC
+        btnAceptar.PerformClick()
     End Sub
 End Class
