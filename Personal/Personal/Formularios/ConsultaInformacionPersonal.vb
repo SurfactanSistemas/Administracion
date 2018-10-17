@@ -1490,14 +1490,14 @@ Public Class ConsultaInformacionPersonal
                 dr.Close()
             End If
 
-            cm.CommandText = "SELECT Distinct Descripcion FROM Legajo WHERE FEgreso IN ('  /  /    ', '00/00/0000')"
+            cm.CommandText = "SELECT Distinct Descripcion FROM Legajo WHERE FEgreso IN ('  /  /    ', '00/00/0000') And Descripcion <> ''"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
 
                 Do While dr.Read()
 
-                    WVector(WRenglon, 1) = dr.Item("Descripcion")
+                    WVector(WRenglon, 1) = IIf(IsDBNull(dr.Item("Descripcion")), "", dr.Item("Descripcion"))
 
                     WRenglon += 1
                 Loop
