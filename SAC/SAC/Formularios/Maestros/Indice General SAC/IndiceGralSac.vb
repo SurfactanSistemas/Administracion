@@ -1,4 +1,6 @@
-﻿Public Class IndiceGralSac : Implements INuevoSAC
+﻿Imports CrystalDecisions.CrystalReports.Engine
+
+Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     Private WDatosSac As DataTable
 
@@ -279,5 +281,130 @@
 
     Public Sub _ProcesarNuevoSAC(ByVal WTipo As Object, ByVal WNumero As Object, ByVal WAnio As Object) Implements INuevoSAC._ProcesarNuevoSAC
         btnAceptar.PerformClick()
+    End Sub
+
+    Private Sub CopiarConCabecerasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopiarConCabecerasToolStripMenuItem.Click
+        dgvListado.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
+        _CopiarSeleccion()
+    End Sub
+
+    Private Sub CopiarSóloDatosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopiarSóloDatosToolStripMenuItem.Click
+        dgvListado.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+        _CopiarSeleccion()
+    End Sub
+
+    Private Sub _CopiarSeleccion()
+        If dgvListado.GetCellCount(DataGridViewElementStates.Selected) > 0 Then
+
+            dgvListado.RowHeadersVisible = False
+
+            Dim WData = dgvListado.GetClipboardContent()
+
+            If Not IsNothing(WData) Then
+                Clipboard.SetDataObject(WData)
+            End If
+
+            dgvListado.RowHeadersVisible = True
+
+        End If
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        With ExportarIndice
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub _ExportarReporte(ByVal frm2 As VistaPrevia, ByVal WFormato As Object)
+
+        With frm2
+
+            Dim WNombreArchivo = String.Format("Indice Gral {0} - {1}", txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"))
+
+            Select Case WFormato
+                Case 0 ' Imprimir
+                    .Imprimir()
+                Case 1 ' Mostrar por Pantalla
+                    .Mostrar()
+                Case 2 ' PDF
+                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
+                Case 3 ' Excel
+                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.Excel)
+                Case 4 ' Word
+                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
+            End Select
+
+        End With
+    End Sub
+
+    Public Sub _ProcesarExportarIndice(ByVal WAgrupar As Boolean, ByVal WFormato As Object) Implements IExportarIndice._ProcesarExportarIndice
+
+        Try
+
+            If dgvListado.Rows.Count = 0 Then Exit Sub
+
+            Dim frm As New VistaPrevia
+            Dim rpt As reportdocument
+
+            If WAgrupar Then
+                rpt = New ReporteIndiceGralAgrupados
+            Else
+                rpt = New ReporteIndiceGral
+            End If
+
+            Dim ds As New DetallesIndiceGral
+
+            For Each row As DataGridViewRow In dgvListado.Rows
+                Dim r As DataRow = ds.Tables("Detalles").NewRow
+
+                With r
+                    .Item("Clave") = row.Index
+                    .Item("Tipo") = If(row.Cells("Tipo").Value, "")
+                    .Item("Año") = If(row.Cells("Anio").Value, 0)
+                    .Item("Nro") = If(row.Cells("Numero").Value, 0)
+                    .Item("Fecha") = If(row.Cells("Fecha").Value, "")
+                    .Item("Estado") = If(row.Cells("Estado").Value, "")
+                    .Item("Titulo") = If(row.Cells("Titulo").Value, "")
+                    .Item("Referencia") = If(row.Cells("Referencia").Value, "")
+                    .Item("Centro") = If(row.Cells("Centro").Value, "")
+                    .Item("Origen") = If(row.Cells("Origen").Value, "")
+                    .Item("Emisor") = If(row.Cells("Emisor").Value, "")
+                    .Item("Responsable") = If(row.Cells("Responsable").Value, "")
+                End With
+                ds.Tables("Detalles").Rows.Add(r)
+            Next
+
+            rpt.SetDataSource(ds)
+
+            With frm
+                .Reporte = rpt
+            End With
+
+            If WFormato = 5 Then
+
+                Dim WRuta As String = "C:/tempIndice/"
+
+                If IO.Directory.Exists(WRuta) Then IO.Directory.Delete(WRuta, True)
+
+                IO.Directory.CreateDirectory(WRuta)
+
+                Dim WNombreArchivo = String.Format("Indice Gral {0} - {1}.pdf", txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"))
+
+                frm.Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
+
+                With VistaPrevia
+                    .EnviarPorEmail(WRuta & WNombreArchivo)
+                End With
+
+            Else
+
+                _ExportarReporte(frm, WFormato)
+
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
     End Sub
 End Class

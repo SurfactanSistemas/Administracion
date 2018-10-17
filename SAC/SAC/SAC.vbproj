@@ -79,6 +79,13 @@
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>PDFSharp\PdfSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -91,6 +98,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="TallComponents.PDF.Kit, Version=4.0.31.0, Culture=neutral, PublicKeyToken=76bf2dedaa68ccb5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\TallComponents.PDF.Kit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -147,6 +158,18 @@
     <Compile Include="Formularios\Maestros\Centros\NuevoCentro.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\ExportarIndice.Designer.vb">
+      <DependentUpon>ExportarIndice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\ExportarIndice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\ExportarSAC.Designer.vb">
+      <DependentUpon>ExportarSAC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Indice General SAC\ExportarSAC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Indice General SAC\IndiceGralSac.Designer.vb">
       <DependentUpon>IndiceGralSac.vb</DependentUpon>
     </Compile>
@@ -190,6 +213,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\IExportarIndice.vb" />
+    <Compile Include="Interfaces\IExportarSac.vb" />
     <Compile Include="Interfaces\INuevoSac.vb" />
     <Compile Include="Interfaces\IAyudaContenedor.vb" />
     <Compile Include="Interfaces\IAyudaCentroSac.vb" />
@@ -227,6 +252,47 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Reportes\IndiceGral\ReporteIndiceGralAgrupados.vb">
+      <DependentUpon>ReporteIndiceGralAgrupados.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\IndiceGral\DetallesIndiceGral.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DetallesIndiceGral.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\IndiceGral\ReporteIndiceGral.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteIndiceGral.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\NuevoSac\NuevoSACAccionesInclude.vb">
+      <DependentUpon>NuevoSACAccionesInclude.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\NuevoSac\NuevoSACAmbos.vb">
+      <DependentUpon>NuevoSACAmbos.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\NuevoSac\NuevoSACAcciones.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NuevoSACAcciones.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\NuevoSac\NuevoSACCaratula.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NuevoSACCaratula.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\VistaPrevia.Designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
@@ -252,6 +318,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Centros\NuevoCentro.resx">
       <DependentUpon>NuevoCentro.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\ExportarIndice.resx">
+      <DependentUpon>ExportarIndice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\ExportarSAC.resx">
+      <DependentUpon>ExportarSAC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\IndiceGralSac.resx">
       <DependentUpon>IndiceGralSac.vb</DependentUpon>
@@ -286,6 +358,30 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\IndiceGral\ReporteIndiceGralAgrupados.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteIndiceGralAgrupados.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\IndiceGral\ReporteIndiceGral.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteIndiceGral.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACAccionesInclude.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NuevoSACAccionesInclude.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACAmbos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NuevoSACAmbos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACAcciones.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NuevoSACAcciones.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACCaratula.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NuevoSACCaratula.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </EmbeddedResource>
@@ -304,8 +400,31 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Reportes\IndiceGral\DetallesIndiceGral.xsc">
+      <DependentUpon>DetallesIndiceGral.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\IndiceGral\DetallesIndiceGral.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DetallesIndiceGral.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\IndiceGral\DetallesIndiceGral.xss">
+      <DependentUpon>DetallesIndiceGral.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PDFSharp\de\PdfSharp.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PDFSharp\PdfSharp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PDFSharp\PdfSharp.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PDFSharp\PdfSharp.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Aceptar N2.png" />
     <Content Include="Resources\actualizar.png" />
     <Content Include="Resources\AddInvoice.png" />
@@ -337,6 +456,7 @@
     <Content Include="Resources\indentificacion.png" />
     <Content Include="Resources\Informe.png" />
     <Content Include="Resources\Limpiar.png" />
+    <Content Include="Resources\LogoSurfac.bmp" />
     <Content Include="Resources\LogoSurfactan.jpg" />
     <Content Include="Resources\Pantalla.jpg" />
     <Content Include="Resources\pdf_icon.png" />

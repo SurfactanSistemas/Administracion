@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroSac, IAyudaReponsableSac, IAyudaTipoSac
+Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroSac, IAyudaReponsableSac, IAyudaTipoSac, IExportarSac
 
     Private Const YMARGEN = 2
     Private Const XMARGEN = 7
@@ -1563,6 +1563,213 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        Try
+            '
+            ' Recargamos los datos de la SAC.
+            '
+            txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+            '
+            ' Verificamos que exista la SAC.
+            '
+            Dim WSAC As DataRow = GetSingle("SELECT Clave FROM CargaSAC WHERE Tipo = '" & txtTipo.Text & "' And Ano = '" & txtAnio.Text & "' And Numero = '" & txtNumero.Text & "'")
+
+            If IsNothing(WSAC) Then Exit Sub
+
+            '
+            ' Cargamos la carátula y filtramos para el SAC indicado.
+            '
+
+            Dim frm As New VistaPrevia
+            With frm
+                .Reporte = New NuevoSACCaratula
+                .Formula = "{CargaSac.Tipo} = " & txtTipo.Text & " And {CargaSac.Numero} = " & txtNumero.Text & " And {CargaSac.Ano} = " & txtAnio.Text & ""
+            End With
+
+            _PrepararImpreSacII()
+
+            Dim frm2 As New VistaPrevia
+            With frm2
+                .Reporte = New NuevoSACAcciones
+                .Formula = "{ImpreSacII.Tipo} = " & txtTipo.Text & " And {ImpreSacII.Numero} = " & txtNumero.Text & " And {ImpreSacII.Ano} = " & txtAnio.Text & ""
+            End With
+
+            frm.Imprimir()
+            frm2.Imprimir()
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+    Private Sub _PrepararImpreSacII()
+
+        '
+        ' Cargamos las Acciones y filtramos para el SAC indicado.
+        '
+        Dim WNroAccion, WDescAccion, WFechaAccion, WRespAccion, WRespImple, WImpleEstado, WImpleFecha, WImpleComentarios, WDescImpleEstado, WVerRespImple, WVerFechaImple, WVerEstadoImple, WDescEstadoImple, WVerRespEfect, WVerFechaEfect, WVerEstadoEfect, WDescEstadoEfect, WVerComentarios As String
+
+        Dim WSQls As New List(Of String)
+
+        WSQls.Add("DELETE FROM ImpreSACII")
+
+        For i = 1 To 12
+
+            With dgvAcciones.Rows(i - 1)
+
+                WNroAccion = i
+                WDescAccion = OrDefault(.Cells("Acciones").Value, "")
+
+                If WDescAccion.Trim = "" Then Continue For
+
+                WFechaAccion = OrDefault(.Cells("Plazo").Value, "  /  /    ")
+                WRespAccion = OrDefault(.Cells("Responsable").Value, 0)
+
+            End With
+
+            With dgvImplementaciones.Rows(i - 1)
+
+                WRespImple = OrDefault(.Cells("ImpleResponsable").Value, 0)
+                WDescImpleEstado = OrDefault(.Cells("Estado").Value, 0)
+                WImpleFecha = OrDefault(.Cells("ImpleFecha").Value, "  /  /    ")
+                WImpleComentarios = OrDefault(.Cells("Comentarios").Value, "")
+                'WDescImpleEstado = _TraerEstado(WImpleEstado)
+
+            End With
+
+            With dgvVerificaciones.Rows(i - 1)
+
+                WVerRespImple = OrDefault(.Cells("VerResponsableI").Value, 0)
+                WVerFechaImple = OrDefault(.Cells("VerFechaI").Value, 0)
+                WDescEstadoImple = OrDefault(.Cells("VerEstadoI").Value, 0)
+                'WDescEstadoImple = _TraerEstado(WVerEstadoImple)
+
+                WVerRespEfect = OrDefault(.Cells("VerResponsableII").Value, 0)
+                WVerFechaEfect = OrDefault(.Cells("VerFechaII").Value, 0)
+                WVerEstadoEfect = OrDefault(.Cells("VerEstadoII").Value, 0)
+                WDescEstadoEfect = _TraerEstado(WVerEstadoImple)
+
+                WVerComentarios = OrDefault(.Cells("VerComentario").Value, "")
+
+            End With
+
+            Dim WSql As String = ""
+            Dim WClave As String = ""
+
+            WClave = txtTipo.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0") & i.ToString.PadLeft(2, "0")
+
+            WSql = String.Format("INSERT INTO ImpreSacII (Clave, Renglon, Tipo, Numero, Ano, FechaSac, Accion, DescAccion, RespAccion, FechaAccion, RespImple, FechaImple, DescImpleEstado, ImpleComentarios, VerImpleResp, VerImpleEstado, VerImpleFecha, VerEfecResp, VerEfecEstado, VerEfecFecha, VerComentario) " &
+                                 " VALUES " &
+                                 " ('{0}', {1}, {2}, {3}, {4}, '{5}', {6}, '{7}', {8}, '{20}', {9}, '{10}', '{11}', '{12}', {13}, '{14}', '{15}', {16}, '{17}', '{18}', '{19}')",
+                                 WClave, i, txtTipo.Text, txtNumero.Text, txtAnio.Text, txtFecha.Text, WNroAccion, WDescAccion, WRespAccion, WRespImple, WImpleFecha, WDescEstadoImple, WImpleComentarios, WVerRespImple, WDescEstadoImple, WVerFechaImple, WVerRespEfect, WDescEstadoEfect, WVerFechaEfect, WVerComentarios, WFechaAccion)
+
+            WSQls.Add(WSql)
+
+        Next
+
+        Query.ExecuteNonQueries(WSQls.ToArray())
+
+    End Sub
+
+    Public Sub _ProcesarExportarSac(ByVal WOpcion1 As Boolean, ByVal WOpcion2 As Boolean, ByVal WFormato As Object) Implements IExportarSac._ProcesarExportarSac
+
+        Try
+            '
+            ' Recargamos los datos de la SAC.
+            '
+            txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+            '
+            ' Verificamos que exista la SAC.
+            '
+            Dim WSAC As DataRow = GetSingle("SELECT Clave FROM CargaSAC WHERE Tipo = '" & txtTipo.Text & "' And Ano = '" & txtAnio.Text & "' And Numero = '" & txtNumero.Text & "'")
+
+            If IsNothing(WSAC) Then Exit Sub
+
+            '
+            ' Cargamos la carátula y filtramos para el SAC indicado.
+            '
+
+            Dim frm As New VistaPrevia
+            With frm
+                .Reporte = New NuevoSACCaratula
+                .Formula = "{CargaSac.Tipo} = " & txtTipo.Text & " And {CargaSac.Numero} = " & txtNumero.Text & " And {CargaSac.Ano} = " & txtAnio.Text & ""
+            End With
+
+            _PrepararImpreSacII()
+
+            Dim frm2 As New VistaPrevia
+            With frm2
+                .Reporte = New NuevoSACAcciones
+                .Formula = "{ImpreSacII.Tipo} = " & txtTipo.Text & " And {ImpreSacII.Numero} = " & txtNumero.Text & " And {ImpreSacII.Ano} = " & txtAnio.Text & ""
+            End With
+
+            If WFormato = 3 Then
+                '
+                ' Exportamos ambos archivos en el caso que corresponda en un archivo temporal.
+                '
+                Dim WRuta As String = "C:/tSac/"
+
+                If IO.Directory.Exists(WRuta) Then IO.Directory.Delete(WRuta, True)
+
+                IO.Directory.CreateDirectory(WRuta)
+
+                If WOpcion2 Then frm2.Exportar("2.pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
+                If WOpcion1 Then frm.Exportar("1.pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
+
+                Dim WNombreArchivo = String.Format("SAC {0} {1} {2} - {3}.pdf", txtTipo.Text, txtNumero.Text, txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"))
+
+                With VistaPrevia
+                    .MergePDFs(WRuta, WNombreArchivo)
+                    .EnviarPorEmail(WRuta & WNombreArchivo)
+                End With
+
+            ElseIf WOpcion1 And WOpcion2 Then
+
+                With frm
+                    .Reporte = New NuevoSACAmbos
+                    .Formula = "{CargaSac.Tipo} = " & txtTipo.Text & " And {CargaSac.Numero} = " & txtNumero.Text & " And {CargaSac.Ano} = " & txtAnio.Text & ""
+                End With
+
+                _ExportarReporte(frm, WFormato)
+
+            Else
+
+                If WOpcion2 Then _ExportarReporte(frm2, WFormato)
+                If WOpcion1 Then _ExportarReporte(frm, WFormato)
+
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+    Private Sub _ExportarReporte(ByVal frm2 As VistaPrevia, ByVal WFormato As Object)
+
+        With frm2
+
+            Dim WNombreArchivo = String.Format("SAC {0} {1} {2} - {3}", txtTipo.Text, txtNumero.Text, txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"))
+
+            Select Case WFormato
+
+                Case 0 ' PDF
+                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
+                Case 1 ' Excel
+                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.Excel)
+                Case 2 ' Word
+                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
+            End Select
+
+        End With
+    End Sub
+
+    Private Sub btnExportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportar.Click
+
+        Dim frm As New ExportarSAC
+        frm.Show(Me)
 
     End Sub
 End Class

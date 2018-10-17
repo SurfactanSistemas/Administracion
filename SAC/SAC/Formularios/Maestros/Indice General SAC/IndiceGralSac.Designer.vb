@@ -22,7 +22,10 @@ Partial Class IndiceGralSac
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -41,6 +44,7 @@ Partial Class IndiceGralSac
         Me.Responsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnNuevaSolicitud = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -65,7 +69,10 @@ Partial Class IndiceGralSac
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.clbEstados = New System.Windows.Forms.CheckedListBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnNuevaSolicitud = New System.Windows.Forms.Button()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopiarConCabecerasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -78,6 +85,7 @@ Partial Class IndiceGralSac
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -122,8 +130,25 @@ Partial Class IndiceGralSac
         Me.dgvListado.AllowUserToAddRows = False
         Me.dgvListado.AllowUserToDeleteRows = False
         Me.dgvListado.AllowUserToResizeRows = False
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListado.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvListado.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.idTipo, Me.Anio, Me.Numero, Me.Fecha, Me.Estado, Me.Titulo, Me.Referencia, Me.Centro, Me.Origen, Me.Emisor, Me.Responsable})
+        Me.dgvListado.ContextMenuStrip = Me.ContextMenuStrip1
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvListado.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgvListado.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvListado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvListado.Location = New System.Drawing.Point(3, 217)
@@ -174,9 +199,9 @@ Partial Class IndiceGralSac
         '
         Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Fecha.DataPropertyName = "Fecha"
-        DataGridViewCellStyle2.Format = "d"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Format = "d"
+        DataGridViewCellStyle8.NullValue = Nothing
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle8
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
@@ -261,6 +286,7 @@ Partial Class IndiceGralSac
         'Panel2
         '
         Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.btnNuevaSolicitud)
         Me.Panel2.Controls.Add(Me.btnCancelar)
         Me.Panel2.Controls.Add(Me.btnAceptar)
@@ -279,20 +305,29 @@ Partial Class IndiceGralSac
         Me.Panel2.Size = New System.Drawing.Size(1119, 175)
         Me.Panel2.TabIndex = 5
         '
+        'btnNuevaSolicitud
+        '
+        Me.btnNuevaSolicitud.Location = New System.Drawing.Point(743, 12)
+        Me.btnNuevaSolicitud.Name = "btnNuevaSolicitud"
+        Me.btnNuevaSolicitud.Size = New System.Drawing.Size(104, 32)
+        Me.btnNuevaSolicitud.TabIndex = 6
+        Me.btnNuevaSolicitud.Text = "Nueva Solicitud"
+        Me.btnNuevaSolicitud.UseVisualStyleBackColor = True
+        '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(970, 11)
+        Me.btnCancelar.Location = New System.Drawing.Point(997, 12)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(130, 32)
+        Me.btnCancelar.Size = New System.Drawing.Size(104, 32)
         Me.btnCancelar.TabIndex = 5
         Me.btnCancelar.Text = "Cerrar"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(686, 11)
+        Me.btnAceptar.Location = New System.Drawing.Point(616, 12)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(130, 32)
+        Me.btnAceptar.Size = New System.Drawing.Size(104, 32)
         Me.btnAceptar.TabIndex = 5
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
@@ -333,9 +368,9 @@ Partial Class IndiceGralSac
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.cmbOrdenI)
         Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Location = New System.Drawing.Point(120, 4)
+        Me.GroupBox2.Location = New System.Drawing.Point(92, 4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(559, 47)
+        Me.GroupBox2.Size = New System.Drawing.Size(500, 47)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Orden"
@@ -344,7 +379,7 @@ Partial Class IndiceGralSac
         '
         Me.cmbOrdenIII.FormattingEnabled = True
         Me.cmbOrdenIII.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
-        Me.cmbOrdenIII.Location = New System.Drawing.Point(453, 15)
+        Me.cmbOrdenIII.Location = New System.Drawing.Point(396, 15)
         Me.cmbOrdenIII.Name = "cmbOrdenIII"
         Me.cmbOrdenIII.Size = New System.Drawing.Size(92, 21)
         Me.cmbOrdenIII.TabIndex = 1
@@ -352,7 +387,7 @@ Partial Class IndiceGralSac
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(390, 19)
+        Me.Label5.Location = New System.Drawing.Point(346, 19)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(48, 13)
         Me.Label5.TabIndex = 0
@@ -362,7 +397,7 @@ Partial Class IndiceGralSac
         '
         Me.cmbOrdenII.FormattingEnabled = True
         Me.cmbOrdenII.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
-        Me.cmbOrdenII.Location = New System.Drawing.Point(283, 15)
+        Me.cmbOrdenII.Location = New System.Drawing.Point(246, 15)
         Me.cmbOrdenII.Name = "cmbOrdenII"
         Me.cmbOrdenII.Size = New System.Drawing.Size(92, 21)
         Me.cmbOrdenII.TabIndex = 1
@@ -370,7 +405,7 @@ Partial Class IndiceGralSac
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(207, 19)
+        Me.Label4.Location = New System.Drawing.Point(183, 19)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(61, 13)
         Me.Label4.TabIndex = 0
@@ -380,7 +415,7 @@ Partial Class IndiceGralSac
         '
         Me.cmbOrdenI.FormattingEnabled = True
         Me.cmbOrdenI.Items.AddRange(New Object() {"Tipo", "Numero", "Sector", "Estado", "Responsable"})
-        Me.cmbOrdenI.Location = New System.Drawing.Point(100, 15)
+        Me.cmbOrdenI.Location = New System.Drawing.Point(84, 15)
         Me.cmbOrdenI.Name = "cmbOrdenI"
         Me.cmbOrdenI.Size = New System.Drawing.Size(92, 21)
         Me.cmbOrdenI.TabIndex = 1
@@ -388,7 +423,7 @@ Partial Class IndiceGralSac
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(41, 19)
+        Me.Label3.Location = New System.Drawing.Point(37, 19)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 13)
         Me.Label3.TabIndex = 0
@@ -418,8 +453,9 @@ Partial Class IndiceGralSac
         Me.txtAnio.Location = New System.Drawing.Point(44, 17)
         Me.txtAnio.MaxLength = 4
         Me.txtAnio.Name = "txtAnio"
-        Me.txtAnio.Size = New System.Drawing.Size(57, 20)
+        Me.txtAnio.Size = New System.Drawing.Size(38, 20)
         Me.txtAnio.TabIndex = 1
+        Me.txtAnio.Text = "0000"
         Me.txtAnio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GroupBox6
@@ -515,14 +551,32 @@ Partial Class IndiceGralSac
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 472)
         Me.TableLayoutPanel1.TabIndex = 4
         '
-        'btnNuevaSolicitud
+        'ContextMenuStrip1
         '
-        Me.btnNuevaSolicitud.Location = New System.Drawing.Point(828, 11)
-        Me.btnNuevaSolicitud.Name = "btnNuevaSolicitud"
-        Me.btnNuevaSolicitud.Size = New System.Drawing.Size(130, 32)
-        Me.btnNuevaSolicitud.TabIndex = 6
-        Me.btnNuevaSolicitud.Text = "Nueva Solicitud"
-        Me.btnNuevaSolicitud.UseVisualStyleBackColor = True
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarConCabecerasToolStripMenuItem, Me.CopiarSóloDatosToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(229, 48)
+        '
+        'CopiarConCabecerasToolStripMenuItem
+        '
+        Me.CopiarConCabecerasToolStripMenuItem.Name = "CopiarConCabecerasToolStripMenuItem"
+        Me.CopiarConCabecerasToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.CopiarConCabecerasToolStripMenuItem.Text = "Copiar Incluyendo Cabeceras"
+        '
+        'CopiarSóloDatosToolStripMenuItem
+        '
+        Me.CopiarSóloDatosToolStripMenuItem.Name = "CopiarSóloDatosToolStripMenuItem"
+        Me.CopiarSóloDatosToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.CopiarSóloDatosToolStripMenuItem.Text = "Copiar Sólo Datos"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(870, 12)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(104, 32)
+        Me.Button1.TabIndex = 7
+        Me.Button1.Text = "Exportar Indice"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'IndiceGralSac
         '
@@ -550,6 +604,7 @@ Partial Class IndiceGralSac
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -596,4 +651,8 @@ Partial Class IndiceGralSac
     Friend WithEvents Emisor As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Responsable As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnNuevaSolicitud As System.Windows.Forms.Button
+    Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents CopiarConCabecerasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CopiarSóloDatosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
