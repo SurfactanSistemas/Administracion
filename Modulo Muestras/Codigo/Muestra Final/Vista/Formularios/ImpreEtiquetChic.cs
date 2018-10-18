@@ -194,6 +194,8 @@ namespace Vista
         {
             string[] datos = new string[31];
 
+            string sufix = _Traducir ? "Ingles" : "";
+
             for (int i = 0; i < 31; i++) {
 
                 datos[i] = "";
@@ -223,35 +225,35 @@ namespace Vista
                         switch (_tipo)
                         {
                             case 0:
-                                datos[0] = dr["Frase1"].ToString();
-                                datos[1] = dr["Frase2"].ToString();
-                                datos[2] = dr["Frase3"].ToString();
-                                datos[3] = dr["Frase4"].ToString();
-                                datos[4] = dr["Frase5"].ToString();
-                                datos[5] = dr["Frase6"].ToString();
-                                datos[6] = dr["Frase7"].ToString();
+                                datos[0] = dr["Frase1" + sufix].ToString();
+                                datos[1] = dr["Frase2" + sufix].ToString();
+                                datos[2] = dr["Frase3" + sufix].ToString();
+                                datos[3] = dr["Frase4" + sufix].ToString();
+                                datos[4] = dr["Frase5" + sufix].ToString();
+                                datos[5] = dr["Frase6" + sufix].ToString();
+                                datos[6] = dr["Frase7" + sufix].ToString();
                                 break;
                             default:
                                 // Arranca del 14 porque se agregaron cantidades de frases despues.
-                                datos[14] = dr["Frase9"].ToString();
-                                datos[15] = dr["Frase10"].ToString();
-                                datos[16] = dr["Frase11"].ToString();
-                                datos[17] = dr["Frase12"].ToString();
-                                datos[18] = dr["Frase13"].ToString();
-                                datos[19] = dr["Frase14"].ToString();
-                                datos[20] = dr["Frase15"].ToString();
-                                datos[21] = dr["Frase16"].ToString();
-                                datos[22] = dr["Frase17"].ToString();
-                                datos[23] = dr["Frase18"].ToString();
-                                datos[24] = dr["Frase19"].ToString();
-                                datos[25] = dr["Frase20"].ToString();
-                                datos[26] = dr["Frase21"].ToString();
-                                datos[27] = dr["Frase22"].ToString();
-                                datos[28] = dr["Frase23"].ToString(); // Aca va la frase de peligro cuando no es etiqueta Frasco.
+                                datos[14] = dr["Frase9" + sufix].ToString();
+                                datos[15] = dr["Frase10" + sufix].ToString();
+                                datos[16] = dr["Frase11" + sufix].ToString();
+                                datos[17] = dr["Frase12" + sufix].ToString();
+                                datos[18] = dr["Frase13" + sufix].ToString();
+                                datos[19] = dr["Frase14" + sufix].ToString();
+                                datos[20] = dr["Frase15" + sufix].ToString();
+                                datos[21] = dr["Frase16" + sufix].ToString();
+                                datos[22] = dr["Frase17" + sufix].ToString();
+                                datos[23] = dr["Frase18" + sufix].ToString();
+                                datos[24] = dr["Frase19" + sufix].ToString();
+                                datos[25] = dr["Frase20" + sufix].ToString();
+                                datos[26] = dr["Frase21" + sufix].ToString();
+                                datos[27] = dr["Frase22" + sufix].ToString();
+                                datos[28] = dr["Frase23" + sufix].ToString(); // Aca va la frase de peligro cuando no es etiqueta Frasco.
                                 break;
                         }
 
-                        datos[7] = (_tipo == 0) ? dr["Frase8"].ToString() : datos[28]; // Guardamos la "palabra"
+                        datos[7] = (_tipo == 0) ? dr["Frase8" + sufix].ToString() : datos[28]; // Guardamos la "palabra"
 
 
                         if (_Codigo.StartsWith("DY")) { // Porque se lo trata como una MP.
@@ -265,7 +267,9 @@ namespace Vista
 
                         if (datos[7] == "") {
 
-                            string pal = dr["Palabra"].ToString().Trim();
+                            var exists = Enumerable.Range(0, dr.FieldCount).Any(i => string.Equals(dr.GetName(i), "Palabra", StringComparison.OrdinalIgnoreCase));
+
+                            string pal = exists ? dr["Palabra"].ToString().Trim() : "";
 
                             switch (pal)
                             {
@@ -341,14 +345,14 @@ namespace Vista
                             {
                                 dr.Read();
 
-                                datos[14] = dr["Frase1"].ToString();
-                                datos[15] = dr["Frase2"].ToString();
-                                datos[16] = dr["Frase3"].ToString();
-                                datos[17] = dr["Frase4"].ToString();
-                                datos[18] = dr["Frase5"].ToString();
-                                datos[19] = dr["Frase6"].ToString();
-                                datos[20] = dr["Frase7"].ToString();
-                                datos[7] = dr["Frase8"].ToString();
+                                datos[14] = dr["Frase1" + sufix].ToString();
+                                datos[15] = dr["Frase2" + sufix].ToString();
+                                datos[16] = dr["Frase3" + sufix].ToString();
+                                datos[17] = dr["Frase4" + sufix].ToString();
+                                datos[18] = dr["Frase5" + sufix].ToString();
+                                datos[19] = dr["Frase6" + sufix].ToString();
+                                datos[20] = dr["Frase7" + sufix].ToString();
+                                datos[7] = dr["Frase8" + sufix].ToString();
 
 
                                 int renglon = 8;
