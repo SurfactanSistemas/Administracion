@@ -196,6 +196,8 @@ namespace Vista
 
             string sufix = _Traducir ? "Ingles" : "";
 
+            bool _ViejoTraducir = _Traducir;
+
             if (_Codigo.Substring(0, 2).ToUpper() == "DY")
             {
                 sufix = "";
@@ -439,6 +441,9 @@ namespace Vista
             {
                 throw new Exception("Ocurrio un error al querer consultar las especificaciones SGA del siguiente producto: " + _Codigo);
             }
+
+            // En caso de que sea un DY y se haya modificado.
+            _Traducir = _ViejoTraducir;
 
             return datos;
         }
