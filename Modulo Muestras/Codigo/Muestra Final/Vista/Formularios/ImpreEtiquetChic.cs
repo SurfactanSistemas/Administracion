@@ -196,6 +196,12 @@ namespace Vista
 
             string sufix = _Traducir ? "Ingles" : "";
 
+            if (_Codigo.Substring(0, 2).ToUpper() == "DY")
+            {
+                sufix = "";
+                _Traducir = false;
+            }
+
             for (int i = 0; i < 31; i++) {
 
                 datos[i] = "";
