@@ -169,10 +169,10 @@ namespace Vista
             {
                 case "PT": case "YQ": case "YF": case "YP":
                     // Porque los datos para la etiquetas de frasco se encuentran en otra tabla.
-                    return (tipo == "Frasco" || tipo == "Chica") ? "DatosEtiqueta" : "DatosEtiquetaImpre";
+                    return (tipo == "Frasco" || tipo == "Chica") && !_Traducir ? "DatosEtiqueta" : "DatosEtiquetaImpre";
                     break;
                 default:
-                    return "DatosEtiquetaMP";
+                    return !_Traducir ? "DatosEtiquetaMP" : "DatosEtiquetaImpre";
                     break;
             }
         }
