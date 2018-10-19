@@ -1772,4 +1772,62 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         frm.Show(Me)
 
     End Sub
+
+    Private Sub btnTipoAnterior_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoAnterior.Click
+        Try
+            Dim WAnterior As DataRow = GetSingle("select top 1 Codigo from TipoSac where Codigo < " & Val(txtTipo.Text) & " Order by Codigo DEsc")
+
+            If Not IsNothing(WAnterior) Then
+                txtTipo.Text = WAnterior.Item("Codigo")
+                txtTipo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
+
+    Private Sub btnTipoSiguiente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoSiguiente.Click
+        Try
+            Dim WProximo As DataRow = GetSingle("select top 1 Codigo from TipoSac where Codigo > " & Val(txtTipo.Text) & " Order by Codigo")
+
+            If Not IsNothing(WProximo) Then
+                txtTipo.Text = WProximo.Item("Codigo")
+                txtTipo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
+
+    Private Sub btnNumeroAnterior_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNumeroAnterior.Click
+        Try
+            Dim WAnterior As DataRow = GetSingle("SELECT TOP 1 Numero FROM cargasac WHERE Tipo = '" & txtTipo.Text & "' AND Numero < " & Val(txtNumero.Text) & " AND Ano = '" & txtAnio.Text & "' ORDER BY Numero DESC")
+
+            If Not IsNothing(WAnterior) Then
+                txtNumero.Text = WAnterior.Item("Numero")
+                txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
+
+    Private Sub btnNumeroSiguiente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNumeroSiguiente.Click
+        Try
+            Dim WProximo As DataRow = GetSingle("SELECT TOP 1 Numero FROM cargasac WHERE Tipo = '" & txtTipo.Text & "' AND Numero > " & Val(txtNumero.Text) & " AND Ano = '" & txtAnio.Text & "' ORDER BY Numero")
+
+            If Not IsNothing(WProximo) Then
+                txtNumero.Text = WProximo.Item("Numero")
+                txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
 End Class
