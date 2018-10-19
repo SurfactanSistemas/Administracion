@@ -472,6 +472,8 @@ Public Class Recibos
         txtRecibo.Text = "0"
         txtProvi.Focus()
         _ResetearConsultas()
+
+        _Provincia = 0
     End Sub
 
     Private Sub eventoSegunTipoEnFormaDePagoPara(ByVal val As Integer, ByVal rowIndex As Integer, ByVal columnIndex As Integer)

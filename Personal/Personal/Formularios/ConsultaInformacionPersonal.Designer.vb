@@ -47,6 +47,16 @@ Partial Class ConsultaInformacionPersonal
         Me.WIndice = New System.Windows.Forms.ListBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.txtCuil = New System.Windows.Forms.MaskedTextBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.txtCbu = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCuenta = New System.Windows.Forms.MaskedTextBox()
+        Me.cmbBanco = New System.Windows.Forms.ComboBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.txtSucursal = New System.Windows.Forms.TextBox()
         Me.txtEdad = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.txtDni = New System.Windows.Forms.TextBox()
@@ -64,6 +74,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtFechaNacimiento = New System.Windows.Forms.MaskedTextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtNombreCompleto = New System.Windows.Forms.TextBox()
@@ -138,6 +149,7 @@ Partial Class ConsultaInformacionPersonal
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -270,9 +282,9 @@ Partial Class ConsultaInformacionPersonal
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(301, 22)
+        Me.pnlConsulta.Location = New System.Drawing.Point(306, 22)
         Me.pnlConsulta.Name = "pnlConsulta"
-        Me.pnlConsulta.Size = New System.Drawing.Size(404, 358)
+        Me.pnlConsulta.Size = New System.Drawing.Size(399, 353)
         Me.pnlConsulta.TabIndex = 2
         '
         'GroupBox1
@@ -351,11 +363,14 @@ Partial Class ConsultaInformacionPersonal
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabPage1.Controls.Add(Me.txtCuil)
+        Me.TabPage1.Controls.Add(Me.GroupBox5)
         Me.TabPage1.Controls.Add(Me.txtEdad)
         Me.TabPage1.Controls.Add(Me.Label24)
         Me.TabPage1.Controls.Add(Me.txtDni)
         Me.TabPage1.Controls.Add(Me.GroupBox2)
         Me.TabPage1.Controls.Add(Me.txtFechaNacimiento)
+        Me.TabPage1.Controls.Add(Me.Label29)
         Me.TabPage1.Controls.Add(Me.Label7)
         Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Controls.Add(Me.txtNombreCompleto)
@@ -371,6 +386,112 @@ Partial Class ConsultaInformacionPersonal
         Me.TabPage1.Size = New System.Drawing.Size(734, 332)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "DATOS GENERALES"
+        '
+        'txtCuil
+        '
+        Me.txtCuil.Location = New System.Drawing.Point(347, 17)
+        Me.txtCuil.Mask = "00-00000000-0"
+        Me.txtCuil.Name = "txtCuil"
+        Me.txtCuil.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCuil.Size = New System.Drawing.Size(78, 20)
+        Me.txtCuil.TabIndex = 17
+        Me.txtCuil.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.txtCbu)
+        Me.GroupBox5.Controls.Add(Me.txtCuenta)
+        Me.GroupBox5.Controls.Add(Me.cmbBanco)
+        Me.GroupBox5.Controls.Add(Me.Label28)
+        Me.GroupBox5.Controls.Add(Me.Label27)
+        Me.GroupBox5.Controls.Add(Me.Label26)
+        Me.GroupBox5.Controls.Add(Me.Label25)
+        Me.GroupBox5.Controls.Add(Me.txtSucursal)
+        Me.GroupBox5.Location = New System.Drawing.Point(6, 260)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(722, 66)
+        Me.GroupBox5.TabIndex = 16
+        Me.GroupBox5.TabStop = False
+        '
+        'txtCbu
+        '
+        Me.txtCbu.Location = New System.Drawing.Point(452, 26)
+        Me.txtCbu.Mask = "00000000-000000000000000"
+        Me.txtCbu.Name = "txtCbu"
+        Me.txtCbu.Size = New System.Drawing.Size(245, 20)
+        Me.txtCbu.TabIndex = 8
+        Me.txtCbu.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtCuenta
+        '
+        Me.txtCuenta.Location = New System.Drawing.Point(336, 24)
+        Me.txtCuenta.Mask = "000.000/0"
+        Me.txtCuenta.Name = "txtCuenta"
+        Me.txtCuenta.Size = New System.Drawing.Size(62, 20)
+        Me.txtCuenta.TabIndex = 8
+        Me.txtCuenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'cmbBanco
+        '
+        Me.cmbBanco.FormattingEnabled = True
+        Me.cmbBanco.Items.AddRange(New Object() {"", "HSBC", "PROVINCIA", "NACION"})
+        Me.cmbBanco.Location = New System.Drawing.Point(57, 26)
+        Me.cmbBanco.Name = "cmbBanco"
+        Me.cmbBanco.Size = New System.Drawing.Size(90, 21)
+        Me.cmbBanco.TabIndex = 0
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label28.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label28.Location = New System.Drawing.Point(412, 26)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(34, 18)
+        Me.Label28.TabIndex = 0
+        Me.Label28.Text = "CBU"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label27.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label27.Location = New System.Drawing.Point(258, 27)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(72, 18)
+        Me.Label27.TabIndex = 0
+        Me.Label27.Text = "Nº Cuenta"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label26.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label26.Location = New System.Drawing.Point(150, 27)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(59, 18)
+        Me.Label26.TabIndex = 0
+        Me.Label26.Text = "Sucursal"
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label25.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label25.Location = New System.Drawing.Point(6, 26)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(45, 18)
+        Me.Label25.TabIndex = 0
+        Me.Label25.Text = "Banco"
+        '
+        'txtSucursal
+        '
+        Me.txtSucursal.Location = New System.Drawing.Point(215, 26)
+        Me.txtSucursal.MaxLength = 4
+        Me.txtSucursal.Name = "txtSucursal"
+        Me.txtSucursal.Size = New System.Drawing.Size(37, 20)
+        Me.txtSucursal.TabIndex = 7
+        Me.txtSucursal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtEdad
         '
@@ -553,6 +674,17 @@ Partial Class ConsultaInformacionPersonal
         Me.txtFechaNacimiento.TabIndex = 5
         Me.txtFechaNacimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label29.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label29.Location = New System.Drawing.Point(305, 19)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(36, 18)
+        Me.Label29.TabIndex = 0
+        Me.Label29.Text = "CUIL"
+        '
         'Label7
         '
         Me.Label7.AutoSize = True
@@ -569,7 +701,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(143, 19)
+        Me.Label3.Location = New System.Drawing.Point(158, 19)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(31, 18)
         Me.Label3.TabIndex = 0
@@ -590,7 +722,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label8.Location = New System.Drawing.Point(29, 46)
+        Me.Label8.Location = New System.Drawing.Point(28, 46)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(161, 18)
         Me.Label8.TabIndex = 2
@@ -599,7 +731,7 @@ Partial Class ConsultaInformacionPersonal
         'txtFechaEgreso
         '
         Me.txtFechaEgreso.BackColor = System.Drawing.SystemColors.Window
-        Me.txtFechaEgreso.Location = New System.Drawing.Point(381, 250)
+        Me.txtFechaEgreso.Location = New System.Drawing.Point(381, 238)
         Me.txtFechaEgreso.Mask = "00/00/0000"
         Me.txtFechaEgreso.Name = "txtFechaEgreso"
         Me.txtFechaEgreso.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -611,7 +743,7 @@ Partial Class ConsultaInformacionPersonal
         'txtFechaIngreso
         '
         Me.txtFechaIngreso.BackColor = System.Drawing.SystemColors.Window
-        Me.txtFechaIngreso.Location = New System.Drawing.Point(194, 250)
+        Me.txtFechaIngreso.Location = New System.Drawing.Point(194, 238)
         Me.txtFechaIngreso.Mask = "00/00/0000"
         Me.txtFechaIngreso.Name = "txtFechaIngreso"
         Me.txtFechaIngreso.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -625,7 +757,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(96, 251)
+        Me.Label4.Location = New System.Drawing.Point(96, 239)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(93, 18)
         Me.Label4.TabIndex = 0
@@ -636,7 +768,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(290, 251)
+        Me.Label5.Location = New System.Drawing.Point(290, 239)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(88, 18)
         Me.Label5.TabIndex = 0
@@ -1245,6 +1377,8 @@ Partial Class ConsultaInformacionPersonal
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
@@ -1362,4 +1496,15 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents Icono As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents RutaArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbBanco As System.Windows.Forms.ComboBox
+    Friend WithEvents Label26 As System.Windows.Forms.Label
+    Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents txtSucursal As System.Windows.Forms.TextBox
+    Friend WithEvents Label28 As System.Windows.Forms.Label
+    Friend WithEvents txtCuenta As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtCbu As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtCuil As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents Label29 As System.Windows.Forms.Label
 End Class

@@ -122,7 +122,7 @@ Public Class IngresoPruebasEnsayo
                 btnLimpiar.PerformClick()
                 txtOrden.Text = WOrden
 
-                If Not _ExisteEnsayo() Then
+                If Not _ExisteOrdenTrabajo() Then
 
                     txtOrden.Focus()
 
@@ -1176,6 +1176,36 @@ Public Class IngresoPruebasEnsayo
 
     End Sub
 
+    Private Function _ExisteOrdenTrabajo() As Boolean
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT Orden FROM OrdenTrabajo WHERE Orden = '" & UCase(txtOrden.Text) & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            Return dr.HasRows
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
+
+
     Private Function _ExisteEnsayo() As Boolean
 
         Dim cn As SqlConnection = New SqlConnection()
@@ -1954,13 +1984,13 @@ Public Class IngresoPruebasEnsayo
 
                 ' Verificamos nuevamente que exista la orden.
 
-                If Not _ExisteEnsayo() Then
+                'If Not _ExisteEnsayo() Then
 
-                    btnLimpiar.PerformClick()
+                '    btnLimpiar.PerformClick()
 
-                    txtOrden.Focus()
-                    Exit Sub
-                End If
+                '    txtOrden.Focus()
+                '    Exit Sub
+                'End If
 
                 Dim WOrden = txtOrden.Text, WVersion = txtVersion.Text
 
