@@ -14,6 +14,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         cmbOrdenIII.SelectedIndex = 2
 
         txtAnio.Text = Date.Now.ToString("yyyy")
+        txtHastaAnio.Text = Date.Now.ToString("yyyy")
 
         For Each o As CheckedListBox In {clbCentros, clbEmisores, clbEstados, clbOrigenes, clbResponsables, clbTiposSolicitud}
             For i As Integer = 0 To o.Items.Count - 1
@@ -104,6 +105,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         ' Chequeamos que tenga un año indicado, sino indicamos por defecto el año actual.
         '
         If txtAnio.Text.Length < 4 Or txtAnio.Text.Trim = "" Then txtAnio.Text = Date.Now.ToString("yyyy")
+        If txtHastaAnio.Text.Length < 4 Or txtHastaAnio.Text.Trim = "" Then txtHastaAnio.Text = txtAnio.Text
 
 
         '
@@ -124,8 +126,8 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         Dim WOrdenIII As String = _GenerarStringOrdenamiento(cmbOrdenIII)
 
         Dim WWhere As String = String.Format("WHERE cs.Centro IN ({0}) And cs.Tipo IN ({1}) And cs.ResponsableEmisor IN ({2}) " &
-                                             " And cs.ResponsableDestino IN ({3}) And cs.Estado IN ({4}) And cs.Origen IN ({5}) And cs.Ano = '{6}' ",
-                                             WCentros, WTiposSolicitud, WEmisores, WResponsables, WEstados, WOrigenes, txtAnio.Text)
+                                             " And cs.ResponsableDestino IN ({3}) And cs.Estado IN ({4}) And cs.Origen IN ({5}) And cs.Ano BETWEEN '{6}' And '{7}' ",
+                                             WCentros, WTiposSolicitud, WEmisores, WResponsables, WEstados, WOrigenes, txtAnio.Text, txtHastaAnio.Text)
 
         '
         ' Eliminamos las posibilidades de colapso entre los ordenamientos.
@@ -138,7 +140,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         '
         ' Armamos la cadena de Ordenamiento.
         '
-        Dim WOrderBy As String = "ORDER BY "
+        Dim WOrderBy As String = "ORDER BY cs.Ano, "
 
         If WOrdenI.Trim <> "" Then WOrderBy &= WOrdenI & ","
         If WOrdenII.Trim <> "" Then WOrderBy &= WOrdenII & ","
@@ -266,7 +268,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         If e.KeyData = Keys.Enter Then
             If Trim(txtAnio.Text).Length < 4 Then : Exit Sub : End If
 
-            btnAceptar.PerformClick()
+            txtHastaAnio.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtAnio.Text = ""
@@ -319,7 +321,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
         With frm2
 
-            Dim WNombreArchivo = String.Format("Indice Gral {0} - {1}", txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"))
+            Dim WNombreArchivo = String.Format("Indice Gral {0} al {2} - {1}", txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"), txtHastaAnio.Text)
 
             Select Case WFormato
                 Case 0 ' Imprimir
@@ -360,6 +362,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
                 With r
                     .Item("Clave") = row.Index
                     .Item("Tipo") = If(row.Cells("Tipo").Value, "")
+                    .Item("idTipo") = If(row.Cells("idTipo").Value, "")
                     .Item("Año") = If(row.Cells("Anio").Value, 0)
                     .Item("Nro") = If(row.Cells("Numero").Value, 0)
                     .Item("Fecha") = If(row.Cells("Fecha").Value, "")
@@ -388,7 +391,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
                 IO.Directory.CreateDirectory(WRuta)
 
-                Dim WNombreArchivo = String.Format("Indice Gral {0} - {1}.pdf", txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"))
+                Dim WNombreArchivo = String.Format("Indice Gral {0} al {2} - {1}.pdf", txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"), txtHastaAnio.Text)
 
                 frm.Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
 
@@ -405,6 +408,19 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
+
+    End Sub
+
+    Private Sub txtHastaAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHastaAnio.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtHastaAnio.Text) = "" Then txtHastaAnio.Text = txtAnio.Text
+
+            btnAceptar.PerformClick()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHastaAnio.Text = ""
+        End If
 
     End Sub
 End Class

@@ -23,9 +23,9 @@ Partial Class IndiceGralSac
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -73,6 +73,9 @@ Partial Class IndiceGralSac
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.clbEstados = New System.Windows.Forms.CheckedListBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtHastaAnio = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -86,6 +89,7 @@ Partial Class IndiceGralSac
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.GroupBox9.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -130,34 +134,34 @@ Partial Class IndiceGralSac
         Me.dgvListado.AllowUserToAddRows = False
         Me.dgvListado.AllowUserToDeleteRows = False
         Me.dgvListado.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListado.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListado.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvListado.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.idTipo, Me.Anio, Me.Numero, Me.Fecha, Me.Estado, Me.Titulo, Me.Referencia, Me.Centro, Me.Origen, Me.Emisor, Me.Responsable})
         Me.dgvListado.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvListado.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvListado.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvListado.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvListado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvListado.Location = New System.Drawing.Point(3, 217)
+        Me.dgvListado.Location = New System.Drawing.Point(3, 230)
         Me.dgvListado.Name = "dgvListado"
         Me.dgvListado.ReadOnly = True
         Me.dgvListado.RowHeadersWidth = 15
         Me.dgvListado.RowTemplate.Height = 20
         Me.dgvListado.ShowCellToolTips = False
-        Me.dgvListado.Size = New System.Drawing.Size(1139, 252)
+        Me.dgvListado.Size = New System.Drawing.Size(1139, 262)
         Me.dgvListado.TabIndex = 2
         '
         'Tipo
@@ -199,9 +203,9 @@ Partial Class IndiceGralSac
         '
         Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Fecha.DataPropertyName = "Fecha"
-        DataGridViewCellStyle2.Format = "d"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Format = "d"
+        DataGridViewCellStyle5.NullValue = Nothing
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
@@ -296,7 +300,7 @@ Partial Class IndiceGralSac
         Me.GroupBox1.Location = New System.Drawing.Point(10, 10)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(10)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1125, 194)
+        Me.GroupBox1.Size = New System.Drawing.Size(1125, 207)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
@@ -304,15 +308,14 @@ Partial Class IndiceGralSac
         'Panel2
         '
         Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.GroupBox9)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.btnNuevaSolicitud)
         Me.Panel2.Controls.Add(Me.btnCancelar)
         Me.Panel2.Controls.Add(Me.btnAceptar)
-        Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.GroupBox8)
         Me.Panel2.Controls.Add(Me.GroupBox2)
         Me.Panel2.Controls.Add(Me.GroupBox7)
-        Me.Panel2.Controls.Add(Me.txtAnio)
         Me.Panel2.Controls.Add(Me.GroupBox6)
         Me.Panel2.Controls.Add(Me.GroupBox3)
         Me.Panel2.Controls.Add(Me.GroupBox5)
@@ -320,41 +323,41 @@ Partial Class IndiceGralSac
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 16)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1119, 175)
+        Me.Panel2.Size = New System.Drawing.Size(1119, 188)
         Me.Panel2.TabIndex = 5
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(892, 12)
+        Me.Button1.Location = New System.Drawing.Point(823, 48)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(104, 32)
+        Me.Button1.Size = New System.Drawing.Size(172, 27)
         Me.Button1.TabIndex = 7
         Me.Button1.Text = "Exportar Indice"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'btnNuevaSolicitud
         '
-        Me.btnNuevaSolicitud.Location = New System.Drawing.Point(718, 12)
+        Me.btnNuevaSolicitud.Location = New System.Drawing.Point(936, 12)
         Me.btnNuevaSolicitud.Name = "btnNuevaSolicitud"
-        Me.btnNuevaSolicitud.Size = New System.Drawing.Size(165, 32)
+        Me.btnNuevaSolicitud.Size = New System.Drawing.Size(165, 30)
         Me.btnNuevaSolicitud.TabIndex = 6
         Me.btnNuevaSolicitud.Text = "Consulta / Nueva Solicitud"
         Me.btnNuevaSolicitud.UseVisualStyleBackColor = True
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(1005, 12)
+        Me.btnCancelar.Location = New System.Drawing.Point(1001, 48)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(104, 32)
+        Me.btnCancelar.Size = New System.Drawing.Size(104, 27)
         Me.btnCancelar.TabIndex = 5
         Me.btnCancelar.Text = "Cerrar"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(605, 12)
+        Me.btnAceptar.Location = New System.Drawing.Point(823, 12)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(104, 32)
+        Me.btnAceptar.Size = New System.Drawing.Size(104, 30)
         Me.btnAceptar.TabIndex = 5
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
@@ -362,16 +365,16 @@ Partial Class IndiceGralSac
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(13, 21)
+        Me.Label6.Location = New System.Drawing.Point(10, 20)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(26, 13)
+        Me.Label6.Size = New System.Drawing.Size(60, 13)
         Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Año"
+        Me.Label6.Text = "Desde Año"
         '
         'GroupBox8
         '
         Me.GroupBox8.Controls.Add(Me.clbCentros)
-        Me.GroupBox8.Location = New System.Drawing.Point(944, 55)
+        Me.GroupBox8.Location = New System.Drawing.Point(944, 77)
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.Size = New System.Drawing.Size(167, 107)
         Me.GroupBox8.TabIndex = 4
@@ -395,7 +398,7 @@ Partial Class IndiceGralSac
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.cmbOrdenI)
         Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Location = New System.Drawing.Point(92, 4)
+        Me.GroupBox2.Location = New System.Drawing.Point(265, 12)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(500, 47)
         Me.GroupBox2.TabIndex = 0
@@ -459,7 +462,7 @@ Partial Class IndiceGralSac
         'GroupBox7
         '
         Me.GroupBox7.Controls.Add(Me.clbResponsables)
-        Me.GroupBox7.Location = New System.Drawing.Point(771, 55)
+        Me.GroupBox7.Location = New System.Drawing.Point(771, 77)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(167, 107)
         Me.GroupBox7.TabIndex = 4
@@ -477,7 +480,7 @@ Partial Class IndiceGralSac
         '
         'txtAnio
         '
-        Me.txtAnio.Location = New System.Drawing.Point(44, 17)
+        Me.txtAnio.Location = New System.Drawing.Point(73, 16)
         Me.txtAnio.MaxLength = 4
         Me.txtAnio.Name = "txtAnio"
         Me.txtAnio.Size = New System.Drawing.Size(38, 20)
@@ -488,7 +491,7 @@ Partial Class IndiceGralSac
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.clbEmisores)
-        Me.GroupBox6.Location = New System.Drawing.Point(598, 55)
+        Me.GroupBox6.Location = New System.Drawing.Point(598, 77)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(167, 107)
         Me.GroupBox6.TabIndex = 3
@@ -507,7 +510,7 @@ Partial Class IndiceGralSac
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.clbTiposSolicitud)
-        Me.GroupBox3.Location = New System.Drawing.Point(9, 54)
+        Me.GroupBox3.Location = New System.Drawing.Point(9, 76)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(202, 107)
         Me.GroupBox3.TabIndex = 3
@@ -526,7 +529,7 @@ Partial Class IndiceGralSac
         'GroupBox5
         '
         Me.GroupBox5.Controls.Add(Me.clbOrigenes)
-        Me.GroupBox5.Location = New System.Drawing.Point(425, 55)
+        Me.GroupBox5.Location = New System.Drawing.Point(425, 77)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(167, 107)
         Me.GroupBox5.TabIndex = 3
@@ -546,7 +549,7 @@ Partial Class IndiceGralSac
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.clbEstados)
-        Me.GroupBox4.Location = New System.Drawing.Point(217, 54)
+        Me.GroupBox4.Location = New System.Drawing.Point(217, 76)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(202, 107)
         Me.GroupBox4.TabIndex = 3
@@ -573,16 +576,47 @@ Partial Class IndiceGralSac
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 50)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 214.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 227.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 472)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 495)
         Me.TableLayoutPanel1.TabIndex = 4
+        '
+        'txtHastaAnio
+        '
+        Me.txtHastaAnio.Location = New System.Drawing.Point(177, 16)
+        Me.txtHastaAnio.MaxLength = 4
+        Me.txtHastaAnio.Name = "txtHastaAnio"
+        Me.txtHastaAnio.Size = New System.Drawing.Size(38, 20)
+        Me.txtHastaAnio.TabIndex = 1
+        Me.txtHastaAnio.Text = "0000"
+        Me.txtHastaAnio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(119, 20)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(54, 13)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "HastaAño"
+        '
+        'GroupBox9
+        '
+        Me.GroupBox9.Controls.Add(Me.txtAnio)
+        Me.GroupBox9.Controls.Add(Me.txtHastaAnio)
+        Me.GroupBox9.Controls.Add(Me.Label6)
+        Me.GroupBox9.Controls.Add(Me.Label7)
+        Me.GroupBox9.Location = New System.Drawing.Point(19, 12)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(240, 47)
+        Me.GroupBox9.TabIndex = 8
+        Me.GroupBox9.TabStop = False
         '
         'IndiceGralSac
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1145, 522)
+        Me.ClientSize = New System.Drawing.Size(1145, 545)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "IndiceGralSac"
@@ -595,7 +629,6 @@ Partial Class IndiceGralSac
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -605,6 +638,8 @@ Partial Class IndiceGralSac
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -655,4 +690,7 @@ Partial Class IndiceGralSac
     Friend WithEvents CopiarConCabecerasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CopiarSóloDatosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents txtHastaAnio As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
 End Class
