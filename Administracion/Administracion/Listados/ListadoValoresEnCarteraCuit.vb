@@ -81,45 +81,45 @@ Public Class ListadoValoresEnCarteraCuit
         Dim dr As SqlDataReader
         Dim WClave, WDestino, WEstado2
 
-        Try
+        'Try
 
-            cn.ConnectionString = Proceso._ConectarA
-            cn.Open()
-            cm.Connection = cn
+        cn.ConnectionString = Proceso._ConectarA
+        cn.Open()
+        cm.Connection = cn
 
-            dr = cm.ExecuteReader()
+        dr = cm.ExecuteReader()
 
-            WClave = ""
-            WDestino = ""
-            WEstado2 = ""
+        WClave = ""
+        WDestino = ""
+        WEstado2 = ""
 
-            If dr.HasRows Then
+        If dr.HasRows Then
 
-                While dr.Read()
+            While dr.Read()
 
-                    With dr
-                        WClave = Trim(.Item("Clave"))
-                        WDestino = IIf(IsDBNull(.Item("Destino")), "", Trim(.Item("Destino")))
-                        WEstado2 = IIf(IsDBNull(.Item("Estado2")), "", Trim(.Item("Estado2")))
+                With dr
+                    WClave = Trim(.Item("Clave"))
+                    WDestino = IIf(IsDBNull(.Item("Destino")), "", Trim(.Item("Destino")))
+                    WEstado2 = IIf(IsDBNull(.Item("Estado2")), "", Trim(.Item("Estado2")))
 
-                        _ActualizarRecibo(WClave, WDestino, WEstado2)
-                    End With
+                    _ActualizarRecibo(WClave, WDestino, WEstado2)
+                End With
 
 
-                End While
+            End While
 
-            End If
+        End If
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
+        'Catch ex As Exception
+        '    Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        'Finally
 
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
+        '    dr = Nothing
+        '    cn.Close()
+        '    cn = Nothing
+        '    cm = Nothing
 
-        End Try
+        'End Try
 
 
 
@@ -198,6 +198,8 @@ Public Class ListadoValoresEnCarteraCuit
                     End If
 
                 End If
+
+                If Not dr.IsClosed Then dr.Close()
 
                 If Trim(WDesProveedor) <> "" Then
                     wDestino = Microsoft.VisualBasic.Left(Trim(WDesProveedor) & "  O.P.:" & Trim(WOrden), 50)
