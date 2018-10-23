@@ -1379,7 +1379,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosXII.Name = "txtComentariosXII"
         Me.txtComentariosXII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosXII.TabIndex = 3
-        Me.txtComentariosXII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosXI
         '
@@ -1388,7 +1387,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosXI.Name = "txtComentariosXI"
         Me.txtComentariosXI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosXI.TabIndex = 3
-        Me.txtComentariosXI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosX
         '
@@ -1397,7 +1395,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosX.Name = "txtComentariosX"
         Me.txtComentariosX.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosX.TabIndex = 3
-        Me.txtComentariosX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosIX
         '
@@ -1406,7 +1403,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosIX.Name = "txtComentariosIX"
         Me.txtComentariosIX.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosIX.TabIndex = 3
-        Me.txtComentariosIX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosVIII
         '
@@ -1415,7 +1411,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosVIII.Name = "txtComentariosVIII"
         Me.txtComentariosVIII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosVIII.TabIndex = 3
-        Me.txtComentariosVIII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosVII
         '
@@ -1424,7 +1419,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosVII.Name = "txtComentariosVII"
         Me.txtComentariosVII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosVII.TabIndex = 3
-        Me.txtComentariosVII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosVI
         '
@@ -1433,7 +1427,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosVI.Name = "txtComentariosVI"
         Me.txtComentariosVI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosVI.TabIndex = 3
-        Me.txtComentariosVI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosV
         '
@@ -1442,7 +1435,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosV.Name = "txtComentariosV"
         Me.txtComentariosV.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosV.TabIndex = 3
-        Me.txtComentariosV.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosIV
         '
@@ -1451,7 +1443,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosIV.Name = "txtComentariosIV"
         Me.txtComentariosIV.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosIV.TabIndex = 3
-        Me.txtComentariosIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosIII
         '
@@ -1460,7 +1451,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosIII.Name = "txtComentariosIII"
         Me.txtComentariosIII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosIII.TabIndex = 3
-        Me.txtComentariosIII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosII
         '
@@ -1469,7 +1459,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosII.Name = "txtComentariosII"
         Me.txtComentariosII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosII.TabIndex = 3
-        Me.txtComentariosII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtComentariosI
         '
@@ -1478,7 +1467,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosI.Name = "txtComentariosI"
         Me.txtComentariosI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosI.TabIndex = 3
-        Me.txtComentariosI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosXII
         '
@@ -1487,7 +1475,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosXII.Name = "txtRequisitosXII"
         Me.txtRequisitosXII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosXII.TabIndex = 3
-        Me.txtRequisitosXII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosXI
         '
@@ -1496,7 +1483,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosXI.Name = "txtRequisitosXI"
         Me.txtRequisitosXI.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosXI.TabIndex = 3
-        Me.txtRequisitosXI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosX
         '
@@ -1505,7 +1491,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosX.Name = "txtRequisitosX"
         Me.txtRequisitosX.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosX.TabIndex = 3
-        Me.txtRequisitosX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosIX
         '
@@ -1514,7 +1499,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosIX.Name = "txtRequisitosIX"
         Me.txtRequisitosIX.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosIX.TabIndex = 3
-        Me.txtRequisitosIX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosVIII
         '
@@ -1523,7 +1507,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosVIII.Name = "txtRequisitosVIII"
         Me.txtRequisitosVIII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosVIII.TabIndex = 3
-        Me.txtRequisitosVIII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosVII
         '
@@ -1532,7 +1515,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosVII.Name = "txtRequisitosVII"
         Me.txtRequisitosVII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosVII.TabIndex = 3
-        Me.txtRequisitosVII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosVI
         '
@@ -1541,7 +1523,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosVI.Name = "txtRequisitosVI"
         Me.txtRequisitosVI.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosVI.TabIndex = 3
-        Me.txtRequisitosVI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosV
         '
@@ -1550,7 +1531,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosV.Name = "txtRequisitosV"
         Me.txtRequisitosV.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosV.TabIndex = 3
-        Me.txtRequisitosV.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosIV
         '
@@ -1559,7 +1539,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosIV.Name = "txtRequisitosIV"
         Me.txtRequisitosIV.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosIV.TabIndex = 3
-        Me.txtRequisitosIV.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosIII
         '
@@ -1568,7 +1547,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosIII.Name = "txtRequisitosIII"
         Me.txtRequisitosIII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosIII.TabIndex = 3
-        Me.txtRequisitosIII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosII
         '
@@ -1577,7 +1555,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosII.Name = "txtRequisitosII"
         Me.txtRequisitosII.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosII.TabIndex = 3
-        Me.txtRequisitosII.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtRequisitosI
         '
@@ -1586,7 +1563,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtRequisitosI.Name = "txtRequisitosI"
         Me.txtRequisitosI.Size = New System.Drawing.Size(377, 20)
         Me.txtRequisitosI.TabIndex = 3
-        Me.txtRequisitosI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label20
         '
