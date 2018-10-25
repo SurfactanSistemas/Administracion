@@ -16,15 +16,15 @@ Option Explicit On
 '''<summary>
 '''Represents a strongly typed in-memory cache of data.
 '''</summary>
-<Global.System.Serializable(),  _
- Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
- Global.System.ComponentModel.ToolboxItem(true),  _
- Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema"),  _
- Global.System.Xml.Serialization.XmlRootAttribute("DetallesIndiceGral"),  _
- Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")>  _
+<Global.System.Serializable(), _
+ Global.System.ComponentModel.DesignerCategoryAttribute("code"), _
+ Global.System.ComponentModel.ToolboxItem(True), _
+ Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema"), _
+ Global.System.Xml.Serialization.XmlRootAttribute("DetallesIndiceGral"), _
+ Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")> _
 Partial Public Class DetallesIndiceGral
     Inherits Global.System.Data.DataSet
-    
+
     Private tableDetalles As DetallesDataTable
 
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
@@ -307,6 +307,8 @@ Partial Public Class DetallesIndiceGral
 
         Private columnResponsable As Global.System.Data.DataColumn
 
+        Private columnidTipo As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -439,6 +441,14 @@ Partial Public Class DetallesIndiceGral
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property idTipoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnidTipo
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -475,9 +485,9 @@ Partial Public Class DetallesIndiceGral
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function AddDetallesRow(ByVal Clave As String, ByVal Tipo As String, ByVal Año As Short, ByVal Nro As Short, ByVal Fecha As String, ByVal Estado As String, ByVal Titulo As String, ByVal Referencia As String, ByVal Centro As String, ByVal Origen As String, ByVal Emisor As String, ByVal Responsable As String) As DetallesRow
+        Public Overloads Function AddDetallesRow(ByVal Clave As String, ByVal Tipo As String, ByVal Año As Short, ByVal Nro As Short, ByVal Fecha As String, ByVal Estado As String, ByVal Titulo As String, ByVal Referencia As String, ByVal Centro As String, ByVal Origen As String, ByVal Emisor As String, ByVal Responsable As String, ByVal idTipo As Integer) As DetallesRow
             Dim rowDetallesRow As DetallesRow = CType(Me.NewRow, DetallesRow)
-            Dim columnValuesArray() As Object = New Object() {Clave, Tipo, Año, Nro, Fecha, Estado, Titulo, Referencia, Centro, Origen, Emisor, Responsable}
+            Dim columnValuesArray() As Object = New Object() {Clave, Tipo, Año, Nro, Fecha, Estado, Titulo, Referencia, Centro, Origen, Emisor, Responsable, idTipo}
             rowDetallesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDetallesRow)
             Return rowDetallesRow
@@ -512,6 +522,7 @@ Partial Public Class DetallesIndiceGral
             Me.columnOrigen = MyBase.Columns("Origen")
             Me.columnEmisor = MyBase.Columns("Emisor")
             Me.columnResponsable = MyBase.Columns("Responsable")
+            Me.columnidTipo = MyBase.Columns("idTipo")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -541,6 +552,8 @@ Partial Public Class DetallesIndiceGral
             MyBase.Columns.Add(Me.columnEmisor)
             Me.columnResponsable = New Global.System.Data.DataColumn("Responsable", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnResponsable)
+            Me.columnidTipo = New Global.System.Data.DataColumn("idTipo", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnidTipo)
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -867,6 +880,21 @@ Partial Public Class DetallesIndiceGral
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property idTipo() As Integer
+            Get
+                Try
+                    Return CType(Me(Me.tableDetalles.idTipoColumn), Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'idTipo' in table 'Detalles' is DBNull.", e)
+                End Try
+            End Get
+            Set(ByVal value As Integer)
+                Me(Me.tableDetalles.idTipoColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsClaveNull() As Boolean
             Return Me.IsNull(Me.tableDetalles.ClaveColumn)
         End Function
@@ -1007,6 +1035,18 @@ Partial Public Class DetallesIndiceGral
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetResponsableNull()
             Me(Me.tableDetalles.ResponsableColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsidTipoNull() As Boolean
+            Return Me.IsNull(Me.tableDetalles.idTipoColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetidTipoNull()
+            Me(Me.tableDetalles.idTipoColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
 

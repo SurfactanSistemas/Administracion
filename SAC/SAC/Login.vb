@@ -3,8 +3,6 @@ Imports SAC.Clases
 
 Public Class Login
 
-    Private _MenuPrincipal As Form = New MenuPrincipal
-
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Close()
     End Sub
@@ -54,11 +52,7 @@ Public Class Login
 
         End If
 
-        _MenuPrincipal.Close()
-
-        _MenuPrincipal = New MenuPrincipal
-
-        _MenuPrincipal.Show()
+        MenuPrincipal.Show()
 
         Close()
 

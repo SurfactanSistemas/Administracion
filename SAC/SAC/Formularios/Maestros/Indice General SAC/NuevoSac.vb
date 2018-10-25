@@ -114,8 +114,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                         WDescRespII = _TraerDescripcionResponsable(WRespII)
                         WFechaI = OrDefault(.Item("Fecha" & i), "  /  /    ")
                         WFechaII = OrDefault(.Item("Fecha1" & i), "  /  /    ")
-                        WEstadoI = _TraerEstado(.Item("Estado" & i))
-                        WEstadoII = _TraerEstado(.Item("Estado1" & i))
+                        WEstadoI = _TraerEstadoVerif(.Item("Estado" & i))
+                        WEstadoII = _TraerEstadoVerif(.Item("Estado1" & i))
                         WComentario = OrDefault(.Item("Comentario" & i & "1"), "").ToString.Trim & " " & OrDefault(.Item("Comentario" & i & "2"), "").ToString.Trim
 
                     Else
@@ -126,8 +126,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                         WDescRespII = _TraerDescripcionResponsable(WRespII)
                         WFechaI = OrDefault(.Item("Fecha" & i & "1"), "  /  /    ")
                         WFechaII = OrDefault(.Item("Fecha" & i & "2"), "  /  /    ")
-                        WEstadoI = _TraerEstado(.Item("Estado" & i & "1"))
-                        WEstadoII = _TraerEstado(.Item("Estado" & i & "1"))
+                        WEstadoI = _TraerEstadoVerif(.Item("Estado" & i & "1"))
+                        WEstadoII = _TraerEstadoVerif(.Item("Estado" & i & "1"))
                         WComentario = OrDefault(.Item("Comentario" & i & "1"), "").ToString.Trim & " " & OrDefault(.Item("Comentario" & i & "2"), "").ToString.Trim
 
                     End If
@@ -175,6 +175,23 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
+
+    Private Function _TraerEstadoVerif(ByVal item As Object) As Object
+
+        Select Case OrDefault(item, 0)
+            Case 0
+                Return "No Imple."
+            Case 1
+                Return "Imple."
+            Case 2
+                Return "Nula"
+            Case 3
+                Return "Cerrada"
+            Case Else
+                Return ""
+        End Select
+
+    End Function
 
     Private Function _TraerEstado(ByVal item As Object) As Object
 
@@ -439,6 +456,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Dim WTipo = txtTipo.Text
         Dim WNumero = txtNumero.Text
         Dim WAnio = txtAnio.Text
+
+        If WAnio = "" Then WAnio = Date.Now.Year
 
         btnLimpiar_Click(Nothing, Nothing)
 
@@ -1146,6 +1165,23 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Function
 
+    Private Function _TraerValorRefEstadoVerif(ByVal valor As Object)
+
+        Select Case OrDefault(valor, "")
+            Case "No Imple."
+                Return 0
+            Case "Imple."
+                Return 1
+            Case "Nula"
+                Return 2
+            Case "Cerrada"
+                Return 2
+            Case Else
+                Return 0
+        End Select
+
+    End Function
+
     Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
 
         Dim cn As New SqlConnection()
@@ -1349,8 +1385,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                     Dim WRespII As String = OrDefault(.Cells("VerResponsableII").Value, "0")
                     Dim WVerFechaI As String = OrDefault(.Cells("VerFechaI").Value, "  /  /    ")
                     Dim WVerFechaII As String = OrDefault(.Cells("VerFechaII").Value, "  /  /    ")
-                    Dim WVerEstadoI As String = _TraerValorRefEstado(.Cells("VerEstadoI").Value)
-                    Dim WVerEstadoII As String = _TraerValorRefEstado(.Cells("VerEstadoII").Value)
+                    Dim WVerEstadoI As String = _TraerValorRefEstadoVerif(.Cells("VerEstadoI").Value)
+                    Dim WVerEstadoII As String = _TraerValorRefEstadoVerif(.Cells("VerEstadoII").Value)
                     Dim WComentario As String = OrDefault(.Cells("VerComentario").Value, "")
                     WComentario = WComentario.Replace("'", "").PadRight(100, " ")
                     Dim WVerComentarioI As String = WComentario.Substring(0, 50)
@@ -1412,7 +1448,11 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             trans.Commit()
 
-            MsgBox("Actualización realizada con Éxito", MsgBoxStyle.Information)
+            If ContinuarSalirMsgBox.Show("Actualización se ha realizado con Éxito" & vbCrLf _
+                                         & "Indique como quiere proseguir.", "Continuar editando SAC", "Volver a Indice") = DialogResult.OK Then
+                txtTipo.Focus()
+                Exit Sub
+            End If
 
             Dim WOwner As INuevoSAC = CType(Owner, INuevoSAC)
 
@@ -1829,5 +1869,9 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
+    End Sub
+
+    Private Sub txtNumero_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNumero.TextChanged
+
     End Sub
 End Class
