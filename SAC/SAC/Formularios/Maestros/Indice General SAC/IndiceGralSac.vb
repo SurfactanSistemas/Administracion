@@ -54,7 +54,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         CType(clbEmisores, ListBox).DisplayMember = "Descripcion"
         CType(clbEmisores, ListBox).ValueMember = "Codigo"
 
-        Dim WResponsables As DataTable = WTemp.Copy
+        Dim WResponsables As DataTable = WEmisores.Copy
 
         WResponsables.DefaultView.Sort = "Codigo"
 
