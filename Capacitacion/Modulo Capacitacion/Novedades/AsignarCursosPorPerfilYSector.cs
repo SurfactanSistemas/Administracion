@@ -1289,5 +1289,16 @@ namespace Modulo_Capacitacion.Novedades
             }
 	        
         }
+
+        private void quitarSegundoCursoAsignadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvGrilla.SelectedCells.Count == 0) return;
+
+            int wRowIndex = dgvGrilla.CurrentCell.RowIndex;
+
+            dgvGrilla.Rows[wRowIndex].Cells["TemaII"].Value = "0";
+            dgvGrilla.Rows[wRowIndex].Cells["DescTemaII"].Value = "";
+            dgvGrilla.Rows[wRowIndex].Cells["Horas"].Value = "0";
+        }
     }
 }
