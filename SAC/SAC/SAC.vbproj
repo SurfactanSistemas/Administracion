@@ -123,6 +123,12 @@
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
+    <Compile Include="Formularios\Auxiliares\ContinuarSalirMsgBox.Designer.vb">
+      <DependentUpon>ContinuarSalirMsgBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Auxiliares\ContinuarSalirMsgBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Ayudas\AyudaResponsablesSac.Designer.vb">
       <DependentUpon>AyudaResponsablesSac.vb</DependentUpon>
     </Compile>
@@ -302,6 +308,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\Auxiliares\ContinuarSalirMsgBox.resx">
+      <DependentUpon>ContinuarSalirMsgBox.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Ayudas\AyudaResponsablesSac.resx">
       <DependentUpon>AyudaResponsablesSac.vb</DependentUpon>
     </EmbeddedResource>
@@ -446,6 +455,7 @@
     <Content Include="Resources\Enviar_Email.png" />
     <Content Include="Resources\etiqueta.png" />
     <Content Include="Resources\Excel_icon.ico" />
+    <None Include="Resources\exm.png" />
     <Content Include="Resources\Experimental.png" />
     <Content Include="Resources\exportar.png" />
     <Content Include="Resources\fin.png" />
@@ -498,6 +508,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

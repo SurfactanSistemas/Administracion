@@ -1448,7 +1448,11 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             trans.Commit()
 
-            MsgBox("Actualización realizada con Éxito", MsgBoxStyle.Information)
+            If ContinuarSalirMsgBox.Show("Actualización se ha realizado con Éxito" & vbCrLf _
+                                         & "Indique como quiere proseguir.", "Continuar editando SAC", "Volver a Indice") = DialogResult.OK Then
+                txtTipo.Focus()
+                Exit Sub
+            End If
 
             Dim WOwner As INuevoSAC = CType(Owner, INuevoSAC)
 
