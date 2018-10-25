@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class NuevoSACAccionesInclude2
+Public Class NuevoSACAmbosSinComentarios
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class NuevoSACAccionesInclude2
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "NuevoSACAccionesInclude2.rpt"
+            Return "NuevoSACAmbosSinComentarios.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class NuevoSACAccionesInclude2
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "SAC.NuevoSACAccionesInclude2.rpt"
+            Return "SAC.NuevoSACAmbosSinComentarios.rpt"
         End Get
         Set
             'Do nothing
@@ -78,7 +78,7 @@ Public Class NuevoSACAccionesInclude2
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property DetailSection1() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(3)
         End Get
@@ -86,15 +86,47 @@ Public Class NuevoSACAccionesInclude2
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property DetailSection2() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(4)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
+        Get
+            Return Me.ReportDefinition.Sections(5)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
+        Get
+            Return Me.ReportDefinition.Sections(6)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_Comentarios() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(0)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_SubInfNuevoSACAccionesImpleVerifrpt_Comentarios() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(1)
         End Get
     End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedNuevoSACAccionesInclude2
+Public Class CachedNuevoSACAmbosSinComentarios
     Inherits Component
     Implements ICachedReport
     
@@ -136,7 +168,7 @@ Public Class CachedNuevoSACAccionesInclude2
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As NuevoSACAccionesInclude2 = New NuevoSACAccionesInclude2()
+        Dim rpt As NuevoSACAmbosSinComentarios = New NuevoSACAmbosSinComentarios()
         rpt.Site = Me.Site
         Return rpt
     End Function

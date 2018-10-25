@@ -276,6 +276,24 @@
       <DependentUpon>ReporteIndiceGral.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\NuevoSac\NuevoSACSoloComentarios.vb">
+      <DependentUpon>NuevoSACSoloComentarios.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\NuevoSac\NuevoSACAccionesSinComentarios.vb">
+      <DependentUpon>NuevoSACAccionesSinComentarios.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\NuevoSac\NuevoSACAmbosSinComentarios.vb">
+      <DependentUpon>NuevoSACAmbosSinComentarios.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\NuevoSac\NuevoSACAccionesInclude.vb">
       <DependentUpon>NuevoSACAccionesInclude.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -284,12 +302,6 @@
     </Compile>
     <Compile Include="Reportes\NuevoSac\SubInfNuevoSACAccionesImpleVerif.vb">
       <DependentUpon>SubInfNuevoSACAccionesImpleVerif.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reportes\NuevoSac\NuevoSACAccionesInclude2.vb">
-      <DependentUpon>NuevoSACAccionesInclude2.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -388,6 +400,18 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteIndiceGral.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACSoloComentarios.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NuevoSACSoloComentarios.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACAccionesSinComentarios.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NuevoSACAccionesSinComentarios.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACAmbosSinComentarios.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NuevoSACAmbosSinComentarios.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACAccionesInclude.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NuevoSACAccionesInclude.vb</LastGenOutput>
@@ -395,10 +419,6 @@
     <EmbeddedResource Include="Reportes\NuevoSac\SubInfNuevoSACAccionesImpleVerif.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SubInfNuevoSACAccionesImpleVerif.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACAccionesInclude2.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>NuevoSACAccionesInclude2.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACAmbos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -7,7 +7,7 @@
             Dim WOwner As IExportarSac = CType(Owner, IExportarSac)
 
             If Not IsNothing(WOwner) Then
-                WOwner._ProcesarExportarSac(CheckBox1.Checked, CheckBox2.Checked, ComboBox1.SelectedIndex)
+                WOwner._ProcesarExportarSac(CheckBox1.Checked, CheckBox2.Checked, ComboBox1.SelectedIndex, CheckBox3.Checked)
             End If
 
             Close()

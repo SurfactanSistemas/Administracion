@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class SubInfNuevoSACAccionesImpleVerif
+Public Class NuevoSACAccionesSinComentarios
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class SubInfNuevoSACAccionesImpleVerif
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "SubInfNuevoSACAccionesImpleVerif.rpt"
+            Return "NuevoSACAccionesSinComentarios.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class SubInfNuevoSACAccionesImpleVerif
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "SAC.SubInfNuevoSACAccionesImpleVerif.rpt"
+            Return "SAC.NuevoSACAccionesSinComentarios.rpt"
         End Get
         Set
             'Do nothing
@@ -102,7 +102,7 @@ Public Class SubInfNuevoSACAccionesImpleVerif
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_Comentarios() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_SubInfNuevoSACAccionesImpleVerifSinComentariosrpt_Comentarios() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(0)
         End Get
@@ -110,7 +110,7 @@ Public Class SubInfNuevoSACAccionesImpleVerif
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedSubInfNuevoSACAccionesImpleVerif
+Public Class CachedNuevoSACAccionesSinComentarios
     Inherits Component
     Implements ICachedReport
     
@@ -152,7 +152,7 @@ Public Class CachedSubInfNuevoSACAccionesImpleVerif
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As SubInfNuevoSACAccionesImpleVerif = New SubInfNuevoSACAccionesImpleVerif()
+        Dim rpt As NuevoSACAccionesSinComentarios = New NuevoSACAccionesSinComentarios()
         rpt.Site = Me.Site
         Return rpt
     End Function

@@ -26,12 +26,13 @@ Partial Class ExportarSAC
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -44,7 +45,7 @@ Partial Class ExportarSAC
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(337, 50)
+        Me.Panel1.Size = New System.Drawing.Size(440, 50)
         Me.Panel1.TabIndex = 2
         '
         'Label2
@@ -67,7 +68,7 @@ Partial Class ExportarSAC
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(217, 16)
+        Me.Label1.Location = New System.Drawing.Point(320, 16)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(108, 18)
         Me.Label1.TabIndex = 0
@@ -78,17 +79,59 @@ Partial Class ExportarSAC
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.CheckBox2)
+        Me.GroupBox1.Controls.Add(Me.CheckBox3)
         Me.GroupBox1.Controls.Add(Me.CheckBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 59)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 59)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(312, 109)
+        Me.GroupBox1.Size = New System.Drawing.Size(424, 109)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Datos a Exportar"
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(74, 76)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(45, 13)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Formato"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"PDF", "EXCEL", "WORD", "Enviar por Correo (como PDF Adjunto)"})
+        Me.ComboBox1.Location = New System.Drawing.Point(125, 72)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(225, 21)
+        Me.ComboBox1.TabIndex = 1
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.Checked = True
+        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox2.Location = New System.Drawing.Point(102, 20)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(196, 46)
+        Me.CheckBox2.TabIndex = 0
+        Me.CheckBox2.Text = "Resumen Acciones, Implementaciones y Verificaciones"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Location = New System.Drawing.Point(20, 35)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(65, 17)
+        Me.CheckBox1.TabIndex = 0
+        Me.CheckBox1.Text = "Carátula"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(60, 178)
+        Me.btnAceptar.Location = New System.Drawing.Point(112, 178)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(101, 28)
         Me.btnAceptar.TabIndex = 4
@@ -97,59 +140,30 @@ Partial Class ExportarSAC
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(176, 178)
+        Me.btnCancelar.Location = New System.Drawing.Point(228, 178)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(101, 28)
         Me.btnCancelar.TabIndex = 4
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'CheckBox3
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(28, 35)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(65, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "Carátula"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.Checked = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox2.Location = New System.Drawing.Point(110, 20)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(196, 46)
-        Me.CheckBox2.TabIndex = 0
-        Me.CheckBox2.Text = "Resumen Acciones, Implementaciones y Verificaciones"
-        Me.CheckBox2.UseVisualStyleBackColor = True
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"PDF", "EXCEL", "WORD", "Enviar por Correo (como PDF Adjunto)"})
-        Me.ComboBox1.Location = New System.Drawing.Point(74, 72)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(225, 21)
-        Me.ComboBox1.TabIndex = 1
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(23, 76)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(45, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Formato"
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Checked = True
+        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox3.Location = New System.Drawing.Point(307, 35)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(97, 17)
+        Me.CheckBox3.TabIndex = 0
+        Me.CheckBox3.Text = "Observaciones"
+        Me.CheckBox3.UseVisualStyleBackColor = True
         '
         'ExportarSAC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(337, 213)
+        Me.ClientSize = New System.Drawing.Size(440, 213)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.GroupBox1)
@@ -173,4 +187,5 @@ Partial Class ExportarSAC
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
 End Class

@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class SubInfNuevoSACAccionesImpleVerif
+Public Class NuevoSACSoloComentarios
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class SubInfNuevoSACAccionesImpleVerif
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "SubInfNuevoSACAccionesImpleVerif.rpt"
+            Return "NuevoSACSoloComentarios.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class SubInfNuevoSACAccionesImpleVerif
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "SAC.SubInfNuevoSACAccionesImpleVerif.rpt"
+            Return "SAC.NuevoSACSoloComentarios.rpt"
         End Get
         Set
             'Do nothing
@@ -99,18 +99,10 @@ Public Class SubInfNuevoSACAccionesImpleVerif
             Return Me.ReportDefinition.Sections(5)
         End Get
     End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_Comentarios() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(0)
-        End Get
-    End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedSubInfNuevoSACAccionesImpleVerif
+Public Class CachedNuevoSACSoloComentarios
     Inherits Component
     Implements ICachedReport
     
@@ -152,7 +144,7 @@ Public Class CachedSubInfNuevoSACAccionesImpleVerif
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As SubInfNuevoSACAccionesImpleVerif = New SubInfNuevoSACAccionesImpleVerif()
+        Dim rpt As NuevoSACSoloComentarios = New NuevoSACSoloComentarios()
         rpt.Site = Me.Site
         Return rpt
     End Function

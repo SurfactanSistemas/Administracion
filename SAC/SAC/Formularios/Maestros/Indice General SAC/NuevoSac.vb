@@ -1620,22 +1620,36 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             ' Cargamos la carátula y filtramos para el SAC indicado.
             '
 
+            _PrepararImpreSacII()
+
+            Dim WIncluirComentarios As Boolean = False
+
+            Dim WRespuesta As MsgBoxResult = MsgBox("¿Incluir los comentarios en la Impresión?", MsgBoxStyle.YesNoCancel)
+
+
+            Select Case WRespuesta
+                Case MsgBoxResult.Yes
+                    WIncluirComentarios = True
+                Case MsgBoxResult.No
+                    WIncluirComentarios = False
+                Case Else
+                    Exit Sub
+            End Select
+
+
             Dim frm As New VistaPrevia
             With frm
-                .Reporte = New NuevoSACCaratula
+                .Reporte = IIf(WIncluirComentarios, New NuevoSACAmbos, New NuevoSACAmbosSinComentarios)
                 .Formula = "{CargaSac.Tipo} = " & txtTipo.Text & " And {CargaSac.Numero} = " & txtNumero.Text & " And {CargaSac.Ano} = " & txtAnio.Text & ""
             End With
 
-            _PrepararImpreSacII()
-
-            Dim frm2 As New VistaPrevia
-            With frm2
-                .Reporte = New NuevoSACAcciones
-                .Formula = "{ImpreSacII.Tipo} = " & txtTipo.Text & " And {ImpreSacII.Numero} = " & txtNumero.Text & " And {ImpreSacII.Ano} = " & txtAnio.Text & ""
-            End With
+            'Dim frm2 As New VistaPrevia
+            'With frm2
+            '    .Reporte = New NuevoSACAcciones
+            '    .Formula = "{ImpreSacII.Tipo} = " & txtTipo.Text & " And {ImpreSacII.Numero} = " & txtNumero.Text & " And {ImpreSacII.Ano} = " & txtAnio.Text & ""
+            'End With
 
             frm.Imprimir()
-            frm2.Imprimir()
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -1712,7 +1726,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Public Sub _ProcesarExportarSac(ByVal WOpcion1 As Boolean, ByVal WOpcion2 As Boolean, ByVal WFormato As Object) Implements IExportarSac._ProcesarExportarSac
+    Public Sub _ProcesarExportarSac(ByVal WOpcion1 As Boolean, ByVal WOpcion2 As Boolean, ByVal WFormato As Object, ByVal WOpcion3 As Boolean) Implements IExportarSac._ProcesarExportarSac
 
         Try
             '
@@ -1741,7 +1755,13 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             Dim frm2 As New VistaPrevia
             With frm2
-                .Reporte = New NuevoSACAcciones
+                .Reporte = IIf(WOpcion3, New NuevoSACAcciones, New NuevoSACAccionesSinComentarios)
+                .Formula = "{ImpreSacII.Tipo} = " & txtTipo.Text & " And {ImpreSacII.Numero} = " & txtNumero.Text & " And {ImpreSacII.Ano} = " & txtAnio.Text & ""
+            End With
+
+            Dim frm3 As New VistaPrevia
+            With frm3
+                .Reporte = New NuevoSACSoloComentarios
                 .Formula = "{ImpreSacII.Tipo} = " & txtTipo.Text & " And {ImpreSacII.Numero} = " & txtNumero.Text & " And {ImpreSacII.Ano} = " & txtAnio.Text & ""
             End With
 
@@ -1768,14 +1788,22 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             ElseIf WOpcion1 And WOpcion2 Then
 
                 With frm
-                    .Reporte = New NuevoSACAmbos
+
+                    If WOpcion3 Then
+                        .Reporte = New NuevoSACAmbos
+                    Else
+                        .Reporte = New NuevoSACAmbosSinComentarios
+                    End If
+
                     .Formula = "{CargaSac.Tipo} = " & txtTipo.Text & " And {CargaSac.Numero} = " & txtNumero.Text & " And {CargaSac.Ano} = " & txtAnio.Text & ""
+
                 End With
 
                 _ExportarReporte(frm, WFormato)
 
             Else
 
+                If WOpcion3 Then _ExportarReporte(frm3, WFormato)
                 If WOpcion2 Then _ExportarReporte(frm2, WFormato)
                 If WOpcion1 Then _ExportarReporte(frm, WFormato)
 
