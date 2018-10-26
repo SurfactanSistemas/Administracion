@@ -34,14 +34,18 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Private Sub txtTipo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTipo.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtTipo.Text) = "" Then : Exit Sub : End If
+            If Trim(txtTipo.Text) = "" Then
+                _ProcesarAyudaContenedor(0)
+                Exit Sub
+            End If
 
             lblDescTipo.Text = ""
 
-            Dim WTipo As DataRow = GetSingle(String.Format("SELECT Descripcion FROM TipoSac WHERE Codigo = '{0}'", txtTipo.Text))
+            Dim WTipo As DataRow = GetSingle(String.Format("SELECT LTRIM(RTRIM(Descripcion)) Descripcion, LTRIM(RTRIM(ISNULL(Abreviatura, ''))) As Abrev  FROM TipoSac WHERE Codigo = '{0}'", txtTipo.Text))
 
             If Not IsNothing(WTipo) Then
-                lblDescTipo.Text = OrDefault(WTipo.Item("Descripcion"), "")
+                lblDescTipo.Text = WTipo.Item("Descripcion")
+                lblDescTipo.Text &= IIf(WTipo.Item("Abrev").ToString = "", "", "(" & WTipo.Item("Abrev") & ")")
                 txtAnio.Focus()
             End If
 
@@ -386,7 +390,10 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Private Sub txtCentro_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCentro.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtCentro.Text) = "" Then : Exit Sub : End If
+            If Trim(txtCentro.Text) = "" Then
+                _ProcesarAyudaContenedor(1)
+                Exit Sub
+            End If
 
             lblDescCentro.Text = ""
 
@@ -409,7 +416,10 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Private Sub txtEmisor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEmisor.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtEmisor.Text) = "" Then : Exit Sub : End If
+            If Trim(txtEmisor.Text) = "" Then
+                _ProcesarAyudaContenedor(2)
+                Exit Sub
+            End If
 
             lblDescEmisor.Text = ""
 
@@ -432,7 +442,10 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Private Sub txtResponsable_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtResponsable.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtResponsable.Text) = "" Then : Exit Sub : End If
+            If Trim(txtResponsable.Text) = "" Then
+                _ProcesarAyudaContenedor(3)
+                Exit Sub
+            End If
 
             lblDescResponsable.Text = ""
 
@@ -1715,7 +1728,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             WSql = String.Format("INSERT INTO ImpreSacII (Clave, Renglon, Tipo, Numero, Ano, FechaSac, Accion, DescAccion, RespAccion, FechaAccion, RespImple, FechaImple, DescImpleEstado, ImpleComentarios, VerImpleResp, VerImpleEstado, VerImpleFecha, VerEfecResp, VerEfecEstado, VerEfecFecha, VerComentario) " &
                                  " VALUES " &
-                                 " ('{0}', {1}, {2}, {3}, {4}, '{5}', {6}, '{7}', {8}, '{20}', {9}, '{10}', '{11}', '{12}', {13}, '{14}', '{15}', {16}, '{17}', '{18}', '{19}')",
+                                 " ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{20}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}')",
                                  WClave, i, txtTipo.Text, txtNumero.Text, txtAnio.Text, txtFecha.Text, WNroAccion, WDescAccion, WRespAccion, WRespImple, WImpleFecha, WDescEstadoImple, WImpleComentarios, WVerRespImple, WDescEstadoImple, WVerFechaImple, WVerRespEfect, WDescEstadoEfect, WVerFechaEfect, WVerComentarios, WFechaAccion)
 
             WSQls.Add(WSql)
@@ -1762,7 +1775,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             Dim frm3 As New VistaPrevia
             With frm3
                 .Reporte = New NuevoSACSoloComentarios
-                .Formula = "{ImpreSacII.Tipo} = " & txtTipo.Text & " And {ImpreSacII.Numero} = " & txtNumero.Text & " And {ImpreSacII.Ano} = " & txtAnio.Text & ""
+                .Formula = "{CargaSacAdicional.Tipo} = " & txtTipo.Text & " And {CargaSacAdicional.Numero} = " & txtNumero.Text & " And {CargaSacAdicional.Ano} = " & txtAnio.Text & ""
             End With
 
             If WFormato = 3 Then
@@ -1778,7 +1791,9 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 If WOpcion2 Then frm2.Exportar("2.pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
                 If WOpcion1 Then frm.Exportar("1.pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
 
-                Dim WNombreArchivo = String.Format("SAC {0} {1} {2} - {3}.pdf", txtTipo.Text, txtNumero.Text, txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"))
+                Dim WPrefijoArchivo As String = GenerarPrefijoArchivo()
+
+                Dim WNombreArchivo = String.Format("{4} {0} {1} {2} - {3}.pdf", txtTipo.Text, txtNumero.Text, txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"), WPrefijoArchivo)
 
                 With VistaPrevia
                     .MergePDFs(WRuta, WNombreArchivo)
@@ -1803,7 +1818,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             Else
 
-                If WOpcion3 Then _ExportarReporte(frm3, WFormato)
+                If WOpcion3 And Not WOpcion2 Then _ExportarReporte(frm3, WFormato)
                 If WOpcion2 Then _ExportarReporte(frm2, WFormato)
                 If WOpcion1 Then _ExportarReporte(frm, WFormato)
 
@@ -1815,11 +1830,29 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
+    Private Function GenerarPrefijoArchivo() As String
+
+        Dim WPrefijoArchivo As String = ""
+
+        Dim WTipo As DataRow = GetSingle("SELECT Descripcion, Abreviatura FROM TipoSac WHERE Codigo = '" & txtTipo.Text & "'")
+
+        WPrefijoArchivo = OrDefault(WTipo.Item("Descripcion"), "")
+
+        If OrDefault(WTipo.Item("Abreviatura"), "") <> "" Then
+            WPrefijoArchivo = OrDefault(WTipo.Item("Abreviatura"), "")
+        End If
+
+        WPrefijoArchivo = Trim(WPrefijoArchivo)
+        Return WPrefijoArchivo
+    End Function
+
     Private Sub _ExportarReporte(ByVal frm2 As VistaPrevia, ByVal WFormato As Object)
 
         With frm2
 
-            Dim WNombreArchivo = String.Format("SAC {0} {1} {2} - {3}", txtTipo.Text, txtNumero.Text, txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"))
+            Dim WPrefijoArchivo As String = GenerarPrefijoArchivo()
+
+            Dim WNombreArchivo = String.Format("{4} {0} {1} {2} - {3}", txtTipo.Text, txtNumero.Text, txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"), WPrefijoArchivo)
 
             Select Case WFormato
 
@@ -1901,5 +1934,21 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Sub txtNumero_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNumero.TextChanged
 
+    End Sub
+
+    Private Sub txtTipo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTipo.MouseDoubleClick
+        _ProcesarAyudaContenedor(0)
+    End Sub
+
+    Private Sub txtCentro_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCentro.MouseDoubleClick
+        _ProcesarAyudaContenedor(1)
+    End Sub
+
+    Private Sub txtEmisor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtEmisor.MouseDoubleClick
+        _ProcesarAyudaContenedor(2)
+    End Sub
+
+    Private Sub txtResponsable_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtResponsable.MouseDoubleClick
+        _ProcesarAyudaContenedor(3)
     End Sub
 End Class

@@ -33,6 +33,8 @@ Partial Class NuevoTipoSolicitud
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.txtAbreviatura = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -72,7 +74,7 @@ Partial Class NuevoTipoSolicitud
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(63, 69)
+        Me.Label3.Location = New System.Drawing.Point(61, 69)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(40, 13)
         Me.Label3.TabIndex = 2
@@ -89,7 +91,7 @@ Partial Class NuevoTipoSolicitud
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(40, 100)
+        Me.Label4.Location = New System.Drawing.Point(38, 96)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(63, 13)
         Me.Label4.TabIndex = 4
@@ -97,7 +99,7 @@ Partial Class NuevoTipoSolicitud
         '
         'txtDescripcion
         '
-        Me.txtDescripcion.Location = New System.Drawing.Point(121, 96)
+        Me.txtDescripcion.Location = New System.Drawing.Point(121, 92)
         Me.txtDescripcion.MaxLength = 50
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.Size = New System.Drawing.Size(350, 20)
@@ -139,6 +141,23 @@ Partial Class NuevoTipoSolicitud
         Me.btnLimpiar.Text = "Limpiar"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'txtAbreviatura
+        '
+        Me.txtAbreviatura.Location = New System.Drawing.Point(121, 119)
+        Me.txtAbreviatura.MaxLength = 20
+        Me.txtAbreviatura.Name = "txtAbreviatura"
+        Me.txtAbreviatura.Size = New System.Drawing.Size(55, 20)
+        Me.txtAbreviatura.TabIndex = 3
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(40, 123)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(61, 13)
+        Me.Label5.TabIndex = 4
+        Me.Label5.Text = "Abreviatura"
+        '
         'NuevoTipoSolicitud
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -148,6 +167,8 @@ Partial Class NuevoTipoSolicitud
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.btnGrabar)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.txtAbreviatura)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtDescripcion)
         Me.Controls.Add(Me.txtCodigo)
@@ -172,4 +193,6 @@ Partial Class NuevoTipoSolicitud
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
+    Friend WithEvents txtAbreviatura As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

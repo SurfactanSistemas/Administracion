@@ -59,7 +59,7 @@
         Try
             txtDescripcion.Text = Microsoft.VisualBasic.Left(txtDescripcion.Text, 50)
 
-            Query.ExecuteNonQueries("DELETE FROM TipoSac WHERE Codigo = '" & txtCodigo.Text & "'", "INSERT INTO TipoSac (Codigo, Descripcion) VALUES (" & txtCodigo.Text & ", '" & txtDescripcion.Text & "')")
+            Query.ExecuteNonQueries("DELETE FROM TipoSac WHERE Codigo = '" & txtCodigo.Text & "'", "INSERT INTO TipoSac (Codigo, Descripcion, Abreviatura) VALUES (" & txtCodigo.Text & ", '" & txtDescripcion.Text & "', '" & txtAbreviatura.Text & "')")
 
             Dim WOwner As INuevoTipoSolicitud = CType(Owner, INuevoTipoSolicitud)
 
@@ -107,4 +107,16 @@
 
 
 
+    Private Sub txtDescripcion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtDescripcion.Text) = "" Then : Exit Sub : End If
+
+            txtAbreviatura.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDescripcion.Text = ""
+        End If
+
+    End Sub
 End Class

@@ -29,10 +29,10 @@ Partial Class ExportarSAC
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -108,21 +108,34 @@ Partial Class ExportarSAC
         '
         'CheckBox2
         '
+        Me.CheckBox2.AutoSize = True
         Me.CheckBox2.Checked = True
         Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox2.Location = New System.Drawing.Point(102, 20)
+        Me.CheckBox2.Location = New System.Drawing.Point(108, 37)
         Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(196, 46)
+        Me.CheckBox2.Size = New System.Drawing.Size(139, 17)
         Me.CheckBox2.TabIndex = 0
-        Me.CheckBox2.Text = "Resumen Acciones, Implementaciones y Verificaciones"
+        Me.CheckBox2.Text = "Acciones y Seguimiento"
         Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Checked = True
+        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox3.Location = New System.Drawing.Point(271, 37)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(135, 17)
+        Me.CheckBox3.TabIndex = 0
+        Me.CheckBox3.Text = "Comentarios Generales"
+        Me.CheckBox3.UseVisualStyleBackColor = True
         '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Checked = True
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(20, 35)
+        Me.CheckBox1.Location = New System.Drawing.Point(19, 37)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(65, 17)
         Me.CheckBox1.TabIndex = 0
@@ -146,18 +159,6 @@ Partial Class ExportarSAC
         Me.btnCancelar.TabIndex = 4
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.UseVisualStyleBackColor = True
-        '
-        'CheckBox3
-        '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Checked = True
-        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox3.Location = New System.Drawing.Point(307, 35)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(97, 17)
-        Me.CheckBox3.TabIndex = 0
-        Me.CheckBox3.Text = "Observaciones"
-        Me.CheckBox3.UseVisualStyleBackColor = True
         '
         'ExportarSAC
         '

@@ -36,6 +36,7 @@ Partial Class ListadoTiposSolicitud
         Me.dgvTIpos = New System.Windows.Forms.DataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Abreviatura = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.dgvTIpos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -154,7 +155,7 @@ Partial Class ListadoTiposSolicitud
         Me.dgvTIpos.AllowUserToDeleteRows = False
         Me.dgvTIpos.AllowUserToResizeRows = False
         Me.dgvTIpos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTIpos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion})
+        Me.dgvTIpos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion, Me.Abreviatura})
         Me.dgvTIpos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvTIpos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvTIpos.Location = New System.Drawing.Point(0, 125)
@@ -179,6 +180,15 @@ Partial Class ListadoTiposSolicitud
         Me.Descripcion.DataPropertyName = "Descripcion"
         Me.Descripcion.HeaderText = "Descripcion"
         Me.Descripcion.Name = "Descripcion"
+        '
+        'Abreviatura
+        '
+        Me.Abreviatura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Abreviatura.DataPropertyName = "Abreviatura"
+        Me.Abreviatura.HeaderText = "Abrev."
+        Me.Abreviatura.Name = "Abreviatura"
+        Me.Abreviatura.ReadOnly = True
+        Me.Abreviatura.Width = 63
         '
         'ListadoTiposSolicitud
         '
@@ -213,4 +223,5 @@ Partial Class ListadoTiposSolicitud
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Abreviatura As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

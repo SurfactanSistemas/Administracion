@@ -8,7 +8,7 @@
 
     Private Sub _CargarTipos()
 
-        Dim WTipos As DataTable = GetAll("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion FROM TipoSac Order by Codigo")
+        Dim WTipos As DataTable = GetAll("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion, LTRIM(RTRIM(Abreviatura)) Abreviatura FROM TipoSac Order by Codigo")
 
         dgvTIpos.DataSource = WTipos
 
