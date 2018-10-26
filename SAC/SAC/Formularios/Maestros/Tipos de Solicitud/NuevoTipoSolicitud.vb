@@ -33,12 +33,12 @@
 
             txtCodigo.Text = c
 
-            Dim WTipoSolic As DataRow = GetSingle("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion FROM TipoSac WHERE Codigo = '" & txtCodigo.Text & "'")
+            Dim WTipoSolic As DataRow = GetSingle("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion, LTRIM(RTRIM(Abreviatura)) Abreviatura FROM TipoSac WHERE Codigo = '" & txtCodigo.Text & "'")
 
             If Not IsNothing(WTipoSolic) Then
                 txtCodigo.Text = WTipoSolic.Item("Codigo")
                 txtDescripcion.Text = WTipoSolic.Item("Descripcion")
-
+                txtAbreviatura.Text = WTipoSolic.Item("Abreviatura")
             End If
 
             txtDescripcion.Focus()
@@ -118,5 +118,9 @@
             txtDescripcion.Text = ""
         End If
 
+    End Sub
+
+    Private Sub NuevoTipoSolicitud_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtCodigo.Focus()
     End Sub
 End Class
