@@ -78,6 +78,8 @@ Namespace Clases
 
             _empresa = DeterminarBasePara(empresa)
 
+            If _empresa Is Nothing Then Stop
+
             Return _ArmarCS(_empresa)
 
         End Function
@@ -108,7 +110,7 @@ Namespace Clases
 
         End Function
 
-        Private Shared Function DeterminarSegunIDIDBasePara(ByVal empresa As Integer) As String
+        Public Shared Function DeterminarSegunIDIDBasePara(ByVal empresa As Integer) As String
 
             Select Case empresa
                 Case 1

@@ -88,13 +88,15 @@ Public Class DiferenciaInventarioPT
             '    WEntradas += WLaudos.Item("Entrada")
             'End If
 
+            If WArticulo.Item("Lote") = 220546 Then Stop
+
             '
             ' Calculamos las Salidas por Hojas de Producción.
             '
             Dim WHojas As DataTable = Query.GetAll("SELECT Canti1, Lote1, Canti2, Lote2, Canti3, Lote3 FROM Hoja WHERE Tipo = 'T' AND Terminado = '" & WArticulo.Item("Terminado") & "' AND (Marca <> 'X' OR (RIGHT(Fecha, 4) + SUBSTRING(fecha, 4,2) + LEFT(fecha, 2))*1 >= 20001218) AND (Lote1 = '" & WArticulo.Item("Lote") & "' Or Lote2 = '" & WArticulo.Item("Lote") & "' OR Lote3 = '" & WArticulo.Item("Lote") & "')", Conexion.EmpresaDeTrabajo)
 
             If Not IsNothing(WHojas) Then
-                For Each row As datarow In WHojas.Rows
+                For Each row As DataRow In WHojas.Rows
                     With row
                         For i = 1 To 3
                             Dim WLote As Integer = OrDefault(.Item("Lote" & i), 0)
@@ -105,6 +107,19 @@ Public Class DiferenciaInventarioPT
                                 WSalidas += OrDefault(.Item("Canti" & i), 0)
                             End If
                         Next
+                    End With
+                Next
+            End If
+
+            '
+            ' Entradas por Hojas.
+            '
+            Dim WHojasII As DataTable = Query.GetAll("SELECT ISNULL(Saldo, 0) As Cantidad FROM Hoja WHERE Hoja = '" & WArticulo.Item("Lote") & "' And Saldo <> 0 And Marca <> 'X' And Renglon = 1", Conexion.EmpresaDeTrabajo)
+
+            If Not IsNothing(WHojasII) Then
+                For Each row As DataRow In WHojasII.Rows
+                    With row
+                        WEntradas += OrDefault(.Item("Cantidad"), 0)
                     End With
                 Next
             End If
@@ -131,7 +146,7 @@ Public Class DiferenciaInventarioPT
             '
             ' Calculamos las Entradas y Salidas por Guías.
             '
-            Dim WGuias As DataTable = Query.GetAll("SELECT Terminado, ISNULL(Cantidad, 0) As Cantidad, Movi FROM Guia WHERE Marca <> 'X' AND Tipo = 'T' AND Terminado = '" & WArticulo.Item("Terminado") & "' And (Lote = '" & WArticulo.Item("Lote") & "' Or Partida = '" & WArticulo.Item("Lote") & "')", Conexion.EmpresaDeTrabajo)
+            Dim WGuias As DataTable = Query.GetAll("SELECT Terminado, ISNULL(Saldo, 0) As Cantidad, Movi FROM Guia WHERE Marca <> 'X' AND Tipo = 'T' AND Terminado = '" & WArticulo.Item("Terminado") & "' And (Lote = '" & WArticulo.Item("Lote") & "' Or Partida = '" & WArticulo.Item("Lote") & "')", Conexion.EmpresaDeTrabajo)
 
             For Each WGuia As DataRow In WGuias.Rows
 
@@ -200,7 +215,7 @@ Public Class DiferenciaInventarioPT
 
         Dim frm As New VistaPrevia
         frm.Reporte = rpt
-
+        
         If rbImpresora.Checked Then
             frm.Imprimir()
         Else

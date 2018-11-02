@@ -264,6 +264,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DSDiferenciaInventario.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Listados\DiferenciaInventarioMP\DSDiferenciaInventario.vb">
+      <DependentUpon>DSDiferenciaInventario.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Listados\DiferenciaInventarioMP\ReporteDiferenciaInventarioMP.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

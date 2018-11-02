@@ -1,4 +1,6 @@
-﻿Public Class MenuPrincipal
+﻿Imports SAC.Clases
+
+Public Class MenuPrincipal
 
     Private Sub CerrarSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CerrarSistemaToolStripMenuItem.Click
         Login.Dispose()
@@ -36,5 +38,46 @@
 
     Private Sub IndiceGeneralDeAccionesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IndiceGeneralDeAccionesToolStripMenuItem.Click
         Abrir(New IndiceGralSac)
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+
+        Dim WGuiasOrigen As DataTable = GetAll("SELECT * FROM Guia WHERE FechaOrd >= '20180801' And upper(Movi) = 'S' Order by Codigo", ComboBox1.SelectedItem)
+        Dim WGuiasAImprimir As DataTable = WGuiasOrigen.Clone
+
+        ProgressBar1.Maximum = WGuiasOrigen.Rows.Count
+        ProgressBar1.Value = 0
+
+        DataGridView1.DataSource = Nothing
+
+        For Each WGuiaOrig As DataRow In WGuiasOrigen.Rows
+
+            With WGuiaOrig
+
+                Dim WEmpr As String = Conexion.DeterminarSegunIDIDBasePara(.Item("Destino"))
+
+                If Trim(WEmpr) = "" Or {2, 4, 8, 9}.Contains(.Item("Destino")) Then Continue For
+
+                Dim WGuiaDestino As DataRow = Nothing
+
+                If .Item("Tipo") = "M" Then
+                    WGuiaDestino = GetSingle("SELECT Clave FROM Guia WHERE Codigo = '" & .Item("Codigo") & "' AND Articulo = '" & .Item("Articulo") & "'", WEmpr)
+                Else
+                    WGuiaDestino = GetSingle("SELECT Clave FROM Guia WHERE Codigo = '" & .Item("Codigo") & "' AND Terminado = '" & .Item("Terminado") & "'", WEmpr)
+                End If
+
+                If WGuiaDestino Is Nothing Then
+                    WGuiasAImprimir.ImportRow(WGuiaOrig)
+                End If
+
+            End With
+
+            ProgressBar1.Increment(1)
+        Next
+
+        DataGridView1.DataSource = WGuiasAImprimir
+
+        ProgressBar1.Value = 0
+
     End Sub
 End Class

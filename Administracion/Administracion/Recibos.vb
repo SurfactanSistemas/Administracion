@@ -2886,9 +2886,9 @@ Public Class Recibos
 
                                     Select Case Val(_mes)
                                         Case Is < 7
-                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2018"
+                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2019"
                                         Case Else
-                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2017"
+                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2018"
                                     End Select
 
                                 End If
@@ -5352,7 +5352,7 @@ Public Class Recibos
 
                 Select Case Val(_mes)
                     Case Is < 7
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2018"
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2019"
                     Case Else
                         txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2018"
                 End Select

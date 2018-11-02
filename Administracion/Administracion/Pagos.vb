@@ -6647,7 +6647,7 @@ Public Class Pagos
 
                 Select Case Val(_mes)
                     Case Is < 6
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2018"
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2019"
                     Case Else
                         txtFechaAux.Text = txtFechaAux.Text & Mid(txtFecha.Text, 7, 4)
                 End Select

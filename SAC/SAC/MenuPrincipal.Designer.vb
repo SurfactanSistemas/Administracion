@@ -38,12 +38,19 @@ Partial Class MenuPrincipal
         Me.IndiceGeneralDeAccionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -58,7 +65,7 @@ Partial Class MenuPrincipal
         Me.LayoutPrincipal.RowCount = 2
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(1009, 463)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(1041, 463)
         Me.LayoutPrincipal.TabIndex = 0
         '
         'LayoutMenu
@@ -76,14 +83,14 @@ Partial Class MenuPrincipal
         Me.LayoutMenu.Name = "LayoutMenu"
         Me.LayoutMenu.RowCount = 1
         Me.LayoutMenu.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutMenu.Size = New System.Drawing.Size(1009, 46)
+        Me.LayoutMenu.Size = New System.Drawing.Size(1041, 46)
         Me.LayoutMenu.TabIndex = 0
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(762, 0)
+        Me.Panel4.Location = New System.Drawing.Point(794, 0)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(247, 46)
@@ -123,13 +130,14 @@ Partial Class MenuPrincipal
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.MenuStrip1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 46)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1009, 417)
+        Me.Panel1.Size = New System.Drawing.Size(1041, 417)
         Me.Panel1.TabIndex = 1
         '
         'Button1
@@ -146,7 +154,7 @@ Partial Class MenuPrincipal
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MaestrosToolStripMenuItem, Me.ProcesosToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1009, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1041, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -194,11 +202,64 @@ Partial Class MenuPrincipal
         Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(3, 69)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(133, 46)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "Comprobar Guias"
+        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(152, 40)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.Size = New System.Drawing.Size(831, 241)
+        Me.DataGridView1.TabIndex = 2
+        Me.DataGridView1.Visible = False
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(7, 122)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(128, 17)
+        Me.ProgressBar1.TabIndex = 3
+        Me.ProgressBar1.Visible = False
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"})
+        Me.ComboBox1.Location = New System.Drawing.Point(6, 40)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(130, 21)
+        Me.ComboBox1.TabIndex = 4
+        Me.ComboBox1.Visible = False
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.DataGridView1)
+        Me.GroupBox1.Controls.Add(Me.ComboBox1)
+        Me.GroupBox1.Controls.Add(Me.ProgressBar1)
+        Me.GroupBox1.Controls.Add(Me.Button2)
+        Me.GroupBox1.Location = New System.Drawing.Point(985, 252)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(31, 149)
+        Me.GroupBox1.TabIndex = 5
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "GroupBox1"
+        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1009, 463)
+        Me.ClientSize = New System.Drawing.Size(1041, 463)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "MenuPrincipal"
@@ -213,6 +274,8 @@ Partial Class MenuPrincipal
         Me.Panel1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -232,5 +295,10 @@ Partial Class MenuPrincipal
     Friend WithEvents ResponsablesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CentrosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IndiceGeneralDeAccionesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
 
 End Class
