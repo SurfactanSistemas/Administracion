@@ -127,9 +127,13 @@ Public Class MenuPrincipal
                 .EmiiosnDeGraficosAnualesToolStripMenuItem.Enabled = True
                 .ProcesosToolStripMenuItem.Enabled = True
                 .FinDelSistemaToolStripMenuItem.Enabled = True
+                '.EmisiónDeVentasDeImportaciónToolStripMenuItem.Enabled = True
             End With
 
         End If
     End Sub
 
+    Private Sub EmisiónDeVentasDeImportaciónToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisiónDeVentasDeImportaciónToolStripMenuItem.Click
+        abrir(New ListadoEstaClienteLineaImpo)
+    End Sub
 End Class

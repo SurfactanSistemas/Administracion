@@ -135,6 +135,12 @@
     <Compile Include="Capa DAO\DAOTipoCambio.vb" />
     <Compile Include="Capa DAO\DAOLinea.vb" />
     <Compile Include="Clases\QueryController.vb" />
+    <Compile Include="Listados\ListadoEstaClienteLineaImpo.Designer.vb">
+      <DependentUpon>ListadoEstaClienteLineaImpo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoEstaClienteLineaImpo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\ListadoEstaAnual.Designer.vb">
       <DependentUpon>ListadoEstaAnual.vb</DependentUpon>
     </Compile>
@@ -258,6 +264,10 @@
     <Compile Include="Clases\Validator.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Listados\ListadoEstaClienteLineaImpo.resx">
+      <DependentUpon>ListadoEstaClienteLineaImpo.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListadoEstaAnual.resx">
       <DependentUpon>ListadoEstaAnual.vb</DependentUpon>
     </EmbeddedResource>
@@ -315,12 +325,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Administracion_TemporaryKey.pfx" />
     <None Include="app.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

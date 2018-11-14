@@ -39,11 +39,11 @@ Partial Class MenuPrincipal
         Me.EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmisionDeGraficosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmiiosnDeGraficosAnualesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmisiónDeVentasDeImportaciónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCambio = New System.Windows.Forms.Button()
-        Me.lblCargando = New Esta.CustomLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -58,7 +58,7 @@ Partial Class MenuPrincipal
         '
         'EstadisticaToolStripMenuItem
         '
-        Me.EstadisticaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EstadisticasPorVendedorToolStripMenuItem, Me.EstadisticaDeVentasPorRubroYClienteToolStripMenuItem, Me.EstadisticasDeVentasPorLineaToolStripMenuItem, Me.EstsdisticaDeVentasPorProductoToolStripMenuItem, Me.EstadisticaDeVentasPorClienteToolStripMenuItem, Me.RankingDeVentasToolStripMenuItem, Me.EstadisticaDeVentasAnualesToolStripMenuItem, Me.EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem, Me.EmisionDeGraficosToolStripMenuItem, Me.EmiiosnDeGraficosAnualesToolStripMenuItem})
+        Me.EstadisticaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EstadisticasPorVendedorToolStripMenuItem, Me.EstadisticaDeVentasPorRubroYClienteToolStripMenuItem, Me.EstadisticasDeVentasPorLineaToolStripMenuItem, Me.EstsdisticaDeVentasPorProductoToolStripMenuItem, Me.EstadisticaDeVentasPorClienteToolStripMenuItem, Me.RankingDeVentasToolStripMenuItem, Me.EstadisticaDeVentasAnualesToolStripMenuItem, Me.EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem, Me.EmisionDeGraficosToolStripMenuItem, Me.EmiiosnDeGraficosAnualesToolStripMenuItem, Me.EmisiónDeVentasDeImportaciónToolStripMenuItem})
         Me.EstadisticaToolStripMenuItem.Name = "EstadisticaToolStripMenuItem"
         Me.EstadisticaToolStripMenuItem.Size = New System.Drawing.Size(74, 20)
         Me.EstadisticaToolStripMenuItem.Text = "Estadistica"
@@ -155,6 +155,12 @@ Partial Class MenuPrincipal
         Me.EmiiosnDeGraficosAnualesToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
         Me.EmiiosnDeGraficosAnualesToolStripMenuItem.Text = "Emiiosn de Graficos Anuales"
         '
+        'EmisiónDeVentasDeImportaciónToolStripMenuItem
+        '
+        Me.EmisiónDeVentasDeImportaciónToolStripMenuItem.Name = "EmisiónDeVentasDeImportaciónToolStripMenuItem"
+        Me.EmisiónDeVentasDeImportaciónToolStripMenuItem.Size = New System.Drawing.Size(313, 22)
+        Me.EmisiónDeVentasDeImportaciónToolStripMenuItem.Text = "Emisión de Ventas de Exportación"
+        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator1, Me.FinDelSistemaToolStripMenuItem})
@@ -182,24 +188,11 @@ Partial Class MenuPrincipal
         Me.btnCambio.Text = "Cambio de Empresa"
         Me.btnCambio.UseVisualStyleBackColor = True
         '
-        'lblCargando
-        '
-        Me.lblCargando.AutoSize = True
-        Me.lblCargando.ControlAssociationKey = -1
-        Me.lblCargando.Font = New System.Drawing.Font("Lucida Console", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCargando.Location = New System.Drawing.Point(71, 43)
-        Me.lblCargando.Name = "lblCargando"
-        Me.lblCargando.Size = New System.Drawing.Size(684, 37)
-        Me.lblCargando.TabIndex = 2
-        Me.lblCargando.Text = "CARGANDO, POR FAVOR ESPERE..."
-        Me.lblCargando.Visible = False
-        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(790, 568)
-        Me.Controls.Add(Me.lblCargando)
         Me.Controls.Add(Me.btnCambio)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
@@ -217,7 +210,6 @@ Partial Class MenuPrincipal
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents ProcesosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnCambio As System.Windows.Forms.Button
-    Friend WithEvents lblCargando As Esta.CustomLabel
     Friend WithEvents FinDelSistemaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents EstadisticaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -237,4 +229,5 @@ Partial Class MenuPrincipal
     Friend WithEvents EstadisticaDeVentasComparativaEntreAñosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EmisionDeGraficosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EmiiosnDeGraficosAnualesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EmisiónDeVentasDeImportaciónToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
