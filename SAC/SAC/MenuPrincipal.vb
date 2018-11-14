@@ -1,4 +1,5 @@
-﻿Imports SAC.Clases
+﻿Imports System.Data.SqlClient
+Imports SAC.Clases
 
 Public Class MenuPrincipal
 

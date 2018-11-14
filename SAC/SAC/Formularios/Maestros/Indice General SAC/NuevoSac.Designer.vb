@@ -141,6 +141,7 @@ Partial Class NuevoSac
         Me.btnImprimir = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -157,6 +158,7 @@ Partial Class NuevoSac
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -455,12 +457,13 @@ Partial Class NuevoSac
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage5)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(200, 25)
-        Me.TabControl1.Location = New System.Drawing.Point(7, 4)
+        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1010, 352)
+        Me.TabControl1.Size = New System.Drawing.Size(1025, 366)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl1.TabIndex = 3
         '
@@ -475,7 +478,7 @@ Partial Class NuevoSac
         Me.TabPage1.Location = New System.Drawing.Point(4, 29)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1002, 319)
+        Me.TabPage1.Size = New System.Drawing.Size(1017, 333)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Descripción"
         '
@@ -1037,10 +1040,10 @@ Partial Class NuevoSac
         '
         Me.Panel2.AutoScroll = True
         Me.Panel2.Controls.Add(Me.TabControl1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 174)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1025, 360)
+        Me.Panel2.Size = New System.Drawing.Size(1025, 366)
         Me.Panel2.TabIndex = 4
         '
         'Panel3
@@ -1162,7 +1165,8 @@ Partial Class NuevoSac
         '
         'btnGrabar
         '
-        Me.btnGrabar.Location = New System.Drawing.Point(196, 540)
+        Me.btnGrabar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnGrabar.Location = New System.Drawing.Point(196, 5)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(96, 37)
         Me.btnGrabar.TabIndex = 7
@@ -1171,7 +1175,8 @@ Partial Class NuevoSac
         '
         'btnConsultas
         '
-        Me.btnConsultas.Location = New System.Drawing.Point(330, 540)
+        Me.btnConsultas.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnConsultas.Location = New System.Drawing.Point(330, 5)
         Me.btnConsultas.Name = "btnConsultas"
         Me.btnConsultas.Size = New System.Drawing.Size(96, 37)
         Me.btnConsultas.TabIndex = 7
@@ -1180,7 +1185,8 @@ Partial Class NuevoSac
         '
         'btnImprimir
         '
-        Me.btnImprimir.Location = New System.Drawing.Point(464, 540)
+        Me.btnImprimir.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnImprimir.Location = New System.Drawing.Point(464, 5)
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(96, 37)
         Me.btnImprimir.TabIndex = 7
@@ -1189,7 +1195,8 @@ Partial Class NuevoSac
         '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(598, 540)
+        Me.btnLimpiar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnLimpiar.Location = New System.Drawing.Point(598, 5)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(96, 37)
         Me.btnLimpiar.TabIndex = 7
@@ -1198,28 +1205,37 @@ Partial Class NuevoSac
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(732, 540)
+        Me.btnCerrar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnCerrar.Location = New System.Drawing.Point(732, 5)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(96, 37)
         Me.btnCerrar.TabIndex = 7
         Me.btnCerrar.Text = "Cerrar"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.btnGrabar)
+        Me.Panel4.Controls.Add(Me.btnConsultas)
+        Me.Panel4.Controls.Add(Me.btnCerrar)
+        Me.Panel4.Controls.Add(Me.btnImprimir)
+        Me.Panel4.Controls.Add(Me.btnLimpiar)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel4.Location = New System.Drawing.Point(0, 540)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(1025, 47)
+        Me.Panel4.TabIndex = 8
+        '
         'NuevoSac
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1025, 587)
-        Me.Controls.Add(Me.btnCerrar)
-        Me.Controls.Add(Me.btnLimpiar)
-        Me.Controls.Add(Me.btnImprimir)
-        Me.Controls.Add(Me.btnConsultas)
-        Me.Controls.Add(Me.btnGrabar)
         Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
         Me.Location = New System.Drawing.Point(5, 5)
-        Me.MaximizeBox = False
         Me.Name = "NuevoSac"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.GroupBox1.ResumeLayout(False)
@@ -1245,6 +1261,7 @@ Partial Class NuevoSac
         Me.GroupBox2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1343,4 +1360,5 @@ Partial Class NuevoSac
     Friend WithEvents ImpleFecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Estado As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Panel4 As System.Windows.Forms.Panel
 End Class

@@ -38,7 +38,7 @@
             If Not IsNothing(WTipoSolic) Then
                 txtCodigo.Text = WTipoSolic.Item("Codigo")
                 txtDescripcion.Text = WTipoSolic.Item("Descripcion")
-                txtAbreviatura.Text = WTipoSolic.Item("Abreviatura")
+                txtAbreviatura.Text = OrDefault(WTipoSolic.Item("Abreviatura"), "")
             End If
 
             txtDescripcion.Focus()
