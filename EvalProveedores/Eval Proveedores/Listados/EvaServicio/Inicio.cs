@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -111,8 +113,6 @@ namespace Eval_Proveedores.Listados.EvaServicio
 
                 BuscarTipo();
 
-                
-
                 dtEva = EVBOL.EvaServ( Prove, PeriodoDesde, PeriodoHasta, Tipo1, Tipo2 );
 
                 CompletarLista();
@@ -158,9 +158,7 @@ namespace Eval_Proveedores.Listados.EvaServicio
             
             foreach (DataRow fila in dtEva.Rows)
             {
-               
-                   
-                        
+
                         if (fila["Estado"].ToString() == "")
                         {
                             fila[39] = "Sin Evaluar";
@@ -338,6 +336,31 @@ namespace Eval_Proveedores.Listados.EvaServicio
                         
                     
                 
+
+            }
+
+            dtEva.Columns.Add("ObservacionesII", typeof(string));
+
+            using (SqlConnection cnx = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString))
+            {
+                cnx.Open();
+                string sqlQuery = "select ISNULL(ObservacionesII, '') ObservII from Proveedor where Proveedor = '" + TB_Prove.Text + "'";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, cnx))
+                {
+                    using (SqlDataReader dataReader = cmd.ExecuteReader())
+                    {
+                        if (dataReader.HasRows)
+                        {
+                            dataReader.Read();
+
+                            foreach (DataRow row in dtEva.Rows)
+                            {
+                                row["ObservacionesII"] = dataReader["ObservII"].ToString().Trim();
+                            }
+                        }
+                    }
+
+                }
 
             }
 

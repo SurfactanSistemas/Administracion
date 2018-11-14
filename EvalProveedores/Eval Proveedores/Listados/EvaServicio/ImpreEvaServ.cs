@@ -36,11 +36,13 @@ namespace Eval_Proveedores.Listados.EvaServicio
             DSEvaServ Ds = new DSEvaServ();
 
             int filas = dtEva.Rows.Count;
+            string WObsII = "";
 
-            for (int i = filas - 1; i > -1; i--)
+            for (int i = 0; i < filas; i++)
             {
                 DataRow dr = dtEva.Rows[i];
                 int TipoServi = int.Parse(dr[6].ToString());
+                WObsII = dr["ObservacionesII"].ToString();
                 switch (TipoServi)
                 {
                     case 2:
@@ -94,11 +96,14 @@ namespace Eval_Proveedores.Listados.EvaServicio
                         dr[39].ToString(),
                         dr[4].ToString(),
                         dr[2].ToString(),
-                        
 
                         });
 
+            }
 
+            foreach (DataRow row in Ds.Tables[0].Rows)
+            {
+                row["ObservacionesII"] = WObsII;
             }
 
             if (Tipo == "Pantalla")

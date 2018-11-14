@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -85,7 +87,7 @@ namespace Eval_Proveedores.Novedades
                 TB_CodProveedor.Text = Eva.Proveedor;
                 TB_NombProveedor.Text = NombProve;
                 P = PBOL.Find(TB_CodProveedor.Text);
-                TB_ObservProve.Text = P.Observac;
+                TB_ObservProve.Text = P.ObservacionesII;
                 //TB_CodProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
                 TB_CodProveedor.Enabled = false;
                 TB_NombProveedor.Enabled = false;
@@ -145,7 +147,6 @@ namespace Eval_Proveedores.Novedades
                 TB_PromedioTot.Text = Eva.PromedioTot.ToString();
                 TB_ObservEva.Text = Eva.Observ;
                 
-                
             }
             else
             {
@@ -154,10 +155,6 @@ namespace Eval_Proveedores.Novedades
                 groupBox1.Focus();
                // TB_NombProveedor.Focus();
             }
-
-
-
-            
         }
 
         private void CargarProveedores()
@@ -745,10 +742,8 @@ namespace Eval_Proveedores.Novedades
                 {
                     
                         CargarEva();
-
-
-
-                        
+                        _ActualizarObservacionesProveedor();
+    
                 }
                 else
                 {
@@ -757,21 +752,40 @@ namespace Eval_Proveedores.Novedades
                         if (dialogResult == DialogResult.Yes)
                         {
                             CargarEva();
+
+                            _ActualizarObservacionesProveedor();
                         }
                 }
-
-                        
-                    
-                    
-                
-
-                
 
             }
             catch (Exception err)
             {
                 
                 MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void _ActualizarObservacionesProveedor()
+        {
+            foreach (
+                string empre in
+                    new string[]
+                    {
+                        "SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI",
+                        "Surfactan_VII"
+                    })
+            {
+                using (SqlConnection cnx = new SqlConnection(ConfigurationManager.ConnectionStrings[empre].ToString()))
+                {
+                    cnx.Open();
+                    string sqlQuery = "update Proveedor set ObservacionesII = '" + TB_ObservProve.Text.Trim() +
+                                      "' WHERE proveedor = '" + TB_CodProveedor.Text + "'";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlQuery, cnx))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
         }
 

@@ -62,5 +62,7 @@ namespace Negocio
             set { _FechaCat = value; }
             get { return _FechaCat; }
         }
+
+        public string ObservacionesII { get; set; }
     }
 }

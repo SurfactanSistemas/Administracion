@@ -216,5 +216,8 @@ namespace Negocio
             set { _DesSector3 = value; }
             get { return _DesSector3; }
         }
+
+        public string Observaciones { get; set; }
+        public string ObservacionesII { get; set; }
     }
 }

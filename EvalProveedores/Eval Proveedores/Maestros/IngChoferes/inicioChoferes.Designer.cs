@@ -29,8 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,7 +43,9 @@
             this.BT_Filtrar = new System.Windows.Forms.Button();
             this.TBFiltro = new System.Windows.Forms.TextBox();
             this.LBFiltro = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.BT_MenuFiltros = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.DGV_Choferes = new System.Windows.Forms.DataGridView();
             this.choferBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -52,8 +58,6 @@
             this.codigoProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nombreProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nombreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -176,6 +180,15 @@
             this.LBFiltro.TabIndex = 0;
             this.LBFiltro.Text = "label3";
             // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(166, 18);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(86, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
+            // 
             // BT_MenuFiltros
             // 
             this.BT_MenuFiltros.Location = new System.Drawing.Point(279, 16);
@@ -185,6 +198,17 @@
             this.BT_MenuFiltros.Text = "Filtrar Por";
             this.BT_MenuFiltros.UseVisualStyleBackColor = true;
             this.BT_MenuFiltros.Click += new System.EventHandler(this.BT_MenuFiltros_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(108, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 18);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Código:";
             // 
             // DGV_Choferes
             // 
@@ -223,13 +247,13 @@
             this.DGV_Choferes.Location = new System.Drawing.Point(89, 0);
             this.DGV_Choferes.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Choferes.Name = "DGV_Choferes";
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Choferes.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Choferes.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.DGV_Choferes.RowHeadersWidth = 15;
             this.DGV_Choferes.Size = new System.Drawing.Size(1025, 359);
             this.DGV_Choferes.TabIndex = 3;
@@ -342,26 +366,6 @@
             this.nombreToolStripMenuItem.Text = "Nombre";
             this.nombreToolStripMenuItem.Click += new System.EventHandler(this.nombreToolStripMenuItem_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(108, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 18);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Código:";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(166, 18);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(86, 20);
-            this.txtCodigo.TabIndex = 1;
-            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.BTAgregarChofer);
@@ -394,9 +398,9 @@
             this.Codigo.DataPropertyName = "Codigo";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.Codigo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.HeaderText = "Cod";
             this.Codigo.Name = "Codigo";
-            this.Codigo.Width = 50;
+            this.Codigo.Width = 35;
             // 
             // descripcionDataGridViewTextBoxColumn
             // 
@@ -407,24 +411,30 @@
             // 
             // Aplica
             // 
+            this.Aplica.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Aplica.DataPropertyName = "AplicaIII";
             this.Aplica.HeaderText = "Aplica";
             this.Aplica.Name = "Aplica";
             this.Aplica.Visible = false;
+            this.Aplica.Width = 61;
             // 
             // CargPelig
             // 
             this.CargPelig.DataPropertyName = "DescAplica";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.CargPelig.DefaultCellStyle = dataGridViewCellStyle2;
             this.CargPelig.HeaderText = "Carg. Pelig.";
             this.CargPelig.Name = "CargPelig";
+            this.CargPelig.Width = 75;
             // 
             // proveedorDataGridViewTextBoxColumn
             // 
+            this.proveedorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.proveedorDataGridViewTextBoxColumn.DataPropertyName = "Proveedor";
             this.proveedorDataGridViewTextBoxColumn.HeaderText = "Proveedor";
             this.proveedorDataGridViewTextBoxColumn.Name = "proveedorDataGridViewTextBoxColumn";
             this.proveedorDataGridViewTextBoxColumn.Visible = false;
-            this.proveedorDataGridViewTextBoxColumn.Width = 101;
+            this.proveedorDataGridViewTextBoxColumn.Width = 81;
             // 
             // NomProve
             // 
@@ -443,33 +453,43 @@
             // FechaVto1
             // 
             this.FechaVto1.DataPropertyName = "FechaVtoI";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaVto1.DefaultCellStyle = dataGridViewCellStyle3;
             this.FechaVto1.HeaderText = "Vto Ruta";
             this.FechaVto1.Name = "FechaVto1";
+            this.FechaVto1.Width = 75;
             // 
             // Comentario1
             // 
             this.Comentario1.DataPropertyName = "ComentarioI";
             this.Comentario1.HeaderText = "Observ. Ruta";
             this.Comentario1.Name = "Comentario1";
+            this.Comentario1.Width = 80;
             // 
             // FechaVto2
             // 
             this.FechaVto2.DataPropertyName = "FechaVtoII";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaVto2.DefaultCellStyle = dataGridViewCellStyle4;
             this.FechaVto2.HeaderText = "Vto RTO ";
             this.FechaVto2.Name = "FechaVto2";
+            this.FechaVto2.Width = 75;
             // 
             // Comentario2
             // 
             this.Comentario2.DataPropertyName = "ComentarioII";
             this.Comentario2.HeaderText = "Observ. RTO";
             this.Comentario2.Name = "Comentario2";
+            this.Comentario2.Width = 80;
             // 
             // FechaVto3
             // 
             this.FechaVto3.DataPropertyName = "FechaVtoIII";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaVto3.DefaultCellStyle = dataGridViewCellStyle5;
             this.FechaVto3.HeaderText = "Vto Carg. Pelig.";
             this.FechaVto3.Name = "FechaVto3";
-            this.FechaVto3.Width = 110;
+            this.FechaVto3.Width = 95;
             // 
             // OrdFechaVto1
             // 
@@ -498,6 +518,7 @@
             this.FechaEnt1.HeaderText = "FechaEnt1";
             this.FechaEnt1.Name = "FechaEnt1";
             this.FechaEnt1.Visible = false;
+            this.FechaEnt1.Width = 75;
             // 
             // FechaEnt2
             // 

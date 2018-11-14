@@ -137,6 +137,7 @@ namespace AccesoADatos
                             Codigo = Convert.ToString(dataReader["Proveedor"]),
                             Descripcion = Convert.ToString(dataReader["Nombre"]),
                             Observac = Convert.ToString(dataReader["Observaciones"]),
+                            ObservacionesII = Convert.ToString(dataReader["ObservacionesII"]),
                             Estado = Esta,
                             Categoria1 = CateI,
                             Categoria2 = CateII,

@@ -12,7 +12,7 @@
   <xs:element name="DSEvaServ" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSEvaServ" msprop:Generator_UserDSName="DSEvaServ">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DSEvaServ" msprop:Generator_TableClassName="DSEvaServDataTable" msprop:Generator_TableVarName="tableDSEvaServ" msprop:Generator_TablePropName="_DSEvaServ" msprop:Generator_RowDeletingName="DSEvaServRowDeleting" msprop:Generator_RowChangingName="DSEvaServRowChanging" msprop:Generator_RowEvHandlerName="DSEvaServRowChangeEventHandler" msprop:Generator_RowDeletedName="DSEvaServRowDeleted" msprop:Generator_UserTableName="DSEvaServ" msprop:Generator_RowChangedName="DSEvaServRowChanged" msprop:Generator_RowEvArgName="DSEvaServRowChangeEvent" msprop:Generator_RowClassName="DSEvaServRow">
+        <xs:element name="DSEvaServ" msprop:Generator_TableClassName="DSEvaServDataTable" msprop:Generator_TableVarName="tableDSEvaServ" msprop:Generator_RowChangedName="DSEvaServRowChanged" msprop:Generator_TablePropName="_DSEvaServ" msprop:Generator_RowDeletingName="DSEvaServRowDeleting" msprop:Generator_RowChangingName="DSEvaServRowChanging" msprop:Generator_RowEvHandlerName="DSEvaServRowChangeEventHandler" msprop:Generator_RowDeletedName="DSEvaServRowDeleted" msprop:Generator_RowClassName="DSEvaServRow" msprop:Generator_UserTableName="DSEvaServ" msprop:Generator_RowEvArgName="DSEvaServRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CodProve" msprop:Generator_ColumnVarNameInTable="columnCodProve" msprop:Generator_ColumnPropNameInRow="CodProve" msprop:Generator_ColumnPropNameInTable="CodProveColumn" msprop:Generator_UserColumnName="CodProve" type="xs:string" minOccurs="0" />
@@ -50,6 +50,7 @@
               <xs:element name="EstaProve" msprop:Generator_ColumnVarNameInTable="columnEstaProve" msprop:Generator_ColumnPropNameInRow="EstaProve" msprop:Generator_ColumnPropNameInTable="EstaProveColumn" msprop:Generator_UserColumnName="EstaProve" type="xs:string" minOccurs="0" />
               <xs:element name="Observ" msprop:Generator_ColumnVarNameInTable="columnObserv" msprop:Generator_ColumnPropNameInRow="Observ" msprop:Generator_ColumnPropNameInTable="ObservColumn" msprop:Generator_UserColumnName="Observ" type="xs:string" minOccurs="0" />
               <xs:element name="Año" msprop:Generator_ColumnVarNameInTable="columnAño" msprop:Generator_ColumnPropNameInRow="Año" msprop:Generator_ColumnPropNameInTable="AñoColumn" msprop:Generator_UserColumnName="Año" type="xs:string" minOccurs="0" />
+              <xs:element name="ObservacionesII" msprop:Generator_ColumnVarNameInTable="columnObservacionesII" msprop:Generator_ColumnPropNameInRow="ObservacionesII" msprop:Generator_ColumnPropNameInTable="ObservacionesIIColumn" msprop:Generator_UserColumnName="ObservacionesII" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

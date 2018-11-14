@@ -43,6 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.TB_Estado = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BT_Guardar = new System.Windows.Forms.Button();
             this.lblCalificacion3 = new System.Windows.Forms.Label();
             this.lblCalificacion2 = new System.Windows.Forms.Label();
             this.lblCalificacion1 = new System.Windows.Forms.Label();
@@ -54,7 +55,6 @@
             this.TB_ObservProve = new System.Windows.Forms.TextBox();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.BT_LimpiarPant = new System.Windows.Forms.Button();
-            this.BT_Guardar = new System.Windows.Forms.Button();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
@@ -285,6 +285,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EVALUACIÓN";
             // 
+            // BT_Guardar
+            // 
+            this.BT_Guardar.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Aceptar_N2;
+            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Guardar.Location = new System.Drawing.Point(114, 347);
+            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_Guardar.Name = "BT_Guardar";
+            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
+            this.BT_Guardar.TabIndex = 76;
+            this.toolTip1.SetToolTip(this.BT_Guardar, "Guardar");
+            this.BT_Guardar.UseVisualStyleBackColor = true;
+            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
+            // 
             // lblCalificacion3
             // 
             this.lblCalificacion3.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -377,6 +392,7 @@
             // TB_ObservEva
             // 
             this.TB_ObservEva.Location = new System.Drawing.Point(408, 439);
+            this.TB_ObservEva.MaxLength = 200;
             this.TB_ObservEva.Multiline = true;
             this.TB_ObservEva.Name = "TB_ObservEva";
             this.TB_ObservEva.Size = new System.Drawing.Size(350, 82);
@@ -418,21 +434,6 @@
             this.toolTip1.SetToolTip(this.BT_LimpiarPant, "Limpiar\r\nPantalla");
             this.BT_LimpiarPant.UseVisualStyleBackColor = true;
             this.BT_LimpiarPant.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
-            // 
-            // BT_Guardar
-            // 
-            this.BT_Guardar.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Aceptar_N2;
-            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(114, 347);
-            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_Guardar.Name = "BT_Guardar";
-            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
-            this.BT_Guardar.TabIndex = 76;
-            this.toolTip1.SetToolTip(this.BT_Guardar, "Guardar");
-            this.BT_Guardar.UseVisualStyleBackColor = true;
-            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
             // 
             // textBox16
             // 
