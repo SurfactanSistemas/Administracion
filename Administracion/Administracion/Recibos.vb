@@ -4240,7 +4240,15 @@ Public Class Recibos
 
         For i = 0 To 40
             If Val(WEntra(i, 10)) <> 0 Then
-                WTotalRecibo += Val(Proceso.formatonumerico(WEntra(i, 10)))
+
+                'WEntra(i, 10) = formatonumerico(WEntra(i, 10))
+
+                If Trim(UCase(WEntra(i, 11))) = "U$S" Then
+                    Dim W As Double = Val(WEntra(i, 10).ToString.Replace(",", ".")) * Val(formatonumerico(txtParidad.Text))
+                    WTotalRecibo += Val(formatonumerico(W))
+                Else
+                    WTotalRecibo += Val(Proceso.formatonumerico(WEntra(i, 10)))
+                End If
             End If
         Next
 
