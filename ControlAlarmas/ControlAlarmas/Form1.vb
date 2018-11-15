@@ -34,7 +34,7 @@ Public Class Form1
         WTCP.connect(addr(i).ToString, "5000")
 
         For Each c As Button In Controls.OfType(Of Button)()
-            c.BackgroundImage = My.Resources.btn_off
+            c.BackgroundImage = My.Resources.btn_disabled
         Next
 
         For Each c As CheckBox In Controls.OfType(Of CheckBox)()
@@ -188,6 +188,13 @@ Public Class Form1
 
             WBut.Enabled = PingHost(WIp)
 
+            If WBut.Enabled Then
+                WBut.BackgroundImage = My.Resources.btn_on
+            Else
+                WBut.BackgroundImage = My.Resources.btn_error
+                Label6.Text = "Hay Dispositivos inaccesibles."
+            End If
+
         Next
         WComprobado = True
     End Sub
@@ -202,8 +209,6 @@ Public Class Form1
 
             Cursor = Cursors.Default
             Timer2.Stop()
-            Label6.Text = ""
-            Label6.Visible = False
         End If
     End Sub
 End Class

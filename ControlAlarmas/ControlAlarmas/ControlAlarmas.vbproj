@@ -125,6 +125,8 @@
     <None Include="Resources\btn_on.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\btn_disabled.png" />
+    <None Include="Resources\btn_error.png" />
     <Content Include="Resources\btn_off.png" />
     <None Include="Resources\btn_on.png" />
   </ItemGroup>
