@@ -41,7 +41,7 @@ namespace AccesoADatos
                 {  
                     using (SqlCommand cmd = new SqlCommand())
                     {
-                        foreach (string WEmpresa in new string[] { "SurfactanSa", "surfactan_II", "surfactan_III", "surfactan_IV", "surfactan_V", "surfactan_VI", "surfactan_VII" })
+                        foreach (string WEmpresa in new string[] { "SurfactanSa", "surfactan_II", "surfactan_III", "surfactan_IV", "surfactan_V" })
                         {
                             if (conn.State == ConnectionState.Open) conn.Close();
 
@@ -74,7 +74,12 @@ namespace AccesoADatos
                         {
                             string WInforme = row["Informe"].ToString();
                             string WFecha = row["Fecha"].ToString();
-                            string WFechaOrd = row["FechaOrd"].ToString();
+
+                            string[] items = WFecha.Split('/');
+
+                            Array.Reverse(items);
+
+                            string WFechaOrd = string.Join("", items);
                             string WExpreso = row["Expreso"].ToString();
                             string WChapa = row["Chapa"].ToString();
                             string WChofer = row["Chofer"].ToString();

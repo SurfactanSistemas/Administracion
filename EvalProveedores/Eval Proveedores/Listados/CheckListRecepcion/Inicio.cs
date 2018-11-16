@@ -77,7 +77,7 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion
                 BuscarFechas();
                 Tipo = "Pantalla";
 
-                ImpreInforme Impre = new ImpreInforme(dtInfMuestra, Tipo);
+                ImpreInforme Impre = new ImpreInforme(dtInforme, Tipo);
                 Impre.Show();
 
             }
@@ -95,18 +95,9 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion
             dtInfMuestra = dtInforme.Clone();
             dtInfMuestra.Clear();
 
-
             foreach (DataRow fila in dtInforme.Rows)
             {
-                string Fecha = fila[1].ToString();
-                int FechaOrd = int.Parse(Fecha.Substring(6, 4) + Fecha.Substring(3, 2) + Fecha.Substring(0, 2));
-
-                if ((FechaOrd >= FechaDesde) && (FechaOrd <= FechaHasta))
-                {
-                    dtInfMuestra.ImportRow(fila);
-                }
-
-
+                dtInfMuestra.ImportRow(fila);
             }
         }
 

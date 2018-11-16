@@ -522,17 +522,17 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             public DSInformeRow AddDSInformeRow(
                         int Informe, 
                         string Fecha, 
-                        string Expreso, 
+                        int Expreso, 
                         string Chapa, 
                         string Chofer, 
-                        string Item1, 
-                        string Item2, 
-                        string Item3, 
-                        string Item4, 
-                        string Item5, 
-                        string Item6, 
-                        string Item7, 
-                        string Item8, 
+                        int Item1, 
+                        int Item2, 
+                        int Item3, 
+                        int Item4, 
+                        int Item5, 
+                        int Item6, 
+                        int Item7, 
+                        int Item8, 
                         string Placa, 
                         string Rombo, 
                         string Observac, 
@@ -604,27 +604,27 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
                 base.Columns.Add(this.columnInforme);
                 this.columnFecha = new global::System.Data.DataColumn("Fecha", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFecha);
-                this.columnExpreso = new global::System.Data.DataColumn("Expreso", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnExpreso = new global::System.Data.DataColumn("Expreso", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExpreso);
                 this.columnChapa = new global::System.Data.DataColumn("Chapa", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChapa);
                 this.columnChofer = new global::System.Data.DataColumn("Chofer", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChofer);
-                this.columnItem1 = new global::System.Data.DataColumn("Item1", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnItem1 = new global::System.Data.DataColumn("Item1", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItem1);
-                this.columnItem2 = new global::System.Data.DataColumn("Item2", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnItem2 = new global::System.Data.DataColumn("Item2", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItem2);
-                this.columnItem3 = new global::System.Data.DataColumn("Item3", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnItem3 = new global::System.Data.DataColumn("Item3", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItem3);
-                this.columnItem4 = new global::System.Data.DataColumn("Item4", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnItem4 = new global::System.Data.DataColumn("Item4", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItem4);
-                this.columnItem5 = new global::System.Data.DataColumn("Item5", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnItem5 = new global::System.Data.DataColumn("Item5", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItem5);
-                this.columnItem6 = new global::System.Data.DataColumn("Item6", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnItem6 = new global::System.Data.DataColumn("Item6", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItem6);
-                this.columnItem7 = new global::System.Data.DataColumn("Item7", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnItem7 = new global::System.Data.DataColumn("Item7", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItem7);
-                this.columnItem8 = new global::System.Data.DataColumn("Item8", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnItem8 = new global::System.Data.DataColumn("Item8", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItem8);
                 this.columnPlaca = new global::System.Data.DataColumn("Placa", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPlaca);
@@ -810,10 +810,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Expreso {
+            public int Expreso {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.ExpresoColumn]));
+                        return ((int)(this[this.tableDSInforme.ExpresoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Expreso\' in table \'DSInforme\' is DBNull.", e);
@@ -858,10 +858,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Item1 {
+            public int Item1 {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.Item1Column]));
+                        return ((int)(this[this.tableDSInforme.Item1Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Item1\' in table \'DSInforme\' is DBNull.", e);
@@ -874,10 +874,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Item2 {
+            public int Item2 {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.Item2Column]));
+                        return ((int)(this[this.tableDSInforme.Item2Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Item2\' in table \'DSInforme\' is DBNull.", e);
@@ -890,10 +890,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Item3 {
+            public int Item3 {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.Item3Column]));
+                        return ((int)(this[this.tableDSInforme.Item3Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Item3\' in table \'DSInforme\' is DBNull.", e);
@@ -906,10 +906,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Item4 {
+            public int Item4 {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.Item4Column]));
+                        return ((int)(this[this.tableDSInforme.Item4Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Item4\' in table \'DSInforme\' is DBNull.", e);
@@ -922,10 +922,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Item5 {
+            public int Item5 {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.Item5Column]));
+                        return ((int)(this[this.tableDSInforme.Item5Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Item5\' in table \'DSInforme\' is DBNull.", e);
@@ -938,10 +938,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Item6 {
+            public int Item6 {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.Item6Column]));
+                        return ((int)(this[this.tableDSInforme.Item6Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Item6\' in table \'DSInforme\' is DBNull.", e);
@@ -954,10 +954,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Item7 {
+            public int Item7 {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.Item7Column]));
+                        return ((int)(this[this.tableDSInforme.Item7Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Item7\' in table \'DSInforme\' is DBNull.", e);
@@ -970,10 +970,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Item8 {
+            public int Item8 {
                 get {
                     try {
-                        return ((string)(this[this.tableDSInforme.Item8Column]));
+                        return ((int)(this[this.tableDSInforme.Item8Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Item8\' in table \'DSInforme\' is DBNull.", e);
