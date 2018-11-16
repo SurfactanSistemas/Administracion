@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -45,6 +47,8 @@ namespace Eval_Proveedores.IngChoferes
         private string Coment3;
         private string NomProve;
 
+        private bool WNuevaManeraCargar = false;
+
         public AgModifChofer()
         {
 
@@ -84,6 +88,55 @@ namespace Eval_Proveedores.IngChoferes
             InitializeComponent();
         }
 
+        public AgModifChofer(string codigo)
+        {
+            InitializeComponent();
+
+            _CargarDatos(codigo);
+
+        }
+
+        private void _CargarDatos(string codigo)
+        {
+            using (SqlConnection cnx = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString))
+            {
+                cnx.Open();
+                string sqlQuery = "SELECT chofer.*, p.Nombre As DescProveedor FROM chofer LEFT OUTER JOIN Proveedor P ON P.Proveedor = Chofer.Proveedor where Chofer.Codigo = '" + codigo + "'";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, cnx))
+                {
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            this.Codigo = dr["Codigo"] == null ? "" : dr["Codigo"].ToString();
+                            this.Desc = dr["Descripcion"] == null ? "" : dr["Descripcion"].ToString();
+                            this.Aplica = dr["AplicaIII"] == null ? "" : dr["AplicaIII"].ToString();
+                            this.Proveedor = dr["Proveedor"] == null ? "" : dr["Proveedor"].ToString();
+                            this.CodEmp = CodEmp;
+                            this.FechaVenc1 = dr["FechaVtoI"] == null ? "" : dr["FechaVtoI"].ToString();
+                            this.FechaVenc2 = dr["FechaVtoII"] == null ? "" : dr["FechaVtoII"].ToString();
+                            this.FechaVenc3 = dr["FechaVtoIII"] == null ? "" : dr["FechaVtoIII"].ToString();
+                            this.OrdFecVenc1 = Helper.OrdenarFecha(FechaVenc1);
+                            this.OrdFecVenc2 = Helper.OrdenarFecha(FechaVenc2);
+                            this.OrdFecVenc3 = Helper.OrdenarFecha(FechaVenc3);
+                            this.FechaEnt1 = dr["FechaEntregaI"] == null ? "" : dr["FechaEntregaI"].ToString();
+                            this.FechaEnt2 = dr["FechaEntregaII"] == null ? "" : dr["FechaEntregaII"].ToString();
+                            this.FechaEnt3 = dr["FechaEntregaIII"] == null ? "" : dr["FechaEntregaIII"].ToString();
+                            this.OrdFecEnt1 = Helper.OrdenarFecha(FechaEnt1);
+                            this.OrdFecEnt2 = Helper.OrdenarFecha(FechaEnt2);
+                            this.OrdFecEnt3 = Helper.OrdenarFecha(FechaEnt3);
+                            this.Coment1 = dr["ComentarioI"] == null ? "" : dr["ComentarioI"].ToString();
+                            this.Coment2 = dr["ComentarioII"] == null ? "" : dr["ComentarioII"].ToString();
+                            this.Coment3 = dr["ComentarioIII"] == null ? "" : dr["ComentarioIII"].ToString();
+                            this.NomProve = dr["DescProveedor"] == null ? "" : dr["DescProveedor"].ToString();
+                        }
+                    }
+                }
+            }
+        }
+
         private void AgModifChofer_Load(object sender, EventArgs e)
         {
             if (Codigo != null)
@@ -103,7 +156,7 @@ namespace Eval_Proveedores.IngChoferes
                 ObservART.Text = Coment2;
                 ObservCargPel.Text = Coment3;
                 if (int.Parse(Aplica) == 1) CB_CertPel.Checked = true;
-                
+
                 TB_Nombre.ReadOnly = true;
                 Modificar = true;
 
@@ -120,7 +173,6 @@ namespace Eval_Proveedores.IngChoferes
                 CargarProveedores();
                 TB_Nombre.Focus();
             }
-            
             
         }
 

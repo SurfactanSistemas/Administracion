@@ -29,12 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,27 +68,23 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Aplica = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CargPelig = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proveedorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigoEmpresaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaVto1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comentario1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaVto2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comentario2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaVto3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrdFechaVto1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrdFechaVto2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrdFechaVto3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEnt1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEnt2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEnt3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrdFechaEnt1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrdFechaEnt2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrdFechaEnt3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comentario3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescChofer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CargasPeligrosas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaVtoLicConducir = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEntLicConducir = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ComentarioI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaVtoARt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEntArt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ComentarioII = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaVtoCargasPeligrosas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEntCargasPeligrosas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ComentarioIII = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaVtoRuta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEntRuta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaVtoRTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEntRTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -218,43 +221,42 @@
             this.DGV_Choferes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.DGV_Choferes.AutoGenerateColumns = false;
             this.DGV_Choferes.ColumnHeadersHeight = 28;
             this.DGV_Choferes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
-            this.descripcionDataGridViewTextBoxColumn,
-            this.Aplica,
-            this.CargPelig,
-            this.proveedorDataGridViewTextBoxColumn,
-            this.NomProve,
-            this.codigoEmpresaDataGridViewTextBoxColumn,
-            this.FechaVto1,
-            this.Comentario1,
-            this.FechaVto2,
-            this.Comentario2,
-            this.FechaVto3,
-            this.OrdFechaVto1,
-            this.OrdFechaVto2,
-            this.OrdFechaVto3,
-            this.FechaEnt1,
-            this.FechaEnt2,
-            this.FechaEnt3,
-            this.OrdFechaEnt1,
-            this.OrdFechaEnt2,
-            this.OrdFechaEnt3,
-            this.Comentario3});
-            this.DGV_Choferes.DataSource = this.choferBindingSource;
+            this.DescChofer,
+            this.CargasPeligrosas,
+            this.DescProveedor,
+            this.FechaVtoLicConducir,
+            this.FechaEntLicConducir,
+            this.ComentarioI,
+            this.FechaVtoARt,
+            this.FechaEntArt,
+            this.ComentarioII,
+            this.FechaVtoCargasPeligrosas,
+            this.FechaEntCargasPeligrosas,
+            this.ComentarioIII,
+            this.FechaVtoRuta,
+            this.FechaEntRuta,
+            this.FechaVtoRTO,
+            this.FechaEntRTO,
+            this.Proveedor});
+            this.DGV_Choferes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_Choferes.Location = new System.Drawing.Point(89, 0);
             this.DGV_Choferes.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Choferes.Name = "DGV_Choferes";
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Choferes.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Choferes.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.DGV_Choferes.RowHeadersWidth = 15;
+            this.DGV_Choferes.ShowCellErrors = false;
+            this.DGV_Choferes.ShowCellToolTips = false;
+            this.DGV_Choferes.ShowEditingIcon = false;
+            this.DGV_Choferes.ShowRowErrors = false;
             this.DGV_Choferes.Size = new System.Drawing.Size(1025, 359);
             this.DGV_Choferes.TabIndex = 3;
             this.DGV_Choferes.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Choferes_RowHeaderMouseDoubleClick);
@@ -395,172 +397,156 @@
             // 
             // Codigo
             // 
+            this.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Codigo.DataPropertyName = "Codigo";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.Codigo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Codigo.HeaderText = "Cod";
+            this.Codigo.HeaderText = "Codigo";
             this.Codigo.Name = "Codigo";
-            this.Codigo.Width = 35;
+            this.Codigo.Width = 65;
             // 
-            // descripcionDataGridViewTextBoxColumn
+            // DescChofer
             // 
-            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "Descripcion";
-            this.descripcionDataGridViewTextBoxColumn.HeaderText = "Nombre";
-            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
-            this.descripcionDataGridViewTextBoxColumn.Width = 200;
+            this.DescChofer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DescChofer.DataPropertyName = "Nombre";
+            this.DescChofer.HeaderText = "Nombre";
+            this.DescChofer.Name = "DescChofer";
+            this.DescChofer.Width = 69;
             // 
-            // Aplica
+            // CargasPeligrosas
             // 
-            this.Aplica.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Aplica.DataPropertyName = "AplicaIII";
-            this.Aplica.HeaderText = "Aplica";
-            this.Aplica.Name = "Aplica";
-            this.Aplica.Visible = false;
-            this.Aplica.Width = 61;
-            // 
-            // CargPelig
-            // 
-            this.CargPelig.DataPropertyName = "DescAplica";
+            this.CargasPeligrosas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CargasPeligrosas.DataPropertyName = "CargasPeligrosas";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.CargPelig.DefaultCellStyle = dataGridViewCellStyle2;
-            this.CargPelig.HeaderText = "Carg. Pelig.";
-            this.CargPelig.Name = "CargPelig";
-            this.CargPelig.Width = 75;
+            this.CargasPeligrosas.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CargasPeligrosas.HeaderText = "Carg. Pelig";
+            this.CargasPeligrosas.Name = "CargasPeligrosas";
+            this.CargasPeligrosas.Width = 83;
             // 
-            // proveedorDataGridViewTextBoxColumn
+            // DescProveedor
             // 
-            this.proveedorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.proveedorDataGridViewTextBoxColumn.DataPropertyName = "Proveedor";
-            this.proveedorDataGridViewTextBoxColumn.HeaderText = "Proveedor";
-            this.proveedorDataGridViewTextBoxColumn.Name = "proveedorDataGridViewTextBoxColumn";
-            this.proveedorDataGridViewTextBoxColumn.Visible = false;
-            this.proveedorDataGridViewTextBoxColumn.Width = 81;
+            this.DescProveedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DescProveedor.DataPropertyName = "DescProveedor";
+            this.DescProveedor.HeaderText = "Proveedor";
+            this.DescProveedor.Name = "DescProveedor";
+            this.DescProveedor.Width = 81;
             // 
-            // NomProve
+            // FechaVtoLicConducir
             // 
-            this.NomProve.DataPropertyName = "NombProve";
-            this.NomProve.HeaderText = "Nomb. Prove";
-            this.NomProve.Name = "NomProve";
-            this.NomProve.Width = 150;
-            // 
-            // codigoEmpresaDataGridViewTextBoxColumn
-            // 
-            this.codigoEmpresaDataGridViewTextBoxColumn.DataPropertyName = "CodigoEmpresa";
-            this.codigoEmpresaDataGridViewTextBoxColumn.HeaderText = "CodigoEmpresa";
-            this.codigoEmpresaDataGridViewTextBoxColumn.Name = "codigoEmpresaDataGridViewTextBoxColumn";
-            this.codigoEmpresaDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // FechaVto1
-            // 
-            this.FechaVto1.DataPropertyName = "FechaVtoI";
+            this.FechaVtoLicConducir.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FechaVtoLicConducir.DataPropertyName = "FechaVtoLicConducir";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.FechaVto1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.FechaVto1.HeaderText = "Vto Ruta";
-            this.FechaVto1.Name = "FechaVto1";
-            this.FechaVto1.Width = 75;
+            this.FechaVtoLicConducir.DefaultCellStyle = dataGridViewCellStyle3;
+            this.FechaVtoLicConducir.HeaderText = "F. Vto. Lic. Cond.";
+            this.FechaVtoLicConducir.Name = "FechaVtoLicConducir";
+            this.FechaVtoLicConducir.Width = 114;
             // 
-            // Comentario1
+            // FechaEntLicConducir
             // 
-            this.Comentario1.DataPropertyName = "ComentarioI";
-            this.Comentario1.HeaderText = "Observ. Ruta";
-            this.Comentario1.Name = "Comentario1";
-            this.Comentario1.Width = 80;
-            // 
-            // FechaVto2
-            // 
-            this.FechaVto2.DataPropertyName = "FechaVtoII";
+            this.FechaEntLicConducir.DataPropertyName = "FechaEntLicConducir";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.FechaVto2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.FechaVto2.HeaderText = "Vto RTO ";
-            this.FechaVto2.Name = "FechaVto2";
-            this.FechaVto2.Width = 75;
+            this.FechaEntLicConducir.DefaultCellStyle = dataGridViewCellStyle4;
+            this.FechaEntLicConducir.HeaderText = "F. Ent. Lic. Cond.";
+            this.FechaEntLicConducir.Name = "FechaEntLicConducir";
             // 
-            // Comentario2
+            // ComentarioI
             // 
-            this.Comentario2.DataPropertyName = "ComentarioII";
-            this.Comentario2.HeaderText = "Observ. RTO";
-            this.Comentario2.Name = "Comentario2";
-            this.Comentario2.Width = 80;
+            this.ComentarioI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ComentarioI.DataPropertyName = "ComentarioI";
+            this.ComentarioI.HeaderText = "Obs.Lic.Cond.";
+            this.ComentarioI.Name = "ComentarioI";
+            this.ComentarioI.Width = 99;
             // 
-            // FechaVto3
+            // FechaVtoARt
             // 
-            this.FechaVto3.DataPropertyName = "FechaVtoIII";
+            this.FechaVtoARt.DataPropertyName = "FechaVtoARt";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.FechaVto3.DefaultCellStyle = dataGridViewCellStyle5;
-            this.FechaVto3.HeaderText = "Vto Carg. Pelig.";
-            this.FechaVto3.Name = "FechaVto3";
-            this.FechaVto3.Width = 95;
+            this.FechaVtoARt.DefaultCellStyle = dataGridViewCellStyle5;
+            this.FechaVtoARt.HeaderText = "F. Vto ART";
+            this.FechaVtoARt.Name = "FechaVtoARt";
             // 
-            // OrdFechaVto1
+            // FechaEntArt
             // 
-            this.OrdFechaVto1.DataPropertyName = "OrdFechaVtoI";
-            this.OrdFechaVto1.HeaderText = "OrdFechaVto1";
-            this.OrdFechaVto1.Name = "OrdFechaVto1";
-            this.OrdFechaVto1.Visible = false;
+            this.FechaEntArt.DataPropertyName = "FechaEntArt";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaEntArt.DefaultCellStyle = dataGridViewCellStyle6;
+            this.FechaEntArt.HeaderText = "F. Ent. ART";
+            this.FechaEntArt.Name = "FechaEntArt";
             // 
-            // OrdFechaVto2
+            // ComentarioII
             // 
-            this.OrdFechaVto2.DataPropertyName = "OrdFechaVtoII";
-            this.OrdFechaVto2.HeaderText = "OrdFechaVto2";
-            this.OrdFechaVto2.Name = "OrdFechaVto2";
-            this.OrdFechaVto2.Visible = false;
+            this.ComentarioII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ComentarioII.DataPropertyName = "ComentarioII";
+            this.ComentarioII.HeaderText = "Obs. ART";
+            this.ComentarioII.Name = "ComentarioII";
+            this.ComentarioII.Width = 79;
             // 
-            // OrdFechaVto3
+            // FechaVtoCargasPeligrosas
             // 
-            this.OrdFechaVto3.DataPropertyName = "OrdFechaVtoIII";
-            this.OrdFechaVto3.HeaderText = "OrdFechaVto3";
-            this.OrdFechaVto3.Name = "OrdFechaVto3";
-            this.OrdFechaVto3.Visible = false;
+            this.FechaVtoCargasPeligrosas.DataPropertyName = "FechaVtoCargasPeligrosas";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaVtoCargasPeligrosas.DefaultCellStyle = dataGridViewCellStyle7;
+            this.FechaVtoCargasPeligrosas.HeaderText = "FVto. Carg. Pelig";
+            this.FechaVtoCargasPeligrosas.Name = "FechaVtoCargasPeligrosas";
             // 
-            // FechaEnt1
+            // FechaEntCargasPeligrosas
             // 
-            this.FechaEnt1.DataPropertyName = "FechaEntregaI";
-            this.FechaEnt1.HeaderText = "FechaEnt1";
-            this.FechaEnt1.Name = "FechaEnt1";
-            this.FechaEnt1.Visible = false;
-            this.FechaEnt1.Width = 75;
+            this.FechaEntCargasPeligrosas.DataPropertyName = "FechaEntCargasPeligrosas";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaEntCargasPeligrosas.DefaultCellStyle = dataGridViewCellStyle8;
+            this.FechaEntCargasPeligrosas.HeaderText = "F.Ent. Carg. Pelig.";
+            this.FechaEntCargasPeligrosas.Name = "FechaEntCargasPeligrosas";
             // 
-            // FechaEnt2
+            // ComentarioIII
             // 
-            this.FechaEnt2.DataPropertyName = "FechaEntregaII";
-            this.FechaEnt2.HeaderText = "FechaEnt2";
-            this.FechaEnt2.Name = "FechaEnt2";
-            this.FechaEnt2.Visible = false;
+            this.ComentarioIII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ComentarioIII.DataPropertyName = "ComentarioIII";
+            this.ComentarioIII.HeaderText = "Obs.Carg.Pelig.";
+            this.ComentarioIII.Name = "ComentarioIII";
+            this.ComentarioIII.Width = 105;
             // 
-            // FechaEnt3
+            // FechaVtoRuta
             // 
-            this.FechaEnt3.DataPropertyName = "FechaEntregaIII";
-            this.FechaEnt3.HeaderText = "FechaEnt3";
-            this.FechaEnt3.Name = "FechaEnt3";
-            this.FechaEnt3.Visible = false;
+            this.FechaVtoRuta.DataPropertyName = "FechaVtoRuta";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaVtoRuta.DefaultCellStyle = dataGridViewCellStyle9;
+            this.FechaVtoRuta.HeaderText = "F.Vto Ruta";
+            this.FechaVtoRuta.Name = "FechaVtoRuta";
+            this.FechaVtoRuta.Visible = false;
             // 
-            // OrdFechaEnt1
+            // FechaEntRuta
             // 
-            this.OrdFechaEnt1.DataPropertyName = "OrdFechaEntregaI";
-            this.OrdFechaEnt1.HeaderText = "OrdFechaEnt1";
-            this.OrdFechaEnt1.Name = "OrdFechaEnt1";
-            this.OrdFechaEnt1.Visible = false;
+            this.FechaEntRuta.DataPropertyName = "FechaEntRuta";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaEntRuta.DefaultCellStyle = dataGridViewCellStyle10;
+            this.FechaEntRuta.HeaderText = "F.Ent. Ruta";
+            this.FechaEntRuta.Name = "FechaEntRuta";
+            this.FechaEntRuta.Visible = false;
             // 
-            // OrdFechaEnt2
+            // FechaVtoRTO
             // 
-            this.OrdFechaEnt2.DataPropertyName = "OrdFechaEntregaII";
-            this.OrdFechaEnt2.HeaderText = "OrdFechaEnt2";
-            this.OrdFechaEnt2.Name = "OrdFechaEnt2";
-            this.OrdFechaEnt2.Visible = false;
+            this.FechaVtoRTO.DataPropertyName = "FechaVtoRTO";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaVtoRTO.DefaultCellStyle = dataGridViewCellStyle11;
+            this.FechaVtoRTO.HeaderText = "F.Vto. RTO";
+            this.FechaVtoRTO.Name = "FechaVtoRTO";
+            this.FechaVtoRTO.Visible = false;
             // 
-            // OrdFechaEnt3
+            // FechaEntRTO
             // 
-            this.OrdFechaEnt3.DataPropertyName = "OrdFechaEntregaIII";
-            this.OrdFechaEnt3.HeaderText = "OrdFechaEnt3";
-            this.OrdFechaEnt3.Name = "OrdFechaEnt3";
-            this.OrdFechaEnt3.Visible = false;
+            this.FechaEntRTO.DataPropertyName = "FechaEntRTO";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaEntRTO.DefaultCellStyle = dataGridViewCellStyle12;
+            this.FechaEntRTO.HeaderText = "F.Ent. RTO";
+            this.FechaEntRTO.Name = "FechaEntRTO";
+            this.FechaEntRTO.Visible = false;
             // 
-            // Comentario3
+            // Proveedor
             // 
-            this.Comentario3.DataPropertyName = "ComentarioIII";
-            this.Comentario3.HeaderText = "Observ Carg. Pelig.";
-            this.Comentario3.Name = "Comentario3";
-            this.Comentario3.Width = 120;
+            this.Proveedor.DataPropertyName = "Proveedor";
+            this.Proveedor.HeaderText = "Proveedor";
+            this.Proveedor.Name = "Proveedor";
+            this.Proveedor.Visible = false;
             // 
             // inicioChoferes
             // 
@@ -633,26 +619,22 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Aplica;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CargPelig;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proveedorDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NomProve;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codigoEmpresaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comentario1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comentario2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaVto1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaVto2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaVto3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaEnt1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaEnt2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaEnt3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comentario3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescChofer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CargasPeligrosas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescProveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoLicConducir;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEntLicConducir;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ComentarioI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoARt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEntArt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ComentarioII;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoCargasPeligrosas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEntCargasPeligrosas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ComentarioIII;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoRuta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEntRuta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoRTO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEntRTO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
     }
 }

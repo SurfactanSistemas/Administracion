@@ -121,7 +121,7 @@ namespace Eval_Proveedores
 
                         string WNumLaudo = "";
 
-                        if (WLaudos.Rows.Count == 0) continue;
+                        //if (WLaudos.Rows.Count == 0) continue;
 
                         WMovimientos++;
 
@@ -179,7 +179,7 @@ namespace Eval_Proveedores
                 WProveedor["Movimientos"] = WMovimientos;
                 WProveedor["CertificadosOk"] = WCertificadosOk;
                 WProveedor["EnvasesOk"] = WEnvasesOk;
-                WProveedor["Retrasos"] = WMovimientos != 0 ? Math.Ceiling((double)WDiasRetrasos / WMovimientos) : WDiasRetrasos;
+                WProveedor["Retrasos"] = WMovimientos != 0 ? Math.Truncate((double)WDiasRetrasos / WMovimientos) : WDiasRetrasos;
                 WProveedor["Aprobados"] = WMovimientos - WRechazados; //WAprobados;
                 WProveedor["Desvios"] = WDesvio;
                 WProveedor["Rechazados"] = WRechazados;

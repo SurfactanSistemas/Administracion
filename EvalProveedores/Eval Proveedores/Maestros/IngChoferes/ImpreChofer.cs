@@ -29,36 +29,36 @@ namespace Eval_Proveedores.Maestros.IngChoferes
         {
             DSChofer DS = new DSChofer();
 
-            int filas = dt.Rows.Count;
+            //int filas = dt.Rows.Count;
 
-            for (int i = filas - 1; i > -1; i--)
-            {
-                DataRow dr = dt.Rows[i];
-                DS.Tables[0].Rows.Add
-                (new object[]
-                {
-                    dr[0].ToString(),
-                    dr[1].ToString(),
-                    dr[2].ToString(),
-                    dr[3].ToString(),
-                    dr[5].ToString(),
-                    dr[6].ToString(),
-                    dr[7].ToString(),
-                    dr[20].ToString(),
+            //for (int i = filas - 1; i > -1; i--)
+            //{
+            //    DataRow dr = dt.Rows[i];
+            //    DS.Tables[0].Rows.Add
+            //    (new object[]
+            //    {
+            //        dr[0].ToString(),
+            //        dr[1].ToString(),
+            //        dr[2].ToString(),
+            //        dr[3].ToString(),
+            //        dr[5].ToString(),
+            //        dr[6].ToString(),
+            //        dr[7].ToString(),
+            //        dr[20].ToString(),
                     
                     
                     
 
-                }
+            //    }
 
-                );
-            }
+            //    );
+            //}
 
             CRV_Chofer.Visible = true;
 
             ReportChofer RImpre = new ReportChofer();
 
-            RImpre.SetDataSource(DS);
+            RImpre.SetDataSource(dt);
 
             CRV_Chofer.ReportSource = RImpre;
         }

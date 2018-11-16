@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -39,35 +41,26 @@ namespace Eval_Proveedores.IngChoferes
 
         private void TraerLista()
         {
-            DataTable dtChofer = CBOL.Lista();
-            DataTable dtProve = PBOL.Lista();
-            dtChofer.Columns.Add("NombProve", typeof(string));
-            dtChofer.Columns.Add("DescAplica", typeof(string));
-            foreach (DataRow fila in dtChofer.Rows)
+            DataTable dtChoferes = new DataTable(); ;
+            using (SqlConnection cnx = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString))
             {
-                foreach (DataRow filaPro in dtProve.Rows)
+                cnx.Open();
+                const string sqlQuery = "SELECT Codigo, Descripcion As Nombre, CargasPeligrosas = CASE WHEN c.AplicaIII = '1' THEN 'Si' ELSE 'No' END, p.Nombre As DescProveedor, " +
+                                        " FechaVtoI As FechaVtoLicConducir, FechaEntregaI As FechaEntLicConducir, LTRIM(RTRIM(ComentarioI)) ComentarioI," +
+                                        " FechaVtoII As FechaVtoArt, FechaEntregaII As FechaEntArt, LTRIM(RTRIM(ComentarioII)) ComentarioII," +
+                                        " FechaVtoIII As FechaVtoCargasPeligrosas, FechaEntregaIII As FechaEntCargasPeligrosas, LTRIM(RTRIM(ComentarioIII)) ComentarioIII," +
+                                        " c.Proveedor" +
+                                        " FROM chofer c LEFT OUTER JOIN Proveedor p ON p.Proveedor = c.Proveedor ORDER BY c.Codigo ASC";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, cnx))
                 {
-                    if (fila[19].ToString() == filaPro[0].ToString())
-                    {
-                        fila["NombProve"] = filaPro[1].ToString();
-                    }
-                }
+                    SqlDataReader dataReader = cmd.ExecuteReader();
 
-                if (fila[3].ToString() == "1")
-                {
-                    fila["DescAplica"] = "SI";
-                }
-                else
-                {
-                    fila["DescAplica"] = "NO";
-                }
+                    dtChoferes.Load(dataReader);
 
-                
-                
+                }
             }
 
-
-            DGV_Choferes.DataSource = dtChofer;
+            DGV_Choferes.DataSource = dtChoferes;
         }
 
         private void BTAgregarChofer_Click(object sender, EventArgs e)
@@ -86,31 +79,9 @@ namespace Eval_Proveedores.IngChoferes
                 if (DGV_Choferes.SelectedRows.Count > 1) throw new Exception("Se ha seleccionado mas de un chofer");
 
                 string Codigo = DGV_Choferes.SelectedRows[0].Cells[0].Value.ToString();
-                string Desc = DGV_Choferes.SelectedRows[0].Cells[1].Value.ToString();
-                string Aplica = DGV_Choferes.SelectedRows[0].Cells[2].Value.ToString();
-                string Proveedor = DGV_Choferes.SelectedRows[0].Cells[4].Value.ToString();
-                string NomProve = DGV_Choferes.SelectedRows[0].Cells[5].Value.ToString();
-                string CodEmp = DGV_Choferes.SelectedRows[0].Cells[6].Value.ToString();
-                string FechaVenc1 = DGV_Choferes.SelectedRows[0].Cells[7].Value.ToString();
-                string Coment1 = DGV_Choferes.SelectedRows[0].Cells[8].Value.ToString();
-                string FechaVenc2 = DGV_Choferes.SelectedRows[0].Cells[9].Value.ToString();
-                string Coment2 = DGV_Choferes.SelectedRows[0].Cells[10].Value.ToString();
-                string FechaVenc3 = DGV_Choferes.SelectedRows[0].Cells[11].Value.ToString();
-                string OrdFecVenc1 = DGV_Choferes.SelectedRows[0].Cells[12].Value.ToString();
-                string OrdFecVenc2 = DGV_Choferes.SelectedRows[0].Cells[13].Value.ToString();
-                string OrdFecVenc3 = DGV_Choferes.SelectedRows[0].Cells[14].Value.ToString();
-                string FechaEnt1 = DGV_Choferes.SelectedRows[0].Cells[15].Value.ToString();
-                string FechaEnt2 = DGV_Choferes.SelectedRows[0].Cells[16].Value.ToString();
-                string FechaEnt3 = DGV_Choferes.SelectedRows[0].Cells[17].Value.ToString();
-                string OrdFecEnt1 = DGV_Choferes.SelectedRows[0].Cells[18].Value.ToString();
-                string OrdFecEnt2 = DGV_Choferes.SelectedRows[0].Cells[19].Value.ToString();
-                string OrdFecEnt3 = DGV_Choferes.SelectedRows[0].Cells[20].Value.ToString();
-                string Coment3 = DGV_Choferes.SelectedRows[0].Cells[21].Value.ToString();
                 
-                
-                
-
-                AgModifChofer ModifChofer = new AgModifChofer(Codigo, Desc, Aplica, Proveedor, CodEmp, FechaVenc1, FechaVenc2, FechaVenc3, OrdFecVenc1, OrdFecVenc2, OrdFecVenc3, FechaEnt1, FechaEnt2, FechaEnt3, OrdFecEnt1, OrdFecEnt2, OrdFecEnt3, Coment1, Coment2, Coment3, NomProve);
+                AgModifChofer ModifChofer = new AgModifChofer(Codigo);
+                //AgModifChofer ModifChofer = new AgModifChofer(Codigo, Desc, Aplica, Proveedor, CodEmp, FechaVenc1, FechaVenc2, FechaVenc3, OrdFecVenc1, OrdFecVenc2, OrdFecVenc3, FechaEnt1, FechaEnt2, FechaEnt3, OrdFecEnt1, OrdFecEnt2, OrdFecEnt3, Coment1, Coment2, Coment3, NomProve);
                 ModifChofer.ShowDialog();
                 TraerLista();
                 P_Filtrado.Visible = false;
@@ -131,9 +102,11 @@ namespace Eval_Proveedores.IngChoferes
 
                 if (DGV_Choferes.SelectedRows.Count > 1) throw new Exception("Se ha seleccionado mas de un chofer");
 
-                CBOL.Eliminar(int.Parse(DGV_Choferes.SelectedRows[0].Cells[0].Value.ToString()));
+                if (MessageBox.Show("¿Está Seguro de querer eliminar el Chofer seleccionado?", "", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
 
-                MessageBox.Show("El chofer se elimino con exito", "Eliminacion chofer",
+                CBOL.Eliminar(int.Parse(DGV_Choferes.SelectedRows[0].Cells["Codigo"].Value.ToString()));
+
+                MessageBox.Show("El chofer se eliminó con exito", "Eliminacion chofer",
                 MessageBoxButtons.OK, MessageBoxIcon.None);
 
                 TraerLista();
@@ -152,16 +125,30 @@ namespace Eval_Proveedores.IngChoferes
                  if (DGV_Choferes.SelectedRows.Count == 0) throw new Exception("No se ha seleccionado ninguna linea");
 
                  DataTable dt = new DataTable();
-                 foreach (DataGridViewColumn column in DGV_Choferes.Columns)
-                     dt.Columns.Add(column.Name, typeof(string));
-                 for (int i = 0; i < DGV_Choferes.SelectedRows.Count; i++)
-                 {
-                     dt.Rows.Add();
-                     for (int j = 0; j < DGV_Choferes.Columns.Count; j++)
-                     {
-                         dt.Rows[i][j] = DGV_Choferes.SelectedRows[i].Cells[j].Value;
-                     }
-                 }
+                dt.Columns.Add("Codigo");
+                dt.Columns.Add("Descripcion");
+                dt.Columns.Add("Aplica");
+                dt.Columns.Add("Proveedor");
+                dt.Columns.Add("FechaVtoLic");
+                dt.Columns.Add("FechaVtoArt");
+                dt.Columns.Add("FechaVtoCargaPel");
+                dt.Columns.Add("NombProve");
+
+                foreach (DataGridViewRow row in DGV_Choferes.SelectedRows)
+                {
+                    DataRow r = dt.NewRow();
+
+                    r["Codigo"] = row.Cells["Codigo"].Value ?? "";
+                    r["Descripcion"] = row.Cells["DescChofer"].Value ?? "";
+                    r["Aplica"] = row.Cells["CargasPeligrosas"].Value ?? "";
+                    r["Proveedor"] = row.Cells["Proveedor"].Value ?? "";
+                    r["FechaVtoLic"] = row.Cells["FechaVtoLicConducir"].Value ?? "";
+                    r["FechaVtoArt"] = row.Cells["FechaVtoArt"].Value ?? "";
+                    r["FechaVtoCargaPel"] = row.Cells["FechaVtoCargasPeligrosas"].Value ?? "";
+                    r["NombProve"] = row.Cells["DescProveedor"].Value ?? "";
+
+                    dt.Rows.Add(r);
+                }
 
                  Maestros.IngChoferes.ImpreChofer Impresion = new Maestros.IngChoferes.ImpreChofer(dt);
                  Impresion.ShowDialog();
@@ -267,30 +254,10 @@ namespace Eval_Proveedores.IngChoferes
 
                 if (DGV_Choferes.SelectedRows.Count > 1) throw new Exception("Se ha seleccionado mas de un chofer");
 
-                string Codigo = DGV_Choferes.SelectedRows[0].Cells[0].Value.ToString();
-                string Desc = DGV_Choferes.SelectedRows[0].Cells[1].Value.ToString();
-                string Aplica = DGV_Choferes.SelectedRows[0].Cells[2].Value.ToString();
-                string Proveedor = DGV_Choferes.SelectedRows[0].Cells[4].Value.ToString();
-                string NomProve = DGV_Choferes.SelectedRows[0].Cells[5].Value.ToString();
-                string CodEmp = DGV_Choferes.SelectedRows[0].Cells[6].Value.ToString();
-                string FechaVenc1 = DGV_Choferes.SelectedRows[0].Cells[7].Value.ToString();
-                string Coment1 = DGV_Choferes.SelectedRows[0].Cells[8].Value.ToString();
-                string FechaVenc2 = DGV_Choferes.SelectedRows[0].Cells[9].Value.ToString();
-                string Coment2 = DGV_Choferes.SelectedRows[0].Cells[10].Value.ToString();
-                string FechaVenc3 = DGV_Choferes.SelectedRows[0].Cells[11].Value.ToString();
-                string OrdFecVenc1 = DGV_Choferes.SelectedRows[0].Cells[12].Value.ToString();
-                string OrdFecVenc2 = DGV_Choferes.SelectedRows[0].Cells[13].Value.ToString();
-                string OrdFecVenc3 = DGV_Choferes.SelectedRows[0].Cells[14].Value.ToString();
-                string FechaEnt1 = DGV_Choferes.SelectedRows[0].Cells[15].Value.ToString();
-                string FechaEnt2 = DGV_Choferes.SelectedRows[0].Cells[16].Value.ToString();
-                string FechaEnt3 = DGV_Choferes.SelectedRows[0].Cells[17].Value.ToString();
-                string OrdFecEnt1 = DGV_Choferes.SelectedRows[0].Cells[18].Value.ToString();
-                string OrdFecEnt2 = DGV_Choferes.SelectedRows[0].Cells[19].Value.ToString();
-                string OrdFecEnt3 = DGV_Choferes.SelectedRows[0].Cells[20].Value.ToString();
-                string Coment3 = DGV_Choferes.SelectedRows[0].Cells[21].Value.ToString();
+                string Codigo = DGV_Choferes.SelectedRows[0].Cells["Codigo"].Value.ToString();
                 
-
-                AgModifChofer ModifChofer = new AgModifChofer(Codigo, Desc, Aplica, Proveedor, CodEmp, FechaVenc1, FechaVenc2, FechaVenc3, OrdFecVenc1, OrdFecVenc2, OrdFecVenc3, FechaEnt1, FechaEnt2, FechaEnt3, OrdFecEnt1, OrdFecEnt2, OrdFecEnt3, Coment1, Coment2, Coment3, NomProve);
+                //AgModifChofer ModifChofer = new AgModifChofer(Codigo, Desc, Aplica, Proveedor, CodEmp, FechaVenc1, FechaVenc2, FechaVenc3, OrdFecVenc1, OrdFecVenc2, OrdFecVenc3, FechaEnt1, FechaEnt2, FechaEnt3, OrdFecEnt1, OrdFecEnt2, OrdFecEnt3, Coment1, Coment2, Coment3, NomProve);
+                AgModifChofer ModifChofer = new AgModifChofer(Codigo);
                 ModifChofer.ShowDialog();
                 TraerLista();
                 P_Filtrado.Visible = false;
@@ -333,6 +300,6 @@ namespace Eval_Proveedores.IngChoferes
             }
 	        
         }
-
+        
     }
 }
