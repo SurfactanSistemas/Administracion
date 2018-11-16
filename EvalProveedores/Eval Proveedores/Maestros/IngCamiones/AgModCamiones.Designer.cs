@@ -253,9 +253,9 @@
             this.label15.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(22, 383);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(51, 18);
+            this.label15.Size = new System.Drawing.Size(205, 18);
             this.label15.TabIndex = 48;
-            this.label15.Text = "Seguro";
+            this.label15.Text = "Seguro de Responsabilidad Civil";
             // 
             // label14
             // 
