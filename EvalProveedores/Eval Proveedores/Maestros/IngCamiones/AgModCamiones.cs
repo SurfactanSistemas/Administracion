@@ -112,7 +112,68 @@ namespace Eval_Proveedores.IngCamiones
             InitializeComponent();
         }
 
-        
+        public AgModCamiones(string codigo)
+        {
+            InitializeComponent();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM Camion WHERE Codigo = '" + codigo + "'";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            this.Codigo = dr["Codigo"] == null ? "" : dr["Codigo"].ToString();
+                            this.Desc = dr["Descripcion"] == null ? "" : dr["Descripcion"].ToString();
+                            this.Patent = dr["Patente"] == null ? "" : dr["Patente"].ToString();
+                            this.NomProve = "";
+                            this.NomChof = "";
+                            this.Estado = dr["Estado"] == null ? "0" : dr["Estado"].ToString();
+                            this.CodEmp = dr["CodigoEmpresa"] == null ? "" : dr["CodigoEmpresa"].ToString();
+                            this.Aplica = dr["AplicaV"] == null ? "" : dr["AplicaV"].ToString();
+                            this.CodChof = dr["Chofer"] == null ? "" : dr["Chofer"].ToString();
+                            this.CodProveedor = dr["Proveedor"] == null ? "" : dr["Proveedor"].ToString();
+                            this.FechaVenc1 = dr["FechaVtoI"] == null ? "" : dr["FechaVtoI"].ToString();
+                            this.FechaVenc2 = dr["FechaVtoII"] == null ? "" : dr["FechaVtoII"].ToString();
+                            this.FechaVenc3 = dr["FechaVtoIII"] == null ? "" : dr["FechaVtoIII"].ToString();
+                            this.FechaVenc4 = dr["FechaVtoIV"] == null ? "" : dr["FechaVtoIV"].ToString();
+                            this.FechaVenc5 = dr["FechaVtoV"] == null ? "" : dr["FechaVtoV"].ToString();
+                            this.OrdFecVenc1 = Helper.OrdenarFecha(FechaVenc1);
+                            this.OrdFecVenc2 = Helper.OrdenarFecha(FechaVenc2);
+                            this.OrdFecVenc3 = Helper.OrdenarFecha(FechaVenc3);
+                            this.OrdFecVenc4 = Helper.OrdenarFecha(FechaVenc4);
+                            this.OrdFecVenc5 = Helper.OrdenarFecha(FechaVenc5);
+                            this.FechaEnt1 = dr["FechaEntregaI"] == null ? "" : dr["FechaEntregaI"].ToString();
+                            this.FechaEnt2 = dr["FechaEntregaII"] == null ? "" : dr["FechaEntregaII"].ToString();
+                            this.FechaEnt3 = dr["FechaEntregaIII"] == null ? "" : dr["FechaEntregaIII"].ToString();
+                            this.FechaEnt4 = dr["FechaEntregaIV"] == null ? "" : dr["FechaEntregaIV"].ToString();
+                            this.FechaEnt5 = dr["FechaEntregaV"] == null ? "" : dr["FechaEntregaV"].ToString();
+                            this.OrdFecEnt1 = Helper.OrdenarFecha(FechaEnt1);
+                            this.OrdFecEnt2 = Helper.OrdenarFecha(FechaEnt2);
+                            this.OrdFecEnt3 = Helper.OrdenarFecha(FechaEnt3);
+                            this.OrdFecEnt4 = Helper.OrdenarFecha(FechaEnt4);
+                            this.OrdFecEnt5 = Helper.OrdenarFecha(FechaEnt5);
+                            this.Coment1 = dr["ComentarioI"] == null ? "" : dr["ComentarioI"].ToString();
+                            this.Coment2 = dr["ComentarioII"] == null ? "" : dr["ComentarioII"].ToString();
+                            this.Coment3 = dr["ComentarioIII"] == null ? "" : dr["ComentarioIII"].ToString();
+                            this.Coment4 = dr["ComentarioIV"] == null ? "" : dr["ComentarioIV"].ToString();
+                            this.Coment5 = dr["ComentarioV"] == null ? "" : dr["ComentarioV"].ToString();
+                            this.Titulo = dr["Titulo"] == null ? "" : dr["Titulo"].ToString();
+                        }
+                    }
+                }
+
+            }
+        }
 
         private void AgModCamiones_Load(object sender, EventArgs e)
         {

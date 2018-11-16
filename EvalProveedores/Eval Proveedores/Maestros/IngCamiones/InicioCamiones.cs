@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -102,52 +104,10 @@ namespace Eval_Proveedores.IngCamiones
 
                 if (DGV_Camiones.SelectedRows.Count > 1) throw new Exception("Se ha seleccionado mas de un Camión");
 
-                string Codigo = DGV_Camiones.SelectedRows[0].Cells[0].Value.ToString();
-                string Desc = DGV_Camiones.SelectedRows[0].Cells[1].Value.ToString();
-                string Patent = DGV_Camiones.SelectedRows[0].Cells[2].Value.ToString();
-                string NomProve = DGV_Camiones.SelectedRows[0].Cells[4].Value.ToString();
-                string NomChof = DGV_Camiones.SelectedRows[0].Cells[5].Value.ToString();
-                string Estado = DGV_Camiones.SelectedRows[0].Cells[6].Value.ToString();
-                string CodEmp = DGV_Camiones.SelectedRows[0].Cells[7].Value.ToString();
-                string Aplica = DGV_Camiones.SelectedRows[0].Cells[8].Value.ToString();
-                string CodChof = DGV_Camiones.SelectedRows[0].Cells[9].Value.ToString();
-                string CodProveedor = DGV_Camiones.SelectedRows[0].Cells[10].Value.ToString();
-                string FechaVenc1 = DGV_Camiones.SelectedRows[0].Cells[11].Value.ToString();
-                string Coment1 = DGV_Camiones.SelectedRows[0].Cells[12].Value.ToString();
-                string FechaVenc2 = DGV_Camiones.SelectedRows[0].Cells[13].Value.ToString();
-                string Coment2 = DGV_Camiones.SelectedRows[0].Cells[14].Value.ToString();
+                string _Codigo = DGV_Camiones.SelectedRows[0].Cells[0].Value.ToString();
 
-                string FechaVenc3 = DGV_Camiones.SelectedRows[0].Cells[15].Value.ToString();
-                string Coment3 = DGV_Camiones.SelectedRows[0].Cells[16].Value.ToString();
-                string FechaVenc4 = DGV_Camiones.SelectedRows[0].Cells[17].Value.ToString();
-                string Coment4 = DGV_Camiones.SelectedRows[0].Cells[18].Value.ToString();
-
-                string FechaVenc5 = DGV_Camiones.SelectedRows[0].Cells[19].Value.ToString();
-                string Coment5 = DGV_Camiones.SelectedRows[0].Cells[20].Value.ToString();
-
-                string OrdFecVenc1 = DGV_Camiones.SelectedRows[0].Cells[21].Value.ToString();
-                string OrdFecVenc2 = DGV_Camiones.SelectedRows[0].Cells[22].Value.ToString();
-                string OrdFecVenc3 = DGV_Camiones.SelectedRows[0].Cells[23].Value.ToString();
-                string OrdFecVenc4 = DGV_Camiones.SelectedRows[0].Cells[24].Value.ToString();
-                string OrdFecVenc5 = DGV_Camiones.SelectedRows[0].Cells[25].Value.ToString();
-                string FechaEnt1 = DGV_Camiones.SelectedRows[0].Cells[26].Value.ToString();
-                string FechaEnt2 = DGV_Camiones.SelectedRows[0].Cells[27].Value.ToString();
-                string FechaEnt3 = DGV_Camiones.SelectedRows[0].Cells[28].Value.ToString();
-                string FechaEnt4 = DGV_Camiones.SelectedRows[0].Cells[29].Value.ToString();
-                string FechaEnt5 = DGV_Camiones.SelectedRows[0].Cells[30].Value.ToString();
-                string OrdFecEnt1 = DGV_Camiones.SelectedRows[0].Cells[31].Value.ToString();
-                string OrdFecEnt2 = DGV_Camiones.SelectedRows[0].Cells[32].Value.ToString();
-                string OrdFecEnt3 = DGV_Camiones.SelectedRows[0].Cells[33].Value.ToString();
-                string OrdFecEnt4 = DGV_Camiones.SelectedRows[0].Cells[34].Value.ToString();
-                string OrdFecEnt5 = DGV_Camiones.SelectedRows[0].Cells[35].Value.ToString();
-                
-                
-                
-                
-                
-                string Titulo = DGV_Camiones.SelectedRows[0].Cells[36].Value.ToString();
-
-                AgModCamiones ModifCamion = new AgModCamiones(Codigo, Desc, Patent, NomProve, NomChof, Estado, CodEmp, Aplica, CodChof, CodProveedor, FechaVenc1, FechaVenc2, FechaVenc3, FechaVenc4, FechaVenc5, OrdFecVenc1, OrdFecVenc2, OrdFecVenc3, OrdFecVenc4, OrdFecVenc5, FechaEnt1, FechaEnt2, FechaEnt3, FechaEnt4, FechaEnt5, OrdFecEnt1, OrdFecEnt2, OrdFecEnt3, OrdFecEnt4, OrdFecEnt5, Coment1, Coment2, Coment3, Coment4, Coment5, Titulo);
+                //AgModCamiones ModifCamion = new AgModCamiones(Codigo, Desc, Patent, NomProve, NomChof, Estado, CodEmp, Aplica, CodChof, CodProveedor, FechaVenc1, FechaVenc2, FechaVenc3, FechaVenc4, FechaVenc5, OrdFecVenc1, OrdFecVenc2, OrdFecVenc3, OrdFecVenc4, OrdFecVenc5, FechaEnt1, FechaEnt2, FechaEnt3, FechaEnt4, FechaEnt5, OrdFecEnt1, OrdFecEnt2, OrdFecEnt3, OrdFecEnt4, OrdFecEnt5, Coment1, Coment2, Coment3, Coment4, Coment5, Titulo);
+                AgModCamiones ModifCamion = new AgModCamiones(_Codigo);
                 ModifCamion.ShowDialog();
                 TraerLista();
                 P_Filtrado.Visible = false;
@@ -171,8 +131,11 @@ namespace Eval_Proveedores.IngCamiones
 
                 if (DGV_Camiones.SelectedRows.Count > 1) throw new Exception("Se ha seleccionado mas de un Camión");
 
+                if (
+                    MessageBox.Show("¿Está seguro de querer eliminar el camión seleccionado?", "",
+                        MessageBoxButtons.YesNo) != DialogResult.Yes) return;
 
-                CABOL.Eliminar(int.Parse(DGV_Camiones.SelectedRows[0].Cells[0].Value.ToString()));
+                CABOL.Eliminar(int.Parse(DGV_Camiones.SelectedRows[0].Cells["Codigo"].Value.ToString()));
 
                 MessageBox.Show("El camión se eliminó con éxito", "Eliminación camión",
                 MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -191,16 +154,68 @@ namespace Eval_Proveedores.IngCamiones
             try
             {
                 if (DGV_Camiones.SelectedRows.Count == 0) throw new Exception("No se ha seleccionado ninguna linea");
+
                 DataTable dt = new DataTable();
-                foreach (DataGridViewColumn column in DGV_Camiones.Columns)
-                    dt.Columns.Add(column.Name, typeof(string));
-                for (int i = 0; i < DGV_Camiones.SelectedRows.Count; i++)
+
+                dt.Columns.Add("Codigo");
+                dt.Columns.Add("Desc");
+                dt.Columns.Add("Patente");
+                dt.Columns.Add("Estado");
+                dt.Columns.Add("Nomb Prove");
+                dt.Columns.Add("Nomb Chofer");
+                dt.Columns.Add("Vto Ruta");
+                dt.Columns.Add("Vto RTO");
+                dt.Columns.Add("Vto Hab Dom");
+                dt.Columns.Add("Vto Seguro");
+                dt.Columns.Add("Vto. Cert. Carg. Pel");
+
+                foreach (DataGridViewRow row in DGV_Camiones.SelectedRows)
                 {
-                    dt.Rows.Add();
-                    for (int j = 0; j < DGV_Camiones.Columns.Count; j++)
+                    using (SqlConnection conn = new SqlConnection())
                     {
-                        dt.Rows[i][j] = DGV_Camiones.SelectedRows[i].Cells[j].Value;
+                        conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                        conn.Open();
+
+                        using (SqlCommand cmd = new SqlCommand())
+                        {
+                            var WCodigo = row.Cells["Codigo"].Value ?? "";
+
+                            if (WCodigo.ToString() == "") continue;
+
+                            cmd.Connection = conn;
+                            cmd.CommandText = "SELECT Ca.*, P.Nombre As DescProveedor, Ch.Descripcion As DescChofer FROM Camion Ca LEFT OUTER JOIN Proveedor P ON P.Proveedor = Ca.Proveedor LEFT OUTER JOIN Chofer Ch ON Ch.Codigo = Ca.Chofer WHERE Ca.Codigo = '" + WCodigo + "'";
+
+                            using (SqlDataReader dr = cmd.ExecuteReader())
+                            {
+                                if (dr.HasRows)
+                                {
+                                    dr.Read();
+
+                                    DataRow r = dt.NewRow();
+
+                                    r["Codigo"] = dr["Codigo"] == null ? "" : dr["Codigo"].ToString();
+                                    r["Desc"] = dr["Descripcion"] == null ? "" : dr["Descripcion"].ToString();
+                                    r["Patente"] = dr["Patente"] == null ? "" : dr["Patente"].ToString();
+                                    r["Estado"] = dr["Estado"] == null ? "0" : dr["Estado"].ToString();
+                                    r["Nomb Prove"] = dr["DescProveedor"] == null ? "" : dr["DescProveedor"].ToString();
+                                    r["Nomb Chofer"] = dr["DescChofer"] == null ? "" : dr["DescChofer"].ToString();
+                                    r["Vto Ruta"] = dr["FechaVtoI"] == null ? "" : dr["FechaVtoI"].ToString();
+                                    r["Vto RTO"] = dr["FechaVtoII"] == null ? "" : dr["FechaVtoII"].ToString();
+                                    r["Vto Hab Dom"] = dr["FechaVtoIII"] == null ? "" : dr["FechaVtoIII"].ToString();
+                                    r["Vto Seguro"] = dr["FechaVtoIV"] == null ? "" : dr["FechaVtoIV"].ToString();
+                                    r["Vto. Cert. Carg. Pel"] = dr["FechaVtoV"] == null ? "" : dr["FechaVtoV"].ToString();
+
+                                    dt.Rows.Add(r);
+                                }
+                            }
+                        }
+
                     }
+                }
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    row["Estado"] = int.Parse(row["Estado"].ToString()) == 0 ? "Habilitado" : "Inhabilitado";
                 }
 
                 Maestros.IngCamiones.ImpreCamion Impresion = new Maestros.IngCamiones.ImpreCamion(dt);
@@ -304,58 +319,13 @@ namespace Eval_Proveedores.IngCamiones
 
                 if (DGV_Camiones.SelectedRows.Count > 1) throw new Exception("Se ha seleccionado mas de un Camión");
 
-                string Codigo = DGV_Camiones.SelectedRows[0].Cells[0].Value.ToString();
-                string Desc = DGV_Camiones.SelectedRows[0].Cells[1].Value.ToString();
-                string Patent = DGV_Camiones.SelectedRows[0].Cells[2].Value.ToString();
-                string NomProve = DGV_Camiones.SelectedRows[0].Cells[4].Value.ToString();
-                string NomChof = DGV_Camiones.SelectedRows[0].Cells[5].Value.ToString();
-                string Estado = DGV_Camiones.SelectedRows[0].Cells[6].Value.ToString();
-                string CodEmp = DGV_Camiones.SelectedRows[0].Cells[7].Value.ToString();
-                string Aplica = DGV_Camiones.SelectedRows[0].Cells[8].Value.ToString();
-                string CodChof = DGV_Camiones.SelectedRows[0].Cells[9].Value.ToString();
-                string CodProveedor = DGV_Camiones.SelectedRows[0].Cells[10].Value.ToString();
-                string FechaVenc1 = DGV_Camiones.SelectedRows[0].Cells[11].Value.ToString();
-                string Coment1 = DGV_Camiones.SelectedRows[0].Cells[12].Value.ToString();
-                string FechaVenc2 = DGV_Camiones.SelectedRows[0].Cells[13].Value.ToString();
-                string Coment2 = DGV_Camiones.SelectedRows[0].Cells[14].Value.ToString();
-
-                string FechaVenc3 = DGV_Camiones.SelectedRows[0].Cells[15].Value.ToString();
-                string Coment3 = DGV_Camiones.SelectedRows[0].Cells[16].Value.ToString();
-                string FechaVenc4 = DGV_Camiones.SelectedRows[0].Cells[17].Value.ToString();
-                string Coment4 = DGV_Camiones.SelectedRows[0].Cells[18].Value.ToString();
-
-                string FechaVenc5 = DGV_Camiones.SelectedRows[0].Cells[19].Value.ToString();
-                string Coment5 = DGV_Camiones.SelectedRows[0].Cells[20].Value.ToString();
-
-                string OrdFecVenc1 = DGV_Camiones.SelectedRows[0].Cells[21].Value.ToString();
-                string OrdFecVenc2 = DGV_Camiones.SelectedRows[0].Cells[22].Value.ToString();
-                string OrdFecVenc3 = DGV_Camiones.SelectedRows[0].Cells[23].Value.ToString();
-                string OrdFecVenc4 = DGV_Camiones.SelectedRows[0].Cells[24].Value.ToString();
-                string OrdFecVenc5 = DGV_Camiones.SelectedRows[0].Cells[25].Value.ToString();
-                string FechaEnt1 = DGV_Camiones.SelectedRows[0].Cells[26].Value.ToString();
-                string FechaEnt2 = DGV_Camiones.SelectedRows[0].Cells[27].Value.ToString();
-                string FechaEnt3 = DGV_Camiones.SelectedRows[0].Cells[28].Value.ToString();
-                string FechaEnt4 = DGV_Camiones.SelectedRows[0].Cells[29].Value.ToString();
-                string FechaEnt5 = DGV_Camiones.SelectedRows[0].Cells[30].Value.ToString();
-                string OrdFecEnt1 = DGV_Camiones.SelectedRows[0].Cells[31].Value.ToString();
-                string OrdFecEnt2 = DGV_Camiones.SelectedRows[0].Cells[32].Value.ToString();
-                string OrdFecEnt3 = DGV_Camiones.SelectedRows[0].Cells[33].Value.ToString();
-                string OrdFecEnt4 = DGV_Camiones.SelectedRows[0].Cells[34].Value.ToString();
-                string OrdFecEnt5 = DGV_Camiones.SelectedRows[0].Cells[35].Value.ToString();
-
-
-
-
-
-                string Titulo = DGV_Camiones.SelectedRows[0].Cells[36].Value.ToString();
-
-                AgModCamiones ModifCamion = new AgModCamiones(Codigo, Desc, Patent, NomProve, NomChof, Estado, CodEmp, Aplica, CodChof, CodProveedor, FechaVenc1, FechaVenc2, FechaVenc3, FechaVenc4, FechaVenc5, OrdFecVenc1, OrdFecVenc2, OrdFecVenc3, OrdFecVenc4, OrdFecVenc5, FechaEnt1, FechaEnt2, FechaEnt3, FechaEnt4, FechaEnt5, OrdFecEnt1, OrdFecEnt2, OrdFecEnt3, OrdFecEnt4, OrdFecEnt5, Coment1, Coment2, Coment3, Coment4, Coment5, Titulo);
+                string _Codigo = DGV_Camiones.SelectedRows[0].Cells[0].Value.ToString();
+                
+                //AgModCamiones ModifCamion = new AgModCamiones(Codigo, Desc, Patent, NomProve, NomChof, Estado, CodEmp, Aplica, CodChof, CodProveedor, FechaVenc1, FechaVenc2, FechaVenc3, FechaVenc4, FechaVenc5, OrdFecVenc1, OrdFecVenc2, OrdFecVenc3, OrdFecVenc4, OrdFecVenc5, FechaEnt1, FechaEnt2, FechaEnt3, FechaEnt4, FechaEnt5, OrdFecEnt1, OrdFecEnt2, OrdFecEnt3, OrdFecEnt4, OrdFecEnt5, Coment1, Coment2, Coment3, Coment4, Coment5, Titulo);
+                AgModCamiones ModifCamion = new AgModCamiones(_Codigo);
                 ModifCamion.ShowDialog();
                 TraerLista();
                 P_Filtrado.Visible = false;
-
-
-
 
             }
             catch (Exception err)

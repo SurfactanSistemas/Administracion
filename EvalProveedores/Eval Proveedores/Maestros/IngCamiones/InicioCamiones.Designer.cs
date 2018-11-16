@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InicioCamiones));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,7 +40,9 @@
             this.BT_Filtrar = new System.Windows.Forms.Button();
             this.TBFiltro = new System.Windows.Forms.TextBox();
             this.LBFiltro = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.BT_MenuFiltros = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.DGV_Camiones = new System.Windows.Forms.DataGridView();
             this.camionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -55,8 +57,6 @@
             this.patenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Patente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,25 +69,25 @@
             this.Chofer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaVto1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEnt1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comentario1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaVto2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEnt2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comentario2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaVto3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comentario3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEnt3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaVto4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEnt4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comentario4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaVto5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEnt5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comentario5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrdFechaVto1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrdFechaVto2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrdFechaVto3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrdFechaVto4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrdFechaVto5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEnt1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEnt2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEnt3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEnt4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEnt5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrdFechaEnt1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrdFechaEnt2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrdFechaEnt3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -192,6 +192,15 @@
             this.LBFiltro.TabIndex = 0;
             this.LBFiltro.Text = "label3";
             // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(170, 16);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(71, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
+            // 
             // BT_MenuFiltros
             // 
             this.BT_MenuFiltros.Location = new System.Drawing.Point(278, 14);
@@ -201,6 +210,17 @@
             this.BT_MenuFiltros.Text = "Filtrar Por";
             this.BT_MenuFiltros.UseVisualStyleBackColor = true;
             this.BT_MenuFiltros.Click += new System.EventHandler(this.BT_MenuFiltros_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(118, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 18);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Código";
             // 
             // DGV_Camiones
             // 
@@ -222,25 +242,25 @@
             this.Chofer,
             this.Proveedor,
             this.FechaVto1,
+            this.FechaEnt1,
             this.Comentario1,
             this.FechaVto2,
+            this.FechaEnt2,
             this.Comentario2,
             this.FechaVto3,
             this.Comentario3,
+            this.FechaEnt3,
             this.FechaVto4,
+            this.FechaEnt4,
             this.Comentario4,
             this.FechaVto5,
+            this.FechaEnt5,
             this.Comentario5,
             this.OrdFechaVto1,
             this.OrdFechaVto2,
             this.OrdFechaVto3,
             this.OrdFechaVto4,
             this.OrdFechaVto5,
-            this.FechaEnt1,
-            this.FechaEnt2,
-            this.FechaEnt3,
-            this.FechaEnt4,
-            this.FechaEnt5,
             this.OrdFechaEnt1,
             this.OrdFechaEnt2,
             this.OrdFechaEnt3,
@@ -252,15 +272,15 @@
             this.DGV_Camiones.Location = new System.Drawing.Point(87, 0);
             this.DGV_Camiones.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Camiones.Name = "DGV_Camiones";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Camiones.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Camiones.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Camiones.RowHeadersWidth = 15;
             this.DGV_Camiones.Size = new System.Drawing.Size(757, 365);
             this.DGV_Camiones.TabIndex = 4;
@@ -400,31 +420,11 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(844, 365);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(118, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 18);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Código";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(170, 16);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(71, 20);
-            this.txtCodigo.TabIndex = 1;
-            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodigo_KeyDown);
-            // 
             // Codigo
             // 
             this.Codigo.DataPropertyName = "Codigo";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Codigo.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Codigo.DefaultCellStyle = dataGridViewCellStyle1;
             this.Codigo.HeaderText = "Codigo";
             this.Codigo.Name = "Codigo";
             this.Codigo.Width = 50;
@@ -504,6 +504,12 @@
             this.FechaVto1.HeaderText = "Vto Ruta";
             this.FechaVto1.Name = "FechaVto1";
             // 
+            // FechaEnt1
+            // 
+            this.FechaEnt1.DataPropertyName = "FechaEntregaI";
+            this.FechaEnt1.HeaderText = "F.Ent. Ruta";
+            this.FechaEnt1.Name = "FechaEnt1";
+            // 
             // Comentario1
             // 
             this.Comentario1.DataPropertyName = "ComentarioI";
@@ -515,6 +521,12 @@
             this.FechaVto2.DataPropertyName = "FechaVtoII";
             this.FechaVto2.HeaderText = "Vto Rev Tec";
             this.FechaVto2.Name = "FechaVto2";
+            // 
+            // FechaEnt2
+            // 
+            this.FechaEnt2.DataPropertyName = "FechaEntregaII";
+            this.FechaEnt2.HeaderText = "F.Ent. Rev Tec";
+            this.FechaEnt2.Name = "FechaEnt2";
             // 
             // Comentario2
             // 
@@ -534,11 +546,23 @@
             this.Comentario3.HeaderText = "Observ Hab Dom";
             this.Comentario3.Name = "Comentario3";
             // 
+            // FechaEnt3
+            // 
+            this.FechaEnt3.DataPropertyName = "FechaEntregaIII";
+            this.FechaEnt3.HeaderText = "F.Ent. Hab Dom";
+            this.FechaEnt3.Name = "FechaEnt3";
+            // 
             // FechaVto4
             // 
             this.FechaVto4.DataPropertyName = "FechaVtoIV";
             this.FechaVto4.HeaderText = "Vto Seguro";
             this.FechaVto4.Name = "FechaVto4";
+            // 
+            // FechaEnt4
+            // 
+            this.FechaEnt4.DataPropertyName = "FechaEntregaIV";
+            this.FechaEnt4.HeaderText = "F.Ent. Seguro";
+            this.FechaEnt4.Name = "FechaEnt4";
             // 
             // Comentario4
             // 
@@ -551,6 +575,12 @@
             this.FechaVto5.DataPropertyName = "FechaVtoV";
             this.FechaVto5.HeaderText = "Vto Cert Carg Pel";
             this.FechaVto5.Name = "FechaVto5";
+            // 
+            // FechaEnt5
+            // 
+            this.FechaEnt5.DataPropertyName = "FechaEntregaV";
+            this.FechaEnt5.HeaderText = "F.Ent. Carg. Pelig.";
+            this.FechaEnt5.Name = "FechaEnt5";
             // 
             // Comentario5
             // 
@@ -592,41 +622,6 @@
             this.OrdFechaVto5.HeaderText = "OrdFechaVto5";
             this.OrdFechaVto5.Name = "OrdFechaVto5";
             this.OrdFechaVto5.Visible = false;
-            // 
-            // FechaEnt1
-            // 
-            this.FechaEnt1.DataPropertyName = "FechaEntregaI";
-            this.FechaEnt1.HeaderText = "FechaEnt1";
-            this.FechaEnt1.Name = "FechaEnt1";
-            this.FechaEnt1.Visible = false;
-            // 
-            // FechaEnt2
-            // 
-            this.FechaEnt2.DataPropertyName = "FechaEntregaII";
-            this.FechaEnt2.HeaderText = "FechaEnt2";
-            this.FechaEnt2.Name = "FechaEnt2";
-            this.FechaEnt2.Visible = false;
-            // 
-            // FechaEnt3
-            // 
-            this.FechaEnt3.DataPropertyName = "FechaEntregaIII";
-            this.FechaEnt3.HeaderText = "FechaEnt3";
-            this.FechaEnt3.Name = "FechaEnt3";
-            this.FechaEnt3.Visible = false;
-            // 
-            // FechaEnt4
-            // 
-            this.FechaEnt4.DataPropertyName = "FechaEntregaIV";
-            this.FechaEnt4.HeaderText = "FechaEnt4";
-            this.FechaEnt4.Name = "FechaEnt4";
-            this.FechaEnt4.Visible = false;
-            // 
-            // FechaEnt5
-            // 
-            this.FechaEnt5.DataPropertyName = "FechaEntregaV";
-            this.FechaEnt5.HeaderText = "FechaEnt5";
-            this.FechaEnt5.Name = "FechaEnt5";
-            this.FechaEnt5.Visible = false;
             // 
             // OrdFechaEnt1
             // 
@@ -736,25 +731,25 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Chofer;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comentario1;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comentario2;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comentario3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt3;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comentario4;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comentario5;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaVto1;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaVto2;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaVto3;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaVto4;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaVto5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnt5;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaEnt1;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaEnt2;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaEnt3;
