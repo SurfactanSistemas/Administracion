@@ -164,18 +164,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosIII = New System.Windows.Forms.TextBox()
         Me.txtComentariosII = New System.Windows.Forms.TextBox()
         Me.txtComentariosI = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosXII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosXI = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosX = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosIX = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosVIII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosVII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosVI = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosV = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosIV = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosIII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosI = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -209,6 +197,18 @@ Partial Class IngresoPruebasEnsayo
         Me.lstConsulta = New System.Windows.Forms.ListBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtRequisitosI = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosIII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosIV = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosV = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosXII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosVII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosVIII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosIX = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosX = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosXI = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosVI = New System.Windows.Forms.TextBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -1375,7 +1375,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosXII
         '
         Me.txtComentariosXII.Location = New System.Drawing.Point(591, 346)
-        Me.txtComentariosXII.MaxLength = 50
+        Me.txtComentariosXII.MaxLength = 60
         Me.txtComentariosXII.Name = "txtComentariosXII"
         Me.txtComentariosXII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosXII.TabIndex = 3
@@ -1383,7 +1383,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosXI
         '
         Me.txtComentariosXI.Location = New System.Drawing.Point(591, 319)
-        Me.txtComentariosXI.MaxLength = 50
+        Me.txtComentariosXI.MaxLength = 60
         Me.txtComentariosXI.Name = "txtComentariosXI"
         Me.txtComentariosXI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosXI.TabIndex = 3
@@ -1391,7 +1391,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosX
         '
         Me.txtComentariosX.Location = New System.Drawing.Point(591, 292)
-        Me.txtComentariosX.MaxLength = 50
+        Me.txtComentariosX.MaxLength = 60
         Me.txtComentariosX.Name = "txtComentariosX"
         Me.txtComentariosX.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosX.TabIndex = 3
@@ -1399,7 +1399,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosIX
         '
         Me.txtComentariosIX.Location = New System.Drawing.Point(591, 265)
-        Me.txtComentariosIX.MaxLength = 50
+        Me.txtComentariosIX.MaxLength = 60
         Me.txtComentariosIX.Name = "txtComentariosIX"
         Me.txtComentariosIX.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosIX.TabIndex = 3
@@ -1407,7 +1407,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosVIII
         '
         Me.txtComentariosVIII.Location = New System.Drawing.Point(591, 238)
-        Me.txtComentariosVIII.MaxLength = 50
+        Me.txtComentariosVIII.MaxLength = 60
         Me.txtComentariosVIII.Name = "txtComentariosVIII"
         Me.txtComentariosVIII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosVIII.TabIndex = 3
@@ -1415,7 +1415,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosVII
         '
         Me.txtComentariosVII.Location = New System.Drawing.Point(591, 211)
-        Me.txtComentariosVII.MaxLength = 50
+        Me.txtComentariosVII.MaxLength = 60
         Me.txtComentariosVII.Name = "txtComentariosVII"
         Me.txtComentariosVII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosVII.TabIndex = 3
@@ -1423,7 +1423,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosVI
         '
         Me.txtComentariosVI.Location = New System.Drawing.Point(591, 184)
-        Me.txtComentariosVI.MaxLength = 50
+        Me.txtComentariosVI.MaxLength = 60
         Me.txtComentariosVI.Name = "txtComentariosVI"
         Me.txtComentariosVI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosVI.TabIndex = 3
@@ -1431,7 +1431,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosV
         '
         Me.txtComentariosV.Location = New System.Drawing.Point(591, 157)
-        Me.txtComentariosV.MaxLength = 50
+        Me.txtComentariosV.MaxLength = 60
         Me.txtComentariosV.Name = "txtComentariosV"
         Me.txtComentariosV.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosV.TabIndex = 3
@@ -1439,7 +1439,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosIV
         '
         Me.txtComentariosIV.Location = New System.Drawing.Point(591, 130)
-        Me.txtComentariosIV.MaxLength = 50
+        Me.txtComentariosIV.MaxLength = 60
         Me.txtComentariosIV.Name = "txtComentariosIV"
         Me.txtComentariosIV.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosIV.TabIndex = 3
@@ -1447,7 +1447,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosIII
         '
         Me.txtComentariosIII.Location = New System.Drawing.Point(591, 103)
-        Me.txtComentariosIII.MaxLength = 50
+        Me.txtComentariosIII.MaxLength = 60
         Me.txtComentariosIII.Name = "txtComentariosIII"
         Me.txtComentariosIII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosIII.TabIndex = 3
@@ -1455,7 +1455,7 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosII
         '
         Me.txtComentariosII.Location = New System.Drawing.Point(591, 76)
-        Me.txtComentariosII.MaxLength = 50
+        Me.txtComentariosII.MaxLength = 60
         Me.txtComentariosII.Name = "txtComentariosII"
         Me.txtComentariosII.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosII.TabIndex = 3
@@ -1463,106 +1463,10 @@ Partial Class IngresoPruebasEnsayo
         'txtComentariosI
         '
         Me.txtComentariosI.Location = New System.Drawing.Point(591, 49)
-        Me.txtComentariosI.MaxLength = 50
+        Me.txtComentariosI.MaxLength = 60
         Me.txtComentariosI.Name = "txtComentariosI"
         Me.txtComentariosI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosI.TabIndex = 3
-        '
-        'txtRequisitosXII
-        '
-        Me.txtRequisitosXII.Location = New System.Drawing.Point(52, 346)
-        Me.txtRequisitosXII.MaxLength = 50
-        Me.txtRequisitosXII.Name = "txtRequisitosXII"
-        Me.txtRequisitosXII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosXII.TabIndex = 3
-        '
-        'txtRequisitosXI
-        '
-        Me.txtRequisitosXI.Location = New System.Drawing.Point(52, 319)
-        Me.txtRequisitosXI.MaxLength = 50
-        Me.txtRequisitosXI.Name = "txtRequisitosXI"
-        Me.txtRequisitosXI.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosXI.TabIndex = 3
-        '
-        'txtRequisitosX
-        '
-        Me.txtRequisitosX.Location = New System.Drawing.Point(52, 292)
-        Me.txtRequisitosX.MaxLength = 50
-        Me.txtRequisitosX.Name = "txtRequisitosX"
-        Me.txtRequisitosX.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosX.TabIndex = 3
-        '
-        'txtRequisitosIX
-        '
-        Me.txtRequisitosIX.Location = New System.Drawing.Point(52, 265)
-        Me.txtRequisitosIX.MaxLength = 50
-        Me.txtRequisitosIX.Name = "txtRequisitosIX"
-        Me.txtRequisitosIX.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosIX.TabIndex = 3
-        '
-        'txtRequisitosVIII
-        '
-        Me.txtRequisitosVIII.Location = New System.Drawing.Point(52, 238)
-        Me.txtRequisitosVIII.MaxLength = 50
-        Me.txtRequisitosVIII.Name = "txtRequisitosVIII"
-        Me.txtRequisitosVIII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosVIII.TabIndex = 3
-        '
-        'txtRequisitosVII
-        '
-        Me.txtRequisitosVII.Location = New System.Drawing.Point(52, 211)
-        Me.txtRequisitosVII.MaxLength = 50
-        Me.txtRequisitosVII.Name = "txtRequisitosVII"
-        Me.txtRequisitosVII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosVII.TabIndex = 3
-        '
-        'txtRequisitosVI
-        '
-        Me.txtRequisitosVI.Location = New System.Drawing.Point(52, 184)
-        Me.txtRequisitosVI.MaxLength = 50
-        Me.txtRequisitosVI.Name = "txtRequisitosVI"
-        Me.txtRequisitosVI.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosVI.TabIndex = 3
-        '
-        'txtRequisitosV
-        '
-        Me.txtRequisitosV.Location = New System.Drawing.Point(52, 157)
-        Me.txtRequisitosV.MaxLength = 50
-        Me.txtRequisitosV.Name = "txtRequisitosV"
-        Me.txtRequisitosV.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosV.TabIndex = 3
-        '
-        'txtRequisitosIV
-        '
-        Me.txtRequisitosIV.Location = New System.Drawing.Point(52, 130)
-        Me.txtRequisitosIV.MaxLength = 50
-        Me.txtRequisitosIV.Name = "txtRequisitosIV"
-        Me.txtRequisitosIV.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosIV.TabIndex = 3
-        '
-        'txtRequisitosIII
-        '
-        Me.txtRequisitosIII.Location = New System.Drawing.Point(52, 103)
-        Me.txtRequisitosIII.MaxLength = 50
-        Me.txtRequisitosIII.Name = "txtRequisitosIII"
-        Me.txtRequisitosIII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosIII.TabIndex = 3
-        '
-        'txtRequisitosII
-        '
-        Me.txtRequisitosII.Location = New System.Drawing.Point(52, 76)
-        Me.txtRequisitosII.MaxLength = 50
-        Me.txtRequisitosII.Name = "txtRequisitosII"
-        Me.txtRequisitosII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosII.TabIndex = 3
-        '
-        'txtRequisitosI
-        '
-        Me.txtRequisitosI.Location = New System.Drawing.Point(52, 49)
-        Me.txtRequisitosI.MaxLength = 50
-        Me.txtRequisitosI.Name = "txtRequisitosI"
-        Me.txtRequisitosI.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosI.TabIndex = 3
         '
         'Label20
         '
@@ -1894,6 +1798,102 @@ Partial Class IngresoPruebasEnsayo
         Me.txtAyuda.Size = New System.Drawing.Size(647, 20)
         Me.txtAyuda.TabIndex = 0
         '
+        'txtRequisitosI
+        '
+        Me.txtRequisitosI.Location = New System.Drawing.Point(52, 49)
+        Me.txtRequisitosI.MaxLength = 60
+        Me.txtRequisitosI.Name = "txtRequisitosI"
+        Me.txtRequisitosI.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosI.TabIndex = 3
+        '
+        'txtRequisitosII
+        '
+        Me.txtRequisitosII.Location = New System.Drawing.Point(52, 76)
+        Me.txtRequisitosII.MaxLength = 60
+        Me.txtRequisitosII.Name = "txtRequisitosII"
+        Me.txtRequisitosII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosII.TabIndex = 3
+        '
+        'txtRequisitosIII
+        '
+        Me.txtRequisitosIII.Location = New System.Drawing.Point(52, 103)
+        Me.txtRequisitosIII.MaxLength = 60
+        Me.txtRequisitosIII.Name = "txtRequisitosIII"
+        Me.txtRequisitosIII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosIII.TabIndex = 3
+        '
+        'txtRequisitosIV
+        '
+        Me.txtRequisitosIV.Location = New System.Drawing.Point(52, 130)
+        Me.txtRequisitosIV.MaxLength = 60
+        Me.txtRequisitosIV.Name = "txtRequisitosIV"
+        Me.txtRequisitosIV.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosIV.TabIndex = 3
+        '
+        'txtRequisitosV
+        '
+        Me.txtRequisitosV.Location = New System.Drawing.Point(52, 157)
+        Me.txtRequisitosV.MaxLength = 60
+        Me.txtRequisitosV.Name = "txtRequisitosV"
+        Me.txtRequisitosV.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosV.TabIndex = 3
+        '
+        'txtRequisitosXII
+        '
+        Me.txtRequisitosXII.Location = New System.Drawing.Point(52, 346)
+        Me.txtRequisitosXII.MaxLength = 60
+        Me.txtRequisitosXII.Name = "txtRequisitosXII"
+        Me.txtRequisitosXII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosXII.TabIndex = 3
+        '
+        'txtRequisitosVII
+        '
+        Me.txtRequisitosVII.Location = New System.Drawing.Point(52, 211)
+        Me.txtRequisitosVII.MaxLength = 60
+        Me.txtRequisitosVII.Name = "txtRequisitosVII"
+        Me.txtRequisitosVII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosVII.TabIndex = 3
+        '
+        'txtRequisitosVIII
+        '
+        Me.txtRequisitosVIII.Location = New System.Drawing.Point(52, 238)
+        Me.txtRequisitosVIII.MaxLength = 60
+        Me.txtRequisitosVIII.Name = "txtRequisitosVIII"
+        Me.txtRequisitosVIII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosVIII.TabIndex = 3
+        '
+        'txtRequisitosIX
+        '
+        Me.txtRequisitosIX.Location = New System.Drawing.Point(52, 265)
+        Me.txtRequisitosIX.MaxLength = 60
+        Me.txtRequisitosIX.Name = "txtRequisitosIX"
+        Me.txtRequisitosIX.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosIX.TabIndex = 3
+        '
+        'txtRequisitosX
+        '
+        Me.txtRequisitosX.Location = New System.Drawing.Point(52, 292)
+        Me.txtRequisitosX.MaxLength = 60
+        Me.txtRequisitosX.Name = "txtRequisitosX"
+        Me.txtRequisitosX.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosX.TabIndex = 3
+        '
+        'txtRequisitosXI
+        '
+        Me.txtRequisitosXI.Location = New System.Drawing.Point(52, 319)
+        Me.txtRequisitosXI.MaxLength = 60
+        Me.txtRequisitosXI.Name = "txtRequisitosXI"
+        Me.txtRequisitosXI.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosXI.TabIndex = 3
+        '
+        'txtRequisitosVI
+        '
+        Me.txtRequisitosVI.Location = New System.Drawing.Point(52, 184)
+        Me.txtRequisitosVI.MaxLength = 60
+        Me.txtRequisitosVI.Name = "txtRequisitosVI"
+        Me.txtRequisitosVI.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosVI.TabIndex = 3
+        '
         'IngresoPruebasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2034,18 +2034,6 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents txtComentariosIII As System.Windows.Forms.TextBox
     Friend WithEvents txtComentariosII As System.Windows.Forms.TextBox
     Friend WithEvents txtComentariosI As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosXII As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosXI As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosX As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosIX As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosVIII As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosVII As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosVI As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosV As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosIV As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosIII As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosII As System.Windows.Forms.TextBox
-    Friend WithEvents txtRequisitosI As System.Windows.Forms.TextBox
     Friend WithEvents CostoTipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CostoArticulo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CostoTerminado As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2099,4 +2087,16 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
     Friend WithEvents txtBuscarEnTodosLosCampos As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents txtRequisitosXII As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosXI As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosX As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosIX As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosVIII As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosVII As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosVI As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosV As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosIV As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosIII As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosII As System.Windows.Forms.TextBox
+    Friend WithEvents txtRequisitosI As System.Windows.Forms.TextBox
 End Class
