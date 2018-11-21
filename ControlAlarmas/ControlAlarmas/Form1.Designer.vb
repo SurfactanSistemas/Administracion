@@ -70,7 +70,7 @@ Partial Class Form1
         Me.btnSurfac1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnSurfac1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnSurfac1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSurfac1.Location = New System.Drawing.Point(65, 34)
+        Me.btnSurfac1.Location = New System.Drawing.Point(47, 32)
         Me.btnSurfac1.Name = "btnSurfac1"
         Me.btnSurfac1.Size = New System.Drawing.Size(106, 123)
         Me.btnSurfac1.TabIndex = 0
@@ -81,7 +81,7 @@ Partial Class Form1
         Me.Label1.BackColor = System.Drawing.SystemColors.ControlLight
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(61, 147)
+        Me.Label1.Location = New System.Drawing.Point(43, 145)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(114, 38)
         Me.Label1.TabIndex = 3
@@ -98,7 +98,7 @@ Partial Class Form1
         Me.btnSurfac2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnSurfac2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnSurfac2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSurfac2.Location = New System.Drawing.Point(219, 34)
+        Me.btnSurfac2.Location = New System.Drawing.Point(201, 32)
         Me.btnSurfac2.Name = "btnSurfac2"
         Me.btnSurfac2.Size = New System.Drawing.Size(106, 123)
         Me.btnSurfac2.TabIndex = 0
@@ -109,7 +109,7 @@ Partial Class Form1
         Me.Label2.BackColor = System.Drawing.SystemColors.ControlLight
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(215, 147)
+        Me.Label2.Location = New System.Drawing.Point(197, 145)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(114, 38)
         Me.Label2.TabIndex = 3
@@ -126,7 +126,7 @@ Partial Class Form1
         Me.btnSurfac3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnSurfac3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnSurfac3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSurfac3.Location = New System.Drawing.Point(373, 34)
+        Me.btnSurfac3.Location = New System.Drawing.Point(355, 32)
         Me.btnSurfac3.Name = "btnSurfac3"
         Me.btnSurfac3.Size = New System.Drawing.Size(106, 123)
         Me.btnSurfac3.TabIndex = 0
@@ -137,7 +137,7 @@ Partial Class Form1
         Me.Label3.BackColor = System.Drawing.SystemColors.ControlLight
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(369, 147)
+        Me.Label3.Location = New System.Drawing.Point(351, 145)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(114, 38)
         Me.Label3.TabIndex = 3
@@ -154,7 +154,7 @@ Partial Class Form1
         Me.btnSurfac5.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnSurfac5.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnSurfac5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSurfac5.Location = New System.Drawing.Point(527, 34)
+        Me.btnSurfac5.Location = New System.Drawing.Point(509, 32)
         Me.btnSurfac5.Name = "btnSurfac5"
         Me.btnSurfac5.Size = New System.Drawing.Size(106, 123)
         Me.btnSurfac5.TabIndex = 0
@@ -165,7 +165,7 @@ Partial Class Form1
         Me.Label4.BackColor = System.Drawing.SystemColors.ControlLight
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(523, 147)
+        Me.Label4.Location = New System.Drawing.Point(505, 145)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(114, 38)
         Me.Label4.TabIndex = 3
@@ -187,6 +187,7 @@ Partial Class Form1
         Me.btnPellital.Size = New System.Drawing.Size(106, 123)
         Me.btnPellital.TabIndex = 0
         Me.btnPellital.UseVisualStyleBackColor = True
+        Me.btnPellital.Visible = False
         '
         'Label5
         '
@@ -199,6 +200,7 @@ Partial Class Form1
         Me.Label5.TabIndex = 3
         Me.Label5.Text = "PELLITAL"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label5.Visible = False
         '
         'Surfac2Encendido
         '
@@ -254,7 +256,7 @@ Partial Class Form1
         Me.Label6.BackColor = System.Drawing.SystemColors.ControlLight
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(508, 195)
+        Me.Label6.Location = New System.Drawing.Point(305, 195)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(332, 25)
         Me.Label6.TabIndex = 4
@@ -264,7 +266,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(852, 231)
+        Me.ClientSize = New System.Drawing.Size(662, 231)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)

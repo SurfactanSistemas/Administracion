@@ -8,6 +8,8 @@ Public Class Form1
     Private WTiempo1 As Integer = 0
     Private WTCP As New TCPConnector
 
+    Private WDispositivos As New DataTable
+
     Private WBoton As Button
     Private WCheck As CheckBox
 
@@ -27,7 +29,14 @@ Public Class Form1
             If addr(i).AddressFamily = AddressFamily.InterNetwork Then
                 Exit For
             End If
+
         Next
+
+        With WDispositivos
+            .Columns.Add("Descripcion")
+            .Columns.Add("IP")
+            .Columns.Add("Estado")
+        End With
 
         WDelay = Val(ConfigurationManager.AppSettings("Delay").ToString)
 
@@ -50,6 +59,24 @@ Public Class Form1
         WBoton = CType(sender, Button)
         WCheck = Nothing
 
+        Dim WComando = ""
+        Dim WIp = ""
+
+        Dim WDispo() As DataRow
+
+        If WDispositivos.Select("Descripcion = '" & WBoton.Name.Replace("btn", "") & "'").Length > 0 Then
+
+            WDispo = WDispositivos.Select("Descripcion = '" & WBoton.Name.Replace("btn", "") & "'")
+
+            With WDispo(0)
+                WIp = .Item("IP")
+                If Val(.Item("Estado")) = 0 Then
+                    Exit Sub
+                End If
+            End With
+
+        End If
+
         Select Case WBoton.Name
             Case btnSurfac1.Name
                 WCheck = Surfac1Encendido
@@ -64,10 +91,6 @@ Public Class Form1
         End Select
 
         WBoton.BackgroundImage = IIf(WCheck.Checked, My.Resources.btn_off, My.Resources.btn_on)
-
-        Dim WComando = ""
-
-        Dim WIp = "193.168.0.85"
 
         If WCheck.Checked Then
             WComando = "2X"
@@ -97,7 +120,7 @@ Public Class Form1
 
             Array.Clear(WData, 0, 8)
 
-            WTCP.SendData("00", "193.168.0.85", "6722", WEstado, WData)
+            WTCP.SendData("00", "193.168.0.86", "6722", WEstado, WData)
 
             Dim W As String
 
@@ -139,7 +162,7 @@ Public Class Form1
 
         Try
             pinger = New Ping
-            Dim reply As PingReply = pinger.Send(ipAddress)
+            Dim reply As PingReply = pinger.Send(ipAddress, 500)
             pingable = reply.Status = IPStatus.Success
 
         Catch ex As Exception
@@ -169,6 +192,10 @@ Public Class Form1
             Dim WPlanta As String = WDisp.Split("=")(0)
             Dim WIp As String = WDisp.Split("=")(1)
 
+            Dim row As DataRow
+
+            row = WDispositivos.NewRow
+
             Dim WBut As Button = Nothing
 
             Select Case "btn" & WPlanta
@@ -188,12 +215,20 @@ Public Class Form1
 
             WBut.Enabled = PingHost(WIp)
 
+            With row
+                .Item("Descripcion") = WPlanta
+                .Item("IP") = WIp
+                .Item("Estado") = IIf(WBut.Enabled, "1", "0")
+            End With
+
             If WBut.Enabled Then
-                WBut.BackgroundImage = My.Resources.btn_on
+                WBut.BackgroundImage = My.Resources.btn_off
             Else
                 WBut.BackgroundImage = My.Resources.btn_error
                 Label6.Text = "Hay Dispositivos inaccesibles."
             End If
+
+            WDispositivos.Rows.Add(row)
 
         Next
         WComprobado = True
