@@ -253,7 +253,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
                 Dim frm As New NuevoSac(WTipo, WNumero, WAnio)
 
-                frm.Show(Me)
+                frm.Show()
 
             End With
 

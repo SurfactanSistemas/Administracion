@@ -1,4 +1,8 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Configuration
+Imports System.Data.SqlClient
+Imports System.IO
+Imports CrystalDecisions.Shared
+Imports Microsoft.VisualBasic.FileIO
 
 Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroSac, IAyudaReponsableSac, IAyudaTipoSac, IExportarSac
 
@@ -6,6 +10,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Private Const XMARGEN = 7
     Private WRow, Wcol As Integer
     Private WRefTipoResp As Control
+
+    Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg"
 
     Sub New()
 
@@ -31,7 +37,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub txtTipo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTipo.KeyDown
+    Private Sub txtTipo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtTipo.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtTipo.Text) = "" Then
@@ -55,7 +61,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnio.KeyDown
+    Private Sub txtAnio_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAnio.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtAnio.Text) = "" Then : Exit Sub : End If
@@ -68,7 +74,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub txtNumero_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNumero.KeyDown
+    Private Sub txtNumero_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtNumero.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtNumero.Text) = "" Then : Exit Sub : End If
@@ -78,6 +84,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             _CargarImplementaciones()
             _CargarVerificaciones()
             _CargarComentarios()
+            _CargarArchivosRelacionados()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtNumero.Text = ""
@@ -274,32 +281,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End Try
     End Sub
 
-    Private Sub _LimpiarCampos()
-
-        For Each t As Control In {txtCentro, txtEmisor, txtFecha, txtReferencia, txtResponsable, txtTitulo}
-            t.Text = ""
-        Next
-
-        cmbEstado.SelectedIndex = 0
-        cmbOrigen.SelectedIndex = 0
-
-        For Each l As Label In {lblDescCentro, lblDescEmisor, lblDescResponsable}
-            l.Text = ""
-        Next
-
-    End Sub
-
-    Private Sub _LimpiarTodo()
-        For Each c As Control In {txtTipo, txtNumero, txtAnio, lblDescTipo}
-            c.Text = ""
-        Next
-
-        _LimpiarCampos()
-
-        txtTipo.Focus()
-
-    End Sub
-
     Private Sub _CargarAcciones()
 
         _LimpiarGrillaAcciones()
@@ -310,7 +291,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         dgvVerificaciones.Columns("VerAcciones").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
-        Dim WCargaSacII As DataRow = Query.GetSingle(String.Format("SELECT * FROM CargaSACII WHERE Tipo = '{0}' AND Numero = '{1}' AND Ano = '{2}'", txtTipo.Text, txtNumero.Text, txtAnio.Text))
+        Dim WCargaSacII As DataRow = GetSingle(String.Format("SELECT * FROM CargaSACII WHERE Tipo = '{0}' AND Numero = '{1}' AND Ano = '{2}'", txtTipo.Text, txtNumero.Text, txtAnio.Text))
 
         If IsNothing(WCargaSacII) Then Exit Sub
 
@@ -383,11 +364,11 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         _CargarAcciones()
     End Sub
 
-    Private Sub NuevoSac_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub NuevoSac_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtTipo.Focus()
     End Sub
 
-    Private Sub txtCentro_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCentro.KeyDown
+    Private Sub txtCentro_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCentro.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtCentro.Text) = "" Then
@@ -413,7 +394,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub txtEmisor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEmisor.KeyDown
+    Private Sub txtEmisor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEmisor.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtEmisor.Text) = "" Then
@@ -439,7 +420,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub txtResponsable_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtResponsable.KeyDown
+    Private Sub txtResponsable_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtResponsable.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtResponsable.Text) = "" Then
@@ -465,7 +446,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub NuevoSac_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub NuevoSac_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Dim WTipo = txtTipo.Text
         Dim WNumero = txtNumero.Text
         Dim WAnio = txtAnio.Text
@@ -506,7 +487,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         Select Case keycode
             Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
@@ -523,7 +504,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -535,7 +516,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Function
 
     Private Function _EsDecimalOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido = False
 
         If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -546,7 +527,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Return valido
     End Function
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
 
         With dgvAcciones
             If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
@@ -580,7 +561,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                             '
                             ' Mantengo actualizadas las filas entre las diferentes grillas.
                             '
-                            Dim WId = .Rows(iRow).Cells("idAccion").Value
                             dgvImplementaciones.Rows(iRow).Cells("ImpleAcciones").Value = valor
                             dgvVerificaciones.Rows(iRow).Cells("VerAcciones").Value = valor
 
@@ -802,7 +782,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
+    Private Sub txtFechaAux_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaAux.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If txtFechaAux.Text.Replace(" ", "").Length = 10 Then
@@ -831,7 +811,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub dgvAcciones_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvAcciones.CellEnter
+    Private Sub dgvAcciones_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvAcciones.CellEnter
         With dgvAcciones
             If e.ColumnIndex = .Columns("Plazo").Index Then
                 .ClearSelection()
@@ -850,7 +830,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End With
     End Sub
 
-    Private Sub dgvAcciones_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvAcciones.RowHeaderMouseDoubleClick
+    Private Sub dgvAcciones_RowHeaderMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvAcciones.RowHeaderMouseDoubleClick
 
         Try
 
@@ -869,7 +849,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub txtFechaAux2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux2.KeyDown
+    Private Sub txtFechaAux2_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaAux2.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If txtFechaAux2.Text.Replace(" ", "").Length = 10 Then
@@ -898,7 +878,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub dgvImplementaciones_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvImplementaciones.CellEnter
+    Private Sub dgvImplementaciones_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvImplementaciones.CellEnter
         With dgvImplementaciones
             If e.ColumnIndex = .Columns("ImpleFecha").Index Then
                 .ClearSelection()
@@ -917,7 +897,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End With
     End Sub
 
-    Private Sub dgvImplementaciones_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvImplementaciones.RowHeaderMouseDoubleClick
+    Private Sub dgvImplementaciones_RowHeaderMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvImplementaciones.RowHeaderMouseDoubleClick
 
         Try
 
@@ -937,7 +917,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub MovilizarInmovilizarAccionesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MovilizarInmovilizarAccionesToolStripMenuItem.Click
+    Private Sub MovilizarInmovilizarAccionesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MovilizarInmovilizarAccionesToolStripMenuItem.Click
 
         If btnInmovilizarAcciones.Text = "Movilizar" Then
 
@@ -948,8 +928,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             btnInmovilizarAcciones.Text = "Inmovilizar"
 
         Else
-            Dim WSeleccionados As Integer = 0
-            Dim WAnt As Integer = 0
+            Dim WSeleccionados = 0
+            Dim WAnt = 0
 
             For Each cell As DataGridViewCell In dgvVerificaciones.SelectedCells
                 If WAnt <> cell.ColumnIndex Then
@@ -975,11 +955,11 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         dgvVerificaciones.ClearSelection()
     End Sub
 
-    Private Sub btnInmovilizarAcciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInmovilizarAcciones.Click
+    Private Sub btnInmovilizarAcciones_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnInmovilizarAcciones.Click
         MovilizarInmovilizarAccionesToolStripMenuItem_Click(Nothing, Nothing)
     End Sub
 
-    Private Sub txtFechaAux3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux3.KeyDown
+    Private Sub txtFechaAux3_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaAux3.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If txtFechaAux3.Text.Replace(" ", "").Length = 10 Then
@@ -1008,7 +988,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub dgvVerificaciones_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvVerificaciones.CellEnter
+    Private Sub dgvVerificaciones_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvVerificaciones.CellEnter
         With dgvVerificaciones
             Dim WControl As Control = IIf(e.ColumnIndex = .Columns("VerFechaI").Index, txtFechaAux3, txtFechaAux4)
 
@@ -1029,7 +1009,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End With
     End Sub
 
-    Private Sub txtFechaAux4_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux4.KeyDown
+    Private Sub txtFechaAux4_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaAux4.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If txtFechaAux4.Text.Replace(" ", "").Length = 10 Then
@@ -1058,7 +1038,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub dgvAcciones_CellLeave(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvAcciones.CellLeave
+    Private Sub dgvAcciones_CellLeave(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvAcciones.CellLeave
         Dim WValor As String = If(dgvAcciones.Rows(e.RowIndex).Cells("Acciones").Value, "")
 
         dgvImplementaciones.Rows(e.RowIndex).Cells("ImpleAcciones").Value = WValor
@@ -1069,13 +1049,13 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End If
     End Sub
 
-    Private Sub dgvVerificaciones_ColumnHeaderMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvVerificaciones.ColumnHeaderMouseClick
+    Private Sub dgvVerificaciones_ColumnHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvVerificaciones.ColumnHeaderMouseClick
         For i = 0 To 11
             dgvVerificaciones.Rows(i).Cells(e.ColumnIndex).Selected = True
         Next
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         If txtTipo.Text.Trim <> "" And txtAnio.Text.Trim <> "" And txtNumero.Text.Trim <> "" Then
             If MsgBox("¿Está seguro de querer salir? Las modificaciones que no se hayan guardado se perderán.", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
         End If
@@ -1083,7 +1063,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Close()
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         '
         ' Limpiamos Campos.
         '
@@ -1098,6 +1078,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         _LimpiarGrillaAcciones()
         _LimpiarGrillaImplementaciones()
         _LimpiarGrillaVerificaciones()
+
+        dgvArchivos.Rows.Clear()
 
         '
         ' Reseteamos Combos.
@@ -1136,7 +1118,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub btnConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultas.Click
+    Private Sub btnConsultas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsultas.Click
         Dim frm As New AyudaContenedor("Tipo de Sac", "Centro SAC", "Emisor", "Responsable")
         _Centrar(frm)
         frm.Show(Me)
@@ -1195,7 +1177,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Function
 
-    Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
 
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand("")
@@ -1205,7 +1187,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         ' Validamos los datos minimos para dar de alta la sac.
         '
         Try
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             trans = cn.BeginTransaction
 
@@ -1234,7 +1216,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             Dim WNoConformidad As String = txtIngresoNoCon.Text.Trim.Replace("'", "")
             Dim WCausa As String = txtIngresoCausa.Text.Trim.Replace("'", "")
 
-            Dim WSql As String = ""
+            Dim WSql = ""
 
             '
             ' Grabamos los datos generales. Verificando primero si existe anteriormente el SAC.
@@ -1285,7 +1267,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             End Using
 
-            Dim WDatos As String = ""
+            Dim WDatos = ""
 
             For i = 1 To 12
 
@@ -1467,7 +1449,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 Exit Sub
             End If
 
-            Dim WOwner As INuevoSAC = CType(Owner, INuevoSAC)
+            Dim WOwner = CType(Owner, INuevoSAC)
 
             If Not IsNothing(WOwner) Then
                 WOwner._ProcesarNuevoSAC(txtTipo.Text, txtNumero.Text, txtAnio.Text)
@@ -1545,7 +1527,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Function
 
-    Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
+    Private Sub txtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFecha.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If txtFecha.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
@@ -1559,7 +1541,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub txtTitulo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTitulo.KeyDown
+    Private Sub txtTitulo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtTitulo.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtTitulo.Text) = "" Then : Exit Sub : End If
@@ -1572,7 +1554,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub txtReferencia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtReferencia.KeyDown
+    Private Sub txtReferencia_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtReferencia.KeyDown
 
         If e.KeyData = Keys.Enter Then
             '    If Trim(txtReferencia.Text) = "" Then : Exit Sub : End If
@@ -1585,11 +1567,11 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub txtAnio_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTipo.Leave, txtAnio.Leave
+    Private Sub txtAnio_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtTipo.Leave, txtAnio.Leave
         btnProximoNumeroLibre.Enabled = txtAnio.Text.Trim <> "" And txtTipo.Text.Trim <> ""
     End Sub
 
-    Private Sub btnProximoNumeroLibre_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProximoNumeroLibre.Click
+    Private Sub btnProximoNumeroLibre_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnProximoNumeroLibre.Click
 
         If txtTipo.Text.Trim = "" Or txtAnio.Text.Trim = "" Then
             MsgBox("Se debe definir primero el Tipo de Solicitud y el Año al cual pertenece", MsgBoxStyle.Exclamation)
@@ -1615,7 +1597,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+    Private Sub btnImprimir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimir.Click
         Try
             '
             ' Recargamos los datos de la SAC.
@@ -1635,7 +1617,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             _PrepararImpreSacII()
 
-            Dim WIncluirComentarios As Boolean = False
+            Dim WIncluirComentarios = False
 
             Dim WRespuesta As MsgBoxResult = MsgBox("¿Incluir los comentarios en la Impresión?", MsgBoxStyle.YesNoCancel)
 
@@ -1721,8 +1703,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             End With
 
-            Dim WSql As String = ""
-            Dim WClave As String = ""
+            Dim WSql = ""
+            Dim WClave = ""
 
             WClave = txtTipo.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0") & i.ToString.PadLeft(2, "0")
 
@@ -1735,7 +1717,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         Next
 
-        Query.ExecuteNonQueries(WSQls.ToArray())
+        ExecuteNonQueries(WSQls.ToArray())
 
     End Sub
 
@@ -1782,14 +1764,14 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 '
                 ' Exportamos ambos archivos en el caso que corresponda en un archivo temporal.
                 '
-                Dim WRuta As String = "C:/tSac/"
+                Dim WRuta = "C:/tSac/"
 
-                If IO.Directory.Exists(WRuta) Then IO.Directory.Delete(WRuta, True)
+                If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
 
-                IO.Directory.CreateDirectory(WRuta)
+                Directory.CreateDirectory(WRuta)
 
-                If WOpcion2 Then frm2.Exportar("2.pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
-                If WOpcion1 Then frm.Exportar("1.pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
+                If WOpcion2 Then frm2.Exportar("2.pdf", ExportFormatType.PortableDocFormat, WRuta)
+                If WOpcion1 Then frm.Exportar("1.pdf", ExportFormatType.PortableDocFormat, WRuta)
 
                 Dim WPrefijoArchivo As String = GenerarPrefijoArchivo()
 
@@ -1832,7 +1814,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Function GenerarPrefijoArchivo() As String
 
-        Dim WPrefijoArchivo As String = ""
+        Dim WPrefijoArchivo = ""
 
         Dim WTipo As DataRow = GetSingle("SELECT Descripcion, Abreviatura FROM TipoSac WHERE Codigo = '" & txtTipo.Text & "'")
 
@@ -1857,24 +1839,24 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             Select Case WFormato
 
                 Case 0 ' PDF
-                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
+                    .Exportar(WNombreArchivo, ExportFormatType.PortableDocFormat)
                 Case 1 ' Excel
-                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.Excel)
+                    .Exportar(WNombreArchivo, ExportFormatType.Excel)
                 Case 2 ' Word
-                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
+                    .Exportar(WNombreArchivo, ExportFormatType.WordForWindows)
             End Select
 
         End With
     End Sub
 
-    Private Sub btnExportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportar.Click
+    Private Sub btnExportar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnExportar.Click
 
         Dim frm As New ExportarSAC
         frm.Show(Me)
 
     End Sub
 
-    Private Sub btnTipoAnterior_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoAnterior.Click
+    Private Sub btnTipoAnterior_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTipoAnterior.Click
         Try
             Dim WAnterior As DataRow = GetSingle("select top 1 Codigo from TipoSac where Codigo < " & Val(txtTipo.Text) & " Order by Codigo DEsc")
 
@@ -1889,7 +1871,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End Try
     End Sub
 
-    Private Sub btnTipoSiguiente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoSiguiente.Click
+    Private Sub btnTipoSiguiente_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTipoSiguiente.Click
         Try
             Dim WProximo As DataRow = GetSingle("select top 1 Codigo from TipoSac where Codigo > " & Val(txtTipo.Text) & " Order by Codigo")
 
@@ -1904,7 +1886,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End Try
     End Sub
 
-    Private Sub btnNumeroAnterior_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNumeroAnterior.Click
+    Private Sub btnNumeroAnterior_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNumeroAnterior.Click
         Try
             Dim WAnterior As DataRow = GetSingle("SELECT TOP 1 Numero FROM cargasac WHERE Tipo = '" & txtTipo.Text & "' AND Numero < " & Val(txtNumero.Text) & " AND Ano = '" & txtAnio.Text & "' ORDER BY Numero DESC")
 
@@ -1918,7 +1900,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End Try
     End Sub
 
-    Private Sub btnNumeroSiguiente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNumeroSiguiente.Click
+    Private Sub btnNumeroSiguiente_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNumeroSiguiente.Click
         Try
             Dim WProximo As DataRow = GetSingle("SELECT TOP 1 Numero FROM cargasac WHERE Tipo = '" & txtTipo.Text & "' AND Numero > " & Val(txtNumero.Text) & " AND Ano = '" & txtAnio.Text & "' ORDER BY Numero")
 
@@ -1932,23 +1914,198 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End Try
     End Sub
 
-    Private Sub txtNumero_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNumero.TextChanged
+    Private Sub txtNumero_TextChanged(ByVal sender As Object, ByVal e As EventArgs)
 
     End Sub
 
-    Private Sub txtTipo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTipo.MouseDoubleClick
+    Private Sub txtTipo_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtTipo.MouseDoubleClick
         _ProcesarAyudaContenedor(0)
     End Sub
 
-    Private Sub txtCentro_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCentro.MouseDoubleClick
+    Private Sub txtCentro_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtCentro.MouseDoubleClick
         _ProcesarAyudaContenedor(1)
     End Sub
 
-    Private Sub txtEmisor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtEmisor.MouseDoubleClick
+    Private Sub txtEmisor_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtEmisor.MouseDoubleClick
         _ProcesarAyudaContenedor(2)
     End Sub
 
-    Private Sub txtResponsable_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtResponsable.MouseDoubleClick
+    Private Sub txtResponsable_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtResponsable.MouseDoubleClick
         _ProcesarAyudaContenedor(3)
+    End Sub
+
+    '
+    ' Rutinas de Archivos.
+    '
+    Private Sub dgvArchivos_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvArchivos.CellMouseDoubleClick
+        If e.RowIndex < 0 Then Exit Sub
+        With dgvArchivos.Rows(e.RowIndex)
+            If Not IsNothing(.Cells("PathArchivo").Value) Then
+
+                Try
+                    Process.Start(.Cells("PathArchivo").Value, "f")
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+
+            End If
+        End With
+    End Sub
+
+
+    Private Sub dgvArchivos_DragEnter(ByVal sender As Object, ByVal e As DragEventArgs) Handles dgvArchivos.DragEnter
+        _PermitirDrag(e)
+    End Sub
+
+    Private Sub _PermitirDrag(ByVal e As DragEventArgs)
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
+
+    Private Sub _ProcesarDragDeArchivo(ByVal e As DragEventArgs)
+
+        Dim WNombreCarpetaArchivos As String = txtNumero.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
+        Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & WNombreCarpetaArchivos
+        Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+        Dim WDestino = ""
+        Dim WCantCorrectas = 0
+
+        If archivos.Length = 0 Then : Exit Sub : End If
+
+        If Not Directory.Exists(WRutaArchivosRelacionados) Then
+            Try
+                Directory.CreateDirectory(WRutaArchivosRelacionados)
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+                Exit Sub
+            End Try
+        End If
+
+        For Each archivo In archivos
+
+            If File.Exists(archivo) Then
+
+                If EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(archivo).ToLower()) Then
+
+                    WDestino = WRutaArchivosRelacionados & "\" & Path.GetFileName(archivo)
+
+                    Try
+                        If Not File.Exists(WDestino) Then
+                            File.Copy(archivo, WDestino)
+                            WCantCorrectas += 1
+                        Else
+                            If MsgBox("El Archivo " & Path.GetFileName(archivo) & ", ya existe en la carpeta. ¿Desea sobreescribir el archivo existente?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                                File.Copy(archivo, WDestino, True)
+                                WCantCorrectas += 1
+                            End If
+                        End If
+
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                        Exit Sub
+                    End Try
+
+                End If
+
+            End If
+
+        Next
+
+        If WCantCorrectas > 0 Then
+            MsgBox("Se subieron correctamente " & WCantCorrectas & " Archivo(s)", MsgBoxStyle.Information)
+        End If
+
+        _CargarArchivosRelacionados()
+
+    End Sub
+
+    Private Sub dgvArchivos_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles dgvArchivos.DragDrop
+        _ProcesarDragDeArchivo(e)
+    End Sub
+
+    Private Function _RutaCarpetaArchivos()
+        Return ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS")
+    End Function
+
+    Private Sub _CargarArchivosRelacionados()
+        Dim WRutaArchivosRelacionados = ""
+        Dim WNombreCarpetaArchivos As String = txtNumero.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
+
+        If Not Directory.Exists(_RutaCarpetaArchivos) Then
+            Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
+        End If
+
+        WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & WNombreCarpetaArchivos
+
+        ' Creamos la Carpeta en caso de que no exista aún.
+        If Not Directory.Exists(WRutaArchivosRelacionados) Then
+            Try
+                Directory.CreateDirectory(WRutaArchivosRelacionados)
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
+        End If
+
+        Dim InfoArchivo As FileInfo
+
+        dgvArchivos.Rows.Clear()
+
+        ' Recorremos unicamente aquellos archivos que tengan una extensión que esté entre las permitidas por la aplicación.
+        For Each WNombreArchivo As String In Directory.GetFiles(WRutaArchivosRelacionados).Where(Function(s) EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(s).ToLower()))
+
+            InfoArchivo = FileSystem.GetFileInfo(WNombreArchivo)
+
+            With InfoArchivo
+                dgvArchivos.Rows.Add(.CreationTime.ToString("dd/MM/yyyy"), UCase(.Name), _ObtenerIconoSegunTipoArchivo(.Extension), .FullName)
+            End With
+
+        Next
+
+    End Sub
+
+    Private Function _ObtenerIconoSegunTipoArchivo(ByVal extension As String)
+        Dim Wicono = Nothing
+
+        'My.Resources.pdf_icon
+
+
+        Select Case UCase(extension)
+
+            Case ".DOC", ".DOCX"
+                Wicono = My.Resources.Word_icon
+            Case ".XLS", ".XLSX", ".XLSM"
+                Wicono = My.Resources.Excel_icon
+            Case ".PDF"
+                Wicono = My.Resources.pdf_icono
+            Case ".JPG", ".JPEG", ".BMP", ".ICO", ".PNG"
+                Wicono = My.Resources.imagen_icono
+            Case ".TXT"
+                Wicono = My.Resources.txt_icono
+            Case Else
+                Wicono = My.Resources.archivo_default
+        End Select
+
+
+        Return Wicono
+    End Function
+
+    Private Sub EliminarArchivoToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EliminarArchivoToolStripMenuItem.Click
+        If dgvArchivos.SelectedRows.Count = 0 Then Exit Sub
+
+        If MsgBox("¿Está seguro de querer eliminar todos los archivos indicados?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+
+        For Each row As DataGridViewRow In dgvArchivos.Rows
+            With row
+
+                If OrDefault(.Cells("PathArchivo").Value, "") = "" Then Continue For
+
+                File.Delete(.Cells("PathArchivo").Value)
+
+            End With
+        Next
+
+        _CargarArchivosRelacionados()
+
     End Sub
 End Class
