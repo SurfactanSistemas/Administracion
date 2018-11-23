@@ -62,7 +62,7 @@ Partial Class DiferenciaInventarioPT
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(92, 191)
+        Me.btnAceptar.Location = New System.Drawing.Point(124, 191)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(82, 36)
         Me.btnAceptar.TabIndex = 4
@@ -71,7 +71,7 @@ Partial Class DiferenciaInventarioPT
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(199, 191)
+        Me.btnCerrar.Location = New System.Drawing.Point(231, 191)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(82, 36)
         Me.btnCerrar.TabIndex = 4

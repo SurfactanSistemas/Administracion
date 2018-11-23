@@ -66,13 +66,22 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabFormula = New System.Windows.Forms.TabPage()
         Me.pnlNotas = New System.Windows.Forms.Panel()
+        Me.pnlConsulta = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtBuscarEnTodosLosCampos = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.lstOpciones = New System.Windows.Forms.ListBox()
+        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
+        Me.lstFiltrada = New System.Windows.Forms.ListBox()
+        Me.lstConsulta = New System.Windows.Forms.ListBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.rbEstabilidad = New System.Windows.Forms.RadioButton()
         Me.rbAplicacion = New System.Windows.Forms.RadioButton()
         Me.btnCerrarNota = New System.Windows.Forms.Button()
         Me.txtNota = New System.Windows.Forms.RichTextBox()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabFormula = New System.Windows.Forms.TabPage()
         Me.pnlHojaPiloto = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.prgbHojaPiloto = New System.Windows.Forms.ProgressBar()
@@ -164,6 +173,18 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosIII = New System.Windows.Forms.TextBox()
         Me.txtComentariosII = New System.Windows.Forms.TextBox()
         Me.txtComentariosI = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosXII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosXI = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosX = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosIX = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosVIII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosVII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosVI = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosV = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosIV = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosIII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosII = New System.Windows.Forms.TextBox()
+        Me.txtRequisitosI = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -187,28 +208,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
-        Me.pnlConsulta = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.txtBuscarEnTodosLosCampos = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.lstOpciones = New System.Windows.Forms.ListBox()
-        Me.btnCerrarConsulta = New System.Windows.Forms.Button()
-        Me.lstFiltrada = New System.Windows.Forms.ListBox()
-        Me.lstConsulta = New System.Windows.Forms.ListBox()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.txtRequisitosI = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosIII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosIV = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosV = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosXII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosVII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosVIII = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosIX = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosX = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosXI = New System.Windows.Forms.TextBox()
-        Me.txtRequisitosVI = New System.Windows.Forms.TextBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -216,9 +216,11 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.pnlNotas.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabFormula.SuspendLayout()
+        Me.pnlNotas.SuspendLayout()
+        Me.pnlConsulta.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.pnlHojaPiloto.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvFormula, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -236,8 +238,6 @@ Partial Class IngresoPruebasEnsayo
         Me.TabPage1.SuspendLayout()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
-        Me.pnlConsulta.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -344,7 +344,6 @@ Partial Class IngresoPruebasEnsayo
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.pnlNotas)
         Me.Panel3.Controls.Add(Me.TabControl1)
         Me.Panel3.Controls.Add(Me.WIndice)
         Me.Panel3.Controls.Add(Me.txtCantidad)
@@ -362,6 +361,52 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel3.Size = New System.Drawing.Size(1058, 527)
         Me.Panel3.TabIndex = 0
         '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabFormula)
+        Me.TabControl1.Controls.Add(Me.TabProceso)
+        Me.TabControl1.Controls.Add(Me.TabResultadosLaboratorio)
+        Me.TabControl1.Controls.Add(Me.TabEnsayosAdicionales)
+        Me.TabControl1.Controls.Add(Me.TabRevisiones)
+        Me.TabControl1.Controls.Add(Me.TabCosto)
+        Me.TabControl1.Controls.Add(Me.TabDocumentacion)
+        Me.TabControl1.Controls.Add(Me.TabDatosEntrada)
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.ItemSize = New System.Drawing.Size(200, 30)
+        Me.TabControl1.Location = New System.Drawing.Point(7, 44)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabControl1.Multiline = True
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.Padding = New System.Drawing.Point(19, 3)
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(1042, 474)
+        Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight
+        Me.TabControl1.TabIndex = 3
+        '
+        'TabFormula
+        '
+        Me.TabFormula.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabFormula.Controls.Add(Me.pnlConsulta)
+        Me.TabFormula.Controls.Add(Me.pnlNotas)
+        Me.TabFormula.Controls.Add(Me.pnlHojaPiloto)
+        Me.TabFormula.Controls.Add(Me.cmbPlanta)
+        Me.TabFormula.Controls.Add(Me.dgvFormula)
+        Me.TabFormula.Controls.Add(Me.txtHojaProduccion)
+        Me.TabFormula.Controls.Add(Me.txtRealizado)
+        Me.TabFormula.Controls.Add(Me.Label9)
+        Me.TabFormula.Controls.Add(Me.Label8)
+        Me.TabFormula.Controls.Add(Me.Label13)
+        Me.TabFormula.Controls.Add(Me.Button3)
+        Me.TabFormula.Controls.Add(Me.btnLeerVersionAntFormula)
+        Me.TabFormula.Controls.Add(Me.btnHojaPiloto)
+        Me.TabFormula.Location = New System.Drawing.Point(4, 34)
+        Me.TabFormula.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabFormula.Name = "TabFormula"
+        Me.TabFormula.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabFormula.Size = New System.Drawing.Size(1034, 436)
+        Me.TabFormula.TabIndex = 0
+        Me.TabFormula.Text = "Composición"
+        '
         'pnlNotas
         '
         Me.pnlNotas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
@@ -369,11 +414,97 @@ Partial Class IngresoPruebasEnsayo
         Me.pnlNotas.Controls.Add(Me.rbAplicacion)
         Me.pnlNotas.Controls.Add(Me.btnCerrarNota)
         Me.pnlNotas.Controls.Add(Me.txtNota)
-        Me.pnlNotas.Location = New System.Drawing.Point(279, 71)
+        Me.pnlNotas.Location = New System.Drawing.Point(267, 39)
         Me.pnlNotas.Name = "pnlNotas"
         Me.pnlNotas.Size = New System.Drawing.Size(501, 385)
         Me.pnlNotas.TabIndex = 3
         Me.pnlNotas.Visible = False
+        '
+        'pnlConsulta
+        '
+        Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlConsulta.Controls.Add(Me.GroupBox1)
+        Me.pnlConsulta.Location = New System.Drawing.Point(158, 84)
+        Me.pnlConsulta.Name = "pnlConsulta"
+        Me.pnlConsulta.Size = New System.Drawing.Size(718, 329)
+        Me.pnlConsulta.TabIndex = 2
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.txtBuscarEnTodosLosCampos)
+        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.lstOpciones)
+        Me.GroupBox1.Controls.Add(Me.btnCerrarConsulta)
+        Me.GroupBox1.Controls.Add(Me.lstFiltrada)
+        Me.GroupBox1.Controls.Add(Me.lstConsulta)
+        Me.GroupBox1.Controls.Add(Me.txtAyuda)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox1.Location = New System.Drawing.Point(18, 10)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(683, 309)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Consulta"
+        '
+        'txtBuscarEnTodosLosCampos
+        '
+        Me.txtBuscarEnTodosLosCampos.Location = New System.Drawing.Point(183, 273)
+        Me.txtBuscarEnTodosLosCampos.Name = "txtBuscarEnTodosLosCampos"
+        Me.txtBuscarEnTodosLosCampos.Size = New System.Drawing.Size(224, 20)
+        Me.txtBuscarEnTodosLosCampos.TabIndex = 5
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(28, 277)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(145, 13)
+        Me.Label16.TabIndex = 4
+        Me.Label16.Text = "Buscar en Todos los Campos"
+        Me.Label16.Visible = False
+        '
+        'lstOpciones
+        '
+        Me.lstOpciones.FormattingEnabled = True
+        Me.lstOpciones.Items.AddRange(New Object() {"Ensayos", "Ensayos por Cliente"})
+        Me.lstOpciones.Location = New System.Drawing.Point(20, 48)
+        Me.lstOpciones.Name = "lstOpciones"
+        Me.lstOpciones.Size = New System.Drawing.Size(647, 212)
+        Me.lstOpciones.TabIndex = 3
+        '
+        'btnCerrarConsulta
+        '
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(538, 269)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(115, 28)
+        Me.btnCerrarConsulta.TabIndex = 0
+        Me.btnCerrarConsulta.Text = "Cerrar"
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.Location = New System.Drawing.Point(19, 49)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(643, 212)
+        Me.lstFiltrada.TabIndex = 2
+        Me.lstFiltrada.Visible = False
+        '
+        'lstConsulta
+        '
+        Me.lstConsulta.FormattingEnabled = True
+        Me.lstConsulta.Location = New System.Drawing.Point(19, 49)
+        Me.lstConsulta.Name = "lstConsulta"
+        Me.lstConsulta.Size = New System.Drawing.Size(643, 212)
+        Me.lstConsulta.TabIndex = 1
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(20, 19)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(647, 20)
+        Me.txtAyuda.TabIndex = 0
         '
         'rbEstabilidad
         '
@@ -416,50 +547,6 @@ Partial Class IngresoPruebasEnsayo
         Me.txtNota.Size = New System.Drawing.Size(467, 328)
         Me.txtNota.TabIndex = 0
         Me.txtNota.Text = ""
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Controls.Add(Me.TabFormula)
-        Me.TabControl1.Controls.Add(Me.TabProceso)
-        Me.TabControl1.Controls.Add(Me.TabResultadosLaboratorio)
-        Me.TabControl1.Controls.Add(Me.TabEnsayosAdicionales)
-        Me.TabControl1.Controls.Add(Me.TabRevisiones)
-        Me.TabControl1.Controls.Add(Me.TabCosto)
-        Me.TabControl1.Controls.Add(Me.TabDocumentacion)
-        Me.TabControl1.Controls.Add(Me.TabDatosEntrada)
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.ItemSize = New System.Drawing.Size(200, 30)
-        Me.TabControl1.Location = New System.Drawing.Point(7, 44)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabControl1.Multiline = True
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.Padding = New System.Drawing.Point(19, 3)
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1042, 474)
-        Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight
-        Me.TabControl1.TabIndex = 3
-        '
-        'TabFormula
-        '
-        Me.TabFormula.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.TabFormula.Controls.Add(Me.pnlHojaPiloto)
-        Me.TabFormula.Controls.Add(Me.cmbPlanta)
-        Me.TabFormula.Controls.Add(Me.dgvFormula)
-        Me.TabFormula.Controls.Add(Me.txtHojaProduccion)
-        Me.TabFormula.Controls.Add(Me.txtRealizado)
-        Me.TabFormula.Controls.Add(Me.Label9)
-        Me.TabFormula.Controls.Add(Me.Label8)
-        Me.TabFormula.Controls.Add(Me.Label13)
-        Me.TabFormula.Controls.Add(Me.Button3)
-        Me.TabFormula.Controls.Add(Me.btnLeerVersionAntFormula)
-        Me.TabFormula.Controls.Add(Me.btnHojaPiloto)
-        Me.TabFormula.Location = New System.Drawing.Point(4, 34)
-        Me.TabFormula.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabFormula.Name = "TabFormula"
-        Me.TabFormula.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabFormula.Size = New System.Drawing.Size(1034, 436)
-        Me.TabFormula.TabIndex = 0
-        Me.TabFormula.Text = "Composición"
         '
         'pnlHojaPiloto
         '
@@ -1085,31 +1172,33 @@ Partial Class IngresoPruebasEnsayo
         '
         'RevisionesParticipantes
         '
-        Me.RevisionesParticipantes.HeaderText = "Participantes"
+        Me.RevisionesParticipantes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.RevisionesParticipantes.HeaderText = "Particip."
         Me.RevisionesParticipantes.MaxInputLength = 50
         Me.RevisionesParticipantes.Name = "RevisionesParticipantes"
-        Me.RevisionesParticipantes.Width = 128
+        Me.RevisionesParticipantes.Width = 70
         '
         'RevisionesResultados
         '
         Me.RevisionesResultados.HeaderText = "Resultados"
-        Me.RevisionesResultados.MaxInputLength = 50
+        Me.RevisionesResultados.MaxInputLength = 75
         Me.RevisionesResultados.Name = "RevisionesResultados"
-        Me.RevisionesResultados.Width = 230
+        Me.RevisionesResultados.Width = 400
         '
         'RevisionesAcciones
         '
         Me.RevisionesAcciones.HeaderText = "Acciones"
-        Me.RevisionesAcciones.MaxInputLength = 50
+        Me.RevisionesAcciones.MaxInputLength = 75
         Me.RevisionesAcciones.Name = "RevisionesAcciones"
-        Me.RevisionesAcciones.Width = 230
+        Me.RevisionesAcciones.Width = 400
         '
         'RevisionesResponsables
         '
-        Me.RevisionesResponsables.HeaderText = "Responsables"
+        Me.RevisionesResponsables.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.RevisionesResponsables.HeaderText = "Resp."
         Me.RevisionesResponsables.MaxInputLength = 20
         Me.RevisionesResponsables.Name = "RevisionesResponsables"
-        Me.RevisionesResponsables.Width = 150
+        Me.RevisionesResponsables.Width = 60
         '
         'RevisionesEstado
         '
@@ -1468,6 +1557,102 @@ Partial Class IngresoPruebasEnsayo
         Me.txtComentariosI.Size = New System.Drawing.Size(392, 20)
         Me.txtComentariosI.TabIndex = 3
         '
+        'txtRequisitosXII
+        '
+        Me.txtRequisitosXII.Location = New System.Drawing.Point(52, 346)
+        Me.txtRequisitosXII.MaxLength = 60
+        Me.txtRequisitosXII.Name = "txtRequisitosXII"
+        Me.txtRequisitosXII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosXII.TabIndex = 3
+        '
+        'txtRequisitosXI
+        '
+        Me.txtRequisitosXI.Location = New System.Drawing.Point(52, 319)
+        Me.txtRequisitosXI.MaxLength = 60
+        Me.txtRequisitosXI.Name = "txtRequisitosXI"
+        Me.txtRequisitosXI.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosXI.TabIndex = 3
+        '
+        'txtRequisitosX
+        '
+        Me.txtRequisitosX.Location = New System.Drawing.Point(52, 292)
+        Me.txtRequisitosX.MaxLength = 60
+        Me.txtRequisitosX.Name = "txtRequisitosX"
+        Me.txtRequisitosX.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosX.TabIndex = 3
+        '
+        'txtRequisitosIX
+        '
+        Me.txtRequisitosIX.Location = New System.Drawing.Point(52, 265)
+        Me.txtRequisitosIX.MaxLength = 60
+        Me.txtRequisitosIX.Name = "txtRequisitosIX"
+        Me.txtRequisitosIX.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosIX.TabIndex = 3
+        '
+        'txtRequisitosVIII
+        '
+        Me.txtRequisitosVIII.Location = New System.Drawing.Point(52, 238)
+        Me.txtRequisitosVIII.MaxLength = 60
+        Me.txtRequisitosVIII.Name = "txtRequisitosVIII"
+        Me.txtRequisitosVIII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosVIII.TabIndex = 3
+        '
+        'txtRequisitosVII
+        '
+        Me.txtRequisitosVII.Location = New System.Drawing.Point(52, 211)
+        Me.txtRequisitosVII.MaxLength = 60
+        Me.txtRequisitosVII.Name = "txtRequisitosVII"
+        Me.txtRequisitosVII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosVII.TabIndex = 3
+        '
+        'txtRequisitosVI
+        '
+        Me.txtRequisitosVI.Location = New System.Drawing.Point(52, 184)
+        Me.txtRequisitosVI.MaxLength = 60
+        Me.txtRequisitosVI.Name = "txtRequisitosVI"
+        Me.txtRequisitosVI.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosVI.TabIndex = 3
+        '
+        'txtRequisitosV
+        '
+        Me.txtRequisitosV.Location = New System.Drawing.Point(52, 157)
+        Me.txtRequisitosV.MaxLength = 60
+        Me.txtRequisitosV.Name = "txtRequisitosV"
+        Me.txtRequisitosV.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosV.TabIndex = 3
+        '
+        'txtRequisitosIV
+        '
+        Me.txtRequisitosIV.Location = New System.Drawing.Point(52, 130)
+        Me.txtRequisitosIV.MaxLength = 60
+        Me.txtRequisitosIV.Name = "txtRequisitosIV"
+        Me.txtRequisitosIV.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosIV.TabIndex = 3
+        '
+        'txtRequisitosIII
+        '
+        Me.txtRequisitosIII.Location = New System.Drawing.Point(52, 103)
+        Me.txtRequisitosIII.MaxLength = 60
+        Me.txtRequisitosIII.Name = "txtRequisitosIII"
+        Me.txtRequisitosIII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosIII.TabIndex = 3
+        '
+        'txtRequisitosII
+        '
+        Me.txtRequisitosII.Location = New System.Drawing.Point(52, 76)
+        Me.txtRequisitosII.MaxLength = 60
+        Me.txtRequisitosII.Name = "txtRequisitosII"
+        Me.txtRequisitosII.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosII.TabIndex = 3
+        '
+        'txtRequisitosI
+        '
+        Me.txtRequisitosI.Location = New System.Drawing.Point(52, 49)
+        Me.txtRequisitosI.MaxLength = 60
+        Me.txtRequisitosI.Name = "txtRequisitosI"
+        Me.txtRequisitosI.Size = New System.Drawing.Size(377, 20)
+        Me.txtRequisitosI.TabIndex = 3
+        '
         'Label20
         '
         Me.Label20.AutoSize = True
@@ -1712,194 +1897,11 @@ Partial Class IngresoPruebasEnsayo
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'pnlConsulta
-        '
-        Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(170, 144)
-        Me.pnlConsulta.Name = "pnlConsulta"
-        Me.pnlConsulta.Size = New System.Drawing.Size(718, 329)
-        Me.pnlConsulta.TabIndex = 2
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.txtBuscarEnTodosLosCampos)
-        Me.GroupBox1.Controls.Add(Me.Label16)
-        Me.GroupBox1.Controls.Add(Me.lstOpciones)
-        Me.GroupBox1.Controls.Add(Me.btnCerrarConsulta)
-        Me.GroupBox1.Controls.Add(Me.lstFiltrada)
-        Me.GroupBox1.Controls.Add(Me.lstConsulta)
-        Me.GroupBox1.Controls.Add(Me.txtAyuda)
-        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(18, 10)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(683, 309)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Consulta"
-        '
-        'txtBuscarEnTodosLosCampos
-        '
-        Me.txtBuscarEnTodosLosCampos.Location = New System.Drawing.Point(183, 273)
-        Me.txtBuscarEnTodosLosCampos.Name = "txtBuscarEnTodosLosCampos"
-        Me.txtBuscarEnTodosLosCampos.Size = New System.Drawing.Size(224, 20)
-        Me.txtBuscarEnTodosLosCampos.TabIndex = 5
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(28, 277)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(145, 13)
-        Me.Label16.TabIndex = 4
-        Me.Label16.Text = "Buscar en Todos los Campos"
-        Me.Label16.Visible = False
-        '
-        'lstOpciones
-        '
-        Me.lstOpciones.FormattingEnabled = True
-        Me.lstOpciones.Items.AddRange(New Object() {"Ensayos", "Ensayos por Cliente"})
-        Me.lstOpciones.Location = New System.Drawing.Point(20, 48)
-        Me.lstOpciones.Name = "lstOpciones"
-        Me.lstOpciones.Size = New System.Drawing.Size(647, 212)
-        Me.lstOpciones.TabIndex = 3
-        '
-        'btnCerrarConsulta
-        '
-        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnCerrarConsulta.Location = New System.Drawing.Point(538, 269)
-        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
-        Me.btnCerrarConsulta.Size = New System.Drawing.Size(115, 28)
-        Me.btnCerrarConsulta.TabIndex = 0
-        Me.btnCerrarConsulta.Text = "Cerrar"
-        Me.btnCerrarConsulta.UseVisualStyleBackColor = True
-        '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.Location = New System.Drawing.Point(19, 49)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(643, 212)
-        Me.lstFiltrada.TabIndex = 2
-        Me.lstFiltrada.Visible = False
-        '
-        'lstConsulta
-        '
-        Me.lstConsulta.FormattingEnabled = True
-        Me.lstConsulta.Location = New System.Drawing.Point(19, 49)
-        Me.lstConsulta.Name = "lstConsulta"
-        Me.lstConsulta.Size = New System.Drawing.Size(643, 212)
-        Me.lstConsulta.TabIndex = 1
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Location = New System.Drawing.Point(20, 19)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(647, 20)
-        Me.txtAyuda.TabIndex = 0
-        '
-        'txtRequisitosI
-        '
-        Me.txtRequisitosI.Location = New System.Drawing.Point(52, 49)
-        Me.txtRequisitosI.MaxLength = 60
-        Me.txtRequisitosI.Name = "txtRequisitosI"
-        Me.txtRequisitosI.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosI.TabIndex = 3
-        '
-        'txtRequisitosII
-        '
-        Me.txtRequisitosII.Location = New System.Drawing.Point(52, 76)
-        Me.txtRequisitosII.MaxLength = 60
-        Me.txtRequisitosII.Name = "txtRequisitosII"
-        Me.txtRequisitosII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosII.TabIndex = 3
-        '
-        'txtRequisitosIII
-        '
-        Me.txtRequisitosIII.Location = New System.Drawing.Point(52, 103)
-        Me.txtRequisitosIII.MaxLength = 60
-        Me.txtRequisitosIII.Name = "txtRequisitosIII"
-        Me.txtRequisitosIII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosIII.TabIndex = 3
-        '
-        'txtRequisitosIV
-        '
-        Me.txtRequisitosIV.Location = New System.Drawing.Point(52, 130)
-        Me.txtRequisitosIV.MaxLength = 60
-        Me.txtRequisitosIV.Name = "txtRequisitosIV"
-        Me.txtRequisitosIV.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosIV.TabIndex = 3
-        '
-        'txtRequisitosV
-        '
-        Me.txtRequisitosV.Location = New System.Drawing.Point(52, 157)
-        Me.txtRequisitosV.MaxLength = 60
-        Me.txtRequisitosV.Name = "txtRequisitosV"
-        Me.txtRequisitosV.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosV.TabIndex = 3
-        '
-        'txtRequisitosXII
-        '
-        Me.txtRequisitosXII.Location = New System.Drawing.Point(52, 346)
-        Me.txtRequisitosXII.MaxLength = 60
-        Me.txtRequisitosXII.Name = "txtRequisitosXII"
-        Me.txtRequisitosXII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosXII.TabIndex = 3
-        '
-        'txtRequisitosVII
-        '
-        Me.txtRequisitosVII.Location = New System.Drawing.Point(52, 211)
-        Me.txtRequisitosVII.MaxLength = 60
-        Me.txtRequisitosVII.Name = "txtRequisitosVII"
-        Me.txtRequisitosVII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosVII.TabIndex = 3
-        '
-        'txtRequisitosVIII
-        '
-        Me.txtRequisitosVIII.Location = New System.Drawing.Point(52, 238)
-        Me.txtRequisitosVIII.MaxLength = 60
-        Me.txtRequisitosVIII.Name = "txtRequisitosVIII"
-        Me.txtRequisitosVIII.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosVIII.TabIndex = 3
-        '
-        'txtRequisitosIX
-        '
-        Me.txtRequisitosIX.Location = New System.Drawing.Point(52, 265)
-        Me.txtRequisitosIX.MaxLength = 60
-        Me.txtRequisitosIX.Name = "txtRequisitosIX"
-        Me.txtRequisitosIX.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosIX.TabIndex = 3
-        '
-        'txtRequisitosX
-        '
-        Me.txtRequisitosX.Location = New System.Drawing.Point(52, 292)
-        Me.txtRequisitosX.MaxLength = 60
-        Me.txtRequisitosX.Name = "txtRequisitosX"
-        Me.txtRequisitosX.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosX.TabIndex = 3
-        '
-        'txtRequisitosXI
-        '
-        Me.txtRequisitosXI.Location = New System.Drawing.Point(52, 319)
-        Me.txtRequisitosXI.MaxLength = 60
-        Me.txtRequisitosXI.Name = "txtRequisitosXI"
-        Me.txtRequisitosXI.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosXI.TabIndex = 3
-        '
-        'txtRequisitosVI
-        '
-        Me.txtRequisitosVI.Location = New System.Drawing.Point(52, 184)
-        Me.txtRequisitosVI.MaxLength = 60
-        Me.txtRequisitosVI.Name = "txtRequisitosVI"
-        Me.txtRequisitosVI.Size = New System.Drawing.Size(377, 20)
-        Me.txtRequisitosVI.TabIndex = 3
-        '
         'IngresoPruebasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1058, 643)
-        Me.Controls.Add(Me.pnlConsulta)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Location = New System.Drawing.Point(10, 10)
         Me.Name = "IngresoPruebasEnsayo"
@@ -1914,11 +1916,14 @@ Partial Class IngresoPruebasEnsayo
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        Me.pnlNotas.ResumeLayout(False)
-        Me.pnlNotas.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.TabFormula.ResumeLayout(False)
         Me.TabFormula.PerformLayout()
+        Me.pnlNotas.ResumeLayout(False)
+        Me.pnlNotas.PerformLayout()
+        Me.pnlConsulta.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.pnlHojaPiloto.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -1941,9 +1946,6 @@ Partial Class IngresoPruebasEnsayo
         Me.TabPage1.ResumeLayout(False)
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
-        Me.pnlConsulta.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2071,14 +2073,6 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents ProcesoTiempo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProcesoControl As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProcesoSeguridad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesVersion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesFecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesParticipantes As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesResultados As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesResponsables As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RevisionesEstado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lstOpciones As System.Windows.Forms.ListBox
     Friend WithEvents btnCerrarConsulta As System.Windows.Forms.Button
@@ -2099,4 +2093,12 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents txtRequisitosIII As System.Windows.Forms.TextBox
     Friend WithEvents txtRequisitosII As System.Windows.Forms.TextBox
     Friend WithEvents txtRequisitosI As System.Windows.Forms.TextBox
+    Friend WithEvents RevisionesVersion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesFecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesParticipantes As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesResultados As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesResponsables As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RevisionesEstado As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
