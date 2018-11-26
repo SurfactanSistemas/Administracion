@@ -1964,21 +1964,25 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Sub
 
     Private Sub _ProcesarDragDeArchivo(ByVal e As DragEventArgs)
+        Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+        _SubirArchvios(archivos)
+    End Sub
 
+    Private Sub _SubirArchvios(ByVal archivos As String())
         Dim WNombreCarpetaArchivos As String = txtNumero.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
         Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & WNombreCarpetaArchivos
-        Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+
         Dim WDestino = ""
         Dim WCantCorrectas = 0
 
-        If archivos.Length = 0 Then : Exit Sub : End If
+        If archivos.Length = 0 Then : Return : End If
 
         If Not Directory.Exists(WRutaArchivosRelacionados) Then
             Try
                 Directory.CreateDirectory(WRutaArchivosRelacionados)
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-                Exit Sub
+                Return
             End Try
         End If
 
@@ -2003,7 +2007,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
                     Catch ex As Exception
                         MsgBox(ex.Message, MsgBoxStyle.Critical)
-                        Exit Sub
+                        Return
                     End Try
 
                 End If
@@ -2017,7 +2021,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End If
 
         _CargarArchivosRelacionados()
-
     End Sub
 
     Private Sub dgvArchivos_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles dgvArchivos.DragDrop
@@ -2107,5 +2110,34 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         _CargarArchivosRelacionados()
 
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Try
+            With OpenFileDialog1
+                .Filter = "Imágenes (bmp, jpg, png) | " & String.Join(";", EXTENSIONES_PERMITIDAS.Split("|"))
+                If .ShowDialog() = Windows.Forms.DialogResult.OK Then
+                    Dim WArchivos() = .FileNames
+
+                    If WArchivos.Length > 0 Then
+                        _SubirArchvios(WArchivos)
+                    End If
+
+                End If
+            End With
+            dgvAcciones.Focus()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        Try
+            If dgvArchivos.SelectedRows.Count > 0 Then
+                EliminarArchivoToolStripMenuItem_Click(Nothing, Nothing)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
     End Sub
 End Class
