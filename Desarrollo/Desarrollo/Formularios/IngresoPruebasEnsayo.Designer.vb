@@ -43,8 +43,6 @@ Partial Class IngresoPruebasEnsayo
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -57,6 +55,8 @@ Partial Class IngresoPruebasEnsayo
         Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -68,7 +68,6 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabFormula = New System.Windows.Forms.TabPage()
-        Me.pnlNotas = New System.Windows.Forms.Panel()
         Me.pnlConsulta = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtBuscarEnTodosLosCampos = New System.Windows.Forms.TextBox()
@@ -78,6 +77,7 @@ Partial Class IngresoPruebasEnsayo
         Me.lstFiltrada = New System.Windows.Forms.ListBox()
         Me.lstConsulta = New System.Windows.Forms.ListBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
+        Me.pnlNotas = New System.Windows.Forms.Panel()
         Me.rbEstabilidad = New System.Windows.Forms.RadioButton()
         Me.rbAplicacion = New System.Windows.Forms.RadioButton()
         Me.btnCerrarNota = New System.Windows.Forms.Button()
@@ -102,6 +102,7 @@ Partial Class IngresoPruebasEnsayo
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.btnLeerVersionAntFormula = New System.Windows.Forms.Button()
         Me.btnHojaPiloto = New System.Windows.Forms.Button()
         Me.TabProceso = New System.Windows.Forms.TabPage()
@@ -116,6 +117,7 @@ Partial Class IngresoPruebasEnsayo
         Me.ProcesoSeguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtRealizadoII = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.btnImprimeProceso = New System.Windows.Forms.Button()
         Me.btnLeeVersionAntProceso = New System.Windows.Forms.Button()
         Me.TabResultadosLaboratorio = New System.Windows.Forms.TabPage()
@@ -132,15 +134,8 @@ Partial Class IngresoPruebasEnsayo
         Me.TabEnsayosAdicionales = New System.Windows.Forms.TabPage()
         Me.txtNotasEnsayosAdicionales = New System.Windows.Forms.RichTextBox()
         Me.TabRevisiones = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.dgvRevisiones = New System.Windows.Forms.DataGridView()
-        Me.RevisionesVersion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesEtapa = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesFecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesParticipantes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesResultados = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesAcciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesResponsables = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RevisionesEstado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabCosto = New System.Windows.Forms.TabPage()
         Me.cmbTipoCalculo = New System.Windows.Forms.ComboBox()
         Me.dgvCosto = New System.Windows.Forms.DataGridView()
@@ -209,6 +204,15 @@ Partial Class IngresoPruebasEnsayo
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.RevisionesVersion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesEtapa = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesFecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesParticipantes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesResultados = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesAcciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesResponsables = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RevisionesEstado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FilaAgregada = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -218,9 +222,9 @@ Partial Class IngresoPruebasEnsayo
         Me.Panel3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabFormula.SuspendLayout()
-        Me.pnlNotas.SuspendLayout()
         Me.pnlConsulta.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.pnlNotas.SuspendLayout()
         Me.pnlHojaPiloto.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvFormula, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -379,7 +383,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.Padding = New System.Drawing.Point(19, 3)
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1042, 474)
+        Me.TabControl1.Size = New System.Drawing.Size(1042, 477)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight
         Me.TabControl1.TabIndex = 3
         '
@@ -397,34 +401,22 @@ Partial Class IngresoPruebasEnsayo
         Me.TabFormula.Controls.Add(Me.Label8)
         Me.TabFormula.Controls.Add(Me.Label13)
         Me.TabFormula.Controls.Add(Me.Button3)
+        Me.TabFormula.Controls.Add(Me.Button2)
         Me.TabFormula.Controls.Add(Me.btnLeerVersionAntFormula)
         Me.TabFormula.Controls.Add(Me.btnHojaPiloto)
         Me.TabFormula.Location = New System.Drawing.Point(4, 34)
         Me.TabFormula.Margin = New System.Windows.Forms.Padding(0)
         Me.TabFormula.Name = "TabFormula"
         Me.TabFormula.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabFormula.Size = New System.Drawing.Size(1034, 436)
+        Me.TabFormula.Size = New System.Drawing.Size(1034, 439)
         Me.TabFormula.TabIndex = 0
         Me.TabFormula.Text = "Composición"
-        '
-        'pnlNotas
-        '
-        Me.pnlNotas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.pnlNotas.Controls.Add(Me.rbEstabilidad)
-        Me.pnlNotas.Controls.Add(Me.rbAplicacion)
-        Me.pnlNotas.Controls.Add(Me.btnCerrarNota)
-        Me.pnlNotas.Controls.Add(Me.txtNota)
-        Me.pnlNotas.Location = New System.Drawing.Point(267, 39)
-        Me.pnlNotas.Name = "pnlNotas"
-        Me.pnlNotas.Size = New System.Drawing.Size(501, 385)
-        Me.pnlNotas.TabIndex = 3
-        Me.pnlNotas.Visible = False
         '
         'pnlConsulta
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(158, 84)
+        Me.pnlConsulta.Location = New System.Drawing.Point(158, 55)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(718, 329)
         Me.pnlConsulta.TabIndex = 2
@@ -505,6 +497,19 @@ Partial Class IngresoPruebasEnsayo
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(647, 20)
         Me.txtAyuda.TabIndex = 0
+        '
+        'pnlNotas
+        '
+        Me.pnlNotas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlNotas.Controls.Add(Me.rbEstabilidad)
+        Me.pnlNotas.Controls.Add(Me.rbAplicacion)
+        Me.pnlNotas.Controls.Add(Me.btnCerrarNota)
+        Me.pnlNotas.Controls.Add(Me.txtNota)
+        Me.pnlNotas.Location = New System.Drawing.Point(267, 27)
+        Me.pnlNotas.Name = "pnlNotas"
+        Me.pnlNotas.Size = New System.Drawing.Size(501, 385)
+        Me.pnlNotas.TabIndex = 3
+        Me.pnlNotas.Visible = False
         '
         'rbEstabilidad
         '
@@ -761,12 +766,24 @@ Partial Class IngresoPruebasEnsayo
         Me.Button3.UseVisualStyleBackColor = True
         Me.Button3.Visible = False
         '
+        'Button2
+        '
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button2.Location = New System.Drawing.Point(772, 367)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(136, 25)
+        Me.Button2.TabIndex = 0
+        Me.Button2.Text = "Agregar Fila"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'btnLeerVersionAntFormula
         '
         Me.btnLeerVersionAntFormula.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLeerVersionAntFormula.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLeerVersionAntFormula.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLeerVersionAntFormula.Location = New System.Drawing.Point(778, 368)
+        Me.btnLeerVersionAntFormula.Location = New System.Drawing.Point(621, 368)
         Me.btnLeerVersionAntFormula.Name = "btnLeerVersionAntFormula"
         Me.btnLeerVersionAntFormula.Size = New System.Drawing.Size(136, 25)
         Me.btnLeerVersionAntFormula.TabIndex = 0
@@ -792,13 +809,14 @@ Partial Class IngresoPruebasEnsayo
         Me.TabProceso.Controls.Add(Me.dgvProceso)
         Me.TabProceso.Controls.Add(Me.txtRealizadoII)
         Me.TabProceso.Controls.Add(Me.Label10)
+        Me.TabProceso.Controls.Add(Me.Button4)
         Me.TabProceso.Controls.Add(Me.btnImprimeProceso)
         Me.TabProceso.Controls.Add(Me.btnLeeVersionAntProceso)
         Me.TabProceso.Location = New System.Drawing.Point(4, 34)
         Me.TabProceso.Margin = New System.Windows.Forms.Padding(0)
         Me.TabProceso.Name = "TabProceso"
         Me.TabProceso.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabProceso.Size = New System.Drawing.Size(1034, 436)
+        Me.TabProceso.Size = New System.Drawing.Size(1034, 439)
         Me.TabProceso.TabIndex = 1
         Me.TabProceso.Text = "Proceso"
         '
@@ -915,6 +933,18 @@ Partial Class IngresoPruebasEnsayo
         Me.Label10.TabIndex = 6
         Me.Label10.Text = "Realizado Por:"
         '
+        'Button4
+        '
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button4.Location = New System.Drawing.Point(707, 400)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(136, 25)
+        Me.Button4.TabIndex = 5
+        Me.Button4.Text = "Agregar Fila"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'btnImprimeProceso
         '
         Me.btnImprimeProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -950,7 +980,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabResultadosLaboratorio.Controls.Add(Me.btnLeerVersionAntLab)
         Me.TabResultadosLaboratorio.Location = New System.Drawing.Point(4, 34)
         Me.TabResultadosLaboratorio.Name = "TabResultadosLaboratorio"
-        Me.TabResultadosLaboratorio.Size = New System.Drawing.Size(1034, 436)
+        Me.TabResultadosLaboratorio.Size = New System.Drawing.Size(1034, 439)
         Me.TabResultadosLaboratorio.TabIndex = 2
         Me.TabResultadosLaboratorio.Text = "Ensayos de Laboratorio"
         '
@@ -1082,7 +1112,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabEnsayosAdicionales.Controls.Add(Me.txtNotasEnsayosAdicionales)
         Me.TabEnsayosAdicionales.Location = New System.Drawing.Point(4, 34)
         Me.TabEnsayosAdicionales.Name = "TabEnsayosAdicionales"
-        Me.TabEnsayosAdicionales.Size = New System.Drawing.Size(1034, 436)
+        Me.TabEnsayosAdicionales.Size = New System.Drawing.Size(1034, 439)
         Me.TabEnsayosAdicionales.TabIndex = 3
         Me.TabEnsayosAdicionales.Text = "Otros Ensayos"
         '
@@ -1098,12 +1128,25 @@ Partial Class IngresoPruebasEnsayo
         'TabRevisiones
         '
         Me.TabRevisiones.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabRevisiones.Controls.Add(Me.Button1)
         Me.TabRevisiones.Controls.Add(Me.dgvRevisiones)
         Me.TabRevisiones.Location = New System.Drawing.Point(4, 34)
         Me.TabRevisiones.Name = "TabRevisiones"
-        Me.TabRevisiones.Size = New System.Drawing.Size(1034, 436)
+        Me.TabRevisiones.Size = New System.Drawing.Size(1034, 439)
         Me.TabRevisiones.TabIndex = 4
         Me.TabRevisiones.Text = "Revisiones"
+        '
+        'Button1
+        '
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button1.Location = New System.Drawing.Point(16, 407)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(170, 25)
+        Me.Button1.TabIndex = 12
+        Me.Button1.Text = "Agregar Fila"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'dgvRevisiones
         '
@@ -1121,7 +1164,7 @@ Partial Class IngresoPruebasEnsayo
         DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvRevisiones.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle18
         Me.dgvRevisiones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvRevisiones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RevisionesVersion, Me.RevisionesEtapa, Me.RevisionesFecha, Me.RevisionesParticipantes, Me.RevisionesResultados, Me.RevisionesAcciones, Me.RevisionesResponsables, Me.RevisionesEstado})
+        Me.dgvRevisiones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RevisionesVersion, Me.RevisionesEtapa, Me.RevisionesFecha, Me.RevisionesParticipantes, Me.RevisionesResultados, Me.RevisionesAcciones, Me.RevisionesResponsables, Me.RevisionesEstado, Me.FilaAgregada})
         DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1142,70 +1185,8 @@ Partial Class IngresoPruebasEnsayo
         DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvRevisiones.RowHeadersDefaultCellStyle = DataGridViewCellStyle22
         Me.dgvRevisiones.RowHeadersWidth = 15
-        Me.dgvRevisiones.Size = New System.Drawing.Size(1016, 404)
+        Me.dgvRevisiones.Size = New System.Drawing.Size(1016, 385)
         Me.dgvRevisiones.TabIndex = 5
-        '
-        'RevisionesVersion
-        '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle19
-        Me.RevisionesVersion.HeaderText = "Ver"
-        Me.RevisionesVersion.MaxInputLength = 10
-        Me.RevisionesVersion.Name = "RevisionesVersion"
-        Me.RevisionesVersion.Width = 30
-        '
-        'RevisionesEtapa
-        '
-        Me.RevisionesEtapa.HeaderText = "Etapa"
-        Me.RevisionesEtapa.MaxInputLength = 20
-        Me.RevisionesEtapa.Name = "RevisionesEtapa"
-        Me.RevisionesEtapa.Width = 90
-        '
-        'RevisionesFecha
-        '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle20
-        Me.RevisionesFecha.HeaderText = "Fecha"
-        Me.RevisionesFecha.MaxInputLength = 10
-        Me.RevisionesFecha.Name = "RevisionesFecha"
-        Me.RevisionesFecha.Width = 70
-        '
-        'RevisionesParticipantes
-        '
-        Me.RevisionesParticipantes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.RevisionesParticipantes.HeaderText = "Particip."
-        Me.RevisionesParticipantes.MaxInputLength = 50
-        Me.RevisionesParticipantes.Name = "RevisionesParticipantes"
-        Me.RevisionesParticipantes.Width = 70
-        '
-        'RevisionesResultados
-        '
-        Me.RevisionesResultados.HeaderText = "Resultados"
-        Me.RevisionesResultados.MaxInputLength = 75
-        Me.RevisionesResultados.Name = "RevisionesResultados"
-        Me.RevisionesResultados.Width = 400
-        '
-        'RevisionesAcciones
-        '
-        Me.RevisionesAcciones.HeaderText = "Acciones"
-        Me.RevisionesAcciones.MaxInputLength = 75
-        Me.RevisionesAcciones.Name = "RevisionesAcciones"
-        Me.RevisionesAcciones.Width = 400
-        '
-        'RevisionesResponsables
-        '
-        Me.RevisionesResponsables.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.RevisionesResponsables.HeaderText = "Resp."
-        Me.RevisionesResponsables.MaxInputLength = 20
-        Me.RevisionesResponsables.Name = "RevisionesResponsables"
-        Me.RevisionesResponsables.Width = 60
-        '
-        'RevisionesEstado
-        '
-        Me.RevisionesEstado.HeaderText = "Estado"
-        Me.RevisionesEstado.MaxInputLength = 20
-        Me.RevisionesEstado.Name = "RevisionesEstado"
-        Me.RevisionesEstado.Width = 70
         '
         'TabCosto
         '
@@ -1220,7 +1201,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabCosto.Controls.Add(Me.btnRecalculaCosto)
         Me.TabCosto.Location = New System.Drawing.Point(4, 34)
         Me.TabCosto.Name = "TabCosto"
-        Me.TabCosto.Size = New System.Drawing.Size(1034, 436)
+        Me.TabCosto.Size = New System.Drawing.Size(1034, 439)
         Me.TabCosto.TabIndex = 5
         Me.TabCosto.Text = "Costo"
         '
@@ -1400,7 +1381,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabDocumentacion.Controls.Add(Me.txtNotasDocumentacion)
         Me.TabDocumentacion.Location = New System.Drawing.Point(4, 34)
         Me.TabDocumentacion.Name = "TabDocumentacion"
-        Me.TabDocumentacion.Size = New System.Drawing.Size(1034, 436)
+        Me.TabDocumentacion.Size = New System.Drawing.Size(1034, 439)
         Me.TabDocumentacion.TabIndex = 6
         Me.TabDocumentacion.Text = "Documentación Adicional"
         '
@@ -1445,7 +1426,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabDatosEntrada.Controls.Add(Me.Label17)
         Me.TabDatosEntrada.Location = New System.Drawing.Point(4, 34)
         Me.TabDatosEntrada.Name = "TabDatosEntrada"
-        Me.TabDatosEntrada.Size = New System.Drawing.Size(1034, 436)
+        Me.TabDatosEntrada.Size = New System.Drawing.Size(1034, 439)
         Me.TabDatosEntrada.TabIndex = 7
         Me.TabDatosEntrada.Text = "Datos de Entrada"
         '
@@ -1681,7 +1662,7 @@ Partial Class IngresoPruebasEnsayo
         Me.TabPage1.Controls.Add(Me.dgvArchivos)
         Me.TabPage1.Location = New System.Drawing.Point(4, 34)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(1034, 436)
+        Me.TabPage1.Size = New System.Drawing.Size(1034, 439)
         Me.TabPage1.TabIndex = 8
         Me.TabPage1.Text = "Archivos Relacionados"
         '
@@ -1897,6 +1878,74 @@ Partial Class IngresoPruebasEnsayo
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
+        'RevisionesVersion
+        '
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.RevisionesVersion.DefaultCellStyle = DataGridViewCellStyle19
+        Me.RevisionesVersion.HeaderText = "Ver"
+        Me.RevisionesVersion.MaxInputLength = 10
+        Me.RevisionesVersion.Name = "RevisionesVersion"
+        Me.RevisionesVersion.Width = 30
+        '
+        'RevisionesEtapa
+        '
+        Me.RevisionesEtapa.HeaderText = "Etapa"
+        Me.RevisionesEtapa.MaxInputLength = 20
+        Me.RevisionesEtapa.Name = "RevisionesEtapa"
+        Me.RevisionesEtapa.Width = 90
+        '
+        'RevisionesFecha
+        '
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.RevisionesFecha.DefaultCellStyle = DataGridViewCellStyle20
+        Me.RevisionesFecha.HeaderText = "Fecha"
+        Me.RevisionesFecha.MaxInputLength = 10
+        Me.RevisionesFecha.Name = "RevisionesFecha"
+        Me.RevisionesFecha.Width = 70
+        '
+        'RevisionesParticipantes
+        '
+        Me.RevisionesParticipantes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.RevisionesParticipantes.HeaderText = "Particip."
+        Me.RevisionesParticipantes.MaxInputLength = 50
+        Me.RevisionesParticipantes.Name = "RevisionesParticipantes"
+        Me.RevisionesParticipantes.Width = 70
+        '
+        'RevisionesResultados
+        '
+        Me.RevisionesResultados.HeaderText = "Resultados"
+        Me.RevisionesResultados.MaxInputLength = 75
+        Me.RevisionesResultados.Name = "RevisionesResultados"
+        Me.RevisionesResultados.Width = 400
+        '
+        'RevisionesAcciones
+        '
+        Me.RevisionesAcciones.HeaderText = "Acciones"
+        Me.RevisionesAcciones.MaxInputLength = 75
+        Me.RevisionesAcciones.Name = "RevisionesAcciones"
+        Me.RevisionesAcciones.Width = 400
+        '
+        'RevisionesResponsables
+        '
+        Me.RevisionesResponsables.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.RevisionesResponsables.HeaderText = "Resp."
+        Me.RevisionesResponsables.MaxInputLength = 20
+        Me.RevisionesResponsables.Name = "RevisionesResponsables"
+        Me.RevisionesResponsables.Width = 60
+        '
+        'RevisionesEstado
+        '
+        Me.RevisionesEstado.HeaderText = "Estado"
+        Me.RevisionesEstado.MaxInputLength = 20
+        Me.RevisionesEstado.Name = "RevisionesEstado"
+        Me.RevisionesEstado.Width = 70
+        '
+        'FilaAgregada
+        '
+        Me.FilaAgregada.HeaderText = "FilaAgregada"
+        Me.FilaAgregada.Name = "FilaAgregada"
+        Me.FilaAgregada.Visible = False
+        '
         'IngresoPruebasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1919,11 +1968,11 @@ Partial Class IngresoPruebasEnsayo
         Me.TabControl1.ResumeLayout(False)
         Me.TabFormula.ResumeLayout(False)
         Me.TabFormula.PerformLayout()
-        Me.pnlNotas.ResumeLayout(False)
-        Me.pnlNotas.PerformLayout()
         Me.pnlConsulta.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.pnlNotas.ResumeLayout(False)
+        Me.pnlNotas.PerformLayout()
         Me.pnlHojaPiloto.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -2093,6 +2142,9 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents txtRequisitosIII As System.Windows.Forms.TextBox
     Friend WithEvents txtRequisitosII As System.Windows.Forms.TextBox
     Friend WithEvents txtRequisitosI As System.Windows.Forms.TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents RevisionesVersion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RevisionesEtapa As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RevisionesFecha As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2101,4 +2153,5 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents RevisionesAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RevisionesResponsables As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RevisionesEstado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FilaAgregada As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -1013,8 +1013,9 @@ Public Class IngresoPruebasEnsayo
                 ZAcciones = IIf(IsNothing(.Cells("RevisionesAcciones").Value), "", .Cells("RevisionesAcciones").Value)
                 ZResponsables = IIf(IsNothing(.Cells("RevisionesResponsables").Value), "", .Cells("RevisionesResponsables").Value)
                 ZEstado = IIf(IsNothing(.Cells("RevisionesEstado").Value), "", .Cells("RevisionesEstado").Value)
+                Dim WFilaAgregada = IIf(IsNothing(.Cells("FilaAgregada").Value), "", .Cells("FilaAgregada").Value)
 
-                If ZVersion <> "" Or ZEtapa <> "" Or ZFecha <> "" Or ZParticipantes <> "" Or ZResultados <> "" Or ZAcciones <> "" Or ZResponsables <> "" Or ZEstado <> "" Then
+                If (ZVersion <> "" Or ZEtapa <> "" Or ZFecha <> "" Or ZParticipantes <> "" Or ZResultados <> "" Or ZAcciones <> "" Or ZResponsables <> "" Or ZEstado <> "") Or Trim(WFilaAgregada) <> "" Then
 
                     WRenglon = Helper.ceros(.Index + 1, 2)
                     WClave = WOrden & WRenglon
@@ -4794,4 +4795,36 @@ Public Class IngresoPruebasEnsayo
 
     End Sub
 
+    Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+        With dgvRevisiones
+
+            If .SelectedRows.Count < 1 Then Exit Sub
+
+            .Rows.Insert(.SelectedRows(0).Index, 1)
+            .Rows(.SelectedRows(0).Index - 1).Cells("FilaAgregada").Value = "X"
+
+        End With
+
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        With dgvFormula
+
+            If .SelectedRows.Count < 1 Then Exit Sub
+
+            .Rows.Insert(.SelectedRows(0).Index, 1)
+
+        End With
+    End Sub
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        With dgvProceso
+
+            If .SelectedRows.Count < 1 Then Exit Sub
+
+            .Rows.Insert(.SelectedRows(0).Index, 1)
+
+        End With
+    End Sub
 End Class

@@ -74,35 +74,37 @@ Public Class Form1
                     Exit Sub
                 End If
             End With
-
-        End If
-
-        Select Case WBoton.Name
-            Case btnSurfac1.Name
-                WCheck = Surfac1Encendido
-            Case btnSurfac2.Name
-                WCheck = Surfac2Encendido
-            Case btnSurfac3.Name
-                WCheck = Surfac3Encendido
-            Case btnSurfac5.Name
-                WCheck = Surfac5Encendido
-            Case btnPellital.Name
-                WCheck = PellitalEncendido
-        End Select
-
-        WBoton.BackgroundImage = IIf(WCheck.Checked, My.Resources.btn_off, My.Resources.btn_on)
-
-        If WCheck.Checked Then
-            WComando = "2X"
         Else
-            WComando = "1X:" & WDelay
+            Exit Sub
         End If
 
-        WTCP.SendData(WComando, WIp, "6722")
 
-        WCheck.Checked = Not WCheck.Checked
+            Select Case WBoton.Name
+                Case btnSurfac1.Name
+                    WCheck = Surfac1Encendido
+                Case btnSurfac2.Name
+                    WCheck = Surfac2Encendido
+                Case btnSurfac3.Name
+                    WCheck = Surfac3Encendido
+                Case btnSurfac5.Name
+                    WCheck = Surfac5Encendido
+                Case btnPellital.Name
+                    WCheck = PellitalEncendido
+            End Select
 
-        Timer1.Start()
+            WBoton.BackgroundImage = IIf(WCheck.Checked, My.Resources.btn_off, My.Resources.btn_on)
+
+            If WCheck.Checked Then
+                WComando = "2X"
+            Else
+                WComando = "1X:" & WDelay
+            End If
+
+            WTCP.SendData(WComando, WIp, "6722")
+
+            WCheck.Checked = Not WCheck.Checked
+
+            Timer1.Start()
 
     End Sub
 
@@ -120,7 +122,24 @@ Public Class Form1
 
             Array.Clear(WData, 0, 8)
 
-            WTCP.SendData("00", "193.168.0.86", "6722", WEstado, WData)
+            Dim WIp = ""
+
+            If WDispositivos.Select("Descripcion = '" & WBoton.Name.Replace("btn", "") & "'").Length > 0 Then
+
+                Dim WDispo = WDispositivos.Select("Descripcion = '" & WBoton.Name.Replace("btn", "") & "'")
+
+                With WDispo(0)
+                    WIp = .Item("IP")
+                    If Val(.Item("Estado")) = 0 Then
+                        Exit Sub
+                    End If
+                End With
+
+            End If
+
+            If WIp = "" Then Exit Sub
+
+            WTCP.SendData("00", WIp, "6722", WEstado, WData)
 
             Dim W As String
 
@@ -136,7 +155,7 @@ Public Class Form1
             End If
 
             If Not WEstado Then
-                MsgBox("Ocurre un problema con la conexió a la alarma. Reinicie el Programa.", MsgBoxStyle.Information)
+                MsgBox("Ocurre un problema con la conexión a la alarma. Reinicie el Programa.", MsgBoxStyle.Information)
                 Timer1.Stop()
             End If
 
