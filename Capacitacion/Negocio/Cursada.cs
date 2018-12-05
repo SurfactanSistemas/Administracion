@@ -127,6 +127,19 @@ namespace Negocio
             return repo.Listar(consulta);
         }
 
+        public System.Data.DataTable ListarCursoNoRealizadosporTema(int TemaDesd, int TemajoHast, int FechaDesde, int FechaHasta, bool WExcluir99)
+        {
+
+
+            Conexion repo = new Conexion();
+            //string consulta = "select Cr.Curso, Cu.Descripcion, Cr.Tema, T.Descripcion, Cr.Legajo, l.Descripcion, Cr.Horas, Codigo = 0, Fecha = '  /  /    ', Cr.Observaciones,  Planificada = '' from Cronograma Cr LEFT JOIN Cursadas C ON C.Legajo = Cr.Legajo AND C.Curso = Cr.Curso AND C.Tema = Cr.Tema LEFT JOIN Legajo l ON l.Codigo = Cr.Legajo AND l.Renglon = 1 LEFT OUTER JOIN Tema Cu ON Cu.Curso = cr.Curso AND Cu.Tema = Cr.Tema LEFT OUTER JOIN Curso T ON T.Codigo = Cr.Curso where (C.Curso IS NULL OR C.Tema IS NULL) And  Cr.Curso >= " + TemaDesd + " and Cr.Curso <= " + TemajoHast + " and C.OrdFecha > = " + FechaDesde + " and C.OrdFecha < = " + FechaHasta;
+            string consulta = "select distinct Cr.Curso, Cu.Descripcion, Cr.Tema, T.Descripcion, Cr.Legajo, l.Descripcion, Cr.Horas, Codigo = 0, Fecha = '  /  /    ', Cr.Observaciones,  Planificada = '' from Cronograma Cr LEFT JOIN Legajo l ON l.Codigo = Cr.Legajo AND l.Renglon = 1 LEFT OUTER JOIN Tema Cu ON Cu.Curso = cr.Curso AND Cu.Tema = Cr.Tema LEFT OUTER JOIN Curso T ON T.Codigo = Cr.Curso  LEFT JOIN Cursadas C ON C.Legajo = Cr.Legajo AND C.Curso = Cr.Curso And c.Tema = cr.Tema And C.OrdFecha >= '" + FechaDesde + "' and C.OrdFecha <= '" + FechaHasta + "'  where (c.Curso IS NULL Or c.Tema IS NULL or c.Legajo IS NULL) And Cr.Curso >= '" + TemaDesd + "' and Cr.Curso <= '" + TemajoHast + "' and cr.tema > 0 And cr.Ano BETWEEN '" + FechaDesde.ToString().Substring(0, 4) + "' And '" + FechaHasta.ToString().Substring(0, 4) + "' order by cr.legajo , cr.curso, cr.tema";
+            
+            if (WExcluir99) consulta = "select distinct Cr.Curso, Cu.Descripcion, Cr.Tema, T.Descripcion, Cr.Legajo, l.Descripcion, Cr.Horas, Codigo = 0, Fecha = '  /  /    ', Cr.Observaciones,  Planificada = '' from Cronograma Cr LEFT JOIN Legajo l ON l.Codigo = Cr.Legajo AND l.Renglon = 1 LEFT OUTER JOIN Tema Cu ON Cu.Curso = cr.Curso AND Cu.Tema = Cr.Tema LEFT OUTER JOIN Curso T ON T.Codigo = Cr.Curso  LEFT JOIN Cursadas C ON C.Legajo = Cr.Legajo AND C.Curso = Cr.Curso And c.Tema = cr.Tema And C.OrdFecha >= '" + FechaDesde + "' and C.OrdFecha <= '" + FechaHasta + "'  where (c.Curso IS NULL Or c.Tema IS NULL or c.Legajo IS NULL) And Cr.Curso >= '" + TemaDesd + "' and Cr.Curso <= '" + TemajoHast + "' and cr.tema > 0 And cr.Ano BETWEEN '" + FechaDesde.ToString().Substring(0, 4) + "' And '" + FechaHasta.ToString().Substring(0, 4) + "' and cr.tema <> 99 order by cr.legajo , cr.curso, cr.tema";
+
+            return repo.Listar(consulta);
+        }
+
         public System.Data.DataTable ListarCursoporSector(int SectorDesd, int SectorHast, int FechaDesde, int FechaHasta)
         {
             Conexion repo = new Conexion();

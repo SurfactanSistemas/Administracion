@@ -63,6 +63,7 @@
             this.listadoDeHorasCursadasPorLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDePromedioDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeCursosPorResponsableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeCursosPendientesPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -215,6 +216,7 @@
             this.toolStripMenuNecesidadesCompetenciasPorSector,
             this.listadoDeTemasRealizadosPorLegajoToolStripMenuItem,
             this.listadoDeCursosRealizadosPorTemaToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem,
             this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem,
             this.listadoTemasRealizadosPorSectorToolStripMenuItem,
@@ -361,6 +363,13 @@
             this.listadoDeCursosPorResponsableToolStripMenuItem.Text = "Listado de Cursos por Responsable";
             this.listadoDeCursosPorResponsableToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCursosPorResponsableToolStripMenuItem_Click);
             // 
+            // listadoDeCronogramaPorSectorYTemaToolStripMenuItem1
+            // 
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Name = "listadoDeCronogramaPorSectorYTemaToolStripMenuItem1";
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Size = new System.Drawing.Size(430, 22);
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Text = "Listado de Cronograma por Sector y Tema";
+            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Click += new System.EventHandler(this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1_Click);
+            // 
             // listadoDeCronogramaPorSectorYTemaToolStripMenuItem
             // 
             this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Name = "listadoDeCronogramaPorSectorYTemaToolStripMenuItem";
@@ -426,12 +435,12 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // listadoDeCronogramaPorSectorYTemaToolStripMenuItem1
+            // toolStripMenuItem1
             // 
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Name = "listadoDeCronogramaPorSectorYTemaToolStripMenuItem1";
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Text = "Listado de Cronograma por Sector y Tema";
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Click += new System.EventHandler(this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1_Click);
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(430, 22);
+            this.toolStripMenuItem1.Text = "Listado de Cursos No Realizados por Tema";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -498,6 +507,7 @@
         private System.Windows.Forms.ToolStripMenuItem asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem planDeCapacitaciónTentativoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoDeCronogramaPorSectorYTemaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

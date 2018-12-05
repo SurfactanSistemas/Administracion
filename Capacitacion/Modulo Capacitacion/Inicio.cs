@@ -242,5 +242,11 @@ namespace Modulo_Capacitacion
             Listados.CronogramaPorSectorYTema.Inicio frm = new Listados.CronogramaPorSectorYTema.Inicio();
             frm.Show();
         }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var frm = new Listados.CursosnoRealizadosporTemas.Inicio();
+            frm.Show();
+        }
     }
 }
