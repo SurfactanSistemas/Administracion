@@ -1,22 +1,25 @@
 ﻿Imports System.Data.SqlClient
-Imports LectoraControl.Clases
-Imports System.Data
+Imports CentroImpresionColectora.Clases
 
 Module Helper
 
     Private Const VALIDA_CUIT = "54327654321"
 
+    Public Function NombreEmpresa() As String
+        Return IIf(_EsPellital, "PELLITAL S.A.", "SURFACTAN S.A.")
+    End Function
+
     Public Function getNombrePC() As String
-        Return "" 'My.Computer.Name
+        Return ""
     End Function
 
     Public Function _EsPellital() As Boolean
         Return Conexion.EsPellital
     End Function
 
-    Public Function OrDefault(ByVal valor As Object, ByVal WDefault As Object)
+    Public Function OrDefault(ByVal valor, ByVal def)
 
-        If valor Is Nothing OrElse IsDBNull(valor) Then Return WDefault
+        If IsNothing(valor) OrElse IsDBNull(valor) Then Return def
 
         Return valor
 
@@ -30,7 +33,7 @@ Module Helper
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -81,22 +84,16 @@ Module Helper
         Return row
 
     End Function
-
-    Public Function _ConectarDesarrollo() As String
-
-        Return Nothing '_ConectarA(ClasesCompartidas.Globals.empresa)
-
-    End Function
-
+    
     Public Function _ConectarA(Optional ByVal empresa As String = "") As String
 
-        Return Conexion.ConectarA(empresa)
+        Return Conexion._ConectarA(empresa)
 
     End Function
 
     Public Function _ConectarA(ByVal empresa As Integer) As String
 
-        Return Conexion.ConectarASegunID(empresa)
+        Return Conexion._ConectarASegunID(empresa)
 
     End Function
 
@@ -218,10 +215,10 @@ Module Helper
 
         valor = IIf(Trim(valor) = "", "0", Trim(valor))
 
-        valor = valor.Replace(",", ".")
+        valor = valor.Replace(".", ",")
 
         ' Redondeamos a los decimales indicados con "." como separador de decimales.
-        _valor = Math.Round(Val(valor), decimales)
+        _valor = FormatNumber(CDbl(valor), decimales)
 
         For i = 1 To decimales - 1
             formato &= "#"
@@ -374,7 +371,7 @@ Module Helper
 
 
 
-    Public Function CaculoRetencionGanancia(ByVal varTipoprv As Integer, ByVal varAcumulaNeto As Double, ByVal varAcuNeto As Double, ByVal varAcuRetenido As Double, ByVal varAcuAnticipo As Double, _
+    Public Function CaculoRetencionGanancia(ByVal varTipoprv As Integer, ByVal varAcumulaNeto As Double, ByVal varAcuNeto As Double, ByVal varAcuRetenido As Double, ByVal varAcuAnticipo As Double,
                                         ByVal varAcuBruto As Double, ByVal varAcuIva As Double)
 
         Dim varRetencion, varBase As Double
@@ -571,7 +568,7 @@ Module Helper
             _Fecha(1) = Val(_Fecha(1)).ToString() ' 04 => 4, 12 => 12
             _Fecha(2) = Val(_Fecha(2)).ToString() ' 2000 => 2000, 0201 => 201
 
-            fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+            fecha = Date.ParseExact(fecha, "d/M/yyyy", Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
 
             Return True
         Catch ex As Exception
@@ -592,7 +589,7 @@ Module Helper
             xfecha = String.Join("/", _Fecha) ' 3/4/2000, 12/12/201
 
             ' En la primera (3/4/2001), se parsearia y devolveria: 03/04/2000. En el segundo caso lanzaria una excepcion ya que la fecha (12/12/201), no es un formato de fecha posible.
-            xfecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+            xfecha = Date.ParseExact(fecha, "d/M/yyyy", Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
         Catch ex As Exception
             ' En caso de excepcion, se retorna el mismo valor que se introdujo sin cambios.
             xfecha = _temp

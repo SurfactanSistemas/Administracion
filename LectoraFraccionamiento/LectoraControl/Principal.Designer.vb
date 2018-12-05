@@ -20,8 +20,6 @@ Partial Public Class Principal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
-        Me.txtCodigoCliente = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
         Me.txtCodigoGral = New System.Windows.Forms.TextBox
         Me.Label2 = New System.Windows.Forms.Label
         Me.txtTotalPedido = New System.Windows.Forms.Label
@@ -45,22 +43,6 @@ Partial Public Class Principal
         Me.Label6 = New System.Windows.Forms.Label
         Me.pnlMsg.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txtCodigoCliente
-        '
-        Me.txtCodigoCliente.Location = New System.Drawing.Point(141, 130)
-        Me.txtCodigoCliente.Name = "txtCodigoCliente"
-        Me.txtCodigoCliente.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtCodigoCliente.Size = New System.Drawing.Size(70, 23)
-        Me.txtCodigoCliente.TabIndex = 0
-        '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(17, 133)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(126, 18)
-        Me.Label1.Text = "Etiqueta Cliente"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'txtCodigoGral
         '
@@ -89,11 +71,12 @@ Partial Public Class Principal
         '
         'txtSuma
         '
-        Me.txtSuma.Location = New System.Drawing.Point(27, 165)
+        Me.txtSuma.Location = New System.Drawing.Point(161, 252)
         Me.txtSuma.Name = "txtSuma"
-        Me.txtSuma.Size = New System.Drawing.Size(187, 19)
+        Me.txtSuma.Size = New System.Drawing.Size(35, 10)
         Me.txtSuma.Text = "100"
         Me.txtSuma.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.txtSuma.Visible = False
         '
         'btnLimpiar
         '
@@ -231,25 +214,25 @@ Partial Public Class Principal
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(44, 187)
+        Me.Button1.Location = New System.Drawing.Point(44, 137)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(152, 23)
+        Me.Button1.Size = New System.Drawing.Size(152, 59)
         Me.Button1.TabIndex = 7
-        Me.Button1.Text = "Reset"
+        Me.Button1.Text = "Limpiar Formulario"
         '
         'ComboBox1
         '
         Me.ComboBox1.Items.Add("Pto de Trab. 1")
         Me.ComboBox1.Items.Add("Pto de Trab. 2")
         Me.ComboBox1.Items.Add("Pto de Trab. 3")
-        Me.ComboBox1.Location = New System.Drawing.Point(106, 231)
+        Me.ComboBox1.Location = New System.Drawing.Point(107, 217)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(128, 23)
         Me.ComboBox1.TabIndex = 14
         '
         'Label6
         '
-        Me.Label6.Location = New System.Drawing.Point(7, 233)
+        Me.Label6.Location = New System.Drawing.Point(8, 219)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(96, 18)
         Me.Label6.Text = "Puesto Trabajo"
@@ -269,7 +252,6 @@ Partial Public Class Principal
         Me.Controls.Add(Me.txtCodProd)
         Me.Controls.Add(Me.txtCodigoGral)
         Me.Controls.Add(Me.txtCandidad)
-        Me.Controls.Add(Me.txtCodigoCliente)
         Me.Controls.Add(Me.txtTotalPedido)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnLimpiar)
@@ -278,17 +260,14 @@ Partial Public Class Principal
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Principal"
-        Me.Text = "Form1"
+        Me.Text = "Fraccionamiento"
         Me.pnlMsg.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents txtCodigoCliente As System.Windows.Forms.TextBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtCodigoGral As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtTotalPedido As System.Windows.Forms.Label

@@ -31,8 +31,6 @@ Public Class Principal
 
         Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Environment\LectoraControl")
 
-        'Microsoft.Win32.Registry.CurrentUser.SetValue("PuestoTrabajo", 0)
-
         ComboBox1.SelectedIndex = Val(Microsoft.Win32.Registry.CurrentUser.GetValue("PuestoTrabajo", "0"))
 
     End Sub
@@ -50,7 +48,6 @@ Public Class Principal
         ' Reproducimos sonidos de exito o error segun corresponda.
         '
 
-
         Select Case WTipo
             Case Tipo.Exito
                 Dim player As New SoundPlayer(New IO.MemoryStream(My.Resources.Success))
@@ -61,7 +58,6 @@ Public Class Principal
             Case Else
 
         End Select
-
 
         lblCuentaRegresiva.Text = ""
         Timer1.Enabled = True
@@ -77,7 +73,6 @@ Public Class Principal
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
 
-        txtCodigoCliente.Text = ""
         txtCodigoGral.Text = ""
         txtPartida.Text = ""
 
@@ -85,11 +80,6 @@ Public Class Principal
 
         txtSuma.Text = GenerarStringCantidad(txtCandidad.Text)
         txtTotalPedido.Text = GenerarStringCantidad(0)
-
-        'pnlMsg.Visible = False
-        'lblMensajeEstado.Text = ""
-        'picError.Visible = False
-        'picExito.Visible = False
 
         txtCodProd.Text = ""
         txtDescProd.Text = ""
@@ -110,13 +100,13 @@ Public Class Principal
 
     End Function
 
-    Private Sub CamposCodigos_GotFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigoGral.GotFocus, txtCodigoCliente.GotFocus, txtCandidad.GotFocus, txtCodProd.GotFocus, txtDescProd.GotFocus, txtPartida.GotFocus
+    Private Sub CamposCodigos_GotFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigoGral.GotFocus, txtCandidad.GotFocus, txtCodProd.GotFocus, txtDescProd.GotFocus, txtPartida.GotFocus
         Dim campo As TextBox = sender
 
         campo.BackColor = Color.Cyan
     End Sub
 
-    Private Sub CamposCodigos_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigoGral.LostFocus, txtCodigoCliente.LostFocus, txtCandidad.LostFocus, txtCodProd.LostFocus, txtDescProd.LostFocus, txtPartida.LostFocus
+    Private Sub CamposCodigos_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigoGral.LostFocus, txtCandidad.LostFocus, txtCodProd.LostFocus, txtDescProd.LostFocus, txtPartida.LostFocus
         Dim campo As TextBox = sender
 
         campo.BackColor = Color.White
@@ -136,13 +126,6 @@ Public Class Principal
                 If WCod.Length <> 15 Then
                     Throw New Exception("La Lectura no tiene el formato correcto.")
                 End If
-
-                '
-                ' Comprobamos que se trate de una etiqueta general.
-                '
-                'If Mid(WCod, 7, 1) <> "1" Then
-                ' Throw New Exception("La Lectura no tiene el formato correcto.")
-                ' End If
 
                 '
                 ' Comprobamos que la Partida, sea una partida válida.
@@ -166,7 +149,34 @@ Public Class Principal
                 txtDescProd.Text = WProd.Rows(0).Item("Descripcion")
                 txtPartida.Text = WPartida
 
-                txtCodigoCliente.Focus()
+                '
+                ' Damos de alta el registro para que se imprima.
+                '
+
+                Dim ZSql As String = ""
+
+                Dim WKilos As String = "0"
+                Dim WEtiqueta As Integer = 0
+                Dim WUltimo As DataRow = GetSingle("SELECT MAX(Etiqueta) Ultimo FROM ImpreColectora WHERE Contenedor = '" & WCod & "'")
+                Dim WFecha As String = Date.Now.ToString("dd/MM/yyyy")
+                Dim WFechaOrd As String = ordenaFecha(WFecha)
+
+                If WUltimo IsNot Nothing Then WEtiqueta = OrDefault(WUltimo.Item("Ultimo"), 0)
+
+                WEtiqueta += 1
+
+                Dim WClave As String = WCod & WEtiqueta.ToString.PadLeft(3, "0")
+
+                ZSql = String.Format("INSERT INTO ImpreColectora (Clave, Contenedor, Kilos, Puesto, Impresion, Etiqueta, Fecha, FechaOrd, FechaImpresion) " _
+                                     & " VALUES " _
+                                     & "('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')", WClave, WCod, WKilos, ComboBox1.SelectedIndex, "", WEtiqueta, WFecha, WFechaOrd, "")
+
+                Debug.WriteLine(ZSql)
+
+                ExecuteNonQueries("SurfactanSa", ZSql)
+
+                btnLimpiar_Click(Nothing, Nothing)
+
             Catch ex As Exception
                 MostrarMsgError(ex.Message, Tipo.Falla)
                 With txtCodigoGral
@@ -219,100 +229,6 @@ Public Class Principal
 
         Return WTabla
     End Function
-
-    Private Sub txtCodigoCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigoCliente.KeyDown, txtCandidad.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-            Try
-                If Trim(txtCodigoGral.Text) = "" Then : Exit Sub : End If
-                If Trim(txtCodigoCliente.Text) = "" Then : Exit Sub : End If
-
-                Dim WCod = txtCodigoCliente.Text.Trim()
-                Dim WTerminado = "", WPartida = "", WPedido = "", WCantidad = 0.0, WEnteros = 0, WDecimales = 0
-
-                Dim WPartidaGral = Mid(txtCodigoGral.Text, 1, 6)
-
-                '
-                ' Comprobamos que tenga el formato correcto (6 Dígitos para la Partida, 1 para indicar el Tipo, 6 para Pedido y 6 para cantidad (4 para enteros y 2 para digitos. Ej: 145.5 -> 014550 ))
-                '
-                If WCod.Length <> 19 Then
-                    Throw New Exception("La Lectura no tiene el formato correcto.")
-                End If
-
-                '
-                ' Comprobamos que se trate de una etiqueta general.
-                '
-                If Mid(WCod, 7, 1) <> "2" Then
-                    Throw New Exception("La Lectura no tiene el formato correcto.")
-                End If
-
-                '
-                ' Controlamos que las partidas se correspondan.
-                '
-                WPartida = Mid(WCod, 1, 6)
-
-                If Val(WPartidaGral) <> Val(WPartida) Then
-                    Throw New Exception("Las Etiquetas no corresponden a la misma Hoja.")
-                End If
-
-                '
-                ' Extraemos el numero de Pedido.
-                '
-                WPedido = Mid(WCod, 8, 6)
-                WTerminado = _BuscarTerminado(WPartida)
-
-                If Trim(WTerminado) = "" Then
-                    Throw New Exception("No se ha podido encontrar el Codigo del Producto para la Hoja " & WPartida)
-                End If
-
-                '
-                ' Controlamos que en el pedido exista el codigo.
-                '
-                If Not TerminadoEnPedido(WTerminado, WPedido) Then
-                    Throw New Exception("El Producto no se encuentra el producto en el Pedido")
-                End If
-
-                '
-                ' Controlo que en alguno de los campos de Lote se encuentre cargada la Partida.
-                '
-                If Not PartidaDeTerminadoEnPedido(WPartida, WTerminado, WPedido) Then
-                    Throw New Exception("La Hoja no se encuentra en el Pedido")
-                End If
-
-                '
-                ' Armamos la cantidad.
-                '
-                WEnteros = Mid(WCod, 14, 4)
-                WDecimales = Mid(WCod, 18, 2)
-
-                Dim a = (WEnteros & "." & WDecimales)
-
-                WCantidad = Val(a)
-
-                Dim WAux = CDbl(txtCandidad.Text)
-
-                WAux += WCantidad
-
-                txtCandidad.Text = WAux
-
-                txtSuma.Text = GenerarStringCantidad(txtCandidad.Text)
-
-                MostrarMsgError("¡Lectura Correcta!", Tipo.Exito, 2)
-
-                btnLimpiar_Click(Nothing, Nothing)
-
-            Catch ex As Exception
-                MostrarMsgError(ex.Message, Tipo.Falla)
-                With txtCodigoCliente
-                    .Text = ""
-                    .Focus()
-                End With
-            End Try
-        ElseIf e.KeyData = Keys.Escape Then
-            txtCodigoCliente.Text = ""
-        End If
-
-    End Sub
 
     Private Function PartidaDeTerminadoEnPedido(ByVal WPartida, ByVal WTerminado, ByVal WPedido)
 
@@ -442,7 +358,7 @@ Public Class Principal
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
-        txtCodigoCliente.Text = ""
+        'txtCodigoCliente.Text = ""
         txtCodigoGral.Text = ""
         txtPartida.Text = ""
 
@@ -466,5 +382,6 @@ Public Class Principal
 
     Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
         Microsoft.Win32.Registry.CurrentUser.SetValue("PuestoTrabajo", ComboBox1.SelectedIndex)
+        btnLimpiar_Click(Nothing, Nothing)
     End Sub
 End Class
