@@ -779,6 +779,8 @@ Public Class IngresoPruebasEnsayo
 
         'Try
 
+        btnRecalculaCosto.PerformClick()
+
         cn.ConnectionString = Helper._ConectarA
         cn.Open()
         trans = cn.BeginTransaction
