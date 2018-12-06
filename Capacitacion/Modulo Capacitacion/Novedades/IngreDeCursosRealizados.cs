@@ -208,7 +208,7 @@ namespace Modulo_Capacitacion.Novedades
             }
 
             VistaPrevia frm = new VistaPrevia();
-            frm.CargarReporte(new wlistacursoplani(), "{Cronograma.Curso}=" + curso + " AND {Cronograma.Ano}=" + TB_Año.Text + " AND {Cronograma.Curso} = {Curso.Codigo} AND {Cronograma.Legajo} = {Legajo.Codigo} AND {Legajo.Renglon} = 1");
+            frm.CargarReporte(new wlistacursoplani(), "{Cronograma.Curso}=" + curso + " AND {Cronograma.Ano}=" + TB_Año.Text + " AND {Legajo.Renglon} = 1");
 
             frm.Show();
         }
@@ -221,8 +221,9 @@ namespace Modulo_Capacitacion.Novedades
         private void btnImprimirAviso_Click(object sender, EventArgs e)
         {
             pnlAviso.Visible = true;
-            cmbMes.SelectedIndex = 1;
-            txtAnoConsulta.Text = "";
+            checkBox1.Checked = true;
+            cmbMes.SelectedIndex = DateTime.Now.Month;
+            txtAnoConsulta.Text = TB_Año.Text.Trim().Length < 4 ? DateTime.Now.ToString("dd/MM/yyyy") : TB_Año.Text;
             cmbMes.Focus();
         }
 
@@ -320,7 +321,8 @@ namespace Modulo_Capacitacion.Novedades
                 return null;
             }
 
-            WCursosAListar = WCursosAListar.Substring(0, WCursosAListar.Length - 2);
+            //WCursosAListar = WCursosAListar.Substring(0, WCursosAListar.Length - 2);
+            WCursosAListar = WCursosAListar.TrimEnd(',');
 
             WCursosAListar += "]";
 
@@ -335,9 +337,12 @@ namespace Modulo_Capacitacion.Novedades
             reporte.SetParameterValue("Mes", WMes);
             reporte.SetParameterValue("ImpreAno", WImpreAno);
 
-            frm.CargarReporte(reporte,
-                "{Cronograma.Ano}=" + WAno + " AND {Cronograma.Curso}IN" + WCursosAListar +
-                " AND {Cronograma.Curso}={Curso.Codigo} AND {Cronograma.Legajo}={Legajo.Codigo} AND {Cronograma.Sector}={Sector.Codigo} AND {Cronograma.Tema}={Tema.Tema} AND {Legajo.Sector}={Sector.Codigo} AND {Legajo.Curso}={Curso.Codigo} AND {Tema.Curso}={Curso.Codigo}");
+            string WFormula = "{Cronograma.Ano} = " + WAno + " AND {Cronograma.Curso} IN " + WCursosAListar +
+                              " AND {Legajo.Renglon} = 1 ";
+
+            if (checkBox1.Checked) WFormula += " AND {Cronograma.Tema} <> 99";
+
+            frm.CargarReporte(reporte, WFormula);
             return frm;
         }
 
@@ -398,7 +403,7 @@ namespace Modulo_Capacitacion.Novedades
 
             //string WDirecciones = ConfigurationManager.AppSettings["DETINATARIOS_AVISO_CRONOGRAMA"];
 
-            if (frm != null) frm.EnviarPorEmail(WDirecciones, "AvisoCronograma2017");
+            if (frm != null) frm.EnviarPorEmail(WDirecciones, "AvisoCronograma");
 
             btnCerrarAviso.PerformClick();
 
@@ -408,11 +413,6 @@ namespace Modulo_Capacitacion.Novedades
         private void cmbMes_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtAnoConsulta.Focus();
-        }
-
-        private void TB_Año_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
