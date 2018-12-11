@@ -65,17 +65,45 @@
 
         If Not IsNothing(WHumedad) Then WMostrarHumedad = 1
 
-        Dim rpt As New ImpreFarmaI
+        Dim rpt As New ImpreFarmaII
 
         rpt.SetParameterValue("MostrarHumedad", WMostrarHumedad)
+        rpt.SetParameterValue("ImprimePlanillaII", WImprePlanillaII.ToString)
 
         Dim frm As New VistaPrevia
 
         With frm
             .Reporte = rpt
-            .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "'"
+            .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "'" ' And {CargaIII.Partida} = {Hoja.Hoja}"
             .Mostrar()
             '.Imprimir()
         End With
+
+        '
+        ' Anexos
+        '
+        Dim rptAnexos As New ImpreAnexos
+
+        rptAnexos.SetParameterValue("ImprePlanilla", WImprePlanilla)
+        rptAnexos.SetParameterValue("ImprePlanillaIII", WImprePlanillaIII)
+
+        With frm
+            .Reporte = rptAnexos
+            .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "'" ' And {CargaIII.Partida} = {Hoja.Hoja}"
+            .Mostrar()
+            '.Imprimir()
+        End With
+
+        If Val(WTerminado.Substring(3, 5)) = 3000 Then
+
+            With frm
+                .Reporte = New impremermadescartesterceros
+                .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = {Terminado.Codigo} " '= '" & WTerminado & "'" ' And {CargaIII.Partida} = {Hoja.Hoja}"
+                .Mostrar()
+                '.Imprimir()
+            End With
+
+        End If
+
     End Sub
 End Class
