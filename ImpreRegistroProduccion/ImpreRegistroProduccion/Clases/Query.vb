@@ -121,6 +121,7 @@ Module Query
                     cm.Transaction = trans
 
                     For Each _q As String In q
+                        Debug.Print(_q)
                         cm.CommandText = _q
                         cm.ExecuteNonQuery()
                     Next
