@@ -17,6 +17,7 @@ Public Class ComparacionesMensualesValorUnico
         txtAnioDesde.Text = _BuscarAnoPorDefecto()
         txtAnioHasta.Text = txtAnioDesde.Text
         txtFechaDiaria.Text = Date.Now.AddDays(-1).ToString("dd/MM/yyyy")
+        txtMesComparativo.Text = Date.Now.ToString("MM/yyyy")
 
     End Sub
 
@@ -123,6 +124,226 @@ Public Class ComparacionesMensualesValorUnico
         Return WBuscarFamilias & ")"
 
     End Function
+
+    Private Function _ArmarTablaYDatosMensualComparativo() As DataSet
+        Dim WMeses(12) As String
+        Dim WMesesCompletos(12) As String
+        Dim WAnios(12) As String
+
+        Dim datos As DataTable = _CrearTablaDetalles()
+        Dim ds As New DataSet
+
+        '
+        ' Obtenemos los meses con los cuales trabajar.
+        '
+        '_TraerMesesAConsultar(WMeses, WAnios, WMesesCompletos)
+
+        Dim WMesTrabajo As Date = Date.ParseExact("01/" & txtMesComparativo.Text.PadLeft(7, "0"), "dd/MM/yyyy", Nothing)
+
+        ' Mes Actual, Año Actual
+        WMeses(0) = WMesTrabajo.Month
+        WAnios(0) = WMesTrabajo.Year
+        ' Mes Anterior
+        WMeses(1) = WMesTrabajo.AddMonths(-1).Month
+        WAnios(1) = WMesTrabajo.AddMonths(-1).Year
+        ' Mismo Mes Año Anterior
+        WMeses(2) = WMesTrabajo.AddYears(-1).Month
+        WAnios(2) = WMesTrabajo.AddYears(-1).Year
+
+        WMesesCompletos = WMeses
+
+        'Dim WIndice = 0
+
+        'If Val(txtMesHasta.Text) = Date.Now.Month Then
+
+        '    If WMesesCompletos(WIndice - 1) < WMesTrabajo.Month Then
+
+        '        WMesesCompletos(WIndice) = WMesTrabajo.Month
+        '        WIndice += 1
+
+        '    End If
+
+        'End If
+
+        '
+        ' Completamos los lugares restantes con -1 asi no los tenemos en cuenta en la consulta.
+        '
+        For i = 3 To 12
+            WMeses(i) = Str$(-1)
+            WAnios(i) = Str$(-1)
+        Next
+
+
+        '
+        ' Obtenemos los valores a comparar.
+        '
+
+        Dim WDatos() As String = _TraerValoresAComparar()
+
+        If Not WDatos.Any(Function(v) Not IsNothing(v)) Then : Exit Function : End If
+
+        '
+        ' Obtenemos los datos de las familias en el periodo dado.
+        '
+
+        Select Case cmbPeriodo.SelectedIndex
+            Case 0
+                _BuscarDatosBrutos(WMeses, WDatos, datos)
+
+                DataGridView1.DataSource = datos
+
+                ' Si es consolidado, rearmamos la tabla con los totales por valor comparable.
+                If ckConsolidado.Checked Then
+                    _FormatearConsolidado(datos)
+                End If
+
+                ds.Tables.Add(datos)
+            Case 1
+                _BuscarDatosBrutos(WMeses, WDatos, datos)
+
+                _FormatearAnual(datos)
+
+                ds.Tables.Add(datos)
+            Case 2
+
+                Dim anios(4) As Integer
+
+                If ckConsolidado.Checked And Not _ValidoParaConsolidarEntrePeriodos() Then
+                    Return Nothing
+                End If
+
+                If Val(txtAnioDesde.Text) = Val(txtAnioHasta.Text) Then
+
+                    For Each WAnio In clbAniosAComparar.CheckedItems
+
+                        _BuscarDatosComparativoMensual(Val(WAnio), Val(WAnio), WDatos, datos, WMeses)
+
+                    Next
+
+                Else
+
+                    anios(1) = Val(txtAnioDesde.Text)
+                    anios(2) = Val(txtAnioHasta.Text)
+                    anios(3) = Val(txtAnioDesde.Text) - 1
+                    anios(4) = Val(txtAnioHasta.Text) - 1
+
+                    For i = 1 To 4 Step 2
+                        _BuscarDatosComparativoMensual(anios(i), anios(i + 1), WDatos, datos, WMeses)
+                    Next
+
+                End If
+
+                If datos.Rows.Count = 0 OrElse datos.Rows.Count - 9 = 0 Then
+                    Throw New Exception("No existen datos para alguno de los siguientes Años: " & anios(1) & " o " & anios(3))
+                End If
+
+                If ckConsolidado.Checked Then
+
+                    _FormatearConsolidadoComparativoMensual(datos)
+
+                End If
+
+                ds.Tables.Add(datos)
+
+                DataGridView1.DataSource = datos
+
+        End Select
+
+        '
+        ' Traemos datos restantes para mostrar debajo de los graficos.
+        '
+        Dim datos_restantes = datos.Copy
+
+        datos_restantes.Clear()
+        datos_restantes.TableName = "Detalles2"
+
+        WDatos(1) = "1"
+
+        WDatos(2) = "2"
+
+        'WDatos(3) = "3" ' Costo no se Grafica.
+
+        WDatos(3) = "4"
+
+        WDatos(4) = "5"
+
+        WDatos(5) = "6"
+
+        WDatos(6) = "7"
+
+        WDatos(7) = "8"
+
+        WDatos(8) = "9"
+
+        WDatos(9) = "10"
+
+        WDatos(10) = "11"
+
+        _BuscarDatosBrutos(WMesesCompletos, WDatos, datos_restantes)
+
+        Dim WTipo = 0, WAcum = 0.0
+
+        For Each row As DataRow In datos_restantes.Rows
+
+            WTipo = 0
+
+            With row
+
+                WTipo = IIf(IsDBNull(.Item("Corte")), 0, Val(.Item("Corte")))
+
+                Select Case WTipo
+                    Case 1, 2, 5, 6
+
+                        WAcum = 0.0
+
+                        For i = 1 To 12
+
+                            If Not IsDBNull(.Item("Valor" & i)) Then
+
+                                WAcum += Val(Helper.formatonumerico(.Item("Valor" & i)))
+
+                            End If
+
+                        Next
+
+                        .Item("TotalFila") = WAcum
+
+                    Case Else
+                        Continue For
+                End Select
+
+            End With
+
+        Next
+
+        If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
+
+            For i = 1 To 4
+                datos_restantes.Rows.Add(99999)
+            Next
+
+        End If
+
+        ds.Tables.Add(datos_restantes)
+
+        Dim WTablaConsolidado = datos_restantes.Copy
+
+        WTablaConsolidado.TableName = "Consolidados"
+
+        If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
+
+            _FormatearConsolidado(WTablaConsolidado, _ValoresComparables.Count, True, WDatos)
+
+        End If
+
+        DataGridView1.DataSource = WTablaConsolidado
+
+        ds.Tables.Add(WTablaConsolidado)
+
+        Return ds
+
+    End Function
+
 
     Private Function _ArmarTablaYDatos() As DataSet
         Dim WMeses(12) As String
@@ -1655,7 +1876,7 @@ Public Class ComparacionesMensualesValorUnico
         '
         ' VALIDAMOS QUE EL PERIODO SEA DE UN AÑO.
         '
-        If Not _ValidaDatosPeriodo() Then
+        If rbMenusal.Checked And Not _ValidaDatosPeriodo() Then
 
             MsgBox("Periodo no valido. Debe seleccionarse un periodo de máximo 12 meses para generar el reporte.", MsgBoxStyle.Exclamation)
             Exit Sub
@@ -1677,7 +1898,8 @@ Public Class ComparacionesMensualesValorUnico
 
         Try
 
-            tabla = _ArmarTablaYDatos() '_TraerDatosParaGraficos()
+            If rbMenusal.Checked Then tabla = _ArmarTablaYDatos() '_TraerDatosParaGraficos()
+            If rbMensualComparativo.Checked Then tabla = _ArmarTablaYDatosMensualComparativo()
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -2448,8 +2670,28 @@ Public Class ComparacionesMensualesValorUnico
             gbDesde.Enabled = True
             gbHasta.Enabled = True
             gbComparativoDiario.Enabled = False
+            gbMensualComparativo.Enabled = False
             cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos"}
             txtMesDesde.Focus()
+        End If
+
+    End Sub
+
+
+    Private Sub rbMensualComparativo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbMensualComparativo.CheckedChanged
+
+        If rbMensualComparativo.Checked Then
+            gbMensualComparativo.Enabled = True
+            gbDesde.Enabled = False
+            gbHasta.Enabled = False
+            gbComparativoDiario.Enabled = False
+            cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos"}
+            With txtMesComparativo
+                .Focus()
+                .SelectionStart = 0
+                .SelectionLength = .Text.Length
+            End With
+
         End If
 
     End Sub
@@ -2459,6 +2701,7 @@ Public Class ComparacionesMensualesValorUnico
         If rbDiaria.Checked Then
             gbDesde.Enabled = False
             gbHasta.Enabled = False
+            gbMensualComparativo.Enabled = False
             gbComparativoDiario.Enabled = True
             cmbPeriodo.DataSource = {"Comparativo Entre Lineas", "Comparativo Entre Periodos"}
             cmbPeriodo.SelectedIndex = 1
