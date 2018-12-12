@@ -16,15 +16,15 @@
                 
                 Select Case WProceso
                     Case 1
-
-                    Case Else
                         _GenerarRegistroProduccion(WTerminado, WPartida)
+                    Case Else
+                        Close()
                 End Select
 
             End If
 
-            'Dim WTerminado2 As String = "PT-25076-100"
-            'Dim WPartida2 As Integer = "308871"
+            'Dim WTerminado2 As String = "PT-03000-156"
+            'Dim WPartida2 As Integer = "308751"
 
             '_GenerarRegistroProduccion(WTerminado2, WPartida2)
 
@@ -77,7 +77,7 @@
 
         With frm
             .Reporte = rpt
-            .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "'" ' And {CargaIII.Partida} = {Hoja.Hoja}"
+            .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "' And {Hoja.Renglon} = 1" ' And {CargaIII.Partida} = {Hoja.Hoja}"
             '.Mostrar()
             .Imprimir()
         End With
@@ -94,7 +94,7 @@
 
             With New VistaPrevia
                 .Reporte = rptAnexos
-                .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "'" ' And {CargaIII.Partida} = {Hoja.Hoja}"
+                .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "' And {Hoja.Renglon} = 1" ' And {CargaIII.Partida} = {Hoja.Hoja}"
                 '.Mostrar()
                 .Imprimir()
             End With
@@ -477,7 +477,7 @@
 
                 For Each emp As String In {"SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
-                    Dim WLaudo As DataRow = GetSingle("SELECT FechaVencimiento FROM Laudo WHERE Laudo = '" & WLoteMP & "' And Articulo = '" & WArtMp & "'")
+                    Dim WLaudo As DataRow = GetSingle("SELECT FechaVencimiento FROM Laudo WHERE Laudo = '" & WLoteMP & "' And Articulo = '" & WArtMp & "'", emp)
 
                     If Not IsNothing(WLaudo) Then
 
