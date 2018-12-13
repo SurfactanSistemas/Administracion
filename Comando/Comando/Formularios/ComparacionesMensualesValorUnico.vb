@@ -2151,6 +2151,7 @@ Public Class ComparacionesMensualesValorUnico
                 .Tipo = WTipo
                 .Tabla = WDatos
                 .Titulo = WTitulo
+                .SumarDiario = ckSumarDiario.Checked
 
                 .TablaGrilla = WTablaGrilla
                 
@@ -2196,7 +2197,7 @@ Public Class ComparacionesMensualesValorUnico
             cn.Open()
             cm.Connection = cn
 
-            cm.CommandText = "SELECT Tipo, Dia, Mes, Ano, sum(Importe1) as Importe1, sum(Importe2) as Importe2, sum(Importe3) as Importe3 FROM ComandoDatosDiario WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = " & wDesde & " AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "' GROUP BY Tipo, Dia, Mes, Ano"
+            cm.CommandText = "SELECT Tipo, Dia, Mes, Ano, sum(Importe1) as Importe1, sum(Importe2) as Importe2, sum(Importe3) as Importe3, sum(Importe4) As Importe4, sum(Importe5) As Importe5 FROM ComandoDatosDiario WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = " & wDesde & " AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "' GROUP BY Tipo, Dia, Mes, Ano"
 
             dr = cm.ExecuteReader()
 
@@ -2249,7 +2250,7 @@ Public Class ComparacionesMensualesValorUnico
             cn.Open()
             cm.Connection = cn
 
-            cm.CommandText = "SELECT Linea, Tipo, Dia, Mes, Ano, sum(Importe1) as Importe1, sum(Importe2) as Importe2, sum(Importe3) as Importe3 FROM ComandoDatosDiario WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = " & wDesde & " AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "' GROUP BY Linea, Tipo,Dia, Mes, Ano"
+            cm.CommandText = "SELECT Linea, Tipo, Dia, Mes, Ano, sum(Importe1) as Importe1, sum(Importe2) as Importe2, sum(Importe3) as Importe3, sum(Importe4) As Importe4, sum(Importe5) As Importe5 FROM ComandoDatosDiario WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = " & wDesde & " AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "' GROUP BY Linea, Tipo,Dia, Mes, Ano"
 
             dr = cm.ExecuteReader()
 
@@ -2285,6 +2286,8 @@ Public Class ComparacionesMensualesValorUnico
             .Add("Importe1", System.Type.GetType("System.Double"))
             .Add("Importe2", System.Type.GetType("System.Double"))
             .Add("Importe3", System.Type.GetType("System.Double"))
+            .Add("Importe4", System.Type.GetType("System.Double"))
+            .Add("Importe5", System.Type.GetType("System.Double"))
             .Add("LineaDesc")
         End With
 
@@ -2798,6 +2801,7 @@ Public Class ComparacionesMensualesValorUnico
             cmbPeriodo.SelectedIndex = 1
             _ProcesarPeriodo()
             btnSeleccionarAnios.Visible = False
+            ckVenta.Checked = True
             txtFechaDiaria.Focus()
             txtFechaDiaria.SelectionStart = 0
             txtFechaDiaria.SelectionLength = txtFechaDiaria.Text.Length

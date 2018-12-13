@@ -13,6 +13,8 @@ Public Class GraficoDiario
 
     Public Property Titulo As String
 
+    Public Property SumarDiario As Boolean
+
     Public WColorBasico
 
     Private _wValoresDibujados As String()
@@ -62,7 +64,7 @@ Public Class GraficoDiario
             Case Else
                 Close()
         End Select
-        
+
 
         If Not IsNothing(TablaGrilla) AndAlso TablaGrilla.Rows.Count > 0 Then
             TablaGrilla.DefaultView.Sort = "Linea , Tipo"
@@ -79,6 +81,9 @@ Public Class GraficoDiario
                 .Add("Actual")
                 .Add("MesAnterior")
                 .Add("AnioAnterior")
+                .Add("Acumulado")
+                .Add("AcumuladoVentas")
+                .Add("AcumuladoKilos")
 
             End With
 
@@ -98,6 +103,10 @@ Public Class GraficoDiario
                     WRow.Item("Actual") = Helper.formatonumerico(.Item("Importe1"))
                     WRow.Item("MesAnterior") = Helper.formatonumerico(.Item("Importe2"))
                     WRow.Item("AnioAnterior") = Helper.formatonumerico(.Item("Importe3"))
+                    WRow.Item("AcumuladoVentas") = Helper.formatonumerico(.Item("Importe4"))
+                    WRow.Item("AcumuladoKilos") = Helper.formatonumerico(.Item("Importe5"))
+
+                    WRow.Item("Acumulado") = IIf(WRow.Item("Tipo") = 1, WRow.Item("AcumuladoVentas"), WRow.Item("AcumuladoKilos"))
 
                     WTablaGrilla.Rows.Add(WRow)
 
@@ -105,7 +114,7 @@ Public Class GraficoDiario
 
             Next
 
-            Dim WVectow(2, 3) As Double
+            Dim WVectow(2, 6) As Double
 
             For Each row As DataRow In WTablaGrilla.Rows
                 Select Case Val(row.Item("Tipo"))
@@ -114,12 +123,18 @@ Public Class GraficoDiario
                         WVectow(1, 1) += Val(Helper.formatonumerico(row.Item("Actual")))
                         WVectow(1, 2) += Val(Helper.formatonumerico(row.Item("MesAnterior")))
                         WVectow(1, 3) += Val(Helper.formatonumerico(row.Item("AnioAnterior")))
+                        WVectow(1, 4) += Val(Helper.formatonumerico(row.Item("AcumuladoVentas")))
+                        WVectow(1, 5) += Val(Helper.formatonumerico(row.Item("AcumuladoKilos")))
+                        WVectow(1, 6) += Val(Helper.formatonumerico(row.Item("Acumulado")))
 
                     Case 2
-                        
+
                         WVectow(2, 1) += Val(Helper.formatonumerico(row.Item("Actual")))
                         WVectow(2, 2) += Val(Helper.formatonumerico(row.Item("MesAnterior")))
                         WVectow(2, 3) += Val(Helper.formatonumerico(row.Item("AnioAnterior")))
+                        WVectow(2, 4) += Val(Helper.formatonumerico(row.Item("AcumuladoVentas")))
+                        WVectow(2, 5) += Val(Helper.formatonumerico(row.Item("AcumuladoKilos")))
+                        WVectow(2, 6) += Val(Helper.formatonumerico(row.Item("Acumulado")))
 
                     Case Else
                         Continue For
@@ -138,6 +153,9 @@ Public Class GraficoDiario
                 .Item("Actual") = Helper.formatonumerico(WVectow(1, 1))
                 .Item("MesAnterior") = Helper.formatonumerico(WVectow(1, 2))
                 .Item("AnioAnterior") = Helper.formatonumerico(WVectow(1, 3))
+                .Item("Acumulado") = Helper.formatonumerico(WVectow(1, 6))
+                .Item("AcumuladoVentas") = Helper.formatonumerico(WVectow(1, 4))
+                .Item("AcumuladoKilos") = Helper.formatonumerico(WVectow(1, 5))
 
             End With
 
@@ -154,6 +172,9 @@ Public Class GraficoDiario
                 .Item("Actual") = Helper.formatonumerico(WVectow(2, 1))
                 .Item("MesAnterior") = Helper.formatonumerico(WVectow(2, 2))
                 .Item("AnioAnterior") = Helper.formatonumerico(WVectow(2, 3))
+                .Item("Acumulado") = Helper.formatonumerico(WVectow(2, 6))
+                .Item("AcumuladoVentas") = Helper.formatonumerico(WVectow(2, 4))
+                .Item("AcumuladoKilos") = Helper.formatonumerico(WVectow(2, 5))
 
             End With
 
@@ -169,7 +190,7 @@ Public Class GraficoDiario
 
                         .DataSource = WTablaGrilla
 
-                        For i = 4 To 7
+                        For i = 4 To 10
                             .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                         Next
 
@@ -192,10 +213,15 @@ Public Class GraficoDiario
                         .Columns(5).HeaderText = "Actual"
                         .Columns(6).HeaderText = "Mes Anterior"
                         .Columns(7).HeaderText = "Año Anterior"
+                        .Columns(8).HeaderText = "Acumulado Diario"
+                        .Columns(9).HeaderText = "Acumulado Ventas"
+                        .Columns(10).HeaderText = "Acumulado Kilos"
 
                         .Columns(0).Visible = False
                         .Columns(2).Visible = False
                         .Columns(4).Visible = False
+                        .Columns(9).Visible = False
+                        .Columns(10).Visible = False
 
                     End With
 
@@ -208,11 +234,13 @@ Public Class GraficoDiario
     Private Sub _ProcesarMesAnteriorEntrePeriodoConsolidado()
 
         Dim WMes As String = ""
-        Dim WSeries() As String = {"", "Actual", "Mes Anterior", "Año Anterior"}
-        
+        Dim WSeries() As String = {"", "Actual", "Mes Anterior", "Año Anterior", "Acumulado " & Date.Now.ToString("dd/MM/yyyy")}
+
+        Dim WLimiteColumnas As Integer = IIf(SumarDiario, 3, 4)
+
         For Each row As DataRow In Tabla.Rows
 
-            For i = 1 To 3
+            For i = 1 To WLimiteColumnas
 
                 WMes = ""
                 WMes = WSeries(i)
@@ -229,7 +257,7 @@ Public Class GraficoDiario
 
             With row
 
-                For i = 1 To 3
+                For i = 1 To WLimiteColumnas
 
                     WMes = ""
 
@@ -237,7 +265,17 @@ Public Class GraficoDiario
 
                     WMes = WSeries(i)
 
-                    Chart1.Series(WMes).Points.AddXY(WTipo, Helper.formatonumerico(.Item("Importe" & i)))
+                    Dim WValor As Double = Val(Helper.formatonumerico(.Item("Importe" & i)))
+
+                    If i > 3 Then
+                        If .Item("Tipo") = 1 Then WValor = Val(Helper.formatonumerico(.Item("Importe4")))
+                        If .Item("Tipo") = 2 Then WValor = Val(Helper.formatonumerico(.Item("Importe5")))
+                    ElseIf i = 1 And SumarDiario Then
+                        If .Item("Tipo") = 1 Then WValor += Val(Helper.formatonumerico(.Item("Importe4")))
+                        If .Item("Tipo") = 2 Then WValor += Val(Helper.formatonumerico(.Item("Importe5")))
+                    End If
+
+                    Chart1.Series(WMes).Points.AddXY(WTipo, WValor)
 
                 Next
 
@@ -283,11 +321,13 @@ Public Class GraficoDiario
     Private Sub _ProcesarMesAnteriorEntrLineas()
 
         Dim WMes As String = ""
-        Dim WSeries() As String = {"", "Actual", "Mes Anterior", "Año Anterior"}
-        
+        Dim WSeries() As String = {"", "Actual", "Mes Anterior", "Año Anterior", "Acumulado " & Date.Now.ToString("dd/MM/yyyy")}
+
+        Dim WLimiteColumnas As Integer = IIf(SumarDiario, 3, 4)
+
         For Each row As DataRow In Tabla.Select("", "Tipo")
 
-            For i = 1 To 3
+            For i = 1 To WLimiteColumnas
 
                 WMes = ""
                 WMes = Helper._DescripcionSegunTipo(row.Item("Tipo")) & " - " & WSeries(i)
@@ -304,12 +344,23 @@ Public Class GraficoDiario
 
             With row
 
-                For i = 1 To 3
+                For i = 1 To WLimiteColumnas
 
                     WMes = ""
                     WMes = Helper._DescripcionSegunTipo(row.Item("Tipo")) & " - " & WSeries(i)
 
-                    Chart1.Series(WMes).Points.AddXY(Helper._NombreLineaSegunNumero(.Item("Linea")), Helper.formatonumerico(.Item("Importe" & i)))
+                    Dim WValor As Double = Val(Helper.formatonumerico(.Item("Importe" & i)))
+
+                    If i > 3 Then
+                        If .Item("Tipo") = 1 Then WValor = Val(Helper.formatonumerico(.Item("Importe4")))
+                        If .Item("Tipo") = 2 Then WValor = Val(Helper.formatonumerico(.Item("Importe5")))
+                    ElseIf i = 1 And SumarDiario Then
+                        If .Item("Tipo") = 1 Then WValor += Val(Helper.formatonumerico(.Item("Importe4")))
+                        If .Item("Tipo") = 2 Then WValor += Val(Helper.formatonumerico(.Item("Importe5")))
+                    End If
+
+                    Chart1.Series(WMes).Points.AddXY(Helper._NombreLineaSegunNumero(.Item("Linea")), WValor)
+
                 Next
 
             End With
@@ -382,7 +433,7 @@ Public Class GraficoDiario
 
         aux = 0.0
 
-        For i = 0 To Chart1.Series.Count - 1 Step 3
+        For i = 0 To Chart1.Series.Count - 1 Step 4
 
             Debug.Print("Indice " & i)
 
@@ -421,6 +472,19 @@ Public Class GraficoDiario
 
             Next
 
+            If Not SumarDiario Then
+                WIndice = 0
+
+                For Each p As DataPoint In Chart1.Series(i + 3).Points
+
+                    aux = p.YValues(0)
+
+                    p.Label = Helper.formatonumerico(aux) & " (" & Helper.formatonumerico(((100 * aux) / WValorComparativo(WIndice)) - 100) & " %)"
+
+                    WIndice += 1
+
+                Next
+            End If
 
         Next
 
