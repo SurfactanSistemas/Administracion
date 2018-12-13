@@ -39,7 +39,7 @@ Partial Class Compras
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.PanelPrincipal = New System.Windows.Forms.Panel()
         Me.ckChequeRechazado = New System.Windows.Forms.CheckBox()
         Me.CustomButton1 = New Administracion.CustomButton()
         Me.txtVtoCAI = New System.Windows.Forms.MaskedTextBox()
@@ -101,10 +101,11 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
+        Me.ckMarcaDifCambio = New System.Windows.Forms.CheckBox()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.PanelPrincipal.SuspendLayout()
         Me.SuspendLayout()
         '
         'chkSoloIVA
@@ -237,76 +238,77 @@ Partial Class Compras
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Ingreso de Comprobantes de Proveedores"
         '
-        'Panel2
+        'PanelPrincipal
         '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.ckChequeRechazado)
-        Me.Panel2.Controls.Add(Me.CustomButton1)
-        Me.Panel2.Controls.Add(Me.txtVtoCAI)
-        Me.Panel2.Controls.Add(Me.txtFechaIVA)
-        Me.Panel2.Controls.Add(Me.txtFechaVto2)
-        Me.Panel2.Controls.Add(Me.txtFechaVto1)
-        Me.Panel2.Controls.Add(Me.txtFechaEmision)
-        Me.Panel2.Controls.Add(Me.CBLetra)
-        Me.Panel2.Controls.Add(Me.txtNumero)
-        Me.Panel2.Controls.Add(Me.CustomLabel4)
-        Me.Panel2.Controls.Add(Me.txtCAI)
-        Me.Panel2.Controls.Add(Me.lblCredito)
-        Me.Panel2.Controls.Add(Me.txtNombreProveedor)
-        Me.Panel2.Controls.Add(Me.CustomLabel5)
-        Me.Panel2.Controls.Add(Me.txtCodigoProveedor)
-        Me.Panel2.Controls.Add(Me.lblDebito)
-        Me.Panel2.Controls.Add(Me.txtNroInterno)
-        Me.Panel2.Controls.Add(Me.CustomLabel6)
-        Me.Panel2.Controls.Add(Me.lblCai)
-        Me.Panel2.Controls.Add(Me.CustomLabel7)
-        Me.Panel2.Controls.Add(Me.lblVtoCai)
-        Me.Panel2.Controls.Add(Me.CustomLabel2)
-        Me.Panel2.Controls.Add(Me.CustomLabel9)
-        Me.Panel2.Controls.Add(Me.CustomLabel1)
-        Me.Panel2.Controls.Add(Me.CustomLabel10)
-        Me.Panel2.Controls.Add(Me.CustomLabel11)
-        Me.Panel2.Controls.Add(Me.CustomLabel12)
-        Me.Panel2.Controls.Add(Me.CustomLabel13)
-        Me.Panel2.Controls.Add(Me.gridAsientos)
-        Me.Panel2.Controls.Add(Me.CustomLabel14)
-        Me.Panel2.Controls.Add(Me.txtIVA10)
-        Me.Panel2.Controls.Add(Me.CustomLabel15)
-        Me.Panel2.Controls.Add(Me.txtDespacho)
-        Me.Panel2.Controls.Add(Me.CustomLabel16)
-        Me.Panel2.Controls.Add(Me.txtIVA21)
-        Me.Panel2.Controls.Add(Me.CustomLabel17)
-        Me.Panel2.Controls.Add(Me.txtIVA27)
-        Me.Panel2.Controls.Add(Me.CustomLabel18)
-        Me.Panel2.Controls.Add(Me.txtNoGravado)
-        Me.Panel2.Controls.Add(Me.CustomLabel19)
-        Me.Panel2.Controls.Add(Me.txtTotal)
-        Me.Panel2.Controls.Add(Me.CustomLabel20)
-        Me.Panel2.Controls.Add(Me.txtNeto)
-        Me.Panel2.Controls.Add(Me.CustomLabel21)
-        Me.Panel2.Controls.Add(Me.txtIVARG)
-        Me.Panel2.Controls.Add(Me.CustomLabel22)
-        Me.Panel2.Controls.Add(Me.txtPercIB)
-        Me.Panel2.Controls.Add(Me.CustomLabel23)
-        Me.Panel2.Controls.Add(Me.txtParidad)
-        Me.Panel2.Controls.Add(Me.chkSoloIVA)
-        Me.Panel2.Controls.Add(Me.cmbFormaPago)
-        Me.Panel2.Controls.Add(Me.gbTipo)
-        Me.Panel2.Controls.Add(Me.txtRemito)
-        Me.Panel2.Controls.Add(Me.cmbTipo)
-        Me.Panel2.Controls.Add(Me.txtPunto)
-        Me.Panel2.Controls.Add(Me.txtTipo)
-        Me.Panel2.Location = New System.Drawing.Point(0, 49)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(814, 551)
-        Me.Panel2.TabIndex = 63
+        Me.PanelPrincipal.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.PanelPrincipal.Controls.Add(Me.ckMarcaDifCambio)
+        Me.PanelPrincipal.Controls.Add(Me.ckChequeRechazado)
+        Me.PanelPrincipal.Controls.Add(Me.CustomButton1)
+        Me.PanelPrincipal.Controls.Add(Me.txtVtoCAI)
+        Me.PanelPrincipal.Controls.Add(Me.txtFechaIVA)
+        Me.PanelPrincipal.Controls.Add(Me.txtFechaVto2)
+        Me.PanelPrincipal.Controls.Add(Me.txtFechaVto1)
+        Me.PanelPrincipal.Controls.Add(Me.txtFechaEmision)
+        Me.PanelPrincipal.Controls.Add(Me.CBLetra)
+        Me.PanelPrincipal.Controls.Add(Me.txtNumero)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel4)
+        Me.PanelPrincipal.Controls.Add(Me.txtCAI)
+        Me.PanelPrincipal.Controls.Add(Me.lblCredito)
+        Me.PanelPrincipal.Controls.Add(Me.txtNombreProveedor)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel5)
+        Me.PanelPrincipal.Controls.Add(Me.txtCodigoProveedor)
+        Me.PanelPrincipal.Controls.Add(Me.lblDebito)
+        Me.PanelPrincipal.Controls.Add(Me.txtNroInterno)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel6)
+        Me.PanelPrincipal.Controls.Add(Me.lblCai)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel7)
+        Me.PanelPrincipal.Controls.Add(Me.lblVtoCai)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel2)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel9)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel1)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel10)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel11)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel12)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel13)
+        Me.PanelPrincipal.Controls.Add(Me.gridAsientos)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel14)
+        Me.PanelPrincipal.Controls.Add(Me.txtIVA10)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel15)
+        Me.PanelPrincipal.Controls.Add(Me.txtDespacho)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel16)
+        Me.PanelPrincipal.Controls.Add(Me.txtIVA21)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel17)
+        Me.PanelPrincipal.Controls.Add(Me.txtIVA27)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel18)
+        Me.PanelPrincipal.Controls.Add(Me.txtNoGravado)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel19)
+        Me.PanelPrincipal.Controls.Add(Me.txtTotal)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel20)
+        Me.PanelPrincipal.Controls.Add(Me.txtNeto)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel21)
+        Me.PanelPrincipal.Controls.Add(Me.txtIVARG)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel22)
+        Me.PanelPrincipal.Controls.Add(Me.txtPercIB)
+        Me.PanelPrincipal.Controls.Add(Me.CustomLabel23)
+        Me.PanelPrincipal.Controls.Add(Me.txtParidad)
+        Me.PanelPrincipal.Controls.Add(Me.chkSoloIVA)
+        Me.PanelPrincipal.Controls.Add(Me.cmbFormaPago)
+        Me.PanelPrincipal.Controls.Add(Me.gbTipo)
+        Me.PanelPrincipal.Controls.Add(Me.txtRemito)
+        Me.PanelPrincipal.Controls.Add(Me.cmbTipo)
+        Me.PanelPrincipal.Controls.Add(Me.txtPunto)
+        Me.PanelPrincipal.Controls.Add(Me.txtTipo)
+        Me.PanelPrincipal.Location = New System.Drawing.Point(0, 49)
+        Me.PanelPrincipal.Name = "PanelPrincipal"
+        Me.PanelPrincipal.Size = New System.Drawing.Size(814, 551)
+        Me.PanelPrincipal.TabIndex = 63
         '
         'ckChequeRechazado
         '
         Me.ckChequeRechazado.AutoSize = True
         Me.ckChequeRechazado.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.ckChequeRechazado.ForeColor = System.Drawing.SystemColors.Control
-        Me.ckChequeRechazado.Location = New System.Drawing.Point(464, 194)
+        Me.ckChequeRechazado.Location = New System.Drawing.Point(464, 196)
         Me.ckChequeRechazado.Name = "ckChequeRechazado"
         Me.ckChequeRechazado.Size = New System.Drawing.Size(144, 22)
         Me.ckChequeRechazado.TabIndex = 65
@@ -1129,13 +1131,25 @@ Partial Class Compras
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'ckMarcaDifCambio
+        '
+        Me.ckMarcaDifCambio.AutoSize = True
+        Me.ckMarcaDifCambio.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.ckMarcaDifCambio.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckMarcaDifCambio.Location = New System.Drawing.Point(614, 196)
+        Me.ckMarcaDifCambio.Name = "ckMarcaDifCambio"
+        Me.ckMarcaDifCambio.Size = New System.Drawing.Size(144, 22)
+        Me.ckMarcaDifCambio.TabIndex = 65
+        Me.ckMarcaDifCambio.Text = "Cheque Rechazado"
+        Me.ckMarcaDifCambio.UseVisualStyleBackColor = True
+        '
         'Compras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(811, 683)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.PanelPrincipal)
         Me.Controls.Add(Me.btnApertura)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnCerrar)
@@ -1152,8 +1166,8 @@ Partial Class Compras
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.PanelPrincipal.ResumeLayout(False)
+        Me.PanelPrincipal.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1218,7 +1232,7 @@ Partial Class Compras
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents PanelPrincipal As System.Windows.Forms.Panel
     Friend WithEvents CBLetra As System.Windows.Forms.ComboBox
     Friend WithEvents txtFechaEmision As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtVtoCAI As System.Windows.Forms.MaskedTextBox
@@ -1232,4 +1246,5 @@ Partial Class Compras
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Debito As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Credito As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ckMarcaDifCambio As System.Windows.Forms.CheckBox
 End Class

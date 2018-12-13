@@ -42,15 +42,15 @@ Public Class Compras
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         'Cleanner.clean(Me)
-        For Each _txt As TextBox In Me.Panel2.Controls.OfType(Of TextBox)() ' Limpiamos todos los textbox del Formulario.
+        For Each _txt As TextBox In Me.PanelPrincipal.Controls.OfType(Of TextBox)() ' Limpiamos todos los textbox del Formulario.
             _txt.Text = ""
         Next
 
-        For Each _msk As MaskedTextBox In Me.Panel2.Controls.OfType(Of MaskedTextBox)() ' Limpiamos todos los campos fecha.
+        For Each _msk As MaskedTextBox In Me.PanelPrincipal.Controls.OfType(Of MaskedTextBox)() ' Limpiamos todos los campos fecha.
             _msk.Clear()
         Next
 
-        For Each _cmb As ComboBox In Me.Panel2.Controls.OfType(Of ComboBox)() ' Limpiamos todos los campos combo.
+        For Each _cmb As ComboBox In Me.PanelPrincipal.Controls.OfType(Of ComboBox)() ' Limpiamos todos los campos combo.
             _cmb.SelectedIndex = 0
         Next
 
@@ -60,6 +60,7 @@ Public Class Compras
         gridAsientos.Rows.Clear()
         chkSoloIVA.Checked = False
         ckChequeRechazado.Checked = False
+        ckMarcaDifCambio.Checked = False
         optCtaCte.Checked = True
         apertura = New Apertura
         esModificacion = False
@@ -442,7 +443,7 @@ Public Class Compras
             End Try
 
             Try
-                _ActualizarChequeRechazado(compra.nroInterno)
+                _ActualizarChequeRechazadoYDifCambio(compra.nroInterno)
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
                 Exit Sub
@@ -476,15 +477,20 @@ Public Class Compras
         End If
     End Sub
 
-    Private Sub _ActualizarChequeRechazado(ByVal NroInterno As Integer)
+    Private Sub _ActualizarChequeRechazadoYDifCambio(ByVal NroInterno As Integer)
         Dim WRechazado = 0
+        Dim WMarcaDifCambio = 0
 
         If ckChequeRechazado.Checked Then
             WRechazado = 1
         End If
 
+        If ckMarcaDifCambio.Checked Then
+            WMarcaDifCambio = 1
+        End If
+
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("UPDATE IvaComp SET Rechazado = " & WRechazado & " WHERE NroInterno = '" & NroInterno & "'")
+        Dim cm = New SqlCommand("UPDATE IvaComp SET Rechazado = " & WRechazado & ", MarcaDifCambio = '" & WMarcaDifCambio & "' WHERE NroInterno = '" & NroInterno & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
