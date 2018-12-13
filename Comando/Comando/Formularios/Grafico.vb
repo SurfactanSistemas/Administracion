@@ -61,125 +61,129 @@ Public Class Grafico
                 _ProcesarAnual()
             Case 4
                 _ProcesarComparativoMensual()
+            Case 5
+                _ProcesarAcumulado3()
             Case Else
                 Close()
         End Select
 
-        TablaGrilla.DefaultView.Sort = "Tipo ASC, Corte ASC"
+        If TablaGrilla IsNot Nothing Then
+            TablaGrilla.DefaultView.Sort = "Tipo ASC, Corte ASC"
 
-        If TablaGrilla.Rows.Count > 0 Then
+            If TablaGrilla.Rows.Count > 0 Then
 
-            With DataGridView1
+                With DataGridView1
 
-                For Each c As DataGridViewColumn In .Columns
-                    c.Visible = True
+                    For Each c As DataGridViewColumn In .Columns
+                        c.Visible = True
+                    Next
+
+                    .DataSource = TablaGrilla.DefaultView
+
+                    Dim linea = ""
+
+                    If Tipo = -1 Then
+
+                        .Columns(0).Visible = False
+                        .Columns(2).Visible = False
+                        .Columns(3).Visible = False
+
+                    Else
+                        Dim aux
+                        For Each row As DataGridViewRow In .Rows
+                            aux = row.Cells(1).Value
+                            If Not IsDBNull(aux) AndAlso linea <> Trim(aux) Then
+                                linea = Trim(row.Cells(1).Value)
+                                Continue For
+                            End If
+
+                            row.Cells(1).Value = ""
+
+                        Next
+
+                    End If
+
+
+                    '
+                    ' Cambiamos los nombres de las columnas con los valores de las fechas en las que se realizó la consulta.
+                    '
+
+                    If Tipo = -1 Then
+
+                        For i = 4 To 15
+
+                            .Columns(i).HeaderText = "- - -"
+
+                            If Not IsDBNull(DataGridView1.Rows(1).Cells(i + 12).Value) Then
+                                .Columns(i).HeaderText = Trim(DataGridView1.Rows(1).Cells(i + 12).Value)
+                            End If
+
+                            .Columns(i + 12).Visible = False
+                            .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                        Next
+
+                    Else
+
+                        For i = 4 To 15
+
+                            .Columns(i).HeaderText = "- - -"
+
+                            If Not IsDBNull(DataGridView1.Rows(0).Cells(i + 12).Value) Then
+                                .Columns(i).HeaderText = Trim(DataGridView1.Rows(0).Cells(i + 12).Value)
+                            End If
+
+                            .Columns(i + 12).Visible = False
+                            .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                            .Columns(i).Width = 80
+
+                        Next
+                    End If
+
+                    If Tipo = -1 Then
+                        .Sort(.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+                        .CurrentCell = .Rows(0).Cells("Descripcion")
+                    Else
+                        .Columns(0).Visible = False
+                        .Columns(3).Visible = False
+
+                        .Columns(2).Width = 70
+
+                        With .Columns(1)
+                            .MinimumWidth = 90
+                            .AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                        End With
+
+                        .Columns(.Columns.Count - 1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                        .Columns(.Columns.Count - 1).HeaderText = "Total"
+
+                        .Columns(1).HeaderText = "Linea"
+                        .Columns(2).HeaderText = "Concepto"
+
+                        .Sort(.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+                        .CurrentCell = .Rows(0).Cells(1)
+                    End If
+
+                    .Focus()
+
+                End With
+
+                If Tipo = 1 Or Tipo = 3 Then
+                    '_MostrarConsolidados()
+                    _ProcesarAcumulados2(DataGridView1.Rows)
+                End If
+
+                For Each row As DataGridViewRow In DataGridView1.Rows
+
+                    row.DefaultCellStyle.BackColor = WColorBasico
+
+                    If Not IsDBNull(row.Cells("Titulo").Value) AndAlso _wValoresDibujados.Contains(row.Cells("Titulo").Value) Then
+                        row.DefaultCellStyle.BackColor = Color.LightBlue
+                    End If
+
                 Next
 
-                .DataSource = TablaGrilla.DefaultView
-
-                Dim linea = ""
-
-                If Tipo = -1 Then
-
-                    .Columns(0).Visible = False
-                    .Columns(2).Visible = False
-                    .Columns(3).Visible = False
-
-                Else
-                    Dim aux
-                    For Each row As DataGridViewRow In .Rows
-                        aux = row.Cells(1).Value
-                        If Not IsDBNull(aux) AndAlso linea <> Trim(aux) Then
-                            linea = Trim(row.Cells(1).Value)
-                            Continue For
-                        End If
-
-                        row.Cells(1).Value = ""
-
-                    Next
-
-                End If
-
-
-                '
-                ' Cambiamos los nombres de las columnas con los valores de las fechas en las que se realizó la consulta.
-                '
-
-                If Tipo = -1 Then
-
-                    For i = 4 To 15
-
-                        .Columns(i).HeaderText = "- - -"
-
-                        If Not IsDBNull(DataGridView1.Rows(1).Cells(i + 12).Value) Then
-                            .Columns(i).HeaderText = Trim(DataGridView1.Rows(1).Cells(i + 12).Value)
-                        End If
-
-                        .Columns(i + 12).Visible = False
-                        .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                    Next
-
-                Else
-
-                    For i = 4 To 15
-
-                        .Columns(i).HeaderText = "- - -"
-
-                        If Not IsDBNull(DataGridView1.Rows(0).Cells(i + 12).Value) Then
-                            .Columns(i).HeaderText = Trim(DataGridView1.Rows(0).Cells(i + 12).Value)
-                        End If
-
-                        .Columns(i + 12).Visible = False
-                        .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        .Columns(i).Width = 80
-
-                    Next
-                End If
-
-                If Tipo = -1 Then
-                    .Sort(.Columns(1), System.ComponentModel.ListSortDirection.Descending)
-                    .CurrentCell = .Rows(0).Cells("Descripcion")
-                Else
-                    .Columns(0).Visible = False
-                    .Columns(3).Visible = False
-
-                    .Columns(2).Width = 70
-
-                    With .Columns(1)
-                        .MinimumWidth = 90
-                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                    End With
-
-                    .Columns(.Columns.Count - 1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    .Columns(.Columns.Count - 1).HeaderText = "Total"
-
-                    .Columns(1).HeaderText = "Linea"
-                    .Columns(2).HeaderText = "Concepto"
-
-                    .Sort(.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
-                    .CurrentCell = .Rows(0).Cells(1)
-                End If
-
-
-                .Focus()
-
-            End With
-            
-            If Tipo = 1 Or Tipo = 3 Then
-                '_MostrarConsolidados()
-                _ProcesarAcumulados2(DataGridView1.Rows)
             End If
-
-            For Each row As DataGridViewRow In DataGridView1.Rows
-
-                row.DefaultCellStyle.BackColor = WColorBasico
-
-                If Not IsDBNull(row.Cells("Titulo").Value) AndAlso _wValoresDibujados.Contains(row.Cells("Titulo").Value) Then
-                    row.DefaultCellStyle.BackColor = Color.LightBlue
-                End If
-
-            Next
 
         End If
 
@@ -690,6 +694,56 @@ Public Class Grafico
         _HabilitarLabels()
     End Sub
 
+    Private Sub _ProcesarAcumulado3()
+        Dim wacu As Double = 0.0
+        Dim wacu1 As Double = 0.0
+        Dim wacu2 As Double = 0.0
+        Dim wacu3 As Double = 0.0
+        Dim WIndice = 0
+
+        Titulo = "CONSOLIDADO" & vbCrLf & " - "
+
+        Titulo &= Tabla.Rows(0).Item("Titulo") & " -"
+
+        'For Each row As DataRow In Tabla.Rows
+        '    If Not IsDBNull(row.Item(1)) AndAlso Chart1.Series.IsUniqueName(row.Item(1)) Then
+        '        Chart1.Series.Add(row.Item(1))
+        '    End If
+        'Next
+
+        Chart1.Series.Add(Tabla.Rows(0).Item("Titulo1"))
+        Chart1.Series.Add(Tabla.Rows(0).Item("Titulo2"))
+        Chart1.Series.Add(Tabla.Rows(0).Item("Titulo3"))
+
+        For Each row As DataRow In Tabla.Rows
+
+            With row
+
+                wacu = Val(formatonumerico(OrDefault(.Item("Valor1"), 0)))
+
+                wacu1 += wacu
+
+                wacu = Val(formatonumerico(OrDefault(.Item("Valor2"), 0)))
+
+                wacu2 += wacu
+
+                wacu = Val(formatonumerico(OrDefault(.Item("Valor3"), 0)))
+
+                wacu3 += wacu
+
+            End With
+
+        Next
+
+        Chart1.Series(Tabla.Rows(0).Item("Titulo1")).Points.AddXY(Tabla.Rows(0).Item("Titulo"), wacu1)
+        Chart1.Series(Tabla.Rows(0).Item("Titulo2")).Points.AddXY(Tabla.Rows(0).Item("Titulo"), wacu2)
+        Chart1.Series(Tabla.Rows(0).Item("Titulo3")).Points.AddXY(Tabla.Rows(0).Item("Titulo"), wacu3)
+
+        wacu = 0.0
+
+        _HabilitarLabels()
+    End Sub
+
     Private Sub _HabilitarLabels()
 
         For Each serie In Chart1.Series
@@ -1030,7 +1084,7 @@ Public Class Grafico
                 With p
                     .IsValueShownAsLabel = True
                     .CustomProperties = "DrawSideBySide=True"
-                    If Chart1.Series(serie.Name).Points.Count > 1 Then
+                    If Chart1.Series(serie.Name).Points.Count > 0 Then
 
                         ComoPorce = False
 

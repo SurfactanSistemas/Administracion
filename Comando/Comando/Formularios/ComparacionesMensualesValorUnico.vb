@@ -133,6 +133,13 @@ Public Class ComparacionesMensualesValorUnico
         Dim datos As DataTable = _CrearTablaDetalles()
         Dim ds As New DataSet
 
+        Dim WCantValores = _ValoresComparables.Count(Function(c) c.Checked)
+        Dim WCantLineas = Familias.Count(Function(c) c.Checked)
+
+        For i = 1 To WCantLineas * WCantValores
+            datos.Rows.Add()
+        Next
+
         '
         ' Obtenemos los meses con los cuales trabajar.
         '
@@ -183,162 +190,113 @@ Public Class ComparacionesMensualesValorUnico
         If Not WDatos.Any(Function(v) Not IsNothing(v)) Then : Exit Function : End If
 
         '
-        ' Obtenemos los datos de las familias en el periodo dado.
+        ' Buscamos los datos del mes actual.
         '
+        Dim WBuscarFamilias As String = _ArmarBuscarFamilias()
+        Dim WValoresABuscar As String = "Importe" & Trim(WMeses(0))
+        Dim WDatosABuscar As String = ""
 
-        Select Case cmbPeriodo.SelectedIndex
-            Case 0
-                _BuscarDatosBrutos(WMeses, WDatos, datos)
+        For i = 0 To 10
+            If OrDefault(WDatos(i), "").ToString.Trim = "" Then Continue For
 
-                DataGridView1.DataSource = datos
+            WDatosABuscar &= Trim(WDatos(i)) & ","
 
-                ' Si es consolidado, rearmamos la tabla con los totales por valor comparable.
-                If ckConsolidado.Checked Then
-                    _FormatearConsolidado(datos)
-                End If
+        Next
 
-                ds.Tables.Add(datos)
-            Case 1
-                _BuscarDatosBrutos(WMeses, WDatos, datos)
+        WDatosABuscar = WDatosABuscar.TrimEnd(",")
 
-                _FormatearAnual(datos)
+        Dim WActual As DataTable = GetAll("SELECT Linea, Tipo, DesTipo as Descripcion, " & "Importe" & Trim(WMeses(0)) & " FROM ComandoDatosII WHERE Tipo IN (" & WDatosABuscar & ") and " & WBuscarFamilias & " AND Ano = '" & Trim(WAnios(0)) & "' order by linea, ano, tipo")
+        Dim WMismoAnio As DataTable = GetAll("SELECT Linea, Tipo, DesTipo as Descripcion, " & "Importe" & Trim(WMeses(1)) & " FROM ComandoDatosII WHERE Tipo IN (" & WDatosABuscar & ") and " & WBuscarFamilias & " AND Ano = '" & Trim(WAnios(1)) & "' order by linea, ano, tipo")
+        Dim WAnioAnterior As DataTable = GetAll("SELECT Linea, Tipo, DesTipo as Descripcion, " & "Importe" & Trim(WMeses(2)) & " FROM ComandoDatosII WHERE Tipo IN (" & WDatosABuscar & ") and " & WBuscarFamilias & " AND Ano = '" & Trim(WAnios(2)) & "' order by linea, ano, tipo")
 
-                ds.Tables.Add(datos)
-            Case 2
+        Dim WIndice = 0
 
-                Dim anios(4) As Integer
+        For i = 0 To (WCantLineas * WCantValores) - 1
 
-                If ckConsolidado.Checked And Not _ValidoParaConsolidarEntrePeriodos() Then
-                    Return Nothing
-                End If
+            Dim r As DataRow = datos.Rows(i)
 
-                If Val(txtAnioDesde.Text) = Val(txtAnioHasta.Text) Then
+            With r
 
-                    For Each WAnio In clbAniosAComparar.CheckedItems
+                For j = 1 To 3
+                    .Item("Tipo") = WActual.Rows(i).Item("Tipo")
+                    .Item("Titulo") = _DescripcionSegunTipo(.Item("Tipo"))
+                    .Item("Corte") = WActual.Rows(i).Item("Linea")
+                    .Item("Descripcion") = _NombreLineaSegunNumero(.Item("Corte"))
 
-                        _BuscarDatosComparativoMensual(Val(WAnio), Val(WAnio), WDatos, datos, WMeses)
+                    Select Case j
+                        Case 1
+                            .Item("Titulo1") = String.Format("{0}/{1}", WMeses(0), WAnios(0)) '"Mes Actual"
+                            .Item("Valor1") = Val(formatonumerico(OrDefault(WActual.Rows(i).Item("Importe" & WMeses(0)), 0), 5))
+                        Case 2
+                            .Item("Titulo2") = String.Format("{0}/{1}", WMeses(1), WAnios(1))
+                            .Item("Valor2") = Val(formatonumerico(OrDefault(WMismoAnio.Rows(i).Item("Importe" & WMeses(1)), 0), 5))
+                        Case Else
+                            .Item("Titulo3") = String.Format("{0}/{1}", WMeses(2), WAnios(2))
+                            .Item("Valor3") = Val(formatonumerico(OrDefault(WAnioAnterior.Rows(i).Item("Importe" & WMeses(2)), 0), 5))
+                    End Select
 
-                    Next
-
-                Else
-
-                    anios(1) = Val(txtAnioDesde.Text)
-                    anios(2) = Val(txtAnioHasta.Text)
-                    anios(3) = Val(txtAnioDesde.Text) - 1
-                    anios(4) = Val(txtAnioHasta.Text) - 1
-
-                    For i = 1 To 4 Step 2
-                        _BuscarDatosComparativoMensual(anios(i), anios(i + 1), WDatos, datos, WMeses)
-                    Next
-
-                End If
-
-                If datos.Rows.Count = 0 OrElse datos.Rows.Count - 9 = 0 Then
-                    Throw New Exception("No existen datos para alguno de los siguientes Años: " & anios(1) & " o " & anios(3))
-                End If
-
-                If ckConsolidado.Checked Then
-
-                    _FormatearConsolidadoComparativoMensual(datos)
-
-                End If
-
-                ds.Tables.Add(datos)
-
-                DataGridView1.DataSource = datos
-
-        End Select
-
-        '
-        ' Traemos datos restantes para mostrar debajo de los graficos.
-        '
-        Dim datos_restantes = datos.Copy
-
-        datos_restantes.Clear()
-        datos_restantes.TableName = "Detalles2"
-
-        WDatos(1) = "1"
-
-        WDatos(2) = "2"
-
-        'WDatos(3) = "3" ' Costo no se Grafica.
-
-        WDatos(3) = "4"
-
-        WDatos(4) = "5"
-
-        WDatos(5) = "6"
-
-        WDatos(6) = "7"
-
-        WDatos(7) = "8"
-
-        WDatos(8) = "9"
-
-        WDatos(9) = "10"
-
-        WDatos(10) = "11"
-
-        _BuscarDatosBrutos(WMesesCompletos, WDatos, datos_restantes)
-
-        Dim WTipo = 0, WAcum = 0.0
-
-        For Each row As DataRow In datos_restantes.Rows
-
-            WTipo = 0
-
-            With row
-
-                WTipo = IIf(IsDBNull(.Item("Corte")), 0, Val(.Item("Corte")))
-
-                Select Case WTipo
-                    Case 1, 2, 5, 6
-
-                        WAcum = 0.0
-
-                        For i = 1 To 12
-
-                            If Not IsDBNull(.Item("Valor" & i)) Then
-
-                                WAcum += Val(Helper.formatonumerico(.Item("Valor" & i)))
-
-                            End If
-
-                        Next
-
-                        .Item("TotalFila") = WAcum
-
-                    Case Else
-                        Continue For
-                End Select
+                Next
 
             End With
 
         Next
 
-        If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
+        Dim datos2 As DataTable = datos.Copy
+        datos2.TableName = "TablaGrilla"
 
-            For i = 1 To 4
-                datos_restantes.Rows.Add(99999)
+        If ckConsolidado.Checked Then
+            Dim WTemp As DataTable = datos.Clone
+            WTemp.Rows.Clear()
+
+            For i = 1 To 11
+                Dim rows = datos.Select("Tipo = " & i).Distinct
+
+                If rows Is Nothing Then Continue For
+
+                For Each t As DataRow In rows
+                    Dim rw As DataRow = WTemp.NewRow
+                    With rw
+                        Dim total1 As Double = datos.Select("Tipo = " & t.Item("Tipo")).Sum(Function(r) Val(r.Item("Valor1")))
+                        Dim total2 As Double = datos.Select("Tipo = " & t.Item("Tipo")).Sum(Function(r) Val(r.Item("Valor2")))
+                        Dim total3 As Double = datos.Select("Tipo = " & t.Item("Tipo")).Sum(Function(r) Val(r.Item("Valor3")))
+
+                        For j = 1 To 3
+
+                            .Item("Tipo") = t.Item("Tipo")
+                            .Item("Titulo") = _DescripcionSegunTipo(.Item("Tipo"))
+                            .Item("Corte") = 0 't.Item("Corte")
+                            .Item("Descripcion") = "Consolidado" '_NombreLineaSegunNumero(.Item("Corte"))
+
+                            Select Case j
+                                Case 1
+                                    .Item("Titulo1") = String.Format("{0}/{1}", WMeses(0), WAnios(0)) '"Mes Actual"
+                                    .Item("Valor1") = Val(formatonumerico(total1, 5))
+                                Case 2
+                                    .Item("Titulo2") = String.Format("{0}/{1}", WMeses(1), WAnios(1))
+                                    .Item("Valor2") = Val(formatonumerico(total2, 5))
+                                Case Else
+                                    .Item("Titulo3") = String.Format("{0}/{1}", WMeses(2), WAnios(2))
+                                    .Item("Valor3") = Val(formatonumerico(total3, 5))
+                            End Select
+
+                        Next
+
+                    End With
+                    WTemp.Rows.Add(rw)
+                    Exit For
+                Next
+                
+
             Next
 
-        End If
-
-        ds.Tables.Add(datos_restantes)
-
-        Dim WTablaConsolidado = datos_restantes.Copy
-
-        WTablaConsolidado.TableName = "Consolidados"
-
-        If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
-
-            _FormatearConsolidado(WTablaConsolidado, _ValoresComparables.Count, True, WDatos)
+            datos = WTemp.Copy
 
         End If
 
-        DataGridView1.DataSource = WTablaConsolidado
+        DataGridView1.DataSource = datos
 
-        ds.Tables.Add(WTablaConsolidado)
+        ds.Tables.Add(datos)
+        ds.Tables.Add(datos2)
 
         Return ds
 
@@ -633,11 +591,12 @@ Public Class ComparacionesMensualesValorUnico
                     End If
 
                     WValoresABuscar = ""
+
                     For i = 0 To 12
 
                         If wMeses(i) > -1 AndAlso Not IsNothing(wMeses(i)) Then
 
-                            WValoresABuscar &= "Importe" & i & ","
+                                WValoresABuscar &= "Importe" & i & ","
 
                         End If
 
@@ -649,8 +608,8 @@ Public Class ComparacionesMensualesValorUnico
                     End If
 
                     ' Eliminamos la ultima coma.
-                    WDatosABuscar = WDatosABuscar.Substring(0, WDatosABuscar.Length - 1)
-                    WValoresABuscar = WValoresABuscar.Substring(0, WValoresABuscar.Length - 1)
+                    WDatosABuscar = WDatosABuscar.Trim.TrimEnd(",")
+                    WValoresABuscar = WValoresABuscar.Trim.TrimEnd(",")
 
 
                     ' Buscamos el registro correspondiente a ese mes y buscamos los datos de los meses, segun datos de mas arriba.
@@ -1185,7 +1144,6 @@ Public Class ComparacionesMensualesValorUnico
 
         Else
 
-            ' ACA esta fallando a la hora de traer Rotacion como mensual acumulado.
             Dim WA = 0
 
             For x = 0 To datos.Rows.Count - 1
@@ -1656,6 +1614,125 @@ Public Class ComparacionesMensualesValorUnico
         Return
     End Sub
 
+    Private Sub _BuscarDatosBrutosMensualComparativo(ByVal wMeses As String(), ByVal wAnios As String(), ByVal WDatos As String(), ByRef tabla As DataTable)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+        Dim row As DataRow
+        Dim rowIndex = 0
+        Dim WBuscarFamilias = _ArmarBuscarFamilias()
+        Dim WDatosABuscar = "", WValoresABuscar = ""
+        Dim WMes = ""
+        Dim WAnio = ""
+        Dim WDato = ""
+
+        Try
+
+            cn.ConnectionString = Helper._ConectarA
+            cn.Open()
+
+            ' Armamos la consulta de los campos a comparar para cada mes.
+            For j = 1 To 10
+
+                ' Recorremos los meses pedidos.
+                WDatosABuscar = ""
+
+                If Not IsNothing(WDatos(j)) OrElse WDatos(j) <> "" Then
+                    WDatosABuscar &= "'" & WDatos(j) & "',"
+                End If
+
+                WValoresABuscar = ""
+                'For i = 0 To 12
+
+                '    If Val(wMeses(i)) > 0 AndAlso Not IsNothing(wMeses(i)) Then
+
+                '        WValoresABuscar &= "Importe" & wMeses(i) & ","
+
+                '    End If
+
+                'Next
+
+
+                ' Chequeamos que hayan datos que buscar.
+                If Trim(WDatosABuscar) = "" Then
+                    Continue For
+                End If
+
+                ' Eliminamos la ultima coma.
+                WDatosABuscar = WDatosABuscar.Trim.TrimEnd(",")
+                WValoresABuscar = WValoresABuscar.Trim.TrimEnd(",")
+
+
+                ' Buscamos el registro correspondiente a ese mes y buscamos los datos de los meses, segun datos de mas arriba.
+                WMes = ""
+                ' Los meses y años se estan guardando como ' 1/ 2017 '
+
+                For i = 0 To 2
+
+                    WValoresABuscar = "Importe" & wMeses(i)
+
+                    WAnio = Trim(wAnios(i))
+
+                    cm.CommandText = "SELECT Linea, Tipo, DesTipo as Descripcion, " & WValoresABuscar & " FROM ComandoDatosII WHERE Ano = '" & WAnio & "' AND " & WBuscarFamilias & " AND Tipo in (" & WDatosABuscar & ") order by linea, ano, tipo"
+
+                    cm.Connection = cn
+
+                    dr = cm.ExecuteReader()
+
+                    If dr.HasRows Then
+
+                        ' Agregamos una fila por cada familia.
+                        Do While dr.Read()
+
+                            row = tabla.NewRow
+                            rowIndex = 1
+                            With row
+                                .Item("Tipo") = dr.Item("Linea")
+                                .Item("Descripcion") = _NombreLineaSegunNumero(.Item("Tipo"))
+                                .Item("Corte") = Val(dr.Item("Tipo"))
+                                .Item("Titulo") = _DescripcionSegunTipo(.Item("Corte"))
+
+                                WMes = ""
+                                WMes = Val(wMeses(i)) & "/" & Trim(Str$(WAnio))
+
+                                WDato = dr.Item("Importe" & Trim(wMeses(i)))
+
+                                .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
+                                .Item("Titulo" & rowIndex) = WMes
+
+                            End With
+
+                            tabla.Rows.Add(row)
+
+                        Loop
+
+                    End If
+
+                    If Not dr.IsClosed Then
+                        dr.Close()
+                        dr = Nothing
+                    End If
+
+                Next
+
+            Next
+
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return
+    End Sub
+
     Private Function _DescripcionSegunTipo(ByVal item As Object) As String
 
         Return Helper._DescripcionSegunTipo(item)
@@ -1917,7 +1994,12 @@ Public Class ComparacionesMensualesValorUnico
         With Grafico
             .Tabla = tabla.Tables(0)
             .TablaGrilla = tabla.Tables(1)
-            .TablaConsolidados = tabla.Tables(2)
+
+            If Not rbMensualComparativo.Checked Then
+
+                .TablaConsolidados = tabla.Tables(2)
+
+            End If
 
             Select Case cmbPeriodo.SelectedIndex
                 Case 0 ' Mensual
@@ -1934,6 +2016,10 @@ Public Class ComparacionesMensualesValorUnico
 
                     .Tipo = 4
             End Select
+
+            If rbMensualComparativo.Checked Then
+                .Tipo = 5
+            End If
 
             .WindowState = FormWindowState.Maximized
             .Show()
@@ -2068,10 +2154,11 @@ Public Class ComparacionesMensualesValorUnico
 
                 .TablaGrilla = WTablaGrilla
                 
-                ._ProcesarGrafico()
                 .WindowState = FormWindowState.Maximized
                 .Show()
                 .Focus()
+
+                ._ProcesarGrafico()
 
             End With
 
@@ -2240,7 +2327,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Dim control As CheckBox = sender
 
-        If cmbPeriodo.SelectedIndex = 2 Then 'Or (rbDiaria.Checked And cmbPeriodo.SelectedIndex = 1) Then
+        If cmbPeriodo.SelectedIndex = 2 Or rbMensualComparativo.Checked Then 'Or (rbDiaria.Checked And cmbPeriodo.SelectedIndex = 1) Then
 
             For Each ck As CheckBox In _ValoresComparables()
 
@@ -2671,6 +2758,7 @@ Public Class ComparacionesMensualesValorUnico
             gbHasta.Enabled = True
             gbComparativoDiario.Enabled = False
             gbMensualComparativo.Enabled = False
+            cmbPeriodo.Enabled = True
             cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos"}
             txtMesDesde.Focus()
         End If
@@ -2686,6 +2774,8 @@ Public Class ComparacionesMensualesValorUnico
             gbHasta.Enabled = False
             gbComparativoDiario.Enabled = False
             cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos"}
+            cmbPeriodo.Enabled = False
+            ckVenta.Checked = True
             With txtMesComparativo
                 .Focus()
                 .SelectionStart = 0
@@ -2703,6 +2793,7 @@ Public Class ComparacionesMensualesValorUnico
             gbHasta.Enabled = False
             gbMensualComparativo.Enabled = False
             gbComparativoDiario.Enabled = True
+            cmbPeriodo.Enabled = True
             cmbPeriodo.DataSource = {"Comparativo Entre Lineas", "Comparativo Entre Periodos"}
             cmbPeriodo.SelectedIndex = 1
             _ProcesarPeriodo()

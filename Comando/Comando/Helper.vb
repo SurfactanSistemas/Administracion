@@ -630,4 +630,13 @@ Module Helper
         Static re As New Regex("\s*,\s*([^,]*)$")
         Return re.Replace(s, " y $1")
     End Function
+
+    Public Function OrDefault(ByVal valor, ByVal def)
+
+        If IsNothing(valor) OrElse IsDBNull(valor) Then Return def
+
+        Return valor
+
+    End Function
+
 End Module
