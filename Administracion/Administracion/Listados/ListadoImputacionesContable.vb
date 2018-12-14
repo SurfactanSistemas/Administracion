@@ -550,7 +550,7 @@ Public Class ListadoImputacionesContable
 
 
         Dim tablaCtaCte As DataTable
-        Dim ZRetIb(8, 2) As String
+        Dim ZRetIb(14, 2) As String
         ZRetIb(1, 2) = "162"
         ZRetIb(2, 2) = "161"
         ZRetIb(3, 2) = "190"
@@ -559,6 +559,13 @@ Public Class ListadoImputacionesContable
         ZRetIb(6, 2) = "193"
         ZRetIb(7, 2) = "194"
         ZRetIb(8, 2) = "195"
+
+        ZRetIb(9, 2) = "176"
+        ZRetIb(10, 2) = "170"
+        ZRetIb(11, 2) = "171"
+        ZRetIb(12, 2) = "167"
+        ZRetIb(13, 2) = "172"
+        ZRetIb(14, 2) = "179"
 
         Dim ZExcluir(1000) As String
         Dim Zex = 0
@@ -863,7 +870,7 @@ Public Class ListadoImputacionesContable
                             WRecibo = IIf(IsDBNull(.Item("Recibo")), "0", Trim(.Item("Recibo")))
                             WFecha = IIf(IsDBNull(.Item("Fecha")), "0", Trim(.Item("Fecha")))
 
-                            For i = 1 To 8
+                            For i = 1 To 14
                                 If IsDBNull(.Item("RetIb" & i)) Then
                                     ZRetIb(i, 1) = "0"
                                 Else
@@ -873,7 +880,7 @@ Public Class ListadoImputacionesContable
 
                         End With
 
-                        For i = 1 To 8
+                        For i = 1 To 14
 
                             If Val(ZRetIb(i, 1)) <> 0 AndAlso Val(WRecibo) <> 0 Then
 
