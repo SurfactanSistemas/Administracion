@@ -40,6 +40,7 @@ Partial Class Compras
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PanelPrincipal = New System.Windows.Forms.Panel()
+        Me.ckMarcaDifCambio = New System.Windows.Forms.CheckBox()
         Me.ckChequeRechazado = New System.Windows.Forms.CheckBox()
         Me.CustomButton1 = New Administracion.CustomButton()
         Me.txtVtoCAI = New System.Windows.Forms.MaskedTextBox()
@@ -101,7 +102,6 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
-        Me.ckMarcaDifCambio = New System.Windows.Forms.CheckBox()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -302,6 +302,18 @@ Partial Class Compras
         Me.PanelPrincipal.Name = "PanelPrincipal"
         Me.PanelPrincipal.Size = New System.Drawing.Size(814, 551)
         Me.PanelPrincipal.TabIndex = 63
+        '
+        'ckMarcaDifCambio
+        '
+        Me.ckMarcaDifCambio.AutoSize = True
+        Me.ckMarcaDifCambio.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.ckMarcaDifCambio.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckMarcaDifCambio.Location = New System.Drawing.Point(614, 196)
+        Me.ckMarcaDifCambio.Name = "ckMarcaDifCambio"
+        Me.ckMarcaDifCambio.Size = New System.Drawing.Size(192, 21)
+        Me.ckMarcaDifCambio.TabIndex = 65
+        Me.ckMarcaDifCambio.Text = "Marcar como Dif. de Cambio"
+        Me.ckMarcaDifCambio.UseVisualStyleBackColor = True
         '
         'ckChequeRechazado
         '
@@ -1130,18 +1142,6 @@ Partial Class Compras
         Me.btnLimpiar.TabIndex = 55
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'ckMarcaDifCambio
-        '
-        Me.ckMarcaDifCambio.AutoSize = True
-        Me.ckMarcaDifCambio.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.ckMarcaDifCambio.ForeColor = System.Drawing.SystemColors.Control
-        Me.ckMarcaDifCambio.Location = New System.Drawing.Point(614, 196)
-        Me.ckMarcaDifCambio.Name = "ckMarcaDifCambio"
-        Me.ckMarcaDifCambio.Size = New System.Drawing.Size(144, 22)
-        Me.ckMarcaDifCambio.TabIndex = 65
-        Me.ckMarcaDifCambio.Text = "Cheque Rechazado"
-        Me.ckMarcaDifCambio.UseVisualStyleBackColor = True
         '
         'Compras
         '
