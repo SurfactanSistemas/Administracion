@@ -354,7 +354,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     Private Function _BuscarCompra(ByVal NroInterno As Integer) As DataRow
         Dim compra As New DataTable
         Dim cn = New SqlConnection()
-        Dim cm = "SELECT Letra, Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
+        Dim cm = "SELECT Letra, Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento, ISNULL(MarcaDifCambio, 0) As MarcaDifCambio FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
@@ -590,7 +590,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         End If
 
-                        Dim compra = Nothing
+                        Dim compra As DataRow = Nothing
                         Try
                             compra = _BuscarCompra(CCPrv.nroInterno)
                         Catch ex As Exception
@@ -706,6 +706,14 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                             varRetIva = varAcumulaIva
                         End If
 
+                        If compra.Item("MarcaDifCambio") = 1 Then
+                            varParidad = 0
+                            varTotalUs = 0
+                            varSaldoUs = 0
+                            CCPrv.Impre = "NDC"
+                            varPago = 1
+                        End If
+
                         varRetIb = varRetIbI + varRetIbII + varRetIva
 
                         varPesosOrig = varParidad * varSaldoUs
@@ -715,9 +723,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         If varParidad <> 0 Then
 
-                            varDifCambio = varSaldo - varPesosOrig
+                            If compra.Item("MarcaDifCambio") = 0 Then
 
-                            AcumDifCambio += varDifCambio
+                                varDifCambio = varSaldo - varPesosOrig
+
+                                AcumDifCambio += varDifCambio
+
+                            End If
 
                             AcumPesosOrig = IIf(varDifCambio >= 0, (varAcuNeto - AcumDifCambio), varAcuNeto)
 

@@ -821,7 +821,7 @@ Public Class Pagos
 
     Private Function _BuscarInfoIvaComp(ByVal xNroInterno As String) As DataRow
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Paridad, Pago FROM IvaComp WHERE NroInterno =  '" & xNroInterno & "'")
+        Dim cm = New SqlCommand("SELECT Paridad, Pago, ISNULL(MarcaDifCambio, 0) As MarcaDifCambio FROM IvaComp WHERE NroInterno =  '" & xNroInterno & "'")
         Dim dr As SqlDataReader
         Dim tabla As New DataTable
 
@@ -1353,6 +1353,7 @@ Public Class Pagos
                                               & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" _
                                               & Trim(txtProveedor.Text) & "' and cp.Clave = '" & clave & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha DESC")
         Dim dr As SqlDataReader
+        Dim WMarcaDifCambio As Integer = 0
 
         'SQLConnector.conexionSql(cn, cm)
 
@@ -1398,6 +1399,7 @@ Public Class Pagos
                             With WIvaComp
                                 XParidad = IIf(IsDBNull(.Item("Paridad")), "0", formatonumerico(.Item("Paridad"), 4))
                                 XPago = IIf(IsDBNull(.Item("Pago")), "0", Val(.Item("Pago")))
+                                WMarcaDifCambio = WIvaComp.Item("MarcaDifCambio")
                             End With
                         End If
 
@@ -1427,7 +1429,7 @@ Public Class Pagos
 
                     If Val(XPago) = 2 Then
 
-                        If Val(XParidad) <> 0 Then
+                        If Val(XParidad) <> 0 And WMarcaDifCambio = 0 Then
                             XParidadTotal = txtParidad.Text '_TraerCambioDivisa(txtFechaParidad.Text)
 
                             XSaldoUS = (Val(_NormalizarNumero(XSaldo)) / Val(XParidad.Replace(",", "."))) * Val(_NormalizarNumero(XParidadTotal, 4))
@@ -6877,9 +6879,18 @@ Public Class Pagos
                 With row
                     If Trim(.Cells(4).Value) <> "" Then
 
+                        Dim ZTipo, ZNumero, ZPunto, ZLetra
+
                         ZZSuma = 0.0
 
                         ZZSuma = Val(.Cells(4).Value) / 1.21
+
+                        ZTipo = .Cells(0).Value
+                        ZLetra = .Cells(1).Value
+                        ZPunto = .Cells(2).Value
+                        ZNumero = .Cells(3).Value
+
+                        Dim ZFactura As DataRow = _BuscarCompra(txtProveedor.Text, ZTipo, ZPunto, ZLetra, ZNumero)
 
                         acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
                     Else
@@ -6985,7 +6996,7 @@ Public Class Pagos
     Private Function _BuscarCompra(ByVal proveedor, ByVal tipo, ByVal punto, ByVal letra, ByVal numero)
         Dim compra As New DataTable
         Dim cn = New SqlConnection()
-        Dim cm As New SqlCommand("SELECT Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento FROM IvaComp WHERE Proveedor = '" & proveedor & "' and letra = '" & letra & "' and punto = '" & ceros(punto, 4) & "' and numero = '" & ceros(numero, 8) & "' and tipo = '" & ceros(tipo, 2) & "'")
+        Dim cm As New SqlCommand("SELECT Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento, ISNULL(MarcaDifCambio, 0) As MarcaDifCambio FROM IvaComp WHERE Proveedor = '" & proveedor & "' and letra = '" & letra & "' and punto = '" & ceros(punto, 4) & "' and numero = '" & ceros(numero, 8) & "' and tipo = '" & ceros(tipo, 2) & "'")
         Dim dr As SqlDataReader
 
         Try

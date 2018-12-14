@@ -54,6 +54,16 @@ Public Class CuentaCorrientePantalla
                 GRilla.Rows.Add()
 
                 GRilla.Item("Tipo", WRenglon).Value = row.Item("Impre") 'CamposCtaCtePrv.Impre
+
+                If row.Item("NroInterno") <> 0 Then
+                    Dim WIvaComp As DataRow = _TraerDatosIvaComp(row.Item("NroInterno"))
+
+                    If Not IsNothing(WIvaComp) Then
+                        GRilla.Item("Tipo", WRenglon).Value = IIf(WIvaComp.Item("MarcaDifCambio") = 1, "NDC", row.Item("Impre"))
+                    End If
+
+                End If
+
                 GRilla.Item("Letra", WRenglon).Value = row.Item("Letra") 'CamposCtaCtePrv.letra
                 GRilla.Item("Punto", WRenglon).Value = row.Item("Punto") 'CamposCtaCtePrv.punto
                 GRilla.Item("Numero", WRenglon).Value = row.Item("Numero") 'CamposCtaCtePrv.numero
@@ -88,6 +98,46 @@ Public Class CuentaCorrientePantalla
         GRilla.AllowUserToAddRows = False
         txtSaldo.Text = formatonumerico(WSuma)
     End Sub
+
+    Private Function _TraerDatosIvaComp(ByVal nroInterno As Object) As DataRow
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT ISNULL(MarcaDifCambio, 0) As MarcaDifCambio FROM IvaComp WHERE NroInterno = '" & nroInterno & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            SQLConnector.conexionSql(cn, cm)
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                Dim WTabla As New DataTable
+
+                WTabla.Load(dr)
+
+                If WTabla.Rows.Count > 0 Then
+                    Return WTabla.Rows(0)
+                Else
+                    Return Nothing
+                End If
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return Nothing
+
+    End Function
 
     Private Function _BuscarCuentaCorrienteProveedorDeuda(ByVal WProveedor As String, ByVal wTipo As Char) As DataTable
         Dim _tabla As New DataTable
