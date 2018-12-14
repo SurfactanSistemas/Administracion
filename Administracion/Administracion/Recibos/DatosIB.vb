@@ -4,7 +4,7 @@
         txtRetIB1.Focus()
     End Sub
 
-    Private Sub txtRetIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB1.KeyDown
+    Private Sub txtRetIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB1.KeyDown, txtRetIB9.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -20,7 +20,7 @@
 
     End Sub
 
-    Private Sub txtCompIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB1.KeyDown
+    Private Sub txtCompIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB1.KeyDown, txtCompIB9.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -32,7 +32,7 @@
 
     End Sub
 
-    Private Sub txtRetIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB2.KeyDown
+    Private Sub txtRetIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB2.KeyDown, txtRetIB10.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -48,7 +48,7 @@
 
     End Sub
 
-    Private Sub txtCompIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB2.KeyDown
+    Private Sub txtCompIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB2.KeyDown, txtCompIB10.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -60,7 +60,7 @@
 
     End Sub
 
-    Private Sub txtRetIB3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB3.KeyDown
+    Private Sub txtRetIB3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB3.KeyDown, txtRetIB11.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Val(txtRetIB3.Text) <> 0 Then
@@ -74,7 +74,7 @@
 
     End Sub
 
-    Private Sub txtCompIB3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB3.KeyDown
+    Private Sub txtCompIB3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB3.KeyDown, txtCompIB11.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -86,7 +86,7 @@
 
     End Sub
 
-    Private Sub txtRetIB4_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB4.KeyDown
+    Private Sub txtRetIB4_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB4.KeyDown, txtRetIB13.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -102,7 +102,7 @@
 
     End Sub
 
-    Private Sub txtCompIB4_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB4.KeyDown
+    Private Sub txtCompIB4_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB4.KeyDown, txtCompIB13.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -114,7 +114,7 @@
 
     End Sub
 
-    Private Sub txtRetIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB5.KeyDown
+    Private Sub txtRetIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB5.KeyDown, txtRetIB14.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -130,7 +130,7 @@
 
     End Sub
 
-    Private Sub txtCompIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB5.KeyDown
+    Private Sub txtCompIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB5.KeyDown, txtCompIB14.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -198,7 +198,7 @@
 
     End Sub
 
-    Private Sub txtRetIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB8.KeyDown
+    Private Sub txtRetIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB8.KeyDown, txtRetIB12.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -214,7 +214,7 @@
 
     End Sub
 
-    Private Sub txtCompIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB8.KeyDown
+    Private Sub txtCompIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB8.KeyDown, txtCompIB12.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -234,7 +234,7 @@
         Me.Close()
     End Sub
 
-    Private Sub NormalizarNumero(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB1.Leave, txtRetIB2.Leave, txtRetIB3.Leave, txtRetIB4.Leave, txtRetIB5.Leave, txtRetIB6.Leave, txtRetIB7.Leave, txtRetIB8.Leave
+    Private Sub NormalizarNumero(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB1.Leave, txtRetIB2.Leave, txtRetIB3.Leave, txtRetIB4.Leave, txtRetIB5.Leave, txtRetIB6.Leave, txtRetIB7.Leave, txtRetIB8.Leave, txtRetIB11.Leave, txtRetIB10.Leave, txtRetIB14.Leave, txtRetIB12.Leave, txtRetIB13.Leave, txtRetIB9.Leave
         txtRetIB1.Text = Proceso.formatonumerico(txtRetIB1.Text)
         txtRetIB2.Text = Proceso.formatonumerico(txtRetIB2.Text)
         txtRetIB3.Text = Proceso.formatonumerico(txtRetIB3.Text)
@@ -245,13 +245,13 @@
         txtRetIB8.Text = Proceso.formatonumerico(txtRetIB8.Text)
     End Sub
 
-    Private Sub SoloNumeros(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCompIB1.KeyPress, txtCompIB2.KeyPress, txtCompIB3.KeyPress, txtCompIB4.KeyPress, txtCompIB5.KeyPress, txtCompIB6.KeyPress, txtCompIB7.KeyPress, txtCompIB8.KeyPress
+    Private Sub SoloNumeros(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCompIB1.KeyPress, txtCompIB2.KeyPress, txtCompIB3.KeyPress, txtCompIB4.KeyPress, txtCompIB5.KeyPress, txtCompIB6.KeyPress, txtCompIB7.KeyPress, txtCompIB8.KeyPress, txtCompIB10.KeyPress, txtCompIB14.KeyPress, txtCompIB9.KeyPress, txtCompIB12.KeyPress, txtCompIB13.KeyPress, txtCompIB11.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRetIB1.KeyPress, txtRetIB2.KeyPress, txtRetIB3.KeyPress, txtRetIB4.KeyPress, txtRetIB5.KeyPress, txtRetIB6.KeyPress, txtRetIB7.KeyPress, txtRetIB8.KeyPress
+    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRetIB1.KeyPress, txtRetIB2.KeyPress, txtRetIB3.KeyPress, txtRetIB4.KeyPress, txtRetIB5.KeyPress, txtRetIB6.KeyPress, txtRetIB7.KeyPress, txtRetIB8.KeyPress, txtRetIB9.KeyPress, txtRetIB10.KeyPress, txtRetIB11.KeyPress, txtRetIB12.KeyPress, txtRetIB13.KeyPress, txtRetIB14.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If

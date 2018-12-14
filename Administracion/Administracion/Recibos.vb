@@ -15,7 +15,7 @@ Public Class Recibos
     Private _ComprobanteRetGanancias As String = ""
     Private _ComprobanteRetSuss As String = ""
     Private _RetIB1, _CompIB1, _RetIB2, _CompIB2, _RetIB3, _CompIB3, _RetIB4, _CompIB4, _RetIB5, _CompIB5, _
-            _RetIB6, _CompIB6, _RetIB7, _CompIB7, _RetIB8, _CompIB8 As String
+            _RetIB6, _CompIB6, _RetIB7, _CompIB7, _RetIB8, _CompIB8, _RetIB9, _CompIB9, _RetIB10, _CompIB10, _RetIB11, _CompIB11, _RetIB12, _CompIB12, _RetIB13, _CompIB13, _RetIB14, _CompIB14 As String
 
     ' Variables para impresion de Recibo.
     Dim WRazon, WDireccion, WLocalidad, WProvincia, WPostal, _
@@ -598,6 +598,18 @@ Public Class Recibos
                         _CompIB7 = IIf(IsDBNull(dr.Item("NroRetIb7")), "", dr.Item("NroRetIb7"))
                         _RetIB8 = IIf(IsDBNull(dr.Item("RetIb8")), "", dr.Item("RetIb8"))
                         _CompIB8 = IIf(IsDBNull(dr.Item("NroRetIb8")), "", dr.Item("NroRetIb8"))
+                        _RetIB9 = IIf(IsDBNull(dr.Item("RetIb9")), "", dr.Item("RetIb9"))
+                        _CompIB9 = IIf(IsDBNull(dr.Item("NroRetIb9")), "", dr.Item("NroRetIb9"))
+                        _RetIB10 = IIf(IsDBNull(dr.Item("RetIb10")), "", dr.Item("RetIb10"))
+                        _CompIB10 = IIf(IsDBNull(dr.Item("NroRetIb10")), "", dr.Item("NroRetIb10"))
+                        _RetIB11 = IIf(IsDBNull(dr.Item("RetIb11")), "", dr.Item("RetIb11"))
+                        _CompIB11 = IIf(IsDBNull(dr.Item("NroRetIb11")), "", dr.Item("NroRetIb11"))
+                        _RetIB12 = IIf(IsDBNull(dr.Item("RetIb12")), "", dr.Item("RetIb12"))
+                        _CompIB12 = IIf(IsDBNull(dr.Item("NroRetIb12")), "", dr.Item("NroRetIb12"))
+                        _RetIB13 = IIf(IsDBNull(dr.Item("RetIb13")), "", dr.Item("RetIb13"))
+                        _CompIB13 = IIf(IsDBNull(dr.Item("NroRetIb13")), "", dr.Item("NroRetIb13"))
+                        _RetIB14 = IIf(IsDBNull(dr.Item("RetIb14")), "", dr.Item("RetIb14"))
+                        _CompIB14 = IIf(IsDBNull(dr.Item("NroRetIb14")), "", dr.Item("NroRetIb14"))
                         txtProvi.Text = IIf(IsDBNull(dr.Item("Provisorio")), "", dr.Item("Provisorio"))
 
                     End If
@@ -1667,7 +1679,13 @@ Public Class Recibos
         XSql = XSql & " RetIb5 = " & _NormalizarNumero(_RetIB5) & ","
         XSql = XSql & " RetIb6 = " & _NormalizarNumero(_RetIB6) & ","
         XSql = XSql & " RetIb7 = " & _NormalizarNumero(_RetIB7) & ","
-        XSql = XSql & " RetIb8 = " & _NormalizarNumero(_RetIB8) & ""
+        XSql = XSql & " RetIb8 = " & _NormalizarNumero(_RetIB8) & ","
+        XSql = XSql & " RetIb9 = " & _NormalizarNumero(_RetIB9) & ","
+        XSql = XSql & " RetIb10 = " & _NormalizarNumero(_RetIB10) & ","
+        XSql = XSql & " RetIb11 = " & _NormalizarNumero(_RetIB11) & ","
+        XSql = XSql & " RetIb12 = " & _NormalizarNumero(_RetIB12) & ","
+        XSql = XSql & " RetIb13 = " & _NormalizarNumero(_RetIB13) & ","
+        XSql = XSql & " RetIb14 = " & _NormalizarNumero(_RetIB14 & ""
         XSql = XSql & " Where Recibo = " & "'" & txtRecibo.Text & "'"
 
         cm.CommandText = XSql
@@ -2541,6 +2559,18 @@ Public Class Recibos
             _CompIB7 = ""
             _RetIB8 = ""
             _CompIB8 = ""
+            _RetIB9 = ""
+            _CompIB9 = ""
+            _RetIB10 = ""
+            _CompIB10 = ""
+            _RetIB11 = ""
+            _CompIB11 = ""
+            _RetIB12 = ""
+            _CompIB12 = ""
+            _RetIB13 = ""
+            _CompIB13 = ""
+            _RetIB14 = ""
+            _CompIB14 = ""
         End If
     End Sub
 
@@ -2563,6 +2593,18 @@ Public Class Recibos
             .txtCompIB7.Text = _CompIB7
             .txtRetIB8.Text = _RetIB8
             .txtCompIB8.Text = _CompIB8
+            .txtRetIB8.Text = _RetIB9
+            .txtCompIB9.Text = _CompIB9
+            .txtRetIB9.Text = _RetIB10
+            .txtCompIB10.Text = _CompIB10
+            .txtRetIB10.Text = _RetIB11
+            .txtCompIB11.Text = _CompIB11
+            .txtRetIB11.Text = _RetIB12
+            .txtCompIB12.Text = _CompIB12
+            .txtRetIB12.Text = _RetIB13
+            .txtCompIB13.Text = _CompIB13
+            .txtRetIB13.Text = _RetIB14
+            .txtCompIB13.Text = _CompIB14
 
             .ShowDialog(Me)
 
@@ -2582,6 +2624,18 @@ Public Class Recibos
             _CompIB7 = .txtCompIB7.Text
             _RetIB8 = .txtRetIB8.Text
             _CompIB8 = .txtCompIB8.Text
+            _RetIB9 = .txtRetIB9.Text
+            _CompIB9 = .txtCompIB9.Text
+            _RetIB10 = .txtRetIB10.Text
+            _CompIB10 = .txtCompIB10.Text
+            _RetIB11 = .txtRetIB11.Text
+            _CompIB11 = .txtCompIB11.Text
+            _RetIB12 = .txtRetIB12.Text
+            _CompIB12 = .txtCompIB12.Text
+            _RetIB13 = .txtRetIB13.Text
+            _CompIB13 = .txtCompIB13.Text
+            _RetIB14 = .txtRetIB14.Text
+            _CompIB14 = .txtCompIB14.Text
 
             .Dispose()
 
