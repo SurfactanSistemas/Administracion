@@ -4,7 +4,7 @@
         txtRetIB1.Focus()
     End Sub
 
-    Private Sub txtRetIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB1.KeyDown, txtRetIB9.KeyDown
+    Private Sub txtRetIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB1.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -20,7 +20,7 @@
 
     End Sub
 
-    Private Sub txtCompIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB1.KeyDown, txtCompIB9.KeyDown
+    Private Sub txtCompIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB1.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -32,7 +32,7 @@
 
     End Sub
 
-    Private Sub txtRetIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB2.KeyDown, txtRetIB10.KeyDown
+    Private Sub txtRetIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB2.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -60,7 +60,7 @@
 
     End Sub
 
-    Private Sub txtRetIB3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB3.KeyDown, txtRetIB11.KeyDown
+    Private Sub txtRetIB3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB3.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Val(txtRetIB3.Text) <> 0 Then
@@ -86,7 +86,7 @@
 
     End Sub
 
-    Private Sub txtRetIB4_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB4.KeyDown, txtRetIB13.KeyDown
+    Private Sub txtRetIB4_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB4.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -114,14 +114,14 @@
 
     End Sub
 
-    Private Sub txtRetIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB5.KeyDown, txtRetIB14.KeyDown
+    Private Sub txtRetIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB5.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
             If Val(txtRetIB5.Text) <> 0 Then
                 _SaltarA(txtCompIB5)
             Else
-                _SaltarA(txtRetIB6)
+                _SaltarA(txtRetIB12)
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -130,11 +130,11 @@
 
     End Sub
 
-    Private Sub txtCompIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB5.KeyDown, txtCompIB14.KeyDown
+    Private Sub txtCompIB5_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB5.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
-            _SaltarA(txtRetIB6)
+            _SaltarA(txtRetIB12)
 
         ElseIf e.KeyData = Keys.Escape Then
             txtCompIB5.Text = ""
@@ -198,30 +198,18 @@
 
     End Sub
 
-    Private Sub txtRetIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB8.KeyDown, txtRetIB12.KeyDown
+    Private Sub txtRetIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB8.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
-            If Val(txtRetIB7.Text) <> 0 Then
+            If Val(txtRetIB8.Text) <> 0 Then
                 _SaltarA(txtCompIB8)
             Else
-                _SaltarA(txtRetIB4)
+                _SaltarA(txtRetIB9)
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
             txtRetIB8.Text = ""
-        End If
-
-    End Sub
-
-    Private Sub txtCompIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB8.KeyDown, txtCompIB12.KeyDown
-
-        If e.KeyData = Keys.Enter Then
-
-            _SaltarA(txtRetIB4)
-
-        ElseIf e.KeyData = Keys.Escape Then
-            txtCompIB8.Text = ""
         End If
 
     End Sub
@@ -235,14 +223,11 @@
     End Sub
 
     Private Sub NormalizarNumero(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB1.Leave, txtRetIB2.Leave, txtRetIB3.Leave, txtRetIB4.Leave, txtRetIB5.Leave, txtRetIB6.Leave, txtRetIB7.Leave, txtRetIB8.Leave, txtRetIB11.Leave, txtRetIB10.Leave, txtRetIB14.Leave, txtRetIB12.Leave, txtRetIB13.Leave, txtRetIB9.Leave
-        txtRetIB1.Text = Proceso.formatonumerico(txtRetIB1.Text)
-        txtRetIB2.Text = Proceso.formatonumerico(txtRetIB2.Text)
-        txtRetIB3.Text = Proceso.formatonumerico(txtRetIB3.Text)
-        txtRetIB4.Text = Proceso.formatonumerico(txtRetIB4.Text)
-        txtRetIB5.Text = Proceso.formatonumerico(txtRetIB5.Text)
-        txtRetIB6.Text = Proceso.formatonumerico(txtRetIB6.Text)
-        txtRetIB7.Text = Proceso.formatonumerico(txtRetIB7.Text)
-        txtRetIB8.Text = Proceso.formatonumerico(txtRetIB8.Text)
+        For Each t As TextBox In {txtRetIB1, txtRetIB2, txtRetIB3, txtRetIB4, txtRetIB5, txtRetIB6, txtRetIB7, txtRetIB8, txtRetIB9, txtRetIB10, txtRetIB11, txtRetIB12, txtRetIB13, txtRetIB14}
+
+            t.Text = Proceso.formatonumerico(t.Text)
+
+        Next
     End Sub
 
     Private Sub SoloNumeros(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCompIB1.KeyPress, txtCompIB2.KeyPress, txtCompIB3.KeyPress, txtCompIB4.KeyPress, txtCompIB5.KeyPress, txtCompIB6.KeyPress, txtCompIB7.KeyPress, txtCompIB8.KeyPress, txtCompIB10.KeyPress, txtCompIB14.KeyPress, txtCompIB9.KeyPress, txtCompIB12.KeyPress, txtCompIB13.KeyPress, txtCompIB11.KeyPress
@@ -255,5 +240,189 @@
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub txtRetIB9_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB9.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            If Val(txtRetIB9.Text) <> 0 Then
+                _SaltarA(txtCompIB9)
+            Else
+                _SaltarA(txtRetIB10)
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRetIB9.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRetIB10_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB10.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            If Val(txtRetIB10.Text) <> 0 Then
+                _SaltarA(txtCompIB10)
+            Else
+                _SaltarA(txtRetIB11)
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRetIB10.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRetIB11_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB11.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            If Val(txtRetIB11.Text) <> 0 Then
+                _SaltarA(txtCompIB11)
+            Else
+                _SaltarA(txtRetIB4)
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRetIB9.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRetIB12_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB12.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            If Val(txtRetIB12.Text) <> 0 Then
+                _SaltarA(txtCompIB12)
+            Else
+                _SaltarA(txtRetIB13)
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRetIB12.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRetIB13_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB13.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            If Val(txtRetIB13.Text) <> 0 Then
+                _SaltarA(txtCompIB13)
+            Else
+                _SaltarA(txtRetIB14)
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRetIB13.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtRetIB14_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB14.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            If Val(txtRetIB14.Text) <> 0 Then
+                _SaltarA(txtCompIB14)
+            Else
+                _SaltarA(txtRetIB6)
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRetIB14.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCompIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB8.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            _SaltarA(txtRetIB9)
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCompIB8.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCompIB9_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB9.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            _SaltarA(txtRetIB10)
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCompIB9.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCompIB10_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB10.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            _SaltarA(txtRetIB11)
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCompIB10.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCompIB11_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB11.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            _SaltarA(txtRetIB4)
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCompIB11.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCompIB12_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB12.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            _SaltarA(txtRetIB13)
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCompIB12.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCompIB13_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB13.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            _SaltarA(txtRetIB14)
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCompIB13.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtCompIB14_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCompIB14.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            _SaltarA(txtRetIB6)
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCompIB14.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub DatosIB_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

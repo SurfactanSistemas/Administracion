@@ -26,72 +26,72 @@ Partial Class DatosIB
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.LBLTipoInformacion = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label40 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtCompIB12 = New System.Windows.Forms.TextBox()
         Me.txtCompIB8 = New System.Windows.Forms.TextBox()
+        Me.Label39 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.txtRetIB12 = New System.Windows.Forms.TextBox()
         Me.txtRetIB8 = New System.Windows.Forms.TextBox()
+        Me.Label38 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.txtCompIB7 = New System.Windows.Forms.TextBox()
+        Me.Label34 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtCompIB13 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtRetIB13 = New System.Windows.Forms.TextBox()
         Me.txtCompIB4 = New System.Windows.Forms.TextBox()
         Me.txtRetIB4 = New System.Windows.Forms.TextBox()
+        Me.txtCompIB11 = New System.Windows.Forms.TextBox()
         Me.txtRetIB7 = New System.Windows.Forms.TextBox()
+        Me.txtRetIB11 = New System.Windows.Forms.TextBox()
         Me.txtCompIB3 = New System.Windows.Forms.TextBox()
         Me.txtRetIB3 = New System.Windows.Forms.TextBox()
         Me.txtCompIB6 = New System.Windows.Forms.TextBox()
+        Me.txtCompIB10 = New System.Windows.Forms.TextBox()
         Me.txtRetIB6 = New System.Windows.Forms.TextBox()
+        Me.txtRetIB10 = New System.Windows.Forms.TextBox()
         Me.txtCompIB2 = New System.Windows.Forms.TextBox()
+        Me.txtCompIB14 = New System.Windows.Forms.TextBox()
         Me.txtRetIB2 = New System.Windows.Forms.TextBox()
+        Me.txtRetIB14 = New System.Windows.Forms.TextBox()
         Me.txtCompIB5 = New System.Windows.Forms.TextBox()
+        Me.txtCompIB9 = New System.Windows.Forms.TextBox()
         Me.txtRetIB5 = New System.Windows.Forms.TextBox()
+        Me.txtRetIB9 = New System.Windows.Forms.TextBox()
         Me.txtCompIB1 = New System.Windows.Forms.TextBox()
         Me.txtRetIB1 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.txtRetIB9 = New System.Windows.Forms.TextBox()
-        Me.txtCompIB9 = New System.Windows.Forms.TextBox()
-        Me.txtRetIB14 = New System.Windows.Forms.TextBox()
-        Me.txtCompIB14 = New System.Windows.Forms.TextBox()
-        Me.txtRetIB10 = New System.Windows.Forms.TextBox()
-        Me.txtCompIB10 = New System.Windows.Forms.TextBox()
-        Me.txtRetIB11 = New System.Windows.Forms.TextBox()
-        Me.txtCompIB11 = New System.Windows.Forms.TextBox()
-        Me.txtRetIB13 = New System.Windows.Forms.TextBox()
-        Me.txtCompIB13 = New System.Windows.Forms.TextBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.Label31 = New System.Windows.Forms.Label()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.Label34 = New System.Windows.Forms.Label()
-        Me.Label37 = New System.Windows.Forms.Label()
-        Me.Label38 = New System.Windows.Forms.Label()
-        Me.txtRetIB12 = New System.Windows.Forms.TextBox()
-        Me.Label39 = New System.Windows.Forms.Label()
-        Me.txtCompIB12 = New System.Windows.Forms.TextBox()
-        Me.Label40 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -188,6 +188,17 @@ Partial Class DatosIB
         Me.Panel2.Size = New System.Drawing.Size(848, 228)
         Me.Panel2.TabIndex = 6
         '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label40.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label40.Location = New System.Drawing.Point(438, 95)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(29, 18)
+        Me.Label40.TabIndex = 16
+        Me.Label40.Text = "912"
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -199,6 +210,14 @@ Partial Class DatosIB
         Me.Label1.TabIndex = 16
         Me.Label1.Text = "905"
         '
+        'txtCompIB12
+        '
+        Me.txtCompIB12.Location = New System.Drawing.Point(716, 94)
+        Me.txtCompIB12.Name = "txtCompIB12"
+        Me.txtCompIB12.Size = New System.Drawing.Size(112, 20)
+        Me.txtCompIB12.TabIndex = 18
+        Me.txtCompIB12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'txtCompIB8
         '
         Me.txtCompIB8.Location = New System.Drawing.Point(292, 117)
@@ -206,6 +225,17 @@ Partial Class DatosIB
         Me.txtCompIB8.Size = New System.Drawing.Size(112, 20)
         Me.txtCompIB8.TabIndex = 18
         Me.txtCompIB8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label39.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label39.Location = New System.Drawing.Point(486, 95)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(55, 18)
+        Me.Label39.TabIndex = 15
+        Me.Label39.Text = "La Rioja"
         '
         'Label20
         '
@@ -218,6 +248,14 @@ Partial Class DatosIB
         Me.Label20.TabIndex = 15
         Me.Label20.Text = "Corriente"
         '
+        'txtRetIB12
+        '
+        Me.txtRetIB12.Location = New System.Drawing.Point(600, 94)
+        Me.txtRetIB12.Name = "txtRetIB12"
+        Me.txtRetIB12.Size = New System.Drawing.Size(112, 20)
+        Me.txtRetIB12.TabIndex = 17
+        Me.txtRetIB12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'txtRetIB8
         '
         Me.txtRetIB8.Location = New System.Drawing.Point(175, 117)
@@ -225,6 +263,17 @@ Partial Class DatosIB
         Me.txtRetIB8.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB8.TabIndex = 17
         Me.txtRetIB8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label38.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label38.Location = New System.Drawing.Point(713, 14)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(120, 18)
+        Me.Label38.TabIndex = 1
+        Me.Label38.Text = "Nro de Certificado"
         '
         'Label5
         '
@@ -236,6 +285,17 @@ Partial Class DatosIB
         Me.Label5.Size = New System.Drawing.Size(120, 18)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "Nro de Certificado"
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label37.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label37.Location = New System.Drawing.Point(633, 14)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(58, 18)
+        Me.Label37.TabIndex = 1
+        Me.Label37.Text = "Importe"
         '
         'Label4
         '
@@ -267,6 +327,17 @@ Partial Class DatosIB
         Me.txtCompIB7.TabIndex = 14
         Me.txtCompIB7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label34.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label34.Location = New System.Drawing.Point(438, 118)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(29, 18)
+        Me.Label34.TabIndex = 1
+        Me.Label34.Text = "918"
+        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -277,6 +348,17 @@ Partial Class DatosIB
         Me.Label12.Size = New System.Drawing.Size(63, 18)
         Me.Label12.TabIndex = 1
         Me.Label12.Text = "Tucumán"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label33.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label33.Location = New System.Drawing.Point(486, 118)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(61, 18)
+        Me.Label33.TabIndex = 1
+        Me.Label33.Text = "San Juan"
         '
         'Label18
         '
@@ -289,6 +371,17 @@ Partial Class DatosIB
         Me.Label18.TabIndex = 1
         Me.Label18.Text = "919"
         '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label32.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label32.Location = New System.Drawing.Point(438, 141)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(29, 18)
+        Me.Label32.TabIndex = 1
+        Me.Label32.Text = "922"
+        '
         'Label9
         '
         Me.Label9.AutoSize = True
@@ -299,6 +392,17 @@ Partial Class DatosIB
         Me.Label9.Size = New System.Drawing.Size(57, 18)
         Me.Label9.TabIndex = 1
         Me.Label9.Text = "San Luis"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label31.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label31.Location = New System.Drawing.Point(486, 141)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(104, 18)
+        Me.Label31.TabIndex = 1
+        Me.Label31.Text = "Stgo. del Estero"
         '
         'Label17
         '
@@ -333,6 +437,17 @@ Partial Class DatosIB
         Me.Label16.TabIndex = 1
         Me.Label16.Text = "923"
         '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label28.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label28.Location = New System.Drawing.Point(16, 164)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(29, 18)
+        Me.Label28.TabIndex = 1
+        Me.Label28.Text = "907"
+        '
         'Label10
         '
         Me.Label10.AutoSize = True
@@ -343,6 +458,17 @@ Partial Class DatosIB
         Me.Label10.Size = New System.Drawing.Size(108, 18)
         Me.Label10.TabIndex = 1
         Me.Label10.Text = "Tierra del Fuego"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label27.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label27.Location = New System.Drawing.Point(65, 164)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(53, 18)
+        Me.Label27.TabIndex = 1
+        Me.Label27.Text = "Chubut"
         '
         'Label15
         '
@@ -355,6 +481,17 @@ Partial Class DatosIB
         Me.Label15.TabIndex = 1
         Me.Label15.Text = "902"
         '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label26.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label26.Location = New System.Drawing.Point(16, 187)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(29, 18)
+        Me.Label26.TabIndex = 1
+        Me.Label26.Text = "908"
+        '
         'Label7
         '
         Me.Label7.AutoSize = True
@@ -365,6 +502,17 @@ Partial Class DatosIB
         Me.Label7.Size = New System.Drawing.Size(48, 18)
         Me.Label7.TabIndex = 1
         Me.Label7.Text = "Bs. As."
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label25.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label25.Location = New System.Drawing.Point(65, 187)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(70, 18)
+        Me.Label25.TabIndex = 1
+        Me.Label25.Text = "Entre Ríos"
         '
         'Label14
         '
@@ -377,6 +525,17 @@ Partial Class DatosIB
         Me.Label14.TabIndex = 1
         Me.Label14.Text = "904"
         '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label24.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label24.Location = New System.Drawing.Point(16, 141)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(29, 18)
+        Me.Label24.TabIndex = 1
+        Me.Label24.Text = "906"
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -387,6 +546,17 @@ Partial Class DatosIB
         Me.Label8.Size = New System.Drawing.Size(60, 18)
         Me.Label8.TabIndex = 1
         Me.Label8.Text = "Córdoba"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label23.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label23.Location = New System.Drawing.Point(65, 141)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(45, 18)
+        Me.Label23.TabIndex = 1
+        Me.Label23.Text = "Chaco"
         '
         'Label13
         '
@@ -399,6 +569,17 @@ Partial Class DatosIB
         Me.Label13.TabIndex = 1
         Me.Label13.Text = "901"
         '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label22.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label22.Location = New System.Drawing.Point(486, 14)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(80, 18)
+        Me.Label22.TabIndex = 1
+        Me.Label22.Text = "Jurisdicción"
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -409,6 +590,17 @@ Partial Class DatosIB
         Me.Label6.Size = New System.Drawing.Size(42, 18)
         Me.Label6.TabIndex = 1
         Me.Label6.Text = "CABA"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label21.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label21.Location = New System.Drawing.Point(420, 14)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(59, 18)
+        Me.Label21.TabIndex = 1
+        Me.Label21.Text = "Número"
         '
         'Label3
         '
@@ -421,6 +613,14 @@ Partial Class DatosIB
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "Jurisdicción"
         '
+        'txtCompIB13
+        '
+        Me.txtCompIB13.Location = New System.Drawing.Point(716, 117)
+        Me.txtCompIB13.Name = "txtCompIB13"
+        Me.txtCompIB13.Size = New System.Drawing.Size(112, 20)
+        Me.txtCompIB13.TabIndex = 8
+        Me.txtCompIB13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -431,6 +631,14 @@ Partial Class DatosIB
         Me.Label2.Size = New System.Drawing.Size(59, 18)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Número"
+        '
+        'txtRetIB13
+        '
+        Me.txtRetIB13.Location = New System.Drawing.Point(600, 117)
+        Me.txtRetIB13.Name = "txtRetIB13"
+        Me.txtRetIB13.Size = New System.Drawing.Size(112, 20)
+        Me.txtRetIB13.TabIndex = 7
+        Me.txtRetIB13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB4
         '
@@ -448,6 +656,14 @@ Partial Class DatosIB
         Me.txtRetIB4.TabIndex = 7
         Me.txtRetIB4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'txtCompIB11
+        '
+        Me.txtCompIB11.Location = New System.Drawing.Point(292, 186)
+        Me.txtCompIB11.Name = "txtCompIB11"
+        Me.txtCompIB11.Size = New System.Drawing.Size(112, 20)
+        Me.txtCompIB11.TabIndex = 6
+        Me.txtCompIB11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'txtRetIB7
         '
         Me.txtRetIB7.Location = New System.Drawing.Point(600, 186)
@@ -455,6 +671,14 @@ Partial Class DatosIB
         Me.txtRetIB7.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB7.TabIndex = 13
         Me.txtRetIB7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtRetIB11
+        '
+        Me.txtRetIB11.Location = New System.Drawing.Point(175, 186)
+        Me.txtRetIB11.Name = "txtRetIB11"
+        Me.txtRetIB11.Size = New System.Drawing.Size(112, 20)
+        Me.txtRetIB11.TabIndex = 5
+        Me.txtRetIB11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB3
         '
@@ -480,6 +704,14 @@ Partial Class DatosIB
         Me.txtCompIB6.TabIndex = 12
         Me.txtCompIB6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'txtCompIB10
+        '
+        Me.txtCompIB10.Location = New System.Drawing.Point(292, 163)
+        Me.txtCompIB10.Name = "txtCompIB10"
+        Me.txtCompIB10.Size = New System.Drawing.Size(112, 20)
+        Me.txtCompIB10.TabIndex = 4
+        Me.txtCompIB10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'txtRetIB6
         '
         Me.txtRetIB6.Location = New System.Drawing.Point(600, 163)
@@ -487,6 +719,14 @@ Partial Class DatosIB
         Me.txtRetIB6.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB6.TabIndex = 11
         Me.txtRetIB6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtRetIB10
+        '
+        Me.txtRetIB10.Location = New System.Drawing.Point(175, 163)
+        Me.txtRetIB10.Name = "txtRetIB10"
+        Me.txtRetIB10.Size = New System.Drawing.Size(112, 20)
+        Me.txtRetIB10.TabIndex = 3
+        Me.txtRetIB10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB2
         '
@@ -496,6 +736,14 @@ Partial Class DatosIB
         Me.txtCompIB2.TabIndex = 4
         Me.txtCompIB2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'txtCompIB14
+        '
+        Me.txtCompIB14.Location = New System.Drawing.Point(716, 140)
+        Me.txtCompIB14.Name = "txtCompIB14"
+        Me.txtCompIB14.Size = New System.Drawing.Size(112, 20)
+        Me.txtCompIB14.TabIndex = 10
+        Me.txtCompIB14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'txtRetIB2
         '
         Me.txtRetIB2.Location = New System.Drawing.Point(175, 71)
@@ -503,6 +751,14 @@ Partial Class DatosIB
         Me.txtRetIB2.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB2.TabIndex = 3
         Me.txtRetIB2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtRetIB14
+        '
+        Me.txtRetIB14.Location = New System.Drawing.Point(600, 140)
+        Me.txtRetIB14.Name = "txtRetIB14"
+        Me.txtRetIB14.Size = New System.Drawing.Size(112, 20)
+        Me.txtRetIB14.TabIndex = 9
+        Me.txtRetIB14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB5
         '
@@ -512,6 +768,14 @@ Partial Class DatosIB
         Me.txtCompIB5.TabIndex = 10
         Me.txtCompIB5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'txtCompIB9
+        '
+        Me.txtCompIB9.Location = New System.Drawing.Point(292, 140)
+        Me.txtCompIB9.Name = "txtCompIB9"
+        Me.txtCompIB9.Size = New System.Drawing.Size(112, 20)
+        Me.txtCompIB9.TabIndex = 2
+        Me.txtCompIB9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'txtRetIB5
         '
         Me.txtRetIB5.Location = New System.Drawing.Point(600, 71)
@@ -519,6 +783,14 @@ Partial Class DatosIB
         Me.txtRetIB5.Size = New System.Drawing.Size(112, 20)
         Me.txtRetIB5.TabIndex = 9
         Me.txtRetIB5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtRetIB9
+        '
+        Me.txtRetIB9.Location = New System.Drawing.Point(175, 140)
+        Me.txtRetIB9.Name = "txtRetIB9"
+        Me.txtRetIB9.Size = New System.Drawing.Size(112, 20)
+        Me.txtRetIB9.TabIndex = 1
+        Me.txtRetIB9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCompIB1
         '
@@ -552,278 +824,6 @@ Partial Class DatosIB
         Me.Button1.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.Button1, "Confirmar Datos")
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'txtRetIB9
-        '
-        Me.txtRetIB9.Location = New System.Drawing.Point(175, 140)
-        Me.txtRetIB9.Name = "txtRetIB9"
-        Me.txtRetIB9.Size = New System.Drawing.Size(112, 20)
-        Me.txtRetIB9.TabIndex = 1
-        Me.txtRetIB9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtCompIB9
-        '
-        Me.txtCompIB9.Location = New System.Drawing.Point(292, 140)
-        Me.txtCompIB9.Name = "txtCompIB9"
-        Me.txtCompIB9.Size = New System.Drawing.Size(112, 20)
-        Me.txtCompIB9.TabIndex = 2
-        Me.txtCompIB9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtRetIB14
-        '
-        Me.txtRetIB14.Location = New System.Drawing.Point(600, 140)
-        Me.txtRetIB14.Name = "txtRetIB14"
-        Me.txtRetIB14.Size = New System.Drawing.Size(112, 20)
-        Me.txtRetIB14.TabIndex = 9
-        Me.txtRetIB14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtCompIB14
-        '
-        Me.txtCompIB14.Location = New System.Drawing.Point(716, 140)
-        Me.txtCompIB14.Name = "txtCompIB14"
-        Me.txtCompIB14.Size = New System.Drawing.Size(112, 20)
-        Me.txtCompIB14.TabIndex = 10
-        Me.txtCompIB14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtRetIB10
-        '
-        Me.txtRetIB10.Location = New System.Drawing.Point(175, 163)
-        Me.txtRetIB10.Name = "txtRetIB10"
-        Me.txtRetIB10.Size = New System.Drawing.Size(112, 20)
-        Me.txtRetIB10.TabIndex = 3
-        Me.txtRetIB10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtCompIB10
-        '
-        Me.txtCompIB10.Location = New System.Drawing.Point(292, 163)
-        Me.txtCompIB10.Name = "txtCompIB10"
-        Me.txtCompIB10.Size = New System.Drawing.Size(112, 20)
-        Me.txtCompIB10.TabIndex = 4
-        Me.txtCompIB10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtRetIB11
-        '
-        Me.txtRetIB11.Location = New System.Drawing.Point(175, 186)
-        Me.txtRetIB11.Name = "txtRetIB11"
-        Me.txtRetIB11.Size = New System.Drawing.Size(112, 20)
-        Me.txtRetIB11.TabIndex = 5
-        Me.txtRetIB11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtCompIB11
-        '
-        Me.txtCompIB11.Location = New System.Drawing.Point(292, 186)
-        Me.txtCompIB11.Name = "txtCompIB11"
-        Me.txtCompIB11.Size = New System.Drawing.Size(112, 20)
-        Me.txtCompIB11.TabIndex = 6
-        Me.txtCompIB11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtRetIB13
-        '
-        Me.txtRetIB13.Location = New System.Drawing.Point(600, 117)
-        Me.txtRetIB13.Name = "txtRetIB13"
-        Me.txtRetIB13.Size = New System.Drawing.Size(112, 20)
-        Me.txtRetIB13.TabIndex = 7
-        Me.txtRetIB13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtCompIB13
-        '
-        Me.txtCompIB13.Location = New System.Drawing.Point(716, 117)
-        Me.txtCompIB13.Name = "txtCompIB13"
-        Me.txtCompIB13.Size = New System.Drawing.Size(112, 20)
-        Me.txtCompIB13.TabIndex = 8
-        Me.txtCompIB13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label21.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label21.Location = New System.Drawing.Point(420, 14)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(59, 18)
-        Me.Label21.TabIndex = 1
-        Me.Label21.Text = "Número"
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label22.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label22.Location = New System.Drawing.Point(486, 14)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(80, 18)
-        Me.Label22.TabIndex = 1
-        Me.Label22.Text = "Jurisdicción"
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label23.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label23.Location = New System.Drawing.Point(65, 141)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(45, 18)
-        Me.Label23.TabIndex = 1
-        Me.Label23.Text = "Chaco"
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label24.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label24.Location = New System.Drawing.Point(16, 141)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(29, 18)
-        Me.Label24.TabIndex = 1
-        Me.Label24.Text = "906"
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label25.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label25.Location = New System.Drawing.Point(65, 187)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(70, 18)
-        Me.Label25.TabIndex = 1
-        Me.Label25.Text = "Entre Ríos"
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label26.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label26.Location = New System.Drawing.Point(16, 187)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(29, 18)
-        Me.Label26.TabIndex = 1
-        Me.Label26.Text = "908"
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label27.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label27.Location = New System.Drawing.Point(65, 164)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(53, 18)
-        Me.Label27.TabIndex = 1
-        Me.Label27.Text = "Chubut"
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label28.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label28.Location = New System.Drawing.Point(16, 164)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(29, 18)
-        Me.Label28.TabIndex = 1
-        Me.Label28.Text = "907"
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label31.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label31.Location = New System.Drawing.Point(486, 141)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(104, 18)
-        Me.Label31.TabIndex = 1
-        Me.Label31.Text = "Stgo. del Estero"
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label32.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label32.Location = New System.Drawing.Point(438, 141)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(29, 18)
-        Me.Label32.TabIndex = 1
-        Me.Label32.Text = "922"
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label33.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label33.Location = New System.Drawing.Point(486, 118)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(61, 18)
-        Me.Label33.TabIndex = 1
-        Me.Label33.Text = "San Juan"
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label34.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label34.Location = New System.Drawing.Point(438, 118)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(29, 18)
-        Me.Label34.TabIndex = 1
-        Me.Label34.Text = "918"
-        '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.Label37.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label37.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label37.Location = New System.Drawing.Point(633, 14)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(58, 18)
-        Me.Label37.TabIndex = 1
-        Me.Label37.Text = "Importe"
-        '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label38.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label38.Location = New System.Drawing.Point(713, 14)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(120, 18)
-        Me.Label38.TabIndex = 1
-        Me.Label38.Text = "Nro de Certificado"
-        '
-        'txtRetIB12
-        '
-        Me.txtRetIB12.Location = New System.Drawing.Point(600, 94)
-        Me.txtRetIB12.Name = "txtRetIB12"
-        Me.txtRetIB12.Size = New System.Drawing.Size(112, 20)
-        Me.txtRetIB12.TabIndex = 17
-        Me.txtRetIB12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label39
-        '
-        Me.Label39.AutoSize = True
-        Me.Label39.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label39.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label39.Location = New System.Drawing.Point(486, 95)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(55, 18)
-        Me.Label39.TabIndex = 15
-        Me.Label39.Text = "La Rioja"
-        '
-        'txtCompIB12
-        '
-        Me.txtCompIB12.Location = New System.Drawing.Point(716, 94)
-        Me.txtCompIB12.Name = "txtCompIB12"
-        Me.txtCompIB12.Size = New System.Drawing.Size(112, 20)
-        Me.txtCompIB12.TabIndex = 18
-        Me.txtCompIB12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label40
-        '
-        Me.Label40.AutoSize = True
-        Me.Label40.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label40.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label40.Location = New System.Drawing.Point(438, 95)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(29, 18)
-        Me.Label40.TabIndex = 16
-        Me.Label40.Text = "912"
         '
         'DatosIB
         '

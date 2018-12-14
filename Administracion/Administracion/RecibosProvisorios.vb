@@ -9,8 +9,10 @@ Public Class RecibosProvisorios
     Private _ComprobanteRetIva As String = ""
     Private _ComprobanteRetGanancias As String = ""
     Private _ComprobanteRetSuss As String = ""
+
     Private _RetIB1, _CompIB1, _RetIB2, _CompIB2, _RetIB3, _CompIB3, _RetIB4, _CompIB4, _RetIB5, _CompIB5, _
-            _RetIB6, _CompIB6, _RetIB7, _CompIB7, _RetIB8, _CompIB8 As String
+            _RetIB6, _CompIB6, _RetIB7, _CompIB7, _RetIB8, _CompIB8, _RetIB9, _CompIB9, _RetIB10, _CompIB10, _RetIB11, _CompIB11, _RetIB12, _CompIB12, _RetIB13, _CompIB13, _RetIB14, _CompIB14 As String
+
     Private _CuentasContables As New List(Of Object)
     Private _ClavesCheques As New List(Of Object)
 
@@ -143,6 +145,19 @@ Public Class RecibosProvisorios
         _CompIB7 = ""
         _RetIB8 = ""
         _CompIB8 = ""
+
+        _RetIB9 = ""
+        _CompIB9 = ""
+        _RetIB10 = ""
+        _CompIB10 = ""
+        _RetIB11 = ""
+        _CompIB11 = ""
+        _RetIB12 = ""
+        _CompIB12 = ""
+        _RetIB13 = ""
+        _CompIB13 = ""
+        _RetIB14 = ""
+        _CompIB14 = ""
 
         lblTotal.Text = "0.00"
         lblDiferencia.Text = "0.00"
@@ -301,6 +316,20 @@ Public Class RecibosProvisorios
                         _CompIB7 = IIf(IsDBNull(dr.Item("NroRetIb7")), "", dr.Item("NroRetIb7"))
                         _RetIB8 = _NormalizarNumero(IIf(IsDBNull(dr.Item("RetIb8")), "", dr.Item("RetIb8")))
                         _CompIB8 = IIf(IsDBNull(dr.Item("NroRetIb8")), "", dr.Item("NroRetIb8"))
+
+                        _RetIB9 = IIf(IsDBNull(dr.Item("RetIb9")), "", dr.Item("RetIb9"))
+                        _CompIB9 = IIf(IsDBNull(dr.Item("NroRetIb9")), "", dr.Item("NroRetIb9"))
+                        _RetIB10 = IIf(IsDBNull(dr.Item("RetIb10")), "", dr.Item("RetIb10"))
+                        _CompIB10 = IIf(IsDBNull(dr.Item("NroRetIb10")), "", dr.Item("NroRetIb10"))
+                        _RetIB11 = IIf(IsDBNull(dr.Item("RetIb11")), "", dr.Item("RetIb11"))
+                        _CompIB11 = IIf(IsDBNull(dr.Item("NroRetIb11")), "", dr.Item("NroRetIb11"))
+                        _RetIB12 = IIf(IsDBNull(dr.Item("RetIb12")), "", dr.Item("RetIb12"))
+                        _CompIB12 = IIf(IsDBNull(dr.Item("NroRetIb12")), "", dr.Item("NroRetIb12"))
+                        _RetIB13 = IIf(IsDBNull(dr.Item("RetIb13")), "", dr.Item("RetIb13"))
+                        _CompIB13 = IIf(IsDBNull(dr.Item("NroRetIb13")), "", dr.Item("NroRetIb13"))
+                        _RetIB14 = IIf(IsDBNull(dr.Item("RetIb14")), "", dr.Item("RetIb14"))
+                        _CompIB14 = IIf(IsDBNull(dr.Item("NroRetIb14")), "", dr.Item("NroRetIb14"))
+
                         txtTotal.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("Importe")), "", dr.Item("Importe")))
                     End If
 
@@ -517,6 +546,7 @@ Public Class RecibosProvisorios
                     (_NormalizarNumero(_CompIB3)), (_NormalizarNumero(_RetIB4)), (_NormalizarNumero(_CompIB4)), _
                     (_NormalizarNumero(_RetIB5)), (_NormalizarNumero(_CompIB5)), (_NormalizarNumero(_RetIB6)), _
                     (_NormalizarNumero(_CompIB6)), (_NormalizarNumero(_RetIB7)), (_NormalizarNumero(_CompIB7)), (_NormalizarNumero(_RetIB8)), (_NormalizarNumero(_CompIB8)), _ClavesCheques, _CuentasContables)
+                    _ActualizarComprobantesIbRestantes(txtrecibo.Text)
             Catch ex As Exception
                 MsgBox(ex.Message)
                 Exit Sub
@@ -526,6 +556,46 @@ Public Class RecibosProvisorios
             btnLimpiar.PerformClick()
 
         End If
+    End Sub
+
+    Private Sub _ActualizarComprobantesIbRestantes(ByVal s As String)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+
+        Try
+
+            SQLConnector.conexionSql(cn, cm)
+
+            Dim XSql = ""
+            XSql = XSql & "UPDATE RecibosProvi SET "
+            XSql = XSql & " NroRetIb9 = " & _NormalizarNumero(_CompIB9) & ","
+            XSql = XSql & " NroRetIb10 = " & _NormalizarNumero(_CompIB10) & ","
+            XSql = XSql & " NroRetIb11 = " & _NormalizarNumero(_CompIB11) & ","
+            XSql = XSql & " NroRetIb12 = " & _NormalizarNumero(_CompIB12) & ","
+            XSql = XSql & " NroRetIb13 = " & _NormalizarNumero(_CompIB13) & ","
+            XSql = XSql & " NroRetIb14 = " & _NormalizarNumero(_CompIB14) & ","
+            XSql = XSql & " RetIb9 = " & _NormalizarNumero(_RetIB9) & ","
+            XSql = XSql & " RetIb10 = " & _NormalizarNumero(_RetIB10) & ","
+            XSql = XSql & " RetIb11 = " & _NormalizarNumero(_RetIB11) & ","
+            XSql = XSql & " RetIb12 = " & _NormalizarNumero(_RetIB12) & ","
+            XSql = XSql & " RetIb13 = " & _NormalizarNumero(_RetIB13) & ","
+            XSql = XSql & " RetIb14 = " & _NormalizarNumero(_RetIB14) & ""
+            XSql = XSql & " Where Recibo = " & "'" & txtRecibo.Text & "'"
+
+            cm.CommandText = XSql
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer actualizar los Comprobantes restantes de IB.", MsgBoxStyle.Critical)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Function _Left(ByVal texto As String, ByVal largo As Integer) As String
@@ -651,6 +721,21 @@ Public Class RecibosProvisorios
             _CompIB7 = ""
             _RetIB8 = ""
             _CompIB8 = ""
+
+
+            _RetIB9 = ""
+            _CompIB9 = ""
+            _RetIB10 = ""
+            _CompIB10 = ""
+            _RetIB11 = ""
+            _CompIB11 = ""
+            _RetIB12 = ""
+            _CompIB12 = ""
+            _RetIB13 = ""
+            _CompIB13 = ""
+            _RetIB14 = ""
+            _CompIB14 = ""
+
         End If
     End Sub
 
@@ -746,44 +831,67 @@ Public Class RecibosProvisorios
     End Sub
 
     Private Sub txtRetIB_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB.Enter
-
         With DatosIB
 
-            .txtRetIB1.Text = Proceso.formatonumerico(_RetIB1)
+            .txtRetIB1.Text = _RetIB1
             .txtCompIB1.Text = _CompIB1
-            .txtRetIB2.Text = Proceso.formatonumerico(_RetIB2)
+            .txtRetIB2.Text = _RetIB2
             .txtCompIB2.Text = _CompIB2
-            .txtRetIB3.Text = Proceso.formatonumerico(_RetIB3)
+            .txtRetIB3.Text = _RetIB3
             .txtCompIB3.Text = _CompIB3
-            .txtRetIB4.Text = Proceso.formatonumerico(_RetIB4)
+            .txtRetIB4.Text = _RetIB4
             .txtCompIB4.Text = _CompIB4
-            .txtRetIB5.Text = Proceso.formatonumerico(_RetIB5)
+            .txtRetIB5.Text = _RetIB5
             .txtCompIB5.Text = _CompIB5
-            .txtRetIB6.Text = Proceso.formatonumerico(_RetIB6)
+            .txtRetIB6.Text = _RetIB6
             .txtCompIB6.Text = _CompIB6
-            .txtRetIB7.Text = Proceso.formatonumerico(_RetIB7)
+            .txtRetIB7.Text = _RetIB7
             .txtCompIB7.Text = _CompIB7
-            .txtRetIB8.Text = Proceso.formatonumerico(_RetIB8)
+            .txtRetIB8.Text = _RetIB8
             .txtCompIB8.Text = _CompIB8
+            .txtRetIB9.Text = _RetIB9
+            .txtCompIB9.Text = _CompIB9
+            .txtRetIB10.Text = _RetIB10
+            .txtCompIB10.Text = _CompIB10
+            .txtRetIB11.Text = _RetIB11
+            .txtCompIB11.Text = _CompIB11
+            .txtRetIB12.Text = _RetIB12
+            .txtCompIB12.Text = _CompIB12
+            .txtRetIB13.Text = _RetIB13
+            .txtCompIB13.Text = _CompIB13
+            .txtRetIB14.Text = _RetIB14
+            .txtCompIB14.Text = _CompIB14
 
             .ShowDialog(Me)
 
-            _RetIB1 = Proceso.formatonumerico(.txtRetIB1.Text)
+            _RetIB1 = .txtRetIB1.Text
             _CompIB1 = .txtCompIB1.Text
-            _RetIB2 = Proceso.formatonumerico(.txtRetIB2.Text)
+            _RetIB2 = .txtRetIB2.Text
             _CompIB2 = .txtCompIB2.Text
-            _RetIB3 = Proceso.formatonumerico(.txtRetIB3.Text)
+            _RetIB3 = .txtRetIB3.Text
             _CompIB3 = .txtCompIB3.Text
-            _RetIB4 = Proceso.formatonumerico(.txtRetIB4.Text)
+            _RetIB4 = .txtRetIB4.Text
             _CompIB4 = .txtCompIB4.Text
-            _RetIB5 = Proceso.formatonumerico(.txtRetIB5.Text)
+            _RetIB5 = .txtRetIB5.Text
             _CompIB5 = .txtCompIB5.Text
-            _RetIB6 = Proceso.formatonumerico(.txtRetIB6.Text)
+            _RetIB6 = .txtRetIB6.Text
             _CompIB6 = .txtCompIB6.Text
-            _RetIB7 = Proceso.formatonumerico(.txtRetIB7.Text)
+            _RetIB7 = .txtRetIB7.Text
             _CompIB7 = .txtCompIB7.Text
-            _RetIB8 = Proceso.formatonumerico(.txtRetIB8.Text)
+            _RetIB8 = .txtRetIB8.Text
             _CompIB8 = .txtCompIB8.Text
+            _RetIB9 = .txtRetIB9.Text
+            _CompIB9 = .txtCompIB9.Text
+            _RetIB10 = .txtRetIB10.Text
+            _CompIB10 = .txtCompIB10.Text
+            _RetIB11 = .txtRetIB11.Text
+            _CompIB11 = .txtCompIB11.Text
+            _RetIB12 = .txtRetIB12.Text
+            _CompIB12 = .txtCompIB12.Text
+            _RetIB13 = .txtRetIB13.Text
+            _CompIB13 = .txtCompIB13.Text
+            _RetIB14 = .txtRetIB14.Text
+            _CompIB14 = .txtCompIB14.Text
 
             .Dispose()
 
@@ -804,6 +912,12 @@ Public Class RecibosProvisorios
         totalIB += (Val(_RetIB6))
         totalIB += (Val(_RetIB7))
         totalIB += (Val(_RetIB8))
+        totalIB += (Val(_RetIB9))
+        totalIB += (Val(_RetIB10))
+        totalIB += (Val(_RetIB11))
+        totalIB += (Val(_RetIB12))
+        totalIB += (Val(_RetIB13))
+        totalIB += (Val(_RetIB14))
 
         txtRetIB.Text = totalIB
 
