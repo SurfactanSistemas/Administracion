@@ -226,13 +226,13 @@ Partial Class GraficoDiario
         'PrintDocument1
         '
         '
-        'Grafico
+        'GraficoDiario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(790, 426)
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Name = "Grafico"
+        Me.Name = "GraficoDiario"
         Me.Text = "Grafico"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.TableLayoutPanel1.ResumeLayout(False)
