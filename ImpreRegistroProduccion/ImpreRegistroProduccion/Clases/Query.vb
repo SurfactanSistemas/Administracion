@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SqlClient
-Imports ImpreRegistroProduccion.Clases
+Imports ImpreProcesosFarma.Clases
 
 Module Query
 

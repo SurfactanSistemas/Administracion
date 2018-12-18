@@ -8,9 +8,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0E49F09F-B585-46DC-8E31-AC298D67372E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>ImpreRegistroProduccion.My.MyApplication</StartupObject>
-    <RootNamespace>ImpreRegistroProduccion</RootNamespace>
-    <AssemblyName>ImpreRegistroProduccion</AssemblyName>
+    <StartupObject>ImpreProcesosFarma.My.MyApplication</StartupObject>
+    <RootNamespace>ImpreProcesosFarma</RootNamespace>
+    <AssemblyName>ImpreProcesosFarma</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -39,7 +39,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>ImpreRegistroProduccion.xml</DocumentationFile>
+    <DocumentationFile>ImpreProcesosFarma.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
     <Optimize>true</Optimize>
@@ -52,7 +52,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>ImpreRegistroProduccion.xml</DocumentationFile>
+    <DocumentationFile>ImpreProcesosFarma.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <WarningLevel>1</WarningLevel>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
@@ -103,11 +103,11 @@
     <Compile Include="Clases\Conexion.vb" />
     <Compile Include="Clases\Helper.vb" />
     <Compile Include="Clases\Query.vb" />
-    <Compile Include="ImpreRegistroProduccion.vb">
+    <Compile Include="ImpreProcesos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImpreRegistroProduccion.Designer.vb">
-      <DependentUpon>ImpreRegistroProduccion.vb</DependentUpon>
+    <Compile Include="ImpreProcesos.Designer.vb">
+      <DependentUpon>ImpreProcesos.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -125,100 +125,118 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reportes\ImpreAnexos.vb">
+    <Compile Include="Reportes\CertificadosFarma\certificadonuevofarma.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>certificadonuevofarma.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CertificadosFarma\certificadonuevofarmaprimero.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>certificadonuevofarmaprimero.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CertificadosFarma\certificadonuevofarmasegunda.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>certificadonuevofarmasegunda.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Registro Produccion Farma\ImpreAnexos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImpreAnexos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ImpreFarmaII.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\ImpreFarmaII.vb">
       <DependentUpon>ImpreFarmaII.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reportes\imprecalidad.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\imprecalidad.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprecalidad.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\imprecaratula.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\imprecaratula.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprecaratula.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\impreconciliacionetiquetas.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\impreconciliacionetiquetas.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>impreconciliacionetiquetas.rpt</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\impreequipos.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\impreequipos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>impreequipos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\impreequiposfarma.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\impreequiposfarma.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>impreequiposfarma.rpt</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\ImpreFarmaI.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\ImpreFarmaI.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImpreFarmaI.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\imprefraccionamiento.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\imprefraccionamiento.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprefraccionamiento.rpt</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\imprehojafarmaalmacen.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\imprehojafarmaalmacen.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprehojafarmaalmacen.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\imprehumedad.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\imprehumedad.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprehumedad.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\impremermadescartesterceros.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\impremermadescartesterceros.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>impremermadescartesterceros.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\impreobservaciones.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\impreobservaciones.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>impreobservaciones.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\imprepeso.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\imprepeso.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprepeso.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\imprepesodiscri.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\imprepesodiscri.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprepesodiscri.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\imprepesodiscriii.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\imprepesodiscriii.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprepesodiscriii.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\impreprocedimiento.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\impreprocedimiento.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>impreprocedimiento.rpt</DependentUpon>
@@ -230,13 +248,13 @@
     <Compile Include="Reportes\VistaPrevia.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reportes\wimprecaratula.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\wimprecaratula.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>wimprecaratula.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\wimpreprocedimiento.vb">
+    <Compile Include="Reportes\Registro Produccion Farma\wimpreprocedimiento.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>wimpreprocedimiento.rpt</DependentUpon>
@@ -244,8 +262,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ImpreRegistroProduccion.resx">
-      <DependentUpon>ImpreRegistroProduccion.vb</DependentUpon>
+    <EmbeddedResource Include="ImpreProcesos.resx">
+      <DependentUpon>ImpreProcesos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -253,82 +271,94 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ImpreAnexos.rpt">
+    <EmbeddedResource Include="Reportes\CertificadosFarma\certificadonuevofarma.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>certificadonuevofarma.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CertificadosFarma\certificadonuevofarmaprimero.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>certificadonuevofarmaprimero.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CertificadosFarma\certificadonuevofarmasegunda.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>certificadonuevofarmasegunda.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\ImpreAnexos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreAnexos.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ImpreFarmaII.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\ImpreFarmaII.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreFarmaII.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\imprecalidad.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\imprecalidad.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprecalidad.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\imprecaratula.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\imprecaratula.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprecaratula.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\impreconciliacionetiquetas.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\impreconciliacionetiquetas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>impreconciliacionetiquetas.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\impreequipos.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\impreequipos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>impreequipos.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\impreequiposfarma.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\impreequiposfarma.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>impreequiposfarma.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ImpreFarmaI.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\ImpreFarmaI.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreFarmaI.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\imprefraccionamiento.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\imprefraccionamiento.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprefraccionamiento.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\imprehojafarmaalmacen.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\imprehojafarmaalmacen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprehojafarmaalmacen.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\imprehumedad.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\imprehumedad.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprehumedad.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\impremermadescartesterceros.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\impremermadescartesterceros.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>impremermadescartesterceros.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\impreobservaciones.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\impreobservaciones.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>impreobservaciones.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\imprepeso.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\imprepeso.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprepeso.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\imprepesodiscri.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\imprepesodiscri.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprepesodiscri.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\imprepesodiscriii.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\imprepesodiscriii.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprepesodiscriii.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\impreprocedimiento.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\impreprocedimiento.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>impreprocedimiento.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\wimprecaratula.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\wimprecaratula.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>wimprecaratula.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\wimpreprocedimiento.rpt">
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\wimpreprocedimiento.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>wimpreprocedimiento.vb</LastGenOutput>
     </EmbeddedResource>

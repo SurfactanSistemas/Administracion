@@ -1,27 +1,45 @@
-﻿Public Class ImpreRegistroProduccion
+﻿Imports System.IO
+Imports System.Text
+Imports CrystalDecisions.CrystalReports.Engine
+
+Public Class ImpreProcesos
 
     Private Sub ImpreRegistroProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Try
-
             If Environment.GetCommandLineArgs.Length > 1 Then
 
-                Dim WTerminado As String = Environment.GetCommandLineArgs(1)
-                Dim WPartida As Integer = Environment.GetCommandLineArgs(2)
-                Dim WProceso As Integer = 0
+                Dim WProceso As Integer = Environment.GetCommandLineArgs(1)
 
-                If Environment.GetCommandLineArgs.Length > 3 Then
-                    WProceso = Environment.GetCommandLineArgs(3)
-                End If
-                
                 Select Case WProceso
-                    Case 1
+                    Case 1 ' REGISTRO DE PRODUCCIÓN.
+
+                        Dim WTerminado As String = Environment.GetCommandLineArgs(2)
+                        Dim WPartida As Integer = Environment.GetCommandLineArgs(3)
+
                         _GenerarRegistroProduccion(WTerminado, WPartida)
+
+                    Case 2 ' CERTIFICADO DE CALIDAD.
+
+                        Dim WTipoReporte As Integer = Environment.GetCommandLineArgs(2)
+                        Dim WPartida As Integer = Environment.GetCommandLineArgs(3)
+                        Dim WTipoSalida As Integer = Environment.GetCommandLineArgs(4)
+                        
+                        _GenerarCertificadoAnalisisFarma(WTipoReporte, WPartida, WTipoSalida)
+
                     Case Else
                         Close()
                 End Select
 
             End If
+
+            'Dim WTipoReporte2 As Integer = 1
+            'Dim WPartida2 As Integer = 308719
+            'Dim WCliente2 As String = ""
+            'Dim WCantidad2 As String = "100.00"
+            'Dim WTipoSalida2 As Integer = 3
+
+            '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WCliente2, WCantidad2, WTipoSalida2)
 
             'Dim WTerminado2 As String = "PT-03000-156"
             'Dim WPartida2 As Integer = "308751"
@@ -30,9 +48,77 @@
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        Finally
+
+            Close()
+
         End Try
 
-        Close()
+    End Sub
+
+    Private Sub _GenerarCertificadoAnalisisFarma(ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer)
+
+        Dim frm As ReportDocument
+        Dim WFormulas() As String
+        Dim WNombreArchivoFormulas As String = "C:\ImpreCertificados\" & wPartida
+        '
+        ' Determinamos el Reporte a imprimir y los datos de las formulas a pasar como parámetro.
+        '
+
+        Select Case wTipoReporte
+            Case 1
+
+                frm = New certificadonuevofarma
+
+                WNombreArchivoFormulas &= "Formulas.txt"
+
+            Case 2
+
+                frm = New certificadonuevofarmaprimero
+
+                WNombreArchivoFormulas &= "FormulasPrimero.txt"
+
+            Case 3
+
+                frm = New certificadonuevofarmasegunda
+
+                WNombreArchivoFormulas &= "FormulasSegunda.txt"
+
+            Case Else
+                Close()
+        End Select
+
+        If Not File.Exists(WNombreArchivoFormulas) Then
+            MsgBox("No se encuentra archivo " & WNombreArchivoFormulas)
+            Close()
+        End If
+
+        WFormulas = File.ReadAllLines(WNombreArchivoFormulas, UTF7Encoding.UTF7)
+
+        For Each wFormula As String In WFormulas
+            Dim WDato() As String = wFormula.Split("=")
+
+            If WDato.Length < 2 Then Continue For
+
+            frm.DataDefinition.FormulaFields(WDato(0)).Text = WDato(1)
+
+        Next
+
+        With New VistaPrevia
+            .Reporte = frm
+            .Formula = "{Certificado.Partida} = " & wPartida & ""
+            
+            Select Case wTipoSalida
+                Case 1
+                    .Imprimir()
+                Case 2
+                    .Mostrar()
+                Case 3
+                    .Exportar("Certificado Calidad " & wPartida & " " & Date.Now.ToString("dd-MM-yyyy"), CrystalDecisions.Shared.ExportFormatType.WordForWindows)
+            End Select
+
+
+        End With
 
     End Sub
 
@@ -375,7 +461,7 @@
         Dim ZZMezclaPartida = 999999
         Dim ZZMezclaPartidaII = ""
 
-        For Each row As Datarow In WHoja.Rows
+        For Each row As DataRow In WHoja.Rows
             With row
 
                 If wTerminado <> OrDefault(.Item("Terminado"), "") Then
@@ -458,7 +544,7 @@
             Dim WLoteMP As Integer = 999999
             Dim WArtMp As String = ""
 
-            For Each row As Datarow In WHoja.Rows
+            For Each row As DataRow In WHoja.Rows
                 With row
                     If OrDefault(.Item("Tipo"), "").ToString.ToUpper = "M" Then
 

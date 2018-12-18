@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Globalization
-Imports ImpreRegistroProduccion.Clases
+Imports ImpreProcesosFarma.Clases
 
 Module Helper
 

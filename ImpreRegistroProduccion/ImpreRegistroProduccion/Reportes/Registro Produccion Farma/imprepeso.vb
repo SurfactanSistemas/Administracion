@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class imprehojafarmaalmacen
+Public Class imprepeso
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class imprehojafarmaalmacen
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "imprehojafarmaalmacen.rpt"
+            Return "imprepeso.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class imprehojafarmaalmacen
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "ImpreRegistroProduccion.imprehojafarmaalmacen.rpt"
+            Return "ImpreProcesosFarma.imprepeso.rpt"
         End Get
         Set
             'Do nothing
@@ -70,7 +70,7 @@ Public Class imprehojafarmaalmacen
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property GroupHeaderSection1() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property DetailSection1() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(2)
         End Get
@@ -78,7 +78,7 @@ Public Class imprehojafarmaalmacen
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property DetailSection1() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property ReportFooterSection1() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(3)
         End Get
@@ -86,31 +86,15 @@ Public Class imprehojafarmaalmacen
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property GroupFooterSection1() As CrystalDecisions.CrystalReports.Engine.Section
-        Get
-            Return Me.ReportDefinition.Sections(4)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property ReportFooterSection1() As CrystalDecisions.CrystalReports.Engine.Section
-        Get
-            Return Me.ReportDefinition.Sections(5)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
     Public ReadOnly Property PageFooterSection1() As CrystalDecisions.CrystalReports.Engine.Section
         Get
-            Return Me.ReportDefinition.Sections(6)
+            Return Me.ReportDefinition.Sections(4)
         End Get
     End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class Cachedimprehojafarmaalmacen
+Public Class Cachedimprepeso
     Inherits Component
     Implements ICachedReport
     
@@ -152,7 +136,7 @@ Public Class Cachedimprehojafarmaalmacen
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As imprehojafarmaalmacen = New imprehojafarmaalmacen()
+        Dim rpt As imprepeso = New imprepeso()
         rpt.Site = Me.Site
         Return rpt
     End Function

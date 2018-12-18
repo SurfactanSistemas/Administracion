@@ -45,7 +45,7 @@ Public Class impreobservaciones
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "ImpreRegistroProduccion.impreobservaciones.rpt"
+            Return "ImpreProcesosFarma.impreobservaciones.rpt"
         End Get
         Set
             'Do nothing
