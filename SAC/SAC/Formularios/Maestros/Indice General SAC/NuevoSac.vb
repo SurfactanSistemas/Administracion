@@ -11,6 +11,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Private WRow, Wcol As Integer
     Private WRefTipoResp As Control
 
+    Private WAbiertoPorCmd As Boolean = False
+
     Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg"
 
     Sub New()
@@ -24,7 +26,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Sub New(ByVal WTipo As Object, ByVal WNumero As Object, ByVal WAnio As Object)
+    Sub New(ByVal WTipo As Object, ByVal WNumero As Object, ByVal WAnio As Object, Optional ByVal WAbiertoPorLineaCmd As Boolean = False)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -34,7 +36,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         txtTipo.Text = WTipo
         txtNumero.Text = WNumero
         txtAnio.Text = WAnio
-
+        WAbiertoPorCmd = WAbiertoPorLineaCmd
     End Sub
 
     Private Sub txtTipo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtTipo.KeyDown
@@ -1182,12 +1184,13 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand("")
         Dim trans As SqlTransaction = Nothing
+        Dim WConectarA As String = IIf(WAbiertoPorCmd, "SurfactanSa", "")
 
         '
         ' Validamos los datos minimos para dar de alta la sac.
         '
         Try
-            cn.ConnectionString = _ConectarA()
+            cn.ConnectionString = _ConectarA(WConectarA)
             cn.Open()
             trans = cn.BeginTransaction
 
@@ -1442,6 +1445,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             cm.ExecuteNonQuery()
 
             trans.Commit()
+
+            If WAbiertoPorCmd Then Close()
 
             If ContinuarSalirMsgBox.Show("Actualización se ha realizado con Éxito" & vbCrLf _
                                          & "Indique como quiere proseguir.", "Continuar editando SAC", "Volver a Indice") = DialogResult.OK Then
@@ -1969,7 +1974,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Sub
 
     Private Sub _SubirArchvios(ByVal archivos As String())
-        Dim WNombreCarpetaArchivos As String = txtNumero.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
+        Dim WNombreCarpetaArchivos As String = "SAC_" & txtNumero.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
         Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & WNombreCarpetaArchivos
 
         Dim WDestino = ""
@@ -2033,7 +2038,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Sub _CargarArchivosRelacionados()
         Dim WRutaArchivosRelacionados = ""
-        Dim WNombreCarpetaArchivos As String = txtNumero.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
+        Dim WNombreCarpetaArchivos As String = "SAC_" & txtNumero.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
 
         If Not Directory.Exists(_RutaCarpetaArchivos) Then
             Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")

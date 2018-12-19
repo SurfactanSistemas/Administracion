@@ -3,11 +3,14 @@ Imports SAC.Clases
 
 Public Class Login
 
+    Private WAbiertoporComando As Boolean = False
+
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Close()
     End Sub
 
     Private Sub Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         Dim tabla As New DataTable
         With tabla
             .Columns.Add("Empresa")
@@ -24,6 +27,26 @@ Public Class Login
         End With
 
         txtPsw.Text = ""
+
+        Try
+            '
+            ' Chequeamos que se haya abierto por linea de comandos.
+            '
+            If Environment.GetCommandLineArgs.Length > 1 Then
+                Dim WTipo As String = Environment.GetCommandLineArgs(1)
+                Dim WNumero As String = Environment.GetCommandLineArgs(2)
+                Dim WAnio As String = Environment.GetCommandLineArgs(3)
+
+                With New NuevoSac(WTipo, WNumero, WAnio, True)
+                    .Show()
+                End With
+
+                btnCancel_Click(Nothing, Nothing)
+            End If
+        Catch ex As Exception
+            btnCancel_Click(Nothing, Nothing)
+        End Try
+
     End Sub
 
     Private Sub btnAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccept.Click
@@ -68,6 +91,9 @@ Public Class Login
     End Function
 
     Private Sub Login_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        If WAbiertoporComando Then
+            btnCancel_Click(Nothing, Nothing)
+        End If
         txtPsw.Focus()
     End Sub
 
