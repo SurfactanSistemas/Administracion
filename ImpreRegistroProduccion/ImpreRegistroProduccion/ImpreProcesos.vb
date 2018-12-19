@@ -41,8 +41,8 @@ Public Class ImpreProcesos
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WCliente2, WCantidad2, WTipoSalida2)
 
-            'Dim WTerminado2 As String = "PT-03000-156"
-            'Dim WPartida2 As Integer = "308751"
+            'Dim WTerminado2 As String = "PT-25015-110"
+            'Dim WPartida2 As Integer = "308933"
 
             '_GenerarRegistroProduccion(WTerminado2, WPartida2)
 
@@ -205,7 +205,7 @@ Public Class ImpreProcesos
         '
         ' Buscamos informacion del Terminado y Hoja.
         '
-        Dim WTerm As DataRow = GetSingle("SELECT * FROM Terminado WHERE Codigo = '" & wTerminado & "'")
+        Dim WTerm As DataRow = GetSingle("SELECT Descripcion, Linea, Vida FROM Terminado WHERE Codigo = '" & wTerminado & "'")
         Dim WHoja As DataTable = GetAll("SELECT * FROM Hoja WHERE Hoja = '" & wPartida & "' Order by Renglon", "Surfactan_III")
 
         If IsNothing(WTerm) Then Throw New Exception("No existe Producto Terminado con Código '" & wTerminado & "'")
